@@ -192,25 +192,25 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 	
 	public SpecialNewFilesPageObject OpenSpecialNewFiles() {
-		driver.get(Domain+"Special:NewFiles");
+		getUrl(Domain+"Special:NewFiles");
 		return new SpecialNewFilesPageObject(driver, Domain);
 	}
 
 
 	public SpecialUploadPageObject OpenSpecialUpload() {
-		driver.get(Domain+"Special:Upload");
+		getUrl(Domain+"Special:Upload");
 		return new SpecialUploadPageObject(driver, Domain);
 	}
 
 	public SpecialMultipleUploadPageObject OpenSpecialMultipleUpload() {
-		driver.get(Domain+"Special:MultipleUpload");
+		getUrl(Domain+"Special:MultipleUpload");
 		return new SpecialMultipleUploadPageObject(driver, Domain);
 		
 	}
 
 	public WikiArticlePageObject OpenArticle(String wikiArticle) {
 		try{
-			driver.get(Domain+"wiki/"+wikiArticle);
+			getUrl(Domain+"wiki/"+wikiArticle);
 		}
 		catch (TimeoutException e)
 		{
@@ -225,7 +225,7 @@ public class WikiBasePageObject extends BasePageObject {
 		String temp = Domain;
 		try{
 			temp = Domain + "?noexternals=1";
-			driver.get(temp);
+			getUrl(temp);
 		}
 		catch (TimeoutException e)
 		{
@@ -365,7 +365,7 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	public void deleteArticle(String atricleName)
 	{
-		driver.get(driver.getCurrentUrl()+"?action=delete");
+		getUrl(driver.getCurrentUrl()+"?action=delete");
 //		clickDeleteButtonInDropDown();
 		clickArticleDeleteConfirmationButton(atricleName);
 		waitForElementByXPath("//div[@class='msg' and contains(text(), 'has been deleted.')]");
@@ -374,7 +374,7 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	public void renameArticle(String articleName, String articleNewName)
 	{
-		driver.get(Global.DOMAIN+"wiki/Special:MovePage/"+articleName);
+		getUrl(Global.DOMAIN+"wiki/Special:MovePage/"+articleName);
 		waitForElementByElement(renameArticleField);
 		waitForElementByElement(confirmRenamePageButton);
 		renameArticleField.clear();
@@ -412,7 +412,7 @@ public class WikiBasePageObject extends BasePageObject {
 //		selectPageLayout(layoutNumber);
 //		typeInArticleName(pageName);
 //		clickAddPageButton();
-		driver.get(Global.DOMAIN+"index.php?title="+pageName+"&action=edit&useFormat="+layoutNumber);
+		getUrl(Global.DOMAIN+"index.php?title="+pageName+"&action=edit&useFormat="+layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"+pageNameEnc+"']")));
 		return new WikiArticleEditMode(driver, Domain, pageName);
@@ -424,7 +424,7 @@ public class WikiBasePageObject extends BasePageObject {
 		try {
 			uri = new URI(Global.DOMAIN+"wiki/"+articleName);
 			String url = uri.toASCIIString();
-			driver.get(url);
+			getUrl(url);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

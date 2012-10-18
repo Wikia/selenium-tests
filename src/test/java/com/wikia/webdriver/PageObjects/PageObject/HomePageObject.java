@@ -43,7 +43,7 @@ public class HomePageObject extends BasePageObject{
 	public void openHomePage()
 	{
 		try{
-			driver.get(Global.LIVE_DOMAIN);			
+			getUrl(Global.LIVE_DOMAIN);			
 		}
 		catch (TimeoutException e)
 		{
@@ -85,7 +85,7 @@ public class HomePageObject extends BasePageObject{
 		{
 			String currentUrl = driver.getCurrentUrl();
 			String desiredUrl = currentUrl.replace("www.wikia.com", "preview.www.wikia.com");
-			driver.get(desiredUrl);
+			getUrl(desiredUrl);
 		}
 		verifyURL(Global.LIVE_DOMAIN+"Special:CreateNewWiki?uselang=en");
 		return new CreateNewWikiPageObjectStep1(driver);
@@ -100,7 +100,7 @@ public class HomePageObject extends BasePageObject{
 			{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
-				driver.get(temp);
+				getUrl(temp);
 				waitForElementByElement(hubsHeroCarousel);
 			}
 			return new VideoGamesHubPageObject(driver);
@@ -112,7 +112,7 @@ public class HomePageObject extends BasePageObject{
 			{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
-				driver.get(temp);
+				getUrl(temp);
 				waitForElementByElement(hubsHeroCarousel);
 			}
 			return new EntertainmentHubPageObject(driver);	
@@ -124,7 +124,7 @@ public class HomePageObject extends BasePageObject{
 			{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
-				driver.get(temp);
+				getUrl(temp);
 				waitForElementByElement(hubsHeroCarousel);
 			}
 			return new LifestyleHubPageObject(driver);	

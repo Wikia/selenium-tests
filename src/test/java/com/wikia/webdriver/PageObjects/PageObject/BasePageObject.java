@@ -158,6 +158,18 @@ public class BasePageObject{
 		}
 	}
 	
+	public void getUrl(String url)
+	{
+		try
+		{
+			driver.get(url);
+		}
+		catch(Exception e)
+		{
+			PageObjectLogging.log("getUrl", "page loaded for more then 30 seconds after click", true);
+		}
+	}
+	
 	public void clickAndWait(WebElement pageElem)
 	{
 		try{

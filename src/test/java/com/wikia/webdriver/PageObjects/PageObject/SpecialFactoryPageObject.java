@@ -35,7 +35,7 @@ public class SpecialFactoryPageObject extends BasePageObject
 	
 	public SpecialFactoryPageObject openWikiFactoryPage()
 	{
-		driver.get(wikiFactoryLiveDomain);
+		getUrl(wikiFactoryLiveDomain);
 		PageObjectLogging.log("openWikiFactoryPage ", "Wiki factory page opened", true, driver);
 		return new SpecialFactoryPageObject(driver);
 	}

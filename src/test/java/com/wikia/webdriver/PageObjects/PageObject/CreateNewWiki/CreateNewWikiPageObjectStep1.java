@@ -103,7 +103,7 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	
 	public CreateNewWikiPageObjectStep1 openCreateNewWikiPage()
 	{
-		driver.get("http://www.wikia.com/Special:CreateNewWiki?uselang=en");
+		getUrl("http://www.wikia.com/Special:CreateNewWiki?uselang=en");
 		return new CreateNewWikiPageObjectStep1(driver);
 	}
 	

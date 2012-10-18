@@ -351,7 +351,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	public WikiHistoryPageObject openHistoryPage()
 	{
-		driver.get(driver.getCurrentUrl() + "?action=history");
+		getUrl(driver.getCurrentUrl() + "?action=history");
 		waitForElementByElement(historyHeadLine);
 		return new WikiHistoryPageObject(driver, articlename, articlename);
 	}

@@ -1,10 +1,5 @@
 package com.wikia.webdriver.PageObjects.PageObject.WikiPage;
 
-
-
-
-
-
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -103,7 +98,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	
 	public MessageWallPageObject openMessageWall(String userName)
 	{
-		driver.get(Global.DOMAIN+"wiki/Message_Wall:"+userName);
+		getUrl(Global.DOMAIN+"wiki/Message_Wall:"+userName);
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
 		return new MessageWallPageObject(driver, userName);
