@@ -90,7 +90,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_004_CreateArticle(String articleName)
 	{
 		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -112,11 +112,11 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_005", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_005_CreateEditArticle()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
