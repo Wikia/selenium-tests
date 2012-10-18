@@ -64,11 +64,11 @@ public class CreateAWikiTests_lang extends TestTemplate{
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
 		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
-		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
-		factory.openWikiFactoryPage();
-		factory.deleteWiki(lang+"."+wikiName);
-		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
+//		factory.openWikiFactoryPage();
+//		factory.deleteWiki(lang+"."+wikiName);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
 	}	
 
 }
