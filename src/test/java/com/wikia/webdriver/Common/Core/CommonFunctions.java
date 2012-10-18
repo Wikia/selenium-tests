@@ -6,22 +6,38 @@ import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.reporters.JqReporter;
 
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
 
 public class CommonFunctions 
 {
@@ -558,6 +574,105 @@ public class CommonFunctions
 		submitButton.click();
 	}
 	
+	public static void logInCookie(String userName, String password)
+	{
+		driver   = DriverProvider.getWebDriver();
+		driver.manage().deleteAllCookies();
+		DefaultHttpClient httpclient = new DefaultHttpClient();
+		
+		HttpPost httpPost = new HttpPost("http://mediawiki119.wikia.com/api.php");
+		List <NameValuePair> nvps = new ArrayList<NameValuePair>();
+		
+		nvps.add(new BasicNameValuePair("action", "login"));
+		nvps.add(new BasicNameValuePair("format", "xml"));
+		nvps.add(new BasicNameValuePair("lgname", Properties.userName));
+		nvps.add(new BasicNameValuePair("lgpassword", Properties.password));
+		
+		try {
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		HttpResponse response = null;
+		try {
+			response = httpclient.execute(httpPost);
+		} catch (ClientProtocolException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        HttpEntity entity = response.getEntity();
+        String xmlResponse = null;
+		try {
+			xmlResponse = EntityUtils.toString(entity);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        String[] xmlResponseArr = xmlResponse.split("\"");
+        String token = xmlResponseArr[5];
+        
+   
+        List <NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+        
+        nvps2.add(new BasicNameValuePair("action", "login"));
+		nvps2.add(new BasicNameValuePair("format", "xml"));
+		nvps2.add(new BasicNameValuePair("lgname", Properties.userName));
+		nvps2.add(new BasicNameValuePair("lgpassword", Properties.password));
+		nvps2.add(new BasicNameValuePair("lgtoken", token));
+		
+		try {
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps2, HTTP.UTF_8));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			response = httpclient.execute(httpPost);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        entity = response.getEntity();
+        try {
+			xmlResponse = EntityUtils.toString(entity);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        xmlResponseArr = xmlResponse.split("\"");
+        
+   
+        System.out.println(xmlResponseArr[13]);
+        System.out.println(xmlResponseArr[7]);
+        System.out.println(xmlResponseArr[5]);
+        System.out.println(xmlResponseArr[9]);
+        
+        Cookie c1 = new Cookie(xmlResponseArr[11]+"_session", xmlResponseArr[13]);
+        Cookie c2 = new Cookie(xmlResponseArr[11]+"UserName", xmlResponseArr[7]);
+        Cookie c3 = new Cookie(xmlResponseArr[11]+"UserID", xmlResponseArr[5]);
+        Cookie c4 = new Cookie(xmlResponseArr[11]+"Token", xmlResponseArr[9]);
+//        
+        
+        driver.manage().addCookie(c1);
+        driver.manage().addCookie(c2);
+        driver.manage().addCookie(c3);
+        driver.manage().addCookie(c4);
+	}
 	
 	
 

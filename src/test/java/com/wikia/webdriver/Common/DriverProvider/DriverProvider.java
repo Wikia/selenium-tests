@@ -1,6 +1,7 @@
 package com.wikia.webdriver.Common.DriverProvider;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerDriverLogLevel;
+import org.openqa.selenium.ie.InternetExplorerDriverServer;
+import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -43,7 +47,17 @@ public class DriverProvider {
 		if (Global.BROWSER.equals("IE"))
 		{
 			setIEProperties();
-			driver = new EventFiringWebDriver(new InternetExplorerDriver()).register(listener);
+			InternetExplorerDriverService service;
+			service = new InternetExplorerDriverService.Builder().usingAnyFreePort()
+	                .withLogFile(new File("c:\\iedriver1.log")).withLogLevel(InternetExplorerDriverLogLevel.TRACE).build();
+			try {
+				service.start();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			driver = new EventFiringWebDriver(new InternetExplorerDriver(service)).register(listener);
+			
 		}
 		else if (Global.BROWSER.equals("FF"))
 		{
