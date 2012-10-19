@@ -153,7 +153,6 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		return new Object[][]
 				{
 					{"QAarticle"},
-					{"這是文章的名字在中國"},
 					{"QAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName"},
 					{"QA/article"},
 					{"QA_article"},
