@@ -23,11 +23,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 007  Adding galleries to an article in edit mode
 	public void ArticleCRUDAdmin_001_AddingGallery()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -44,7 +45,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheObjectOnThePreview("gallery");
 		WikiArticlePageObject article = edit.clickOnPublishButtonPreview();
 		article.verifyTheObjectOnThePage("gallery");
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_002", "ArticleFeaturesCRUDAdmin"}) 
@@ -52,11 +53,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 007  Adding galleries to an article in edit mode
 	public void ArticleCRUDAdmin_002_ModifyGallery()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -86,7 +88,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyObjectInEditMode("gallery");
 		article = edit.clickOnPublishButton();
 		article.verifyGalleryPosion("right");
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_003", "ArticleFeaturesCRUDAdmin"}) 
@@ -94,11 +96,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 007  Adding galleries to an article in edit mode
 	public void ArticleCRUDAdmin_003_DeleteGallery()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -122,7 +125,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheGalleryNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
 		article.verifyTheGalleryNotOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_004", "ArticleFeaturesCRUDAdmin", "Smoke"})
@@ -130,11 +133,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 008 Adding slideshows to an article in edit mode
 	public void ArticleCRUDAdmin_004_AddingSlideshow()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -150,7 +154,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheObjectOnThePreview("slideshow");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
 		article.verifyTheObjectOnThePage("slideshow");
-		CommonFunctions.logOut(Properties.userNameStaff, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_009", "ArticleFeaturesCRUDAdmin"})
@@ -158,11 +162,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 008 Adding slideshows to an article in edit mode
 	public void ArticleCRUDAdmin_005_ModifySlideshow()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -191,17 +196,18 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article = edit.clickOnPublishButton();
 		article.verifyTheObjectOnThePage("slideshow");
 		article.verifySlideshowPosition("right");
-		CommonFunctions.logOut(Properties.userNameStaff, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_006", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_006_DeleteSlideshow()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -224,7 +230,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheSlideshowNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
 		article.verifyTheSlideshowNotOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	
@@ -234,11 +240,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 009 Adding sliders to an article in edit mode
 	public void ArticleCRUDAdmin_007_AddingSlider()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -254,7 +261,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheObjectOnThePreview("slider");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
 		article.verifyTheObjectOnThePage("slider");
-		CommonFunctions.logOut(Properties.userName, driver);	
+		CommonFunctions.logoutCookie(cookieName);	
 	}
 	
 	
@@ -263,11 +270,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 009 Adding sliders to an article in edit mode
 	public void ArticleCRUDAdmin_008_ModifySlider()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -296,17 +304,18 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article = edit.clickOnPublishButton();
 		article.verifyTheObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("horizontal");
-		CommonFunctions.logOut(Properties.userName, driver);	
+		CommonFunctions.logoutCookie(cookieName);	
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_009", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_009_DeleteSlider()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -329,7 +338,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheSliderNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
 		article.verifyTheSlideshowNotOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_010", "ArticleFeaturesCRUDAdmin", "Smoke"})
@@ -337,11 +346,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 010 Adding videos to an article in edit mode
 	public void ArticleCRUDAdmin_010_AddingVideo()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -357,17 +367,18 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheVideoOnThePreview();
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
 		article.verifyTheVideoOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}	
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_011", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_011_ModifyVideo()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -391,17 +402,18 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyVideoInEditMode(Caption2);
 		article = edit.clickOnPublishButton();
 		article.verifyTheVideoOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_012", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_012_DeleteVideo()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -423,7 +435,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheVideoNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
 		article.verifyTheVideoNotOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDAdmin", "Smoke"}) 
@@ -431,11 +443,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 004 Adding images to an article in edit mode
 	public void ArticleCRUDAdmin_013_AddingImage()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -449,7 +462,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheCaptionOnThePreview(Caption);
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
 		article.VerifyTheImageOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_014", "ArticleFeaturesCRUDAdmin"})
@@ -457,11 +470,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 005 Modifying images in an article in edit mode
 	public void ArticleCRUDAdmin_014_ModifyImage()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -479,7 +493,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheCaptionOnThePreview(Caption2);
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
 		article.VerifyTheImageOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_015", "ArticleFeaturesCRUDAdmin"})
@@ -487,11 +501,12 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 005 Modifying images in an article in edit mode
 	public void ArticleCRUDAdmin_015_DeleteImage()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
+		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
@@ -508,13 +523,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheImageNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
 		article.verifyTheImageNotOnThePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logoutCookie(cookieName);
 	}	
 	
 //	@Test(groups={"ArticleFeaturesCRUDAdmin_016", "ArticleFeaturesCRUDAdmin"})
 //	public void ArticleCRUDAdmin_016_AddTable()
 //	{
-//		CommonFunctions.logOut(Properties.userName, driver);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 //		pageName = "QAarticle"+wiki.getTimeStamp();
@@ -534,7 +549,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //	@Test(groups={"ArticleFeaturesCRUDAdmin_017", "ArticleFeaturesCRUDAdmin"})
 //	public void ArticleCRUDAdmin_017_EditTable()
 //	{
-//		CommonFunctions.logOut(Properties.userName, driver);
+//		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 //		pageName = "QAarticle"+wiki.getTimeStamp();
