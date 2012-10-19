@@ -78,7 +78,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		return new Object[][]
 				{
 					{"QAarticle"},
-					{"QAVeryLongAr	ticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName"},
+					{"QAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName"},
 					{"QA/article"},
 					{"QA_article"},
 					{"123123123123"}
