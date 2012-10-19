@@ -654,11 +654,11 @@ public class CommonFunctions
 		}
         xmlResponseArr = xmlResponse.split("\"");
         
-   
-        System.out.println(xmlResponseArr[13]);
-        System.out.println(xmlResponseArr[7]);
-        System.out.println(xmlResponseArr[5]);
-        System.out.println(xmlResponseArr[9]);
+//   
+//        System.out.println(xmlResponseArr[13]);
+//        System.out.println(xmlResponseArr[7]);
+//        System.out.println(xmlResponseArr[5]);
+//        System.out.println(xmlResponseArr[9]);
         
         Cookie c1 = new Cookie(xmlResponseArr[11]+"_session", xmlResponseArr[13]);
         Cookie c2 = new Cookie(xmlResponseArr[11]+"UserName", xmlResponseArr[7]);
@@ -670,7 +670,7 @@ public class CommonFunctions
 //        driver.manage().addCookie(c2);
 //        driver.manage().addCookie(c3);        	
 //        driver.manage().addCookie(c4);
-        //$.cookie('nandyciastko', 'blah2 bla2h blah', {'domain': 'wikia.com'});
+        
         JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("$.cookie('"+xmlResponseArr[11]+"_session', '"+ xmlResponseArr[13]+"', {'domain': 'wikia.com'})");
 		js.executeScript("$.cookie('"+xmlResponseArr[11]+"UserName', '"+ xmlResponseArr[7]+"', {'domain': 'wikia.com'})");
