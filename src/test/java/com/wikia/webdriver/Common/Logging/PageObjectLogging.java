@@ -72,6 +72,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 		CommonUtils.appendTextToFile(logPath, l1);
 		CommonUtils.appendTextToFile(logPath, l2);
 		CommonUtils.appendTextToFile(logPath, l3);
+		System.out.println(className +" "+ methodName);
 	}
 
 	public static void stopLoggingMethod() {
