@@ -6,7 +6,6 @@ import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -29,8 +28,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -574,10 +573,9 @@ public class CommonFunctions
 		submitButton.click();
 	}
 	
-	public static void logInCookie(String userName, String password)
+	public static String logInCookie(String userName, String password)
 	{
 		driver   = DriverProvider.getWebDriver();
-		driver.manage().deleteAllCookies();
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		
 		HttpPost httpPost = new HttpPost("http://mediawiki119.wikia.com/api.php");
@@ -585,8 +583,8 @@ public class CommonFunctions
 		
 		nvps.add(new BasicNameValuePair("action", "login"));
 		nvps.add(new BasicNameValuePair("format", "xml"));
-		nvps.add(new BasicNameValuePair("lgname", Properties.userName));
-		nvps.add(new BasicNameValuePair("lgpassword", Properties.password));
+		nvps.add(new BasicNameValuePair("lgname", userName));
+		nvps.add(new BasicNameValuePair("lgpassword", password));
 		
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
@@ -624,8 +622,8 @@ public class CommonFunctions
         
         nvps2.add(new BasicNameValuePair("action", "login"));
 		nvps2.add(new BasicNameValuePair("format", "xml"));
-		nvps2.add(new BasicNameValuePair("lgname", Properties.userName));
-		nvps2.add(new BasicNameValuePair("lgpassword", Properties.password));
+		nvps2.add(new BasicNameValuePair("lgname", userName));
+		nvps2.add(new BasicNameValuePair("lgpassword", password));
 		nvps2.add(new BasicNameValuePair("lgtoken", token));
 		
 		try {
@@ -668,10 +666,28 @@ public class CommonFunctions
         Cookie c4 = new Cookie(xmlResponseArr[11]+"Token", xmlResponseArr[9]);
 //        
         
-        driver.manage().addCookie(c1);
-        driver.manage().addCookie(c2);
-        driver.manage().addCookie(c3);
-        driver.manage().addCookie(c4);
+//        driver.manage().addCookie(c1);        	
+//        driver.manage().addCookie(c2);
+//        driver.manage().addCookie(c3);        	
+//        driver.manage().addCookie(c4);
+        //$.cookie('nandyciastko', 'blah2 bla2h blah', {'domain': 'wikia.com'});
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$.cookie('"+xmlResponseArr[11]+"_session', '"+ xmlResponseArr[13]+"', {'domain': 'wikia.com'})");
+		js.executeScript("$.cookie('"+xmlResponseArr[11]+"UserName', '"+ xmlResponseArr[7]+"', {'domain': 'wikia.com'})");
+		js.executeScript("$.cookie('"+xmlResponseArr[11]+"UserID', '"+ xmlResponseArr[5]+"', {'domain': 'wikia.com'})");
+		js.executeScript("$.cookie('"+xmlResponseArr[11]+"Token', '"+ xmlResponseArr[9]+"', {'domain': 'wikia.com'})");
+		return xmlResponseArr[11];
+        
+	}
+	
+	public static void logoutCookie(String wiki)
+	{
+		driver = DriverProvider.getWebDriver();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$.cookie('"+wiki+"_session', null)");
+		js.executeScript("$.cookie('"+wiki+"UserName', null)");
+		js.executeScript("$.cookie('"+wiki+"UserID', null)");
+		js.executeScript("$.cookie('"+wiki+"Token', null)");
 	}
 	
 	
