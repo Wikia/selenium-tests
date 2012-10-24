@@ -43,6 +43,7 @@ public class CreateAWikiTests_lang extends TestTemplate{
 	@Test(dataProvider="getArticleName", groups = {"CreateNewWiki_lang_001","CNW_lang"})
 	public void CreateNewWiki_lang_TC001(String lang)
 	{
+		CommonFunctions.logOut(Properties.userName, driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
