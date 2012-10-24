@@ -18,7 +18,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
  */
 public class NewWikiaHomePage extends WikiBasePageObject{
 
-	@FindBy(css="button[class='close wikia-chiclet-button']")
+	@FindBy(css="button.close.wikia-chiclet-button")
 	WebElement congratulationLightBoxCloseButton;
 	
 	public NewWikiaHomePage(WebDriver driver, String wikiname) 
