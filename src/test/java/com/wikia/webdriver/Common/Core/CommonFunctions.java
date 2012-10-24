@@ -246,6 +246,7 @@ public class CommonFunctions
 	{
 		wait = new WebDriverWait(driver, 30);
 		try{			
+			driver.manage().deleteAllCookies();
 			driver.get(Global.DOMAIN+"wiki/Special:UserLogout?noexternals=1");
 		}
 		catch (TimeoutException e)

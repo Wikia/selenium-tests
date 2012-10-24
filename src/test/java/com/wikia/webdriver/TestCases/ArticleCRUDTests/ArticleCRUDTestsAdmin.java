@@ -31,7 +31,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_002", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_002_VerifyEditDropDown()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName, Properties.password);
@@ -50,7 +50,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_003", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_003_VerifyEditDropDown()
 	{
-//		CommonFunctions.logOut(Properties.userNameStaff, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
