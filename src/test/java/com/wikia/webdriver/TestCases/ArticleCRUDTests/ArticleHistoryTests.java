@@ -21,7 +21,7 @@ public class ArticleHistoryTests extends TestTemplate
 	@Test(groups={"ArticleHistoryTests_001", "ArticleCRUDAdmin"})
 	public void RecoverPreviousVersion()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
@@ -48,13 +48,13 @@ public class ArticleHistoryTests extends TestTemplate
 		article.deleteArticle(pageName);
 		article.openArticle(pageName);
 		article.verifyDeletedArticlePage(pageName);
-		CommonFunctions.logOut(Properties.userNameStaff, driver);
+		CommonFunctions.logOut(driver);
 	}
 	
 	@Test(groups={"ArticleHistoryTests_002", "ArticleCRUDAdmin"})
 	public void RollbackVersion()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
@@ -66,7 +66,7 @@ public class ArticleHistoryTests extends TestTemplate
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
 		article.verifyArticleText(articleText);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password);
 		article.openArticle(pageName);
 		edit = article.edit();
@@ -76,7 +76,7 @@ public class ArticleHistoryTests extends TestTemplate
 		article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
 		article.verifyArticleText(articleTextEdit);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(pageName);
 		WikiHistoryPageObject history = article.openHistoryPage();
@@ -87,6 +87,6 @@ public class ArticleHistoryTests extends TestTemplate
 		article.deleteArticle(pageName);
 		article.openArticle(pageName);
 		article.verifyDeletedArticlePage(pageName);
-		CommonFunctions.logOut(Properties.userNameStaff, driver);
+		CommonFunctions.logOut(driver);
 	}
 }

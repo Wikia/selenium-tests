@@ -44,7 +44,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 			factory.openWikiFactoryPage();
 			factory.deleteWiki(wikiNames.get(i));
 		}
-		CommonFunctions.logOut(Properties.userNameStaff, driver);
+		CommonFunctions.logOut(driver);
 		stopBrowser();
 	}
 	
@@ -57,7 +57,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 //	@Test(groups = {"CreateNewWiki_latin_001","CNW"})
 	public void CreateNewWiki_latin_001_have_an_account()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -69,7 +69,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 		logInPage.verifyTabTransition();
 		logInPage.verifyFaceBookToolTip();
 		logInPage.verifySignUpText();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 	}
 	
 	/*
@@ -80,7 +80,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 	@Test(groups = {"CreateNewWiki_latin_002","CNW"})
 	public void CreateNewWiki_latin_TC002_user_name_is_blank()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -103,7 +103,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
 //		factory.openWikiFactoryPage();
@@ -120,7 +120,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 	@Test(groups = {"CreateNewWiki_latin_003","CNW"})
 	public void CreateNewWiki_latin_TC003_user_name_does_not_exists()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -144,7 +144,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
 		newWikia.verifyUserToolBar();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
 //		factory.openWikiFactoryPage();
@@ -160,7 +160,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 	@Test(groups = {"CreateNewWiki_latin_004","CNW"})
 	public void CreateNewWiki_latin_TC004_password_is_blank()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -184,7 +184,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
 		newWikia.verifyUserToolBar();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
 //		factory.openWikiFactoryPage();
@@ -224,7 +224,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
 		newWikia.verifyUserToolBar();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
 //		factory.openWikiFactoryPage();
@@ -260,7 +260,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
 		newWikia.verifyUserToolBar();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
 //		factory.openWikiFactoryPage();

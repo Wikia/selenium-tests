@@ -42,7 +42,7 @@ public class CreateAWiki_1 extends TestTemplate{
 		NewWikiaHomePage newWikia = createNewWikiStep3.submit(wikiName);
 		newWikia.waitForCongratulationsLightBox(wikiName);
 		//logout
-		CommonFunctions.logOut("KarolK1", driver);
+		CommonFunctions.logOut(driver);
 		
 		
 		//delete created wiki

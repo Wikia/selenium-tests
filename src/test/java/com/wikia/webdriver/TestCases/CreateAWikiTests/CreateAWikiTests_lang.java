@@ -43,7 +43,7 @@ public class CreateAWikiTests_lang extends TestTemplate{
 	@Test(dataProvider="getArticleName", groups = {"CreateNewWiki_lang_001","CNW_lang"})
 	public void CreateNewWiki_lang_TC001(String lang)
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -64,7 +64,7 @@ public class CreateAWikiTests_lang extends TestTemplate{
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
 //		factory.openWikiFactoryPage();

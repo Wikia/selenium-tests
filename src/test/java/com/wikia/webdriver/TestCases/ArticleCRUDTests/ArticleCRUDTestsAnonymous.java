@@ -29,7 +29,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	@Test(groups={"ArticleCRUDAnon_001", "ArticleCRUDAnonymous"})
 	public void ArticleCRUDAnon_001_VerifyEditDropDown()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		wiki.openRandomArticle();
@@ -53,7 +53,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	@Test(dataProvider="getArticleName", groups={"ArticleCRUDAnon_002", "ArticleCRUDAnonymous"})
 	public void ArticleCRUDAnon_002_CreateArticle(String articleName)
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -74,7 +74,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	@Test(groups={"ArticleCRUDAnon_003", "ArticleCRUDAnonymous"})
 	public void ArticleCRUDAnon_003_CreateEditArticle()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -104,7 +104,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	@Test(groups={"ArticleCRUDAnon_004", "ArticleCRUDAnonymous"})
 	public void ArticleCRUDAnon_004_CreateArticleComment()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -130,7 +130,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	@Test(groups={"ArticleCRUDAnon_005", "ArticleCRUDAnonymous"})
 	public void ArticleCRUDAnon_005_CreateArticleCommentReply()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();

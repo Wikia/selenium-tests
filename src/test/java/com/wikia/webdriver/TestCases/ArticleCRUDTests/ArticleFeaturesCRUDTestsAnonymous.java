@@ -19,7 +19,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	// Test Case 004 Adding images to an article in edit mode
 	public void ArticleCRUDAnonymous_001_AddingImage()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -28,7 +28,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Image");
 		edit.verifyModalLogin();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 	}		
 	
 	@Test(groups={"ArticleFeatureCRUDAnonymous_002", "ArticleCRUDAnonymous"}) 
@@ -36,7 +36,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	// Test Case 007  Adding galleries to an article in edit mode
 	public void ArticleCRUDAnonymous_002_AddingGallery()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -45,7 +45,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Gallery");
 		edit.verifyModalLogin();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 	}
 	
 	@Test(groups={"ArticleFeatureCRUDAnonymous_003", "ArticleCRUDAnonymous"}) 
@@ -53,7 +53,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	// Test Case 008 Adding slideshows to an article in edit mode
 	public void ArticleCRUDAnonymous_003_AddingSlideshow()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -62,7 +62,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slideshow");
 		edit.verifyModalLogin();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 	}
 	
 	@Test(groups={"ArticleFeatureCRUDAnonymous_004", "ArticleCRUDAnonymous"})
@@ -70,7 +70,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	// Test Case 009 Adding sliders to an article in edit mode
 	public void ArticleCRUDAnonymous_004_AddingSlider()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -79,7 +79,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slider");
 		edit.verifyModalLogin();
-		CommonFunctions.logOut(Properties.userName, driver);	
+		CommonFunctions.logOut(driver);	
 	}
 	
 	@Test(groups={"ArticleFeatureCRUDAnonymous_005", "ArticleCRUDAnonymous"}) 
@@ -87,7 +87,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	// Test Case 010 Adding videos to an article in edit mode
 	public void ArticleCRUDAnonymous_005_AddingVideo()
 	{
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -96,7 +96,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
 		edit.verifyModalLogin();
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 	}	
 	
 

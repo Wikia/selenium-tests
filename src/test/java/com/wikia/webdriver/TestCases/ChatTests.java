@@ -41,7 +41,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
@@ -50,7 +50,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//second user opens the chat
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -74,14 +74,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -116,14 +116,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -156,14 +156,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat	
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -205,14 +205,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -247,14 +247,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat	
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -289,14 +289,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -337,14 +337,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -401,14 +401,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -458,14 +458,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -524,14 +524,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		HomePageObject home = new HomePageObject(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		home.openHomePage();
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		HomePageObject home2 = new HomePageObject(driver2);
-		CommonFunctions.logOut(Properties.userName, driver2);
+		CommonFunctions.logOut(driver2);
 		home2.openHomePage();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -548,7 +548,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat1.selectChatModStatus(driver);
 		chat1.verifyChatModMessage(Properties.userNameStaff, Properties.userName2);
 		chat2.verifyChatModMessage(Properties.userNameStaff, Properties.userName2);
-		CommonFunctions.logOut(Properties.userNameStaff, driver);
+		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 		chat1.openChatPage();
 		switchToWindow(driver2);
@@ -557,7 +557,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat2.verifyChatModUserDropdown();
 		//remove admin rights
 		switchToWindow(driver);
-		CommonFunctions.logOut(Properties.userName, driver);
+		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff, driver);
 		CommonFunctions.removeChatModeratorRights(Properties.userName2, driver);
 	}

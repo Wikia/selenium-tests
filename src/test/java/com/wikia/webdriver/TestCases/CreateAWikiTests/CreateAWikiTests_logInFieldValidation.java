@@ -40,7 +40,7 @@ public class CreateAWikiTests_logInFieldValidation extends TestTemplate{
 	
 	public void CreateNewWiki_LogInFieldValidation(String userName, String userNameEnc, String password)
 	{
-		CommonFunctions.logOut(userNameEnc, driver);
+		CommonFunctions.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -61,6 +61,7 @@ public class CreateAWikiTests_logInFieldValidation extends TestTemplate{
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(userNameEnc);
 		newWikia.verifyUserToolBar();
+		CommonFunctions.logOut(driver);
 //		CommonFunctions.logOut(userNameEnc, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);

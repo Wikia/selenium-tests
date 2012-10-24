@@ -242,7 +242,7 @@ public class CommonFunctions
 	 * @param userName
 	 * @author: Karol Kujawiak
 	 */
-	public static void logOut(String userName, WebDriver driver)
+	public static void logOut(WebDriver driver)
 	{
 		wait = new WebDriverWait(driver, 30);
 		try{			

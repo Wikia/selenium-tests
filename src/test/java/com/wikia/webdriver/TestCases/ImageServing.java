@@ -29,7 +29,7 @@ public class ImageServing extends TestTemplate {
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 	public void ImageServing001_SpecialNewFilesTest()
 	{
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		SpecialNewFilesPageObject wikiSpecialNF = wiki.OpenSpecialNewFiles();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2);
@@ -40,14 +40,14 @@ public class ImageServing extends TestTemplate {
 		wikiSpecialNF.TypeInFileToUploadPath(file);
 		wikiSpecialNF.ClickOnUploadaPhoto();
 		wikiSpecialNF.waitForFile(file);
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 	}
 	
 	@Test(groups = {"ImageServing002", "ImageServing"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 	public void ImageServing002_SpecialUploadTest()
 	{
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		SpecialUploadPageObject wikiSpecialU = wiki.OpenSpecialUpload();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2);
@@ -56,13 +56,13 @@ public class ImageServing extends TestTemplate {
 		wikiSpecialU.CheckIgnoreAnyWarnings();
 		FilePageObject filePage = wikiSpecialU.ClickOnUploadFile(file);
 		filePage.VerifyCorrectFilePage();
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 	}
 	@Test(groups = {"ImageServing003", "ImageServing"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 	public void ImageServing003_SpecialMultipleUploadTest()
 	{
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		SpecialMultipleUploadPageObject wikiSpecialMU = wiki.OpenSpecialMultipleUpload();
 		CommonFunctions.logIn(Properties.userName2, Properties.password2);
@@ -70,7 +70,7 @@ public class ImageServing extends TestTemplate {
 		wikiSpecialMU.CheckIgnoreAnyWarnings();
 		wikiSpecialMU.ClickOnUploadFile();
 		wikiSpecialMU.VerifySuccessfulUpload(ListOfFiles);
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 	}
 	
 	
@@ -80,7 +80,7 @@ public class ImageServing extends TestTemplate {
 	// Test Case 011 Adding related videos through Related Video (RV) module
 	public void ImageServing011_AddingVideoThroughRV()
 	{		
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 		//delete the given video from RV module on QAAutopage using MediaWiki:RelatedVideosGlobalList (message article), by its name (videoURL2name variable)
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		WikiArticlePageObject RVmoduleMessage = wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
@@ -96,7 +96,7 @@ public class ImageServing extends TestTemplate {
 		article.clickOnRVModalAddButton();
 //		article.WaitForProcessingToFinish();
 		article.verifyVideoAddedToRVModule(videoURL2name);
-		CommonFunctions.logOut(Properties.userName2, driver);
+		CommonFunctions.logOut(driver);
 	}
 }
 
