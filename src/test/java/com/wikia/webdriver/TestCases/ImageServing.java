@@ -30,8 +30,8 @@ public class ImageServing extends TestTemplate {
 	public void ImageServing001_SpecialNewFilesTest()
 	{
 		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		SpecialNewFilesPageObject wikiSpecialNF = wiki.OpenSpecialNewFiles();
 		wikiSpecialNF.ClickOnAddaPhoto();
 		wikiSpecialNF.ClickOnMoreOrFewerOptions();
