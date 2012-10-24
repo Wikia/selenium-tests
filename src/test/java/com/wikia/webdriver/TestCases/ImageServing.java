@@ -31,8 +31,8 @@ public class ImageServing extends TestTemplate {
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		SpecialNewFilesPageObject wikiSpecialNF = wiki.OpenSpecialNewFiles();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		wikiSpecialNF.ClickOnAddaPhoto();
 		wikiSpecialNF.ClickOnMoreOrFewerOptions();
 		wikiSpecialNF.CheckIgnoreAnyWarnings();
@@ -49,10 +49,10 @@ public class ImageServing extends TestTemplate {
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		SpecialUploadPageObject wikiSpecialU = wiki.OpenSpecialUpload();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		wikiSpecialU.TypeInFileToUploadPath(file);
-		wikiSpecialU.verifyFilePreviewAppeared(file);
+//		wikiSpecialU.verifyFilePreviewAppeared(file);
 		wikiSpecialU.CheckIgnoreAnyWarnings();
 		FilePageObject filePage = wikiSpecialU.ClickOnUploadFile(file);
 		filePage.VerifyCorrectFilePage();
@@ -64,8 +64,8 @@ public class ImageServing extends TestTemplate {
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		SpecialMultipleUploadPageObject wikiSpecialMU = wiki.OpenSpecialMultipleUpload();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		wikiSpecialMU.TypeInFilesToUpload(ListOfFiles);
 		wikiSpecialMU.CheckIgnoreAnyWarnings();
 		wikiSpecialMU.ClickOnUploadFile();
@@ -82,14 +82,15 @@ public class ImageServing extends TestTemplate {
 	{		
 		CommonFunctions.logOut(driver);
 		//delete the given video from RV module on QAAutopage using MediaWiki:RelatedVideosGlobalList (message article), by its name (videoURL2name variable)
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		WikiArticlePageObject RVmoduleMessage = wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
+//		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode RVmoduleMessageEdit = RVmoduleMessage.edit();		
+//		WikiArticlePageObject RVmoduleMessage = wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
+		WikiArticleEditMode RVmoduleMessageEdit = new WikiArticleEditMode(driver, Global.DOMAIN, "");		
+		RVmoduleMessageEdit.editArticleByName("MediaWiki:RelatedVideosGlobalList");
 		RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(videoURL2name);
-		RVmoduleMessage = RVmoduleMessageEdit.clickOnPublishButton();
+		WikiArticlePageObject article = RVmoduleMessageEdit.clickOnPublishButton();
 		// after deletion start testing
-		WikiArticlePageObject article = RVmoduleMessage.OpenArticle(wikiArticle);
+		article = article.OpenArticle(wikiArticle);
 		article.verifyRVModulePresence();
 		article.clickOnAddVideoRVModule();
 		article.typeInVideoURL(videoURL2);

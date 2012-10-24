@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -124,6 +125,11 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	}
 
 
+	public WikiArticleEditMode editArticleByName(String name)
+	{
+		driver.get(Global.DOMAIN + "wiki/"+name+"?action=edit");
+		return new WikiArticleEditMode(driver, Domain, name);
+	}
 
 	/**
 	 * Type given caption for the photo
@@ -722,10 +728,19 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 		messageSourceModeTextArea.sendKeys("WHITELIST");
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
-		for (int i = 0; i < videos.size(); i++) {
-			messageSourceModeTextArea.sendKeys(videos.get(i));
-			messageSourceModeTextArea.sendKeys(Keys.ENTER);
+		String builder = "";
+		for (int i = 0; i<videos.size(); i++)
+		{	
+			builder+=videos.get(i);
+			builder+="\n";
 		}
+		CommonUtils.setClipboardContents(builder);
+		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		
+//		for (int i = 0; i < videos.size(); i++) {
+//			messageSourceModeTextArea.sendKeys(videos.get(i));
+//			messageSourceModeTextArea.sendKeys(Keys.ENTER);
+//		}
 		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
 	}
 

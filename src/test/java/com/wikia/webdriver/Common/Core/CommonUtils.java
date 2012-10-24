@@ -1,5 +1,8 @@
 package com.wikia.webdriver.Common.Core;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -21,6 +24,12 @@ public class CommonUtils {
 	 * @param textToWrite
 	 * @author Karol Kujawiak
 	 */
+	  public static void setClipboardContents(String content)
+	  {
+		  StringSelection ss = new StringSelection(content);
+		  Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+	  }
+	
 	public static void appendTextToFile(String filePath, String textToWrite) {
 		try {
 			boolean append;
