@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjects.PageObject.CreateNewWiki;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -49,6 +50,18 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 	
 	public NewWikiaHomePage submit(String wikiName)
 	{
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		int sleep = 0;
+		while(js.executeScript("return WikiBuilder.cityId").toString().equals("false")&&sleep<10000)		
+		{	
+			sleep+=500;
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		waitForElementByElement(submitButton);
 		clickAndWait(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
