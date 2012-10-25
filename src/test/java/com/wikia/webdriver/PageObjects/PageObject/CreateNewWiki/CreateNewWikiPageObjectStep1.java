@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjects.PageObject.CreateNewWiki;
 
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -97,6 +98,9 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	 */
 	public void waitForSuccessIcon()
 	{
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		while(js.executeScript("return WikiBuilder.domainAjax").toString().equals("false"));///bug in CNW
+		while(js.executeScript("return WikiBuilder.domainAjax").toString().equals("true"));///bug in CNW
 		waitForElementByElement(successIcon);																				 
 		PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);																							
 	}
