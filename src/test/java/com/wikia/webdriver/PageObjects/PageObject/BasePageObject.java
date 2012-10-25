@@ -147,15 +147,7 @@ public class BasePageObject{
 
 	public void click(WebElement pageElem)
 	{
-		try
-		{
-			CommonFunctions.scrollToElement(pageElem);
-			pageElem.click();
-		}
-		catch(Exception e)
-		{
-			PageObjectLogging.log("click", Throwables.getStackTraceAsString(e), false);
-		}
+		pageElem.click();	
 	}
 	
 	public void getUrl(String url)
@@ -625,6 +617,12 @@ public class BasePageObject{
 		}
 	}
 	
+	public void showToolbar()
+	{
+		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
+		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
+	}
+	
 	/**
 	 * Verifies that user toolbar buttons are visible
 	 */
@@ -644,7 +642,7 @@ public class BasePageObject{
 	public void customizeToolbar_ClickCustomize() {
 		waitForElementByElement(customizeToolbar_CustomizeButton);
 		waitForElementClickableByElement(customizeToolbar_CustomizeButton);
-		clickAndWait(customizeToolbar_CustomizeButton);
+		click(customizeToolbar_CustomizeButton);
 		PageObjectLogging.log("customizeToolbar_ClickCustomize", "Clicks on 'Customize' button.", true, driver);
 		
 	}
