@@ -52,7 +52,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		int sleep = 0;
-		while(js.executeScript("return WikiBuilder.cityId").toString().equals("false")&&sleep<10000)		
+		while(js.executeScript("return WikiBuilder.cityId").toString().equals("false")&&sleep<20000)//https://wikia.fogbugz.com/default.asp?51510
 		{	
 			sleep+=500;
 			try {
