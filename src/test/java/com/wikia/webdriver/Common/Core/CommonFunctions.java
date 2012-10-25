@@ -108,6 +108,7 @@ public class CommonFunctions
 	public static void logIn(String userName, String password)
 	{
 		driver   = DriverProvider.getWebDriver();
+		driver.manage().deleteAllCookies();
 		String temp = driver.getCurrentUrl();
 		try{
 		driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
@@ -690,6 +691,7 @@ public class CommonFunctions
 		js.executeScript("$.cookie('"+wiki+"UserID', null)");
 		js.executeScript("$.cookie('"+wiki+"Token', null)");
 	}
+	
 	
 	
 
