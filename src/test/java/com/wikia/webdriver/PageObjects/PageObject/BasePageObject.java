@@ -209,6 +209,26 @@ public class BasePageObject{
 		}
 	}
 	
+	/**
+	 * Sends Keys to an element within iFrame, using jQuery
+	 * 
+	 * @author Michal Nowierski
+	 * ** @param cssSelecotr The WebElement to which keys will be sent
+	 * ** @param text the text to be sent
+	 * 
+	 */
+	
+	public void sendKeysInArticleIframe(String cssSelecotr, String text)
+	{
+		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"+cssSelecotr+"')).text('"+text+"')");
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void mouseOverInArticleIframe(String cssSelecotr)
 	{
 		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"+cssSelecotr+"')).mouseenter()");

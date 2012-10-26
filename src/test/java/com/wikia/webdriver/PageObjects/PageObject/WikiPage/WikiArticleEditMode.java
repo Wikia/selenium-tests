@@ -9,6 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -77,8 +79,14 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private WebElement searchFieldImageInLightBox;
 	@FindBy(css="img.sprite.search")
 	private WebElement searchButtonImageInLightBox;
-	
-
+	@FindBy(css="span.cke_button_table a")
+	private WebElement tableButton;
+	@FindBy(css="div.cke_dialog.modalWrapper")
+	private WebElement tableModal;
+	@FindBy(css="a.cke_dialog_ui_button.wikia-button")
+	private WebElement tableModalOKbutton;
+	@FindBy(css="table.article-table")
+	private WebElement VisualModeTable;
 	
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By removePhotoDialog = By.cssSelector("section.modalWrapper.RTEModal");
@@ -89,12 +97,16 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private By galleryDialogPhotosList = By.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By.cssSelector("ul.clearfix[id='WikiaPhotoGalleryOrientation'] li");
 	private By galleryDialogSlideshowOrientationsList = By.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
+	
+	private By contextMenuIframeList = By.cssSelector("iframe[aria-label='Context Menu Options']");
+	private By contextMenuOptionsList = By.cssSelector("span.cke_menuitem a");
 
 	private String imageArticleIFrame = "img";
 	private String galleryArticleIFrame = "img.image-gallery";
 	private String sliderArticleIFrame = "img.image-gallery-slider";
 	private String slideShowArticleIFrame = "img.image-slideshow";
 	private String videoArticleIFrame = "img.video";
+	
 	
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 	private String deleteButtonArticleItem = "span.RTEMediaOverlayDelete";
@@ -745,6 +757,201 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	}
 
 	
+	/**
+	 * 
+	 * Left Click on add Table button.
+	 * 
+	 * 
+	 * 
+	 * 
+	 @author Michal Nowierski
+	 */
+
+	public void clickOnAddTableButton() {
+
+		waitForElementByElement(tableButton);
+		waitForElementClickableByElement(tableButton);
+		tableButton.click();
+		PageObjectLogging.log("clickOnAddTableButton","Click on: table-button, on wiki: " + Domain + "",true, driver);
+	}
+
+	/**
+	* wait for table modal
+	*
+	*
+	@author Michal Nowierski
+	*/
+	public void verifyTableModal() {
+	waitForElementByElement(tableModal);
+	PageObjectLogging.log("waitForTableModal", "wait for table modal", true, driver);
+	}
+
+	/**
+	* Click OK on table modal
+	*
+	*
+	@author Michal Nowierski
+	*/
+	public void clickOKonTableModal() {
+	waitForElementByElement(tableModalOKbutton);
+	waitForElementClickableByElement(tableModalOKbutton);
+	tableModalOKbutton.click();
+	PageObjectLogging.log("clickOKonTableModal", "Click OK on table modal", true, driver);
+	}
+
+	/**
+	* Verify that the table has appeared in the visual mode
+	*
+	*
+	@author Michal Nowierski
+	*/
+
+	public void verifyTableAppears() {
+		waitForElementByElement(visualModeIFrame);
+		driver.switchTo().frame(visualModeIFrame);
+		waitForElementByElement(VisualModeTable);
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("verifyTableAppeared",
+				"Verify that the table has appeared in the visual mode", true,
+				driver);
+	}
+
+	
+	/**
+	* Populate table cell
+	*
+	*
+	@author Michal Nowierski
+	*
+	@param string value - text to be present in the cell
+	@param j row index
+	@param i column index
+	*/
+
+	public void tablePupulateCell(int i, int j, String value) {
+	int cellPosition = (i*2)+(j-3);
+	executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('table.article-table tr *:not(br)')["+cellPosition+"]).text('"+value+"')");
+// 	 *:not(br)  expression matches all possible elements, except <br> elements
+	PageObjectLogging.log("tablePupulateCell", "send "+value+" to cell at row: "+i+", column: "+j+"", true, driver);
+
+	}
+
+	/**
+	* Check if there are enough rows
+	*
+	*
+	@author Michal Nowierski
+	*
+	@param i number of rows
+	*/
+	public void tableCheckTableRowsCount(int i) {
+	waitForElementByElement(visualModeIFrame);
+	driver.switchTo().frame(visualModeIFrame);
+	waitForElementByElement(VisualModeTable);
+
+	List<WebElement> RowsList;
+
+	for (int j = 0; j < i; j++) {
+	RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
+	waitForElementByElement(RowsList.get(j));
+	}
+
+	driver.switchTo().defaultContent();
+	PageObjectLogging.log("tableCheckTableRowsCount", "check that there are "+i+" rows in the table", true, driver);
+	}
+
+	/**
+	* Right click on a cell
+	*
+	*
+	@author Michal Nowierski
+	*
+	@param i row index of the cell
+	@param j column index of the cell
+	*/
+	public void tableRightClickOnCell(int i, int j) {
+
+	waitForElementByElement(visualModeIFrame);
+	driver.switchTo().frame(visualModeIFrame);
+	waitForElementByElement(VisualModeTable);
+
+	List<WebElement> RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
+	List<WebElement> CellsList = RowsList.get(i-1).findElements(By.cssSelector("*:not(br)"));
+
+	Actions builderq = new Actions(driver);
+	Action rClick = builderq.contextClick(CellsList.get(j-1)).build();
+	rClick.perform();
+
+	driver.switchTo().defaultContent();
+	// somehow, the driver does not click on the wanted cell. It click Just on table
+	PageObjectLogging.log("tableRightClickOnCell", "Right click on cell at row: "+i+", column: "+j+"", true, driver);
+
+	}
+
+	/**
+	* Check that pointed table cell has wanted value in it
+	*
+	*
+	@author Michal Nowierski
+	*
+	@param i row index of the cell
+	@param j column index of the cell
+	*/
+	public void tableCheckCellContent(int i, int j, String value){
+
+	waitForElementByElement(visualModeIFrame);
+	driver.switchTo().frame(visualModeIFrame);
+	waitForElementByElement(VisualModeTable);
+	
+	List<WebElement> RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
+	List<WebElement> CellsList = RowsList.get(i-1).findElements(By.cssSelector("*:not(br)"));
+
+	waitForElementByElement(CellsList.get(j-1));
+	waitForTextToBePresentInElementByElement(CellsList.get(j-1), value);
+
+	driver.switchTo().defaultContent();
+	PageObjectLogging.log("tableCheckCellContent", "Check that cell at row: "+i+", column: "+j+" has value: "+value+" in it", true, driver);
+
+	}
+
+	/**
+	* Choose an option from table context menu.
+	* Right click on table must be invoked before this method
+	*
+	*
+	@author Michal Nowierski
+	*
+	@param i position of an option in the context menu. <br>
+	1 = Paste, 2 = Cell, 3 = Row (...)
+	@param j position of an option in the extended context menu <br>
+	i = 2 , j = 1 indicates "insert cell before" option
+	<br>
+	<br> Manually right click on table context menu for better understanding
+	*/
+	public void tableChooseFromContextMenu(int i, int j) {
+
+	List<WebElement> list = driver.findElements(contextMenuIframeList);
+	driver.switchTo().frame(list.get(0));
+	List<WebElement> list2 = driver.findElements(contextMenuOptionsList);
+
+	WebElement click = list2.get(i-1);
+	waitForElementByElement(click);
+	click.click();
+	driver.switchTo().defaultContent();
+
+	if (i ==2 | i ==3 | i ==4) {
+	list = driver.findElements(contextMenuIframeList);
+	driver.switchTo().frame(list.get(1));
+	list2 = driver.findElements(contextMenuOptionsList);
+	click = list2.get(j-1);
+	waitForElementByElement(click);
+	click.click();
+	driver.switchTo().defaultContent();
+
+	}
+
+	PageObjectLogging.log("tableChooseFromContextMenu", "Choose the indicated option from context menu", true, driver);
+	}
 
 	
 
