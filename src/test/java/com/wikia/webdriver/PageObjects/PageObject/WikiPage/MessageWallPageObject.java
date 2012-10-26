@@ -33,7 +33,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private WebElement postButton;
 	@FindBy(css="#WallMessagePreview")
 	private WebElement previewButton;
-	@FindBy(css=".buttonswrapper .wikia-menu-button.secondary.combined")
+	@FindBy(css=".buttonswrapper .wikia-menu-button.secondary.combined span")
 	private WebElement moreButton;
 	@FindBy(css="a.thread-history")
 	private WebElement historyButton;
@@ -88,6 +88,8 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	
 	By messageList = By.cssSelector("div.msg-body");
 	By sortingList = By.cssSelector("ul.SortingList li a");
+	
+	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	
 //	By messageTitle = By.cssSelector(".msg-title");
 	
@@ -310,8 +312,8 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	{
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
 		waitForElementByElement(moreButton);
-		clickAndWait(moreButton);
-		waitForElementByElement(removeMessageButton);
+		mouseOver(moreButtonCss);
+		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		jQueryClick(".WikiaMenuElement .remove-message");
 		waitForElementByElement(removeMessageOverLay);
 		waitForElementByElement(removeMessageConfirmButton);
@@ -328,8 +330,9 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		waitForElementByCss("div.msg-toolbar");
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
 		waitForElementByElement(moreButton);
-		clickAndWait(moreButton);
-	
+		mouseOver(moreButtonCss);
+		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
+		
 		waitForElementByElement(editMessageButton);
 		clickAndWait(editMessageButton);
 //		jQueryClick(".edit-message");
@@ -341,7 +344,8 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		waitForElementByCss("div.msg-toolbar");
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
 		waitForElementByElement(moreButton);
-		clickAndWait(moreButton);
+		mouseOver(moreButtonCss);
+		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		waitForElementByElement(historyButton);
 		clickAndWait(historyButton);
 		PageObjectLogging.log("openHistory", "open History page of the newest thread", true, driver);

@@ -72,6 +72,7 @@ public class BasePageObject{
 	{
 		this.driver = driver;
 		wait = new WebDriverWait(driver, timeOut);
+
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
 	}
@@ -167,6 +168,7 @@ public class BasePageObject{
 		try{
 			CommonFunctions.scrollToElement(pageElem);
 			pageElem.click();
+			
 		}
 		catch(TimeoutException e)
 		{
