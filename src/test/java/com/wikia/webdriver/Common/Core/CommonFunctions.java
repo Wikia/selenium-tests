@@ -716,6 +716,108 @@ public class CommonFunctions {
 		}
 	}
 
+	public static String logInCookie(String userName, String password, WebDriver driver) {
+		try {
+			DefaultHttpClient httpclient = new DefaultHttpClient();
+
+			HttpPost httpPost = new HttpPost(
+					"http://mediawiki119.wikia.com/api.php");
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+			nvps.add(new BasicNameValuePair("action", "login"));
+			nvps.add(new BasicNameValuePair("format", "xml"));
+			nvps.add(new BasicNameValuePair("lgname", userName));
+			nvps.add(new BasicNameValuePair("lgpassword", password));
+
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+
+			HttpResponse response = null;
+
+			response = httpclient.execute(httpPost);
+
+			HttpEntity entity = response.getEntity();
+			String xmlResponse = null;
+
+			xmlResponse = EntityUtils.toString(entity);
+
+			String[] xmlResponseArr = xmlResponse.split("\"");
+			String token = xmlResponseArr[5];
+
+			// System.out.println(token);
+
+			while (xmlResponseArr.length < 11) {//sometimes first request does not contain full information, in such situation xmlResponseArr.length < 11
+				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+
+				nvps2.add(new BasicNameValuePair("action", "login"));
+				nvps2.add(new BasicNameValuePair("format", "xml"));
+				nvps2.add(new BasicNameValuePair("lgname", userName));
+				nvps2.add(new BasicNameValuePair("lgpassword", password));
+				nvps2.add(new BasicNameValuePair("lgtoken", token));
+
+				httpPost.setEntity(new UrlEncodedFormEntity(nvps2, HTTP.UTF_8));
+
+				response = httpclient.execute(httpPost);
+
+				entity = response.getEntity();
+
+				xmlResponse = EntityUtils.toString(entity);
+
+				xmlResponseArr = xmlResponse.split("\"");
+			}
+			//
+			// System.out.println(xmlResponseArr[13]);
+			// System.out.println(xmlResponseArr[7]);
+			// System.out.println(xmlResponseArr[5]);
+			// System.out.println(xmlResponseArr[9]);
+
+			// for (int i=0; i<xmlResponseArr.length; i++)
+			// {
+			// System.out.println("\n");
+			// System.out.println(xmlResponseArr.length);
+			// System.out.println(xmlResponseArr[i]);
+			// System.out.println("\n");
+			// }
+			Cookie c1 = new Cookie(xmlResponseArr[11] + "_session",
+					xmlResponseArr[13]);
+			Cookie c2 = new Cookie(xmlResponseArr[11] + "UserName",
+					xmlResponseArr[7]);
+			Cookie c3 = new Cookie(xmlResponseArr[11] + "UserID",
+					xmlResponseArr[5]);
+			Cookie c4 = new Cookie(xmlResponseArr[11] + "Token",
+					xmlResponseArr[9]);
+			//
+
+			// driver.manage().addCookie(c1);
+			// driver.manage().addCookie(c2);
+			// driver.manage().addCookie(c3);
+			// driver.manage().addCookie(c4);
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$.cookie('" + xmlResponseArr[11] + "_session', '"
+					+ xmlResponseArr[13] + "', {'domain': 'wikia.com'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11] + "UserName', '"
+					+ xmlResponseArr[7] + "', {'domain': 'wikia.com'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11] + "UserID', '"
+					+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
+					+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
+			return xmlResponseArr[11];
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	
 	public static void logoutCookie(String wiki) {
 		driver = DriverProvider.getWebDriver();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
