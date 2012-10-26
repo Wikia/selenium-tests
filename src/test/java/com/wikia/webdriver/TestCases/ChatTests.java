@@ -70,22 +70,22 @@ public class ChatTests extends TestTemplate_Two_Drivers{
     3. If user is an admin there should be also: Give ChatMod status and Kickban (if clicked user is not a chat moderator or admin).
 	 */
 	
-	@Test(groups = {"Chat_002", ""})
+	@Test(groups = {"Chat_002", "Chat"})
 	public void Chat_002_changes_in_drop_down_menu_1()
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		HomePageObject home = new HomePageObject(driver);
 		CommonFunctions.logOut(driver);
-		home.openHomePage();
-		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
-		HomePageObject home2 = new HomePageObject(driver2);
 		CommonFunctions.logOut(driver2);
-		home2.openHomePage();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		home2.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		switchToWindow(driver);
@@ -112,22 +112,22 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	 * */
 	
 	
-	@Test(groups = {"Chat_003", ""})
+	@Test(groups = {"Chat_003", "Chat"})
 	public void Chat_003_changes_in_drop_down_menu_2()
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		HomePageObject home = new HomePageObject(driver);
 		CommonFunctions.logOut(driver);
-		home.openHomePage();
-		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
-		HomePageObject home2 = new HomePageObject(driver2);
 		CommonFunctions.logOut(driver2);
-		home2.openHomePage();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		home2.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		switchToWindow(driver);
