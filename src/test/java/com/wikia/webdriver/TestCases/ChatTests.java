@@ -152,22 +152,22 @@ public class ChatTests extends TestTemplate_Two_Drivers{
     4. If user A is an admin there should be also Give ChatMod status and Kickban (if clicked user is not a chat moderator or admin). 
 	 */
 	
-	@Test(groups = {"Chat_004", ""})
+	@Test(groups = {"Chat_004", "Chat"})
 	public void Chat_004_changes_in_drop_down_menu_staff()
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		HomePageObject home = new HomePageObject(driver);
 		CommonFunctions.logOut(driver);
-		home.openHomePage();
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff, driver);
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat	
 		switchToWindow(driver2);
-		HomePageObject home2 = new HomePageObject(driver2);
 		CommonFunctions.logOut(driver2);
-		home2.openHomePage();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		home2.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		switchToWindow(driver);
@@ -201,22 +201,22 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	 */
 	/*Above test cases are covered by below script */
 	
-	@Test(groups = {"Chat_005", ""})
+	@Test(groups = {"Chat_005", "Chat"})
 	public void Chat_005_private_chat_validation()
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		HomePageObject home = new HomePageObject(driver);
 		CommonFunctions.logOut(driver);
-		home.openHomePage();
-		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
-		HomePageObject home2 = new HomePageObject(driver2);
 		CommonFunctions.logOut(driver2);
-		home2.openHomePage();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		home2.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		switchToWindow(driver);
@@ -243,22 +243,22 @@ public class ChatTests extends TestTemplate_Two_Drivers{
     5. Click on main room changes chat messages area so there is 'abc' message displayed now.  
 	 */
 	
-	@Test(groups = {"Chat_006", ""})
+	@Test(groups = {"Chat_006", "Chat"})
 	public void Chat_006_current_chat_messages_area_changes()
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		HomePageObject home = new HomePageObject(driver);
 		CommonFunctions.logOut(driver);
-		home.openHomePage();
-		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat	
 		switchToWindow(driver2);
-		HomePageObject home2 = new HomePageObject(driver2);
 		CommonFunctions.logOut(driver2);
-		home2.openHomePage();
-		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver2);
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		home2.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		switchToWindow(driver);
