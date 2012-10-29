@@ -23,7 +23,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 
 	@FindBy(css="li[data-theme]")
 	private WebElement themeList;
-	@FindBy(css="li[id='ThemeWiki'] input[class='next']") 
+	@FindBy(css="li[id='ThemeWiki'] input[class='next enabled']") 
 	private WebElement submitButton;
 
 	
@@ -62,6 +62,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 				e.printStackTrace();
 			}
 		}
+		
 		waitForElementByElement(submitButton);
 		clickAndWait(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
