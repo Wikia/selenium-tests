@@ -87,7 +87,6 @@ public class HomePageObject extends BasePageObject{
 			String desiredUrl = currentUrl.replace("www.wikia.com", "preview.www.wikia.com");
 			getUrl(desiredUrl);
 		}
-		verifyURL(Global.LIVE_DOMAIN+"Special:CreateNewWiki?uselang=en");
 		return new CreateNewWikiPageObjectStep1(driver);
 	}
 	
