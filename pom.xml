@@ -104,6 +104,7 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/testSuite.xml</suiteXmlFile>
 					</suiteXmlFiles>
+					<argLine>-Xms800m -Xmx800m -XX:MaxPermSize=500m</argLine>
 				</configuration>				
 			</plugin>
 			<plugin>
