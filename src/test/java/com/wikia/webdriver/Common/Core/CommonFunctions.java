@@ -40,10 +40,8 @@ import com.wikia.webdriver.Common.Properties.Properties;
 
 public class CommonFunctions {
 	static By logInAjax = By.className("ajaxLogin");
-	static By userNameField = By
-			.xpath("//div[@class='input-group required   ']/input[@name='username']");
-	static By passwordField = By
-			.xpath("//div[@class='input-group required   ']/input[@name='password']");
+	static By userNameField = By.cssSelector("[name='username']");
+	static By passwordField = By.cssSelector("[name='password']");
 	static By remeberMeCheckBox = By.cssSelector("input[type=checkbox]");
 	static By submitButton = By.cssSelector("input[type='submit']");
 
@@ -172,6 +170,50 @@ public class CommonFunctions {
 		// driver);
 		// wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/User:"+userName+"']")));
 	}
+	
+	public static void logInSpecialUserLogin(String userName, String password, String userNameEnc) {
+		driver = DriverProvider.getWebDriver();
+		driver.manage().deleteAllCookies();
+		String temp = driver.getCurrentUrl();
+		try {
+			driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logIn",
+					"page loads for more than 30 seconds", true, driver);
+		}
+		WebElement userNameField = driver.findElement(By
+				.cssSelector("#WikiaArticle input[name='username']"));
+		WebElement passwordField = driver.findElement(By
+				.cssSelector("#WikiaArticle input[name='password']"));
+		WebElement submitButton = driver.findElement(By
+				.cssSelector("#WikiaArticle input.login-button.big"));
+		userNameField.sendKeys(userName);
+		passwordField.sendKeys(password);
+		try {
+			submitButton.click();
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logIn",
+					"page loads for more than 30 seconds", true, driver);
+			try {
+				driver.navigate().refresh();
+			} catch (TimeoutException f) {
+				PageObjectLogging.log("logIn",
+						"page loads for more than 30 seconds", true, driver);
+			}
+		}
+		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
+				+ userNameEnc + "']"));// only for verification
+		try {
+			if (!temp.contains("Special:UserLogout")) {
+				driver.get(temp);
+			}
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logIn",
+					"page loads for more than 30 seconds", true, driver);
+		}
+		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
+				+ userNameEnc + "']"));
+	}
 
 	/**
 	 * log in by overlay available from main menu
@@ -202,6 +244,29 @@ public class CommonFunctions {
 		submitButtonElem.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.cssSelector("a[href*='/User:" + userName + "']")));
+	}
+	
+	public static void logInDropDown(String userName, String password, String userNameEnc) {
+		driver = DriverProvider.getWebDriver();
+		wait = new WebDriverWait(driver, 30);
+		WebElement logInAjaxElem = driver.findElement(logInAjax);
+		logInAjaxElem.click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("input[name='username']")));
+		WebElement userNameFieldElem = driver.findElement(userNameField);
+		userNameFieldElem.sendKeys(userName);
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement passwordFieldElem = driver.findElement(passwordField);
+		passwordFieldElem.sendKeys(password);
+		WebElement submitButtonElem = driver.findElement(submitButton);
+		submitButtonElem.click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("a[href*='/User:" + userNameEnc + "']")));
 	}
 
 	/**
