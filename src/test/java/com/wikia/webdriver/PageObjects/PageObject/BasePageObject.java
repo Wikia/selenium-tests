@@ -281,9 +281,30 @@ public class BasePageObject{
 		executeScript("$('"+cssSelector+"').click()");
 	}
 	
+	/**
+	 * Click on nth element with given css
+	 * 
+	 * @author Michal Nowierski
+	 * ** @param n - the indicator of element from those which match the css selector  
+	 */
+	public void jQueryNthElemClick(String cssSelector, int n)
+	{
+		executeScript("$('"+cssSelector+"')["+n+"].click()");
+	}
+	
 	public void jQueryFocus(String cssSelector)
 	{
 		executeScript("$('"+cssSelector+"').focus()");
+	}
+	
+	/**
+	 * Returns parent element of the given element
+	 * 
+	 * @author Michal Nowierski
+	 * ** @param childElement - the element whose parent we are looking for
+	 */
+	public WebElement getParentElement(WebElement childElement) {
+		return childElement.findElement(By.xpath(".."));
 	}
 	
 //	public void clickRobot(WebElement pageElem)

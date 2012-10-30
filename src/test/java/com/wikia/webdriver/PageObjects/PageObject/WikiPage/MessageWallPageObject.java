@@ -39,7 +39,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private WebElement historyButton;
 	@FindBy(css="a.edit-message")
 	private WebElement editMessageButton;
-	@FindBy(css=".WikiaMenuElement .remove-message")
+	@FindBy(css="a.remove-message")
 	private WebElement removeMessageButton;
 	@FindBy(css="#WikiaConfirm")
 	private WebElement removeMessageOverLay;
@@ -90,6 +90,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	By sortingList = By.cssSelector("ul.SortingList li a");
 	
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
+	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
 	
 //	By messageTitle = By.cssSelector(".msg-title");
 	
@@ -310,21 +311,35 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	
 	public void removeMessage(String reason)
 	{
+		waitForElementByCss("div.msg-toolbar");
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
 		waitForElementByElement(moreButton);
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
-		jQueryClick(".WikiaMenuElement .remove-message");
+		mouseOver(".WikiaMenuElement .remove-message");
+//		jQueryClick(".WikiaMenuElement .remove-message");
+		jQueryNthElemClick(".WikiaMenuElement .remove-message", 0);
 		waitForElementByElement(removeMessageOverLay);
 		waitForElementByElement(removeMessageConfirmButton);
-		removeMessageReason.sendKeys(reason);
-		clickAndWait(removeMessageConfirmButton);
+	
+		if (Global.BROWSER.equals("IE")) {
+			
+			WebElement removeMessageReasonParent = getParentElement(removeMessageReason);
+			clickAndWait(removeMessageReasonParent);
+			removeMessageReasonParent.sendKeys(reason);
+			clickAndWait(removeMessageConfirmButton);
+		}
+		else {
+			removeMessageReason.sendKeys(reason);
+			clickAndWait(removeMessageConfirmButton);
+		}	
+		
 		waitForElementByElement(removeMessageConfirmation);
 		driver.navigate().refresh();
 //		waitForElementNotVisibleByBy(messageTitle);
 		PageObjectLogging.log("removeMessage", "message is removed", true, driver);
 	}
-	
+
 	private void clickEditMessage()
 	{
 		waitForElementByCss("div.msg-toolbar");
@@ -375,7 +390,18 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		messageTitleEditField2.clear();
 		messageTitleEditField2.sendKeys(title);
 		waitForElementByElement(saveEditButton);
-		clickAndWait(saveEditButton);
+		
+		if (Global.BROWSER.equals("IE")) {
+			driver.switchTo().frame(messageWallIFrame);
+			clickAndWait(messageBodyField);
+			messageBodyField.sendKeys(Keys.TAB);
+			messageBodyField.sendKeys(Keys.TAB);
+			messageBodyField.sendKeys(Keys.ENTER);
+			driver.switchTo().defaultContent();
+		}
+		else {			
+			clickAndWait(saveEditButton);
+		}
 		PageObjectLogging.log("writeEditMessage", "message edited", true, driver);
 	}
 	
