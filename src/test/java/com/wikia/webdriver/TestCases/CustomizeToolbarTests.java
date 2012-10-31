@@ -17,8 +17,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar001_Adding()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticlePageObject article = wiki.OpenArticle(wikiArticle);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		article.showToolbar();
 		article.customizeToolbar_ClickCustomize();
 		article.customizeToolbar_ClickOnResetDefaults();
@@ -35,8 +36,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar002_Editing()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticlePageObject article = wiki.OpenArticle(wikiArticle);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		article.showToolbar();
 		article.customizeToolbar_ClickCustomize();
 		article.customizeToolbar_ClickOnResetDefaults();
@@ -75,8 +77,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar004_Deleteing()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticlePageObject article = wiki.OpenArticle(wikiArticle);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		article.showToolbar();
 		article.customizeToolbar_ClickCustomize();
 		article.customizeToolbar_ClickOnResetDefaults();
@@ -94,8 +97,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar005_Finding()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticlePageObject article = wiki.OpenArticle(wikiArticle);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		article.showToolbar();
 		article.customizeToolbar_ClickCustomize();
 		article.customizeToolbar_ClickOnResetDefaults();
@@ -111,8 +115,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar006_ResetDefaults()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticlePageObject article = wiki.OpenArticle(wikiArticle);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		article.showToolbar();
 		article.customizeToolbar_ClickCustomize();
 		article.customizeToolbar_ClickOnResetDefaults();
@@ -133,8 +138,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar007_ButtonsActions()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticlePageObject article = wiki.OpenArticle(wikiArticle);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		article.showToolbar();
 		article.customizeToolbar_UnfollowIfPageIsFollowed();
 		article.customizeToolbar_VerifyToolOnToolbar("Follow");
