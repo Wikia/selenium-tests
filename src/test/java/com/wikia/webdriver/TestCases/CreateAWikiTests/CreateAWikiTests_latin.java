@@ -33,7 +33,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 		wikiCount+=1;
 	}
 	
-	@AfterClass
+//	@AfterClass
 	public void DeleteWiki()
 	{
 		startBrowser();

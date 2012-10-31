@@ -27,7 +27,7 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	private WebElement wikiDomain;
 	@FindBy(css="span.domain-status-icon img[src*='check.png']")
 	private WebElement successIcon;
-	@FindBy(className="next") 
+	@FindBy(css=".next.enabled") 
 	private WebElement submitButton;
 	@FindBy(css="select[name='wiki-language']") 
 	private WebElement languageSelector;
@@ -98,10 +98,12 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	 */
 	public void waitForSuccessIcon()
 	{
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		while(js.executeScript("return WikiBuilder.domainAjax").toString().equals("false"));///bug in CNW
-		while(js.executeScript("return WikiBuilder.domainAjax").toString().equals("true"));///bug in CNW
-		waitForElementByElement(successIcon);																				 
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		while(js.executeScript("return WikiBuilder.domainAjax").toString().equals("true"));///bug in CNW
+//		while(js.executeScript("return WikiBuilder.domainAjax").toString().equals("false"));///bug in CNW
+//		while(js.executeScript("return WikiBuilder.nameAjax").toString().equals("false"));///bug in CNW
+		waitForElementByElement(successIcon);		
+		waitForElementByElement(submitButton);
 		PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);																							
 	}
 	
