@@ -57,7 +57,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private WebElement videoInMessageEditMode;
 	@FindBy(css=".RTEVideoButton .cke_icon")
 	private WebElement addVideoButton;
-	@FindBy(css="span.cke_button.cke_off.cke_button_link a .cke_icon")
+	@FindBy(css=".cke_toolbar_formatmini span.cke_button.cke_button_link a .cke_icon")
 	private WebElement addLinkButton;
 	@FindBy(css="span.cke_button.cke_off.cke_button_bold a .cke_icon")
 	private WebElement boldButton;
@@ -276,7 +276,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		PageObjectLogging.log("verifyPostedItalicMessageWithTitle", "italic message with title verified", true, driver);		
 	}
 	
-	public void verifyPostedMessageWithLinks(String internallink, String externallink) {
+	public void verifyPostedMessageWithLinks(String internallink, String externallink){//, String articleName) {
 		List<WebElement> links = messageBody.findElements(By.cssSelector("a"));
 		waitForTextToBePresentInElementByElement(links.get(0), internallink);
 		waitForTextToBePresentInElementByElement(links.get(1), externallink);
@@ -402,6 +402,10 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		waitForElementByElement(linkModalOkButton);
 		clickAndWait(linkModalOkButton);
 		// add external link
+		driver.switchTo().frame(messageWallIFrame);
+		messageBodyField.sendKeys(Keys.END);
+		messageBodyField.sendKeys(Keys.ENTER);
+		driver.switchTo().defaultContent();
 		waitForElementByElement(addLinkButton);
 		clickAndWait(addLinkButton);
 		waitForElementByElement(externalLinkOption);
