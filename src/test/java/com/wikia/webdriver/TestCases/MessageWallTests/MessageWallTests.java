@@ -296,7 +296,4 @@ public class MessageWallTests extends TestTemplate
 
 	}
 	
-	
-	
-	
 }
