@@ -23,7 +23,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 
 	@FindBy(css="li[data-theme]")
 	private WebElement themeList;
-	@FindBy(css="li[id='ThemeWiki'] input[class='next']") 
+	@FindBy(css="li[id='ThemeWiki'] input[class='next enabled']") 
 	private WebElement submitButton;
 
 	
@@ -50,18 +50,19 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 	
 	public NewWikiaHomePage submit(String wikiName)
 	{
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		int sleep = 0;
-		while(js.executeScript("return WikiBuilder.cityId").toString().equals("false")&&sleep<20000)//https://wikia.fogbugz.com/default.asp?51510
-		{	
-			sleep+=500;
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		int sleep = 0;
+//		while(js.executeScript("return WikiBuilder.cityId").toString().equals("false")&&sleep<20000)//https://wikia.fogbugz.com/default.asp?51510
+//		{	
+//			sleep+=500;
+//			try {
+//				Thread.sleep(500);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+		
 		waitForElementByElement(submitButton);
 		clickAndWait(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
