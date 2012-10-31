@@ -12,8 +12,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject
 
 public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 {
-	private String videoURL = "http://www.youtube.com/watch?v=pZB6Dg1RJ_o";
-	private String videoURL2 = "http://www.youtube.com/watch?v=pmPDl7JqmR0&feature=fvst";
+	private String videoURL = "https://www.youtube.com/watch?v=QE32HghV8-I";
 	private String Caption = "QAWebdriverCaption1";
 	private String Caption2 = "QAWebdriverCaption2";
 	private String pageName;
