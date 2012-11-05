@@ -237,12 +237,14 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	
 	public void clickPostButton()
 	{
+		executeScript("WikiaEditor.getInstance('WallMessageBody').getEditbox().trigger('keyup')");
 		waitForElementByElement(postButton);
 		jQueryClick("#WallMessageSubmit");
 		PageObjectLogging.log("clickPostButton", "post button is clicked", true, driver);		
 	}
 	
 	public void clickPreviewButton() {
+		executeScript("WikiaEditor.getInstance('WallMessageBody').getEditbox().trigger('keyup')");
 		waitForElementByElement(previewButton);
 		clickAndWait(previewButton);
 		PageObjectLogging.log("clickPreviewButton", "preview button is clicked", true, driver);
