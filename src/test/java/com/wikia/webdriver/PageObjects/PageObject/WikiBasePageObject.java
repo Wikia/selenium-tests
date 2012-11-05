@@ -135,6 +135,12 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * 	 */
 	public void clickAddAvideo() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		waitForElementClickableByElement(videoAddVideoButton);
 		clickAndWait(videoAddVideoButton);
 		PageObjectLogging.log("ClickAddAvideo", "Click 'Add a video'", true, driver);
