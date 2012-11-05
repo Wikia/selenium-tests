@@ -395,7 +395,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article.verifyTheVideoOnThePage();
 		edit = article.edit();
 		edit.clickModifyButtonVideo();
-		edit.waitForVideoDialog();
+//		edit.waitForVideoDialog();
 		edit.typeVideoCaption(Caption2);
 		edit.clickAddAvideo();
 		edit.verifyVideoInEditMode(Caption2);

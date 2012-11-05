@@ -85,7 +85,7 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="a[id='VideoEmbedUrlSubmit']")
 	private WebElement videoNextButton;
 	
-	@FindBy(css="tr.VideoEmbedNoBorder input.wikia-button")
+	@FindBy(css="div.input-group.VideoEmbedNoBorder input.wikia-button[type='submit']")
 	private WebElement videoAddVideoButton;
 	
 	@FindBy(css="div[id='VideoEmbed'] input[value='Return to editing']")
