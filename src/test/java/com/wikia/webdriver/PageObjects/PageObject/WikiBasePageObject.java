@@ -250,7 +250,9 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	public void openRandomArticle()
 	{
-		clickAndWait(randomPageButton);
+		String href = randomPageButton.getAttribute("href");
+		driver.navigate().to(href);
+//		clickAndWait(randomPageButton);
 		PageObjectLogging.log("openRandomArticle", "random page button clicked", true);
 	}
 	
