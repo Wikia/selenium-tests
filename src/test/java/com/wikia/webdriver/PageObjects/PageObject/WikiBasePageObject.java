@@ -85,13 +85,18 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="a[id='VideoEmbedUrlSubmit']")
 	private WebElement videoNextButton;
 	
-	@FindBy(css="div.input-group.VideoEmbedNoBorder input.wikia-button[type='submit']")
+	@FindBy(css="div.input-group.VideoEmbedNoBorder input")
 	private WebElement videoAddVideoButton;
 	
-	@FindBy(css="div[id='VideoEmbed'] input[value='Return to editing']")
+	@FindBy(css="#VideoEmbed")
+	private WebElement videoDialog;
+	
+	@FindBy(css="input[value='Return to editing']")
 	private WebElement videoReturnToEditing;
 
 	
+	private String videoAddVideoButtonSelector = "div.input-group.VideoEmbedNoBorder input";
+	private String videoReturnToEditingSelector = "input[value=\"Return to editing\"]";
 	
 	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
 	
@@ -113,7 +118,8 @@ public class WikiBasePageObject extends BasePageObject {
 	public void waitForSuccesDialogAndReturnToEditing() {
 		waitForElementByElement(videoReturnToEditing);
 		waitForElementClickableByElement(videoReturnToEditing);
-		clickAndWait(videoReturnToEditing);
+		jQueryClick(videoReturnToEditingSelector);
+//		clickAndWait(videoReturnToEditing);
 		PageObjectLogging.log("WaitForSuccesDialogAndReturnToEditing", "Wait For Succes dialog and click on 'return to editing'", true, driver);
 		
 	}
@@ -124,7 +130,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * 	 */
 	public void waitForVideoDialog() {
-		waitForElementByElement(videoAddVideoButton);
+		waitForElementByElement(videoDialog);
 		PageObjectLogging.log("WaitForVideoDialog", "Wait for video dialog", true, driver);
 		
 	}
@@ -138,11 +144,12 @@ public class WikiBasePageObject extends BasePageObject {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		waitForElementClickableByElement(videoAddVideoButton);
-		clickAndWait(videoAddVideoButton);
+		waitForElementByElement(videoAddVideoButton);
+//		waitForElementClickableByElement(videoAddVideoButton);
+		jQueryClick(videoAddVideoButtonSelector);
+//		clickAndWait(videoAddVideoButton);
 		PageObjectLogging.log("ClickAddAvideo", "Click 'Add a video'", true, driver);
 		
 	}
@@ -302,7 +309,7 @@ public class WikiBasePageObject extends BasePageObject {
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		articleNameField.sendKeys(name);
@@ -432,7 +439,7 @@ public class WikiBasePageObject extends BasePageObject {
 			String url = uri.toASCIIString();
 			getUrl(url);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		PageObjectLogging.log("openArticle", "article "+articleName+" opened", true, driver);

@@ -41,7 +41,8 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	@FindBy(css="tr.ImageUploadFindLinks td a")
 	private WebElement addThisPhotoLink;
 	
-	@FindBy(css="div.module_content nav.buttons nav.wikia-menu-button a")
+//	@FindBy(css="div.module_content nav.buttons nav.wikia-menu-button a")
+	@FindBy(css="#wpPreview")
 	private WebElement previewButton;
 	@FindBy(css="div.neutral.modalToolbar a[id='publish']")
 	private WebElement publishButtonPreview;
@@ -106,7 +107,8 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private String sliderArticleIFrame = "img.image-gallery-slider";
 	private String slideShowArticleIFrame = "img.image-slideshow";
 	private String videoArticleIFrame = "img.video";
-	
+	private String previewButtonSelector = "#wpPreview";
+	private String publishButtonSelector = "div.neutral.modalToolbar a[id=\"publish\"]";
 	
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 	private String deleteButtonArticleItem = "span.RTEMediaOverlayDelete";
@@ -190,10 +192,11 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	 * @author Michal Nowierski
 	 */
 	public void clickOnPreviewButton() {
-		System.out.println();
+		
 		waitForElementByElement(previewButton);
 		waitForElementClickableByElement(previewButton);
-		clickAndWait(previewButton);
+		jQueryClick(previewButtonSelector);
+//		clickAndWait(previewButton);
 		PageObjectLogging.log("LeftClickOnPreviewButton", "Left Click on 'Preview' Button", true, driver);
 		
 		
@@ -230,7 +233,8 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
 		waitForElementByElement(publishButtonPreview);
 		waitForElementClickableByElement(publishButtonPreview);
-		clickAndWait(publishButtonPreview);
+//		clickAndWait(publishButtonPreview);
+		jQueryClick(publishButtonSelector);
 		PageObjectLogging.log("LeftClickOnPublishButtonInPreviewMode", "Click on 'Publish' button in preview mode", true, driver);
 	
 		return new WikiArticlePageObject(driver, Domain, articlename);
