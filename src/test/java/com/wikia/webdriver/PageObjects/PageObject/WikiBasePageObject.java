@@ -399,7 +399,10 @@ public class WikiBasePageObject extends BasePageObject {
 	private void clickUndeleteArticle()
 	{
 		waitForElementByElement(undeleteButton);
-		clickAndWait(undeleteButton);
+// jQuery didn't work here. The below workaround stimulates clicking on 'undelete' button
+		String href = undeleteButton.getAttribute("href");
+		driver.navigate().to(href);
+//		clickAndWait(undeleteButton);
 		waitForElementByElement(restoreButton);
 		PageObjectLogging.log("clickUndeleteArticle", "undelete article button clicked", true, driver);
 	}
