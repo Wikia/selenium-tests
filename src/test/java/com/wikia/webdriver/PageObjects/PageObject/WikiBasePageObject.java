@@ -240,15 +240,15 @@ public class WikiBasePageObject extends BasePageObject {
 		{
 			PageObjectLogging.log("logOut", "page loads for more than 30 seconds", true);
 		}
-		waitForElementByCss(".hub3");
+		waitForElementByCss("a[class*=hub]");
 		executeScript("$('ul#pagehistory li:nth-child(1) .mw-history-undo')");
 	}
 	
 	public void openRandomArticle()
 	{
-		String href = randomPageButton.getAttribute("href");
-		driver.navigate().to(href);
-//		clickAndWait(randomPageButton);
+//		String href = randomPageButton.getAttribute("href");
+//		driver.navigate().to(href);
+		clickAndWait(randomPageButton);
 		PageObjectLogging.log("openRandomArticle", "random page button clicked", true);
 	}
 	
