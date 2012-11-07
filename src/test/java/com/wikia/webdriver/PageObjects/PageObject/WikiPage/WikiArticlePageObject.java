@@ -103,7 +103,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private void clickReplyCommentButton(String comment)
 	{
 		waitForElementByXPath("//p[contains(text(), '"+comment+"')]//..//..//button[contains(text(), 'Reply')]");
-		click(driver.findElement(By.xpath("//p[contains(text(), '"+comment+"')]//..//..//button[contains(text(), 'Reply')]")));
+		jQueryClick(".article-comm-reply");
+//		click(driver.findElement(By.xpath("//p[contains(text(), '"+comment+"')]//..//..//button[contains(text(), 'Reply')]")));
 		waitForElementByElement(iframe);
 		PageObjectLogging.log("clickReplyCommentButton", "reply comment button clicked", true);
 	}
