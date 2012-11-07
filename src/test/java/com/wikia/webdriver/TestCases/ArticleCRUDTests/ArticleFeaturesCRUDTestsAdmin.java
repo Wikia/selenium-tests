@@ -525,7 +525,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		CommonFunctions.logoutCookie(cookieName);
 	}	
 	
-	@Test(groups={"ArticleFeaturesCRUDAdmin_016", "ArticleFeaturesCRUDAdmin"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_016"})//, "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_016_AddTable()
 	{
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
@@ -546,7 +546,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		CommonFunctions.logoutCookie(cookieName);	
 	}	
 	
-	@Test(groups={"ArticleFeaturesCRUDAdmin_017", "ArticleFeaturesCRUDAdmin"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_017"})//, "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_017_EditTable()
 	{
 
@@ -587,7 +587,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		CommonFunctions.logoutCookie(cookieName);	
 		}
 
-		@Test(groups={"ArticleFeaturesCRUDAdmin_018", "ArticleFeaturesCRUDAdmin"})
+		@Test(groups={"ArticleFeaturesCRUDAdmin_018"})//, "ArticleFeaturesCRUDAdmin"})
 		public void ArticleCRUDAdmin_018_RemoveTable()
 		{
 //		CommonFunctions.logOut(Properties.userName, driver);
