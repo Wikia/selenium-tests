@@ -19,8 +19,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	private String commentText = "Lorem ipsum dolor sit amet, comment";
 	private String commentTextEdit = "Brand new comment";
 	private String replyText = "Brand new reply";
-	private String videoURL = "http://www.youtube.com/watch?v=pZB6Dg1RJ_o";
-	private String Caption = "QAcaption1";
 	
 	/*
 	 * TestCase002
@@ -88,7 +86,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(dataProvider="getArticleName", groups={"ArticleCRUDAdmin_004", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_004_CreateArticle(String articleName)
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -111,7 +108,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_005", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_005_CreateEditArticle()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -131,7 +127,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.verifyPageTitle(pageName);
 		article.verifyArticleText(articleTextEdit);
 		CommonFunctions.logoutCookie(cookieName);
-//		CommonFunctions.logOut(Properties.userNameStaff, driver);
 	}
 	
 	/* 
@@ -144,18 +139,12 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_006", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_006_CreateArticleComment()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
-		edit.verifyPageTitle(pageName);
+		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
+		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(commentText);
 		article.clickSubmitButton();
@@ -174,18 +163,12 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_007", "ArticleCRUDAdmin"}) //P2 issue raised: https://wikia.fogbugz.com/default.asp?46789 article comments aren't visible in IE9
 	public void ArticleCRUDAdmin_007_CreateArticleEditComment()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
-		edit.verifyPageTitle(pageName);
+		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
+		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(commentText);
 		article.clickSubmitButton();
@@ -208,8 +191,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_008", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_008_CreateArticleUndeleteDelete()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -238,8 +219,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_009", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_009_CreateArticleMoveDelete()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
@@ -268,18 +247,13 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_010", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_010_CreateArticleCommentReply()
 	{
-//		CommonFunctions.logOut(Properties.userName, driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
-		edit.verifyPageTitle(pageName);
+		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
+		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(commentText);
 		article.clickSubmitButton();
@@ -288,6 +262,4 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.deleteComment(commentText);
 		CommonFunctions.logoutCookie(cookieName);
 	}
-
-
 }

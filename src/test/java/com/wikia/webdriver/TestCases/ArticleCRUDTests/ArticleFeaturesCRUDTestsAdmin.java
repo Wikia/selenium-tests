@@ -610,11 +610,4 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userName2, driver);
 		CommonFunctions.logoutCookie(cookieName);	
 		}
-
-	
-
-
-	
-
-
 }

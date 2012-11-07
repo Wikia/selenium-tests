@@ -685,7 +685,7 @@ public class CommonFunctions {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
 
 			HttpPost httpPost = new HttpPost(
-					"http://mediawiki119.wikia.com/api.php");
+					Global.DOMAIN+"api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
 			nvps.add(new BasicNameValuePair("action", "login"));

@@ -93,6 +93,9 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(css="input[value='Return to editing']")
 	private WebElement videoReturnToEditing;
+	
+	@FindBy(css=".sprite.search")
+	private WebElement searchButton;
 
 	
 	private String videoAddVideoButtonSelector = "div.input-group.VideoEmbedNoBorder input";
@@ -249,6 +252,7 @@ public class WikiBasePageObject extends BasePageObject {
 //		String href = randomPageButton.getAttribute("href");
 //		driver.navigate().to(href);
 		clickAndWait(randomPageButton);
+		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle", "random page button clicked", true);
 	}
 	
