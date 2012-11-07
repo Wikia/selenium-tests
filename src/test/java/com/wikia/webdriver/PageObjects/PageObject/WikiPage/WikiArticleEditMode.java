@@ -30,7 +30,7 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private WebElement captionTextArea;
 	@FindBy(css="div.cke_skin_wikia.visible div.cke_contents iframe")
 	private WebElement visualModeIFrame;
-	@FindBy(css="textarea.cke_source")
+	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
 	@FindBy(css="textarea.yui-ac-input")
 	private WebElement messageSourceModeTextArea;
@@ -274,6 +274,18 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true, driver);
 		
+	}
+	
+	public void clearSource(){
+		waitForElementByElement(sourceModeTextArea);
+		sourceModeTextArea.clear();
+		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true, driver);
+	}
+	
+	public void writeSourceMode(String source)
+	{
+		sourceModeTextArea.sendKeys();
+		PageObjectLogging.log("writeSourceMode", "Write in source mode: "+source, true, driver);		
 	}
 
 	/**

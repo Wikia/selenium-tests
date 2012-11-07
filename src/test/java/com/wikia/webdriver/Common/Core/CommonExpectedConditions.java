@@ -243,31 +243,35 @@ public class CommonExpectedConditions {
 	    }
 	  }
 	  
-	  private static boolean findInvisibleElement(By by, WebDriver driver) 
-	  {
-		  try
-		  {
-			  driver.findElement(by);
-			  return false;
-		  }
-		  catch (NoSuchElementException e)
-		  {
-			  return true;
-		  }
-	  }
+//	  private static boolean findInvisibleElement(By by, WebDriver driver) 
+//	  {
+//		  try
+//		  {
+//			  driver.findElement(by);
+//			  return false;
+//		  }
+//		  catch (NoSuchElementException e)
+//		  {
+//			  return true;
+//		  }
+//	  }
 	  
 	  public static ExpectedCondition<Boolean> invisibilityOfElementLocated(
 		      final By locator) {
 		    return new ExpectedCondition<Boolean>() {
 		      public Boolean apply(WebDriver driver) {
 		        try {
-		          return (findInvisibleElement(locator, driver));
+		          return !(findElement(locator, driver).isDisplayed());
 		        }
 		        catch (StaleElementReferenceException e) 
 		        {
 		          // Returns true because stale element reference implies that element
 		          // is no longer visible.
 		          return true;
+		        }
+		        catch (NoSuchElementException e)
+		        {
+		        	return true;
 		        }
 		      }
 
