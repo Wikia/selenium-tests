@@ -116,7 +116,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		driver.switchTo().frame(iframe);
 		editCommentArea.sendKeys(reply);
 		driver.switchTo().defaultContent();
-		click(submitReplyButton);
+		waitForElementByElement(submitReplyButton);
+		jQueryClick("input[id*=\"article-comm-reply\"]");
 		waitForElementByXPath("//p[contains(text(), '"+reply+"')]");
 		PageObjectLogging.log("writeReply", "reply comment written", true);
 	}
