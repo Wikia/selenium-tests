@@ -141,7 +141,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * 	 */
 	public void clickAddAvideo() {
-		try {
+		
 		waitForElementByElement(videoAddVideoButton);
 //		waitForElementClickableByElement(videoAddVideoButton);
 		jQueryClick(videoAddVideoButtonSelector);
