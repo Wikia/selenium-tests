@@ -7,6 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
@@ -67,8 +68,8 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private WebElement messageTitle;
 	@FindBy(css="div.edited-by a")
 	private WebElement messageAuthor;
-	@FindBy(css="div.msg-body p")
-	private WebElement messageBody;
+	@FindBys(@FindBy(css="div.msg-body p"))
+	private List<WebElement> messageBody;
 	@FindBy(css="a#publish")
 	private WebElement publishButton;
 	@FindBy(css="input.cke_dialog_ui_input_text")
@@ -264,27 +265,31 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	public void verifyPostedMessageWithTitle(String title, String message)
 	{
 		waitForTextToBePresentInElementByElement(messageTitle, title);
-		waitForTextToBePresentInElementByElement(messageBody, message);
+		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
 //		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), '"+title+"')]");
 //		waitForElementByXPath("//div[@class='msg-body']/p[contains(text(), '"+message+"')]");
 		PageObjectLogging.log("verifyPostedMessageWithTitle", "message with title verified", true, driver);		
 	}
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
-		waitForTextToBePresentInElementByElement(messageBody.findElement(By.cssSelector("b")), message);
+		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
 		PageObjectLogging.log("verifyPostedBoldMessageWithTitle", "bold message with title verified", true, driver);		
 	}
 	
 	public void verifyPostedItalicMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
-		waitForTextToBePresentInElementByElement(messageBody.findElement(By.cssSelector("i")), message);
+		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
 		PageObjectLogging.log("verifyPostedItalicMessageWithTitle", "italic message with title verified", true, driver);		
 	}
 	
 	public void verifyPostedMessageWithLinks(String internallink, String externallink){//, String articleName) {
-		List<WebElement> links = messageBody.findElements(By.cssSelector("a"));
-		waitForTextToBePresentInElementByElement(links.get(0), internallink);
-		waitForTextToBePresentInElementByElement(links.get(1), externallink);
+//		List<WebElement> links = messageBody.findElements(By.cssSelector("a"));
+//		waitForTextToBePresentInElementByElement(links.get(0), internallink);
+//		waitForTextToBePresentInElementByElement(links.get(1), externallink);
+//		List<WebElement> links = messageBody.findElements(By.cssSelector("a"));
+		waitForTextToBePresentInElementByElement(messageBody.get(0), internallink);
+		waitForTextToBePresentInElementByElement(messageBody.get(1), externallink);
+		
 		
 	}
 	
