@@ -71,6 +71,12 @@ public class ChatPageObject extends BasePageObject
 	@FindBy(css="li.give-chat-mod span.label")
 	private WebElement giveChatModStatusButton;
 	
+	@FindBy(xpath="//li[@class='inline-alert' and contains(text(), 'Welcome to the')]")
+	private WebElement userIsOnChatIndicator1;
+	
+	@FindBy(xpath="//li[@class='inline-alert' and contains(text(), 'Wiki chat')]")
+	private WebElement userIsOnChatIndicator2;
+	
 	By userContextMenu = By.cssSelector("ul.regular-actions li");
 	By adminContextMenu = By.cssSelector("ul.admin-actions li");
 	By privateMessageHeader = By.xpath("//h1[@class='private' and contains(text(), 'Private Messages')]");
@@ -90,6 +96,8 @@ public class ChatPageObject extends BasePageObject
 	public void openChatPage()
 	{
 		driver.get(Global.DOMAIN+"wiki/Special:Chat");
+		waitForElementByElement(userIsOnChatIndicator1);
+		waitForElementByElement(userIsOnChatIndicator2);
 		PageObjectLogging.log("openChatPage", "Chat page "+Global.DOMAIN+"wiki/Special:Chat opened", true, driver);		
 	}
 	
