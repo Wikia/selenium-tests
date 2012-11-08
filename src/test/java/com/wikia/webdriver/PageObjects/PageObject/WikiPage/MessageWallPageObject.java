@@ -352,6 +352,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		
 		waitForElementByElement(editMessageButton);
 		clickAndWait(editMessageButton);
+		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"\"");
 //		jQueryClick(".edit-message");
 //		waitForElementByElement(messageWallEditIFrame);
 		PageObjectLogging.log("clickEditMessage", "edit message button is clicked", true, driver);
