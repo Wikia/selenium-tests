@@ -866,6 +866,10 @@ public class CommonFunctions {
 					+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 					+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
+			driver.navigate().refresh();
+			driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
+					+ userName + "']"));// only for verification
+			PageObjectLogging.log("loginCookie", "user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
