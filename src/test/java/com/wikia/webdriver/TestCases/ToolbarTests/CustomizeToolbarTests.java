@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases;
+package com.wikia.webdriver.TestCases.ToolbarTests;
 
 import org.testng.annotations.Test;
 

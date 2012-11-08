@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases;
+package com.wikia.webdriver.TestCases.HubsTests;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

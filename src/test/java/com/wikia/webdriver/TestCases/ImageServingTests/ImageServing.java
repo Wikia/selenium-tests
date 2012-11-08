@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases;
+package com.wikia.webdriver.TestCases.ImageServingTests;
 
 import org.testng.annotations.Test;
 
