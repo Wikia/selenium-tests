@@ -61,6 +61,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void triggerCommentArea()
 	{
 		jQueryFocus("textarea#article-comm");
+		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
 	}
 	
 	public void writeOnCommentArea(String comment)
