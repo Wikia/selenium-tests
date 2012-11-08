@@ -491,7 +491,8 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	 * @param order - specifies order of sorting <br><br> possible values: <br> "NewestThreads", "OldestThreads", "NewestReplies"}
 	 * 	 */
 	public void sortThreads(String order) {
-		clickAndWait(sortingMenu);
+//		clickAndWait(sortingMenu);
+		executeScript("document.getElementsByClassName('SortingList')[0].style.display=\"block\"");
 		List<WebElement> list = driver.findElements(sortingList);
 		if (order.equals("NewestThreads")) {
 			waitForElementByElement(list.get(0));
