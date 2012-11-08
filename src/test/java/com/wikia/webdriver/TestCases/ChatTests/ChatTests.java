@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases;
+package com.wikia.webdriver.TestCases.ChatTests;
 
 import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
