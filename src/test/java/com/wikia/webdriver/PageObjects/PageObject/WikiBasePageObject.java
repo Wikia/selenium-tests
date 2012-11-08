@@ -337,7 +337,7 @@ public class WikiBasePageObject extends BasePageObject {
 	{
 		waitForElementByElement(editDropDown);
 		clickAndWait(editDropDown);
-		PageObjectLogging.log("clickEditDropDown", "edit drop-down clicked", true);
+		PageObjectLogging.log("clickEditDropDown", "edit drop-down clicked", true, driver);
 	}
 	
 	public WikiArticleEditMode clickEditButton(String pageName)
