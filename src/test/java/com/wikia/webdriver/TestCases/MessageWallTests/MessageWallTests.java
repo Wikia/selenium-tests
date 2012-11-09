@@ -176,7 +176,7 @@ public class MessageWallTests extends TestTemplate
 		
 	}
 	
-	//descoped, too many messages caused pagination
+	//descoped, too many messages caused pagination 
 	public void MessageWall_010_SortMessageWall()
 	{
 		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
