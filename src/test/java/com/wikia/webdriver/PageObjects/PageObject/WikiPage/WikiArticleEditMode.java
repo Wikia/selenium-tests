@@ -141,7 +141,7 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 
 	public WikiArticleEditMode editArticleByName(String name)
 	{
-		driver.get(Global.DOMAIN + "wiki/"+name+"?action=edit");
+		getUrl(Global.DOMAIN + "wiki/"+name+"?action=edit");
 		return new WikiArticleEditMode(driver, Domain, name);
 	}
 

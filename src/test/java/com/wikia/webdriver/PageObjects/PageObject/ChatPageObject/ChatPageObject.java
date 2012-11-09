@@ -95,7 +95,7 @@ public class ChatPageObject extends BasePageObject
 	 */
 	public void openChatPage()
 	{
-		driver.get(Global.DOMAIN+"wiki/Special:Chat");
+		getUrl(Global.DOMAIN+"wiki/Special:Chat");
 		waitForElementByElement(userIsOnChatIndicator1);
 		waitForElementByElement(userIsOnChatIndicator2);
 		PageObjectLogging.log("openChatPage", "Chat page "+Global.DOMAIN+"wiki/Special:Chat opened", true, driver);		
@@ -330,7 +330,7 @@ public class ChatPageObject extends BasePageObject
 	
 	public void disconnectFromChat()
 	{
-		driver.get(Global.DOMAIN);
+		getUrl(Global.DOMAIN);
 		PageObjectLogging.log("disconnectFromChat", "User is disconnected from the chat", true, driver);
 	}
 

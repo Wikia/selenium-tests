@@ -46,7 +46,7 @@ public class SearchPageObject extends BasePageObject
 
 	public void openSearchPage()
 	{
-		driver.get(Global.DOMAIN + searchUri);
+		getUrl(Global.DOMAIN + searchUri);
 		driver.getCurrentUrl();
 	}
 

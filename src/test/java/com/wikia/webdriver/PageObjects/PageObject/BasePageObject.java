@@ -157,7 +157,7 @@ public class BasePageObject{
 		{
 			driver.get(url);
 		}
-		catch(Exception e)
+		catch(TimeoutException e)
 		{
 			PageObjectLogging.log("getUrl", "page loaded for more then 30 seconds after click", true);
 		}
@@ -175,6 +175,7 @@ public class BasePageObject{
 			PageObjectLogging.log("clickAndWait", "page loaded for more then 30 seconds after click", true);
 		}
 	}
+	
 	/**
 	 * Send keys to WebElement
 	 */
