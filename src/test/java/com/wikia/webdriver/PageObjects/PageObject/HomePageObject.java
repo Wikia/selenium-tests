@@ -31,8 +31,10 @@ public class HomePageObject extends BasePageObject{
 	private WebElement UserNameField;
 	@FindBy(css="div#UserLoginDropdown a.forgot-password")
 	private WebElement ForgotYourPassword;
-	@FindBy(css=".wikia-mosaic-slider-panorama")
-	private WebElement hubsHeroCarousel;
+//	@FindBy(css=".wikia-mosaic-slider-panorama")
+//	private WebElement hubsHeroCarousel;
+	
+	private By hubsHeroCarousel = By.cssSelector(".wikia-mosaic-slider-panorama");
 	
 	public HomePageObject(WebDriver driver) 
 	{
@@ -94,37 +96,43 @@ public class HomePageObject extends BasePageObject{
 		PageObjectLogging.log("OpenHub", "Opening "+Hub, true, driver);
 		if (Hub.equals("VideoGamesHub")) {
 			clickAndWait(OpenVideoGamesHub);
-			waitForElementByElement(hubsHeroCarousel);
+			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
+			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
 			{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
 				getUrl(temp);
-				waitForElementByElement(hubsHeroCarousel);
+				hubsHero = driver.findElement(hubsHeroCarousel);
+				waitForElementByElement(hubsHero);
 			}
 			return new VideoGamesHubPageObject(driver);
 		}
 		if (Hub.equals("EntertainmentHub")) {
 			clickAndWait(OpenEntertainmentHub);
-			waitForElementByElement(hubsHeroCarousel);
+			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
+			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
 			{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
 				getUrl(temp);
-				waitForElementByElement(hubsHeroCarousel);
+				hubsHero = driver.findElement(hubsHeroCarousel);
+				waitForElementByElement(hubsHero);
 			}
 			return new EntertainmentHubPageObject(driver);	
 		}
 		if (Hub.equals("LifestyleHub")) {
 			clickAndWait(OpenLifestyleHub);
-			waitForElementByElement(hubsHeroCarousel);
+			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
+			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
 			{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
 				getUrl(temp);
-				waitForElementByElement(hubsHeroCarousel);
+				hubsHero = driver.findElement(hubsHeroCarousel);
+				waitForElementByElement(hubsHero);
 			}
 			return new LifestyleHubPageObject(driver);	
 		}
