@@ -170,8 +170,9 @@ public class CommonFunctions {
 		// driver);
 		// wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/User:"+userName+"']")));
 	}
-	
-	public static void logInSpecialUserLogin(String userName, String password, String userNameEnc) {
+
+	public static void logInSpecialUserLogin(String userName, String password,
+			String userNameEnc) {
 		driver = DriverProvider.getWebDriver();
 		driver.manage().deleteAllCookies();
 		String temp = driver.getCurrentUrl();
@@ -245,8 +246,9 @@ public class CommonFunctions {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.cssSelector("a[href*='/User:" + userName + "']")));
 	}
-	
-	public static void logInDropDown(String userName, String password, String userNameEnc) {
+
+	public static void logInDropDown(String userName, String password,
+			String userNameEnc) {
 		driver = DriverProvider.getWebDriver();
 		wait = new WebDriverWait(driver, 30);
 		WebElement logInAjaxElem = driver.findElement(logInAjax);
@@ -293,23 +295,6 @@ public class CommonFunctions {
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
 				+ userName + "']"));// only for verification
 		driver.get(temp);
-		// wait = new WebDriverWait(driver, 30);
-		// WebElement logInAjaxElem = driver.findElement(logInAjax);
-		// logInAjaxElem.click();
-		// wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='username']")));
-		// WebElement userNameFieldElem = driver.findElement(userNameField);
-		// userNameFieldElem.sendKeys(userName);
-		// try {
-		// Thread.sleep(500);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// WebElement passwordFieldElem = driver.findElement(passwordField);
-		// passwordFieldElem.sendKeys(password);
-		// WebElement submitButtonElem = driver.findElement(submitButton);
-		// submitButtonElem.click();
-		// wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/User:"+userName+"']")));
 	}
 
 	/**
@@ -684,8 +669,7 @@ public class CommonFunctions {
 			driver = DriverProvider.getWebDriver();
 			DefaultHttpClient httpclient = new DefaultHttpClient();
 
-			HttpPost httpPost = new HttpPost(
-					Global.DOMAIN+"api.php");
+			HttpPost httpPost = new HttpPost(Global.DOMAIN + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
 			nvps.add(new BasicNameValuePair("action", "login"));
@@ -709,7 +693,10 @@ public class CommonFunctions {
 
 			// System.out.println(token);
 
-			while (xmlResponseArr.length < 11) {//sometimes first request does not contain full information, in such situation xmlResponseArr.length < 11
+			while (xmlResponseArr.length < 11) {// sometimes first request does
+												// not contain full information,
+												// in such situation
+												// xmlResponseArr.length < 11
 				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
 				nvps2.add(new BasicNameValuePair("action", "login"));
@@ -728,33 +715,6 @@ public class CommonFunctions {
 
 				xmlResponseArr = xmlResponse.split("\"");
 			}
-			//
-			// System.out.println(xmlResponseArr[13]);
-			// System.out.println(xmlResponseArr[7]);
-			// System.out.println(xmlResponseArr[5]);
-			// System.out.println(xmlResponseArr[9]);
-
-			// for (int i=0; i<xmlResponseArr.length; i++)
-			// {
-			// System.out.println("\n");
-			// System.out.println(xmlResponseArr.length);
-			// System.out.println(xmlResponseArr[i]);
-			// System.out.println("\n");
-			// }
-			Cookie c1 = new Cookie(xmlResponseArr[11] + "_session",
-					xmlResponseArr[13]);
-			Cookie c2 = new Cookie(xmlResponseArr[11] + "UserName",
-					xmlResponseArr[7]);
-			Cookie c3 = new Cookie(xmlResponseArr[11] + "UserID",
-					xmlResponseArr[5]);
-			Cookie c4 = new Cookie(xmlResponseArr[11] + "Token",
-					xmlResponseArr[9]);
-			//
-
-			// driver.manage().addCookie(c1);
-			// driver.manage().addCookie(c2);
-			// driver.manage().addCookie(c3);
-			// driver.manage().addCookie(c4);
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$.cookie('" + xmlResponseArr[11] + "_session', '"
@@ -781,7 +741,8 @@ public class CommonFunctions {
 		}
 	}
 
-	public static String logInCookie(String userName, String password, WebDriver driver) {
+	public static String logInCookie(String userName, String password,
+			WebDriver driver) {
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
 
@@ -808,9 +769,10 @@ public class CommonFunctions {
 			String[] xmlResponseArr = xmlResponse.split("\"");
 			String token = xmlResponseArr[5];
 
-			// System.out.println(token);
-
-			while (xmlResponseArr.length < 11) {//sometimes first request does not contain full information, in such situation xmlResponseArr.length < 11
+			while (xmlResponseArr.length < 11) {// sometimes first request does
+												// not contain full information,
+												// in such situation
+												// xmlResponseArr.length < 11
 				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
 				nvps2.add(new BasicNameValuePair("action", "login"));
@@ -829,33 +791,6 @@ public class CommonFunctions {
 
 				xmlResponseArr = xmlResponse.split("\"");
 			}
-			//
-			// System.out.println(xmlResponseArr[13]);
-			// System.out.println(xmlResponseArr[7]);
-			// System.out.println(xmlResponseArr[5]);
-			// System.out.println(xmlResponseArr[9]);
-
-			// for (int i=0; i<xmlResponseArr.length; i++)
-			// {
-			// System.out.println("\n");
-			// System.out.println(xmlResponseArr.length);
-			// System.out.println(xmlResponseArr[i]);
-			// System.out.println("\n");
-			// }
-			Cookie c1 = new Cookie(xmlResponseArr[11] + "_session",
-					xmlResponseArr[13]);
-			Cookie c2 = new Cookie(xmlResponseArr[11] + "UserName",
-					xmlResponseArr[7]);
-			Cookie c3 = new Cookie(xmlResponseArr[11] + "UserID",
-					xmlResponseArr[5]);
-			Cookie c4 = new Cookie(xmlResponseArr[11] + "Token",
-					xmlResponseArr[9]);
-			//
-
-			// driver.manage().addCookie(c1);
-			// driver.manage().addCookie(c2);
-			// driver.manage().addCookie(c3);
-			// driver.manage().addCookie(c4);
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$.cookie('" + xmlResponseArr[11] + "_session', '"
@@ -866,10 +801,18 @@ public class CommonFunctions {
 					+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 					+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
-			driver.navigate().refresh();
-			driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
-					+ userName + "']"));// only for verification
-			PageObjectLogging.log("loginCookie", "user was logged in by cookie", true, driver);
+			try {
+				driver.navigate().refresh();
+			} catch (TimeoutException e) {
+				PageObjectLogging.log("loginCookie",
+						"page timeout after login by cookie", true);
+			}
+
+			driver.findElement(By
+					.cssSelector(".AccountNavigation a[href*='User:" + userName
+							+ "']"));// only for verification
+			PageObjectLogging.log("loginCookie",
+					"user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
@@ -886,7 +829,6 @@ public class CommonFunctions {
 		}
 	}
 
-	
 	public static void logoutCookie(String wiki) {
 		driver = DriverProvider.getWebDriver();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
