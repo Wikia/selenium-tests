@@ -802,7 +802,7 @@ public class CommonFunctions {
 			js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 					+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
 			try {
-				driver.navigate().refresh();
+				driver.get(Global.DOMAIN+"Special:Random");
 			} catch (TimeoutException e) {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);
