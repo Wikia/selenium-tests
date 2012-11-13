@@ -61,6 +61,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void triggerCommentArea()
 	{
 		jQueryFocus("textarea#article-comm");
+		waitForElementByElement(iframe);
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
 	}
 	
@@ -89,7 +90,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void clickSubmitButton(String userName)
 	{		
-		click(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
+		clickAndWait(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
 //		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
