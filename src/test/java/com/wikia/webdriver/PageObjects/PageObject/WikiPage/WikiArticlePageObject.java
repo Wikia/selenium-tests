@@ -149,6 +149,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	private void clickEditCommentButton()
 	{
+		try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
 		executeScript("document.querySelectorAll('.article-comm-edit')[0].click()");
 		waitForElementByElement(iframe);
 		PageObjectLogging.log("clickEditCommentButton", "edit comment button clicked", true, driver);
@@ -169,6 +170,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 //		hoverMouseOverCommentArea(comment);
 		clickEditCommentButton();
 	}
+	
 	
 	public void verifyPageTitle(String title)
 	{
