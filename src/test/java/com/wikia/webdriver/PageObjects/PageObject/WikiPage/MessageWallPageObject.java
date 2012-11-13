@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -103,6 +104,14 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	public MessageWallPageObject openMessageWall(String userName)
 	{
 		getUrl(Global.DOMAIN+"wiki/Message_Wall:"+userName);
+		try {
+			if (Global.BROWSER.equals("CHROME")) {
+				while (driver.findElement(By.cssSelector("a[jsvalues='href:reloadUrl']")).isDisplayed()) {
+					driver.findElement(By.cssSelector("a[jsvalues='href:reloadUrl']")).click();
+					PageObjectLogging.log("openMessageWall", "error 503 happened, site had to be reloaded", false, driver);
+				}			
+			}
+		} catch (Exception e) {}
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
 		return new MessageWallPageObject(driver, userName);
