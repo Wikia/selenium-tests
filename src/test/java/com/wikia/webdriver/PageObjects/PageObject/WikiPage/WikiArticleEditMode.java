@@ -46,7 +46,7 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private WebElement previewButton;
 	@FindBy(css="div.neutral.modalToolbar a[id='publish']")
 	private WebElement publishButtonPreview;
-	@FindBy(css="span.cke_button_ModeSource span.cke_label")
+	@FindBy(css="span.cke_button_ModeSource a")
 	private WebElement sourceModeButton;
 	@FindBy(css="input.control-button")
 	private WebElement publishButtonGeneral;
@@ -249,6 +249,7 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 		waitForElementByElement(sourceModeButton);
 		waitForElementClickableByElement(sourceModeButton);
 		clickAndWait(sourceModeButton);
+		jQueryClick("span.cke_button_ModeSource a");
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
 		
 	}
