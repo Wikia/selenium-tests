@@ -163,6 +163,18 @@ public class BasePageObject{
 		}
 	}
 	
+	public void refreshPage()
+	{
+		try{
+			driver.navigate().refresh();			
+		}
+		catch(TimeoutException e)
+		{
+			PageObjectLogging.log("refreshPage", "page loaded for more then 30 seconds after click", true);
+		}
+	}
+
+	
 	public void clickAndWait(WebElement pageElem)
 	{
 		try{

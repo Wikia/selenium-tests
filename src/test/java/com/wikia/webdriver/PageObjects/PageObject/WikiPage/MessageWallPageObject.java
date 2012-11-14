@@ -416,6 +416,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	
 	public void editMessage(String title, String message)
 	{
+		refreshPage();
 		clickEditMessage();
 		writeEditMessage(title, message);
 		

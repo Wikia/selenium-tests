@@ -457,10 +457,6 @@ public class WikiBasePageObject extends BasePageObject {
 		
 	}
 	
-	public void refreshPage()
-	{
-		driver.navigate().refresh();
-	}
 
 
 	
