@@ -40,6 +40,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement submitReplyButton;
 	@FindBy(css="table.article-table")
 	private WebElement TableOnWikiaArticle;
+	@FindBy(css="textarea#article-comm")
+	private WebElement commentAreaDisabled;
 	
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle span.Wikia-video-play-button");
@@ -60,6 +62,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void triggerCommentArea()
 	{
+		waitForElementByElement(submitCommentButton);
+		waitForElementByElement(commentAreaDisabled);
 		jQueryFocus("textarea#article-comm");
 		waitForElementByElement(iframe);
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
