@@ -17,7 +17,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 
 public class MessageWallPageObject extends WikiBasePageObject{
 
-	@FindBy(css="#cke_contents_WallMessageBody iframe")
+	@FindBy(css="[id*='cke_contents_WallMessage'] iframe")
 	private WebElement messageWallIFrame;
 	@FindBy(css="div.cke_wrapper.cke_ltr iframe")
 	private WebElement messageWallEditIFrame;
