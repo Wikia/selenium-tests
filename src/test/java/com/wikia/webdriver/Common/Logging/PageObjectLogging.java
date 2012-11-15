@@ -32,22 +32,23 @@ public class PageObjectLogging implements WebDriverEventListener {
 	public static void startLoggingSuite() {
 		CommonUtils.createDirectory(screenDirPath);
 		imageCounter = 0;
-		//date time
+		// date time
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		//resolution
-		Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+		// resolution
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
-		
+
 		String l1 = "<html><style>table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) {width:100px;}tr.success{color:black;background-color:#CCFFCC;}tr.error{color:black;background-color:#FFCCCC;}tr.step{color:white;background:grey}</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><style>td { border-top: 1px solid grey; } </style></head><body>";
 		String l2 = "<p>Date: " + dateFormat.format(date) + " UTC</p>";
 		String l3 = "<p>Browser: " + Global.BROWSER + "</p>";
 		String l4 = "<p>OS: " + System.getProperty("os.name") + "</p>";
-		String l5 = "<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>";
-		String l6 = "<p>Testing environment: "+ Global.DOMAIN+"</p>";
-		String l7 = "<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>";
-		String l8 = "<p>Tested version: "+ Global.WIKI_VERSION+"</p>";
-		
+		String l5 = "<p>Screen resolution: " + dim.width + "x" + dim.height
+				+ "</p>";
+		String l6 = "<p>Testing environment: " + Global.DOMAIN + "</p>";
+		String l7 = "<p>Testing environment: " + Global.LIVE_DOMAIN + "</p>";
+		String l8 = "<p>Tested version: " + Global.WIKI_VERSION + "</p>";
+
 		CommonUtils.appendTextToFile(logPath, l1);
 		CommonUtils.appendTextToFile(logPath, l2);
 		CommonUtils.appendTextToFile(logPath, l3);
@@ -57,7 +58,6 @@ public class PageObjectLogging implements WebDriverEventListener {
 		CommonUtils.appendTextToFile(logPath, l7);
 		CommonUtils.appendTextToFile(logPath, l8);
 	}
-	
 
 	public static void stopLoggingSuite() {
 		String l1 = "</body></html>";
@@ -72,7 +72,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 		CommonUtils.appendTextToFile(logPath, l1);
 		CommonUtils.appendTextToFile(logPath, l2);
 		CommonUtils.appendTextToFile(logPath, l3);
-		System.out.println(className +" "+ methodName);
+		System.out.println(className + " " + methodName);
 	}
 
 	public static void stopLoggingMethod() {
@@ -96,7 +96,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
 				+ imageCounter + ".html'>HTML Source</a></td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-		
+
 	}
 
 	public static void log(String command, String description, boolean success) {
@@ -105,8 +105,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ "</td><td>" + description
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-	
-		
+
 	}
 
 	@Override
@@ -207,67 +206,73 @@ public class PageObjectLogging implements WebDriverEventListener {
 	@Override
 	public void onException(Throwable throwable, WebDriver driver) {
 
-		//sometimes there is no ability to capture from browser, if it's not responding
-		try {
-			CommonUtils.captureScreenshot(screenPath + imageCounter, driver);
-			CommonUtils.appendTextToFile(screenPath + imageCounter + ".html",
-					driver.getPageSource());
-		} catch (Exception e) {
-			log("onException",
-					"driver has no ability to catch screenshot or html source - driver may died",
-					false);
-		}
-		
-		//getting stacktrace of exception
-		String stackTrace = Throwables.getStackTraceAsString(throwable); 
-		Throwable cause = Throwables.getRootCause(throwable);
-		//creating array with stacktrace
-		StackTraceElement[] stacktraceElements = cause.getStackTrace();
-		try {
-			//looking for stacktrace element with method name findInvisibleElement when exception message is "Unable to find element"
-			for (int i = 0; i < stacktraceElements.length; i++) {
-				if (stacktraceElements[i].getMethodName().contains(
-						"findInvisibleElement")
-						&& throwable.getMessage().contains(
-								"Unable to find element")) {
-					//if below conditions were met:
-					//exception comes from findInvisibleElement method and
-					//exception message contains text "Unable to find element"
-					//exception "elementIsInvisible" is thrown to be caught at the bottom
-					
-					throw new Exception("elementIsInvisible");
-				}
-				if (throwable.getMessage().contains("Timed out waiting for page"))
-				{
-					throw new Exception("pageLoadTimeOut");
-				}
+		// sometimes there is no ability to capture from browser, if it's not
+		// responding
+		if (Global.LOG_ENABLED) {
+			try {
+				CommonUtils
+						.captureScreenshot(screenPath + imageCounter, driver);
+				CommonUtils.appendTextToFile(screenPath + imageCounter
+						+ ".html", driver.getPageSource());
+			} catch (Exception e) {
+				log("onException",
+						"driver has no ability to catch screenshot or html source - driver may died",
+						false);
 			}
-			String s1 = "<tr class=\"error\"><td>error</td><td>"
-					+ stackTrace
-					+ "</td><td> <br/><a href='screenshots/screenshot"
-					+ imageCounter
-					+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
-					+ imageCounter + ".html'>HTML Source</a></td></tr>";
-			CommonUtils.appendTextToFile(logPath, s1);
-			imageCounter += 1;
-		} 
-		catch (Exception e) {
-			if (e.getMessage().equals("elementIsInvisible")) {
-				String s1 = "<tr class=\"success\"><td>findInvisibleElement</td><td>element is not visible which is expected</td><td> <br/><a href='screenshots/screenshot"
+
+			// getting stacktrace of exception
+			String stackTrace = Throwables.getStackTraceAsString(throwable);
+			Throwable cause = Throwables.getRootCause(throwable);
+			// creating array with stacktrace
+			StackTraceElement[] stacktraceElements = cause.getStackTrace();
+			try {
+				// looking for stacktrace element with method name
+				// findInvisibleElement when exception message is
+				// "Unable to find element"
+				for (int i = 0; i < stacktraceElements.length; i++) {
+					if (stacktraceElements[i].getMethodName().contains(
+							"findInvisibleElement")
+							&& throwable.getMessage().contains(
+									"Unable to find element")) {
+						// if below conditions were met:
+						// exception comes from findInvisibleElement method and
+						// exception message contains text
+						// "Unable to find element"
+						// exception "elementIsInvisible" is thrown to be caught
+						// at the bottom
+
+						throw new Exception("elementIsInvisible");
+					}
+					if (throwable.getMessage().contains(
+							"Timed out waiting for page")) {
+						throw new Exception("pageLoadTimeOut");
+					}
+				}
+				String s1 = "<tr class=\"error\"><td>error</td><td>"
+						+ stackTrace
+						+ "</td><td> <br/><a href='screenshots/screenshot"
 						+ imageCounter
 						+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
 						+ imageCounter + ".html'>HTML Source</a></td></tr>";
 				CommonUtils.appendTextToFile(logPath, s1);
 				imageCounter += 1;
-			}
-			if(e.getMessage().equals("pageLoadTimeOut"))
-			{
-				String s1 = "<tr class=\"success\"><td>pageLoadTimeOut</td><td>page loads for more than 30 seconds</td><td> <br/><a href='screenshots/screenshot"
-						+ imageCounter
-						+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
-						+ imageCounter + ".html'>HTML Source</a></td></tr>";
-				CommonUtils.appendTextToFile(logPath, s1);
-				imageCounter += 1;
+			} catch (Exception e) {
+				if (e.getMessage().equals("elementIsInvisible")) {
+					String s1 = "<tr class=\"success\"><td>findInvisibleElement</td><td>element is not visible which is expected</td><td> <br/><a href='screenshots/screenshot"
+							+ imageCounter
+							+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
+							+ imageCounter + ".html'>HTML Source</a></td></tr>";
+					CommonUtils.appendTextToFile(logPath, s1);
+					imageCounter += 1;
+				}
+				if (e.getMessage().equals("pageLoadTimeOut")) {
+					String s1 = "<tr class=\"success\"><td>pageLoadTimeOut</td><td>page loads for more than 30 seconds</td><td> <br/><a href='screenshots/screenshot"
+							+ imageCounter
+							+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
+							+ imageCounter + ".html'>HTML Source</a></td></tr>";
+					CommonUtils.appendTextToFile(logPath, s1);
+					imageCounter += 1;
+				}
 			}
 		}
 	}

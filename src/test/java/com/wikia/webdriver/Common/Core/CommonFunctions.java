@@ -131,7 +131,7 @@ public class CommonFunctions {
 						"page loads for more than 30 seconds", true, driver);
 			}
 		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
+		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userName + "']"));// only for verification
 		try {
 			if (!temp.contains("Special:UserLogout")) {
@@ -141,7 +141,7 @@ public class CommonFunctions {
 			PageObjectLogging.log("logIn",
 					"page loads for more than 30 seconds", true, driver);
 		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
+		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userName + "']"));
 		// driver = DriverProvider.getWebDriver();
 		// wait = new WebDriverWait(driver, 30);
