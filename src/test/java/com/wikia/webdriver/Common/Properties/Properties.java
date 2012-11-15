@@ -3,7 +3,6 @@ package com.wikia.webdriver.Common.Properties;
 import java.io.File;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -101,6 +100,13 @@ public class Properties {
 		Global.DOMAIN = System.getProperty("base-address");
 		Global.LIVE_DOMAIN = System.getProperty("live-domain");
 		Global.LOG_VERBOSE = 2;
+		if (Global.DOMAIN.contains("dev"))
+		{
+			Global.LOGIN_BY_COOKIE = false;
+		}
+		else{
+			Global.LOGIN_BY_COOKIE = true;
+		}
 	}
 	
 	private static void setPropertiesManually()
@@ -111,6 +117,7 @@ public class Properties {
 		Global.CONFIG_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
+		Global.LOGIN_BY_COOKIE = true;
 	}
 	
 	private static void getWikiVersion()

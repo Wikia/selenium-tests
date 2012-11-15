@@ -13,5 +13,6 @@ public class Global {
 	public static File CAPTCHA_FILE;
 	public static int LOG_VERBOSE;
 	public static String WIKI_VERSION;
+	public static boolean LOGIN_BY_COOKIE;
 
 }
