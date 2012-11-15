@@ -248,8 +248,8 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	public void clickOnSourceButton() {
 		waitForElementByElement(sourceModeButton);
 		waitForElementClickableByElement(sourceModeButton);
-//		clickAndWait(sourceModeButton);
-		jQueryClick("span.cke_button_ModeSource a");
+		clickAndWait(sourceModeButton);
+//		jQueryClick("span.cke_button_ModeSource a");
 		waitForElementByElement(sourceModeTextArea);
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
 		
