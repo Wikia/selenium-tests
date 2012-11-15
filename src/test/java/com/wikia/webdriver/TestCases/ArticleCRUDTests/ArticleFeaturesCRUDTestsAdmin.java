@@ -30,7 +30,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Gallery");
 		edit.waitForObjectModalAndClickAddAphoto("Gallery");
 		edit.searchImageInLightBox("image");
@@ -60,7 +60,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Gallery");
 		edit.waitForObjectModalAndClickAddAphoto("Gallery");
 		edit.searchImageInLightBox("image");
@@ -103,7 +103,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Gallery");
 		edit.waitForObjectModalAndClickAddAphoto("Gallery");
 		edit.searchImageInLightBox("image");
@@ -140,7 +140,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slideshow");
 		edit.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
 		edit.searchImageInLightBox("image");
@@ -169,7 +169,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slideshow");
 		edit.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
 		edit.searchImageInLightBox("image");
@@ -209,7 +209,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slideshow");
 		edit.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
 		edit.searchImageInLightBox("image");
@@ -247,7 +247,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slider");
 		edit.waitForObjectModalAndClickAddAphoto("GallerySlider");
 		edit.searchImageInLightBox("image");
@@ -277,7 +277,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slider");
 		edit.waitForObjectModalAndClickAddAphoto("GallerySlider");
 		edit.searchImageInLightBox("image");
@@ -317,7 +317,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slider");
 		edit.waitForObjectModalAndClickAddAphoto("GallerySlider");
 		edit.searchImageInLightBox("image");
@@ -353,7 +353,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
 		edit.waitForVideoModalAndTypeVideoURL(videoURL);
 		edit.clickVideoNextButton();
@@ -380,7 +380,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
 		edit.waitForVideoModalAndTypeVideoURL(videoURL);
 		edit.clickVideoNextButton();
@@ -415,7 +415,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
 		edit.waitForVideoModalAndTypeVideoURL(videoURL);
 		edit.clickVideoNextButton();
@@ -450,7 +450,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Image");
 		edit.waitForModalAndClickAddThisPhoto();
 		edit.typePhotoCaption(Caption);
@@ -477,7 +477,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Image");
 		edit.waitForModalAndClickAddThisPhoto();
 		edit.typePhotoCaption(Caption);
@@ -508,7 +508,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Image");
 		edit.waitForModalAndClickAddThisPhoto();
 		edit.typePhotoCaption(Caption);
@@ -536,7 +536,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddTableButton();
 		edit.verifyTableModal();
 		edit.clickOKonTableModal();
@@ -558,7 +558,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddTableButton();
 		edit.verifyTableModal();
 		edit.clickOKonTableModal();
@@ -598,7 +598,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.clickOnAddTableButton();
 		edit.verifyTableModal();
 		edit.clickOKonTableModal();

@@ -59,7 +59,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.typeInContent(articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
@@ -80,7 +80,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.typeInContent(articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
@@ -110,7 +110,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.typeInContent(articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
@@ -136,7 +136,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.typeInContent(articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
