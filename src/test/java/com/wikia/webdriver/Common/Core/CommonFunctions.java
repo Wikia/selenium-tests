@@ -134,7 +134,7 @@ public class CommonFunctions {
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userName + "']"));// only for verification
 		try {
-			if (!temp.contains("Special:UserLogout")) {
+			if (!(temp.contains("Special:UserLogout")||temp.contains("Specjalna:Wyloguj"))) {
 				driver.get(temp);
 			}
 		} catch (TimeoutException e) {
