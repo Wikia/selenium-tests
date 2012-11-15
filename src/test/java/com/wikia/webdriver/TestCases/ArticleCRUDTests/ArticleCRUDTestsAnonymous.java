@@ -87,7 +87,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		article.verifyArticleText(articleText);
 		edit = article.clickEditButton(pageName);
 		edit.deleteArticleContent();
-		edit.clickOnVisualButton();
+//		edit.clickOnVisualButton();
 		edit.typeInContent(articleTextEdit);
 		article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
