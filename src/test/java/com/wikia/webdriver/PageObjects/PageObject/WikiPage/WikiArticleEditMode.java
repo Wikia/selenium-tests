@@ -275,9 +275,12 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	 * @author Michal Nowierski
 	 */
 	public void deleteArticleContent() {
-		clickOnSourceButton();
-		waitForElementByElement(sourceModeTextArea);
-		sourceModeTextArea.clear();
+		driver.switchTo().frame(iFrame);
+		bodyContent.clear();
+		driver.switchTo().defaultContent();
+//		clickOnSourceButton();
+//		waitForElementByElement(sourceModeTextArea);
+//		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true, driver);
 		
 	}
