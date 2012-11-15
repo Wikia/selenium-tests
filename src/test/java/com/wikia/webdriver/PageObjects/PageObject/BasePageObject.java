@@ -498,7 +498,9 @@ public class BasePageObject{
 	{
 //		try
 //		{
-			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(by));								
+			Global.LOG_ENABLED = false;
+			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(by));
+			Global.LOG_ENABLED = true;
 //		}
 //		catch(NoSuchElementException e)
 //		{

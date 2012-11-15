@@ -107,6 +107,7 @@ public class Properties {
 		else{
 			Global.LOGIN_BY_COOKIE = true;
 		}
+		Global.LOG_ENABLED = true; 
 	}
 	
 	private static void setPropertiesManually()
@@ -118,6 +119,7 @@ public class Properties {
 		Global.CAPTCHA_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
 		Global.LOGIN_BY_COOKIE = true;
+		Global.LOG_ENABLED = true;
 	}
 	
 	private static void getWikiVersion()
