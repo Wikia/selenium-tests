@@ -202,17 +202,17 @@ public class CommonFunctions {
 						"page loads for more than 30 seconds", true, driver);
 			}
 		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
+		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userNameEnc + "']"));// only for verification
 		try {
-			if (!temp.contains("Special:UserLogout")) {
+			if (!(temp.contains("Special:UserLogout")||temp.contains("Specjalna:Wyloguj"))) {
 				driver.get(temp);
 			}
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("logIn",
 					"page loads for more than 30 seconds", true, driver);
 		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
+		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userNameEnc + "']"));
 	}
 
@@ -268,7 +268,7 @@ public class CommonFunctions {
 		WebElement submitButtonElem = driver.findElement(submitButton);
 		submitButtonElem.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='/User:" + userNameEnc + "']")));
+				.cssSelector("a[href*='" + userNameEnc + "']")));
 	}
 
 	/**
