@@ -43,8 +43,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement submitReplyButton;
 	@FindBy(css="table.article-table")
 	private WebElement TableOnWikiaArticle;
-	@FindBy(css="textarea#article-comm")
-	private WebElement commentAreaDisabled;
 	@FindBy(css="#csAddCategorySwitch a")
 	private WebElement categories_AddCategoryButton;
 	@FindBy(css="#csCategoryInput")
@@ -73,8 +71,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void triggerCommentArea()
 	{
-		waitForElementByElement(submitCommentButton);
-		waitForElementByElement(commentAreaDisabled);
 		jQueryFocus("textarea#article-comm");
 		waitForElementByElement(iframe);
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
