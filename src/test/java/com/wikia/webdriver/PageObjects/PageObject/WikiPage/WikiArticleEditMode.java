@@ -20,9 +20,12 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 
 
-public class WikiArticleEditMode extends WikiArticlePageObject {
+public class WikiArticleEditMode extends WikiBasePageObject {
+
+	protected String articlename;
 
 	@FindBy(css="div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
@@ -88,6 +91,10 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private WebElement tableModalOKbutton;
 	@FindBy(css="table.article-table")
 	private WebElement VisualModeTable;
+	@FindBy(css="#csCategoryInput")
+	private WebElement categories_CategoryInputField;
+	@FindBy(css="#csWikitext")
+	private WebElement categories_CategorySourceInputField;
 	
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By removePhotoDialog = By.cssSelector("section.modalWrapper.RTEModal");
@@ -102,6 +109,8 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private By contextMenuIframeList = By.cssSelector("iframe[aria-label='Context Menu Options']");
 	private By contextMenuOptionsList = By.cssSelector("span.cke_menuitem a");
 
+	private By categories_listOfCategoriyPrompts = By.cssSelector("#csSuggestContainer div.yui-ac-bd ul li");
+
 	private String imageArticleIFrame = "img";
 	private String galleryArticleIFrame = "img.image-gallery";
 	private String sliderArticleIFrame = "img.image-gallery-slider";
@@ -113,13 +122,16 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 	private String deleteButtonArticleItem = "span.RTEMediaOverlayDelete";
 	
-	
+	private String categories_listOfCategories = "#csItemsContainer";
+
 	public WikiArticleEditMode(WebDriver driver, String Domain,
-			String articlename) {
-		super(driver, Domain, articlename);
+			String wikiArticle) {
+		super(driver, Domain);
+		this.articlename = wikiArticle;
 		PageFactory.initElements(driver, this);
 	}
-
+	
+	
 	/**
 	 * Left Click on add Object button.
 	 *  
@@ -969,6 +981,160 @@ public class WikiArticleEditMode extends WikiArticlePageObject {
 
 	PageObjectLogging.log("tableChooseFromContextMenu", "Choose the indicated option from context menu", true, driver);
 	}
+
+
+	/**
+	* type category name
+	*
+	@author Michal Nowierski
+	*/
+	public void categories_addCategoryEditMode(String categoryName) {
+		waitForElementByElement(categories_CategoryInputField);
+		waitForElementClickableByElement(categories_CategoryInputField);
+		clickAndWait(categories_CategoryInputField);
+		categories_CategoryInputField.sendKeys(categoryName);
+		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
+		categories_CategoryInputField.sendKeys(Keys.ENTER);
+		PageObjectLogging.log("categories_typeCategoryNameEditMode", "category "+categoryName+" typed", true, driver);
+	}
+	
+	/**
+	* type category name in source mode
+	*
+	@author Michal Nowierski
+	*/
+	public void categories_addCategorySourceEditMode(String categoryName) {
+		waitForElementByElement(categories_CategorySourceInputField);
+		waitForElementClickableByElement(categories_CategorySourceInputField);
+		clickAndWait(categories_CategorySourceInputField);
+		categories_CategorySourceInputField.sendKeys("[[Category:"+categoryName+"]]");
+		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();};
+		PageObjectLogging.log("categories_addCategorySourceEditMode", "category [[Category:"+categoryName+"]] typed in the source mode", true, driver);
+	}
+	
+	/**
+	 * check category name in source mode
+	 *
+	@author Michal Nowierski
+	 */
+	public void categories_verifyCategoryAddedSourceEditMode(String categoryName) {
+		waitForElementByElement(categories_CategorySourceInputField);
+		String text = categories_CategorySourceInputField.getAttribute("value");
+		if (text.contains("[[Category:"+categoryName+"]]")) {
+			
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category [[Category:"+categoryName+"]] present in the source mode", true, driver);
+		}
+		else {
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category [[Category:"+categoryName+"]] NOT present in the source mode", false, driver);
+			
+		}
+	}
+	
+	
+	
+	
+
+	public String categories_addSuggestedCategoryEditMode(String givenString) {
+		waitForElementByElement(categories_CategoryInputField);
+		waitForElementClickableByElement(categories_CategoryInputField);
+		clickAndWait(categories_CategoryInputField);
+		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
+		categories_CategoryInputField.sendKeys(givenString);
+		List<WebElement> PromptsList  = driver.findElements(categories_listOfCategoriyPrompts);
+		WebElement category = PromptsList.get(3);
+		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
+		waitForElementByElement(category);
+		String categoryName = category.getText(); 
+		waitForElementClickableByElement(category);
+		clickAndWait(category);
+		PageObjectLogging.log("categories_addCategoryFromPromptEditMode", "category "+categoryName+" added from prompt", true, driver);
+		return categoryName;
+	}
+
+	/**
+	* categories_verifyCategoryAdded in edit mode
+	*
+	@author Michal Nowierski
+	*/
+	public void categories_verifyCategoryAddedEditMode(String categoryName) {
+		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories));
+		Boolean result = false;
+		By categoryItemBy = By.cssSelector("span");
+		// there might be more than one category on a random page. Thus - loop over all of them.
+		for (WebElement webElement : lista) {
+			waitForElementByElement(webElement);		
+			if (webElement.findElement(categoryItemBy).getText().equalsIgnoreCase(categoryName)) {
+				result = true;
+			}
+		}
+		if (result) {
+			PageObjectLogging.log("categories_verifyCategoryAddedEditMode", "category "+categoryName+" succesfully added", true, driver);			
+		}
+		else {
+			PageObjectLogging.log("categories_verifyCategoryAddedEditMode", "category "+categoryName+" NOT added", false, driver);						
+		}
+		
+	}
+
+
+	public void categories_removeCategoryEditMode(String categoryName) {
+		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories));
+		WebElement categoryItem = null;
+		WebElement categoryItemRemove = null;
+		Boolean isTheCategoryOnList = false;
+		By categoryItemBy = By.cssSelector("span");
+		By categoryItemRemoveBy = By.cssSelector("img.delete");
+				
+		// We want item with given name. there might be more than one category on a random page. Thus - loop over all of them.
+		for (WebElement webElement : lista) {
+			waitForElementByElement(webElement);		
+			//if the element is the one we want
+			if (webElement.findElement(categoryItemBy).getText().equalsIgnoreCase(categoryName)) {
+				categoryItem = webElement.findElement(categoryItemBy);
+				categoryItemRemove = webElement.findElement(categoryItemRemoveBy);
+				isTheCategoryOnList = true;
+			}
+		}
+		if (!isTheCategoryOnList) {
+			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+" not found on list", false, driver);			
+			return;
+		}
+		clickAndWait(categoryItem);
+		waitForElementByElement(categoryItemRemove);
+		clickAndWait(categoryItemRemove);
+		if (isTheCategoryOnList) {
+			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+"  removed", true, driver);			
+			return;
+		}
+		
+	}
+
+
+	public void categories_verifyCategoryRemovedEditMode(String categoryName) {
+		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories+" span"));
+		Boolean result = false;
+
+		// there might be more than one category on a random page. Thus - loop over all of them.
+		if (lista.size()>0) {
+			
+			for (WebElement webElement : lista) {
+				waitForElementByElement(webElement);		
+				if (webElement.getText().equalsIgnoreCase(categoryName)) {
+					result = true;
+				}
+			}
+		}
+		if (result) {
+			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" not removed - found on the list", false, driver);			
+		}
+		else {
+			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);						
+		}
+		
+	}
+
+
+
 
 	
 

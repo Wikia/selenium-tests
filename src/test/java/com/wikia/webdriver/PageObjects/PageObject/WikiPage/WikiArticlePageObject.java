@@ -1,5 +1,7 @@
 package com.wikia.webdriver.PageObjects.PageObject.WikiPage;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -13,6 +15,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObject;
 
 public class WikiArticlePageObject extends WikiBasePageObject {
 	
@@ -40,7 +43,15 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement submitReplyButton;
 	@FindBy(css="table.article-table")
 	private WebElement TableOnWikiaArticle;
+	@FindBy(css="#csAddCategorySwitch a")
+	private WebElement categories_AddCategoryButton;
+	@FindBy(css="#csCategoryInput")
+	private WebElement categories_CategoryInputField;
+	@FindBy(css="#csSave")
+	private WebElement categories_saveButton;
 	
+	
+	private By categories_listOfCategories = By.cssSelector("#catlinks li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle span.Wikia-video-play-button");
 	private By AddVideoRVButton = By.cssSelector("a.addVideo");
@@ -375,6 +386,102 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	waitForElementByElement(TableOnWikiaArticle);
 	PageObjectLogging.log("VerifyTheTableOnThePage", "Verify that the table appears on the page", true, driver);
 	}
+
+	/**
+	* Click on 'add Category' Button
+	*
+	@author Michal Nowierski
+	*/
+	public void categories_clickAddCategory() {
+		waitForElementByElement(categories_AddCategoryButton);
+		waitForElementClickableByElement(categories_AddCategoryButton);
+		clickAndWait(categories_AddCategoryButton);
+		PageObjectLogging.log("categories_clickAddCategory", "Click on 'add Category' Button", true, driver);
+	}
+
+	/**
+	* type a category to field
+	*
+	@author Michal Nowierski
+	*/
+	public void categories_typeCategoryName(String categoryName) {
+		waitForElementByElement(categories_CategoryInputField);
+		categories_CategoryInputField.sendKeys(categoryName);
+		PageObjectLogging.log("categories_clickAddCategory", "type "+categoryName+" to category input field", true, driver);
+		
+	}
+	/**
+	* click SaveButton
+	*
+	@author Michal Nowierski
+	*/
+	public void categories_clickOnSave() {
+		waitForElementByElement(categories_saveButton);
+		waitForElementClickableByElement(categories_saveButton);
+		clickAndWait(categories_saveButton);
+		PageObjectLogging.log("categories_clickOnSave", "Click on 'Save' Button", true, driver);
+		
+	}
+
+	/**
+	* click SaveButton
+	*
+	@author Michal Nowierski
+	*/
+	public void categories_verifyCategoryAdded(String categoryName) {
+		List<WebElement> lista  = driver.findElements(categories_listOfCategories);
+		Boolean result = false;
+		// there might be more than one category on a random page. Thus - loop over all of them.
+		for (WebElement webElement : lista) {
+			waitForElementByElement(webElement);		
+			if (webElement.getText().equalsIgnoreCase(categoryName)) {
+				result = true;
+			}
+		}
+		if (result) {
+			PageObjectLogging.log("categories_verifyCategoryAdded", "category "+categoryName+" succesfully added", true, driver);			
+		}
+		else {
+			PageObjectLogging.log("categories_verifyCategoryAdded", "category "+categoryName+" NOT added", false, driver);						
+		}
+		
+	}
+
+	public void categories_verifyCategoryRemoved(String categoryName) {
+		List<WebElement> lista  = driver.findElements(categories_listOfCategories);
+		Boolean result = false;
+		// there might be more than one category on a random page. Thus - loop over all of them.
+		if (lista.size()>0) {
+			
+		for (WebElement webElement : lista) {
+			waitForElementByElement(webElement);		
+			if (webElement.getText().equalsIgnoreCase(categoryName)) {
+				result = true;
+			}
+		}
+		}
+		if (result) {
+			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" not removed - found on the list", false, driver);			
+		}
+		else {
+			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);						
+		}
+		
+	}
+	/**
+	* getArticleNameFromURL
+	*
+	@author Michal Nowierski
+	*/
+	public String getArticleNameFromURL() {
+		//TODO: To Michal: use Regular Expression here, when its syntax is learned.
+		String URL= driver.getCurrentUrl();
+		int articlenameIndex = URL.indexOf("wiki/");
+		String articleName = URL.substring(articlenameIndex+5);
+		return articleName;
+	}
+
+
 
 
 

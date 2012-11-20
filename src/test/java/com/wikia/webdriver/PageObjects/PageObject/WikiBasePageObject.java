@@ -21,6 +21,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialNewFilesPageOb
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObject;
 
 public class WikiBasePageObject extends BasePageObject {
 	protected String Domain;
@@ -449,6 +450,30 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		PageObjectLogging.log("openArticle", "article "+articleName+" opened", true, driver);
 		return new WikiArticlePageObject(driver, Domain, articleName);
+	}
+	
+	public WikiCategoryPageObject clickOnCategory(String categoryName) {
+		List<WebElement> lista  = driver.findElements(By.cssSelector("#catlinks li a"));
+		Boolean result = false;
+		// there might be more than one category on a random page. Thus - loop over all of them.
+		if (lista.size()>0) {
+			
+		for (WebElement webElement : lista) {
+			waitForElementByElement(webElement);		
+			if (webElement.getText().equalsIgnoreCase(categoryName)) {
+				waitForElementClickableByElement(webElement);
+				clickAndWait(webElement);
+				result = true;
+			}
+		}
+		}
+		if (result) {
+			PageObjectLogging.log("clickOnCategory", "clicked on "+categoryName, false, driver);			
+		}
+		else {
+			PageObjectLogging.log("clickOnCategory", "category "+categoryName+" not found", false, driver);						
+		}
+		return new WikiCategoryPageObject(driver, Domain);
 	}
 	
 	public CreateNewWikiPageObjectStep1 startAWiki()
