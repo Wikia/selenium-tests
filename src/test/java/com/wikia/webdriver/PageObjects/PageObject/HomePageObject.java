@@ -103,8 +103,8 @@ public class HomePageObject extends BasePageObject{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
 				getUrl(temp);
-				hubsHero = driver.findElement(hubsHeroCarousel);
-				waitForElementByElement(hubsHero);
+//				hubsHero = driver.findElement(hubsHeroCarousel);
+				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
 			return new VideoGamesHubPageObject(driver);
 		}
@@ -117,8 +117,8 @@ public class HomePageObject extends BasePageObject{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
 				getUrl(temp);
-				hubsHero = driver.findElement(hubsHeroCarousel);
-				waitForElementByElement(hubsHero);
+//				hubsHero = driver.findElement(hubsHeroCarousel);
+				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
 			return new EntertainmentHubPageObject(driver);	
 		}
@@ -131,8 +131,8 @@ public class HomePageObject extends BasePageObject{
 				String currentUrl = driver.getCurrentUrl();
 				String temp = currentUrl.replace("http://www.wikia.com", "http://preview.www.wikia.com");
 				getUrl(temp);
-				hubsHero = driver.findElement(hubsHeroCarousel);
-				waitForElementByElement(hubsHero);
+//				hubsHero = driver.findElement(hubsHeroCarousel);
+				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
 			return new LifestyleHubPageObject(driver);	
 		}
