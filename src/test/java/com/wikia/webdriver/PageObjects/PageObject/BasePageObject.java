@@ -163,6 +163,18 @@ public class BasePageObject{
 		}
 	}
 	
+	public void refreshPage()
+	{
+		try{
+			driver.navigate().refresh();			
+		}
+		catch(TimeoutException e)
+		{
+			PageObjectLogging.log("refreshPage", "page loaded for more then 30 seconds after click", true);
+		}
+	}
+
+	
 	public void clickAndWait(WebElement pageElem)
 	{
 		try{
@@ -486,7 +498,9 @@ public class BasePageObject{
 	{
 //		try
 //		{
-			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(by));								
+			Global.LOG_ENABLED = false;
+			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(by));
+			Global.LOG_ENABLED = true;
 //		}
 //		catch(NoSuchElementException e)
 //		{
