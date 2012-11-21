@@ -122,7 +122,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 	private String deleteButtonArticleItem = "span.RTEMediaOverlayDelete";
 	
-	private String categories_listOfCategories = "#csItemsContainer";
+	private String categories_listOfCategories = "#csItemsContainer li";
 
 	public WikiArticleEditMode(WebDriver driver, String Domain,
 			String wikiArticle) {
@@ -996,6 +996,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		waitForElementByElement(categories_CategoryInputField);
 		waitForElementClickableByElement(categories_CategoryInputField);
 		clickAndWait(categories_CategoryInputField);
+		jQueryFocus("#csCategoryInput");
 		categories_CategoryInputField.sendKeys(categoryName);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
 		categories_CategoryInputField.sendKeys(Keys.ENTER);
@@ -1067,7 +1068,8 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		// there might be more than one category on a random page. Thus - loop over all of them.
 		for (WebElement webElement : lista) {
 			waitForElementByElement(webElement);		
-			if (webElement.findElement(categoryItemBy).getText().equalsIgnoreCase(categoryName)) {
+			if (webElement.getText().equalsIgnoreCase(categoryName)) {
+//				if (webElement.findElement(categoryItemBy).getText().equalsIgnoreCase(categoryName)) {
 				result = true;
 			}
 		}

@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.testng.Assert;
 
 import com.google.common.base.Throwables;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -96,6 +97,10 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
 				+ imageCounter + ".html'>HTML Source</a></td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
+		if (!success)
+		{
+			Assert.fail(description);
+		}
 		
 	}
 
@@ -105,6 +110,10 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ "</td><td>" + description
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
+		if (!success)
+		{
+			Assert.fail(description);
+		}
 	
 		
 	}
