@@ -64,7 +64,21 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	{
 		waitForElementByElement(submitCommentButton);
 		waitForElementByElement(commentAreaDisabled);
-		jQueryFocus("textarea#article-comm");
+		int delay = 500;
+		while (commentAreaDisabled.isDisplayed())
+		{
+			try {
+				Thread.sleep(delay);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			jQueryFocus("textarea#article-comm");
+			delay+=500;
+			if (delay > 3000)
+			{
+				break;
+			}
+		}
 		waitForElementByElement(iframe);
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
 	}
