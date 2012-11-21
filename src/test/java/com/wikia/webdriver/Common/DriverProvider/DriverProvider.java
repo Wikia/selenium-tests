@@ -47,16 +47,16 @@ public class DriverProvider {
 		if (Global.BROWSER.equals("IE"))
 		{
 			setIEProperties();
-			InternetExplorerDriverService service;
-			service = new InternetExplorerDriverService.Builder().usingAnyFreePort()
-	                .withLogFile(new File("c:\\iedriver1.log")).withLogLevel(InternetExplorerDriverLogLevel.TRACE).build();
-			try {
-				service.start();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			driver = new EventFiringWebDriver(new InternetExplorerDriver(service)).register(listener);
+//			InternetExplorerDriverService service;
+//			service = new InternetExplorerDriverService.Builder().usingAnyFreePort()
+//	                .withLogFile(new File("c:\\iedriver1.log")).withLogLevel(InternetExplorerDriverLogLevel.TRACE).build();
+//			try {
+//				service.start();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			driver = new EventFiringWebDriver(new InternetExplorerDriver()).register(listener);
 			
 		}
 		else if (Global.BROWSER.equals("FF"))
@@ -112,12 +112,12 @@ public class DriverProvider {
 		}
 			
 		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);			
-		if (!Global.BROWSER.equals("CHROME"))
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
+		if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")))
 		{
-			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		}
-		driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
+//		driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 		return instance;
 	}
 	
