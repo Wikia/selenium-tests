@@ -404,7 +404,8 @@ public class MessageWallPageObject extends WikiBasePageObject{
 			driver.switchTo().frame(messageWallIFrame);
 			clickAndWait(messageBodyField);
 			messageBodyField.sendKeys(Keys.TAB);
-			messageBodyField.sendKeys(Keys.TAB);
+//			messageBodyField.sendKeys(Keys.TAB);
+//			messageBodyField.sendKeys(Keys.TAB);
 			messageBodyField.sendKeys(Keys.ENTER);
 			driver.switchTo().defaultContent();
 		}
