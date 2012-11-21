@@ -43,12 +43,11 @@ public class PageObjectLogging implements WebDriverEventListener {
 		String l2 = "<p>Date: " + dateFormat.format(date) + " UTC</p>";
 		String l3 = "<p>Browser: " + Global.BROWSER + "</p>";
 		String l4 = "<p>OS: " + System.getProperty("os.name") + "</p>";
-		String l5 = "<p>Screen resolution: " + dim.width + "x" + dim.height
-				+ "</p>";
-		String l6 = "<p>Testing environment: " + Global.DOMAIN + "</p>";
-		String l7 = "<p>Testing environment: " + Global.LIVE_DOMAIN + "</p>";
-		String l8 = "<p>Tested version: " + Global.WIKI_VERSION + "</p>";
-
+		String l5 = "<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>";
+		String l6 = "<p>Testing environment: "+ Global.DOMAIN+"</p>";
+		String l7 = "<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>";
+		String l8 = "<p>Tested version: "+ Global.WIKI_VERSION+"</p>";
+		
 		CommonUtils.appendTextToFile(logPath, l1);
 		CommonUtils.appendTextToFile(logPath, l2);
 		CommonUtils.appendTextToFile(logPath, l3);
@@ -58,6 +57,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 		CommonUtils.appendTextToFile(logPath, l7);
 		CommonUtils.appendTextToFile(logPath, l8);
 	}
+	
 
 	public static void stopLoggingSuite() {
 		String l1 = "</body></html>";
@@ -96,7 +96,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
 				+ imageCounter + ".html'>HTML Source</a></td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-
+		
 	}
 
 	public static void log(String command, String description, boolean success) {
@@ -105,7 +105,8 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ "</td><td>" + description
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-
+	
+		
 	}
 
 	@Override
