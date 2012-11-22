@@ -1105,9 +1105,20 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+" not found on list", false, driver);			
 			return;
 		}
-		clickAndWait(categoryItem);
-		waitForElementByElement(categoryItemRemove);
-		clickAndWait(categoryItemRemove);
+		List<WebElement> l = driver.findElements(By.cssSelector("li.CSitem span"));
+		int counter = 0;
+		for (WebElement element:l)
+		{
+			if (element.getText().equals(categoryName))
+			{
+				counter = l.indexOf(element);
+				counter+=1;
+				jQueryClick("li.CSitem:nth-child("+counter+") .delete");
+			}
+		}
+//		clickAndWait(categoryItem);
+//		waitForElementByElement(categoryItemRemove);
+//		clickAndWait(categoryItemRemove);
 		if (isTheCategoryOnList) {
 			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+"  removed", true, driver);			
 			return;

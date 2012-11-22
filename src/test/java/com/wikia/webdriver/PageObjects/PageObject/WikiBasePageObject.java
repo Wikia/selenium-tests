@@ -468,7 +468,7 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		}
 		if (result) {
-			PageObjectLogging.log("clickOnCategory", "clicked on "+categoryName, false, driver);			
+			PageObjectLogging.log("clickOnCategory", "clicked on "+categoryName, true, driver);			
 		}
 		else {
 			PageObjectLogging.log("clickOnCategory", "category "+categoryName+" not found", false, driver);						

@@ -111,7 +111,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 * TestCase005 Open random wiki page as anonymous user add category from
 	 * suggestions Verify category is added
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_005", "CategoriesTestsAnonymous" })
+	@Test(groups = { "CategoriesTestsAnonymous_005", "" })
 	public void CategoriesTestsAnonymous_005_addSuggestedCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
@@ -131,7 +131,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 * TestCase006 Open random wiki page as anonymous user edit it and add
 	 * category from source mode Verify category is properly added in visual
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_006", "CategoriesTestsAnonymous" })
+	@Test(groups = { "CategoriesTestsAnonymous_006", "" })
 	public void CategoriesTestsAnonymous_006_addCategorySourceModeTransitionToVisual() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String categoryName = "test" + wiki.getTimeStamp();
@@ -153,7 +153,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 * TestCase007 Open random wiki page as anonymous user edit it and add
 	 * category from visaul mode Verify category is properly added in source
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_007", "CategoriesTestsAnonymous" })
+	@Test(groups = { "CategoriesTestsAnonymous_007", "" })
 	public void CategoriesTestsAnonymous_007_addCategoryVisualModeTransitionToSource() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String categoryName = "test" + wiki.getTimeStamp();
