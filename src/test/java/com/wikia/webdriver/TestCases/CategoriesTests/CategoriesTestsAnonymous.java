@@ -102,8 +102,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article.categories_clickOnSave();
 		article.categories_verifyCategoryAdded(categoryName);
 		article.refreshPage();
-		WikiCategoryPageObject categoryPage = article
-				.clickOnCategory(categoryName);
+		WikiCategoryPageObject categoryPage = article.openCategoryPage(categoryName);
 		categoryPage.verifyCategoryContainsPage(articleName);
 	}
 

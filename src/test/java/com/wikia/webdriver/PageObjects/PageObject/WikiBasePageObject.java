@@ -476,6 +476,13 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiCategoryPageObject(driver, Domain);
 	}
 	
+	public WikiCategoryPageObject openCategoryPage(String category)
+	{
+		getUrl(Global.DOMAIN + "wiki/"+"Category:"+category);
+		PageObjectLogging.log("openCategoryPage", category+" page opened", true, driver);
+		return new WikiCategoryPageObject(driver, Domain);
+	}
+	
 	public CreateNewWikiPageObjectStep1 startAWiki()
 	{
 		return null;
