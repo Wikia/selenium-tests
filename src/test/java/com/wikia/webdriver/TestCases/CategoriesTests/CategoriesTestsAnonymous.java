@@ -110,7 +110,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 * TestCase005 Open random wiki page as anonymous user add category from
 	 * suggestions Verify category is added
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_005", "" })
+	@Test(groups = { "CategoriesTestsAnonymous_005", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_005_addSuggestedCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
