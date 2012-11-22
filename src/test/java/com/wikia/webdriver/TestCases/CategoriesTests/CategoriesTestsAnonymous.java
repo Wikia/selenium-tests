@@ -11,12 +11,6 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObjec
 
 public class CategoriesTestsAnonymous extends TestTemplate {
 
-	private String pageName;
-	private String articleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-	private String articleTextEdit = "Brand new content";
-	private String commentText = "Lorem ipsum dolor sit amet, comment";
-	private String replyText = "Brand new reply";
-
 	/*
 	 * TestCase001 Open random wiki page as anonymous user add category Verify
 	 * category is added
@@ -130,7 +124,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 * TestCase006 Open random wiki page as anonymous user edit it and add
 	 * category from source mode Verify category is properly added in visual
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_006", "" })
+	@Test(groups = { "CategoriesTestsAnonymous_006", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_006_addCategorySourceModeTransitionToVisual() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String categoryName = "test" + wiki.getTimeStamp();
@@ -152,7 +146,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 * TestCase007 Open random wiki page as anonymous user edit it and add
 	 * category from visaul mode Verify category is properly added in source
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_007", "" })
+	@Test(groups = { "CategoriesTestsAnonymous_007", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_007_addCategoryVisualModeTransitionToSource() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String categoryName = "test" + wiki.getTimeStamp();
