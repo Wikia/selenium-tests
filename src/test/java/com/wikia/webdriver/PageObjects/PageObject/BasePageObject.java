@@ -5,8 +5,10 @@ import static org.testng.AssertJUnit.fail;
 import java.util.Date;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
@@ -1063,4 +1065,30 @@ public class BasePageObject{
 		waitForElementByElement(modalLoginForm);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
+	
+	public void checkJSalertIsNotThere(String alertMessage) {
+
+	    try 
+	    { 
+	    	Thread.sleep(1000);
+	    	Alert alert =  driver.switchTo().alert(); 
+	    	if (alert.getText().equals(alertMessage)) {
+	    		alert.accept();
+	    		PageObjectLogging.log("checkJSalertIsNotThere", "JS alert found", false, driver);	 
+			}
+	       else {
+	    	   alert.accept();
+	    	   PageObjectLogging.log("checkJSalertIsNotThere", "JS alert found, and it has unexpected message: "+alert.getText()+" while it should be: "+alertMessage, false, driver);	        			
+		
+	       } 
+	    }  
+	    catch (NoAlertPresentException Ex) 
+	    { 
+	    	PageObjectLogging.log("checkJSalertIsNotThere", "JS alert not found", true, driver);	    	
+	    } 
+	    catch (InterruptedException e) {
+			
+		}  	
+	
+}
 } 

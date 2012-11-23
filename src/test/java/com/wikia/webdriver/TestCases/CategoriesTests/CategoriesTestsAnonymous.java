@@ -162,6 +162,28 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article = articleEdit.clickOnPublishButton();
 		article.categories_verifyCategoryAdded(categoryName);
 	}
+	
+	/*
+	 * TestCase008 Open random wiki page as anonymous user edit it and add
+	 * to category area js popup code: <script> alert("CategoriesTest"); </script>
+	 */
+	@Test(groups = { "CategoriesTestsAnonymous_008", "CategoriesTestsAnonymous" })
+	public void CategoriesTestsAnonymous_008_addJSpopupSourceModeJSprevention() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String JSalert = "<script> alert(\"CategoriesTest\"); </script>";
+		String JSalertMessage = "CategoriesTest";
+		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver,
+				Global.DOMAIN, "random");
+		article.openRandomArticle();
+		WikiArticleEditMode articleEdit = article.clickEditButton("");
+		articleEdit.clickOnSourceButton();
+		articleEdit.categories_addCategorySourceEditMode(JSalert);
+		articleEdit.categories_verifyCategoryAddedSourceEditMode(JSalert);
+		articleEdit.clickOnVisualButtonAndCheckJSalertNotThere(JSalertMessage);	
+		article = articleEdit.clickOnPublishButtonAndCheckJSalertNotThere(JSalertMessage);	
+	}
+	
 	// articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);
 
 }

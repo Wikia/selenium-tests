@@ -281,6 +281,17 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		
 	}
 	
+	public void clickOnVisualButtonAndCheckJSalertNotThere(String alertMessage) {
+		waitForElementByElement(visualModeButton);
+		waitForElementClickableByElement(visualModeButton);
+		clickAndWait(visualModeButton);
+		//The potential alert must be served right after alert-sensitive action:  
+		//The alert check must come right after the action that might cause it. If it appear anywhere later, the potential alert will not be served. 
+		checkJSalertIsNotThere(alertMessage);
+		waitForElementByElement(iFrame);
+		PageObjectLogging.log("clickOnVisualButtonAndCheckJSalertNotThere", "Click on 'Visual' button and check there is no JS alert", true, driver);	
+	}
+	
 	/**
 	 * Delete all source code on the article
 	 *  
@@ -321,6 +332,21 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
 	
+		return new WikiArticlePageObject(driver, Domain, articlename);
+	}
+	/**
+	 * Click  on Publish button
+	 *  
+	 * @author Michal Nowierski
+	 */
+	public WikiArticlePageObject clickOnPublishButtonAndCheckJSalertNotThere(String alertMessage) {
+		waitForElementByElement(publishButtonGeneral);
+		waitForElementClickableByElement(publishButtonGeneral);
+		clickAndWait(publishButtonGeneral);
+		checkJSalertIsNotThere(alertMessage);
+		waitForElementByElement(editButton);
+		PageObjectLogging.log("clickOnPublishButtonAndCheckJSalertNotThere", "Click on 'Publish' button and check there is no JS alert", true, driver);
+		
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 	
@@ -1149,6 +1175,12 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		}
 		
 	}
+
+
+
+
+
+
 
 
 
