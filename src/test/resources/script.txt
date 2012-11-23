@@ -1,0 +1,38 @@
+<script>
+function createToc()
+{
+	var h1 = $('td h1');
+	var l = h1.length;
+	var toc = "<ul>";
+	for (var i=0; i<l; i++){
+		var ident = "toc"+i;
+		var tr = h1[i].parentNode.parentNode;
+		h1[i].setAttribute('id', ident);
+		if (tr.style.backgroundColor == "red")
+		{
+			var temp = "<li><a style=\"color:red;\" href='#" + ident + "' >" + h1[i].textContent + "</a></li>";
+		}
+		else
+		{
+			var temp = "<li><a href='#" + ident + "' >" + h1[i].textContent + "</a></li>";
+		}
+		toc += temp;
+	}
+	toc+="</ul>";
+	var tocWrapper = document.getElementById('toc');
+	console.log(toc);
+	tocWrapper.innerHTML += toc;
+}
+function markMethodAsFailed()
+{
+	var a = $('table tr.error').parent();
+	var l = a.length;
+	for (var i=0; i<l; i++)
+	{
+		var b = a[i].children[0];
+		b.style.backgroundColor = "red";
+	}
+}
+window.addEventListener("load", markMethodAsFailed);
+window.addEventListener("load", createToc);
+</script>

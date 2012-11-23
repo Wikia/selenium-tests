@@ -3,10 +3,13 @@ package com.wikia.webdriver.Common.Logging;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,14 +44,15 @@ public class PageObjectLogging implements WebDriverEventListener {
 		Dimension dim = toolkit.getScreenSize();
 
 		String l1 = "<html><style>table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) {width:100px;}tr.success{color:black;background-color:#CCFFCC;}tr.error{color:black;background-color:#FFCCCC;}tr.step{color:white;background:grey}</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><style>td { border-top: 1px solid grey; } </style></head><body>";
-		String l2 = "<p>Date: " + dateFormat.format(date) + " UTC</p>";
-		String l3 = "<p>Browser: " + Global.BROWSER + "</p>";
-		String l4 = "<p>OS: " + System.getProperty("os.name") + "</p>";
-		String l5 = "<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>";
-		String l6 = "<p>Testing environment: "+ Global.DOMAIN+"</p>";
-		String l7 = "<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>";
-		String l8 = "<p>Tested version: "+ Global.WIKI_VERSION+"</p>";
-		
+		String l2 = "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>";
+		String l3 = "<p>Date: " + dateFormat.format(date) + " UTC</p>";
+		String l4 = "<p>Browser: " + Global.BROWSER + "</p>";
+		String l5 = "<p>OS: " + System.getProperty("os.name") + "</p>";
+		String l6 = "<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>";
+		String l7 = "<p>Testing environment: "+ Global.DOMAIN+"</p>";
+		String l8 = "<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>";
+		String l9 = "<p>Tested version: "+ Global.WIKI_VERSION+"</p>";
+		String l10 = "<div id='toc'></div>";
 		CommonUtils.appendTextToFile(logPath, l1);
 		CommonUtils.appendTextToFile(logPath, l2);
 		CommonUtils.appendTextToFile(logPath, l3);
@@ -57,6 +61,18 @@ public class PageObjectLogging implements WebDriverEventListener {
 		CommonUtils.appendTextToFile(logPath, l6);
 		CommonUtils.appendTextToFile(logPath, l7);
 		CommonUtils.appendTextToFile(logPath, l8);
+		CommonUtils.appendTextToFile(logPath, l9);
+		CommonUtils.appendTextToFile(logPath, l10);
+		try{
+			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
+			String content = IOUtils.toString(input);
+			CommonUtils.appendTextToFile(logPath, content);
+		}
+		catch(IOException e)
+		{
+			System.out.println("no script.txt file available");
+		}
+		
 	}
 	
 
@@ -66,10 +82,9 @@ public class PageObjectLogging implements WebDriverEventListener {
 	}
 
 	public static void startLoggingMethod(String className, String methodName) {
-		String l1 = "<h1>Class: <em>" + className + "." + methodName
-				+ "</em></h1>";
-		String l2 = "<table>";
-		String l3 = "<tr class=\"step\"><td>&nbsp</td><td>START LOGGING METHOD</td><td> <br/> &nbsp;</td></tr>";
+		String l1 = "<table>";
+		String l2 = "<h1>Class: <em>" + className + "." + methodName+ "</em></h1>";
+		String l3 = "<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + className + "." + methodName+ "</em></h1></td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, l1);
 		CommonUtils.appendTextToFile(logPath, l2);
 		CommonUtils.appendTextToFile(logPath, l3);
