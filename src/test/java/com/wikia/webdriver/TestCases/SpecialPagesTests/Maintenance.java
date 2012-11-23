@@ -13,8 +13,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
 
-import freemarker.core.ReturnInstruction.Return;
-
 public class Maintenance extends TestTemplate{
 	
 	
@@ -90,14 +88,12 @@ public class Maintenance extends TestTemplate{
 		return al.iterator();
 	}	
 	
-	@Test(dataProvider="getSpecialUrl")
+	@Test(dataProvider="getSpecialUrl", groups = {"SpecialPagesAnon","SpecialPages"})
 	public  void maintenancePageAnon(String[] url)
 	{
 		BasePageObject base = new BasePageObject(driver);
-//		for (String u:url)
 		for (int i=0; i<url.length; i+=2)
 		{
-//			String tmp = urlToPageTitle(u);
 			base.getUrl(Global.DOMAIN + "wiki/"+url[i]);
 			base.waitForElementByXPath("//h1[contains(text(), '"+url[i+1]+"')]");
 		}
