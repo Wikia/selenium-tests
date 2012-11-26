@@ -92,7 +92,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 	}
 
 	public static void stopLoggingMethod() {
-		String l1 = "<tr class=\"step\"><td>&nbsp</td><td>STOP LOGGING METHOD</td><td> <br/> &nbsp;</td></tr>";
+		String l1 = "<tr class=\"step\"><td>&nbsp</td><td>STOP LOGGING METHOD  <div style=\"text-align:center\"> <a href=\"#toc\" style=\"color:blue\"><b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>";
 		String l2 = "</table>";
 		CommonUtils.appendTextToFile(logPath, l1);
 		CommonUtils.appendTextToFile(logPath, l2);
