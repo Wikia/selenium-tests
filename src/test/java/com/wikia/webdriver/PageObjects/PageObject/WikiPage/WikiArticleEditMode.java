@@ -35,7 +35,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement visualModeIFrame;
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
-	@FindBy(css="textarea.yui-ac-input")
+	@FindBy(css="#wpTextbox1")
 	private WebElement messageSourceModeTextArea;
 	@FindBy(css="div.cke_wrapper.cke_ltr div.cke_contents iframe")
 	private WebElement iFrame;
