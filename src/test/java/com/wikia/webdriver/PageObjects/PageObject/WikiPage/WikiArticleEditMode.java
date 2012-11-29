@@ -25,8 +25,6 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 
 public class WikiArticleEditMode extends WikiBasePageObject {
 
-	protected String articlename;
-
 	@FindBy(css="div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
 	@FindBy(css="textarea[id='ImageUploadCaption']")
@@ -51,8 +49,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement publishButtonPreview;
 	@FindBy(css="span.cke_button_ModeSource a")
 	private WebElement sourceModeButton;
-	@FindBy(css="input.control-button")
-	private WebElement publishButtonGeneral;
 	@FindBy(css="span.RTEMediaOverlayEdit")
 	private WebElement modifyButton;
 	@FindBy(css="span.RTEMediaOverlayDelete")
@@ -257,14 +253,14 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 *  
 	 * @author Michal Nowierski
 	 */
-	public void clickOnSourceButton() {
+	public WikiArticleSourceEditMode clickOnSourceButton() {
 		waitForElementByElement(sourceModeButton);
 		waitForElementClickableByElement(sourceModeButton);
 		clickAndWait(sourceModeButton);
 //		jQueryClick("span.cke_button_ModeSource a");
 		waitForElementByElement(sourceModeTextArea);
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
-		
+		return new WikiArticleSourceEditMode(driver, this.Domain);
 	}
 	
 	/**
@@ -320,35 +316,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		PageObjectLogging.log("writeSourceMode", "Write in source mode: "+source, true, driver);		
 	}
 
-	/**
-	 * Click  on Publish button
-	 *  
-	 * @author Michal Nowierski
-	 */
-	public WikiArticlePageObject clickOnPublishButton() {
-		waitForElementByElement(publishButtonGeneral);
-		waitForElementClickableByElement(publishButtonGeneral);
-		clickAndWait(publishButtonGeneral);
-		waitForElementByElement(editButton);
-		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
-	
-		return new WikiArticlePageObject(driver, Domain, articlename);
-	}
-	/**
-	 * Click  on Publish button
-	 *  
-	 * @author Michal Nowierski
-	 */
-	public WikiArticlePageObject clickOnPublishButtonAndCheckJSalertNotThere(String alertMessage) {
-		waitForElementByElement(publishButtonGeneral);
-		waitForElementClickableByElement(publishButtonGeneral);
-		clickAndWait(publishButtonGeneral);
-		checkJSalertIsNotThere(alertMessage);
-		waitForElementByElement(editButton);
-		PageObjectLogging.log("clickOnPublishButtonAndCheckJSalertNotThere", "Click on 'Publish' button and check there is no JS alert", true, driver);
-		
-		return new WikiArticlePageObject(driver, Domain, articlename);
-	}
 	
 	public WikiArticlePageObject clickOnPublishButtonPreview() {
 		waitForElementByElement(publishButtonPreview);

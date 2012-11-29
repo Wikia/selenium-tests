@@ -24,7 +24,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObject;
 
 public class WikiBasePageObject extends BasePageObject {
-	protected String Domain;
+	
 
 	@FindBy(css="span.drop")
 	private WebElement contributeButton;
@@ -49,9 +49,6 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(xpath="//div[@class='msg' and contains(text(), 'The comment has been deleted.')]")
 	private WebElement deleteCommentConfirmationMessage;
-	
-	@FindBy(css="a#ca-edit")
-	protected WebElement editButton;
 	
 	@FindBy(css="a[data-canonical='random']")
 	private WebElement randomPageButton;

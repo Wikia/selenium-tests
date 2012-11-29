@@ -25,6 +25,7 @@ import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
 
 /**
  * 
@@ -39,6 +40,10 @@ public class BasePageObject{
 	public String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 		
 	protected int timeOut = 30;
+
+	protected String Domain;
+	
+	protected String articlename;
 	
 	public WebDriverWait wait;
 
@@ -60,6 +65,10 @@ public class BasePageObject{
 	WebElement customizeToolbar_MyToolsMenuButton;
 	@FindBy(css="ul[id='my-tools-menu']")
 	WebElement customizeToolbar_MyToolsMenu;
+	@FindBy(css="input.control-button")
+	private WebElement publishButtonGeneral;
+	@FindBy(css="a#ca-edit")
+	protected WebElement editButton;
 	
 	@FindBy(css="form.WikiaSearch")
 	WebElement wikiaSearch_searchForm;
@@ -77,6 +86,38 @@ public class BasePageObject{
 
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
+	}
+	
+	/**
+	 * Click  on Publish button
+	 *  
+	 * @author Michal Nowierski
+	 */
+	public WikiArticlePageObject clickOnPublishButton() {
+		waitForElementByElement(publishButtonGeneral);
+		waitForElementClickableByElement(publishButtonGeneral);
+		clickAndWait(publishButtonGeneral);
+		waitForElementByElement(editButton);
+		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
+	
+		return new WikiArticlePageObject(driver, Domain, articlename);
+	}
+	
+
+	/**
+	 * Click  on Publish button
+	 *  
+	 * @author Michal Nowierski
+	 */
+	public WikiArticlePageObject clickOnPublishButtonAndCheckJSalertNotThere(String alertMessage) {
+		waitForElementByElement(publishButtonGeneral);
+		waitForElementClickableByElement(publishButtonGeneral);
+		clickAndWait(publishButtonGeneral);
+		checkJSalertIsNotThere(alertMessage);
+		waitForElementByElement(editButton);
+		PageObjectLogging.log("clickOnPublishButtonAndCheckJSalertNotThere", "Click on 'Publish' button and check there is no JS alert", true, driver);
+		
+		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 	
 
@@ -348,6 +389,12 @@ public class BasePageObject{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String executeScriptRet(String script)
+	{
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		return (String) js.executeScript("return "+script);
 	}
 	
 	protected void executeScript(String script, WebDriver driver)
