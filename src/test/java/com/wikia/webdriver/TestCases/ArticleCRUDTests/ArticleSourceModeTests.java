@@ -62,7 +62,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test
+	@Test(groups={"RTE_extended"})
 	public void RTE_005_HeadLine(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -88,7 +88,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test
+	@Test(groups={"RTE_extended"})
 	public void RTE_007_EmbedMedia(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -114,7 +114,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test
+	@Test(groups={"RTE_extended"})
 	public void RTE_009_Nowiki(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -127,7 +127,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test
+	@Test(groups={"RTE_extended"})
 	public void RTE_010_Signature(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
