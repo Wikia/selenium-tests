@@ -100,6 +100,12 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 		PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
 	}
 	
+	public void clickLvl2Headline(){
+		focusTextArea();
+		lvl2headLine.click();
+		PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
+	}
+	
 	public void clickEmbedFile(){
 		focusTextArea();
 		embedFile.click();
