@@ -192,7 +192,7 @@ public class HubBasePageObject extends BasePageObject{
 		WebElement MosaicSliderLargeImageDesc = driver.findElement(MosaicSliderLargeImageDescription);
 		waitForElementByElement(MosaicSliderLargeImageDesc);
 		String description = MosaicSliderLargeImageDesc.getText();
-		PageObjectLogging.log("MosaicSliderGetCurrentLargeImageDescription", "Get description of current LargeImage on Mosaic Slider", true, driver);
+		PageObjectLogging.log("MosaicSliderGetCurrentLargeImageDescription", "description of current LargeImage on Mosaic Slider is: <b>"+ description +"</b>", true, driver);
 		return description;
 	}
 	
