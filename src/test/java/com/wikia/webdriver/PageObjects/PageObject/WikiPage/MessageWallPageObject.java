@@ -296,7 +296,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	
 	public void verifyPostedMessageWithoutTitle(String userName, String message)
 	{
-		
 		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), 'Message from "+userName+"')]");
 		waitForElementByXPath("//div[@class='msg-body']/p[contains(text(), '"+message+"')]");
 		PageObjectLogging.log("verifyPostedMessageWithTitle", "message without title verified", true, driver);		

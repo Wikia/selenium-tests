@@ -731,19 +731,21 @@ public class CommonFunctions {
 						+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 						+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
+				PageObjectLogging.log("logInCookie", "login cookie procedure accomplished", true);
 				return xmlResponseArr[11];
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				PageObjectLogging.log("logInCookie", "UnsupportedEncodingException", false);
 				return null;
 			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				PageObjectLogging.log("logInCookie", "ClientProtocolException", false);
 				return null;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				PageObjectLogging.log("logInCookie", "IOException", false);
 				return null;
+			} catch (Exception e) {
+				PageObjectLogging.log("logInCookie", e.getClass().getCanonicalName(), false);
+				return null;
+				
 			}
 		}
 		
