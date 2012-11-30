@@ -178,7 +178,7 @@ public class HubBasePageObject extends BasePageObject{
 //		waitForElementByElement(WikiaMosaicSliderThumbRegionImages.get(n-1));
 //		Point ImageLocation = WikiaMosaicSliderThumbRegionImages.get(n-1).getLocation();
 //		CommonFunctions.MoveCursorToElement(ImageLocation);
-		mouseOver("ul.wikia-mosaic-thumb-region li:nth-child("+n+")");
+		mouseOver("ul.wikia-mosaic-thumb-region li:nth-child("+n+") img");
 		PageObjectLogging.log("MosaicSliderHoverOverImage", "MosaicSlider: Hover over image number "+n, true, driver);
 		
 	}
