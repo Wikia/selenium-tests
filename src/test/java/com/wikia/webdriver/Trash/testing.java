@@ -9,6 +9,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 
 public class testing extends TestTemplate
 {
@@ -145,15 +146,12 @@ public class testing extends TestTemplate
 	@Test 
 	public void numbers()
 	{
-		int a = 7;
-		int b = 5;
-		for (int i=1; i<6; i++)
-		{
-			a = i*a;
-			b = b+i;
-		}
-
-		System.out.println(a+b);
+		WikiArticleEditMode e = new WikiArticleEditMode(driver, Global.DOMAIN, "");
+		e.editArticleByName("QAarticle1346923033271");
+		e.clickOnSourceButton();
+		WebElement el = driver.findElement(By.cssSelector(".cke_source"));
+		el.clear();
+		el.sendKeys("aaa");
 	}
 		
 //		BasePageObject b = new BasePageObject(driver);

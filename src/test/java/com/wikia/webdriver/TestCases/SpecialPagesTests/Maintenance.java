@@ -80,7 +80,7 @@ public class Maintenance extends TestTemplate{
 
 	
 	@DataProvider
-	private static final Iterator<Object[]> getSpecialUrl()
+	private static final Iterator<Object[]> getSpecialUrlAnonAvailable()
 	{
 		String[] urls = specialAnonUrl();
 		ArrayList al = new ArrayList();
@@ -88,8 +88,8 @@ public class Maintenance extends TestTemplate{
 		return al.iterator();
 	}	
 	
-	@Test(dataProvider="getSpecialUrl", groups = {"SpecialPagesAnon","SpecialPages"})
-	public  void maintenancePageAnon(String[] url)
+	@Test(dataProvider="getSpecialUrlAnonAvailable", groups = {"SpecialPagesAnon","SpecialPages"})
+	public  void availableAnon(String[] url)
 	{
 		BasePageObject base = new BasePageObject(driver);
 		for (int i=0; i<url.length; i+=2)
@@ -97,8 +97,5 @@ public class Maintenance extends TestTemplate{
 			base.getUrl(Global.DOMAIN + "wiki/"+url[i]);
 			base.waitForElementByXPath("//h1[contains(text(), '"+url[i+1]+"')]");
 		}
-		
-		
 	}
-
 }
