@@ -81,6 +81,10 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 	public void checkSourceContent(String desiredContent){
 		CommonFunctions.assertString(desiredContent, getSourceContent());
 	}
+	
+	public void checkSourceVideoContent(String desiredContent){		
+		CommonFunctions.assertString(desiredContent.substring(1, 38) + desiredContent.substring(48), getSourceContent().substring(1, 38) + getSourceContent().substring(48));
+	}
 
 	
 	public void clickBold(){

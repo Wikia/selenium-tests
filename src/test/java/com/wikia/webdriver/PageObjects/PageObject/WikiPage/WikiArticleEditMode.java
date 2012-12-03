@@ -55,8 +55,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement cancelImageRemovalButton;
 	@FindBy(css="a[id='RTEConfirmOk']")
 	private WebElement oKbutton;
-	@FindBy(css="input[id='VideoEmbedCaption']")
-	private WebElement videoCaptionTextArea;
 	@FindBy(css="img.video")
 	private WebElement videoInEditMode;
 	@FindBy(css="div.ArticlePreview span.Wikia-video-play-button")
@@ -143,17 +141,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		return new WikiArticleEditMode(driver, Domain, name);
 	}
 	
-	/**
-	 * Type given caption for the video
-	 *  
-	 * @author Michal Nowierski
-	 */
-	public void typeVideoCaption(String caption) {
-		waitForElementByElement(videoCaptionTextArea);
-		videoCaptionTextArea.clear();
-		videoCaptionTextArea.sendKeys(caption);
-		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo", true, driver);
-	}
+	
 
 
 

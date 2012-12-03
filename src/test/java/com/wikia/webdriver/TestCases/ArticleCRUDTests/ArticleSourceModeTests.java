@@ -12,6 +12,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleSourceEdit
 public class ArticleSourceModeTests extends TestTemplate{
 	
 	private String caption = "QAWebdriverCaption1";
+	private String videoURL = "https://www.youtube.com/watch?v=QE32HghV8-I";
 	
 	@Test(groups={"RTE_extended"})
 	public void RTE_001_Bold(){
@@ -236,4 +237,22 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
+	@Test(groups={"RTE_extended"})
+	public void RTE_016_Video(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.clearSource();
+		source.clickAddVideo();
+		source.waitForVideoModalAndTypeVideoURL(videoURL);
+		source.clickVideoNextButton();
+		source.waitForVideoDialog();
+		source.typeVideoCaption(caption);
+		source.clickAddAvideo();
+		source.waitForSuccesDialogAndReturnToEditing();
+		source.checkSourceVideoContent("[[File:WikiEvolution - Poznańska Wiki-1354533479|thumb|right|335px|"+caption+"]]");
+		source.clickOnPublishButton();		
+	}
 }

@@ -112,6 +112,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "a[id='WikiaPhotoGalleryEditorSave']")
 	private WebElement galleryDialogFinishButton;
+	
+	@FindBy(css="input[id='VideoEmbedCaption']")
+	private WebElement videoCaptionTextArea;
 
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
@@ -133,6 +136,18 @@ public class WikiBasePageObject extends BasePageObject {
 		return Domain;
 	}
 
+	/**
+	 * Type given caption for the video
+	 *  
+	 * @author Michal Nowierski
+	 */
+	public void typeVideoCaption(String caption) {
+		waitForElementByElement(videoCaptionTextArea);
+		videoCaptionTextArea.clear();
+		videoCaptionTextArea.sendKeys(caption);
+		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo", true, driver);
+	}
+	
 	/**
 	 * Set photo orientation option number n
 	 * 
