@@ -6,9 +6,12 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleSourceEditMode;
 
 public class ArticleSourceModeTests extends TestTemplate{
+	
+	private String caption = "QAWebdriverCaption1";
 	
 	@Test(groups={"RTE_extended"})
 	public void RTE_001_Bold(){
@@ -151,5 +154,86 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickHorizontalLine();
 		source.checkSourceContent("\n----\n");
 		source.clickOnPublishButton();
+	}
+	
+	@Test(groups={"RTE_extended"})
+	public void RTE_012_Photo(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.clearSource();
+		source.clickAddPhoto();
+		source.waitForModalAndClickAddThisPhoto();
+		source.typePhotoCaption(caption);
+		source.clickOnAddPhotoButton2();
+		source.checkSourceContent("[[File:Image010.jpg|thumb|"+caption+"]]");
+		source.clickOnPublishButton();
 	}	
+	
+	@Test(groups={"RTE_extended"})
+	public void RTE_013_Slideshow(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.clearSource();
+		source.clickAddGallery();
+		source.verifyComponentSelector();
+		source.addComponent("slideshow");
+		source.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
+		source.searchImageInLightBox("image");
+		source.galleryCheckImageInputs(4);
+		source.galleryClickOnSelectButton();
+		source.gallerySetPositionSlideshow("Center");
+		source.galleryClickOnFinishButton();
+		source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		source.clickOnPublishButton();
+	}
+	
+	@Test(groups={"RTE_extended"})
+	public void RTE_014_Gallery(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.clearSource();
+		source.clickAddGallery();
+		source.verifyComponentSelector();
+		source.addComponent("gallery");
+		source.waitForObjectModalAndClickAddAphoto("Gallery");
+		source.searchImageInLightBox("image");
+		source.galleryCheckImageInputs(4);
+		source.galleryClickOnSelectButton();
+		source.gallerySetPositionGallery("Center");
+		source.gallerySetPhotoOrientation(2);
+		source.galleryClickOnFinishButton();
+		source.checkSourceContent("<gallery position=\"center\" orientation=\"square\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		source.clickOnPublishButton();
+	}
+	
+	@Test(groups={"RTE_extended"})
+	public void RTE_015_Slider(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.clearSource();
+		source.clickAddGallery();
+		source.verifyComponentSelector();
+		source.addComponent("slider");
+		source.waitForObjectModalAndClickAddAphoto("GallerySlider");
+		source.searchImageInLightBox("image");
+		source.galleryCheckImageInputs(4);
+		source.galleryClickOnSelectButton();
+		source.gallerySetSliderPosition(2);
+		source.galleryClickOnFinishButton();
+		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		source.clickOnPublishButton();
+	}
+	
 }

@@ -27,8 +27,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 
 	@FindBy(css="div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
-	@FindBy(css="textarea[id='ImageUploadCaption']")
-	private WebElement captionTextArea;
 	@FindBy(css="div.cke_skin_wikia.visible div.cke_contents iframe")
 	private WebElement visualModeIFrame;
 	@FindBy(css=".cke_source")
@@ -57,12 +55,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement cancelImageRemovalButton;
 	@FindBy(css="a[id='RTEConfirmOk']")
 	private WebElement oKbutton;
-	@FindBy(css="section[id='WikiaPhotoGalleryEditor']")
-	private WebElement objectModal;
-	@FindBy(css="a[id='WikiaPhotoGallerySearchResultsSelect']")
-	private WebElement galleryDialogSelectButton;
-	@FindBy(css="a[id='WikiaPhotoGalleryEditorSave']")
-	private WebElement galleryDialogFinishButton;
 	@FindBy(css="input[id='VideoEmbedCaption']")
 	private WebElement videoCaptionTextArea;
 	@FindBy(css="img.video")
@@ -75,10 +67,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement imageOnPreview;
 	@FindBy(css="body[id='bodyContent']")
 	private WebElement bodyContent;
-	@FindBy(css="input[name='search'][placeholder='Search photos on this wiki']")
-	private WebElement searchFieldImageInLightBox;
-	@FindBy(css="img.sprite.search")
-	private WebElement searchButtonImageInLightBox;
 	@FindBy(css="span.cke_button_table a")
 	private WebElement tableButton;
 	@FindBy(css="div.cke_dialog.modalWrapper")
@@ -98,9 +86,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private By videoOnArticleEditMode = By.cssSelector("img.video");
 	private By slideShowOnArticleEditMode = By.cssSelector("img.image-slideshow");
 	private By sliderOnArticleEditMode = By.cssSelector("img.image-gallery-slider");
-	private By galleryDialogPhotosList = By.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
-	private By galleryDialogPhotoOrientationsList = By.cssSelector("ul.clearfix[id='WikiaPhotoGalleryOrientation'] li");
-	private By galleryDialogSlideshowOrientationsList = By.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
 	
 	private By contextMenuIframeList = By.cssSelector("iframe[aria-label='Context Menu Options']");
 	private By contextMenuOptionsList = By.cssSelector("span.cke_menuitem a");
@@ -147,23 +132,16 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	}
 
 
+	/**
+	 * @author Karol Kujawiak
+	 * @param name
+	 * @return WikiArticleByName
+	 */
 	public WikiArticleEditMode editArticleByName(String name)
 	{
 		getUrl(Global.DOMAIN + "wiki/"+name+"?action=edit");
 		return new WikiArticleEditMode(driver, Domain, name);
 	}
-
-	/**
-	 * Type given caption for the photo
-	 *  
-	 * @author Michal Nowierski
-	 */
-	public void typePhotoCaption(String caption) {
-		waitForElementByElement(captionTextArea);
-		captionTextArea.clear();
-		captionTextArea.sendKeys(caption);
-		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo", true, driver);
-		}
 	
 	/**
 	 * Type given caption for the video
@@ -531,70 +509,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		
 	}
 
-	/**
-	 * Wait for Object and click on 'add this photo' under the first seen
-	 *  
-	 * @author Michal Nowierski
-	 * @param Object Object = {Gallery, GallerySlideshow, GallerySlider}
-	 * 	 */
-	public void waitForObjectModalAndClickAddAphoto(String Object) {
-		waitForElementClickableByBy(By.cssSelector("button[id='WikiaPhoto"+Object+"AddImage']"));
-		clickAndWait(driver.findElement(
-				By.cssSelector("button[id='WikiaPhoto"+Object+"AddImage']")));
-		PageObjectLogging.log("WaitForObjectModalAndClickAddAphoto", "Wait for "
-				+ Object
-				+ " modal and click on 'add a photo'", true, driver);
-		waitForElementByElement(objectModal);
-	}
-
-	/**
-	 * Wait for Object and click on 'add this photo' under the first seen
-	 *  
-	 * @author Michal Nowierski
-	 * @param n n = parameter determining how many inputs the method should check
-	 * 	 */
-	public void galleryCheckImageInputs(int n) {
-		driver.findElement(galleryDialogPhotosList);
-		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
-		for (int i = 0; i < n; i++) {
-			clickAndWait(List.get(i));
-		}
-		PageObjectLogging.log("CheckGalleryImageInputs", "Check first "+n+" image inputs", true, driver);
-	}
 	
-	public void searchImageInLightBox(String imageName)
-	{
-		waitForElementByElement(searchFieldImageInLightBox);
-		searchFieldImageInLightBox.sendKeys(imageName);
-		clickAndWait(searchButtonImageInLightBox);
-		waitForElementByElement(searchButtonImageInLightBox);
-	}
-	/**
-	 * Gallery dialog: Left click 'Select' button
-	 *  
-	 * @author Michal Nowierski
-	 * 	 */
-	public void galleryClickOnSelectButton() {
-		waitForElementByElement(galleryDialogSelectButton);
-		waitForElementClickableByElement(galleryDialogSelectButton);
-		clickAndWait(galleryDialogSelectButton);
-		PageObjectLogging.log("GalleryClickOnSelectButton", "Gallery dialog: Left click 'Select' button", true, driver);
-		
-	}
-
-	
-	/**
-	 * Gallery dialog: Left click 'Finish' button 
-	 *  
-	 * @author Michal Nowierski
-	 * 	 */
-	public void galleryClickOnFinishButton() {
-		waitForElementByElement(galleryDialogFinishButton);
-		waitForElementClickableByElement(galleryDialogFinishButton);
-		clickAndWait(galleryDialogFinishButton);
-		PageObjectLogging.log("GalleryClickOnFinishButton", "Gallery dialog: Left click 'Finish' button ", true, driver);
-		
-	}
 
 	/**
 	 * Verify Gallery object appears in edit mode
@@ -659,69 +574,8 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 			
 	}
 
-	/**
-	 * Set photo orientation option number n
-	 *  
-	 * @author Michal Nowierski
-	 * @param n = {1,2,3,4} <p> 1 - Original.<p> 2 - Square.<p> 3 - Landscape.<p> 4 - Portrait
-	 * 	 */
-	public void gallerySetPhotoOrientation(int n) {
-		List<WebElement> List = driver.findElements(galleryDialogPhotoOrientationsList);
-		waitForElementByElement(List.get(n-1));
-		clickAndWait(List.get(n-1));
-		PageObjectLogging.log("GallerySetPhotoOrientation", "Set photo orientation option number "+n, true, driver);
-				
-	}
 
-	/**
-	 * Set Object position to the wanted one
-	 *  
-	 * @author Michal Nowierski
-	 * @param Object {Gallery, Slideshow} 
-	 * @param WantedPosition = {Left, Center, Right} !CASE SENSITIVITY!
-	 * 	 * 	 */
-	public void gallerySetPositionGallery(String WantedPosition) {
-				
-		Select select = new Select(driver.findElement(By.cssSelector("select[id='WikiaPhotoGalleryEditorGalleryPosition']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-		
-	}
-		PageObjectLogging.log("GallerySetPosition", "Set gallery position to "+WantedPosition, true, driver);
-		}
-	
-	public void gallerySetPositionSlideshow(String WantedPosition) {
-		
-		Select select = new Select(driver.findElement(By.cssSelector("select[id='WikiaPhotoGalleryEditorSlideshowAlign']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-		
-	}
-		PageObjectLogging.log("GallerySetPosition", "Set slideshow position to "+WantedPosition, true, driver);
-		}
 
-	/**
-	 * Set photo orientation option number n
-	 *  
-	 * @author Michal Nowierski
-	 * @param n = {1, 2} <p> 1 - Horizontaal.<p> 2 - Vertical
-	 * 	 */
-	public void gallerySetSliderPosition(int n) {
-		List<WebElement> List = driver.findElements(galleryDialogSlideshowOrientationsList);
-		waitForElementByElement(List.get(n-1));
-		clickAndWait(List.get(n-1));
-		PageObjectLogging.log("GallerySetSliderPosition", "Set photo orientation option number "+n, true, driver);
-		
-		
-	}
 
 
 

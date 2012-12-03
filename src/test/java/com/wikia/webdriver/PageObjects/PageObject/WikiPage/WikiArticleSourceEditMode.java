@@ -45,6 +45,14 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 	private WebElement video;
 	@FindBy(css=".cke_toolbar_source .cke_toolbar_expand")
 	private WebElement more;
+	@FindBy(css="section#WikiaPhotoGalleryEditor")
+	private WebElement componentSelector;
+	@FindBy(css="a.wikia-button[type='2']")
+	private WebElement createSlideshow;
+	@FindBy(css="a.wikia-button[type='1']")
+	private WebElement createGallery;
+	@FindBy(css="a.wikia-button[type='3']")
+	private WebElement createSlider;
 	
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
@@ -160,8 +168,37 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 		PageObjectLogging.log("clickAddVideo", "add video button was clicked", true, driver);
 	}
 	
-	public void clearSource()
-	{
+	public void clearSource(){
 		sourceModeTextArea.clear();
+		PageObjectLogging.log("clearSource", "source area erased", true, driver);
 	}
+	
+	public void verifyComponentSelector()
+	{
+		waitForElementByElement(componentSelector);
+		PageObjectLogging.log("verifyComponentSelector", "component selector is visible", true, driver);
+	}
+	
+	public void addComponent(String componentName){
+		if (componentName.equals("slideshow")){
+			waitForElementByElement(createSlideshow);
+			createSlideshow.click();
+			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+		}
+		else if (componentName.equals("gallery")){
+			waitForElementByElement(createGallery);
+			createGallery.click();
+			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+		}
+		else if (componentName.equals("slider")){
+			waitForElementByElement(createSlider);
+			createSlider.click();
+			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+		}
+		else{
+			PageObjectLogging.log("addComponent", "not supported component name: "+componentName, false);
+		}
+	}
+	
+	
 }
