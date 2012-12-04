@@ -579,7 +579,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public WikiArticleEditMode clickEditButton(String pageName) {
 		clickAndWait(editButton);
-		PageObjectLogging.log("clickEditButton", "edit button clicked", true);
+		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
 		return new WikiArticleEditMode(driver, Domain, pageName);
 	}
 
