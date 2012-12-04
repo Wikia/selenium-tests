@@ -132,7 +132,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
 		article.openRandomArticle();
-		WikiArticleEditMode articleEdit = article.clickEditButton("");
+		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.clickOnSourceButton();
 		articleEdit.categories_addCategorySourceEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);

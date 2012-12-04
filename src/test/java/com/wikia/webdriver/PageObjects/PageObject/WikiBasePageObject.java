@@ -623,6 +623,14 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticleEditMode(driver, Domain, pageName);
 	}
 
+	public WikiArticleEditMode navigateToEditPage() {
+		String URL = getCurrentUrl();
+		String targetURL = URL+"?action=edit";
+		driver.navigate().to(targetURL);
+		PageObjectLogging.log("navigateToEditPage()", "navigating to edit page via URL", true, driver);
+		return new WikiArticleEditMode(driver, Domain, articlename);
+	}
+	
 	protected void clickDeleteButtonInDropDown() {
 		waitForElementByElement(deleteButton);
 		clickActions(deleteButton);
