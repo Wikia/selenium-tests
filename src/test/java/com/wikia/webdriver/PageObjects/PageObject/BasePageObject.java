@@ -97,7 +97,7 @@ public class BasePageObject{
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
 		clickAndWait(publishButtonGeneral);
-		executeScript("$('input.control-button').click()");
+		executeScript("document.querySelectorAll(\"input.control-button\")[0]");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
 	
