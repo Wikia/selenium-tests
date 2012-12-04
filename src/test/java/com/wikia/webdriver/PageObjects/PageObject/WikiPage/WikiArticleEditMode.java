@@ -109,25 +109,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		this.articlename = wikiArticle;
 		PageFactory.initElements(driver, this);
 	}
-	
-	
-	/**
-	 * Left Click on add Object button.
-	 *  
-	 * @author Michal Nowierski
-	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
-	 */
-	public void clickOnAddObjectButton(String Object) {
-		// TODO Auto-generated method stub
-		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
-		WebElement ObjectButton;
-		waitForElementByCss(ObjectCss);
-		waitForElementClickableByCss(ObjectCss);
-		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
-		clickAndWait(ObjectButton);
-		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
-		
-	}
 
 
 	/**

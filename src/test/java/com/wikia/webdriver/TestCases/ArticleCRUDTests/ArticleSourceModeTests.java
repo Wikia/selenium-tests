@@ -166,6 +166,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddPhoto();
+		source.searchForImage("image");
 		source.waitForModalAndClickAddThisPhoto();
 		source.typePhotoCaption(caption);
 		source.clickOnAddPhotoButton2();
