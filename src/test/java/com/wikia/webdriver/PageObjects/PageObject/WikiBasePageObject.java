@@ -466,7 +466,7 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true);
+				"random page button clicked", true, driver);
 	}
 
 	public void verifyEditDropDownAnonymous() {
