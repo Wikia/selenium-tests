@@ -97,6 +97,11 @@ public class BasePageObject{
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
 		clickAndWait(publishButtonGeneral);
+		if (publishButtonGeneral.isDisplayed())
+		{
+			PageObjectLogging.log("clickAndWait(publishButtonGeneral)", "publish button was clicked without efect", true);
+			executeScript("$('input.control-button').click()");
+		}
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
 	
