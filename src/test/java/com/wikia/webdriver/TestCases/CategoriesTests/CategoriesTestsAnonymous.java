@@ -134,8 +134,8 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article.openRandomArticle();
 		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.clickOnSourceButton();
-		articleEdit.categories_addCategorySourceEditMode(categoryName);
-		articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);
+		articleEdit.categories_addToCategorySourceEditMode("[[Category:"+categoryName+"]]");
+		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+categoryName+"]]");
 		articleEdit.clickOnVisualButton();
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		article = articleEdit.clickOnPublishButton();
@@ -158,7 +158,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		articleEdit.clickOnSourceButton();
-		articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);
+		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+categoryName+"]]");
 		article = articleEdit.clickOnPublishButton();
 		article.categories_verifyCategoryAdded(categoryName);
 	}
@@ -178,12 +178,33 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article.openRandomArticle();
 		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.clickOnSourceButton();
-		articleEdit.categories_addCategorySourceEditMode(JSalert);
+		articleEdit.categories_addToCategorySourceEditMode(JSalert);
 		articleEdit.categories_verifyCategoryAddedSourceEditMode(JSalert);
 		articleEdit.clickOnVisualButtonAndCheckJSalertNotThere(JSalertMessage);	
 		article = articleEdit.clickOnPublishButtonAndCheckJSalertNotThere(JSalertMessage);	
 	}
 	
-	// articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);
+//	/*
+//	 * TestCase009 verify if typing wrong category in edit mode is prevented
+//	 */
+//	@Test(groups = { "CategoriesTestsAnonymous_009", "CategoriesTestsAnonymous" })
+//	public void CategoriesTestsAnonymous_009_invalidCategoryInSourceModePrevention() {
+//		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+//		String categoryName = "test" + wiki.getTimeStamp();
+//		wiki.openWikiPage();
+//		WikiArticlePageObject article = new WikiArticlePageObject(driver,
+//				Global.DOMAIN, "random");
+//		article.openRandomArticle();
+//		WikiArticleEditMode articleEdit = article.navigateToEditPage();
+//		articleEdit.clickOnSourceButton();
+//		articleEdit.categories_addToCategorySourceEditMode("this is invalid source mode category syntax");
+//		articleEdit.categories_verifyCategoryAddedSourceEditMode("this is invalid source mode category syntax");
+//		articleEdit.clickOnVisualButton();
+//		//TODO: check if alert is send
+//		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
+//		article = articleEdit.clickOnPublishButton();
+//		article.categories_verifyCategoryAdded(categoryName);
+//	}
+//	// articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);
 
 }
