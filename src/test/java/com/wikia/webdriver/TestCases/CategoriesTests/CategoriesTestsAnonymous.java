@@ -178,8 +178,8 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article.openRandomArticle();
 		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.clickOnSourceButton();
-		articleEdit.categories_addToCategorySourceEditMode(JSalert);
-		articleEdit.categories_verifyCategoryAddedSourceEditMode(JSalert);
+		articleEdit.categories_addToCategorySourceEditMode("[[Category:"+JSalert+"]]");
+		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+JSalert+"]]");
 		articleEdit.clickOnVisualButtonAndCheckJSalertNotThere(JSalertMessage);	
 		article = articleEdit.clickOnPublishButtonAndCheckJSalertNotThere(JSalertMessage);	
 	}
