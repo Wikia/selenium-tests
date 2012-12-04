@@ -111,7 +111,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
 		article.openRandomArticle();
-		WikiArticleEditMode articleEdit = article.clickEditButton("");
+		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		// remmemeber name of added category
 		String categoryName = articleEdit
 				.categories_addSuggestedCategoryEditMode("t");
@@ -154,7 +154,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
 		article.openRandomArticle();
-		WikiArticleEditMode articleEdit = article.clickEditButton("");
+		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		articleEdit.clickOnSourceButton();
@@ -176,7 +176,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
 		article.openRandomArticle();
-		WikiArticleEditMode articleEdit = article.clickEditButton("");
+		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.clickOnSourceButton();
 		articleEdit.categories_addCategorySourceEditMode(JSalert);
 		articleEdit.categories_verifyCategoryAddedSourceEditMode(JSalert);
