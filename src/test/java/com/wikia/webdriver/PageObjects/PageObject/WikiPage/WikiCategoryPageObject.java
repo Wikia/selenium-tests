@@ -29,6 +29,7 @@ public class WikiCategoryPageObject extends WikiBasePageObject{
 		public void verifyCategoryContainsPage(String articleName) {
 			List<WebElement> lista  = driver.findElements(categories_listOfCategories);
 			Boolean result = false;
+			articleName = articleName.replaceAll("_", " ");
 			// there might be more than one category on a random page. Thus - loop over all of them.
 			for (WebElement webElement : lista) {
 				waitForElementByElement(webElement);		
