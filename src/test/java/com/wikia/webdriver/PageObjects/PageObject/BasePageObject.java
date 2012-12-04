@@ -98,7 +98,9 @@ public class BasePageObject{
 		waitForElementClickableByElement(publishButtonGeneral);
 		clickAndWait(publishButtonGeneral);
 		try{
-			executeScript("document.querySelectorAll(\"input.control-button\")[0].click()");			
+			Global.LOG_ENABLED = false;
+			executeScript("document.querySelectorAll(\"input.control-button\")[0].click()");
+			Global.LOG_ENABLED = true;
 		}
 		catch(Exception e){
 			PageObjectLogging.log("clickOnPublishButton", "script execution wasn't necessary", true);
