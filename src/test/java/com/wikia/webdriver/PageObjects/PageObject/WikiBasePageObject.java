@@ -614,22 +614,23 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public WikiArticleEditMode clickEditButton(String pageName) {
 		//two lines below prevent hubs drop-down on IE9
+		mouseOver("#GlobalNavigation li:nth(1)");
+		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(editButton);
 		waitForElementClickableByElement(editButton);
-		try{
-			CommonFunctions.scrollToElement(editButton);
-			mouseOver("#GlobalNavigation li:nth(1)");
-			mouseRelease("#GlobalNavigation li:nth(1)");
-			editButton.click();			
-		}
-		catch(TimeoutException e)
-		{
-			PageObjectLogging.log("clickAndWait", "page loaded for more then 30 seconds after click", true);
-		}
+		clickAndWait(editButton);
 		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
 		return new WikiArticleEditMode(driver, Domain, pageName);
 	}
 
+	public WikiArticleEditMode navigateToEditPage() {
+		String URL = getCurrentUrl();
+		String targetURL = URL+"?action=edit";
+		driver.navigate().to(targetURL);
+		PageObjectLogging.log("navigateToEditPage()", "navigating to edit page via URL", true, driver);
+		return new WikiArticleEditMode(driver, Domain, articlename);
+	}
+	
 	protected void clickDeleteButtonInDropDown() {
 		waitForElementByElement(deleteButton);
 		clickActions(deleteButton);
