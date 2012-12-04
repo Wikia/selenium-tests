@@ -94,6 +94,8 @@ public class BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public WikiArticlePageObject clickOnPublishButton() {
+		mouseOver("#GlobalNavigation li:nth(1)");
+		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
 		clickAndWait(publishButtonGeneral);

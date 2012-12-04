@@ -868,7 +868,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		String categoryName = category.getText(); 
 		waitForElementClickableByElement(category);
 		clickAndWait(category);
-		PageObjectLogging.log("categories_addCategoryFromPromptEditMode", "category "+categoryName+" added from prompt", true, driver);
+		PageObjectLogging.log("categories_addSuggestedCategoryEditMode", "suggested category "+categoryName+" added", true, driver);
 		return categoryName;
 	}
 
