@@ -143,9 +143,9 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void searchForImage(String name){
-		waitForElementByElement(imageFindButton);
+//		waitForElementByElement(imageFindButton);
 		imageQuery.sendKeys(name);
-		waitForElementByElement(imageQuery);
+//		waitForElementByElement(imageQuery);
 		imageFindButton.click();
 		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
 	}
@@ -349,6 +349,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementClickableByElement(videoReturnToEditing);
 		jQueryClick(videoReturnToEditingSelector);
 		// clickAndWait(videoReturnToEditing);
+		waitForElementNotVisibleByCss(videoReturnToEditingSelector);
 		PageObjectLogging.log("WaitForSuccesDialogAndReturnToEditing",
 				"Wait For Succes dialog and click on 'return to editing'",
 				true, driver);
