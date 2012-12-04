@@ -613,6 +613,11 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public WikiArticleEditMode clickEditButton(String pageName) {
+		//two lines below prevent hubs drop-down on IE9
+		mouseOver("#GlobalNavigation li:nth(1)");
+		mouseRelease("#GlobalNavigation li:nth(1)");
+		waitForElementByElement(editButton);
+		waitForElementClickableByElement(editButton);
 		clickAndWait(editButton);
 		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
 		return new WikiArticleEditMode(driver, Domain, pageName);
