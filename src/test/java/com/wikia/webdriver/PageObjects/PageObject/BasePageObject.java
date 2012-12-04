@@ -93,7 +93,8 @@ public class BasePageObject{
 		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-		clickAndWait(publishButtonGeneral);
+//		clickAndWait(publishButtonGeneral);
+		jQueryClick("input.control-button");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
 	
