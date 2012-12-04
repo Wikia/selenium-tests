@@ -144,8 +144,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void searchForImage(String name){
 		waitForElementByElement(imageFindButton);
-		waitForElementByElement(imageQuery);
 		imageQuery.sendKeys(name);
+		waitForElementByElement(imageQuery);
 		imageFindButton.click();
 		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
 	}
