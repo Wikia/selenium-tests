@@ -115,6 +115,12 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(css="input[id='VideoEmbedCaption']")
 	private WebElement videoCaptionTextArea;
+	
+	@FindBy(css="input#ImageQuery")
+	private WebElement imageQuery;
+	
+	@FindBy(css="[value='Find']")
+	private WebElement imageFindButton;
 
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
@@ -136,6 +142,32 @@ public class WikiBasePageObject extends BasePageObject {
 		return Domain;
 	}
 
+	public void searchForImage(String name){
+		waitForElementByElement(imageFindButton);
+		waitForElementByElement(imageQuery);
+		imageQuery.sendKeys(name);
+		imageFindButton.click();
+		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
+	}
+	
+	/**
+	 * Left Click on add Object button.
+	 *  
+	 * @author Michal Nowierski
+	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
+	 */
+	public void clickOnAddObjectButton(String Object) {
+		// TODO Auto-generated method stub
+		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
+		WebElement ObjectButton;
+		waitForElementByCss(ObjectCss);
+		waitForElementClickableByCss(ObjectCss);
+		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
+		clickAndWait(ObjectButton);
+		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
+		
+	}
+	
 	/**
 	 * Type given caption for the video
 	 *  
@@ -393,6 +425,8 @@ public class WikiBasePageObject extends BasePageObject {
 				"Left Click on add 'Photo' button.", true, driver);
 	}
 
+	
+	
 	/**
 	 * Wait for modal and click on 'add this photo' under the first seen photo
 	 * 
