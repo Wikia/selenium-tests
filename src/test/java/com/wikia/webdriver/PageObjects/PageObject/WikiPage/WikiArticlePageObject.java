@@ -159,7 +159,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void replyComment(String comment, String reply)
 	{
-		driver.navigate().refresh();
+		refreshPage();
 		clickReplyCommentButton(comment);
 		writeReply(reply);
 		PageObjectLogging.log("reply comment", "reply comment written and checked", true, driver);
