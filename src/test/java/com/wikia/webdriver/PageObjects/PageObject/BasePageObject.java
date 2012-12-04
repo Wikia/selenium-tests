@@ -99,7 +99,7 @@ public class BasePageObject{
 		clickAndWait(publishButtonGeneral);
 		if (publishButtonGeneral.isDisplayed())
 		{
-			PageObjectLogging.log("clickAndWait(publishButtonGeneral)", "publish button was clicked without efect", true);
+			PageObjectLogging.log("warning", "publish button was clicked without efect - will be clicked using JS", true);
 			executeScript("$('input.control-button').click()");
 		}
 		waitForElementByElement(editButton);

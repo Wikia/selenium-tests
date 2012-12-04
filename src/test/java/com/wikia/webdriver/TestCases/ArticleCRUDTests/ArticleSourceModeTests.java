@@ -14,7 +14,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	private String caption = "QAWebdriverCaption1";
 	private String videoURL = "https://www.youtube.com/watch?v=QE32HghV8-I";
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_001"})
 	public void RTE_001_Bold(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -27,7 +27,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_002"})
 	public void RTE_002_Italic(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -40,7 +40,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_003"})
 	public void RTE_003_InternalLink(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -53,7 +53,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_004"})
 	public void RTE_004_ExternalLink(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -66,7 +66,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_005"})
 	public void RTE_005_HeadLine(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -79,7 +79,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_006"})
 	public void RTE_006_EmbedFile(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -92,7 +92,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_007"})
 	public void RTE_007_EmbedMedia(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -105,7 +105,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_008"})
 	public void RTE_008_Math(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -118,7 +118,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_009"})
 	public void RTE_009_Nowiki(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -131,7 +131,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_010"})
 	public void RTE_010_Signature(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -144,7 +144,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}	
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_011"})
 	public void RTE_011_HLine(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -157,7 +157,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_012"})
 	public void RTE_012_Photo(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -173,7 +173,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}	
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_013"})
 	public void RTE_013_Slideshow(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -194,7 +194,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_014"})
 	public void RTE_014_Gallery(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
@@ -216,7 +216,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_015"})
 	public void RTE_015_Slider(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
