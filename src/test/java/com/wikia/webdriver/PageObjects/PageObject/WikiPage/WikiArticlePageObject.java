@@ -488,7 +488,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		else {
 			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);						
 		}
-		
 	}
 	/**
 	* getArticleNameFromURL
@@ -502,9 +501,4 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		String articleName = URL.substring(articlenameIndex+5);
 		return articleName;
 	}
-
-
-
-
-
 }

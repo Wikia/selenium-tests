@@ -237,7 +237,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickOnPublishButton();
 	}
 	
-	@Test(groups={"RTE_extended"})
+	@Test(groups={"RTE_extended","RTE_extended_016"})
 	public void RTE_016_Video(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
 		String pageName = "QAarticle"+source.getTimeStamp();
