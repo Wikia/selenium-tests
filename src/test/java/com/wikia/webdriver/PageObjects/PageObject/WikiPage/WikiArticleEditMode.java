@@ -824,13 +824,13 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	*
 	@author Michal Nowierski
 	*/
-	public void categories_addCategorySourceEditMode(String categoryName) {
+	public void categories_addToCategorySourceEditMode(String textToBeAdded) {
 		waitForElementByElement(categories_CategorySourceInputField);
 		waitForElementClickableByElement(categories_CategorySourceInputField);
 		clickAndWait(categories_CategorySourceInputField);
-		categories_CategorySourceInputField.sendKeys("[[Category:"+categoryName+"]]");
+		categories_CategorySourceInputField.sendKeys(textToBeAdded);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();};
-		PageObjectLogging.log("categories_addCategorySourceEditMode", "category [[Category:"+categoryName+"]] typed in the source mode", true, driver);
+		PageObjectLogging.log("categories_addCategorySourceEditMode", "category "+textToBeAdded+" typed in the source mode", true, driver);
 	}
 	
 	/**
@@ -838,15 +838,15 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 *
 	@author Michal Nowierski
 	 */
-	public void categories_verifyCategoryAddedSourceEditMode(String categoryName) {
+	public void categories_verifyCategoryAddedSourceEditMode(String textToBeChecked) {
 		waitForElementByElement(categories_CategorySourceInputField);
 		String text = categories_CategorySourceInputField.getAttribute("value");
-		if (text.contains("[[Category:"+categoryName+"]]")) {
+		if (text.contains(textToBeChecked)) {
 			
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category [[Category:"+categoryName+"]] present in the source mode", true, driver);
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked+" present in the source mode", true, driver);
 		}
 		else {
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category [[Category:"+categoryName+"]] NOT present in the source mode", false, driver);
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked+" NOT present in the source mode", false, driver);
 			
 		}
 	}
