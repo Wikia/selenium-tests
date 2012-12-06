@@ -266,6 +266,52 @@ public class CommonFunctions {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.cssSelector("a[href*='" + userNameEnc + "']")));
 	}
+	
+	public static void logInDropDownFB(){
+		driver = DriverProvider.getWebDriver();
+		wait = new WebDriverWait(driver, 30);
+		WebElement logInAjaxElem = driver.findElement(logInAjax);
+		logInAjaxElem.click();
+		PageObjectLogging.log("logInDropDownFB", "login ajax clicked", true);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.className("wikia-button-facebook")));
+		((JavascriptExecutor) driver)
+		.executeScript("$('.wikia-button-facebook').click()");
+		PageObjectLogging.log("logInDropDownFB", "facebook button clicked", true);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		WebElement fbConnect = driver.findElement(By.className("wikia-button-facebook"));		
+//		fbConnect.click();
+		//getting window handles
+		Object[] windows = driver.getWindowHandles().toArray();
+		driver.switchTo().window(windows[1].toString());
+		PageObjectLogging.log("logInDropDownFB", "facebook popup window detected", true);
+		PageObjectLogging.log("logInDropDownFB", "switching to facebook pop-up window", true);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("pass")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='login']")));
+		WebElement em = driver.findElement(By.id("email"));
+		WebElement pa = driver.findElement(By.id("pass"));
+		WebElement sm = driver.findElement(By.cssSelector("input[name='login']"));
+		em.clear();
+		pa.clear();
+		em.sendKeys(Properties.userNameFB);
+		PageObjectLogging.log("logInDropDownFB", "facebook username filled", true);
+		pa.sendKeys(Properties.passwordFB);
+		PageObjectLogging.log("logInDropDownFB", "facebook password filled", true);
+		sm.click();
+		PageObjectLogging.log("logInDropDownFB", "facebook log in button clicked", true);
+		driver.switchTo().window(windows[0].toString());
+		PageObjectLogging.log("logInDropDownFB", "switching to main window", true);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a img.avatar")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("a[href*='Patrick_test_07-Feb-12_1313']")));
+		PageObjectLogging.log("logInDropDownFB", "facebook login verification passed", true);
+	}
 
 	/**
 	 * log in by overlay available from main menu
