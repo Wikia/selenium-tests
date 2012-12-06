@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -189,14 +190,14 @@ public class ChatPageObject extends BasePageObject
 	public void verifyNormalUserDropdown()
 	{
 		List<WebElement> list = getDropDownListOfElements();
-		CommonFunctions.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyNormalUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
 		}
-		CommonFunctions.assertString("message-wall", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("contribs", list.get(1).getAttribute("class"));
-		CommonFunctions.assertString("private", list.get(2).getAttribute("class"));
+		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
+		Assertion.assertEquals("private", list.get(2).getAttribute("class"));
 	}
 
 	/**
@@ -206,14 +207,14 @@ public class ChatPageObject extends BasePageObject
 	public void verifyBlockingUserDropdown()
 	{
 		List<WebElement> list = getDropDownListOfElements();
-		CommonFunctions.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyBlockingUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
 		}
-		CommonFunctions.assertString("message-wall", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("contribs", list.get(1).getAttribute("class"));
-		CommonFunctions.assertString("private-allow", list.get(2).getAttribute("class"));	
+		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
+		Assertion.assertEquals("private-allow", list.get(2).getAttribute("class"));	
 	}
 	
 	/**
@@ -223,13 +224,13 @@ public class ChatPageObject extends BasePageObject
 	public void verifyBlockedUserDropdown()
 	{
 		List<WebElement> list = getDropDownListOfElements();
-		CommonFunctions.assertNumber(2, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(2, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyBlockedUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);	
 		}
-		CommonFunctions.assertString("message-wall", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("contribs", list.get(1).getAttribute("class"));	
+		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));	
 	}
 	
 	public void verifyBlockedUserMessage(String blockingUserName, String blockedUserName)
@@ -245,14 +246,14 @@ public class ChatPageObject extends BasePageObject
 	public void verifyPrivateUserDropdown()
 	{
 		List<WebElement> list = getDropDownListOfElements();
-		CommonFunctions.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyPrivateUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
 		}
-		CommonFunctions.assertString("message-wall", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("contribs", list.get(1).getAttribute("class"));
-		CommonFunctions.assertString("private-block", list.get(2).getAttribute("class"));	
+		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
+		Assertion.assertEquals("private-block", list.get(2).getAttribute("class"));	
 	}
 
 	/**
@@ -262,46 +263,46 @@ public class ChatPageObject extends BasePageObject
 	public void verifyAdminUserDropdown()
 	{
 		List<WebElement> list = getDropDownListOfElements();
-		CommonFunctions.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyAdminUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
 		}
-		CommonFunctions.assertString("message-wall", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("contribs", list.get(1).getAttribute("class"));
-		CommonFunctions.assertString("private", list.get(2).getAttribute("class"));
+		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
+		Assertion.assertEquals("private", list.get(2).getAttribute("class"));
 		
 		list = getAdminDropDownListOfElements();
-		CommonFunctions.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyAdminUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
 		}
-		CommonFunctions.assertString("give-chat-mod", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("kick", list.get(1).getAttribute("class"));
-		CommonFunctions.assertString("ban", list.get(2).getAttribute("class"));
+		Assertion.assertEquals("give-chat-mod", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("kick", list.get(1).getAttribute("class"));
+		Assertion.assertEquals("ban", list.get(2).getAttribute("class"));
 	}
 	
 	public void verifyChatModUserDropdown()
 	{
 		List<WebElement> list = getDropDownListOfElements();
-		CommonFunctions.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyAdminUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
 		}
-		CommonFunctions.assertString("message-wall", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("contribs", list.get(1).getAttribute("class"));
-		CommonFunctions.assertString("private", list.get(2).getAttribute("class"));
+		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
+		Assertion.assertEquals("private", list.get(2).getAttribute("class"));
 		
 		list = getAdminDropDownListOfElements();
-		CommonFunctions.assertNumber(2, list.size(), "Checking number of elements in the drop-down");
+		Assertion.assertNumber(2, list.size(), "Checking number of elements in the drop-down");
 		for (int i=0; i<list.size(); i++)
 		{
 			PageObjectLogging.log("verifyAdminUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
 		}
-		CommonFunctions.assertString("kick", list.get(0).getAttribute("class"));
-		CommonFunctions.assertString("ban", list.get(1).getAttribute("class"));
+		Assertion.assertEquals("kick", list.get(0).getAttribute("class"));
+		Assertion.assertEquals("ban", list.get(1).getAttribute("class"));
 	}
 	
 	public void verifyUserIsGreyedOut()

@@ -112,10 +112,10 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
 				+ imageCounter + ".html'>HTML Source</a></td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-		if (!success)
-		{
-			Assert.fail(description);
-		}
+//		if (!success)
+//		{
+//			Assert.fail(description);
+//		}
 		
 	}
 
@@ -125,10 +125,10 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ "</td><td>" + description
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-		if (!success)
-		{
-			Assert.fail(description);
-		}
+//		if (!success)
+//		{
+//			Assert.fail(description);
+//		}
 	
 		
 	}

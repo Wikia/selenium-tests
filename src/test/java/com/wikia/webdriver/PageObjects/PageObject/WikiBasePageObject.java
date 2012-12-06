@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -507,9 +508,9 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyEditDropDownAnonymous() {
 		List<WebElement> list = driver.findElements(By
 				.cssSelector("header#WikiaPageHeader ul.WikiaMenuElement li"));
-		CommonFunctions.assertNumber(1, list.size(),
+		Assertion.assertNumber(1, list.size(),
 				"Edit drop-down number of items for anonymous user");
-		CommonFunctions.assertString(
+		Assertion.assertEquals(
 				"history",
 				list.get(0).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));
@@ -518,13 +519,13 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyEditDropDownLoggedInUser() {
 		List<WebElement> list = driver.findElements(By
 				.cssSelector("header#WikiaPageHeader ul.WikiaMenuElement li"));
-		CommonFunctions.assertNumber(2, list.size(),
+		Assertion.assertNumber(2, list.size(),
 				"Edit drop-down number of items for admin user");
-		CommonFunctions.assertString(
+		Assertion.assertEquals(
 				"history",
 				list.get(0).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));
-		CommonFunctions.assertString(
+		Assertion.assertEquals(
 				"move",
 				list.get(1).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));
@@ -533,21 +534,21 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyEditDropDownAdmin() {
 		List<WebElement> list = driver.findElements(By
 				.cssSelector("header#WikiaPageHeader ul.WikiaMenuElement li"));
-		CommonFunctions.assertNumber(4, list.size(),
+		Assertion.assertNumber(4, list.size(),
 				"Edit drop-down number of items for admin user");
-		CommonFunctions.assertString(
+		Assertion.assertEquals(
 				"history",
 				list.get(0).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));
-		CommonFunctions.assertString(
+		Assertion.assertEquals(
 				"move",
 				list.get(1).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));
-		CommonFunctions.assertString(
+		Assertion.assertEquals(
 				"protect",
 				list.get(2).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));
-		CommonFunctions.assertString(
+		Assertion.assertEquals(
 				"delete",
 				list.get(3).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));

@@ -14,7 +14,6 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -23,16 +22,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -396,47 +392,48 @@ public class CommonFunctions {
 		PageObjectLogging.log("logInAsStaff ", "Staff user logged in", true,
 				driver);
 	}
-
-	/**
-	 * verifies whether pattern and current string are the same and log to log
-	 * file
-	 * 
-	 * @param pattern
-	 * @param current
-	 * @author: Karol Kujawiak
-	 */
-	public static void assertString(String pattern, String current) {
-
-		try {
-			Assert.assertEquals(pattern, current);
-			PageObjectLogging.log("assertString", "pattern string: " + pattern
-					+ " <br/>current string: " + current + "<br/>are the same",
-					true);
-		} catch (AssertionError e) {
-			PageObjectLogging.log("assertString",
-					"pattern string: " + pattern + " <br/>current string: "
-							+ current + "<br/>are different", false);
-		}
-	}
-
-	/**
-	 * Verify actual number is the same as expected number
-	 * 
-	 * @param aNumber
-	 * @param secondNumber
-	 * @author: Piotr Gabryjeluk
-	 */
-	public static void assertNumber(Number expected, Number actual,
-			String message) {
-		try {
-			Assert.assertEquals(expected, actual);
-			PageObjectLogging.log("assertNumber", message + ", expected: "
-					+ expected + ", got: " + actual, true);
-		} catch (AssertionError e) {
-			PageObjectLogging.log("assertNumber", message + ", expected: "
-					+ expected + ", got: " + actual, false);
-		}
-	}
+//
+//	/**
+//	 * verifies whether pattern and current string are the same and log to log
+//	 * file
+//	 * 
+//	 * @param pattern
+//	 * @param current
+//	 * @author: Karol Kujawiak
+//	 */
+//	public static void assertString(String pattern, String current) {
+//
+//		try {
+//			Assert.assertEquals(pattern, current);
+//			PageObjectLogging.log("assertString", "pattern string: " + pattern
+//					+ " <br/>current string: " + current + "<br/>are the same",
+//					true);
+//		} catch (AssertionError e) {
+//			PageObjectLogging.log("assertString",
+//					"pattern string: " + pattern + " <br/>current string: "
+//							+ current + "<br/>are different", false);
+//		}
+//	}
+//	
+//	
+//	/**
+//	 * Verify actual number is the same as expected number
+//	 * 
+//	 * @param aNumber
+//	 * @param secondNumber
+//	 * @author: Piotr Gabryjeluk
+//	 */
+//	public static void assertNumber(Number expected, Number actual,
+//			String message) {
+//		try {
+//			Assert.assertEquals(expected, actual);
+//			PageObjectLogging.log("assertNumber", message + ", expected: "
+//					+ expected + ", got: " + actual, true);
+//		} catch (AssertionError e) {
+//			PageObjectLogging.log("assertNumber", message + ", expected: "
+//					+ expected + ", got: " + actual, false);
+//		}
+//	}
 
 	/**
 	 * 

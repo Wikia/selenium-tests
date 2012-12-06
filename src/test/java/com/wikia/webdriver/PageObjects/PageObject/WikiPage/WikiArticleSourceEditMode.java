@@ -1,12 +1,17 @@
 package com.wikia.webdriver.PageObjects.PageObject.WikiPage;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.ibm.icu.util.CalendarAstronomer.Horizon;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -45,6 +50,8 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 	private WebElement video;
 	@FindBy(css=".cke_toolbar_source .cke_toolbar_expand")
 	private WebElement more;
+	@FindBy(css=".close.wikia-chiclet-button")
+	private WebElement moreClose;
 	@FindBy(css="section#WikiaPhotoGalleryEditor")
 	private WebElement componentSelector;
 	@FindBy(css="a.wikia-button[type='2']")
@@ -53,6 +60,12 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 	private WebElement createGallery;
 	@FindBy(css="a.wikia-button[type='3']")
 	private WebElement createSlider;
+//	@FindBys(@FindBy(css=".modalContent #edittools_main a"))
+//	private List<WebElement> editToolsMain;
+//	@FindBys(@FindBy(css=".modalContent #edittools_wikimarkup a"))
+//	private List<WebElement> editToolsWikiMarkup;
+//	@FindBys(@FindBy(css=".modalContent #edittools_symbols a"))
+//	private List<WebElement> editToolsSymbols;
 	
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
@@ -79,11 +92,11 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 	}
 	
 	public void checkSourceContent(String desiredContent){
-		CommonFunctions.assertString(desiredContent, getSourceContent());
+		Assertion.assertEquals(desiredContent, getSourceContent());
 	}
 	
 	public void checkSourceVideoContent(String desiredContent){		
-		CommonFunctions.assertString(desiredContent.substring(1, 38) + desiredContent.substring(48), getSourceContent().substring(1, 38) + getSourceContent().substring(48));
+		Assertion.assertEquals(desiredContent.substring(1, 38) + desiredContent.substring(48), getSourceContent().substring(1, 38) + getSourceContent().substring(48));
 	}
 
 	
@@ -172,9 +185,19 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 		PageObjectLogging.log("clickAddVideo", "add video button was clicked", true, driver);
 	}
 	
+	public void clickMore(){
+		focusTextArea();
+		more.click();
+		PageObjectLogging.log("clickMore", "more button was clicked", true, driver);
+	}
+	
 	public void clearSource(){
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("clearSource", "source area erased", true, driver);
+	}
+	
+	public void closeMore(){
+		moreClose.click();
 	}
 	
 	public void verifyComponentSelector()
@@ -204,5 +227,37 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 		}
 	}
 	
+	public void checkMainTools()
+	{
+		for (int i=1; i<17; i++){
+			clearSource();
+			clickMore();
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a["+i+"]")).getText();
+			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a["+i+"]")).click();
+			checkSourceContent(content);
+		}
+	}
 	
+	public void checkWikiMarkupTools()
+	{
+		for (int i=1; i<20; i++){
+			clearSource();
+			clickMore();
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).getText();
+			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).click();
+			checkSourceContent(content);
+		}
+	}
+	
+	public void checkSymbolsTools()
+	{
+		for (int i=1; i<65; i++){
+			System.out.println(i);
+			clearSource();
+			clickMore();
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).getText();
+			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).click();
+			checkSourceContent(content);
+		}
+	}
 }

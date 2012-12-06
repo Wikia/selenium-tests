@@ -1,15 +1,10 @@
 package com.wikia.webdriver.Trash;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 
 public class testing extends TestTemplate
 {
@@ -143,15 +138,22 @@ public class testing extends TestTemplate
 //		b.waitForElementByCss("a img.avatar");
 //	}
 	
-	@Test 
+	@Test(groups={"aaa"})
 	public void numbers()
 	{
-		WikiArticleEditMode e = new WikiArticleEditMode(driver, Global.DOMAIN, "");
-		e.editArticleByName("QAarticle1346923033271");
-		e.clickOnSourceButton();
-		WebElement el = driver.findElement(By.cssSelector(".cke_source"));
-		el.clear();
-		el.sendKeys("aaa");
+//		WikiArticleEditMode e = new WikiArticleEditMode(driver, Global.DOMAIN, "");
+//		e.editArticleByName("QAarticle1346923033271");
+//		e.clickOnSourceButton();
+//		WebElement el = driver.findElement(By.cssSelector(".cke_source"));
+//		el.clear();
+//		el.sendKeys("aaa");
+		Assertion.assertEquals("aaaa", "bbb");
+		System.out.println("********************************************1");
+		Assertion.assertEquals("aaaa", "ccc");
+		System.out.println("********************************************2");
+		Assertion.assertEquals("aaaa", "aaaa");
+		System.out.println("********************************************3");
+		
 	}
 		
 //		BasePageObject b = new BasePageObject(driver);

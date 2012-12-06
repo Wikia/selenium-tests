@@ -256,4 +256,38 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceVideoContent("[[File:WikiEvolution - Poznańska Wiki-1354533479|thumb|right|335px|"+caption+"]]");
 		source.clickOnPublishButton();		
 	}
+	
+	
+	@Test(groups={"RTE_extended","RTE_extended_017"})
+	public void RTE_017_MoreMainTools(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.checkMainTools();
+		source.clickOnPublishButton();
+	}
+	
+	@Test(groups={"RTE_extended","RTE_extended_018"})
+	public void RTE_018_MoreWikiMarkupTools(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.checkWikiMarkupTools();
+		source.clickOnPublishButton();
+	}
+	
+	@Test(groups={"RTE_extended","RTE_extended_019"})
+	public void RTE_019_MoreSympolsTools(){
+		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
+		String pageName = "QAarticle"+source.getTimeStamp();
+		source.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		source.createNewArticleSource(pageName, 1);
+		source.checkSymbolsTools();
+		source.clickOnPublishButton();
+	}
 }

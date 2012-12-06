@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
@@ -57,7 +58,7 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 			if (langDropElement.contains(lang+":"))
 			{				
 				language.selectByIndex(i);
-				CommonFunctions.assertString(lang+".", languageSelectedIndicator.getText());
+				Assertion.assertEquals(lang+".", languageSelectedIndicator.getText());
 				break;
 			}
 		}

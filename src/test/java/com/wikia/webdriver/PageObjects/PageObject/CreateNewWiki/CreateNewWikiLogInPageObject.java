@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
@@ -98,28 +99,28 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	{
 		waitForElementByElement(userNameField);
 		clickAndWait(userNameField);
-		CommonFunctions.assertString("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
+		Assertion.assertEquals("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
 		userNameField.sendKeys(Keys.TAB);
-		CommonFunctions.assertString("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
+		Assertion.assertEquals("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		CommonFunctions.assertString("forgot-password", CommonFunctions.currentlyFocusedGetAttributeValue("class")) ;
+		Assertion.assertEquals("forgot-password", CommonFunctions.currentlyFocusedGetAttributeValue("class")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		CommonFunctions.assertString("submit", CommonFunctions.currentlyFocusedGetAttributeValue("type")) ;
+		Assertion.assertEquals("submit", CommonFunctions.currentlyFocusedGetAttributeValue("type")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		CommonFunctions.assertString("facebook", CommonFunctions.currentlyFocusedGetAttributeValue("data-id")) ;
+		Assertion.assertEquals("facebook", CommonFunctions.currentlyFocusedGetAttributeValue("data-id")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		CommonFunctions.assertString("Sign up", CommonFunctions.currentlyFocusedGetAttributeValue("value")) ;
+		Assertion.assertEquals("Sign up", CommonFunctions.currentlyFocusedGetAttributeValue("value")) ;
 	}
 
 	public void verifyFaceBookToolTip()
 	{
 		
-		CommonFunctions.assertString("Click the button to log in with Facebook", CommonFunctions.getAttributeValue(facebookButton, "data-original-title"));
+		Assertion.assertEquals("Click the button to log in with Facebook", CommonFunctions.getAttributeValue(facebookButton, "data-original-title"));
 	}
 	
 	public void verifySignUpText()
 	{
-		CommonFunctions.assertString("You need an account to create a wiki on Wikia. It only takes a minute to sign up!", signUpText.getText());
+		Assertion.assertEquals("You need an account to create a wiki on Wikia. It only takes a minute to sign up!", signUpText.getText());
 	}
 	
 	
@@ -128,28 +129,28 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 		waitForElementByBy(By.cssSelector("div.UserLoginModal div.input-group div.error-msg"));
 		waitForElementByElement(usernameValidationText);
 		String text = usernameValidationText.getText();
-		CommonFunctions.assertString("Oops, please fill in the username field.", text);
+		Assertion.assertEquals("Oops, please fill in the username field.", text);
 		userNameField.clear();
 	}
 	
 	public void verifyInvalidUserNameValidation()
 	{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
-		CommonFunctions.assertString("Hm, we don't recognize this name. Don't forget usernames are case sensitive.", usernameValidationText.getText());
+		Assertion.assertEquals("Hm, we don't recognize this name. Don't forget usernames are case sensitive.", usernameValidationText.getText());
 		userNameField.clear();
 	}
 	
 	public void verifyBlankPasswordValidation()
 	{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
-		CommonFunctions.assertString("Oops, please fill in the password field.", usernameValidationText.getText());
+		Assertion.assertEquals("Oops, please fill in the password field.", usernameValidationText.getText());
 		userNameField.clear();
 	}
 	
 	public void verifyInvalidPasswordValidation()
 	{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
-		CommonFunctions.assertString("Oops, wrong password. Make sure caps lock is off and try again.", usernameValidationText.getText());
+		Assertion.assertEquals("Oops, wrong password. Make sure caps lock is off and try again.", usernameValidationText.getText());
 		userNameField.clear();
 		passwordField.clear();
 	}
@@ -157,15 +158,15 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	public void facebookConnectButtonClick()
 	{
 		clickAndWait(userNameField);
-		CommonFunctions.assertString("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
+		Assertion.assertEquals("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
 		userNameField.sendKeys(Keys.TAB);
-		CommonFunctions.assertString("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
+		Assertion.assertEquals("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		CommonFunctions.assertString("forgot-password", CommonFunctions.currentlyFocusedGetAttributeValue("class")) ;
+		Assertion.assertEquals("forgot-password", CommonFunctions.currentlyFocusedGetAttributeValue("class")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		CommonFunctions.assertString("submit", CommonFunctions.currentlyFocusedGetAttributeValue("type")) ;
+		Assertion.assertEquals("submit", CommonFunctions.currentlyFocusedGetAttributeValue("type")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		CommonFunctions.assertString("facebook", CommonFunctions.currentlyFocusedGetAttributeValue("data-id")) ;
+		Assertion.assertEquals("facebook", CommonFunctions.currentlyFocusedGetAttributeValue("data-id")) ;
 		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.ENTER);
 	}
 	
