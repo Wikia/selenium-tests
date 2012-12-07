@@ -358,6 +358,20 @@ public class CommonFunctions {
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
 	}
 
+	public static void logOutMobile(WebDriver driver) {
+		wait = new WebDriverWait(driver, 30);
+		try {
+			driver.manage().deleteAllCookies();
+			driver.get(Global.DOMAIN + "wiki/Special:UserLogout?noexternals=1");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector(".tgl.lgdout")));
+		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
+	}
+	
 	/**
 	 * log in by overlay available from main menu, using generic credentials
 	 * 

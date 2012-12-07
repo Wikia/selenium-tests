@@ -25,6 +25,9 @@
 			<class name="com.wikia.webdriver.TestCases.MessageWallTests.MessageWallTests"/>  
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>   
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>   
+			<class name="com.wikia.webdriver.TestCases.Mobile.ArticleCommentTests"/>   
+			<class name="com.wikia.webdriver.TestCases.Mobile.LoginTests"/>   
+			<class name="com.wikia.webdriver.TestCases.Mobile.SearchTests"/>   
 		</classes>
 	</test>
 </suite>
