@@ -180,31 +180,33 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.clickOnSourceButton();
 		articleEdit.categories_addToCategorySourceEditMode("[[Category:"+JSalert+"]]");
 		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+JSalert+"]]");
-		articleEdit.clickOnVisualButtonAndCheckJSalertNotThere(JSalertMessage);	
+		articleEdit.clickOnVisualButtonAndCheckJSalertThere(JSalertMessage, false);	
 		article = articleEdit.clickOnPublishButtonAndCheckJSalertNotThere(JSalertMessage);	
 	}
 	
-//	/*
-//	 * TestCase009 verify if typing wrong category in edit mode is prevented
-//	 */
-//	@Test(groups = { "CategoriesTestsAnonymous_009", "CategoriesTestsAnonymous" })
-//	public void CategoriesTestsAnonymous_009_invalidCategoryInSourceModePrevention() {
-//		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-//		String categoryName = "test" + wiki.getTimeStamp();
-//		wiki.openWikiPage();
-//		WikiArticlePageObject article = new WikiArticlePageObject(driver,
-//				Global.DOMAIN, "random");
-//		article.openRandomArticle();
-//		WikiArticleEditMode articleEdit = article.navigateToEditPage();
-//		articleEdit.clickOnSourceButton();
-//		articleEdit.categories_addToCategorySourceEditMode("this is invalid source mode category syntax");
-//		articleEdit.categories_verifyCategoryAddedSourceEditMode("this is invalid source mode category syntax");
-//		articleEdit.clickOnVisualButton();
-//		//TODO: check if alert is send
+	/*
+	 * TestCase009 verify if typing wrong category in edit source mode is prevented
+	 */
+	@Test(groups = { "CategoriesTestsAnonymous_009", "CategoriesTestsAnonymous" })
+	public void CategoriesTestsAnonymous_009_invalidCategoryInSourceModePrevention() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String categoryName = "test" + wiki.getTimeStamp();
+		String JSalertMessage = "Unhandled syntax detected - switching back to visual mode impossible.";
+		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver,
+				Global.DOMAIN, "random");
+		article.openRandomArticle();
+		WikiArticleEditMode articleEdit = article.navigateToEditPage();
+		articleEdit.clickOnSourceButton();
+		articleEdit.categories_addToCategorySourceEditMode("this is invalid source mode category syntax");
+		articleEdit.categories_verifyCategoryAddedSourceEditMode("this is invalid source mode category syntax");
+		articleEdit.clickOnVisualButtonAndCheckJSalertThere(JSalertMessage, true);	
+		article = articleEdit.clickOnPublishButton();
+		//TODO: check if alert is send
 //		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 //		article = articleEdit.clickOnPublishButton();
 //		article.categories_verifyCategoryAdded(categoryName);
-//	}
-//	// articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);
+	}
+	// articleEdit.categories_verifyCategoryAddedSourceEditMode(categoryName);
 
 }
