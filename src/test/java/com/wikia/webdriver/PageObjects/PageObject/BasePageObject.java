@@ -111,7 +111,7 @@ public class BasePageObject{
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
 		clickAndWait(publishButtonGeneral);
-		checkJSalertIsNotThere(alertMessage);
+		checkJSalertIsThere(alertMessage, false);
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("clickOnPublishButtonAndCheckJSalertNotThere", "Click on 'Publish' button and check there is no JS alert", true, driver);
 		
@@ -1111,25 +1111,32 @@ public class BasePageObject{
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
 	
-	public void checkJSalertIsNotThere(String alertMessage) {
+	/**
+	 * <p> Verify if js alert is or isn't there. You can expect alert with certain message, or not expect alert with certain message <br> 
+	 * 
+	 * @param alert message that we do or do not expect 
+	 * @param ifAlertExpected  if we expect JS alert - true. If we don't expect JS alert - false 
+	 * @author Michal Nowierski
+	 */
+	public void checkJSalertIsThere(String alertMessage, Boolean ifAlertExpected) {
 
 	    try 
 	    { 
 	    	Thread.sleep(1000);
 	    	Alert alert =  driver.switchTo().alert(); 
-	    	if (alert.getText().equals(alertMessage)) {
+	       	if (alert.getText().equals(alertMessage)) {
 	    		alert.accept();
-	    		PageObjectLogging.log("checkJSalertIsNotThere", "JS alert found", false, driver);	 
+	    		PageObjectLogging.log("checkJSalertIsThere", "We expect an alret = "+ifAlertExpected+". JS alert found", ifAlertExpected, driver);	 
 			}
 	       else {
 	    	   alert.accept();
-	    	   PageObjectLogging.log("checkJSalertIsNotThere", "JS alert found, and it has unexpected message: "+alert.getText()+" while it should be: "+alertMessage, false, driver);	        			
+	    	   PageObjectLogging.log("checkJSalertIsThere", "We expect an alret = "+ifAlertExpected+". JS alert found, and it has unexpected message: "+alert.getText()+" while it should be: "+alertMessage, false, driver);	        			
 		
 	       } 
 	    }  
 	    catch (NoAlertPresentException Ex) 
 	    { 
-	    	PageObjectLogging.log("checkJSalertIsNotThere", "JS alert not found", true, driver);	    	
+	    	PageObjectLogging.log("checkJSalertIsThere", "We expect an alret = "+ifAlertExpected+". JS alert not found", !ifAlertExpected, driver);	    	
 	    } 
 	    catch (InterruptedException e) {
 			

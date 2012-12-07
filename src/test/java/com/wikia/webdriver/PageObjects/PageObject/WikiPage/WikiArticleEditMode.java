@@ -224,13 +224,22 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		
 	}
 	
-	public void clickOnVisualButtonAndCheckJSalertNotThere(String alertMessage) {
+	
+	
+	/**
+	 * <p> Verify if js alert is or isn't there. You can expect alert with certain message, or not expect alert with certain message <br> 
+	 * 
+	 * @param alert message that we do or do not expect 
+	 * @param ifAlertExpected  if we expect JS alert - true. If we don't expect JS alert - false 
+	 * @author Michal Nowierski
+	 */
+	public void clickOnVisualButtonAndCheckJSalertThere(String alertMessage, Boolean ifAlertExpected) {
 		waitForElementByElement(visualModeButton);
 		waitForElementClickableByElement(visualModeButton);
 		clickAndWait(visualModeButton);
 		//The potential alert must be served right after alert-sensitive action:  
 		//The alert check must come right after the action that might cause it. If it appear anywhere later, the potential alert will not be served. 
-		checkJSalertIsNotThere(alertMessage);
+		checkJSalertIsThere(alertMessage, ifAlertExpected);
 		waitForElementByElement(iFrame);
 		PageObjectLogging.log("clickOnVisualButtonAndCheckJSalertNotThere", "Click on 'Visual' button and check there is no JS alert", true, driver);	
 	}
