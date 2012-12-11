@@ -12,6 +12,7 @@ import org.openqa.selenium.Proxy;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -101,10 +102,21 @@ public class DriverProvider {
 		else if (Global.BROWSER.equals("CHROMEMOBILE"))
 		{
 			setChromeProperties();
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability("chrome.switches", Arrays.asList("--user-agent="+"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"));
+//			File file = new File("."+File.separator+
+//					"src"+File.separator+
+//					"test"+File.separator+
+//					"resources"+File.separator+
+//					"ChromeDriver"+File.separator+
+//					"chromedriver.exe");
+////				System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+//			ChromeOptions o = new ChromeOptions();
+//			o.setBinary(file);
+//			DesiredCapabilities caps = new DesiredCapabilities().chrome();
+//			caps.setCapability("chrome.switches", Arrays.asList("--user-agent="+"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"));
+			ChromeOptions o = new ChromeOptions();
+			o.addArguments("--user-agent="+"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3");
 			//"--user-agent="+"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3");
-			driver = new EventFiringWebDriver(new ChromeDriver(caps)).register(listener);
+			driver = new EventFiringWebDriver(new ChromeDriver(o)).register(listener);
 		}
 		else if (Global.BROWSER.equals("HTMLUNIT"))
 		{
