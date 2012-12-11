@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +15,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObject;
 
 public class WikiArticlePageObject extends WikiBasePageObject {
@@ -450,7 +450,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	*
 	@author Michal Nowierski
 	*/
-	public void categories_verifyCategoryAdded(String categoryName) {
+	public void categories_verifyCategoryPresent(String categoryName) {
 		List<WebElement> lista  = driver.findElements(categories_listOfCategories);
 		Boolean result = false;
 		// there might be more than one category on a random page. Thus - loop over all of them.
@@ -461,10 +461,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 			}
 		}
 		if (result) {
-			PageObjectLogging.log("categories_verifyCategoryAdded", "category "+categoryName+" succesfully added", true, driver);			
+			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" prsesnce succesfully verified", true, driver);			
 		}
 		else {
-			PageObjectLogging.log("categories_verifyCategoryAdded", "category "+categoryName+" NOT added", false, driver);						
+			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" NOT present", false, driver);						
 		}
 		
 	}
@@ -501,4 +501,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		String articleName = URL.substring(articlenameIndex+5);
 		return articleName;
 	}
+
+	
 }

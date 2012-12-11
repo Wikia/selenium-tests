@@ -20,6 +20,7 @@ import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
 
 /**
@@ -1109,6 +1110,12 @@ public class BasePageObject{
 	{
 		waitForElementByElement(modalLoginForm);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
+	}
+	
+	public UserProfilePageObject navigateToProfilePage(String domain, String userName) {
+		driver.navigate().to(domain+"wiki/User:"+userName);
+		PageObjectLogging.log("UserProfilePageObject ", "navigate to username page: "+domain+"wiki/User:"+userName, true, driver);	        			
+		return new UserProfilePageObject(driver);
 	}
 	
 	/**

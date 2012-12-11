@@ -14,11 +14,16 @@ import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateBlogPageObject;
 
 public class UserProfilePageObject extends BasePageObject{
 
 	@FindBy(css="header#WikiaHeader a.ajaxLogin")
 	private WebElement logInLink;
+	@FindBy(css="li[data-id='blog'] a")
+	private WebElement blogTab;
+	@FindBy(css="a[data-id='createblogpost']")
+	private WebElement createBlogPostButton;
 	
 	public UserProfilePageObject(WebDriver driver) {
 		super(driver);
@@ -89,6 +94,27 @@ public class UserProfilePageObject extends BasePageObject{
 		Assertion.assertEquals("Want more information? Find advice, answers, and the Wikia community at Com=munity Central (http://www.community.wikia.com). Happy editing!", mailContent[22]);
 		Assertion.assertEquals("The Wikia Team", mailContent[24]);
 		PageObjectLogging.log("verifyWelcomeEmail ", "end of email verification", true);
+	}
+
+	/**
+	 * @author Michal Nowierski
+	 */
+	public void clickOnBlogTab() {
+		waitForElementByElement(blogTab);
+		waitForElementClickableByElement(blogTab);
+		clickAndWait(blogTab);
+		PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true, driver);		
+	}
+	/**
+	 * @author Michal Nowierski
+	 * @return 
+	 */
+	public SpecialCreateBlogPageObject clickOnCreateBlogPost() {
+		waitForElementByElement(createBlogPostButton);
+		waitForElementClickableByElement(createBlogPostButton);
+		clickAndWait(createBlogPostButton);
+		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);		
+		return new SpecialCreateBlogPageObject(driver, this.Domain, this.articlename);
 	}
 	
 	
