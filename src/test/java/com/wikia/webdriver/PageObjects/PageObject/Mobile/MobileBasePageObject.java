@@ -85,15 +85,15 @@ public class MobileBasePageObject extends BasePageObject {
 
 	public void clickFbWindowTriggerButton() {
 		waitForElementByElement(loginFbButton);
-		if (driver.findElement(By.cssSelector("#ssoFbBtn[disabled]"))
-				.isDisplayed()) {
+//		if (driver.findElement(By.cssSelector("#ssoFbBtn[disabled]"))
+//				.isDisplayed()) {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+//		}
 		click(loginFbButton);
 		try {
 			Thread.sleep(2000);
