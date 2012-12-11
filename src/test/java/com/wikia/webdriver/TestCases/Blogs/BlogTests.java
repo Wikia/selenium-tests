@@ -6,22 +6,22 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.BlogPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
 
 public class BlogTests extends TestTemplate{
 
 	@Test(groups = { "BlogTests_001", "BlogTests" })
 	public void blogTests_001_CreateBlogPost() 
 	{
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		wiki.openWikiPage();
-		String BlogPostTitle = "blogPost"+wiki.getTimeStamp(); 
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		String BlogPostTitle = "blogPost"+home.getTimeStamp(); 
 		String BlogContent = "blogContent";
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = wiki.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(BlogPostTitle);
