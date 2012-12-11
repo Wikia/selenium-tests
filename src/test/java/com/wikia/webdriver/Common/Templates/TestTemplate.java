@@ -100,7 +100,7 @@ public class TestTemplate {
 		driver = DriverProvider.getWebDriver();
 		if (driver != null)
 		{
-			if (Global.BROWSER.equals("CHROME"))
+			if (Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE"))
 			{
 				driver.quit();
 			}
