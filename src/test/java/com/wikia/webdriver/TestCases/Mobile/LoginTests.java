@@ -22,7 +22,7 @@ public class LoginTests extends TestTemplate{
 		CommonFunctions.logOutMobile(driver);
 	}
 	
-	@Test(groups={"mobile"})
+	@Test(groups={"mobile", "mobile_facebook_login"})
 	public void LoginFacebook(){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome();
