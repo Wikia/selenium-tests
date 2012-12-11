@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.Blogs;
+package com.wikia.webdriver.TestCases.BlogTests;
 
 import org.testng.annotations.Test;
 
