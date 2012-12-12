@@ -72,7 +72,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	public void addReply(String reply){
 		waitForElementByElement(replyCommentButton);
 		String url = driver.getCurrentUrl();
-		clickAndWait(replyCommentButton);
+		executeScript("document.querySelectorAll('.cmnRpl')[0].click()");
+//		clickAndWait(replyCommentButton);
 		verifyURL(url+"#Modal");
 		replyInputArea.sendKeys(reply);
 		replyInputArea.submit();
