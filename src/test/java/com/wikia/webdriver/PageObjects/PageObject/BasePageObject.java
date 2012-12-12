@@ -478,11 +478,12 @@ public class BasePageObject{
 //		}
 	}
 	
-	public void  waitForElementByCss(String cssSelector)
+	public WebElement waitForElementByCss(String cssSelector)
 	{
 //		try
 //		{						
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
+			return driver.findElement(By.cssSelector(cssSelector));
 //			return true;
 //		}
 //		catch(Exception e)
@@ -517,11 +518,12 @@ public class BasePageObject{
 //		}
 	}
 	
-	public void waitForElementByXPath(String xPath)
+	public WebElement waitForElementByXPath(String xPath)
 	{
 //		try
 //		{
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));								
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+			return driver.findElement(By.xpath(xPath));
 //		}
 //		catch(Exception e)
 //		{

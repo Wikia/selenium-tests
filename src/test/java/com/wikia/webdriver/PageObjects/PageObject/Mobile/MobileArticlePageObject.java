@@ -2,10 +2,13 @@ package com.wikia.webdriver.PageObjects.PageObject.Mobile;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.server.handler.html5.GetLocalStorageItem;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 
 public class MobileArticlePageObject extends MobileBasePageObject{
 
@@ -36,6 +39,10 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement loadMoreCommentsButton;
 	@FindBy(css="#commPrev")
 	private WebElement loadPreviousCommentsButton;
+	@FindBy(css="#toctitle")
+	private WebElement tocWrapper;
+	@FindBy(css=".artSec.open .goBck")
+	private WebElement hideSectionButton;
 	
 	private void showCommentsSection(){
 		waitForElementByElement(commentsSectionShowButton);
@@ -83,5 +90,42 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		loadPreviousCommentsButton.click();
 		waitForElementByElement(loadMoreCommentsButton);
 	}
-
+	
+	public MobileArticlePageObject openSections(){
+		getUrl(Global.DOMAIN+"wiki/Sections");
+		waitForElementByElement(tocWrapper);
+		PageObjectLogging.log("openSections", "sections page was opened", true, driver);
+		return new MobileArticlePageObject(driver);
+	}
+	
+	public void clickSection(int sectionNumber){		
+		WebElement chev = waitForElementByXPath("//div[@class='mw-content-ltr']/h2["+sectionNumber+"]");
+		chev.click();
+		PageObjectLogging.log("clickSection", "section "+chev.getText()+" clicked", true, driver);
+		
+////		waitForElementByXPath("//div[@class='mw-content-ltr']/h2[@class=' collSec open']");
+//		waitForElementByCss("div.mw-content-ltr h2.collSec.open");
+//		chev.click();
+//		Global.LOG_ENABLED = false;
+//		waitForElementNotVisibleByCss("div.mw-content-ltr h2.collSec.open");
+//		Global.LOG_ENABLED = true;
+	}
+	
+	public void verifySectionVisibility(){
+		waitForElementByCss("div.mw-content-ltr h2.collSec.open");
+		PageObjectLogging.log("verifySectionVisibility", "section is opened and visible", true, driver);
+	}
+	
+	public void verifySectionInvisibility(){
+		Global.LOG_ENABLED = false;
+		waitForElementNotVisibleByCss("div.mw-content-ltr h2.collSec.open");
+		Global.LOG_ENABLED = true;		
+		PageObjectLogging.log("verifySectionInvisibility", "section is not visible", true, driver);
+	}
+	
+	public void clickHideButton(){
+		waitForElementByElement(hideSectionButton);
+		executeScript("document.querySelectorAll('.artSec.open .goBck')[0].click()");
+		PageObjectLogging.log("clickHideButton", "hide section button clicked", true, driver);
+	}
 }
