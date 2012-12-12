@@ -27,7 +27,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article.categories_clickAddCategory();
 		article.categories_typeCategoryName(categoryName);
 		article.categories_clickOnSave();
-		article.categories_verifyCategoryAdded(categoryName);
+		article.categories_verifyCategoryPresent(categoryName);
 
 	}
 
@@ -47,7 +47,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		article = articleEdit.clickOnPublishButton();
-		article.categories_verifyCategoryAdded(categoryName);
+		article.categories_verifyCategoryPresent(categoryName);
 	}
 
 	/*
@@ -69,7 +69,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName + 2);
 		WikiArticlePageObject article = articleEdit.clickOnPublishButton();
-		article.categories_verifyCategoryAdded(categoryName);
+		article.categories_verifyCategoryPresent(categoryName);
 		articleEdit = article.clickEditButton("");
 		articleEdit.categories_removeCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryRemovedEditMode(categoryName);
@@ -94,7 +94,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article.categories_clickAddCategory();
 		article.categories_typeCategoryName(categoryName);
 		article.categories_clickOnSave();
-		article.categories_verifyCategoryAdded(categoryName);
+		article.categories_verifyCategoryPresent(categoryName);
 		article.refreshPage();
 		WikiCategoryPageObject categoryPage = article.openCategoryPage(categoryName);
 		categoryPage.verifyCategoryContainsPage(articleName);
@@ -117,7 +117,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 				.categories_addSuggestedCategoryEditMode("t");
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		article = articleEdit.clickOnPublishButton();
-		article.categories_verifyCategoryAdded(categoryName);
+		article.categories_verifyCategoryPresent(categoryName);
 	}
 
 	/*
@@ -139,7 +139,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.clickOnVisualButton();
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		article = articleEdit.clickOnPublishButton();
-		article.categories_verifyCategoryAdded(categoryName);
+		article.categories_verifyCategoryPresent(categoryName);
 	}
 
 	/*
@@ -160,7 +160,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.clickOnSourceButton();
 		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+categoryName+"]]");
 		article = articleEdit.clickOnPublishButton();
-		article.categories_verifyCategoryAdded(categoryName);
+		article.categories_verifyCategoryPresent(categoryName);
 	}
 	
 	/*
@@ -190,7 +190,6 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_009", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_009_invalidCategoryInSourceModePrevention() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String categoryName = "test" + wiki.getTimeStamp();
 		String JSalertMessage = "Unhandled syntax detected - switching back to visual mode impossible.";
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
