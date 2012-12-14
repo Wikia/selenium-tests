@@ -8,7 +8,7 @@ import com.wikia.webdriver.PageObjects.PageObject.Mobile.MobileArticlePageObject
 public class SectionsTests extends TestTemplate{
 	
 	@Test(groups={"mobile"})
-	public void sections_001_chevronTest(){
+	public void Sections_001_chevronTest(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openSections();
 		article.clickSection(1);
@@ -18,13 +18,17 @@ public class SectionsTests extends TestTemplate{
 	}
 	
 	@Test(groups={"mobile"})
-	public void sections_002_hideTest(){
+	public void Sections_002_hideTest(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openSections();
 		article.clickSection(1);
 		article.verifySectionVisibility();
 		article.clickHideButton();
 		article.verifySectionInvisibility();
+	}
+	
+	public void Sections_003_contents(){
+		
 	}
 
 }

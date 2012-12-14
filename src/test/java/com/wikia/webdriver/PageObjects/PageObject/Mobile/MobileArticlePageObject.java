@@ -6,6 +6,7 @@ import org.openqa.selenium.remote.server.handler.html5.GetLocalStorageItem;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
@@ -43,6 +44,13 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement tocWrapper;
 	@FindBy(css=".artSec.open .goBck")
 	private WebElement hideSectionButton;
+	@FindBy(xpath="//div/figure[@class='thumb']")
+	private WebElement modalWrapper;
+	@FindBy(xpath="//div/figure[@class='thumb']/img")
+	private WebElement imageModalTrigger;
+	@FindBy(xpath="//section[@class='swiperPage current']")
+	private WebElement currentImageModal;
+	
 	
 	private void showCommentsSection(){
 		waitForElementByElement(commentsSectionShowButton);
@@ -129,4 +137,23 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		executeScript("document.querySelectorAll('.artSec.open .goBck')[0].click()");
 		PageObjectLogging.log("clickHideButton", "hide section button clicked", true, driver);
 	}
+	
+	public MobileArticlePageObject openModals(){
+		getUrl(Global.DOMAIN+"wiki/Modal");
+		waitForElementByElement(modalWrapper);
+		PageObjectLogging.log("openModals", "modals page was opened", true, driver);
+		return new MobileArticlePageObject(driver);
+	}
+	
+	public void clickModal(){
+		String url = driver.getCurrentUrl();
+		clickAndWait(imageModalTrigger);
+		PageObjectLogging.log("clickModal", "modal trigger clicked", true, driver);		
+		Assertion.assertEquals(url+"#Modal", driver.getCurrentUrl());
+		waitForElementByElement(currentImageModal);
+		PageObjectLogging.log("clickModal", "modal url verified", true, driver);
+		
+	}
+	
+	
 }
