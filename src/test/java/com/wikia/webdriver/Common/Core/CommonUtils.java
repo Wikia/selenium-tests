@@ -1,17 +1,22 @@
 package com.wikia.webdriver.Common.Core;
 
 import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class CommonUtils {
 	
@@ -29,6 +34,21 @@ public class CommonUtils {
 		  StringSelection ss = new StringSelection(content);
 		  Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 	  }
+	  
+
+		public static List<String> getLinesInFile(String pathToFile) {
+			List<String> list = new ArrayList<String>();
+			try {
+				BufferedReader br = new BufferedReader(
+				new FileReader(pathToFile));
+				String line;
+				while ((line = br.readLine()) != null) {
+					list.add(line);
+				}
+				} catch (IOException e) {
+				}
+			return list;
+		} 
 	
 	public static void appendTextToFile(String filePath, String textToWrite) {
 		try {
@@ -108,8 +128,21 @@ public class CommonUtils {
 	 */
 	public static void createDirectory(String fileName)
 	{
-		new File(fileName).mkdir();
+		Boolean dirCreated = new File(fileName).mkdir();
+		int numberOftakes = 0;
+		if (!dirCreated && numberOftakes < 5) {
+			dirCreated = new File(fileName).mkdir();
+			numberOftakes++;
+			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created, trying to create it again", false);
+		}
+		else if(dirCreated) {
+			PageObjectLogging.log("createDirectory", "directory "+fileName+" created", true);			
+		}
+		else {
+			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created", false);
+		}
 	}
+
 	
 	
 //	public static void createFile(String filePath, String content)
