@@ -482,6 +482,18 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		return new WikiArticlePageObject(driver, Domain, wikiArticle);
 	}
+	
+	protected void navigateToRandomPage() {
+		String temp = Domain;
+		try {
+			temp = Domain + "wiki/Special:Random";
+			getUrl(temp);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		
+	}
 
 	public void openWikiPage() {
 		String temp = Domain;

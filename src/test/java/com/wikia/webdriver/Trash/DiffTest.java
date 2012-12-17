@@ -49,7 +49,7 @@ public class DiffTest extends TestTemplate {
 				if (!(preview.length()==live.length())){
 					ImageComparisonHelper.compareImages(preview.getCanonicalPath(),
 							live.getCanonicalPath(),
-							"c:/WebdriverTestsGit/logs/diff/" + i + "output.png");
+							"c:/WebdriverTestsGit/logs/diff/" + i + "output.png", "compare_x64.exe");
 					PageObjectLogging.log("images are different", "<a href='diff/"+i+"preview.png'>preview</a><br/>" +
 							"<a href='diff/"+i+"live.png'>live</a><br/>" +
 							"<a class='diff' href='diff/"+i+"output.png'>diff</a>", false);

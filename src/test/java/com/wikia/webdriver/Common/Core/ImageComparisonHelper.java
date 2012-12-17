@@ -9,10 +9,11 @@ import org.apache.tools.ant.types.CommandlineJava.SysProperties;
 
 public class ImageComparisonHelper {
 	
-	public static void compareImages(String imageFirst, String imageSecond, String imageOutput){
+	// exeFileName = {compare_x64.exe, compare.exe}
+	public static void compareImages(String imageFirst, String imageSecond, String imageOutput, String exeFileName){
 		File f = new File("." + File.separator + "src" + File.separator + "test"
 				+ File.separator + "resources" + File.separator
-				+ "ImageTools" + File.separator + "compare_x64.exe ");
+				+ "ImageTools" + File.separator + exeFileName);
 		try {
 			String path = f.getCanonicalPath();
 			String command = path + " "+imageFirst+" "+imageSecond+ " "+imageOutput;
