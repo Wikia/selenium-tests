@@ -56,7 +56,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	private By categories_listOfCategories = By.cssSelector("#catlinks li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
-	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle span.Wikia-video-play-button");
+	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle img.sprite.play");
 	private By AddVideoRVButton = By.cssSelector("a.addVideo");
 	private By VideoModalAddButton = By.cssSelector("button.relatedVideosConfirm");
 	private By RVvideoLoading = By.cssSelector("section.loading");
