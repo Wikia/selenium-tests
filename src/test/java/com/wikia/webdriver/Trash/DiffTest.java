@@ -78,19 +78,18 @@ public class DiffTest extends TestTemplate {
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
-		Har har = server.getHar();
-		try {
+		try{
+			server.start();
+			Har har = server.getHar();
 			parseUrlParams(har);
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		addTimings(har);
-		try {
+			addTimings(har);
 			har.writeTo(new File(path));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			server.stop();
+			server.cleanup();
+		}
+		catch(Exception e)
+		{
+			
 		}
 	}
 	
