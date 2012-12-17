@@ -200,6 +200,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	{
 		driver.navigate().refresh();
 //		hoverMouseOverCommentArea(comment);
+		waitForElementByXPath("//blockquote//p[contains(text(), '"+comment+"')]");
 		clickEditCommentButton();
 	}
 	
