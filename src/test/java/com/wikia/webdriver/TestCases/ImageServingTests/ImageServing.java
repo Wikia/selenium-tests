@@ -64,7 +64,7 @@ public class ImageServing extends TestTemplate {
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		SpecialMultipleUploadPageObject wikiSpecialMU = wiki.OpenSpecialMultipleUpload();
 		wikiSpecialMU.TypeInFilesToUpload(ListOfFiles);
 		wikiSpecialMU.CheckIgnoreAnyWarnings();
