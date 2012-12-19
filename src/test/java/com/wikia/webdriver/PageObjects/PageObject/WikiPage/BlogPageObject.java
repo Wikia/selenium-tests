@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class BlogPageObject extends WikiArticlePageObject{
@@ -32,8 +33,20 @@ public class BlogPageObject extends WikiArticlePageObject{
 		waitForElementByElement(usernameField.findElement(secondSpan));
 		waitForTextToBePresentInElementByElement(usernameField.findElement(thirdSpan), "User blog:"+userName);
 		PageObjectLogging.log("verifyUsernameFieldPresent ", "verify that Username Field and all its element are presesnt", true, driver);			
+	}
 	
-		
+	public SpecialCreateBlogPageObject editBlog(){
+		getUrl(driver.getCurrentUrl()+"?action=edit");
+		PageObjectLogging.log("editBlog", "blog is in edit mode now", true, driver);
+		return new SpecialCreateBlogPageObject(driver, this.Domain, this.articlename);
+	}
+	
+	public void deleteBlogPost(String postName){
+		getUrl(driver.getCurrentUrl() + "?action=delete");
+		clickArticleDeleteConfirmationButton(postName);
+		waitForElementByXPath("//div[@class='msg' and contains(text(), 'has been deleted.')]");
+		PageObjectLogging.log("deleteArticle", "article has been deleted",
+				true, driver);
 	}
 
 }

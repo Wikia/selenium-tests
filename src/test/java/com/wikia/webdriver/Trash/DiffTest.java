@@ -28,9 +28,9 @@ public class DiffTest extends TestTemplate {
 	public void diffTest() {
 		FileInputStream input;
 		try {
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 3; i++) {
 				driver.manage().window().maximize();
-				driver.get("http://harrypotter.wikia.com/wiki/Special:Random");
+				driver.get("http://muppets.wikia.com/wiki/Special:Random");
 				String url = driver.getCurrentUrl();
 				url = url.substring(url.indexOf("/")+2);
 				Thread.sleep(1000);
@@ -53,14 +53,14 @@ public class DiffTest extends TestTemplate {
 					PageObjectLogging.log("images are different", "<a href='diff/"+i+"preview.png'>preview</a><br/>" +
 							"<a href='diff/"+i+"live.png'>live</a><br/>" +
 							"<a class='diff' href='diff/"+i+"output.png'>diff</a>", false);
-					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_live"+i+".har'>traffic</a>", false);
-					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_preview"+i+".har'>traffic</a>", false);
+//					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_live"+i+".har'>traffic</a>", false);
+//					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_preview"+i+".har'>traffic</a>", false);
 				}
 				else{
 					PageObjectLogging.log("images are the same", "<a href='diff/"+i+"preview.png'>preview</a><br/>" +
 							"<a href='diff/"+i+"live.png'>live</a>", true);
-					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_live"+i+".har'>traffic</a>", true);
-					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_preview"+i+".har'>traffic</a>", true);
+//					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_live"+i+".har'>traffic</a>", true);
+//					PageObjectLogging.log("live traffic", "<a href='../temp/traffic_preview"+i+".har'>traffic</a>", true);
 				}
 			}
 
@@ -93,7 +93,7 @@ public class DiffTest extends TestTemplate {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void browserMobTest(){
 		driver.get("http://wikia.com");
 		getHarFile("./temp/traffic.har");

@@ -133,13 +133,13 @@ public class CommonUtils {
 		if (!dirCreated && numberOftakes < 5) {
 			dirCreated = new File(fileName).mkdir();
 			numberOftakes++;
-			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created, trying to create it again", false);
+//			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created, trying to create it again", false);
 		}
 		else if(dirCreated) {
-			PageObjectLogging.log("createDirectory", "directory "+fileName+" created", true);			
+//			PageObjectLogging.log("createDirectory", "directory "+fileName+" created", true);			
 		}
 		else {
-			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created", false);
+//			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created", false);
 		}
 	}
 
