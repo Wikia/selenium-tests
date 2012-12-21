@@ -57,7 +57,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement oKbutton;
 	@FindBy(css="img.video")
 	private WebElement videoInEditMode;
-	@FindBy(css="div.ArticlePreview span.Wikia-video-play-button")
+	@FindBy(css="div.ArticlePreview img.sprite.play")
 	private WebElement videoOnPreview;
 	@FindBy(css="span.cke_button_ModeWysiwyg a")
 	private WebElement visualModeButton;

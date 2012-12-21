@@ -55,7 +55,6 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		jQueryClick("input.control-button");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
-	
 		return new BlogPageObject(driver, Domain, articlename);
 	}
 

@@ -668,7 +668,7 @@ public class WikiBasePageObject extends BasePageObject {
 		deleteCommentReasonField.sendKeys("QAReason");
 		clickAndWait(deleteConfirmationButton);
 		String temp = atricleName.replace("_", " ");
-		waitForElementByXPath("//div[@class='msg' and contains(text(), '\""
+		waitForElementByXPath("//div[@class='msg' and contains(text(), '"
 				+ temp + "\" has been deleted.')]");
 	}
 
