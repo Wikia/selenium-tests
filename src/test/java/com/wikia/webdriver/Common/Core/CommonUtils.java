@@ -134,16 +134,13 @@ public class CommonUtils {
 			dirCreated = new File(fileName).mkdir();
 			numberOftakes++;
 			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created, trying to create it again", false);
-
-		}
-		else if(dirCreated) {
+		}		
 		if(dirCreated) {
 			PageObjectLogging.log("createDirectory", "directory "+fileName+" created", true);			
 
 		}
 		else {
 			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created", false);
-
 		}
 	}
 
