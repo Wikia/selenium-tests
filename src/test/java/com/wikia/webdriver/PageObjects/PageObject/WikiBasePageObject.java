@@ -18,6 +18,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialUploadPageObject;
@@ -730,6 +731,14 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
 				+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver, Domain, pageName);
+	}
+	
+	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
+		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);
+		PageObjectLogging.log("SpecialCreateTopListPageObject",
+				"create top 10 list with name: "+top_10_list_Name, true, driver);
+		return new SpecialCreateTopListPageObject(driver, Domain, top_10_list_Name);
+		
 	}
 
 	public WikiArticlePageObject openArticle(String articleName) {
