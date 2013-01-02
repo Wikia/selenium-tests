@@ -60,10 +60,12 @@ public class MailFunctions {
 					buffer.append(line);
 				}
 				System.out.println(buffer);
+				store.close();
 				return buffer.toString();
 			}
 			else
 			{
+				store.close();
 				return "no messages";
 			}
 		} 
@@ -132,6 +134,7 @@ public class MailFunctions {
 			{
 				System.out.println("There is no messages in inbox");
 			}
+			store.close();
 		} 
 		catch (NoSuchProviderException e) 
 		{
