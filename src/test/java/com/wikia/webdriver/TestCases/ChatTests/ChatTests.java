@@ -366,21 +366,37 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		switchToWindow(driver);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification(1);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(2);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(3);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(4);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(5);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(6);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(7);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(8);
+		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(9);
 
 	}
