@@ -278,16 +278,32 @@ public class CommonFunctions {
 		((JavascriptExecutor) driver)
 		.executeScript("$('.wikia-button-facebook').click()");
 		PageObjectLogging.log("logInDropDownFB", "facebook button clicked", true);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //		WebElement fbConnect = driver.findElement(By.className("wikia-button-facebook"));		
 //		fbConnect.click();
 		//getting window handles
 		Object[] windows = driver.getWindowHandles().toArray();
+		int delay = 500;
+		int sumDelay = 500;
+		while(windows.length==1){
+			try {
+				Thread.sleep(delay);
+				windows = driver.getWindowHandles().toArray();
+				sumDelay+=500;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(sumDelay>5000){
+				PageObjectLogging.log("logInDropDownFB", "facebook button clicked but without result", false);
+				break;
+			}
+			
+		}
 		driver.switchTo().window(windows[1].toString());
 		PageObjectLogging.log("logInDropDownFB", "facebook popup window detected", true);
 		PageObjectLogging.log("logInDropDownFB", "switching to facebook pop-up window", true);
