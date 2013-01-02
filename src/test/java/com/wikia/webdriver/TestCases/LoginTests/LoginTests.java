@@ -56,7 +56,7 @@ public class LoginTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 	}
 
-	@Test(groups = { "Login_003", "Login" })
+	@Test(groups = { "Login_003", "" })
 	public void Login_003_Facebook_dropDown() {
 		CommonFunctions.logOut(driver);
 //		driver.get("http://www.facebook.com/");
