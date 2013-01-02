@@ -718,6 +718,7 @@ public class BasePageObject{
 		try
 		{								
 			driver.navigate().back();
+			PageObjectLogging.log("navigateBack", "succesfully navigated back", true);			
 		}
 		catch(Exception e)
 		{
