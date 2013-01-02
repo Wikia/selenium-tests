@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -52,6 +53,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement categories_saveButton;
 	@FindBy(css="textarea#article-comm")
 	private WebElement commentAreaDisabled;
+	@FindBy(css=".article-comm-reply")
+	private WebElement replyCommentButton;
 	
 	
 	private By categories_listOfCategories = By.cssSelector("#catlinks li a");
@@ -78,16 +81,21 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(submitCommentButton);
 		waitForElementByElement(commentAreaDisabled);
 		int delay = 500;
+		int sumDelay = 500;
 		while (commentAreaDisabled.isDisplayed())
 		{
 			try {
 				Thread.sleep(delay);
-			} catch (InterruptedException e) {
+				jQueryFocus("textarea#article-comm");				
+			}
+			catch(WebDriverException e){
+				PageObjectLogging.log("triggerCommentArea", "comment are visible after "+delay+" ms", true);
+			}
+			catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			jQueryFocus("textarea#article-comm");
-			delay+=500;
-			if (delay > 3000)
+			sumDelay+=500;
+			if (sumDelay > 3000)
 			{
 				break;
 			}
@@ -199,6 +207,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void editComment(String comment)
 	{
 		driver.navigate().refresh();
+		waitForElementByElement(replyCommentButton);
 //		hoverMouseOverCommentArea(comment);
 		clickEditCommentButton();
 	}

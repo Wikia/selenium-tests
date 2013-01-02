@@ -42,6 +42,9 @@ public class Properties {
 	public static String userNameFB;
 	public static String passwordFB;
 	
+	public static String userNameBlocked;
+	public static String passwordBlocked;
+	
 	
 	
 	private static void setVariables()
@@ -74,6 +77,9 @@ public class Properties {
 		
 		email = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.username");
 		emailPassword = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.password");
+
+		userNameBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.username");
+		passwordBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
 	
 	}
 	
@@ -112,8 +118,8 @@ public class Properties {
 	
 	private static void setPropertiesManually()
 	{
-		Global.BROWSER = "FF";
-		Global.DOMAIN = "http://mediawiki119.wikia.com/";
+		Global.BROWSER = "IE";
+		Global.DOMAIN = "http://preview.mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		Global.CONFIG_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"captcha.txt");
