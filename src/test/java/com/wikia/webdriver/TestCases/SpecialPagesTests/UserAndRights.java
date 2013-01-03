@@ -6,8 +6,10 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.Special.Block.SpecialBlockListPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.Special.Block.SpecialBlockPageObject;
+import com.wikia.webdriver.PageObjects.PageObject.Special.Block.SpecialContributionsPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.Special.Block.SpecialUnblockPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
@@ -85,16 +87,23 @@ public class UserAndRights extends TestTemplate{
 		list.searchForUser(Properties.userNameBlocked);
 		list.verifyUserUnblocked();
 	}
-//	@Test
-//	public void UsersAndRights004_UserRights(){
-//		
-//	}
-//	
-//	//
-//	@Test
-//	public void UsersAndRights005_Contributions(){
-//		CommonFunctions.logOut(driver);
-//		
-//		
-//	}
+
+	@Test(groups = {"usersAndRights006", "UsersAndRights"})
+	public void usersAndRights007_Contributions(){
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String pageName = wiki.getTimeStamp() + "Special:Contributions test article title";
+		String pageContent = wiki.getTimeStamp() + "Special:Contributions test article content";
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		edit.deleteArticleContent();
+		edit.typeInContent(pageContent);
+		edit.clickOnPublishButton();
+		SpecialContributionsPageObject contribution = new SpecialContributionsPageObject(driver);
+		contribution = contribution.openContributionsPage();
+		contribution.searchContributions(Properties.userNameStaff);
+		contribution.verifyNewPageOnList(pageName, pageContent);
+		CommonFunctions.logOut(driver);
+	}
 }
