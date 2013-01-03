@@ -133,14 +133,14 @@ public class CommonUtils {
 		while (!dirCreated && numberOftakes < 5) {
 			dirCreated = new File(fileName).mkdir();
 			numberOftakes++;
-			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created, trying to create it again", false);
+			System.out.println("directory "+fileName+" not created, trying to create it again");
 		}		
 		if(dirCreated) {
-			PageObjectLogging.log("createDirectory", "directory "+fileName+" created", true);			
+			System.out.println("directory "+fileName+" created");			
 
 		}
 		else {
-			PageObjectLogging.log("createDirectory", "directory "+fileName+" not created", false);
+			System.out.println("directory "+fileName+" not created");
 		}
 	}
 
