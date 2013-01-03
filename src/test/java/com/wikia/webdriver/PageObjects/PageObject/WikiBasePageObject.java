@@ -123,7 +123,7 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(css="[value='Find']")
 	private WebElement imageFindButton;
-
+	
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By
@@ -794,5 +794,4 @@ public class WikiBasePageObject extends BasePageObject {
 		return null;
 
 	}
-
 }

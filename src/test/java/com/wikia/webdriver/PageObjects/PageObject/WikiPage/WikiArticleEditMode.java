@@ -39,8 +39,6 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement header;
 	@FindBy(css="tr.ImageUploadFindLinks td a")
 	private WebElement addThisPhotoLink;
-	
-//	@FindBy(css="div.module_content nav.buttons nav.wikia-menu-button a")
 	@FindBy(css="#wpPreview")
 	private WebElement previewButton;
 	@FindBy(css="div.neutral.modalToolbar a[id='publish']")
@@ -77,6 +75,11 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement categories_CategoryInputField;
 	@FindBy(css="#csWikitext")
 	private WebElement categories_CategorySourceInputField;
+	@FindBy(xpath="//p[contains(text(), 'You do not have permission to create pages, for the following reason:')]")
+	private WebElement blockedUserMessage1;
+	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
+	private WebElement blockedUserMessage2;
+	
 	
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By removePhotoDialog = By.cssSelector("section.modalWrapper.RTEModal");
@@ -84,12 +87,9 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private By videoOnArticleEditMode = By.cssSelector("img.video");
 	private By slideShowOnArticleEditMode = By.cssSelector("img.image-slideshow");
 	private By sliderOnArticleEditMode = By.cssSelector("img.image-gallery-slider");
-	
 	private By contextMenuIframeList = By.cssSelector("iframe[aria-label='Context Menu Options']");
 	private By contextMenuOptionsList = By.cssSelector("span.cke_menuitem a");
-
 	private By categories_listOfCategoriyPrompts = By.cssSelector("#csSuggestContainer div.yui-ac-bd ul li");
-
 	private String imageArticleIFrame = "img";
 	private String galleryArticleIFrame = "img.image-gallery";
 	private String sliderArticleIFrame = "img.image-gallery-slider";
@@ -97,10 +97,8 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private String videoArticleIFrame = "img.video";
 	private String previewButtonSelector = "#wpPreview";
 	private String publishButtonSelector = "div.neutral.modalToolbar a[id=\"publish\"]";
-	
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 	private String deleteButtonArticleItem = "span.RTEMediaOverlayDelete";
-	
 	private String categories_listOfCategories = "#csItemsContainer li";
 
 	public WikiArticleEditMode(WebDriver driver, String Domain,
@@ -974,32 +972,10 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		}
 		
 	}
-
-
-
-
-
-
-
-
-
-
 	
-
-	
-
-	
-
-	
-
-	
-
-	
-	
-
-
-
-
-
-
+	public void verifyBlockedUserMessage(){
+		waitForElementByElement(blockedUserMessage1);
+		waitForElementByElement(blockedUserMessage2);
+		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true, driver);
+	}
 }

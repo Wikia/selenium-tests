@@ -44,7 +44,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	@FindBy(css="input[id*='article-comm-reply']")
 	private WebElement submitReplyButton;
 	@FindBy(css="table.article-table")
-	private WebElement TableOnWikiaArticle;
+	private WebElement tableOnWikiaArticle;
 	@FindBy(css="#csAddCategorySwitch a")
 	private WebElement categories_AddCategoryButton;
 	@FindBy(css="#csCategoryInput")
@@ -413,7 +413,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	*/
 
 	public void VerifyTheTableOnThePage() {
-	waitForElementByElement(TableOnWikiaArticle);
+	waitForElementByElement(tableOnWikiaArticle);
 	PageObjectLogging.log("VerifyTheTableOnThePage", "Verify that the table appears on the page", true, driver);
 	}
 
