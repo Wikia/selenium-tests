@@ -471,7 +471,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialMultipleUploadPageObject OpenSpecialMultipleUpload() {
 		getUrl(Domain + "Special:MultipleUpload");
 		return new SpecialMultipleUploadPageObject(driver, Domain);
-
 	}
 
 	public WikiArticlePageObject OpenArticle(String wikiArticle) {

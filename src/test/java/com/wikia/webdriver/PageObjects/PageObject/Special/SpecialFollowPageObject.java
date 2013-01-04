@@ -15,13 +15,24 @@ public class SpecialFollowPageObject extends BasePageObject{
 	}
 	
 	public SpecialFollowPageObject openFollowingPage(){
-		getUrl(Global.DOMAIN+"/wiki/Special:Following");
+		getUrl(Global.DOMAIN+"wiki/Special:Following");
 		PageObjectLogging.log("openFollowingPage", "following page opened", true, driver);
 		return new SpecialFollowPageObject(driver);
 	}
 	
-	public void verifyFollowedArticle(){
-		
+	public void verifyFollowedArticle(String articleName){
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-article']//a[contains(text(), '"+articleName+"')]");
+		PageObjectLogging.log("verifyFollowedArticle", articleName + "is visible on followed list", true);
+	}
+	
+	public void verifyFollowedImageVideo(String image){
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-media']//a[contains(text(), '"+image+"')]");
+		PageObjectLogging.log("verifyFollowedArticle", image + "is visible on followed list", true);
+	}
+	
+	public void verifyFollowedBLog(String userName){
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '"+userName+"')]");
+		PageObjectLogging.log("verifyFollowedArticle", userName + " blog is visible on followed list", true);
 	}
 
 }

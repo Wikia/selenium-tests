@@ -175,6 +175,4 @@ public class BlogTests extends TestTemplate{
 		blogPage.verifyComment(blogComment, Properties.userNameStaff);
 		blogPage.deleteComment(blogComment);
 	}
-	
-	
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjects.PageObject.Special.Block.SpecialBlockPageObject;
 
 public class BlogPageObject extends WikiArticlePageObject{
 
@@ -48,5 +49,25 @@ public class BlogPageObject extends WikiArticlePageObject{
 		PageObjectLogging.log("deleteArticle", "article has been deleted",
 				true, driver);
 	}
+	
+	public BlogPageObject openBlogPage(String userName){
+		getUrl(Global.DOMAIN+"/User_blog:"+userName);
+		PageObjectLogging.log("openBlogPage", "blog page opened", true, driver);
+		return new BlogPageObject(driver, userName, "");
+	}
+	
+	public void followBlogPage(String userName){
+		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=watch");
+		clickAndWait(followSubmit);
+		waitForElementByElement(followedButton);
+	}
+	
+	public void unfollowBlogPage(String userName){
+		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=unwatch");
+		clickAndWait(followSubmit);
+		waitForElementByElement(unfollowedButton);
+	}
+	
+	
 
 }

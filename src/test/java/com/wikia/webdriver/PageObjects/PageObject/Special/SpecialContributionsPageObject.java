@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjects.PageObject.Special.Block;
+package com.wikia.webdriver.PageObjects.PageObject.Special;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
