@@ -17,7 +17,7 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 
 public class ArticleRTETest extends TestTemplate{
-	
+
 //	@DataProvider
 //	private static final String[][] wikiText()
 //	{
@@ -25,14 +25,14 @@ public class ArticleRTETest extends TestTemplate{
 //				{
 //					{"aaa"}
 //				};
-//	}	
-	
+//	}
+
 
 	private static final int WIKI_TEXTS_PER_CYCLE = 300;
 
 	static public String[] createWikitexts() {
 		return new String[] {
-				
+/*
 ////				 lines
 				"\n1a",
 				"\n\n1b",
@@ -204,6 +204,7 @@ public class ArticleRTETest extends TestTemplate{
 				"<te&st>a&b&c</te<&>st> &amp; &nbsp; &lt; &gt; : &#58; &#123; - 123 &#x5f;",
 				"<noinclude>&#91;brackets&#93;&nbsp;&amp;&nbsp;non-breaking&nbsp;spaces</noinclude>\n\n<noinclude>[brackets] & non-breaking spaces</noinclude>",
 				"« foo",
+*/
 				// utf magic
 				"ÀàĄąÒòỪừỲỳŹź",
 				"(義) (誠) (涅 ネム) foo",
@@ -213,6 +214,7 @@ public class ArticleRTETest extends TestTemplate{
 				"[[&]]\n\n[[&amp;]]\n\n[[foo & bar]]es\n\n[[Flip & Flap]]\n\n[[Flip & Flap|and &amp; entity]]\n\n[[Flip &amp; Entity]]\n\nfoo & bar\n\nfoo &amp; entity\n\n[[foo|&amp;]]\n\n[[foo|Caption with &amp; entity]]",
 				"[[/foo]]\n\n[[/foo/]]\n\n[[/foo bar]]\n\n[[/foo bar/]]",
 				"[[RTE_test_page/foo|foo]]\n\n[[/foo/]]\n\n[[RTE_test_page/foo|bar]]\n\n[[RTE_test_page/foo]]",
+/*
 				// div
 				"\n<div>123</div>\n\n<div>456</div>\n\n\n<div>789</div>",
 				"<div>123</div>\n\n<div>456</div>\n\n\n\n<div>\n\n\n789</div>",
@@ -292,12 +294,12 @@ public class ArticleRTETest extends TestTemplate{
 				// BugID: 11537
 				"<div>\n<h2>Test</h2>\n* Test\n</div>",
 				"<div>\n<h2>Test</h2>\n: Test\n</div>",
+*/
 
 
-				
-				
-				
-				
+
+
+
 				///**********************************
 //				"\n\n\n\n\n\n\n1g",
 //				"1\nb",//bug jeden enter
@@ -314,7 +316,7 @@ public class ArticleRTETest extends TestTemplate{
 //				"1 b\n3 4\n\n5 6\n\n\ny 8",//bug jeden enter
 //				"* 1a\n* 2\n*  3\n*     10\n*      11\n*      12\n*  4\n*   5\n*   6\n*    7\n*    8\n*     9",
 //				"# 1b\n# 2\n#  3\n#     10\n#      11\n#      12\n#  4\n#   5\n#   6\n#    7\n#    8\n#     9",
-//				"\n\n\n\n=1=\na\nb\n\n\n=2=\n\na\n\nb\n==     3     ==\n*a\n*b\n#c\n#d\n1\n*1\n\n1\n=== 4===\n=5 =\n=== 6 ===\n1 2 3 4\n a\n2\n\n3\n\n\n\n\n\n a", 
+//				"\n\n\n\n=1=\na\nb\n\n\n=2=\n\na\n\nb\n==     3     ==\n*a\n*b\n#c\n#d\n1\n*1\n\n1\n=== 4===\n=5 =\n=== 6 ===\n1 2 3 4\n a\n2\n\n3\n\n\n\n\n\n a",
 //				"{|\n|123\n|}",
 //				"{|\n|123\n|}\n\n\n{|\n|123\n|}",
 //				"{|\n|123\n{|\n|123\n|}\n{|\n|123\n|}\n|}",
@@ -344,10 +346,10 @@ public class ArticleRTETest extends TestTemplate{
 //				"[[Media:Wiki.png]]\n\n[[File:Wiki.png]]\n\n[[Media:Foo.png]]",
 //				"{|\n|  foo ||    || bar  ||\n|}",
 
-//				
+//
 				//
-				
-				
+
+
 		};
 	}
 
@@ -368,6 +370,7 @@ public class ArticleRTETest extends TestTemplate{
 
 		return al.iterator();
 	}
+
 	@Test(dataProvider="wikiTextsProvider", groups={"RTE"})
 	public void ArticleRTETest_001(String[] wikiTexts)
 	{
@@ -377,8 +380,7 @@ public class ArticleRTETest extends TestTemplate{
 		for (String wikitext : wikiTexts)
 		{
 			WebElement e = driver.findElement(By.cssSelector(".cke_source"));
-			e.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-			e.sendKeys(Keys.DELETE);
+			edit.clearSource();
 			e.sendKeys(wikitext);
 			PageObjectLogging.log("", "", true, driver);
 			edit.clickOnVisualButton();
@@ -388,7 +390,7 @@ public class ArticleRTETest extends TestTemplate{
 			String tmp2;
 			char[] tmp1arr;
 			char[] tmp2arr;
-			
+
 			if(e.getAttribute("value").contains(wikitext)){
 				tmp1 = e.getAttribute("value").replace("<", "&lt");
 				tmp1.replace(">", "&gt");
@@ -401,36 +403,12 @@ public class ArticleRTETest extends TestTemplate{
 				tmp2 = wikitext.replace("<", "&lt;");
 				tmp2 = tmp2.replace(">", "&gt;");
 				tmp2 = tmp2.replace(" ", "_");
-				
-				PageObjectLogging.log("checking value failed", "should be: "+tmp2, false);				
-				PageObjectLogging.log("checking value failed", "       is: "+tmp1, false, driver);				
+
+				PageObjectLogging.log("checking value failed", "should be: "+tmp2, false);
+				PageObjectLogging.log("checking value failed", "       is: "+tmp1, false, driver);
 			}
 		}
 		edit.clickOnVisualButton();
 		edit.clickOnPublishButton();
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
