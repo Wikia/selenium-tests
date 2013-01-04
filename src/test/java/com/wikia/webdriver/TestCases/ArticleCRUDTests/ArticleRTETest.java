@@ -32,7 +32,6 @@ public class ArticleRTETest extends TestTemplate{
 
 	static public String[] createWikitexts() {
 		return new String[] {
-/*
 ////				 lines
 				"\n1a",
 				"\n\n1b",
@@ -214,7 +213,6 @@ public class ArticleRTETest extends TestTemplate{
 				"[[&]]\n\n[[&amp;]]\n\n[[foo & bar]]es\n\n[[Flip & Flap]]\n\n[[Flip & Flap|and &amp; entity]]\n\n[[Flip &amp; Entity]]\n\nfoo & bar\n\nfoo &amp; entity\n\n[[foo|&amp;]]\n\n[[foo|Caption with &amp; entity]]",
 				"[[/foo]]\n\n[[/foo/]]\n\n[[/foo bar]]\n\n[[/foo bar/]]",
 				"[[RTE_test_page/foo|foo]]\n\n[[/foo/]]\n\n[[RTE_test_page/foo|bar]]\n\n[[RTE_test_page/foo]]",
-/*
 				// div
 				"\n<div>123</div>\n\n<div>456</div>\n\n\n<div>789</div>",
 				"<div>123</div>\n\n<div>456</div>\n\n\n\n<div>\n\n\n789</div>",
@@ -294,11 +292,6 @@ public class ArticleRTETest extends TestTemplate{
 				// BugID: 11537
 				"<div>\n<h2>Test</h2>\n* Test\n</div>",
 				"<div>\n<h2>Test</h2>\n: Test\n</div>",
-*/
-
-
-
-
 
 				///**********************************
 //				"\n\n\n\n\n\n\n1g",
@@ -345,10 +338,6 @@ public class ArticleRTETest extends TestTemplate{
 //				"<p style=\"text-align: center; height: 3em;\">&#160;</p>",
 //				"[[Media:Wiki.png]]\n\n[[File:Wiki.png]]\n\n[[Media:Foo.png]]",
 //				"{|\n|  foo ||    || bar  ||\n|}",
-
-//
-				//
-
 
 		};
 	}
