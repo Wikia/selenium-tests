@@ -13,6 +13,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateTopListP
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
 
+// https://internal.wikia-inc.com/wiki/Top_10_List/QA#Tests_on_Development_environment  - TOP 10 list QA specification
 public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_001", "Top_10_list_Tests" })
@@ -74,6 +75,27 @@ public class Top_10_list_Tests extends TestTemplate {
 		top10list.refreshPage();
 		top10list.clickEditAsAnon(top_10_list_Name);
 		top10list.verifyModalLogin();
-
 	}
+	
+//	@Test(groups = { "Top_10_list_Tests_004", "Top_10_list_Tests" })
+	public void Top_10_list_Tests_004_createTop10listPageWithUploadedPhoto() {
+		// this test creation can be completed after 94877 defect is fixed
+		// photoUpload on top10list doesn't allow overwriting uploaded photos.
+		// solution: delete Image001.jpg file from wiki before each execution of this test. - not possible to do due to 94877 bug. 
+		
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
+		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver,
+				Global.DOMAIN, "random");
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
+		top10listCreation.verifyListName(top_10_list_Name);
+		top10listCreation.addAPhoto("Image001.jpg");
+		top10listCreation.verifyPhotoAppeared("Image001.jpg");
+		Top_10_list top10list = top10listCreation.clickCreateList();
+		top10list.verifyPhotoOnTop10page("Image001.jpg");
+	}
+	
+	//PageToCheckTop10ListFetching
 }

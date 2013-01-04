@@ -1,5 +1,7 @@
 package com.wikia.webdriver.PageObjects.PageObject.WikiPage;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,10 +32,4 @@ public class SpecialCreateTopListPageObject extends Top_10_list_EditonCore{
 		waitForValueToBePresentInElementsAttributeByElement(listNameField, "value", listName);
 		PageObjectLogging.log("verifyListName", "verify that list has its name visible: "+listName, true, driver);		
 	}
-
-
-
-
-
-
 }

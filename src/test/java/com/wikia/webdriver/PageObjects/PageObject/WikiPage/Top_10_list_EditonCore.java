@@ -22,6 +22,14 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 
 	@FindBy(css="#description")
 	private WebElement descriptionField; 
+	@FindBy(css="#image-browser-dialogWrapper")
+	private WebElement choosePhotoForm; 
+	@FindBy(css="#image-browser-dialogWrapper input")
+	private WebElement choosePhotoInput; 
+	@FindBy(css="div.ImageBrowser img")
+	private WebElement addPhotoButton; 
+	@FindBy(css=".ImageBrowser .frame img")
+	private WebElement photoPreview; 
 	
 	By itemInputsList = new By.ByCssSelector("li.ListItem div.ItemName input");
 	
@@ -47,5 +55,18 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 		else {
 			PageObjectLogging.log("addItem", "No item input fields on the page", false, driver);					
 		}
+	}
+
+	public void addAPhoto(String imageName) {
+		addPhotoButton.click();
+		waitForElementByElement(choosePhotoForm);		
+		choosePhotoInput.sendKeys(System.getProperty("user.dir")+"\\src\\test\\resources\\ImagesForUploadTests\\"+imageName);		
+		PageObjectLogging.log("addAPhoto", "Upload Image001.jpg file from resources/ImagesForUpload", true, driver);					
+	}
+
+	public void verifyPhotoAppeared(String photoName) {
+		waitForElementByElement(photoPreview);
+		waitForValueToBePresentInElementsAttributeByElement(photoPreview, "title", photoName);
+		PageObjectLogging.log("verifyPhotoAppeared", "verify that following photo appeared in the preview frame: "+photoName, true, driver);					
 	}
 }

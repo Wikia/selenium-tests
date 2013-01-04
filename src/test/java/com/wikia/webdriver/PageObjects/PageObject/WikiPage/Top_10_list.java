@@ -16,6 +16,8 @@ public class Top_10_list extends WikiArticlePageObject{
 	WebElement wikiaHeader;
 	@FindBy(css="#ca-viewsource")
 	WebElement editButton;
+	@FindBy(css="#WikiaArticle a.image img")
+	WebElement photoOnThePage;
 	
 	By itemsContentList = new By.ByCssSelector("#toplists-list-body div.ItemContent");
 	
@@ -48,6 +50,12 @@ public class Top_10_list extends WikiArticlePageObject{
 		executeScript("$('#ca-viewsource').click()");
 		PageObjectLogging.log("clickEdit", "click on edit button", true, driver);
 		return new Top_10_list_EditMode(driver, top10listName);				
+	}
+
+	public void verifyPhotoOnTop10page(String photoName) {
+		waitForElementByElement(photoOnThePage);
+		waitForValueToBePresentInElementsAttributeByElement(photoOnThePage, "alt", photoName);
+		PageObjectLogging.log("verifyPhotoOnTop10page", "verify that the following photo is present on the page: "+photoName, true, driver);		
 	}
 
 }
