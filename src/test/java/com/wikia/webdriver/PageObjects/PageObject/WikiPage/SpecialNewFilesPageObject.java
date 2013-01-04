@@ -1,10 +1,17 @@
 package com.wikia.webdriver.PageObjects.PageObject.WikiPage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.apache.tools.ant.types.CommandlineJava.SysProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 
@@ -24,17 +31,17 @@ public class SpecialNewFilesPageObject extends WikiBasePageObject{
 	@FindBy(css="section[id='UploadPhotosWrapper']") 
 	private WebElement UploadPhotoDialog;
 	
+	@FindBys(@FindBy(css=".wikia-gallery .image"))
+	private List<WebElement> imagesNewFiles;
+	
 	private String WikiaPreviewImgCssSelector = "div.wikia-gallery span.wikia-gallery-item img";
 
 	public SpecialNewFilesPageObject(WebDriver driver, String Domain) {
 		
 		super(driver, Domain);
-		
 		PageFactory.initElements(driver, this);
 	}
 
-
-	
 	public void ClickOnAddaPhoto() {
 		waitForElementByElement(AddAphotoButton);
 		clickAndWait(AddAphotoButton);
@@ -75,8 +82,25 @@ public class SpecialNewFilesPageObject extends WikiBasePageObject{
 		driver.navigate().refresh();
 		waitForValueToBePresentInElementsAttributeByCss(WikiaPreviewImgCssSelector, "src", FileName);
 		PageObjectLogging.log("waitForFile", "Verify if "+FileName+" has been succesfully uploaded", true, driver);
-
-		
+	}
+	
+	public String followRandomImage(){
+		List<String> hrefs = new ArrayList<String>();
+		for (WebElement elem:imagesNewFiles)		{
+			hrefs.add(elem.getAttribute("data-image-name"));
+		}
+		Random r = new Random();
+		String imageName = hrefs.get((r.nextInt(hrefs.size()-1))+1);
+		getUrl(Global.DOMAIN+"wiki/File:"+imageName+"?action=watch");
+		clickAndWait(followSubmit);
+		waitForElementByElement(followedButton);
+		return imageName;
+	}
+	
+	public void unfollowImage(String imageName){
+		getUrl(Global.DOMAIN+"wiki/File:"+imageName+"?action=unwatch");
+		clickAndWait(followSubmit);
+		waitForElementByElement(unfollowedButton);
 	}
 
 

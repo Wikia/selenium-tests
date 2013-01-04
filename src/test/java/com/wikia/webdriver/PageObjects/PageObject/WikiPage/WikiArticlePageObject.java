@@ -56,7 +56,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	@FindBy(css=".article-comm-reply")
 	private WebElement replyCommentButton;
 	
-	
 	private By categories_listOfCategories = By.cssSelector("#catlinks li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle img.sprite.play");
@@ -510,6 +509,21 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		String articleName = URL.substring(articlenameIndex+5);
 		return articleName;
 	}
-
 	
+	public String followRandomArticle(){
+		openRandomArticle();
+		String name = driver.findElement(By.cssSelector(".WikiaPageHeader h1")).getText();
+		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=watch");
+		driver.findElement(By.cssSelector("[value=OK]")).click();
+		waitForElementByElement(followedButton);
+		PageObjectLogging.log("followRandomArticle", "random article followed", true);
+		return name;
+	}
+	
+	public void unfollowArticle(String name){
+		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=unwatch");
+		driver.findElement(By.cssSelector("[value=OK]")).click();
+		waitForElementByElement(unfollowedButton);
+		PageObjectLogging.log("followRandomArticle", "random article followed", true);
+	}
 }

@@ -65,6 +65,12 @@ public class BasePageObject{
 	private WebElement publishButtonGeneral;
 	@FindBy(css="a#ca-edit")
 	protected WebElement editButton;
+	@FindBy(css=".mw-htmlform-submit") 
+	protected WebElement followSubmit;
+	@FindBy(css="#ca-unwatch")
+	protected WebElement followedButton;
+	@FindBy(css="#ca-watch")
+	protected WebElement unfollowedButton;
 	
 	@FindBy(css="form.WikiaSearch")
 	WebElement wikiaSearch_searchForm;
