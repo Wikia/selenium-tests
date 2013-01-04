@@ -203,7 +203,6 @@ public class ArticleRTETest extends TestTemplate{
 				"<te&st>a&b&c</te<&>st> &amp; &nbsp; &lt; &gt; : &#58; &#123; - 123 &#x5f;",
 				"<noinclude>&#91;brackets&#93;&nbsp;&amp;&nbsp;non-breaking&nbsp;spaces</noinclude>\n\n<noinclude>[brackets] & non-breaking spaces</noinclude>",
 				"« foo",
-*/
 				// utf magic
 				"ÀàĄąÒòỪừỲỳŹź",
 				"(義) (誠) (涅 ネム) foo",
