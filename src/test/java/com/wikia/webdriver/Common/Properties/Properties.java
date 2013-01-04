@@ -118,7 +118,7 @@ public class Properties {
 	
 	private static void setPropertiesManually()
 	{
-		Global.BROWSER = "IE";
+		Global.BROWSER = "FF";
 		Global.DOMAIN = "http://preview.mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		Global.CONFIG_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"config.xml");

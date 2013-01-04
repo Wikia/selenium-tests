@@ -22,8 +22,12 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 
 	@FindBy(css="#description")
 	private WebElement descriptionField; 
+	@FindBy(css="#related_article_name")
+	private WebElement relatedPageField; 
 	@FindBy(css="#image-browser-dialogWrapper")
 	private WebElement choosePhotoForm; 
+	@FindBy(css="#image-browser-dialogWrapper li img")
+	private WebElement fetchedPhoto; 
 	@FindBy(css="#image-browser-dialogWrapper input")
 	private WebElement choosePhotoInput; 
 	@FindBy(css="div.ImageBrowser img")
@@ -64,9 +68,35 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 		PageObjectLogging.log("addAPhoto", "Upload Image001.jpg file from resources/ImagesForUpload", true, driver);					
 	}
 
+	public void clickAddAPhoto() {
+		addPhotoButton.click();
+		PageObjectLogging.log("clickAddAPhoto", "click on Add a photo button", true, driver);					
+	}
 	public void verifyPhotoAppeared(String photoName) {
 		waitForElementByElement(photoPreview);
 		waitForValueToBePresentInElementsAttributeByElement(photoPreview, "title", photoName);
 		PageObjectLogging.log("verifyPhotoAppeared", "verify that following photo appeared in the preview frame: "+photoName, true, driver);					
+	}
+	
+	public void verifyPhotoAppeared() {
+		waitForElementByElement(photoPreview);
+		PageObjectLogging.log("verifyPhotoAppeared", "verify that a photo appeared in the preview", true, driver);					
+	}
+	
+	public void typeRelatedPageName(String relatedPage) {
+		waitForElementByElement(relatedPageField);
+		sendKeys(relatedPageField, relatedPage);
+		PageObjectLogging.log("typeRelatedPageName", "add related page to top 10 list: "+relatedPage, true, driver);	
+	}
+	
+	public void checkFetchedPhotoAppears() {
+		waitForElementByElement(fetchedPhoto);
+		PageObjectLogging.log("checkFetchedPhotoAppears", "make sure that fetched photo appeared", true, driver);	
+	}
+
+	public void addTheFetchedPhoto() {
+		waitForElementByElement(fetchedPhoto);
+		click(fetchedPhoto);
+		PageObjectLogging.log("addTheFetchedPhoto", "add the fetched photo", true, driver);	
 	}
 }

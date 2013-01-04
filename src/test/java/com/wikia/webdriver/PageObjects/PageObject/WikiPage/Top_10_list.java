@@ -57,5 +57,10 @@ public class Top_10_list extends WikiArticlePageObject{
 		waitForValueToBePresentInElementsAttributeByElement(photoOnThePage, "alt", photoName);
 		PageObjectLogging.log("verifyPhotoOnTop10page", "verify that the following photo is present on the page: "+photoName, true, driver);		
 	}
+	public void verifyRelatedPhotoOnTop10page(String relatedPageName) {
+		WebElement relatedPhoto = driver.findElement(By.cssSelector("a[title="+relatedPageName+"] img"));
+		waitForElementByElement(relatedPhoto);
+		PageObjectLogging.log("verifyRelatedPhotoOnTop10page", "verify that the a photo is present on the page and is linked to related page: "+relatedPageName, true, driver);		
+	}
 
 }

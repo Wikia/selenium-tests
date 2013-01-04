@@ -22,10 +22,8 @@ public class Top_10_list_Tests extends TestTemplate {
 		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
 		String Description = "DescriptionForList";
 		wiki.openWikiPage();
-		WikiArticlePageObject article = new WikiArticlePageObject(driver,
-				Global.DOMAIN, "random");
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
+		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
 		top10listCreation.verifyListName(top_10_list_Name);
 		top10listCreation.addDescription(Description);
 		Top_10_list top10list = top10listCreation.clickCreateList();
@@ -43,10 +41,8 @@ public class Top_10_list_Tests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticlePageObject article = new WikiArticlePageObject(driver,
-				Global.DOMAIN, "random");
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
+		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
 		top10listCreation.verifyListName(top_10_list_Name);
 		top10listCreation.addItem(1, "Item1");
 		top10listCreation.addItem(2, "Item2");
@@ -63,10 +59,8 @@ public class Top_10_list_Tests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticlePageObject article = new WikiArticlePageObject(driver,
-				Global.DOMAIN, "random");
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
+		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
 		top10listCreation.verifyListName(top_10_list_Name);
 		Top_10_list top10list = top10listCreation.clickCreateList();
 		top10list.verifyTop10listPageTitle(top_10_list_Name);
@@ -86,10 +80,8 @@ public class Top_10_list_Tests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticlePageObject article = new WikiArticlePageObject(driver,
-				Global.DOMAIN, "random");
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
+		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
 		top10listCreation.verifyListName(top_10_list_Name);
 		top10listCreation.addAPhoto("Image001.jpg");
 		top10listCreation.verifyPhotoAppeared("Image001.jpg");
@@ -97,5 +89,22 @@ public class Top_10_list_Tests extends TestTemplate {
 		top10list.verifyPhotoOnTop10page("Image001.jpg");
 	}
 	
+	@Test(groups = { "Top_10_list_Tests_005", "Top_10_list_Tests" }) //story 94880
+	public void Top_10_list_Tests_005_createTop10listPageWithSelectedPhoto() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
+		String relatedPageName = "PageToCheckTop10ListFetching";
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
+		top10listCreation.verifyListName(top_10_list_Name);
+		top10listCreation.typeRelatedPageName(relatedPageName);
+		top10listCreation.clickAddAPhoto();
+		top10listCreation.checkFetchedPhotoAppears();
+		top10listCreation.addTheFetchedPhoto();
+		top10listCreation.verifyPhotoAppeared();
+		Top_10_list top10list = top10listCreation.clickCreateList();
+		top10list.verifyRelatedPhotoOnTop10page(relatedPageName);
+	}
 	//PageToCheckTop10ListFetching
 }
