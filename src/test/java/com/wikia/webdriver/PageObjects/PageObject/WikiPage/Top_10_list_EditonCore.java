@@ -36,6 +36,7 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 	private WebElement photoPreview; 
 	
 	By itemInputsList = new By.ByCssSelector("li.ListItem div.ItemName input");
+	By itemDeleteButtonsList = new By.ByCssSelector("li.ListItem .ItemRemove img");
 	
 	public Top_10_list_EditonCore(WebDriver driver, String Domain) {
 		super(driver, Domain);
@@ -98,5 +99,25 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 		waitForElementByElement(fetchedPhoto);
 		click(fetchedPhoto);
 		PageObjectLogging.log("addTheFetchedPhoto", "add the fetched photo", true, driver);	
+	}
+	
+	public void removeItem() {
+		List<WebElement> list = driver.findElements(itemDeleteButtonsList);
+		int listSize = list.size();
+		if (listSize>1) {
+			WebElement inputDeleteElement = list.get(1);			
+			waitForElementByElement(inputDeleteElement);
+			click(inputDeleteElement);
+			list = driver.findElements(itemDeleteButtonsList);
+			if (listSize > list.size()) {
+				PageObjectLogging.log("removeItem", "item removed", true, driver);					
+			}
+			else {
+				PageObjectLogging.log("removeItem", "item not removed", false, driver);					
+			}			
+		}
+		else {			
+			PageObjectLogging.log("removeItem", "item nor removed - there are no items", false, driver);	
+		}
 	}
 }

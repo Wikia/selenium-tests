@@ -121,6 +121,9 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="input#ImageQuery")
 	private WebElement imageQuery;
 	
+	@FindBy(css="#WikiaPageHeader h1")
+	private WebElement premissionErrorMessage;
+	
 	@FindBy(css="[value='Find']")
 	private WebElement imageFindButton;
 	
@@ -793,5 +796,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public CreateNewWikiPageObjectStep1 startAWiki() {
 		return null;
 
+	}
+	
+	public void verifyPermissionsErrorsPresent() {
+		waitForElementByElement(premissionErrorMessage);
+		PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
+				true, driver);
 	}
 }

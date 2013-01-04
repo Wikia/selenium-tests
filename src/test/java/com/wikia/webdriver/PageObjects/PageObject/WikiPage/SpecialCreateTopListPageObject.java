@@ -29,6 +29,7 @@ public class SpecialCreateTopListPageObject extends Top_10_list_EditonCore{
 	public Top_10_list clickCreateList() {
 		waitForElementByElement(createlistButton);
 		clickAndWait(createlistButton);
+		PageObjectLogging.log("clickCreateList", "click on Create List button", true, driver);		
 		return new Top_10_list(driver, Domain, this.articlename);
 	}
 

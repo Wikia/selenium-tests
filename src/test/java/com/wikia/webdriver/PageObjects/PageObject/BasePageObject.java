@@ -209,6 +209,7 @@ public class BasePageObject{
 	{
 		try{
 			driver.navigate().refresh();			
+			PageObjectLogging.log("refreshPage", "page refreshed", true);
 		}
 		catch(TimeoutException e)
 		{
@@ -1109,7 +1110,7 @@ public class BasePageObject{
 		return String.valueOf(timeCurrent);
 	} 
 	
-	public void verifyModalLogin()
+	public void verifyModalLoginAppeared()
 	{
 		waitForElementByElement(modalLoginForm);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);

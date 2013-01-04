@@ -27,7 +27,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Image");
-		edit.verifyModalLogin();
+		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}		
 	
@@ -44,7 +44,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Gallery");
-		edit.verifyModalLogin();
+		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -61,7 +61,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slideshow");
-		edit.verifyModalLogin();
+		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -78,7 +78,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Slider");
-		edit.verifyModalLogin();
+		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);	
 	}
 	
@@ -95,7 +95,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
-		edit.verifyModalLogin();
+		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}	
 	
