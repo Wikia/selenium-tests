@@ -182,7 +182,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	@Test(groups = { "Top_10_list_Tests_010", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_010_historyTop10listLoggedIn() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
+		String top_10_list_Name = "Top_10_list:TestListQA";
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);
@@ -218,7 +218,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	}
 	
 	@Test(groups = { "Top_10_list_Tests_013", "Top_10_list_Tests" })
-	public void Top_10_list_Tests_013_deleteTop10listLoggedIn() {
+	public void Top_10_list_Tests_013_deleteTop10listLoggedInNonStaff() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top_10_list:TestListQA";
 		wiki.openWikiPage();
