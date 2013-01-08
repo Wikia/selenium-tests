@@ -121,7 +121,7 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="input#ImageQuery")
 	private WebElement imageQuery;
 	
-	@FindBy(css="#WikiaPageHeader h1")
+	@FindBy(css="div.permissions-errors")
 	private WebElement premissionErrorMessage;
 	
 	@FindBy(css="[value='Find']")
@@ -683,6 +683,12 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("deleteArticle", "article has been deleted",
 				true, driver);
 	}
+	
+	public void clickOnDeleteButton() {
+		getUrl(driver.getCurrentUrl() + "?action=delete");
+		PageObjectLogging.log("deleteArticle", "article deletion invoked",
+				true, driver);
+	}
 
 	public void renameArticle(String articleName, String articleNewName) {
 		getUrl(Global.DOMAIN + "wiki/Special:MovePage/" + articleName);
@@ -753,8 +759,12 @@ public class WikiBasePageObject extends BasePageObject {
 
 			e.printStackTrace();
 		}
+		catch (TimeoutException e) {
+			PageObjectLogging.log("OpenArticle",
+					"page loads for more than 30 seconds", true);
+		}
 		PageObjectLogging.log("openArticle", "article " + articleName
-				+ " opened", true, driver);
+				+ " opened", true);
 		return new WikiArticlePageObject(driver, Domain, articleName);
 	}
 

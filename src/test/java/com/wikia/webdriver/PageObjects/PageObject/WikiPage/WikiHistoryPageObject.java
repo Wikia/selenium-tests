@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 
 public class WikiHistoryPageObject extends WikiBasePageObject{
@@ -63,10 +64,14 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 	
-	
-	
-	
-	
-	
+	/*Author: Michal Nowierski
+	 * 
+	 * */
+	public void verifyImportandPageElements() {
+		waitForElementByElement(fromYearField);
+		waitForElementByElement(backToPageLink);
+		waitForElementByElement(goButton);
+		PageObjectLogging.log("verifyImportandPageElements", "verify that several importand history page elements are present", true , driver);
+	}
 
 }

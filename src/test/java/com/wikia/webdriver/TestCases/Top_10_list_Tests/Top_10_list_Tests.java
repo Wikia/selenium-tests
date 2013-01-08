@@ -13,6 +13,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateTopListP
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.Top_10_list_EditMode;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiHistoryPageObject;
 
 // https://internal.wikia-inc.com/wiki/Top_10_List/QA#Tests_on_Development_environment  - TOP 10 list QA specification
 public class Top_10_list_Tests extends TestTemplate {
@@ -153,9 +154,41 @@ public class Top_10_list_Tests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
 		top10listCreation.verifyPermissionsErrorsPresent();
+	}	
+	
+	@Test(groups = { "Top_10_list_Tests_008", "Top_10_list_Tests" })
+	public void Top_10_list_Tests_008_deleteTop10listAnonymous() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String top_10_list_Name = "Top_10_list:TestListQA";
+		wiki.openWikiPage();
+		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
+		top10list.clickOnDeleteButton();
+		top10list.verifyPermissionsErrorsPresent();
+	}
+	
+	@Test(groups = { "Top_10_list_Tests_009", "Top_10_list_Tests" })
+	public void Top_10_list_Tests_009_historyTop10listAnonymous() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String top_10_list_Name = "Top_10_list:TestListQA";
+		wiki.openWikiPage();
+		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
+		WikiHistoryPageObject top10history = top10list.openHistoryPage();
+		top10history.verifyImportandPageElements();
+	}
+	
+	@Test(groups = { "Top_10_list_Tests_010", "Top_10_list_Tests" })
+	public void Top_10_list_Tests_010_historyTop10listLoggedIn() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
+		wiki.openWikiPage();
+//		WikiArticlePageObject article = new WikiArticlePageObject(driver,
+//				Global.DOMAIN, "random");
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
+		WikiHistoryPageObject top10history = top10list.openHistoryPage();
+		top10history.verifyImportandPageElements();
 	}
 	
 }
