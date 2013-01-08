@@ -162,8 +162,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	public void Top_10_list_Tests_008_deleteTop10listAnonymous() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top_10_list:TestListQA";
-		wiki.openWikiPage();
-		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
+		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);
 		top10list.clickOnDeleteButton();
 		top10list.verifyPermissionsErrorsPresent();
 	}
@@ -172,8 +171,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	public void Top_10_list_Tests_009_historyTop10listAnonymous() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top_10_list:TestListQA";
-		wiki.openWikiPage();
-		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
+		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);
 		WikiHistoryPageObject top10history = top10list.openHistoryPage();
 		top10history.verifyImportandPageElements();
 	}
@@ -182,13 +180,24 @@ public class Top_10_list_Tests extends TestTemplate {
 	public void Top_10_list_Tests_010_historyTop10listLoggedIn() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
-		wiki.openWikiPage();
+		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);
 //		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 //				Global.DOMAIN, "random");
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
+//		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
 		WikiHistoryPageObject top10history = top10list.openHistoryPage();
 		top10history.verifyImportandPageElements();
+	}
+	
+	@Test(groups = { "Top_10_list_Tests_009", "Top_10_list_Tests" })
+	public void Top_10_list_Tests_0011_voteTop10listLoggedIn() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		String top_10_list_Name = "Top_10_list:TestListQA";
+		wiki.openWikiPage();
+		Top_10_list top10list = (Top_10_list) wiki.openArticle(top_10_list_Name);
+//		int voteCount = top10list.getVoteCountOfItem(1);
+//		top10list.voteForItem(1);
+//		top10list.checkVoteCountOfItem(voteCount+1, 1);
 	}
 	
 }

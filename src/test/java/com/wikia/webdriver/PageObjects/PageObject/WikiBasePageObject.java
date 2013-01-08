@@ -22,6 +22,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateTopListP
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialUploadPageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObject;
@@ -766,6 +767,25 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("openArticle", "article " + articleName
 				+ " opened", true);
 		return new WikiArticlePageObject(driver, Domain, articleName);
+	}
+	
+	public Top_10_list openTop10List(String topTenListName) {
+		URI uri;
+		try {
+			uri = new URI(Global.DOMAIN + "wiki/" + topTenListName);
+			String url = uri.toASCIIString();
+			getUrl(url);
+		} catch (URISyntaxException e) {
+
+			e.printStackTrace();
+		}
+		catch (TimeoutException e) {
+			PageObjectLogging.log("openTop10List",
+					"page loads for more than 30 seconds", true);
+		}
+		PageObjectLogging.log("openTop10List", topTenListName
+				+ " opened", true);
+		return new Top_10_list(driver, Domain, topTenListName);
 	}
 
 	public WikiCategoryPageObject clickOnCategory(String categoryName) {
