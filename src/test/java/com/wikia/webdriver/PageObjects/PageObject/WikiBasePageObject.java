@@ -127,6 +127,9 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(css="[value='Find']")
 	private WebElement imageFindButton;
+
+	@FindBy(css="div.mw-warning-with-logexcerpt p")
+	private WebElement pageDeletedInfo;
 	
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
@@ -681,7 +684,17 @@ public class WikiBasePageObject extends BasePageObject {
 		// clickDeleteButtonInDropDown();
 		clickArticleDeleteConfirmationButton(atricleName);
 		waitForElementByXPath("//div[@class='msg' and contains(text(), 'has been deleted.')]");
-		PageObjectLogging.log("deleteArticle", "article has been deleted",
+		PageObjectLogging.log("deleteArticle", "article "+atricleName+" has been deleted",
+				true, driver);
+	}
+	
+	public void deleteTop10List(String top10listName) {
+		String top10listURL = driver.getCurrentUrl();
+		getUrl(top10listURL + "?action=delete");
+		clickArticleDeleteConfirmationButton(top10listName);
+		getUrl(top10listURL);
+		waitForTextToBePresentInElementByElement(pageDeletedInfo, "has been deleted.");
+		PageObjectLogging.log("deleteArticle", "top 10 list: "+top10listName+" has been deleted",
 				true, driver);
 	}
 	

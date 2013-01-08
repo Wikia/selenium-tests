@@ -569,6 +569,24 @@ public class BasePageObject{
 //		}
 	}
 	
+	public void waitForElementNotVisibleByElement(WebElement element)
+	{
+		try
+		{
+			Global.LOG_ENABLED = false;
+			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
+			Global.LOG_ENABLED = true;
+		}
+//		catch(NoSuchElementException e)
+//		{
+//			PageObjectLogging.log("waitForElementNotVisibleByBy", "Element " + by.getClass() + " is not visible which is expected", true);
+//		}
+		catch(Exception e)
+		{
+			PageObjectLogging.log("waitForElementNotVisibleByElement", e.toString(), false);			
+		}
+	}
+	
 	public void waitForElementClickableByClassName(String className)
 	{
 //		try

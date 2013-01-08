@@ -71,7 +71,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 		waitForElementByElement(fromYearField);
 		waitForElementByElement(backToPageLink);
 		waitForElementByElement(goButton);
-		PageObjectLogging.log("verifyImportandPageElements", "verify that several importand history page elements are present", true , driver);
+		PageObjectLogging.log("verifyImportandPageElements", "several importand history page elements are present", true , driver);
 	}
 
 }
