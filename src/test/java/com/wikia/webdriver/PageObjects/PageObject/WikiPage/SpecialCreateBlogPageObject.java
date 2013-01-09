@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
@@ -57,5 +58,11 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
 		return new BlogPageObject(driver, Domain, articlename);
 	}
-
+	
+	public SpecialCreateBlogPageObject createBlogFormUrl(String blogPostTitle){
+		getUrl(Global.DOMAIN+"wiki/Special:CreateBlogPage");
+		typeBlogPostTitle(blogPostTitle);
+		clickOk();
+		return new SpecialCreateBlogPageObject(driver, this.Domain, blogPostTitle);
+	}
 }
