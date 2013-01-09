@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -14,10 +15,6 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject
 public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	
 	private String pageName;
-	private String articleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-	private String articleTextEdit = "Brand new content";
-	private String commentText = "Lorem ipsum dolor sit amet, comment";
-	private String replyText = "Brand new reply";
 	
 	
 	/*
@@ -60,10 +57,10 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
+		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
-		article.verifyArticleText(articleText);
+		article.verifyArticleText(PageContent.articleText);
 	}
 	/*
 	 * TestCase005
@@ -76,22 +73,22 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = "QAarticle"+wiki.getTimeStamp();
+		pageName = PageContent.articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
+		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
-		article.verifyArticleText(articleText);
+		article.verifyArticleText(PageContent.articleText);
 		edit = article.clickEditButton(pageName);
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.typeInContent(articleTextEdit);
+		edit.typeInContent(PageContent.articleTextEdit);
 		article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
-		article.verifyArticleText(articleTextEdit);
+		article.verifyArticleText(PageContent.articleTextEdit);
 	}
 	
 	/* 
@@ -106,18 +103,18 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = "QAarticle"+wiki.getTimeStamp();
+		pageName = PageContent.articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
+		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
 		article.triggerCommentArea();
-		article.writeOnCommentArea(commentText);
+		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(commentText, "A Wikia contributor");
+		article.verifyComment(PageContent.commentText, PageContent.wikiaContributor);
 	}
 	
 	/* 
@@ -132,19 +129,19 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = "QAarticle"+wiki.getTimeStamp();
+		pageName = PageContent.articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
+		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
 		article.triggerCommentArea();
-		article.writeOnCommentArea(commentText);
+		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(commentText, "A Wikia contributor");
-		article.replyComment(commentText, replyText);
+		article.verifyComment(PageContent.commentText, PageContent.wikiaContributor);
+		article.replyComment(PageContent.commentText, PageContent.replyText);
 	}	
 	
 	@DataProvider

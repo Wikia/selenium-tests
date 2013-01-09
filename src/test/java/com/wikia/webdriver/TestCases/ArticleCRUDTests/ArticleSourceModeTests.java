@@ -2,6 +2,8 @@ package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -11,13 +13,13 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleSourceEdit
 
 public class ArticleSourceModeTests extends TestTemplate{
 	
-	private String caption = "QAWebdriverCaption1";
-	private String videoURL = "https://www.youtube.com/watch?v=QE32HghV8-I";
+	String pageName;
+	
 	
 	@Test(groups={"RTE_extended","RTE_extended_001"})
 	public void RTE_001_Bold(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -30,7 +32,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_002"})
 	public void RTE_002_Italic(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -43,7 +45,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_003"})
 	public void RTE_003_InternalLink(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -56,7 +58,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_004"})
 	public void RTE_004_ExternalLink(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -69,7 +71,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_005"})
 	public void RTE_005_HeadLine(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -82,7 +84,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_006"})
 	public void RTE_006_EmbedFile(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -95,7 +97,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_007"})
 	public void RTE_007_EmbedMedia(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -108,7 +110,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_008"})
 	public void RTE_008_Math(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -121,7 +123,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_009"})
 	public void RTE_009_Nowiki(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -134,7 +136,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_010"})
 	public void RTE_010_Signature(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -147,7 +149,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_011"})
 	public void RTE_011_HLine(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -160,7 +162,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_012"})
 	public void RTE_012_Photo(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -168,16 +170,16 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickAddPhoto();
 		source.searchForImage("image");
 		source.waitForModalAndClickAddThisPhoto();
-		source.typePhotoCaption(caption);
+		source.typePhotoCaption(PageContent.caption);
 		source.clickOnAddPhotoButton2();
-		source.checkSourceContent("[[File:Image010.jpg|thumb|"+caption+"]]");
+		source.checkSourceContent("[[File:Image010.jpg|thumb|"+PageContent.caption+"]]");
 		source.clickOnPublishButton();
 	}	
 	
 	@Test(groups={"RTE_extended","RTE_extended_013"})
 	public void RTE_013_Slideshow(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -198,7 +200,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_014"})
 	public void RTE_014_Gallery(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -220,7 +222,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_015"})
 	public void RTE_015_Slider(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -241,19 +243,19 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_016"})
 	public void RTE_016_Video(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddVideo();
-		source.waitForVideoModalAndTypeVideoURL(videoURL);
+		source.waitForVideoModalAndTypeVideoURL(VideoContent.videoURL);
 		source.clickVideoNextButton();
 		source.waitForVideoDialog();
-		source.typeVideoCaption(caption);
+		source.typeVideoCaption(PageContent.caption);
 		source.clickAddAvideo();
 		source.waitForSuccesDialogAndReturnToEditing();
-		source.checkSourceVideoContent("[[File:WikiEvolution - Poznańska Wiki-1354533479|thumb|right|335px|"+caption+"]]");
+		source.checkSourceVideoContent("[["+VideoContent.youtubeVideoWikiText+PageContent.caption+"]]");
 		source.clickOnPublishButton();		
 	}
 	
@@ -261,7 +263,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_017"})
 	public void RTE_017_MoreMainTools(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -272,7 +274,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_018"})
 	public void RTE_018_MoreWikiMarkupTools(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
@@ -283,7 +285,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 	@Test(groups={"RTE_extended","RTE_extended_019"})
 	public void RTE_019_MoreSympolsTools(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver, Global.DOMAIN);
-		String pageName = "QAarticle"+source.getTimeStamp();
+		pageName = PageContent.articleName+source.getTimeStamp();
 		source.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);

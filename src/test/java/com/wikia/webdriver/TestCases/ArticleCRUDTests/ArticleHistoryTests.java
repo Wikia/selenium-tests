@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -15,8 +16,6 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiHistoryPageObject
 public class ArticleHistoryTests extends TestTemplate
 {
 	private String pageName;
-	private String articleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-	private String articleTextEdit = "Brand new content";
 	
 	@Test(groups={"ArticleHistoryTests_001", "ArticleCRUDAdmin"})
 	public void RecoverPreviousVersion()
@@ -24,27 +23,27 @@ public class ArticleHistoryTests extends TestTemplate
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = "QAarticle"+wiki.getTimeStamp();
+		pageName = PageContent.articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
+		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
-		article.verifyArticleText(articleText);
+		article.verifyArticleText(PageContent.articleText);
 		edit = article.edit();
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
-		edit.typeInContent(articleTextEdit);
+		edit.typeInContent(PageContent.articleTextEdit);
 		article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
-		article.verifyArticleText(articleTextEdit);
+		article.verifyArticleText(PageContent.articleTextEdit);
 		WikiHistoryPageObject history = article.openHistoryPage();
 		WikiArticleRevisionEditMode revision = history.clickUndoRevision(1);
 		article = revision.clickOnPublishButton();
 		article.verifyTitle(pageName);
-		article.verifyArticleText(articleText);
+		article.verifyArticleText(PageContent.articleText);
 		article.deleteArticle(pageName);
 		article.openArticle(pageName);
 		article.verifyDeletedArticlePage(pageName);
@@ -57,25 +56,25 @@ public class ArticleHistoryTests extends TestTemplate
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = "QAarticle"+wiki.getTimeStamp();
+		pageName = PageContent.articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
-		edit.typeInContent(articleText);
+		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
-		article.verifyArticleText(articleText);
+		article.verifyArticleText(PageContent.articleText);
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password);
 		article.openArticle(pageName);
 		edit = article.edit();
 		edit.deleteArticleContent();
 		edit.clickOnVisualButton();
-		edit.typeInContent(articleTextEdit);
+		edit.typeInContent(PageContent.articleTextEdit);
 		article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
-		article.verifyArticleText(articleTextEdit);
+		article.verifyArticleText(PageContent.articleTextEdit);
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(pageName);
@@ -83,7 +82,7 @@ public class ArticleHistoryTests extends TestTemplate
 		history.rollbackPage();
 		article = history.enterPageAfterRollback();
 		article.verifyTitle(pageName);
-		article.verifyArticleText(articleText);
+		article.verifyArticleText(PageContent.articleText);
 		article.deleteArticle(pageName);
 		article.openArticle(pageName);
 		article.verifyDeletedArticlePage(pageName);
