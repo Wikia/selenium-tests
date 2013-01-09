@@ -100,14 +100,16 @@ public class TestTemplate {
 		driver = DriverProvider.getWebDriver();
 		if (driver != null)
 		{
-			if (Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE"))
-			{
+//			if (Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE"))
+//			{
 				driver.quit();
-			}
-			else
-			{
-				driver.close();				
-			}
+//			}
+//			else
+//			{
+//				System.out.println("before");
+//				driver.close();		
+//				System.out.println("after");
+//			}
 			driver = null;
 		}
 	}
