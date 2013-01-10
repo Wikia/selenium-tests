@@ -1,5 +1,8 @@
 # Selenium Tests
-This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia App](https://github.com/Wikia/app). Please remember to keep this up to date as they are worthless otherwise. A good rule of thumb is to add a new test that covers whatever bug you're fixing so we can track regressions on it.
+This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia App](https://github.com/Wikia/app).
+
+## Adding Tests
+Please remember to keep this repository up to date as the tests become worthless otherwise. A good rule of thumb is to add a new test that covers whatever bug you're fixing so we can track regressions on it. Also, make sure to code your tests in a cross-operating system compliant manor as it's valid to run them in Windows, Mac or Linux environments.
 
 ## Running Tests
 
