@@ -17,22 +17,11 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
 
 public class ArticleRTETest extends TestTemplate{
-
-//	@DataProvider
-//	private static final String[][] wikiText()
-//	{
-//		return new String[][]
-//				{
-//					{"aaa"}
-//				};
-//	}
-
-
 	private static final int WIKI_TEXTS_PER_CYCLE = 300;
 
 	static public String[] createWikitexts() {
 		return new String[] {
-////				 lines
+				// new lines
 				"\n1a",
 				"\n\n1b",
 				"\n\n\n1c",
@@ -144,7 +133,7 @@ public class ArticleRTETest extends TestTemplate{
 				"abc [[foo|bar]] def",
 				"[[:Category:foo]] 123",
 				"[[Foo]]s 123",
-				"[[#Foo]] 123",
+				"[[#Foo]] 123", // causes complex code edgecase
 				"[[/foo]] 123",
 				"[[foo & bar]]",
 				"[[Tower|Towers of Wizardry]]",
@@ -291,6 +280,17 @@ public class ArticleRTETest extends TestTemplate{
 				// BugID: 11537
 				"<div>\n<h2>Test</h2>\n* Test\n</div>",
 				"<div>\n<h2>Test</h2>\n: Test\n</div>",
+				// BugId: 11235
+				"{|\n|[[link]]\ntext1\n|}",
+				"{|\n|[[link]] text1\ntext2\n|}",
+				"{|\n|[[link]] text1\ntext2\ntext3\n|}",
+				"{|\n|[[link]] text1\ntext2\n|text3\n|}",
+				"{|\n|text1 [[link]]\ntext2\n|}",
+				"{|\n|text1 [[link]]\ntext2\ntext3\n|}",
+				"{|\n|text1 [[link]]\ntext2\n|text3\n|}",
+				"{|\n|text1 [[link]] text2\ntext3\n|}",
+				"{|\n|text1 [[link]] text2\ntext3\ntext4\n|}",
+				"{|\n|text1 [[link]] text2\ntext3\n|text4\n|}",
 
 				///**********************************
 //				"\n\n\n\n\n\n\n1g",
@@ -367,35 +367,38 @@ public class ArticleRTETest extends TestTemplate{
 		edit.clickOnSourceButton();
 		for (String wikitext : wikiTexts)
 		{
-			WebElement e = driver.findElement(By.cssSelector(".cke_source"));
-			edit.clearSource();
-			e.sendKeys(wikitext);
-			PageObjectLogging.log("", "", true, driver);
-			edit.clickOnVisualButton();
-			edit.clickOnSourceButton();
-			e = driver.findElement(By.cssSelector(".cke_source"));
 			String tmp1;
 			String tmp2;
 			char[] tmp1arr;
 			char[] tmp2arr;
 
-			if(e.getAttribute("value").contains(wikitext)){
+			edit.clearSource();
+
+			WebElement e = driver.findElement(By.cssSelector(".cke_source"));
+			e.sendKeys(wikitext);
+
+			edit.clickOnVisualButton();
+			edit.clickOnSourceButton();
+
+			e = driver.findElement(By.cssSelector(".cke_source"));
+
+			if (e.getAttribute("value").contains(wikitext)){
 				tmp1 = e.getAttribute("value").replace("<", "&lt");
 				tmp1.replace(">", "&gt");
-				PageObjectLogging.log("checking value passed", e.getAttribute("value"), true);
-			}
-			else{
+				PageObjectLogging.log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
+			} else{
 				tmp1 = e.getAttribute("value").replace("<", "&lt;");
 				tmp1 = tmp1.replace(">", "&gt;");
-				tmp1 = tmp1.replace(" ", "_");
+				tmp1 = tmp1.replace(" ", "&nbsp;");
 				tmp2 = wikitext.replace("<", "&lt;");
 				tmp2 = tmp2.replace(">", "&gt;");
-				tmp2 = tmp2.replace(" ", "_");
+				tmp2 = tmp2.replace(" ", "&nbsp;");
 
-				PageObjectLogging.log("checking value failed", "should be: "+tmp2, false);
-				PageObjectLogging.log("checking value failed", "       is: "+tmp1, false, driver);
+				PageObjectLogging.log("checking value failed", "should be: <pre>" + tmp2 + "</pre>", false);
+				PageObjectLogging.log("checking value failed", "result is: <pre>" + tmp1 + "</pre>", false, driver);
 			}
 		}
+
 		edit.clickOnVisualButton();
 		edit.clickOnPublishButton();
 	}
