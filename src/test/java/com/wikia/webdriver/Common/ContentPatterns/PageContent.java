@@ -14,6 +14,10 @@ public class PageContent {
 	public static String blogContentEdit = "blogContentEdit";
 	public static String blogComment = "blogComment";
 	public static String blogCommentEdit = "blogCommentEdit";
+	//categories
+	public static String categoryPageName = "QACategoryTest";
+	public static String categoryName = "testCategory";
+	public static String jsAlertMessage = "Unhandled syntax detected - switching back to visual mode impossible.";
 	//generic
 	public static String caption = "QAWebdriverCaption1";
 	public static String caption2 = "QAWebdriverCaption2";

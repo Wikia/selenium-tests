@@ -1,7 +1,11 @@
 package com.wikia.webdriver.TestCases.CategoriesTests;
 
+import java.awt.PageAttributes;
+
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
@@ -11,6 +15,9 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObjec
 
 public class CategoriesTestsAnonymous extends TestTemplate {
 
+	String categoryName;
+	String pageName;
+	
 	/*
 	 * TestCase001 Open random wiki page as anonymous user add category Verify
 	 * category is added
@@ -19,7 +26,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	public void CategoriesTestsAnonymous_001_addCategoryNotEditMode() {
 
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String categoryName = "test" + wiki.getTimeStamp();
+		categoryName = PageContent.categoryName + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -38,7 +45,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_002", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_002_addCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String categoryName = "test" + wiki.getTimeStamp();
+		categoryName = PageContent.categoryName + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -57,8 +64,8 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_003", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_003_removeCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String categoryName = "test" + wiki.getTimeStamp();
-		String pageName = "QACategoryTest" + wiki.getTimeStamp();		
+		categoryName = PageContent.categoryName + wiki.getTimeStamp();
+		pageName = PageContent.categoryPageName + wiki.getTimeStamp();		
 		wiki.openWikiPage();
 		WikiArticleEditMode articleEdit = wiki.createNewArticle(pageName, 1);
 		articleEdit.categories_addCategoryEditMode(categoryName);
@@ -85,7 +92,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_004", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_004_verifyCategoryPage() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String categoryName = "test" + wiki.getTimeStamp();
+		categoryName = PageContent.categoryName + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -127,7 +134,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_006", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_006_addCategorySourceModeTransitionToVisual() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String categoryName = "test" + wiki.getTimeStamp();
+		categoryName = PageContent.categoryName + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -149,7 +156,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_007", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_007_addCategoryVisualModeTransitionToSource() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String categoryName = "test" + wiki.getTimeStamp();
+		categoryName = PageContent.categoryName + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -170,18 +177,18 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_008", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_008_addJSpopupSourceModeJSprevention() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String JSalert = "<script> alert(\"CategoriesTest\"); </script>";
-		String JSalertMessage = "CategoriesTest";
+//		String JSalert = "<script> alert(\"CategoriesTest\"); </script>";
+//		String JSalertMessage = "CategoriesTest";
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
 		article.openRandomArticle();
 		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.clickOnSourceButton();
-		articleEdit.categories_addToCategorySourceEditMode("[[Category:"+JSalert+"]]");
-		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+JSalert+"]]");
-		articleEdit.clickOnVisualButtonAndCheckJSalertThere(JSalertMessage, false);	
-		article = articleEdit.clickOnPublishButtonAndCheckJSalertNotThere(JSalertMessage);	
+		articleEdit.categories_addToCategorySourceEditMode("[[Category:"+XSSContent.jsAlertCategories+"]]");
+		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+XSSContent.jsAlertCategories+"]]");
+		articleEdit.clickOnVisualButtonAndCheckJSalertThere(XSSContent.jsAlertMessageCategories, false);	
+		article = articleEdit.clickOnPublishButtonAndCheckJSalertNotThere(XSSContent.jsAlertMessageCategories);	
 	}
 	
 	/*
@@ -190,7 +197,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_009", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_009_invalidCategoryInSourceModePrevention() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String JSalertMessage = "Unhandled syntax detected - switching back to visual mode impossible.";
+//		String JSalertMessage = "Unhandled syntax detected - switching back to visual mode impossible.";
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -199,7 +206,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.clickOnSourceButton();
 		articleEdit.categories_addToCategorySourceEditMode("this is invalid source mode category syntax");
 		articleEdit.categories_verifyCategoryAddedSourceEditMode("this is invalid source mode category syntax");
-		articleEdit.clickOnVisualButtonAndCheckJSalertThere(JSalertMessage, true);	
+		articleEdit.clickOnVisualButtonAndCheckJSalertThere(PageContent.jsAlertMessage, true);	
 		article = articleEdit.clickOnPublishButton();
 		//TODO: check if alert is send
 //		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);

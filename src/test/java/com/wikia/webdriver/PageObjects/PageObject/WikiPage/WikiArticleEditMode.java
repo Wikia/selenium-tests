@@ -837,7 +837,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		clickAndWait(categories_CategorySourceInputField);
 		categories_CategorySourceInputField.sendKeys(textToBeAdded);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();};
-		PageObjectLogging.log("categories_addCategorySourceEditMode", "category "+textToBeAdded+" typed in the source mode", true, driver);
+		PageObjectLogging.log("categories_addCategorySourceEditMode", "category "+textToBeAdded.replaceAll("<", "&lt").replaceAll(">", "&gt")+" typed in the source mode", true, driver);
 	}
 	
 	/**
@@ -850,10 +850,10 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		String text = categories_CategorySourceInputField.getAttribute("value");
 		if (text.contains(textToBeChecked)) {
 			
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked+" present in the source mode", true, driver);
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked.replaceAll("<", "&lt").replaceAll(">", "&gt")+" present in the source mode", true, driver);
 		}
 		else {
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked+" NOT present in the source mode", false, driver);
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked.replaceAll("<", "&lt").replaceAll(">", "&gt")+" NOT present in the source mode", false, driver);
 			
 		}
 	}
