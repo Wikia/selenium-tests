@@ -50,3 +50,7 @@ The following are valid for use in the `-Dgroups` parameter:
 * MessageWall
 * RTE
 * Toolbar
+
+## Reading Logs
+
+Most tests write logs and take screenshots while they run which provide further information about what happened if they failed. These files reside in the `./logs` directory and can be viewed locally in your browser by navigating to that folder.
