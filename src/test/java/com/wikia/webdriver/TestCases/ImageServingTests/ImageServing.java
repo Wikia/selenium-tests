@@ -18,9 +18,6 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject
 public class ImageServing extends TestTemplate {
 	private String file = "Image001.jpg";
 	private String[] ListOfFiles = {"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg", "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"};
-	private String wikiArticle = "QAautoPage";
-	private String Caption = "QAcaption1";
-	private String Caption2 = "QAcaption2";
 	private String videoURL2 = "http://www.youtube.com/watch?v=TTchckhECwE";
 	private String videoURL2name = "What is love (?) - on piano (Haddway)";
 	
@@ -90,12 +87,11 @@ public class ImageServing extends TestTemplate {
 		RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(videoURL2name);
 		WikiArticlePageObject article = RVmoduleMessageEdit.clickOnPublishButton();
 		// after deletion start testing
-		article = article.OpenArticle(wikiArticle);
+		article.openRandomArticle();
 		article.verifyRVModulePresence();
 		article.clickOnAddVideoRVModule();
 		article.typeInVideoURL(videoURL2);
 		article.clickOnRVModalAddButton();
-//		article.WaitForProcessingToFinish();
 		article.verifyVideoAddedToRVModule(videoURL2name);
 		CommonFunctions.logOut(driver);
 	}
