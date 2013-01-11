@@ -24,7 +24,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -54,7 +54,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -97,7 +97,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -134,7 +134,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -163,7 +163,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -203,7 +203,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -241,7 +241,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -271,7 +271,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -311,7 +311,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -347,7 +347,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -374,7 +374,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -409,7 +409,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -444,7 +444,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -471,7 +471,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -502,7 +502,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -530,7 +530,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -552,7 +552,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userName, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -592,7 +592,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		CommonFunctions.logOut(Properties.userName, driver);
 //		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);

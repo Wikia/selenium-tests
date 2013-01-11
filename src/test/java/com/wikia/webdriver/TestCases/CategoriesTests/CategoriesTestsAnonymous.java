@@ -26,7 +26,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	public void CategoriesTestsAnonymous_001_addCategoryNotEditMode() {
 
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		categoryName = PageContent.categoryName + wiki.getTimeStamp();
+		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -45,7 +45,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_002", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_002_addCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		categoryName = PageContent.categoryName + wiki.getTimeStamp();
+		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -64,8 +64,8 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_003", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_003_removeCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		categoryName = PageContent.categoryName + wiki.getTimeStamp();
-		pageName = PageContent.categoryPageName + wiki.getTimeStamp();		
+		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
+		pageName = PageContent.categoryPageNamePrefix + wiki.getTimeStamp();		
 		wiki.openWikiPage();
 		WikiArticleEditMode articleEdit = wiki.createNewArticle(pageName, 1);
 		articleEdit.categories_addCategoryEditMode(categoryName);
@@ -92,7 +92,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_004", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_004_verifyCategoryPage() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		categoryName = PageContent.categoryName + wiki.getTimeStamp();
+		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -134,7 +134,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_006", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_006_addCategorySourceModeTransitionToVisual() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		categoryName = PageContent.categoryName + wiki.getTimeStamp();
+		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");
@@ -156,7 +156,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	@Test(groups = { "CategoriesTestsAnonymous_007", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_007_addCategoryVisualModeTransitionToSource() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		categoryName = PageContent.categoryName + wiki.getTimeStamp();
+		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticlePageObject article = new WikiArticlePageObject(driver,
 				Global.DOMAIN, "random");

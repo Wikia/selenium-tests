@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.CreateAWikiTests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -48,7 +49,7 @@ public class CreateAWikiTests_lang extends TestTemplate{
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
 		String timeStamp = createNewWiki1.getTimeStamp();
-		wikiName = "QaTest"+timeStamp;
+		wikiName = PageContent.wikiNamePrefix+timeStamp;
 		createNewWiki1.selectLanguage(lang);
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -56,8 +57,8 @@ public class CreateAWikiTests_lang extends TestTemplate{
 		logInPage.typeInUserName(Properties.userName);
 		logInPage.typeInPassword(Properties.password);
 		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();
-		createNewWiki2.describeYourTopic("Duis quam ante, fringilla at cursus tristique, laoreet vel elit. Nullam rhoncus, magna ut dictum ultrices, mauris lectus consectetur tellus, sed dignissim elit justo vel ante.");
-		createNewWiki2.selectCategory("Auto");
+		createNewWiki2.describeYourTopic(PageContent.wikiTopic);
+		createNewWiki2.selectCategory(PageContent.wikiCategory);
 		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
 		createNewWiki3.selectTheme(3);
 		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
@@ -65,11 +66,6 @@ public class CreateAWikiTests_lang extends TestTemplate{
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
 		CommonFunctions.logOut(driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
-//		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
-//		factory.openWikiFactoryPage();
-//		factory.deleteWiki(lang+"."+wikiName);
-//		CommonFunctions.logOut(Properties.userNameStaff, driver);
 	}	
 
 }

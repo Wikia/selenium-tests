@@ -73,7 +73,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -103,7 +103,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -129,7 +129,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleName+wiki.getTimeStamp();
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();

@@ -19,7 +19,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostName + blogEdit.getTimeStamp(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		blogEdit.clickOnAddObjectButton("Gallery");
 		blogEdit.waitForObjectModalAndClickAddAphoto("Gallery");
@@ -39,7 +39,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostName + blogEdit.getTimeStamp(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		blogEdit.clickOnAddObjectButton("Slideshow");
 		blogEdit.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
@@ -59,7 +59,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostName + blogEdit.getTimeStamp(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		blogEdit.clickOnAddObjectButton("Slider");
 		blogEdit.waitForObjectModalAndClickAddAphoto("GallerySlider");
@@ -78,7 +78,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostName + blogEdit.getTimeStamp(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		blogEdit.clickOnAddObjectButton("Video");
 		blogEdit.waitForVideoModalAndTypeVideoURL(VideoContent.videoURL);
@@ -97,7 +97,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostName + blogEdit.getTimeStamp(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		blogEdit.clickOnAddObjectButton("Image");
 		blogEdit.waitForModalAndClickAddThisPhoto();
