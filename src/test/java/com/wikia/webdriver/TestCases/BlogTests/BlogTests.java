@@ -177,4 +177,29 @@ public class BlogTests extends TestTemplate{
 		blogPage.verifyComment(PageContent.blogComment, Properties.userNameStaff);
 		blogPage.deleteComment(PageContent.blogComment);
 	}
+	
+	//test case for https://wikia.fogbugz.com/default.asp?95165
+	@Test(groups = { "BlogTests_008", "BlogTests" })
+	public void BlogTests_008_PostReplyReply(){
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		String blogPostTitle = PageContent.blogPostName+home.getTimeStamp();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		userProfile.clickOnBlogTab();
+		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
+		createBlogPage.typeBlogPostTitle(blogPostTitle);
+		createBlogPage.clickOk();
+		createBlogPage.typeInContent(PageContent.blogContent);
+		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
+		blogPage.verifyArticleText(PageContent.blogContent);
+		blogPage.verifyPageTitle(blogPostTitle);
+		blogPage.verifyUsernameFieldPresent(Properties.userName);
+		blogPage.categories_verifyCategoryPresent("Blog posts");	
+		blogPage.triggerCommentArea();
+		blogPage.writeOnCommentArea(PageContent.blogComment);
+		blogPage.clickSubmitButton();
+		blogPage.verifyComment(PageContent.blogComment, Properties.userName);
+		blogPage.replyComment(PageContent.blogComment, PageContent.blogCommentReply);
+	}
 }

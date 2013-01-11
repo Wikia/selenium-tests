@@ -10,6 +10,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.BlogPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
 
 public class BlogFeaturesTests extends TestTemplate{
 
@@ -90,8 +91,20 @@ public class BlogFeaturesTests extends TestTemplate{
 		BlogPageObject blog = blogEdit.clickOnPublishButton();
 		blog.verifyTheVideoOnThePage();
 	}
-//TODO	
-//	@Test(groups={"BlogFeatures_005", "BlogFeatures"})
-//	public void BlogFeatures_005_AddingImage(){}
-	
+
+	@Test(groups={"BlogFeatures_005", "BlogFeatures"})
+	public void BlogFeatures_005_AddingImage(){
+		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
+		blogEdit.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		String blogPostTitle = PageContent.blogPostName + blogEdit.getTimeStamp(); 
+		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
+		blogEdit.clickOnAddObjectButton("Image");
+		blogEdit.waitForModalAndClickAddThisPhoto();
+		blogEdit.typePhotoCaption(PageContent.caption);
+		blogEdit.clickOnAddPhotoButton2();
+		blogEdit.verifyThatThePhotoAppears(PageContent.caption);
+		BlogPageObject blog = blogEdit.clickOnPublishButton();
+		blog.VerifyTheImageOnThePage();
+	}
 }

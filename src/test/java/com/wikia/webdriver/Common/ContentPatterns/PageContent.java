@@ -13,6 +13,7 @@ public class PageContent {
 	public static String blogContent = "blogContent";
 	public static String blogContentEdit = "blogContentEdit";
 	public static String blogComment = "blogComment";
+	public static String blogCommentReply = "blogCommentReply";
 	public static String blogCommentEdit = "blogCommentEdit";
 	//categories
 	public static String categoryPageName = "QACategoryTest";
@@ -22,4 +23,6 @@ public class PageContent {
 	public static String caption = "QAWebdriverCaption1";
 	public static String caption2 = "QAWebdriverCaption2";
 	public static String wikiaContributor = "A Wikia contributor";
+	//create new wiki
+	
 }
