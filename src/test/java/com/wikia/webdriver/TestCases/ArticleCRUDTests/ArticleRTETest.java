@@ -159,7 +159,7 @@ public class ArticleRTETest extends TestTemplate{
 				"inline template {{123}}",
 				"* {{123}} {{abc}}\n*{{456}}\n**{{789}}\n# {{123}} {{abc}}\n#{{456}}\n##{{789}}\n: {{123}} {{abc}}\n:{{456}}\n::{{789}}\n\n\n::*: {{foo}}\n:::# {{bar}}",
 				"{{123|\nfoo=bar}}",
-				"{|\n|+caption\n| 123\n|}",
+				"{|\n|+caption\n|-\n| 123\n|}",
 				"{|\n| style=\"color:blue\"| 123\n| style=\"color:red\"  |456\n|}",
 				"<b  style=\"color: red\">a''b''\n</b>",
 				"foo<br />bar<b style=\"color: #f55;\">foo</b> '''bar'''",
@@ -291,7 +291,7 @@ public class ArticleRTETest extends TestTemplate{
 				"{|\n|text1 [[link]] text2\ntext3\n|}",
 				"{|\n|text1 [[link]] text2\ntext3\ntext4\n|}",
 				"{|\n|text1 [[link]] text2\ntext3\n|text4\n|}",
-
+								       
 				///**********************************
 //				"\n\n\n\n\n\n\n1g",
 //				"1\nb",//bug jeden enter
