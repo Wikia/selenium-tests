@@ -30,5 +30,8 @@ public class PageContent {
 	//image serving
 	public static String file = "Image001.jpg";
 	public static String[] listOfFiles = {"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg", "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"};
-	
+	//top 10 list
+	public static String top10Description = "DescriptionForList";
+	public static String top10TestListQAfull = "Top_10_list:TestListQA";
+	public static String top10TestListQAshort = "TestListQA";
 }
