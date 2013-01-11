@@ -65,18 +65,10 @@ public class Top_10_list_Tests extends TestTemplate {
 	@Test(groups = { "Top_10_list_Tests_003", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_003_anonymousEditingPermissions() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String top_10_list_Name = "Top10list" + wiki.getTimeStamp();
+		String top_10_list_Name = "Top_10_list:TestListQA";
 		wiki.openWikiPage();
-		WikiArticlePageObject article = new WikiArticlePageObject(driver,
-				Global.DOMAIN, "random");
-		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
-		top10listCreation.verifyListName(top_10_list_Name);
-		Top_10_list top10list = top10listCreation.clickCreateList();
-		top10list.verifyTop10listPageTitle(top_10_list_Name);
-		CommonFunctions.logOut(driver);
-		top10list.navigateBack();
-		top10list.refreshPage();
+		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);
+		top10list.verifyTop10listPageTitle("TestListQA");
 		top10list.clickEditAsAnon();
 		top10list.verifyModalLoginAppeared();
 	}
@@ -261,20 +253,8 @@ public class Top_10_list_Tests extends TestTemplate {
 		top10list = top10listEdit.clickSaveList();
 		top10list.verifyArticleText(Description);
 	}
-	
-	@Test(groups = { "Top_10_list_Tests_016", "Top_10_list_Tests" })
-	public void Top_10_list_Tests_016_editTop10listAsAnonymous() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String top_10_list_Name = "Top_10_list:TestListQA";
-		wiki.openWikiPage();
-		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);
-		top10list.verifyTop10listPageTitle("TestListQA");
-		top10list.clickEditAsAnon();
-		top10list.verifyModalLoginAppeared();
-	}
 
 	//		The below logging is in case of writing test that will check if user can vote twice for the same item
 	//		PageObjectLogging.log("ACTIVE BUG 33902", "one user car repeatedly vote on the same list. Remove if 33902 bug is fixed ", false);			
-
 	
 }
