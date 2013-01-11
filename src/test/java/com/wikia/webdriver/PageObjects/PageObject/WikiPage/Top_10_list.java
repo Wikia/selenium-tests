@@ -132,6 +132,7 @@ public class Top_10_list extends WikiArticlePageObject{
 		Assertion.assertNumber(expectedVoteCount, actualVoteCount, "verifyVoteCountOfItem of Top10List");		
 	}
 
+	/* Author: Michal Nowierski */
 	public void verifyThereAreNoVoteButtons() {
 		List<WebElement> list = driver.findElements(itemsVoteButtonsList);
 		if (list.size()>0) {	
@@ -143,6 +144,22 @@ public class Top_10_list extends WikiArticlePageObject{
 		}
 		else {
 			PageObjectLogging.log("verifyThereAreNoVoteButtons", "No items found on the page", false, driver);					
+		}
+		
+	}
+	
+	/* Author: Michal Nowierski */
+	public void verifyThereAreVoteButtons() {
+		List<WebElement> list = driver.findElements(itemsVoteButtonsList);
+		if (list.size()>0) {	
+			for (int i = 0; i < list.size(); i++) {				
+				WebElement itemVoteButton = list.get(i);
+				waitForElementByElement(itemVoteButton);
+			}
+			PageObjectLogging.log("verifyThereAreVoteButtons", "if you don't see red fields above, all buttons are visible as expected", true, driver);		
+		}
+		else {
+			PageObjectLogging.log("verifyThereAreVoteButtons", "No items found on the page", false, driver);					
 		}
 		
 	}
