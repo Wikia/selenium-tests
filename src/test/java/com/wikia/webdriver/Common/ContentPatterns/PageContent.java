@@ -24,7 +24,7 @@ public class PageContent {
 	public static String caption2 = "QAWebdriverCaption2";
 	public static String wikiaContributor = "A Wikia contributor";
 	//create new wiki
-	public static String wikiNamePrefix = "QaTest";
+	public static String wikiNamePrefix = "QaTestWiki";
 	public static String wikiTopic = "Duis quam ante, fringilla at cursus tristique, laoreet vel elit. Nullam rhoncus, magna ut dictum ultrices, mauris lectus consectetur tellus, sed dignissim elit justo vel ante.";
 	public static String wikiCategory = "Auto";
 }
