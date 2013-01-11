@@ -14,7 +14,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject
 
 public class BlogFeaturesTests extends TestTemplate{
 
-	@Test(groups={"BlogFeatures_001", "BlogFeatures"})
+	@Test(groups={"BlogFeatures_001", "BlogTests"})
 	public void BlogFeatures_001_AddingGallery(){
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
@@ -34,7 +34,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blog.verifyTheObjectOnThePage("gallery");
 	}
 	
-	@Test(groups={"BlogFeatures_002", "BlogFeatures"})
+	@Test(groups={"BlogFeatures_002", "BlogTests"})
 	public void BlogFeatures_002_AddingSlideshow(){
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
@@ -54,7 +54,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		
 	}
 	
-	@Test(groups={"BlogFeatures_003", "BlogFeatures"})
+	@Test(groups={"BlogFeatures_003", "BlogTests"})
 	public void BlogFeatures_003_AddingSlider(){
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
@@ -73,7 +73,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blog.verifyTheObjectOnThePage("slider");
 	}
 	
-	@Test(groups={"BlogFeatures_004", "BlogFeatures"})
+	@Test(groups={"BlogFeatures_004", "BlogTests"})
 	public void BlogFeatures_004_AddingVideo(){
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
@@ -92,7 +92,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blog.verifyTheVideoOnThePage();
 	}
 
-	@Test(groups={"BlogFeatures_005", "BlogFeatures"})
+	@Test(groups={"BlogFeatures_005", "BlogTests"})
 	public void BlogFeatures_005_AddingImage(){
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
 		blogEdit.openWikiPage();
