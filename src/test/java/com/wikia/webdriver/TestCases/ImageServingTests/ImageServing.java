@@ -85,7 +85,7 @@ public class ImageServing extends TestTemplate {
 		RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		WikiArticlePageObject article = RVmoduleMessageEdit.clickOnPublishButton();
 		// after deletion start testing
-		article.openRandomArticle();
+		article.openRandomArticleByUrl();
 		article.verifyRVModulePresence();
 		article.clickOnAddVideoRVModule();
 		article.typeInVideoURL(VideoContent.youtubeVideoURL2);

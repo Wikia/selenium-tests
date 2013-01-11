@@ -523,6 +523,15 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("openRandomArticle",
 				"random page button clicked", true, driver);
 	}
+	
+	public void openRandomArticleByUrl() {
+		// String href = randomPageButton.getAttribute("href");
+		// driver.navigate().to(href);
+		navigateToRandomPage();
+		waitForElementByElement(searchButton);
+		PageObjectLogging.log("openRandomArticle",
+				"random page button clicked", true, driver);
+	}
 
 	public void verifyEditDropDownAnonymous() {
 		List<WebElement> list = driver.findElements(By
