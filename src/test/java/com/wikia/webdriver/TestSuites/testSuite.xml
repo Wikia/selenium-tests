@@ -31,6 +31,7 @@
 			<class name="com.wikia.webdriver.TestCases.Mobile.SearchTests"/>   
 			<class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>   
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogTests"/>   
+			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>   
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>   
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>   
 		</classes>
