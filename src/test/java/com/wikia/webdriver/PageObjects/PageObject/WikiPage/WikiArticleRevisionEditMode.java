@@ -9,7 +9,6 @@ public class WikiArticleRevisionEditMode extends WikiArticleEditMode{
 			String articlename) {
 		super(driver, Domain, articlename);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
 
 }

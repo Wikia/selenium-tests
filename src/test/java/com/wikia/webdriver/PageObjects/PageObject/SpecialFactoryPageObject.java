@@ -28,7 +28,6 @@ public class SpecialFactoryPageObject extends BasePageObject
 	public SpecialFactoryPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
