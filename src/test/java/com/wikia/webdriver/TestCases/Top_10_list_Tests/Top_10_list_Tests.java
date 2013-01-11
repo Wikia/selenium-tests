@@ -215,7 +215,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		String top_10_list_Name = "Top_10_list:TestListQA";
 		CommonFunctions.logOut(driver);
 		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);	
-		top10list.verifyThereAreNoVoteButtons();
+		top10list.verifyThereAreVoteButtons();
 	}
 	
 	@Test(groups = { "Top_10_list_Tests_013", "Top_10_list_Tests" })
