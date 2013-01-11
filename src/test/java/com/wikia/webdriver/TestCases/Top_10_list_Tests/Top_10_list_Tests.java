@@ -68,7 +68,8 @@ public class Top_10_list_Tests extends TestTemplate {
 		top10list.verifyModalLoginAppeared();
 	}
 	
-	@Test(groups = { "Top_10_list_Tests_004", "Top_10_list_Tests" })
+//  uncomment when 94877 is fixed, then the test case can be finished
+//	@Test(groups = { "Top_10_list_Tests_004", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_004_createTop10listPageWithUploadedPhoto() {
 		// this test creation can be completed after 94877 defect is fixed
 		// photoUpload on top10list doesn't allow overwriting uploaded photos.
