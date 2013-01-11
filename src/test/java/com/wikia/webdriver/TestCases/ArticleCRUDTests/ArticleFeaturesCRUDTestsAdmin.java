@@ -354,7 +354,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
-		edit.waitForVideoModalAndTypeVideoURL(VideoContent.videoURL);
+		edit.waitForVideoModalAndTypeVideoURL(VideoContent.youtubeVideoURL);
 		edit.clickVideoNextButton();
 		edit.waitForVideoDialog();
 		edit.typeVideoCaption(PageContent.caption);
@@ -381,7 +381,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
-		edit.waitForVideoModalAndTypeVideoURL(VideoContent.videoURL);
+		edit.waitForVideoModalAndTypeVideoURL(VideoContent.youtubeVideoURL);
 		edit.clickVideoNextButton();
 		edit.waitForVideoDialog();
 		edit.typeVideoCaption(PageContent.caption);
@@ -416,7 +416,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickOnAddObjectButton("Video");
-		edit.waitForVideoModalAndTypeVideoURL(VideoContent.videoURL);
+		edit.waitForVideoModalAndTypeVideoURL(VideoContent.youtubeVideoURL);
 		edit.clickVideoNextButton();
 		edit.waitForVideoDialog();
 		edit.typeVideoCaption(PageContent.caption);

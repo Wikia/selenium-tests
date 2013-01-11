@@ -81,7 +81,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		blogEdit.clickOnAddObjectButton("Video");
-		blogEdit.waitForVideoModalAndTypeVideoURL(VideoContent.videoURL);
+		blogEdit.waitForVideoModalAndTypeVideoURL(VideoContent.youtubeVideoURL);
 		blogEdit.clickVideoNextButton();
 		blogEdit.waitForVideoDialog();
 		blogEdit.typeVideoCaption(PageContent.caption);

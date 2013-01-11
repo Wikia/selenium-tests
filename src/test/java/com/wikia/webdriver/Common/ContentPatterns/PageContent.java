@@ -27,4 +27,8 @@ public class PageContent {
 	public static String wikiNamePrefix = "QaTestWiki";
 	public static String wikiTopic = "Duis quam ante, fringilla at cursus tristique, laoreet vel elit. Nullam rhoncus, magna ut dictum ultrices, mauris lectus consectetur tellus, sed dignissim elit justo vel ante.";
 	public static String wikiCategory = "Auto";
+	//image serving
+	public static String file = "Image001.jpg";
+	public static String[] listOfFiles = {"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg", "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"};
+	
 }

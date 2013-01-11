@@ -249,7 +249,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddVideo();
-		source.waitForVideoModalAndTypeVideoURL(VideoContent.videoURL);
+		source.waitForVideoModalAndTypeVideoURL(VideoContent.youtubeVideoURL);
 		source.clickVideoNextButton();
 		source.waitForVideoDialog();
 		source.typeVideoCaption(PageContent.caption);

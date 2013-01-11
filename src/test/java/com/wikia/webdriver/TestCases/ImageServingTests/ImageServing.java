@@ -2,6 +2,8 @@ package com.wikia.webdriver.TestCases.ImageServingTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -16,10 +18,6 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject
 //https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 
 public class ImageServing extends TestTemplate {
-	private String file = "Image001.jpg";
-	private String[] ListOfFiles = {"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg", "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"};
-	private String videoURL2 = "http://www.youtube.com/watch?v=TTchckhECwE";
-	private String videoURL2name = "What is love (?) - on piano (Haddway)";
 	
 	
 	@Test(groups = {"ImageServing001", "Smoke", "ImageServing"}) 
@@ -34,9 +32,9 @@ public class ImageServing extends TestTemplate {
 		wikiSpecialNF.ClickOnMoreOrFewerOptions();
 		wikiSpecialNF.CheckIgnoreAnyWarnings();
 		wikiSpecialNF.ClickOnMoreOrFewerOptions();
-		wikiSpecialNF.TypeInFileToUploadPath(file);
+		wikiSpecialNF.TypeInFileToUploadPath(PageContent.file);
 		wikiSpecialNF.ClickOnUploadaPhoto();
-		wikiSpecialNF.waitForFile(file);
+		wikiSpecialNF.waitForFile(PageContent.file);
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -48,10 +46,10 @@ public class ImageServing extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		SpecialUploadPageObject wikiSpecialU = wiki.OpenSpecialUpload();
-		wikiSpecialU.TypeInFileToUploadPath(file);
+		wikiSpecialU.TypeInFileToUploadPath(PageContent.file);
 //		wikiSpecialU.verifyFilePreviewAppeared(file);
 		wikiSpecialU.CheckIgnoreAnyWarnings();
-		FilePageObject filePage = wikiSpecialU.ClickOnUploadFile(file);
+		FilePageObject filePage = wikiSpecialU.ClickOnUploadFile(PageContent.file);
 		filePage.VerifyCorrectFilePage();
 		CommonFunctions.logOut(driver);
 	}
@@ -63,10 +61,10 @@ public class ImageServing extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		SpecialMultipleUploadPageObject wikiSpecialMU = wiki.OpenSpecialMultipleUpload();
-		wikiSpecialMU.TypeInFilesToUpload(ListOfFiles);
+		wikiSpecialMU.TypeInFilesToUpload(PageContent.listOfFiles);
 		wikiSpecialMU.CheckIgnoreAnyWarnings();
 		wikiSpecialMU.ClickOnUploadFile();
-		wikiSpecialMU.VerifySuccessfulUpload(ListOfFiles);
+		wikiSpecialMU.VerifySuccessfulUpload(PageContent.listOfFiles);
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -84,15 +82,15 @@ public class ImageServing extends TestTemplate {
 //		WikiArticlePageObject RVmoduleMessage = wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
 		WikiArticleEditMode RVmoduleMessageEdit = new WikiArticleEditMode(driver, Global.DOMAIN, "");		
 		RVmoduleMessageEdit.editArticleByName("MediaWiki:RelatedVideosGlobalList");
-		RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(videoURL2name);
+		RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		WikiArticlePageObject article = RVmoduleMessageEdit.clickOnPublishButton();
 		// after deletion start testing
 		article.openRandomArticle();
 		article.verifyRVModulePresence();
 		article.clickOnAddVideoRVModule();
-		article.typeInVideoURL(videoURL2);
+		article.typeInVideoURL(VideoContent.youtubeVideoURL2);
 		article.clickOnRVModalAddButton();
-		article.verifyVideoAddedToRVModule(videoURL2name);
+		article.verifyVideoAddedToRVModule(VideoContent.youtubeVideoURL2name);
 		CommonFunctions.logOut(driver);
 	}
 }
