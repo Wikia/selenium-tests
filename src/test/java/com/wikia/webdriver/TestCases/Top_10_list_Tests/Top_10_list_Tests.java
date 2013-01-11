@@ -212,7 +212,8 @@ public class Top_10_list_Tests extends TestTemplate {
 	@Test(groups = { "Top_10_list_Tests_012", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_012_voteTop10listAnonymous() {				
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String top_10_list_Name = "Top_10_list:TestListQA";		
+		String top_10_list_Name = "Top_10_list:TestListQA";
+		CommonFunctions.logOut(driver);
 		Top_10_list top10list = wiki.openTop10List(top_10_list_Name);	
 		top10list.verifyThereAreNoVoteButtons();
 	}
