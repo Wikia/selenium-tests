@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 
@@ -55,6 +56,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 		waitForElementByElement(multipleUploadForm);
 		List<WebElement> FileInputsLits = driver.findElements(FileInputs);
 		for (int i = 0; i < FilesNamesList.length; i++) {
+			CommonFunctions.scrollToElement(FileInputsLits.get(i));
 			FileInputsLits.get(i).sendKeys(System.getProperty("user.dir")+"\\src\\test\\resources\\ImagesForUploadTests\\"+FilesNamesList[i]);
 		}
 		PageObjectLogging.log("TypeInFilesToUpload", "Upload "+FilesNamesList.length+" files, specified in FilesNamesList", true, driver);	
