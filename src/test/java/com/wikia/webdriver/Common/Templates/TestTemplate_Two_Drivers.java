@@ -94,12 +94,12 @@ public class TestTemplate_Two_Drivers {
 	{
 		if (driver != null)
 		{
-			driver.close();
+			driver.quit();
 			driver = null;
 		}
 		if (driver2 != null)
 		{
-			driver2.close();
+			driver2.quit();
 			driver2 = null;
 		}
 	}

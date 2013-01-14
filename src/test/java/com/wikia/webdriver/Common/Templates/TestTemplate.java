@@ -102,6 +102,7 @@ public class TestTemplate {
 		{
 //			if (Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE"))
 //			{
+			//chrome needs driver.quit();
 				driver.quit();
 //			}
 //			else
