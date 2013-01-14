@@ -110,7 +110,7 @@ public class MessageWallTests extends TestTemplate
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
-		String message = "QAMessage" + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
@@ -127,9 +127,9 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
-		String Externallink = "www.wikia.com";
-		String Internallink = "Formatting";
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String Externallink = PageContent.externalLink;
+		String Internallink = PageContent.internalLink;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
@@ -145,8 +145,8 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
-		String message = "QAMessage" + timeStamp;
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
@@ -163,10 +163,10 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
-		String message = "QAMessage" + timeStamp;
-		String titleEdit = "QATitle" + timeStamp + "edit";
-		String messageEdit = "QAMessage" + timeStamp + "edit";
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
+		String titleEdit = PageContent.messageWallTitleEditPrefix + timeStamp;
+		String messageEdit = PageContent.messageWallMessageEditPrefix + timeStamp;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
@@ -185,8 +185,8 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
-		String message = "Гсторыя śćąęłńó" + timeStamp;
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessageNonLatinPrefix + timeStamp;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
@@ -201,8 +201,8 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
-		String message = "QAMessage" + timeStamp;
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
@@ -218,7 +218,7 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String sourceMessage = "'''bold" + timeStamp + "'''";
 		String message = "bold" + timeStamp;
 		wall.openWikiPage();
@@ -235,8 +235,8 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
-		String message = "QAMessage" + timeStamp;
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
@@ -256,8 +256,8 @@ public class MessageWallTests extends TestTemplate
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
 				Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
-		String title = "QATitle" + timeStamp;
-		String message = "QAMessage" + timeStamp;
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);

@@ -37,13 +37,14 @@ public class PageContent {
 	public static String messageWallMessagePrefix = "QAMessageWallMessage";
 	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
-	public static String externalLink = "www.wikia.com";
-	public static String internalLink = "Formatting";
 	
-
 	//top 10 list
 	public static String top10Description = "DescriptionForList";
 	public static String top10TestListQAfull = "Top_10_list:TestListQA";
 	public static String top10TestListQAshort = "TestListQA";
+	
+	//links
+	public static String externalLink = "www.wikia.com";
+	public static String internalLink = "Formatting";
 
 }
