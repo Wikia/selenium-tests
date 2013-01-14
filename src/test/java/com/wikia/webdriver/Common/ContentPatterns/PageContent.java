@@ -30,5 +30,13 @@ public class PageContent {
 	//image serving
 	public static String file = "Image001.jpg";
 	public static String[] listOfFiles = {"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg", "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"};
+	//message wall
+	public static String messageWallTitlePrefix = "QAMessageWallTitle";
+	public static String messageWallTitleEditPrefix = "QAMessageWallTitleEdit";
+	public static String messageWallMessagePrefix = "QAMessageWallMessage";
+	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
+	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
+	public static String externalLink = "www.wikia.com";
+	public static String internalLink = "Formatting";
 	
 }
