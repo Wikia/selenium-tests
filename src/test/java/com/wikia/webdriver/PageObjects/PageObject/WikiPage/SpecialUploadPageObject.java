@@ -37,7 +37,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	 * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
 	 *  */ 
 	
-	public void TypeInFileToUploadPath(String file){
+	public void typeInFileToUploadPath(String file){
 		sendKeys(BrowseForFileInput, System.getProperty("user.dir")+"\\src\\test\\resources\\ImagesForUploadTests\\"+file);
 		PageObjectLogging.log("TypeInFileToUploadPath", "Type file "+file+" to Special:Upload upload path", true, driver);
 	
@@ -48,7 +48,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyFilePreviewAppeared", "Verify that file preview appeared", true, driver);
 	}
 
-	public void CheckIgnoreAnyWarnings() {
+	public void checkIgnoreAnyWarnings() {
 		waitForElementByElement(IgnoreAnyWarnings);
 		CommonFunctions.scrollToElement(IgnoreAnyWarnings);
 //		CommonFunctions.scrollToElement(IgnoreAnyWarnings);
@@ -57,7 +57,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 		
 	}
 
-	public FilePageObject ClickOnUploadFile(String file) {
+	public FilePageObject clickOnUploadFile(String file) {
 		waitForElementByElement(UploadFileInput);
 		clickAndWait(UploadFileInput);
 		PageObjectLogging.log("ClickOnUploadFile", "Click on Upload file button. The method returns FilePageObject", true, driver);

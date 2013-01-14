@@ -55,7 +55,7 @@ public class Following extends TestTemplate{
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		SpecialNewFilesPageObject special = article.OpenSpecialNewFiles();
+		SpecialNewFilesPageObject special = article.openSpecialNewFiles();
 		String image = special.followRandomImage();
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
 		follow.openFollowingPage();

@@ -17,7 +17,7 @@ public class FilePageObject extends BasePageObject{
 			return fileName;
 		}
 		
-		public void VerifyCorrectFilePage() {
+		public void verifyCorrectFilePage() {
 			waitForStringInURL("File:"+fileName);
 			PageObjectLogging.log("VerifyCorrectFilePage", "Verify that the page represents "+fileName+" file", true, driver);
 		}
