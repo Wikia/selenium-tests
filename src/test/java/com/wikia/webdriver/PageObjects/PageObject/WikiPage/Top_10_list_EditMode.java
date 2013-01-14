@@ -13,7 +13,6 @@ public class Top_10_list_EditMode extends Top_10_list_EditonCore{
 
 	public Top_10_list_EditMode(WebDriver driver, String Domain) {
 		super(driver, Domain);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Top_10_list clickSaveList() {

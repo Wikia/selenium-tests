@@ -22,7 +22,6 @@ public class MobileBasePageObject extends BasePageObject {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		driver.manage().window().setSize(new Dimension(640, 960));
-		// TODO Auto-generated constructor stub
 	}
 
 	// UI Mapping
@@ -90,7 +89,6 @@ public class MobileBasePageObject extends BasePageObject {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 //		}
@@ -98,7 +96,6 @@ public class MobileBasePageObject extends BasePageObject {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		PageObjectLogging.log("clickFbWindowTriggerButton",
