@@ -870,6 +870,6 @@ public class WikiBasePageObject extends BasePageObject {
 	{
 		waitForElementNotVisibleByElement(ad_Prefooter_left_boxad);
 		waitForElementNotVisibleByElement(ad_Prefooter_right_boxad);
-		PageObjectLogging.log("verifyPrefooterAdsInvisiblee", "left and right prefooter ads are invisible", true, driver);
+		PageObjectLogging.log("verifyPrefooterAdsInvisible", "left and right prefooter ads are invisible", true, driver);
 	}
 }
