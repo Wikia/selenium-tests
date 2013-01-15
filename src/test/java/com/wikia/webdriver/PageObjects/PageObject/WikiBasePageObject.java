@@ -131,6 +131,12 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="div.mw-warning-with-logexcerpt p")
 	private WebElement pageDeletedInfo;
 	
+	@FindBy(css="#PREFOOTER_RIGHT_BOXAD")
+	private WebElement ad_Prefooter_right_boxad;
+	
+	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
+	private WebElement ad_Prefooter_left_boxad;
+	
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By
@@ -851,5 +857,19 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(premissionErrorMessage);
 		PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
 				true, driver);
+	}
+	
+	public void verifyAdsVisible_PrefooterAds()
+	{
+		waitForElementByElement(ad_Prefooter_left_boxad);
+		waitForElementByElement(ad_Prefooter_right_boxad);
+		PageObjectLogging.log("verifyPrefooterAdsVisible", "left and right prefooter ads are visible", true, driver);
+	}
+	
+	public void verifyAdsInvisible_PrefooterAds()
+	{
+		waitForElementNotVisibleByElement(ad_Prefooter_left_boxad);
+		waitForElementNotVisibleByElement(ad_Prefooter_right_boxad);
+		PageObjectLogging.log("verifyPrefooterAdsInvisiblee", "left and right prefooter ads are invisible", true, driver);
 	}
 }
