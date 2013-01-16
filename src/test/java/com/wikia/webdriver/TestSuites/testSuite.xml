@@ -34,6 +34,7 @@
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>   
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>   
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>   
+			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsTests"/>   
 		</classes>
 	</test>
 </suite>

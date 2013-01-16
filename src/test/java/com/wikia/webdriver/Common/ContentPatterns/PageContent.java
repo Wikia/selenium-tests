@@ -46,5 +46,4 @@ public class PageContent {
 	//links
 	public static String externalLink = "www.wikia.com";
 	public static String internalLink = "Formatting";
-
 }
