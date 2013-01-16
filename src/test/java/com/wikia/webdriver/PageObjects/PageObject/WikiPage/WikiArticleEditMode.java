@@ -75,7 +75,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement categories_CategoryInputField;
 	@FindBy(css="#csWikitext")
 	private WebElement categories_CategorySourceInputField;
-	@FindBy(xpath="//p[contains(text(), 'You do not have permission to create pages, for the following reason:')]")
+	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
 	private WebElement blockedUserMessage1;
 	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
 	private WebElement blockedUserMessage2;
