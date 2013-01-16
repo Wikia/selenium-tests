@@ -822,7 +822,8 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		jQueryFocus("#csCategoryInput");
 		categories_CategoryInputField.sendKeys(categoryName);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
-		categories_CategoryInputField.sendKeys(Keys.ENTER);
+		executeScript("var e = jQuery.Event(\"keypress\"); e.keyCode=13; $('#csCategoryInput').trigger(e);");
+//		categories_CategoryInputField.sendKeys(Keys.ENTER);
 		PageObjectLogging.log("categories_typeCategoryNameEditMode", "category "+categoryName+" typed", true, driver);
 	}
 	
