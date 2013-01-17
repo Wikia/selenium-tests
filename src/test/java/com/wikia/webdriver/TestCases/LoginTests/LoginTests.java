@@ -59,30 +59,9 @@ public class LoginTests extends TestTemplate {
 	@Test(groups = { "Login_003", "" })
 	public void Login_003_Facebook_dropDown() {
 		CommonFunctions.logOut(driver);
-//		driver.get("http://www.facebook.com/");
 		WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
-//		if (base.waitForElementByCss("div#userNavigationLabel"));
-//		try{
-//			Global.LOG_ENABLED = false;
-//			driver.findElement(By.cssSelector("div#userNavigationLabel")).isDisplayed();
-//			Global.LOG_ENABLED = true;
-//			WebElement fbdd = driver.findElement(By.cssSelector("div#userNavigationLabel"));
-//			base.waitForElementByElement(fbdd);
-//			fbdd.click();
-//			WebElement fblo = driver.findElement(By.cssSelector("label input[value='Log Out']"));
-//			base.waitForElementByElement(fblo);
-//			fblo.click();
-//			WebElement lonot = driver.findElement(By.cssSelector("input#email"));
-//			base.waitForElementByElement(lonot);
-//			base.openWikiPage();
-//			CommonFunctions.logInDropDownFB();
-//		}
-//		catch(Exception e)
-//		{
-//			Global.LOG_ENABLED = true;
-			base.openWikiPage();
-			CommonFunctions.logInDropDownFB();			
-//		}
+		base.openWikiPage();
+		CommonFunctions.logInDropDownFB();			
 		CommonFunctions.logOut(driver);
 	}
 }

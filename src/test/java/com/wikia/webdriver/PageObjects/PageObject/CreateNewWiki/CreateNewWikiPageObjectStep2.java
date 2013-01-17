@@ -27,7 +27,6 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 	public CreateNewWikiPageObjectStep2(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void describeYourTopic(String description)

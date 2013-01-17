@@ -14,13 +14,11 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.MiniEditor.MiniEditorComponentObject;
 
-public class MessageWallPageObject extends WikiBasePageObject{
+//public class MessageWallPageObject extends MiniEditorComponentObject{
+	public class MessageWallPageObject extends WikiBasePageObject{
 
-	@FindBy(css="[id*='cke_contents_WallMessage'] iframe")
-	private WebElement messageWallIFrame;
-	@FindBy(css="div.cke_wrapper.cke_ltr iframe")
-	private WebElement messageWallEditIFrame;
 	@FindBy(css="#WallMessageTitle")
 	private WebElement messageTitleField;
 	@FindBy(css="ul .msg-title textarea:nth-child(2)")
@@ -51,16 +49,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private WebElement removeMessageConfirmButton;
 	@FindBy(css=".speech-bubble-message-removed")
 	private WebElement removeMessageConfirmation;
-	@FindBy(css=".RTEImageButton .cke_icon")
-	private WebElement addImageButton;
-	@FindBy(css="img.image.thumb")
-	private WebElement imageInMessageEditMode;
-	@FindBy(css="img.video.thumb")
-	private WebElement videoInMessageEditMode;
-	@FindBy(css=".RTEVideoButton .cke_icon")
-	private WebElement addVideoButton;
-	@FindBy(css=".cke_toolbar_formatmini span.cke_button.cke_button_link a .cke_icon")
-	private WebElement addLinkButton;
 	@FindBy(css="span.cke_button.cke_off.cke_button_bold a .cke_icon")
 	private WebElement boldButton;
 	@FindBy(css="span.cke_button.cke_off.cke_button_itallic a .cke_icon")
@@ -73,14 +61,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private List<WebElement> messageBody;
 	@FindBy(css="a#publish")
 	private WebElement publishButton;
-	@FindBy(css="input.cke_dialog_ui_input_text")
-	private WebElement targetPageOrURL;
-	@FindBy(css="p.link-type-note span")
-	private WebElement linkPageStatus;
-	@FindBy(css="span.cke_dialog_ui_button")
-	private WebElement linkModalOkButton;
-	@FindBy(css="input[value='ext']")
-	private WebElement externalLinkOption;
 	@FindBy(css="a.cke_button_ModeSource .cke_icon")
 	private WebElement sourceModeButton;
 	@FindBy(css="textarea.cke_source")
@@ -94,10 +74,11 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
 	
-//	By messageTitle = By.cssSelector(".msg-title");
+	MiniEditorComponentObject miniEditor;
 	
 	public MessageWallPageObject(WebDriver driver, String Domain) {
 		super(driver, Domain);
+		miniEditor = new MiniEditorComponentObject(driver, Domain);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -112,130 +93,75 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private void triggerMessageArea()
 	{
 		jQueryFocus("#WallMessageBody");
-		waitForElementByElement(messageWallIFrame);
+		waitForElementByElement(miniEditor.miniEditorIframe);
 		PageObjectLogging.log("triggerMessageArea", "message area is triggered", true, driver);
+	}
+	
+	private void writeTitle(String title){
+		clickAndWait(messageTitleField);
+		messageTitleField.sendKeys(title);
 	}
 	
 	public void writeMessage(String title, String message)
 	{
-		clickAndWait(messageTitleField);
-		messageTitleField.sendKeys(title);
+		writeTitle(title);
 		triggerMessageArea();
-		waitForElementByElement(messageWallIFrame);
 		messageTitleField.sendKeys(Keys.TAB);
-		driver.switchTo().frame(messageWallIFrame);
-		waitForElementByElement(messageBodyField);
-		messageBodyField.sendKeys(message);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+		miniEditor.writeMiniEditor(message);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("writeMessage", "message is written, title: "+title+" body: "+message, true, driver);
 	}
 	
 	
 	public void writeBoldMessage(String title, String message) {
-		writeSpecialMessage(title, message, "Bold");
-	}
-	public void writeItalicMessage(String title, String message) {
-		writeSpecialMessage(title, message, "Italic");
-	}
-	
-	public void writeSpecialMessage(String title, String message, String special) {	
-		String specialKey = "Not Initialized";
-		if (special.equals("Bold")) {
-			specialKey = "b";
-		}
-		if (special.equals("Italic")) {
-			specialKey = "i";
-		}
-		messageTitleField.sendKeys(title);		
+		writeTitle(title);
 		triggerMessageArea();
-		waitForElementByElement(messageWallIFrame);
 		jQueryClick("span.cke_button.cke_off.cke_button_bold a .cke_icon");
 		messageTitleField.sendKeys(Keys.TAB);
-		driver.switchTo().frame(messageWallIFrame);
-		waitForElementByElement(messageBodyField);
-		messageBodyField.sendKeys(message);
-		messageBodyField.sendKeys(Keys.LEFT_CONTROL + "a" );
-		messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey );	
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+//		writeSpecialMessage(title, message, "Bold");
+		miniEditor.writeStylesMiniEditor(message, "Bold");
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("write"+special+"Message", special + " message is written, title: "+title+" body: "+message, true, driver);		
+	}
+	public void writeItalicMessage(String title, String message) {
+		writeTitle(title);
+		triggerMessageArea();
+		jQueryClick("span.cke_button.cke_off.cke_button_bold a .cke_icon");
+		messageTitleField.sendKeys(Keys.TAB);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+//		writeSpecialMessage(title, message, "Italic");
+		miniEditor.writeStylesMiniEditor(message, "Italic");
+		driver.switchTo().defaultContent();
 	}
 
 	public void writeMessageNoTitle(String message)
 	{
 		clickAndWait(messageTitleField);
 		triggerMessageArea();
-		waitForElementByElement(messageWallIFrame);
 		messageTitleField.sendKeys(Keys.TAB);
-		driver.switchTo().frame(messageWallIFrame);
-		messageBodyField.sendKeys(message);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+		miniEditor.writeMiniEditor(message);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("writeMessage", "message is written, body: "+message, true, driver);
 	}
 	
-	private void verifyImageInMessageEditMode()
-	{
-		waitForElementByElement(messageWallIFrame);
-		driver.switchTo().frame(messageWallIFrame);
-		waitForElementByElement(imageInMessageEditMode);
-		driver.switchTo().defaultContent();
-	}
-	
-	private void verifyVideoInMessageEditMode()
-	{
-		waitForElementByElement(messageWallIFrame);
-		driver.switchTo().frame(messageWallIFrame);
-		waitForElementByElement(videoInMessageEditMode);
-		driver.switchTo().defaultContent();
-	}
-	
 	public void writeMessageImage(String title)
 	{
-		clickAndWait(messageTitleField);
-		messageTitleField.sendKeys(title);
+		writeTitle(title);
 		triggerMessageArea();
-		waitForElementByElement(addImageButton);
-		clickAndWait(addImageButton);
-		waitForModalAndClickAddThisPhoto();
-		clickOnAddPhotoButton2();
-		verifyImageInMessageEditMode();
+		miniEditor.addImageMiniEditor();
 		PageObjectLogging.log("writeMessageImage", "message is written, with image "+title, true, driver);
 	}
-	
 	
 	public void writeMessageVideo(String title, String url)
 	{
 		clickAndWait(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-		waitForElementByElement(addVideoButton);
-		clickAndWait(addVideoButton);
-		waitForVideoModalAndTypeVideoURL(url);
-		clickVideoNextButton();
-		waitForVideoDialog();
-		clickAddAvideo();
-		waitForSuccesDialogAndReturnToEditing();
-		verifyVideoInMessageEditMode();
+		miniEditor.addVideoMiniEditor(url);
 		PageObjectLogging.log("writeMessageVideo", "message is written, with video "+title, true, driver);
 	}
-	
-	
-	public void writeMessageLink(String title, String url)
-	{
-		clickAndWait(messageTitleField);
-		messageTitleField.sendKeys(title);
-		triggerMessageArea();
-		waitForElementByElement(addLinkButton);
-		clickAndWait(addLinkButton);
-		
-		waitForVideoModalAndTypeVideoURL(url);
-		clickVideoNextButton();
-		waitForVideoDialog();
-		clickAddAvideo();
-		waitForSuccesDialogAndReturnToEditing();
-		verifyVideoInMessageEditMode();
-		PageObjectLogging.log("writeMessageVideo", "message is written, with video "+title, true, driver);
-	}
-	
 	
 	public void clickPostButton()
 	{
@@ -250,7 +176,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		waitForElementByElement(previewButton);
 		clickAndWait(previewButton);
 		PageObjectLogging.log("clickPreviewButton", "preview button is clicked", true, driver);
-		
 	}
 	
 	public void clickPostNotitleButton()
@@ -267,8 +192,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	{
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
-//		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), '"+title+"')]");
-//		waitForElementByXPath("//div[@class='msg-body']/p[contains(text(), '"+message+"')]");
 		PageObjectLogging.log("verifyPostedMessageWithTitle", "message with title verified", true, driver);		
 	}
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
@@ -283,15 +206,9 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		PageObjectLogging.log("verifyPostedItalicMessageWithTitle", "italic message with title verified", true, driver);		
 	}
 	
-	public void verifyPostedMessageWithLinks(String internallink, String externallink){//, String articleName) {
-//		List<WebElement> links = messageBody.findElements(By.cssSelector("a"));
-//		waitForTextToBePresentInElementByElement(links.get(0), internallink);
-//		waitForTextToBePresentInElementByElement(links.get(1), externallink);
-//		List<WebElement> links = messageBody.findElements(By.cssSelector("a"));
+	public void verifyPostedMessageWithLinks(String internallink, String externallink){
 		waitForTextToBePresentInElementByElement(messageBody.get(0), internallink);
 		waitForTextToBePresentInElementByElement(messageBody.get(1), externallink);
-		
-		
 	}
 	
 	public void verifyPostedMessageWithoutTitle(String userName, String message)
@@ -300,9 +217,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		waitForElementByXPath("//div[@class='msg-body']/p[contains(text(), '"+message+"')]");
 		PageObjectLogging.log("verifyPostedMessageWithTitle", "message without title verified", true, driver);		
 	}
-	
-	
-	
 	
 	public void verifyPostedMessageVideo(String title)
 	{
@@ -378,19 +292,21 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	private void writeEditMessage(String title, String message)
 	{
 		WebElement elem = driver.switchTo().activeElement();
-		messageWallIFrame = elem;
+//		miniEditorIframe = elem;
 
-		driver.switchTo().frame(messageWallIFrame);
+		driver.switchTo().frame(elem);
 
 		messageBodyField.clear();
-		messageBodyField.sendKeys(message);
+		miniEditor.writeMiniEditor(message);
+//		messageBodyField.sendKeys(message);
 		driver.switchTo().defaultContent();
 		
-		waitForElementByElement(messageWallIFrame);
+		waitForElementByElement(elem);
 		clickAndWait(messageTitleEditField2);
 		messageTitleEditField2.sendKeys(Keys.TAB);
-		driver.switchTo().frame(messageWallIFrame);
-		messageBodyField.sendKeys(message);
+		driver.switchTo().frame(elem);
+//		messageBodyField.sendKeys(message);
+		miniEditor.writeMiniEditor(message);
 		
 		driver.switchTo().defaultContent();
 		
@@ -400,12 +316,12 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		waitForElementByElement(saveEditButton);
 		
 		if (Global.BROWSER.equals("IE")) {
-			driver.switchTo().frame(messageWallIFrame);
+			driver.switchTo().frame(elem);
 			clickAndWait(messageBodyField);
-			messageBodyField.sendKeys(Keys.TAB);
+			miniEditor.writeMiniEditor(Keys.TAB);
+			miniEditor.writeMiniEditor(Keys.ENTER);
 //			messageBodyField.sendKeys(Keys.TAB);
-//			messageBodyField.sendKeys(Keys.TAB);
-			messageBodyField.sendKeys(Keys.ENTER);
+//			messageBodyField.sendKeys(Keys.ENTER);
 			driver.switchTo().defaultContent();
 		}
 		else {			
@@ -419,55 +335,37 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		refreshPage();
 		clickEditMessage();
 		writeEditMessage(title, message);
-		
 	}
 
 	public void clickPublishButton() {
 		waitForElementByElement(publishButton);
 		clickAndWait(publishButton);
 		PageObjectLogging.log("clickPublishButton", "publish button is clicked", true, driver);	
-		
 	}
-
-	public void writeMessageWithLink(String internallink, String externallink, String title) {
+	
+	public void writeMessageWithLink(String internalLink, String externalLink, String title) {
 		clickAndWait(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
 		// add internal wikia link
-		waitForElementByElement(addLinkButton);
-		clickAndWait(addLinkButton);
-		waitForElementByElement(targetPageOrURL);
-		targetPageOrURL.sendKeys(internallink);
-		waitForTextToBePresentInElementByElement(linkPageStatus, "Page exists");
-		waitForElementByElement(linkModalOkButton);
-		clickAndWait(linkModalOkButton);
+		miniEditor.addInternalLink(internalLink);
 		// add external link
-		driver.switchTo().frame(messageWallIFrame);
-		messageBodyField.sendKeys(Keys.END);
-		messageBodyField.sendKeys(Keys.ENTER);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+		miniEditor.writeMiniEditor(Keys.END);
+		miniEditor.writeMiniEditor(Keys.ENTER);
 		driver.switchTo().defaultContent();
-		waitForElementByElement(addLinkButton);
-		clickAndWait(addLinkButton);
-		waitForElementByElement(externalLinkOption);
-		clickAndWait(externalLinkOption);
-		targetPageOrURL.sendKeys(externallink);
-		waitForTextToBePresentInElementByElement(linkPageStatus, "External link");
-		clickAndWait(linkModalOkButton);
-		PageObjectLogging.log("writeMessageWithLink", "internal and external links: "+internallink+" and" +externallink+ "added", true, driver);
-		
+		miniEditor.addExternalLink(externalLink);
+		PageObjectLogging.log("writeMessageWithLink", "internal and external links: "+internalLink+" and" +externalLink+ "added", true, driver);
 	}
 
 	public void writeMessageSourceMode(String title, String message) {
 		clickAndWait(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-		waitForElementByElement(messageWallIFrame);
 		clickAndWait(sourceModeButton);
 		waitForElementByElement(sourceModeTextarea);
 		sourceModeTextarea.sendKeys(message);
 		PageObjectLogging.log("writeMessageSourceMode", "message in source mode is written, title: "+title+" body: "+message, true, driver);
-
-		
 	}
 
 	/**
@@ -482,8 +380,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		waitForTextToBePresentInElementByElement(list.get(0), message1);
 		waitForTextToBePresentInElementByElement(list.get(1), message2);
 		PageObjectLogging.log("verifyMessagesOrderIs", "order of messages is appropriate: "+message1+", then "+message2, true, driver);
-		
-		
 	}
 
 	/**
@@ -510,20 +406,4 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		}
 		PageObjectLogging.log("sortThreads", "order of messages sorted: "+order, true, driver);
 	}
-
-
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
+}

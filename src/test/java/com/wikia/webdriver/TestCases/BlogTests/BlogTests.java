@@ -2,7 +2,7 @@ package com.wikia.webdriver.TestCases.BlogTests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.BlogsContent;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -24,16 +24,16 @@ public class BlogTests extends TestTemplate{
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 //		String blogPostTitle = "blogPost"+home.getTimeStamp(); 
-		String blogPostTitle = BlogsContent.blogPostName+home.getTimeStamp(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
-		createBlogPage.typeInContent(BlogsContent.blogContent);
+		createBlogPage.typeInContent(PageContent.blogContent);
 		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContent);
+		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userName);
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
@@ -43,40 +43,40 @@ public class BlogTests extends TestTemplate{
 	public void BlogTests_002_EditBlogPost(){
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = BlogsContent.blogPostName+home.getTimeStamp();
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
-		createBlogPage.typeInContent(BlogsContent.blogContent);
+		createBlogPage.typeInContent(PageContent.blogContent);
 		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContent);
+		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userName);
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
 		createBlogPage = blogPage.editBlog();
 		createBlogPage.deleteArticleContent();
-		createBlogPage.typeInContent(BlogsContent.blogContentEdit);
+		createBlogPage.typeInContent(PageContent.blogContentEdit);
 		blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContentEdit);
+		blogPage.verifyArticleText(PageContent.blogContentEdit);
 	}
 
 	@Test(groups = { "BlogTests_003", "BlogTests" })
 	public void BlogTests_003_DeleteBlogPost(){
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = BlogsContent.blogPostName+home.getTimeStamp();
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
-		createBlogPage.typeInContent(BlogsContent.blogContent);
+		createBlogPage.typeInContent(PageContent.blogContent);
 		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContent);
+		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userNameStaff);
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
@@ -87,16 +87,16 @@ public class BlogTests extends TestTemplate{
 	public void BlogTests_004_DeleteUndeleteBlogPost(){
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = BlogsContent.blogPostName+home.getTimeStamp();
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
-		createBlogPage.typeInContent(BlogsContent.blogContent);
+		createBlogPage.typeInContent(PageContent.blogContent);
 		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContent);
+		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userNameStaff);
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
@@ -108,73 +108,98 @@ public class BlogTests extends TestTemplate{
 	public void BlogTests_005_PostReply(){
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = BlogsContent.blogPostName+home.getTimeStamp();
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
-		createBlogPage.typeInContent(BlogsContent.blogContent);
+		createBlogPage.typeInContent(PageContent.blogContent);
 		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContent);
+		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userName);
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
 		blogPage.triggerCommentArea();
-		blogPage.writeOnCommentArea(BlogsContent.blogComment);
+		blogPage.writeOnCommentArea(PageContent.blogComment);
 		blogPage.clickSubmitButton();
-		blogPage.verifyComment(BlogsContent.blogComment, Properties.userName);
+		blogPage.verifyComment(PageContent.blogComment, Properties.userName);
 	}
 	
 	@Test(groups = { "BlogTests_006", "BlogTests" })
 	public void BlogTests_006_PostReplyEdit(){
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = BlogsContent.blogPostName+home.getTimeStamp();
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
-		createBlogPage.typeInContent(BlogsContent.blogContent);
+		createBlogPage.typeInContent(PageContent.blogContent);
 		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContent);
+		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userName);
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
 		blogPage.triggerCommentArea();
-		blogPage.writeOnCommentArea(BlogsContent.blogComment);
+		blogPage.writeOnCommentArea(PageContent.blogComment);
 		blogPage.clickSubmitButton();
-		blogPage.verifyComment(BlogsContent.blogComment, Properties.userName);
-		blogPage.editComment(BlogsContent.blogComment);
-		blogPage.writeOnCommentArea(BlogsContent.blogCommentEdit);
+		blogPage.verifyComment(PageContent.blogComment, Properties.userName);
+		blogPage.editComment(PageContent.blogComment);
+		blogPage.writeOnCommentArea(PageContent.blogCommentEdit);
 		blogPage.clickSubmitButton(Properties.userName);
-		blogPage.verifyComment(BlogsContent.blogCommentEdit, Properties.userName);
+		blogPage.verifyComment(PageContent.blogCommentEdit, Properties.userName);
 	}
 	
 	@Test(groups = { "BlogTests_007", "BlogTests" })
 	public void BlogTests_007_PostReplyDelete(){
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = BlogsContent.blogPostName+home.getTimeStamp();
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
-		createBlogPage.typeInContent(BlogsContent.blogContent);
+		createBlogPage.typeInContent(PageContent.blogContent);
 		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
-		blogPage.verifyArticleText(BlogsContent.blogContent);
+		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userNameStaff);
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
 		blogPage.triggerCommentArea();
-		blogPage.writeOnCommentArea(BlogsContent.blogComment);
+		blogPage.writeOnCommentArea(PageContent.blogComment);
 		blogPage.clickSubmitButton();
-		blogPage.verifyComment(BlogsContent.blogComment, Properties.userNameStaff);
-		blogPage.deleteComment(BlogsContent.blogComment);
+		blogPage.verifyComment(PageContent.blogComment, Properties.userNameStaff);
+		blogPage.deleteComment(PageContent.blogComment);
+	}
+	
+	//test case for https://wikia.fogbugz.com/default.asp?95165
+	@Test(groups = { "BlogTests_008", "BlogTests" })
+	public void BlogTests_008_PostReplyReply(){
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage();
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		userProfile.clickOnBlogTab();
+		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
+		createBlogPage.typeBlogPostTitle(blogPostTitle);
+		createBlogPage.clickOk();
+		createBlogPage.typeInContent(PageContent.blogContent);
+		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
+		blogPage.verifyArticleText(PageContent.blogContent);
+		blogPage.verifyPageTitle(blogPostTitle);
+		blogPage.verifyUsernameFieldPresent(Properties.userName);
+		blogPage.categories_verifyCategoryPresent("Blog posts");	
+		blogPage.triggerCommentArea();
+		blogPage.writeOnCommentArea(PageContent.blogComment);
+		blogPage.clickSubmitButton();
+		blogPage.verifyComment(PageContent.blogComment, Properties.userName);
+		blogPage.replyComment(PageContent.blogComment, PageContent.blogCommentReply);
 	}
 }

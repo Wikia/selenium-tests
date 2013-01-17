@@ -20,7 +20,7 @@ public class Crawler extends WikiBasePageObject {
 	private int wantedNumberOfURLs;
 	private int currentPreparingIteration = 1;
 	//TODO: prevent the currentPreparingIteration to exceed number 15. Searching for too long is not good 
-	private List<String> readyForExportListOfURLs;
+	private List<String> ListOfURLsReadyForExport;
 	private List<String> ImportedListOfURLs;
 	List<String> listOfAllURLs;
 	
@@ -48,7 +48,7 @@ public class Crawler extends WikiBasePageObject {
 	 * */
 	public void prepareURLsForExploratoryTests(int numberOfURLs) {
 		this.wantedNumberOfURLs = numberOfURLs;
-		this.readyForExportListOfURLs = new ArrayList<String>(wantedNumberOfURLs);
+		this.ListOfURLsReadyForExport = new ArrayList<String>(wantedNumberOfURLs);
 		navigateToRandomPage();
 		prepareExportList();
 		exportTheExportList();			
@@ -107,8 +107,8 @@ public class Crawler extends WikiBasePageObject {
 				//prevent saving special:Random page. Reason: Two random pages will never be comparable because they are almost always different
 				if ((currentNumberOfURLs < wantedNumberOfURLs) && without_domain.substring(0, 5).equals("wiki/") && (!without_domain.contains("Special:Random"))) {
 					
-					if (!this.readyForExportListOfURLs.contains(urlList.get(i))) {
-						this.readyForExportListOfURLs.add(urlList.get(i));
+					if (!this.ListOfURLsReadyForExport.contains(urlList.get(i))) {
+						this.ListOfURLsReadyForExport.add(urlList.get(i));
 						
 						currentNumberOfURLs++;
 					}								
@@ -126,8 +126,8 @@ public class Crawler extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 * */
 	private void navigateToRandomWikiUrl() {
-		int randomInteger = (int)(Math.random() * (readyForExportListOfURLs.size()));
-		String randomURL = readyForExportListOfURLs.get(randomInteger);
+		int randomInteger = (int)(Math.random() * (ListOfURLsReadyForExport.size()));
+		String randomURL = ListOfURLsReadyForExport.get(randomInteger);
 		currentPreparingIteration++;
 		try {			
 			getUrl(randomURL);
@@ -148,8 +148,8 @@ public class Crawler extends WikiBasePageObject {
 				+ File.separator + "crawler");
 		CommonUtils.createDirectory("." + File.separator + "src"+ File.separator + "test"+ File.separator + "resources"+ File.separator + "crawler");
 		CommonUtils.createDirectory("." + File.separator + "src"+ File.separator + "test"+ File.separator + "resources"+ File.separator + "crawler"+ File.separator + "resultImages");
-		for (int i = 0; i < readyForExportListOfURLs.size(); i++) {			
-			CommonUtils.appendTextToFile(wikiURLsFilePath, readyForExportListOfURLs.get(i));
+		for (int i = 0; i < ListOfURLsReadyForExport.size(); i++) {			
+			CommonUtils.appendTextToFile(wikiURLsFilePath, ListOfURLsReadyForExport.get(i));
 		}		
 	}
 
@@ -171,8 +171,23 @@ public class Crawler extends WikiBasePageObject {
 		String screenPath = screenDirPath + "screenshot";
 		for (int i = 0; i < ImportedListOfURLs.size(); i++) {
 			driver.get(ImportedListOfURLs.get(i));
+			hideAds();
 			CommonUtils.captureScreenshot(screenPath + (i), driver);			
 		}
+	}
+
+	private void hideAds() {
+		String command = "css('opacity', '0')";
+		executeScript("$('#TOP_BUTTON')."+command);
+		executeScript("$('#HOME_TOP_RIGHT_BOXAD')."+command);
+		executeScript("$('#TOP_RIGHT_BOXAD img')."+command);		
+		executeScript("$('#WIKIA_BAR_BOXAD_1')."+command);
+		executeScript("$('#PREFOOTER_LEFT_BOXAD')."+command);
+		executeScript("$('#PREFOOTER_RIGHT_BOXAD')."+command);
+		executeScript("$('#SPOTLIGHT_FOOTER img')."+command);		
+		executeScript("$('#div.RVBody .item a.video-thumbnail')."+command);	
+		//TODO: continue adding elements that should be hidden
+		executeScript("$('#div.RVBody .item a.video-thumbnail')."+command);		
 	}
 
 	/**

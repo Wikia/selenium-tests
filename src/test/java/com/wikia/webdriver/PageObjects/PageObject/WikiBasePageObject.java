@@ -131,6 +131,12 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="div.mw-warning-with-logexcerpt p")
 	private WebElement pageDeletedInfo;
 	
+	@FindBy(css="#PREFOOTER_RIGHT_BOXAD")
+	private WebElement ad_Prefooter_right_boxad;
+	
+	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
+	private WebElement ad_Prefooter_left_boxad;
+	
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By
@@ -166,15 +172,13 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
 	 */
 	public void clickOnAddObjectButton(String Object) {
-		// TODO Auto-generated method stub
 		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
 		WebElement ObjectButton;
 		waitForElementByCss(ObjectCss);
 		waitForElementClickableByCss(ObjectCss);
 		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
 		clickAndWait(ObjectButton);
-		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
-		
+		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);		
 	}
 	
 	/**
@@ -465,17 +469,17 @@ public class WikiBasePageObject extends BasePageObject {
 				true, driver);
 	}
 
-	public SpecialNewFilesPageObject OpenSpecialNewFiles() {
+	public SpecialNewFilesPageObject openSpecialNewFiles() {
 		getUrl(Domain + "Special:NewFiles");
 		return new SpecialNewFilesPageObject(driver, Domain);
 	}
 
-	public SpecialUploadPageObject OpenSpecialUpload() {
+	public SpecialUploadPageObject openSpecialUpload() {
 		getUrl(Domain + "Special:Upload");
 		return new SpecialUploadPageObject(driver, Domain);
 	}
 
-	public SpecialMultipleUploadPageObject OpenSpecialMultipleUpload() {
+	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
 		getUrl(Domain + "Special:MultipleUpload");
 		return new SpecialMultipleUploadPageObject(driver, Domain);
 	}
@@ -519,6 +523,15 @@ public class WikiBasePageObject extends BasePageObject {
 		// String href = randomPageButton.getAttribute("href");
 		// driver.navigate().to(href);
 		clickAndWait(randomPageButton);
+		waitForElementByElement(searchButton);
+		PageObjectLogging.log("openRandomArticle",
+				"random page button clicked", true, driver);
+	}
+	
+	public void openRandomArticleByUrl() {
+		// String href = randomPageButton.getAttribute("href");
+		// driver.navigate().to(href);
+		navigateToRandomPage();
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
 				"random page button clicked", true, driver);
@@ -844,5 +857,19 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(premissionErrorMessage);
 		PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
 				true, driver);
+	}
+	
+	public void verifyAdsVisible_PrefooterAds()
+	{
+		waitForElementByElement(ad_Prefooter_left_boxad);
+		waitForElementByElement(ad_Prefooter_right_boxad);
+		PageObjectLogging.log("verifyPrefooterAdsVisible", "left and right prefooter ads are visible", true, driver);
+	}
+	
+	public void verifyAdsInvisible_PrefooterAds()
+	{
+		waitForElementNotVisibleByElement(ad_Prefooter_left_boxad);
+		waitForElementNotVisibleByElement(ad_Prefooter_right_boxad);
+		PageObjectLogging.log("verifyPrefooterAdsInvisible", "left and right prefooter ads are invisible", true, driver);
 	}
 }

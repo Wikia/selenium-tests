@@ -10,21 +10,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 
 public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 
 	@FindBy(css="input[name='wpIgnoreWarning']")
-	private WebElement IgnoreAnyWarnings;
+	private WebElement ignoreAnyWarnings;
 	@FindBy(css="input[name='wpUpload']")
-	private WebElement UploadFileButton;
+	private WebElement uploadFileButton;
 	@FindBy(css="form[id='mw-upload-form']")
-	private WebElement MultipleUploadForm;
+	private WebElement multipleUploadForm;
+	@FindBy(css="#wpUploadDescription")
+	private WebElement multipleUploadSummaryField;
 
 	
 	private By FileInputs = By.cssSelector("tr.mw-htmlform-field-UploadSourceField td.mw-input input");
-	private By UploadedFiles = By.cssSelector("tr.mw-htmlform-field-UploadSourceField td.mw-input input");
 	private By UploadedFilesListContener = By.cssSelector("div[id='mw-content-text']");
 	private By UploadedFilesList = By.cssSelector("div[id='mw-content-text'] ul li a");
 		
@@ -43,7 +45,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 	 * ** @param FilesNamesList List of files to be uploaded 
 	 * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
 	 *  */
-	public void TypeInFilesToUpload(String[] FilesNamesList) {
+	public void typeInFilesToUpload(String[] FilesNamesList) {
 		if (FilesNamesList==null) {
 			PageObjectLogging.log("TypeInFilesToUpload", "File names list can not be null", false, driver);
 								}
@@ -51,25 +53,32 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 			PageObjectLogging.log("TypeInFilesToUpload", "You can upload from 1 to 10 files using MultipleUpload. "+FilesNamesList.length+" files is unaccpetable", false, driver);
 					}
 		else {
-		waitForElementByElement(MultipleUploadForm);
+		waitForElementByElement(multipleUploadForm);
 		List<WebElement> FileInputsLits = driver.findElements(FileInputs);
 		for (int i = 0; i < FilesNamesList.length; i++) {
+			CommonFunctions.scrollToElement(FileInputsLits.get(i));
 			FileInputsLits.get(i).sendKeys(System.getProperty("user.dir")+"\\src\\test\\resources\\ImagesForUploadTests\\"+FilesNamesList[i]);
 		}
 		PageObjectLogging.log("TypeInFilesToUpload", "Upload "+FilesNamesList.length+" files, specified in FilesNamesList", true, driver);	
 		}
 	}
+	
+	public void typeInMultiUploadSummary(String summary){
+		waitForElementByElement(multipleUploadSummaryField);
+		multipleUploadSummaryField.sendKeys(summary);
+		PageObjectLogging.log("typeInMultiUploadSummary", "summary: "+summary+" added to multiupload", true, driver);
+	}
 
-	public void CheckIgnoreAnyWarnings() {
-		waitForElementByElement(IgnoreAnyWarnings);
-		clickAndWait(IgnoreAnyWarnings);
+	public void checkIgnoreAnyWarnings() {
+		waitForElementByElement(ignoreAnyWarnings);
+		clickAndWait(ignoreAnyWarnings);
 		PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true, driver);
 		
 	}
 
-	public void ClickOnUploadFile() {
-		waitForElementByElement(UploadFileButton);
-		clickAndWait(UploadFileButton);
+	public void clickOnUploadFile() {
+		waitForElementByElement(uploadFileButton);
+		clickAndWait(uploadFileButton);
 		PageObjectLogging.log("ClickOnUploadFile", "Click on Upload File button", true, driver);
 		
 	}
@@ -81,7 +90,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 	 *  @author Michal Nowierski
 	 ** @param FilesNamesList list of expected names of files 
 	 */
-	public void VerifySuccessfulUpload(String[] FilesNamesList) {
+	public void verifySuccessfulUpload(String[] FilesNamesList) {
 		waitForElementByBy(UploadedFilesListContener);
 		
 		List<WebElement> UploadedFileslist = driver.findElements(UploadedFilesList);

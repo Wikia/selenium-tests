@@ -13,7 +13,6 @@ public class Top_10_list_EditMode extends Top_10_list_EditonCore{
 
 	public Top_10_list_EditMode(WebDriver driver, String Domain) {
 		super(driver, Domain);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Top_10_list clickSaveList() {
@@ -22,7 +21,4 @@ public class Top_10_list_EditMode extends Top_10_list_EditonCore{
 		PageObjectLogging.log("clickCreateList", "click on Create List button", true, driver);		
 		return new Top_10_list(driver, Domain, this.articlename);
 	}
-
-
-
 }

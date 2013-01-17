@@ -75,7 +75,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement categories_CategoryInputField;
 	@FindBy(css="#csWikitext")
 	private WebElement categories_CategorySourceInputField;
-	@FindBy(xpath="//p[contains(text(), 'You do not have permission to create pages, for the following reason:')]")
+	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
 	private WebElement blockedUserMessage1;
 	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
 	private WebElement blockedUserMessage2;
@@ -822,7 +822,8 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		jQueryFocus("#csCategoryInput");
 		categories_CategoryInputField.sendKeys(categoryName);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
-		categories_CategoryInputField.sendKeys(Keys.ENTER);
+		executeScript("var e = jQuery.Event(\"keypress\"); e.keyCode=13; $('#csCategoryInput').trigger(e);");
+//		categories_CategoryInputField.sendKeys(Keys.ENTER);
 		PageObjectLogging.log("categories_typeCategoryNameEditMode", "category "+categoryName+" typed", true, driver);
 	}
 	
@@ -837,7 +838,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		clickAndWait(categories_CategorySourceInputField);
 		categories_CategorySourceInputField.sendKeys(textToBeAdded);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();};
-		PageObjectLogging.log("categories_addCategorySourceEditMode", "category "+textToBeAdded+" typed in the source mode", true, driver);
+		PageObjectLogging.log("categories_addCategorySourceEditMode", "category "+textToBeAdded.replaceAll("<", "&lt").replaceAll(">", "&gt")+" typed in the source mode", true, driver);
 	}
 	
 	/**
@@ -850,10 +851,10 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		String text = categories_CategorySourceInputField.getAttribute("value");
 		if (text.contains(textToBeChecked)) {
 			
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked+" present in the source mode", true, driver);
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked.replaceAll("<", "&lt").replaceAll(">", "&gt")+" present in the source mode", true, driver);
 		}
 		else {
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked+" NOT present in the source mode", false, driver);
+			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked.replaceAll("<", "&lt").replaceAll(">", "&gt")+" NOT present in the source mode", false, driver);
 			
 		}
 	}

@@ -42,25 +42,25 @@ public class SpecialNewFilesPageObject extends WikiBasePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void ClickOnAddaPhoto() {
+	public void clickOnAddaPhoto() {
 		waitForElementByElement(AddAphotoButton);
 		clickAndWait(AddAphotoButton);
 		PageObjectLogging.log("ClickOnAddaPhoto", "Click on add a photo button", true, driver);
 	}
 	
-	public void ClickOnUploadaPhoto() {
+	public void clickOnUploadaPhoto() {
 		waitForElementByElement(UploadFileInput);
 		clickAndWait(UploadFileInput);
 		PageObjectLogging.log("ClickOnUploadaPhoto", "Click on upload a photo button", true, driver);
 	}
 	
-	public void ClickOnMoreOrFewerOptions() {
+	public void clickOnMoreOrFewerOptions() {
 		waitForElementByElement(MoreOrFewerOptions);
 		clickAndWait(MoreOrFewerOptions);
 		PageObjectLogging.log("ClickOnMoreOrFewerOptions", "Click on More or Fewer options (depends on which of those two is currently visible)", true, driver);
 		
 	}
-	public void CheckIgnoreAnyWarnings() {
+	public void checkIgnoreAnyWarnings() {
 		waitForElementByElement(IgnoreAnyWarnings);
 		clickAndWait(IgnoreAnyWarnings);
 		PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true, driver);
@@ -74,7 +74,7 @@ public class SpecialNewFilesPageObject extends WikiBasePageObject{
 	 * ** @param file file to Be uploaded
 	 * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
 	 *  */ 
-	public void TypeInFileToUploadPath(String file){
+	public void typeInFileToUploadPath(String file){
 	sendKeys(BrowseForFileInput, System.getProperty("user.dir")+"\\src\\test\\resources\\ImagesForUploadTests\\"+file);
 	}
 

@@ -30,7 +30,6 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 	public CreateNewWikiPageObjectStep3(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -42,7 +41,6 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		PageObjectLogging.log("selectTheme", "skin number: " + skinNumber + " selected", true, driver);
@@ -58,7 +56,6 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 //			try {
 //				Thread.sleep(500);
 //			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
 //		}

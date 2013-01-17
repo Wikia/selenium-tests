@@ -31,7 +31,6 @@ public class SignUpPageObject extends BasePageObject {
 	public SignUpPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
 
 	@FindBy(css = "form#WikiaSignupForm input[name='username']")

@@ -6,7 +6,6 @@ public class WikiBasePageObjectMobile extends BasePageObject{
 	
 	public WikiBasePageObjectMobile(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 	
 	

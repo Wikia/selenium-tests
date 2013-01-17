@@ -224,8 +224,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByXPath("//div[@id='mw-content-text']//*[contains(text(), '"+content+"')]");
 		PageObjectLogging.log("verifyArticleText", "article text is verified", true, driver);
 	}
-	
-	
+		
 	/**
 	 * Click Edit button on a wiki article
 	 *  

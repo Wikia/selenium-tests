@@ -43,7 +43,6 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	public CreateNewWikiPageObjectStep1(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void selectLanguage(String lang)
@@ -75,7 +74,6 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		PageObjectLogging.log("typeInWikiName ", "Typed wiki name" +name, true, driver);

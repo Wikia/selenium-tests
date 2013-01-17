@@ -49,6 +49,13 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 		PageObjectLogging.log("addDescription", "add Description to top 10 list: "+description, true, driver);
 	}
 	
+	public void addNewDescription(String description) {
+		waitForElementByElement(descriptionField);
+		descriptionField.clear();
+		sendKeys(descriptionField, description);
+		PageObjectLogging.log("addDescription", "add Description to top 10 list: "+description, true, driver);
+	}
+	
 	public void addItem(int index, String itemName) {
 		List<WebElement> list = driver.findElements(itemInputsList);
 		if (list.size()>0) {	
