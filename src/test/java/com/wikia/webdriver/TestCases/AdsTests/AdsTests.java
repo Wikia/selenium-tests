@@ -19,81 +19,81 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject
 	@Test(groups = { "AdsTests_001", "AdsTests"})
 	public void Top_10_list_Tests_001_preFooterEnabledOnWikiSearch() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiSearchMiddleLink1+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiSearchMiddleLink1, URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiSearchMiddleLink2+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiSearchMiddleLink2,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_002", "AdsTests"})
 	public void Top_10_list_Tests_002_preFooterDisabledOnWikiSearch() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiSearchMiddleLink1+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiSearchMiddleLink1, URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiSearchMiddleLink2+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiSearchMiddleLink1, URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_003", "AdsTests"})
 	public void Top_10_list_Tests_003_preFooterEnabledOnWikiMainPage() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiMainPageLink1+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiMainPageLink1,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiMainPageLink2+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiMainPageLink2,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_004", "AdsTests"})
 	public void Top_10_list_Tests_004_preFooterDisabledOnWikiMainPage() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiMainPageLink1+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiMainPageLink1,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiMainPageLink2+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiMainPageLink2,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_005", "AdsTests"})
 	public void Top_10_list_Tests_005_preFooterEnabledOnWikiNewForum() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiNewForumLink1+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiNewForumLink1,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiNewForumLink2+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiNewForumLink2,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_006", "AdsTests"})
 	public void Top_10_list_Tests_006_preFooterDisabledOnWikiNewForum() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiNewForumLink1+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiNewForumLink1,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiNewForumLink2+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiNewForumLink2,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_007", "AdsTests"})
 	public void Top_10_list_Tests_007_preFooterEnabledOnWikiCategory() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiCategoryLink1+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiCategoryLink1,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiCategoryLink2+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiCategoryLink2,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_008", "AdsTests"})
 	public void Top_10_list_Tests_008_preFooterDisabledOnWikiCategory() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiCategoryLink1+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiCategoryLink1,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiCategoryLink2+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiCategoryLink2,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_009", "AdsTests"})
 	public void Top_10_list_Tests_009_preFooterEnabledOnWikiArticle() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiArticleLink1+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiArticleLink1,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiArticleLink2+URLsContent.prefooterAdsEnabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiArticleLink2,URLsContent.prefooterAdsEnabled));
 		wikiObject.verifyAdsVisible_PrefooterAds();						
 	}
 	@Test(groups = { "AdsTests_010", "AdsTests"})
 	public void Top_10_list_Tests_010_preFooterDisabledOnWikiArticle() {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver,Global.DOMAIN);
-		wikiObject.getUrl(URLsContent.wikiArticleLink1+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiArticleLink1,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();
-		wikiObject.getUrl(URLsContent.wikiArticleLink2+URLsContent.prefooterAdsDisabled);
+		wikiObject.getUrl(URLsContent.buildUrl(URLsContent.wikiArticleLink2,URLsContent.prefooterAdsDisabled));
 		wikiObject.verifyAdsInvisible_PrefooterAds();						
 	}
 	
