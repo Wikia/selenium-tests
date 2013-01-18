@@ -46,4 +46,12 @@ public class PageContent {
 	//links
 	public static String externalLink = "www.wikia.com";
 	public static String internalLink = "Formatting";
+	
+	//forum
+	public static String forumTitlePrefix = "QABoardTitle ";
+	public static String forumTitle40CharPrefix = "This forum title is forty c";
+	public static String forumTitleSlashPrefix = "QA/article";
+	public static String forumTitleUnderScorePrefix = "QA_article";	
+	public static String forumTitleNonlatinPrefix = "查爾斯";	
+	public static String forumDescriptionPrefix = "Duis quam ante, fringilla at cursus tristique ";
 }

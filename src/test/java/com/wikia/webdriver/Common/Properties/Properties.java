@@ -12,6 +12,18 @@ import com.wikia.webdriver.Common.Core.XMLFunctions;
 
 public class Properties {
 
+	private static void setPropertiesManually()
+	{
+		Global.BROWSER = "CHROME";
+		Global.DOMAIN = "http://mediawiki119.wikia.com/";
+		Global.LIVE_DOMAIN = "http://www.wikia.com/";
+		Global.CONFIG_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"config.xml");
+		Global.CAPTCHA_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"captcha.txt");
+		Global.LOG_VERBOSE = 2;
+		Global.LOGIN_BY_COOKIE = true;
+		Global.LOG_ENABLED = true;
+	}
+	
 	public static String userName;
 	public static String password;
 	
@@ -114,18 +126,6 @@ public class Properties {
 			Global.LOGIN_BY_COOKIE = true;
 		}
 		Global.LOG_ENABLED = true; 
-	}
-	
-	private static void setPropertiesManually()
-	{
-		Global.BROWSER = "IE";
-		Global.DOMAIN = "http://mediawiki119.wikia.com/";
-		Global.LIVE_DOMAIN = "http://www.wikia.com/";
-		Global.CONFIG_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"config.xml");
-		Global.CAPTCHA_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"captcha.txt");
-		Global.LOG_VERBOSE = 2;
-		Global.LOGIN_BY_COOKIE = true;
-		Global.LOG_ENABLED = true;
 	}
 	
 	private static void getWikiVersion()
