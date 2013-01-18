@@ -129,7 +129,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		waitForElementByXPath("//h1[contains(text(), '"+forumName+"')]");
+		waitForElementByXPath("//h1[contains(text(), '"+forumName.replace("_", " ")+"')]");
 		getUrl(temp);
 		PageObjectLogging.log("verifyForumExists", "verified forum exists", true, driver);
 	}
