@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
@@ -53,7 +54,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		boardTitleField.sendKeys(title);
 		PageObjectLogging.log("typeBoardTitle", "board title typed in", true);
 	}
-	private void typeBoadDescription(String description){
+	private void typeBoradDescription(String description){
 		waitForElementByElement(boardDescriptionField);
 		boardDescriptionField.sendKeys(description);
 		PageObjectLogging.log("typeBoardDescription", "board description typed in", true);
@@ -67,16 +68,13 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	public void createNewBoard(String title, String description){
 		openCreateNewBoardForm();
 		typeBoardTitle(title);
-		typeBoadDescription(description);
+		typeBoradDescription(description);
 		submitNewBoard();
 	}
 	
 	public void verifyBoardCreated(String title, String description){
-		//  //a[contains(text(), '查爾斯')]/../../../p[contains(text(), 'Duis quam ante, fringilla at cursus tristique 1358495325828')]
-		System.out.println("//a[contains(text(), '"+title+"')]/../../../p[contains(text(), '"+description+"')]");
-		waitForElementByXPath("//ul/li//a[contains(text(), '"+title.replaceAll("_", " ")+"')]/../../../p[contains(text(), '"+description+"')]");;
-//		waitForElementByXPath("//a[@href='"+Global.DOMAIN+"wiki/Board:"+title.replace(" ", "_")+"']/../../../p[contains(text(), '"+description+"')]");
-		PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true, driver);		
+		waitForElementByXPath("//ul/li//a[contains(text(), '"+title.replaceAll("_", " ")+"')]/../../../p[contains(text(), '"+description+"')]");
+		PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);		
 	}
 
 	private void clickDeleteForum(String name){
@@ -102,7 +100,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private void verifyForumDeletedText(String deletedName){
 		waitForElementByXPath("//div[@class='global-notification confirm']" +
 				"/div[@class='msg' and contains(text(), '\"Board:"+deletedName+"\" has been deleted.')]");
-		PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true, driver);
+		PageObjectLogging.log("verifyForumDeletedText", "forum deleted text verified", true);
 	}
 	
 	public void deleteForum(String sourceForumName, String destinationForumName){
@@ -147,5 +145,41 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true, driver);
 	}
 	
-		
+	private void clickModifyForum(String forumName){
+		WebElement editPecil = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//img[@class='sprite edit-pencil']");
+		clickAndWait(editPecil);
+		PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true, driver);
+	}
+	
+	private void clearEditBoardFields(){
+		waitForElementByElement(boardTitleField);
+		waitForElementByElement(boardDescriptionField);
+		boardTitleField.clear();
+		boardDescriptionField.clear();
+		PageObjectLogging.log("clickEditBoardFields", "edit boards fields cleared", true, driver);
+	}
+	
+	public void editForum(String forumName, String newTitle, String newDescription){
+		clickModifyForum(forumName);
+		clearEditBoardFields();
+		typeBoardTitle(newTitle);
+		typeBoradDescription(newDescription);
+		submitNewBoard();
+	}
+	
+	public void clickMoveDown(String forumName){
+		String temp = getFirstForumName();
+		WebElement down = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//span[@class='movedown']");
+		down.click();
+		Assertion.assertEquals(temp, getSecondForumName());
+		PageObjectLogging.log("clickMoveDown", "move down button clicked", true, driver);
+	}
+	
+	public void clickMoveUp(String forumName){
+		String temp = getSecondForumName();
+		WebElement up = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//span[@class='moveup']");
+		up.click();
+		Assertion.assertEquals(temp, getFirstForumName());
+		PageObjectLogging.log("clickMoveDown", "move up button clicked", true, driver);
+	}
 }

@@ -49,9 +49,11 @@ public class PageContent {
 	
 	//forum
 	public static String forumTitlePrefix = "QABoardTitle ";
+	public static String forumTitleEditPrefix = "QABoardTitleEdit ";
 	public static String forumTitle40CharPrefix = "This forum title is forty c";
-	public static String forumTitleSlashPrefix = "QA/article";
-	public static String forumTitleUnderScorePrefix = "QA_article";	
+	public static String forumTitleSlashPrefix = "QA/boardTitle";
+	public static String forumTitleUnderScorePrefix = "QA_boardTitle";	
 	public static String forumTitleNonlatinPrefix = "查爾斯";	
 	public static String forumDescriptionPrefix = "Duis quam ante, fringilla at cursus tristique ";
+	public static String forumDescriptionEditPrefix = "Duis quam ante, fringilla at cursus tristique edit ";
 }
