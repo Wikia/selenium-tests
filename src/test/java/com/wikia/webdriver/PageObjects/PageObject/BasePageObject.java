@@ -35,7 +35,7 @@ public class BasePageObject{
 	
 	public String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 		
-	protected int timeOut = 30;
+	protected int timeOut = 10;
 
 	protected String Domain;
 	
@@ -71,6 +71,10 @@ public class BasePageObject{
 	protected WebElement followedButton;
 	@FindBy(css="#ca-watch")
 	protected WebElement unfollowedButton;
+	@FindBy(css = "a[data-canonical='random']")
+	private WebElement randomPageButton;
+	@FindBy(css = ".sprite.search")
+	private WebElement searchButton;
 	
 	@FindBy(css="form.WikiaSearch")
 	WebElement wikiaSearch_searchForm;
@@ -84,8 +88,8 @@ public class BasePageObject{
 	public BasePageObject(WebDriver driver)
 	{
 		this.driver = driver;
+		this.Domain = Global.DOMAIN;
 		wait = new WebDriverWait(driver, timeOut);
-
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
 	}
@@ -1169,6 +1173,48 @@ public class BasePageObject{
 	    catch (InterruptedException e) {
 			
 		}  	
+	}
 	
-}
+	public void openWikiPage() {
+		String temp = Domain;
+		try {
+			temp = Domain + "?noexternals=1";
+			getUrl(temp);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		waitForElementByCss("a[class*=hub]");
+		executeScript("$('ul#pagehistory li:nth-child(1) .mw-history-undo')");
+	}
+
+	public void openRandomArticle() {
+		// String href = randomPageButton.getAttribute("href");
+		// driver.navigate().to(href);
+		clickAndWait(randomPageButton);
+		waitForElementByElement(searchButton);
+		PageObjectLogging.log("openRandomArticle",
+				"random page button clicked", true, driver);
+	}
+	
+	public void openRandomArticleByUrl() {
+		// String href = randomPageButton.getAttribute("href");
+		// driver.navigate().to(href);
+		navigateToRandomPage();
+		waitForElementByElement(searchButton);
+		PageObjectLogging.log("openRandomArticle",
+				"random page button clicked", true, driver);
+	}
+	
+	private void navigateToRandomPage() {
+		String temp = Domain;
+		try {
+			temp = Domain + "wiki/Special:Random";
+			getUrl(temp);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		
+	}
 } 
