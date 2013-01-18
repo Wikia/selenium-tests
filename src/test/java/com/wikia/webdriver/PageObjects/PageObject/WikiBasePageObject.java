@@ -758,7 +758,7 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		catch (TimeoutException e) {
 			PageObjectLogging.log("openTop10List",
-					"page loads for more than 30 seconds", true);
+					"page loads for more than 30 seconds", true, driver);
 		}
 		PageObjectLogging.log("openTop10List", topTenListName
 				+ " opened", true);
