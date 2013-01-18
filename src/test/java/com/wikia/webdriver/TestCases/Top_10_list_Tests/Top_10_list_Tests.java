@@ -212,10 +212,8 @@ public class Top_10_list_Tests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();		
 		wiki.openWikiPage();
-		WikiArticlePageObject article = new WikiArticlePageObject(driver,
-				Global.DOMAIN, "random");
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
-		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
+		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
 		top10listCreation.verifyListName(top_10_list_Name);
 		top10listCreation.addDescription(PageContent.top10Description);
 		Top_10_list top10list = top10listCreation.clickCreateList();

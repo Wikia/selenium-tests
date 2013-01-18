@@ -57,4 +57,5 @@ public class PageContent {
 	public static String forumTitleNonlatinPrefix = "查爾斯";	
 	public static String forumDescriptionPrefix = "Duis quam ante, fringilla at cursus tristique ";
 	public static String forumDescriptionEditPrefix = "Duis quam ante, fringilla at cursus tristique edit ";
+	public static String forumMessage = "QAforumMessage";
 }

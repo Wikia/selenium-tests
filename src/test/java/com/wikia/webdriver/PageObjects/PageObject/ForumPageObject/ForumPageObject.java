@@ -1,5 +1,8 @@
 package com.wikia.webdriver.PageObjects.PageObject.ForumPageObject;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +23,7 @@ public class ForumPageObject extends BasePageObject{
 	@FindBy(css=".button.admin-link")
 	private WebElement manageBoardsButton;	
 	
+	private By forumBoardsList = By.cssSelector("ul.boards h4 a");
 	
 	public ForumPageObject(WebDriver driver) {
 		super(driver);
@@ -61,6 +65,16 @@ public class ForumPageObject extends BasePageObject{
 		clickAndWait(manageBoardsButton);
 		PageObjectLogging.log("clickManageBoardsButton", "manage boards button clicked", true);
 		return new ForumManageBoardsPageObject(driver);
+	}
+
+	public ForumBoardPageObject openForumBoard(int forumBoardNumber) {
+		List<WebElement> lista = driver.findElements(forumBoardsList);
+		WebElement forumBoardLink = lista.get(forumBoardNumber-1);
+		waitForElementByElement(forumBoardLink);
+		waitForElementClickableByElement(forumBoardLink);
+		click(forumBoardLink);
+		PageObjectLogging.log("openForumBoard", "click on the forum Board number "+forumBoardNumber, true, driver);
+		return new ForumBoardPageObject(driver);
 	}
 	
 }
