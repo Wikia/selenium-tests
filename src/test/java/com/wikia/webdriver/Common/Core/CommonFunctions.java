@@ -804,14 +804,10 @@ public class CommonFunctions {
 						+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 						+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
-				try {
-					if (driver.getCurrentUrl().contains("Special:UserLogout")) {						
-						driver.get(Global.DOMAIN+"Special:Random");
-					}
-					else {
-						driver.navigate().refresh();
-					}
-				} catch (TimeoutException e) {
+				try{						
+					driver.get(Global.DOMAIN+"Special:Random");
+				}
+				catch (TimeoutException e) {
 					PageObjectLogging.log("loginCookie",
 							"page timeout after login by cookie", true);
 				}
@@ -900,14 +896,10 @@ public class CommonFunctions {
 					+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 					+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
-			try {
-				if (driver.getCurrentUrl().contains("Special:UserLogout")) {						
-					driver.get(Global.DOMAIN+"Special:Random");
+			try{
+				driver.get(Global.DOMAIN+"Special:Random");
 				}
-				else {
-					driver.navigate().refresh();
-				}
-			} catch (TimeoutException e) {
+			catch (TimeoutException e) {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);
 			}
