@@ -418,7 +418,7 @@ public class BasePageObject{
 	}
 	
 	public void addCssClass(String cssSelector, String className){
-		executeScript("$('."+cssSelector+"').removeClass('"+className+"')");
+		executeScript("$('."+cssSelector+"').addClass('"+className+"')");
 		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true);
 	}
 	
