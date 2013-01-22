@@ -412,6 +412,16 @@ public class BasePageObject{
 		}
 	}
 	
+	public void removeCssClass(String cssSelector, String className){
+		executeScript("$('."+cssSelector+"').removeClass('"+className+"')");
+		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true);
+	}
+	
+	public void addCssClass(String cssSelector, String className){
+		executeScript("$('."+cssSelector+"').removeClass('"+className+"')");
+		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true);
+	}
+	
 	/**
 	 * Returns List of WebElements by CssSelector
 	 * 
