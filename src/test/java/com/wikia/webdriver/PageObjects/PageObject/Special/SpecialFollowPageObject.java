@@ -30,9 +30,14 @@ public class SpecialFollowPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyFollowedArticle", image + "is visible on followed list", true);
 	}
 	
-	public void verifyFollowedBLog(String userName){
+	public void verifyFollowedBlog(String userName){
 		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("verifyFollowedArticle", userName + " blog is visible on followed list", true);
+	}
+	
+	public void verifyFollowedBlogPost(String bloPostName){
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '"+bloPostName+"')]");
+		PageObjectLogging.log("verifyFollowedArticle", bloPostName + " blog post is visible on followed list", true);
 	}
 
 }

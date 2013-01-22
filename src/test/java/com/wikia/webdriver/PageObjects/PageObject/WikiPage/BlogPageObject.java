@@ -62,6 +62,13 @@ public class BlogPageObject extends WikiArticlePageObject{
 		waitForElementByElement(followedButton);
 	}
 	
+	public void followBlogPostPage(String userName, String postName){
+		//  /wiki/User_blog:QATestsUser/blogPost1358842569583?action=unwatch&token=bc863c8bb8a5b9c46d19ea102919bb84%2B%5C
+		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"/"+postName+"&action=watch");
+		clickAndWait(followSubmit);
+		waitForElementByElement(followedButton);
+	}
+	
 	public void unfollowBlogPage(String userName){
 		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=unwatch");
 		clickAndWait(followSubmit);

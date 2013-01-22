@@ -38,7 +38,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		
 	@Test(groups = { "Top_10_list_Tests_002", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_002_createTop10listWithItems() {
-		PageObjectLogging.log("ACTIVE BUG 35690", "on CHROME and IE: verifyItemPresent steps are likely to fail. NOTE: the defect SOMETIMES does not occur", false);	
+		PageObjectLogging.log("ACTIVE BUG 35690", "on CHROME, FF and IE: verifyItemPresent steps are likely to fail. NOTE: the defect SOMETIMES does not occur", false);	
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();

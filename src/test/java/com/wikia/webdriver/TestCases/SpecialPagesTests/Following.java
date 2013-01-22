@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 import org.openqa.selenium.remote.server.handler.html5.GetLocalStorageItem;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -11,6 +12,7 @@ import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.Special.SpecialFollowPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.BlogPageObject;
+import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -42,12 +44,33 @@ public class Following extends TestTemplate{
 		blog.followBlogPage(Properties.userName);
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
 		follow.openFollowingPage();
-		follow.verifyFollowedBLog(Properties.userName);
+		follow.verifyFollowedBlog(Properties.userName);
 		blog.unfollowBlogPage(Properties.userName);
 	}
 	
-	
-//	public void follow003_Posts(){}
+	@Test(groups = {"follow003", "follow"})
+	public void follow003_BlogPosts(){
+		CommonFunctions.logOut(driver);
+		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		home.openWikiPage(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		userProfile.clickOnBlogTab();
+		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
+		createBlogPage.typeBlogPostTitle(blogPostTitle);
+		createBlogPage.clickOk();
+		createBlogPage.typeInContent(PageContent.blogContent);
+		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
+		blogPage.verifyArticleText(PageContent.blogContent);
+		blogPage.verifyPageTitle(blogPostTitle);
+		blogPage.verifyUsernameFieldPresent(Properties.userName);
+		blogPage.categories_verifyCategoryPresent("Blog posts");
+		blogPage.followBlogPostPage(Properties.userName, blogPostTitle);
+		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
+		follow.openFollowingPage();
+		follow.verifyFollowedBlogPost(blogPostTitle);
+	}
 	
 	@Test(groups = {"follow004", "follow"})
 	public void follow004_Photos(){
