@@ -16,6 +16,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -84,9 +86,9 @@ public class BasePageObject{
 	@FindBy(css="span#l")
 	WebElement twitterButton;	
 	@FindBy(css="iframe.fb_ltr")
-	WebElement FBIframe;
-	@FindBy(css="div.plugninConnectButton")
-	WebElement FBLikeButton;	
+	WebElement fBIframe;
+	@FindBy(css="div.pluginConnectButton")
+	WebElement fBLikeButton;	
 	@FindBy(css="a.email-link")
 	WebElement emailButton;
 	@FindBy(css="a[id='ok']")
@@ -1195,82 +1197,79 @@ public class BasePageObject{
 	
 }
 	public void clickShareButton() {
+		
 		waitForElementByElement(shareButton);
 		shareButton.click();
+		PageObjectLogging.log("clickShareButton", "Share button was clicked", true, driver);
 	}
 	
 	public void verifyTwitterIframeVisibility() {
+		
 		waitForElementByElement(twitterIframe);
 		PageObjectLogging.log("VerifyTwitterIframePresence", "Verify that the Twitter Iframe Is Present", true, driver);
 	}
 	
 	
 	public void verifyFBIframeVisibility() {
-		waitForElementByElement(FBIframe);
+		
+		waitForElementByElement(fBIframe);
 		PageObjectLogging.log("VerifyFBIframeVisibility", "Verify that the FB Iframe Is Present", true, driver);
 	}
 
 	public void verifyEmailButtonVisibility() {
+		
 		waitForElementByElement(emailButton);
 		PageObjectLogging.log("verifyEmailButtonVisibility", "Verify that the Email Button Is Present", true, driver);
 	}
 	
 	public void clickTweetButton() {
+		
 		waitForElementByElement(twitterIframe);
 		driver.switchTo().frame(twitterIframe);
 		twitterButton.click();
 		driver.switchTo().defaultContent();
-		
+		PageObjectLogging.log("clickTweetButton", "Twitter button was clicked", true, driver);
 		
 	}
 	
 	public void clickFBLikeButton() {
-		waitForElementByElement(FBLikeButton);
-		FBLikeButton.click();
+		
+		waitForElementByElement(fBIframe);
+		driver.switchTo().frame(fBIframe);
+		fBLikeButton.click();
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickFBLikeButton", "FB Like button was clicked", true, driver);
 	}
 	
 	public void clickEmailButton() {
+		
 		waitForElementByElement(emailButton);
 		emailButton.click();
+		PageObjectLogging.log("clickEmailButton", "Email button was clicked", true, driver);
 	}
 	
 	public void verifyTwitterModalURL() {
-//		Object[] windows = driver.getWindowHandles().toArray();
-//		int delay = 500;
-//		int sumDelay = 500;
-//		while(windows.length==1){
-//			try {
-//				Thread.sleep(delay);
-//				windows = driver.getWindowHandles().toArray();
-//				sumDelay+=500;
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//			if(sumDelay>5000){
-//				PageObjectLogging.log("logInDropDownFB", "facebook button clicked but without result", false);
-//				break;
-//			}
-//			
-//		}
+
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		String TwitterURL = "https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Frodrismrt.wikia.com%2Fwiki%2FRodrisMRT_Wiki&text=RodrisMRT%20Wiki&tw_p=tweetbutton&url=http%3A%2F%2Frodrismrt.wikia.com%2Fwiki%2FRodrisMRT_Wiki";
-		verifyURL(TwitterURL);
-		PageObjectLogging.log("VerifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true, driver);
+		Assertion.assertStringContains(getCurrentUrl(), "twitter.com");
 		driver.switchTo().window(windows[0].toString());
+		PageObjectLogging.log("VerifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true, driver);
 	}
 	
 	public void verifyFBModalURL() {
+		
+		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		String FBURL = "https://www.facebook.com/login.php?skip_api_login=1&display=popup&social_plugin=like&next=http%3A%2F%2Fwww.facebook.com%2Fdialog%2Fplugin.optin%3F_path%3Dplugin.optin%26app_id%3D127760087237610%26display%3Dpopup%26secure%3Dfalse%26social_plugin%3Dlike%26return_params%3D%257B%2522api_key%2522%253A%2522112328095453510%2522%252C%2522locale%2522%253A%2522en_US%2522%252C%2522sdk%2522%253A%2522joey%2522%252C%2522channel_url%2522%253A%2522http%253A%252F%252Fstatic.ak.facebook.com%252Fconnect%252Fxd_arbiter.php%253Fversion%253D18%2523cb%253Df2fa520c95c9254%2526origin%253Dhttp%25253A%25252F%25252Frodrismrt.wikia.com%25252Ff13f9f3946d8bea%2526domain%253Drodrismrt.wikia.com%2526relation%253Dparent.parent%2522%252C%2522href%2522%253A%2522http%253A%252F%252Frodrismrt.wikia.com%252Fwiki%252FRodrisMRT_Wiki%2522%252C%2522node_type%2522%253A%2522link%2522%252C%2522width%2522%253A%252255%2522%252C%2522layout%2522%253A%2522box_count%2522%252C%2522colorscheme%2522%253A%2522dark%2522%252C%2522show_faces%2522%253A%2522false%2522%252C%2522send%2522%253A%2522false%2522%252C%2522extended_social_context%2522%253A%2522false%2522%252C%2522ret%2522%253A%2522optin%2522%252C%2522act%2522%253A%2522connect%2522%257D%26login_params%3D%257B%257D%26from_login%3D1%26client_id%3D127760087237610&rcount=1";
-		verifyURL(FBURL);
-		PageObjectLogging.log("VerifyFBModalURL", "Verify that the FB Modal URL is correct", true, driver);
+		Assertion.assertStringContains(getCurrentUrl(), "facebook.com");
 		driver.switchTo().window(windows[0].toString());
+		PageObjectLogging.log("VerifyFBModalURL", "Verify that the FB Modal URL is correct", true, driver);
 	}
 	
 	public void verifyEmailModalElements() {
+		
 		waitForElementByElement(emailModalSendButton);
 		waitForElementByElement(emailModalCancelButton);
 		waitForElementByElement(emailModalCloseButton);
@@ -1279,6 +1278,7 @@ public class BasePageObject{
 	}
 	
 	public void verifyLogInModalForAnonsVisibility() {
+		
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("VerifyLogInModalForAnonsVisibility", "Verify that the Log In modal is present", true, driver);
 	}
