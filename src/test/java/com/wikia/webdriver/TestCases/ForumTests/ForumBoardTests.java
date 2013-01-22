@@ -16,7 +16,7 @@ public class ForumBoardTests extends TestTemplate {
 	String title;
 	String message;
 	
-	@Test(groups= {"ForumBoardTests_001, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_001", "ForumBoardTests", "Forum"} )
 	public void ForumBoardTests_001_startDiscussionWithTitleAndMessage(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -29,7 +29,7 @@ public class ForumBoardTests extends TestTemplate {
 		forumBoard.verifyDiscussionWithTitle(title, message);
 	}
 	
-	@Test(groups= {"ForumBoardTests_002, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_002", "ForumBoardTests", "Forum"} )
 	public void ForumBoardTests_002_startDiscussionWithoutTitle(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -42,7 +42,7 @@ public class ForumBoardTests extends TestTemplate {
 		forumBoard.verifyDiscussionWithTitle("Message from", message);
 	}
 	
-	@Test(groups= {"ForumBoardTests_003, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_003", "ForumBoardTests", "Forum"} )
 	public void ForumBoardTests_003_startDiscussionWithImage(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -55,7 +55,7 @@ public class ForumBoardTests extends TestTemplate {
 		forumBoard.verifyDiscussionWithImage();
 	}
 	
-	@Test(groups= {"ForumBoardTests_004, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_004", "ForumBoardTests", "Forum"} )
 	public void ForumBoardTests_004_startDiscussionWithLink(){
 		String Externallink = PageContent.externalLink;
 		String Internallink = PageContent.internalLink;
@@ -70,9 +70,9 @@ public class ForumBoardTests extends TestTemplate {
 		forumBoard.verifyStartedDiscussionWithLinks(Internallink, Externallink);
 	}
 	
-//	@Test(groups= {"ForumBoardTests_005, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_005, ForumBoardTests", "Forum"} )
 	public void ForumBoardTests_005_startDiscussionWithVideo(){
-//		CommonFunctions.logOut(driver);
+		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openForumMainPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);
