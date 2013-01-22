@@ -920,5 +920,24 @@ public class CommonFunctions {
 		js.executeScript("$.cookie('" + wiki + "UserID', null)");
 		js.executeScript("$.cookie('" + wiki + "Token', null)");
 	}
+	
+	public static void waitForWindow(String windowName, String comment){
+		Object[] windows = driver.getWindowHandles().toArray();
+		int delay = 500;
+		int sumDelay = 500;
+		while(windows.length==1){
+			try {
+				Thread.sleep(delay);
+				windows = driver.getWindowHandles().toArray();
+				sumDelay+=500;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(sumDelay>5000){
+				PageObjectLogging.log(windowName, comment, false);
+				break;
+			}
+		}
+	}
 
 }
