@@ -804,7 +804,19 @@ public class CommonFunctions {
 						+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 						+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
-				PageObjectLogging.log("logInCookie", "login cookie procedure accomplished", true);
+				try{						
+					driver.get(Global.DOMAIN+"Special:Random");
+				}
+				catch (TimeoutException e) {
+					PageObjectLogging.log("loginCookie",
+							"page timeout after login by cookie", true);
+				}
+
+				driver.findElement(By
+						.cssSelector(".AccountNavigation a[href*='User:" + userName
+								+ "']"));// only for verification
+				PageObjectLogging.log("loginCookie",
+						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
 			} catch (UnsupportedEncodingException e) {
 				PageObjectLogging.log("logInCookie", "UnsupportedEncodingException", false);
@@ -884,9 +896,10 @@ public class CommonFunctions {
 					+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
 					+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
-			try {
+			try{
 				driver.get(Global.DOMAIN+"Special:Random");
-			} catch (TimeoutException e) {
+				}
+			catch (TimeoutException e) {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);
 			}

@@ -159,7 +159,7 @@ public class Top_10_list extends WikiArticlePageObject{
 			PageObjectLogging.log("verifyThereAreVoteButtons", "if you don't see red fields above, all buttons are visible as expected", true, driver);		
 		}
 		else {
-			PageObjectLogging.log("verifyThereAreVoteButtons", "No items found on the page", false, driver);					
+			PageObjectLogging.log("verifyThereAreVoteButtons", "No items found on the page", false);					
 		}
 		
 	}

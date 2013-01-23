@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjects.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiCategoryPageObject;
@@ -55,6 +56,11 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement commentAreaDisabled;
 	@FindBy(css=".article-comm-reply")
 	private WebElement replyCommentButton;
+	@FindBy(css="a[title='View photo details']")
+	private WebElement videoDetailsButton;
+	@FindBy(css="img.thumbimage")
+	private WebElement thumbnailImage;
+	
 	
 	private By categories_listOfCategories = By.cssSelector("#catlinks li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
@@ -524,5 +530,19 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(unfollowedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
+	}
+	
+	public FileDetailsPageObject clickVideoDetailsButton() {
+		waitForElementByElement(videoDetailsButton);
+		videoDetailsButton.click();
+		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true, driver);
+		return new FileDetailsPageObject(driver, Domain);
+	}
+
+	public LightboxPageObject clickThumbnailImage() {
+		waitForElementByElement(thumbnailImage);
+		thumbnailImage.click();
+		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true, driver);
+		return new LightboxPageObject(driver);
 	}
 }

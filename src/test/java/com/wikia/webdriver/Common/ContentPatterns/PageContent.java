@@ -42,8 +42,20 @@ public class PageContent {
 	public static String top10Description = "DescriptionForList";
 	public static String top10TestListQAfull = "Top_10_list:TestListQA";
 	public static String top10TestListQAshort = "TestListQA";
-	
+	public static String top10listNamePrefix = "Top10list";
+	public static String relatedPageName = "PageToCheckTop10ListFetching";
 	//links
 	public static String externalLink = "www.wikia.com";
 	public static String internalLink = "Formatting";
+	
+	//forum
+	public static String forumTitlePrefix = "QABoardTitle ";
+	public static String forumTitleEditPrefix = "QABoardTitleEdit ";
+	public static String forumTitle40CharPrefix = "This forum title is forty c";
+	public static String forumTitleSlashPrefix = "QA/boardTitle";
+	public static String forumTitleUnderScorePrefix = "QA_boardTitle";	
+	public static String forumTitleNonlatinPrefix = "查爾斯";	
+	public static String forumDescriptionPrefix = "Duis quam ante, fringilla at cursus tristique ";
+	public static String forumDescriptionEditPrefix = "Duis quam ante, fringilla at cursus tristique edit ";
+	public static String forumMessage = "QAforumMessage";
 }

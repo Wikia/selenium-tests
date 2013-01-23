@@ -49,7 +49,7 @@ public class Crawler extends WikiBasePageObject {
 	public void prepareURLsForExploratoryTests(int numberOfURLs) {
 		this.wantedNumberOfURLs = numberOfURLs;
 		this.ListOfURLsReadyForExport = new ArrayList<String>(wantedNumberOfURLs);
-		navigateToRandomPage();
+		openRandomArticleByUrl();
 		prepareExportList();
 		exportTheExportList();			
 	}

@@ -119,8 +119,5 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForTextToBePresentInElementByElement(linkPageStatus, "Page exists");
 		waitForElementByElement(linkModalOkButton);
 		clickAndWait(linkModalOkButton);
-	}
-	
-	
-	
+	}	
 }
