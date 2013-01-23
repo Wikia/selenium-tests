@@ -35,7 +35,7 @@ public class BasePageObject{
 	
 	public String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 		
-	protected int timeOut = 10;
+	protected int timeOut = 30;
 
 	protected String Domain;
 	
