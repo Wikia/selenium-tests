@@ -464,17 +464,17 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Domain + "Special:NewFiles");
+		getUrl(Domain + "wiki/Special:NewFiles");
 		return new SpecialNewFilesPageObject(driver, Domain);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Domain + "Special:Upload");
+		getUrl(Domain + "wiki/Special:Upload");
 		return new SpecialUploadPageObject(driver, Domain);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Domain + "Special:MultipleUpload");
+		getUrl(Domain + "wiki/Special:MultipleUpload");
 		return new SpecialMultipleUploadPageObject(driver, Domain);
 	}
 
