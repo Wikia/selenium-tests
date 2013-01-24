@@ -89,6 +89,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	}
 
 	public void quoteTheThreadsAuthor(String message) {
+		refreshPage();
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
 		waitForElementByElement(quoteButton);
 		waitForElementClickableByElement(quoteButton);

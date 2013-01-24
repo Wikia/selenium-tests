@@ -32,6 +32,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	private List<WebElement> postedImageList;
 	@FindBys(@FindBy(css="li.SpeechBubble div.Wikia-video-play-button"))
 	private List<WebElement> postedVideoList;
+	@FindBy(css=".notify-everyone")
+	private WebElement highlight;
 	
 	private String discussionTextarea = "textarea.title:nth-child(2)";
 	private String wikiaEditorTextarea = "#WikiaEditor-0";
@@ -44,13 +46,22 @@ public class ForumBoardPageObject extends BasePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-	public ForumThreadPageObject startDiscussion(String title, String message) {
+	private void checkHighlightCheckbox(boolean isHighLighted){
+		if(isHighLighted){
+			highlight.click();
+			PageObjectLogging.log("checkHighlightCheckbox", "highlight checkbox clicked", true, driver);
+		}
+		
+	}
+	
+	public ForumThreadPageObject startDiscussion(String title, String message, boolean highlight) {
 		jQueryFocus(discussionTextarea);
 		discussionTitleArea.sendKeys(title);
 		jQueryFocus(wikiaEditorTextarea);		
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(message);
 		driver.switchTo().defaultContent();	
+		checkHighlightCheckbox(highlight);
 		clickPostButton();
 		PageObjectLogging.log("startDiscussion", "discussion with message: "+message+", with title "+title+" posted", true, driver);		
 		return new ForumThreadPageObject(driver);

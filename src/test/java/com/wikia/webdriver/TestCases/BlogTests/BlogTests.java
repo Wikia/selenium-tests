@@ -21,6 +21,7 @@ public class BlogTests extends TestTemplate{
 	
 	@Test(groups = { "BlogTests_001", "BlogTests" })
 	public void BlogTests_001_CreateBlogPost(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 //		String blogPostTitle = "blogPost"+home.getTimeStamp(); 
@@ -41,6 +42,7 @@ public class BlogTests extends TestTemplate{
 	
 	@Test(groups = { "BlogTests_002", "BlogTests" })
 	public void BlogTests_002_EditBlogPost(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
@@ -65,6 +67,7 @@ public class BlogTests extends TestTemplate{
 
 	@Test(groups = { "BlogTests_003", "BlogTests" })
 	public void BlogTests_003_DeleteBlogPost(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
@@ -85,6 +88,7 @@ public class BlogTests extends TestTemplate{
 	
 	@Test(groups = { "BlogTests_004", "BlogTests" })
 	public void BlogTests_004_DeleteUndeleteBlogPost(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
@@ -106,6 +110,7 @@ public class BlogTests extends TestTemplate{
 	
 	@Test(groups = { "BlogTests_005", "BlogTests" })
 	public void BlogTests_005_PostReply(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
@@ -129,6 +134,7 @@ public class BlogTests extends TestTemplate{
 	
 	@Test(groups = { "BlogTests_006", "BlogTests" })
 	public void BlogTests_006_PostReplyEdit(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
@@ -156,6 +162,7 @@ public class BlogTests extends TestTemplate{
 	
 	@Test(groups = { "BlogTests_007", "BlogTests" })
 	public void BlogTests_007_PostReplyDelete(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
@@ -181,6 +188,7 @@ public class BlogTests extends TestTemplate{
 	//test case for https://wikia.fogbugz.com/default.asp?95165
 	@Test(groups = { "BlogTests_008", "BlogTests" })
 	public void BlogTests_008_PostReplyReply(){
+		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
 		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();

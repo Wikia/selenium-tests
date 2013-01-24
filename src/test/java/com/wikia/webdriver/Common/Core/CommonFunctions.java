@@ -130,7 +130,8 @@ public class CommonFunctions {
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userName + "']"));// only for verification
 		try {
-			if (!(temp.contains("Special:UserLogout")||temp.contains("Specjalna:Wyloguj"))) {
+			if (!(temp.contains("Special:UserLogout") || temp
+					.contains("Specjalna:Wyloguj"))) {
 				driver.get(temp);
 			}
 		} catch (TimeoutException e) {
@@ -201,7 +202,8 @@ public class CommonFunctions {
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userNameEnc + "']"));// only for verification
 		try {
-			if (!(temp.contains("Special:UserLogout")||temp.contains("Specjalna:Wyloguj"))) {
+			if (!(temp.contains("Special:UserLogout") || temp
+					.contains("Specjalna:Wyloguj"))) {
 				driver.get(temp);
 			}
 		} catch (TimeoutException e) {
@@ -266,8 +268,8 @@ public class CommonFunctions {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.cssSelector("a[href*='" + userNameEnc + "']")));
 	}
-	
-	public static void logInDropDownFB(){
+
+	public static void logInDropDownFB() {
 		driver = DriverProvider.getWebDriver();
 		wait = new WebDriverWait(driver, 30);
 		WebElement logInAjaxElem = driver.findElement(logInAjax);
@@ -276,57 +278,70 @@ public class CommonFunctions {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.className("wikia-button-facebook")));
 		((JavascriptExecutor) driver)
-		.executeScript("$('.wikia-button-facebook').click()");
-		PageObjectLogging.log("logInDropDownFB", "facebook button clicked", true);
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		WebElement fbConnect = driver.findElement(By.className("wikia-button-facebook"));		
-//		fbConnect.click();
-		//getting window handles
+				.executeScript("$('.wikia-button-facebook').click()");
+		PageObjectLogging.log("logInDropDownFB", "facebook button clicked",
+				true);
+		// try {
+		// Thread.sleep(2000);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// WebElement fbConnect =
+		// driver.findElement(By.className("wikia-button-facebook"));
+		// fbConnect.click();
+		// getting window handles
 		Object[] windows = driver.getWindowHandles().toArray();
 		int delay = 500;
 		int sumDelay = 500;
-		while(windows.length==1){
+		while (windows.length == 1) {
 			try {
 				Thread.sleep(delay);
 				windows = driver.getWindowHandles().toArray();
-				sumDelay+=500;
+				sumDelay += 500;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if(sumDelay>5000){
-				PageObjectLogging.log("logInDropDownFB", "facebook button clicked but without result", false);
+			if (sumDelay > 5000) {
+				PageObjectLogging.log("logInDropDownFB",
+						"facebook button clicked but without result", false);
 				break;
 			}
-			
+
 		}
 		driver.switchTo().window(windows[1].toString());
-		PageObjectLogging.log("logInDropDownFB", "facebook popup window detected", true);
-		PageObjectLogging.log("logInDropDownFB", "switching to facebook pop-up window", true);
+		PageObjectLogging.log("logInDropDownFB",
+				"facebook popup window detected", true);
+		PageObjectLogging.log("logInDropDownFB",
+				"switching to facebook pop-up window", true);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("pass")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='login']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("input[name='login']")));
 		WebElement em = driver.findElement(By.id("email"));
 		WebElement pa = driver.findElement(By.id("pass"));
-		WebElement sm = driver.findElement(By.cssSelector("input[name='login']"));
+		WebElement sm = driver.findElement(By
+				.cssSelector("input[name='login']"));
 		em.clear();
 		pa.clear();
 		em.sendKeys(Properties.userNameFB);
-		PageObjectLogging.log("logInDropDownFB", "facebook username filled", true);
+		PageObjectLogging.log("logInDropDownFB", "facebook username filled",
+				true);
 		pa.sendKeys(Properties.passwordFB);
-		PageObjectLogging.log("logInDropDownFB", "facebook password filled", true);
+		PageObjectLogging.log("logInDropDownFB", "facebook password filled",
+				true);
 		sm.click();
-		PageObjectLogging.log("logInDropDownFB", "facebook log in button clicked", true);
+		PageObjectLogging.log("logInDropDownFB",
+				"facebook log in button clicked", true);
 		driver.switchTo().window(windows[0].toString());
-		PageObjectLogging.log("logInDropDownFB", "switching to main window", true);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a img.avatar")));
+		PageObjectLogging.log("logInDropDownFB", "switching to main window",
+				true);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By
+				.cssSelector("a img.avatar")));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.cssSelector("a[href*='Patrick_test_07-Feb-12_1313']")));
-		PageObjectLogging.log("logInDropDownFB", "facebook login verification passed", true);
+		PageObjectLogging.log("logInDropDownFB",
+				"facebook login verification passed", true);
 	}
 
 	/**
@@ -387,7 +402,7 @@ public class CommonFunctions {
 				.cssSelector(".tgl.lgdout")));
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
 	}
-	
+
 	/**
 	 * log in by overlay available from main menu, using generic credentials
 	 * 
@@ -468,48 +483,49 @@ public class CommonFunctions {
 		PageObjectLogging.log("logInAsStaff ", "Staff user logged in", true,
 				driver);
 	}
-//
-//	/**
-//	 * verifies whether pattern and current string are the same and log to log
-//	 * file
-//	 * 
-//	 * @param pattern
-//	 * @param current
-//	 * @author: Karol Kujawiak
-//	 */
-//	public static void assertString(String pattern, String current) {
-//
-//		try {
-//			Assert.assertEquals(pattern, current);
-//			PageObjectLogging.log("assertString", "pattern string: " + pattern
-//					+ " <br/>current string: " + current + "<br/>are the same",
-//					true);
-//		} catch (AssertionError e) {
-//			PageObjectLogging.log("assertString",
-//					"pattern string: " + pattern + " <br/>current string: "
-//							+ current + "<br/>are different", false);
-//		}
-//	}
-//	
-//	
-//	/**
-//	 * Verify actual number is the same as expected number
-//	 * 
-//	 * @param aNumber
-//	 * @param secondNumber
-//	 * @author: Piotr Gabryjeluk
-//	 */
-//	public static void assertNumber(Number expected, Number actual,
-//			String message) {
-//		try {
-//			Assert.assertEquals(expected, actual);
-//			PageObjectLogging.log("assertNumber", message + ", expected: "
-//					+ expected + ", got: " + actual, true);
-//		} catch (AssertionError e) {
-//			PageObjectLogging.log("assertNumber", message + ", expected: "
-//					+ expected + ", got: " + actual, false);
-//		}
-//	}
+
+	//
+	// /**
+	// * verifies whether pattern and current string are the same and log to log
+	// * file
+	// *
+	// * @param pattern
+	// * @param current
+	// * @author: Karol Kujawiak
+	// */
+	// public static void assertString(String pattern, String current) {
+	//
+	// try {
+	// Assert.assertEquals(pattern, current);
+	// PageObjectLogging.log("assertString", "pattern string: " + pattern
+	// + " <br/>current string: " + current + "<br/>are the same",
+	// true);
+	// } catch (AssertionError e) {
+	// PageObjectLogging.log("assertString",
+	// "pattern string: " + pattern + " <br/>current string: "
+	// + current + "<br/>are different", false);
+	// }
+	// }
+	//
+	//
+	// /**
+	// * Verify actual number is the same as expected number
+	// *
+	// * @param aNumber
+	// * @param secondNumber
+	// * @author: Piotr Gabryjeluk
+	// */
+	// public static void assertNumber(Number expected, Number actual,
+	// String message) {
+	// try {
+	// Assert.assertEquals(expected, actual);
+	// PageObjectLogging.log("assertNumber", message + ", expected: "
+	// + expected + ", got: " + actual, true);
+	// } catch (AssertionError e) {
+	// PageObjectLogging.log("assertNumber", message + ", expected: "
+	// + expected + ", got: " + actual, false);
+	// }
+	// }
 
 	/**
 	 * 
@@ -738,12 +754,10 @@ public class CommonFunctions {
 	}
 
 	public static String logInCookie(String userName, String password) {
-		if (!Global.LOGIN_BY_COOKIE)
-		{
+		if (!Global.LOGIN_BY_COOKIE) {
 			CommonFunctions.logIn(userName, password);
 			return null;
-		}
-		else{
+		} else {
 			try {
 				driver = DriverProvider.getWebDriver();
 				DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -772,10 +786,13 @@ public class CommonFunctions {
 
 				// System.out.println(token);
 
-				while (xmlResponseArr.length < 11) {// sometimes first request does
-													// not contain full information,
+				while (xmlResponseArr.length < 11) {// sometimes first request
+													// does
+													// not contain full
+													// information,
 													// in such situation
-													// xmlResponseArr.length < 11
+													// xmlResponseArr.length <
+													// 11
 					List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
 					nvps2.add(new BasicNameValuePair("action", "login"));
@@ -784,7 +801,8 @@ public class CommonFunctions {
 					nvps2.add(new BasicNameValuePair("lgpassword", password));
 					nvps2.add(new BasicNameValuePair("lgtoken", token));
 
-					httpPost.setEntity(new UrlEncodedFormEntity(nvps2, HTTP.UTF_8));
+					httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
+							HTTP.UTF_8));
 
 					response = httpclient.execute(httpPost);
 
@@ -796,132 +814,150 @@ public class CommonFunctions {
 				}
 
 				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("$.cookie('" + xmlResponseArr[11] + "_session', '"
-						+ xmlResponseArr[13] + "', {'domain': 'wikia.com'})");
-				js.executeScript("$.cookie('" + xmlResponseArr[11] + "UserName', '"
-						+ xmlResponseArr[7] + "', {'domain': 'wikia.com'})");
-				js.executeScript("$.cookie('" + xmlResponseArr[11] + "UserID', '"
-						+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
-				js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
-						+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
-				try{						
-					driver.get(Global.DOMAIN+"Special:Random");
-				}
-				catch (TimeoutException e) {
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "_session', '" + xmlResponseArr[13]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "UserName', '" + xmlResponseArr[7]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "UserID', '" + xmlResponseArr[5]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "Token', '" + xmlResponseArr[9]
+						+ "', {'domain': 'wikia.com'})");
+				try {
+					driver.get(Global.DOMAIN + "Special:Random");
+				} catch (TimeoutException e) {
 					PageObjectLogging.log("loginCookie",
 							"page timeout after login by cookie", true);
 				}
 
 				driver.findElement(By
-						.cssSelector(".AccountNavigation a[href*='User:" + userName
-								+ "']"));// only for verification
+						.cssSelector(".AccountNavigation a[href*='User:"
+								+ userName + "']"));// only for verification
 				PageObjectLogging.log("loginCookie",
 						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
 			} catch (UnsupportedEncodingException e) {
-				PageObjectLogging.log("logInCookie", "UnsupportedEncodingException", false);
+				PageObjectLogging.log("logInCookie",
+						"UnsupportedEncodingException", false);
 				return null;
 			} catch (ClientProtocolException e) {
-				PageObjectLogging.log("logInCookie", "ClientProtocolException", false);
+				PageObjectLogging.log("logInCookie", "ClientProtocolException",
+						false);
 				return null;
 			} catch (IOException e) {
 				PageObjectLogging.log("logInCookie", "IOException", false);
 				return null;
 			} catch (Exception e) {
-				PageObjectLogging.log("logInCookie", e.getClass().getCanonicalName(), false);
+				PageObjectLogging.log("logInCookie", e.getClass()
+						.getCanonicalName(), false);
 				return null;
-				
+
 			}
 		}
-		
+
 	}
 
 	public static String logInCookie(String userName, String password,
 			WebDriver driver) {
-		try {
-			DefaultHttpClient httpclient = new DefaultHttpClient();
+		if (!Global.LOGIN_BY_COOKIE) {
+			CommonFunctions.logIn(userName, password, driver);
+			return null;
+		} else {
+			try {
+				DefaultHttpClient httpclient = new DefaultHttpClient();
 
-			HttpPost httpPost = new HttpPost(
-					"http://mediawiki119.wikia.com/api.php");
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+				HttpPost httpPost = new HttpPost(
+						"http://mediawiki119.wikia.com/api.php");
+				List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
-			nvps.add(new BasicNameValuePair("action", "login"));
-			nvps.add(new BasicNameValuePair("format", "xml"));
-			nvps.add(new BasicNameValuePair("lgname", userName));
-			nvps.add(new BasicNameValuePair("lgpassword", password));
+				nvps.add(new BasicNameValuePair("action", "login"));
+				nvps.add(new BasicNameValuePair("format", "xml"));
+				nvps.add(new BasicNameValuePair("lgname", userName));
+				nvps.add(new BasicNameValuePair("lgpassword", password));
 
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+				httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
-			HttpResponse response = null;
-
-			response = httpclient.execute(httpPost);
-
-			HttpEntity entity = response.getEntity();
-			String xmlResponse = null;
-
-			xmlResponse = EntityUtils.toString(entity);
-
-			String[] xmlResponseArr = xmlResponse.split("\"");
-			String token = xmlResponseArr[5];
-
-			while (xmlResponseArr.length < 11) {// sometimes first request does
-												// not contain full information,
-												// in such situation
-												// xmlResponseArr.length < 11
-				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-
-				nvps2.add(new BasicNameValuePair("action", "login"));
-				nvps2.add(new BasicNameValuePair("format", "xml"));
-				nvps2.add(new BasicNameValuePair("lgname", userName));
-				nvps2.add(new BasicNameValuePair("lgpassword", password));
-				nvps2.add(new BasicNameValuePair("lgtoken", token));
-
-				httpPost.setEntity(new UrlEncodedFormEntity(nvps2, HTTP.UTF_8));
+				HttpResponse response = null;
 
 				response = httpclient.execute(httpPost);
 
-				entity = response.getEntity();
+				HttpEntity entity = response.getEntity();
+				String xmlResponse = null;
 
 				xmlResponse = EntityUtils.toString(entity);
 
-				xmlResponseArr = xmlResponse.split("\"");
-			}
+				String[] xmlResponseArr = xmlResponse.split("\"");
+				String token = xmlResponseArr[5];
 
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$.cookie('" + xmlResponseArr[11] + "_session', '"
-					+ xmlResponseArr[13] + "', {'domain': 'wikia.com'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11] + "UserName', '"
-					+ xmlResponseArr[7] + "', {'domain': 'wikia.com'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11] + "UserID', '"
-					+ xmlResponseArr[5] + "', {'domain': 'wikia.com'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11] + "Token', '"
-					+ xmlResponseArr[9] + "', {'domain': 'wikia.com'})");
-			try{
-				driver.get(Global.DOMAIN+"Special:Random");
+				while (xmlResponseArr.length < 11) {// sometimes first request
+													// does
+													// not contain full
+													// information,
+													// in such situation
+													// xmlResponseArr.length <
+													// 11
+					List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+
+					nvps2.add(new BasicNameValuePair("action", "login"));
+					nvps2.add(new BasicNameValuePair("format", "xml"));
+					nvps2.add(new BasicNameValuePair("lgname", userName));
+					nvps2.add(new BasicNameValuePair("lgpassword", password));
+					nvps2.add(new BasicNameValuePair("lgtoken", token));
+
+					httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
+							HTTP.UTF_8));
+
+					response = httpclient.execute(httpPost);
+
+					entity = response.getEntity();
+
+					xmlResponse = EntityUtils.toString(entity);
+
+					xmlResponseArr = xmlResponse.split("\"");
 				}
-			catch (TimeoutException e) {
-				PageObjectLogging.log("loginCookie",
-						"page timeout after login by cookie", true);
-			}
 
-			driver.findElement(By
-					.cssSelector(".AccountNavigation a[href*='User:" + userName
-							+ "']"));// only for verification
-			PageObjectLogging.log("loginCookie",
-					"user was logged in by cookie", true, driver);
-			return xmlResponseArr[11];
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "_session', '" + xmlResponseArr[13]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "UserName', '" + xmlResponseArr[7]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "UserID', '" + xmlResponseArr[5]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "Token', '" + xmlResponseArr[9]
+						+ "', {'domain': 'wikia.com'})");
+				try {
+					driver.get(Global.DOMAIN + "/wiki/Special:Random");
+				} catch (TimeoutException e) {
+					PageObjectLogging.log("loginCookie",
+							"page timeout after login by cookie", true);
+				}
+
+				driver.findElement(By
+						.cssSelector(".AccountNavigation a[href*='User:"
+								+ userName + "']"));// only for verification
+				PageObjectLogging.log("loginCookie",
+						"user was logged in by cookie", true, driver);
+				return xmlResponseArr[11];
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 		}
 	}
 

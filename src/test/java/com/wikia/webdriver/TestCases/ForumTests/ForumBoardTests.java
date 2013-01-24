@@ -26,7 +26,7 @@ public class ForumBoardTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 	}
 	
@@ -80,7 +80,7 @@ public class ForumBoardTests extends TestTemplate {
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
 		forumBoard.startDiscussionWithVideo(VideoContent.youtubeVideoURL3, title);
-		forumBoard.clickPostButton();	
+		forumBoard.clickPostButton();
 	}
 	
 	@Test(groups= {"ForumBoardTests_006, ForumBoardTests", "Forum"} )
@@ -97,5 +97,18 @@ public class ForumBoardTests extends TestTemplate {
 		forumBoard.verifyTextOnFollowButton(1, "Following");
 		forumBoard.clickOnFollowButton(1);
 		forumBoard.verifyTextOnFollowButton(1, "Follow");
+	}
+	
+//	@Test(groups= {"ForumBoardTests_007, ForumBoardTests", "Forum"} )
+	public void forumBoardTests_007_highlightDiscussion(){
+		CommonFunctions.logOut(driver);
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage();
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, true);
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
 	}
 }
