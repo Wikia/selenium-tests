@@ -863,7 +863,7 @@ public class CommonFunctions {
 	public static String logInCookie(String userName, String password,
 			WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
-			CommonFunctions.logIn(userName, password);
+			CommonFunctions.logIn(userName, password, driver);
 			return null;
 		} else {
 			try {
