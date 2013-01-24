@@ -32,7 +32,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	}
 	
 	public SpecialBlockPageObject openSpecialBlockPage(){
-		getUrl(Global.DOMAIN+"Special:BLock");
+		getUrl(Global.DOMAIN+"wiki/Special:Block");
 		waitForElementByElement(blockPageHeader);
 		Assertion.assertEquals(Global.DOMAIN+"wiki/Special:Block", driver.getCurrentUrl());
 		return new SpecialBlockPageObject(driver);
