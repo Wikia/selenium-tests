@@ -16,6 +16,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -80,6 +82,29 @@ public class BasePageObject{
 	WebElement wikiaSearch_searchForm;
 	@FindBy(css="section.modalContent div.UserLoginModal form")
 	WebElement modalLoginForm;
+	
+	@FindBy(css="a[data-id='shareButton']")
+	WebElement shareButton;
+	@FindBy(css="iframe.twitter-share-button")
+	WebElement twitterIframe;
+	@FindBy(css="span#l")
+	WebElement twitterButton;	
+	@FindBy(css="iframe.fb_ltr")
+	WebElement fBIframe;
+	@FindBy(css="div.pluginConnectButton")
+	WebElement fBLikeButton;	
+	@FindBy(css="a.email-link")
+	WebElement emailButton;
+	@FindBy(css="a[id='ok']")
+	WebElement emailModalSendButton;
+	@FindBy(css="a[id='cancel']")
+	WebElement emailModalCancelButton;
+	@FindBy(css="button.wikia-chiclet-button")
+	WebElement emailModalCloseButton;
+	@FindBy(css="input#lightbox-share-email-text")
+	WebElement emailModalEmailInputField;
+	@FindBy(css="section.modalWrapper")
+	WebElement logInModal;
 	
 	private By customizeToolbar_ToolsList = By.cssSelector("ul.tools li");
 	private By customizeToolbar_MyToolsList = By.cssSelector("ul[id='my-tools-menu'] a");
@@ -1185,6 +1210,7 @@ public class BasePageObject{
 		}  	
 	}
 	
+
 	public void openWikiPage() {
 		String temp = Domain;
 		try {
@@ -1227,4 +1253,91 @@ public class BasePageObject{
 		}
 		
 	}
+	public void clickShareButton() {
+		
+		waitForElementByElement(shareButton);
+		shareButton.click();
+		PageObjectLogging.log("clickShareButton", "Share button was clicked", true, driver);
+	}
+	
+	public void verifyTwitterIframeVisibility() {
+		
+		waitForElementByElement(twitterIframe);
+		PageObjectLogging.log("VerifyTwitterIframePresence", "Verify that the Twitter Iframe Is Present", true, driver);
+	}
+	
+	
+	public void verifyFBIframeVisibility() {
+		
+		waitForElementByElement(fBIframe);
+		PageObjectLogging.log("VerifyFBIframeVisibility", "Verify that the FB Iframe Is Present", true, driver);
+	}
+
+	public void verifyEmailButtonVisibility() {
+		
+		waitForElementByElement(emailButton);
+		PageObjectLogging.log("verifyEmailButtonVisibility", "Verify that the Email Button Is Present", true, driver);
+	}
+	
+	public void clickTweetButton() {
+		
+		waitForElementByElement(twitterIframe);
+		driver.switchTo().frame(twitterIframe);
+		twitterButton.click();
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickTweetButton", "Twitter button was clicked", true, driver);
+		
+	}
+	
+	public void clickFBLikeButton() {
+		
+		waitForElementByElement(fBIframe);
+		driver.switchTo().frame(fBIframe);
+		fBLikeButton.click();
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickFBLikeButton", "FB Like button was clicked", true, driver);
+	}
+	
+	public void clickEmailButton() {
+		
+		waitForElementByElement(emailButton);
+		emailButton.click();
+		PageObjectLogging.log("clickEmailButton", "Email button was clicked", true, driver);
+	}
+	
+	public void verifyTwitterModalURL() {
+
+		CommonFunctions.waitForWindow("", "");
+		Object[] windows = driver.getWindowHandles().toArray();
+		driver.switchTo().window(windows[1].toString());
+		Assertion.assertStringContains(getCurrentUrl(), "twitter.com");
+		driver.switchTo().window(windows[0].toString());
+		PageObjectLogging.log("VerifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true, driver);
+	}
+	
+	public void verifyFBModalURL() {
+		
+		CommonFunctions.waitForWindow("", "");
+		Object[] windows = driver.getWindowHandles().toArray();
+		driver.switchTo().window(windows[1].toString());
+		Assertion.assertStringContains(getCurrentUrl(), "facebook.com");
+		driver.switchTo().window(windows[0].toString());
+		PageObjectLogging.log("VerifyFBModalURL", "Verify that the FB Modal URL is correct", true, driver);
+	}
+	
+	public void verifyEmailModalElements() {
+		
+		waitForElementByElement(emailModalSendButton);
+		waitForElementByElement(emailModalCancelButton);
+		waitForElementByElement(emailModalCloseButton);
+		waitForElementByElement(emailModalEmailInputField);
+		PageObjectLogging.log("VerifyEmailModalElements", "Verify that the Email Modal elements are present", true, driver);
+	}
+	
+	public void verifyLogInModalForAnonsVisibility() {
+		
+		waitForElementByElement(logInModal);
+		PageObjectLogging.log("VerifyLogInModalForAnonsVisibility", "Verify that the Log In modal is present", true, driver);
+	}
+	
 } 

@@ -79,6 +79,33 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement blockedUserMessage1;
 	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
 	private WebElement blockedUserMessage2;
+	@FindBy(css="#VideoEmbedUrlSubmit")
+	private WebElement videoSubmitButton;
+	@FindBy(css=".VideoEmbedNoBorder input[type='submit']")
+	private WebElement addVideoButton;
+	@FindBy(css="input[value='Return to editing']")
+	private WebElement returnToEditingButton;
+	
+	@FindBy(css="input[id='ImageUploadLayoutLeft']")
+	private WebElement imageLeftAlignmentOption;
+	@FindBy(css="input[id='ImageUploadLayoutRight']")
+	private WebElement imageRightAlignmentOption;
+	@FindBy(css="input[name='search'][placeholder='Search photos on this wiki']")
+	private WebElement searchFieldImageInLightBox;
+	@FindBy(css="img.sprite.search")
+	private WebElement searchButtonImageInLightBox;
+	@FindBy(css="button.close")
+	private WebElement imageUploadCloseButton;
+	@FindBy(css="div#ImageUploadBody")
+	private WebElement imageUploadBodyModal;
+	@FindBy(css="input#ImageQuery")
+	private WebElement findInputField;
+	@FindBy(css="input[value='Find']")
+	private WebElement findButton;
+	@FindBy(css="input[value='Add photo']")
+	private WebElement finalAddPhotoButton;
+	@FindBy(css="div#ImageUploadHeadline")
+	private WebElement ImageUploadHeadline;
 	
 	
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
@@ -979,4 +1006,137 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		waitForElementByElement(blockedUserMessage2);
 		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true, driver);
 	}
+	
+	public void clickAddVideoButton() {
+		waitForElementByElement(videoSubmitButton);
+		videoSubmitButton.click();	
+		PageObjectLogging.log("clickAddVideoButton", "Add Video button is clicked", true, driver);
+	}
+	
+	public void clickSubmitVideoButton()
+	{
+		waitForElementByElement(addVideoButton);
+		addVideoButton.click();
+		PageObjectLogging.log("clickSubmitVideoButton", "Submit Video button is clicked", true, driver);
+	}
+	
+	public void verifySuccessAfterAddingVideo(){ 
+		waitForElementByXPath("//h1[contains(text(), \"Success\")]");
+		PageObjectLogging.log("verifySuccessAfterAddingVideo", "Verified Success after adding video modal is visible", true, driver);
+	}
+	
+	public void clickReturnToEditingButton() {
+		waitForElementByElement(returnToEditingButton);
+		returnToEditingButton.click();
+		PageObjectLogging.log("clickReturnToEditingButton", "Return to editing button is clicked", true, driver);
+		
+	}
+	
+	public void clickImageLeftAlignment() {
+		waitForElementByElement(imageLeftAlignmentOption);
+		imageLeftAlignmentOption.click();
+		PageObjectLogging.log("clickImageLeftAlignment", "Left allignment option is selected", true, driver);
+	}
+	
+	public void clickImageRightAlignment() {
+		waitForElementByElement(imageRightAlignmentOption);
+		imageRightAlignmentOption.click();
+		PageObjectLogging.log("clickImageRightAlignment", "Right allignment option is selected", true, driver);
+	}
+	
+	
+	public void verifyWikiTextInSourceMode(String text) {
+		String wikiText = sourceModeTextArea.getAttribute("value");
+		if (wikiText.contains(text))
+		{
+			PageObjectLogging.log("verifyWikiTextInSourceMode", "Correct wiki text is visible in source mode", true);
+		}
+		else
+		{
+			PageObjectLogging.log("verifyWikiTextInSourceMode", "Incorrect wiki text is visible in source mode", false);
+		}
+		
+		
+//		waitForTextToBePresentInElementByElement(sourceModeText, text);
+		
+	}
+	
+	public void clickOnModifyImageLink() {
+		waitForElementByElement(modifyButton);
+		modifyButton.click();
+		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
+	}
+	
+	public void verifyLeftAlignmentIsSelected() {
+		
+//		waitForElementByElement(visualModeIFrame);
+//		driver.switchTo().frame(visualModeIFrame);
+		mouseOverInArticleIframe(imageArticleIFrame);
+//		waitForElementByElement(modifyButton);
+		clickOnModifyImageLink();
+//		waitForElementByElement(visualModeIFrame);
+		waitForElementByElement(imageLeftAlignmentOption);
+		
+		if (imageLeftAlignmentOption.isSelected())
+		{
+			PageObjectLogging.log("verifyLeftAlignmentIsSelected", "Left allignment option is selected in modal", true);
+			}
+		else
+			{
+			PageObjectLogging.log("verifyLeftAlignmentIsSelected", "Left allignment option is NOT selected in modal", false);
+		}		
+		
+		waitForElementByElement(imageUploadCloseButton);
+		imageUploadCloseButton.click();
+//		driver.switchTo().defaultContent();
+		
+	}
+	
+public void verifyRightAlignmentIsSelected() {
+		
+//		waitForElementByElement(visualModeIFrame);
+//		driver.switchTo().frame(visualModeIFrame);
+		mouseOverInArticleIframe(imageArticleIFrame);
+//		waitForElementByElement(modifyButton);
+		clickOnModifyImageLink();
+//		waitForElementByElement(visualModeIFrame);
+		waitForElementByElement(imageRightAlignmentOption);
+		
+		if (imageRightAlignmentOption.isSelected())
+		{
+			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is selected in modal", true);
+			}
+		else
+			{
+			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is NOT selected in modal", false);
+		}		
+		
+		waitForElementByElement(imageUploadCloseButton);
+		imageUploadCloseButton.click();
+//		driver.switchTo().defaultContent();
+		
+	}
+	
+	public WikiArticlePageObject addImageForLightboxTesting () {
+		clickOnAddObjectButton("Image");
+		waitForElementByElement(findInputField);
+		findInputField.sendKeys("aa");
+		waitForElementByElement(findButton);
+		findButton.click();		
+//		waitForElementByXPath("//div[@id='ImageUploadHeadline' and contains(text(), 'Photos on this wiki')]");
+		waitForElementByCss("#ImageUploadProgress2");
+		waitForElementByCss("img[src*='AmericaAfrica']");
+//		CommonFunctions.assertString("Photos on this wiki (1 results)", ImageUploadHeadline.getText());
+		waitForElementByElement(ImageUploadHeadline);
+		addThisPhotoLink.click();
+		waitForElementByElement(finalAddPhotoButton);
+		finalAddPhotoButton.click();
+		clickOnPublishButton();
+		return new WikiArticlePageObject(driver, Domain, articlename);
+		
+		
+		
+}
+	
+	
 }
