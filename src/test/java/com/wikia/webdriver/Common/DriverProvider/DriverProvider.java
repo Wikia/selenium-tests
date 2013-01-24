@@ -123,7 +123,7 @@ public class DriverProvider {
 		}
 			
 		
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);			
 		if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")))
 		{
 			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
