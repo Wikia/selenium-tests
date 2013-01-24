@@ -74,7 +74,7 @@ public class SignUpPageObject extends BasePageObject {
 	 */
 	public void openSignUpPage()
 	{
-		getUrl(Global.DOMAIN+"Special:UserSignup");
+		getUrl(Global.DOMAIN+"wiki/Special:UserSignup");
 		waitForElementByElement(blurryWordField);
 		PageObjectLogging.log("openSignUpPage ", "Sign up page opened " +driver.getCurrentUrl(), true, driver);
 	}
