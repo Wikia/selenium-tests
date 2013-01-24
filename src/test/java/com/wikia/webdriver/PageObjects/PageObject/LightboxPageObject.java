@@ -24,98 +24,68 @@ public class LightboxPageObject extends BasePageObject{
 	
 	@FindBy(css="span[data-pin-title='Unpin top and bottom bars']")
 	private WebElement unpinButton;
-
 	@FindBy(css="span[data-pinned-title='Unpin top and bottom bars']")
-	private WebElement pinButton;
-	
+	private WebElement pinButton;	
 	@FindBy(css="button[class='more-info-button secondary']")
-	private WebElement moreInfoButton;
-	
+	private WebElement moreInfoButton;	
 	@FindBy(css="button[class='share-button secondary']")
-	private WebElement shareButton;
-	
+	private WebElement shareButton;	
 	@FindBy(css="button.close.wikia-chiclet-button")
-	private WebElement closeLightboxButton;
-	
+	private WebElement closeLightboxButton;	
 	@FindBy(css="span.arrow.previous")
-	private WebElement previousArrow;
-	
+	private WebElement previousArrow;	
 	@FindBy(css="span[id='LightboxNext']")
-	private WebElement nextArrow;
-	
+	private WebElement nextArrow;	
 	@FindBy(css="div.media.video-media")
-	private WebElement fullVideo;
-	
+	private WebElement fullVideo;	
 	@FindBy(css="span.Wikia-video.playbutton.min")
-	private WebElement videoThumbnailCarousel;
-	
+	private WebElement videoThumbnailCarousel;	
 	@FindBy(css="span.carousel-arrow.next.button.secondary")
-	private WebElement nextArrowCarousel;
-	
+	private WebElement nextArrowCarousel;	
 	@FindBy(css="span.carousel-arrow.previous.button.secondary")
-	private WebElement previousArrowCarousel;
-	
+	private WebElement previousArrowCarousel;	
 	@FindBy(css="div.hero-inner")
-	private WebElement moreInfoThumbnail;
-	
+	private WebElement moreInfoThumbnail;	
 	@FindBy(css="a[class='facebook']")
-	private WebElement facebookShareLink;
-	
+	private WebElement facebookShareLink;	
 	@FindBy(css="a.twitter")
-	private WebElement twitterShareLink;
-	
+	private WebElement twitterShareLink;	
 	@FindBy(css="a[class='stumbleupon']")
-	private WebElement stumbleUponShareLink;	
-	
+	private WebElement stumbleUponShareLink;		
 	@FindBy(css="a[class='reddit']")
-	private WebElement redditShareLink;
-	
+	private WebElement redditShareLink;	
 	@FindBy(css="a[class='plusone']")
-	private WebElement plusoneShareLink;
-	
+	private WebElement plusoneShareLink;	
 	@FindBy(css="button.more-info-close.secondary")
-	private WebElement backButton;	
-	
+	private WebElement backButton;		
 	@FindBy(css="input[name='lightbox-email']")
-	private WebElement emailInput;
-	
+	private WebElement emailInput;	
 	@FindBy(css="input[name='Send']")
-	private WebElement sendButton;
-	
+	private WebElement sendButton;	
 	@FindBy(css="div.success-msg")
-	private WebElement successMessage;
-	
+	private WebElement successMessage;	
 	@FindBy(css="div.error-msg")
-	private WebElement errorMessage;
-	
+	private WebElement errorMessage;	
 	@FindBy(css="input[name='lightbox-standard-link']")
-	private WebElement standardLink;
-	
+	private WebElement standardLink;	
 	@FindBy(css="input[name='lightbox-embed-url']")
-	private WebElement embedURL;
-	
+	private WebElement embedURL;	
 	@FindBy(css="input[name='lightbox-file-page-url']")
-	private WebElement filePageURL;
-	
+	private WebElement filePageURL;	
 	@FindBy(css="p#LightboxCarouselProgress")
 	private WebElement progress;
-
-	
-	
 	
 	
 	
 	public void clickMoreInfoButton() {
 		waitForElementByElement(moreInfoButton);
 		moreInfoButton.click();
-		PageObjectLogging.log("clickMoreInfoButton", "Clicked More Info button", true, driver);
-		
+		PageObjectLogging.log("clickMoreInfoButton", "Clicked More Info button", true, driver);		
 	}
 	
 	public void verifyMoreInfoThumbnail() {
 		waitForElementByElement(moreInfoThumbnail);
 		PageObjectLogging.log("verifyMoreInfoThumbnail", "Thumbnail in More Info modal is visible", true, driver);
-		
 	}	
 	
 	public WikiArticlePageObject clickCloseButton() {
@@ -123,8 +93,7 @@ public class LightboxPageObject extends BasePageObject{
 //		closeLightboxButton.click();
 		jQueryClick("button.close.wikia-chiclet-button");
 		PageObjectLogging.log("clickCloseButton", "Close button is clicked", true, driver);
-		return new WikiArticlePageObject(driver, themeDesignerUrl, themeDesignerUrl);
-		
+		return new WikiArticlePageObject(driver, themeDesignerUrl, themeDesignerUrl);		
 	}
 	
 	public void clickShareButton() {
@@ -140,8 +109,7 @@ public class LightboxPageObject extends BasePageObject{
 		waitForElementByElement(stumbleUponShareLink);
 		waitForElementByElement(twitterShareLink);
 		waitForElementByElement(facebookShareLink);
-		PageObjectLogging.log("verifyShareButtons", "All share buttons are visible", true, driver);
-		
+		PageObjectLogging.log("verifyShareButtons", "All share buttons are visible", true, driver);		
 	}
 	
 	public void clickMoreInfoBackButton() {
@@ -172,13 +140,10 @@ public class LightboxPageObject extends BasePageObject{
 	
 	public void clickPlusOneShareButton() {
 		plusoneShareLink.click();	
-		PageObjectLogging.log("clickPlusOneShareButton", "Plus one share button is clicked", true, driver);
+		PageObjectLogging.log("clickPlusOneShareButton", "Plus one share button is clicked", true, driver);	
+	}	
 	
-	}
-	
-	
-	public void verifyFacebookWindow(){
-				
+	public void verifyFacebookWindow() {				
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
@@ -188,8 +153,7 @@ public class LightboxPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyFacebookWindow", "Verify that the FB window URL is correct", true, driver);
 	}
 	
-	public void verifyTwitterWindow(){
-				
+	public void verifyTwitterWindow(){				
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
@@ -199,8 +163,7 @@ public class LightboxPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyTwitterWindow", "Verify that the Twitter window URL is correct", true, driver);
 	}
 	
-	public void verifyStumbleUponWindow(){
-				
+	public void verifyStumbleUponWindow(){				
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
@@ -210,8 +173,7 @@ public class LightboxPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyStumbleUponWindow", "Verify that the Stumbleupon window URL is correct", true, driver);
 	}
 	
-	public void verifyRedditWindow(){
-		
+	public void verifyRedditWindow(){		
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
@@ -236,8 +198,7 @@ public class LightboxPageObject extends BasePageObject{
 		sendKeys(emailInput, "rodriuki@hotmail.com");
 		sendButton.click();
 		waitForElementByElement(successMessage);
-		PageObjectLogging.log("addCorrectEmail", "Success message is displayed after providing correct mail address", true, driver);
-		
+		PageObjectLogging.log("addCorrectEmail", "Success message is displayed after providing correct mail address", true, driver);		
 	}
 	
 	public void addBlankEmail () {
@@ -245,8 +206,7 @@ public class LightboxPageObject extends BasePageObject{
 		sendKeys(emailInput, "");
 		sendButton.click();
 		waitForElementByElement(errorMessage);
-		PageObjectLogging.log("addBlankEmail", "Error message is displayed after providing incorrect mail address", true, driver);
-		
+		PageObjectLogging.log("addBlankEmail", "Error message is displayed after providing incorrect mail address", true, driver);		
 	}
 	
 	public void verifyCorrectStandardLink() {
@@ -263,8 +223,7 @@ public class LightboxPageObject extends BasePageObject{
 	public void verifyCorrectFilePageURLLinkk() {
 		waitForElementByElement(filePageURL);
 		Assertion.assertStringContains(embedURL.getText(), "file=Lion2.gif");
-		PageObjectLogging.log("verifyCorrectFilePageURLLinkk", "File Page URL link is correctly formatted", true, driver);
-		
+		PageObjectLogging.log("verifyCorrectFilePageURLLinkk", "File Page URL link is correctly formatted", true, driver);		
 	}
 	
 	public void verifyLightboxCarouselProgress() {
@@ -272,8 +231,7 @@ public class LightboxPageObject extends BasePageObject{
 		Assertion.assertEquals("1-1 of 1", progress.getText());
 //		CommonFunctions.assertString("1-1 of 1", progress.getText());
 		PageObjectLogging.log("verifyLightboxCarouselProgress", "Number of media elements in carousel progress is correct ", true, driver);
-	}
-	
+	}	
 	
 	public void clickUnpinButton() {
 		waitForElementByElement(unpinButton);
@@ -287,5 +245,4 @@ public class LightboxPageObject extends BasePageObject{
 		pinButton.click();
 		PageObjectLogging.log("clickPinButton", "Pin button was clicked", true, driver);
 	}
-	
 }

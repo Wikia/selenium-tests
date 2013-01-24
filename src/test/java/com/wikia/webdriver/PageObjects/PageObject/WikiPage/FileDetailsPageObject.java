@@ -20,18 +20,15 @@ public class FileDetailsPageObject extends WikiBasePageObject{
 	@FindBy(css="img.Wikia-video-thumb")
 	private WebElement videoThumbnail;
 	
-	public void verifyEmbeddedVideoIsPresent() {
-		
+	public void verifyEmbeddedVideoIsPresent() {		
 		waitForElementByElement(videoEmbedded);
 		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true, driver);
 		
 	}
 	
-	public void verifythumbnailIsPresent() {
-	
+	public void verifythumbnailIsPresent() {	
 		waitForElementByElement(videoThumbnail);
 		PageObjectLogging.log("verifythumbnailIsPresent", "Verified thumbnail is visible", true, driver);
 		
 	}
-
 }
