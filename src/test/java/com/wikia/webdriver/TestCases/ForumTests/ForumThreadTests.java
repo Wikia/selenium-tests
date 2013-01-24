@@ -20,7 +20,7 @@ public class ForumThreadTests extends TestTemplate{
 	private String title;
 	private String message;
 	
-	@Test(groups= {"ForumThreadTests_001, ForumThreadTests", "Forum"} )
+	@Test(groups= {"ForumThreadTests_001", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_001_replyToThread(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -29,14 +29,14 @@ public class ForumThreadTests extends TestTemplate{
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
 	}
 	
-	@Test(groups= {"ForumThreadTests_002, ForumThreadTests", "Forum"} )
-	public void forumThreadTests_002_quoteremoveTThread(){
+	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_002_quoteRemoveThread(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
@@ -44,13 +44,13 @@ public class ForumThreadTests extends TestTemplate{
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 		forumThread.quoteTheThreadsAuthor(message);
 		forumThread.verifyMessageWithQuotation(1, message);
 	}
 	
-	@Test(groups= {"ForumThreadTests_003, ForumThreadTests", "Forum"} )
+	@Test(groups= {"ForumThreadTests_003", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_003_removeThread(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -59,13 +59,13 @@ public class ForumThreadTests extends TestTemplate{
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 		forumThread.removeThread("reason");
 		forumThread.verifyThreadRemoved();
 	}
 	
-	@Test(groups= {"ForumThreadTests_004, ForumThreadTests", "Forum"} )
+	@Test(groups= {"ForumThreadTests_004", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_004_removeThreadAndUndo(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -74,7 +74,7 @@ public class ForumThreadTests extends TestTemplate{
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 		forumThread.removeThread("reason");
 		forumThread.verifyThreadRemoved();
@@ -82,7 +82,7 @@ public class ForumThreadTests extends TestTemplate{
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 	}
 	
-//	@Test(groups= {"ForumThreadTests_005, ForumThreadTests", "Forum"} )
+//	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_005_moveThreadToOtherBoard(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -91,7 +91,7 @@ public class ForumThreadTests extends TestTemplate{
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message);		
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);		
 	}
 }
 
