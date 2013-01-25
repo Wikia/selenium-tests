@@ -13,11 +13,11 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class Assertion extends Assert{
 	
-	public static void assertStringContains(String pattern, String current){
+	public static void assertStringContains(String bigger, String smaller){
 		boolean isAssertPassed = true;
 		try{
-			if (pattern.contains(current)){				
-				PageObjectLogging.log("assertStringContains", "assertion passed<br/>pattern: "+pattern+"<br/>current: "+current,  true);
+			if (bigger.contains(smaller)){				
+				PageObjectLogging.log("assertStringContains", "assertion passed<br/>pattern: "+bigger+"<br/>current: "+smaller,  true);
 			}
 			else{
 				throw new AssertionError();
@@ -26,7 +26,7 @@ public class Assertion extends Assert{
 		catch(AssertionError ass){
 			isAssertPassed = false;
 			addVerificationFailure(ass);
-			PageObjectLogging.log("assertStringContains", "assertion failed<br/>pattern: "+pattern+"<br/>current: "+current,  false);
+			PageObjectLogging.log("assertStringContains", "assertion failed<br/>pattern: "+bigger+"<br/>current: "+smaller,  false);
 		}
 	}
 	

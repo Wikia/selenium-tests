@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.LightboxPageObject;
@@ -620,31 +621,29 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		{
 			return new Object[][] 
 			{
-					{"http://www.youtube.com/watch?v=p7R-X1CXiI8&feature=g-vrec"},
-					{"http://www.dailymotion.com/video/xqyly1_dni-ostrowca-koncert-kakadu_music"},
-					{"http://www.metacafe.com/watch/9111307/the_master_movie_review_indiana_jones_blu_ray_collection_review_breakin_it_down/"},
-					{"http://www.viddler.com/v/27dbe690"},
-					{"http://vimeo.com/channels/staffpicks/50238512"},
-					{"http://www.5min.com/Video/Getting-Out-of-a-Defensive-Position-in-Pool-516993703"},
-					{"http://www.hulu.com/watch/401167"},
-					{"http://www.myvideo.de/watch/8653744/Exklusive_7_Minuten_aus_This_Ain_t_California"},
-					{"http://www.gamestar.de/videos/sport,12/landwirtschafts-simulator-2013,67641.html"},
-					{"http://www.twitch.tv/girlsgonegaming"},
-					//screenplay from video.wikia
-					{"http://video.wikia.com/wiki/File:The_Muppets_(2011)_-_Featurette_Behind_The_Scenes_-_Ok_Go_Video"},
-					//ign from video.wikia
-					{"http://video.wikia.com/wiki/File:IGN_Live_Tomb_Raider_Demo_-_E3_2012"},
-					//realgravity form video.wikia
-					{"http://video.wikia.com/wiki/File:Good-Looking_Gamer_Girlfriend_Episode_16:_Snow!_by_xRpMx13_(Modern_Warfare_3_Gameplay/Commentary)"}
-
-					
+					{"http://www.twitch.tv/girlsgonegaming", "Girlsgonegaming playing Minecraft"},
+				    {"http://www.youtu1e.com/watch?v=p7R-X1CXiI8&feature=g-vrec", "Christopher Hitchens VS John And Tom Metzger"},
+				    {"http://www.dailymotion.com/video/xqyly1_dni-ostrowca-koncert-kakadu_music", "Dni Ostrowca - Koncert Kakadu"},
+				    {"http://www.metacafe.com/watch/9111307/the_master_movie_review_indiana_jones_blu_ray_collection_review_breakin_it_down/", "The Master Movie Review & Indiana Jones Blu-ray Collection Review - Breakin' It Down"},
+				    {"http://www.viddler.com/v/27dbe690", "Lawn mower beer train gets pulled over"},
+				    {"http://vimeo.com/channels/staffpicks/50238512", "Berlin hyper-lapse"},
+				    {"http://www.5min.com/Video/Getting-Out-of-a-Defensive-Position-in-Pool-516993703", "Getting Out of a Defensive Position in Pool"},
+				    {"http://www.hulu.com/watch/401167", "The New Rachel (Glee)"},
+				    {"http://www.myvideo.de/watch/8653744/Exklusive_7_Minuten_aus_This_Ain_t_California", "Exklusive 7 Minuten aus This Ain't California"},
+				    {"http://www.gamestar.de/videos/sport,12/landwirtschafts-simulator-2013,67641.html", "Landwirtschafts-Simulator 2013 - Fahrzeug-Trailer"},
+				    //screenplay from video.wikia
+				    {"http://video.wikia.com/wiki/File:The_Muppets_(2011)_-_Featurette_Behind_The_Scenes_-_Ok_Go_Video", "The Muppets (2011) - Featurette Behind The Scenes - Ok Go Video"},
+				    //ign from video.wikia
+				    {"http://video.wikia.com/wiki/File:IGN_Live_Tomb_Raider_Demo_-_E3_2012", "IGN Live Tomb Raider Demo - E3 2012"},
+				    //realgravity form video.wikia
+				    {"http://video.wikia.com/wiki/File:Good-Looking_Gamer_Girlfriend_Episode_16:_Snow!_by_xRpMx13_(Modern_Warfare_3_Gameplay/Commentary)", "Good-Looking Gamer Girlfriend Episode 16: Snow! by xRpMx13 (Modern Warfare 3 Gameplay/Commentary)"},
 			};
 		}
 		
 		@Test(dataProvider="provideVideo", groups={"ArticleFeaturesCRUDTestsAdmin_019", "ArticleCRUDAdmin"}) 
-		public void ArticleCRUDAdmin_019_AddingProviderVideosVET(String videoURL)
+		public void ArticleCRUDAdmin_019_AddingProviderVideosVET(String videoURL, String name)
 		{
-			
+			PageObjectLogging.log("", videoURL, true);
 			WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 			wiki.openWikiPage();
 			String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
@@ -672,26 +671,22 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		}
 		
 		@Test(dataProvider="provideVideo", groups={"ArticleFeaturesCRUDTestsAdmin_020", "ArticleCRUDAdmin"}) 
-		public void ArticleCRUDAdmin_020_AddingProviderVideosRVModule(String url, String name)
+		public void ArticleCRUDAdmin_020_AddingProviderVideosRVModule(String videoUrl, String name)
 		{
-			
+			PageObjectLogging.log("", videoUrl, true);
 			WikiArticlePageObject wiki = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 			wiki.openWikiPage();
 			String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 			wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
-			
 			WikiArticleEditMode RVmoduleMessageEdit = wiki.edit();		
 			RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
 			wiki = RVmoduleMessageEdit.clickOnPublishButton();
-			
 			wiki.openRandomArticle();
 			wiki.clickOnAddVideoRVModule();
-			wiki.typeInVideoURL(url);
+			wiki.typeInVideoURL(videoUrl);
 			wiki.clickOnRVModalAddButton();
 			wiki.verifyVideoAddedToRVModule(name);
-			
 			CommonFunctions.logoutCookie(cookieName);
-			
 		}
 		
 		@Test(groups={"ArticleFeaturesCRUDTestsAdmin_021", "ArticleCRUDAdmin"}) 
@@ -708,32 +703,25 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 			edit.clickOnAddObjectButton("Image");
 			edit.waitForModalAndClickAddThisPhoto();
 			edit.typePhotoCaption(PageContent.caption);
-			
 			edit.clickImageLeftAlignment();
 			edit.clickOnAddPhotoButton2();
 			edit.clickOnSourceButton();
 			edit.verifyWikiTextInSourceMode("left");					
 			edit.clickOnVisualButton();				
 			edit.verifyLeftAlignmentIsSelected();
-			
 			edit.deleteArticleContent();
 			edit.clickOnAddObjectButton("Image");
 			edit.waitForModalAndClickAddThisPhoto();
 			edit.typePhotoCaption(PageContent.caption);
-			
 			edit.clickImageRightAlignment();
 			edit.clickOnAddPhotoButton2();
 			edit.clickOnSourceButton();
 			edit.verifyWikiTextInSourceMode("right");					
 			edit.clickOnVisualButton();				
 			edit.verifyRightAlignmentIsSelected();
-			
 			WikiArticlePageObject article = edit.clickOnPublishButton();
 			article.VerifyTheImageOnThePage();
-			
 			CommonFunctions.logoutCookie(cookieName);
-			
-					
 		}
 		
 		@Test(groups={"ArticleFeaturesCRUDTestsAdmin_022", "ArticleCRUDAdmin"}) 
@@ -743,18 +731,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 			wiki.openWikiPage();
 			String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 			wiki.refreshPage();
-			
 			pageName = "QAarticle"+wiki.getTimeStamp();
 			wiki.openWikiPage();			
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-			
 			edit.deleteArticleContent();
 			edit.clickOnAddObjectButton("Image");
-					
 			WikiArticlePageObject article = edit.addImageForLightboxTesting();
-			
 			LightboxPageObject lightbox = article.clickThumbnailImage();
-						
 			lightbox.clickPinButton();
 			lightbox.clickShareButton();
 			lightbox.verifyShareButtons();
@@ -768,10 +751,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 			lightbox.verifyRedditWindow();
 			lightbox.clickPlusOneShareButton();
 			lightbox.verifyPlusOneWindow();
-			
 			lightbox.clickCloseButton();
-			
 			CommonFunctions.logoutCookie(cookieName);
-			
 		}
 }

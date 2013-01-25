@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjects.PageObject.MiniEditor;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -120,4 +121,8 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForElementByElement(linkModalOkButton);
 		clickAndWait(linkModalOkButton);
 	}	
+	
+	public void clearContent(){
+		messageBodyField.clear();
+	}
 }

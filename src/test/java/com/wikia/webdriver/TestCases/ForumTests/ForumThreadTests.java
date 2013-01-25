@@ -36,6 +36,8 @@ public class ForumThreadTests extends TestTemplate{
 		forumThread.verifyReplyMessage(1, message);
 	}
 	
+	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_002_quoteRemoveThread(){
 //	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
 	// issues of element presence when using mini-editor
 	public void forumThreadTests_002_quoteThread(){

@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -1047,14 +1048,15 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	
 	public void verifyWikiTextInSourceMode(String text) {
 		String wikiText = sourceModeTextArea.getAttribute("value");
-		if (wikiText.contains(text))
-		{
-			PageObjectLogging.log("verifyWikiTextInSourceMode", "Correct wiki text is visible in source mode", true);
-		}
-		else
-		{
-			PageObjectLogging.log("verifyWikiTextInSourceMode", "Incorrect wiki text is visible in source mode", false);
-		}
+		Assertion.assertStringContains(wikiText, text);
+//		if (wikiText.contains(text))
+//		{
+//			PageObjectLogging.log("verifyWikiTextInSourceMode", "Correct wiki text is visible in source mode", true);
+//		}
+//		else
+//		{
+//			PageObjectLogging.log("verifyWikiTextInSourceMode", "Incorrect wiki text is visible in source mode", false);
+//		}
 		
 		
 //		waitForTextToBePresentInElementByElement(sourceModeText, text);
