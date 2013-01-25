@@ -3,18 +3,19 @@ package com.wikia.webdriver.TestCases.SignUpTests;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.SignUpPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
+import com.wikia.webdriver.PageObjects.PageObject.Special.SpecialUserLoginPageObject;
 
 public class SignUpTests_account_creation extends TestTemplate
-{
-	private String timeStamp;
-	
-	private String userName, userNameEnc, password;
+{	
+	private String timeStamp, userName, userNameEnc, password, tempPassword;
 	
 	/*
 	 * 3.30 Test Case 2.3.01 Sign up page: Account creation Non latin username
@@ -190,10 +191,42 @@ public class SignUpTests_account_creation extends TestTemplate
 		userProfile.verifyWelcomeEmail(userName);
 	}
 	
-	@Test(groups = {"SignUp_account_creation_TC_006", "SignUp"})
+	@Test(groups = {"SignUp_account_creation_TC_007", "SignUp"})
 	public void SignUp_account_creation_TC_007_forgotYourPassword()
 	{
-		
 		SignUpPageObject signUp = new SignUpPageObject(driver);
+		timeStamp = signUp.getTimeStamp(); 
+		userName = Properties.userName+timeStamp;
+		password = Properties.password+timeStamp;
+		signUp.openSignUpPage();
+		signUp.typeInEmail();
+		signUp.typeInUserName(userName);
+		signUp.typeInPassword(password);
+		signUp.enterBirthDate("2", "29", "1988");
+		signUp.enterBlurryWord();
+		AlmostTherePageObject almostTherePage = signUp.submit();
+		almostTherePage.verifyAlmostTherePage();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		confirmPageAlmostThere.typeInUserName(userName);
+		confirmPageAlmostThere.typeInPassword(password);
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		userProfile.verifyUserLoggedIn(userName);
+		userProfile.verifyUserToolBar();	
+		userProfile.verifyWelcomeEmail(userName);
+		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.forgotPassword(userName);
+		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
+		tempPassword = MailFunctions.getPasswordFromMailContent((MailFunctions.getFirstMailContent(Properties.email, Properties.emailPassword)));
+		login.login(userName, tempPassword);
+		password = Properties.password+timeStamp;
+		login.resetPassword(password);
+		login.verifyUserIsLoggedIn(userName);
+		CommonFunctions.logOut(driver);
+		login.openSpecialUserLogin();
+		login.login(userName, password);
+		login.verifyUserIsLoggedIn(userName);
+		CommonFunctions.logOut(driver);
 	}
 }

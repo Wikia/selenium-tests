@@ -108,7 +108,6 @@ public class AlmostTherePageObject extends BasePageObject
 	 */
 	public ConfirmationPageObject enterActivationLink()
 	{
-		System.out.println(getActivationLinkFromMail());
 		getUrl(getActivationLinkFromMail());
 		PageObjectLogging.log("enterActivationLink", "activation page is displayed", true, driver);
 		return new ConfirmationPageObject(driver);
