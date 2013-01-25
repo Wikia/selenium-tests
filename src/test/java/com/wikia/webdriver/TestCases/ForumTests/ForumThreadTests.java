@@ -61,7 +61,7 @@ public class ForumThreadTests extends TestTemplate{
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
-		forumThread.removeThread("reason");
+		forumThread.removeThread("QA reason");
 		forumThread.verifyThreadRemoved();
 	}
 	
@@ -76,7 +76,7 @@ public class ForumThreadTests extends TestTemplate{
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
-		forumThread.removeThread("reason");
+		forumThread.removeThread("QA reason");
 		forumThread.verifyThreadRemoved();
 		forumThread.undoRemove();
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	

@@ -152,7 +152,7 @@ public class ForumBoardPageObject extends BasePageObject{
 
 	public void unfollowIfDiscussionIsFollowed(int threadNumber) {
 		WebElement followButton = driver.findElement(By.cssSelector(".thread:nth-child("+threadNumber+") li.follow"));
-		waitForElementNotVisibleByElement(followButton);
+		waitForElementByElement(followButton);
 		if (followButton.getText().contains("Following")) {
 			PageObjectLogging.log("unfollowIfDiscussionIsFollowed", "discussion is followed. Preparing to click \"unfollowed\"", true);		
 			waitForElementClickableByElement(followButton);
