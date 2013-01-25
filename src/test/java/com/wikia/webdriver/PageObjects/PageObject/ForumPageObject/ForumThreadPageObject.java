@@ -100,12 +100,7 @@ public class ForumThreadPageObject extends BasePageObject{
 
 	public void quoteTheThreadsAuthor(String message) {
 		refreshPage();
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
-		waitForElementByElement(quoteButton);
-		waitForElementClickableByElement(quoteButton);
-		clickAndWait(quoteButton);
 		clickOnQuoteButton();
-
 		waitForElementByElement(miniEditor.miniEditorIframe);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(message);
