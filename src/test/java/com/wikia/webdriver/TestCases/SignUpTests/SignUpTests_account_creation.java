@@ -14,6 +14,7 @@ public class SignUpTests_account_creation extends TestTemplate
 {
 	private String timeStamp;
 	
+	private String userName, userNameEnc, password;
 	
 	/*
 	 * 3.30 Test Case 2.3.01 Sign up page: Account creation Non latin username
@@ -24,9 +25,9 @@ public class SignUpTests_account_creation extends TestTemplate
 	{
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
-		String userName = Properties.userNameNonLatin+timeStamp;
-		String userNameEnc = Properties.userNameNonLatinEncoded+timeStamp;
-		String password = "QAPassword"+timeStamp;
+		userName = Properties.userNameNonLatin+timeStamp;
+		userNameEnc = Properties.userNameNonLatinEncoded+timeStamp;
+		password = "QAPassword"+timeStamp;
 		signUp.openSignUpPage();
 		signUp.typeInEmail();
 		signUp.typeInUserName(userName);
@@ -54,8 +55,8 @@ public class SignUpTests_account_creation extends TestTemplate
 	{
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
-		String userName = "Qweasdzxcvqweasdzxcvqweasdzxcvqweasdz"+timeStamp;
-		String password = "QAPassword"+timeStamp;
+		userName = "Qweasdzxcvqweasdzxcvqweasdzxcvqweasdz"+timeStamp;
+		password = "QAPassword"+timeStamp;
 		signUp.openSignUpPage();
 		signUp.typeInEmail();
 		signUp.typeInUserName(userName);
@@ -83,9 +84,9 @@ public class SignUpTests_account_creation extends TestTemplate
 	{
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
-		String userName = Properties.userNameWithBackwardSlash+timeStamp;
-		String userNameEnc = Properties.userNameWithBackwardSlashEncoded+timeStamp;
-		String password = "QAPassword"+timeStamp;
+		userName = Properties.userNameWithBackwardSlash+timeStamp;
+		userNameEnc = Properties.userNameWithBackwardSlashEncoded+timeStamp;
+		password = "QAPassword"+timeStamp;
 		signUp.openSignUpPage();
 		signUp.typeInEmail();
 		signUp.typeInUserName(userName);
@@ -113,8 +114,8 @@ public class SignUpTests_account_creation extends TestTemplate
 	{
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
-		String userName = Properties.userNameWithUnderScore+timeStamp;
-		String password = RandomStringUtils.randomAscii(1);
+		userName = Properties.userNameWithUnderScore+timeStamp;
+		password = RandomStringUtils.randomAscii(1);
 		signUp.openSignUpPage();
 		signUp.typeInEmail();
 		signUp.typeInUserName(userName);
@@ -142,8 +143,8 @@ public class SignUpTests_account_creation extends TestTemplate
 	{
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
-		String userName = Properties.userName+timeStamp;
-		String password = RandomStringUtils.randomAscii(50);
+		userName = Properties.userName+timeStamp;
+		password = RandomStringUtils.randomAscii(50);
 		signUp.openSignUpPage();
 		signUp.typeInEmail();
 		signUp.typeInUserName(userName);
@@ -170,8 +171,8 @@ public class SignUpTests_account_creation extends TestTemplate
 	{
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
-		String userName = Properties.userName+timeStamp;
-		String password = Properties.password+timeStamp;
+		userName = Properties.userName+timeStamp;
+		password = Properties.password+timeStamp;
 		signUp.openSignUpPage();
 		signUp.typeInEmail();
 		signUp.typeInUserName(userName);
@@ -187,5 +188,12 @@ public class SignUpTests_account_creation extends TestTemplate
 		userProfile.verifyUserLoggedIn(userName);
 		userProfile.verifyUserToolBar();	
 		userProfile.verifyWelcomeEmail(userName);
+	}
+	
+	@Test(groups = {"SignUp_account_creation_TC_006", "SignUp"})
+	public void SignUp_account_creation_TC_007_forgotYourPassword()
+	{
+		
+		SignUpPageObject signUp = new SignUpPageObject(driver);
 	}
 }

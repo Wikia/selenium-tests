@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjects.PageObject.ForumPageObject;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -94,6 +95,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementByElement(quoteButton);
 		waitForElementClickableByElement(quoteButton);
 		clickAndWait(quoteButton);
+		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"none\"");
 		waitForElementByElement(miniEditor.miniEditorIframe);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(message);

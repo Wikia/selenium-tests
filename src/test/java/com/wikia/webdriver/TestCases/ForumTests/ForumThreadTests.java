@@ -36,7 +36,7 @@ public class ForumThreadTests extends TestTemplate{
 	}
 	
 	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_002_quoteRemoveThread(){
+	public void forumThreadTests_002_quoteThread(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
