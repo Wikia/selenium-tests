@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.LightboxPageObject;
@@ -636,15 +637,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 					{"http://video.wikia.com/wiki/File:IGN_Live_Tomb_Raider_Demo_-_E3_2012"},
 					//realgravity form video.wikia
 					{"http://video.wikia.com/wiki/File:Good-Looking_Gamer_Girlfriend_Episode_16:_Snow!_by_xRpMx13_(Modern_Warfare_3_Gameplay/Commentary)"}
-
-					
 			};
 		}
 		
 		@Test(dataProvider="provideVideo", groups={"ArticleFeaturesCRUDTestsAdmin_019", "ArticleCRUDAdmin"}) 
 		public void ArticleCRUDAdmin_019_AddingProviderVideosVET(String videoURL)
 		{
-			
+			PageObjectLogging.log("", videoURL, true);
 			WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 			wiki.openWikiPage();
 			String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
@@ -672,24 +671,21 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		}
 		
 		@Test(dataProvider="provideVideo", groups={"ArticleFeaturesCRUDTestsAdmin_020", "ArticleCRUDAdmin"}) 
-		public void ArticleCRUDAdmin_020_AddingProviderVideosRVModule(String url, String name)
+		public void ArticleCRUDAdmin_020_AddingProviderVideosRVModule(String videoUrl, String name)
 		{
-			
+			PageObjectLogging.log("", videoUrl, true);
 			WikiArticlePageObject wiki = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 			wiki.openWikiPage();
 			String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 			wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
-			
 			WikiArticleEditMode RVmoduleMessageEdit = wiki.edit();		
 			RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
 			wiki = RVmoduleMessageEdit.clickOnPublishButton();
-			
 			wiki.openRandomArticle();
 			wiki.clickOnAddVideoRVModule();
-			wiki.typeInVideoURL(url);
+			wiki.typeInVideoURL(videoUrl);
 			wiki.clickOnRVModalAddButton();
 			wiki.verifyVideoAddedToRVModule(name);
-			
 			CommonFunctions.logoutCookie(cookieName);
 			
 		}
@@ -708,32 +704,25 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 			edit.clickOnAddObjectButton("Image");
 			edit.waitForModalAndClickAddThisPhoto();
 			edit.typePhotoCaption(PageContent.caption);
-			
 			edit.clickImageLeftAlignment();
 			edit.clickOnAddPhotoButton2();
 			edit.clickOnSourceButton();
 			edit.verifyWikiTextInSourceMode("left");					
 			edit.clickOnVisualButton();				
 			edit.verifyLeftAlignmentIsSelected();
-			
 			edit.deleteArticleContent();
 			edit.clickOnAddObjectButton("Image");
 			edit.waitForModalAndClickAddThisPhoto();
 			edit.typePhotoCaption(PageContent.caption);
-			
 			edit.clickImageRightAlignment();
 			edit.clickOnAddPhotoButton2();
 			edit.clickOnSourceButton();
 			edit.verifyWikiTextInSourceMode("right");					
 			edit.clickOnVisualButton();				
 			edit.verifyRightAlignmentIsSelected();
-			
 			WikiArticlePageObject article = edit.clickOnPublishButton();
 			article.VerifyTheImageOnThePage();
-			
 			CommonFunctions.logoutCookie(cookieName);
-			
-					
 		}
 		
 		@Test(groups={"ArticleFeaturesCRUDTestsAdmin_022", "ArticleCRUDAdmin"}) 
@@ -743,18 +732,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 			wiki.openWikiPage();
 			String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 			wiki.refreshPage();
-			
 			pageName = "QAarticle"+wiki.getTimeStamp();
 			wiki.openWikiPage();			
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-			
 			edit.deleteArticleContent();
 			edit.clickOnAddObjectButton("Image");
-					
 			WikiArticlePageObject article = edit.addImageForLightboxTesting();
-			
 			LightboxPageObject lightbox = article.clickThumbnailImage();
-						
 			lightbox.clickPinButton();
 			lightbox.clickShareButton();
 			lightbox.verifyShareButtons();
@@ -768,10 +752,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 			lightbox.verifyRedditWindow();
 			lightbox.clickPlusOneShareButton();
 			lightbox.verifyPlusOneWindow();
-			
 			lightbox.clickCloseButton();
-			
 			CommonFunctions.logoutCookie(cookieName);
-			
 		}
 }
