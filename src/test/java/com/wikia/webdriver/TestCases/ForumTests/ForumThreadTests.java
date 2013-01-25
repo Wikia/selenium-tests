@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumBoardPageObject;
+import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumHistoryPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumThreadPageObject;
 
@@ -35,8 +36,9 @@ public class ForumThreadTests extends TestTemplate{
 		forumThread.verifyReplyMessage(1, message);
 	}
 	
-	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_002_quoteRemoveThread(){
+//	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
+	// issues of element presence when using mini-editor
+	public void forumThreadTests_002_quoteThread(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
@@ -82,18 +84,37 @@ public class ForumThreadTests extends TestTemplate{
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 	}
 	
-//	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
+	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_005_moveThreadToOtherBoard(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logIn(Properties.userName, Properties.password);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);		
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		forumThread.moveThread(PageContent.forumBoard);
+		forumThread.verifyParentBoard(PageContent.forumBoard);
+	}
+	
+	@Test(groups= {"ForumThreadTests_006", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_006_threadHistory(){
+		CommonFunctions.logOut(driver);
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		CommonFunctions.logIn(Properties.userName, Properties.password);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage();
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);		
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		ForumHistoryPageObject forumHistory = forumThread.openHistory();
+		forumHistory.verifyImportandPageElements();
 	}
 }
+
 
 
 
