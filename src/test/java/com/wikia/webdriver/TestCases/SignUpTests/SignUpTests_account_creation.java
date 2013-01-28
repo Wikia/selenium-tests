@@ -11,7 +11,7 @@ import com.wikia.webdriver.PageObjects.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.SignUpPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.Special.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjects.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class SignUpTests_account_creation extends TestTemplate
 {	

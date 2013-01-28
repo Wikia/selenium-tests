@@ -103,13 +103,14 @@ public class CommonFunctions {
 		WebElement userNameField = driver.findElement(By
 				.cssSelector("#WikiaArticle input[name='username']"));
 		WebElement passwordField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='password']"));
-		WebElement submitButton = driver.findElement(By
-				.cssSelector("#WikiaArticle input.login-button.big"));
+				.cssSelector("#WikiaArticle input[name='password']"));		
+		WebElement loginForm = driver.findElement(By
+				.cssSelector(".UserLogin form"));
+		
 		userNameField.sendKeys(userName);
 		passwordField.sendKeys(password);
 		try {
-			submitButton.click();
+			loginForm.submit();
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("logIn",
 					"page loads for more than 30 seconds", true, driver);
