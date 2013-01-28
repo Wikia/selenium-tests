@@ -130,8 +130,9 @@ public class ForumThreadPageObject extends BasePageObject{
 
 	public void clickOnRemoveButton() {
 		waitForElementByElement(removeButton);
-		waitForElementClickableByElement(removeButton);
-		clickAndWait(removeButton);		
+//		waitForElementClickableByElement(removeButton);
+//		clickAndWait(removeButton);
+		jQueryClick(".WikiaMenuElement .remove-message");
 		PageObjectLogging.log("clickOnRemoveButton", "click on 'remove' button", true, driver);								
 	}
 	
