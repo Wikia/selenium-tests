@@ -46,23 +46,35 @@ public class BasePageObject{
 	public WebDriverWait wait;
 
 	@FindBy(css="div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
-	WebElement customizeToolbar_CustomizeButton;
+	protected WebElement customizeToolbar_CustomizeButton;
 	@FindBy(css="div.msg")
-	WebElement customizeToolbar_PageWatchlistStatusMessage;
+	protected WebElement customizeToolbar_PageWatchlistStatusMessage;
 	@FindBy(css="div.search-box input.search")
-	WebElement customizeToolbar_FindAToolField;
+	protected WebElement customizeToolbar_FindAToolField;
 	@FindBy(css="div.MyToolsRenameItem input.input-box")
-	WebElement customizeToolbar_RenameItemDialogInput;
+	protected WebElement customizeToolbar_RenameItemDialogInput;
 	@FindBy(css="div.MyToolsRenameItem input.save-button")
-	WebElement customizeToolbar_SaveItemDialogInput;
+	protected WebElement customizeToolbar_SaveItemDialogInput;
 	@FindBy(css="input.save-button")
-	WebElement customizeToolbar_SaveButton;
+	protected WebElement customizeToolbar_SaveButton;
 	@FindBy(css="span.reset-defaults a")
-	WebElement customizeToolbar_ResetDefaultsButton;
+	protected WebElement customizeToolbar_ResetDefaultsButton;
 	@FindBy(css="li.mytools.menu")
-	WebElement customizeToolbar_MyToolsMenuButton;
+	protected WebElement customizeToolbar_MyToolsMenuButton;
 	@FindBy(css="ul[id='my-tools-menu']")
-	WebElement customizeToolbar_MyToolsMenu;
+	protected WebElement customizeToolbar_MyToolsMenu;
+	@FindBy(css="#WallNotifications div.notification div.msg-title")
+	protected WebElement notifications_LatestNotificationOnWiki;
+	@FindBy(css="#WallNotifications li")
+	protected WebElement notifications_ShowNotificationsLogo;
+	@FindBy(css="li.notifications-for-wiki")
+	protected WebElement notifications_NotificationsForWiki;
+	@FindBy(css="#wall-notifications-markasread-sub")
+	protected WebElement notifications_MarkAllAsReadButton;
+	@FindBy(css="#wall-notifications-markasread-all-wikis")
+	protected WebElement notifications_MarkAllWikisAsReadButton;
+	@FindBy(css="#wall-notifications-markasread-this-wiki")
+	protected WebElement notifications_MarkOnlyThisWikiAsReadButton;
 	@FindBy(css="input.control-button")
 	private WebElement publishButtonGeneral;
 	@FindBy(css="a#ca-edit")
@@ -1334,10 +1346,58 @@ public class BasePageObject{
 		PageObjectLogging.log("VerifyEmailModalElements", "Verify that the Email Modal elements are present", true, driver);
 	}
 	
-	public void verifyLogInModalForAnonsVisibility() {
-		
+	public void verifyLogInModalForAnonsVisibility() {	
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("VerifyLogInModalForAnonsVisibility", "Verify that the Log In modal is present", true, driver);
+	}	
+	
+	public void notifications_verifyLatestNotificationTitle(String title) {
+		notifications_showNotifications();
+		//the below method is native click which is the only way to load notification
+		notifications_clickOnNotificationsLogo();
+		waitForElementByElement(notifications_LatestNotificationOnWiki);
+		waitForTextToBePresentInElementByElement(notifications_LatestNotificationOnWiki, title);
+		PageObjectLogging.log("notifications_verifyNotificationTitle", "Verify that the latest notification has the following title: "+title, true, driver);
+	}
+
+	public void notifications_clickOnNotificationsLogo() {
+		waitForElementByElement(notifications_ShowNotificationsLogo);
+		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
+		clickAndWait(notifications_ShowNotificationsLogo);
+		PageObjectLogging.log("notifications_clickOnNotificationsLogo", "click on notifications logo on the upper right corner", true, driver);				
+	}
+
+	public void notifications_showNotifications() {
+		waitForElementByElement(notifications_ShowNotificationsLogo);
+		executeScript("$('#WallNotifications ul.subnav').addClass('show')");
+		PageObjectLogging.log("norifications_showNotifications", "show notifications by adding 'show' class to element", true, driver);		
 	}
 	
+	public void notifications_showNotificationsForWikiOnMenu() {
+		waitForElementByElement(notifications_NotificationsForWiki);
+		waitForElementClickableByElement(notifications_NotificationsForWiki);
+		clickAndWait(notifications_NotificationsForWiki);
+//		executeScript("$($('li.notifications-for-wiki')[0]).addClass('show')");
+		PageObjectLogging.log("notifications_showNotificationsForWiki", "show the upper wiki notifications on menu", true, driver);		
+	}
+	
+	public void notifications_markLatestNotificationsAsRead() {
+		notifications_showNotifications();
+		notifications_clickMarkAllAsRead(false);	
+	}
+
+	public void notifications_clickMarkAllAsRead(boolean allWikis) {
+		waitForElementByElement(notifications_MarkAllAsReadButton);
+		waitForElementClickableByElement(notifications_MarkAllAsReadButton);
+		clickAndWait(notifications_MarkAllAsReadButton);
+		if (allWikis) {
+			waitForElementClickableByElement(notifications_MarkAllWikisAsReadButton);
+			clickAndWait(notifications_MarkAllWikisAsReadButton);
+		}
+		else {
+			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
+			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);			
+		}
+		PageObjectLogging.log("notifications_clickMarkAllAsRead", (allWikis ? "all wikis" : "only one wiki")+" marked as read", true, driver);				
+	}
 } 

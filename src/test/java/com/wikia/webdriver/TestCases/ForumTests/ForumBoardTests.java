@@ -99,16 +99,18 @@ public class ForumBoardTests extends TestTemplate {
 		forumBoard.verifyTextOnFollowButton(1, "Follow");
 	}
 	
-//	@Test(groups= {"ForumBoardTests_007, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_007, ForumBoardTests", "Forum"} )
 	public void forumBoardTests_007_highlightDiscussion(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, true);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
+ 		forumThread.notifications_verifyLatestNotificationTitle(title);
+// 		forumThread.notifications_markLatestNotificationsAsRead();
 	}
 }

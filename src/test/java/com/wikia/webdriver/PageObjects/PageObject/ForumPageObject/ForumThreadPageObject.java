@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
@@ -25,12 +26,20 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement discussionTitle;
 	@FindBy(css=".replyButton")
 	private WebElement replyButton;
+	@FindBy(css="div.BreadCrumbs :nth-child(3)")
+	private WebElement parentBoardField;
 	@FindBy(css=".quote-button")
 	private WebElement quoteButton;
 	@FindBy(css=".speech-bubble-message nav")
 	private WebElement moreButton;
 	@FindBy(css=".WikiaMenuElement .remove-message")
 	private WebElement removeButton;
+	@FindBy(css=".WikiaMenuElement .move-thread")
+	private WebElement moveThreadButton;
+	@FindBy(css="#WallMoveModal select")
+	private WebElement moveThreadModal_selectElement;
+	@FindBy(css="#WallMoveModal button.submit")
+	private WebElement moveThreadModal_moveThreadButton;
 	@FindBy(css=".wall-action-reason")
 	private WebElement removeThreadModal_Textarea;
 	@FindBy(css="#WikiaConfirmOk")
@@ -91,17 +100,21 @@ public class ForumThreadPageObject extends BasePageObject{
 
 	public void quoteTheThreadsAuthor(String message) {
 		refreshPage();
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
-		waitForElementByElement(quoteButton);
-		waitForElementClickableByElement(quoteButton);
-		clickAndWait(quoteButton);
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"none\"");
+		clickOnQuoteButton();
 		waitForElementByElement(miniEditor.miniEditorIframe);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(message);
 		driver.switchTo().defaultContent();	
 		clickReplyButton();
 		PageObjectLogging.log("quoteTheThreadsAuthor", "quote the author of the thread with the following text: "+message, true, driver);								
+	}
+
+	public void clickOnQuoteButton() {
+		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+		waitForElementByElement(quoteButton);
+		waitForElementClickableByElement(quoteButton);
+		clickAndWait(quoteButton);
+		PageObjectLogging.log("clickOnQuoteButton", "clicked on Quote button", true, driver);								
 	}
 
 	public void removeThread(String reason) {	
@@ -115,11 +128,18 @@ public class ForumThreadPageObject extends BasePageObject{
 		PageObjectLogging.log("removeThread", "removed thread with the following reason: "+reason, true, driver);								
 	}
 
-	private void clickOnRemoveButton() {
+	public void clickOnRemoveButton() {
 		waitForElementByElement(removeButton);
 		waitForElementClickableByElement(removeButton);
 		clickAndWait(removeButton);		
 		PageObjectLogging.log("clickOnRemoveButton", "click on 'remove' button", true, driver);								
+	}
+	
+	public void clickOnMoveThreadButton() {
+		waitForElementByElement(moveThreadButton);
+		waitForElementClickableByElement(moveThreadButton);
+		clickAndWait(moveThreadButton);		
+		PageObjectLogging.log("clickOnMoveThreadButton", "click on 'move thread' button", true, driver);								
 	}
 
 	public void clickOnMoreButton() {
@@ -140,5 +160,28 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementClickableByElement(undoThreadRemoveButton);
 		clickAndWait(undoThreadRemoveButton);		
 		PageObjectLogging.log("undoRemove", "click on 'undo' button", true, driver);
+	}
+
+	public void moveThread(String forumBoardName) {
+		clickOnMoreButton();
+		clickOnMoveThreadButton();
+		waitForElementByElement(moveThreadModal_selectElement);
+		Select dropList = new Select(moveThreadModal_selectElement);
+		dropList.selectByVisibleText(forumBoardName);
+		waitForElementClickableByElement(moveThreadModal_moveThreadButton);
+		clickAndWait(moveThreadModal_moveThreadButton);		
+		PageObjectLogging.log("moveThread", "thread moved to the following board: "+forumBoardName, true, driver);									
+	}
+
+	public void verifyParentBoard(String forumBoardName) {
+		waitForElementByElement(parentBoardField);
+		waitForTextToBePresentInElementByElement(parentBoardField, forumBoardName);
+		PageObjectLogging.log("verifyParentBoard", "verify that the parent board of current thread is the following: "+forumBoardName, true);													
+	}
+
+	public ForumHistoryPageObject openHistory() {
+		getUrl(getCurrentUrl()+"?action=history");
+		PageObjectLogging.log("openHistory", "thread history page opened", true, driver);													
+		return new ForumHistoryPageObject(driver, Domain);
 	}
 }
