@@ -21,6 +21,7 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnonymous"/>  
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>  
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleVideoTestsAdmin"/>  
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsAnonymous"/>  
 			<class name="com.wikia.webdriver.TestCases.Top_10_list_Tests.Top_10_list_Tests"/>  
 			<class name="com.wikia.webdriver.TestCases.MessageWallTests.MessageWallTests"/>  
