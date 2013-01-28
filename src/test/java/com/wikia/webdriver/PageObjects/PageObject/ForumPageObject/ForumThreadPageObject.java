@@ -137,8 +137,9 @@ public class ForumThreadPageObject extends BasePageObject{
 	
 	public void clickOnMoveThreadButton() {
 		waitForElementByElement(moveThreadButton);
-		waitForElementClickableByElement(moveThreadButton);
-		clickAndWait(moveThreadButton);		
+//		waitForElementClickableByElement(moveThreadButton);
+//		clickAndWait(moveThreadButton);
+		jQueryClick(".WikiaMenuElement .move-thread");
 		PageObjectLogging.log("clickOnMoveThreadButton", "click on 'move thread' button", true, driver);								
 	}
 
@@ -147,7 +148,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementByElement(moreButton);
 		waitForElementClickableByElement(moreButton);
 		clickAndWait(moreButton);	
-		PageObjectLogging.log("clickOnMoreButton", "click on 'more' button on a message", true, driver);								
+		PageObjectLogging.log("clickOnMoreButton", "click on 'more' button on a message", true);								
 	}
 
 	public void verifyThreadRemoved() {
