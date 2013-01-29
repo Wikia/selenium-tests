@@ -482,11 +482,12 @@ public class BasePageObject{
 	 *
 	 ** @param by The By class defined for the element
 	 */
-	public void waitForElementByBy(By by)
+	public WebElement waitForElementByBy(By by)
 	{
 //		try
 //		{
-			wait.until(ExpectedConditions.visibilityOfElementLocated(by));						
+			wait.until(ExpectedConditions.visibilityOfElementLocated(by));		
+			return driver.findElement(by);
 //		}
 //		catch(Exception e)
 //		{
@@ -745,6 +746,19 @@ public class BasePageObject{
 //		try
 //		{
 			wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));								
+//		}
+//		catch(Exception e)
+//		{
+//			PageObjectLogging.log("waitForTextToBePresentInElementByElement", e.toString(), false);
+//		}
+		
+	}
+	
+	public void waitForTextToBePresentInElementByBy(By by, String text)
+	{
+//		try
+//		{
+			wait.until(CommonExpectedConditions.textToBePresentInElement(driver.findElement(by), text));								
 //		}
 //		catch(Exception e)
 //		{
