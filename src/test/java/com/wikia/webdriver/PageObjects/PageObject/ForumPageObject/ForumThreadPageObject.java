@@ -176,6 +176,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	}
 
 	public void verifyParentBoard(String forumBoardName) {
+		refreshPage();
 		waitForElementByElement(parentBoardField);
 		waitForTextToBePresentInElementByElement(parentBoardField, forumBoardName);
 		PageObjectLogging.log("verifyParentBoard", "verify that the parent board of current thread is the following: "+forumBoardName, true);													
