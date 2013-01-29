@@ -20,7 +20,7 @@ public class CreateAWiki_1 extends TestTemplate{
 	{	
 		HomePageObject home = new HomePageObject(driver);	
 		home.openHomePage();
-		CommonFunctions.logIn();
+//		CommonFunctions.logIn();
 		CreateNewWikiPageObjectStep1 createNewWikistep1 = home.startAWiki();
 		String timeStamp = createNewWikistep1.getTimeStamp();
 		wikiName = "QaTest"+timeStamp;

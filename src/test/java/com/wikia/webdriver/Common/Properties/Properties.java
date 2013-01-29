@@ -14,13 +14,20 @@ public class Properties {
 
 	private static void setPropertiesManually()
 	{
-		Global.BROWSER = "CHROME";
+		Global.BROWSER = "FF";
+//		Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
 		Global.DOMAIN = "http://mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		Global.CONFIG_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
-		Global.LOGIN_BY_COOKIE = true;
+		if (Global.DOMAIN.contains("dev"))
+		{
+			Global.LOGIN_BY_COOKIE = false;
+		}
+		else{
+			Global.LOGIN_BY_COOKIE = true;
+		}
 		Global.LOG_ENABLED = true;
 	}
 	

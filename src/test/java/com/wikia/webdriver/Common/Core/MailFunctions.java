@@ -148,9 +148,9 @@ public class MailFunctions {
 	
 	public static String getPasswordFromMailContent(String content)
 	{
-		content = content.replace("\"","\n\"\n");
+		content = content.replace("\"","\n");
 		String [] lines = content.split("\n");
-		return lines[6];
+		return lines[1];
 	}
 
 	public static String getActivationLinkFromMailContent(String content)

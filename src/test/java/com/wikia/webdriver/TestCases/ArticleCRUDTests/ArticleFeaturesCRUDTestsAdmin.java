@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjects.PageObject.LightboxPageObject;
@@ -21,7 +22,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_001", "ArticleFeaturesCRUDAdmin", "Smoke"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 007  Adding galleries to an article in edit mode
+	// Test Case 007  Adding galleries to an article in edit mode 
 	public void ArticleCRUDAdmin_001_AddingGallery()
 	{
 //		CommonFunctions.logOut(Properties.userNameStaff, driver);
@@ -614,164 +615,5 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		}
 		
 		
-		//Rodrigo Testing TCs
-		@DataProvider
-		private static final Object[][] provideVideo()
-		{
-			return new Object[][] 
-			{
-					{"http://www.youtube.com/watch?v=p7R-X1CXiI8&feature=g-vrec"},
-					{"http://www.dailymotion.com/video/xqyly1_dni-ostrowca-koncert-kakadu_music"},
-					{"http://www.metacafe.com/watch/9111307/the_master_movie_review_indiana_jones_blu_ray_collection_review_breakin_it_down/"},
-					{"http://www.viddler.com/v/27dbe690"},
-					{"http://vimeo.com/channels/staffpicks/50238512"},
-					{"http://www.5min.com/Video/Getting-Out-of-a-Defensive-Position-in-Pool-516993703"},
-					{"http://www.hulu.com/watch/401167"},
-					{"http://www.myvideo.de/watch/8653744/Exklusive_7_Minuten_aus_This_Ain_t_California"},
-					{"http://www.gamestar.de/videos/sport,12/landwirtschafts-simulator-2013,67641.html"},
-					{"http://www.twitch.tv/girlsgonegaming"},
-					//screenplay from video.wikia
-					{"http://video.wikia.com/wiki/File:The_Muppets_(2011)_-_Featurette_Behind_The_Scenes_-_Ok_Go_Video"},
-					//ign from video.wikia
-					{"http://video.wikia.com/wiki/File:IGN_Live_Tomb_Raider_Demo_-_E3_2012"},
-					//realgravity form video.wikia
-					{"http://video.wikia.com/wiki/File:Good-Looking_Gamer_Girlfriend_Episode_16:_Snow!_by_xRpMx13_(Modern_Warfare_3_Gameplay/Commentary)"}
-
-					
-			};
-		}
 		
-		@Test(dataProvider="provideVideo", groups={"ArticleFeaturesCRUDTestsAdmin_019", "ArticleCRUDAdmin"}) 
-		public void ArticleCRUDAdmin_019_AddingProviderVideosVET(String videoURL)
-		{
-			
-			WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-			wiki.openWikiPage();
-			String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-			wiki.refreshPage();
-			pageName = "QAarticle"+wiki.getTimeStamp();
-			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-			edit.deleteArticleContent();
-			edit.clickOnVisualButton();
-			edit.clickOnAddObjectButton("Video");
-			edit.waitForVideoModalAndTypeVideoURL(videoURL);
-			edit.clickAddVideoButton();
-			edit.typeVideoCaption(PageContent.caption);
-			edit.clickSubmitVideoButton();
-			edit.verifySuccessAfterAddingVideo();
-			edit.clickReturnToEditingButton();
-			edit.verifyVideoInEditMode(PageContent.caption);
-			WikiArticlePageObject article = edit.clickOnPublishButton();
-			article.verifyTheVideoOnThePage();
-			FileDetailsPageObject fileDetails = article.clickVideoDetailsButton();
-			fileDetails.verifyEmbeddedVideoIsPresent();	
-			fileDetails.verifythumbnailIsPresent();
-			CommonFunctions.logoutCookie(cookieName);
-				
-		
-		}
-		
-		@Test(dataProvider="provideVideo", groups={"ArticleFeaturesCRUDTestsAdmin_020", "ArticleCRUDAdmin"}) 
-		public void ArticleCRUDAdmin_020_AddingProviderVideosRVModule(String url, String name)
-		{
-			
-			WikiArticlePageObject wiki = new WikiArticlePageObject(driver, Global.DOMAIN, "");
-			wiki.openWikiPage();
-			String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-			wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
-			
-			WikiArticleEditMode RVmoduleMessageEdit = wiki.edit();		
-			RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
-			wiki = RVmoduleMessageEdit.clickOnPublishButton();
-			
-			wiki.openRandomArticle();
-			wiki.clickOnAddVideoRVModule();
-			wiki.typeInVideoURL(url);
-			wiki.clickOnRVModalAddButton();
-			wiki.verifyVideoAddedToRVModule(name);
-			
-			CommonFunctions.logoutCookie(cookieName);
-			
-		}
-		
-		@Test(groups={"ArticleFeaturesCRUDTestsAdmin_021", "ArticleCRUDAdmin"}) 
-		public void ArticleCRUDAdmin_021_VerifyingImagesPositionWikiText()
-		{
-			WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-			wiki.openWikiPage();
-			String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-			wiki.refreshPage();
-			pageName = "QAarticle"+wiki.getTimeStamp();
-			wiki.openWikiPage();
-			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-			edit.deleteArticleContent();
-			edit.clickOnAddObjectButton("Image");
-			edit.waitForModalAndClickAddThisPhoto();
-			edit.typePhotoCaption(PageContent.caption);
-			
-			edit.clickImageLeftAlignment();
-			edit.clickOnAddPhotoButton2();
-			edit.clickOnSourceButton();
-			edit.verifyWikiTextInSourceMode("left");					
-			edit.clickOnVisualButton();				
-			edit.verifyLeftAlignmentIsSelected();
-			
-			edit.deleteArticleContent();
-			edit.clickOnAddObjectButton("Image");
-			edit.waitForModalAndClickAddThisPhoto();
-			edit.typePhotoCaption(PageContent.caption);
-			
-			edit.clickImageRightAlignment();
-			edit.clickOnAddPhotoButton2();
-			edit.clickOnSourceButton();
-			edit.verifyWikiTextInSourceMode("right");					
-			edit.clickOnVisualButton();				
-			edit.verifyRightAlignmentIsSelected();
-			
-			WikiArticlePageObject article = edit.clickOnPublishButton();
-			article.VerifyTheImageOnThePage();
-			
-			CommonFunctions.logoutCookie(cookieName);
-			
-					
-		}
-		
-		@Test(groups={"ArticleFeaturesCRUDTestsAdmin_022", "ArticleCRUDAdmin"}) 
-		public void ArticleCRUDAdmin_022__Lightbox_VerifyExistenceAndURLsOfSocialButtons()
-		{
-			WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-			wiki.openWikiPage();
-			String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-			wiki.refreshPage();
-			
-			pageName = "QAarticle"+wiki.getTimeStamp();
-			wiki.openWikiPage();			
-			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-			
-			edit.deleteArticleContent();
-			edit.clickOnAddObjectButton("Image");
-					
-			WikiArticlePageObject article = edit.addImageForLightboxTesting();
-			
-			LightboxPageObject lightbox = article.clickThumbnailImage();
-						
-			lightbox.clickPinButton();
-			lightbox.clickShareButton();
-			lightbox.verifyShareButtons();
-			lightbox.clickFacebookShareButton();
-			lightbox.verifyFacebookWindow();
-			lightbox.clickTwitterShareButton();
-			lightbox.verifyTwitterWindow();
-			lightbox.clickStumbleUponShareButton();
-			lightbox.verifyStumbleUponWindow();
-			lightbox.clickRedditShareButton();
-			lightbox.verifyRedditWindow();
-			lightbox.clickPlusOneShareButton();
-			lightbox.verifyPlusOneWindow();
-			
-			lightbox.clickCloseButton();
-			
-			CommonFunctions.logoutCookie(cookieName);
-			
-		}
 }

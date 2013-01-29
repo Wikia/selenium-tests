@@ -44,59 +44,6 @@ public class CommonFunctions {
 	private static WebDriver driver;
 	private static WebDriverWait wait;
 
-	// public CommonFunctions()
-	// {
-	// driver = DriverProvider.getWebDriver();
-	// wait = new WebDriverWait(driver, 30);
-	// }
-
-	/**
-	 * log in by overlay available from main menu
-	 * 
-	 * @param userName
-	 * @param password
-	 * @author: Karol Kujawiak
-	 */
-
-	private static void clickLogInAjax() {
-		driver = DriverProvider.getWebDriver();
-		WebElement loginButton = driver.findElement(logInAjax);
-		loginButton.click();
-
-		PageObjectLogging.log("logIn", "log in ajax button clicked", true,
-				driver);
-	}
-
-	private static void typeInUserName(String userName) {
-		driver = DriverProvider.getWebDriver();
-		WebElement userNameInAjax = driver.findElement(userNameField);
-
-		userNameInAjax.sendKeys(userName);
-		PageObjectLogging.log("logIn", "user name field populated", true,
-				driver);
-	}
-
-	private static void typeInUserPass(String password) {
-		driver = DriverProvider.getWebDriver();
-		WebElement passwordInAjax = driver.findElement(passwordField);
-		passwordInAjax.sendKeys(password);
-		PageObjectLogging
-				.log("logIn", "password field populated", true, driver);
-	}
-
-	private static void clickSubmitLoginButton(String userName) {
-		driver = DriverProvider.getWebDriver();
-		WebElement submitLoginButton = driver.findElement(submitButton);
-		submitLoginButton.click();
-		PageObjectLogging.log("logIn", "submit button clicked", true, driver);
-	}
-
-	private static void verifyUserIsLoggedIn(String userName) {
-		driver.findElement(By.cssSelector("a[href*='/User:" + userName + "']"));
-		PageObjectLogging.log("verifyUserIsLoggedIn",
-				"verified user is logged in", true, driver);
-	}
-
 	public static void logIn(String userName, String password) {
 		driver = DriverProvider.getWebDriver();
 		driver.manage().deleteAllCookies();
@@ -140,32 +87,6 @@ public class CommonFunctions {
 		}
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userName + "']"));
-		// driver = DriverProvider.getWebDriver();
-		// wait = new WebDriverWait(driver, 30);
-		// WebElement logInAjaxElem = driver.findElement(logInAjax);
-		// logInAjaxElem.click();
-		// PageObjectLogging.log("logIn", "log in ajax button clicked", true,
-		// driver);
-		// wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='username']")));
-		// WebElement userNameFieldElem = driver.findElement(userNameField);
-		// userNameFieldElem.sendKeys(userName);
-		// PageObjectLogging.log("logIn", "user name field is populated with " +
-		// userName, true, driver);
-		// try {
-		// Thread.sleep(500);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// WebElement passwordFieldElem = driver.findElement(passwordField);
-		// PageObjectLogging.log("logIn", "password field is populated", true,
-		// driver);
-		// passwordFieldElem.sendKeys(password);
-		// WebElement submitButtonElem = driver.findElement(submitButton);
-		// submitButtonElem.click();
-		// PageObjectLogging.log("logIn", "submit button clicked", true,
-		// driver);
-		// wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/User:"+userName+"']")));
 	}
 
 	public static void logInSpecialUserLogin(String userName, String password,
@@ -182,13 +103,14 @@ public class CommonFunctions {
 		WebElement userNameField = driver.findElement(By
 				.cssSelector("#WikiaArticle input[name='username']"));
 		WebElement passwordField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='password']"));
-		WebElement submitButton = driver.findElement(By
-				.cssSelector("#WikiaArticle input.login-button.big"));
+				.cssSelector("#WikiaArticle input[name='password']"));		
+		WebElement loginForm = driver.findElement(By
+				.cssSelector(".UserLogin form"));
+		
 		userNameField.sendKeys(userName);
 		passwordField.sendKeys(password);
 		try {
-			submitButton.click();
+			loginForm.submit();
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("logIn",
 					"page loads for more than 30 seconds", true, driver);
@@ -212,37 +134,6 @@ public class CommonFunctions {
 		}
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userNameEnc + "']"));
-	}
-
-	/**
-	 * log in by overlay available from main menu
-	 * 
-	 * @param userName
-	 * @param password
-	 * @author: Karol Kujawiak
-	 */
-
-	public static void logInDriver(String userName, String password,
-			WebDriver driver) {
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='username']")));
-		WebElement userNameFieldElem = driver.findElement(userNameField);
-		userNameFieldElem.sendKeys(userName);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		WebElement passwordFieldElem = driver.findElement(passwordField);
-		passwordFieldElem.sendKeys(password);
-		WebElement submitButtonElem = driver.findElement(submitButton);
-		submitButtonElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='/User:" + userName + "']")));
 	}
 
 	public static void logInDropDown(String userName, String password,
@@ -281,16 +172,6 @@ public class CommonFunctions {
 				.executeScript("$('.wikia-button-facebook').click()");
 		PageObjectLogging.log("logInDropDownFB", "facebook button clicked",
 				true);
-		// try {
-		// Thread.sleep(2000);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// WebElement fbConnect =
-		// driver.findElement(By.className("wikia-button-facebook"));
-		// fbConnect.click();
-		// getting window handles
 		Object[] windows = driver.getWindowHandles().toArray();
 		int delay = 500;
 		int sumDelay = 500;
@@ -344,13 +225,7 @@ public class CommonFunctions {
 				"facebook login verification passed", true);
 	}
 
-	/**
-	 * log in by overlay available from main menu
-	 * 
-	 * @param userName
-	 * @param password
-	 * @author: Karol Kujawiak
-	 */
+
 
 	public static void logIn(String userName, String password, WebDriver driver) {
 		String temp = driver.getCurrentUrl();
@@ -403,129 +278,6 @@ public class CommonFunctions {
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
 	}
 
-	/**
-	 * log in by overlay available from main menu, using generic credentials
-	 * 
-	 * @author: Karol Kujawiak
-	 */
-	public static void logIn() {
-		driver = DriverProvider.getWebDriver();
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='username']")));
-		WebElement userNameFieldElem = driver.findElement(userNameField);
-		userNameFieldElem.sendKeys(Properties.userName);
-		WebElement passwordFieldElem = driver.findElement(passwordField);
-		passwordFieldElem.sendKeys(Properties.password);
-		WebElement submitButtonElem = driver.findElement(submitButton);
-		submitButtonElem.click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-				.cssSelector("header#WikiaHeader a.ajaxLogin")));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-				.cssSelector("header#WikiaHeader a.ajaxRegister")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='/User:" + Properties.userName + "']")));
-		PageObjectLogging.log("logIn ", "Normal user logged in", true, driver);
-	}
-
-	/**
-	 * log in by overlay available from main menu, using generic credentials
-	 * with stay logged in check-box checked
-	 * 
-	 * @author: Karol Kujawiak
-	 */
-	public static void logInRememberMe() {
-		driver = DriverProvider.getWebDriver();
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='username']")));
-		WebElement userNameFieldElem = driver.findElement(userNameField);
-		userNameFieldElem.sendKeys(Properties.userName);
-		WebElement passwordFieldElem = driver.findElement(passwordField);
-		passwordFieldElem.sendKeys(Properties.password);
-		WebElement rememberMeCheckBox = driver.findElement(remeberMeCheckBox);
-		rememberMeCheckBox.click();
-		WebElement submitButtonElem = driver.findElement(submitButton);
-		submitButtonElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='/User:" + Properties.userName + "']")));
-		PageObjectLogging.log("logIn ", "Normal user logged in", true, driver);
-	}
-
-	/**
-	 * Obsolete below method - should be fixed
-	 * */
-
-	public static void logInAsStaff() {
-		driver = DriverProvider.getWebDriver();
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='username']")));
-		WebElement userNameFieldElem = driver.findElement(userNameField);
-		userNameFieldElem.sendKeys(Properties.userNameStaff);
-		WebElement passwordFieldElem = driver.findElement(passwordField);
-		passwordFieldElem.sendKeys(Properties.passwordStaff);
-		WebElement submitButtonElem = driver.findElement(submitButton);
-		submitButtonElem.click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-				.cssSelector("header#WikiaHeader a.ajaxLogin")));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-				.cssSelector("header#WikiaHeader a.ajaxRegister")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='/User:" + Properties.userNameStaff
-						+ "']")));
-		PageObjectLogging.log("logInAsStaff ", "Staff user logged in", true,
-				driver);
-	}
-
-	//
-	// /**
-	// * verifies whether pattern and current string are the same and log to log
-	// * file
-	// *
-	// * @param pattern
-	// * @param current
-	// * @author: Karol Kujawiak
-	// */
-	// public static void assertString(String pattern, String current) {
-	//
-	// try {
-	// Assert.assertEquals(pattern, current);
-	// PageObjectLogging.log("assertString", "pattern string: " + pattern
-	// + " <br/>current string: " + current + "<br/>are the same",
-	// true);
-	// } catch (AssertionError e) {
-	// PageObjectLogging.log("assertString",
-	// "pattern string: " + pattern + " <br/>current string: "
-	// + current + "<br/>are different", false);
-	// }
-	// }
-	//
-	//
-	// /**
-	// * Verify actual number is the same as expected number
-	// *
-	// * @param aNumber
-	// * @param secondNumber
-	// * @author: Piotr Gabryjeluk
-	// */
-	// public static void assertNumber(Number expected, Number actual,
-	// String message) {
-	// try {
-	// Assert.assertEquals(expected, actual);
-	// PageObjectLogging.log("assertNumber", message + ", expected: "
-	// + expected + ", got: " + actual, true);
-	// } catch (AssertionError e) {
-	// PageObjectLogging.log("assertNumber", message + ", expected: "
-	// + expected + ", got: " + actual, false);
-	// }
-	// }
 
 	/**
 	 * 
@@ -648,12 +400,6 @@ public class CommonFunctions {
 
 	public static void MoveCursorToElement(Point elem1_location,
 			WebDriver driver) {
-		// Toolkit toolkit = Toolkit.getDefaultToolkit ();
-		// Dimension dim = toolkit.getScreenSize();
-		// double ScreenHeight = dim.getHeight();
-
-		// int FireFoxStatusBarHeight = 20;
-
 		int pixDiff = 0;
 		if (Global.BROWSER.equals("FF")) {
 			pixDiff = 6;
