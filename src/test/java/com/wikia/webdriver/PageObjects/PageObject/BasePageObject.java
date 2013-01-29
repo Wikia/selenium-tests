@@ -758,7 +758,8 @@ public class BasePageObject{
 	{
 //		try
 //		{
-			wait.until(CommonExpectedConditions.textToBePresentInElement(driver.findElement(by), text));								
+			WebElement temp = driver.findElement(by);
+			wait.until(CommonExpectedConditions.textToBePresentInElement(temp, text));								
 //		}
 //		catch(Exception e)
 //		{
