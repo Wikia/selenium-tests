@@ -26,8 +26,6 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement discussionTitle;
 	@FindBy(css=".replyButton")
 	private WebElement replyButton;
-	@FindBy(css="div.BreadCrumbs :nth-child(3)")
-	private WebElement parentBoardField;
 	@FindBy(css=".quote-button")
 	private WebElement quoteButton;
 	@FindBy(css=".speech-bubble-message nav")
@@ -50,6 +48,8 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement undoThreadRemoveButton;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> discussionBody;
+
+	By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
 	
 	private String wikiaEditorTextarea = "textarea.replyBody";
 	
@@ -176,9 +176,8 @@ public class ForumThreadPageObject extends BasePageObject{
 	}
 
 	public void verifyParentBoard(String forumBoardName) {
-		refreshPage();
-		waitForElementByElement(parentBoardField);
-		waitForTextToBePresentInElementByElement(parentBoardField, forumBoardName);
+		waitForElementByBy(parentBoardField);
+		waitForTextToBePresentInElementByBy(parentBoardField, forumBoardName);
 		PageObjectLogging.log("verifyParentBoard", "verify that the parent board of current thread is the following: "+forumBoardName, true);													
 	}
 
