@@ -25,15 +25,15 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 			{
 				return new Object[][] 
 				{
-						{"http://www.twitch.tv/girlsgonegaming", "Girlsgonegaming playing Minecraft"},
-					    {"http://www.youtu1e.com/watch?v=p7R-X1CXiI8&feature=g-vrec", "Christopher Hitchens VS John And Tom Metzger"},
+//						{"http://www.twitch.tv/girlsgonegaming", "Girlsgonegaming playing Minecraft"},
+					    {"http://www.youtube.com/watch?v=p7R-X1CXiI8&feature=g-vrec", "Christopher Hitchens VS John And Tom Metzger"},
 					    {"http://www.dailymotion.com/video/xqyly1_dni-ostrowca-koncert-kakadu_music", "Dni Ostrowca - Koncert Kakadu"},
-					    {"http://www.metacafe.com/watch/9111307/the_master_movie_review_indiana_jones_blu_ray_collection_review_breakin_it_down/", "The Master Movie Review & Indiana Jones Blu-ray Collection Review - Breakin' It Down"},
+					    {"http://www.metacafe.com/watch/9111307/the_master_movie_review_indiana_jones_blu_ray_collection_review_breakin_it_down/", "The Master Movie Review Indiana Jones Blu-ray Collection Review - Breakin' It Down"},
 					    {"http://www.viddler.com/v/27dbe690", "Lawn mower beer train gets pulled over"},
 					    {"http://vimeo.com/channels/staffpicks/50238512", "Berlin hyper-lapse"},
 					    {"http://www.5min.com/Video/Getting-Out-of-a-Defensive-Position-in-Pool-516993703", "Getting Out of a Defensive Position in Pool"},
 					    {"http://www.hulu.com/watch/401167", "The New Rachel (Glee)"},
-					    {"http://www.myvideo.de/watch/8653744/Exklusive_7_Minuten_aus_This_Ain_t_California", "Exklusive 7 Minuten aus This Ain't California"},
+						{"http://www.myvideo.de/watch/8653744/Exklusive_7_Minuten_aus_This_Ain_t_California", "Exklusive 7 Minuten aus This Ain't California"},
 					    {"http://www.gamestar.de/videos/sport,12/landwirtschafts-simulator-2013,67641.html", "Landwirtschafts-Simulator 2013 - Fahrzeug-Trailer"},
 					    //screenplay from video.wikia
 					    {"http://video.wikia.com/wiki/File:The_Muppets_(2011)_-_Featurette_Behind_The_Scenes_-_Ok_Go_Video", "The Muppets (2011) - Featurette Behind The Scenes - Ok Go Video"},
@@ -113,16 +113,17 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				edit.verifyWikiTextInSourceMode("left");					
 				edit.clickOnVisualButton();				
 				edit.verifyLeftAlignmentIsSelected();
-				edit.deleteArticleContent();
-				edit.clickOnAddObjectButton("Image");
-				edit.waitForModalAndClickAddThisPhoto();
-				edit.typePhotoCaption(PageContent.caption);
-				edit.clickImageRightAlignment();
-				edit.clickOnAddPhotoButton2();
-				edit.clickOnSourceButton();
-				edit.verifyWikiTextInSourceMode("right");					
-				edit.clickOnVisualButton();				
-				edit.verifyRightAlignmentIsSelected();
+				//no need to check images "right" string in wikitext until centered position has been added to images like it has to videos
+//				edit.deleteArticleContent();
+//				edit.clickOnAddObjectButton("Image");
+//				edit.waitForModalAndClickAddThisPhoto();
+//				edit.typePhotoCaption(PageContent.caption);
+//				edit.clickImageRightAlignment();
+//				edit.clickOnAddPhotoButton2();
+//				edit.clickOnSourceButton();
+//				edit.verifyWikiTextInSourceMode("");					
+//				edit.clickOnVisualButton();				
+//				edit.verifyRightAlignmentIsSelected();
 				WikiArticlePageObject article = edit.clickOnPublishButton();
 				article.VerifyTheImageOnThePage();
 				CommonFunctions.logoutCookie(cookieName);

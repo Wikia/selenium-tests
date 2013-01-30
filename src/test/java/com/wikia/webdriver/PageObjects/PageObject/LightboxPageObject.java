@@ -187,7 +187,7 @@ public class LightboxPageObject extends BasePageObject{
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		Assertion.assertStringContains(getCurrentUrl(), "plusone.google.com");
+		Assertion.assertStringContains(getCurrentUrl(), "accounts.google.com");
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyPlusOneWindow", "Verify that the Plus One window URL is correct", true, driver);
