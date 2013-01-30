@@ -11,7 +11,10 @@ import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumHistoryPa
 import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumThreadPageObject;
 
-/**
+/* 
+ * StoryQA0128 - Create test cases for forum
+ * https://wikia.fogbugz.com/default.asp?95449
+ *
  * Tests for Forum Thread.  
  * Forum Thread Example: http://mediawiki119.wikia.com/wiki/Thread:41679
  */
