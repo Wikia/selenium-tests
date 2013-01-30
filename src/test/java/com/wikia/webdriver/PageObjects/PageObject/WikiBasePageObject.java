@@ -32,9 +32,6 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = "span.drop")
 	private WebElement contributeButton;
 
-	@FindBy(css = "textarea[id='ImageUploadCaption']")
-	private WebElement captionTextArea;
-
 	@FindBy(css = "a.createpage")
 	private WebElement createArticleButton;
 
@@ -140,6 +137,7 @@ public class WikiBasePageObject extends BasePageObject {
 	private By galleryDialogSlideshowOrientationsList = By
 			.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
 	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
+	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
 
 	public WikiBasePageObject(WebDriver driver, String Domain) {
 		super(driver);
@@ -456,9 +454,9 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 */
 	public void typePhotoCaption(String caption) {
-		waitForElementByElement(captionTextArea);
-		captionTextArea.clear();
-		captionTextArea.sendKeys(caption);
+		WebElement captionText = waitForElementByBy(captionTextArea);
+		captionText.clear();
+		captionText.sendKeys(caption);
 		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo",
 				true, driver);
 	}
