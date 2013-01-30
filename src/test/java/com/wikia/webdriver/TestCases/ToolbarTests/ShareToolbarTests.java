@@ -11,6 +11,7 @@ import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
 public class ShareToolbarTests extends TestTemplate {
 	@Test(groups = { "ShareToolbar001", "Toolbar" })
 	public void ShareToolbar001_VerifyingElements() {
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
@@ -23,6 +24,7 @@ public class ShareToolbarTests extends TestTemplate {
 
 	@Test(groups = { "ShareToolbar002", "Toolbar" })
 	public void ShareToolbar002_VerifyingTwitterModal() {
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
@@ -32,8 +34,9 @@ public class ShareToolbarTests extends TestTemplate {
 		wiki.verifyTwitterModalURL();
 	}
 
-	@Test(groups = { "ShareToolbar003", "Toolbar" })
+	//@Test(groups = { "ShareToolbar003", "Toolbar" })
 	public void ShareToolbar003_VerifyingFBModal() {
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
@@ -45,6 +48,7 @@ public class ShareToolbarTests extends TestTemplate {
 
 	@Test(groups = { "ShareToolbar004", "Toolbar" })
 	public void ShareToolbar004_VerifyingLogInModalForAnons() {
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		wiki.clickShareButton();
@@ -54,6 +58,7 @@ public class ShareToolbarTests extends TestTemplate {
 
 	@Test(groups = { "ShareToolbar005", "Toolbar" })
 	public void ShareToolbar005_VerifyingEmailModalElements() {
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
