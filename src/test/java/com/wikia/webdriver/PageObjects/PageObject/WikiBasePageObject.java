@@ -68,9 +68,6 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = "input#wpReason")
 	private WebElement deleteCommentReasonField;
 
-	@FindBy(css = "tr.ImageUploadFindLinks td a")
-	private WebElement addThisPhotoLink;
-
 	@FindBy(css = "div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
 
@@ -138,6 +135,7 @@ public class WikiBasePageObject extends BasePageObject {
 			.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
 	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
 	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
+	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
 
 	public WikiBasePageObject(WebDriver driver, String Domain) {
 		super(driver);
@@ -440,8 +438,9 @@ public class WikiBasePageObject extends BasePageObject {
 	 */
 	public void waitForModalAndClickAddThisPhoto() {
 		waitForElementByElement(imageUploadModal);
-		waitForElementClickableByElement(addThisPhotoLink);
-		clickAndWait(addThisPhotoLink);
+		WebElement addPhoto = waitForElementByBy(addThisPhotoLink);
+		waitForElementClickableByElement(addPhoto);
+		clickAndWait(addPhoto);
 		PageObjectLogging
 				.log("WaitForModalAndClickAddThisPhoto",
 						"Wait for modal and click on 'add this photo' under the first seen photo",
