@@ -13,6 +13,11 @@ import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumThreadPag
 import com.wikia.webdriver.PageObjects.PageObject.MiniEditor.MiniEditorComponentObject;
 
 public class ForumBoardTests extends TestTemplate {
+	
+	/* 
+	 * StoryQA0128 - Create test cases for forum
+	 * https://wikia.fogbugz.com/default.asp?95449
+	 */
 
 	private String title;
 	private String message;

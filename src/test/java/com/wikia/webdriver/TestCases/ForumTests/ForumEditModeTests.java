@@ -12,6 +12,11 @@ import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumPageObjec
 
 public class ForumEditModeTests extends TestTemplate{
 	
+	/* 
+	 * StoryQA0128 - Create test cases for forum
+	 * https://wikia.fogbugz.com/default.asp?95449
+	 */
+	
 	private String title, description, first, second;
 	
 	@Test(groups = {"Forum_001","Forum"})
