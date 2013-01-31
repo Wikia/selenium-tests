@@ -103,7 +103,7 @@ public class BasePageObject{
 	WebElement twitterButton;	
 	@FindBy(css="iframe.fb_ltr")
 	WebElement fBIframe;
-	@FindBy(css="div.pluginConnectButton")
+	@FindBy(css="div.pluginConnectButton .pluginConnectButtonDisconnected button")
 	WebElement fBLikeButton;	
 	@FindBy(css="a.email-link")
 	WebElement emailButton;
@@ -451,12 +451,12 @@ public class BasePageObject{
 	
 	public void removeCssClass(String cssSelector, String className){
 		executeScript("$('."+cssSelector+"').removeClass('"+className+"')");
-		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true);
+		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true, driver);
 	}
 	
 	public void addCssClass(String cssSelector, String className){
 		executeScript("$('."+cssSelector+"').addClass('"+className+"')");
-		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true);
+		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true, driver);
 	}
 	
 	/**
