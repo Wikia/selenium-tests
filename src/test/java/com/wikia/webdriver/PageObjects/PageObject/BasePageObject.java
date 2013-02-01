@@ -99,7 +99,7 @@ public class BasePageObject{
 	WebElement shareButton;
 	@FindBy(css="iframe.twitter-share-button")
 	WebElement twitterIframe;
-	@FindBy(css="span#l")
+	@FindBy(css="a#b")
 	WebElement twitterButton;	
 	@FindBy(css="iframe.fb_ltr")
 	WebElement fBIframe;
