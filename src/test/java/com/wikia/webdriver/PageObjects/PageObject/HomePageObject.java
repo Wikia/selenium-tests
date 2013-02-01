@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjects.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
@@ -20,16 +21,10 @@ public class HomePageObject extends BasePageObject{
 	@FindBy(css="header.wikiahomepage-header a.button") 
 	private WebElement startWikiButton;
 	@FindBy(css="section.grid-2.videogames a img") 
-	private WebElement OpenVideoGamesHub2;
-	@FindBy(css="li.Video_Games > a") 
 	private WebElement OpenVideoGamesHub;
 	@FindBy(css="section.grid-2.entertainment a img") 
-	private WebElement OpenEntertainmentHub2;
-	@FindBy(css="li.Entertainment > a") 
 	private WebElement OpenEntertainmentHub;
 	@FindBy(css="section.grid-2.lifestyle a img") 
-	private WebElement OpenLifestyleHub2;
-	@FindBy(css="li.Lifestyle > a") 
 	private WebElement OpenLifestyleHub;
 	@FindBy(css="a.ajaxLogin")
 	private WebElement LoginOverlay;
@@ -100,7 +95,7 @@ public class HomePageObject extends BasePageObject{
 	
 	public HubBasePageObject OpenHub(String Hub){
 		if (Hub.equals("VideoGamesHub")) {
-			clickAndWait(OpenVideoGamesHub);
+			getUrl(URLsContent.VideoGamesHub);
 			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
 			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
@@ -115,7 +110,7 @@ public class HomePageObject extends BasePageObject{
 			return new VideoGamesHubPageObject(driver);
 		}
 		if (Hub.equals("EntertainmentHub")) {
-			clickAndWait(OpenEntertainmentHub);
+			getUrl(URLsContent.EntertainmentHub);
 			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
 			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
@@ -130,7 +125,7 @@ public class HomePageObject extends BasePageObject{
 			return new EntertainmentHubPageObject(driver);	
 		}
 		if (Hub.equals("LifestyleHub")) {
-			clickAndWait(OpenLifestyleHub);
+			getUrl(URLsContent.LifestyleHub);
 			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
 			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))

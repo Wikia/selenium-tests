@@ -18,6 +18,11 @@ public class URLsContent {
 	public static String prefooterAdsEnabled = "AbTest.PERFORMANCE_V_PREFOOTERS=PREFOOTERS_ENABLED";
 	public static String prefooterAdsDisabled = "AbTest.PERFORMANCE_V_PREFOOTERS=PREFOOTERS_DISABLED";
 	
+	//Hubs
+	public static String VideoGamesHub = "http://www.wikia.com/Video_Games";
+	public static String EntertainmentHub = "http://www.wikia.com/Entertainment";
+	public static String LifestyleHub = "http://www.wikia.com/Lifestyle";
+
 	public static String buildUrl(String url, String parameter){
 		String temp;
 		if (url.contains("?"))
