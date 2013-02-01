@@ -125,7 +125,6 @@ public class HubsTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-//		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		Hub.ClickSuggestAVideo();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest a Video");
@@ -138,9 +137,9 @@ public class HubsTests extends TestTemplate {
 	public void HubsTest006_suggestAVideoAndClickXtoClose(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		Hub.ClickSuggestAVideo();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest a Video");
@@ -153,9 +152,9 @@ public class HubsTests extends TestTemplate {
 	public void HubsTest007_VerifyVideoSuggestionWorksProperly(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		Hub.ClickSuggestAVideo();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest a Video");
@@ -183,9 +182,9 @@ public class HubsTests extends TestTemplate {
 	public void HubsTest009_suggestAVideoAndClickCancelToClose(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		Hub.ClickSuggestAnArticle();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest an Article");
@@ -198,9 +197,9 @@ public class HubsTests extends TestTemplate {
 	public void HubsTest010_suggestAVideoAndClickXtoClose(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		Hub.ClickSuggestAnArticle();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest an Article");
@@ -213,9 +212,9 @@ public class HubsTests extends TestTemplate {
 	public void HubsTest011_VerifyArticleSuggestionWorksProperly(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		Hub.ClickSuggestAnArticle();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest an Article");
