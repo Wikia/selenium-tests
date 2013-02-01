@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjects.PageObject;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -618,8 +619,10 @@ public class BasePageObject{
 	{
 		try
 		{
-			Global.LOG_ENABLED = false;
+			Global.LOG_ENABLED = false;			
+//			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
+//			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);						
 			Global.LOG_ENABLED = true;
 		}
 //		catch(NoSuchElementException e)
