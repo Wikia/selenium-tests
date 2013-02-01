@@ -48,9 +48,10 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 			public void ArticleVideo001_AddingProviderVideosVET(String videoURL, String name)
 			{
 				PageObjectLogging.log("", videoURL, true);
+				CommonFunctions.logOut(driver);
 				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 				wiki.openWikiPage();
-				String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
 				pageName = "QAarticle"+wiki.getTimeStamp();
 				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -69,18 +70,16 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				FileDetailsPageObject fileDetails = article.clickVideoDetailsButton();
 				fileDetails.verifyEmbeddedVideoIsPresent();	
 				fileDetails.verifythumbnailIsPresent();
-				CommonFunctions.logoutCookie(cookieName);
-					
-			
 			}
 			
 			@Test(dataProvider="provideVideo", groups={"ArticleVideo_002", "ArticleVideo"}) 
 			public void ArticleVideo002_AddingProviderVideosRVModule(String videoUrl, String name)
 			{
 				PageObjectLogging.log("", videoUrl, true);
+				CommonFunctions.logOut(driver);
 				WikiArticlePageObject wiki = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 				wiki.openWikiPage();
-				String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+				CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 				wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
 				WikiArticleEditMode RVmoduleMessageEdit = wiki.edit();		
 				RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
@@ -90,15 +89,15 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				wiki.typeInVideoURL(videoUrl);
 				wiki.clickOnRVModalAddButton();
 				wiki.verifyVideoAddedToRVModule(name);
-				CommonFunctions.logoutCookie(cookieName);
 			}
 			
 			@Test(groups={"ArticleVideo_003", "ArticleVideo"}) 
 			public void ArticleVideo003_VerifyingImagesPositionWikiText()
 			{
+				CommonFunctions.logOut(driver);
 				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 				wiki.openWikiPage();
-				String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
 				pageName = "QAarticle"+wiki.getTimeStamp();
 				wiki.openWikiPage();
@@ -126,15 +125,15 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 //				edit.verifyRightAlignmentIsSelected();
 				WikiArticlePageObject article = edit.clickOnPublishButton();
 				article.VerifyTheImageOnThePage();
-				CommonFunctions.logoutCookie(cookieName);
 			}
 			
 			@Test(groups={"ArticleVideo_004", "ArticleVideo"}) 
 			public void ArticleVideo004_Lightbox_VerifyExistenceAndURLsOfSocialButtons()
 			{
+				CommonFunctions.logOut(driver);
 				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 				wiki.openWikiPage();
-				String cookieName = CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
 				pageName = "QAarticle"+wiki.getTimeStamp();
 				wiki.openWikiPage();			
@@ -157,7 +156,6 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				lightbox.clickPlusOneShareButton();
 				lightbox.verifyPlusOneWindow();
 				lightbox.clickCloseButton();
-				CommonFunctions.logoutCookie(cookieName);
 			}
 
 }

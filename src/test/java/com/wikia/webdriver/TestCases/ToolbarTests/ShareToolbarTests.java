@@ -30,11 +30,11 @@ public class ShareToolbarTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
 		wiki.clickShareButton();
-		wiki.clickTweetButton();
+		wiki.navigteTweetButtonUrl();
 		wiki.verifyTwitterModalURL();
 	}
 
-	//@Test(groups = { "ShareToolbar003", "Toolbar" })
+	@Test(groups = { "ShareToolbar003", "Toolbar" })
 	public void ShareToolbar003_VerifyingFBModal() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
