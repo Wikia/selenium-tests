@@ -30,7 +30,7 @@ public class ShareToolbarTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
 		wiki.clickShareButton();
-		wiki.clickTweetButton();
+		wiki.navigteTweetButtonUrl();
 		wiki.verifyTwitterModalURL();
 	}
 
