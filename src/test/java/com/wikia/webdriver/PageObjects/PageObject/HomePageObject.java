@@ -106,7 +106,7 @@ public class HomePageObject extends BasePageObject{
 //				hubsHero = driver.findElement(hubsHeroCarousel);
 				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
-			PageObjectLogging.log("OpenHub", "Opening "+Hub, true, driver);
+			PageObjectLogging.log("OpenHub", "Open "+Hub, true, driver);
 			return new VideoGamesHubPageObject(driver);
 		}
 		if (Hub.equals("EntertainmentHub")) {
@@ -121,7 +121,7 @@ public class HomePageObject extends BasePageObject{
 //				hubsHero = driver.findElement(hubsHeroCarousel);
 				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
-			PageObjectLogging.log("OpenHub", "Opening "+Hub, true, driver);
+			PageObjectLogging.log("OpenHub", "Open "+Hub, true, driver);
 			return new EntertainmentHubPageObject(driver);	
 		}
 		if (Hub.equals("LifestyleHub")) {
@@ -136,7 +136,7 @@ public class HomePageObject extends BasePageObject{
 //				hubsHero = driver.findElement(hubsHeroCarousel);
 				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
-			PageObjectLogging.log("OpenHub", "Opening "+Hub, true, driver);
+			PageObjectLogging.log("OpenHub", "Open "+Hub, true, driver);
 			return new LifestyleHubPageObject(driver);	
 		}
 		else {

@@ -245,7 +245,7 @@ public class HubBasePageObject extends BasePageObject{
 			WebElement Video3 = List.get(3*n-1);
 			waitForElementByElement(Video3);				
 		}
-		PageObjectLogging.log("VerifyRelatedVideosPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true);
+		PageObjectLogging.log("VerifyRelatedVideosPresence", "Verify that videos are present on the list", true);
 	}
 
 	public void ClickOnRelatedVideo(int i) {
@@ -256,7 +256,7 @@ public class HubBasePageObject extends BasePageObject{
 		waitForElementByElement(Video);
 		CommonFunctions.scrollToElement(Video);
 		clickAndWait(Video);
-		PageObjectLogging.log("ClickOnRelatedVideo", "Click on related video number "+i+"' is present as well", true, driver);		
+		PageObjectLogging.log("ClickOnRelatedVideo", "Click on related video number "+i+" from the current list", true, driver);		
 	}
 
 	/**

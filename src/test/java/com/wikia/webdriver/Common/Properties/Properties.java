@@ -14,7 +14,7 @@ public class Properties {
 
 	private static void setPropertiesManually()
 	{
-		Global.BROWSER = "FF";
+		Global.BROWSER = "CHROME";
 //		Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
 		Global.DOMAIN = "http://mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
