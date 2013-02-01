@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.ToolbarTests;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Core.CommonFunctions;
@@ -34,7 +35,7 @@ public class ShareToolbarTests extends TestTemplate {
 		wiki.verifyTwitterModalURL();
 	}
 
-	@Test(groups = { "ShareToolbar003", "Toolbar" })
+//	@Test(groups = { "ShareToolbar003", "Toolbar" })
 	public void ShareToolbar003_VerifyingFBModal() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
