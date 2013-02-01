@@ -141,7 +141,7 @@ public class HubBasePageObject extends BasePageObject{
 		for (int i = 0; i < 5; i++) {
 			waitForElementByElement(WikiaMosaicSliderThumbRegionImages.get(i));
 		}
-		PageObjectLogging.log("MosaicSliderVerifyHasImages", "Verify that WikiaMosaicSlider has images", true, driver);
+		PageObjectLogging.log("MosaicSliderVerifyHasImages", "Verify that WikiaMosaicSlider has images", true);
 	}
 	
 	/**
@@ -219,7 +219,7 @@ public class HubBasePageObject extends BasePageObject{
 		List<WebElement> NewsTabs = driver.findElements(NewsTabsList);
 		WebElement NewsTab = NewsTabs.get(n-1);
 		waitForElementByElement(NewsTab);
-		PageObjectLogging.log("VerifyNewsTabsPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true, driver);		
+		PageObjectLogging.log("VerifyNewsTabsPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true);		
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class HubBasePageObject extends BasePageObject{
 			WebElement Video3 = List.get(3*n-1);
 			waitForElementByElement(Video3);				
 		}
-		PageObjectLogging.log("VerifyRelatedVideosPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true, driver);
+		PageObjectLogging.log("VerifyRelatedVideosPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true);
 	}
 
 	public void ClickOnRelatedVideo(int i) {
@@ -266,7 +266,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */
 	public void VerifyVideoPlayerAppeared() {
 		waitForElementByElement(VideoPlayer);
-		PageObjectLogging.log("VerifyVideoPlayerAppeared", "Verify that video player appeared", true, driver);		
+		PageObjectLogging.log("VerifyVideoPlayerAppeared", "Verify that video player appeared", true);		
 	}
 
 	/**
@@ -286,7 +286,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */
 	public void ClickSuggestAVideo() {
 		waitForElementByElement(suggestVideoButton);
-		CommonFunctions.scrollToElement(suggestVideoButton);
+//		CommonFunctions.scrollToElement(suggestVideoButton); //scroll is done when clickandwait
 		waitForElementClickableByElement(suggestVideoButton);	
 		clickAndWait(suggestVideoButton);
 		PageObjectLogging.log("ClickSuggestAVideo", "Click on a suggest video button", true, driver);		
@@ -312,7 +312,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */
 	public void VerifySuggestAVideoOrArticleModalAppeared() {
 		waitForElementByElement(suggestVideoOrArticleModal);
-		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalAppeared", "Verify that suggest a video modal appeared", true, driver);		
+		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalAppeared", "Verify that suggest a video modal appeared", true);		
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void VerifySuggestAVideoOrArticleModalTopic(String topic) {
 		waitForElementByElement(suggestVideoOrArticleModalTopic);
 		waitForTextToBePresentInElementByElement(suggestVideoOrArticleModalTopic, topic);
-		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalTopic", "Verify that suggest a video or an article modal has topic: "+topic, true, driver);		
+		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalTopic", "Verify that suggest a video or an article modal has topic: "+topic, true);		
 	}
 	
 	/**
@@ -367,7 +367,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void VerifySuggestVideoOrArticleButtonNotClickable() {
 		waitForElementByElement(submitButton);
 		waitForElementNotClickableByElement(submitButton);
-		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonNotClickable", "Verify that 'Suggest Video' or 'Article' submit button button is disabled", true, driver);		
+		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonNotClickable", "Verify that 'Suggest Video' or 'Article' submit button button is disabled", true);		
 	}
 	
 	/**
@@ -378,7 +378,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void VerifySuggestVideoOrArticleButtonClickable() {
 		waitForElementByElement(submitButton);
 		waitForElementClickableByElement(submitButton);
-		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonClickable", "Verify that Suggest Video or Article submit button is enabled", true, driver);		
+		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonClickable", "Verify that Suggest Video or Article submit button is enabled", true);		
 	}
 
 	/**
@@ -433,11 +433,11 @@ public class HubBasePageObject extends BasePageObject{
 	public void verifyFromModuleHasImages() {
 		List<WebElement> List = driver.findElements(FromCommunityImagesList);
 		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyFromModuleHasImages", "Checking image number "+(i+1), true, driver);
+			PageObjectLogging.log("verifyFromModuleHasImages", "Checking image number "+(i+1), true);
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyFromModuleHasImages", "Verify that from the community module has images", true, driver);		
+		PageObjectLogging.log("verifyFromModuleHasImages", "Verify that from the community module has images", true);		
 	}
 	
 	/**
@@ -448,11 +448,11 @@ public class HubBasePageObject extends BasePageObject{
 	public void verifyFromModuleHasHeadline() {
 		List<WebElement> List = driver.findElements(FromCommunityHeadlinesList);
 		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyFromModuleHasHeadline", "Checking headline number "+(i+1), true, driver);
+			PageObjectLogging.log("verifyFromModuleHasHeadline", "Checking headline number "+(i+1), true);
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyFromModuleHasHeadline", "Verify that from the community module has headline", true, driver);		
+		PageObjectLogging.log("verifyFromModuleHasHeadline", "Verify that from the community module has headline", true);		
 	}
 	
 	/**
@@ -463,11 +463,11 @@ public class HubBasePageObject extends BasePageObject{
 	public void verifyFromModuleHasUserAndWikiField() {
 		List<WebElement> List = driver.findElements(FromCommunityWikinameAndUsernameFieldsList);
 		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyFromModuleHasUserAndWikiField", "Checking field number "+(i+1), true, driver);
+			PageObjectLogging.log("verifyFromModuleHasUserAndWikiField", "Checking field number "+(i+1), true);
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyFromModuleHasUserAndWikiField", "Verify that from the community module has username field", true, driver);
+		PageObjectLogging.log("verifyFromModuleHasUserAndWikiField", "Verify that from the community module has username field", true);
 	}
 
 	/**
@@ -478,11 +478,11 @@ public class HubBasePageObject extends BasePageObject{
 	public void verifyFromModuleHasQuatation() {
 		List<WebElement> List = driver.findElements(FromCommunityQuatationsList);
 		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyFromModuleHasQuatation", "Checking quotation number "+(i+1), true, driver);
+			PageObjectLogging.log("verifyFromModuleHasQuatation", "Checking quotation number "+(i+1), true);
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyFromModuleHasQuatation", "Verify that from the community module has a quatation", true, driver);		
+		PageObjectLogging.log("verifyFromModuleHasQuatation", "Verify that from the community module has a quatation", true);		
 	}
 
 	/**
@@ -492,7 +492,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyPulseModuleAppears() {
 		waitForElementByElement(pulseModule);		
-		PageObjectLogging.log("verifyPulseModuleAppears", "Verify that Pulse module appears", true, driver);
+		PageObjectLogging.log("verifyPulseModuleAppears", "Verify that Pulse module appears", true);
 	}
 	
 	/**
@@ -502,7 +502,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyTopWikisModuleAppears() {
 		waitForElementByElement(topWikisModule);		
-		PageObjectLogging.log("verifyTopWikisModuleAppears", "Verify that top wikis module appears", true, driver);
+		PageObjectLogging.log("verifyTopWikisModuleAppears", "Verify that top wikis module appears", true);
 	}
 	
 	
@@ -513,7 +513,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyFacebookButtonAppears() {
 		waitForElementByElement(FacebookButton);		
-		PageObjectLogging.log("verifyFacebookButtonAppears", "Verify that facebook button is displayed", true, driver);
+		PageObjectLogging.log("verifyFacebookButtonAppears", "Verify that facebook button is displayed", true);
 	}
 	
 	/**
@@ -523,7 +523,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyTwitterButtonAppears() {
 		waitForElementByElement(TwitterButton);		
-		PageObjectLogging.log("verifyTwitterButtonAppears", "Verify that twitter button is displayed", true, driver);
+		PageObjectLogging.log("verifyTwitterButtonAppears", "Verify that twitter button is displayed", true);
 	}
 	
 	/**
@@ -533,7 +533,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyGoogleButtonAppears() {
 		waitForElementByElement(GoogleButton);		
-		PageObjectLogging.log("verifyGoogleButtonAppears", "Verify that google button is displayed", true, driver);
+		PageObjectLogging.log("verifyGoogleButtonAppears", "Verify that google button is displayed", true);
 	}
 	
 	/**
@@ -543,7 +543,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyFacebookButtonIsClickable() {
 		waitForElementClickableByElement(FacebookButton);		
-		PageObjectLogging.log("verifyFacebookButtonIsClickable", "verify that facebook button is clickable", true, driver);
+		PageObjectLogging.log("verifyFacebookButtonIsClickable", "verify that facebook button is clickable", true);
 	}
 	
 	/**
@@ -553,7 +553,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyTwitterButtonIsClickable() {
 		waitForElementClickableByElement(TwitterButton);		
-		PageObjectLogging.log("verifyTwitterButtonIsClickable", "verify that twitter button is clickable", true, driver);
+		PageObjectLogging.log("verifyTwitterButtonIsClickable", "verify that twitter button is clickable", true);
 	}
 	
 	/**
@@ -563,7 +563,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */	
 	public void verifyGoogleButtonIsClickable() {
 		waitForElementClickableByElement(GoogleButton);		
-		PageObjectLogging.log("verifyGoogleButtonIsClickable", "verify that google button is clickable", true, driver);
+		PageObjectLogging.log("verifyGoogleButtonIsClickable", "verify that google button is clickable", true);
 	}
 	
 	
@@ -575,11 +575,11 @@ public class HubBasePageObject extends BasePageObject{
 	public void verifyStatisticsAreDisplayed() {
 		List<WebElement> List = driver.findElements(PulseStatisticsList);
 		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyStatisticsAreDisplayed", "Checking statistics box number "+(i+1), true, driver);
+			PageObjectLogging.log("verifyStatisticsAreDisplayed", "Checking statistics box number "+(i+1), true);
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyStatisticsAreDisplayed", "verify that statistics are displayed", true, driver);
+		PageObjectLogging.log("verifyStatisticsAreDisplayed", "verify that statistics are displayed", true);
 	}
 	
 	/**
@@ -590,11 +590,11 @@ public class HubBasePageObject extends BasePageObject{
 	public void verifyWikisAreListedInTopWikisModule() {
 		List<WebElement> List = driver.findElements(topWikissList);
 		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyWikisAreListedInTopWikisModule", "Checking  top wiki number "+(i+1), true, driver);
+			PageObjectLogging.log("verifyWikisAreListedInTopWikisModule", "Checking  top wiki number "+(i+1), true);
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyWikisAreListedInTopWikisModule", "verify that wikis are listed in 'Top Wikis' module", true, driver);
+		PageObjectLogging.log("verifyWikisAreListedInTopWikisModule", "verify that wikis are listed in 'Top Wikis' module", true);
 	}	
 	
 	/**
@@ -608,12 +608,12 @@ public class HubBasePageObject extends BasePageObject{
 
 	public void verifyVideoPlayerDisappeared() {
 		waitForElementNotVisibleByElement(VideoPlayer);
-		PageObjectLogging.log("verifyVideoPlayerDisappeared", "Verify that video player disppeared", true, driver);				
+		PageObjectLogging.log("verifyVideoPlayerDisappeared", "Verify that video player disppeared", true);				
 	}
 
 	public void verifySuggestAVideoOrArticleModalDisappeared() {
 		waitForElementNotVisibleByElement(suggestVideoOrArticleModal);
-		PageObjectLogging.log("verifySuggestAVideoOrArticleModalDisappeared", "Verify that video 'suggest video or article' modal disppeared", true, driver);				
+		PageObjectLogging.log("verifySuggestAVideoOrArticleModalDisappeared", "Verify that video 'suggest video or article' modal disppeared", true);				
 	}
 }
 

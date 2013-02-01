@@ -54,7 +54,6 @@ public class HubsTests extends TestTemplate {
 		Hub.MosaicSliderHoverOverImage(1);
 		CurrentLargeImageDescription = Hub
 				.MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription(CurrentLargeImageDescription);
-		home = Hub.BackToHomePage();
 	}
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests002", "Hubs" })
@@ -71,9 +70,6 @@ public class HubsTests extends TestTemplate {
 		Hub.VerifyNewsTabsPresence(3);
 		Hub.ClickOnNewsTab(2);
 		Hub.VerifyNewsTabsPresence(2);
-		Hub.ClickOnNewsTab(1);
-		Hub.VerifyNewsTabsPresence(1);
-		home = Hub.BackToHomePage();
 	}
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests003", "Hubs", "new" })

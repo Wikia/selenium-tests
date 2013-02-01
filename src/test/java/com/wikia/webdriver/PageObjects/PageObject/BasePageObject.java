@@ -214,11 +214,11 @@ public class BasePageObject{
 		String currentURL = driver.getCurrentUrl();
 		if (currentURL.equals(GivenURL))
 		{
-			PageObjectLogging.log("verifyURL", "Given URL matches actual URL", true, driver);
+			PageObjectLogging.log("verifyURL", "Given URL matches actual URL", true);
 			return true;
 		}
 		else {
-			PageObjectLogging.log("verifyURL", "Given URL: "+GivenURL+", does not match actual URL: "+currentURL, false, driver);
+			PageObjectLogging.log("verifyURL", "Given URL: "+GivenURL+", does not match actual URL: "+currentURL, false);
 			return false;
 		}
 		
@@ -1186,7 +1186,7 @@ public class BasePageObject{
 	 */	
 	public void verifyWikiaSearchFieldIsDisplayed() {
 		waitForElementByElement(wikiaSearch_searchForm);
-		PageObjectLogging.log("verifyWikiaSearchFieldIsDisplayed", "verify that wikia search field is displayed", true, driver);
+		PageObjectLogging.log("verifyWikiaSearchFieldIsDisplayed", "verify that wikia search field is displayed", true);
 	}
 	
 	public String getTimeStamp()
