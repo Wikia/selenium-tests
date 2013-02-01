@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 //http://code.google.com/p/selenium/source/browse/trunk/java/client/src/org/openqa/selenium/support/ui/ExpectedConditions.java
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -287,13 +288,16 @@ public class CommonExpectedConditions {
 		    return new ExpectedCondition<Boolean>() {
 		      public Boolean apply(WebDriver driver) {
 		        try {
-		          return !(element.isDisplayed());
+		        	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);	
+		        	Boolean isDisplayed = element.isDisplayed();
+		        	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		          return !isDisplayed;
 		        }
 		        catch (StaleElementReferenceException e) 
 		        {
 		          // Returns true because stale element reference implies that element
 		          // is no longer visible.
-		          return true;
+		            return true;
 		        }
 		        catch (NoSuchElementException e)
 		        {
