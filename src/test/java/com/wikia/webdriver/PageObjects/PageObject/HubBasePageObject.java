@@ -86,13 +86,15 @@ public class HubBasePageObject extends BasePageObject{
 		PageObjectLogging.log("ClickOnNewsTab", "Click on news tab number "+TabNumber+".", true, driver);
 
 	}
+
 	public void RelatedVideosScrollLeft() {
 		waitForElementClickableByElement(RelatedVideosScrollLeft);
 		clickAndWait(RelatedVideosScrollLeft);
 		--RVmoduleCurrentVideosSet;
-		PageObjectLogging.log("RelatedVideosScrollLeft", "RV module: scroll left", true, driver);
-		}
-	
+		PageObjectLogging.log("RelatedVideosScrollLeft",
+				"RV module: scroll left", true, driver);
+	}
+
 	public void RelatedVideosScrollRight() {
 		waitForElementClickableByElement(RelatedVideosScrollRight);
 		clickAndWait(RelatedVideosScrollRight);
@@ -129,9 +131,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */
 	public void SearchButtonClick() {
 		clickAndWait(SearchButton);
-		PageObjectLogging.log("SearchButtonClick", "Left click on the WikiaSearch button", true, driver);
-		
-		
+		PageObjectLogging.log("SearchButtonClick", "Left click on the WikiaSearch button", true, driver);				
 	}
 	
 	public void MosaicSliderVerifyHasImages() {
@@ -153,13 +153,8 @@ public class HubBasePageObject extends BasePageObject{
 	 * @param  URL  Specifies what URL you expect as 100% sure result of searching
 	 */
 	protected void SearchResultsVerifyFoundURL(String URL) {
-		
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By
-					.cssSelector("li.result a[href='"+URL+"']")));
-			PageObjectLogging.log("SearchResultsVerifyFoundURL", "Verify if " + URL
-					+ " URL is one of found the results", true, driver);
-
-		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.result a[href='" + URL + "']")));
+		PageObjectLogging.log("SearchResultsVerifyFoundURL", "Verify if " + URL+ " URL is one of found the results", true, driver);
 	}
 
 	/**
@@ -179,8 +174,7 @@ public class HubBasePageObject extends BasePageObject{
 //		Point ImageLocation = WikiaMosaicSliderThumbRegionImages.get(n-1).getLocation();
 //		CommonFunctions.MoveCursorToElement(ImageLocation);
 		mouseOver("ul.wikia-mosaic-thumb-region li:nth-child("+n+")");
-		PageObjectLogging.log("MosaicSliderHoverOverImage", "MosaicSlider: Hover over image number "+n, true, driver);
-		
+		PageObjectLogging.log("MosaicSliderHoverOverImage", "MosaicSlider: Hover over image number "+n, true, driver);		
 	}
 
 	/**
@@ -225,8 +219,7 @@ public class HubBasePageObject extends BasePageObject{
 		List<WebElement> NewsTabs = driver.findElements(NewsTabsList);
 		WebElement NewsTab = NewsTabs.get(n-1);
 		waitForElementByElement(NewsTab);
-		PageObjectLogging.log("VerifyNewsTabsPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true, driver);
-		
+		PageObjectLogging.log("VerifyNewsTabsPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true, driver);		
 	}
 
 	/**
@@ -263,8 +256,7 @@ public class HubBasePageObject extends BasePageObject{
 		waitForElementByElement(Video);
 		CommonFunctions.scrollToElement(Video);
 		clickAndWait(Video);
-		PageObjectLogging.log("ClickOnRelatedVideo", "Click on related video number "+i+"' is present as well", true, driver);
-		
+		PageObjectLogging.log("ClickOnRelatedVideo", "Click on related video number "+i+"' is present as well", true, driver);		
 	}
 
 	/**
@@ -274,8 +266,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */
 	public void VerifyVideoPlayerAppeared() {
 		waitForElementByElement(VideoPlayer);
-		PageObjectLogging.log("VerifyVideoPlayerAppeared", "Verify that video player appeared", true, driver);
-		
+		PageObjectLogging.log("VerifyVideoPlayerAppeared", "Verify that video player appeared", true, driver);		
 	}
 
 	/**
@@ -298,8 +289,7 @@ public class HubBasePageObject extends BasePageObject{
 		CommonFunctions.scrollToElement(suggestVideoButton);
 		waitForElementClickableByElement(suggestVideoButton);	
 		clickAndWait(suggestVideoButton);
-		PageObjectLogging.log("ClickSuggestAVideo", "Click on a suggest video button", true, driver);
-		
+		PageObjectLogging.log("ClickSuggestAVideo", "Click on a suggest video button", true, driver);		
 	}
 	
 	/**
@@ -312,8 +302,7 @@ public class HubBasePageObject extends BasePageObject{
 		CommonFunctions.scrollToElement(suggestArticleButton);
 		waitForElementClickableByElement(suggestArticleButton);	
 		clickAndWait(suggestArticleButton);
-		PageObjectLogging.log("ClickSuggestAnArticle", "Click on suggest an article button", true, driver);
-		
+		PageObjectLogging.log("ClickSuggestAnArticle", "Click on suggest an article button", true, driver);		
 	}
 
 	/**
@@ -323,8 +312,7 @@ public class HubBasePageObject extends BasePageObject{
 	 */
 	public void VerifySuggestAVideoOrArticleModalAppeared() {
 		waitForElementByElement(suggestVideoOrArticleModal);
-		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalAppeared", "Verify that suggest a video modal appeared", true, driver);
-		
+		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalAppeared", "Verify that suggest a video modal appeared", true, driver);		
 	}
 
 	/**
@@ -335,8 +323,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void VerifySuggestAVideoOrArticleModalTopic(String topic) {
 		waitForElementByElement(suggestVideoOrArticleModalTopic);
 		waitForTextToBePresentInElementByElement(suggestVideoOrArticleModalTopic, topic);
-		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalTopic", "Verify that suggest a video or an article modal has topic: "+topic, true, driver);
-		
+		PageObjectLogging.log("VerifySuggestAVideoOrArticleModalTopic", "Verify that suggest a video or an article modal has topic: "+topic, true, driver);		
 	}
 	
 	/**
@@ -380,8 +367,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void VerifySuggestVideoOrArticleButtonNotClickable() {
 		waitForElementByElement(submitButton);
 		waitForElementNotClickableByElement(submitButton);
-		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonNotClickable", "Verify that 'Suggest Video' or 'Article' submit button button is disabled", true, driver);
-		
+		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonNotClickable", "Verify that 'Suggest Video' or 'Article' submit button button is disabled", true, driver);		
 	}
 	
 	/**
@@ -392,8 +378,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void VerifySuggestVideoOrArticleButtonClickable() {
 		waitForElementByElement(submitButton);
 		waitForElementClickableByElement(submitButton);
-		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonClickable", "Verify that Suggest Video or Article submit button is enabled", true, driver);
-		
+		PageObjectLogging.log("VerifySuggestVideoOrArticleButtonClickable", "Verify that Suggest Video or Article submit button is enabled", true, driver);		
 	}
 
 	/**
@@ -404,8 +389,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void SuggestVideoTypeIntoWhatVideoField(String text) {
 		waitForElementByElement(suggestVideoWhatInput);
 		suggestVideoWhatInput.sendKeys(text);
-		PageObjectLogging.log("SuggestVideoTypeIntoWhatVideoField", "Type '"+text+"' into 'What Video' field on 'Suggest Video Modal'", true, driver);
-		
+		PageObjectLogging.log("SuggestVideoTypeIntoWhatVideoField", "Type '"+text+"' into 'What Video' field on 'Suggest Video Modal'", true, driver);		
 	}
 	
 	/**
@@ -416,8 +400,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void SuggestArticleTypeIntoWhatVideoField(String text) {
 		waitForElementByElement(suggestArticleWhatInput);
 		suggestArticleWhatInput.sendKeys(text);
-		PageObjectLogging.log("SuggestArticleTypeIntoWhatVideoField", "Type '"+text+"' into 'What Video' field on 'Suggest Article Modal'", true, driver);
-		
+		PageObjectLogging.log("SuggestArticleTypeIntoWhatVideoField", "Type '"+text+"' into 'What Video' field on 'Suggest Article Modal'", true, driver);		
 	}
 	
 	/**
@@ -428,8 +411,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void SuggestVideoTypeIntoWhichWikiField(String text) {
 		waitForElementByElement(suggestVideoWhichWikiInput);
 		suggestVideoWhichWikiInput.sendKeys(text);
-		PageObjectLogging.log("SuggestVideoTypeIntoWhatVideoField", "Type '"+text+"' into 'Which Wiki' field on 'Suggest Video Modal'", true, driver);
-		
+		PageObjectLogging.log("SuggestVideoTypeIntoWhatVideoField", "Type '"+text+"' into 'Which Wiki' field on 'Suggest Video Modal'", true, driver);		
 	}
 	
 	/**
@@ -440,8 +422,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void SuggestArticleTypeIntoWhyCoolField(String text) {
 		waitForElementByElement(suggestArticleWhyCooliInput);
 		suggestArticleWhyCooliInput.sendKeys(text);
-		PageObjectLogging.log("SuggestArticleTypeIntoWhyCoolField", "Type '"+text+"' into 'Why cool' field on 'Suggest Video Modal'", true, driver);
-		
+		PageObjectLogging.log("SuggestArticleTypeIntoWhyCoolField", "Type '"+text+"' into 'Why cool' field on 'Suggest Video Modal'", true, driver);		
 	}
 
 	/**
@@ -456,9 +437,9 @@ public class HubBasePageObject extends BasePageObject{
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyFromModuleHasImages", "Verify that from the community module has images", true, driver);
-		
+		PageObjectLogging.log("verifyFromModuleHasImages", "Verify that from the community module has images", true, driver);		
 	}
+	
 	/**
 	 * Verify that from the communitz module has headline
 	 * 
@@ -471,9 +452,9 @@ public class HubBasePageObject extends BasePageObject{
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyFromModuleHasHeadline", "Verify that from the community module has headline", true, driver);
-		
+		PageObjectLogging.log("verifyFromModuleHasHeadline", "Verify that from the community module has headline", true, driver);		
 	}
+	
 	/**
 	 * Verify that from the community module has username field
 	 * 
@@ -501,8 +482,7 @@ public class HubBasePageObject extends BasePageObject{
 			CommonFunctions.scrollToElement(List.get(i));
 			waitForElementByElement(List.get(i));		
 		}
-		PageObjectLogging.log("verifyFromModuleHasQuatation", "Verify that from the community module has a quatation", true, driver);
-		
+		PageObjectLogging.log("verifyFromModuleHasQuatation", "Verify that from the community module has a quatation", true, driver);		
 	}
 
 	/**
@@ -615,9 +595,7 @@ public class HubBasePageObject extends BasePageObject{
 			waitForElementByElement(List.get(i));		
 		}
 		PageObjectLogging.log("verifyWikisAreListedInTopWikisModule", "verify that wikis are listed in 'Top Wikis' module", true, driver);
-	}
-	
-
+	}	
 	
 	/**
 	 * 
@@ -625,8 +603,18 @@ public class HubBasePageObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */	
 	public void templateMethod() {
-		PageObjectLogging.log("", "", true, driver);
-	
+		PageObjectLogging.log("", "", true, driver);	
+	}
+
+	public void verifyVideoPlayerDisappeared() {
+		waitForElementNotVisibleByElement(VideoPlayer);
+		PageObjectLogging.log("verifyVideoPlayerDisappeared", "Verify that video player disppeared", true, driver);				
+	}
+
+	public void verifySuggestAVideoOrArticleModalDisappeared() {
+		System.out.println(suggestVideoOrArticleModal.isDisplayed());
+		waitForElementNotVisibleByElement(suggestVideoOrArticleModal);
+		PageObjectLogging.log("verifySuggestAVideoOrArticleModalDisappeared", "Verify that video 'suggest video or article' modal disppeared", true, driver);				
 	}
 }
 
