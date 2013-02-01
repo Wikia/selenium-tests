@@ -612,7 +612,6 @@ public class HubBasePageObject extends BasePageObject{
 	}
 
 	public void verifySuggestAVideoOrArticleModalDisappeared() {
-		System.out.println(suggestVideoOrArticleModal.isDisplayed());
 		waitForElementNotVisibleByElement(suggestVideoOrArticleModal);
 		PageObjectLogging.log("verifySuggestAVideoOrArticleModalDisappeared", "Verify that video 'suggest video or article' modal disppeared", true, driver);				
 	}
