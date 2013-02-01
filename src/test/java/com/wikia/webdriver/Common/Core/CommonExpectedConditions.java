@@ -262,7 +262,10 @@ public class CommonExpectedConditions {
 		    return new ExpectedCondition<Boolean>() {
 		      public Boolean apply(WebDriver driver) {
 		        try {
-		          return !(findElement(locator, driver).isDisplayed());
+		        	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);	
+		        	Boolean isDisplayed = findElement(locator, driver).isDisplayed();
+		        	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		          return !isDisplayed;
 		        }
 		        catch (StaleElementReferenceException e) 
 		        {

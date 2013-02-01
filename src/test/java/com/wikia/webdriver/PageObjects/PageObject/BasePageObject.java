@@ -981,7 +981,7 @@ public class BasePageObject{
 	 */
 	public void customizeToolbar_VerifyToolOnToolbarList(String Tool) {
 		waitForElementByCss("ul.options-list li[data-caption='"+Tool+"']");
-		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbarList", "Check if "+Tool+" appears on list", true, driver);
+		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbarList", "Check if "+Tool+" appears on list", true);
 	
 	}
 	
@@ -1119,7 +1119,7 @@ public class BasePageObject{
 	public void customizeToolbar_VerifyToolOnToolbar(String ToolName)
 	{
 		waitForElementByXPath("//ul[@class='tools']//a[contains(text(), '"+ToolName+"')]");
-		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbar","Verify that "+ToolName+" appears in Toolbar.", true, driver);
+		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbar","Verify that "+ToolName+" appears in Toolbar.", true);
 	}
 	
 	/**
@@ -1176,7 +1176,7 @@ public class BasePageObject{
 	{
 		By tool = By.xpath("//ul[@class='tools']//a[contains(text(), '"+ToolName+"')]");
 		waitForElementNotVisibleByBy(tool);
-		PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbar","Verify that "+ToolName+" tool does not appear in Toolbar.", true, driver);
+		PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbar","Verify that "+ToolName+" tool does not appear in Toolbar.", true);
 	}
 	
 	/**
