@@ -1306,12 +1306,13 @@ public class BasePageObject{
 		PageObjectLogging.log("verifyEmailButtonVisibility", "Verify that the Email Button Is Present", true, driver);
 	}
 	
-	public void clickTweetButton() {
+	public void navigteTweetButtonUrl() {
 		
 		waitForElementByElement(twitterIframe);
 		driver.switchTo().frame(twitterIframe);
-		twitterButton.click();
+		String href = twitterButton.getAttribute("href");
 		driver.switchTo().defaultContent();
+		getUrl(href);
 		PageObjectLogging.log("clickTweetButton", "Twitter button was clicked", true, driver);
 		
 	}
@@ -1333,12 +1334,7 @@ public class BasePageObject{
 	}
 	
 	public void verifyTwitterModalURL() {
-
-		CommonFunctions.waitForWindow("", "");
-		Object[] windows = driver.getWindowHandles().toArray();
-		driver.switchTo().window(windows[1].toString());
 		Assertion.assertStringContains(getCurrentUrl(), "twitter.com");
-		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("VerifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true, driver);
 	}
 	
