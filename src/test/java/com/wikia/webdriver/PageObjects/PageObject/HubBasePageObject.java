@@ -186,7 +186,7 @@ public class HubBasePageObject extends BasePageObject{
 		WebElement MosaicSliderLargeImageDesc = driver.findElement(MosaicSliderLargeImageDescription);
 		waitForElementByElement(MosaicSliderLargeImageDesc);
 		String description = MosaicSliderLargeImageDesc.getText();
-		PageObjectLogging.log("MosaicSliderGetCurrentLargeImageDescription", "description of current LargeImage on Mosaic Slider is: <b>"+ description +"</b>", true, driver);
+		PageObjectLogging.log("MosaicSliderGetCurrentLargeImageDescription", "description of current LargeImage on Mosaic Slider is: <b>"+ description +"</b>", true);
 		return description;
 	}
 	
@@ -200,10 +200,10 @@ public class HubBasePageObject extends BasePageObject{
 			String PreviousLargeImageDescription) {
 		String CurrentDescription = MosaicSliderGetCurrentLargeImageDescription();
 		if (CurrentDescription.equals(PreviousLargeImageDescription)) {
-			PageObjectLogging.log("MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription", "Large Image hasn't changed", false, driver);
+			PageObjectLogging.log("MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription", "Large Image hasn't changed", false);
 			
 		}
-		PageObjectLogging.log("MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription", "Verify that Large Image has changed", true, driver);
+		PageObjectLogging.log("MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription", "Verify that Large Image has changed", true);
 		return CurrentDescription;
 	}
 
