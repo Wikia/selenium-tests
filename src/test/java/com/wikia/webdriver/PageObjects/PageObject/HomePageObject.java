@@ -20,10 +20,16 @@ public class HomePageObject extends BasePageObject{
 	@FindBy(css="header.wikiahomepage-header a.button") 
 	private WebElement startWikiButton;
 	@FindBy(css="section.grid-2.videogames a img") 
+	private WebElement OpenVideoGamesHub2;
+	@FindBy(css="li.Video_Games > a") 
 	private WebElement OpenVideoGamesHub;
 	@FindBy(css="section.grid-2.entertainment a img") 
+	private WebElement OpenEntertainmentHub2;
+	@FindBy(css="li.Entertainment > a") 
 	private WebElement OpenEntertainmentHub;
 	@FindBy(css="section.grid-2.lifestyle a img") 
+	private WebElement OpenLifestyleHub2;
+	@FindBy(css="li.Lifestyle > a") 
 	private WebElement OpenLifestyleHub;
 	@FindBy(css="a.ajaxLogin")
 	private WebElement LoginOverlay;

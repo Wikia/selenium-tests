@@ -33,7 +33,7 @@ public class HubsTests extends TestTemplate {
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_1_.28Mosaic_Slider.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
 	// above
-	public void HubsTest001(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest001_verifyMosaicSliderShowsImagesOnHover(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -61,7 +61,7 @@ public class HubsTests extends TestTemplate {
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_2_.28News_Tabs.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
 	// above
-	public void HubsTest002(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest002_verifyNewsTabsWorkProperly(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -80,7 +80,7 @@ public class HubsTests extends TestTemplate {
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
 	// above
-	public void HubsTest003(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest003_verifyRelatedVideosScrolling(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -100,7 +100,7 @@ public class HubsTests extends TestTemplate {
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
 	// above
-	public void HubsTest004(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest004_verifyRelatedVideosAppearAfterScrolling(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -119,12 +119,13 @@ public class HubsTests extends TestTemplate {
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests005", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
-	public void HubsTest005(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest005_suggestAVideoAndClickCancelToClose(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2);
+//		CommonFunctions.logIn(Properties.userName2, Properties.password2);
 		Hub.ClickSuggestAVideo();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest a Video");
@@ -134,7 +135,7 @@ public class HubsTests extends TestTemplate {
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests006", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
-	public void HubsTest006(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest006_suggestAVideoAndClickXtoClose(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -149,7 +150,7 @@ public class HubsTests extends TestTemplate {
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests007", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
-	public void HubsTest007(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest007_VerifyVideoSuggestionWorksProperly(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -166,7 +167,7 @@ public class HubsTests extends TestTemplate {
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests008", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
-	public void HubsTest008(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest008_verifyFromCommunityModuleHasItsElements(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -179,7 +180,7 @@ public class HubsTests extends TestTemplate {
 	
 	@Test(dataProvider = "provideHub", groups = { "HubsTests009", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
-	public void HubsTest009(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest009_suggestAVideoAndClickCancelToClose(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -194,7 +195,7 @@ public class HubsTests extends TestTemplate {
 	
 	@Test(dataProvider = "provideHub", groups = { "HubsTests010", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
-	public void HubsTest010(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest010_suggestAVideoAndClickXtoClose(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -209,7 +210,7 @@ public class HubsTests extends TestTemplate {
 	
 	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
-	public void HubsTest011(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest011_VerifyArticleSuggestionWorksProperly(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -226,7 +227,7 @@ public class HubsTests extends TestTemplate {
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests012", "Hubs" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_5_.28The_Pulse.29_Test_Cases
-	public void HubsTest012(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest012_verifyThePulseModule(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
@@ -246,7 +247,7 @@ public class HubsTests extends TestTemplate {
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_7_.28Top_Wikis.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
 	// above
-	public void HubsTest013(HubBasePageObject Hub, String HubName, String HubURL) {
+	public void HubsTest013_verifyTopWikisModule(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		Hub = home.OpenHub(HubName);
