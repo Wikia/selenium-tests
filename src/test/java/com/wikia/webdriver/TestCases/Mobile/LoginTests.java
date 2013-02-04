@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.Mobile.MobileBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 
 public class LoginTests extends TestTemplate{
 	

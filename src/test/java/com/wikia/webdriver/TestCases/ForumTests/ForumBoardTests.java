@@ -7,10 +7,10 @@ import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumBoardPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumThreadPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
 
 public class ForumBoardTests extends TestTemplate {
 	

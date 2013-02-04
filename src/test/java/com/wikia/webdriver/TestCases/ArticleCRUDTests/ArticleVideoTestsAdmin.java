@@ -9,11 +9,11 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.LightboxPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.FileDetailsPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class ArticleVideoTestsAdmin extends TestTemplate{
 	

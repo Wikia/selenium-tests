@@ -14,7 +14,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 
 public class ArticleRTETest extends TestTemplate{
 	private static final int WIKI_TEXTS_PER_CYCLE = 300;

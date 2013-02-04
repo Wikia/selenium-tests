@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.SignUp.SignUpPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
 
 public class SignUpTests_field_validation extends TestTemplate
 {

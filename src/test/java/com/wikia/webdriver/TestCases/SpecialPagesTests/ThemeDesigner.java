@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.Special.SpecialFollowPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.Special.ThemeDesigner.SpecialThemeDesignerPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFollowPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.ThemeDesigner.SpecialThemeDesignerPageObject;
 
 public class ThemeDesigner extends TestTemplate{
 	

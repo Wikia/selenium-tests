@@ -7,10 +7,10 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.BlogPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateBlogPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class BlogTests extends TestTemplate{
 	
