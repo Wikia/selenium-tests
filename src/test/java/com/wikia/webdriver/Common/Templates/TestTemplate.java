@@ -39,35 +39,6 @@ public class TestTemplate {
 	public void afterSuite()
 	{
 		PageObjectLogging.stopLoggingSuite();
-//		try 
-//		{
-//			if (Global.BROWSER.equals("IE"))
-//			{
-//				String sysArch = System.getProperty("os.arch");
-//				if (sysArch.equals("x86"))
-//				{
-//					Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer_x86.exe");
-//				} 
-//				else
-//				{
-//					Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer_x64.exe");
-//				}							
-//			}
-//			else if (Global.BROWSER.equals("CHROME"))
-//			{
-//				Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
-//			}
-//			else if (Global.BROWSER.equals("FF"))
-//			{
-//				Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
-//			}
-//		}
-//
-//		catch (IOException e) 
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}		
 	}
 
 	
@@ -75,7 +46,6 @@ public class TestTemplate {
 	public void start(Method method)
 	{
 		startBrowser();
-//		CommonFunctions.MoveCursorTo(0, 0);
 		PageObjectLogging.startLoggingMethod(getClass().getSimpleName().toString(), method.getName());
 	}
 	
