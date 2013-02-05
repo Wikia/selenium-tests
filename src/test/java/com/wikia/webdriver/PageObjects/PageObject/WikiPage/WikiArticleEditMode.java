@@ -72,7 +72,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement tableModalOKbutton;
 	@FindBy(css="table.article-table")
 	private WebElement VisualModeTable;
-	@FindBy(css="#csCategoryInput")
+	@FindBy(css="#CategorySelectInput")
 	private WebElement categories_CategoryInputField;
 	@FindBy(css="#csWikitext")
 	private WebElement categories_CategorySourceInputField;
@@ -127,7 +127,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private String publishButtonSelector = "div.neutral.modalToolbar a[id=\"publish\"]";
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 	private String deleteButtonArticleItem = "span.RTEMediaOverlayDelete";
-	private String categories_listOfCategories = "#csItemsContainer li";
+	private String categories_listOfCategories = "li.category";
 
 	public WikiArticleEditMode(WebDriver driver, String Domain,
 			String wikiArticle) {
@@ -847,10 +847,10 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		waitForElementByElement(categories_CategoryInputField);
 		waitForElementClickableByElement(categories_CategoryInputField);
 		clickAndWait(categories_CategoryInputField);
-		jQueryFocus("#csCategoryInput");
+		jQueryFocus("#CategorySelectInput");
 		categories_CategoryInputField.sendKeys(categoryName);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
-		executeScript("var e = jQuery.Event(\"keypress\"); e.keyCode=13; $('#csCategoryInput').trigger(e);");
+		executeScript("var e = jQuery.Event(\"keydown\"); e.which=13; $('#CategorySelectInput').trigger(e);");
 //		categories_CategoryInputField.sendKeys(Keys.ENTER);
 		PageObjectLogging.log("categories_typeCategoryNameEditMode", "category "+categoryName+" typed", true, driver);
 	}

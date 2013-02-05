@@ -46,11 +46,11 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement submitReplyButton;
 	@FindBy(css="table.article-table")
 	private WebElement tableOnWikiaArticle;
-	@FindBy(css="#csAddCategorySwitch a")
+	@FindBy(css="#CategorySelectAdd")
 	private WebElement categories_AddCategoryButton;
-	@FindBy(css="#csCategoryInput")
+	@FindBy(css="#CategorySelectInput")
 	private WebElement categories_CategoryInputField;
-	@FindBy(css="#csSave")
+	@FindBy(css="#CategorySelectSave")
 	private WebElement categories_saveButton;
 	@FindBy(css="textarea#article-comm")
 	private WebElement commentAreaDisabled;
@@ -62,7 +62,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImage;
 	
 	
-	private By categories_listOfCategories = By.cssSelector("#catlinks li a");
+	private By categories_listOfCategories = By.cssSelector(".categories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle img.sprite.play");
 	private By AddVideoRVButton = By.cssSelector("a.addVideo");
@@ -441,7 +441,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void categories_typeCategoryName(String categoryName) {
 		waitForElementByElement(categories_CategoryInputField);
 		categories_CategoryInputField.sendKeys(categoryName);
-		categories_CategoryInputField.sendKeys(Keys.ENTER);
+		executeScript("var e = jQuery.Event(\"keydown\"); e.which=13; $('#CategorySelectInput').trigger(e);");
+//		categories_CategoryInputField.sendKeys(Keys.ENTER);
 		PageObjectLogging.log("categories_clickAddCategory", "type "+categoryName+" to category input field", true, driver);
 		
 	}
