@@ -111,7 +111,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 * TestCase005 Open random wiki page as anonymous user add category from
 	 * suggestions Verify category is added
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_005", "CategoriesTestsAnonymous" })
+//	@Test(groups = { "CategoriesTestsAnonymous_005", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_005_addSuggestedCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
@@ -141,8 +141,8 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		article.openRandomArticle();
 		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.clickOnSourceButton();
-		articleEdit.categories_addToCategorySourceEditMode("[[Category:"+categoryName+"]]");
-		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+categoryName+"]]");
+		articleEdit.categories_addCategoryEditMode(categoryName);
+		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		articleEdit.clickOnVisualButton();
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		article = articleEdit.clickOnPublishButton();
@@ -165,7 +165,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		articleEdit.clickOnSourceButton();
-		articleEdit.categories_verifyCategoryAddedSourceEditMode("[[Category:"+categoryName+"]]");
+		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		article = articleEdit.clickOnPublishButton();
 		article.categories_verifyCategoryPresent(categoryName);
 	}
@@ -173,8 +173,9 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	/*
 	 * TestCase008 Open random wiki page as anonymous user edit it and add
 	 * to category area js popup code: <script> alert("CategoriesTest"); </script>
+	 * obsolete test case after refactoring of categories
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_008", "CategoriesTestsAnonymous" })
+//	@Test(groups = { "CategoriesTestsAnonymous_008", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_008_addJSpopupSourceModeJSprevention() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 //		String JSalert = "<script> alert(\"CategoriesTest\"); </script>";
@@ -193,8 +194,9 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	
 	/*
 	 * TestCase009 verify if typing wrong category in edit source mode is prevented
+	 * obsolete test case after refactoring of categories
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_009", "CategoriesTestsAnonymous" })
+//	@Test(groups = { "CategoriesTestsAnonymous_009", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_009_invalidCategoryInSourceModePrevention() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 //		String JSalertMessage = "Unhandled syntax detected - switching back to visual mode impossible.";
