@@ -117,7 +117,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private By sliderOnArticleEditMode = By.cssSelector("img.image-gallery-slider");
 	private By contextMenuIframeList = By.cssSelector("iframe[aria-label='Context Menu Options']");
 	private By contextMenuOptionsList = By.cssSelector("span.cke_menuitem a");
-	private By categories_listOfCategoriyPrompts = By.cssSelector("#csSuggestContainer div.yui-ac-bd ul li");
+	private By categories_listOfCategoriyPrompts = By.cssSelector("li.ui-menu-item");
 	private String imageArticleIFrame = "img";
 	private String galleryArticleIFrame = "img.image-gallery";
 	private String sliderArticleIFrame = "img.image-gallery-slider";
@@ -957,7 +957,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+" not found on list", false, driver);			
 			return;
 		}
-		List<WebElement> l = driver.findElements(By.cssSelector("li.CSitem span"));
+		List<WebElement> l = driver.findElements(By.cssSelector("li.category span"));
 		int counter = 0;
 		for (WebElement element:l)
 		{
@@ -965,7 +965,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 			{
 				counter = l.indexOf(element);
 				counter+=1;
-				jQueryClick("li.CSitem:nth-child("+counter+") .delete");
+				jQueryClick("li.category:nth-child("+counter+") .delete");
 			}
 		}
 //		clickAndWait(categoryItem);
