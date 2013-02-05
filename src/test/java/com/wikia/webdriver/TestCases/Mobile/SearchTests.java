@@ -3,8 +3,8 @@ package com.wikia.webdriver.TestCases.Mobile;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.Mobile.MobileBasePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.Mobile.MobileSearchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileSearchPageObject;
 
 public class SearchTests extends TestTemplate {
 

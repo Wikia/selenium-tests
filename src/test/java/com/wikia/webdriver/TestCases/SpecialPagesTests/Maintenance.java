@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class Maintenance extends TestTemplate{
 	

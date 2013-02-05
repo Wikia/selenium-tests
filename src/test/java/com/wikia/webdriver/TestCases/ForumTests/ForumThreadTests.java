@@ -6,10 +6,10 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumBoardPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumHistoryPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.ForumPageObject.ForumThreadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumHistoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
 
 /* 
  * StoryQA0128 - Create test cases for forum

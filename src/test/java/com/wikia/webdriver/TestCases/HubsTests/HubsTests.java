@@ -7,11 +7,11 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.HubBasePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.Hubs.EntertainmentHubPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.Hubs.LifestyleHubPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.Hubs.VideoGamesHubPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HubBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.EntertainmentHubPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.LifestyleHubPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.VideoGamesHubPageObject;
 
 public class HubsTests extends TestTemplate {
 

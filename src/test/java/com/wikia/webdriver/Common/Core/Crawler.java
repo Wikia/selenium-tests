@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class Crawler extends WikiBasePageObject {
 	

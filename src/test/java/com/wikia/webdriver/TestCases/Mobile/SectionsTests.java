@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.Mobile;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.Mobile.MobileArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 
 public class SectionsTests extends TestTemplate{
 	

@@ -8,12 +8,12 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.SpecialCreateTopListPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.Top_10_list;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.Top_10_list_EditMode;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiHistoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateTopListPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list_EditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 
 // https://internal.wikia-inc.com/wiki/Top_10_List/QA#Tests_on_Development_environment  - TOP 10 list QA specification
 public class Top_10_list_Tests extends TestTemplate {

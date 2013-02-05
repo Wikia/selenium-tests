@@ -7,11 +7,11 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjects.PageObject.SignUp.AlmostTherePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.SignUp.ConfirmationPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.SignUp.SignUpPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.AlmostTherePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.ConfirmationPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class SignUpTests_account_creation extends TestTemplate
 {	

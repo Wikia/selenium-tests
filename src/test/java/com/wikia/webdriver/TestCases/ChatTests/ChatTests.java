@@ -5,9 +5,9 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate_Two_Drivers;
-import com.wikia.webdriver.PageObjects.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjects.PageObject.ChatPageObject.ChatPageObject;
-import com.wikia.webdriver.PageObjects.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class ChatTests extends TestTemplate_Two_Drivers{
 
