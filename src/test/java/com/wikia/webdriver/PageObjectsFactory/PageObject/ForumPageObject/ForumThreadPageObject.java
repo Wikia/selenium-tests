@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +10,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -48,6 +48,8 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement undoThreadRemoveButton;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> discussionBody;
+	@FindBy(xpath="//div[@class='msg-toolbar']//a[contains(text(), 'Thread moved by')]")
+	private WebElement movedThreadText;
 
 	By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
 	
@@ -176,6 +178,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	}
 
 	public void verifyParentBoard(String forumBoardName) {
+		waitForElementByElement(movedThreadText);
 		waitForElementByBy(parentBoardField);
 		waitForTextToBePresentInElementByBy(parentBoardField, forumBoardName);
 		PageObjectLogging.log("verifyParentBoard", "verify that the parent board of current thread is the following: "+forumBoardName, true);													
