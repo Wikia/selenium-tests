@@ -14,6 +14,7 @@
 			<class name="com.wikia.webdriver.TestCases.HubsTests.HubsTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation"/>
+                        <class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation_monobook"/>
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDTestsAdmin"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDTestsAnonymous"/>
@@ -22,10 +23,13 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleVideoTestsAdmin"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleAnonymousActionsMonoBookTests"/>
+                        <class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleUserActionsMonoBookTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsAnonymous"/>
 			<class name="com.wikia.webdriver.TestCases.Top_10_list_Tests.Top_10_list_Tests"/>
 			<class name="com.wikia.webdriver.TestCases.MessageWallTests.MessageWallTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
+                        <class name="com.wikia.webdriver.TestCases.LoginTests.LoginMonoBookTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.ArticleCommentTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.LoginTests"/>
@@ -33,6 +37,7 @@
 			<class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>
+                        <class name="com.wikia.webdriver.TestCases.BlogTests.BlogMonoBookTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>

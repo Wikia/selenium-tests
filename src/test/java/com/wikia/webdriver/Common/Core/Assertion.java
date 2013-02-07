@@ -97,6 +97,4 @@ public class Assertion extends Assert{
 		List verificationFailures = verificationFailuresMap.get(result);
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}
-
-
 }

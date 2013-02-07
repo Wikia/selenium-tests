@@ -59,4 +59,8 @@ public class PageContent {
 	public static String forumDescriptionEditPrefix = "Duis quam ante, fringilla at cursus tristique edit ";
 	public static String forumMessage = "QAforumMessage";
 	public static String forumBoard = "QAboardForMoveThreadTest";
+
+        //Messages
+        public static String articleDeletedMessage = "This page has been deleted.";
+        public static String createNewBlogPostMessage = "Create a new blog post";
 }

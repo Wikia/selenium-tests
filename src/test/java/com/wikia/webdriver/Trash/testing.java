@@ -5,10 +5,13 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class testing extends TestTemplate
+public class testing
 {
-	
+
 ////	@Test(groups = {"trash"})
 ////	public void CreateNewWiki()
 ////	{
@@ -138,7 +141,7 @@ public class testing extends TestTemplate
 //		b.waitForElementByCss("a img.avatar");
 //	}
 	
-	@Test(groups={"aaa"})
+//	@Test(groups={"aaa"})
 	public void numbers()
 	{
 //		WikiArticleEditMode e = new WikiArticleEditMode(driver, Global.DOMAIN, "");
@@ -160,6 +163,12 @@ public class testing extends TestTemplate
 //		driver.get("http://mediawiki119.wikia.com/wiki/Formatting");
 //		JavascriptExecutor js = (JavascriptExecutor) driver;
 //		Object aaa = js.executeScript("return document.getElementById('WikiaPageHeader')");
-	}
+        @Test(groups={"vv"})
+        public void raises() {
+            WebDriver driver = new FirefoxDriver();
+            driver.get("http://wikia.com");
+                driver.findElement(By.cssSelector(".bognix"));
+        }
+}
 	
 	

@@ -597,7 +597,6 @@ public class BasePageObject{
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text)
 	{
 			wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));								
-		
 	}
 	
 	public void waitForTextToBePresentInElementByBy(By by, String text)
@@ -1185,4 +1184,4 @@ public class BasePageObject{
 		}
 		PageObjectLogging.log("notifications_clickMarkAllAsRead", (allWikis ? "all wikis" : "only one wiki")+" marked as read", true, driver);				
 	}
-} 
+}

@@ -23,7 +23,24 @@ public class URLsContent {
 	public static String EntertainmentHub = "http://www.wikia.com/Entertainment";
 	public static String LifestyleHub = "http://www.wikia.com/Lifestyle";
 
-	public static String buildUrl(String url, String parameter){
+        //Special Urls - links to special pages
+        public static final String specialUserLogin = "wiki/Special:UserLogin";
+        public static final String specialUserSignup = "wiki/Special:UserSignup";
+        public static final String specialAddBlogPost = "wiki/Special:CreateBlogPage";
+
+        //Extra switches - appear after ? in link
+        public static final String noexternals = "?noexternals=1";
+
+        //Extra sites - useful for monobook
+        //replace %user% with username
+        public static final String userBlog = "User_blog:%user%";
+        //replace %title% with new article name
+        public static final String addArticle = "index.php?title=%title%&action=edit";
+        //replace %user% with username
+        public static final String userPrefix = "User:%user%";
+
+
+        public static String buildUrl(String url, String parameter){
 		String temp;
 		if (url.contains("?"))
 		{
@@ -37,5 +54,5 @@ public class URLsContent {
 			return temp;
 		}
 	}
-	
+
 }

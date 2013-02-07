@@ -138,9 +138,9 @@ public class SignUpPageObject extends BasePageObject {
 			m.selectByVisibleText(month);
 			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);			
 		}
-		catch(Exception e)
+		catch(InterruptedException e)
 		{
-			
+                    e.printStackTrace();
 		}
 	}
 	

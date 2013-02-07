@@ -53,11 +53,11 @@ public class TestTemplate_Two_Drivers {
 			}
 			else if (Global.BROWSER.equals("CHROME"))
 			{
-				Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
+				//Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
 			}
 			else if (Global.BROWSER.equals("FF"))
 			{
-				Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
+				//Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
 			}
 		}
 
