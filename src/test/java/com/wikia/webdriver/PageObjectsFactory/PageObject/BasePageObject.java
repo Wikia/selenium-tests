@@ -405,23 +405,7 @@ public class BasePageObject{
 	public WebElement getParentElement(WebElement childElement) {
 		return childElement.findElement(By.xpath(".."));
 	}
-	
-//	public void clickRobot(WebElement pageElem)
-//	{
-////		try
-////		{
-//			Point p = pageElem.getLocation();
-////			PageObjectLogging.log(p.toString(),p.toString(),p.toString());
-//			CommonFunctions.MoveCursorToElement(p);
-//			CommonFunctions.ClickElement();
-////		}
-////		catch(Exception e)
-////		{
-////			PageObjectLogging.log("clickRobot", e.toString(), false);			
-////		}
-//	}
-	
-	
+
 	public void executeScript(String script)
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -485,15 +469,8 @@ public class BasePageObject{
 	 */
 	public WebElement waitForElementByBy(By by)
 	{
-//		try
-//		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(by));		
 			return driver.findElement(by);
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("clickActions", e.toString(), false);			
-//		}
 	}
 	
 	/**
@@ -504,15 +481,7 @@ public class BasePageObject{
 	 */
 	public void waitForElementByElement(WebElement element)
 	{
-//		try
-//		{
 			wait.until(ExpectedConditions.visibilityOf(element));
-//		}
-//		catch(Exception e)
-//		{
-//			String stackTrace = Throwables.getStackTraceAsString(e);
-//			PageObjectLogging.log("waitForElementByElement", stackTrace, false);			
-//		}
 	}
 
 	/**
@@ -522,97 +491,42 @@ public class BasePageObject{
 	 */
 	public void waitForElementPresenceByBy(By locator)
 	{
-//		try
-//		{			
 			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementPresenceByBy", e.toString(), false);			
-//		}
+
 	}
 	
 	public WebElement waitForElementByCss(String cssSelector)
 	{
-//		try
-//		{						
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
 			return driver.findElement(By.cssSelector(cssSelector));
-//			return true;
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementByCss", e.toString(), false);
-//			return false;
-//		}
-		
 	}
 	
 	public void waitForElementByClassName(String className)
-	{
-//		try
-//		{								
+	{							
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(className)));
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementByClassName", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForElementByClass(String id)
-	{
-//		try
-//		{								
+	{							
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementByClass", e.toString(), false);			
-//		}
 	}
 	
 	public WebElement waitForElementByXPath(String xPath)
 	{
-//		try
-//		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
 			return driver.findElement(By.xpath(xPath));
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementByXpath", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForElementNotVisibleByCss(String css)
 	{
-//		try
-//		{
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(css)));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementNotVisibleByCss", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForElementNotVisibleByBy(By by)
 	{
-//		try
-//		{
 			Global.LOG_ENABLED = false;
 			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(by));
 			Global.LOG_ENABLED = true;
-//		}
-//		catch(NoSuchElementException e)
-//		{
-//			PageObjectLogging.log("waitForElementNotVisibleByBy", "Element " + by.getClass() + " is not visible which is expected", true);
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementNotVisibleByBy", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForElementNotVisibleByElement(WebElement element)
@@ -620,15 +534,9 @@ public class BasePageObject{
 		try
 		{
 			Global.LOG_ENABLED = false;			
-//			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(element));
-//			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);						
+			wait.until(CommonExpectedConditions.invisibilityOfElementLocated(element));						
 			Global.LOG_ENABLED = true;
 		}
-//		catch(NoSuchElementException e)
-//		{
-//			PageObjectLogging.log("waitForElementNotVisibleByBy", "Element " + by.getClass() + " is not visible which is expected", true);
-//		}
 		catch(Exception e)
 		{
 			PageObjectLogging.log("waitForElementNotVisibleByElement", e.toString(), false);			
@@ -637,162 +545,73 @@ public class BasePageObject{
 	
 	public void waitForElementClickableByClassName(String className)
 	{
-//		try
-//		{
 			wait.until(ExpectedConditions.elementToBeClickable(By.className(className)));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementClickableByClassName", e.toString(), false);			
-//		}
+
 	}
 	
 	public void waitForElementClickableByCss(String css)
 	{
-//		try
-//		{
+
 			wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(css)));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementClickAbleByCss", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForElementClickableByBy(By by)
 	{
-//		try
-//		{
+
 			wait.until(ExpectedConditions.elementToBeClickable(by));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementClickableByBy", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForElementClickableByElement(WebElement element)
 	{
-//		try
-//		{
 			wait.until(CommonExpectedConditions.elementToBeClickable(element));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementClickableByElement", e.toString(), false);			
-//		}
 	}
 	public void waitForElementNotClickableByElement(WebElement element)
 	{
-//		try
-//		{
 			wait.until(CommonExpectedConditions.elementNotToBeClickable(element));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementNotClickableByElement", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForElementById(String id)
 	{
-//		try
-//		{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForElementById", e.toString(), false);			
-//		}
 	}
 
 	
 	
 	public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute, String value)
 	{
-//		try
-//		{
 			wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(By.cssSelector(selector), attribute, value));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForValueToBePresentInElementsAttributeByCss", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForValueToBePresentInElementsAttributeByElement(WebElement element, String attribute, String value)
 	{
-//		try
-//		{
 			wait.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(element, attribute, value));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForValueToBePresentInElementsAttributeByCss", e.toString(), false);			
-//		}
 	}
 
 	public void waitForValueToNotBePresentInElementsAttributeByCss(String selector, String attribute, String value)
 	{
-//		try
-//		{
 			wait.until(CommonExpectedConditions.valueToNotBePresentInElementsAttribute(By.cssSelector(selector), attribute, value));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForValueToNotBePresentInElementsAttributeByCss", e.toString(), false);			
-//		}
 	}
 	
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text)
 	{
-//		try
-//		{
 			wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForTextToBePresentInElementByElement", e.toString(), false);
-//		}
 		
 	}
 	
 	public void waitForTextToBePresentInElementByBy(By by, String text)
 	{
-//		try
-//		{
 			WebElement temp = driver.findElement(by);
-			wait.until(CommonExpectedConditions.textToBePresentInElement(temp, text));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForTextToBePresentInElementByElement", e.toString(), false);
-//		}
-		
+			wait.until(CommonExpectedConditions.textToBePresentInElement(temp, text));										
 	}
 
 	public void waitForClassRemovedFromElement(WebElement element, String className)
 	{
-//		try
-//		{
 			wait.until(CommonExpectedConditions.classRemovedFromElement(element, className));								
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForClassRemovedFromElement", e.toString(), false);			
-//		}
 	}
 
 	public void waitForStringInURL(String givenString)
-	{
-//		try
-//		{								
+	{						
 			wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
-//		}
-//		catch(Exception e)
-//		{
-//			PageObjectLogging.log("waitForStringInURL", e.toString(), false);			
-//		}
 	}
 	
 	/**
@@ -1090,32 +909,6 @@ public class BasePageObject{
 		
 	}
 	
-//	/**
-//	 * <p> Verify that wanted Tool appears in Toolbar. <br> 
-//	 * The method finds all of Tools appearing in Toolbar (by their name), and checks if there is at least one name which fits the given param (ToolName)
-//	 * 
-//	 * @param ToolName Tool to be verified (name that should appear on toolbar)
-//	 * @author Michal Nowierski
-//	 */
-//	public void customizeToolbar_VerifyToolOnToolbar(String ToolName) {
-//		try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
-//		waitForElementByBy(customizeToolbar_ToolsList);
-//		List<WebElement> List = driver.findElements(customizeToolbar_ToolsList);
-//		int amountOfToolsOtherThanTheWantedTool = 0;
-//		for (int i = 0; i < List.size(); i++) {
-//			if (!driver.findElements(customizeToolbar_ToolsList).get(i).getText().equals(ToolName)) {
-//				++amountOfToolsOtherThanTheWantedTool;
-//			}
-//		}
-//		if (amountOfToolsOtherThanTheWantedTool==List.size()) {
-//			PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbar",
-//					ToolName+" does not appear on toolbar. All of tools are other than the wanted one.", false, driver);
-//				fail();
-//		}
-//		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbar",
-//				"Verify that "+ToolName+" appears in Toolbar.", true, driver);
-//	}
-	
 	public void customizeToolbar_VerifyToolOnToolbar(String ToolName)
 	{
 		waitForElementByXPath("//ul[@class='tools']//a[contains(text(), '"+ToolName+"')]");
@@ -1143,34 +936,6 @@ public class BasePageObject{
 				"If the page is Followed, unfollow it (preconditions assurance)", true, driver);
 
 	}
-	
-	
-	/**
-	 * <p> Verify that wanted Tool does not appear in Toolbar. <br> 
-	 * The method finds all of Tools appearing in Toolbar (by their name), and checks if there is no tool that fits the given param (ToolName)
-	 * 
-	 * @param ToolName Tool to be verified (name that should not appear on toolbar)
-	 * @author Michal Nowierski
-	 */
-//	public void customizeToolbar_VerifyToolNotOnToolbar(String ToolName){
-//		try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
-//		waitForElementByBy(customizeToolbar_ToolsList);
-//		List<WebElement> List = driver.findElements(customizeToolbar_ToolsList);
-//		int amountOfToolsOtherThanTheWantedTool = 0;
-//		for (int i = 0; i < List.size(); i++) {
-//			if (!List.get(i).getText().equals(ToolName)) {
-//				++amountOfToolsOtherThanTheWantedTool;
-//			}
-//		}
-//		if (amountOfToolsOtherThanTheWantedTool<List.size()) {
-//			PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbar",
-//					ToolName+" Tool appears on toolbar (Not all of tools are other than the wanted one).", false, driver);
-//				fail();
-//		}
-//		PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbar",
-//				"Verify that "+ToolName+" tool does not appear in Toolbar.", true, driver);
-//		
-//	}
 	
 	public void customizeToolbar_VerifyToolNotOnToolbar(String ToolName)
 	{
@@ -1255,8 +1020,6 @@ public class BasePageObject{
 	}
 
 	public void openRandomArticle() {
-		// String href = randomPageButton.getAttribute("href");
-		// driver.navigate().to(href);
 		clickAndWait(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
@@ -1264,8 +1027,6 @@ public class BasePageObject{
 	}
 	
 	public void openRandomArticleByUrl() {
-		// String href = randomPageButton.getAttribute("href");
-		// driver.navigate().to(href);
 		navigateToRandomPage();
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
