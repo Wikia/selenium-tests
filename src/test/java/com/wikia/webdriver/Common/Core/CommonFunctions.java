@@ -634,6 +634,9 @@ public class CommonFunctions {
 				String xmlResponse = null;
 
 				xmlResponse = EntityUtils.toString(entity);
+				System.out.println("**********First xml responce**********");
+				System.out.println(xmlResponse);
+				System.out.println("**********End of first xml responce**********");
 
 				String[] xmlResponseArr = xmlResponse.split("\"");
 				String token = xmlResponseArr[5];
@@ -661,6 +664,9 @@ public class CommonFunctions {
 					entity = response.getEntity();
 
 					xmlResponse = EntityUtils.toString(entity);
+					System.out.println("**********Second xml responce**********");
+					System.out.println(xmlResponse);
+					System.out.println("**********End of second xml responce**********");
 
 					xmlResponseArr = xmlResponse.split("\"");
 				}
