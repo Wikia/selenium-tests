@@ -110,14 +110,12 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
 		article.verifyArticleText(PageContent.articleText);
 		edit = article.clickEditButton(pageName);
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleTextEdit);
 		article = edit.clickOnPublishButton();
 		article.verifyPageTitle(pageName);
