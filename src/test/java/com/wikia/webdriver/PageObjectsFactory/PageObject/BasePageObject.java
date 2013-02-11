@@ -1019,11 +1019,19 @@ public class BasePageObject{
 		executeScript("$('ul#pagehistory li:nth-child(1) .mw-history-undo')");
 	}
 
-	public void openRandomArticle() {
+//	public void openRandomArticle() {
+//		clickAndWait(randomPageButton);
+//		waitForElementByElement(searchButton);
+//		PageObjectLogging.log("openRandomArticle",
+//				"random page button clicked", true, driver);
+//	}
+	
+	public WikiArticlePageObject openRandomArticle() {
 		clickAndWait(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
 				"random page button clicked", true, driver);
+		return new WikiArticlePageObject(driver, Domain, "random");
 	}
 	
 	public void openRandomArticleByUrl() {

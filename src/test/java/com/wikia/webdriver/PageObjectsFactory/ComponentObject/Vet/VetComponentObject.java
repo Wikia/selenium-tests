@@ -32,19 +32,7 @@ public class VetComponentObject extends BasePageObject{
 	@FindBy(css="#VET-search-field")
 	private WebElement findField;
 	@FindBy(css="#VET-search-submit")
-	private WebElement findButton;
-	
-	//generic
-	@FindBy(css="#VideoEmbedHeader")
-	private WebElement videoOptionsHeader;
-	@FindBy(css=".vet-style-label.VideoEmbedThumbOption")
-	private WebElement styleWithCation;
-	@FindBy(css="#VideoEmbedCaption")
-	private WebElement captionField;
-	@FindBy(css=".vet-style-label.VideoEmbedNoThumbOption")
-	private WebElement styleWithoutCation;
-	
-	
+	private WebElement findButton;	
 	
 	public VetComponentObject(WebDriver driver) {
 		super(driver);
@@ -71,26 +59,7 @@ public class VetComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickAddButton", "add url button clicked", true, driver);
 	}
 	
-	/**
-	 * for provider
-	 */
-	/**
-	 * @param i
-	 * i = 1; with caption
-	 * i = 2; without caption 
-	 */
-	public void adjustStyle(int i){
-		waitForTextToBePresentInElementByElement(videoOptionsHeader, "Video display options");
-		switch (i){
-		case 1: styleWithCation.click();
-				PageObjectLogging.log("adjustStyle", "first style selected",  true);
-				break;
-		case 2: styleWithoutCation.click();
-				PageObjectLogging.log("adjustStyle", "second style selected",  true);
-				break;
-		default: PageObjectLogging.log("adjustStyle", "invalid style selected",  false);
-		}
-	}
+	
 	
 	/**
 	 * for wiki videos

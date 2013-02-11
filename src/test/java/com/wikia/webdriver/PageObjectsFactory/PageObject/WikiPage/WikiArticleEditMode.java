@@ -482,34 +482,34 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 * 	 */
 	public void verifyTheImageNotOnTheArticleEditMode() {
 		waitForElementNotVisibleByBy(imageOnArticleEditMode);//this need to be rewritten
-		PageObjectLogging.log("VerifyTheImageNotOnTheArticleEditMode", "Verify that the image does not appear on the Article edit mode", true, driver);
+		PageObjectLogging.log("VerifyTheImageNotOnTheArticleEditMode", "Verify that the image does not appear on the Article edit mode", true);
 				
 	}
 	
 	public void verifyTheGalleryNotOnTheArticleEditMode() {
 		waitForElementNotVisibleByBy(imageOnArticleEditMode);//this need to be rewritten
-		PageObjectLogging.log("VerifyTheImageNotOnTheArticleEditMode", "Verify that the image does not appear on the Article edit mode", true, driver);
+		PageObjectLogging.log("VerifyTheImageNotOnTheArticleEditMode", "Verify that the image does not appear on the Article edit mode", true);
 	}
 	
 	public void verifyTheSlideshowNotOnTheArticleEditMode() {
 		driver.switchTo().frame(iFrame);
 		waitForElementNotVisibleByBy(slideShowOnArticleEditMode);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("VerifyTheImageNotOnTheArticleEditMode", "Verify that the image does not appear on the Article edit mode", true, driver);		
+		PageObjectLogging.log("VerifyTheImageNotOnTheArticleEditMode", "Verify that the image does not appear on the Article edit mode", true);		
 	}
 	
 	public void verifyTheVideoNotOnTheArticleEditMode() {
 		driver.switchTo().frame(iFrame);
 		waitForElementNotVisibleByBy(videoOnArticleEditMode);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyTheVideoNotOnTheArticleEditMode", "Verify that the video does not appear on the Article edit mode", true, driver);	
+		PageObjectLogging.log("verifyTheVideoNotOnTheArticleEditMode", "Verify that the video does not appear on the Article edit mode", true);	
 	}
 	
 	public void verifyTheSliderNotOnTheArticleEditMode() {
 		driver.switchTo().frame(iFrame);
 		waitForElementNotVisibleByBy(sliderOnArticleEditMode);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyTheSliderNotOnTheArticleEditMode", "Verify that the slider does not appear on the Article edit mode", true, driver);
+		PageObjectLogging.log("verifyTheSliderNotOnTheArticleEditMode", "Verify that the slider does not appear on the Article edit mode", true);
 		
 	}
 
