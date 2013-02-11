@@ -83,7 +83,7 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = "div.input-group.VideoEmbedNoBorder input")
 	private WebElement videoAddVideoButton;
 
-	@FindBy(css = "#VideoEmbed")
+	@FindBy(css = "#VideoEmbedThumb")
 	private WebElement videoDialog;
 
 	@FindBy(css = "input[value='Return to editing']")
