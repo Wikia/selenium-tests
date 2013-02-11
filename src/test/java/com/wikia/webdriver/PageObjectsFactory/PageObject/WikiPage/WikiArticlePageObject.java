@@ -28,7 +28,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement historyHeadLine;
 	@FindBy(css="section.RelatedVideosModule")
 	private WebElement rVModule;
-	@FindBy(css="input.videoUrl")
+	@FindBy(css="#VideoEmbedUrl")
 	private WebElement videoRVmodalInput;
 	@FindBy(css="div[class='editarea']")
 	private WebElement editCommentTrigger;
@@ -60,13 +60,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement videoDetailsButton;
 	@FindBy(css="img.thumbimage")
 	private WebElement thumbnailImage;
+	@FindBy(css="#VideoEmbedUrlSubmit")
+	private WebElement VideoModalAddButton;
 	
 	
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle img.sprite.play");
 	private By AddVideoRVButton = By.cssSelector("a.addVideo");
-	private By VideoModalAddButton = By.cssSelector("button.relatedVideosConfirm");
 	private By RVvideoLoading = By.cssSelector("section.loading");
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
@@ -345,9 +346,9 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 * 	 */
 	public void clickOnRVModalAddButton() {
-		waitForElementByBy(VideoModalAddButton);
-		waitForElementClickableByBy(VideoModalAddButton);
-		clickAndWait(driver.findElement(VideoModalAddButton));
+		waitForElementByElement(VideoModalAddButton);
+		waitForElementClickableByElement(VideoModalAddButton);
+		clickAndWait((VideoModalAddButton));
 		PageObjectLogging.log("ClickOnRVModalAddButton", "Click on Add button on RV modal", true, driver);
 		
 	}
