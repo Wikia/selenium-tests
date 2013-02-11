@@ -519,7 +519,9 @@ public class BasePageObject{
 	
 	public void waitForElementNotVisibleByCss(String css)
 	{
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(css)));								
+			Global.LOG_ENABLED = false;
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(css)));
+			Global.LOG_ENABLED = true;
 	}
 	
 	public void waitForElementNotVisibleByBy(By by)
