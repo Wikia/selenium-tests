@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.mvel2.optimizers.impl.refl.nodes.ArrayLength;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,10 +13,17 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialVideosPageObject extends WikiBasePageObject{
 
+	@FindBy(css = "a.addVideo")
+	private WebElement addVideo;
+	@FindBy(css = "div.WikiaGrid div:nth-child(1).grid-2")
+	private WebElement newestVideo;
+	
 	public SpecialVideosPageObject(WebDriver driver, String Domain) {
 		super(driver, Domain);
 		this.Domain = Global.DOMAIN;
@@ -58,5 +66,19 @@ public class SpecialVideosPageObject extends WikiBasePageObject{
 		clickAndWait(followSubmit);
 		waitForElementByElement(unfollowedButton);
 	}
-	
+
+	public VetAddVideoComponentObject clickAddAVideo() {
+		waitForElementByElement(addVideo);
+		waitForElementClickableByElement(addVideo);
+		clickAndWait(addVideo);
+		PageObjectLogging.log("clickAddAVideo", "click on 'add a video' button", true, driver);
+		return new VetAddVideoComponentObject(driver);
+	}
+
+	public void verifyVideoAdded(String videoDescription) {
+		waitForElementByElement(newestVideo);
+		WebElement videoDescriptonElem = newestVideo.findElement(By.cssSelector("a.image.video"));
+		waitForValueToBePresentInElementsAttributeByElement(videoDescriptonElem, "data-video-name", videoDescription);
+		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);	
+	}	
 }

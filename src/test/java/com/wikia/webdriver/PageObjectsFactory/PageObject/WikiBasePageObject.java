@@ -18,6 +18,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialNewFilesPageObject;
@@ -371,13 +372,14 @@ public class WikiBasePageObject extends BasePageObject {
 
 	}
 
+	
 	/**
 	 * Click 'Add a video'
 	 * 
 	 * @author Michal Nowierski
 	 * */
 	public void clickAddAvideo() {
-
+		//TODO: delete this method when VET components are introduced
 		waitForElementByElement(videoAddVideoButton);
 		// waitForElementClickableByElement(videoAddVideoButton);
 		jQueryClick(videoAddVideoButtonSelector);
@@ -398,9 +400,16 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(videoNextButton);
 		PageObjectLogging.log("ClickVideoNextButton", "Left Click Next button",
 				true, driver);
-
 	}
-
+	
+	/**
+	 * @author Michal Nowierski
+	 * */
+	public SpecialVideosPageObject openSpecialVideoPage(){
+		getUrl(Domain+"wiki/Special:Videos");
+		return new SpecialVideosPageObject(driver, Domain);
+	}
+	
 	/**
 	 * Wait for Video modal and type in the video URL
 	 * 

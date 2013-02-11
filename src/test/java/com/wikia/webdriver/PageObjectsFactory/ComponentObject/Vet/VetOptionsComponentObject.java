@@ -24,16 +24,18 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement captionField;
 		@FindBy(css="#VideoEmbedManualWidth")
 		private WebElement withInputField;
-		@FindBy(css="#VideoEmbedLayoutLeft")
+		@FindBy(css="#VET_LayoutLeftBox label")
 		private WebElement PositionLayoutLeft;
-		@FindBy(css="#VideoEmbedLayoutCenter")
+		@FindBy(css="#VET_LayoutCenterBox label")
 		private WebElement PositionLayoutCenter;
-		@FindBy(css="#VideoEmbedLayoutRight")
+		@FindBy(css="#VET_LayoutRightBox label")
 		private WebElement PositionLayoutRight;
 		@FindBy(css=".vet-style-label.VideoEmbedNoThumbOption")
 		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
 		private WebElement videoName;
+		@FindBy(css="div.addVideoDetailsFormControls input")
+		private WebElement addAvideo;
 	
 	public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
@@ -79,6 +81,15 @@ public class VetOptionsComponentObject extends BasePageObject{
 		waitForElementByElement(videoName);
 		videoName.clear();
 		videoName.sendKeys(title);
+		PageObjectLogging.log("setTitle", "set title of the viedo to: "+title,  true, driver);
+	}
+	
+	/**
+	 * author: Michal Nowierski
+	 */
+	public void clickAddaVideo(String title) {
+		waitForElementByElement(addAvideo);
+		clickAndWait(addAvideo);
 		PageObjectLogging.log("setTitle", "set title of the viedo to: "+title,  true, driver);
 	}
 	

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
-public class VetComponentObject extends BasePageObject{
+public class VetAddVideoComponentObject extends BasePageObject{
 
 	
 	/*
@@ -25,7 +25,7 @@ public class VetComponentObject extends BasePageObject{
 	//provider
 	@FindBy(css="#VideoEmbedUrl")
 	private WebElement urlField;	
-	@FindBy(css="#VideoEmbedUrl")
+	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement addUrlButton;
 	
 	//wiki videos
@@ -34,7 +34,7 @@ public class VetComponentObject extends BasePageObject{
 	@FindBy(css="#VET-search-submit")
 	private WebElement findButton;	
 	
-	public VetComponentObject(WebDriver driver) {
+	public VetAddVideoComponentObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver,  this);
 	}
