@@ -103,8 +103,8 @@
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
-						<config>../../../wikia-config/config.xml</config>
-						<captcha>../../../wikia-config/captcha.txt</captcha>
+						<config>../../../wikia-qa/config.xml</config>
+						<captcha>../../../wikia-qa/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/testSuite.xml</suiteXmlFile>
