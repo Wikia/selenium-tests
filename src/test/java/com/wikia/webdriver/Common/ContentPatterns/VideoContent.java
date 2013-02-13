@@ -6,4 +6,6 @@ public class VideoContent {
 	public static String youtubeVideoURL2 = "http://www.youtube.com/watch?v=TTchckhECwE";
 	public static String youtubeVideoURL2name = "What is love (?) - on piano (Haddway)";
 	public static String youtubeVideoURL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
+	public static String wikiaVideoQuery = "wikia";
+	public static String wikiaVideoName = "Wikia () - Wikia Intro Video";
 }
