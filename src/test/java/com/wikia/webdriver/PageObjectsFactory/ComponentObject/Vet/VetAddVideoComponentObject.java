@@ -1,8 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -33,6 +37,10 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	private WebElement findField;
 	@FindBy(css="#VET-search-submit")
 	private WebElement findButton;	
+	@FindBys(@FindBy(css="#VET-suggestions li"))
+	private List<WebElement> videoList;
+	private By videoNameSelector = By.cssSelector("strong");
+	private By addVideoLibraryLink = By.cssSelector("li a[href*='http']");
 	
 	public VetAddVideoComponentObject(WebDriver driver) {
 		super(driver);
@@ -53,7 +61,7 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	/**
 	 * for provider
 	 */
-	private void clickAddButton(){
+	private void clickAddButtonProvider(){
 		waitForElementByElement(addUrlButton);
 		clickAndWait(addUrlButton);
 		PageObjectLogging.log("clickAddButton", "add url button clicked", true, driver);
@@ -79,23 +87,38 @@ public class VetAddVideoComponentObject extends BasePageObject{
 		clickAndWait(findButton);
 		PageObjectLogging.log("clickFindButton", "find button clicked", true, driver);
 	}
+	
+	/**
+	 * for wiki videos
+	 */
+	private String clickAddVideoLibrary(int i){
+		WebElement temp = videoList.get(i);
+		waitForElementByElement(temp);
+		String videoName = temp.findElement(videoNameSelector).getText();
+		WebElement addVideoLink = temp.findElement(addVideoLibraryLink);
+		addVideoLink.click();
+		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked", true, driver);
+		return videoName;
+	}
 
 	/**
 	 * for provider
 	 * @param url
 	 */
-	public void addVideoByUrl(String url){
+	public VetOptionsComponentObject addVideoByUrl(String url){
 		typeInUrl(url);
-		clickAddButton();
+		clickAddButtonProvider();
+		return new VetOptionsComponentObject(driver);
 	}
 	
 	/**
 	 * for wiki videos
 	 * @param query
 	 */
-	public void addVideoByQuery(String query){
+	public String addVideoByQuery(String query, int i){
 		typeInSearchQuery(query);
 		clickFindButton();
+		return clickAddVideoLibrary(i);
 	}
 	
 

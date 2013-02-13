@@ -36,6 +36,8 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement videoName;
 		@FindBy(css="div.addVideoDetailsFormControls input")
 		private WebElement addAvideo;
+		@FindBy(css="#VideoEmbedCloseButton")
+		private WebElement returnToEditing;
 	
 	public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
@@ -63,6 +65,12 @@ public class VetOptionsComponentObject extends BasePageObject{
 		}
 	}
 	
+	public void setCaption(String caption){
+		waitForElementByElement(captionField);
+		captionField.sendKeys(caption);
+		PageObjectLogging.log("setCaption", "caption was set to: "+caption, true);
+	}
+	
 	/**
 	 * author: Michal Nowierski
 	 */
@@ -87,10 +95,21 @@ public class VetOptionsComponentObject extends BasePageObject{
 	/**
 	 * author: Michal Nowierski
 	 */
-	public void clickAddaVideo(String title) {
+	private void clickAddaVideo() {
 		waitForElementByElement(addAvideo);
 		clickAndWait(addAvideo);
-		PageObjectLogging.log("setTitle", "set title of the viedo to: "+title,  true, driver);
+		PageObjectLogging.log("clickAddaVideo", "add video button clicked",  true, driver);
+	}
+	
+	private void clickRetunToEditing(){
+		waitForElementByElement(returnToEditing);
+		clickAndWait(returnToEditing);
+		PageObjectLogging.log("clickReturnToEditing", "return to editing button clicked",  true, driver);
+	}
+	
+	public void submit(){
+		clickAddaVideo();
+		clickRetunToEditing();
 	}
 	
 	/**
