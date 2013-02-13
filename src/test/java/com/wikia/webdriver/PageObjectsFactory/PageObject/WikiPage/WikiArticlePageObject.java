@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
@@ -62,6 +63,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImage;
 	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement VideoModalAddButton;
+	@FindBy(css="#WikiaImagePlaceholderInner0")
+	private WebElement videoAddPlaceholder;
 	
 	
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
@@ -253,7 +256,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 *  
 	 * @author Michal Nowierski
 	 */
-	public void VerifyTheImageOnThePage() {
+	public void verifyImageOnThePage() {
 		waitForElementByBy(ImageOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
 	}
@@ -263,23 +266,23 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 *  
 	 * @author Michal Nowierski
 	 */
-	public void verifyTheImageNotOnThePage() {
+	public void verifyImageNotOnThePage() {
 		waitForElementNotVisibleByBy(ImageOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheImageNotOnThePage", "Verify that the image does not appear on the page", true, driver);	
 	}
 	
-	public void verifyTheGalleryNotOnThePage() {
+	public void verifyGalleryNotOnThePage() {
 		waitForElementNotVisibleByBy(galleryOnPublish);
 		PageObjectLogging.log("verifyTheGalleryNotOnThePage", "Verify that the gallery does not appear on the page", true, driver);	
 	}
 	
-	public void verifyTheSlideshowNotOnThePage() 
+	public void verifySlideshowNotOnThePage() 
 	{
 		waitForElementNotVisibleByBy(slideShowOnPublish);
 		PageObjectLogging.log("verifyTheSlideshowNotOnThePage", "Verify that the slideshow does not appear on the page", true, driver);			
 	}
 	
-	public void verifyTheVideoNotOnThePage() {
+	public void verifyVideoNotOnThePage() {
 		waitForElementNotVisibleByBy(videoOnPublish);
 		PageObjectLogging.log("verifyTheVideoNotOnThePage", "Verify that the video does not appear on the page", true, driver);
 	}
@@ -290,7 +293,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 * @param Object Object = {gallery, slideshow}
 	 * 	 */
-	public void verifyTheObjectOnThePage(String Object) {
+	public void verifyObjectOnThePage(String Object) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.WikiaArticle div[id*='"+Object+"']")));
 		PageObjectLogging.log("VerifyTheObjetOnThePage", "Verify that the "+Object+" appears on the page", true, driver);
 		
@@ -301,7 +304,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 *  
 	 * @author Michal Nowierski
 	 * 	 */
-	public void verifyTheVideoOnThePage() {
+	public void verifyVideoOnThePage() {
 		waitForElementByBy(VideoOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheVideoOnThePage", "Verify that the Video appears on the page", true, driver);
 	}
@@ -322,13 +325,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 *  
 	 * @author Michal Nowierski
 	 * 	 */
-	public void clickOnAddVideoRVModule() {
+	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
 		waitForElementByBy(AddVideoRVButton);
 		CommonFunctions.scrollToElement(driver.findElement(AddVideoRVButton));
 		waitForElementClickableByBy(AddVideoRVButton);
 		clickAndWait(driver.findElement(AddVideoRVButton));
 		PageObjectLogging.log("ClickOnAddVideoRVModule", "Click On 'Add a video' button on RV module", true, driver);
-			
+		return new VetAddVideoComponentObject(driver);
 	}
 
 	/**
@@ -550,5 +553,11 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		thumbnailImage.click();
 		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true, driver);
 		return new LightboxPageObject(driver);
+	}
+	
+	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
+		waitForElementByElement(videoAddPlaceholder);
+		clickAndWait(videoAddPlaceholder);
+		return new VetAddVideoComponentObject(driver);
 	}
 }

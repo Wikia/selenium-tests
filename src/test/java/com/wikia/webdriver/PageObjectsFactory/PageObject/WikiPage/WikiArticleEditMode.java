@@ -21,6 +21,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 
@@ -48,6 +49,8 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement sourceModeButton;
 	@FindBy(css="span.RTEMediaOverlayEdit")
 	private WebElement modifyButton;
+	@FindBy(css="[type='video-placeholder'] span.RTEMediaOverlayEdit")
+	private WebElement modifyButtonVideoPlaceholder;
 	@FindBy(css="span.RTEMediaOverlayDelete")
 	private WebElement removeButton;
 	@FindBy(css="div.RTEConfirmButtons a[id='RTEConfirmCancel'] span")
@@ -128,7 +131,9 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 	private String deleteButtonArticleItem = "span.RTEMediaOverlayDelete";
 	private String categories_listOfCategories = "li.category";
-
+	private String videoPlaceholder = "img.video-placeholder";
+	private String editButtonVideoPlaceholder = "[type=video-placeholder] span.RTEMediaOverlayEdit";
+	
 	public WikiArticleEditMode(WebDriver driver, String Domain,
 			String wikiArticle) {
 		super(driver, Domain);
@@ -348,7 +353,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 * @param caption Caption of the image 
 	 * 	 */
-	public void clickModifyButtonOfImage(String caption) 
+	public void clickModifyButtonImage(String caption) 
 	{
 		waitForElementByElement(iFrame);
 		mouseOverInArticleIframe(imageArticleIFrame);
@@ -391,6 +396,16 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		jQueryClick(editButtonArticleItem);
 		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on video", true, driver);		
 	}
+	
+	public VetAddVideoComponentObject clickModifyButtonVideoPlaceholder() 
+	{
+		waitForElementByElement(iFrame);
+		mouseOverInArticleIframe(videoPlaceholder);
+		waitForElementByElement(modifyButtonVideoPlaceholder);
+		jQueryClick(editButtonVideoPlaceholder);
+		PageObjectLogging.log("clickModifyButtonOfVideoPlaceholder", "modify button on video placeholder clicked", true, driver);
+		return new VetAddVideoComponentObject(driver);
+	}
 
 	/**
 	 * Click on 'remove button' of image with given caption
@@ -398,7 +413,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 * @param caption Caption of the image 
 	 * 	 */
-	public void clickRemoveButtonOfImage(String caption) {
+	public void clickRemoveButtonImage(String caption) {
 		waitForElementByElement(iFrame);
 		mouseOverInArticleIframe(imageArticleIFrame);
 		waitForElementByElement(removeButton);
@@ -443,7 +458,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 *  
 	 * @author Michal Nowierski
 	 * 	 */
-	public void leftClickCancelButton() {
+	public void clickCancelButton() {
 		waitForElementByElement(cancelImageRemovalButton);
 		waitForElementClickableByElement(cancelImageRemovalButton);
 		clickAndWait(cancelImageRemovalButton);
@@ -466,7 +481,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 *  
 	 * @author Michal Nowierski
 	 * 	 */
-	public void leftClickOkButton() {
+	public void clickOkButton() {
 		waitForElementByElement(oKbutton);
 		waitForElementClickableByElement(oKbutton);
 		clickAndWait(oKbutton);
@@ -1135,10 +1150,5 @@ public void verifyRightAlignmentIsSelected() {
 		finalAddPhotoButton.click();
 		clickOnPublishButton();
 		return new WikiArticlePageObject(driver, Domain, articlename);
-		
-		
-		
-}
-	
-	
+	}
 }
