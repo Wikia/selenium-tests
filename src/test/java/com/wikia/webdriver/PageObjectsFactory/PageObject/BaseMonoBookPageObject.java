@@ -16,7 +16,9 @@ import org.openqa.selenium.support.PageFactory;
 public class BaseMonoBookPageObject extends BasePageObject {
 
     @FindBy(css = ".skin-monobook")
-    protected WebElement skinClass;
+    protected WebElement monobookSkinClass;
+    @FindBy(css = "body.oasis-oasis")
+    protected WebElement oasisSkinClass;
 
     public BaseMonoBookPageObject(WebDriver driver) {
         super(driver);
@@ -40,7 +42,8 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void changeToMonoBook() {
-        String currentUrl = driver.getCurrentUrl();
+    	waitForElementByElement(oasisSkinClass);
+    	String currentUrl = driver.getCurrentUrl();
         if (currentUrl.contains("?")) {
             getUrl(currentUrl+"&useskin=monobook");
         } else {
@@ -50,7 +53,7 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void verifySkinChanged() {
-        waitForElementByElement(skinClass);
+        waitForElementByElement(monobookSkinClass);
         PageObjectLogging.log(
             "skinChangedToMonoBook", "skin is changed to monobook", true
         );
