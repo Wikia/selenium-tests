@@ -95,8 +95,10 @@ public class HomePageObject extends BasePageObject{
 	
 	public HubBasePageObject OpenHub(String Hub){
 		if (Hub.equals("VideoGamesHub")) {
+			PageObjectLogging.log("open hub", "before hub page opened", true, driver);
 			getUrl(URLsContent.VideoGamesHub);
 			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
+			PageObjectLogging.log("open hub", "after hub page opened", true, driver);
 			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
 			{
@@ -110,8 +112,10 @@ public class HomePageObject extends BasePageObject{
 			return new VideoGamesHubPageObject(driver);
 		}
 		if (Hub.equals("EntertainmentHub")) {
+			PageObjectLogging.log("open hub", "before hub page opened", true, driver);
 			getUrl(URLsContent.EntertainmentHub);
 			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
+			PageObjectLogging.log("open hub", "after hub page opened", true, driver);
 			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
 			{
@@ -125,8 +129,10 @@ public class HomePageObject extends BasePageObject{
 			return new EntertainmentHubPageObject(driver);	
 		}
 		if (Hub.equals("LifestyleHub")) {
+			PageObjectLogging.log("open hub", "before hub page opened", true, driver);
 			getUrl(URLsContent.LifestyleHub);
 			WebElement hubsHero = driver.findElement(hubsHeroCarousel);
+			PageObjectLogging.log("open hub", "after hub page opened", true, driver);
 			waitForElementByElement(hubsHero);
 			if (Global.LIVE_DOMAIN.contains("preview"))
 			{
