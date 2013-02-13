@@ -32,7 +32,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blogEdit.galleryClickOnFinishButton();
 		blogEdit.verifyObjectInEditMode("gallery");
 		BlogPageObject blog = blogEdit.clickOnPublishButton();
-		blog.verifyTheObjectOnThePage("gallery");
+		blog.verifyObjectOnThePage("gallery");
 	}
 	
 	@Test(groups={"BlogFeatures_002", "BlogTests"})
@@ -52,7 +52,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blogEdit.galleryClickOnFinishButton();
 		blogEdit.verifyObjectInEditMode("slideshow");
 		BlogPageObject blog = blogEdit.clickOnPublishButton();
-		blog.verifyTheObjectOnThePage("slideshow");
+		blog.verifyObjectOnThePage("slideshow");
 		
 	}
 	
@@ -73,7 +73,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blogEdit.galleryClickOnFinishButton();
 		blogEdit.verifyObjectInEditMode("gallery-slider");
 		BlogPageObject blog = blogEdit.clickOnPublishButton();
-		blog.verifyTheObjectOnThePage("slider");
+		blog.verifyObjectOnThePage("slider");
 	}
 	
 	@Test(groups={"BlogFeatures_004", "BlogTests"})
@@ -93,7 +93,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blogEdit.waitForSuccesDialogAndReturnToEditing();
 		blogEdit.verifyVideoInEditMode(PageContent.caption);
 		BlogPageObject blog = blogEdit.clickOnPublishButton();
-		blog.verifyTheVideoOnThePage();
+		blog.verifyVideoOnThePage();
 	}
 
 	@Test(groups={"BlogFeatures_005", "BlogTests"})
@@ -110,6 +110,6 @@ public class BlogFeaturesTests extends TestTemplate{
 		blogEdit.clickOnAddPhotoButton2();
 		blogEdit.verifyThatThePhotoAppears(PageContent.caption);
 		BlogPageObject blog = blogEdit.clickOnPublishButton();
-		blog.VerifyTheImageOnThePage();
+		blog.verifyImageOnThePage();
 	}
 }

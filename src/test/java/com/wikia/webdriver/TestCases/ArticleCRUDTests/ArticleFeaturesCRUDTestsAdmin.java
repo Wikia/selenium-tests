@@ -46,7 +46,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("gallery");
 		WikiArticlePageObject article = edit.clickOnPublishButtonPreview();
-		article.verifyTheObjectOnThePage("gallery");
+		article.verifyObjectOnThePage("gallery");
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -76,7 +76,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("gallery");
 		WikiArticlePageObject article = edit.clickOnPublishButtonPreview();
-		article.verifyTheObjectOnThePage("gallery");
+		article.verifyObjectOnThePage("gallery");
 		article.verifyGalleryPosion("center");
 		edit = article.edit();
 		edit.clickModifyButtonGallery();
@@ -119,14 +119,14 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("gallery");
 		WikiArticlePageObject article = edit.clickOnPublishButtonPreview();
-		article.verifyTheObjectOnThePage("gallery");
+		article.verifyObjectOnThePage("gallery");
 		article.verifyGalleryPosion("center");
 		edit = article.edit();
 		edit.clickRemoveButtonGallery();
-		edit.leftClickOkButton();
+		edit.clickOkButton();
 		edit.verifyTheGalleryNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
-		article.verifyTheGalleryNotOnThePage();
+		article.verifyGalleryNotOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -155,7 +155,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slideshow");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheObjectOnThePage("slideshow");
+		article.verifyObjectOnThePage("slideshow");
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -184,7 +184,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slideshow");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheObjectOnThePage("slideshow");
+		article.verifyObjectOnThePage("slideshow");
 		article.verifySlideshowPosition("center");
 		edit = article.edit();
 		edit.clickModifyButtonSlideshow();
@@ -196,7 +196,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.galleryClickOnFinishButton();
 		edit.verifyObjectInEditMode("slideshow");
 		article = edit.clickOnPublishButton();
-		article.verifyTheObjectOnThePage("slideshow");
+		article.verifyObjectOnThePage("slideshow");
 		article.verifySlideshowPosition("right");
 		CommonFunctions.logoutCookie(cookieName);
 	}
@@ -224,14 +224,14 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slideshow");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheObjectOnThePage("slideshow");
+		article.verifyObjectOnThePage("slideshow");
 		article.verifySlideshowPosition("center");
 		edit = article.edit();
 		edit.clickRemoveButtonSlideshow();
-		edit.leftClickOkButton();
+		edit.clickOkButton();
 		edit.verifyTheSlideshowNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
-		article.verifyTheSlideshowNotOnThePage();
+		article.verifySlideshowNotOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -262,7 +262,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slider");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheObjectOnThePage("slider");
+		article.verifyObjectOnThePage("slider");
 		CommonFunctions.logoutCookie(cookieName);	
 	}
 	
@@ -292,7 +292,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slider");//publish 
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheObjectOnThePage("slider");
+		article.verifyObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("vertical");
 		edit = article.edit();
 		edit.clickModifyButtonSlider();
@@ -304,7 +304,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.galleryClickOnFinishButton();
 		edit.verifyObjectInEditMode("gallery-slider");
 		article = edit.clickOnPublishButton();
-		article.verifyTheObjectOnThePage("slider");
+		article.verifyObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("horizontal");
 		CommonFunctions.logoutCookie(cookieName);	
 	}
@@ -332,14 +332,14 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slider");//publish 
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheObjectOnThePage("slider");
+		article.verifyObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("vertical");
 		edit = article.edit();
 		edit.clickRemoveButtonSlider();
-		edit.leftClickOkButton();
+		edit.clickOkButton();
 		edit.verifyTheSliderNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
-		article.verifyTheSlideshowNotOnThePage();
+		article.verifySlideshowNotOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -368,7 +368,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheVideoOnThePreview();
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheVideoOnThePage();
+		article.verifyVideoOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}	
 	
@@ -395,7 +395,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheVideoOnThePreview();
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheVideoOnThePage();
+		article.verifyVideoOnThePage();
 		edit = article.edit();
 		edit.clickModifyButtonVideo();
 //		edit.waitForVideoDialog();
@@ -403,7 +403,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickAddAvideo();
 		edit.verifyVideoInEditMode(PageContent.caption2);
 		article = edit.clickOnPublishButton();
-		article.verifyTheVideoOnThePage();
+		article.verifyVideoOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -430,13 +430,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheVideoOnThePreview();
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyTheVideoOnThePage();
+		article.verifyVideoOnThePage();
 		edit = article.edit();
 		edit.clickRemoveButtonVideo();
-		edit.leftClickOkButton();
+		edit.clickOkButton();
 		edit.verifyTheVideoNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
-		article.verifyTheVideoNotOnThePage();
+		article.verifyVideoNotOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -463,7 +463,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheImageOnThePreview();
 		edit.verifyTheCaptionOnThePreview(PageContent.caption);
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.VerifyTheImageOnThePage();
+		article.verifyImageOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -486,7 +486,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.typePhotoCaption(PageContent.caption);
 		edit.clickOnAddPhotoButton2();
 		edit.verifyThatThePhotoAppears(PageContent.caption);
-		edit.clickModifyButtonOfImage(PageContent.caption);
+		edit.clickModifyButtonImage(PageContent.caption);
 		edit.typePhotoCaption(PageContent.caption2);
 		edit.clickOnAddPhotoButton2();
 		edit.verifyThatThePhotoAppears(PageContent.caption2);
@@ -494,7 +494,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheImageOnThePreview();
 		edit.verifyTheCaptionOnThePreview(PageContent.caption2);
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.VerifyTheImageOnThePage();
+		article.verifyImageOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
@@ -518,13 +518,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnAddPhotoButton2();
 		edit.verifyThatThePhotoAppears(PageContent.caption);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.VerifyTheImageOnThePage();
+		article.verifyImageOnThePage();
 		edit = article.edit();
-		edit.clickRemoveButtonOfImage(PageContent.caption);
-		edit.leftClickOkButton();
+		edit.clickRemoveButtonImage(PageContent.caption);
+		edit.clickOkButton();
 		edit.verifyTheImageNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
-		article.verifyTheImageNotOnThePage();
+		article.verifyImageNotOnThePage();
 		CommonFunctions.logoutCookie(cookieName);
 	}	
 	

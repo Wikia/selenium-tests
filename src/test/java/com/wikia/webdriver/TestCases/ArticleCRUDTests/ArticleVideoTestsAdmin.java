@@ -66,7 +66,7 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				edit.clickReturnToEditingButton();
 				edit.verifyVideoInEditMode(PageContent.caption);
 				WikiArticlePageObject article = edit.clickOnPublishButton();
-				article.verifyTheVideoOnThePage();
+				article.verifyVideoOnThePage();
 				FileDetailsPageObject fileDetails = article.clickVideoDetailsButton();
 				fileDetails.verifyEmbeddedVideoIsPresent();	
 				fileDetails.verifythumbnailIsPresent();
@@ -124,7 +124,7 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 //				edit.clickOnVisualButton();				
 //				edit.verifyRightAlignmentIsSelected();
 				WikiArticlePageObject article = edit.clickOnPublishButton();
-				article.VerifyTheImageOnThePage();
+				article.verifyImageOnThePage();
 			}
 			
 			@Test(groups={"ArticleVideo_004", "ArticleVideo"}) 
