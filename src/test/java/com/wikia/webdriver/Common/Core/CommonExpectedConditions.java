@@ -314,11 +314,48 @@ public class CommonExpectedConditions {
 		      }
 		    };
 		  }
-    public static ExpectedCondition<Boolean> elementNotPresent(final String cssSelector) {
+    /**
+     *
+     * @param cssSelector
+     * @return
+     */
+    public static ExpectedCondition<Boolean> elementNotPresent(
+        final String cssSelector
+    ) {
         return new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver f) {
                 return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "Element with ('%s') selector still present!",
+                    cssSelector
+                );
+            }
+        };
+    }
+
+    /**
+     *
+     * @param element
+     * @return
+     */
+    public static ExpectedCondition<Boolean> elementVisible(
+        final WebElement element
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                return (element.isDisplayed());
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "Element ('%s') not visisble!",
+                    element.getTagName()
+                );
             }
         };
     }

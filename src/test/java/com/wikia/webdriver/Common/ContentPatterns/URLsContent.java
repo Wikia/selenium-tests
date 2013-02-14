@@ -27,6 +27,10 @@ public class URLsContent {
         public static final String specialUserLogin = "wiki/Special:UserLogin";
         public static final String specialUserSignup = "wiki/Special:UserSignup";
         public static final String specialAddBlogPost = "wiki/Special:CreateBlogPage";
+        public static final String specialNewFiles = "wiki/Special:NewFiles";
+        public static final String specialNewVideo = "wiki/Special:Videos";
+        public static final String specialUpload = "wiki/Special:Upload";
+        public static final String specialWatchList = "wiki/Special:Watchlist";
 
         //Extra switches - appear after ? in link
         public static final String noexternals = "?noexternals=1";

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -117,9 +118,11 @@ public class BasePageObject{
 	WebElement emailModalCloseButton;
 	@FindBy(css="input#lightbox-share-email-text")
 	WebElement emailModalEmailInputField;
-	@FindBy(css="section.modalWrapper")
-	WebElement logInModal;
-	
+	@FindBy(css="section.modalWrapper .UserLoginModal")
+	protected WebElement logInModal;
+        @FindBy(css = "#AccountNavigation a[href*='User:']")
+        protected WebElement userProfileLink;
+
 	private By customizeToolbar_ToolsList = By.cssSelector("ul.tools li");
 	private By customizeToolbar_MyToolsList = By.cssSelector("ul[id='my-tools-menu'] a");
 	
@@ -193,17 +196,15 @@ public class BasePageObject{
 	 */
 	public void verifyURLcontains(String GivenString)
 	{
-		String currentURL = driver.getCurrentUrl();
-		if (currentURL.contains(GivenString))
-		{
-			PageObjectLogging.log("verifyURLcontains", "current url is the same as expected url", true, driver);
-		}
-		else
-		{
-			PageObjectLogging.log("verifyURLcontains", "current url isn't the same as expetced url", false, driver);
-		}
+            String currentURL = driver.getCurrentUrl();
+            Assertion.assertStringContains(currentURL, GivenString);
+            PageObjectLogging.log(
+                "verifyURLcontains",
+                "current url is the same as expetced url",
+                true, driver
+            );
 	}
-	
+
 	/**
 	 * Checks if the current URL is the given URL
 	 *
@@ -497,13 +498,14 @@ public class BasePageObject{
 	}
 
         /**
-         * waitForElementNotPresent
+         * Wait for element to be displayed
          *
-         * @param cssSelector
+         * @param element
          */
-        public void waitForElementNotPresent(final String cssSelector) {
-            wait.until(CommonExpectedConditions.elementNotPresent(cssSelector));
+        public void waitForElementVisibleByElement(WebElement element) {
+            wait.until(CommonExpectedConditions.elementVisible(element));
         }
+
 
 	public WebElement waitForElementByCss(String cssSelector)
 	{
@@ -659,7 +661,7 @@ public class BasePageObject{
 		waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
 		PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true, driver);
 	}
-	
+
 	/**
 	 * Clicks on "Customize" button. User must be logged in.
 	 * 
@@ -1017,18 +1019,13 @@ public class BasePageObject{
 	}
 	
 
-	public void openWikiPage() {
-		String temp = Domain;
-		try {
-			temp = Domain + "?noexternals=1";
-			getUrl(temp);
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logOut",
-					"page loads for more than 30 seconds", true);
-		}
-		waitForElementByCss("a[class*=hub]");
-		executeScript("$('ul#pagehistory li:nth-child(1) .mw-history-undo')");
-	}
+    public void openWikiPage() {
+        getUrl(Domain + URLsContent.noexternals);
+        PageObjectLogging.log(
+            "WikiPageOpened",
+            "Wiki page is opened", true
+        );
+    }
 
 //	public void openRandomArticle() {
 //		clickAndWait(randomPageButton);
@@ -1036,15 +1033,17 @@ public class BasePageObject{
 //		PageObjectLogging.log("openRandomArticle",
 //				"random page button clicked", true, driver);
 //	}
-	
+
 	public WikiArticlePageObject openRandomArticle() {
-		clickAndWait(randomPageButton);
-		waitForElementByElement(searchButton);
-		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
-		return new WikiArticlePageObject(driver, Domain, "random");
+            clickAndWait(randomPageButton);
+            waitForElementByElement(searchButton);
+            PageObjectLogging.log(
+                "openRandomArticle",
+                "random page button clicked", true, driver
+            );
+            return new WikiArticlePageObject(driver, Domain, "random");
 	}
-	
+
 	public void openRandomArticleByUrl() {
 		navigateToRandomPage();
 		waitForElementByElement(searchButton);
@@ -1140,11 +1139,7 @@ public class BasePageObject{
 		PageObjectLogging.log("VerifyEmailModalElements", "Verify that the Email Modal elements are present", true, driver);
 	}
 	
-	public void verifyLogInModalForAnonsVisibility() {	
-		waitForElementByElement(logInModal);
-		PageObjectLogging.log("VerifyLogInModalForAnonsVisibility", "Verify that the Log In modal is present", true, driver);
-	}	
-	
+
 	public void notifications_verifyLatestNotificationTitle(String title) {
 		notifications_showNotifications();
 		//the below method is native click which is the only way to load notification
@@ -1194,4 +1189,60 @@ public class BasePageObject{
 		}
 		PageObjectLogging.log("notifications_clickMarkAllAsRead", (allWikis ? "all wikis" : "only one wiki")+" marked as read", true, driver);				
 	}
+
+    /**
+     * Determine whether username contains underscore
+     * if so replace it with space
+     *
+     * @param username
+     */
+    protected String purifyUserName(String userName) {
+        if (userName.contains("_")) {
+            userName = userName.replace("_", " ");
+        }
+        return userName;
+    }
+
+    /**
+     * Verify if modal for forced login is present
+     */
+    public void verifyLogInModalForAnonsVisibility() {
+        waitForElementVisibleByElement(logInModal);
+        PageObjectLogging.log(
+            "VerifyLogInModalForAnonsVisibility",
+            "Verify that the Log In modal is present",
+            true,
+            driver
+        );
+    }
+
+    /**
+     * Verify if user is logged in
+     * Check if link to user's Profile contains user's name
+     *
+     * @param userName
+     */
+    public void verifyUserLoggedIn(String userName) {
+        waitForElementByElement(userProfileLink);
+        userName = purifyUserName(userName);
+        waitForTextToBePresentInElementByElement(
+            userProfileLink, userName
+        );
+        PageObjectLogging.log(
+            "VerifyUserNamePresent",
+            "Verify that username is present in link to user's profile",
+            true, driver
+        );
+    }
+
+    /**
+     * Wait for element to not be present in DOM
+     *
+     * @param cssSelector
+     */
+    public void waitForElementNotPresent(final String cssSelector) {
+        wait.until(
+            CommonExpectedConditions.elementNotPresent(cssSelector)
+        );
+    }
 }

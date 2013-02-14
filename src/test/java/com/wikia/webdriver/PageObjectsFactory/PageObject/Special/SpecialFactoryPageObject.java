@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -6,9 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
-public class SpecialFactoryPageObject extends BasePageObject
+public class SpecialFactoryPageObject extends SpecialPageObject
 {
 	@FindBy(id="citydomain")
 	private WebElement domainField;
@@ -26,8 +28,8 @@ public class SpecialFactoryPageObject extends BasePageObject
 	private WebElement closedWikiaLink;
 	
 	public SpecialFactoryPageObject(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
+            super(driver);
+            PageFactory.initElements(driver, this);
 	}
 	
 	

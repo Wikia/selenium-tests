@@ -9,9 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
-public class SpecialUserLoginPageObject extends BasePageObject{
+public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	public SpecialUserLoginPageObject(WebDriver driver) {
 		super(driver);

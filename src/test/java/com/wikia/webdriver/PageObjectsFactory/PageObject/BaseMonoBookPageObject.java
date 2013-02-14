@@ -26,12 +26,10 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void openWikiPageWithMonobook() {
-        String baseUrl = Domain;
-        baseUrl = Domain + URLsContent.noexternals;
-        getUrl(baseUrl);
+        getUrl(Domain + URLsContent.noexternals);
         PageObjectLogging.log(
-            "logOut",
-            "page loads for more than 30 seconds", true
+            "OpenWikiPage",
+            "Wiki Page opened with success", true
         );
         changeToMonoBook();
         PageObjectLogging.log(

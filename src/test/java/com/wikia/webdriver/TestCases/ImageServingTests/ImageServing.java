@@ -12,7 +12,7 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.FilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialMultipleUploadPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
@@ -26,9 +26,9 @@ public class ImageServing extends TestTemplate {
 	{
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2);		
-		SpecialNewFilesPageObject wikiSpecialNF = new SpecialNewFilesPageObject(driver, Global.DOMAIN);
+		SpecialNewFilesPageObject wikiSpecialNF = new SpecialNewFilesPageObject(driver);
 		wikiSpecialNF = wikiSpecialNF.openSpecialNewFiles();
-		wikiSpecialNF.clickOnAddaPhoto();
+		wikiSpecialNF.addPhoto();
 		wikiSpecialNF.clickOnMoreOrFewerOptions();
 		wikiSpecialNF.checkIgnoreAnyWarnings();
 		wikiSpecialNF.clickOnMoreOrFewerOptions();
