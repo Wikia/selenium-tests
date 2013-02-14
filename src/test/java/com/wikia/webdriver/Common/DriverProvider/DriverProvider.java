@@ -21,6 +21,7 @@ import org.openqa.selenium.ie.InternetExplorerDriverLogLevel;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.wikia.webdriver.Common.Core.Global;
@@ -121,13 +122,15 @@ public class DriverProvider {
 		{
 			driver = new EventFiringWebDriver(new HtmlUnitDriver()).register(listener);
 		}
-			
-		
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);			
+		else if (Global.BROWSER.equals("SAFARI")){
+			driver = new EventFiringWebDriver(new SafariDriver()).register(listener);
+		}			
 		if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")))
 		{
 			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		}
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 //		driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 		return instance;
 	}
