@@ -9,6 +9,7 @@ import org.browsermob.core.har.Har;
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Proxy;
+import org.openqa.selenium.SeleneseCommandExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,10 +21,14 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverLogLevel;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.CommandExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import com.thoughtworks.selenium.DefaultSelenium;
+import com.thoughtworks.selenium.Selenium;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -123,9 +128,13 @@ public class DriverProvider {
 			driver = new EventFiringWebDriver(new HtmlUnitDriver()).register(listener);
 		}
 		else if (Global.BROWSER.equals("SAFARI")){
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability("safari.cleanSession", true);
-			driver = new EventFiringWebDriver(new SafariDriver(caps)).register(listener);
+//			DesiredCapabilities caps = new DesiredCapabilities();
+//			caps.setCapability("safari.cleanSession", true);
+//			driver = new EventFiringWebDriver(new SafariDriver(caps)).register(listener);
+			Selenium sel = new DefaultSelenium("lcoalhost", 4444, "*safari", "");
+			CommandExecutor executor = new SeleneseCommandExecutor(sel);
+			DesiredCapabilities cap = new DesiredCapabilities();
+			driver = new RemoteWebDriver(executor, cap);
 		}			
 		if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")))
 		{
