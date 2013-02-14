@@ -25,6 +25,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 /**
  * 
@@ -481,7 +482,7 @@ public class BasePageObject{
 	 */
 	public void waitForElementByElement(WebElement element)
 	{
-			wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.visibilityOf(element));
 	}
 
 	/**
@@ -491,10 +492,24 @@ public class BasePageObject{
 	 */
 	public void waitForElementPresenceByBy(By locator)
 	{
-			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+            wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 
 	}
-	
+
+        /**
+         * waitForElementNotPresent
+         *
+         * @param cssSelector
+         */
+        public void waitForElementNotPresent(final String cssSelector) {
+            wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver driver) {
+                    return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
+                }
+            });
+        }
+
 	public WebElement waitForElementByCss(String cssSelector)
 	{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
