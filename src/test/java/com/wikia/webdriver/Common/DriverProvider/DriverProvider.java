@@ -123,7 +123,9 @@ public class DriverProvider {
 			driver = new EventFiringWebDriver(new HtmlUnitDriver()).register(listener);
 		}
 		else if (Global.BROWSER.equals("SAFARI")){
-			driver = new EventFiringWebDriver(new SafariDriver()).register(listener);
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setCapability("safari.cleanSession", true);
+			driver = new EventFiringWebDriver(new SafariDriver(caps)).register(listener);
 		}			
 		if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")))
 		{
