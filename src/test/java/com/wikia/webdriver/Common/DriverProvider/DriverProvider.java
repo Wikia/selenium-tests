@@ -1,15 +1,10 @@
 package com.wikia.webdriver.Common.DriverProvider;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import org.browsermob.core.har.Har;
 import org.browsermob.proxy.ProxyServer;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Proxy;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,8 +12,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerDriverLogLevel;
-import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
@@ -26,9 +19,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-
-
-//import com.wikia.selenium.logging.LoggerDriver;
 
 public class DriverProvider {
 	
@@ -38,37 +28,36 @@ public class DriverProvider {
 
 	/**
 	 * creating webdriver instance based on given browser string
-	 * @return
+	 * @return instance of webdriver
 	 * @author Karol Kujawiak
 	 */
 	public static DriverProvider getInstance()
 	{
 		PageObjectLogging listener = new PageObjectLogging();
 		
-		if (Global.BROWSER.equals("IE"))
-		{
+		if (Global.BROWSER.equals("IE")){
 			setIEProperties();
-//			InternetExplorerDriverService service;
-//			service = new InternetExplorerDriverService.Builder().usingAnyFreePort()
-//	                .withLogFile(new File("c:\\iedriver1.log")).withLogLevel(InternetExplorerDriverLogLevel.TRACE).build();
-//			try {
-//				service.start();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			driver = new EventFiringWebDriver(new InternetExplorerDriver()).register(listener);
-			
 		}
-		else if (Global.BROWSER.equals("FF"))
-		{
+		else if (Global.BROWSER.equals("FF")){
 			driver = new EventFiringWebDriver(new FirefoxDriver()).register(listener);
 		}
-		else if (Global.BROWSER.equals("FFPROXY"))
-		{
+		else if (Global.BROWSER.equals("CHROME")){
+			setChromeProperties();
+			driver = new EventFiringWebDriver(new ChromeDriver()).register(listener);
+		}
+		else if (Global.BROWSER.equals("SAFARI")){
+			/*
+			 * clone following repository
+			 * https://github.com/senthilnayagam/safari-webdriver.git
+			 * webdriver.safari.driver property should be set to path to the SafariDriver.safariextz file
+			 */
+			System.setProperty("webdriver.safari.driver", "");
+			driver = new EventFiringWebDriver(new SafariDriver()).register(listener);
+		}
+		else if (Global.BROWSER.equals("FFPROXY")){
 			server = new ProxyServer(4569);
-			try
-			{
+			try{
 				server.start();
 				server.setCaptureHeaders(true);
 				server.setCaptureContent(true);
@@ -88,52 +77,30 @@ public class DriverProvider {
 		        caps.setCapability(FirefoxDriver.PROFILE,profile);
 		        caps.setCapability(CapabilityType.PROXY, proxy);
 		        driver = new EventFiringWebDriver(new FirefoxDriver(caps)).register(listener);
-			}
-			catch(Exception e)
-			{
+		        }
+			catch(Exception e){
 				e.printStackTrace();
 			}
 		}
-		else if (Global.BROWSER.equals("CHROME"))
-		{
+		else if (Global.BROWSER.equals("CHROMEMOBILE")){
 			setChromeProperties();
-			driver = new EventFiringWebDriver(new ChromeDriver()).register(listener);
-		}
-		else if (Global.BROWSER.equals("CHROMEMOBILE"))
-		{
-			setChromeProperties();
-//			File file = new File("."+File.separator+
-//					"src"+File.separator+
-//					"test"+File.separator+
-//					"resources"+File.separator+
-//					"ChromeDriver"+File.separator+
-//					"chromedriver.exe");
-////				System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-//			ChromeOptions o = new ChromeOptions();
-//			o.setBinary(file);
-//			DesiredCapabilities caps = new DesiredCapabilities().chrome();
-//			caps.setCapability("chrome.switches", Arrays.asList("--user-agent="+"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3"));
 			ChromeOptions o = new ChromeOptions();
 			o.addArguments("--user-agent="+"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3");
-			//"--user-agent="+"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3");
 			driver = new EventFiringWebDriver(new ChromeDriver(o)).register(listener);
 		}
-		else if (Global.BROWSER.equals("HTMLUNIT"))
-		{
+		else if (Global.BROWSER.equals("HTMLUNIT")){
 			driver = new EventFiringWebDriver(new HtmlUnitDriver()).register(listener);
+		}		
+		else{
+			System.out.println("This browser is not supported. Check -Dbrowser property value");
 		}
-		else if (Global.BROWSER.equals("SAFARI")){
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability("safari.cleanSession", true);
-			driver = new EventFiringWebDriver(new SafariDriver(caps)).register(listener);
-		}			
-		if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")))
-		{
+		if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")||Global.BROWSER.equals("SAFARI"))){
 			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		}
-		
+		else{
+			System.out.print(Global.BROWSER+" browser detected. Unable to set pageLoadTimeout()");
+		}
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//		driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 		return instance;
 	}
 	
@@ -142,9 +109,7 @@ public class DriverProvider {
 	 * @return
 	 * @author Karol Kujawiak
 	 */
-	public static DriverProvider getInstanceFF()
-	{
-		
+	public static DriverProvider getInstanceFF(){
 		PageObjectLogging listener = new PageObjectLogging();
 		driver = new EventFiringWebDriver(new FirefoxDriver()).register(listener);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -156,29 +121,20 @@ public class DriverProvider {
 	 * @return
 	 * @author Karol Kujawiak
 	 */
-	public static WebDriver getWebDriver()
-	{
+	public static WebDriver getWebDriver(){
 		return driver;
 	}
 	
-	public static ProxyServer getServer()
-	{
+	public static ProxyServer getServer(){
 		return server;
 	}
-	/**
-	 * @author Karol Kujawiak
-	 */
-	
-	
 
 	/**
 	 * @author Karol Kujawiak
 	 */
-	private static void setIEProperties()
-	{
+	private static void setIEProperties(){
 		String sysArch = System.getProperty("os.arch");
-		if (sysArch.equals("x86"))
-		{
+		if (sysArch.equals("x86")){
 			File file = new File("."+File.separator+
 					"src"+File.separator+
 					"test"+File.separator+
@@ -186,10 +142,8 @@ public class DriverProvider {
 					"IEDriver"+File.separator+
 					"IEDriverServer_x86.exe");	
 			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-
 		}
-		else
-		{
+		else{
 			File file = new File("."+File.separator+
 					"src"+File.separator+
 					"test"+File.separator+
@@ -204,8 +158,7 @@ public class DriverProvider {
 	/**
 	 * @author Karol Kujawiak
 	 */
-	private static void setChromeProperties()
-	{
+	private static void setChromeProperties(){
 		File file = new File("."+File.separator+
 				"src"+File.separator+
 				"test"+File.separator+
