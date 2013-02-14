@@ -21,7 +21,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 
 public class VetAddingVideo extends TestTemplate {
 
-	private String videoName, pageName; 
+	private String pageName; 
 	
 	@Test(groups = { "VetTests001", "VetTests" })
 	public void Vet_Tests_001_SpecialVideosProvider() {
@@ -44,8 +44,8 @@ public class VetAddingVideo extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		SpecialVideosPageObject specialVideos = wiki.openSpecialVideoPage();
 		VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-		videoName = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
-		specialVideos.verifyVideoAdded(videoName);
+		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		specialVideos.verifyVideoAdded(vetAddingVideo.getVideoName());
 	}
 	
 	@Test(groups = { "VetTests003", "VetTests" })
@@ -98,15 +98,28 @@ public class VetAddingVideo extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}
 	
-//	@Test(groups = { "VetTests006", "VetTests" })
-//	public void Vet_Tests_006_ArticlePlaceholderPublishedPageLibrary() {
-//	}
-////		
-	@Test(groups = { "VetTests007", "VetTests" })
-	public void Vet_Tests_007_ArticlePlaceholderEditModePageProvider() {
+	@Test(groups = { "VetTests006", "VetTests" })
+	public void Vet_Tests_006_ArticlePlaceholderPublishedPageLibrary() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticlePageObject article = edit.clickOnPublishButton();
+		article.verifyPageTitle(pageName);
+		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		vetOptions.submit();
+		article.verifyVideoOnThePage();
+	}
+		
+	@Test(groups = { "VetTests007", "VetTests" })
+	public void Vet_Tests_007_ArticlePlaceholderEditModePageProvider() {
+		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
@@ -118,9 +131,24 @@ public class VetAddingVideo extends TestTemplate {
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyVideoOnThePage();
 	}
-//	
-//	@Test(groups = { "VetTests008", "VetTests" })
-//	public void Vet_Tests_008_ArticlePlaceholderEditModePageLibrary() {}	
+	
+	@Test(groups = { "VetTests008", "VetTests" })
+	public void Vet_Tests_008_ArticlePlaceholderEditModePageLibrary() {
+		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		VetAddVideoComponentObject vetAddingVideo = edit.clickModifyButtonVideoPlaceholder();
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		vetOptions.setCaption(PageContent.caption);
+		vetOptions.submit();
+		edit.verifyVideoInEditMode(PageContent.caption);
+		WikiArticlePageObject article = edit.clickOnPublishButton();
+		article.verifyVideoOnThePage();
+	}	
 //	
 //	@Test(groups = { "VetTests009", "VetTests" })
 //	public void Vet_Tests_009_BlogProvider() {}

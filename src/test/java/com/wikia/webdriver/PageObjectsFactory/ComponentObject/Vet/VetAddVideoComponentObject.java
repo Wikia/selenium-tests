@@ -47,6 +47,7 @@ public class VetAddVideoComponentObject extends BasePageObject{
 		PageFactory.initElements(driver,  this);
 	}
 	
+	private String videoName;
 	
 	/**
 	 * for provider
@@ -91,14 +92,14 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	/**
 	 * for wiki videos
 	 */
-	private String clickAddVideoLibrary(int i){
+	private void clickAddVideoLibrary(int i){
 		WebElement temp = videoList.get(i);
 		waitForElementByElement(temp);
 		String videoName = temp.findElement(videoNameSelector).getText();
 		WebElement addVideoLink = temp.findElement(addVideoLibraryLink);
 		addVideoLink.click();
 		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked", true, driver);
-		return videoName;
+		this.videoName =  videoName;
 	}
 
 	/**
@@ -115,11 +116,15 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	 * for wiki videos
 	 * @param query
 	 */
-	public String addVideoByQuery(String query, int i){
+	public VetOptionsComponentObject addVideoByQuery(String query, int i){
 		typeInSearchQuery(query);
 		clickFindButton();
-		return clickAddVideoLibrary(i);
+		clickAddVideoLibrary(i);
+		return new VetOptionsComponentObject(driver);
 	}
 	
+	public String getVideoName(){
+		return this.videoName;
+	}
 
 }
