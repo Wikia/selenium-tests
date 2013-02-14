@@ -142,7 +142,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentText, Properties.userNameStaff);
 		article.deleteComment(PageContent.commentText);
 		CommonFunctions.logoutCookie(cookieName);
 	}
@@ -166,11 +166,11 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentText, Properties.userNameStaff);
 		article.editComment(PageContent.commentText);
 		article.writeOnCommentArea(PageContent.commentTextEdit);
 		article.clickSubmitButton(Properties.userNameStaff);
-		article.verifyComment(PageContent.commentTextEdit, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentTextEdit, Properties.userNameStaff);
 		article.deleteComment(PageContent.commentTextEdit);
 		CommonFunctions.logoutCookie(cookieName);
 	}
@@ -251,7 +251,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentText, Properties.userNameStaff);
 		article.replyComment(PageContent.commentText, PageContent.replyText);
 		article.deleteComment(PageContent.commentText);
 		CommonFunctions.logoutCookie(cookieName);

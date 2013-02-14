@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class MiniEditorComponentObject extends WikiBasePageObject{
@@ -94,7 +95,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		driver.switchTo().defaultContent();
 	}
 	
-	protected void verifyVideoMiniEditor(){
+	public void verifyVideoMiniEditor(){
 		waitForElementByElement(miniEditorIframe);
 		driver.switchTo().frame(miniEditorIframe);
 		waitForElementByElement(videoInMessageEditMode);
@@ -124,5 +125,11 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	
 	public void clearContent(){
 		messageBodyField.clear();
+	}
+	
+	public VetAddVideoComponentObject clickAddVideo(){
+		waitForElementByElement(addVideoButton);
+		clickAndWait(addVideoButton);
+		return new VetAddVideoComponentObject(driver);
 	}
 }

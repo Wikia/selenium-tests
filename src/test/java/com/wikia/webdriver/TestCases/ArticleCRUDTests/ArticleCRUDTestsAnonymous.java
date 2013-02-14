@@ -114,7 +114,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, PageContent.wikiaContributor);
+		article.verifyCommentText(PageContent.commentText, PageContent.wikiaContributor);
 	}
 	
 	/* 
@@ -140,7 +140,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, PageContent.wikiaContributor);
+		article.verifyCommentText(PageContent.commentText, PageContent.wikiaContributor);
 		article.replyComment(PageContent.commentText, PageContent.replyText);
 	}	
 	

@@ -138,21 +138,24 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	{
 		executeScript("document.querySelectorAll('#article-comm-submit')[0].click()");
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
-//		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 	
 	public void clickSubmitButton(String userName)
 	{		
 		clickAndWait(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
-//		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 	
-	public void verifyComment(String message, String userName)
+	public void verifyCommentText(String message, String userName)
 	{
 		waitForElementByXPath("//blockquote//p[contains(text(), '"+message+"')]");
 		waitForElementByXPath("//div[@class='edited-by']//a[contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("verifyComment", "comment: "+message+" is visible", true, driver);
+	}
+	
+	public void verifyCommentVideo(String videoName){
+		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video*='"+videoName+"']");
+		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
 	}
 	
 	private void clickReplyCommentButton(String comment)
