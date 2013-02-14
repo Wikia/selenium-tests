@@ -314,6 +314,12 @@ public class CommonExpectedConditions {
 		      }
 		    };
 		  }
- 
-	  
+    public static ExpectedCondition<Boolean> elementNotPresent(final String cssSelector) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
+            }
+        };
+    }
 }

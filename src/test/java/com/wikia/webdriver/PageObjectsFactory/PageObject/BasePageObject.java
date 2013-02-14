@@ -502,12 +502,7 @@ public class BasePageObject{
          * @param cssSelector
          */
         public void waitForElementNotPresent(final String cssSelector) {
-            wait.until(new ExpectedCondition<Boolean>() {
-                @Override
-                public Boolean apply(WebDriver driver) {
-                    return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
-                }
-            });
+            wait.until(CommonExpectedConditions.elementNotPresent(cssSelector));
         }
 
 	public WebElement waitForElementByCss(String cssSelector)
