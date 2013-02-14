@@ -131,7 +131,7 @@ public class DriverProvider {
 //			DesiredCapabilities caps = new DesiredCapabilities();
 //			caps.setCapability("safari.cleanSession", true);
 //			driver = new EventFiringWebDriver(new SafariDriver(caps)).register(listener);
-			Selenium sel = new DefaultSelenium("lcoalhost", 4444, "*safari", "");
+			Selenium sel = new DefaultSelenium("localhost", 4444, "*safari", "");
 			CommandExecutor executor = new SeleneseCommandExecutor(sel);
 			DesiredCapabilities cap = new DesiredCapabilities();
 			driver = new RemoteWebDriver(executor, cap);
