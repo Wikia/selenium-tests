@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -137,6 +138,8 @@ public class WikiBasePageObject extends BasePageObject {
 	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
 	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
 	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
+	
+	private String pageName;
 
 	public WikiBasePageObject(WebDriver driver, String Domain) {
 		super(driver);
@@ -724,6 +727,11 @@ public class WikiBasePageObject extends BasePageObject {
 				+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver, Domain, pageName);
 	}
+	
+	public WikiArticleEditMode createNewDefaultArticle(){
+		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
+		return createNewArticle(this.pageName, 1);
+	} 
 	
 	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
 		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);

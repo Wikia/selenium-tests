@@ -135,9 +135,9 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private String editButtonVideoPlaceholder = "[type=video-placeholder] span.RTEMediaOverlayEdit";
 	
 	public WikiArticleEditMode(WebDriver driver, String Domain,
-			String wikiArticle) {
+			String pageName) {
 		super(driver, Domain);
-		this.articlename = wikiArticle;
+		this.articlename = pageName;
 		PageFactory.initElements(driver, this);
 	}
 

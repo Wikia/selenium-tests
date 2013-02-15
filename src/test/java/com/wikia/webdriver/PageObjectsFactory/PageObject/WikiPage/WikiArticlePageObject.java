@@ -80,12 +80,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public WikiArticlePageObject(WebDriver driver, String Domain,
 			String wikiArticle) {
 		super(driver, Domain);
-		
-		
-		
-		
 		this.articlename = wikiArticle;
 		PageFactory.initElements(driver, this);
+	}
+	
+	public String getPageName(){
+		return this.articlename;
 	}
 	
 	public void triggerCommentArea()

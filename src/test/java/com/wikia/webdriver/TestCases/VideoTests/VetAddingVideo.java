@@ -23,8 +23,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 // https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
 
 public class VetAddingVideo extends TestTemplate {
-
-	private String pageName; 
 	
 	@Test(groups = {"VetTests001", "VetTests"})
 	public void Vet_Tests_001_SpecialVideosProvider() {
@@ -89,12 +87,11 @@ public class VetAddingVideo extends TestTemplate {
 	public void Vet_Tests_005_ArticlePlaceholderPublishedPageProvider() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.submit();
@@ -105,12 +102,11 @@ public class VetAddingVideo extends TestTemplate {
 	public void Vet_Tests_006_ArticlePlaceholderPublishedPageLibrary() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.submit();
@@ -122,16 +118,16 @@ public class VetAddingVideo extends TestTemplate {
 		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickModifyButtonVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		edit.verifyVideoInEditMode(PageContent.caption);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
+		article.verifyPageTitle(article.getPageName());
 		article.verifyVideoOnThePage();
 	}
 	
@@ -140,16 +136,16 @@ public class VetAddingVideo extends TestTemplate {
 		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickModifyButtonVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		edit.verifyVideoInEditMode(PageContent.caption);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
+		article.verifyPageTitle(article.getPageName());
 		article.verifyVideoOnThePage();
 	}	
 	
