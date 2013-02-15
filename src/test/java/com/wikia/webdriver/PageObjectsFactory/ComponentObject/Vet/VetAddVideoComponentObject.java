@@ -92,8 +92,8 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	/**
 	 * for wiki videos
 	 */
-	private void clickAddVideoLibrary(int i){
-		WebElement temp = videoList.get(i);
+	private void clickAddVideoLibrary(int videoListItem){
+		WebElement temp = videoList.get(videoListItem);
 		waitForElementByElement(temp);
 		String videoName = temp.findElement(videoNameSelector).getText();
 		WebElement addVideoLink = temp.findElement(addVideoLibraryLink);
