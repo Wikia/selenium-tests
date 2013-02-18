@@ -16,9 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEdi
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class ArticleVideoTestsAdmin extends TestTemplate{
-	
-	private String pageName;
-	
+		
 	//Rodrigo Testing TCs
 			@DataProvider
 			private static final Object[][] provideVideo()
@@ -53,8 +51,7 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 				edit.deleteArticleContent();
 				edit.clickOnVisualButton();
 				edit.clickOnAddObjectButton("Video");
@@ -99,9 +96,8 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
 				wiki.openWikiPage();
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 				edit.deleteArticleContent();
 				edit.clickOnAddObjectButton("Image");
 				edit.waitForModalAndClickAddThisPhoto();
@@ -135,9 +131,8 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
 				wiki.openWikiPage();			
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 				edit.deleteArticleContent();
 				edit.clickOnAddObjectButton("Image");
 				WikiArticlePageObject article = edit.addImageForLightboxTesting();
