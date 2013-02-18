@@ -43,7 +43,7 @@ public class MailFunctions {
 				messages = inbox.getMessages();
 				counter+=1;
 				System.out.println(counter);
-				if (counter >1500)
+				if (counter >2500)
 				{
 					break;
 				}
