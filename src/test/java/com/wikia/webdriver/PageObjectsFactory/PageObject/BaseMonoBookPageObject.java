@@ -42,7 +42,6 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void changeToMonoBook() {
-    	waitForElementByElement(oasisSkinClass);
     	String currentUrl = driver.getCurrentUrl();
         if (currentUrl.contains("?")) {
             getUrl(currentUrl+"&useskin=monobook");
