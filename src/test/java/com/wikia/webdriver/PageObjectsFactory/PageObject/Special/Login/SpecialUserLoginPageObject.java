@@ -28,7 +28,7 @@ public class SpecialUserLoginPageObject extends BasePageObject{
 	private WebElement retypeNewPassword;
 	@FindBy(css=".WikiaArticle input.login-button.big")
 	private WebElement loginButton;
-	@FindBy(css=".WikiaArticle .forgot-your-password-link")
+	@FindBy(css=".WikiaArticle .forgot-password")
 	private WebElement forgotPasswordLink;
 
 	/**
