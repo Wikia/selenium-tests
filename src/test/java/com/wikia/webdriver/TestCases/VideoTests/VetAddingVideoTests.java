@@ -22,7 +22,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 
 // https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
 
-public class VetAddingVideo extends TestTemplate {
+public class VetAddingVideoTests extends TestTemplate {
 	
 	@Test(groups = {"VetTests001", "VetTests"})
 	public void Vet_Tests_001_SpecialVideosProvider() {

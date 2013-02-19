@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.ArticleCRUDTests;
+package com.wikia.webdriver.TestCases.VideoTests;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -15,7 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPag
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
-public class ArticleVideoTestsAdmin extends TestTemplate{
+public class VetProvidersTests extends TestTemplate{
 	
 	private String pageName;
 	
