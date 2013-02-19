@@ -91,42 +91,6 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				wiki.verifyVideoAddedToRVModule(name);
 			}
 			
-			@Test(groups={"ArticleVideo_003", "ArticleVideo"}) 
-			public void ArticleVideo003_VerifyingImagesPositionWikiText()
-			{
-				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-				wiki.openWikiPage();
-				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-				wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
-				wiki.openWikiPage();
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-				edit.deleteArticleContent();
-				edit.clickOnAddObjectButton("Image");
-				edit.waitForModalAndClickAddThisPhoto();
-				edit.typePhotoCaption(PageContent.caption);
-				edit.clickImageLeftAlignment();
-				edit.clickOnAddPhotoButton2();
-				edit.clickOnSourceButton();
-				edit.verifyWikiTextInSourceMode("left");					
-				edit.clickOnVisualButton();				
-				edit.verifyLeftAlignmentIsSelected();
-				//no need to check images "right" string in wikitext until centered position has been added to images like it has to videos
-//				edit.deleteArticleContent();
-//				edit.clickOnAddObjectButton("Image");
-//				edit.waitForModalAndClickAddThisPhoto();
-//				edit.typePhotoCaption(PageContent.caption);
-//				edit.clickImageRightAlignment();
-//				edit.clickOnAddPhotoButton2();
-//				edit.clickOnSourceButton();
-//				edit.verifyWikiTextInSourceMode("");					
-//				edit.clickOnVisualButton();				
-//				edit.verifyRightAlignmentIsSelected();
-				WikiArticlePageObject article = edit.clickOnPublishButton();
-				article.verifyImageOnThePage();
-			}
-			
 			@Test(groups={"ArticleVideo_004", "ArticleVideo"}) 
 			public void ArticleVideo004_Lightbox_VerifyExistenceAndURLsOfSocialButtons()
 			{

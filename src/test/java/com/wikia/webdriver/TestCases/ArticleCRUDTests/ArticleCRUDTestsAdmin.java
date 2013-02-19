@@ -256,4 +256,30 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.deleteComment(PageContent.commentText);
 		CommonFunctions.logoutCookie(cookieName);
 	}
+	
+	
+	@Test(groups={"ArticleCRUDAdmin_011", "ArticleCRUDAdmin"})
+	public void ArticleCRUDAdmin_011_VerifyingImagesPositionWikiText()
+	{
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		wiki.refreshPage();
+		pageName = "QAarticle"+wiki.getTimeStamp();
+		wiki.openWikiPage();
+		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		edit.deleteArticleContent();
+		edit.clickOnAddObjectButton("Image");
+		edit.waitForModalAndClickAddThisPhoto();
+		edit.typePhotoCaption(PageContent.caption);
+		edit.clickImageLeftAlignment();
+		edit.clickOnAddPhotoButton2();
+		edit.clickOnSourceButton();
+		edit.verifyWikiTextInSourceMode("left");					
+		edit.clickOnVisualButton();				
+		edit.verifyLeftAlignmentIsSelected();
+		WikiArticlePageObject article = edit.clickOnPublishButton();
+		article.verifyImageOnThePage();
+	}
 }
