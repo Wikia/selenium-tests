@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.VideoTests;
 
-import org.apache.http.entity.ContentProducer;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -15,12 +14,15 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
-// https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
+/*
+ * Documentation:
+ * https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
+ */
 
 public class VetAddingVideo extends TestTemplate {
 	
@@ -187,6 +189,7 @@ public class VetAddingVideo extends TestTemplate {
 	
 	@Test(groups = {"VetTests011", "VetTests"})
 	public void Vet_Tests_011_CommentsProvider() {
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
@@ -205,6 +208,7 @@ public class VetAddingVideo extends TestTemplate {
 	
 	@Test(groups = {"VetTests012", "VetTests"})
 	public void Vet_Tests_012_CommentsLibrary() {
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
@@ -220,10 +224,48 @@ public class VetAddingVideo extends TestTemplate {
 		article.clickSubmitButton();
 		article.verifyCommentVideo(VideoContent.wikiaVideoName);
 	}
-//	
-//	@Test(groups = {"VetTests013", "VetTests"})
-//	public void Vet_Tests_013_MessageWallProvider() {}
-//	
-//	@Test(groups = {"VetTests014", "VetTests"})
-//	public void Vet_Tests_014_MessageWallLibrary() {}
+	
+	@Test(groups = {"VetTests013", "VetTests"})
+	public void Vet_Tests_013_MessageWallProvider() {
+		CommonFunctions.logOut(driver);
+		MessageWallPageObject wall = new MessageWallPageObject(driver,
+				Global.DOMAIN);
+		String timeStamp = wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		wall.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		wall.openMessageWall(Properties.userName);
+		wall.triggerMessageArea();
+		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver, Global.DOMAIN);
+		wall.writeMessage(title, "");
+		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
+		vetOptions.setCaption(PageContent.caption);
+		vetOptions.submit();
+		mini.verifyVideoMiniEditor();
+		wall.clickPostButton();
+		wall.verifyPostedMessageVideo(title);
+	}
+	
+	@Test(groups = {"VetTests014", "VetTests"})
+	public void Vet_Tests_014_MessageWallLibrary() {
+		CommonFunctions.logOut(driver);
+		MessageWallPageObject wall = new MessageWallPageObject(driver,
+				Global.DOMAIN);
+		String timeStamp = wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		wall.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		wall.openMessageWall(Properties.userName);
+		wall.triggerMessageArea();
+		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver, Global.DOMAIN);
+		wall.writeMessage(title, "");
+		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		vetOptions.setCaption(PageContent.caption);
+		vetOptions.submit();
+		mini.verifyVideoMiniEditor();
+		wall.clickPostButton();
+		wall.verifyPostedMessageVideo(title);
+	}
 }

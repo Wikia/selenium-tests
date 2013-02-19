@@ -90,7 +90,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		return new MessageWallPageObject(driver, userName);
 	}
 	
-	private void triggerMessageArea()
+	public void triggerMessageArea()
 	{
 		jQueryFocus("#WallMessageBody");
 		waitForElementByElement(miniEditor.miniEditorIframe);
