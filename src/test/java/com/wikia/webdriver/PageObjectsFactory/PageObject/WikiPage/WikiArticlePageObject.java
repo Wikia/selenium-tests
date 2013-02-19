@@ -547,7 +547,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public FileDetailsPageObject clickVideoDetailsButton() {
 		waitForElementByElement(videoDetailsButton);
 		videoDetailsButton.click();
-		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true, driver);
+		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
 		return new FileDetailsPageObject(driver, Domain);
 	}
 

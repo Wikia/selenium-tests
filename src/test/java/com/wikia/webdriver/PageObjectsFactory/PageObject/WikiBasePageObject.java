@@ -18,6 +18,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateTopListPageObject;
@@ -165,14 +166,20 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
 	 */
-	public void clickOnAddObjectButton(String Object) {
+	public Object clickOnAddObjectButton(String Object) {
 		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
 		WebElement ObjectButton;
 		waitForElementByCss(ObjectCss);
 		waitForElementClickableByCss(ObjectCss);
 		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
 		clickAndWait(ObjectButton);
-		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);		
+		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
+		if (Object.equals("Video")){
+			return new VetAddVideoComponentObject(driver);
+		}
+		else{
+			return null;
+		}		
 	}
 	
 	/**

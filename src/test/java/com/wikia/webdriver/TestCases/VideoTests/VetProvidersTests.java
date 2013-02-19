@@ -4,12 +4,14 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
@@ -44,7 +46,7 @@ public class VetProvidersTests extends TestTemplate{
 				};
 			}
 			
-			@Test(dataProvider="provideVideo", groups={"ArticleVideo_001", "ArticleVideo"}) 
+			@Test(dataProvider="provideVideo", groups={"VetProvidersTests001", "VetTests"}) 
 			public void ArticleVideo001_AddingProviderVideosVET(String videoURL, String name)
 			{
 				PageObjectLogging.log("", videoURL, true);
@@ -57,13 +59,10 @@ public class VetProvidersTests extends TestTemplate{
 				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 				edit.deleteArticleContent();
 				edit.clickOnVisualButton();
-				edit.clickOnAddObjectButton("Video");
-				edit.waitForVideoModalAndTypeVideoURL(videoURL);
-				edit.clickAddVideoButton();
-				edit.typeVideoCaption(PageContent.caption);
-				edit.clickSubmitVideoButton();
-				edit.verifySuccessAfterAddingVideo();
-				edit.clickReturnToEditingButton();
+				VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) edit.clickOnAddObjectButton("Video");
+				VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+				vetOptions.setCaption(PageContent.caption);
+				vetOptions.submit();
 				edit.verifyVideoInEditMode(PageContent.caption);
 				WikiArticlePageObject article = edit.clickOnPublishButton();
 				article.verifyVideoOnThePage();
@@ -72,7 +71,7 @@ public class VetProvidersTests extends TestTemplate{
 				fileDetails.verifythumbnailIsPresent();
 			}
 			
-			@Test(dataProvider="provideVideo", groups={"ArticleVideo_002", "ArticleVideo"}) 
+			@Test(dataProvider="provideVideo", groups={"VetProvidersTests002", "VetTests"}) 
 			public void ArticleVideo002_AddingProviderVideosRVModule(String videoUrl, String name)
 			{
 				PageObjectLogging.log("", videoUrl, true);
@@ -85,9 +84,8 @@ public class VetProvidersTests extends TestTemplate{
 				RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
 				wiki = RVmoduleMessageEdit.clickOnPublishButton();
 				wiki.openRandomArticle();
-				wiki.clickOnAddVideoRVModule();
-				wiki.typeInVideoURL(videoUrl);
-				wiki.clickOnRVModalAddButton();
+				VetAddVideoComponentObject vetAddingVideo = wiki.clickOnAddVideoRVModule();
+				vetAddingVideo.addVideoByUrl(videoUrl);
 				wiki.verifyVideoAddedToRVModule(name);
 			}
 }
