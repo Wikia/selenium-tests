@@ -8,6 +8,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
@@ -257,7 +258,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		CommonFunctions.logoutCookie(cookieName);
 	}
 	
-	
 	@Test(groups={"ArticleCRUDAdmin_011", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_011_VerifyingImagesPositionWikiText()
 	{
@@ -281,5 +281,36 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		edit.verifyLeftAlignmentIsSelected();
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyImageOnThePage();
+	}
+	
+	@Test(groups={"ArticleCRUDAdmin_012", "ArticleCRUDAdmin"})
+	public void ArticleCRUDAdmin_012_LightboxVerifyExistenceAndURLsOfSocialButtons()
+	{
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		wiki.refreshPage();
+		pageName = "QAarticle"+wiki.getTimeStamp();
+		wiki.openWikiPage();			
+		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		edit.deleteArticleContent();
+		edit.clickOnAddObjectButton("Image");
+		WikiArticlePageObject article = edit.addImageForLightboxTesting();
+		LightboxPageObject lightbox = article.clickThumbnailImage();
+		lightbox.clickPinButton();
+		lightbox.clickShareButton();
+		lightbox.verifyShareButtons();
+		lightbox.clickFacebookShareButton();
+		lightbox.verifyFacebookWindow();
+		lightbox.clickTwitterShareButton();
+		lightbox.verifyTwitterWindow();
+		lightbox.clickStumbleUponShareButton();
+		lightbox.verifyStumbleUponWindow();
+		lightbox.clickRedditShareButton();
+		lightbox.verifyRedditWindow();
+		lightbox.clickPlusOneShareButton();
+		lightbox.verifyPlusOneWindow();
+		lightbox.clickCloseButton();
 	}
 }

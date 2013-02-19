@@ -90,36 +90,4 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				wiki.clickOnRVModalAddButton();
 				wiki.verifyVideoAddedToRVModule(name);
 			}
-			
-			@Test(groups={"ArticleVideo_004", "ArticleVideo"}) 
-			public void ArticleVideo004_Lightbox_VerifyExistenceAndURLsOfSocialButtons()
-			{
-				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-				wiki.openWikiPage();
-				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-				wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
-				wiki.openWikiPage();			
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
-				edit.deleteArticleContent();
-				edit.clickOnAddObjectButton("Image");
-				WikiArticlePageObject article = edit.addImageForLightboxTesting();
-				LightboxPageObject lightbox = article.clickThumbnailImage();
-				lightbox.clickPinButton();
-				lightbox.clickShareButton();
-				lightbox.verifyShareButtons();
-				lightbox.clickFacebookShareButton();
-				lightbox.verifyFacebookWindow();
-				lightbox.clickTwitterShareButton();
-				lightbox.verifyTwitterWindow();
-				lightbox.clickStumbleUponShareButton();
-				lightbox.verifyStumbleUponWindow();
-				lightbox.clickRedditShareButton();
-				lightbox.verifyRedditWindow();
-				lightbox.clickPlusOneShareButton();
-				lightbox.verifyPlusOneWindow();
-				lightbox.clickCloseButton();
-			}
-
 }
