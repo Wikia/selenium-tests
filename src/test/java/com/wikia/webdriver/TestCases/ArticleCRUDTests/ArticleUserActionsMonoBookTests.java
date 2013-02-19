@@ -38,7 +38,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
      * TestCase001
      * Edit random article as user
      */
-    @Test(groups={"monobook", "ArticleUserActionsMonoBook_001_edit", "ArticleCRUDAdmin"})
+    @Test(groups={"monobook", "ArticleUserActionsMonoBook_001_edit", ""})
     public void ArticleUserActionsMonoBook_001_edit() {
         CommonFunctions.logOut(driver);
         String cookie = CommonFunctions.logInCookie(
@@ -61,7 +61,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
      * TestCase002
      * Add article as user
      */
-    @Test(dataProvider="getArticleName", groups={"monobook", "ArticleUserActionsMonoBook_002_add", "ArticleCRUDAdmin"})
+    @Test(dataProvider="getArticleName", groups={"monobook", "ArticleUserActionsMonoBook_002_add", ""})
     public void ArticleUserActionsMonoBook_002_add(String articleName) {
         CommonFunctions.logOut(driver);
 
@@ -88,7 +88,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
      * TestCase003
      * Delete article as user
      */
-    @Test(groups={"monobook", "ArticleUserActionsMonoBook_003_delete", "ArticleCRUDAdmin"})
+    @Test(groups={"monobook", "ArticleUserActionsMonoBook_003_delete", ""})
     public void ArticleUserActionsMonoBook_003_delete() {
         CommonFunctions.logOut(driver);
         String cookie = CommonFunctions.logInCookie(
@@ -109,7 +109,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
      * TestCase004
      * Rename article as user
      */
-    @Test(groups={"monobook", "ArticleUserActionsMonoBook_004_rename", "ArticleCRUDAdmin"})
+    @Test(groups={"monobook", "ArticleUserActionsMonoBook_004_rename", ""})
     public void ArticleUserActionsMonoBook_004_rename() {
         CommonFunctions.logOut(driver);
         String cookie = CommonFunctions.logInCookie(
@@ -131,7 +131,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
      * post comment
      * under random article as user
      */
-    @Test(groups={"monobook", "ArticleUserActionsMonoBook_005_add_comment", "ArticleCRUDAdmin"})
+    @Test(groups={"monobook", "ArticleUserActionsMonoBook_005_add_comment", ""})
     public void ArticleUserActionsMonoBook_005_add_comment()
     {
         CommonFunctions.logOut(driver);
@@ -154,7 +154,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
      * Start a discussion
      * under random article
      */
-    @Test(groups={"monobook", "ArticleUserActionsMonoBook_006_start_disc", "ArticleCRUDAdmin"})
+    @Test(groups={"monobook", "ArticleUserActionsMonoBook_006_start_disc", ""})
     public void ArticleUserActionsMonoBook_006_start_discusion() {
         CommonFunctions.logOut(driver);
         String cookie = CommonFunctions.logInCookie(
@@ -177,7 +177,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
      * Reply comment under random article
      * In order to do that first create a comment
      */
-    @Test(groups={"monobook", "ArticleUserActionsMonoBook_007_reply_comment", "ArticleCRUDAdmin"})
+    @Test(groups={"monobook", "ArticleUserActionsMonoBook_007_reply_comment", ""})
     public void ArticleUserActionsMonoBook_005_reply_comment() {
         CommonFunctions.logOut(driver);
         String cookie = CommonFunctions.logInCookie(

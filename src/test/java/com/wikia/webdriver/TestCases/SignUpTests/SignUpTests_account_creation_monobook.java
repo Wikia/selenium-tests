@@ -13,7 +13,7 @@ public class SignUpTests_account_creation_monobook extends TestTemplate
 {
     private String timeStamp, userName, userNameEnc, password, tempPassword;
 
-    @Test(groups = {"SignUp_monobook_account_creation_TC_001", "monobook", "SignUp", "Smoke"})
+    @Test(groups = {"SignUp_monobook_account_creation_TC_001", "monobook", "", "Smoke"})
     public void SignUp_account_creation_TC_001_non_latin_user_name()
     {
         SignUpMonoBookPageObject signUp = new SignUpMonoBookPageObject(driver);

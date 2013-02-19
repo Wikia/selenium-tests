@@ -34,7 +34,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
      * Open random wiki page as anonymous user
      * Verify editing article by anonymous user
      */
-    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_001_edit", "ArticleCRUDAnonymous"})
+    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_001_edit", ""})
     public void ArticleAnonymousActionsMonoBook_001_edit() {
         CommonFunctions.logOut(driver);
 
@@ -52,7 +52,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
      * TestCase002
      * Add article as anonymous user
      */
-    @Test(dataProvider="getArticleName", groups={"monobook", "ArticleAnonymousActionsMonoBook_002_add", "ArticleCRUDAnonymous"})
+    @Test(dataProvider="getArticleName", groups={"monobook", "ArticleAnonymousActionsMonoBook_002_add", ""})
     public void ArticleAnonymousActionsMonoBook_002_add(String articleName) {
         CommonFunctions.logOut(driver);
 
@@ -68,7 +68,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
      * Open random wiki page as anonymous user
      * post comment
      */
-    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_003_add_comment", "ArticleCRUDAnonymous"})
+    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_003_add_comment", ""})
     public void ArticleAnonymousActionsMonoBook_003_add_comment()
     {
         CommonFunctions.logOut(driver);
@@ -87,7 +87,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
      * Start a discussion
      * To random article
      */
-    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_004_start_disc", "ArticleCRUDAnonymous"})
+    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_004_start_disc", ""})
     public void ArticleAnonymousActionsMonoBook_004_start_discusion() {
         CommonFunctions.logOut(driver);
 
@@ -105,7 +105,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
      * Reply comment under random article
      * In order to do that first create a comment
      */
-    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_005_reply_comment", "ArticleCRUDAnonymous"})
+    @Test(groups={"monobook", "ArticleAnonymousActionsMonoBook_005_reply_comment", ""})
     public void ArticleAnonymousActionsMonoBook_005_reply_comment() {
         CommonFunctions.logOut(driver);
 

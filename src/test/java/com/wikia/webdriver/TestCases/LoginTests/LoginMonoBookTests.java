@@ -31,7 +31,7 @@ public class LoginMonoBookTests extends TestTemplate {
         };
     }
 
-    @Test(dataProvider = "getUserCredentials", groups = {"monobook", "Login_monobook_001", "Login" })
+    @Test(dataProvider = "getUserCredentials", groups = {"monobook", "Login_monobook_001", "" })
     public void Login_monobook_001_SpecialPage(String userName, String password,
         String userNameEnc) {
             PageObjectLogging.log("Login_monobook_001_SpecialPage", userName, true);
