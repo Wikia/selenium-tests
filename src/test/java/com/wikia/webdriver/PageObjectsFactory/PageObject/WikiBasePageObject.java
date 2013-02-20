@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,15 +14,14 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialMultipleUploadPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
@@ -127,7 +125,24 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
 	private WebElement ad_Prefooter_left_boxad;
-	
+
+        @FindBy (css = "#WikiaPageHeader h1")
+        private WebElement wikiFirstHeader;
+
+        @FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
+        private WebElement specialUserLoginLink;
+
+        @FindBy(css = ".UserLoginModal input[name='username']")
+        protected WebElement modalUserNameInput;
+
+        @FindBy(css = ".UserLoginModal input[name='password']")
+        protected WebElement modalPasswordInput;
+
+        @FindBy(css = ".UserLoginModal input[type='submit']")
+        protected WebElement modalLoginSubmit;
+
+    //Selectors
+    protected String loginModalSelector = ".UserLoginModal";
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By
@@ -144,7 +159,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public WikiBasePageObject(WebDriver driver, String Domain) {
 		super(driver);
-		this.Domain = Domain;
+		this.Domain = Global.DOMAIN;
 		PageFactory.initElements(driver, this);
 	}
 
@@ -481,7 +496,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
 		getUrl(Domain + "wiki/Special:NewFiles");
-		return new SpecialNewFilesPageObject(driver, Domain);
+		return new SpecialNewFilesPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
@@ -844,4 +859,71 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(ad_Prefooter_right_boxad);
 		PageObjectLogging.log("verifyPrefooterAdsInvisible", "left and right prefooter ads are invisible", true, driver);
 	}
+
+        public void openSpecialPage(String specialPage) {
+            getUrl(Domain + specialPage);
+        }
+
+        public void verifyLoginReguiredMessage() {
+            waitForTextToBePresentInElementByElement(
+                wikiFirstHeader, PageContent.loginRequired
+            );
+            PageObjectLogging.log(
+                "LoginRequiredMessage",
+                "Login required message in first header present",
+                true, driver
+            );
+        }
+
+        public void clickLoginOnSpecialPage() {
+            waitForElementByElement(specialUserLoginLink);
+            PageObjectLogging.log(
+                "LoginLinkPresent",
+                "Link to login special page present",
+                true, driver
+            );
+            clickAndWait(specialUserLoginLink);
+            PageObjectLogging.log(
+                "LoginLinkClicked",
+                "Link to login special page clicked",
+                true, driver
+            );
+        }
+
+        public void verifyNotLoggedInMessage() {
+            waitForTextToBePresentInElementByElement(
+                wikiFirstHeader, PageContent.notLoggedInMessage
+            );
+            PageObjectLogging.log(
+                "NotLoggedInMessage",
+                "Not logged in message present",
+                true, driver
+            );
+        }
+
+        public void logInViaModal(String userName, String password) {
+            waitForElementByElement(modalUserNameInput);
+            modalUserNameInput.sendKeys(userName);
+            waitForElementByElement(modalPasswordInput);
+            modalPasswordInput.sendKeys(password);
+            PageObjectLogging.log(
+                "FillLoginForm",
+                "Login form in modal is filled",
+                true, driver
+            );
+
+            clickAndWait(modalLoginSubmit);
+            PageObjectLogging.log(
+                "LoginFormSubmitted",
+                "Login form is submitted",
+                true, driver
+            );
+
+            waitForElementNotVisibleByElement(logInModal);
+            PageObjectLogging.log(
+                "LoginModalDissapears",
+                "Login modal is no longer visible",
+                true
+            );
+        }
 }

@@ -63,4 +63,6 @@ public class PageContent {
         //Messages
         public static String articleDeletedMessage = "This page has been deleted.";
         public static String createNewBlogPostMessage = "Create a new blog post";
+        public static String loginRequired = "Login required";
+        public static String notLoggedInMessage = "Not logged in";
 }

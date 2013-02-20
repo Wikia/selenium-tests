@@ -5,9 +5,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
-public class SpecialFollowPageObject extends BasePageObject{
+public class SpecialFollowPageObject extends SpecialPageObject {
 
 	public SpecialFollowPageObject(WebDriver driver) {
 		super(driver);

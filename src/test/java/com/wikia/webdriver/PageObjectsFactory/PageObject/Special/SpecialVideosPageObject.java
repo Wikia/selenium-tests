@@ -15,9 +15,8 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class SpecialVideosPageObject extends WikiBasePageObject{
+public class SpecialVideosPageObject extends SpecialPageObject{
 
 	@FindBy(css = "a.addVideo")
 	private WebElement addVideo;
@@ -25,9 +24,8 @@ public class SpecialVideosPageObject extends WikiBasePageObject{
 	private WebElement newestVideo;
 	
 	public SpecialVideosPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
-		this.Domain = Global.DOMAIN;
-		PageFactory.initElements(driver, this);
+            super(driver);
+            PageFactory.initElements(driver, this);
 	}
 
 	

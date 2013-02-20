@@ -65,8 +65,9 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement VideoModalAddButton;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
-	
-	
+	@FindBy(css="#WikiaRail .addVideo")
+        private WebElement addVideoWikiaRail;
+
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle img.sprite.play");
@@ -241,17 +242,21 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByXPath("//div[@id='mw-content-text']//*[contains(text(), '"+content+"')]");
 		PageObjectLogging.log("verifyArticleText", "article text is verified", true, driver);
 	}
-		
+
 	/**
 	 * Click Edit button on a wiki article
 	 *  
 	 * @author Michal Nowierski
 	 */
 	public WikiArticleEditMode edit() {
-		waitForElementByElement(editButton);
-		clickAndWait(editButton);
-		PageObjectLogging.log("Edit", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
-		return new WikiArticleEditMode(driver, Domain, articlename);
+            waitForElementByElement(editButton);
+            clickAndWait(editButton);
+            PageObjectLogging.log(
+                "Edit",
+                "Edit Article: " + articlename + ", on wiki: " + Domain,
+                true, driver
+            );
+            return new WikiArticleEditMode(driver, Domain, articlename);
 	}
 
 	/**
@@ -563,4 +568,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		clickAndWait(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
 	}
+
+    public void clickAddVideoFromRail() {
+        waitForElementByElement(addVideoWikiaRail);
+        clickAndWait(addVideoWikiaRail);
+        PageObjectLogging.log(
+            "clickAndVideoOnWikiaRail",
+            "Button add video on wikia rail is clicked",
+            true, driver
+        );
+    }
 }

@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.SpecialFactoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;

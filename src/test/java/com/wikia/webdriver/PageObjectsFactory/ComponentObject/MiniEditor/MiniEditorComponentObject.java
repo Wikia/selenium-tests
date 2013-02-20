@@ -16,7 +16,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		super(driver,Domain);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(css="body#bodyContent")
 	private WebElement messageBodyField;
 	@FindBy(css=".cke_contents iframe")
@@ -39,7 +39,9 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement linkPageStatus;
 	@FindBy(css="span.cke_dialog_ui_button")
 	private WebElement linkModalOkButton;
-	
+        @FindBy (css=".loading-throbber")
+        private WebElement loader;
+
 	public void writeMiniEditor(String text){
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(text);
@@ -65,8 +67,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	}
 	
 	public void addImageMiniEditor(){
-		waitForElementByElement(addImageButton);
-		clickAndWait(addImageButton);
+                clickAddImage();
 		waitForModalAndClickAddThisPhoto();
 		clickOnAddPhotoButton2();
 //		verifyImageMiniEditor();
@@ -126,10 +127,19 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	public void clearContent(){
 		messageBodyField.clear();
 	}
-	
+
 	public VetAddVideoComponentObject clickAddVideo(){
 		waitForElementByElement(addVideoButton);
 		clickAndWait(addVideoButton);
 		return new VetAddVideoComponentObject(driver);
 	}
+
+        public void clickAddImage() {
+            waitForElementByElement(addImageButton);
+            clickAndWait(addImageButton);
+        }
+
+        public void waitForEditorReady() {
+            waitForElementNotVisibleByElement(loader);
+        }
 }
