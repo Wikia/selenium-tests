@@ -138,7 +138,7 @@ public class WikiBasePageObject extends BasePageObject {
         @FindBy(css = ".UserLoginModal input[name='password']")
         protected WebElement modalPasswordInput;
 
-        @FindBy(css = ".UserLoginModal input.login-button")
+        @FindBy(css = ".UserLoginModal input[type='submit']")
         protected WebElement modalLoginSubmit;
 
     //Selectors

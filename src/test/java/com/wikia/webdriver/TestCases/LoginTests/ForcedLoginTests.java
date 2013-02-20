@@ -25,7 +25,7 @@ public class ForcedLoginTests extends TestTemplate{
     private String upload = URLsContent.specialUpload;
     private String watchList = URLsContent.specialWatchList;
 
-    //@Test(groups = {"ForcedLogin_001_newFile", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_001_newFile", "Login", "ForcedLogin"})
     public void ForcedLogin_001_newFile () {
         CommonFunctions.logOut(driver);
 
@@ -43,7 +43,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    //@Test(groups = {"ForcedLogin_002_video", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_002_video", "Login", "ForcedLogin"})
     public void ForcedLogin_002_video () {
         CommonFunctions.logOut(driver);
 
@@ -59,7 +59,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    //@Test(groups = {"ForcedLogin_003_loginRequired", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_003_loginRequired", "Login", "ForcedLogin"})
     public void ForcedLogin_003_loginRequired () {
         CommonFunctions.logOut(driver);
 
@@ -76,7 +76,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    //@Test(groups = {"ForcedLogin_004_notLoggedIn", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_004_notLoggedIn", "Login", "ForcedLogin"})
     public void ForcedLogin_004_notLoggedIn () {
         CommonFunctions.logOut(driver);
 
@@ -93,7 +93,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    //@Test(groups = {"ForcedLogin_005_addMedia", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_005_addMedia", "Login", "ForcedLogin"})
     public void ForcedLogin_005_addMedia () {
         CommonFunctions.logOut(driver);
 
@@ -110,7 +110,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    //@Test(groups = {"ForcedLogin_006_rail", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_006_rail", "Login", "ForcedLogin"})
     public void ForcedLogin_006_rail () {
         CommonFunctions.logOut(driver);
 
