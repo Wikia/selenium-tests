@@ -142,7 +142,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 			e.printStackTrace();
 		}
 		waitForElementByXPath("//div[@class='msg' and contains(text(), \"The board you're looking for was not found\")]");
-		PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true, driver);
+		PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
 	}
 	
 	private void clickModifyForum(String forumName){
