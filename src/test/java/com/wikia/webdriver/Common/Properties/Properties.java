@@ -57,10 +57,11 @@ public class Properties {
 	
 	public static String userNameStaff;
 	public static String passwordStaff;
-	
+
 	public static String userNameFB;
 	public static String passwordFB;
-	
+        public static String emailFB;
+
 	public static String userNameBlocked;
 	public static String passwordBlocked;
 	
@@ -90,10 +91,11 @@ public class Properties {
 		
 		userNameStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.username");
 		passwordStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.password");
-		
-		userNameFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.username");
+
+		emailFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.email");
 		passwordFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.password");
-		
+                userNameFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.username");
+
 		email = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.username");
 		emailPassword = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.password");
 

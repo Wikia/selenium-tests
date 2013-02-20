@@ -32,14 +32,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 
 public class CommonFunctions {
-	static By logInAjax = By.className("ajaxLogin");
-	static By userNameField = By.cssSelector("[name='username']");
-	static By passwordField = By.cssSelector("[name='password']");
-	static By remeberMeCheckBox = By.cssSelector("input[type=checkbox]");
-	static By submitButton = By.cssSelector("input[type='submit']");
 
 	private static WebDriver driver;
 	private static WebDriverWait wait;
@@ -135,97 +129,6 @@ public class CommonFunctions {
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
 				+ userNameEnc + "']"));
 	}
-
-	public static void logInDropDown(String userName, String password,
-			String userNameEnc) {
-		driver = DriverProvider.getWebDriver();
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='username']")));
-		WebElement userNameFieldElem = driver.findElement(userNameField);
-		userNameFieldElem.sendKeys(userName);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		WebElement passwordFieldElem = driver.findElement(passwordField);
-		passwordFieldElem.sendKeys(password);
-		WebElement submitButtonElem = driver.findElement(submitButton);
-		submitButtonElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='" + userNameEnc + "']")));
-	}
-
-	public static void logInDropDownFB() {
-		driver = DriverProvider.getWebDriver();
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		PageObjectLogging.log("logInDropDownFB", "login ajax clicked", true);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.className("wikia-button-facebook")));
-		((JavascriptExecutor) driver)
-				.executeScript("$('.wikia-button-facebook').click()");
-		PageObjectLogging.log("logInDropDownFB", "facebook button clicked",
-				true);
-		Object[] windows = driver.getWindowHandles().toArray();
-		int delay = 500;
-		int sumDelay = 500;
-		while (windows.length == 1) {
-			try {
-				Thread.sleep(delay);
-				windows = driver.getWindowHandles().toArray();
-				sumDelay += 500;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if (sumDelay > 5000) {
-				PageObjectLogging.log("logInDropDownFB",
-						"facebook button clicked but without result", false);
-				break;
-			}
-
-		}
-		driver.switchTo().window(windows[1].toString());
-		PageObjectLogging.log("logInDropDownFB",
-				"facebook popup window detected", true);
-		PageObjectLogging.log("logInDropDownFB",
-				"switching to facebook pop-up window", true);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("pass")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='login']")));
-		WebElement em = driver.findElement(By.id("email"));
-		WebElement pa = driver.findElement(By.id("pass"));
-		WebElement sm = driver.findElement(By
-				.cssSelector("input[name='login']"));
-		em.clear();
-		pa.clear();
-		em.sendKeys(Properties.userNameFB);
-		PageObjectLogging.log("logInDropDownFB", "facebook username filled",
-				true);
-		pa.sendKeys(Properties.passwordFB);
-		PageObjectLogging.log("logInDropDownFB", "facebook password filled",
-				true);
-		sm.click();
-		PageObjectLogging.log("logInDropDownFB",
-				"facebook log in button clicked", true);
-		driver.switchTo().window(windows[0].toString());
-		PageObjectLogging.log("logInDropDownFB", "switching to main window",
-				true);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a img.avatar")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='Patrick_test_07-Feb-12_1313']")));
-		PageObjectLogging.log("logInDropDownFB",
-				"facebook login verification passed", true);
-	}
-
-
 
 	public static void logIn(String userName, String password, WebDriver driver) {
 		String temp = driver.getCurrentUrl();
