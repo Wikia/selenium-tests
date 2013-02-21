@@ -2,4 +2,5 @@ logs/
 target/
 .DS_Store
 Thumbs.db
-src/test/resources/ChromeDriver/chromedriver.exe
+chromedriver.log
+tmp.exe
