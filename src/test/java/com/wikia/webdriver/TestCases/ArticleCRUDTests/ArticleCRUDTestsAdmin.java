@@ -257,9 +257,8 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
-		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.clickOnAddObjectButton("Image");
 		edit.waitForModalAndClickAddThisPhoto();
@@ -282,9 +281,8 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
-		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();			
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.clickOnAddObjectButton("Image");
 		WikiArticlePageObject article = edit.addImageForLightboxTesting();
