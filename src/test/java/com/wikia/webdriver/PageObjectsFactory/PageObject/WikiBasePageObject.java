@@ -15,7 +15,9 @@ import org.openqa.selenium.support.ui.Select;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
@@ -917,6 +919,12 @@ public class WikiBasePageObject extends BasePageObject {
             );
         }
 
+        public void clickContributeNewPage() {
+            clickContributeButton();
+            waitForElementVisibleByElement(contributeAddPage);
+            clickAndWait(contributeAddPage);
+        }
+
         public void logInViaModal(String userName, String password) {
             waitForElementByElement(modalUserNameInput);
             modalUserNameInput.sendKeys(userName);
@@ -927,12 +935,35 @@ public class WikiBasePageObject extends BasePageObject {
                 "Login form in modal is filled",
                 true, driver
             );
+
             clickAndWait(modalLoginSubmit);
+            PageObjectLogging.log(
+                "LoginFormSubmitted",
+                "Login form is submitted",
+                true
+            );
+
+            waitForElementNotVisibleByElement(logInModal);
+            PageObjectLogging.log(
+                "LoginModalDissapears",
+                "Login modal is no longer visible",
+                true
+            );
         }
 
-        public void clickContributeNewPage() {
-            clickContributeButton();
-            waitForElementVisibleByElement(contributeAddPage);
-            clickAndWait(contributeAddPage);
+        public String receiveMailWithNewPassowrd() {
+            MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
+            String newPassword = MailFunctions.getPasswordFromMailContent((
+                MailFunctions.getFirstMailContent(
+                    Properties.email, Properties.emailPassword)
+                )
+            );
+            PageObjectLogging.log(
+                "NewPasswordRecived",
+                "New password recived from mail",
+                true
+            );
+
+            return newPassword;
         }
 }
