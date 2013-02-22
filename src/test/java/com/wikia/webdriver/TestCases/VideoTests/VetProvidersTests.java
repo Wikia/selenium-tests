@@ -10,6 +10,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -18,9 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEdi
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class VetProvidersTests extends TestTemplate{
-	
-	private String pageName;
-	
+		
 	//Rodrigo Testing TCs
 			@DataProvider
 			private static final Object[][] provideVideo()
@@ -55,8 +54,7 @@ public class VetProvidersTests extends TestTemplate{
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 				edit.deleteArticleContent();
 				edit.clickOnVisualButton();
 				VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) edit.clickOnAddObjectButton("Video");

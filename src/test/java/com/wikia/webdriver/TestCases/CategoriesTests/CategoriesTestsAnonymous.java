@@ -16,7 +16,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPa
 public class CategoriesTestsAnonymous extends TestTemplate {
 
 	String categoryName;
-	String pageName;
 	
 	/*
 	 * TestCase001 Open random wiki page as anonymous user add category Verify
@@ -65,9 +64,8 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	public void CategoriesTestsAnonymous_003_removeCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
-		pageName = PageContent.categoryPageNamePrefix + wiki.getTimeStamp();		
 		wiki.openWikiPage();
-		WikiArticleEditMode articleEdit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode articleEdit = wiki.createNewDefaultArticle();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		// adding the below category will save 1 minute of time execution time.
 		// Reason: it assures that list of categories will not be empty, what

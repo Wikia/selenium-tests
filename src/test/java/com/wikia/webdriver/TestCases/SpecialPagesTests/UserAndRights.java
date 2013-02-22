@@ -37,8 +37,7 @@ public class UserAndRights extends TestTemplate{
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameBlocked, Properties.passwordBlocked);
-		String ts = article.getTimeStamp();
-		WikiArticleEditMode edit = article.createNewArticle(ts, 1);
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.verifyBlockedUserMessage();
 	}
 	
@@ -55,7 +54,7 @@ public class UserAndRights extends TestTemplate{
 	
 //	public void 
 	
-	@Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
+	@Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
 	public void usersAndRights004_Unblock(){
 		CommonFunctions.logOut(driver);
 		SpecialUnblockPageObject unblock = new SpecialUnblockPageObject(driver, Global.DOMAIN);
@@ -72,8 +71,7 @@ public class UserAndRights extends TestTemplate{
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameBlocked, Properties.passwordBlocked);
-		String ts = article.getTimeStamp();
-		WikiArticleEditMode edit = article.createNewArticle(ts, 1);
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.clickOnPublishButton();
 	}
 	
@@ -88,22 +86,21 @@ public class UserAndRights extends TestTemplate{
 		list.verifyUserUnblocked();
 	}
 
-	@Test(groups = {"usersAndRights006", "UsersAndRights"})
+	@Test(groups = {"usersAndRights007", "UsersAndRights"})
 	public void usersAndRights007_Contributions(){
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String pageName = wiki.getTimeStamp() + "Special:Contributions test article title";
 		String pageContent = wiki.getTimeStamp() + "Special:Contributions test article content";
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.typeInContent(pageContent);
-		edit.clickOnPublishButton();
+		WikiArticlePageObject article = edit.clickOnPublishButton();
 		SpecialContributionsPageObject contribution = new SpecialContributionsPageObject(driver);
 		contribution = contribution.openContributionsPage();
 		contribution.searchContributions(Properties.userNameStaff);
-		contribution.verifyNewPageOnList(pageName, pageContent);
+		contribution.verifyNewPageOnList(article.getPageName(), pageContent);
 		CommonFunctions.logOut(driver);
 	}
 }
