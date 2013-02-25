@@ -20,10 +20,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     @FindBy(css = "a.upphotos[title*='Add a photo']")
     private WebElement addPhotoButton;
-    @FindBy(css = "#UploadPhotosWrapper")
-    private WebElement addPhotoModal;
-    @FindBy(css = "#UploadPhotosWrapper .close")
-    private WebElement modalClose;
     @FindBy(css="input[name='wpUploadFile']")
     private WebElement BrowseForFileInput;
     @FindBy(css="div.step-1 input[value*='Upload']")
@@ -53,22 +49,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
             "ClickAddPhotoButton",
             "Add photo button clicked",
             true
-        );
-    }
-
-    public void closeAddPhotoModal() {
-        waitForElementVisibleByElement(addPhotoModal);
-        PageObjectLogging.log(
-            "UploadPhotoModalIsPresent",
-            "Upload photo modal is present",
-            true, driver
-        );
-        clickAndWait(modalClose);
-        waitForElementNotVisibleByElement(addPhotoModal);
-        PageObjectLogging.log(
-            "UploadPhotoModalClosed",
-            "Upload photo modal is closed",
-            true, driver
         );
     }
 
