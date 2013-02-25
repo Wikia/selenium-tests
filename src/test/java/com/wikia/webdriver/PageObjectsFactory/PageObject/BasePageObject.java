@@ -1245,4 +1245,25 @@ public class BasePageObject{
             CommonExpectedConditions.elementNotPresent(cssSelector)
         );
     }
+
+    /**
+     * Wait for element to be in viewport
+     * Either position top or left is bigger then -1
+     *
+     * @param element
+     */
+    public void waitForElementInViewPort(final WebElement element) {
+        wait.until(
+            CommonExpectedConditions.elementInViewPort(element)
+        );
+    }
+
+    /**
+     * Wait for new window present
+     */
+    public void waitForNewWindow() {
+        wait.until(
+            CommonExpectedConditions.newWindowPresent()
+        );
+    };
 }

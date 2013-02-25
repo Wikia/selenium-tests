@@ -14,6 +14,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import javax.naming.spi.DirStateFactory;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 
 public class CommonExpectedConditions {
 
@@ -355,6 +358,46 @@ public class CommonExpectedConditions {
                 return String.format(
                     "Element ('%s') not visisble!",
                     element.getTagName()
+                );
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> elementInViewPort (
+        final WebElement element
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                Dimension size = element.getSize();
+                Point location = element.getLocation();
+                if (((size.height + location.y) > -1)
+                    && (size.width + location.x > -1)) {
+                    return true;
+                }
+                return false;
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "Element ('%s') not in viewport!",
+                    element.getTagName()
+                );
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> newWindowPresent() {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+               Object[] windows = driver.getWindowHandles().toArray();
+               return (windows.length > 1);
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "New window not found"
                 );
             }
         };

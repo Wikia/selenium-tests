@@ -14,9 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEdi
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class ArticleCRUDTestsAdmin extends TestTemplate{
-	
-	private String pageName;
-	
+		
 	/*
 	 * TestCase002
 	 * Open random wiki page as logged in user
@@ -84,15 +82,14 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_004_CreateArticle(String articleName)
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();		
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
 		CommonFunctions.logoutCookie(cookieName);
 	}
@@ -106,20 +103,19 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_005_CreateEditArticle()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();	
 		edit.deleteArticleContent();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton(article.getPageName());
 		edit.deleteArticleContent();
 		edit.typeInContent(PageContent.articleTextEdit);
 		article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleTextEdit);
 		CommonFunctions.logoutCookie(cookieName);
 	}
@@ -135,7 +131,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_006_CreateArticleComment()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
@@ -159,7 +154,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_007_CreateArticleEditComment()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
@@ -187,20 +181,19 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_008_CreateArticleUndeleteDelete()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		article.deleteArticle(pageName);
+		article.deleteArticle(article.getPageName());
 		article.undeleteArticle();
-		article.openArticle(pageName);
-		article.verifyPageTitle(pageName);
+		article.openArticle(article.getPageName());
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
 		CommonFunctions.logoutCookie(cookieName);
 	}
@@ -215,18 +208,17 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_009_CreateArticleMoveDelete()
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		article.renameArticle(pageName, pageName+"moved");
-		article.verifyPageTitle(pageName+"moved");
+		article.renameArticle(article.getPageName(), article.getPageName()+"moved");
+		article.verifyPageTitle(article.getPageName()+"moved");
 		article.verifyArticleText(PageContent.articleText);
 		CommonFunctions.logoutCookie(cookieName);
 	}
@@ -244,7 +236,6 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	{
 
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
@@ -266,9 +257,8 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
-		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.clickOnAddObjectButton("Image");
 		edit.waitForModalAndClickAddThisPhoto();
@@ -291,9 +281,8 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
-		pageName = "QAarticle"+wiki.getTimeStamp();
 		wiki.openWikiPage();			
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.clickOnAddObjectButton("Image");
 		WikiArticlePageObject article = edit.addImageForLightboxTesting();

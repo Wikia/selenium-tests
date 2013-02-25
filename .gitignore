@@ -2,3 +2,5 @@ logs/
 target/
 .DS_Store
 Thumbs.db
+chromedriver.log
+tmp.exe
