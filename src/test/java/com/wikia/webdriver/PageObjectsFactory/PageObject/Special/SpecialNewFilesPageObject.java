@@ -90,13 +90,21 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
      * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests
      * - this is where those files are stored
      */
-    public void typeInFileToUploadPath(String file){
+    public void typeInFileToUploadPath(String file){    
+    File fileCheck = new File("." + File.separator + "src" + File.separator
+            + "test" + File.separator + "resources" + File.separator + "ImagesForUploadTests"
+            + File.separator + file);
+    if (!fileCheck.isFile()) {
+		try {
+			throw new Exception("the file doesn't exist");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	} 
 	sendKeys(
-            BrowseForFileInput,
-            "." + File.separator + "src" + File.separator
-            + "test" + File.separator + "ImagesForUploadTests"
-            + File.separator + file
+            BrowseForFileInput,fileCheck.getAbsoluteFile().toString()
         );
+	PageObjectLogging.log("typeInFileToUploadPath", "type file "+file+" to upload it", true, driver);
     }
 
     public void waitForFile(String FileName) {
