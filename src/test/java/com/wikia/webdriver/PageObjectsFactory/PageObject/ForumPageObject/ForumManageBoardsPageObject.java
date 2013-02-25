@@ -131,7 +131,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		}
 		waitForElementByXPath("//h1[contains(text(), '"+forumName.replace("_", " ")+"')]");
 		getUrl(temp);
-		PageObjectLogging.log("verifyForumExists", "verified forum exists", true, driver);
+		PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
 	}
 	
 	public void verifyForumNotExists(String forumName){
@@ -148,7 +148,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private void clickModifyForum(String forumName){
 		WebElement editPecil = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//img[@class='sprite edit-pencil']");
 		clickAndWait(editPecil);
-		PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true, driver);
+		PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true);
 	}
 	
 	private void clearEditBoardFields(){
@@ -172,7 +172,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		WebElement down = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//span[@class='movedown']");
 		down.click();
 		Assertion.assertEquals(temp, getSecondForumName());
-		PageObjectLogging.log("clickMoveDown", "move down button clicked", true, driver);
+		PageObjectLogging.log("clickMoveDown", "move down button clicked", true);
 	}
 	
 	public void clickMoveUp(String forumName){

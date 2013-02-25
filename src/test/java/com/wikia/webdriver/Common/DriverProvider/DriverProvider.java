@@ -1,6 +1,7 @@
 package com.wikia.webdriver.Common.DriverProvider;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.browsermob.proxy.ProxyServer;
@@ -40,7 +41,29 @@ public class DriverProvider {
 			driver = new EventFiringWebDriver(new InternetExplorerDriver()).register(listener);
 		}
 		else if (Global.BROWSER.equals("FF")){
-			driver = new EventFiringWebDriver(new FirefoxDriver()).register(listener);
+			FirefoxProfile profile = new FirefoxProfile();
+//			try {
+//				profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\firebug-1.7.2.xpi"));
+//				profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\netExport-0.8b13.xpi"));
+//				profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\consoleExport-0.5b5.xpi"));
+//				profile.setPreference("extensions.firebug.currentVersion", "1.7.2");
+//				profile.setPreference("extensions.firebug.previousPlacement", 1);
+//				profile.setPreference("extensions.firebug.net.enableSites", true);
+//				profile.setPreference("extensions.firebug.defaultPanelName", "console");
+//				profile.setPreference("extensions.firebug.console.enableSites", "true");
+//				profile.setPreference("extensions.firebug.consoleexport.active", "true");
+//				profile.setPreference("extensions.firebug.consoleexport.serverURL", "file://c:/asdf");
+//				profile.setPreference("extensions.firebug.showJSErrors", "true");
+//				profile.setPreference("extensions.firebug.allPagesActivation", "on");
+//				profile.setPreference("extensions.firebug.consoleexport.defaultLogDir", "c:\\console");
+//				profile.setPreference("extensions.firebug.netexport.alwaysEnableAutoExport", true);
+//				profile.setPreference("extensions.firebug.netexport.autoExportToFile", true);
+//				profile.setPreference("extensions.firebug.consoleexport.saveFiles", true);		
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			driver = new EventFiringWebDriver(new FirefoxDriver(profile)).register(listener);
 		}
 		else if (Global.BROWSER.equals("CHROME")){
 			setChromeProperties();
