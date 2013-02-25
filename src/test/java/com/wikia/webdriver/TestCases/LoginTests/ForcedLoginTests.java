@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.DataProvider.LoginDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
@@ -37,7 +38,10 @@ public class ForcedLoginTests extends TestTemplate{
         specialPage.addPhoto();
         specialPage.verifyLogInModalForAnonsVisibility();
         specialPage.logInViaModal(Properties.userName, Properties.password);
-        specialPage.closeAddPhotoModal();
+
+        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver, Global.DOMAIN);
+        modal.closeAddPhotoModal();
+
         specialPage.verifyUserLoggedIn(Properties.userName);
 
         CommonFunctions.logOut(driver);
@@ -54,6 +58,10 @@ public class ForcedLoginTests extends TestTemplate{
         specialPage.clickAddAVideo();
         specialPage.verifyLogInModalForAnonsVisibility();
         specialPage.logInViaModal(Properties.userName, Properties.password);
+
+        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver, Global.DOMAIN);
+        modal.closeAddVideoModal();
+
         specialPage.verifyUserLoggedIn(Properties.userName);
 
         CommonFunctions.logOut(driver);
@@ -119,6 +127,10 @@ public class ForcedLoginTests extends TestTemplate{
         WikiArticlePageObject article = base.openRandomArticle();
         article.clickAddVideoFromRail();
         article.logInViaModal(Properties.userName, Properties.password);
+
+        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver, Global.DOMAIN);
+        modal.closeAddVideoModal();
+
         base.verifyUserLoggedIn(Properties.userName);
 
         CommonFunctions.logOut(driver);
