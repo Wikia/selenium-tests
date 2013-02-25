@@ -26,7 +26,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 
 public class VetAddingVideoTests extends TestTemplate {
 	
-	@Test(groups = {"VetTests001", "VetTests"})
+	@Test(groups = {"VetTests001", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_001_SpecialVideosProvider() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -38,7 +38,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		specialVideos.verifyVideoAdded(VideoContent.youtubeVideoURL2name);
 	}
 	
-	@Test(groups = {"VetTests002", "VetTests"})
+	@Test(groups = {"VetTests002", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_002_SpecialVideosLibrary() {
 		PageObjectLogging.log("", "ACTIVE BUG https://wikia.fogbugz.com/default.asp?97650", false);
 		CommonFunctions.logOut(driver);
@@ -51,7 +51,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		specialVideos.verifyVideoAdded(vetAddingVideo.getVideoName());
 	}
 	
-	@Test(groups = {"VetTests003", "VetTests"})
+	@Test(groups = {"VetTests003", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_003_RelatedVideosProvider() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -68,7 +68,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoAddedToRVModule(VideoContent.youtubeVideoURL2name);
 	}
 	
-	@Test(groups = {"VetTests004", "VetTests"})
+	@Test(groups = {"VetTests004", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_004_RelatedVideosLibrary() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -85,7 +85,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoAddedToRVModule(VideoContent.wikiaVideoName);
 	}
 	
-	@Test(groups = {"VetTests005", "VetTests"})
+	@Test(groups = {"VetTests005", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_005_ArticlePlaceholderPublishedPageProvider() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -100,7 +100,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}
 	
-	@Test(groups = {"VetTests006", "VetTests"})
+	@Test(groups = {"VetTests006", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_006_ArticlePlaceholderPublishedPageLibrary() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -115,7 +115,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}
 		
-	@Test(groups = {"VetTests007", "VetTests"})
+	@Test(groups = {"VetTests007", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_007_ArticlePlaceholderEditModePageProvider() {
 		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
 		CommonFunctions.logOut(driver);
@@ -133,7 +133,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}
 	
-	@Test(groups = {"VetTests008", "VetTests"})
+	@Test(groups = {"VetTests008", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_008_ArticlePlaceholderEditModePageLibrary() {
 		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
 		CommonFunctions.logOut(driver);
@@ -151,7 +151,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}	
 	
-	@Test(groups = {"VetTests009", "VetTests"})
+	@Test(groups = {"VetTests009", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_009_BlogProvider() {
 		CommonFunctions.logOut(driver);
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
@@ -169,7 +169,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}
 	
-	@Test(groups = {"VetTests010", "VetTests"})
+	@Test(groups = {"VetTests010", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_010_BlogLibrary() {
 		CommonFunctions.logOut(driver);
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
@@ -187,7 +187,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}	
 	
-	@Test(groups = {"VetTests011", "VetTests"})
+	@Test(groups = {"VetTests011", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_011_CommentsProvider() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -206,7 +206,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyCommentVideo(VideoContent.youtubeVideoURL2name);
 	}
 	
-	@Test(groups = {"VetTests012", "VetTests"})
+	@Test(groups = {"VetTests012", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_012_CommentsLibrary() {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -225,7 +225,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyCommentVideo(VideoContent.wikiaVideoName);
 	}
 	
-	@Test(groups = {"VetTests013", "VetTests"})
+	@Test(groups = {"VetTests013", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_013_MessageWallProvider() {
 		CommonFunctions.logOut(driver);
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
@@ -247,7 +247,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		wall.verifyPostedMessageVideo(title);
 	}
 	
-	@Test(groups = {"VetTests014", "VetTests"})
+	@Test(groups = {"VetTests014", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_014_MessageWallLibrary() {
 		CommonFunctions.logOut(driver);
 		MessageWallPageObject wall = new MessageWallPageObject(driver,
