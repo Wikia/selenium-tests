@@ -41,7 +41,7 @@ public class DriverProvider {
 			driver = new EventFiringWebDriver(new InternetExplorerDriver()).register(listener);
 		}
 		else if (Global.BROWSER.equals("FF")){
-			FirefoxProfile profile = new FirefoxProfile();
+//			FirefoxProfile profile = new FirefoxProfile();
 //			try {
 //				profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\firebug-1.7.2.xpi"));
 //				profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\netExport-0.8b13.xpi"));
@@ -63,7 +63,7 @@ public class DriverProvider {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			driver = new EventFiringWebDriver(new FirefoxDriver(profile)).register(listener);
+			driver = new EventFiringWebDriver(new FirefoxDriver()).register(listener);
 		}
 		else if (Global.BROWSER.equals("CHROME")){
 			setChromeProperties();
