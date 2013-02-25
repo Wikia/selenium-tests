@@ -81,7 +81,7 @@ public class VetProvidersTests extends TestTemplate{
 				WikiArticleEditMode RVmoduleMessageEdit = wiki.edit();		
 				RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
 				wiki = RVmoduleMessageEdit.clickOnPublishButton();
-				wiki.openRandomArticle();
+				wiki.openRandomArticleByUrl();
 				VetAddVideoComponentObject vetAddingVideo = wiki.clickOnAddVideoRVModule();
 				vetAddingVideo.addVideoByUrl(videoUrl);
 				wiki.verifyVideoAddedToRVModule(name);
