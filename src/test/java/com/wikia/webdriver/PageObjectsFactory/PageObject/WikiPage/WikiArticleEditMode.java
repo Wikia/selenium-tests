@@ -1135,7 +1135,7 @@ public void verifyRightAlignmentIsSelected() {
 	}
 	
 	public WikiArticlePageObject addImageForLightboxTesting () {
-		clickOnAddObjectButton("Image");
+//		clickOnAddObjectButton("Image");
 		waitForElementByElement(findInputField);
 		findInputField.sendKeys("aa");
 		waitForElementByElement(findButton);

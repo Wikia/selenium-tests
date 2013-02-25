@@ -509,15 +509,15 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialMultipleUploadPageObject(driver, Domain);
 	}
 
-	public WikiArticlePageObject OpenArticle(String wikiArticle) {
-		try {
-			getUrl(Domain + "wiki/" + wikiArticle);
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("OpenArticle",
-					"page loads for more than 30 seconds", true);
-		}
-		return new WikiArticlePageObject(driver, Domain, wikiArticle);
-	}
+//	public WikiArticlePageObject OpenArticle(String wikiArticle) {
+//		try {
+//			getUrl(Domain + "wiki/" + wikiArticle);
+//		} catch (TimeoutException e) {
+//			PageObjectLogging.log("OpenArticle",
+//					"page loads for more than 30 seconds", true);
+//		}
+//		return new WikiArticlePageObject(driver, Domain, wikiArticle);
+//	}
 
 	public void verifyEditDropDownAnonymous() {
 		List<WebElement> list = driver.findElements(By

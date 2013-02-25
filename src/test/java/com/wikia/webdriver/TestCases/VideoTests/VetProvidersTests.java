@@ -77,7 +77,7 @@ public class VetProvidersTests extends TestTemplate{
 				WikiArticlePageObject wiki = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-				wiki.OpenArticle("MediaWiki:RelatedVideosGlobalList");
+				wiki.openArticle("MediaWiki:RelatedVideosGlobalList");
 				WikiArticleEditMode RVmoduleMessageEdit = wiki.edit();		
 				RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
 				wiki = RVmoduleMessageEdit.clickOnPublishButton();

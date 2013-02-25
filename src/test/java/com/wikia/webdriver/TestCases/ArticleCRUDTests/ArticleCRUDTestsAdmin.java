@@ -4,6 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -280,12 +281,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-		wiki.refreshPage();
-		wiki.openWikiPage();			
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
-		edit.deleteArticleContent();
-		edit.clickOnAddObjectButton("Image");
-		WikiArticlePageObject article = edit.addImageForLightboxTesting();
+		WikiArticlePageObject article = wiki.openArticle(URLsContent.lightboxImageTest);
 		LightboxPageObject lightbox = article.clickThumbnailImage();
 		lightbox.clickPinButton();
 		lightbox.clickShareButton();
