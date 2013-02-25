@@ -22,18 +22,17 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 	private WebElement addVideo;
 	@FindBy(css = "div.WikiaGrid div:nth-child(1).grid-2")
 	private WebElement newestVideo;
+	@FindBys(@FindBy(css=".image.video"))
+	private List<WebElement> videos;
 
 	public SpecialVideosPageObject(WebDriver driver, String Domain) {
             super(driver);
             PageFactory.initElements(driver, this);
 	}
 
-	
-	@FindBys(@FindBy(css=".image.video"))
-	private List<WebElement> videos;
-	
-	
-	public SpecialVideosPageObject openSpecialVideoPage(){
+
+
+        public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Domain+"wiki/Special:Videos");
 		return new SpecialVideosPageObject(driver, Domain);
 	}
