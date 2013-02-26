@@ -22,27 +22,26 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 		// TODO Auto-generated constructor stub
 	}
 	@FindBy(css="div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
-	protected WebElement customizeToolbar_CustomizeButton;
+	protected WebElement customizeButton;
 	@FindBy(css="div.msg")
-	protected WebElement customizeToolbar_PageWatchlistStatusMessage;
+	protected WebElement pageWatchlistStatusMessage;
 	@FindBy(css="div.search-box input.search")
-	protected WebElement customizeToolbar_FindAToolField;
+	protected WebElement findAToolField;
 	@FindBy(css="div.MyToolsRenameItem input.input-box")
-	protected WebElement customizeToolbar_RenameItemDialogInput;
+	protected WebElement renameItemDialogInput;
 	@FindBy(css="div.MyToolsRenameItem input.save-button")
-	protected WebElement customizeToolbar_SaveItemDialogInput;
+	protected WebElement saveItemDialogInput;
 	@FindBy(css="input.save-button")
-	protected WebElement customizeToolbar_SaveButton;
+	protected WebElement saveButton;
 	@FindBy(css="span.reset-defaults a")
-	protected WebElement customizeToolbar_ResetDefaultsButton;
+	protected WebElement resetDefaultsButton;
 	@FindBy(css="li.mytools.menu")
-	protected WebElement customizeToolbar_MyToolsMenuButton;
+	protected WebElement myToolsMenuButton;
 	@FindBy(css="ul[id='my-tools-menu']")
-	protected WebElement customizeToolbar_MyToolsMenu;
+	protected WebElement myToolsMenu;
 	
 	
-	private By customizeToolbar_ToolsList = By.cssSelector("ul.tools li");
-	private By customizeToolbar_MyToolsList = By.cssSelector("ul[id='my-tools-menu'] a");
+	private By toolsList = By.cssSelector("ul.tools li");
 	
 	/**
 	 * Verifies that user toolbar buttons are visible
@@ -60,9 +59,9 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void clickCustomize() {
-		waitForElementByElement(customizeToolbar_CustomizeButton);
-		waitForElementClickableByElement(customizeToolbar_CustomizeButton);
-		click(customizeToolbar_CustomizeButton);
+		waitForElementByElement(customizeButton);
+		waitForElementClickableByElement(customizeButton);
+		click(customizeButton);
 		PageObjectLogging.log("customizeToolbar_ClickCustomize", "Clicks on 'Customize' button.", true, driver);
 		
 	}
@@ -74,9 +73,9 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void clickResetDefaults() {
-		waitForElementByElement(customizeToolbar_ResetDefaultsButton);
-		waitForElementClickableByElement(customizeToolbar_ResetDefaultsButton);
-		clickAndWait(customizeToolbar_ResetDefaultsButton);
+		waitForElementByElement(resetDefaultsButton);
+		waitForElementClickableByElement(resetDefaultsButton);
+		clickAndWait(resetDefaultsButton);
 		PageObjectLogging.log("customizeToolbar_ClickOnResetDefaults", "Click on 'ResetDefaults' button.", true, driver);
 		
 	}
@@ -88,10 +87,10 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void searchTool(String GivenString) {
-		waitForElementByElement(customizeToolbar_FindAToolField);
-		waitForElementClickableByElement(customizeToolbar_FindAToolField);
-		customizeToolbar_FindAToolField.clear();
-		customizeToolbar_FindAToolField.sendKeys(GivenString);
+		waitForElementByElement(findAToolField);
+		waitForElementClickableByElement(findAToolField);
+		findAToolField.clear();
+		findAToolField.sendKeys(GivenString);
 		PageObjectLogging.log("customizeToolbar_TypeIntoFindATool", "Type "+GivenString+" into Find A Tool field", true, driver);
 		
 	}
@@ -104,10 +103,10 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void typeNewName(String GivenString) {
-		waitForElementByElement(customizeToolbar_RenameItemDialogInput);
-		waitForElementClickableByElement(customizeToolbar_RenameItemDialogInput);
-		customizeToolbar_RenameItemDialogInput.clear();
-		customizeToolbar_RenameItemDialogInput.sendKeys(GivenString);
+		waitForElementByElement(renameItemDialogInput);
+		waitForElementClickableByElement(renameItemDialogInput);
+		renameItemDialogInput.clear();
+		renameItemDialogInput.sendKeys(GivenString);
 		PageObjectLogging.log("customizeToolbar_TypeIntoRenameItemDialog", "Type "+GivenString+" into rename item input", true, driver);
 	}
 	
@@ -117,9 +116,9 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void clickSaveNewName() {
-		waitForElementByElement(customizeToolbar_SaveItemDialogInput);
-		waitForElementClickableByElement(customizeToolbar_SaveItemDialogInput);
-		clickAndWait(customizeToolbar_SaveItemDialogInput);
+		waitForElementByElement(saveItemDialogInput);
+		waitForElementClickableByElement(saveItemDialogInput);
+		clickAndWait(saveItemDialogInput);
 		PageObjectLogging.log("customizeToolbar_saveInRenameItemDialog", "Click on 'save' button on Rename Item dialog.", true, driver);
 		
 	}
@@ -168,7 +167,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void verifyFollowMessage() {
-		waitForElementByElement(customizeToolbar_PageWatchlistStatusMessage);
+		waitForElementByElement(pageWatchlistStatusMessage);
 		PageObjectLogging.log("customizeToolbar_VerifyPageWatchlistStatusMessage", "Verify that the page watchlist status message appeared ", true, driver);
 		
 	}
@@ -193,7 +192,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void verifyUnfollowed() {
-		waitForElementByElement(customizeToolbar_PageWatchlistStatusMessage);
+		waitForElementByElement(pageWatchlistStatusMessage);
 		waitForValueToBePresentInElementsAttributeByCss("a[data-name='follow']", "title", "Follow");
 		PageObjectLogging.log("customizeToolbar_VerifyPageUnfollowed", "Verify that page is unfollowed", true, driver);
 		
@@ -209,18 +208,6 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 		waitForElementByCss("ul.options-list li[data-caption='"+Tool+"']");
 		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbarList", "Check if "+Tool+" appears on list", true);
 	
-	}
-	
-	/**
-	 * Look up if Tool does not appear on Toolbar List
-	 * 
-	 * @param Tool {Follow, Edit, History, (...)} 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyToolNotOnToolbarList(String Tool) {
-		waitForElementByCss("ul.options-list li");
-		waitForElementNotVisibleByCss("ul.options-list li[data-caption='"+Tool+"']");
-		PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbarList", "Check if "+Tool+" does not appear on Toolbar list", true, driver);
 	}
 	
 	/**
@@ -246,62 +233,6 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 		jQueryClick("ul.options-list li[data-caption=\""+ToolID+"\"] img.edit-pencil");
 		PageObjectLogging.log("customizeToolbar_ClickOnToolRenameButton", "Rename the "+ToolID+" Tool", true, driver);
 	}
-	
-	/**
-	 * Drag the wanted Tool
-	 * 
-	 * @param ToolID ID of tool to be dragged. {PageAction:Follow, PageAction:Edit, PageAction:History, (...)}
-	 * @param DragDirection The direction of dragging. e.g -1 is 'drop the tool one item below'
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_DragElemAndDrop(String ToolID, int DragDirection) {
-		By By1 = By.cssSelector("ul.options-list li[data-caption='"+ToolID+"']");
-		By By2 = By.cssSelector("ul.options-list li[data-caption='"+ToolID+"'] img.drag");
-		Point Elem1_location = driver.findElement(By1).getLocation();
-		CommonFunctions.MoveCursorToElement(Elem1_location);
-		waitForElementByBy(By2);
-		waitForElementClickableByBy(By2);
-		Point Elem2_location = driver.findElement(By2).getLocation();
-		CommonFunctions.MoveCursorToElement(Elem2_location);
-		if (Global.BROWSER.equals("FF")) {
-			// Firefox is unable to drag and drop customize toolbar elements using actions class. Able to do it with robot class
-			CommonFunctions.DragFromCurrentCursorPositionAndDrop(0, 25*DragDirection+8);
-		}
-		else {		
-			// Chrome is unable to drag and drop customize toolbar elements using robot class. Able to do it with actions class
-			WebElement draggable = driver.findElement(By2); 
-			new Actions(driver).dragAndDropBy(draggable, 0, 25*DragDirection+8).perform();  
-			
-		}
-		PageObjectLogging.log("customizeToolbar_DragElemAndDrop", "Drag element "+ToolID+", by "+DragDirection, true, driver);
-	}
-	
-	/**
-	 * Check the order of two first tools on My tools list
-	 * 
-	 * @param tool1 The first tool to appear on My Tools list. {History, What links here, (...)} 
-	 * @param tool2 The second tool to appear on My Tools list. {History, What links here, (...)} 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyMyToolsOrder(String tool1, String tool2) {
-		CommonFunctions.MoveCursorTo(0, 100);		
-		CommonFunctions.MoveCursorTo(0, 0);		
-		waitForElementByElement(customizeToolbar_MyToolsMenuButton);
-		Point location = customizeToolbar_MyToolsMenuButton.getLocation();
-		try {Thread.sleep(1000);} catch (InterruptedException e) {}
-		CommonFunctions.MoveCursorToElement(location);
-		waitForElementByElement(customizeToolbar_MyToolsMenu);
-		List<WebElement> MyToolsList = driver.findElements(customizeToolbar_MyToolsList);
-		String ActualTool1=MyToolsList.get(0).getText();
-		String ActualTool2=MyToolsList.get(1).getText();
-		if (!tool1.equals(ActualTool1)) {
-			PageObjectLogging.log("customizeToolbar_VerifyMyToolsOrder", ActualTool1+" where "+tool1+" should be. Drag & drop action (from previous step) must hadn't been succesful", false, driver);
-		}
-		if (!tool2.equals(ActualTool2)) {
-			PageObjectLogging.log("customizeToolbar_VerifyMyToolsOrder", ActualTool2+" where "+tool2+" should be. Drag & drop action (from previous step) must hadn't been succesful", false, driver);
-		}
-		PageObjectLogging.log("customizeToolbar_VerifyMyToolsOrder", "Verify that My Tools list has"+tool2+" appearing after "+tool1, true, driver);
-	}
 
 	/**
 	 * Click on save button on customize toolbar
@@ -309,9 +240,9 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void clickSave() {
-		waitForElementByElement(customizeToolbar_SaveButton);
-		waitForElementClickableByElement(customizeToolbar_SaveButton);
-		clickAndWait(customizeToolbar_SaveButton);
+		waitForElementByElement(saveButton);
+		waitForElementClickableByElement(saveButton);
+		clickAndWait(saveButton);
 		PageObjectLogging.log("customizeToolbar_ClickOnSaveButton", "Click on 'save' button.", true, driver);
 		
 	}
@@ -330,12 +261,12 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @author Michal Nowierski
 	 */
 	public void unfollowIfFollowed() {
-		List<WebElement> List = driver.findElements(customizeToolbar_ToolsList);
+		List<WebElement> List = driver.findElements(toolsList);
 		for (int i = 0; i < List.size(); i++) {
 			if (List.get(i).getText().equals("Following")) {
 				clickOnTool("follow");
 				verifyFollowMessage();
-				wait.until(ExpectedConditions.textToBePresentInElement(customizeToolbar_ToolsList, "Follow"));
+				wait.until(ExpectedConditions.textToBePresentInElement(toolsList, "Follow"));
 			
 			}
 		}
