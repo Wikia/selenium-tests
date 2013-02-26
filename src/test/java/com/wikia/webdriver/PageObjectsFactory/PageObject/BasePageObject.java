@@ -127,7 +127,6 @@ public class BasePageObject{
 		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-//		clickAndWait(publishButtonGeneral);
 		jQueryClick("input.control-button");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
@@ -478,15 +477,13 @@ public class BasePageObject{
 
 	}
 
-        /**
-         * Wait for element to be displayed
-         *
-         * @param element
-         */
-        public void waitForElementVisibleByElement(WebElement element) {
-            wait.until(CommonExpectedConditions.elementVisible(element));
-        }
-
+	/**
+	 * Wait for element to be displayed
+	 * @param element
+	 */
+	public void waitForElementVisibleByElement(WebElement element) {
+		wait.until(CommonExpectedConditions.elementVisible(element));
+	}
 
 	public WebElement waitForElementByCss(String cssSelector)
 	{
@@ -569,8 +566,6 @@ public class BasePageObject{
 	{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));								
 	}
-
-	
 	
 	public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute, String value)
 	{
@@ -625,23 +620,6 @@ public class BasePageObject{
 			PageObjectLogging.log("navigateBack", e.toString(), false);			
 		}
 	}
-	
-
-
-
-	
-
-	
-
-
-	
-
-	
-
-	
-
-	
-
 	
 	/**
 	 * verify that wikia search field is displayed
@@ -703,7 +681,6 @@ public class BasePageObject{
 			
 		}  	
 	}
-	
 
     public void openWikiPage() {
         getUrl(Domain + URLsContent.noexternals);
@@ -712,13 +689,6 @@ public class BasePageObject{
             "Wiki page is opened", true
         );
     }
-
-//	public void openRandomArticle() {
-//		clickAndWait(randomPageButton);
-//		waitForElementByElement(searchButton);
-//		PageObjectLogging.log("openRandomArticle",
-//				"random page button clicked", true, driver);
-//	}
 
 	public WikiArticlePageObject openRandomArticle() {
             clickAndWait(randomPageButton);
@@ -852,7 +822,6 @@ public class BasePageObject{
 		waitForElementByElement(notifications_NotificationsForWiki);
 		waitForElementClickableByElement(notifications_NotificationsForWiki);
 		clickAndWait(notifications_NotificationsForWiki);
-//		executeScript("$($('li.notifications-for-wiki')[0]).addClass('show')");
 		PageObjectLogging.log("notifications_showNotificationsForWiki", "show the upper wiki notifications on menu", true, driver);		
 	}
 	

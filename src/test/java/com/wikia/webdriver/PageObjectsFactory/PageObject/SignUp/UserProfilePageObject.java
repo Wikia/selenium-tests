@@ -63,17 +63,7 @@ public class UserProfilePageObject extends BasePageObject{
 			PageObjectLogging.log("verifyLogInInvisiblity ", "Register in is not visible", true);						
 		}
 	}
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void verifyUserProfilePage()
-	{
-//		verifyLogInInvisiblity();
-//		verifyRegisterInvisiblity();
-		verifyUserToolBar();
-	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */

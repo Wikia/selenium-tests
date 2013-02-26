@@ -4,6 +4,7 @@ public class URLsContent {
 
 	//Image lightbox test page
 	public static String lightboxImageTest = "LightboxTesting";
+	public static String followingToolbarTest = "QAautoPage";
 	
 	// Ads - pages with height better than 2400 px
 	public static String wikiSearchMiddleLink1 = "http://preview.plantsvszombies.wikia.com/wiki/Special:Search?ns0=1&ns14=1&search=zombies&fulltext=Search&ns0=1&ns14=1&advanced=";

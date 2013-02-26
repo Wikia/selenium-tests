@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.CustomizedToolbar.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -42,7 +43,8 @@ public class SignUpTests_account_creation extends TestTemplate
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
 		userProfile.verifyUserLoggedIn(userNameEnc);
-		userProfile.verifyUserToolBar();	
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();	
 		userProfile.verifyWelcomeEmail(userNameEnc);
 	}
 	
@@ -71,7 +73,8 @@ public class SignUpTests_account_creation extends TestTemplate
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
 		userProfile.verifyUserLoggedIn(userName);
-		userProfile.verifyUserToolBar();	
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userName);
 	}
 	
@@ -101,7 +104,8 @@ public class SignUpTests_account_creation extends TestTemplate
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
 		userProfile.verifyUserLoggedIn(userNameEnc);
-		userProfile.verifyUserToolBar();	
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userNameEnc);
 	}
 	
@@ -130,7 +134,8 @@ public class SignUpTests_account_creation extends TestTemplate
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
 		userProfile.verifyUserLoggedIn(userName);
-		userProfile.verifyUserToolBar();	
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userName);
 	}
 	
@@ -159,7 +164,8 @@ public class SignUpTests_account_creation extends TestTemplate
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
 		userProfile.verifyUserLoggedIn(userName);
-		userProfile.verifyUserToolBar();	
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();	
 		userProfile.verifyWelcomeEmail(userName);
 	}
 	
@@ -187,7 +193,8 @@ public class SignUpTests_account_creation extends TestTemplate
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
 		userProfile.verifyUserLoggedIn(userName);
-		userProfile.verifyUserToolBar();	
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userName);
 	}
 	
@@ -211,7 +218,8 @@ public class SignUpTests_account_creation extends TestTemplate
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
 		userProfile.verifyUserLoggedIn(userName);
-		userProfile.verifyUserToolBar();	
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();	
 		userProfile.verifyWelcomeEmail(userName);
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);

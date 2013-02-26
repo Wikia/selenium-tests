@@ -65,7 +65,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_ClickCustomize() {
+	public void clickCustomize() {
 		waitForElementByElement(customizeToolbar_CustomizeButton);
 		waitForElementClickableByElement(customizeToolbar_CustomizeButton);
 		click(customizeToolbar_CustomizeButton);
@@ -79,7 +79,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * 	 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_ClickOnResetDefaults() {
+	public void clickResetDefaults() {
 		waitForElementByElement(customizeToolbar_ResetDefaultsButton);
 		waitForElementClickableByElement(customizeToolbar_ResetDefaultsButton);
 		clickAndWait(customizeToolbar_ResetDefaultsButton);
@@ -93,7 +93,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param GivenString String to be typed into search field 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_TypeIntoFindATool(String GivenString) {
+	public void searchTool(String GivenString) {
 		waitForElementByElement(customizeToolbar_FindAToolField);
 		waitForElementClickableByElement(customizeToolbar_FindAToolField);
 		customizeToolbar_FindAToolField.clear();
@@ -109,7 +109,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param GivenString new name for the Tool
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_TypeIntoRenameItemDialog(String GivenString) {
+	public void typeNewName(String GivenString) {
 		waitForElementByElement(customizeToolbar_RenameItemDialogInput);
 		waitForElementClickableByElement(customizeToolbar_RenameItemDialogInput);
 		customizeToolbar_RenameItemDialogInput.clear();
@@ -122,7 +122,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * 	 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_saveInRenameItemDialog() {
+	public void clickSaveNewName() {
 		waitForElementByElement(customizeToolbar_SaveItemDialogInput);
 		waitForElementClickableByElement(customizeToolbar_SaveItemDialogInput);
 		clickAndWait(customizeToolbar_SaveItemDialogInput);
@@ -136,7 +136,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param Tool toolname appearing on the list of found tools
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_ClickOnFoundTool(String Tool) {
+	public void clickSearchSuggestion(String Tool) {
 		waitForElementByCss("div.autocomplete div[title='"+Tool+"']");
 		waitForElementClickableByCss("div.autocomplete div[title='"+Tool+"']");
 		clickAndWait(driver.findElement(By.cssSelector("div.autocomplete div[title='"+Tool+"']")));
@@ -150,7 +150,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool you want to click.
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_ClickOnTool(String Tool_dataname) {
+	public void clickOnTool(String Tool_dataname) {
 		waitForElementByCss("li.overflow a[data-name='"+Tool_dataname+"']");
 		WebElement element = driver.findElement(By.cssSelector("li.overflow a[data-name='"+Tool_dataname+"']"));
 		if (Global.BROWSER.equals("IE")) {
@@ -173,7 +173,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool you want to click.
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_VerifyPageWatchlistStatusMessage() {
+	public void verifyFollowMessage() {
 		waitForElementByElement(customizeToolbar_PageWatchlistStatusMessage);
 		PageObjectLogging.log("customizeToolbar_VerifyPageWatchlistStatusMessage", "Verify that the page watchlist status message appeared ", true, driver);
 		
@@ -185,7 +185,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_VerifyPageFollowed() {
+	public void verifyFollowedToolbar() {
 		waitForElementByCss("a[data-name='follow']");
 		waitForValueToBePresentInElementsAttributeByCss("a[data-name='follow']", "title", "Unfollow");
 		PageObjectLogging.log("customizeToolbar_VerifyPageFollowed", "Verify that page is followed", true, driver);
@@ -198,7 +198,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_VerifyPageUnfollowed() {
+	public void verifyUnfollowed() {
 		waitForElementByElement(customizeToolbar_PageWatchlistStatusMessage);
 		waitForValueToBePresentInElementsAttributeByCss("a[data-name='follow']", "title", "Follow");
 		PageObjectLogging.log("customizeToolbar_VerifyPageUnfollowed", "Verify that page is unfollowed", true, driver);
@@ -211,7 +211,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param Tool {Follow, Edit, History, (...)} 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_VerifyToolOnToolbarList(String Tool) {
+	public void verifyToolOnList(String Tool) {
 		waitForElementByCss("ul.options-list li[data-caption='"+Tool+"']");
 		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbarList", "Check if "+Tool+" appears on list", true);
 	
@@ -235,7 +235,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param Tool ID of tool to be removed. {Follow, Edit, History, (...)} 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_ClickOnToolRemoveButton(String Tool) {
+	public void clickRemove(String Tool) {
 		jQueryClick("ul.options-list li[data-caption=\""+Tool+"\"] img.trash");
 		PageObjectLogging.log("customizeToolbar_ClickOnToolRemoveButton", "Remove Tool with id "+Tool+" from Toolbar List", true, driver);
 	}
@@ -246,7 +246,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param ToolID ID of tool to be removed. {PageAction:Follow, PageAction:Edit, PageAction:History, (...)} 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_ClickOnToolRenameButton(String ToolID) {
+	public void clickRename(String ToolID) {
 		By By1 = By.cssSelector("ul.options-list li[data-caption='"+ToolID+"']");
 		waitForElementByBy(By1);
 		jQueryClick("ul.options-list li[data-caption=\""+ToolID+"\"] img.edit-pencil");
@@ -314,7 +314,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * 
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_ClickOnSaveButton() {
+	public void clickSave() {
 		waitForElementByElement(customizeToolbar_SaveButton);
 		waitForElementClickableByElement(customizeToolbar_SaveButton);
 		clickAndWait(customizeToolbar_SaveButton);
@@ -322,7 +322,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 		
 	}
 	
-	public void customizeToolbar_VerifyToolOnToolbar(String ToolName)
+	public void verifyToolOnToolbar(String ToolName)
 	{
 		waitForElementByXPath("//ul[@class='tools']//a[contains(text(), '"+ToolName+"')]");
 		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbar","Verify that "+ToolName+" appears in Toolbar.", true);
@@ -335,12 +335,12 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 * @param ToolName Tool to be verified (name that should appear on toolbar)
 	 * @author Michal Nowierski
 	 */
-	public void customizeToolbar_UnfollowIfPageIsFollowed() {
+	public void unfollowIfFollowed() {
 		List<WebElement> List = driver.findElements(customizeToolbar_ToolsList);
 		for (int i = 0; i < List.size(); i++) {
 			if (List.get(i).getText().equals("Following")) {
-				customizeToolbar_ClickOnTool("follow");
-				customizeToolbar_VerifyPageWatchlistStatusMessage();
+				clickOnTool("follow");
+				verifyFollowMessage();
 				wait.until(ExpectedConditions.textToBePresentInElement(customizeToolbar_ToolsList, "Follow"));
 			
 			}
@@ -350,7 +350,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 
 	}
 	
-	public void customizeToolbar_VerifyToolNotOnToolbar(String ToolName)
+	public void verifyToolRemoved(String ToolName)
 	{
 		By tool = By.xpath("//ul[@class='tools']//a[contains(text(), '"+ToolName+"')]");
 		waitForElementNotVisibleByBy(tool);
