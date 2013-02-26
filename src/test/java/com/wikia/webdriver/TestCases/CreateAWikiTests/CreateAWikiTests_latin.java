@@ -13,6 +13,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.CustomizedToolbar.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInPageObject;
@@ -139,7 +140,8 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
-		newWikia.verifyUserToolBar();
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
 	}
 //	
@@ -174,7 +176,8 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
-		newWikia.verifyUserToolBar();
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -209,7 +212,8 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
-		newWikia.verifyUserToolBar();
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -240,10 +244,8 @@ public class CreateAWikiTests_latin extends TestTemplate
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userName);
-		newWikia.verifyUserToolBar();
+		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
+		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
 	}	
-	
-	
-	
 }

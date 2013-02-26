@@ -626,22 +626,7 @@ public class BasePageObject{
 		}
 	}
 	
-	public void showToolbar()
-	{
-		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
-		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
-	}
-	
-	/**
-	 * Verifies that user toolbar buttons are visible
-	 */
-	public void verifyUserToolBar()
-	{
-		waitForElementByCss("div.toolbar ul.tools li.overflow");
-		waitForElementByCss("div.toolbar ul.tools li.mytools");
-		waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
-		PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true, driver);
-	}
+
 
 
 	
