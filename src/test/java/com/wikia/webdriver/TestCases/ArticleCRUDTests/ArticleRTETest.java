@@ -222,6 +222,7 @@ public class ArticleRTETest extends TestTemplate{
 				"<div>\n\n<h2>foo</h2>\n\n{|\n|bar\n|}\n</div>",
 				"<div><div><span>foo</span></div>\n<!-- bar -->\n</div>",
 				"<div><div><span>foo</span></div>\n\n<!-- bar -->\n</div>",
+				"<div style='clear:both;'></div>", //BugId:96210
 				// aligned paragraphs
 				"<p style=\"text-align:right\">123</p>\n\n\n\n456",
 				"<p style=\"text-align:right;\">123</p>\n\n\n\n456",
@@ -289,7 +290,7 @@ public class ArticleRTETest extends TestTemplate{
 				"{|\n|text1 [[link]] text2\ntext3\n|}",
 				"{|\n|text1 [[link]] text2\ntext3\ntext4\n|}",
 				"{|\n|text1 [[link]] text2\ntext3\n|text4\n|}",
-								       
+
 				///**********************************
 //				"\n\n\n\n\n\n\n1g",
 //				"1\nb",//bug jeden enter
