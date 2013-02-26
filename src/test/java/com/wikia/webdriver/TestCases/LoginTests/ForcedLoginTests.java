@@ -112,9 +112,8 @@ public class ForcedLoginTests extends TestTemplate{
         MiniEditorComponentObject miniEditor = new MiniEditorComponentObject(driver, Global.DOMAIN);
         miniEditor.clickAddImage();
         base.logInViaModal(Properties.userName, Properties.password);
-        miniEditor.waitForEditorReady();
         base.verifyUserLoggedIn(Properties.userName);
-
+        miniEditor.waitForEditorReady();
         CommonFunctions.logOut(driver);
     }
 

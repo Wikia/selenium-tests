@@ -911,19 +911,6 @@ public class WikiBasePageObject extends BasePageObject {
                 "Login form in modal is filled",
                 true, driver
             );
-
             clickAndWait(modalLoginSubmit);
-            PageObjectLogging.log(
-                "LoginFormSubmitted",
-                "Login form is submitted",
-                true, driver
-            );
-
-            waitForElementNotVisibleByElement(logInModal);
-            PageObjectLogging.log(
-                "LoginModalDissapears",
-                "Login modal is no longer visible",
-                true
-            );
         }
 }
