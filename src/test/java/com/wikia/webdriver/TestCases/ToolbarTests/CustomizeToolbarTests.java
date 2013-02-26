@@ -23,7 +23,6 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-		toolbar.showToolbar();
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
 		toolbar.searchTool("e");
@@ -43,7 +42,6 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-		toolbar.showToolbar();
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
 		toolbar.searchTool("e");
@@ -55,12 +53,11 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolOnList("Edit123");
 		toolbar.clickSave();
 		toolbar.verifyToolOnToolbar("Edit123");
-				
 	}
 	
-	@Test(groups = {"CustomizeToolbar004", "Toolbar"}) 
+	@Test(groups = {"CustomizeToolbar003", "Toolbar"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Deleting
-	public void CustomizeToolbar004_Deleteing()
+	public void CustomizeToolbar003_Deleteing()
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -68,7 +65,6 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-		toolbar.showToolbar();
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
 		toolbar.searchTool("e");
@@ -79,9 +75,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolRemoved("Edit");
 	}
 	
-	@Test(groups = {"CustomizeToolbar005", "Toolbar"}) 
+	@Test(groups = {"CustomizeToolbar004", "Toolbar"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Finding
-	public void CustomizeToolbar005_Finding()
+	public void CustomizeToolbar004_Finding()
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -89,7 +85,6 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-		toolbar.showToolbar();
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
 		toolbar.searchTool("Up");
@@ -99,9 +94,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolOnToolbar("Upload photo");
 	}
 	
-	@Test(groups = {"CustomizeToolbar006", "Toolbar"}) 
+	@Test(groups = {"CustomizeToolbar005", "Toolbar"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
-	public void CustomizeToolbar006_ResetDefaults()
+	public void CustomizeToolbar005_ResetDefaults()
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -109,7 +104,6 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-		toolbar.showToolbar();
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
 		toolbar.searchTool("Up");
@@ -123,9 +117,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolRemoved("Upload photo");
 	}
 	
-	@Test(groups = {"CustomizeToolbar007", "Toolbar"}) 
+	@Test(groups = {"CustomizeToolbar006", "Toolbar"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
-	public void CustomizeToolbar007_ButtonsActions()
+	public void CustomizeToolbar006_ButtonsActions()
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -133,7 +127,6 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-		toolbar.showToolbar();
 		toolbar.unfollowIfFollowed();
 		toolbar.verifyToolOnToolbar("Follow");
 		toolbar.clickOnTool("follow");

@@ -44,12 +44,6 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	private By customizeToolbar_ToolsList = By.cssSelector("ul.tools li");
 	private By customizeToolbar_MyToolsList = By.cssSelector("ul[id='my-tools-menu'] a");
 	
-	public void showToolbar()
-	{
-		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
-		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
-	}
-	
 	/**
 	 * Verifies that user toolbar buttons are visible
 	 */
