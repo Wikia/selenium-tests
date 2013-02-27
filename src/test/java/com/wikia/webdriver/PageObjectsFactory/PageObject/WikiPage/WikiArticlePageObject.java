@@ -84,7 +84,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		this.articlename = wikiArticle;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public String getPageName(){
 		return this.articlename;
 	}
@@ -577,5 +577,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
             "Button add video on wikia rail is clicked",
             true, driver
         );
+    }
+
+    public void renameRandomArticle(String newName) {
+        String oldName = getArticleNameFromURL();
+        renameArticle(oldName, newName);
     }
 }

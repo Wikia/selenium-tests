@@ -66,6 +66,7 @@ public class PageContent {
         public static String loginRequired = "Login required";
         public static String notLoggedInMessage = "Not logged in";
         public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
+        public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
 
         //Blocks for Phalanx
         public static String titleFilterPlain = "BadTitle";
