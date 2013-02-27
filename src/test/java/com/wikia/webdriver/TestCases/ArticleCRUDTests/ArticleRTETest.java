@@ -11,6 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -378,8 +379,9 @@ public class ArticleRTETest extends TestTemplate{
 			edit.clickOnSourceButton();
 
 			e = driver.findElement(By.cssSelector(".cke_source"));
-
-			if (e.getAttribute("value").contains(wikitext)){
+			;
+			if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)){
+//			if (e.getAttribute("value").contains(wikitext)){
 				tmp1 = e.getAttribute("value").replace("<", "&lt");
 				tmp1.replace(">", "&gt");
 				PageObjectLogging.log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
