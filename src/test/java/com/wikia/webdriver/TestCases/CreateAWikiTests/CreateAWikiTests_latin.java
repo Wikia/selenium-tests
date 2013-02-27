@@ -16,6 +16,7 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.CustomizedToolbar.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
@@ -39,7 +40,10 @@ public class CreateAWikiTests_latin extends TestTemplate
 	public void DeleteWiki()
 	{
 		startBrowser();
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);		
 		for (int i=0; i<wikiNames.size(); i++)
 		{

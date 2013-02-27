@@ -8,6 +8,8 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPhalanxPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+
 import java.util.HashMap;
 
 /**
@@ -23,7 +25,10 @@ public class BlockPageTitleTests extends TestTemplate {
     public void BlockPageTitle_001_SpecialPage () {
         CommonFunctions.logOut(driver);
 
-        CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
         SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addStandardFilterForTitle();

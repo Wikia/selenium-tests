@@ -7,10 +7,10 @@ import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class ForumBoardTests extends TestTemplate {
 	
@@ -80,7 +80,10 @@ public class ForumBoardTests extends TestTemplate {
 	public void forumBoardTests_005_startDiscussionWithVideo(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
@@ -92,7 +95,10 @@ public class ForumBoardTests extends TestTemplate {
 	public void forumBoardTests_006_followDiscussion(){
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
@@ -107,8 +113,11 @@ public class ForumBoardTests extends TestTemplate {
 	@Test(groups= {"ForumBoardTests_007, ForumBoardTests", "Forum"} )
 	public void forumBoardTests_007_highlightDiscussion(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();

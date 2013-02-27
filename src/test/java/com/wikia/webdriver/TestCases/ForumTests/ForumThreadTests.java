@@ -10,6 +10,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBo
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 /* 
  * StoryQA0128 - Create test cases for forum
@@ -58,8 +59,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_003", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_003_removeThread(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -73,8 +77,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_004", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_004_removeThreadAndUndo(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -90,8 +97,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_005_moveThreadToOtherBoard(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userName, Properties.password);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -105,8 +115,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_006", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_006_threadHistory(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logIn(Properties.userName, Properties.password);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();

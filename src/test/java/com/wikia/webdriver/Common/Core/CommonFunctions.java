@@ -33,103 +33,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CommonFunctions {
 
 	private static WebDriver driver;
 	private static WebDriverWait wait;
 
-	public static void logIn(String userName, String password) {
-		driver = DriverProvider.getWebDriver();
-		driver.manage().deleteAllCookies();
-		String temp = driver.getCurrentUrl();
-		try {
-			driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		WebElement userNameField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='username']"));
-		WebElement passwordField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='password']"));
-		WebElement submitButton = driver.findElement(By
-				.cssSelector("#WikiaArticle input.login-button.big"));
-		userNameField.sendKeys(userName);
-		passwordField.sendKeys(password);
-		try {
-			submitButton.click();
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-			try {
-				driver.navigate().refresh();
-			} catch (TimeoutException f) {
-				PageObjectLogging.log("logIn",
-						"page loads for more than 30 seconds", true, driver);
-			}
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userName + "']"));// only for verification
-		try {
-			if (!(temp.contains("Special:UserLogout") || temp
-					.contains("Specjalna:Wyloguj"))) {
-				driver.get(temp);
-			}
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userName + "']"));
-	}
-
-	public static void logInSpecialUserLogin(String userName, String password,
-			String userNameEnc) {
-		driver = DriverProvider.getWebDriver();
-		driver.manage().deleteAllCookies();
-		String temp = driver.getCurrentUrl();
-		try {
-			driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		WebElement userNameField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='username']"));
-		WebElement passwordField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='password']"));		
-		WebElement loginForm = driver.findElement(By
-				.cssSelector(".UserLogin form"));
-		
-		userNameField.sendKeys(userName);
-		passwordField.sendKeys(password);
-		try {
-			loginForm.submit();
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-			try {
-				driver.navigate().refresh();
-			} catch (TimeoutException f) {
-				PageObjectLogging.log("logIn",
-						"page loads for more than 30 seconds", true, driver);
-			}
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userNameEnc + "']"));// only for verification
-		try {
-			if (!(temp.contains("Special:UserLogout") || temp
-					.contains("Specjalna:Wyloguj"))) {
-				driver.get(temp);
-			}
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userNameEnc + "']"));
-	}
 
 	public static void logIn(String userName, String password, WebDriver driver) {
 		String temp = driver.getCurrentUrl();
@@ -405,7 +316,11 @@ public class CommonFunctions {
 
 	public static String logInCookie(String userName, String password) {
 		if (!Global.LOGIN_BY_COOKIE) {
-			CommonFunctions.logIn(userName, password);
+			driver = DriverProvider.getWebDriver();
+			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+			login.openSpecialUserLogin();
+			login.login(userName, password);
+			login.verifyUserIsLoggedIn(userName);
 			return null;
 		} else {
 			try {
@@ -512,7 +427,10 @@ public class CommonFunctions {
 	public static String logInCookie(String userName, String password,
 			WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
-			CommonFunctions.logIn(userName, password, driver);
+			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+			login.openSpecialUserLogin();
+			login.login(Properties.userNameStaff, Properties.passwordStaff);
+			login.verifyUserIsLoggedIn(Properties.userNameStaff);
 			return null;
 		} else {
 			try {

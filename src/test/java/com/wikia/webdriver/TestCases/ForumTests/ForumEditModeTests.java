@@ -9,6 +9,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class ForumEditModeTests extends TestTemplate{
 	
@@ -45,9 +46,11 @@ public class ForumEditModeTests extends TestTemplate{
 	@Test(dataProvider="getForumName", groups={"Forum_002", "Forum"})
 	public void forumEditModeTests_002_createNewBoard(String name){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-//		forumMainPage.openRandomArticleByUrl();
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		title = name+manageForum.getTimeStamp();
@@ -60,9 +63,11 @@ public class ForumEditModeTests extends TestTemplate{
 	@Test(groups = {"Forum_003","Forum"})
 	public void forumEditModeTests_003_deleteBoard(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-//		forumMainPage.openRandomArticleByUrl();
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		first = manageForum.getFirstForumName();
@@ -75,9 +80,11 @@ public class ForumEditModeTests extends TestTemplate{
 	@Test(groups = {"Forum_004","Forum"})
 	public void forumEditModeTests_004_editBoard(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-//		forumMainPage.openRandomArticleByUrl();
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		first = manageForum.getFirstForumName();
@@ -91,9 +98,11 @@ public class ForumEditModeTests extends TestTemplate{
 	@Test(groups = {"Forum_005","Forum"})
 	public void forumEditModeTests_005_moveBoard(){
 		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
+		login.login(Properties.userNameStaff, Properties.passwordStaff);
+		login.verifyUserIsLoggedIn(Properties.userNameStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-//		forumMainPage.openRandomArticleByUrl();
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		first = manageForum.getFirstForumName();

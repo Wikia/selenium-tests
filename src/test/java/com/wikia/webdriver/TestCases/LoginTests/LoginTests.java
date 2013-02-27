@@ -10,6 +10,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject.DropDownComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class LoginTests extends TestTemplate {
 
@@ -24,9 +25,10 @@ public class LoginTests extends TestTemplate {
         ) {
             PageObjectLogging.log("Login_001_SpecialPage", userName, true);
             CommonFunctions.logOut(driver);
-            WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
-            base.openWikiPage();
-            CommonFunctions.logInSpecialUserLogin(userName, password, userNameEnc);
+            SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+            login.openSpecialUserLogin();
+            login.login(userName, password);
+            login.verifyUserIsLoggedIn(userNameEnc);
             CommonFunctions.logOut(driver);
 	}
 
