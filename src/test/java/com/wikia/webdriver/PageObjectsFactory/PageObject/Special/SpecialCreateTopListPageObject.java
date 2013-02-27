@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list_EditonCore;
 
 //Top_10_list_EditonCore class was created because there are 2 very similar (but not the same) PageObjects: Special:CreateTopList  and Special:EditTopList
 //Special:CreateTopList extends Top_10_list_EditonCore

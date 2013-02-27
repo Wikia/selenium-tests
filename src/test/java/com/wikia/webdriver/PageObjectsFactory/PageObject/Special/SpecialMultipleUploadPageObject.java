@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 
 
