@@ -223,6 +223,7 @@ public class SignUpTests_account_creation extends TestTemplate
 		userProfile.verifyWelcomeEmail(userName);
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openSpecialUserLogin();
 		login.forgotPassword(userName);
 		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
 		tempPassword = MailFunctions.getPasswordFromMailContent((MailFunctions.getFirstMailContent(Properties.email, Properties.emailPassword)));
