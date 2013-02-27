@@ -11,6 +11,12 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
+/**
+ * 
+ * @author Karol 'kkarolk' Kujawiak
+ *
+ */
+
 public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	public SpecialUserLoginPageObject(WebDriver driver) {
@@ -137,8 +143,9 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	/**
 	 * opens Special:UserLogin page
 	 */
-	public void openSpecialUserLogin(){
+	public SpecialUserLoginPageObject openSpecialUserLogin(){
 		getUrl(Global.DOMAIN+"wiki/Special:UserLogin");
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
+		return new SpecialUserLoginPageObject(driver);
 	}
 }
