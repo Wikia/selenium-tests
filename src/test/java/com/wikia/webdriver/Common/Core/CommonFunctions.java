@@ -318,9 +318,7 @@ public class CommonFunctions {
 		if (!Global.LOGIN_BY_COOKIE) {
 			driver = DriverProvider.getWebDriver();
 			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-			login.openSpecialUserLogin();
-			login.login(userName, password);
-			login.verifyUserIsLoggedIn(userName);
+			login.loginAndVerify(userName, password);
 			return null;
 		} else {
 			try {
@@ -428,9 +426,7 @@ public class CommonFunctions {
 			WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
 			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-			login.openSpecialUserLogin();
-			login.login(Properties.userNameStaff, Properties.passwordStaff);
-			login.verifyUserIsLoggedIn(Properties.userNameStaff);
+			login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 			return null;
 		} else {
 			try {

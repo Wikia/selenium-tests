@@ -60,9 +60,7 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_003_removeThread(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
@@ -78,9 +76,7 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_004_removeThreadAndUndo(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
@@ -98,9 +94,7 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_005_moveThreadToOtherBoard(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
@@ -116,9 +110,7 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_006_threadHistory(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();

@@ -47,9 +47,7 @@ public class ForumEditModeTests extends TestTemplate{
 	public void forumEditModeTests_002_createNewBoard(String name){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
@@ -64,9 +62,7 @@ public class ForumEditModeTests extends TestTemplate{
 	public void forumEditModeTests_003_deleteBoard(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
@@ -81,9 +77,7 @@ public class ForumEditModeTests extends TestTemplate{
 	public void forumEditModeTests_004_editBoard(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
@@ -99,9 +93,7 @@ public class ForumEditModeTests extends TestTemplate{
 	public void forumEditModeTests_005_moveBoard(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();

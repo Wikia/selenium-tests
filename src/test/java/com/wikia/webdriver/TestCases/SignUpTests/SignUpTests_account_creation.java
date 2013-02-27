@@ -223,18 +223,15 @@ public class SignUpTests_account_creation extends TestTemplate
 		userProfile.verifyWelcomeEmail(userName);
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
 		login.forgotPassword(userName);
 		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
 		tempPassword = MailFunctions.getPasswordFromMailContent((MailFunctions.getFirstMailContent(Properties.email, Properties.emailPassword)));
 		login.login(userName, tempPassword);
 		password = Properties.password+timeStamp;
 		login.resetPassword(password);
-		login.verifyUserIsLoggedIn(userName);
+		login.verifyUserLoggedIn(userName);
 		CommonFunctions.logOut(driver);
-		login.openSpecialUserLogin();
-		login.login(userName, password);
-		login.verifyUserIsLoggedIn(userName);
+		login.loginAndVerify(userName, password);
 		CommonFunctions.logOut(driver);
 	}
 }

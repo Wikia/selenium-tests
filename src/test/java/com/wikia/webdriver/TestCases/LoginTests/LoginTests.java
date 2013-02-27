@@ -26,9 +26,7 @@ public class LoginTests extends TestTemplate {
             PageObjectLogging.log("Login_001_SpecialPage", userName, true);
             CommonFunctions.logOut(driver);
             SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-            login.openSpecialUserLogin();
-            login.login(userName, password);
-            login.verifyUserIsLoggedIn(userNameEnc);
+            login.loginAndVerify(userName, password);
             CommonFunctions.logOut(driver);
 	}
 
@@ -62,7 +60,6 @@ public class LoginTests extends TestTemplate {
             dropdown.openDropDown();
             dropdown.logInViaFacebook();
             base.verifyUserLoggedIn(Properties.userNameFB);
-
             CommonFunctions.logOut(driver);
 	}
 }

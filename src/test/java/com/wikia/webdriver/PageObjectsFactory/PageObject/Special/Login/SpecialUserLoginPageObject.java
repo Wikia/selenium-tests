@@ -90,16 +90,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	}
 	
 	/**
-	 * checks user name on main menu
-	 * @param name
-	 */
-	public void verifyUserIsLoggedIn(String name){
-		waitForElementByCss(".AccountNavigation a[href*='"
-				+ name + "']");
-		PageObjectLogging.log("verifyUserIsLoggedIn", name + "user logged in successfully", true, driver);
-	}
-	
-	/**
 	 * Special:UserLogin forgot password
 	 */
 	private void clickForgotPasswordLink(){
@@ -108,7 +98,24 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	}
 	
 	/**
-	 * Special:UserLogin 
+	 * Special:UserLogin
+	 * use if user is not on Special:UserLogin page
+	 * and verification after logging in is needed
+	 *  
+	 * @param name
+	 * @param pass
+	 */
+	public void loginAndVerify(String name, String pass){
+		openSpecialUserLogin();
+		login(name, pass);
+		verifyUserLoggedIn(name);
+	}
+	
+	/**
+	 * Special:UserLogin
+	 * use if user is on Special:UserLogin page 
+	 * and no verification after logging in is needed
+	 * 
 	 * @param name
 	 * @param pass
 	 */
@@ -135,6 +142,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	 * @param name
 	 */
 	public void forgotPassword(String name){
+		openSpecialUserLogin();
 		typeInUserName(name);
 		clickForgotPasswordLink();
 		waitForElementByXPath("//div[@class='error-msg' and contains(text(), \"We've sent a new password to the email address for "+name+".\")]");
@@ -143,9 +151,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	/**
 	 * opens Special:UserLogin page
 	 */
-	public SpecialUserLoginPageObject openSpecialUserLogin(){
+	private void openSpecialUserLogin(){
 		getUrl(Global.DOMAIN+"wiki/Special:UserLogin");
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
-		return new SpecialUserLoginPageObject(driver);
 	}
 }

@@ -41,9 +41,7 @@ public class CreateAWikiTests_latin extends TestTemplate
 	{
 		startBrowser();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);		
 		for (int i=0; i<wikiNames.size(); i++)
 		{

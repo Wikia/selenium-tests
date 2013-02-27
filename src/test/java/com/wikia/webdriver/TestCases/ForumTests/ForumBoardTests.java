@@ -81,9 +81,7 @@ public class ForumBoardTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
@@ -96,9 +94,7 @@ public class ForumBoardTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
@@ -114,9 +110,7 @@ public class ForumBoardTests extends TestTemplate {
 	public void forumBoardTests_007_highlightDiscussion(){
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();

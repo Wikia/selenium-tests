@@ -26,9 +26,7 @@ public class BlockPageTitleTests extends TestTemplate {
         CommonFunctions.logOut(driver);
 
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
         SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addStandardFilterForTitle();

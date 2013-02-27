@@ -22,9 +22,7 @@ public class ArticleHistoryTests extends TestTemplate
 	{
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -57,9 +55,7 @@ public class ArticleHistoryTests extends TestTemplate
 	{
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);		
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);		
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -70,9 +66,7 @@ public class ArticleHistoryTests extends TestTemplate
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
 		CommonFunctions.logOut(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(article.getPageName());
 		edit = article.edit();
 		edit.deleteArticleContent();
@@ -82,9 +76,7 @@ public class ArticleHistoryTests extends TestTemplate
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleTextEdit);
 		CommonFunctions.logOut(driver);
-		login.openSpecialUserLogin();
-		login.login(Properties.userNameStaff, Properties.passwordStaff);
-		login.verifyUserIsLoggedIn(Properties.userNameStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(article.getPageName());
 		WikiHistoryPageObject history = article.openHistoryPage();
 		history.rollbackPage();
