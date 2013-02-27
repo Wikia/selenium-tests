@@ -404,7 +404,12 @@ public class BasePageObject{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return (String) js.executeScript("return "+script);
 	}
-	
+
+        public WebElement executeScriptReturnElement(String script) {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                return (WebElement) js.executeScript(script);
+        }
+
 	protected void executeScript(String script, WebDriver driver)
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -415,7 +420,8 @@ public class BasePageObject{
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	public void removeCssClass(String cssSelector, String className){
 		executeScript("$('."+cssSelector+"').removeClass('"+className+"')");
 		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true, driver);

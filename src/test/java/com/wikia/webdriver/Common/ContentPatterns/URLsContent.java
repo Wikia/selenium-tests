@@ -28,14 +28,17 @@ public class URLsContent {
 	public static String EntertainmentHub = "http://www.wikia.com/Entertainment";
 	public static String LifestyleHub = "http://www.wikia.com/Lifestyle";
 
-	// Special Urls - links to special pages
-	public static final String specialUserLogin = "wiki/Special:UserLogin";
-	public static final String specialUserSignup = "wiki/Special:UserSignup";
-	public static final String specialAddBlogPost = "wiki/Special:CreateBlogPage";
-	public static final String specialNewFiles = "wiki/Special:NewFiles";
-	public static final String specialNewVideo = "wiki/Special:Videos";
-	public static final String specialUpload = "wiki/Special:Upload";
-	public static final String specialWatchList = "wiki/Special:Watchlist";
+        //Special Urls - links to special pages
+        public static final String specialUserLogin = "wiki/Special:UserLogin";
+        public static final String specialUserSignup = "wiki/Special:UserSignup";
+        public static final String specialAddBlogPost = "wiki/Special:CreateBlogPage";
+        public static final String specialNewFiles = "wiki/Special:NewFiles";
+        public static final String specialNewVideo = "wiki/Special:Videos";
+        public static final String specialUpload = "wiki/Special:Upload";
+        public static final String specialWatchList = "wiki/Special:Watchlist";
+        public static final String specialPhalanx = "wiki/Special:Phalanx";
+        public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
+        public static final String specialCreatePage = "wiki/Special:CreatePage";
 
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
