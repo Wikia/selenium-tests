@@ -129,6 +129,9 @@ public class ArticleRTETest extends TestTemplate{
 				"{|\n|-\n|\n|\n|}",
 				"{|\n|-\n!\n!\n|-\n|\n|\n|}",
 				"{|\n!\n!\n|-\n|\n|\n|}",
+				// BugId:95911
+				"{|\n|-\n|\nfirst\n\nsecond\n|}",
+				"{|\n|-\n| '''Text'''\n\nText\n|}",
 				// links
 				"123 [[bar]] 456",
 				"abc [[foo|bar]] def",
