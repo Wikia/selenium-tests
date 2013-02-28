@@ -142,7 +142,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	 * @param name
 	 */
 	public void forgotPassword(String name){
-		openSpecialUserLogin();
 		typeInUserName(name);
 		clickForgotPasswordLink();
 		waitForElementByXPath("//div[@class='error-msg' and contains(text(), \"We've sent a new password to the email address for "+name+".\")]");
@@ -151,7 +150,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	/**
 	 * opens Special:UserLogin page
 	 */
-	private void openSpecialUserLogin(){
+	public void openSpecialUserLogin(){
 		getUrl(Global.DOMAIN+"wiki/Special:UserLogin");
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
 	}
