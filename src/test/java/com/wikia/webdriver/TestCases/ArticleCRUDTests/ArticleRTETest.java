@@ -208,7 +208,7 @@ public class ArticleRTETest extends TestTemplate{
 				"<div>\n* 123\n</div>\n\n<div>\n# 123\n</div>\n\n<div>\n: 123\n</div>",
 				"<div>\n<span>foo</span>\n</div>\n\n<div>\n\n<span>foo</span>\n</div>\n\n\n<div><span>foo</span></div>",
 				"<div>\n\n\n{|\n|123\n|}\n\n\n</div>",
-				"{|\n|<div class=\"foo\"> </div>\n{|\n|bar\n|}\n|}",
+				"{|\n|<div class=\"foo\"> </div>\n{|\n|bar\n|}\n|}",
 				"<div>\n== foo ==\n\nbar\n</div>",
 				"<div>123</div>",
 				"<div>\n123\n</div>",
@@ -380,8 +380,7 @@ public class ArticleRTETest extends TestTemplate{
 
 			e = driver.findElement(By.cssSelector(".cke_source"));
 			;
-			if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)){
-//			if (e.getAttribute("value").contains(wikitext)){ 
+			if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)){ 
 				tmp1 = e.getAttribute("value").replace("<", "&lt");
 				tmp1.replace(">", "&gt");
 				PageObjectLogging.log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
