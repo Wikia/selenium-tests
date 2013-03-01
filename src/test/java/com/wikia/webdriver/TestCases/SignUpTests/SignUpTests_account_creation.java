@@ -230,11 +230,9 @@ public class SignUpTests_account_creation extends TestTemplate
 		login.login(userName, tempPassword);
 		password = Properties.password+timeStamp;
 		login.resetPassword(password);
-		login.verifyUserIsLoggedIn(userName);
+		login.verifyUserLoggedIn(userName);
 		CommonFunctions.logOut(driver);
-		login.openSpecialUserLogin();
-		login.login(userName, password);
-		login.verifyUserIsLoggedIn(userName);
+		login.loginAndVerify(userName, password);
 		CommonFunctions.logOut(driver);
 	}
 }

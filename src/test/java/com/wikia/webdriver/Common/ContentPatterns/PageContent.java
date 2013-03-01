@@ -65,4 +65,8 @@ public class PageContent {
         public static String createNewBlogPostMessage = "Create a new blog post";
         public static String loginRequired = "Login required";
         public static String notLoggedInMessage = "Not logged in";
+        public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
+
+        //Blocks for Phalanx
+        public static String titleFilterPlain = "BadTitle";
 }

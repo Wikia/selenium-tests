@@ -8,6 +8,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleRevisionEditMode;
@@ -20,7 +21,8 @@ public class ArticleHistoryTests extends TestTemplate
 	public void ArticleHistoryTests_001_RecoverPreviousVersion()
 	{
 		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -52,7 +54,8 @@ public class ArticleHistoryTests extends TestTemplate
 	public void ArticleHistoryTests_002_RollbackVersion()
 	{
 		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);		
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -63,7 +66,7 @@ public class ArticleHistoryTests extends TestTemplate
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
 		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userName, Properties.password);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(article.getPageName());
 		edit = article.edit();
 		edit.deleteArticleContent();
@@ -73,7 +76,7 @@ public class ArticleHistoryTests extends TestTemplate
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleTextEdit);
 		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(article.getPageName());
 		WikiHistoryPageObject history = article.openHistoryPage();
 		history.rollbackPage();

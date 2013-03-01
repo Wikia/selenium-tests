@@ -11,6 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -128,6 +129,22 @@ public class ArticleRTETest extends TestTemplate{
 				"{|\n|-\n|\n|\n|}",
 				"{|\n|-\n!\n!\n|-\n|\n|\n|}",
 				"{|\n!\n!\n|-\n|\n|\n|}",
+				// BugId: 11235
+				"{|\n|[[link]]\ntext1\n|}",
+				"{|\n|[[link]] text1\ntext2\n|}",
+				"{|\n|[[link]] text1\ntext2\ntext3\n|}",
+				"{|\n|[[link]] text1\ntext2\n|text3\n|}",
+				"{|\n|text1 [[link]]\ntext2\n|}",
+				"{|\n|text1 [[link]]\ntext2\ntext3\n|}",
+				"{|\n|text1 [[link]]\ntext2\n|text3\n|}",
+				"{|\n|text1 [[link]] text2\ntext3\n|}",
+				"{|\n|text1 [[link]] text2\ntext3\ntext4\n|}",
+				"{|\n|text1 [[link]] text2\ntext3\n|text4\n|}",
+				// BugId:95911
+				"{|\n|-\n|\nfirst\n\nsecond\n|}",
+				"{|\n|-\n| '''Text'''\n\nText\n|}",
+				// BugId:98729
+				"{|\n|\n----\nfoo\n|\n\n----\nfoo\n|}",
 				// links
 				"123 [[bar]] 456",
 				"abc [[foo|bar]] def",
@@ -207,7 +224,7 @@ public class ArticleRTETest extends TestTemplate{
 				"<div>\n* 123\n</div>\n\n<div>\n# 123\n</div>\n\n<div>\n: 123\n</div>",
 				"<div>\n<span>foo</span>\n</div>\n\n<div>\n\n<span>foo</span>\n</div>\n\n\n<div><span>foo</span></div>",
 				"<div>\n\n\n{|\n|123\n|}\n\n\n</div>",
-				"{|\n|<div class=\"foo\"> </div>\n{|\n|bar\n|}\n|}",
+				"{|\n|<div class=\"foo\"> </div>\n{|\n|bar\n|}\n|}",
 				"<div>\n== foo ==\n\nbar\n</div>",
 				"<div>123</div>",
 				"<div>\n123\n</div>",
@@ -222,7 +239,8 @@ public class ArticleRTETest extends TestTemplate{
 				"<div>\n\n<h2>foo</h2>\n\n{|\n|bar\n|}\n</div>",
 				"<div><div><span>foo</span></div>\n<!-- bar -->\n</div>",
 				"<div><div><span>foo</span></div>\n\n<!-- bar -->\n</div>",
-				"<div style='clear:both;'></div>", //BugId:96210
+				// BugId:96210
+				//"<div style='clear:both;'></div>",
 				// aligned paragraphs
 				"<p style=\"text-align:right\">123</p>\n\n\n\n456",
 				"<p style=\"text-align:right;\">123</p>\n\n\n\n456",
@@ -279,17 +297,6 @@ public class ArticleRTETest extends TestTemplate{
 				// BugID: 11537
 				"<div>\n<h2>Test</h2>\n* Test\n</div>",
 				"<div>\n<h2>Test</h2>\n: Test\n</div>",
-				// BugId: 11235
-				"{|\n|[[link]]\ntext1\n|}",
-				"{|\n|[[link]] text1\ntext2\n|}",
-				"{|\n|[[link]] text1\ntext2\ntext3\n|}",
-				"{|\n|[[link]] text1\ntext2\n|text3\n|}",
-				"{|\n|text1 [[link]]\ntext2\n|}",
-				"{|\n|text1 [[link]]\ntext2\ntext3\n|}",
-				"{|\n|text1 [[link]]\ntext2\n|text3\n|}",
-				"{|\n|text1 [[link]] text2\ntext3\n|}",
-				"{|\n|text1 [[link]] text2\ntext3\ntext4\n|}",
-				"{|\n|text1 [[link]] text2\ntext3\n|text4\n|}",
 
 				///**********************************
 //				"\n\n\n\n\n\n\n1g",
@@ -378,8 +385,8 @@ public class ArticleRTETest extends TestTemplate{
 			edit.clickOnSourceButton();
 
 			e = driver.findElement(By.cssSelector(".cke_source"));
-
-			if (e.getAttribute("value").contains(wikitext)){
+			;
+			if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)){
 				tmp1 = e.getAttribute("value").replace("<", "&lt");
 				tmp1.replace(">", "&gt");
 				PageObjectLogging.log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);

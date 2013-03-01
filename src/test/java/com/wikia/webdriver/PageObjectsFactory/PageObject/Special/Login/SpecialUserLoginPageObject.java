@@ -11,6 +11,12 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
+/**
+ * 
+ * @author Karol 'kkarolk' Kujawiak
+ *
+ */
+
 public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	public SpecialUserLoginPageObject(WebDriver driver) {
@@ -84,16 +90,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	}
 	
 	/**
-	 * checks user name on main menu
-	 * @param name
-	 */
-	public void verifyUserIsLoggedIn(String name){
-		waitForElementByCss(".AccountNavigation a[href*='"
-				+ name + "']");
-		PageObjectLogging.log("verifyUserIsLoggedIn", name + "user logged in successfully", true, driver);
-	}
-	
-	/**
 	 * Special:UserLogin forgot password
 	 */
 	private void clickForgotPasswordLink(){
@@ -102,7 +98,24 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	}
 	
 	/**
-	 * Special:UserLogin 
+	 * Special:UserLogin
+	 * use if user is not on Special:UserLogin page
+	 * and verification after logging in is needed
+	 *  
+	 * @param name
+	 * @param pass
+	 */
+	public void loginAndVerify(String name, String pass){
+		openSpecialUserLogin();
+		login(name, pass);
+		verifyUserLoggedIn(name);
+	}
+	
+	/**
+	 * Special:UserLogin
+	 * use if user is on Special:UserLogin page 
+	 * and no verification after logging in is needed
+	 * 
 	 * @param name
 	 * @param pass
 	 */
