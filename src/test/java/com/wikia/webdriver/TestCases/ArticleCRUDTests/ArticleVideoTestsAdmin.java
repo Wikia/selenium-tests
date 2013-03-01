@@ -134,7 +134,7 @@ public class ArticleVideoTestsAdmin extends TestTemplate{
 				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-				wiki.refreshPage();
+				//wiki.refreshPage();
 				pageName = "QAarticle"+wiki.getTimeStamp();
 				wiki.openWikiPage();			
 				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);

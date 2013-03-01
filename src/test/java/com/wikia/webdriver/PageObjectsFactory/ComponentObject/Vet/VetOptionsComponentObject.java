@@ -2,14 +2,17 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.seleniumemulation.GetValue;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import bsh.Parser;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 
 public class VetOptionsComponentObject extends BasePageObject{
 
@@ -38,6 +41,23 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement addAvideo;
 		@FindBy(css="#VideoEmbedCloseButton")
 		private WebElement returnToEditing;
+		@FindBy(css="input.wikia-button.v-float-right")
+		private WebElement updateVideoButton;
+		@FindBy(css="span#VET_LayoutLeftBox.selected")
+		private WebElement PositionLayoutLeftSelected;
+		@FindBy(css="span#VET_LayoutRightBox.selected")
+		private WebElement PositionLayoutRightSelected;
+		@FindBy(css="span#VET_LayoutCenterBox.selected")
+		private WebElement PositionLayoutCenterSelected;
+		
+		@FindBy(css="input[type='hidden'][id='VideoEmbedName']")
+		private WebElement uneditableVideoNameField;
+		@FindBy(css="input[type='text'][id='VideoEmbedName']")
+		private WebElement editableVideoNameField;
+		
+		
+		
+		
 	
 	public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
@@ -107,9 +127,10 @@ public class VetOptionsComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickReturnToEditing", "return to editing button clicked",  true, driver);
 	}
 	
-	public void submit(){
+	public WikiArticleEditMode submit(){
 		clickAddaVideo();
 		clickRetunToEditing();
+		return new WikiArticleEditMode(driver, Domain, Domain);
 	}
 	
 	/**
@@ -135,5 +156,76 @@ public class VetOptionsComponentObject extends BasePageObject{
 				break;
 		default: PageObjectLogging.log("adjustPosition", "invalid style selected",  false);
 		}
+	}
+	
+	
+	/**
+	 * @param i
+	 * i = 1; left position
+	 * i = 2; center position
+	 * i = 3; right position
+	 * 
+	 * @author Rodrigo 'RodriGomez' Molinero
+	 *  
+	 */
+	
+	public void verifyAlignmentOptionIsSelected(int i){
+		waitForElementByElement(videoEmbedLayotRow);
+		switch (i){
+		case 1: PositionLayoutLeftSelected.click();
+				PageObjectLogging.log("verifyAlignmentOptionIsSelected", "left position selected",  true);
+				break;
+		case 2: PositionLayoutCenterSelected.click();
+				PageObjectLogging.log("verifyAlignmentOptionIsSelected", "center position selected",  true);
+				break;
+		case 3: PositionLayoutRightSelected.click();
+				PageObjectLogging.log("verifyAlignmentOptionIsSelected", "right position selected",  true);
+				break;
+		default: PageObjectLogging.log("verifyAlignmentOptionIsSelected", "invalid alignment selected",  false);
+		}
+	}
+	
+	public void clickUpdateVideo() {
+		waitForElementByElement(updateVideoButton);
+		clickAndWait(updateVideoButton);
+		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true, driver);
+	}
+	
+	
+	public void verifyVideoWidthInVETOptionsModal() {
+		waitForElementByElement(withInputField);
+		Assertion.assertEquals("250", withInputField.getAttribute("value"));
+		PageObjectLogging.log("verifyVideoWidthInVETOptionsModal", "Video width has the correct value set previously", true);
+		
+	}
+	
+	
+	public void verifyCaptionInVETModal(String caption) {
+		String captionText = captionField.getText();
+		Assertion.assertStringContains(captionText, caption);
+		PageObjectLogging.log("verifyCaptionInVETModal", "Verify that the caption of the video set previously appears in the VET modal", true, driver);
+	}
+	
+	
+	public void verifyNoCaptionInVETModal() {
+		if (styleWithoutCaption.isSelected())
+		{
+			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with no caption is selected in VET modal", true);
+			}
+		else
+			{
+			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with caption is selected in VET modal", false);
+		}	
+				
+	}
+	
+	public void verifyVideoNameFieldIsNotEditable(){
+		waitForElementByElement(uneditableVideoNameField);
+		PageObjectLogging.log("verifyVideoNameFieldIsNotEditable", "Verified that Video Name Field is not editable",  true, driver);
+	}
+	
+	public void verifyVideoNameFieldIsEditable(){
+		waitForElementByElement(editableVideoNameField);
+		PageObjectLogging.log("verifyVideoNameFieldIsEditable", "Verified that Video Name Field is editable",  true, driver);
 	}
 }

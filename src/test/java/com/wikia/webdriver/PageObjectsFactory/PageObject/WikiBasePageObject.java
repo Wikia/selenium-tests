@@ -14,9 +14,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateTopListPageObject;
@@ -27,6 +29,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
+import com.wikia.webdriver.TestCases.VideoTests.VetAddingVideo;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -126,6 +129,18 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
 	private WebElement ad_Prefooter_left_boxad;
 	
+	@FindBy(css="figure.tleft")
+	private WebElement videoOnLeftOfArticle;
+	@FindBy(css="figure.tright")
+	private WebElement videoOnRightOfArticle;
+	@FindBy(css="figure.tnone")
+	private WebElement videoOnCenterOfArticle;
+	@FindBy(css="#WikiaArticle div[style*='width:250px']")
+	private WebElement videoWidthOnArticle;
+	@FindBy(css="figcaption.thumbcaption")
+	private WebElement videoCaptionOnArticle;
+	
+	
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By
@@ -162,14 +177,15 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
 	 */
-	public void clickOnAddObjectButton(String Object) {
+	public VetAddVideoComponentObject clickOnAddObjectButton(String Object) {
 		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
 		WebElement ObjectButton;
 		waitForElementByCss(ObjectCss);
 		waitForElementClickableByCss(ObjectCss);
 		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
 		clickAndWait(ObjectButton);
-		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);		
+		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
+		return new VetAddVideoComponentObject(driver);
 	}
 	
 	/**
@@ -828,5 +844,42 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(ad_Prefooter_left_boxad);
 		waitForElementNotVisibleByElement(ad_Prefooter_right_boxad);
 		PageObjectLogging.log("verifyPrefooterAdsInvisible", "left and right prefooter ads are invisible", true, driver);
+	}
+	
+	public void verifyVideoOnTheLeftOnAritcle()
+	{
+		waitForElementByElement(videoOnLeftOfArticle);
+		PageObjectLogging.log("verifyVideoOnTheLeftOnAritcle", "Video appears on the left of the article page once published", true, driver);
+	}
+	
+	public void verifyVideoOnTheRightOnAritcle()
+	{
+		waitForElementByElement(videoOnRightOfArticle);
+		PageObjectLogging.log("verifyVideoOnTheRightOnAritcle", "Video appears on the right of the article page once published", true, driver);
+	}
+	
+	public void verifyVideoOnTheCenterOnArticle()
+	{
+		waitForElementByElement(videoOnCenterOfArticle);
+		PageObjectLogging.log("verifyVideoOnTheCenterOnAritcle", "Video appears on the center of the article page once published", true, driver);
+	}
+	
+	public void verifyVideoWidthOnAritcle()
+	{
+		waitForElementByElement(videoWidthOnArticle);
+		PageObjectLogging.log("verifyVideoWidthOnAritcle", "Video width is correct article page when page is published", true, driver);
+	}
+	
+	public void verifyVideoCaptionOnAritcle()
+	{
+		waitForElementByElement(videoCaptionOnArticle);
+		CommonExpectedConditions.textToBePresentInElement(videoCaptionOnArticle, "QAWebdriverCaption1");
+		PageObjectLogging.log("verifyVideoCaptionOnAritcle", "Video caption appears correctly in article page", true, driver);
+	}
+	
+	public void verifyNoVideoCaptionOnAritcle() {
+		waitForElementNotVisibleByElement(videoCaptionOnArticle);
+		PageObjectLogging.log("verifyNoVideoCaptionOnAritcle", "Verify that the video does not have a caption in the article page", true);
+				
 	}
 }

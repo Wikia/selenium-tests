@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -110,6 +111,33 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement finalAddPhotoButton;
 	@FindBy(css="div#ImageUploadHeadline")
 	private WebElement ImageUploadHeadline;
+	
+	@FindBy(css="img.alignLeft")
+	private WebElement leftAlignedVideoOnEditor;
+	@FindBy(css="img.alignRight")
+	private WebElement rightAlignedVideoOnEditor;
+	@FindBy(css="img.alignCenter")
+	private WebElement centerAlignedVideoOnEditor;
+	@FindBy(css="figure.tleft")
+	private WebElement leftAlignedVideoOnPreview;
+	@FindBy(css="figure.tright")
+	private WebElement rightAlignedVideoOnPreview;
+	@FindBy(css="button.close.wikia-chiclet-button")
+	private WebElement closePreviewModal;
+	@FindBy(css="figure.tnone")
+	private WebElement centerAlignedVideoOnPreview;
+	@FindBy(css="img[width='250']")
+	private WebElement videoWidthEditor;
+	@FindBy(css="div[style*='width:250px']")
+	private WebElement videoWidthPreview;
+	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
+	private WebElement captionInEditor;	
+	
+	
+	
+	
+	
+	
 	
 	
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
@@ -386,7 +414,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		mouseOverInArticleIframe(sliderArticleIFrame);
 		waitForElementByElement(modifyButton);
 		jQueryClick(editButtonArticleItem);
-		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on slideshow", true, driver);		
+		PageObjectLogging.log("clickModifyButtonSlider", "Click on 'modify button' on slider", true, driver);		
 	}
 	
 	public void clickModifyButtonVideo() {
@@ -394,7 +422,7 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		mouseOverInArticleIframe(videoArticleIFrame);
 		waitForElementByElement(modifyButton);
 		jQueryClick(editButtonArticleItem);
-		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on video", true, driver);		
+		PageObjectLogging.log("clickModifyButtonVideo", "Click on 'modify button' on video", true, driver);		
 	}
 	
 	public VetAddVideoComponentObject clickModifyButtonVideoPlaceholder() 
@@ -581,6 +609,35 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		PageObjectLogging.log("VerifyVideoInEditMode", "Verify that video appears in edit mode", true, driver);
 		
 	}
+	
+	public void verifyLeftVideoInEditMode() {
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
+		waitForElementByElement(leftAlignedVideoOnEditor);
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("verifyLeftVideoInEditMode", "Verify that video appears in the left at the editor", true, driver);
+		
+	}
+	
+	public void verifyRightVideoInEditMode() {
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
+		waitForElementByElement(rightAlignedVideoOnEditor);
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("verifyRighttVideoInEditMode", "Verify that video appears in the right at the editor", true, driver);
+		
+	}
+	
+	public void verifyCenterVideoInEditMode() {
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
+		waitForElementByElement(centerAlignedVideoOnEditor);
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("verifyCenterVideoInEditMode", "Verify that video appears in the center at the editor", true, driver);
+		
+	}
+	
+	
 
 	/**
 	 * Verify that the video appears in the preview
@@ -592,10 +649,51 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	PageObjectLogging.log("VerifyTheVideoOnThePreview", "Verify that the video appears in the preview", true, driver);
 			
 	}
-
-
-
-
+	
+	/**
+	 * Verify that the video appears in the left hand side in preview
+	 *  
+	 * @author Rodrigo Molinero
+	 * 	 */
+	
+	public void verifyVideoOnTheLeftInPreview() {
+		waitForElementByElement(leftAlignedVideoOnPreview);
+		PageObjectLogging.log("verifyVideoOnTheLeftOnPreview", "Verify that the video appears on the left in preview", true, driver);
+				
+		}
+	
+	/**
+	 * Verify that the video appears in the right hand side in preview
+	 *  
+	 * @author Rodrigo Molinero
+	 * 	 */
+	
+	public void verifyVideoOnTheRightInPreview() {
+		waitForElementByElement(rightAlignedVideoOnPreview);
+		PageObjectLogging.log("verifyRightVideoOnTheLeftOnPreview", "Verify that the video appears on the right in preview", true, driver);
+				
+		}
+	
+	public void verifyVideoOnTheCenterInPreview() {
+		waitForElementByElement(centerAlignedVideoOnPreview);
+		PageObjectLogging.log("verifyVideoOnTheCenterInPreview", "Verify that the video appears on the center in preview", true, driver);
+				
+		}
+	
+	
+	public void clickClosePreviewModalButton() {
+		waitForElementByElement(closePreviewModal);
+		PageObjectLogging.log("clickClosePreviewModalButton", "Verify that the close button in the preview modal is clicked", true, driver);
+				
+		}
+	
+	/**
+	 * Verify that the video appears in the right hand side in preview
+	 *  
+	 * @author Rodrigo Molinero
+	 * 	 */
+	
+	
 
 
 	/**
@@ -1060,7 +1158,15 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		PageObjectLogging.log("clickImageRightAlignment", "Right allignment option is selected", true, driver);
 	}
 	
+	public void verifyCaptionInEditMode() {
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
+		waitForElementByElement(captionInEditor);
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("verifyCaptionInEditMode", "Verified existence of caption in editor", true, driver);
+	}
 	
+
 	public void verifyWikiTextInSourceMode(String text) {
 		String wikiText = sourceModeTextArea.getAttribute("value");
 		Assertion.assertStringContains(wikiText, text);
@@ -1083,6 +1189,21 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		modifyButton.click();
 		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
 	}
+	
+	public void verifyVideoWidthInEditMode() {
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
+		waitForElementByElement(videoWidthEditor);
+		driver.switchTo().defaultContent();		
+		PageObjectLogging.log("verifyVideoWidthInEditMode", "Video width in editor is exactly the same as value set in VET modal", true, driver);
+	}
+	
+	public void verifyVideoWidthOnPreview() {
+		waitForElementByElement(videoWidthPreview);
+		PageObjectLogging.log("verifyVideoWidthOnPreview", "Video width in preview is exactly the same as value set in VET modal", true, driver);
+	}
+	
+	
 	
 	public void verifyLeftAlignmentIsSelected() {
 		
@@ -1150,5 +1271,12 @@ public void verifyRightAlignmentIsSelected() {
 		finalAddPhotoButton.click();
 		clickOnPublishButton();
 		return new WikiArticlePageObject(driver, Domain, articlename);
+	}
+	
+	
+	public void verifyNoVideoCaptionInEditMode() {
+		waitForElementNotVisibleByElement(captionInEditor);
+		PageObjectLogging.log("verifyNoCaptionInEditMode", "Verify that the video does not have a caption in the editor", true);
+				
 	}
 }
