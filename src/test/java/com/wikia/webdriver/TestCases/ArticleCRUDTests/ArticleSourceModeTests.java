@@ -8,6 +8,10 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleSourceEditMode;
 
@@ -167,12 +171,11 @@ public class ArticleSourceModeTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
-		source.clickAddPhoto();
-		source.searchForImage("image");
-		source.waitForModalAndClickAddThisPhoto();
-		source.typePhotoCaption(PageContent.caption);
-		source.clickOnAddPhotoButton2();
-		source.checkSourceContent("[[File:Image010.jpg|thumb|"+PageContent.caption+"]]");
+		PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
+		source.checkSourceContent("[[File:Image009.jpg|thumb|"+PageContent.caption+"]]");
 		source.clickOnPublishButton();
 	}	
 	
@@ -248,13 +251,10 @@ public class ArticleSourceModeTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
-		source.clickAddVideo();
-		source.waitForVideoModalAndTypeVideoURL(VideoContent.youtubeVideoURL);
-		source.clickVideoNextButton();
-		source.waitForVideoDialog();
-		source.typeVideoCaption(PageContent.caption);
-		source.clickAddAvideo();
-		source.waitForSuccesDialogAndReturnToEditing();
+		VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+		vetOptions.setCaption(PageContent.caption);
+		vetOptions.submit();
 		source.checkSourceVideoContent("[["+VideoContent.youtubeVideoWikiText+PageContent.caption+"]]");
 		source.clickOnPublishButton();		
 	}

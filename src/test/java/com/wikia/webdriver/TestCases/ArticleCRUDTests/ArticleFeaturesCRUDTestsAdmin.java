@@ -10,6 +10,8 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
@@ -432,25 +434,22 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 004 Adding images to an article in edit mode
 	public void ArticleCRUDAdmin_013_AddingImage()
 	{
-//		CommonFunctions.logOut(Properties.userNameStaff, driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Image");
-		edit.waitForModalAndClickAddThisPhoto();
-		edit.typePhotoCaption(PageContent.caption);
-		edit.clickOnAddPhotoButton2();
+		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
 		edit.verifyThatThePhotoAppears(PageContent.caption);
 		edit.clickOnPreviewButton();
 		edit.verifyTheImageOnThePreview();
 		edit.verifyTheCaptionOnThePreview(PageContent.caption);
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
 		article.verifyImageOnThePage();
-		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_014", "ArticleFeaturesCRUDAdmin"})
@@ -465,15 +464,14 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Image");
-		edit.waitForModalAndClickAddThisPhoto();
-		edit.typePhotoCaption(PageContent.caption);
-		edit.clickOnAddPhotoButton2();
+		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
 		edit.verifyThatThePhotoAppears(PageContent.caption);
-		edit.clickModifyButtonImage(PageContent.caption);
-		edit.typePhotoCaption(PageContent.caption2);
-		edit.clickOnAddPhotoButton2();
+		photoOptions = edit.clickModifyButtonImage(PageContent.caption);
+		photoOptions.setCaption(PageContent.caption2);
+		photoOptions.clickAddPhoto();
 		edit.verifyThatThePhotoAppears(PageContent.caption2);
 		edit.clickOnPreviewButton();
 		edit.verifyTheImageOnThePreview();
@@ -488,18 +486,16 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	// Test Case 005 Modifying images in an article in edit mode
 	public void ArticleCRUDAdmin_015_DeleteImage()
 	{
-//		CommonFunctions.logOut(Properties.userNameStaff, driver);
-//		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);		
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Image");
-		edit.waitForModalAndClickAddThisPhoto();
-		edit.typePhotoCaption(PageContent.caption);
-		edit.clickOnAddPhotoButton2();
+		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
 		edit.verifyThatThePhotoAppears(PageContent.caption);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyImageOnThePage();
@@ -509,7 +505,6 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheImageNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
 		article.verifyImageNotOnThePage();
-		CommonFunctions.logoutCookie(cookieName);
 	}	
 	
 //	@Test(groups={"ArticleFeaturesCRUDAdmin_016", "ArticleFeaturesCRUDAdmin"})//, "ArticleFeaturesCRUDAdmin"})

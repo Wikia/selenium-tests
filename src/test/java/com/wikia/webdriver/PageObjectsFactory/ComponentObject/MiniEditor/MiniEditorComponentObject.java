@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class MiniEditorComponentObject extends WikiBasePageObject{
@@ -66,21 +69,12 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey );	
 	}
 	
-	public void addImageMiniEditor(){
-                clickAddImage();
-		waitForModalAndClickAddThisPhoto();
-		clickOnAddPhotoButton2();
-//		verifyImageMiniEditor();
-	}
-	
 	public void addVideoMiniEditor(String url){
 		waitForElementByElement(addVideoButton);
 		clickAndWait(addVideoButton);
-		waitForVideoModalAndTypeVideoURL(url);
-		clickVideoNextButton();
-		waitForVideoDialog();
-		clickAddAvideo();
-		waitForSuccesDialogAndReturnToEditing();
+		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+		vetOptions.submit();
 		verifyVideoMiniEditor();
 	}
 	
@@ -134,12 +128,13 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		return new VetAddVideoComponentObject(driver);
 	}
 
-        public void clickAddImage() {
-            waitForElementByElement(addImageButton);
-            clickAndWait(addImageButton);
-        }
+	public PhotoAddComponentObject clickAddImage() {
+		waitForElementByElement(addImageButton);
+		clickAndWait(addImageButton);
+		return new PhotoAddComponentObject(driver);
+	}
 
-        public void waitForEditorReady() {
-            waitForElementNotVisibleByElement(loader);
-        }
+	public void waitForEditorReady() {
+		waitForElementNotVisibleByElement(loader);
+	}
 }

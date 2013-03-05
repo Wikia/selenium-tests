@@ -14,6 +14,8 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 //public class MessageWallPageObject extends MiniEditorComponentObject{
@@ -150,7 +152,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	{
 		writeTitle(title);
 		triggerMessageArea();
-		miniEditor.addImageMiniEditor();
+		PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
+		PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 1);
+		photoOptions.clickAddPhoto();
 		PageObjectLogging.log("writeMessageImage", "message is written, with image "+title, true, driver);
 	}
 	

@@ -15,6 +15,8 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class WikiArticleSourceEditMode extends WikiEditMode{
@@ -92,6 +94,7 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	}
 	
 	public void checkSourceContent(String desiredContent){
+		waitForElementClickableByElement(sourceModeTextArea);
 		Assertion.assertEquals(desiredContent, getSourceContent());
 	}
 	
@@ -167,10 +170,11 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 		PageObjectLogging.log("clickHorizontalLine", "horizontal line button was clicked", true, driver);
 	}
 	
-	public void clickAddPhoto(){
+	public PhotoAddComponentObject clickAddPhoto(){
 		focusTextArea();
 		photo.click();
 		PageObjectLogging.log("clickAddPhot", "add photo button was clicked", true, driver);
+		return new PhotoAddComponentObject(driver);
 	}
 	
 	public void clickAddGallery(){
@@ -179,10 +183,11 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 		PageObjectLogging.log("clickAddGallery", "add gallery button was clicked", true, driver);
 	}
 	
-	public void clickAddVideo(){
+	public VetAddVideoComponentObject clickAddVideo(){
 		focusTextArea();
 		video.click();
 		PageObjectLogging.log("clickAddVideo", "add video button was clicked", true, driver);
+		return new VetAddVideoComponentObject(driver);
 	}
 	
 	public void clickMore(){

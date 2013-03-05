@@ -3,6 +3,8 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.cglib.transform.impl.AddPropertyTransformer;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -21,6 +23,8 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
@@ -28,6 +32,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 
 public class WikiArticleEditMode extends WikiEditMode {
 
+	@FindBy(css="a.RTEImageButton")
+	private WebElement photoButton;
+	
 	@FindBy(css="div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
 	@FindBy(css="div.cke_skin_wikia.visible div.cke_contents iframe")
@@ -386,13 +393,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 	 * @author Michal Nowierski
 	 * @param caption Caption of the image 
 	 * 	 */
-	public void clickModifyButtonImage(String caption) 
+	public PhotoOptionsComponentObject clickModifyButtonImage(String caption) 
 	{
 		waitForElementByElement(iFrame);
 		mouseOverInArticleIframe(imageArticleIFrame);
 		waitForElementByElement(modifyButton);
 		jQueryClick(editButtonArticleItem);
 		PageObjectLogging.log("ClickModifyButtonOfImage", "Click on 'modify button' of image with caption: '"+caption+"'", true, driver);
+		return new PhotoOptionsComponentObject(driver);
 	}
 	
 	public void clickModifyButtonGallery()
@@ -1081,17 +1089,17 @@ public class WikiArticleEditMode extends WikiEditMode {
 		
 	}
 	
-	public void clickImageLeftAlignment() {
-		waitForElementByElement(imageLeftAlignmentOption);
-		imageLeftAlignmentOption.click();
-		PageObjectLogging.log("clickImageLeftAlignment", "Left allignment option is selected", true, driver);
-	}
-	
-	public void clickImageRightAlignment() {
-		waitForElementByElement(imageRightAlignmentOption);
-		imageRightAlignmentOption.click();
-		PageObjectLogging.log("clickImageRightAlignment", "Right allignment option is selected", true, driver);
-	}
+//	public void clickImageLeftAlignment() {
+//		waitForElementByElement(imageLeftAlignmentOption);
+//		imageLeftAlignmentOption.click();
+//		PageObjectLogging.log("clickImageLeftAlignment", "Left allignment option is selected", true, driver);
+//	}
+//	
+//	public void clickImageRightAlignment() {
+//		waitForElementByElement(imageRightAlignmentOption);
+//		imageRightAlignmentOption.click();
+//		PageObjectLogging.log("clickImageRightAlignment", "Right allignment option is selected", true, driver);
+//	}
 	
 	
 	public void verifyWikiTextInSourceMode(String text) {
@@ -1186,70 +1194,77 @@ public void verifyRightAlignmentIsSelected() {
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 	
-	/**
-	 * Left Click on add Object button.
-	 *  
-	 * @author Michal Nowierski
-	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
-	 */
-	public Object clickOnAddObjectButton(String Object) {
-		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
-		WebElement ObjectButton;
-		waitForElementByCss(ObjectCss);
-		waitForElementClickableByCss(ObjectCss);
-		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
-		clickAndWait(ObjectButton);
-		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
-		if (Object.equals("Video")){
-			return new VetAddVideoComponentObject(driver);
-		}
-		else{
-			return null;
-		}		
+//	/**
+//	 * Left Click on add Object button.
+//	 *  
+//	 * @author Michal Nowierski
+//	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
+//	 */
+//	public Object clickOnAddObjectButton(String Object) {
+//		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
+//		WebElement ObjectButton;
+//		waitForElementByCss(ObjectCss);
+//		waitForElementClickableByCss(ObjectCss);
+//		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
+//		clickAndWait(ObjectButton);
+//		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
+//		if (Object.equals("Video")){
+//			return new VetAddVideoComponentObject(driver);
+//		}
+//		else{
+//			return null;
+//		}		
+//	}
+	
+	public PhotoAddComponentObject clickPhotoButton(){
+		waitForElementByElement(photoButton);
+		clickAndWait(photoButton);
+		PageObjectLogging.log("clickPhotoButton", "photo button clicked", true);
+		return new PhotoAddComponentObject(driver);
 	}
 	
-	/**
-	 * Wait for modal and click on 'add this photo' under the first seen photo
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void waitForModalAndClickAddThisPhoto() {
-		waitForElementByElement(imageUploadModal);
-		WebElement addPhoto = waitForElementByBy(addThisPhotoLink);
-		waitForElementClickableByElement(addPhoto);
-		clickAndWait(addPhoto);
-		PageObjectLogging
-				.log("WaitForModalAndClickAddThisPhoto",
-						"Wait for modal and click on 'add this photo' under the first seen photo",
-						true, driver);
-	}
+//	/**
+//	 * Wait for modal and click on 'add this photo' under the first seen photo
+//	 * 
+//	 * @author Michal Nowierski
+//	 */
+//	public void waitForModalAndClickAddThisPhoto() {
+//		waitForElementByElement(imageUploadModal);
+//		WebElement addPhoto = waitForElementByBy(addThisPhotoLink);
+//		waitForElementClickableByElement(addPhoto);
+//		clickAndWait(addPhoto);
+//		PageObjectLogging
+//				.log("WaitForModalAndClickAddThisPhoto",
+//						"Wait for modal and click on 'add this photo' under the first seen photo",
+//						true, driver);
+//	}
+//	
+//	/**
+//	 * Type given caption for the photo
+//	 * 
+//	 * @author Michal Nowierski
+//	 */
+//	public void typePhotoCaption(String caption) {
+//		WebElement captionText = waitForElementByBy(captionTextArea);
+//		captionText.clear();
+//		captionText.sendKeys(caption);
+//		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo",
+//				true, driver);
+//	}
 	
-	/**
-	 * Type given caption for the photo
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void typePhotoCaption(String caption) {
-		WebElement captionText = waitForElementByBy(captionTextArea);
-		captionText.clear();
-		captionText.sendKeys(caption);
-		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo",
-				true, driver);
-	}
-	
-	/**
-	 * Left Click on add 'Photo' button.
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void clickOnAddPhotoButton2() {
-		waitForElementByElement(addPhotoButton);
-		waitForElementClickableByElement(addPhotoButton);
-		clickAndWait(addPhotoButton);
-		PageObjectLogging.log("ClickOnAddPhotoButton2",
-				"Left Click on add 'Photo' button.", true, driver);
-	}
-	
+//	/**
+//	 * Left Click on add 'Photo' button.
+//	 * 
+//	 * @author Michal Nowierski
+//	 */
+//	public void clickOnAddPhotoButton2() {
+//		waitForElementByElement(addPhotoButton);
+//		waitForElementClickableByElement(addPhotoButton);
+//		clickAndWait(addPhotoButton);
+//		PageObjectLogging.log("ClickOnAddPhotoButton2",
+//				"Left Click on add 'Photo' button.", true, driver);
+//	}
+//	
 	/**
 	 * Wait for Object and click on 'add this photo' under the first seen
 	 * 

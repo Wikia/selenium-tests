@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class ForumBoardPageObject extends BasePageObject{
@@ -104,8 +106,10 @@ public class ForumBoardPageObject extends BasePageObject{
 	public void startDiscussionWithImgae(String title) {
 		jQueryFocus(discussionTextarea);
 		discussionTitleArea.sendKeys(title);
-		jQueryFocus(wikiaEditorTextarea);		
-		miniEditor.addImageMiniEditor();
+		jQueryFocus(wikiaEditorTextarea);
+		PhotoAddComponentObject photoAdd = miniEditor.clickAddImage();
+		PhotoOptionsComponentObject photoOptions = photoAdd.addPhotoFromWiki("image", 1);
+		photoOptions.clickAddPhoto();
 		PageObjectLogging.log("startDiscussionWithImgae", "discussion with image started"+title, true, driver);	
 	}
 

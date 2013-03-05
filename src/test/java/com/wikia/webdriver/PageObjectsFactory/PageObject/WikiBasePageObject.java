@@ -127,13 +127,13 @@ public class WikiBasePageObject extends BasePageObject {
 		return Domain;
 	}
 
-	public void searchForImage(String name){
-//		waitForElementByElement(imageFindButton);
-		imageQuery.sendKeys(name);
-//		waitForElementByElement(imageQuery);
-		imageFindButton.click();
-		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
-	}
+//	public void searchForImage(String name){
+////		waitForElementByElement(imageFindButton);
+//		imageQuery.sendKeys(name);
+////		waitForElementByElement(imageQuery);
+//		imageFindButton.click();
+//		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
+//	}
 	
 	
 	/**
