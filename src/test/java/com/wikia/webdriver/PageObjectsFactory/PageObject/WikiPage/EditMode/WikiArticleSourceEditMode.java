@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class WikiArticleSourceEditMode extends WikiBasePageObject{
+public class WikiArticleSourceEditMode extends WikiEditMode{
 
 	
 	@FindBy(css="#mw-editbutton-bold")
@@ -71,7 +71,7 @@ public class WikiArticleSourceEditMode extends WikiBasePageObject{
 	private WebElement sourceModeTextArea;
 	
 	public WikiArticleSourceEditMode(WebDriver driver, String Domain) {
-		super(driver, Domain);
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
