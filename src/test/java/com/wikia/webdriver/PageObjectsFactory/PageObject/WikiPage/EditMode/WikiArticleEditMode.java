@@ -26,6 +26,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -34,6 +35,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	@FindBy(css="a.RTEImageButton")
 	private WebElement photoButton;
+	@FindBy(css="a.RTEVideoButton")
+	private WebElement videoButton;
 	
 	@FindBy(css="div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
@@ -430,12 +433,13 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on slideshow", true, driver);		
 	}
 	
-	public void clickModifyButtonVideo() {
+	public VetOptionsComponentObject clickModifyButtonVideo() {
 		waitForElementByElement(iFrame);
 		mouseOverInArticleIframe(videoArticleIFrame);
 		waitForElementByElement(modifyButton);
 		jQueryClick(editButtonArticleItem);
-		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on video", true, driver);		
+		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on video", true, driver);
+		return new VetOptionsComponentObject(driver);
 	}
 	
 	public VetAddVideoComponentObject clickModifyButtonVideoPlaceholder() 
@@ -1223,6 +1227,12 @@ public void verifyRightAlignmentIsSelected() {
 		return new PhotoAddComponentObject(driver);
 	}
 	
+	public VetAddVideoComponentObject clickVideoButton(){
+		waitForElementByElement(videoButton);
+		clickAndWait(videoButton);
+		PageObjectLogging.log("clickVideoButton", "video button clicked", true);
+		return new VetAddVideoComponentObject(driver);
+	}
 //	/**
 //	 * Wait for modal and click on 'add this photo' under the first seen photo
 //	 * 
@@ -1428,92 +1438,92 @@ public void verifyRightAlignmentIsSelected() {
 
 	}
 	
-	/**
-	 * Wait for Video modal and type in the video URL
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void waitForVideoModalAndTypeVideoURL(String videoURL) {
-		waitForElementByElement(videoModalInput);
-		waitForElementClickableByElement(videoModalInput);
-		videoModalInput.clear();
-		videoModalInput.sendKeys(videoURL);
-		PageObjectLogging.log("WaitForVideoModalAndTypeVideoURL",
-				"Wait for Video modal and type in the video URL: " + videoURL,
-				true, driver);
-	}
+//	/**
+//	 * Wait for Video modal and type in the video URL
+//	 * 
+//	 * @author Michal Nowierski
+//	 * */
+//	public void waitForVideoModalAndTypeVideoURL(String videoURL) {
+//		waitForElementByElement(videoModalInput);
+//		waitForElementClickableByElement(videoModalInput);
+//		videoModalInput.clear();
+//		videoModalInput.sendKeys(videoURL);
+//		PageObjectLogging.log("WaitForVideoModalAndTypeVideoURL",
+//				"Wait for Video modal and type in the video URL: " + videoURL,
+//				true, driver);
+//	}
 	
 
-	/**
-	 * Video Click Next button
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void clickVideoNextButton() {
-		waitForElementByElement(videoNextButton);
-		waitForElementClickableByElement(videoNextButton);
-		clickAndWait(videoNextButton);
-		PageObjectLogging.log("ClickVideoNextButton", "Left Click Next button",
-				true, driver);
-	}
+//	/**
+//	 * Video Click Next button
+//	 * 
+//	 * @author Michal Nowierski
+//	 * */
+//	public void clickVideoNextButton() {
+//		waitForElementByElement(videoNextButton);
+//		waitForElementClickableByElement(videoNextButton);
+//		clickAndWait(videoNextButton);
+//		PageObjectLogging.log("ClickVideoNextButton", "Left Click Next button",
+//				true, driver);
+//	}
 	
-	/**
-	 * Wait for video dialog
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void waitForVideoDialog() {
-		waitForElementByElement(videoDialog);
-		PageObjectLogging.log("WaitForVideoDialog", "Wait for video dialog",
-				true, driver);
-
-	}
+//	/**
+//	 * Wait for video dialog
+//	 * 
+//	 * @author Michal Nowierski
+//	 * */
+//	public void waitForVideoDialog() {
+//		waitForElementByElement(videoDialog);
+//		PageObjectLogging.log("WaitForVideoDialog", "Wait for video dialog",
+//				true, driver);
+//
+//	}
 	
-
-	/**
-	 * Type given caption for the video
-	 *  
-	 * @author Michal Nowierski
-	 */
-	public void typeVideoCaption(String caption) {
-		waitForElementByElement(videoCaptionTextArea);
-		videoCaptionTextArea.clear();
-		videoCaptionTextArea.sendKeys(caption);
-		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo", true, driver);
-	}
+//
+//	/**
+//	 * Type given caption for the video
+//	 *  
+//	 * @author Michal Nowierski
+//	 */
+//	public void typeVideoCaption(String caption) {
+//		waitForElementByElement(videoCaptionTextArea);
+//		videoCaptionTextArea.clear();
+//		videoCaptionTextArea.sendKeys(caption);
+//		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo", true, driver);
+//	}
 	
-	/**
-	 * Click 'Add a video'
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void clickAddAvideo() {
-		//TODO: delete this method when VET components are introduced
-		waitForElementByElement(videoAddVideoButton);
-		// waitForElementClickableByElement(videoAddVideoButton);
-		jQueryClick(videoAddVideoButtonSelector);
-		// clickAndWait(videoAddVideoButton);
-		PageObjectLogging.log("ClickAddAvideo", "Click 'Add a video'", true,
-				driver);
-
-	}
-	
-	/**
-	 * Wait For Succes dialog and click on 'return to editing'
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void waitForSuccesDialogAndReturnToEditing() {
-		waitForElementByElement(videoReturnToEditing);
-		waitForElementClickableByElement(videoReturnToEditing);
-		jQueryClick(videoReturnToEditingSelector);
-		// clickAndWait(videoReturnToEditing);
-		waitForElementNotVisibleByCss(videoReturnToEditingSelector);
-		PageObjectLogging.log("WaitForSuccesDialogAndReturnToEditing",
-				"Wait For Succes dialog and click on 'return to editing'",
-				true, driver);
-
-	}
+//	/**
+//	 * Click 'Add a video'
+//	 * 
+//	 * @author Michal Nowierski
+//	 * */
+//	public void clickAddAvideo() {
+//		//TODO: delete this method when VET components are introduced
+//		waitForElementByElement(videoAddVideoButton);
+//		// waitForElementClickableByElement(videoAddVideoButton);
+//		jQueryClick(videoAddVideoButtonSelector);
+//		// clickAndWait(videoAddVideoButton);
+//		PageObjectLogging.log("ClickAddAvideo", "Click 'Add a video'", true,
+//				driver);
+//
+//	}
+//	
+//	/**
+//	 * Wait For Succes dialog and click on 'return to editing'
+//	 * 
+//	 * @author Michal Nowierski
+//	 * */
+//	public void waitForSuccesDialogAndReturnToEditing() {
+//		waitForElementByElement(videoReturnToEditing);
+//		waitForElementClickableByElement(videoReturnToEditing);
+//		jQueryClick(videoReturnToEditingSelector);
+//		// clickAndWait(videoReturnToEditing);
+//		waitForElementNotVisibleByCss(videoReturnToEditingSelector);
+//		PageObjectLogging.log("WaitForSuccesDialogAndReturnToEditing",
+//				"Wait For Succes dialog and click on 'return to editing'",
+//				true, driver);
+//
+//	}
 
 	
 

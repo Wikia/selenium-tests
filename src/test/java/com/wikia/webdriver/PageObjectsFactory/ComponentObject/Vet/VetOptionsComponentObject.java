@@ -34,7 +34,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
 		private WebElement videoName;
-		@FindBy(css="div.addVideoDetailsFormControls input")
+		@FindBy(css="div.VideoEmbedNoBorder input")
 		private WebElement addAvideo;
 		@FindBy(css="#VideoEmbedCloseButton")
 		private WebElement returnToEditing;
@@ -67,6 +67,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 	
 	public void setCaption(String caption){
 		waitForElementByElement(captionField);
+		captionField.clear();
 		captionField.sendKeys(caption);
 		PageObjectLogging.log("setCaption", "caption was set to: "+caption, true);
 	}
@@ -110,6 +111,10 @@ public class VetOptionsComponentObject extends BasePageObject{
 	public void submit(){
 		clickAddaVideo();
 		clickRetunToEditing();
+	}
+	
+	public void update(){
+		clickAddaVideo();
 	}
 	
 	/**

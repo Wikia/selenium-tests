@@ -89,7 +89,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Video");
+		edit.clickVideoButton();
 		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}	
