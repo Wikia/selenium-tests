@@ -159,8 +159,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
-		blogEdit.clickOnAddObjectButton("Video");
-		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
+		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
@@ -177,8 +176,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
-		blogEdit.clickOnAddObjectButton("Video");
-		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
+		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();

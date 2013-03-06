@@ -416,13 +416,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new PhotoOptionsComponentObject(driver);
 	}
 	
-	public void clickModifyButtonGallery()
+	public GalleryBuilderComponentObject clickModifyButtonGallery()
 	{
 		waitForElementByElement(iFrame);
 		mouseOverInArticleIframe(galleryArticleIFrame);
 		waitForElementByElement(modifyButton);
 		jQueryClick(editButtonArticleItem);
 		PageObjectLogging.log("clickModifyButtonGallery", "Click on 'modify button' on gallery", true, driver);
+		return new GalleryBuilderComponentObject(driver);
 	}
 	
 	public void clickModifyButtonSlideshow() 
@@ -1304,130 +1305,130 @@ public void verifyRightAlignmentIsSelected() {
 //				"Left Click on add 'Photo' button.", true, driver);
 //	}
 //	
-	/**
-	 * Wait for Object and click on 'add this photo' under the first seen
-	 * 
-	 * @author Michal Nowierski
-	 * @param Object
-	 *            Object = {Gallery, GallerySlideshow, GallerySlider}
-	 * */
-	public void waitForObjectModalAndClickAddAphoto(String Object) {
-		waitForElementClickableByBy(By.cssSelector("button[id='WikiaPhoto"
-				+ Object + "AddImage']"));
-		clickAndWait(driver.findElement(By.cssSelector("button[id='WikiaPhoto"
-				+ Object + "AddImage']")));
-		PageObjectLogging.log("WaitForObjectModalAndClickAddAphoto",
-				"Wait for " + Object + " modal and click on 'add a photo'",
-				true, driver);
-		waitForElementByElement(objectModal);
-	}
-	
-	public void searchImageInLightBox(String imageName) {
-		waitForElementByElement(searchFieldImageInLightBox);
-		searchFieldImageInLightBox.sendKeys(imageName);
-		clickAndWait(searchButtonImageInLightBox);
-		waitForElementByElement(searchButtonImageInLightBox);
-	}
-	
-	/**
-	 * Wait for Object and click on 'add this photo' under the first seen
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            n = parameter determining how many inputs the method should
-	 *            check
-	 * */
-	public void galleryCheckImageInputs(int n) {
-		driver.findElement(galleryDialogPhotosList);
-		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
-		for (int i = 0; i < n; i++) {
-			clickAndWait(List.get(i));
-		}
-		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + n
-				+ " image inputs", true, driver);
-	}
-	
-
-	/**
-	 * Gallery dialog: Left click 'Select' button
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void galleryClickOnSelectButton() {
-		waitForElementByElement(galleryDialogSelectButton);
-		waitForElementClickableByElement(galleryDialogSelectButton);
-		clickAndWait(galleryDialogSelectButton);
-		PageObjectLogging.log("GalleryClickOnSelectButton",
-				"Gallery dialog: Left click 'Select' button", true, driver);
-
-	}
-
-
-	/**
-	 * Set Object position to the wanted one
-	 * 
-	 * @author Michal Nowierski
-	 * @param Object
-	 *            {Gallery, Slideshow}
-	 * @param WantedPosition
-	 *            = {Left, Center, Right} !CASE SENSITIVITY! *
-	 */
-	public void gallerySetPositionGallery(String WantedPosition) {
-
-		Select select = new Select(
-				driver.findElement(By
-						.cssSelector("select[id='WikiaPhotoGalleryEditorGalleryPosition']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-
-		}
-		PageObjectLogging.log("GallerySetPosition", "Set gallery position to "
-				+ WantedPosition, true, driver);
-	}
-	
-	/**
-	 * Set photo orientation option number n
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            = {1,2,3,4}
-	 *            <p>
-	 *            1 - Original.
-	 *            <p>
-	 *            2 - Square.
-	 *            <p>
-	 *            3 - Landscape.
-	 *            <p>
-	 *            4 - Portrait
-	 * */
-	public void gallerySetPhotoOrientation(int n) {
-		List<WebElement> List = driver
-				.findElements(galleryDialogPhotoOrientationsList);
-		waitForElementByElement(List.get(n - 1));
-		clickAndWait(List.get(n - 1));
-		PageObjectLogging.log("GallerySetPhotoOrientation",
-				"Set photo orientation option number " + n, true, driver);
-
-	}
-	
-
-	/**
-	 * Gallery dialog: Left click 'Finish' button
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void galleryClickOnFinishButton() {
-		waitForElementByElement(galleryDialogFinishButton);
-		waitForElementClickableByElement(galleryDialogFinishButton);
-		clickAndWait(galleryDialogFinishButton);
-		PageObjectLogging.log("GalleryClickOnFinishButton",
-				"Gallery dialog: Left click 'Finish' button ", true, driver);
-
-	}
+//	/**
+//	 * Wait for Object and click on 'add this photo' under the first seen
+//	 * 
+//	 * @author Michal Nowierski
+//	 * @param Object
+//	 *            Object = {Gallery, GallerySlideshow, GallerySlider}
+//	 * */
+//	public void waitForObjectModalAndClickAddAphoto(String Object) {
+//		waitForElementClickableByBy(By.cssSelector("button[id='WikiaPhoto"
+//				+ Object + "AddImage']"));
+//		clickAndWait(driver.findElement(By.cssSelector("button[id='WikiaPhoto"
+//				+ Object + "AddImage']")));
+//		PageObjectLogging.log("WaitForObjectModalAndClickAddAphoto",
+//				"Wait for " + Object + " modal and click on 'add a photo'",
+//				true, driver);
+//		waitForElementByElement(objectModal);
+//	}
+//	
+//	public void searchImageInLightBox(String imageName) {
+//		waitForElementByElement(searchFieldImageInLightBox);
+//		searchFieldImageInLightBox.sendKeys(imageName);
+//		clickAndWait(searchButtonImageInLightBox);
+//		waitForElementByElement(searchButtonImageInLightBox);
+//	}
+//	
+//	/**
+//	 * Wait for Object and click on 'add this photo' under the first seen
+//	 * 
+//	 * @author Michal Nowierski
+//	 * @param n
+//	 *            n = parameter determining how many inputs the method should
+//	 *            check
+//	 * */
+//	public void galleryCheckImageInputs(int n) {
+//		driver.findElement(galleryDialogPhotosList);
+//		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
+//		for (int i = 0; i < n; i++) {
+//			clickAndWait(List.get(i));
+//		}
+//		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + n
+//				+ " image inputs", true, driver);
+//	}
+//	
+//
+//	/**
+//	 * Gallery dialog: Left click 'Select' button
+//	 * 
+//	 * @author Michal Nowierski
+//	 * */
+//	public void galleryClickOnSelectButton() {
+//		waitForElementByElement(galleryDialogSelectButton);
+//		waitForElementClickableByElement(galleryDialogSelectButton);
+//		clickAndWait(galleryDialogSelectButton);
+//		PageObjectLogging.log("GalleryClickOnSelectButton",
+//				"Gallery dialog: Left click 'Select' button", true, driver);
+//
+//	}
+//
+//
+//	/**
+//	 * Set Object position to the wanted one
+//	 * 
+//	 * @author Michal Nowierski
+//	 * @param Object
+//	 *            {Gallery, Slideshow}
+//	 * @param WantedPosition
+//	 *            = {Left, Center, Right} !CASE SENSITIVITY! *
+//	 */
+//	public void gallerySetPositionGallery(String WantedPosition) {
+//
+//		Select select = new Select(
+//				driver.findElement(By
+//						.cssSelector("select[id='WikiaPhotoGalleryEditorGalleryPosition']")));
+//		select.selectByVisibleText(WantedPosition);
+//		// below code will make sure that proper position is selected
+//		String category_name = select.getAllSelectedOptions().get(0).getText();
+//		while (!category_name.equalsIgnoreCase(WantedPosition)) {
+//			select.selectByVisibleText(WantedPosition);
+//			category_name = select.getAllSelectedOptions().get(0).getText();
+//
+//		}
+//		PageObjectLogging.log("GallerySetPosition", "Set gallery position to "
+//				+ WantedPosition, true, driver);
+//	}
+//	
+//	/**
+//	 * Set photo orientation option number n
+//	 * 
+//	 * @author Michal Nowierski
+//	 * @param n
+//	 *            = {1,2,3,4}
+//	 *            <p>
+//	 *            1 - Original.
+//	 *            <p>
+//	 *            2 - Square.
+//	 *            <p>
+//	 *            3 - Landscape.
+//	 *            <p>
+//	 *            4 - Portrait
+//	 * */
+//	public void gallerySetPhotoOrientation(int n) {
+//		List<WebElement> List = driver
+//				.findElements(galleryDialogPhotoOrientationsList);
+//		waitForElementByElement(List.get(n - 1));
+//		clickAndWait(List.get(n - 1));
+//		PageObjectLogging.log("GallerySetPhotoOrientation",
+//				"Set photo orientation option number " + n, true, driver);
+//
+//	}
+//	
+//
+//	/**
+//	 * Gallery dialog: Left click 'Finish' button
+//	 * 
+//	 * @author Michal Nowierski
+//	 * */
+//	public void galleryClickOnFinishButton() {
+//		waitForElementByElement(galleryDialogFinishButton);
+//		waitForElementClickableByElement(galleryDialogFinishButton);
+//		clickAndWait(galleryDialogFinishButton);
+//		PageObjectLogging.log("GalleryClickOnFinishButton",
+//				"Gallery dialog: Left click 'Finish' button ", true, driver);
+//
+//	}
 	
 
 	public void gallerySetPositionSlideshow(String WantedPosition) {

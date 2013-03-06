@@ -906,6 +906,16 @@ public class BasePageObject{
             CommonExpectedConditions.elementNotPresent(cssSelector)
         );
     }
+    
+    /**
+     * Wait for element to not be present in DOM
+     * @param selector
+     */
+    public void waitForElementNotPresent(final By selector) {
+    	wait.until(
+    			CommonExpectedConditions.elementNotPresent(selector)
+    			);
+    }
 
     /**
      * Wait for element to be in viewport

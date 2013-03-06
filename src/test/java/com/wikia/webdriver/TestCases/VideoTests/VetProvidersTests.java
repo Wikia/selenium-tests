@@ -57,7 +57,7 @@ public class VetProvidersTests extends TestTemplate{
 				WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 				edit.deleteArticleContent();
 				edit.clickOnVisualButton();
-				VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) edit.clickOnAddObjectButton("Video");
+				VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 				VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 				vetOptions.setCaption(PageContent.caption);
 				vetOptions.submit();

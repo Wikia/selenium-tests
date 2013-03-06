@@ -15,6 +15,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -211,24 +212,28 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 		PageObjectLogging.log("verifyComponentSelector", "component selector is visible", true, driver);
 	}
 	
-	public void addComponent(String componentName){
+	public Object addComponent(String componentName){
 		if (componentName.equals("slideshow")){
 			waitForElementByElement(createSlideshow);
 			createSlideshow.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+			return null; //TODO
 		}
 		else if (componentName.equals("gallery")){
 			waitForElementByElement(createGallery);
 			createGallery.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+			return new GalleryBuilderComponentObject(driver);
 		}
 		else if (componentName.equals("slider")){
 			waitForElementByElement(createSlider);
 			createSlider.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+			return null; //TODO
 		}
 		else{
 			PageObjectLogging.log("addComponent", "not supported component name: "+componentName, false);
+			return null; //TODO
 		}
 	}
 	

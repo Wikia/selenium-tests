@@ -8,6 +8,8 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryAddPhotoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -210,15 +212,17 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clearSource();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
-		source.addComponent("gallery");
-		source.waitForObjectModalAndClickAddAphoto("Gallery");
-		source.searchImageInLightBox("image");
-		source.galleryCheckImageInputs(4);
-		source.galleryClickOnSelectButton();
-		source.gallerySetPositionGallery("Center");
-		source.gallerySetPhotoOrientation(2);
-		source.galleryClickOnFinishButton();
-		source.checkSourceContent("<gallery position=\"center\" orientation=\"square\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		GalleryBuilderComponentObject galleryBuiler = (GalleryBuilderComponentObject) source.addComponent("gallery");
+		GalleryAddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
+		galleryAddPhoto.search("image");
+		galleryAddPhoto.choosePhotos(4);
+		galleryBuiler = galleryAddPhoto.clickSelect();
+		galleryBuiler.adjustPosition("Center");
+		galleryBuiler.adjustColumns("2");
+		galleryBuiler.adjustSpacing("Small");
+		galleryBuiler.adjustOrientation(3);
+		galleryBuiler.clickFinish();
+		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}
 	
