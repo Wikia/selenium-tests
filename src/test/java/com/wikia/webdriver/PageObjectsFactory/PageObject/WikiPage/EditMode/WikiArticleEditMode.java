@@ -23,8 +23,11 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -33,10 +36,17 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 
 public class WikiArticleEditMode extends WikiEditMode {
 
+	//right rail toolbox - will be moved to edit mode
 	@FindBy(css="a.RTEImageButton")
 	private WebElement photoButton;
 	@FindBy(css="a.RTEVideoButton")
 	private WebElement videoButton;
+	@FindBy(css="a.RTEGalleryButton")
+	private WebElement galleryButton;
+	@FindBy(css="a.RTESlideshowButton")
+	private WebElement slideshowButton;
+	@FindBy(css="a.RTESliderButton")
+	private WebElement sliderButton;
 	
 	@FindBy(css="div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
@@ -1232,6 +1242,25 @@ public void verifyRightAlignmentIsSelected() {
 		clickAndWait(videoButton);
 		PageObjectLogging.log("clickVideoButton", "video button clicked", true);
 		return new VetAddVideoComponentObject(driver);
+	}
+	
+	public SliderAddComponentObject clickSliderButton(){
+		waitForElementByElement(sliderButton);
+		clickAndWait(sliderButton);
+		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
+		return new SliderAddComponentObject(driver);
+	}
+	public SlideshowAddComponentObject clickSlideshowButton(){
+		waitForElementByElement(slideshowButton);
+		clickAndWait(slideshowButton);
+		PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
+		return new SlideshowAddComponentObject(driver);
+	}
+	public GalleryBuilderComponentObject clickGallery(){
+		waitForElementByElement(galleryButton);
+		clickAndWait(galleryButton);
+		PageObjectLogging.log("clickGallery", "gallery button clicked", true);
+		return new GalleryBuilderComponentObject(driver);
 	}
 //	/**
 //	 * Wait for modal and click on 'add this photo' under the first seen photo
