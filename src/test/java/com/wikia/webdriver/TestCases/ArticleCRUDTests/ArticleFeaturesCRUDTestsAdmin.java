@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryAddPhotoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -44,7 +45,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
-		galleryBuiler.adjustOrientation(3);
+		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		edit.verifyObjectInEditMode("gallery");
 		edit.clickOnPreviewButton();
@@ -72,7 +73,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
-		galleryBuiler.adjustOrientation(3);
+		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		edit.verifyObjectInEditMode("gallery");
 		edit.clickOnPreviewButton();
@@ -89,7 +90,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		galleryBuiler.adjustPosition("Right");
 		galleryBuiler.adjustColumns("3");
 		galleryBuiler.adjustSpacing("Medium");
-		galleryBuiler.adjustOrientation(3);
+		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		edit.verifyObjectInEditMode("gallery");
 		article = edit.clickOnPublishButton();
@@ -115,7 +116,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
-		galleryBuiler.adjustOrientation(3);
+		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		edit.verifyObjectInEditMode("gallery");
 		edit.clickOnPreviewButton();

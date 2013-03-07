@@ -10,6 +10,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryAddPhotoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -177,7 +178,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
 		photoOptions.setCaption(PageContent.caption);
 		photoOptions.clickAddPhoto();
-		source.checkSourceContent("[[File:Image009.jpg|thumb|"+PageContent.caption+"]]");
+		source.checkSourceContent(String.format(PageContent.wikiTextPhoto, PageContent.caption));
 		source.clickOnPublishButton();
 	}	
 	
@@ -220,7 +221,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
-		galleryBuiler.adjustOrientation(3);
+		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();

@@ -60,13 +60,16 @@ public class PageContent {
 	public static String forumMessage = "QAforumMessage";
 	public static String forumBoard = "QAboardForMoveThreadTest";
 
-        //Messages
-        public static String articleDeletedMessage = "This page has been deleted.";
-        public static String createNewBlogPostMessage = "Create a new blog post";
-        public static String loginRequired = "Login required";
-        public static String notLoggedInMessage = "Not logged in";
-        public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
+    //Messages
+	public static String articleDeletedMessage = "This page has been deleted.";
+	public static String createNewBlogPostMessage = "Create a new blog post";
+	public static String loginRequired = "Login required";
+	public static String notLoggedInMessage = "Not logged in";
+	public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
 
-        //Blocks for Phalanx
-        public static String titleFilterPlain = "BadTitle";
+	//Blocks for Phalanx
+	public static String titleFilterPlain = "BadTitle";
+	
+	//wikiText
+	public static String wikiTextPhoto = "[[File:Image009.jpg|thumb|%s]]";
 }

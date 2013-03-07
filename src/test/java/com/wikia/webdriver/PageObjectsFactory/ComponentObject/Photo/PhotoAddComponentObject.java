@@ -47,6 +47,13 @@ public class PhotoAddComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 	}
 	
+	
+	/**
+	 * Adding photo with given @photoName and @photoNumber
+	 * @param photoName
+	 * @param photoNumber
+	 * @return
+	 */
 	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName, int photoNumber){
 		typeSearchQuery(photoName);
 		clickAddPhoto(photoNumber);

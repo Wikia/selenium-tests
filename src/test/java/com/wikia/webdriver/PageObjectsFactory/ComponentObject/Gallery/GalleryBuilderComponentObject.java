@@ -34,6 +34,11 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	@FindBy(css="ul#WikiaPhotoGalleryOrientation")
 	private WebElement orientation;
 	
+	private By orintationNone = By.cssSelector("[id*='none']");
+	private By orintationSquare = By.cssSelector("[id*='square']");
+	private By orintationLandscape = By.cssSelector("[id*='landscape']");
+	private By orintationPortrait = By.cssSelector("[id*='portrait']");
+
 	
 	public GalleryBuilderComponentObject(WebDriver driver) {
 		super(driver);
@@ -84,6 +89,9 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 		spacingDropdown.selectByVisibleText(spacingNo);
 	}
 	
+	public enum Orientation{
+		none, square, landscape, portrait
+	}
 	
 	/**
 	 * 0 - none
@@ -92,20 +100,20 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	 * 3 - portrait
 	 * @param orientationNo
 	 */
-	public void adjustOrientation(int orientationNo){
+	public void adjustOrientation(Orientation orient){
 		waitForElementByElement(orientation);
-		switch(orientationNo){
-		case 0: 
-			orientation.findElement(By.cssSelector("[id*='none']"));
+		switch(orient){
+		case none: 
+			orientation.findElement(orintationNone);
 			break;
-		case 1:
-			orientation.findElement(By.cssSelector("[id*='square']"));
+		case square:
+			orientation.findElement(orintationSquare);
 			break;
-		case 2:
-			orientation.findElement(By.cssSelector("[id*='landscape']"));
+		case landscape:
+			orientation.findElement(orintationLandscape);
 			break;
-		case 3:
-			orientation.findElement(By.cssSelector("[id*='portrait']"));
+		case portrait:
+			orientation.findElement(orintationPortrait);
 			break;
 		}
 		PageObjectLogging.log("adjustOrientation", "dropdown selected", true);
