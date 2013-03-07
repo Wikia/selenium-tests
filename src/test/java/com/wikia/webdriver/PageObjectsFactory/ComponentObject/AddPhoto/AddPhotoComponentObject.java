@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery;
+package com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto;
 
 import java.util.List;
 
@@ -9,13 +9,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 /**
- * 
+ * class for adding photo to gallery, slider and slideshow
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class GalleryAddPhotoComponentObject extends BasePageObject{
+public class AddPhotoComponentObject extends BasePageObject{
 
 	@FindBy(css=".WikiaSearch input[name='search']")
 	private WebElement searchField; 
@@ -29,7 +31,7 @@ public class GalleryAddPhotoComponentObject extends BasePageObject{
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	
-	public GalleryAddPhotoComponentObject(WebDriver driver) {
+	public AddPhotoComponentObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
@@ -62,10 +64,22 @@ public class GalleryAddPhotoComponentObject extends BasePageObject{
 				+ " image inputs", true, driver);
 	}
 	
-	public GalleryBuilderComponentObject clickSelect(){
+	public enum Components {
+		Gallery, Slideshow, Slider}
+	
+	public Object clickSelect(Components comp){
 		waitForElementByElement(selectButton);
 		selectButton.click();
 		PageObjectLogging.log("clickSelect", "select button clicked", true);
-		return new GalleryBuilderComponentObject(driver);
+		switch(comp){
+		case Gallery: 
+			return new GalleryBuilderComponentObject(driver);
+		case Slideshow:
+			return new SlideshowBuilderComponentObject(driver);
+		case Slider:
+			return new SliderAddComponentObject(driver);
+		default:
+			return null;
+		}
 	}
 }

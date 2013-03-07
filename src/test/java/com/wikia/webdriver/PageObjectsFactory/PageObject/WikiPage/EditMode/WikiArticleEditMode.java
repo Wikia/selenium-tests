@@ -27,7 +27,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBui
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderAddComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -426,13 +426,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new GalleryBuilderComponentObject(driver);
 	}
 	
-	public void clickModifyButtonSlideshow() 
+	public SlideshowBuilderComponentObject clickModifyButtonSlideshow() 
 	{
 		waitForElementByElement(iFrame);
 		mouseOverInArticleIframe(slideShowArticleIFrame);
 		waitForElementByElement(modifyButton);
 		jQueryClick(editButtonArticleItem);
 		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on slideshow", true, driver);
+		return new SlideshowBuilderComponentObject(driver);
 	}
 
 	public void clickModifyButtonSlider() 
@@ -1251,13 +1252,13 @@ public void verifyRightAlignmentIsSelected() {
 		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
 		return new SliderAddComponentObject(driver);
 	}
-	public SlideshowAddComponentObject clickSlideshowButton(){
+	public SlideshowBuilderComponentObject clickSlideshowButton(){
 		waitForElementByElement(slideshowButton);
 		clickAndWait(slideshowButton);
 		PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
-		return new SlideshowAddComponentObject(driver);
+		return new SlideshowBuilderComponentObject(driver);
 	}
-	public GalleryBuilderComponentObject clickGallery(){
+	public GalleryBuilderComponentObject clickGalleryButton(){
 		waitForElementByElement(galleryButton);
 		clickAndWait(galleryButton);
 		PageObjectLogging.log("clickGallery", "gallery button clicked", true);
@@ -1430,22 +1431,22 @@ public void verifyRightAlignmentIsSelected() {
 //
 //	}
 	
-
-	public void gallerySetPositionSlideshow(String WantedPosition) {
-
-		Select select = new Select(
-				driver.findElement(By
-						.cssSelector("select[id='WikiaPhotoGalleryEditorSlideshowAlign']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-		}
-		PageObjectLogging.log("GallerySetPosition",
-				"Set slideshow position to " + WantedPosition, true, driver);
-	}
+//
+//	public void gallerySetPositionSlideshow(String WantedPosition) {
+//
+//		Select select = new Select(
+//				driver.findElement(By
+//						.cssSelector("select[id='WikiaPhotoGalleryEditorSlideshowAlign']")));
+//		select.selectByVisibleText(WantedPosition);
+//		// below code will make sure that proper position is selected
+//		String category_name = select.getAllSelectedOptions().get(0).getText();
+//		while (!category_name.equalsIgnoreCase(WantedPosition)) {
+//			select.selectByVisibleText(WantedPosition);
+//			category_name = select.getAllSelectedOptions().get(0).getText();
+//		}
+//		PageObjectLogging.log("GallerySetPosition",
+//				"Set slideshow position to " + WantedPosition, true, driver);
+//	}
 	
 	/**
 	 * Set photo orientation option number n

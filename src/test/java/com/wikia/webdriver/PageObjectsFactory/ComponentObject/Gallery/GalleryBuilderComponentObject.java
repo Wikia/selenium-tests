@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
@@ -120,11 +121,11 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 		
 	}
 	
-	public GalleryAddPhotoComponentObject clickAddPhoto(){
+	public AddPhotoComponentObject clickAddPhoto(){
 		waitForElementByElement(addPhotoButton);
 		clickAndWait(addPhotoButton);
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
-		return new GalleryAddPhotoComponentObject(driver);
+		return new AddPhotoComponentObject(driver);
 	}
 	
 	public void verifyPhotosVisible(int photos){

@@ -17,6 +17,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -217,7 +218,7 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 			waitForElementByElement(createSlideshow);
 			createSlideshow.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
-			return null; //TODO
+			return new SlideshowBuilderComponentObject(driver);
 		}
 		else if (componentName.equals("gallery")){
 			waitForElementByElement(createGallery);
