@@ -239,7 +239,7 @@ public class SignUpTests_account_creation extends TestTemplate
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.openSpecialUserLogin();
 		login.forgotPassword(userName);
-		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
+		MailFunctions.deleteAllMails(userNameEmail, passwordEmail);
 		tempPassword = MailFunctions.getPasswordFromMailContent((MailFunctions.getFirstMailContent(userNameEmail, passwordEmail)));
 		login.login(userName, tempPassword);
 		password = Properties.password+timeStamp;
