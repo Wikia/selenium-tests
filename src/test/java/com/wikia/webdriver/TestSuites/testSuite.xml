@@ -43,7 +43,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.PhalanxTests.BlockPageTitleTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsTests"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsTestingTest"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>  
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>

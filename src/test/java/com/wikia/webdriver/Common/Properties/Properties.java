@@ -62,14 +62,12 @@ public class Properties {
 	public static String emailQaart4;
 	public static String emailPasswordQaart4;
 
-	
-	
 	public static String userNameStaff;
 	public static String passwordStaff;
 
 	public static String userNameFB;
 	public static String passwordFB;
-    public static String emailFB;
+        public static String emailFB;
 
 	public static String userNameBlocked;
 	public static String passwordBlocked;
@@ -77,7 +75,10 @@ public class Properties {
         public static String userNameForgottenPassword;
         public static String userNameForgottenPassword2;
 
-	private static void setVariables()
+        public static String geoEdgeUserName;
+        public static String geoEdgeUserPass;
+
+        private static void setVariables()
 	{
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
@@ -117,29 +118,27 @@ public class Properties {
 		emailPasswordQaart3 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia3.password");
 		emailQaart4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.username");
 		emailPasswordQaart4 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.password");
-		
+
 		userNameBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.username");
 		passwordBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
 
                 userNameForgottenPassword = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.forgottenPassword.username1");
                 userNameForgottenPassword2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.forgottenPassword.username2");
+
+                geoEdgeUserName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.userName");
+                geoEdgeUserPass = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.password");
 	}
 
-	public static void setProperties()
-	{
-		Global.RUN_BY_MAVEN = "true".equals(System.getProperty("run_mvn"));
-		if (Global.RUN_BY_MAVEN)
-		{	
-			getPropertiesFromPom();
-		}
-		else
-		{
-			setPropertiesManually();
-		}		
-//		getWikiVersion();
-		setVariables();
+        public static void setProperties() {
+            Global.RUN_BY_MAVEN = "true".equals(System.getProperty("run_mvn"));
+            if (Global.RUN_BY_MAVEN) {
+                getPropertiesFromPom();
+            } else {
+                setPropertiesManually();
+            }
+            setVariables();
 	}
-	
+
 	private static void getPropertiesFromPom()
 	{
 		Global.BROWSER = System.getProperty("browser");
@@ -157,7 +156,7 @@ public class Properties {
 		}
 		Global.LOG_ENABLED = true; 
 	}
-	
+
 	private static void getWikiVersion()
 	{
 		WebDriver versionDriver = new HtmlUnitDriver(true);
