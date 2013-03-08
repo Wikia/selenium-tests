@@ -73,11 +73,8 @@ public class Properties {
 
 	public static String userNameBlocked;
 	public static String passwordBlocked;
-	
-	
-	
-	private static void setVariables()
-	{
+
+        private static void setVariables() {
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
 		
@@ -121,22 +118,17 @@ public class Properties {
 		passwordBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
 	
 	}
-	
-	public static void setProperties()
-	{
-		Global.RUN_BY_MAVEN = "true".equals(System.getProperty("run_mvn"));
-		if (Global.RUN_BY_MAVEN)
-		{	
-			getPropertiesFromPom();
-		}
-		else
-		{
-			setPropertiesManually();
-		}		
-//		getWikiVersion();
-		setVariables();
+
+        public static void setProperties() {
+            Global.RUN_BY_MAVEN = "true".equals(System.getProperty("run_mvn"));
+            if (Global.RUN_BY_MAVEN) {
+                getPropertiesFromPom();
+            } else {
+                setPropertiesManually();
+            }
+            setVariables();
 	}
-	
+
 	private static void getPropertiesFromPom()
 	{
 		Global.BROWSER = System.getProperty("browser");
@@ -154,7 +146,7 @@ public class Properties {
 		}
 		Global.LOG_ENABLED = true; 
 	}
-	
+
 	private static void getWikiVersion()
 	{
 		WebDriver versionDriver = new HtmlUnitDriver(true);
