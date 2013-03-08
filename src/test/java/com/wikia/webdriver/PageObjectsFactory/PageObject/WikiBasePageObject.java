@@ -30,9 +30,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPa
 
 public class WikiBasePageObject extends BasePageObject {
 
-	@FindBy(css = "span.drop")
-	private WebElement contributeButton;
-
 	@FindBy(css = "a.createpage")
 	private WebElement createArticleButton;
 
@@ -140,6 +137,15 @@ public class WikiBasePageObject extends BasePageObject {
 
         @FindBy(css = ".UserLoginModal input[type='submit']")
         protected WebElement modalLoginSubmit;
+
+        @FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
+        protected WebElement contributeButton;
+
+        @FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
+        protected WebElement contributeAddPage;
+
+        @FindBy(css = "#CreatePageDialog")
+        protected WebElement addPageModal;
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
@@ -706,9 +712,19 @@ public class WikiBasePageObject extends BasePageObject {
 		renameArticleField.clear();
 		renameArticleField.sendKeys(articleNewName);
 		clickAndWait(confirmRenamePageButton);
-		waitForElementByXPath("//b[contains(text(), '\"" + articleName
-				+ "\" has been renamed \"" + articleNewName + "\"')]");
 	}
+
+        public void renameArticleAndVerify(String articleName, String articleNewName) {
+            renameArticle(articleName, articleNewName);
+            verifyArticleRenamed(articleName, articleNewName);
+        }
+
+        public void verifyArticleRenamed(String articleName, String articleNewName) {
+            waitForElementByXPath(
+                "//b[contains(text(), '\"" + articleName
+                + "\" has been renamed \"" + articleNewName + "\"')]"
+            );
+        }
 
 	private void clickUndeleteArticle() {
 		waitForElementByElement(undeleteButton);
@@ -912,5 +928,11 @@ public class WikiBasePageObject extends BasePageObject {
                 true, driver
             );
             clickAndWait(modalLoginSubmit);
+        }
+
+        public void clickContributeNewPage() {
+            clickContributeButton();
+            waitForElementVisibleByElement(contributeAddPage);
+            clickAndWait(contributeAddPage);
         }
 }

@@ -1,12 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -14,7 +14,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
@@ -89,7 +88,8 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	private WebElement addVideoButton;
 	@FindBy(css="input[value='Return to editing']")
 	private WebElement returnToEditingButton;
-	
+        @FindBy (css = "#wpSave")
+        private WebElement publishButton;
 	@FindBy(css="input[id='ImageUploadLayoutLeft']")
 	private WebElement imageLeftAlignmentOption;
 	@FindBy(css="input[id='ImageUploadLayoutRight']")
@@ -149,13 +149,10 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 	 */
 	public WikiArticleEditMode editArticleByName(String name)
 	{
-		getUrl(Global.DOMAIN + "wiki/"+name+"?action=edit");
+            String newUrl = URLsContent.addArticle.replace("%title%", name);
+            getUrl(Global.DOMAIN + newUrl);
 		return new WikiArticleEditMode(driver, Domain, name);
 	}
-	
-	
-
-
 
 	/**
 	 * Verify that the photo appears in the visual mode
@@ -254,9 +251,12 @@ public class WikiArticleEditMode extends WikiBasePageObject {
 		PageObjectLogging.log("ClickOnVisualButton", "Click on 'Visual' button", true, driver);
 		
 	}
-	
-	
-	
+
+        public void clickOnPublish() {
+            waitForElementClickableByElement(publishButton);
+            clickAndWait(publishButton);
+        }
+
 	/**
 	 * <p> Verify if js alert is or isn't there. You can expect alert with certain message, or not expect alert with certain message <br> 
 	 * 
