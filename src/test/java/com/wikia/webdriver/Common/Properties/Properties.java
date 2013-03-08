@@ -18,8 +18,8 @@ public class Properties {
 //		Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
 		Global.DOMAIN = "http://preview.mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
-		Global.CONFIG_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"config.xml");
-		Global.CAPTCHA_FILE = new File("c:"+File.separator+"wikia-qa"+File.separator+"captcha.txt");
+		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
+		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
 		if (Global.DOMAIN.contains("dev"))
 		{
@@ -53,6 +53,15 @@ public class Properties {
 	
 	public static String email;
 	public static String emailPassword;
+	public static String emailQaart1;
+	public static String emailPasswordQaart1;
+	public static String emailQaart2;
+	public static String emailPasswordQaart2;
+	public static String emailQaart3;
+	public static String emailPasswordQaart3;
+	public static String emailQaart4;
+	public static String emailPasswordQaart4;
+
 	
 	
 	public static String userNameStaff;
@@ -60,7 +69,7 @@ public class Properties {
 
 	public static String userNameFB;
 	public static String passwordFB;
-        public static String emailFB;
+    public static String emailFB;
 
 	public static String userNameBlocked;
 	public static String passwordBlocked;
@@ -99,6 +108,15 @@ public class Properties {
 		email = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.username");
 		emailPassword = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.password");
 
+		emailQaart1 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia1.username");
+		emailPasswordQaart1 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia1.password");
+		emailQaart2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia2.username");
+		emailPasswordQaart2 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia2.password");
+		emailQaart3 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia3.username");
+		emailPasswordQaart3 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia3.password");
+		emailQaart4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.username");
+		emailPasswordQaart4 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.password");
+		
 		userNameBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.username");
 		passwordBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
 	

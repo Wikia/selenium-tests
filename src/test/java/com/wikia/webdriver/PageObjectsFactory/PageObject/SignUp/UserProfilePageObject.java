@@ -67,10 +67,10 @@ public class UserProfilePageObject extends BasePageObject{
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public void verifyWelcomeEmail(String userName)
+	public void verifyWelcomeEmail(String userName, String mailUserName, String mailPassword)
 	{
 		PageObjectLogging.log("verifyWelcomeEmail ", "start of email verification", true);
-		String[] mailContent = MailFunctions.getWelcomeMailContent(MailFunctions.getFirstMailContent(Properties.email, Properties.emailPassword));
+		String[] mailContent = MailFunctions.getWelcomeMailContent(MailFunctions.getFirstMailContent(mailUserName, mailPassword));
 		System.out.println("*****************************************************************************");
 		System.out.println("*****************************************************************************");
 		System.out.println("*****************************************************************************");

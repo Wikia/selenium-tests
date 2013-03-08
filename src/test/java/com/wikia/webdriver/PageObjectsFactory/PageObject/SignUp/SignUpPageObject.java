@@ -94,9 +94,9 @@ public class SignUpPageObject extends BasePageObject {
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public void typeInEmail()
+	public void typeInEmail(String email)
 	{
-		emailField.sendKeys(Properties.email);
+		emailField.sendKeys(email);
 		PageObjectLogging.log("typeInEmail ", "Email field populated", true, driver);
 	}
 	
@@ -159,9 +159,9 @@ public class SignUpPageObject extends BasePageObject {
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public AlmostTherePageObject submit()
+	public AlmostTherePageObject submit(String email, String password)
 	{
-		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
+		MailFunctions.deleteAllMails(email, password);
 		clickAndWait(createAccountButton);
 		PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
 		return new AlmostTherePageObject(driver);

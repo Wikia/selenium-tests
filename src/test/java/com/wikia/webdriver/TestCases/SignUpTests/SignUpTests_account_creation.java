@@ -16,7 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 
 public class SignUpTests_account_creation extends TestTemplate
 {	
-	private String timeStamp, userName, userNameEnc, password, tempPassword;
+	private String timeStamp, userName, userNameEnc, password, tempPassword, userNameEmail, passwordEmail;
 	
 	/*
 	 * 3.30 Test Case 2.3.01 Sign up page: Account creation Non latin username
@@ -25,27 +25,29 @@ public class SignUpTests_account_creation extends TestTemplate
 	@Test(groups = {"SignUp_account_creation_TC_001", "SignUp", "Smoke"})
 	public void SignUp_account_creation_TC_001_non_latin_user_name()
 	{
+		userNameEmail = Properties.emailQaart1;
+		passwordEmail = Properties.emailPasswordQaart1;
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
 		userName = Properties.userNameNonLatin+timeStamp;
 		userNameEnc = Properties.userNameNonLatinEncoded+timeStamp;
 		password = "QAPassword"+timeStamp;
 		signUp.openSignUpPage();
-		signUp.typeInEmail();
+		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
 		signUp.enterBirthDate("11", "11", "1954");
 		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit();
+		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
 		userProfile.verifyUserLoggedIn(userNameEnc);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();	
-		userProfile.verifyWelcomeEmail(userNameEnc);
+		userProfile.verifyWelcomeEmail(userNameEnc, userNameEmail, passwordEmail);
 	}
 	
 
@@ -56,26 +58,28 @@ public class SignUpTests_account_creation extends TestTemplate
 	@Test(groups = {"SignUp_account_creation_TC_002", "SignUp"})
 	public void SignUp_account_creation_TC_002_fifty_character_user_name()
 	{
+		userNameEmail = Properties.emailQaart2;
+		passwordEmail = Properties.emailPasswordQaart2;
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
 		userName = "Qweasdzxcvqweasdzxcvqweasdzxcvqweasdz"+timeStamp;
 		password = "QAPassword"+timeStamp;
 		signUp.openSignUpPage();
-		signUp.typeInEmail();
+		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
 		signUp.enterBirthDate("11", "11", "1954");
 		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit();
+		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
 		userProfile.verifyUserLoggedIn(userName);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		userProfile.verifyWelcomeEmail(userName);
+		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
 	}
 	
 
@@ -86,27 +90,29 @@ public class SignUpTests_account_creation extends TestTemplate
 	@Test(groups = {"SignUp_account_creation_TC_003", "SignUp"})
 	public void SignUp_account_creation_TC_003_backward_slash_user_name()
 	{
+		userNameEmail = Properties.emailQaart3;
+		passwordEmail = Properties.emailPasswordQaart3;
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
 		userName = Properties.userNameWithBackwardSlash+timeStamp;
 		userNameEnc = Properties.userNameWithBackwardSlashEncoded+timeStamp;
 		password = "QAPassword"+timeStamp;
 		signUp.openSignUpPage();
-		signUp.typeInEmail();
+		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
 		signUp.enterBirthDate("11", "11", "1954");
 		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit();
+		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
 		userProfile.verifyUserLoggedIn(userNameEnc);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		userProfile.verifyWelcomeEmail(userNameEnc);
+		userProfile.verifyWelcomeEmail(userNameEnc, userNameEmail, passwordEmail);
 	}
 	
 	/*
@@ -117,26 +123,28 @@ public class SignUpTests_account_creation extends TestTemplate
 	@Test(groups = {"SignUp_account_creation_TC_004", "SignUp"})
 	public void SignUp_account_creation_TC_004_one_char_password()
 	{
+		userNameEmail = Properties.emailQaart4;
+		passwordEmail = Properties.emailPasswordQaart4;
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
 		userName = Properties.userNameWithUnderScore+timeStamp;
 		password = RandomStringUtils.randomAscii(1);
 		signUp.openSignUpPage();
-		signUp.typeInEmail();
+		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
 		signUp.enterBirthDate("11", "11", "1954");
 		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit();
+		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
 		userProfile.verifyUserLoggedIn(userName);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		userProfile.verifyWelcomeEmail(userName);
+		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
 	}
 	
 
@@ -147,26 +155,28 @@ public class SignUpTests_account_creation extends TestTemplate
 	@Test(groups = {"SignUp_account_creation__005", "SignUp", "Smoke"})
 	public void SignUp_account_creation_TC_005_fifty_character_password()
 	{
+		userNameEmail = Properties.emailQaart1;
+		passwordEmail = Properties.emailPasswordQaart1;
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
 		userName = Properties.userName+timeStamp;
 		password = RandomStringUtils.randomAscii(50);
 		signUp.openSignUpPage();
-		signUp.typeInEmail();
+		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
 		signUp.enterBirthDate("11", "11", "1954");
 		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit();
+		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
 		userProfile.verifyUserLoggedIn(userName);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();	
-		userProfile.verifyWelcomeEmail(userName);
+		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
 	}
 	
 	/*
@@ -176,57 +186,61 @@ public class SignUpTests_account_creation extends TestTemplate
 	@Test(groups = {"SignUp_account_creation_TC_006", "SignUp"})
 	public void SignUp_account_creation_TC_006_lap_year()
 	{
+		userNameEmail = Properties.emailQaart2;
+		passwordEmail = Properties.emailPasswordQaart2;
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
 		userName = Properties.userName+timeStamp;
 		password = Properties.password+timeStamp;
 		signUp.openSignUpPage();
-		signUp.typeInEmail();
+		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
 		signUp.enterBirthDate("2", "29", "1988");
 		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit();
+		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
 		userProfile.verifyUserLoggedIn(userName);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		userProfile.verifyWelcomeEmail(userName);
+		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
 	}
 	
 	@Test(groups = {"SignUp_account_creation_TC_007", "SignUp"})
 	public void SignUp_account_creation_TC_007_forgotYourPassword()
 	{
+		userNameEmail = Properties.emailQaart3;
+		passwordEmail = Properties.emailPasswordQaart3;
 		SignUpPageObject signUp = new SignUpPageObject(driver);
 		timeStamp = signUp.getTimeStamp(); 
 		userName = Properties.userName+timeStamp;
 		password = Properties.password+timeStamp;
 		signUp.openSignUpPage();
-		signUp.typeInEmail();
+		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
 		signUp.enterBirthDate("2", "29", "1988");
 		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit();
+		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton();
+		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
 		userProfile.verifyUserLoggedIn(userName);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();	
-		userProfile.verifyWelcomeEmail(userName);
+		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.openSpecialUserLogin();
 		login.forgotPassword(userName);
 		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
-		tempPassword = MailFunctions.getPasswordFromMailContent((MailFunctions.getFirstMailContent(Properties.email, Properties.emailPassword)));
+		tempPassword = MailFunctions.getPasswordFromMailContent((MailFunctions.getFirstMailContent(userNameEmail, passwordEmail)));
 		login.login(userName, tempPassword);
 		password = Properties.password+timeStamp;
 		login.resetPassword(password);
