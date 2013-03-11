@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 /**
@@ -77,7 +77,7 @@ public class AddPhotoComponentObject extends BasePageObject{
 		case Slideshow:
 			return new SlideshowBuilderComponentObject(driver);
 		case Slider:
-			return new SliderAddComponentObject(driver);
+			return new SliderBuilderComponentObject(driver);
 		default:
 			return null;
 		}

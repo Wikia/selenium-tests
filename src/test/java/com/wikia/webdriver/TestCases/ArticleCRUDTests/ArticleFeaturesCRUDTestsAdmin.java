@@ -14,6 +14,8 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBui
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject.MenuPositions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -237,18 +239,19 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-		edit.clickOnAddObjectButton("Slider");
-		edit.waitForObjectModalAndClickAddAphoto("GallerySlider");
-		edit.searchImageInLightBox("image");
-		edit.galleryCheckImageInputs(4);
-		edit.galleryClickOnSelectButton();
-		edit.gallerySetSliderPosition(2);
-		edit.galleryClickOnFinishButton();
+		SliderBuilderComponentObject sliderBuilder = edit.clickSliderButton();
+		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
+		sliderAddPhoto.search("image");
+		sliderAddPhoto.choosePhotos(4);
+		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slider");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
-		article.verifyObjectOnThePage("slider");	
+		article.verifyObjectOnThePage("slider");
+		article.verifySliderThumbnailsPosition("vertical");
 	}
 	
 	
@@ -263,13 +266,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-		edit.clickOnAddObjectButton("Slider");
-		edit.waitForObjectModalAndClickAddAphoto("GallerySlider");
-		edit.searchImageInLightBox("image");
-		edit.galleryCheckImageInputs(4);
-		edit.galleryClickOnSelectButton();
-		edit.gallerySetSliderPosition(2);//Vertical
-		edit.galleryClickOnFinishButton();
+		SliderBuilderComponentObject sliderBuilder = edit.clickSliderButton();
+		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
+		sliderAddPhoto.search("image");
+		sliderAddPhoto.choosePhotos(4);
+		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slider");//publish 
@@ -277,13 +280,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article.verifyObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("vertical");
 		edit = article.edit();
-		edit.clickModifyButtonSlider();
-		edit.waitForObjectModalAndClickAddAphoto("GallerySlider");
-		edit.searchImageInLightBox("image");
-		edit.galleryCheckImageInputs(8);
-		edit.galleryClickOnSelectButton();
-		edit.gallerySetSliderPosition(1);//Horizontal
-		edit.galleryClickOnFinishButton();
+		sliderBuilder = edit.clickModifyButtonSlider();
+		sliderBuilder.selectMenuPosition(MenuPositions.Horizontal);
+		sliderAddPhoto = sliderBuilder.clickAddPhoto();
+		sliderAddPhoto.search("image");
+		sliderAddPhoto.choosePhotos(8);
+		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		article = edit.clickOnPublishButton();
 		article.verifyObjectOnThePage("slider");
@@ -299,13 +302,13 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-		edit.clickOnAddObjectButton("Slider");
-		edit.waitForObjectModalAndClickAddAphoto("GallerySlider");
-		edit.searchImageInLightBox("image");
-		edit.galleryCheckImageInputs(4);
-		edit.galleryClickOnSelectButton();
-		edit.gallerySetSliderPosition(2);//Vertical
-		edit.galleryClickOnFinishButton();
+		SliderBuilderComponentObject sliderBuilder = edit.clickSliderButton();
+		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
+		sliderAddPhoto.search("image");
+		sliderAddPhoto.choosePhotos(4);
+		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slider");//publish 

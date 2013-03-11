@@ -16,7 +16,6 @@ public class WikiEditMode extends BasePageObject{
 	public WikiEditMode(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		
 		}
 	
 	

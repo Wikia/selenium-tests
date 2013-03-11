@@ -26,7 +26,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
@@ -163,15 +163,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private By contextMenuOptionsList = By.cssSelector("span.cke_menuitem a");
 	private By categories_listOfCategoriyPrompts = By.cssSelector("li.ui-menu-item");
 	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
-	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
-	private By galleryDialogPhotosList = By
-			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
-	private By galleryDialogPhotoOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGalleryOrientation'] li");
-	private By galleryDialogSlideshowOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
-	private String videoAddVideoButtonSelector = "div.input-group.VideoEmbedNoBorder input";
-	private String videoReturnToEditingSelector = "input[value=\"Return to editing\"]";
 	
 	private String imageArticleIFrame = "img";
 	private String galleryArticleIFrame = "img.image-gallery";
@@ -206,10 +197,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new WikiArticleEditMode(driver, Domain, name);
 	}
 	
-	
-
-
-
 	/**
 	 * Verify that the photo appears in the visual mode
 	 *  
@@ -235,7 +222,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(previewButton);
 		waitForElementClickableByElement(previewButton);
 		jQueryClick(previewButtonSelector);
-//		clickAndWait(previewButton);
 		PageObjectLogging.log("LeftClickOnPreviewButton", "Left Click on 'Preview' Button", true, driver);
 		
 		
@@ -272,10 +258,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
 		waitForElementByElement(publishButtonPreview);
 		waitForElementClickableByElement(publishButtonPreview);
-//		clickAndWait(publishButtonPreview);
 		jQueryClick(publishButtonSelector);
 		PageObjectLogging.log("LeftClickOnPublishButtonInPreviewMode", "Click on 'Publish' button in preview mode", true, driver);
-	
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 
@@ -288,7 +272,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(sourceModeButton);
 		waitForElementClickableByElement(sourceModeButton);
 		clickAndWait(sourceModeButton);
-//		jQueryClick("span.cke_button_ModeSource a");
 		waitForElementByElement(sourceModeTextArea);
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
 		return new WikiArticleSourceEditMode(driver, this.Domain);
@@ -337,9 +320,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().frame(iFrame);
 		bodyContent.clear();
 		driver.switchTo().defaultContent();
-//		clickOnSourceButton();
-//		waitForElementByElement(sourceModeTextArea);
-//		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true, driver);
 		
 	}
@@ -436,13 +416,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new SlideshowBuilderComponentObject(driver);
 	}
 
-	public void clickModifyButtonSlider() 
+	public SliderBuilderComponentObject clickModifyButtonSlider() 
 	{
 		waitForElementByElement(iFrame);
 		mouseOverInArticleIframe(sliderArticleIFrame);
 		waitForElementByElement(modifyButton);
 		jQueryClick(editButtonArticleItem);
-		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on slideshow", true, driver);		
+		PageObjectLogging.log("clickModifyButtonSlideshow", "Click on 'modify button' on slideshow", true, driver);
+		return new SliderBuilderComponentObject(driver);
 	}
 	
 	public VetOptionsComponentObject clickModifyButtonVideo() {
@@ -585,8 +566,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		
 	}
 
-	
-
 	/**
 	 * Verify Gallery object appears in edit mode
 	 *  
@@ -596,7 +575,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void verifyObjectInEditMode(String Object) {
 		//The Editor is iframe so we have to switch to the iframe in order to investigate its content
 		waitForElementByElement(iFrame);
-//		WebElement iFrame = driver.findElement(IframeVisualEditor);
 		driver.switchTo().frame(iFrame);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.media-placeholder.image-"+Object)));
 		// Now switch back to the normal DOM
@@ -616,10 +594,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("VerifyTheObjectOnThePreview", "Verify that the "+Object+" appears in the preview", true, driver);		
 	}
 
-	
-
-	
-
 	/**
 	 * Verify that video appears in edit mode
 	 *  
@@ -627,10 +601,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	 * 	 */
 	public void verifyVideoInEditMode(String caption) {
 		waitForElementByElement(iFrame);
-//		WebElement iFrame = driver.findElement(IframeVisualEditor);
 		driver.switchTo().frame(iFrame);
-		waitForElementByElement(videoInEditMode);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(VideoInEditMode));		
+		waitForElementByElement(videoInEditMode);		
 		driver.switchTo().defaultContent();
 		mouseOverInArticleIframe(videoArticleIFrame);
 		waitForElementByXPath("//div[@class='RTEMediaCaption' and contains(text(), '"+caption+"')]");
@@ -649,11 +621,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	PageObjectLogging.log("VerifyTheVideoOnThePreview", "Verify that the video appears in the preview", true, driver);
 			
 	}
-
-
-
-
-
 
 	/**
 	 * Get text of source mode text of message article page. Remmember that source mode must be turned on to invoke this method. Just invoke 'ClickOnSourceButton'
@@ -705,21 +672,12 @@ public class WikiArticleEditMode extends WikiEditMode {
 		CommonUtils.setClipboardContents(builder);
 		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		
-//		for (int i = 0; i < videos.size(); i++) {
-//			messageSourceModeTextArea.sendKeys(videos.get(i));
-//			messageSourceModeTextArea.sendKeys(Keys.ENTER);
-//		}
 		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
 	}
 
 	
 	/**
-	 * 
 	 * Left Click on add Table button.
-	 * 
-	 * 
-	 * 
-	 * 
 	 @author Michal Nowierski
 	 */
 
@@ -733,8 +691,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	/**
 	* wait for table modal
-	*
-	*
 	@author Michal Nowierski
 	*/
 	public void verifyTableModal() {
@@ -959,10 +915,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		}
 	}
 	
-	
-	
-	
-
 	public String categories_addSuggestedCategoryEditMode(String givenString) {
 		waitForElementByElement(categories_CategoryInputField);
 		waitForElementClickableByElement(categories_CategoryInputField);
@@ -988,12 +940,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void categories_verifyCategoryAddedEditMode(String categoryName) {
 		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories));
 		Boolean result = false;
-		By categoryItemBy = By.cssSelector("span");
 		// there might be more than one category on a random page. Thus - loop over all of them.
 		for (WebElement webElement : lista) {
 			waitForElementByElement(webElement);		
 			if (webElement.getText().equalsIgnoreCase(categoryName)) {
-//				if (webElement.findElement(categoryItemBy).getText().equalsIgnoreCase(categoryName)) {
 				result = true;
 			}
 		}
@@ -1005,7 +955,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		}
 		
 	}
-
 
 	public void categories_removeCategoryEditMode(String categoryName) {
 		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories));
@@ -1040,9 +989,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 				jQueryClick("li.category:nth-child("+counter+") .delete");
 			}
 		}
-//		clickAndWait(categoryItem);
-//		waitForElementByElement(categoryItemRemove);
-//		clickAndWait(categoryItemRemove);
 		if (isTheCategoryOnList) {
 			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+"  removed", true, driver);			
 			return;
@@ -1104,35 +1050,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickReturnToEditingButton", "Return to editing button is clicked", true, driver);
 		
 	}
-	
-//	public void clickImageLeftAlignment() {
-//		waitForElementByElement(imageLeftAlignmentOption);
-//		imageLeftAlignmentOption.click();
-//		PageObjectLogging.log("clickImageLeftAlignment", "Left allignment option is selected", true, driver);
-//	}
-//	
-//	public void clickImageRightAlignment() {
-//		waitForElementByElement(imageRightAlignmentOption);
-//		imageRightAlignmentOption.click();
-//		PageObjectLogging.log("clickImageRightAlignment", "Right allignment option is selected", true, driver);
-//	}
-	
-	
+
 	public void verifyWikiTextInSourceMode(String text) {
 		String wikiText = sourceModeTextArea.getAttribute("value");
-		Assertion.assertStringContains(wikiText, text);
-//		if (wikiText.contains(text))
-//		{
-//			PageObjectLogging.log("verifyWikiTextInSourceMode", "Correct wiki text is visible in source mode", true);
-//		}
-//		else
-//		{
-//			PageObjectLogging.log("verifyWikiTextInSourceMode", "Incorrect wiki text is visible in source mode", false);
-//		}
-		
-		
-//		waitForTextToBePresentInElementByElement(sourceModeText, text);
-		
+		Assertion.assertStringContains(wikiText, text);		
 	}
 	
 	public void clickOnModifyImageLink() {
@@ -1142,13 +1063,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 	
 	public void verifyLeftAlignmentIsSelected() {
-		
-//		waitForElementByElement(visualModeIFrame);
-//		driver.switchTo().frame(visualModeIFrame);
 		mouseOverInArticleIframe(imageArticleIFrame);
-//		waitForElementByElement(modifyButton);
 		clickOnModifyImageLink();
-//		waitForElementByElement(visualModeIFrame);
 		waitForElementByElement(imageLeftAlignmentOption);
 		
 		if (imageLeftAlignmentOption.isSelected())
@@ -1162,18 +1078,12 @@ public class WikiArticleEditMode extends WikiEditMode {
 		
 		waitForElementByElement(imageUploadCloseButton);
 		imageUploadCloseButton.click();
-//		driver.switchTo().defaultContent();
 		
 	}
 	
 public void verifyRightAlignmentIsSelected() {
-		
-//		waitForElementByElement(visualModeIFrame);
-//		driver.switchTo().frame(visualModeIFrame);
 		mouseOverInArticleIframe(imageArticleIFrame);
-//		waitForElementByElement(modifyButton);
 		clickOnModifyImageLink();
-//		waitForElementByElement(visualModeIFrame);
 		waitForElementByElement(imageRightAlignmentOption);
 		
 		if (imageRightAlignmentOption.isSelected())
@@ -1187,20 +1097,15 @@ public void verifyRightAlignmentIsSelected() {
 		
 		waitForElementByElement(imageUploadCloseButton);
 		imageUploadCloseButton.click();
-//		driver.switchTo().defaultContent();
-		
 	}
 	
 	public WikiArticlePageObject addImageForLightboxTesting () {
-//		clickOnAddObjectButton("Image");
 		waitForElementByElement(findInputField);
 		findInputField.sendKeys("aa");
 		waitForElementByElement(findButton);
 		findButton.click();		
-//		waitForElementByXPath("//div[@id='ImageUploadHeadline' and contains(text(), 'Photos on this wiki')]");
 		waitForElementByCss("#ImageUploadProgress2");
 		waitForElementByCss("img[src*='AmericaAfrica']");
-//		CommonFunctions.assertString("Photos on this wiki (1 results)", ImageUploadHeadline.getText());
 		waitForElementByElement(ImageUploadHeadline);
 		WebElement addThisPhoto = waitForElementByBy(addThisPhotoLink);
 		addThisPhoto.click();
@@ -1209,28 +1114,6 @@ public void verifyRightAlignmentIsSelected() {
 		clickOnPublishButton();
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
-	
-//	/**
-//	 * Left Click on add Object button.
-//	 *  
-//	 * @author Michal Nowierski
-//	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
-//	 */
-//	public Object clickOnAddObjectButton(String Object) {
-//		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
-//		WebElement ObjectButton;
-//		waitForElementByCss(ObjectCss);
-//		waitForElementClickableByCss(ObjectCss);
-//		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
-//		clickAndWait(ObjectButton);
-//		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
-//		if (Object.equals("Video")){
-//			return new VetAddVideoComponentObject(driver);
-//		}
-//		else{
-//			return null;
-//		}		
-//	}
 	
 	public PhotoAddComponentObject clickPhotoButton(){
 		waitForElementByElement(photoButton);
@@ -1246,11 +1129,11 @@ public void verifyRightAlignmentIsSelected() {
 		return new VetAddVideoComponentObject(driver);
 	}
 	
-	public SliderAddComponentObject clickSliderButton(){
+	public SliderBuilderComponentObject clickSliderButton(){
 		waitForElementByElement(sliderButton);
 		clickAndWait(sliderButton);
 		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
-		return new SliderAddComponentObject(driver);
+		return new SliderBuilderComponentObject(driver);
 	}
 	public SlideshowBuilderComponentObject clickSlideshowButton(){
 		waitForElementByElement(slideshowButton);
@@ -1264,298 +1147,4 @@ public void verifyRightAlignmentIsSelected() {
 		PageObjectLogging.log("clickGallery", "gallery button clicked", true);
 		return new GalleryBuilderComponentObject(driver);
 	}
-//	/**
-//	 * Wait for modal and click on 'add this photo' under the first seen photo
-//	 * 
-//	 * @author Michal Nowierski
-//	 */
-//	public void waitForModalAndClickAddThisPhoto() {
-//		waitForElementByElement(imageUploadModal);
-//		WebElement addPhoto = waitForElementByBy(addThisPhotoLink);
-//		waitForElementClickableByElement(addPhoto);
-//		clickAndWait(addPhoto);
-//		PageObjectLogging
-//				.log("WaitForModalAndClickAddThisPhoto",
-//						"Wait for modal and click on 'add this photo' under the first seen photo",
-//						true, driver);
-//	}
-//	
-//	/**
-//	 * Type given caption for the photo
-//	 * 
-//	 * @author Michal Nowierski
-//	 */
-//	public void typePhotoCaption(String caption) {
-//		WebElement captionText = waitForElementByBy(captionTextArea);
-//		captionText.clear();
-//		captionText.sendKeys(caption);
-//		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo",
-//				true, driver);
-//	}
-	
-//	/**
-//	 * Left Click on add 'Photo' button.
-//	 * 
-//	 * @author Michal Nowierski
-//	 */
-//	public void clickOnAddPhotoButton2() {
-//		waitForElementByElement(addPhotoButton);
-//		waitForElementClickableByElement(addPhotoButton);
-//		clickAndWait(addPhotoButton);
-//		PageObjectLogging.log("ClickOnAddPhotoButton2",
-//				"Left Click on add 'Photo' button.", true, driver);
-//	}
-//	
-//	/**
-//	 * Wait for Object and click on 'add this photo' under the first seen
-//	 * 
-//	 * @author Michal Nowierski
-//	 * @param Object
-//	 *            Object = {Gallery, GallerySlideshow, GallerySlider}
-//	 * */
-//	public void waitForObjectModalAndClickAddAphoto(String Object) {
-//		waitForElementClickableByBy(By.cssSelector("button[id='WikiaPhoto"
-//				+ Object + "AddImage']"));
-//		clickAndWait(driver.findElement(By.cssSelector("button[id='WikiaPhoto"
-//				+ Object + "AddImage']")));
-//		PageObjectLogging.log("WaitForObjectModalAndClickAddAphoto",
-//				"Wait for " + Object + " modal and click on 'add a photo'",
-//				true, driver);
-//		waitForElementByElement(objectModal);
-//	}
-//	
-//	public void searchImageInLightBox(String imageName) {
-//		waitForElementByElement(searchFieldImageInLightBox);
-//		searchFieldImageInLightBox.sendKeys(imageName);
-//		clickAndWait(searchButtonImageInLightBox);
-//		waitForElementByElement(searchButtonImageInLightBox);
-//	}
-//	
-//	/**
-//	 * Wait for Object and click on 'add this photo' under the first seen
-//	 * 
-//	 * @author Michal Nowierski
-//	 * @param n
-//	 *            n = parameter determining how many inputs the method should
-//	 *            check
-//	 * */
-//	public void galleryCheckImageInputs(int n) {
-//		driver.findElement(galleryDialogPhotosList);
-//		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
-//		for (int i = 0; i < n; i++) {
-//			clickAndWait(List.get(i));
-//		}
-//		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + n
-//				+ " image inputs", true, driver);
-//	}
-//	
-//
-//	/**
-//	 * Gallery dialog: Left click 'Select' button
-//	 * 
-//	 * @author Michal Nowierski
-//	 * */
-//	public void galleryClickOnSelectButton() {
-//		waitForElementByElement(galleryDialogSelectButton);
-//		waitForElementClickableByElement(galleryDialogSelectButton);
-//		clickAndWait(galleryDialogSelectButton);
-//		PageObjectLogging.log("GalleryClickOnSelectButton",
-//				"Gallery dialog: Left click 'Select' button", true, driver);
-//
-//	}
-//
-//
-//	/**
-//	 * Set Object position to the wanted one
-//	 * 
-//	 * @author Michal Nowierski
-//	 * @param Object
-//	 *            {Gallery, Slideshow}
-//	 * @param WantedPosition
-//	 *            = {Left, Center, Right} !CASE SENSITIVITY! *
-//	 */
-//	public void gallerySetPositionGallery(String WantedPosition) {
-//
-//		Select select = new Select(
-//				driver.findElement(By
-//						.cssSelector("select[id='WikiaPhotoGalleryEditorGalleryPosition']")));
-//		select.selectByVisibleText(WantedPosition);
-//		// below code will make sure that proper position is selected
-//		String category_name = select.getAllSelectedOptions().get(0).getText();
-//		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-//			select.selectByVisibleText(WantedPosition);
-//			category_name = select.getAllSelectedOptions().get(0).getText();
-//
-//		}
-//		PageObjectLogging.log("GallerySetPosition", "Set gallery position to "
-//				+ WantedPosition, true, driver);
-//	}
-//	
-//	/**
-//	 * Set photo orientation option number n
-//	 * 
-//	 * @author Michal Nowierski
-//	 * @param n
-//	 *            = {1,2,3,4}
-//	 *            <p>
-//	 *            1 - Original.
-//	 *            <p>
-//	 *            2 - Square.
-//	 *            <p>
-//	 *            3 - Landscape.
-//	 *            <p>
-//	 *            4 - Portrait
-//	 * */
-//	public void gallerySetPhotoOrientation(int n) {
-//		List<WebElement> List = driver
-//				.findElements(galleryDialogPhotoOrientationsList);
-//		waitForElementByElement(List.get(n - 1));
-//		clickAndWait(List.get(n - 1));
-//		PageObjectLogging.log("GallerySetPhotoOrientation",
-//				"Set photo orientation option number " + n, true, driver);
-//
-//	}
-//	
-//
-//	/**
-//	 * Gallery dialog: Left click 'Finish' button
-//	 * 
-//	 * @author Michal Nowierski
-//	 * */
-//	public void galleryClickOnFinishButton() {
-//		waitForElementByElement(galleryDialogFinishButton);
-//		waitForElementClickableByElement(galleryDialogFinishButton);
-//		clickAndWait(galleryDialogFinishButton);
-//		PageObjectLogging.log("GalleryClickOnFinishButton",
-//				"Gallery dialog: Left click 'Finish' button ", true, driver);
-//
-//	}
-	
-//
-//	public void gallerySetPositionSlideshow(String WantedPosition) {
-//
-//		Select select = new Select(
-//				driver.findElement(By
-//						.cssSelector("select[id='WikiaPhotoGalleryEditorSlideshowAlign']")));
-//		select.selectByVisibleText(WantedPosition);
-//		// below code will make sure that proper position is selected
-//		String category_name = select.getAllSelectedOptions().get(0).getText();
-//		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-//			select.selectByVisibleText(WantedPosition);
-//			category_name = select.getAllSelectedOptions().get(0).getText();
-//		}
-//		PageObjectLogging.log("GallerySetPosition",
-//				"Set slideshow position to " + WantedPosition, true, driver);
-//	}
-	
-	/**
-	 * Set photo orientation option number n
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            = {1, 2}
-	 *            <p>
-	 *            1 - Horizontaal.
-	 *            <p>
-	 *            2 - Vertical
-	 * */
-	public void gallerySetSliderPosition(int n) {
-		List<WebElement> List = driver
-				.findElements(galleryDialogSlideshowOrientationsList);
-		waitForElementByElement(List.get(n - 1));
-		clickAndWait(List.get(n - 1));
-		PageObjectLogging.log("GallerySetSliderPosition",
-				"Set photo orientation option number " + n, true, driver);
-
-	}
-	
-//	/**
-//	 * Wait for Video modal and type in the video URL
-//	 * 
-//	 * @author Michal Nowierski
-//	 * */
-//	public void waitForVideoModalAndTypeVideoURL(String videoURL) {
-//		waitForElementByElement(videoModalInput);
-//		waitForElementClickableByElement(videoModalInput);
-//		videoModalInput.clear();
-//		videoModalInput.sendKeys(videoURL);
-//		PageObjectLogging.log("WaitForVideoModalAndTypeVideoURL",
-//				"Wait for Video modal and type in the video URL: " + videoURL,
-//				true, driver);
-//	}
-	
-
-//	/**
-//	 * Video Click Next button
-//	 * 
-//	 * @author Michal Nowierski
-//	 * */
-//	public void clickVideoNextButton() {
-//		waitForElementByElement(videoNextButton);
-//		waitForElementClickableByElement(videoNextButton);
-//		clickAndWait(videoNextButton);
-//		PageObjectLogging.log("ClickVideoNextButton", "Left Click Next button",
-//				true, driver);
-//	}
-	
-//	/**
-//	 * Wait for video dialog
-//	 * 
-//	 * @author Michal Nowierski
-//	 * */
-//	public void waitForVideoDialog() {
-//		waitForElementByElement(videoDialog);
-//		PageObjectLogging.log("WaitForVideoDialog", "Wait for video dialog",
-//				true, driver);
-//
-//	}
-	
-//
-//	/**
-//	 * Type given caption for the video
-//	 *  
-//	 * @author Michal Nowierski
-//	 */
-//	public void typeVideoCaption(String caption) {
-//		waitForElementByElement(videoCaptionTextArea);
-//		videoCaptionTextArea.clear();
-//		videoCaptionTextArea.sendKeys(caption);
-//		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo", true, driver);
-//	}
-	
-//	/**
-//	 * Click 'Add a video'
-//	 * 
-//	 * @author Michal Nowierski
-//	 * */
-//	public void clickAddAvideo() {
-//		//TODO: delete this method when VET components are introduced
-//		waitForElementByElement(videoAddVideoButton);
-//		// waitForElementClickableByElement(videoAddVideoButton);
-//		jQueryClick(videoAddVideoButtonSelector);
-//		// clickAndWait(videoAddVideoButton);
-//		PageObjectLogging.log("ClickAddAvideo", "Click 'Add a video'", true,
-//				driver);
-//
-//	}
-//	
-//	/**
-//	 * Wait For Succes dialog and click on 'return to editing'
-//	 * 
-//	 * @author Michal Nowierski
-//	 * */
-//	public void waitForSuccesDialogAndReturnToEditing() {
-//		waitForElementByElement(videoReturnToEditing);
-//		waitForElementClickableByElement(videoReturnToEditing);
-//		jQueryClick(videoReturnToEditingSelector);
-//		// clickAndWait(videoReturnToEditing);
-//		waitForElementNotVisibleByCss(videoReturnToEditingSelector);
-//		PageObjectLogging.log("WaitForSuccesDialogAndReturnToEditing",
-//				"Wait For Succes dialog and click on 'return to editing'",
-//				true, driver);
-//
-//	}
-
-	
-
 }

@@ -2,6 +2,8 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.List;
 
+import mx4j.tools.config.DefaultConfigurationBuilder.New;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +19,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -64,12 +67,6 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	private WebElement createGallery;
 	@FindBy(css="a.wikia-button[type='3']")
 	private WebElement createSlider;
-//	@FindBys(@FindBy(css=".modalContent #edittools_main a"))
-//	private List<WebElement> editToolsMain;
-//	@FindBys(@FindBy(css=".modalContent #edittools_wikimarkup a"))
-//	private List<WebElement> editToolsWikiMarkup;
-//	@FindBys(@FindBy(css=".modalContent #edittools_symbols a"))
-//	private List<WebElement> editToolsSymbols;
 	
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
@@ -230,11 +227,11 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 			waitForElementByElement(createSlider);
 			createSlider.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
-			return null; //TODO
+			return new SliderBuilderComponentObject(driver);
 		}
 		else{
 			PageObjectLogging.log("addComponent", "not supported component name: "+componentName, false);
-			return null; //TODO
+			return null;
 		}
 	}
 	

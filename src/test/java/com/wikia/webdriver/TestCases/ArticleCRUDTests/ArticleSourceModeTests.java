@@ -14,6 +14,8 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBui
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject.MenuPositions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -247,13 +249,14 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clearSource();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
-		source.addComponent("slider");
-		source.waitForObjectModalAndClickAddAphoto("GallerySlider");
-		source.searchImageInLightBox("image");
-		source.galleryCheckImageInputs(4);
-		source.galleryClickOnSelectButton();
-		source.gallerySetSliderPosition(2);
-		source.galleryClickOnFinishButton();
+		
+		SliderBuilderComponentObject sliderBuilder = (SliderBuilderComponentObject)source.addComponent("slider");
+		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
+		sliderAddPhoto.search("image");
+		sliderAddPhoto.choosePhotos(4);
+		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderBuilder.clickFinish();
 		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}

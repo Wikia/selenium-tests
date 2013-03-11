@@ -10,13 +10,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
@@ -95,25 +93,24 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
 	private WebElement ad_Prefooter_left_boxad;
+	
+	@FindBy (css = "#WikiaPageHeader h1")
+	private WebElement wikiFirstHeader;
 
-        @FindBy (css = "#WikiaPageHeader h1")
-        private WebElement wikiFirstHeader;
+	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
+	private WebElement specialUserLoginLink;
 
-        @FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
-        private WebElement specialUserLoginLink;
+	@FindBy(css = ".UserLoginModal input[name='username']")
+	protected WebElement modalUserNameInput;
 
-        @FindBy(css = ".UserLoginModal input[name='username']")
-        protected WebElement modalUserNameInput;
+	@FindBy(css = ".UserLoginModal input[name='password']")
+	protected WebElement modalPasswordInput;
 
-        @FindBy(css = ".UserLoginModal input[name='password']")
-        protected WebElement modalPasswordInput;
-
-        @FindBy(css = ".UserLoginModal input[type='submit']")
-        protected WebElement modalLoginSubmit;
+	@FindBy(css = ".UserLoginModal input[type='submit']")
+	protected WebElement modalLoginSubmit;
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
-	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
 	
 	private String pageName;
 
@@ -126,15 +123,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public String getWikiName() {
 		return Domain;
 	}
-
-//	public void searchForImage(String name){
-////		waitForElementByElement(imageFindButton);
-//		imageQuery.sendKeys(name);
-////		waitForElementByElement(imageQuery);
-//		imageFindButton.click();
-//		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
-//	}
-	
 	
 	/**
 	 * @author Michal Nowierski
@@ -158,16 +146,6 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(Domain + "wiki/Special:MultipleUpload");
 		return new SpecialMultipleUploadPageObject(driver, Domain);
 	}
-
-//	public WikiArticlePageObject OpenArticle(String wikiArticle) {
-//		try {
-//			getUrl(Domain + "wiki/" + wikiArticle);
-//		} catch (TimeoutException e) {
-//			PageObjectLogging.log("OpenArticle",
-//					"page loads for more than 30 seconds", true);
-//		}
-//		return new WikiArticlePageObject(driver, Domain, wikiArticle);
-//	}
 
 	public void verifyEditDropDownAnonymous() {
 		List<WebElement> list = driver.findElements(By
@@ -216,48 +194,6 @@ public class WikiBasePageObject extends BasePageObject {
 				"delete",
 				list.get(3).findElement(By.cssSelector("a"))
 						.getAttribute("data-id"));
-	}
-
-	private void clickContributeButton() {
-		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
-		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
-		waitForElementByElement(createArticleButton);
-		PageObjectLogging.log("clickOnContributeButton",
-				"contribute button clicked", true);
-	}
-
-	private void clickCreateArticleButton() {
-		waitForElementByElement(createArticleButton);
-		waitForElementClickableByElement(createArticleButton);
-		// jQueryClick(".createpage");
-		executeScript("document.querySelectorAll('.createpage')[0].click()");
-		waitForElementByElement(driver.findElement(layoutList));
-		PageObjectLogging.log("clickCreateArticleButton",
-				"create article button clicked", true);
-	}
-
-	private void selectPageLayout(int number) {
-		List<WebElement> list = driver.findElements(layoutList);
-		clickAndWait(list.get(number));
-		PageObjectLogging.log("selectPageLayout", "wiki layout selected", true,
-				driver);
-	}
-
-	private void typeInArticleName(String name) {
-		waitForElementByElement(articleNameField);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
-		articleNameField.sendKeys(name);
-	}
-
-	private void clickAddPageButton() {
-		clickAndWait(addArticleButton);
-		PageObjectLogging.log("clickAddPageButton", "add button clicked", true,
-				driver);
 	}
 
 	public void verifyDeletedArticlePage(String pageName) {
@@ -387,11 +323,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public WikiArticleEditMode createNewArticle(String pageName,
 			int layoutNumber) {
-		// clickContributeButton();
-		// clickCreateArticleButton();
-		// selectPageLayout(layoutNumber);
-		// typeInArticleName(pageName);
-		// clickAddPageButton();
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
 				+ "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");

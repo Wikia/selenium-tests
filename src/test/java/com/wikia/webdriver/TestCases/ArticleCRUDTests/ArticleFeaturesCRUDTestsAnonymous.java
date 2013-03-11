@@ -72,8 +72,7 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Slider");
+		edit.clickSliderButton();
 		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);	
 	}
