@@ -364,7 +364,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 *            Object = {Gallery, GallerySlideshow, GallerySlider}
 	 * */
 	public void waitForObjectModalAndClickAddAphoto(String Object) {
-		waitForElementClickableByBy(By.cssSelector("button[id='WikiaPhoto"
+		waitForElementByBy(By.cssSelector("button[id='WikiaPhoto"
 				+ Object + "AddImage']"));
 		clickAndWait(driver.findElement(By.cssSelector("button[id='WikiaPhoto"
 				+ Object + "AddImage']")));
