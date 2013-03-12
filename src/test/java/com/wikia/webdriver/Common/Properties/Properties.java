@@ -73,9 +73,10 @@ public class Properties {
 
 	public static String userNameBlocked;
 	public static String passwordBlocked;
-	
-	
-	
+
+        public static String userNameForgottenPassword;
+        public static String userNameForgottenPassword2;
+
 	private static void setVariables()
 	{
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
@@ -119,9 +120,11 @@ public class Properties {
 		
 		userNameBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.username");
 		passwordBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
-	
+
+                userNameForgottenPassword = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.forgottenPassword.username1");
+                userNameForgottenPassword2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.forgottenPassword.username2");
 	}
-	
+
 	public static void setProperties()
 	{
 		Global.RUN_BY_MAVEN = "true".equals(System.getProperty("run_mvn"));
