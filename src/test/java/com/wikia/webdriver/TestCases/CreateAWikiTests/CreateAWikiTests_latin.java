@@ -231,7 +231,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 	}
 	
 	//https://wikia.fogbugz.com/default.asp?99340
-	@Test(groups = { "CreateNewWiki_latin_006", "CNW", "Smoke" })
+	@Test(groups = { "CreateNewWiki_latin_007", "CNW", "Smoke" })
 	public void CreateNewWiki_latin_TC007_deleteWiki(){
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
