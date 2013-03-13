@@ -72,12 +72,12 @@ public class BasePageObject{
 	private WebElement randomPageButton;
 	@FindBy(css = ".sprite.search")
 	private WebElement searchButton;
-	
+
 	@FindBy(css="form.WikiaSearch")
 	WebElement wikiaSearch_searchForm;
 	@FindBy(css="section.modalContent div.UserLoginModal form")
 	WebElement modalLoginForm;
-	
+
 	@FindBy(css="a[data-id='shareButton']")
 	WebElement shareButton;
 	@FindBy(css="iframe.twitter-share-button")
@@ -130,7 +130,7 @@ public class BasePageObject{
 	
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
-	
+
 
 	/**
 	 * Click  on Publish button

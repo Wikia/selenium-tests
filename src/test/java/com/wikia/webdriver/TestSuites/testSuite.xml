@@ -29,6 +29,7 @@
 			<class name="com.wikia.webdriver.TestCases.MessageWallTests.MessageWallTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForcedLoginTests"/>
+			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginMonoBookTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.ArticleCommentTests"/>
@@ -42,7 +43,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.PhalanxTests.BlockPageTitleTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsTests"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsTestingTest"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>  
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>

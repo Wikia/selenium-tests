@@ -4,7 +4,6 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,8 +21,6 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
     private WebElement submitTitleInput;
     @FindBy (css = "#bodyContent")
     private WebElement contentInput;
-    @FindBy (css = "#wpSave")
-    private WebElement submitInput;
 
     public SpecialCreatePagePageObject (WebDriver driver, String Domain) {
         super(driver);
@@ -37,12 +34,12 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
         clickAndWait(submitTitleInput);
     }
 
-    public void addDefaultContentWithTitle(String title) {
+    public void addPageWithGIvenTitleAndDefaultContent(String title) {
         fillTitle(title);
         WikiArticleEditMode article = new WikiArticleEditMode(
             driver, Global.DOMAIN, title
         );
         article.typeInContent(PageContent.articleText);
-        clickAndWait(submitInput);
+        article.clickOnPublish();
     }
 }

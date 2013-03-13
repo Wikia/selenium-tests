@@ -218,7 +218,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		WikiArticlePageObject article = edit.clickOnPublishButton();
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		article.renameArticle(article.getPageName(), article.getPageName()+"moved");
+		article.renameArticleAndVerify(article.getPageName(), article.getPageName()+"moved");
 		article.verifyPageTitle(article.getPageName()+"moved");
 		article.verifyArticleText(PageContent.articleText);
 	}

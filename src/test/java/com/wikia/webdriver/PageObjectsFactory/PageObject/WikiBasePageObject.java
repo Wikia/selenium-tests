@@ -14,7 +14,10 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
@@ -27,9 +30,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPa
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class WikiBasePageObject extends BasePageObject {
-
-	@FindBy(css = "span.drop")
-	private WebElement contributeButton;
 
 	@FindBy(css = "a.createpage")
 	private WebElement createArticleButton;
@@ -108,6 +108,15 @@ public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
+
+        @FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
+        protected WebElement contributeButton;
+
+        @FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
+        protected WebElement contributeAddPage;
+
+        @FindBy(css = "#CreatePageDialog")
+        protected WebElement addPageModal;
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
@@ -196,6 +205,13 @@ public class WikiBasePageObject extends BasePageObject {
 						.getAttribute("data-id"));
 	}
 
+	private void clickContributeButton() {
+		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
+		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
+		waitForElementByElement(createArticleButton);
+		PageObjectLogging.log("clickOnContributeButton",
+				"contribute button clicked", true);
+	}
 	public void verifyDeletedArticlePage(String pageName) {
 		pageName = pageName.replace("_", " ");
 		waitForElementByXPath("//h1[contains(text(), '" + pageName + "')]");
@@ -292,9 +308,19 @@ public class WikiBasePageObject extends BasePageObject {
 		renameArticleField.clear();
 		renameArticleField.sendKeys(articleNewName);
 		clickAndWait(confirmRenamePageButton);
-		waitForElementByXPath("//b[contains(text(), '\"" + articleName
-				+ "\" has been renamed \"" + articleNewName + "\"')]");
 	}
+
+        public void renameArticleAndVerify(String articleName, String articleNewName) {
+            renameArticle(articleName, articleNewName);
+            verifyArticleRenamed(articleName, articleNewName);
+        }
+
+        public void verifyArticleRenamed(String articleName, String articleNewName) {
+            waitForElementByXPath(
+                "//b[contains(text(), '\"" + articleName
+                + "\" has been renamed \"" + articleNewName + "\"')]"
+            );
+        }
 
 	private void clickUndeleteArticle() {
 		waitForElementByElement(undeleteButton);
@@ -482,6 +508,12 @@ public class WikiBasePageObject extends BasePageObject {
             );
         }
 
+        public void clickContributeNewPage() {
+            clickContributeButton();
+            waitForElementVisibleByElement(contributeAddPage);
+            clickAndWait(contributeAddPage);
+        }
+
         public void logInViaModal(String userName, String password) {
             waitForElementByElement(modalUserNameInput);
             modalUserNameInput.sendKeys(userName);
@@ -492,6 +524,35 @@ public class WikiBasePageObject extends BasePageObject {
                 "Login form in modal is filled",
                 true, driver
             );
+
             clickAndWait(modalLoginSubmit);
+            PageObjectLogging.log(
+                "LoginFormSubmitted",
+                "Login form is submitted",
+                true
+            );
+
+            waitForElementNotVisibleByElement(logInModal);
+            PageObjectLogging.log(
+                "LoginModalDissapears",
+                "Login modal is no longer visible",
+                true
+            );
+        }
+
+        public String receiveMailWithNewPassowrd() {
+            MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
+            String newPassword = MailFunctions.getPasswordFromMailContent((
+                MailFunctions.getFirstMailContent(
+                    Properties.email, Properties.emailPassword)
+                )
+            );
+            PageObjectLogging.log(
+                "NewPasswordRecived",
+                "New password recived from mail",
+                true
+            );
+
+            return newPassword;
         }
 }

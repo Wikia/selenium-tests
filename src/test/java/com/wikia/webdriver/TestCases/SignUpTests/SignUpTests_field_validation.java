@@ -8,7 +8,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject
 
 public class SignUpTests_field_validation extends TestTemplate
 {
-
+	private String userNameEmail;
+	private String passwordEmail;
+	
 	private static String nonLati50Char = "ユーザー名は、50以上の文字が含まれているとアカウントを作成する機能はありませんありませんありません";
 	/**
 	 * https://internal.wikia-inc.com/wiki/Global_Log_in_and_Sign_up/Test_Cases:_Sign_up
@@ -17,9 +19,11 @@ public class SignUpTests_field_validation extends TestTemplate
 //	@Test(groups = {"SignUp_field_validation_TC001"})
 	public void SignUp_field_validation_TC001()
 	{
+		userNameEmail = Properties.emailQaart1;
+		passwordEmail = Properties.emailPasswordQaart1;
 		SignUpPageObject signUpPage = new SignUpPageObject(driver);
 		signUpPage.openSignUpPage();
-		signUpPage.submit();
+		signUpPage.submit(userNameEmail, passwordEmail);
 		signUpPage.verifyEmptyUserNameValidation();
 	}
 
@@ -30,6 +34,8 @@ public class SignUpTests_field_validation extends TestTemplate
 	@Test(groups = {"SignUp_field_validation_TC002"})
 	public void SignUp_field_validation_TC002()
 	{
+		userNameEmail = Properties.emailQaart2;
+		passwordEmail = Properties.emailPasswordQaart2;
 		SignUpPageObject signUpPage = new SignUpPageObject(driver);
 		signUpPage.openSignUpPage();
 		signUpPage.typeInUserName(Properties.userName);

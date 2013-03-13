@@ -67,21 +67,10 @@ public class UserProfilePageObject extends BasePageObject{
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public void verifyWelcomeEmail(String userName)
+	public void verifyWelcomeEmail(String userName, String mailUserName, String mailPassword)
 	{
 		PageObjectLogging.log("verifyWelcomeEmail ", "start of email verification", true);
-		String[] mailContent = MailFunctions.getWelcomeMailContent(MailFunctions.getFirstMailContent(Properties.email, Properties.emailPassword));
-		System.out.println("*****************************************************************************");
-		System.out.println("*****************************************************************************");
-		System.out.println("*****************************************************************************");
-		System.out.println("*****************************************************************************");
-		System.out.println("*****************************************************************************");
-		System.out.println("*****************************************************************************");
-		System.out.println("*****************************************************************************");
-		for (int i=0; i<mailContent.length; i++){
-			System.out.println(i+".  "+mailContent[i]);
-			System.out.println("\n");
-		}
+		String[] mailContent = MailFunctions.getWelcomeMailContent(MailFunctions.getFirstMailContent(mailUserName, mailPassword));
 //		Assertion.assertEquals("We're happy to welcome you to Wikia and Wikia! Here are some things you can= do to get started.", mailContent[2]);
 		Assertion.assertEquals("Edit your profile.", mailContent[4]);
 //		Assertion.assertEquals("Add a profile photo and a few quick facts about yourself on your Wikia prof=ile.", mailContent[6]);

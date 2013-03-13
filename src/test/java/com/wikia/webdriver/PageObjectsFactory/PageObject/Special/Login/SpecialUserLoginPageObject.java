@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
-import org.apache.tools.ant.taskdefs.WaitFor;
-import org.openqa.selenium.By;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
 /**
@@ -23,7 +23,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(css=".WikiaArticle input[name='username']")
 	private WebElement userName;
 	@FindBy(css=".WikiaArticle input[name='password']")
@@ -36,6 +36,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	private WebElement loginButton;
 	@FindBy(css=".WikiaArticle .forgot-password")
 	private WebElement forgotPasswordLink;
+        @FindBy (css=".UserLogin .error-msg")
+        private WebElement messagePlaceholder;
 
 	/**
 	 * Special:UserLogin user name field
@@ -88,8 +90,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		clickAndWait(loginButton);
 		PageObjectLogging.log("clickLoginButton", "login button clicked", true, driver);
 	}
-	
-	/**
+
+        /**
 	 * Special:UserLogin forgot password
 	 */
 	private void clickForgotPasswordLink(){
@@ -124,29 +126,16 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		typeInPassword(pass);
 		clickLoginButton();
 	}
-	
-	/**
-	 * Special:UserLogin reset password 
-	 * @param name
-	 * @param pass
-	 */
-	public void resetPassword(String pass){
-		typeInNewPassword(pass);
-		retypeInNewPassword(pass);
-		clickLoginButton();
-	}
-	
-	/**
-	 * 	/**
+
+        /**
 	 * Special:UserLogin forgot password
 	 * @param name
 	 */
-	public void forgotPassword(String name){
-		typeInUserName(name);
-		clickForgotPasswordLink();
-		waitForElementByXPath("//div[@class='error-msg' and contains(text(), \"We've sent a new password to the email address for "+name+".\")]");
+	public void remindPassword(String name){
+            typeInUserName(name);
+            clickForgotPasswordLink();
 	}
-	
+
 	/**
 	 * opens Special:UserLogin page
 	 */
@@ -154,4 +143,28 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		getUrl(Global.DOMAIN+"wiki/Special:UserLogin");
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
 	}
+
+        public String setNewPassword() {
+            String password = Properties.password + getTimeStamp();
+            typeInNewPassword(password);
+            retypeInNewPassword(password);
+            clickLoginButton();
+            PageObjectLogging.log(
+                "setNewPassword",
+                "new password is set",
+                true, driver
+            );
+            return password;
+        }
+
+        public void verifyMessageAboutNewPassword(String userName) {
+            waitForElementByElement(messagePlaceholder);
+            String message = PageContent.newPasswordSentMessage.replace("%userName%", userName);
+            waitForTextToBePresentInElementByElement(messagePlaceholder, message);
+            PageObjectLogging.log(
+                "newPasswordSentMessage",
+                "Message about new password sent present",
+                true, driver
+            );
+        }
 }

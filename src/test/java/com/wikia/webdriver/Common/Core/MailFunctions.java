@@ -1,8 +1,10 @@
 package com.wikia.webdriver.Common.Core;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.Properties;
 
 import javax.mail.Flags;
@@ -12,8 +14,6 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
-
-import org.testng.annotations.Test;
 
 public class MailFunctions {
 	
@@ -27,7 +27,7 @@ public class MailFunctions {
 			Properties props = System.getProperties();
 			props.setProperty("mail.store.protocol", "imaps");
 			Session session = Session.getDefaultInstance(props, null);
-			session.setDebug(true);
+//			session.setDebug(true);
 			Store store = session.getStore("imaps");
 			
 			store.connect("imap.googlemail.com", userName, password);
@@ -42,12 +42,15 @@ public class MailFunctions {
 				Thread.sleep(150);
 				messages = inbox.getMessages();
 				counter+=1;
-				System.out.println(counter);
+				if ((counter % 10) == 0){
+					System.out.println("Checking mail... \r");
+				}
 				if (counter >2500)
 				{
 					break;
 				}
 			}
+			System.out.println("Mail arrived... \r");
 			if (messages.length!=0)
 			{
 				Message m = messages[0];
@@ -59,7 +62,6 @@ public class MailFunctions {
 				{
 					buffer.append(line);
 				}
-				System.out.println(buffer);
 				store.close();
 				return buffer.toString();
 			}
@@ -92,16 +94,11 @@ public class MailFunctions {
 	public static void deleteAllMails(String userName, String password)
 	{
 		try {
-			
 			//establishing connections
 			Properties props = System.getProperties();
-
-			props.setProperty("proxySet","true");
-			props.setProperty("http.proxyHost","squid-proxy.local");
-			props.setProperty("http.proxyPort","3128");
 			props.setProperty("mail.store.protocol", "imaps");
 			Session session = Session.getDefaultInstance(props, null);
-			session.setDebug(true);
+			session.setDebug(false);
 			Store store = session.getStore("imaps");
 			store.connect("imap.googlemail.com", userName, password);
 			//getInbox
@@ -120,20 +117,6 @@ public class MailFunctions {
 				System.out.println("There is no messages in inbox");
 			}
 			
-			Folder inbox2 = store.getFolder("Important");
-			inbox2.open(Folder.READ_WRITE);
-			Message messages2[] = inbox2.getMessages();
-			if (messages2.length != 0)
-			{
-				for (int i=0; i< messages2.length; i++)
-				{
-					messages2[i].setFlag(Flags.Flag.DELETED, true);
-				}
-			}
-			else
-			{
-				System.out.println("There is no messages in inbox");
-			}
 			store.close();
 		} 
 		catch (NoSuchProviderException e) 
@@ -143,7 +126,7 @@ public class MailFunctions {
 		catch (MessagingException e) 
 		{
 			System.out.println("problems : " + e.getMessage());
-		}
+		} 
 	}
 	
 	public static String getPasswordFromMailContent(String content)
