@@ -16,7 +16,7 @@ public class AdsTestingTest extends AdsTestTemplate {
     public void TestUS() {
         driver.get("http://gta.wikia.com");
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -27,7 +27,7 @@ public class AdsTestingTest extends AdsTestTemplate {
     public void TestDE() {
         driver.get("http://gta.wikia.com");
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100000);
         } catch (Exception e) {
             e.printStackTrace();
         }

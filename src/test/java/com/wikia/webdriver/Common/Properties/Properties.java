@@ -62,17 +62,18 @@ public class Properties {
 	public static String emailQaart4;
 	public static String emailPasswordQaart4;
 
-	
-	
 	public static String userNameStaff;
 	public static String passwordStaff;
 
 	public static String userNameFB;
 	public static String passwordFB;
-    public static String emailFB;
+        public static String emailFB;
 
 	public static String userNameBlocked;
 	public static String passwordBlocked;
+
+        public static String geoEdgeUserName;
+        public static String geoEdgeUserPass;
 
         private static void setVariables() {
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
@@ -116,6 +117,8 @@ public class Properties {
 		
 		userNameBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.username");
 		passwordBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
+                geoEdgeUserName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.userName");
+                geoEdgeUserPass = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.password");
 	
 	}
 
