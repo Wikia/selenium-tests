@@ -9,7 +9,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject.Components;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
@@ -42,7 +41,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
-		galleryBuiler = (GalleryBuilderComponentObject)galleryAddPhoto.clickSelect(Components.Gallery);
+		galleryAddPhoto.clickSelect();
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
@@ -70,7 +69,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
-		galleryBuiler = (GalleryBuilderComponentObject)galleryAddPhoto.clickSelect(Components.Gallery);
+		galleryAddPhoto.clickSelect();
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
@@ -87,7 +86,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
-		galleryBuiler = (GalleryBuilderComponentObject)galleryAddPhoto.clickSelect(Components.Gallery);
+		galleryAddPhoto.clickSelect();
 		galleryBuiler.adjustPosition("Right");
 		galleryBuiler.adjustColumns("3");
 		galleryBuiler.adjustSpacing("Medium");
@@ -113,7 +112,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
-		galleryBuiler = (GalleryBuilderComponentObject)galleryAddPhoto.clickSelect(Components.Gallery);
+		galleryAddPhoto.clickSelect();
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
@@ -148,7 +147,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
-		slideshowBuilder = (SlideshowBuilderComponentObject)slideshowAddPhoto.clickSelect(Components.Slideshow);
+		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 		edit.verifyObjectInEditMode("slideshow");
@@ -173,7 +172,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
-		slideshowBuilder = (SlideshowBuilderComponentObject)slideshowAddPhoto.clickSelect(Components.Slideshow);
+		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 		edit.verifyObjectInEditMode("slideshow");
@@ -187,7 +186,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(8);
-		slideshowBuilder = (SlideshowBuilderComponentObject)slideshowAddPhoto.clickSelect(Components.Slideshow);
+		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Right);
 		slideshowBuilder.clickFinish();
 		edit.verifyObjectInEditMode("slideshow");
@@ -209,7 +208,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
-		slideshowBuilder = (SlideshowBuilderComponentObject)slideshowAddPhoto.clickSelect(Components.Slideshow);
+		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 		edit.verifyObjectInEditMode("slideshow");
@@ -244,7 +243,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);
-		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();
@@ -271,7 +270,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);
-		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();
@@ -285,7 +284,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(8);
-		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		article = edit.clickOnPublishButton();
@@ -307,7 +306,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);
-		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();

@@ -9,7 +9,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject.Components;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
@@ -22,7 +21,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class BlogFeaturesTests extends TestTemplate{
 
@@ -38,7 +36,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
-		galleryBuiler = (GalleryBuilderComponentObject)galleryAddPhoto.clickSelect(Components.Gallery);
+		galleryAddPhoto.clickSelect();
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
@@ -61,19 +59,9 @@ public class BlogFeaturesTests extends TestTemplate{
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
-		slideshowBuilder = (SlideshowBuilderComponentObject)slideshowAddPhoto.clickSelect(Components.Slideshow);
+		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
-		
-		
-//		blogEdit.clickOnAddObjectButton("Slideshow");
-//		blogEdit.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
-//		blogEdit.searchImageInLightBox("image");
-//		blogEdit.galleryCheckImageInputs(4);
-//		blogEdit.galleryClickOnSelectButton();
-//		blogEdit.gallerySetPositionSlideshow("Center");
-//		blogEdit.galleryClickOnFinishButton();
-//		blogEdit.verifyObjectInEditMode("slideshow");
 		BlogPageObject blog = blogEdit.clickOnPublishButton();
 		blog.verifyObjectOnThePage("slideshow");
 		
@@ -92,7 +80,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);
-		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		blogEdit.verifyObjectInEditMode("gallery-slider");
 		BlogPageObject blog = blogEdit.clickOnPublishButton();

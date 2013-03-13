@@ -64,22 +64,10 @@ public class AddPhotoComponentObject extends BasePageObject{
 				+ " image inputs", true, driver);
 	}
 	
-	public enum Components {
-		Gallery, Slideshow, Slider}
 	
-	public Object clickSelect(Components comp){
+	public void clickSelect(){
 		waitForElementByElement(selectButton);
 		selectButton.click();
 		PageObjectLogging.log("clickSelect", "select button clicked", true);
-		switch(comp){
-		case Gallery: 
-			return new GalleryBuilderComponentObject(driver);
-		case Slideshow:
-			return new SlideshowBuilderComponentObject(driver);
-		case Slider:
-			return new SliderBuilderComponentObject(driver);
-		default:
-			return null;
-		}
 	}
 }

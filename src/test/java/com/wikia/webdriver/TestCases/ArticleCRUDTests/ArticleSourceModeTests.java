@@ -9,7 +9,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject.Components;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
@@ -201,7 +200,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
-		slideshowBuilder = (SlideshowBuilderComponentObject)slideshowAddPhoto.clickSelect(Components.Slideshow);
+		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 //		
@@ -229,7 +228,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
-		galleryBuiler = (GalleryBuilderComponentObject)galleryAddPhoto.clickSelect(Components.Gallery);
+		galleryAddPhoto.clickSelect();
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
@@ -255,7 +254,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);
-		sliderBuilder = (SliderBuilderComponentObject)sliderAddPhoto.clickSelect(Components.Slider);
+		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
