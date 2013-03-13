@@ -28,10 +28,6 @@ public class DriverProvider {
 	private static ProxyServer server;
         private static DesiredCapabilities caps = new DesiredCapabilities();
 
-        private static DesiredCapabilities capsFF = DesiredCapabilities.firefox();
-        private static DesiredCapabilities capsIE = DesiredCapabilities.internetExplorer();
-        private static DesiredCapabilities capsChrome = DesiredCapabilities.chrome();
-
 	/**
 	 * creating webdriver instance based on given browser string
 	 * @return instance of webdriver
@@ -43,16 +39,16 @@ public class DriverProvider {
             if (Global.BROWSER.equals("IE")) {
                 setIEProperties();
                 driver = new EventFiringWebDriver(
-                    new InternetExplorerDriver(capsIE)
+                    new InternetExplorerDriver(caps)
                 ).register(listener);
             } else if (Global.BROWSER.equals("FF")) {
                 driver = new EventFiringWebDriver(
-                    new FirefoxDriver(capsFF)
+                    new FirefoxDriver(caps)
                 ).register(listener);
             } else if (Global.BROWSER.equals("CHROME")) {
                 setChromeProperties();
                 driver = new EventFiringWebDriver(
-                    new ChromeDriver(capsChrome)
+                    new ChromeDriver(caps)
                 ).register(listener);
             } else if (Global.BROWSER.equals("SAFARI")) {
                 /*
@@ -177,9 +173,7 @@ public class DriverProvider {
             System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 	}
 
-        public static void setCapabilities(DesiredCapabilities setCaps) {
-            capsFF = setCaps;
-            capsIE = setCaps;
-            capsChrome = setCaps;
+        public static void setCapabilities(DesiredCapabilities newCaps) {
+            caps = newCaps;
         }
 }
