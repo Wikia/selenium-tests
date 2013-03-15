@@ -57,7 +57,10 @@ public class CommonFunctions {
 		submitButton.click();
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
 				+ userName + "']"));// only for verification
-		driver.get(temp);
+		if (!temp.contains("UserLogout")){
+            driver.get(temp);
+        }
+
 	}
 
 	/**
