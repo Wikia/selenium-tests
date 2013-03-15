@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class ForgottenPasswordTests extends TestTemplate {
 
     @Test(
-        groups = { "ForgottenPassword_001_dropdown", "ForgottenPassword" }
+        groups = { "ForgottenPassword_001_dropdown", "ForgottenPassword" , "Login"}
     )
     public void ForgottenPassword_001_dropdown() {
         CommonFunctions.logOut(driver);
@@ -46,7 +46,7 @@ public class ForgottenPasswordTests extends TestTemplate {
     }
 
     @Test(
-        groups = { "ForgottenPassword_002_specialPage", "ForgottenPassword" }
+        groups = { "ForgottenPassword_002_specialPage", "ForgottenPassword" , "Login"}
     )
     public void ForgottenPassword_002_specialPage() {
         CommonFunctions.logOut(driver);

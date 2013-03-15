@@ -1,20 +1,22 @@
 package com.wikia.webdriver.Common.Logging;
 
 import java.awt.Dimension;
+import java.awt.List;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-import org.testng.Assert;
 
 import com.google.common.base.Throwables;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -112,6 +114,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
 				+ imageCounter + ".html'>HTML Source</a></td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
+		logJSError(driver);
 //		if (!success)
 //		{
 //			Assert.fail(description);
@@ -136,7 +139,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 	@Override
 	public void beforeNavigateTo(String url, WebDriver driver) {
 		// System.out.println("Before navigate to " + url);
-
+		logJSError(driver);
 	}
 
 	@Override
@@ -145,7 +148,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 		String s = "<tr class=\"success\"><td>Navigate to</td><td>" + url
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-
+		logJSError(driver);
 	}
 
 	@Override
@@ -190,7 +193,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 	@Override
 	public void beforeClickOn(WebElement element, WebDriver driver) {
 		// System.out.println("beforeClick");
-
+		logJSError(driver);
 	}
 
 	@Override
@@ -199,9 +202,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 		String s = "<tr class=\"success\"><td>click</td><td>" + lastFindBy
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-
-		// System.out.println("afterClick");
-
+		logJSError(driver);
 	}
 
 	@Override
@@ -281,6 +282,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 						+ imageCounter + ".html'>HTML Source</a></td></tr>";
 				CommonUtils.appendTextToFile(logPath, s1);
 				imageCounter += 1;
+				logJSError(driver);
 			} catch (Exception e) {
 				if (e.getMessage().equals("elementIsInvisible")) {
 					String s1 = "<tr class=\"success\"><td>findInvisibleElement</td><td>element is not visible which is expected</td><td> <br/><a href='screenshots/screenshot"
@@ -298,6 +300,17 @@ public class PageObjectLogging implements WebDriverEventListener {
 					CommonUtils.appendTextToFile(logPath, s1);
 					imageCounter += 1;
 				}
+			}
+		}
+	}
+	
+	private static void logJSError(WebDriver driver){
+		if (Global.JS_ERROR_ENABLED){
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
+			if (!(error.size()==0)){			
+				String s1 = "<tr class=\"error\"><td>click</td><td>"+error+"</td><td> <br/> &nbsp;</td></tr>";
+				CommonUtils.appendTextToFile(logPath, s1);
 			}
 		}
 	}
