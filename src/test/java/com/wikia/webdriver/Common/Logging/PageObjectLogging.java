@@ -139,7 +139,6 @@ public class PageObjectLogging implements WebDriverEventListener {
 	@Override
 	public void beforeNavigateTo(String url, WebDriver driver) {
 		// System.out.println("Before navigate to " + url);
-		logJSError(driver);
 	}
 
 	@Override
