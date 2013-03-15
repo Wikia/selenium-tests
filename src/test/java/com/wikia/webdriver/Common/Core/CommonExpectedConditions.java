@@ -341,6 +341,29 @@ public class CommonExpectedConditions {
     }
 
     /**
+     * 
+     * @param bySelector
+     * @return
+     */
+    public static ExpectedCondition<Boolean> elementNotPresent(
+            final By bySelector
+        ) {
+            return new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver f) {
+                    return (driver.findElements(bySelector).size() < 1);
+                }
+                @Override
+                public String toString() {
+                    return String.format(
+                        "Element with provided selector still present!"
+                    );
+                }
+            };
+        }
+
+    
+    /**
      *
      * @param element
      * @return

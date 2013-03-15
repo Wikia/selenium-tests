@@ -16,8 +16,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 /*
  * Documentation:
@@ -159,8 +159,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
-		blogEdit.clickOnAddObjectButton("Video");
-		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
+		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
@@ -177,8 +176,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
-		blogEdit.clickOnAddObjectButton("Video");
-		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
+		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();

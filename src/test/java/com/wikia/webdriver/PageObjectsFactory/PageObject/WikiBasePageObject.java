@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -26,9 +25,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFiles
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -71,41 +70,11 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = "div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
 
-	@FindBy(css = "div.details input")
-	private WebElement addPhotoButton;
-
-	@FindBy(css = "input[id='VideoEmbedUrl']")
-	private WebElement videoModalInput;
-
-	@FindBy(css = "a[id='VideoEmbedUrlSubmit']")
-	private WebElement videoNextButton;
-
-	@FindBy(css = "div.input-group.VideoEmbedNoBorder input")
-	private WebElement videoAddVideoButton;
-
-	@FindBy(css = "#VideoEmbedThumb")
-	private WebElement videoDialog;
-
-	@FindBy(css = "input[value='Return to editing']")
-	private WebElement videoReturnToEditing;
-
-	@FindBy(css = "section[id='WikiaPhotoGalleryEditor']")
-	private WebElement objectModal;
-
 	@FindBy(css = "input[name='search'][placeholder='Search photos on this wiki']")
 	private WebElement searchFieldImageInLightBox;
 
 	@FindBy(css = "img.sprite.search")
 	private WebElement searchButtonImageInLightBox;
-
-	@FindBy(css = "a[id='WikiaPhotoGallerySearchResultsSelect']")
-	private WebElement galleryDialogSelectButton;
-
-	@FindBy(css = "a[id='WikiaPhotoGalleryEditorSave']")
-	private WebElement galleryDialogFinishButton;
-	
-	@FindBy(css="input[id='VideoEmbedCaption']")
-	private WebElement videoCaptionTextArea;
 	
 	@FindBy(css="input#ImageQuery")
 	private WebElement imageQuery;
@@ -124,21 +93,21 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
 	private WebElement ad_Prefooter_left_boxad;
+	
+	@FindBy (css = "#WikiaPageHeader h1")
+	private WebElement wikiFirstHeader;
 
-        @FindBy (css = "#WikiaPageHeader h1")
-        private WebElement wikiFirstHeader;
+	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
+	private WebElement specialUserLoginLink;
 
-        @FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
-        private WebElement specialUserLoginLink;
+	@FindBy(css = ".UserLoginModal input[name='username']")
+	protected WebElement modalUserNameInput;
 
-        @FindBy(css = ".UserLoginModal input[name='username']")
-        protected WebElement modalUserNameInput;
+	@FindBy(css = ".UserLoginModal input[name='password']")
+	protected WebElement modalPasswordInput;
 
-        @FindBy(css = ".UserLoginModal input[name='password']")
-        protected WebElement modalPasswordInput;
-
-        @FindBy(css = ".UserLoginModal input[type='submit']")
-        protected WebElement modalLoginSubmit;
+	@FindBy(css = ".UserLoginModal input[type='submit']")
+	protected WebElement modalLoginSubmit;
 
         @FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
         protected WebElement contributeButton;
@@ -151,17 +120,6 @@ public class WikiBasePageObject extends BasePageObject {
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
-	private By galleryDialogPhotosList = By
-			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
-	private By galleryDialogPhotoOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGalleryOrientation'] li");
-	private String videoAddVideoButtonSelector = "div.input-group.VideoEmbedNoBorder input";
-	private String videoReturnToEditingSelector = "input[value=\"Return to editing\"]";
-	private By galleryDialogSlideshowOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
-	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
-	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
-	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
 	
 	private String pageName;
 
@@ -174,266 +132,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public String getWikiName() {
 		return Domain;
 	}
-
-	public void searchForImage(String name){
-//		waitForElementByElement(imageFindButton);
-		imageQuery.sendKeys(name);
-//		waitForElementByElement(imageQuery);
-		imageFindButton.click();
-		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
-	}
-	
-	/**
-	 * Left Click on add Object button.
-	 *  
-	 * @author Michal Nowierski
-	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
-	 */
-	public Object clickOnAddObjectButton(String Object) {
-		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
-		WebElement ObjectButton;
-		waitForElementByCss(ObjectCss);
-		waitForElementClickableByCss(ObjectCss);
-		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
-		clickAndWait(ObjectButton);
-		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
-		if (Object.equals("Video")){
-			return new VetAddVideoComponentObject(driver);
-		}
-		else{
-			return null;
-		}		
-	}
-	
-	/**
-	 * Type given caption for the video
-	 *  
-	 * @author Michal Nowierski
-	 */
-	public void typeVideoCaption(String caption) {
-		waitForElementByElement(videoCaptionTextArea);
-		videoCaptionTextArea.clear();
-		videoCaptionTextArea.sendKeys(caption);
-		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo", true, driver);
-	}
-	
-	/**
-	 * Set photo orientation option number n
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            = {1, 2}
-	 *            <p>
-	 *            1 - Horizontaal.
-	 *            <p>
-	 *            2 - Vertical
-	 * */
-	public void gallerySetSliderPosition(int n) {
-		List<WebElement> List = driver
-				.findElements(galleryDialogSlideshowOrientationsList);
-		waitForElementByElement(List.get(n - 1));
-		clickAndWait(List.get(n - 1));
-		PageObjectLogging.log("GallerySetSliderPosition",
-				"Set photo orientation option number " + n, true, driver);
-
-	}
-
-	/**
-	 * Set photo orientation option number n
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            = {1,2,3,4}
-	 *            <p>
-	 *            1 - Original.
-	 *            <p>
-	 *            2 - Square.
-	 *            <p>
-	 *            3 - Landscape.
-	 *            <p>
-	 *            4 - Portrait
-	 * */
-	public void gallerySetPhotoOrientation(int n) {
-		List<WebElement> List = driver
-				.findElements(galleryDialogPhotoOrientationsList);
-		waitForElementByElement(List.get(n - 1));
-		clickAndWait(List.get(n - 1));
-		PageObjectLogging.log("GallerySetPhotoOrientation",
-				"Set photo orientation option number " + n, true, driver);
-
-	}
-
-	/**
-	 * Set Object position to the wanted one
-	 * 
-	 * @author Michal Nowierski
-	 * @param Object
-	 *            {Gallery, Slideshow}
-	 * @param WantedPosition
-	 *            = {Left, Center, Right} !CASE SENSITIVITY! *
-	 */
-	public void gallerySetPositionGallery(String WantedPosition) {
-
-		Select select = new Select(
-				driver.findElement(By
-						.cssSelector("select[id='WikiaPhotoGalleryEditorGalleryPosition']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-
-		}
-		PageObjectLogging.log("GallerySetPosition", "Set gallery position to "
-				+ WantedPosition, true, driver);
-	}
-
-	/**
-	 * Gallery dialog: Left click 'Finish' button
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void galleryClickOnFinishButton() {
-		waitForElementByElement(galleryDialogFinishButton);
-		waitForElementClickableByElement(galleryDialogFinishButton);
-		clickAndWait(galleryDialogFinishButton);
-		PageObjectLogging.log("GalleryClickOnFinishButton",
-				"Gallery dialog: Left click 'Finish' button ", true, driver);
-
-	}
-
-	public void gallerySetPositionSlideshow(String WantedPosition) {
-
-		Select select = new Select(
-				driver.findElement(By
-						.cssSelector("select[id='WikiaPhotoGalleryEditorSlideshowAlign']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-		}
-		PageObjectLogging.log("GallerySetPosition",
-				"Set slideshow position to " + WantedPosition, true, driver);
-	}
-
-	/**
-	 * Gallery dialog: Left click 'Select' button
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void galleryClickOnSelectButton() {
-		waitForElementByElement(galleryDialogSelectButton);
-		waitForElementClickableByElement(galleryDialogSelectButton);
-		clickAndWait(galleryDialogSelectButton);
-		PageObjectLogging.log("GalleryClickOnSelectButton",
-				"Gallery dialog: Left click 'Select' button", true, driver);
-
-	}
-
-	/**
-	 * Wait for Object and click on 'add this photo' under the first seen
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            n = parameter determining how many inputs the method should
-	 *            check
-	 * */
-	public void galleryCheckImageInputs(int n) {
-		driver.findElement(galleryDialogPhotosList);
-		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
-		for (int i = 0; i < n; i++) {
-			clickAndWait(List.get(i));
-		}
-		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + n
-				+ " image inputs", true, driver);
-	}
-
-	public void searchImageInLightBox(String imageName) {
-		waitForElementByElement(searchFieldImageInLightBox);
-		searchFieldImageInLightBox.sendKeys(imageName);
-		clickAndWait(searchButtonImageInLightBox);
-		waitForElementByElement(searchButtonImageInLightBox);
-	}
-
-	/**
-	 * Wait for Object and click on 'add this photo' under the first seen
-	 * 
-	 * @author Michal Nowierski
-	 * @param Object
-	 *            Object = {Gallery, GallerySlideshow, GallerySlider}
-	 * */
-	public void waitForObjectModalAndClickAddAphoto(String Object) {
-		waitForElementByBy(By.cssSelector("button[id='WikiaPhoto"
-				+ Object + "AddImage']"));
-		clickAndWait(driver.findElement(By.cssSelector("button[id='WikiaPhoto"
-				+ Object + "AddImage']")));
-		PageObjectLogging.log("WaitForObjectModalAndClickAddAphoto",
-				"Wait for " + Object + " modal and click on 'add a photo'",
-				true, driver);
-		waitForElementByElement(objectModal);
-	}
-
-	/**
-	 * Wait For Succes dialog and click on 'return to editing'
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void waitForSuccesDialogAndReturnToEditing() {
-		waitForElementByElement(videoReturnToEditing);
-		waitForElementClickableByElement(videoReturnToEditing);
-		jQueryClick(videoReturnToEditingSelector);
-		// clickAndWait(videoReturnToEditing);
-		waitForElementNotVisibleByCss(videoReturnToEditingSelector);
-		PageObjectLogging.log("WaitForSuccesDialogAndReturnToEditing",
-				"Wait For Succes dialog and click on 'return to editing'",
-				true, driver);
-
-	}
-
-	/**
-	 * Wait for video dialog
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void waitForVideoDialog() {
-		waitForElementByElement(videoDialog);
-		PageObjectLogging.log("WaitForVideoDialog", "Wait for video dialog",
-				true, driver);
-
-	}
-
-	
-	/**
-	 * Click 'Add a video'
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void clickAddAvideo() {
-		//TODO: delete this method when VET components are introduced
-		waitForElementByElement(videoAddVideoButton);
-		// waitForElementClickableByElement(videoAddVideoButton);
-		jQueryClick(videoAddVideoButtonSelector);
-		// clickAndWait(videoAddVideoButton);
-		PageObjectLogging.log("ClickAddAvideo", "Click 'Add a video'", true,
-				driver);
-
-	}
-
-	/**
-	 * Video Click Next button
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void clickVideoNextButton() {
-		waitForElementByElement(videoNextButton);
-		waitForElementClickableByElement(videoNextButton);
-		clickAndWait(videoNextButton);
-		PageObjectLogging.log("ClickVideoNextButton", "Left Click Next button",
-				true, driver);
-	}
 	
 	/**
 	 * @author Michal Nowierski
@@ -441,65 +139,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Domain+"wiki/Special:Videos");
 		return new SpecialVideosPageObject(driver, Domain);
-	}
-	
-	/**
-	 * Wait for Video modal and type in the video URL
-	 * 
-	 * @author Michal Nowierski
-	 * */
-	public void waitForVideoModalAndTypeVideoURL(String videoURL) {
-		waitForElementByElement(videoModalInput);
-		waitForElementClickableByElement(videoModalInput);
-		videoModalInput.clear();
-		videoModalInput.sendKeys(videoURL);
-		PageObjectLogging.log("WaitForVideoModalAndTypeVideoURL",
-				"Wait for Video modal and type in the video URL: " + videoURL,
-				true, driver);
-	}
-
-	/**
-	 * Left Click on add 'Photo' button.
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void clickOnAddPhotoButton2() {
-		waitForElementByElement(addPhotoButton);
-		waitForElementClickableByElement(addPhotoButton);
-		clickAndWait(addPhotoButton);
-		PageObjectLogging.log("ClickOnAddPhotoButton2",
-				"Left Click on add 'Photo' button.", true, driver);
-	}
-
-	
-	
-	/**
-	 * Wait for modal and click on 'add this photo' under the first seen photo
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void waitForModalAndClickAddThisPhoto() {
-		waitForElementByElement(imageUploadModal);
-		WebElement addPhoto = waitForElementByBy(addThisPhotoLink);
-		waitForElementClickableByElement(addPhoto);
-		clickAndWait(addPhoto);
-		PageObjectLogging
-				.log("WaitForModalAndClickAddThisPhoto",
-						"Wait for modal and click on 'add this photo' under the first seen photo",
-						true, driver);
-	}
-
-	/**
-	 * Type given caption for the photo
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void typePhotoCaption(String caption) {
-		WebElement captionText = waitForElementByBy(captionTextArea);
-		captionText.clear();
-		captionText.sendKeys(caption);
-		PageObjectLogging.log("TypeAcaption", "Type any caption for the photo",
-				true, driver);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
@@ -516,16 +155,6 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(Domain + "wiki/Special:MultipleUpload");
 		return new SpecialMultipleUploadPageObject(driver, Domain);
 	}
-
-//	public WikiArticlePageObject OpenArticle(String wikiArticle) {
-//		try {
-//			getUrl(Domain + "wiki/" + wikiArticle);
-//		} catch (TimeoutException e) {
-//			PageObjectLogging.log("OpenArticle",
-//					"page loads for more than 30 seconds", true);
-//		}
-//		return new WikiArticlePageObject(driver, Domain, wikiArticle);
-//	}
 
 	public void verifyEditDropDownAnonymous() {
 		List<WebElement> list = driver.findElements(By
@@ -583,41 +212,6 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("clickOnContributeButton",
 				"contribute button clicked", true);
 	}
-
-	private void clickCreateArticleButton() {
-		waitForElementByElement(createArticleButton);
-		waitForElementClickableByElement(createArticleButton);
-		// jQueryClick(".createpage");
-		executeScript("document.querySelectorAll('.createpage')[0].click()");
-		waitForElementByElement(driver.findElement(layoutList));
-		PageObjectLogging.log("clickCreateArticleButton",
-				"create article button clicked", true);
-	}
-
-	private void selectPageLayout(int number) {
-		List<WebElement> list = driver.findElements(layoutList);
-		clickAndWait(list.get(number));
-		PageObjectLogging.log("selectPageLayout", "wiki layout selected", true,
-				driver);
-	}
-
-	private void typeInArticleName(String name) {
-		waitForElementByElement(articleNameField);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
-		articleNameField.sendKeys(name);
-	}
-
-	private void clickAddPageButton() {
-		clickAndWait(addArticleButton);
-		PageObjectLogging.log("clickAddPageButton", "add button clicked", true,
-				driver);
-	}
-
 	public void verifyDeletedArticlePage(String pageName) {
 		pageName = pageName.replace("_", " ");
 		waitForElementByXPath("//h1[contains(text(), '" + pageName + "')]");
@@ -755,11 +349,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public WikiArticleEditMode createNewArticle(String pageName,
 			int layoutNumber) {
-		// clickContributeButton();
-		// clickCreateArticleButton();
-		// selectPageLayout(layoutNumber);
-		// typeInArticleName(pageName);
-		// clickAddPageButton();
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
 				+ "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");

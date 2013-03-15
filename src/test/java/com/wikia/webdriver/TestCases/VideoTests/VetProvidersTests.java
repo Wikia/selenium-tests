@@ -15,8 +15,8 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class VetProvidersTests extends TestTemplate{
 		
@@ -57,7 +57,7 @@ public class VetProvidersTests extends TestTemplate{
 				WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 				edit.deleteArticleContent();
 				edit.clickOnVisualButton();
-				VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) edit.clickOnAddObjectButton("Video");
+				VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 				VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 				vetOptions.setCaption(PageContent.caption);
 				vetOptions.submit();
