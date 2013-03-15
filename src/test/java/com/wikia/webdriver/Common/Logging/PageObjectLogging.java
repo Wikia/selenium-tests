@@ -201,7 +201,6 @@ public class PageObjectLogging implements WebDriverEventListener {
 		String s = "<tr class=\"success\"><td>click</td><td>" + lastFindBy
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
-		logJSError(driver);
 	}
 
 	@Override
