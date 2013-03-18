@@ -33,6 +33,8 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	private WebElement addUrlButton;
 	
 	//wiki videos
+	@FindBy(css="figure")
+	private WebElement libraryFigures;
 	@FindBy(css="#VET-search-field")
 	private WebElement findField;
 	@FindBy(css="#VET-search-submit")
@@ -101,6 +103,14 @@ public class VetAddVideoComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked", true, driver);
 		this.videoName =  videoName;
 	}
+	
+	/**
+	 * @author Michal 'justnpT' Nowierski
+	 */
+	private void checkIfLibraryIsPresent(){
+		waitForElementByElement(libraryFigures);
+		PageObjectLogging.log("checkIfLibraryIsPresent", "library carousel present", true);
+	}
 
 	/**
 	 * for provider
@@ -119,6 +129,7 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	public VetOptionsComponentObject addVideoByQuery(String query, int i){
 		typeInSearchQuery(query);
 		clickFindButton();
+		checkIfLibraryIsPresent();
 		clickAddVideoLibrary(i);
 		return new VetOptionsComponentObject(driver);
 	}
