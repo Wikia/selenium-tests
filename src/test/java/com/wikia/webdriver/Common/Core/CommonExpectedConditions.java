@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 //http://code.google.com/p/selenium/source/browse/trunk/java/client/src/org/openqa/selenium/support/ui/ExpectedConditions.java
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -421,6 +422,35 @@ public class CommonExpectedConditions {
             public String toString() {
                 return String.format(
                     "New window not found"
+                );
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> oneOfTagsPresentInElement(
+        final WebElement slot, final String tagNameOne, final String tagNameTwo
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                List <WebElement> tagsNodes = slot.findElements(
+                By.cssSelector(tagNameOne + "," + tagNameTwo));
+                for (WebElement tagNode : tagsNodes) {
+                    if (
+                        !"1px".equals(tagNode.getCssValue("height"))
+                        && !"1px".equals(tagNode.getCssValue("width"))
+                        && tagNode.isDisplayed()
+                    ) {
+                       return true;
+                   }
+               }
+               return false;
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "%s tag or %s that matches the criteria were not found!",
+                    tagNameOne, tagNameTwo
                 );
             }
         };

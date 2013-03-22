@@ -217,21 +217,27 @@ public class BasePageObject{
 
 	public void click(WebElement pageElem)
 	{
-		pageElem.click();	
+		pageElem.click();
 	}
 	
-	public void getUrl(String url)
-	{
-		try
-		{
-			driver.get(url);
-		}
-		catch(TimeoutException e)
-		{
-			PageObjectLogging.log("getUrl", "page loaded for more then 30 seconds after click", true);
-		}
+	public void getUrl(String url) {
+            try	{
+                driver.get(url);
+            } catch(TimeoutException e) {
+                PageObjectLogging.log(
+                    "getUrl",
+                    "page loaded for more then 30 seconds after click",
+                    false
+                );
+            }
+
+            PageObjectLogging.log(
+                "getUrl",
+                "page loaded for less then 30 seconds after click",
+                true
+            );
 	}
-	
+
 	public void refreshPage()
 	{
 		try{
@@ -934,4 +940,26 @@ public class BasePageObject{
             CommonExpectedConditions.newWindowPresent()
         );
     };
+
+    /**
+     * Wait for tags that are visible and are bigger then 1px x 1px
+     * @param String tagNameOne - first tag name
+     * @param String tagNameTwo - second tag name
+     */
+    public void waitForOneOfTagsPresentInElement(WebElement slot, String tagNameOne, String tagNameTwo) {
+        wait.until(
+            CommonExpectedConditions.oneOfTagsPresentInElement(slot, tagNameOne, tagNameTwo)
+        );
+    }
+
+    /**
+     * Determine if tests are ran on preview or live enviroment
+     */
+    public String determineEnviroment() {
+        if (Global.DOMAIN.contains(URLsContent.previewPrefix)) {
+            return "preview";
+        } else {
+            return "";
+        }
+    }
 }
