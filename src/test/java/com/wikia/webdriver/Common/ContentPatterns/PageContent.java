@@ -72,7 +72,6 @@ public class PageContent {
         //Blocks for Phalanx
         public static String titleFilterPlain = "BadTitle";
 
-	
 	//wikiText
 	public static String wikiTextPhoto = "[[File:Image009.jpg|thumb|%s]]";
 

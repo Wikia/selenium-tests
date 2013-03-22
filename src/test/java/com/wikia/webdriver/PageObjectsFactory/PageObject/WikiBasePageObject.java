@@ -17,7 +17,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
@@ -28,6 +27,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import org.openqa.selenium.NoSuchElementException;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -555,4 +555,14 @@ public class WikiBasePageObject extends BasePageObject {
 
             return newPassword;
         }
+
+    /**
+     * Method checks if current wiki page is main page of this wiki
+     *
+     * @return Boolean
+     */
+    protected Boolean checkIfMainPage() {
+        WebElement body = driver.findElement(By.cssSelector("body"));
+	return (body.getAttribute("class").contains("mainpage"));
+    }
 }
