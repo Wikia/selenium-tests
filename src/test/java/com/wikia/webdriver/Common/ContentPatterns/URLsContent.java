@@ -7,7 +7,7 @@ public class URLsContent {
 	public static String followingToolbarTest = "QAautoPage";
 
 	//Preview url prefix
-        public static String previewPrefix = "http://preview";
+	public static String previewPrefix = "http://preview";
 
 	// Ads - pages with height better than 2400 px
 	public static String wikiSearchMiddleLink1 = "http://preview.plantsvszombies.wikia.com/wiki/Special:Search?ns0=1&ns14=1&search=zombies&fulltext=Search&ns0=1&ns14=1&advanced=";
