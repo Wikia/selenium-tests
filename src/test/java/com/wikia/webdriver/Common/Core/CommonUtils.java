@@ -128,6 +128,19 @@ public class CommonUtils {
 	 */
 	public static void createDirectory(String fileName)
 	{
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
+		System.out.println("os.version");
 		Boolean dirCreated = new File(fileName).mkdir();
 		int numberOftakes = 0;
 		while (!dirCreated && numberOftakes < 5) {
