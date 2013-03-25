@@ -42,7 +42,7 @@ public class DriverProvider {
                     new InternetExplorerDriver(caps)
                 ).register(listener);
             } else if (Global.BROWSER.contains("FF")) {
-            	if (System.getProperty("os.name").toLowerCase().contains("win8")){
+            	if (System.getProperty("os.name").toLowerCase().equals("windows 8")){
             		System.setProperty("webdriver.firefox.bin", "c:\\Program Files (x86)\\Mozilla Firefox\\");
             	}
             	if (Global.BROWSER.contains("CONSOLE")){
