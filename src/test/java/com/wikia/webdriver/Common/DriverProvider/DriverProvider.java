@@ -42,6 +42,9 @@ public class DriverProvider {
                     new InternetExplorerDriver(caps)
                 ).register(listener);
             } else if (Global.BROWSER.contains("FF")) {
+            	System.out.println(System.getProperty("************************************************"));
+            	System.out.println(System.getProperty("os.name"));
+            	System.out.println(System.getProperty("************************************************"));
             	if (Global.BROWSER.contains("CONSOLE")){
             		try{
             			File jsErr = new File("./src/test/resources/Firebug/JSErrorCollector.xpi");
