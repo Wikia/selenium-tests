@@ -20,14 +20,16 @@ import org.openqa.selenium.support.PageFactory;
 public class AdsBaseObject extends WikiBasePageObject {
 
     private final String anyLeaderboardSelector = "[id$='TOP_LEADERBOARD']";
+    private final String anyMadrecSelector = "[id$='TOP_RIGHT_BOXAD']";
     private String presentLeaderboard;
+    private String presentMadrec;
 
     private String wikiPage;
 
     @FindBy (css = anyLeaderboardSelector)
     private WebElement anyLeaderboardContainer;
-    @FindBy (css = "#TOP_RIGHT_BOXAD")
-    private WebElement topRightBoxAdContainer;
+    @FindBy (css = anyMadrecSelector)
+    private WebElement anyMadrecContainer;
 
     public AdsBaseObject(WebDriver driver, String page) {
         super(driver, page);
@@ -47,25 +49,35 @@ public class AdsBaseObject extends WikiBasePageObject {
         }
         waitForElementByElement(anyLeaderboardContainer);
         checkScriptPresentInSlot(presentLeaderboard, anyLeaderboardContainer);
-        checkTagsPresent(AdsContent.topLeaderboard, anyLeaderboardContainer);
+        checkTagsPresent(presentLeaderboard, anyLeaderboardContainer);
+    }
+
+    public void verifyMadrecPresent() {
+        if (checkIfMainPage()) {
+            presentMadrec = AdsContent.homeMadrec;
+        } else {
+            presentMadrec = AdsContent.madrec;
+        }
+        waitForElementByElement(anyMadrecContainer);
+        checkScriptPresentInSlot(presentMadrec, anyMadrecContainer);
+        checkTagsPresent(presentMadrec, anyMadrecContainer);
     }
 
     private void checkTagsPresent(String slotName, WebElement slotElement) {
         Global.LOG_ENABLED  = false;
         try {
             waitForOneOfTagsPresentInElement(slotElement, "img", "iframe");
+            PageObjectLogging.log(
+                "IFrameOrImageFound",
+                "Image or iframe was found in slot for 30 seconds",
+                true,
+                driver
+            );
         } catch (TimeoutException e) {
             PageObjectLogging.log(
                 "IFrameOrImgNotFound",
                 "Nor image or iframe was found in slot",
                 false,
-                driver
-            );
-        } finally {
-            PageObjectLogging.log(
-                "IFrameOrImageFound",
-                "Image or iframe was found in slot",
-                true,
                 driver
             );
         }

@@ -11,6 +11,8 @@ public class AdsContent {
     //SLOTS NAMES
     public static String homeTopLeaderboard = "HOME_TOP_LEADERBOARD";
     public static String topLeaderboard = "TOP_LEADERBOARD";
+    public static String homeMadrec = "HOME_TOP_RIGHT_BOXAD";
+    public static String madrec = "TOP_RIGHT_BOXAD";
 
     //SCIPTS 
     public static String adsPushSlotScript = "window.adslots2.push([\"%slot%\",null,\"AdEngine2\"]);";

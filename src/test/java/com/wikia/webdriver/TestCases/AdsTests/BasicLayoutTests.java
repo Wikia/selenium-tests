@@ -16,11 +16,51 @@ public class BasicLayoutTests extends AdsTestTemplate {
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="popularSites",
-        groups={"Ads", "Basic_Layout_001"}
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_001"}
     )
-    public void TestUS(String page) {
+    public void TestBasicLayout_US(String page) {
         AdsBaseObject mainPage = new AdsBaseObject(driver, page);
         mainPage.openPage();
         mainPage.verifyTopLeaderBoardPresent();
+        mainPage.verifyMadrecPresent();;
+    }
+
+    @GeoEdgeProxy(country="DE")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="popularSites",
+        groups={"Ads_Basic_Layout", "Basic_Layout_002"}
+    )
+    public void TestBasicLayout_DE(String page) {
+        AdsBaseObject mainPage = new AdsBaseObject(driver, page);
+        mainPage.openPage();
+        mainPage.verifyTopLeaderBoardPresent();
+        mainPage.verifyMadrecPresent();;
+    }
+
+    @GeoEdgeProxy(country="UK")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="popularSites",
+        groups={"Ads_Basic_Layout", "Basic_Layout_003"}
+    )
+    public void TestBasicLayout_UK(String page) {
+        AdsBaseObject mainPage = new AdsBaseObject(driver, page);
+        mainPage.openPage();
+        mainPage.verifyTopLeaderBoardPresent();
+        mainPage.verifyMadrecPresent();;
+    }
+
+    @GeoEdgeProxy(country="CA")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="popularSites",
+        groups={"Ads_Basic_Layout", "Basic_Layout_004"}
+    )
+    public void TestBasicLayout_CA(String page) {
+        AdsBaseObject mainPage = new AdsBaseObject(driver, page);
+        mainPage.openPage();
+        mainPage.verifyTopLeaderBoardPresent();
+        mainPage.verifyMadrecPresent();;
     }
 }

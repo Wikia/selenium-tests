@@ -433,17 +433,19 @@ public class CommonExpectedConditions {
         return new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver f) {
+                Dimension zero = new Dimension(0, 0);
+                Dimension one = new Dimension(1, 1);
                 List <WebElement> tagsNodes = slot.findElements(
                 By.cssSelector(tagNameOne + "," + tagNameTwo));
                 for (WebElement tagNode : tagsNodes) {
                     if (
-                        !"1px".equals(tagNode.getCssValue("height"))
-                        && !"1px".equals(tagNode.getCssValue("width"))
+                        tagNode.getSize() != zero
+                        && tagNode.getSize() != one
                         && tagNode.isDisplayed()
                     ) {
-                       return true;
-                   }
-               }
+                        return true;
+                    }
+                }
                return false;
             }
             @Override
