@@ -128,15 +128,6 @@ public class CommonUtils {
 	 */
 	public static void createDirectory(String fileName)
 	{
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
-		System.out.println(System.getProperty("os.name").toString().toLowerCase());
 		Boolean dirCreated = new File(fileName).mkdir();
 		int numberOftakes = 0;
 		while (!dirCreated && numberOftakes < 5) {
