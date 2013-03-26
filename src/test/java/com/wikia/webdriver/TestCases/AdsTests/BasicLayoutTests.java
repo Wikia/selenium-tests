@@ -19,10 +19,8 @@ public class BasicLayoutTests extends AdsTestTemplate {
         groups={"Ads_Basic_Layout", "Ads_Basic_Layout_001"}
     )
     public void TestBasicLayout_US(String page) {
-        AdsBaseObject mainPage = new AdsBaseObject(driver, page);
-        mainPage.openPage();
-        mainPage.verifyTopLeaderBoardPresent();
-        mainPage.verifyMadrecPresent();;
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyTopLeaderBoardAndMedrec();
     }
 
     @GeoEdgeProxy(country="DE")
@@ -32,10 +30,8 @@ public class BasicLayoutTests extends AdsTestTemplate {
         groups={"Ads_Basic_Layout", "Basic_Layout_002"}
     )
     public void TestBasicLayout_DE(String page) {
-        AdsBaseObject mainPage = new AdsBaseObject(driver, page);
-        mainPage.openPage();
-        mainPage.verifyTopLeaderBoardPresent();
-        mainPage.verifyMadrecPresent();;
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyTopLeaderBoardAndMedrec();
     }
 
     @GeoEdgeProxy(country="UK")
@@ -45,10 +41,8 @@ public class BasicLayoutTests extends AdsTestTemplate {
         groups={"Ads_Basic_Layout", "Basic_Layout_003"}
     )
     public void TestBasicLayout_UK(String page) {
-        AdsBaseObject mainPage = new AdsBaseObject(driver, page);
-        mainPage.openPage();
-        mainPage.verifyTopLeaderBoardPresent();
-        mainPage.verifyMadrecPresent();;
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyTopLeaderBoardAndMedrec();
     }
 
     @GeoEdgeProxy(country="CA")
@@ -58,9 +52,7 @@ public class BasicLayoutTests extends AdsTestTemplate {
         groups={"Ads_Basic_Layout", "Basic_Layout_004"}
     )
     public void TestBasicLayout_CA(String page) {
-        AdsBaseObject mainPage = new AdsBaseObject(driver, page);
-        mainPage.openPage();
-        mainPage.verifyTopLeaderBoardPresent();
-        mainPage.verifyMadrecPresent();;
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyTopLeaderBoardAndMedrec();
     }
 }

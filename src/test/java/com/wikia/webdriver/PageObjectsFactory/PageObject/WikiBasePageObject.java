@@ -562,14 +562,7 @@ public class WikiBasePageObject extends BasePageObject {
      * @return Boolean
      */
     protected Boolean checkIfMainPage() {
-        Global.LOG_ENABLED = false;
-        try {
-            driver.findElement(By.cssSelector("body.mainpage"));
-        } catch (NoSuchElementException e) {
-            Global.LOG_ENABLED = true;
-            return false;
-        }
-        Global.LOG_ENABLED = true;
-        return true;
+        WebElement body = driver.findElement(By.cssSelector("body"));
+	return (body.getAttribute("class").contains("mainpage"));
     }
 }

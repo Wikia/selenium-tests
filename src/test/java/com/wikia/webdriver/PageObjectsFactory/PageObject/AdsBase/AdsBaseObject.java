@@ -20,16 +20,16 @@ import org.openqa.selenium.support.PageFactory;
 public class AdsBaseObject extends WikiBasePageObject {
 
     private final String anyLeaderboardSelector = "[id$='TOP_LEADERBOARD']";
-    private final String anyMadrecSelector = "[id$='TOP_RIGHT_BOXAD']";
+    private final String anyMedrecSelector = "[id$='TOP_RIGHT_BOXAD']";
     private String presentLeaderboard;
-    private String presentMadrec;
+    private String presentMedrec;
 
     private String wikiPage;
 
     @FindBy (css = anyLeaderboardSelector)
     private WebElement anyLeaderboardContainer;
-    @FindBy (css = anyMadrecSelector)
-    private WebElement anyMadrecContainer;
+    @FindBy (css = anyMedrecSelector)
+    private WebElement anyMedrecContainer;
 
     public AdsBaseObject(WebDriver driver, String page) {
         super(driver, page);
@@ -52,35 +52,45 @@ public class AdsBaseObject extends WikiBasePageObject {
         checkTagsPresent(presentLeaderboard, anyLeaderboardContainer);
     }
 
-    public void verifyMadrecPresent() {
+    public void verifyMedrecPresent() {
         if (checkIfMainPage()) {
-            presentMadrec = AdsContent.homeMadrec;
+            presentMedrec = AdsContent.homeMedrec;
         } else {
-            presentMadrec = AdsContent.madrec;
+            presentMedrec = AdsContent.medrec;
         }
-        waitForElementByElement(anyMadrecContainer);
-        checkScriptPresentInSlot(presentMadrec, anyMadrecContainer);
-        checkTagsPresent(presentMadrec, anyMadrecContainer);
+        waitForElementByElement(anyMedrecContainer);
+        checkScriptPresentInSlot(presentMedrec, anyMedrecContainer);
+        checkTagsPresent(presentMedrec, anyMedrecContainer);
+    }
+
+    public void verifyTopLeaderBoardAndMedrec() {
+	openPage();
+	verifyTopLeaderBoardPresent();
+	verifyMedrecPresent();
     }
 
     private void checkTagsPresent(String slotName, WebElement slotElement) {
+	//Turn off logging exceptions
+	//TimeoutException is meant to be cought
+	//and should not break the test
         Global.LOG_ENABLED  = false;
         try {
             waitForOneOfTagsPresentInElement(slotElement, "img", "iframe");
             PageObjectLogging.log(
                 "IFrameOrImageFound",
-                "Image or iframe was found in slot for 30 seconds",
+                "Image or iframe was found in slot in less then 30 seconds",
                 true,
                 driver
             );
         } catch (TimeoutException e) {
             PageObjectLogging.log(
                 "IFrameOrImgNotFound",
-                "Nor image or iframe was found in slot",
+                "Nor image or iframe was found in slot for 30 seconds",
                 false,
                 driver
             );
         }
+	//Turn on logging
         Global.LOG_ENABLED  = true;
     }
 

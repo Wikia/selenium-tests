@@ -221,8 +221,8 @@ public class BasePageObject{
 	}
 	
 	public void getUrl(String url) {
-            try	{
-                driver.get(url);
+	    try	{
+		driver.get(url);
             } catch(TimeoutException e) {
                 PageObjectLogging.log(
                     "getUrl",
