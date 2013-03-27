@@ -17,6 +17,7 @@ public class Properties {
 		Global.BROWSER = "FF";
 //		Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
 		Global.DOMAIN = "http://preview.mediawiki119.wikia.com/";
+//		Global.DOMAIN = "http://sandbox-qa05.mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
@@ -152,7 +153,7 @@ public class Properties {
 			Global.LOGIN_BY_COOKIE = false;
 		}
 		else{
-			Global.LOGIN_BY_COOKIE = true;
+			Global.LOGIN_BY_COOKIE = false;
 		}
 		Global.LOG_ENABLED = true; 
 	}
