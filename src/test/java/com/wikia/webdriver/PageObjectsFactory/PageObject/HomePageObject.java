@@ -159,6 +159,7 @@ public class HomePageObject extends BasePageObject{
     public CrossWikiSearchPage searchFor(String queryString) {
         searchInput.sendKeys(queryString);
         clickAndWait(searchButton);
+        PageObjectLogging.log("searchFor", "Enter search string \"" + queryString + "\" and click ok.", true, driver);
         return new CrossWikiSearchPage(driver);
     }
 }
