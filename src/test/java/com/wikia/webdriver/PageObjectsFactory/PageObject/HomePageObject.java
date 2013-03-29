@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch.CrossWikiSearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +33,10 @@ public class HomePageObject extends BasePageObject{
 	private WebElement UserNameField;
 	@FindBy(css="div#UserLoginDropdown a.forgot-password")
 	private WebElement ForgotYourPassword;
+    @FindBy(css="#WikiaSearch button.wikia-button")
+    private WebElement searchButton;
+    @FindBy(css="#WikiaSearch input[name='search']")
+    private WebElement searchInput;
 //	@FindBy(css=".wikia-mosaic-slider-panorama")
 //	private WebElement hubsHeroCarousel;
 	
@@ -151,5 +156,9 @@ public class HomePageObject extends BasePageObject{
 		}
 	}
 
-
+    public CrossWikiSearchPage searchFor(String queryString) {
+        searchInput.sendKeys(queryString);
+        clickAndWait(searchButton);
+        return new CrossWikiSearchPage(driver);
+    }
 }
