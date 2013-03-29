@@ -65,6 +65,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement videoAddPlaceholder;
 	@FindBy(css="#WikiaRail .addVideo")
     private WebElement addVideoWikiaRail;
+	@FindBy(css="#SPOTLIGHT_FOOTER_1 a img")
+	private WebElement spotlightImage1;
+	@FindBy(css="#SPOTLIGHT_FOOTER_2 a img")
+	private WebElement spotlightImage2;
+	@FindBy(css="#SPOTLIGHT_FOOTER_3 a img")
+	private WebElement spotlightImage3;
 
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
@@ -570,4 +576,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
         String oldName = getArticleNameFromURL();
         renameArticle(oldName, newName);
     }
+
+	/**
+	 *  @author Michal 'justnpT' Nowierski
+	 */
+	public void verifySpotlightsPresence() {
+		waitForElementByElement(spotlightImage1);
+		waitForElementByElement(spotlightImage2);
+		waitForElementByElement(spotlightImage3);		
+		PageObjectLogging.log("verifySpotlightsPresence", "all 3 spotlights are present", true, driver);
+	}
 }
