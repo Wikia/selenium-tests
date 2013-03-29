@@ -39,7 +39,7 @@ public class CrossWikiSearchTests extends TestTemplate {
     public void crossWikiSearch_005_MainPageExactMatch() {
         verifyExactMatch("cod", "Call of Duty Wiki", "GAMING");
     }
-    @Test(groups= {"CrossWikiSearchTests_005", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
+    @Test(groups= {"CrossWikiSearchTests_006", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
     public void crossWikiSearch_006_MainPageExactMatch() {
         verifyExactMatch("lohgame", "Legacy of Heroes Wiki", "GAMING");
     }

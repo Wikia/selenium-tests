@@ -35,7 +35,7 @@
 			<class name="com.wikia.webdriver.TestCases.Mobile.ArticleCommentTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.SearchTests"/>
-			<class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>
+            <class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogMonoBookTests"/>
@@ -50,6 +50,7 @@
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.ShareToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetAddingVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetProvidersTests"/>
+			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTests"/>
 		</classes>
 	</test>
 </suite>
