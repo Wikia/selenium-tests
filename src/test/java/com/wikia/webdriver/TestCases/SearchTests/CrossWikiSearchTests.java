@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.SearchTests;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.DataProvider.CrossWikiSearchProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch.CrossWikiSearchPage;
@@ -9,6 +10,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBo
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHomePage;
 import org.testng.annotations.Test;
 
 /**
@@ -17,34 +19,13 @@ import org.testng.annotations.Test;
  * Time: 11:22
  */
 public class CrossWikiSearchTests extends TestTemplate {
+    private static final int resultsPerPage = 7;
+    private static final String searchPhrase = "muppets";
 
-
-    @Test(groups= {"CrossWikiSearchTests_001", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
-    public void crossWikiSearch_001_MainPageExactMatch() {
-        verifyExactMatch("call of duty", "Call of Duty Wiki", "GAMING");
-    }
-    @Test(groups= {"CrossWikiSearchTests_002", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
-    public void crossWikiSearch_002_MainPageExactMatch() {
-        verifyExactMatch("call-of-duty", "Call of Duty Wiki", "GAMING");
-    }
-    @Test(groups= {"CrossWikiSearchTests_003", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
-    public void crossWikiSearch_003_MainPageExactMatch() {
-        verifyExactMatch("call_of_duty", "Call of Duty Wiki", "GAMING");
-    }
-    @Test(groups= {"CrossWikiSearchTests_004", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
-    public void crossWikiSearch_004_MainPageExactMatch() {
-        verifyExactMatch("callofduty", "Call of Duty Wiki", "GAMING");
-    }
-    @Test(groups= {"CrossWikiSearchTests_005", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
-    public void crossWikiSearch_005_MainPageExactMatch() {
-        verifyExactMatch("cod", "Call of Duty Wiki", "GAMING");
-    }
-    @Test(groups= {"CrossWikiSearchTests_006", "CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch"} )
-    public void crossWikiSearch_006_MainPageExactMatch() {
-        verifyExactMatch("lohgame", "Legacy of Heroes Wiki", "GAMING");
-    }
-
-    private void verifyExactMatch(String query, String wikiName, String vertical) {
+    @Test(dataProviderClass = CrossWikiSearchProvider.class,
+            dataProvider = "getExactMatchQueries",
+            groups = {"CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch" })
+    public void testExactMatch(String query, String wikiName, String vertical) {
         CommonFunctions.logOut(driver);
         HomePageObject home = new HomePageObject(driver);
         home.openHomePage();
@@ -55,5 +36,44 @@ public class CrossWikiSearchTests extends TestTemplate {
         searchPage.verifyFirstResultPageCount();
         searchPage.verifyFirstResultPageImages();
         searchPage.verifyFirstResultPageVideos();
+    }
+
+    @Test(groups= {"CrossWikiSearchTests_Pagination_001", "CrossWikiSearchTests", "CrossWikiSearchTests_Pagination"} )
+    public void crossWikiSearchTests_Pagination_001() {
+        CommonFunctions.logOut(driver);
+        HomePageObject home = new HomePageObject(driver);
+        home.openHomePage();
+        CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);
+
+        searchPage.verifyResultsPosForPage(0, resultsPerPage);
+        searchPage.verifyResultsCount(resultsPerPage);
+        searchPage.nextPage();
+        searchPage.verifyResultsPosForPage(1, resultsPerPage);
+        searchPage.verifyResultsCount(resultsPerPage);
+        searchPage.prevPage();
+        searchPage.verifyResultsPosForPage(0, resultsPerPage);
+        searchPage.verifyResultsCount(resultsPerPage);
+    }
+
+    @Test(groups= {"CrossWikiSearchTests_ResultClick_001", "CrossWikiSearchTests", "CrossWikiSearchTests_ResultClick"} )
+    public void CrossWikiSearchTests_ResultClick_001() {
+        CommonFunctions.logOut(driver);
+        HomePageObject home = new HomePageObject(driver);
+        home.openHomePage();
+        CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);
+
+        WikiHomePage wikiHomePage = searchPage.openResult(0);
+        wikiHomePage.verifyThisIsWikiHomePage();
+    }
+
+    @Test(groups= {"CrossWikiSearchTests_ResultClick_002", "CrossWikiSearchTests", "CrossWikiSearchTests_ResultClick"} )
+    public void CrossWikiSearchTests_ResultClick_002() {
+        CommonFunctions.logOut(driver);
+        HomePageObject home = new HomePageObject(driver);
+        home.openHomePage();
+        CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);
+
+        WikiHomePage wikiHomePage = searchPage.openResult(1);
+        wikiHomePage.verifyThisIsWikiHomePage();
     }
 }
