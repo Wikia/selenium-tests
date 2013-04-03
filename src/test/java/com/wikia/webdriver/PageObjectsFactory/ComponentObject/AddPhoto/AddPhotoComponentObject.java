@@ -45,7 +45,6 @@ public class AddPhotoComponentObject extends BasePageObject{
 	private void clickSearchButton(){
 		waitForElementByElement(searchButton);
 		searchButton.click();
-		waitForElementByBy(searchThrobber);
 		PageObjectLogging.log("clickSearchButton", "search button clicked", true);
 	}
 	

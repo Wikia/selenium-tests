@@ -137,6 +137,21 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		article.replyComment(PageContent.commentText, PageContent.replyText);
 	}	
 	
+	/**
+	 * creation reason: Jira QAART-64
+	 * @author Michal 'justnpT' Nowierski
+	 * 
+	 */
+	@Test(groups={"ArticleCRUDAnon_006", "ArticleCRUDAnonymous"})
+	public void ArticleCRUDAnon_006_verifySpotlightsPresence()
+	{
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		wiki.openWikiPage();
+		WikiArticlePageObject article = wiki.openRandomArticle();
+		article.verifySpotlightsPresence();
+	}
+	
 	@DataProvider
 	private static final Object[][] getArticleName()
 	{

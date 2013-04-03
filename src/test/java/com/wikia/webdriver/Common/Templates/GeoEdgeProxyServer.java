@@ -1,7 +1,6 @@
 package com.wikia.webdriver.Common.Templates;
 
 import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.XMLFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.util.HashMap;
 import java.util.Map;

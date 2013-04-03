@@ -42,6 +42,9 @@ public class DriverProvider {
                     new InternetExplorerDriver(caps)
                 ).register(listener);
             } else if (Global.BROWSER.contains("FF")) {
+            	if (System.getProperty("os.name").toLowerCase().equals("windows 8")){
+            		System.setProperty("webdriver.firefox.bin", "c:\\Program Files (x86)\\Mozilla Firefox\\Firefox.exe");
+            	}
             	if (Global.BROWSER.contains("CONSOLE")){
             		try{
             			File jsErr = new File("./src/test/resources/Firebug/JSErrorCollector.xpi");
@@ -54,8 +57,9 @@ public class DriverProvider {
             			System.out.println("Error with adding firefox extension");
 					}
             	}
+                caps.setCapability(FirefoxDriver.PROFILE, profile);
                 driver = new EventFiringWebDriver(
-                    new FirefoxDriver(profile)
+                    new FirefoxDriver(caps)
                 ).register(listener);
             } else if (Global.BROWSER.equals("CHROME")) {
                 setChromeProperties();
@@ -126,7 +130,7 @@ public class DriverProvider {
 	 */
 	public static DriverProvider getInstanceFF() {
             PageObjectLogging listener = new PageObjectLogging();
-            driver = new EventFiringWebDriver(new FirefoxDriver()).register(listener);
+            driver = new EventFiringWebDriver(new FirefoxDriver(caps)).register(listener);
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             return instance;
 	}

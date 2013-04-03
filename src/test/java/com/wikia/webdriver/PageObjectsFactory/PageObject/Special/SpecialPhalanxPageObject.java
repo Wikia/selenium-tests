@@ -80,7 +80,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
         PageObjectLogging.log(
             "BlockPresentOnList",
             "Block is present on list",
-            true, driver
+            true
         );
     }
 
@@ -120,7 +120,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
         PageObjectLogging.log(
             "MessageAboutBlockedContentAbsent",
             "Message that content was blocked is not present",
-            true, driver
+            true
         );
     }
 

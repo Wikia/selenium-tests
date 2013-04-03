@@ -34,7 +34,6 @@ public class BlockPageTitleTests extends TestTemplate {
         groups = {"BlockPageTitle_001_SpecialPage", "Phalanx"}
     )
     public void BlockPageTitle_001_SpecialPage (String filterType) {
-        CommonFunctions.logOut(driver);
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
@@ -44,13 +43,14 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
+
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
         special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
-
-        CommonFunctions.logOut(driver);
     }
 
     @Test(
@@ -59,7 +59,6 @@ public class BlockPageTitleTests extends TestTemplate {
         groups = {"BlockPageTitle_002_actionSwitch" , "Phalanx"}
     )
         public void BlockPageTitle_002_actionSwitch (String filterType) {
-        CommonFunctions.logOut(driver);
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
@@ -69,14 +68,15 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
+
         WikiArticleEditMode article = new WikiArticleEditMode(driver, Global.DOMAIN, "");
         article.editArticleByName(blockedContent);
         article.typeInContent(PageContent.articleText);
         article.clickOnPublish();
 
         phalanx.verifyMessageAboutBlockPresent();
-
-        CommonFunctions.logOut(driver);
     }
 
     @Test(
@@ -85,7 +85,6 @@ public class BlockPageTitleTests extends TestTemplate {
         groups = {"BlockPageTitle_003_contribute" , "Phalanx"}
     )
         public void BlockPageTitle_003_contribute (String filterType) {
-        CommonFunctions.logOut(driver);
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
@@ -94,6 +93,9 @@ public class BlockPageTitleTests extends TestTemplate {
         HashMap block = phalanx.addFilterForTitle(filterType);
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
+
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
 
         WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
         base.openWikiPage();
@@ -102,8 +104,6 @@ public class BlockPageTitleTests extends TestTemplate {
         CreateArticleModalComponentObject modal = new CreateArticleModalComponentObject(driver, Global.DOMAIN);
         modal.createPageWithStandardLayout(blockedContent);
         modal.verifyMessageAboutBlockPresent();
-
-        CommonFunctions.logOut(driver);
     }
 
     @Test(
@@ -112,7 +112,6 @@ public class BlockPageTitleTests extends TestTemplate {
         groups = {"BlockPageTitle_004_rename" , "Phalanx"}
     )
         public void BlockPageTitle_004_rename (String filterType) {
-        CommonFunctions.logOut(driver);
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
@@ -122,13 +121,14 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
+
         WikiArticlePageObject base = new WikiArticlePageObject(driver, Global.DOMAIN,"");
         base.openRandomArticle();
         base.renameRandomArticle(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
-
-        CommonFunctions.logOut(driver);
     }
 
     @Test(
@@ -137,7 +137,6 @@ public class BlockPageTitleTests extends TestTemplate {
         groups = {"BlockPageTitle_005_editBlock" , "Phalanx"}
     )
         public void BlockPageTitle_005_editBlock (String filterType) {
-        CommonFunctions.logOut(driver);
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
@@ -147,23 +146,30 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
+
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
         special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap modifiedBlock = phalanx.changeFilterContent(block);
         phalanx.testBlock(modifiedBlock);
         String modifiedBlockedContent = (String) modifiedBlock.get("content");
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
+
         phalanx.openSpecialPage(specialCreatePage);
         special.addPageWithGIvenTitleAndDefaultContent(modifiedBlockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
-
-        CommonFunctions.logOut(driver);
     }
 
     @Test(
@@ -172,7 +178,6 @@ public class BlockPageTitleTests extends TestTemplate {
         groups = {"BlockPageTitle_006_unblockBlock" , "Phalanx"}
     )
         public void BlockPageTitle_006_unblockBlock (String filterType) {
-        CommonFunctions.logOut(driver);
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
@@ -182,20 +187,27 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
+
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
         special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+
         phalanx.openSpecialPage(phalanxSpecialPage);
         phalanx.unblockFilter(blockedContent);
+
+        CommonFunctions.logOut(driver);
+        login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
         special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
-
-        CommonFunctions.logOut(driver);
     }
 }
