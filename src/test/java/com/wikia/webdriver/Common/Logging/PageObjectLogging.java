@@ -21,6 +21,7 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 import com.google.common.base.Throwables;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 
 public class PageObjectLogging implements WebDriverEventListener {
 
@@ -128,6 +129,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 				+ "</td><td>" + description
 				+ "</td><td> <br/> &nbsp;</td></tr>";
 		CommonUtils.appendTextToFile(logPath, s);
+		logJSError(DriverProvider.getWebDriver());
 //		if (!success)
 //		{
 //			Assert.fail(description);
