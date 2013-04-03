@@ -26,7 +26,6 @@ public class CrossWikiSearchTests extends TestTemplate {
             dataProvider = "getExactMatchQueries",
             groups = {"CrossWikiSearchTests", "CrossWikiSearchTests_ExactMatch" })
     public void testExactMatch(String query, String wikiName, String vertical) {
-        CommonFunctions.logOut(driver);
         HomePageObject home = new HomePageObject(driver);
         home.openHomePage();
         CrossWikiSearchPage searchPage = home.searchFor(query);
@@ -38,26 +37,31 @@ public class CrossWikiSearchTests extends TestTemplate {
         searchPage.verifyFirstResultPageVideos();
     }
 
-    @Test(groups= {"CrossWikiSearchTests_Pagination_001", "CrossWikiSearchTests", "CrossWikiSearchTests_Pagination"} )
+    @Test(groups= {"CrossWikiSearchTests_Pagination_001"
+                 , "CrossWikiSearchTests"
+                 , "CrossWikiSearchTests_Pagination"} )
     public void crossWikiSearchTests_Pagination_001() {
-        CommonFunctions.logOut(driver);
         HomePageObject home = new HomePageObject(driver);
         home.openHomePage();
         CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);
 
+        // verify results pos parameter for first page
         searchPage.verifyResultsPosForPage(0, resultsPerPage);
         searchPage.verifyResultsCount(resultsPerPage);
         searchPage.nextPage();
+        // verify results pos parameter for second page
         searchPage.verifyResultsPosForPage(1, resultsPerPage);
         searchPage.verifyResultsCount(resultsPerPage);
         searchPage.prevPage();
+        // verify results pos parameter for first page
         searchPage.verifyResultsPosForPage(0, resultsPerPage);
         searchPage.verifyResultsCount(resultsPerPage);
     }
 
-    @Test(groups= {"CrossWikiSearchTests_ResultClick_001", "CrossWikiSearchTests", "CrossWikiSearchTests_ResultClick"} )
+    @Test(groups= {"CrossWikiSearchTests_ResultClick_001"
+                 , "CrossWikiSearchTests"
+                 , "CrossWikiSearchTests_ResultClick"} )
     public void CrossWikiSearchTests_ResultClick_001() {
-        CommonFunctions.logOut(driver);
         HomePageObject home = new HomePageObject(driver);
         home.openHomePage();
         CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);
@@ -66,9 +70,10 @@ public class CrossWikiSearchTests extends TestTemplate {
         wikiHomePage.verifyThisIsWikiHomePage();
     }
 
-    @Test(groups= {"CrossWikiSearchTests_ResultClick_002", "CrossWikiSearchTests", "CrossWikiSearchTests_ResultClick"} )
+    @Test(groups= {"CrossWikiSearchTests_ResultClick_002"
+                 , "CrossWikiSearchTests"
+                 , "CrossWikiSearchTests_ResultClick"} )
     public void CrossWikiSearchTests_ResultClick_002() {
-        CommonFunctions.logOut(driver);
         HomePageObject home = new HomePageObject(driver);
         home.openHomePage();
         CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);

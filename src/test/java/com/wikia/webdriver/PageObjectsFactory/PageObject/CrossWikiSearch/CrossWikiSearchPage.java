@@ -59,27 +59,27 @@ public class CrossWikiSearchPage extends BasePageObject {
 
     public void verifyFirstResultVertical(String vertical) {
         waitForTextToBePresentInElementByElement(firstResultVertical, vertical);
-        Assertion.assertNotEquals(firstResultVertical.getText().length(), 0, "Vertical (Hub) string is empty.");
+        Assertion.assertFalse(firstResultVertical.getText().isEmpty(), "Vertical (Hub) string is empty.");
     }
 
     public void verifyFirstResultDescription() {
         waitForElementByElement(firstResultVertical);
-        Assertion.assertNotEquals(firstResult.getText().length(), 0, "There is no article description.");
+        Assertion.assertFalse(firstResult.getText().isEmpty(), "There is no article description.");
     }
 
     public void verifyFirstResultPageCount() {
         waitForElementByElement(firstResultStatisticsPageCount);
-        Assertion.assertNotEquals(firstResultStatisticsPageCount.getText().length(), 0, "Page count string is empty.");
+        Assertion.assertFalse(firstResultStatisticsPageCount.getText().isEmpty(), "Page count string is empty.");
     }
 
     public void verifyFirstResultPageImages() {
         waitForElementByElement(firstResultStatisticsPageImages);
-        Assertion.assertNotEquals(firstResultStatisticsPageCount.getText().length(), 0, "Images count is empty.");
+        Assertion.assertFalse(firstResultStatisticsPageImages.getText().isEmpty(), "Images count is empty.");
     }
 
     public void verifyFirstResultPageVideos() {
         waitForElementByElement(firstResultStatisticsPageVideos);
-        Assertion.assertNotEquals(firstResultStatisticsPageCount.getText().length(), 0, "Results count is empty.");
+        Assertion.assertFalse(firstResultStatisticsPageVideos.getText().isEmpty(), "Results count is empty.");
     }
 
     public void verifyResultsCount( int resultsPerPage ) {
