@@ -71,6 +71,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement spotlightImage2;
 	@FindBy(css="#SPOTLIGHT_FOOTER_3 a img")
 	private WebElement spotlightImage3;
+	@FindBy(css="#SPOTLIGHT_FOOTER")
+	private WebElement spotlightFooter;
 
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
@@ -581,6 +583,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 *  @author Michal 'justnpT' Nowierski
 	 */
 	public void verifySpotlightsPresence() {
+		CommonFunctions.scrollToElement(spotlightFooter);
 		waitForElementByElement(spotlightImage1);
 		waitForElementByElement(spotlightImage2);
 		waitForElementByElement(spotlightImage3);		
