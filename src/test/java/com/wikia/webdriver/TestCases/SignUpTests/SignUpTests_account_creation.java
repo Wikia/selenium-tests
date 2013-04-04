@@ -209,44 +209,4 @@ public class SignUpTests_account_creation extends TestTemplate
 		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
 	}
-	
-	@Test(groups = {"SignUp_account_creation_TC_007", "SignUp"})
-	public void SignUp_account_creation_TC_007_forgotYourPassword()
-	{
-		userNameEmail = Properties.emailQaart3;
-		passwordEmail = Properties.emailPasswordQaart3;
-		SignUpPageObject signUp = new SignUpPageObject(driver);
-		timeStamp = signUp.getTimeStamp(); 
-		userName = Properties.userName+timeStamp;
-		password = Properties.password+timeStamp;
-		signUp.openSignUpPage();
-		signUp.typeInEmail(userNameEmail);
-		signUp.typeInUserName(userName);
-		signUp.typeInPassword(password);
-		signUp.enterBirthDate("2", "29", "1988");
-		signUp.enterBlurryWord();
-		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
-		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(userNameEmail, passwordEmail);
-		confirmPageAlmostThere.typeInUserName(userName);
-		confirmPageAlmostThere.typeInPassword(password);
-		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(userNameEmail, passwordEmail);
-		userProfile.verifyUserLoggedIn(userName);
-		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
-		toolbar.verifyUserToolBar();	
-		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
-		CommonFunctions.logOut(driver);
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.openSpecialUserLogin();
-		login.remindPassword(userName);
-		String tempPassword = login.receiveMailWithNewPassowrd();
-		login.login(userName, tempPassword);
-		String newPassword = login.setNewPassword();
-		login.verifyUserLoggedIn(userName);
-		CommonFunctions.logOut(driver);
-		login.openSpecialUserLogin();
-		login.login(userName, password);
-		login.verifyUserLoggedIn(userName);
-		CommonFunctions.logOut(driver);
-	}
 }
