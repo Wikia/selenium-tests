@@ -44,7 +44,7 @@ public class NewWikiaHomePage extends WikiBasePageObject{
 	{
 		waitForElementByElement(congratulationLightBoxCloseButton);
 		clickAndWait(congratulationLightBoxCloseButton);
-		PageObjectLogging.log("closeCongratulationsLightBox ", "Congratulations lightbox closed", true, driver);
+		PageObjectLogging.log("closeCongratulationsLightBox ", "Congratulations lightbox closed", true);
 	}
 	
 	public void verifyUserLoggedIn(String userName)
