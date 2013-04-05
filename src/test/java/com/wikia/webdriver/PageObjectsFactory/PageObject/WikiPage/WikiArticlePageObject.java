@@ -37,6 +37,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement iframe;
 	@FindBy(css="input[id*='article-comm-submit']")
 	private WebElement submitCommentButton;
+	@FindBy(css="#WikiaArticleFooter")
+	private WebElement commentHolder;
 	@FindBy(css="a.article-comm-delete")
 	private WebElement deleteCommentButton;
 	@FindBy(css="span.edit-link a")
@@ -97,7 +99,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void triggerCommentArea()
 	{
-
+		waitForElementByElement(commentHolder);
+		CommonFunctions.scrollToElement(commentHolder);
 		waitForElementByElement(submitCommentButton);
 		waitForElementByElement(commentAreaDisabled);
 		int delay = 500;
