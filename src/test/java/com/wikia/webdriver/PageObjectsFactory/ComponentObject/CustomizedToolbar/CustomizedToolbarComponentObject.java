@@ -51,7 +51,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 		waitForElementByCss("div.toolbar ul.tools li.overflow");
 		waitForElementByCss("div.toolbar ul.tools li.mytools");
 		waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
-		PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true, driver);
+		PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true);
 	}
 	/**
 	 * Clicks on "Customize" button. User must be logged in.
