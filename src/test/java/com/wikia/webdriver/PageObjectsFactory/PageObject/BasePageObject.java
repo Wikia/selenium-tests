@@ -387,6 +387,12 @@ public class BasePageObject{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return (String) js.executeScript("return "+script);
 	}
+	
+	public long executeScriptRetLong(String script)
+	{
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		return (Long) js.executeScript("return "+script);
+	}
 
         public WebElement executeScriptReturnElement(String script) {
                 JavascriptExecutor js = (JavascriptExecutor) driver;

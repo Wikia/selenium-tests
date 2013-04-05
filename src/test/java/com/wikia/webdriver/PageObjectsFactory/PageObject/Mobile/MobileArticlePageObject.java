@@ -1,9 +1,13 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.server.handler.html5.GetLocalStorageItem;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -24,7 +28,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement commentsSectionShowButton;	
 	@FindBy(css=".commSbt.wkBtn.main")
 	private WebElement postCommentButton;
-	@FindBy(css=".wkInp[name='wpArticleComment']")
+	@FindBy(css=".commText[name='wpArticleComment']")
 	private WebElement commentInputArea;
 	@FindBy(css=".cmnRpl")
 	private WebElement replyCommentButton;
@@ -50,7 +54,26 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement imageModalTrigger;
 	@FindBy(xpath="//section[@class='swiperPage current']")
 	private WebElement currentImageModal;
+	@FindBy(css=".toc")
+	private WebElement tocClosed;
+	@FindBy(css=".toc.open")
+	private WebElement tocOpened;
+	@FindBy(css=".toctext")
+	private WebElement tocText;
+	@FindBys(@FindBy(css=".toclevel-1>a"))
+	private List<WebElement> tocLevel1Sections;
+	@FindBys(@FindBy(css=".toclevel-2>a"))
+	private List<WebElement> tocLevel2Sections;
+	@FindBys(@FindBy(css=".toclevel-3>a"))
+	private List<WebElement> tocLevel3Sections;
+	@FindBys(@FindBy(css=".toclevel-4>a"))
+	private List<WebElement> tocLevel4Sections;
+	@FindBy(css="section.artSec.open")
+	private WebElement sectionOpened;	
+
 	
+	//@FindBy(css="h2.collSec")
+	//private WebElement sectionClosed; 
 	
 	private void showCommentsSection(){
 		waitForElementByElement(commentsSectionShowButton);
@@ -70,6 +93,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		commentInputArea.sendKeys(comment);
 		postCommentButton.click();
 		verifyAddedComment(comment);
+		PageObjectLogging.log("addComment", "comment "+comment+" added", true);
 	}
 	
 	private void verifyAddedReplyOnCommentPage(String reply){
@@ -94,10 +118,12 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	{
 		showCommentsSection();
 		waitForElementByElement(loadMoreCommentsButton);
-		loadMoreCommentsButton.click();
+		clickAndWait(loadMoreCommentsButton);
+		//loadMoreCommentsButton.click();
 		waitForElementByElement(loadPreviousCommentsButton);
 		loadPreviousCommentsButton.click();
 		waitForElementByElement(loadMoreCommentsButton);
+		PageObjectLogging.log("verifyPagination", "pagination added", true);
 	}
 	
 	public MobileArticlePageObject openSections(){
@@ -107,17 +133,18 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		return new MobileArticlePageObject(driver);
 	}
 	
+	public MobileArticlePageObject openTOCPage(){
+		getUrl(Global.DOMAIN+"wiki/TOC");
+		waitForElementByElement(tocWrapper);
+		PageObjectLogging.log("openTOC", "TOC page was opened", true, driver);
+		return new MobileArticlePageObject(driver);
+	}
+	
 	public void clickSection(int sectionNumber){		
 		WebElement chev = waitForElementByXPath("//div[@class='mw-content-ltr']/h2["+sectionNumber+"]");
 		chev.click();
 		PageObjectLogging.log("clickSection", "section "+chev.getText()+" clicked", true, driver);
 		
-////		waitForElementByXPath("//div[@class='mw-content-ltr']/h2[@class=' collSec open']");
-//		waitForElementByCss("div.mw-content-ltr h2.collSec.open");
-//		chev.click();
-//		Global.LOG_ENABLED = false;
-//		waitForElementNotVisibleByCss("div.mw-content-ltr h2.collSec.open");
-//		Global.LOG_ENABLED = true;
 	}
 	
 	public void verifySectionVisibility(){
@@ -145,15 +172,79 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		return new MobileArticlePageObject(driver);
 	}
 	
-	public void clickModal(){
+	
+	public MobileModalComponentObject clickModal(){
 		String url = driver.getCurrentUrl();
 		clickAndWait(imageModalTrigger);
 		PageObjectLogging.log("clickModal", "modal trigger clicked", true, driver);		
 		Assertion.assertEquals(url+"#Modal", driver.getCurrentUrl());
 		waitForElementByElement(currentImageModal);
 		PageObjectLogging.log("clickModal", "modal url verified", true, driver);
+		return new MobileModalComponentObject(driver);
 		
 	}
 	
+	public void verifyTocOpened(){
+		waitForElementByElement(tocOpened);
+		PageObjectLogging.log("verifyTocOpened", "verified toc opened", true);
+	}
 	
+	public void verifyTocClosed(){
+		waitForElementByElement(tocClosed);
+		waitForElementNotVisibleByElement(tocOpened);
+		PageObjectLogging.log("verifyTocClosed", "verified toc closed", true);
+	}
+	
+	public void clickChevronToChangeTocState(){
+		waitForElementByElement(tocClosed);
+		tocClosed.click();
+		PageObjectLogging.log("clickChevronToChangeTocState", "toc state changed", true);
+	}
+	
+	public String clickOnLevel1SectionInToc(int number){
+		WebElement tocElement = tocLevel1Sections.get(number);
+		String href = tocElement.getAttribute("href");
+		tocElement.click();
+		PageObjectLogging.log("clickOnLevel1SectionInToc", "toc level 1 clicked", true);
+		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+	}
+	
+	public String clickOnLevel2SectionInToc(int number){
+		WebElement tocElement = tocLevel2Sections.get(number);
+		String href = tocElement.getAttribute("href");
+		tocElement.click();
+		PageObjectLogging.log("clickOnLevel2SectionInToc", "toc level 2 clicked: "+href, true);
+		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+	}
+	
+	public String clickOnLevel3SectionInToc(int number){
+		WebElement tocElement = tocLevel3Sections.get(number);
+		String href = tocElement.getAttribute("href");
+		tocElement.click();
+		PageObjectLogging.log("clickOnLevel3SectionInToc", "toc level 3 clicked: "+href, true);
+		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+	}
+	
+	public String clickOnLevel4SectionInToc(int number){
+		WebElement tocElement = tocLevel4Sections.get(number);
+		String href = tocElement.getAttribute("href");
+		tocElement.click();
+		PageObjectLogging.log("clickOnLevel4SectionInToc", "toc level 4 clicked: "+href, true);
+		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+	}
+	
+	public void verifySectionHeaderOpened(String desiredId){
+		waitForElementByElement(sectionHeaderOpened);
+		String currentId = sectionHeaderOpened.getAttribute("id");
+		Assertion.assertEquals(desiredId, currentId);
+		PageObjectLogging.log("verifySectionHeaderOpened", "header section opened", true);
+	}
+	
+	public void verifySectionOpened(String desiredId, int level){
+		waitForElementByElement(sectionOpened);
+		sectionOpened.findElement(By.cssSelector("h"+level+"#"+desiredId));
+		PageObjectLogging.log("verifySectionLevel" + level + "Opened", "section opened", true);
+	}
+	
+		
 }

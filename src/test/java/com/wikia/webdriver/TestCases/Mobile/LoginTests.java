@@ -22,14 +22,14 @@ public class LoginTests extends TestTemplate{
 		CommonFunctions.logOutMobile(driver);
 	}
 	
-	@Test(groups={"mobile", "mobile_facebook_login"})
+/*	@Test(groups={"mobile", "mobile_facebook_login"})
 	public void LoginFacebook(){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome();
 		mobile.openRandomPage();
 		url = driver.getCurrentUrl();
-		mobile.loginFB(Properties.userNameFB, Properties.passwordFB);
+		mobile.loginFB(Properties.emailFB, Properties.passwordFB);
 		mobile.verifyURLcontains(url);
 		CommonFunctions.logOutMobile(driver);
-	}
+	}*/
 }

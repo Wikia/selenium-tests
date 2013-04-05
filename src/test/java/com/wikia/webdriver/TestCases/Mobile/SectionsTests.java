@@ -27,8 +27,5 @@ public class SectionsTests extends TestTemplate{
 		article.verifySectionInvisibility();
 	}
 	
-	public void Sections_003_contents(){
-		
-	}
-
+	
 }

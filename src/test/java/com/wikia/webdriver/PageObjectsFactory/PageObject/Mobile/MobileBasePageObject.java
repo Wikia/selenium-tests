@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -55,7 +56,12 @@ public class MobileBasePageObject extends BasePageObject {
 	private WebElement searchField;
 	@FindBy(css = "#wkSrhSub")
 	private WebElement searchButton;
-	
+	@FindBy(css = "#wkWrdMrk")
+	protected WebElement wikiaTopPageLogo;
+	@FindBy(css = "#wkCurtain")
+	private WebElement curtain;
+	@FindBy(css="h2.collSec.open")
+	protected WebElement sectionHeaderOpened;
 	
 	 @FindBys(@FindBy(css="ul[id='wkSrhSug'] li[class='show']"))
 	 private List<WebElement> searchSuggestion;
@@ -219,5 +225,23 @@ public class MobileBasePageObject extends BasePageObject {
 		String text = searchSuggestion.get(n).findElement(By.cssSelector("span")).getAttribute("title");
 		addSuggestionButton.get(n).click();
 		Assertion.assertEquals(text, searchField.getAttribute("value"));
+	}
+	
+	public long getPosition()
+	{
+		return (Long) executeScriptRetLong("window.pageYOffset");
+	}
+	
+	public void clickOnWikiaTopPageLogo(){
+		waitForElementByElement(wikiaTopPageLogo);
+		clickActions(wikiaTopPageLogo);
+	}
+	
+	public void verifyCurtainOpened(){
+		Assertion.assertEquals("block", curtain.getCssValue("display"));
+	}
+	
+	public void verifyCurtainClosed(){
+		Assertion.assertEquals("none", curtain.getCssValue("display"));
 	}
 }
