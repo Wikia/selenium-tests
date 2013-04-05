@@ -170,6 +170,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	private void clickReplyCommentButton(String comment)
 	{
+		CommonFunctions.scrollToElement(commentHolder);
 		waitForElementByXPath("//p[contains(text(), '"+comment+"')]//..//..//button[contains(text(), 'Reply')]");
 		jQueryClick(".article-comm-reply");
 		waitForElementByElement(iframe);
