@@ -223,7 +223,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void editComment(String comment)
 	{
-		driver.navigate().refresh();
+		refreshPage();
+		CommonFunctions.scrollToElement(commentHolder);
 		waitForElementByElement(replyCommentButton);
 		clickEditCommentButton();
 	}
