@@ -3,8 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHomePage;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -100,10 +99,10 @@ public class CrossWikiSearchPage extends BasePageObject {
         }
     }
 
-    public WikiHomePage openResult(int no) {
+    public WikiArticleHomePage openResult(int no) {
         WebElement webElement = getResultWikiNameLink(no);
         clickAndWait(webElement);
-        return new WikiHomePage(driver);
+        return new WikiArticleHomePage(driver);
     }
 
     public CrossWikiSearchPage prevPage() {

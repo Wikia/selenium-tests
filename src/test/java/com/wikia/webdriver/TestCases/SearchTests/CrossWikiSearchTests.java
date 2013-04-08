@@ -1,16 +1,10 @@
 package com.wikia.webdriver.TestCases.SearchTests;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.DataProvider.CrossWikiSearchProvider;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch.CrossWikiSearchPage;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHomePage;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHomePage;
 import org.testng.annotations.Test;
 
 /**
@@ -66,8 +60,8 @@ public class CrossWikiSearchTests extends TestTemplate {
         home.openHomePage();
         CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);
 
-        WikiHomePage wikiHomePage = searchPage.openResult(0);
-        wikiHomePage.verifyThisIsWikiHomePage();
+        WikiArticleHomePage wikiArticleHomePage = searchPage.openResult(0);
+        wikiArticleHomePage.verifyThisIsWikiHomePage();
     }
 
     @Test(groups= {"CrossWikiSearchTests_ResultClick_002"
@@ -78,7 +72,7 @@ public class CrossWikiSearchTests extends TestTemplate {
         home.openHomePage();
         CrossWikiSearchPage searchPage = home.searchFor(searchPhrase);
 
-        WikiHomePage wikiHomePage = searchPage.openResult(1);
-        wikiHomePage.verifyThisIsWikiHomePage();
+        WikiArticleHomePage wikiArticleHomePage = searchPage.openResult(1);
+        wikiArticleHomePage.verifyThisIsWikiHomePage();
     }
 }
