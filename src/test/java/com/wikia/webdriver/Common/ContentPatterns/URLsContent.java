@@ -1,5 +1,7 @@
 package com.wikia.webdriver.Common.ContentPatterns;
 
+import com.wikia.webdriver.Common.Core.Global;
+
 public class URLsContent {
 
 	//Image lightbox test page
@@ -54,6 +56,8 @@ public class URLsContent {
 	// replace %user% with username
 	public static final String userPrefix = "User:%user%";
 
+	public static final String apiUrl = Global.DOMAIN + "api.php";
+	
 	public static String buildUrl(String url, String parameter) {
 		String temp;
 		if (url.contains("?")) {

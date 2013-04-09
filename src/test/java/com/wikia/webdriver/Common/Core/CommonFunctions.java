@@ -31,6 +31,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -554,5 +556,16 @@ public class CommonFunctions {
 			}
 		}
 	}
+	
+	public static String resetForgotPasswordTime(String userName){
+		String[][] apiRequestParameters = {
+				{"action", ApiActions.apiActionForgotPassword},
+				{"user", userName},
+				{"token", Properties.apiToken},
+				{"format", "json"},
+		};
+		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
+	}
+	
 
 }

@@ -1,11 +1,14 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -132,6 +135,9 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	 * @param name
 	 */
 	public void remindPassword(String name){
+    	Assertion.assertEquals(
+    			ApiActions.apiActionForgotPasswordResponse, 
+    			CommonFunctions.resetForgotPasswordTime(name));
             typeInUserName(name);
             clickForgotPasswordLink();
 	}

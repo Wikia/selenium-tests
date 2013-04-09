@@ -68,19 +68,20 @@ public class Properties {
 
 	public static String userNameFB;
 	public static String passwordFB;
-        public static String emailFB;
+	public static String emailFB;
 
 	public static String userNameBlocked;
 	public static String passwordBlocked;
 
-        public static String userNameForgottenPassword;
-        public static String userNameForgottenPassword2;
-
-        public static String geoEdgeUserName;
-        public static String geoEdgeUserPass;
-
-        private static void setVariables()
-	{
+	public static String userNameForgottenPassword;
+	public static String userNameForgottenPassword2;
+	
+	public static String geoEdgeUserName;
+	public static String geoEdgeUserPass;
+	
+	public static String apiToken;
+	
+	private static void setVariables(){	
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
 		
@@ -106,7 +107,7 @@ public class Properties {
 
 		emailFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.email");
 		passwordFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.password");
-                userNameFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.username");
+		userNameFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.username");
 
 		email = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.username");
 		emailPassword = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.password");
@@ -128,16 +129,18 @@ public class Properties {
 
 		geoEdgeUserName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.userName");
 		geoEdgeUserPass = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.password");
+		
+		apiToken = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.api.token");
 	}
 
-        public static void setProperties() {
-            Global.RUN_BY_MAVEN = "true".equals(System.getProperty("run_mvn"));
-            if (Global.RUN_BY_MAVEN) {
-                getPropertiesFromPom();
-            } else {
-                setPropertiesManually();
-            }
-            setVariables();
+	public static void setProperties() {
+		Global.RUN_BY_MAVEN = "true".equals(System.getProperty("run_mvn"));
+		if (Global.RUN_BY_MAVEN) {
+			getPropertiesFromPom();
+		} else {
+			setPropertiesManually();
+		}
+		setVariables();
 	}
 
 	private static void getPropertiesFromPom()
