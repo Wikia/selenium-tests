@@ -143,6 +143,7 @@ public class ArticleRTETest extends TestTemplate{
 				// BugId:95911
 				"{|\n|-\n|\nfirst\n\nsecond\n|}",
 				"{|\n|-\n| '''Text'''\n\nText\n|}",
+				"{|\n|-\n|\nfirst\n\nsecond\n\nthird\n|}",
 				// BugId:98729
 				"{|\n|\n----\nfoo\n|\n\n----\nfoo\n|}",
 				// links
