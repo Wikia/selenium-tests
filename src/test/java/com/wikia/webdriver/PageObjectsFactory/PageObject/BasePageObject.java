@@ -22,6 +22,7 @@ import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -100,7 +101,7 @@ public class BasePageObject{
 	WebElement emailModalEmailInputField;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
-	@FindBy(css = "#AccountNavigation a[href*='User:']")
+	@FindBy(css="#AccountNavigation a[href*='User:']")
 	protected WebElement userProfileLink;
 
 	
@@ -887,7 +888,8 @@ public class BasePageObject{
      * @param userName
      */
     public void verifyUserLoggedIn(String userName) {
-        waitForElementByElement(userProfileLink);
+        refreshPage();
+    	waitForElementByElement(userProfileLink);
         userName = purifyUserName(userName);
         waitForTextToBePresentInElementByElement(
             userProfileLink, userName
