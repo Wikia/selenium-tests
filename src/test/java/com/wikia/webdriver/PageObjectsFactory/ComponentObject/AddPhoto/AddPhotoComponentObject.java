@@ -19,7 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
  */
 public class AddPhotoComponentObject extends BasePageObject{
 
-	@FindBy(css=".WikiaSearch input[name='search']")
+	@FindBy(css=".WikiaSearch#WikiaPhotoGallerySearch input[name='search']")
 	private WebElement searchField; 
 	@FindBy(css="#WikiaPhotoGallerySearch img.search")
 	private WebElement searchButton; 

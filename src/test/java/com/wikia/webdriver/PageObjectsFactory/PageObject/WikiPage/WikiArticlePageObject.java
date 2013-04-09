@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -75,6 +77,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement spotlightImage3;
 	@FindBy(css="#SPOTLIGHT_FOOTER")
 	private WebElement spotlightFooter;
+	@FindBy(css=".wikia-photogallery-add")
+	private WebElement addPhotoToGalleryButton;
+	@FindBy(css=".wikia-slideshow-addimage")
+	private WebElement addPhotoToSlideShowButton;
 
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
@@ -593,5 +599,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(spotlightImage2);
 		waitForElementByElement(spotlightImage3);		
 		PageObjectLogging.log("verifySpotlightsPresence", "all 3 spotlights are present", true, driver);
+	}
+	
+	public GalleryBuilderComponentObject clickAddPhotoToGallery(){
+		addPhotoToGalleryButton.click();
+		return new GalleryBuilderComponentObject(driver);
+	}
+	public SlideshowBuilderComponentObject clickAddPhotoToSlideshow(){
+		addPhotoToSlideShowButton.click();
+		return new SlideshowBuilderComponentObject(driver);
 	}
 }

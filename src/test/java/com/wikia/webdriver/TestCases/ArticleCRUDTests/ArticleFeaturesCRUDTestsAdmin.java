@@ -52,6 +52,17 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheObjectOnThePreview("gallery");
 		WikiArticlePageObject article = edit.clickOnPublishButtonPreview();
 		article.verifyObjectOnThePage("gallery");
+		galleryBuiler = article.clickAddPhotoToGallery();
+		galleryAddPhoto = galleryBuiler.clickAddPhoto();
+		galleryAddPhoto.search("image");
+		galleryAddPhoto.choosePhotos(2);
+		galleryAddPhoto.clickSelect();
+		galleryBuiler.adjustPosition("Center");
+		galleryBuiler.adjustColumns("2");
+		galleryBuiler.adjustSpacing("Small");
+		galleryBuiler.adjustOrientation(Orientation.landscape);
+		galleryBuiler.clickFinish();
+		article.verifyObjectOnThePage("gallery");
 	}
 	
 	@Test(groups={"ArticleFeaturesCRUDAdmin_002", "ArticleFeaturesCRUDAdmin"}) 
@@ -154,6 +165,14 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPreviewButton();
 		edit.verifyTheObjectOnThePreview("slideshow");
 		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
+		article.verifyObjectOnThePage("slideshow");
+		slideshowBuilder = article.clickAddPhotoToSlideshow();
+		slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
+		slideshowAddPhoto.search("image");
+		slideshowAddPhoto.choosePhotos(4);
+		slideshowAddPhoto.clickSelect();
+		slideshowBuilder.adjustPosition(Positions.Center);
+		slideshowBuilder.clickFinish();
 		article.verifyObjectOnThePage("slideshow");
 	}
 	
