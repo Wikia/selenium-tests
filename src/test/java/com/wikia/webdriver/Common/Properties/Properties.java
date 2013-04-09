@@ -25,7 +25,7 @@ public class Properties {
 		{
 			Global.LOGIN_BY_COOKIE = false;
 		}
-		else{
+		else {
 			Global.LOGIN_BY_COOKIE = true;
 		}
 		Global.LOG_ENABLED = true;

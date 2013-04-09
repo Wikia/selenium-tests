@@ -7,8 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 
-import javax.swing.RepaintManager;
-
 import org.browsermob.core.har.Har;
 import org.browsermob.core.har.HarEntry;
 import org.browsermob.core.har.HarNameValuePair;
@@ -121,7 +119,7 @@ public class DiffTest extends TestTemplate {
 			}
 			else
 			{
-				System.out.println("WARN Timings are null");				
+				System.out.println("WARN Timings are null");
 				//harEntry = new HarEntry();
 				//System.out.println("WARNING, MAGIC AHEAD: HarEntry was manually created to avoid NullPointers in further tests!");
 			}

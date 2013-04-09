@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 //http://code.google.com/p/selenium/source/browse/trunk/java/client/src/org/openqa/selenium/support/ui/ExpectedConditions.java
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -329,13 +330,36 @@ public class CommonExpectedConditions {
         return new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver f) {
-                return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
+                return (driver.findElements(By.cssSelector(cssSelector)).isEmpty());
             }
             @Override
             public String toString() {
                 return String.format(
                     "Element with ('%s') selector still present!",
                     cssSelector
+                );
+            }
+        };
+    }
+
+    /**
+     *
+     * @param xpathSelector
+     * @return
+     */
+    public static ExpectedCondition<Boolean> elementNotPresentByXpath(
+        final String xpathSelector
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+		return (driver.findElements(By.xpath(xpathSelector)).isEmpty());
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "Element with ('%s') selector still present!",
+                    xpathSelector
                 );
             }
         };

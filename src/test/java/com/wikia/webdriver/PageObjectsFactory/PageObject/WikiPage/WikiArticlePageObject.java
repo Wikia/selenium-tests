@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -20,9 +19,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class WikiArticlePageObject extends WikiBasePageObject {
-	
+
 	protected String articlename;
-	
+	private String commentTextXpath = "//blockquote//p[contains(text(), '%comment%')]";
+	private final String submitCommentSelector = "input[id*='article-comm-submit']";
+	private final String commentAreaSelector = "#article-comm";
+
 	@FindBy(css="div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
 	@FindBy(css="section.RelatedVideosModule")
@@ -35,7 +37,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement editCommentArea;
 	@FindBy(css="div.cke_contents iframe")
 	private WebElement iframe;
-	@FindBy(css="input[id*='article-comm-submit']")
+	@FindBy(css=submitCommentSelector)
 	private WebElement submitCommentButton;
 	@FindBy(css="a.article-comm-delete")
 	private WebElement deleteCommentButton;
@@ -51,7 +53,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement categories_CategoryInputField;
 	@FindBy(css="#CategorySelectSave")
 	private WebElement categories_saveButton;
-	@FindBy(css="textarea#article-comm")
+	@FindBy(css=commentAreaSelector)
 	private WebElement commentAreaDisabled;
 	@FindBy(css=".article-comm-reply")
 	private WebElement replyCommentButton;
@@ -86,37 +88,19 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public String getPageName(){
 		return this.articlename;
 	}
-	
-	public void triggerCommentArea()
-	{
 
-		waitForElementByElement(submitCommentButton);
-		waitForElementByElement(commentAreaDisabled);
-		int delay = 500;
-		int sumDelay = 500;
-		while (commentAreaDisabled.isDisplayed())
-		{
-			try {
-				Thread.sleep(delay);
-				jQueryFocus("textarea#article-comm");				
-			}
-			catch(WebDriverException e){
-				PageObjectLogging.log("triggerCommentArea", "comment are visible after "+delay+" ms", true);
-			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			sumDelay+=500;
-			if (sumDelay > 3000)
-			{
-				break;
-			}
-		}
-
+	public void triggerCommentArea() {
+		waitForElementPresenceByBy(By.cssSelector(submitCommentSelector));
+		waitForElementPresenceByBy(By.cssSelector(commentAreaSelector));
+		waitForElementVisibleByElement(commentAreaDisabled);
+		commentAreaDisabled.click();
 		waitForElementByElement(iframe);
-		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
+		PageObjectLogging.log(
+		    "triggerCommentArea", "comment area triggered",
+		    true, driver
+		);
 	}
-	
+
 	public void writeOnCommentArea(String comment)
 	{
 		driver.switchTo().frame(iframe);
@@ -127,7 +111,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 			((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + comment + "'");
 		}
 		else
-		{			
+		{
 			editCommentArea.sendKeys(comment);
 		}
 		driver.switchTo().defaultContent();
@@ -147,7 +131,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void verifyCommentText(String message, String userName)
 	{
-		waitForElementByXPath("//blockquote//p[contains(text(), '"+message+"')]");
+		waitForElementByXPath(commentTextXpath.replace("%comment%", message));
 		waitForElementByXPath("//div[@class='edited-by']//a[contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("verifyComment", "comment: "+message+" is visible", true, driver);
 	}
@@ -184,13 +168,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		refreshPage();
 		clickReplyCommentButton(comment);
 		writeReply(reply);
-		PageObjectLogging.log("reply comment", "reply comment written and checked", true, driver);
+		PageObjectLogging.log("reply comment", "reply comment written and checked", true);
 	}
 
 	private void clickDeleteCommentButton()
 	{
 		executeScript("document.querySelectorAll('.article-comm-delete')[0].click()");
-		PageObjectLogging.log("clickDeleteCommentButton", "delete comment button clicked", true, driver);
+		PageObjectLogging.log("clickDeleteCommentButton", "delete comment button clicked", true);
 	}
 	
 	private void clickEditCommentButton()
@@ -198,7 +182,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
 		executeScript("document.querySelectorAll('.article-comm-edit')[0].click()");
 		waitForElementByElement(iframe);
-		PageObjectLogging.log("clickEditCommentButton", "edit comment button clicked", true, driver);
+		PageObjectLogging.log("clickEditCommentButton", "edit comment button clicked", true);
 	}
 	
 	public void deleteComment(String comment)
@@ -208,7 +192,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		clickCommentDeleteConfirmationButton();
 		PageObjectLogging.log("deleteComment", "comment deleted", true, driver);
 	}
-	
+
+	public void addComment(String commentContent) {
+	    triggerCommentArea();
+	    writeOnCommentArea(commentContent);
+	    clickSubmitButton();
+	}
+
 	public void editComment(String comment)
 	{
 		driver.navigate().refresh();
@@ -569,5 +559,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
     public void renameRandomArticle(String newName) {
         String oldName = getArticleNameFromURL();
         renameArticle(oldName, newName);
+    }
+
+    public void verifyCommentTextNotPresent(String commentContent) {
+	waitForElementNotPresentByXpath(commentTextXpath.replace("%comment%", commentContent));
+	PageObjectLogging.log(
+	    "commentNotFound", "Comment not found", true
+	);
     }
 }

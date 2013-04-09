@@ -1,26 +1,28 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockPageObject;
 
 public class BlogPageObject extends WikiArticlePageObject{
 
 	@FindBy(css="div.author-details")
 	private WebElement usernameField;
-	
+	@FindBy(css="a[data-id='createblogpost']")
+	private WebElement createBlogPostButton;
+
 	By image = By.cssSelector("img");
 	By firstSpan = By.cssSelector("span:nth-child(2) a");
 	By secondSpan = By.cssSelector("span:nth-child(3)");
 	By thirdSpan = By.cssSelector("span:nth-child(4) a");
-	
+
 	public BlogPageObject(WebDriver driver, String Domain, String wikiArticle) {
 		super(driver, Domain, wikiArticle);
 		PageFactory.initElements(driver, this);
@@ -36,7 +38,7 @@ public class BlogPageObject extends WikiArticlePageObject{
 		waitForTextToBePresentInElementByElement(usernameField.findElement(thirdSpan), "User blog:"+userName);
 		PageObjectLogging.log("verifyUsernameFieldPresent ", "verify that Username Field and all its element are presesnt", true, driver);			
 	}
-	
+
 	public SpecialCreateBlogPageObject editBlog(){
 		getUrl(driver.getCurrentUrl()+"?action=edit");
 		PageObjectLogging.log("editBlog", "blog is in edit mode now", true, driver);
@@ -50,13 +52,7 @@ public class BlogPageObject extends WikiArticlePageObject{
 		PageObjectLogging.log("deleteArticle", "article has been deleted",
 				true, driver);
 	}
-	
-	public BlogPageObject openBlogPage(String userName){
-		getUrl(Global.DOMAIN+"/User_blog:"+userName);
-		PageObjectLogging.log("openBlogPage", "blog page opened", true, driver);
-		return new BlogPageObject(driver, userName, "");
-	}
-	
+
 	public void followBlogPage(String userName){
 		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=watch");
 		clickAndWait(followSubmit);
@@ -75,7 +71,17 @@ public class BlogPageObject extends WikiArticlePageObject{
 		clickAndWait(followSubmit);
 		waitForElementByElement(unfollowedButton);
 	}
-	
-	
+
+	public SpecialCreateBlogPageObject clickOnCreateBlogPost() {
+	    waitForElementByElement(createBlogPostButton);
+	    waitForElementClickableByElement(createBlogPostButton);
+	    clickAndWait(createBlogPostButton);
+	    PageObjectLogging.log(
+		"clickOnCreateBlogPost",
+		"Click on create blog post button",
+		true
+	    );
+	    return new SpecialCreateBlogPageObject(driver, Domain, articlename);
+	}
 
 }

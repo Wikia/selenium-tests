@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Trash;
 
+import com.wikia.webdriver.Common.Properties.Properties;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -7,7 +8,9 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class testing
 {
@@ -163,12 +166,23 @@ public class testing
 //		driver.get("http://mediawiki119.wikia.com/wiki/Formatting");
 //		JavascriptExecutor js = (JavascriptExecutor) driver;
 //		Object aaa = js.executeScript("return document.getElementById('WikiaPageHeader')");
-        @Test(groups={"vv"})
-        public void raises() {
-            WebDriver driver = new FirefoxDriver();
-            driver.get("http://wikia.com");
-                driver.findElement(By.cssSelector(".bognix"));
-        }
+//        @Test(groups={"vv"})
+//        public void raises() {
+//            WebDriver driver = new FirefoxDriver();
+//            driver.get("http://wikia.com");
+//                driver.findElement(By.cssSelector(".bognix"));
+//        }
+	
+	@Test(groups="aa")
+	public void test(){
+	    WebDriver driver = new FirefoxDriver();
+	    driver.get("http://mediawiki119.wikia.com/wiki/User:"+Properties.userName);
+	    CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+	    driver.get("http://mediawiki119.wikia.com/wiki/User:"+Properties.userName);
+	    WebElement e = driver.findElement(By.cssSelector(".details"));
+	    Actions a = new Actions(driver);
+	    a.moveToElement(e).build().perform();
+    }
 }
 	
 	

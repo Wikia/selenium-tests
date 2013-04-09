@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,11 +22,10 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 	private WebElement publishButtonGeneral;
 	
 	public SpecialCreateBlogPageObject(WebDriver driver, String Domain,
-			String wikiArticle) {
-		super(driver, Domain, wikiArticle);
-		this.articlename = wikiArticle;
+			String blogPostTitle) {
+		super(driver, Domain, blogPostTitle);
+		this.articlename = blogPostTitle;
 		PageFactory.initElements(driver, this);
-	
 	}
 
 	/**
@@ -35,8 +35,7 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		waitForElementByElement(blogTitleInput);
 		waitForElementClickableByElement(blogTitleInput);
 		blogTitleInput.sendKeys(blogPostTitle);
-		PageObjectLogging.log("typeBlogPostTitle", "type title to blog post: <b>"+blogPostTitle+"</b>", true, driver);		
-		
+		PageObjectLogging.log("typeBlogPostTitle", "type title to blog post: <b>"+blogPostTitle+"</b>", true, driver);
 	}
 
 	/**
@@ -46,25 +45,40 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		waitForElementByElement(okButton);
 		waitForElementClickableByElement(okButton);
 		clickAndWait(okButton);
-		PageObjectLogging.log("clickOk", "click OK button", true, driver);		
+		PageObjectLogging.log("clickOk", "click OK button", true, driver);
 	}
-	
+
 	public BlogPageObject clickOnPublishButton() {
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-//		clickAndWait(publishButtonGeneral);
 		jQueryClick("input.control-button");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
 		return new BlogPageObject(driver, Domain, articlename);
 	}
-	
+
 	public SpecialCreateBlogPageObject createBlogFormUrl(String blogPostTitle){
 		getUrl(Global.DOMAIN+"wiki/Special:CreateBlogPage");
 		typeBlogPostTitle(blogPostTitle);
 		clickOk();
 		return new SpecialCreateBlogPageObject(driver, this.Domain, blogPostTitle);
+	}
+
+	public void createBlogPost(String title, String content) {
+	    typeBlogPostTitle(title);
+	    clickOk();
+	    typeInContent(content);
+	    clickOnPublishButton();
+	}
+
+	public void createBlogPostWithDefaultContent(String title) {
+	    createBlogPost(title, PageContent.blogContent);
+	}
+
+	public void createBlogPostWithDefaultTitle(String content) {
+	    String defaultTitle = PageContent.blogPostNamePrefix + getTimeStamp();
+	    createBlogPost(defaultTitle, content);
 	}
 }

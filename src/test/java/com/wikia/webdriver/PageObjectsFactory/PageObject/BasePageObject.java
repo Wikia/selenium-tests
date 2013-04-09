@@ -100,11 +100,9 @@ public class BasePageObject{
 	WebElement emailModalEmailInputField;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
-	@FindBy(css = "#AccountNavigation a[href*='User:']")
+	@FindBy(css = "#AccountNavigation > li > a")
 	protected WebElement userProfileLink;
 
-	
-	
 	public BasePageObject(WebDriver driver)
 	{
 		this.driver = driver;
@@ -341,7 +339,7 @@ public class BasePageObject{
 	
 	public void mouseOver(String cssSelecotr)
 	{
-		executeScript("$('"+cssSelecotr+"').mouseenter()");
+	    executeScript("$('"+cssSelecotr+"').mouseenter()");
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
@@ -358,8 +356,13 @@ public class BasePageObject{
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	public void hoverElement(WebElement element) {
+	    Actions actionObject = new Actions(driver);
+	    actionObject.moveToElement(element);
+	    actionObject.build().perform();
+	}
+
 	public void jQueryClick(String cssSelector)
 	{
 		executeScript("$('"+cssSelector+"').click()");
@@ -491,7 +494,7 @@ public class BasePageObject{
 	 * @param element
 	 */
 	public void waitForElementVisibleByElement(WebElement element) {
-		wait.until(CommonExpectedConditions.elementVisible(element));
+	    wait.until(CommonExpectedConditions.elementVisible(element));
 	}
 
 	public WebElement waitForElementByCss(String cssSelector)
@@ -909,7 +912,18 @@ public class BasePageObject{
             CommonExpectedConditions.elementNotPresent(cssSelector)
         );
     }
-    
+
+    /**
+     * Wait for element to not be present in DOM
+     *
+     * @param xpathSelector
+     */
+    public void waitForElementNotPresentByXpath(final String xpathSelector) {
+        wait.until(
+            CommonExpectedConditions.elementNotPresentByXpath(xpathSelector)
+        );
+    }
+
     /**
      * Wait for element to not be present in DOM
      * @param selector
@@ -950,6 +964,12 @@ public class BasePageObject{
         wait.until(
             CommonExpectedConditions.oneOfTagsPresentInElement(slot, tagNameOne, tagNameTwo)
         );
+    }
+
+    public void showElementHackyWay(String selector) {
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	String script = "$('#userIdentityBoxEdit').css('display', 'block')";
+	js.executeScript(script);
     }
 
     /**

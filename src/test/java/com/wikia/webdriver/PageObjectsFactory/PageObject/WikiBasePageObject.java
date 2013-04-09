@@ -12,17 +12,20 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
@@ -540,6 +543,23 @@ public class WikiBasePageObject extends BasePageObject {
             );
         }
 
+	public BlogPageObject openBlogPage(String userName){
+	    String url = Global.DOMAIN + URLsContent.userBlog.replace(
+		"%user%", userName
+	    );
+	    getUrl(url);
+	    PageObjectLogging.log("openBlogPage", "blog page opened", true);
+	    return new BlogPageObject(driver, userName, "");
+	}
+
+	public UserProfilePageObject openUserProfile(String userName) {
+	    String url = Global.DOMAIN + URLsContent.userPrefixUrl.replace(
+		"%user%", userName
+	    );
+	    getUrl(url);
+	    PageObjectLogging.log("openUserPage", "user page opened", true);
+	    return new UserProfilePageObject(driver);
+	}
         public String receiveMailWithNewPassowrd() {
             MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
             String newPassword = MailFunctions.getPasswordFromMailContent((

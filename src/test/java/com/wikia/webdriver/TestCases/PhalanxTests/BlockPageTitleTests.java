@@ -31,7 +31,7 @@ public class BlockPageTitleTests extends TestTemplate {
     @Test(
         dataProviderClass=PhalanxDataProvider.class,
         dataProvider="getFilterTypes",
-        groups = {"BlockPageTitle_001_SpecialPage", "Phalanx"}
+        groups = {"BlockPageTitle_001_SpecialPage", "PhalanxTitle", "Phalanx"}
     )
     public void BlockPageTitle_001_SpecialPage (String filterType) {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -48,7 +48,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
     }
@@ -56,7 +56,7 @@ public class BlockPageTitleTests extends TestTemplate {
     @Test(
         dataProviderClass=PhalanxDataProvider.class,
         dataProvider="getFilterTypes",
-        groups = {"BlockPageTitle_002_actionSwitch" , "Phalanx"}
+        groups = {"BlockPageTitle_002_actionSwitch", "PhalanxTitle", "Phalanx"}
     )
         public void BlockPageTitle_002_actionSwitch (String filterType) {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -82,7 +82,7 @@ public class BlockPageTitleTests extends TestTemplate {
     @Test(
         dataProviderClass=PhalanxDataProvider.class,
         dataProvider="getFilterTypes",
-        groups = {"BlockPageTitle_003_contribute" , "Phalanx"}
+        groups = {"BlockPageTitle_003_contribute", "PhalanxTitle", "Phalanx"}
     )
         public void BlockPageTitle_003_contribute (String filterType) {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -109,7 +109,7 @@ public class BlockPageTitleTests extends TestTemplate {
     @Test(
         dataProviderClass=PhalanxDataProvider.class,
         dataProvider="getFilterTypes",
-        groups = {"BlockPageTitle_004_rename" , "Phalanx"}
+        groups = {"BlockPageTitle_004_rename", "PhalanxTitle", "Phalanx"}
     )
         public void BlockPageTitle_004_rename (String filterType) {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -134,7 +134,7 @@ public class BlockPageTitleTests extends TestTemplate {
     @Test(
         dataProviderClass=PhalanxDataProvider.class,
         dataProvider="getFilterTypes",
-        groups = {"BlockPageTitle_005_editBlock" , "Phalanx"}
+        groups = {"BlockPageTitle_005_editBlock", "PhalanxTitle", "Phalanx"}
     )
         public void BlockPageTitle_005_editBlock (String filterType) {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -151,7 +151,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
@@ -167,7 +167,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        special.addPageWithGIvenTitleAndDefaultContent(modifiedBlockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(modifiedBlockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
     }
@@ -175,7 +175,7 @@ public class BlockPageTitleTests extends TestTemplate {
     @Test(
         dataProviderClass=PhalanxDataProvider.class,
         dataProvider="getFilterTypes",
-        groups = {"BlockPageTitle_006_unblockBlock" , "Phalanx"}
+        groups = {"BlockPageTitle_006_unblockBlock", "PhalanxTitle", "Phalanx"}
     )
         public void BlockPageTitle_006_unblockBlock (String filterType) {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -192,7 +192,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
@@ -206,7 +206,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
     }

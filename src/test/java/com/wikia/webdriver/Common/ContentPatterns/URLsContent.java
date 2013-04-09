@@ -53,6 +53,7 @@ public class URLsContent {
 	public static final String addArticle = "index.php?title=%title%&action=edit";
 	// replace %user% with username
 	public static final String userPrefix = "User:%user%";
+	public static final String userPrefixUrl = "wiki/User:%user%";
 
 	public static String buildUrl(String url, String parameter) {
 		String temp;

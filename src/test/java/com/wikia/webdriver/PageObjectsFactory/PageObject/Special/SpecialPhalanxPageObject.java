@@ -31,8 +31,10 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
     private WebElement typeCase;
     @FindBy (css = "#wpPhalanxFormatExact")
     private WebElement typeExact;
-    @FindBy (xpath = "//label[text()[contains(.,'page title')]]//input")
+    @FindBy (xpath = "//form[@id='phalanx-block']//label[text()[contains(.,'page title')]]//input")
     private WebElement blockTitleCheckbox;
+    @FindBy (xpath = "//form[@id='phalanx-block']//label[text()[contains(.,'page content')]]//input")
+    private WebElement blockContentCheckbox;
     @FindBy (css = "#phalanx-block-test #phalanx-block-text")
     private WebElement testTextInput;
     @FindBy (css = "#phalanx-block-optionals #wpPhalanxSubmit")
@@ -41,6 +43,8 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
     private WebElement submitTestFilter;
     @FindBy (css = blockMessageContainerLocator)
     private WebElement phalanxBlockMessageContainer;
+    @FindBy (css = "[id^='phalanx-block'] .removed")
+    private WebElement blockToRemoval;
 
     public SpecialPhalanxPageObject (WebDriver driver, String Domain) {
         super(driver);
@@ -56,16 +60,11 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
      * @return HashMap with keys "content", "type", "author"
      */
     public HashMap addFilterForTitle(String type) {
-        String content = fillFilterField();
-        checkMatchTypeCheckbox(type);
-        checkTitleCheckbox();
-        submitAddFilterForm();
-        HashMap block = new HashMap();
-        block.put("content", content);
-        block.put("type", type);
-        block.put("author", Properties.userNameStaff);
-        verifyBlockOnBlocksList(block);
-        return block;
+	return addFilter("title", type);
+    }
+
+    public HashMap addFilterForContent(String type) {
+        return addFilter("content", type);
     }
 
     public void testBlock(HashMap block) {
@@ -101,6 +100,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
         WebElement row = getRowFromSearchResult(filter);
         WebElement unblockButton = row.findElement(By.cssSelector(unblockButtonSelector));
         clickAndWait(unblockButton);
+	waitForElementByElement(blockToRemoval);
     }
 
     public void verifyMessageAboutBlockPresent() {
@@ -122,6 +122,25 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
             "Message that content was blocked is not present",
             true
         );
+    }
+
+    private HashMap addFilter(String filterType, String matchType) {
+	String content = fillFilterField();
+	checkMatchTypeCheckbox(matchType);
+	if (filterType.equals("title")) {
+	    checkTitleCheckbox();
+	} else if (filterType.equals("content")) {
+	    checkContentCheckbox();
+	}
+	submitAddFilterForm();
+
+	HashMap block = new HashMap();
+        block.put("content", content);
+        block.put("type", matchType);
+        block.put("author", Properties.userNameStaff);
+        verifyBlockOnBlocksList(block);
+
+	return block;
     }
 
     private WebElement getRowFromSearchResult(String text) {
@@ -160,6 +179,16 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
         );
     }
 
+    private void checkContentCheckbox() {
+	waitForElementByElement(blockContentCheckbox);
+        blockContentCheckbox.click();
+        PageObjectLogging.log(
+            "ContentCheckboxChecked",
+            "Content checkbox in Phalanx checked",
+            true
+        );
+    }
+
     private void checkMatchTypeCheckbox(String type) {
         if (type.equals("plain")) {
             PageObjectLogging.log(
@@ -184,6 +213,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
 
     private String fillFilterField() {
         waitForElementByElement(filterContent);
+	filterContent.clear();
         String content = PageContent.titleFilterPlain + getTimeStamp().substring(5);
         sendKeys(filterContent, content);
         PageObjectLogging.log(

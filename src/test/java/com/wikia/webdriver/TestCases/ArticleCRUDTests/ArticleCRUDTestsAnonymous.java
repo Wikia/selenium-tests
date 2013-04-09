@@ -122,7 +122,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_005_CreateArticleCommentReply()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
