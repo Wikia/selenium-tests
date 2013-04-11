@@ -46,19 +46,19 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
-			<version>2.30.0</version>
+			<version>2.32.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.30.0</version>
+			<version>2.32.0</version>
 			<scope>provided</scope>
 		</dependency>		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
         	    <artifactId>selenium-api</artifactId>
-               	<version>2.30.0</version>
+               	<version>2.32.0</version>
         </dependency>		
 		<dependency>
          		<groupId>org.apache.httpcomponents</groupId>
@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>com.github.detro.ghostdriver</groupId>
 			<artifactId>phantomjsdriver</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.3</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -124,11 +124,6 @@
 				<filesets>
 					<fileset>
 						<directory>${base-path}/logs</directory>
-						<excludes>
-							<exclude>**/screens/**</exclude>
-							<exclude>**/FF/**</exclude>
-							<exclude>**/IE/**</exclude>
-						</excludes>
 						<followSymlinks>false</followSymlinks>
 					</fileset>
 				</filesets>
