@@ -248,10 +248,10 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	
 	public void checkWikiMarkupTools()
 	{
-		for (int i=1; i<20; i++){
+		for (int i=1; i<21; i++){
 			clearSource();
 			clickMore();
-			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).getText();
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).getAttribute("text");
 			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).click();
 			checkSourceContent(content);
 		}
