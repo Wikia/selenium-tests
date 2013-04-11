@@ -602,7 +602,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 	
 	public GalleryBuilderComponentObject clickAddPhotoToGallery(){
-		addPhotoToGalleryButton.click();
+		clickAndWait(addPhotoToGalleryButton);
 		return new GalleryBuilderComponentObject(driver);
 	}
 	public SlideshowBuilderComponentObject clickAddPhotoToSlideshow(){
