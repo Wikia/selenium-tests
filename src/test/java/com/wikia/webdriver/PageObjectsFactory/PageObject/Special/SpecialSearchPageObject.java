@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class SpecialSearchPageObject extends SpecialPageObject{
@@ -34,11 +35,11 @@ public class SpecialSearchPageObject extends SpecialPageObject{
 
 	public void goToSearchPage() {
 		try{
-			getUrl("http://wwww.wikia.com/wiki/Special:Search");			
+			getUrl(PageContent.crossWikiSearchUrl);			
 		}
 		catch (TimeoutException e)
 		{
-			PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", true);
+			PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", false);
 		}
 	}
 	
