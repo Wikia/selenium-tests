@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.mvel2.optimizers.impl.refl.nodes.ArrayLength;
 import org.openqa.selenium.By;
