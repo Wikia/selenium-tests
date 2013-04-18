@@ -32,9 +32,9 @@ If everything goes right it should log in as a QATestsUser.
 The following are valid test parameters:
 
 * `-Dbrowser` - Which browser to use, for example "CHROME"
-* `-Dbase-address` - The base URL to pull the database from, for example "http://yourname.wikia-dev.com/"
-* `-Dgroups` - Which test groups to run, for example "Chat". Optional. Uses all tests if omitted
-* `-Dlive-domain` - The base URL to run in the browser, for example "http://www.wikia.com/". Only required for Hubs tests
+* `-Dbase-address` - The base URL to run in the browser, for example "http://yourname.wikia-dev.com/"
+* `-Dgroups` - (Optional) Which test groups to run, for example "Chat". Optional. Uses all tests if omitted
+* `-Dlive-domain` - (Optional) The base URL to run in the browser, for example "http://www.wikia.com/". Only required for Hubs tests
 
 ### Browsers
 

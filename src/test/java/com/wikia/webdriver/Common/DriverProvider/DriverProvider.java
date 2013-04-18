@@ -192,7 +192,9 @@ public class DriverProvider {
                 + "test" + File.separator
                 + "resources" + File.separator
                 + "ChromeDriver" + File.separator
-                + "chromedriver.exe"
+                + ( System.getProperty("os.name").toUpperCase().contains("MAC") ?
+                    "chromedriver" :
+                    "chromedriver.exe" )
             );
             System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 	}
