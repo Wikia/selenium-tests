@@ -43,6 +43,10 @@ public class CommonFunctions {
 	private static WebDriver driver;
 	private static WebDriverWait wait;
 
+	static {
+		driver = DriverProvider.getWebDriver();
+		wait = new WebDriverWait(driver, 30);
+	}
 
 	public static void logIn(String userName, String password, WebDriver driver) {
 		String temp = driver.getCurrentUrl();
@@ -81,6 +85,19 @@ public class CommonFunctions {
 		}
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.cssSelector("a[data-id='login']")));
+		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
+	}
+	
+	public static void logOutMonobook() {
+		try {
+			driver.manage().deleteAllCookies();
+			driver.get(Global.DOMAIN + "wiki/Special:UserLogout?noexternals=1");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector("#pt-login")));
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
 	}
 

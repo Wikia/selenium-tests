@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -110,7 +111,12 @@ public class DriverProvider {
                 driver = new EventFiringWebDriver(new ChromeDriver(o)).register(listener);
             } else if (Global.BROWSER.equals("HTMLUNIT")) {
                 driver = new EventFiringWebDriver(new HtmlUnitDriver()).register(listener);
-            } else {
+            } else if (Global.BROWSER.equals("GHOST")){
+            	System.setProperty("phantomjs.binary.path", "src/test/resources/PhantomJS/phantomjs.exe");
+            	driver = new  EventFiringWebDriver(new PhantomJSDriver(caps)).register(listener);
+            }
+            
+            else {
                 System.out.println("This browser is not supported. Check -Dbrowser property value");
             }
             if (!(Global.BROWSER.equals("CHROME")||Global.BROWSER.equals("CHROMEMOBILE")||Global.BROWSER.equals("SAFARI"))) {
