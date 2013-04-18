@@ -32,9 +32,9 @@ public class SpecialSearchPageObject extends SpecialPageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void goToSearchPage() {
+	public void goToSearchPage(String searchUrl) {
 		try{
-			getUrl(PageContent.crossWikiSearchUrl);			
+			getUrl(searchUrl+"wiki/Special:Search");			
 		}
 		catch (TimeoutException e)
 		{
