@@ -431,7 +431,7 @@ public class CommonFunctions {
 			WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
 			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-			login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+			login.loginAndVerify(userName, password);
 			return null;
 		} else {
 			try {
