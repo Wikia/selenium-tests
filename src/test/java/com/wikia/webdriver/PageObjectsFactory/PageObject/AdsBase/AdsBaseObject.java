@@ -150,6 +150,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     }
 
    public void verifyNoAds() throws Exception {
+       openPage();
 	List <WebElement> adsElements = driver.findElements(
 	    By.cssSelector(createSelectorAll())
 	);
