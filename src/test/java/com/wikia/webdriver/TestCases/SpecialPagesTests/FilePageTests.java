@@ -8,6 +8,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.DiffPage.DiffPagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HistoryPage.HistoryPagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 
@@ -51,8 +52,9 @@ public class FilePageTests extends TestTemplate {
 
 		historyPage.openHistoryPage(Global.DOMAIN + URLsContent.wikiDir + URLsContent.fileNS + URLsContent.fileName);
 		historyPage.goToDiffPageFromHistoryPage();
-		//historyPage.verifyDiffSections("about");
-		//historyPage.verifyDiffSections("history");		
-		//historyPage.verifyDiffSections("metadata");
+		
+		DiffPagePageObject diffPage = new DiffPagePageObject(driver);
+		
+		diffPage.verifyDiffTablePresent();
 	}
 }
