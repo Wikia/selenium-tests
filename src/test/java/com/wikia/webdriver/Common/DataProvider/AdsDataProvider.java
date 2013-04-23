@@ -23,4 +23,16 @@ public class AdsDataProvider {
             {"http://naruto.wikia.com/wiki/Narutopedia"}
         };
     }
+
+    @DataProvider
+    public static final Object[][] corporatePages() {
+	return new Object[][] {
+	    {"http://www.wikia.com"},
+	    {"http://de.wikia.com/Wikia"},
+	    {"http://fr.wikia.com/Wikia"},
+	    {"http://es.wikia.com/Wikia"},
+	    {"http://www.wikia.com/WAM"},
+	    {"http://www.wikia.com/About_Us"}
+	};
+    }
 }

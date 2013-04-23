@@ -4,6 +4,7 @@ import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import java.util.Collection;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,6 +26,7 @@ public class AdsBaseObject extends WikiBasePageObject {
     private String presentMedrec;
 
     private String wikiPage;
+    private AdsContent adsContent;
 
     @FindBy (css = anyLeaderboardSelector)
     private WebElement anyLeaderboardContainer;
@@ -35,6 +37,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         super(driver, page);
         PageFactory.initElements(driver, this);
         wikiPage = setEnviroment(page);
+	adsContent = new AdsContent();
     }
 
     public void openPage() {
@@ -101,12 +104,12 @@ public class AdsBaseObject extends WikiBasePageObject {
         String scriptExpectedResult = AdsContent.adsPushSlotScript.replace(
             "%slot%", slotName
         );
-
         for (WebElement scriptNode : scriptsTags) {
             String result = (String) js.executeScript(
                 "return arguments[0].innerHTML", scriptNode
             );
-            if (scriptExpectedResult.equals(result)) {
+	    String trimedResult = result.replaceAll("\\s", "");
+            if (scriptExpectedResult.equals(trimedResult)) {
                 PageObjectLogging.log(
                     "PushSlotsScriptFound",
                     "Script " + scriptExpectedResult + " found",
@@ -129,5 +132,51 @@ public class AdsBaseObject extends WikiBasePageObject {
         String enviroment = determineEnviroment();
         String pageToOpen = page.replace("http://", "http://" + enviroment);
         return pageToOpen;
+    }
+
+    public void verifyNoAds() throws Exception {
+	openPage();
+	Collection slotsSelectors = adsContent.slotsSelectors.values();
+	Integer size = slotsSelectors.size();
+	Integer i = 1;
+	String selectorAll = "";
+	for (Object selector : slotsSelectors) {
+	    selectorAll += (String) selector;
+	    if (!i.equals(size)) {
+		 selectorAll += ",";
+	    }
+	    i += 1;
+	}
+
+	List <WebElement> adsElements = driver.findElements(By.cssSelector(selectorAll));
+	if (adsElements.isEmpty()) {
+	    PageObjectLogging.log(
+		"AdsNotFound",
+		"Ads not found",
+		true,
+		driver
+	    );
+	    return;
+	} else {
+	    for (WebElement element : adsElements) {
+		if (element.isDisplayed()
+		    && (element.getSize().height > 1 && element.getSize().width > 1)
+		) {
+		    PageObjectLogging.log(
+			"AdsFound",
+			"Ads found on page",
+			false,
+			driver
+		    );
+		    throw new Exception("Found element that was not expected!");
+		}
+	    }
+	PageObjectLogging.log(
+	    "AdsNotFound",
+	    "Ads not found",
+	    true,
+	    driver
+	);
+	}
     }
 }
