@@ -230,9 +230,10 @@ public class BasePageObject{
             } catch(TimeoutException e) {
                 PageObjectLogging.log(
                     "getUrl",
-                    "page loaded for more then 30 seconds after click",
-                    false
+                    "page %page% loaded for more then 30 seconds".replace("%page%", url),
+                     false
                 );
+		return;
             }
 
             PageObjectLogging.log(
@@ -245,7 +246,7 @@ public class BasePageObject{
 	public void refreshPage()
 	{
 		try{
-			driver.navigate().refresh();			
+			driver.navigate().refresh();
 			PageObjectLogging.log("refreshPage", "page refreshed", true);
 		}
 		catch(TimeoutException e)

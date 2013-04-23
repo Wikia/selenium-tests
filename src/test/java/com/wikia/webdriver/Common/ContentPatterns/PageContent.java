@@ -70,7 +70,7 @@ public class PageContent {
         public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
 
         //Blocks for Phalanx
-        public static String titleFilterPlain = "BadTitle";
+        public static String titleFilterPlain = "BadContent";
 
 	//wikiText
 	public static String wikiTextPhoto = "[[File:Image009.jpg|thumb|%s]]";
