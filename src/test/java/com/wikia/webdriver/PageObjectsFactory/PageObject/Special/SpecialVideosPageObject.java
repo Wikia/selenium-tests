@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -73,8 +74,8 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 
 	public void verifyVideoAdded(String videoDescription) {
 		waitForElementByElement(newestVideo);
-		WebElement videoDescriptonElem = newestVideo.findElement(By.cssSelector("a.image.video"));
-		waitForValueToBePresentInElementsAttributeByElement(videoDescriptonElem, "data-video-name", videoDescription);
+		List<WebElement> videoDescriptonElem = newestVideo.findElements(By.cssSelector("a.image.video span.info-overlay-title"));
+		Assertion.assertEquals(videoDescription, videoDescriptonElem.get(0).getText());
 		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);	
 	}
 }

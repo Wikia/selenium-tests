@@ -8,28 +8,27 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class LightboxComponentObject extends BasePageObject{
-
+	
 	public LightboxComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
 	@FindBy(className="WikiaLightbox")
 	private WebElement lightBoxHeader;
-	@FindBy(css=".thumb.thumbinner a")
+	@FindBy(css=".thumb.thumbinner")
 	private WebElement imageThumbnail;
-
-	public void verifyLightboxPopup() {
+	
+	public void verifyLightboxPopup(){
 		waitForElementByElement(lightBoxHeader);
-		PageObjectLogging.log("verifyLightboxPopup",
-			"verify lightbox appeared", true, driver);
+		PageObjectLogging.log("verifyLightboxPopup", 
+				"verify lightbox appeared", true, driver);
 	}
-
-	public LightboxComponentObject openLightbox() {
+	
+	public LightboxComponentObject openLightbox(){
 		waitForElementByElement(imageThumbnail);
 		clickAndWait(imageThumbnail);
-		PageObjectLogging.log("openLightbox",
-			"opened ligthbox", true, driver);
+		PageObjectLogging.log("openLightbox", 
+				"lightbox opened", true, driver);
 		return new LightboxComponentObject(driver);
 	}
-
 }

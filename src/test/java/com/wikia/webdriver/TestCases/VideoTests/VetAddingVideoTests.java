@@ -215,7 +215,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.triggerCommentArea();
 		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver, Global.DOMAIN);
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 4);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();

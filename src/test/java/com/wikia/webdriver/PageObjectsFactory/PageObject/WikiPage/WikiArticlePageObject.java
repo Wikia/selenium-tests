@@ -170,7 +170,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 	
 	public void verifyCommentVideo(String videoName){
-		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video*='"+videoName+"']");
+		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='"+videoName+"']");
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
 	}
 	
@@ -392,7 +392,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @param videoURL2name The name of the video, or any fragment of the video name
 	 * 	 */
 	public void verifyVideoAddedToRVModule(String videoURL2name) {
-		waitForElementByCss("img[data-video*=\""+videoURL2name+"\"]");
+		waitForElementByCss("img[data-video-name*=\""+videoURL2name+"\"]");
 		PageObjectLogging.log("VerifyVideoAddedToRVModule", "Verify that video given by its name has been added to RV module", true, driver);
 		
 	}
