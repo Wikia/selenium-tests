@@ -125,7 +125,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public WikiBasePageObject(WebDriver driver, String Domain) {
 		super(driver);
-		this.Domain = Global.DOMAIN;
+		this.Domain = Domain;
 		PageFactory.initElements(driver, this);
 	}
 
