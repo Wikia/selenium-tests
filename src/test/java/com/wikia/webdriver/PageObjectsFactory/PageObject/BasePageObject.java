@@ -45,6 +45,8 @@ public class BasePageObject{
 	protected String articlename;
 	
 	public WebDriverWait wait;
+	
+	public Actions builder;
 
 
 	@FindBy(css="#WallNotifications div.notification div.msg-title")
@@ -111,6 +113,7 @@ public class BasePageObject{
 		this.driver = driver;
 		this.Domain = Global.DOMAIN;
 		wait = new WebDriverWait(driver, timeOut);
+		this.builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
 	}
