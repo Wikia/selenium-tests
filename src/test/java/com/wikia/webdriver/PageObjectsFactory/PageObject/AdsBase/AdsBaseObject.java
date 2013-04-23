@@ -134,8 +134,7 @@ public class AdsBaseObject extends WikiBasePageObject {
         return pageToOpen;
     }
 
-    public void verifyNoAds() throws Exception {
-	openPage();
+    private String createSelectorAll () {
 	Collection slotsSelectors = adsContent.slotsSelectors.values();
 	Integer size = slotsSelectors.size();
 	Integer i = 1;
@@ -147,8 +146,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 	    }
 	    i += 1;
 	}
+	return selectorAll;
+    }
 
-	List <WebElement> adsElements = driver.findElements(By.cssSelector(selectorAll));
+   public void verifyNoAds() throws Exception {
+	List <WebElement> adsElements = driver.findElements(
+	    By.cssSelector(createSelectorAll())
+	);
 	if (adsElements.isEmpty()) {
 	    PageObjectLogging.log(
 		"AdsNotFound",
