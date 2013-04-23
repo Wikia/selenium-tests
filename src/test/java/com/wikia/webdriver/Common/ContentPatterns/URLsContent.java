@@ -10,6 +10,9 @@ public class URLsContent {
 
 	//Preview url prefix
 	public static String previewPrefix = "http://preview";
+	
+	// Common url component
+	public static String wikiDir = "wiki/";
 
 	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 
@@ -61,5 +64,12 @@ public class URLsContent {
 			return temp;
 		}
 	}
+	
+	// File Pages
+	public static String fileNS = "File:";
+	public static String fileName = "Grammy_Muppet_Critics";
+	
+	// History Pages
+	public static String historyAction = "?action=history";
 
 }

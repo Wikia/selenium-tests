@@ -14,6 +14,7 @@ public class Properties {
 
 	private static void setPropertiesManually()
 	{
+
 		Global.BROWSER = System.getenv("SELENIUM_BROWSER");
 		if(Global.BROWSER == null || Global.BROWSER.isEmpty()) {
 			Global.BROWSER = "FF";
