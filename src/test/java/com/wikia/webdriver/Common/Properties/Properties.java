@@ -19,8 +19,8 @@ public class Properties {
 		Global.DOMAIN = "http://preview.mediawiki119.wikia.com/";
 //		Global.DOMAIN = "http://sandbox-qa05.mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
-		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
-		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
+		Global.CONFIG_FILE = new File("/Users/liz_lux/Sites/Wikia"+File.separator+"selenium-config"+File.separator+"config.xml");
+		Global.CAPTCHA_FILE = new File("/Users/liz_lux/Sites/Wikia"+File.separator+"selenium-config"+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
 		if (Global.DOMAIN.contains("dev"))
 		{

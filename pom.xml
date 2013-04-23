@@ -30,7 +30,7 @@
    			<groupId>xmlunit</groupId>
    			<artifactId>xmlunit</artifactId>
    			<version>1.3</version>
-		</dependency>        
+		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -42,7 +42,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
@@ -54,12 +54,12 @@
 			<artifactId>selenium-java</artifactId>
 			<version>2.32.0</version>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
         	    <artifactId>selenium-api</artifactId>
                	<version>2.32.0</version>
-        </dependency>		
+        </dependency>
 		<dependency>
          		<groupId>org.apache.httpcomponents</groupId>
         		<artifactId>httpclient</artifactId>
@@ -68,8 +68,8 @@
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4.4</version>			
-		</dependency>		
+			<version>1.4.4</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-io</artifactId>
@@ -102,20 +102,20 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12.4</version>
-				<configuration>							
+				<configuration>
 					<systemPropertyVariables>
 						<run_mvn>true</run_mvn>
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
-						<config>../../../selenium-config/config.xml</config>
-						<captcha>../../../selenium-config/captcha.txt</captcha>
+						<config>../selenium-config/config.xml</config>
+						<captcha>../selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/testSuite.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<argLine>-Xms800m -Xmx800m -XX:MaxPermSize=500m</argLine>
-				</configuration>				
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
@@ -130,5 +130,5 @@
 			</configuration>
 			</plugin>
 		</plugins>
-	</build>		
+	</build>
 </project>

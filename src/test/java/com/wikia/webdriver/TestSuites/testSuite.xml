@@ -45,11 +45,12 @@
 			<class name="com.wikia.webdriver.TestCases.PhalanxTests.BlockPageTitleTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.BasicLayoutTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
-			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>  
+			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.ShareToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetAddingVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetProvidersTests"/>
+			<class name="com.wikia.webdriver.TestCases.LightboxTests.ImageLightboxTests"/>
 		</classes>
 	</test>
 </suite>
