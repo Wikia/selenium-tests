@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -74,6 +75,8 @@ public class LightboxPageObject extends BasePageObject{
 	private WebElement filePageURL;	
 	@FindBy(css="p#LightboxCarouselProgress")
 	private WebElement progress;
+	@FindBy(css="#LightboxModal")
+	private WebElement lightBoxModal;
 	
 	
 	
@@ -240,9 +243,10 @@ public class LightboxPageObject extends BasePageObject{
 	}
 	
 	public void clickPinButton() {
-		removeCssClass("section.LightboxModal", "overlay-hidden");
-		waitForElementByElement(pinButton);
-		pinButton.click();
+		builder.moveToElement(lightBoxModal).
+				click(pinButton).
+				build().
+				perform();
 		PageObjectLogging.log("clickPinButton", "Pin button was clicked", true, driver);
 	}
 }
