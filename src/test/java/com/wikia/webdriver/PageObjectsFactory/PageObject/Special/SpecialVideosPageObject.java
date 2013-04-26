@@ -38,24 +38,20 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 		return new SpecialVideosPageObject(driver, Domain);
 	}
 	
-	public String[] followRandomVideo(){
+	public String followRandomVideo(){
 		
 		List<String> hrefs = new ArrayList();
-		List<String> names = new ArrayList();
 		for (WebElement elem:videos)
 		{
-			hrefs.add(elem.getAttribute("href"));
-			names.add(elem.getAttribute("data-video-name"));
+			hrefs.add(elem.getAttribute("href"));		
 		}
 		Random r = new Random();
 		int rnd = r.nextInt(hrefs.size()-1);
 		String href = hrefs.get((rnd)+1);
-		String name = names.get((rnd)+1);
 		getUrl(href+"?action=watch");
 		clickAndWait(followSubmit);
 		waitForElementByElement(followedButton);
-		String[] retArr = {href, name};
-		return retArr;
+		return href;
 	}
 	
 	public void unfollowVideo(String videoName){

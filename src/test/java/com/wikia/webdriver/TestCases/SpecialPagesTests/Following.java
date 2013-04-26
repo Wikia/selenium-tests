@@ -93,10 +93,10 @@ public class Following extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		SpecialVideosPageObject video = new SpecialVideosPageObject(driver, Global.DOMAIN);
 		video.openSpecialVideoPage();
-		String[] arr = video.followRandomVideo();
+		String videoName = video.followRandomVideo();
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
 		follow.openFollowingPage();
-		follow.verifyFollowedImageVideo(arr[1]);
-		video.unfollowVideo(arr[0]);
+		follow.verifyFollowedImageVideo(videoName);
+		video.unfollowVideo(videoName);
 	}
 }
