@@ -25,7 +25,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 	}
 	
 	public void verifyFollowedImageVideo(String image){
-		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-media']//a[contains(text(), '"+image+"')]");
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-media']//a[@href='"+image.replace(Global.DOMAIN, "/")+"']");
 		PageObjectLogging.log("verifyFollowedArticle", image + "is visible on followed list", true);
 	}
 	
