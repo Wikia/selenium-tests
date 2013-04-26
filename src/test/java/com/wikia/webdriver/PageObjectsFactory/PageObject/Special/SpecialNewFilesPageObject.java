@@ -129,6 +129,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
         getUrl(imageName+"?action=watch");
         clickAndWait(followSubmit);
         waitForElementByElement(followedButton);
+        PageObjectLogging.log("followRandomImage", "folow image named "+imageName, true, driver);
         return imageName;
     }
 
