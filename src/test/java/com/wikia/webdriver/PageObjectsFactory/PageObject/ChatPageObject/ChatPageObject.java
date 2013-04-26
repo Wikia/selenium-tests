@@ -33,7 +33,7 @@ public class ChatPageObject extends BasePageObject
 	@FindBy(css="form[class='Write blocked']")
 	private WebElement messageWriteAreaBlocked;//when user is disconnected
 	
-	@FindBy(xpath="//div[@class='Chat']//li[contains(text(), 'Welcome to the Mediawiki 1.19 test Wiki chat')]")
+	@FindBy(xpath="//div[@class='Chat']//li[contains(text(), 'Welcome to the ')]")
 	private WebElement welcomeMessage;
 	
 	@FindBy(css="div.Rail")
