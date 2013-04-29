@@ -78,48 +78,4 @@ public class TestTemplate {
 		return capabilities;
 	}
 	
-	/**
-	 *  sets new profile to the firefox browser, with netExport enabled
-	 */
-	protected void enableNetExportOnFirebug() {
-		FirefoxProfile profile = new FirefoxProfile();
-		try {
-			profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\firebug-1.7.2.xpi"));
-			profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\netExport-0.8b13.xpi"));
-			profile.setPreference("app.update.enabled", false);
-
-		        String domain = "extensions.firebug.";
-
-		        // Set default Firebug preferences
-		    profile.setPreference(domain + "currentVersion", "2.0");
-		    profile.setPreference(domain + "allPagesActivation", "on");
-		    profile.setPreference(domain + "defaultPanelName", "net");
-		    profile.setPreference(domain + "net.enableSites", true);
-
-		        // Set default NetExport preferences
-		    profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
-		    profile.setPreference(domain + "netexport.showPreview", false);
-		    profile.setPreference(domain + "netexport.defaultLogDir", "C:\\Downloads\\_har\\");
-//			profile.addExtension(new File("c:\\WebdriverTestsGit\\src\\test\\resources\\Firebug\\consoleExport-0.5b5.xpi"));
-//			profile.setPreference("extensions.firebug.currentVersion", "1.7.2");
-//			profile.setPreference("extensions.firebug.previousPlacement", 1);
-//			profile.setPreference("extensions.firebug.net.enableSites", true);
-//			profile.setPreference("extensions.firebug.defaultPanelName", "console");
-//			profile.setPreference("extensions.firebug.console.enableSites", "true");
-//			profile.setPreference("extensions.firebug.consoleexport.active", "true");
-//			profile.setPreference("extensions.firebug.consoleexport.serverURL", "file://c:/asdf");
-//			profile.setPreference("extensions.firebug.showJSErrors", "true");
-//			profile.setPreference("extensions.firebug.allPagesActivation", "on");
-//			profile.setPreference("extensions.firebug.consoleexport.defaultLogDir", "c:\\console");
-//			profile.setPreference("extensions.firebug.netexport.alwaysEnableAutoExport", true);
-//			profile.setPreference("extensions.firebug.netexport.autoExportToFile", true);
-//			profile.setPreference("extensions.firebug.consoleexport.saveFiles", true);		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DriverProvider.setFirefoxProfile(profile);
-		DriverProvider.getInstance();
-		driver = DriverProvider.getWebDriver();
-	}
 }

@@ -58,6 +58,29 @@ public class DriverProvider {
             			System.out.println("Error with adding firefox extension");
 					}
             	}
+            	if (Global.BROWSER.contains("eventTracking")) {
+            		try {
+            			profile.addExtension(new File("src\\test\\resources\\Firebug\\firebug-1.7.2.xpi"));
+            			profile.addExtension(new File("src\\test\\resources\\Firebug\\netExport-0.8b13.xpi"));
+            			profile.setPreference("app.update.enabled", false);
+
+            		        String domain = "extensions.firebug.";
+
+            		        // Set default Firebug preferences
+            		    profile.setPreference(domain + "currentVersion", "2.0");
+            		    profile.setPreference(domain + "allPagesActivation", "on");
+            		    profile.setPreference(domain + "defaultPanelName", "net");
+            		    profile.setPreference(domain + "net.enableSites", true);
+
+            		        // Set default NetExport preferences
+            		    profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
+            		    profile.setPreference(domain + "netexport.showPreview", false);
+            		    profile.setPreference(domain + "netexport.defaultLogDir", "C:\\Downloads\\_har\\");
+            		}   catch (IOException e) {
+            			// TODO Auto-generated catch block
+            			e.printStackTrace();
+            		}
+				}
                 caps.setCapability(FirefoxDriver.PROFILE, profile);
                 driver = new EventFiringWebDriver(
                     new FirefoxDriver(caps)
