@@ -54,7 +54,7 @@ public class ArticleHistoryTests extends TestTemplate
 	
 	/**
 	 * only STAFF and admins can use rollback button
-	 * Rollback changes of user nad verif: create article with content, then change that content and at the end undo changes using history. Check if undo changes is succesful
+	 * Rollback changes of user and verify: create article with content, then change that content and at the end undo changes using history. Check if undo changes is succesful
 	 */
 	@Test(groups={"ArticleHistoryTests_002", "ArticleCRUDAdmin"})
 	public void ArticleHistoryTests_002_RollbackVersion()
