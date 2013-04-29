@@ -35,7 +35,7 @@ public class HubBasePageObject extends BasePageObject{
 	@FindBy(css="button[id='suggestVideo']") 
 	private WebElement suggestVideoButton;
 	@FindBy(css="button[id='suggestArticle']") 
-	private WebElement suggestArticleButton;
+	private WebElement getPromotedButton;
 	@FindBy(css="section.modalWrapper") 
 	private WebElement suggestVideoOrArticleModal;
 	@FindBy(css="section.modalWrapper h1") 
@@ -293,15 +293,15 @@ public class HubBasePageObject extends BasePageObject{
 	}
 	
 	/**
-	 * Click on suggest an article button
+	 * Click on getPromoted button
 	 * 
 	 * @author Michal Nowierski
 	 */
-	public void ClickSuggestAnArticle() {
-		waitForElementByElement(suggestArticleButton);
-		CommonFunctions.scrollToElement(suggestArticleButton);
-		waitForElementClickableByElement(suggestArticleButton);	
-		clickAndWait(suggestArticleButton);
+	public void ClickGetPromoted() {
+		waitForElementByElement(getPromotedButton);
+		CommonFunctions.scrollToElement(getPromotedButton);
+		waitForElementClickableByElement(getPromotedButton);	
+		clickAndWait(getPromotedButton);
 		PageObjectLogging.log("ClickSuggestAnArticle", "Click on suggest an article button", true, driver);		
 	}
 
