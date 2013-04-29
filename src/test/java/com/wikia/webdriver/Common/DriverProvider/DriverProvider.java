@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.http.entity.ContentProducer;
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,6 +19,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import com.wikia.webdriver.Common.ContentPatterns.PathsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -75,7 +77,7 @@ public class DriverProvider {
             		        // Set default NetExport preferences
             		    profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
             		    profile.setPreference(domain + "netexport.showPreview", false);
-            		    profile.setPreference(domain + "netexport.defaultLogDir", "C:\\Downloads\\_har\\");
+            		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.harFilePath);
             		}   catch (IOException e) {
             			// TODO Auto-generated catch block
             			e.printStackTrace();

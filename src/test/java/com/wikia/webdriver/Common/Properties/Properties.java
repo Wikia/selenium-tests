@@ -16,7 +16,7 @@ public class Properties {
 	{
 		Global.BROWSER = "FFeventTracking";
 //		Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
-		Global.DOMAIN = "http://muppet.michalnowierski.wikia-dev.com";
+		Global.DOMAIN = "http://muppet.michalnowierski.wikia-dev.com/";
 //		Global.DOMAIN = "http://sandbox-qa05.mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
