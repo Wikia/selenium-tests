@@ -199,7 +199,11 @@ public class DriverProvider {
             System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 	}
 
-        public static void setCapabilities(DesiredCapabilities newCaps) {
-            caps = newCaps;
-        }
+	public static void setCapabilities(DesiredCapabilities newCaps) {
+		caps = newCaps;
+	}
+	
+	public static void setFirefoxProfile(FirefoxProfile newFFprofile) {
+		profile = newFFprofile;
+	}
 }
