@@ -24,22 +24,13 @@ public class EventTrackingVerifier {
 
 	    try {
 
-	        Object obj = parser.parse(new FileReader("c:\\file.json"));
+	        Object obj = parser.parse(new FileReader("c:\\muppet.michalnowierski.wikia-dev.com+2013-04-29+16-50-27.har"));
 
 	        JSONObject jsonObject =  (JSONObject) obj;
 
-	        String name = (String) jsonObject.get("name");
-	        System.out.println(name);
-
-	        String city = (String) jsonObject.get("city");
-	        System.out.println(city);
-
-	                String job = (String) jsonObject.get("job");
-	        System.out.println(job);
-
 	        // loop array
-	        JSONArray cars = (JSONArray) jsonObject.get("cars");
-	        Iterator<String> iterator = cars.iterator();
+	        JSONArray entries = (JSONArray) jsonObject.get("entries");
+	        Iterator<String> iterator = entries.iterator();
 	        while (iterator.hasNext()) {
 	            System.out.println(iterator.next());
 	        }

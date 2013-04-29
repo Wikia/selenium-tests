@@ -27,6 +27,7 @@ public class EditorEventTrackingTests extends TestTemplate {
 	@Test(groups={"EditorEventTrackingTests_001", "EditorEventTrackingTests"})
 	public void EditorEventTrackingTests_001_verifyEditPageEvent()
 	{
+	
 		//
 		 try {
 			Thread.sleep(5000);
@@ -34,6 +35,8 @@ public class EditorEventTrackingTests extends TestTemplate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			EventTrackingVerifier verifier = new EventTrackingVerifier(PathsContent.harFilePath);
+			verifier.verifyEvent("editor-ck*view*edit-page");
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
@@ -48,7 +51,6 @@ public class EditorEventTrackingTests extends TestTemplate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		EventTrackingVerifier verifier = new EventTrackingVerifier(PathsContent.harFilePath);
 		verifier.verifyEvent("editor-ck*view*edit-page");
 	}
 }
