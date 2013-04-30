@@ -20,20 +20,20 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="corporatePages",
-        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_001"}
+        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_001", "Ads", "US"}
     )
     public void TestCorporatePage_US(String page) throws Exception {
         AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 	wikiPage.verifyNoAds();
     }
 
-    @GeoEdgeProxy(country="UK")
+    @GeoEdgeProxy(country="GB")
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="corporatePages",
-        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_002"}
+        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_002", "Ads", "GB"}
     )
-    public void TestCorporatePage_UK(String page) throws Exception {
+    public void TestCorporatePage_GB(String page) throws Exception {
         AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 	wikiPage.verifyNoAds();
     }
@@ -42,7 +42,7 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="corporatePages",
-        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_003"}
+        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_003", "Ads", "DE"}
     )
     public void TestCorporatePage_DE(String page) throws Exception {
         AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
@@ -53,9 +53,42 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="corporatePages",
-        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_004"}
+        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_004", "Ads", "CA"}
     )
     public void TestCorporatePage_CA(String page) throws Exception {
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyNoAds();
+    }
+
+    @GeoEdgeProxy(country="AU")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="corporatePages",
+        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_005", "Ads", "AU"}
+    )
+    public void TestCorporatePage_AU(String page) throws Exception {
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyNoAds();
+    }
+
+    @GeoEdgeProxy(country="PL")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="corporatePages",
+        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_006", "Ads", "PL"}
+    )
+    public void TestCorporatePage_PL(String page) throws Exception {
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyNoAds();
+    }
+
+    @GeoEdgeProxy(country="UK")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="corporatePages",
+        groups={"Ads_Corporate_Page", "Ads_Corporate_Page_007", "Ads", "UK"}
+    )
+    public void TestCorporatePage_UK(String page) throws Exception {
         AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 	wikiPage.verifyNoAds();
     }

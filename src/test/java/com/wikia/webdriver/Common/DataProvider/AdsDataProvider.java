@@ -35,4 +35,25 @@ public class AdsDataProvider {
 	    {"http://www.wikia.com/About_Us"}
 	};
     }
+
+    @DataProvider
+    public static final Object[][] noAdsForUsers () {
+	return new Object[][] {
+	    {"http://monsterhunter.wikia.com/wiki/MH3U:_Monsters"},
+	    {"http://callofduty.wikia.com/wiki/Mob_of_the_Dead"},
+	    {"http://monsterhunter.wikia.com/wiki/Monster_Hunter_3_Ultimate"},
+	    {"http://dragoncity.wikia.com/wiki/Category:Dragons"},
+	    {"http://monsterhunter.wikia.com/wiki/Portal:MH3U"},
+	    {"http://www.wikia.com"},
+	    {"http://elderscrolls.wikia.com/wiki/Skyrim"}
+	};
+    }
+
+    @DataProvider
+    public static final Object[][] longPages() {
+	return new Object[][] {
+	    {"http://monsterhunter.wikia.com/wiki/MH3U:_Monsters"},
+	    {"http://elderscrolls.wikia.com/wiki/Skyrim"}
+	};
+    }
 }
