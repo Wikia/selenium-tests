@@ -29,13 +29,14 @@ public class EditorEventTrackingTests extends TestTemplate {
 	{
 	
 		//
+		EventTrackingVerifier verifier = new EventTrackingVerifier(PathsContent.harFilePath);
+		verifier.verifyEvent("editor-ck*view*edit-page");
 		 try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			EventTrackingVerifier verifier = new EventTrackingVerifier(PathsContent.harFilePath);
 			verifier.verifyEvent("editor-ck*view*edit-page");
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
@@ -51,6 +52,5 @@ public class EditorEventTrackingTests extends TestTemplate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		verifier.verifyEvent("editor-ck*view*edit-page");
 	}
 }
