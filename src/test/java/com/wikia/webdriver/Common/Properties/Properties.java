@@ -78,10 +78,13 @@ public class Properties {
 	
 	public static String geoEdgeUserName;
 	public static String geoEdgeUserPass;
-	
+
+	public static String cpmUserName;
+	public static String cpmPassowrd;
+
 	public static String apiToken;
-	
-	private static void setVariables(){	
+
+	private static void setVariables(){
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
 		
@@ -129,7 +132,10 @@ public class Properties {
 
 		geoEdgeUserName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.userName");
 		geoEdgeUserPass = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.password");
-		
+
+		cpmUserName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.cpm.username");
+		cpmPassowrd = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.cpm.password");
+
 		apiToken = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.api.token");
 	}
 
