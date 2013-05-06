@@ -115,7 +115,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		login(name, pass);
 		verifyUserLoggedIn(name);
 	}
-	
+
 	/**
 	 * Special:UserLogin
 	 * use if user is on Special:UserLogin page 
