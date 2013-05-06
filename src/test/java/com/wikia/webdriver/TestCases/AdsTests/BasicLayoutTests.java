@@ -27,20 +27,20 @@ public class BasicLayoutTests extends AdsTestTemplate {
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Basic_Layout_002"}
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_002"}
     )
     public void TestBasicLayout_DE(String page) {
         AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 	wikiPage.verifyTopLeaderBoardAndMedrec();
     }
 
-    @GeoEdgeProxy(country="UK")
+    @GeoEdgeProxy(country="GB")
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Basic_Layout_003"}
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_003"}
     )
-    public void TestBasicLayout_UK(String page) {
+    public void TestBasicLayout_GB(String page) {
         AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 	wikiPage.verifyTopLeaderBoardAndMedrec();
     }
@@ -49,9 +49,42 @@ public class BasicLayoutTests extends AdsTestTemplate {
     @Test (
         dataProviderClass=AdsDataProvider.class,
         dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Basic_Layout_004"}
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_004"}
     )
     public void TestBasicLayout_CA(String page) {
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyTopLeaderBoardAndMedrec();
+    }
+
+    @GeoEdgeProxy(country="UK")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="popularSites",
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_005"}
+    )
+    public void TestBasicLayout_UK(String page) {
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyTopLeaderBoardAndMedrec();
+    }
+
+    @GeoEdgeProxy(country="PL")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="popularSites",
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_006"}
+    )
+    public void TestBasicLayout_PL(String page) {
+        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	wikiPage.verifyTopLeaderBoardAndMedrec();
+    }
+
+    @GeoEdgeProxy(country="AU")
+    @Test (
+        dataProviderClass=AdsDataProvider.class,
+        dataProvider="popularSites",
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_007"}
+    )
+    public void TestBasicLayout_AU(String page) {
         AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 	wikiPage.verifyTopLeaderBoardAndMedrec();
     }
