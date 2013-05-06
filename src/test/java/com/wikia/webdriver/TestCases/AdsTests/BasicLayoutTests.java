@@ -27,7 +27,7 @@ public class BasicLayoutTests extends AdsTestTemplate {
 	@Test (
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="popularSites",
-		groups={"Ads_Basic_Layout", "Basic_Layout_002", "Ads", "DE"}
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_002", "Ads", "DE"}
 	)
 	public void TestBasicLayout_DE(String page) {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
@@ -38,7 +38,7 @@ public class BasicLayoutTests extends AdsTestTemplate {
 	@Test (
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Basic_Layout_003", "Ads", "GB"}
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_003", "Ads", "GB"}
 	)
 	public void TestBasicLayout_GB(String page) {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
@@ -49,7 +49,7 @@ public class BasicLayoutTests extends AdsTestTemplate {
 	@Test (
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="popularSites",
-		groups={"Ads_Basic_Layout", "Basic_Layout_004", "Ads", "CA"}
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_004", "Ads", "CA"}
 	)
 	public void TestBasicLayout_CA(String page) {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
