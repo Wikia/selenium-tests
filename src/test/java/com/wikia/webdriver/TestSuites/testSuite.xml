@@ -44,6 +44,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.PhalanxTests.BlockPageTitleTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.BasicLayoutTests"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsInContentTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsOnCorporatePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.NoAdsForLoggedUsersTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
