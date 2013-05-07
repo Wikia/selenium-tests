@@ -892,7 +892,6 @@ public class BasePageObject{
      * @param userName
      */
     public void verifyUserLoggedIn(String userName) {
-        refreshPage();
     	waitForElementByElement(userProfileLink);
         userName = purifyUserName(userName);
         waitForTextToBePresentInElementByElement(
@@ -901,7 +900,7 @@ public class BasePageObject{
         PageObjectLogging.log(
             "VerifyUserNamePresent",
             "Verify that username is present in link to user's profile",
-            true, driver
+            true
         );
     }
 

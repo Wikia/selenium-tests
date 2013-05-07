@@ -59,6 +59,8 @@ public class AdsContent {
 	slotsSelectors.put("INCONTENT_BOXAD_1", "#INCONTENT_BOXAD_1");
 	slotsSelectors.put("PREFOOTER_LEFT_BOXAD", "#PREFOOTER_LEFT_BOXAD");
 	slotsSelectors.put("PREFOOTER_RIGHT_BOXAD", "#PREFOOTER_RIGHT_BOXAD");
+	slotsSelectors.put("AdsInContent", "#WikiaAdInContentPlaceHolder");
+	slotsSelectors.put("Prefooters", "#WikiaArticleBottomAd");
     }
 }
 

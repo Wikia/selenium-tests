@@ -149,7 +149,24 @@ public class AdsBaseObject extends WikiBasePageObject {
 	return selectorAll;
     }
 
-   public void verifyNoAds() throws Exception {
+    private void scrollToSelector(String selector) {
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript(
+	    "var x = $(arguments[0]);"
+	    + "window.scroll(0,x.position()['top']+x.height());"
+	    + "$(window).trigger('scroll');",
+	    selector
+	);
+    }
+
+    public void verifyNoAdsOnWikiPage() throws Exception {
+	openPage();
+        scrollToSelector((String) adsContent.slotsSelectors.get("AdsInContent"));
+        scrollToSelector((String) adsContent.slotsSelectors.get("Prefooters"));
+	verifyNoAds();
+    }
+
+    public void verifyNoAds() throws Exception {
        openPage();
 	List <WebElement> adsElements = driver.findElements(
 	    By.cssSelector(createSelectorAll())
