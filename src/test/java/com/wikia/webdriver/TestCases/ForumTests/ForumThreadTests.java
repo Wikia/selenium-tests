@@ -1,5 +1,7 @@
 package com.wikia.webdriver.TestCases.ForumTests;
 
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -99,11 +101,12 @@ public class ForumThreadTests extends TestTemplate{
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
+		List<String> forumNames = forumMainPage.getForumNamesList();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);	
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);		
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		forumThread.moveThread(PageContent.forumBoard);
-		forumThread.verifyParentBoard(PageContent.forumBoard);
+		forumThread.moveThread(forumNames.get(1));
+		forumThread.verifyParentBoard(forumNames.get(1));
 	}
 	
 	@Test(groups= {"ForumThreadTests_006", "ForumThreadTests", "Forum"} )

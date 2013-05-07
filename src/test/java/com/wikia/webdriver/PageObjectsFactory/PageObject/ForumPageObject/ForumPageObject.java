@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -68,13 +69,26 @@ public class ForumPageObject extends BasePageObject{
 	}
 
 	public ForumBoardPageObject openForumBoard(int forumBoardNumber) {
-		List<WebElement> lista = driver.findElements(forumBoardsList);
-		WebElement forumBoardLink = lista.get(forumBoardNumber-1);
+		WebElement forumBoardLink = getForumElementsList().get(forumBoardNumber-1);
 		waitForElementByElement(forumBoardLink);
 		waitForElementClickableByElement(forumBoardLink);
 		click(forumBoardLink);
 		PageObjectLogging.log("openForumBoard", "click on the forum Board number "+forumBoardNumber, true, driver);
 		return new ForumBoardPageObject(driver);
+	}
+	
+	public List<String> getForumNamesList(){
+		List<WebElement> listWebElements = getForumElementsList();
+		List<String> forumNames = new ArrayList<String>();
+		for (WebElement elem:listWebElements){
+			forumNames.add(elem.getText());
+		}
+		return forumNames;
+	}
+	
+	private List<WebElement> getForumElementsList(){
+		List<WebElement> listWebElements = driver.findElements(forumBoardsList);		
+		return listWebElements;
 	}
 	
 }
