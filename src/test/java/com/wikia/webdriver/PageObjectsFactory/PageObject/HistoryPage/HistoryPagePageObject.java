@@ -9,6 +9,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.DiffPage.DiffPagePageObject;
 
 public class HistoryPagePageObject extends BasePageObject {
 
@@ -32,8 +33,9 @@ public class HistoryPagePageObject extends BasePageObject {
 		PageObjectLogging.log("Open history page", "history page opened", true);
 	}
 	
-	public void goToDiffPageFromHistoryPage() {
+	public DiffPagePageObject goToDiffPageFromHistoryPage() {
 		historySubmit.click();
 		waitForTextToBePresentInElementByElement(diffHeader, "Changes");
+		return new DiffPagePageObject(driver);
 	}
 }
