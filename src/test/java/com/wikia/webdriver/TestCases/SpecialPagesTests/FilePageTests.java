@@ -14,6 +14,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePa
 
 public class FilePageTests extends TestTemplate {
 	
+	/**
+	 * Verify functionality of tabs on file pages in Oasis.  When a tab
+	 * is clicked, the corresponding content should be displayed. 
+	 * 
+	 * @author "Liz Lee"
+	 */
 	@Test(groups = {"FilePage", "filePage001_tabs"})
 	public void filePage001_tabs() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
@@ -31,6 +37,12 @@ public class FilePageTests extends TestTemplate {
 		filePage.verifySelectedTab("metadata");
 	}
 	
+	/**
+	 * Verify that file page tabs will save their state for logged in users
+	 * when they navigate away from the page and back to it. 
+	 * 
+	 * @author "Liz Lee"
+	 */
 	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn"})
 	public void filePage002_tabsLoggedIn() {
 		CommonFunctions.logOut(driver);
@@ -45,7 +57,12 @@ public class FilePageTests extends TestTemplate {
 		filePage.refreshAndVerifyTabs(2);
 	}
 
-	// Diff Page
+	/**
+	 * Verify if a diff table is present on a diff page.  
+	 * Note that not all diff pages have diff tables but the one specified does. 
+	 * 
+	 * @author "Liz Lee"
+	 */
 	@Test(groups = {"FilePage", "filePage003_diffPage"})
 	public void filePage003_diffPage() {
 		
@@ -59,7 +76,11 @@ public class FilePageTests extends TestTemplate {
 		diffPage.verifyDiffTablePresent();
 	}
 
-    // Testing "Appears on these pages"
+    /**
+     * Testing "Appears on these pages"
+     * 
+     * @author Garth Webb
+     */
     @Test(groups = {"FilePage", "filePage004_appearsOn"})
     public void filePage004_appearsOn() {
         FilePagePageObject filePage = new FilePagePageObject(driver);
