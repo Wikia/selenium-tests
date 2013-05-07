@@ -68,8 +68,14 @@ public class URLsContent {
 	// File Pages
 	public static String fileNS = "File:";
 	public static String fileName = "Grammy_Muppet_Critics";
-	
+	public static String fileName002 = "New_Batman_Year_One_Clip";
+
 	// History Pages
 	public static String historyAction = "?action=history";
 
+    // Article Pages
+    public static String articleName001 = "TestVid001";
+    public static String articleName002 = "TestVid002";
+    public static String articleName003 = "TestVid003";
+    public static String articleName004 = "TestVid004";
 }

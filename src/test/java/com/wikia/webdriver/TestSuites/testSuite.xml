@@ -64,6 +64,7 @@
 			<class name="com.wikia.webdriver.TestCases.EventTrackingTests.EditorEventTrackingTests"/>
 			<class name="com.wikia.webdriver.TestCases.WamPageTests.WamPageTests"/>
 			<class name="com.wikia.webdriver.TestCases.LightboxTests.ImageLightboxTests"/>
+            <class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 		</classes>
 	</test>
 </suite>

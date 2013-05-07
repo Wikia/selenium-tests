@@ -28,6 +28,15 @@ public class FilePagePageObject extends BasePageObject {
 	@FindBys(@FindBy(css="ul.tabs li a"))
 	private List<WebElement> tabList;
 
+    @FindBy(css="section[data-listing-type='local'] h3.page-listing-title a")
+    private WebElement appearsListing;
+
+    @FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.right")
+    private WebElement localPageNext;
+
+    @FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
+    private WebElement localPagePrev;
+
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
 	public void selectTab(int tab) {
@@ -42,7 +51,7 @@ public class FilePagePageObject extends BasePageObject {
 	}
 	
 	public void openFilePage(String fileName) {
-		getUrl(Global.DOMAIN + URLsContent.fileNS + fileName);
+		getUrl(Global.DOMAIN + URLsContent.wikiDir + URLsContent.fileNS + fileName);
 		waitForElementByElement(tabList.get(0));
 		PageObjectLogging.log("Open file page", "file page opened", true);
 		
@@ -65,4 +74,19 @@ public class FilePagePageObject extends BasePageObject {
 		refreshPage();
 		verifySelectedTab(tabName);
 	}
+
+    // Page forward in the local "appears on" section
+    public void localAppearsPageNext() {
+        localPageNext.click();
+    }
+
+    // Page backward in the local "appears on" section
+    public void localAppearsPagePrev() {
+        localPagePrev.click();
+    }
+
+    // Verify that a specific video title is in the "Appears on these pages" list
+    public void verifyAppearsOn(String articleName) {
+        PageObjectLogging.log("Verify correct article title", "title correct", appearsListing.getText().equals(articleName));
+    }
 }
