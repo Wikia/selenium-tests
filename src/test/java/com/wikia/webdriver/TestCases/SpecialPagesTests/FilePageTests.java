@@ -34,8 +34,9 @@ public class FilePageTests extends TestTemplate {
 	@Test(groups = {"FilePage", "FilePage002"})
 	public void filePage002_tabsLoggedIn() {
 		CommonFunctions.logOut(driver);
+
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		
+
 		FilePagePageObject filePage = new FilePagePageObject(driver);
 		filePage.openFilePage(URLsContent.fileName);
 		
@@ -57,4 +58,18 @@ public class FilePageTests extends TestTemplate {
 		
 		diffPage.verifyDiffTablePresent();
 	}
+
+    // Testing "Appears on these pages"
+    @Test(groups = {"FilePage", "FilePage004"})
+    public void filePage004_appearsOn() {
+        FilePagePageObject filePage = new FilePagePageObject(driver);
+        filePage.openFilePage(URLsContent.fileName002);
+
+        // This should be the first article in the list
+        filePage.verifyAppearsOn(URLsContent.articleName001);
+
+        // After paging, article #4 should be at the top of the list
+        filePage.localAppearsPageNext();
+        filePage.verifyAppearsOn(URLsContent.articleName003);
+    }
 }

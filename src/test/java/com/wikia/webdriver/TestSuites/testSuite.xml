@@ -51,6 +51,7 @@
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetAddingVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetProvidersTests"/>
 			<class name="com.wikia.webdriver.TestCases.LightboxTests.ImageLightboxTests"/>
+            <class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 		</classes>
 	</test>
 </suite>
