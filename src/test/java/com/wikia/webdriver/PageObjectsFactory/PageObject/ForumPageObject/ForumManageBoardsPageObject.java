@@ -141,7 +141,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		waitForElementByXPath("//div[@class='msg' and contains(text(), \"The board you're looking for was not found\")]");
+		waitForElementByXPath("//div[contains(text(), \"We couldn't find a board with that title.  Here's the list of forum boards.\")]");
 		PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
 	}
 	
