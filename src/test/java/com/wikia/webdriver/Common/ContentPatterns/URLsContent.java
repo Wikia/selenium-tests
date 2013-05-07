@@ -71,7 +71,7 @@ public class URLsContent {
 	public static String fileName002 = "New_Batman_Year_One_Clip";
 
 	// History Pages
-	public static String historyAction = "?action=history";
+	public static String historyAction = "action=history";
 
     // Article Pages
     public static String articleName001 = "TestVid001";
