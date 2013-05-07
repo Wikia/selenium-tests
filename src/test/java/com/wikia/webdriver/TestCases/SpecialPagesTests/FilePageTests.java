@@ -14,7 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePa
 
 public class FilePageTests extends TestTemplate {
 	
-	@Test(groups = {"FilePage", "FilePage001"})
+	@Test(groups = {"FilePage", "filePage001_tabs"})
 	public void filePage001_tabs() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
 		filePage.openFilePage(URLsContent.fileName);
@@ -31,7 +31,7 @@ public class FilePageTests extends TestTemplate {
 		filePage.verifySelectedTab("metadata");
 	}
 	
-	@Test(groups = {"FilePage", "FilePage002"})
+	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn"})
 	public void filePage002_tabsLoggedIn() {
 		CommonFunctions.logOut(driver);
 
@@ -46,7 +46,7 @@ public class FilePageTests extends TestTemplate {
 	}
 
 	// Diff Page
-	@Test(groups = {"FilePage", "FilePage003"})
+	@Test(groups = {"FilePage", "filePage003_diffPage"})
 	public void filePage003_diffPage() {
 		
 		HistoryPagePageObject historyPage = new HistoryPagePageObject(driver);
@@ -60,7 +60,7 @@ public class FilePageTests extends TestTemplate {
 	}
 
     // Testing "Appears on these pages"
-    @Test(groups = {"FilePage", "FilePage004"})
+    @Test(groups = {"FilePage", "filePage004_appearsOn"})
     public void filePage004_appearsOn() {
         FilePagePageObject filePage = new FilePagePageObject(driver);
         filePage.openFilePage(URLsContent.fileName002);
