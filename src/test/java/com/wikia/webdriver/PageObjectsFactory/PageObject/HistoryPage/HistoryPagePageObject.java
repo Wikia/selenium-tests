@@ -8,6 +8,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class HistoryPagePageObject extends BasePageObject {
 
@@ -25,7 +26,8 @@ public class HistoryPagePageObject extends BasePageObject {
 	//String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
 	public void openHistoryPage(String articlePage) {
-		getUrl(articlePage + URLsContent.historyAction);
+		WikiBasePageObject wikiObject = new WikiBasePageObject(driver, Global.DOMAIN);
+		wikiObject.getUrl(URLsContent.buildUrl(articlePage, URLsContent.historyAction));
 		waitForTextToBePresentInElementByElement(diffHeader, "History");
 		PageObjectLogging.log("Open history page", "history page opened", true);
 	}
