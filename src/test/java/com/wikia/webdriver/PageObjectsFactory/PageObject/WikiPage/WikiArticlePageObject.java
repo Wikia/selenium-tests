@@ -89,7 +89,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By RVvideoLoading = By.cssSelector("section.loading");
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
-	private By videoOnPublish = By.cssSelector("a.image.video");
+	private By videoOnPublish = By.cssSelector("figure a.image.video");
 	
 
 	public WikiArticlePageObject(WebDriver driver, String Domain,
