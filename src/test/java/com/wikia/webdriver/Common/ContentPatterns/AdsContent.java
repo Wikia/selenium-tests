@@ -43,24 +43,24 @@ public class AdsContent {
     public static String prefooterLeft = "PREFOOTER_LEFT_BOXAD";
     public static String prefooterRight = "PREFOOTER_RIGHT_BOXAD";
 
-    public AdsContent() {
-	setSlotsSelectors();
-    }
+	public AdsContent() {
+		setSlotsSelectors();
+	}
 
     private void setSlotsSelectors() {
-	slotsSelectors.put("HOME_TOP_LEADERBOARD", "#HOME_TOP_LEADERBOARD");
-	slotsSelectors.put("CORP_TOP_LEADERBOARD", "#CORP_TOP_LEADERBOARD");
-	slotsSelectors.put("TOP_LEADERBOARD", "#TOP_LEADERBOARD");
-	slotsSelectors.put("HOME_TOP_RIGHT_BOXAD", "#HOME_TOP_RIGHT_BOXAD");
-	slotsSelectors.put("TOP_RIGHT_BOXAD", "#TOP_RIGHT_BOXAD");
-//	slotsSelectors.put("WIKIA_BAR_BOXAD_1", "#WIKIA_BAR_BOXAD_1");
-	slotsSelectors.put("LEFT_SKYSCRAPER_2", "#LEFT_SKYSCRAPER_2");
-	slotsSelectors.put("LEFT_SKYSCRAPER_3", "#LEFT_SKYSCRAPER_3");
-	slotsSelectors.put("INCONTENT_BOXAD_1", "#INCONTENT_BOXAD_1");
-	slotsSelectors.put("PREFOOTER_LEFT_BOXAD", "#PREFOOTER_LEFT_BOXAD");
-	slotsSelectors.put("PREFOOTER_RIGHT_BOXAD", "#PREFOOTER_RIGHT_BOXAD");
-	slotsSelectors.put("AdsInContent", "#WikiaAdInContentPlaceHolder");
-	slotsSelectors.put("Prefooters", "#WikiaArticleBottomAd");
+		slotsSelectors.put("HOME_TOP_LEADERBOARD", "#HOME_TOP_LEADERBOARD");
+		slotsSelectors.put("CORP_TOP_LEADERBOARD", "#CORP_TOP_LEADERBOARD");
+		slotsSelectors.put("TOP_LEADERBOARD", "#TOP_LEADERBOARD");
+		slotsSelectors.put("HOME_TOP_RIGHT_BOXAD", "#HOME_TOP_RIGHT_BOXAD");
+		slotsSelectors.put("TOP_RIGHT_BOXAD", "#TOP_RIGHT_BOXAD");
+//		slotsSelectors.put("WIKIA_BAR_BOXAD_1", "#WIKIA_BAR_BOXAD_1");
+		slotsSelectors.put("LEFT_SKYSCRAPER_2", "#LEFT_SKYSCRAPER_2");
+		slotsSelectors.put("LEFT_SKYSCRAPER_3", "#LEFT_SKYSCRAPER_3");
+		slotsSelectors.put("INCONTENT_BOXAD_1", "#INCONTENT_BOXAD_1");
+		slotsSelectors.put("PREFOOTER_LEFT_BOXAD", "#PREFOOTER_LEFT_BOXAD");
+		slotsSelectors.put("PREFOOTER_RIGHT_BOXAD", "#PREFOOTER_RIGHT_BOXAD");
+		slotsSelectors.put("AdsInContent", "#WikiaAdInContentPlaceHolder");
+		slotsSelectors.put("Prefooters", "#WikiaArticleBottomAd");
     }
 }
 
