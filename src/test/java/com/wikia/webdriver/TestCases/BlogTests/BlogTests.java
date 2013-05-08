@@ -8,7 +8,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -209,5 +209,20 @@ public class BlogTests extends TestTemplate{
 		blogPage.clickSubmitButton();
 		blogPage.verifyCommentText(PageContent.blogComment, Properties.userName);
 		blogPage.replyComment(PageContent.blogComment, PageContent.blogCommentReply);
+	}
+	
+	@Test(groups = {"BlogTests_009", "BlogTests"})
+	public void BlogTests_009_CreateBlogListing(){
+		
+	}
+	
+	@Test(groups = {"BlogTests_009", "BlogTests"})
+	public void BlogTests_010_EditBlogListing(){
+		
+	}
+	
+	@Test(groups = {"BlogTests_009", "BlogTests"})
+	public void BlogTests_011_DeleteBlogListing(){
+		
 	}
 }
