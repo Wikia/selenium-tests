@@ -79,13 +79,13 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 		wikiPage.verifyNoAdsOnWikiPage();
 	}
 
-	@GeoEdgeProxy(country="UK")
+	@GeoEdgeProxy(country="UA")
 	@Test (
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="noAdsForUsers",
-		groups={"noAdsForUsers", "NoAdsForUsers_06", "Ads", "UK"}
+		groups={"noAdsForUsers", "NoAdsForUsers_06", "Ads", "UA"}
 	)
-	public void TestNoAdsForUsers_UK(String page) throws Exception {
+	public void TestNoAdsForUsers_UA(String page) throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 		wikiPage.verifyNoAdsOnWikiPage();

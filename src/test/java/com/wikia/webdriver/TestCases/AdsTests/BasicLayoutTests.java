@@ -56,13 +56,13 @@ public class BasicLayoutTests extends AdsTestTemplate {
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
 
-	@GeoEdgeProxy(country="UK")
+	@GeoEdgeProxy(country="UA")
 	@Test (
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="popularSites",
-		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_005", "Ads", "UK"}
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_005", "Ads", "UA"}
 	)
-	public void TestBasicLayout_UK(String page) {
+	public void TestBasicLayout_UA(String page) {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
