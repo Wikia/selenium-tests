@@ -260,7 +260,6 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	public void checkSymbolsTools()
 	{
 		for (int i=1; i<65; i++){
-			System.out.println(i);
 			clearSource();
 			clickMore();
 			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).getText();
