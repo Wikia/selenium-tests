@@ -8,9 +8,10 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogListingPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 public class BlogTests extends TestTemplate{
 	
@@ -214,6 +215,13 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = {"BlogTests_009", "BlogTests"})
 	public void BlogTests_009_CreateBlogListing(){
 		
+		SpecialCreateBlogListingPageObject blogList = new SpecialCreateBlogListingPageObject(driver);
+		blogList.openRandomArticleByUrl();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		blogList
+			.openCreateBlogListingPage()
+			.typeTitle(blogList.getTimeStamp())
+			.clickSavePageButton();
 	}
 	
 	@Test(groups = {"BlogTests_009", "BlogTests"})
