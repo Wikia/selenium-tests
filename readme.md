@@ -60,6 +60,7 @@ The following are valid for use in the `-Dgroups` parameter:
 * Login
 * MessageWall
 * RTE
+* Search
 * Toolbar
 
 ## Reading Logs
