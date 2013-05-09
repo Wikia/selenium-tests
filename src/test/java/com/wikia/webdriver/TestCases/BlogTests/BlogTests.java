@@ -15,18 +15,14 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageO
 
 public class BlogTests extends TestTemplate{
 	
-//	private String blogContent = "blogContent";
-//	private String blogContentEdit = "blogContentEdit";
-//	private String blogComment = "blogComment";
-//	private String blogCommentEdit = "blogCommentEdit";
+	String blogPostTitle;
 	
 	@Test(groups = { "BlogTests_001", "BlogTests" })
 	public void BlogTests_001_CreateBlogPost(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
-		home.openWikiPage();
-//		String blogPostTitle = "blogPost"+home.getTimeStamp(); 
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
+		home.openWikiPage(); 
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
@@ -46,7 +42,7 @@ public class BlogTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
@@ -71,7 +67,7 @@ public class BlogTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
 		userProfile.clickOnBlogTab();
@@ -92,7 +88,7 @@ public class BlogTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
 		userProfile.clickOnBlogTab();
@@ -114,7 +110,7 @@ public class BlogTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
@@ -138,7 +134,7 @@ public class BlogTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
@@ -166,7 +162,7 @@ public class BlogTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
 		userProfile.clickOnBlogTab();
@@ -192,7 +188,7 @@ public class BlogTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
 		home.openWikiPage();
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
+		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
 		userProfile.clickOnBlogTab();
@@ -218,11 +214,12 @@ public class BlogTests extends TestTemplate{
 		SpecialCreateBlogListingPageObject blogList = new SpecialCreateBlogListingPageObject(driver);
 		blogList.openRandomArticleByUrl();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		blogPostTitle = PageContent.blogListName+blogList.getTimeStamp();
 		blogList
 			.openCreateBlogListingPage()
-			.typeTitle(blogList.getTimeStamp())
+			.typeTitle(blogPostTitle)
 			.clickSavePageButton()
-			.verifyBlogListPage(blogList.getTimeStamp());
+			.verifyBlogListPage(blogPostTitle);
 	}
 	
 	@Test(groups = {"BlogTests_009", "BlogTests"})

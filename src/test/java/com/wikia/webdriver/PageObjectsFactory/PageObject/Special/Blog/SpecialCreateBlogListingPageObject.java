@@ -58,6 +58,7 @@ public class SpecialCreateBlogListingPageObject extends BasePageObject{
 	
 	public BlogListPageObject clickSavePageButton(){
 		waitForElementByElement(savePageButton);
+		savePageButton.click();
 		PageObjectLogging.log("clickSavePageButton", "save page button clicked", true);
 		return new BlogListPageObject(driver);
 	}

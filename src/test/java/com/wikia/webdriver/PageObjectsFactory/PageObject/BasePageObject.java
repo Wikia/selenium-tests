@@ -190,21 +190,10 @@ public class BasePageObject{
 	 * Checks if the current URL is the given URL
 	 *
 	 *  @author Michal Nowierski
-	 ** @param GivenURL 
+	 ** @param givenURL 
 	 */
-	public boolean verifyURL(String GivenURL)
-	{
-		String currentURL = driver.getCurrentUrl();
-		if (currentURL.equals(GivenURL))
-		{
-			PageObjectLogging.log("verifyURL", "Given URL matches actual URL", true);
-			return true;
-		}
-		else {
-			PageObjectLogging.log("verifyURL", "Given URL: "+GivenURL+", does not match actual URL: "+currentURL, false);
-			return false;
-		}
-		
+	public void verifyURL(String givenURL){
+		Assertion.assertEquals(givenURL, driver.getCurrentUrl());
 	}
 	
 	public String getCurrentUrl()
