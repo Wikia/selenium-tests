@@ -10,6 +10,9 @@ public class URLsContent {
 
 	//Preview url prefix
 	public static String previewPrefix = "http://preview";
+	
+	// Common url component
+	public static String wikiDir = "wiki/";
 
 	// Ads - pages with height better than 2400 px
 	public static String wikiSearchMiddleLink1 = "http://preview.plantsvszombies.wikia.com/wiki/Special:Search?ns0=1&ns14=1&search=zombies&fulltext=Search&ns0=1&ns14=1&advanced=";
@@ -70,5 +73,18 @@ public class URLsContent {
 			return temp;
 		}
 	}
+	
+	// File Pages
+	public static String fileNS = "File:";
+	public static String fileName = "Grammy_Muppet_Critics";
+	public static String fileName002 = "New_Batman_Year_One_Clip";
 
+	// History Pages
+	public static String historyAction = "action=history";
+
+    // Article Pages
+    public static String articleName001 = "TestVid001";
+    public static String articleName002 = "TestVid002";
+    public static String articleName003 = "TestVid003";
+    public static String articleName004 = "TestVid004";
 }

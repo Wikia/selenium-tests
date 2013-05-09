@@ -11,7 +11,7 @@ public class FilePageObject extends BasePageObject{
 		public FilePageObject(WebDriver driver, String fileName) {
 			super(driver);
 			this.fileName = fileName;
-			}
+		}
 
 		public String getWikiName() {
 			return fileName;

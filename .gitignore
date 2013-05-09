@@ -4,3 +4,8 @@ target/
 Thumbs.db
 chromedriver.log
 tmp.exe
+.classpath
+.project
+.settings/
+test-output/
+pom.xml
