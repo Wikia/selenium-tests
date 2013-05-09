@@ -24,7 +24,7 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_US(String page) throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAds();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="GB")
@@ -35,7 +35,7 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_GB(String page) throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAds();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="DE")
@@ -46,7 +46,7 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_DE(String page) throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAds();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="CA")
@@ -57,7 +57,7 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_CA(String page) throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAds();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="AU")
@@ -68,7 +68,7 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_AU(String page) throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAds();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="PL")
@@ -79,7 +79,7 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_PL(String page) throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAds();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="UA")
@@ -91,6 +91,6 @@ public class AdsOnCorporatePageTests extends AdsTestTemplate {
 
 	public void TestCorporatePage_UA(String page) throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAds();
+		wikiPage.verifyNoAdsOnPage();
 	}
 }
