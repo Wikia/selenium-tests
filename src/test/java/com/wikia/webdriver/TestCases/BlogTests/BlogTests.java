@@ -221,7 +221,8 @@ public class BlogTests extends TestTemplate{
 		blogList
 			.openCreateBlogListingPage()
 			.typeTitle(blogList.getTimeStamp())
-			.clickSavePageButton();
+			.clickSavePageButton()
+			.verifyBlogListPage(blogList.getTimeStamp());
 	}
 	
 	@Test(groups = {"BlogTests_009", "BlogTests"})
