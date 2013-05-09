@@ -29,6 +29,9 @@ public class URLsContent {
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
 	
+	//Blog list page url
+	public static final String blogList = "wiki/Blog:%listName%";
+	
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
 
