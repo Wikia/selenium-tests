@@ -81,7 +81,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.openRandomArticleByUrl();
 		article.verifyRVModulePresence();
 		VetAddVideoComponentObject vetAddingVideo = article.clickOnAddVideoRVModule();
-		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 4);
 		article.verifyVideoAddedToRVModule(VideoContent.wikiaVideoName);
 	}
 	
