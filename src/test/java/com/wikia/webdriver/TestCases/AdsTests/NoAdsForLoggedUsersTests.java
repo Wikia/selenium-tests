@@ -27,7 +27,7 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	)
 	public void TestNoAdsForUsers_US(String page) throws Exception {
 		loginSteps();
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, improvedPageUrl);
 		wikiPage.verifyNoAdsOnPage();
 	}
 
