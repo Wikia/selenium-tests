@@ -76,7 +76,7 @@ public class DriverProvider {
             		        // Set default NetExport preferences
             		    profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
             		    profile.setPreference(domain + "netexport.showPreview", false);
-            		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.harFilePath);
+            		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.harDirPath);
             		}   catch (IOException e) {
             			// TODO Auto-generated catch block
             			e.printStackTrace();

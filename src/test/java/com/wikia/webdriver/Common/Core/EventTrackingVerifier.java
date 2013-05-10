@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,24 +8,26 @@ import java.util.ArrayList;
 import com.google.gson.stream.JsonReader;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
+/**This class is used for verification, if wikia.tracker is logging events properly and sends them to google.analytics
+ * 
+ * @author Michal "justnpT" Nowierski
+ *
+ */
 public class EventTrackingVerifier {
 
-	private String harFilesPath;
 	private ArrayList<String> trackedEventsList;
 	
-	public EventTrackingVerifier(String harFilePath) {
-		this.harFilesPath = harFilePath;
-		trackedEventsList = getTrackedEventsFromFolder(harFilePath);
-//		trackedEventsList = getTrackedEventsFromFile("harFileName");
+	public EventTrackingVerifier(String harDirtPath) {
+		trackedEventsList = getTrackedEventsFromFolder(harDirtPath);
 	}
 
-	private ArrayList<String> getTrackedEventsFromFolder(String harFilePath) {
+	private ArrayList<String> getTrackedEventsFromFolder(String harDirPath) {
 		ArrayList<String> finalTrackedEvents = new ArrayList<String>();
 		ArrayList<String> listOfHarFiles = new ArrayList<String>();
-		listOfHarFiles = getAllHarFiles(harFilePath);
+		listOfHarFiles = getAllHarFiles(harDirPath);
 		for (int i = 0; i < listOfHarFiles.size(); i++) {
 			ArrayList<String> trackedEvents = new ArrayList<String>();
-			trackedEvents = getTrackedEventsFromFile(harFilePath+listOfHarFiles.get(i));
+			trackedEvents = getTrackedEventsFromFile(harDirPath+listOfHarFiles.get(i));
 			finalTrackedEvents.addAll(trackedEvents);
 		}
 		return finalTrackedEvents;
@@ -33,21 +36,41 @@ public class EventTrackingVerifier {
 	/**
 	 * returns list of all .har files names in specified folder
 	 * 
-	 * @param harFilePath
+	 * @param harDirPath
 	 * @return
 	 */
-	private ArrayList<String> getAllHarFiles(String harFilePath) {
-		// TODO return list of all .har files
-		return null;
+	private ArrayList<String> getAllHarFiles(String harDirPath) {
+		ArrayList<String> fileNamesList = new ArrayList<String>();		
+		String fileName;
+		File Folder = new File(harDirPath);
+		File[] listOfFiles = Folder.listFiles();
+		 for (int i = 0; i < listOfFiles.length; i++) 
+		  {
+		 
+		   if (listOfFiles[i].isFile()) 
+		   {
+			   fileName = listOfFiles[i].getName();
+			   fileNamesList.add(fileName);
+		      }
+		  }
+		return fileNamesList;
 	}
 
+	/**
+	 * verify if specified event was logged by Wikia.tracker
+	 * 
+	 * @param eventContent event name, eg: "editor-ck*view*edit-page"
+	 */
 	public void verifyEvent(String eventContent) {
 		for (int i = 0; i < trackedEventsList.size(); i++) {
 			if (trackedEventsList.get(i).contains(eventContent)) {
 				PageObjectLogging.log("verifyEvent", eventContent+" event was logged by wikia tracker", true);
+				break;
 			}
 			else {
-				PageObjectLogging.log("verifyEvent", eventContent+" event wasn't logged by wikia tracker", false);				
+				if (i==trackedEventsList.size()-1) {
+					PageObjectLogging.log("verifyEvent", eventContent+" event wasn't logged by wikia tracker", false);									
+				}
 			}
 		}
 	}
@@ -61,21 +84,17 @@ public class EventTrackingVerifier {
 	 * @return list with all events reported by WikiaTracker in analized har file
 	 */
 	private ArrayList<String> getTrackedEventsFromFile(String harFileName) {
-		ArrayList<String> lista = new ArrayList<String>();
-
+		PageObjectLogging.log("getTrackedEventsFromFile", "starting process of extracting events from file: "+harFileName, true);
+		ArrayList<String> listOfTrackedEvents = new ArrayList<String>();
 		try {
-			JsonReader reader = new JsonReader(new FileReader(harFilesPath+"muppet.michalnowierski.wikia-dev.com+2013-04-29+16-50-27.har"));
-		 
-			reader.beginObject();
-		 		 
+			JsonReader reader = new JsonReader(new FileReader(harFileName));		 
+			reader.beginObject();		 		 
 			String name = reader.nextName();
-		      System.out.println(name);
 		      reader.beginObject();
 		      while (reader.hasNext()) {		
 		    	switch (reader.peek()) {
 				case NAME:
 					name = reader.nextName();
-					System.out.println("string name: " + name);
 					if (name.equals("entries")) {
 						reader.beginArray();
 						reader.beginObject();
@@ -85,7 +104,12 @@ public class EventTrackingVerifier {
 					}
 					if (name.equals("headers")) {
 						reader.beginArray();
-						reader.beginObject();
+						if (reader.peek().name().equals("END_ARRAY")) {
+							reader.endArray();
+						}
+						else {
+							reader.beginObject();							
+						}
 					}
 					if (name.equals("name")) {
 						String isHost = reader.nextString();
@@ -121,8 +145,7 @@ public class EventTrackingVerifier {
 							reader.skipValue();
 							if (reader.nextString().equals("utme")) {
 								reader.skipValue();
-								lista.add(reader.nextString());
-								System.out.println(lista.get(lista.size()-1));
+								listOfTrackedEvents.add(reader.nextString());
 								reader.endObject();
 							}
 							else {
@@ -151,20 +174,15 @@ public class EventTrackingVerifier {
 				case STRING:
 				if (reader.nextString().equals("utme")) {
 					reader.skipValue();
-					lista.add(reader.nextString());
+					listOfTrackedEvents.add(reader.nextString());
 					reader.endObject();
 					reader.endArray();
 				}
 				break;
-				default: System.out.println("default and skip because: "+reader.peek().name()); reader.skipValue();
+				default: reader.skipValue();
 					break;
 				}  		    			    	
 		      }	
-		 
-		     System.out.println("found events: ");
-		     for (int i = 0; i < lista.size(); i++) {
-				System.out.println(lista.get(i));
-			}
 			reader.endObject();
 			reader.close();
 		 
@@ -173,7 +191,7 @@ public class EventTrackingVerifier {
 		     } catch (IOException e) {
 			e.printStackTrace();
 		     }	  
-		return lista;
+		return listOfTrackedEvents;
 	}
 
 
