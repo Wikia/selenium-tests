@@ -4,9 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import com.google.gson.stream.JsonReader;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class EventTrackingVerifier {
 
@@ -15,10 +14,42 @@ public class EventTrackingVerifier {
 	
 	public EventTrackingVerifier(String harFilePath) {
 		this.harFilesPath = harFilePath;
-		trackedEventsList = getTrackedEvents("harFileName");
+		trackedEventsList = getTrackedEventsFromFolder(harFilePath);
+//		trackedEventsList = getTrackedEventsFromFile("harFileName");
 	}
 
-	public void verifyEvent(String eventContent) {				
+	private ArrayList<String> getTrackedEventsFromFolder(String harFilePath) {
+		ArrayList<String> finalTrackedEvents = new ArrayList<String>();
+		ArrayList<String> listOfHarFiles = new ArrayList<String>();
+		listOfHarFiles = getAllHarFiles(harFilePath);
+		for (int i = 0; i < listOfHarFiles.size(); i++) {
+			ArrayList<String> trackedEvents = new ArrayList<String>();
+			trackedEvents = getTrackedEventsFromFile(harFilePath+listOfHarFiles.get(i));
+			finalTrackedEvents.addAll(trackedEvents);
+		}
+		return finalTrackedEvents;
+	}
+
+	/**
+	 * returns list of all .har files names in specified folder
+	 * 
+	 * @param harFilePath
+	 * @return
+	 */
+	private ArrayList<String> getAllHarFiles(String harFilePath) {
+		// TODO return list of all .har files
+		return null;
+	}
+
+	public void verifyEvent(String eventContent) {
+		for (int i = 0; i < trackedEventsList.size(); i++) {
+			if (trackedEventsList.get(i).contains(eventContent)) {
+				PageObjectLogging.log("verifyEvent", eventContent+" event was logged by wikia tracker", true);
+			}
+			else {
+				PageObjectLogging.log("verifyEvent", eventContent+" event wasn't logged by wikia tracker", false);				
+			}
+		}
 	}
 	
 	/**
@@ -29,7 +60,7 @@ public class EventTrackingVerifier {
 	 * 
 	 * @return list with all events reported by WikiaTracker in analized har file
 	 */
-	private ArrayList<String> getTrackedEvents(String harFileName) {
+	private ArrayList<String> getTrackedEventsFromFile(String harFileName) {
 		ArrayList<String> lista = new ArrayList<String>();
 
 		try {
