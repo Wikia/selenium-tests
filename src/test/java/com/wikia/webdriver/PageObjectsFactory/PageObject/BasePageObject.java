@@ -969,7 +969,11 @@ public class BasePageObject{
         }
     }
 	public void enableWikiaTracker() {
-		appendToUrl("&log_level=info");		
+		if (driver.getCurrentUrl().contains("?")) {
+			appendToUrl("&log_level=info");					
+		} else {
+			appendToUrl("?log_level=info");								
+		}
 	}
 
 	public void appendToUrl(String additionToUrl) {

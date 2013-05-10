@@ -1,9 +1,8 @@
 package com.wikia.webdriver.TestCases.EventTrackingTests;
 
-import org.apache.tools.ant.taskdefs.PathConvert;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.EventsContent;
 import com.wikia.webdriver.Common.ContentPatterns.PathsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -17,7 +16,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 
 /**
  * Those tests cover testing events from below wikia spreadsheet
- * https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0Ahq3QVBqbE1xdElQRmRvbk4tMUc3VXVmeWl6WlFWSEE#gid=4
+ * https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0
+ * Ahq3QVBqbE1xdElQRmRvbk4tMUc3VXVmeWl6WlFWSEE#gid=4
+ * 
  * @author Michal 'justnpT' Nowierski
  */
 public class EditorEventTrackingTests extends TestTemplate {
@@ -44,12 +45,13 @@ public class EditorEventTrackingTests extends TestTemplate {
 		edit.enableWikiaTracker();
 //		edit.clickGalleryButton();
 		try {
-			Thread.sleep(10000); //this is required to make sure that netExport has time to export the wanted har files
+			Thread.sleep(10000); // this is required to make sure that netExport
+									// has time to export the wanted har files
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		EventTrackingVerifier verifier = new EventTrackingVerifier(PathsContent.harDirPath);
-		verifier.verifyEvent("editor-ck*view*edit-page");
-		verifier.verifyEvent("editor-ck*open*gallery-tool");
+		verifier.verifyEvent(EventsContent.editPageEvent);
+		verifier.verifyEvent(EventsContent.openGalleryEvent);
 	}
 }
