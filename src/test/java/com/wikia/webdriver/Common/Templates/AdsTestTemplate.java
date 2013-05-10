@@ -27,7 +27,7 @@ public class AdsTestTemplate extends TestTemplate {
      */
     @BeforeMethod(alwaysRun=true)
     @Override
-    public void start(Method method) {
+    public void start(Method method, Object[] data) {
         try {
             GeoEdgeProxy country = method.getAnnotation(GeoEdgeProxy.class);
             adServer = new GeoEdgeProxyServer(
@@ -42,6 +42,7 @@ public class AdsTestTemplate extends TestTemplate {
         } catch (Exception ex) {
             Logger.getLogger(AdsTestTemplate.class.getName()).log(Level.SEVERE, null, ex);
         }
+		improvePageUrl((String) data[0]);
     }
 
     @AfterMethod(alwaysRun=true)
