@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -10,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -80,7 +82,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		String prefooterSelector = (String) adsContent.slotsSelectors.get("Prefooters");
 		WebElement prefooterContainer = driver.findElement(By.cssSelector(prefooterSelector));
 
-		//Scroll to AIC container and wait for <div> to be present inside it
+		//Scroll to Prefooters container and wait for <div> to be present inside it
 		scrollToSelector(prefooterSelector);
 		checkTagsPresent(prefooterContainer);
 	}
@@ -115,7 +117,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		Global.LOG_ENABLED  = true;
 	}
 
-	private void checkScriptPresentInSlot(String slotName, WebElement slotElement) {
+	private List checkScriptPresentInSlot(String slotName, WebElement slotElement) {
 		List<WebElement> scriptsTags = slotElement.findElements(By.tagName("script"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Boolean scriptFound = false;
@@ -144,6 +146,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
+		return scriptsTags;
 	}
 
 	private String setEnviroment(String page) {
@@ -168,12 +171,27 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void scrollToSelector(String selector) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript(
-			"var x = $(arguments[0]);"
-			+ "window.scroll(0,x.position()['top']+x.height()+250);"
-			+ "$(window).trigger('scroll');",
-			selector
+		if (driver.findElements(By.cssSelector((selector))).size() > 0) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			try {
+				js.executeScript(
+					"var x = $(arguments[0]);"
+					+ "window.scroll(0,x.position()['top']+x.height()+100);"
+					+ "$(window).trigger('scroll');",
+					selector
+				);
+			} catch (WebDriverException e) {
+				if (e.getMessage().contains(XSSContent.noJQueryError)) {
+					PageObjectLogging.log(
+						"JSError", "JQuery is not defined", true
+					);
+				}
+			}
+		}
+		PageObjectLogging.log(
+			"SelectorNotFound",
+			"Selector " + selector + " not found on page",
+			true
 		);
 	}
 
@@ -192,6 +210,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 		waitForElementByElement(aicContainer.findElement(By.cssSelector("div")));
 
 		checkTagsPresent(aicContainer);
+	}
+
+	public void verifyHubTopLeaderboard() {
+		String hubTLName = AdsContent.HubTopLeaderboard;
+		List scripts = checkScriptPresentInSlot(hubTLName, anyLeaderboardContainer);
+		checkDartCallPresent(scripts);
 	}
 
     private void verifyNoAds() throws Exception {
@@ -227,5 +251,25 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
+	}
+
+	private void checkDartCallPresent(List <WebElement> scripts) {
+		String dartCall = AdsContent.dartCallHubsRegEx;
+		for (WebElement script : scripts) {
+			String src = script.getAttribute("src");
+			if (src.matches(dartCall)) {
+				PageObjectLogging.log(
+					"DartCallFound",
+					"Dart call found in script " + src,
+					true
+				);
+				return;
+			}
+		}
+		PageObjectLogging.log(
+			"DartCallFound",
+			"Dart call not found in script",
+			false
+		);
 	}
 }

@@ -46,7 +46,8 @@ public class AdsDataProvider {
 			{"http://monsterhunter.wikia.com/wiki/Portal:MH3U"},
 			{"http://www.wikia.com"},
 			{"http://elderscrolls.wikia.com/wiki/Skyrim"},
-			{"http://wiki.ffxiclopedia.org/wiki/Category:Jobs"}
+			{"http://de.gta.wikia.com/wiki/Welding_%26_Weddings"},
+//			{"http://wiki.ffxiclopedia.org/wiki/Category:Jobs"}
 		};
 	}
 
@@ -63,6 +64,26 @@ public class AdsDataProvider {
 			{"http://yugioh.wikia.com/wiki/Lord_of_the_Tachyon_Galaxy"},
 			{"http://es.dragonball.wikia.com/wiki/Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"http://wiki.ffxiclopedia.org/wiki/Category:Jobs"}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] hubsPages() {
+		return new Object[][] {
+			{"http://wikia.com/Video_Games"},
+			{"http://www.wikia.com/Video_Games/Lizzunchbox"},
+			{"http://www.wikia.com/Video_Games/Meet_the_Character"},
+			{"http://www.wikia.com/Video_Games/Gaming_Calendar"},
+			{"http://www.wikia.com/Video_Games/This_Week%27s_Tool"},
+			{"http://www.wikia.com/Entertainment"},
+			{"http://www.wikia.com/Entertainment/TV_Schedule"},
+			{"http://www.wikia.com/Entertainment/ToMoro"},
+			{"http://www.wikia.com/Entertainment/Failsafe"},
+			{"http://www.wikia.com/Lifestyle"},
+			{"http://www.wikia.com/Lifestyle/21_December_2012"},
+			{"http://www.wikia.com/Lifestyle/20_December_2012"},
+			{"http://de.wikia.com/Videospiele"},
+			{"http://de.wikia.com/Videospiele/gamescom"}
 		};
 	}
 }
