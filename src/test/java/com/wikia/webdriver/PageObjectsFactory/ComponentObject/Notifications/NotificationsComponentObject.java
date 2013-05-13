@@ -1,9 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -12,38 +15,36 @@ public class NotificationsComponentObject extends BasePageObject{
 	
 	public NotificationsComponentObject(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
-	@FindBy(css="div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
-	protected WebElement customizeButton;
-	@FindBy(css="div.msg")
-	protected WebElement pageWatchlistStatusMessage;
-	@FindBy(css="div.search-box input.search")
-	protected WebElement findAToolField;
-	@FindBy(css="div.MyToolsRenameItem input.input-box")
-	protected WebElement renameItemDialogInput;
-	@FindBy(css="div.MyToolsRenameItem input.save-button")
-	protected WebElement saveItemDialogInput;
-	@FindBy(css="input.save-button")
-	protected WebElement saveButton;
-	@FindBy(css="span.reset-defaults a")
-	protected WebElement resetDefaultsButton;
-	@FindBy(css="li.mytools.menu")
-	protected WebElement myToolsMenuButton;
-	@FindBy(css="ul[id='my-tools-menu']")
-	protected WebElement myToolsMenu;
-	
-	
+	@FindBy(css="div.bubbles")
+	protected WebElement notificationsBubbles;
+	@FindBys(@FindBy(css="li.unread_notification a"))
+	private List<WebElement> notificationsList;
+	@FindBys(@FindBy(css="#WallNotifications li ul.subnav"))
+	private List<WebElement> notificationsSubnav;
+
 	private By toolsList = By.cssSelector("ul.tools li");
 	
 	/**
-	 * Verifies that user toolbar buttons are visible
+	 * shown notifications 
 	 */
-	public void verifyUserToolBar()
-	{
-		waitForElementByCss("div.toolbar ul.tools li.overflow");
-		waitForElementByCss("div.toolbar ul.tools li.mytools");
-		waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
-		PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true);
+	public void showNotifications() {
+		executeScript("$('#WallNotifications li ul.subnav').addClass('show')");
+		PageObjectLogging.log("#WallNotifications li ul.subnav", "show notifications", true, driver);
+	}
+	
+	/**
+	 * click notifications bubble
+	 */
+	public void clickNotifications() {
+		waitForElementByElement(notificationsBubbles);
+		clickAndWait(notificationsBubbles);
+		PageObjectLogging.log("clickshowNotifications", "click on notifications bubbles", true, driver);
+	}
+
+	public String getNotificationLink(int notificationNumber) {
+		waitForElementByElement(notificationsList.get(notificationNumber - 1));
+		PageObjectLogging.log("unrollNotifications", "click on notifications bubbles", true, driver);
+		return notificationsList.get(notificationNumber - 1).getAttribute("href");
 	}
 }

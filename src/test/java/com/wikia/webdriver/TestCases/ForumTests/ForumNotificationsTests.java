@@ -3,9 +3,14 @@ package com.wikia.webdriver.TestCases.ForumTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.CustomizedToolbar.CustomizedToolbarComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
@@ -22,9 +27,11 @@ public class ForumNotificationsTests extends TestTemplate{
 	 */
 	@Test(groups= {"ForumNotificationsTests_001", "ForumNotificationsTests", "Forum"} )
 	public void forumNotificationsTests_001_notificationsGoToCorrectAnchoredPost(){
+		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+//		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
+		CommonFunctions.logInCookie("NeptuNtester", "1tester.", driver);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -32,9 +39,34 @@ public class ForumNotificationsTests extends TestTemplate{
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 		CommonFunctions.logOut(driver);
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		// user 2 leaves 5 replies on user 1 thread
+		CommonFunctions.logInCookie("NeptuNooo", "123michalNexternalwikia.");
+		forumMainPage.openForumMainPage();
+		forumBoard = forumMainPage.openForumBoard(1);	
+		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);		
+		forumThread.reply(message);
+		forumThread.verifyReplyMessage(2, message);		
+		forumThread.reply(message);
+		forumThread.verifyReplyMessage(3, message);		
+		forumThread.reply(message);
+		forumThread.verifyReplyMessage(4, message);		
+		forumThread.reply(message);
+		forumThread.verifyReplyMessage(5, message);		
+		CommonFunctions.logOut(driver);
+		// user 1 verifies his notifications
+		forumMainPage = new ForumPageObject(driver);
+		CommonFunctions.logIn("NeptuNtester", "1tester.", driver);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage();
+		forumBoard = forumMainPage.openForumBoard(1);	
+		
+		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
+		notifications.showNotifications();
+		notifications.clickNotifications();
+		String anchoredLink = notifications.getNotificationLink(1);	
 	}
 	
 }
