@@ -15,10 +15,10 @@ public class AdsDataProvider {
             {"http://zh.pad.wikia.com/wiki/%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
             {"http://leagueoflegends.wikia.com/wiki/League_of_Legends_Wiki"},
             {"http://runescape.wikia.com/wiki/RuneScape_Wiki"},
-            {"http://zh.againstwar.wikia.com/wiki/逆轉三國_维基"},
+            {"http://zh.againstwar.wikia.com/wiki/%E9%80%86%E8%BD%89%E4%B8%89%E5%9C%8B_%E7%BB%B4%E5%9F%BA"},
             {"http://yugioh.wikia.com/wiki/Main_Page"},
-            {"http://zh.tos.wikia.com/wiki/Category:圖鑒"},
-            {"http://zh.pad.wikia.com/wiki/Category:宠物"},
+            {"http://zh.tos.wikia.com/wiki/Category:%E5%9C%96%E9%91%92"},
+            {"http://zh.pad.wikia.com/wiki/Category:%E5%AE%A0%E7%89%A9"},
             {"http://dragonvale.wikia.com/wiki/Eggs"},
             {"http://naruto.wikia.com/wiki/Narutopedia"}
         };
