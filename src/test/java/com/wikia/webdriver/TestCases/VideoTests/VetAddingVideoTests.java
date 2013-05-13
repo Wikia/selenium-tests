@@ -84,7 +84,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyRVModulePresence();
 		VetAddVideoComponentObject vetAddingVideo = article.clickOnAddVideoRVModule();
 		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 4);
-		article.verifyVideoAddedToRVModule(VideoContent.wikiaVideoName);
+		article.verifyVideoAddedToRVModule(vetAddingVideo.getVideoName());
 	}
 	
 	@Test(groups = {"VetTests005", "VetTests", "VetAddVideo"})
