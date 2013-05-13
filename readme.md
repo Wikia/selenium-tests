@@ -11,7 +11,7 @@ The following steps should get you set up for running Selenium tests locally on 
 1. First, make sure you have [Java](http://www.java.com/) and [Maven](http://maven.apache.org/) installed on your system, if not follow the vendor instructions for installing them on your operating system.
 2. Clone this repository to your local machine (not your devbox).
 3. Clone selenium-config repository to the same folder (eg. myfolder/selenium-tests and myfolder/selenium-config)
-4. Create a symlink from `/selenium-config/config.xml` to wherever your selenium-config repository is checked out to (and the same for `<captcha>` block).
+4. Create a symlink from `/selenium-config/config.xml` to wherever your selenium-config repository is checked out to.
 5. Open up a terminal and navigate to the root directory of the repository.
 
 Using Maven, you may now run any tests you want on whatever database and domain you want:
