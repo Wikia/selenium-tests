@@ -68,6 +68,6 @@ public class ForumNotificationsTests extends TestTemplate{
 		notifications.clickNotifications();
 		String anchoredLink = notifications.getNotificationLink(1);
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
-		Assertion.assertEquals("2", anchor);
+		Assertion.assertEquals("#2", anchor);
 	}
 }
