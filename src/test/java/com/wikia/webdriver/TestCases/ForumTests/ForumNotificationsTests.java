@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -31,7 +32,7 @@ public class ForumNotificationsTests extends TestTemplate{
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 //		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
-		CommonFunctions.logInCookie("NeptuNtester", "1tester.", driver);
+		CommonFunctions.logIn("NeptuNtester", "1tester.", driver);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -40,7 +41,7 @@ public class ForumNotificationsTests extends TestTemplate{
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 		CommonFunctions.logOut(driver);
 		// user 2 leaves 5 replies on user 1 thread
-		CommonFunctions.logInCookie("NeptuNooo", "123michalNexternalwikia.");
+		CommonFunctions.logIn("NeptuNooo", "123michalNexternalwikia.", driver);
 		forumMainPage.openForumMainPage();
 		forumBoard = forumMainPage.openForumBoard(1);	
 		forumThread = forumBoard.openDiscussion(title);
@@ -66,7 +67,8 @@ public class ForumNotificationsTests extends TestTemplate{
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(1);	
+		String anchoredLink = notifications.getNotificationLink(1);
+		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
+		Assertion.assertEquals("2", anchor);
 	}
-	
 }
