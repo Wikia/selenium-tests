@@ -32,7 +32,7 @@ public class ForumNotificationsTests extends TestTemplate{
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);	
 		CommonFunctions.logOut(driver);
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);		
 	}
