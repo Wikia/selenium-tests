@@ -6,6 +6,7 @@ chromedriver.log
 tmp.exe
 *.class
 .classpath
+.idea/
 .project
 .settings/
 bin/
