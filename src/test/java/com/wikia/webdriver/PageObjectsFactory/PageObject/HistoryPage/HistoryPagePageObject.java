@@ -23,8 +23,6 @@ public class HistoryPagePageObject extends BasePageObject {
 	@FindBy(css=".WikiaPageHeaderDiffHistory h1 strong")
 	private WebElement diffHeader;
 
-	//String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
-
 	public void openHistoryPage(String articlePage) {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver);
 		wikiObject.getUrl(URLsContent.buildUrl(articlePage, URLsContent.historyAction));

@@ -76,21 +76,24 @@ public class FilePageTests extends TestTemplate {
 		diffPage.verifyDiffTablePresent();
 	}
 
-    /**
-     * Testing "Appears on these pages"
-     * 
-     * @author Garth Webb
-     */
-    @Test(groups = {"FilePage", "filePage004_appearsOn"})
-    public void filePage004_appearsOn() {
-        FilePagePageObject filePage = new FilePagePageObject(driver);
-        filePage.openFilePage(URLsContent.fileName002);
+	/**
+	 * Testing "Appears on these pages"
+	 * 
+	 * @author Garth Webb
+	 */
+	@Test(groups = {"FilePage", "filePage004_appearsOn"})
+	public void filePage004_appearsOn() {
+		FilePagePageObject filePage = new FilePagePageObject(driver);
+		filePage.openFilePage(URLsContent.fileName002);
 
-        // This should be the first article in the list
-        filePage.verifyAppearsOn(URLsContent.articleName001);
+		// Make sure you're on the "about" tab
+		filePage.selectTab(0);
 
-        // After paging, article #4 should be at the top of the list
-        filePage.localAppearsPageNext();
-        filePage.verifyAppearsOn(URLsContent.articleName003);
-    }
+		// This should be the first article in the list
+		filePage.verifyAppearsOn(URLsContent.articleName001);
+
+		// After paging, article #4 should be at the top of the list
+		filePage.localAppearsPageNext();
+		filePage.verifyAppearsOn(URLsContent.articleName003);
+	}
 }

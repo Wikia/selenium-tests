@@ -51,7 +51,7 @@ public class FilePagePageObject extends BasePageObject {
 	}
 	
 	public void openFilePage(String fileName) {
-		getUrl(Global.DOMAIN + URLsContent.wikiDir + URLsContent.fileNS + fileName);
+		getUrl(URLsContent.filePage + fileName);
 		waitForElementByElement(tabList.get(0));
 		PageObjectLogging.log("Open file page", "file page opened", true);
 		
