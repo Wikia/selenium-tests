@@ -111,6 +111,9 @@ public class ForumNotificationsTests extends TestTemplate{
 		Assertion.assertEquals("#2", anchor);
 	}
 	
+	/**
+	 * User A posts a thread, user B leaves a reply to this thread and then user A verifies if the anchor is correct
+	 */
 	@Test(groups= {"ForumNotificationsTests_003", "ForumNotificationsTests", "Forum"} )
 	public void forumNotificationsTests_003_notificationsRepliesAnchor_userLeaves1reply(){
 		// user 1 creates a thread
@@ -131,7 +134,6 @@ public class ForumNotificationsTests extends TestTemplate{
 		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);		
-		forumThread.reply(message);
 		CommonFunctions.logOut(driver);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
