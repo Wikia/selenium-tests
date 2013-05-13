@@ -26,6 +26,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 
 public class VetAddingVideoTests extends TestTemplate {
 	
+	String desiredVideoName;
+	
 	@Test(groups = {"VetTests001", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_001_SpecialVideosProvider() {
 		CommonFunctions.logOut(driver);
@@ -215,12 +217,13 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.triggerCommentArea();
 		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver, Global.DOMAIN);
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 4);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
+		desiredVideoName = vetOptions.getVideoName();
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();
 		article.clickSubmitButton();
-		article.verifyCommentVideo(VideoContent.wikiaVideoName);
+		article.verifyCommentVideo(desiredVideoName);
 	}
 	
 	@Test(groups = {"VetTests013", "VetTests", "VetAddVideo"})
