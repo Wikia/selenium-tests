@@ -23,7 +23,7 @@ public class FilePageTests extends TestTemplate {
 	@Test(groups = {"FilePage", "filePage001_tabs"})
 	public void filePage001_tabs() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
-		filePage.openFilePage(URLsContent.fileName);
+		filePage.openFilePage(URLsContent.fileName001);
 
 		filePage.verifySelectedTab("about");
 		
@@ -50,7 +50,7 @@ public class FilePageTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 
 		FilePagePageObject filePage = new FilePagePageObject(driver);
-		filePage.openFilePage(URLsContent.fileName);
+		filePage.openFilePage(URLsContent.fileName001);
 		
 		filePage.refreshAndVerifyTabs(0);
 		filePage.refreshAndVerifyTabs(1);
@@ -68,7 +68,7 @@ public class FilePageTests extends TestTemplate {
 		
 		HistoryPagePageObject historyPage = new HistoryPagePageObject(driver);
 
-		historyPage.openHistoryPage(Global.DOMAIN + URLsContent.wikiDir + URLsContent.fileNS + URLsContent.fileName);
+		historyPage.openFileHistoryPage(URLsContent.filePage + URLsContent.fileName001);
 		historyPage.goToDiffPageFromHistoryPage();
 		
 		DiffPagePageObject diffPage = new DiffPagePageObject(driver);

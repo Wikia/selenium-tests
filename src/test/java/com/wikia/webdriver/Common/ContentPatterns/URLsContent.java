@@ -67,7 +67,7 @@ public class URLsContent {
 	
 	// File Pages
 	public static String fileNS = "File:";
-	public static String fileName = "Grammy_Muppet_Critics";
+	public static String fileName001 = "Grammy_Muppet_Critics";
 	public static String fileName002 = "New_Batman_Year_One_Clip";
 	public static String filePage = Global.DOMAIN + wikiDir + fileNS;
 
