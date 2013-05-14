@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.ForumTests;
+package com.wikia.webdriver.TestCases.NotificationsTests;
 
 import org.testng.annotations.Test;
 
