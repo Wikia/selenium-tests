@@ -72,6 +72,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	}
 
 	public void reply(String message) {
+		waitForElementByCss(wikiaEditorTextarea);
 		jQueryFocus(wikiaEditorTextarea);		
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(message);
