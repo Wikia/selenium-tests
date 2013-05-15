@@ -26,7 +26,7 @@ public class ForumNotificationsTests extends TestTemplate{
 	 * 
 	 * https://wikia-inc.atlassian.net/browse/DAR-112
 	 */
-	@Test(groups= {"ForumNotificationsTests_001", "ForumNotificationsTests", "Forum"} )
+	@Test(groups= {"ForumNotificationsTests_001", "ForumNotificationsTests", "Forum", "NotificationsTests"} )
 	public void forumNotificationsTests_001_notificationsRepliesAnchor_userLeaves5replies(){
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -71,7 +71,7 @@ public class ForumNotificationsTests extends TestTemplate{
 		Assertion.assertEquals("#2", anchor);
 	}
 	
-	@Test(groups= {"ForumNotificationsTests_002", "ForumNotificationsTests", "Forum"} )
+	@Test(groups= {"ForumNotificationsTests_002", "ForumNotificationsTests", "Forum", "NotificationsTests"} )
 	public void forumNotificationsTests_002_notificationsRepliesAnchor_userLeaves2replies(){
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -114,7 +114,7 @@ public class ForumNotificationsTests extends TestTemplate{
 	/**
 	 * User A posts a thread, user B leaves a reply to this thread and then user A verifies if the anchor is correct
 	 */
-	@Test(groups= {"ForumNotificationsTests_003", "ForumNotificationsTests", "Forum"} )
+	@Test(groups= {"ForumNotificationsTests_003", "ForumNotificationsTests", "Forum", "NotificationsTests"} )
 	public void forumNotificationsTests_003_notificationsRepliesAnchor_userLeaves1reply(){
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
