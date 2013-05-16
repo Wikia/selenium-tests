@@ -75,5 +75,7 @@ public class PageContent {
 
 	//wikiText
 	public static String wikiTextPhoto = "[[File:Image009.jpg|thumb|%s]]";
+	
+	public static String wikiaGlobalUrl = "http://www.wikia.com/";
 
 }

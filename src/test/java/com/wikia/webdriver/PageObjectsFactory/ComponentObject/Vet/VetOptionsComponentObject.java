@@ -38,6 +38,8 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement addAvideo;
 		@FindBy(css="#VideoEmbedCloseButton")
 		private WebElement returnToEditing;
+		@FindBy(css="div#VideoEmbedNameRow p")
+		private WebElement videoNameCaption;
 	
 	public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
@@ -63,6 +65,10 @@ public class VetOptionsComponentObject extends BasePageObject{
 				break;
 		default: PageObjectLogging.log("adjustStyle", "invalid style selected",  false);
 		}
+	}
+	
+	public String getVideoName(){
+		return videoNameCaption.getText();
 	}
 	
 	public void setCaption(String caption){

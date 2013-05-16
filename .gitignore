@@ -4,3 +4,9 @@ target/
 Thumbs.db
 chromedriver.log
 tmp.exe
+*.class
+.classpath
+.idea/
+.project
+.settings/
+bin/

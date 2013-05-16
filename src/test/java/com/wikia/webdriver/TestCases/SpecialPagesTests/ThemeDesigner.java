@@ -14,7 +14,7 @@ public class ThemeDesigner extends TestTemplate{
 	
 	private String themeName;
 	
-	@Test(groups={"themeDesigner001", "themeDesigner"})
+	@Test(groups={"ThemeDesigner001", "ThemeDesigner"})
 	public void themeDesigner001_selectThemeFromFirstPage(){
 		CommonFunctions.logOut(driver);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
@@ -26,7 +26,7 @@ public class ThemeDesigner extends TestTemplate{
 		designer.verifyThemeSelected(themeName);
 	}
 	
-	@Test(groups={"themeDesigner002", "themeDesigner"})
+	@Test(groups={"ThemeDesigner002", "ThemeDesigner"})
 	public void themeDesigner002_selectThemeFromMiddlePage(){
 		CommonFunctions.logOut(driver);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
@@ -38,7 +38,7 @@ public class ThemeDesigner extends TestTemplate{
 		designer.verifyThemeSelected(themeName);
 	}
 	
-	@Test(groups={"themeDesigner003", "themeDesigner"})
+	@Test(groups={"ThemeDesigner003", "ThemeDesigner"})
 	public void themeDesigner003_selectThemeFromLastPage(){
 		CommonFunctions.logOut(driver);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
@@ -50,7 +50,7 @@ public class ThemeDesigner extends TestTemplate{
 		designer.verifyThemeSelected(themeName);
 	}
 	
-	@Test(groups={"themeDesigner004", "themeDesigner"})
+	@Test(groups={"ThemeDesigner004", "ThemeDesigner"})
 	public void themeDesigner004_selectThemeSubmit(){
 		CommonFunctions.logOut(driver);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
@@ -63,7 +63,7 @@ public class ThemeDesigner extends TestTemplate{
 		designer.submitThemeSelection();
 	}
 	
-	@Test(groups={"themeDesigner005", "themeDesigner"})
+	@Test(groups={"ThemeDesigner005", "ThemeDesigner"})
 	public void themeDesigner005_customizeTab(){
 		CommonFunctions.logOut(driver);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
@@ -74,7 +74,7 @@ public class ThemeDesigner extends TestTemplate{
 		designer.verifyCustomizeTab();
 	}
 	
-	@Test(groups={"themeDesigner005", "themeDesigner"})
+	@Test(groups={"ThemeDesigner005", "ThemeDesigner"})
 	public void themeDesigner006_wordmarkTab(){
 		CommonFunctions.logOut(driver);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);

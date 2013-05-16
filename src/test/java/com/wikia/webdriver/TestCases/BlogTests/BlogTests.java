@@ -17,7 +17,7 @@ public class BlogTests extends TestTemplate{
 	
 	String blogPostTitle;
 	
-	@Test(groups = { "BlogTests_001", "BlogTests" })
+	@Test(groups = { "BlogTests_001", "BlogTests", "Blog"})
 	public void BlogTests_001_CreateBlogPost(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -37,7 +37,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.categories_verifyCategoryPresent("Blog posts");	
 	}
 	
-	@Test(groups = { "BlogTests_002", "BlogTests" })
+	@Test(groups = { "BlogTests_002", "BlogTests", "Blog"})
 	public void BlogTests_002_EditBlogPost(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -62,7 +62,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.verifyArticleText(PageContent.blogContentEdit);
 	}
 
-	@Test(groups = { "BlogTests_003", "BlogTests" })
+	@Test(groups = { "BlogTests_003", "BlogTests", "Blog"})
 	public void BlogTests_003_DeleteBlogPost(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -83,7 +83,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.deleteBlogPost(blogPostTitle);
 	}
 	
-	@Test(groups = { "BlogTests_004", "BlogTests" })
+	@Test(groups = { "BlogTests_004", "BlogTests", "Blog"})
 	public void BlogTests_004_DeleteUndeleteBlogPost(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -105,7 +105,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.undeleteArticle();
 	}
 	
-	@Test(groups = { "BlogTests_005", "BlogTests" })
+	@Test(groups = { "BlogTests_005", "BlogTests", "Blog"})
 	public void BlogTests_005_PostReply(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -129,7 +129,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.verifyCommentText(PageContent.blogComment, Properties.userName);
 	}
 	
-	@Test(groups = { "BlogTests_006", "BlogTests" })
+	@Test(groups = { "BlogTests_006", "BlogTests", "Blog"})
 	public void BlogTests_006_PostReplyEdit(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -157,7 +157,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.verifyCommentText(PageContent.blogCommentEdit, Properties.userName);
 	}
 	
-	@Test(groups = { "BlogTests_007", "BlogTests" })
+	@Test(groups = { "BlogTests_007", "BlogTests", "Blog"})
 	public void BlogTests_007_PostReplyDelete(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -183,7 +183,7 @@ public class BlogTests extends TestTemplate{
 	}
 	
 	//test case for https://wikia.fogbugz.com/default.asp?95165
-	@Test(groups = { "BlogTests_008", "BlogTests" })
+	@Test(groups = { "BlogTests_008", "BlogTests", "Blog"})
 	public void BlogTests_008_PostReplyReply(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");

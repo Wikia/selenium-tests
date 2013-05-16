@@ -19,7 +19,7 @@ public class Following extends TestTemplate{
 
 	String pageName;
 	
-	@Test(groups = {"follow001", "follow"})
+	@Test(groups = {"Follow001", "Follow"})
 	public void follow001_Article(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -32,7 +32,7 @@ public class Following extends TestTemplate{
 		article.unfollowArticle(name);
 	}
 	
-	@Test(groups = {"follow002", "follow"})
+	@Test(groups = {"Follow002", "Follow"})
 	public void follow002_Blog(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -47,7 +47,7 @@ public class Following extends TestTemplate{
 		blog.unfollowBlogPage(Properties.userName);
 	}
 	
-	@Test(groups = {"follow003", "follow"})
+	@Test(groups = {"Follow003", "Follow"})
 	public void follow003_BlogPosts(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -71,7 +71,7 @@ public class Following extends TestTemplate{
 		follow.verifyFollowedBlogPost(blogPostTitle);
 	}
 	
-	@Test(groups = {"follow004", "follow"})
+	@Test(groups = {"Follow004", "Follow"})
 	public void follow004_Photos(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -85,7 +85,7 @@ public class Following extends TestTemplate{
 		special.unfollowImage(image);
 	}
 	
-	@Test(groups = {"follow005", "follow"})
+	@Test(groups = {"Follow005", "Follow"})
 	public void follow005_Videos(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");

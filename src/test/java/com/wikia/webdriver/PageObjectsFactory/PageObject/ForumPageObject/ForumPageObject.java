@@ -55,7 +55,7 @@ public class ForumPageObject extends BasePageObject{
 	}
 	
 	public ForumPageObject openForumMainPage(){
-		getUrl(Global.DOMAIN+"Special:Forum");
+		getUrl(Global.DOMAIN+"wiki/Special:Forum");
 		waitForElementByElement(faqButton);
 		PageObjectLogging.log("openForumPage", "forum page opened", true);
 		return new ForumPageObject(driver);

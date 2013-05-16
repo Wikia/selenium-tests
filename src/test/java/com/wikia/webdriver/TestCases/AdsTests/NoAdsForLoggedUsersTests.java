@@ -27,8 +27,8 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	)
 	public void TestNoAdsForUsers_US(String page) throws Exception {
 		loginSteps();
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAdsOnWikiPage();
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, improvedPageUrl);
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="CA")
@@ -40,7 +40,7 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	public void TestNoAdsForUsers_CA(String page) throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAdsOnWikiPage();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="DE")
@@ -52,7 +52,7 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	public void TestNoAdsForUsers_DE(String page) throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAdsOnWikiPage();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="GB")
@@ -64,7 +64,7 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	public void TestNoAdsForUsers_GB(String page) throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAdsOnWikiPage();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="AU")
@@ -76,7 +76,7 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	public void TestNoAdsForUsers_AU(String page) throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAdsOnWikiPage();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="UA")
@@ -88,7 +88,7 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	public void TestNoAdsForUsers_UA(String page) throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAdsOnWikiPage();
+		wikiPage.verifyNoAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="PL")
@@ -100,6 +100,6 @@ public class NoAdsForLoggedUsersTests extends AdsTestTemplate {
 	public void TestNoAdsForUsers_PL(String page) throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-		wikiPage.verifyNoAdsOnWikiPage();
+		wikiPage.verifyNoAdsOnPage();
 	}
 }
