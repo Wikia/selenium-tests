@@ -95,9 +95,9 @@ public class AlmostTherePageObject extends BasePageObject
 	/**
 	 * @author Karol Kujawiak
 	 */
-	private String getActivationLinkFromMail()
+	private String getActivationLinkFromMail(String email, String password)
 	{
-		String www = MailFunctions.getActivationLinkFromMailContent(MailFunctions.getFirstMailContent(Properties.email, Properties.emailPassword));
+		String www = MailFunctions.getActivationLinkFromMailContent(MailFunctions.getFirstMailContent(email, password));
 		www = www.replace("=", "");
 		PageObjectLogging.log("getActivationLinkFromMail", "activation link is visible in email content: "+www, true);
 		return www;
@@ -106,9 +106,9 @@ public class AlmostTherePageObject extends BasePageObject
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public ConfirmationPageObject enterActivationLink()
+	public ConfirmationPageObject enterActivationLink(String email, String password)
 	{
-		getUrl(getActivationLinkFromMail());
+		getUrl(getActivationLinkFromMail(email, password));
 		PageObjectLogging.log("enterActivationLink", "activation page is displayed", true, driver);
 		return new ConfirmationPageObject(driver);
 	}

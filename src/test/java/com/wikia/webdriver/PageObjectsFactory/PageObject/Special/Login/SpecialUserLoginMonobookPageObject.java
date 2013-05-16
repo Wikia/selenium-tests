@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -10,7 +6,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BaseMonoBookPageObject;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

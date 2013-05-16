@@ -9,14 +9,13 @@ import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class CategoriesTestsAnonymous extends TestTemplate {
 
 	String categoryName;
-	String pageName;
 	
 	/*
 	 * TestCase001 Open random wiki page as anonymous user add category Verify
@@ -65,9 +64,8 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	public void CategoriesTestsAnonymous_003_removeCategoryEditMode() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		categoryName = PageContent.categoryNamePrefix + wiki.getTimeStamp();
-		pageName = PageContent.categoryPageNamePrefix + wiki.getTimeStamp();		
 		wiki.openWikiPage();
-		WikiArticleEditMode articleEdit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode articleEdit = wiki.createNewDefaultArticle();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		// adding the below category will save 1 minute of time execution time.
 		// Reason: it assures that list of categories will not be empty, what

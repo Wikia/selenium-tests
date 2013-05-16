@@ -11,9 +11,8 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleSourceEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+
 
 public class VetModalTests extends TestTemplate {
 	
@@ -28,11 +27,11 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests001", "VetModalTests" })
 	public void Vet_Tests_001_VerifyLeftAlignmentOnEditorSourceAndArticle() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		CommonFunctions.logIn(Properties.userName, Properties.password);	
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);	
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.adjustPosition(1);
 		vetOptions.submit();
@@ -55,11 +54,11 @@ public class VetModalTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
-		CommonFunctions.logIn(Properties.userName, Properties.password);	
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.adjustPosition(1);
 		vetOptions.submit();
@@ -92,7 +91,7 @@ public class VetModalTests extends TestTemplate {
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.adjustPosition(1);
 		vetOptions.submit();
@@ -123,7 +122,7 @@ public class VetModalTests extends TestTemplate {
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.adjustPosition(3);
 		vetOptions.submit();
@@ -153,7 +152,7 @@ public class VetModalTests extends TestTemplate {
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
-		VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.adjustPosition(3);
 		vetOptions.submit();
@@ -186,7 +185,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustPosition(3);
 			vetOptions.submit();
@@ -217,7 +216,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustPosition(2);
 			vetOptions.submit();
@@ -247,7 +246,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustPosition(2);
 			vetOptions.submit();
@@ -280,7 +279,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustPosition(2);
 			vetOptions.submit();
@@ -311,7 +310,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();			
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustWith(250);
 			vetOptions.submit();			
@@ -340,7 +339,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustWith(250);
 			vetOptions.submit();
@@ -372,7 +371,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustWith(250);
 			vetOptions.submit();
@@ -403,7 +402,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.setCaption(PageContent.caption);
 			vetOptions.submit();
@@ -431,7 +430,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.setCaption(PageContent.caption);
 			vetOptions.submit();
@@ -461,7 +460,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.setCaption(PageContent.caption);
 			vetOptions.submit();
@@ -492,7 +491,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 			vetOptions.adjustStyle(2);
 			vetOptions.submit();
@@ -523,7 +522,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.wikiaVideoURL);
 			vetOptions.verifyVideoNameFieldIsNotEditable();
 			vetOptions.submit();
@@ -547,7 +546,7 @@ public class VetModalTests extends TestTemplate {
 			pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 			WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 			edit.deleteArticleContent();
-			VetAddVideoComponentObject vetAddingVideo = edit.clickOnAddObjectButton("Video");
+			VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 			VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
 			vetOptions.verifyVideoNameFieldIsEditable();
 			vetOptions.submit();

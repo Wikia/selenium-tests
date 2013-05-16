@@ -51,9 +51,9 @@ public class ConfirmationPageObject extends BasePageObject{
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public UserProfilePageObject clickSubmitButton()
+	public UserProfilePageObject clickSubmitButton(String email, String password)
 	{
-		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
+		MailFunctions.deleteAllMails(email, password);
 		clickAndWait(confirmationButton);
 		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);
 		return new UserProfilePageObject(driver);

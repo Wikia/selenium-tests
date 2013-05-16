@@ -2,17 +2,14 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.seleniumemulation.GetValue;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import bsh.Parser;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+
 
 public class VetOptionsComponentObject extends BasePageObject{
 
@@ -37,7 +34,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
 		private WebElement videoName;
-		@FindBy(css="div.addVideoDetailsFormControls input")
+		@FindBy(css="div.VideoEmbedNoBorder input")
 		private WebElement addAvideo;
 		@FindBy(css="#VideoEmbedCloseButton")
 		private WebElement returnToEditing;
@@ -87,6 +84,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 	
 	public void setCaption(String caption){
 		waitForElementByElement(captionField);
+		captionField.clear();
 		captionField.sendKeys(caption);
 		PageObjectLogging.log("setCaption", "caption was set to: "+caption, true);
 	}
@@ -131,6 +129,10 @@ public class VetOptionsComponentObject extends BasePageObject{
 		clickAddaVideo();
 		clickRetunToEditing();
 		return new WikiArticleEditMode(driver, Domain, Domain);
+	}
+	
+	public void update(){
+		clickAddaVideo();
 	}
 	
 	/**

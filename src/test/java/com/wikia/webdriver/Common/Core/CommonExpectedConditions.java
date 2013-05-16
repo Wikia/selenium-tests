@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 //http://code.google.com/p/selenium/source/browse/trunk/java/client/src/org/openqa/selenium/support/ui/ExpectedConditions.java
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import javax.naming.spi.DirStateFactory;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 
 public class CommonExpectedConditions {
 
@@ -314,6 +318,143 @@ public class CommonExpectedConditions {
 		      }
 		    };
 		  }
- 
-	  
+    /**
+     *
+     * @param cssSelector
+     * @return
+     */
+    public static ExpectedCondition<Boolean> elementNotPresent(
+        final String cssSelector
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "Element with ('%s') selector still present!",
+                    cssSelector
+                );
+            }
+        };
+    }
+
+    /**
+     * 
+     * @param bySelector
+     * @return
+     */
+    public static ExpectedCondition<Boolean> elementNotPresent(
+            final By bySelector
+        ) {
+            return new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver f) {
+                    return (driver.findElements(bySelector).size() < 1);
+                }
+                @Override
+                public String toString() {
+                    return String.format(
+                        "Element with provided selector still present!"
+                    );
+                }
+            };
+        }
+
+    
+    /**
+     *
+     * @param element
+     * @return
+     */
+    public static ExpectedCondition<Boolean> elementVisible(
+        final WebElement element
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                return (element.isDisplayed());
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "Element ('%s') not visisble!",
+                    element.getTagName()
+                );
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> elementInViewPort (
+        final WebElement element
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                Dimension size = element.getSize();
+                Point location = element.getLocation();
+                if (((size.height + location.y) > -1)
+                    && (size.width + location.x > -1)) {
+                    return true;
+                }
+                return false;
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "Element ('%s') not in viewport!",
+                    element.getTagName()
+                );
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> newWindowPresent() {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+               Object[] windows = driver.getWindowHandles().toArray();
+               return (windows.length > 1);
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "New window not found"
+                );
+            }
+        };
+    }
+
+    public static ExpectedCondition<Boolean> oneOfTagsPresentInElement(
+        final WebElement slot, final String tagNameOne, final String tagNameTwo
+    ) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver f) {
+                Dimension zero = new Dimension(0, 0);
+                Dimension one = new Dimension(1, 1);
+                List <WebElement> tagsNodes = slot.findElements(
+                By.cssSelector(tagNameOne + "," + tagNameTwo));
+                for (WebElement tagNode : tagsNodes) {
+                    if (
+                        tagNode.getSize() != zero
+                        && tagNode.getSize() != one
+                        && tagNode.isDisplayed()
+                    ) {
+                        return true;
+                    }
+                }
+               return false;
+            }
+            @Override
+            public String toString() {
+                return String.format(
+                    "%s tag or %s that matches the criteria were not found!",
+                    tagNameOne, tagNameTwo
+                );
+            }
+        };
+    }
 }

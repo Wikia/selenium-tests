@@ -5,6 +5,8 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BaseMonoBookPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -96,7 +98,8 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 
     public String enterEdition() {
         waitForElementByElement(editLink);
-        editLink.click();
+        clickAndWait(editLink);
+        waitForElementByElement(submitEditButton);
         changeToMonoBook();
         PageObjectLogging.log(
             "editArticlePageMonobook",

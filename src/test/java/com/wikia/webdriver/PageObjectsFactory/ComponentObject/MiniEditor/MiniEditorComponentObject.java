@@ -7,6 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class MiniEditorComponentObject extends WikiBasePageObject{
@@ -15,7 +19,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		super(driver,Domain);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(css="body#bodyContent")
 	private WebElement messageBodyField;
 	@FindBy(css=".cke_contents iframe")
@@ -38,7 +42,9 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement linkPageStatus;
 	@FindBy(css="span.cke_dialog_ui_button")
 	private WebElement linkModalOkButton;
-	
+        @FindBy (css=".loading-throbber")
+        private WebElement loader;
+
 	public void writeMiniEditor(String text){
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(text);
@@ -63,22 +69,12 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey );	
 	}
 	
-	public void addImageMiniEditor(){
-		waitForElementByElement(addImageButton);
-		clickAndWait(addImageButton);
-		waitForModalAndClickAddThisPhoto();
-		clickOnAddPhotoButton2();
-//		verifyImageMiniEditor();
-	}
-	
 	public void addVideoMiniEditor(String url){
 		waitForElementByElement(addVideoButton);
 		clickAndWait(addVideoButton);
-		waitForVideoModalAndTypeVideoURL(url);
-		clickVideoNextButton();
-		waitForVideoDialog();
-		clickAddAvideo();
-		waitForSuccesDialogAndReturnToEditing();
+		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+		vetOptions.submit();
 		verifyVideoMiniEditor();
 	}
 	
@@ -94,7 +90,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		driver.switchTo().defaultContent();
 	}
 	
-	protected void verifyVideoMiniEditor(){
+	public void verifyVideoMiniEditor(){
 		waitForElementByElement(miniEditorIframe);
 		driver.switchTo().frame(miniEditorIframe);
 		waitForElementByElement(videoInMessageEditMode);
@@ -124,5 +120,21 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	
 	public void clearContent(){
 		messageBodyField.clear();
+	}
+
+	public VetAddVideoComponentObject clickAddVideo(){
+		waitForElementByElement(addVideoButton);
+		clickAndWait(addVideoButton);
+		return new VetAddVideoComponentObject(driver);
+	}
+
+	public PhotoAddComponentObject clickAddImage() {
+		waitForElementByElement(addImageButton);
+		clickAndWait(addImageButton);
+		return new PhotoAddComponentObject(driver);
+	}
+
+	public void waitForEditorReady() {
+		waitForElementNotVisibleByElement(loader);
 	}
 }

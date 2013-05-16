@@ -16,7 +16,9 @@ import org.openqa.selenium.support.PageFactory;
 public class BaseMonoBookPageObject extends BasePageObject {
 
     @FindBy(css = ".skin-monobook")
-    protected WebElement skinClass;
+    protected WebElement monobookSkinClass;
+    @FindBy(css = "body.oasis-oasis")
+    protected WebElement oasisSkinClass;
 
     public BaseMonoBookPageObject(WebDriver driver) {
         super(driver);
@@ -24,12 +26,10 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void openWikiPageWithMonobook() {
-        String baseUrl = Domain;
-        baseUrl = Domain + URLsContent.noexternals;
-        getUrl(baseUrl);
+        getUrl(Domain + URLsContent.noexternals);
         PageObjectLogging.log(
-            "logOut",
-            "page loads for more than 30 seconds", true
+            "OpenWikiPage",
+            "Wiki Page opened with success", true
         );
         changeToMonoBook();
         PageObjectLogging.log(
@@ -40,7 +40,7 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void changeToMonoBook() {
-        String currentUrl = driver.getCurrentUrl();
+    	String currentUrl = driver.getCurrentUrl();
         if (currentUrl.contains("?")) {
             getUrl(currentUrl+"&useskin=monobook");
         } else {
@@ -50,7 +50,7 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void verifySkinChanged() {
-        waitForElementByElement(skinClass);
+        waitForElementByElement(monobookSkinClass);
         PageObjectLogging.log(
             "skinChangedToMonoBook", "skin is changed to monobook", true
         );

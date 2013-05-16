@@ -46,7 +46,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private void openCreateNewBoardForm(){
 		waitForElementByElement(createBoardButton);
 		createBoardButton.click();
-		PageObjectLogging.log("openCreateNewBoardForm", "create new board form opened", true, driver);
+		PageObjectLogging.log("openCreateNewBoardForm", "create new board form opened", true);
 	}
 	
 	private void typeBoardTitle(String title){
@@ -62,7 +62,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private void submitNewBoard(){
 		waitForElementByElement(boardSubmitButton);
 		clickAndWait(boardSubmitButton);
-		PageObjectLogging.log("submitNewBoard", "new board submitted", true, driver);
+		PageObjectLogging.log("submitNewBoard", "new board submitted", true);
 	}
 	
 	public void createNewBoard(String title, String description){
@@ -80,7 +80,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private void clickDeleteForum(String name){
 		WebElement deleteButton = waitForElementByXPath("//a[contains(text(), '"+name+"')]/../..//img[@class='sprite trash']");
 		clickAndWait(deleteButton);
-		PageObjectLogging.log("clickDeleteForum", "delete forum button clicked", true, driver);				
+		PageObjectLogging.log("clickDeleteForum", "delete forum button clicked", true);				
 	}
 	
 	private void confirmDeleteForum(String deletedName, String mergerdName){
@@ -88,13 +88,13 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		deleteBoardConfirmationField.sendKeys(deletedName);
 		Select select = new Select(mergeToBoard);
 		select.selectByVisibleText(mergerdName);
-		PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true, driver);
+		PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true);
 	}
 	
 	private void clickDeleteAndMergeForum(){
 		waitForElementByElement(deleteAndMergeButton);
 		clickAndWait(deleteAndMergeButton);
-		PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true, driver);
+		PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true);
 	}
 	
 	private void verifyForumDeletedText(String deletedName){
@@ -131,7 +131,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		}
 		waitForElementByXPath("//h1[contains(text(), '"+forumName.replace("_", " ")+"')]");
 		getUrl(temp);
-		PageObjectLogging.log("verifyForumExists", "verified forum exists", true, driver);
+		PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
 	}
 	
 	public void verifyForumNotExists(String forumName){
@@ -142,13 +142,13 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 			e.printStackTrace();
 		}
 		waitForElementByXPath("//div[@class='msg' and contains(text(), \"The board you're looking for was not found\")]");
-		PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true, driver);
+		PageObjectLogging.log("verifyForumNotExists", "verified forum not exists", true);
 	}
 	
 	private void clickModifyForum(String forumName){
 		WebElement editPecil = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//img[@class='sprite edit-pencil']");
 		clickAndWait(editPecil);
-		PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true, driver);
+		PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true);
 	}
 	
 	private void clearEditBoardFields(){
@@ -156,7 +156,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		waitForElementByElement(boardDescriptionField);
 		boardTitleField.clear();
 		boardDescriptionField.clear();
-		PageObjectLogging.log("clickEditBoardFields", "edit boards fields cleared", true, driver);
+		PageObjectLogging.log("clickEditBoardFields", "edit boards fields cleared", true);
 	}
 	
 	public void editForum(String forumName, String newTitle, String newDescription){
@@ -172,7 +172,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		WebElement down = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//span[@class='movedown']");
 		down.click();
 		Assertion.assertEquals(temp, getSecondForumName());
-		PageObjectLogging.log("clickMoveDown", "move down button clicked", true, driver);
+		PageObjectLogging.log("clickMoveDown", "move down button clicked", true);
 	}
 	
 	public void clickMoveUp(String forumName){
@@ -180,6 +180,6 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		WebElement up = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//span[@class='moveup']");
 		up.click();
 		Assertion.assertEquals(temp, getFirstForumName());
-		PageObjectLogging.log("clickMoveDown", "move up button clicked", true, driver);
+		PageObjectLogging.log("clickMoveDown", "move up button clicked", true);
 	}
 }

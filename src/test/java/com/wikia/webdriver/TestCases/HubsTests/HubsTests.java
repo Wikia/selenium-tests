@@ -56,6 +56,8 @@ public class HubsTests extends TestTemplate {
 				.MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription(CurrentLargeImageDescription);
 	}
 
+	
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests002", "Hubs" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_2_.28News_Tabs.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
@@ -70,8 +72,10 @@ public class HubsTests extends TestTemplate {
 		Hub.VerifyNewsTabsPresence(3);
 		Hub.ClickOnNewsTab(2);
 		Hub.VerifyNewsTabsPresence(2);
-	}
+	}*/
 
+	
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests003", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
@@ -91,7 +95,9 @@ public class HubsTests extends TestTemplate {
 		Hub.RelatedVideosScrollLeft();
 		Hub.VerifyRelatedVideosPresence();
 	}
+	*/
 
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests004", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
@@ -112,7 +118,8 @@ public class HubsTests extends TestTemplate {
 		Hub.Click_X_toCloseVideoPlayer();
 		Hub.verifyVideoPlayerDisappeared();
 	}
-
+	*/
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests005", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	public void HubsTest005_suggestAVideoAndClickCancelToClose(HubBasePageObject Hub, String HubName, String HubURL) {
@@ -127,7 +134,9 @@ public class HubsTests extends TestTemplate {
 		Hub.Click_Cancel_toCloseSuggestAVideoOrArticle();
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
-
+	*/
+	
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests006", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	public void HubsTest006_suggestAVideoAndClickXtoClose(HubBasePageObject Hub, String HubName, String HubURL) {
@@ -142,7 +151,9 @@ public class HubsTests extends TestTemplate {
 		Hub.Click_X_toCloseSuggestAVideoOrArticle();
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
+	*/
 
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests007", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	public void HubsTest007_VerifyVideoSuggestionWorksProperly(HubBasePageObject Hub, String HubName, String HubURL) {
@@ -159,6 +170,7 @@ public class HubsTests extends TestTemplate {
 		Hub.SuggestVideoTypeIntoWhichWikiField("random text");
 		Hub.VerifySuggestVideoOrArticleButtonClickable();
 	}
+	*/
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests008", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
@@ -173,6 +185,7 @@ public class HubsTests extends TestTemplate {
 		Hub.verifyFromModuleHasQuatation();
 	}
 	
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests009", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	public void HubsTest009_suggestAVideoAndClickCancelToClose(HubBasePageObject Hub, String HubName, String HubURL) {
@@ -187,7 +200,9 @@ public class HubsTests extends TestTemplate {
 		Hub.Click_Cancel_toCloseSuggestAVideoOrArticle();
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
+	*/
 	
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests010", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
 	public void HubsTest010_suggestAVideoAndClickXtoClose(HubBasePageObject Hub, String HubName, String HubURL) {
@@ -202,6 +217,7 @@ public class HubsTests extends TestTemplate {
 		Hub.Click_X_toCloseSuggestAVideoOrArticle();
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
+	*/
 	
 	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
@@ -218,8 +234,18 @@ public class HubsTests extends TestTemplate {
 		Hub.SuggestArticleTypeIntoWhatVideoField("random text");
 		Hub.SuggestArticleTypeIntoWhyCoolField("random text");
 		Hub.VerifySuggestVideoOrArticleButtonClickable();
+		Hub.Click_X_toCloseSuggestAVideoOrArticle();
+		Hub.verifySuggestAVideoOrArticleModalDisappeared();
+		Hub.ClickSuggestAnArticle();
+		Hub.VerifySuggestAVideoOrArticleModalAppeared();
+		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest an Article");
+		Hub.VerifySuggestVideoOrArticleButtonNotClickable();
+		Hub.Click_Cancel_toCloseSuggestAVideoOrArticle();
+		Hub.verifySuggestAVideoOrArticleModalDisappeared();
+		
 	}
 
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests012", "Hubs" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_5_.28The_Pulse.29_Test_Cases
 	public void HubsTest012_verifyThePulseModule(HubBasePageObject Hub, String HubName, String HubURL) {
@@ -237,7 +263,9 @@ public class HubsTests extends TestTemplate {
 		Hub.verifyStatisticsAreDisplayed();
 		Hub.verifyWikiaSearchFieldIsDisplayed();
 	}
+	*/
 
+	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests013", "Hubs" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_7_.28Top_Wikis.29_Test_Cases
 	// The test covers underscored steps from test case documentation - see link
@@ -250,4 +278,5 @@ public class HubsTests extends TestTemplate {
 		Hub.verifyTopWikisModuleAppears();
 		Hub.verifyWikisAreListedInTopWikisModule();
 	}
+	*/
 }

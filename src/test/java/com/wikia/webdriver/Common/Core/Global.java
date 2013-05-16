@@ -15,5 +15,5 @@ public class Global {
 	public static String WIKI_VERSION;
 	public static boolean LOGIN_BY_COOKIE;
 	public static boolean LOG_ENABLED;
-
+	public static boolean JS_ERROR_ENABLED;
 }

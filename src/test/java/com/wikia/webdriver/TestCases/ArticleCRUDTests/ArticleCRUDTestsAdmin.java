@@ -4,18 +4,20 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class ArticleCRUDTestsAdmin extends TestTemplate{
-	
-	private String pageName;
-	
+		
 	/*
 	 * TestCase002
 	 * Open random wiki page as logged in user
@@ -82,18 +84,16 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(dataProvider="getArticleName", groups={"ArticleCRUDAdmin_004", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_004_CreateArticle(String articleName)
 	{
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = articleName+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();		
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		CommonFunctions.logoutCookie(cookieName);
 	}
 	/*
 	 * TestCase005
@@ -104,23 +104,22 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_005", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_005_CreateEditArticle()
 	{
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();	
 		edit.deleteArticleContent();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton(article.getPageName());
 		edit.deleteArticleContent();
 		edit.typeInContent(PageContent.articleTextEdit);
 		article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleTextEdit);
-		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	/* 
@@ -133,18 +132,17 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_006", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_006_CreateArticleComment()
 	{
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
 		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentText, Properties.userNameStaff);
 		article.deleteComment(PageContent.commentText);
-		CommonFunctions.logoutCookie(cookieName);
 	}
 	/*
 	 * TestCase007
@@ -157,22 +155,21 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_007", "ArticleCRUDAdmin"}) //P2 issue raised: https://wikia.fogbugz.com/default.asp?46789 article comments aren't visible in IE9
 	public void ArticleCRUDAdmin_007_CreateArticleEditComment()
 	{
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
 		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentText, Properties.userNameStaff);
 		article.editComment(PageContent.commentText);
 		article.writeOnCommentArea(PageContent.commentTextEdit);
 		article.clickSubmitButton(Properties.userNameStaff);
-		article.verifyComment(PageContent.commentTextEdit, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentTextEdit, Properties.userNameStaff);
 		article.deleteComment(PageContent.commentTextEdit);
-		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	/*
@@ -185,23 +182,21 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_008", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_008_CreateArticleUndeleteDelete()
 	{
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		article.deleteArticle(pageName);
+		article.deleteArticle(article.getPageName());
 		article.undeleteArticle();
-		article.openArticle(pageName);
-		article.verifyPageTitle(pageName);
+		article.openArticle(article.getPageName());
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		CommonFunctions.logoutCookie(cookieName);
 	}
 	/*
 	 * TestCase006
@@ -213,21 +208,19 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_009", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_009_CreateArticleMoveDelete()
 	{
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
 		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(pageName);
+		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		article.renameArticle(pageName, pageName+"moved");
-		article.verifyPageTitle(pageName+"moved");
+		article.renameArticleAndVerify(article.getPageName(), article.getPageName()+"moved");
+		article.verifyPageTitle(article.getPageName()+"moved");
 		article.verifyArticleText(PageContent.articleText);
-		CommonFunctions.logoutCookie(cookieName);
 	}
 	
 	/* 
@@ -241,19 +234,66 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	@Test(groups={"ArticleCRUDAdmin_010", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_010_CreateArticleCommentReply()
 	{
-
+		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
 		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
 		article.clickSubmitButton();
-		article.verifyComment(PageContent.commentText, Properties.userNameStaff);
+		article.verifyCommentText(PageContent.commentText, Properties.userNameStaff);
 		article.replyComment(PageContent.commentText, PageContent.replyText);
 		article.deleteComment(PageContent.commentText);
-		CommonFunctions.logoutCookie(cookieName);
+	}
+	
+	@Test(groups={"ArticleCRUDAdmin_011", "ArticleCRUDAdmin"})
+	public void ArticleCRUDAdmin_011_VerifyingImagesPositionWikiText()
+	{
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		wiki.refreshPage();
+		wiki.openWikiPage();
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		edit.deleteArticleContent();
+		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.adjustAlignment(1);
+		photoOptions.clickAddPhoto();
+		edit.clickOnSourceButton();
+		edit.verifyWikiTextInSourceMode("left");					
+		edit.clickOnVisualButton();				
+		edit.verifyLeftAlignmentIsSelected();
+		WikiArticlePageObject article = edit.clickOnPublishButton();
+		article.verifyImageOnThePage();
+	}
+	
+	@Test(groups={"ArticleCRUDAdmin_012", "ArticleCRUDAdmin"})
+	public void ArticleCRUDAdmin_012_LightboxVerifyExistenceAndURLsOfSocialButtons()
+	{
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		WikiArticlePageObject article = wiki.openArticle(URLsContent.lightboxImageTest);
+		LightboxPageObject lightbox = article.clickThumbnailImage();
+		lightbox.clickPinButton();
+		lightbox.clickShareButton();
+		lightbox.verifyShareButtons();
+		lightbox.clickFacebookShareButton();
+		lightbox.verifyFacebookWindow();
+		lightbox.clickTwitterShareButton();
+		lightbox.verifyTwitterWindow();
+		lightbox.clickStumbleUponShareButton();
+		lightbox.verifyStumbleUponWindow();
+		lightbox.clickRedditShareButton();
+		lightbox.verifyRedditWindow();
+		lightbox.clickPlusOneShareButton();
+		lightbox.verifyPlusOneWindow();
+		lightbox.clickCloseButton();
 	}
 }

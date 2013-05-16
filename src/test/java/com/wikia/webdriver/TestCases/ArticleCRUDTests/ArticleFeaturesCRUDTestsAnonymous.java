@@ -7,13 +7,14 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 {
-	private String pageName;
 	
 	@Test(groups={"ArticleFeatureCRUDAnonymous_001", "ArticleCRUDAnonymous"}) 
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
@@ -22,12 +23,11 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Image");
+		edit.clickPhotoButton();
 		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}		
@@ -39,12 +39,10 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Gallery");
+		edit.clickGalleryButton();
 		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}
@@ -56,12 +54,10 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	{
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
 		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Slideshow");
+		edit.clickSlideshowButton();
 		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}
@@ -72,13 +68,11 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	public void ArticleCRUDAnonymous_004_AddingSlider()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
 		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Slider");
+		edit.clickSliderButton();
 		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);	
 	}
@@ -89,13 +83,12 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	public void ArticleCRUDAnonymous_005_AddingVideo()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		pageName = PageContent.articleNamePrefix+wiki.getTimeStamp();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
 		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
-		edit.clickOnAddObjectButton("Video");
+		edit.clickVideoButton();
 		edit.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}	

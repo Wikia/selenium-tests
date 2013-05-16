@@ -7,9 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
-public class SpecialContributionsPageObject extends BasePageObject{
+public class SpecialContributionsPageObject extends SpecialPageObject {
 
 	public SpecialContributionsPageObject(WebDriver driver) {
 		super(driver);

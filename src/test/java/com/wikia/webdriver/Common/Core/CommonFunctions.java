@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -30,201 +31,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CommonFunctions {
-	static By logInAjax = By.className("ajaxLogin");
-	static By userNameField = By.cssSelector("[name='username']");
-	static By passwordField = By.cssSelector("[name='password']");
-	static By remeberMeCheckBox = By.cssSelector("input[type=checkbox]");
-	static By submitButton = By.cssSelector("input[type='submit']");
 
 	private static WebDriver driver;
 	private static WebDriverWait wait;
-
-	public static void logIn(String userName, String password) {
-		driver = DriverProvider.getWebDriver();
-		driver.manage().deleteAllCookies();
-		String temp = driver.getCurrentUrl();
-		try {
-			driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		WebElement userNameField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='username']"));
-		WebElement passwordField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='password']"));
-		WebElement submitButton = driver.findElement(By
-				.cssSelector("#WikiaArticle input.login-button.big"));
-		userNameField.sendKeys(userName);
-		passwordField.sendKeys(password);
-		try {
-			submitButton.click();
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-			try {
-				driver.navigate().refresh();
-			} catch (TimeoutException f) {
-				PageObjectLogging.log("logIn",
-						"page loads for more than 30 seconds", true, driver);
-			}
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userName + "']"));// only for verification
-		try {
-			if (!(temp.contains("Special:UserLogout") || temp
-					.contains("Specjalna:Wyloguj"))) {
-				driver.get(temp);
-			}
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userName + "']"));
-	}
-
-	public static void logInSpecialUserLogin(String userName, String password,
-			String userNameEnc) {
-		driver = DriverProvider.getWebDriver();
-		driver.manage().deleteAllCookies();
-		String temp = driver.getCurrentUrl();
-		try {
-			driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		WebElement userNameField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='username']"));
-		WebElement passwordField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='password']"));		
-		WebElement loginForm = driver.findElement(By
-				.cssSelector(".UserLogin form"));
-		
-		userNameField.sendKeys(userName);
-		passwordField.sendKeys(password);
-		try {
-			loginForm.submit();
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-			try {
-				driver.navigate().refresh();
-			} catch (TimeoutException f) {
-				PageObjectLogging.log("logIn",
-						"page loads for more than 30 seconds", true, driver);
-			}
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userNameEnc + "']"));// only for verification
-		try {
-			if (!(temp.contains("Special:UserLogout") || temp
-					.contains("Specjalna:Wyloguj"))) {
-				driver.get(temp);
-			}
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logIn",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		driver.findElement(By.cssSelector(".AccountNavigation a[href*='"
-				+ userNameEnc + "']"));
-	}
-
-	public static void logInDropDown(String userName, String password,
-			String userNameEnc) {
-		driver = DriverProvider.getWebDriver();
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='username']")));
-		WebElement userNameFieldElem = driver.findElement(userNameField);
-		userNameFieldElem.sendKeys(userName);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		WebElement passwordFieldElem = driver.findElement(passwordField);
-		passwordFieldElem.sendKeys(password);
-		WebElement submitButtonElem = driver.findElement(submitButton);
-		submitButtonElem.click();
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='" + userNameEnc + "']")));
-	}
-
-	public static void logInDropDownFB() {
-		driver = DriverProvider.getWebDriver();
-		wait = new WebDriverWait(driver, 30);
-		WebElement logInAjaxElem = driver.findElement(logInAjax);
-		logInAjaxElem.click();
-		PageObjectLogging.log("logInDropDownFB", "login ajax clicked", true);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.className("wikia-button-facebook")));
-		((JavascriptExecutor) driver)
-				.executeScript("$('.wikia-button-facebook').click()");
-		PageObjectLogging.log("logInDropDownFB", "facebook button clicked",
-				true);
-		Object[] windows = driver.getWindowHandles().toArray();
-		int delay = 500;
-		int sumDelay = 500;
-		while (windows.length == 1) {
-			try {
-				Thread.sleep(delay);
-				windows = driver.getWindowHandles().toArray();
-				sumDelay += 500;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if (sumDelay > 5000) {
-				PageObjectLogging.log("logInDropDownFB",
-						"facebook button clicked but without result", false);
-				break;
-			}
-
-		}
-		driver.switchTo().window(windows[1].toString());
-		PageObjectLogging.log("logInDropDownFB",
-				"facebook popup window detected", true);
-		PageObjectLogging.log("logInDropDownFB",
-				"switching to facebook pop-up window", true);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("pass")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("input[name='login']")));
-		WebElement em = driver.findElement(By.id("email"));
-		WebElement pa = driver.findElement(By.id("pass"));
-		WebElement sm = driver.findElement(By
-				.cssSelector("input[name='login']"));
-		em.clear();
-		pa.clear();
-		em.sendKeys(Properties.userNameFB);
-		PageObjectLogging.log("logInDropDownFB", "facebook username filled",
-				true);
-		pa.sendKeys(Properties.passwordFB);
-		PageObjectLogging.log("logInDropDownFB", "facebook password filled",
-				true);
-		sm.click();
-		PageObjectLogging.log("logInDropDownFB",
-				"facebook log in button clicked", true);
-		driver.switchTo().window(windows[0].toString());
-		PageObjectLogging.log("logInDropDownFB", "switching to main window",
-				true);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a img.avatar")));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.cssSelector("a[href*='Patrick_test_07-Feb-12_1313']")));
-		PageObjectLogging.log("logInDropDownFB",
-				"facebook login verification passed", true);
-	}
-
 
 
 	public static void logIn(String userName, String password, WebDriver driver) {
@@ -242,7 +59,10 @@ public class CommonFunctions {
 		submitButton.click();
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
 				+ userName + "']"));// only for verification
-		driver.get(temp);
+		if (!temp.contains("UserLogout")){
+            driver.get(temp);
+        }
+
 	}
 
 	/**
@@ -501,7 +321,9 @@ public class CommonFunctions {
 
 	public static String logInCookie(String userName, String password) {
 		if (!Global.LOGIN_BY_COOKIE) {
-			CommonFunctions.logIn(userName, password);
+			driver = DriverProvider.getWebDriver();
+			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+			login.loginAndVerify(userName, password);
 			return null;
 		} else {
 			try {
@@ -593,23 +415,23 @@ public class CommonFunctions {
 				PageObjectLogging.log("logInCookie", "ClientProtocolException",
 						false);
 				return null;
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
 			} catch (IOException e) {
-				PageObjectLogging.log("logInCookie", "IOException", false);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 				return null;
-			} catch (Exception e) {
-				PageObjectLogging.log("logInCookie", e.getClass()
-						.getCanonicalName(), false);
-				return null;
-
-			}
-		}
+			} 		}
 
 	}
 
 	public static String logInCookie(String userName, String password,
 			WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
-			CommonFunctions.logIn(userName, password, driver);
+			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+			login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 			return null;
 		} else {
 			try {
@@ -734,5 +556,16 @@ public class CommonFunctions {
 			}
 		}
 	}
+	
+	public static String resetForgotPasswordTime(String userName){
+		String[][] apiRequestParameters = {
+				{"action", ApiActions.apiActionForgotPassword},
+				{"user", userName},
+				{"token", Properties.apiToken},
+				{"format", "json"},
+		};
+		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
+	}
+	
 
 }

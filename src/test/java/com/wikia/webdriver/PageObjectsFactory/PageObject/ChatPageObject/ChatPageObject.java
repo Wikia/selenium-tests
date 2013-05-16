@@ -130,6 +130,7 @@ public class ChatPageObject extends BasePageObject
 	 */
 	public void verifyUserJoinToChat(String userName)
 	{
+		PageObjectLogging.log("verifyUserJoinToChat", "verifying if user joined chat", true, driver);
 		waitForElementByXPath("//div[@class='Chat']/ul/li[contains(text(), '"+userName+" has joined the chat.')]");
 		PageObjectLogging.log("verifyUserJoinToChat", userName+" has joined the chat.", true, driver);
 	}

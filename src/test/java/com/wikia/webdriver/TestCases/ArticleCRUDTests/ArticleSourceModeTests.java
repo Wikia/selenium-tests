@@ -8,8 +8,19 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleSourceEditMode;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject.MenuPositions;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleSourceEditMode;
 
 public class ArticleSourceModeTests extends TestTemplate{
 	
@@ -167,12 +178,11 @@ public class ArticleSourceModeTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
-		source.clickAddPhoto();
-		source.searchForImage("image");
-		source.waitForModalAndClickAddThisPhoto();
-		source.typePhotoCaption(PageContent.caption);
-		source.clickOnAddPhotoButton2();
-		source.checkSourceContent("[[File:Image010.jpg|thumb|"+PageContent.caption+"]]");
+		PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
+		source.checkSourceContent(String.format(PageContent.wikiTextPhoto, PageContent.caption));
 		source.clickOnPublishButton();
 	}	
 	
@@ -186,13 +196,20 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clearSource();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
-		source.addComponent("slideshow");
-		source.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
-		source.searchImageInLightBox("image");
-		source.galleryCheckImageInputs(4);
-		source.galleryClickOnSelectButton();
-		source.gallerySetPositionSlideshow("Center");
-		source.galleryClickOnFinishButton();
+		SlideshowBuilderComponentObject slideshowBuilder = (SlideshowBuilderComponentObject)source.addComponent("slideshow");
+		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
+		slideshowAddPhoto.search("image");
+		slideshowAddPhoto.choosePhotos(4);
+		slideshowAddPhoto.clickSelect();
+		slideshowBuilder.adjustPosition(Positions.Center);
+		slideshowBuilder.clickFinish();
+//		
+//		source.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
+//		source.searchImageInLightBox("image");
+//		source.galleryCheckImageInputs(4);
+//		source.galleryClickOnSelectButton();
+//		source.gallerySetPositionSlideshow("Center");
+//		source.galleryClickOnFinishButton();
 		source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}
@@ -207,15 +224,17 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clearSource();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
-		source.addComponent("gallery");
-		source.waitForObjectModalAndClickAddAphoto("Gallery");
-		source.searchImageInLightBox("image");
-		source.galleryCheckImageInputs(4);
-		source.galleryClickOnSelectButton();
-		source.gallerySetPositionGallery("Center");
-		source.gallerySetPhotoOrientation(2);
-		source.galleryClickOnFinishButton();
-		source.checkSourceContent("<gallery position=\"center\" orientation=\"square\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		GalleryBuilderComponentObject galleryBuiler = (GalleryBuilderComponentObject) source.addComponent("gallery");
+		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
+		galleryAddPhoto.search("image");
+		galleryAddPhoto.choosePhotos(4);
+		galleryAddPhoto.clickSelect();
+		galleryBuiler.adjustPosition("Center");
+		galleryBuiler.adjustColumns("2");
+		galleryBuiler.adjustSpacing("Small");
+		galleryBuiler.adjustOrientation(Orientation.landscape);
+		galleryBuiler.clickFinish();
+		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}
 	
@@ -229,13 +248,14 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clearSource();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
-		source.addComponent("slider");
-		source.waitForObjectModalAndClickAddAphoto("GallerySlider");
-		source.searchImageInLightBox("image");
-		source.galleryCheckImageInputs(4);
-		source.galleryClickOnSelectButton();
-		source.gallerySetSliderPosition(2);
-		source.galleryClickOnFinishButton();
+		
+		SliderBuilderComponentObject sliderBuilder = (SliderBuilderComponentObject)source.addComponent("slider");
+		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
+		sliderAddPhoto.search("image");
+		sliderAddPhoto.choosePhotos(4);
+		sliderAddPhoto.clickSelect();
+		sliderBuilder.clickFinish();
 		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}
@@ -248,13 +268,10 @@ public class ArticleSourceModeTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
-		source.clickAddVideo();
-		source.waitForVideoModalAndTypeVideoURL(VideoContent.youtubeVideoURL);
-		source.clickVideoNextButton();
-		source.waitForVideoDialog();
-		source.typeVideoCaption(PageContent.caption);
-		source.clickAddAvideo();
-		source.waitForSuccesDialogAndReturnToEditing();
+		VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+		vetOptions.setCaption(PageContent.caption);
+		vetOptions.submit();
 		source.checkSourceVideoContent("[["+VideoContent.youtubeVideoWikiText+PageContent.caption+"]]");
 		source.clickOnPublishButton();		
 	}

@@ -8,8 +8,8 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class BlogTests extends TestTemplate{
@@ -129,7 +129,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.triggerCommentArea();
 		blogPage.writeOnCommentArea(PageContent.blogComment);
 		blogPage.clickSubmitButton();
-		blogPage.verifyComment(PageContent.blogComment, Properties.userName);
+		blogPage.verifyCommentText(PageContent.blogComment, Properties.userName);
 	}
 	
 	@Test(groups = { "BlogTests_006", "BlogTests" })
@@ -153,11 +153,11 @@ public class BlogTests extends TestTemplate{
 		blogPage.triggerCommentArea();
 		blogPage.writeOnCommentArea(PageContent.blogComment);
 		blogPage.clickSubmitButton();
-		blogPage.verifyComment(PageContent.blogComment, Properties.userName);
+		blogPage.verifyCommentText(PageContent.blogComment, Properties.userName);
 		blogPage.editComment(PageContent.blogComment);
 		blogPage.writeOnCommentArea(PageContent.blogCommentEdit);
 		blogPage.clickSubmitButton(Properties.userName);
-		blogPage.verifyComment(PageContent.blogCommentEdit, Properties.userName);
+		blogPage.verifyCommentText(PageContent.blogCommentEdit, Properties.userName);
 	}
 	
 	@Test(groups = { "BlogTests_007", "BlogTests" })
@@ -181,7 +181,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.triggerCommentArea();
 		blogPage.writeOnCommentArea(PageContent.blogComment);
 		blogPage.clickSubmitButton();
-		blogPage.verifyComment(PageContent.blogComment, Properties.userNameStaff);
+		blogPage.verifyCommentText(PageContent.blogComment, Properties.userNameStaff);
 		blogPage.deleteComment(PageContent.blogComment);
 	}
 	
@@ -207,7 +207,7 @@ public class BlogTests extends TestTemplate{
 		blogPage.triggerCommentArea();
 		blogPage.writeOnCommentArea(PageContent.blogComment);
 		blogPage.clickSubmitButton();
-		blogPage.verifyComment(PageContent.blogComment, Properties.userName);
+		blogPage.verifyCommentText(PageContent.blogComment, Properties.userName);
 		blogPage.replyComment(PageContent.blogComment, PageContent.blogCommentReply);
 	}
 }

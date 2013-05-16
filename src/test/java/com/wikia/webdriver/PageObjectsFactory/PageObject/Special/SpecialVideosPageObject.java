@@ -15,27 +15,24 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class SpecialVideosPageObject extends WikiBasePageObject{
+public class SpecialVideosPageObject extends SpecialPageObject{
 
 	@FindBy(css = "a.addVideo")
 	private WebElement addVideo;
 	@FindBy(css = "div.WikiaGrid div:nth-child(1).grid-2")
 	private WebElement newestVideo;
-	
-	public SpecialVideosPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
-		this.Domain = Global.DOMAIN;
-		PageFactory.initElements(driver, this);
-	}
-
-	
 	@FindBys(@FindBy(css=".image.video"))
 	private List<WebElement> videos;
-	
-	
-	public SpecialVideosPageObject openSpecialVideoPage(){
+
+	public SpecialVideosPageObject(WebDriver driver, String Domain) {
+            super(driver);
+            PageFactory.initElements(driver, this);
+	}
+
+
+
+        public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Domain+"wiki/Special:Videos");
 		return new SpecialVideosPageObject(driver, Domain);
 	}
@@ -53,7 +50,6 @@ public class SpecialVideosPageObject extends WikiBasePageObject{
 		int rnd = r.nextInt(hrefs.size()-1);
 		String href = hrefs.get((rnd)+1);
 		String name = names.get((rnd)+1);
-//		getUrl(Global.DOMAIN+href+"?action=watch");
 		getUrl(href+"?action=watch");
 		clickAndWait(followSubmit);
 		waitForElementByElement(followedButton);
@@ -80,5 +76,5 @@ public class SpecialVideosPageObject extends WikiBasePageObject{
 		WebElement videoDescriptonElem = newestVideo.findElement(By.cssSelector("a.image.video"));
 		waitForValueToBePresentInElementsAttributeByElement(videoDescriptonElem, "data-video-name", videoDescription);
 		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);	
-	}	
+	}
 }

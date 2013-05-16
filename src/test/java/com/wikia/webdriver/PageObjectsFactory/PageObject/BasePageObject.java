@@ -2,13 +2,11 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,11 +16,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -46,24 +46,7 @@ public class BasePageObject{
 	
 	public WebDriverWait wait;
 
-	@FindBy(css="div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
-	protected WebElement customizeToolbar_CustomizeButton;
-	@FindBy(css="div.msg")
-	protected WebElement customizeToolbar_PageWatchlistStatusMessage;
-	@FindBy(css="div.search-box input.search")
-	protected WebElement customizeToolbar_FindAToolField;
-	@FindBy(css="div.MyToolsRenameItem input.input-box")
-	protected WebElement customizeToolbar_RenameItemDialogInput;
-	@FindBy(css="div.MyToolsRenameItem input.save-button")
-	protected WebElement customizeToolbar_SaveItemDialogInput;
-	@FindBy(css="input.save-button")
-	protected WebElement customizeToolbar_SaveButton;
-	@FindBy(css="span.reset-defaults a")
-	protected WebElement customizeToolbar_ResetDefaultsButton;
-	@FindBy(css="li.mytools.menu")
-	protected WebElement customizeToolbar_MyToolsMenuButton;
-	@FindBy(css="ul[id='my-tools-menu']")
-	protected WebElement customizeToolbar_MyToolsMenu;
+
 	@FindBy(css="#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
 	@FindBy(css="#WallNotifications li")
@@ -90,12 +73,12 @@ public class BasePageObject{
 	private WebElement randomPageButton;
 	@FindBy(css = ".sprite.search")
 	private WebElement searchButton;
-	
+
 	@FindBy(css="form.WikiaSearch")
 	WebElement wikiaSearch_searchForm;
 	@FindBy(css="section.modalContent div.UserLoginModal form")
 	WebElement modalLoginForm;
-	
+
 	@FindBy(css="a[data-id='shareButton']")
 	WebElement shareButton;
 	@FindBy(css="iframe.twitter-share-button")
@@ -116,11 +99,11 @@ public class BasePageObject{
 	WebElement emailModalCloseButton;
 	@FindBy(css="input#lightbox-share-email-text")
 	WebElement emailModalEmailInputField;
-	@FindBy(css="section.modalWrapper")
-	WebElement logInModal;
-	
-	private By customizeToolbar_ToolsList = By.cssSelector("ul.tools li");
-	private By customizeToolbar_MyToolsList = By.cssSelector("ul[id='my-tools-menu'] a");
+	@FindBy(css="section.modalWrapper .UserLoginModal")
+	protected WebElement logInModal;
+	@FindBy(css="#AccountNavigation a[href*='User:']")
+	protected WebElement userProfileLink;
+
 	
 	
 	public BasePageObject(WebDriver driver)
@@ -142,14 +125,13 @@ public class BasePageObject{
 		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-//		clickAndWait(publishButtonGeneral);
 		jQueryClick("input.control-button");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
 	
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
-	
+
 
 	/**
 	 * Click  on Publish button
@@ -192,17 +174,15 @@ public class BasePageObject{
 	 */
 	public void verifyURLcontains(String GivenString)
 	{
-		String currentURL = driver.getCurrentUrl();
-		if (currentURL.contains(GivenString))
-		{
-			PageObjectLogging.log("verifyURLcontains", "current url is the same as expected url", true, driver);
-		}
-		else
-		{
-			PageObjectLogging.log("verifyURLcontains", "current url isn't the same as expetced url", false, driver);
-		}
+            String currentURL = driver.getCurrentUrl();
+            Assertion.assertStringContains(currentURL, GivenString);
+            PageObjectLogging.log(
+                "verifyURLcontains",
+                "current url is the same as expetced url",
+                true, driver
+            );
 	}
-	
+
 	/**
 	 * Checks if the current URL is the given URL
 	 *
@@ -238,21 +218,27 @@ public class BasePageObject{
 
 	public void click(WebElement pageElem)
 	{
-		pageElem.click();	
+		pageElem.click();
 	}
 	
-	public void getUrl(String url)
-	{
-		try
-		{
-			driver.get(url);
-		}
-		catch(TimeoutException e)
-		{
-			PageObjectLogging.log("getUrl", "page loaded for more then 30 seconds after click", true);
-		}
+	public void getUrl(String url) {
+	    try	{
+		driver.get(url);
+            } catch(TimeoutException e) {
+                PageObjectLogging.log(
+                    "getUrl",
+                    "page loaded for more then 30 seconds after click",
+                    false
+                );
+            }
+
+            PageObjectLogging.log(
+                "getUrl",
+                "page loaded for less then 30 seconds after click",
+                true
+            );
 	}
-	
+
 	public void refreshPage()
 	{
 		try{
@@ -422,7 +408,12 @@ public class BasePageObject{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return (String) js.executeScript("return "+script);
 	}
-	
+
+        public WebElement executeScriptReturnElement(String script) {
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                return (WebElement) js.executeScript(script);
+        }
+
 	protected void executeScript(String script, WebDriver driver)
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -433,7 +424,8 @@ public class BasePageObject{
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	public void removeCssClass(String cssSelector, String className){
 		executeScript("$('."+cssSelector+"').removeClass('"+className+"')");
 		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true, driver);
@@ -481,7 +473,7 @@ public class BasePageObject{
 	 */
 	public void waitForElementByElement(WebElement element)
 	{
-			wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.visibilityOf(element));
 	}
 
 	/**
@@ -491,10 +483,18 @@ public class BasePageObject{
 	 */
 	public void waitForElementPresenceByBy(By locator)
 	{
-			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+            wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 
 	}
-	
+
+	/**
+	 * Wait for element to be displayed
+	 * @param element
+	 */
+	public void waitForElementVisibleByElement(WebElement element) {
+		wait.until(CommonExpectedConditions.elementVisible(element));
+	}
+
 	public WebElement waitForElementByCss(String cssSelector)
 	{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
@@ -576,8 +576,6 @@ public class BasePageObject{
 	{
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));								
 	}
-
-	
 	
 	public void waitForValueToBePresentInElementsAttributeByCss(String selector, String attribute, String value)
 	{
@@ -631,318 +629,6 @@ public class BasePageObject{
 		{
 			PageObjectLogging.log("navigateBack", e.toString(), false);			
 		}
-	}
-	
-	public void showToolbar()
-	{
-		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
-		executeScript("$('div#WikiaBarWrapper').attr('class', 'WikiaBarWrapper')");
-	}
-	
-	/**
-	 * Verifies that user toolbar buttons are visible
-	 */
-	public void verifyUserToolBar()
-	{
-		waitForElementByCss("div.toolbar ul.tools li.overflow");
-		waitForElementByCss("div.toolbar ul.tools li.mytools");
-		waitForElementByCss("div.toolbar ul.tools li a.tools-customize");
-		PageObjectLogging.log("verifyUserToolBar", "user toolbar verified", true, driver);
-	}
-	
-	/**
-	 * Clicks on "Customize" button. User must be logged in.
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_ClickCustomize() {
-		waitForElementByElement(customizeToolbar_CustomizeButton);
-		waitForElementClickableByElement(customizeToolbar_CustomizeButton);
-		click(customizeToolbar_CustomizeButton);
-		PageObjectLogging.log("customizeToolbar_ClickCustomize", "Clicks on 'Customize' button.", true, driver);
-		
-	}
-	
-	/**
-	 * Clicks on "ResetDefaults" button.
-	 * 	 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_ClickOnResetDefaults() {
-		waitForElementByElement(customizeToolbar_ResetDefaultsButton);
-		waitForElementClickableByElement(customizeToolbar_ResetDefaultsButton);
-		clickAndWait(customizeToolbar_ResetDefaultsButton);
-		PageObjectLogging.log("customizeToolbar_ClickOnResetDefaults", "Click on 'ResetDefaults' button.", true, driver);
-		
-	}
-	
-	/**
-	 * Types GivenString to Find A Tool field
-	 * 
-	 * @param GivenString String to be typed into search field 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_TypeIntoFindATool(String GivenString) {
-		waitForElementByElement(customizeToolbar_FindAToolField);
-		waitForElementClickableByElement(customizeToolbar_FindAToolField);
-		customizeToolbar_FindAToolField.clear();
-		customizeToolbar_FindAToolField.sendKeys(GivenString);
-		PageObjectLogging.log("customizeToolbar_TypeIntoFindATool", "Type "+GivenString+" into Find A Tool field", true, driver);
-		
-	}
-	
-	/**
-	 * Types GivenString to Find A Tool field
-	 * 
-	 * @param GivenString new name for the Tool
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_TypeIntoRenameItemDialog(String GivenString) {
-		waitForElementByElement(customizeToolbar_RenameItemDialogInput);
-		waitForElementClickableByElement(customizeToolbar_RenameItemDialogInput);
-		customizeToolbar_RenameItemDialogInput.clear();
-		customizeToolbar_RenameItemDialogInput.sendKeys(GivenString);
-		PageObjectLogging.log("customizeToolbar_TypeIntoRenameItemDialog", "Type "+GivenString+" into rename item input", true, driver);
-	}
-	
-	/**
-	 * Clicks on "save" button on Rename Item dialog.
-	 * 	 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_saveInRenameItemDialog() {
-		waitForElementByElement(customizeToolbar_SaveItemDialogInput);
-		waitForElementClickableByElement(customizeToolbar_SaveItemDialogInput);
-		clickAndWait(customizeToolbar_SaveItemDialogInput);
-		PageObjectLogging.log("customizeToolbar_saveInRenameItemDialog", "Click on 'save' button on Rename Item dialog.", true, driver);
-		
-	}
-	
-	/**
-	 * Click on a Tool after searching for it
-	 * 
-	 * @param Tool toolname appearing on the list of found tools
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_ClickOnFoundTool(String Tool) {
-		waitForElementByCss("div.autocomplete div[title='"+Tool+"']");
-		waitForElementClickableByCss("div.autocomplete div[title='"+Tool+"']");
-		clickAndWait(driver.findElement(By.cssSelector("div.autocomplete div[title='"+Tool+"']")));
-		PageObjectLogging.log("customizeToolbar_ClickOnFoundTool", "Click on "+Tool, true, driver);
-		
-	}
-	
-	/**
-	 * Click on a toolbar tool.
-	 * 
-	 * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool you want to click.
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_ClickOnTool(String Tool_dataname) {
-		waitForElementByCss("li.overflow a[data-name='"+Tool_dataname+"']");
-		WebElement element = driver.findElement(By.cssSelector("li.overflow a[data-name='"+Tool_dataname+"']"));
-		if (Global.BROWSER.equals("IE")) {
-			// clicking on parent element of the above 'a' element, because IE couldn't click on the above 'a' element
-			// Unfortunately Firefox can't click on this parent element, so the code must be browser-dependent
-			WebElement parent = element.findElement(By.xpath(".."));
-			waitForElementClickableByElement(parent);
-			clickAndWait(parent);
-		}
-		else {
-			waitForElementClickableByElement(element);
-			clickAndWait(element);
-		}
-		PageObjectLogging.log("customizeToolbar_ClickOnFoundTool", "Click on "+Tool_dataname, true, driver);
-	}
-	
-	/**
-	 * Click on a toolbar tool.
-	 * 
-	 * @param data-name data-name of the toolbar tool. <br> You should check the data-name of the tool you want to click.
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyPageWatchlistStatusMessage() {
-		waitForElementByElement(customizeToolbar_PageWatchlistStatusMessage);
-		PageObjectLogging.log("customizeToolbar_VerifyPageWatchlistStatusMessage", "Verify that the page watchlist status message appeared ", true, driver);
-		
-	}
-	
-	/**
-	 * Verify that page is followed
-	 * The method should be used only after clicking on "follow" button. Before that, "follow" button does not have 'title' attribute which is necessary in the method
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyPageFollowed() {
-		waitForElementByCss("a[data-name='follow']");
-		waitForValueToBePresentInElementsAttributeByCss("a[data-name='follow']", "title", "Unfollow");
-		PageObjectLogging.log("customizeToolbar_VerifyPageFollowed", "Verify that page is followed", true, driver);
-	
-	}
-	
-	/**
-	 * Verify that page is unfollowed
-	 * The method should be used only after clicking on "Unfollow" button. Before that, "follow" button does not have 'title' attribute which is necessary in the method
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyPageUnfollowed() {
-		waitForElementByElement(customizeToolbar_PageWatchlistStatusMessage);
-		waitForValueToBePresentInElementsAttributeByCss("a[data-name='follow']", "title", "Follow");
-		PageObjectLogging.log("customizeToolbar_VerifyPageUnfollowed", "Verify that page is unfollowed", true, driver);
-		
-	}
-	
-	/**
-	 * Look up if Tool appears on Toolbar List
-	 * 
-	 * @param Tool {Follow, Edit, History, (...)} 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyToolOnToolbarList(String Tool) {
-		waitForElementByCss("ul.options-list li[data-caption='"+Tool+"']");
-		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbarList", "Check if "+Tool+" appears on list", true);
-	
-	}
-	
-	/**
-	 * Look up if Tool does not appear on Toolbar List
-	 * 
-	 * @param Tool {Follow, Edit, History, (...)} 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyToolNotOnToolbarList(String Tool) {
-		waitForElementByCss("ul.options-list li");
-		waitForElementNotVisibleByCss("ul.options-list li[data-caption='"+Tool+"']");
-		PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbarList", "Check if "+Tool+" does not appear on Toolbar list", true, driver);
-	}
-	
-	/**
-	 * Remove a wanted Tool by its data-caption
-	 * 
-	 * @param Tool ID of tool to be removed. {Follow, Edit, History, (...)} 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_ClickOnToolRemoveButton(String Tool) {
-		jQueryClick("ul.options-list li[data-caption=\""+Tool+"\"] img.trash");
-		PageObjectLogging.log("customizeToolbar_ClickOnToolRemoveButton", "Remove Tool with id "+Tool+" from Toolbar List", true, driver);
-	}
-	
-	/**
-	 * Rename the wanted Tool
-	 * 
-	 * @param ToolID ID of tool to be removed. {PageAction:Follow, PageAction:Edit, PageAction:History, (...)} 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_ClickOnToolRenameButton(String ToolID) {
-		By By1 = By.cssSelector("ul.options-list li[data-caption='"+ToolID+"']");
-		waitForElementByBy(By1);
-		jQueryClick("ul.options-list li[data-caption=\""+ToolID+"\"] img.edit-pencil");
-		PageObjectLogging.log("customizeToolbar_ClickOnToolRenameButton", "Rename the "+ToolID+" Tool", true, driver);
-	}
-	
-	/**
-	 * Drag the wanted Tool
-	 * 
-	 * @param ToolID ID of tool to be dragged. {PageAction:Follow, PageAction:Edit, PageAction:History, (...)}
-	 * @param DragDirection The direction of dragging. e.g -1 is 'drop the tool one item below'
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_DragElemAndDrop(String ToolID, int DragDirection) {
-		By By1 = By.cssSelector("ul.options-list li[data-caption='"+ToolID+"']");
-		By By2 = By.cssSelector("ul.options-list li[data-caption='"+ToolID+"'] img.drag");
-		Point Elem1_location = driver.findElement(By1).getLocation();
-		CommonFunctions.MoveCursorToElement(Elem1_location);
-		waitForElementByBy(By2);
-		waitForElementClickableByBy(By2);
-		Point Elem2_location = driver.findElement(By2).getLocation();
-		CommonFunctions.MoveCursorToElement(Elem2_location);
-		if (Global.BROWSER.equals("FF")) {
-			// Firefox is unable to drag and drop customize toolbar elements using actions class. Able to do it with robot class
-			CommonFunctions.DragFromCurrentCursorPositionAndDrop(0, 25*DragDirection+8);
-		}
-		else {		
-			// Chrome is unable to drag and drop customize toolbar elements using robot class. Able to do it with actions class
-			WebElement draggable = driver.findElement(By2); 
-			new Actions(driver).dragAndDropBy(draggable, 0, 25*DragDirection+8).perform();  
-			
-		}
-		PageObjectLogging.log("customizeToolbar_DragElemAndDrop", "Drag element "+ToolID+", by "+DragDirection, true, driver);
-	}
-	
-	/**
-	 * Check the order of two first tools on My tools list
-	 * 
-	 * @param tool1 The first tool to appear on My Tools list. {History, What links here, (...)} 
-	 * @param tool2 The second tool to appear on My Tools list. {History, What links here, (...)} 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_VerifyMyToolsOrder(String tool1, String tool2) {
-		CommonFunctions.MoveCursorTo(0, 100);		
-		CommonFunctions.MoveCursorTo(0, 0);		
-		waitForElementByElement(customizeToolbar_MyToolsMenuButton);
-		Point location = customizeToolbar_MyToolsMenuButton.getLocation();
-		try {Thread.sleep(1000);} catch (InterruptedException e) {}
-		CommonFunctions.MoveCursorToElement(location);
-		waitForElementByElement(customizeToolbar_MyToolsMenu);
-		List<WebElement> MyToolsList = driver.findElements(customizeToolbar_MyToolsList);
-		String ActualTool1=MyToolsList.get(0).getText();
-		String ActualTool2=MyToolsList.get(1).getText();
-		if (!tool1.equals(ActualTool1)) {
-			PageObjectLogging.log("customizeToolbar_VerifyMyToolsOrder", ActualTool1+" where "+tool1+" should be. Drag & drop action (from previous step) must hadn't been succesful", false, driver);
-		}
-		if (!tool2.equals(ActualTool2)) {
-			PageObjectLogging.log("customizeToolbar_VerifyMyToolsOrder", ActualTool2+" where "+tool2+" should be. Drag & drop action (from previous step) must hadn't been succesful", false, driver);
-		}
-		PageObjectLogging.log("customizeToolbar_VerifyMyToolsOrder", "Verify that My Tools list has"+tool2+" appearing after "+tool1, true, driver);
-	}
-
-	/**
-	 * Click on save button on customize toolbar
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_ClickOnSaveButton() {
-		waitForElementByElement(customizeToolbar_SaveButton);
-		waitForElementClickableByElement(customizeToolbar_SaveButton);
-		clickAndWait(customizeToolbar_SaveButton);
-		PageObjectLogging.log("customizeToolbar_ClickOnSaveButton", "Click on 'save' button.", true, driver);
-		
-	}
-	
-	public void customizeToolbar_VerifyToolOnToolbar(String ToolName)
-	{
-		waitForElementByXPath("//ul[@class='tools']//a[contains(text(), '"+ToolName+"')]");
-		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbar","Verify that "+ToolName+" appears in Toolbar.", true);
-	}
-	
-	/**
-	 * <p> Verify that wanted Tool appears in Toolbar. <br> 
-	 * The method finds all of Tools appearing in Toolbar (by their name), and checks if there is at least one name which fits the given param (ToolName)
-	 * 
-	 * @param ToolName Tool to be verified (name that should appear on toolbar)
-	 * @author Michal Nowierski
-	 */
-	public void customizeToolbar_UnfollowIfPageIsFollowed() {
-		List<WebElement> List = driver.findElements(customizeToolbar_ToolsList);
-		for (int i = 0; i < List.size(); i++) {
-			if (List.get(i).getText().equals("Following")) {
-				customizeToolbar_ClickOnTool("follow");
-				customizeToolbar_VerifyPageWatchlistStatusMessage();
-				wait.until(ExpectedConditions.textToBePresentInElement(customizeToolbar_ToolsList, "Follow"));
-			
-			}
-		}
-		PageObjectLogging.log("customizeToolbar_UnfollowIfPageIsFollowed",
-				"If the page is Followed, unfollow it (preconditions assurance)", true, driver);
-
-	}
-	
-	public void customizeToolbar_VerifyToolNotOnToolbar(String ToolName)
-	{
-		By tool = By.xpath("//ul[@class='tools']//a[contains(text(), '"+ToolName+"')]");
-		waitForElementNotVisibleByBy(tool);
-		PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbar","Verify that "+ToolName+" tool does not appear in Toolbar.", true);
 	}
 	
 	/**
@@ -1005,36 +691,25 @@ public class BasePageObject{
 			
 		}  	
 	}
-	
 
-	public void openWikiPage() {
-		String temp = Domain;
-		try {
-			temp = Domain + "?noexternals=1";
-			getUrl(temp);
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logOut",
-					"page loads for more than 30 seconds", true);
-		}
-		waitForElementByCss("a[class*=hub]");
-		executeScript("$('ul#pagehistory li:nth-child(1) .mw-history-undo')");
-	}
+    public void openWikiPage() {
+        getUrl(Domain + URLsContent.noexternals);
+        PageObjectLogging.log(
+            "WikiPageOpened",
+            "Wiki page is opened", true
+        );
+    }
 
-//	public void openRandomArticle() {
-//		clickAndWait(randomPageButton);
-//		waitForElementByElement(searchButton);
-//		PageObjectLogging.log("openRandomArticle",
-//				"random page button clicked", true, driver);
-//	}
-	
 	public WikiArticlePageObject openRandomArticle() {
-		clickAndWait(randomPageButton);
-		waitForElementByElement(searchButton);
-		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
-		return new WikiArticlePageObject(driver, Domain, "random");
+            clickAndWait(randomPageButton);
+            waitForElementByElement(searchButton);
+            PageObjectLogging.log(
+                "openRandomArticle",
+                "random page button clicked", true, driver
+            );
+            return new WikiArticlePageObject(driver, Domain, "random");
 	}
-	
+
 	public void openRandomArticleByUrl() {
 		navigateToRandomPage();
 		waitForElementByElement(searchButton);
@@ -1130,11 +805,7 @@ public class BasePageObject{
 		PageObjectLogging.log("VerifyEmailModalElements", "Verify that the Email Modal elements are present", true, driver);
 	}
 	
-	public void verifyLogInModalForAnonsVisibility() {	
-		waitForElementByElement(logInModal);
-		PageObjectLogging.log("VerifyLogInModalForAnonsVisibility", "Verify that the Log In modal is present", true, driver);
-	}	
-	
+
 	public void notifications_verifyLatestNotificationTitle(String title) {
 		notifications_showNotifications();
 		//the below method is native click which is the only way to load notification
@@ -1161,7 +832,6 @@ public class BasePageObject{
 		waitForElementByElement(notifications_NotificationsForWiki);
 		waitForElementClickableByElement(notifications_NotificationsForWiki);
 		clickAndWait(notifications_NotificationsForWiki);
-//		executeScript("$($('li.notifications-for-wiki')[0]).addClass('show')");
 		PageObjectLogging.log("notifications_showNotificationsForWiki", "show the upper wiki notifications on menu", true, driver);		
 	}
 	
@@ -1184,4 +854,114 @@ public class BasePageObject{
 		}
 		PageObjectLogging.log("notifications_clickMarkAllAsRead", (allWikis ? "all wikis" : "only one wiki")+" marked as read", true, driver);				
 	}
+
+    /**
+     * Determine whether username contains underscore
+     * if so replace it with space
+     *
+     * @param username
+     */
+    protected String purifyUserName(String userName) {
+        if (userName.contains("_")) {
+            userName = userName.replace("_", " ");
+        }
+        return userName;
+    }
+
+    /**
+     * Verify if modal for forced login is present
+     */
+    public void verifyLogInModalForAnonsVisibility() {
+        waitForElementVisibleByElement(logInModal);
+        PageObjectLogging.log(
+            "VerifyLogInModalForAnonsVisibility",
+            "Verify that the Log In modal is present",
+            true,
+            driver
+        );
+    }
+
+    /**
+     * Verify if user is logged in
+     * Check if link to user's Profile contains user's name
+     *
+     * @param userName
+     */
+    public void verifyUserLoggedIn(String userName) {
+        refreshPage();
+    	waitForElementByElement(userProfileLink);
+        userName = purifyUserName(userName);
+        waitForTextToBePresentInElementByElement(
+            userProfileLink, userName
+        );
+        PageObjectLogging.log(
+            "VerifyUserNamePresent",
+            "Verify that username is present in link to user's profile",
+            true, driver
+        );
+    }
+
+    /**
+     * Wait for element to not be present in DOM
+     *
+     * @param cssSelector
+     */
+    public void waitForElementNotPresent(final String cssSelector) {
+        wait.until(
+            CommonExpectedConditions.elementNotPresent(cssSelector)
+        );
+    }
+    
+    /**
+     * Wait for element to not be present in DOM
+     * @param selector
+     */
+    public void waitForElementNotPresent(final By selector) {
+    	wait.until(
+    			CommonExpectedConditions.elementNotPresent(selector)
+    			);
+    }
+
+    /**
+     * Wait for element to be in viewport
+     * Either position top or left is bigger then -1
+     *
+     * @param element
+     */
+    public void waitForElementInViewPort(final WebElement element) {
+        wait.until(
+            CommonExpectedConditions.elementInViewPort(element)
+        );
+    }
+
+    /**
+     * Wait for new window present
+     */
+    public void waitForNewWindow() {
+        wait.until(
+            CommonExpectedConditions.newWindowPresent()
+        );
+    };
+
+    /**
+     * Wait for tags that are visible and are bigger then 1px x 1px
+     * @param String tagNameOne - first tag name
+     * @param String tagNameTwo - second tag name
+     */
+    public void waitForOneOfTagsPresentInElement(WebElement slot, String tagNameOne, String tagNameTwo) {
+        wait.until(
+            CommonExpectedConditions.oneOfTagsPresentInElement(slot, tagNameOne, tagNameTwo)
+        );
+    }
+
+    /**
+     * Determine if tests are ran on preview or live enviroment
+     */
+    public String determineEnviroment() {
+        if (Global.DOMAIN.contains(URLsContent.previewPrefix)) {
+            return "preview";
+        } else {
+            return "";
+        }
+    }
 }

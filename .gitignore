@@ -2,3 +2,9 @@ logs/
 target/
 .DS_Store
 Thumbs.db
+chromedriver.log
+tmp.exe
+.classpath
+.project
+.settings/
+test-output/
