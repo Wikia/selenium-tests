@@ -53,4 +53,12 @@ public class NotificationsComponentObject extends BasePageObject{
 		return notificationsList.get(notificationNumber - 1).getAttribute("href");
 	}
 	
+	public int getNumberOfUnderNotifications() {
+		String text = bubblesCount.getText();
+		if (!text.isEmpty()) {
+			return Integer.parseInt(text);
+		}
+		return 0;
+	}
+	
 }
