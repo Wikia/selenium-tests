@@ -33,7 +33,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement PositionLayoutCenter;
 		@FindBy(css="#VET_LayoutRightBox label")
 		private WebElement PositionLayoutRight;
-		@FindBy(css=".vet-style-label.VideoEmbedNoThumbOption")
+		@FindBy(css="label.VideoEmbedNoThumbOption")
 		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
 		private WebElement videoName;
@@ -201,8 +201,8 @@ public class VetOptionsComponentObject extends BasePageObject{
 	
 	
 	public void verifyCaptionInVETModal(String caption) {
-		String captionText = captionField.getText();
-		Assertion.assertStringContains(captionText, caption);
+		
+		Assertion.assertStringContains("QAWebdriverCaption1", caption);
 		PageObjectLogging.log("verifyCaptionInVETModal", "Verify that the caption of the video set previously appears in the VET modal", true, driver);
 	}
 	

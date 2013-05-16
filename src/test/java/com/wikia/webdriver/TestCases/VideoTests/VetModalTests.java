@@ -27,10 +27,8 @@ public class VetModalTests extends TestTemplate {
 	
 	@Test(groups = { "VetModalTests001", "VetModalTests" })
 	public void Vet_Tests_001_VerifyLeftAlignmentOnEditorSourceAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		CommonFunctions.logIn(Properties.userName, Properties.password);	
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -42,10 +40,7 @@ public class VetModalTests extends TestTemplate {
 		edit.clickOnSourceButton();
 		edit.verifyWikiTextInSourceMode("left");
 		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheLeftOnAritcle();
-		CommonFunctions.logoutCookie(cookieName);
-		
-	}
+		wiki.verifyVideoOnTheLeftOnAritcle();	}
 		
 	/**
 	 * TC002 - Verifies left video alignment on editor, 'left' string on source mode,
@@ -60,7 +55,7 @@ public class VetModalTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
+		CommonFunctions.logIn(Properties.userName, Properties.password);	
 		pageName =PageContent.articleNamePrefix+wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -77,7 +72,7 @@ public class VetModalTests extends TestTemplate {
 		edit.clickClosePreviewModalButton();
 		wiki = edit.clickOnPublishButton();
 		wiki.verifyVideoOnTheLeftOnAritcle();
-		CommonFunctions.logoutCookie(cookieName);
+		
 	
 	}
 	
