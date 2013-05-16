@@ -20,8 +20,12 @@ public class NotificationsComponentObject extends BasePageObject{
 	protected WebElement notificationsBubbles;
 	@FindBys(@FindBy(css="li.unread_notification a"))
 	private List<WebElement> notificationsList;
-	@FindBys(@FindBy(css="#WallNotifications li ul.subnav"))
-	private List<WebElement> notificationsSubnav;
+	@FindBy(css="#WallNotifications li ul.subnav")
+	private WebElement notificationsSubnav;
+	@FindBy(css="#WallNotifications")
+	private WebElement notifications;
+	@FindBy(css="#bubbles_count")
+	private WebElement bubblesCount;	
 
 	private By toolsList = By.cssSelector("ul.tools li");
 	
@@ -29,7 +33,8 @@ public class NotificationsComponentObject extends BasePageObject{
 	 * shown notifications 
 	 */
 	public void showNotifications() {
-		executeScript("$('#WallNotifications li ul.subnav').addClass('show')");
+		builder.moveToElement(notifications).build().perform();
+		waitForElementVisibleByElement(notificationsSubnav);
 		PageObjectLogging.log("#WallNotifications li ul.subnav", "show notifications", true, driver);
 	}
 	
@@ -47,4 +52,5 @@ public class NotificationsComponentObject extends BasePageObject{
 		PageObjectLogging.log("unrollNotifications", "click on notifications bubbles", true, driver);
 		return notificationsList.get(notificationNumber - 1).getAttribute("href");
 	}
+	
 }
