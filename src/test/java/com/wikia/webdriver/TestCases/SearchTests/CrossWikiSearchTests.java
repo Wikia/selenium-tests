@@ -27,7 +27,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 		home.openHomePage();
 		CrossWikiSearchPage searchPage = home.searchFor(query);
 		searchPage.verifyFirstResultTitle(wikiName);
-	searchPage.verifyFirstResultVertical(vertical);
+		searchPage.verifyFirstResultVertical(vertical);
 		searchPage.verifyFirstResultDescription();
 		searchPage.verifyFirstResultPageCount();
 		searchPage.verifyFirstResultPageImages();

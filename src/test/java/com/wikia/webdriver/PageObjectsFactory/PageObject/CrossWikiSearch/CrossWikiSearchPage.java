@@ -91,6 +91,11 @@ public class CrossWikiSearchPage extends BasePageObject {
 		Assertion.assertEquals( elements.size(), expectedResultsPerPage, "Wrong number of results per page.");
 	}
 
+	/**
+	 * Verify data-pos attributes are present
+	 * @param pageNumber search result page number
+	 * @param resultsPerPage expected pages per result
+	 */
 	public void verifyResultsPosForPage(int pageNumber, int resultsPerPage) {
 		waitForElementByElement(resultsContainer);
 		List<WebElement> elements = driver.findElements(resultLinks);
