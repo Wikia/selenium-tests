@@ -1,9 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Wall;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,6 +20,8 @@ public class WallPageObject extends BasePageObject {
 
 	@FindBy(css="textarea#WallMessageTitle")
 	private WebElement wallMessageTitle;
+	@FindBys(@FindBy(css="ul.comments li.message-main .msg-title a"))
+	private List<WebElement> discussionTitlesList;
 	@FindBy(css="button#WallMessageSubmit")
 	private WebElement postButton;
 
@@ -57,6 +62,21 @@ public class WallPageObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 		clickPostButton();
 		PageObjectLogging.log("startDiscussion", "discussion with message: "+message+", with title "+title+" posted", true);
+	}
+
+	/**
+	 * Open a discussion with a specific title from a message wall.
+	 *
+	 * @param title
+	 */
+	public void openDiscussion(String title) {
+		for (WebElement elem : discussionTitlesList) {
+			if (elem.getText().contains(title)) {
+				clickAndWait(elem);
+				break;
+			}
+		}
+		PageObjectLogging.log("openDiscussion", "discussion with title: "+title+", opened", true);
 	}
 
 	/**
