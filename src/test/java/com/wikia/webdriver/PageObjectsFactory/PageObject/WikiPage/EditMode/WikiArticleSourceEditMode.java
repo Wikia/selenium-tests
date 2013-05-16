@@ -248,10 +248,11 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	
 	public void checkWikiMarkupTools()
 	{
-		for (int i=1; i<20; i++){
+		for (int i=1,j=i+1; i<21; i++){
+			j=i+1;
 			clearSource();
 			clickMore();
-			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).getText();
+			String content = executeScriptRet("$('.modalContent #edittools_wikimarkup a:nth-child("+j+")').text()");
 			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).click();
 			checkSourceContent(content);
 		}
@@ -263,7 +264,7 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 			System.out.println(i);
 			clearSource();
 			clickMore();
-			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).getText();
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).getAttribute("value");
 			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).click();
 			checkSourceContent(content);
 		}

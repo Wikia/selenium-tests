@@ -31,6 +31,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -41,6 +43,10 @@ public class CommonFunctions {
 	private static WebDriver driver;
 	private static WebDriverWait wait;
 
+	static {
+		driver = DriverProvider.getWebDriver();
+		wait = new WebDriverWait(driver, 30);
+	}
 
 	public static void logIn(String userName, String password, WebDriver driver) {
 		String temp = driver.getCurrentUrl();
@@ -79,6 +85,19 @@ public class CommonFunctions {
 		}
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.cssSelector("a[data-id='login']")));
+		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
+	}
+	
+	public static void logOutMonobook() {
+		try {
+			driver.manage().deleteAllCookies();
+			driver.get(Global.DOMAIN + "wiki/Special:UserLogout?noexternals=1");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector("#pt-login")));
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
 	}
 
@@ -429,7 +448,7 @@ public class CommonFunctions {
 			WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
 			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-			login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+			login.loginAndVerify(userName, password);
 			return null;
 		} else {
 			try {
@@ -554,5 +573,16 @@ public class CommonFunctions {
 			}
 		}
 	}
+	
+	public static String resetForgotPasswordTime(String userName){
+		String[][] apiRequestParameters = {
+				{"action", ApiActions.apiActionForgotPassword},
+				{"user", userName},
+				{"token", Properties.apiToken},
+				{"format", "json"},
+		};
+		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
+	}
+	
 
 }

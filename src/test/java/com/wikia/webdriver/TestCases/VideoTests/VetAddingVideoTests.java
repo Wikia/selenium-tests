@@ -26,6 +26,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 
 public class VetAddingVideoTests extends TestTemplate {
 	
+	String desiredVideoName;
+	
 	@Test(groups = {"VetTests001", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_001_SpecialVideosProvider() {
 		CommonFunctions.logOut(driver);
@@ -81,8 +83,8 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.openRandomArticleByUrl();
 		article.verifyRVModulePresence();
 		VetAddVideoComponentObject vetAddingVideo = article.clickOnAddVideoRVModule();
-		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
-		article.verifyVideoAddedToRVModule(VideoContent.wikiaVideoName);
+		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 4);
+		article.verifyVideoAddedToRVModule(vetAddingVideo.getVideoName());
 	}
 	
 	@Test(groups = {"VetTests005", "VetTests", "VetAddVideo"})
@@ -217,10 +219,11 @@ public class VetAddingVideoTests extends TestTemplate {
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
+		desiredVideoName = vetOptions.getVideoName();
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();
 		article.clickSubmitButton();
-		article.verifyCommentVideo(VideoContent.wikiaVideoName);
+		article.verifyCommentVideo(desiredVideoName);
 	}
 	
 	@Test(groups = {"VetTests013", "VetTests", "VetAddVideo"})

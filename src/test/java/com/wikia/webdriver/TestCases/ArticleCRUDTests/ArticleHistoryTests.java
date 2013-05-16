@@ -16,7 +16,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 
 public class ArticleHistoryTests extends TestTemplate
 {
-	
+	/**
+	 * Verify if undo button works properly: create article with content, then change that content and at the end undo changes using history. Check if undo changes is succesful
+	 */
 	@Test(groups={"ArticleHistoryTests_001", "ArticleCRUDAdmin"})
 	public void ArticleHistoryTests_001_RecoverPreviousVersion()
 	{
@@ -50,6 +52,10 @@ public class ArticleHistoryTests extends TestTemplate
 		CommonFunctions.logOut(driver);
 	}
 	
+	/**
+	 * only STAFF and admins can use rollback button
+	 * Rollback changes of user and verify: create article with content, then change that content and at the end undo changes using history. Check if undo changes is succesful
+	 */
 	@Test(groups={"ArticleHistoryTests_002", "ArticleCRUDAdmin"})
 	public void ArticleHistoryTests_002_RollbackVersion()
 	{

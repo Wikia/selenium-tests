@@ -66,7 +66,6 @@ public class VetProvidersTests extends TestTemplate{
 				article.verifyVideoOnThePage();
 				FileDetailsPageObject fileDetails = article.clickVideoDetailsButton();
 				fileDetails.verifyEmbeddedVideoIsPresent();	
-				fileDetails.verifythumbnailIsPresent();
 			}
 			
 			@Test(dataProvider="provideVideo", groups={"VetProvidersTests002", "VetTests"}) 

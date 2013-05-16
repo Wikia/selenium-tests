@@ -1,11 +1,15 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -112,7 +116,13 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		login(name, pass);
 		verifyUserLoggedIn(name);
 	}
-	
+
+	public void loginAndVerifyOnWiki(String name, String pass, String url) {
+		openSpecialUserLoginOnWiki(url);
+		login(name, pass);
+		verifyUserLoggedIn(name);
+	}
+
 	/**
 	 * Special:UserLogin
 	 * use if user is on Special:UserLogin page 
@@ -127,44 +137,56 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		clickLoginButton();
 	}
 
-        /**
+	/**
 	 * Special:UserLogin forgot password
 	 * @param name
 	 */
 	public void remindPassword(String name){
-            typeInUserName(name);
-            clickForgotPasswordLink();
+		Assertion.assertEquals(
+			ApiActions.apiActionForgotPasswordResponse,
+			CommonFunctions.resetForgotPasswordTime(name));
+		typeInUserName(name);
+		clickForgotPasswordLink();
 	}
 
 	/**
 	 * opens Special:UserLogin page
 	 */
 	public void openSpecialUserLogin(){
-		getUrl(Global.DOMAIN+"wiki/Special:UserLogin");
+		getUrl(Global.DOMAIN+ URLsContent.specialUserLogin);
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
 	}
 
-        public String setNewPassword() {
-            String password = Properties.password + getTimeStamp();
-            typeInNewPassword(password);
-            retypeInNewPassword(password);
-            clickLoginButton();
-            PageObjectLogging.log(
-                "setNewPassword",
-                "new password is set",
-                true, driver
-            );
-            return password;
-        }
+	public String setNewPassword() {
+		String password = Properties.password + getTimeStamp();
+		typeInNewPassword(password);
+		retypeInNewPassword(password);
+		clickLoginButton();
+		PageObjectLogging.log(
+			"setNewPassword",
+			"new password is set",
+			true, driver
+		);
+		return password;
+	}
 
-        public void verifyMessageAboutNewPassword(String userName) {
-            waitForElementByElement(messagePlaceholder);
-            String message = PageContent.newPasswordSentMessage.replace("%userName%", userName);
-            waitForTextToBePresentInElementByElement(messagePlaceholder, message);
-            PageObjectLogging.log(
-                "newPasswordSentMessage",
-                "Message about new password sent present",
-                true, driver
-            );
-        }
+	public void openSpecialUserLoginOnWiki(String url) {
+		getUrl(url + URLsContent.specialUserLogin);
+		PageObjectLogging.log(
+			"SpecialUserLoginOnWiki",
+			"Special:UserLogin opened on: " + url,
+			true
+		);
+	}
+
+	public void verifyMessageAboutNewPassword(String userName) {
+		waitForElementByElement(messagePlaceholder);
+		String message = PageContent.newPasswordSentMessage.replace("%userName%", userName);
+		waitForTextToBePresentInElementByElement(messagePlaceholder, message);
+		PageObjectLogging.log(
+			"newPasswordSentMessage",
+			"Message about new password sent present",
+			true, driver
+		);
+	}
 }

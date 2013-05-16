@@ -8,11 +8,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MarketingToolbox.Dashbo
 import org.testng.annotations.Test;
 
 /**
- * Created with IntelliJ IDEA.
  * User: kvas
- * Date: 15.03.13
- * Time: 15:29
- * To change this template use File | Settings | File Templates.
  */
 public class DashboardTests extends TestTemplate{
     @Test(groups = {"MarketingToolbox001", "MarketingToolbox"})

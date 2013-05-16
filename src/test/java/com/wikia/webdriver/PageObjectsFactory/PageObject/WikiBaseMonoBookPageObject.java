@@ -22,6 +22,8 @@ public class WikiBaseMonoBookPageObject extends BaseMonoBookPageObject {
     private WebElement randomArticleLink;
     @FindBy(css = "#pt-userpage>a")
     private WebElement userPageLink;
+    @FindBy(css = "#pt-userpage>a")
+    private WebElement closeDisclaimer;
 
     public WikiBaseMonoBookPageObject(WebDriver driver, String Domain) {
         super(driver);

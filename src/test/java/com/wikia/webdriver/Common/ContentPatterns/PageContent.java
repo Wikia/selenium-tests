@@ -51,14 +51,14 @@ public class PageContent {
 	//forum
 	public static String forumTitlePrefix = "QABoardTitle ";
 	public static String forumTitleEditPrefix = "QABoardTitleEdit ";
-	public static String forumTitle40CharPrefix = "This forum title is forty c";
-	public static String forumTitleSlashPrefix = "QA/boardTitle";
-	public static String forumTitleUnderScorePrefix = "QA_boardTitle";	
-	public static String forumTitleNonlatinPrefix = "查爾斯";	
+	public static String forumTitle40CharPrefix = "QABoardlongtitle 40 forty c";
+	public static String forumTitleSlashPrefix = "QABoard/Title";
+	public static String forumTitleUnderScorePrefix = "QABoard_Title";	
+	public static String forumTitleNonlatinPrefix = "QABoard查爾斯";	
 	public static String forumDescriptionPrefix = "Duis quam ante, fringilla at cursus tristique ";
 	public static String forumDescriptionEditPrefix = "Duis quam ante, fringilla at cursus tristique edit ";
 	public static String forumMessage = "QAforumMessage";
-	public static String forumBoard = "QAboardForMoveThreadTest";
+	public static String forumBoard = "QABoardForMoveThreadTest";
 
         //Messages
         public static String articleDeletedMessage = "This page has been deleted.";
@@ -70,9 +70,11 @@ public class PageContent {
         public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
 
         //Blocks for Phalanx
-        public static String titleFilterPlain = "BadTitle";
+        public static String titleFilterPlain = "BadContent";
 
 	//wikiText
 	public static String wikiTextPhoto = "[[File:Image009.jpg|thumb|%s]]";
+	
+	public static String wikiaGlobalUrl = "http://www.wikia.com/";
 
 }

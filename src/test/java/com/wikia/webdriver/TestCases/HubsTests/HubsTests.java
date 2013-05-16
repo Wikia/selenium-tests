@@ -30,9 +30,10 @@ public class HubsTests extends TestTemplate {
 	}
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests001", "Hubs" })
-	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_1_.28Mosaic_Slider.29_Test_Cases
-	// The test covers underscored steps from test case documentation - see link
-	// above
+	/** https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_1_.28Mosaic_Slider.29_Test_Cases
+	* 	Verify that slider is displayed at the top left of the Hubs page
+	*   Verify that when transitioning, the old large image is replaced by the new large image
+	*/ 
 	public void HubsTest001_verifyMosaicSliderShowsImagesOnHover(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
@@ -173,7 +174,9 @@ public class HubsTests extends TestTemplate {
 	*/
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests008", "Hubs", "new" })
-	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
+	/**
+	 *  verify that from community module has its elements
+	 */
 	public void HubsTest008_verifyFromCommunityModuleHasItsElements(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
@@ -220,14 +223,16 @@ public class HubsTests extends TestTemplate {
 	*/
 	
 	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs", "new" })
-	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
+	/**
+	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
+	 */
 	public void HubsTest011_VerifyArticleSuggestionWorksProperly(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
-		Hub.ClickSuggestAnArticle();
+		Hub.ClickGetPromoted();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest an Article");
 		Hub.VerifySuggestVideoOrArticleButtonNotClickable();
@@ -236,7 +241,7 @@ public class HubsTests extends TestTemplate {
 		Hub.VerifySuggestVideoOrArticleButtonClickable();
 		Hub.Click_X_toCloseSuggestAVideoOrArticle();
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
-		Hub.ClickSuggestAnArticle();
+		Hub.ClickGetPromoted();
 		Hub.VerifySuggestAVideoOrArticleModalAppeared();
 		Hub.VerifySuggestAVideoOrArticleModalTopic("Suggest an Article");
 		Hub.VerifySuggestVideoOrArticleButtonNotClickable();

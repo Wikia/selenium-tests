@@ -1,6 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -56,6 +62,9 @@ public class DropDownComponentObject extends WikiBasePageObject {
     }
 
     public void remindPassword(String userName) {
+    	Assertion.assertEquals(
+    			ApiActions.apiActionForgotPasswordResponse, 
+    			CommonFunctions.resetForgotPasswordTime(userName));
         fillUserNameInput(userName);
         waitForElementByElement(formForgotPasswordLink);
         clickAndWait(formForgotPasswordLink);

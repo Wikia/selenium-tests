@@ -8,15 +8,32 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CommonUtils {
 	
@@ -144,24 +161,34 @@ public class CommonUtils {
 		}
 	}
 
+	public static String sendPost(String apiUrl, String[][] param) {
+		try {
+			DefaultHttpClient httpclient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost(apiUrl);
+			List<NameValuePair> paramPairs = new ArrayList<NameValuePair>();
+			
+			for (int i=0; i<param.length; i++){
+				paramPairs.add(new BasicNameValuePair(param[i][0], param[i][1]));
+			}
+			httpPost.setEntity(new UrlEncodedFormEntity(paramPairs));				
 	
+			HttpResponse response = null;
+			response = httpclient.execute(httpPost);
 	
-//	public static void createFile(String filePath, String content)
-//	{
-//		try {
-//			File file = new File(filePath);
-//			FileWriter newfile = new FileWriter(file);
-//			BufferedWriter out = new BufferedWriter(newfile);
-//			out.write(content);
-//			out.flush();
-//			out.close();
-//		} 
-//		catch (IOException e) 
-//		{
-//			System.out.println("ERROR in createFile) in CommonUtils.java \n"+ e.getMessage());
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
+			HttpEntity entity = response.getEntity();
+			return EntityUtils.toString(entity);
+			} 
+		catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (ClientProtocolException e) {
+			e.printStackTrace();
+			return null;
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

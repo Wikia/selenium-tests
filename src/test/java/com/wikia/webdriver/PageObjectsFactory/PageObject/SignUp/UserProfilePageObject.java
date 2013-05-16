@@ -56,7 +56,7 @@ public class UserProfilePageObject extends BasePageObject{
 	{
 		try
 		{
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("header#WikiaHeader a.ajaxRegister")));			
+			waitForElementNotVisibleByBy(By.cssSelector("header#WikiaHeader a.ajaxRegister"));			
 		}
 		catch (NoSuchElementException e)
 		{

@@ -22,6 +22,7 @@ import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -44,6 +45,8 @@ public class BasePageObject{
 	protected String articlename;
 	
 	public WebDriverWait wait;
+	
+	public Actions builder;
 
 
 	@FindBy(css="#WallNotifications div.notification div.msg-title")
@@ -100,7 +103,7 @@ public class BasePageObject{
 	WebElement emailModalEmailInputField;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
-	@FindBy(css = "#AccountNavigation a[href*='User:']")
+	@FindBy(css="#AccountNavigation a[href*='User:']")
 	protected WebElement userProfileLink;
 
 	
@@ -110,6 +113,7 @@ public class BasePageObject{
 		this.driver = driver;
 		this.Domain = Global.DOMAIN;
 		wait = new WebDriverWait(driver, timeOut);
+		this.builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
 	}
@@ -226,9 +230,10 @@ public class BasePageObject{
             } catch(TimeoutException e) {
                 PageObjectLogging.log(
                     "getUrl",
-                    "page loaded for more then 30 seconds after click",
-                    false
+                    "page %page% loaded for more then 30 seconds".replace("%page%", url),
+                     false
                 );
+		return;
             }
 
             PageObjectLogging.log(
@@ -241,7 +246,7 @@ public class BasePageObject{
 	public void refreshPage()
 	{
 		try{
-			driver.navigate().refresh();			
+			driver.navigate().refresh();
 			PageObjectLogging.log("refreshPage", "page refreshed", true);
 		}
 		catch(TimeoutException e)
@@ -887,7 +892,7 @@ public class BasePageObject{
      * @param userName
      */
     public void verifyUserLoggedIn(String userName) {
-        waitForElementByElement(userProfileLink);
+    	waitForElementByElement(userProfileLink);
         userName = purifyUserName(userName);
         waitForTextToBePresentInElementByElement(
             userProfileLink, userName
@@ -895,7 +900,7 @@ public class BasePageObject{
         PageObjectLogging.log(
             "VerifyUserNamePresent",
             "Verify that username is present in link to user's profile",
-            true, driver
+            true
         );
     }
 

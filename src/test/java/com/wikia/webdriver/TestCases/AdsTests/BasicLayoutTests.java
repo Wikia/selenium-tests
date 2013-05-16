@@ -12,47 +12,80 @@ import org.testng.annotations.Test;
  */
 public class BasicLayoutTests extends AdsTestTemplate {
 
-    @GeoEdgeProxy(country="US")
-    @Test (
-        dataProviderClass=AdsDataProvider.class,
-        dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_001"}
-    )
-    public void TestBasicLayout_US(String page) {
-        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-	wikiPage.verifyTopLeaderBoardAndMedrec();
-    }
+	@GeoEdgeProxy(country="US")
+	@Test (
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="popularSites",
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_001", "Ads", "US"}
+	)
+	public void TestBasicLayout_US(String page) {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
 
-    @GeoEdgeProxy(country="DE")
-    @Test (
-        dataProviderClass=AdsDataProvider.class,
-        dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Basic_Layout_002"}
-    )
-    public void TestBasicLayout_DE(String page) {
-        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-	wikiPage.verifyTopLeaderBoardAndMedrec();
-    }
+	@GeoEdgeProxy(country="DE")
+	@Test (
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="popularSites",
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_002", "Ads", "DE"}
+	)
+	public void TestBasicLayout_DE(String page) {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
 
-    @GeoEdgeProxy(country="UK")
-    @Test (
-        dataProviderClass=AdsDataProvider.class,
-        dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Basic_Layout_003"}
-    )
-    public void TestBasicLayout_UK(String page) {
-        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-	wikiPage.verifyTopLeaderBoardAndMedrec();
-    }
+	@GeoEdgeProxy(country="GB")
+	@Test (
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="popularSites",
+        groups={"Ads_Basic_Layout", "Ads_Basic_Layout_003", "Ads", "GB"}
+	)
+	public void TestBasicLayout_GB(String page) {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
 
-    @GeoEdgeProxy(country="CA")
-    @Test (
-        dataProviderClass=AdsDataProvider.class,
-        dataProvider="popularSites",
-        groups={"Ads_Basic_Layout", "Basic_Layout_004"}
-    )
-    public void TestBasicLayout_CA(String page) {
-        AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
-	wikiPage.verifyTopLeaderBoardAndMedrec();
-    }
+	@GeoEdgeProxy(country="CA")
+	@Test (
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="popularSites",
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_004", "Ads", "CA"}
+	)
+	public void TestBasicLayout_CA(String page) {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
+
+	@GeoEdgeProxy(country="UA")
+	@Test (
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="popularSites",
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_005", "Ads", "UA"}
+	)
+	public void TestBasicLayout_UA(String page) {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
+
+	@GeoEdgeProxy(country="PL")
+	@Test (
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="popularSites",
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_006", "Ads", "PL"}
+	)
+	public void TestBasicLayout_PL(String page) {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
+
+	@GeoEdgeProxy(country="AU")
+	@Test (
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="popularSites",
+		groups={"Ads_Basic_Layout", "Ads_Basic_Layout_007", "Ads", "AU"}
+	)
+	public void TestBasicLayout_AU(String page) {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
 }

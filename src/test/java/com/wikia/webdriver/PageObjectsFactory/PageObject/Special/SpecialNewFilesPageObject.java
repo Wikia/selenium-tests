@@ -122,13 +122,14 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     public String followRandomImage(){
         List<String> hrefs = new ArrayList<String>();
         for (WebElement elem:imagesNewFiles) {
-            hrefs.add(elem.getAttribute("data-image-name"));
+            hrefs.add(elem.getAttribute("href"));
         }
         Random r = new Random();
         String imageName = hrefs.get((r.nextInt(hrefs.size()-1))+1);
-        getUrl(Global.DOMAIN+"wiki/File:"+imageName+"?action=watch");
+        getUrl(imageName+"?action=watch");
         clickAndWait(followSubmit);
         waitForElementByElement(followedButton);
+        PageObjectLogging.log("followRandomImage", "folow image named "+imageName, true, driver);
         return imageName;
     }
 
