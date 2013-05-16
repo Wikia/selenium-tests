@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -44,6 +45,7 @@ public class WallPageObject extends BasePageObject {
 	 * @param message
 	 */
 	public void startDiscussion(String title, String message) {
+		CommonFunctions.scrollToElement(wallMessageTitle);
 		jQueryFocus(wallMessageTitleSelector);
 		wallMessageTitle.sendKeys(title);
 		jQueryFocus(wallMessageBodySelector);
