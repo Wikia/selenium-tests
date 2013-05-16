@@ -14,13 +14,27 @@ public class Properties {
 
 	private static void setPropertiesManually()
 	{
-		Global.BROWSER = "CHROME";
-//		Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
-		Global.DOMAIN = "http://mediawiki119.wikia.com/";
-//		Global.DOMAIN = "http://sandbox-qa05.mediawiki119.wikia.com/";
-		Global.LIVE_DOMAIN = "http://www.wikia.com/";
-		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
-		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
+		Global.BROWSER = System.getenv("SELENIUM_BROWSER");
+		if(Global.BROWSER == null || Global.BROWSER.isEmpty()) {
+			Global.BROWSER = "CHROME";
+		}
+		Global.DOMAIN = System.getenv("SELENIUM_DOMAIN");
+		if(Global.DOMAIN == null || Global.DOMAIN.isEmpty()) {
+//			Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
+			Global.DOMAIN = "http://mediawiki119.wikia.com/";
+//			Global.DOMAIN = "http://sandbox-qa05.mediawiki119.wikia.com/";
+		}
+		Global.LIVE_DOMAIN = System.getenv("SELENIUM_LIVE_DOMAIN");
+		if(Global.LIVE_DOMAIN == null || Global.LIVE_DOMAIN.isEmpty()) {
+			Global.LIVE_DOMAIN = "http://www.wikia.com/";
+		}
+		String seleniumConfigDir = System.getenv("SELENIUM_CONFIG");
+		if(seleniumConfigDir == null || seleniumConfigDir.isEmpty()) {
+			seleniumConfigDir = "c:"+File.separator+"selenium-config";
+		}
+		
+		Global.CONFIG_FILE = new File(seleniumConfigDir+File.separator+"config.xml");
+		Global.CAPTCHA_FILE = new File(seleniumConfigDir+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
 		if (Global.DOMAIN.contains("dev"))
 		{
@@ -84,7 +98,6 @@ public class Properties {
 	private static void setVariables(){	
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
-		
 		userName2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.username");
 		password2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.password");
 		
