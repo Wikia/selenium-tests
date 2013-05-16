@@ -83,7 +83,7 @@ public class CrossWikiSearchPage extends BasePageObject {
 
 	 /**
 	 * Verify that result count is same as expected
-	 * @param expectedResultsPerPage
+	 * @param expectedResultsPerPage number of results that should appear on result page
 	 */
 	public void verifyResultsCount( int expectedResultsPerPage ) {
 		waitForElementByElement(resultsContainer);
@@ -103,8 +103,13 @@ public class CrossWikiSearchPage extends BasePageObject {
 		}
 	}
 
-	public WikiArticleHomePage openResult(int no) {
-		WebElement webElement = getResultWikiNameLink(no);
+	/**
+	 * Clicks on nth result
+	 * @param resultNumber zero based number of result to click
+	 * @return result page
+	 */
+	public WikiArticleHomePage openResult(int resultNumber) {
+		WebElement webElement = getResultWikiNameLink(resultNumber);
 		clickAndWait(webElement);
 		return new WikiArticleHomePage(driver);
 	}
