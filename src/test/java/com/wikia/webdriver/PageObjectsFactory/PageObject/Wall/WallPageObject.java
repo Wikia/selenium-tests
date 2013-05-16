@@ -1,8 +1,11 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Wall;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -60,8 +63,13 @@ public class WallPageObject extends BasePageObject {
 	 * Click the post button to post a message.
 	 */
 	public void clickPostButton() {
+		String title = wallMessageTitle.getAttribute("value");
 		waitForElementClickableByElement(postButton);
-		clickAndWait(postButton);
+		postButton.click();
+		// Wait for a message with the correct title to show up on the page.
+		new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(
+			By.cssSelector("ul.comments li.message-main .msg-title a"), title)
+		);
 		PageObjectLogging.log("clickPostButton", "post button clicked", true);
 	}
 
