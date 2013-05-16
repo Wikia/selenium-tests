@@ -66,7 +66,7 @@ public class PreferencesPageObject extends BasePageObject{
 	public void verifyEmailMeSection(){
 		for (WebElement elem:emailMeSectionRows){
 			PageObjectLogging.log("verifyEmailSection", "verifying "+elem.getText(), true);
-			Assertion.assertEquals("checked", elem.findElement(By.id("mw-input-wpenotifwatchlistpages")).getAttribute("checked"));
+			Assertion.assertEquals("true", elem.findElement(By.cssSelector("input")).getAttribute("checked"));
 		}
 	}
 }

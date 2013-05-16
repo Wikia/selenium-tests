@@ -50,6 +50,10 @@ public class SignUpTests_account_creation extends TestTemplate
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();	
 		userProfile.verifyWelcomeEmail(userNameEnc, userNameEmail, passwordEmail);
+		PreferencesPageObject preferences = new PreferencesPageObject(driver);
+		preferences.openSpecialPreferencesPage();
+		preferences.selectTab(tabNames.Email);
+		preferences.verifyEmailMeSection();
 	}
 	
 
@@ -119,6 +123,10 @@ public class SignUpTests_account_creation extends TestTemplate
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userNameEnc, userNameEmail, passwordEmail);
+		PreferencesPageObject preferences = new PreferencesPageObject(driver);
+		preferences.openSpecialPreferencesPage();
+		preferences.selectTab(tabNames.Email);
+		preferences.verifyEmailMeSection();
 	}
 	
 	/*
@@ -151,6 +159,10 @@ public class SignUpTests_account_creation extends TestTemplate
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
+		PreferencesPageObject preferences = new PreferencesPageObject(driver);
+		preferences.openSpecialPreferencesPage();
+		preferences.selectTab(tabNames.Email);
+		preferences.verifyEmailMeSection();
 	}
 	
 
@@ -183,6 +195,10 @@ public class SignUpTests_account_creation extends TestTemplate
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();	
 		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
+		PreferencesPageObject preferences = new PreferencesPageObject(driver);
+		preferences.openSpecialPreferencesPage();
+		preferences.selectTab(tabNames.Email);
+		preferences.verifyEmailMeSection();
 	}
 	
 	/*
@@ -214,5 +230,9 @@ public class SignUpTests_account_creation extends TestTemplate
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
 		userProfile.verifyWelcomeEmail(userName, userNameEmail, passwordEmail);
+		PreferencesPageObject preferences = new PreferencesPageObject(driver);
+		preferences.openSpecialPreferencesPage();
+		preferences.selectTab(tabNames.Email);
+		preferences.verifyEmailMeSection();
 	}
 }
