@@ -85,6 +85,7 @@ public class SignUpTests_account_creation extends TestTemplate
 		PreferencesPageObject preferences = new PreferencesPageObject(driver);
 		preferences.openSpecialPreferencesPage();
 		preferences.selectTab(tabNames.Email);
+		preferences.verifyEmailMeSection();
 	}
 	
 
