@@ -57,6 +57,7 @@
 			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTest"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.OnWikiSearchTest"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.ForumNotificationsTests"/>
+			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotificationsTests"/>
 		</classes>
 	</test>
 </suite>

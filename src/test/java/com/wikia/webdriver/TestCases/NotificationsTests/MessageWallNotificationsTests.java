@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
 
-public class WallNotificationsTests extends TestTemplate {
+public class MessageWallNotificationsTests extends TestTemplate {
 	
 	@Test(groups= {"NotificationsTests", "Wall"} )
 	public void wallNotificationsTests_001_wallOwnerReceivesANotification() {
