@@ -1,5 +1,7 @@
 package com.wikia.webdriver.Common.Templates;
 
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.lang.reflect.Method;
@@ -14,7 +16,7 @@ import org.testng.annotations.BeforeMethod;
  *
  * @author Bogna 'bognix' Knychala
  */
-public class AdsTestTemplate extends TestTemplate {
+public class AdsTestTemplate extends NewTestTemplate {
 
     private static HashMap adsConfiguration;
     private static DesiredCapabilities adCap;
@@ -34,7 +36,7 @@ public class AdsTestTemplate extends TestTemplate {
                 country.country(), 4444
             );
             adServer.runGeoEdgeServer();
-            adCap = setServerCaps(adServer);
+            adCap = getCapsWithProxyServerSet(adServer);
             startBrowserWithCapabilities(adCap);
             PageObjectLogging.startLoggingMethod(
                 getClass().getSimpleName().toString(), method.getName()
@@ -42,7 +44,6 @@ public class AdsTestTemplate extends TestTemplate {
         } catch (Exception ex) {
             Logger.getLogger(AdsTestTemplate.class.getName()).log(Level.SEVERE, null, ex);
         }
-		improvePageUrl((String) data[0]);
     }
 
     @AfterMethod(alwaysRun=true)
@@ -52,10 +53,5 @@ public class AdsTestTemplate extends TestTemplate {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void startBrowserWithCapabilities(DesiredCapabilities caps) {
-        DriverProvider.setCapabilities(caps);
-        startBrowser();
     }
 }

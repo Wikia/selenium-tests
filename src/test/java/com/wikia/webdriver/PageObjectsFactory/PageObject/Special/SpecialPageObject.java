@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;

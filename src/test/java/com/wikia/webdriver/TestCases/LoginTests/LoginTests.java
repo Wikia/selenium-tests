@@ -1,7 +1,5 @@
 package com.wikia.webdriver.TestCases.LoginTests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.DataProvider.LoginDataProvider;
@@ -9,8 +7,9 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject.DropDownComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.testng.annotations.Test;
 
 public class LoginTests extends TestTemplate {
 
@@ -50,7 +49,7 @@ public class LoginTests extends TestTemplate {
             CommonFunctions.logOut(driver);
 	}
 
-	@Test(groups = { "Login_003", "" })
+	@Test(groups = { "Login_003", ""})
 	public void Login_003_Facebook_dropDown() {
             CommonFunctions.logOut(driver);
 

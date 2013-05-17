@@ -1,16 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
@@ -23,11 +12,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultiple
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top_10_list;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import org.openqa.selenium.NoSuchElementException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -75,25 +72,25 @@ public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "img.sprite.search")
 	private WebElement searchButtonImageInLightBox;
-	
+
 	@FindBy(css="input#ImageQuery")
 	private WebElement imageQuery;
-	
+
 	@FindBy(css="div.permissions-errors")
 	private WebElement premissionErrorMessage;
-	
+
 	@FindBy(css="[value='Find']")
 	private WebElement imageFindButton;
 
 	@FindBy(css="div.mw-warning-with-logexcerpt p")
 	private WebElement pageDeletedInfo;
-	
+
 	@FindBy(css="#PREFOOTER_RIGHT_BOXAD")
 	private WebElement ad_Prefooter_right_boxad;
-	
+
 	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
 	private WebElement ad_Prefooter_left_boxad;
-	
+
 	@FindBy (css = "#WikiaPageHeader h1")
 	private WebElement wikiFirstHeader;
 
@@ -109,18 +106,22 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
 
-        @FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
-        protected WebElement contributeButton;
+	@FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
+	protected WebElement contributeButton;
 
-        @FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
-        protected WebElement contributeAddPage;
+	@FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
+	protected WebElement contributeAddPage;
 
-        @FindBy(css = "#CreatePageDialog")
-        protected WebElement addPageModal;
+	@FindBy(css = "#CreatePageDialog")
+	protected WebElement addPageModal;
+
+	@FindBy(css="#AccountNavigation > li > a > .avatar")
+	protected WebElement userProfileAvatar;
+	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
+	protected WebElement navigationLogoutLink;
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
-	
 	private String pageName;
 
 	public WikiBasePageObject(WebDriver driver, String Domain) {
@@ -263,6 +264,22 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(deleteConfirmationButton);
 		waitForElementByElement(deleteCommentConfirmationMessage);
 
+	}
+
+	/**
+     * Verify if user is logged in
+     * Check if link to user's Profile contains user's name
+     *
+     * @param userName
+     */
+    public void verifyUserLoggedIn(String userName) {
+		waitForElementByElement(userProfileAvatar);
+		waitForElementByElement(navigationLogoutLink);
+		PageObjectLogging.log(
+			"LgoutLinkPresent",
+			"Verify that logout link is present in navigation dropdown",
+			true
+		);
 	}
 
 	protected void clickArticleDeleteConfirmationButton(String atricleName) {

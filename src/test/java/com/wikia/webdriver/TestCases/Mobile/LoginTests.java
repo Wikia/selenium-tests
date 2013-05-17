@@ -8,9 +8,9 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 
 public class LoginTests extends TestTemplate{
-	
+
 	String url;
-	
+
 	@Test(groups={"mobile"})
 	public void Login(){//String userName, String password){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);

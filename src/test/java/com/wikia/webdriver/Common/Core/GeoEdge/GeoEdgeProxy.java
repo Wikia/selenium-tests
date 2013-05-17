@@ -1,4 +1,4 @@
-package com.wikia.webdriver.Common.Templates;
+package com.wikia.webdriver.Common.Core.GeoEdge;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

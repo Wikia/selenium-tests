@@ -62,11 +62,9 @@ public class URLsContent {
 		String temp;
 		if (url.contains("?")) {
 			temp = url + "&" + parameter;
-			System.out.println(temp);
 			return temp;
 		} else {
 			temp = url + "?" + parameter;
-			System.out.println(temp);
 			return temp;
 		}
 	}

@@ -1,8 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,16 +24,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-
 /**
  * 
  * @author Karol
@@ -35,19 +33,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 public class BasePageObject{
 
 	public final WebDriver driver;
-	
 	public String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
-		
 	protected int timeOut = 30;
-
 	protected String Domain;
-	
 	protected String articlename;
-	
 	public WebDriverWait wait;
-	
 	public Actions builder;
-
 
 	@FindBy(css="#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
@@ -75,22 +66,25 @@ public class BasePageObject{
 	private WebElement randomPageButton;
 	@FindBy(css = ".sprite.search")
 	private WebElement searchButton;
+	@FindBy(css="section.modalWrapper .UserLoginModal")
+	protected WebElement logInModal;
+	@FindBy(css="#AccountNavigation a[href*='User:']")
+	protected WebElement userProfileLink;
 
 	@FindBy(css="form.WikiaSearch")
 	WebElement wikiaSearch_searchForm;
 	@FindBy(css="section.modalContent div.UserLoginModal form")
 	WebElement modalLoginForm;
-
 	@FindBy(css="a[data-id='shareButton']")
 	WebElement shareButton;
 	@FindBy(css="iframe.twitter-share-button")
 	WebElement twitterIframe;
 	@FindBy(css="a#b")
-	WebElement twitterButton;	
+	WebElement twitterButton;
 	@FindBy(css="iframe.fb_ltr")
 	WebElement fBIframe;
 	@FindBy(css="div.pluginConnectButton .pluginConnectButtonDisconnected button")
-	WebElement fBLikeButton;	
+	WebElement fBLikeButton;
 	@FindBy(css="a.email-link")
 	WebElement emailButton;
 	@FindBy(css="a[id='ok']")
@@ -101,15 +95,8 @@ public class BasePageObject{
 	WebElement emailModalCloseButton;
 	@FindBy(css="input#lightbox-share-email-text")
 	WebElement emailModalEmailInputField;
-	@FindBy(css="section.modalWrapper .UserLoginModal")
-	protected WebElement logInModal;
-	@FindBy(css="#AccountNavigation a[href*='User:']")
-	protected WebElement userProfileLink;
 
-	
-	
-	public BasePageObject(WebDriver driver)
-	{
+	public BasePageObject(WebDriver driver) {
 		this.driver = driver;
 		this.Domain = Global.DOMAIN;
 		wait = new WebDriverWait(driver, timeOut);
@@ -117,7 +104,7 @@ public class BasePageObject{
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
 	}
-	
+
 	/**
 	 * Click  on Publish button
 	 *  
@@ -131,7 +118,7 @@ public class BasePageObject{
 		jQueryClick("input.control-button");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
-	
+
 		return new WikiArticlePageObject(driver, Domain, articlename);
 	}
 
@@ -261,7 +248,6 @@ public class BasePageObject{
 		try{
 			CommonFunctions.scrollToElement(pageElem);
 			pageElem.click();
-			
 		}
 		catch(TimeoutException e)
 		{
@@ -429,35 +415,6 @@ public class BasePageObject{
 		}
 	}
 
-
-	public void removeCssClass(String cssSelector, String className){
-		executeScript("$('."+cssSelector+"').removeClass('"+className+"')");
-		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true, driver);
-	}
-	
-	public void addCssClass(String cssSelector, String className){
-		executeScript("$('."+cssSelector+"').addClass('"+className+"')");
-		PageObjectLogging.log("removeCssClass", className+" removed for selector: "+cssSelector, true, driver);
-	}
-	
-	/**
-	 * Returns List of WebElements by CssSelector
-	 * 
-	 * @author Michal Nowierski
-	 * ** @param Selector  
-	 */
-	public List<WebElement> getListOfElementsByCss(String Selector) 
-	{
-		try
-		{
-			return driver.findElements(By.cssSelector(Selector));						
-		}
-		catch(Exception e)
-		{
-			PageObjectLogging.log("getListOfElementsByCss", e.toString(), false);
-			return null;
-		}
-	}
 	/**
 	 * Checks if the element is visible on browser
 	 *
@@ -465,7 +422,7 @@ public class BasePageObject{
 	 */
 	public WebElement waitForElementByBy(By by)
 	{
-			wait.until(ExpectedConditions.visibilityOfElementLocated(by));		
+			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 			return driver.findElement(by);
 	}
 	
@@ -854,7 +811,7 @@ public class BasePageObject{
 		}
 		else {
 			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
-			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);			
+			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);
 		}
 		PageObjectLogging.log("notifications_clickMarkAllAsRead", (allWikis ? "all wikis" : "only one wiki")+" marked as read", true, driver);				
 	}
@@ -882,25 +839,6 @@ public class BasePageObject{
             "Verify that the Log In modal is present",
             true,
             driver
-        );
-    }
-
-    /**
-     * Verify if user is logged in
-     * Check if link to user's Profile contains user's name
-     *
-     * @param userName
-     */
-    public void verifyUserLoggedIn(String userName) {
-    	waitForElementByElement(userProfileLink);
-        userName = purifyUserName(userName);
-        waitForTextToBePresentInElementByElement(
-            userProfileLink, userName
-        );
-        PageObjectLogging.log(
-            "VerifyUserNamePresent",
-            "Verify that username is present in link to user's profile",
-            true
         );
     }
 

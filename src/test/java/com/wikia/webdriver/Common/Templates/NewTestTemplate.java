@@ -1,16 +1,14 @@
 package com.wikia.webdriver.Common.Templates;
 
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.Core.Configuration;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
-import org.browsermob.proxy.ProxyServer;
+import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -20,13 +18,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 
-public class TestTemplate {
+public class NewTestTemplate {
 
-	public WebDriver driver;
-	public ProxyServer server;
-	protected String improvedPageUrl;
-	protected UrlBuilder urlBuilder;
-	protected String page;
+	protected WebDriver driver;
+	protected String testedWiki;
+	protected HashMap<String, Object> config;
+
+	public NewTestTemplate() {
+		config = Configuration.getConfiguration();
+	}
 
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {
@@ -56,20 +56,23 @@ public class TestTemplate {
 	}
 
 	protected void startBrowser() {
-		DriverProvider.getInstance();
-		driver = DriverProvider.getWebDriver();
-		server = DriverProvider.getServer();
+		driver = NewDriverProvider.getDriverIntstanceForConfig(config);
 	}
 
+	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
+        NewDriverProvider.setDriverCapabilities(caps);
+        startBrowser();
+    }
+
 	protected void stopBrowser() {
-		driver = DriverProvider.getWebDriver();
+		driver = NewDriverProvider.getWebDriver();
 		if (driver != null) {
 			driver.quit();
 			driver = null;
 		}
 	}
 
-	protected DesiredCapabilities setServerCaps(GeoEdgeProxyServer server) {
+	protected DesiredCapabilities getCapsWithProxyServerSet(GeoEdgeProxyServer server) {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		try {
 			capabilities.setCapability(
