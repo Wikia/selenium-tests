@@ -207,28 +207,4 @@ public class BlogTests extends TestTemplate{
 		blogPage.verifyCommentText(PageContent.blogComment, Properties.userName);
 		blogPage.replyComment(PageContent.blogComment, PageContent.blogCommentReply);
 	}
-	
-	@Test(groups = {"BlogTests_009", "BlogTests"})
-	public void BlogTests_009_CreateBlogListing(){
-		
-		SpecialCreateBlogListingPageObject blogList = new SpecialCreateBlogListingPageObject(driver);
-		blogList.openRandomArticleByUrl();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		blogPostTitle = PageContent.blogListName+blogList.getTimeStamp();
-		blogList
-			.openCreateBlogListingPage()
-			.typeTitle(blogPostTitle)
-			.clickSavePageButton()
-			.verifyBlogListPage(blogPostTitle);
-	}
-	
-	@Test(groups = {"BlogTests_009", "BlogTests"})
-	public void BlogTests_010_EditBlogListing(){
-		
-	}
-	
-	@Test(groups = {"BlogTests_009", "BlogTests"})
-	public void BlogTests_011_DeleteBlogListing(){
-		
-	}
 }

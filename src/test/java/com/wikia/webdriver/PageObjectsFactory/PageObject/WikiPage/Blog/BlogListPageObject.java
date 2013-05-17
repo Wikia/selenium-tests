@@ -25,19 +25,28 @@ public class BlogListPageObject extends BasePageObject{
 		super(driver);
 	}
 
-	public void verifyBlogListPage(String listName){
+	public BlogListPageObject verifyBlogListPage(String listName){
 		verifyURL(Global.DOMAIN+
 				URLsContent.blogList.replace("%listName%", listName));
 		waitForElementByElement(blogListHeader);
 		waitForElementByElement(createBlogPostButton);
+		return this;
 	}
 	
-	public void verifyBlogList(){
+	public BlogListPageObject verifyBlogList(){
 		for (WebElement elem:blogList){
 			//header with link to blog post
 			elem.findElement(By.cssSelector("h1 a[href*='/wiki/User_blog:']"));
 			//comments bubble
 			elem.findElement(By.cssSelector(".comments"));
 		}
+		return this;
+	}
+	
+	public BlogListPageObject followBlogListingPage(String name){
+		getUrl(Global.DOMAIN+"wiki/Blog:"+name+"?action=watch");
+		clickAndWait(followSubmit);
+		waitForElementByElement(followedButton);
+		return this;
 	}
 }
