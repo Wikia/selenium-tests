@@ -319,13 +319,79 @@ public class ForumNotificationsTests extends TestTemplate {
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
+	
+	/**
+	 * User A posts a thread, user B leaves a 1 reply to this thread and then
+	 * User C leaves 1 reply. user B leave yet annother reply. User A verifies if the anchor is correct
+	 */
+	@Test(groups = { "ForumNotificationsTests_007", "ForumNotificationsTests",
+			"Forum", "NotificationsTests" })
+	public void forumNotificationsTests_007_notificationsRepliesAnchor_TwoUsersLeaveThreeReplies() {
+		// user 1 creates a thread
+		CommonFunctions.logOut(driver);
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage();
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
+				message, false);
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName2, Properties.password2,
+				driver);
+		forumMainPage.openForumMainPage();
+		forumBoard = forumMainPage.openForumBoard(1);
+		forumThread = forumBoard.openDiscussion(title);
+		// user 2 leaves 1 reply on user 1 thread and logs out
+		forumThread.reply(message);
+		forumThread.verifyReplyMessage(1, message);
+		CommonFunctions.logOut(driver);
+		forumMainPage = new ForumPageObject(driver);
+		CommonFunctions.logIn(Properties.userNameStaff,
+				Properties.passwordStaff, driver);
+		forumMainPage.openForumMainPage();
+		forumBoard = forumMainPage.openForumBoard(1);
+		forumThread = forumBoard.openDiscussion(title);
+		// user 3 leaves 1 replies on user 1 thread and logs out
+		forumThread.reply(message);
+		forumThread.verifyReplyMessage(1, message);
+		CommonFunctions.logOut(driver);
+		// user 2 leaves 2nd reply on user 1 thread and logs out
+		forumMainPage = new ForumPageObject(driver);
+		CommonFunctions.logIn(Properties.userName2,
+				Properties.password2, driver);
+		forumMainPage.openForumMainPage();
+		forumBoard = forumMainPage.openForumBoard(1);
+		forumThread = forumBoard.openDiscussion(title);
+		// user 3 leaves 1 replies on user 1 thread and logs out
+		forumThread.reply(message);
+		forumThread.verifyReplyMessage(1, message);
+		CommonFunctions.logOut(driver);
+		// user 1 verifies his notifications
+		forumMainPage = new ForumPageObject(driver);
+		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage();
+		forumBoard = forumMainPage.openForumBoard(1);
+		NotificationsComponentObject notifications = new NotificationsComponentObject(
+				driver);
+		notifications.showNotifications();
+		notifications.clickNotifications();
+		String anchoredLink = notifications.getNotificationLink(1);
+		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
+		Assertion.assertEquals("#2", anchor);
+	}
+	
 	/**
 	 * User A posts a thread, user B leaves a 1 reply in turns with user C to this thread and then
 	 * Four replies are left. User A verifies if the anchor is correct
 	 */
-	@Test(groups = { "ForumNotificationsTests_007", "ForumNotificationsTests",
+	@Test(groups = { "ForumNotificationsTests_008", "ForumNotificationsTests",
 			"Forum", "NotificationsTests" })
-	public void forumNotificationsTests_007_notificationsRepliesAnchor_TwoUsersLeaveFourReplies() {
+	public void forumNotificationsTests_008_notificationsRepliesAnchor_TwoUsersLeaveFourReplies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
@@ -395,9 +461,9 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * User A posts a thread, user B leaves a 1 reply in turns with user C to this thread and then
 	 * Six replies are left. User A verifies if the anchor is correct
 	 */
-	@Test(groups = { "ForumNotificationsTests_008", "ForumNotificationsTests",
+	@Test(groups = { "ForumNotificationsTests_009", "ForumNotificationsTests",
 			"Forum", "NotificationsTests" })
-	public void forumNotificationsTests_008_notificationsRepliesAnchor_TwoUsersLeaveSixReplies() {
+	public void forumNotificationsTests_009_notificationsRepliesAnchor_TwoUsersLeaveSixReplies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
