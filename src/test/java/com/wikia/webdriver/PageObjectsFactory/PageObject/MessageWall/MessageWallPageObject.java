@@ -33,6 +33,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement saveEditButton;
 	@FindBy(css="#WallMessageSubmit")
 	private WebElement postButton;
+	@FindBy(css=".replyButton")
+	private WebElement replyButton;
 	@FindBy(css="#WallMessagePreview")
 	private WebElement previewButton;
 	@FindBy(css=".buttonswrapper .wikia-menu-button.secondary.combined span")
@@ -77,6 +79,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
+
+	private String wikiaEditorTextarea = "textarea.replyBody";
 
 	MiniEditorComponentObject miniEditor;
 
@@ -132,7 +136,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		PageObjectLogging.log("writeMessage", "message is written, title: "+title+" body: "+message, true, driver);
 	}
 
-
 	public void writeBoldMessage(String title, String message) {
 		writeTitle(title);
 		triggerMessageArea();
@@ -184,12 +187,34 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		PageObjectLogging.log("writeMessageVideo", "message is written, with video "+title, true, driver);
 	}
 
+	/**
+	 * Posts a reply on a message wall thread page.
+	 *
+	 * @param message
+	 */
+	public void reply(String message) {
+		waitForElementByCss(wikiaEditorTextarea);
+		jQueryFocus(wikiaEditorTextarea);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+		miniEditor.writeMiniEditor(message);
+		driver.switchTo().defaultContent();
+		clickReplyButton();
+		PageObjectLogging.log("reply", "write a reply with the following text: "+message, true, driver);
+	}
+
 	public void clickPostButton()
 	{
 		executeScript("WikiaEditor.getInstance('WallMessageBody').getEditbox().trigger('keyup')");
 		waitForElementByElement(postButton);
 		jQueryClick("#WallMessageSubmit");
 		PageObjectLogging.log("clickPostButton", "post button is clicked", true, driver);
+	}
+
+	public void clickReplyButton() {
+		waitForElementByElement(replyButton);
+		waitForElementClickableByElement(replyButton);
+		clickAndWait(replyButton);
+		PageObjectLogging.log("clickReplyButton", "reply button clicked", true, driver);
 	}
 
 	public void clickPreviewButton() {
