@@ -1,11 +1,19 @@
 package com.wikia.webdriver.TestCases.NotificationsTests;
 
+import java.util.ArrayList;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
 
 public class MessageWallNotificationsTests extends TestTemplate {
 
@@ -15,9 +23,30 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 
+		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		String timeStamp = wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
+
+		wall.openMessageWall(Properties.userName2);
+		wall.writeMessage(title, message);
+		wall.clickPostButton();
+		wall.verifyPostedMessageWithTitle(title, message);
+
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
-		notifications.clickNotifications();
-		System.out.println("MECH " + notifications.getNumberOfUnreadNotifications());
+
+		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
+
+		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
+		Assertion.assertEquals(1, notificationsListForTitle.size());
+
+		String notificationMessageBody = notificationsListForTitle.get(0)
+				.findElement(By.cssSelector("div.msg-body")).getText();
+		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName));
 	}
+
 }
