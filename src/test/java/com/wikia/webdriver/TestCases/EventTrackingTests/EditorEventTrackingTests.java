@@ -26,6 +26,7 @@ public class EditorEventTrackingTests extends TestTemplate {
 	/*
 	 * TestCase001
 	 * Verify if clicking on 'edit' button is tracked as edit-page event
+	 * browser property must contain "eventTracking" String. eg. FFeventTracking
 	 */
 	@Test(groups={"EditorEventTrackingTests_001", "EditorEventTrackingTests"})
 	public void EditorEventTrackingTests_001_verifyEditPageEvent()
@@ -43,7 +44,7 @@ public class EditorEventTrackingTests extends TestTemplate {
 		WikiArticlePageObject article = wiki.openRandomArticle();
 		WikiArticleEditMode edit = article.edit();
 		edit.enableWikiaTracker();
-//		edit.clickGalleryButton();
+		edit.clickGalleryButton();
 		try {
 			Thread.sleep(10000); // this is required to make sure that netExport
 									// has time to export the wanted har files
