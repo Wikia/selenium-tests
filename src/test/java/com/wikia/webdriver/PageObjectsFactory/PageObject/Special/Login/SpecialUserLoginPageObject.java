@@ -64,7 +64,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		password.sendKeys(pass);
 		PageObjectLogging.log("typeInUserPassword", "password typed", true, driver);
 	}
-	
+
 	/**
 	 * Special:UserLogin for forgot password
 	 * @param pass
@@ -91,7 +91,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	 */
 	private void clickLoginButton(){
 		waitForElementByElement(loginButton);
-		clickAndWait(loginButton);
+		loginButton.click();
 		PageObjectLogging.log("clickLoginButton", "login button clicked", true, driver);
 	}
 

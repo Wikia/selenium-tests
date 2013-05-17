@@ -1,25 +1,43 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
-import com.wikia.webdriver.Common.Templates.GeoEdgeProxy;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
  *
  * @author Bogna 'bognix' Knychala
  */
-public class AdsInContentTests extends AdsTestTemplate {
+@Test (
+	groups={"Ads_In_Content", "Ads"}
+)
+public class TestAdsInContent extends AdsTestTemplate {
+
+	private String testedPage;
+
+	@Factory(
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="pagesWithAIC"
+	)
+	public TestAdsInContent(String wikiName, String path) {
+		super();
+		UrlBuilder urlBuilder = new UrlBuilder(
+			(String) config.get("ENV"),
+			(String) config.get("QS")
+		);
+		testedPage = urlBuilder.getUrlForPath(wikiName, path);
+	}
 
 	@GeoEdgeProxy(country="US")
 	@Test (
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="pagesWithAIC",
-		groups={"Ads_In_Content", "Ads_In_Content_001", "Ads", "US"}
+		groups={"Ads_In_Content_001", "US"}
 	)
-	public void TestAdsInContent_US(String page) {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	public void TestAdsInContent_US() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
@@ -27,12 +45,10 @@ public class AdsInContentTests extends AdsTestTemplate {
 
 	@GeoEdgeProxy(country="AU")
 	@Test (
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="pagesWithAIC",
-		groups={"Ads_In_Content", "Ads_In_Content_002", "Ads", "AU"}
+		groups={"Ads_In_Content_002", "AU"}
 	)
-	public void TestAdsInContent_AU(String page) {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	public void TestAdsInContent_AU() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
@@ -40,12 +56,10 @@ public class AdsInContentTests extends AdsTestTemplate {
 
 	@GeoEdgeProxy(country="CA")
 	@Test (
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="pagesWithAIC",
-		groups={"Ads_In_Content", "Ads_In_Content_003", "Ads", "CA"}
+		groups={"Ads_In_Content_003", "CA"}
 	)
-	public void TestAdsInContent_CA(String page) {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	public void TestAdsInContent_CA() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
@@ -53,12 +67,10 @@ public class AdsInContentTests extends AdsTestTemplate {
 
 	@GeoEdgeProxy(country="DE")
 	@Test (
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="pagesWithAIC",
-		groups={"Ads_In_Content", "Ads_In_Content_004", "Ads", "DE"}
+		groups={"Ads_In_Content_004", "DE"}
 	)
-	public void TestAdsInContent_DE(String page) {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	public void TestAdsInContent_DE() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
@@ -66,12 +78,10 @@ public class AdsInContentTests extends AdsTestTemplate {
 
 	@GeoEdgeProxy(country="GB")
 	@Test (
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="pagesWithAIC",
-		groups={"Ads_In_Content", "Ads_In_Content_005", "Ads", "GB"}
+		groups={"Ads_In_Content_005", "GB"}
 	)
-	public void TestAdsInContent_GB(String page) {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	public void TestAdsInContent_GB() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
@@ -79,12 +89,10 @@ public class AdsInContentTests extends AdsTestTemplate {
 
 	@GeoEdgeProxy(country="PL")
 	@Test (
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="pagesWithAIC",
-		groups={"Ads_In_Content", "Ads_In_Content_006", "Ads", "PL"}
+		groups={"Ads_In_Content_006", "PL"}
 	)
-	public void TestAdsInContent_PL(String page) {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+	public void TestAdsInContent_PL() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();

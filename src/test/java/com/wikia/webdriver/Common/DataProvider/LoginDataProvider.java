@@ -16,7 +16,7 @@ public class LoginDataProvider {
                 Properties.userName, Properties.password, Properties.userName
             }, {
                 Properties.userName2, Properties.password2, Properties.userName2
-            }, { 
+            }, {
                 Properties.userNameWithUnderScore,
                 Properties.passwordWithUnderScore,
                 Properties.userNameWithUnderScore

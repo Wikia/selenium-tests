@@ -113,6 +113,8 @@
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
+						<env>${env}</env>
+						<qs>${qs}</qs>
 						<config>/selenium-config/config.xml</config>
 						<captcha>/selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>

@@ -1,5 +1,11 @@
 package com.wikia.webdriver.Common.Core;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import java.awt.AWTException;
 import java.awt.GraphicsEnvironment;
 import java.awt.MouseInfo;
@@ -10,7 +16,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,13 +35,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CommonFunctions {
 
@@ -321,19 +319,6 @@ public class CommonFunctions {
 		robot.mousePress(InputEvent.BUTTON1_MASK);
 		robot.mouseMove(currentX + x, currentY + y);
 		robot.mouseRelease(InputEvent.BUTTON1_MASK);
-	}
-
-	public static void removeChatModeratorRights(String userName,
-			WebDriver driver) {
-		driver.get(Global.DOMAIN + "wiki/Special:UserRights?user=" + userName);
-		PageObjectLogging.log("enterUserRightsPage", "user rights page opened",
-				true);
-		WebElement chatModeratorChkbox = driver.findElement((By
-				.cssSelector("input#wpGroup-chatmoderator")));
-		WebElement submitButton = driver.findElement((By
-				.cssSelector("input[title='[alt-shift-s]']")));
-		chatModeratorChkbox.click();
-		submitButton.click();
 	}
 
 	public static String logInCookie(String userName, String password) {

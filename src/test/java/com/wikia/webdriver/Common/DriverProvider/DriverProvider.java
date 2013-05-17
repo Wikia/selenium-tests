@@ -1,10 +1,12 @@
 package com.wikia.webdriver.Common.DriverProvider;
 
+import com.wikia.webdriver.Common.ContentPatterns.PathsContent;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,12 +20,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
-import com.wikia.webdriver.Common.ContentPatterns.PathsContent;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-
 public class DriverProvider {
-	
+
 	private static final DriverProvider instance = new DriverProvider();
 	private static WebDriver driver;
 	private static ProxyServer server;
@@ -202,7 +200,7 @@ public class DriverProvider {
                 + "ChromeDriver" + File.separator
                 + ( System.getProperty("os.name").toUpperCase().contains("MAC") ?
                     "chromedriver" :
-                    "chromedriver.exe" )
+                    "chromedriver.exe")
             );
             System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 	}
