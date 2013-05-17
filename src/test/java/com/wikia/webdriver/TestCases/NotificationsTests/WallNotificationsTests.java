@@ -17,6 +17,6 @@ public class WallNotificationsTests extends TestTemplate {
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		System.out.println("MECH " + notifications.getNumberOfUnderNotifications());
+		System.out.println("MECH " + notifications.getNumberOfUnreadNotifications());
 	}
 }
