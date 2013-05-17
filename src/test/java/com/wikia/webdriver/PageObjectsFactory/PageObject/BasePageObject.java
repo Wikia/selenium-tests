@@ -956,4 +956,16 @@ public class BasePageObject{
             return "";
         }
     }
+	public void enableWikiaTracker() {
+		if (driver.getCurrentUrl().contains("?")) {
+			appendToUrl("&log_level=info");					
+		} else {
+			appendToUrl("?log_level=info");								
+		}
+	}
+
+	public void appendToUrl(String additionToUrl) {
+		driver.get(getCurrentUrl()+additionToUrl);
+	}
+
 }

@@ -18,6 +18,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import com.wikia.webdriver.Common.ContentPatterns.PathsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -58,6 +59,26 @@ public class DriverProvider {
             			System.out.println("Error with adding firefox extension");
 					}
             	}
+            	if (Global.BROWSER.contains("eventTracking")) {
+            		try {
+            			profile.addExtension(new File(PathsContent.fireBugPath));
+            			profile.addExtension(new File(PathsContent.netExportPath));
+            			profile.setPreference("app.update.enabled", false);
+            		        String domain = "extensions.firebug.";
+            		        // Set default Firebug preferences
+            		    profile.setPreference(domain + "currentVersion", "2.0");
+            		    profile.setPreference(domain + "allPagesActivation", "on");
+            		    profile.setPreference(domain + "defaultPanelName", "net");
+            		    profile.setPreference(domain + "net.enableSites", true);
+            		        // Set default NetExport preferences
+            		    profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
+            		    profile.setPreference(domain + "netexport.showPreview", false);
+            		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.harDirPath);
+            		}   catch (IOException e) {
+            			// TODO Auto-generated catch block
+            			e.printStackTrace();
+            		}
+				}
                 caps.setCapability(FirefoxDriver.PROFILE, profile);
                 driver = new EventFiringWebDriver(
                     new FirefoxDriver(caps)
@@ -186,7 +207,11 @@ public class DriverProvider {
             System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 	}
 
-        public static void setCapabilities(DesiredCapabilities newCaps) {
-            caps = newCaps;
-        }
+	public static void setCapabilities(DesiredCapabilities newCaps) {
+		caps = newCaps;
+	}
+	
+	public static void setFirefoxProfile(FirefoxProfile newFFprofile) {
+		profile = newFFprofile;
+	}
 }
