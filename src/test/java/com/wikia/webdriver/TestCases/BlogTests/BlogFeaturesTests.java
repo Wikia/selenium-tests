@@ -19,12 +19,12 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 public class BlogFeaturesTests extends TestTemplate{
 
-	@Test(groups={"BlogFeatures_001", "BlogTests"})
+	@Test(groups={"BlogFeatures_001", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_001_AddingGallery(){
 		CommonFunctions.logOut(driver);
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
@@ -47,7 +47,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blog.verifyObjectOnThePage("gallery");
 	}
 	
-	@Test(groups={"BlogFeatures_002", "BlogTests"})
+	@Test(groups={"BlogFeatures_002", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_002_AddingSlideshow(){
 		CommonFunctions.logOut(driver);
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
@@ -67,7 +67,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		
 	}
 	
-	@Test(groups={"BlogFeatures_003", "BlogTests"})
+	@Test(groups={"BlogFeatures_003", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_003_AddingSlider(){
 		CommonFunctions.logOut(driver);
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
@@ -87,7 +87,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blog.verifyObjectOnThePage("slider");
 	}
 	
-	@Test(groups={"BlogFeatures_004", "BlogTests"})
+	@Test(groups={"BlogFeatures_004", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_004_AddingVideo(){
 		CommonFunctions.logOut(driver);
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
@@ -104,7 +104,7 @@ public class BlogFeaturesTests extends TestTemplate{
 		blog.verifyVideoOnThePage();
 	}
 
-	@Test(groups={"BlogFeatures_005", "BlogTests"})
+	@Test(groups={"BlogFeatures_005", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_005_AddingImage(){
 		CommonFunctions.logOut(driver);
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");

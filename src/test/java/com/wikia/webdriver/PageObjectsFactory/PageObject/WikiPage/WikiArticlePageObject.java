@@ -89,7 +89,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By RVvideoLoading = By.cssSelector("section.loading");
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
-	private By videoOnPublish = By.cssSelector("a.image.video");
+	private By videoOnPublish = By.cssSelector("figure a.image.video");
 	
 
 	public WikiArticlePageObject(WebDriver driver, String Domain,
@@ -392,7 +392,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @param videoURL2name The name of the video, or any fragment of the video name
 	 * 	 */
 	public void verifyVideoAddedToRVModule(String videoURL2name) {
-		waitForElementByCss("img[data-video-name*=\""+videoURL2name+"\"]");
+		waitForElementByCss(".RVBody img[data-video-name*=\""+videoURL2name+"\"]");
 		PageObjectLogging.log("VerifyVideoAddedToRVModule", "Verify that video given by its name has been added to RV module", true, driver);
 		
 	}

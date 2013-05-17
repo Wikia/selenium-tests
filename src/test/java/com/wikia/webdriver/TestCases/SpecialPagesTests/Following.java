@@ -8,18 +8,19 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFollowPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogListingPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 public class Following extends TestTemplate{
 
-	String pageName;
+	String pageName, blogPostTitle;
 	
-	@Test(groups = {"follow001", "follow"})
+	@Test(groups = {"Follow001", "Follow"})
 	public void follow001_Article(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -32,7 +33,7 @@ public class Following extends TestTemplate{
 		article.unfollowArticle(name);
 	}
 	
-	@Test(groups = {"follow002", "follow"})
+	@Test(groups = {"Follow002", "Follow"})
 	public void follow002_Blog(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -47,7 +48,7 @@ public class Following extends TestTemplate{
 		blog.unfollowBlogPage(Properties.userName);
 	}
 	
-	@Test(groups = {"follow003", "follow"})
+	@Test(groups = {"Follow003", "Follow"})
 	public void follow003_BlogPosts(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -71,7 +72,7 @@ public class Following extends TestTemplate{
 		follow.verifyFollowedBlogPost(blogPostTitle);
 	}
 	
-	@Test(groups = {"follow004", "follow"})
+	@Test(groups = {"Follow004", "Follow"})
 	public void follow004_Photos(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -85,7 +86,7 @@ public class Following extends TestTemplate{
 		special.unfollowImage(image);
 	}
 	
-	@Test(groups = {"follow005", "follow"})
+	@Test(groups = {"Follow005", "Follow"})
 	public void follow005_Videos(){
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
@@ -98,5 +99,25 @@ public class Following extends TestTemplate{
 		follow.openFollowingPage();
 		follow.verifyFollowedImageVideo(videoName);
 		video.unfollowVideo(videoName);
+	}
+	
+	
+	@Test(groups = {"Follow006", "Follow"})
+	public void follow006_FollowBlogListing(){
+		
+		SpecialCreateBlogListingPageObject blogList = new SpecialCreateBlogListingPageObject(driver);
+		blogList.openRandomArticleByUrl();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		blogPostTitle = PageContent.blogListName+blogList.getTimeStamp();
+		blogList
+			.openCreateBlogListingPage()
+			.typeTitle(blogPostTitle)
+			.clickSavePageButton()
+			.verifyBlogListPage(blogPostTitle)
+			.followBlogListingPage(blogPostTitle);
+		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
+		follow.openFollowingPage();
+		follow.verifyFollowedBlogPost(blogPostTitle);
+		
 	}
 }

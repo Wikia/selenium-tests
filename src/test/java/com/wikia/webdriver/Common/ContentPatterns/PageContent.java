@@ -15,6 +15,7 @@ public class PageContent {
 	public static String blogComment = "blogComment";
 	public static String blogCommentReply = "blogCommentReply";
 	public static String blogCommentEdit = "blogCommentEdit";
+	public static String blogListName = "BlogPostList";
 	//categories
 	public static String categoryPageNamePrefix = "QACategoryTest";
 	public static String categoryNamePrefix = "TestCategory";
@@ -74,5 +75,7 @@ public class PageContent {
 
 	//wikiText
 	public static String wikiTextPhoto = "[[File:Image009.jpg|thumb|%s]]";
+	
+	public static String wikiaGlobalUrl = "http://www.wikia.com/";
 
 }

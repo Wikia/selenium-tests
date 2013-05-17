@@ -224,7 +224,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	
 	public void verifyPostedMessageVideo(String title)
 	{
-		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), '"+title+"')]/../../div[@class='editarea']//a[@class='image video lightbox']");
+		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), '"+title+"')]/../../div[@class='editarea']//a[@class='video image lightbox']");
 		PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true, driver);		
 	}
 	

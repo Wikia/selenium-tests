@@ -13,8 +13,8 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEdi
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -25,6 +25,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
  */
 
 public class VetAddingVideoTests extends TestTemplate {
+	
+	String desiredVideoName;
 	
 	@Test(groups = {"VetTests001", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_001_SpecialVideosProvider() {
@@ -81,8 +83,8 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.openRandomArticleByUrl();
 		article.verifyRVModulePresence();
 		VetAddVideoComponentObject vetAddingVideo = article.clickOnAddVideoRVModule();
-		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
-		article.verifyVideoAddedToRVModule(VideoContent.wikiaVideoName);
+		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 1);
+		article.verifyVideoAddedToRVModule(vetAddingVideo.getVideoName());
 	}
 	
 	@Test(groups = {"VetTests005", "VetTests", "VetAddVideo"})
@@ -215,12 +217,13 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.triggerCommentArea();
 		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver, Global.DOMAIN);
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 4);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
+		desiredVideoName = vetOptions.getVideoName();
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();
 		article.clickSubmitButton();
-		article.verifyCommentVideo(VideoContent.wikiaVideoName);
+		article.verifyCommentVideo(desiredVideoName);
 	}
 	
 	@Test(groups = {"VetTests013", "VetTests", "VetAddVideo"})

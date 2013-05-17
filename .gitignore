@@ -1,6 +1,14 @@
 logs/
 target/
 .DS_Store
+.idea
+Wikia.iml
 Thumbs.db
 chromedriver.log
 tmp.exe
+*.class
+.classpath
+.idea/
+.project
+.settings/
+bin/

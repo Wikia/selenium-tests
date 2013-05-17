@@ -85,11 +85,6 @@
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.0.3</version>
 		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.2.3</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -113,11 +108,11 @@
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
-						<config>/selenium-config/config.xml</config>
-						<captcha>/selenium-config/captcha.txt</captcha>
+						<config>../../../selenium-config/config.xml</config>
+						<captcha>../../../selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/testSuite.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/suiteFailed.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<argLine>-Xms800m -Xmx800m -XX:MaxPermSize=500m</argLine>
 				</configuration>				
