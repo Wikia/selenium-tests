@@ -79,7 +79,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.openMessageWall(Properties.userName2);
 		wall.openMessageWallThread(title);
 		wall.reply(message);
-		wall.verifyPostedReplyWithMessage(message, 1);
+		wall.verifyPostedReplyWithMessage(message, 2);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -120,7 +120,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.openMessageWall(Properties.userName);
 		wall.openMessageWallThread(title);
 		wall.reply(message);
-		wall.verifyPostedReplyWithMessage(message, 1);
+		wall.verifyPostedReplyWithMessage(message, 2);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -128,7 +128,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.openMessageWall(Properties.userName);
 		wall.openMessageWallThread(title);
 		wall.reply(message);
-		wall.verifyPostedReplyWithMessage(message, 2);
+		wall.verifyPostedReplyWithMessage(message, 3);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
@@ -219,7 +219,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		timeStamp = wall.getTimeStamp();
 		String replyMessage = PageContent.messageWallMessagePrefix + "_reply_" + timeStamp;
 		wall.reply(replyMessage);
-		wall.verifyPostedReplyWithMessage(replyMessage, 1);
+		wall.verifyPostedReplyWithMessage(replyMessage, 2);
 		CommonFunctions.logOut(driver);
 
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -258,7 +258,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.openMessageWall(Properties.userName);
 		wall.openMessageWallThread(title);
 		wall.reply(message);
-		wall.verifyPostedReplyWithMessage(message, 1);
+		wall.verifyPostedReplyWithMessage(message, 2);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -298,7 +298,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.openMessageWall(Properties.userName4);
 		wall.openMessageWallThread(title);
 		wall.reply(message);
-		wall.verifyPostedReplyWithMessage(message, 1);
+		wall.verifyPostedReplyWithMessage(message, 2);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -306,7 +306,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.openMessageWall(Properties.userName4);
 		wall.openMessageWallThread(title);
 		wall.reply(message);
-		wall.verifyPostedReplyWithMessage(message, 2);
+		wall.verifyPostedReplyWithMessage(message, 3);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName4, Properties.password4, driver);

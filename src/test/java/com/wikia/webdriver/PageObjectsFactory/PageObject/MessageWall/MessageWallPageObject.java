@@ -10,6 +10,8 @@ import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -244,11 +246,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	}
 	/**
 	 * @param message
-	 * @param replyNumber Replies from the whole message wall count here!
+	 * @param replyNumber This is the same number as in the URL for that message.
 	 */
 	public void verifyPostedReplyWithMessage(String message, int replyNumber)
 	{
-		waitForTextToBePresentInElementByElement(messageRepliesBody.get(replyNumber-1), message);
+		new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(
+			By.cssSelector("ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p"), message)
+		);
 		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
