@@ -25,11 +25,11 @@ public class VetOptionsComponentObject extends BasePageObject{
 		@FindBy(css="#VideoEmbedManualWidth")
 		private WebElement withInputField;
 		@FindBy(css="#VET_LayoutLeftBox label")
-		private WebElement PositionLayoutLeft;
+		private WebElement positionLayoutLeft;
 		@FindBy(css="#VET_LayoutCenterBox label")
-		private WebElement PositionLayoutCenter;
+		private WebElement positionLayoutCenter;
 		@FindBy(css="#VET_LayoutRightBox label")
-		private WebElement PositionLayoutRight;
+		private WebElement positionLayoutRight;
 		@FindBy(css="label.VideoEmbedNoThumbOption")
 		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
@@ -41,11 +41,11 @@ public class VetOptionsComponentObject extends BasePageObject{
 		@FindBy(css="input.wikia-button.v-float-right")
 		private WebElement updateVideoButton;
 		@FindBy(css="span#VET_LayoutLeftBox.selected")
-		private WebElement PositionLayoutLeftSelected;
+		private WebElement positionLayoutLeftSelected;
 		@FindBy(css="span#VET_LayoutRightBox.selected")
-		private WebElement PositionLayoutRightSelected;
+		private WebElement positionLayoutRightSelected;
 		@FindBy(css="span#VET_LayoutCenterBox.selected")
-		private WebElement PositionLayoutCenterSelected;
+		private WebElement positionLayoutCenterSelected;
 		
 		@FindBy(css="input[type='hidden'][id='VideoEmbedName']")
 		private WebElement uneditableVideoNameField;
@@ -58,7 +58,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		@FindBy(css="div#VideoEmbedNameRow p")
 		private WebElement videoNameCaption;
 	
-	public VetOptionsComponentObject(WebDriver driver) {
+		public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver,  this);
 	}
@@ -109,16 +109,6 @@ public class VetOptionsComponentObject extends BasePageObject{
 	/**
 	 * author: Michal Nowierski
 	 */
-	public void setTitle(String title) {
-		waitForElementByElement(videoName);
-		videoName.clear();
-		videoName.sendKeys(title);
-		PageObjectLogging.log("setTitle", "set title of the viedo to: "+title,  true, driver);
-	}
-	
-	/**
-	 * author: Michal Nowierski
-	 */
 	private void clickAddaVideo() {
 		waitForElementByElement(addAvideo);
 		clickAndWait(addAvideo);
@@ -153,13 +143,13 @@ public class VetOptionsComponentObject extends BasePageObject{
 	public void adjustPosition(int i){
 		waitForElementByElement(videoEmbedLayotRow);
 		switch (i){
-		case 1: PositionLayoutLeft.click();
+		case 1: positionLayoutLeft.click();
 				PageObjectLogging.log("adjustPosition", "left position selected",  true);
 				break;
-		case 2: PositionLayoutCenter.click();
+		case 2: positionLayoutCenter.click();
 				PageObjectLogging.log("adjustPosition", "center position selected",  true);
 				break;
-		case 3: PositionLayoutRight.click();
+		case 3: positionLayoutRight.click();
 				PageObjectLogging.log("adjustPosition", "right position selected",  true);
 				break;
 		default: PageObjectLogging.log("adjustPosition", "invalid style selected",  false);
@@ -180,13 +170,13 @@ public class VetOptionsComponentObject extends BasePageObject{
 	public void verifyAlignmentOptionIsSelected(int i){
 		waitForElementByElement(videoEmbedLayotRow);
 		switch (i){
-		case 1: PositionLayoutLeftSelected.click();
+		case 1: positionLayoutLeftSelected.click();
 				PageObjectLogging.log("verifyAlignmentOptionIsSelected", "left position selected",  true);
 				break;
-		case 2: PositionLayoutCenterSelected.click();
+		case 2: positionLayoutCenterSelected.click();
 				PageObjectLogging.log("verifyAlignmentOptionIsSelected", "center position selected",  true);
 				break;
-		case 3: PositionLayoutRightSelected.click();
+		case 3: positionLayoutRightSelected.click();
 				PageObjectLogging.log("verifyAlignmentOptionIsSelected", "right position selected",  true);
 				break;
 		default: PageObjectLogging.log("verifyAlignmentOptionIsSelected", "invalid alignment selected",  false);
@@ -209,22 +199,18 @@ public class VetOptionsComponentObject extends BasePageObject{
 	
 	
 	public void verifyCaptionInVETModal(String caption) {
-		
 		Assertion.assertStringContains("QAWebdriverCaption1", caption);
 		PageObjectLogging.log("verifyCaptionInVETModal", "Verify that the caption of the video set previously appears in the VET modal", true, driver);
 	}
 	
 	
 	public void verifyNoCaptionInVETModal() {
-		if (styleWithoutCaption.isSelected())
-		{
+		if (styleWithoutCaption.isSelected()){
 			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with no caption is selected in VET modal", true);
 			}
-		else
-			{
+		else{
 			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with caption is selected in VET modal", false);
-		}	
-				
+		}
 	}
 	
 	public void verifyVideoNameFieldIsNotEditable(){

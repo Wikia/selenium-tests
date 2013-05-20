@@ -38,68 +38,42 @@ public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "a.createpage")
 	private WebElement createArticleButton;
-
-	@FindBy(css = "a[class='wikia-button createpage']")
-	private WebElement addArticleButton;
-
-	@FindBy(id = "wpCreatePageDialogTitle")
-	private WebElement articleNameField;
-
 	@FindBy(css = "article span.drop")
 	private WebElement editDropDown;
-
 	@FindBy(css = "a[data-id='delete']")
 	private WebElement deleteButton;
-
 	@FindBy(css = "input#wpConfirmB")
 	private WebElement deleteConfirmationButton;
-
 	@FindBy(xpath = "//div[@class='msg' and contains(text(), 'The comment has been deleted.')]")
 	private WebElement deleteCommentConfirmationMessage;
-
 	@FindBy(css = "div.msg a")
 	private WebElement undeleteButton;
-
 	@FindBy(css = "input#mw-undelete-submit")
 	private WebElement restoreButton;
-
 	@FindBy(css = "input#wpNewTitleMain")
 	private WebElement renameArticleField;
-
 	@FindBy(css = "input[name='wpMove']")
 	private WebElement confirmRenamePageButton;
-
 	@FindBy(css = "input#wpReason")
 	private WebElement deleteCommentReasonField;
-
 	@FindBy(css = "div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
-
 	@FindBy(css = "input[name='search'][placeholder='Search photos on this wiki']")
 	private WebElement searchFieldImageInLightBox;
-
 	@FindBy(css = "img.sprite.search")
 	private WebElement searchButtonImageInLightBox;
-	
 	@FindBy(css="input#ImageQuery")
 	private WebElement imageQuery;
-	
 	@FindBy(css="div.permissions-errors")
 	private WebElement premissionErrorMessage;
-	
 	@FindBy(css="[value='Find']")
 	private WebElement imageFindButton;
-
 	@FindBy(css="div.mw-warning-with-logexcerpt p")
 	private WebElement pageDeletedInfo;
-	
 	@FindBy(css="#PREFOOTER_RIGHT_BOXAD")
 	private WebElement ad_Prefooter_right_boxad;
-	
 	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
 	private WebElement ad_Prefooter_left_boxad;
-	
-
 	@FindBy(css="figure.tleft")
 	private WebElement videoOnLeftOfArticle;
 	@FindBy(css="figure.tright")
@@ -112,16 +86,12 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement videoCaptionOnArticle;
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
-
 	@FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
 	protected WebElement contributeButton;
-
 	@FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
 	protected WebElement contributeAddPage;
-
 	@FindBy(css = "#CreatePageDialog")
 	protected WebElement addPageModal;
-	
 	@FindBy(css = ".UserLoginModal input[name='password']")
 	protected WebElement modalPasswordInput;
 	
@@ -161,155 +131,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public String getWikiName() {
 		return Domain;
 	}
-
-	public void searchForImage(String name){
-//		waitForElementByElement(imageFindButton);
-		imageQuery.sendKeys(name);
-//		waitForElementByElement(imageQuery);
-		imageFindButton.click();
-		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
-	}
-	
-	/**
-	 * Left Click on add Object button.
-	 *  
-	 * @author Michal Nowierski
-	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
-	 */
-	public VetAddVideoComponentObject clickOnAddObjectButton(String Object) {
-		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
-		WebElement ObjectButton;
-		waitForElementByCss(ObjectCss);
-		waitForElementClickableByCss(ObjectCss);
-		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
-		clickAndWait(ObjectButton);
-		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
-		return new VetAddVideoComponentObject(driver);
-	}
-	
-	
-	/**
-	 * Set photo orientation option number n
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            = {1, 2}
-	 *            <p>
-	 *            1 - Horizontaal.
-	 *            <p>
-	 *            2 - Vertical
-	 * */
-	public void gallerySetSliderPosition(int n) {
-		List<WebElement> List = driver
-				.findElements(galleryDialogSlideshowOrientationsList);
-		waitForElementByElement(List.get(n - 1));
-		clickAndWait(List.get(n - 1));
-		PageObjectLogging.log("GallerySetSliderPosition",
-				"Set photo orientation option number " + n, true, driver);
-
-	}
-
-	/**
-	 * Set photo orientation option number n
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            = {1,2,3,4}
-	 *            <p>
-	 *            1 - Original.
-	 *            <p>
-	 *            2 - Square.
-	 *            <p>
-	 *            3 - Landscape.
-	 *            <p>
-	 *            4 - Portrait
-	 * */
-	public void gallerySetPhotoOrientation(int n) {
-		List<WebElement> List = driver
-				.findElements(galleryDialogPhotoOrientationsList);
-		waitForElementByElement(List.get(n - 1));
-		clickAndWait(List.get(n - 1));
-		PageObjectLogging.log("GallerySetPhotoOrientation",
-				"Set photo orientation option number " + n, true, driver);
-
-	}
-
-	/**
-	 * Set Object position to the wanted one
-	 * 
-	 * @author Michal Nowierski
-	 * @param Object
-	 *            {Gallery, Slideshow}
-	 * @param WantedPosition
-	 *            = {Left, Center, Right} !CASE SENSITIVITY! *
-	 */
-	public void gallerySetPositionGallery(String WantedPosition) {
-
-		Select select = new Select(
-				driver.findElement(By
-						.cssSelector("select[id='WikiaPhotoGalleryEditorGalleryPosition']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-
-		}
-		PageObjectLogging.log("GallerySetPosition", "Set gallery position to "
-				+ WantedPosition, true, driver);
-	}
-
-
-	public void gallerySetPositionSlideshow(String WantedPosition) {
-
-		Select select = new Select(
-				driver.findElement(By
-						.cssSelector("select[id='WikiaPhotoGalleryEditorSlideshowAlign']")));
-		select.selectByVisibleText(WantedPosition);
-		// below code will make sure that proper position is selected
-		String category_name = select.getAllSelectedOptions().get(0).getText();
-		while (!category_name.equalsIgnoreCase(WantedPosition)) {
-			select.selectByVisibleText(WantedPosition);
-			category_name = select.getAllSelectedOptions().get(0).getText();
-		}
-		PageObjectLogging.log("GallerySetPosition",
-				"Set slideshow position to " + WantedPosition, true, driver);
-	}
-
-
-	/**
-	 * Wait for Object and click on 'add this photo' under the first seen
-	 * 
-	 * @author Michal Nowierski
-	 * @param n
-	 *            n = parameter determining how many inputs the method should
-	 *            check
-	 * */
-	public void galleryCheckImageInputs(int n) {
-		driver.findElement(galleryDialogPhotosList);
-		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
-		for (int i = 0; i < n; i++) {
-			clickAndWait(List.get(i));
-		}
-		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + n
-				+ " image inputs", true, driver);
-	}
-
-	public void searchImageInLightBox(String imageName) {
-		waitForElementByElement(searchFieldImageInLightBox);
-		searchFieldImageInLightBox.sendKeys(imageName);
-		clickAndWait(searchButtonImageInLightBox);
-		waitForElementByElement(searchButtonImageInLightBox);
-	}
-
-
-
-
-
-
-    //Selectors
-
 	
 	/**
 	 * @author Michal Nowierski
