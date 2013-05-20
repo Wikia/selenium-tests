@@ -1,10 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.ArrayList;
 import java.util.List;
-
-import net.sf.cglib.transform.impl.AddPropertyTransformer;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,8 +14,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -30,7 +27,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 
@@ -110,8 +106,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement addVideoButton;
 	@FindBy(css="input[value='Return to editing']")
 	private WebElement returnToEditingButton;
-        @FindBy (css = "#wpSave")
-        private WebElement publishButton;
+	@FindBy (css = "#wpSave")
+	private WebElement publishButton;
 	@FindBy(css="input[id='ImageUploadLayoutLeft']")
 	private WebElement imageLeftAlignmentOption;
 	@FindBy(css="input[id='ImageUploadLayoutRight']")
@@ -667,7 +663,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(centerAlignedVideoOnEditor);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("verifyCenterVideoInEditMode", "Verify that video appears in the center at the editor", true, driver);
-		
 	}
 	
 	
@@ -676,7 +671,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	 * Verify that the video appears in the preview
 	 *  
 	 * @author Michal Nowierski
-	 * 	 */
+	 */
 	public void verifyTheVideoOnThePreview() {
 		waitForElementByElement(videoOnPreview);
 		PageObjectLogging.log("VerifyTheVideoOnThePreview", "Verify that the video appears in the preview", true, driver);
@@ -691,8 +686,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void verifyVideoOnTheLeftInPreview() {
 		waitForElementByElement(leftAlignedVideoOnPreview);
 		PageObjectLogging.log("verifyVideoOnTheLeftOnPreview", "Verify that the video appears on the left in preview", true, driver);
-				
-		}
+	}
 	
 	/**
 	 * Verify that the video appears in the right hand side in preview
@@ -703,20 +697,18 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void verifyVideoOnTheRightInPreview() {
 		waitForElementByElement(rightAlignedVideoOnPreview);
 		PageObjectLogging.log("verifyRightVideoOnTheLeftOnPreview", "Verify that the video appears on the right in preview", true, driver);
-				
-		}
+	}
 	
 	public void verifyVideoOnTheCenterInPreview() {
 		waitForElementByElement(centerAlignedVideoOnPreview);
 		PageObjectLogging.log("verifyVideoOnTheCenterInPreview", "Verify that the video appears on the center in preview", true, driver);
-				
-		}
+	}
 	
 	
 	public void clickClosePreviewModalButton() {
 		waitForElementByElement(closePreviewModal);
 		PageObjectLogging.log("clickClosePreviewModalButton", "Verify that the close button in the preview modal is clicked", true, driver);
-		}
+	}
 	
 	/**
 	 * Get text of source mode text of message article page. Remmember that source mode must be turned on to invoke this method. Just invoke 'ClickOnSourceButton'
@@ -778,7 +770,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	 */
 
 	public void clickOnAddTableButton() {
-
 		waitForElementByElement(tableButton);
 		waitForElementClickableByElement(tableButton);
 		tableButton.click();
@@ -790,8 +781,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	@author Michal Nowierski
 	*/
 	public void verifyTableModal() {
-	waitForElementByElement(tableModal);
-	PageObjectLogging.log("waitForTableModal", "wait for table modal", true, driver);
+		waitForElementByElement(tableModal);
+		PageObjectLogging.log("waitForTableModal", "wait for table modal", true, driver);
 	}
 
 	/**
@@ -801,10 +792,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 	@author Michal Nowierski
 	*/
 	public void clickOKonTableModal() {
-	waitForElementByElement(tableModalOKbutton);
-	waitForElementClickableByElement(tableModalOKbutton);
-	tableModalOKbutton.click();
-	PageObjectLogging.log("clickOKonTableModal", "Click OK on table modal", true, driver);
+		waitForElementByElement(tableModalOKbutton);
+		waitForElementClickableByElement(tableModalOKbutton);
+		tableModalOKbutton.click();
+		PageObjectLogging.log("clickOKonTableModal", "Click OK on table modal", true, driver);
 	}
 
 	/**
@@ -837,35 +828,33 @@ public class WikiArticleEditMode extends WikiEditMode {
 	*/
 
 	public void tablePupulateCell(int i, int j, String value) {
-	int cellPosition = (i*2)+(j-3);
-	executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('table.article-table tr *:not(br)')["+cellPosition+"]).text('"+value+"')");
-// 	 *:not(br)  expression matches all possible elements, except <br> elements
-	PageObjectLogging.log("tablePupulateCell", "send "+value+" to cell at row: "+i+", column: "+j+"", true, driver);
-
+		int cellPosition = (i*2)+(j-3);
+		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('table.article-table tr *:not(br)')["+cellPosition+"]).text('"+value+"')");
+		//*:not(br)  expression matches all possible elements, except <br> elements
+		PageObjectLogging.log("tablePupulateCell", "send "+value+" to cell at row: "+i+", column: "+j+"", true, driver);
 	}
 
 	/**
 	* Check if there are enough rows
-	*
+		*
 	*
 	@author Michal Nowierski
 	*
 	@param i number of rows
 	*/
 	public void tableCheckTableRowsCount(int i) {
-	waitForElementByElement(visualModeIFrame);
-	driver.switchTo().frame(visualModeIFrame);
-	waitForElementByElement(VisualModeTable);
+		waitForElementByElement(visualModeIFrame);
+		driver.switchTo().frame(visualModeIFrame);
+		waitForElementByElement(VisualModeTable);
 
-	List<WebElement> RowsList;
+		List<WebElement> RowsList;
 
-	for (int j = 0; j < i; j++) {
-	RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
-	waitForElementByElement(RowsList.get(j));
-	}
-
-	driver.switchTo().defaultContent();
-	PageObjectLogging.log("tableCheckTableRowsCount", "check that there are "+i+" rows in the table", true, driver);
+		for (int j = 0; j < i; j++) {
+			RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
+			waitForElementByElement(RowsList.get(j));
+		}
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("tableCheckTableRowsCount", "check that there are "+i+" rows in the table", true, driver);
 	}
 
 	/**
@@ -878,21 +867,20 @@ public class WikiArticleEditMode extends WikiEditMode {
 	@param j column index of the cell
 	*/
 	public void tableRightClickOnCell(int i, int j) {
+		waitForElementByElement(visualModeIFrame);
+		driver.switchTo().frame(visualModeIFrame);
+		waitForElementByElement(VisualModeTable);
+		
+		List<WebElement> RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
+		List<WebElement> CellsList = RowsList.get(i-1).findElements(By.cssSelector("*:not(br)"));
+		
+		Actions builderq = new Actions(driver);
+		Action rClick = builderq.contextClick(CellsList.get(j-1)).build();
+		rClick.perform();
 
-	waitForElementByElement(visualModeIFrame);
-	driver.switchTo().frame(visualModeIFrame);
-	waitForElementByElement(VisualModeTable);
-
-	List<WebElement> RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
-	List<WebElement> CellsList = RowsList.get(i-1).findElements(By.cssSelector("*:not(br)"));
-
-	Actions builderq = new Actions(driver);
-	Action rClick = builderq.contextClick(CellsList.get(j-1)).build();
-	rClick.perform();
-
-	driver.switchTo().defaultContent();
-	// somehow, the driver does not click on the wanted cell. It click Just on table
-	PageObjectLogging.log("tableRightClickOnCell", "Right click on cell at row: "+i+", column: "+j+"", true, driver);
+		driver.switchTo().defaultContent();
+		//somehow, the driver does not click on the wanted cell. It click Just on table
+		PageObjectLogging.log("tableRightClickOnCell", "Right click on cell at row: "+i+", column: "+j+"", true, driver);
 
 	}
 
@@ -906,20 +894,18 @@ public class WikiArticleEditMode extends WikiEditMode {
 	@param j column index of the cell
 	*/
 	public void tableCheckCellContent(int i, int j, String value){
-
-	waitForElementByElement(visualModeIFrame);
-	driver.switchTo().frame(visualModeIFrame);
-	waitForElementByElement(VisualModeTable);
+		waitForElementByElement(visualModeIFrame);
+		driver.switchTo().frame(visualModeIFrame);
+		waitForElementByElement(VisualModeTable);
 	
-	List<WebElement> RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
-	List<WebElement> CellsList = RowsList.get(i-1).findElements(By.cssSelector("*:not(br)"));
+		List<WebElement> RowsList = VisualModeTable.findElements(By.cssSelector("tr"));
+		List<WebElement> CellsList = RowsList.get(i-1).findElements(By.cssSelector("*:not(br)"));
 
-	waitForElementByElement(CellsList.get(j-1));
-	waitForTextToBePresentInElementByElement(CellsList.get(j-1), value);
+		waitForElementByElement(CellsList.get(j-1));
+		waitForTextToBePresentInElementByElement(CellsList.get(j-1), value);
 
-	driver.switchTo().defaultContent();
-	PageObjectLogging.log("tableCheckCellContent", "Check that cell at row: "+i+", column: "+j+" has value: "+value+" in it", true, driver);
-
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("tableCheckCellContent", "Check that cell at row: "+i+", column: "+j+" has value: "+value+" in it", true, driver);
 	}
 
 	/**
@@ -937,28 +923,25 @@ public class WikiArticleEditMode extends WikiEditMode {
 	<br> Manually right click on table context menu for better understanding
 	*/
 	public void tableChooseFromContextMenu(int i, int j) {
+		List<WebElement> list = driver.findElements(contextMenuIframeList);
+		driver.switchTo().frame(list.get(0));
+		List<WebElement> list2 = driver.findElements(contextMenuOptionsList);
 
-	List<WebElement> list = driver.findElements(contextMenuIframeList);
-	driver.switchTo().frame(list.get(0));
-	List<WebElement> list2 = driver.findElements(contextMenuOptionsList);
+		WebElement click = list2.get(i-1);
+		waitForElementByElement(click);
+		click.click();
+		driver.switchTo().defaultContent();
 
-	WebElement click = list2.get(i-1);
-	waitForElementByElement(click);
-	click.click();
-	driver.switchTo().defaultContent();
-
-	if (i ==2 | i ==3 | i ==4) {
-	list = driver.findElements(contextMenuIframeList);
-	driver.switchTo().frame(list.get(1));
-	list2 = driver.findElements(contextMenuOptionsList);
-	click = list2.get(j-1);
-	waitForElementByElement(click);
-	click.click();
-	driver.switchTo().defaultContent();
-
-	}
-
-	PageObjectLogging.log("tableChooseFromContextMenu", "Choose the indicated option from context menu", true, driver);
+		if (i ==2 | i ==3 | i ==4) {
+			list = driver.findElements(contextMenuIframeList);
+			driver.switchTo().frame(list.get(1));
+			list2 = driver.findElements(contextMenuOptionsList);
+			click = list2.get(j-1);
+			waitForElementByElement(click);
+			click.click();
+			driver.switchTo().defaultContent();
+			}
+			PageObjectLogging.log("tableChooseFromContextMenu", "Choose the indicated option from context menu", true, driver);
 	}
 
 
@@ -975,7 +958,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		categories_CategoryInputField.sendKeys(categoryName);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
 		executeScript("var e = jQuery.Event(\"keydown\"); e.which=13; $('#CategorySelectInput').trigger(e);");
-//		categories_CategoryInputField.sendKeys(Keys.ENTER);
 		PageObjectLogging.log("categories_typeCategoryNameEditMode", "category "+categoryName+" typed", true, driver);
 	}
 	
@@ -1002,7 +984,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(categories_CategorySourceInputField);
 		String text = categories_CategorySourceInputField.getAttribute("value");
 		if (text.contains(textToBeChecked)) {
-			
 			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked.replaceAll("<", "&lt").replaceAll(">", "&gt")+" present in the source mode", true, driver);
 		}
 		else {
@@ -1215,20 +1196,17 @@ public class WikiArticleEditMode extends WikiEditMode {
 		
 	}
 	
-public void verifyRightAlignmentIsSelected() {
+	public void verifyRightAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
 		clickOnModifyImageLink();
 		waitForElementByElement(imageRightAlignmentOption);
 		
-		if (imageRightAlignmentOption.isSelected())
-		{
+		if (imageRightAlignmentOption.isSelected()){
 			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is selected in modal", true);
-			}
-		else
-			{
+		}
+		else{
 			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is NOT selected in modal", false);
 		}		
-		
 		waitForElementByElement(imageUploadCloseButton);
 		imageUploadCloseButton.click();
 	}
