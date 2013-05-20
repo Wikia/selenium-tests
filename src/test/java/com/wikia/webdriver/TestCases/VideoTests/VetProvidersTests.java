@@ -11,6 +11,8 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -21,6 +23,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 public class VetProvidersTests extends TestTemplate{
 		
 	//Rodrigo Testing TCs
+			
+			String pageName;
+	
 			@DataProvider
 			private static final Object[][] provideVideo()
 			{
@@ -85,4 +90,97 @@ public class VetProvidersTests extends TestTemplate{
 				vetAddingVideo.addVideoByUrl(videoUrl);
 				wiki.verifyVideoAddedToRVModule(name);
 			}
+
+			/*
+			 * 	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDAdmin", "Smoke"}) 
+//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
+	// Test Case 004 Adding images to an article in edit mode
+	public void ArticleCRUDAdmin_013_AddingImage()
+	{
+		CommonFunctions.logOut(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		edit.deleteArticleContent();
+		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
+		edit.verifyThatThePhotoAppears(PageContent.caption);
+		edit.clickOnPreviewButton();
+		edit.verifyTheImageOnThePreview();
+		edit.verifyTheCaptionOnThePreview(PageContent.caption);
+		WikiArticlePageObject article = edit.clickOnPublishButtonInPreviewMode();
+		article.verifyImageOnThePage();
+	}
+			 */
+			
+			@Test(groups={"ArticleVideo_003", "ArticleVideo"}) 
+			public void ArticleVideo003_VerifyingImagesPositionWikiText()
+			{
+				CommonFunctions.logOut(driver);
+				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+				wiki.openWikiPage();
+				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+				wiki.refreshPage();
+				pageName = "QAarticle"+wiki.getTimeStamp();
+				wiki.openWikiPage();
+				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				edit.deleteArticleContent();
+				PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
+				PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+				photoOptions.setCaption(PageContent.caption);
+				photoOptions.adjustAlignment(1);
+				photoOptions.clickAddPhoto();
+				edit.clickOnSourceButton();
+				edit.verifyWikiTextInSourceMode("left");					
+				edit.clickOnVisualButton();				
+				edit.verifyLeftAlignmentIsSelected();
+				//no need to check images "right" string in wikitext until centered position has been added to images like it has to videos
+//				edit.deleteArticleContent();
+//				edit.clickOnAddObjectButton("Image");
+//				edit.waitForModalAndClickAddThisPhoto();
+//				edit.typePhotoCaption(PageContent.caption);
+//				edit.clickImageRightAlignment();
+//				edit.clickOnAddPhotoButton2();
+//				edit.clickOnSourceButton();
+//				edit.verifyWikiTextInSourceMode("");					
+//				edit.clickOnVisualButton();				
+//				edit.verifyRightAlignmentIsSelected();
+				WikiArticlePageObject article = edit.clickOnPublishButton();
+				article.verifyImageOnThePage();
+			}
+			
+			@Test(groups={"ArticleVideo_004", "ArticleVideo"}) 
+			public void ArticleVideo004_Lightbox_VerifyExistenceAndURLsOfSocialButtons()
+			{
+				CommonFunctions.logOut(driver);
+				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+				wiki.openWikiPage();
+				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+				//wiki.refreshPage();
+				pageName = "QAarticle"+wiki.getTimeStamp();
+				wiki.openWikiPage();			
+				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				edit.deleteArticleContent();
+				edit.clickPhotoButton();
+				WikiArticlePageObject article = edit.addImageForLightboxTesting();
+				LightboxPageObject lightbox = article.clickThumbnailImage();
+				lightbox.clickPinButton();
+				lightbox.clickShareButton();
+				lightbox.verifyShareButtons();
+				lightbox.clickFacebookShareButton();
+				lightbox.verifyFacebookWindow();
+				lightbox.clickTwitterShareButton();
+				lightbox.verifyTwitterWindow();
+				lightbox.clickStumbleUponShareButton();
+				lightbox.verifyStumbleUponWindow();
+				lightbox.clickRedditShareButton();
+				lightbox.verifyRedditWindow();
+				lightbox.clickPlusOneShareButton();
+				lightbox.verifyPlusOneWindow();
+				lightbox.clickCloseButton();
+			}
+
 }

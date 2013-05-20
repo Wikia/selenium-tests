@@ -10,13 +10,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
@@ -29,6 +32,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
 
 import org.openqa.selenium.NoSuchElementException;
+
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -95,8 +99,48 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
 	private WebElement ad_Prefooter_left_boxad;
 	
+
+	@FindBy(css="figure.tleft")
+	private WebElement videoOnLeftOfArticle;
+	@FindBy(css="figure.tright")
+	private WebElement videoOnRightOfArticle;
+	@FindBy(css="figure.tnone")
+	private WebElement videoOnCenterOfArticle;
+	@FindBy(css="#WikiaArticle div[style*='width:250px']")
+	private WebElement videoWidthOnArticle;
+	@FindBy(css="figcaption.thumbcaption")
+	private WebElement videoCaptionOnArticle;
+	@FindBy(css = ".UserLoginModal input[type='submit']")
+	protected WebElement modalLoginSubmit;
+
+	@FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
+	protected WebElement contributeButton;
+
+	@FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
+	protected WebElement contributeAddPage;
+
+	@FindBy(css = "#CreatePageDialog")
+	protected WebElement addPageModal;
+	
+	@FindBy(css = ".UserLoginModal input[name='password']")
+	protected WebElement modalPasswordInput;
+	
+	
+	private By galleryDialogPhotosList = By
+			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
+	private By galleryDialogPhotoOrientationsList = By
+			.cssSelector("ul.clearfix[id='WikiaPhotoGalleryOrientation'] li");
+	private String videoAddVideoButtonSelector = "div.input-group.VideoEmbedNoBorder input";
+	private String videoReturnToEditingSelector = "input[value=\"Return to editing\"]";
+	private By galleryDialogSlideshowOrientationsList = By
+			.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
+	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
+	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
+	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
+
 	@FindBy (css = "#WikiaPageHeader h1")
 	private WebElement wikiFirstHeader;
+
 
 	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
 	private WebElement specialUserLoginLink;
@@ -104,22 +148,6 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = ".UserLoginModal input[name='username']")
 	protected WebElement modalUserNameInput;
 
-	@FindBy(css = ".UserLoginModal input[name='password']")
-	protected WebElement modalPasswordInput;
-
-	@FindBy(css = ".UserLoginModal input[type='submit']")
-	protected WebElement modalLoginSubmit;
-
-        @FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
-        protected WebElement contributeButton;
-
-        @FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
-        protected WebElement contributeAddPage;
-
-        @FindBy(css = "#CreatePageDialog")
-        protected WebElement addPageModal;
-
-    //Selectors
     protected String loginModalSelector = ".UserLoginModal";
 	
 	private String pageName;
@@ -133,6 +161,155 @@ public class WikiBasePageObject extends BasePageObject {
 	public String getWikiName() {
 		return Domain;
 	}
+
+	public void searchForImage(String name){
+//		waitForElementByElement(imageFindButton);
+		imageQuery.sendKeys(name);
+//		waitForElementByElement(imageQuery);
+		imageFindButton.click();
+		PageObjectLogging.log("searchForImage", "search for image: "+name, true);
+	}
+	
+	/**
+	 * Left Click on add Object button.
+	 *  
+	 * @author Michal Nowierski
+	 * @param Object Object = {Image, Gallery, Slideshow, Slider, Video}
+	 */
+	public VetAddVideoComponentObject clickOnAddObjectButton(String Object) {
+		String ObjectCss = "span.cke_button.RTE"+Object+"Button a";
+		WebElement ObjectButton;
+		waitForElementByCss(ObjectCss);
+		waitForElementClickableByCss(ObjectCss);
+		ObjectButton = driver.findElement(By.cssSelector(ObjectCss));
+		clickAndWait(ObjectButton);
+		PageObjectLogging.log("ClickOnAddObjectButton", "Edit Article: "+articlename+", on wiki: "+Domain+"", true, driver);
+		return new VetAddVideoComponentObject(driver);
+	}
+	
+	
+	/**
+	 * Set photo orientation option number n
+	 * 
+	 * @author Michal Nowierski
+	 * @param n
+	 *            = {1, 2}
+	 *            <p>
+	 *            1 - Horizontaal.
+	 *            <p>
+	 *            2 - Vertical
+	 * */
+	public void gallerySetSliderPosition(int n) {
+		List<WebElement> List = driver
+				.findElements(galleryDialogSlideshowOrientationsList);
+		waitForElementByElement(List.get(n - 1));
+		clickAndWait(List.get(n - 1));
+		PageObjectLogging.log("GallerySetSliderPosition",
+				"Set photo orientation option number " + n, true, driver);
+
+	}
+
+	/**
+	 * Set photo orientation option number n
+	 * 
+	 * @author Michal Nowierski
+	 * @param n
+	 *            = {1,2,3,4}
+	 *            <p>
+	 *            1 - Original.
+	 *            <p>
+	 *            2 - Square.
+	 *            <p>
+	 *            3 - Landscape.
+	 *            <p>
+	 *            4 - Portrait
+	 * */
+	public void gallerySetPhotoOrientation(int n) {
+		List<WebElement> List = driver
+				.findElements(galleryDialogPhotoOrientationsList);
+		waitForElementByElement(List.get(n - 1));
+		clickAndWait(List.get(n - 1));
+		PageObjectLogging.log("GallerySetPhotoOrientation",
+				"Set photo orientation option number " + n, true, driver);
+
+	}
+
+	/**
+	 * Set Object position to the wanted one
+	 * 
+	 * @author Michal Nowierski
+	 * @param Object
+	 *            {Gallery, Slideshow}
+	 * @param WantedPosition
+	 *            = {Left, Center, Right} !CASE SENSITIVITY! *
+	 */
+	public void gallerySetPositionGallery(String WantedPosition) {
+
+		Select select = new Select(
+				driver.findElement(By
+						.cssSelector("select[id='WikiaPhotoGalleryEditorGalleryPosition']")));
+		select.selectByVisibleText(WantedPosition);
+		// below code will make sure that proper position is selected
+		String category_name = select.getAllSelectedOptions().get(0).getText();
+		while (!category_name.equalsIgnoreCase(WantedPosition)) {
+			select.selectByVisibleText(WantedPosition);
+			category_name = select.getAllSelectedOptions().get(0).getText();
+
+		}
+		PageObjectLogging.log("GallerySetPosition", "Set gallery position to "
+				+ WantedPosition, true, driver);
+	}
+
+
+	public void gallerySetPositionSlideshow(String WantedPosition) {
+
+		Select select = new Select(
+				driver.findElement(By
+						.cssSelector("select[id='WikiaPhotoGalleryEditorSlideshowAlign']")));
+		select.selectByVisibleText(WantedPosition);
+		// below code will make sure that proper position is selected
+		String category_name = select.getAllSelectedOptions().get(0).getText();
+		while (!category_name.equalsIgnoreCase(WantedPosition)) {
+			select.selectByVisibleText(WantedPosition);
+			category_name = select.getAllSelectedOptions().get(0).getText();
+		}
+		PageObjectLogging.log("GallerySetPosition",
+				"Set slideshow position to " + WantedPosition, true, driver);
+	}
+
+
+	/**
+	 * Wait for Object and click on 'add this photo' under the first seen
+	 * 
+	 * @author Michal Nowierski
+	 * @param n
+	 *            n = parameter determining how many inputs the method should
+	 *            check
+	 * */
+	public void galleryCheckImageInputs(int n) {
+		driver.findElement(galleryDialogPhotosList);
+		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
+		for (int i = 0; i < n; i++) {
+			clickAndWait(List.get(i));
+		}
+		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + n
+				+ " image inputs", true, driver);
+	}
+
+	public void searchImageInLightBox(String imageName) {
+		waitForElementByElement(searchFieldImageInLightBox);
+		searchFieldImageInLightBox.sendKeys(imageName);
+		clickAndWait(searchButtonImageInLightBox);
+		waitForElementByElement(searchButtonImageInLightBox);
+	}
+
+
+
+
+
+
+    //Selectors
+
 	
 	/**
 	 * @author Michal Nowierski
@@ -468,6 +645,44 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyPrefooterAdsInvisible", "left and right prefooter ads are invisible", true, driver);
 	}
 
+	
+	public void verifyVideoOnTheLeftOnAritcle()
+	{
+		waitForElementByElement(videoOnLeftOfArticle);
+		PageObjectLogging.log("verifyVideoOnTheLeftOnAritcle", "Video appears on the left of the article page once published", true, driver);
+	}
+	
+	public void verifyVideoOnTheRightOnAritcle()
+	{
+		waitForElementByElement(videoOnRightOfArticle);
+		PageObjectLogging.log("verifyVideoOnTheRightOnAritcle", "Video appears on the right of the article page once published", true, driver);
+	}
+	
+	public void verifyVideoOnTheCenterOnArticle()
+	{
+		waitForElementByElement(videoOnCenterOfArticle);
+		PageObjectLogging.log("verifyVideoOnTheCenterOnAritcle", "Video appears on the center of the article page once published", true, driver);
+	}
+	
+	public void verifyVideoWidthOnAritcle()
+	{
+		waitForElementByElement(videoWidthOnArticle);
+		PageObjectLogging.log("verifyVideoWidthOnAritcle", "Video width is correct article page when page is published", true, driver);
+	}
+	
+	public void verifyVideoCaptionOnAritcle()
+	{
+		waitForElementByElement(videoCaptionOnArticle);
+		CommonExpectedConditions.textToBePresentInElement(videoCaptionOnArticle, "QAWebdriverCaption1");
+		PageObjectLogging.log("verifyVideoCaptionOnAritcle", "Video caption appears correctly in article page", true, driver);
+	}
+	
+	public void verifyNoVideoCaptionOnAritcle() {
+		waitForElementNotVisibleByElement(videoCaptionOnArticle);
+		PageObjectLogging.log("verifyNoVideoCaptionOnAritcle", "Verify that the video does not have a caption in the article page", true);
+				
+	}
+
         public void openSpecialPage(String specialPage) {
             getUrl(Domain + specialPage);
         }
@@ -566,4 +781,5 @@ public class WikiBasePageObject extends BasePageObject {
         WebElement body = driver.findElement(By.cssSelector("body"));
 	return (body.getAttribute("class").contains("mainpage"));
     }
+
 }

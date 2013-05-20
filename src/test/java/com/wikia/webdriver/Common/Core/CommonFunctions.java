@@ -85,7 +85,7 @@ public class CommonFunctions {
 		}
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.cssSelector("a[data-id='login']")));
-		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
+		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 	
 	public static void logOutMonobook() {
