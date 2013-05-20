@@ -50,6 +50,10 @@ public class SpecialThemeDesignerPageObject extends BasePageObject{
 	private WebElement faviconSubmit;
 	@FindBy(css="#FaviconUploadFile")
 	private WebElement faviconUpload;
+	@FindBy(css="ul[style='margin-left: -760px;']")
+	private WebElement secondThemesSet;
+	@FindBy(css="ul[style='margin-left: -1520px;']")
+	private WebElement thirdThemesSet;
 	
 	
 	
@@ -75,13 +79,16 @@ public class SpecialThemeDesignerPageObject extends BasePageObject{
 		}
 		if(number >=5 && number <10){
 			clickAndWait(nextButton);
+			waitForElementByElement(secondThemesSet);
 			waitForElementByElement(themes.get(number));
 			clickAndWait(themes.get(number));
 		}
 		if(number==10){
 			clickAndWait(nextButton);
+			waitForElementByElement(secondThemesSet);
 			waitForElementByElement(themes.get(7));
 			clickAndWait(nextButton);
+			waitForElementByElement(thirdThemesSet);
 			waitForElementByElement(themes.get(number));
 			clickAndWait(themes.get(number));
 		}

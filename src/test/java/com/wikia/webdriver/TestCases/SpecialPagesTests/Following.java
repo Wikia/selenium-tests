@@ -8,16 +8,17 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFollowPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogListingPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 public class Following extends TestTemplate{
 
-	String pageName;
+	String pageName, blogPostTitle;
 	
 	@Test(groups = {"Follow001", "Follow"})
 	public void follow001_Article(){
@@ -98,5 +99,25 @@ public class Following extends TestTemplate{
 		follow.openFollowingPage();
 		follow.verifyFollowedImageVideo(videoName);
 		video.unfollowVideo(videoName);
+	}
+	
+	
+	@Test(groups = {"Follow006", "Follow"})
+	public void follow006_FollowBlogListing(){
+		
+		SpecialCreateBlogListingPageObject blogList = new SpecialCreateBlogListingPageObject(driver);
+		blogList.openRandomArticleByUrl();
+		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		blogPostTitle = PageContent.blogListName+blogList.getTimeStamp();
+		blogList
+			.openCreateBlogListingPage()
+			.typeTitle(blogPostTitle)
+			.clickSavePageButton()
+			.verifyBlogListPage(blogPostTitle)
+			.followBlogListingPage(blogPostTitle);
+		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
+		follow.openFollowingPage();
+		follow.verifyFollowedBlogPost(blogPostTitle);
+		
 	}
 }
