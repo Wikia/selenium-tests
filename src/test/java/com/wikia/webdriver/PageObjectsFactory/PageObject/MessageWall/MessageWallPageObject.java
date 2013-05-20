@@ -65,6 +65,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement messageAuthor;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> messageBody;
+	@FindBys(@FindBy(css=".replies div.msg-body p"))
+	private List<WebElement> messageRepliesBody;
 	@FindBy(css="a#publish")
 	private WebElement publishButton;
 	@FindBy(css="a.cke_button_ModeSource .cke_icon")
@@ -239,6 +241,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
 		PageObjectLogging.log("verifyPostedMessageWithTitle", "message with title verified", true, driver);
+	}
+	/**
+	 * @param message
+	 * @param replyNumber Replies from the whole message wall count here!
+	 */
+	public void verifyPostedReplyWithMessage(String message, int replyNumber)
+	{
+		waitForTextToBePresentInElementByElement(messageRepliesBody.get(replyNumber-1), message);
+		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
