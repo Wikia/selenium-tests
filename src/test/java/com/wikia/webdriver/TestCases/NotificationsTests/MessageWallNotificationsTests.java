@@ -206,7 +206,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.verifyPostedMessageWithTitle(title, message);
 
 		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userNameStaff, Properties.passwordStaff, driver);
+		CommonFunctions.logIn(Properties.userName3, Properties.password3, driver);
 		
 		wall.openMessageWall(Properties.userName);
 		wall.reply(message);
