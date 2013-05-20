@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class Top_10_list extends WikiArticlePageObject{
 

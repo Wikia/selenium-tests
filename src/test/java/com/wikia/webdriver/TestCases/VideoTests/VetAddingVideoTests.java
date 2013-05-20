@@ -14,7 +14,8 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -83,7 +84,7 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.openRandomArticleByUrl();
 		article.verifyRVModulePresence();
 		VetAddVideoComponentObject vetAddingVideo = article.clickOnAddVideoRVModule();
-		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 4);
+		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 1);
 		article.verifyVideoAddedToRVModule(vetAddingVideo.getVideoName());
 	}
 	
