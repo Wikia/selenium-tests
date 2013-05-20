@@ -42,7 +42,6 @@ public class VetAddingVideoTests extends TestTemplate {
 	
 	@Test(groups = {"VetTests002", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_002_SpecialVideosLibrary() {
-		PageObjectLogging.log("", "ACTIVE BUG https://wikia.fogbugz.com/default.asp?97650", false);
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
@@ -119,7 +118,6 @@ public class VetAddingVideoTests extends TestTemplate {
 		
 	@Test(groups = {"VetTests007", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_007_ArticlePlaceholderEditModePageProvider() {
-		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
@@ -137,7 +135,6 @@ public class VetAddingVideoTests extends TestTemplate {
 	
 	@Test(groups = {"VetTests008", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_008_ArticlePlaceholderEditModePageLibrary() {
-		PageObjectLogging.log("", "ACTIVE BUG <a href=https://wikia.fogbugz.com/default.asp?97721>link</a>", false);
 		CommonFunctions.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
