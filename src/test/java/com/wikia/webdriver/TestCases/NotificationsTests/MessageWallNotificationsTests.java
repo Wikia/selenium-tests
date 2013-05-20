@@ -96,7 +96,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		Assertion.assertTrue(notificationMessageBody.contains("replied to your message"));
 	}
 
-	@Test(groups= {"MessageWallNotificationsTests_001", "MessageWallNotificationsTests",
+	@Test(groups= {"MessageWallNotificationsTests_006", "MessageWallNotificationsTests",
 			"NotificationsTests", "MessageWall"} )
 	public void messageWallNotificationsTests_006_oneNotificationPerThread() {
 		CommonFunctions.logOut(driver);
@@ -142,4 +142,10 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));		
 	}
 
+	@Test(groups= {"MessageWallNotificationsTests_006", "MessageWallNotificationsTests",
+			"NotificationsTests", "MessageWall"} )
+	public void messageWallNotificationsTests_007_notificationPerEveryThread() {
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+	}
 }
