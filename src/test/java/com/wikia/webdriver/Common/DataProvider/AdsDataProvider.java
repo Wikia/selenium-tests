@@ -8,21 +8,46 @@ import org.testng.annotations.DataProvider;
  */
 public class AdsDataProvider {
 
-    @DataProvider
-    public static final Object[][] popularSites() {
-        return new Object[][] {
+	@DataProvider
+	public static final Object[][] popularSites() {
+		return new Object[][] {
+			{"http://en.memory-alpha.org/wiki/Star_Trek_Into_Darkness"},
+			{"http://zh.pad.wikia.com/wiki/%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
+			{"http://zh.againstwar.wikia.com/wiki/%E9%80%86%E8%BD%89%E4%B8%89%E5%9C%8B_%E7%BB%B4%E5%9F%BA"},
+			{"http://zh.tos.wikia.com/wiki/Category:%E5%9C%96%E9%91%92"},
+			{"http://zh.pad.wikia.com/wiki/Category:%E5%AE%A0%E7%89%A9"},
+			{"http://es.drama.wikia.com/wiki/Portada"},
+			{"http://es.dragonball.wikia.com/wiki/Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
+			{"http://ru.elderscrolls.wikia.com/wiki/%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+			{"http://de.gta.wikia.com/wiki/Welding_%26_Weddings"},
+			{"http://it.creepypastaitalia.wikia.com/wiki/Slenderman"},
+			{"http://it.creepypastaitalia.wikia.com/wiki/Categoria:Creepypasta"},
+			{"http://ja.gundam.wikia.com/wiki/%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
+			{"http://ja.gundam.wikia.com/wiki/%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"},
             {"http://elderscrolls.wikia.com/wiki/Skyrim"},
-            {"http://zh.pad.wikia.com/wiki/%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
             {"http://leagueoflegends.wikia.com/wiki/League_of_Legends_Wiki"},
             {"http://runescape.wikia.com/wiki/RuneScape_Wiki"},
-            {"http://zh.againstwar.wikia.com/wiki/%E9%80%86%E8%BD%89%E4%B8%89%E5%9C%8B_%E7%BB%B4%E5%9F%BA"},
             {"http://yugioh.wikia.com/wiki/Main_Page"},
-            {"http://zh.tos.wikia.com/wiki/Category:%E5%9C%96%E9%91%92"},
-            {"http://zh.pad.wikia.com/wiki/Category:%E5%AE%A0%E7%89%A9"},
-            {"http://dragonvale.wikia.com/wiki/Eggs"},
-            {"http://naruto.wikia.com/wiki/Narutopedia"}
-        };
-    }
+			{"http://dragonvale.wikia.com/wiki/Eggs"},
+			{"http://naruto.wikia.com/wiki/Narutopedia"}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] mainWikiPages() {
+		return new Object[][] {
+			{"http://es.drama.wikia.com/wiki/Portada"},
+			{"http://de.memory-alpha.org/wiki/Hauptseite"},
+			{"http://it.squadraspecialecobra11.wikia.com/wiki/Squadra_speciale_Cobra_11"},
+			{"http://it.onepiece.wikia.com/wiki/One_Piece_Wiki_Italia"},
+			{"http://zh.pad.wikia.com/wiki/Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA"},
+			{"http://ja.gundam.wikia.com/wiki/%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"},
+			{"http://runescape.wikia.com/wiki/RuneScape_Wiki"},
+			{"http://naruto.wikia.com/wiki/Narutopedia"},
+			{"http://yugioh.wikia.com/wiki/Main_Page"},
+			{"http://ja.gundam.wikia.com/wiki/%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
+		};
+	}
 
 	@DataProvider
 	public static final Object[][] corporatePages() {
@@ -47,6 +72,12 @@ public class AdsDataProvider {
 			{"http://www.wikia.com"},
 			{"http://elderscrolls.wikia.com/wiki/Skyrim"},
 			{"http://de.gta.wikia.com/wiki/Welding_%26_Weddings"},
+			{"http://es.dragonball.wikia.com/wiki/Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
+			{"http://ru.elderscrolls.wikia.com/wiki/%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+			{"http://zh.pad.wikia.com/wiki/%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
+			{"http://en.memory-alpha.org/wiki/Star_Trek_Into_Darkness"},
+			{"http://it.creepypastaitalia.wikia.com/wiki/Categoria:Creepypasta"},
+			{"http://ja.gundam.wikia.com/wiki/%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"}
 //			{"http://wiki.ffxiclopedia.org/wiki/Category:Jobs"}
 		};
 	}
@@ -63,7 +94,15 @@ public class AdsDataProvider {
 			{"http://zh.pad.wikia.com/wiki/%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
 			{"http://yugioh.wikia.com/wiki/Lord_of_the_Tachyon_Galaxy"},
 			{"http://es.dragonball.wikia.com/wiki/Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
-			{"http://wiki.ffxiclopedia.org/wiki/Category:Jobs"}
+			{"http://wiki.ffxiclopedia.org/wiki/Category:Jobs"},
+			{"http://es.pokemon.wikia.com/wiki/Lista_de_Pok%C3%A9mon"},
+			{"http://es.horadeaventura.wikia.com/wiki/Lista_de_Episodios_de_Hora_de_Aventura"},
+			{"http://es.pokemon.wikia.com/wiki/Lista_de_Pok%C3%A9mon"},
+			{"http://es.horadeaventura.wikia.com/wiki/Lista_de_Episodios_de_Hora_de_Aventura"},
+			{"http://es.dragonball.wikia.com/wiki/Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
+			{"http://ru.elderscrolls.wikia.com/wiki/%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+			{"http://en.memory-alpha.org/wiki/Star_Trek_Into_Darkness"},
+			{"http://ja.gundam.wikia.com/wiki/%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"}
 		};
 	}
 
