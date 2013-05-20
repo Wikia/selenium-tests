@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.CustomizedToolbar.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
 
@@ -141,6 +142,49 @@ public class MessageWallNotificationsTests extends TestTemplate {
 				.findElement(By.cssSelector("div.msg-body")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName));
 		Assertion.assertTrue(notificationMessageBody.contains("replied to "+Properties.userName));
+	}
+	
+	@Test(groups= {"MessageWallNotificationsTests_004", "MessageWallNotificationsTests",
+			"NotificationsTests", "MessageWall"} )
+	public void messageWallNotificationsTests_004_followerReceivesNotificationAboutNewThread() {
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		
+		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		String timeStamp = wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
+		
+		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
+//		if (notifications.getNumberOfUnreadNotifications() > 0) {
+//			notifications.showNotifications();
+//			notifications.markNotificationsAsRead();
+//		}
+		
+		wall.openMessageWall(Properties.userName2);
+		CustomizedToolbarComponentObject CustomizedToolbar = new CustomizedToolbarComponentObject(driver);
+		CustomizedToolbar.unfollowIfFollowed();
+		CustomizedToolbar.verifyToolOnToolbar("Follow");
+		CustomizedToolbar.clickOnTool("follow");
+		CustomizedToolbar.verifyFollowedToolbar();
+		
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
+		
+		wall.openMessageWall(Properties.userName2);
+		wall.writeMessage(title, message);
+		wall.clickPostButton();
+		wall.verifyPostedMessageWithTitle(title, message);
+		
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+		
+		notifications.showNotifications();
+		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
+		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
+		Assertion.assertEquals(1, notificationsListForTitle.size());
+		String notificationMessageBody = notificationsListForTitle.get(0).findElement(By.cssSelector("div.msg-body")).getText();
+		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));	
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_006", "MessageWallNotificationsTests",
