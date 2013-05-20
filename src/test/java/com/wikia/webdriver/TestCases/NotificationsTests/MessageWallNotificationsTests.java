@@ -19,7 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWall
 /**
  * Scenarios for the tests:
  * https://internal.wikia-inc.com/wiki/Engineering/Wall_and_Forum_Notifications/Test_Scenarios
- * 
+ *
  * @author wikia
  *
  */
@@ -56,7 +56,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 				.findElement(By.cssSelector("div.msg-body")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName));
 	}
-	
+
 	@Test(groups= {"MessageWallNotificationsTests_002", "MessageWallNotificationsTests",
 			"NotificationsTests", "MessageWall"} )
 	public void messageWallNotificationsTests_002_threadCreatorSeesNotification() {
@@ -75,14 +75,15 @@ public class MessageWallNotificationsTests extends TestTemplate {
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
-		
+
 		wall.openMessageWall(Properties.userName2);
+		wall.openMessageWallThread(title);
 		wall.reply(message);
 		wall.verifyPostedReplyWithMessage(message, 1);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
 
@@ -96,7 +97,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName));
 		Assertion.assertTrue(notificationMessageBody.contains("replied to your message"));
 	}
-	
+
 	@Test(groups= {"MessageWallNotificationsTests_003", "MessageWallNotificationsTests",
 			"NotificationsTests", "MessageWall"} )
 	public void messageWallNotificationsTests_003_wallThreadParticipantSeesNotification() {
@@ -115,26 +116,28 @@ public class MessageWallNotificationsTests extends TestTemplate {
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
-		
+
 		wall.openMessageWall(Properties.userName);
+		wall.openMessageWallThread(title);
 		wall.reply(message);
 		wall.verifyPostedReplyWithMessage(message, 1);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		wall.openMessageWall(Properties.userName);
+		wall.openMessageWallThread(title);
 		wall.reply(message);
 		wall.verifyPostedReplyWithMessage(message, 2);
-		
+
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
-		
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
 
 		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
-	
+
 		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 
@@ -143,48 +146,48 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName));
 		Assertion.assertTrue(notificationMessageBody.contains("replied to "+Properties.userName));
 	}
-	
+
 	@Test(groups= {"MessageWallNotificationsTests_004", "MessageWallNotificationsTests",
 			"NotificationsTests", "MessageWall"} )
 	public void messageWallNotificationsTests_004_followerReceivesNotificationAboutNewThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
-		
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 //		if (notifications.getNumberOfUnreadNotifications() > 0) {
 //			notifications.showNotifications();
 //			notifications.markNotificationsAsRead();
 //		}
-		
+
 		wall.openMessageWall(Properties.userName2);
 		CustomizedToolbarComponentObject CustomizedToolbar = new CustomizedToolbarComponentObject(driver);
 		CustomizedToolbar.unfollowIfFollowed();
 		CustomizedToolbar.verifyToolOnToolbar("Follow");
 		CustomizedToolbar.clickOnTool("follow");
 		CustomizedToolbar.verifyFollowedToolbar();
-		
+
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
-		
+
 		wall.openMessageWall(Properties.userName2);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
-		
+
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		notifications.showNotifications();
 		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
 		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0).findElement(By.cssSelector("div.msg-body")).getText();
-		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));	
+		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_006", "MessageWallNotificationsTests",
@@ -192,14 +195,14 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	public void messageWallNotificationsTests_006_oneNotificationPerThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		if (notifications.getNumberOfUnreadNotifications() > 0) {
 			notifications.showNotifications();
 			notifications.markNotificationsAsRead();
 		}
 		CommonFunctions.logOut(driver);
-		
+
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
 
 		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
@@ -211,59 +214,20 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
-		
+
 		wall.openMessageWallThread(title);
 		timeStamp = wall.getTimeStamp();
 		String replyMessage = PageContent.messageWallMessagePrefix + "_reply_" + timeStamp;
 		wall.reply(replyMessage);
 		wall.verifyPostedReplyWithMessage(replyMessage, 1);
 		CommonFunctions.logOut(driver);
-		
+
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		notifications = new NotificationsComponentObject(driver); //?
 		notifications.showNotifications();
 
-		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());		
-		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
-		Assertion.assertEquals(1, notificationsListForTitle.size());
-
-		String notificationMessageBody = notificationsListForTitle.get(0)
-				.findElement(By.cssSelector("div.msg-body")).getText();
-		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));		
-	}
-	
-	@Test(groups= {"MessageWallNotificationsTests_008", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
-	public void messageWallNotificationsTests_008_twoUsersCreatingAndRespondingToTheSameThread() {	
-		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
-
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
-		String timeStamp = wall.getTimeStamp();
-		String title = PageContent.messageWallTitlePrefix + timeStamp;
-		String message = PageContent.messageWallMessagePrefix + timeStamp;
-
-		wall.openMessageWall(Properties.userName);
-		wall.writeMessage(title, message);
-		wall.clickPostButton();
-		wall.verifyPostedMessageWithTitle(title, message);
-
-		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userName3, Properties.password3, driver);
-		
-		wall.openMessageWall(Properties.userName);
-		wall.reply(message);
-		wall.verifyPostedReplyWithMessage(message, 1);
-
-		CommonFunctions.logOut(driver);
-		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
-		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
-		notifications.showNotifications();
-
 		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
-	
 		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 
@@ -271,10 +235,50 @@ public class MessageWallNotificationsTests extends TestTemplate {
 				.findElement(By.cssSelector("div.msg-body")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));
 	}
-	
+
+	@Test(groups= {"MessageWallNotificationsTests_008", "MessageWallNotificationsTests",
+			"NotificationsTests", "MessageWall"} )
+	public void messageWallNotificationsTests_008_twoUsersCreatingAndRespondingToTheSameThread() {
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
+
+		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		String timeStamp = wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
+
+		wall.openMessageWall(Properties.userName);
+		wall.writeMessage(title, message);
+		wall.clickPostButton();
+		wall.verifyPostedMessageWithTitle(title, message);
+
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName3, Properties.password3, driver);
+
+		wall.openMessageWall(Properties.userName);
+		wall.openMessageWallThread(title);
+		wall.reply(message);
+		wall.verifyPostedReplyWithMessage(message, 1);
+
+		CommonFunctions.logOut(driver);
+		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
+
+		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
+		notifications.showNotifications();
+
+		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
+
+		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
+		Assertion.assertEquals(1, notificationsListForTitle.size());
+
+		String notificationMessageBody = notificationsListForTitle.get(0)
+				.findElement(By.cssSelector("div.msg-body")).getText();
+		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));
+	}
+
 	@Test(groups= {"MessageWallNotificationsTests_009", "MessageWallNotificationsTests",
 			"NotificationsTests", "MessageWall"} )
-	public void messageWallNotificationsTests_009_threeUsersCreatingAndRespondingToTheSameThread() {	
+	public void messageWallNotificationsTests_009_threeUsersCreatingAndRespondingToTheSameThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
 
@@ -290,26 +294,28 @@ public class MessageWallNotificationsTests extends TestTemplate {
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName3, Properties.password3, driver);
-		
+
 		wall.openMessageWall(Properties.userName4);
+		wall.openMessageWallThread(title);
 		wall.reply(message);
 		wall.verifyPostedReplyWithMessage(message, 1);
-		
+
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		wall.openMessageWall(Properties.userName4);
+		wall.openMessageWallThread(title);
 		wall.reply(message);
 		wall.verifyPostedReplyWithMessage(message, 2);
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName4, Properties.password4, driver);
-		
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
 
 		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
-	
+
 		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 
