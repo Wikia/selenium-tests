@@ -45,7 +45,7 @@ public class VetProvidersTests extends TestTemplate{
 				};
 			}
 			
-			@Test(dataProvider="provideVideo", groups={"VetProvidersTests001", "VetTests"}) 
+			@Test(dataProvider="provideVideo", groups={"VetProvidersTests001", "VetTests", "VetProviders"}) 
 			public void ArticleVideo001_AddingProviderVideosVET(String videoURL, String name)
 			{
 				PageObjectLogging.log("", videoURL, true);
@@ -68,7 +68,7 @@ public class VetProvidersTests extends TestTemplate{
 				fileDetails.verifyEmbeddedVideoIsPresent();	
 			}
 			
-			@Test(dataProvider="provideVideo", groups={"VetProvidersTests002", "VetTests"}) 
+			@Test(dataProvider="provideVideo", groups={"VetProvidersTests002", "VetTests", "VetProviders"}) 
 			public void ArticleVideo002_AddingProviderVideosRVModule(String videoUrl, String name)
 			{
 				PageObjectLogging.log("", videoUrl, true);
