@@ -36,6 +36,10 @@ public class NotificationsComponentObject extends BasePageObject{
 	private WebElement notifications;
 	@FindBy(css="#bubbles_count")
 	private WebElement bubblesCount;	
+	@FindBy(css="#wall-notifications-markasread-sub")
+	private WebElement markNotificationsAsRead;
+	@FindBy(css="#wall-notifications-markasread-all-wikis")
+	private WebElement markNotificationsAsReadAllWikis;
 
 	/**
 	 * expand the notifications and wait until the notifications for the current wiki are loaded
@@ -88,7 +92,7 @@ public class NotificationsComponentObject extends BasePageObject{
 	
 	/**
 	 * This should be called after expanding the notifications dropdown
-	 * Ii will return a list of unread notifications that have a given title
+	 * It will return a list of unread notifications that have a given title
 	 */
 	public ArrayList<WebElement> getUnreadNotificationsForTitle(String title) {
 		ArrayList<WebElement> notifications = new ArrayList<WebElement>();
@@ -102,6 +106,20 @@ public class NotificationsComponentObject extends BasePageObject{
 			}
 		}		
 		return notifications;
+	}
+		
+	/**
+	 * This should be called after expanding the notifications dropdown.
+	 * It marks all the notifications as read
+	 * 
+	 */
+	public void markNotificationsAsRead() {
+		if (this.getNumberOfUnreadNotifications() > 0) {
+			this.click(this.markNotificationsAsRead);
+			this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
+			this.click(this.markNotificationsAsReadAllWikis);
+			this.waitForElementNotPresent("#WallNotifications > li > div.reddot");			
+		}
 	}
 	
 }
