@@ -40,6 +40,8 @@ public class NotificationsComponentObject extends BasePageObject{
 	private WebElement markNotificationsAsRead;
 	@FindBy(css="#wall-notifications-markasread-all-wikis")
 	private WebElement markNotificationsAsReadAllWikis;
+	@FindBy(css="#wall-notifications-markasread-this-wiki")
+	private WebElement markNotificationsAsReadThisWiki;
 
 	/**
 	 * expand the notifications and wait until the notifications for the current wiki are loaded
@@ -115,9 +117,13 @@ public class NotificationsComponentObject extends BasePageObject{
 	 */
 	public void markNotificationsAsRead() {
 		if (this.getNumberOfUnreadNotifications() > 0) {
-			this.click(this.markNotificationsAsRead);
-			this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
-			this.click(this.markNotificationsAsReadAllWikis);
+			if (this.markNotificationsAsReadThisWiki.isDisplayed()) {
+				this.click(this.markNotificationsAsReadThisWiki);
+			} else {
+				this.click(this.markNotificationsAsRead);
+				this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
+				this.click(this.markNotificationsAsReadAllWikis);
+			}			
 			this.waitForElementNotPresent("#WallNotifications > li > div.reddot");			
 		}
 	}
