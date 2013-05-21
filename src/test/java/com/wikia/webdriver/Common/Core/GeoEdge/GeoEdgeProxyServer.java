@@ -1,4 +1,4 @@
-package com.wikia.webdriver.Common.Templates;
+package com.wikia.webdriver.Common.Core.GeoEdge;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;

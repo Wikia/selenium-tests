@@ -1,16 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
@@ -24,10 +13,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultiple
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -90,8 +88,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement addPageModal;
 	@FindBy(css = ".UserLoginModal input[name='password']")
 	protected WebElement modalPasswordInput;
-	
-	
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By
@@ -114,8 +110,13 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = ".UserLoginModal input[name='username']")
 	protected WebElement modalUserNameInput;
 
+	@FindBy(css="#AccountNavigation > li > a > .avatar")
+	protected WebElement userProfileAvatar;
+	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
+	protected WebElement navigationLogoutLink;
+
+    //Selectors
     protected String loginModalSelector = ".UserLoginModal";
-	
 	private String pageName;
 
 	public WikiBasePageObject(WebDriver driver, String Domain) {
@@ -258,6 +259,22 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(deleteConfirmationButton);
 		waitForElementByElement(deleteCommentConfirmationMessage);
 
+	}
+
+	/**
+     * Verify if user is logged in
+     * Check if link to user's Profile contains user's name
+     *
+     * @param userName
+     */
+    public void verifyUserLoggedIn(String userName) {
+		waitForElementByElement(userProfileAvatar);
+		waitForElementByElement(navigationLogoutLink);
+		PageObjectLogging.log(
+			"LgoutLinkPresent",
+			"Verify that logout link is present in navigation dropdown",
+			true
+		);
 	}
 
 	protected void clickArticleDeleteConfirmationButton(String atricleName) {

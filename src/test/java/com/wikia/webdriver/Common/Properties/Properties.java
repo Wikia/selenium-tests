@@ -1,23 +1,19 @@
 package com.wikia.webdriver.Common.Properties;
 
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.XMLFunctions;
 import java.io.File;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.XMLFunctions;
 
 public class Properties {
 
 	private static void setPropertiesManually()
 	{
 		Global.BROWSER = "FF";
-//		Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
 		Global.DOMAIN = "http://mediawiki119.wikia.com/";
-//		Global.DOMAIN = "http://sandbox-qa05.mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
@@ -31,7 +27,7 @@ public class Properties {
 		}
 		Global.LOG_ENABLED = true;
 	}
-	
+
 	public static String userName;
 	public static String password;
 	
@@ -41,17 +37,17 @@ public class Properties {
 	public static String userNameNonLatin;
 	public static String userNameNonLatinEncoded;
 	public static String passwordNonLatin;
-	
+
 	public static String userNameWithUnderScore;
 	public static String passwordWithUnderScore;
-	
+
 	public static String userNameWithBackwardSlash;
 	public static String userNameWithBackwardSlashEncoded;
 	public static String passwordWithBackwardSlash;
-	
+
 	public static String userNameLong;
 	public static String passwordLong;
-	
+
 	public static String email;
 	public static String emailPassword;
 	public static String emailQaart1;
@@ -75,13 +71,13 @@ public class Properties {
 
 	public static String userNameForgottenPassword;
 	public static String userNameForgottenPassword2;
-	
+
 	public static String geoEdgeUserName;
 	public static String geoEdgeUserPass;
-	
+
 	public static String apiToken;
-	
-	private static void setVariables(){	
+
+	private static void setVariables() {
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
 		
@@ -129,7 +125,7 @@ public class Properties {
 
 		geoEdgeUserName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.userName");
 		geoEdgeUserPass = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.AdsConfig.GeoEdgeCredentials.password");
-		
+
 		apiToken = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.api.token");
 	}
 
@@ -150,15 +146,21 @@ public class Properties {
 		Global.CAPTCHA_FILE = new File(System.getProperty("captcha"));
 		Global.DOMAIN = System.getProperty("base-address");
 		Global.LIVE_DOMAIN = System.getProperty("live-domain");
+		Global.ENV = System.getProperty("env");
+		Global.QS = System.getProperty("qs");
 		Global.LOG_VERBOSE = 2;
-		if (Global.DOMAIN.contains("dev"))
-		{
-			Global.LOGIN_BY_COOKIE = false;
+
+		try {
+			if (Global.DOMAIN.contains("dev") || Global.ENV.contains("dev"))
+			{
+				Global.LOGIN_BY_COOKIE = false;
+			} else {
+				Global.LOGIN_BY_COOKIE = true;
+			}
+		} catch (NullPointerException ex) {
+
 		}
-		else{
-			Global.LOGIN_BY_COOKIE = true;
-		}
-		Global.LOG_ENABLED = true; 
+		Global.LOG_ENABLED = true;
 	}
 
 	private static void getWikiVersion()

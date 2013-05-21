@@ -43,11 +43,11 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.PhalanxTests.BlockPageTitleTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.BasicLayoutTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsInContentTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsOnCorporatePageTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.NoAdsForLoggedUsersTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.AdsOnHubsTests"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsInContent"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestBasicLayout"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnHubs"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>  
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>

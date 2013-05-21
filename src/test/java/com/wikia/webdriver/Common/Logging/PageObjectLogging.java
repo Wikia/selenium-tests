@@ -75,9 +75,7 @@ public class PageObjectLogging implements WebDriverEventListener {
 		{
 			System.out.println("no script.txt file available");
 		}
-		
 	}
-	
 
 	public static void stopLoggingSuite() {
 		String l1 = "</body></html>";
@@ -303,12 +301,12 @@ public class PageObjectLogging implements WebDriverEventListener {
 			}
 		}
 	}
-	
+
 	private static void logJSError(WebDriver driver){
 		if (Global.JS_ERROR_ENABLED){
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
-			if (!(error.size()==0)){			
+			if (!error.isEmpty()) {
 				String s1 = "<tr class=\"error\"><td>click</td><td>"+error+"</td><td> <br/> &nbsp;</td></tr>";
 				CommonUtils.appendTextToFile(logPath, s1);
 			}
