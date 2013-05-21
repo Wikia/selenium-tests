@@ -76,7 +76,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement oKbutton;
 	@FindBy(css="img.video")
 	private WebElement videoInEditMode;
-	@FindBy(css="div.ArticlePreview img.sprite.play")
+	@FindBy(css="div.ArticlePreview div.Wikia-video-play-button")
 	private WebElement videoOnPreview;
 	@FindBy(css="span.cke_button_ModeWysiwyg a")
 	private WebElement visualModeButton;
@@ -165,8 +165,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement centerAlignedVideoOnPreview;
 	@FindBy(css="img[width='250']")
 	private WebElement videoWidthEditor;
-	@FindBy(css="div[style*='width:250px']")
-	private WebElement videoWidthPreview;
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;	
 	
@@ -1170,8 +1168,9 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("verifyVideoWidthInEditMode", "Video width in editor is exactly the same as value set in VET modal", true, driver);
 	}
 	
-	public void verifyVideoWidthOnPreview() {
-		waitForElementByElement(videoWidthPreview);
+	public void verifyVideoWidthOnPreview(String width) {
+		waitForElementByElement(videoOnPreview);
+		Assertion.assertEquals(width, videoOnPreview.getCssValue("width"));
 		PageObjectLogging.log("verifyVideoWidthOnPreview", "Video width in preview is exactly the same as value set in VET modal", true, driver);
 	}
 	

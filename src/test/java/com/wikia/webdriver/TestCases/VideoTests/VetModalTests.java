@@ -334,7 +334,7 @@ public class VetModalTests extends TestTemplate {
 		edit.clickOnSourceButton();
 		edit.verifyWikiTextInSourceMode("250");
 		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoWidthOnAritcle();
+		wiki.verifyVideoWidthOnAritcle("250px");
 		CommonFunctions.logoutCookie(cookieName);
 
 	}
@@ -367,10 +367,10 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyWikiTextInSourceMode("250");
 		edit.clickOnVisualButton();
 		edit.clickOnPreviewButton();
-		edit.verifyVideoWidthOnPreview();
+		edit.verifyVideoWidthOnPreview("250px");
 		edit.clickClosePreviewModalButton();
 		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoWidthOnAritcle();
+		wiki.verifyVideoWidthOnAritcle("250px");
 		CommonFunctions.logoutCookie(cookieName);
 
 	}
@@ -399,7 +399,7 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.submit();
 		edit.verifyVideoWidthInEditMode();
 		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoWidthOnAritcle();
+		wiki.verifyVideoWidthOnAritcle("250px");
 		edit = wiki.clickEditButton(pageName);
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyVideoWidthInVETOptionsModal();

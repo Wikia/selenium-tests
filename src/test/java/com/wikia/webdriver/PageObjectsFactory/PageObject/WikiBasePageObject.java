@@ -481,10 +481,10 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyVideoOnTheCenterOnAritcle", "Video appears on the center of the article page once published", true, driver);
 	}
 	
-	public void verifyVideoWidthOnAritcle()
+	public void verifyVideoWidthOnAritcle(String width)
 	{
 		waitForElementByElement(videoOnArticle);
-		Assertion.assertEquals("250", videoOnArticle.getCssValue("width"));
+		Assertion.assertEquals(width, videoOnArticle.getCssValue("width"));
 		PageObjectLogging.log("verifyVideoWidthOnAritcle", "Video width is correct article page when page is published", true, driver);
 	}
 	
