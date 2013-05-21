@@ -108,8 +108,10 @@
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
-						<config>../../../selenium-config/config.xml</config>
-						<captcha>../../../selenium-config/captcha.txt</captcha>
+						<env>${env}</env>
+						<qs>${qs}</qs>
+						<config>/selenium-config/config.xml</config>
+						<captcha>/selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/suiteFailed.xml</suiteXmlFile>
