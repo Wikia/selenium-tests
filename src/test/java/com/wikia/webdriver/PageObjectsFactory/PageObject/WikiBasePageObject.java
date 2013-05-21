@@ -76,8 +76,8 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement videoOnRightOfArticle;
 	@FindBy(css="figure.tnone")
 	private WebElement videoOnCenterOfArticle;
-	@FindBy(css="#WikiaArticle div[style*='width:250px']")
-	private WebElement videoWidthOnArticle;
+	@FindBy(css="#WikiaArticle div.Wikia-video-play-button")
+	private WebElement videoOnArticle;
 	@FindBy(css="figcaption.thumbcaption")
 	private WebElement videoCaptionOnArticle;
 	@FindBy(css = ".UserLoginModal input[type='submit']")
@@ -483,7 +483,8 @@ public class WikiBasePageObject extends BasePageObject {
 	
 	public void verifyVideoWidthOnAritcle()
 	{
-		waitForElementByElement(videoWidthOnArticle);
+		waitForElementByElement(videoOnArticle);
+		Assertion.assertEquals("250", videoOnArticle.getCssValue("width"));
 		PageObjectLogging.log("verifyVideoWidthOnAritcle", "Video width is correct article page when page is published", true, driver);
 	}
 	
