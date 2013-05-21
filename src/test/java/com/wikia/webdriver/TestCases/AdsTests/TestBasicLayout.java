@@ -94,4 +94,31 @@ public class TestBasicLayout extends AdsTestTemplate {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
+
+	@GeoEdgeProxy(country="JP")
+	@Test (
+		groups={"Ads_Basic_Layout_008", "JP"}
+	)
+	public void TestBasicLayout_JP() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
+
+	@GeoEdgeProxy(country="IT")
+	@Test (
+		groups={"Ads_Basic_Layout_009", "IT"}
+	)
+	public void TestBasicLayout_IT() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
+
+	@GeoEdgeProxy(country="RU")
+	@Test (
+		groups={"Ads_Basic_Layout_010", "RU"}
+	)
+	public void TestBasicLayout_RU() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyTopLeaderBoardAndMedrec();
+	}
 }

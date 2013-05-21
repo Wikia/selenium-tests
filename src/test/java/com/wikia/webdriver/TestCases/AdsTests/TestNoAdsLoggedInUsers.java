@@ -110,4 +110,34 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
+
+	@GeoEdgeProxy(country="RU")
+	@Test (
+		groups={"NoAdsForUsers_007", "RU"}
+	)
+	public void TestNoAdsForUsers_RU() throws Exception {
+		loginSteps();
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
+
+	@GeoEdgeProxy(country="JP")
+	@Test (
+		groups={"NoAdsForUsers_009", "JP"}
+	)
+	public void TestNoAdsForUsers_JP() throws Exception {
+		loginSteps();
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
+
+	@GeoEdgeProxy(country="IT")
+	@Test (
+		groups={"NoAdsForUsers_010", "IT"}
+	)
+	public void TestNoAdsForUsers_IT() throws Exception {
+		loginSteps();
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
 }

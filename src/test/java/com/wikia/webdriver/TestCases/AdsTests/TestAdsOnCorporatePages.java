@@ -98,4 +98,31 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
+
+	@GeoEdgeProxy(country="IT")
+	@Test (
+		groups={"Ads_Corporate_Page_008", "IT"}
+	)
+	public void TestCorporatePage_IT() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
+
+	@GeoEdgeProxy(country="RU")
+	@Test (
+		groups={"Ads_Corporate_Page_009", "RU"}
+	)
+	public void TestCorporatePage_RU() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
+
+	@GeoEdgeProxy(country="JP")
+	@Test (
+		groups={"Ads_Corporate_Page_010", "JP"}
+	)
+	public void TestCorporatePage_JP() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
 }
