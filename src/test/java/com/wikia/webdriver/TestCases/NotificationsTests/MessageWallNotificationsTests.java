@@ -159,10 +159,10 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
-//		if (notifications.getNumberOfUnreadNotifications() > 0) {
-//			notifications.showNotifications();
-//			notifications.markNotificationsAsRead();
-//		}
+		if (notifications.getNumberOfUnreadNotifications() > 0) {
+			notifications.showNotifications();
+			notifications.markNotificationsAsRead();
+		}
 
 		wall.openMessageWall(Properties.userName2);
 		CustomizedToolbarComponentObject CustomizedToolbar = new CustomizedToolbarComponentObject(driver);
@@ -272,8 +272,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		
 		notifications.showNotifications();
 		
-		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
-		Assertion.assertNotEquals(1, notifications.getNumberOfUnreadNotifications());
+		Assertion.assertTrue(notifications.getNumberOfUnreadNotifications() > 1);
 		
 		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
