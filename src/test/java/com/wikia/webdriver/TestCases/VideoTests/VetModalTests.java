@@ -27,6 +27,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests001", "VetModalTests" })
 	public void Vet_Tests_001_VerifyLeftAlignmentOnEditorSourceAndArticle() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
 		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);

@@ -14,7 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 public class VetOptionsComponentObject extends BasePageObject{
 
 	//generic
-		@FindBy(css="#VideoEmbedHeader")
+		@FindBy(css=".main-header")
 		private WebElement videoOptionsHeader;
 		@FindBy(css="#VideoEmbedLayoutRow")
 		private WebElement videoEmbedLayotRow;
@@ -214,7 +214,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 	}
 	
 	public void verifyVideoNameFieldIsNotEditable(){
-		waitForElementByElement(uneditableVideoNameField);
+		waitForElementNotVisibleByElement(uneditableVideoNameField);
 		PageObjectLogging.log("verifyVideoNameFieldIsNotEditable", "Verified that Video Name Field is not editable",  true, driver);
 	}
 	
