@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,15 +47,12 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement positionLayoutRightSelected;
 		@FindBy(css="span#VET_LayoutCenterBox.selected")
 		private WebElement positionLayoutCenterSelected;
-		
 		@FindBy(css="input[type='hidden'][id='VideoEmbedName']")
 		private WebElement uneditableVideoNameField;
 		@FindBy(css="input[type='text'][id='VideoEmbedName']")
 		private WebElement editableVideoNameField;
-		
-		
-		
-		
+		@FindBy(css="div#VideoEmbedThumb div")
+		private WebElement videoThumbnail;
 		@FindBy(css="div#VideoEmbedNameRow p")
 		private WebElement videoNameCaption;
 	
@@ -121,7 +119,18 @@ public class VetOptionsComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickReturnToEditing", "return to editing button clicked",  true, driver);
 	}
 	
+	private void verifyVideoThumbnail(){
+		waitForElementByElement(videoThumbnail);
+		Dimension dim = videoThumbnail.getSize();
+		int h = dim.getHeight();
+		int w = dim.getWidth();
+		Assertion.assertEquals(h, 232);
+		Assertion.assertEquals(w, 350);
+		PageObjectLogging.log("verifyVideoThumbnail", "video thumbnail is visible",  true);
+	}
+	
 	public WikiArticleEditMode submit(){
+		verifyVideoThumbnail();
 		clickAddaVideo();
 		clickRetunToEditing();
 		return new WikiArticleEditMode(driver, Domain, Domain);
