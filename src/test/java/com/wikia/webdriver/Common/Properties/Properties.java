@@ -151,7 +151,7 @@ public class Properties {
 		Global.LOG_VERBOSE = 2;
 
 		try {
-			if (Global.DOMAIN.contains("dev") || Global.ENV.contains("dev"))
+			if (Global.DOMAIN.contains("dev"))
 			{
 				Global.LOGIN_BY_COOKIE = false;
 			} else {
