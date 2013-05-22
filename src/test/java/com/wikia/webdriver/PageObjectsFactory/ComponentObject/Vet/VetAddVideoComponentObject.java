@@ -41,6 +41,12 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	private WebElement findButton;	
 	@FindBys(@FindBy(css="#VET-suggestions li"))
 	private List<WebElement> videoList;
+	@FindBys(@FindBy(css="#VET-suggestions .Wikia-video-play-button"))
+	private List<WebElement> videoThumbnailsList;
+	@FindBy(css=".Wikia-video-enabledEmbedCode")
+	private WebElement videoThumbnail;
+	
+	
 	private By videoNameSelector = By.cssSelector("strong");
 	private By addVideoLibraryLink = By.cssSelector("li a[href*='http']");
 	
@@ -130,8 +136,20 @@ public class VetAddVideoComponentObject extends BasePageObject{
 		typeInSearchQuery(query);
 		clickFindButton();
 		checkIfLibraryIsPresent();
+		clickVideoThumbnail(i);
+		checkVideoPreviewAppearing();
 		clickAddVideoLibrary(i);
 		return new VetOptionsComponentObject(driver);
+	}
+	
+	private void clickVideoThumbnail(int i){
+		videoThumbnailsList.get(i).click();
+		PageObjectLogging.log("clickVideoThumbnail", "video thumbnails clicked", true);
+	}
+	
+	private void checkVideoPreviewAppearing(){
+		waitForElementByElement(videoThumbnail);
+		PageObjectLogging.log("checkVideoPreviewAppearing", "video preview appeared", true);
 	}
 	
 	public String getVideoName(){
