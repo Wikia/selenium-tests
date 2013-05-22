@@ -122,9 +122,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 	private void verifyVideoThumbnail(){
 		waitForElementByElement(videoThumbnail);
 		Dimension dim = videoThumbnail.getSize();
-		int h = dim.getHeight();
 		int w = dim.getWidth();
-		Assertion.assertEquals(h, 232);
 		Assertion.assertEquals(w, 350);
 		PageObjectLogging.log("verifyVideoThumbnail", "video thumbnail is visible",  true);
 	}
