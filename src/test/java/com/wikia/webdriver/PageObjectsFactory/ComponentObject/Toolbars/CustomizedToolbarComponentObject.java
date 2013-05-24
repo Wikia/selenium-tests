@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.ComponentObject.CustomizedToolbar;
+package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars;
 
 import java.util.List;
 
