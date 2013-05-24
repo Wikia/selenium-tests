@@ -30,8 +30,8 @@ public class Top_10_list extends WikiArticlePageObject{
 	By itemsVotesList = new By.ByCssSelector("#toplists-list-body div.ItemVotes");
 	By itemsNumberList = new By.ByCssSelector("#toplists-list-body div.ItemNumber");
 	
-	public Top_10_list(WebDriver driver, String Domain, String wikiArticle) {
-		super(driver, Domain, wikiArticle);
+	public Top_10_list(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -68,7 +68,7 @@ public class Top_10_list extends WikiArticlePageObject{
 		waitForElementByElement(editButtonForAnon);
 		executeScript("$('#ca-viewsource').click()");
 		PageObjectLogging.log("clickEdit", "click on edit button", true, driver);
-		return new Top_10_list_EditMode(driver, Domain);				
+		return new Top_10_list_EditMode(driver);				
 	}
 	
 	public Top_10_list_EditMode clickEditAsLoggedIn() {
@@ -76,7 +76,7 @@ public class Top_10_list extends WikiArticlePageObject{
 		this.clickEditButton("whatever");
 		executeScript("$('#ca-edit').click()");
 		PageObjectLogging.log("clickEditAsLoggedIn", "click on edit button", true, driver);
-		return new Top_10_list_EditMode(driver, Domain);			
+		return new Top_10_list_EditMode(driver);			
 	}
 
 	public void verifyPhotoOnTop10page(String photoName) {

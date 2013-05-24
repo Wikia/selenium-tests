@@ -104,7 +104,7 @@ public class UserProfilePageObject extends BasePageObject{
 		waitForElementClickableByElement(createBlogPostButton);
 		clickAndWait(createBlogPostButton);
 		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);		
-		return new SpecialCreateBlogPageObject(driver, this.Domain, this.articlename);
+		return new SpecialCreateBlogPageObject(driver);
 	}
 	
 	

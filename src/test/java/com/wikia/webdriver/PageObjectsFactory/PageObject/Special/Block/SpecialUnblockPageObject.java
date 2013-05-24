@@ -26,8 +26,8 @@ public class SpecialUnblockPageObject extends WikiBasePageObject{
 //	@FindBy(xpath="//a[@href='/wiki/Special:Block/TooManyLogInAttempts' and contains(text(), 're-block')]")
 //	private WebElement unblockedUserMassage3;
 	
-	public SpecialUnblockPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
+	public SpecialUnblockPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -36,7 +36,7 @@ public class SpecialUnblockPageObject extends WikiBasePageObject{
 		waitForElementByElement(userNameField);
 		waitForElementByElement(submitButton);
 		PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true, driver);
-		return new SpecialUnblockPageObject(driver, this.Domain);
+		return new SpecialUnblockPageObject(driver);
 	}
 	
 	private void typeInUserName(String userName){

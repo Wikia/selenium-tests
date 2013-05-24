@@ -36,8 +36,8 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 	private WebElement backToPageLinkOnRollbackPage;
 
 	
-	public WikiHistoryPageObject(WebDriver driver, String Domain, String articlename) {
-		super(driver, Domain);
+	public WikiHistoryPageObject(WebDriver driver) {
+		super(driver);
 		this.articlename = articlename;
 		PageFactory.initElements(driver, this);
 	}
@@ -61,7 +61,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 	{
 		waitForElementByElement(backToPageLinkOnRollbackPage);
 		clickAndWait(backToPageLinkOnRollbackPage);
-		return new WikiArticlePageObject(driver, Domain, articlename);
+		return new WikiArticlePageObject(driver);
 	}
 	
 	/*Author: Michal Nowierski

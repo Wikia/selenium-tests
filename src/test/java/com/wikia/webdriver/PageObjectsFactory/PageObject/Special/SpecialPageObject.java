@@ -18,7 +18,7 @@ public class SpecialPageObject extends WikiBasePageObject {
     protected WebElement specialPageHeader;
 
     public SpecialPageObject(WebDriver driver) {
-        super(driver, Global.DOMAIN);
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 

@@ -40,9 +40,9 @@ public class LoginTests extends TestTemplate {
         ) {
             PageObjectLogging.log("Login_002_DropDown", userName, true);
             CommonFunctions.logOut(driver);
-            WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+            WikiBasePageObject base = new WikiBasePageObject(driver);
             base.openWikiPage();
-            DropDownComponentObject dropDown = new DropDownComponentObject(driver, Global.DOMAIN);
+            DropDownComponentObject dropDown = new DropDownComponentObject(driver);
             dropDown.openDropDown();
             dropDown.logIn(userName, password);
             base.verifyUserLoggedIn(userName);
@@ -53,9 +53,9 @@ public class LoginTests extends TestTemplate {
 	public void Login_003_Facebook_dropDown() {
             CommonFunctions.logOut(driver);
 
-            WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+            WikiBasePageObject base = new WikiBasePageObject(driver);
             base.openWikiPage();
-            DropDownComponentObject dropdown = new DropDownComponentObject(driver, Global.DOMAIN);
+            DropDownComponentObject dropdown = new DropDownComponentObject(driver);
             dropdown.openDropDown();
             dropdown.logInViaFacebook();
             base.verifyUserLoggedIn(Properties.userNameFB);

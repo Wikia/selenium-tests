@@ -83,7 +83,7 @@ public class VetProvidersTests extends TestTemplate{
 			{
 				PageObjectLogging.log("", videoURL, true);
 				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+				WikiBasePageObject wiki = new WikiBasePageObject(driver);
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
@@ -106,7 +106,7 @@ public class VetProvidersTests extends TestTemplate{
 			{
 				PageObjectLogging.log("", videoUrl, true);
 				CommonFunctions.logOut(driver);
-				WikiArticlePageObject wiki = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+				WikiArticlePageObject wiki = new WikiArticlePageObject(driver);
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 				wiki.openArticle("MediaWiki:RelatedVideosGlobalList");
@@ -123,7 +123,7 @@ public class VetProvidersTests extends TestTemplate{
 			public void ArticleVideo003_VerifyingImagesPositionWikiText()
 			{
 				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+				WikiBasePageObject wiki = new WikiBasePageObject(driver);
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				wiki.refreshPage();
@@ -148,7 +148,7 @@ public class VetProvidersTests extends TestTemplate{
 			public void ArticleVideo004_Lightbox_VerifyExistenceAndURLsOfSocialButtons()
 			{
 				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+				WikiBasePageObject wiki = new WikiBasePageObject(driver);
 				wiki.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				//wiki.refreshPage();

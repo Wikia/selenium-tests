@@ -38,8 +38,8 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 	By itemInputsList = new By.ByCssSelector("li.ListItem div.ItemName input");
 	By itemDeleteButtonsList = new By.ByCssSelector("li.ListItem .ItemRemove img");
 	
-	public Top_10_list_EditonCore(WebDriver driver, String Domain) {
-		super(driver, Domain);
+	public Top_10_list_EditonCore(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 

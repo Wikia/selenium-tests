@@ -24,7 +24,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_001", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_001_createTop10list() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
@@ -39,7 +39,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	@Test(groups = { "Top_10_list_Tests_002", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_002_createTop10listWithItems() {
 		PageObjectLogging.log("ACTIVE BUG 35690", "on CHROME, FF and IE: verifyItemPresent steps are likely to fail. NOTE: the defect SOMETIMES does not occur", false);	
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);			
@@ -57,7 +57,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_003", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_003_anonymousEditingPermissions() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);
 		top10list.verifyTop10listPageTitle(PageContent.top10TestListQAshort);
@@ -72,7 +72,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		// photoUpload on top10list doesn't allow overwriting uploaded photos.
 		// solution: delete Image001.jpg file from wiki before each execution of this test. - not possible to do due to 94877 bug. 
 		
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		String top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
@@ -86,7 +86,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_005", "Top_10_list_Tests" }) //story 94880
 	public void Top_10_list_Tests_005_createTop10listPageWithSelectedPhoto() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		this.relatedPageName = PageContent.relatedPageName;
 		wiki.openWikiPage();
@@ -107,7 +107,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		if (Global.BROWSER.equals("CHROME") || Global.BROWSER.equals("IE")) {
 			PageObjectLogging.log("ACTIVE BUG 35690", "after the bug is fixed, remove the line 'refreshpage(). It is added only to work around the bug", false);
 		}		
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
@@ -133,7 +133,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_007", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_007_createTop10listAnonymous() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		SpecialCreateTopListPageObject top10listCreation = wiki.createNewTop_10_list(top_10_list_Name);
@@ -142,7 +142,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_008", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_008_deleteTop10listAnonymous() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);
 		top10list.clickOnDeleteButton();
 		top10list.verifyPermissionsErrorsPresent();
@@ -150,7 +150,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_009", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_009_historyTop10listAnonymous() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);
 		WikiHistoryPageObject top10history = top10list.openHistoryPage();
 		top10history.verifyImportandPageElements();
@@ -158,7 +158,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_010", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_010_historyTop10listLoggedIn() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);
@@ -169,10 +169,10 @@ public class Top_10_list_Tests extends TestTemplate {
 	@Test(groups = { "Top_10_list_Tests_011", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_011_voteTop10listLoggedIn() {		
 		PageObjectLogging.log("ACTIVE BUG 35690", "verifyItemPresent steps are likely to fail, which will make it impossible to vote for an item. NOTE: the defect SOMETIMES does not occur", false);	
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
 		wiki.openWikiPage();		
-		WikiArticlePageObject article = new WikiArticlePageObject(driver,	Global.DOMAIN, "random");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		SpecialCreateTopListPageObject top10listCreation = article.createNewTop_10_list(top_10_list_Name);
 		top10listCreation.verifyListName(top_10_list_Name);
@@ -188,7 +188,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	@Test(groups = { "Top_10_list_Tests_012", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_012_voteTop10listAnonymous() {	
 		// bug: 95218 'Vote up' button is not displayed for anonymous user
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		CommonFunctions.logOut(driver);
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);	
 		top10list.verifyThereAreVoteButtons();
@@ -196,7 +196,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_013", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_013_deleteTop10listLoggedInNonStaff() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);
@@ -206,7 +206,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_014", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_014_deleteTop10listSTAFF() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();		
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
@@ -221,7 +221,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	
 	@Test(groups = { "Top_10_list_Tests_015", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_015_editTop10list() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.Description = PageContent.top10Description + wiki.getTimeStamp();
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	

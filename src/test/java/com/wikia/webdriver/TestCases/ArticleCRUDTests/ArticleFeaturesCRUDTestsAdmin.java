@@ -32,7 +32,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_001_AddingGallery()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -71,7 +71,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_002_ModifyGallery()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -114,7 +114,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_003_DeleteGallery()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);		
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);		
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -149,7 +149,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_004_AddingSlideshow()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);		
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);		
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -182,7 +182,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_005_ModifySlideshow()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -218,7 +218,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_006_DeleteSlideshow()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -252,7 +252,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_007_AddingSlider()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);		
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);		
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -279,7 +279,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_008_ModifySlider()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);		
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);		
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -315,7 +315,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_009_DeleteSlider()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -347,7 +347,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_010_AddingVideo()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);		
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);		
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -367,7 +367,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_011_ModifyVideo()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -394,7 +394,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_012_DeleteVideo()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -422,7 +422,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_013_AddingImage()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -445,7 +445,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_014_ModifyImage()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -472,7 +472,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_015_DeleteImage()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);		
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);		
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -496,7 +496,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 	public void ArticleCRUDAdmin_016_AddTable()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -512,7 +512,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //	@Test(groups={"ArticleFeaturesCRUDAdmin_017", "ArticleFeaturesCRUDAdmin"})//, "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_017_EditTable(){
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -546,7 +546,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 //		@Test(groups={"ArticleFeaturesCRUDAdmin_018", "ArticleFeaturesCRUDAdmin"})//, "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_018_RemoveTable(){	
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();

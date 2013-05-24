@@ -20,7 +20,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_001", "BlogTests", "Blog"})
 	public void BlogTests_001_CreateBlogPost(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage(); 
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
@@ -40,7 +40,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_002", "BlogTests", "Blog"})
 	public void BlogTests_002_EditBlogPost(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
@@ -65,7 +65,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_003", "BlogTests", "Blog"})
 	public void BlogTests_003_DeleteBlogPost(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
@@ -86,7 +86,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_004", "BlogTests", "Blog"})
 	public void BlogTests_004_DeleteUndeleteBlogPost(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
@@ -108,7 +108,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_005", "BlogTests", "Blog"})
 	public void BlogTests_005_PostReply(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
@@ -132,7 +132,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_006", "BlogTests", "Blog"})
 	public void BlogTests_006_PostReplyEdit(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
@@ -160,7 +160,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_007", "BlogTests", "Blog"})
 	public void BlogTests_007_PostReplyDelete(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
@@ -186,7 +186,7 @@ public class BlogTests extends TestTemplate{
 	@Test(groups = { "BlogTests_008", "BlogTests", "Blog"})
 	public void BlogTests_008_PostReplyReply(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	

@@ -10,3 +10,5 @@ tmp.exe
 .project
 .settings/
 bin/
+src/test/java/com/wikia/webdriver/Trash/
+test-output/

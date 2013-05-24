@@ -10,8 +10,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class FileDetailsPageObject extends WikiBasePageObject{
 
-	public FileDetailsPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
+	public FileDetailsPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	

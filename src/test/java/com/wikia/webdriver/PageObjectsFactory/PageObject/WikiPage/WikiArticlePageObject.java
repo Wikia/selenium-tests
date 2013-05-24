@@ -92,10 +92,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
 	
 
-	public WikiArticlePageObject(WebDriver driver, String Domain,
-			String wikiArticle) {
-		super(driver, Domain);
-		this.articlename = wikiArticle;
+	public WikiArticlePageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -262,7 +260,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
                 "Edit Article: " + articlename + ", on wiki: " + Domain,
                 true, driver
             );
-            return new WikiArticleEditMode(driver, Domain, articlename);
+            return new WikiArticleEditMode(driver);
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	{
 		getUrl(driver.getCurrentUrl() + "?action=history");
 		waitForElementByElement(historyHeadLine);
-		return new WikiHistoryPageObject(driver, articlename, articlename);
+		return new WikiHistoryPageObject(driver);
 	}
 
 	/**
@@ -559,7 +557,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(videoDetailsButton);
 		videoDetailsButton.click();
 		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-		return new FileDetailsPageObject(driver, Domain);
+		return new FileDetailsPageObject(driver);
 	}
 
 	public LightboxPageObject clickThumbnailImage() {

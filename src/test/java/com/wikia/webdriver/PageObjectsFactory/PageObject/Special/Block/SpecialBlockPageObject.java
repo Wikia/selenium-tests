@@ -27,7 +27,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	private WebElement blockButton;
 	
 	public SpecialBlockPageObject(WebDriver driver) {
-		super(driver, Global.DOMAIN);
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	

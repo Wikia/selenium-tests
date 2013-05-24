@@ -78,9 +78,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	
 	MiniEditorComponentObject miniEditor;
 	
-	public MessageWallPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
-		miniEditor = new MiniEditorComponentObject(driver, Domain);
+	public MessageWallPageObject(WebDriver driver) {
+		super(driver);
+		miniEditor = new MiniEditorComponentObject(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -89,7 +89,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		getUrl(Global.DOMAIN+"wiki/Message_Wall:"+userName);
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
-		return new MessageWallPageObject(driver, userName);
+		return new MessageWallPageObject(driver);
 	}
 	
 	public void triggerMessageArea()
@@ -290,7 +290,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		waitForElementByElement(historyButton);
 		clickAndWait(historyButton);
 		PageObjectLogging.log("openHistory", "open History page of the newest thread", true, driver);
-		return new MessageWallHistoryPageObject(driver, Domain);
+		return new MessageWallHistoryPageObject(driver);
 	}
 	
 	private void writeEditMessage(String title, String message)

@@ -38,7 +38,7 @@ public class EditorEventTrackingTests extends TestTemplate {
 			e.printStackTrace();
 		}
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = wiki.openRandomArticle();

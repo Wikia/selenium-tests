@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.ThemeDesigner;
 
 import java.util.List;
 
-import org.apache.tools.ant.types.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,9 +11,9 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class SpecialThemeDesignerPageObject extends BasePageObject{
+public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
 	
 	@FindBy(css=".save")

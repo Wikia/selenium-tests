@@ -14,7 +14,7 @@ public class ShareToolbarTests extends TestTemplate {
 	@Test(groups = { "ShareToolbar001", "Toolbar" })
 	public void ShareToolbar001_VerifyingElements() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
@@ -28,7 +28,7 @@ public class ShareToolbarTests extends TestTemplate {
 	@Test(groups = { "ShareToolbar002", "Toolbar" })
 	public void ShareToolbar002_VerifyingTwitterModal() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
@@ -41,7 +41,7 @@ public class ShareToolbarTests extends TestTemplate {
 //	@Test(groups = { "ShareToolbar003", "Toolbar" })
 	public void ShareToolbar003_VerifyingFBModal() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
@@ -54,18 +54,18 @@ public class ShareToolbarTests extends TestTemplate {
 	@Test(groups = { "ShareToolbar004", "Toolbar" })
 	public void ShareToolbar004_VerifyingLogInModalForAnons() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
 		share.clickShareButton();
 		share.clickEmailButton();
-		share.verifyLogInModalForAnonsVisibility();
+		wiki.verifyModalLoginAppeared();
 	}
 
 	@Test(groups = { "ShareToolbar005", "Toolbar" })
 	public void ShareToolbar005_VerifyingEmailModalElements() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();

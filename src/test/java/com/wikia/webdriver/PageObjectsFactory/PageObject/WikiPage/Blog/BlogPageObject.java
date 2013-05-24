@@ -22,8 +22,8 @@ public class BlogPageObject extends WikiArticlePageObject{
 	By secondSpan = By.cssSelector("span:nth-child(3)");
 	By thirdSpan = By.cssSelector("span:nth-child(4) a");
 	
-	public BlogPageObject(WebDriver driver, String Domain, String wikiArticle) {
-		super(driver, Domain, wikiArticle);
+	public BlogPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -41,7 +41,7 @@ public class BlogPageObject extends WikiArticlePageObject{
 	public SpecialCreateBlogPageObject editBlog(){
 		getUrl(driver.getCurrentUrl()+"?action=edit");
 		PageObjectLogging.log("editBlog", "blog is in edit mode now", true, driver);
-		return new SpecialCreateBlogPageObject(driver, this.Domain, this.articlename);
+		return new SpecialCreateBlogPageObject(driver);
 	}
 	
 	public void deleteBlogPost(String postName){
@@ -55,7 +55,7 @@ public class BlogPageObject extends WikiArticlePageObject{
 	public BlogPageObject openBlogPage(String userName){
 		getUrl(Global.DOMAIN+"/User_blog:"+userName);
 		PageObjectLogging.log("openBlogPage", "blog page opened", true, driver);
-		return new BlogPageObject(driver, userName, "");
+		return new BlogPageObject(driver);
 	}
 	
 	public void followBlogPage(String userName){

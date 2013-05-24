@@ -22,8 +22,8 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	@FindBy(css="input.mw-htmlform-submit[value*='Upload']") 
 	private WebElement UploadFileInput;
 	
-	public SpecialUploadPageObject(WebDriver driver, String wikiname) {
-		super(driver, wikiname);
+	public SpecialUploadPageObject(WebDriver driver) {
+		super(driver);
 		
 		PageFactory.initElements(driver, this);
 	}

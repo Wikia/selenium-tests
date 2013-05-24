@@ -42,7 +42,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
     @FindBy (css = blockMessageContainerLocator)
     private WebElement phalanxBlockMessageContainer;
 
-    public SpecialPhalanxPageObject (WebDriver driver, String Domain) {
+    public SpecialPhalanxPageObject (WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

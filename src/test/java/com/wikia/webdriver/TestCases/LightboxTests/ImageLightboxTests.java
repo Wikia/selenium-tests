@@ -15,7 +15,7 @@ public class ImageLightboxTests extends TestTemplate{
 	
 	@Test(groups = {"lightbox", "lightbox001"})
 	public void lightboxTest_001(){
-		WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openArticle(URLsContent.lightboxImageTest);
 		LightboxComponentObject lightbox = new LightboxComponentObject(driver);
 		lightbox.openLightbox();

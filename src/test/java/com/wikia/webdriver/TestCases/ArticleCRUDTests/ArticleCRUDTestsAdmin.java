@@ -28,7 +28,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_002_VerifyEditDropDown()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wiki.openRandomArticle();
@@ -47,7 +47,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_003_VerifyEditDropDown()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		wiki.openRandomArticle();
@@ -85,7 +85,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_004_CreateArticle(String articleName)
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();		
@@ -105,7 +105,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_005_CreateEditArticle()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();	
@@ -133,10 +133,10 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_006_CreateArticleComment()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
@@ -156,10 +156,10 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_007_CreateArticleEditComment()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
@@ -183,7 +183,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_008_CreateArticleUndeleteDelete()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -209,7 +209,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_009_CreateArticleMoveDelete()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
@@ -235,10 +235,10 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_010_CreateArticleCommentReply()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "random");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openRandomArticle();
 		article.triggerCommentArea();
 		article.writeOnCommentArea(PageContent.commentText);
@@ -252,7 +252,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_011_VerifyingImagesPositionWikiText()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.refreshPage();
@@ -276,7 +276,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	public void ArticleCRUDAdmin_012_LightboxVerifyExistenceAndURLsOfSocialButtons()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticlePageObject article = wiki.openArticle(URLsContent.lightboxImageTest);

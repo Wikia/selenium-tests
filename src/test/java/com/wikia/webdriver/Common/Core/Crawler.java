@@ -33,7 +33,7 @@ public class Crawler extends WikiBasePageObject {
 	private static String wikiURLsFilePath = crawlerFolderPath + wikiURLsFileName;
 
 	public Crawler(WebDriver driver, String Domain) {
-		super(driver, Domain);	
+		super(driver);	
 		PageFactory.initElements(driver, this);
 	}
 		

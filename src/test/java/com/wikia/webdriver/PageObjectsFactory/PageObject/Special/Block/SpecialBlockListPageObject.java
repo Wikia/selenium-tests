@@ -11,8 +11,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialBlockListPageObject extends WikiBasePageObject{
 
-	public SpecialBlockListPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
+	public SpecialBlockListPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -28,7 +28,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 	public SpecialBlockListPageObject openSpecialBlockListPage(){
 		getUrl(Global.DOMAIN+"wiki/Special:BlockList");
 		PageObjectLogging.log("Special:BlockList openSpecialBlockListPage", "blocked users list page opened", true, driver);
-		return new SpecialBlockListPageObject(driver, this.Domain);
+		return new SpecialBlockListPageObject(driver);
 	}
 	
 	private void typeInUserName(String userName){

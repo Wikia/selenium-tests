@@ -25,7 +25,7 @@ public class ArticleHistoryTests extends TestTemplate
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
@@ -62,7 +62,7 @@ public class ArticleHistoryTests extends TestTemplate
 		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);		
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();

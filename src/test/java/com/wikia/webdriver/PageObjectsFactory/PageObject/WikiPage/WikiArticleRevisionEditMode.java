@@ -9,7 +9,7 @@ public class WikiArticleRevisionEditMode extends WikiArticleEditMode{
 
 	public WikiArticleRevisionEditMode(WebDriver driver, String Domain,
 			String articlename) {
-		super(driver, Domain, articlename);
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 

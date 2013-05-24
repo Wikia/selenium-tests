@@ -18,7 +18,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar001_Adding()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
@@ -37,7 +37,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar002_Editing()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
@@ -60,7 +60,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar003_Deleteing()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
@@ -80,7 +80,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar004_Finding()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
@@ -99,7 +99,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar005_ResetDefaults()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
@@ -122,7 +122,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 	public void CustomizeToolbar006_ButtonsActions()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);

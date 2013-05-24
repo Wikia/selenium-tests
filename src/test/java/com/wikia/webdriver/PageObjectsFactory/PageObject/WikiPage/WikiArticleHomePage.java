@@ -17,7 +17,7 @@ public class WikiArticleHomePage extends WikiArticlePageObject {
     private WebElement wikiHomePageSpecificElement;
 
     public WikiArticleHomePage(WebDriver driver) {
-        super(driver, Global.DOMAIN, "TODO: REFACTOR");
+        super(driver);
     }
 
     /**

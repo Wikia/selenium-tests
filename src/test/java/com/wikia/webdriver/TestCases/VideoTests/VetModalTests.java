@@ -26,7 +26,7 @@ public class VetModalTests extends TestTemplate {
 
 	@Test(groups = { "VetModalTests001", "VetModalTests" })
 	public void Vet_Tests_001_VerifyLeftAlignmentOnEditorSourceAndArticle() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
@@ -54,7 +54,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests002", "VetModalTests" })
 	public void Vet_Tests_002_VerifyLeftAlignmentOnEditorSourcePreviewModalAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password,
 				driver);
@@ -88,7 +88,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests003", "VetModalTests" })
 	public void Vet_Tests_003_VerifyLeftAlignmentOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -121,7 +121,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests004", "VetModalTests" })
 	public void Vet_Tests_004_VerifyRightAlignmentOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -152,7 +152,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests005", "VetModalTests" })
 	public void Vet_Tests_005_VerifyRightAlignmentOnEditorSourcePreviewModalAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -187,7 +187,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests006", "VetModalTests" })
 	public void Vet_Tests_006_VerifyRightAlignmentOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -220,7 +220,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests007", "VetModalTests" })
 	public void Vet_Tests_007_VerifyCenterAlignmentOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -251,7 +251,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests008", "VetModalTests" })
 	public void Vet_Tests_008_VerifyCenterAlignmentOnEditorSourcePreviewModalAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -286,7 +286,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests009", "VetModalTests" })
 	public void Vet_Tests_009_VerifyCenterAlignmentOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -318,7 +318,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests010", "VetModalTests" })
 	public void Vet_Tests_010_VerifyVideoWidthOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -350,7 +350,7 @@ public class VetModalTests extends TestTemplate {
 	public void Vet_Tests_011_VerifyVideoWidthOnEditorSourcePreviewModalAndArticle() {
 
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -385,7 +385,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests012", "VetModalTests" })
 	public void Vet_Tests_012_VerifyVideoWidthOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -418,7 +418,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests013", "VetModalTests" })
 	public void Vet_Tests_013_VerifyVideoCaptionOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -449,7 +449,7 @@ public class VetModalTests extends TestTemplate {
 	public void Vet_Tests_014_VerifyVideoCaptionOnEditorSourcePreviewModalAndArticle() {
 
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -482,7 +482,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests015", "VetModalTests" })
 	public void Vet_Tests_015_VerifyVideoCaptionOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -516,7 +516,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests016", "VetModalTests" })
 	public void Vet_Tests_016_VerifyNoCaptionOnEditorArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -550,7 +550,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests017", "VetModalTests" })
 	public void Vet_Tests_017_VerifyVideoNameFieldIsNotEditable() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
@@ -577,7 +577,7 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests018", "VetModalTests" })
 	public void Vet_Tests_018_VerifyVideoNameFieldIsEditable() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		String cookieName = CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);

@@ -30,16 +30,16 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_001_newFile () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         base.openSpecialPage(newFiles);
         SpecialNewFilesPageObject specialPage = new SpecialNewFilesPageObject(driver);
         specialPage.verifySpecialPage();
         specialPage.addPhoto();
-        specialPage.verifyLogInModalForAnonsVisibility();
+        specialPage.verifyModalLoginAppeared();
         specialPage.logInViaModal(Properties.userName, Properties.password);
 
-        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver, Global.DOMAIN);
+        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
         modal.closeAddPhotoModal();
 
         specialPage.verifyUserLoggedIn(Properties.userName);
@@ -51,15 +51,15 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_002_video () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         base.openSpecialPage(newVideo);
-        SpecialVideosPageObject specialPage = new SpecialVideosPageObject(driver, Global.DOMAIN);
+        SpecialVideosPageObject specialPage = new SpecialVideosPageObject(driver);
         specialPage.clickAddAVideo();
-        specialPage.verifyLogInModalForAnonsVisibility();
+        specialPage.verifyModalLoginAppeared();
         specialPage.logInViaModal(Properties.userName, Properties.password);
 
-        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver, Global.DOMAIN);
+        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
         modal.closeAddVideoModal();
 
         specialPage.verifyUserLoggedIn(Properties.userName);
@@ -71,7 +71,7 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_003_loginRequired () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         base.openSpecialPage(upload);
         base.verifyLoginReguiredMessage();
@@ -88,7 +88,7 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_004_notLoggedIn () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         base.openSpecialPage(watchList);
         base.verifyNotLoggedInMessage();
@@ -105,11 +105,11 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_005_addMedia () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         WikiArticlePageObject article = base.openRandomArticle();
         article.edit();
-        MiniEditorComponentObject miniEditor = new MiniEditorComponentObject(driver, Global.DOMAIN);
+        MiniEditorComponentObject miniEditor = new MiniEditorComponentObject(driver);
         miniEditor.clickAddImage();
         base.logInViaModal(Properties.userName, Properties.password);
         base.verifyUserLoggedIn(Properties.userName);
@@ -121,13 +121,13 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_006_rail () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         WikiArticlePageObject article = base.openRandomArticle();
         article.clickAddVideoFromRail();
         article.logInViaModal(Properties.userName, Properties.password);
 
-        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver, Global.DOMAIN);
+        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
         modal.closeAddVideoModal();
 
         base.verifyUserLoggedIn(Properties.userName);

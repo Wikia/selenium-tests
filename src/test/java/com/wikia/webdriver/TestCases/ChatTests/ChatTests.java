@@ -42,7 +42,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
@@ -51,7 +51,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//second user opens the chat
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -75,14 +75,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -117,14 +117,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -157,14 +157,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat	
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -206,14 +206,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -248,14 +248,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat	
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -290,14 +290,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
@@ -338,14 +338,14 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		//first user opens the chat
 		switchToWindow(driver);
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
 		CommonFunctions.logOut(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2, Global.DOMAIN, "");
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);

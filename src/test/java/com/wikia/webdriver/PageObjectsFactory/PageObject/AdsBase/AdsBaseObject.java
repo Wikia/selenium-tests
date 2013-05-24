@@ -36,9 +36,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	private WebElement anyMedrecContainer;
 
 	public AdsBaseObject(WebDriver driver, String page) {
-		super(driver, page);
+		super(driver);
 		wikiPage = page;
-		PageFactory.initElements(driver, this);
 		adsContent = new AdsContent();
 		openPage();
 	}

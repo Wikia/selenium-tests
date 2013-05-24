@@ -23,9 +23,9 @@ public class ForgottenPasswordTests extends TestTemplate {
         CommonFunctions.logOut(driver);
         String userName = Properties.userNameForgottenPassword;
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
-        DropDownComponentObject dropdown = new DropDownComponentObject(driver, Global.DOMAIN);
+        DropDownComponentObject dropdown = new DropDownComponentObject(driver);
         dropdown.openDropDown();
         dropdown.remindPassword(userName);
 
@@ -52,7 +52,7 @@ public class ForgottenPasswordTests extends TestTemplate {
         CommonFunctions.logOut(driver);
         String userName = Properties.userNameForgottenPassword2;
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
         special.openSpecialUserLogin();

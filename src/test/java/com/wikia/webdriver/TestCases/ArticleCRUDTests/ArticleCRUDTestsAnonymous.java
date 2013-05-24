@@ -24,7 +24,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_001_VerifyEditDropDown()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		wiki.openRandomArticle();
 		wiki.clickEditDropDown();
@@ -48,7 +48,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_002_CreateArticle(String articleName)
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
@@ -68,7 +68,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_003_CreateEditArticle()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
@@ -97,7 +97,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_004_CreateArticleComment()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
@@ -122,7 +122,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_005_CreateArticleCommentReply()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
@@ -146,7 +146,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_006_verifySpotlightsPresence()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
 		wiki.openWikiPage();
 		WikiArticlePageObject article = wiki.openRandomArticle();
 		article.verifySpotlightsPresence();
