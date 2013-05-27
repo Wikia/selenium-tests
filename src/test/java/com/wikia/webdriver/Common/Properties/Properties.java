@@ -15,8 +15,8 @@ public class Properties {
 		Global.BROWSER = "FF";
 		Global.DOMAIN = "http://mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
-		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
-		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
+		Global.CONFIG_FILE = new File("/home/andrew/workspace/selenium/selenium-config/config.xml");
+        Global.CAPTCHA_FILE = new File("/home/andrew/workspace/selenium/selenium-config/captcha.txt");
 		Global.LOG_VERBOSE = 2;
 		if (Global.DOMAIN.contains("dev"))
 		{
