@@ -10,3 +10,6 @@ tmp.exe
 .project
 .settings/
 bin/
+Wikia.iml
+captcha.txt
+config.xml
