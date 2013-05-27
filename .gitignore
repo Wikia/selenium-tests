@@ -12,3 +12,6 @@ tmp.exe
 bin/
 src/test/java/com/wikia/webdriver/Trash/
 test-output/
+Wikia.iml
+captcha.txt
+config.xml
