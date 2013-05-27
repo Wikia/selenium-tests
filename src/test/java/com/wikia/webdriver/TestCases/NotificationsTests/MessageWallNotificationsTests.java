@@ -161,7 +161,6 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		if (notifications.getNumberOfUnreadNotifications() > 0) {
 			notifications.showNotifications();
-			notifications.clickNotifications();
 			notifications.markNotificationsAsRead();
 		}
 
