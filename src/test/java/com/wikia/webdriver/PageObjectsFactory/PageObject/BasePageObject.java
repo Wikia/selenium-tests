@@ -211,6 +211,7 @@ public class BasePageObject{
 
 	public void click(WebElement pageElem)
 	{
+		CommonFunctions.scrollToElement(pageElem);
 		pageElem.click();
 	}
 	
