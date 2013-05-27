@@ -33,6 +33,7 @@ public class Properties {
 
 		Global.CONFIG_FILE = new File(seleniumConfigDir+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File(seleniumConfigDir+File.separator+"captcha.txt");
+
 		Global.LOG_VERBOSE = 2;
 		if (Global.DOMAIN.contains("dev")||Global.DOMAIN.contains("sandbox"))
 		{

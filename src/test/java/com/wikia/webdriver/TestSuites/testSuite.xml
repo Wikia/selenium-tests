@@ -62,6 +62,7 @@
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.ForumNotificationsTests"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotificationsTests"/>
 			<class name="com.wikia.webdriver.TestCases.EventTrackingTests.EditorEventTrackingTests"/>
+            <class name="com.wikia.webdriver.TestCases.WamPageTests.WamPageTests"/>
 		</classes>
 	</test>
 </suite>
