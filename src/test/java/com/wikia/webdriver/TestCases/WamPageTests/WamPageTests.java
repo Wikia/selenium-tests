@@ -11,5 +11,13 @@ public class WamPageTests extends TestTemplate {
         pageObject.openWamPage();
         pageObject.verifyFirstTabSelected();
         pageObject.verifyWamIndexIsNotEmpty();
+        pageObject.verifyWamIndexHasExactRowsNo( pageObject.DEFAULT_WAM_INDEX_ROWS );
+    }
+
+    @Test(groups = {"WamPage002", "WamPageTests"})
+    public void verifyFilteringByVertical() {
+        WamPageObject pageObject = new WamPageObject(driver);
+        pageObject.openWamPage();
+
     }
 }
