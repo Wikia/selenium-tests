@@ -18,6 +18,13 @@ public class WamPageTests extends TestTemplate {
     public void verifyFilteringByVertical() {
         WamPageObject pageObject = new WamPageObject(driver);
         pageObject.openWamPage();
+        pageObject.verifyWamIndexIsNotEmpty();
+        pageObject.verifyWamVerticalFilterOptions();
 
+        for( WamPageObject.VerticalsIds verticalId : WamPageObject.VerticalsIds.values() ) {
+            pageObject.selectVertical( verticalId.getIdAsString() );
+            pageObject.verifyWamIndexIsNotEmpty();
+            pageObject.verifyVerticalColumnValuesAreTheSame();
+        }
     }
 }
