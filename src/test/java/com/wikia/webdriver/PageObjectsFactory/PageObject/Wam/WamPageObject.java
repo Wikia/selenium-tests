@@ -48,14 +48,18 @@ public class WamPageObject extends BasePageObject {
     }
 
     public void verifyFirstTabSelected() {
-        WebElement firstWamTab = wamTabs.get(FIRST_WAM_TAB_INDEX);
-        WebElement firstWamTabAnchor = firstWamTab.findElement(By.className("selected"));
+        verifyTabIsSelected(FIRST_WAM_TAB_INDEX);
+    }
 
-        waitForElementByElement(firstWamTab);
-        PageObjectLogging.log("verifyFirstTabSelected", "first tab exist", true);
+    public void verifyTabIsSelected(int tabIndex) {
+        WebElement wamTab = wamTabs.get(tabIndex);
+        WebElement wamTabAnchor = wamTab.findElement(By.className("selected"));
 
-        waitForElementByElement(firstWamTabAnchor);
-        PageObjectLogging.log("verifyFirstTabSelected", "first tab's anchor's selected", true);
+        waitForElementByElement(wamTab);
+        PageObjectLogging.log("verifyTabIsSelected", "tab with index" + tabIndex + " exist", true);
+
+        waitForElementByElement(wamTabAnchor);
+        PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's selected", true);
     }
 
     public void verifyWamIndexIsNotEmpty() {
