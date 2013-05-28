@@ -36,6 +36,9 @@ public class URLsContent {
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
 
+    // WAM Scores page url
+    public static final String wamPageUrl = "WAM";
+
 	// Extra sites - useful for monobook
 	// replace %user% with username
 	public static final String userBlog = "User_blog:%user%";
