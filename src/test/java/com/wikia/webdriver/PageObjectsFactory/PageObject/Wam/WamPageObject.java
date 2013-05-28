@@ -149,8 +149,8 @@ public class WamPageObject extends BasePageObject {
         options.remove(0); // first option is "All" and we don't care about it here
         Boolean result = true;
 
-        for( int i = 0; i < options.size(); i++) {
-            String optionValue = options.get(i).getAttribute("value");
+        for( WebElement e : options ) {
+            String optionValue = e.getAttribute("value");
 
             if( !VerticalsIds.contains(optionValue) ) {
             // once an option is not in our ENUM the test is failed
@@ -170,10 +170,10 @@ public class WamPageObject extends BasePageObject {
      * @desc Selects vertical in vertical select box
      * @param verticalId vertical id
      */
-    public void selectVertical(String verticalId) {
+    public void selectVertical(VerticalsIds verticalId) {
         waitForElementByElement(wamVerticalFilterSelect);
         Select verticalSelectBox = new Select(wamVerticalFilterSelect);
-        verticalSelectBox.selectByValue(verticalId);
+        verticalSelectBox.selectByValue( verticalId.getIdAsString() );
         waitForElementByElement(wamIndexTable);
     }
 

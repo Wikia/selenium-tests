@@ -22,7 +22,7 @@ public class WamPageTests extends TestTemplate {
         pageObject.verifyWamVerticalFilterOptions();
 
         for( WamPageObject.VerticalsIds verticalId : WamPageObject.VerticalsIds.values() ) {
-            pageObject.selectVertical( verticalId.getIdAsString() );
+            pageObject.selectVertical( verticalId );
             pageObject.verifyWamIndexIsNotEmpty();
             pageObject.verifyVerticalColumnValuesAreTheSame();
         }
