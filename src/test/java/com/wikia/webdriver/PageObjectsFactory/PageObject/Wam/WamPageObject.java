@@ -10,12 +10,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
 public class WamPageObject extends BasePageObject {
-    final int FIRST_WAM_TAB_INDEX = 0;
+    private final int FIRST_WAM_TAB_INDEX = 0;
     public final int DEFAULT_WAM_INDEX_ROWS = 21;
+    private final int VERTICAL_COLUMN_INDEX = 5;
 
     @FindBy(id="verticalId")
     private WebElement wamVerticalFilterSelect;
@@ -37,6 +39,44 @@ public class WamPageObject extends BasePageObject {
 
     @FindBy(css="#wam-index table tr")
     private List<WebElement> wamIndexRows;
+
+    /**
+     * @desc Wikia verticals (hubs)
+     * @todo think of a better place it might be moved to
+     */
+    public enum VerticalsIds {
+        VIDEO_GAMES(2), ENTERTAINMENT(3), LIFESTYLE(9);
+
+        private int verticalId;
+
+        private VerticalsIds(int id) {
+            verticalId = id;
+        }
+
+        public int getId() {
+            return verticalId;
+        }
+
+        public String getIdAsString() {
+            return Integer.toString(verticalId);
+        }
+
+        /**
+         * @desc Checks if passed value is in enum
+         * @param value mostly a select-box option
+         *
+         * @return true if enum has the value; false otherwise
+         */
+        public static Boolean contains(String value) {
+            for( VerticalsIds vids : VerticalsIds.values() ) {
+                if( vids.getIdAsString().equals(value)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
 
     public WamPageObject(WebDriver driver) {
         super(driver);
@@ -97,5 +137,61 @@ public class WamPageObject extends BasePageObject {
     public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
         waitForElementByElement(wamIndexTable);
         Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals " + expectedRowsNo );
+    }
+
+    /**
+     * @desc Checks if vertical filter except "All" option has options with our verticals' ids
+     */
+    public void verifyWamVerticalFilterOptions() {
+        waitForElementByElement(wamVerticalFilterSelect);
+        Select verticalSelectBox = new Select(wamVerticalFilterSelect);
+        List<WebElement> options = verticalSelectBox.getOptions();
+        options.remove(0); // first option is "All" and we don't care about it here
+        Boolean result = true;
+
+        for( int i = 0; i < options.size(); i++) {
+            String optionValue = options.get(i).getAttribute("value");
+
+            if( !VerticalsIds.contains(optionValue) ) {
+            // once an option is not in our ENUM the test is failed
+                result = false;
+                break;
+            }
+        }
+
+        if( result.equals(true) ) {
+            PageObjectLogging.log("verifyWamVerticalFilterOptions", "There are correct options in the vertical select box", true);
+        } else {
+            PageObjectLogging.log("verifyWamVerticalFilterOptions", "There is invalid option in the vertical select box", false);
+        }
+    }
+
+    /**
+     * @desc Selects vertical in vertical select box
+     * @param verticalId vertical id
+     */
+    public void selectVertical(String verticalId) {
+        waitForElementByElement(wamVerticalFilterSelect);
+        Select verticalSelectBox = new Select(wamVerticalFilterSelect);
+        verticalSelectBox.selectByValue(verticalId);
+        waitForElementByElement(wamIndexTable);
+    }
+
+    /**
+     * @desc Checks if "Vertical" column in WAM index has the same values for each row
+     */
+    public void verifyVerticalColumnValuesAreTheSame() {
+        waitForElementByElement(wamIndexTable);
+        waitForElementByElement(wamVerticalFilterSelect);
+        Select verticalSelectBox = new Select(wamVerticalFilterSelect);
+        String selectedValue = verticalSelectBox.getFirstSelectedOption().getText();
+        wamIndexRows.remove(0); // we don't need first headline row
+
+        for( int i = 0; i < wamIndexRows.size(); i++ ) {
+            List<WebElement> cells = wamIndexRows.get(i).findElements(By.tagName("td"));
+            if( !cells.isEmpty() && cells.size() > VERTICAL_COLUMN_INDEX ) {
+                Assertion.assertEquals( cells.get(VERTICAL_COLUMN_INDEX).getText(), selectedValue);
+            }
+        }
     }
 }
