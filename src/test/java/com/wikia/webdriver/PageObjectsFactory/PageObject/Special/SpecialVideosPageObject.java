@@ -34,7 +34,7 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 
 
         public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Domain+"wiki/Special:Videos");
+		getUrl(Global.DOMAIN+"wiki/Special:Videos");
 		return new SpecialVideosPageObject(driver);
 	}
 	

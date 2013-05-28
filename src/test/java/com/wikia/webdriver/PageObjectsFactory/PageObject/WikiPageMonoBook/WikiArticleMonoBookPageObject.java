@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BaseMonoBookPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -356,7 +357,7 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void openArticle(String articleName) {
         String articleTitleWithUnderscore = articleName.replace(" ", "_");
-        String url =  Domain + "wiki/" + articleTitleWithUnderscore;
+        String url =  Global.DOMAIN + "wiki/" + articleTitleWithUnderscore;
         getUrl(url);
         changeToMonoBook();
     }

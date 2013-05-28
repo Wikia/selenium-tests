@@ -38,10 +38,10 @@ public class EditorEventTrackingTests extends TestTemplate {
 			e.printStackTrace();
 		}
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticlePageObject article = wiki.openRandomArticle();
+		article.openRandomArticle();
 		WikiArticleEditMode edit = article.edit();
 		edit.enableWikiaTracker();
 		edit.clickGalleryButton();

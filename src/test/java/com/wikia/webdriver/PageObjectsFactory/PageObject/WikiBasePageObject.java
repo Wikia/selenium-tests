@@ -1,5 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
@@ -13,19 +24,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultiple
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -107,15 +109,10 @@ public class WikiBasePageObject extends BasePageObject {
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
-	private String pageName;
 
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	}
-
-	public String getWikiName() {
-		return Domain;
 	}
 	
 
@@ -139,22 +136,22 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * */
 	public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Domain+"wiki/Special:Videos");
+		getUrl(Global.DOMAIN+"wiki/Special:Videos");
 		return new SpecialVideosPageObject(driver);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Domain + "wiki/Special:NewFiles");
+		getUrl(Global.DOMAIN + "wiki/Special:NewFiles");
 		return new SpecialNewFilesPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Domain + "wiki/Special:Upload");
+		getUrl(Global.DOMAIN + "wiki/Special:Upload");
 		return new SpecialUploadPageObject(driver);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Domain + "wiki/Special:MultipleUpload");
+		getUrl(Global.DOMAIN + "wiki/Special:MultipleUpload");
 		return new SpecialMultipleUploadPageObject(driver);
 	}
 
@@ -364,21 +361,6 @@ public class WikiBasePageObject extends BasePageObject {
 		clickUndeleteArticle();
 		clickRestoreArticleButton();
 	}
-
-	public WikiArticleEditMode createNewArticle(String pageName,
-			int layoutNumber) {
-		getUrl(Global.DOMAIN + "index.php?title=" + pageName
-				+ "&action=edit&useFormat=" + layoutNumber);
-		String pageNameEnc = pageName.replace("_", " ");
-		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
-				+ pageNameEnc + "']")));
-		return new WikiArticleEditMode(driver);
-	}
-	
-	public WikiArticleEditMode createNewDefaultArticle(){
-		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
-		return createNewArticle(this.pageName, 1);
-	} 
 	
 	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
 		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);
@@ -525,7 +507,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
         public void openSpecialPage(String specialPage) {
-            getUrl(Domain + specialPage);
+            getUrl(Global.DOMAIN + specialPage);
         }
 
         public void verifyLoginReguiredMessage() {

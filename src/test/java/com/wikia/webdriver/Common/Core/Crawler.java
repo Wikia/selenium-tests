@@ -4,17 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
-public class Crawler extends WikiBasePageObject {
+public class Crawler extends WikiArticlePageObject {
 	
 	private int currentNumberOfURLs = 0;
 	private int wantedNumberOfURLs;
@@ -93,7 +93,7 @@ public class Crawler extends WikiBasePageObject {
 	 *            list of URLs from which you want to extract only those which contain "wiki/" after domain.
 	 * */
 	private void extractWikiURLs(List<String> urlList) {
-		int domainLength= this.Domain.length();
+		int domainLength= Global.DOMAIN.length();
 		for (int i = 0; i < urlList.size(); i++) {
 			try {
 				if (urlList.get(i)==null) {

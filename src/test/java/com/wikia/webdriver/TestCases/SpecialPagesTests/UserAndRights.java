@@ -89,14 +89,14 @@ public class UserAndRights extends TestTemplate{
 	@Test(groups = {"usersAndRights007", "UsersAndRights"})
 	public void usersAndRights007_Contributions(){
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		String pageContent = wiki.getTimeStamp() + "Special:Contributions test article content";
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		String pageContent = article.getTimeStamp() + "Special:Contributions test article content";
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.typeInContent(pageContent);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
+		edit.clickOnPublishButton();
 		SpecialContributionsPageObject contribution = new SpecialContributionsPageObject(driver);
 		contribution = contribution.openContributionsPage();
 		contribution.searchContributions(Properties.userNameStaff);

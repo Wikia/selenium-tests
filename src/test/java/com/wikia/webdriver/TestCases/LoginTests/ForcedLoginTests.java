@@ -105,7 +105,7 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_005_addMedia () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver);
+        WikiArticlePageObject base = new WikiArticlePageObject(driver);
         base.openWikiPage();
         WikiArticlePageObject article = base.openRandomArticle();
         article.edit();
@@ -121,7 +121,7 @@ public class ForcedLoginTests extends TestTemplate{
     public void ForcedLogin_006_rail () {
         CommonFunctions.logOut(driver);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver);
+        WikiArticlePageObject base = new WikiArticlePageObject(driver);
         base.openWikiPage();
         WikiArticlePageObject article = base.openRandomArticle();
         article.clickAddVideoFromRail();

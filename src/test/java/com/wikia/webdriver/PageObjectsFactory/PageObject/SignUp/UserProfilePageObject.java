@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -30,6 +31,14 @@ public class UserProfilePageObject extends BasePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
+	public UserProfilePageObject navigateToProfilePage(String userName) {
+		driver.navigate().to(Global.DOMAIN + "wiki/User:" + userName);
+		PageObjectLogging.log("UserProfilePageObject ",
+				"navigate to username page: " + Global.DOMAIN + "wiki/User:"
+						+ userName, true, driver);
+		return new UserProfilePageObject(driver);
+	}
+	
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName

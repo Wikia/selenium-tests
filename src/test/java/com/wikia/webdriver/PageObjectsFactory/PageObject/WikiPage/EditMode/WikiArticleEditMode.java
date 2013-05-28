@@ -295,7 +295,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		clickAndWait(sourceModeButton);
 		waitForElementByElement(sourceModeTextArea);
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
-		return new WikiArticleSourceEditMode(driver, this.Domain);
+		return new WikiArticleSourceEditMode(driver);
 	}
 	
 	/**
@@ -769,7 +769,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(tableButton);
 		waitForElementClickableByElement(tableButton);
 		tableButton.click();
-		PageObjectLogging.log("clickOnAddTableButton","Click on: table-button, on wiki: " + Domain + "",true, driver);
+		PageObjectLogging.log("clickOnAddTableButton","Click on table-button",true, driver);
 	}
 
 	/**

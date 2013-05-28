@@ -1,16 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import java.util.Date;
-import java.util.List;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,19 +15,23 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 /**
  * 
  * @author Karol
  * 
  */
 
-public class BasePageObject {
+public class BasePageObject{
 
 	public final WebDriver driver;
-	public String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 	protected int timeOut = 30;
-	protected String Domain;
-	protected String articlename;
 	public WebDriverWait wait;
 	public Actions builder;
 
@@ -58,126 +53,25 @@ public class BasePageObject {
 	protected WebElement followedButton;
 	@FindBy(css = "#ca-watch")
 	protected WebElement unfollowedButton;
-	@FindBy(css = "a[data-canonical='random']")
-	private WebElement randomPageButton;
-	@FindBy(css = ".sprite.search")
-	private WebElement searchButton;
 	@FindBy(css = "#AccountNavigation a[href*='User:']")
 	protected WebElement userProfileLink;
 
 	public BasePageObject(WebDriver driver) {
-		this.driver = driver;
-		this.Domain = Global.DOMAIN;
 		wait = new WebDriverWait(driver, timeOut);
-		this.builder = new Actions(driver);
+		this.driver = driver;
+		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
 	}
 
-	/**
-	 * Checks page title
-	 * 
-	 ** @param title
-	 *            Specifies the title that you want to compare with the actual
-	 *            current title
-	 */
-
-	public boolean verifyTitle(String title) {
-		String currentTitle = driver.getTitle();
-		if (!currentTitle.equals(title)) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Checks if the current URL contains the given String
-	 * 
-	 * @author Michal Nowierski
-	 ** @param GivenString
-	 */
-	public void verifyURLcontains(String GivenString) {
-		String currentURL = driver.getCurrentUrl();
-		Assertion.assertStringContains(currentURL, GivenString);
-		PageObjectLogging.log("verifyURLcontains",
-				"current url is the same as expetced url", true, driver);
-	}
-
-	/**
-	 * Checks if the current URL is the given URL
-	 * 
-	 * @author Michal Nowierski
-	 ** @param givenURL
-	 */
-	public void verifyURL(String givenURL) {
-		Assertion.assertEquals(givenURL, driver.getCurrentUrl());
-	}
-
-	public String getCurrentUrl() {
-		System.out.println(driver.getCurrentUrl());
-		return driver.getCurrentUrl();
-	}
-
-	/**
-	 * Clicks on an element
+	/*
+	 * Mouse events
 	 */
 
 	public void click(WebElement pageElem) {
 		pageElem.click();
 	}
 
-	public void getUrl(String url) {
-		try {
-			driver.get(url);
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("getUrl",
-					"page %page% loaded for more then 30 seconds".replace(
-							"%page%", url), false);
-			return;
-		}
-
-		PageObjectLogging.log("getUrl",
-				"page loaded for less then 30 seconds after click", true);
-	}
-
-	public void refreshPage() {
-		try {
-			driver.navigate().refresh();
-			PageObjectLogging.log("refreshPage", "page refreshed", true);
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("refreshPage",
-					"page loaded for more then 30 seconds after click", true);
-		}
-	}
-
-	public void clickAndWait(WebElement pageElem) {
-		try {
-			CommonFunctions.scrollToElement(pageElem);
-			pageElem.click();
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("clickAndWait",
-					"page loaded for more then 30 seconds after click", true);
-		}
-	}
-
-	/**
-	 * Send keys to WebElement
-	 */
-
-	public void sendKeys(WebElement pageElem, String KeysToSend) {
-		try {
-			pageElem.sendKeys(KeysToSend);
-		} catch (Exception e) {
-			PageObjectLogging.log("sendKeys", e.toString(), false);
-		}
-	}
-
-	/**
-	 * Clicks on an element using Actions click method
-	 * 
-	 * @author Michal Nowierski ** @param pageElem The WebElement to be clicked
-	 *         on
-	 */
 	public void clickActions(WebElement pageElem) {
 		try {
 			Actions builder = new Actions(driver);
@@ -230,12 +124,6 @@ public class BasePageObject {
 		executeScript("$('" + cssSelector + "').click()");
 	}
 
-	/**
-	 * Click on nth element with given css
-	 * 
-	 * @author Michal Nowierski ** @param n - the indicator of element from
-	 *         those which match the css selector
-	 */
 	public void jQueryNthElemClick(String cssSelector, int n) {
 		executeScript("$('" + cssSelector + "')[" + n + "].click()");
 	}
@@ -244,15 +132,71 @@ public class BasePageObject {
 		executeScript("$('" + cssSelector + "').focus()");
 	}
 
-	/**
-	 * Returns parent element of the given element
-	 * 
-	 * @author Michal Nowierski ** @param childElement - the element whose
-	 *         parent we are looking for
-	 */
-	public WebElement getParentElement(WebElement childElement) {
-		return childElement.findElement(By.xpath(".."));
+	public void clickAndWait(WebElement pageElem) {
+		try {
+			CommonFunctions.scrollToElement(pageElem);
+			pageElem.click();
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("clickAndWait",
+					"page loaded for more then 30 seconds after click", true);
+		}
 	}
+
+	/*
+	 * Url helpers
+	 */
+
+	public boolean verifyTitle(String title) {
+		String currentTitle = driver.getTitle();
+		if (!currentTitle.equals(title)) {
+			return false;
+		}
+		return true;
+	}
+
+	public void verifyURLcontains(String GivenString) {
+		String currentURL = driver.getCurrentUrl();
+		Assertion.assertStringContains(currentURL, GivenString);
+		PageObjectLogging.log("verifyURLcontains",
+				"current url is the same as expetced url", true, driver);
+	}
+
+	public void verifyURL(String givenURL) {
+		Assertion.assertEquals(givenURL, driver.getCurrentUrl());
+	}
+
+	public String getCurrentUrl() {
+		System.out.println(driver.getCurrentUrl());
+		return driver.getCurrentUrl();
+	}
+
+	public void getUrl(String url) {
+		try {
+			driver.get(url);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("getUrl",
+					"page %page% loaded for more then 30 seconds".replace(
+							"%page%", url), false);
+			return;
+		}
+
+		PageObjectLogging.log("getUrl",
+				"page loaded for less then 30 seconds after click", true);
+	}
+
+	public void refreshPage() {
+		try {
+			driver.navigate().refresh();
+			PageObjectLogging.log("refreshPage", "page refreshed", true);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("refreshPage",
+					"page loaded for more then 30 seconds after click", true);
+		}
+	}
+
+	/*
+	 * Script execution helpers
+	 */
 
 	public void executeScript(String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -282,6 +226,28 @@ public class BasePageObject {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Send keys to WebElement
+	 */
+
+	public void sendKeys(WebElement pageElem, String KeysToSend) {
+		try {
+			pageElem.sendKeys(KeysToSend);
+		} catch (Exception e) {
+			PageObjectLogging.log("sendKeys", e.toString(), false);
+		}
+	}
+
+	/**
+	 * Returns parent element of the given element
+	 * 
+	 * @author Michal Nowierski ** @param childElement - the element whose
+	 *         parent we are looking for
+	 */
+	public WebElement getParentElement(WebElement childElement) {
+		return childElement.findElement(By.xpath(".."));
 	}
 
 	/**
@@ -443,35 +409,13 @@ public class BasePageObject {
 				.givenStringtoBePresentInURL(givenString));
 	}
 
-	/**
-	 * Navigates back to the previous page
-	 * 
-	 * @author Michal Nowierski
-	 */
-	public void navigateBack() {
-		try {
-			driver.navigate().back();
-			PageObjectLogging.log("navigateBack", "succesfully navigated back",
-					true);
-		} catch (Exception e) {
-			PageObjectLogging.log("navigateBack", e.toString(), false);
-		}
-	}
-
 	public String getTimeStamp() {
 		Date time = new Date();
 		long timeCurrent = time.getTime();
 		return String.valueOf(timeCurrent);
 	}
 
-	public UserProfilePageObject navigateToProfilePage(String domain,
-			String userName) {
-		driver.navigate().to(domain + "wiki/User:" + userName);
-		PageObjectLogging.log("UserProfilePageObject ",
-				"navigate to username page: " + domain + "wiki/User:"
-						+ userName, true, driver);
-		return new UserProfilePageObject(driver);
-	}
+	
 
 	/**
 	 * <p>
@@ -517,109 +461,14 @@ public class BasePageObject {
 	}
 
 	public void openWikiPage() {
-		getUrl(Domain + URLsContent.noexternals);
+		getUrl(Global.DOMAIN + URLsContent.noexternals);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
-	public WikiArticlePageObject openRandomArticle() {
-		clickAndWait(randomPageButton);
-		waitForElementByElement(searchButton);
-		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
-		return new WikiArticlePageObject(driver);
-	}
-
-	public void openRandomArticleByUrl() {
-		navigateToRandomPage();
-		waitForElementByElement(searchButton);
-		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
-	}
-
-	private void navigateToRandomPage() {
-		String temp = Domain;
-		try {
-			temp = Domain + "wiki/Special:Random";
-			getUrl(temp);
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logOut",
-					"page loads for more than 30 seconds", true);
-		}
-
-	}
-
-	public void notifications_verifyLatestNotificationTitle(String title) {
-		notifications_showNotifications();
-		// the below method is native click which is the only way to load
-		// notification
-		notifications_clickOnNotificationsLogo();
-		waitForElementByElement(notifications_LatestNotificationOnWiki);
-		waitForTextToBePresentInElementByElement(
-				notifications_LatestNotificationOnWiki, title);
-		PageObjectLogging.log("notifications_verifyNotificationTitle",
-				"Verify that the latest notification has the following title: "
-						+ title, true, driver);
-	}
-
-	public void notifications_clickOnNotificationsLogo() {
-		waitForElementByElement(notifications_ShowNotificationsLogo);
-		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		clickAndWait(notifications_ShowNotificationsLogo);
-		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
-				"click on notifications logo on the upper right corner", true,
-				driver);
-	}
-
-	public void notifications_showNotifications() {
-		waitForElementByElement(notifications_ShowNotificationsLogo);
-		executeScript("$('#WallNotifications ul.subnav').addClass('show')");
-		PageObjectLogging.log("norifications_showNotifications",
-				"show notifications by adding 'show' class to element", true,
-				driver);
-	}
-
-	public void notifications_showNotificationsForWikiOnMenu() {
-		waitForElementByElement(notifications_NotificationsForWiki);
-		waitForElementClickableByElement(notifications_NotificationsForWiki);
-		clickAndWait(notifications_NotificationsForWiki);
-		PageObjectLogging.log("notifications_showNotificationsForWiki",
-				"show the upper wiki notifications on menu", true, driver);
-	}
-
-	public void notifications_markLatestNotificationsAsRead() {
-		notifications_showNotifications();
-		notifications_clickMarkAllAsRead(false);
-	}
-
-	public void notifications_clickMarkAllAsRead(boolean allWikis) {
-		waitForElementByElement(notifications_MarkAllAsReadButton);
-		waitForElementClickableByElement(notifications_MarkAllAsReadButton);
-		clickAndWait(notifications_MarkAllAsReadButton);
-		if (allWikis) {
-			waitForElementClickableByElement(notifications_MarkAllWikisAsReadButton);
-			clickAndWait(notifications_MarkAllWikisAsReadButton);
-		} else {
-			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
-			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);
-		}
-		PageObjectLogging.log("notifications_clickMarkAllAsRead",
-				(allWikis ? "all wikis" : "only one wiki") + " marked as read",
-				true, driver);
-	}
-
-	/**
-	 * Determine whether username contains underscore if so replace it with
-	 * space
-	 * 
-	 * @param username
+	/*
+	 * Wait for expected conditions methods
 	 */
-	protected String purifyUserName(String userName) {
-		if (userName.contains("_")) {
-			userName = userName.replace("_", " ");
-		}
-		return userName;
-	}
-
+	
 	/**
 	 * Wait for element to not be present in DOM
 	 * 
@@ -692,4 +541,67 @@ public class BasePageObject {
 		driver.get(getCurrentUrl() + additionToUrl);
 	}
 
+	
+	/*
+	 * notifications methods - will be moved to other class
+	 */
+	public void notifications_verifyLatestNotificationTitle(String title) {
+		notifications_showNotifications();
+		// the below method is native click which is the only way to load
+		// notification
+		notifications_clickOnNotificationsLogo();
+		waitForElementByElement(notifications_LatestNotificationOnWiki);
+		waitForTextToBePresentInElementByElement(
+				notifications_LatestNotificationOnWiki, title);
+		PageObjectLogging.log("notifications_verifyNotificationTitle",
+				"Verify that the latest notification has the following title: "
+						+ title, true, driver);
+	}
+
+	public void notifications_clickOnNotificationsLogo() {
+		waitForElementByElement(notifications_ShowNotificationsLogo);
+		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
+		clickAndWait(notifications_ShowNotificationsLogo);
+		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
+				"click on notifications logo on the upper right corner", true,
+				driver);
+	}
+
+	public void notifications_showNotifications() {
+		waitForElementByElement(notifications_ShowNotificationsLogo);
+		executeScript("$('#WallNotifications ul.subnav').addClass('show')");
+		PageObjectLogging.log("norifications_showNotifications",
+				"show notifications by adding 'show' class to element", true,
+				driver);
+	}
+
+	public void notifications_showNotificationsForWikiOnMenu() {
+		waitForElementByElement(notifications_NotificationsForWiki);
+		waitForElementClickableByElement(notifications_NotificationsForWiki);
+		clickAndWait(notifications_NotificationsForWiki);
+		PageObjectLogging.log("notifications_showNotificationsForWiki",
+				"show the upper wiki notifications on menu", true, driver);
+	}
+
+	public void notifications_markLatestNotificationsAsRead() {
+		notifications_showNotifications();
+		notifications_clickMarkAllAsRead(false);
+	}
+
+	public void notifications_clickMarkAllAsRead(boolean allWikis) {
+		waitForElementByElement(notifications_MarkAllAsReadButton);
+		waitForElementClickableByElement(notifications_MarkAllAsReadButton);
+		clickAndWait(notifications_MarkAllAsReadButton);
+		if (allWikis) {
+			waitForElementClickableByElement(notifications_MarkAllWikisAsReadButton);
+			clickAndWait(notifications_MarkAllWikisAsReadButton);
+		} else {
+			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
+			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);
+		}
+		PageObjectLogging.log("notifications_clickMarkAllAsRead",
+				(allWikis ? "all wikis" : "only one wiki") + " marked as read",
+				true, driver);
+	}
+	
 }

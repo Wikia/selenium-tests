@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -81,6 +83,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement addPhotoToGalleryButton;
 	@FindBy(css=".wikia-slideshow-addimage")
 	private WebElement addPhotoToSlideShowButton;
+	@FindBy(css = "a[data-canonical='random']")
+	private WebElement randomPageButton;
+	@FindBy(css = ".sprite.search")
+	private WebElement searchButton;
 
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
@@ -91,6 +97,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
 	
+	private String pageName;
 
 	public WikiArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -98,7 +105,46 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public String getPageName(){
-		return this.articlename;
+		return this.pageName;
+	}
+	
+	public WikiArticleEditMode createNewArticle(String pageName,
+			int layoutNumber) {
+		getUrl(Global.DOMAIN + "index.php?title=" + pageName
+				+ "&action=edit&useFormat=" + layoutNumber);
+		String pageNameEnc = pageName.replace("_", " ");
+		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
+				+ pageNameEnc + "']")));
+		return new WikiArticleEditMode(driver);
+	} 
+	
+	public WikiArticleEditMode createNewDefaultArticle(){
+		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
+		return createNewArticle(this.pageName, 1);
+	}
+	
+	private void navigateToRandomPage() {
+		try {
+			getUrl(Global.DOMAIN + "wiki/Special:Random");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+	}
+	
+	public void openRandomArticleByUrl() {
+		navigateToRandomPage();
+		waitForElementByElement(searchButton);
+		PageObjectLogging.log("openRandomArticle",
+				"random page button clicked", true, driver);
+	}
+	
+	public WikiArticlePageObject openRandomArticle() {
+		clickAndWait(randomPageButton);
+		waitForElementByElement(searchButton);
+		PageObjectLogging.log("openRandomArticle",
+				"random page button clicked", true, driver);
+		return new WikiArticlePageObject(driver);
 	}
 	
 	public void triggerCommentArea()
@@ -256,8 +302,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
             waitForElementByElement(editButton);
             clickAndWait(editButton);
             PageObjectLogging.log(
-                "Edit",
-                "Edit Article: " + articlename + ", on wiki: " + Domain,
+                "edit",
+                "",
                 true, driver
             );
             return new WikiArticleEditMode(driver);

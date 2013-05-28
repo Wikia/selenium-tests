@@ -38,7 +38,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
     public void ArticleAnonymousActionsMonoBook_001_edit() {
         CommonFunctions.logOut(driver);
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -56,7 +56,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
     public void ArticleAnonymousActionsMonoBook_002_add(String articleName) {
         CommonFunctions.logOut(driver);
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.addArticleByUrl(articleName);
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
         articleContent = article.editContent();
@@ -73,7 +73,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
     {
         CommonFunctions.logOut(driver);
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -91,7 +91,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
     public void ArticleAnonymousActionsMonoBook_004_start_discusion() {
         CommonFunctions.logOut(driver);
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -109,7 +109,7 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
     public void ArticleAnonymousActionsMonoBook_005_reply_comment() {
         CommonFunctions.logOut(driver);
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);

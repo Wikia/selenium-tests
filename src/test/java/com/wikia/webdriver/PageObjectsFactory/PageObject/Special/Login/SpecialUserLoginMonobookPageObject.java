@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BaseMonoBookPageObject;
 
@@ -28,7 +29,7 @@ public class SpecialUserLoginMonobookPageObject extends BaseMonoBookPageObject {
     }
 
     public void open() {
-        String specialLoginPageUrl = Domain + URLsContent.specialUserLogin;
+        String specialLoginPageUrl = Global.DOMAIN + URLsContent.specialUserLogin;
         getUrl(specialLoginPageUrl);
         changeToMonoBook();
         PageObjectLogging.log(

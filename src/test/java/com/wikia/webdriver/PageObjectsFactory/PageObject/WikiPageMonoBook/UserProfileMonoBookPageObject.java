@@ -7,6 +7,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -118,7 +119,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
     }
 
     public void addBlogPostViaSpecial() {
-        getUrl(Domain + URLsContent.specialAddBlogPost + "?useskin=monobook");
+        getUrl(Global.DOMAIN + URLsContent.specialAddBlogPost + "?useskin=monobook");
         waitForTextToBePresentInElementByElement(
             header, PageContent.createNewBlogPostMessage
         );
@@ -152,7 +153,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void openUserBlogViaUrl() {
         String userBlog = URLsContent.userBlog.replace("%user%", userName);
-        getUrl(Domain + userBlog);
+        getUrl(Global.DOMAIN + userBlog);
         changeToMonoBook();
 
         PageObjectLogging.log(

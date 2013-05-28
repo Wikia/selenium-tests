@@ -10,10 +10,10 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogListPageObject;
 
-public class SpecialCreateBlogListingPageObject extends BasePageObject{
+public class SpecialCreateBlogListingPageObject extends WikiArticlePageObject{
 
 	public SpecialCreateBlogListingPageObject(WebDriver driver) {
 		super(driver);

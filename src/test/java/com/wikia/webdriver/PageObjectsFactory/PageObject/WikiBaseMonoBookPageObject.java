@@ -5,6 +5,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -25,15 +26,13 @@ public class WikiBaseMonoBookPageObject extends BaseMonoBookPageObject {
     @FindBy(css = "#pt-userpage>a")
     private WebElement closeDisclaimer;
 
-    public WikiBaseMonoBookPageObject(WebDriver driver, String Domain) {
+    public WikiBaseMonoBookPageObject(WebDriver driver) {
         super(driver);
-        this.Domain = Domain;
         PageFactory.initElements(driver, this);
     }
 
     public void openWikiWithMonobook() {
-        String baseUrl = Domain;
-        getUrl(baseUrl + URLsContent.noexternals);
+        getUrl(Global.DOMAIN + URLsContent.noexternals);
         PageObjectLogging.log(
             "openWikiBasePageError",
             "open wiki base page took more then 30 seconds",
@@ -56,7 +55,7 @@ public class WikiBaseMonoBookPageObject extends BaseMonoBookPageObject {
         String url  = URLsContent.addArticle;
         articleName = articleName+getTimeStamp();
         url = url.replace("%title%", articleName);
-        getUrl(Domain + url);
+        getUrl(Global.DOMAIN + url);
         PageObjectLogging.log(
             "addArticleUsingMonobook",
             "adding article by url",

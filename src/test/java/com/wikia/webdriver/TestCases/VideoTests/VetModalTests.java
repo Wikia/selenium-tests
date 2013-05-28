@@ -11,6 +11,7 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class VetModalTests extends TestTemplate {
@@ -26,11 +27,11 @@ public class VetModalTests extends TestTemplate {
 
 	@Test(groups = { "VetModalTests001", "VetModalTests" })
 	public void Vet_Tests_001_VerifyLeftAlignmentOnEditorSourceAndArticle() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -40,8 +41,8 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyLeftVideoInEditMode();
 		edit.clickOnSourceButton();
 		edit.verifyWikiTextInSourceMode("left");
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheLeftOnAritcle();
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheLeftOnAritcle();
 	}
 
 	/**
@@ -54,12 +55,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests002", "VetModalTests" })
 	public void Vet_Tests_002_VerifyLeftAlignmentOnEditorSourcePreviewModalAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password,
 				driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -73,8 +74,8 @@ public class VetModalTests extends TestTemplate {
 		edit.clickOnPreviewButton();
 		edit.verifyVideoOnTheLeftInPreview();
 		edit.clickClosePreviewModalButton();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheLeftOnAritcle();
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheLeftOnAritcle();
 	}
 
 	/**
@@ -88,12 +89,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests003", "VetModalTests" })
 	public void Vet_Tests_003_VerifyLeftAlignmentOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -101,14 +102,13 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.adjustPosition(1);
 		vetOptions.submit();
 		edit.verifyLeftVideoInEditMode();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheLeftOnAritcle();
-		edit = wiki.clickEditButton(pageName);
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheLeftOnAritcle();
+		edit = article.clickEditButton(pageName);
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyAlignmentOptionIsSelected(1);
 		vetOptions.clickUpdateVideo();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
 	}
 
 	/**
@@ -121,12 +121,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests004", "VetModalTests" })
 	public void Vet_Tests_004_VerifyRightAlignmentOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -136,9 +136,8 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyRightVideoInEditMode();
 		edit.clickOnSourceButton();
 		edit.verifyWikiTextInSourceMode("right");
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheRightOnAritcle();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheRightOnAritcle();
 	}
 
 	/**
@@ -152,12 +151,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests005", "VetModalTests" })
 	public void Vet_Tests_005_VerifyRightAlignmentOnEditorSourcePreviewModalAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -171,9 +170,8 @@ public class VetModalTests extends TestTemplate {
 		edit.clickOnPreviewButton();
 		edit.verifyVideoOnTheRightInPreview();
 		edit.clickClosePreviewModalButton();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheRightOnAritcle();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheRightOnAritcle();
 	}
 
 	/**
@@ -187,12 +185,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests006", "VetModalTests" })
 	public void Vet_Tests_006_VerifyRightAlignmentOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -200,14 +198,13 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.adjustPosition(3);
 		vetOptions.submit();
 		edit.verifyRightVideoInEditMode();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheRightOnAritcle();
-		edit = wiki.clickEditButton(pageName);
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheRightOnAritcle();
+		edit = article.clickEditButton(pageName);
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyAlignmentOptionIsSelected(3);
 		vetOptions.clickUpdateVideo();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
 	}
 
 	/**
@@ -220,12 +217,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests007", "VetModalTests" })
 	public void Vet_Tests_007_VerifyCenterAlignmentOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -235,9 +232,8 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyCenterVideoInEditMode();
 		edit.clickOnSourceButton();
 		edit.verifyWikiTextInSourceMode("center");
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheCenterOnArticle();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheCenterOnArticle();
 	}
 
 	/**
@@ -251,12 +247,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests008", "VetModalTests" })
 	public void Vet_Tests_008_VerifyCenterAlignmentOnEditorSourcePreviewModalAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -270,9 +266,8 @@ public class VetModalTests extends TestTemplate {
 		edit.clickOnPreviewButton();
 		edit.verifyVideoOnTheCenterInPreview();
 		edit.clickClosePreviewModalButton();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheCenterOnArticle();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheCenterOnArticle();
 	}
 
 	/**
@@ -286,12 +281,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests009", "VetModalTests" })
 	public void Vet_Tests_009_VerifyCenterAlignmentOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -299,14 +294,13 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.adjustPosition(2);
 		vetOptions.submit();
 		edit.verifyCenterVideoInEditMode();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoOnTheCenterOnArticle();
-		edit = wiki.clickEditButton(pageName);
+		edit.clickOnPublishButton();
+		article.verifyVideoOnTheCenterOnArticle();
+		edit = article.clickEditButton(pageName);
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyAlignmentOptionIsSelected(2);
 		vetOptions.clickUpdateVideo();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
 	}
 
 	/**
@@ -318,12 +312,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests010", "VetModalTests" })
 	public void Vet_Tests_010_VerifyVideoWidthOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -333,10 +327,8 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyVideoWidthInEditMode();
 		edit.clickOnSourceButton();
 		edit.verifyWikiTextInSourceMode("250");
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoWidthOnAritcle("250px");
-		CommonFunctions.logoutCookie(cookieName);
-
+		edit.clickOnPublishButton();
+		article.verifyVideoWidthOnAritcle("250px");
 	}
 
 	/**
@@ -350,12 +342,12 @@ public class VetModalTests extends TestTemplate {
 	public void Vet_Tests_011_VerifyVideoWidthOnEditorSourcePreviewModalAndArticle() {
 
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -369,10 +361,8 @@ public class VetModalTests extends TestTemplate {
 		edit.clickOnPreviewButton();
 		edit.verifyVideoWidthOnPreview("250px");
 		edit.clickClosePreviewModalButton();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoWidthOnAritcle("250px");
-		CommonFunctions.logoutCookie(cookieName);
-
+		edit.clickOnPublishButton();
+		article.verifyVideoWidthOnAritcle("250px");
 	}
 
 	/**
@@ -385,12 +375,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests012", "VetModalTests" })
 	public void Vet_Tests_012_VerifyVideoWidthOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -398,15 +388,13 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.adjustWith(250);
 		vetOptions.submit();
 		edit.verifyVideoWidthInEditMode();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoWidthOnAritcle("250px");
-		edit = wiki.clickEditButton(pageName);
+		edit.clickOnPublishButton();
+		article.verifyVideoWidthOnAritcle("250px");
+		edit = article.clickEditButton(pageName);
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyVideoWidthInVETOptionsModal();
 		vetOptions.clickUpdateVideo();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
-
+		edit.clickOnPublishButton();
 	}
 
 	/**
@@ -418,12 +406,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests013", "VetModalTests" })
 	public void Vet_Tests_013_VerifyVideoCaptionOnEditorSourceAndArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -433,9 +421,8 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyCaptionInEditMode();
 		edit.clickOnSourceButton();
 		edit.verifyWikiTextInSourceMode(PageContent.caption);
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoCaptionOnAritcle();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
+		article.verifyVideoCaptionOnAritcle();
 	}
 
 	/**
@@ -449,12 +436,12 @@ public class VetModalTests extends TestTemplate {
 	public void Vet_Tests_014_VerifyVideoCaptionOnEditorSourcePreviewModalAndArticle() {
 
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -467,9 +454,8 @@ public class VetModalTests extends TestTemplate {
 		edit.clickOnPreviewButton();
 		edit.verifyTheCaptionOnThePreview(PageContent.caption);
 		edit.clickClosePreviewModalButton();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoCaptionOnAritcle();
-		CommonFunctions.logoutCookie(cookieName);
+		edit.clickOnPublishButton();
+		article.verifyVideoCaptionOnAritcle();
 	}
 
 	/**
@@ -482,12 +468,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests015", "VetModalTests" })
 	public void Vet_Tests_015_VerifyVideoCaptionOnEditorArticleAndVETOptions() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -495,15 +481,13 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		edit.verifyCaptionInEditMode();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyVideoCaptionOnAritcle();
-		edit = wiki.clickEditButton(pageName);
+		edit.clickOnPublishButton();
+		article.verifyVideoCaptionOnAritcle();
+		edit = article.clickEditButton(pageName);
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyCaptionInVETModal(PageContent.caption);
 		vetOptions.clickUpdateVideo();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
-
+		edit.clickOnPublishButton();
 	}
 
 	/**
@@ -516,12 +500,12 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests016", "VetModalTests" })
 	public void Vet_Tests_016_VerifyNoCaptionOnEditorArticle() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
@@ -529,15 +513,13 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.adjustStyle(2);
 		vetOptions.submit();
 		edit.verifyNoVideoCaptionInEditMode();
-		wiki = edit.clickOnPublishButton();
-		wiki.verifyNoVideoCaptionOnAritcle();
-		edit = wiki.clickEditButton(pageName);
+		edit.clickOnPublishButton();
+		article.verifyNoVideoCaptionOnAritcle();
+		edit = article.clickEditButton(pageName);
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyNoCaptionInVETModal();
 		vetOptions.clickUpdateVideo();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
-
+		edit.clickOnPublishButton();
 	}
 
 	/**
@@ -550,21 +532,19 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests017", "VetModalTests" })
 	public void Vet_Tests_017_VerifyVideoNameFieldIsNotEditable() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.wikiaVideoURL);
 		vetOptions.verifyVideoNameFieldIsNotEditable();
 		vetOptions.submit();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
-
+		edit.clickOnPublishButton();
 	}
 
 	/**
@@ -577,20 +557,18 @@ public class VetModalTests extends TestTemplate {
 	@Test(groups = { "VetModalTests018", "VetModalTests" })
 	public void Vet_Tests_018_VerifyVideoNameFieldIsEditable() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		String cookieName = CommonFunctions.logInCookie(Properties.userName,
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + wiki.getTimeStamp();
-		WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL2);
 		vetOptions.verifyVideoNameFieldIsEditable();
 		vetOptions.submit();
-		wiki = edit.clickOnPublishButton();
-		CommonFunctions.logoutCookie(cookieName);
-
+		edit.clickOnPublishButton();
 	}
 }

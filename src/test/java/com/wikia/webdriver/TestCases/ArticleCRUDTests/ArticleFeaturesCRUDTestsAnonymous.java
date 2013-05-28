@@ -22,13 +22,12 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	public void ArticleCRUDAnonymous_001_AddingImage()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
+		article.openWikiPage();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.clickPhotoButton();
-		wiki.verifyModalLoginAppeared();
+		article.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}		
 	
@@ -38,12 +37,12 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	public void ArticleCRUDAnonymous_002_AddingGallery()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
+		article.openWikiPage();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.clickGalleryButton();
-		wiki.verifyModalLoginAppeared();
+		article.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -53,12 +52,12 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	public void ArticleCRUDAnonymous_003_AddingSlideshow()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
+		article.openWikiPage();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.clickSlideshowButton();
-		wiki.verifyModalLoginAppeared();
+		article.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}
 	
@@ -68,12 +67,12 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	public void ArticleCRUDAnonymous_004_AddingSlider()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
-		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
+		article.openWikiPage();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.clickSliderButton();
-		wiki.verifyModalLoginAppeared();
+		article.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);	
 	}
 	
@@ -83,13 +82,13 @@ public class ArticleFeaturesCRUDTestsAnonymous extends TestTemplate
 	public void ArticleCRUDAnonymous_005_AddingVideo()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);	
-		wiki.openWikiPage();
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
+		article.openWikiPage();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 //		edit.clickOnVisualButton();
 		edit.clickVideoButton();
-		wiki.verifyModalLoginAppeared();
+		article.verifyModalLoginAppeared();
 		CommonFunctions.logOut(driver);
 	}	
 	

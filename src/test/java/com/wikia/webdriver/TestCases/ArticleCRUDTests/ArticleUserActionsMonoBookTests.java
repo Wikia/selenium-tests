@@ -45,7 +45,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -65,7 +65,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
     public void ArticleUserActionsMonoBook_002_add(String articleName) {
         CommonFunctions.logOut(driver);
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
 
         String cookie = CommonFunctions.logInCookie(
@@ -95,7 +95,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -116,7 +116,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -139,7 +139,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff
         );
         
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -161,7 +161,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
@@ -184,7 +184,7 @@ public class ArticleUserActionsMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         wiki.openRandomArticleMonobook();
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);

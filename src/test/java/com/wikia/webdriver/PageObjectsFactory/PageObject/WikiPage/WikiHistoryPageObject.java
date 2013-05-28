@@ -47,7 +47,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 		WebElement undo = driver.findElement(By.xpath("//ul[@id='pagehistory']/li["+revision+"]//span[@class='mw-history-undo']/a"));
 //		WebElement undo = driver.findElement(By.cssSelector("ul#pagehistory li:nth-child("+revision+") .mw-history-undo"));
 		clickAndWait(undo);
-		return new WikiArticleRevisionEditMode(driver, Domain, articlename);
+		return new WikiArticleRevisionEditMode(driver);
 	}
 	
 	public void rollbackPage()

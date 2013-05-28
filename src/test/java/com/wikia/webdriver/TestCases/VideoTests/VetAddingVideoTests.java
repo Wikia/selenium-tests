@@ -89,11 +89,11 @@ public class VetAddingVideoTests extends TestTemplate {
 	@Test(groups = {"VetTests005", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_005_ArticlePlaceholderPublishedPageProvider() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
-		WikiArticlePageObject article = edit.clickOnPublishButton();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		edit.clickOnPublishButton();
 		article.verifyPageTitle(article.getPageName());
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -104,11 +104,11 @@ public class VetAddingVideoTests extends TestTemplate {
 	@Test(groups = {"VetTests006", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_006_ArticlePlaceholderPublishedPageLibrary() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
-		WikiArticlePageObject article = edit.clickOnPublishButton();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		edit.clickOnPublishButton();
 		article.verifyPageTitle(article.getPageName());
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
@@ -119,16 +119,16 @@ public class VetAddingVideoTests extends TestTemplate {
 	@Test(groups = {"VetTests007", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_007_ArticlePlaceholderEditModePageProvider() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickModifyButtonVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		edit.verifyVideoInEditMode(PageContent.caption);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
+		edit.clickOnPublishButton();
 		article.verifyPageTitle(article.getPageName());
 		article.verifyVideoOnThePage();
 	}
@@ -136,16 +136,16 @@ public class VetAddingVideoTests extends TestTemplate {
 	@Test(groups = {"VetTests008", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_008_ArticlePlaceholderEditModePageLibrary() {
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickModifyButtonVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		edit.verifyVideoInEditMode(PageContent.caption);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
+		edit.clickOnPublishButton();
 		article.verifyPageTitle(article.getPageName());
 		article.verifyVideoOnThePage();
 	}	

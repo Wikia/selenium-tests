@@ -51,11 +51,12 @@ public class Following extends TestTemplate{
 	@Test(groups = {"Follow003", "Follow"})
 	public void follow003_BlogPosts(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage(); 
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
-		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix+article.getTimeStamp(); 
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);

@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.util.HashMap;
@@ -146,7 +147,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
     }
 
     private void openTestBlockTab() {
-        getUrl(Domain + URLsContent.specialPhalanxTest);
+        getUrl(Global.DOMAIN + URLsContent.specialPhalanxTest);
         waitForElementByElement(testTextInput);
     }
 

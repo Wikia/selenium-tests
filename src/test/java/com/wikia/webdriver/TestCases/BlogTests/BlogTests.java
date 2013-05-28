@@ -24,7 +24,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage(); 
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -44,7 +45,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -69,7 +71,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -90,7 +93,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -112,7 +116,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -136,7 +141,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -164,7 +170,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userNameStaff);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -190,7 +197,8 @@ public class BlogTests extends TestTemplate{
 		home.openWikiPage();
 		blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);

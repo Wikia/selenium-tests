@@ -83,11 +83,11 @@ public class VetProvidersTests extends TestTemplate{
 			{
 				PageObjectLogging.log("", videoURL, true);
 				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver);
-				wiki.openWikiPage();
+				WikiArticlePageObject article = new WikiArticlePageObject(driver);
+				article.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-				wiki.refreshPage();
-				WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+				article.refreshPage();
+				WikiArticleEditMode edit = article.createNewDefaultArticle();
 				edit.deleteArticleContent();
 				edit.clickOnVisualButton();
 				VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
@@ -95,7 +95,7 @@ public class VetProvidersTests extends TestTemplate{
 				vetOptions.setCaption(PageContent.caption);
 				vetOptions.submit();
 				edit.verifyVideoInEditMode(PageContent.caption);
-				WikiArticlePageObject article = edit.clickOnPublishButton();
+				edit.clickOnPublishButton();
 				article.verifyVideoOnThePage();
 				FileDetailsPageObject fileDetails = article.clickVideoDetailsButton();
 				fileDetails.verifyEmbeddedVideoIsPresent();	
@@ -106,30 +106,30 @@ public class VetProvidersTests extends TestTemplate{
 			{
 				PageObjectLogging.log("", videoUrl, true);
 				CommonFunctions.logOut(driver);
-				WikiArticlePageObject wiki = new WikiArticlePageObject(driver);
-				wiki.openWikiPage();
+				WikiArticlePageObject article = new WikiArticlePageObject(driver);
+				article.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-				wiki.openArticle("MediaWiki:RelatedVideosGlobalList");
-				WikiArticleEditMode RVmoduleMessageEdit = wiki.edit();		
+				article.openArticle("MediaWiki:RelatedVideosGlobalList");
+				WikiArticleEditMode RVmoduleMessageEdit = article.edit();		
 				RVmoduleMessageEdit.deleteUnwantedVideoFromMessage(name);
-				wiki = RVmoduleMessageEdit.clickOnPublishButton();
-				wiki.openRandomArticleByUrl();
-				VetAddVideoComponentObject vetAddingVideo = wiki.clickOnAddVideoRVModule();
+				RVmoduleMessageEdit.clickOnPublishButton();
+				article.openRandomArticleByUrl();
+				VetAddVideoComponentObject vetAddingVideo = article.clickOnAddVideoRVModule();
 				vetAddingVideo.addVideoByUrl(videoUrl);
-				wiki.verifyVideoAddedToRVModule(name);
+				article.verifyVideoAddedToRVModule(name);
 			}
 			
 			@Test(groups={"ArticleVideo_003", "ArticleVideo"}) 
 			public void ArticleVideo003_VerifyingImagesPositionWikiText()
 			{
 				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver);
-				wiki.openWikiPage();
+				WikiArticlePageObject article = new WikiArticlePageObject(driver);
+				article.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
-				wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
-				wiki.openWikiPage();
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				article.refreshPage();
+				pageName = "QAarticle"+article.getTimeStamp();
+				article.openWikiPage();
+				WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 				edit.deleteArticleContent();
 				PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
 				PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
@@ -140,7 +140,7 @@ public class VetProvidersTests extends TestTemplate{
 				edit.verifyWikiTextInSourceMode("left");					
 				edit.clickOnVisualButton();				
 				edit.verifyLeftAlignmentIsSelected();
-				WikiArticlePageObject article = edit.clickOnPublishButton();
+				edit.clickOnPublishButton();
 				article.verifyImageOnThePage();
 			}
 			
@@ -148,16 +148,16 @@ public class VetProvidersTests extends TestTemplate{
 			public void ArticleVideo004_Lightbox_VerifyExistenceAndURLsOfSocialButtons()
 			{
 				CommonFunctions.logOut(driver);
-				WikiBasePageObject wiki = new WikiBasePageObject(driver);
-				wiki.openWikiPage();
+				WikiArticlePageObject article = new WikiArticlePageObject(driver);
+				article.openWikiPage();
 				CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 				//wiki.refreshPage();
-				pageName = "QAarticle"+wiki.getTimeStamp();
-				wiki.openWikiPage();			
-				WikiArticleEditMode edit = wiki.createNewArticle(pageName, 1);
+				pageName = "QAarticle"+article.getTimeStamp();
+				article.openWikiPage();			
+				WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 				edit.deleteArticleContent();
 				edit.clickPhotoButton();
-				WikiArticlePageObject article = edit.addImageForLightboxTesting();
+				edit.addImageForLightboxTesting();
 				LightboxPageObject lightbox = article.clickThumbnailImage();
 				lightbox.clickPinButton();
 				lightbox.clickShareButton();
