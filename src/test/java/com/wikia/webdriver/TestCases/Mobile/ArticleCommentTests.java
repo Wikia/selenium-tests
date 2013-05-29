@@ -9,7 +9,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageOb
 public class ArticleCommentTests extends TestTemplate{
 
 	String timeStamp;
-	
+
 	@Test(groups={"mobile"})
 	public void ArticleCommentTest_001_PostComment(){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
@@ -17,9 +17,9 @@ public class ArticleCommentTests extends TestTemplate{
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
 		article.addComment("QAComment"+timeStamp);
-		
+
 	}
-	
+
 	@Test(groups={"mobile"})
 	public void ArticleCommentTest_002_PostCommentReply(){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
@@ -29,7 +29,7 @@ public class ArticleCommentTests extends TestTemplate{
 		article.addComment("QAComment"+timeStamp);
 		article.addReply("QAReply"+timeStamp);
 	}
-	
+
 	@Test(groups={"mobile"})
 	public void ArticleCommentTest_003_CommentPagination(){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);

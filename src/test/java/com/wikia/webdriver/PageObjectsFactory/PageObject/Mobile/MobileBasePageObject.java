@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -62,13 +60,13 @@ public class MobileBasePageObject extends BasePageObject {
 	private WebElement curtain;
 	@FindBy(css="h2.collSec.open")
 	protected WebElement sectionHeaderOpened;
-	
+
 	 @FindBys(@FindBy(css="ul[id='wkSrhSug'] li[class='show']"))
 	 private List<WebElement> searchSuggestion;
-	 
+
 	 @FindBys(@FindBy(css="ul[id='wkSrhSug'] li[class='show'] span[title]"))
 	 private List<WebElement> searchSuggestionText;
-	 
+
 	 @FindBys(@FindBy(css="ul[id='wkSrhSug'] li span[class='copySrh']"))
 	 private List<WebElement> addSuggestionButton;
 
@@ -200,47 +198,47 @@ public class MobileBasePageObject extends BasePageObject {
 		typeInSearchQuery(query);
 		submitSearchQuery();
 		PageObjectLogging.log("searchQuery", "searching for "+query, true, driver);
-		return new MobileSearchPageObject(driver);	
+		return new MobileSearchPageObject(driver);
 	}
-	
+
 	public void verifySuggestions()
 	{
 		for (WebElement elem:searchSuggestion)
 		{
 			waitForElementByElement(elem);
 		}
-		PageObjectLogging.log("verifySuggestions", "search suggestions verified", true, driver);		
+		PageObjectLogging.log("verifySuggestions", "search suggestions verified", true, driver);
 	}
-	
-	
+
+
 	public void verifySuggestionsPlusButton(){
 		for (WebElement elem:addSuggestionButton){
 			waitForElementByElement(elem);
 		}
-		PageObjectLogging.log("verifySuggestionsPlusButton", "search suggestions plus button verified", true, driver);		
+		PageObjectLogging.log("verifySuggestionsPlusButton", "search suggestions plus button verified", true, driver);
 	}
-	
+
 	public void selectPlusFromSuggestions(int n){
 		waitForElementByElement(addSuggestionButton.get(n));
 		String text = searchSuggestion.get(n).findElement(By.cssSelector("span")).getAttribute("title");
 		addSuggestionButton.get(n).click();
 		Assertion.assertEquals(text, searchField.getAttribute("value"));
 	}
-	
+
 	public long getPosition()
 	{
-		return (Long) executeScriptRetLong("window.pageYOffset");
+		return executeScriptRetLong("window.pageYOffset");
 	}
-	
+
 	public void clickOnWikiaTopPageLogo(){
 		waitForElementByElement(wikiaTopPageLogo);
 		clickActions(wikiaTopPageLogo);
 	}
-	
+
 	public void verifyCurtainOpened(){
 		Assertion.assertEquals("block", curtain.getCssValue("display"));
 	}
-	
+
 	public void verifyCurtainClosed(){
 		Assertion.assertEquals("none", curtain.getCssValue("display"));
 	}

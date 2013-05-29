@@ -21,20 +21,20 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	private WebElement showHideAllButton;
 	@FindBy(css = "h2.collSec")
 	private List<WebElement> chevronList;
-	
-	
-	
+
+
+
 	public void clickShowHideAllButton(){
 		waitForElementByElement(showHideAllButton);
 		showHideAllButton.click();
 	}
-	
+
 	public void verifyChevronOpened(){
 		for(WebElement elem:chevronList){
 			Assertion.assertEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
-	
+
 	public void verifyChevronClosed(){
 		for(WebElement elem:chevronList){
 			Assertion.assertNotEquals("collSec open", elem.getAttribute("class"));

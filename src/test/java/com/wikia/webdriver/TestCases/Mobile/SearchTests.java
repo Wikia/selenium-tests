@@ -68,6 +68,6 @@ public class SearchTests extends TestTemplate {
 		List<String> thirdPage = search.getResult();
 		search.compareResultsEquals(firstPage, thirdPage);
 		search.compareResultsNotEquals(secondPage, firstPage);
-	}	
-	
+	}
+
 }

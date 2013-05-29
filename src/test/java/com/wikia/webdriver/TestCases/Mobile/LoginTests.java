@@ -21,7 +21,7 @@ public class LoginTests extends TestTemplate{
 		mobile.verifyURLcontains(url);
 		CommonFunctions.logOutMobile(driver);
 	}
-	
+
 /*	@Test(groups={"mobile", "mobile_facebook_login"})
 	public void LoginFacebook(){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);

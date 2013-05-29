@@ -64,7 +64,7 @@ public class TocTests extends TestTemplate{
 		Long positionAfterClick = article.getPosition();
 		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
 	}
-	@Test(groups={"mobile"}) 
+	@Test(groups={"mobile"})
 	public void Sections_006_tocClickOutsideOfToc(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage();
@@ -73,6 +73,6 @@ public class TocTests extends TestTemplate{
 		article.clickOnWikiaTopPageLogo();
 		article.verifyCurtainClosed();
 	}
-	
+
 }
 

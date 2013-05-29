@@ -19,9 +19,9 @@ public class ModalTests extends TestTemplate{
 		modal.goToNextImage();
 		Assertion.assertStringContains(current, modal.getCurrentImageUrl());
 		mobile = modal.closeModal();
-		
+
 	}
-	
+
 	// previous image
 	@Test
 	public void modalTest_002(){
@@ -32,7 +32,7 @@ public class ModalTests extends TestTemplate{
 		modal.goToPreviousImage();
 		Assertion.assertStringContains(current, modal.getCurrentImageUrl());
 		mobile = modal.closeModal();
-		
+
 	}
 
 	//test top bar visible/hidden
@@ -47,9 +47,9 @@ public class ModalTests extends TestTemplate{
 		modal.showTopBar();
 		modal.verifyTopBarVisible();
 	}
-	
-	
-	
-	
+
+
+
+
 }
 
