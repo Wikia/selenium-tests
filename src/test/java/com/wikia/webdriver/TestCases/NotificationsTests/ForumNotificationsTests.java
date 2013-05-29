@@ -23,7 +23,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * https://wikia-inc.atlassian.net/browse/DAR-112
 	 */
 	@Test(groups = { "ForumNotificationsTests_001", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_001_notificationsRepliesAnchor_userLeaves5replies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -72,7 +72,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups = { "ForumNotificationsTests_002", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_002_notificationsRepliesAnchor_userLeaves2replies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -120,7 +120,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * A verifies if the anchor is correct
 	 */
 	@Test(groups = { "ForumNotificationsTests_003", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_003_notificationsRepliesAnchor_userLeaves1reply() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -166,7 +166,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * correct
 	 */
 	@Test(groups = { "ForumNotificationsTests_004", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_004_notificationsRepliesAnchor_userSlowlyLeaves2replies60SecInterval() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -219,7 +219,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * is correct
 	 */
 	@Test(groups = { "ForumNotificationsTests_005", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_005_notificationsRepliesAnchor_userSlowlyLeaves2replies120SecInterval() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -271,7 +271,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * User C leaves 1 reply. User A verifies if the anchor is correct
 	 */
 	@Test(groups = { "ForumNotificationsTests_006", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_006_notificationsRepliesAnchor_TwoUsersLeaveTwoReplies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -325,7 +325,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * User C leaves 1 reply. user B leave yet annother reply. User A verifies if the anchor is correct
 	 */
 	@Test(groups = { "ForumNotificationsTests_007", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_007_notificationsRepliesAnchor_TwoUsersLeaveThreeReplies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -390,7 +390,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * Four replies are left. User A verifies if the anchor is correct
 	 */
 	@Test(groups = { "ForumNotificationsTests_008", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_008_notificationsRepliesAnchor_TwoUsersLeaveFourReplies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
@@ -462,7 +462,7 @@ public class ForumNotificationsTests extends TestTemplate {
 	 * Six replies are left. User A verifies if the anchor is correct
 	 */
 	@Test(groups = { "ForumNotificationsTests_009", "ForumNotificationsTests",
-			"Forum", "NotificationsTests" })
+			"NotificationsTests" })
 	public void forumNotificationsTests_009_notificationsRepliesAnchor_TwoUsersLeaveSixReplies() {
 		// user 1 creates a thread
 		CommonFunctions.logOut(driver);
