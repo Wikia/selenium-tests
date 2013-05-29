@@ -10,7 +10,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileModalCompo
 public class ModalTests extends TestTemplate{
 
 	// next image
-	@Test
+	@Test(groups={"mobile"})
 	public void modalTest_001(){
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals();
@@ -23,7 +23,7 @@ public class ModalTests extends TestTemplate{
 	}
 
 	// previous image
-	@Test
+	@Test(groups={"mobile"})
 	public void modalTest_002(){
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals();
@@ -36,7 +36,7 @@ public class ModalTests extends TestTemplate{
 	}
 
 	//test top bar visible/hidden
-	@Test
+	@Test(groups={"mobile"})
 	public void modalTest_003(){
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals();

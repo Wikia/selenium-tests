@@ -15,8 +15,6 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class MobileArticlePageObject extends MobileBasePageObject{
 
-
-
 	public MobileArticlePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
