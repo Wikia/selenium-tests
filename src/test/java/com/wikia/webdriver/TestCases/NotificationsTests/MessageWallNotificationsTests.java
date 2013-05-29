@@ -26,7 +26,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWall
 public class MessageWallNotificationsTests extends TestTemplate {
 
 	@Test(groups= {"MessageWallNotificationsTests_001", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_001_wallOwnerReceivesANotification() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -58,7 +58,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_002", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_002_threadCreatorSeesNotification() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -99,7 +99,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_003", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_003_wallThreadParticipantSeesNotification() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -148,7 +148,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_004", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_004_followerReceivesNotificationAboutNewThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -191,7 +191,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 	
 	@Test(groups= {"MessageWallNotificationsTests_005", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_005_followerReceivesNotificationAboutThreadResponse() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -251,7 +251,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_006", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_006_oneNotificationPerThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -295,7 +295,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_007", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_007_notificationPerEveryThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
@@ -350,7 +350,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_008", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_008_twoUsersCreatingAndRespondingToTheSameThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
@@ -390,7 +390,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_009", "MessageWallNotificationsTests",
-			"NotificationsTests", "MessageWall"} )
+			"NotificationsTests"} )
 	public void messageWallNotificationsTests_009_threeUsersCreatingAndRespondingToTheSameThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
