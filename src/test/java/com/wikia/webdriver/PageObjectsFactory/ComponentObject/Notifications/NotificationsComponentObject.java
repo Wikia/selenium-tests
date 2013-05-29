@@ -62,7 +62,7 @@ public class NotificationsComponentObject extends BasePageObject{
 	 */
 	protected void waitForNotificationsMessagesToLoad() {
 		waitForElementVisibleByElement(notificationsSubnav);
-		waitForElementPresenceByBy(By.cssSelector(notificationDropdownForCurrentWiki));		
+		waitForElementPresenceByBy(notificationDropdownForCurrentWiki);		
 		waitForElementNotPresent(emptyNotificationDropdownForCurrentWiki);
 	}
 	
@@ -125,7 +125,7 @@ public class NotificationsComponentObject extends BasePageObject{
 		ArrayList<WebElement> notifications = new ArrayList<WebElement>();
 		for (int i = 0; i < this.notificationsList.size(); i++) {
 			WebElement n = this.notificationsList.get(i);
-			WebElement nTitle = n.findElement(By.cssSelector(notificationTitle));
+			WebElement nTitle = n.findElement(notificationTitle);
 			if (n != null) {
 				if (title.equals(nTitle.getText())) {
 					notifications.add(n);

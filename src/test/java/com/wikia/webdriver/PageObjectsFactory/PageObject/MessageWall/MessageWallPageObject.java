@@ -249,12 +249,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	 * @param replyNumber This is the same number as in the URL for that message.
 	 */
 	public void verifyPostedReplyWithMessage(String message, int replyNumber)
-	{
-		new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(
-			By.cssSelector("ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p"), message)
-		);
+	{	
+		waitForTextToBePresentInElementByBy(By.cssSelector("ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message);
 		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
+	
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
