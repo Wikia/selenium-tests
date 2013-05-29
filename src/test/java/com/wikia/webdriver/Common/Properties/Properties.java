@@ -20,10 +20,7 @@ public class Properties {
 		}
 		Global.DOMAIN = System.getenv("SELENIUM_DOMAIN");
 		if(Global.DOMAIN == null || Global.DOMAIN.isEmpty()) {
-//			Global.DOMAIN = "http://mediawiki116.karol.wikia-dev.com/";
 			Global.DOMAIN = "http://mediawiki119.wikia.com/";
-//			Global.DOMAIN = "http://sandbox-qa05.mediawiki119.wikia.com/";
-//			Global.DOMAIN = "http://muppet.michalnowierski.wikia-dev.com/";
 		}
 		Global.LIVE_DOMAIN = System.getenv("SELENIUM_LIVE_DOMAIN");
 		if(Global.LIVE_DOMAIN == null || Global.LIVE_DOMAIN.isEmpty()) {

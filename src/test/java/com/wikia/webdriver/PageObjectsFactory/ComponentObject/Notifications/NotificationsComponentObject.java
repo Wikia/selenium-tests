@@ -42,18 +42,39 @@ public class NotificationsComponentObject extends BasePageObject{
 	private WebElement markNotificationsAsReadAllWikis;
 	@FindBy(css="#wall-notifications-markasread-this-wiki")
 	private WebElement markNotificationsAsReadThisWiki;
-
+	private By notificationDropdownForCurrentWiki = By.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
+	private By emptyNotificationDropdownForCurrentWiki = By.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
+	private By emptyNumberOfUnreadNotifications = By.cssSelector("#WallNotifications .subnav > li.notifications-empty");
+	private By notificationTitle = By.cssSelector("div.msg-title");
+	private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
+	
+	/**
+	 * hover the mouse over the notification bubble and wait for it to expand
+	 */
+	protected void openNotifications() {
+		executeScript("$('#WallNotifications li ul.subnav').addClass('show');$('#WallNotifications').mouseover();"); 
+		builder.moveToElement(notifications).build().perform();
+	}
+	
+	/**
+	 * After expanding the notifications dropdown, the notification messages are loaded
+	 * using ajax request. This method waits until this requests completes.
+	 */
+	protected void waitForNotificationsMessagesToLoad() {
+		waitForElementVisibleByElement(notificationsSubnav);
+		waitForElementPresenceByBy(By.cssSelector(notificationDropdownForCurrentWiki));		
+		waitForElementNotPresent(emptyNotificationDropdownForCurrentWiki);
+	}
+	
+	
 	/**
 	 * expand the notifications and wait until the notifications for the current wiki are loaded
 	 */
 	public void showNotifications() {
-		this.waitForNotificationsLoaded();
-		executeScript("$('#WallNotifications li ul.subnav').addClass('show');$('#WallNotifications').mouseover();"); 
-		builder.moveToElement(notifications).build().perform();
-		waitForElementVisibleByElement(notificationsSubnav);
+		waitForNotificationsLoaded();
+		openNotifications();
+		waitForNotificationsMessagesToLoad();				
 		PageObjectLogging.log("#WallNotifications li ul.subnav", "show notifications", true, driver);
-		waitForElementPresenceByBy(By.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)"));		
-		waitForElementNotPresent("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
 	}
 	
 	/**
@@ -71,9 +92,13 @@ public class NotificationsComponentObject extends BasePageObject{
 	 * Wait until ajax call updates the notifications status (showing the number of unread notifications)
 	 */
 	public void waitForNotificationsLoaded() {
-		waitForElementNotPresent("#WallNotifications .subnav > li.notifications-empty");
+		waitForElementNotPresent(emptyNumberOfUnreadNotifications);
 	}
 	
+	/**
+	 * Fetches the address that of n-th notification points to. 
+	 * Keep in mind the the notification index starts with 1, not 0.
+	 */
 	public String getNotificationLink(int notificationNumber) {
 		waitForElementByElement(notificationsList.get(notificationNumber - 1));
 		PageObjectLogging.log("unrollNotifications", "click on notifications bubbles", true, driver);
@@ -100,7 +125,7 @@ public class NotificationsComponentObject extends BasePageObject{
 		ArrayList<WebElement> notifications = new ArrayList<WebElement>();
 		for (int i = 0; i < this.notificationsList.size(); i++) {
 			WebElement n = this.notificationsList.get(i);
-			WebElement nTitle = n.findElement(By.cssSelector("div.msg-title"));
+			WebElement nTitle = n.findElement(By.cssSelector(notificationTitle));
 			if (n != null) {
 				if (title.equals(nTitle.getText())) {
 					notifications.add(n);
@@ -124,7 +149,7 @@ public class NotificationsComponentObject extends BasePageObject{
 				this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
 				this.click(this.markNotificationsAsReadAllWikis);
 			}			
-			this.waitForElementNotPresent("#WallNotifications > li > div.reddot");			
+			this.waitForElementNotPresent(unreadNotificationReddot);			
 		}
 	}
 	
