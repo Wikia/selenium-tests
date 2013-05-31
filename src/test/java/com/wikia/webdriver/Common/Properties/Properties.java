@@ -13,8 +13,7 @@ public class Properties {
 	private static void setPropertiesManually()
 	{
 		Global.BROWSER = "FF";
-		Global.DOMAIN = "http://mediawiki119.wikia.com/";
-		Global.LIVE_DOMAIN = "http://www.wikia.com/";
+		Global.DOMAIN = "http://muppet.michalnowierski.wikia-dev.com/";
 		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
