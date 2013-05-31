@@ -242,7 +242,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	{
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
-		PageObjectLogging.log("verifyPostedMessageWithTitle", "message with title verified", true, driver);
+		PageObjectLogging.log("verifyPostedMessageWithTitle", "message with title verified", true);
 	}
 	/**
 	 * @param message
@@ -257,37 +257,38 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
-		PageObjectLogging.log("verifyPostedBoldMessageWithTitle", "bold message with title verified", true, driver);
+		PageObjectLogging.log("verifyPostedBoldMessageWithTitle", "bold message with title verified", true);
 	}
 
 	public void verifyPostedItalicMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
-		PageObjectLogging.log("verifyPostedItalicMessageWithTitle", "italic message with title verified", true, driver);
+		PageObjectLogging.log("verifyPostedItalicMessageWithTitle", "italic message with title verified", true);
 	}
 
 	public void verifyPostedMessageWithLinks(String internallink, String externallink){
 		waitForTextToBePresentInElementByElement(messageBody.get(0), internallink);
 		waitForTextToBePresentInElementByElement(messageBody.get(1), externallink);
+		PageObjectLogging.log("verifyPostedMessageWithLinks", "message with links", true);
 	}
 
 	public void verifyPostedMessageWithoutTitle(String userName, String message)
 	{
 		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), 'Message from "+userName+"')]");
 		waitForElementByXPath("//div[@class='msg-body']/p[contains(text(), '"+message+"')]");
-		PageObjectLogging.log("verifyPostedMessageWithTitle", "message without title verified", true, driver);
+		PageObjectLogging.log("verifyPostedMessageWithTitle", "message without title verified", true);
 	}
 
 	public void verifyPostedMessageVideo(String title)
 	{
 		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), '"+title+"')]/../../div[@class='editarea']//a[@class='video image lightbox']");
-		PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true, driver);
+		PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
 	}
 
 	public void verifyPostedMessageImage(String title)
 	{
 		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), '"+title+"')]/../../div[@class='editarea']//img[@class='thumbimage']");
-		PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true, driver);
+		PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
 	}
 
 	public void removeMessage(String reason)
