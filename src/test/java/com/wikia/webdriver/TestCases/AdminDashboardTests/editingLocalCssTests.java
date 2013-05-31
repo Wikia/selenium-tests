@@ -20,6 +20,7 @@ public class editingLocalCssTests extends TestTemplate{
 	
 	private String mediaWikiCss = "MediaWiki:Wikia.css";
 	private String specialCSS = "Special:CSS";
+	private String actionEditParameter = "?action=edit";
 	
 	/**
 	 *	https://wikia-inc.atlassian.net/browse/DAR-293 
@@ -31,7 +32,7 @@ public class editingLocalCssTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		wiki.openArticle(this.mediaWikiCss);
 		wiki.clickEditButton("");
-		wiki.verifyURL(Global.DOMAIN+"wiki/"+this.specialCSS);
+		wiki.waitForStringInURL(this.specialCSS);
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class editingLocalCssTests extends TestTemplate{
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wiki.openArticle(this.mediaWikiCss);
-		wiki.appendToUrl("?action=edit");
+		wiki.appendToUrl(this.actionEditParameter);
 		wiki.verifyPermissionsErrorsPresent();
 	}
 	
@@ -78,7 +79,20 @@ public class editingLocalCssTests extends TestTemplate{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		wiki.openArticle(this.mediaWikiCss);
-		wiki.appendToUrl("?action=edit");
+		wiki.appendToUrl(this.actionEditParameter );
 		wiki.verifyPermissionsErrorsPresent();
+	}
+	
+	/**
+	 *	https://wikia-inc.atlassian.net/browse/DAR-298
+	 */
+	@Test(groups = { "editingLocalCss_006", "editingLocalCss", "AdminDashboard" })
+	public void editingLocalCss_006_UserWithAdminRightsTriesToEditWikiaCssUsingParameter() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		wiki.openArticle(this.mediaWikiCss);
+		wiki.appendToUrl(this.actionEditParameter);
+		wiki.waitForStringInURL(this.specialCSS);
 	}
 }
