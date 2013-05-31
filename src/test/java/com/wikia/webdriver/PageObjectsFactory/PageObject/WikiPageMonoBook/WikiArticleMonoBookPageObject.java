@@ -168,6 +168,11 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
             true, driver
         );
     }
+    
+    public void verifyEditionArea() {
+    	waitForElementByElement(editionArea);
+    	PageObjectLogging.log("verifyEditArea", "verify that edition area is present", true);
+    }
 
     public String renameArticle() {
         clickAndWait(renameLink);
@@ -366,4 +371,10 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
         String title = titleLocator.getText();
         return title;
     }
+
+	public void clickEdit() {
+		clickAndWait(editLink);
+		changeToMonoBook();
+		PageObjectLogging.log("clickEdit", "click on Edit link", true, driver);
+	}
 }
