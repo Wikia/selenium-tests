@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.P.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
@@ -140,6 +141,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
 		getUrl(Domain + "wiki/Special:NewFiles");
 		return new SpecialNewFilesPageObject(driver);
+	}
+	
+	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
+		getUrl(Domain + "wiki/Special:AdminDashboard");
+		return new SpecialAdminDashboardPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
@@ -622,5 +628,4 @@ public class WikiBasePageObject extends BasePageObject {
         WebElement body = driver.findElement(By.cssSelector("body"));
 	return (body.getAttribute("class").contains("mainpage"));
     }
-
 }

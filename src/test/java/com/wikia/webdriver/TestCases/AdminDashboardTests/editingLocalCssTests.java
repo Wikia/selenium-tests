@@ -8,6 +8,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.P.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBaseMonoBookPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;
@@ -103,13 +104,32 @@ public class editingLocalCssTests extends TestTemplate{
 	 *	https://wikia-inc.atlassian.net/browse/DAR-299
 	 */
 	@Test(groups = { "editingLocalCss_007", "editingLocalCss", "AdminDashboard" })
-	public void editingLocalCss_007_UserWithAdminRightsTriesToEditWikiaCssUsingParameter() {
-		CommonFunctions.logOut(driver);
+	public void editingLocalCss_007_MonobookUserWithAdminRightsEditsWikiaCss() {
         WikiBaseMonoBookPageObject monobookWiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
         monobookWiki.openWikiWithMonobook();
         CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
         WikiArticleMonoBookPageObject monobookArticle = monobookWiki.openArticle(this.mediaWikiCss);
         monobookArticle.clickEdit();
         monobookArticle.verifyEditionArea();
+	}
+	
+	/**
+	 *	https://wikia-inc.atlassian.net/browse/DAR-300
+	 */
+	@Test(groups = { "editingLocalCss_008", "editingLocalCss", "AdminDashboard" })
+	public void editingLocalCss_008_MonobookUserWithAdminRightsOpensSpecialCss() {
+	}
+	
+	/**
+	 *	https://wikia-inc.atlassian.net/browse/DAR-302
+	 */
+	@Test(groups = { "editingLocalCss_009", "editingLocalCss", "AdminDashboard" })
+	public void editingLocalCss_009_UserWithAdminRightsTriesToAccesSpecialCssFromAdminDashboard() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+        CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+        SpecialAdminDashboardPageObject adminDashboard = wiki.openSpecialAdminDashboard();
+        adminDashboard.clickCssTool();
+        wiki.waitForStringInURL(this.specialCSS);
 	}
 }

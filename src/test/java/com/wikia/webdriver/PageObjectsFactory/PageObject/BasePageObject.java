@@ -567,6 +567,7 @@ public class BasePageObject{
 	public void waitForStringInURL(String givenString)
 	{						
 			wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
+			PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
 	}
 	
 	/**
