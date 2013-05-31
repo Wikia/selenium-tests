@@ -334,6 +334,12 @@ public class WikiBasePageObject extends BasePageObject {
             );
         }
 
+       public void verifyEditButtonNotPresent() {
+    	   waitForElementNotVisibleByElement(editButton);
+    	   PageObjectLogging.log("verifyEditButtonNotPresent",
+    			   "edit button is not present", true);
+       }        
+
 	private void clickUndeleteArticle() {
 		waitForElementByElement(undeleteButton);
 		// jQuery didn't work here. The below workaround stimulates clicking on
