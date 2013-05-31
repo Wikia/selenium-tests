@@ -5,10 +5,13 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBaseMonoBookPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
 
 /**
  * tests are prepared to test the following feature: https://wikia-inc.atlassian.net/browse/DAR-136
@@ -94,5 +97,19 @@ public class editingLocalCssTests extends TestTemplate{
 		wiki.openArticle(this.mediaWikiCss);
 		wiki.appendToUrl(this.actionEditParameter);
 		wiki.waitForStringInURL(this.specialCSS);
+	}
+	
+	/**
+	 *	https://wikia-inc.atlassian.net/browse/DAR-299
+	 */
+	@Test(groups = { "editingLocalCss_007", "editingLocalCss", "AdminDashboard" })
+	public void editingLocalCss_007_UserWithAdminRightsTriesToEditWikiaCssUsingParameter() {
+		CommonFunctions.logOut(driver);
+        WikiBaseMonoBookPageObject monobookWiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        monobookWiki.openWikiWithMonobook();
+        CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+        WikiArticleMonoBookPageObject monobookArticle = monobookWiki.openArticle(this.mediaWikiCss);
+        monobookArticle.clickEdit();
+        monobookArticle.verifyEditionArea();
 	}
 }

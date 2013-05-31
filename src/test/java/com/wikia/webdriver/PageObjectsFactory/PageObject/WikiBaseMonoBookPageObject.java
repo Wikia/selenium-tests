@@ -4,9 +4,15 @@
  */
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
+
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -74,4 +80,23 @@ public class WikiBaseMonoBookPageObject extends BaseMonoBookPageObject {
             true, driver
         );
     }
+
+	public WikiArticleMonoBookPageObject openArticle(String articleName) {
+		URI uri;
+		try {
+			uri = new URI(Global.DOMAIN + "wiki/" + articleName);
+			String url = uri.toASCIIString();
+			getUrl(url);
+		} catch (URISyntaxException e) {
+
+			e.printStackTrace();
+		}
+		catch (TimeoutException e) {
+			PageObjectLogging.log("OpenArticle",
+					"page loads for more than 30 seconds", true);
+		}
+		PageObjectLogging.log("openArticle", "article " + articleName
+				+ " opened", true);
+		return new WikiArticleMonoBookPageObject(driver);
+	}
 }
