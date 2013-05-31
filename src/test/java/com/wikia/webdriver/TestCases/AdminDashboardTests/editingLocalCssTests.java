@@ -69,4 +69,16 @@ public class editingLocalCssTests extends TestTemplate{
 		wiki.openArticle(this.mediaWikiCss);
 		wiki.verifyEditButtonNotPresent();
 	}
+	
+	/**
+	 *	https://wikia-inc.atlassian.net/browse/DAR-297
+	 */
+	@Test(groups = { "editingLocalCss_005", "editingLocalCss", "AdminDashboard" })
+	public void editingLocalCss_005_AnonTriesToAccessWikiaCssUsingParameter() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		wiki.openArticle(this.mediaWikiCss);
+		wiki.appendToUrl("?action=edit");
+		wiki.verifyPermissionsErrorsPresent();
+	}
 }
