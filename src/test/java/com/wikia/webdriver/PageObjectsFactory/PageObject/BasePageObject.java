@@ -910,7 +910,7 @@ public class BasePageObject{
 
 	public void appendToUrl(String additionToUrl) {
 		driver.get(getCurrentUrl()+additionToUrl);
-		PageObjectLogging.log("appendToUrl", "append to the url the following string: "+additionToUrl, true);
+		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
 }
