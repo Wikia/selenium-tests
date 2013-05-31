@@ -11,7 +11,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;
 
 /**
- * those tests are prepared to test the following feature: on https://wikia-inc.atlassian.net/browse/DAR-136
+ * tests are prepared to test the following feature: https://wikia-inc.atlassian.net/browse/DAR-136
  * 
  * @author wikia
  *
@@ -57,5 +57,16 @@ public class editingLocalCssTests extends TestTemplate{
 		wiki.openArticle(this.mediaWikiCss);
 		wiki.appendToUrl("?action=edit");
 		wiki.verifyPermissionsErrorsPresent();
+	}
+	
+	/**
+	 *	https://wikia-inc.atlassian.net/browse/DAR-296
+	 */
+	@Test(groups = { "editingLocalCss_004", "editingLocalCss", "AdminDashboard" })
+	public void editingLocalCss_004_AnonHasNoEditOptionOnMediawikiWikiaCss() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		wiki.openWikiPage();
+		wiki.openArticle(this.mediaWikiCss);
+		wiki.verifyEditButtonNotPresent();
 	}
 }
