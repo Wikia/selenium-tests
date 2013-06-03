@@ -1,11 +1,5 @@
 package com.wikia.webdriver.Common.Core;
 
-import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import java.awt.AWTException;
 import java.awt.GraphicsEnvironment;
 import java.awt.MouseInfo;
@@ -16,6 +10,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -35,6 +30,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CommonFunctions {
 
@@ -68,7 +70,7 @@ public class CommonFunctions {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param userName
 	 * @author: Karol Kujawiak
 	 */
@@ -85,7 +87,7 @@ public class CommonFunctions {
 				.cssSelector("a[data-id='login']")));
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
-	
+
 	public static void logOutMonobook() {
 		try {
 			driver.manage().deleteAllCookies();
@@ -115,7 +117,7 @@ public class CommonFunctions {
 
 
 	/**
-	 * 
+	 *
 	 * @param attributeName
 	 * @return
 	 * @author: Karol Kujawiak
@@ -128,7 +130,7 @@ public class CommonFunctions {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param element
 	 * @param attributeName
 	 * @return
@@ -142,7 +144,7 @@ public class CommonFunctions {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return author: Karol Kujawiak
 	 */
 	public static WebElement getCurrentlyFocused() {
@@ -158,7 +160,7 @@ public class CommonFunctions {
 	 * automaticly (18 july 2012)
 	 * <p>
 	 * This method uses JavascriptExecutor
-	 * 
+	 *
 	 * @author Michal Nowierski
 	 * @param element
 	 *            Webelement to be scrolled to
@@ -177,7 +179,7 @@ public class CommonFunctions {
 
 	/**
 	 * Move cursor to the given X and Y coordinates
-	 * 
+	 *
 	 * @author Michal Nowierski
 	 * @param x
 	 * @param y
@@ -198,7 +200,7 @@ public class CommonFunctions {
 
 	/**
 	 * Move cursor to Element existing in default DOM, by its Location
-	 * 
+	 *
 	 * @author Michal Nowierski
 	 * @param elem1_location
 	 *            Location of WebElement (getLocation method)
@@ -261,7 +263,7 @@ public class CommonFunctions {
 	/**
 	 * Move cursor to Element existing in an IFrame DOM, by its By locator, and
 	 * the Iframe Webelement
-	 * 
+	 *
 	 * @author Michal Nowierski
 	 * @param IframeElemBy
 	 *            By selector of element to be hovered over
@@ -298,7 +300,7 @@ public class CommonFunctions {
 
 	/**
 	 * Move cursor to from current position by given x and y
-	 * 
+	 *
 	 * @author Michal Nowierski
 	 * @param x
 	 *            horrizontal move
@@ -350,7 +352,7 @@ public class CommonFunctions {
 				String xmlResponse = null;
 
 				xmlResponse = EntityUtils.toString(entity);
-				
+
 				String[] xmlResponseArr = xmlResponse.split("\"");
 				String token = xmlResponseArr[5];
 
@@ -461,7 +463,7 @@ public class CommonFunctions {
 
 				String[] xmlResponseArr = xmlResponse.split("\"");
 				String token = xmlResponseArr[5];
-
+				int i=0;
 				while (xmlResponseArr.length < 11) {// sometimes first request
 													// does
 													// not contain full
@@ -469,6 +471,7 @@ public class CommonFunctions {
 													// in such situation
 													// xmlResponseArr.length <
 													// 11
+					i++;
 					List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
 					nvps2.add(new BasicNameValuePair("action", "login"));
@@ -487,6 +490,10 @@ public class CommonFunctions {
 					xmlResponse = EntityUtils.toString(entity);
 
 					xmlResponseArr = xmlResponse.split("\"");
+					if (i>100){
+						System.out.println("unable to login using cookies");
+						break;
+					}
 				}
 
 				JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -539,7 +546,7 @@ public class CommonFunctions {
 		js.executeScript("$.cookie('" + wiki + "UserID', null)");
 		js.executeScript("$.cookie('" + wiki + "Token', null)");
 	}
-	
+
 	public static void waitForWindow(String windowName, String comment){
 		Object[] windows = driver.getWindowHandles().toArray();
 		int delay = 500;
@@ -558,7 +565,7 @@ public class CommonFunctions {
 			}
 		}
 	}
-	
+
 	public static String resetForgotPasswordTime(String userName){
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
@@ -568,6 +575,6 @@ public class CommonFunctions {
 		};
 		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
 	}
-	
+
 
 }
