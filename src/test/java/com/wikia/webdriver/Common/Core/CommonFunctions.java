@@ -63,14 +63,38 @@ public class CommonFunctions {
 		submitButton.click();
 		driver.findElement(By.cssSelector(".AccountNavigation a[href*='User:"
 				+ userName + "']"));// only for verification
-		if (!temp.contains("UserLogout")){
-            driver.get(temp);
-        }
+		if (!temp.contains("UserLogout")) {
+			driver.get(temp);
+		}
+
+	}
+
+	public static void logInMonobook(String userName, String password, WebDriver driver) {
+		String temp = driver.getCurrentUrl();
+		driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
+		WebElement userNameField = driver.findElement(By
+				.cssSelector("#WikiaArticle input[name='username']"));
+		WebElement passwordField = driver.findElement(By
+				.cssSelector("#WikiaArticle input[name='password']"));
+		String submitButtonSelector = "#WikiaArticle input[class='login-button big']";
+		WebElement submitButton = driver.findElement(By
+				.cssSelector(submitButtonSelector));
+		userNameField.sendKeys(userName);
+		passwordField.sendKeys(password);
+		submitButton.click();
+		driver.findElement(By.cssSelector("#pt-userpage a[href*='User:"
+				+ userName + "']"));// only for verification
+		if (!temp.contains("UserLogout")) {
+			driver.get(temp);
+		}
 
 	}
 
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param userName
 	 * @author: Karol Kujawiak
 	 */
@@ -117,7 +141,10 @@ public class CommonFunctions {
 
 
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param attributeName
 	 * @return
 	 * @author: Karol Kujawiak
@@ -130,21 +157,27 @@ public class CommonFunctions {
 	}
 
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param element
 	 * @param attributeName
 	 * @return
 	 * @author: Karol Kujawiak
 	 */
 	public static String getAttributeValue(WebElement element,
-			String attributeName) {
+										   String attributeName) {
 		driver = DriverProvider.getWebDriver();
 		wait = new WebDriverWait(driver, 30);
 		return element.getAttribute(attributeName);
 	}
 
 	/**
+<<<<<<< HEAD
 	 *
+=======
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @return author: Karol Kujawiak
 	 */
 	public static WebElement getCurrentlyFocused() {
@@ -155,15 +188,17 @@ public class CommonFunctions {
 
 	/**
 	 * Scroll to the given element
-	 * <p>
+	 * <p/>
 	 * This mehtod is used mostly because Chrome does not scroll to elements
 	 * automaticly (18 july 2012)
-	 * <p>
+	 * <p/>
 	 * This method uses JavascriptExecutor
 	 *
+<<<<<<< HEAD
+=======
+	 * @param element Webelement to be scrolled to
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
-	 * @param element
-	 *            Webelement to be scrolled to
 	 */
 	public static void scrollToElement(WebElement element) {
 		driver = DriverProvider.getWebDriver();
@@ -180,9 +215,13 @@ public class CommonFunctions {
 	/**
 	 * Move cursor to the given X and Y coordinates
 	 *
+<<<<<<< HEAD
 	 * @author Michal Nowierski
+=======
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param x
 	 * @param y
+	 * @author Michal Nowierski
 	 */
 	public static void MoveCursorTo(int x, int y) {
 		Robot robot = null;
@@ -201,9 +240,11 @@ public class CommonFunctions {
 	/**
 	 * Move cursor to Element existing in default DOM, by its Location
 	 *
+<<<<<<< HEAD
+=======
+	 * @param elem1_location Location of WebElement (getLocation method)
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
-	 * @param elem1_location
-	 *            Location of WebElement (getLocation method)
 	 */
 	public static void MoveCursorToElement(Point elem1_location) {
 		// Toolkit toolkit = Toolkit.getDefaultToolkit ();
@@ -236,7 +277,7 @@ public class CommonFunctions {
 	}
 
 	public static void MoveCursorToElement(Point elem1_location,
-			WebDriver driver) {
+										   WebDriver driver) {
 		int pixDiff = 0;
 		if (Global.BROWSER.equals("FF")) {
 			pixDiff = 6;
@@ -264,14 +305,15 @@ public class CommonFunctions {
 	 * Move cursor to Element existing in an IFrame DOM, by its By locator, and
 	 * the Iframe Webelement
 	 *
+<<<<<<< HEAD
+=======
+	 * @param IframeElemBy By selector of element to be hovered over
+	 * @param IFrame       IFrame where the element exists
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
-	 * @param IframeElemBy
-	 *            By selector of element to be hovered over
-	 * @param IFrame
-	 *            IFrame where the element exists
 	 */
 	public static void MoveCursorToIFrameElement(By IframeElemBy,
-			WebElement IFrame) {
+												 WebElement IFrame) {
 		driver = DriverProvider.getWebDriver();
 		Point IFrameLocation = IFrame.getLocation();
 		driver.switchTo().frame(IFrame);
@@ -301,11 +343,12 @@ public class CommonFunctions {
 	/**
 	 * Move cursor to from current position by given x and y
 	 *
+<<<<<<< HEAD
+=======
+	 * @param x horrizontal move
+	 * @param y vertical move
+>>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
-	 * @param x
-	 *            horrizontal move
-	 * @param y
-	 *            vertical move
 	 */
 	public static void DragFromCurrentCursorPositionAndDrop(int x, int y) {
 		Robot robot = null;
@@ -359,12 +402,12 @@ public class CommonFunctions {
 				// System.out.println(token);
 
 				while (xmlResponseArr.length < 11) {// sometimes first request
-													// does
-													// not contain full
-													// information,
-													// in such situation
-													// xmlResponseArr.length <
-													// 11
+					// does
+					// not contain full
+					// information,
+					// in such situation
+					// xmlResponseArr.length <
+					// 11
 					List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
 					nvps2.add(new BasicNameValuePair("action", "login"));
@@ -427,12 +470,13 @@ public class CommonFunctions {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return null;
-			} 		}
+			}
+		}
 
 	}
 
 	public static String logInCookie(String userName, String password,
-			WebDriver driver) {
+									 WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
 			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 			login.loginAndVerify(userName, password);
@@ -551,15 +595,15 @@ public class CommonFunctions {
 		Object[] windows = driver.getWindowHandles().toArray();
 		int delay = 500;
 		int sumDelay = 500;
-		while(windows.length==1){
+		while (windows.length == 1) {
 			try {
 				Thread.sleep(delay);
 				windows = driver.getWindowHandles().toArray();
-				sumDelay+=500;
+				sumDelay += 500;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if(sumDelay>5000){
+			if (sumDelay > 5000) {
 				PageObjectLogging.log(windowName, comment, false);
 				break;
 			}
