@@ -96,7 +96,7 @@ public class LightboxPageObject extends BasePageObject{
 //		closeLightboxButton.click();
 		jQueryClick("button.close.wikia-chiclet-button");
 		PageObjectLogging.log("clickCloseButton", "Close button is clicked", true, driver);
-		return new WikiArticlePageObject(driver, themeDesignerUrl, themeDesignerUrl);		
+		return new WikiArticlePageObject(driver);		
 	}
 	
 	public void clickShareButton() {

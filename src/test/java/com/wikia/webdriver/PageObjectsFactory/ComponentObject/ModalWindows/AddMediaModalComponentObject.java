@@ -23,8 +23,8 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
     @FindBy (css = "#VideoEmbedBackWrapper")
     private WebElement addVideoModal;
 
-    public AddMediaModalComponentObject(WebDriver driver, String Domain) {
-        super(driver, Global.DOMAIN);
+    public AddMediaModalComponentObject(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 

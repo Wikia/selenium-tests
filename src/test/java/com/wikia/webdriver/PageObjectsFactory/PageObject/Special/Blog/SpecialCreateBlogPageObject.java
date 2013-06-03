@@ -20,10 +20,8 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 	@FindBy(css="input.control-button")
 	private WebElement publishButtonGeneral;
 	
-	public SpecialCreateBlogPageObject(WebDriver driver, String Domain,
-			String wikiArticle) {
-		super(driver, Domain, wikiArticle);
-		this.articlename = wikiArticle;
+	public SpecialCreateBlogPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	
 	}
@@ -58,13 +56,13 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		jQueryClick("input.control-button");
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
-		return new BlogPageObject(driver, Domain, articlename);
+		return new BlogPageObject(driver);
 	}
 	
 	public SpecialCreateBlogPageObject createBlogFormUrl(String blogPostTitle){
 		getUrl(Global.DOMAIN+"wiki/Special:CreateBlogPage");
 		typeBlogPostTitle(blogPostTitle);
 		clickOk();
-		return new SpecialCreateBlogPageObject(driver, this.Domain, blogPostTitle);
+		return new SpecialCreateBlogPageObject(driver);
 	}
 }

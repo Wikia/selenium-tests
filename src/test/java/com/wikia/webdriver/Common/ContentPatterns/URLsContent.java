@@ -11,6 +11,8 @@ public class URLsContent {
 	//Preview url prefix
 	public static String previewPrefix = "http://preview";
 
+	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
+
 	// Hubs
 	public static String VideoGamesHub = "http://www.wikia.com/Video_Games";
 	public static String EntertainmentHub = "http://www.wikia.com/Entertainment";

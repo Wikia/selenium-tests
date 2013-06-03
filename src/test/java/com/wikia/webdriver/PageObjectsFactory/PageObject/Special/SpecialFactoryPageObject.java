@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -36,7 +37,7 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 	
 	public SpecialFactoryPageObject openWikiFactoryPage()
 	{
-		getUrl(wikiFactoryLiveDomain);
+		getUrl(URLsContent.wikiFactoryLiveDomain);
 		PageObjectLogging.log("openWikiFactoryPage ", "Wiki factory page opened", true, driver);
 		return new SpecialFactoryPageObject(driver);
 	}

@@ -37,7 +37,7 @@ public class BlockPageTitleTests extends TestTemplate {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
-        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
+        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addFilterForTitle(filterType);
         phalanx.testBlock(block);
@@ -47,7 +47,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
+        SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
         special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
@@ -62,7 +62,7 @@ public class BlockPageTitleTests extends TestTemplate {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
-        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
+        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addFilterForTitle(filterType);
         phalanx.testBlock(block);
@@ -71,7 +71,7 @@ public class BlockPageTitleTests extends TestTemplate {
         CommonFunctions.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
-        WikiArticleEditMode article = new WikiArticleEditMode(driver, Global.DOMAIN, "");
+        WikiArticleEditMode article = new WikiArticleEditMode(driver);
         article.editArticleByName(blockedContent);
         article.typeInContent(PageContent.articleText);
         article.clickOnPublish();
@@ -88,7 +88,7 @@ public class BlockPageTitleTests extends TestTemplate {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
-        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
+        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addFilterForTitle(filterType);
         phalanx.testBlock(block);
@@ -97,11 +97,11 @@ public class BlockPageTitleTests extends TestTemplate {
         CommonFunctions.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver, Global.DOMAIN);
+        WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
         base.clickContributeNewPage();
 
-        CreateArticleModalComponentObject modal = new CreateArticleModalComponentObject(driver, Global.DOMAIN);
+        CreateArticleModalComponentObject modal = new CreateArticleModalComponentObject(driver);
         modal.createPageWithStandardLayout(blockedContent);
         modal.verifyMessageAboutBlockPresent();
     }
@@ -115,7 +115,7 @@ public class BlockPageTitleTests extends TestTemplate {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
-        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
+        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addFilterForTitle(filterType);
         phalanx.testBlock(block);
@@ -124,7 +124,7 @@ public class BlockPageTitleTests extends TestTemplate {
         CommonFunctions.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
-        WikiArticlePageObject base = new WikiArticlePageObject(driver, Global.DOMAIN,"");
+        WikiArticlePageObject base = new WikiArticlePageObject(driver);
         base.openRandomArticle();
         base.renameRandomArticle(blockedContent);
 
@@ -140,7 +140,7 @@ public class BlockPageTitleTests extends TestTemplate {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
-        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
+        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addFilterForTitle(filterType);
         phalanx.testBlock(block);
@@ -150,7 +150,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
+        SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
         special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
@@ -181,7 +181,7 @@ public class BlockPageTitleTests extends TestTemplate {
         SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
-        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver, Global.DOMAIN);
+        SpecialPhalanxPageObject phalanx = new SpecialPhalanxPageObject(driver);
         phalanx.openSpecialPage(phalanxSpecialPage);
         HashMap block = phalanx.addFilterForTitle(filterType);
         phalanx.testBlock(block);
@@ -191,7 +191,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver, Global.DOMAIN);
+        SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
         special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();

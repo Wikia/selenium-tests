@@ -15,8 +15,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class MiniEditorComponentObject extends WikiBasePageObject{
 
-	public MiniEditorComponentObject(WebDriver driver, String Domain) {
-		super(driver,Domain);
+	public MiniEditorComponentObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 

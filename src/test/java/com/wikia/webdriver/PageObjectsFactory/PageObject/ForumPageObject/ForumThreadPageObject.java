@@ -59,7 +59,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	
 	public ForumThreadPageObject(WebDriver driver) {
 		super(driver);
-		miniEditor = new MiniEditorComponentObject(driver, Domain);
+		miniEditor = new MiniEditorComponentObject(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -188,6 +188,6 @@ public class ForumThreadPageObject extends BasePageObject{
 	public ForumHistoryPageObject openHistory() {
 		getUrl(getCurrentUrl()+"?action=history");
 		PageObjectLogging.log("openHistory", "thread history page opened", true, driver);													
-		return new ForumHistoryPageObject(driver, Domain);
+		return new ForumHistoryPageObject(driver);
 	}
 }

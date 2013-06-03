@@ -15,8 +15,8 @@ public class ForumHistoryPageObject extends WikiBasePageObject{
 	@FindBy(css="#WallThreadHistory tr:nth-child(1) td:nth-child(3)")
 	private WebElement creatorActionCell;
 	
-	public ForumHistoryPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
+	public ForumHistoryPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 

@@ -22,8 +22,8 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class DropDownComponentObject extends WikiBasePageObject {
 
-    public DropDownComponentObject(WebDriver driver, String Domain) {
-            super(driver,Domain);
+    public DropDownComponentObject(WebDriver driver) {
+            super(driver);
             PageFactory.initElements(driver, this);
     }
 

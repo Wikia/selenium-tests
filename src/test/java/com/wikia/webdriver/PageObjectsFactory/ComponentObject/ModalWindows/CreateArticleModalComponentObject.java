@@ -28,8 +28,8 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     @FindBy (css = "#createPageErrorMsg")
     private WebElement phalanxBlockMessageContainer;
 
-    public CreateArticleModalComponentObject(WebDriver driver, String Domain) {
-        super(driver, Global.DOMAIN);
+    public CreateArticleModalComponentObject(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 

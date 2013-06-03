@@ -18,8 +18,8 @@ public class MessageWallHistoryPageObject extends WikiBasePageObject {
 	@FindBy(css="div.BreadCrumbs a")
 	private WebElement messageWallLink;
 	
-	public MessageWallHistoryPageObject(WebDriver driver, String Domain) {
-		super(driver, Domain);
+	public MessageWallHistoryPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -41,7 +41,7 @@ public class MessageWallHistoryPageObject extends WikiBasePageObject {
 	public MessageWallPageObject navigateBackToMessageWall() {
 		waitForElementByElement(messageWallLink);
 		clickAndWait(messageWallLink);	
-		return new MessageWallPageObject(driver, Domain);
+		return new MessageWallPageObject(driver);
 		
 	}
 	

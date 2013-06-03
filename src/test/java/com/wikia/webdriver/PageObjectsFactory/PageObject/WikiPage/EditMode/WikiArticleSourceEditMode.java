@@ -71,7 +71,7 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
 	
-	public WikiArticleSourceEditMode(WebDriver driver, String Domain) {
+	public WikiArticleSourceEditMode(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -80,7 +80,7 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 		getUrl(Global.DOMAIN+"index.php?title="+pageName+"&action=edit&useFormat="+layoutNum+"&useeditor=source");
 		waitForElementByElement(more);
 		PageObjectLogging.log("createNewArticleSource", "create article page in source mode opened", true, driver);
-		return new WikiArticleSourceEditMode(driver, pageName);
+		return new WikiArticleSourceEditMode(driver);
 	}
 	public void focusTextArea()
 	{

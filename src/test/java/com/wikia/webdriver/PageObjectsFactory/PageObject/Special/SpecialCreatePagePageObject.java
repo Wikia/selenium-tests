@@ -22,7 +22,7 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
     @FindBy (css = "#bodyContent")
     private WebElement contentInput;
 
-    public SpecialCreatePagePageObject (WebDriver driver, String Domain) {
+    public SpecialCreatePagePageObject (WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
@@ -36,9 +36,7 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
 
     public void addPageWithGIvenTitleAndDefaultContent(String title) {
         fillTitle(title);
-        WikiArticleEditMode article = new WikiArticleEditMode(
-            driver, Global.DOMAIN, title
-        );
+        WikiArticleEditMode article = new WikiArticleEditMode(driver);
         article.typeInContent(PageContent.articleText);
         article.clickOnPublish();
     }

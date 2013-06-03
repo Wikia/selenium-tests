@@ -23,7 +23,7 @@ public class Following extends TestTemplate{
 	@Test(groups = {"Follow001", "Follow"})
 	public void follow001_Article(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String name = article.followRandomArticle();
@@ -36,10 +36,10 @@ public class Following extends TestTemplate{
 	@Test(groups = {"Follow002", "Follow"})
 	public void follow002_Blog(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		BlogPageObject blog = new BlogPageObject(driver, Global.DOMAIN, "");
+		BlogPageObject blog = new BlogPageObject(driver);
 		blog.openBlogPage(Properties.userName);
 		blog.followBlogPage(Properties.userName);
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
@@ -51,11 +51,12 @@ public class Following extends TestTemplate{
 	@Test(groups = {"Follow003", "Follow"})
 	public void follow003_BlogPosts(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver, Global.DOMAIN, "");
-		home.openWikiPage(); 
-		String blogPostTitle = PageContent.blogPostNamePrefix+home.getTimeStamp(); 
-		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);	
-		UserProfilePageObject userProfile = home.navigateToProfilePage(Global.DOMAIN, Properties.userName);
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage(); 
+		String blogPostTitle = PageContent.blogPostNamePrefix+article.getTimeStamp(); 
+		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
+		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
+		userProfile.navigateToProfilePage(Properties.userName);
 		userProfile.clickOnBlogTab();
 		SpecialCreateBlogPageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
@@ -75,7 +76,7 @@ public class Following extends TestTemplate{
 	@Test(groups = {"Follow004", "Follow"})
 	public void follow004_Photos(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		SpecialNewFilesPageObject special = article.openSpecialNewFiles();
@@ -89,10 +90,10 @@ public class Following extends TestTemplate{
 	@Test(groups = {"Follow005", "Follow"})
 	public void follow005_Videos(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		SpecialVideosPageObject video = new SpecialVideosPageObject(driver, Global.DOMAIN);
+		SpecialVideosPageObject video = new SpecialVideosPageObject(driver);
 		video.openSpecialVideoPage();
 		String videoName = video.followRandomVideo();
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);

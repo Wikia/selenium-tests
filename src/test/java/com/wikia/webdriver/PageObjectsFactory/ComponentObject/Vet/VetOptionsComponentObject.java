@@ -131,7 +131,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		verifyVideoThumbnail();
 		clickAddaVideo();
 		clickRetunToEditing();
-		return new WikiArticleEditMode(driver, Domain, Domain);
+		return new WikiArticleEditMode(driver);
 	}
 	
 	public void update(){

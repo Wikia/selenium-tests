@@ -34,7 +34,7 @@ public class UserAndRights extends TestTemplate{
 	@Test(groups = {"usersAndRights002", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
 	public void usersAndRights002_VerifyBlockedUser(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameBlocked, Properties.passwordBlocked);
 		WikiArticleEditMode edit = article.createNewDefaultArticle();
@@ -44,7 +44,7 @@ public class UserAndRights extends TestTemplate{
 	@Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
 	public void usersAndRights003_BlockListBlocked(){
 		CommonFunctions.logOut(driver);
-		SpecialBlockListPageObject list = new SpecialBlockListPageObject(driver, Global.DOMAIN);
+		SpecialBlockListPageObject list = new SpecialBlockListPageObject(driver);
 		list.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		list = list.openSpecialBlockListPage();
@@ -57,7 +57,7 @@ public class UserAndRights extends TestTemplate{
 	@Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
 	public void usersAndRights004_Unblock(){
 		CommonFunctions.logOut(driver);
-		SpecialUnblockPageObject unblock = new SpecialUnblockPageObject(driver, Global.DOMAIN);
+		SpecialUnblockPageObject unblock = new SpecialUnblockPageObject(driver);
 		unblock.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		unblock = unblock.openSpecialUnblockPage();
@@ -68,7 +68,7 @@ public class UserAndRights extends TestTemplate{
 	@Test(groups = {"usersAndRights005", "UsersAndRights"}, dependsOnMethods={"usersAndRights004_Unblock"})
 	public void usersAndRights005_VerifyUnblockedUser(){
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver, Global.DOMAIN, "");
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameBlocked, Properties.passwordBlocked);
 		WikiArticleEditMode edit = article.createNewDefaultArticle();
@@ -78,7 +78,7 @@ public class UserAndRights extends TestTemplate{
 	@Test(groups = {"usersAndRights006", "UsersAndRights"}, dependsOnMethods={"usersAndRights004_Unblock"})
 	public void usersAndRights006_BlockListUnblocked(){
 		CommonFunctions.logOut(driver);
-		SpecialBlockListPageObject list = new SpecialBlockListPageObject(driver, Global.DOMAIN);
+		SpecialBlockListPageObject list = new SpecialBlockListPageObject(driver);
 		list.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		list = list.openSpecialBlockListPage();
@@ -89,14 +89,14 @@ public class UserAndRights extends TestTemplate{
 	@Test(groups = {"usersAndRights007", "UsersAndRights"})
 	public void usersAndRights007_Contributions(){
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		String pageContent = wiki.getTimeStamp() + "Special:Contributions test article content";
-		wiki.openWikiPage();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		String pageContent = article.getTimeStamp() + "Special:Contributions test article content";
+		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.typeInContent(pageContent);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
+		edit.clickOnPublishButton();
 		SpecialContributionsPageObject contribution = new SpecialContributionsPageObject(driver);
 		contribution = contribution.openContributionsPage();
 		contribution.searchContributions(Properties.userNameStaff);

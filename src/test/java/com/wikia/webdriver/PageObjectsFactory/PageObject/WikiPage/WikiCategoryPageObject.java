@@ -14,8 +14,8 @@ public class WikiCategoryPageObject extends WikiBasePageObject{
 
 	private By categories_listOfCategories = By.cssSelector("div.mw-content-ltr li a");	
 	
-	public WikiCategoryPageObject(WebDriver driver, String wikiname) {
-		super(driver, wikiname);
+	public WikiCategoryPageObject(WebDriver driver) {
+		super(driver);
 		
 		PageFactory.initElements(driver, this);
 	}

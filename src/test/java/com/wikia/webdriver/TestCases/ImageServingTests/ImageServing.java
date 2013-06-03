@@ -45,7 +45,7 @@ public class ImageServing extends TestTemplate {
 	public void ImageServing002_SpecialUploadTest()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		SpecialUploadPageObject wikiSpecialU = wiki.openSpecialUpload();
 		wikiSpecialU.typeInFileToUploadPath(PageContent.file);
@@ -60,7 +60,7 @@ public class ImageServing extends TestTemplate {
 	public void ImageServing003_SpecialMultipleUploadTest()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		SpecialMultipleUploadPageObject wikiSpecialMU = wiki.openSpecialMultipleUpload();
 		wikiSpecialMU.typeInFilesToUpload(PageContent.listOfFiles);

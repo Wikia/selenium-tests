@@ -1,5 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
@@ -13,19 +24,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultiple
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -88,68 +90,69 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement addPageModal;
 	@FindBy(css = ".UserLoginModal input[name='password']")
 	protected WebElement modalPasswordInput;
-	private By galleryDialogPhotosList = By
-			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
-	private By galleryDialogPhotoOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGalleryOrientation'] li");
-	private String videoAddVideoButtonSelector = "div.input-group.VideoEmbedNoBorder input";
-	private String videoReturnToEditingSelector = "input[value=\"Return to editing\"]";
-	private By galleryDialogSlideshowOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
-	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
-	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
-	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
-
 	@FindBy (css = "#WikiaPageHeader h1")
 	private WebElement wikiFirstHeader;
-
-
 	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
 	private WebElement specialUserLoginLink;
-
 	@FindBy(css = ".UserLoginModal input[name='username']")
 	protected WebElement modalUserNameInput;
-
 	@FindBy(css="#AccountNavigation > li > a > .avatar")
 	protected WebElement userProfileAvatar;
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
+	@FindBy(css="form.WikiaSearch")
+	private WebElement wikiaSearch_searchForm;
+	@FindBy(css="section.modalWrapper .UserLoginModal")
+	protected WebElement logInModal;
+	@FindBy(css = "a#ca-edit")
+	protected WebElement editButton;
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
-	private String pageName;
 
-	public WikiBasePageObject(WebDriver driver, String Domain) {
+	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
-		this.Domain = Domain;
 		PageFactory.initElements(driver, this);
 	}
+	
 
-	public String getWikiName() {
-		return Domain;
+	public void verifyModalLoginAppeared()
+	{
+		waitForElementByElement(logInModal);
+		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
+	}
+	
+	/**
+	 * verify that wikia search field is displayed
+	 * 
+	 * @author Michal Nowierski
+	 */	
+	public void verifyWikiaSearchFieldIsDisplayed() {
+		waitForElementByElement(wikiaSearch_searchForm);
+		PageObjectLogging.log("verifyWikiaSearchFieldIsDisplayed", "verify that wikia search field is displayed", true);
 	}
 	
 	/**
 	 * @author Michal Nowierski
 	 * */
 	public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Domain+"wiki/Special:Videos");
-		return new SpecialVideosPageObject(driver, Domain);
+		getUrl(Global.DOMAIN+"wiki/Special:Videos");
+		return new SpecialVideosPageObject(driver);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Domain + "wiki/Special:NewFiles");
+		getUrl(Global.DOMAIN + "wiki/Special:NewFiles");
 		return new SpecialNewFilesPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Domain + "wiki/Special:Upload");
-		return new SpecialUploadPageObject(driver, Domain);
+		getUrl(Global.DOMAIN + "wiki/Special:Upload");
+		return new SpecialUploadPageObject(driver);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Domain + "wiki/Special:MultipleUpload");
-		return new SpecialMultipleUploadPageObject(driver, Domain);
+		getUrl(Global.DOMAIN + "wiki/Special:MultipleUpload");
+		return new SpecialMultipleUploadPageObject(driver);
 	}
 
 	public void verifyEditDropDownAnonymous() {
@@ -233,7 +236,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementClickableByElement(editButton);
 		clickAndWait(editButton);
 		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
-		return new WikiArticleEditMode(driver, Domain, pageName);
+		return new WikiArticleEditMode(driver);
 	}
 
 	public WikiArticleEditMode navigateToEditPage() {
@@ -241,7 +244,7 @@ public class WikiBasePageObject extends BasePageObject {
 		String targetURL = URL+"?action=edit";
 		driver.navigate().to(targetURL);
 		PageObjectLogging.log("navigateToEditPage()", "navigating to edit page via URL", true, driver);
-		return new WikiArticleEditMode(driver, Domain, articlename);
+		return new WikiArticleEditMode(driver);
 	}
 	
 	protected void clickDeleteButtonInDropDown() {
@@ -358,27 +361,12 @@ public class WikiBasePageObject extends BasePageObject {
 		clickUndeleteArticle();
 		clickRestoreArticleButton();
 	}
-
-	public WikiArticleEditMode createNewArticle(String pageName,
-			int layoutNumber) {
-		getUrl(Global.DOMAIN + "index.php?title=" + pageName
-				+ "&action=edit&useFormat=" + layoutNumber);
-		String pageNameEnc = pageName.replace("_", " ");
-		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
-				+ pageNameEnc + "']")));
-		return new WikiArticleEditMode(driver, Domain, pageName);
-	}
-	
-	public WikiArticleEditMode createNewDefaultArticle(){
-		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
-		return createNewArticle(this.pageName, 1);
-	} 
 	
 	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
 		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);
 		PageObjectLogging.log("SpecialCreateTopListPageObject",
 				"create top 10 list with name: "+top_10_list_Name, true, driver);
-		return new SpecialCreateTopListPageObject(driver, Domain, top_10_list_Name);
+		return new SpecialCreateTopListPageObject(driver);
 		
 	}
 
@@ -398,7 +386,7 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		PageObjectLogging.log("openArticle", "article " + articleName
 				+ " opened", true);
-		return new WikiArticlePageObject(driver, Domain, articleName);
+		return new WikiArticlePageObject(driver);
 	}
 	
 	public Top_10_list openTop10List(String topTenListName) {
@@ -417,7 +405,7 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		PageObjectLogging.log("openTop10List", topTenListName
 				+ " opened", true);
-		return new Top_10_list(driver, Domain, topTenListName);
+		return new Top_10_list(driver);
 	}
 
 	public WikiCategoryPageObject clickOnCategory(String categoryName) {
@@ -444,14 +432,14 @@ public class WikiBasePageObject extends BasePageObject {
 			PageObjectLogging.log("clickOnCategory", "category " + categoryName
 					+ " not found", false, driver);
 		}
-		return new WikiCategoryPageObject(driver, Domain);
+		return new WikiCategoryPageObject(driver);
 	}
 
 	public WikiCategoryPageObject openCategoryPage(String category) {
 		getUrl(Global.DOMAIN + "wiki/" + "Category:" + category);
 		PageObjectLogging.log("openCategoryPage", category + " page opened",
 				true, driver);
-		return new WikiCategoryPageObject(driver, Domain);
+		return new WikiCategoryPageObject(driver);
 	}
 
 	public CreateNewWikiPageObjectStep1 startAWiki() {
@@ -519,7 +507,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
         public void openSpecialPage(String specialPage) {
-            getUrl(Domain + specialPage);
+            getUrl(Global.DOMAIN + specialPage);
         }
 
         public void verifyLoginReguiredMessage() {

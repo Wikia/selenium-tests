@@ -7,9 +7,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 
 public class WikiArticleRevisionEditMode extends WikiArticleEditMode{
 
-	public WikiArticleRevisionEditMode(WebDriver driver, String Domain,
-			String articlename) {
-		super(driver, Domain, articlename);
+	public WikiArticleRevisionEditMode(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 

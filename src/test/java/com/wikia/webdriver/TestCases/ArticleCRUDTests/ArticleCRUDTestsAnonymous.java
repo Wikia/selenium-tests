@@ -5,8 +5,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
@@ -24,9 +22,8 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_001_VerifyEditDropDown()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
-		wiki.openWikiPage();
-		wiki.openRandomArticle();
+		WikiArticlePageObject wiki = new WikiArticlePageObject(driver);
+		wiki.openRandomArticleByUrl();
 		wiki.clickEditDropDown();
 		wiki.verifyEditDropDownAnonymous();
 	}
@@ -48,15 +45,14 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_002_CreateArticle(String articleName)
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiArticlePageObject wiki = new WikiArticlePageObject(driver);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(article.getPageName());
-		article.verifyArticleText(PageContent.articleText);
+		edit.clickOnPublishButton();
+		wiki.verifyPageTitle(wiki.getPageName());
+		wiki.verifyArticleText(PageContent.articleText);
 	}
 	/*
 	 * TestCase005
@@ -68,22 +64,20 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_003_CreateEditArticle()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiArticlePageObject wiki = new WikiArticlePageObject(driver);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(article.getPageName());
-		article.verifyArticleText(PageContent.articleText);
-		edit = article.clickEditButton(article.getPageName());
+		edit.clickOnPublishButton();
+		wiki.verifyPageTitle(wiki.getPageName());
+		wiki.verifyArticleText(PageContent.articleText);
+		wiki.clickEditButton(wiki.getPageName());
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleTextEdit);
-		article = edit.clickOnPublishButton();
-		article.verifyPageTitle(article.getPageName());
-		article.verifyArticleText(PageContent.articleTextEdit);
+		edit.clickOnPublishButton();
+		wiki.verifyPageTitle(wiki.getPageName());
+		wiki.verifyArticleText(PageContent.articleTextEdit);
 	}
 	
 	/* 
@@ -97,18 +91,17 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_004_CreateArticleComment()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
+		WikiArticlePageObject wiki = new WikiArticlePageObject(driver);
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(article.getPageName());
-		article.triggerCommentArea();
-		article.writeOnCommentArea(PageContent.commentText);
-		article.clickSubmitButton();
-		article.verifyCommentText(PageContent.commentText, PageContent.wikiaContributor);
+		edit.clickOnPublishButton();
+		wiki.verifyPageTitle(wiki.getPageName());
+		wiki.triggerCommentArea();
+		wiki.writeOnCommentArea(PageContent.commentText);
+		wiki.clickSubmitButton();
+		wiki.verifyCommentText(PageContent.commentText, PageContent.wikiaContributor);
 	}
 	
 	/* 
@@ -122,19 +115,18 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_005_CreateArticleCommentReply()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
+		WikiArticlePageObject wiki = new WikiArticlePageObject(driver);	
 		wiki.openWikiPage();
 		WikiArticleEditMode edit = wiki.createNewDefaultArticle();
 		edit.deleteArticleContent();
-//		edit.clickOnVisualButton();
 		edit.typeInContent(PageContent.articleText);
-		WikiArticlePageObject article = edit.clickOnPublishButton();
-		article.verifyPageTitle(article.getPageName());
-		article.triggerCommentArea();
-		article.writeOnCommentArea(PageContent.commentText);
-		article.clickSubmitButton();
-		article.verifyCommentText(PageContent.commentText, PageContent.wikiaContributor);
-		article.replyComment(PageContent.commentText, PageContent.replyText);
+		edit.clickOnPublishButton();
+		wiki.verifyPageTitle(wiki.getPageName());
+		wiki.triggerCommentArea();
+		wiki.writeOnCommentArea(PageContent.commentText);
+		wiki.clickSubmitButton();
+		wiki.verifyCommentText(PageContent.commentText, PageContent.wikiaContributor);
+		wiki.replyComment(PageContent.commentText, PageContent.replyText);
 	}	
 	
 	/**
@@ -146,9 +138,8 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 	public void ArticleCRUDAnon_006_verifySpotlightsPresence()
 	{
 		CommonFunctions.logOut(driver);
-		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);	
-		wiki.openWikiPage();
-		WikiArticlePageObject article = wiki.openRandomArticle();
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);	
+		article.openRandomArticleByUrl();
 		article.verifySpotlightsPresence();
 	}
 	

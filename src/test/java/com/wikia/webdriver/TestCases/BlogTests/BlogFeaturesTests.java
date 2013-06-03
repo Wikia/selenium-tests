@@ -27,7 +27,7 @@ public class BlogFeaturesTests extends TestTemplate{
 	@Test(groups={"BlogFeatures_001", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_001_AddingGallery(){
 		CommonFunctions.logOut(driver);
-		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
+		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
@@ -50,7 +50,7 @@ public class BlogFeaturesTests extends TestTemplate{
 	@Test(groups={"BlogFeatures_002", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_002_AddingSlideshow(){
 		CommonFunctions.logOut(driver);
-		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
+		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
@@ -70,7 +70,7 @@ public class BlogFeaturesTests extends TestTemplate{
 	@Test(groups={"BlogFeatures_003", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_003_AddingSlider(){
 		CommonFunctions.logOut(driver);
-		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
+		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
@@ -90,7 +90,7 @@ public class BlogFeaturesTests extends TestTemplate{
 	@Test(groups={"BlogFeatures_004", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_004_AddingVideo(){
 		CommonFunctions.logOut(driver);
-		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
+		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
@@ -107,7 +107,7 @@ public class BlogFeaturesTests extends TestTemplate{
 	@Test(groups={"BlogFeatures_005", "Blog", "BlogFeaturesTests"})
 	public void BlogFeatures_005_AddingImage(){
 		CommonFunctions.logOut(driver);
-		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver, Global.DOMAIN, "");
+		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
 		blogEdit.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 

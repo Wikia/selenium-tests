@@ -10,8 +10,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import javax.xml.bind.annotation.XmlElementDecl;
-
 /**
  * Created with IntelliJ IDEA.
  * User: kvas
@@ -19,7 +17,7 @@ import javax.xml.bind.annotation.XmlElementDecl;
  * Time: 14:47
  * To change this template use File | Settings | File Templates.
  */
-public class DashboarPageObject extends BasePageObject {
+public class DashBoardPageObject extends BasePageObject {
 
     @FindBy(id="marketingToolboxRegionSelect")
     private WebElement regionDropDown;
@@ -41,7 +39,7 @@ public class DashboarPageObject extends BasePageObject {
         Video_games, Entertainment, LifeStyle
     }
 
-    public DashboarPageObject(WebDriver driver) {
+    public DashBoardPageObject(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }

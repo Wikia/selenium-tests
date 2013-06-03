@@ -23,8 +23,8 @@ public class SpecialCreateTopListPageObject extends Top_10_list_EditonCore{
 	@FindBy(css="#list_name")
 	private WebElement listNameField; 
 	
-	public SpecialCreateTopListPageObject(WebDriver driver, String Domain, String top_10_list_Name) {
-		super(driver, Domain);
+	public SpecialCreateTopListPageObject(WebDriver driver) {
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -32,7 +32,7 @@ public class SpecialCreateTopListPageObject extends Top_10_list_EditonCore{
 		waitForElementByElement(createlistButton);
 		clickAndWait(createlistButton);
 		PageObjectLogging.log("clickCreateList", "click on Create List button", true, driver);		
-		return new Top_10_list(driver, Domain, this.articlename);
+		return new Top_10_list(driver);
 	}
 
 	public void verifyListName(String listName) {

@@ -9,11 +9,10 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.CustomizedToolbar.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
 
 /**
@@ -31,7 +30,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -63,7 +62,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -104,7 +103,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -153,7 +152,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -189,29 +188,29 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		String notificationMessageBody = notificationsListForTitle.get(0).findElement(By.cssSelector("div.msg-body")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));
 	}
-	
+
 	@Test(groups= {"MessageWallNotificationsTests_005", "MessageWallNotificationsTests",
 			"NotificationsTests"} )
 	public void messageWallNotificationsTests_005_followerReceivesNotificationAboutThreadResponse() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
-		
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		if (notifications.getNumberOfUnreadNotifications() > 0) {
 			notifications.showNotifications();
 			notifications.markNotificationsAsRead();
 		}
-		
+
 		wall.openMessageWall(Properties.userName2);
 		CustomizedToolbarComponentObject CustomizedToolbar = new CustomizedToolbarComponentObject(driver);
 		CustomizedToolbar.unfollowIfFollowed();
 		CustomizedToolbar.verifyToolOnToolbar("Follow");
-		
+
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
 
@@ -222,32 +221,32 @@ public class MessageWallNotificationsTests extends TestTemplate {
 
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		wall.openMessageWall(Properties.userName2);
 		CustomizedToolbar.verifyToolOnToolbar("Follow");
 		CustomizedToolbar.clickOnTool("follow");
 		CustomizedToolbar.verifyFollowedToolbar();
-		
+
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
-		
+
 		wall.openMessageWall(Properties.userName2);
 		wall.openMessageWallThread(title);
 		timeStamp = wall.getTimeStamp();
 		String replyMessage = PageContent.messageWallMessagePrefix + "_reply_" + timeStamp;
 		wall.reply(replyMessage);
 		wall.verifyPostedReplyWithMessage(replyMessage, 2);
-		
+
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		notifications.showNotifications();
 		Assertion.assertNotEquals(0, notifications.getNumberOfUnreadNotifications());
 		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0).findElement(By.cssSelector("div.msg-body")).getText();
-		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));	
-		
+		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));
+
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_006", "MessageWallNotificationsTests",
@@ -265,7 +264,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -299,17 +298,17 @@ public class MessageWallNotificationsTests extends TestTemplate {
 	public void messageWallNotificationsTests_007_notificationPerEveryThread() {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		if (notifications.getNumberOfUnreadNotifications() > 0) {
 			notifications.showNotifications();
 			notifications.markNotificationsAsRead();
 		}
 		CommonFunctions.logOut(driver);
-		
+
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -318,35 +317,35 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
-		
+
 		timeStamp = wall.getTimeStamp();
 		String title2 =  PageContent.messageWallTitlePrefix + "_2_" + timeStamp;
 		String message2 = PageContent.messageWallMessagePrefix + "_2_" + timeStamp;
-		
+
 		wall.writeMessage(title2, message2);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title2, message2);
 		CommonFunctions.logOut(driver);
-		
+
 		CommonFunctions.logIn(Properties.userName, Properties.password, driver);
-		
+
 		notifications.showNotifications();
-		
+
 		Assertion.assertTrue(notifications.getNumberOfUnreadNotifications() > 1);
-		
+
 		ArrayList<WebElement> notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 
 		String notificationMessageBody = notificationsListForTitle.get(0)
 				.findElement(By.cssSelector("div.msg-body")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));
-		
+
 		notificationsListForTitle = notifications.getUnreadNotificationsForTitle(title2);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		notificationMessageBody = notificationsListForTitle.get(0)
 				.findElement(By.cssSelector("div.msg-body")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName2));
-		
+
 	}
 
 	@Test(groups= {"MessageWallNotificationsTests_008", "MessageWallNotificationsTests",
@@ -355,7 +354,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -395,7 +394,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 		CommonFunctions.logOut(driver);
 		CommonFunctions.logIn(Properties.userName2, Properties.password2, driver);
 
-		MessageWallPageObject wall = new MessageWallPageObject(driver, Global.DOMAIN);
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;

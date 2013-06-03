@@ -29,7 +29,7 @@ public class BlogMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff, driver
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         UserProfileMonoBookPageObject userProfile = new UserProfileMonoBookPageObject(
             driver, Properties.userNameStaff
@@ -54,7 +54,7 @@ public class BlogMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff, driver
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         UserProfileMonoBookPageObject userProfile = new UserProfileMonoBookPageObject(
             driver, Properties.userNameStaff
@@ -83,7 +83,7 @@ public class BlogMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff, driver
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         UserProfileMonoBookPageObject userProfile = new UserProfileMonoBookPageObject(
             driver, Properties.userNameStaff
@@ -112,7 +112,7 @@ public class BlogMonoBookTests extends TestTemplate {
             Properties.userNameStaff, Properties.passwordStaff, driver
         );
 
-        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver, Global.DOMAIN);
+        WikiBaseMonoBookPageObject wiki = new WikiBaseMonoBookPageObject(driver);
         wiki.openWikiWithMonobook();
         UserProfileMonoBookPageObject userProfile = new UserProfileMonoBookPageObject(
             driver, Properties.userNameStaff

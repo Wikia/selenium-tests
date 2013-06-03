@@ -26,7 +26,7 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 	@FindBys(@FindBy(css=".image.video"))
 	private List<WebElement> videos;
 
-	public SpecialVideosPageObject(WebDriver driver, String Domain) {
+	public SpecialVideosPageObject(WebDriver driver) {
             super(driver);
             PageFactory.initElements(driver, this);
 	}
@@ -34,8 +34,8 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 
 
         public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Domain+"wiki/Special:Videos");
-		return new SpecialVideosPageObject(driver, Domain);
+		getUrl(Global.DOMAIN+"wiki/Special:Videos");
+		return new SpecialVideosPageObject(driver);
 	}
 	
 	public String followRandomVideo(){

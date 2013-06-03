@@ -36,8 +36,8 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 	private WebElement backToPageLinkOnRollbackPage;
 
 	
-	public WikiHistoryPageObject(WebDriver driver, String Domain, String articlename) {
-		super(driver, Domain);
+	public WikiHistoryPageObject(WebDriver driver) {
+		super(driver);
 		this.articlename = articlename;
 		PageFactory.initElements(driver, this);
 	}
@@ -47,7 +47,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 		WebElement undo = driver.findElement(By.xpath("//ul[@id='pagehistory']/li["+revision+"]//span[@class='mw-history-undo']/a"));
 //		WebElement undo = driver.findElement(By.cssSelector("ul#pagehistory li:nth-child("+revision+") .mw-history-undo"));
 		clickAndWait(undo);
-		return new WikiArticleRevisionEditMode(driver, Domain, articlename);
+		return new WikiArticleRevisionEditMode(driver);
 	}
 	
 	public void rollbackPage()
@@ -61,7 +61,7 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 	{
 		waitForElementByElement(backToPageLinkOnRollbackPage);
 		clickAndWait(backToPageLinkOnRollbackPage);
-		return new WikiArticlePageObject(driver, Domain, articlename);
+		return new WikiArticlePageObject(driver);
 	}
 	
 	/*Author: Michal Nowierski

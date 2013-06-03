@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 import org.openqa.selenium.TimeoutException;
@@ -26,7 +27,7 @@ public class BaseMonoBookPageObject extends BasePageObject {
     }
 
     public void openWikiPageWithMonobook() {
-        getUrl(Domain + URLsContent.noexternals);
+        getUrl(Global.DOMAIN + URLsContent.noexternals);
         PageObjectLogging.log(
             "OpenWikiPage",
             "Wiki Page opened with success", true

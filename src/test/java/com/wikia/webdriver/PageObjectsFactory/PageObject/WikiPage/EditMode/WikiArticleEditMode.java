@@ -200,10 +200,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private String editButtonVideoPlaceholder = "[type=video-placeholder] span.RTEMediaOverlayEdit";
 	
 	
-	public WikiArticleEditMode(WebDriver driver, String Domain,
-			String pageName) {
+	public WikiArticleEditMode(WebDriver driver) {
 		super(driver);
-		this.articlename = pageName;
 		PageFactory.initElements(driver, this);
 	}
 
@@ -217,7 +215,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	{
             String newUrl = URLsContent.addArticle.replace("%title%", name);
             getUrl(Global.DOMAIN + newUrl);
-		return new WikiArticleEditMode(driver, Domain, name);
+		return new WikiArticleEditMode(driver);
 	}
 
 	/**
@@ -283,7 +281,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementClickableByElement(publishButtonPreview);
 		jQueryClick(publishButtonSelector);
 		PageObjectLogging.log("LeftClickOnPublishButtonInPreviewMode", "Click on 'Publish' button in preview mode", true, driver);
-		return new WikiArticlePageObject(driver, Domain, articlename);
+		return new WikiArticlePageObject(driver);
 	}
 
 	/**
@@ -297,7 +295,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		clickAndWait(sourceModeButton);
 		waitForElementByElement(sourceModeTextArea);
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
-		return new WikiArticleSourceEditMode(driver, this.Domain);
+		return new WikiArticleSourceEditMode(driver);
 	}
 	
 	/**
@@ -369,7 +367,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		clickAndWait(publishButtonPreview);
 		PageObjectLogging.log("ClickOnPublishButtonPreview", "Click on 'Publish' button in preview", true, driver);
 		
-		return new WikiArticlePageObject(driver, Domain, articlename);
+		return new WikiArticlePageObject(driver);
 	}
 	
 	/**
@@ -771,7 +769,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(tableButton);
 		waitForElementClickableByElement(tableButton);
 		tableButton.click();
-		PageObjectLogging.log("clickOnAddTableButton","Click on: table-button, on wiki: " + Domain + "",true, driver);
+		PageObjectLogging.log("clickOnAddTableButton","Click on table-button",true, driver);
 	}
 
 	/**
@@ -1223,7 +1221,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(finalAddPhotoButton);
 		finalAddPhotoButton.click();
 		clickOnPublishButton();
-		return new WikiArticlePageObject(driver, Domain, articlename);
+		return new WikiArticlePageObject(driver);
 	}
 	
 
