@@ -35,7 +35,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
 		private WebElement videoName;
-		@FindBy(css="div.VideoEmbedNoBorder input")
+		@FindBy(css=".input-group.button-group input")
 		private WebElement addAvideo;
 		@FindBy(css="#VideoEmbedCloseButton")
 		private WebElement returnToEditing;
@@ -55,7 +55,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement videoThumbnail;
 		@FindBy(css="div#VideoEmbedNameRow p")
 		private WebElement videoNameCaption;
-	
+
 		public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver,  this);
@@ -67,7 +67,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 	/**
 	 * @param i
 	 * i = 1; with caption
-	 * i = 2; without caption 
+	 * i = 2; without caption
 	 */
 	public void adjustStyle(int i){
 		waitForTextToBePresentInElementByElement(videoOptionsHeader, "Video display options");
@@ -81,18 +81,18 @@ public class VetOptionsComponentObject extends BasePageObject{
 		default: PageObjectLogging.log("adjustStyle", "invalid style selected",  false);
 		}
 	}
-	
+
 	public String getVideoName(){
 		return videoNameCaption.getText();
 	}
-	
+
 	public void setCaption(String caption){
 		waitForElementByElement(captionField);
 		captionField.clear();
 		captionField.sendKeys(caption);
 		PageObjectLogging.log("setCaption", "caption was set to: "+caption, true);
 	}
-	
+
 	/**
 	 * author: Michal Nowierski
 	 */
@@ -103,7 +103,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		withInputField.sendKeys(width);
 		PageObjectLogging.log("adjustWith", "width set to: "+Width,  true, driver);
 	}
-	
+
 	/**
 	 * author: Michal Nowierski
 	 */
@@ -112,13 +112,13 @@ public class VetOptionsComponentObject extends BasePageObject{
 		clickAndWait(addAvideo);
 		PageObjectLogging.log("clickAddaVideo", "add video button clicked",  true, driver);
 	}
-	
+
 	private void clickRetunToEditing(){
 		waitForElementByElement(returnToEditing);
 		clickAndWait(returnToEditing);
 		PageObjectLogging.log("clickReturnToEditing", "return to editing button clicked",  true, driver);
 	}
-	
+
 	private void verifyVideoThumbnail(){
 		waitForElementByElement(videoThumbnail);
 		Dimension dim = videoThumbnail.getSize();
@@ -126,18 +126,18 @@ public class VetOptionsComponentObject extends BasePageObject{
 		Assertion.assertEquals(w, 350);
 		PageObjectLogging.log("verifyVideoThumbnail", "video thumbnail is visible",  true);
 	}
-	
+
 	public WikiArticleEditMode submit(){
 		verifyVideoThumbnail();
 		clickAddaVideo();
 		clickRetunToEditing();
 		return new WikiArticleEditMode(driver);
 	}
-	
+
 	public void update(){
 		clickAddaVideo();
 	}
-	
+
 	/**
 	 * for provider
 	 */
@@ -145,7 +145,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 	 * @param i
 	 * i = 1; left position
 	 * i = 2; center position
-	 * i = 3; right position 
+	 * i = 3; right position
 	 */
 	public void adjustPosition(int i){
 		waitForElementByElement(videoEmbedLayotRow);
@@ -162,18 +162,18 @@ public class VetOptionsComponentObject extends BasePageObject{
 		default: PageObjectLogging.log("adjustPosition", "invalid style selected",  false);
 		}
 	}
-	
-	
+
+
 	/**
 	 * @param i
 	 * i = 1; left position
 	 * i = 2; center position
 	 * i = 3; right position
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
-	 *  
+	 *
 	 */
-	
+
 	public void verifyAlignmentOptionIsSelected(int i){
 		waitForElementByElement(videoEmbedLayotRow);
 		switch (i){
@@ -189,28 +189,28 @@ public class VetOptionsComponentObject extends BasePageObject{
 		default: PageObjectLogging.log("verifyAlignmentOptionIsSelected", "invalid alignment selected",  false);
 		}
 	}
-	
+
 	public void clickUpdateVideo() {
 		waitForElementByElement(updateVideoButton);
 		clickAndWait(updateVideoButton);
 		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true, driver);
 	}
-	
-	
+
+
 	public void verifyVideoWidthInVETOptionsModal() {
 		waitForElementByElement(withInputField);
 		Assertion.assertEquals("250", withInputField.getAttribute("value"));
 		PageObjectLogging.log("verifyVideoWidthInVETOptionsModal", "Video width has the correct value set previously", true);
-		
+
 	}
-	
-	
+
+
 	public void verifyCaptionInVETModal(String caption) {
 		Assertion.assertStringContains("QAWebdriverCaption1", caption);
 		PageObjectLogging.log("verifyCaptionInVETModal", "Verify that the caption of the video set previously appears in the VET modal", true, driver);
 	}
-	
-	
+
+
 	public void verifyNoCaptionInVETModal() {
 		if (styleWithoutCaption.isSelected()){
 			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with no caption is selected in VET modal", true);
@@ -219,12 +219,12 @@ public class VetOptionsComponentObject extends BasePageObject{
 			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with caption is selected in VET modal", false);
 		}
 	}
-	
+
 	public void verifyVideoNameFieldIsNotEditable(){
 		waitForElementNotVisibleByElement(uneditableVideoNameField);
 		PageObjectLogging.log("verifyVideoNameFieldIsNotEditable", "Verified that Video Name Field is not editable",  true, driver);
 	}
-	
+
 	public void verifyVideoNameFieldIsEditable(){
 		waitForElementByElement(editableVideoNameField);
 		PageObjectLogging.log("verifyVideoNameFieldIsEditable", "Verified that Video Name Field is editable",  true, driver);
