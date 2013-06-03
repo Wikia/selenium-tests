@@ -2,7 +2,9 @@ package com.wikia.webdriver.Common.Properties;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.XMLFunctions;
+
 import java.io.File;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,18 +12,15 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Properties {
 
-	private static void setPropertiesManually()
-	{
+	private static void setPropertiesManually() {
 		Global.BROWSER = "FF";
-		Global.DOMAIN = "http://muppet.michalnowierski.wikia-dev.com/";
-		Global.CONFIG_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"config.xml");
-		Global.CAPTCHA_FILE = new File("c:"+File.separator+"selenium-config"+File.separator+"captcha.txt");
+		Global.DOMAIN = "http://muppet.lukaszk.wikia-dev.com/";
+		Global.CONFIG_FILE = new File("c:" + File.separator + "selenium-config" + File.separator + "config.xml");
+		Global.CAPTCHA_FILE = new File("c:" + File.separator + "selenium-config" + File.separator + "captcha.txt");
 		Global.LOG_VERBOSE = 2;
-		if (Global.DOMAIN.contains("dev"))
-		{
+		if (Global.DOMAIN.contains("dev")) {
 			Global.LOGIN_BY_COOKIE = false;
-		}
-		else{
+		} else {
 			Global.LOGIN_BY_COOKIE = true;
 		}
 		Global.LOG_ENABLED = true;
@@ -29,10 +28,10 @@ public class Properties {
 
 	public static String userName;
 	public static String password;
-	
+
 	public static String userName2;
 	public static String password2;
-	
+
 	public static String userNameNonLatin;
 	public static String userNameNonLatinEncoded;
 	public static String passwordNonLatin;
@@ -61,6 +60,9 @@ public class Properties {
 	public static String userNameStaff;
 	public static String passwordStaff;
 
+	public static String userNameMonobook;
+	public static String passwordMonobook;
+
 	public static String userNameFB;
 	public static String passwordFB;
 	public static String emailFB;
@@ -79,26 +81,29 @@ public class Properties {
 	private static void setVariables() {
 		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
 		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
-		
+
 		userName2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.username");
 		password2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.password");
-		
+
 		userNameNonLatin = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.username");
 		userNameNonLatinEncoded = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.usernameenc");
 		passwordNonLatin = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.password");
-		
+
 		userNameWithUnderScore = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.underscore.username");
 		passwordWithUnderScore = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.underscore.password");
-		
+
 		userNameWithBackwardSlash = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.backwardslash.username");
 		userNameWithBackwardSlashEncoded = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.backwardslash.usernameenc");
 		passwordWithBackwardSlash = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.backwardslash.password");
-		
+
 		userNameLong = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.long.username");
 		passwordLong = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.long.password");
-		
+
 		userNameStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.username");
 		passwordStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.password");
+
+		userNameMonobook = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiamonobook.username");
+		passwordMonobook = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiamonobook.password");
 
 		emailFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.email");
 		passwordFB = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.facebook.password");
@@ -108,13 +113,13 @@ public class Properties {
 		emailPassword = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.generic.password");
 
 		emailQaart1 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia1.username");
-		emailPasswordQaart1 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia1.password");
+		emailPasswordQaart1 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia1.password");
 		emailQaart2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia2.username");
-		emailPasswordQaart2 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia2.password");
+		emailPasswordQaart2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia2.password");
 		emailQaart3 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia3.username");
-		emailPasswordQaart3 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia3.password");
+		emailPasswordQaart3 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia3.password");
 		emailQaart4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.username");
-		emailPasswordQaart4 =XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.password");
+		emailPasswordQaart4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.email.qawikia4.password");
 
 		userNameBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.username");
 		passwordBlocked = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.tooManyLoginAttempts.password");
@@ -138,8 +143,7 @@ public class Properties {
 		setVariables();
 	}
 
-	private static void getPropertiesFromPom()
-	{
+	private static void getPropertiesFromPom() {
 		Global.BROWSER = System.getProperty("browser");
 		Global.CONFIG_FILE = new File(System.getProperty("config"));
 		Global.CAPTCHA_FILE = new File(System.getProperty("captcha"));
@@ -150,8 +154,7 @@ public class Properties {
 		Global.LOG_VERBOSE = 2;
 
 		try {
-			if (Global.DOMAIN.contains("dev"))
-			{
+			if (Global.DOMAIN.contains("dev")) {
 				Global.LOGIN_BY_COOKIE = false;
 			} else {
 				Global.LOGIN_BY_COOKIE = true;
@@ -162,10 +165,9 @@ public class Properties {
 		Global.LOG_ENABLED = true;
 	}
 
-	private static void getWikiVersion()
-	{
+	private static void getWikiVersion() {
 		WebDriver versionDriver = new HtmlUnitDriver(true);
-		versionDriver.get(Global.DOMAIN+"wiki/Special:Version");
+		versionDriver.get(Global.DOMAIN + "wiki/Special:Version");
 		WebElement versionTable = versionDriver.findElement(By.xpath("//td[contains(text(), 'Code')]"));
 		Global.WIKI_VERSION = versionTable.getText();
 		versionDriver.close();
