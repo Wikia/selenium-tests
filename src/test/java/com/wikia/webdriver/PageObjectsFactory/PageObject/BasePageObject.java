@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -197,6 +198,7 @@ public class BasePageObject{
 
 	public void click(WebElement pageElem)
 	{
+		CommonFunctions.scrollToElement(pageElem);
 		pageElem.click();
 	}
 	
@@ -328,7 +330,8 @@ public class BasePageObject{
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	public void mouseRelease(String cssSelecotr)
 	{
 		executeScript("$('"+cssSelecotr+"').mouseleave()");
@@ -843,9 +846,7 @@ public class BasePageObject{
      * @param cssSelector
      */
     public void waitForElementNotPresent(final String cssSelector) {
-        wait.until(
-            CommonExpectedConditions.elementNotPresent(cssSelector)
-        );
+    	this.waitForElementNotPresent(By.cssSelector(cssSelector));   	
     }
     
     /**
@@ -853,9 +854,11 @@ public class BasePageObject{
      * @param selector
      */
     public void waitForElementNotPresent(final By selector) {
+    	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);	
     	wait.until(
     			CommonExpectedConditions.elementNotPresent(selector)
     			);
+    	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);    	
     }
 
     /**

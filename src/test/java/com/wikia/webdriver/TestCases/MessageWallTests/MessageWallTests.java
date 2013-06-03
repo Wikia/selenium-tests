@@ -9,8 +9,8 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallHistoryPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallHistoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
 
 public class MessageWallTests extends TestTemplate
 {

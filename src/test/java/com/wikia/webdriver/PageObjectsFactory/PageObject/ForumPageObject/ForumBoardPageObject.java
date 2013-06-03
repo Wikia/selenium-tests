@@ -9,9 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
@@ -34,6 +31,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	private List<WebElement> postedImageList;
 	@FindBys(@FindBy(css="li.SpeechBubble div.Wikia-video-play-button"))
 	private List<WebElement> postedVideoList;
+	@FindBys(@FindBy(css="li.thread div.thread-left h4 a"))
+	private List<WebElement> threadTitlesList;
 	@FindBy(css=".notify-everyone")
 	private WebElement highlight;
 	
@@ -66,6 +65,17 @@ public class ForumBoardPageObject extends BasePageObject{
 		checkHighlightCheckbox(highlight);
 		clickPostButton();
 		PageObjectLogging.log("startDiscussion", "discussion with message: "+message+", with title "+title+" posted", true, driver);		
+		return new ForumThreadPageObject(driver);
+	}
+	
+	public ForumThreadPageObject openDiscussion(String title) {
+		for (WebElement elem : threadTitlesList) {
+			if (elem.getText().contains(title)) {
+				clickAndWait(elem);
+				break;
+			}
+		}
+		PageObjectLogging.log("openDiscussion", "discussion with title: "+title+", opened", true, driver);		
 		return new ForumThreadPageObject(driver);
 	}
 	
@@ -181,5 +191,4 @@ public class ForumBoardPageObject extends BasePageObject{
 		clickAndWait(followButton);
 		PageObjectLogging.log("clickOnFollowButton", "click on follow button of thread number "+threadNumber, true, driver);					
 	}
-
 }

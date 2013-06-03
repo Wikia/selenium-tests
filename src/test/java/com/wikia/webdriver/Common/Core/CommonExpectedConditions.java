@@ -328,7 +328,7 @@ public class CommonExpectedConditions {
     ) {
         return new ExpectedCondition<Boolean>() {
             @Override
-            public Boolean apply(WebDriver f) {
+            public Boolean apply(WebDriver driver) {
                 return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
             }
             @Override
@@ -351,7 +351,7 @@ public class CommonExpectedConditions {
         ) {
             return new ExpectedCondition<Boolean>() {
                 @Override
-                public Boolean apply(WebDriver f) {
+                public Boolean apply(WebDriver driver) {
                     return (driver.findElements(bySelector).size() < 1);
                 }
                 @Override
@@ -374,7 +374,7 @@ public class CommonExpectedConditions {
     ) {
         return new ExpectedCondition<Boolean>() {
             @Override
-            public Boolean apply(WebDriver f) {
+            public Boolean apply(WebDriver driver) {
                 return (element.isDisplayed());
             }
             @Override
@@ -392,7 +392,7 @@ public class CommonExpectedConditions {
     ) {
         return new ExpectedCondition<Boolean>() {
             @Override
-            public Boolean apply(WebDriver f) {
+            public Boolean apply(WebDriver driver) {
                 Dimension size = element.getSize();
                 Point location = element.getLocation();
                 if (((size.height + location.y) > -1)
@@ -414,7 +414,7 @@ public class CommonExpectedConditions {
     public static ExpectedCondition<Boolean> newWindowPresent() {
         return new ExpectedCondition<Boolean>() {
             @Override
-            public Boolean apply(WebDriver f) {
+            public Boolean apply(WebDriver driver) {
                Object[] windows = driver.getWindowHandles().toArray();
                return (windows.length > 1);
             }
@@ -432,7 +432,7 @@ public class CommonExpectedConditions {
     ) {
         return new ExpectedCondition<Boolean>() {
             @Override
-            public Boolean apply(WebDriver f) {
+            public Boolean apply(WebDriver driver) {
                 Dimension zero = new Dimension(0, 0);
                 Dimension one = new Dimension(1, 1);
                 List <WebElement> tagsNodes = slot.findElements(
