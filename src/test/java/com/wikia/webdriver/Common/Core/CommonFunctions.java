@@ -145,8 +145,7 @@ public class CommonFunctions {
 	 * @return
 	 * @author: Karol Kujawiak
 	 */
-	public static String getAttributeValue(WebElement element,
-										   String attributeName) {
+	public static String getAttributeValue(WebElement element, String attributeName) {
 		driver = DriverProvider.getWebDriver();
 		wait = new WebDriverWait(driver, 30);
 		return element.getAttribute(attributeName);
@@ -255,8 +254,7 @@ public class CommonFunctions {
 				- VisibleDomHeight - pixDiff + 1 - invisibleUpperDomHeight);
 	}
 
-	public static void MoveCursorToElement(Point elem1_location,
-										   WebDriver driver) {
+	public static void MoveCursorToElement(Point elem1_location, WebDriver driver) {
 		int pixDiff = 0;
 		if (Global.BROWSER.equals("FF")) {
 			pixDiff = 6;
@@ -291,8 +289,7 @@ public class CommonFunctions {
 >>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
 	 */
-	public static void MoveCursorToIFrameElement(By IframeElemBy,
-												 WebElement IFrame) {
+	public static void MoveCursorToIFrameElement(By IframeElemBy, WebElement IFrame) {
 		driver = DriverProvider.getWebDriver();
 		Point IFrameLocation = IFrame.getLocation();
 		driver.switchTo().frame(IFrame);
@@ -454,8 +451,7 @@ public class CommonFunctions {
 
 	}
 
-	public static String logInCookie(String userName, String password,
-									 WebDriver driver) {
+	public static String logInCookie(String userName, String password, WebDriver driver) {
 		if (!Global.LOGIN_BY_COOKIE) {
 			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 			login.loginAndVerify(userName, password);

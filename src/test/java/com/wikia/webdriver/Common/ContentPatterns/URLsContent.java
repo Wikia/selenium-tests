@@ -34,7 +34,7 @@ public class URLsContent {
 	public static final String specialPhalanx = "wiki/Special:Phalanx";
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
-    public static final String specialPreferences = "wiki/Special:Preferences";
+	public static final String specialPreferences = "wiki/Special:Preferences";
     public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	public static final String specialCSS = "Special:CSS";
 
