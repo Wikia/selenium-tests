@@ -29,11 +29,13 @@ public class URLsContent {
 	public static final String specialNewFiles = "wiki/Special:NewFiles";
 	public static final String specialNewVideo = "wiki/Special:Videos";
 	public static final String specialUpload = "wiki/Special:Upload";
+	public static final String specialMultipleUpload = "wiki/Special:MultipleUpload";
 	public static final String specialWatchList = "wiki/Special:Watchlist";
 	public static final String specialPhalanx = "wiki/Special:Phalanx";
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
     public static final String specialPreferences = "wiki/Special:Preferences";
+    public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	
 	//Blog list page url
 	public static final String blogList = "wiki/Blog:%listName%";

@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.P.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleUserMonoBookPageObject;
 
 /**

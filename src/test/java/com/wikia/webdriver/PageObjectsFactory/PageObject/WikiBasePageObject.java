@@ -12,14 +12,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.P.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
@@ -115,49 +116,49 @@ public class WikiBasePageObject extends BasePageObject {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 
 	public void verifyModalLoginAppeared()
 	{
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
-	
+
 	/**
 	 * verify that wikia search field is displayed
-	 * 
+	 *
 	 * @author Michal Nowierski
-	 */	
+	 */
 	public void verifyWikiaSearchFieldIsDisplayed() {
 		waitForElementByElement(wikiaSearch_searchForm);
 		PageObjectLogging.log("verifyWikiaSearchFieldIsDisplayed", "verify that wikia search field is displayed", true);
 	}
-	
+
 	/**
 	 * @author Michal Nowierski
 	 * */
 	public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Global.DOMAIN+"wiki/Special:Videos");
+		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
 		return new SpecialVideosPageObject(driver);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Global.DOMAIN + "wiki/Special:NewFiles");
+		getUrl(Global.DOMAIN + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
 	}
-	
+
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
-		getUrl(Global.DOMAIN + "wiki/Special:AdminDashboard");
+		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Global.DOMAIN + "wiki/Special:Upload");
+		getUrl(Global.DOMAIN + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Global.DOMAIN + "wiki/Special:MultipleUpload");
+		getUrl(Global.DOMAIN + URLsContent.specialMultipleUpload);
 		return new SpecialMultipleUploadPageObject(driver);
 	}
 
@@ -252,7 +253,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("navigateToEditPage()", "navigating to edit page via URL", true, driver);
 		return new WikiArticleEditMode(driver);
 	}
-	
+
 	protected void clickDeleteButtonInDropDown() {
 		waitForElementByElement(deleteButton);
 		clickActions(deleteButton);
@@ -305,7 +306,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("deleteArticle", "article "+atricleName+" has been deleted",
 				true, driver);
 	}
-	
+
 	public void deleteTop10List(String top10listName) {
 		String top10listURL = driver.getCurrentUrl();
 		getUrl(top10listURL + "?action=delete");
@@ -315,7 +316,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("deleteArticle", "top 10 list: "+top10listName+" has been deleted",
 				true, driver);
 	}
-	
+
 	public void clickOnDeleteButton() {
 		getUrl(driver.getCurrentUrl() + "?action=delete");
 		PageObjectLogging.log("deleteArticle", "article deletion invoked",
@@ -347,7 +348,7 @@ public class WikiBasePageObject extends BasePageObject {
     	   waitForElementNotVisibleByElement(editButton);
     	   PageObjectLogging.log("verifyEditButtonNotPresent",
     			   "edit button is not present", true);
-       }        
+       }
 
 	private void clickUndeleteArticle() {
 		waitForElementByElement(undeleteButton);
@@ -373,13 +374,13 @@ public class WikiBasePageObject extends BasePageObject {
 		clickUndeleteArticle();
 		clickRestoreArticleButton();
 	}
-	
+
 	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
 		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);
 		PageObjectLogging.log("SpecialCreateTopListPageObject",
 				"create top 10 list with name: "+top_10_list_Name, true, driver);
 		return new SpecialCreateTopListPageObject(driver);
-		
+
 	}
 
 	public WikiArticlePageObject openArticle(String articleName) {
@@ -400,7 +401,7 @@ public class WikiBasePageObject extends BasePageObject {
 				+ " opened", true);
 		return new WikiArticlePageObject(driver);
 	}
-	
+
 	public Top_10_list openTop10List(String topTenListName) {
 		URI uri;
 		try {
@@ -458,20 +459,20 @@ public class WikiBasePageObject extends BasePageObject {
 		return null;
 
 	}
-	
+
 	public void verifyPermissionsErrorsPresent() {
 		waitForElementByElement(premissionErrorMessage);
 		PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
 				true, driver);
 	}
-	
+
 	public void verifyAdsVisible_PrefooterAds()
 	{
 		waitForElementByElement(ad_Prefooter_left_boxad);
 		waitForElementByElement(ad_Prefooter_right_boxad);
 		PageObjectLogging.log("verifyPrefooterAdsVisible", "left and right prefooter ads are visible", true, driver);
 	}
-	
+
 	public void verifyAdsInvisible_PrefooterAds()
 	{
 		waitForElementNotVisibleByElement(ad_Prefooter_left_boxad);
@@ -479,43 +480,43 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyPrefooterAdsInvisible", "left and right prefooter ads are invisible", true, driver);
 	}
 
-	
+
 	public void verifyVideoOnTheLeftOnAritcle()
 	{
 		waitForElementByElement(videoOnLeftOfArticle);
 		PageObjectLogging.log("verifyVideoOnTheLeftOnAritcle", "Video appears on the left of the article page once published", true, driver);
 	}
-	
+
 	public void verifyVideoOnTheRightOnAritcle()
 	{
 		waitForElementByElement(videoOnRightOfArticle);
 		PageObjectLogging.log("verifyVideoOnTheRightOnAritcle", "Video appears on the right of the article page once published", true, driver);
 	}
-	
+
 	public void verifyVideoOnTheCenterOnArticle()
 	{
 		waitForElementByElement(videoOnCenterOfArticle);
 		PageObjectLogging.log("verifyVideoOnTheCenterOnAritcle", "Video appears on the center of the article page once published", true, driver);
 	}
-	
+
 	public void verifyVideoWidthOnAritcle(String width)
 	{
 		waitForElementByElement(videoOnArticle);
 		Assertion.assertEquals(width, videoOnArticle.getCssValue("width"));
 		PageObjectLogging.log("verifyVideoWidthOnAritcle", "Video width is correct article page when page is published", true, driver);
 	}
-	
+
 	public void verifyVideoCaptionOnAritcle()
 	{
 		waitForElementByElement(videoCaptionOnArticle);
 		CommonExpectedConditions.textToBePresentInElement(videoCaptionOnArticle, "QAWebdriverCaption1");
 		PageObjectLogging.log("verifyVideoCaptionOnAritcle", "Video caption appears correctly in article page", true, driver);
 	}
-	
+
 	public void verifyNoVideoCaptionOnAritcle() {
 		waitForElementNotVisibleByElement(videoCaptionOnArticle);
 		PageObjectLogging.log("verifyNoVideoCaptionOnAritcle", "Verify that the video does not have a caption in the article page", true);
-				
+
 	}
 
         public void openSpecialPage(String specialPage) {

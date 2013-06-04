@@ -1,4 +1,4 @@
-package com.wikia.webdriver.P;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
 public class SpecialAdminDashboardPageObject extends SpecialPageObject {
 
