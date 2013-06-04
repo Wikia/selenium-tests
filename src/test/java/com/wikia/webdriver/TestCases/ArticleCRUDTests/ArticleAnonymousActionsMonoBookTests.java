@@ -1,12 +1,13 @@
 package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBaseMonoBookPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
+
 import java.util.HashMap;
 import org.testng.annotations.DataProvider;
 
@@ -79,7 +80,6 @@ public class ArticleAnonymousActionsMonoBookTests extends TestTemplate {
         WikiArticleMonoBookPageObject article = new WikiArticleMonoBookPageObject(driver);
         articleComment = article.postComment();
         article.verifyCommentPresent(articleComment);
-        article.verifyRestrictedPermissions();
     }
 
     /*

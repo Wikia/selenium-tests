@@ -69,27 +69,6 @@ public class CommonFunctions {
 
 	}
 
-	public static void logInMonobook(String userName, String password, WebDriver driver) {
-		String temp = driver.getCurrentUrl();
-		driver.get(Global.DOMAIN + "wiki/Special:UserLogin");
-		WebElement userNameField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='username']"));
-		WebElement passwordField = driver.findElement(By
-				.cssSelector("#WikiaArticle input[name='password']"));
-		String submitButtonSelector = "#WikiaArticle input[class='login-button big']";
-		WebElement submitButton = driver.findElement(By
-				.cssSelector(submitButtonSelector));
-		userNameField.sendKeys(userName);
-		passwordField.sendKeys(password);
-		submitButton.click();
-		driver.findElement(By.cssSelector("#pt-userpage a[href*='User:"
-				+ userName + "']"));// only for verification
-		if (!temp.contains("UserLogout")) {
-			driver.get(temp);
-		}
-
-	}
-
 	/**
 <<<<<<< HEAD
 	 *

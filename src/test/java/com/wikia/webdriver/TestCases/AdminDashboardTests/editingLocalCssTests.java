@@ -2,12 +2,14 @@ package com.wikia.webdriver.TestCases.AdminDashboardTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleUserMonoBookPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginMonobookPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
 
 /**
  * tests are prepared to test the following feature: https://wikia-inc.atlassian.net/browse/DAR-136
@@ -15,11 +17,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiAr
  * @author wikia
  */
 public class editingLocalCssTests extends TestTemplate {
-
-	private String mediaWikiCss = "MediaWiki:Wikia.css";
-	private String specialCSS = "Special:CSS";
-	private String actionEditParameter = "?action=edit";
-	private String editButtonSelector = "a#ca-edit";
 
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-293
@@ -29,9 +26,9 @@ public class editingLocalCssTests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		wiki.openArticle(this.mediaWikiCss);
-		wiki.clickEditButton("");
-		wiki.waitForStringInURL(this.specialCSS);
+		wiki.openArticle(URLsContent.mediaWikiCss);
+		wiki.clickEditButton();
+		wiki.verifyUrl(URLsContent.specialCSS);
 	}
 
 	/**
@@ -42,8 +39,8 @@ public class editingLocalCssTests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		wiki.openArticle(this.mediaWikiCss);
-		wiki.waitForElementNotPresent(this.editButtonSelector);
+		wiki.openArticle(URLsContent.mediaWikiCss);
+		wiki.verifyEditButtonNotPresent();
 	}
 
 	/**
@@ -54,8 +51,8 @@ public class editingLocalCssTests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		wiki.openArticle(this.mediaWikiCss);
-		wiki.appendToUrl(this.actionEditParameter);
+		wiki.openArticle(URLsContent.mediaWikiCss);
+		wiki.appendToUrl(URLsContent.actionEditParameter);
 		wiki.verifyPermissionsErrorsPresent();
 	}
 
@@ -66,8 +63,8 @@ public class editingLocalCssTests extends TestTemplate {
 	public void editingLocalCss_004_AnonHasNoEditOptionOnMediawikiWikiaCss() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		wiki.openArticle(this.mediaWikiCss);
-		wiki.waitForElementNotPresent(this.editButtonSelector);
+		wiki.openArticle(URLsContent.mediaWikiCss);
+		wiki.verifyEditButtonNotPresent();
 	}
 
 	/**
@@ -77,8 +74,8 @@ public class editingLocalCssTests extends TestTemplate {
 	public void editingLocalCss_005_AnonTriesToAccessWikiaCssUsingParameter() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		wiki.openArticle(this.mediaWikiCss);
-		wiki.appendToUrl(this.actionEditParameter);
+		wiki.openArticle(URLsContent.mediaWikiCss);
+		wiki.appendToUrl(URLsContent.actionEditParameter);
 		wiki.verifyPermissionsErrorsPresent();
 	}
 
@@ -90,9 +87,9 @@ public class editingLocalCssTests extends TestTemplate {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		wiki.openArticle(this.mediaWikiCss);
-		wiki.appendToUrl(this.actionEditParameter);
-		wiki.waitForStringInURL(this.specialCSS);
+		wiki.openArticle(URLsContent.mediaWikiCss);
+		wiki.appendToUrl(URLsContent.actionEditParameter);
+		wiki.verifyUrl(URLsContent.specialCSS);
 	}
 
 	/**
@@ -100,11 +97,13 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_007", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_007_MonobookUserWithAdminRightsEditsWikiaCss() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		CommonFunctions.logInMonobook(Properties.userNameMonobook, Properties.passwordMonobook, driver);
-		WikiArticleUserMonoBookPageObject monobookArticle = new WikiArticleUserMonoBookPageObject(driver);
-		monobookArticle.openArticle(this.mediaWikiCss);
+		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
+		loginMonobook.open();
+		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordStaff, "");
+		loginMonobook.submitForm();
+		loginMonobook.verifyLogin(Properties.userNameMonobook);
+		WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
+		monobookArticle.openArticle(URLsContent.mediaWikiCss);
 		monobookArticle.clickEdit();
 		monobookArticle.verifyEditionArea();
 	}
@@ -114,11 +113,13 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_008", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_008_MonobookUserWithAdminRightsOpensSpecialCss() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		CommonFunctions.logInMonobook(Properties.userNameMonobook, Properties.passwordMonobook, driver);
-		WikiArticleUserMonoBookPageObject monobookArticle = new WikiArticleUserMonoBookPageObject(driver);
-		monobookArticle.openArticle(this.specialCSS);
+		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
+		loginMonobook.open();
+		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordStaff, "");
+		loginMonobook.submitForm();
+		loginMonobook.verifyLogin(Properties.userNameMonobook);
+		WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
+		monobookArticle.openArticle(URLsContent.specialCSS);
 		monobookArticle.verifyOasisOnly();
 	}
 
@@ -132,6 +133,6 @@ public class editingLocalCssTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialAdminDashboardPageObject adminDashboard = wiki.openSpecialAdminDashboard();
 		adminDashboard.clickCssTool();
-		wiki.waitForStringInURL(this.specialCSS);
+		wiki.verifyUrl(URLsContent.specialCSS);
 	}
 }

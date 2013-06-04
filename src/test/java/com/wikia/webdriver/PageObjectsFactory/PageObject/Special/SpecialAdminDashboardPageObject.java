@@ -23,6 +23,6 @@ public class SpecialAdminDashboardPageObject extends SpecialPageObject {
 	    public void clickCssTool() {
 	        waitForElementByElement(cssToolButton);
 	        clickAndWait(cssToolButton);
-	        PageObjectLogging.log("clickCssTool", "click on special CSS tool", true, driver);
+	        PageObjectLogging.log("clickCssTool", "click on special CSS tool", true);
 	    }
 }

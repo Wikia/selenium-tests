@@ -6,6 +6,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBaseMonoBookPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
+
 import java.util.HashMap;
 
 import org.testng.annotations.DataProvider;

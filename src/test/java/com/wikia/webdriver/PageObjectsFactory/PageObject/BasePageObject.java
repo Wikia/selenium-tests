@@ -641,7 +641,7 @@ public class BasePageObject{
 
 	public void appendToUrl(String additionToUrl) {
 		driver.get(getCurrentUrl()+additionToUrl);
-		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true, driver);
+		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
 }
