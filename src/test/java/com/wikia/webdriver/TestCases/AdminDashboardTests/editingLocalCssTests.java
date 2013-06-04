@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.AdminDashboardTests;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleUserMonoBookPageObject;
 import org.testng.annotations.Test;
 
@@ -9,7 +10,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.P.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBaseMonoBookPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.MessageWallPageObject;

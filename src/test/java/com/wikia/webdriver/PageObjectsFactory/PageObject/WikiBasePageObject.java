@@ -1,14 +1,15 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.P.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
@@ -134,27 +135,27 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * */
 	public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Domain+"wiki/Special:Videos");
+		getUrl(Domain+URLsContent.specialNewVideo);
 		return new SpecialVideosPageObject(driver, Domain);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Domain + "wiki/Special:NewFiles");
+		getUrl(Domain + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
 	}
 	
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
-		getUrl(Domain + "wiki/Special:AdminDashboard");
+		getUrl(Domain + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Domain + "wiki/Special:Upload");
+		getUrl(Domain + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver, Domain);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Domain + "wiki/Special:MultipleUpload");
+		getUrl(Domain + URLsContent.specialMultipleUpload);
 		return new SpecialMultipleUploadPageObject(driver, Domain);
 	}
 
