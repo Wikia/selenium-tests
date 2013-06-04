@@ -27,7 +27,6 @@ import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 
 	private By lastFindBy;
-
 	private WebDriver driver;
 
 	private static long imageCounter;
@@ -38,63 +37,6 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 	private static String screenPath = screenDirPath + "screenshot";
 	private static String logFileName = "log.html";
 	private static String logPath = reportPath + logFileName;
-
-	public static void startLoggingSuite() {
-		CommonUtils.createDirectory(screenDirPath);
-		imageCounter = 0;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Dimension dim = toolkit.getScreenSize();
-
-		StringBuilder builder = new StringBuilder();
-		builder.append(
-				"<html><style>table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) {width:100px;}tr.success{color:black;background-color:#CCFFCC;}tr.error{color:black;background-color:#FFCCCC;}tr.step{color:white;background:grey}</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><style>td { border-top: 1px solid grey; } </style></head><body>" +
-				"<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>" +
-				"<p>Date: " + dateFormat.format(date) + " UTC</p>" +
-				"<p>Browser: " + Global.BROWSER + "</p>" +
-				"<p>OS: " + System.getProperty("os.name") + "</p>" +
-				"<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>" +
-				"<p>Testing environment: "+ Global.DOMAIN+"</p>" +
-				"<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>" +
-				"<p>Tested version: "+ Global.WIKI_VERSION+"</p>" +
-				"<div id='toc'></div>"
-				);
-		CommonUtils.appendTextToFile(logPath, builder.toString());
-		try{
-			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
-			String content = IOUtils.toString(input);
-			CommonUtils.appendTextToFile(logPath, content);
-		}
-		catch(IOException e){
-			System.out.println("no script.txt file available");
-		}
-	}
-
-	public static void stopLoggingSuite() {
-		CommonUtils.appendTextToFile(logPath, "</body></html>");
-	}
-
-	public static void startLoggingMethod(String className, String methodName) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(
-				"<table>" +
-				"<h1>Class: <em>" + className + "." + methodName+ "</em></h1>" +
-				"<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + className + "." + methodName+ "</em></h1></td><td> <br/> &nbsp;</td></tr>"
-				);
-		CommonUtils.appendTextToFile(logPath, builder.toString());
-		System.out.println(className + " " + methodName);
-	}
-
-	public static void stopLoggingMethod() {
-		StringBuilder builder = new StringBuilder();
-		builder.append(
-				"<tr class=\"step\">" +
-				"<td>&nbsp</td><td>STOP LOGGING METHOD  <div style=\"text-align:center\">" +
-				"<a href=\"#toc\" style=\"color:blue\"><b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" +
-				"</table>");
-		CommonUtils.appendTextToFile(logPath, builder.toString());
-	}
 
 	public static void log(String command, String description, boolean success,
 			WebDriver driver) {
@@ -131,7 +73,6 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 
 	@Override
 	public void afterNavigateTo(String url, WebDriver driver) {
-		// System.out.println("After navigate to " + url);
 		StringBuilder builder = new StringBuilder();
 		builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
 				+ "</td><td> <br/> &nbsp;</td></tr>");
@@ -157,6 +98,7 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 
 	@Override
 	public void beforeFindBy(By by, WebElement element, WebDriver driver) {
+		lastFindBy = by;
 	}
 
 	@Override
@@ -210,10 +152,27 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 
 	@Override
 	public void onTestStart(ITestResult result) {
+		StringBuilder builder = new StringBuilder();
+		String testName = result.getName().toString();
+		String className = result.getTestClass().getName().toString();
+		builder.append(
+				"<table>" +
+				"<h1>Class: <em>" +className+ "." + testName + " </em></h1>" +
+				"<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName + "</em></h1></td><td> <br/> &nbsp;</td></tr>"
+				);
+		CommonUtils.appendTextToFile(logPath, builder.toString());
+		System.out.println(className + " " + testName);
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(
+				"<tr class=\"step\">" +
+				"<td>&nbsp</td><td>STOP LOGGING METHOD  <div style=\"text-align:center\">" +
+				"<a href=\"#toc\" style=\"color:blue\"><b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" +
+				"</table>");
+		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
 
 	@Override
@@ -261,9 +220,39 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 
 	@Override
 	public void onStart(ITestContext context) {
+		CommonUtils.createDirectory(screenDirPath);
+		imageCounter = 0;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Dimension dim = toolkit.getScreenSize();
+
+		StringBuilder builder = new StringBuilder();
+		builder.append(
+				"<html><style>table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) {width:100px;}tr.success{color:black;background-color:#CCFFCC;}tr.error{color:black;background-color:#FFCCCC;}tr.step{color:white;background:grey}</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><style>td { border-top: 1px solid grey; } </style></head><body>" +
+				"<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>" +
+				"<p>Date: " + dateFormat.format(date) + " UTC</p>" +
+				"<p>Browser: " + Global.BROWSER + "</p>" +
+				"<p>OS: " + System.getProperty("os.name") + "</p>" +
+				"<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>" +
+				"<p>Testing environment: "+ Global.DOMAIN+"</p>" +
+				"<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>" +
+				"<p>Tested version: "+ Global.WIKI_VERSION+"</p>" +
+				"<div id='toc'></div>"
+				);
+		CommonUtils.appendTextToFile(logPath, builder.toString());
+		try{
+			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
+			String content = IOUtils.toString(input);
+			CommonUtils.appendTextToFile(logPath, content);
+		}
+		catch(IOException e){
+			System.out.println("no script.txt file available");
+		}
 	}
 
 	@Override
 	public void onFinish(ITestContext context) {
+		CommonUtils.appendTextToFile(logPath, "</body></html>");
 	}
 }
