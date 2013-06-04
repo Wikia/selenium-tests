@@ -67,8 +67,7 @@ public class SpecialUserLoginMonobookPageObject extends BaseMonoBookPageObject {
         );
     }
 
-	public void verifyLogin(String userName) {
-		driver.findElement(By.cssSelector("#pt-userpage a[href*='"
-				+ userName + "']"));// only for verification
+	public void verifyLogin() {
+		driver.findElement(By.cssSelector("#pt-logout a"));// only for verification
 	}
 }

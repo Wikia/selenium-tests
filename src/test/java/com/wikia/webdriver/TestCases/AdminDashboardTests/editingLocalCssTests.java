@@ -99,9 +99,9 @@ public class editingLocalCssTests extends TestTemplate {
 	public void editingLocalCss_007_MonobookUserWithAdminRightsEditsWikiaCss() {
 		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
 		loginMonobook.open();
-		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordStaff, "");
+		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordMonobook, "");
 		loginMonobook.submitForm();
-		loginMonobook.verifyLogin(Properties.userNameMonobook);
+		loginMonobook.verifyLogin();
 		WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
 		monobookArticle.openArticle(URLsContent.mediaWikiCss);
 		monobookArticle.clickEdit();
@@ -115,9 +115,9 @@ public class editingLocalCssTests extends TestTemplate {
 	public void editingLocalCss_008_MonobookUserWithAdminRightsOpensSpecialCss() {
 		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
 		loginMonobook.open();
-		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordStaff, "");
+		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordMonobook, "");
 		loginMonobook.submitForm();
-		loginMonobook.verifyLogin(Properties.userNameMonobook);
+		loginMonobook.verifyLogin();
 		WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
 		monobookArticle.openArticle(URLsContent.specialCSS);
 		monobookArticle.verifyOasisOnly();
