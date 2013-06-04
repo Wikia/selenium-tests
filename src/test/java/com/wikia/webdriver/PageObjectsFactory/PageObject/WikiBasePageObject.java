@@ -101,6 +101,7 @@ public class WikiBasePageObject extends BasePageObject {
 	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
 	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
 	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
+	private By editButtonSelector = By.cssSelector("a#ca-edit");
 
 	@FindBy (css = "#WikiaPageHeader h1")
 	private WebElement wikiFirstHeader;
@@ -230,6 +231,14 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(editDropDown);
 		PageObjectLogging.log("clickEditDropDown", "edit drop-down clicked",
 				true, driver);
+	}
+
+	public void clickEditButton() {
+		mouseOver("#GlobalNavigation li:nth(1)");
+		mouseRelease("#GlobalNavigation li:nth(1)");
+		waitForElementByElement(editButton);
+		waitForElementClickableByElement(editButton);
+		clickAndWait(editButton);
 	}
 
 	public WikiArticleEditMode clickEditButton(String pageName) {
@@ -529,6 +538,14 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(videoCaptionOnArticle);
 		PageObjectLogging.log("verifyNoVideoCaptionOnAritcle", "Verify that the video does not have a caption in the article page", true);
 				
+	}
+
+	public void verifyUrl(String url) {
+		waitForStringInURL(url);
+	}
+
+	public void verifyEditButtonVisible() {
+		waitForElementNotPresent(editButtonSelector);
 	}
 
         public void openSpecialPage(String specialPage) {

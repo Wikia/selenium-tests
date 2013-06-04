@@ -31,12 +31,17 @@ public class URLsContent {
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
     public static final String specialPreferences = "wiki/Special:Preferences";
     public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
+	public static final String specialCSS = "Special:CSS";
+
+	//Mediawiki Urls
+	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
 	
 	//Blog list page url
 	public static final String blogList = "wiki/Blog:%listName%";
 	
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
+	public static final String actionEditParameter = "?action=edit";
 
 	// Extra sites - useful for monobook
 	// replace %user% with username
