@@ -136,28 +136,28 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal Nowierski
 	 * */
 	public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Domain+URLsContent.specialNewVideo);
-		return new SpecialVideosPageObject(driver, Domain);
+		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
+		return new SpecialVideosPageObject(driver, Global.DOMAIN);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Domain + URLsContent.specialNewFiles);
+		getUrl(Global.DOMAIN + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
 	}
 	
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
-		getUrl(Domain + URLsContent.specialAdminDashboard);
+		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Domain + URLsContent.specialUpload);
-		return new SpecialUploadPageObject(driver, Domain);
+		getUrl(Global.DOMAIN + URLsContent.specialUpload);
+		return new SpecialUploadPageObject(driver, Global.DOMAIN);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Domain + URLsContent.specialMultipleUpload);
-		return new SpecialMultipleUploadPageObject(driver, Domain);
+		getUrl(Global.DOMAIN + URLsContent.specialMultipleUpload);
+		return new SpecialMultipleUploadPageObject(driver, Global.DOMAIN);
 	}
 
 	public void verifyEditDropDownAnonymous() {

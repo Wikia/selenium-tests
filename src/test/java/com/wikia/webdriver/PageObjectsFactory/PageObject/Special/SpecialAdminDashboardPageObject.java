@@ -17,7 +17,6 @@ public class SpecialAdminDashboardPageObject extends SpecialPageObject {
 
 	    public SpecialAdminDashboardPageObject(WebDriver driver) {
 	        super(driver);
-	        PageFactory.initElements(driver, this);
 	    }
 
 	    public void clickCssTool() {
