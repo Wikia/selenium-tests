@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -190,16 +191,16 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 						false);
 			}
 
-			StackTraceElement[] stackTrace = result.getThrowable().getStackTrace();
-			StringBuilder stackTraceBuilder = new StringBuilder();
-			for (int i=0; i<stackTrace.length; i++){
-				stackTraceBuilder.append(stackTrace[i]);
-				stackTraceBuilder.append("\n");
+			String exception;
+			try{
+				exception = result.getThrowable().toString() + "\n" +ExceptionUtils.getStackTrace(result.getThrowable());
 			}
-
+			catch(NullPointerException e){
+				exception = "no further exception";
+			}
 			StringBuilder builder = new StringBuilder();
 			builder.append("<tr class=\"error\"><td>error</td><td>"
-					+ result.getThrowable().toString() + "\n" +stackTraceBuilder.toString()
+					+ exception
 					+ "</td><td> <br/><a href='screenshots/screenshot"
 					+ imageCounter
 					+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
@@ -207,6 +208,7 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 			CommonUtils.appendTextToFile(logPath, builder.toString());
 			imageCounter += 1;
 			logJSError(driver);
+			onTestSuccess(result);
 		}
 	}
 
