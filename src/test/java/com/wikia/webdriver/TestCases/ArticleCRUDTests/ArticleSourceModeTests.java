@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
@@ -19,14 +18,13 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleSourceEditMode;
 
 public class ArticleSourceModeTests extends TestTemplate{
-	
+
 	String pageName;
-	
-	
+
+
 	@Test(groups={"RTE_extended","RTE_extended_001"})
 	public void RTE_001_Bold(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -39,7 +37,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("'''Bold text'''");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_002"})
 	public void RTE_002_Italic(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -52,7 +50,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("''Italic text''");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_003"})
 	public void RTE_003_InternalLink(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -78,7 +76,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("[http://www.example.com link title]");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_005"})
 	public void RTE_005_HeadLine(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -91,7 +89,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("\n== Headline text ==\n");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_006"})
 	public void RTE_006_EmbedFile(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -104,7 +102,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("[[File:Example.jpg]]");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_007"})
 	public void RTE_007_EmbedMedia(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -117,7 +115,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("[[Media:Example.ogg]]");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_008"})
 	public void RTE_008_Math(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -130,7 +128,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("<math>Insert formula here</math>");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_009"})
 	public void RTE_009_Nowiki(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -143,7 +141,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("<nowiki>Insert non-formatted text here</nowiki>");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_010"})
 	public void RTE_010_Signature(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -155,8 +153,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clickSignature();
 		source.checkSourceContent("--~~~~");
 		source.clickOnPublishButton();
-	}	
-	
+	}
+
 	@Test(groups={"RTE_extended","RTE_extended_011"})
 	public void RTE_011_HLine(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -169,7 +167,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("\n----\n");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_012"})
 	public void RTE_012_Photo(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -182,10 +180,11 @@ public class ArticleSourceModeTests extends TestTemplate{
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
 		photoOptions.setCaption(PageContent.caption);
 		photoOptions.clickAddPhoto();
-		source.checkSourceContent(String.format(PageContent.wikiTextPhoto, PageContent.caption));
+		String photoName = photoAddPhoto.getPhotoName();
+		source.checkSourceContent(String.format(PageContent.wikiTextPhoto.replace("%photoName%", photoName), PageContent.caption));
 		source.clickOnPublishButton();
-	}	
-	
+	}
+
 	@Test(groups={"RTE_extended","RTE_extended_013"})
 	public void RTE_013_Slideshow(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -203,17 +202,10 @@ public class ArticleSourceModeTests extends TestTemplate{
 		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
-//		
-//		source.waitForObjectModalAndClickAddAphoto("GallerySlideshow");
-//		source.searchImageInLightBox("image");
-//		source.galleryCheckImageInputs(4);
-//		source.galleryClickOnSelectButton();
-//		source.gallerySetPositionSlideshow("Center");
-//		source.galleryClickOnFinishButton();
 		source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_014"})
 	public void RTE_014_Gallery(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -237,7 +229,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_015"})
 	public void RTE_015_Slider(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -248,7 +240,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.clearSource();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
-		
+
 		SliderBuilderComponentObject sliderBuilder = (SliderBuilderComponentObject)source.addComponent("slider");
 		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
@@ -259,7 +251,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_016"})
 	public void RTE_016_Video(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -273,10 +265,10 @@ public class ArticleSourceModeTests extends TestTemplate{
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		source.checkSourceVideoContent("[["+VideoContent.youtubeVideoWikiText+PageContent.caption+"]]");
-		source.clickOnPublishButton();		
+		source.clickOnPublishButton();
 	}
-	
-	
+
+
 	@Test(groups={"RTE_extended","RTE_extended_017"})
 	public void RTE_017_MoreMainTools(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -287,7 +279,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkMainTools();
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_018"})
 	public void RTE_018_MoreWikiMarkupTools(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
@@ -298,7 +290,7 @@ public class ArticleSourceModeTests extends TestTemplate{
 		source.checkWikiMarkupTools();
 		source.clickOnPublishButton();
 	}
-	
+
 	@Test(groups={"RTE_extended","RTE_extended_019"})
 	public void RTE_019_MoreSympolsTools(){
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);

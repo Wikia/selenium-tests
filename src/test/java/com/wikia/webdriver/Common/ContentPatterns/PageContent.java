@@ -38,7 +38,7 @@ public class PageContent {
 	public static String messageWallMessagePrefix = "QAMessageWallMessage";
 	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
-	
+
 	//top 10 list
 	public static String top10Description = "DescriptionForList";
 	public static String top10TestListQAfull = "Top_10_list:TestListQA";
@@ -48,14 +48,14 @@ public class PageContent {
 	//links
 	public static String externalLink = "www.wikia.com";
 	public static String internalLink = "Formatting";
-	
+
 	//forum
 	public static String forumTitlePrefix = "QABoardTitle ";
 	public static String forumTitleEditPrefix = "QABoardTitleEdit ";
 	public static String forumTitle40CharPrefix = "QABoardlongtitle 40 forty c";
 	public static String forumTitleSlashPrefix = "QABoard/Title";
-	public static String forumTitleUnderScorePrefix = "QABoard_Title";	
-	public static String forumTitleNonlatinPrefix = "QABoard查爾斯";	
+	public static String forumTitleUnderScorePrefix = "QABoard_Title";
+	public static String forumTitleNonlatinPrefix = "QABoard查爾斯";
 	public static String forumDescriptionPrefix = "Duis quam ante, fringilla at cursus tristique ";
 	public static String forumDescriptionEditPrefix = "Duis quam ante, fringilla at cursus tristique edit ";
 	public static String forumMessage = "QAforumMessage";
@@ -74,8 +74,8 @@ public class PageContent {
         public static String titleFilterPlain = "BadContent";
 
 	//wikiText
-	public static String wikiTextPhoto = "[[File:Image009.jpg|thumb|%s]]";
-	
+	public static String wikiTextPhoto = "[[File:%photoName%|thumb|%s]]";
+
 	public static String wikiaGlobalUrl = "http://www.wikia.com/";
 
 }

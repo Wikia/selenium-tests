@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,10 +19,11 @@ public class PhotoAddComponentObject extends BasePageObject{
 	private WebElement searchButton;
 	@FindBy(css="#ImageUploadProgress2")
 	private WebElement searchProgressThrobber;
-	@FindBys(@FindBy(css="tr.ImageUploadFindLinks td a"))
+	@FindBys(@FindBy(css="tr.ImageUploadFindImages td a"))
 	private List<WebElement> addThisPhotoList;
-	
-	
+
+	private String photoName;
+
 	public PhotoAddComponentObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -32,7 +34,7 @@ public class PhotoAddComponentObject extends BasePageObject{
 		searchField.sendKeys(photoName);
 		PageObjectLogging.log("typeSearchQuery", photoName+" searching", true);
 	}
-	
+
 	private void clickSearch(){
 		waitForElementByElement(searchButton);
 		clickAndWait(searchButton);
@@ -40,14 +42,18 @@ public class PhotoAddComponentObject extends BasePageObject{
 		waitForElementNotVisibleByElement(searchProgressThrobber);
 		PageObjectLogging.log("clickSearch", "search button clicked", true);
 	}
-	
+
 	private void clickAddPhoto(int photoNumber){
 		waitForElementByElement(addThisPhotoList.get(photoNumber));
+		photoName = addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img")).getAttribute("data-image-name");
 		clickAndWait(addThisPhotoList.get(photoNumber));
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 	}
-	
-	
+
+	public String getPhotoName(){
+		return photoName;
+	}
+
 	/**
 	 * Adding photo with given @photoName and @photoNumber
 	 * @param photoName
@@ -59,12 +65,12 @@ public class PhotoAddComponentObject extends BasePageObject{
 		clickAddPhoto(photoNumber);
 		return new PhotoOptionsComponentObject(driver);
 	}
-	
+
 	private void clickThisWiki(){
-		
+
 	}
-	
+
 	private void clickFlickr(){
-		
+
 	}
 }

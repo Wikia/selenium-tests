@@ -12,19 +12,19 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 	@FindBy(css="#ImageUploadCaption")
 	private WebElement captionField;
 	@FindBy(css="[value='Add photo']")
-	private WebElement addPhotoButton;	
+	private WebElement addPhotoButton;
 	@FindBy(css="#ImageLayoutRow")
 	private WebElement alignmentRow;
 	@FindBy(css="#ImageUploadLayoutLeft")
 	private WebElement alignmentLeft;
 	@FindBy(css="#ImageUploadLayoutRight")
 	private WebElement alignmentRight;
-	
+
 	public PhotoOptionsComponentObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public void setCaption(String caption){
 		waitForElementByElement(captionField);
 		captionField.clear();
@@ -37,7 +37,7 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 		waitForElementNotVisibleByElement(addPhotoButton);
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 	}
-	
+
 	public void adjustAlignment(int i){
 		waitForElementByElement(alignmentRow);
 		switch(i){
@@ -48,13 +48,13 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 				PageObjectLogging.log("adjustAlignment", "right alignment selected",  true);
 				break;
 		default: PageObjectLogging.log("adjustAlignment", "invalid alignment selected",  false);
-		
+
 		}
 	}
 	public void adjustLayout(){
 		//TODO
 	}
 	public void replaceCaption(){
-		//TODO		
+		//TODO
 	}
 }
