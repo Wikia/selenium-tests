@@ -231,7 +231,13 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 
 		StringBuilder builder = new StringBuilder();
 		builder.append(
-				"<html><style>table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) {width:100px;}tr.success{color:black;background-color:#CCFFCC;}tr.error{color:black;background-color:#FFCCCC;}tr.step{color:white;background:grey}</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><style>td { border-top: 1px solid grey; } </style></head><body>" +
+				"<html><style>" +
+				"table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) " +
+				"{width:100px;}tr.success{color:black;background-color:#CCFFCC;}" +
+				"tr.error{color:black;background-color:#FFCCCC;}" +
+				"tr.step{color:white;background:grey}" +
+				"</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">" +
+				"<style>td { border-top: 1px solid grey; } </style></head><body>" +
 				"<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>" +
 				"<p>Date: " + dateFormat.format(date) + " UTC</p>" +
 				"<p>Browser: " + Global.BROWSER + "</p>" +
