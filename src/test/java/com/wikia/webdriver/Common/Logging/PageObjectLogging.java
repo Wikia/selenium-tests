@@ -142,10 +142,16 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 	private static void logJSError(WebDriver driver){
 		if (Global.JS_ERROR_ENABLED){
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
+			ArrayList<String> error = (ArrayList<String>) js.executeScript(
+					"return window.JSErrorCollector_errors.pump()"
+					);
 			if (!error.isEmpty()) {
 				StringBuilder builder = new StringBuilder();
-				builder.append("<tr class=\"error\"><td>click</td><td>"+error+"</td><td> <br/> &nbsp;</td></tr>");
+				builder.append(
+						"<tr class=\"error\">" +
+						"<td>click</td>" +
+						"<td>"+error+"</td>" +
+						"<td> <br/> &nbsp;</td></tr>");
 				CommonUtils.appendTextToFile(logPath, builder.toString());
 			}
 		}
@@ -159,7 +165,10 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 		builder.append(
 				"<table>" +
 				"<h1>Class: <em>" +className+ "." + testName + " </em></h1>" +
-				"<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName + "</em></h1></td><td> <br/> &nbsp;</td></tr>"
+				"<tr class=\"step\">" +
+				"<td>&nbsp</td>" +
+				"<td><h1><em>" + testName + "</em></h1></td>" +
+				"<td> <br/> &nbsp;</td></tr>"
 				);
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 		System.out.println(className + " " + testName);
