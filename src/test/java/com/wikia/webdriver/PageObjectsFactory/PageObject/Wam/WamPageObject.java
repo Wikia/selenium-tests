@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -43,6 +44,24 @@ public class WamPageObject extends BasePageObject {
 
 	@FindBy(css="#wam-index table tr")
 	private List<WebElement> wamIndexRows;
+
+	@FindBys(@FindBy(css="ul.wam-tabs li"))
+	private List<WebElement> tabsList;
+
+	@FindBy(css="a.paginator-next")
+	private WebElement paginationNext;
+
+	@FindBy(css="div.wam-index tr td:nth-child(1)")
+	private List<WebElement> indexList;
+
+	@FindBy(css="div.wikia-paginator ul li a.paginator-page")
+	private List<WebElement> paginationPageNo;
+
+	@FindBy(css="a.selected")
+	private WebElement tabSelected;
+
+	@FindBy(css="div.wam-header h2")
+	private WebElement selectedHeaderName;
 
 	/**
 	 * @desc Wikia verticals (hubs)
@@ -199,17 +218,6 @@ public class WamPageObject extends BasePageObject {
 		}
 	}
 
-	@FindBy(css="a.paginator-next")
-	private WebElement paginationNext;
-
-	@FindBy(css="div.wam-index tr td:nth-child(1)")
-	private List<WebElement> indexList;
-
-	@FindBy(css="div.wikia-paginator ul li a.paginator-page")
-	private List<WebElement> paginationPageNo;
-
-
-
 	private List<String> getCurrentIndexNo() {
 		List<String> counter = new ArrayList<String>();
 		String no;
@@ -247,5 +255,32 @@ public class WamPageObject extends BasePageObject {
 		//<a href="/WAM?title=WAM&amp;controller=WAMPageController&amp;method=index&amp;page=250" data-page="250" class="paginator-page">250</a>
 	}
 
+	public void selectTab(int tabNumber){
+		tabsList.get(tabNumber).click();
+		verifyTabSelected(tabNumber);
+	}
+
+	private void verifyTabSelected(int tabNumber){
+		tabNumber++;
+		WebElement tabSelected = driver.findElement(By
+				.cssSelector("ul.wam-tabs li:nth-child("+tabNumber+") a.selected"));
+		waitForElementByElement(tabSelected);
+	}
+
+	public void checkTabAndHeaderName() {
+		String selectedTabName = getSelectedTabName();
+		String selectedHeaderName = getSelectedHeaderName();
+		Assertion.assertEquals(selectedHeaderName.toLowerCase(), selectedTabName.toLowerCase());
+	}
+
+	private String getSelectedTabName() {
+		String selectedTabName = tabSelected.getText();
+		return selectedTabName;
+	}
+
+	private String getSelectedHeaderName() {
+		String headerName = selectedHeaderName.getText();
+		return headerName;
+	}
 }
 

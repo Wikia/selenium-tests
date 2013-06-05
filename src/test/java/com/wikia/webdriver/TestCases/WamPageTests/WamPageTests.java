@@ -39,4 +39,20 @@ public class WamPageTests extends TestTemplate {
 		pageObject.clickNextPaginator();
 		pageObject.verifyWAMindexPageFirstColumn(41, 60);
 	}
+
+	@Test(groups = {"WamPage004", "WamPageTests"})
+	public void compareTabAndHeaderName() {
+		WamPageObject WAMpage = new WamPageObject(driver);
+		WAMpage.openWamPage();
+		WAMpage.selectTab(0);
+		WAMpage.checkTabAndHeaderName();
+		WAMpage.selectTab(1);
+		WAMpage.checkTabAndHeaderName();
+		WAMpage.selectTab(2);
+		WAMpage.checkTabAndHeaderName();
+		WAMpage.selectTab(3);
+		WAMpage.checkTabAndHeaderName();
+		WAMpage.selectTab(4);
+		WAMpage.checkTabAndHeaderName();
+	}
 }
