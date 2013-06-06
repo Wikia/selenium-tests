@@ -23,7 +23,7 @@ public class HistoryPagePageObject extends BasePageObject {
 	@FindBy(css=".WikiaPageHeaderDiffHistory h1 strong")
 	private WebElement diffHeader;
 
-	public void openHistoryPage(String articlePage) {
+	public void openFileHistoryPage(String articlePage) {
 		WikiBasePageObject wikiObject = new WikiBasePageObject(driver);
 		wikiObject.getUrl(URLsContent.buildUrl(articlePage, URLsContent.historyAction));
 		waitForTextToBePresentInElementByElement(diffHeader, "History");
