@@ -1,12 +1,14 @@
 package com.wikia.webdriver.Common.Properties;
 
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.XMLFunctions;
 import java.io.File;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.XMLFunctions;
 
 public class Properties {
 
@@ -28,11 +30,11 @@ public class Properties {
 		if(seleniumConfigDir == null || seleniumConfigDir.isEmpty()) {
 			seleniumConfigDir = "c:"+File.separator+"selenium-config";
 		}
-		
+
 		Global.CONFIG_FILE = new File(seleniumConfigDir+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File(seleniumConfigDir+File.separator+"captcha.txt");
 		Global.LOG_VERBOSE = 2;
-		if (Global.DOMAIN.contains("dev"))
+		if (Global.DOMAIN.contains("dev")||Global.DOMAIN.contains("sandbox"))
 		{
 			Global.LOGIN_BY_COOKIE = false;
 		}
@@ -44,16 +46,16 @@ public class Properties {
 
 	public static String userName;
 	public static String password;
-	
+
 	public static String userName2;
 	public static String password2;
-	
+
 	public static String userName3;
 	public static String password3;
-	
+
 	public static String userName4;
 	public static String password4;
-	
+
 	public static String userNameNonLatin;
 	public static String userNameNonLatinEncoded;
 	public static String passwordNonLatin;
@@ -106,21 +108,21 @@ public class Properties {
 		password3 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular3.password");
 		userName4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular4.username");
 		password4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular4.password");
-		
+
 		userNameNonLatin = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.username");
 		userNameNonLatinEncoded = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.usernameenc");
 		passwordNonLatin = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.password");
-		
+
 		userNameWithUnderScore = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.underscore.username");
 		passwordWithUnderScore = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.underscore.password");
-		
+
 		userNameWithBackwardSlash = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.backwardslash.username");
 		userNameWithBackwardSlashEncoded = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.backwardslash.usernameenc");
 		passwordWithBackwardSlash = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.backwardslash.password");
-		
+
 		userNameLong = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.long.username");
 		passwordLong = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.long.password");
-		
+
 		userNameStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.username");
 		passwordStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.password");
 
