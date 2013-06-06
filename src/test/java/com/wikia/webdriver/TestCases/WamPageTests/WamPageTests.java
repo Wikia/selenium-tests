@@ -33,11 +33,11 @@ public class WamPageTests extends TestTemplate {
 	public void verifyPaginationByNextButton() {
 		WamPageObject pageObject = new WamPageObject(driver);
 		pageObject.openWamPage();
-		pageObject.verifyWAMindexPageFirstColumn(1, 20);
+		pageObject.verifyWamIndexPageFirstColumn(1, 20);
 		pageObject.clickNextPaginator();
-		pageObject.verifyWAMindexPageFirstColumn(21, 40);
+		pageObject.verifyWamIndexPageFirstColumn(21, 40);
 		pageObject.clickNextPaginator();
-		pageObject.verifyWAMindexPageFirstColumn(41, 60);
+		pageObject.verifyWamIndexPageFirstColumn(41, 60);
 	}
 
 	@Test(groups = {"WamPage004", "WamPageTests"})

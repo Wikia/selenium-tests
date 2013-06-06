@@ -238,7 +238,7 @@ public class WamPageObject extends BasePageObject {
 		return ret;
 	}
 
-	public void verifyWAMindexPageFirstColumn(int startElement, int endElement) {
+	public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
 		waitForElementByElement(wamIndexTable);
 		List<String> pattern = makeStringSequence(startElement, endElement);
 		List<String> current = getCurrentIndexNo();
