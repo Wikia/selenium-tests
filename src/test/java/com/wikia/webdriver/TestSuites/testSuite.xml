@@ -60,6 +60,7 @@
 			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.OnWikiSearchTest"/>
 			<class name="com.wikia.webdriver.TestCases.EventTrackingTests.EditorEventTrackingTests"/>
+			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.editingLocalCssTests"/>
 		</classes>
 	</test>
 </suite>
