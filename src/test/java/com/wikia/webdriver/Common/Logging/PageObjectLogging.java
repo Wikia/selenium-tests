@@ -191,13 +191,8 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 						false);
 			}
 
-			String exception;
-			try{
-				exception = result.getThrowable().toString() + "\n" +ExceptionUtils.getStackTrace(result.getThrowable());
-			}
-			catch(NullPointerException e){
-				exception = "no further exception";
-			}
+			String exception = result.getThrowable().toString() + "\n" +ExceptionUtils.getStackTrace(result.getThrowable());
+
 			StringBuilder builder = new StringBuilder();
 			builder.append("<tr class=\"error\"><td>error</td><td>"
 					+ exception
