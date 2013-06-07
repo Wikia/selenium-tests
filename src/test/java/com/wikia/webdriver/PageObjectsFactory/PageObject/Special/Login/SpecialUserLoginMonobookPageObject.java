@@ -35,11 +35,6 @@ public class SpecialUserLoginMonobookPageObject extends BaseMonoBookPageObject {
         changeToMonoBook();
         PageObjectLogging.log(
             "openSpecialLoginPageWithMonobook",
-            "login page with monobook skin selected loading for more then 30 seconds",
-            true, driver
-        );
-        PageObjectLogging.log(
-            "openSpecialLoginPageWithMonobook",
             "Login page with monobook opened",
             true, driver
         );
