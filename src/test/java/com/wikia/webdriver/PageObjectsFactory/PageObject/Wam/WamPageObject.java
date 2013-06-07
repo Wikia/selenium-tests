@@ -242,7 +242,10 @@ public class WamPageObject extends BasePageObject {
 		waitForElementByElement(wamIndexTable);
 		List<String> pattern = makeStringSequence(startElement, endElement);
 		List<String> current = getCurrentIndexNo();
-		Assertion.assertEquals(pattern, current);
+		for (int i=0; i<pattern.size(); i++) {
+			Assertion.assertEquals(pattern.get(i), current.get(i));
+		}
+
 	}
 
 	public void clickNextPaginator() {
