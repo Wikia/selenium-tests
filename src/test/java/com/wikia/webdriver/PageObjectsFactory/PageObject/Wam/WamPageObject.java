@@ -245,19 +245,12 @@ public class WamPageObject extends BasePageObject {
 		for (int i=0; i<pattern.size(); i++) {
 			Assertion.assertEquals(pattern.get(i), current.get(i));
 		}
-
 	}
 
 	public void clickNextPaginator() {
 		waitForElementByElement(paginationNext);
 		paginationNext.click();
 		PageObjectLogging.log("clickNextPaginator", "next button in pagination was clicked", true);
-	}
-
-	public void clickNumberPagination(String pageNo) {
-		waitForElementByElement(paginationNext);
-		//    	paginationPageNo.
-		//<a href="/WAM?title=WAM&amp;controller=WAMPageController&amp;method=index&amp;page=250" data-page="250" class="paginator-page">250</a>
 	}
 
 	public void selectTab(int tabNumber){
