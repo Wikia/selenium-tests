@@ -1,5 +1,7 @@
 package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -198,11 +200,11 @@ public class ArticleSourceModeTests extends TestTemplate{
 		SlideshowBuilderComponentObject slideshowBuilder = (SlideshowBuilderComponentObject)source.addComponent("slideshow");
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
-		slideshowAddPhoto.choosePhotos(4);
+		List<String> photoNames = slideshowAddPhoto.choosePhotos(4);
 		slideshowAddPhoto.clickSelect();
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
-		source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");
 		source.clickOnPublishButton();
 	}
 
