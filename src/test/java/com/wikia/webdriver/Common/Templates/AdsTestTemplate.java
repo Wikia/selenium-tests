@@ -2,7 +2,6 @@ package com.wikia.webdriver.Common.Templates;
 
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.lang.reflect.Method;
 import java.util.HashMap;
