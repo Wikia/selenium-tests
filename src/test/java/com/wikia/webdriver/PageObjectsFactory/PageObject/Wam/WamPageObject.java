@@ -230,21 +230,13 @@ public class WamPageObject extends BasePageObject {
 		return counter;
 	}
 
-	private List<String> makeStringSequence(int begin, int end) {
-		List<String> ret = new ArrayList<String>();
-		for (int i=begin; i<=end; i++) {
-			ret.add(Integer.toString(i));
-		}
-		return ret;
-	}
-
 	public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
 		waitForElementByElement(wamIndexTable);
-		List<String> pattern = makeStringSequence(startElement, endElement);
 		List<String> current = getCurrentIndexNo();
-		for (int i=0; i<pattern.size(); i++) {
-			Assertion.assertEquals(pattern.get(i), current.get(i));
+		for (int i=0; i<=endElement - startElement; i++) {
+			Assertion.assertEquals(current.get(i), Integer.toString(i + startElement));
 		}
+		Assertion.assertEquals(current.size(), endElement - startElement + 1);
 	}
 
 	public void clickNextPaginator() {
