@@ -221,14 +221,14 @@ public class ArticleSourceModeTests extends TestTemplate{
 		GalleryBuilderComponentObject galleryBuiler = (GalleryBuilderComponentObject) source.addComponent("gallery");
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
-		galleryAddPhoto.choosePhotos(4);
+		List<String> photoNames = galleryAddPhoto.choosePhotos(4);
 		galleryAddPhoto.clickSelect();
 		galleryBuiler.adjustPosition("Center");
 		galleryBuiler.adjustColumns("2");
 		galleryBuiler.adjustSpacing("Small");
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
-		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");
 		source.clickOnPublishButton();
 	}
 
@@ -247,10 +247,10 @@ public class ArticleSourceModeTests extends TestTemplate{
 		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
-		sliderAddPhoto.choosePhotos(4);
+		List<String> photoNames = sliderAddPhoto.choosePhotos(4);
 		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
-		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\nImage010.jpg\nImage009.jpg\nImage008.jpg\nImage007.jpg\n</gallery>");
+		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");
 		source.clickOnPublishButton();
 	}
 
