@@ -4,7 +4,6 @@ target/
 Thumbs.db
 chromedriver.log
 tmp.exe
-<<<<<<< HEAD
 *.class
 .classpath
 .idea/
@@ -12,14 +11,9 @@ tmp.exe
 .settings/
 bin/
 src/test/java/com/wikia/webdriver/Trash/
+src/test/java/com/wikia/webdriver/Properties/
 test-output/
 Wikia.iml
 captcha.txt
 config.xml
-=======
-.classpath
-.project
-.settings/
-test-output/
 pom.xml
->>>>>>> 502bfc0... adding some tests for file page redesign including small tests for the history page and diff pages
