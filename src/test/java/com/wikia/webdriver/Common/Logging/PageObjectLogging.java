@@ -179,8 +179,10 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 		StringBuilder builder = new StringBuilder();
 		builder.append(
 				"<tr class=\"step\">" +
-				"<td>&nbsp</td><td>STOP LOGGING METHOD  <div style=\"text-align:center\">" +
-				"<a href=\"#toc\" style=\"color:blue\"><b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" +
+				"<td>&nbsp</td><td>STOP LOGGING METHOD  " +
+				"<div style=\"text-align:center\">" +
+				"<a href=\"#toc\" style=\"color:blue\">" +
+				"<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" +
 				"</table>");
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
@@ -200,7 +202,8 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 						false);
 			}
 
-			String exception = result.getThrowable().toString() + "\n" +ExceptionUtils.getStackTrace(result.getThrowable());
+			String exception = result.getThrowable().toString() +
+					"\n" +ExceptionUtils.getStackTrace(result.getThrowable());
 
 			StringBuilder builder = new StringBuilder();
 			builder.append("<tr class=\"error\"><td>error</td><td>"
