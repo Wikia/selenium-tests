@@ -14,8 +14,11 @@ public class AdsDataProvider {
 			{"runescape", "RuneScape_Wiki"},
 			{"yugioh", "Main_Page"},
 			{"naruto", "Narutopedia"},
+			{"leagueoflegends" ,"League_of_Legends_Wiki"},
 			{"es.drama", "Portada"},
 			{"de.memory-alpha", "Hauptseite"},
+			{"de.marvel-filme", "Marvel-Filme"},
+			{"de.wikia", "index.php?search=elder&fulltext=Search"},
 			{"it.squadraspecialecobra11", "Squadra_speciale_Cobra_11"},
 			{"it.onepiece", "One_Piece_Wiki_Italia"},
 			{"zh.pad", "Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA"},
@@ -28,20 +31,16 @@ public class AdsDataProvider {
         return new Object[][] {
             {"elderscrolls", "Skyrim"},
             {"dragonvale", "Eggs"},
-            {"leagueoflegends" ,"League_of_Legends_Wiki"},
-            {"runescape", "RuneScape_Wiki"},
-            {"yugioh", "Main_Page"},
-            {"naruto", "Narutopedia"},
+			{"memory-alpha", "Star_Trek_Into_Darkness"},
             {"zh.againstwar", "%E9%80%86%E8%BD%89%E4%B8%89%E5%9C%8B_%E7%BB%B4%E5%9F%BA"},
             {"zh.tos" ,"Category:%E5%9C%96%E9%91%92"},
-            {"zh.pad", "Category:%E5%AE%A0%E7%89%A9"},
-			{"en.memory-alpha", "Star_Trek_Into_Darkness"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
 			{"de.gta", "Welding_%26_Weddings"},
+			{"de.community", "Forum:%C3%9Cbersicht"},
 			{"it.creepypastaitalia", "Slenderman"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
-			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
+			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
         };
     }
 
@@ -51,6 +50,7 @@ public class AdsDataProvider {
 		return new Object[][] {
 			{"wikia", "Wikia"},
 			{"de.wikia", "Wikia"},
+			{"de.wikia", "Spezial:Kontakt"},
 			{"fr.wikia", "Wikia"},
 			{"es.wikia", "Wikia"},
 			{"wikia", "WAM"},
@@ -64,16 +64,15 @@ public class AdsDataProvider {
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
 			{"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
-			{"en.memory-alpha", "Star_Trek_Into_Darkness"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
 			{"ja.gundam", "%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"},
 			{"de.gta", "Welding_%26_Weddings"},
-			{"monsterhunter", "MH3U:_Monsters"},
-			{"callofduty", "Mob_of_the_Dead"},
-			{"monsterhunter", "Monster_Hunter_3_Ultimate"},
-			{"dragoncity", "Category:Dragons"},
-			{"monsterhunter", "Portal:MH3U"},
 			{"wikia", "Wikia"},
+			{"wikia", "Video_Games/Lizzunchbox"},
+			{"monsterhunter", "MH3U:_Monsters"},
+			{"monsterhunter", "Portal:MH3U"},
+			{"dragoncity", "Category:Dragons"},
+			{"memory-alpha", "Star_Trek_Into_Darkness"},
 			{"elderscrolls", "Skyrim"},
 			{"ffxiclopedia", "Category:Jobs"}
 
@@ -85,14 +84,11 @@ public class AdsDataProvider {
 		return new Object[][] {
 			{"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
 			{"zh.pad", "%E5%AE%A0%E7%89%A9%E4%B8%80%E8%A7%88%E8%A1%A8"},
-			{"zh.pad", "%E7%A5%9E%E7%BE%85%E4%B8%87%E8%B1%A1%E3%83%81%E3%83%A7%E3%82%B3_%E3%82%B3%E3%83%A9%E3%83%9C"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"es.pokemon", "Lista_de_Pok%C3%A9mon"},
-			{"es.horadeaventura", "Lista_de_Episodios_de_Hora_de_Aventura"},
-			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-			{"en.memory-alpha.org", "Star_Trek_Into_Darkness"},
 			{"ja.gundam", "%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"},
+			{"memory-alpha", "Star_Trek_Into_Darkness"},
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"elderscrolls", "Skyrim"},
 			{"dragonvale", "Eggs"},
@@ -107,18 +103,14 @@ public class AdsDataProvider {
 		return new Object[][] {
 			{"wikia", "Video_Games"},
 			{"wikia", "Video_Games/Lizzunchbox"},
-			{"wikia", "Video_Games/Meet_the_Character"},
-			{"wikia", "Video_Games/Gaming_Calendar"},
-			{"wikia", "Video_Games/This_Week%27s_Tool"},
 			{"wikia", "Entertainment"},
 			{"wikia", "Entertainment/TV_Schedule"},
-			{"wikia", "Entertainment/ToMoro"},
-			{"wikia", "Entertainment/Failsafe"},
 			{"wikia", "Lifestyle"},
 			{"wikia", "Lifestyle/21_December_2012"},
-			{"wikia", "Lifestyle/20_December_2012"},
-			{"de.wikia"," Videospiele"},
-			{"de.wikia", "Videospiele/gamescom"}
+			{"es.wikia", "Entretenimiento"},
+			{"es.wikia", "Entretenimiento/11_febrero_2013"},
+			{"fr.wikia", "Mode_de_vie"},
+			{"fr.wikia", "Mode_de_vie/Failsafe"}
 		};
 	}
 }
