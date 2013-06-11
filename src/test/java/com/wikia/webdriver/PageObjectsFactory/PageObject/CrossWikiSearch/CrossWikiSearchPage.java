@@ -53,8 +53,22 @@ public class CrossWikiSearchPage extends BasePageObject {
 	protected WebElement paginatorNextButton;
 	@FindBy(css=".paginator-prev.button.secondary")
 	protected WebElement paginatorPrevButton;
+	@FindBy(css=".results-wrapper i")
+	protected WebElement noResultsCaption;
+	@FindBy(css=".wikiPromoteThumbnail")
+	protected List<WebElement> thumbnails;
+	@FindBy(css=".description")
+	protected List<WebElement> descriptions;
+	@FindBy(css=".wiki-statistics>li:nth-child(1)")
+	protected List<WebElement> statisticsPages;
+	@FindBy(css=".wiki-statistics>li:nth-child(2)")
+	protected List<WebElement> statisticsImages;
+	@FindBy(css=".wiki-statistics>li:nth-child(3)")
+	protected List<WebElement> statisticsVideos;
 
 	protected By resultLinks = By.cssSelector(".Results .result > a");
+	private By paginationContainer = By.cssSelector(".wikia-paginator");
+
 
 	public CrossWikiSearchPage(WebDriver driver) {
 		super(driver);
@@ -77,6 +91,7 @@ public class CrossWikiSearchPage extends BasePageObject {
 		searchBox.sendKeys( term );
 		PageObjectLogging.log("searchFor", "Typed search term" +term, true, driver);
 		clickAndWait(searchButton);
+		waitForElementByElement(searchBox);
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPage(driver);
 	}
@@ -178,5 +193,47 @@ public class CrossWikiSearchPage extends BasePageObject {
 	public void verifyResultsNumber(int number){
 		waitForElementByElement(searchResultList.get(0));
 		Assertion.assertNumber(number, searchResultList.size(), "checking number of search results");
+	}
+
+	public void verifyNoPagination(){
+		waitForElementNotPresent(paginationContainer);
+		PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
+				true);
+	}
+
+	public void verifyNoResultsCaption(){
+		waitForElementByElement(noResultsCaption);
+		Assertion.assertEquals("No results found.", noResultsCaption.getText());
+		PageObjectLogging.log("verifyNoResultsCaption", "verified no results caption",
+				true);
+	}
+
+	public void verifyThumbnails(int number){
+		Assertion.assertNumber(number, thumbnails.size(), "checking number of thumbnails");
+		for (WebElement elem:thumbnails){
+			Assertion.assertStringContains(elem.getAttribute("src"), ".png");
+		}
+		PageObjectLogging.log("verifyThumbnails", "thumbnails verified",
+				true);
+	}
+
+	public void verifyDescription(int number){
+		Assertion.assertNumber(number, descriptions.size(), "checking number of thumbnails");
+		for (WebElement elem:descriptions){
+			Assertion.assertTrue(!elem.getText().isEmpty(), "checking if description is not empty");
+		}
+		PageObjectLogging.log("verifyDescriptions", "descriptions verified",
+				true);
+	}
+
+	public void verifyStatistics(int number){
+		Assertion.assertEquals(statisticsPages.size(), number);
+		Assertion.assertEquals(statisticsImages.size(), number);
+		Assertion.assertEquals(statisticsVideos.size(), number);
+		for (int i=0; i<number; i++){
+			Assertion.assertStringContains(statisticsPages.get(i).getText(), "PAGE");
+			Assertion.assertStringContains(statisticsImages.get(i).getText(), "IMAGE");
+			Assertion.assertStringContains(statisticsVideos.get(i).getText(), "VIDEO");
+		}
 	}
 }

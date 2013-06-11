@@ -18,6 +18,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
 public class CrossWikiSearchTests extends TestTemplate {
 	private static final int resultsPerPage = 7;
 	private static final String searchPhrase = "muppets";
+	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
+	private static final String searchPhraseOnePageResults = "muppet_wiki";
 
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getExactMatchQueries",
@@ -42,14 +44,23 @@ public class CrossWikiSearchTests extends TestTemplate {
 		// verify results pos parameter for first page
 		searchPage.verifyResultsPosForPage(0, resultsPerPage);
 		searchPage.verifyResultsCount(resultsPerPage);
+		searchPage.verifyThumbnails(resultsPerPage);
+		searchPage.verifyDescription(resultsPerPage);
+		searchPage.verifyStatistics(resultsPerPage);
 		searchPage.nextPage();
 		// verify results pos parameter for second page
 		searchPage.verifyResultsPosForPage(1, resultsPerPage);
 		searchPage.verifyResultsCount(resultsPerPage);
+		searchPage.verifyThumbnails(resultsPerPage);
+		searchPage.verifyDescription(resultsPerPage);
+		searchPage.verifyStatistics(resultsPerPage);
 		searchPage.prevPage();
 		// verify results pos parameter for first page
 		searchPage.verifyResultsPosForPage(0, resultsPerPage);
 		searchPage.verifyResultsCount(resultsPerPage);
+		searchPage.verifyThumbnails(resultsPerPage);
+		searchPage.verifyDescription(resultsPerPage);
+		searchPage.verifyStatistics(resultsPerPage);
 	}
 
 	@Test(groups= {"CrossWikiSearchTests_003" , "Search"} )
@@ -70,7 +81,24 @@ public class CrossWikiSearchTests extends TestTemplate {
 	public void crossWikiSearch_004_wikimatch( String searchTerm, String expectedUrl ) {
 		CrossWikiSearchPage search = new CrossWikiSearchPage(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
-		CrossWikiSearchPage searched = search.searchFor(searchTerm);
-		searched.verifyMatchResultUrl(expectedUrl);
+		search.searchFor(searchTerm);
+		search.verifyMatchResultUrl(expectedUrl);
+	}
+
+	@Test(groups = {"CrossWikiSearchTests_005", "Search"})
+	public void crossWikiSearch_005_noResults() {
+		CrossWikiSearchPage search = new CrossWikiSearchPage(driver);
+		search.goToSearchPage(PageContent.wikiaGlobalUrl);
+		search.searchFor(searchPhraseNoResults);
+		search.verifyNoPagination();
+		search.verifyNoResultsCaption();
+	}
+
+	@Test(groups = {"CrossWikiSearchTests_005", "Search"})
+	public void crossWikiSearch_006_onePageResult() {
+		CrossWikiSearchPage search = new CrossWikiSearchPage(driver);
+		search.goToSearchPage(PageContent.wikiaGlobalUrl);
+		search.searchFor(searchPhraseOnePageResults);
+		search.verifyNoPagination();
 	}
 }
