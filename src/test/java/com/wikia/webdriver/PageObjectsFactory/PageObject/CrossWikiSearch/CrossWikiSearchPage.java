@@ -3,9 +3,11 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -23,6 +25,8 @@ public class CrossWikiSearchPage extends BasePageObject {
 	protected WebElement searchInput;
 	@FindBy(css="#search-v2-button")
 	protected WebElement searchButton;
+	@FindBy(css=".result")
+	protected List<WebElement> searchResultList;
 	@FindBy(css=".Results")
 	protected WebElement resultsContainer;
 	@FindBy(css=".Results > :nth-child(1)")
@@ -39,17 +43,51 @@ public class CrossWikiSearchPage extends BasePageObject {
 	protected WebElement firstResultStatisticsPageImages;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(3)")
 	protected WebElement firstResultStatisticsPageVideos;
-
+	@FindBy(css = "#search-v2-input")
+	private WebElement searchBox;
+	@FindBys(@FindBy(css = "li.result"))
+	private List<WebElement> results;
+	@FindBy(css = "a[data-event=\"search_click_match\"]")
+	private WebElement match;
 	@FindBy(css=".paginator-next.button.secondary")
 	protected WebElement paginatorNextButton;
 	@FindBy(css=".paginator-prev.button.secondary")
 	protected WebElement paginatorPrevButton;
 
-	protected By results = By.cssSelector(".Results .result");
 	protected By resultLinks = By.cssSelector(".Results .result > a");
 
 	public CrossWikiSearchPage(WebDriver driver) {
 		super(driver);
+	}
+
+
+
+	public void goToSearchPage(String searchUrl) {
+		try{
+			getUrl(searchUrl+"wiki/Special:Search");
+		}
+		catch (TimeoutException e)
+		{
+			PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", false);
+		}
+	}
+
+	public CrossWikiSearchPage searchFor( String term ) {
+		searchBox.clear();
+		searchBox.sendKeys( term );
+		PageObjectLogging.log("searchFor", "Typed search term" +term, true, driver);
+		clickAndWait(searchButton);
+		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
+		return new CrossWikiSearchPage(driver);
+	}
+
+	public void verifyMatchResultUrl( String url ) {
+		String href = match.getAttribute("href");
+		if ( href.contains(url) ) {
+			PageObjectLogging.log("verifyMatchResultUrl", "match result page matches url "+url+ ": "+href, true, driver);
+		} else {
+			PageObjectLogging.log("verifyMatchResultUrl", "match result page does not match url "+url+ ": "+href, false, driver);
+		}
 	}
 
 
@@ -88,8 +126,7 @@ public class CrossWikiSearchPage extends BasePageObject {
 	 */
 	public void verifyResultsCount( int expectedResultsPerPage ) {
 		waitForElementByElement(resultsContainer);
-		List<WebElement> elements = driver.findElements(resultLinks);
-		Assertion.assertEquals( elements.size(), expectedResultsPerPage, "Wrong number of results per page.");
+		Assertion.assertEquals(searchResultList.size(), expectedResultsPerPage, "Wrong number of results per page.");
 	}
 
 	/**
@@ -136,5 +173,10 @@ public class CrossWikiSearchPage extends BasePageObject {
 
 	protected WebElement getResultWikiNameLink(int no) {
 		return driver.findElements(resultLinks).get(no);
+	}
+
+	public void verifyResultsNumber(int number){
+		waitForElementByElement(searchResultList.get(0));
+		Assertion.assertNumber(number, searchResultList.size(), "checking number of search results");
 	}
 }

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.Common.DataProvider;
 
-import com.wikia.webdriver.Common.Properties.Properties;
 import org.testng.annotations.DataProvider;
 
 /**
@@ -24,6 +23,8 @@ public class CrossWikiSearchProvider {
                 "cod", "Call of Duty Wiki", "GAMING"
             }, {
                 "lohgame", "Legacy of Heroes Wiki", "GAMING" // no exact match if solr result set is empty bug.
+            }, {
+                "jojo's bizarre", "JoJo's Bizarre Encyclopedia", "GAMING" // no exact match if solr result set is empty bug.
             }
         };
     }
