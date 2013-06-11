@@ -18,6 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
 public class CrossWikiSearchTests extends TestTemplate {
 	private static final int resultsPerPage = 7;
 	private static final String searchPhrase = "muppets";
+	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getExactMatchQueries",
@@ -70,7 +71,15 @@ public class CrossWikiSearchTests extends TestTemplate {
 	public void crossWikiSearch_004_wikimatch( String searchTerm, String expectedUrl ) {
 		CrossWikiSearchPage search = new CrossWikiSearchPage(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
-		CrossWikiSearchPage searched = search.searchFor(searchTerm);
-		searched.verifyMatchResultUrl(expectedUrl);
+		search.searchFor(searchTerm);
+		search.verifyMatchResultUrl(expectedUrl);
+	}
+
+	@Test(groups = {"CrossWikiSearchTests_005", "Search"})
+	public void crossWikiSearch_005_noResults() {
+		CrossWikiSearchPage search = new CrossWikiSearchPage(driver);
+		search.goToSearchPage(PageContent.wikiaGlobalUrl);
+		search.searchFor(searchPhraseNoResults);
+		search.verifyNoPagination();
 	}
 }

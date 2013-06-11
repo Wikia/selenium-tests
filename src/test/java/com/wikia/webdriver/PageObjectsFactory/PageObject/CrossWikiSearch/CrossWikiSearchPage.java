@@ -55,6 +55,8 @@ public class CrossWikiSearchPage extends BasePageObject {
 	protected WebElement paginatorPrevButton;
 
 	protected By resultLinks = By.cssSelector(".Results .result > a");
+	private By paginationContainer = By.cssSelector(".wikia-paginator");
+
 
 	public CrossWikiSearchPage(WebDriver driver) {
 		super(driver);
@@ -77,6 +79,7 @@ public class CrossWikiSearchPage extends BasePageObject {
 		searchBox.sendKeys( term );
 		PageObjectLogging.log("searchFor", "Typed search term" +term, true, driver);
 		clickAndWait(searchButton);
+		waitForElementByElement(searchBox);
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPage(driver);
 	}
@@ -178,5 +181,11 @@ public class CrossWikiSearchPage extends BasePageObject {
 	public void verifyResultsNumber(int number){
 		waitForElementByElement(searchResultList.get(0));
 		Assertion.assertNumber(number, searchResultList.size(), "checking number of search results");
+	}
+
+	public void verifyNoPagination(){
+		waitForElementNotPresent(paginationContainer);
+		PageObjectLogging.log("verifyNoPagination", "pagination is not visible on the page",
+				true);
 	}
 }
