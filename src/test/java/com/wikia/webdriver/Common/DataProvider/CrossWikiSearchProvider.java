@@ -1,6 +1,5 @@
 package com.wikia.webdriver.Common.DataProvider;
 
-import com.wikia.webdriver.Common.Properties.Properties;
 import org.testng.annotations.DataProvider;
 
 /**

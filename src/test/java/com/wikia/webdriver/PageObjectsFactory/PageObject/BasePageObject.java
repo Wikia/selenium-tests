@@ -197,6 +197,16 @@ public class BasePageObject{
 		}
 	}
 
+	public void navigateBack(){
+		try{
+			driver.navigate().back();
+			PageObjectLogging.log("navigateBack", "previous page loaded", true);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("navigateBack",
+					"page loaded for more then 30 seconds after navigating back", true);
+		}
+	}
+
 	/*
 	 * Script execution helpers
 	 */
