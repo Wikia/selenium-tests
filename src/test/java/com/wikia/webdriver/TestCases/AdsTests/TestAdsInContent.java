@@ -36,7 +36,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_001", "US"}
 	)
-	public void TestAdsInContent_US() {
+	public void TestAdsInContent_US() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -47,7 +47,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_002", "AU"}
 	)
-	public void TestAdsInContent_AU() {
+	public void TestAdsInContent_AU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -58,7 +58,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_003", "CA"}
 	)
-	public void TestAdsInContent_CA() {
+	public void TestAdsInContent_CA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -69,7 +69,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_004", "DE"}
 	)
-	public void TestAdsInContent_DE() {
+	public void TestAdsInContent_DE() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -80,7 +80,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_005", "GB"}
 	)
-	public void TestAdsInContent_GB() {
+	public void TestAdsInContent_GB() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -91,7 +91,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_006", "PL"}
 	)
-	public void TestAdsInContent_PL() {
+	public void TestAdsInContent_PL() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -102,7 +102,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_007", "UA"}
 	)
-	public void TestAdsInContent_UA() {
+	public void TestAdsInContent_UA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -113,7 +113,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_008", "RU"}
 	)
-	public void TestAdsInContent_RU() {
+	public void TestAdsInContent_RU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -124,7 +124,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_009", "IT"}
 	)
-	public void TestAdsInContent_IT() {
+	public void TestAdsInContent_IT() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
@@ -135,7 +135,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_In_Content_010", "JP"}
 	)
-	public void TestAdsInContent_JP() {
+	public void TestAdsInContent_JP() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();

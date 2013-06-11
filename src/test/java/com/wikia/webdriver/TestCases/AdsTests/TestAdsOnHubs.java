@@ -41,14 +41,15 @@ public class TestAdsOnHubs extends AdsTestTemplate {
 		wikiPage.verifyHubTopLeaderboard();
 	}
 
-	@GeoEdgeProxy(country="DE")
+	@GeoEdgeProxy(country="IT")
 	@Test (
 		groups={"Ads_Hubs_Pages_002"}
 	)
-	public void TestAdsHubsPages_DE() throws Exception {
+	public void TestAdsHubsPages_IT() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyHubTopLeaderboard();
 	}
+
 
 	@GeoEdgeProxy(country="GB")
 	@Test (
