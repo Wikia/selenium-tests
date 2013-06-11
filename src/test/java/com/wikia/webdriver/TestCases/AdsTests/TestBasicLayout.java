@@ -36,7 +36,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_001", "US"}
 	)
-	public void TestBasicLayout_US() {
+	public void TestBasicLayout_US() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -45,7 +45,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_002", "DE"}
 	)
-	public void TestBasicLayout_DE() {
+	public void TestBasicLayout_DE() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -54,7 +54,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
         groups={"Ads_Basic_Layout_003", "GB"}
 	)
-	public void TestBasicLayout_GB() {
+	public void TestBasicLayout_GB() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -63,7 +63,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_004", "CA"}
 	)
-	public void TestBasicLayout_CA() {
+	public void TestBasicLayout_CA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -72,7 +72,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_005", "UA"}
 	)
-	public void TestBasicLayout_UA() {
+	public void TestBasicLayout_UA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -81,7 +81,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_006", "PL"}
 	)
-	public void TestBasicLayout_PL() {
+	public void TestBasicLayout_PL() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -90,7 +90,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_007", "AU"}
 	)
-	public void TestBasicLayout_AU() {
+	public void TestBasicLayout_AU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -99,7 +99,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_008", "JP"}
 	)
-	public void TestBasicLayout_JP() {
+	public void TestBasicLayout_JP() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -108,7 +108,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_009", "IT"}
 	)
-	public void TestBasicLayout_IT() {
+	public void TestBasicLayout_IT() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}
@@ -117,7 +117,7 @@ public class TestBasicLayout extends AdsTestTemplate {
 	@Test (
 		groups={"Ads_Basic_Layout_010", "RU"}
 	)
-	public void TestBasicLayout_RU() {
+	public void TestBasicLayout_RU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyTopLeaderBoardAndMedrec();
 	}

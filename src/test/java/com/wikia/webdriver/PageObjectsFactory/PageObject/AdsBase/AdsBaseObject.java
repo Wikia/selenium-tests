@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -14,7 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  *
@@ -22,80 +22,108 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
-	private final String anyLeaderboardSelector = "[id$='TOP_LEADERBOARD']";
-	private final String anyMedrecSelector = "[id$='TOP_RIGHT_BOXAD']";
-	private String presentLeaderboard;
-	private String presentMedrec;
+	private Boolean isWikiMainPage;
 
-	private String wikiPage;
-	private AdsContent adsContent;
+	private WebElement presentLB;
+	private String presentLBName;
 
-	@FindBy (css = anyLeaderboardSelector)
-	private WebElement anyLeaderboardContainer;
-	@FindBy (css = anyMedrecSelector)
-	private WebElement anyMedrecContainer;
+	private WebElement presentMD;
+	private String presentMDName;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
-		wikiPage = page;
-		adsContent = new AdsContent();
-		openPage();
+		AdsContent.setSlotsSelectors();
+		isWikiMainPage = checkIfMainPage();
+		getUrl(page);
 	}
 
-	private void openPage() {
-		getUrl(wikiPage);
-	}
-
-	public void verifyTopLeaderBoardPresent() {
-		if (checkIfMainPage()) {
-			presentLeaderboard = AdsContent.homeTopLeaderboard;
+	public void verifyTopLeaderBoardPresent() throws Exception {
+		if (isWikiMainPage) {
+			presentLB = driver.findElement(
+				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeTopLB))
+			);
+			presentLBName = AdsContent.homeTopLB;
 		} else {
-			presentLeaderboard = AdsContent.topLeaderboard;
+			presentLB = driver.findElement(
+				By.cssSelector(AdsContent.getSlotSelector(AdsContent.topLB))
+			);
+			presentLBName = AdsContent.topLB;
 		}
-		waitForElementByElement(anyLeaderboardContainer);
-		checkScriptPresentInSlot(presentLeaderboard, anyLeaderboardContainer);
-		checkTagsPresent(anyLeaderboardContainer);
+		waitForElementByElement(presentLB);
+		checkScriptPresentInSlotScripts(presentLBName, presentLB);
+		checkTagsPresent(presentLB);
 	}
 
-	public void verifyMedrecPresent() {
-		if (checkIfMainPage()) {
-			presentMedrec = AdsContent.homeMedrec;
+	public void verifyMedrecPresent() throws Exception {
+		if (isWikiMainPage) {
+			presentMD = driver.findElement(
+				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeMedrec))
+			);
+			presentMDName = AdsContent.homeMedrec;
 		} else {
-			presentMedrec = AdsContent.medrec;
+			presentMD = driver.findElement(
+				By.cssSelector(AdsContent.getSlotSelector(AdsContent.medrec))
+			);
+			presentMDName = AdsContent.medrec;
 		}
-		waitForElementByElement(anyMedrecContainer);
-		checkScriptPresentInSlot(presentMedrec, anyMedrecContainer);
-		checkTagsPresent(anyMedrecContainer);
+		waitForElementByElement(presentMD);
+		checkScriptPresentInSlotScripts(presentMDName, presentMD);
+		checkTagsPresent(presentMD);
 	}
 
 	public void verifyPrefooters() {
-		String prefooterSelector = (String) adsContent.slotsSelectors.get("Prefooters");
-		WebElement prefooterContainer = driver.findElement(By.cssSelector(prefooterSelector));
+		String prefooterSelector = AdsContent.getSlotSelector("Prefooters");
+		WebElement prefooterElement = driver.findElement(By.cssSelector(prefooterSelector));
 
 		//Scroll to AIC container and wait for <div> to be present inside it
 		scrollToSelector(prefooterSelector);
-		checkTagsPresent(prefooterContainer);
+		checkTagsPresent(prefooterElement);
 	}
 
-	public void verifySpotlights() {
-		String prefooterSelector = (String) adsContent.slotsSelectors.get("Prefooters");
-		WebElement prefooterContainer = driver.findElement(By.cssSelector(prefooterSelector));
-
-		//Scroll to Prefooters container and wait for <div> to be present inside it
-		scrollToSelector(prefooterSelector);
-		checkTagsPresent(prefooterContainer);
-	}
-
-	public void verifyTopLeaderBoardAndMedrec() {
+	public void verifyTopLeaderBoardAndMedrec() throws Exception {
 		verifyTopLeaderBoardPresent();
 		verifyMedrecPresent();
 	}
 
+	public void verifyHubTopLeaderboard() throws Exception {
+		String hubLBName = AdsContent.hubLB;
+		WebElement hubLB = driver.findElement(By.cssSelector(AdsContent.getSlotSelector(hubLBName)));
+		checkScriptPresentInSlotScripts(hubLBName, hubLB);
+		PageObjectLogging.log("HUB_TOP_LEADERBOARD found", "HUB_TOP_LEADERBOARD found", true);
+
+		WebElement hubGPT_LB = hubLB.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.hubLB_gpt)));
+		PageObjectLogging.log("HUB_TOP_LEADERBOARD_gpt found", "HUB_TOP_LEADERBOARD_gpt found", true);
+
+		if(hubGPT_LB.findElements(By.cssSelector("iframe")).size() > 1) {
+			PageObjectLogging.log("IFrames found", "2 IFrames found in HUB_TOP_LEADERBOAD_gpt div", true);
+		} else {
+			PageObjectLogging.log(
+				"IFrames not found",
+				"2 IFrames expected to be found in HUB_TOP_LEADERBOAD_gpt div, found less",
+				false, driver
+			);
+			throw new Exception("IFrames inside GPT div not found!");
+		}
+	}
+
+	public void verifyNoAdsOnPage() throws Exception {
+		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
+		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
+		verifyNoAds();
+	}
+
+	public void verifyAdsInContent() {
+		String aicSelector = AdsContent.getSlotSelector("AdsInContent");
+		WebElement aicContainer = driver.findElement(By.cssSelector(aicSelector));
+
+		//Scroll to AIC container and wait for <div> to be present inside it
+		scrollToSelector(aicSelector);
+		waitForElementByElement(aicContainer.findElement(By.cssSelector("div")));
+
+		checkTagsPresent(aicContainer);
+	}
+
 	private void checkTagsPresent(WebElement slotElement) {
-		//Turn off logging exceptions
-		//TimeoutException is meant to be cought
-		//and should not break the test
-		Global.LOG_ENABLED  = false;
 		try {
 			waitForOneOfTagsPresentInElement(slotElement, "img", "iframe");
 			PageObjectLogging.log(
@@ -112,11 +140,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
-		//Turn on logging
-		Global.LOG_ENABLED  = true;
 	}
 
-	private List checkScriptPresentInSlot(String slotName, WebElement slotElement) {
+	private List checkScriptPresentInSlotScripts(String slotName, WebElement slotElement) throws Exception {
 		List<WebElement> scriptsTags = slotElement.findElements(By.tagName("script"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Boolean scriptFound = false;
@@ -144,18 +170,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 				false,
 				driver
 			);
+			throw new Exception("Script for pushing ads not found in element");
 		}
 		return scriptsTags;
 	}
 
-	private String setEnviroment(String page) {
-		String enviroment = determineEnviroment();
-		String pageToOpen = page.replace("http://", "http://" + enviroment);
-		return pageToOpen;
-	}
-
 	private String createSelectorAll () {
-		Collection slotsSelectors = adsContent.slotsSelectors.values();
+		Collection slotsSelectors = AdsContent.slotsSelectors.values();
 		Integer size = slotsSelectors.size();
 		Integer i = 1;
 		String selectorAll = "";
@@ -186,36 +207,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 					);
 				}
 			}
+		} else {
+			PageObjectLogging.log(
+				"SelectorNotFound",
+				"Selector " + selector + " not found on page",
+				false
+			);
 		}
-		PageObjectLogging.log(
-			"SelectorNotFound",
-			"Selector " + selector + " not found on page",
-			true
-		);
 	}
 
-	public void verifyNoAdsOnPage() throws Exception {
-		scrollToSelector((String) adsContent.slotsSelectors.get("AdsInContent"));
-		scrollToSelector((String) adsContent.slotsSelectors.get("Prefooters"));
-		verifyNoAds();
-	}
-
-	public void verifyAdsInContent() {
-		String aicSelector = (String) adsContent.slotsSelectors.get("AdsInContent");
-		WebElement aicContainer = driver.findElement(By.cssSelector(aicSelector));
-
-		//Scroll to AIC container and wait for <div> to be present inside it
-		scrollToSelector(aicSelector);
-		waitForElementByElement(aicContainer.findElement(By.cssSelector("div")));
-
-		checkTagsPresent(aicContainer);
-	}
-
-	public void verifyHubTopLeaderboard() {
-		String hubTLName = AdsContent.HubTopLeaderboard;
-		List scripts = checkScriptPresentInSlot(hubTLName, anyLeaderboardContainer);
-		checkDartCallPresent(scripts);
-	}
 
     private void verifyNoAds() throws Exception {
 		List <WebElement> adsElements = driver.findElements(
@@ -228,7 +228,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 				true,
 				driver
 			);
-			return;
 		} else {
 			for (WebElement element : adsElements) {
 				if (element.isDisplayed()
@@ -250,25 +249,5 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
-	}
-
-	private void checkDartCallPresent(List <WebElement> scripts) {
-		String dartCall = AdsContent.dartCallHubsRegEx;
-		for (WebElement script : scripts) {
-			String src = script.getAttribute("src");
-			if (src.matches(dartCall)) {
-				PageObjectLogging.log(
-					"DartCallFound",
-					"Dart call found in script " + src,
-					true
-				);
-				return;
-			}
-		}
-		PageObjectLogging.log(
-			"DartCallFound",
-			"Dart call not found in script",
-			false
-		);
 	}
 }

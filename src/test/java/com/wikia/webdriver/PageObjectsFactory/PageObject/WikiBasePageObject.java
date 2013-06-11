@@ -600,9 +600,9 @@ public class WikiBasePageObject extends BasePageObject {
      *
      * @return Boolean
      */
-    protected Boolean checkIfMainPage() {
-        WebElement body = driver.findElement(By.cssSelector("body"));
-	return (body.getAttribute("class").contains("mainpage"));
-    }
+	protected Boolean checkIfMainPage() {
+		WebElement body = driver.findElement(By.cssSelector("body"));
+		return (body.getAttribute("class").contains("mainpage"));
+	}
 
 }
