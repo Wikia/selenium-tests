@@ -15,7 +15,6 @@ public class ArticleCommentTests extends TestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome();
 		MobileArticlePageObject article = mobile.openRandomPage();
-		driver.get("http://mobileregressiontesting.wikia.com/wiki/PMGPMG01");
 		timeStamp = article.getTimeStamp();
 		article.addComment("QAComment"+timeStamp);
 	}
