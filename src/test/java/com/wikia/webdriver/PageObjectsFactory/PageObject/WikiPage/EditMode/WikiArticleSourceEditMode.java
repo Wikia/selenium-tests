@@ -1,20 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
-import java.util.List;
-
-import mx4j.tools.config.DefaultConfigurationBuilder.New;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import com.ibm.icu.util.CalendarAstronomer.Horizon;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
@@ -22,11 +14,10 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class WikiArticleSourceEditMode extends WikiEditMode{
 
-	
+
 	@FindBy(css="#mw-editbutton-bold")
 	private WebElement bold;
 	@FindBy(css="#mw-editbutton-italic")
@@ -67,15 +58,15 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	private WebElement createGallery;
 	@FindBy(css="a.wikia-button[type='3']")
 	private WebElement createSlider;
-	
+
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
-	
+
 	public WikiArticleSourceEditMode(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public WikiArticleSourceEditMode createNewArticleSource(String pageName, int layoutNum){
 		getUrl(Global.DOMAIN+"index.php?title="+pageName+"&action=edit&useFormat="+layoutNum+"&useeditor=source");
 		waitForElementByElement(more);
@@ -86,22 +77,22 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 	{
 		jQueryFocus(".cke_source");
 	}
-	
+
 	public String getSourceContent()
 	{
 		return executeScriptRet("$('.cke_source').attr('value')");
 	}
-	
+
 	public void checkSourceContent(String desiredContent){
 		waitForElementClickableByElement(sourceModeTextArea);
 		Assertion.assertEquals(desiredContent, getSourceContent());
 	}
-	
-	public void checkSourceVideoContent(String desiredContent){		
+
+	public void checkSourceVideoContent(String desiredContent){
 		Assertion.assertEquals(desiredContent.substring(1, 38) + desiredContent.substring(48), getSourceContent().substring(1, 38) + getSourceContent().substring(48));
 	}
 
-	
+
 	public void clickBold(){
 		focusTextArea();
 		bold.click();
@@ -120,96 +111,96 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 		internalLink.click();
 		PageObjectLogging.log("clickInternalLink", "internal link button was clicked", true, driver);
 	}
-	
+
 	public void clickExternalLink(){
 		focusTextArea();
 		externalLink.click();
 		PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
 	}
-	
+
 	public void clickLvl2Headline(){
 		focusTextArea();
 		lvl2headLine.click();
 		PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
 	}
-	
+
 	public void clickEmbedFile(){
 		focusTextArea();
 		embedFile.click();
 		PageObjectLogging.log("clickEmbedFile", "embed file button was clicked", true, driver);
 	}
-	
+
 	public void clickEmbedMedia(){
 		focusTextArea();
 		embedMedia.click();
 		PageObjectLogging.log("clickEmbedMedia", "embed media button was clicked", true, driver);
 	}
-	
+
 	public void clickMath(){
 		focusTextArea();
 		math.click();
 		PageObjectLogging.log("clickMath", "math button was clicked", true, driver);
 	}
-	
+
 	public void clickNowiki(){
 		focusTextArea();
 		nowiki.click();
 		PageObjectLogging.log("clickNoWiki", "nowwiki button was clicked", true, driver);
 	}
-	
+
 	public void clickSignature(){
 		focusTextArea();
 		signature.click();
 		PageObjectLogging.log("clickSignature", "signature button was clicked", true, driver);
 	}
-	
+
 	public void clickHorizontalLine(){
 		focusTextArea();
 		hline.click();
 		PageObjectLogging.log("clickHorizontalLine", "horizontal line button was clicked", true, driver);
 	}
-	
+
 	public PhotoAddComponentObject clickAddPhoto(){
 		focusTextArea();
 		photo.click();
 		PageObjectLogging.log("clickAddPhot", "add photo button was clicked", true, driver);
 		return new PhotoAddComponentObject(driver);
 	}
-	
+
 	public void clickAddGallery(){
 		focusTextArea();
 		gallery.click();
 		PageObjectLogging.log("clickAddGallery", "add gallery button was clicked", true, driver);
 	}
-	
+
 	public VetAddVideoComponentObject clickAddVideo(){
 		focusTextArea();
 		video.click();
 		PageObjectLogging.log("clickAddVideo", "add video button was clicked", true, driver);
 		return new VetAddVideoComponentObject(driver);
 	}
-	
+
 	public void clickMore(){
 		focusTextArea();
 		more.click();
 		PageObjectLogging.log("clickMore", "more button was clicked", true, driver);
 	}
-	
+
 	public void clearSource(){
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("clearSource", "source area erased", true, driver);
 	}
-	
+
 	public void closeMore(){
 		moreClose.click();
 	}
-	
+
 	public void verifyComponentSelector()
 	{
 		waitForElementByElement(componentSelector);
 		PageObjectLogging.log("verifyComponentSelector", "component selector is visible", true, driver);
 	}
-	
+
 	public Object addComponent(String componentName){
 		if (componentName.equals("slideshow")){
 			waitForElementByElement(createSlideshow);
@@ -234,7 +225,7 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 			return null;
 		}
 	}
-	
+
 	public void checkMainTools()
 	{
 		for (int i=1; i<17; i++){
@@ -245,7 +236,7 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 			checkSourceContent(content);
 		}
 	}
-	
+
 	public void checkWikiMarkupTools()
 	{
 		for (int i=1,j=i+1; i<21; i++){
@@ -257,13 +248,13 @@ public class WikiArticleSourceEditMode extends WikiEditMode{
 			checkSourceContent(content);
 		}
 	}
-	
+
 	public void checkSymbolsTools()
 	{
 		for (int i=1; i<65; i++){
 			clearSource();
 			clickMore();
-			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).getAttribute("value");
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).getText();
 			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).click();
 			checkSourceContent(content);
 		}

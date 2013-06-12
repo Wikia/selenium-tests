@@ -94,7 +94,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 		search.verifyNoResultsCaption();
 	}
 
-	@Test(groups = {"CrossWikiSearchTests_005", "Search"})
+	@Test(groups = {"CrossWikiSearchTests_006", "Search"})
 	public void crossWikiSearch_006_onePageResult() {
 		CrossWikiSearchPage search = new CrossWikiSearchPage(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
