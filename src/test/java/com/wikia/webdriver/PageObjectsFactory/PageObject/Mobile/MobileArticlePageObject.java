@@ -3,13 +3,16 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.google.inject.Key;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -87,7 +90,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	public void addComment(String comment){
 		showCommentsSection();
 		commentInputArea.sendKeys(comment);
-		postCommentButton.click();
+		commentInputArea.sendKeys(Keys.TAB);
+		clickAndWait(postCommentButton);
 		verifyAddedComment(comment);
 		PageObjectLogging.log("addComment", "comment "+comment+" added", true);
 	}
