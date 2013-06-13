@@ -10,9 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import com.google.inject.Key;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -53,7 +51,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement imageModalTrigger;
 	@FindBy(xpath="//section[@class='swiperPage current']")
 	private WebElement currentImageModal;
-	@FindBy(css=".toc")
+	@FindBy(css=".toc:not(.open)")
 	private WebElement tocClosed;
 	@FindBy(css=".toc.open")
 	private WebElement tocOpened;
@@ -153,9 +151,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public void verifySectionInvisibility(){
-		Global.LOG_ENABLED = false;
-		waitForElementNotVisibleByCss("div.mw-content-ltr h2.collSec.open");
-		Global.LOG_ENABLED = true;
+		waitForElementByCss("div.mw-content-ltr h2.collSec:not(.open)");
 		PageObjectLogging.log("verifySectionInvisibility", "section is not visible", true, driver);
 	}
 
@@ -191,13 +187,18 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void verifyTocClosed(){
 		waitForElementByElement(tocClosed);
-		waitForElementNotVisibleByElement(tocOpened);
 		PageObjectLogging.log("verifyTocClosed", "verified toc closed", true);
 	}
 
-	public void clickChevronToChangeTocState(){
+	public void clickChevronToOpenToc(){
 		waitForElementByElement(tocClosed);
 		tocClosed.click();
+		PageObjectLogging.log("clickChevronToChangeTocState", "toc state changed", true);
+	}
+
+	public void clickChevronToCloseToc(){
+		waitForElementByElement(tocOpened);
+		tocOpened.click();
 		PageObjectLogging.log("clickChevronToChangeTocState", "toc state changed", true);
 	}
 

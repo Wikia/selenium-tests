@@ -70,7 +70,7 @@ public class MobileSearchPageObject extends MobileBasePageObject{
 	}
 
 	public void compareResultsNotEquals(List<String> beforePagination, List<String> afterPagination){
-		Assertion.assertNumber(beforePagination.size(), afterPagination.size(), "checking length");
+		Assertion.assertTrue(beforePagination.size()!=afterPagination.size());
 		for (int i=0; i<beforePagination.size(); i++){
 			Assertion.assertNotEquals(beforePagination.get(i), afterPagination.get(i));
 		}
