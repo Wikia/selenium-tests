@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.DataProvider.CrossWikiSearchProvider;
 import com.wikia.webdriver.Common.DataProvider.SearchDataProvider;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch.CrossWikiSearchPage;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPage;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHomePage;
 
 /**

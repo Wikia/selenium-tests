@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch.CrossWikiSearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNew
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.EntertainmentHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.LifestyleHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.VideoGamesHubPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPage;
 
 public class HomePageObject extends BasePageObject{
 

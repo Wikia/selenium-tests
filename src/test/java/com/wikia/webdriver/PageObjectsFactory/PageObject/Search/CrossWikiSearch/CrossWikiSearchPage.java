@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.CrossWikiSearch;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch;
 
 import java.util.List;
 
