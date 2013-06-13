@@ -15,7 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNew
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.EntertainmentHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.LifestyleHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.VideoGamesHubPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPage;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
 
 public class HomePageObject extends BasePageObject{
 
@@ -156,10 +156,10 @@ public class HomePageObject extends BasePageObject{
 		}
 	}
 
-    public CrossWikiSearchPage searchFor(String queryString) {
+    public CrossWikiSearchPageObject searchFor(String queryString) {
         searchInput.sendKeys(queryString);
         clickAndWait(searchButton);
         PageObjectLogging.log("searchFor", "Enter search string \"" + queryString + "\" and click ok.", true, driver);
-        return new CrossWikiSearchPage(driver);
+        return new CrossWikiSearchPageObject(driver);
     }
 }

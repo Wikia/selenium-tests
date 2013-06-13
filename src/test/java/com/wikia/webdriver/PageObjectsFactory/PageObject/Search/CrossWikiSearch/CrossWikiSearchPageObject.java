@@ -19,7 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
  * Date: 28.03.13
  * Time: 19:29
  */
-public class CrossWikiSearchPage extends BasePageObject {
+public class CrossWikiSearchPageObject extends BasePageObject {
 
 	@FindBy(css="#search-v2-input")
 	protected WebElement searchInput;
@@ -70,7 +70,7 @@ public class CrossWikiSearchPage extends BasePageObject {
 	private By paginationContainer = By.cssSelector(".wikia-paginator");
 
 
-	public CrossWikiSearchPage(WebDriver driver) {
+	public CrossWikiSearchPageObject(WebDriver driver) {
 		super(driver);
 	}
 
@@ -86,14 +86,14 @@ public class CrossWikiSearchPage extends BasePageObject {
 		}
 	}
 
-	public CrossWikiSearchPage searchFor( String term ) {
+	public CrossWikiSearchPageObject searchFor( String term ) {
 		searchBox.clear();
 		searchBox.sendKeys( term );
 		PageObjectLogging.log("searchFor", "Typed search term" +term, true, driver);
 		clickAndWait(searchButton);
 		waitForElementByElement(searchBox);
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
-		return new CrossWikiSearchPage(driver);
+		return new CrossWikiSearchPageObject(driver);
 	}
 
 	public void verifyMatchResultUrl( String url ) {
@@ -172,18 +172,18 @@ public class CrossWikiSearchPage extends BasePageObject {
 		return new WikiArticleHomePage(driver);
 	}
 
-	public CrossWikiSearchPage prevPage() {
+	public CrossWikiSearchPageObject prevPage() {
 		clickAndWait(paginatorPrevButton);
 		PageObjectLogging.log("prevPage", "Moving to prev page of search results.",
 				true, driver);
-		return new CrossWikiSearchPage(driver);
+		return new CrossWikiSearchPageObject(driver);
 	}
 
-	public CrossWikiSearchPage nextPage() {
+	public CrossWikiSearchPageObject nextPage() {
 		clickAndWait(paginatorNextButton);
 		PageObjectLogging.log("nextPage", "Moving to next page of search results.",
 				true, driver);
-		return new CrossWikiSearchPage(driver);
+		return new CrossWikiSearchPageObject(driver);
 	}
 
 	protected WebElement getResultWikiNameLink(int no) {

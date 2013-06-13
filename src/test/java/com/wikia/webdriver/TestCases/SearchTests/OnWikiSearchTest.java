@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.DataProvider.SearchDataProvider;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPage;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
 
 public class OnWikiSearchTest extends TestTemplate {
 
@@ -12,9 +12,9 @@ public class OnWikiSearchTest extends TestTemplate {
 			dataProvider="getOnWikiHostsTermsAndMatchUrls",
 	          groups = {"OnWikiSearch_001_articlematch", "", "Search"})
 		public void OnWikiSearch_001_articlematch( String searchHost, String searchTerm, String expectedUrl ) {
-			CrossWikiSearchPage search = new CrossWikiSearchPage(driver);
+			CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 			search.goToSearchPage(searchHost);
-			CrossWikiSearchPage searched = search.searchFor(searchTerm);
+			CrossWikiSearchPageObject searched = search.searchFor(searchTerm);
 			searched.verifyMatchResultUrl(expectedUrl);
 		}
 }
