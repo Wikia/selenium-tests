@@ -31,7 +31,6 @@ public class AdsDataProvider {
         return new Object[][] {
             {"elderscrolls", "Skyrim"},
             {"dragonvale", "Eggs"},
-			{"memory-alpha", "Star_Trek_Into_Darkness"},
             {"zh.againstwar", "%E9%80%86%E8%BD%89%E4%B8%89%E5%9C%8B_%E7%BB%B4%E5%9F%BA"},
             {"zh.tos" ,"Category:%E5%9C%96%E9%91%92"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
@@ -72,7 +71,6 @@ public class AdsDataProvider {
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"monsterhunter", "Portal:MH3U"},
 			{"dragoncity", "Category:Dragons"},
-			{"memory-alpha", "Star_Trek_Into_Darkness"},
 			{"elderscrolls", "Skyrim"},
 			{"ffxiclopedia", "Category:Jobs"}
 
@@ -88,7 +86,6 @@ public class AdsDataProvider {
 			{"es.pokemon", "Lista_de_Pok%C3%A9mon"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
 			{"ja.gundam", "%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"},
-			{"memory-alpha", "Star_Trek_Into_Darkness"},
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"elderscrolls", "Skyrim"},
 			{"dragonvale", "Eggs"},

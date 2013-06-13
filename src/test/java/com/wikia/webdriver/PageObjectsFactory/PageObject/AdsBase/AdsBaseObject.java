@@ -2,8 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.Collection;
@@ -14,7 +12,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  *
@@ -33,8 +30,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
 		AdsContent.setSlotsSelectors();
-		isWikiMainPage = checkIfMainPage();
 		getUrl(page);
+		isWikiMainPage = checkIfMainPage();
 	}
 
 	public void verifyTopLeaderBoardPresent() throws Exception {
