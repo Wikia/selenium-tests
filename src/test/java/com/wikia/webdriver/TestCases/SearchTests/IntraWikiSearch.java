@@ -25,6 +25,11 @@ public class IntraWikiSearch extends TestTemplate{
     STAPI103AT23: Verify clicking “Videos only” option will not display photos
 
 	 */
+	private static final int resultsPerPage = 7;
+	private static final String searchPhrase = "qa";
+	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
+	private static final String searchPhraseOnePageResults = "muppet_wiki";
+
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",
 			groups={"intraSearch001", "Search"})
@@ -35,4 +40,9 @@ public class IntraWikiSearch extends TestTemplate{
 		search.verifyFirstResult(query);
 	}
 
+	public void intraWikiSearchPagination(){
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+		search.openIntraWikiSearch();
+		search.searchFor(searchPhrase);
+	}
 }

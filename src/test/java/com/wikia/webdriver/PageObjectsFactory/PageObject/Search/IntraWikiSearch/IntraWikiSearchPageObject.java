@@ -48,6 +48,10 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 	private List<WebElement> descriptions;
 	@FindBy(css=".Results article li>a")
 	private List<WebElement> urls;
+	@FindBy(css=".wikia-paginator")
+	private WebElement paginationContainer;
+	@FindBy(css=".paginator-page")
+	private List<WebElement> paginationPages;
 
 	public void openIntraWikiSearch() {
 		getUrl(Global.DOMAIN+URLsContent.intraWikiSearchPage);
@@ -93,5 +97,11 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		verifyFirstResultName(query);
 		verifyDescription();
 		verifyUrl(query);
+	}
+
+	public void verifyPagination(){
+		waitForElementByElement(paginationContainer);
+		for (WebElement elem:paginationPages){
+		}
 	}
 }
