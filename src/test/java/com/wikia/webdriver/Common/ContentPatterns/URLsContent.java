@@ -10,7 +10,7 @@ public class URLsContent {
 
 	//Preview url prefix
 	public static String previewPrefix = "http://preview";
-	
+
 	// Common url component
 	public static String wikiDir = "wiki/";
 
@@ -34,10 +34,10 @@ public class URLsContent {
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
     public static final String specialPreferences = "wiki/Special:Preferences";
-	
+
 	//Blog list page url
 	public static final String blogList = "wiki/Blog:%listName%";
-	
+
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
 
@@ -53,7 +53,7 @@ public class URLsContent {
 	public static final String userPrefix = "User:%user%";
 
 	public static final String apiUrl = Global.DOMAIN + "api.php";
-	
+
 	public static String buildUrl(String url, String parameter) {
 		String temp;
 		if (url.contains("?")) {
@@ -64,7 +64,7 @@ public class URLsContent {
 			return temp;
 		}
 	}
-	
+
 	// File Pages
 	public static String fileNS = "File:";
 	public static String fileName001 = "Grammy_Muppet_Critics";
@@ -79,4 +79,6 @@ public class URLsContent {
     public static String articleName002 = "TestVid002";
     public static String articleName003 = "TestVid003";
     public static String articleName004 = "TestVid004";
+
+    public static String intraWikiSearchPage = "wiki/Special:Search";
 }

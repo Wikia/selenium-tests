@@ -1,11 +1,11 @@
 package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.DataProvider.ArticleDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
@@ -15,7 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class ArticleCRUDTestsAdmin extends TestTemplate{
-		
+
 	/*
 	 * TestCase002
 	 * Open random wiki page as logged in user
@@ -32,7 +32,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.clickEditDropDown();
 		article.verifyEditDropDownLoggedInUser();
 	}
-	
+
 	/*
 	 * TestCase003
 	 * Open random wiki page as admin user
@@ -49,7 +49,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.clickEditDropDown();
 		article.verifyEditDropDownAdmin();
 	}
-	
+
 	/*
 	 * TestCase004
 	 * Create article as admin user with following names:
@@ -61,28 +61,17 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	 * 	made from digits:123123123123
 	 * Delete article
 	 */
-			
-	@DataProvider
-	private static final Object[][] getArticleName()
-	{
-		return new Object[][]
-				{
-					{"QAarticle"},
-					{"QAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName"},
-					{"QA/article"},
-					{"QA_article"},
-					{"123123123123"}
-				};
-	}	
-	
-	@Test(dataProvider="getArticleName", groups={"ArticleCRUDAdmin_004", "ArticleCRUDAdmin", "Smoke"})
+
+	@Test(dataProviderClass = ArticleDataProvider.class,
+			dataProvider="getArticleName",
+			groups={"ArticleCRUDAdmin_004", "ArticleCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_004_CreateArticle(String articleName)
 	{
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();		
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.typeInContent(PageContent.articleText);
 		edit.clickOnPublishButton();
@@ -102,7 +91,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();	
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
 		edit.typeInContent(PageContent.articleText);
 		edit.clickOnPublishButton();
@@ -115,8 +104,8 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleTextEdit);
 	}
-	
-	/* 
+
+	/*
 	 * TestCase006
 	 * Add article as admin
 	 * Add comment
@@ -161,14 +150,14 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.verifyCommentText(PageContent.commentTextEdit, Properties.userNameStaff);
 		article.deleteComment(PageContent.commentTextEdit);
 	}
-	
+
 	/*
 	 * TestCase005
 	 * Add article
 	 * Delete article
 	 * Undelete article
 	 */
-	
+
 	@Test(groups={"ArticleCRUDAdmin_008", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_008_CreateArticleUndeleteDelete()
 	{
@@ -194,7 +183,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 	 * Move-rename article
 	 * Delete article
 	 */
-	
+
 	@Test(groups={"ArticleCRUDAdmin_009", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_009_CreateArticleMoveDelete()
 	{
@@ -212,8 +201,8 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.verifyPageTitle(article.getPageName()+"moved");
 		article.verifyArticleText(PageContent.articleText);
 	}
-	
-	/* 
+
+	/*
 	 * TestCase010
 	 * Add article as admin
 	 * Add comment
@@ -236,12 +225,12 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		article.replyComment(PageContent.commentText, PageContent.replyText);
 		article.deleteComment(PageContent.commentText);
 	}
-	
+
 	@Test(groups={"ArticleCRUDAdmin_011", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_011_VerifyingImagesPositionWikiText()
 	{
 		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver); 
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
 		WikiArticleEditMode edit = article.createNewDefaultArticle();
@@ -252,13 +241,13 @@ public class ArticleCRUDTestsAdmin extends TestTemplate{
 		photoOptions.adjustAlignment(1);
 		photoOptions.clickAddPhoto();
 		edit.clickOnSourceButton();
-		edit.verifyWikiTextInSourceMode("left");					
-		edit.clickOnVisualButton();				
+		edit.verifyWikiTextInSourceMode("left");
+		edit.clickOnVisualButton();
 		edit.verifyLeftAlignmentIsSelected();
 		edit.clickOnPublishButton();
 		article.verifyImageOnThePage();
 	}
-	
+
 	@Test(groups={"ArticleCRUDAdmin_012", "ArticleCRUDAdmin"})
 	public void ArticleCRUDAdmin_012_LightboxVerifyExistenceAndURLsOfSocialButtons()
 	{
