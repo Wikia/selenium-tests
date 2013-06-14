@@ -16,6 +16,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -185,8 +186,7 @@ public class NewDriverProvider {
 			phantomJSBinaryName = "phantomjs_mac";
 		}
 
-		System.setProperty(
-			"phantomjs.binary.path",
+		File phantomJSBinary = new File(
 			"." + File.separator
 			+ "src" + File.separator
 			+ "test" + File.separator
@@ -194,6 +194,11 @@ public class NewDriverProvider {
 			+ "PhantomJS" + File.separator
 			+ phantomJSBinaryName
 		);
+
+		caps.setCapability(
+            PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+            phantomJSBinary.getAbsolutePath()
+        );
 
 		return new EventFiringWebDriver(new PhantomJSDriver(caps)).register(listener);
 	}
