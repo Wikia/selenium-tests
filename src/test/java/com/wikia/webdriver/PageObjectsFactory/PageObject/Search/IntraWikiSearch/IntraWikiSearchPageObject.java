@@ -1,5 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +44,10 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 	private WebElement sortingOptions;
 	@FindBy(css="li.result:nth-child(1) a")
 	private WebElement firstResult;
+	@FindBy(css=".Results article h1")
+	private List<WebElement> descriptions;
+	@FindBy(css=".Results article li>a")
+	private List<WebElement> urls;
 
 	public void openIntraWikiSearch() {
 		getUrl(Global.DOMAIN+URLsContent.intraWikiSearchPage);
@@ -66,8 +72,26 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		PageObjectLogging.log("searchFor", "searching for query: "+query, true, driver);
 	}
 
-	public void verifyFirstResult(String name) {
+	private void verifyFirstResultName(String query) {
 		waitForElementByElement(firstResult);
-		Assertion.assertStringContains(firstResult.getText(), name);
+		Assertion.assertStringContains(firstResult.getText(), query.replace("_", " "));
+	}
+
+	private void verifyDescription(){
+		for (WebElement elem:descriptions) {
+			Assertion.assertTrue(!elem.getText().isEmpty());
+		}
+	}
+
+	private void verifyUrl(String query){
+		for (WebElement elem:urls){
+			Assertion.assertEquals((Global.DOMAIN+URLsContent.wikiDir+query).replaceAll("(_|/)", ""), elem.getAttribute("href").replaceAll("(_|/)", ""));
+		}
+	}
+
+	public void verifyFirstResult(String query) {
+		verifyFirstResultName(query);
+		verifyDescription();
+		verifyUrl(query);
 	}
 }

@@ -1,6 +1,10 @@
 package com.wikia.webdriver.TestCases.SearchTests;
 
+import org.testng.annotations.Test;
+
+import com.wikia.webdriver.Common.DataProvider.IntraWikiSearchProvider;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject;
 
 public class IntraWikiSearch extends TestTemplate{
 
@@ -21,5 +25,14 @@ public class IntraWikiSearch extends TestTemplate{
     STAPI103AT23: Verify clicking “Videos only” option will not display photos
 
 	 */
+	@Test(dataProviderClass=IntraWikiSearchProvider.class,
+			dataProvider="getArticleName",
+			groups={"intraSearch001", "Search"})
+	public void intraWikiSearch_001_exactMatch(String query){
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+		search.openIntraWikiSearch();
+		search.searchFor(query);
+		search.verifyFirstResult(query);
+	}
 
 }

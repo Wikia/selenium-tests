@@ -4,13 +4,14 @@ import org.testng.annotations.DataProvider;
 
 public class IntraWikiSearchProvider {
 
+
 	@DataProvider
-	public static final Object[][] getExactMatchQueries() {
+	private static final Object[][] getArticleName() {
 		return new Object[][] {
-				{
-					"call of duty", "Call of Duty Wiki", "GAMING"
-				},
-				};
+				{ "QAarticle" },
+				{ "QAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName" },
+				{ "QA_article" },
+				{ "123123123123" } };
 	}
 
 }
