@@ -174,7 +174,7 @@ public class Properties {
 		Global.LIVE_DOMAIN = System.getProperty("live-domain");
 		Global.ENV = System.getProperty("env");
 		Global.QS = System.getProperty("qs");
-		Global.LOG_VERBOSE = 2;
+		Global.LOG_VERBOSE = (Global.BROWSER=="IE") ? 1 : 2;
 
 		try {
 			if (Global.DOMAIN.contains("dev"))
