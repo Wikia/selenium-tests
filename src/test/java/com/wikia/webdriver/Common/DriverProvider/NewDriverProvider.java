@@ -31,11 +31,11 @@ public class NewDriverProvider {
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 
-	private static void init(HashMap<String, Object> config) {
+	private static void init(HashMap config) {
 		browserName = (String) config.get("BROWSER");
 	}
 
-	public static WebDriver getDriverIntstanceForConfig(HashMap<String, Object> config) {
+	public static WebDriver getDriverIntstanceForConfig(HashMap config) {
 		init(config);
 		PageObjectLogging listener = new PageObjectLogging();
 
@@ -139,17 +139,26 @@ public class NewDriverProvider {
 	}
 
 	private static WebDriver getChromeInstance(PageObjectLogging listener) {
-		File file = new File (
+		String chromeBinaryName;
+		String OSName = System.getProperty("os.name").toUpperCase();
+		if (OSName.contains("WINDOWS")) {
+			chromeBinaryName = "chromedriver.exe";
+		} else if (OSName.contains("LINUX")) {
+			chromeBinaryName = "chromedriver_linux";
+		} else {
+			chromeBinaryName = "chromedriver_mac";
+		}
+
+		File chromeBinary = new File (
 			"." + File.separator
 			+ "src" + File.separator
 			+ "test" + File.separator
 			+ "resources" + File.separator
 			+ "ChromeDriver" + File.separator
-			+ ( System.getProperty("os.name").toUpperCase().contains("WINDOWS") ?
-				"chromedriver.exe" : "chromedriver"
-			)
+			+ chromeBinaryName
 		);
-		System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+
+		System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
 
 		if (browserName.equals("CHROMEMOBILE")) {
 			caps.setCapability(
@@ -166,6 +175,16 @@ public class NewDriverProvider {
 	}
 
 	private static WebDriver getPhantomJSInstance(PageObjectLogging listener) {
+		String phantomJSBinaryName;
+		String OSName = System.getProperty("os.name").toUpperCase();
+		if (OSName.contains("WINDOWS")) {
+			phantomJSBinaryName = "phantomjs.exe";
+		} else if (OSName.contains("LINUX")) {
+			phantomJSBinaryName = "phantomjs_linux";
+		} else {
+			phantomJSBinaryName = "phantomjs_mac";
+		}
+
 		System.setProperty(
 			"phantomjs.binary.path",
 			"." + File.separator
@@ -173,10 +192,9 @@ public class NewDriverProvider {
 			+ "test" + File.separator
 			+ "resources" + File.separator
 			+ "PhantomJS" + File.separator
-			+ ( System.getProperty("os.name").toUpperCase().contains("WINDOWS") ?
-				"phantomjs.exe" : "phantomjs"
-			)
+			+ phantomJSBinaryName
 		);
+
 		return new EventFiringWebDriver(new PhantomJSDriver(caps)).register(listener);
 	}
 
