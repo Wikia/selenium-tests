@@ -40,9 +40,11 @@ public class IntraWikiSearch extends TestTemplate{
 		search.verifyFirstResult(query);
 	}
 
-	public void intraWikiSearchPagination(){
+	@Test(groups={"intraSearch001", "Search"})
+	public void intraWikiSearch_002_pagination(){
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openIntraWikiSearch();
 		search.searchFor(searchPhrase);
+		search.verifyPagination();
 	}
 }

@@ -81,7 +81,7 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		Assertion.assertStringContains(firstResult.getText(), query.replace("_", " "));
 	}
 
-	private void verifyDescription(){
+	private void verifyDescriptions(){
 		for (WebElement elem:descriptions) {
 			Assertion.assertTrue(!elem.getText().isEmpty());
 		}
@@ -95,13 +95,16 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 
 	public void verifyFirstResult(String query) {
 		verifyFirstResultName(query);
-		verifyDescription();
+		verifyDescriptions();
 		verifyUrl(query);
 	}
 
 	public void verifyPagination(){
 		waitForElementByElement(paginationContainer);
+		int i=1;
 		for (WebElement elem:paginationPages){
+			Assertion.assertEquals(Integer.toString(i), elem.getText());
+			i++;
 		}
 	}
 }
