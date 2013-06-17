@@ -15,6 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 public class ForumNotificationsTests extends TestTemplate {
 
 	private String title;
+	private String forumBoardTitle;
 	private String message;
 
 	/**
@@ -38,6 +39,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
@@ -45,7 +47,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		// user 2 leaves 5 replies on user 1 thread
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
@@ -64,7 +66,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
@@ -90,6 +92,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
@@ -98,7 +101,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
@@ -112,7 +115,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
@@ -140,6 +143,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
@@ -147,7 +151,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		// user 2 leaves 1 reply on user 1 thread
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
@@ -158,7 +162,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
@@ -186,13 +190,14 @@ public class ForumNotificationsTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		login.logOut(driver);
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -201,7 +206,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumMainPage = new ForumPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -213,7 +218,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
 		notifications.showNotifications();
@@ -240,13 +245,14 @@ public class ForumNotificationsTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		login.logOut(driver);
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 reply on user 1 thread and logs out
 		forumThread.reply(message);
@@ -256,7 +262,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		login.loginAndVerify(Properties.userNameStaff,
 				Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -267,7 +273,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		login.loginAndVerify(Properties.userName2,
 				Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -279,7 +285,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
 		notifications.showNotifications();
@@ -306,13 +312,14 @@ public class ForumNotificationsTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		login.logOut(driver);
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -321,7 +328,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumMainPage = new ForumPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -329,7 +336,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		login.logOut(driver);
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -338,7 +345,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumMainPage = new ForumPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -350,7 +357,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
 		notifications.showNotifications();
@@ -376,13 +383,14 @@ public class ForumNotificationsTests extends TestTemplate {
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		login.logOut(driver);
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -391,7 +399,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumMainPage = new ForumPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -399,7 +407,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		login.logOut(driver);
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -408,7 +416,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumMainPage = new ForumPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -416,7 +424,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		login.logOut(driver);
 		login.loginAndVerify(Properties.userName2, Properties.password2);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -425,7 +433,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumMainPage = new ForumPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
@@ -437,7 +445,7 @@ public class ForumNotificationsTests extends TestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
-		forumBoard = forumMainPage.openForumBoard(1);
+		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
 		notifications.showNotifications();
