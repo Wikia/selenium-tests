@@ -93,7 +93,8 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 
 	private void verifyUrl(String query) {
 		for (WebElement elem:urls){
-			Assertion.assertEquals((Global.DOMAIN+URLsContent.wikiDir+query).replaceAll("(_|/)", ""), elem.getAttribute("href").replaceAll("(_|/)", ""));
+			Assertion.assertEquals((Global.DOMAIN+URLsContent.wikiDir+query).replaceAll("(_|/)", ""),
+					elem.getAttribute("href").replaceAll("(_|/)", ""));
 		}
 	}
 
