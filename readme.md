@@ -5,8 +5,8 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
 
 1. Make sure you have [Java](http://www.java.com/) and [Maven](http://maven.apache.org/) installed on your system, if not follow the vendor instructions for installing them on your operating system.
 2. In order to run tests in CHROME browser make sure you have [chromedriver](http://code.google.com/p/chromedriver/downloads/list) and it is accessibile
-
-    (in linux OS family it would be in /usr/bin/ for example)
+    * in Linux OS family it would be in /usr/bin/ for example
+    * in Windows OS family you should export your chromedriver localization to system path
 
 ## Adding Tests
 Please remember to keep this repository up to date as the tests become worthless otherwise. A good rule of thumb is to add a new test that covers whatever bug you're fixing so we can track regressions on it. Also, make sure to code your tests in a cross-operating system compliant manor as it's valid to run them in Windows, Mac or Linux environments.
