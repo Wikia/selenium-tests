@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,10 +17,14 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement aceEditor;
 		@FindBy(css = "textarea.ace_text-input")
 		private WebElement aceInputTextArea;
+		@FindBy(css = ".ace_text-layer")
+		private WebElement aceLayerTextArea;
 		@FindBys(@FindBy(css = ".ace_content div[class*='ace']"))
 		private List<WebElement> aceElementsList;
 		@FindBys(@FindBy(css = "div.ace_line span"))
 		private List<WebElement> aceLinesList;
+		@FindBy(css = ".ace_error")
+		private WebElement aceError;
 
 	    public SpecialCssPageObject(WebDriver driver) {
 	        super(driver);
@@ -36,13 +41,13 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void sendCssText(String cssText) {
-			waitForElementByElement(aceInputTextArea);
-			aceInputTextArea.sendKeys(cssText);
+			waitForElementByElement(aceLayerTextArea);
+			executeScript("ace.edit('cssEditorContainer').setValue('"+ cssText +"');");
 			PageObjectLogging.log("sendCssText", "the following text was send to ace editor: "+cssText, true, driver);
 		}
 
-		public void verifyAceLineText(int aceLineNumber, String text) {
-			waitForTextToBePresentInElementByElement(aceLinesList.get(aceLineNumber-1), text);
-			PageObjectLogging.log("verifyAceLineText", "verify that highlightet ace line number "+aceLineNumber+" contains the following text: "+text, true);
+		public void verifyAceError() {
+			waitForElementByElement(aceError);
+			PageObjectLogging.log("verifyAceError", "verify that highlightet ace shows an error", true);
 		}
 }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Core.CommonFunctions;
@@ -26,15 +27,15 @@ public class CssChromeTests extends TestTemplate{
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-285
 	 */
-	@Test(groups = {"editingLocalCss_001", "editingLocalCss", "AdminDashboard"})
+	@Test(groups = {"editingLocalCss_002", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_002_syntaxHighlightingIsViewableWhenEditing() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
-//		specialCss.sendCssText(".testStructure {display: none;}");
-//		specialCss.verifyAceLineText(1, ".testStructure");
+		specialCss.sendCssText(".testStructure {display: none;");
+		specialCss.verifyAceError();
 	}
 
 }
