@@ -5,6 +5,7 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
 
 1. Make sure you have [Java](http://www.java.com/) and [Maven](http://maven.apache.org/) installed on your system, if not follow the vendor instructions for installing them on your operating system.
 2. In order to run tests in CHROME browser make sure you have [chromedriver](http://code.google.com/p/chromedriver/downloads/list) and it is accessibile
+
     (in linux OS family it would be in /usr/bin/ for example)
 
 ## Adding Tests
@@ -45,6 +46,7 @@ The following are valid for use in the `-Dbrowser` parameter:
 * FF
 * CHROME
 * IE
+* GHOST (phantomjs)
 
 ### Groups
 
