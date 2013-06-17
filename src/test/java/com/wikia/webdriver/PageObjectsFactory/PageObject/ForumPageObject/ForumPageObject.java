@@ -22,46 +22,46 @@ public class ForumPageObject extends WikiArticlePageObject{
 	@FindBy(css=".close.wikia-chiclet-button")
 	private WebElement closeFaqLightBoxButton;
 	@FindBy(css=".button.admin-link")
-	private WebElement manageBoardsButton;	
-	
+	private WebElement manageBoardsButton;
+
 	private By forumBoardsList = By.cssSelector("ul.boards h4 a");
-	
+
 	public ForumPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	private void openFaqLightBox(){
 		clickAndWait(faqButton);
 		PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
 	}
-	
+
 	private void closeFaqLightBox(){
 		clickAndWait(closeFaqLightBoxButton);
 		PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
-		
+
 	}
-	
+
 	private void checkFaqLightBoxOpened(){
 		waitForElementByElement(faqLightBox);
 		PageObjectLogging.log("checkFaqLightBoxOpened", "faq lightbox verified", true);
-		
+
 	}
-	
+
 	public void verifyFaqLightBox(){
 		openFaqLightBox();
 		checkFaqLightBoxOpened();
 		closeFaqLightBox();
 	}
-	
+
 	public ForumPageObject openForumMainPage(){
 		getUrl(Global.DOMAIN+"wiki/Special:Forum");
 		waitForElementByElement(faqButton);
 		PageObjectLogging.log("openForumPage", "forum page opened", true);
 		return new ForumPageObject(driver);
 	}
-	
-	
+
+
 	public ForumManageBoardsPageObject clickManageBoardsButton(){
 		clickAndWait(manageBoardsButton);
 		PageObjectLogging.log("clickManageBoardsButton", "manage boards button clicked", true);
@@ -76,7 +76,26 @@ public class ForumPageObject extends WikiArticlePageObject{
 		PageObjectLogging.log("openForumBoard", "click on the forum Board number "+forumBoardNumber, true, driver);
 		return new ForumBoardPageObject(driver);
 	}
-	
+
+	public ForumBoardPageObject openForumBoard(String forumBoardTitle) {
+		int forumNumber = 0;
+		List<String> forumNames = getForumNamesList();
+		forumBoardTitle = forumBoardTitle.replace("_", " ");
+		for (int i = 0; i < forumNames.size(); i++) {
+			if (forumNames.get(i).contains(forumBoardTitle)) {
+				forumNumber = i+1;
+			}
+		}
+		if (forumNumber==0) {
+			PageObjectLogging.log("openForumBoard", "didn't find forum Board with title "+forumBoardTitle, true, driver);
+			return null;
+		}
+		else {
+			PageObjectLogging.log("openForumBoard", "click on the forum Board with title "+forumBoardTitle, true, driver);
+			return openForumBoard(forumNumber);
+		}
+	}
+
 	public List<String> getForumNamesList(){
 		List<WebElement> listWebElements = getForumElementsList();
 		List<String> forumNames = new ArrayList<String>();
@@ -85,10 +104,12 @@ public class ForumPageObject extends WikiArticlePageObject{
 		}
 		return forumNames;
 	}
-	
+
 	private List<WebElement> getForumElementsList(){
-		List<WebElement> listWebElements = driver.findElements(forumBoardsList);		
+		List<WebElement> listWebElements = driver.findElements(forumBoardsList);
 		return listWebElements;
 	}
-	
+
+
+
 }
