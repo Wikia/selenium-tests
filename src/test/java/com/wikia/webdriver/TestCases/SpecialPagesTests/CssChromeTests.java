@@ -15,7 +15,7 @@ public class CssChromeTests extends TestTemplate{
 	 * http://wikia-inc.atlassian.net/browse/DAR-285
 	 */
 	@Test(groups = {"editingLocalCss_001", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_001_syntaxHighlightingIsViewableWhenNotEditing() {
+	public void editingLocalCss_001_syntaxHighlightingIsViewable() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
@@ -28,7 +28,7 @@ public class CssChromeTests extends TestTemplate{
 	 * http://wikia-inc.atlassian.net/browse/DAR-285
 	 */
 	@Test(groups = {"editingLocalCss_002", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_002_syntaxHighlightingIsViewableWhenEditing() {
+	public void editingLocalCss_002_showingErrorWhenWrongSyntax() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
