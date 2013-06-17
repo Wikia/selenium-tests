@@ -7,7 +7,6 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginMonobookPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
@@ -135,17 +134,5 @@ public class editingLocalCssTests extends TestTemplate {
 		SpecialAdminDashboardPageObject adminDashboard = wiki.openSpecialAdminDashboard();
 		adminDashboard.clickCssTool();
 		wiki.verifyUrl(URLsContent.specialCSS);
-	}
-	/**
-	 * http://wikia-inc.atlassian.net/browse/DAR-285
-	 */
-	@Test(groups = {"editingLocalCss_010", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_010_EnsureThatCssAceEditorIsWorking() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		SpecialAdminDashboardPageObject adminDashboard = wiki.openSpecialAdminDashboard();
-		SpecialCssPageObject specialCss = adminDashboard.clickCssTool();
-		specialCss.verifyAceEditorPresence();
 	}
 }
