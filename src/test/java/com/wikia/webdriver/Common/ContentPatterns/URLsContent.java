@@ -81,4 +81,7 @@ public class URLsContent {
     public static String articleName004 = "TestVid004";
 
     public static String intraWikiSearchPage = "wiki/Special:Search";
+
+    //query strings
+    public static String disableMessages = "uselang=qqx";
 }

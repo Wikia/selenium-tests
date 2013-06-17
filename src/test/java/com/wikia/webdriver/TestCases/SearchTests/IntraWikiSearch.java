@@ -25,7 +25,7 @@ public class IntraWikiSearch extends TestTemplate{
     STAPI103AT23: Verify clicking “Videos only” option will not display photos
 
 	 */
-	private static final int resultsPerPage = 7;
+	private static final int resultsPerPage = 25;
 	private static final String searchPhrase = "qa";
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 	private static final String searchPhraseOnePageResults = "muppet_wiki";
@@ -40,7 +40,7 @@ public class IntraWikiSearch extends TestTemplate{
 		search.verifyFirstResult(query);
 	}
 
-	@Test(groups={"intraSearch001", "Search"})
+	@Test(groups={"intraSearch002", "Search"})
 	public void intraWikiSearch_002_pagination(){
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openIntraWikiSearch();
@@ -50,5 +50,15 @@ public class IntraWikiSearch extends TestTemplate{
 		search.verifyPagination();
 		search.clickPrevPaginator();
 		search.verifyPagination();
+	}
+
+	@Test(groups={"intraSearch003", "Search"})
+	public void intraWikiSearch_003_resultsCount() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+		search.openIntraWikiSearch();
+		search.searchFor(searchPhrase);
+		search.verifyResultsCount(resultsPerPage);
+		search.clickNextPaginator();
+		search.verifyResultsCount(resultsPerPage);
 	}
 }

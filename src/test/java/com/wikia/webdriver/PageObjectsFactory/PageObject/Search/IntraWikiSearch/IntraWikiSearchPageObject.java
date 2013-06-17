@@ -45,6 +45,8 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 	@FindBy(css="li.result:nth-child(1) a")
 	private WebElement firstResult;
 	@FindBy(css=".Results article h1")
+	private List<WebElement> titles;
+	@FindBy(css=".Results article")
 	private List<WebElement> descriptions;
 	@FindBy(css=".Results article li>a")
 	private List<WebElement> urls;
@@ -123,5 +125,9 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		waitForElementByElement(paginatorPrev);
 		clickAndWait(paginatorPrev);
 		PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
+	}
+
+	public void verifyResultsCount(int i){
+		Assertion.assertNumber(i, titles.size(), "checking results count");
 	}
 }
