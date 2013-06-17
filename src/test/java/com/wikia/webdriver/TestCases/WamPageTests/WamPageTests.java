@@ -7,7 +7,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Wam.WamPageObject;
 
 public class WamPageTests extends TestTemplate {
 	@Test(groups = {"WamPage001", "WamPageTests"})
-	public void verifyDefaultPage() {
+	public void wam_001_verifyDefaultPage() {
 		WamPageObject pageObject = new WamPageObject(driver);
 		pageObject.openWamPage();
 		pageObject.verifyFirstTabSelected();
@@ -16,7 +16,7 @@ public class WamPageTests extends TestTemplate {
 	}
 
 	@Test(groups = {"WamPage002", "WamPageTests"})
-	public void verifyFilteringByVertical() {
+	public void wam_002_verifyFilteringByVertical() {
 		WamPageObject pageObject = new WamPageObject(driver);
 		pageObject.openWamPage();
 		pageObject.verifyWamIndexIsNotEmpty();
@@ -30,7 +30,7 @@ public class WamPageTests extends TestTemplate {
 	}
 
 	@Test(groups = {"WamPage003", "WamPageTests"})
-	public void verifyPaginationByNextButton() {
+	public void wam_003_verifyPaginationByNextButton() {
 		WamPageObject pageObject = new WamPageObject(driver);
 		pageObject.openWamPage();
 		pageObject.verifyWamIndexPageFirstColumn(1, 20);
@@ -41,7 +41,7 @@ public class WamPageTests extends TestTemplate {
 	}
 
 	@Test(groups = {"WamPage004", "WamPageTests"})
-	public void compareTabAndHeaderName() {
+	public void wam_004_compareTabAndHeaderName() {
 		WamPageObject WAMpage = new WamPageObject(driver);
 		WAMpage.openWamPage();
 		WAMpage.selectTab(0);
