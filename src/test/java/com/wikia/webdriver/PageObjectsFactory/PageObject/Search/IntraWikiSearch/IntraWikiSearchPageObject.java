@@ -52,6 +52,10 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 	private WebElement paginationContainer;
 	@FindBy(css=".paginator-page")
 	private List<WebElement> paginationPages;
+	@FindBy(css=".paginator-next")
+	private WebElement paginatorNext;
+	@FindBy(css=".paginator-prev")
+	private WebElement paginatorPrev;
 
 	public void openIntraWikiSearch() {
 		getUrl(Global.DOMAIN+URLsContent.intraWikiSearchPage);
@@ -65,7 +69,7 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		searchField.sendKeys(query);
 	}
 
-	private void clickSearchbutton(){
+	private void clickSearchbutton() {
 		waitForElementByElement(searchButton);
 		searchButton.click();
 	}
@@ -87,7 +91,7 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		}
 	}
 
-	private void verifyUrl(String query){
+	private void verifyUrl(String query) {
 		for (WebElement elem:urls){
 			Assertion.assertEquals((Global.DOMAIN+URLsContent.wikiDir+query).replaceAll("(_|/)", ""), elem.getAttribute("href").replaceAll("(_|/)", ""));
 		}
@@ -99,12 +103,24 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		verifyUrl(query);
 	}
 
-	public void verifyPagination(){
+	public void verifyPagination() {
 		waitForElementByElement(paginationContainer);
 		int i=1;
-		for (WebElement elem:paginationPages){
+		for (WebElement elem:paginationPages) {
 			Assertion.assertEquals(Integer.toString(i), elem.getText());
 			i++;
 		}
+	}
+
+	public void clickNextPaginator() {
+		waitForElementByElement(paginatorNext);
+		clickAndWait(paginatorNext);
+		PageObjectLogging.log("clickNextPaginator", "next paginator clicked", true);
+	}
+
+	public void clickPrevPaginator() {
+		waitForElementByElement(paginatorPrev);
+		clickAndWait(paginatorPrev);
+		PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
 	}
 }

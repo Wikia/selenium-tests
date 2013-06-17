@@ -46,5 +46,9 @@ public class IntraWikiSearch extends TestTemplate{
 		search.openIntraWikiSearch();
 		search.searchFor(searchPhrase);
 		search.verifyPagination();
+		search.clickNextPaginator();
+		search.verifyPagination();
+		search.clickPrevPaginator();
+		search.verifyPagination();
 	}
 }
