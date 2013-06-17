@@ -26,14 +26,14 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		@FindBy(css = ".ace_error")
 		private WebElement aceError;
 
-	    public SpecialCssPageObject(WebDriver driver) {
-	        super(driver);
-	    }
+		public SpecialCssPageObject( WebDriver driver ) {
+			super(driver);
+		}
 
-	    public void verifyAceEditorPresence() {
-	        waitForElementByElement(aceEditor);
-	        PageObjectLogging.log("verifyAceEditorPresence", "Ace Editor is present.", true);
-	    }
+		public void verifyAceEditorPresence() {
+			waitForElementByElement(aceEditor);
+			PageObjectLogging.log("verifyAceEditorPresence", "Ace Editor is present.", true);
+		}
 
 		public void verifyHighlighting() {
 			Assertion.assertNotEquals(aceElementsList.size(), 0);
