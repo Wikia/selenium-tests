@@ -65,8 +65,9 @@
 			<class name="com.wikia.webdriver.TestCases.EventTrackingTests.EditorEventTrackingTests"/>
 			<class name="com.wikia.webdriver.TestCases.WamPageTests.WamPageTests"/>
 			<class name="com.wikia.webdriver.TestCases.LightboxTests.ImageLightboxTests"/>
-            <class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.editingLocalCssTests"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 		</classes>
 	</test>
 </suite>
