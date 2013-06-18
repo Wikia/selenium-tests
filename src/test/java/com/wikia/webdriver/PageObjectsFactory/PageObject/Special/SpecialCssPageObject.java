@@ -47,7 +47,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 		public void sendCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
-			executeScript("$('.ace_text-input').sendKeys('"+ cssText +"');");
+			waitForElementByElement(aceInputTextArea);
+			aceInputTextArea.sendKeys(cssText);
 			PageObjectLogging.log("sendCssText", "the following text was send to ace editor: "+cssText, true, driver);
 		}
 
