@@ -17,7 +17,6 @@ public class ArticleCommentTests extends TestTemplate{
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
 		article.addComment("QAComment"+timeStamp);
-
 	}
 
 	@Test(groups={"mobile"})
