@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
