@@ -24,6 +24,7 @@ import org.testng.ITestResult;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 
 public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 
@@ -181,6 +182,9 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 	@Override
 	public void onTestFailure(ITestResult result) {
 		driver = DriverProvider.getWebDriver();
+		if (driver == null){
+			driver = NewDriverProvider.getWebDriver();
+		}
 		if (Global.LOG_ENABLED) {
 			try {
 				CommonUtils
