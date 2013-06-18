@@ -23,12 +23,11 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 	@FindBy(css="section.current>img")
 	private WebElement currentImage;
 
-	@FindBy(css=".imgMdl.zoomer.open")
+	@FindBy(css=".imgMdl.zoomer:not(.hdn)")
 	private WebElement topBarVisible;
 
-	@FindBy(css=".imgMdl.zoomer.open.hdn")
+	@FindBy(css=".imgMdl.zoomer.hdn")
 	private WebElement topBarHidden;
-
 
 	public MobileArticlePageObject closeModal(){
 		waitForElementByElement(closeModalButton);
@@ -56,7 +55,6 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 
 	public void verifyTopBarHidden(){
 		waitForElementByElement(topBarHidden);
-		waitForElementNotVisibleByElement(topBarVisible);
 	}
 
 

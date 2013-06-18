@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class MobileCategoryPageObject extends MobileBasePageObject {
 
@@ -17,16 +19,30 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	// UI Mapping
 
-	@FindBy(css = "")
-	private WebElement showHideAllButton;
+	@FindBy(css = "#expAll:not(.exp)")
+	private WebElement showAllButton;
+
+	@FindBy(css = "#expAll.exp")
+	private WebElement hideAllButton;
+
 	@FindBy(css = "h2.collSec")
 	private List<WebElement> chevronList;
 
+	public MobileArticlePageObject openCategory(){
+		getUrl(Global.DOMAIN+"wiki/Category:PMG");
+		waitForElementByElement(showAllButton);
+		PageObjectLogging.log("openCategory", "category page was opened", true, driver);
+		return new MobileArticlePageObject(driver);
+	}
 
+	public void clickShowAllButton(){
+		waitForElementByElement(showAllButton);
+		showAllButton.click();
+	}
 
-	public void clickShowHideAllButton(){
-		waitForElementByElement(showHideAllButton);
-		showHideAllButton.click();
+	public void clickHideAllButton (){
+		waitForElementByElement(hideAllButton);
+		hideAllButton.click();
 	}
 
 	public void verifyChevronOpened(){
@@ -40,4 +56,13 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 			Assertion.assertNotEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
+
+	public void verifyShowAll (){
+		waitForElementByElement(showAllButton);
+	}
+
+	public void verifyHideAll() {
+		waitForElementByElement(hideAllButton);
+	}
+
 }

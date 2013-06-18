@@ -13,9 +13,9 @@ public class TocTests extends TestTemplate{
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage();
 		article.verifyTocClosed();
-		article.clickChevronToChangeTocState();
+		article.clickChevronToOpenToc();
 		article.verifyTocOpened();
-		article.clickChevronToChangeTocState();
+		article.clickChevronToCloseToc();
 		article.verifyTocClosed();
 	}
 
@@ -23,7 +23,7 @@ public class TocTests extends TestTemplate{
 	public void Sections_002_tocToSectionLevel1Test(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage();
-		article.clickChevronToChangeTocState();
+		article.clickChevronToOpenToc();
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel1SectionInToc(5);
 		article.verifySectionHeaderOpened(clickedItem);
@@ -35,7 +35,7 @@ public class TocTests extends TestTemplate{
 	public void Sections_003_tocToSectionLevel2Test(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage();
-		article.clickChevronToChangeTocState();
+		article.clickChevronToOpenToc();
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel2SectionInToc(0);
 		article.verifySectionOpened(clickedItem,3);
@@ -46,7 +46,7 @@ public class TocTests extends TestTemplate{
 	public void Sections_004_tocToSectionLevel3Test(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage();
-		article.clickChevronToChangeTocState();
+		article.clickChevronToOpenToc();
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel3SectionInToc(0);
 		article.verifySectionOpened(clickedItem,4);
@@ -57,7 +57,7 @@ public class TocTests extends TestTemplate{
 	public void Sections_005_tocToSectionLevel4Test(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage();
-		article.clickChevronToChangeTocState();
+		article.clickChevronToOpenToc();
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel4SectionInToc(0);
 		article.verifySectionOpened(clickedItem,5);
@@ -68,7 +68,7 @@ public class TocTests extends TestTemplate{
 	public void Sections_006_tocClickOutsideOfToc(){
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage();
-		article.clickChevronToChangeTocState();
+		article.clickChevronToOpenToc();
 		article.verifyCurtainOpened();
 		article.clickOnWikiaTopPageLogo();
 		article.verifyCurtainClosed();
