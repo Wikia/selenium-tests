@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -34,7 +35,8 @@ public class CssChromeTests extends TestTemplate{
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
-		specialCss.sendCssText(".testStructure {display: none;");
+		specialCss.clearCssText();
+		specialCss.sendCssText(CssEditorContent.invalidCssError);
 		specialCss.verifyAceError();
 	}
 

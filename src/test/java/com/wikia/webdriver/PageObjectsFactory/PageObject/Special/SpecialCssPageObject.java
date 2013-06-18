@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import java.util.List;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,9 +39,15 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("verifyHighlighting", "There are elements highlighted by ace library", true);
 		}
 
+		public void clearCssText() {
+			waitForElementByElement(aceLayerTextArea);
+			executeScript("ace.edit('cssEditorContainer').setValue('');");
+			PageObjectLogging.log("clearCssText", "ace editor was cleared", true, driver);
+		}
+
 		public void sendCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
-			executeScript("ace.edit('cssEditorContainer').setValue('"+ cssText +"');");
+			executeScript("$('.ace_text-input').sendKeys('"+ cssText +"');");
 			PageObjectLogging.log("sendCssText", "the following text was send to ace editor: "+cssText, true, driver);
 		}
 
