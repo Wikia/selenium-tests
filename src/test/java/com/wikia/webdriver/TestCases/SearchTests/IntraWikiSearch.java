@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.SearchTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DataProvider.IntraWikiSearchProvider;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject;
@@ -26,7 +27,7 @@ public class IntraWikiSearch extends TestTemplate{
 
 	 */
 	private static final int resultsPerPage = 25;
-	private static final String searchPhrase = "qa";
+	private static final String searchPhrase = "a";
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 	private static final String searchPhraseOnePageResults = "muppet_wiki";
 
@@ -60,5 +61,26 @@ public class IntraWikiSearch extends TestTemplate{
 		search.verifyResultsCount(resultsPerPage);
 		search.clickNextPaginator();
 		search.verifyResultsCount(resultsPerPage);
+	}
+
+	@Test(groups={"intraSearch004", "Search"})
+	public void intraWikiSearch_004_noResults() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+		search.openIntraWikiSearch();
+		search.searchFor(searchPhraseNoResults);
+		search.verifyNoResults();
+	}
+
+	@Test(groups={"intraSearch005", "Search"})
+	public void intraWikiSearch_005_filtering() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+		search.openIntraWikiSearch();
+		search.searchFor(searchPhrase);
+		search.selectPhotosVideos();
+		search.verifyNamespacesInTitles(URLsContent.fileNS);
+		search.selectPhotosOnly();
+		search.verifyAllResultsImages();
+		search.selectVideosOnly();
+		search.verifyAllResultsVideos();
 	}
 }

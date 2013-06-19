@@ -58,6 +58,10 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 	private WebElement paginatorNext;
 	@FindBy(css=".paginator-prev")
 	private WebElement paginatorPrev;
+	@FindBy(css=".results-wrapper i")
+	private WebElement noResultsCaption;
+	@FindBy(css=".Results a.image>img")
+	private List<WebElement> thumbnails;
 
 	public void openIntraWikiSearch() {
 		getUrl(Global.DOMAIN+URLsContent.intraWikiSearchPage);
@@ -127,7 +131,46 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
 	}
 
-	public void verifyResultsCount(int i){
+	public void verifyResultsCount(int i) {
 		Assertion.assertNumber(i, titles.size(), "checking results count");
+	}
+
+	public void verifyNoResults() {
+		waitForElementByElement(noResultsCaption);
+		Assertion.assertEquals("No results found.", noResultsCaption.getText());
+	}
+
+	public void selectPhotosVideos() {
+		waitForElementByElement(photosVideos);
+		photosVideos.click();
+		waitForElementByElement(sortingOptions);
+	}
+
+	public void selectPhotosOnly() {
+		waitForElementByElement(sortingOptions);
+		filterPhotos.click();
+	}
+
+	public void verifyAllResultsImages() {
+		for(WebElement elem:thumbnails) {
+			Assertion.assertEquals("thumbimage", elem.getAttribute("class"));
+		}
+	}
+
+	public void verifyAllResultsVideos() {
+		for(WebElement elem:thumbnails) {
+			Assertion.assertEquals("sprite play small", elem.getAttribute("class"));
+		}
+	}
+
+	public void selectVideosOnly() {
+		waitForElementByElement(sortingOptions);
+		filterVideos.click();
+	}
+
+	public void verifyNamespacesInTitles(String nameSpace) {
+		for (WebElement elem:titles) {
+			Assertion.assertStringContains(elem.getText(), nameSpace);
+		}
 	}
 }
