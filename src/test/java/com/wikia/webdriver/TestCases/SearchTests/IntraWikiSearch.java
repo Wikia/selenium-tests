@@ -29,7 +29,6 @@ public class IntraWikiSearch extends TestTemplate{
 	private static final int resultsPerPage = 25;
 	private static final String searchPhrase = "a";
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
-	private static final String searchPhraseOnePageResults = "muppet_wiki";
 
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",
@@ -79,8 +78,10 @@ public class IntraWikiSearch extends TestTemplate{
 		search.selectPhotosVideos();
 		search.verifyNamespacesInTitles(URLsContent.fileNS);
 		search.selectPhotosOnly();
-		search.verifyAllResultsImages();
+		search.verifyNamespacesInTitles(URLsContent.fileNS);
+		search.verifyAllResultsImages(resultsPerPage);
+		search.verifyNamespacesInTitles(URLsContent.fileNS);
 		search.selectVideosOnly();
-		search.verifyAllResultsVideos();
+		search.verifyAllResultsVideos(resultsPerPage);
 	}
 }

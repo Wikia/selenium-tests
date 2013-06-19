@@ -60,8 +60,10 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 	private WebElement paginatorPrev;
 	@FindBy(css=".results-wrapper i")
 	private WebElement noResultsCaption;
-	@FindBy(css=".Results a.image>img")
-	private List<WebElement> thumbnails;
+	@FindBy(css=".Results a.image:not(.video.lightbox)")
+	private List<WebElement> thumbnailsImages;
+	@FindBy(css=".Results a.image.video.lightbox")
+	private List<WebElement> thumbnailsVideos;
 
 	public void openIntraWikiSearch() {
 		getUrl(Global.DOMAIN+URLsContent.intraWikiSearchPage);
@@ -151,16 +153,12 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 		filterPhotos.click();
 	}
 
-	public void verifyAllResultsImages() {
-		for(WebElement elem:thumbnails) {
-			Assertion.assertEquals("thumbimage", elem.getAttribute("class"));
-		}
+	public void verifyAllResultsImages(int numberOfResults) {
+		Assertion.assertEquals(numberOfResults, thumbnailsImages.size());
 	}
 
-	public void verifyAllResultsVideos() {
-		for(WebElement elem:thumbnails) {
-			Assertion.assertEquals("sprite play small", elem.getAttribute("class"));
-		}
+	public void verifyAllResultsVideos(int numberOfResults) {
+		Assertion.assertEquals(numberOfResults, thumbnailsVideos.size());
 	}
 
 	public void selectVideosOnly() {
