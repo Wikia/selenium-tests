@@ -1,10 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -169,6 +171,41 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 	public void verifyNamespacesInTitles(String nameSpace) {
 		for (WebElement elem:titles) {
 			Assertion.assertStringContains(elem.getText(), nameSpace);
+		}
+	}
+
+	public enum sortOptions{
+		relevancy, publishDate, duration;
+	}
+
+	public void sortBy(sortOptions option){
+		waitForElementByElement(sortingOptions);
+		Select dropDown = new Select(sortingOptions);
+		switch (option) {
+		case relevancy:
+			dropDown.selectByIndex(0);
+			break;
+		case publishDate:
+			dropDown.selectByIndex(1);
+			break;
+		case duration:
+			dropDown.selectByIndex(2);
+			break;
+		}
+	}
+
+	public List<String> getTitles() {
+		ArrayList<String> titleList = new ArrayList<String>();
+		for (WebElement elem:titles){
+			titleList.add(elem.getText());
+		}
+		return titleList;
+	}
+
+	public void compareTitleListsNotEquals(List<String> titles1, List<String> titles2){
+		Assertion.assertNumber(titles1.size(), titles2.size(), "checking list length");
+		for (int i=0; i<titles1.size(); i++){
+			Assertion.assertTrue(!titles1.get(i).equals(titles2.get(i)));
 		}
 	}
 }

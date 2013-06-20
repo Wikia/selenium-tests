@@ -1,5 +1,7 @@
 package com.wikia.webdriver.TestCases.SearchTests;
 
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -7,6 +9,7 @@ import com.wikia.webdriver.Common.DataProvider.IntraWikiSearchProvider;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject.sortOptions;
 
 public class IntraWikiSearch extends TestTemplate{
 
@@ -29,6 +32,7 @@ public class IntraWikiSearch extends TestTemplate{
     STAPI103AT22: Verify clicking “Photos only” option will not display videos +
     STAPI103AT23: Verify clicking “Videos only” option will not display photos +
 
+
 	 */
 	private static final int resultsPerPage = 25;
 	private static final String searchPhraseResults = "a";
@@ -38,7 +42,7 @@ public class IntraWikiSearch extends TestTemplate{
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",
 			groups={"intraSearch001", "Search"})
-	public void intraWikiSearch_001_exactMatch(String query){
+	public void intraWikiSearch_001_exactMatch(String query) {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openIntraWikiSearch();
 		search.searchFor(query);
@@ -46,7 +50,7 @@ public class IntraWikiSearch extends TestTemplate{
 	}
 
 	@Test(groups={"intraSearch002", "Search"})
-	public void intraWikiSearch_002_pagination(){
+	public void intraWikiSearch_002_pagination() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openIntraWikiSearch();
 		search.searchFor(searchPhraseResults);
@@ -55,6 +59,7 @@ public class IntraWikiSearch extends TestTemplate{
 		search.verifyPagination();
 		search.clickPrevPaginator();
 		search.verifyPagination();
+		//TODO go to last and verify
 	}
 
 	@Test(groups={"intraSearch003", "Search"})
@@ -90,12 +95,30 @@ public class IntraWikiSearch extends TestTemplate{
 		search.verifyAllResultsVideos(resultsPerPage);
 	}
 
-	@Test
-	public void intraWikiSearch_006_dropDownSuggestions() {
+	@Test(groups={"intraSearch006", "Search"})
+	public void intraWikiSearch_006_sorting() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+		search.openIntraWikiSearch();
+		search.searchFor(searchPhraseResults);
+		search.selectPhotosVideos();
+		search.verifyNamespacesInTitles(URLsContent.fileNS);
+		search.sortBy(sortOptions.duration);
+		List<String> titles1 = search.getTitles();
+		search.sortBy(sortOptions.relevancy);
+		List<String> titles2 = search.getTitles();
+		search.sortBy(sortOptions.publishDate);
+		List<String> titles3 = search.getTitles();
+		search.compareTitleListsNotEquals(titles1, titles2);
+		search.compareTitleListsNotEquals(titles1, titles3);
+		search.compareTitleListsNotEquals(titles2, titles3);
+
+	}
+
+	@Test(groups={"intraSearch007", "Search"})
+	public void intraWikiSearch_007_dropDownSuggestions() {
 		WikiBasePageObject page = new WikiBasePageObject(driver);
 		page.openWikiPage();
 		page.typeSearchQuery(searchPhraseSuggestions);
 		page.verifySuggestionDropdown(searchPhraseSuggestions);
-
 	}
 }
