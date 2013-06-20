@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.WebDriver;
@@ -32,12 +31,8 @@ public class NewDriverProvider {
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 
-	private static void init(HashMap config) {
-		browserName = (String) config.get("BROWSER");
-	}
-
-	public static WebDriver getDriverIntstanceForConfig(HashMap config) {
-		init(config);
+	public static WebDriver getDriverIntstanceForConfig(String browser) {
+		browserName = browser;
 		PageObjectLogging listener = new PageObjectLogging();
 
 		//If browser equals IE set driver property as IEWebDriver instance

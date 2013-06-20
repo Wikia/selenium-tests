@@ -1,9 +1,13 @@
 package com.wikia.webdriver.Common.Templates;
 
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Configuration;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
+import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -11,12 +15,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Configuration;
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
-import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
-import com.wikia.webdriver.Common.Properties.Properties;
 
 
 public class NewTestTemplate {
@@ -51,7 +49,7 @@ public class NewTestTemplate {
 	}
 
 	protected void startBrowser() {
-		driver = NewDriverProvider.getDriverIntstanceForConfig(config);
+		driver = NewDriverProvider.getDriverIntstanceForConfig((String) config.get("BROWSER"));
 	}
 
 	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
