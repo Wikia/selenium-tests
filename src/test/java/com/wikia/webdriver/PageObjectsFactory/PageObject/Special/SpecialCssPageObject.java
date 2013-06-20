@@ -3,6 +3,8 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 import java.util.List;
 import java.util.Random;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,6 +33,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement cssPublishButtonDropdown;
 		@FindBy(css = "#editSummary")
 		private WebElement editSummaryField;
+		@FindBy(css = "#minorEdit")
+		private WebElement minorEdit;
 		@FindBy(css = "#showChanges")
 		private WebElement showChanges;
 		@FindBy(css = "#wikiDiff")
@@ -52,6 +56,16 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("verifyHighlighting", "There are elements highlighted by ace library", true);
 		}
 
+		public void saveCssContent(String randomText, WikiBasePageObject wiki) {
+			verifyPublishButtonAppears();
+			clearCssText();
+			sendAceCssText(randomText);
+			//specialCss.sendCssText(randomText);
+			clickPublishButton();
+			wiki.verifyUrl(URLsContent.specialCSS);
+			verifySaveComplete();
+		}
+
 		public void clearCssText() {
 			waitForElementByElement(aceLayerTextArea);
 			executeScript("ace.edit('cssEditorContainer').setValue('');");
@@ -60,7 +74,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 		public void sendAceCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
-			executeScript("ace.edit('cssEditorContainer').setValue('"+cssText+"');");
+			executeScript("ace.edit('cssEditorContainer').setValue('" + cssText + "');");
 			PageObjectLogging.log("clearCssText", "the following text was send to ace editor: "+cssText, true);
 		}
 
@@ -87,6 +101,11 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("cssPublishButton", "verify that publish button appears", true);
 		}
 
+		public void verifyMinorEditAppears() {
+			waitForElementByElement(minorEdit);
+			PageObjectLogging.log("minorEdit", "verify that minor edit checkbox appears", true);
+		}
+
 		public void clickPublishButton() {
 			clickAndWait(cssPublishButton);
 			PageObjectLogging.log("clickCssPublishButton", "click on publish button", true);
@@ -95,6 +114,11 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void clickPublishButtonDropdown() {
 			clickAndWait(cssPublishButtonDropdown);
 			PageObjectLogging.log("clickCssPublishButton", "click on publish button dropdown", true);
+		}
+
+		public void clickMinorCheckbox() {
+			clickAndWait(minorEdit);
+			PageObjectLogging.log("minorEdit", "click on minor edit checkbox dropdown", true);
 		}
 
 		public void clickShowChanges() {

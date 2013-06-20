@@ -37,12 +37,15 @@ public class CssChromeTests extends TestTemplate {
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.clearCssText();
-		specialCss.sendCssText(CssEditorContent.invalidCssError);
+		/*  I'm not sure does it work properly
+			specialCss.sendCssText(CssEditorContent.invalidCssError);
+		 */
+		specialCss.sendAceCssText(CssEditorContent.invalidCssError);
 		specialCss.verifyAceError();
 	}
 
 	/**
-	 * http://wikia-inc.atlassian.net/browse/DAR-755
+	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
 	@Test(groups = {"cssChrome_003", "cssChrome", "AdminDashboard"})
 	public void cssChrome_003_verifyPublishButtonAppearsAndWorks() {
@@ -51,18 +54,14 @@ public class CssChromeTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		String randomText = specialCss.generateRandomString();
-		specialCss.verifyPublishButtonAppears();
-		specialCss.clearCssText();
-		specialCss.sendAceCssText(randomText);
-		//specialCss.sendCssText(randomText);
-		specialCss.clickPublishButton();
-		wiki.verifyUrl(URLsContent.specialCSS);
-		specialCss.verifySaveComplete();
+		specialCss.saveCssContent(randomText, wiki);
 		wiki.openArticle(URLsContent.mediaWikiCss);
 		String cssContent = wiki.getWikiaCssContent();
 		Assertion.assertEquals(randomText, cssContent);
 	}
-
+	/**
+	 * http://wikia-inc.atlassian.net/browse/DAR-733
+	 */
 	@Test(groups = {"cssChrome_004", "cssChrome", "AdminDashboard"})
 	public void cssChrome_004_verifyEditSummaryAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
@@ -70,19 +69,17 @@ public class CssChromeTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		String randomText = specialCss.generateRandomString();
-		specialCss.verifyPublishButtonAppears();
-		specialCss.clearCssText();
-		specialCss.sendAceCssText(randomText);
 		specialCss.sendEditSummaryText(randomText);
-		specialCss.clickPublishButton();
-		wiki.verifyUrl(URLsContent.specialCSS);
-		specialCss.verifySaveComplete();
-		wiki.openArticle(URLsContent.mediaWikiCss+"?"+URLsContent.historyAction);
+		specialCss.saveCssContent(randomText, wiki);
+		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
 		String editSummary = wiki.getFirstCssRevision();
 		randomText = "(" + randomText + ")";
 		Assertion.assertEquals(randomText, editSummary);
 	}
 
+	/**
+	 * http://wikia-inc.atlassian.net/browse/DAR-733
+	 */
 	@Test(groups = {"cssChrome_005", "cssChrome", "AdminDashboard"})
 	public void cssChrome_005_verifyChangesAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
@@ -93,5 +90,22 @@ public class CssChromeTests extends TestTemplate {
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickShowChanges();
 		specialCss.showModalChanges();
+	}
+
+	/**
+	 * http://wikia-inc.atlassian.net/browse/DAR-733
+	 */
+	@Test(groups = {"cssChrome_006", "cssChrome", "AdminDashboard"})
+	public void cssChrome_006_verifyMinorEditAppearsAndWorks() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		String randomText = specialCss.generateRandomString();
+		specialCss.verifyMinorEditAppears();
+		specialCss.clickMinorCheckbox();
+		specialCss.saveCssContent(randomText, wiki);
+		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
+		wiki.checkMinorEdit();
 	}
 }

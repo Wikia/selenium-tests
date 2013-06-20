@@ -113,6 +113,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement cssSource;
 	@FindBy(css = "ul#pagehistory > li:first-child .comment")
 	protected WebElement cssEditSummary;
+	@FindBy(css = "ul#pagehistory > li:first-child .minoredit")
+	protected WebElement cssMinorEdit;
 
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
@@ -669,5 +671,10 @@ public class WikiBasePageObject extends BasePageObject {
 		String summary = cssEditSummary.getText();
 		PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "+summary, true);
 		return summary;
+	}
+
+	public void checkMinorEdit() {
+		waitForElementByElement(cssMinorEdit);
+		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
 	}
 }
