@@ -19,9 +19,10 @@ public class SpecialAdminDashboardPageObject extends SpecialPageObject {
 	        super(driver);
 	    }
 
-	    public void clickCssTool() {
+	    public SpecialCssPageObject clickCssTool() {
 	        waitForElementByElement(cssToolButton);
 	        clickAndWait(cssToolButton);
 	        PageObjectLogging.log("clickCssTool", "click on special CSS tool", true);
-	    }
+					return new SpecialCssPageObject(driver);
+	}
 }
