@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,18 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private List<WebElement> aceLinesList;
 		@FindBy(css = ".ace_error")
 		private WebElement aceError;
+		@FindBy(css = ".css-publish-button")
+		private WebElement cssPublishButton;
+		@FindBy(css = ".css-edit-box .drop")
+		private WebElement cssPublishButtonDropdown;
+		@FindBy(css = "#editSummary")
+		private WebElement editSummaryField;
+		@FindBy(css = "#showChanges")
+		private WebElement showChanges;
+		@FindBy(css = "#wikiDiff")
+		private WebElement wikiDiff;
+		@FindBy(css = ".global-notification.confirm")
+		private WebElement notificationConfirm;
 
 		public SpecialCssPageObject( WebDriver driver ) {
 			super(driver);
@@ -45,6 +58,18 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("clearCssText", "ace editor was cleared", true, driver);
 		}
 
+		public void sendAceCssText(String cssText) {
+			waitForElementByElement(aceLayerTextArea);
+			executeScript("ace.edit('cssEditorContainer').setValue('"+cssText+"');");
+			PageObjectLogging.log("clearCssText", "the following text was send to ace editor: "+cssText, true);
+		}
+
+		public void sendEditSummaryText(String summaryText) {
+			waitForElementByElement(editSummaryField);
+			editSummaryField.sendKeys(summaryText);
+			PageObjectLogging.log("editSummaryField", "the following text was send to ace editor: "+summaryText, true);
+		}
+
 		public void sendCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
 			waitForElementByElement(aceInputTextArea);
@@ -55,5 +80,46 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void verifyAceError() {
 			waitForElementByElement(aceError);
 			PageObjectLogging.log("verifyAceError", "verify that highlightet ace shows an error", true);
+		}
+
+		public void verifyPublishButtonAppears() {
+			waitForElementByElement(cssPublishButton);
+			PageObjectLogging.log("cssPublishButton", "verify that publish button appears", true);
+		}
+
+		public void clickPublishButton() {
+			clickAndWait(cssPublishButton);
+			PageObjectLogging.log("clickCssPublishButton", "click on publish button", true);
+		}
+
+		public void clickPublishButtonDropdown() {
+			clickAndWait(cssPublishButtonDropdown);
+			PageObjectLogging.log("clickCssPublishButton", "click on publish button dropdown", true);
+		}
+
+		public void clickShowChanges() {
+			clickAndWait(showChanges);
+			PageObjectLogging.log("showChanges", "click on show changes from dropdown", true);
+		}
+
+		public void showModalChanges() {
+			clickAndWait(wikiDiff);
+			PageObjectLogging.log("wikiDiff", "modal with changes is displayed", true);
+		}
+
+		public void verifySaveComplete() {
+			waitForElementByElement(notificationConfirm);
+			PageObjectLogging.log("notificationConfirm", "css content saved", true);
+		}
+
+		public String generateRandomString() {
+			char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+			Random random = new Random();
+			StringBuilder randomText = new StringBuilder();
+			for(int i = 0; i < 30; i++) {
+				char c = chars[random.nextInt(chars.length)];
+				randomText.append(c);
+			}
+			return randomText.toString();
 		}
 }

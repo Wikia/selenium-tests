@@ -109,6 +109,10 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement logInModal;
 	@FindBy(css = "a#ca-edit")
 	protected WebElement editButton;
+	@FindBy(css = "#mw-content-text .source-css")
+	protected WebElement cssSource;
+	@FindBy(css = "ul#pagehistory > li:first-child .comment")
+	protected WebElement cssEditSummary;
 
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
@@ -651,5 +655,19 @@ public class WikiBasePageObject extends BasePageObject {
 	protected Boolean checkIfMainPage() {
 		WebElement body = driver.findElement(By.cssSelector("body"));
 		return (body.getAttribute("class").contains("mainpage"));
+	}
+
+	public String getWikiaCssContent() {
+		waitForElementByElement(cssSource);
+		String source = cssSource.getText();
+		PageObjectLogging.log("cssSource", "the following text was get from Wikia.css: "+source, true);
+		return source;
+	}
+
+	public String getFirstCssRevision() {
+		waitForElementByElement(cssEditSummary);
+		String summary = cssEditSummary.getText();
+		PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "+summary, true);
+		return summary;
 	}
 }
