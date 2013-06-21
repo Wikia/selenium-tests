@@ -108,4 +108,46 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
 		wiki.checkMinorEdit();
 	}
+	
+	@Test(groups = {"cssChrome_007", "cssChrome", "AdminDashboard"})
+	public void cssChrome_007_verifyHistoryButtonAppearsAndWorks() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);		
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		specialCss.clickPublishButtonDropdown();
+		specialCss.clickHistoryButton();
+		specialCss.verifyUrl("action=history");
+	}
+
+	@Test(groups = {"cssChrome_008", "cssChrome", "AdminDashboard"})
+	public void cssChrome_008_verifyDeleteButtonAppearsAndWorks() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);		
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		specialCss.verifyAceEditorPresence();
+		specialCss.verifyArticleIsNotRemoved();		
+		specialCss.clickPublishButtonDropdown();
+		specialCss.clickDeleteButton();
+		specialCss.confirmDelete();
+	}
+	
+	@Test(groups = {"cssChrome_009", "cssChrome", "AdminDashboard"}, 
+			dependsOnMethods={"cssChrome_008_verifyDeleteButtonAppearsAndWorks"})
+	public void cssChrome_009_verifyUndeleteButtonAppearsAndWorks() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);		
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		specialCss.verifyAceEditorPresence();
+		specialCss.verifyArticleIsRemoved();
+		specialCss.clickPublishButtonDropdown();
+		specialCss.clickUndeleteButton();
+		specialCss.confirmUndelete();
+		wiki.openArticle(URLsContent.specialCSS);
+		specialCss.verifyAceEditorPresence();
+		specialCss.verifyArticleIsNotRemoved();		
+	}
+	
 }

@@ -395,7 +395,7 @@ public class WikiBasePageObject extends BasePageObject {
 				"undelete article button clicked", true, driver);
 	}
 
-	private void clickRestoreArticleButton() {
+	protected void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
 		clickAndWait(restoreButton);
 		waitForElementByXPath("//div[@class='msg' and contains(text(), 'This page has been restored.')]");

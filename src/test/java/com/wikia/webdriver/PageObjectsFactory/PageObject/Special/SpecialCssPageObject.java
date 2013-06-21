@@ -5,12 +5,14 @@ import java.util.Random;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class SpecialCssPageObject extends SpecialPageObject {
@@ -41,7 +43,16 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement wikiDiff;
 		@FindBy(css = ".global-notification.confirm")
 		private WebElement notificationConfirm;
-
+		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=history\"]")
+		private WebElement historyButton;		
+		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=delete\"]")
+		private WebElement deleteButton;
+		//@FindBy(css = ".css-editor .mw-warning-with-logexcerpt")
+		//private WebElement removedWarning;
+		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"Special:Undelete\"]")
+		private WebElement undeleteButton;
+		private By removedWarning = By.cssSelector(".css-editor .mw-warning-with-logexcerpt");
+		
 		public SpecialCssPageObject( WebDriver driver ) {
 			super(driver);
 		}
@@ -145,5 +156,38 @@ public class SpecialCssPageObject extends SpecialPageObject {
 				randomText.append(c);
 			}
 			return randomText.toString();
+		}
+		
+		public void clickHistoryButton() {
+			clickAndWait(historyButton);
+			PageObjectLogging.log("historyButton", "click on history button", true);			
+		}
+		
+		public void clickDeleteButton() {
+			clickAndWait(deleteButton);
+			verifyUrl("action=delete");
+			PageObjectLogging.log("deleteButton", "click on delete button", true);
+		}
+		
+		public void confirmDelete() {
+			clickArticleDeleteConfirmationButton("MediaWiki:Wikia.css");
+		}
+		
+		public void verifyArticleIsRemoved() {
+			waitForElementByBy(removedWarning);
+		}
+		
+		public void verifyArticleIsNotRemoved() {
+			waitForElementNotPresent(removedWarning);
+		}
+		
+		public void clickUndeleteButton() {
+			clickAndWait(undeleteButton);
+			verifyUrl("Special:Undelete?target=MediaWiki%3AWikia.css");
+			PageObjectLogging.log("undeleteButton", "click on undelete button", true);			
+		}
+		
+		public void confirmUndelete() {
+			clickRestoreArticleButton();
 		}
 }
