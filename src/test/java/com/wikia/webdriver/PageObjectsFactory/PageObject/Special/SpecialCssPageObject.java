@@ -31,7 +31,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement aceError;
 		@FindBy(css = ".css-publish-button")
 		private WebElement cssPublishButton;
-		@FindBy(css = ".css-edit-box .drop")
+		@FindBy(css = ".css-edit-box .wikia-menu-button .drop")
 		private WebElement cssPublishButtonDropdown;
 		@FindBy(css = "#editSummary")
 		private WebElement editSummaryField;
@@ -41,6 +41,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement showChanges;
 		@FindBy(css = "#wikiDiff")
 		private WebElement wikiDiff;
+		@FindBy(css = "#wikiDiff .diff-addedline > div")
+		private WebElement wikiDiffAddedLine;
 		@FindBy(css = ".global-notification.confirm")
 		private WebElement notificationConfirm;
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=history\"]")
@@ -86,7 +88,14 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void sendAceCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
 			executeScript("ace.edit('cssEditorContainer').setValue('" + cssText + "');");
-			PageObjectLogging.log("clearCssText", "the following text was send to ace editor: "+cssText, true);
+			PageObjectLogging.log("sendAceCssText", "the following text was send to ace editor: "+cssText, true);
+		}
+
+		public void insertAceCssText(String cssText) {
+			waitForElementByElement(aceLayerTextArea);
+			executeScript("ace.edit('cssEditorContainer').navigateFileEnd();");
+			executeScript("ace.edit('cssEditorContainer').insert('" + cssText + "');");
+			PageObjectLogging.log("sendAceCssText", "the following text was send to ace editor: "+cssText, true);
 		}
 
 		public void sendEditSummaryText(String summaryText) {
@@ -145,6 +154,13 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void verifySaveComplete() {
 			waitForElementByElement(notificationConfirm);
 			PageObjectLogging.log("notificationConfirm", "css content saved", true);
+		}
+
+		public String getAddedLineText() {
+			waitForElementByElement(wikiDiffAddedLine);
+			String addedLine = wikiDiffAddedLine.getText();
+			PageObjectLogging.log("wikiDiffAddedLine", "get added line content", true);
+			return addedLine;
 		}
 
 		public String generateRandomString() {

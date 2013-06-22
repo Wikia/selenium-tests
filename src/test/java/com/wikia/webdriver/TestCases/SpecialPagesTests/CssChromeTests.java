@@ -86,10 +86,13 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
-		specialCss.verifyPublishButtonAppears();
+		String randomText = specialCss.generateRandomString();
+		specialCss.insertAceCssText("\\n" + randomText);
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickShowChanges();
 		specialCss.showModalChanges();
+		String addedLine = specialCss.getAddedLineText();
+		Assertion.assertEquals(randomText, addedLine);
 	}
 
 	/**
