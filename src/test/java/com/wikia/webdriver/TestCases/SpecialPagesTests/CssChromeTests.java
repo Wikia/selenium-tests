@@ -37,10 +37,7 @@ public class CssChromeTests extends TestTemplate {
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.clearCssText();
-		/*  I'm not sure does it work properly
-			specialCss.sendCssText(CssEditorContent.invalidCssError);
-		 */
-		specialCss.sendAceCssText(CssEditorContent.invalidCssError);
+		specialCss.sendCssText(CssEditorContent.invalidCssError);
 		specialCss.verifyAceError();
 	}
 
@@ -87,7 +84,7 @@ public class CssChromeTests extends TestTemplate {
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		String randomText = specialCss.generateRandomString();
-		specialCss.insertAceCssText("\\n" + randomText);
+		specialCss.insertCssText("\n" + randomText);
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickShowChanges();
 		specialCss.showModalChanges();

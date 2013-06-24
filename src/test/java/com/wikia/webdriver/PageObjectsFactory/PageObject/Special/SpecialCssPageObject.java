@@ -72,8 +72,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void saveCssContent(String randomText, WikiBasePageObject wiki) {
 			verifyPublishButtonAppears();
 			clearCssText();
-			sendAceCssText(randomText);
-			//specialCss.sendCssText(randomText);
+			sendCssText(randomText);
 			clickPublishButton();
 			wiki.verifyUrl(URLsContent.specialCSS);
 			verifySaveComplete();
@@ -85,16 +84,10 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("clearCssText", "ace editor was cleared", true, driver);
 		}
 
-		public void sendAceCssText(String cssText) {
-			waitForElementByElement(aceLayerTextArea);
-			executeScript("ace.edit('cssEditorContainer').setValue('" + cssText + "');");
-			PageObjectLogging.log("sendAceCssText", "the following text was send to ace editor: "+cssText, true);
-		}
-
-		public void insertAceCssText(String cssText) {
+		public void insertCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
 			executeScript("ace.edit('cssEditorContainer').navigateFileEnd();");
-			executeScript("ace.edit('cssEditorContainer').insert('" + cssText + "');");
+			sendCssText(cssText);
 			PageObjectLogging.log("sendAceCssText", "the following text was send to ace editor: "+cssText, true);
 		}
 
@@ -106,7 +99,6 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 		public void sendCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
-			waitForElementByElement(aceInputTextArea);
 			aceInputTextArea.sendKeys(cssText);
 			PageObjectLogging.log("sendCssText", "the following text was send to ace editor: "+cssText, true, driver);
 		}
