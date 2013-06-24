@@ -1,7 +1,6 @@
 package com.wikia.webdriver.Common.DriverProvider;
 
 import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,50 +25,45 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
  */
 public class NewDriverProvider {
 
-	private static WebDriver driver;
+	private static EventFiringWebDriver driver;
 	private static ProxyServer server;
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 
-	public static WebDriver getDriverIntstanceForConfig(String browser) {
+	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
 		browserName = browser;
-		PageObjectLogging listener = new PageObjectLogging();
 
 		//If browser equals IE set driver property as IEWebDriver instance
 		if (browserName.equals("IE")) {
-			driver = getIEInstance(listener);
+			driver = getIEInstance();
 
 		//If browser contains FF set driver property as FFWebDriver instance
 		} else if(browserName.contains("FF")) {
-			driver = getFFInstance(listener);
+			driver = getFFInstance();
 
 		//If browser equals CHROME set driver property as ChromeWebDriver instance
 		} else if (browserName.contains("CHROME")) {
-			driver = getChromeInstance(listener);
+			driver = getChromeInstance();
 
 		//If browser equals SAFARI set driver property as SafariWebDriver instance
 		} else if (browserName.equals("SAFARI")) {
-			driver = getSafariInstance(listener);
+			driver = getSafariInstance();
 
 		} else if (browserName.equals("HTMLUNIT")) {
-			driver = new EventFiringWebDriver(new HtmlUnitDriver()).register(listener);
+			driver = new EventFiringWebDriver(new HtmlUnitDriver());
 		} else if (browserName.equals("GHOST")){
-			driver = getPhantomJSInstance(listener);
+			driver = getPhantomJSInstance();
 		}
 
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		return driver;
 	}
 
-	public static WebDriver getWebDriver() {
-            return driver;
+	public static  WebDriver getWebDriver() {
+            return (WebDriver) driver;
 	}
 
-	public static ProxyServer getServer() {
-            return server;
-	}
-
-	private static WebDriver getIEInstance(PageObjectLogging listener) {
+	private static EventFiringWebDriver getIEInstance() {
 		String sysArch = System.getProperty("os.arch");
 		if (sysArch.equals("x86")) {
 			File file = new File (
@@ -92,10 +86,10 @@ public class NewDriverProvider {
 			);
 			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 		}
-		return new EventFiringWebDriver(new InternetExplorerDriver(caps)).register(listener);
+		return new EventFiringWebDriver(new InternetExplorerDriver(caps));
 	}
 
-	private static WebDriver getFFInstance(PageObjectLogging listener) {
+	private static EventFiringWebDriver getFFInstance() {
 		FirefoxProfile profile = new FirefoxProfile();
 
 		//Windows 8 requires to set webdriver.firefox.bin system variable
@@ -131,10 +125,10 @@ public class NewDriverProvider {
 		}
 
 		caps.setCapability(FirefoxDriver.PROFILE, profile);
-		return new EventFiringWebDriver(new FirefoxDriver(caps)).register(listener);
+		return new EventFiringWebDriver(new FirefoxDriver(caps));
 	}
 
-	private static WebDriver getChromeInstance(PageObjectLogging listener) {
+	private static EventFiringWebDriver getChromeInstance() {
 		String chromeBinaryName;
 		String OSName = System.getProperty("os.name").toUpperCase();
 
@@ -153,8 +147,6 @@ public class NewDriverProvider {
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
 		}
 
-
-
 		if (browserName.equals("CHROMEMOBILE")) {
 			caps.setCapability(
 				"chrome.switches",
@@ -166,10 +158,10 @@ public class NewDriverProvider {
 			);
 		}
 
-		return new EventFiringWebDriver(new ChromeDriver(caps)).register(listener);
+		return new EventFiringWebDriver(new ChromeDriver(caps));
 	}
 
-	private static WebDriver getPhantomJSInstance(PageObjectLogging listener) {
+	private static EventFiringWebDriver getPhantomJSInstance() {
 		String phantomJSBinaryName;
 		String OSName = System.getProperty("os.name").toUpperCase();
 
@@ -191,17 +183,17 @@ public class NewDriverProvider {
 			);
 		}
 
-		return new EventFiringWebDriver(new PhantomJSDriver(caps)).register(listener);
+		return new EventFiringWebDriver(new PhantomJSDriver(caps));
 	}
 
-	private static WebDriver getSafariInstance(PageObjectLogging listener) {
+	private static EventFiringWebDriver getSafariInstance() {
 		/*
 		 * clone following repository
 		 * https://github.com/senthilnayagam/safari-webdriver.git
 		 * webdriver.safari.driver property should be set to path to the SafariDriver.safariextz file
 		 */
 		System.setProperty("webdriver.safari.driver", "");
-		return new EventFiringWebDriver(new SafariDriver()).register(listener);
+		return new EventFiringWebDriver(new SafariDriver());
 	}
 
 	public static void setDriverCapabilities(DesiredCapabilities newCaps) {

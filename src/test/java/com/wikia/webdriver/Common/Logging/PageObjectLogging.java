@@ -1,5 +1,9 @@
 package com.wikia.webdriver.Common.Logging;
 
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -9,24 +13,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
-import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
-
-public class PageObjectLogging implements WebDriverEventListener, ITestListener{
+public class PageObjectLogging extends AbstractWebDriverEventListener implements WebDriverEventListener, ITestListener{
 
 	private By lastFindBy;
 	private WebDriver driver;
@@ -83,28 +82,8 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 	}
 
 	@Override
-	public void beforeNavigateBack(WebDriver driver) {
-	}
-
-	@Override
-	public void afterNavigateBack(WebDriver driver) {
-	}
-
-	@Override
-	public void beforeNavigateForward(WebDriver driver) {
-	}
-
-	@Override
-	public void afterNavigateForward(WebDriver driver) {
-	}
-
-	@Override
 	public void beforeFindBy(By by, WebElement element, WebDriver driver) {
 		lastFindBy = by;
-	}
-
-	@Override
-	public void afterFindBy(By by, WebElement element, WebDriver driver) {
 	}
 
 	@Override
@@ -118,26 +97,6 @@ public class PageObjectLogging implements WebDriverEventListener, ITestListener{
 		builder.append("<tr class=\"success\"><td>click</td><td>" + lastFindBy
 				+ "</td><td> <br/> &nbsp;</td></tr>");
 		CommonUtils.appendTextToFile(logPath, builder.toString());
-	}
-
-	@Override
-	public void beforeChangeValueOf(WebElement element, WebDriver driver) {
-	}
-
-	@Override
-	public void afterChangeValueOf(WebElement element, WebDriver driver) {
-	}
-
-	@Override
-	public void beforeScript(String script, WebDriver driver) {
-	}
-
-	@Override
-	public void afterScript(String script, WebDriver driver) {
-	}
-
-	@Override
-	public void onException(Throwable throwable, WebDriver driver) {
 	}
 
 	private static void logJSError(WebDriver driver){
