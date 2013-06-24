@@ -4,6 +4,7 @@ import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Configuration;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -49,7 +51,11 @@ public class NewTestTemplate {
 	}
 
 	protected void startBrowser() {
-		driver = NewDriverProvider.getDriverIntstanceForConfig((String) config.get("BROWSER"));
+		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser(
+			(String) config.get("BROWSER")
+		);
+		eventDriver.register(new PageObjectLogging());
+		driver = (WebDriver) eventDriver;
 	}
 
 	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
@@ -61,7 +67,6 @@ public class NewTestTemplate {
 		driver = NewDriverProvider.getWebDriver();
 		if (driver != null) {
 			driver.quit();
-			driver = null;
 		}
 	}
 

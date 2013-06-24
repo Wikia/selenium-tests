@@ -41,7 +41,7 @@ public class TestTemplate {
 	}
 
 	@BeforeMethod(alwaysRun = true)
-	public void start(Method method, Object[] data) {
+	public void start(Method method) {
 		startBrowser();
 	}
 
