@@ -17,9 +17,9 @@ public class URLsContent {
 	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 
 	// Hubs
-	public static String VideoGamesHub = "http://www.wikia.com/Video_Games";
-	public static String EntertainmentHub = "http://www.wikia.com/Entertainment";
-	public static String LifestyleHub = "http://www.wikia.com/Lifestyle";
+	public static String VideoGamesHub = Global.LIVE_DOMAIN+"Video_Games";
+	public static String EntertainmentHub = Global.LIVE_DOMAIN+"Entertainment";
+	public static String LifestyleHub = Global.LIVE_DOMAIN+"Lifestyle";
 
 	//Special Urls - links to special pages
 	public static final String specialUserLogin = "wiki/Special:UserLogin";
