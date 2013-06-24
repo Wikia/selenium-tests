@@ -173,7 +173,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialCssPageObject openSpecialCss() {
-		getUrl(Global.DOMAIN + URLsContent.specialCss);
+		getUrl(Global.DOMAIN + URLsContent.specialCSS);
 		return new SpecialCssPageObject(driver);
 	}
 

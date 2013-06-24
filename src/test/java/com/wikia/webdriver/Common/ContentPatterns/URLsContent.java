@@ -36,8 +36,7 @@ public class URLsContent {
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
 	public static final String specialPreferences = "wiki/Special:Preferences";
 	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
-	public static final String specialCss = "wiki/Special:Css";
-	public static final String specialCSS = "Special:CSS";
+	public static final String specialCSS = "wiki/Special:CSS";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
