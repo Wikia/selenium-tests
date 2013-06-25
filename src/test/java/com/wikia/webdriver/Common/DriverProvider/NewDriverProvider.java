@@ -63,6 +63,10 @@ public class NewDriverProvider {
             return (WebDriver) driver;
 	}
 
+	public static EventFiringWebDriver getEventDriver() {
+		return driver;
+	}
+
 	private static EventFiringWebDriver getIEInstance() {
 		String sysArch = System.getProperty("os.arch");
 		if (sysArch.equals("x86")) {
