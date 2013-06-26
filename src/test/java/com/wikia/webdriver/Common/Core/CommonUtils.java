@@ -78,6 +78,19 @@ public class CommonUtils {
 		}
 	}
 
+	/*
+	 * Check if directory as given in path exists
+	 * If not create one using this.createDirectory() method
+	 */
+	public static void createDirectoryIfNotExist(String path) {
+		File newDir = new File(path);
+		if (!newDir.exists()) {
+			createDirectory(path);
+			return;
+		}
+		System.out.println("Directory %dir% already exists".replace("%dir%", path));
+	}
+
 	/**
 	 * captures screenshot with given path, returns output file path
 	 * @param outputFilePath

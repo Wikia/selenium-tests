@@ -55,7 +55,7 @@ public class NewTestTemplate {
 			(String) config.get("BROWSER")
 		);
 		eventDriver.register(new PageObjectLogging());
-		driver = (WebDriver) eventDriver;
+		driver = eventDriver;
 	}
 
 	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
