@@ -2,6 +2,9 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
@@ -147,6 +150,22 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openArticle(URLsContent.specialCSS);
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved();		
+	}
+
+	@Test(groups = {"cssChrome_010", "cssChrome", "AdminDashboard"})
+	public void cssChrome_010_verifyOnLeaveMessageWorks() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		specialCss.verifyAceEditorPresence();
+		specialCss.sendCssText(CssEditorContent.validCss);
+		specialCss.clickPublishButtonDropdown();
+		specialCss.clickHistoryButton();
+		WebDriverWait wait = new WebDriverWait(driver, 2);
+		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
 	}
 	
 }
