@@ -22,6 +22,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
@@ -108,6 +109,12 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement logInModal;
 	@FindBy(css = "a#ca-edit")
 	protected WebElement editButton;
+	@FindBy(css = "#mw-content-text .source-css")
+	protected WebElement cssSource;
+	@FindBy(css = "ul#pagehistory > li:first-child .comment")
+	protected WebElement cssEditSummary;
+	@FindBy(css = "ul#pagehistory > li:first-child .minoredit")
+	protected WebElement cssMinorEdit;
 
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
@@ -163,6 +170,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
 		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
+	}
+
+	public SpecialCssPageObject openSpecialCss() {
+		getUrl(Global.DOMAIN + URLsContent.specialCSS);
+		return new SpecialCssPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
@@ -383,7 +395,7 @@ public class WikiBasePageObject extends BasePageObject {
 				"undelete article button clicked", true, driver);
 	}
 
-	private void clickRestoreArticleButton() {
+	protected void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
 		clickAndWait(restoreButton);
 		waitForElementByXPath("//div[@class='msg' and contains(text(), 'This page has been restored.')]");
@@ -645,5 +657,24 @@ public class WikiBasePageObject extends BasePageObject {
 	protected Boolean checkIfMainPage() {
 		WebElement body = driver.findElement(By.cssSelector("body"));
 		return (body.getAttribute("class").contains("mainpage"));
+	}
+
+	public String getWikiaCssContent() {
+		waitForElementByElement(cssSource);
+		String source = cssSource.getText();
+		PageObjectLogging.log("cssSource", "the following text was get from Wikia.css: "+source, true);
+		return source;
+	}
+
+	public String getFirstCssRevision() {
+		waitForElementByElement(cssEditSummary);
+		String summary = cssEditSummary.getText();
+		PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "+summary, true);
+		return summary;
+	}
+
+	public void verifyRevisionMarkedAsMinor() {
+		waitForElementByElement(cssMinorEdit);
+		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
 	}
 }
