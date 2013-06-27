@@ -140,7 +140,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 		public void showChangesModal() {
 			clickAndWait(changesModal);
-			PageObjectLogging.log("wikiDiff", "modal with changes is displayed", true);
+			PageObjectLogging.log("changesModal", "modal with changes is displayed", true);
 		}
 
 		public void verifySaveComplete() {
