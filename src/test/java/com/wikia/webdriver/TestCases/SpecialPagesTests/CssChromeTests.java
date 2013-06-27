@@ -50,11 +50,11 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
-		String randomText = specialCss.generateRandomString();
-		specialCss.saveCssContent(randomText, wiki);
+		String currentTimestamp = specialCss.getTimeStamp();
+		specialCss.saveCssContent(currentTimestamp, wiki);
 		wiki.openArticle(URLsContent.mediaWikiCss);
 		String cssContent = wiki.getWikiaCssContent();
-		Assertion.assertEquals(randomText, cssContent);
+		Assertion.assertEquals(currentTimestamp, cssContent);
 	}
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
@@ -65,13 +65,12 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
-		String randomText = specialCss.generateRandomString();
-		specialCss.sendEditSummaryText(randomText);
-		specialCss.saveCssContent(randomText, wiki);
+		String currentTimestamp = specialCss.getTimeStamp();
+		specialCss.sendEditSummaryText(currentTimestamp);
+		specialCss.saveCssContent(currentTimestamp, wiki);
 		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
 		String editSummary = wiki.getFirstCssRevision();
-		randomText = "(" + randomText + ")";
-		Assertion.assertEquals(randomText, editSummary);
+		Assertion.assertStringContains(editSummary, currentTimestamp);
 	}
 
 	/**
@@ -83,13 +82,13 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
-		String randomText = specialCss.generateRandomString();
-		specialCss.insertCssText("\n" + randomText);
+		String currentTimestamp = specialCss.getTimeStamp();
+		specialCss.insertCssText("\n" + currentTimestamp);
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickShowChanges();
-		specialCss.showModalChanges();
+		specialCss.showChangesModal();
 		String addedLine = specialCss.getAddedLineText();
-		Assertion.assertEquals(randomText, addedLine);
+		Assertion.assertEquals(currentTimestamp, addedLine);
 	}
 
 	/**
@@ -101,12 +100,12 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
-		String randomText = specialCss.generateRandomString();
+		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.verifyMinorEditAppears();
 		specialCss.clickMinorCheckbox();
-		specialCss.saveCssContent(randomText, wiki);
+		specialCss.saveCssContent(currentTimestamp, wiki);
 		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
-		wiki.checkMinorEdit();
+		wiki.verifyRevisionMarkedAsMinor();
 	}
 	
 	@Test(groups = {"cssChrome_007", "cssChrome", "AdminDashboard"})

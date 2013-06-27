@@ -1,7 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Random;
+import java.net.URLEncoder;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -12,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class SpecialCssPageObject extends SpecialPageObject {
@@ -40,9 +40,9 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		@FindBy(css = "#showChanges")
 		private WebElement showChanges;
 		@FindBy(css = "#wikiDiff")
-		private WebElement wikiDiff;
+		private WebElement changesModal;
 		@FindBy(css = "#wikiDiff .diff-addedline > div")
-		private WebElement wikiDiffAddedLine;
+		private WebElement changesModalAddedLine;
 		@FindBy(css = ".global-notification.confirm")
 		private WebElement notificationConfirm;
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=history\"]")
@@ -138,8 +138,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("showChanges", "click on show changes from dropdown", true);
 		}
 
-		public void showModalChanges() {
-			clickAndWait(wikiDiff);
+		public void showChangesModal() {
+			clickAndWait(changesModal);
 			PageObjectLogging.log("wikiDiff", "modal with changes is displayed", true);
 		}
 
@@ -149,21 +149,10 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public String getAddedLineText() {
-			waitForElementByElement(wikiDiffAddedLine);
-			String addedLine = wikiDiffAddedLine.getText();
-			PageObjectLogging.log("wikiDiffAddedLine", "get added line content", true);
+			waitForElementByElement(changesModalAddedLine);
+			String addedLine = changesModalAddedLine.getText();
+			PageObjectLogging.log("changesModalAddedLine", "get added line content", true);
 			return addedLine;
-		}
-
-		public String generateRandomString() {
-			char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-			Random random = new Random();
-			StringBuilder randomText = new StringBuilder();
-			for(int i = 0; i < 30; i++) {
-				char c = chars[random.nextInt(chars.length)];
-				randomText.append(c);
-			}
-			return randomText.toString();
 		}
 		
 		public void clickHistoryButton() {
@@ -178,7 +167,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 		
 		public void confirmDelete() {
-			clickArticleDeleteConfirmationButton("MediaWiki:Wikia.css");
+			clickArticleDeleteConfirmationButton(URLsContent.mediaWikiCss);
 		}
 		
 		public void verifyArticleIsRemoved() {
@@ -191,7 +180,11 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		
 		public void clickUndeleteButton() {
 			clickAndWait(undeleteButton);
-			verifyUrl("Special:Undelete?target=MediaWiki%3AWikia.css");
+			try {
+				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.mediaWikiCss, "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				// this should never happen
+			}
 			PageObjectLogging.log("undeleteButton", "click on undelete button", true);			
 		}
 		

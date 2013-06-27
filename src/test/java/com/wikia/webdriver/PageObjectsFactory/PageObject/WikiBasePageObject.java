@@ -673,7 +673,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return summary;
 	}
 
-	public void checkMinorEdit() {
+	public void verifyRevisionMarkedAsMinor() {
 		waitForElementByElement(cssMinorEdit);
 		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
 	}
