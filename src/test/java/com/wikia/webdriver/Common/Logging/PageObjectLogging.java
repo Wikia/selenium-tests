@@ -20,12 +20,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
-import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class PageObjectLogging extends AbstractWebDriverEventListener implements WebDriverEventListener, ITestListener{
+public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener, LoggerInterface {
 
 	private By lastFindBy;
 	private WebDriver driver;
@@ -224,4 +223,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public void onFinish(ITestContext context) {
 		CommonUtils.appendTextToFile(logPath, "</body></html>");
 	}
+
+	@Override
+	public void log(String command, WebElement element, WebDriver driver) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void saveLogs() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 }

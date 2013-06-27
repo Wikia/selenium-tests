@@ -12,39 +12,6 @@ import com.wikia.webdriver.Common.Core.XMLFunctions;
 
 public class Properties {
 
-	private static void setPropertiesManually()
-	{
-		Global.BROWSER = System.getenv("SELENIUM_BROWSER");
-		if(Global.BROWSER == null || Global.BROWSER.isEmpty()) {
-			Global.BROWSER = "FF";
-		}
-		Global.DOMAIN = System.getenv("SELENIUM_DOMAIN");
-		if(Global.DOMAIN == null || Global.DOMAIN.isEmpty()) {
-			Global.DOMAIN = "http://mediawiki119.wikia.com/";
-		}
-		Global.LIVE_DOMAIN = System.getenv("SELENIUM_LIVE_DOMAIN");
-		if(Global.LIVE_DOMAIN == null || Global.LIVE_DOMAIN.isEmpty()) {
-			Global.LIVE_DOMAIN = "http://www.wikia.com/";
-		}
-		String seleniumConfigDir = System.getenv("SELENIUM_CONFIG");
-		if(seleniumConfigDir == null || seleniumConfigDir.isEmpty()) {
-			seleniumConfigDir = "c:"+File.separator+"selenium-config";
-		}
-
-		Global.CONFIG_FILE = new File(seleniumConfigDir+File.separator+"config.xml");
-		Global.CAPTCHA_FILE = new File(seleniumConfigDir+File.separator+"captcha.txt");
-
-		Global.LOG_VERBOSE = 2;
-		if (Global.DOMAIN.contains("dev")||Global.DOMAIN.contains("sandbox"))
-		{
-			Global.LOGIN_BY_COOKIE = false;
-		}
-		else {
-			Global.LOGIN_BY_COOKIE = true;
-		}
-		Global.LOG_ENABLED = true;
-	}
-
 	public static String userName;
 	public static String password;
 
@@ -166,7 +133,7 @@ public class Properties {
 		if (Global.RUN_BY_MAVEN) {
 			getPropertiesFromPom();
 		} else {
-			setPropertiesManually();
+			PropertiesSetter.setPropertiesManually();
 		}
 		setVariables();
 	}

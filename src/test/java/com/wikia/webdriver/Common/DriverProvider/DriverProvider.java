@@ -193,17 +193,23 @@ public class DriverProvider {
 	 * @author Karol Kujawiak
 	 */
 	private static void setChromeProperties() {
-            File file = new File (
-                "." + File.separator
-                + "src" + File.separator
-                + "test" + File.separator
-                + "resources" + File.separator
-                + "ChromeDriver" + File.separator
-                + ( System.getProperty("os.name").toUpperCase().contains("MAC") ?
-                    "chromedriver" :
-                    "chromedriver.exe")
-            );
-            System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+		String chromeBinaryName;
+		String OSName = System.getProperty("os.name").toUpperCase();
+
+		if (OSName.contains("WINDOWS")) {
+			chromeBinaryName = "chromedriver.exe";
+
+			File chromeBinary = new File (
+				"." + File.separator
+				+ "src" + File.separator
+				+ "test" + File.separator
+				+ "resources" + File.separator
+				+ "ChromeDriver" + File.separator
+				+ chromeBinaryName
+			);
+
+			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
+		}
 	}
 
 	public static void setCapabilities(DesiredCapabilities newCaps) {
