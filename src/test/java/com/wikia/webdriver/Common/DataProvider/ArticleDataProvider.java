@@ -12,7 +12,6 @@ public class ArticleDataProvider {
 	public static final Object[][] getArticleName() {
 		return new Object[][] {
 			{"QAarticle"},
-			{"這是文章的名字在中國"},
 			{"QAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName"},
 			{"QA/article"},
 			{"QA_article"},
