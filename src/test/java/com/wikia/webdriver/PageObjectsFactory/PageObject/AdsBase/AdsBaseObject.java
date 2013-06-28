@@ -73,7 +73,14 @@ public class AdsBaseObject extends WikiBasePageObject {
 		WebElement prefooterElement = driver.findElement(By.cssSelector(prefooterSelector));
 
 		//Scroll to AIC container and wait for <div> to be present inside it
-		scrollToSelector(prefooterSelector);
+		if (!scrollToSelector(prefooterSelector)) {
+			PageObjectLogging.log(
+				"SelectorNotFound",
+				"Selector " + prefooterSelector + " not found on page",
+				false,
+				driver
+			);
+		}
 		checkTagsPresent(prefooterElement);
 	}
 
@@ -103,6 +110,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
+	public void verifyNoLiftiumAdsOnPage() throws Exception {
+		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
+		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
+		verifyNoLiftiumAds();
+	}
+
 	public void verifyNoAdsOnPage() throws Exception {
 		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
 		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
@@ -114,9 +127,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 		WebElement aicContainer = driver.findElement(By.cssSelector(aicSelector));
 
 		//Scroll to AIC container and wait for <div> to be present inside it
-		scrollToSelector(aicSelector);
+		if (!scrollToSelector(aicSelector)) {
+			PageObjectLogging.log(
+				"SelectorNotFound",
+				"Selector " + aicSelector + " not found on page",
+				false,
+				driver
+			);
+		}
 		waitForElementByElement(aicContainer.findElement(By.cssSelector("div")));
-
 		checkTagsPresent(aicContainer);
 	}
 
@@ -187,7 +206,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return selectorAll;
 	}
 
-	private void scrollToSelector(String selector) {
+	private Boolean scrollToSelector(String selector) {
 		if (driver.findElements(By.cssSelector((selector))).size() > 0) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			try {
@@ -200,16 +219,18 @@ public class AdsBaseObject extends WikiBasePageObject {
 			} catch (WebDriverException e) {
 				if (e.getMessage().contains(XSSContent.noJQueryError)) {
 					PageObjectLogging.log(
-						"JSError", "JQuery is not defined", true
+						"JSError", "JQuery is not defined", false
 					);
 				}
 			}
+			return true;
 		} else {
 			PageObjectLogging.log(
 				"SelectorNotFound",
 				"Selector " + selector + " not found on page",
-				false
+				true
 			);
+			return false;
 		}
 	}
 
@@ -245,6 +266,39 @@ public class AdsBaseObject extends WikiBasePageObject {
 				true,
 				driver
 			);
+		}
+	}
+
+	private void verifyNoLiftiumAds() throws Exception {
+		List <WebElement> adsElements = driver.findElements(
+			By.cssSelector(createSelectorAll())
+		);
+		if (adsElements.isEmpty()) {
+			PageObjectLogging.log(
+				"AdsNotFound",
+				"Ads not found",
+				true,
+				driver
+			);
+		} else {
+			for (WebElement element : adsElements) {
+				if (element.getAttribute("id").contains("liftium")) {
+					PageObjectLogging.log(
+						"LiftiumAdFound",
+						"Liftium ads found on page",
+						false,
+						driver
+					);
+					throw new Exception("Found element that was not expected!");
+				} else {
+					PageObjectLogging.log(
+						"LiftiumAdsNotFound",
+						"Liftium Ads not found",
+						true,
+						driver
+					);
+				}
+			}
 		}
 	}
 }

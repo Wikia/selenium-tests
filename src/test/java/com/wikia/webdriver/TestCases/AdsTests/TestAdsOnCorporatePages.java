@@ -42,7 +42,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_US() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="GB")
@@ -51,7 +51,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_GB() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="DE")
@@ -60,7 +60,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_DE() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="CA")
@@ -69,7 +69,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_CA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="AU")
@@ -78,7 +78,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_AU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="PL")
@@ -87,7 +87,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_PL() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="UA")
@@ -96,7 +96,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_UA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="IT")
@@ -105,7 +105,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_IT() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="RU")
@@ -114,7 +114,7 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_RU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
 	@GeoEdgeProxy(country="JP")
@@ -123,6 +123,6 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 	)
 	public void TestCorporatePage_JP() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
+		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 }

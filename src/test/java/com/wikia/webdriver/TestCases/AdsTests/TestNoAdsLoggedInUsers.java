@@ -1,10 +1,10 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import org.testng.annotations.Factory;
@@ -47,6 +47,7 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_001", "US"}
 	)
 	public void TestNoAdsForUsers_US() throws Exception {
+		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
