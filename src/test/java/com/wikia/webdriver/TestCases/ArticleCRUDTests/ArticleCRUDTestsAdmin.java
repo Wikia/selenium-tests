@@ -1,7 +1,6 @@
 package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.DataProvider.ArticleDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
