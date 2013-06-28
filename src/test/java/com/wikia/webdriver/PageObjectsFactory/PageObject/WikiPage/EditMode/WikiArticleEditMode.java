@@ -308,7 +308,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementClickableByElement(visualModeButton);
 		clickAndWait(visualModeButton);
 		waitForElementByElement(iFrame);
-		PageObjectLogging.log("ClickOnVisualButton", "Click on 'Visual' button", true, driver);
+		PageObjectLogging.log("ClickOnVisualButton", "Click on 'Visual' button", true);
 
 	}
 

@@ -1,17 +1,12 @@
 package com.wikia.webdriver.TestCases.CategoriesTests;
 
-import java.awt.PageAttributes;
-
-import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import org.testng.annotations.Test;
 
 public class CategoriesTestsAnonymous extends TestTemplate {
 
@@ -43,7 +38,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
 		article.openRandomArticleByUrl();
-		WikiArticleEditMode articleEdit = article.clickEditButton("");
+		WikiArticleEditMode articleEdit = article.clickEditButton();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
 		article = articleEdit.clickOnPublishButton();
@@ -69,7 +64,7 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName + 2);
 		articleEdit.clickOnPublishButton();
 		article.categories_verifyCategoryPresent(categoryName);
-		articleEdit = article.clickEditButton("");
+		articleEdit = article.clickEditButton();
 		articleEdit.categories_removeCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryRemovedEditMode(categoryName);
 		articleEdit.clickOnPublishButton();
