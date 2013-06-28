@@ -1,19 +1,20 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.net.URLEncoder;
+import java.util.List;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialCssPageObject extends SpecialPageObject {
 
@@ -46,15 +47,19 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		@FindBy(css = ".global-notification.confirm")
 		private WebElement notificationConfirm;
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=history\"]")
-		private WebElement historyButton;		
+		private WebElement historyButton;
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=delete\"]")
 		private WebElement deleteButton;
+		@FindBy(css = "#wikiDiff")
+		private WebElement conflictArea;
+		@FindBy(css = "td.diff-otitle")
+		private WebElement oRevisionTitle;
 		//@FindBy(css = ".css-editor .mw-warning-with-logexcerpt")
 		//private WebElement removedWarning;
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"Special:Undelete\"]")
 		private WebElement undeleteButton;
 		private By removedWarning = By.cssSelector(".css-editor .mw-warning-with-logexcerpt");
-		
+
 		public SpecialCssPageObject( WebDriver driver ) {
 			super(driver);
 		}
@@ -154,30 +159,30 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("changesModalAddedLine", "get added line content", true);
 			return addedLine;
 		}
-		
+
 		public void clickHistoryButton() {
 			clickAndWait(historyButton);
-			PageObjectLogging.log("historyButton", "click on history button", true);			
+			PageObjectLogging.log("historyButton", "click on history button", true);
 		}
-		
+
 		public void clickDeleteButton() {
 			clickAndWait(deleteButton);
 			verifyUrl("action=delete");
 			PageObjectLogging.log("deleteButton", "click on delete button", true);
 		}
-		
+
 		public void confirmDelete() {
 			clickArticleDeleteConfirmationButton(URLsContent.mediaWikiCss);
 		}
-		
+
 		public void verifyArticleIsRemoved() {
 			waitForElementByBy(removedWarning);
 		}
-		
+
 		public void verifyArticleIsNotRemoved() {
 			waitForElementNotPresent(removedWarning);
 		}
-		
+
 		public void clickUndeleteButton() {
 			clickAndWait(undeleteButton);
 			try {
@@ -185,10 +190,25 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			} catch (UnsupportedEncodingException e) {
 				// this should never happen
 			}
-			PageObjectLogging.log("undeleteButton", "click on undelete button", true);			
+			PageObjectLogging.log("undeleteButton", "click on undelete button", true);
 		}
-		
+
 		public void confirmUndelete() {
 			clickRestoreArticleButton();
+		}
+
+		public void verifyConflictArea() {
+			waitForElementByElement(cssPublishButton);
+			PageObjectLogging.log("verifyConflictArea", "verify that conflict area is present", true);
+		}
+
+		public void verifyLatestRevision() {
+			waitForElementByElement(oRevisionTitle);
+			waitForTextToBePresentInElementByElement(oRevisionTitle, "Latest revision");
+			PageObjectLogging.log("verifyLatestRevision", "verify that latest revision is shown", true);
+		}
+
+		public void navigateToHistoryPage() {
+			getUrl(Global.DOMAIN+"wiki/MediaWiki:Wikia.css?action=edit");
 		}
 }

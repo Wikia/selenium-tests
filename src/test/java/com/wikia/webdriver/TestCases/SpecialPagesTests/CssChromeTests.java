@@ -1,13 +1,13 @@
 package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -110,12 +110,12 @@ public class CssChromeTests extends TestTemplate {
 		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
 		wiki.verifyRevisionMarkedAsMinor();
 	}
-	
+
 	@Test(groups = {"cssChrome_007", "cssChrome", "AdminDashboard"})
 	public void cssChrome_007_verifyHistoryButtonAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);		
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickHistoryButton();
@@ -126,21 +126,21 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_008_verifyDeleteButtonAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);		
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
-		specialCss.verifyArticleIsNotRemoved();		
+		specialCss.verifyArticleIsNotRemoved();
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickDeleteButton();
 		specialCss.confirmDelete();
 	}
-	
-	@Test(groups = {"cssChrome_009", "cssChrome", "AdminDashboard"}, 
+
+	@Test(groups = {"cssChrome_009", "cssChrome", "AdminDashboard"},
 			dependsOnMethods={"cssChrome_008_verifyDeleteButtonAppearsAndWorks"})
 	public void cssChrome_009_verifyUndeleteButtonAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);		
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsRemoved();
@@ -149,9 +149,13 @@ public class CssChromeTests extends TestTemplate {
 		specialCss.confirmUndelete();
 		wiki.openArticle(URLsContent.specialCSS);
 		specialCss.verifyAceEditorPresence();
-		specialCss.verifyArticleIsNotRemoved();		
+		specialCss.verifyArticleIsNotRemoved();
 	}
 
+	/**
+	 * https://wikia-inc.atlassian.net/browse/DAR-731 story description
+	 * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
+	 */
 	@Test(groups = {"cssChrome_010", "cssChrome", "AdminDashboard"})
 	public void cssChrome_010_verifyOnLeaveMessageWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
@@ -160,12 +164,13 @@ public class CssChromeTests extends TestTemplate {
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.sendCssText(CssEditorContent.validCss);
-		specialCss.clickPublishButtonDropdown();
-		specialCss.clickHistoryButton();
+//		specialCss.clickPublishButtonDropdown();
+//		specialCss.clickHistoryButton();
+		specialCss.navigateToHistoryPage();
 		WebDriverWait wait = new WebDriverWait(driver, 2);
 		wait.until(ExpectedConditions.alertIsPresent());
 		Alert alert = driver.switchTo().alert();
 		alert.accept();
 	}
-	
+
 }
