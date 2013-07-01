@@ -73,7 +73,7 @@ public class Top_10_list extends WikiArticlePageObject{
 	
 	public Top_10_list_EditMode clickEditAsLoggedIn() {
 		waitForElementByElement(editButton);
-		this.clickEditButton("whatever");
+		this.clickEditButton();
 		executeScript("$('#ca-edit').click()");
 		PageObjectLogging.log("clickEditAsLoggedIn", "click on edit button", true, driver);
 		return new Top_10_list_EditMode(driver);			

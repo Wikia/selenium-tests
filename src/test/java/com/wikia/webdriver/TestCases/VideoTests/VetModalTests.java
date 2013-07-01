@@ -5,12 +5,10 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
@@ -104,7 +102,7 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyLeftVideoInEditMode();
 		edit.clickOnPublishButton();
 		article.verifyVideoOnTheLeftOnAritcle();
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton();
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyAlignmentOptionIsSelected(1);
 		vetOptions.clickUpdateVideo();
@@ -200,7 +198,7 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyRightVideoInEditMode();
 		edit.clickOnPublishButton();
 		article.verifyVideoOnTheRightOnAritcle();
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton();
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyAlignmentOptionIsSelected(3);
 		vetOptions.clickUpdateVideo();
@@ -296,7 +294,7 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyCenterVideoInEditMode();
 		edit.clickOnPublishButton();
 		article.verifyVideoOnTheCenterOnArticle();
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton();
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyAlignmentOptionIsSelected(2);
 		vetOptions.clickUpdateVideo();
@@ -390,7 +388,7 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyVideoWidthInEditMode();
 		edit.clickOnPublishButton();
 		article.verifyVideoWidthOnAritcle("250px");
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton();
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyVideoWidthInVETOptionsModal();
 		vetOptions.clickUpdateVideo();
@@ -483,7 +481,7 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyCaptionInEditMode();
 		edit.clickOnPublishButton();
 		article.verifyVideoCaptionOnAritcle();
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton();
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyCaptionInVETModal(PageContent.caption);
 		vetOptions.clickUpdateVideo();
@@ -515,7 +513,7 @@ public class VetModalTests extends TestTemplate {
 		edit.verifyNoVideoCaptionInEditMode();
 		edit.clickOnPublishButton();
 		article.verifyNoVideoCaptionOnAritcle();
-		edit = article.clickEditButton(pageName);
+		edit = article.clickEditButton();
 		edit.clickModifyButtonVideo();
 		vetOptions.verifyNoCaptionInVETModal();
 		vetOptions.clickUpdateVideo();

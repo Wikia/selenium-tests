@@ -72,7 +72,7 @@ public class ArticleCRUDTestsAnonymous extends TestTemplate{
 		edit.clickOnPublishButton();
 		wiki.verifyPageTitle(wiki.getPageName());
 		wiki.verifyArticleText(PageContent.articleText);
-		wiki.clickEditButton(wiki.getPageName());
+		wiki.clickEditButton();
 		edit.deleteArticleContent();
 		edit.typeInContent(PageContent.articleTextEdit);
 		edit.clickOnPublishButton();

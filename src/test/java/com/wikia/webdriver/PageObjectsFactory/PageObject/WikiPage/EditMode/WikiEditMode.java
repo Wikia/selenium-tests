@@ -1,13 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 /**
  * 
@@ -16,31 +15,27 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
  */
 public class WikiEditMode extends WikiBasePageObject{
 
-		
 	public WikiEditMode(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		}
-	
-	@FindBy(css="input.control-button")
+
+	@FindBy(css="#wpSave")
 	private WebElement publishButtonGeneral;
-	
+
 	/**
 	 * Click  on Publish button
 	 *  
 	 * @author Michal Nowierski
 	 */
 	public WikiArticlePageObject clickOnPublishButton() {
-		mouseOver("#GlobalNavigation li:nth(1)");
-		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-		jQueryClick("input.control-button");
+		publishButtonGeneral.click();
 		waitForElementByElement(editButton);
-		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
+		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
 		return new WikiArticlePageObject(driver);
 	}
-	
 
 	/**
 	 * Click  on Publish button
