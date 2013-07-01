@@ -13,6 +13,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -101,12 +102,20 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	public WikiArticlePageObject(WebDriver driver) {
 		super(driver);
-		this.pageName = wikiFirstHeader.getText();
+		setPageName();
 		PageFactory.initElements(driver, this);
 	}
 
 	public String getPageName(){
 		return this.pageName;
+	}
+
+	private void setPageName() {
+		try {
+			pageName = wikiFirstHeader.getText();
+		} catch (NoSuchElementException ex) {
+			pageName = "";
+		}
 	}
 
 	public WikiArticleEditMode createNewArticle(String pageName,
@@ -224,14 +233,15 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByXPath("//p[contains(text(), '"+reply+"')]");
 		PageObjectLogging.log("writeReply", "reply comment written", true);
 	}
-	
-	
+
 	public void replyComment(String comment, String reply)
 	{
 		refreshPage();
 		clickReplyCommentButton(comment);
 		writeReply(reply);
-		PageObjectLogging.log("reply comment", "reply comment written and checked", true, driver);
+		PageObjectLogging.log(
+			"reply comment", "reply comment written and checked", true, driver
+		);
 	}
 
 	private void clickDeleteCommentButton()
@@ -288,8 +298,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
             clickAndWait(editButton);
             PageObjectLogging.log(
                 "edit",
-                "",
-                true, driver
+                "Edit article",
+                true
             );
             return new WikiArticleEditMode(driver);
 	}
@@ -337,11 +347,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @param Object Object = {gallery, slideshow}
 	 * 	 */
 	public void verifyObjectOnThePage(String Object) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.WikiaArticle div[id*='"+Object+"']")));
-		PageObjectLogging.log("VerifyTheObjetOnThePage", "Verify that the "+Object+" appears on the page", true, driver);
-		
+		waitForElementByBy(By.cssSelector("#WikiaArticle div[id*='"+ Object +"']"));
+		PageObjectLogging.log(
+			"VerifyTheObjetOnThePage",
+			"Verify that the " + Object + " appears on the page",
+			true, driver
+		);
 	}
-	
+
 	/**
 	 * Verify that the Video appears on the page
 	 *  

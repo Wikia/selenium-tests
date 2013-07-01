@@ -46,6 +46,8 @@ public class ArticleCRUDTestsAdmin extends TestTemplate {
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
+		articleName += wiki.getTimeStamp();
+
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		WikiArticleEditMode edit = article.createNewArticle(articleName, 1);

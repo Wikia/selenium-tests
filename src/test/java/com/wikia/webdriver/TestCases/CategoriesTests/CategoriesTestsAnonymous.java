@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.CategoriesTests;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
@@ -11,22 +12,21 @@ import org.testng.annotations.Test;
 public class CategoriesTestsAnonymous extends TestTemplate {
 
 	String categoryName;
-	
+
 	/*
 	 * TestCase001 Open random wiki page as anonymous user add category Verify
 	 * category is added
 	 */
-	@Test(groups = { "CategoriesTestsAnonymous_001", "CategoriesTestsAnonymous" })
+	@Test(groups = {"CategoriesTestsAnonymous_001", "CategoriesTestsAnonymous"})
 	public void CategoriesTestsAnonymous_001_addCategoryNotEditMode() {
-
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
-		article.openRandomArticleByUrl();
 		article.categories_clickAddCategory();
 		article.categories_typeCategoryName(categoryName);
 		article.categories_clickOnSave();
 		article.categories_verifyCategoryPresent(categoryName);
-
 	}
 
 	/*
@@ -35,9 +35,10 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 */
 	@Test(groups = { "CategoriesTestsAnonymous_002", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_002_addCategoryEditMode() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		WikiBasePageObject wiki =  new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
-		article.openRandomArticleByUrl();
 		WikiArticleEditMode articleEdit = article.clickEditButton();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
@@ -51,10 +52,11 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 */
 	@Test(groups = { "CategoriesTestsAnonymous_003", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_003_removeCategoryEditMode() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
-		article.openWikiPage();
-		WikiArticleEditMode articleEdit = article.createNewDefaultArticle();
+		WikiArticleEditMode articleEdit = article.edit();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		// adding the below category will save 1 minute of time execution time.
 		// Reason: it assures that list of categories will not be empty, what
@@ -69,7 +71,6 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 		articleEdit.categories_verifyCategoryRemovedEditMode(categoryName);
 		articleEdit.clickOnPublishButton();
 		article.categories_verifyCategoryRemoved(categoryName);
-
 	}
 
 	/*
@@ -78,10 +79,11 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 */
 	@Test(groups = { "CategoriesTestsAnonymous_004", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_004_verifyCategoryPage() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
-		article.openRandomArticleByUrl();
-		String articleName = article.getArticleNameFromURL();
+		String articleName = article.getPageName();
 		article.categories_clickAddCategory();
 		article.categories_typeCategoryName(categoryName);
 		article.categories_clickOnSave();
@@ -92,32 +94,16 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	}
 
 	/*
-	 * TestCase005 Open random wiki page as anonymous user add category from
-	 * suggestions Verify category is added
-	 */
-//	@Test(groups = { "CategoriesTestsAnonymous_005", "CategoriesTestsAnonymous" })
-	public void CategoriesTestsAnonymous_005_addSuggestedCategoryEditMode() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openRandomArticleByUrl();
-		WikiArticleEditMode articleEdit = article.navigateToEditPage();
-		// remmemeber name of added category
-		categoryName = articleEdit
-				.categories_addSuggestedCategoryEditMode("t");
-		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
-		article = articleEdit.clickOnPublishButton();
-		article.categories_verifyCategoryPresent(categoryName);
-	}
-
-	/*
 	 * TestCase006 Open random wiki page as anonymous user edit it and add
 	 * category from source mode Verify category is properly added in visual
 	 */
 	@Test(groups = { "CategoriesTestsAnonymous_006", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_006_addCategorySourceModeTransitionToVisual() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
-		article.openRandomArticleByUrl();
-		WikiArticleEditMode articleEdit = article.navigateToEditPage();
+		WikiArticleEditMode articleEdit = article.edit();
 		articleEdit.clickOnSourceButton();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);
@@ -133,9 +119,10 @@ public class CategoriesTestsAnonymous extends TestTemplate {
 	 */
 	@Test(groups = { "CategoriesTestsAnonymous_007", "CategoriesTestsAnonymous" })
 	public void CategoriesTestsAnonymous_007_addCategoryVisualModeTransitionToSource() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
-		article.openRandomArticleByUrl();
 		WikiArticleEditMode articleEdit = article.navigateToEditPage();
 		articleEdit.categories_addCategoryEditMode(categoryName);
 		articleEdit.categories_verifyCategoryAddedEditMode(categoryName);

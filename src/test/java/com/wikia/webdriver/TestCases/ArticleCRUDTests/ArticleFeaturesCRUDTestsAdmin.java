@@ -16,23 +16,22 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import org.testng.annotations.Test;
 
 public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 {
-	
-	@Test(groups={"ArticleFeaturesCRUDAdmin_001", "ArticleFeaturesCRUDAdmin", "Smoke"}) 
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 007  Adding galleries to an article in edit mode 
+
+	@Test(groups={"ArticleFeaturesCRUDAdmin_001", "ArticleFeaturesCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_001_AddingGallery()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		GalleryBuilderComponentObject galleryBuiler = edit.clickGalleryButton();
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -61,17 +60,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		galleryBuiler.clickFinish();
 		article.verifyObjectOnThePage("gallery");
 	}
-	
-	@Test(groups={"ArticleFeaturesCRUDAdmin_002", "ArticleFeaturesCRUDAdmin"}) 
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 007  Adding galleries to an article in edit mode
+
+	@Test(groups={"ArticleFeaturesCRUDAdmin_002", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_002_ModifyGallery()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		GalleryBuilderComponentObject galleryBuiler = edit.clickGalleryButton();
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -90,7 +87,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article.verifyObjectOnThePage("gallery");
 		article.verifyGalleryPosion("center");
 		article.edit();
-		galleryBuiler = edit.clickModifyButtonGallery(); 
+		galleryBuiler = edit.clickModifyButtonGallery();
 		galleryAddPhoto = galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
@@ -104,17 +101,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPublishButton();
 		article.verifyGalleryPosion("right");
 	}
-	
-	@Test(groups={"ArticleFeaturesCRUDAdmin_003", "ArticleFeaturesCRUDAdmin"}) 
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 007  Adding galleries to an article in edit mode
+
+	@Test(groups={"ArticleFeaturesCRUDAdmin_003", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_003_DeleteGallery()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		GalleryBuilderComponentObject galleryBuiler = edit.clickGalleryButton();
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -139,17 +134,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPublishButton();
 		article.verifyGalleryNotOnThePage();
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_004", "ArticleFeaturesCRUDAdmin", "Smoke"})
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 008 Adding slideshows to an article in edit mode
 	public void ArticleCRUDAdmin_004_AddingSlideshow()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		SlideshowBuilderComponentObject slideshowBuilder = edit.clickSlideshowButton();
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
@@ -172,17 +165,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		slideshowBuilder.clickFinish();
 		article.verifyObjectOnThePage("slideshow");
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_009", "ArticleFeaturesCRUDAdmin"})
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 008 Adding slideshows to an article in edit mode
 	public void ArticleCRUDAdmin_005_ModifySlideshow()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		SlideshowBuilderComponentObject slideshowBuilder = edit.clickSlideshowButton();
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
@@ -210,15 +201,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article.verifyObjectOnThePage("slideshow");
 		article.verifySlideshowPosition("right");
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_006", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_006_DeleteSlideshow()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		SlideshowBuilderComponentObject slideshowBuilder = edit.clickSlideshowButton();
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
@@ -240,19 +231,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article = edit.clickOnPublishButton();
 		article.verifySlideshowNotOnThePage();
 	}
-	
-	
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_007", "ArticleFeaturesCRUDAdmin", "Smoke"})
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 009 Adding sliders to an article in edit mode
 	public void ArticleCRUDAdmin_007_AddingSlider()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		SliderBuilderComponentObject sliderBuilder = edit.clickSliderButton();
 		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
@@ -268,18 +255,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article.verifyObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("vertical");
 	}
-	
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_008", "ArticleFeaturesCRUDAdmin"})
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 009 Adding sliders to an article in edit mode
 	public void ArticleCRUDAdmin_008_ModifySlider()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		SliderBuilderComponentObject sliderBuilder = edit.clickSliderButton();
 		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
@@ -290,7 +274,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();
-		edit.verifyTheObjectOnThePreview("slider");//publish 
+		edit.verifyTheObjectOnThePreview("slider");
 		edit.clickOnPublishButtonInPreviewMode();
 		article.verifyObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("vertical");
@@ -305,17 +289,17 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyObjectInEditMode("gallery-slider");
 		article = edit.clickOnPublishButton();
 		article.verifyObjectOnThePage("slider");
-		article.verifySliderThumbnailsPosition("horizontal");	
+		article.verifySliderThumbnailsPosition("horizontal");
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_009", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_009_DeleteSlider()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		SliderBuilderComponentObject sliderBuilder = edit.clickSliderButton();
 		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
@@ -326,7 +310,7 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		sliderBuilder.clickFinish();
 		edit.verifyObjectInEditMode("gallery-slider");
 		edit.clickOnPreviewButton();
-		edit.verifyTheObjectOnThePreview("slider");//publish 
+		edit.verifyTheObjectOnThePreview("slider");
 		edit.clickOnPublishButtonInPreviewMode();
 		article.verifyObjectOnThePage("slider");
 		article.verifySliderThumbnailsPosition("vertical");
@@ -337,17 +321,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPublishButton();
 		article.verifySlideshowNotOnThePage();
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_010", "ArticleFeaturesCRUDAdmin", "Smoke"})
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving	
-	// Test Case 010 Adding videos to an article in edit mode
 	public void ArticleCRUDAdmin_010_AddingVideo()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -358,16 +340,16 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheVideoOnThePreview();
 		edit.clickOnPublishButtonInPreviewMode();
 		article.verifyVideoOnThePage();
-	}	
-	
+	}
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_011", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_011_ModifyVideo()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -386,15 +368,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article = edit.clickOnPublishButton();
 		article.verifyVideoOnThePage();
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_012", "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_012_DeleteVideo()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		VetAddVideoComponentObject vetAddVideo = edit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -412,17 +394,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		article = edit.clickOnPublishButton();
 		article.verifyVideoNotOnThePage();
 	}
-	
-	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDAdmin", "Smoke"}) 
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
-	// Test Case 004 Adding images to an article in edit mode
+
+	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDAdmin", "Smoke"})
 	public void ArticleCRUDAdmin_013_AddingImage()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
@@ -435,17 +415,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPublishButtonInPreviewMode();
 		article.verifyImageOnThePage();
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_014", "ArticleFeaturesCRUDAdmin"})
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
-	// Test Case 005 Modifying images in an article in edit mode
 	public void ArticleCRUDAdmin_014_ModifyImage()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
@@ -462,17 +440,15 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.clickOnPublishButtonInPreviewMode();
 		article.verifyImageOnThePage();
 	}
-	
+
 	@Test(groups={"ArticleFeaturesCRUDAdmin_015", "ArticleFeaturesCRUDAdmin"})
-//	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
-	// Test Case 005 Modifying images in an article in edit mode
 	public void ArticleCRUDAdmin_015_DeleteImage()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
@@ -487,45 +463,45 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTheImageNotOnTheArticleEditMode();
 		article = edit.clickOnPublishButton();
 		article.verifyImageNotOnThePage();
-	}	
-	
+	}
+
 //	@Test(groups={"ArticleFeaturesCRUDAdmin_016", "ArticleFeaturesCRUDAdmin"})//, "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_016_AddTable()
 	{
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		edit.clickOnAddTableButton();
 		edit.verifyTableModal();
 		edit.clickOKonTableModal();
 		edit.verifyTableAppears();
 		edit.clickOnPublishButton();
-		article.VerifyTheTableOnThePage();	
-	}	
-	
+		article.VerifyTheTableOnThePage();
+	}
+
 //	@Test(groups={"ArticleFeaturesCRUDAdmin_017", "ArticleFeaturesCRUDAdmin"})//, "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_017_EditTable(){
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		edit.clickOnAddTableButton();
 		edit.verifyTableModal();
 		edit.clickOKonTableModal();
 		edit.verifyTableAppears();
-		
+
 		edit.tablePupulateCell(1,1, "first");
 		edit.tablePupulateCell(1,2, "second");
 		edit.tablePupulateCell(2,1, "third");
 		edit.tablePupulateCell(2,2, "fourth");
 		edit.tablePupulateCell(3,1, "fifth");
 		edit.tablePupulateCell(3,2, "sixth");
-		
+
 		edit.tableCheckCellContent(1,1, "first");
 		edit.tableCheckCellContent(1,2, "second");
 		edit.tableCheckCellContent(2,1, "third");
@@ -537,16 +513,16 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.tableChooseFromContextMenu(3,2);
 		edit.tableCheckTableRowsCount(4);
 		edit.clickOnPublishButton();
-		article.VerifyTheTableOnThePage();	
-		}
+		article.VerifyTheTableOnThePage();
+	}
 
-//		@Test(groups={"ArticleFeaturesCRUDAdmin_018", "ArticleFeaturesCRUDAdmin"})//, "ArticleFeaturesCRUDAdmin"})
+//	@Test(groups={"ArticleFeaturesCRUDAdmin_018", "ArticleFeaturesCRUDAdmin"})//, "ArticleFeaturesCRUDAdmin"})
 	public void ArticleCRUDAdmin_018_RemoveTable(){	
-		CommonFunctions.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
-		article.openWikiPage();
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.edit();
 		edit.deleteArticleContent();
 		edit.clickOnAddTableButton();
 		edit.verifyTableModal();
@@ -554,9 +530,6 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.verifyTableAppears();
 		edit.tableRightClickOnCell(2, 2);
 		edit.tableChooseFromContextMenu(5,0);
-		edit.clickOnPublishButton();	
-		}
-		
-		
-		
+		edit.clickOnPublishButton();
+	}
 }
