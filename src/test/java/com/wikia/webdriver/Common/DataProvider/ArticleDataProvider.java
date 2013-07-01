@@ -2,10 +2,6 @@ package com.wikia.webdriver.Common.DataProvider;
 
 import org.testng.annotations.DataProvider;
 
-/**
- *
- * @author Bogna 'bognix' Knychała
- */
 public class ArticleDataProvider {
 
 	@DataProvider

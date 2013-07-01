@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -140,7 +141,7 @@ public class LightboxPageObject extends BasePageObject{
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForStringInURL("facebook.com");
+		waitForStringInURL(URLsContent.facebookDomain);
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyFacebookWindow", "Verify that the FB window URL is correct", true, driver);
@@ -150,7 +151,7 @@ public class LightboxPageObject extends BasePageObject{
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForStringInURL("twitter.com");
+		waitForStringInURL(URLsContent.twitterDomain);
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyTwitterWindow", "Verify that the Twitter window URL is correct", true, driver);
@@ -160,7 +161,7 @@ public class LightboxPageObject extends BasePageObject{
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForStringInURL("stumbleupon.com");
+		waitForStringInURL(URLsContent.stumpleUponDomain);
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyStumbleUponWindow", "Verify that the Stumbleupon window URL is correct", true, driver);
@@ -170,7 +171,7 @@ public class LightboxPageObject extends BasePageObject{
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForStringInURL("reddit.com");
+		waitForStringInURL(URLsContent.redditDomain);
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyRedditWindow", "Verify that the Reddit window URL is correct", true, driver);
@@ -180,7 +181,7 @@ public class LightboxPageObject extends BasePageObject{
 		CommonFunctions.waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForStringInURL("accounts.google.com");
+		waitForStringInURL(URLsContent.googleDomain);
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyPlusOneWindow", "Verify that the Plus One window URL is correct", true, driver);

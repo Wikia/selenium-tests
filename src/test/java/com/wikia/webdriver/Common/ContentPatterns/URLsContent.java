@@ -87,4 +87,11 @@ public class URLsContent {
     public static String articleName002 = "TestVid002";
     public static String articleName003 = "TestVid003";
     public static String articleName004 = "TestVid004";
+
+	//External sites
+	public static String facebookDomain = "facebook.com";
+	public static String twitterDomain = "twitter.com";
+	public static String googleDomain = "accounts.google.com";
+	public static String redditDomain = "reddit.com";
+	public static String stumpleUponDomain = "stumbleupon.com";
 }
