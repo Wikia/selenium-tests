@@ -1,17 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -22,6 +10,15 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class WikiArticlePageObject extends WikiBasePageObject {
 	
@@ -65,6 +62,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement videoDetailsButton;
 	@FindBy(css="img.thumbimage")
 	private WebElement thumbnailImage;
+	@FindBy(css="#mw-content-text img.thumbimage")
+	private WebElement thumbnailImageArticle;
+	@FindBy(css="#mw-content-text")
+	private WebElement articleContent;
 	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement VideoModalAddButton;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
@@ -96,18 +97,18 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
-	
 	private String pageName;
 
 	public WikiArticlePageObject(WebDriver driver) {
 		super(driver);
+		this.pageName = wikiFirstHeader.getText();
 		PageFactory.initElements(driver, this);
 	}
 
 	public String getPageName(){
 		return this.pageName;
 	}
-	
+
 	public WikiArticleEditMode createNewArticle(String pageName,
 			int layoutNumber) {
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
@@ -116,29 +117,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
 				+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver);
-	} 
-	
+	}
+
 	public WikiArticleEditMode createNewDefaultArticle(){
 		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
 		return createNewArticle(this.pageName, 1);
 	}
-	
-	private void navigateToRandomPage() {
-		try {
-			getUrl(Global.DOMAIN + "wiki/Special:Random");
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logOut",
-					"page loads for more than 30 seconds", true);
-		}
-	}
-	
-	public void openRandomArticleByUrl() {
-		navigateToRandomPage();
-		waitForElementByElement(searchButton);
-		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
-	}
-	
+
 	public WikiArticlePageObject openRandomArticle() {
 		clickAndWait(randomPageButton);
 		waitForElementByElement(searchButton);
@@ -278,19 +263,19 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(replyCommentButton);
 		clickEditCommentButton();
 	}
-	
-	
+
 	public void verifyPageTitle(String title)
 	{
 		title = title.replace("_", " ");
 		waitForElementByXPath("//h1[contains(text(), '"+title+"')]");
 		PageObjectLogging.log("verifyPageTitle", "page title is verified", true, driver);
 	}
-	
+
 	public void verifyArticleText(String content)
 	{
-		waitForElementByXPath("//div[@id='mw-content-text']//*[contains(text(), '"+content+"')]");
-		PageObjectLogging.log("verifyArticleText", "article text is verified", true, driver);
+		waitForElementByElement(articleContent);
+		waitForTextToBePresentInElementByElement(articleContent, content);
+		PageObjectLogging.log("verifyArticleText", "article text is verified", true);
 	}
 
 	/**
@@ -607,12 +592,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public LightboxPageObject clickThumbnailImage() {
-		waitForElementByElement(thumbnailImage);
-		thumbnailImage.click();
-		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true, driver);
+		waitForElementByElement(thumbnailImageArticle);
+		thumbnailImageArticle.click();
+		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
 		return new LightboxPageObject(driver);
 	}
-	
+
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
 		waitForElementByElement(videoAddPlaceholder);
 		clickAndWait(videoAddPlaceholder);
@@ -641,7 +626,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		CommonFunctions.scrollToElement(spotlightFooter);
 		waitForElementByElement(spotlightImage1);
 		waitForElementByElement(spotlightImage2);
-		waitForElementByElement(spotlightImage3);		
+		waitForElementByElement(spotlightImage3);
 		PageObjectLogging.log("verifySpotlightsPresence", "all 3 spotlights are present", true, driver);
 	}
 	
@@ -652,5 +637,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public SlideshowBuilderComponentObject clickAddPhotoToSlideshow(){
 		addPhotoToSlideShowButton.click();
 		return new SlideshowBuilderComponentObject(driver);
+	}
+
+	/**
+	 * Get article content from the beggining to the "Discussions" part
+	 */
+	public String getArticleContent() {
+		return articleContent.getText().split("Discussions")[0];
 	}
 }

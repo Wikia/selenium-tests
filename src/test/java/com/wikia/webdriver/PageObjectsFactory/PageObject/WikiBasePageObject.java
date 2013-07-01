@@ -93,7 +93,7 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css = ".UserLoginModal input[name='password']")
 	protected WebElement modalPasswordInput;
 	@FindBy (css = "#WikiaPageHeader h1")
-	private WebElement wikiFirstHeader;
+	protected WebElement wikiFirstHeader;
 	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
 	private WebElement specialUserLoginLink;
 	@FindBy(css = ".UserLoginModal input[name='username']")
@@ -106,7 +106,7 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement wikiaSearch_searchForm;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
-	@FindBy(css = "a#ca-edit")
+	@FindBy(css = "#WikiaPageHeader a[data-id='edit']")
 	protected WebElement editButton;
 
 	private By galleryDialogPhotosList = By
@@ -244,19 +244,13 @@ public class WikiBasePageObject extends BasePageObject {
 	public void clickEditDropDown() {
 		waitForElementByElement(editDropDown);
 		clickAndWait(editDropDown);
-		PageObjectLogging.log("clickEditDropDown", "edit drop-down clicked",
-				true, driver);
+		PageObjectLogging.log (
+			"clickEditDropDown", "edit drop-down clicked",
+			true, driver
+		);
 	}
 
-	public void clickEditButton() {
-		mouseOver("#GlobalNavigation li:nth(1)");
-		mouseRelease("#GlobalNavigation li:nth(1)");
-		waitForElementByElement(editButton);
-		waitForElementClickableByElement(editButton);
-		clickAndWait(editButton);
-	}
-
-	public WikiArticleEditMode clickEditButton(String pageName) {
+	public WikiArticleEditMode clickEditButton() {
 		//two lines below prevent hubs drop-down on IE9
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
@@ -440,6 +434,24 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("openTop10List", topTenListName
 				+ " opened", true);
 		return new Top_10_list(driver);
+	}
+
+	public WikiArticlePageObject openRandomArticleByUrl() {
+		try {
+			getUrl(Global.DOMAIN + URLsContent.specialRandom);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log(
+				"Loading page",
+				"Page loads for more than 30 seconds", false
+			);
+		}
+		waitForElementByElement(editDropDown);
+		PageObjectLogging.log(
+			"openRandomArticle",
+			"Random article opened",
+			true
+		);
+		return new WikiArticlePageObject(driver);
 	}
 
 	public WikiCategoryPageObject clickOnCategory(String categoryName) {

@@ -37,6 +37,7 @@ public class URLsContent {
 	public static final String specialPreferences = "wiki/Special:Preferences";
     public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	public static final String specialCSS = "Special:CSS";
+	public static final String specialRandom = "wiki/Special:Random";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
@@ -86,4 +87,11 @@ public class URLsContent {
     public static String articleName002 = "TestVid002";
     public static String articleName003 = "TestVid003";
     public static String articleName004 = "TestVid004";
+
+	//External sites
+	public static String facebookDomain = "facebook.com";
+	public static String twitterDomain = "twitter.com";
+	public static String googleDomain = "accounts.google.com";
+	public static String redditDomain = "reddit.com";
+	public static String stumpleUponDomain = "stumbleupon.com";
 }
