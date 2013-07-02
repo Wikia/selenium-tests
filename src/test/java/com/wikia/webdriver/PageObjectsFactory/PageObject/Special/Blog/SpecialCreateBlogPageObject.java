@@ -33,8 +33,10 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		waitForElementByElement(blogTitleInput);
 		waitForElementClickableByElement(blogTitleInput);
 		blogTitleInput.sendKeys(blogPostTitle);
-		PageObjectLogging.log("typeBlogPostTitle", "type title to blog post: <b>"+blogPostTitle+"</b>", true, driver);		
-		
+		PageObjectLogging.log(
+			"typeBlogPostTitle",
+			"type title to blog post: <b>"+blogPostTitle+"</b>", true
+		);
 	}
 
 	/**
@@ -43,19 +45,16 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 	public void clickOk() {
 		waitForElementByElement(okButton);
 		waitForElementClickableByElement(okButton);
-		clickAndWait(okButton);
-		PageObjectLogging.log("clickOk", "click OK button", true, driver);		
+		okButton.click();
+		PageObjectLogging.log("clickOk", "click OK button", true);
 	}
-	
-	public BlogPageObject clickOnPublishButton() {
-		mouseOver("#GlobalNavigation li:nth(1)");
-		mouseRelease("#GlobalNavigation li:nth(1)");
+
+	public BlogPageObject clickOnPublishBlogPostButton() {
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-//		clickAndWait(publishButtonGeneral);
-		jQueryClick("input.control-button");
+		publishButtonGeneral.click();
 		waitForElementByElement(editButton);
-		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
+		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
 		return new BlogPageObject(driver);
 	}
 	

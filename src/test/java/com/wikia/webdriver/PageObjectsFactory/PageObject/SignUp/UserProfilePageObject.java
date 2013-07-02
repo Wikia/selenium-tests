@@ -32,7 +32,7 @@ public class UserProfilePageObject extends BasePageObject{
 	}
 
 	public UserProfilePageObject navigateToProfilePage(String userName) {
-		driver.navigate().to(Global.DOMAIN + "wiki/User:" + userName);
+		driver.get(Global.DOMAIN + "wiki/User:" + userName);
 		PageObjectLogging.log("UserProfilePageObject ",
 				"navigate to username page: " + Global.DOMAIN + "wiki/User:"
 						+ userName, true, driver);
@@ -101,9 +101,10 @@ public class UserProfilePageObject extends BasePageObject{
 	public void clickOnBlogTab() {
 		waitForElementByElement(blogTab);
 		waitForElementClickableByElement(blogTab);
-		clickAndWait(blogTab);
-		PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true, driver);		
+		blogTab.click();
+		PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
 	}
+
 	/**
 	 * @author Michal Nowierski
 	 * @return 

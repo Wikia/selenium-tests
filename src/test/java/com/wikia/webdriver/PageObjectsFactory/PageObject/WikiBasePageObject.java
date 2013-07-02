@@ -106,8 +106,10 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement wikiaSearch_searchForm;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
-	@FindBy(css = "#WikiaPageHeader a[data-id='edit']")
+	@FindBy(css = "#WikiaMainContent a[data-id='edit']")
 	protected WebElement editButton;
+	@FindBy(css=".msg")
+	protected WebElement userMessage;
 
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
@@ -168,6 +170,21 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUploadPageObject openSpecialUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);
+	}
+
+	/**
+	 * Verify that the Object appears on the page
+	 *  
+	 * @author Michal Nowierski
+	 * @param Object Object = {gallery, slideshow}
+	 * 	 */
+	public void verifyObjectOnThePage(String Object) {
+		waitForElementByBy(By.cssSelector("#WikiaArticle div[id*='"+ Object +"']"));
+		PageObjectLogging.log(
+			"VerifyTheObjetOnThePage",
+			"Verify that the " + Object + " appears on the page",
+			true, driver
+		);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
@@ -307,10 +324,8 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(deleteCommentReasonField);
 		deleteCommentReasonField.clear();
 		deleteCommentReasonField.sendKeys("QAReason");
-		clickAndWait(deleteConfirmationButton);
+		deleteConfirmationButton.click();
 		String temp = atricleName.replace("_", " ");
-		waitForElementByXPath("//div[@class='msg' and contains(text(), '"
-				+ temp + "\" has been deleted.')]");
 	}
 
 	public void deleteArticle(String atricleName) {
@@ -367,22 +382,24 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private void clickUndeleteArticle() {
 		waitForElementByElement(undeleteButton);
-		// jQuery didn't work here. The below workaround stimulates clicking on
-		// 'undelete' button
 		String href = undeleteButton.getAttribute("href");
 		driver.navigate().to(href);
-		// clickAndWait(undeleteButton);
 		waitForElementByElement(restoreButton);
-		PageObjectLogging.log("clickUndeleteArticle",
-				"undelete article button clicked", true, driver);
+		PageObjectLogging.log(
+			"clickUndeleteArticle",
+				"undelete article button clicked", true
+		);
 	}
 
 	private void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
 		clickAndWait(restoreButton);
-		waitForElementByXPath("//div[@class='msg' and contains(text(), 'This page has been restored.')]");
-		PageObjectLogging.log("clickUndeleteArticle",
-				"undelete article button clicked", true, driver);
+		waitForElementByElement(userMessage);
+		PageObjectLogging.log(
+			"clickUndeleteArticle",
+			"undelete article button clicked",
+			true, driver
+		);
 	}
 
 	public void undeleteArticle() {
@@ -451,7 +468,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"Random article opened",
 			true
 		);
-		return new WikiArticlePageObject(driver);
+		return new WikiArticlePageObject(driver, wikiFirstHeader.getText());
 	}
 
 	public WikiCategoryPageObject clickOnCategory(String categoryName) {

@@ -387,14 +387,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(visualModeIFrame);
 		driver.switchTo().frame(visualModeIFrame);
 		waitForElementByElement(bodyContent);
-		if (Global.BROWSER.equals("FF"))
-		{
-			((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + content + "'");
-		}
-		else
-		{
-			bodyContent.sendKeys(content);
-		}
+		bodyContent.sendKeys(content);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}

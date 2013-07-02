@@ -62,7 +62,7 @@ public class Following extends TestTemplate{
 		createBlogPage.typeBlogPostTitle(blogPostTitle);
 		createBlogPage.clickOk();
 		createBlogPage.typeInContent(PageContent.blogContent);
-		BlogPageObject blogPage = createBlogPage.clickOnPublishButton();
+		BlogPageObject blogPage = createBlogPage.clickOnPublishBlogPostButton();
 		blogPage.verifyArticleText(PageContent.blogContent);
 		blogPage.verifyPageTitle(blogPostTitle);
 		blogPage.verifyUsernameFieldPresent(Properties.userName);

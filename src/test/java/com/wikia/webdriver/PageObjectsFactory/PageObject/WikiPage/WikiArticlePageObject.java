@@ -19,12 +19,11 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class WikiArticlePageObject extends WikiBasePageObject {
-	
+
 	protected String articlename;
-	
+
 	@FindBy(css="div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
 	@FindBy(css="section.RelatedVideosModule")
@@ -102,20 +101,16 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	public WikiArticlePageObject(WebDriver driver) {
 		super(driver);
-		setPageName();
 		PageFactory.initElements(driver, this);
+	}
+
+	public WikiArticlePageObject(WebDriver driver, String pageName) {
+		super(driver);
+		this.pageName = pageName;
 	}
 
 	public String getPageName(){
 		return this.pageName;
-	}
-
-	private void setPageName() {
-		try {
-			pageName = wikiFirstHeader.getText();
-		} catch (NoSuchElementException ex) {
-			pageName = "";
-		}
 	}
 
 	public WikiArticleEditMode createNewArticle(String pageName,
@@ -153,7 +148,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		{
 			try {
 				Thread.sleep(delay);
-				jQueryFocus("textarea#article-comm");				
+				jQueryFocus("textarea#article-comm");
 			}
 			catch(WebDriverException e){
 				PageObjectLogging.log("triggerCommentArea", "comment are visible after "+delay+" ms", true);
@@ -278,7 +273,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	{
 		title = title.replace("_", " ");
 		waitForElementByXPath("//h1[contains(text(), '"+title+"')]");
-		PageObjectLogging.log("verifyPageTitle", "page title is verified", true, driver);
+		PageObjectLogging.log("verifyPageTitle", "page title is verified", true);
 	}
 
 	public void verifyArticleText(String content)
@@ -338,21 +333,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void verifyVideoNotOnThePage() {
 		waitForElementNotVisibleByBy(videoOnPublish);
 		PageObjectLogging.log("verifyTheVideoNotOnThePage", "Verify that the video does not appear on the page", true, driver);
-	}
-
-	/**
-	 * Verify that the Object appears on the page
-	 *  
-	 * @author Michal Nowierski
-	 * @param Object Object = {gallery, slideshow}
-	 * 	 */
-	public void verifyObjectOnThePage(String Object) {
-		waitForElementByBy(By.cssSelector("#WikiaArticle div[id*='"+ Object +"']"));
-		PageObjectLogging.log(
-			"VerifyTheObjetOnThePage",
-			"Verify that the " + Object + " appears on the page",
-			true, driver
-		);
 	}
 
 	/**
@@ -533,16 +513,16 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		Boolean result = false;
 		// there might be more than one category on a random page. Thus - loop over all of them.
 		for (WebElement webElement : lista) {
-			waitForElementByElement(webElement);		
+			waitForElementByElement(webElement);
 			if (webElement.getText().equalsIgnoreCase(categoryName)) {
 				result = true;
 			}
 		}
 		if (result) {
-			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" prsesnce succesfully verified", true, driver);			
+			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" prsesnce succesfully verified", true);
 		}
 		else {
-			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" NOT present", false, driver);						
+			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" NOT present", false);
 		}
 		
 	}
