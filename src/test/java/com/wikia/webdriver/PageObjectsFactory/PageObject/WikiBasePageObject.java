@@ -111,6 +111,7 @@ public class WikiBasePageObject extends BasePageObject {
 	@FindBy(css=".msg")
 	protected WebElement userMessage;
 
+	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	private By galleryDialogPhotosList = By
 			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
 	private By galleryDialogPhotoOrientationsList = By

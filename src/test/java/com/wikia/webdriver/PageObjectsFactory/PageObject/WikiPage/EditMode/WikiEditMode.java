@@ -32,7 +32,7 @@ public class WikiEditMode extends WikiBasePageObject{
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
 		publishButtonGeneral.click();
-		waitForElementByElement(editButton);
+		waitForElementPresenceByBy(editButtonBy);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
 		return new WikiArticlePageObject(driver);
 	}

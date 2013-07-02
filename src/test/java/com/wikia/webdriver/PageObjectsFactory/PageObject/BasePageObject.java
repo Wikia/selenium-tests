@@ -94,6 +94,13 @@ public class BasePageObject{
 		}
 	}
 
+	public void mouseOverByBy(By by) {
+		WebElement element = driver.findElement(by);
+		Actions action = new Actions(driver);
+		action.moveToElement(element);
+		action.perform();
+	}
+
 	public void mouseReleaseInArticleIframe(String cssSelecotr) {
 		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
 				+ cssSelecotr + "')).mouseleave()");

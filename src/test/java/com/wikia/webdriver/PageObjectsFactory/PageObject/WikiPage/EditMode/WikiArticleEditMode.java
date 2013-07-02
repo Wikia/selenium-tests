@@ -168,13 +168,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
 
-
-
-
-
-
-
-
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By removePhotoDialog = By.cssSelector("section.modalWrapper.RTEModal");
 	private By imageOnArticleEditMode = By.cssSelector("div.WikiaArticle figure a img");
@@ -615,17 +608,18 @@ public class WikiArticleEditMode extends WikiEditMode {
 	 * Verify that video appears in edit mode
 	 *
 	 * @author Michal Nowierski
-	 * 	 */
+	 *
+	 */
 	public void verifyVideoInEditMode(String caption) {
 		waitForElementByElement(iFrame);
 		driver.switchTo().frame(iFrame);
-		waitForElementByElement(videoInEditMode);
+		waitForElementPresenceByBy(videoOnArticleEditMode);
+		mouseOverByBy(videoOnArticleEditMode);
 		driver.switchTo().defaultContent();
-		mouseOverInArticleIframe(videoArticleIFrame);
-		waitForElementByXPath("//div[@class='RTEMediaCaption' and contains(text(), '"+caption+"')]");
-		mouseReleaseInArticleIframe(videoArticleIFrame);
-		PageObjectLogging.log("VerifyVideoInEditMode", "Verify that video appears in edit mode", true, driver);
-
+		waitForElementByXPath(
+			"//div[@class='RTEMediaCaption' and contains(text(), '"+caption+"')]"
+		);
+		PageObjectLogging.log("VerifyVideoInEditMode", "Verify that video appears in edit mode", true);
 	}
 
 	public void verifyLeftVideoInEditMode() {
