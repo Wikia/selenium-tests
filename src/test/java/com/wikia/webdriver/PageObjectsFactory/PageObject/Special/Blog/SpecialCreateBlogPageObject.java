@@ -53,7 +53,7 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
 		publishButtonGeneral.click();
-		waitForElementByElement(editButton);
+		waitForElementByBy(editButtonBy);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
 		return new BlogPageObject(driver);
 	}

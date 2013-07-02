@@ -331,7 +331,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 	
 	public void verifyVideoNotOnThePage() {
-		waitForElementNotVisibleByBy(videoOnPublish);
+		waitForElementNotPresent(videoOnPublish);
 		PageObjectLogging.log("verifyTheVideoNotOnThePage", "Verify that the video does not appear on the page", true, driver);
 	}
 

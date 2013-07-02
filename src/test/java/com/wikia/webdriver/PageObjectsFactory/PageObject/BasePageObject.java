@@ -347,9 +347,7 @@ public class BasePageObject{
 	}
 
 	public void waitForElementNotVisibleByBy(By by) {
-		Global.LOG_ENABLED = false;
-		wait.until(CommonExpectedConditions.invisibilityOfElementLocated(by));
-		Global.LOG_ENABLED = true;
+		wait.until(CommonExpectedConditions.elementNotPresent(by));
 	}
 
 	public void waitForElementNotVisibleByElement(WebElement element) {
@@ -602,8 +600,8 @@ public class BasePageObject{
     public void waitForElementNotPresent(final By selector) {
     	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     	wait.until(
-    			CommonExpectedConditions.elementNotPresent(selector)
-    			);
+			CommonExpectedConditions.elementNotPresent(selector)
+		);
     	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 

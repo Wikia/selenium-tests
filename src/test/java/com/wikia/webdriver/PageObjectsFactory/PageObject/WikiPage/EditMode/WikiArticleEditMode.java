@@ -563,7 +563,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void verifyTheVideoNotOnTheArticleEditMode() {
 		driver.switchTo().frame(iFrame);
-		waitForElementNotVisibleByBy(videoOnArticleEditMode);
+		waitForElementNotPresent(videoOnArticleEditMode);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("verifyTheVideoNotOnTheArticleEditMode", "Verify that the video does not appear on the Article edit mode", true);
 	}
