@@ -51,14 +51,14 @@ public class HomePageObject extends BasePageObject{
 	public void openHomePage()
 	{
 		try{
-			getUrl(Global.LIVE_DOMAIN);			
+			getUrl(Global.LIVE_DOMAIN);
 		}
 		catch (TimeoutException e)
 		{
 			PageObjectLogging.log("openHomePage", "timeouted when opening homepage", true);
 		}
 		try{
-			driver.getCurrentUrl();			
+			driver.getCurrentUrl();
 		}
 		catch (TimeoutException e)
 		{
