@@ -26,7 +26,7 @@ public class CreateAWikiTests_logInFieldValidation extends TestTemplate{
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(0, 3);
+		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
 		wikiName = "QaTest"+timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
