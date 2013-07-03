@@ -1,12 +1,11 @@
 package com.wikia.webdriver.TestCases.ChatTests;
 
-import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate_Two_Drivers;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import org.testng.annotations.Test;
 
 public class ChatTests extends TestTemplate_Two_Drivers{
 
@@ -41,7 +40,6 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
@@ -59,9 +57,9 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat2.verifyChatPage();
 		//Test	
 		switchToWindow(driver);
-		chat1.verifyUserJoinToChat(Properties.userName2);		
+		chat1.verifyUserJoinToChat(Properties.userName2);
 	}
-	
+
 	/*
 	 *  Test 3: Changes in drop-down menu #1
 	1. User clicks on a different user name with left mouse button. Drop-down menu appears.
@@ -74,14 +72,12 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
-		CommonFunctions.logOut(driver2);
 		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);
@@ -94,36 +90,25 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat1.clickOnDifferentUser(Properties.userName2, driver);
 		chat1.verifyNormalUserDropdown();
 	}
-	
-	/*
-	 *   Test 4: Changes in drop-down menu #2
-	1. There are two users in the chat room: user A and user B. User B private message are blocked by user A.
-    2. User A clicks with a left mouse button on user B name. Drop-down menu appears.
-    3. There are three options to choose: User Profile, Contributions, Allow Private Messages.
-    4. If user A is an admin there should be also Give ChatMod status and Kickban (if clicked user is not a chat moderator or admin). - to next test case 
-	 */
-	/*
-	  Test 11: Private room dropdown menu Edit
 
-    1. There are two users in the chat room: user A and user B.
-    2. User B opens private chat room with user A.
-    3. Clicks on user A item under "Private messages" bar displays drop-down menu similar to main chat's drop-down menu except one new element: "Block Private Messages" 
-	 * */
-	
-	
+	/*
+	 * Test 4: Changes in drop-down menu #2
+	 * 1. There are two users in the chat room: user A and user B. User B private message are blocked by user A.
+     * 2. User A clicks with a left mouse button on user B name. Drop-down menu appears.
+     * 3. There are three options to choose: User Profile, Contributions, Allow Private Messages.
+     * 4. If user A is an admin there should be also Give ChatMod status and Kickban (if clicked user is not a chat moderator or admin). - to next test case 
+	 */
 	@Test(groups = {"Chat_003", "Chat"})
 	public void Chat_003_changes_in_drop_down_menu_2()
 	{
 		//first user opens the chat
 		switchToWindow(driver);
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat		
 		switchToWindow(driver2);
-		CommonFunctions.logOut(driver2);
 		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver2);

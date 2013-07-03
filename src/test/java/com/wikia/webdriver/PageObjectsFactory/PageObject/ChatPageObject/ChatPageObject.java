@@ -1,20 +1,15 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject;
 
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class ChatPageObject extends BasePageObject
 {
@@ -44,7 +39,10 @@ public class ChatPageObject extends BasePageObject
 	
 	@FindBy(css="div.User span.username")
 	private WebElement userName;
-	
+
+	@FindBy(css="#Chat_4 .inline-alert")
+	private WebElement chatInlineAlert;
+
 	@FindBy(css="div.User img")
 	private WebElement userAvatar;
 	
@@ -74,17 +72,15 @@ public class ChatPageObject extends BasePageObject
 	
 	@FindBy(xpath="//li[@class='inline-alert' and contains(text(), 'Welcome to the')]")
 	private WebElement userIsOnChatIndicator1;
-	
+
 	@FindBy(xpath="//li[@class='inline-alert' and contains(text(), 'Wiki chat')]")
 	private WebElement userIsOnChatIndicator2;
-	
+
 	By userContextMenu = By.cssSelector("ul.regular-actions li");
 	By adminContextMenu = By.cssSelector("ul.admin-actions li");
 	By privateMessageHeader = By.xpath("//h1[@class='private' and contains(text(), 'Private Messages')]");
-	
-	
-	
-	public ChatPageObject(WebDriver driver) 
+
+	public ChatPageObject(WebDriver driver)
 	{
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -97,11 +93,15 @@ public class ChatPageObject extends BasePageObject
 	public void openChatPage()
 	{
 		getUrl(Global.DOMAIN+"wiki/Special:Chat");
-		waitForElementByElement(userIsOnChatIndicator1);
-		waitForElementByElement(userIsOnChatIndicator2);
-		PageObjectLogging.log("openChatPage", "Chat page "+Global.DOMAIN+"wiki/Special:Chat opened", true, driver);		
+		waitForElementByElement(chatInlineAlert);
+		waitForElementByElement(chatInlineAlert);
+		PageObjectLogging.log(
+			"openChatPage",
+			"Chat page "+Global.DOMAIN+"wiki/Special:Chat opened",
+			true, driver
+		);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * verifies certain components on chat page, chat page should be opened
@@ -110,7 +110,7 @@ public class ChatPageObject extends BasePageObject
 	public void verifyChatPage()
 	{
 		waitForElementByElement(messageWritingArea);
-		waitForElementByElement(welcomeMessage);
+		waitForElementByElement(chatInlineAlert);
 		waitForElementByElement(sideBar);
 		waitForElementByElement(userName);
 		waitForElementByElement(userAvatar);
@@ -362,22 +362,17 @@ public class ChatPageObject extends BasePageObject
 	public void selectPrivateMessage(WebDriver driver)
 	{
 		waitForElementByElement(privateMassageButton);
-//		Point p = privateMassageButton.getLocation();
-//		CommonFunctions.MoveCursorToElement(p, driver);
-//		CommonFunctions.ClickElement();
 		executeScript("document.querySelectorAll('.private')[2].click()", driver);
 		PageObjectLogging.log("selectPrivateMessage", "private message selected from dropdown", true, driver);
 	}
-	
+
 	public void selectChatModStatus(WebDriver driver)
 	{
 		waitForElementByElement(giveChatModStatusButton);
 		jQueryClick("li.give-chat-mod span.label");
 		PageObjectLogging.log("selectChatModStatus", "chat mod status is clicked", true, driver);
 	}
-	
-	
-	
+
 	public void clickOnMainChat(WebDriver driver)
 	{
 //		Point p = mainChatButton.getLocation();
@@ -410,18 +405,12 @@ public class ChatPageObject extends BasePageObject
 	{
 		By privateMessagesUserButton = By.xpath("//li[@id='priv-user-"+userName+"']/span");
 		waitForElementByBy(privateMessagesUserButton);
-//		WebElement e = driver.findElement(privateMessagesUserButton);
-//		Point p = e.getLocation();
-//		CommonFunctions.MoveCursorToElement(p, driver);		
-//		CommonFunctions.ClickElement();
-//		CommonFunctions.ClickElement();
 		executeScript("document.querySelectorAll('#priv-user-"+userName+"')[0].click()", driver);
 		executeScript("document.querySelectorAll('#priv-user-"+userName+"')[0].click()", driver);
 		waitForElementByBy(userContextMenu);
 		PageObjectLogging.log("clickPrivateMessageUser", "private messages user "+userName+" is clicked", true, driver);
 	}
-	
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName
@@ -434,10 +423,9 @@ public class ChatPageObject extends BasePageObject
 		By userButton = By.xpath("//div[@class='Rail']//li[@id='user-"+userName+"']/img");
 		waitForElementByBy(userButton);
 		executeScript("document.querySelectorAll('#user-"+userName+"')[0].click()", driver);
-//		executeScript("document.querySelectorAll('#user-"+userName+"')[0].click()", driver);
-		PageObjectLogging.log("clickOnDifferentUser", userName+" button clicked", true, driver);
+		PageObjectLogging.log("clickOnDifferentUser", userName+" button clicked", true);
 	}
-	
+
 	public void clickOnBlockedDifferentUser(String userName, WebDriver driver)
 	{
 		By userButton = By.xpath("//div[@class='Rail']//li[@id='user-"+userName+"']/img");
