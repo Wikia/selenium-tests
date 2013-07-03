@@ -1,14 +1,13 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 
@@ -19,11 +18,10 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 	private WebElement okButton;
 	@FindBy(css="input.control-button")
 	private WebElement publishButtonGeneral;
-	
+
 	public SpecialCreateBlogPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	
 	}
 
 	/**
@@ -57,7 +55,7 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
 		return new BlogPageObject(driver);
 	}
-	
+
 	public SpecialCreateBlogPageObject createBlogFormUrl(String blogPostTitle){
 		getUrl(Global.DOMAIN+"wiki/Special:CreateBlogPage");
 		typeBlogPostTitle(blogPostTitle);

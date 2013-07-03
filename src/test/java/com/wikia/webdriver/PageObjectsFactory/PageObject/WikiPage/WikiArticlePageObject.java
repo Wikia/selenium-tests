@@ -13,7 +13,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -97,6 +96,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
+	private By articleContentBy = By.cssSelector("#mw-content-text");
 	private String pageName;
 
 	public WikiArticlePageObject(WebDriver driver) {
@@ -135,7 +135,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 				"random page button clicked", true, driver);
 		return new WikiArticlePageObject(driver);
 	}
-	
+
 	public void triggerCommentArea()
 	{
 		waitForElementByElement(commentHolder);
@@ -194,14 +194,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		clickAndWait(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
 	}
-	
+
 	public void verifyCommentText(String message, String userName)
 	{
 		waitForElementByXPath("//blockquote//p[contains(text(), '"+message+"')]");
 		waitForElementByXPath("//div[@class='edited-by']//a[contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("verifyComment", "comment: "+message+" is visible", true, driver);
 	}
-	
+
 	public void verifyCommentVideo(String videoName){
 		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='"+videoName+"']");
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
@@ -209,14 +209,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	private void clickReplyCommentButton(String comment)
 	{
-		CommonFunctions.scrollToElement(commentHolder);
-		waitForElementByXPath("//p[contains(text(), '"+comment+"')]//..//..//button[contains(text(), 'Reply')]");
-		jQueryClick(".article-comm-reply");
-		waitForElementByElement(iframe);
+		WebElement commentReplyButton = waitForElementByXPath(
+			"//p[contains(text(), '" + comment
+			+ "')]//..//..//button[contains(@class,'article-comm-reply')]"
+		);
+		commentReplyButton.click();
 		PageObjectLogging.log("clickReplyCommentButton", "reply comment button clicked", true);
 	}
-	
-	
+
 	private void writeReply(String reply)
 	{
 		waitForElementByElement(iframe);
@@ -224,9 +224,9 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		editCommentArea.sendKeys(reply);
 		driver.switchTo().defaultContent();
 		waitForElementByElement(submitReplyButton);
-		jQueryClick("input[id*=\"article-comm-reply\"]");
-		waitForElementByXPath("//p[contains(text(), '"+reply+"')]");
-		PageObjectLogging.log("writeReply", "reply comment written", true);
+		submitReplyButton.click();
+		waitForElementByXPath("//p[contains(text(), '" + reply + "')]");
+		PageObjectLogging.log("writeReply", "reply comment written", true, driver);
 	}
 
 	public void replyComment(String comment, String reply)
@@ -278,8 +278,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	public void verifyArticleText(String content)
 	{
-		waitForElementByElement(articleContent);
-		waitForTextToBePresentInElementByElement(articleContent, content);
+		waitForElementByBy(articleContentBy);
+		waitForTextToBePresentInElementByBy(articleContentBy, content);
 		PageObjectLogging.log("verifyArticleText", "article text is verified", true);
 	}
 

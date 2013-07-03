@@ -283,7 +283,7 @@ public class BasePageObject{
 	 *            The By class defined for the element
 	 */
 	public WebElement waitForElementByBy(By by) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		wait.until(ExpectedConditions.presenceOfElementLocated(by));
 		return driver.findElement(by);
 	}
 

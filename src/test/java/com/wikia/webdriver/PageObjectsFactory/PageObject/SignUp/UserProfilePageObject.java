@@ -1,5 +1,11 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp;
 
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.MailFunctions;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -7,15 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.MailFunctions;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 
 public class UserProfilePageObject extends BasePageObject{
 
@@ -38,7 +35,7 @@ public class UserProfilePageObject extends BasePageObject{
 						+ userName, true, driver);
 		return new UserProfilePageObject(driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName
@@ -48,14 +45,14 @@ public class UserProfilePageObject extends BasePageObject{
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/User:"+userName+"']")));
 		PageObjectLogging.log("verifyUserLoggedIn ", "Verified user is logged in", true);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
 	private void verifyLogInInvisiblity()
 	{
 		wait.until(ExpectedConditions.stalenessOf(logInLink));	
-		PageObjectLogging.log("verifyLogInInvisiblity ", "Log in is not visible", true);			
+		PageObjectLogging.log("verifyLogInInvisiblity ", "Log in is not visible", true);
 	}
 	
 	/**
