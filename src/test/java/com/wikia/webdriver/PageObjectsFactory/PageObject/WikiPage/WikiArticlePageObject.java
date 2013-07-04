@@ -89,8 +89,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement searchButton;
 
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
-	private By ImageOnWikiaArticle = By.cssSelector("div.WikiaArticle figure a img");
-	private By VideoOnWikiaArticle = By.cssSelector("div.WikiaArticle img.sprite.play");
+	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
+	private By VideoOnWikiaArticle = By.cssSelector("#WikiaArticle img.sprite.play");
 	private By AddVideoRVButton = By.cssSelector("a.addVideo");
 	private By RVvideoLoading = By.cssSelector("section.loading");
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");

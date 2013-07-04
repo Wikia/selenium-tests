@@ -139,7 +139,11 @@ public class ChatPageObject extends BasePageObject
 	public void verifyPrivateMessageNotification(int notificationNumber)
 	{
 		waitForElementByXPath("//span[@class='splotch' and contains(text(), '"+notificationNumber+"')]");
-		PageObjectLogging.log("verifyPrivateMessageNotification", "private message notification number "+notificationNumber+" is visible", true, driver);
+		PageObjectLogging.log(
+			"verifyPrivateMessageNotification",
+			"private message notification number " + notificationNumber + " is visible",
+			true
+		);
 	}
 
 	public void verifyPrivateMessageIsHighLighted(String user)

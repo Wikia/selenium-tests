@@ -124,6 +124,7 @@ public class WikiBasePageObject extends BasePageObject {
 	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
 	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
 	private By editButtonSelector = By.cssSelector("a#ca-edit");
+	private By editDropDownBy = By.cssSelector("article span.drop");
 
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
@@ -260,8 +261,8 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void clickEditDropDown() {
-		waitForElementByElement(editDropDown);
-		clickAndWait(editDropDown);
+		WebElement editDrop = waitForElementByBy(editDropDownBy);
+		editDrop.click();
 		PageObjectLogging.log (
 			"clickEditDropDown", "edit drop-down clicked",
 			true, driver
