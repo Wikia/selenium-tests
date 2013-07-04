@@ -172,5 +172,21 @@ public class CssChromeTests extends TestTemplate {
 		Alert alert = driver.switchTo().alert();
 		alert.accept();
 	}
+	
+	/**
+	 * https://wikia-inc.atlassian.net/browse/DAR-999
+	 */
+	@Test(groups = {"cssChrome_011", "cssChrome", "AdminDashboard"})
+	public void cssChrome_011_verifyTalkButtonWorks() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		specialCss.verifyTalkBubblePresence();
+		int commentsFromSpecialCss = specialCss.getNumberFromCssTalkBubble();
+		specialCss.clickTalkButton();
+		Assertion.assertEquals(commentsFromSpecialCss, specialCss.getNumberFromWikaiCssTalkBubble());
+		
+	}
 
 }

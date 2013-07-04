@@ -59,7 +59,13 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"Special:Undelete\"]")
 		private WebElement undeleteButton;
 		private By removedWarning = By.cssSelector(".css-editor .mw-warning-with-logexcerpt");
-
+		@FindBy(css = ".css-edit-box a.talk .commentsbubble")
+		private WebElement talkBubble;
+		@FindBy(css = ".css-edit-box a.talk")
+		private WebElement talkLink;
+		@FindBy(css = "#WikiaMainContentContainer a.talk .commentsbubble")
+		private WebElement mwTalkBubble;
+		
 		public SpecialCssPageObject( WebDriver driver ) {
 			super(driver);
 		}
@@ -211,4 +217,31 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void navigateToHistoryPage() {
 			getUrl(Global.DOMAIN+"wiki/MediaWiki:Wikia.css?action=edit");
 		}
+		
+		public void verifyTalkBubblePresence() {
+			waitForElementByElement(talkBubble);
+			PageObjectLogging.log("verifyTalkBubblePresence", "Talk bubble is present.", true);
+		}
+		
+		/**
+		 * Return the number of comments from talk button bubble
+		 */
+		public int getNumberFromCssTalkBubble() {
+			return Integer.parseInt(talkBubble.getText());
+		}
+		
+		public void clickTalkButton() {
+			clickAndWait(talkLink);
+			verifyUrl("/MediaWiki_talk:Wikia.css");
+		}
+		
+		/**
+		 * go to mediawiki:wikia.css and return the number of comments from talk button bubble
+		 */
+		public int getNumberFromWikaiCssTalkBubble() {
+			getUrl(Global.DOMAIN+"wiki/MediaWiki:Wikia.css");
+			waitForElementByElement(mwTalkBubble);
+			return Integer.parseInt(mwTalkBubble.getText());
+		}
+		
 }
