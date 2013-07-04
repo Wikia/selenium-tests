@@ -16,6 +16,7 @@
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation_monobook"/>
+			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_field_validation"/>
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDTestsAdmin"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDTestsAnonymous"/>

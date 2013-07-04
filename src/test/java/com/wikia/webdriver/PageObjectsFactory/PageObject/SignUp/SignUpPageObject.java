@@ -126,9 +126,7 @@ public class SignUpPageObject extends BasePageObject {
 			Select d = new Select(birthDayField);
 			Select y = new Select(birthYearField);
 			m.selectByVisibleText(month);
-			Thread.sleep(150);
 			d.selectByVisibleText(day);
-			Thread.sleep(150);
 			y.selectByVisibleText(year);
 			Thread.sleep(150);
 			d.selectByVisibleText(day);
