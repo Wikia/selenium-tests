@@ -85,6 +85,9 @@ public class Properties {
 	public static String userNameStaff;
 	public static String passwordStaff;
 
+	public static String userNameStaff2;
+	public static String passwordStaff2;
+
 	public static String userNameMonobook;
 	public static String passwordMonobook;
 
@@ -129,6 +132,9 @@ public class Properties {
 
 		userNameStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.username");
 		passwordStaff = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff.password");
+
+		userNameStaff2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff2.username");
+		passwordStaff2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiastaff2.password");
 
 		userNameMonobook = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiamonobook.username");
 		passwordMonobook = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.wikiamonobook.password");
