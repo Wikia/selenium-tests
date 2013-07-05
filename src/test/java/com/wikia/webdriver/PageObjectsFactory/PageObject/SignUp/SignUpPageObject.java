@@ -143,15 +143,15 @@ public class SignUpPageObject extends BasePageObject {
 		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true, driver);
 	}
 
-        public void enterWrongBlurryWord()
-	{
-                String word = getTimeStamp();
-                blurryWordField.sendKeys(word);
+	public void enterWrongBlurryWord(){
+		String word = getTimeStamp();
+		blurryWordField.sendKeys(word);
+		PageObjectLogging.log("enterWrongBlurryWord ", "Blurry word field populated incorrectly", true);
 	}
 
-        public void clickCreateAccountButton()
-	{
-                createAccountButton.click();
+	public void clickCreateAccountButton(){
+		waitForElementClickableByElement(createAccountButton);
+		createAccountButton.click();
 	}
 	
 	
@@ -184,9 +184,9 @@ public class SignUpPageObject extends BasePageObject {
 		PageObjectLogging.log("verifyUserNameValidation ", "occupied user name validation verified", true);
 	}
 
-        public void verifyWrongBlurryWordValidation()
-	{
+	public void verifyWrongBlurryWordValidation(){
 		waitForElementByElement(WrongBlurryWordValidationError);
+		PageObjectLogging.log("verifyUWrongBlurryWordValidation ", "wrong blurry word validation verified", true, driver);
 	}
 	
 	/**
