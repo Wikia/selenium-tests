@@ -79,4 +79,9 @@ public class PageContent {
 
 	public static String wikiaGlobalUrl = "http://www.wikia.com/";
 
+        //SignUp correct
+        public static String wikiSignUpBirthDay = "11";
+        public static String wikiSignUpBirthMonth = "11";
+        public static String wikiSignUpBirthYear = "1954";
+
 }
