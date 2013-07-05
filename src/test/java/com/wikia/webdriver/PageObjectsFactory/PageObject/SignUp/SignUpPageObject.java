@@ -186,7 +186,11 @@ public class SignUpPageObject extends BasePageObject {
 
 	public void verifyWrongBlurryWordValidation(){
 		waitForElementByElement(WrongBlurryWordValidationError);
-		PageObjectLogging.log("verifyUWrongBlurryWordValidation ", "wrong blurry word validation verified", true, driver);
+		PageObjectLogging.log(
+			"verifyWrongBlurryWordValidation ", 
+			"wrong blurry word validation verified", 
+			true, driver
+		);
 	}
 	
 	/**

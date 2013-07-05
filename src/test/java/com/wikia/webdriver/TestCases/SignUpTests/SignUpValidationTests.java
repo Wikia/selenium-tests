@@ -13,8 +13,7 @@ public class SignUpValidationTests extends TestTemplate {
 		SignUpPageObject signUpPage = new SignUpPageObject(driver);
 		signUpPage.openSignUpPage();
 		signUpPage.typeInUserName(signUpPage.getTimeStamp());
-		String userNameEmail = Properties.emailQaart4;
-		signUpPage.typeInEmail(userNameEmail);
+		signUpPage.typeInEmail(Properties.emailQaart4);
 		signUpPage.typeInPassword(signUpPage.getTimeStamp());
 		signUpPage.enterBirthDate(
 			PageContent.wikiSignUpBirthMonth,
