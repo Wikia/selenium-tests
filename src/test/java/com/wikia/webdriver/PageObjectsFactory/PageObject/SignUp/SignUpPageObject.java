@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,10 +12,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Proxy.ProxyType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -23,8 +22,9 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SignUpPageObject extends BasePageObject {
 
@@ -51,20 +51,29 @@ public class SignUpPageObject extends BasePageObject {
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
 	private WebElement createAccountButton;
+	private final String tooYoungErrorMsg = ".input-group.required.error .error-msg";
+	@FindBy(css = tooYoungErrorMsg)
+	private WebElement tooYoungError;
 	
 	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Oops, please fill in the username field.')]")
 	 private WebElement emptyUserNameValidationError;
 	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Someone already has this username. Try a different one!')]")
 	 private WebElement occupiedUserNameValidationError;
 
+	 private Select yearSelect;
+	 private Select daySelect;
+	 private Select monthSelect;
 	/**
 	 * @author Karol Kujawiak
 	 */
 	public void openSignUpPage()
 	{
-		getUrl(Global.DOMAIN+"wiki/Special:UserSignup");
-		waitForElementByElement(blurryWordField);
-		PageObjectLogging.log("openSignUpPage ", "Sign up page opened " +driver.getCurrentUrl(), true, driver);
+            getUrl(Global.DOMAIN+"wiki/Special:UserSignup");
+            waitForElementByElement(blurryWordField);
+	    yearSelect = new Select(birthYearField);
+	    daySelect = new Select(birthDayField);
+	    monthSelect = new Select(birthMonthField);
+            PageObjectLogging.log("openSignUpPage ", "Sign up page opened " +driver.getCurrentUrl(), true, driver);
 	}
 	
 	/**
@@ -102,17 +111,16 @@ public class SignUpPageObject extends BasePageObject {
 	
         public void selectToYoungBirthDate()
         {
-            Select m = new Select(birthMonthField);
-            Select d = new Select(birthDayField);
-            Select y = new Select(birthYearField);
-            m.selectByIndex(1);
-            d.selectByIndex(1);
-            y.selectByIndex(1);
+	    monthSelect.selectByIndex(1);
+            daySelect.selectByIndex(1);
+            yearSelect.selectByIndex(1);
         }
 
-        public void clickCreateAccountButton()
+        public void waitForTooYoungErrorMsg()
         {
-            createAccountButton.click();
+	    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tooYoungErrorMsg)));
+	    Assertion.assertTrue(tooYoungError.isDisplayed());
+	    PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true, driver);
         }
 
 	/**
@@ -125,20 +133,17 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		try
 		{
-			Select m = new Select(birthMonthField);
-			Select d = new Select(birthDayField);
-			Select y = new Select(birthYearField);
-			m.selectByVisibleText(month);
+			monthSelect.selectByVisibleText(month);
 			Thread.sleep(150);
-			d.selectByVisibleText(day);
+			daySelect.selectByVisibleText(day);
 			Thread.sleep(150);
-			y.selectByVisibleText(year);
+			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
-			d.selectByVisibleText(day);
+			daySelect.selectByVisibleText(day);
 			Thread.sleep(150);
-			y.selectByVisibleText(year);
+			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
-			m.selectByVisibleText(month);
+			monthSelect.selectByVisibleText(month);
 			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);			
 		}
 		catch(InterruptedException e)
