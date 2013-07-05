@@ -1,22 +1,28 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.wikia.webdriver.TestCases.SignUpTests;
 
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
 import org.testng.annotations.Test;
 
 public class SignUpValidationTests extends TestTemplate {
 
-	@Test(groups = {"SignUp_test"})
-	public void SignUp_field_validation_TC002()
-	{
-		String userNameEmail = Properties.emailQaart2;
-		String passwordEmail = Properties.emailPasswordQaart2;
+	@Test(groups = {"SignUp_validation_1", "SignUp_validation"})
+	public void SignUp_validation_1() {
 		SignUpPageObject signUpPage = new SignUpPageObject(driver);
 		signUpPage.openSignUpPage();
+		signUpPage.typeInUserName(signUpPage.getTimeStamp());
+		signUpPage.typeInEmail(Properties.emailQaart4);
+		signUpPage.typeInPassword(signUpPage.getTimeStamp());
+		signUpPage.enterBirthDate(
+			PageContent.wikiSignUpBirthMonth,
+			PageContent.wikiSignUpBirthDay,
+			PageContent.wikiSignUpBirthYear
+		);
+		signUpPage.enterWrongBlurryWord();
+		signUpPage.clickCreateAccountButton();
+		signUpPage.verifyWrongBlurryWordValidation();
 	}
+
 }

@@ -56,8 +56,8 @@ public class SignUpPageObject extends BasePageObject {
 	 private WebElement emptyUserNameValidationError;
 	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Someone already has this username. Try a different one!')]")
 	 private WebElement occupiedUserNameValidationError;
-//	 @FindBy(css="")
-	// private WebElement;
+	 @FindBy(css=".input-group.captcha.error.required .error-msg")
+	 private WebElement WrongBlurryWordValidationError;
 	// @FindBy(css="")
 	// private WebElement;
 	// @FindBy(css="")
@@ -120,29 +120,17 @@ public class SignUpPageObject extends BasePageObject {
 	 */
 	public void enterBirthDate(String month, String day, String year)
 	{
-		try
-		{
 			Select m = new Select(birthMonthField);
 			Select d = new Select(birthDayField);
 			Select y = new Select(birthYearField);
 			m.selectByVisibleText(month);
-			Thread.sleep(150);
 			d.selectByVisibleText(day);
-			Thread.sleep(150);
 			y.selectByVisibleText(year);
-			Thread.sleep(150);
 			d.selectByVisibleText(day);
-			Thread.sleep(150);
 			y.selectByVisibleText(year);
-			Thread.sleep(150);
 			m.selectByVisibleText(month);
 			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);			
 		}
-		catch(InterruptedException e)
-		{
-                    e.printStackTrace();
-		}
-	}
 	
 	
 	/**
@@ -153,6 +141,17 @@ public class SignUpPageObject extends BasePageObject {
 		String word = getWordFromCaptcha();
 		blurryWordField.sendKeys(word);
 		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true, driver);
+	}
+
+	public void enterWrongBlurryWord(){
+		String word = getTimeStamp();
+		blurryWordField.sendKeys(word);
+		PageObjectLogging.log("enterWrongBlurryWord ", "Blurry word field populated incorrectly", true);
+	}
+
+	public void clickCreateAccountButton(){
+		waitForElementClickableByElement(createAccountButton);
+		createAccountButton.click();
 	}
 	
 	
@@ -183,6 +182,15 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		waitForElementByElement(occupiedUserNameValidationError);
 		PageObjectLogging.log("verifyUserNameValidation ", "occupied user name validation verified", true);
+	}
+
+	public void verifyWrongBlurryWordValidation(){
+		waitForElementByElement(WrongBlurryWordValidationError);
+		PageObjectLogging.log(
+			"verifyWrongBlurryWordValidation ", 
+			"wrong blurry word validation verified", 
+			true, driver
+		);
 	}
 	
 	/**
