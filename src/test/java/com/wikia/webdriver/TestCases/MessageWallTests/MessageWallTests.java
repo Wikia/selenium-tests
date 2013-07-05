@@ -1,25 +1,19 @@
 package com.wikia.webdriver.TestCases.MessageWallTests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
+import org.testng.annotations.Test;
 
 public class MessageWallTests extends TestTemplate
 {
-//	protected String url = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
 
-	
 	@Test(groups = { "MessageWall001", "MessageWall" })
 	public void MessageWall_001_WriteMessage() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -30,7 +24,6 @@ public class MessageWallTests extends TestTemplate
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall002", "MessageWall" })
@@ -45,7 +38,6 @@ public class MessageWallTests extends TestTemplate
 		wall.writeMessageNoTitle(message);
 		wall.clickPostNotitleButton();
 		wall.verifyPostedMessageWithoutTitle(Properties.userName, message);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall003", "MessageWall" })
@@ -60,7 +52,6 @@ public class MessageWallTests extends TestTemplate
 		wall.writeMessageImage(title);
 		wall.clickPostButton();
 		wall.verifyPostedMessageImage(title);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall004", "MessageWall" })
@@ -75,7 +66,6 @@ public class MessageWallTests extends TestTemplate
 		wall.writeMessageVideo(title, VideoContent.youtubeVideoURL3);
 		wall.clickPostButton();
 		wall.verifyPostedMessageVideo(title);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall005", "MessageWall" })
@@ -94,8 +84,6 @@ public class MessageWallTests extends TestTemplate
 		wall.verifyPostedMessageWithoutTitle(Properties.userName, message);
 		wall.editMessage(titleEdit, messageEdit);
 		wall.verifyPostedMessageWithTitle(titleEdit, messageEdit);
-		CommonFunctions.logOut(driver);
-		
 	}
 
 	@Test(groups = { "MessageWall006", "MessageWall" })
@@ -112,12 +100,10 @@ public class MessageWallTests extends TestTemplate
 		wall.clickPreviewButton();
 		wall.clickPublishButton();
 		wall.verifyPostedMessageWithTitle(title, message);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall007", "MessageWall" })
 	public void MessageWall_007_WriteMessageWithLink() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -129,12 +115,10 @@ public class MessageWallTests extends TestTemplate
 		wall.writeMessageWithLink(Internallink, Externallink, title);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithLinks(Internallink, Externallink);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall008", "MessageWall" })
 	public void MessageWall_008_RemoveMessage() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -146,12 +130,10 @@ public class MessageWallTests extends TestTemplate
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
 		wall.removeMessage("reason");
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall009", "MessageWall" })
 	public void MessageWall_009_WriteAndEditMessage() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -166,8 +148,6 @@ public class MessageWallTests extends TestTemplate
 		wall.verifyPostedMessageWithTitle(title, message);
 		wall.editMessage(titleEdit, messageEdit);
 		wall.verifyPostedMessageWithTitle(titleEdit, messageEdit);
-		CommonFunctions.logOut(driver);
-
 	}
 
 	@Test(groups = { "MessageWall011", "MessageWall" })
@@ -198,12 +178,10 @@ public class MessageWallTests extends TestTemplate
 		wall.writeItalicMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedItalicMessageWithTitle(title, message);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall013", "MessageWall" })
 	public void MessageWall_013_WriteMessageSourceMode() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -215,7 +193,6 @@ public class MessageWallTests extends TestTemplate
 		wall.writeMessageSourceMode(title, sourceMessage);
 		wall.clickPostButton();
 		wall.verifyPostedBoldMessageWithTitle(title, message);
-		CommonFunctions.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall014", "MessageWall" })

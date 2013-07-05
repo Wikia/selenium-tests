@@ -1,24 +1,20 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
 
 //public class MessageWallPageObject extends MiniEditorComponentObject{
 	public class MessageWallPageObject extends WikiBasePageObject{
@@ -61,6 +57,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement italicButton;
 	@FindBy(css="div.msg-title a")
 	private WebElement messageTitle;
+	@FindBys(@FindBy(css=".edited-by"))
+	private List<WebElement> msgEditedByFields;
 	@FindBys(@FindBy(css="div.msg-title a"))
 	private List<WebElement> messageTitlesList;
 	@FindBy(css="div.edited-by a")
@@ -77,9 +75,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement sourceModeTextarea;
 	@FindBy(css=".SortingSelected")
 	private WebElement sortingMenu;
+	@FindBy(css=".no-title-warning")
+	private WebElement noTitleErrorMsg;
+	@FindBy (css="#WallMessageBody")
+	private WebElement messageMainBody;
 
+	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
 	By sortingList = By.cssSelector("ul.SortingList li a");
+	By moreButtonsBy = By.cssSelector("div.msg-toolbar nav.wikia-menu-button.secondary.combined");
+	By editMessageBy = By.cssSelector(".edit-message");
 
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
@@ -96,7 +101,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public MessageWallPageObject openMessageWall(String userName)
 	{
-		getUrl(Global.DOMAIN+"wiki/Message_Wall:"+userName);
+		getUrl(Global.DOMAIN + URLsContent.userMessageWall + userName);
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
 		return new MessageWallPageObject(driver);
@@ -119,13 +124,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public void triggerMessageArea()
 	{
-		jQueryFocus("#WallMessageBody");
+		messageMainBody.click();
 		waitForElementByElement(miniEditor.miniEditorIframe);
 		PageObjectLogging.log("triggerMessageArea", "message area is triggered", true, driver);
 	}
 
 	private void writeTitle(String title){
-		clickAndWait(messageTitleField);
+		messageTitleField.click();
 		messageTitleField.sendKeys(title);
 	}
 
@@ -208,10 +213,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public void clickPostButton()
 	{
-		executeScript("WikiaEditor.getInstance('WallMessageBody').getEditbox().trigger('keyup')");
 		waitForElementByElement(postButton);
-		jQueryClick("#WallMessageSubmit");
-		PageObjectLogging.log("clickPostButton", "post button is clicked", true, driver);
+		waitForElementClickableByElement(postButton);
+		postButton.click();
+		PageObjectLogging.log("clickPostButton", "post button is clicked", true);
 	}
 
 	public void clickReplyButton() {
@@ -222,19 +227,17 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	}
 
 	public void clickPreviewButton() {
-		executeScript("WikiaEditor.getInstance('WallMessageBody').getEditbox().trigger('keyup')");
 		waitForElementByElement(previewButton);
-		clickAndWait(previewButton);
-		PageObjectLogging.log("clickPreviewButton", "preview button is clicked", true, driver);
+		waitForElementClickableByElement(previewButton);
+		previewButton.click();
+		PageObjectLogging.log("clickPreviewButton", "preview button is clicked", true);
 	}
 
 	public void clickPostNotitleButton()
 	{
-		waitForElementByElement(postButton);
-		jQueryClick("#WallMessageSubmit");
-		waitForElementByXPath("//button[@id='WallMessageSubmit' and contains(text(), 'Post without a title')]");
-		waitForElementByXPath("//div[@class='no-title-warning' and contains(text(), 'You did not specify any title')]");
-		jQueryClick("#WallMessageSubmit");
+		clickPostButton();
+		waitForElementVisibleByElement(noTitleErrorMsg);
+		postButton.click();
 		PageObjectLogging.log("clickPostButton", "post button is clicked", true, driver);
 	}
 
@@ -242,8 +245,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	{
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
-		PageObjectLogging.log("verifyPostedMessageWithTitle", "message with title verified", true);
+		PageObjectLogging.log(
+			"verifyPostedMessageWithTitle", "message with title verified", true, driver
+		);
 	}
+
 	/**
 	 * @param message
 	 * @param replyNumber This is the same number as in the URL for that message.
@@ -263,7 +269,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void verifyPostedItalicMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
-		PageObjectLogging.log("verifyPostedItalicMessageWithTitle", "italic message with title verified", true);
+		PageObjectLogging.log(
+			"verifyPostedItalicMessageWithTitle",
+			"italic message with title verified", true
+		);
 	}
 
 	public void verifyPostedMessageWithLinks(String internallink, String externallink){
@@ -274,9 +283,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public void verifyPostedMessageWithoutTitle(String userName, String message)
 	{
-		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), 'Message from "+userName+"')]");
-		waitForElementByXPath("//div[@class='msg-body']/p[contains(text(), '"+message+"')]");
-		PageObjectLogging.log("verifyPostedMessageWithTitle", "message without title verified", true);
+		waitForTextToBePresentInElementByElement(msgEditedByFields.get(0), userName);
+		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
+		PageObjectLogging.log(
+			"verifyPostedMessageWithTitle",
+			"message without title verified", true, driver
+		);
 	}
 
 	public void verifyPostedMessageVideo(String title)
@@ -299,7 +311,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		mouseOver(".WikiaMenuElement .remove-message");
-//		jQueryClick(".WikiaMenuElement .remove-message");
 		jQueryNthElemClick(".WikiaMenuElement .remove-message", 0);
 		waitForElementByElement(removeMessageOverLay);
 		waitForElementByElement(removeMessageConfirmButton);
@@ -318,7 +329,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 		waitForElementByElement(removeMessageConfirmation);
 		driver.navigate().refresh();
-//		waitForElementNotVisibleByBy(messageTitle);
 		PageObjectLogging.log("removeMessage", "message is removed", true, driver);
 	}
 
@@ -329,13 +339,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		waitForElementByElement(moreButton);
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
-
 		waitForElementByElement(editMessageButton);
 		clickAndWait(editMessageButton);
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"\"");
-//		jQueryClick(".edit-message");
-//		waitForElementByElement(messageWallEditIFrame);
-		PageObjectLogging.log("clickEditMessage", "edit message button is clicked", true, driver);
+		PageObjectLogging.log("clickEditMessage", "edit message button is clicked", true);
 	}
 
 	public MessageWallHistoryPageObject openHistory() {
@@ -408,15 +415,17 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		clickAndWait(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-		// add internal wikia link
 		miniEditor.addInternalLink(internalLink);
-		// add external link
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(Keys.END);
 		miniEditor.writeMiniEditor(Keys.ENTER);
 		driver.switchTo().defaultContent();
 		miniEditor.addExternalLink(externalLink);
-		PageObjectLogging.log("writeMessageWithLink", "internal and external links: "+internalLink+" and" +externalLink+ "added", true, driver);
+		PageObjectLogging.log(
+			"writeMessageWithLink",
+			"internal and external links: "+internalLink+" and" +externalLink+ "added",
+			true
+		);
 	}
 
 	public void writeMessageSourceMode(String title, String message) {

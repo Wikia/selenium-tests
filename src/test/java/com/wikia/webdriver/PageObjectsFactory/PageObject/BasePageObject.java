@@ -95,6 +95,7 @@ public class BasePageObject{
 	}
 
 	public void mouseOverByBy(By by) {
+		waitForElementByBy(by);
 		WebElement element = driver.findElement(by);
 		Actions action = new Actions(driver);
 		action.moveToElement(element);

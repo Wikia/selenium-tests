@@ -42,8 +42,12 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement linkPageStatus;
 	@FindBy(css="span.cke_dialog_ui_button")
 	private WebElement linkModalOkButton;
-        @FindBy (css=".loading-throbber")
-        private WebElement loader;
+	@FindBy (css=".loading-throbber")
+	private WebElement loader;
+	@FindBy (css="[id*='_uiElement'] .link-yes")
+	private WebElement linkExistsIcon;
+	@FindBy (css="[id*='_uiElement'] .external")
+	private WebElement linkExternalIcon;
 
 	public void writeMiniEditor(String text){
 		waitForElementByElement(messageBodyField);
@@ -96,28 +100,27 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForElementByElement(videoInMessageEditMode);
 		driver.switchTo().defaultContent();
 	}
-	
+
 	public void addExternalLink(String externalLink){
 		waitForElementByElement(addLinkButton);
 		clickAndWait(addLinkButton);
 		waitForElementByElement(externalLinkOption);
 		clickAndWait(externalLinkOption);
 		targetPageOrURL.sendKeys(externalLink);
-		waitForTextToBePresentInElementByElement(linkPageStatus, "External link");
+		waitForElementByElement(linkExternalIcon);
 		clickAndWait(linkModalOkButton);
-		
 	}
-	
+
 	public void addInternalLink(String internalLink){
 		waitForElementByElement(addLinkButton);
 		clickAndWait(addLinkButton);
 		waitForElementByElement(targetPageOrURL);
 		targetPageOrURL.sendKeys(internalLink);
-		waitForTextToBePresentInElementByElement(linkPageStatus, "Page exists");
+		waitForElementByElement(linkExistsIcon);
 		waitForElementByElement(linkModalOkButton);
 		clickAndWait(linkModalOkButton);
-	}	
-	
+	}
+
 	public void clearContent(){
 		messageBodyField.clear();
 	}
