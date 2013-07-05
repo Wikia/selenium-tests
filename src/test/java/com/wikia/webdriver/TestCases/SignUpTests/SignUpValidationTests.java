@@ -17,9 +17,9 @@ public class SignUpValidationTests extends TestTemplate {
 		signUpPage.typeInEmail(userNameEmail);
 		signUpPage.typeInPassword(signUpPage.getTimeStamp());
 		signUpPage.enterBirthDate(
-		PageContent.wikiSignUpBirthMonth,
-		PageContent.wikiSignUpBirthDay,
-		PageContent.wikiSignUpBirthYear
+			PageContent.wikiSignUpBirthMonth,
+			PageContent.wikiSignUpBirthDay,
+			PageContent.wikiSignUpBirthYear
 		);
 		signUpPage.enterWrongBlurryWord();
 		signUpPage.clickCreateAccountButton();
