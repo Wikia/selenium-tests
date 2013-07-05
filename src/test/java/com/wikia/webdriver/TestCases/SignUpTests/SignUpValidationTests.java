@@ -4,6 +4,7 @@
  */
 package com.wikia.webdriver.TestCases.SignUpTests;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -11,12 +12,18 @@ import org.testng.annotations.Test;
 
 public class SignUpValidationTests extends TestTemplate {
 
-	@Test(groups = {"SignUp_test"})
-	public void SignUp_field_validation_TC002()
+	@Test(groups = {"SignUp_validation_2"})
+	public void SignUp_validation_2()
 	{
-		String userNameEmail = Properties.emailQaart2;
-		String passwordEmail = Properties.emailPasswordQaart2;
 		SignUpPageObject signUpPage = new SignUpPageObject(driver);
-		signUpPage.openSignUpPage();
-	}
+                signUpPage.openSignUpPage();
+                String userNameNotExisting = signUpPage.getTimeStamp();
+                signUpPage.typeInUserName(userNameNotExisting);
+                String userNameEmail = signUpPage.getTimeStamp();
+                signUpPage.typeInEmail(userNameEmail);
+                String passwordNotExisting = signUpPage.getTimeStamp();
+                signUpPage.typeInPassword(passwordNotExisting);
+                signUpPage.selectToYoungBirthDate();
+                signUpPage.clickCreateAccountButton();
+        }
 }
