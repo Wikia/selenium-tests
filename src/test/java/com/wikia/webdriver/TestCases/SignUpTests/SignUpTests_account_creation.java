@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.SignUpTests;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.Test;
 
@@ -38,7 +39,11 @@ public class SignUpTests_account_creation extends TestTemplate
 		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
-		signUp.enterBirthDate("11", "11", "1954");
+		signUp.enterBirthDate(
+			PageContent.wikiSignUpBirthMonth, 
+			PageContent.wikiSignUpBirthDay, 
+			PageContent.wikiSignUpBirthYear
+		);
 		signUp.enterBlurryWord();
 		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
@@ -74,7 +79,11 @@ public class SignUpTests_account_creation extends TestTemplate
 		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
-		signUp.enterBirthDate("11", "11", "1954");
+		signUp.enterBirthDate(
+			PageContent.wikiSignUpBirthMonth, 
+			PageContent.wikiSignUpBirthDay, 
+			PageContent.wikiSignUpBirthYear
+		);
 		signUp.enterBlurryWord();
 		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
@@ -111,7 +120,11 @@ public class SignUpTests_account_creation extends TestTemplate
 		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
-		signUp.enterBirthDate("11", "11", "1954");
+		signUp.enterBirthDate(
+			PageContent.wikiSignUpBirthMonth, 
+			PageContent.wikiSignUpBirthDay, 
+			PageContent.wikiSignUpBirthYear
+		);
 		signUp.enterBlurryWord();
 		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
@@ -147,7 +160,11 @@ public class SignUpTests_account_creation extends TestTemplate
 		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
-		signUp.enterBirthDate("11", "11", "1954");
+		signUp.enterBirthDate(
+			PageContent.wikiSignUpBirthMonth, 
+			PageContent.wikiSignUpBirthDay, 
+			PageContent.wikiSignUpBirthYear
+		);
 		signUp.enterBlurryWord();
 		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
@@ -183,7 +200,11 @@ public class SignUpTests_account_creation extends TestTemplate
 		signUp.typeInEmail(userNameEmail);
 		signUp.typeInUserName(userName);
 		signUp.typeInPassword(password);
-		signUp.enterBirthDate("11", "11", "1954");
+		signUp.enterBirthDate(
+			PageContent.wikiSignUpBirthMonth, 
+			PageContent.wikiSignUpBirthDay, 
+			PageContent.wikiSignUpBirthYear
+		);
 		signUp.enterBlurryWord();
 		AlmostTherePageObject almostTherePage = signUp.submit(userNameEmail, passwordEmail);
 		almostTherePage.verifyAlmostTherePage();
