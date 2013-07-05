@@ -56,18 +56,6 @@ public class SignUpPageObject extends BasePageObject {
 	 private WebElement emptyUserNameValidationError;
 	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Someone already has this username. Try a different one!')]")
 	 private WebElement occupiedUserNameValidationError;
-//	 @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
 
 	/**
 	 * @author Karol Kujawiak
@@ -112,6 +100,21 @@ public class SignUpPageObject extends BasePageObject {
 		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
 	}
 	
+        public void selectToYoungBirthDate()
+        {
+            Select m = new Select(birthMonthField);
+            Select d = new Select(birthDayField);
+            Select y = new Select(birthYearField);
+            m.selectByIndex(1);
+            d.selectByIndex(1);
+            y.selectByIndex(1);
+        }
+
+        public void clickCreateAccountButton()
+        {
+            createAccountButton.click();
+        }
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param month
@@ -265,5 +268,4 @@ public class SignUpPageObject extends BasePageObject {
 			return null;
 		}
 	}
-
 }
