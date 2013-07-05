@@ -55,7 +55,6 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
-		//Test	
 		switchToWindow(driver);
 		chat1.verifyUserJoinToChat(Properties.userName2);
 	}
@@ -76,6 +75,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		home.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password, driver);
 		ChatPageObject chat1 = new ChatPageObject(driver);
+		chat1.openChatPage();
 		//second user opens the chat		
 		switchToWindow(driver2);
 		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
@@ -84,7 +84,6 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		switchToWindow(driver);
-		chat1.openChatPage();
 		//Test	
 		chat1.verifyChatPage();
 		chat1.clickOnDifferentUser(Properties.userName2, driver);

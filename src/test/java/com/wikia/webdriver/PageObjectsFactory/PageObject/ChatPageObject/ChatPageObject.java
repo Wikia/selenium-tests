@@ -28,7 +28,7 @@ public class ChatPageObject extends BasePageObject
 	private WebElement wordmark;
 	@FindBy(css="div.User span.username")
 	private WebElement userName;
-	@FindBy(css="#Chat_4 .inline-alert")
+	@FindBy(css="[id*='Chat'] .inline-alert[id*='entry']")
 	private WebElement chatInlineAlert;
 	@FindBy(css="div.User img")
 	private WebElement userAvatar;
@@ -69,7 +69,6 @@ public class ChatPageObject extends BasePageObject
 	public void openChatPage()
 	{
 		getUrl(Global.DOMAIN+"wiki/Special:Chat");
-		waitForElementByElement(chatInlineAlert);
 		waitForElementByElement(chatInlineAlert);
 		PageObjectLogging.log(
 			"openChatPage",
