@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,33 +36,30 @@ public class ForumPageObject extends WikiArticlePageObject{
 		clickAndWait(faqButton);
 		PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
 	}
-	
+
 	private void closeFaqLightBox(){
 		clickAndWait(closeFaqLightBoxButton);
 		PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
-		
 	}
-	
+
 	private void checkFaqLightBoxOpened(){
 		waitForElementByElement(faqLightBox);
 		PageObjectLogging.log("checkFaqLightBoxOpened", "faq lightbox verified", true);
-		
 	}
-	
+
 	public void verifyFaqLightBox(){
 		openFaqLightBox();
 		checkFaqLightBoxOpened();
 		closeFaqLightBox();
 	}
-	
+
 	public ForumPageObject openForumMainPage(){
-		getUrl(Global.DOMAIN+"wiki/Special:Forum");
+		getUrl(Global.DOMAIN + URLsContent.specialForum);
 		waitForElementByElement(faqButton);
 		PageObjectLogging.log("openForumPage", "forum page opened", true);
 		return new ForumPageObject(driver);
 	}
-	
-	
+
 	public ForumManageBoardsPageObject clickManageBoardsButton(){
 		clickAndWait(manageBoardsButton);
 		PageObjectLogging.log("clickManageBoardsButton", "manage boards button clicked", true);
@@ -76,7 +74,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 		PageObjectLogging.log("openForumBoard", "click on the forum Board number "+forumBoardNumber, true, driver);
 		return new ForumBoardPageObject(driver);
 	}
-	
+
 	public List<String> getForumNamesList(){
 		List<WebElement> listWebElements = getForumElementsList();
 		List<String> forumNames = new ArrayList<String>();

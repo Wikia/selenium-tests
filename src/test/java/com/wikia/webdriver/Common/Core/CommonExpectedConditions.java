@@ -1,23 +1,20 @@
 package com.wikia.webdriver.Common.Core;
-//http://code.google.com/p/selenium/source/browse/trunk/java/client/src/org/openqa/selenium/support/ui/ExpectedConditions.java
+
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
-import javax.naming.spi.DirStateFactory;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 
 public class CommonExpectedConditions {
 
@@ -214,13 +211,9 @@ public class CommonExpectedConditions {
 		final WebElement GivenElement, final String text) {
 
 	    return new ExpectedCondition<Boolean>() {
-	      public Boolean apply(WebDriver from) {
-	        try {
+	      public Boolean apply(WebDriver driver) {
 	          String elementText = GivenElement.getText();
 	          return elementText.contains(text);
-	        } catch (StaleElementReferenceException e) {
-	          return null;
-	        }
 	      }
 
 	      @Override

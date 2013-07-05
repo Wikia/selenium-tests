@@ -38,6 +38,8 @@ public class URLsContent {
     public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	public static final String specialCSS = "Special:CSS";
 	public static final String specialRandom = "wiki/Special:Random";
+	public static final String specialFollow = "wiki/Special:Following";
+	public static final String specialForum = "wiki/Special:Forum";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";

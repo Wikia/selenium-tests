@@ -126,15 +126,16 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
         }
         Random r = new Random();
         String imageName = hrefs.get((r.nextInt(hrefs.size()-1))+1);
+		unfollowImage(imageName);
         getUrl(imageName+"?action=watch");
         clickAndWait(followSubmit);
         waitForElementByElement(followedButton);
-        PageObjectLogging.log("followRandomImage", "folow image named "+imageName, true, driver);
+        PageObjectLogging.log("followRandomImage", "folow image named "+imageName, true);
         return imageName;
     }
 
     public void unfollowImage(String imageName){
-        getUrl(Global.DOMAIN+"wiki/File:"+imageName+"?action=unwatch");
+        getUrl(imageName+"?action=unwatch");
         clickAndWait(followSubmit);
         waitForElementByElement(unfollowedButton);
     }

@@ -20,7 +20,7 @@ public class ArticleCRUDTestsAdmin extends TestTemplate {
 	{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
 		article.clickEditDropDown();
 		article.verifyEditDropDownLoggedInUser();

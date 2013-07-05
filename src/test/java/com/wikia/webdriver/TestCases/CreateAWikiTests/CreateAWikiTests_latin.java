@@ -44,17 +44,6 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
 		logInPage.submitLogin();
 		logInPage.verifyEmptyUserNameValidation();
-		logInPage.typeInUserName(Properties.userName);
-		logInPage.typeInPassword(Properties.password);
-		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();
-		createNewWiki2.describeYourTopic(PageContent.wikiTopic);
-		createNewWiki2.selectCategory(PageContent.wikiCategory);
-		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
-		createNewWiki3.selectThemeByName("carbon");
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
-		newWikia.VerifyCongratulationsLightBox();
-		newWikia.closeCongratulationsLightBox();
-		newWikia.verifyUserLoggedIn(Properties.userName);
 	}
 
 	@Test(groups = { "CreateNewWiki_latin_003", "CNW" })
@@ -70,20 +59,6 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		logInPage.typeInUserName("invalidUserName");
 		logInPage.submitLogin();
 		logInPage.verifyInvalidUserNameValidation();
-		logInPage.typeInUserName(Properties.userName);
-		logInPage.typeInPassword(Properties.password);
-		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();
-		createNewWiki2.describeYourTopic(PageContent.wikiTopic);
-		createNewWiki2.selectCategory(PageContent.wikiCategory);
-		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
-		createNewWiki3.selectThemeByName("carbon");
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
-		newWikia.VerifyCongratulationsLightBox();
-		newWikia.closeCongratulationsLightBox();
-		newWikia.verifyUserLoggedIn(Properties.userName);
-		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(
-				driver);
-		toolbar.verifyUserToolBar();
 	}
 
 	@Test(groups = { "CreateNewWiki_latin_004", "CNW" })
@@ -99,20 +74,6 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		logInPage.typeInUserName(Properties.userName);
 		logInPage.submitLogin();
 		logInPage.verifyBlankPasswordValidation();
-		logInPage.typeInUserName(Properties.userName);
-		logInPage.typeInPassword(Properties.password);
-		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();
-		createNewWiki2.describeYourTopic(PageContent.wikiTopic);
-		createNewWiki2.selectCategory(PageContent.wikiCategory);
-		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
-		createNewWiki3.selectThemeByName("carbon");
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
-		newWikia.VerifyCongratulationsLightBox();
-		newWikia.closeCongratulationsLightBox();
-		newWikia.verifyUserLoggedIn(Properties.userName);
-		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(
-				driver);
-		toolbar.verifyUserToolBar();
 	}
 
 	@Test(groups = { "CreateNewWiki_latin_005", "CNW" })
@@ -129,20 +90,6 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		logInPage.typeInPassword("Invalid password");
 		logInPage.submitLogin();
 		logInPage.verifyInvalidPasswordValidation();
-		logInPage.typeInUserName(Properties.userName);
-		logInPage.typeInPassword(Properties.password);
-		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();
-		createNewWiki2.describeYourTopic(PageContent.wikiTopic);
-		createNewWiki2.selectCategory(PageContent.wikiCategory);
-		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
-		createNewWiki3.selectThemeByName("carbon");
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
-		newWikia.VerifyCongratulationsLightBox();
-		newWikia.closeCongratulationsLightBox();
-		newWikia.verifyUserLoggedIn(Properties.userName);
-		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(
-				driver);
-		toolbar.verifyUserToolBar();
 	}
 
 	@Test(groups = { "CreateNewWiki_latin_006", "CNW", "Smoke" })
@@ -170,7 +117,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 				driver);
 		toolbar.verifyUserToolBar();
 	}
-	
+
 	//https://wikia.fogbugz.com/default.asp?99340
 	@Test(groups = { "CreateNewWiki_latin_007", "CNW", "Smoke" })
 	public void CreateNewWiki_latin_TC007_deleteWiki(){

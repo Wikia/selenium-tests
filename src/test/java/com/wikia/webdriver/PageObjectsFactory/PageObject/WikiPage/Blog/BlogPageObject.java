@@ -2,14 +2,14 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BlogPageObject extends WikiArticlePageObject {
+public class BlogPageObject extends UserProfilePageObject {
 
 	@FindBy(css="div.author-details")
 	private WebElement usernameField;
@@ -52,11 +52,12 @@ public class BlogPageObject extends WikiArticlePageObject {
 
 	public BlogPageObject openBlogPage(String userName){
 		getUrl(Global.DOMAIN+"/User_blog:"+userName);
-		PageObjectLogging.log("openBlogPage", "blog page opened", true, driver);
+		PageObjectLogging.log("openBlogPage", "blog page opened", true);
 		return new BlogPageObject(driver);
 	}
 
 	public void followBlogPage(String userName){
+		unfollowBlogPage(userName);
 		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=watch");
 		clickAndWait(followSubmit);
 		waitForElementByElement(followedButton);

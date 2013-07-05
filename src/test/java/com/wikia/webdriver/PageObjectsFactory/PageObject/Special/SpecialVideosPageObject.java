@@ -43,17 +43,18 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 		List<String> hrefs = new ArrayList();
 		for (WebElement elem:videos)
 		{
-			hrefs.add(elem.getAttribute("href"));		
+			hrefs.add(elem.getAttribute("href"));
 		}
 		Random r = new Random();
 		int rnd = r.nextInt(hrefs.size()-1);
 		String href = hrefs.get((rnd)+1);
+		unfollowVideo(href);
 		getUrl(href+"?action=watch");
 		clickAndWait(followSubmit);
 		waitForElementByElement(followedButton);
 		return href;
 	}
-	
+
 	public void unfollowVideo(String videoName){
 		getUrl(videoName+"?action=unwatch");
 		clickAndWait(followSubmit);

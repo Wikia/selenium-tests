@@ -559,24 +559,25 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		String articleName = URL.substring(articlenameIndex+5);
 		return articleName;
 	}
-	
+
 	public String followRandomArticle(){
 		openRandomArticle();
 		String name = driver.findElement(By.cssSelector(".WikiaPageHeader h1")).getText();
+		unfollowArticleByApi(name);
 		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=watch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(followedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
 		return name;
 	}
-	
-	public void unfollowArticle(String name){
+
+	public void unfollowArticleByApi(String name){
 		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=unwatch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(unfollowedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
 	}
-	
+
 	public FileDetailsPageObject clickVideoDetailsButton() {
 		waitForElementByElement(videoDetailsButton);
 		videoDetailsButton.click();
