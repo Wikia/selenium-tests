@@ -21,7 +21,6 @@ public class PropertiesSetter {
 		Global.DOMAIN = "http://mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		String seleniumConfigDir = "c:"+File.separator+"selenium-config";
-        seleniumConfigDir = "/selenium-config/";
 		Global.CONFIG_FILE = new File(seleniumConfigDir+File.separator+"config.xml");
 		Global.CAPTCHA_FILE = new File(seleniumConfigDir+File.separator+"captcha.txt");
 
