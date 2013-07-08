@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.Common.Properties.NewProperties;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
@@ -27,10 +27,7 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 	)
 	public TestNoAdsLoggedInUsers(String wikiName, String path) {
 		super();
-		UrlBuilder urlBuilder = new UrlBuilder(
-			(String) config.get("ENV"),
-			(String) config.get("QS")
-		);
+		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		testedWiki = urlBuilder.getUrlForWiki(wikiName);
 	}
@@ -38,7 +35,7 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 	private void loginSteps() {
 		SpecialUserLoginPageObject userLogin = new SpecialUserLoginPageObject(driver);
 		userLogin.loginAndVerifyOnWiki(
-			Properties.userName, Properties.password, testedWiki
+			NewProperties.userName, NewProperties.password, testedWiki
 		);
 	}
 

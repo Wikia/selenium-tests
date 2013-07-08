@@ -17,7 +17,6 @@ import org.testng.annotations.BeforeMethod;
  */
 public class AdsTestTemplate extends NewTestTemplate {
 
-    private static HashMap adsConfiguration;
     private static DesiredCapabilities adCap;
     private static GeoEdgeProxyServer adServer;
 

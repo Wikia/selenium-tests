@@ -10,9 +10,8 @@ public class UrlBuilder {
 	private String qs;
 	private Boolean isWikia;
 
-	public UrlBuilder(String environment, String queryString) {
+	public UrlBuilder(String environment) {
 		env = environment;
-		qs = queryString;
 	}
 
 	public String getUrlForPath(String wikiName, String wikiPath) {
@@ -55,15 +54,5 @@ public class UrlBuilder {
 
 	public static String buildUrl(String wikiUrl, String suffix) {
 		return wikiUrl + suffix;
-	}
-
-	public static String addQueryString(String wikiUrl, String queryString) {
-		String url = wikiUrl;
-		if (wikiUrl.contains("?")) {
-			url += "&" + queryString;
-		} else {
-			url += "?" + queryString;
-		}
-		return url;
 	}
 }

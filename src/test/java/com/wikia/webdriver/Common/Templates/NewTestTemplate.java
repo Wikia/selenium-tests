@@ -1,14 +1,15 @@
 package com.wikia.webdriver.Common.Templates;
 
 import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Configuration;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationInterface;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.NewProperties;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -23,17 +24,21 @@ public class NewTestTemplate {
 
 	protected WebDriver driver;
 	protected String testedWiki;
-	protected HashMap<String, Object> config;
+	protected ConfigurationInterface config;
 
 	public NewTestTemplate() {
-		config = Configuration.getConfiguration();
+		config = ConfigurationFactory.getConfig();
 	}
 
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {
+		NewProperties.setVariables();
+		//Needed because a lot of tests uses GLOBAL object
+		//Not calling causes NUllPointerException
+		Properties.setProperties();
 		CommonUtils.deleteDirectory("." + File.separator + "logs");
 		CommonUtils.createDirectory("." + File.separator + "logs");
-		Properties.setProperties();
+
 	}
 
 	@AfterSuite(alwaysRun = true)
@@ -52,7 +57,7 @@ public class NewTestTemplate {
 
 	protected void startBrowser() {
 		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser(
-			(String) config.get("BROWSER")
+			config.getBrowser()
 		);
 		eventDriver.register(new PageObjectLogging());
 		driver = eventDriver;
