@@ -108,10 +108,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 
         // add new board and use the template in description
 
-        // verify the template's content IS visible on Special:Forum edit mode page
+        // verify the template's content IS NOT visible on Special:Forum
 
-        // verify the template's content IS NOT visible on Special:Forum without edit mode
-
-        // verify the templte's content IS visible on board page
+        // verify the template's content IS visible on board page
     }
 }
