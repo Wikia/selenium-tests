@@ -47,6 +47,9 @@ public class URLsContent {
 	
 	//Blog list page url
 	public static final String blogList = "wiki/Blog:%listName%";
+
+    // Mediawiki template url
+    public static final String templateUrl = "wiki/Template:%name%";
 	
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";

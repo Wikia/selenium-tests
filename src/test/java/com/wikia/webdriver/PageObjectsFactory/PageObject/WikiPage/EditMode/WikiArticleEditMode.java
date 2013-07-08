@@ -385,10 +385,11 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}
 
-
-
-
-
+    public void typeInTemplateContent( String content ) {
+        waitForElementByElement(messageSourceModeTextArea);
+        messageSourceModeTextArea.sendKeys(content);
+        PageObjectLogging.log("typeInContent", "content type into source mode textarea", true, driver);
+    }
 
 	/**
 	 * Click on 'modify button' of image with given caption

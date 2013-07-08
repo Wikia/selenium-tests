@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -116,12 +117,31 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public WikiArticleEditMode createNewArticle(String pageName,
 			int layoutNumber) {
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
-				+ "&action=edit&useFormat=" + layoutNumber);
+                + "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
-				+ pageNameEnc + "']")));
+                + pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver);
 	}
+
+    public WikiArticleEditMode createNewArticle(WikiArticlePageObject article) {
+        String pageName = article.getPageName();
+        getUrl(Global.DOMAIN + URLsContent.wikiDir + pageName + URLsContent.actionEditParameter );
+
+        String pageNameEnc = pageName.replace("_", " ");
+        waitForElementByElement( driver.findElement( By.cssSelector( "a[title='" + pageNameEnc + "']" ) ) );
+
+        return new WikiArticleEditMode(driver);
+    }
+
+    public WikiArticleEditMode createNewTemplate( String templateName ) {
+        String templateNamespace = "Template"; //TODO: check with QA if we keep somewhere namespaces
+
+        WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, templateNamespace + ":" + templateName );
+        WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
+
+        return edit;
+    }
 
 	public WikiArticleEditMode createNewDefaultArticle(){
 		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
@@ -132,7 +152,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		clickAndWait(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
+                "random page button clicked", true, driver);
 		return new WikiArticlePageObject(driver);
 	}
 
@@ -191,19 +211,19 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	
 	public void clickSubmitButton(String userName)
 	{		
-		clickAndWait(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
+		clickAndWait(driver.findElement(By.xpath("//a[contains(text(), '" + userName + "')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
 	}
 
 	public void verifyCommentText(String message, String userName)
 	{
-		waitForElementByXPath("//blockquote//p[contains(text(), '"+message+"')]");
-		waitForElementByXPath("//div[@class='edited-by']//a[contains(text(), '"+userName+"')]");
+		waitForElementByXPath("//blockquote//p[contains(text(), '" + message + "')]");
+		waitForElementByXPath("//div[@class='edited-by']//a[contains(text(), '" + userName + "')]");
 		PageObjectLogging.log("verifyComment", "comment: "+message+" is visible", true, driver);
 	}
 
 	public void verifyCommentVideo(String videoName){
-		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='"+videoName+"']");
+		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='" + videoName + "']");
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
 	}
 	
@@ -272,7 +292,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void verifyPageTitle(String title)
 	{
 		title = title.replace("_", " ");
-		waitForElementByXPath("//h1[contains(text(), '"+title+"')]");
+		waitForElementByXPath("//h1[contains(text(), '" + title + "')]");
 		PageObjectLogging.log("verifyPageTitle", "page title is verified", true);
 	}
 
@@ -442,8 +462,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
  * @param position available values (vertical, horizontal)
  */
 	public void verifySliderThumbnailsPosition(String position) {
-		waitForElementByCss(".wikiaPhotoGallery-slider-body div."+position);
-		PageObjectLogging.log("verifySliderThumbnailsPosition", "Slider thumbnails position verified: "+position, true, driver);		
+		waitForElementByCss(".wikiaPhotoGallery-slider-body div." + position);
+		PageObjectLogging.log("verifySliderThumbnailsPosition", "Slider thumbnails position verified: " + position, true, driver);
 	}
 
 	public WikiHistoryPageObject openHistoryPage()
@@ -564,7 +584,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		openRandomArticle();
 		String name = driver.findElement(By.cssSelector(".WikiaPageHeader h1")).getText();
 		unfollowArticleByApi(name);
-		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=watch");
+		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=watch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(followedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
@@ -572,7 +592,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void unfollowArticleByApi(String name){
-		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=unwatch");
+		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=unwatch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(unfollowedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
@@ -602,9 +622,9 @@ public class WikiArticlePageObject extends WikiBasePageObject {
         waitForElementByElement(addVideoWikiaRail);
         clickAndWait(addVideoWikiaRail);
         PageObjectLogging.log(
-            "clickAndVideoOnWikiaRail",
-            "Button add video on wikia rail is clicked",
-            true, driver
+                "clickAndVideoOnWikiaRail",
+                "Button add video on wikia rail is clicked",
+                true, driver
         );
     }
 
