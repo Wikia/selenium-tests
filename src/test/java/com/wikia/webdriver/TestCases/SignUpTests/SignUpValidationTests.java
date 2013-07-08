@@ -15,7 +15,7 @@ public class SignUpValidationTests extends TestTemplate {
 	signUpPage.typeInUserName(signUpPage.getTimeStamp());
 	signUpPage.typeInEmail(Properties.emailQaart1);
 	signUpPage.typeInPassword(signUpPage.getTimeStamp());
-	signUpPage.selectToYoungBirthDate();
+	signUpPage.selectTooYoungBirthDate();
 	signUpPage.waitForTooYoungErrorMsg();
     }
 }

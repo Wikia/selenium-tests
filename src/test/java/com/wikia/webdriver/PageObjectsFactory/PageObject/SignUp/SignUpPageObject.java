@@ -53,11 +53,13 @@ public class SignUpPageObject extends BasePageObject {
 	@FindBy(css = ".input-group.required.error .error-msg")
 	private WebElement tooYoungError;
 
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), "
+	 @FindBy(
+		 xpath="//div[@class='error-msg' and contains(text(), "
 		 + "'Oops, please fill in the username field.')]"
 		 )
 	 private WebElement emptyUserNameValidationError;
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), "
+	 @FindBy(
+		 xpath="//div[@class='error-msg' and contains(text(), "
 		 + "'Someone already has this username. Try a different one!')]"
 		 )
 	 private WebElement occupiedUserNameValidationError;
@@ -114,7 +116,7 @@ public class SignUpPageObject extends BasePageObject {
 		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
 	}
 
-	public void selectToYoungBirthDate()
+	public void selectTooYoungBirthDate()
 	{
 		monthSelect.selectByIndex(1);
 		daySelect.selectByIndex(1);
