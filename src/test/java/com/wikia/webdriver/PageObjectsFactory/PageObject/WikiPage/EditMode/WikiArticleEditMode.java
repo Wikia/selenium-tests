@@ -23,7 +23,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
-
 public class WikiArticleEditMode extends WikiEditMode {
 
 	@FindBy(css="a.RTEImageButton")
@@ -409,6 +408,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		CommonUtils.setClipboardContents(builder);
 		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 
-		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
+		PageObjectLogging.log("deleteUnwantedVideoFromMessage",
+				"Delete all source code on the article", true, driver);
+	}
+
+	public void typeInTemplateContent(String content) {
+		waitForElementByElement(messageSourceModeTextArea);
+		messageSourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log("typeInContent",
+				"content type into source mode textarea", true, driver);
 	}
 }

@@ -1,5 +1,9 @@
 package com.wikia.webdriver.TestCases.ForumTests;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -91,4 +95,23 @@ public class ForumEditModeTests extends NewTestTemplate{
 		second = manageForum.getSecondForumName();
 		manageForum.clickMoveUp(second);
 	}
+
+    @Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
+    public void testTemplatesInBoardDescription() {
+        ForumPageObject forumMainPage = new ForumPageObject(driver);
+
+        // create a template
+        String templateName = "Forum_test_template_" + forumMainPage.getTimeStamp();
+        WikiArticleEditMode edit = forumMainPage.createNewTemplate( templateName, templateName );
+
+        // go to Special:Forum and enter edit mode
+
+        // add new board and use the template in description
+
+        // verify the template's content IS visible on Special:Forum edit mode page
+
+        // verify the template's content IS NOT visible on Special:Forum without edit mode
+
+        // verify the templte's content IS visible on board page
+    }
 }

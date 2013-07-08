@@ -4,6 +4,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -115,4 +116,13 @@ public class ForumPageObject extends WikiArticlePageObject{
 		List<WebElement> listWebElements = driver.findElements(forumBoardsList);
 		return listWebElements;
 	}
+
+    public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
+        WikiArticleEditMode edit = super.createNewTemplate( templateName );
+
+        edit.typeInTemplateContent( templateContent );
+        edit.clickOnPublish();
+
+        return edit;
+    }
 }
