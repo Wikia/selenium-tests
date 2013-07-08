@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,8 +24,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SignUpPageObject extends BasePageObject {
 
@@ -33,17 +32,17 @@ public class SignUpPageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css = "form#WikiaSignupForm input[name='username']")
+	@FindBy(css = "#WikiaSignupForm input[name='username']")
 	private WebElement userNameField;
-	@FindBy(css = "form#WikiaSignupForm input[name='email']")
+	@FindBy(css = "#WikiaSignupForm input[name='email']")
 	private WebElement emailField;
-	@FindBy(css = "form#WikiaSignupForm input[name='password']")
+	@FindBy(css = "#WikiaSignupForm input[name='password']")
 	private WebElement passwordField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthmonth']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthmonth']")
 	private WebElement birthMonthField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthday']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthday']")
 	private WebElement birthDayField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthyear']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthyear']")
 	private WebElement birthYearField;
 	@FindBy(css = "input#wpCaptchaWord")
 	private WebElement blurryWordField;
@@ -51,13 +50,16 @@ public class SignUpPageObject extends BasePageObject {
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
 	private WebElement createAccountButton;
-	private final String tooYoungErrorMsg = ".input-group.required.error .error-msg";
-	@FindBy(css = tooYoungErrorMsg)
+	@FindBy(css = ".input-group.required.error .error-msg")
 	private WebElement tooYoungError;
-	
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Oops, please fill in the username field.')]")
+
+	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), "
+		 + "'Oops, please fill in the username field.')]"
+		 )
 	 private WebElement emptyUserNameValidationError;
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Someone already has this username. Try a different one!')]")
+	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), "
+		 + "'Someone already has this username. Try a different one!')]"
+		 )
 	 private WebElement occupiedUserNameValidationError;
 
 	 private Select yearSelect;
@@ -68,14 +70,17 @@ public class SignUpPageObject extends BasePageObject {
 	 */
 	public void openSignUpPage()
 	{
-            getUrl(Global.DOMAIN+"wiki/Special:UserSignup");
-            waitForElementByElement(blurryWordField);
-	    yearSelect = new Select(birthYearField);
-	    daySelect = new Select(birthDayField);
-	    monthSelect = new Select(birthMonthField);
-            PageObjectLogging.log("openSignUpPage ", "Sign up page opened " +driver.getCurrentUrl(), true, driver);
+		getUrl(Global.DOMAIN+ URLsContent.specialUserSignup);
+		yearSelect = new Select(birthYearField);
+		daySelect = new Select(birthDayField);
+		monthSelect = new Select(birthMonthField);
+		PageObjectLogging.log(
+		    "openSignUpPage ",
+		    "Sign up page opened " +driver.getCurrentUrl(),
+		    true, driver
+		);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName
@@ -84,10 +89,11 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		userNameField.sendKeys(userName);
 		userNameField.sendKeys(Keys.TAB);
-		PageObjectLogging.log("typeInUserName ", "User name field populated " +userName, true, driver);
+		PageObjectLogging.log("typeInUserName ",
+			"User name field populated "
+			+userName, true, driver);
 	}
-	
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -96,8 +102,7 @@ public class SignUpPageObject extends BasePageObject {
 		emailField.sendKeys(email);
 		PageObjectLogging.log("typeInEmail ", "Email field populated", true, driver);
 	}
-	
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param password
@@ -108,20 +113,20 @@ public class SignUpPageObject extends BasePageObject {
 		passwordField.sendKeys(password);
 		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
 	}
-	
-        public void selectToYoungBirthDate()
-        {
-	    monthSelect.selectByIndex(1);
-            daySelect.selectByIndex(1);
-            yearSelect.selectByIndex(1);
-        }
 
-        public void waitForTooYoungErrorMsg()
-        {
-	    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tooYoungErrorMsg)));
-	    Assertion.assertTrue(tooYoungError.isDisplayed());
-	    PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true, driver);
-        }
+	public void selectToYoungBirthDate()
+	{
+		monthSelect.selectByIndex(1);
+		daySelect.selectByIndex(1);
+		yearSelect.selectByIndex(1);
+	}
+
+	public void waitForTooYoungErrorMsg()
+	{
+		waitForElementByElement(tooYoungError);
+		Assertion.assertTrue(tooYoungError.isDisplayed());
+		PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true, driver);
+	}
 
 	/**
 	 * @author Karol Kujawiak
@@ -144,15 +149,14 @@ public class SignUpPageObject extends BasePageObject {
 			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
 			monthSelect.selectByVisibleText(month);
-			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);			
+			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);
 		}
 		catch(InterruptedException e)
 		{
                     e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -162,8 +166,7 @@ public class SignUpPageObject extends BasePageObject {
 		blurryWordField.sendKeys(word);
 		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true, driver);
 	}
-	
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -174,7 +177,7 @@ public class SignUpPageObject extends BasePageObject {
 		PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
 		return new AlmostTherePageObject(driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -183,7 +186,7 @@ public class SignUpPageObject extends BasePageObject {
 		waitForElementByElement(emptyUserNameValidationError);
 		PageObjectLogging.log("verifyUserNameValidation ", "empty user name validation verified", true);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -192,7 +195,7 @@ public class SignUpPageObject extends BasePageObject {
 		waitForElementByElement(occupiedUserNameValidationError);
 		PageObjectLogging.log("verifyUserNameValidation ", "occupied user name validation verified", true);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
