@@ -95,6 +95,9 @@ public class ForumPageObject extends WikiArticlePageObject{
 
         edit.typeInTemplateContent( templateContent );
         edit.clickOnPublish();
+        this.waitForElementByCss("#WikiaArticle");
+
+        PageObjectLogging.log("createNewTemplate", "new template created", true);
 
         return edit;
     }

@@ -112,14 +112,21 @@ public class ForumEditModeTests extends TestTemplate{
         ForumPageObject forumMainPage = new ForumPageObject(driver);
 
         // create a template
-        String templateName = "Forum_test_template_" + forumMainPage.getTimeStamp();
-        WikiArticleEditMode edit = forumMainPage.createNewTemplate( templateName, templateName );
+        String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
+        WikiArticleEditMode edit = forumMainPage.createNewTemplate( templateNameAndContent, templateNameAndContent );
 
-        // go to Special:Forum and enter edit mode
+        // login & open forum page and create new board
+        CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+        forumMainPage.openForumMainPage();
+        ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
 
-        // add new board and use the template in description
+        String boardTitle = "Forum test board with template (" + forumManageBoardPage.getTimeStamp() + ")";
+        String boardDescWithoutTpl = "Forum test board with template.";
+        String boardDescWithTpl = boardDescWithoutTpl + " {{" + templateNameAndContent + "}}";
+        forumManageBoardPage.createNewBoard( boardTitle, boardDescWithTpl );
+        forumManageBoardPage.verifyBoardCreated( boardTitle, boardDescWithoutTpl );
 
-        // verify the template's content IS NOT visible on Special:Forum
+        // verify the template IS in the edit mode of the board
 
         // verify the template's content IS visible on board page
     }
