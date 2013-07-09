@@ -93,9 +93,36 @@ public class ForumThreadTests extends TestTemplate{
 		ForumHistoryPageObject forumHistory = forumThread.openHistory();
 		forumHistory.verifyImportandPageElements();
 	}
+
+	@Test(groups= {"ForumThreadTests_007", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_007_closeThread(){
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage();
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		forumThread.closeThread(PageContent.closeReason);
+		forumThread.verifyThreadClosed();
+	}
+
+	@Test(groups= {"ForumThreadTests_008", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_008_closeThreadAndReopen(){
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage();
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		forumThread.closeThread(PageContent.closeReason);
+		forumThread.verifyThreadClosed();
+		forumThread.reopenThread();
+		forumThread.verifyThreadReopened();
+	}
 }
-
-
-
-
-

@@ -34,12 +34,20 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement removeButton;
 	@FindBy(css=".WikiaMenuElement .move-thread")
 	private WebElement moveThreadButton;
+	@FindBy(css=".WikiaMenuElement .close-thread")
+	private WebElement closeThreadButton;
+	@FindBy(css=".WikiaMenuElement .reopen-thread")
+	private WebElement reopenThreadButton;
 	@FindBy(css="#WallMoveModal select")
 	private WebElement moveThreadModal_selectElement;
 	@FindBy(css="#WallMoveModal button.submit")
 	private WebElement moveThreadModal_moveThreadButton;
 	@FindBy(css=".wall-action-reason")
 	private WebElement removeThreadModal_Textarea;
+	@FindBy(css=".reason")
+	private WebElement closeThreadMessage;
+	@FindBy(css="#reason")
+	private WebElement closeThreadTextarea;
 	@FindBy(css="#WikiaConfirmOk")
 	private WebElement removeThreadModal_removeButton;
 	@FindBy(css=".speech-bubble-message-removed")
@@ -138,7 +146,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		jQueryClick(".WikiaMenuElement .remove-message");
 		PageObjectLogging.log("clickOnRemoveButton", "click on 'remove' button", true, driver);								
 	}
-	
+
 	public void clickOnMoveThreadButton() {
 		waitForElementByElement(moveThreadButton);
 //		waitForElementClickableByElement(moveThreadButton);
@@ -155,9 +163,35 @@ public class ForumThreadPageObject extends BasePageObject{
 		PageObjectLogging.log("clickOnMoreButton", "click on 'more' button on a message", true);								
 	}
 
+	public void clickOnCloseThreadButton() {
+		waitForElementByElement(closeThreadButton);
+		waitForElementClickableByElement(closeThreadButton);
+		clickAndWait(closeThreadButton);
+		PageObjectLogging.log("clickOnCloseThreadButton", "click on 'close thread' button on a message", true);
+	}
+
+	public void clickOnReopenThreadButton() {
+		waitForElementByElement(reopenThreadButton);
+		waitForElementClickableByElement(reopenThreadButton);
+		clickAndWait(reopenThreadButton);
+		PageObjectLogging.log("clickOnReopenThreadButton", "click on 'reopen thread' button on a message", true);
+	}
+
 	public void verifyThreadRemoved() {
 		waitForTextToBePresentInElementByElement(threadRemovedMessage, "thread has been removed");
 		PageObjectLogging.log("verifyThreadRemoved", "Thread has been removed", true);								
+	}
+
+	public void verifyThreadClosed() {
+		waitForElementByElement(closeThreadMessage);
+		PageObjectLogging.log("verifyThreadClosed", "Thread has been closed", true);
+	}
+
+	public void verifyThreadReopened() {
+		clickOnMoreButton();
+		waitForElementVisibleByElement(closeThreadButton);
+		waitForElementNotVisibleByElement(closeThreadMessage);
+		PageObjectLogging.log("verifyThreadClosed", "Thread has been closed", true);
 	}
 
 	public void undoRemove() {
@@ -176,6 +210,23 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementClickableByElement(moveThreadModal_moveThreadButton);
 		clickAndWait(moveThreadModal_moveThreadButton);		
 		PageObjectLogging.log("moveThread", "thread moved to the following board: "+forumBoardName, true, driver);									
+	}
+
+	public void closeThread(String reason) {
+		clickOnMoreButton();
+		clickOnCloseThreadButton();
+		waitForElementByElement(closeThreadTextarea);
+		closeThreadTextarea.sendKeys(reason);
+		waitForElementByElement(removeThreadModal_removeButton);
+		waitForElementClickableByElement(removeThreadModal_removeButton);
+		click(removeThreadModal_removeButton);
+		PageObjectLogging.log("closeThread", "closed thread with the following reason: "+reason, true, driver);
+	}
+
+	public void reopenThread() {
+		clickOnMoreButton();
+		clickOnReopenThreadButton();
+		PageObjectLogging.log("closeThread", "reopened thread", true, driver);
 	}
 
 	public void verifyParentBoard(String forumBoardName) {
