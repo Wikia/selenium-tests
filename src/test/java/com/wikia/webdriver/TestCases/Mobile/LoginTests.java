@@ -11,7 +11,7 @@ public class LoginTests extends TestTemplate{
 
 	String url;
 
-	@Test(groups={"mobile"})
+	@Test(groups={"mobile", "login_mobile"})
 	public void Login(){//String userName, String password){
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome();
