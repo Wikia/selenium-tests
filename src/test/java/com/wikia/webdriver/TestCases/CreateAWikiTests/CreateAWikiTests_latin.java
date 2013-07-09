@@ -1,19 +1,20 @@
 package com.wikia.webdriver.TestCases.CreateAWikiTests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.NewWikiaHomePage;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CreateAWikiTests_latin extends TestTemplate {
 	private String wikiName;
@@ -22,7 +23,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix + timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -37,7 +38,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix + timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -51,7 +52,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix + timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -66,7 +67,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix + timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -81,7 +82,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix + timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -97,7 +98,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix + timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -124,7 +125,7 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(createNewWiki1.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix + timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();

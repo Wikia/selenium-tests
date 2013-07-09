@@ -1,17 +1,18 @@
 package com.wikia.webdriver.TestCases.CreateAWikiTests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.NewWikiaHomePage;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import org.testng.annotations.Test;
 
 public class CreateAWikiTests_nonLatin extends TestTemplate
 {
@@ -20,7 +21,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 	/*
 	 * Test Case 3.1.03 Create new wiki: log in field validation (non-Latin characters)
 	 * https://internal.wikia-inc.com/wiki/Global_Log_in_and_Sign_up/Test_Cases:_CNW#Test_Case_3.1.02_Create_new_wiki:_log_in_field_validation_.28Latin_characters.29
-	 * Username field validation: username does not exist  
+	 * Username field validation: username does not exist
 	 * */
 	@Test(groups = {"CreateNewWiki_nonLatin_TC001","CNW"})
 	public void CreateNewWiki_nonLatin_TC001_user_name_does_not_exists()
@@ -29,7 +30,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp().substring(home.getTimeStamp().length()-3);
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix+timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -52,7 +53,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
 	}
-	
+
 	/*
 	 * Test Case 3.1.02 Create new wiki: log in field validation (Latin characters)
 	 * https://internal.wikia-inc.com/wiki/Global_Log_in_and_Sign_up/Test_Cases:_CNW#Test_Case_3.1.02_Create_new_wiki:_log_in_field_validation_.28Latin_characters.29
@@ -65,7 +66,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp();
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix+timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -88,7 +89,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
 	}
-	
+
 	/*
 	 * Test Case 3.1.02 Create new wiki: log in field validation (Latin characters)
 	 * https://internal.wikia-inc.com/wiki/Global_Log_in_and_Sign_up/Test_Cases:_CNW#Test_Case_3.1.02_Create_new_wiki:_log_in_field_validation_.28Latin_characters.29
@@ -101,7 +102,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp();
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix+timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -125,7 +126,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
 	}
-	
+
 	/*
 	 * Test Case 3.1.02 Create new wiki: log in field validation (Latin characters)
 	 * https://internal.wikia-inc.com/wiki/Global_Log_in_and_Sign_up/Test_Cases:_CNW#Test_Case_3.1.02_Create_new_wiki:_log_in_field_validation_.28Latin_characters.29
@@ -138,7 +139,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp();
+		String timeStamp = createNewWiki1.getTimeStamp(3);
 		wikiName = PageContent.wikiNamePrefix+timeStamp;
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.waitForSuccessIcon();
@@ -156,5 +157,5 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
 		CommonFunctions.logOut(driver);
-	}	
+	}
 }

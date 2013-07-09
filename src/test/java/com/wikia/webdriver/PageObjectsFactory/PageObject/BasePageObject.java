@@ -440,6 +440,15 @@ public class BasePageObject{
 		return String.valueOf(timeCurrent);
 	}
 
+	public String getTimeStamp(int length) {
+		Date time = new Date();
+		long timeCurrent = time.getTime();
+		String timeStamp = String.valueOf(timeCurrent);
+		int timeStampLenght = timeStamp.length();
+		int timeStampCut = timeStampLenght-length;
+		return timeStamp.substring(timeStampCut);
+	}
+
 
 
 	/**
