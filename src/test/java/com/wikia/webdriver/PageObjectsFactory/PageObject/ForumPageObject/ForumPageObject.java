@@ -90,16 +90,16 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return listWebElements;
 	}
 
-    public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
-        WikiArticleEditMode edit = super.createNewTemplate( templateName );
+	public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
+		WikiArticleEditMode edit = super.createNewTemplate( templateName );
 
-        edit.typeInTemplateContent( templateContent );
-        edit.clickOnPublish();
-        this.waitForElementByCss("#WikiaArticle");
+		edit.typeInTemplateContent( templateContent );
+		edit.clickOnPublish();
+		this.waitForElementByCss("#WikiaArticle");
 
-        PageObjectLogging.log("createNewTemplate", "new template created", true);
+		PageObjectLogging.log("createNewTemplate", "new template created", true);
 
-        return edit;
-    }
+		return edit;
+	}
 	
 }
