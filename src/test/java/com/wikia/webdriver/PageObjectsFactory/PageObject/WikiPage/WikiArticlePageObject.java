@@ -105,9 +105,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
-	public WikiArticleEditMode createNewTemplate( String templateName ) {
+	public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
 		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.templateNs + ":" + templateName );
 		WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
+		edit.typeInTemplateContent( templateContent );
+		edit.clickOnPublish();
+		this.waitForElementByCss("#WikiaArticle");
+
+		PageObjectLogging.log("createNewTemplate", "new template created: " + templateName, true);
 
 		return edit;
 	}
