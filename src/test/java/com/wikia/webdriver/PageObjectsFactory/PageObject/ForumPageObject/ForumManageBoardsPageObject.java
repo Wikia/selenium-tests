@@ -17,9 +17,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class ForumManageBoardsPageObject extends BasePageObject{
 
-    public static Integer BOARD_TITLE_DISPLAY_LIMIT = 40;
-    public static Integer BOARD_DESCRIPTION_DISPLAY_LIMIT = 255;
-
 	public ForumManageBoardsPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
