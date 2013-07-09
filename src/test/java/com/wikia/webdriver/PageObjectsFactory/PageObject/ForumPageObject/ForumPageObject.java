@@ -1,10 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
-import com.wikia.webdriver.Common.Core.Assertion;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class ForumPageObject extends WikiArticlePageObject{
 
@@ -117,15 +116,15 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return listWebElements;
 	}
 
-    public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
-        WikiArticleEditMode edit = super.createNewTemplate( templateName );
+	public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
+		WikiArticleEditMode edit = super.createNewTemplate( templateName );
 
-        edit.typeInTemplateContent( templateContent );
-        edit.clickOnPublish();
-        this.waitForElementByCss("#WikiaArticle");
+		edit.typeInTemplateContent( templateContent );
+		edit.clickOnPublish();
+		this.waitForElementByCss("#WikiaArticle");
 
-        PageObjectLogging.log("createNewTemplate", "new template created", true);
+		PageObjectLogging.log("createNewTemplate", "new template created", true);
 
-        return edit;
-    }
+		return edit;
+	}
 }
