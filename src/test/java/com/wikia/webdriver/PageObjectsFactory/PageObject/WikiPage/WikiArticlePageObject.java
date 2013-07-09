@@ -638,4 +638,5 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public String getArticleContent() {
 		return articleContent.getText().split("Discussions")[0];
 	}
+	
 }

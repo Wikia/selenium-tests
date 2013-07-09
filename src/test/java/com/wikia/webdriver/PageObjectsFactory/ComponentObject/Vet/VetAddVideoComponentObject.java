@@ -46,6 +46,11 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	@FindBy(css=".Wikia-video-enabledEmbedCode")
 	private WebElement videoThumbnail;
 	
+	//Video Suggestions
+	@FindBy(css="div.Wikia-video-play-button")
+	private WebElement suggestedVideo;
+	@FindBy(css="a.bottom-close-button")
+	private WebElement closeButton;
 	
 	private By videoNameSelector = By.cssSelector("strong");
 	private By addVideoLibraryLink = By.cssSelector("li a[href*='http']");
@@ -154,6 +159,17 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	
 	public String getVideoName(){
 		return this.videoName;
+	}
+	
+	public void verifySuggestionsIsDisplayed() {
+		waitForElementByElement(suggestedVideo);
+		PageObjectLogging.log("verifySuggestionsIsDisplayed", "Verified suggested module appeared", true, driver);
+	}
+	
+	public void clickSuggestionsCloseButton() {
+		waitForElementByElement(closeButton);
+		clickAndWait(closeButton);
+		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true, driver);
 	}
 
 }

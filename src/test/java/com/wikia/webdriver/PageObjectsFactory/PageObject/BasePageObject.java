@@ -488,6 +488,11 @@ public class BasePageObject{
 		getUrl(Global.DOMAIN + URLsContent.noexternals);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
+	
+	public void openVideoSuggestionsPage() {
+		getUrl(URLsContent.videoSuggestionsUrl);
+		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	}
 
 	/*
 	 * Wait for expected conditions methods

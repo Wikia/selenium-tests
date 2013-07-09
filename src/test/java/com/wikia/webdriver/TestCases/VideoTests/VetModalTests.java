@@ -553,20 +553,18 @@ public class VetModalTests extends TestTemplate {
 	 */
 
 	@Test(groups = { "VetModalTests018", "VetModalTests" })
-	public void Vet_Tests_018_VerifyVideoNameFieldIsEditable() {
+	public void Vet_Tests_018_VerifyVideoSuggestionsIsDisplayed() {
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName,
 				Properties.password, driver);
-		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
-		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
-		edit.deleteArticleContent();
+		article.openVideoSuggestionsPage();
+		WikiArticleEditMode edit = article.edit();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL2);
-		vetOptions.verifyVideoNameFieldIsEditable();
-		vetOptions.submit();
+		vetAddingVideo.verifySuggestionsIsDisplayed();
+		vetAddingVideo.clickSuggestionsCloseButton();
 		edit.clickOnPublishButton();
 	}
+	
+	
 }
