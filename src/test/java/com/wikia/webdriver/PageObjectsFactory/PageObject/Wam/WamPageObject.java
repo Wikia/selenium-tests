@@ -44,7 +44,7 @@ public class WamPageObject extends BasePageObject {
 	@FindBy(css="#wam-index table tr")
 	private List<WebElement> wamIndexRows;
 
-	@FindBys(@FindBy(css="ul.wam-tabs li"))
+	@FindBys(@FindBy(css="ul.wam-tabs li a"))
 	private List<WebElement> tabsList;
 
 	@FindBy(css="a.paginator-next")
