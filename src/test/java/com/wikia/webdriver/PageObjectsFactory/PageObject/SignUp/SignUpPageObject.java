@@ -109,7 +109,7 @@ public class SignUpPageObject extends BasePageObject {
 	 * @author Karol Kujawiak
 	 * @param password
 	 */
-	 
+
 	public void typeInPassword(String password)
 	{
 		passwordField.sendKeys(password);
@@ -215,7 +215,7 @@ public class SignUpPageObject extends BasePageObject {
 			{
 				PageObjectLogging.log("getWordFromCaptcha", "mdp error", false);
 			}
-	
+
 			File file = Global.CAPTCHA_FILE;
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String strLine;

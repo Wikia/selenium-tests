@@ -79,4 +79,6 @@ public class PageContent {
 
 	public static String wikiaGlobalUrl = "http://www.wikia.com/";
 
+	public static final int MIN_AGE = 12;
+
 }
