@@ -35,6 +35,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	private List<WebElement> threadTitlesList;
 	@FindBy(css=".notify-everyone")
 	private WebElement highlight;
+    @FindBy(css="#Forum .board-description")
+    private WebElement boardDescription;
 	
 	private String discussionTextarea = "textarea.title:nth-child(2)";
 	private String wikiaEditorTextarea = "#WikiaEditor-0";
@@ -102,6 +104,11 @@ public class ForumBoardPageObject extends BasePageObject{
 		waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
 		PageObjectLogging.log("verifyDiscussionWithTitle", "discussion with title and message verified", true);		
 	}
+
+    public void verifyBoardDescription( String description ) {
+        waitForTextToBePresentInElementByElement( boardDescription, description );
+        PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
+    }
 		
 	public void clickPostNotitleButton()
 	{
