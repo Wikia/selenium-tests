@@ -97,29 +97,30 @@ public class ForumEditModeTests extends NewTestTemplate{
 		manageForum.clickMoveUp(second);
 	}
 
-    @Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
-    public void testTemplatesInBoardDescription() {
-        ForumPageObject forumMainPage = new ForumPageObject(driver);
+	@Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
+	public void testTemplatesInBoardDescription() {
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
 
-        // create a template
-        String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
-        WikiArticleEditMode edit = forumMainPage.createNewTemplate( templateNameAndContent, templateNameAndContent );
+		// create a template
+		String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
+		WikiArticleEditMode edit = forumMainPage.createNewTemplate( templateNameAndContent, templateNameAndContent );
 
-        // login & open forum page and create new board
-        CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-        forumMainPage.openForumMainPage();
-        ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
+		// login & open forum page and create new board
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.openForumMainPage();
+		ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
 
-        // create new board and verify its creation
-        String boardTitle = "QA with tpl (" + forumManageBoardPage.getTimeStamp() + ")";
-        String boardDescWithoutTpl = "QA with tpl.";
-        String boardDescWithTpl = boardDescWithoutTpl + " {{" + templateNameAndContent + "}}";
-        String boardDescWithTplParsed = boardDescWithoutTpl + " " + templateNameAndContent;
-        forumManageBoardPage.createNewBoard( boardTitle, boardDescWithTpl );
-        forumManageBoardPage.verifyBoardCreated(boardTitle, boardDescWithoutTpl);
+		// create new board and verify its creation
+		String boardTitle = "QA with tpl (" + forumManageBoardPage.getTimeStamp() + ")";
+		String boardDescWithoutTpl = "QA with tpl.";
+		String boardDescWithTpl = boardDescWithoutTpl + " {{" + templateNameAndContent + "}}";
+		String boardDescWithTplParsed = boardDescWithoutTpl + " " + templateNameAndContent;
+		forumManageBoardPage.createNewBoard( boardTitle, boardDescWithTpl );
+		forumManageBoardPage.verifyBoardCreated(boardTitle, boardDescWithoutTpl);
 
-        // open the board and verify there is the template's content in description
-        ForumBoardPageObject boardPage = forumMainPage.openForumBoard( 1 );
-        boardPage.verifyBoardDescription( boardDescWithTplParsed );
-    }
+		// open the board and verify there is the template's content in description
+		ForumBoardPageObject boardPage = forumMainPage.openForumBoard( 1 );
+		boardPage.verifyBoardDescription( boardDescWithTplParsed );
+	}
+
 }
