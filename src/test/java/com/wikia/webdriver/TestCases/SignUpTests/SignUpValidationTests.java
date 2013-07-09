@@ -20,7 +20,8 @@ public class SignUpValidationTests extends TestTemplate {
 		signUpPage.typeInPassword(signUpPage.getTimeStamp());
 		Calendar currentDate = Calendar.getInstance();
 		signUpPage.enterBirthDate(
-			Integer.toString(currentDate.get(Calendar.MONTH) + 1),// +1 because months are numerated from 0
+			// +1 because months are numerated from 0
+			Integer.toString(currentDate.get(Calendar.MONTH) + 1),
 			Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
 			Integer.toString(currentDate.get(Calendar.YEAR)- PageContent.MIN_AGE)
 		);
