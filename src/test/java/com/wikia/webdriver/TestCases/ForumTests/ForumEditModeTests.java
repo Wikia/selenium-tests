@@ -110,11 +110,12 @@ public class ForumEditModeTests extends TestTemplate{
 
 	@Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
 	public void testTemplatesInBoardDescription() {
-		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		ForumPageObject forumMainPage = new ForumPageObject( driver );
 
 		// create a template
 		String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
-		WikiArticleEditMode edit = forumMainPage.createNewTemplate( templateNameAndContent, templateNameAndContent );
+		WikiArticlePageObject article = new WikiArticlePageObject( driver );
+		article.createNewTemplate( templateNameAndContent, templateNameAndContent );
 
 		// login & open forum page and create new board
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);

@@ -89,17 +89,5 @@ public class ForumPageObject extends WikiArticlePageObject{
 		List<WebElement> listWebElements = driver.findElements(forumBoardsList);		
 		return listWebElements;
 	}
-
-	public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
-		WikiArticleEditMode edit = super.createNewTemplate( templateName );
-
-		edit.typeInTemplateContent( templateContent );
-		edit.clickOnPublish();
-		this.waitForElementByCss("#WikiaArticle");
-
-		PageObjectLogging.log("createNewTemplate", "new template created", true);
-
-		return edit;
-	}
 	
 }
