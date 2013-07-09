@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
 import java.util.List;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -107,7 +108,8 @@ public class ForumBoardPageObject extends BasePageObject{
 
 	public void verifyBoardDescription( String description ) {
 		waitForTextToBePresentInElementByElement( boardDescription, description );
-		PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
+		waitForElementByElement( boardDescription );
+		Assertion.assertStringContains( boardDescription.getText(), description );
 	}
 		
 	public void clickPostNotitleButton()
