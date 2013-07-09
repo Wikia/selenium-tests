@@ -72,21 +72,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	}
 	
 	public void verifyBoardCreated(String title, String description) {
-        String trimmedTitle = "";
-        if( title.length() > BOARD_TITLE_DISPLAY_LIMIT ) {
-            trimmedTitle = title.replaceAll("_", " ").substring( 0, BOARD_TITLE_DISPLAY_LIMIT );
-        } else {
-            trimmedTitle = title.replaceAll("_", " ");
-        }
-
-        String trimmedDesc = "";
-        if( description.length() > BOARD_DESCRIPTION_DISPLAY_LIMIT ) {
-            trimmedDesc = description.substring( 0, BOARD_DESCRIPTION_DISPLAY_LIMIT );
-        } else {
-            trimmedDesc = description;
-        }
-
-		waitForElementByXPath("//ul/li//a[contains(text(), '" + trimmedTitle + "')]/../../../p[contains(text(), '" + trimmedDesc + "')]");
+		waitForElementByXPath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ") + "')]/../../../p[contains(text(), '" + description + "')]");
 		PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);		
 	}
 
