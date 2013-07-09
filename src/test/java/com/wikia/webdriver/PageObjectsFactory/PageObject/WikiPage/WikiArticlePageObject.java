@@ -86,33 +86,33 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewArticle(String pageName,
-			int layoutNumber) {
+												int layoutNumber) {
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
-                + "&action=edit&useFormat=" + layoutNumber);
+				+ "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
-                + pageNameEnc + "']")));
+				+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver);
 	}
 
-    public WikiArticleEditMode createNewArticle(WikiArticlePageObject article) {
-        String pageName = article.getPageName();
-        getUrl(Global.DOMAIN + URLsContent.wikiDir + pageName + URLsContent.actionEditParameter );
+	public WikiArticleEditMode createNewArticle(WikiArticlePageObject article) {
+		String pageName = article.getPageName();
+		getUrl(Global.DOMAIN + URLsContent.wikiDir + pageName + URLsContent.actionEditParameter );
 
-        String pageNameEnc = pageName.replace("_", " ");
-        waitForElementByElement( driver.findElement( By.cssSelector( "a[title='" + pageNameEnc + "']" ) ) );
+		String pageNameEnc = pageName.replace("_", " ");
+		waitForElementByElement( driver.findElement( By.cssSelector( "a[title='" + pageNameEnc + "']" ) ) );
 
-        return new WikiArticleEditMode(driver);
-    }
+		return new WikiArticleEditMode(driver);
+	}
 
-    public WikiArticleEditMode createNewTemplate( String templateName ) {
-        String templateNamespace = "Template"; //TODO: check with QA if we keep somewhere namespaces
+	public WikiArticleEditMode createNewTemplate( String templateName ) {
+		String templateNamespace = "Template"; //TODO: check with QA if we keep somewhere namespaces
 
-        WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, templateNamespace + ":" + templateName );
-        WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
+		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, templateNamespace + ":" + templateName );
+		WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
 
-        return edit;
-    }
+		return edit;
+	}
 
 	public WikiArticleEditMode createNewDefaultArticle(){
 		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
@@ -123,7 +123,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		scrollAndClick(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
-                "random page button clicked", true, driver);
+				"random page button clicked", true, driver);
 		return new WikiArticlePageObject(driver);
 	}
 
@@ -236,6 +236,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	* getArticleNameFromURL
 	*
 	@author Michal Nowierski
@@ -305,4 +306,5 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void verifyVideoAddedToRVModule(String videoName) {
 		waitForTextToBePresentInElementByBy(rvFirstVideo, videoName);
 	}
+
 }
