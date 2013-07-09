@@ -110,7 +110,7 @@ public class ForumThreadTests extends TestTemplate{
 	}
 
 	@Test(groups= {"ForumThreadTests_008", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_007_closeThreadAndReopen(){
+	public void forumThreadTests_008_closeThreadAndReopen(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
@@ -126,8 +126,3 @@ public class ForumThreadTests extends TestTemplate{
 		forumThread.verifyThreadReopened();
 	}
 }
-
-
-
-
-
