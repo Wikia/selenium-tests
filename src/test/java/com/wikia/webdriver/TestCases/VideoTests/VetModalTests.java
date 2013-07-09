@@ -553,7 +553,31 @@ public class VetModalTests extends TestTemplate {
 	 */
 
 	@Test(groups = { "VetModalTests018", "VetModalTests" })
-	public void Vet_Tests_018_VerifyVideoSuggestionsIsDisplayed() {
+		public void Vet_Tests_018_VerifyVideoNameFieldIsEditable() {
+		CommonFunctions.logOut(driver);
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+		article.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userName,
+				Properties.password, driver);
+		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
+		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
+		edit.deleteArticleContent();
+		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
+		VetOptionsComponentObject vetOptions = vetAddingVideo
+			.addVideoByUrl(VideoContent.youtubeVideoURL2);
+		vetOptions.verifyVideoNameFieldIsEditable();
+		vetOptions.submit();
+		edit.clickOnPublishButton();
+	}
+	
+	/**
+	 * TC019 - Verifies video suggestions appear correctly in CoD Wiki
+	 * 
+	 * @author Rodrigo 'RodriGomez' Molinero
+	 */
+
+	@Test(groups = { "VetModalTests019", "VetModalTests" })
+	public void Vet_Tests_019_VerifyVideoSuggestionsIsDisplayed() {
 		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		CommonFunctions.logInCookie(Properties.userName,
@@ -565,6 +589,5 @@ public class VetModalTests extends TestTemplate {
 		vetAddingVideo.clickSuggestionsCloseButton();
 		edit.clickOnPublishButton();
 	}
-	
 	
 }
