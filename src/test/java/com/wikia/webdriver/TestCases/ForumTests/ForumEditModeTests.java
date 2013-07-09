@@ -1,6 +1,7 @@
 package com.wikia.webdriver.TestCases.ForumTests;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
@@ -109,14 +110,16 @@ public class ForumEditModeTests extends NewTestTemplate{
         forumMainPage.openForumMainPage();
         ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
 
-        String boardTitle = "Forum test board with template (" + forumManageBoardPage.getTimeStamp() + ")";
-        String boardDescWithoutTpl = "Forum test board with template.";
+        // create new board and verify its creation
+        String boardTitle = "QA with tpl (" + forumManageBoardPage.getTimeStamp() + ")";
+        String boardDescWithoutTpl = "QA with tpl.";
         String boardDescWithTpl = boardDescWithoutTpl + " {{" + templateNameAndContent + "}}";
+        String boardDescWithTplParsed = boardDescWithoutTpl + " " + templateNameAndContent;
         forumManageBoardPage.createNewBoard( boardTitle, boardDescWithTpl );
-        forumManageBoardPage.verifyBoardCreated( boardTitle, boardDescWithoutTpl );
+        forumManageBoardPage.verifyBoardCreated(boardTitle, boardDescWithoutTpl);
 
-        // verify the template IS in the edit mode of the board
-
-        // verify the template's content IS visible on board page
+        // open the board and verify there is the template's content in description
+        ForumBoardPageObject boardPage = forumMainPage.openForumBoard( 1 );
+        boardPage.verifyBoardDescription( boardDescWithTplParsed );
     }
 }
