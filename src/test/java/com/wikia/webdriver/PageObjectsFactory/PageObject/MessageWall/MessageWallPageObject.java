@@ -55,20 +55,14 @@ import org.openqa.selenium.support.PageFactory;
 	private List<WebElement> msgEditedByFields;
 	@FindBys(@FindBy(css="div.msg-title a"))
 	private List<WebElement> messageTitlesList;
-	@FindBy(css="div.edited-by a")
-	private WebElement messageAuthor;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> messageBody;
-	@FindBys(@FindBy(css=".replies div.msg-body p"))
-	private List<WebElement> messageRepliesBody;
 	@FindBy(css="a#publish")
 	private WebElement publishButton;
 	@FindBy(css="a.cke_button_ModeSource .cke_icon")
 	private WebElement sourceModeButton;
 	@FindBy(css="textarea.cke_source")
 	private WebElement sourceModeTextarea;
-	@FindBy(css=".SortingSelected")
-	private WebElement sortingMenu;
 	@FindBy(css=".no-title-warning")
 	private WebElement noTitleErrorMsg;
 	@FindBy (css="#WallMessageBody")
