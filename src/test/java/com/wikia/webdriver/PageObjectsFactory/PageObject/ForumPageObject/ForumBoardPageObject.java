@@ -32,8 +32,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	private List<WebElement> threadTitlesList;
 	@FindBy(css=".notify-everyone")
 	private WebElement highlight;
-    @FindBy(css="#Forum .board-description")
-    private WebElement boardDescription;
+	@FindBy(css="#Forum .board-description")
+	private WebElement boardDescription;
 	private String discussionTextarea = "textarea.title:nth-child(2)";
 	private String wikiaEditorTextarea = "#WikiaEditor-0";
 
