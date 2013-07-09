@@ -105,10 +105,10 @@ public class ForumBoardPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyDiscussionWithTitle", "discussion with title and message verified", true);		
 	}
 
-    public void verifyBoardDescription( String description ) {
-        waitForTextToBePresentInElementByElement( boardDescription, description );
-        PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
-    }
+	public void verifyBoardDescription( String description ) {
+		waitForTextToBePresentInElementByElement( boardDescription, description );
+		PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
+	}
 		
 	public void clickPostNotitleButton()
 	{
