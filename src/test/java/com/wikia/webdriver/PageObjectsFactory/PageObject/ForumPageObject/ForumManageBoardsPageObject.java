@@ -72,8 +72,8 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		submitNewBoard();
 	}
 	
-	public void verifyBoardCreated(String title, String description){
-		waitForElementByXPath("//ul/li//a[contains(text(), '"+title.replaceAll("_", " ")+"')]/../../../p[contains(text(), '"+description+"')]");
+	public void verifyBoardCreated(String title, String description) {
+		waitForElementByXPath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ") + "')]/../../../p[contains(text(), '" + description + "')]");
 		PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);		
 	}
 

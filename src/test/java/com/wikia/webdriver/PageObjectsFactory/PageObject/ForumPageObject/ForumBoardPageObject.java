@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
 import java.util.List;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -35,6 +36,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	private List<WebElement> threadTitlesList;
 	@FindBy(css=".notify-everyone")
 	private WebElement highlight;
+	@FindBy(css="#Forum .board-description")
+	private WebElement boardDescription;
 	
 	private String discussionTextarea = "textarea.title:nth-child(2)";
 	private String wikiaEditorTextarea = "#WikiaEditor-0";
@@ -101,6 +104,12 @@ public class ForumBoardPageObject extends BasePageObject{
 		waitForTextToBePresentInElementByElement(discussionTitle, title);
 		waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
 		PageObjectLogging.log("verifyDiscussionWithTitle", "discussion with title and message verified", true);		
+	}
+
+	public void verifyBoardDescription( String description ) {
+		waitForTextToBePresentInElementByElement( boardDescription, description );
+		waitForElementByElement( boardDescription );
+		Assertion.assertStringContains( boardDescription.getText(), description );
 	}
 		
 	public void clickPostNotitleButton()

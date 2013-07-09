@@ -47,6 +47,10 @@ public class URLsContent {
 	
 	//Blog list page url
 	public static final String blogList = "wiki/Blog:%listName%";
+
+	// Mediawiki template url
+	public static final String templateNs = "Template";
+	public static final String templateUrl = "wiki/" + templateNs + ":%name%";
 	
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
@@ -85,11 +89,11 @@ public class URLsContent {
 	// History Pages
 	public static String historyAction = "action=history";
 
-    // Article Pages
-    public static String articleName001 = "TestVid001";
-    public static String articleName002 = "TestVid002";
-    public static String articleName003 = "TestVid003";
-    public static String articleName004 = "TestVid004";
+	// Article Pages
+	public static String articleName001 = "TestVid001";
+	public static String articleName002 = "TestVid002";
+	public static String articleName003 = "TestVid003";
+	public static String articleName004 = "TestVid004";
 
 	//External sites
 	public static String facebookDomain = "facebook.com";
