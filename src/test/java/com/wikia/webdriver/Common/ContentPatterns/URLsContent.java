@@ -63,7 +63,8 @@ public class URLsContent {
 	public static final String blogNameSpace = "wiki/User_blog:%userName%/";
 
 	// Mediawiki template url
-    public static final String templateUrl = "wiki/Template:%name%";
+	public static final String templateNs = "Template";
+	public static final String templateUrl = "wiki/" + templateNs + ":%name%";
 
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";

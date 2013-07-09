@@ -106,9 +106,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewTemplate( String templateName ) {
-		String templateNamespace = "Template"; //TODO: check with QA if we keep somewhere namespaces
-
-		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, templateNamespace + ":" + templateName );
+		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.templateNs + ":" + templateName );
 		WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
 
 		return edit;
