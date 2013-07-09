@@ -180,6 +180,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode", true, driver);
 	}
 
+
 	public void verifyTheCaptionOnThePreview(String caption) {
 		wait.until(ExpectedConditions.textToBePresentInElement(captionInPreview, caption));
 		PageObjectLogging.log("VerifyTheCaptionOnThePreview", "Verify that the caption of image appears in the preview", true, driver);
@@ -214,6 +215,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementClickableByElement(publishButton);
 		scrollAndClick(publishButton);
 		PageObjectLogging.log("clickOnPublish", "publish button clicked", true, driver);
+
 	}
 
 	public void deleteArticleContent() {
@@ -252,6 +254,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}
+
 
 	public void verifyVideoInEditMode(String caption) {
 		waitForElementByElement(iFrame);
@@ -308,6 +311,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
 	}
 
+
 	public void verifyLeftAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
 		clickOnModifyImageLink();
@@ -321,6 +325,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 		waitForElementByElement(imageUploadCloseButton);
 		imageUploadCloseButton.click();
+
 	}
 
 	public WikiArticlePageObject addImageForLightboxTesting () {
