@@ -115,33 +115,33 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewArticle(String pageName,
-			int layoutNumber) {
+												int layoutNumber) {
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
-                + "&action=edit&useFormat=" + layoutNumber);
+				+ "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
-                + pageNameEnc + "']")));
+				+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver);
 	}
 
-    public WikiArticleEditMode createNewArticle(WikiArticlePageObject article) {
-        String pageName = article.getPageName();
-        getUrl(Global.DOMAIN + URLsContent.wikiDir + pageName + URLsContent.actionEditParameter );
+	public WikiArticleEditMode createNewArticle(WikiArticlePageObject article) {
+		String pageName = article.getPageName();
+		getUrl(Global.DOMAIN + URLsContent.wikiDir + pageName + URLsContent.actionEditParameter );
 
-        String pageNameEnc = pageName.replace("_", " ");
-        waitForElementByElement( driver.findElement( By.cssSelector( "a[title='" + pageNameEnc + "']" ) ) );
+		String pageNameEnc = pageName.replace("_", " ");
+		waitForElementByElement( driver.findElement( By.cssSelector( "a[title='" + pageNameEnc + "']" ) ) );
 
-        return new WikiArticleEditMode(driver);
-    }
+		return new WikiArticleEditMode(driver);
+	}
 
-    public WikiArticleEditMode createNewTemplate( String templateName ) {
-        String templateNamespace = "Template"; //TODO: check with QA if we keep somewhere namespaces
+	public WikiArticleEditMode createNewTemplate( String templateName ) {
+		String templateNamespace = "Template"; //TODO: check with QA if we keep somewhere namespaces
 
-        WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, templateNamespace + ":" + templateName );
-        WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
+		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, templateNamespace + ":" + templateName );
+		WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
 
-        return edit;
-    }
+		return edit;
+	}
 
 	public WikiArticleEditMode createNewDefaultArticle(){
 		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
@@ -152,7 +152,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		clickAndWait(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
-                "random page button clicked", true, driver);
+				"random page button clicked", true, driver);
 		return new WikiArticlePageObject(driver);
 	}
 
@@ -305,18 +305,18 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	/**
 	 * Click Edit button on a wiki article
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 */
 	public WikiArticleEditMode edit() {
-            waitForElementByElement(editButton);
-            clickAndWait(editButton);
-            PageObjectLogging.log(
-                "edit",
-                "Edit article",
-                true
-            );
-            return new WikiArticleEditMode(driver);
+		waitForElementByElement(editButton);
+		clickAndWait(editButton);
+		PageObjectLogging.log(
+				"edit",
+				"Edit article",
+				true
+		);
+		return new WikiArticleEditMode(driver);
 	}
 
 	/**
@@ -457,10 +457,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		}
 		
 	}
-/**
- * 
- * @param position available values (vertical, horizontal)
- */
+	/**
+ 	 *
+ 	 * @param position available values (vertical, horizontal)
+ 	 */
 	public void verifySliderThumbnailsPosition(String position) {
 		waitForElementByCss(".wikiaPhotoGallery-slider-body div." + position);
 		PageObjectLogging.log("verifySliderThumbnailsPosition", "Slider thumbnails position verified: " + position, true, driver);
@@ -479,7 +479,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	*
 	@author Michal Nowierski
 	*/
-
 	public void VerifyTheTableOnThePage() {
 	waitForElementByElement(tableOnWikiaArticle);
 	PageObjectLogging.log("VerifyTheTableOnThePage", "Verify that the table appears on the page", true, driver);
@@ -510,6 +509,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("categories_clickAddCategory", "type "+categoryName+" to category input field", true, driver);
 		
 	}
+
 	/**
 	* click SaveButton
 	*
@@ -567,11 +567,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);						
 		}
 	}
+
 	/**
-	* getArticleNameFromURL
-	*
-	@author Michal Nowierski
-	*/
+	 * getArticleNameFromURL
+	 *
+	 * @author Michal Nowierski
+	 */
 	public String getArticleNameFromURL() {
 		//TODO: To Michal: use Regular Expression here, when its syntax is learned.
 		String URL= driver.getCurrentUrl();
@@ -618,20 +619,20 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new VetAddVideoComponentObject(driver);
 	}
 
-    public void clickAddVideoFromRail() {
-        waitForElementByElement(addVideoWikiaRail);
-        clickAndWait(addVideoWikiaRail);
-        PageObjectLogging.log(
-                "clickAndVideoOnWikiaRail",
-                "Button add video on wikia rail is clicked",
-                true, driver
-        );
-    }
+	public void clickAddVideoFromRail() {
+		waitForElementByElement(addVideoWikiaRail);
+		clickAndWait(addVideoWikiaRail);
+		PageObjectLogging.log(
+				"clickAndVideoOnWikiaRail",
+				"Button add video on wikia rail is clicked",
+				true, driver
+		);
+	}
 
-    public void renameRandomArticle(String newName) {
-        String oldName = getArticleNameFromURL();
-        renameArticle(oldName, newName);
-    }
+	public void renameRandomArticle(String newName) {
+		String oldName = getArticleNameFromURL();
+		renameArticle(oldName, newName);
+	}
 
 	/**
 	 *  @author Michal 'justnpT' Nowierski
@@ -648,6 +649,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		clickAndWait(addPhotoToGalleryButton);
 		return new GalleryBuilderComponentObject(driver);
 	}
+
 	public SlideshowBuilderComponentObject clickAddPhotoToSlideshow(){
 		addPhotoToSlideShowButton.click();
 		return new SlideshowBuilderComponentObject(driver);
@@ -659,4 +661,5 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public String getArticleContent() {
 		return articleContent.getText().split("Discussions")[0];
 	}
+
 }
