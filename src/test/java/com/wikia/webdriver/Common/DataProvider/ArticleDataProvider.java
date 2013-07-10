@@ -17,13 +17,13 @@ public class ArticleDataProvider {
 
 	@DataProvider
 	public static final Object[][] getPopularPagenames() {
-        return new Object[][] {
-		{"Muppets"},
-		{"Gta"},
-		{"Star_trek"},
-		{"Harry_potter"},
-		{"Star_wars"},
-	};
+		return new Object[][] {
+			{"Muppets"},
+			{"Gta"},
+			{"Star_trek"},
+			{"Harry_potter"},
+			{"Star_wars"},
+		};
 	}
 
 }
