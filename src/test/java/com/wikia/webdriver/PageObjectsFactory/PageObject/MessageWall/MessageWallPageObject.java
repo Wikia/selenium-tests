@@ -6,12 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -48,11 +45,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	@FindBy(css="a.remove-message")
 	private WebElement removeMessageButton;
 	@FindBy(css="#WikiaConfirm")
-	private WebElement removeMessageOverLay;
+	private WebElement removeCloseMessageOverLay;								//it's used to remove message and close thread
 	@FindBy(css="#reason")
-	private WebElement removeMessageReason;
+	private WebElement removeCloseMessageReason;								//it's used to remove message and close thread
 	@FindBy(css="#WikiaConfirmOk")
-	private WebElement removeMessageConfirmButton;
+	private WebElement removeCloseMessageConfirmButton;							//it's used to remove message and close thread
 	@FindBy(css=".speech-bubble-message-removed")
 	private WebElement removeMessageConfirmation;
 	@FindBy(css="span.cke_button.cke_off.cke_button_bold a .cke_icon")
@@ -301,19 +298,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		mouseOver(".WikiaMenuElement .remove-message");
 //		jQueryClick(".WikiaMenuElement .remove-message");
 		jQueryNthElemClick(".WikiaMenuElement .remove-message", 0);
-		waitForElementByElement(removeMessageOverLay);
-		waitForElementByElement(removeMessageConfirmButton);
+		waitForElementByElement(removeCloseMessageOverLay);
+		waitForElementByElement(removeCloseMessageConfirmButton);
 
 		if (Global.BROWSER.equals("IE")) {
 
-			WebElement removeMessageReasonParent = getParentElement(removeMessageReason);
+			WebElement removeMessageReasonParent = getParentElement(removeCloseMessageReason);
 			clickAndWait(removeMessageReasonParent);
 			removeMessageReasonParent.sendKeys(reason);
-			clickAndWait(removeMessageConfirmButton);
+			clickAndWait(removeCloseMessageConfirmButton);
 		}
 		else {
-			removeMessageReason.sendKeys(reason);
-			clickAndWait(removeMessageConfirmButton);
+			removeCloseMessageReason.sendKeys(reason);
+			clickAndWait(removeCloseMessageConfirmButton);
 		}
 
 		waitForElementByElement(removeMessageConfirmation);
@@ -466,5 +463,35 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 			clickAndWait(list.get(2));
 		}
 		PageObjectLogging.log("sortThreads", "order of messages sorted: "+order, true, driver);
+	}
+
+	public void closeThread(String reason)
+	{
+		waitForElementByCss("div.msg-toolbar");
+		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+		waitForElementByElement(moreButton);
+		mouseOver(moreButtonCss);
+		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
+		mouseOver(".WikiaMenuElement .close-thread");
+		jQueryNthElemClick(".WikiaMenuElement .close-thread", 0);
+		waitForElementByElement(removeCloseMessageOverLay);
+		waitForElementByElement(removeCloseMessageConfirmButton);
+		removeCloseMessageReason.sendKeys(reason);
+		clickAndWait(removeCloseMessageConfirmButton);
+		driver.navigate().refresh();
+		PageObjectLogging.log("closeThread", "Thread is closed" + reason, true, driver);
+	}
+
+	public void reopenThread()
+	{
+		waitForElementByCss("div.msg-toolbar");
+		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+		waitForElementByElement(moreButton);
+		mouseOver(moreButtonCss);
+		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
+		mouseOver(".WikiaMenuElement .reopen-thread");
+		jQueryNthElemClick(".WikiaMenuElement .reopen-thread", 0);
+		driver.navigate().refresh();
+		PageObjectLogging.log("reopenThread", "Thread is reopen", true, driver);
 	}
 }
