@@ -1,12 +1,11 @@
 package com.wikia.webdriver.Common.Templates;
 
 import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
 import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
-import com.wikia.webdriver.Common.Core.Configuration.ConfigurationInterface;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
@@ -15,7 +14,6 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -23,7 +21,7 @@ import org.testng.annotations.BeforeSuite;
 public class NewTestTemplate {
 
 	protected WebDriver driver;
-	protected ConfigurationInterface config;
+	protected AbstractConfiguration config;
 
 	public NewTestTemplate() {
 		config = ConfigurationFactory.getConfig();

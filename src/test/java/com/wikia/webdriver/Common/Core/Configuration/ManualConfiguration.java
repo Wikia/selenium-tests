@@ -3,13 +3,9 @@ package com.wikia.webdriver.Common.Core.Configuration;
 import java.io.File;
 
 /**
- * This is a sample file for ManualConfiguration class
- * If you want to run your tests using IDE instead of POM you need to create
- * ManualConfiguration.java in your local repo. This file is for you only!
- * REMEMBER TO EXTEND THE AbstractConfiguration!
- *
- * @author Bogna 'bognix' Knychała
+ * @author: Bogna 'bognix' Knychała
  */
+
 public class ManualConfiguration extends AbstractConfiguration {
 
 	private String browser = "FF"; //Accepted values: FF, CHROME, GHOST, IE

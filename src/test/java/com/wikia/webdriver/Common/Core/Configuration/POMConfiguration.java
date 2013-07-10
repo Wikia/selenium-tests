@@ -8,13 +8,13 @@ import java.io.File;
  *
  * @author Bogna 'bognix' Knychała
  */
-public class POMConfiguration implements ConfigurationInterface {
+public class POMConfiguration extends AbstractConfiguration {
 
 	private String browser;
 	private String env;
 	private String wikiName;
-	private String credentialsPath;
 	private String captchaPath;
+	private String credentialsFilePath;
 
 	public POMConfiguration() {
 		browser = System.getProperty("browser");
@@ -44,7 +44,7 @@ public class POMConfiguration implements ConfigurationInterface {
 			wikiName = "mediawiki119";
 		}
 
-		credentialsPath = System.getProperty("config");
+		credentialsFilePath = System.getProperty("config");
 		captchaPath = System.getProperty("captcha");
 	}
 
@@ -74,7 +74,7 @@ public class POMConfiguration implements ConfigurationInterface {
 	}
 
 	@Override
-	public Credentials getCredentials() {
-		return new Credentials(new File(credentialsPath));
+	public String getCredentialsFilePath() {
+		return this.credentialsFilePath;
 	}
 }

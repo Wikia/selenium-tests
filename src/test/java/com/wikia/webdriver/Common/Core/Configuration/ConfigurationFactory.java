@@ -6,11 +6,12 @@ package com.wikia.webdriver.Common.Core.Configuration;
  */
 public class ConfigurationFactory {
 
-	public static ConfigurationInterface getConfig() {
-		if (System.getProperty("run_mvn").equals("true")) {
-			return new POMConfiguration();
-		} else {
+	public static AbstractConfiguration getConfig() {
+
+		if (System.getProperty("run_mvn") == null) {
 			return new ManualConfiguration();
+		} else {
+			return new POMConfiguration();
 		}
 	}
 }
