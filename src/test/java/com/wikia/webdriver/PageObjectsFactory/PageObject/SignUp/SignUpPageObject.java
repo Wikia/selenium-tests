@@ -116,13 +116,6 @@ public class SignUpPageObject extends BasePageObject {
 		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
 	}
 
-	public void selectTooYoungBirthDate()
-	{
-		monthSelect.selectByIndex(1);
-		daySelect.selectByIndex(1);
-		yearSelect.selectByIndex(1);
-	}
-
 	public void waitForTooYoungErrorMsg()
 	{
 		waitForElementByElement(tooYoungError);
