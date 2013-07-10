@@ -22,6 +22,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
@@ -187,6 +188,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
 		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
+	}
+
+	public SpecialCssPageObject openSpecialCss() {
+		getUrl(Global.DOMAIN + URLsContent.specialCss);
+		return new SpecialCssPageObject(driver);
 	}
 
 	public SpecialUploadPageObject openSpecialUpload() {
