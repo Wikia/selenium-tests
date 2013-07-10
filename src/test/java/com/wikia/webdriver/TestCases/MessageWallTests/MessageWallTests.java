@@ -210,7 +210,7 @@ public class MessageWallTests extends TestTemplate
 		MessageWallHistoryPageObject threadHistory = wall.openHistory();
 		threadHistory.verifyThreadHistory();
 		threadHistory.verifyThreadHistoryElements();
-		wall = threadHistory.navigateBackToMessageWall();
+		threadHistory.navigateBackToMessageWall();
 		CommonFunctions.logOut(driver);
 	}
 

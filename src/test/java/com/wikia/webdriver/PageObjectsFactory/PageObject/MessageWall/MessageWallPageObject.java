@@ -44,8 +44,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement historyButton;
 	@FindBy(css="a.edit-message")
 	private WebElement editMessageButton;
-	@FindBy(css="a.remove-message")
-	private WebElement removeMessageButton;
 	@FindBy(css="#WikiaConfirm")
 	private WebElement removeMessageOverLay;
 	@FindBy(css="#reason")
@@ -54,30 +52,20 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement removeMessageConfirmButton;
 	@FindBy(css=".speech-bubble-message-removed")
 	private WebElement removeMessageConfirmation;
-	@FindBy(css="span.cke_button.cke_off.cke_button_bold a .cke_icon")
-	private WebElement boldButton;
-	@FindBy(css="span.cke_button.cke_off.cke_button_itallic a .cke_icon")
-	private WebElement italicButton;
 	@FindBy(css="div.msg-title a")
 	private WebElement messageTitle;
 	@FindBys(@FindBy(css=".edited-by"))
 	private List<WebElement> msgEditedByFields;
 	@FindBys(@FindBy(css="div.msg-title a"))
 	private List<WebElement> messageTitlesList;
-	@FindBy(css="div.edited-by a")
-	private WebElement messageAuthor;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> messageBody;
-	@FindBys(@FindBy(css=".replies div.msg-body p"))
-	private List<WebElement> messageRepliesBody;
 	@FindBy(css="a#publish")
 	private WebElement publishButton;
 	@FindBy(css="a.cke_button_ModeSource .cke_icon")
 	private WebElement sourceModeButton;
 	@FindBy(css="textarea.cke_source")
 	private WebElement sourceModeTextarea;
-	@FindBy(css=".SortingSelected")
-	private WebElement sortingMenu;
 	@FindBy(css=".no-title-warning")
 	private WebElement noTitleErrorMsg;
 	@FindBy (css="#WallMessageBody")
@@ -153,20 +141,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void writeBoldMessage(String title, String message) {
 		writeTitle(title);
 		triggerMessageArea();
-		jQueryClick("span.cke_button.cke_off.cke_button_bold a .cke_icon");
-		messageTitleField.sendKeys(Keys.TAB);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
-//		writeSpecialMessage(title, message, "Bold");
 		miniEditor.writeStylesMiniEditor(message, "Bold");
 		driver.switchTo().defaultContent();
 	}
+
 	public void writeItalicMessage(String title, String message) {
 		writeTitle(title);
 		triggerMessageArea();
-		jQueryClick("span.cke_button.cke_off.cke_button_bold a .cke_icon");
-		messageTitleField.sendKeys(Keys.TAB);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
-//		writeSpecialMessage(title, message, "Italic");
 		miniEditor.writeStylesMiniEditor(message, "Italic");
 		driver.switchTo().defaultContent();
 	}
