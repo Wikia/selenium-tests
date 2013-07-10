@@ -1,6 +1,7 @@
 package com.wikia.webdriver.TestCases.AdminDashboardTests;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+<<<<<<< HEAD
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -9,6 +10,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDas
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
 import org.testng.annotations.Test;
+import com.wikia.webdriver.Common.Core.Global;
 
 /**
  * tests are prepared to test the following feature: https://wikia-inc.atlassian.net/browse/DAR-136
@@ -22,7 +24,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_001", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_001_UserWithAdminRightsTriesToEditWikiaCss() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		wiki.openArticle(URLsContent.mediaWikiCss);
@@ -35,7 +37,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_002", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_002_UserWithoudAdminRightsHasNoEditOption() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wiki.openArticle(URLsContent.mediaWikiCss);
@@ -47,7 +49,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_003", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_003_UserWithoudAdminRightsTriesToAccessWikiaCssUsingParameter() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
 		wiki.openArticle(URLsContent.mediaWikiCss);
@@ -60,7 +62,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_004", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_004_AnonHasNoEditOptionOnMediawikiWikiaCss() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		wiki.openArticle(URLsContent.mediaWikiCss);
 		wiki.verifyEditButtonNotPresent();
@@ -71,7 +73,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_005", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_005_AnonTriesToAccessWikiaCssUsingParameter() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		wiki.openArticle(URLsContent.mediaWikiCss);
 		wiki.appendToUrl(URLsContent.actionEditParameter);
@@ -83,7 +85,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_006", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_006_UserWithAdminRightsTriesToEditWikiaCssUsingParameter() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		wiki.openArticle(URLsContent.mediaWikiCss);
@@ -127,7 +129,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_009", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_009_UserWithAdminRightsTriesToAccesSpecialCssFromAdminDashboard() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		WikiBasePageObject wiki = new WikiBasePageObject(driver, Global.DOMAIN);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialAdminDashboardPageObject adminDashboard = wiki.openSpecialAdminDashboard();

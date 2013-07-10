@@ -1,5 +1,12 @@
 package com.wikia.webdriver.Common.Core;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+
 import java.awt.AWTException;
 import java.awt.GraphicsEnvironment;
 import java.awt.MouseInfo;
@@ -70,10 +77,7 @@ public class CommonFunctions {
 	}
 
 	/**
-<<<<<<< HEAD
 	 *
-=======
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param userName
 	 * @author: Karol Kujawiak
 	 */
@@ -120,10 +124,7 @@ public class CommonFunctions {
 
 
 	/**
-<<<<<<< HEAD
 	 *
-=======
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param attributeName
 	 * @return
 	 * @author: Karol Kujawiak
@@ -136,10 +137,7 @@ public class CommonFunctions {
 	}
 
 	/**
-<<<<<<< HEAD
 	 *
-=======
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param element
 	 * @param attributeName
 	 * @return
@@ -152,10 +150,7 @@ public class CommonFunctions {
 	}
 
 	/**
-<<<<<<< HEAD
 	 *
-=======
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @return author: Karol Kujawiak
 	 */
 	public static WebElement getCurrentlyFocused() {
@@ -172,10 +167,7 @@ public class CommonFunctions {
 	 * <p/>
 	 * This method uses JavascriptExecutor
 	 *
-<<<<<<< HEAD
-=======
 	 * @param element Webelement to be scrolled to
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
 	 */
 	public static void scrollToElement(WebElement element) {
@@ -193,10 +185,6 @@ public class CommonFunctions {
 	/**
 	 * Move cursor to the given X and Y coordinates
 	 *
-<<<<<<< HEAD
-	 * @author Michal Nowierski
-=======
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @param x
 	 * @param y
 	 * @author Michal Nowierski
@@ -218,10 +206,7 @@ public class CommonFunctions {
 	/**
 	 * Move cursor to Element existing in default DOM, by its Location
 	 *
-<<<<<<< HEAD
-=======
 	 * @param elem1_location Location of WebElement (getLocation method)
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
 	 */
 	public static void MoveCursorToElement(Point elem1_location) {
@@ -282,11 +267,8 @@ public class CommonFunctions {
 	 * Move cursor to Element existing in an IFrame DOM, by its By locator, and
 	 * the Iframe Webelement
 	 *
-<<<<<<< HEAD
-=======
 	 * @param IframeElemBy By selector of element to be hovered over
 	 * @param IFrame       IFrame where the element exists
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
 	 */
 	public static void MoveCursorToIFrameElement(By IframeElemBy, WebElement IFrame) {
@@ -319,11 +301,8 @@ public class CommonFunctions {
 	/**
 	 * Move cursor to from current position by given x and y
 	 *
-<<<<<<< HEAD
-=======
 	 * @param x horrizontal move
 	 * @param y vertical move
->>>>>>> a3f7d27... DAR-289: Added and changed selenium tests for DAR-136
 	 * @author Michal Nowierski
 	 */
 	public static void DragFromCurrentCursorPositionAndDrop(int x, int y) {
@@ -484,13 +463,12 @@ public class CommonFunctions {
 				String token = xmlResponseArr[5];
 				int i=0;
 				while (xmlResponseArr.length < 11) {// sometimes first request
-													// does
-													// not contain full
-													// information,
-													// in such situation
-													// xmlResponseArr.length <
-													// 11
-					i++;
+					// does
+					// not contain full
+					// information,
+					// in such situation
+					// xmlResponseArr.length <
+					// 11
 					List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
 
 					nvps2.add(new BasicNameValuePair("action", "login"));
@@ -566,7 +544,7 @@ public class CommonFunctions {
 		js.executeScript("$.cookie('" + wiki + "Token', null)");
 	}
 
-	public static void waitForWindow(String windowName, String comment){
+	public static void waitForWindow(String windowName, String comment) {
 		Object[] windows = driver.getWindowHandles().toArray();
 		int delay = 500;
 		int sumDelay = 500;
@@ -585,7 +563,7 @@ public class CommonFunctions {
 		}
 	}
 
-	public static String resetForgotPasswordTime(String userName){
+	public static String resetForgotPasswordTime(String userName) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},

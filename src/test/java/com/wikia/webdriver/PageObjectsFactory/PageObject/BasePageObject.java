@@ -421,6 +421,10 @@ public class BasePageObject{
 		WebElement temp = driver.findElement(by);
 		wait.until(CommonExpectedConditions
 				.textToBePresentInElement(temp, text));
+	
+	public void waitForStringInURL(String givenString) {						
+		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
+		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
 	}
 
 	public void waitForClassRemovedFromElement(WebElement element,

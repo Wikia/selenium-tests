@@ -35,7 +35,7 @@ public class URLsContent {
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
 	public static final String specialPreferences = "wiki/Special:Preferences";
-    public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
+	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	public static final String specialCSS = "Special:CSS";
 	public static final String specialRandom = "wiki/Special:Random";
 	public static final String specialFollow = "wiki/Special:Following";
@@ -52,8 +52,8 @@ public class URLsContent {
 	public static final String noexternals = "?noexternals=1";
 	public static final String actionEditParameter = "?action=edit";
 
-    // WAM Scores page url
-    public static final String wamPageUrl = "WAM";
+ 	// WAM Scores page url
+ 	public static final String wamPageUrl = "WAM";
 
 	// Extra sites - useful for monobook
 	// replace %user% with username
