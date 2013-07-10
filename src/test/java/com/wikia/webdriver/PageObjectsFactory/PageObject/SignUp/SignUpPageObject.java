@@ -53,20 +53,20 @@ public class SignUpPageObject extends BasePageObject {
 	@FindBy(css = ".input-group.required.error .error-msg")
 	private WebElement tooYoungError;
 
-	 @FindBy(
-		 xpath="//div[@class='error-msg' and contains(text(), "
-		 + "'Oops, please fill in the username field.')]"
-		 )
-	 private WebElement emptyUserNameValidationError;
-	 @FindBy(
-			xpath="//div[@class='error-msg' and contains(text(), "
-			+ "'Someone already has this username. Try a different one!')]"
-		 )
-	 private WebElement occupiedUserNameValidationError;
+	@FindBy(
+		xpath="//div[@class='error-msg' and contains(text(), "
+		+ "'Oops, please fill in the username field.')]"
+	)
+	private WebElement emptyUserNameValidationError;
+	@FindBy(
+		xpath="//div[@class='error-msg' and contains(text(), "
+		+ "'Someone already has this username. Try a different one!')]"
+	)
+	private WebElement occupiedUserNameValidationError;
 
-	 private Select yearSelect;
-	 private Select daySelect;
-	 private Select monthSelect;
+	private Select yearSelect;
+	private Select daySelect;
+	private Select monthSelect;
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -115,7 +115,7 @@ public class SignUpPageObject extends BasePageObject {
 	public void typeInPassword(String password)
 	{
 		passwordField.sendKeys(password);
-		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
+		PageObjectLogging.log("typeInPassword ", "Password field populated", true);
 	}
 
 	public void waitForTooYoungErrorMsg()
@@ -146,7 +146,7 @@ public class SignUpPageObject extends BasePageObject {
 			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
 			monthSelect.selectByVisibleText(month);
-			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);
+			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true);
 		}
 		catch(InterruptedException e)
 		{
