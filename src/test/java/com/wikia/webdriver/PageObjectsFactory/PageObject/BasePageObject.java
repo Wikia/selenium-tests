@@ -450,7 +450,6 @@ public class BasePageObject{
 	}
 
 
-
 	/**
 	 * <p>
 	 * Verify if js alert is or isn't there. You can expect alert with certain

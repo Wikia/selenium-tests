@@ -1,13 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +9,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 //public class MessageWallPageObject extends MiniEditorComponentObject{
 	public class MessageWallPageObject extends WikiBasePageObject{
@@ -79,6 +82,8 @@ import org.openqa.selenium.support.PageFactory;
 	private WebElement noTitleErrorMsg;
 	@FindBy (css="#WallMessageBody")
 	private WebElement messageMainBody;
+	@FindBy (css="ul.comments li[style]")
+	private WebElement newMessageBubble;
 
 	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
@@ -168,7 +173,6 @@ import org.openqa.selenium.support.PageFactory;
 
 	public void writeMessageNoTitle(String message)
 	{
-		clickAndWait(messageTitleField);
 		triggerMessageArea();
 		messageTitleField.sendKeys(Keys.TAB);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
@@ -255,11 +259,11 @@ import org.openqa.selenium.support.PageFactory;
 	 * @param replyNumber This is the same number as in the URL for that message.
 	 */
 	public void verifyPostedReplyWithMessage(String message, int replyNumber)
-	{	
+	{
 		waitForTextToBePresentInElementByBy(By.cssSelector("ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message);
 		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
-	
+
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
@@ -276,15 +280,17 @@ import org.openqa.selenium.support.PageFactory;
 	}
 
 	public void verifyPostedMessageWithLinks(String internallink, String externallink){
-		waitForTextToBePresentInElementByElement(messageBody.get(0), internallink);
-		waitForTextToBePresentInElementByElement(messageBody.get(1), externallink);
+		waitForElementByElement(newMessageBubble);
+		Assertion.assertEquals(messageBody.get(0).getText(), internallink);
+		Assertion.assertEquals(messageBody.get(1).getText(), externallink);
 		PageObjectLogging.log("verifyPostedMessageWithLinks", "message with links", true);
 	}
 
 	public void verifyPostedMessageWithoutTitle(String userName, String message)
 	{
+		waitForElementByElement(newMessageBubble);
 		waitForTextToBePresentInElementByElement(msgEditedByFields.get(0), userName);
-		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
+		Assertion.assertEquals(messageBody.get(0).getText(), message);
 		PageObjectLogging.log(
 			"verifyPostedMessageWithTitle",
 			"message without title verified", true, driver
