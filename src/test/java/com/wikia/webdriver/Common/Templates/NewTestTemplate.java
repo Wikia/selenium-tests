@@ -6,7 +6,7 @@ import com.wikia.webdriver.Common.Core.Configuration.ConfigurationInterface;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.NewProperties;
+import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
@@ -23,7 +23,6 @@ import org.testng.annotations.BeforeSuite;
 public class NewTestTemplate {
 
 	protected WebDriver driver;
-	protected String testedWiki;
 	protected ConfigurationInterface config;
 
 	public NewTestTemplate() {
@@ -32,17 +31,12 @@ public class NewTestTemplate {
 
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {
-		NewProperties.setVariables();
 		//Needed because a lot of tests uses GLOBAL object
 		//Not calling causes NUllPointerException
 		Properties.setProperties();
 		CommonUtils.deleteDirectory("." + File.separator + "logs");
 		CommonUtils.createDirectory("." + File.separator + "logs");
 
-	}
-
-	@AfterSuite(alwaysRun = true)
-	public void afterSuite() {
 	}
 
 	@BeforeMethod(alwaysRun = true)
@@ -62,11 +56,6 @@ public class NewTestTemplate {
 		eventDriver.register(new PageObjectLogging());
 		driver = eventDriver;
 	}
-
-	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
-        NewDriverProvider.setDriverCapabilities(caps);
-        startBrowser();
-    }
 
 	protected void stopBrowser() {
 		driver = NewDriverProvider.getWebDriver();

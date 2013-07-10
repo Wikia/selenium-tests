@@ -1,5 +1,7 @@
 package com.wikia.webdriver.Common.Core.Configuration;
 
+import com.wikia.webdriver.Common.Properties.Credentials;
+
 import java.io.File;
 
 /**
@@ -11,7 +13,7 @@ public class POMConfiguration implements ConfigurationInterface {
 	private String browser;
 	private String env;
 	private String wikiName;
-	private String propertiesPath;
+	private String credentialsPath;
 	private String captchaPath;
 
 	public POMConfiguration() {
@@ -42,7 +44,7 @@ public class POMConfiguration implements ConfigurationInterface {
 			wikiName = "mediawiki119";
 		}
 
-		propertiesPath = System.getProperty("config");
+		credentialsPath = System.getProperty("config");
 		captchaPath = System.getProperty("captcha");
 	}
 
@@ -62,11 +64,6 @@ public class POMConfiguration implements ConfigurationInterface {
 	}
 
 	@Override
-	public File getPropertiesFile() {
-		return new File(propertiesPath);
-	}
-
-	@Override
 	public File getCaptchaFile() {
 		return new File(captchaPath);
 	}
@@ -74,5 +71,10 @@ public class POMConfiguration implements ConfigurationInterface {
 	@Override
 	public boolean loginCookieAvailable() {
 		return !env.contains("dev");
+	}
+
+	@Override
+	public Credentials getCredentials() {
+		return new Credentials(new File(credentialsPath));
 	}
 }

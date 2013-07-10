@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import com.wikia.webdriver.Common.Properties.Credentials;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -112,22 +113,9 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement userMessage;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
-	private By galleryDialogPhotosList = By
-			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li input");
-	private By galleryDialogPhotoOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGalleryOrientation'] li");
-	private String videoAddVideoButtonSelector = "div.input-group.VideoEmbedNoBorder input";
-	private String videoReturnToEditingSelector = "input[value=\"Return to editing\"]";
-	private By galleryDialogSlideshowOrientationsList = By
-			.cssSelector("ul.clearfix[id='WikiaPhotoGallerySliderType'] li");
-	private By layoutList = By.cssSelector("ul#CreatePageDialogChoices li");
-	private By captionTextArea = By.cssSelector("textarea[id='ImageUploadCaption']");
-	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
-	private By editButtonSelector = By.cssSelector("a#ca-edit");
 	private By editDropDownBy = By.cssSelector("article span.drop");
 
-    //Selectors
-    protected String loginModalSelector = ".UserLoginModal";
+	protected Credentials credentials;
 
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
@@ -139,16 +127,6 @@ public class WikiBasePageObject extends BasePageObject {
 	{
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
-	}
-
-	/**
-	 * verify that wikia search field is displayed
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyWikiaSearchFieldIsDisplayed() {
-		waitForElementByElement(wikiaSearch_searchForm);
-		PageObjectLogging.log("verifyWikiaSearchFieldIsDisplayed", "verify that wikia search field is displayed", true);
 	}
 
 	/**
@@ -288,13 +266,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
-	protected void clickDeleteButtonInDropDown() {
-		waitForElementByElement(deleteButton);
-		clickActions(deleteButton);
-		PageObjectLogging.log("clickDeleteButtonInDropDown",
-				"delete button in drop-down clicked", true);
-	}
-
 	protected void clickCommentDeleteConfirmationButton() {
 		waitForElementByElement(deleteConfirmationButton);
 		waitForElementByElement(deleteCommentReasonField);
@@ -398,9 +369,9 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(restoreButton);
 		waitForElementByElement(userMessage);
 		PageObjectLogging.log(
-			"clickUndeleteArticle",
-			"undelete article button clicked",
-			true, driver
+				"clickUndeleteArticle",
+				"undelete article button clicked",
+				true, driver
 		);
 	}
 
@@ -466,38 +437,11 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 		waitForElementByElement(editDropDown);
 		PageObjectLogging.log(
-			"openRandomArticle",
-			"Random article opened",
-			true
+				"openRandomArticle",
+				"Random article opened",
+				true
 		);
 		return new WikiArticlePageObject(driver, wikiFirstHeader.getText());
-	}
-
-	public WikiCategoryPageObject clickOnCategory(String categoryName) {
-		List<WebElement> lista = driver.findElements(By
-				.cssSelector("#catlinks li a"));
-		Boolean result = false;
-		// there might be more than one category on a random page. Thus - loop
-		// over all of them.
-		if (lista.size() > 0) {
-
-			for (WebElement webElement : lista) {
-				waitForElementByElement(webElement);
-				if (webElement.getText().equalsIgnoreCase(categoryName)) {
-					waitForElementClickableByElement(webElement);
-					clickAndWait(webElement);
-					result = true;
-				}
-			}
-		}
-		if (result) {
-			PageObjectLogging.log("clickOnCategory", "clicked on "
-					+ categoryName, true, driver);
-		} else {
-			PageObjectLogging.log("clickOnCategory", "category " + categoryName
-					+ " not found", false, driver);
-		}
-		return new WikiCategoryPageObject(driver);
 	}
 
 	public WikiCategoryPageObject openCategoryPage(String category) {
@@ -507,31 +451,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiCategoryPageObject(driver);
 	}
 
-	public CreateNewWikiPageObjectStep1 startAWiki() {
-		return null;
-
-	}
-
 	public void verifyPermissionsErrorsPresent() {
 		waitForElementByElement(premissionErrorMessage);
 		PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
 				true, driver);
 	}
-
-	public void verifyAdsVisible_PrefooterAds()
-	{
-		waitForElementByElement(ad_Prefooter_left_boxad);
-		waitForElementByElement(ad_Prefooter_right_boxad);
-		PageObjectLogging.log("verifyPrefooterAdsVisible", "left and right prefooter ads are visible", true, driver);
-	}
-
-	public void verifyAdsInvisible_PrefooterAds()
-	{
-		waitForElementNotVisibleByElement(ad_Prefooter_left_boxad);
-		waitForElementNotVisibleByElement(ad_Prefooter_right_boxad);
-		PageObjectLogging.log("verifyPrefooterAdsInvisible", "left and right prefooter ads are invisible", true, driver);
-	}
-
 
 	public void verifyVideoOnTheLeftOnAritcle()
 	{
@@ -573,10 +497,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyUrl(String url) {
 		waitForStringInURL(url);
-	}
-
-	public void verifyEditButtonVisible() {
-		waitForElementNotPresent(editButtonSelector);
 	}
 
         public void openSpecialPage(String specialPage) {

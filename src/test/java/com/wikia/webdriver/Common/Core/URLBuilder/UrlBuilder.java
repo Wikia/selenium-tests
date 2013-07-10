@@ -7,7 +7,6 @@ package com.wikia.webdriver.Common.Core.URLBuilder;
 public class UrlBuilder {
 
 	private String env;
-	private String qs;
 	private Boolean isWikia;
 
 	public UrlBuilder(String environment) {
@@ -50,9 +49,5 @@ public class UrlBuilder {
 			System.out.println("ENV property is not set!");
 		}
 		return url;
-	}
-
-	public static String buildUrl(String wikiUrl, String suffix) {
-		return wikiUrl + suffix;
 	}
 }
