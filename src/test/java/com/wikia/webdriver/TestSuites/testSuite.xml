@@ -68,6 +68,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.editingLocalCssTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpValidationTests"/>
+			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiwikifinderTests"/>
 		</classes>
 	</test>
 </suite>
