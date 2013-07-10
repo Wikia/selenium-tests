@@ -1,19 +1,18 @@
 package com.wikia.webdriver.TestCases.LoginTests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.DataProvider.LoginDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.AddMediaModalComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import org.testng.annotations.Test;
 
 /**
  *
@@ -26,7 +25,7 @@ public class ForcedLoginTests extends TestTemplate{
     private String upload = URLsContent.specialUpload;
     private String watchList = URLsContent.specialWatchList;
 
-    @Test(groups = {"ForcedLogin_001_newFile", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_001_newFile", "ForcedLogin"})
     public void ForcedLogin_001_newFile () {
         CommonFunctions.logOut(driver);
 
@@ -47,7 +46,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    @Test(groups = {"ForcedLogin_002_video", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_002_video", "ForcedLogin"})
     public void ForcedLogin_002_video () {
         CommonFunctions.logOut(driver);
 
@@ -67,7 +66,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    @Test(groups = {"ForcedLogin_003_loginRequired", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_003_loginRequired", "ForcedLogin"})
     public void ForcedLogin_003_loginRequired () {
         CommonFunctions.logOut(driver);
 
@@ -84,7 +83,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    @Test(groups = {"ForcedLogin_004_notLoggedIn", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_004_notLoggedIn", "ForcedLogin"})
     public void ForcedLogin_004_notLoggedIn () {
         CommonFunctions.logOut(driver);
 
@@ -101,7 +100,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    @Test(groups = {"ForcedLogin_005_addMedia", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_005_addMedia", "ForcedLogin"})
     public void ForcedLogin_005_addMedia () {
         CommonFunctions.logOut(driver);
 
@@ -117,7 +116,7 @@ public class ForcedLoginTests extends TestTemplate{
         CommonFunctions.logOut(driver);
     }
 
-    @Test(groups = {"ForcedLogin_006_rail", "Login", "ForcedLogin"})
+    @Test(groups = {"ForcedLogin_006_rail", "ForcedLogin"})
     public void ForcedLogin_006_rail () {
         CommonFunctions.logOut(driver);
 

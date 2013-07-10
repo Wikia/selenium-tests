@@ -1,14 +1,13 @@
 package com.wikia.webdriver.TestCases.LoginTests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.DataProvider.LoginDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject.DropDownComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 /**
  *
@@ -17,7 +16,7 @@ import org.testng.annotations.Test;
 public class ForgottenPasswordTests extends TestTemplate {
 
     @Test(
-        groups = { "ForgottenPassword_001_dropdown", "ForgottenPassword" , "Login"}
+        groups = { "ForgottenPassword_001_dropdown", "ForgottenPassword"}
     )
     public void ForgottenPassword_001_dropdown() {
         CommonFunctions.logOut(driver);
@@ -46,7 +45,7 @@ public class ForgottenPasswordTests extends TestTemplate {
     }
 
     @Test(
-        groups = { "ForgottenPassword_002_specialPage", "ForgottenPassword" , "Login"}
+        groups = { "ForgottenPassword_002_specialPage", "ForgottenPassword"}
     )
     public void ForgottenPassword_002_specialPage() {
         CommonFunctions.logOut(driver);
