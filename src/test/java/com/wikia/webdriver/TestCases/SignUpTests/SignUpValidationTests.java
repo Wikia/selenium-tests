@@ -5,7 +5,6 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
-import java.text.SimpleDateFormat;
 import org.testng.annotations.Test;
 
 public class SignUpValidationTests extends TestTemplate {

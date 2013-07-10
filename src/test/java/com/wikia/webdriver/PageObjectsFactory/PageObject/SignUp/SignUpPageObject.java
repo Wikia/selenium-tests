@@ -59,8 +59,8 @@ public class SignUpPageObject extends BasePageObject {
 		 )
 	 private WebElement emptyUserNameValidationError;
 	 @FindBy(
-		 xpath="//div[@class='error-msg' and contains(text(), "
-		 + "'Someone already has this username. Try a different one!')]"
+			xpath="//div[@class='error-msg' and contains(text(), "
+			+ "'Someone already has this username. Try a different one!')]"
 		 )
 	 private WebElement occupiedUserNameValidationError;
 
@@ -91,9 +91,11 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		userNameField.sendKeys(userName);
 		userNameField.sendKeys(Keys.TAB);
-		PageObjectLogging.log("typeInUserName ",
+		PageObjectLogging.log(
+			"typeInUserName ",
 			"User name field populated "
-			+userName, true, driver);
+			+ userName, true
+		);
 	}
 
 	/**
@@ -120,7 +122,7 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		waitForElementByElement(tooYoungError);
 		Assertion.assertTrue(tooYoungError.isDisplayed());
-		PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true, driver);
+		PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true);
 	}
 
 	/**
@@ -159,7 +161,7 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		String word = getWordFromCaptcha();
 		blurryWordField.sendKeys(word);
-		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true, driver);
+		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true);
 	}
 
 	/**
