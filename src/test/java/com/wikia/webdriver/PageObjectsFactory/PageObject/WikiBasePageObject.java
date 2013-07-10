@@ -133,21 +133,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private By editButtonSelector = By.cssSelector("a#ca-edit");
 	private By editDropDownBy = By.cssSelector("article span.drop");
 
-	@FindBy (css = "#WikiaPageHeader h1")
-	private WebElement wikiFirstHeader;
-
-
-	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
-	private WebElement specialUserLoginLink;
-
-	@FindBy(css = ".UserLoginModal input[name='username']")
-	protected WebElement modalUserNameInput;
-
-	@FindBy(css="#AccountNavigation > li > a > .avatar")
-	protected WebElement userProfileAvatar;
-	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
-	protected WebElement navigationLogoutLink;
-
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
 
@@ -178,7 +163,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * */
 	public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
-		return new SpecialVideosPageObject(driver, Global.DOMAIN);
+		return new SpecialVideosPageObject(driver);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
@@ -191,11 +176,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialAdminDashboardPageObject(driver);
 	}
 
-	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
-		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
-		return new SpecialAdminDashboardPageObject(driver);
-	}
-
 	public SpecialCssPageObject openSpecialCss() {
 		getUrl(Global.DOMAIN + URLsContent.specialCSS);
 		return new SpecialCssPageObject(driver);
@@ -203,7 +183,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialUploadPageObject openSpecialUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialUpload);
-		return new SpecialUploadPageObject(driver, Global.DOMAIN);
+		return new SpecialUploadPageObject(driver);
 	}
 
 	/**
@@ -223,7 +203,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialMultipleUpload);
-		return new SpecialMultipleUploadPageObject(driver, Global.DOMAIN);
+		return new SpecialMultipleUploadPageObject(driver);
 	}
 
 	public void verifyEditDropDownAnonymous() {
@@ -301,16 +281,7 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public void clickEditButton() {
-		mouseOver("#GlobalNavigation li:nth(1)");
-		mouseRelease("#GlobalNavigation li:nth(1)");
-		waitForElementByElement(editButton);
-		waitForElementClickableByElement(editButton);
-		clickAndWait(editButton);
-	}
-
-	public WikiArticleEditMode clickEditButton(String pageName) {
-		//two lines below prevent hubs drop-down on IE9
+	public WikiArticleEditMode clickEditButton() {
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(editButton);
@@ -619,13 +590,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotPresent(editButtonSelector);
 	}
 
-	public void verifyUrl(String url) {
-		waitForStringInURL(url);
-	}
-
-	public void verifyEditButtonVisible() {
-		waitForElementNotPresent(editButtonSelector);
-	}
 
         public void openSpecialPage(String specialPage) {
             getUrl(Global.DOMAIN + specialPage);

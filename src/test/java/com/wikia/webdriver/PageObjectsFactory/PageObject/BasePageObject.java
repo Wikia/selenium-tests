@@ -302,8 +302,7 @@ public class BasePageObject{
 	/**
 	 * Checks if the element is present in DOM
 	 *
-	 * @param element
-	 *            The element to be checked
+	 * @param locator The element to be checked
 	 */
 	public void waitForElementPresenceByBy(By locator) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -421,6 +420,7 @@ public class BasePageObject{
 		WebElement temp = driver.findElement(by);
 		wait.until(CommonExpectedConditions
 				.textToBePresentInElement(temp, text));
+	}
 	
 	public void waitForStringInURL(String givenString) {						
 		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
@@ -431,11 +431,6 @@ public class BasePageObject{
 			String className) {
 		wait.until(CommonExpectedConditions.classRemovedFromElement(element,
 				className));
-	}
-
-	public void waitForStringInURL(String givenString) {
-		wait.until(CommonExpectedConditions
-				.givenStringtoBePresentInURL(givenString));
 	}
 
 	public String getTimeStamp() {
@@ -459,8 +454,7 @@ public class BasePageObject{
 	 * Verify if js alert is or isn't there. You can expect alert with certain
 	 * message, or not expect alert with certain message <br>
 	 *
-	 * @param alert
-	 *            message that we do or do not expect
+	 * @param alertMessage that we do or do not expect
 	 * @param ifAlertExpected
 	 *            if we expect JS alert - true. If we don't expect JS alert -
 	 *            false
@@ -509,10 +503,8 @@ public class BasePageObject{
 	/**
 	 * Wait for tags that are visible and are bigger then 1px x 1px
 	 *
-	 * @param String
-	 *            tagNameOne - first tag name
-	 * @param String
-	 *            tagNameTwo - second tag name
+	 * @param tagNameOne - first tag name
+	 * @param tagNameTwo - second tag name
 	 */
 	public void waitForOneOfTagsPresentInElement(WebElement slot,
 			String tagNameOne, String tagNameTwo) {
@@ -588,7 +580,7 @@ public class BasePageObject{
      * Determine whether username contains underscore
      * if so replace it with space
      *
-     * @param username
+     * @param userName
      */
     protected String purifyUserName(String userName) {
         if (userName.contains("_")) {
