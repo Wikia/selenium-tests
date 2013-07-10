@@ -111,6 +111,12 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement editButton;
 	@FindBy(css=".msg")
 	protected WebElement userMessage;
+	@FindBy(css = "#mw-content-text .source-css")
+	protected WebElement cssSource;
+	@FindBy(css = "ul#pagehistory > li:first-child .comment")
+	protected WebElement cssEditSummary;
+	@FindBy(css = "ul#pagehistory > li:first-child .minoredit")
+	protected WebElement cssMinorEdit;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	private By galleryDialogPhotosList = By
@@ -191,7 +197,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialCssPageObject openSpecialCss() {
-		getUrl(Global.DOMAIN + URLsContent.specialCss);
+		getUrl(Global.DOMAIN + URLsContent.specialCSS);
 		return new SpecialCssPageObject(driver);
 	}
 
@@ -427,7 +433,7 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	private void clickRestoreArticleButton() {
+	protected void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
 		clickAndWait(restoreButton);
 		waitForElementByElement(userMessage);
@@ -715,8 +721,27 @@ public class WikiBasePageObject extends BasePageObject {
      *
      * @return Boolean
      */
-    protected Boolean checkIfMainPage() {
-        WebElement body = driver.findElement(By.cssSelector("body"));
-	return (body.getAttribute("class").contains("mainpage"));
-    }
+	protected Boolean checkIfMainPage() {
+		WebElement body = driver.findElement(By.cssSelector("body"));
+		return (body.getAttribute("class").contains("mainpage"));
+	}
+
+	public String getWikiaCssContent() {
+		waitForElementByElement(cssSource);
+		String source = cssSource.getText();
+		PageObjectLogging.log("cssSource", "the following text was get from Wikia.css: "+source, true);
+		return source;
+	}
+
+	public String getFirstCssRevision() {
+		waitForElementByElement(cssEditSummary);
+		String summary = cssEditSummary.getText();
+		PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "+summary, true);
+		return summary;
+	}
+
+	public void verifyRevisionMarkedAsMinor() {
+		waitForElementByElement(cssMinorEdit);
+		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+	}
 }
