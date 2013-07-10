@@ -43,149 +43,149 @@ public class SpecialMultiwikifinderPageObject extends WikiBasePageObject{
     private List <WebElement> listOfLinks;
 
     public SpecialMultiwikifinderPageObject(WebDriver driver) {
-	super(driver);
+		super(driver);
     }
 
     public SpecialMultiwikifinderPageObject openSpecialMultiwikifinderPage(){
-	getUrl(Global.DOMAIN+"wiki/Special:Multiwikifinder");
-	waitForElementByElement(multiwikifinderPageHeader);
-	PageObjectLogging.log(
-	    "openSpecialMultiwikifinderPage",
-	    "Special Multiwikifinder page was opened",
-	    true, driver
-	);
-	return new SpecialMultiwikifinderPageObject(driver);
+		getUrl(Global.DOMAIN+"wiki/Special:Multiwikifinder");
+		waitForElementByElement(multiwikifinderPageHeader);
+		PageObjectLogging.log(
+			"openSpecialMultiwikifinderPage",
+			"Special Multiwikifinder page was opened",
+			true, driver
+		);
+		return new SpecialMultiwikifinderPageObject(driver);
     }
 
     public void enterPagename(String pagename){
-	waitForElementByElement(enterPagenameField);
-	enterPagenameField.sendKeys(pagename);
+		waitForElementByElement(enterPagenameField);
+		enterPagenameField.sendKeys(pagename);
     }
 
     public void clickFindButton(){
-	waitForElementByElement(findButton);
-	clickAndWait(findButton);
+		waitForElementByElement(findButton);
+		clickAndWait(findButton);
     }
 
     public void clickNextResultsButton(){
-	waitForElementByElement(nextResultsButton);
-	clickAndWait(nextResultsButton);
+		waitForElementByElement(nextResultsButton);
+		clickAndWait(nextResultsButton);
     }
 
     public void clickPreviousResultsButton(){
-	waitForElementByElement(previousResultsButton);
-	clickAndWait(previousResultsButton);
+		waitForElementByElement(previousResultsButton);
+		clickAndWait(previousResultsButton);
     }
 
     public void findPagename(String pagename){
-	enterPagename(pagename);
-	clickFindButton();
+		enterPagename(pagename);
+		clickFindButton();
     }
 
     public void verifyFoundNotExistingPagename(){
-	waitForElementByElement(noWikisMessage);
-	PageObjectLogging.log(
-	    "verifyNoPagenameFounded",
-	    "Not existing pagename is not founded",
-	    true, driver
-	);
+		waitForElementByElement(noWikisMessage);
+		PageObjectLogging.log(
+			"verifyNoPagenameFounded",
+			"Not existing pagename is not founded",
+			true, driver
+		);
     }
 
     public void verifyMaxAmountOfLinksOnPage(int maxAmountOfLinks){
-	waitForElementByElement(firstLink);
-	int amountOfLinks = listOfLinks.size();
-	if(amountOfLinks <= maxAmountOfLinks){
-	    PageObjectLogging.log(
-		"verifyMaxAmountOfLinksOnPage",
-		"Max amount of links is not exceeded",
-		true, driver
-	    );
-	}
-	else{
-	    PageObjectLogging.log(
-		"verifyMaxAmountOfLinksOnPage",
-		"Max amount of links is exceeded",
-		false, driver
-	    );
-	    assert amountOfLinks <= maxAmountOfLinks;
-	}
+		waitForElementByElement(firstLink);
+		int amountOfLinks = listOfLinks.size();
+		if(amountOfLinks <= maxAmountOfLinks){
+			PageObjectLogging.log(
+				"verifyMaxAmountOfLinksOnPage",
+				"Max amount of links is not exceeded",
+				true, driver
+			);
+		}
+		else{
+			PageObjectLogging.log(
+				"verifyMaxAmountOfLinksOnPage",
+				"Max amount of links is exceeded",
+				false, driver
+			);
+			assert amountOfLinks <= maxAmountOfLinks;
+		}
     }
 
     public void clickAndVerifyMaxAmountOfLinksOnPage(){
-	clickAndWait(maxAmountOfLinksOnPage20);
-	verifyMaxAmountOfLinksOnPage(20);
-	clickAndWait(maxAmountOfLinksOnPage50);
-	verifyMaxAmountOfLinksOnPage(50);
-	clickAndWait(maxAmountOfLinksOnPage100);
-	verifyMaxAmountOfLinksOnPage(100);
-	clickAndWait(maxAmountOfLinksOnPage250);
-	verifyMaxAmountOfLinksOnPage(250);
-	clickAndWait(maxAmountOfLinksOnPage500);
-	verifyMaxAmountOfLinksOnPage(500);
+		clickAndWait(maxAmountOfLinksOnPage20);
+		verifyMaxAmountOfLinksOnPage(20);
+		clickAndWait(maxAmountOfLinksOnPage50);
+		verifyMaxAmountOfLinksOnPage(50);
+		clickAndWait(maxAmountOfLinksOnPage100);
+		verifyMaxAmountOfLinksOnPage(100);
+		clickAndWait(maxAmountOfLinksOnPage250);
+		verifyMaxAmountOfLinksOnPage(250);
+		clickAndWait(maxAmountOfLinksOnPage500);
+		verifyMaxAmountOfLinksOnPage(500);
     }
 
     public void verifyPagination(){
-	String firstLinkOnFirstPage = listOfLinks.get(0).getAttribute("href");
-	String lastLinkOnFirstPage = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
-	clickNextResultsButton();
-	String firstLinkOnSecondPage = listOfLinks.get(0).getAttribute("href");
-	String lastLinkOnSecondPage = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
-	if(!(firstLinkOnFirstPage.equals(firstLinkOnSecondPage)) &
-	    (!(lastLinkOnFirstPage.equals(lastLinkOnSecondPage)))){
-		PageObjectLogging.log(
-		    "verifyPagination",
-		    "Links on next pages are different",
-		    true, driver
-		);
+		String firstLinkOnFirstPage = listOfLinks.get(0).getAttribute("href");
+		String lastLinkOnFirstPage = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
+		clickNextResultsButton();
+		String firstLinkOnSecondPage = listOfLinks.get(0).getAttribute("href");
+		String lastLinkOnSecondPage = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
+		if(!(firstLinkOnFirstPage.equals(firstLinkOnSecondPage)) &
+			(!(lastLinkOnFirstPage.equals(lastLinkOnSecondPage)))){
+				PageObjectLogging.log(
+					"verifyPagination",
+					"Links on next pages are different",
+					true, driver
+				);
 	    }
-	else{
-		PageObjectLogging.log(
-		    "verifyPagination",
-		    "Links on next pages are the same",
-		    false, driver
-		);
-		assert !(firstLinkOnFirstPage.equals(firstLinkOnSecondPage)) &
-		    (!(lastLinkOnFirstPage.equals(lastLinkOnSecondPage)));
-	}
-	clickPreviousResultsButton();
-	String firstLinkAfterBack = listOfLinks.get(0).getAttribute("href");
-	String lastLinkAfterBack = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
-	if((firstLinkOnFirstPage.equals(firstLinkAfterBack)) &
-	    (lastLinkOnFirstPage.equals(lastLinkAfterBack))){
-		PageObjectLogging.log(
-		    "verifyPagination",
-		    "Links on the same pages are the same",
-		    true, driver
-		    );
+		else{
+			PageObjectLogging.log(
+				"verifyPagination",
+				"Links on next pages are the same",
+				false, driver
+			);
+			assert !(firstLinkOnFirstPage.equals(firstLinkOnSecondPage)) &
+				(!(lastLinkOnFirstPage.equals(lastLinkOnSecondPage)));
 		}
-	else{
-		PageObjectLogging.log(
-		    "verifyPagination",
-		    "Links on the same pages are different",
-		    false, driver
-		);
-		assert (firstLinkOnFirstPage.equals(firstLinkAfterBack)) &
-		    (lastLinkOnFirstPage.equals(lastLinkAfterBack));
-	}
+		clickPreviousResultsButton();
+		String firstLinkAfterBack = listOfLinks.get(0).getAttribute("href");
+		String lastLinkAfterBack = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
+		if((firstLinkOnFirstPage.equals(firstLinkAfterBack)) &
+			(lastLinkOnFirstPage.equals(lastLinkAfterBack))){
+				PageObjectLogging.log(
+					"verifyPagination",
+					"Links on the same pages are the same",
+					true, driver
+				);
+		}
+		else{
+			PageObjectLogging.log(
+				"verifyPagination",
+				"Links on the same pages are different",
+				false, driver
+			);
+			assert (firstLinkOnFirstPage.equals(firstLinkAfterBack)) &
+				(lastLinkOnFirstPage.equals(lastLinkAfterBack));
+		}
     }
 
     public void verifyAllLinksHavePagenameInPath(String popularPagename){
-	for(int i=0; i<listOfLinks.size(); i++){
-	    if(listOfLinks.get(i).getAttribute("href").endsWith(popularPagename)){
-		PageObjectLogging.log(
-		    "verifyThisLinkHavePagenameInPath",
-		    "This link has searched pagename in path",
-		    true
-		);
-	    }
-	    else{
-		PageObjectLogging.log(
-		    "verifyAllLinksHavePagenameInPath",
-		    "Not all links have searched pagename in path",
-		    false
-		);
-		assert listOfLinks.get(i).getAttribute("href").endsWith(popularPagename);
-	    }
-	}
+		for(int i=0; i<listOfLinks.size(); i++){
+			if(listOfLinks.get(i).getAttribute("href").endsWith(popularPagename)){
+				PageObjectLogging.log(
+					"verifyThisLinkHavePagenameInPath",
+					"This link has searched pagename in path",
+					true
+				);
+			}
+			else{
+				PageObjectLogging.log(
+					"verifyAllLinksHavePagenameInPath",
+					"Not all links have searched pagename in path",
+					false
+				);
+				assert listOfLinks.get(i).getAttribute("href").endsWith(popularPagename);
+			}
+		}
     }
 }

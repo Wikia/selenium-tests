@@ -17,53 +17,53 @@ public class MultiwikifinderTests extends TestTemplate{
 
     @Test(groups = { "Multiwikifinder_001" ,"Multiwikifinder" })
     public void multiwikifinderTests_001_notExistingPagename() {
-	CommonFunctions.logOut(driver);
-	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-	login.openWikiPage();
-	login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-	SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
-	multiwikifinder.openSpecialMultiwikifinderPage();
-	multiwikifinder.findPagename(multiwikifinder.getTimeStamp());
-	multiwikifinder.verifyFoundNotExistingPagename();
+		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openWikiPage();
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
+		multiwikifinder.openSpecialMultiwikifinderPage();
+		multiwikifinder.findPagename(multiwikifinder.getTimeStamp());
+		multiwikifinder.verifyFoundNotExistingPagename();
     }
 
     @Test(groups = { "Multiwikifinder_002" , "Multiwikifinder"})
     public void multiwikifinderTests_002_maxAmoutOfLinksOnPage() {
-	CommonFunctions.logOut(driver);
-	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-	login.openWikiPage();
-	login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-	SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
-	multiwikifinder.openSpecialMultiwikifinderPage();
-	multiwikifinder.findPagename("A");
-	multiwikifinder.clickAndVerifyMaxAmountOfLinksOnPage();
+		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openWikiPage();
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
+		multiwikifinder.openSpecialMultiwikifinderPage();
+		multiwikifinder.findPagename("A");
+		multiwikifinder.clickAndVerifyMaxAmountOfLinksOnPage();
     }
 
     @Test(groups = { "Multiwikifinder_003" , "Multiwikifinder"})
     public void multiwikifinderTests_003_checkPagination() {
-	CommonFunctions.logOut(driver);
-	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-	login.openWikiPage();
-	login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-	SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
-	multiwikifinder.openSpecialMultiwikifinderPage();
-	multiwikifinder.findPagename("A");
-	multiwikifinder.verifyPagination();
+		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openWikiPage();
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
+		multiwikifinder.openSpecialMultiwikifinderPage();
+		multiwikifinder.findPagename("A");
+		multiwikifinder.verifyPagination();
     }
 
     @Test(
-	dataProviderClass = ArticleDataProvider.class,
-	dataProvider = "getPopularPagenames",
-	groups = { "Multiwikifinder_004" , "Multiwikifinder"}
+		dataProviderClass = ArticleDataProvider.class,
+		dataProvider = "getPopularPagenames",
+		groups = { "Multiwikifinder_004" , "Multiwikifinder"}
     )
     public void multiwikifinderTests_004_pagenameInPath(String popularPagename) {
-	CommonFunctions.logOut(driver);
-	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-	login.openWikiPage();
-	login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-	SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
-	multiwikifinder.openSpecialMultiwikifinderPage();
-	multiwikifinder.findPagename(popularPagename);
-	multiwikifinder.verifyAllLinksHavePagenameInPath(popularPagename);
+		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.openWikiPage();
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialMultiwikifinderPageObject multiwikifinder = new SpecialMultiwikifinderPageObject(driver);
+		multiwikifinder.openSpecialMultiwikifinderPage();
+		multiwikifinder.findPagename(popularPagename);
+		multiwikifinder.verifyAllLinksHavePagenameInPath(popularPagename);
     }
 }
