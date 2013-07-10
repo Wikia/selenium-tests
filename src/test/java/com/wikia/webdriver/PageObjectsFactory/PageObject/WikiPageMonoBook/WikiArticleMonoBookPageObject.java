@@ -1,9 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook;
 
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,12 +13,13 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BaseMonoBookPageObject;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author lukaszk
  */
 public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
-
 
 	@FindBy(css = "#mw-content-text")
 	private WebElement articleContentLocator;

@@ -126,6 +126,21 @@ public class WikiBasePageObject extends BasePageObject {
 	private By editButtonSelector = By.cssSelector("a#ca-edit");
 	private By editDropDownBy = By.cssSelector("article span.drop");
 
+	@FindBy (css = "#WikiaPageHeader h1")
+	private WebElement wikiFirstHeader;
+
+
+	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
+	private WebElement specialUserLoginLink;
+
+	@FindBy(css = ".UserLoginModal input[name='username']")
+	protected WebElement modalUserNameInput;
+
+	@FindBy(css="#AccountNavigation > li > a > .avatar")
+	protected WebElement userProfileAvatar;
+	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
+	protected WebElement navigationLogoutLink;
+
     //Selectors
     protected String loginModalSelector = ".UserLoginModal";
 
@@ -156,12 +171,17 @@ public class WikiBasePageObject extends BasePageObject {
 	 * */
 	public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
-		return new SpecialVideosPageObject(driver);
+		return new SpecialVideosPageObject(driver, Global.DOMAIN);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
 		getUrl(Global.DOMAIN + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
+	}
+	
+	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
+		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
+		return new SpecialAdminDashboardPageObject(driver);
 	}
 
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
@@ -171,7 +191,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialUploadPageObject openSpecialUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialUpload);
-		return new SpecialUploadPageObject(driver);
+		return new SpecialUploadPageObject(driver, Global.DOMAIN);
 	}
 
 	/**
@@ -191,7 +211,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialMultipleUpload);
-		return new SpecialMultipleUploadPageObject(driver);
+		return new SpecialMultipleUploadPageObject(driver, Global.DOMAIN);
 	}
 
 	public void verifyEditDropDownAnonymous() {
@@ -269,7 +289,15 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public WikiArticleEditMode clickEditButton() {
+	public void clickEditButton() {
+		mouseOver("#GlobalNavigation li:nth(1)");
+		mouseRelease("#GlobalNavigation li:nth(1)");
+		waitForElementByElement(editButton);
+		waitForElementClickableByElement(editButton);
+		clickAndWait(editButton);
+	}
+
+	public WikiArticleEditMode clickEditButton(String pageName) {
 		//two lines below prevent hubs drop-down on IE9
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
@@ -380,7 +408,7 @@ public class WikiBasePageObject extends BasePageObject {
     	   waitForElementNotVisibleByElement(editButton);
     	   PageObjectLogging.log("verifyEditButtonNotPresent",
     			   "edit button is not present", true);
-       }
+       }        
 
 	private void clickUndeleteArticle() {
 		waitForElementByElement(undeleteButton);
@@ -579,6 +607,14 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotPresent(editButtonSelector);
 	}
 
+	public void verifyUrl(String url) {
+		waitForStringInURL(url);
+	}
+
+	public void verifyEditButtonVisible() {
+		waitForElementNotPresent(editButtonSelector);
+	}
+
         public void openSpecialPage(String specialPage) {
             getUrl(Global.DOMAIN + specialPage);
         }
@@ -673,8 +709,8 @@ public class WikiBasePageObject extends BasePageObject {
      *
      * @return Boolean
      */
-	protected Boolean checkIfMainPage() {
-		WebElement body = driver.findElement(By.cssSelector("body"));
-		return (body.getAttribute("class").contains("mainpage"));
-	}
+    protected Boolean checkIfMainPage() {
+        WebElement body = driver.findElement(By.cssSelector("body"));
+	return (body.getAttribute("class").contains("mainpage"));
+    }
 }
