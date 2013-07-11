@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -421,8 +422,8 @@ public class BasePageObject{
 		wait.until(CommonExpectedConditions
 				.textToBePresentInElement(temp, text));
 	}
-	
-	public void waitForStringInURL(String givenString) {						
+
+	public void waitForStringInURL(String givenString) {
 		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
 		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
 	}
@@ -439,15 +440,28 @@ public class BasePageObject{
 		return String.valueOf(timeCurrent);
 	}
 
-	public String getTimeStamp(int length) {
-		Date time = new Date();
-		long timeCurrent = time.getTime();
-		String timeStamp = String.valueOf(timeCurrent);
+	public String getRandomDigits(int length) {
+		String timeStamp = getTimeStamp();
 		int timeStampLenght = timeStamp.length();
 		int timeStampCut = timeStampLenght-length;
 		return timeStamp.substring(timeStampCut);
 	}
 
+	public String getRandomString(int length) {
+		char [] alphabet = {
+				'A','B','C','D','E','F','G','H','I',
+				'J','K','L','M','N','O','P','Q','R',
+				'S','T','U','V','W','X','Y','Z',
+				'a','b','c','d','e','f','g','h','i',
+				'j','l','k','l','m','n','o','p','r',
+				's','t','u','v','w','x','y','z'};
+		Random rnd = new Random();
+		StringBuilder sb = new StringBuilder();
+		for (int i=0; i<length; i++) {
+			sb.append(alphabet[rnd.nextInt(alphabet.length)]);
+		}
+		return sb.toString();
+	}
 
 	/**
 	 * <p>

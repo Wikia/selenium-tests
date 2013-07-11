@@ -16,8 +16,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.NewWikiaH
 
 public class CreateAWikiTests_nonLatin extends TestTemplate
 {
-	private String wikiName;
-
 	/*
 	 * Test Case 3.1.03 Create new wiki: log in field validation (non-Latin characters)
 	 * https://internal.wikia-inc.com/wiki/Global_Log_in_and_Sign_up/Test_Cases:_CNW#Test_Case_3.1.02_Create_new_wiki:_log_in_field_validation_.28Latin_characters.29
@@ -30,9 +28,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp(3);
-		wikiName = PageContent.wikiNamePrefix+timeStamp;
-		createNewWiki1.typeInWikiName(wikiName);
+		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
 		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
 		logInPage.typeInUserName("查爾斯和");
@@ -45,7 +41,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		createNewWiki2.selectCategory(PageContent.wikiCategory);
 		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
 		createNewWiki3.selectTheme(3);
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
+		NewWikiaHomePage newWikia = createNewWiki3.submit();
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userNameNonLatinEncoded);
@@ -66,9 +62,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp(3);
-		wikiName = PageContent.wikiNamePrefix+timeStamp;
-		createNewWiki1.typeInWikiName(wikiName);
+		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
 		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
 		logInPage.typeInUserName(Properties.userNameNonLatin);
@@ -81,7 +75,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		createNewWiki2.selectCategory(PageContent.wikiCategory);
 		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
 		createNewWiki3.selectTheme(3);
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
+		NewWikiaHomePage newWikia = createNewWiki3.submit();
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userNameNonLatinEncoded);
@@ -102,9 +96,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp(3);
-		wikiName = PageContent.wikiNamePrefix+timeStamp;
-		createNewWiki1.typeInWikiName(wikiName);
+		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
 		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
 		logInPage.typeInUserName(Properties.userNameNonLatin);
@@ -118,7 +110,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		createNewWiki2.selectCategory(PageContent.wikiCategory);
 		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
 		createNewWiki3.selectTheme(3);
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
+		NewWikiaHomePage newWikia = createNewWiki3.submit();
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		newWikia.verifyUserLoggedIn(Properties.userNameNonLatinEncoded);
@@ -139,9 +131,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
-		String timeStamp = createNewWiki1.getTimeStamp(3);
-		wikiName = PageContent.wikiNamePrefix+timeStamp;
-		createNewWiki1.typeInWikiName(wikiName);
+		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
 		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
 		logInPage.typeInUserName(Properties.userNameNonLatin);
@@ -151,7 +141,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		createNewWiki2.selectCategory(PageContent.wikiCategory);
 		CreateNewWikiPageObjectStep3 createNewWiki3 = createNewWiki2.submit();
 		createNewWiki3.selectTheme(3);
-		NewWikiaHomePage newWikia = createNewWiki3.submit(wikiName);
+		NewWikiaHomePage newWikia = createNewWiki3.submit();
 		newWikia.VerifyCongratulationsLightBox();
 		newWikia.closeCongratulationsLightBox();
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
