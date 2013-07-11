@@ -1,28 +1,19 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.lang.Thread;
 
 public class NotificationsComponentObject extends BasePageObject{
-	
+
 	public NotificationsComponentObject(WebDriver driver) {
 		super(driver);
 	}
@@ -35,7 +26,7 @@ public class NotificationsComponentObject extends BasePageObject{
 	@FindBy(css="#WallNotifications")
 	private WebElement notifications;
 	@FindBy(css="#bubbles_count")
-	private WebElement bubblesCount;	
+	private WebElement bubblesCount;
 	@FindBy(css="#wall-notifications-markasread-sub")
 	private WebElement markNotificationsAsRead;
 	@FindBy(css="#wall-notifications-markasread-all-wikis")
@@ -47,36 +38,36 @@ public class NotificationsComponentObject extends BasePageObject{
 	private By emptyNumberOfUnreadNotifications = By.cssSelector("#WallNotifications .subnav > li.notifications-empty");
 	private By notificationTitle = By.cssSelector("div.msg-title");
 	private By unreadNotificationReddot = By.cssSelector("#WallNotifications > li > div.reddot");
-	
+
 	/**
 	 * hover the mouse over the notification bubble and wait for it to expand
 	 */
 	protected void openNotifications() {
-		executeScript("$('#WallNotifications li ul.subnav').addClass('show');$('#WallNotifications').mouseover();"); 
+		executeScript("$('#WallNotifications li ul.subnav').addClass('show');$('#WallNotifications').mouseover();");
 		builder.moveToElement(notifications).build().perform();
 	}
-	
+
 	/**
 	 * After expanding the notifications dropdown, the notification messages are loaded
 	 * using ajax request. This method waits until this requests completes.
 	 */
 	protected void waitForNotificationsMessagesToLoad() {
 		waitForElementVisibleByElement(notificationsSubnav);
-		waitForElementPresenceByBy(notificationDropdownForCurrentWiki);		
+		waitForElementPresenceByBy(notificationDropdownForCurrentWiki);
 		waitForElementNotPresent(emptyNotificationDropdownForCurrentWiki);
 	}
-	
-	
+
+
 	/**
 	 * expand the notifications and wait until the notifications for the current wiki are loaded
 	 */
 	public void showNotifications() {
 		waitForNotificationsLoaded();
 		openNotifications();
-		waitForNotificationsMessagesToLoad();				
-		PageObjectLogging.log("#WallNotifications li ul.subnav", "show notifications", true, driver);
+		waitForNotificationsMessagesToLoad();
+		PageObjectLogging.log("#WallNotifications li ul.subnav", "show notifications", true);
 	}
-	
+
 	/**
 	 * click notifications bubble
 	 * @todo: is this needed? the notifications expand on mouse hover
@@ -94,9 +85,9 @@ public class NotificationsComponentObject extends BasePageObject{
 	public void waitForNotificationsLoaded() {
 		waitForElementNotPresent(emptyNumberOfUnreadNotifications);
 	}
-	
+
 	/**
-	 * Fetches the address that of n-th notification points to. 
+	 * Fetches the address that of n-th notification points to.
 	 * Keep in mind the the notification index starts with 1, not 0.
 	 */
 	public String getNotificationLink(int notificationNumber) {
@@ -104,7 +95,7 @@ public class NotificationsComponentObject extends BasePageObject{
 		PageObjectLogging.log("unrollNotifications", "click on notifications bubbles", true, driver);
 		return notificationsList.get(notificationNumber - 1).getAttribute("href");
 	}
-	
+
 	/**
 	 * Return the number of unread notifications
 	 */
@@ -116,7 +107,7 @@ public class NotificationsComponentObject extends BasePageObject{
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * This should be called after expanding the notifications dropdown
 	 * It will return a list of unread notifications that have a given title
@@ -131,14 +122,14 @@ public class NotificationsComponentObject extends BasePageObject{
 					notifications.add(n);
 				}
 			}
-		}		
+		}
 		return notifications;
 	}
-		
+
 	/**
 	 * This should be called after expanding the notifications dropdown.
 	 * It marks all the notifications as read
-	 * 
+	 *
 	 */
 	public void markNotificationsAsRead() {
 		if (this.getNumberOfUnreadNotifications() > 0) {
@@ -148,9 +139,9 @@ public class NotificationsComponentObject extends BasePageObject{
 				this.click(this.markNotificationsAsRead);
 				this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
 				this.click(this.markNotificationsAsReadAllWikis);
-			}			
-			this.waitForElementNotPresent(unreadNotificationReddot);			
+			}
+			this.waitForElementNotPresent(unreadNotificationReddot);
 		}
 	}
-	
+
 }
