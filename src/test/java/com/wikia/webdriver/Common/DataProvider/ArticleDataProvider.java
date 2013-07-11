@@ -16,7 +16,7 @@ public class ArticleDataProvider {
 	}
 
 	@DataProvider
-	public static final Object[][] getPopularPagenames() {
+	public static final Object[][] getPageNames() {
 		return new Object[][] {
 			{"Muppets"},
 			{"Gta"},
