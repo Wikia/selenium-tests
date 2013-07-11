@@ -16,4 +16,4 @@ Wikia.iml
 captcha.txt
 config.xml
 src/test/java/com/wikia/webdriver/Common/Properties/PropertiesSetter.java
-src/test/java/com/wikia/webdriver/Common/Core/Configuration/ManualConfiguration.java
+config.yml

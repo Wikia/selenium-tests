@@ -1,6 +1,12 @@
 package com.wikia.webdriver.Common.Core.Configuration;
 
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Map;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -8,40 +14,50 @@ import java.io.File;
 
 public class ManualConfiguration extends AbstractConfiguration {
 
-	private String browser = "FF"; //Accepted values: FF, CHROME, GHOST, IE
-	private String env = "prod"; //Accepted values: prod, dev-name, preview, sandbox-number
-	private String wikiName = "mediawiki119"; //Mediawiki119 is default testing wiki
+	private Map<String, String> config;
 
-	protected String credentialsFilePath = ""; //Set path to your selenium-config/config.xml file
-	private String captchaPath = ""; //Set path to your selenium-config/captcha.xml file
+	public ManualConfiguration() {
+		Yaml yaml = new Yaml();
+		InputStream input = null;
+		try {
+			input = new FileInputStream(new File("config.yml"));
+		} catch (FileNotFoundException ex) {
+			try {
+				input = new FileInputStream(new File("config_sample.yml"));
+			} catch (FileNotFoundException ex2) {
+				System.out.println("CAN'T LOCATE CONFIG FILE");
+			}
+		}
+		config = (Map<String, String>)yaml.load(input);
+	}
 
 	@Override
 	public String getBrowser() {
-		return this.browser;
+		return config.get("browser");
 	}
 
 	@Override
 	public String getEnv() {
-		return this.env;
+		return config.get("env");
 	}
 
 	@Override
 	public String getWikiName() {
-		return this.wikiName;
+		return config.get("wikiName");
 	}
 
 	@Override
 	public File getCaptchaFile() {
-		return new File(captchaPath);
+		return new File(config.get("captchaPath"));
 	}
 
 	@Override
 	public boolean loginCookieAvailable() {
-		return !env.contains("dev");
+		return !config.get("env").contains("dev");
 	}
 
 	@Override
 	public String getCredentialsFilePath() {
-		return this.credentialsFilePath;
+		return config.get("credentialsPath");
 	}
 }
