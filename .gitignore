@@ -16,4 +16,3 @@ Wikia.iml
 captcha.txt
 config.xml
 pom.xml
-src/test/java/com/wikia/webdriver/Common/Properties/PropertiesSetter.java
