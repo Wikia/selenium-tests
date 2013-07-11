@@ -18,30 +18,18 @@ public class POMConfiguration extends AbstractConfiguration {
 
 	public POMConfiguration() {
 		browser = System.getProperty("browser");
-		try {
-			if (browser.isEmpty()) {
-				browser = "FF"; //Set default value to Firefox;
-			}
-		} catch (NullPointerException ex) {
-			browser = "FF";
+		if (browser == null) {
+			browser = "FF"; //Set default value to Firefox;
 		}
 
 		env = System.getProperty("env");
-		try {
-			if (env.isEmpty()) {
-				env = "prod"; //Set default value to production
-			}
-		} catch (NullPointerException ex) {
-			env = "prod";
+		if (env == null) {
+			env = "prod"; //Set default value to production
 		}
 
 		wikiName = System.getProperty("wiki-name");
-		try {
-			if (wikiName.isEmpty()) {
-				wikiName = "mediawiki119"; //Set default value to mediawiki119
-			}
-		} catch (NullPointerException ex) {
-			wikiName = "mediawiki119";
+		if (wikiName == null) {
+			wikiName = "mediawiki119"; //Set default value to mediawiki119
 		}
 
 		credentialsFilePath = System.getProperty("config");
@@ -70,7 +58,7 @@ public class POMConfiguration extends AbstractConfiguration {
 
 	@Override
 	public boolean loginCookieAvailable() {
-		return !env.contains("dev");
+		return !(env.contains("dev") || (env.contains("sandbox")));
 	}
 
 	@Override

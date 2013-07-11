@@ -53,7 +53,7 @@ public class ManualConfiguration extends AbstractConfiguration {
 
 	@Override
 	public boolean loginCookieAvailable() {
-		return !config.get("env").contains("dev");
+		return !((config.get("env").contains("dev")) || (config.get("env").contains("sandbox")));
 	}
 
 	@Override
