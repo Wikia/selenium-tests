@@ -63,28 +63,15 @@ public class NewDriverProvider {
 	}
 
 	private static EventFiringWebDriver getIEInstance() {
-		String sysArch = System.getProperty("os.arch");
-		if (sysArch.equals("x86")) {
-			File file = new File (
-				"." + File.separator
-				+ "src" + File.separator
-				+ "test" + File.separator
-				+ "resources" + File.separator
-				+ "IEDriver" + File.separator
-				+ "IEDriverServer_x86.exe"
-			);
-			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-		} else {
-			File file = new File (
-				"." + File.separator
-				+ "src" + File.separator
-				+ "test" + File.separator
-				+ "resources" + File.separator
-				+ "IEDriver" + File.separator
-				+ "IEDriverServer_x64.exe"
-			);
-			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-		}
+		File file = new File (
+			"." + File.separator
+			+ "src" + File.separator
+			+ "test" + File.separator
+			+ "resources" + File.separator
+			+ "IEDriver" + File.separator
+			+ "IEDriverServer.exe"
+		);
+		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 		return new EventFiringWebDriver(new InternetExplorerDriver(caps));
 	}
 
