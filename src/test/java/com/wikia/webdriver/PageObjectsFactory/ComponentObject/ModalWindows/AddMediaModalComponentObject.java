@@ -35,7 +35,7 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
             "Upload photo modal is present",
             true, driver
         );
-        clickAndWait(modalAddPhotoClose);
+        scrollAndClick(modalAddPhotoClose);
         waitForElementNotVisibleByElement(addPhotoModal);
         PageObjectLogging.log(
             "UploadPhotoModalClosed",
@@ -51,7 +51,7 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
             "Upload video modal is present",
             true, driver
         );
-        clickAndWait(modalAddVideoClose);
+        scrollAndClick(modalAddVideoClose);
         waitForElementNotVisibleByElement(addVideoModal);
         PageObjectLogging.log(
             "UploadVideoModalClosed",

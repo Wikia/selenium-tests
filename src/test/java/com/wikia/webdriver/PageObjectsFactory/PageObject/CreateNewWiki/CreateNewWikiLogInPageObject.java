@@ -58,7 +58,7 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	public CreateNewWikiPageObjectStep2 submitLogin()
 	{
 		waitForElementByElement(submitButton);
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
 		return new CreateNewWikiPageObjectStep2(driver);
 	}

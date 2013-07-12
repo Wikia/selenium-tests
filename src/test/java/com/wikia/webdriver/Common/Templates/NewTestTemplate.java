@@ -18,7 +18,6 @@ import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Properties.Properties;
 
 
@@ -27,13 +26,10 @@ public class NewTestTemplate {
 	protected WebDriver driver;
 	protected AbstractConfiguration config;
 
-	protected String wikiUrl;
-	protected Credentials credentials;
+	protected String wikiURL;
 
 	public NewTestTemplate() {
 		config = ConfigurationFactory.getConfig();
-		UrlBuilder builder = new UrlBuilder(config.getEnv());
-		wikiUrl = builder.getUrlForWiki(config.getWikiName());
 	}
 
 	@BeforeSuite(alwaysRun = true)
@@ -43,12 +39,14 @@ public class NewTestTemplate {
 		Properties.setProperties();
 		CommonUtils.deleteDirectory("." + File.separator + "logs");
 		CommonUtils.createDirectory("." + File.separator + "logs");
-		credentials = config.getCredentials();
 	}
 
 	@BeforeMethod(alwaysRun = true)
 	public void start(Method method, Object[] data) {
 		startBrowser();
+		UrlBuilder builder = new UrlBuilder(config.getEnv());
+		wikiURL = builder.getUrlForWiki(config.getWikiName());
+		driver.get(wikiURL);
 	}
 
 	@AfterMethod(alwaysRun = true)

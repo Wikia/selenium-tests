@@ -42,7 +42,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
         sendKeys(titleInput, title);
         chooseLayout(layout);
         waitForElementByElement(createPageButton);
-        clickAndWait(createPageButton);
+        scrollAndClick(createPageButton);
         PageObjectLogging.log(
             "PageCreated",
             "Page with given title created",
@@ -74,15 +74,15 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
      */
     private void chooseLayout(String layout) {
         if (layout.equals("standard")) {
-            clickAndWait(standardRadioButton);
+            scrollAndClick(standardRadioButton);
             return;
         }
         if (layout.equals("blank")) {
-            clickAndWait(blankRadioButton);
+            scrollAndClick(blankRadioButton);
             return;
         }
         if (layout.equals("top")) {
-            clickAndWait(topListRadioButton);
+            scrollAndClick(topListRadioButton);
         }
     }
 }

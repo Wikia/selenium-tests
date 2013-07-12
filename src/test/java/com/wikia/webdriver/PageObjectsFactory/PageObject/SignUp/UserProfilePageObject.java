@@ -70,7 +70,7 @@ public class UserProfilePageObject extends WikiArticlePageObject {
 	public SpecialCreateBlogPageObject clickOnCreateBlogPost() {
 		waitForElementByElement(createBlogPostButton);
 		waitForElementClickableByElement(createBlogPostButton);
-		clickAndWait(createBlogPostButton);
+		scrollAndClick(createBlogPostButton);
 		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);
 		return new SpecialCreateBlogPageObject(driver);
 	}

@@ -119,7 +119,7 @@ public class Top_10_list extends WikiArticlePageObject{
 			WebElement itemVoteButton = list.get(index-1);
 			waitForElementByElement(itemVoteButton);
 			waitForElementClickableByElement(itemVoteButton);
-			clickAndWait(itemVoteButton);
+			scrollAndClick(itemVoteButton);
 			PageObjectLogging.log("voteForItem", "vote for item number "+index, true, driver);		
 		}
 		else {

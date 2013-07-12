@@ -47,37 +47,37 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 
 	private void getConfiguration()
 	{
-		clickAndWait(getConfigButton);
+		scrollAndClick(getConfigButton);
 		PageObjectLogging.log("getConfiguration ", "Get configuration button clicked", true, driver);
 	}
 
 	private void clickCloseWikiButton()
 	{
-		clickAndWait(closeWikiButton);
+		scrollAndClick(closeWikiButton);
 		PageObjectLogging.log("clickCloseWikiButton ", "Close wiki button clicked", true, driver);
 	}
 
 	private void deselectCreateDumpCheckBox()
 	{
-		clickAndWait(dumpCheckBox);
+		scrollAndClick(dumpCheckBox);
 		PageObjectLogging.log("deselectCreateDumpCheckBox ", "Create dump checkbox deselected", true, driver);
 	}
 
 	private void deselectImageArchiveCheckBox()
 	{
-		clickAndWait(imageArchiveCheckBox);
+		scrollAndClick(imageArchiveCheckBox);
 		PageObjectLogging.log("deselectImageArchiveCheckBox ", "Create image archive checkbox deselected", true, driver);
 	}
 
 	private void confirmClose()
 	{
-		clickAndWait(confirmCloseButton);
+		scrollAndClick(confirmCloseButton);
 		PageObjectLogging.log("confirmClose ", "Close confirmation button clicked", true, driver);
 	}
 
 	private void clickClosedWikiaLink()
 	{
-		clickAndWait(closedWikiaLink);
+		scrollAndClick(closedWikiaLink);
 		PageObjectLogging.log("clickClosedWikiaLink ", "Closed wikia link clicked", true, driver);
 	}
 

@@ -75,7 +75,7 @@ public class NotificationsComponentObject extends BasePageObject{
 	 */
 	public void clickNotifications() {
 		waitForElementByElement(notificationsBubbles);
-		clickAndWait(notificationsBubbles);
+		scrollAndClick(notificationsBubbles);
 		PageObjectLogging.log("clickshowNotifications", "click on notifications bubbles", true, driver);
 	}
 
@@ -134,11 +134,11 @@ public class NotificationsComponentObject extends BasePageObject{
 	public void markNotificationsAsRead() {
 		if (this.getNumberOfUnreadNotifications() > 0) {
 			if (this.markNotificationsAsReadThisWiki.isDisplayed()) {
-				this.clickAndWait(this.markNotificationsAsReadThisWiki);
+				this.scrollAndClick(this.markNotificationsAsReadThisWiki);
 			} else {
-				this.clickAndWait(this.markNotificationsAsRead);
+				this.scrollAndClick(this.markNotificationsAsRead);
 				this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
-				this.clickAndWait(this.markNotificationsAsReadAllWikis);
+				this.scrollAndClick(this.markNotificationsAsReadAllWikis);
 			}
 			this.waitForElementNotPresent(unreadNotificationReddot);
 		}

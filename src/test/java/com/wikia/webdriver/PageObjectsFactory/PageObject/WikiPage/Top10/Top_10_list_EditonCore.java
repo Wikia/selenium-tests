@@ -104,7 +104,7 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 
 	public void addTheFetchedPhoto() {
 		waitForElementByElement(fetchedPhoto);
-		clickAndWait(fetchedPhoto);
+		scrollAndClick(fetchedPhoto);
 		PageObjectLogging.log("addTheFetchedPhoto", "add the fetched photo", true, driver);	
 	}
 	
@@ -114,7 +114,7 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 		if (listSize>1) {
 			WebElement inputDeleteElement = list.get(1);			
 			waitForElementByElement(inputDeleteElement);
-			clickAndWait(inputDeleteElement);
+			scrollAndClick(inputDeleteElement);
 			list = driver.findElements(itemDeleteButtonsList);
 			if (listSize > list.size()) {
 				PageObjectLogging.log("removeItem", "item removed", true, driver);					

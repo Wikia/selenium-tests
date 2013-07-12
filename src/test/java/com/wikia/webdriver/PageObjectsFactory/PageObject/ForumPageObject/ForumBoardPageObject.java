@@ -71,7 +71,7 @@ public class ForumBoardPageObject extends BasePageObject{
 	public ForumThreadPageObject openDiscussion(String title) {
 		for (WebElement elem : threadTitlesList) {
 			if (elem.getText().contains(title)) {
-				clickAndWait(elem);
+				scrollAndClick(elem);
 				break;
 			}
 		}
@@ -92,7 +92,7 @@ public class ForumBoardPageObject extends BasePageObject{
 
 	public void clickPostButton() {
 		waitForElementClickableByElement(postButton);
-		clickAndWait(postButton);
+		scrollAndClick(postButton);
 		PageObjectLogging.log("clickPostButton", "post button clicked", true, driver);		
 	}
 
@@ -106,8 +106,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	public void clickPostNotitleButton()
 	{
 		waitForElementClickableByElement(postButton);
-		clickAndWait(postButton);
-		clickAndWait(postButton);
+		scrollAndClick(postButton);
+		scrollAndClick(postButton);
 //		WebElement postWithoutTitle = driver.findElement(By.cssSelector("button.submit"));
 //		clickAndWait(postWithoutTitle);
 		PageObjectLogging.log("clickPostNotitleButton", "post button is clicked", true, driver);		
@@ -170,7 +170,7 @@ public class ForumBoardPageObject extends BasePageObject{
 		if (followButton.getText().contains("Following")) {
 			PageObjectLogging.log("unfollowIfDiscussionIsFollowed", "discussion is followed. Preparing to click \"unfollowed\"", true);		
 			waitForElementClickableByElement(followButton);
-			clickAndWait(followButton);
+			scrollAndClick(followButton);
 			PageObjectLogging.log("unfollowIfDiscussionIsFollowed", "discussion unfollowed", true, driver);		
 		}
 		else {
@@ -188,7 +188,7 @@ public class ForumBoardPageObject extends BasePageObject{
 		WebElement followButton = driver.findElement(By.cssSelector(".thread:nth-child("+threadNumber+") li.follow"));
 		waitForElementByElement(followButton);
 		waitForElementClickableByElement(followButton);
-		clickAndWait(followButton);
+		scrollAndClick(followButton);
 		PageObjectLogging.log("clickOnFollowButton", "click on follow button of thread number "+threadNumber, true, driver);					
 	}
 }

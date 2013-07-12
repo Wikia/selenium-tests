@@ -37,7 +37,7 @@ public class PhotoAddComponentObject extends BasePageObject{
 
 	private void clickSearch(){
 		waitForElementByElement(searchButton);
-		clickAndWait(searchButton);
+		scrollAndClick(searchButton);
 		waitForElementVisibleByElement(searchProgressThrobber);
 		waitForElementNotVisibleByElement(searchProgressThrobber);
 		PageObjectLogging.log("clickSearch", "search button clicked", true);
@@ -46,7 +46,7 @@ public class PhotoAddComponentObject extends BasePageObject{
 	private void clickAddPhoto(int photoNumber){
 		waitForElementByElement(addThisPhotoList.get(photoNumber));
 		photoName = addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img")).getAttribute("data-image-name");
-		clickAndWait(addThisPhotoList.get(photoNumber));
+		scrollAndClick(addThisPhotoList.get(photoNumber));
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 	}
 

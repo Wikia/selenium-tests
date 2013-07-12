@@ -44,7 +44,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultiple
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -288,7 +287,7 @@ public class WikiBasePageObject extends BasePageObject {
 		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(editButton);
 		waitForElementClickableByElement(editButton);
-		clickAndWait(editButton);
+		scrollAndClick(editButton);
 		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
 		return new WikiArticleEditMode(driver);
 	}
@@ -306,7 +305,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(deleteCommentReasonField);
 		deleteCommentReasonField.clear();
 		deleteCommentReasonField.sendKeys("QAReason");
-		clickAndWait(deleteConfirmationButton);
+		scrollAndClick(deleteConfirmationButton);
 		waitForElementByElement(deleteCommentConfirmationMessage);
 
 	}
@@ -367,7 +366,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(confirmRenamePageButton);
 		renameArticleField.clear();
 		renameArticleField.sendKeys(articleNewName);
-		clickAndWait(confirmRenamePageButton);
+		scrollAndClick(confirmRenamePageButton);
 	}
 
         public void renameArticleAndVerify(String articleName, String articleNewName) {
@@ -401,7 +400,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	protected void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
-		clickAndWait(restoreButton);
+		scrollAndClick(restoreButton);
 		waitForElementByElement(userMessage);
 		PageObjectLogging.log(
 				"clickUndeleteArticle",
@@ -556,7 +555,7 @@ public class WikiBasePageObject extends BasePageObject {
                 "Link to login special page present",
                 true, driver
             );
-            clickAndWait(specialUserLoginLink);
+            scrollAndClick(specialUserLoginLink);
             PageObjectLogging.log(
                 "LoginLinkClicked",
                 "Link to login special page clicked",
@@ -578,7 +577,7 @@ public class WikiBasePageObject extends BasePageObject {
         public void clickContributeNewPage() {
             clickContributeButton();
             waitForElementVisibleByElement(contributeAddPage);
-            clickAndWait(contributeAddPage);
+            scrollAndClick(contributeAddPage);
         }
 
         public void logInViaModal(String userName, String password) {
@@ -592,7 +591,7 @@ public class WikiBasePageObject extends BasePageObject {
                 true, driver
             );
 
-            clickAndWait(modalLoginSubmit);
+            scrollAndClick(modalLoginSubmit);
             PageObjectLogging.log(
                 "LoginFormSubmitted",
                 "Login form is submitted",
@@ -667,11 +666,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 
 	public String logInCookie(String userName, String password) {
-		if (!Global.LOGIN_BY_COOKIE) {
-			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-			login.loginAndVerify(userName, password);
-			return null;
-		} else {
 			try {
 				DefaultHttpClient httpclient = new DefaultHttpClient();
 
@@ -770,5 +764,105 @@ public class WikiBasePageObject extends BasePageObject {
 				return null;
 			}
 		}
+
+	public String logInCookie(String userName, String password, String wikiURL) {
+		try {
+			DefaultHttpClient httpclient = new DefaultHttpClient();
+
+			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+			nvps.add(new BasicNameValuePair("action", "login"));
+			nvps.add(new BasicNameValuePair("format", "xml"));
+			nvps.add(new BasicNameValuePair("lgname", userName));
+			nvps.add(new BasicNameValuePair("lgpassword", password));
+
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+
+			HttpResponse response = null;
+
+			response = httpclient.execute(httpPost);
+
+			HttpEntity entity = response.getEntity();
+			String xmlResponse = null;
+
+			xmlResponse = EntityUtils.toString(entity);
+
+			String[] xmlResponseArr = xmlResponse.split("\"");
+			String token = xmlResponseArr[5];
+
+			// System.out.println(token);
+
+			while (xmlResponseArr.length < 11) {// sometimes first request
+				// does
+				// not contain full
+				// information,
+				// in such situation
+				// xmlResponseArr.length <
+				// 11
+				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+
+				nvps2.add(new BasicNameValuePair("action", "login"));
+				nvps2.add(new BasicNameValuePair("format", "xml"));
+				nvps2.add(new BasicNameValuePair("lgname", userName));
+				nvps2.add(new BasicNameValuePair("lgpassword", password));
+				nvps2.add(new BasicNameValuePair("lgtoken", token));
+
+				httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
+						HTTP.UTF_8));
+
+				response = httpclient.execute(httpPost);
+
+				entity = response.getEntity();
+
+				xmlResponse = EntityUtils.toString(entity);
+
+				xmlResponseArr = xmlResponse.split("\"");
+			}
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "_session', '" + xmlResponseArr[13]
+							+ "', {'domain': 'wikia.com'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "UserName', '" + xmlResponseArr[7]
+							+ "', {'domain': 'wikia.com'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "UserID', '" + xmlResponseArr[5]
+							+ "', {'domain': 'wikia.com'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "Token', '" + xmlResponseArr[9]
+							+ "', {'domain': 'wikia.com'})");
+			try {
+				driver.get(Global.DOMAIN + "Special:Random");
+			} catch (TimeoutException e) {
+				PageObjectLogging.log("loginCookie",
+						"page timeout after login by cookie", true);
+			}
+
+			driver.findElement(By
+					.cssSelector(".AccountNavigation a[href*='User:"
+							+ userName + "']"));// only for verification
+			PageObjectLogging.log("loginCookie",
+					"user was logged in by cookie", true, driver);
+			return xmlResponseArr[11];
+		} catch (UnsupportedEncodingException e) {
+			PageObjectLogging.log("logInCookie",
+					"UnsupportedEncodingException", false);
+			return null;
+		} catch (ClientProtocolException e) {
+			PageObjectLogging.log("logInCookie", "ClientProtocolException",
+					false);
+			return null;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
+
 }

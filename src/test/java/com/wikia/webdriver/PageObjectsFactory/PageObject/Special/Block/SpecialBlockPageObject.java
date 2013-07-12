@@ -49,7 +49,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 
 	public void clickBlockButton(){
 		waitForElementByElement(blockButton);
-		clickAndWait(blockButton);
+		scrollAndClick(blockButton);
 	}
 
 	public void deselectAllSelections(){

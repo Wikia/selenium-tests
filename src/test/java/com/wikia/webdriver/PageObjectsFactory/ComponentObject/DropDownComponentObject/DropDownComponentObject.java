@@ -48,7 +48,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
     public void openDropDown() {
         waitForElementByElement(loginDropdownTrigger);
-        clickAndWait(loginDropdownTrigger);
+        scrollAndClick(loginDropdownTrigger);
         waitForElementInViewPort(loginDropdown);
         PageObjectLogging.log(
             "DropdownVisible",
@@ -63,13 +63,13 @@ public class DropDownComponentObject extends WikiBasePageObject {
     			resetForgotPasswordTime(userName));
         fillUserNameInput(userName);
         waitForElementByElement(formForgotPasswordLink);
-        clickAndWait(formForgotPasswordLink);
+        scrollAndClick(formForgotPasswordLink);
     }
 
     public void logIn(String userName, String password) {
         fillUserNameInput(userName);
         fillPasswordInput(password);
-        clickAndWait(formSubmitButton);
+        scrollAndClick(formSubmitButton);
         PageObjectLogging.log(
             "LoginFormSubmitted",
             "Login form is submitted",
@@ -100,7 +100,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     }
 
     public void logInViaFacebook() {
-        clickAndWait(formConnectWithFbButton);
+        scrollAndClick(formConnectWithFbButton);
         PageObjectLogging.log(
             "logInDropDownFB",
             "facebook button clicked",
@@ -138,7 +138,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
             true
         );
 
-        clickAndWait(facebookSubmitButton);
+        scrollAndClick(facebookSubmitButton);
         PageObjectLogging.log(
             "logInDropDownFB",
             "facebook log in submit button clicked",
