@@ -411,10 +411,8 @@ public class BasePageObject{
 						By.cssSelector(selector), attribute, value));
 	}
 
-	public void waitForTextToBePresentInElementByElement(WebElement element,
-			String text) {
-		wait.until(CommonExpectedConditions.textToBePresentInElement(element,
-				text));
+	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
+		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
 	}
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {

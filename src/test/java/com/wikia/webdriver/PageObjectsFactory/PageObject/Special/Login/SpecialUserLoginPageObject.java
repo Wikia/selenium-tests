@@ -40,8 +40,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	private WebElement loginButton;
 	@FindBy(css=".WikiaArticle .forgot-password")
 	private WebElement forgotPasswordLink;
-        @FindBy (css=".UserLogin .error-msg")
-        private WebElement messagePlaceholder;
+	@FindBy (css=".UserLogin .error-msg")
+	private WebElement messagePlaceholder;
 
 	/**
 	 * Special:UserLogin user name field
@@ -51,7 +51,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		waitForElementByElement(userName);
 		userName.clear();
 		userName.sendKeys(name);
-		PageObjectLogging.log("typeInUserName", name+" user name typed", true, driver);
+		PageObjectLogging.log("typeInUserName", name+" user name typed", true);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		waitForElementByElement(password);
 		password.clear();
 		password.sendKeys(pass);
-		PageObjectLogging.log("typeInUserPassword", "password typed", true, driver);
+		PageObjectLogging.log("typeInUserPassword", "password typed", true);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	private void clickLoginButton(){
 		waitForElementByElement(loginButton);
 		loginButton.click();
-		PageObjectLogging.log("clickLoginButton", "login button clicked", true, driver);
+		PageObjectLogging.log("clickLoginButton", "login button clicked", true);
 	}
 
         /**
@@ -168,15 +168,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 			true, driver
 		);
 		return password;
-	}
-
-	public void openSpecialUserLoginOnWiki(String url) {
-		getUrl(url + URLsContent.specialUserLogin);
-		PageObjectLogging.log(
-			"SpecialUserLoginOnWiki",
-			"Special:UserLogin opened on: " + url,
-			true
-		);
 	}
 
 	public void verifyMessageAboutNewPassword(String userName) {

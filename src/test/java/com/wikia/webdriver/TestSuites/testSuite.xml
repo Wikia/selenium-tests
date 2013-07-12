@@ -70,6 +70,8 @@
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpValidationTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDAnonTests"/>
 		</classes>
 	</test>
 </suite>

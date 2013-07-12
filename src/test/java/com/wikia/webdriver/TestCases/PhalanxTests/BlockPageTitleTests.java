@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.DataProvider.PhalanxDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -48,7 +47,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
     }
@@ -151,7 +150,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
@@ -167,7 +166,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        special.addPageWithGIvenTitleAndDefaultContent(modifiedBlockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(modifiedBlockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
     }
@@ -192,7 +191,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
@@ -206,7 +205,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
     }
