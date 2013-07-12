@@ -1,7 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
@@ -10,14 +19,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import java.util.List;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class WikiArticlePageObject extends WikiBasePageObject {
 
@@ -139,7 +140,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void triggerCommentArea()
 	{
 		waitForElementByElement(commentHolder);
-		CommonFunctions.scrollToElement(commentHolder);
+		scrollToElement(commentHolder);
 		waitForElementByElement(submitCommentButton);
 		waitForElementByElement(commentAreaDisabled);
 		int delay = 500;
@@ -166,7 +167,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(iframe);
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
 	}
-	
+
 	public void writeOnCommentArea(String comment)
 	{
 		driver.switchTo().frame(iframe);
@@ -177,20 +178,20 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 			((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + comment + "'");
 		}
 		else
-		{			
+		{
 			editCommentArea.sendKeys(comment);
 		}
 		driver.switchTo().defaultContent();
 	}
-	
+
 	public void clickSubmitButton()
 	{
 		executeScript("document.querySelectorAll('#article-comm-submit')[0].click()");
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
 	}
-	
+
 	public void clickSubmitButton(String userName)
-	{		
+	{
 		clickAndWait(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
 	}
@@ -206,7 +207,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='"+videoName+"']");
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
 	}
-	
+
 	private void clickReplyCommentButton(String comment)
 	{
 		WebElement commentReplyButton = waitForElementByXPath(
@@ -244,7 +245,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		executeScript("document.querySelectorAll('.article-comm-delete')[0].click()");
 		PageObjectLogging.log("clickDeleteCommentButton", "delete comment button clicked", true, driver);
 	}
-	
+
 	private void clickEditCommentButton()
 	{
 		try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
@@ -252,7 +253,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(iframe);
 		PageObjectLogging.log("clickEditCommentButton", "edit comment button clicked", true, driver);
 	}
-	
+
 	public void deleteComment(String comment)
 	{
 		((JavascriptExecutor)driver).executeScript("window.scrollTo(0,0)");
@@ -260,11 +261,11 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		clickCommentDeleteConfirmationButton();
 		PageObjectLogging.log("deleteComment", "comment deleted", true, driver);
 	}
-	
+
 	public void editComment(String comment)
 	{
 		refreshPage();
-		CommonFunctions.scrollToElement(commentHolder);
+		scrollToElement(commentHolder);
 		waitForElementByElement(replyCommentButton);
 		clickEditCommentButton();
 	}
@@ -285,7 +286,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	/**
 	 * Click Edit button on a wiki article
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 */
 	public WikiArticleEditMode edit() {
@@ -301,35 +302,35 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	/**
 	 * Verify that the image appears on the page
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 */
 	public void verifyImageOnThePage() {
 		waitForElementByBy(ImageOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
 	}
-	
+
 	/**
 	 * Verify that the image does not appear on the page
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 */
 	public void verifyImageNotOnThePage() {
 		waitForElementNotVisibleByBy(ImageOnWikiaArticle);
-		PageObjectLogging.log("VerifyTheImageNotOnThePage", "Verify that the image does not appear on the page", true, driver);	
+		PageObjectLogging.log("VerifyTheImageNotOnThePage", "Verify that the image does not appear on the page", true, driver);
 	}
-	
+
 	public void verifyGalleryNotOnThePage() {
 		waitForElementNotVisibleByBy(galleryOnPublish);
-		PageObjectLogging.log("verifyTheGalleryNotOnThePage", "Verify that the gallery does not appear on the page", true, driver);	
+		PageObjectLogging.log("verifyTheGalleryNotOnThePage", "Verify that the gallery does not appear on the page", true, driver);
 	}
-	
-	public void verifySlideshowNotOnThePage() 
+
+	public void verifySlideshowNotOnThePage()
 	{
 		waitForElementNotVisibleByBy(slideShowOnPublish);
-		PageObjectLogging.log("verifyTheSlideshowNotOnThePage", "Verify that the slideshow does not appear on the page", true, driver);			
+		PageObjectLogging.log("verifyTheSlideshowNotOnThePage", "Verify that the slideshow does not appear on the page", true, driver);
 	}
-	
+
 	public void verifyVideoNotOnThePage() {
 		waitForElementNotPresent(videoOnPublish);
 		PageObjectLogging.log("verifyTheVideoNotOnThePage", "Verify that the video does not appear on the page", true, driver);
@@ -337,33 +338,33 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	/**
 	 * Verify that the Video appears on the page
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * 	 */
 	public void verifyVideoOnThePage() {
 		waitForElementByBy(VideoOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheVideoOnThePage", "Verify that the Video appears on the page", true, driver);
 	}
-	
+
 	/**
 	 * Verify that the RV Module Is Present
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * 	 */
 	public void verifyRVModulePresence() {
 		waitForElementByElement(rVModule);
 		PageObjectLogging.log("VerifyRVModulePresence", "Verify that the RV Module Is Present", true, driver);
-		
+
 	}
 
 	/**
 	 * Click On 'Add a video' button on RV module
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * 	 */
 	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
 		waitForElementByBy(AddVideoRVButton);
-		CommonFunctions.scrollToElement(driver.findElement(AddVideoRVButton));
+		scrollToElement(driver.findElement(AddVideoRVButton));
 		waitForElementClickableByBy(AddVideoRVButton);
 		clickAndWait(driver.findElement(AddVideoRVButton));
 		PageObjectLogging.log("ClickOnAddVideoRVModule", "Click On 'Add a video' button on RV module", true, driver);
@@ -372,12 +373,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	/**
 	 * Type given URL into RV modal
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * @param videoURL URL of the video to be added
 	 * 	 */
 	public void typeInVideoURL(String videoURL) {
-		waitForElementByElement(videoRVmodalInput);		
+		waitForElementByElement(videoRVmodalInput);
 		videoRVmodalInput.clear();
 		videoRVmodalInput.sendKeys(videoURL);
 		PageObjectLogging.log("TypeInVideoURL", "Type given URL into RV modal", true, driver);
@@ -385,7 +386,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	/**
 	 * Click on Add button on RV modal
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * 	 */
 	public void clickOnRVModalAddButton() {
@@ -393,30 +394,30 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementClickableByElement(VideoModalAddButton);
 		clickAndWait((VideoModalAddButton));
 		PageObjectLogging.log("ClickOnRVModalAddButton", "Click on Add button on RV modal", true, driver);
-		
+
 	}
 
 	/**
 	 * Wait for processing the added video to finish
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * 	 */
 	public void waitForProcessingToFinish() {
 		waitForElementNotVisibleByBy(RVvideoLoading);
 		PageObjectLogging.log("WaitForProcessingToFinish", "Wait for processing the added video to finish", true, driver);
-		
+
 	}
 
 	/**
 	 * Verify that video given by its name has been added to RV module
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * @param videoURL2name The name of the video, or any fragment of the video name
 	 * 	 */
 	public void verifyVideoAddedToRVModule(String videoURL2name) {
 		waitForElementByCss(".RVBody img[data-video-name*=\""+videoURL2name+"\"]");
 		PageObjectLogging.log("VerifyVideoAddedToRVModule", "Verify that video given by its name has been added to RV module", true, driver);
-		
+
 	}
 
 	public void verifyGalleryPosion(String position) {
@@ -432,18 +433,18 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		}
 		else if (position.equals("center"))
 		{
-			waitForElementByCss("div.wikia-slideshow.slideshow-center");			
+			waitForElementByCss("div.wikia-slideshow.slideshow-center");
 			PageObjectLogging.log("verifySlideshowPosion", "Slideshow position verified: "+position, true, driver);
 		}
-		
+
 	}
 /**
- * 
+ *
  * @param position available values (vertical, horizontal)
  */
 	public void verifySliderThumbnailsPosition(String position) {
 		waitForElementByCss(".wikiaPhotoGallery-slider-body div."+position);
-		PageObjectLogging.log("verifySliderThumbnailsPosition", "Slider thumbnails position verified: "+position, true, driver);		
+		PageObjectLogging.log("verifySliderThumbnailsPosition", "Slider thumbnails position verified: "+position, true, driver);
 	}
 
 	public WikiHistoryPageObject openHistoryPage()
@@ -488,7 +489,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		executeScript("var e = jQuery.Event(\"keydown\"); e.which=13; $('#CategorySelectInput').trigger(e);");
 //		categories_CategoryInputField.sendKeys(Keys.ENTER);
 		PageObjectLogging.log("categories_clickAddCategory", "type "+categoryName+" to category input field", true, driver);
-		
+
 	}
 	/**
 	* click SaveButton
@@ -500,7 +501,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementClickableByElement(categories_saveButton);
 		clickAndWait(categories_saveButton);
 		PageObjectLogging.log("categories_clickOnSave", "Click on 'Save' Button", true, driver);
-		
+
 	}
 
 	/**
@@ -524,7 +525,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		else {
 			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" NOT present", false);
 		}
-		
+
 	}
 
 	public void categories_verifyCategoryRemoved(String categoryName) {
@@ -532,19 +533,19 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		Boolean result = false;
 		// there might be more than one category on a random page. Thus - loop over all of them.
 		if (lista.size()>0) {
-			
+
 		for (WebElement webElement : lista) {
-			waitForElementByElement(webElement);		
+			waitForElementByElement(webElement);
 			if (webElement.getText().equalsIgnoreCase(categoryName)) {
 				result = true;
 			}
 		}
 		}
 		if (result) {
-			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" not removed - found on the list", false, driver);			
+			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" not removed - found on the list", false, driver);
 		}
 		else {
-			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);						
+			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);
 		}
 	}
 	/**
@@ -617,13 +618,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 *  @author Michal 'justnpT' Nowierski
 	 */
 	public void verifySpotlightsPresence() {
-		CommonFunctions.scrollToElement(spotlightFooter);
+		scrollToElement(spotlightFooter);
 		waitForElementByElement(spotlightImage1);
 		waitForElementByElement(spotlightImage2);
 		waitForElementByElement(spotlightImage3);
 		PageObjectLogging.log("verifySpotlightsPresence", "all 3 spotlights are present", true, driver);
 	}
-	
+
 	public GalleryBuilderComponentObject clickAddPhotoToGallery(){
 		clickAndWait(addPhotoToGalleryButton);
 		return new GalleryBuilderComponentObject(driver);

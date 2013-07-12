@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.HubsTests;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -12,6 +11,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.HubBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.EntertainmentHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.LifestyleHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.VideoGamesHubPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class HubsTests extends TestTemplate {
 
@@ -33,7 +33,7 @@ public class HubsTests extends TestTemplate {
 	/** https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_1_.28Mosaic_Slider.29_Test_Cases
 	* 	Verify that slider is displayed at the top left of the Hubs page
 	*   Verify that when transitioning, the old large image is replaced by the new large image
-	*/ 
+	*/
 	public void HubsTest001_verifyMosaicSliderShowsImagesOnHover(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
@@ -57,7 +57,7 @@ public class HubsTests extends TestTemplate {
 				.MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription(CurrentLargeImageDescription);
 	}
 
-	
+
 	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests002", "Hubs" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_2_.28News_Tabs.29_Test_Cases
@@ -75,7 +75,7 @@ public class HubsTests extends TestTemplate {
 		Hub.VerifyNewsTabsPresence(2);
 	}*/
 
-	
+
 	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests003", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
@@ -136,7 +136,7 @@ public class HubsTests extends TestTemplate {
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
 	*/
-	
+
 	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests006", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
@@ -187,7 +187,7 @@ public class HubsTests extends TestTemplate {
 		Hub.verifyFromModuleHasUserAndWikiField();
 		Hub.verifyFromModuleHasQuatation();
 	}
-	
+
 	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests009", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
@@ -204,7 +204,7 @@ public class HubsTests extends TestTemplate {
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
 	*/
-	
+
 	/*
 	@Test(dataProvider = "provideHub", groups = { "HubsTests010", "Hubs", "new" })
 	// https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_3_.28Videos_Module.29_Test_Cases
@@ -221,7 +221,7 @@ public class HubsTests extends TestTemplate {
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
 	*/
-	
+
 	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs", "new" })
 	/**
 	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
@@ -229,7 +229,8 @@ public class HubsTests extends TestTemplate {
 	public void HubsTest011_VerifyArticleSuggestionWorksProperly(HubBasePageObject Hub, String HubName, String HubURL) {
 		home = new HomePageObject(driver);
 		home.openHomePage();
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName2, Properties.password2);
 		Hub = home.OpenHub(HubName);
 		Hub.verifyURL(HubURL);
 		Hub.ClickGetPromoted();
@@ -247,7 +248,7 @@ public class HubsTests extends TestTemplate {
 		Hub.VerifySuggestVideoOrArticleButtonNotClickable();
 		Hub.Click_Cancel_toCloseSuggestAVideoOrArticle();
 		Hub.verifySuggestAVideoOrArticleModalDisappeared();
-		
+
 	}
 
 	/*

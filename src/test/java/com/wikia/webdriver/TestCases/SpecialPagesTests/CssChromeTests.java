@@ -8,11 +8,11 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CssChromeTests extends TestTemplate {
 
@@ -23,7 +23,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_001_syntaxHighlightingIsViewable() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyHighlighting();
@@ -36,7 +37,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_002_showingErrorWhenWrongSyntax() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.clearCssText();
@@ -51,7 +53,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_003_verifyPublishButtonAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.saveCssContent(currentTimestamp, wiki);
@@ -66,7 +69,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_004_verifyEditSummaryAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.sendEditSummaryText(currentTimestamp);
@@ -83,7 +87,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_005_verifyChangesAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.insertCssText("\n" + currentTimestamp);
@@ -101,7 +106,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_006_verifyMinorEditAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.verifyMinorEditAppears();
@@ -115,7 +121,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_007_verifyHistoryButtonAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickHistoryButton();
@@ -126,16 +133,27 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_008_verifyDeleteAndUndeleteButtonAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		// delete
+
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved();
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickDeleteButton();
 		specialCss.confirmDelete();
-		// undelete
 		wiki.openSpecialCss();
+	}
+
+	@Test(groups = {"cssChrome_009", "cssChrome", "AdminDashboard"},
+			dependsOnMethods={"cssChrome_008_verifyDeleteButtonAppearsAndWorks"})
+	public void cssChrome_009_verifyUndeleteButtonAppearsAndWorks() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsRemoved();
 		specialCss.clickPublishButtonDropdown();
@@ -154,7 +172,8 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_009_verifyOnLeaveMessageWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.sendCssText(CssEditorContent.validCss);
@@ -164,7 +183,7 @@ public class CssChromeTests extends TestTemplate {
 		Alert alert = driver.switchTo().alert();
 		alert.accept();
 	}
-	
+
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-999
 	 */
@@ -172,13 +191,14 @@ public class CssChromeTests extends TestTemplate {
 	public void cssChrome_010_verifyTalkButtonWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyTalkBubblePresence();
 		int commentsFromSpecialCss = specialCss.getNumberFromCssTalkBubble();
 		specialCss.clickTalkButton();
 		Assertion.assertEquals(commentsFromSpecialCss, specialCss.getNumberFromWikaiCssTalkBubble());
-		
+
 	}
 
 }

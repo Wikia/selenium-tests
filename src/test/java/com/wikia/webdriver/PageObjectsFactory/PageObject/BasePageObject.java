@@ -20,7 +20,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -32,7 +31,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class BasePageObject{
 
-	public final WebDriver driver;
+	public WebDriver driver;
 	protected int timeOut = 30;
 	public WebDriverWait wait;
 	public Actions builder;
@@ -66,14 +65,18 @@ public class BasePageObject{
 		driver.manage().window().maximize();
 	}
 
-	/*
-	 * Mouse events
-	 */
-
-	public void click(WebElement pageElem) {
-		CommonFunctions.scrollToElement(pageElem);
-		pageElem.click();
+	public static String getAttributeValue(WebElement element, String attributeName) {
+		return element.getAttribute(attributeName);
 	}
+
+//	/*
+//	 * Mouse events
+//	 */
+//
+//	public void clickAndWait(WebElement pageElem) {
+//		scrollToElement(pageElem);
+//		pageElem.click();
+//	}
 
 	public void clickActions(WebElement pageElem) {
 		try {
@@ -135,7 +138,7 @@ public class BasePageObject{
 	public void clickAndWait(WebElement pageElem)
 	{
 		try {
-			CommonFunctions.scrollToElement(pageElem);
+			scrollToElement(pageElem);
 			pageElem.click();
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("clickAndWait",
@@ -204,6 +207,33 @@ public class BasePageObject{
 			PageObjectLogging.log("refreshPage",
 					"page loaded for more then 30 seconds after click", true);
 		}
+	}
+
+	public void waitForWindow(String windowName, String comment) {
+		Object[] windows = driver.getWindowHandles().toArray();
+		int delay = 500;
+		int sumDelay = 500;
+		while (windows.length == 1) {
+			try {
+				Thread.sleep(delay);
+				windows = driver.getWindowHandles().toArray();
+				sumDelay += 500;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (sumDelay > 5000) {
+				PageObjectLogging.log(windowName, comment, false);
+				break;
+			}
+		}
+	}
+
+	public void scrollToElement(WebElement element) {
+		int y = element.getLocation().getY();
+		((JavascriptExecutor) driver)
+				.executeScript("window.scrollBy(0,-3000);");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + y
+				+ ");");
 	}
 
 	public void navigateBack(){
