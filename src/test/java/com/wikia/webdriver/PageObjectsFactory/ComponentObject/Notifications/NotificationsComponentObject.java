@@ -134,11 +134,11 @@ public class NotificationsComponentObject extends BasePageObject{
 	public void markNotificationsAsRead() {
 		if (this.getNumberOfUnreadNotifications() > 0) {
 			if (this.markNotificationsAsReadThisWiki.isDisplayed()) {
-				this.click(this.markNotificationsAsReadThisWiki);
+				this.clickAndWait(this.markNotificationsAsReadThisWiki);
 			} else {
-				this.click(this.markNotificationsAsRead);
+				this.clickAndWait(this.markNotificationsAsRead);
 				this.waitForElementVisibleByElement(this.markNotificationsAsReadAllWikis);
-				this.click(this.markNotificationsAsReadAllWikis);
+				this.clickAndWait(this.markNotificationsAsReadAllWikis);
 			}
 			this.waitForElementNotPresent(unreadNotificationReddot);
 		}

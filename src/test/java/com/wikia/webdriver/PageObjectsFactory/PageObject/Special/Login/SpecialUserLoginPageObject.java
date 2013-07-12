@@ -1,22 +1,21 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
-import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
 /**
- * 
+ *
  * @author Karol 'kkarolk' Kujawiak
  *
  */
@@ -53,7 +52,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		userName.sendKeys(name);
 		PageObjectLogging.log("typeInUserName", name+" user name typed", true, driver);
 	}
-	
+
 	/**
 	 * Special:UserLogin password field
 	 * @param pass
@@ -74,7 +73,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		newPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
-	
+
 	/**
 	 * Special:UserLogin for forgot password
 	 * @param pass
@@ -84,8 +83,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		retypeNewPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
-	
-	
+
+
 	/**
 	 * Special:UserLogin login button
 	 */
@@ -102,12 +101,12 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		waitForElementByElement(forgotPasswordLink);
 		clickAndWait(forgotPasswordLink);
 	}
-	
+
 	/**
 	 * Special:UserLogin
 	 * use if user is not on Special:UserLogin page
 	 * and verification after logging in is needed
-	 *  
+	 *
 	 * @param name
 	 * @param pass
 	 */
@@ -125,9 +124,9 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	/**
 	 * Special:UserLogin
-	 * use if user is on Special:UserLogin page 
+	 * use if user is on Special:UserLogin page
 	 * and no verification after logging in is needed
-	 * 
+	 *
 	 * @param name
 	 * @param pass
 	 */
@@ -144,7 +143,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	public void remindPassword(String name){
 		Assertion.assertEquals(
 			ApiActions.apiActionForgotPasswordResponse,
-			CommonFunctions.resetForgotPasswordTime(name));
+			resetForgotPasswordTime(name));
 		typeInUserName(name);
 		clickForgotPasswordLink();
 	}

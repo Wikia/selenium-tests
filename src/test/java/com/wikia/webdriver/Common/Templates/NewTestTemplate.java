@@ -1,14 +1,8 @@
 package com.wikia.webdriver.Common.Templates;
 
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
-import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
-import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,14 +11,29 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Properties.Properties;
+
 
 public class NewTestTemplate {
 
 	protected WebDriver driver;
 	protected AbstractConfiguration config;
 
+	protected String wikiUrl;
+	protected Credentials credentials;
+
 	public NewTestTemplate() {
 		config = ConfigurationFactory.getConfig();
+		UrlBuilder builder = new UrlBuilder(config.getEnv());
+		wikiUrl = builder.getUrlForWiki(config.getWikiName());
 	}
 
 	@BeforeSuite(alwaysRun = true)
@@ -34,7 +43,7 @@ public class NewTestTemplate {
 		Properties.setProperties();
 		CommonUtils.deleteDirectory("." + File.separator + "logs");
 		CommonUtils.createDirectory("." + File.separator + "logs");
-
+		credentials = config.getCredentials();
 	}
 
 	@BeforeMethod(alwaysRun = true)

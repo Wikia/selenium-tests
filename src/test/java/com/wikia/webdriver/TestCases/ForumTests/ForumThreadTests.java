@@ -1,15 +1,17 @@
 package com.wikia.webdriver.TestCases.ForumTests;
 
+import java.util.List;
+
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
-import java.util.List;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class ForumThreadTests extends TestTemplate{
 
@@ -20,7 +22,8 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_001_replyToThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -35,7 +38,8 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_003_removeThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -50,7 +54,8 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_004_removeThreadAndUndo(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -67,7 +72,8 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_005_moveThreadToOtherBoard(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -83,7 +89,8 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_006_threadHistory(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -98,7 +105,8 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_007_closeThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();
@@ -113,7 +121,8 @@ public class ForumThreadTests extends TestTemplate{
 	public void forumThreadTests_008_closeThreadAndReopen(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage();

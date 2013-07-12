@@ -3,11 +3,11 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate_Two_Drivers;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CssChromeTests_TwoDrivers extends TestTemplate_Two_Drivers {
 
@@ -22,7 +22,8 @@ public class CssChromeTests_TwoDrivers extends TestTemplate_Two_Drivers {
 		switchToWindow(driver);
 		WikiBasePageObject wiki1 = new WikiBasePageObject(driver);
 		wiki1.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff, driver);
+		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
+		loginUser1.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialCssPageObject specialCss1 = wiki1.openSpecialCss();
 		specialCss1.verifyAceEditorPresence();
 		specialCss1.sendCssText(CssEditorContent.validCss);
@@ -30,7 +31,8 @@ public class CssChromeTests_TwoDrivers extends TestTemplate_Two_Drivers {
 		switchToWindow(driver2);
 		WikiBasePageObject wiki2 = new WikiBasePageObject(driver2);
 		wiki2.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff2, Properties.passwordStaff2, driver2);
+		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
+		loginUser2.logInCookie(Properties.userNameStaff2, Properties.passwordStaff2);
 		SpecialCssPageObject specialCss2 = wiki2.openSpecialCss();
 		specialCss2.verifyAceEditorPresence();
 		specialCss2.sendCssText(CssEditorContent.validCss2);

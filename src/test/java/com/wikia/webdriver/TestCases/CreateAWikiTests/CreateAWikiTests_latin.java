@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.CreateAWikiTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
@@ -117,9 +116,8 @@ public class CreateAWikiTests_latin extends TestTemplate {
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(
 				driver);
 		toolbar.verifyUserToolBar();
-		CommonFunctions.logOut(driver);
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(
-				driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
 		factory.openWikiFactoryPage();

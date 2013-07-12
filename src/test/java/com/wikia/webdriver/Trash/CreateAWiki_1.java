@@ -2,7 +2,6 @@ package com.wikia.webdriver.Trash;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
@@ -41,7 +40,7 @@ public class CreateAWiki_1 extends TestTemplate{
 		NewWikiaHomePage newWikia = createNewWikiStep3.submit();
 		newWikia.waitForCongratulationsLightBox(wikiName);
 		//logout
-		CommonFunctions.logOut(driver);
+
 
 
 		//delete created wiki
