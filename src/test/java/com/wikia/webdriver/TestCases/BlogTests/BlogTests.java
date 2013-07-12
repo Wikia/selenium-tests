@@ -25,8 +25,6 @@ public class BlogTests extends NewTestTemplate{
 
 	@Test(groups = { "BlogTests_001", "BlogTests", "Blog"})
 	public void BlogTests_001_CreateBlogPost(){
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage(wikiURL);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logInCookie(credentials.userName, credentials.password, wikiURL);
 		UserProfilePageObject userProfile = new UserProfilePageObject(driver);

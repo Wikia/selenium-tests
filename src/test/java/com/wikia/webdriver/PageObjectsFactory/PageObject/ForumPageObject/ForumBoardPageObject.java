@@ -20,18 +20,12 @@ public class ForumBoardPageObject extends BasePageObject{
 
 	@FindBy(css="textarea.title:nth-child(2)")
 	private WebElement discussionTitleArea;
-	@FindBy(css="#WikiaEditor-0")
-	private WebElement wikiaEditorTextareaWebElem;
 	@FindBy(css="button.submit")
 	private WebElement postButton;
-	@FindBy(css="div.msg-title a")
-	private WebElement discussionTitle;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> discussionBody;
 	@FindBys(@FindBy(css="li.SpeechBubble img.thumbimage"))
 	private List<WebElement> postedImageList;
-	@FindBys(@FindBy(css="li.SpeechBubble div.Wikia-video-play-button"))
-	private List<WebElement> postedVideoList;
 	@FindBys(@FindBy(css="li.thread div.thread-left h4 a"))
 	private List<WebElement> threadTitlesList;
 	@FindBy(css=".notify-everyone")
@@ -107,21 +101,11 @@ public class ForumBoardPageObject extends BasePageObject{
 				driver);
 	}
 
-	public void verifyDiscussionTitleAndMessage(String title, String message) {
-		waitForTextToBePresentInElementByElement(discussionTitle, title);
-		waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
-		PageObjectLogging.log("verifyDiscussionWithTitle",
-				"discussion with title and message verified", true);
-	}
-
 	public void clickPostNotitleButton()
 	{
 		waitForElementClickableByElement(postButton);
 		scrollAndClick(postButton);
 		scrollAndClick(postButton);
-//		WebElement postWithoutTitle = driver.findElement(By.cssSelector("button.submit"));
-//		clickAndWait(postWithoutTitle);
-		PageObjectLogging.log("clickPostNotitleButton", "post button is clicked", true, driver);
 	}
 
 	public void startDiscussionWithImgae(String title) {
@@ -179,12 +163,6 @@ public class ForumBoardPageObject extends BasePageObject{
 		miniEditor.addVideoMiniEditor(url);
 		PageObjectLogging.log("startDiscussionWithVideo",
 				"discussion with video started" + title, true, driver);
-	}
-
-	public void verifyStartedDiscussionWithVideo(String title) {
-		waitForElementByElement(postedVideoList.get(0));
-		PageObjectLogging.log("verifyStartedDiscussionWithVideo",
-				"discussion with video started", true);
 	}
 
 	public void unfollowIfDiscussionIsFollowed(int threadNumber) {

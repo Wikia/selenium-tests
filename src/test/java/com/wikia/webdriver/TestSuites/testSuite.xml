@@ -16,8 +16,6 @@
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation"/>
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDTestsAdmin"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDTestsAnonymous"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAdmin"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnonymous"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
@@ -66,6 +64,11 @@
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpValidationTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDAnonTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleActionsAdminTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleEditDropdownTests"/>
+			<class name="com.wikia.webdriver.TestCases.CommentsTests.ArticleCommentsTests"/>
 		</classes>
 	</test>
 </suite>

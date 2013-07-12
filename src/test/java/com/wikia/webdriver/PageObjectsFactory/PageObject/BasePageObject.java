@@ -4,13 +4,9 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -39,22 +35,12 @@ public class BasePageObject{
 	protected WebElement notifications_LatestNotificationOnWiki;
 	@FindBy(css = "#WallNotifications li")
 	protected WebElement notifications_ShowNotificationsLogo;
-	@FindBy(css = "li.notifications-for-wiki")
-	protected WebElement notifications_NotificationsForWiki;
-	@FindBy(css = "#wall-notifications-markasread-sub")
-	protected WebElement notifications_MarkAllAsReadButton;
-	@FindBy(css = "#wall-notifications-markasread-all-wikis")
-	protected WebElement notifications_MarkAllWikisAsReadButton;
-	@FindBy(css = "#wall-notifications-markasread-this-wiki")
-	protected WebElement notifications_MarkOnlyThisWikiAsReadButton;
 	@FindBy(css = ".mw-htmlform-submit")
 	protected WebElement followSubmit;
 	@FindBy(css = "#ca-unwatch")
 	protected WebElement followedButton;
 	@FindBy(css = "#ca-watch")
 	protected WebElement unfollowedButton;
-	@FindBy(css = "#AccountNavigation a[href*='User:']")
-	protected WebElement userProfileLink;
 
 	public BasePageObject(WebDriver driver) {
 		wait = new WebDriverWait(driver, timeOut);
@@ -101,16 +87,6 @@ public class BasePageObject{
 		action.perform();
 	}
 
-	public void mouseReleaseInArticleIframe(String cssSelecotr) {
-		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-				+ cssSelecotr + "')).mouseleave()");
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void mouseOver(String cssSelecotr) {
 		executeScript("$('" + cssSelecotr + "').mouseenter()");
 		try {
@@ -130,14 +106,27 @@ public class BasePageObject{
 	}
 
 
-	public void scrollAndClick(WebElement pageElem)
+	protected void scrollAndClick(WebElement element)
 	{
+		scrollToElement(element);
+		element.click();
+	}
+
+	protected void scrollToElement(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			scrollToElement(pageElem);
-			pageElem.click();
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("clickAndWait",
-					"page loaded for more then 30 seconds after click", true);
+			js.executeScript(
+					"var x = $(arguments[0]);"
+					+ "window.scroll(0,x.position()['top']+x.height()+100);"
+					+ "$(window).trigger('scroll');",
+					element
+			);
+		} catch (WebDriverException e) {
+			if (e.getMessage().contains(XSSContent.noJQueryError)) {
+				PageObjectLogging.log(
+					"JSError", "JQuery is not defined", false
+				);
+			}
 		}
 	}
 
@@ -146,7 +135,7 @@ public class BasePageObject{
 		}
 
 	public void jQueryFocus(String cssSelector){
-		executeScript("$('"+cssSelector+"').focus()");
+		executeScript("$('" + cssSelector + "').focus()");
 	}
 
 	public void jQueryNthElemClick(String cssSelector, int n){
@@ -186,7 +175,7 @@ public class BasePageObject{
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("getUrl",
 					"page %page% loaded for more then 30 seconds".replace(
-							"%page%", url), false);
+						"%page%", url), false);
 			return;
 		}
 
@@ -223,14 +212,6 @@ public class BasePageObject{
 		}
 	}
 
-	public void scrollToElement(WebElement element) {
-		int y = element.getLocation().getY();
-		((JavascriptExecutor) driver)
-				.executeScript("window.scrollBy(0,-3000);");
-		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + y
-				+ ");");
-	}
-
 	public void navigateBack(){
 		try{
 			driver.navigate().back();
@@ -265,11 +246,6 @@ public class BasePageObject{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return (Long) js.executeScript("return "+script);
 	}
-
-        public WebElement executeScriptReturnElement(String script) {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                return (WebElement) js.executeScript(script);
-        }
 
 	protected void executeScript(String script, WebDriver driver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -350,15 +326,6 @@ public class BasePageObject{
 		return driver.findElement(By.cssSelector(cssSelector));
 	}
 
-	public void waitForElementByClassName(String className) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.className(className)));
-	}
-
-	public void waitForElementByClass(String id) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
-	}
-
 	public WebElement waitForElementByXPath(String xPath) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(xPath)));
@@ -386,12 +353,6 @@ public class BasePageObject{
 			PageObjectLogging.log("waitForElementNotVisibleByElement",
 					e.toString(), false);
 		}
-	}
-
-	public void waitForElementClickableByClassName(String className) {
-		wait.until(ExpectedConditions.elementToBeClickable(By
-				.className(className)));
-
 	}
 
 	public void waitForElementClickableByCss(String css) {
@@ -429,17 +390,8 @@ public class BasePageObject{
 				.valueToBePresentInElementsAttribute(element, attribute, value));
 	}
 
-	public void waitForValueToNotBePresentInElementsAttributeByCss(
-			String selector, String attribute, String value) {
-		wait.until(CommonExpectedConditions
-				.valueToNotBePresentInElementsAttribute(
-						By.cssSelector(selector), attribute, value));
-	}
-
-	public void waitForTextToBePresentInElementByElement(WebElement element,
-			String text) {
-		wait.until(CommonExpectedConditions.textToBePresentInElement(element,
-				text));
+	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
+		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
 	}
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {
@@ -451,12 +403,6 @@ public class BasePageObject{
 	public void waitForStringInURL(String givenString) {
 		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
 		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
-	}
-
-	public void waitForClassRemovedFromElement(WebElement element,
-			String className) {
-		wait.until(CommonExpectedConditions.classRemovedFromElement(element,
-				className));
 	}
 
 	public String getTimeStamp() {
@@ -530,9 +476,10 @@ public class BasePageObject{
 		}
 	}
 
-	/*
-	 * Wait for expected conditions methods
-	 */
+	public void openWikiPage() {
+		getUrl(Global.DOMAIN + URLsContent.noexternals);
+		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	}
 
 	/**
 	 * Wait for tags that are visible and are bigger then 1px x 1px
@@ -580,48 +527,6 @@ public class BasePageObject{
 				"show notifications by adding 'show' class to element", true,
 				driver);
 	}
-
-	public void notifications_showNotificationsForWikiOnMenu() {
-		waitForElementByElement(notifications_NotificationsForWiki);
-		waitForElementClickableByElement(notifications_NotificationsForWiki);
-		scrollAndClick(notifications_NotificationsForWiki);
-		PageObjectLogging.log("notifications_showNotificationsForWiki",
-				"show the upper wiki notifications on menu", true, driver);
-	}
-
-	public void notifications_markLatestNotificationsAsRead() {
-		notifications_showNotifications();
-		notifications_clickMarkAllAsRead(false);
-	}
-
-	public void notifications_clickMarkAllAsRead(boolean allWikis) {
-		waitForElementByElement(notifications_MarkAllAsReadButton);
-		waitForElementClickableByElement(notifications_MarkAllAsReadButton);
-		scrollAndClick(notifications_MarkAllAsReadButton);
-		if (allWikis) {
-			waitForElementClickableByElement(notifications_MarkAllWikisAsReadButton);
-			scrollAndClick(notifications_MarkAllWikisAsReadButton);
-		} else {
-			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
-			scrollAndClick(notifications_MarkOnlyThisWikiAsReadButton);
-		}
-		PageObjectLogging.log("notifications_clickMarkAllAsRead",
-				(allWikis ? "all wikis" : "only one wiki") + " marked as read",
-				true, driver);
-	}
-
-    /**
-     * Determine whether username contains underscore
-     * if so replace it with space
-     *
-     * @param userName
-     */
-    protected String purifyUserName(String userName) {
-        if (userName.contains("_")) {
-            userName = userName.replace("_", " ");
-        }
-        return userName;
-    }
 
     /**
      * Wait for element to not be present in DOM

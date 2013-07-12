@@ -8,9 +8,6 @@ public class URLsContent {
 	public static String lightboxImageTest = "LightboxTesting";
 	public static String followingToolbarTest = "QAautoPage";
 
-	//Preview url prefix
-	public static String previewPrefix = "http://preview";
-
 	// Common url component
 	public static String wikiDir = "wiki/";
 
@@ -87,9 +84,7 @@ public class URLsContent {
 
     // Article Pages
     public static String articleName001 = "TestVid001";
-    public static String articleName002 = "TestVid002";
-    public static String articleName003 = "TestVid003";
-    public static String articleName004 = "TestVid004";
+    public static String articleName002 = "TestVid003";
 
 	//External sites
 	public static String facebookDomain = "facebook.com";

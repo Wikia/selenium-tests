@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;

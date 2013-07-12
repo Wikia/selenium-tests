@@ -7,12 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class HubBasePageObject extends BasePageObject{
-	//Author Michal Nowierski
+
 	@FindBy(css="div.button.scrollleft p")
 	private WebElement RelatedVideosScrollLeft;
 	@FindBy(css="div.button.scrollright p")
@@ -59,14 +58,10 @@ public class HubBasePageObject extends BasePageObject{
 	private WebElement topWikisModule;
 
 	By MosaicSliderLargeImageDescription = By.cssSelector("div.wikia-mosaic-slider-description span.image-description b");
-	By NewsTabsList = By.cssSelector("div.tabbertab");
-	By RelatedVideosList = By.cssSelector("div.wikiahubs-popular-videos div.container div.item");
 	By FromCommunityImagesList = By.cssSelector("ul.wikiahubs-ftc-list div img");
 	By FromCommunityHeadlinesList = By.cssSelector("ul.wikiahubs-ftc-list div.wikiahubs-ftc-title a");
 	By FromCommunityWikinameAndUsernameFieldsList = By.cssSelector("ul.wikiahubs-ftc-list div.wikiahubs-ftc-subtitle a");
 	By FromCommunityQuatationsList = By.cssSelector("ul.wikiahubs-ftc-list div.wikiahubs-ftc-creative");
-	By PulseStatisticsList = By.cssSelector("div.boxes div");
-	By topWikissList = By.cssSelector("div.boxes div");
 
 	int RVmoduleCurrentVideosSet;
 
@@ -74,61 +69,6 @@ public class HubBasePageObject extends BasePageObject{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		RVmoduleCurrentVideosSet = 1;
-	}
-
-	public void ClickOnNewsTab(int TabNumber) {
-		List<WebElement> newstabs = driver.findElements(By.cssSelector("section.wikiahubs-newstabs ul.tabbernav li a"));
-		waitForElementClickableByCss("section.wikiahubs-newstabs ul.tabbernav li a");
-		scrollAndClick(newstabs.get(TabNumber - 1));
-		PageObjectLogging.log("ClickOnNewsTab", "Click on news tab number "+TabNumber+".", true, driver);
-
-	}
-
-	public void RelatedVideosScrollLeft() {
-		waitForElementClickableByElement(RelatedVideosScrollLeft);
-		scrollAndClick(RelatedVideosScrollLeft);
-		--RVmoduleCurrentVideosSet;
-		PageObjectLogging.log("RelatedVideosScrollLeft",
-				"RV module: scroll left", true, driver);
-	}
-
-	public void RelatedVideosScrollRight() {
-		waitForElementClickableByElement(RelatedVideosScrollRight);
-		scrollAndClick(RelatedVideosScrollRight);
-		++RVmoduleCurrentVideosSet;
-		PageObjectLogging.log("RelatedVideosScrollRight", "RV module: scroll right", true, driver);
-	}
-	public HomePageObject BackToHomePage() {
-		PageObjectLogging.log("navigate to www.wikia.com", "", true, driver);
-		return new HomePageObject(driver);
-	}
-
-	/**
-	 * Allows to type into a search filed the given SearchString
-	 * <p>
-	 * This method is global for all WikiaSearch forms on all of the wikis
-	 *
-	 * @author Michal Nowierski
-	 * @param  SearchString  Specifies what you want to search for
-	 */
-	public void SearchFieldTypeIn(String SearchString) {
-		SearchField.sendKeys(SearchString);
-		PageObjectLogging.log("Type " + SearchString
-				+ " String into the search field ", "", true, driver);
-		}
-
-	/**
-	 * Allows to left click on search button in order to initiate searching.
-	 * <p>
-	 * This method is global for all WikiaSearch forms on all of the wikis
-	 * The method should be invoked after SearchFieldType method
-	 *
-	 * @author Michal Nowierski
-	 * @param  SearchString  Specifies what you want to search for
-	 */
-	public void SearchButtonClick() {
-		scrollAndClick(SearchButton);
-		PageObjectLogging.log("SearchButtonClick", "Left click on the WikiaSearch button", true, driver);
 	}
 
 	public void MosaicSliderVerifyHasImages() {
@@ -139,19 +79,6 @@ public class HubBasePageObject extends BasePageObject{
 			waitForElementByElement(WikiaMosaicSliderThumbRegionImages.get(i));
 		}
 		PageObjectLogging.log("MosaicSliderVerifyHasImages", "Verify that WikiaMosaicSlider has images", true);
-	}
-
-	/**
-	 * Verifies that the given URL is one of the searching process results. You must be 100% sure that the URL will be found after searching
-	 * <p>
-	 * The method should be invoked after SearchButtonClick method
-	 *
-	 * @author Michal Nowierski
-	 * @param  URL  Specifies what URL you expect as 100% sure result of searching
-	 */
-	protected void SearchResultsVerifyFoundURL(String URL) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.result a[href='" + URL + "']")));
-		PageObjectLogging.log("SearchResultsVerifyFoundURL", "Verify if " + URL+ " URL is one of found the results", true, driver);
 	}
 
 	/**
@@ -166,10 +93,6 @@ public class HubBasePageObject extends BasePageObject{
 			return;
 		}
 		waitForElementByBy(By.cssSelector("ul.wikia-mosaic-thumb-region img"));
-//		List<WebElement> WikiaMosaicSliderThumbRegionImages = driver.findElements(By.cssSelector("ul.wikia-mosaic-thumb-region img"));
-//		waitForElementByElement(WikiaMosaicSliderThumbRegionImages.get(n-1));
-//		Point ImageLocation = WikiaMosaicSliderThumbRegionImages.get(n-1).getLocation();
-//		CommonFunctions.MoveCursorToElement(ImageLocation);
 		mouseOver("ul.wikia-mosaic-thumb-region li:nth-child("+n+")");
 		PageObjectLogging.log("MosaicSliderHoverOverImage", "MosaicSlider: Hover over image number "+n, true, driver);
 	}
@@ -202,91 +125,6 @@ public class HubBasePageObject extends BasePageObject{
 		}
 		PageObjectLogging.log("MosaicSliderVerifyLargeImageChangeAndGetCurrentDescription", "Verify that Large Image has changed", true);
 		return CurrentDescription;
-	}
-
-	/**
-	 * Verify that News tabs bar is present and content of newstab number n is present as well
-	 *
-	 * @param  n number of the tab n={1,2,3}
-	 * @author Michal Nowierski
-	 *
-	 */
-	public void VerifyNewsTabsPresence(int n) {
-		waitForElementByElement(NewsTabsNav);
-		List<WebElement> NewsTabs = driver.findElements(NewsTabsList);
-		WebElement NewsTab = NewsTabs.get(n-1);
-		waitForElementByElement(NewsTab);
-		PageObjectLogging.log("VerifyNewsTabsPresence", "Verify that News tabs bar is present and content of newstab number '"+n+"' is present as well", true);
-	}
-
-	/**
-	 * Verify that given  set of videos appears in Related Videos
-	 *
-	 * @param  n number of the tab n={1,2,3,4 (...)}
-	 * @author Michal Nowierski
-	 *
-	 */
-	public void VerifyRelatedVideosPresence() {
-		int n = RVmoduleCurrentVideosSet;
-		waitForElementByBy(RelatedVideosList);
-		List<WebElement> List = driver.findElements(RelatedVideosList);
-		int size = List.size();
-		WebElement Video1 = List.get(3*n-3);
-		waitForElementByElement(Video1);
-		//the below 'if' statements prevents situations when driver wants to verify presence of 3 videos in RV module, when there are only 2 videos (or 1 video) in the module. (The situation when there are only 2 or 1 videos is correct)
-		if (size%3==0 | size%3==2) {
-			WebElement Video2 = List.get(3*n-2);
-			waitForElementByElement(Video2);
-		}
-		if (size%3==0) {
-			WebElement Video3 = List.get(3*n-1);
-			waitForElementByElement(Video3);
-		}
-		PageObjectLogging.log("VerifyRelatedVideosPresence", "Verify that videos are present on the list", true);
-	}
-
-	public void ClickOnRelatedVideo(int i) {
-		int n = RVmoduleCurrentVideosSet;
-		waitForElementByBy(RelatedVideosList);
-		List<WebElement> NewsTabs = driver.findElements(RelatedVideosList);
-		WebElement Video = NewsTabs.get(3*n-4+i).findElement(By.cssSelector("div.playButton"));
-		waitForElementByElement(Video);
-		scrollToElement(Video);
-		scrollAndClick(Video);
-		PageObjectLogging.log("ClickOnRelatedVideo", "Click on related video number "+i+" from the current list", true, driver);
-	}
-
-	/**
-	 * Verify that video player appeared
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void VerifyVideoPlayerAppeared() {
-		waitForElementByElement(VideoPlayer);
-		PageObjectLogging.log("VerifyVideoPlayerAppeared", "Verify that video player appeared", true);
-	}
-
-	/**
-	 * Click on [x] to close video player
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void Click_X_toCloseVideoPlayer() {
-		closeModalWrapper();
-		PageObjectLogging.log("Click_X_toCloseVideoPlayer", "Click on [x] to close video player", true, driver);
-	}
-
-	/**
-	 * Click on suggest video button
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void ClickSuggestAVideo() {
-		waitForElementByElement(suggestVideoButton);
-//		CommonFunctions.scrollToElement(suggestVideoButton); //scroll is done when clickandwait
-		waitForElementClickableByElement(suggestVideoButton);
-		scrollAndClick(suggestVideoButton);
-		PageObjectLogging.log("ClickSuggestAVideo", "Click on a suggest video button", true, driver);
 	}
 
 	/**
@@ -383,32 +221,10 @@ public class HubBasePageObject extends BasePageObject{
 	 *
 	 * @author Michal Nowierski
 	 */
-	public void SuggestVideoTypeIntoWhatVideoField(String text) {
-		waitForElementByElement(suggestVideoWhatInput);
-		suggestVideoWhatInput.sendKeys(text);
-		PageObjectLogging.log("SuggestVideoTypeIntoWhatVideoField", "Type '"+text+"' into 'What Video' field on 'Suggest Video Modal'", true, driver);
-	}
-
-	/**
-	 * Type text into 'What Video' field on 'Suggest Video Modal'
-	 *
-	 * @author Michal Nowierski
-	 */
 	public void SuggestArticleTypeIntoWhatVideoField(String text) {
 		waitForElementByElement(suggestArticleWhatInput);
 		suggestArticleWhatInput.sendKeys(text);
 		PageObjectLogging.log("SuggestArticleTypeIntoWhatVideoField", "Type '"+text+"' into 'What Video' field on 'Suggest Article Modal'", true, driver);
-	}
-
-	/**
-	 * Type text into 'Which Wiki' field on 'Suggest Video Modal'
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void SuggestVideoTypeIntoWhichWikiField(String text) {
-		waitForElementByElement(suggestVideoWhichWikiInput);
-		suggestVideoWhichWikiInput.sendKeys(text);
-		PageObjectLogging.log("SuggestVideoTypeIntoWhatVideoField", "Type '"+text+"' into 'Which Wiki' field on 'Suggest Video Modal'", true, driver);
 	}
 
 	/**
@@ -480,132 +296,6 @@ public class HubBasePageObject extends BasePageObject{
 			waitForElementByElement(List.get(i));
 		}
 		PageObjectLogging.log("verifyFromModuleHasQuatation", "Verify that from the community module has a quatation", true);
-	}
-
-	/**
-	 * Verify that Pulse module appears
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyPulseModuleAppears() {
-		waitForElementByElement(pulseModule);
-		PageObjectLogging.log("verifyPulseModuleAppears", "Verify that Pulse module appears", true);
-	}
-
-	/**
-	 * Verify that top wikis module appears
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyTopWikisModuleAppears() {
-		waitForElementByElement(topWikisModule);
-		PageObjectLogging.log("verifyTopWikisModuleAppears", "Verify that top wikis module appears", true);
-	}
-
-
-	/**
-	 * Verify that facebook button is displayed
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyFacebookButtonAppears() {
-		waitForElementByElement(FacebookButton);
-		PageObjectLogging.log("verifyFacebookButtonAppears", "Verify that facebook button is displayed", true);
-	}
-
-	/**
-	 * Verify that twitter button is displayed
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyTwitterButtonAppears() {
-		waitForElementByElement(TwitterButton);
-		PageObjectLogging.log("verifyTwitterButtonAppears", "Verify that twitter button is displayed", true);
-	}
-
-	/**
-	 * Verify that google button is displayed
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyGoogleButtonAppears() {
-		waitForElementByElement(GoogleButton);
-		PageObjectLogging.log("verifyGoogleButtonAppears", "Verify that google button is displayed", true);
-	}
-
-	/**
-	 * verify that facebook button is clickable
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyFacebookButtonIsClickable() {
-		waitForElementClickableByElement(FacebookButton);
-		PageObjectLogging.log("verifyFacebookButtonIsClickable", "verify that facebook button is clickable", true);
-	}
-
-	/**
-	 * verify that twitter button is clickable
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyTwitterButtonIsClickable() {
-		waitForElementClickableByElement(TwitterButton);
-		PageObjectLogging.log("verifyTwitterButtonIsClickable", "verify that twitter button is clickable", true);
-	}
-
-	/**
-	 * verify that google button is clickable
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyGoogleButtonIsClickable() {
-		waitForElementClickableByElement(GoogleButton);
-		PageObjectLogging.log("verifyGoogleButtonIsClickable", "verify that google button is clickable", true);
-	}
-
-
-	/**
-	 * verify that statistics are displayed
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyStatisticsAreDisplayed() {
-		List<WebElement> List = driver.findElements(PulseStatisticsList);
-		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyStatisticsAreDisplayed", "Checking statistics box number "+(i+1), true);
-			scrollToElement(List.get(i));
-			waitForElementByElement(List.get(i));
-		}
-		PageObjectLogging.log("verifyStatisticsAreDisplayed", "verify that statistics are displayed", true);
-	}
-
-	/**
-	 * verify that wikis are listed in 'Top Wikis' module
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyWikisAreListedInTopWikisModule() {
-		List<WebElement> List = driver.findElements(topWikissList);
-		for (int i = 0; i < List.size(); i++) {
-			PageObjectLogging.log("verifyWikisAreListedInTopWikisModule", "Checking  top wiki number "+(i+1), true);
-			scrollToElement(List.get(i));
-			waitForElementByElement(List.get(i));
-		}
-		PageObjectLogging.log("verifyWikisAreListedInTopWikisModule", "verify that wikis are listed in 'Top Wikis' module", true);
-	}
-
-	/**
-	 *
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void templateMethod() {
-		PageObjectLogging.log("", "", true, driver);
-	}
-
-	public void verifyVideoPlayerDisappeared() {
-		waitForElementNotVisibleByElement(VideoPlayer);
-		PageObjectLogging.log("verifyVideoPlayerDisappeared", "Verify that video player disppeared", true);
 	}
 
 	public void verifySuggestAVideoOrArticleModalDisappeared() {

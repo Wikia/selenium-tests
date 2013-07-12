@@ -19,10 +19,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class CommonExpectedConditions {
 
 	private final static Logger log = Logger.getLogger(ExpectedConditions.class.getName());
-	
+
 	private static WebDriver driver = DriverProvider.getWebDriver();
 
-	
+
 	/**
 	 * An expectation for checking if the given text is present in the specified
 	 * element.
@@ -76,48 +76,7 @@ public class CommonExpectedConditions {
 	      }
 	    };
 	}
-  
-	/**
-	 * An expectation for checking if the given text is present in the specified
-	 * element.
-	 *
-	 * @author Michal Nowierski
-	 */
-	public static ExpectedCondition<Boolean> valueToNotBePresentInElementsAttribute(
-	      final By locator, final String attribute, final String value) {
 
-	    return new ExpectedCondition<Boolean>() {
-	      public Boolean apply(WebDriver from) {
-	        try {
-	          String elementsAttributeValue = findElement(locator, from).getAttribute(attribute);
-	          return !elementsAttributeValue.contains(value);
-	        } catch (StaleElementReferenceException e) {
-	          return null;
-	        }
-	      }
-
-	      @Override
-	      public String toString() {
-	        return String.format("value ('%s') to be present in element found by %s",
-	        		value, locator);
-	      }
-	    };
-	  }
-
-	public static ExpectedCondition<Boolean> classRemovedFromElement(final WebElement element, final String className)
-	{
-		return new ExpectedCondition<Boolean>() {
-			public Boolean apply(WebDriver from) {
-				String classString = element.getAttribute("class");
-				boolean hasClass = classString.matches("^"   + className + "$")
-								|| classString.matches("\\s" + className + "$")
-								|| classString.matches("^"   + className + "\\s")
-								|| classString.matches("\\s" + className + "\\s");
-				return !hasClass;
-			}
-		};
-	}
-	  
 	  /**
 	   * An expectation for checking if the page URL contains givenString
 	   * 
@@ -202,29 +161,28 @@ public class CommonExpectedConditions {
 	      }
 	    };
 	  }
-	  
-	  /**
-	   * An expectation for checking if the given text is present in the specified
-	   * element.
-	   */
-	  public static ExpectedCondition<Boolean> textToBePresentInElement(
-		final WebElement GivenElement, final String text) {
 
-	    return new ExpectedCondition<Boolean>() {
-	      public Boolean apply(WebDriver driver) {
-	          String elementText = GivenElement.getText();
-	          return elementText.contains(text);
-	      }
+	/**
+	* An expectation for checking if the given text is present in the specified
+	* element.
+	*/
+	public static ExpectedCondition<Boolean> textToBePresentInElement(
+	final WebElement GivenElement, final String text) {
 
-	      @Override
-	      public String toString() {
-	        return String.format("text ('%s') to be present in element %s",
-	            text, GivenElement.getTagName());
-	      }
-	    };
-	  }
-	  
-  	  
+		return new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				String elementText = GivenElement.getText();
+				return elementText.contains(text);
+			}
+
+			@Override
+			public String toString() {
+			return String.format("text ('%s') to be present in element %s",
+				text, GivenElement.getTagName());
+			}
+		};
+	}
+
 	  /**
 	   * Looks up an element. Logs and re-throws WebDriverException if thrown. <p/>
 	   * Method exists to gather data for http://code.google.com/p/selenium/issues/detail?id=1800
@@ -240,47 +198,7 @@ public class CommonExpectedConditions {
 	      throw e;
 	    }
 	  }
-	  
-//	  private static boolean findInvisibleElement(By by, WebDriver driver) 
-//	  {
-//		  try
-//		  {
-//			  driver.findElement(by);
-//			  return false;
-//		  }
-//		  catch (NoSuchElementException e)
-//		  {
-//			  return true;
-//		  }
-//	  }
-	  
-	  public static ExpectedCondition<Boolean> invisibilityOfElementLocated(
-		      final By locator) {
-		    return new ExpectedCondition<Boolean>() {
-		      public Boolean apply(WebDriver driver) {
-		        try {
-		        	Boolean isDisplayed = findElement(locator, driver).isDisplayed();
-		          return !isDisplayed;
-		        }
-		        catch (StaleElementReferenceException e)
-		        {
-		          // Returns true because stale element reference implies that element
-		          // is no longer visible.
-		          return true;
-		        }
-		        catch (NoSuchElementException e)
-		        {
-		        	return true;
-		        }
-		      }
 
-		      @Override
-		      public String toString() {
-		        return "element to no longer be visible: " + locator;
-		      }
-		    };
-		  }
-	  
 	  public static ExpectedCondition<Boolean> invisibilityOfElementLocated(
 		      final WebElement element) {
 		    return new ExpectedCondition<Boolean>() {
@@ -309,28 +227,6 @@ public class CommonExpectedConditions {
 		      }
 		    };
 		  }
-    /**
-     *
-     * @param cssSelector
-     * @return
-     */
-    public static ExpectedCondition<Boolean> elementNotPresent(
-        final String cssSelector
-    ) {
-        return new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                return (driver.findElements(By.cssSelector(cssSelector)).size() < 1);
-            }
-            @Override
-            public String toString() {
-                return String.format(
-                    "Element with ('%s') selector still present!",
-                    cssSelector
-                );
-            }
-        };
-    }
 
     /**
      * 
@@ -354,29 +250,32 @@ public class CommonExpectedConditions {
             };
         }
 
-    
-    /**
-     *
-     * @param element
-     * @return
-     */
-    public static ExpectedCondition<Boolean> elementVisible(
-        final WebElement element
-    ) {
-        return new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                return (element.isDisplayed());
-            }
-            @Override
-            public String toString() {
-                return String.format(
-                    "Element ('%s') not visisble!",
-                    element.getTagName()
-                );
-            }
-        };
-    }
+
+	public static ExpectedCondition<Boolean> elementVisible(
+		final WebElement element
+	) {
+		return new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				try {
+					return element.isDisplayed();
+				} catch (StaleElementReferenceException e) {
+					// Returns false because stale element implies that element
+					// is still not visible.
+					return false;
+				} catch (NoSuchElementException e) {
+					return false;
+				}
+			}
+			@Override
+			public String toString() {
+				return String.format(
+					"Element ('%s') not visisble!",
+					element.getTagName()
+				);
+			}
+		};
+	}
 
     public static ExpectedCondition<Boolean> elementInViewPort (
         final WebElement element

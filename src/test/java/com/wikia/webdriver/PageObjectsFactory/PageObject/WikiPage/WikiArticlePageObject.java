@@ -93,7 +93,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("#WikiaArticle img.sprite.play");
 	private By AddVideoRVButton = By.cssSelector("a.addVideo");
-	private By RVvideoLoading = By.cssSelector("section.loading");
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
@@ -192,7 +191,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	public void clickSubmitButton(String userName)
 	{
-		scrollAndClick(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
+		//submit button taken by username which edited comment
+		scrollAndClick(
+			driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']"))
+		);
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
 	}
 
@@ -369,43 +371,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		scrollAndClick(driver.findElement(AddVideoRVButton));
 		PageObjectLogging.log("ClickOnAddVideoRVModule", "Click On 'Add a video' button on RV module", true, driver);
 		return new VetAddVideoComponentObject(driver);
-	}
-
-	/**
-	 * Type given URL into RV modal
-	 *
-	 * @author Michal Nowierski
-	 * @param videoURL URL of the video to be added
-	 * 	 */
-	public void typeInVideoURL(String videoURL) {
-		waitForElementByElement(videoRVmodalInput);
-		videoRVmodalInput.clear();
-		videoRVmodalInput.sendKeys(videoURL);
-		PageObjectLogging.log("TypeInVideoURL", "Type given URL into RV modal", true, driver);
-	}
-
-	/**
-	 * Click on Add button on RV modal
-	 *
-	 * @author Michal Nowierski
-	 * 	 */
-	public void clickOnRVModalAddButton() {
-		waitForElementByElement(VideoModalAddButton);
-		waitForElementClickableByElement(VideoModalAddButton);
-		scrollAndClick((VideoModalAddButton));
-		PageObjectLogging.log("ClickOnRVModalAddButton", "Click on Add button on RV modal", true, driver);
-
-	}
-
-	/**
-	 * Wait for processing the added video to finish
-	 *
-	 * @author Michal Nowierski
-	 * 	 */
-	public void waitForProcessingToFinish() {
-		waitForElementNotVisibleByBy(RVvideoLoading);
-		PageObjectLogging.log("WaitForProcessingToFinish", "Wait for processing the added video to finish", true, driver);
-
 	}
 
 	/**
@@ -614,17 +579,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
         renameArticle(oldName, newName);
     }
 
-	/**
-	 *  @author Michal 'justnpT' Nowierski
-	 */
-	public void verifySpotlightsPresence() {
-		scrollToElement(spotlightFooter);
-		waitForElementByElement(spotlightImage1);
-		waitForElementByElement(spotlightImage2);
-		waitForElementByElement(spotlightImage3);
-		PageObjectLogging.log("verifySpotlightsPresence", "all 3 spotlights are present", true, driver);
-	}
-
 	public GalleryBuilderComponentObject clickAddPhotoToGallery(){
 		scrollAndClick(addPhotoToGalleryButton);
 		return new GalleryBuilderComponentObject(driver);
@@ -634,10 +588,4 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new SlideshowBuilderComponentObject(driver);
 	}
 
-	/**
-	 * Get article content from the beggining to the "Discussions" part
-	 */
-	public String getArticleContent() {
-		return articleContent.getText().split("Discussions")[0];
-	}
 }

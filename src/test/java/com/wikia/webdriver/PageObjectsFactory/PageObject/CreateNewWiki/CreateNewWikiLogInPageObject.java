@@ -30,14 +30,6 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	WebElement passwordField;
 	@FindBy(css="div.UserLoginModal input[type='submit']")
 	WebElement submitButton;
-	@FindBy(css="div.UserLoginModal a.forgot-password")
-	WebElement forgotYourPasswordLink;
-	@FindBy(css="div.UserLoginModal a[data-id='facebook'] img")
-	WebElement facebookButton;
-	@FindBy(css="li#UserAuth input[value='Sign up']")
-	WebElement signUpButton;
-	@FindBy(css="div.signup-marketing p:nth-of-type(2)")
-	WebElement signUpText;
 	@FindBy(css="div.UserLoginModal div.error-msg")
 	WebElement usernameValidationText;
 
@@ -61,39 +53,6 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 		scrollAndClick(submitButton);
 		PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
 		return new CreateNewWikiPageObjectStep2(driver);
-	}
-
-	public void verifyUserNameIsBlank()
-	{
-		waitForElementByElement(userNameField);
-		String value = userNameField.getAttribute("value");
-		if (value.isEmpty())
-		{
-			PageObjectLogging.log("verifyUserNameIsBlank", "user name is blank", true, driver);
-		}
-		else
-		{
-			PageObjectLogging.log("verifyUserNameIsBlank", "user name isn't blank, value: "+value, false, driver);
-		}
-	}
-
-	public void verifyPasswordIsBlank()
-	{
-		waitForElementByElement(passwordField);
-		String value = passwordField.getAttribute("value");
-		if (value.isEmpty())
-		{
-			PageObjectLogging.log("verifyUserNameIsBlank", "password is blank", true, driver);
-		}
-		else
-		{
-			PageObjectLogging.log("verifyUserNameIsBlank", "password isn't blank, value: "+value, false, driver);
-		}
-	}
-
-	public void verifySignUpText()
-	{
-		Assertion.assertEquals("You need an account to create a wiki on Wikia. It only takes a minute to sign up!", signUpText.getText());
 	}
 
 
@@ -127,11 +86,4 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 		userNameField.clear();
 		passwordField.clear();
 	}
-
-
-
-
-
-
-
 }

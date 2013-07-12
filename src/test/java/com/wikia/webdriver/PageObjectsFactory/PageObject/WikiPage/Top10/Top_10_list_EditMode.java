@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class Top_10_list_EditMode extends Top_10_list_EditonCore{
 	@FindBy(css=".FormButtons input[type='Submit']")

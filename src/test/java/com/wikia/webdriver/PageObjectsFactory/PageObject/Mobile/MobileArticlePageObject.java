@@ -103,7 +103,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		waitForElementByElement(replyCommentButton);
 		String url = driver.getCurrentUrl();
 		executeScript("document.querySelectorAll('.cmnRpl')[0].click()");
-//		clickAndWait(replyCommentButton);
+//		scrollAndClick(replyCommentButton);
 		verifyURL(url+"#Modal");
 		replyInputArea.sendKeys(reply);
 		replyInputArea.submit();

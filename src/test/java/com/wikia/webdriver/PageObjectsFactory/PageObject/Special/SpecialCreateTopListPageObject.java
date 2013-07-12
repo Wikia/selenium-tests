@@ -1,7 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

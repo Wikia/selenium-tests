@@ -129,7 +129,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickSearchSuggestion(String Tool) {
 		waitForElementByCss("div.autocomplete div[title='"+Tool+"']");
 		waitForElementClickableByCss("div.autocomplete div[title='"+Tool+"']");
-		scrollAndClick(driver.findElement(By.cssSelector("div.autocomplete div[title='"+Tool+"']")));
+		scrollAndClick(driver.findElement(By.cssSelector("div.autocomplete div[title='" + Tool + "']")));
 		PageObjectLogging.log("customizeToolbar_ClickOnFoundTool", "Click on "+Tool, true, driver);
 
 	}

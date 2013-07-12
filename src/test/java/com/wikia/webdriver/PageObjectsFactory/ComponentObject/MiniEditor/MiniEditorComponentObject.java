@@ -1,6 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor;
 
-import org.openqa.selenium.By;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,10 +24,12 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement messageBodyField;
 	@FindBy(css=".cke_contents iframe")
 	public WebElement miniEditorIframe;
+	@FindBy(css=".speech-bubble-message .cke_contents iframe")
+	protected WebElement miniEditorEditCommentIFrame;
+	@FindBy(css=".article-comm-edit-box iframe")
+	protected WebElement replyCommentIFrame;
 	@FindBy(css=".RTEImageButton .cke_icon")
 	private WebElement addImageButton;
-	@FindBy(css="img.image.thumb")
-	private WebElement imageInMessageEditMode;
 	@FindBy(css=".RTEVideoButton .cke_icon")
 	private WebElement addVideoButton;
 	@FindBy(css="img.video.thumb")
@@ -38,8 +40,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement externalLinkOption;
 	@FindBy(css="input.cke_dialog_ui_input_text")
 	private WebElement targetPageOrURL;
-	@FindBy(css="p.link-type-note span")
-	private WebElement linkPageStatus;
 	@FindBy(css="span.cke_dialog_ui_button")
 	private WebElement linkModalOkButton;
 	@FindBy (css=".loading-throbber")
@@ -53,12 +53,19 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(text);
 	}
-	
+
 	public void writeMiniEditor(Keys key){
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(key);
 	}
-	 
+
+	public void switchAndWrite(String text) {
+		waitForElementByElement(miniEditorIframe);
+		driver.switchTo().frame(miniEditorIframe);
+		waitForElementByElement(messageBodyField);
+		messageBodyField.sendKeys(text);
+	}
+
 	public void writeStylesMiniEditor(String message, String special){
 		String specialKey = "Not Initialized";
 		if (special.equals("Bold")) {
@@ -81,19 +88,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		vetOptions.submit();
 		verifyVideoMiniEditor();
 	}
-	
-	protected void clickPost(){}
-	
-	protected void clickPreview(){}
-	
-	
-	protected void verifyImageMiniEditor(){
-		waitForElementByElement(miniEditorIframe);
-		driver.switchTo().frame(miniEditorIframe);
-		waitForElementByElement(imageInMessageEditMode);
-		driver.switchTo().defaultContent();
-	}
-	
+
 	public void verifyVideoMiniEditor(){
 		waitForElementByElement(miniEditorIframe);
 		driver.switchTo().frame(miniEditorIframe);
@@ -121,10 +116,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		scrollAndClick(linkModalOkButton);
 	}
 
-	public void clearContent(){
-		messageBodyField.clear();
-	}
-
 	public VetAddVideoComponentObject clickAddVideo(){
 		waitForElementByElement(addVideoButton);
 		scrollAndClick(addVideoButton);
@@ -139,5 +130,23 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 
 	public void waitForEditorReady() {
 		waitForElementNotVisibleByElement(loader);
+	}
+
+	public void switchAndEditComment(String comment) {
+		waitForElementByElement(miniEditorEditCommentIFrame);
+		driver.switchTo().frame(miniEditorEditCommentIFrame);
+		waitForElementByElement(messageBodyField);
+		messageBodyField.clear();
+		messageBodyField.sendKeys(comment);
+		PageObjectLogging.log("CommentEdited", "Comment edited", true);
+	}
+
+	public void switchAndReplyComment(String reply) {
+		waitForElementByElement(replyCommentIFrame);
+		driver.switchTo().frame(replyCommentIFrame);
+		waitForElementByElement(messageBodyField);
+		messageBodyField.clear();
+		messageBodyField.sendKeys(reply);
+		PageObjectLogging.log("CommentReplied", "Comment replied", true);
 	}
 }

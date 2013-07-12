@@ -46,7 +46,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
     }
@@ -149,7 +149,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
@@ -165,7 +165,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        special.addPageWithGIvenTitleAndDefaultContent(modifiedBlockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(modifiedBlockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
     }
@@ -190,7 +190,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.openSpecialPage(specialCreatePage);
         SpecialCreatePagePageObject special = new SpecialCreatePagePageObject(driver);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockPresent();
 
@@ -204,7 +204,7 @@ public class BlockPageTitleTests extends TestTemplate {
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
-        special.addPageWithGIvenTitleAndDefaultContent(blockedContent);
+        special.addPageWithGivenTitleAndDefaultContent(blockedContent);
 
         phalanx.verifyMessageAboutBlockAbsent();
     }

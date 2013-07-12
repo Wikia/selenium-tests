@@ -14,8 +14,6 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 
 	@FindBy(css="input[name='wpUploadFile']")
 	private WebElement BrowseForFileInput;
-	@FindBy(css="div.thumbinner canvas")
-	private WebElement FilePreview;
 	@FindBy(css="input[name='wpIgnoreWarning']")
 	private WebElement IgnoreAnyWarnings;
 	@FindBy(css="input.mw-htmlform-submit[value*='Upload']")
@@ -42,14 +40,8 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 
 	}
 
-	public void verifyFilePreviewAppeared(String string) {
-		waitForElementByElement(FilePreview);
-		PageObjectLogging.log("verifyFilePreviewAppeared", "Verify that file preview appeared", true, driver);
-	}
-
 	public void checkIgnoreAnyWarnings() {
 		waitForElementByElement(IgnoreAnyWarnings);
-		scrollToElement(IgnoreAnyWarnings);
 		scrollAndClick(IgnoreAnyWarnings);
 		PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true, driver);
 

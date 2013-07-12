@@ -93,6 +93,6 @@ public class FilePageTests extends TestTemplate {
 
 		// After paging, article #4 should be at the top of the list
 		filePage.localAppearsPageNext();
-		filePage.verifyAppearsOn(URLsContent.articleName003);
+		filePage.verifyAppearsOn(URLsContent.articleName002);
 	}
 }

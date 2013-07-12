@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.net.URLEncoder;
 
 import org.openqa.selenium.WebDriver;

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.io.File;
 import java.util.ArrayList;
