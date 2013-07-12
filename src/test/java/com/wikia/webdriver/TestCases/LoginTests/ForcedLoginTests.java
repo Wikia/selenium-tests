@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.LoginTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -27,7 +26,8 @@ public class ForcedLoginTests extends TestTemplate{
 
     @Test(groups = {"ForcedLogin_001_newFile", "ForcedLogin"})
     public void ForcedLogin_001_newFile () {
-        CommonFunctions.logOut(driver);
+        SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    	login.logOut(driver);
 
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
@@ -43,12 +43,13 @@ public class ForcedLoginTests extends TestTemplate{
 
         specialPage.verifyUserLoggedIn(Properties.userName);
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
     }
 
     @Test(groups = {"ForcedLogin_002_video", "ForcedLogin"})
     public void ForcedLogin_002_video () {
-        CommonFunctions.logOut(driver);
+    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    	login.logOut(driver);
 
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
@@ -63,12 +64,13 @@ public class ForcedLoginTests extends TestTemplate{
 
         specialPage.verifyUserLoggedIn(Properties.userName);
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
     }
 
     @Test(groups = {"ForcedLogin_003_loginRequired", "ForcedLogin"})
     public void ForcedLogin_003_loginRequired () {
-        CommonFunctions.logOut(driver);
+    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    	login.logOut(driver);
 
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
@@ -80,12 +82,13 @@ public class ForcedLoginTests extends TestTemplate{
         special.verifyUserLoggedIn(Properties.userName);
         special.verifySpecialPageRedirection(upload);
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
     }
 
     @Test(groups = {"ForcedLogin_004_notLoggedIn", "ForcedLogin"})
     public void ForcedLogin_004_notLoggedIn () {
-        CommonFunctions.logOut(driver);
+    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    	login.logOut(driver);
 
         WikiBasePageObject base = new WikiBasePageObject(driver);
         base.openWikiPage();
@@ -97,12 +100,13 @@ public class ForcedLoginTests extends TestTemplate{
         special.verifyUserLoggedIn(Properties.userName);
         special.verifySpecialPageRedirection(watchList);
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
     }
 
     @Test(groups = {"ForcedLogin_005_addMedia", "ForcedLogin"})
     public void ForcedLogin_005_addMedia () {
-        CommonFunctions.logOut(driver);
+    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    	login.logOut(driver);
 
         WikiArticlePageObject base = new WikiArticlePageObject(driver);
         base.openWikiPage();
@@ -113,12 +117,13 @@ public class ForcedLoginTests extends TestTemplate{
         base.logInViaModal(Properties.userName, Properties.password);
         base.verifyUserLoggedIn(Properties.userName);
         miniEditor.waitForEditorReady();
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
     }
 
     @Test(groups = {"ForcedLogin_006_rail", "ForcedLogin"})
     public void ForcedLogin_006_rail () {
-        CommonFunctions.logOut(driver);
+    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+    	login.logOut(driver);
 
         WikiArticlePageObject base = new WikiArticlePageObject(driver);
         base.openWikiPage();
@@ -131,6 +136,6 @@ public class ForcedLoginTests extends TestTemplate{
 
         base.verifyUserLoggedIn(Properties.userName);
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
     }
 }

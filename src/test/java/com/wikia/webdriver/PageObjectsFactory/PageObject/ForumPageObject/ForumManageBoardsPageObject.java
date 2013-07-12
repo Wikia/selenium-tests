@@ -61,7 +61,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	}
 	private void submitNewBoard(){
 		waitForElementByElement(boardSubmitButton);
-		clickAndWait(boardSubmitButton);
+		scrollAndClick(boardSubmitButton);
 		PageObjectLogging.log("submitNewBoard", "new board submitted", true);
 	}
 	
@@ -79,7 +79,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 
 	private void clickDeleteForum(String name){
 		WebElement deleteButton = waitForElementByXPath("//a[contains(text(), '"+name+"')]/../..//img[@class='sprite trash']");
-		clickAndWait(deleteButton);
+		scrollAndClick(deleteButton);
 		PageObjectLogging.log("clickDeleteForum", "delete forum button clicked", true);				
 	}
 	
@@ -93,7 +93,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	
 	private void clickDeleteAndMergeForum(){
 		waitForElementByElement(deleteAndMergeButton);
-		clickAndWait(deleteAndMergeButton);
+		scrollAndClick(deleteAndMergeButton);
 		PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true);
 	}
 	
@@ -147,7 +147,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	
 	private void clickModifyForum(String forumName){
 		WebElement editPecil = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//img[@class='sprite edit-pencil']");
-		clickAndWait(editPecil);
+		scrollAndClick(editPecil);
 		PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true);
 	}
 	

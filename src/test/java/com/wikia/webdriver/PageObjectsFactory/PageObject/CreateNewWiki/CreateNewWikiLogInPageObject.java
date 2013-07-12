@@ -1,20 +1,19 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+
 
 /**
- * 
+ *
  * @author Karol
  *
  */
@@ -59,7 +58,7 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	public CreateNewWikiPageObjectStep2 submitLogin()
 	{
 		waitForElementByElement(submitButton);
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
 		return new CreateNewWikiPageObjectStep2(driver);
 	}
@@ -77,7 +76,7 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 			PageObjectLogging.log("verifyUserNameIsBlank", "user name isn't blank, value: "+value, false, driver);
 		}
 	}
-	
+
 	public void verifyPasswordIsBlank()
 	{
 		waitForElementByElement(passwordField);
@@ -91,36 +90,13 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 			PageObjectLogging.log("verifyUserNameIsBlank", "password isn't blank, value: "+value, false, driver);
 		}
 	}
-	
-	public void verifyTabTransition()
-	{
-		waitForElementByElement(userNameField);
-		clickAndWait(userNameField);
-		Assertion.assertEquals("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
-		userNameField.sendKeys(Keys.TAB);
-		Assertion.assertEquals("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		Assertion.assertEquals("forgot-password", CommonFunctions.currentlyFocusedGetAttributeValue("class")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		Assertion.assertEquals("submit", CommonFunctions.currentlyFocusedGetAttributeValue("type")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		Assertion.assertEquals("facebook", CommonFunctions.currentlyFocusedGetAttributeValue("data-id")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		Assertion.assertEquals("Sign up", CommonFunctions.currentlyFocusedGetAttributeValue("value")) ;
-	}
 
-	public void verifyFaceBookToolTip()
-	{
-		
-		Assertion.assertEquals("Click the button to log in with Facebook", CommonFunctions.getAttributeValue(facebookButton, "data-original-title"));
-	}
-	
 	public void verifySignUpText()
 	{
 		Assertion.assertEquals("You need an account to create a wiki on Wikia. It only takes a minute to sign up!", signUpText.getText());
 	}
-	
-	
+
+
 	public void verifyEmptyUserNameValidation()
 	{
 		waitForElementByBy(By.cssSelector("div.UserLoginModal div.input-group div.error-msg"));
@@ -129,21 +105,21 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 		Assertion.assertEquals("Oops, please fill in the username field.", text);
 		userNameField.clear();
 	}
-	
+
 	public void verifyInvalidUserNameValidation()
 	{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
 		Assertion.assertEquals("Hm, we don't recognize this name. Don't forget usernames are case sensitive.", usernameValidationText.getText());
 		userNameField.clear();
 	}
-	
+
 	public void verifyBlankPasswordValidation()
 	{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
 		Assertion.assertEquals("Oops, please fill in the password field.", usernameValidationText.getText());
 		userNameField.clear();
 	}
-	
+
 	public void verifyInvalidPasswordValidation()
 	{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
@@ -151,25 +127,11 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 		userNameField.clear();
 		passwordField.clear();
 	}
-	
-	public void facebookConnectButtonClick()
-	{
-		clickAndWait(userNameField);
-		Assertion.assertEquals("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
-		userNameField.sendKeys(Keys.TAB);
-		Assertion.assertEquals("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		Assertion.assertEquals("forgot-password", CommonFunctions.currentlyFocusedGetAttributeValue("class")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		Assertion.assertEquals("submit", CommonFunctions.currentlyFocusedGetAttributeValue("type")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.TAB);
-		Assertion.assertEquals("facebook", CommonFunctions.currentlyFocusedGetAttributeValue("data-id")) ;
-		CommonFunctions.getCurrentlyFocused().sendKeys(Keys.ENTER);
-	}
-	
-	
 
-	
-	
-	
+
+
+
+
+
+
 }

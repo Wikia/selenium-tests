@@ -1,14 +1,14 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class LightboxPageObject extends BasePageObject{
 
@@ -96,7 +96,7 @@ public class LightboxPageObject extends BasePageObject{
 		waitForElementByElement(moreInfoThumbnail);
 		PageObjectLogging.log("clickShareButton", "Share button is clicked", true, driver);
 	}
-	
+
 	public void verifyShareButtons() {
 		waitForElementByElement(plusoneShareLink);
 		waitForElementByElement(redditShareLink);
@@ -105,7 +105,7 @@ public class LightboxPageObject extends BasePageObject{
 		waitForElementByElement(facebookShareLink);
 		PageObjectLogging.log("verifyShareButtons", "All share buttons are visible", true, driver);
 	}
-	
+
 	public void clickMoreInfoBackButton() {
 		waitForElementByElement(backButton);
 		backButton.click();
@@ -121,9 +121,9 @@ public class LightboxPageObject extends BasePageObject{
 		twitterShareLink.click();
 		PageObjectLogging.log("clickTwitterShareButton", "Twitter share button is clicked", true);
 	}
-	
+
 	public void clickStumbleUponShareButton() {
-		stumbleUponShareLink.click();	
+		stumbleUponShareLink.click();
 		PageObjectLogging.log("clickStumbleUponShareButton", "Stumbleupon share button is clicked", true);
 	}
 
@@ -133,12 +133,12 @@ public class LightboxPageObject extends BasePageObject{
 	}
 
 	public void clickPlusOneShareButton() {
-		plusoneShareLink.click();	
+		plusoneShareLink.click();
 		PageObjectLogging.log("clickPlusOneShareButton", "Plus one share button is clicked", true);
 	}
 
 	public void verifyFacebookWindow() {
-		CommonFunctions.waitForWindow("", "");
+		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
 		waitForStringInURL(URLsContent.facebookDomain);
@@ -148,7 +148,7 @@ public class LightboxPageObject extends BasePageObject{
 	}
 
 	public void verifyTwitterWindow(){
-		CommonFunctions.waitForWindow("", "");
+		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
 		waitForStringInURL(URLsContent.twitterDomain);
@@ -158,7 +158,7 @@ public class LightboxPageObject extends BasePageObject{
 	}
 
 	public void verifyStumbleUponWindow(){
-		CommonFunctions.waitForWindow("", "");
+		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
 		waitForStringInURL(URLsContent.stumpleUponDomain);
@@ -168,7 +168,7 @@ public class LightboxPageObject extends BasePageObject{
 	}
 
 	public void verifyRedditWindow() {
-		CommonFunctions.waitForWindow("", "");
+		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
 		waitForStringInURL(URLsContent.redditDomain);
@@ -178,7 +178,7 @@ public class LightboxPageObject extends BasePageObject{
 	}
 
 	public void verifyPlusOneWindow(){
-		CommonFunctions.waitForWindow("", "");
+		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
 		waitForStringInURL(URLsContent.googleDomain);
@@ -192,17 +192,17 @@ public class LightboxPageObject extends BasePageObject{
 		sendKeys(emailInput, "rodriuki@hotmail.com");
 		sendButton.click();
 		waitForElementByElement(successMessage);
-		PageObjectLogging.log("addCorrectEmail", "Success message is displayed after providing correct mail address", true, driver);		
+		PageObjectLogging.log("addCorrectEmail", "Success message is displayed after providing correct mail address", true, driver);
 	}
-	
+
 	public void addBlankEmail () {
 		waitForElementByElement(emailInput);
 		sendKeys(emailInput, "");
 		sendButton.click();
 		waitForElementByElement(errorMessage);
-		PageObjectLogging.log("addBlankEmail", "Error message is displayed after providing incorrect mail address", true, driver);		
+		PageObjectLogging.log("addBlankEmail", "Error message is displayed after providing incorrect mail address", true, driver);
 	}
-	
+
 	public void verifyCorrectStandardLink() {
 		waitForElementByElement(standardLink);
 		Assertion.assertStringContains(standardLink.getText(), "file=Lion2.gif");
@@ -212,22 +212,22 @@ public class LightboxPageObject extends BasePageObject{
 	public void verifyCorrectFilePageURLLinkk() {
 		waitForElementByElement(filePageURL);
 		Assertion.assertStringContains(embedURL.getText(), "file=Lion2.gif");
-		PageObjectLogging.log("verifyCorrectFilePageURLLinkk", "File Page URL link is correctly formatted", true, driver);		
+		PageObjectLogging.log("verifyCorrectFilePageURLLinkk", "File Page URL link is correctly formatted", true, driver);
 	}
-	
+
 	public void verifyLightboxCarouselProgress() {
 		waitForElementByElement(progress);
 		Assertion.assertEquals("1-1 of 1", progress.getText());
 //		CommonFunctions.assertString("1-1 of 1", progress.getText());
 		PageObjectLogging.log("verifyLightboxCarouselProgress", "Number of media elements in carousel progress is correct ", true, driver);
-	}	
-	
+	}
+
 	public void clickUnpinButton() {
 		waitForElementByElement(unpinButton);
 		unpinButton.click();
 		PageObjectLogging.log("clickUnpinButton", "Unpin button was clicked", true, driver);
 	}
-	
+
 	public void clickPinButton() {
 		builder.moveToElement(lightBoxModal).
 				click(pinButton).

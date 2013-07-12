@@ -11,19 +11,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Proxy.ProxyType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class SignUpPageObject extends BasePageObject {
@@ -51,7 +47,7 @@ public class SignUpPageObject extends BasePageObject {
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
 	private WebElement createAccountButton;
-	
+
 	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Oops, please fill in the username field.')]")
 	 private WebElement emptyUserNameValidationError;
 	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Someone already has this username. Try a different one!')]")
@@ -78,7 +74,7 @@ public class SignUpPageObject extends BasePageObject {
 		waitForElementByElement(blurryWordField);
 		PageObjectLogging.log("openSignUpPage ", "Sign up page opened " +driver.getCurrentUrl(), true, driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName
@@ -89,8 +85,8 @@ public class SignUpPageObject extends BasePageObject {
 		userNameField.sendKeys(Keys.TAB);
 		PageObjectLogging.log("typeInUserName ", "User name field populated " +userName, true, driver);
 	}
-	
-	
+
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -99,19 +95,19 @@ public class SignUpPageObject extends BasePageObject {
 		emailField.sendKeys(email);
 		PageObjectLogging.log("typeInEmail ", "Email field populated", true, driver);
 	}
-	
-	
+
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param password
 	 */
-	 
+
 	public void typeInPassword(String password)
 	{
 		passwordField.sendKeys(password);
 		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param month
@@ -129,10 +125,10 @@ public class SignUpPageObject extends BasePageObject {
 			d.selectByVisibleText(day);
 			y.selectByVisibleText(year);
 			m.selectByVisibleText(month);
-			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);			
+			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);
 		}
-	
-	
+
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -153,19 +149,19 @@ public class SignUpPageObject extends BasePageObject {
 		waitForElementClickableByElement(createAccountButton);
 		createAccountButton.click();
 	}
-	
-	
+
+
 	/**
 	 * @author Karol Kujawiak
 	 */
 	public AlmostTherePageObject submit(String email, String password)
 	{
 		MailFunctions.deleteAllMails(email, password);
-		clickAndWait(createAccountButton);
+		scrollAndClick(createAccountButton);
 		PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
 		return new AlmostTherePageObject(driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -174,7 +170,7 @@ public class SignUpPageObject extends BasePageObject {
 		waitForElementByElement(emptyUserNameValidationError);
 		PageObjectLogging.log("verifyUserNameValidation ", "empty user name validation verified", true);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -187,37 +183,37 @@ public class SignUpPageObject extends BasePageObject {
 	public void verifyWrongBlurryWordValidation(){
 		waitForElementByElement(WrongBlurryWordValidationError);
 		PageObjectLogging.log(
-			"verifyWrongBlurryWordValidation ", 
-			"wrong blurry word validation verified", 
+			"verifyWrongBlurryWordValidation ",
+			"wrong blurry word validation verified",
 			true, driver
 		);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
-	private String getWordFromCaptcha() 
+	private String getWordFromCaptcha()
 	{
 		try
 		{
-			String captchaId = CommonFunctions.getAttributeValue(blurryWordHidden, "value");
+			String captchaId = getAttributeValue(blurryWordHidden, "value");
 			String urlAd = Global.DOMAIN+ "wiki/Special:Captcha/image?wpCaptchaId="+ captchaId;
 			URL url = new URL(urlAd);
-			
-			
+
+
 			String md5 = md5(url.openStream());
-			if (md5 == null) 
+			if (md5 == null)
 			{
 				PageObjectLogging.log("getWordFromCaptcha", "mdp error", false);
 			}
-	
+
 			File file = Global.CAPTCHA_FILE;
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String strLine;
-			while ((strLine = in.readLine()) != null) 
+			while ((strLine = in.readLine()) != null)
 			{
 				String[] field = strLine.split(" ");
-				if (field[1].equals(md5)) 
+				if (field[1].equals(md5))
 				{
 					in.close();
 					PageObjectLogging.log("getWordFromCaptcha", "Captcha word decoded", true);
@@ -233,14 +229,14 @@ public class SignUpPageObject extends BasePageObject {
 			PageObjectLogging.log("getWordFromCaptcha", e.toString(), false);
 			e.printStackTrace();
 			return null;
-		} 
-		
+		}
+
 	}
 
 	/**
 	 * @author Karol Kujawiak
 	 */
-	private static String md5(InputStream is) 
+	private static String md5(InputStream is)
 		{
 		try
 		{

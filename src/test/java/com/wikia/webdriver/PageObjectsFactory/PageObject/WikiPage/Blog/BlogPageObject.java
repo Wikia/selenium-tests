@@ -59,19 +59,19 @@ public class BlogPageObject extends UserProfilePageObject {
 	public void followBlogPage(String userName){
 		unfollowBlogPage(userName);
 		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=watch");
-		clickAndWait(followSubmit);
+		scrollAndClick(followSubmit);
 		waitForElementByElement(followedButton);
 	}
 
 	public void followBlogPostPage(String userName, String postName){
 		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"/"+postName+"&action=watch");
-		clickAndWait(followSubmit);
+		scrollAndClick(followSubmit);
 		waitForElementByElement(followedButton);
 	}
 
 	public void unfollowBlogPage(String userName){
 		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=unwatch");
-		clickAndWait(followSubmit);
+		scrollAndClick(followSubmit);
 		waitForElementByElement(unfollowedButton);
 	}
 }

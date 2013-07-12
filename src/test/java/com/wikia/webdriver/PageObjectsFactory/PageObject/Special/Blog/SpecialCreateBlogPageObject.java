@@ -1,17 +1,19 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog;
 
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+
 public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 
-	
+
 	@FindBy(css="input[name='wpTitle']")
 	private WebElement blogTitleInput;
 	@FindBy(css="#ok")
@@ -19,10 +21,18 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 	@FindBy(css="input.control-button")
 	private WebElement publishButtonGeneral;
 
+	private String blogName;
+
 	public SpecialCreateBlogPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		blogName = PageContent.blogPostNamePrefix + getRandomDigits(5) + getRandomDigits(5);
 	}
+
+	public String getBlogName() {
+		return this.blogName;
+	}
+
 
 	/**
 	 * @author Michal Nowierski

@@ -1,15 +1,13 @@
 package com.wikia.webdriver.TestCases.LoginTests;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.DataProvider.LoginDataProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject.DropDownComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class LoginTests extends TestTemplate {
 
@@ -23,10 +21,10 @@ public class LoginTests extends TestTemplate {
             String userNameEnc
         ) {
             PageObjectLogging.log("Login_001_SpecialPage", userName, true);
-            CommonFunctions.logOut(driver);
             SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+            login.logOut(driver);
             login.loginAndVerify(userName, password);
-            CommonFunctions.logOut(driver);
+            login.logOut(driver);
 	}
 
 	@Test(
@@ -39,26 +37,14 @@ public class LoginTests extends TestTemplate {
             String userNameEnc
         ) {
             PageObjectLogging.log("Login_002_DropDown", userName, true);
-            CommonFunctions.logOut(driver);
+            SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+            login.logOut(driver);
             WikiBasePageObject base = new WikiBasePageObject(driver);
             base.openWikiPage();
             DropDownComponentObject dropDown = new DropDownComponentObject(driver);
             dropDown.openDropDown();
             dropDown.logIn(userName, password);
             base.verifyUserLoggedIn(userName);
-            CommonFunctions.logOut(driver);
-	}
-
-	@Test(groups = { "Login_003", ""})
-	public void Login_003_Facebook_dropDown() {
-            CommonFunctions.logOut(driver);
-
-            WikiBasePageObject base = new WikiBasePageObject(driver);
-            base.openWikiPage();
-            DropDownComponentObject dropdown = new DropDownComponentObject(driver);
-            dropdown.openDropDown();
-            dropdown.logInViaFacebook();
-            base.verifyUserLoggedIn(Properties.userNameFB);
-            CommonFunctions.logOut(driver);
+            login.logOut(driver);
 	}
 }

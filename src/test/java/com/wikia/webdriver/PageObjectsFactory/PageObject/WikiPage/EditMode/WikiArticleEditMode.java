@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +15,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -285,7 +283,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public WikiArticleSourceEditMode clickOnSourceButton() {
 		waitForElementByElement(sourceModeButton);
 		waitForElementClickableByElement(sourceModeButton);
-		clickAndWait(sourceModeButton);
+		scrollAndClick(sourceModeButton);
 		waitForElementByElement(sourceModeTextArea);
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
 		return new WikiArticleSourceEditMode(driver);
@@ -299,7 +297,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void clickOnVisualButton() {
 		waitForElementByElement(visualModeButton);
 		waitForElementClickableByElement(visualModeButton);
-		clickAndWait(visualModeButton);
+		scrollAndClick(visualModeButton);
 		waitForElementByElement(iFrame);
 		PageObjectLogging.log("ClickOnVisualButton", "Click on 'Visual' button", true);
 
@@ -307,7 +305,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
         public void clickOnPublish() {
             waitForElementClickableByElement(publishButton);
-            clickAndWait(publishButton);
+            scrollAndClick(publishButton);
         }
 
 	/**
@@ -320,7 +318,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void clickOnVisualButtonAndCheckJSalertThere(String alertMessage, Boolean ifAlertExpected) {
 		waitForElementByElement(visualModeButton);
 		waitForElementClickableByElement(visualModeButton);
-		clickAndWait(visualModeButton);
+		scrollAndClick(visualModeButton);
 		//The potential alert must be served right after alert-sensitive action:
 		//The alert check must come right after the action that might cause it. If it appear anywhere later, the potential alert will not be served.
 		checkJSalertIsThere(alertMessage, ifAlertExpected);
@@ -357,22 +355,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public WikiArticlePageObject clickOnPublishButtonPreview() {
 		waitForElementByElement(publishButtonPreview);
 		waitForElementClickableByElement(publishButtonPreview);
-		clickAndWait(publishButtonPreview);
+		scrollAndClick(publishButtonPreview);
 		PageObjectLogging.log("ClickOnPublishButtonPreview", "Click on 'Publish' button in preview", true, driver);
 
 		return new WikiArticlePageObject(driver);
-	}
-
-	/**
-	 * Hover your phisical mouse cursor over image. Identify image by its caption
-	 *
-	 * @author Michal Nowierski
-	 * @param caption Caption of the image
-	 * 	 */
-	public void hoverCursorOverImage(String caption) {
-		waitForElementByElement(iFrame);
-		CommonFunctions.MoveCursorToIFrameElement(By.cssSelector("img[data-rte-meta*='"+caption+"']"), iFrame);
-		PageObjectLogging.log("HoverCursorOverImage", "Hover your phisical mouse cursor over image.", true, driver);
 	}
 
 	public void typeInContent(String content)
@@ -509,7 +495,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void clickCancelButton() {
 		waitForElementByElement(cancelImageRemovalButton);
 		waitForElementClickableByElement(cancelImageRemovalButton);
-		clickAndWait(cancelImageRemovalButton);
+		scrollAndClick(cancelImageRemovalButton);
 		PageObjectLogging.log("LeftClickCancelButton", "Left Click on Cancel button", true, driver);
 
 	}
@@ -532,7 +518,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void clickOkButton() {
 		waitForElementByElement(oKbutton);
 		waitForElementClickableByElement(oKbutton);
-		clickAndWait(oKbutton);
+		scrollAndClick(oKbutton);
 		PageObjectLogging.log("LeftClickOkButton", "Left Click on Ok button on remove photo dialog", true, driver);
 
 
@@ -936,7 +922,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void categories_addCategoryEditMode(String categoryName) {
 		waitForElementByElement(categories_CategoryInputField);
 		waitForElementClickableByElement(categories_CategoryInputField);
-		clickAndWait(categories_CategoryInputField);
+		scrollAndClick(categories_CategoryInputField);
 		jQueryFocus("#CategorySelectInput");
 		categories_CategoryInputField.sendKeys(categoryName);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
@@ -952,7 +938,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void categories_addToCategorySourceEditMode(String textToBeAdded) {
 		waitForElementByElement(categories_CategorySourceInputField);
 		waitForElementClickableByElement(categories_CategorySourceInputField);
-		clickAndWait(categories_CategorySourceInputField);
+		scrollAndClick(categories_CategorySourceInputField);
 		categories_CategorySourceInputField.sendKeys(textToBeAdded);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();};
 		PageObjectLogging.log("categories_addCategorySourceEditMode", "category "+textToBeAdded.replaceAll("<", "&lt").replaceAll(">", "&gt")+" typed in the source mode", true, driver);
@@ -978,7 +964,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public String categories_addSuggestedCategoryEditMode(String givenString) {
 		waitForElementByElement(categories_CategoryInputField);
 		waitForElementClickableByElement(categories_CategoryInputField);
-		clickAndWait(categories_CategoryInputField);
+		scrollAndClick(categories_CategoryInputField);
 		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
 		categories_CategoryInputField.sendKeys(givenString);
 		List<WebElement> PromptsList  = driver.findElements(categories_listOfCategoriyPrompts);
@@ -987,7 +973,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(category);
 		String categoryName = category.getText();
 		waitForElementClickableByElement(category);
-		clickAndWait(category);
+		scrollAndClick(category);
 		PageObjectLogging.log("categories_addSuggestedCategoryEditMode", "suggested category "+categoryName+" added", true, driver);
 		return categoryName;
 	}
@@ -1220,33 +1206,33 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public PhotoAddComponentObject clickPhotoButton(){
 		waitForElementByElement(photoButton);
-		clickAndWait(photoButton);
+		scrollAndClick(photoButton);
 		PageObjectLogging.log("clickPhotoButton", "photo button clicked", true);
 		return new PhotoAddComponentObject(driver);
 	}
 
 	public VetAddVideoComponentObject clickVideoButton(){
 		waitForElementByElement(videoButton);
-		clickAndWait(videoButton);
+		scrollAndClick(videoButton);
 		PageObjectLogging.log("clickVideoButton", "video button clicked", true);
 		return new VetAddVideoComponentObject(driver);
 	}
 
 	public SliderBuilderComponentObject clickSliderButton(){
 		waitForElementByElement(sliderButton);
-		clickAndWait(sliderButton);
+		scrollAndClick(sliderButton);
 		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
 		return new SliderBuilderComponentObject(driver);
 	}
 	public SlideshowBuilderComponentObject clickSlideshowButton(){
 		waitForElementByElement(slideshowButton);
-		clickAndWait(slideshowButton);
+		scrollAndClick(slideshowButton);
 		PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
 		return new SlideshowBuilderComponentObject(driver);
 	}
 	public GalleryBuilderComponentObject clickGalleryButton(){
 		waitForElementByElement(galleryButton);
-		clickAndWait(galleryButton);
+		scrollAndClick(galleryButton);
 		PageObjectLogging.log("clickGallery", "gallery button clicked", true);
 		return new GalleryBuilderComponentObject(driver);
 	}

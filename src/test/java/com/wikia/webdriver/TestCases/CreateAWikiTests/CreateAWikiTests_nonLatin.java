@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.CreateAWikiTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
@@ -13,6 +12,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNew
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.NewWikiaHomePage;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CreateAWikiTests_nonLatin extends TestTemplate
 {
@@ -24,7 +24,8 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 	@Test(groups = {"CreateNewWiki_nonLatin_TC001","CNW"})
 	public void CreateNewWiki_nonLatin_TC001_user_name_does_not_exists()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login =  new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -47,7 +48,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		newWikia.verifyUserLoggedIn(Properties.userNameNonLatinEncoded);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
 
 	/*
@@ -58,7 +59,8 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 	@Test(groups = {"CreateNewWiki_nonLatin_TC002","CNW"})
 	public void CreateNewWiki_nonLatin_TC002_password_is_blank()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -81,7 +83,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		newWikia.verifyUserLoggedIn(Properties.userNameNonLatinEncoded);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
 
 	/*
@@ -92,7 +94,8 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 	@Test(groups = {"CreateNewWiki_nonLatin_TC003","CNW"})
 	public void CreateNewWiki_nonLatin_TC003_password_is_incorrect()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -116,7 +119,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		newWikia.verifyUserLoggedIn(Properties.userNameNonLatinEncoded);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
 
 	/*
@@ -127,7 +130,8 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 	@Test(groups = {"CreateNewWiki_nonLatin_TC004","CNW", "Smoke"})
 	public void CreateNewWiki_nonLatin_TC004_user_name_and_password_are_correct()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
@@ -146,6 +150,6 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		newWikia.closeCongratulationsLightBox();
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
 }

@@ -130,27 +130,27 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void clickPublishButton() {
-			clickAndWait(cssPublishButton);
+			scrollAndClick(cssPublishButton);
 			PageObjectLogging.log("clickCssPublishButton", "click on publish button", true);
 		}
 
 		public void clickPublishButtonDropdown() {
-			clickAndWait(cssPublishButtonDropdown);
+			scrollAndClick(cssPublishButtonDropdown);
 			PageObjectLogging.log("clickCssPublishButton", "click on publish button dropdown", true);
 		}
 
 		public void clickMinorCheckbox() {
-			clickAndWait(minorEdit);
+			scrollAndClick(minorEdit);
 			PageObjectLogging.log("minorEdit", "click on minor edit checkbox dropdown", true);
 		}
 
 		public void clickShowChanges() {
-			clickAndWait(showChanges);
+			scrollAndClick(showChanges);
 			PageObjectLogging.log("showChanges", "click on show changes from dropdown", true);
 		}
 
 		public void showChangesModal() {
-			clickAndWait(changesModal);
+			scrollAndClick(changesModal);
 			PageObjectLogging.log("changesModal", "modal with changes is displayed", true);
 		}
 
@@ -167,12 +167,12 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void clickHistoryButton() {
-			clickAndWait(historyButton);
+			scrollAndClick(historyButton);
 			PageObjectLogging.log("historyButton", "click on history button", true);
 		}
 
 		public void clickDeleteButton() {
-			clickAndWait(deleteButton);
+			scrollAndClick(deleteButton);
 			verifyUrl("action=delete");
 			PageObjectLogging.log("deleteButton", "click on delete button", true);
 		}
@@ -190,7 +190,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void clickUndeleteButton() {
-			clickAndWait(undeleteButton);
+			scrollAndClick(undeleteButton);
 			try {
 				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.mediaWikiCss, "UTF-8"));
 			} catch (UnsupportedEncodingException e) {
@@ -231,7 +231,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 		
 		public void clickTalkButton() {
-			clickAndWait(talkLink);
+			scrollAndClick(talkLink);
 			verifyUrl("/MediaWiki_talk:Wikia.css");
 		}
 		

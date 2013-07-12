@@ -32,7 +32,7 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 	}
 	public void clickAddPhoto(){
 		waitForElementByElement(addPhotoButton);
-		clickAndWait(addPhotoButton);
+		scrollAndClick(addPhotoButton);
 		waitForElementNotVisibleByElement(addPhotoButton);
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 	}

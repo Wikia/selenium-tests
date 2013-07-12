@@ -25,7 +25,7 @@ public class LightboxComponentObject extends BasePageObject{
 
 	public LightboxComponentObject openLightbox() {
 		waitForElementByElement(imageThumbnail);
-		clickAndWait(imageThumbnail);
+		scrollAndClick(imageThumbnail);
 		PageObjectLogging.log("openLightbox",
 			"opened ligthbox", true, driver);
 		return new LightboxComponentObject(driver);
