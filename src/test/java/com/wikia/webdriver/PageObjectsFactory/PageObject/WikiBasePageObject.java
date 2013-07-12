@@ -10,11 +10,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -125,6 +128,15 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
+    public String resetForgotPasswordTime(String userName) {
+		String[][] apiRequestParameters = {
+				{"action", ApiActions.apiActionForgotPassword},
+				{"user", userName},
+				{"token", Properties.apiToken},
+				{"format", "json"},
+		};
+		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
+	}
 
 	public void verifyModalLoginAppeared()
 	{
@@ -144,7 +156,7 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(Global.DOMAIN + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
 	}
-	
+
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
 		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
@@ -162,7 +174,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	/**
 	 * Verify that the Object appears on the page
-	 *  
+	 *
 	 * @author Michal Nowierski
 	 * @param Object Object = {gallery, slideshow}
 	 * 	 */
@@ -358,7 +370,7 @@ public class WikiBasePageObject extends BasePageObject {
     	   waitForElementNotVisibleByElement(editButton);
     	   PageObjectLogging.log("verifyEditButtonNotPresent",
     			   "edit button is not present", true);
-       }        
+       }
 
 	private void clickUndeleteArticle() {
 		waitForElementByElement(undeleteButton);
@@ -622,5 +634,18 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyRevisionMarkedAsMinor() {
 		waitForElementByElement(cssMinorEdit);
 		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+	}
+
+	public void logOut(WebDriver driver) {
+		try {
+			driver.manage().deleteAllCookies();
+			driver.get(Global.DOMAIN + "wiki/Special:UserLogout?noexternals=1");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector("a[data-id='login']")));
+		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 }

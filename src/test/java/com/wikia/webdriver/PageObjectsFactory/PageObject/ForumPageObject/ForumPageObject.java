@@ -70,7 +70,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 		WebElement forumBoardLink = getForumElementsList().get(forumBoardNumber-1);
 		waitForElementByElement(forumBoardLink);
 		waitForElementClickableByElement(forumBoardLink);
-		click(forumBoardLink);
+		clickAndWait(forumBoardLink);
 		PageObjectLogging.log("openForumBoard", "click on the forum Board number "+forumBoardNumber, true, driver);
 		return new ForumBoardPageObject(driver);
 	}

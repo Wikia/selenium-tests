@@ -219,7 +219,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		closeThreadTextarea.sendKeys(reason);
 		waitForElementByElement(removeThreadModal_removeButton);
 		waitForElementClickableByElement(removeThreadModal_removeButton);
-		click(removeThreadModal_removeButton);
+		clickAndWait(removeThreadModal_removeButton);
 		PageObjectLogging.log("closeThread", "closed thread with the following reason: "+reason, true, driver);
 	}
 

@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
@@ -20,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleSourceEditMode;
 
 public class ArticleSourceModeTests extends TestTemplate{
@@ -32,7 +32,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickBold();
@@ -45,7 +46,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickItalic();
@@ -58,7 +60,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickInternalLink();
@@ -71,7 +74,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickExternalLink();
@@ -84,7 +88,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickLvl2Headline();
@@ -97,7 +102,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickEmbedFile();
@@ -110,7 +116,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickEmbedMedia();
@@ -123,7 +130,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickMath();
@@ -136,7 +144,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickNowiki();
@@ -149,7 +158,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickSignature();
@@ -162,7 +172,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickHorizontalLine();
@@ -175,7 +186,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
@@ -192,7 +204,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddGallery();
@@ -213,7 +226,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddGallery();
@@ -237,7 +251,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddGallery();
@@ -259,7 +274,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
@@ -276,7 +292,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.checkMainTools();
 		source.clickOnPublishButton();
@@ -287,7 +304,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.checkWikiMarkupTools();
 		source.clickOnPublishButton();
@@ -298,7 +316,8 @@ public class ArticleSourceModeTests extends TestTemplate{
 		WikiArticleSourceEditMode source = new WikiArticleSourceEditMode(driver);
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.checkSymbolsTools();
 		source.clickOnPublishButton();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -96,7 +97,7 @@ public class MobileBasePageObject extends BasePageObject {
 				e.printStackTrace();
 			}
 //		}
-		click(loginFbButton);
+		clickAndWait(loginFbButton);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -241,5 +242,17 @@ public class MobileBasePageObject extends BasePageObject {
 
 	public void verifyCurtainClosed(){
 		Assertion.assertEquals("none", curtain.getCssValue("display"));
+	}
+
+	public void logOutMobile() {
+		try {
+			driver.manage().deleteAllCookies();
+			driver.get(Global.DOMAIN + "wiki/Special:UserLogout?noexternals=1");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		waitForElementByElement(loginDropDownTrigger);
+		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
 	}
 }

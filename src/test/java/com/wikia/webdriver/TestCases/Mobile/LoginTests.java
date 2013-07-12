@@ -2,7 +2,6 @@ package com.wikia.webdriver.TestCases.Mobile;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
@@ -19,7 +18,7 @@ public class LoginTests extends TestTemplate{
 		url = driver.getCurrentUrl();
 		mobile.login(Properties.userName, Properties.password);
 		mobile.verifyURLcontains(url);
-		CommonFunctions.logOutMobile(driver);
+		mobile.logOutMobile();
 	}
 
 /*	@Test(groups={"mobile", "mobile_facebook_login"})

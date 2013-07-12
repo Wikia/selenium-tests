@@ -1,13 +1,14 @@
 package com.wikia.webdriver.TestCases.MessageWallTests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class MessageWallTests extends TestTemplate
 {
@@ -19,7 +20,8 @@ public class MessageWallTests extends TestTemplate
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
@@ -33,7 +35,8 @@ public class MessageWallTests extends TestTemplate
 		String timeStamp = wall.getTimeStamp();
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessageNoTitle(message);
 		wall.clickPostNotitleButton();
@@ -47,7 +50,8 @@ public class MessageWallTests extends TestTemplate
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessageImage(title);
 		wall.clickPostButton();
@@ -61,7 +65,8 @@ public class MessageWallTests extends TestTemplate
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessageVideo(title, VideoContent.youtubeVideoURL3);
 		wall.clickPostButton();
@@ -77,7 +82,8 @@ public class MessageWallTests extends TestTemplate
 		String titleEdit = PageContent.messageWallTitleEditPrefix + timeStamp;
 		String messageEdit = PageContent.messageWallMessageEditPrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessageNoTitle(message);
 		wall.clickPostNotitleButton();
@@ -94,7 +100,8 @@ public class MessageWallTests extends TestTemplate
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessage(title, message);
 		wall.clickPreviewButton();
@@ -110,7 +117,8 @@ public class MessageWallTests extends TestTemplate
 		String Externallink = PageContent.externalLink;
 		String Internallink = PageContent.internalLink;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessageWithLink(Internallink, Externallink, title);
 		wall.clickPostButton();
@@ -124,7 +132,8 @@ public class MessageWallTests extends TestTemplate
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
@@ -141,7 +150,8 @@ public class MessageWallTests extends TestTemplate
 		String titleEdit = PageContent.messageWallTitleEditPrefix + timeStamp;
 		String messageEdit = PageContent.messageWallMessageEditPrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
@@ -158,12 +168,13 @@ public class MessageWallTests extends TestTemplate
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessageNonLatinPrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall012", "MessageWall" })
@@ -173,7 +184,8 @@ public class MessageWallTests extends TestTemplate
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeItalicMessage(title, message);
 		wall.clickPostButton();
@@ -188,7 +200,8 @@ public class MessageWallTests extends TestTemplate
 		String sourceMessage = "'''bold" + timeStamp + "'''";
 		String message = "bold" + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessageSourceMode(title, sourceMessage);
 		wall.clickPostButton();
@@ -202,7 +215,8 @@ public class MessageWallTests extends TestTemplate
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
@@ -211,7 +225,7 @@ public class MessageWallTests extends TestTemplate
 		threadHistory.verifyThreadHistory();
 		threadHistory.verifyThreadHistoryElements();
 		threadHistory.navigateBackToMessageWall();
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall015", "MessageWall" })
@@ -222,13 +236,14 @@ public class MessageWallTests extends TestTemplate
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		String message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
 		wall.openMessageWall(Properties.userName);
 		wall.writeBoldMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedBoldMessageWithTitle(title, message);
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 
 	}
-	
+
 }

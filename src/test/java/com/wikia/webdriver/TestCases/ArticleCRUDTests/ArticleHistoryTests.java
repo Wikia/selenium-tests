@@ -3,11 +3,8 @@ package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleRevisionEditMode;
@@ -22,10 +19,10 @@ public class ArticleHistoryTests extends TestTemplate
 	@Test(groups={"ArticleHistoryTests_001", "ArticleCRUDAdmin"})
 	public void ArticleHistoryTests_001_RecoverPreviousVersion()
 	{
-		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
@@ -49,9 +46,9 @@ public class ArticleHistoryTests extends TestTemplate
 		article.deleteArticle(article.getPageName());
 		article.openArticle(article.getPageName());
 		article.verifyDeletedArticlePage(article.getPageName());
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
-	
+
 	/**
 	 * only STAFF and admins can use rollback button
 	 * Rollback changes of user and verify: create article with content, then change that content and at the end undo changes using history. Check if undo changes is succesful
@@ -59,10 +56,10 @@ public class ArticleHistoryTests extends TestTemplate
 	@Test(groups={"ArticleHistoryTests_002", "ArticleCRUDAdmin"})
 	public void ArticleHistoryTests_002_RollbackVersion()
 	{
-		CommonFunctions.logOut(driver);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);		
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);		
+		login.logOut(driver);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
 		WikiArticleEditMode edit = article.createNewDefaultArticle();
 		edit.deleteArticleContent();
@@ -71,7 +68,7 @@ public class ArticleHistoryTests extends TestTemplate
 		edit.clickOnPublishButton();
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleText);
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(article.getPageName());
 		edit = article.edit();
@@ -81,7 +78,7 @@ public class ArticleHistoryTests extends TestTemplate
 		article = edit.clickOnPublishButton();
 		article.verifyPageTitle(article.getPageName());
 		article.verifyArticleText(PageContent.articleTextEdit);
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		article.openArticle(article.getPageName());
 		WikiHistoryPageObject history = article.openHistoryPage();
@@ -92,6 +89,6 @@ public class ArticleHistoryTests extends TestTemplate
 		article.deleteArticle(article.getPageName());
 		article.openArticle(article.getPageName());
 		article.verifyDeletedArticlePage(article.getPageName());
-		CommonFunctions.logOut(driver);
+		login.logOut(driver);
 	}
 }

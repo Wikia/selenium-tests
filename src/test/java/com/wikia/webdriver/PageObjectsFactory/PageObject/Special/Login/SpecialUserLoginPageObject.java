@@ -1,22 +1,40 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
-import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
 /**
- * 
+ *
  * @author Karol 'kkarolk' Kujawiak
  *
  */
@@ -53,7 +71,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		userName.sendKeys(name);
 		PageObjectLogging.log("typeInUserName", name+" user name typed", true, driver);
 	}
-	
+
 	/**
 	 * Special:UserLogin password field
 	 * @param pass
@@ -74,7 +92,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		newPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
-	
+
 	/**
 	 * Special:UserLogin for forgot password
 	 * @param pass
@@ -84,8 +102,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		retypeNewPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
-	
-	
+
+
 	/**
 	 * Special:UserLogin login button
 	 */
@@ -102,12 +120,12 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		waitForElementByElement(forgotPasswordLink);
 		clickAndWait(forgotPasswordLink);
 	}
-	
+
 	/**
 	 * Special:UserLogin
 	 * use if user is not on Special:UserLogin page
 	 * and verification after logging in is needed
-	 *  
+	 *
 	 * @param name
 	 * @param pass
 	 */
@@ -125,9 +143,9 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	/**
 	 * Special:UserLogin
-	 * use if user is on Special:UserLogin page 
+	 * use if user is on Special:UserLogin page
 	 * and no verification after logging in is needed
-	 * 
+	 *
 	 * @param name
 	 * @param pass
 	 */
@@ -144,7 +162,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	public void remindPassword(String name){
 		Assertion.assertEquals(
 			ApiActions.apiActionForgotPasswordResponse,
-			CommonFunctions.resetForgotPasswordTime(name));
+			resetForgotPasswordTime(name));
 		typeInUserName(name);
 		clickForgotPasswordLink();
 	}
@@ -188,5 +206,112 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 			"Message about new password sent present",
 			true, driver
 		);
+	}
+
+	public String logInCookie(String userName, String password) {
+		if (!Global.LOGIN_BY_COOKIE) {
+			SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+			login.loginAndVerify(userName, password);
+			return null;
+		} else {
+			try {
+				DefaultHttpClient httpclient = new DefaultHttpClient();
+
+				HttpPost httpPost = new HttpPost(Global.DOMAIN + "api.php");
+				List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+				nvps.add(new BasicNameValuePair("action", "login"));
+				nvps.add(new BasicNameValuePair("format", "xml"));
+				nvps.add(new BasicNameValuePair("lgname", userName));
+				nvps.add(new BasicNameValuePair("lgpassword", password));
+
+				httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+
+				HttpResponse response = null;
+
+				response = httpclient.execute(httpPost);
+
+				HttpEntity entity = response.getEntity();
+				String xmlResponse = null;
+
+				xmlResponse = EntityUtils.toString(entity);
+
+				String[] xmlResponseArr = xmlResponse.split("\"");
+				String token = xmlResponseArr[5];
+
+				// System.out.println(token);
+
+				while (xmlResponseArr.length < 11) {// sometimes first request
+					// does
+					// not contain full
+					// information,
+					// in such situation
+					// xmlResponseArr.length <
+					// 11
+					List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+
+					nvps2.add(new BasicNameValuePair("action", "login"));
+					nvps2.add(new BasicNameValuePair("format", "xml"));
+					nvps2.add(new BasicNameValuePair("lgname", userName));
+					nvps2.add(new BasicNameValuePair("lgpassword", password));
+					nvps2.add(new BasicNameValuePair("lgtoken", token));
+
+					httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
+							HTTP.UTF_8));
+
+					response = httpclient.execute(httpPost);
+
+					entity = response.getEntity();
+
+					xmlResponse = EntityUtils.toString(entity);
+
+					xmlResponseArr = xmlResponse.split("\"");
+				}
+
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "_session', '" + xmlResponseArr[13]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "UserName', '" + xmlResponseArr[7]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "UserID', '" + xmlResponseArr[5]
+						+ "', {'domain': 'wikia.com'})");
+				js.executeScript("$.cookie('" + xmlResponseArr[11]
+						+ "Token', '" + xmlResponseArr[9]
+						+ "', {'domain': 'wikia.com'})");
+				try {
+					driver.get(Global.DOMAIN + "Special:Random");
+				} catch (TimeoutException e) {
+					PageObjectLogging.log("loginCookie",
+							"page timeout after login by cookie", true);
+				}
+
+				driver.findElement(By
+						.cssSelector(".AccountNavigation a[href*='User:"
+								+ userName + "']"));// only for verification
+				PageObjectLogging.log("loginCookie",
+						"user was logged in by cookie", true, driver);
+				return xmlResponseArr[11];
+			} catch (UnsupportedEncodingException e) {
+				PageObjectLogging.log("logInCookie",
+						"UnsupportedEncodingException", false);
+				return null;
+			} catch (ClientProtocolException e) {
+				PageObjectLogging.log("logInCookie", "ClientProtocolException",
+						false);
+				return null;
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+		}
+
 	}
 }

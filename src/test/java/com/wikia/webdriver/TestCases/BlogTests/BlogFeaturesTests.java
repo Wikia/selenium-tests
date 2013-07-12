@@ -1,8 +1,9 @@
 package com.wikia.webdriver.TestCases.BlogTests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
@@ -16,10 +17,10 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import org.testng.annotations.Test;
 
 public class BlogFeaturesTests extends TestTemplate{
 
@@ -28,8 +29,9 @@ public class BlogFeaturesTests extends TestTemplate{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		GalleryBuilderComponentObject galleryBuiler = blogEdit.clickGalleryButton();
 		AddPhotoComponentObject galleryAddPhoto = galleryBuiler.clickAddPhoto();
@@ -51,8 +53,9 @@ public class BlogFeaturesTests extends TestTemplate{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		SlideshowBuilderComponentObject slideshowBuilder = blogEdit.clickSlideshowButton();
 		AddPhotoComponentObject slideshowAddPhoto = slideshowBuilder.clickAddPhoto();
@@ -70,8 +73,9 @@ public class BlogFeaturesTests extends TestTemplate{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		SliderBuilderComponentObject sliderBuilder = blogEdit.clickSliderButton();
 		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
@@ -90,8 +94,9 @@ public class BlogFeaturesTests extends TestTemplate{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		VetAddVideoComponentObject vetAddVideo = blogEdit.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -107,8 +112,9 @@ public class BlogFeaturesTests extends TestTemplate{
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp(); 
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName, Properties.password);
+		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
 		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
 		PhotoAddComponentObject photoAddPhoto = blogEdit.clickPhotoButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
