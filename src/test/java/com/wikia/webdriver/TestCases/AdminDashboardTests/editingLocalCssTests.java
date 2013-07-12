@@ -9,7 +9,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDas
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
 import org.testng.annotations.Test;
-import com.wikia.webdriver.Common.Core.Global;
 
 /**
  * tests are prepared to test the following feature: https://wikia-inc.atlassian.net/browse/DAR-136
@@ -35,7 +34,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 * https://wikia-inc.atlassian.net/browse/DAR-294
 	 */
 	@Test(groups = {"editingLocalCss_002", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_002_UserWithoudAdminRightsHasNoEditOption() {
+	public void editingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);
@@ -47,7 +46,7 @@ public class editingLocalCssTests extends TestTemplate {
 	 * https://wikia-inc.atlassian.net/browse/DAR-295
 	 */
 	@Test(groups = {"editingLocalCss_003", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_003_UserWithoudAdminRightsTriesToAccessWikiaCssUsingParameter() {
+	public void editingLocalCss_003_UserWithoutAdminRightsTriesToAccessWikiaCssUsingParameter() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userName, Properties.password);

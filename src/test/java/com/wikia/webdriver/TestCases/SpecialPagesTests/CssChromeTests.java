@@ -147,7 +147,7 @@ public class CssChromeTests extends TestTemplate {
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickUndeleteButton();
 		specialCss.confirmUndelete();
-		wiki.openArticle(URLsContent.specialCSS);
+		specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved();
 	}
@@ -164,8 +164,6 @@ public class CssChromeTests extends TestTemplate {
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.sendCssText(CssEditorContent.validCss);
-//		specialCss.clickPublishButtonDropdown();
-//		specialCss.clickHistoryButton();
 		specialCss.navigateToHistoryPage();
 		WebDriverWait wait = new WebDriverWait(driver, 2);
 		wait.until(ExpectedConditions.alertIsPresent());

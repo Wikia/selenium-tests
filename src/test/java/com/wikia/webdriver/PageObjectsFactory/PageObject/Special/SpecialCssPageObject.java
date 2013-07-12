@@ -183,10 +183,12 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 		public void verifyArticleIsRemoved() {
 			waitForElementByBy(removedWarning);
+			PageObjectLogging.log("verifyArticleIsRemoved", "Article is removed.", true);
 		}
 
 		public void verifyArticleIsNotRemoved() {
 			waitForElementNotPresent(removedWarning);
+			PageObjectLogging.log("verifyArticleIsNotRemoved", "Article is not removed.", true);
 		}
 
 		public void clickUndeleteButton() {
@@ -195,6 +197,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.mediaWikiCss, "UTF-8"));
 			} catch (UnsupportedEncodingException e) {
 				// this should never happen
+				PageObjectLogging.log("undeleteButton", "dont work", true);
 			}
 			PageObjectLogging.log("undeleteButton", "click on undelete button", true);
 		}
