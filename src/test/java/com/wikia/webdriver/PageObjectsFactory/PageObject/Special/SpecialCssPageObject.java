@@ -63,7 +63,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement talkBubble;
 		@FindBy(css = ".css-edit-box a.talk")
 		private WebElement talkLink;
-		@FindBy(css = "#WikiaMainContentContainer a.talk .commentsbubble")
+		@FindBy(css = "a.talk .commentsbubble")
 		private WebElement mwTalkBubble;
 		
 		public SpecialCssPageObject( WebDriver driver ) {

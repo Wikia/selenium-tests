@@ -6,6 +6,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginMonobookPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
 import org.testng.annotations.Test;
@@ -112,13 +113,14 @@ public class editingLocalCssTests extends TestTemplate {
 	 */
 	@Test(groups = {"editingLocalCss_008", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_008_MonobookUserWithAdminRightsOpensSpecialCss() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
 		loginMonobook.open();
 		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordMonobook, "");
 		loginMonobook.submitForm();
 		loginMonobook.verifyLogin();
 		WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
-		monobookArticle.openArticle(URLsContent.specialCSS);
+		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		monobookArticle.verifyOasisOnly();
 	}
 
