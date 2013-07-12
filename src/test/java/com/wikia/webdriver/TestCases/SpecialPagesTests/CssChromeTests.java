@@ -123,31 +123,25 @@ public class CssChromeTests extends TestTemplate {
 	}
 
 	@Test(groups = {"cssChrome_008", "cssChrome", "AdminDashboard"})
-	public void cssChrome_008_verifyDeleteButtonAppearsAndWorks() {
+	public void cssChrome_008_verifyDeleteAndUndeleteButtonAppearsAndWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		// delete
 		SpecialCssPageObject specialCss = wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved();
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickDeleteButton();
 		specialCss.confirmDelete();
-	}
-
-	@Test(groups = {"cssChrome_009", "cssChrome", "AdminDashboard"},
-			dependsOnMethods={"cssChrome_008_verifyDeleteButtonAppearsAndWorks"})
-	public void cssChrome_009_verifyUndeleteButtonAppearsAndWorks() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		// undelete
+		wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsRemoved();
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickUndeleteButton();
 		specialCss.confirmUndelete();
-		specialCss = wiki.openSpecialCss();
+		wiki.openSpecialCss();
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved();
 	}
@@ -156,8 +150,8 @@ public class CssChromeTests extends TestTemplate {
 	 * https://wikia-inc.atlassian.net/browse/DAR-731 story description
 	 * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
 	 */
-	@Test(groups = {"cssChrome_010", "cssChrome", "AdminDashboard"})
-	public void cssChrome_010_verifyOnLeaveMessageWorks() {
+	@Test(groups = {"cssChrome_009", "cssChrome", "AdminDashboard"})
+	public void cssChrome_009_verifyOnLeaveMessageWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
@@ -174,8 +168,8 @@ public class CssChromeTests extends TestTemplate {
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-999
 	 */
-	@Test(groups = {"cssChrome_011", "cssChrome", "AdminDashboard"})
-	public void cssChrome_011_verifyTalkButtonWorks() {
+	@Test(groups = {"cssChrome_010", "cssChrome", "AdminDashboard"})
+	public void cssChrome_010_verifyTalkButtonWorks() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
 		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
