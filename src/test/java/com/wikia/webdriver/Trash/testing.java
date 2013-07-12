@@ -1,13 +1,11 @@
 package com.wikia.webdriver.Trash;
 
-import org.testng.annotations.Test;
-
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Test;
+
+import com.wikia.webdriver.Common.Core.Assertion;
 
 public class testing
 {
@@ -30,7 +28,7 @@ public class testing
 //////		js.executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
 //////		driver.findElement(By.cssSelector("#article-comm")).click();
 //////		WebElement a = driver.findElement(By.cssSelector("nav[class='wikia-menu-button contribute secondary combined']"));
-//////		
+//////
 //////		for (int i=0; i<3; i++)
 //////		{
 //////			((JavascriptExecutor)driver).executeScript("$('.Video_Games').mouseenter()");
@@ -69,17 +67,17 @@ public class testing
 //////		b.executeScript("$('.Video_Games').mouseenter()");
 //////		a.click();
 //////		b.aaa();
-////		
+////
 ////	}
-////	
-//	
+////
+//
 //////aaaa
-//	
-////	
-////	
-////	
-////	
-////	
+//
+////
+////
+////
+////
+////
 ////	public void dragdrop(By ByFrom, By ByTo) {
 ////		WebElement LocatorFrom = driver.findElement(ByFrom);
 ////		WebElement LocatorTo = driver.findElement(ByTo);
@@ -89,10 +87,10 @@ public class testing
 ////		"simulate(arguments[0],\"mousedown\",0,0); simulate(arguments[0],\"mousemove\",arguments[1],arguments[2]); simulate(arguments[0],\"mouseup\",arguments[1],arguments[2]); ",
 ////		LocatorFrom,xto,yto);
 ////	}
-////	
-////	
+////
+////
 ////	@Test
-////	
+////
 ////	public void aaa()
 ////	{
 ////		driver.get("http://devfiles.myopera.com/articles/735/example.html");
@@ -100,8 +98,8 @@ public class testing
 ////		By locB = By.xpath("//li[contains(text(), 'Babyshambles')]");
 ////		dragdrop(locA, locB);
 ////	}
-//	
-//	
+//
+//
 //	@Test
 //	public void aaa()
 //	{
@@ -140,7 +138,7 @@ public class testing
 //		driver.switchTo().window(aaa[0].toString());
 //		b.waitForElementByCss("a img.avatar");
 //	}
-	
+
 //	@Test(groups={"aaa"})
 	public void numbers()
 	{
@@ -156,9 +154,9 @@ public class testing
 		System.out.println("********************************************2");
 		Assertion.assertEquals("aaaa", "aaaa");
 		System.out.println("********************************************3");
-		
+
 	}
-		
+
 //		BasePageObject b = new BasePageObject(driver);
 //		driver.get("http://mediawiki119.wikia.com/wiki/Formatting");
 //		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -170,5 +168,4 @@ public class testing
                 driver.findElement(By.cssSelector(".bognix"));
         }
 }
-	
-	
+
