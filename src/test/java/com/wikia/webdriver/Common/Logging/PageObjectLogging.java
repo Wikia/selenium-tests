@@ -24,7 +24,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener, LoggerInterface {
+public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
 	private By lastFindBy;
 	private WebDriver driver;
@@ -223,15 +223,4 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public void onFinish(ITestContext context) {
 		CommonUtils.appendTextToFile(logPath, "</body></html>");
 	}
-
-	@Override
-	public void log(String command, WebElement element, WebDriver driver) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void saveLogs() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
 }

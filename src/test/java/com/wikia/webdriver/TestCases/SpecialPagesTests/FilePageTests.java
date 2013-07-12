@@ -4,8 +4,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.DiffPage.DiffPagePageObject;
@@ -94,6 +92,6 @@ public class FilePageTests extends TestTemplate {
 
 		// After paging, article #4 should be at the top of the list
 		filePage.localAppearsPageNext();
-		filePage.verifyAppearsOn(URLsContent.articleName003);
+		filePage.verifyAppearsOn(URLsContent.articleName002);
 	}
 }

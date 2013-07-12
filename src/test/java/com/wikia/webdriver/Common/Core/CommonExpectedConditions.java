@@ -202,29 +202,28 @@ public class CommonExpectedConditions {
 	      }
 	    };
 	  }
-	  
-	  /**
-	   * An expectation for checking if the given text is present in the specified
-	   * element.
-	   */
-	  public static ExpectedCondition<Boolean> textToBePresentInElement(
-		final WebElement GivenElement, final String text) {
 
-	    return new ExpectedCondition<Boolean>() {
-	      public Boolean apply(WebDriver driver) {
-	          String elementText = GivenElement.getText();
-	          return elementText.contains(text);
-	      }
+	/**
+	* An expectation for checking if the given text is present in the specified
+	* element.
+	*/
+	public static ExpectedCondition<Boolean> textToBePresentInElement(
+	final WebElement GivenElement, final String text) {
 
-	      @Override
-	      public String toString() {
-	        return String.format("text ('%s') to be present in element %s",
-	            text, GivenElement.getTagName());
-	      }
-	    };
-	  }
-	  
-  	  
+		return new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				String elementText = GivenElement.getText();
+				return elementText.contains(text);
+			}
+
+			@Override
+			public String toString() {
+			return String.format("text ('%s') to be present in element %s",
+				text, GivenElement.getTagName());
+			}
+		};
+	}
+
 	  /**
 	   * Looks up an element. Logs and re-throws WebDriverException if thrown. <p/>
 	   * Method exists to gather data for http://code.google.com/p/selenium/issues/detail?id=1800

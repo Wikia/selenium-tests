@@ -371,43 +371,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	/**
-	 * Type given URL into RV modal
-	 *  
-	 * @author Michal Nowierski
-	 * @param videoURL URL of the video to be added
-	 * 	 */
-	public void typeInVideoURL(String videoURL) {
-		waitForElementByElement(videoRVmodalInput);		
-		videoRVmodalInput.clear();
-		videoRVmodalInput.sendKeys(videoURL);
-		PageObjectLogging.log("TypeInVideoURL", "Type given URL into RV modal", true, driver);
-	}
-
-	/**
-	 * Click on Add button on RV modal
-	 *  
-	 * @author Michal Nowierski
-	 * 	 */
-	public void clickOnRVModalAddButton() {
-		waitForElementByElement(VideoModalAddButton);
-		waitForElementClickableByElement(VideoModalAddButton);
-		clickAndWait((VideoModalAddButton));
-		PageObjectLogging.log("ClickOnRVModalAddButton", "Click on Add button on RV modal", true, driver);
-		
-	}
-
-	/**
-	 * Wait for processing the added video to finish
-	 *  
-	 * @author Michal Nowierski
-	 * 	 */
-	public void waitForProcessingToFinish() {
-		waitForElementNotVisibleByBy(RVvideoLoading);
-		PageObjectLogging.log("WaitForProcessingToFinish", "Wait for processing the added video to finish", true, driver);
-		
-	}
-
-	/**
 	 * Verify that video given by its name has been added to RV module
 	 *  
 	 * @author Michal Nowierski

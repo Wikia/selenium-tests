@@ -4,6 +4,7 @@ import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
 import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -22,6 +23,7 @@ public class NewTestTemplate {
 
 	protected WebDriver driver;
 	protected AbstractConfiguration config;
+	protected String wikiURL;
 
 	public NewTestTemplate() {
 		config = ConfigurationFactory.getConfig();
@@ -40,6 +42,9 @@ public class NewTestTemplate {
 	@BeforeMethod(alwaysRun = true)
 	public void start(Method method, Object[] data) {
 		startBrowser();
+		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
+		driver.get(wikiURL);
 	}
 
 	@AfterMethod(alwaysRun = true)
