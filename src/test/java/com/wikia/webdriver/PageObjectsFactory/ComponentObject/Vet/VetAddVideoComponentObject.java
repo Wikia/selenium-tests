@@ -71,7 +71,7 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	 */
 	private void clickAddButtonProvider(){
 		waitForElementByElement(addUrlButton);
-		clickAndWait(addUrlButton);
+		scrollAndClick(addUrlButton);
 		PageObjectLogging.log("clickAddButton", "add url button clicked", true, driver);
 	}
 
@@ -92,7 +92,7 @@ public class VetAddVideoComponentObject extends BasePageObject{
 	 */
 	private void clickFindButton(){
 		waitForElementByElement(findButton);
-		clickAndWait(findButton);
+		scrollAndClick(findButton);
 		PageObjectLogging.log("clickFindButton", "find button clicked", true, driver);
 	}
 

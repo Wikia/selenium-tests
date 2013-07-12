@@ -39,7 +39,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 
 	private void clickSearchButton(){
 		waitForElementByElement(searchButton);
-		clickAndWait(searchButton);
+		scrollAndClick(searchButton);
 		PageObjectLogging.log("Special:BlockList clickSearchButton", "search button clicked", true);
 	}
 	

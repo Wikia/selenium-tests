@@ -47,7 +47,7 @@ public class SpecialUnblockPageObject extends WikiBasePageObject{
 	
 	private void clickSubmitButton(){
 		waitForElementByElement(submitButton);
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("clickSubmitButton", "submit button clicked", true);
 	}
 	

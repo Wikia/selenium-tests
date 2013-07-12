@@ -17,7 +17,7 @@ public class Top_10_list_EditMode extends Top_10_list_EditonCore{
 
 	public Top_10_list clickSaveList() {
 		waitForElementByElement(savelistButton);
-		clickAndWait(savelistButton);
+		scrollAndClick(savelistButton);
 		PageObjectLogging.log("clickCreateList", "click on Create List button", true, driver);		
 		return new Top_10_list(driver);
 	}

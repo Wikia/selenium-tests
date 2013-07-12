@@ -69,14 +69,10 @@ public class BasePageObject{
 		return element.getAttribute(attributeName);
 	}
 
-//	/*
-//	 * Mouse events
-//	 */
-//
-//	public void clickAndWait(WebElement pageElem) {
-//		scrollToElement(pageElem);
-//		pageElem.click();
-//	}
+	/*
+	 * Mouse events
+	 */
+
 
 	public void clickActions(WebElement pageElem) {
 		try {
@@ -135,7 +131,7 @@ public class BasePageObject{
 	}
 
 
-	public void clickAndWait(WebElement pageElem)
+	public void scrollAndClick(WebElement pageElem)
 	{
 		try {
 			scrollToElement(pageElem);
@@ -577,7 +573,7 @@ public class BasePageObject{
 	public void notifications_clickOnNotificationsLogo() {
 		waitForElementByElement(notifications_ShowNotificationsLogo);
 		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		clickAndWait(notifications_ShowNotificationsLogo);
+		scrollAndClick(notifications_ShowNotificationsLogo);
 		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
 				"click on notifications logo on the upper right corner", true,
 				driver);
@@ -594,7 +590,7 @@ public class BasePageObject{
 	public void notifications_showNotificationsForWikiOnMenu() {
 		waitForElementByElement(notifications_NotificationsForWiki);
 		waitForElementClickableByElement(notifications_NotificationsForWiki);
-		clickAndWait(notifications_NotificationsForWiki);
+		scrollAndClick(notifications_NotificationsForWiki);
 		PageObjectLogging.log("notifications_showNotificationsForWiki",
 				"show the upper wiki notifications on menu", true, driver);
 	}
@@ -607,13 +603,13 @@ public class BasePageObject{
 	public void notifications_clickMarkAllAsRead(boolean allWikis) {
 		waitForElementByElement(notifications_MarkAllAsReadButton);
 		waitForElementClickableByElement(notifications_MarkAllAsReadButton);
-		clickAndWait(notifications_MarkAllAsReadButton);
+		scrollAndClick(notifications_MarkAllAsReadButton);
 		if (allWikis) {
 			waitForElementClickableByElement(notifications_MarkAllWikisAsReadButton);
-			clickAndWait(notifications_MarkAllWikisAsReadButton);
+			scrollAndClick(notifications_MarkAllWikisAsReadButton);
 		} else {
 			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
-			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);
+			scrollAndClick(notifications_MarkOnlyThisWikiAsReadButton);
 		}
 		PageObjectLogging.log("notifications_clickMarkAllAsRead",
 				(allWikis ? "all wikis" : "only one wiki") + " marked as read",

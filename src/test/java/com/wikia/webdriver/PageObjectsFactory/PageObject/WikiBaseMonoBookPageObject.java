@@ -66,7 +66,7 @@ public class WikiBaseMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void openUserProfile() {
         waitForElementByElement(userPageLink);
-        clickAndWait(userPageLink);
+        scrollAndClick(userPageLink);
         changeToMonoBook();
         PageObjectLogging.log(
             "enterUserProfile",

@@ -130,7 +130,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticlePageObject openRandomArticle() {
-		clickAndWait(randomPageButton);
+		scrollAndClick(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
 				"random page button clicked", true, driver);
@@ -192,7 +192,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	public void clickSubmitButton(String userName)
 	{
-		clickAndWait(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
+		scrollAndClick(driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']")));//submit button taken by username which edited comment
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
 	}
 
@@ -291,7 +291,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 */
 	public WikiArticleEditMode edit() {
             waitForElementByElement(editButton);
-            clickAndWait(editButton);
+            scrollAndClick(editButton);
             PageObjectLogging.log(
                 "edit",
                 "Edit article",
@@ -366,7 +366,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByBy(AddVideoRVButton);
 		scrollToElement(driver.findElement(AddVideoRVButton));
 		waitForElementClickableByBy(AddVideoRVButton);
-		clickAndWait(driver.findElement(AddVideoRVButton));
+		scrollAndClick(driver.findElement(AddVideoRVButton));
 		PageObjectLogging.log("ClickOnAddVideoRVModule", "Click On 'Add a video' button on RV module", true, driver);
 		return new VetAddVideoComponentObject(driver);
 	}
@@ -392,7 +392,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void clickOnRVModalAddButton() {
 		waitForElementByElement(VideoModalAddButton);
 		waitForElementClickableByElement(VideoModalAddButton);
-		clickAndWait((VideoModalAddButton));
+		scrollAndClick((VideoModalAddButton));
 		PageObjectLogging.log("ClickOnRVModalAddButton", "Click on Add button on RV modal", true, driver);
 
 	}
@@ -474,7 +474,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void categories_clickAddCategory() {
 		waitForElementByElement(categories_AddCategoryButton);
 		waitForElementClickableByElement(categories_AddCategoryButton);
-		clickAndWait(categories_AddCategoryButton);
+		scrollAndClick(categories_AddCategoryButton);
 		PageObjectLogging.log("categories_clickAddCategory", "Click on 'add Category' Button", true, driver);
 	}
 
@@ -499,7 +499,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void categories_clickOnSave() {
 		waitForElementByElement(categories_saveButton);
 		waitForElementClickableByElement(categories_saveButton);
-		clickAndWait(categories_saveButton);
+		scrollAndClick(categories_saveButton);
 		PageObjectLogging.log("categories_clickOnSave", "Click on 'Save' Button", true, driver);
 
 	}
@@ -595,13 +595,13 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
 		waitForElementByElement(videoAddPlaceholder);
-		clickAndWait(videoAddPlaceholder);
+		scrollAndClick(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
 	}
 
     public void clickAddVideoFromRail() {
         waitForElementByElement(addVideoWikiaRail);
-        clickAndWait(addVideoWikiaRail);
+        scrollAndClick(addVideoWikiaRail);
         PageObjectLogging.log(
             "clickAndVideoOnWikiaRail",
             "Button add video on wikia rail is clicked",
@@ -626,7 +626,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public GalleryBuilderComponentObject clickAddPhotoToGallery(){
-		clickAndWait(addPhotoToGalleryButton);
+		scrollAndClick(addPhotoToGalleryButton);
 		return new GalleryBuilderComponentObject(driver);
 	}
 	public SlideshowBuilderComponentObject clickAddPhotoToSlideshow(){

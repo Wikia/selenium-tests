@@ -97,7 +97,7 @@ public class MobileBasePageObject extends BasePageObject {
 				e.printStackTrace();
 			}
 //		}
-		clickAndWait(loginFbButton);
+		scrollAndClick(loginFbButton);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -124,7 +124,7 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void submitLogin() {
-		clickAndWait(loginButton);
+		scrollAndClick(loginButton);
 		waitForElementByElement(avatar);
 		PageObjectLogging.log("submitLogin", "login submit button clicked",
 				true, driver);
@@ -154,7 +154,7 @@ public class MobileBasePageObject extends BasePageObject {
 	public MobileArticlePageObject openRandomPage() {
 		triggerMainMenu();
 		waitForElementByElement(randomPageButton);
-		clickAndWait(randomPageButton);
+		scrollAndClick(randomPageButton);
 		waitForElementByElement(mainMenuTrigger);
 		PageObjectLogging.log("openRandomPage", "randomPageOpened", true,
 				driver);

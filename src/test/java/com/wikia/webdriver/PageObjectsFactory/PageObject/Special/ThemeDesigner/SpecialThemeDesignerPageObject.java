@@ -74,22 +74,22 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		waitForElementByElement(themes.get(0));
 		if (number <5){
 			waitForElementByElement(themes.get(number));
-			clickAndWait(themes.get(number));
+			scrollAndClick(themes.get(number));
 		}
 		if(number >=5 && number <10){
-			clickAndWait(nextButton);
+			scrollAndClick(nextButton);
 			waitForElementByElement(secondThemesSet);
 			waitForElementByElement(themes.get(number));
-			clickAndWait(themes.get(number));
+			scrollAndClick(themes.get(number));
 		}
 		if(number==10){
-			clickAndWait(nextButton);
+			scrollAndClick(nextButton);
 			waitForElementByElement(secondThemesSet);
 			waitForElementByElement(themes.get(7));
-			clickAndWait(nextButton);
+			scrollAndClick(nextButton);
 			waitForElementByElement(thirdThemesSet);
 			waitForElementByElement(themes.get(number));
-			clickAndWait(themes.get(number));
+			scrollAndClick(themes.get(number));
 		}
 		String themeName = themes.get(number).findElement(By.cssSelector("label")).getText().toLowerCase();
 		PageObjectLogging.log("selectTheme", "theme "+themeName+" selected", true);
@@ -103,14 +103,14 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 	
 	public void submitThemeSelection(){
-		clickAndWait(saveButton);
+		scrollAndClick(saveButton);
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
 	}
 	
 	public void selectTab(String tabName){
 		WebElement tab = waitForElementByCss("a[rel='"+tabName+"Tab']");
-		clickAndWait(tab);
+		scrollAndClick(tab);
 		waitForElementByCss("li.selected a[rel='"+tabName+"Tab']");
 		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
 	}

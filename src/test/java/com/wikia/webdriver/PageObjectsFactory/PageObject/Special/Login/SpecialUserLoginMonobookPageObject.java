@@ -54,7 +54,7 @@ public class SpecialUserLoginMonobookPageObject extends BaseMonoBookPageObject {
 
     public void submitForm() {
         waitForElementByElement(submitButton);
-        clickAndWait(submitButton);
+        scrollAndClick(submitButton);
         PageObjectLogging.log(
             "submitSpecialLoginForm",
             "login form on special page submitted",

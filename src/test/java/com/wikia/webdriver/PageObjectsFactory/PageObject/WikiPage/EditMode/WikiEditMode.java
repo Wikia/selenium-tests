@@ -47,7 +47,7 @@ public class WikiEditMode extends WikiBasePageObject{
 	public WikiArticlePageObject clickOnPublishButtonAndCheckJSalertNotThere(String alertMessage) {
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-		clickAndWait(publishButtonGeneral);
+		scrollAndClick(publishButtonGeneral);
 		checkJSalertIsThere(alertMessage, false);
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("clickOnPublishButtonAndCheckJSalertNotThere", "Click on 'Publish' button and check there is no JS alert", true, driver);

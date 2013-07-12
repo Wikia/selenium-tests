@@ -157,7 +157,7 @@ public class SignUpPageObject extends BasePageObject {
 	public AlmostTherePageObject submit(String email, String password)
 	{
 		MailFunctions.deleteAllMails(email, password);
-		clickAndWait(createAccountButton);
+		scrollAndClick(createAccountButton);
 		PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
 		return new AlmostTherePageObject(driver);
 	}

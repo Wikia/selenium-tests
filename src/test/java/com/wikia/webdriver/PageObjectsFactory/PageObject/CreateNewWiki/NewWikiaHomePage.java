@@ -42,7 +42,7 @@ public class NewWikiaHomePage extends WikiBasePageObject{
 	public void closeCongratulationsLightBox()
 	{
 		waitForElementByElement(congratulationLightBoxCloseButton);
-		clickAndWait(congratulationLightBoxCloseButton);
+		scrollAndClick(congratulationLightBoxCloseButton);
 		PageObjectLogging.log("closeCongratulationsLightBox ", "Congratulations lightbox closed", true);
 	}
 	

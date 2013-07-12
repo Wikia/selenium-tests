@@ -58,7 +58,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickCustomize() {
 		waitForElementByElement(customizeButton);
 		waitForElementClickableByElement(customizeButton);
-		clickAndWait(customizeButton);
+		scrollAndClick(customizeButton);
 		PageObjectLogging.log("customizeToolbar_ClickCustomize", "Clicks on 'Customize' button.", true, driver);
 
 	}
@@ -72,7 +72,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickResetDefaults() {
 		waitForElementByElement(resetDefaultsButton);
 		waitForElementClickableByElement(resetDefaultsButton);
-		clickAndWait(resetDefaultsButton);
+		scrollAndClick(resetDefaultsButton);
 		PageObjectLogging.log("customizeToolbar_ClickOnResetDefaults", "Click on 'ResetDefaults' button.", true, driver);
 
 	}
@@ -115,7 +115,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickSaveNewName() {
 		waitForElementByElement(saveItemDialogInput);
 		waitForElementClickableByElement(saveItemDialogInput);
-		clickAndWait(saveItemDialogInput);
+		scrollAndClick(saveItemDialogInput);
 		PageObjectLogging.log("customizeToolbar_saveInRenameItemDialog", "Click on 'save' button on Rename Item dialog.", true, driver);
 
 	}
@@ -129,7 +129,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickSearchSuggestion(String Tool) {
 		waitForElementByCss("div.autocomplete div[title='"+Tool+"']");
 		waitForElementClickableByCss("div.autocomplete div[title='"+Tool+"']");
-		clickAndWait(driver.findElement(By.cssSelector("div.autocomplete div[title='"+Tool+"']")));
+		scrollAndClick(driver.findElement(By.cssSelector("div.autocomplete div[title='"+Tool+"']")));
 		PageObjectLogging.log("customizeToolbar_ClickOnFoundTool", "Click on "+Tool, true, driver);
 
 	}
@@ -148,11 +148,11 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 			// Unfortunately Firefox can't click on this parent element, so the code must be browser-dependent
 			WebElement parent = element.findElement(By.xpath(".."));
 			waitForElementClickableByElement(parent);
-			clickAndWait(parent);
+			scrollAndClick(parent);
 		}
 		else {
 			waitForElementClickableByElement(element);
-			clickAndWait(element);
+			scrollAndClick(element);
 		}
 		PageObjectLogging.log("customizeToolbar_ClickOnFoundTool", "Click on "+Tool_dataname, true, driver);
 	}
@@ -239,7 +239,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickSave() {
 		waitForElementByElement(saveButton);
 		waitForElementClickableByElement(saveButton);
-		clickAndWait(saveButton);
+		scrollAndClick(saveButton);
 		PageObjectLogging.log("customizeToolbar_ClickOnSaveButton", "Click on 'save' button.", true, driver);
 
 	}
