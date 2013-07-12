@@ -26,6 +26,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultiple
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -138,6 +139,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
 		return new SpecialVideosPageObject(driver);
+	}
+	
+	public SpecialFBConnectPageObject openSpecialFBConnectPage() {
+		getUrl(Global.DOMAIN+URLsContent.specialConnect);
+		return new SpecialFBConnectPageObject(driver);		
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {

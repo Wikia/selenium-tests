@@ -27,6 +27,7 @@ public class URLsContent {
 	public static final String specialAddBlogPost = "wiki/Special:CreateBlogPage";
 	public static final String specialAddBlogListingPage = "wiki/Special:CreateBlogListingPage";
 	public static final String specialNewFiles = "wiki/Special:NewFiles";
+	public static final String specialConnect = "wiki/Special:Connect";
 	public static final String specialNewVideo = "wiki/Special:Videos";
 	public static final String specialUpload = "wiki/Special:Upload";
 	public static final String specialMultipleUpload = "wiki/Special:MultipleUpload";
