@@ -19,13 +19,13 @@ import org.openqa.selenium.support.FindBys;
 public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 
 	private final String listOfLinksSelector = ".special > li > a";
-	private String linksLimit = "a[href*=\"/wiki/Special:Multiwikifinder?limit=%n%&offset=0&target=%k%\"]";
+	private final String linksLimit = "a[href*=\"/wiki/Special:Multiwikifinder?limit=%limit%&offset=0&target=%target%\"]";
 
 	@FindBy(css="#mw-content-text input[type=submit]")
 	private WebElement findButton;
 	@FindBy(css="input[name=target]")
 	private WebElement enterPagenameField;
-	@FindBy(css=".AdminDashboardGeneralHeader.AdminDashboardArticleHeader > h1")
+	@FindBy(css=".AdminDashboardArticleHeader > h1")
 	private WebElement multiWikiFinderPageHeader;
 	@FindBy(css = ".mw-nextlink")
 	private WebElement nextResultsButton;
@@ -66,8 +66,8 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 	}
 
 	public void limitResults(String pageName, int limit) {
-		String limitCssSelector = linksLimit.replace("%n%", Integer.toString(limit));
-		String newLimitCssSelector = limitCssSelector.replace("%k%", pageName);
+		String limitCssSelector = linksLimit.replace("%limit%", Integer.toString(limit));
+		String newLimitCssSelector = limitCssSelector.replace("%target%", pageName);
 		WebElement limitButton = driver.findElement(By.cssSelector(newLimitCssSelector));
 		limitButton.click();
 	}
