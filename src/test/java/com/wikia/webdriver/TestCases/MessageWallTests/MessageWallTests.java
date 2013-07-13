@@ -230,5 +230,39 @@ public class MessageWallTests extends TestTemplate
 		CommonFunctions.logOut(driver);
 
 	}
-	
+
+	@Test(groups = {"MessageWall016", "MessageWall" })
+	public void MessageWall_016_CloseThread() {
+
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
+		String timeStamp = wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
+		wall.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		wall.openMessageWall(Properties.userNameStaff);
+		wall.writeMessage(title, message);
+		wall.clickPostButton();
+		wall.verifyPostedMessageWithTitle(title, message);
+		wall.closeThread("reason");
+		CommonFunctions.logOut(driver);
+	}
+
+	@Test(groups = {"MessageWall017", "MessageWall" })
+	public void MessageWall_017_CloseAndReopenThread() {
+
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
+		String timeStamp = wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix + timeStamp;
+		String message = PageContent.messageWallMessagePrefix + timeStamp;
+		wall.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		wall.openMessageWall(Properties.userNameStaff);
+		wall.writeMessage(title, message);
+		wall.clickPostButton();
+		wall.verifyPostedMessageWithTitle(title, message);
+		wall.closeThread("reason");
+		wall.reopenThread();
+		CommonFunctions.logOut(driver);
+	}
 }
