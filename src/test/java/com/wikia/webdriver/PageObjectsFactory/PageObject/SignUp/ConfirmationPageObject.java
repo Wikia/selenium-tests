@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class ConfirmationPageObject extends BasePageObject{
@@ -54,7 +53,7 @@ public class ConfirmationPageObject extends BasePageObject{
 	public UserProfilePageObject clickSubmitButton(String email, String password)
 	{
 		MailFunctions.deleteAllMails(email, password);
-		clickAndWait(confirmationButton);
+		scrollAndClick(confirmationButton);
 		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);
 		return new UserProfilePageObject(driver);
 	}

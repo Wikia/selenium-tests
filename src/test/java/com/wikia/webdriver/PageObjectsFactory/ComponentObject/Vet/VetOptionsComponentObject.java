@@ -109,13 +109,13 @@ public class VetOptionsComponentObject extends BasePageObject{
 	 */
 	private void clickAddaVideo() {
 		waitForElementByElement(addAvideo);
-		clickAndWait(addAvideo);
+		scrollAndClick(addAvideo);
 		PageObjectLogging.log("clickAddaVideo", "add video button clicked",  true, driver);
 	}
 
 	private void clickRetunToEditing(){
 		waitForElementByElement(returnToEditing);
-		clickAndWait(returnToEditing);
+		scrollAndClick(returnToEditing);
 		PageObjectLogging.log("clickReturnToEditing", "return to editing button clicked",  true, driver);
 	}
 
@@ -192,7 +192,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 
 	public void clickUpdateVideo() {
 		waitForElementByElement(updateVideoButton);
-		clickAndWait(updateVideoButton);
+		scrollAndClick(updateVideoButton);
 		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true, driver);
 	}
 

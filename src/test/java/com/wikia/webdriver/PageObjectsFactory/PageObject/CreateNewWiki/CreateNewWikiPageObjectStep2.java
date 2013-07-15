@@ -46,7 +46,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 	public CreateNewWikiPageObjectStep3 submit()
 	{
 		waitForElementByElement(submitButton);
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
 		return new CreateNewWikiPageObjectStep3(driver);
 	}

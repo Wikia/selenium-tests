@@ -240,7 +240,7 @@ public class WamPageObject extends BasePageObject {
 
 	public void clickNextPaginator() {
 		waitForElementByElement(paginationNext);
-		clickAndWait(paginationNext);
+		scrollAndClick(paginationNext);
 		PageObjectLogging.log("clickNextPaginator", "next button in pagination was clicked", true);
 	}
 

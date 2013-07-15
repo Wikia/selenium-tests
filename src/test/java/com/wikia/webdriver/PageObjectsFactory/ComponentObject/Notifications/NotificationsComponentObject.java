@@ -75,7 +75,7 @@ public class NotificationsComponentObject extends BasePageObject{
 	 */
 	public void clickNotifications() {
 		waitForElementByElement(notificationsBubbles);
-		clickAndWait(notificationsBubbles);
+		scrollAndClick(notificationsBubbles);
 		PageObjectLogging.log("clickshowNotifications", "click on notifications bubbles", true, driver);
 	}
 

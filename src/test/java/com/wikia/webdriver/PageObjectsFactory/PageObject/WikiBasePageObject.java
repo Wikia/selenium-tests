@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.*;
@@ -177,27 +176,9 @@ public class WikiBasePageObject extends BasePageObject {
 		mouseRelease("#GlobalNavigation li:nth(1)");
 		waitForElementByElement(editButton);
 		waitForElementClickableByElement(editButton);
-		clickAndWait(editButton);
+		scrollAndClick(editButton);
 		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
 		return new WikiArticleEditMode(driver);
-	}
-
-	protected void scrollToElement(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			js.executeScript(
-				"var x = $(arguments[0]);"
-				+ "window.scroll(0,x.position()['top']+x.height()+100);"
-				+ "$(window).trigger('scroll');",
-				element
-			);
-		} catch (WebDriverException e) {
-			if (e.getMessage().contains(XSSContent.noJQueryError)) {
-				PageObjectLogging.log(
-					"JSError", "JQuery is not defined", false
-				);
-			}
-		}
 	}
 
 	public WikiArticleEditMode navigateToEditPage() {
@@ -209,12 +190,12 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
-		driver.get(driver.getCurrentUrl() + URLsContent.actionEditParameter);
+		getUrl(driver.getCurrentUrl() + URLsContent.actionEditParameter);
 		return new VisualEditModePageObject(driver);
 	}
 
-	public VisualEditModePageObject goToArticleEditPage(String wiki, String article) {
-		driver.get(wiki + URLsContent.wikiDir + article + URLsContent.actionEditParameter);
+	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
+		getUrl(wikiURL + URLsContent.wikiDir + article + URLsContent.actionEditParameter);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -233,7 +214,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(deleteCommentReasonField);
 		deleteCommentReasonField.clear();
 		deleteCommentReasonField.sendKeys("QAReason");
-		clickAndWait(deleteConfirmationButton);
+		scrollAndClick(deleteConfirmationButton);
 		waitForElementByElement(deleteCommentConfirmationMessage);
 	}
 
@@ -292,7 +273,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(confirmRenamePageButton);
 		renameArticleField.clear();
 		renameArticleField.sendKeys(articleNewName);
-		clickAndWait(confirmRenamePageButton);
+		scrollAndClick(confirmRenamePageButton);
 	}
 
         public void verifyArticleRenamed(String articleName, String articleNewName) {
@@ -310,7 +291,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	protected void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
-		clickAndWait(restoreButton);
+		scrollAndClick(restoreButton);
 		waitForElementByElement(userMessage);
 		PageObjectLogging.log(
 				"clickUndeleteArticle",
@@ -325,7 +306,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialRestorePageObject(driver);
 	}
 
-	public void verifyFlashMessage() {
+	public void verifyNotificationMessage() {
 		waitForElementVisibleByElement(flashMessage);
 		flashMessageClose.click();
 		waitForElementNotVisibleByElement(flashMessage);
@@ -396,7 +377,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public ArticlePageObject openRandomArticleOnWiki(String wikiURL) {
-		driver.get(wikiURL + URLsContent.specialRandom);
+		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);
 	}
 
@@ -460,7 +441,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialCreatePagePageObject openSpecialCreatePage(String wikiURL) {
-		driver.get(wikiURL + URLsContent.specialCreatePage);
+		getUrl(wikiURL + URLsContent.specialCreatePage);
 		return new SpecialCreatePagePageObject(driver);
 	}
 
@@ -482,7 +463,7 @@ public class WikiBasePageObject extends BasePageObject {
                 "Link to login special page present",
                 true, driver
             );
-            clickAndWait(specialUserLoginLink);
+            scrollAndClick(specialUserLoginLink);
             PageObjectLogging.log(
                 "LoginLinkClicked",
                 "Link to login special page clicked",
@@ -504,7 +485,7 @@ public class WikiBasePageObject extends BasePageObject {
         public void clickContributeNewPage() {
             clickContributeButton();
             waitForElementVisibleByElement(contributeAddPage);
-            clickAndWait(contributeAddPage);
+            scrollAndClick(contributeAddPage);
         }
 
         public void logInViaModal(String userName, String password) {
@@ -518,7 +499,7 @@ public class WikiBasePageObject extends BasePageObject {
                 true, driver
             );
 
-            clickAndWait(modalLoginSubmit);
+            scrollAndClick(modalLoginSubmit);
             PageObjectLogging.log(
                 "LoginFormSubmitted",
                 "Login form is submitted",

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
@@ -87,6 +88,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
 		contributeDropdown.click();
+		waitForElementVisibleByElement(addArticleInDropdown);
 		addArticleInDropdown.click();
 		articleTitleInputModal.sendKeys(articleTitle);
 		submitModal.click();
@@ -99,8 +101,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public MiniEditorComponentObject triggerCommentArea() {
-		scrollToElement(allCommentsArea);
-		commentArea.click();
+		scrollAndClick(commentArea);
 		waitForElementNotVisibleByElement(commentAreaLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
 	}
@@ -138,7 +139,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyCommentCreator(String userName) {
 		WebElement mostRecentComment = articleComments.get(0);
 		WebElement editedByArea = mostRecentComment.findElement(By.cssSelector(commentAuthorLink));
-		waitForTextToBePresentInElementByElement(editedByArea, userName);
+		waitForElementVisibleByElement(editedByArea);
 		Assertion.assertStringContains(editedByArea.getText(), userName);
 	}
 
@@ -158,14 +159,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyCommentReply(String reply) {
 		WebElement mostRecentReply = commentReplies.get(0);
-		waitForTextToBePresentInElementByElement(mostRecentReply, reply);
+		waitForElementVisibleByElement(mostRecentReply);
 		Assertion.assertStringContains(mostRecentReply.getText(), reply);
 	}
 
 	public void verifyReplyCreator(String userName) {
 		WebElement mostRecentReply = commentReplies.get(0);
 		WebElement editedByArea = mostRecentReply.findElement(By.cssSelector(commentAuthorLink));
-		waitForTextToBePresentInElementByElement(editedByArea, userName);
+		waitForElementVisibleByElement(editedByArea);
 		Assertion.assertStringContains(editedByArea.getText(), userName);
 	}
 
@@ -193,6 +194,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementVisibleByElement(deleteDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		waitForElementVisibleByElement(protectDropdown);
+		Assertion.assertEquals(editDropdownElements.size(), 4);
+		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for admin", true);
 	}
 
 	public void verifyDropdownForUser() {
@@ -200,11 +203,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementVisibleByElement(historyDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 2);
+		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for user", true);
 	}
 
 	public void verifyDropdownForAnon() {
 		articleEditDropdown.click();
 		waitForElementVisibleByElement(historyDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 1);
+		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
 	}
 }

@@ -108,7 +108,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void openMessageWallThread(String title) {
 		for (WebElement elem : messageTitlesList) {
 			if (elem.getText().contains(title)) {
-				clickAndWait(elem);
+				scrollAndClick(elem);
 				break;
 			}
 		}
@@ -176,7 +176,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public void writeMessageVideo(String title, String url)
 	{
-		clickAndWait(messageTitleField);
+		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
 		miniEditor.addVideoMiniEditor(url);
@@ -209,7 +209,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void clickReplyButton() {
 		waitForElementByElement(replyButton);
 		waitForElementClickableByElement(replyButton);
-		clickAndWait(replyButton);
+		scrollAndClick(replyButton);
 		PageObjectLogging.log("clickReplyButton", "reply button clicked", true, driver);
 	}
 
@@ -307,13 +307,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		if (Global.BROWSER.equals("IE")) {
 
 			WebElement removeMessageReasonParent = getParentElement(removeMessageReason);
-			clickAndWait(removeMessageReasonParent);
+			scrollAndClick(removeMessageReasonParent);
 			removeMessageReasonParent.sendKeys(reason);
-			clickAndWait(removeMessageConfirmButton);
+			scrollAndClick(removeMessageConfirmButton);
 		}
 		else {
 			removeMessageReason.sendKeys(reason);
-			clickAndWait(removeMessageConfirmButton);
+			scrollAndClick(removeMessageConfirmButton);
 		}
 
 		waitForElementByElement(removeMessageConfirmation);
@@ -329,7 +329,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		waitForElementByElement(editMessageButton);
-		clickAndWait(editMessageButton);
+		scrollAndClick(editMessageButton);
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"\"");
 		PageObjectLogging.log("clickEditMessage", "edit message button is clicked", true);
 	}
@@ -341,7 +341,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		waitForElementByElement(historyButton);
-		clickAndWait(historyButton);
+		scrollAndClick(historyButton);
 		PageObjectLogging.log("openHistory", "open History page of the newest thread", true, driver);
 		return new MessageWallHistoryPageObject(driver);
 	}
@@ -359,7 +359,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		driver.switchTo().defaultContent();
 
 		waitForElementByElement(elem);
-		clickAndWait(messageTitleEditField2);
+		scrollAndClick(messageTitleEditField2);
 		messageTitleEditField2.sendKeys(Keys.TAB);
 		driver.switchTo().frame(elem);
 //		messageBodyField.sendKeys(message);
@@ -374,7 +374,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 		if (Global.BROWSER.equals("IE")) {
 			driver.switchTo().frame(elem);
-			clickAndWait(messageBodyField);
+			scrollAndClick(messageBodyField);
 			miniEditor.writeMiniEditor(Keys.TAB);
 			miniEditor.writeMiniEditor(Keys.ENTER);
 //			messageBodyField.sendKeys(Keys.TAB);
@@ -382,7 +382,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 			driver.switchTo().defaultContent();
 		}
 		else {
-			clickAndWait(saveEditButton);
+			scrollAndClick(saveEditButton);
 		}
 		PageObjectLogging.log("writeEditMessage", "message edited", true, driver);
 	}
@@ -396,12 +396,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public void clickPublishButton() {
 		waitForElementByElement(publishButton);
-		clickAndWait(publishButton);
+		scrollAndClick(publishButton);
 		PageObjectLogging.log("clickPublishButton", "publish button is clicked", true, driver);
 	}
 
 	public void writeMessageWithLink(String internalLink, String externalLink, String title) {
-		clickAndWait(messageTitleField);
+		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
 		miniEditor.addInternalLink(internalLink);
@@ -418,10 +418,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	}
 
 	public void writeMessageSourceMode(String title, String message) {
-		clickAndWait(messageTitleField);
+		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-		clickAndWait(sourceModeButton);
+		scrollAndClick(sourceModeButton);
 		waitForElementByElement(sourceModeTextarea);
 		sourceModeTextarea.sendKeys(message);
 		PageObjectLogging.log("writeMessageSourceMode", "message in source mode is written, title: "+title+" body: "+message, true, driver);
@@ -448,20 +448,20 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	 * @param order - specifies order of sorting <br><br> possible values: <br> "NewestThreads", "OldestThreads", "NewestReplies"}
 	 * 	 */
 	public void sortThreads(String order) {
-//		clickAndWait(sortingMenu);
+//		scrollAndClick(sortingMenu);
 		executeScript("document.getElementsByClassName('SortingList')[0].style.display=\"block\"");
 		List<WebElement> list = driver.findElements(sortingList);
 		if (order.equals("NewestThreads")) {
 			waitForElementByElement(list.get(0));
-			clickAndWait(list.get(0));
+			scrollAndClick(list.get(0));
 		}
 		if (order.equals("OldestThreads")) {
 			waitForElementByElement(list.get(1));
-			clickAndWait(list.get(1));
+			scrollAndClick(list.get(1));
 		}
 		if (order.equals("NewestReplies")) {
 			waitForElementByElement(list.get(2));
-			clickAndWait(list.get(2));
+			scrollAndClick(list.get(2));
 		}
 		PageObjectLogging.log("sortThreads", "order of messages sorted: "+order, true, driver);
 	}

@@ -52,7 +52,7 @@ public class WikiArticleUserMonoBookPageObject extends BaseMonoBookPageObject {
 	}
 
 	public void clickEdit() {
-		clickAndWait(editLink);
+		scrollAndClick(editLink);
 		PageObjectLogging.log("clickEdit", "click on Edit link", true, driver);
 	}
 

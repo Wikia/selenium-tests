@@ -136,7 +136,7 @@ public class SignUpMonoBookPageObject extends BaseMonoBookPageObject {
     public AlmostThereMonoBookPageObject submitForm()
     {
             MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
-            clickAndWait(createAccountButton);
+            scrollAndClick(createAccountButton);
             PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
             return new AlmostThereMonoBookPageObject(driver);
     }

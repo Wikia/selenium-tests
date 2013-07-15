@@ -17,7 +17,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	@Test(
 		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_001", "Smoke"}
 	)
-	public void ArticleCRUDUser_specialPage() {
+	public void ArticleCRUDUser_001_specialPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -32,7 +32,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	@Test(
 		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_002", "Smoke"}
 	)
-	public void ArticleCRUDUser_addByURL() {
+	public void ArticleCRUDUser_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -46,7 +46,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_003", "Smoke"}
 	)
-	public void ArticleCRUDUser_addDropdown() {
+	public void ArticleCRUDUser_003_addDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -63,7 +63,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		dataProvider = "articleTitles",
 		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_004"}
 	)
-	public void ArticleCRUDUser_differentTitles(String articleTitle) {
+	public void ArticleCRUDUser_004_differentTitles(String articleTitle) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		articleTitle = articleTitle + base.getTimeStamp();
@@ -77,7 +77,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_005"}
 	)
-	public void ArticleCRUDUser_editByURL() {
+	public void ArticleCRUDUser_005_editByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		ArticlePageObject article = base.openRandomArticleOnWiki(wikiURL);
@@ -90,7 +90,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_006"}
 	)
-	public void ArticleCRUDUser_editDropdown() {
+	public void ArticleCRUDUser_006_editDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		ArticlePageObject article = base.openRandomArticleOnWiki(wikiURL);

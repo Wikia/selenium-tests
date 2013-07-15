@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
@@ -18,8 +19,9 @@ public class DeleteArticlePageObject extends ArticlePageObject {
 		super(driver);
 	}
 
-	public WikiBasePageObject submitAction() {
+	public WikiBasePageObject submitDeletion() {
 		submitButton.click();
+		PageObjectLogging.log("ArticleDeleted", "Article deleted", true);
 		return new WikiBasePageObject(driver);
 	}
 }

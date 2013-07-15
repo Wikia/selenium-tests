@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,5 +24,6 @@ public class RenameArticlePageObject extends ArticlePageObject {
 		newNameInput.clear();
 		newNameInput.sendKeys(newName);
 		submitRename.click();
+		PageObjectLogging.log("ArticleRenamed", "Article renamed", true);
 	}
 }

@@ -100,7 +100,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	 */
 	private void clickForgotPasswordLink(){
 		waitForElementByElement(forgotPasswordLink);
-		clickAndWait(forgotPasswordLink);
+		scrollAndClick(forgotPasswordLink);
 	}
 	
 	/**

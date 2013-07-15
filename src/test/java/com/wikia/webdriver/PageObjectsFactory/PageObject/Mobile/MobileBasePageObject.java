@@ -123,7 +123,7 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void submitLogin() {
-		clickAndWait(loginButton);
+		scrollAndClick(loginButton);
 		waitForElementByElement(avatar);
 		PageObjectLogging.log("submitLogin", "login submit button clicked",
 				true, driver);
@@ -153,7 +153,7 @@ public class MobileBasePageObject extends BasePageObject {
 	public MobileArticlePageObject openRandomPage() {
 		triggerMainMenu();
 		waitForElementByElement(randomPageButton);
-		clickAndWait(randomPageButton);
+		scrollAndClick(randomPageButton);
 		waitForElementByElement(mainMenuTrigger);
 		PageObjectLogging.log("openRandomPage", "randomPageOpened", true,
 				driver);

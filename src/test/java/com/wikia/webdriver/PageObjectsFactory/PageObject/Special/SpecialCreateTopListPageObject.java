@@ -1,7 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +28,7 @@ public class SpecialCreateTopListPageObject extends Top_10_list_EditonCore{
 
 	public Top_10_list clickCreateList() {
 		waitForElementByElement(createlistButton);
-		clickAndWait(createlistButton);
+		scrollAndClick(createlistButton);
 		PageObjectLogging.log("clickCreateList", "click on Create List button", true, driver);		
 		return new Top_10_list(driver);
 	}

@@ -35,7 +35,7 @@ public class ConfirmationMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void submitForm() {
         MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
-        clickAndWait(submitButton);
+        scrollAndClick(submitButton);
         PageObjectLogging.log(
             "submit button clicked ", "submit button clicked", true, driver
         );

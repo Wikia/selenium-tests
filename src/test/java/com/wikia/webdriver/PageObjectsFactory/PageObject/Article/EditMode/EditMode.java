@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +22,7 @@ public class EditMode extends WikiBasePageObject {
 	public ArticlePageObject submit() {
 		driver.switchTo().defaultContent();
 		submitButton.click();
+		PageObjectLogging.log("ArticleSubmited", "Article submited", true);
 		return new ArticlePageObject(driver);
 	}
 }

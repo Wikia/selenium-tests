@@ -8,9 +8,6 @@ public class URLsContent {
 	public static String lightboxImageTest = "LightboxTesting";
 	public static String followingToolbarTest = "QAautoPage";
 
-	//Preview url prefix
-	public static String previewPrefix = "http://preview";
-
 	// Common url component
 	public static String wikiDir = "wiki/";
 

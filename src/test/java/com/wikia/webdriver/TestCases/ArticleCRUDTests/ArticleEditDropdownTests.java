@@ -17,7 +17,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleEditDropdown_001", "ArticleEditDropdown"}
 	)
-	public void ArticleEditDropdown_admin() {
+	public void ArticleEditDropdown_001_admin() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
@@ -27,7 +27,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleEditDropdown_002", "ArticleEditDropdown"}
 	)
-	public void ArticleEditDropdown_user() {
+	public void ArticleEditDropdown_002_user() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
@@ -36,7 +36,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleEditDropdown_003", "ArticleEditDropdown"}
 	)
-	public void ArticleEditDropdown_anon() {
+	public void ArticleEditDropdown_003_anon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openRandomArticleOnWiki(wikiURL);
 		article.verifyDropdownForAnon();

@@ -137,7 +137,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
         blogPostTitleInput.sendKeys(postTitle);
         waitForElementByElement(contentInput);
         contentInput.sendKeys(blogPostContent);
-        clickAndWait(submitBlogPost);
+        scrollAndClick(submitBlogPost);
 
         PageObjectLogging.log(
             "SubmitBlogPost",
@@ -186,7 +186,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void openBlogPost(String postTitle) {
         WebElement blogPostLink = driver.findElement(By.partialLinkText(postTitle));
-        clickAndWait(blogPostLink);
+        scrollAndClick(blogPostLink);
         changeToMonoBook();
         PageObjectLogging.log(
             "EnterBlogPost",
@@ -197,7 +197,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void renameBlogPost() {
         waitForElementByElement(renameLink);
-        clickAndWait(renameLink);
+        scrollAndClick(renameLink);
         PageObjectLogging.log(
             "EnterRenamingForm",
             "Enter renaming blog post form for currently selected post",
@@ -211,7 +211,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
         renameTitleInput.clear();
         renameTitleInput.sendKeys(newName);
         renameReason.sendKeys(getTimeStamp());
-        clickAndWait(renameSubmit);
+        scrollAndClick(renameSubmit);
 
         PageObjectLogging.log(
             "renameFormSubmitted",
@@ -243,7 +243,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void editBlogPost() {
         waitForElementByElement(editLink);
-        clickAndWait(editLink);
+        scrollAndClick(editLink);
         changeToMonoBook();
         PageObjectLogging.log(
             "enterEditionForm",
@@ -257,7 +257,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
         waitForElementByElement(contentInput);
         contentInput.clear();
         contentInput.sendKeys(content);
-        clickAndWait(submitBlogPost);
+        scrollAndClick(submitBlogPost);
         PageObjectLogging.log(
             "EditionFormSubmited",
             "Edition form is submited and skin is changed to monobook",
@@ -278,7 +278,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void deleteBlogPost() {
         waitForElementByElement(deleteLink);
-        clickAndWait(deleteLink);
+        scrollAndClick(deleteLink);
         changeToMonoBook();
         PageObjectLogging.log(
             "enterDeletionForm",
@@ -290,7 +290,7 @@ public class UserProfileMonoBookPageObject extends BaseMonoBookPageObject {
     public String fillDeleteForm() {
         Select deleteSelect = new Select(deleteReasonSelect);
         deleteSelect.selectByIndex(1);
-        clickAndWait(deleteSubmit);
+        scrollAndClick(deleteSubmit);
 
         String deletionUrl = getCurrentUrl();
         PageObjectLogging.log(

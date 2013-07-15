@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.mvel2.optimizers.impl.refl.nodes.ArrayLength;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -50,21 +49,21 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 		String href = hrefs.get((rnd)+1);
 		unfollowVideo(href);
 		getUrl(href+"?action=watch");
-		clickAndWait(followSubmit);
+		scrollAndClick(followSubmit);
 		waitForElementByElement(followedButton);
 		return href;
 	}
 
 	public void unfollowVideo(String videoName){
 		getUrl(videoName+"?action=unwatch");
-		clickAndWait(followSubmit);
+		scrollAndClick(followSubmit);
 		waitForElementByElement(unfollowedButton);
 	}
 
 	public VetAddVideoComponentObject clickAddAVideo() {
 		waitForElementByElement(addVideo);
 		waitForElementClickableByElement(addVideo);
-		clickAndWait(addVideo);
+		scrollAndClick(addVideo);
 		PageObjectLogging.log("clickAddAVideo", "click on 'add a video' button", true, driver);
 		return new VetAddVideoComponentObject(driver);
 	}

@@ -54,7 +54,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 	{
 		waitForElementNotPresent(loadingIndicatorBy);
 		waitForElementByElement(submitButton);
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
 		return new NewWikiaHomePage(driver);
 	}

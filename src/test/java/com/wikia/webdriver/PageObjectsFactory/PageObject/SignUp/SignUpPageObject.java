@@ -11,10 +11,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Proxy.ProxyType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -23,7 +21,6 @@ import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class SignUpPageObject extends BasePageObject {
@@ -161,7 +158,7 @@ public class SignUpPageObject extends BasePageObject {
 	public AlmostTherePageObject submit(String email, String password)
 	{
 		MailFunctions.deleteAllMails(email, password);
-		clickAndWait(createAccountButton);
+		scrollAndClick(createAccountButton);
 		PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
 		return new AlmostTherePageObject(driver);
 	}

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -80,7 +81,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	
 	public void addVideoMiniEditor(String url){
 		waitForElementByElement(addVideoButton);
-		clickAndWait(addVideoButton);
+		scrollAndClick(addVideoButton);
 		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.submit();
@@ -96,33 +97,33 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 
 	public void addExternalLink(String externalLink){
 		waitForElementByElement(addLinkButton);
-		clickAndWait(addLinkButton);
+		scrollAndClick(addLinkButton);
 		waitForElementByElement(externalLinkOption);
-		clickAndWait(externalLinkOption);
+		scrollAndClick(externalLinkOption);
 		targetPageOrURL.sendKeys(externalLink);
 		waitForElementByElement(linkExternalIcon);
-		clickAndWait(linkModalOkButton);
+		scrollAndClick(linkModalOkButton);
 	}
 
 	public void addInternalLink(String internalLink){
 		waitForElementByElement(addLinkButton);
-		clickAndWait(addLinkButton);
+		scrollAndClick(addLinkButton);
 		waitForElementByElement(targetPageOrURL);
 		targetPageOrURL.sendKeys(internalLink);
 		waitForElementByElement(linkExistsIcon);
 		waitForElementByElement(linkModalOkButton);
-		clickAndWait(linkModalOkButton);
+		scrollAndClick(linkModalOkButton);
 	}
 
 	public VetAddVideoComponentObject clickAddVideo(){
 		waitForElementByElement(addVideoButton);
-		clickAndWait(addVideoButton);
+		scrollAndClick(addVideoButton);
 		return new VetAddVideoComponentObject(driver);
 	}
 
 	public PhotoAddComponentObject clickAddImage() {
 		waitForElementByElement(addImageButton);
-		clickAndWait(addImageButton);
+		scrollAndClick(addImageButton);
 		return new PhotoAddComponentObject(driver);
 	}
 
@@ -135,6 +136,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForElementByElement(messageBodyField);
 		messageBodyField.clear();
 		messageBodyField.sendKeys(comment);
+		PageObjectLogging.log("CommentEdited", "Comment edited", true);
 	}
 
 	public void switchAndReplyComment(String reply) {
@@ -143,5 +145,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForElementByElement(messageBodyField);
 		messageBodyField.clear();
 		messageBodyField.sendKeys(reply);
+		PageObjectLogging.log("CommentReplied", "Comment replied", true);
 	}
 }

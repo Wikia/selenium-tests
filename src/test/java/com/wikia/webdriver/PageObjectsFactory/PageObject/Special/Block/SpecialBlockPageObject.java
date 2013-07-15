@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -51,7 +50,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	
 	public void clickBlockButton(){
 		waitForElementByElement(blockButton);
-		clickAndWait(blockButton);
+		scrollAndClick(blockButton);
 	}
 	
 	public void deselectAllSelections(){

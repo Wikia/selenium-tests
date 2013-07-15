@@ -21,7 +21,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	@Test(
 		groups={"ArticleCRUDUser", "ArticleCRUDUser_001", "Smoke"}
 	)
-	public void ArticleCRUDUser_specialPage() {
+	public void ArticleCRUDUser_001_specialPage() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject specialCreatePage = login.openSpecialCreatePage(wikiURL);
@@ -37,7 +37,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	@Test(
 		groups={"ArticleCRUDUser", "ArticleCRUDUser_002", "Smoke"}
 	)
-	public void ArticleCRUDUser_addByURL() {
+	public void ArticleCRUDUser_002_addByURL() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
@@ -52,7 +52,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleCRUDUser", "ArticleCRUDUser_003", "Smoke"}
 	)
-	public void ArticleCRUDUser_addDropdown() {
+	public void ArticleCRUDUser_003_addDropdown() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
@@ -70,7 +70,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		dataProvider = "articleTitles",
 		groups = {"ArticleCRUDUser", "ArticleCRUDUser_004"}
 	)
-	public void ArticleCRUDUser_differentTitles(String articleTitle) {
+	public void ArticleCRUDUser_004_differentTitles(String articleTitle) {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
@@ -85,7 +85,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleCRUDUser", "ArticleCRUDUser_005"}
 	)
-	public void ArticleCRUDUser_editByURL() {
+	public void ArticleCRUDUser_005_editByURL() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
@@ -99,7 +99,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	@Test(
 		groups = {"ArticleCRUDUser", "ArticleCRUDUser_006"}
 	)
-	public void ArticleCRUDUser_editDropdown() {
+	public void ArticleCRUDUser_006_editDropdown() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;

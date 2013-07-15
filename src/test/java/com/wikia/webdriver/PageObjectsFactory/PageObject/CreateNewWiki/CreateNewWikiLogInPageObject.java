@@ -59,7 +59,7 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	public CreateNewWikiPageObjectStep2 submitLogin()
 	{
 		waitForElementByElement(submitButton);
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
 		return new CreateNewWikiPageObjectStep2(driver);
 	}
@@ -95,7 +95,7 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	public void verifyTabTransition()
 	{
 		waitForElementByElement(userNameField);
-		clickAndWait(userNameField);
+		scrollAndClick(userNameField);
 		Assertion.assertEquals("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
 		userNameField.sendKeys(Keys.TAB);
 		Assertion.assertEquals("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
@@ -154,7 +154,7 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	
 	public void facebookConnectButtonClick()
 	{
-		clickAndWait(userNameField);
+		scrollAndClick(userNameField);
 		Assertion.assertEquals("username", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;
 		userNameField.sendKeys(Keys.TAB);
 		Assertion.assertEquals("password", CommonFunctions.currentlyFocusedGetAttributeValue("name")) ;

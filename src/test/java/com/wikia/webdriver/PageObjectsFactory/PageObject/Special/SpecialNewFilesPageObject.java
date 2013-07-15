@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.io.File;
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     public void addPhoto() {
         waitForElementByElement(addPhotoButton);
-        clickAndWait(addPhotoButton);
+        scrollAndClick(addPhotoButton);
         PageObjectLogging.log(
             "ClickAddPhotoButton",
             "Add photo button clicked",
@@ -54,7 +53,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     public void clickOnUploadaPhoto() {
         waitForElementByElement(UploadFileInput);
-        clickAndWait(UploadFileInput);
+        scrollAndClick(UploadFileInput);
         PageObjectLogging.log(
             "ClickOnUploadaPhoto",
             "Click on upload a photo button",
@@ -64,7 +63,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     public void clickOnMoreOrFewerOptions() {
         waitForElementByElement(MoreOrFewerOptions);
-        clickAndWait(MoreOrFewerOptions);
+        scrollAndClick(MoreOrFewerOptions);
         PageObjectLogging.log(
             "ClickOnMoreOrFewerOptions",
             "Click on More or Fewer options (depends on which of those two is currently visible)",
@@ -74,7 +73,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     public void checkIgnoreAnyWarnings() {
         waitForElementByElement(IgnoreAnyWarnings);
-        clickAndWait(IgnoreAnyWarnings);
+        scrollAndClick(IgnoreAnyWarnings);
         PageObjectLogging.log(
             "CheckIgnoreAnyWarnings",
             "Check 'Ignore Any Warnings' option",
@@ -128,7 +127,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
         String imageName = hrefs.get((r.nextInt(hrefs.size()-1))+1);
 		unfollowImage(imageName);
         getUrl(imageName+"?action=watch");
-        clickAndWait(followSubmit);
+        scrollAndClick(followSubmit);
         waitForElementByElement(followedButton);
         PageObjectLogging.log("followRandomImage", "folow image named "+imageName, true);
         return imageName;
@@ -136,7 +135,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     public void unfollowImage(String imageName){
         getUrl(imageName+"?action=unwatch");
-        clickAndWait(followSubmit);
+        scrollAndClick(followSubmit);
         waitForElementByElement(unfollowedButton);
     }
 }

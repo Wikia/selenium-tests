@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import org.openqa.selenium.Point;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class HubBasePageObject extends BasePageObject{
@@ -82,14 +80,14 @@ public class HubBasePageObject extends BasePageObject{
 	public void ClickOnNewsTab(int TabNumber) {
 		List<WebElement> newstabs = driver.findElements(By.cssSelector("section.wikiahubs-newstabs ul.tabbernav li a"));
 		waitForElementClickableByCss("section.wikiahubs-newstabs ul.tabbernav li a");
-		clickAndWait(newstabs.get(TabNumber - 1));
+		scrollAndClick(newstabs.get(TabNumber - 1));
 		PageObjectLogging.log("ClickOnNewsTab", "Click on news tab number "+TabNumber+".", true, driver);
 
 	}
 
 	public void RelatedVideosScrollLeft() {
 		waitForElementClickableByElement(RelatedVideosScrollLeft);
-		clickAndWait(RelatedVideosScrollLeft);
+		scrollAndClick(RelatedVideosScrollLeft);
 		--RVmoduleCurrentVideosSet;
 		PageObjectLogging.log("RelatedVideosScrollLeft",
 				"RV module: scroll left", true, driver);
@@ -97,7 +95,7 @@ public class HubBasePageObject extends BasePageObject{
 
 	public void RelatedVideosScrollRight() {
 		waitForElementClickableByElement(RelatedVideosScrollRight);
-		clickAndWait(RelatedVideosScrollRight);
+		scrollAndClick(RelatedVideosScrollRight);
 		++RVmoduleCurrentVideosSet;
 		PageObjectLogging.log("RelatedVideosScrollRight", "RV module: scroll right", true, driver);
 	}
@@ -130,7 +128,7 @@ public class HubBasePageObject extends BasePageObject{
 	 * @param  SearchString  Specifies what you want to search for
 	 */
 	public void SearchButtonClick() {
-		clickAndWait(SearchButton);
+		scrollAndClick(SearchButton);
 		PageObjectLogging.log("SearchButtonClick", "Left click on the WikiaSearch button", true, driver);				
 	}
 	
@@ -255,7 +253,7 @@ public class HubBasePageObject extends BasePageObject{
 		WebElement Video = NewsTabs.get(3*n-4+i).findElement(By.cssSelector("div.playButton"));
 		waitForElementByElement(Video);
 		CommonFunctions.scrollToElement(Video);
-		clickAndWait(Video);
+		scrollAndClick(Video);
 		PageObjectLogging.log("ClickOnRelatedVideo", "Click on related video number "+i+" from the current list", true, driver);		
 	}
 
@@ -288,7 +286,7 @@ public class HubBasePageObject extends BasePageObject{
 		waitForElementByElement(suggestVideoButton);
 //		CommonFunctions.scrollToElement(suggestVideoButton); //scroll is done when clickandwait
 		waitForElementClickableByElement(suggestVideoButton);	
-		clickAndWait(suggestVideoButton);
+		scrollAndClick(suggestVideoButton);
 		PageObjectLogging.log("ClickSuggestAVideo", "Click on a suggest video button", true, driver);		
 	}
 	
@@ -301,7 +299,7 @@ public class HubBasePageObject extends BasePageObject{
 		waitForElementByElement(getPromotedButton);
 		CommonFunctions.scrollToElement(getPromotedButton);
 		waitForElementClickableByElement(getPromotedButton);	
-		clickAndWait(getPromotedButton);
+		scrollAndClick(getPromotedButton);
 		PageObjectLogging.log("ClickSuggestAnArticle", "Click on suggest an article button", true, driver);		
 	}
 
@@ -344,7 +342,7 @@ public class HubBasePageObject extends BasePageObject{
 	public void Click_Cancel_toCloseSuggestAVideoOrArticle() {
 		waitForElementByElement(modalWrapper_Cancel_CloseButton);
 		waitForElementClickableByElement(modalWrapper_Cancel_CloseButton);	
-		clickAndWait(modalWrapper_Cancel_CloseButton);
+		scrollAndClick(modalWrapper_Cancel_CloseButton);
 		PageObjectLogging.log("Click_Cancel_toCloseSuggestAVideoOrArticle", "Click on Cancel to close suggest a video or article modal", true, driver);
 	}
 	
@@ -356,7 +354,7 @@ public class HubBasePageObject extends BasePageObject{
 	private void closeModalWrapper() {
 		waitForElementByElement(modalWrapper_X_CloseButton);
 		waitForElementClickableByElement(modalWrapper_X_CloseButton);	
-		clickAndWait(modalWrapper_X_CloseButton);
+		scrollAndClick(modalWrapper_X_CloseButton);
 	}
 
 	/**

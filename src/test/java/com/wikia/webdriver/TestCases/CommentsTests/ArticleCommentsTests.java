@@ -17,7 +17,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"ArticleCommentsUser_001", "ArticleComments"})
-	public void ArticleCommentsUser_editComment() {
+	public void ArticleCommentsUser_001_editComment() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
@@ -35,7 +35,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ArticleCommentsUser_002", "ArticleComments"})
-	public void ArticleCommentsUser_replyComment() {
+	public void ArticleCommentsUser_002_replyComment() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
@@ -54,7 +54,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ArticleCommentsAnon_001", "ArticleComments"})
-	public void ArticleCommentsAnon_replyComment() {
+	public void ArticleCommentsAnon_003_replyComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openRandomArticleOnWiki(wikiURL);
 		String comment = PageContent.commentText + article.getTimeStamp();

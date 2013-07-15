@@ -33,12 +33,12 @@ public class ForumPageObject extends WikiArticlePageObject{
 	}
 	
 	private void openFaqLightBox(){
-		clickAndWait(faqButton);
+		scrollAndClick(faqButton);
 		PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
 	}
 
 	private void closeFaqLightBox(){
-		clickAndWait(closeFaqLightBoxButton);
+		scrollAndClick(closeFaqLightBoxButton);
 		PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
 	}
 
@@ -61,7 +61,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 	}
 
 	public ForumManageBoardsPageObject clickManageBoardsButton(){
-		clickAndWait(manageBoardsButton);
+		scrollAndClick(manageBoardsButton);
 		PageObjectLogging.log("clickManageBoardsButton", "manage boards button clicked", true);
 		return new ForumManageBoardsPageObject(driver);
 	}

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -106,14 +107,27 @@ public class BasePageObject{
 	}
 
 
-	public void clickAndWait(WebElement pageElem)
+	protected void scrollAndClick(WebElement element)
 	{
+		scrollToElement(element);
+		element.click();
+	}
+
+	protected void scrollToElement(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			CommonFunctions.scrollToElement(pageElem);
-			pageElem.click();
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("clickAndWait",
-					"page loaded for more then 30 seconds after click", true);
+			js.executeScript(
+					"var x = $(arguments[0]);"
+					+ "window.scroll(0,x.position()['top']+x.height()+100);"
+					+ "$(window).trigger('scroll');",
+					element
+			);
+		} catch (WebDriverException e) {
+			if (e.getMessage().contains(XSSContent.noJQueryError)) {
+				PageObjectLogging.log(
+					"JSError", "JQuery is not defined", false
+				);
+			}
 		}
 	}
 
@@ -482,7 +496,7 @@ public class BasePageObject{
 	public void notifications_clickOnNotificationsLogo() {
 		waitForElementByElement(notifications_ShowNotificationsLogo);
 		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		clickAndWait(notifications_ShowNotificationsLogo);
+		scrollAndClick(notifications_ShowNotificationsLogo);
 		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
 				"click on notifications logo on the upper right corner", true,
 				driver);

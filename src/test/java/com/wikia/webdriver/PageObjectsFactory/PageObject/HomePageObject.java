@@ -68,7 +68,7 @@ public class HomePageObject extends BasePageObject{
 
 	public void triggerLoginOverlay()
 	{
-		clickAndWait(LoginOverlay);
+		scrollAndClick(LoginOverlay);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='username']")));
 	}
 
@@ -81,13 +81,13 @@ public class HomePageObject extends BasePageObject{
 	public void forgotYourPasswordClick()
 	{
 		waitForElementByElement(ForgotYourPassword);
-		clickAndWait(ForgotYourPassword);
+		scrollAndClick(ForgotYourPassword);
 		waitForElementByCss("div#UserLoginDropdown div.error-msg");
 	}
 
 	public CreateNewWikiPageObjectStep1 startAWiki()
 	{
-		clickAndWait(startWikiButton);
+		scrollAndClick(startWikiButton);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
 		if (Global.LIVE_DOMAIN.contains("preview"))
 		{
@@ -158,7 +158,7 @@ public class HomePageObject extends BasePageObject{
 
     public CrossWikiSearchPageObject searchFor(String queryString) {
         searchInput.sendKeys(queryString);
-        clickAndWait(searchButton);
+        scrollAndClick(searchButton);
         PageObjectLogging.log("searchFor", "Enter search string \"" + queryString + "\" and click ok.", true, driver);
         return new CrossWikiSearchPageObject(driver);
     }

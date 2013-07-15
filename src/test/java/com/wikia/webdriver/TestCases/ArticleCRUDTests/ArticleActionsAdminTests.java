@@ -19,23 +19,23 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups={"ArticleActionsAdmin_001", "ArticleActionsAdmin"})
-	public void ArticleActionsAdmin_deleteUndelete() {
+	public void ArticleActionsAdmin_001_deleteUndelete() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
 		String articleName = article.getArticleName();
 		DeleteArticlePageObject deletePage = article.deleteArticleUsingDropdown();
-		WikiBasePageObject base = deletePage.submitAction();
+		WikiBasePageObject base = deletePage.submitDeletion();
 		SpecialRestorePageObject restore = base.undeleteArticle();
 		restore.verifyArticleName(articleName);
 		restore.giveReason(article.getTimeStamp());
 		restore.restorePage();
-		article.verifyFlashMessage();
+		article.verifyNotificationMessage();
 		article.compareTitle(articleName);
 	}
 
 	@Test(groups={"ArticleActionsAdmin_002", "ArticleActionsAdmin"})
-	public void ArticleActionsAdmin_move() {
+	public void ArticleActionsAdmin_002_move() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
@@ -43,6 +43,6 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		RenameArticlePageObject renamePage = article.renameArticleUsingDropdown();
 		renamePage.rename(articleNewName);
 		article.compareTitle(articleNewName);
-		article.verifyFlashMessage();
+		article.verifyNotificationMessage();
 	}
 }

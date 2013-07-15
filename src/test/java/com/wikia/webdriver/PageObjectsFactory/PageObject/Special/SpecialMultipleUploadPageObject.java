@@ -69,14 +69,14 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 
 	public void checkIgnoreAnyWarnings() {
 		waitForElementByElement(ignoreAnyWarnings);
-		clickAndWait(ignoreAnyWarnings);
+		scrollAndClick(ignoreAnyWarnings);
 		PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true, driver);
 		
 	}
 
 	public void clickOnUploadFile() {
 		waitForElementByElement(uploadFileButton);
-		clickAndWait(uploadFileButton);
+		scrollAndClick(uploadFileButton);
 		PageObjectLogging.log("ClickOnUploadFile", "Click on Upload File button", true, driver);
 		
 	}

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,7 +24,7 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyArticleName(String articleName) {
-		waitForTextToBePresentInElementByElement(articleToRestore, articleName);
+		waitForElementVisibleByElement(articleToRestore);
 		Assertion.assertStringContains(articleToRestore.getText(), articleName);
 	}
 
@@ -33,5 +34,6 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
 
 	public void restorePage() {
 		submitRestore.click();
+		PageObjectLogging.log("ArticleRestored", "Article restored", true);
 	}
 }
