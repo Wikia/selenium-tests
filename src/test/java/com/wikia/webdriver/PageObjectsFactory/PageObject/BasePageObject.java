@@ -17,7 +17,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -531,11 +530,6 @@ public class BasePageObject{
 		}
 	}
 
-	public void openWikiPage() {
-		getUrl(Global.DOMAIN + URLsContent.noexternals);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
-	}
-
 	/*
 	 * Wait for expected conditions methods
 	 */
@@ -671,16 +665,6 @@ public class BasePageObject{
         );
     };
 
-    /**
-     * Determine if tests are ran on preview or live enviroment
-     */
-    public String determineEnviroment() {
-        if (Global.DOMAIN.contains(URLsContent.previewPrefix)) {
-            return "preview";
-        } else {
-            return "";
-        }
-    }
 	public void enableWikiaTracker() {
 		if (driver.getCurrentUrl().contains("?")) {
 			appendToUrl("&log_level=info");
