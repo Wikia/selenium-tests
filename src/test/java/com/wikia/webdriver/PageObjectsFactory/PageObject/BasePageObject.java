@@ -35,22 +35,12 @@ public class BasePageObject{
 	protected WebElement notifications_LatestNotificationOnWiki;
 	@FindBy(css = "#WallNotifications li")
 	protected WebElement notifications_ShowNotificationsLogo;
-	@FindBy(css = "li.notifications-for-wiki")
-	protected WebElement notifications_NotificationsForWiki;
-	@FindBy(css = "#wall-notifications-markasread-sub")
-	protected WebElement notifications_MarkAllAsReadButton;
-	@FindBy(css = "#wall-notifications-markasread-all-wikis")
-	protected WebElement notifications_MarkAllWikisAsReadButton;
-	@FindBy(css = "#wall-notifications-markasread-this-wiki")
-	protected WebElement notifications_MarkOnlyThisWikiAsReadButton;
 	@FindBy(css = ".mw-htmlform-submit")
 	protected WebElement followSubmit;
 	@FindBy(css = "#ca-unwatch")
 	protected WebElement followedButton;
 	@FindBy(css = "#ca-watch")
 	protected WebElement unfollowedButton;
-	@FindBy(css = "#AccountNavigation a[href*='User:']")
-	protected WebElement userProfileLink;
 
 	public BasePageObject(WebDriver driver) {
 		wait = new WebDriverWait(driver, timeOut);
@@ -95,16 +85,6 @@ public class BasePageObject{
 		Actions action = new Actions(driver);
 		action.moveToElement(element);
 		action.perform();
-	}
-
-	public void mouseReleaseInArticleIframe(String cssSelecotr) {
-		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-				+ cssSelecotr + "')).mouseleave()");
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void mouseOver(String cssSelecotr) {
@@ -235,11 +215,6 @@ public class BasePageObject{
 		return (Long) js.executeScript("return "+script);
 	}
 
-        public WebElement executeScriptReturnElement(String script) {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                return (WebElement) js.executeScript(script);
-        }
-
 	protected void executeScript(String script, WebDriver driver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(script);
@@ -319,15 +294,6 @@ public class BasePageObject{
 		return driver.findElement(By.cssSelector(cssSelector));
 	}
 
-	public void waitForElementByClassName(String className) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.className(className)));
-	}
-
-	public void waitForElementByClass(String id) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
-	}
-
 	public WebElement waitForElementByXPath(String xPath) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(xPath)));
@@ -355,12 +321,6 @@ public class BasePageObject{
 			PageObjectLogging.log("waitForElementNotVisibleByElement",
 					e.toString(), false);
 		}
-	}
-
-	public void waitForElementClickableByClassName(String className) {
-		wait.until(ExpectedConditions.elementToBeClickable(By
-				.className(className)));
-
 	}
 
 	public void waitForElementClickableByCss(String css) {
@@ -398,13 +358,6 @@ public class BasePageObject{
 				.valueToBePresentInElementsAttribute(element, attribute, value));
 	}
 
-	public void waitForValueToNotBePresentInElementsAttributeByCss(
-			String selector, String attribute, String value) {
-		wait.until(CommonExpectedConditions
-				.valueToNotBePresentInElementsAttribute(
-						By.cssSelector(selector), attribute, value));
-	}
-
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
 		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
 	}
@@ -418,12 +371,6 @@ public class BasePageObject{
 	public void waitForStringInURL(String givenString) {
 		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
 		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
-	}
-
-	public void waitForClassRemovedFromElement(WebElement element,
-			String className) {
-		wait.until(CommonExpectedConditions.classRemovedFromElement(element,
-				className));
 	}
 
 	public String getTimeStamp() {
@@ -502,10 +449,6 @@ public class BasePageObject{
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
-	/*
-	 * Wait for expected conditions methods
-	 */
-
 	/**
 	 * Wait for tags that are visible and are bigger then 1px x 1px
 	 *
@@ -553,48 +496,6 @@ public class BasePageObject{
 				driver);
 	}
 
-	public void notifications_showNotificationsForWikiOnMenu() {
-		waitForElementByElement(notifications_NotificationsForWiki);
-		waitForElementClickableByElement(notifications_NotificationsForWiki);
-		clickAndWait(notifications_NotificationsForWiki);
-		PageObjectLogging.log("notifications_showNotificationsForWiki",
-				"show the upper wiki notifications on menu", true, driver);
-	}
-
-	public void notifications_markLatestNotificationsAsRead() {
-		notifications_showNotifications();
-		notifications_clickMarkAllAsRead(false);
-	}
-
-	public void notifications_clickMarkAllAsRead(boolean allWikis) {
-		waitForElementByElement(notifications_MarkAllAsReadButton);
-		waitForElementClickableByElement(notifications_MarkAllAsReadButton);
-		clickAndWait(notifications_MarkAllAsReadButton);
-		if (allWikis) {
-			waitForElementClickableByElement(notifications_MarkAllWikisAsReadButton);
-			clickAndWait(notifications_MarkAllWikisAsReadButton);
-		} else {
-			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
-			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);
-		}
-		PageObjectLogging.log("notifications_clickMarkAllAsRead",
-				(allWikis ? "all wikis" : "only one wiki") + " marked as read",
-				true, driver);
-	}
-
-    /**
-     * Determine whether username contains underscore
-     * if so replace it with space
-     *
-     * @param userName
-     */
-    protected String purifyUserName(String userName) {
-        if (userName.contains("_")) {
-            userName = userName.replace("_", " ");
-        }
-        return userName;
-    }
-
     /**
      * Wait for element to not be present in DOM
      *
@@ -637,16 +538,6 @@ public class BasePageObject{
         );
     };
 
-    /**
-     * Determine if tests are ran on preview or live enviroment
-     */
-    public String determineEnviroment() {
-        if (Global.DOMAIN.contains(URLsContent.previewPrefix)) {
-            return "preview";
-        } else {
-            return "";
-        }
-    }
 	public void enableWikiaTracker() {
 		if (driver.getCurrentUrl().contains("?")) {
 			appendToUrl("&log_level=info");
