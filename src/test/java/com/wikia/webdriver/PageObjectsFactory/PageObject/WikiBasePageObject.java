@@ -2,16 +2,13 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.*;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -35,14 +32,16 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement createArticleButton;
 	@FindBy(css = "article span.drop")
 	private WebElement editDropDown;
-	@FindBy(css = "a[data-id='delete']")
-	private WebElement deleteButton;
 	@FindBy(css = "input#wpConfirmB")
 	private WebElement deleteConfirmationButton;
 	@FindBy(xpath = "//div[@class='msg' and contains(text(), 'The comment has been deleted.')]")
 	private WebElement deleteCommentConfirmationMessage;
-	@FindBy(css = "div.msg a")
-	private WebElement undeleteButton;
+	@FindBy(css = ".global-notification div.msg a")
+	private WebElement undeleteLink;
+	@FindBy(css = ".global-notification")
+	private WebElement flashMessage;
+	@FindBy(css = ".global-notification .close")
+	private WebElement flashMessageClose;
 	@FindBy(css = "input#mw-undelete-submit")
 	private WebElement restoreButton;
 	@FindBy(css = "input#wpNewTitleMain")
@@ -51,24 +50,10 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement confirmRenamePageButton;
 	@FindBy(css = "input#wpReason")
 	private WebElement deleteCommentReasonField;
-	@FindBy(css = "div.reset[id='ImageUpload']")
-	private WebElement imageUploadModal;
-	@FindBy(css = "input[name='search'][placeholder='Search photos on this wiki']")
-	private WebElement searchFieldImageInLightBox;
-	@FindBy(css = "img.sprite.search")
-	private WebElement searchButtonImageInLightBox;
-	@FindBy(css="input#ImageQuery")
-	private WebElement imageQuery;
 	@FindBy(css="div.permissions-errors")
 	private WebElement premissionErrorMessage;
-	@FindBy(css="[value='Find']")
-	private WebElement imageFindButton;
 	@FindBy(css="div.mw-warning-with-logexcerpt p")
 	private WebElement pageDeletedInfo;
-	@FindBy(css="#PREFOOTER_RIGHT_BOXAD")
-	private WebElement ad_Prefooter_right_boxad;
-	@FindBy(css="#PREFOOTER_LEFT_BOXAD")
-	private WebElement ad_Prefooter_left_boxad;
 	@FindBy(css="figure.tleft")
 	private WebElement videoOnLeftOfArticle;
 	@FindBy(css="figure.tright")
@@ -81,12 +66,8 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement videoCaptionOnArticle;
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
-	@FindBy(css = ".wikia-menu-button.contribute.secondary.combined > .drop")
-	protected WebElement contributeButton;
 	@FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
 	protected WebElement contributeAddPage;
-	@FindBy(css = "#CreatePageDialog")
-	protected WebElement addPageModal;
 	@FindBy(css = ".UserLoginModal input[name='password']")
 	protected WebElement modalPasswordInput;
 	@FindBy (css = "#WikiaPageHeader h1")
@@ -99,8 +80,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement userProfileAvatar;
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
-	@FindBy(css="form.WikiaSearch")
-	private WebElement wikiaSearch_searchForm;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
 	@FindBy(css = "#WikiaMainContent a[data-id='edit']")
@@ -115,7 +94,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement cssMinorEdit;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
-	private By editDropDownBy = By.cssSelector("article span.drop");
 
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
@@ -177,55 +155,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialMultipleUploadPageObject(driver);
 	}
 
-	public void verifyEditDropDownAnonymous() {
-		List<WebElement> list = driver.findElements(By
-				.cssSelector("header#WikiaPageHeader ul.WikiaMenuElement li"));
-		Assertion.assertNumber(1, list.size(),
-				"Edit drop-down number of items for anonymous user");
-		Assertion.assertEquals(
-				"history",
-				list.get(0).findElement(By.cssSelector("a"))
-						.getAttribute("data-id"));
-	}
-
-	public void verifyEditDropDownLoggedInUser() {
-		List<WebElement> list = driver.findElements(By
-				.cssSelector("header#WikiaPageHeader ul.WikiaMenuElement li"));
-		Assertion.assertNumber(2, list.size(),
-				"Edit drop-down number of items for admin user");
-		Assertion.assertEquals(
-				"history",
-				list.get(0).findElement(By.cssSelector("a"))
-						.getAttribute("data-id"));
-		Assertion.assertEquals(
-				"move",
-				list.get(1).findElement(By.cssSelector("a"))
-						.getAttribute("data-id"));
-	}
-
-	public void verifyEditDropDownAdmin() {
-		List<WebElement> list = driver.findElements(By
-				.cssSelector("header#WikiaPageHeader ul.WikiaMenuElement li"));
-		Assertion.assertNumber(4, list.size(),
-				"Edit drop-down number of items for admin user");
-		Assertion.assertEquals(
-				"history",
-				list.get(0).findElement(By.cssSelector("a"))
-						.getAttribute("data-id"));
-		Assertion.assertEquals(
-				"move",
-				list.get(1).findElement(By.cssSelector("a"))
-						.getAttribute("data-id"));
-		Assertion.assertEquals(
-				"protect",
-				list.get(2).findElement(By.cssSelector("a"))
-						.getAttribute("data-id"));
-		Assertion.assertEquals(
-				"delete",
-				list.get(3).findElement(By.cssSelector("a"))
-						.getAttribute("data-id"));
-	}
-
 	private void clickContributeButton() {
 		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
 		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
@@ -243,15 +172,6 @@ public class WikiBasePageObject extends BasePageObject {
 				"deleted article page verified", true);
 	}
 
-	public void clickEditDropDown() {
-		WebElement editDrop = waitForElementByBy(editDropDownBy);
-		editDrop.click();
-		PageObjectLogging.log (
-			"clickEditDropDown", "edit drop-down clicked",
-			true, driver
-		);
-	}
-
 	public WikiArticleEditMode clickEditButton() {
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
@@ -260,6 +180,24 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(editButton);
 		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
 		return new WikiArticleEditMode(driver);
+	}
+
+	protected void scrollToElement(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		try {
+			js.executeScript(
+				"var x = $(arguments[0]);"
+				+ "window.scroll(0,x.position()['top']+x.height()+100);"
+				+ "$(window).trigger('scroll');",
+				element
+			);
+		} catch (WebDriverException e) {
+			if (e.getMessage().contains(XSSContent.noJQueryError)) {
+				PageObjectLogging.log(
+					"JSError", "JQuery is not defined", false
+				);
+			}
+		}
 	}
 
 	public WikiArticleEditMode navigateToEditPage() {
@@ -315,21 +253,20 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	protected void clickArticleDeleteConfirmationButton(String atricleName) {
+	protected void clickArticleDeleteConfirmationButton(String articleName) {
 		waitForElementByElement(deleteConfirmationButton);
 		waitForElementByElement(deleteCommentReasonField);
 		deleteCommentReasonField.clear();
 		deleteCommentReasonField.sendKeys("QAReason");
 		deleteConfirmationButton.click();
-		String temp = atricleName.replace("_", " ");
 	}
 
-	public void deleteArticle(String atricleName) {
+	public void deleteArticle(String articleName) {
 		getUrl(driver.getCurrentUrl() + "?action=delete");
 		// clickDeleteButtonInDropDown();
-		clickArticleDeleteConfirmationButton(atricleName);
+		clickArticleDeleteConfirmationButton(articleName);
 		waitForElementByXPath("//div[@class='msg' and contains(text(), 'has been deleted.')]");
-		PageObjectLogging.log("deleteArticle", "article "+atricleName+" has been deleted",
+		PageObjectLogging.log("deleteArticle", "article "+articleName+" has been deleted",
 				true, driver);
 	}
 
@@ -358,11 +295,6 @@ public class WikiBasePageObject extends BasePageObject {
 		clickAndWait(confirmRenamePageButton);
 	}
 
-        public void renameArticleAndVerify(String articleName, String articleNewName) {
-            renameArticle(articleName, articleNewName);
-            verifyArticleRenamed(articleName, articleNewName);
-        }
-
         public void verifyArticleRenamed(String articleName, String articleNewName) {
             waitForElementByXPath(
 					"//b[contains(text(), '\"" + articleName
@@ -376,17 +308,6 @@ public class WikiBasePageObject extends BasePageObject {
 				   "edit button is not present", true);
        }        
 
-	private void clickUndeleteArticle() {
-		waitForElementByElement(undeleteButton);
-		String href = undeleteButton.getAttribute("href");
-		driver.navigate().to(href);
-		waitForElementByElement(restoreButton);
-		PageObjectLogging.log(
-				"clickUndeleteArticle",
-				"undelete article button clicked", true
-		);
-	}
-
 	protected void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
 		clickAndWait(restoreButton);
@@ -398,9 +319,16 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public void undeleteArticle() {
-		clickUndeleteArticle();
-		clickRestoreArticleButton();
+	public SpecialRestorePageObject undeleteArticle() {
+		waitForElementByElement(undeleteLink);
+		undeleteLink.click();
+		return new SpecialRestorePageObject(driver);
+	}
+
+	public void verifyFlashMessage() {
+		waitForElementVisibleByElement(flashMessage);
+		flashMessageClose.click();
+		waitForElementNotVisibleByElement(flashMessage);
 	}
 
 	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {

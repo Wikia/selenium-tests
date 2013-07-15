@@ -532,4 +532,26 @@ public class ArticleFeaturesCRUDTestsAdmin extends TestTemplate
 		edit.tableChooseFromContextMenu(5,0);
 		edit.clickOnPublishButton();
 	}
+
+	@Test(groups={"ArticleFeaturesCRUDAdmin_018", "ArticleFeaturesCRUDAdmin"})
+	public void ArticleCRUDAdmin_011_VerifyingImagesPositionWikiText()
+	{
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.openWikiPage();
+		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		WikiArticlePageObject article = wiki.openRandomArticleByUrl();
+		WikiArticleEditMode edit = article.createNewDefaultArticle();
+		edit.deleteArticleContent();
+		PhotoAddComponentObject photoAddPhoto = edit.clickPhotoButton();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.adjustAlignment(1);
+		photoOptions.clickAddPhoto();
+		edit.clickOnSourceButton();
+		edit.verifyWikiTextInSourceMode("left");
+		edit.clickOnVisualButton();
+		edit.verifyLeftAlignmentIsSelected();
+		edit.clickOnPublishButton();
+		article.verifyImageOnThePage();
+	}
 }

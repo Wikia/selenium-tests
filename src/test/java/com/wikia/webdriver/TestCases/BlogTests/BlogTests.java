@@ -6,6 +6,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import org.testng.annotations.Test;
@@ -99,7 +100,9 @@ public class BlogTests extends TestTemplate{
 		blogPage.verifyUsernameFieldPresent(Properties.userNameStaff);
 		blogPage.categories_verifyCategoryPresent("Blog posts");
 		blogPage.deleteBlogPost(blogPostTitle);
-		blogPage.undeleteArticle();
+		SpecialRestorePageObject restore = blogPage.undeleteArticle();
+		restore.giveReason(wiki.getTimeStamp());
+		restore.restorePage();
 	}
 
 	@Test(groups = { "BlogTests_005", "BlogTests", "Blog"})

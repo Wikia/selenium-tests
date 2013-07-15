@@ -92,7 +92,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("#WikiaArticle img.sprite.play");
 	private By AddVideoRVButton = By.cssSelector("a.addVideo");
-	private By RVvideoLoading = By.cssSelector("section.loading");
 	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
@@ -576,17 +575,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
         renameArticle(oldName, newName);
     }
 
-	/**
-	 *  @author Michal 'justnpT' Nowierski
-	 */
-	public void verifySpotlightsPresence() {
-		CommonFunctions.scrollToElement(spotlightFooter);
-		waitForElementByElement(spotlightImage1);
-		waitForElementByElement(spotlightImage2);
-		waitForElementByElement(spotlightImage3);
-		PageObjectLogging.log("verifySpotlightsPresence", "all 3 spotlights are present", true, driver);
-	}
-	
 	public GalleryBuilderComponentObject clickAddPhotoToGallery(){
 		clickAndWait(addPhotoToGalleryButton);
 		return new GalleryBuilderComponentObject(driver);
@@ -596,10 +584,4 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new SlideshowBuilderComponentObject(driver);
 	}
 
-	/**
-	 * Get article content from the beggining to the "Discussions" part
-	 */
-	public String getArticleContent() {
-		return articleContent.getText().split("Discussions")[0];
-	}
 }

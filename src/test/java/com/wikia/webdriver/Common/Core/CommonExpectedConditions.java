@@ -353,29 +353,36 @@ public class CommonExpectedConditions {
             };
         }
 
-    
-    /**
-     *
-     * @param element
-     * @return
-     */
-    public static ExpectedCondition<Boolean> elementVisible(
-        final WebElement element
-    ) {
-        return new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                return (element.isDisplayed());
-            }
-            @Override
-            public String toString() {
-                return String.format(
-                    "Element ('%s') not visisble!",
-                    element.getTagName()
-                );
-            }
-        };
-    }
+	 /**
+	 *
+	 * @param element
+	 * @return
+	 */
+	public static ExpectedCondition<Boolean> elementVisible(
+		final WebElement element
+	) {
+		return new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				try {
+					return element.isDisplayed();
+				} catch (StaleElementReferenceException e) {
+					// Returns true because stale element reference implies that element
+					// is no longer visible.
+					return false;
+				} catch (NoSuchElementException e) {
+					return false;
+				}
+			}
+			@Override
+			public String toString() {
+				return String.format(
+					"Element ('%s') not visisble!",
+					element.getTagName()
+				);
+			}
+		};
+	}
 
     public static ExpectedCondition<Boolean> elementInViewPort (
         final WebElement element
