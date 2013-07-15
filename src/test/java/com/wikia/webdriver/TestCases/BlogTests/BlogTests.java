@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.BlogTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
@@ -11,6 +12,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 public class BlogTests extends NewTestTemplate{
+
+	Credentials credentials = config.getCredentials();
 
 	/*
 	 * 1. Create blog post using "Create blog post button" (one case)
@@ -23,9 +26,9 @@ public class BlogTests extends NewTestTemplate{
 	@Test(groups = { "BlogTests_001", "BlogTests", "Blog"})
 	public void BlogTests_001_CreateBlogPost(){
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
+		wiki.openWikiPage(wikiURL);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(credentials.userName, credentials.password);
+		login.logInCookie(credentials.userName, credentials.password, wikiURL);
 		UserProfilePageObject userProfile = new UserProfilePageObject(driver);
 		userProfile.navigateToProfilePage(credentials.userName);
 		userProfile.clickOnBlogTab();

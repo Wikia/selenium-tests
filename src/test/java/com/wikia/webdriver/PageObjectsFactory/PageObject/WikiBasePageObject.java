@@ -664,6 +664,19 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 
+	public void logOut(String wikiURL) {
+		try {
+			driver.manage().deleteAllCookies();
+			driver.get(wikiURL + "wiki/Special:UserLogout?noexternals=1");
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector("a[data-id='login']")));
+		PageObjectLogging.log("logOut", "user is logged out", true, driver);
+	}
+
 
 	public String logInCookie(String userName, String password) {
 			try {
@@ -834,7 +847,7 @@ public class WikiBasePageObject extends BasePageObject {
 					+ "Token', '" + xmlResponseArr[9]
 							+ "', {'domain': 'wikia.com'})");
 			try {
-				driver.get(Global.DOMAIN + "Special:Random");
+				driver.get(wikiURL + "Special:Random");
 			} catch (TimeoutException e) {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);
@@ -865,4 +878,14 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
+
+	public void openWikiPage() {
+		getUrl(Global.DOMAIN + URLsContent.noexternals);
+		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	}
+
+	public void openWikiPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.noexternals);
+		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	}
 }

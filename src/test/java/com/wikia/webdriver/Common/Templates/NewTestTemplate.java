@@ -44,8 +44,8 @@ public class NewTestTemplate {
 	@BeforeMethod(alwaysRun = true)
 	public void start(Method method, Object[] data) {
 		startBrowser();
-		UrlBuilder builder = new UrlBuilder(config.getEnv());
-		wikiURL = builder.getUrlForWiki(config.getWikiName());
+		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
 		driver.get(wikiURL);
 	}
 
