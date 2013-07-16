@@ -1,12 +1,11 @@
 package com.wikia.webdriver.Common.DriverProvider;
 
-import com.wikia.webdriver.Common.Core.Global;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
-import org.browsermob.proxy.ProxyServer;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,6 +18,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import com.wikia.webdriver.Common.Core.Global;
+
 /**
  *
  * @author Bogna 'bognix' Knychala
@@ -26,6 +27,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public class NewDriverProvider {
 
 	private static EventFiringWebDriver driver;
+	private static EventFiringWebDriver driver2;
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 
@@ -58,8 +60,17 @@ public class NewDriverProvider {
 		return driver;
 	}
 
+	public static EventFiringWebDriver getDriverInstanceFirefox() {
+		driver2 = getFFInstance();
+		return driver2;
+	}
+
 	public static  WebDriver getWebDriver() {
-            return driver;
+		return driver;
+	}
+
+	public static WebDriver getWebDriverFirefox() {
+		return driver2;
 	}
 
 	private static EventFiringWebDriver getIEInstance() {
