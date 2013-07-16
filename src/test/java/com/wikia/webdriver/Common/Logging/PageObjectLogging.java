@@ -111,6 +111,14 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	@Override
+	public void afterChangeValueOf(WebElement element, WebDriver driver) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("<tr class=\"success\"><td>ChangeValueOfField</td><td>" + lastFindBy
+				+ "</td><td> <br/> &nbsp;</td></tr>");
+		CommonUtils.appendTextToFile(logPath, builder.toString());
+	}
+
+	@Override
 	public void onTestStart(ITestResult result) {
 		StringBuilder builder = new StringBuilder();
 		String testName = result.getName().toString();

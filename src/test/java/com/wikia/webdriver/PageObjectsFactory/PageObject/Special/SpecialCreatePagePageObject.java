@@ -1,8 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
@@ -29,7 +27,7 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	public VisualEditModePageObject fillTitle(String title) {
+	public VisualEditModePageObject populateTitleField(String title) {
 		waitForElementByElement(titleInput);
 		titleInput.sendKeys(title);
 		waitForElementByElement(submitTitleInput);
@@ -38,7 +36,7 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
 	}
 
 	public void addPageWithGivenTitleAndDefaultContent(String title) {
-		fillTitle(title);
+		populateTitleField(title);
 		WikiArticleEditMode article = new WikiArticleEditMode(driver);
 		article.typeInContent(PageContent.articleText);
 		article.clickOnPublish();

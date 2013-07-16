@@ -20,10 +20,11 @@ public class RenameArticlePageObject extends ArticlePageObject {
 		super(driver);
 	}
 
-	public void rename(String newName) {
+	public ArticlePageObject rename(String newName) {
 		newNameInput.clear();
 		newNameInput.sendKeys(newName);
 		submitRename.click();
 		PageObjectLogging.log("ArticleRenamed", "Article renamed", true);
+		return new ArticlePageObject(driver);
 	}
 }

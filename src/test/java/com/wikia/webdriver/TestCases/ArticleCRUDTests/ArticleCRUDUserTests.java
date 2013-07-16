@@ -27,11 +27,11 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		SpecialCreatePagePageObject specialCreatePage = login.openSpecialCreatePage(wikiURL);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + specialCreatePage.getTimeStamp();
-		VisualEditModePageObject visualEditMode = specialCreatePage.fillTitle(articleTitle);
+		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submit();
-		article.compareContent(articleContent);
-		article.compareTitle(articleTitle);
+		article.verifyContent(articleContent);
+		article.verifyArticleTitle(articleTitle);
 	}
 
 	@Test(
@@ -45,8 +45,8 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = login.goToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submit();
-		article.compareContent(articleContent);
-		article.compareTitle(articleTitle);
+		article.verifyContent(articleContent);
+		article.verifyArticleTitle(articleTitle);
 	}
 
 	@Test(
@@ -57,12 +57,12 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + login.getTimeStamp();
-		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = login.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.createArticleUsingDropdown(articleTitle);
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submit();
-		article.compareContent(articleContent);
-		article.compareTitle(articleTitle);
+		article.verifyContent(articleContent);
+		article.verifyArticleTitle(articleTitle);
 	}
 
 	@Test(
@@ -78,8 +78,8 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = login.goToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submit();
-		article.compareContent(articleContent);
-		article.compareTitle(articleTitle);
+		article.verifyContent(articleContent);
+		article.verifyArticleTitle(articleTitle);
 	}
 
 	@Test(
@@ -89,11 +89,11 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
-		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = login.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submit();
-		article.compareContent(articleContent);
+		article.verifyContent(articleContent);
 	}
 
 	@Test(
@@ -103,10 +103,10 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
-		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = login.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submit();
-		article.compareContent(articleContent);
+		article.verifyContent(articleContent);
 	}
 }

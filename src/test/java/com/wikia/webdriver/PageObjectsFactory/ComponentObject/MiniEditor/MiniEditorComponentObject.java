@@ -60,6 +60,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	}
 
 	public void switchAndWrite(String text) {
+		waitForElementByElement(miniEditorIframe);
 		driver.switchTo().frame(miniEditorIframe);
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(text);
@@ -132,6 +133,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	}
 
 	public void switchAndEditComment(String comment) {
+		waitForElementByElement(miniEditorEditCommentIFrame);
 		driver.switchTo().frame(miniEditorEditCommentIFrame);
 		waitForElementByElement(messageBodyField);
 		messageBodyField.clear();

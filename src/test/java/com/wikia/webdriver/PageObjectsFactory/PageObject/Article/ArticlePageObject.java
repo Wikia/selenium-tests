@@ -28,11 +28,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
-	@FindBy(css="#WikiaPageHeader .drop")
+	@FindBy(css="#WikiaPageHeader .drop img")
 	protected WebElement articleEditDropdown;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
-	@FindBy(css="#WikiHeader .drop")
+	@FindBy(css="#WikiHeader .drop img")
 	protected WebElement contributeDropdown;
 	@FindBy(css="#ca-delete")
 	protected WebElement deleteDropdown;
@@ -76,12 +76,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	public void compareTitle(String title) {
+	public void verifyArticleTitle(String title) {
 		waitForElementVisibleByElement(articleHeader);
 		Assertion.assertEquals(articleHeader.getText(), title);
 	}
 
-	public void compareContent(String content) {
+	public void verifyContent(String content) {
 		waitForElementVisibleByElement(articleContent);
 		Assertion.assertStringContains(articleContent.getText(), content);
 	}
@@ -101,7 +101,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public MiniEditorComponentObject triggerCommentArea() {
-		scrollAndClick(commentArea);
+		scrollToElement(allCommentsArea);
+		waitForElementVisibleByElement(commentArea);
+		commentArea.click();
 		waitForElementNotVisibleByElement(commentAreaLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
 	}
@@ -153,6 +155,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void submitReplyComment() {
 		driver.switchTo().defaultContent();
+		waitForElementClickableByElement(replyCommentSubmitButton);
 		replyCommentSubmitButton.click();
 		waitForElementNotVisibleByElement(replyCommentSubmitButton);
 	}

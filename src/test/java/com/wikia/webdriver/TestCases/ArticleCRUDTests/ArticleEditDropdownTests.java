@@ -20,7 +20,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 	public void ArticleEditDropdown_001_admin() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = login.openRandomArticle(wikiURL);
 		article.verifyDropdownForAdmin();
 	}
 
@@ -30,7 +30,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 	public void ArticleEditDropdown_002_user() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userName, credentials.password, wikiURL);
-		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = login.openRandomArticle(wikiURL);
 		article.verifyDropdownForUser();
 	}
 	@Test(
@@ -38,7 +38,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 	)
 	public void ArticleEditDropdown_003_anon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		ArticlePageObject article = base.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		article.verifyDropdownForAnon();
 	}
 }

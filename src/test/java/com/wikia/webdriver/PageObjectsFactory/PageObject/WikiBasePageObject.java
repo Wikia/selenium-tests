@@ -1,7 +1,9 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
@@ -376,7 +378,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticlePageObject(driver, wikiFirstHeader.getText());
 	}
 
-	public ArticlePageObject openRandomArticleOnWiki(String wikiURL) {
+	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);
 	}

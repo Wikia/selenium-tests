@@ -22,7 +22,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 	public void ArticleActionsAdmin_001_deleteUndelete() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = login.openRandomArticle(wikiURL);
 		String articleName = article.getArticleName();
 		DeleteArticlePageObject deletePage = article.deleteArticleUsingDropdown();
 		WikiBasePageObject base = deletePage.submitDeletion();
@@ -31,18 +31,18 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		restore.giveReason(article.getTimeStamp());
 		restore.restorePage();
 		article.verifyNotificationMessage();
-		article.compareTitle(articleName);
+		article.verifyArticleTitle(articleName);
 	}
 
 	@Test(groups={"ArticleActionsAdmin_002", "ArticleActionsAdmin"})
 	public void ArticleActionsAdmin_002_move() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerifyOnWiki(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		ArticlePageObject article = login.openRandomArticleOnWiki(wikiURL);
+		ArticlePageObject article = login.openRandomArticle(wikiURL);
 		String articleNewName = PageContent.articleNamePrefix + article.getTimeStamp();
 		RenameArticlePageObject renamePage = article.renameArticleUsingDropdown();
 		renamePage.rename(articleNewName);
-		article.compareTitle(articleNewName);
+		article.verifyArticleTitle(articleNewName);
 		article.verifyNotificationMessage();
 	}
 }
