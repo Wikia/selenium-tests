@@ -5,6 +5,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.DataProvider.SearchDataProvider;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,7 @@ import org.openqa.selenium.support.FindBys;
 public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 
 	private final String listOfLinksSelector = ".special > li > a";
-	private final String linksLimit = "a[href*=\"/wiki/Special:Multiwikifinder?limit=%limit%&offset=0&target=%target%\"]";
+	private final String linksLimit = "a[href*=\"/wiki/Special:Multiwikifinder?limit=%limit%\"]";
 
 	@FindBy(css="#mw-content-text input[type=submit]")
 	private WebElement findButton;
@@ -65,13 +66,6 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 		);
 	}
 
-	public void limitResults(String pageName, int limit) {
-		String limitCssSelector = linksLimit.replace("%limit%", Integer.toString(limit));
-		String newLimitCssSelector = limitCssSelector.replace("%target%", pageName);
-		WebElement limitButton = driver.findElement(By.cssSelector(newLimitCssSelector));
-		limitButton.click();
-	}
-
 	public void compareResultsCount(int limit){
 		if(limit==0){
 			waitForElementNotPresent(listOfLinksSelector);
@@ -110,4 +104,14 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 			Assertion.assertTrue(listOfLinks.get(i).getAttribute("href").endsWith("/" + pageName));
 		}
 	}
+
+	public void checkAllLimits(){
+		for(int limit : SearchDataProvider.getSearchLimits()){
+			String limitCssSelector = linksLimit.replace("%limit%", Integer.toString(limit));
+			WebElement limitButton = driver.findElement(By.cssSelector(limitCssSelector));
+			limitButton.click();
+			compareResultsCount(limit);
+		}
+	}
+
 }
