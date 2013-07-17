@@ -649,8 +649,11 @@ public class BasePageObject{
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
-	public void setStyle(/*String selrctor, String style*/) {
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
-	}
-
+        public void setStyle(String selector, String index, String style){
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript(
+                "document.querySelectorAll(arguments[0])[arguments[1]].style.display=arguments[2]",
+                selector, index, style
+            );
+        }
 }

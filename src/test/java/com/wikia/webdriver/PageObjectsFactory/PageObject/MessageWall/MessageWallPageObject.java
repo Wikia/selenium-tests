@@ -293,10 +293,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void removeMessage(String reason)
 	{
 		waitForElementByElement(msgToolbar);
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+		setStyle(".buttons", "1", "block");
 		waitForElementByElement(moreButton);
 		mouseOver(moreButtonCss);
-		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
+                jQueryClick("div.msg-toolbar nav.wikia-menu-button.secondary.combined");
 		mouseOver(".WikiaMenuElement .remove-message");
 		jQueryNthElemClick(".WikiaMenuElement .remove-message", 0);
 		waitForElementByElement(removeCloseOverLay);
@@ -322,7 +322,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private void clickEditMessage()
 	{
 		waitForElementByCss("div.msg-toolbar");
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+		setStyle(".buttons", "1", "block");
 		waitForElementByElement(moreButton);
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
@@ -335,7 +335,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public MessageWallHistoryPageObject openHistory() {
 		waitForElementByElement(msgToolbar);
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
+		setStyle(".buttons", "1", "block");
 		waitForElementByElement(moreButton);
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
@@ -458,10 +458,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void closeThread(String reason)
 	{
 		waitForElementByElement(msgToolbar);
-		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
-		waitForElementByElement(moreButton);
-		mouseOver(moreButtonCss);
-		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
+		setStyle(".buttons", "1", "block");
+                driver.findElement(By.cssSelector("div.msg-toolbar nav.wikia-menu-button.secondary.combined")).click();
 		mouseOver(".WikiaMenuElement .close-thread");
 		click(closeThread);
 		waitForElementByElement(removeCloseOverLay);
@@ -475,13 +473,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	public void reopenThread()
 	{
 		waitForElementByElement(msgToolbar);
-		setStyle();
-		waitForElementByElement(moreButton);
-		mouseOver(moreButtonCss);
-		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
-		mouseOver(".WikiaMenuElement .reopen-thread");
+		setStyle(".buttons", "1", "block");
+                driver.findElement(By.cssSelector("div.msg-toolbar nav.wikia-menu-button.secondary.combined")).click();
+                mouseOver(".WikiaMenuElement .reopen-thread");
 		click(reopenThread);
-		refreshPage();
+                refreshPage();
 		PageObjectLogging.log("reopenThread", "Thread is reopen", true);
 	}
+
 }
