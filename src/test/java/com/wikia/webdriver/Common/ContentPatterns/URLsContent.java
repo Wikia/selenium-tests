@@ -41,6 +41,7 @@ public class URLsContent {
 	public static final String specialFollow = "wiki/Special:Following";
 	public static final String specialForum = "wiki/Special:Forum";
 	public static final String userMessageWall = "wiki/Message_Wall:";
+	public static final String specialMultiWikiFinderPage = "wiki/Special:Multiwikifinder";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";

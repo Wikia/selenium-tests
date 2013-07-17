@@ -1,5 +1,7 @@
 package com.wikia.webdriver.Common.DataProvider;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.testng.annotations.DataProvider;
 
 public class SearchDataProvider {
@@ -11,7 +13,7 @@ public class SearchDataProvider {
         		{"star wars", "http://starwars.wikia.com/"}
         };
     }
-    
+
     @DataProvider
     public static final Object[][] getOnWikiHostsTermsAndMatchUrls() {
     	return new Object[][] {
@@ -19,4 +21,14 @@ public class SearchDataProvider {
     			{ "http://callofduty.wikia.com/", "Frank Woods", "http://callofduty.wikia.com/wiki/Frank_Woods" }
     	};
     }
+
+	public static final List<Integer> getSearchLimits() {
+		List<Integer> limits = new ArrayList<Integer>();
+		limits.add(20);
+		limits.add(50);
+		limits.add(100);
+		limits.add(250);
+		limits.add(500);
+		return limits;
+	}
 }
