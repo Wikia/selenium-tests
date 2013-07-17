@@ -1,10 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DataProvider.SearchDataProvider;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -37,17 +35,6 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 
 	public SpecialMultiWikiFinderPageObject(WebDriver driver) {
 		super(driver);
-	}
-
-	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(){
-		getUrl(Global.DOMAIN + URLsContent.specialMultiWikiFinderPage);
-		waitForElementByElement(multiWikiFinderPageHeader);
-		PageObjectLogging.log(
-			"openSpecialMultiWikiFinderPage",
-			"Special MultiWikiFinder page was opened",
-			true, driver
-		);
-		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
 	public void findPageName(String pagename){
