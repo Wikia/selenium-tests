@@ -87,7 +87,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
 
     public void submitTestFilterForm() {
         waitForElementByElement(submitTestFilter);
-        clickAndWait(submitTestFilter);
+        scrollAndClick(submitTestFilter);
     }
 
     public HashMap changeFilterContent(HashMap block) {
@@ -101,7 +101,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
     public void unblockFilter(String filter) {
         WebElement row = getRowFromSearchResult(filter);
         WebElement unblockButton = row.findElement(By.cssSelector(unblockButtonSelector));
-        clickAndWait(unblockButton);
+        scrollAndClick(unblockButton);
     }
 
     public void verifyMessageAboutBlockPresent() {
@@ -143,7 +143,7 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
 
     private void submitAddFilterForm() {
         waitForElementByElement(submitAddFilter);
-        clickAndWait(submitAddFilter);
+        scrollAndClick(submitAddFilter);
     }
 
     private void openTestBlockTab() {
@@ -170,11 +170,11 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
             );
             return;
         } else if (type.equals("regex")) {
-            clickAndWait(typeRegex);
+            scrollAndClick(typeRegex);
         } else if (type.equals("caseSensitive")) {
-            clickAndWait(typeCase);
+            scrollAndClick(typeCase);
         } else if (type.equals("exact")) {
-            clickAndWait(typeExact);
+            scrollAndClick(typeExact);
         }
         PageObjectLogging.log(
             "CheckboxChecked",
@@ -198,6 +198,6 @@ public class SpecialPhalanxPageObject extends SpecialPageObject {
     private void clickModifyFilter(String filter) {
         WebElement row = getRowFromSearchResult(filter);
         WebElement modifyLink = row.findElement(By.cssSelector(modifyLinkSelector));
-        clickAndWait(modifyLink);
+        scrollAndClick(modifyLink);
     }
 }

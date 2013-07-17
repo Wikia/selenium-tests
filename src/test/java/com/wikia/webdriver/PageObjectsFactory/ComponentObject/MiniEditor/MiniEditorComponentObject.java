@@ -75,7 +75,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	
 	public void addVideoMiniEditor(String url){
 		waitForElementByElement(addVideoButton);
-		clickAndWait(addVideoButton);
+		scrollAndClick(addVideoButton);
 		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.submit();
@@ -103,22 +103,22 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 
 	public void addExternalLink(String externalLink){
 		waitForElementByElement(addLinkButton);
-		clickAndWait(addLinkButton);
+		scrollAndClick(addLinkButton);
 		waitForElementByElement(externalLinkOption);
-		clickAndWait(externalLinkOption);
+		scrollAndClick(externalLinkOption);
 		targetPageOrURL.sendKeys(externalLink);
 		waitForElementByElement(linkExternalIcon);
-		clickAndWait(linkModalOkButton);
+		scrollAndClick(linkModalOkButton);
 	}
 
 	public void addInternalLink(String internalLink){
 		waitForElementByElement(addLinkButton);
-		clickAndWait(addLinkButton);
+		scrollAndClick(addLinkButton);
 		waitForElementByElement(targetPageOrURL);
 		targetPageOrURL.sendKeys(internalLink);
 		waitForElementByElement(linkExistsIcon);
 		waitForElementByElement(linkModalOkButton);
-		clickAndWait(linkModalOkButton);
+		scrollAndClick(linkModalOkButton);
 	}
 
 	public void clearContent(){
@@ -127,13 +127,13 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 
 	public VetAddVideoComponentObject clickAddVideo(){
 		waitForElementByElement(addVideoButton);
-		clickAndWait(addVideoButton);
+		scrollAndClick(addVideoButton);
 		return new VetAddVideoComponentObject(driver);
 	}
 
 	public PhotoAddComponentObject clickAddImage() {
 		waitForElementByElement(addImageButton);
-		clickAndWait(addImageButton);
+		scrollAndClick(addImageButton);
 		return new PhotoAddComponentObject(driver);
 	}
 

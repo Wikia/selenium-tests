@@ -25,10 +25,7 @@ public class TestAdsInContent extends AdsTestTemplate {
 	)
 	public TestAdsInContent(String wikiName, String path) {
 		super();
-		UrlBuilder urlBuilder = new UrlBuilder(
-			(String) config.get("ENV"),
-			(String) config.get("QS")
-		);
+		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 	}
 

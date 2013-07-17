@@ -1,13 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +9,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 //public class MessageWallPageObject extends MiniEditorComponentObject{
 	public class MessageWallPageObject extends WikiBasePageObject{
@@ -41,8 +44,6 @@ import org.openqa.selenium.support.PageFactory;
 	private WebElement historyButton;
 	@FindBy(css="a.edit-message")
 	private WebElement editMessageButton;
-	@FindBy(css="a.remove-message")
-	private WebElement removeMessageButton;
 	@FindBy(css="#WikiaConfirm")
 	private WebElement removeMessageOverLay;
 	@FindBy(css="#reason")
@@ -51,34 +52,26 @@ import org.openqa.selenium.support.PageFactory;
 	private WebElement removeMessageConfirmButton;
 	@FindBy(css=".speech-bubble-message-removed")
 	private WebElement removeMessageConfirmation;
-	@FindBy(css="span.cke_button.cke_off.cke_button_bold a .cke_icon")
-	private WebElement boldButton;
-	@FindBy(css="span.cke_button.cke_off.cke_button_itallic a .cke_icon")
-	private WebElement italicButton;
 	@FindBy(css="div.msg-title a")
 	private WebElement messageTitle;
 	@FindBys(@FindBy(css=".edited-by"))
 	private List<WebElement> msgEditedByFields;
 	@FindBys(@FindBy(css="div.msg-title a"))
 	private List<WebElement> messageTitlesList;
-	@FindBy(css="div.edited-by a")
-	private WebElement messageAuthor;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> messageBody;
-	@FindBys(@FindBy(css=".replies div.msg-body p"))
-	private List<WebElement> messageRepliesBody;
 	@FindBy(css="a#publish")
 	private WebElement publishButton;
 	@FindBy(css="a.cke_button_ModeSource .cke_icon")
 	private WebElement sourceModeButton;
 	@FindBy(css="textarea.cke_source")
 	private WebElement sourceModeTextarea;
-	@FindBy(css=".SortingSelected")
-	private WebElement sortingMenu;
 	@FindBy(css=".no-title-warning")
 	private WebElement noTitleErrorMsg;
 	@FindBy (css="#WallMessageBody")
 	private WebElement messageMainBody;
+	@FindBy (css="ul.comments li[style]")
+	private WebElement newMessageBubble;
 
 	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
@@ -115,7 +108,7 @@ import org.openqa.selenium.support.PageFactory;
 	public void openMessageWallThread(String title) {
 		for (WebElement elem : messageTitlesList) {
 			if (elem.getText().contains(title)) {
-				clickAndWait(elem);
+				scrollAndClick(elem);
 				break;
 			}
 		}
@@ -148,27 +141,21 @@ import org.openqa.selenium.support.PageFactory;
 	public void writeBoldMessage(String title, String message) {
 		writeTitle(title);
 		triggerMessageArea();
-		jQueryClick("span.cke_button.cke_off.cke_button_bold a .cke_icon");
-		messageTitleField.sendKeys(Keys.TAB);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
-//		writeSpecialMessage(title, message, "Bold");
 		miniEditor.writeStylesMiniEditor(message, "Bold");
 		driver.switchTo().defaultContent();
 	}
+
 	public void writeItalicMessage(String title, String message) {
 		writeTitle(title);
 		triggerMessageArea();
-		jQueryClick("span.cke_button.cke_off.cke_button_bold a .cke_icon");
-		messageTitleField.sendKeys(Keys.TAB);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
-//		writeSpecialMessage(title, message, "Italic");
 		miniEditor.writeStylesMiniEditor(message, "Italic");
 		driver.switchTo().defaultContent();
 	}
 
 	public void writeMessageNoTitle(String message)
 	{
-		clickAndWait(messageTitleField);
 		triggerMessageArea();
 		messageTitleField.sendKeys(Keys.TAB);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
@@ -189,7 +176,7 @@ import org.openqa.selenium.support.PageFactory;
 
 	public void writeMessageVideo(String title, String url)
 	{
-		clickAndWait(messageTitleField);
+		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
 		miniEditor.addVideoMiniEditor(url);
@@ -222,7 +209,7 @@ import org.openqa.selenium.support.PageFactory;
 	public void clickReplyButton() {
 		waitForElementByElement(replyButton);
 		waitForElementClickableByElement(replyButton);
-		clickAndWait(replyButton);
+		scrollAndClick(replyButton);
 		PageObjectLogging.log("clickReplyButton", "reply button clicked", true, driver);
 	}
 
@@ -255,11 +242,11 @@ import org.openqa.selenium.support.PageFactory;
 	 * @param replyNumber This is the same number as in the URL for that message.
 	 */
 	public void verifyPostedReplyWithMessage(String message, int replyNumber)
-	{	
+	{
 		waitForTextToBePresentInElementByBy(By.cssSelector("ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message);
 		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
-	
+
 	public void verifyPostedBoldMessageWithTitle(String title, String message) {
 		waitForTextToBePresentInElementByElement(messageTitle, title);
 		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
@@ -276,15 +263,17 @@ import org.openqa.selenium.support.PageFactory;
 	}
 
 	public void verifyPostedMessageWithLinks(String internallink, String externallink){
-		waitForTextToBePresentInElementByElement(messageBody.get(0), internallink);
-		waitForTextToBePresentInElementByElement(messageBody.get(1), externallink);
+		waitForElementByElement(newMessageBubble);
+		Assertion.assertEquals(messageBody.get(0).getText(), internallink);
+		Assertion.assertEquals(messageBody.get(1).getText(), externallink);
 		PageObjectLogging.log("verifyPostedMessageWithLinks", "message with links", true);
 	}
 
 	public void verifyPostedMessageWithoutTitle(String userName, String message)
 	{
+		waitForElementByElement(newMessageBubble);
 		waitForTextToBePresentInElementByElement(msgEditedByFields.get(0), userName);
-		waitForTextToBePresentInElementByElement(messageBody.get(0), message);
+		Assertion.assertEquals(messageBody.get(0).getText(), message);
 		PageObjectLogging.log(
 			"verifyPostedMessageWithTitle",
 			"message without title verified", true, driver
@@ -318,13 +307,13 @@ import org.openqa.selenium.support.PageFactory;
 		if (Global.BROWSER.equals("IE")) {
 
 			WebElement removeMessageReasonParent = getParentElement(removeMessageReason);
-			clickAndWait(removeMessageReasonParent);
+			scrollAndClick(removeMessageReasonParent);
 			removeMessageReasonParent.sendKeys(reason);
-			clickAndWait(removeMessageConfirmButton);
+			scrollAndClick(removeMessageConfirmButton);
 		}
 		else {
 			removeMessageReason.sendKeys(reason);
-			clickAndWait(removeMessageConfirmButton);
+			scrollAndClick(removeMessageConfirmButton);
 		}
 
 		waitForElementByElement(removeMessageConfirmation);
@@ -340,7 +329,7 @@ import org.openqa.selenium.support.PageFactory;
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		waitForElementByElement(editMessageButton);
-		clickAndWait(editMessageButton);
+		scrollAndClick(editMessageButton);
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"\"");
 		PageObjectLogging.log("clickEditMessage", "edit message button is clicked", true);
 	}
@@ -352,7 +341,7 @@ import org.openqa.selenium.support.PageFactory;
 		mouseOver(moreButtonCss);
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		waitForElementByElement(historyButton);
-		clickAndWait(historyButton);
+		scrollAndClick(historyButton);
 		PageObjectLogging.log("openHistory", "open History page of the newest thread", true, driver);
 		return new MessageWallHistoryPageObject(driver);
 	}
@@ -370,7 +359,7 @@ import org.openqa.selenium.support.PageFactory;
 		driver.switchTo().defaultContent();
 
 		waitForElementByElement(elem);
-		clickAndWait(messageTitleEditField2);
+		scrollAndClick(messageTitleEditField2);
 		messageTitleEditField2.sendKeys(Keys.TAB);
 		driver.switchTo().frame(elem);
 //		messageBodyField.sendKeys(message);
@@ -385,7 +374,7 @@ import org.openqa.selenium.support.PageFactory;
 
 		if (Global.BROWSER.equals("IE")) {
 			driver.switchTo().frame(elem);
-			clickAndWait(messageBodyField);
+			scrollAndClick(messageBodyField);
 			miniEditor.writeMiniEditor(Keys.TAB);
 			miniEditor.writeMiniEditor(Keys.ENTER);
 //			messageBodyField.sendKeys(Keys.TAB);
@@ -393,7 +382,7 @@ import org.openqa.selenium.support.PageFactory;
 			driver.switchTo().defaultContent();
 		}
 		else {
-			clickAndWait(saveEditButton);
+			scrollAndClick(saveEditButton);
 		}
 		PageObjectLogging.log("writeEditMessage", "message edited", true, driver);
 	}
@@ -407,12 +396,12 @@ import org.openqa.selenium.support.PageFactory;
 
 	public void clickPublishButton() {
 		waitForElementByElement(publishButton);
-		clickAndWait(publishButton);
+		scrollAndClick(publishButton);
 		PageObjectLogging.log("clickPublishButton", "publish button is clicked", true, driver);
 	}
 
 	public void writeMessageWithLink(String internalLink, String externalLink, String title) {
-		clickAndWait(messageTitleField);
+		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
 		miniEditor.addInternalLink(internalLink);
@@ -429,10 +418,10 @@ import org.openqa.selenium.support.PageFactory;
 	}
 
 	public void writeMessageSourceMode(String title, String message) {
-		clickAndWait(messageTitleField);
+		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-		clickAndWait(sourceModeButton);
+		scrollAndClick(sourceModeButton);
 		waitForElementByElement(sourceModeTextarea);
 		sourceModeTextarea.sendKeys(message);
 		PageObjectLogging.log("writeMessageSourceMode", "message in source mode is written, title: "+title+" body: "+message, true, driver);
@@ -464,15 +453,15 @@ import org.openqa.selenium.support.PageFactory;
 		List<WebElement> list = driver.findElements(sortingList);
 		if (order.equals("NewestThreads")) {
 			waitForElementByElement(list.get(0));
-			clickAndWait(list.get(0));
+			scrollAndClick(list.get(0));
 		}
 		if (order.equals("OldestThreads")) {
 			waitForElementByElement(list.get(1));
-			clickAndWait(list.get(1));
+			scrollAndClick(list.get(1));
 		}
 		if (order.equals("NewestReplies")) {
 			waitForElementByElement(list.get(2));
-			clickAndWait(list.get(2));
+			scrollAndClick(list.get(2));
 		}
 		PageObjectLogging.log("sortThreads", "order of messages sorted: "+order, true, driver);
 	}

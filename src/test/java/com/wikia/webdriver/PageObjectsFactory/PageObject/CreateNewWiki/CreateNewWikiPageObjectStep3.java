@@ -1,16 +1,17 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+
 
 /**
- * 
+ *
  * @author Karol
  *
  */
@@ -49,11 +50,11 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 		PageObjectLogging.log("selectTheme", "skin number: " + skinNumber + " selected", true, driver);
 	}
 
-	public NewWikiaHomePage submit(String wikiName)
+	public NewWikiaHomePage submit()
 	{
 		waitForElementNotPresent(loadingIndicatorBy);
 		waitForElementByElement(submitButton);
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
 		return new NewWikiaHomePage(driver);
 	}

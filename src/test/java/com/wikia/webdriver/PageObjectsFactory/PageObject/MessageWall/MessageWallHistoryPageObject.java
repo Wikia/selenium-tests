@@ -40,7 +40,7 @@ public class MessageWallHistoryPageObject extends WikiBasePageObject {
 	
 	public MessageWallPageObject navigateBackToMessageWall() {
 		waitForElementByElement(messageWallLink);
-		clickAndWait(messageWallLink);	
+		scrollAndClick(messageWallLink);	
 		return new MessageWallPageObject(driver);
 		
 	}

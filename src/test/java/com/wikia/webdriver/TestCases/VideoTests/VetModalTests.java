@@ -4,11 +4,11 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
@@ -19,7 +19,7 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC001 - Verifies left video alignment on editor, 'left' string on source
 	 * mode and left alignment on article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
@@ -27,7 +27,9 @@ public class VetModalTests extends TestTemplate {
 	public void Vet_Tests_001_VerifyLeftAlignmentOnEditorSourceAndArticle() {
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -46,17 +48,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC002 - Verifies left video alignment on editor, 'left' string on source
 	 * mode, left alignment on preview modal and left alignment on article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests002", "VetModalTests" })
 	public void Vet_Tests_002_VerifyLeftAlignmentOnEditorSourcePreviewModalAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName, Properties.password,
-				driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -80,17 +82,17 @@ public class VetModalTests extends TestTemplate {
 	 * TC003 - Verifies left video alignment on editor, left alignment on
 	 * article and then checks left alignment is chosen back in the VET options
 	 * modal *
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests003", "VetModalTests" })
 	public void Vet_Tests_003_VerifyLeftAlignmentOnEditorArticleAndVETOptions() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -112,17 +114,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC004 - Verifies right video alignment on editor, 'right' string on
 	 * source mode and right alignment on article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests004", "VetModalTests" })
 	public void Vet_Tests_004_VerifyRightAlignmentOnEditorSourceAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -142,17 +144,17 @@ public class VetModalTests extends TestTemplate {
 	 * TC005 - Verifies right video alignment on editor, 'right' string on
 	 * source mode, right alignment on preview modal and right alignment on
 	 * article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests005", "VetModalTests" })
 	public void Vet_Tests_005_VerifyRightAlignmentOnEditorSourcePreviewModalAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -176,17 +178,17 @@ public class VetModalTests extends TestTemplate {
 	 * TC006 - Verifies right video alignment on editor, right alignment on
 	 * article and then checks right alignment is chosen back in the VET options
 	 * modal *
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests006", "VetModalTests" })
 	public void Vet_Tests_006_VerifyRightAlignmentOnEditorArticleAndVETOptions() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -208,17 +210,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC007 - Verifies center video alignment on editor, 'center' string on
 	 * source mode and center alignment on article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests007", "VetModalTests" })
 	public void Vet_Tests_007_VerifyCenterAlignmentOnEditorSourceAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -238,17 +240,17 @@ public class VetModalTests extends TestTemplate {
 	 * TC008 - Verifies center video alignment on editor, 'center' string on
 	 * source mode, center alignment on preview modal and center alignment on
 	 * article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests008", "VetModalTests" })
 	public void Vet_Tests_008_VerifyCenterAlignmentOnEditorSourcePreviewModalAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -272,17 +274,17 @@ public class VetModalTests extends TestTemplate {
 	 * TC009 - Verifies center video alignment on editor, center alignment on
 	 * article and then checks center alignment is chosen back in the VET
 	 * options modal *
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests009", "VetModalTests" })
 	public void Vet_Tests_009_VerifyCenterAlignmentOnEditorArticleAndVETOptions() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -303,17 +305,17 @@ public class VetModalTests extends TestTemplate {
 
 	/**
 	 * TC010 - Verifies video width on editor, source mode and on article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests010", "VetModalTests" })
 	public void Vet_Tests_010_VerifyVideoWidthOnEditorSourceAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -332,18 +334,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC011 - Verifies video width on editor, source mode, preview modal and on
 	 * article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests011", "VetModalTests" })
 	public void Vet_Tests_011_VerifyVideoWidthOnEditorSourcePreviewModalAndArticle() {
-
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -366,17 +367,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC012 - Verifies video width on editor, article and then checks back in
 	 * VET options modal
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests012", "VetModalTests" })
 	public void Vet_Tests_012_VerifyVideoWidthOnEditorArticleAndVETOptions() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -397,17 +398,17 @@ public class VetModalTests extends TestTemplate {
 
 	/**
 	 * TC013 - Verifies video caption on editor, source mode and article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests013", "VetModalTests" })
 	public void Vet_Tests_013_VerifyVideoCaptionOnEditorSourceAndArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -426,18 +427,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC014 - Verifies video caption on editor, source mode, preview modal and
 	 * article
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests014", "VetModalTests" })
 	public void Vet_Tests_014_VerifyVideoCaptionOnEditorSourcePreviewModalAndArticle() {
-
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -459,17 +459,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC015 - Verifies video caption on editor, article and then back in VET
 	 * options modal *
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests015", "VetModalTests" })
 	public void Vet_Tests_015_VerifyVideoCaptionOnEditorArticleAndVETOptions() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -491,17 +491,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC016 - Verifies no video caption on editor, article and then back in VET
 	 * options modal
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests016", "VetModalTests" })
 	public void Vet_Tests_016_VerifyNoCaptionOnEditorArticle() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -523,17 +523,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC017 - Verifies video name field is not editable for Wikia Premium
 	 * Videos
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests017", "VetModalTests" })
 	public void Vet_Tests_017_VerifyVideoNameFieldIsNotEditable() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();
@@ -548,17 +548,17 @@ public class VetModalTests extends TestTemplate {
 	/**
 	 * TC018 - Verifies video name field is editable for Non-Premium Wikia
 	 * videos
-	 * 
+	 *
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
 	@Test(groups = { "VetModalTests018", "VetModalTests" })
 	public void Vet_Tests_018_VerifyVideoNameFieldIsEditable() {
-		CommonFunctions.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName,
-				Properties.password, driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logInCookie(Properties.userName,
+				Properties.password);
 		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
 		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
 		edit.deleteArticleContent();

@@ -1,20 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject;
 
-import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  *
@@ -52,7 +48,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
     public void openDropDown() {
         waitForElementByElement(loginDropdownTrigger);
-        clickAndWait(loginDropdownTrigger);
+        scrollAndClick(loginDropdownTrigger);
         waitForElementInViewPort(loginDropdown);
         PageObjectLogging.log(
             "DropdownVisible",
@@ -63,17 +59,17 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
     public void remindPassword(String userName) {
     	Assertion.assertEquals(
-    			ApiActions.apiActionForgotPasswordResponse, 
-    			CommonFunctions.resetForgotPasswordTime(userName));
+    			ApiActions.apiActionForgotPasswordResponse,
+    			resetForgotPasswordTime(userName));
         fillUserNameInput(userName);
         waitForElementByElement(formForgotPasswordLink);
-        clickAndWait(formForgotPasswordLink);
+        scrollAndClick(formForgotPasswordLink);
     }
 
     public void logIn(String userName, String password) {
         fillUserNameInput(userName);
         fillPasswordInput(password);
-        clickAndWait(formSubmitButton);
+        scrollAndClick(formSubmitButton);
         PageObjectLogging.log(
             "LoginFormSubmitted",
             "Login form is submitted",
@@ -104,7 +100,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
     }
 
     public void logInViaFacebook() {
-        clickAndWait(formConnectWithFbButton);
+        scrollAndClick(formConnectWithFbButton);
         PageObjectLogging.log(
             "logInDropDownFB",
             "facebook button clicked",
@@ -142,7 +138,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
             true
         );
 
-        clickAndWait(facebookSubmitButton);
+        scrollAndClick(facebookSubmitButton);
         PageObjectLogging.log(
             "logInDropDownFB",
             "facebook log in submit button clicked",

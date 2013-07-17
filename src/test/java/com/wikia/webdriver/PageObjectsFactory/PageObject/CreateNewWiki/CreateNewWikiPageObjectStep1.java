@@ -1,17 +1,20 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+
 /**
- * 
+ *
  * @author Karol Kujawiak
  *
  */
@@ -33,14 +36,22 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	@FindBy(css=".domain-country")
 	private WebElement languageSelectedIndicator;
 
+	private String wikiNameString;
+
 	public CreateNewWikiPageObjectStep1(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		wikiNameString = PageContent.wikiNamePrefix + getRandomDigits(3) + getRandomString(5);
 	}
+
+	public String getWikiName(){
+		return this.wikiNameString;
+	}
+
 
 	public void selectLanguage(String lang)
 	{
-		clickAndWait(languageSelectorTrigger);
+		scrollAndClick(languageSelectorTrigger);
 		waitForElementByElement(languageSelector);
 		Select language = new Select(languageSelector);
 		List<WebElement> langList = language.getOptions();
@@ -57,7 +68,7 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	}
 
 	/**
-	 * 
+	 *
 	 * @param name
 	 * @author Karol Kujawiak
 	 */
@@ -73,7 +84,7 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	}
 
 	/**
-	 * 
+	 *
 	 * @param domain
 	 * @author Karol Kujawiak
 	 */
@@ -103,14 +114,14 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 
 	public CreateNewWikiPageObjectStep2 submit()
 	{
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
 		return new CreateNewWikiPageObjectStep2(driver);
 	}
 
 	public CreateNewWikiLogInPageObject submitToLogIn()
 	{
-		clickAndWait(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
 		return new CreateNewWikiLogInPageObject(driver);
 	}

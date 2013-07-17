@@ -10,16 +10,16 @@ public class URLsContent {
 
 	//Preview url prefix
 	public static String previewPrefix = "http://preview";
-	
+
 	// Common url component
 	public static String wikiDir = "wiki/";
 
 	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 
 	// Hubs
-	public static String VideoGamesHub = "http://www.wikia.com/Video_Games";
-	public static String EntertainmentHub = "http://www.wikia.com/Entertainment";
-	public static String LifestyleHub = "http://www.wikia.com/Lifestyle";
+	public static String VideoGamesHub = Global.LIVE_DOMAIN+"Video_Games";
+	public static String EntertainmentHub = Global.LIVE_DOMAIN+"Entertainment";
+	public static String LifestyleHub = Global.LIVE_DOMAIN+"Lifestyle";
 
 	//Special Urls - links to special pages
 	public static final String specialUserLogin = "wiki/Special:UserLogin";
@@ -35,8 +35,8 @@ public class URLsContent {
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
 	public static final String specialPreferences = "wiki/Special:Preferences";
-    public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
-	public static final String specialCSS = "Special:CSS";
+	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
+	public static final String specialCSS = "wiki/Special:CSS";
 	public static final String specialRandom = "wiki/Special:Random";
 	public static final String specialFollow = "wiki/Special:Following";
 	public static final String specialForum = "wiki/Special:Forum";
@@ -45,16 +45,16 @@ public class URLsContent {
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
-	
+
 	//Blog list page url
 	public static final String blogList = "wiki/Blog:%listName%";
-	
+
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
 	public static final String actionEditParameter = "?action=edit";
 
-    // WAM Scores page url
-    public static final String wamPageUrl = "WAM";
+ 	// WAM Scores page url
+ 	public static final String wamPageUrl = "WAM";
 
 	// Extra sites - useful for monobook
 	// replace %user% with username
@@ -65,7 +65,7 @@ public class URLsContent {
 	public static final String userPrefix = "User:%user%";
 
 	public static final String apiUrl = Global.DOMAIN + "api.php";
-	
+
 	public static String buildUrl(String url, String parameter) {
 		String temp;
 		if (url.contains("?")) {
@@ -76,7 +76,7 @@ public class URLsContent {
 			return temp;
 		}
 	}
-	
+
 	// File Pages
 	public static String fileNS = "File:";
 	public static String fileName001 = "Grammy_Muppet_Critics";

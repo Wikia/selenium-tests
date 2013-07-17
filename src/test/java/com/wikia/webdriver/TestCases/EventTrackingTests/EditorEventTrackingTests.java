@@ -4,13 +4,11 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.EventsContent;
 import com.wikia.webdriver.Common.ContentPatterns.PathsContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.EventTrackingVerifier;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
@@ -18,7 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
  * Those tests cover testing events from below wikia spreadsheet
  * https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0
  * Ahq3QVBqbE1xdElQRmRvbk4tMUc3VXVmeWl6WlFWSEE#gid=4
- * 
+ *
  * @author Michal 'justnpT' Nowierski
  */
 public class EditorEventTrackingTests extends TestTemplate {
@@ -37,10 +35,11 @@ public class EditorEventTrackingTests extends TestTemplate {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		CommonFunctions.logOut(driver);
+		 SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		article.openRandomArticle();
 		WikiArticleEditMode edit = article.edit();
 		edit.enableWikiaTracker();

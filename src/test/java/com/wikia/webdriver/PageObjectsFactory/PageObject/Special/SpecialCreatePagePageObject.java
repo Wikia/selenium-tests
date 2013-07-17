@@ -31,7 +31,7 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
         waitForElementByElement(titleInput);
         titleInput.sendKeys(title);
         waitForElementByElement(submitTitleInput);
-        clickAndWait(submitTitleInput);
+        scrollAndClick(submitTitleInput);
     }
 
     public void addPageWithGIvenTitleAndDefaultContent(String title) {

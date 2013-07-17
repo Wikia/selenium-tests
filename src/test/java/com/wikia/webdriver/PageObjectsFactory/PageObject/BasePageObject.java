@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -16,10 +17,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -31,7 +30,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class BasePageObject{
 
-	public final WebDriver driver;
+	public WebDriver driver;
 	protected int timeOut = 30;
 	public WebDriverWait wait;
 	public Actions builder;
@@ -65,14 +64,14 @@ public class BasePageObject{
 		driver.manage().window().maximize();
 	}
 
+	public static String getAttributeValue(WebElement element, String attributeName) {
+		return element.getAttribute(attributeName);
+	}
+
 	/*
 	 * Mouse events
 	 */
 
-	public void click(WebElement pageElem) {
-		CommonFunctions.scrollToElement(pageElem);
-		pageElem.click();
-	}
 
 	public void clickActions(WebElement pageElem) {
 		try {
@@ -131,10 +130,10 @@ public class BasePageObject{
 	}
 
 
-	public void clickAndWait(WebElement pageElem)
+	public void scrollAndClick(WebElement pageElem)
 	{
 		try {
-			CommonFunctions.scrollToElement(pageElem);
+			scrollToElement(pageElem);
 			pageElem.click();
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("clickAndWait",
@@ -203,6 +202,33 @@ public class BasePageObject{
 			PageObjectLogging.log("refreshPage",
 					"page loaded for more then 30 seconds after click", true);
 		}
+	}
+
+	public void waitForWindow(String windowName, String comment) {
+		Object[] windows = driver.getWindowHandles().toArray();
+		int delay = 500;
+		int sumDelay = 500;
+		while (windows.length == 1) {
+			try {
+				Thread.sleep(delay);
+				windows = driver.getWindowHandles().toArray();
+				sumDelay += 500;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (sumDelay > 5000) {
+				PageObjectLogging.log(windowName, comment, false);
+				break;
+			}
+		}
+	}
+
+	public void scrollToElement(WebElement element) {
+		int y = element.getLocation().getY();
+		((JavascriptExecutor) driver)
+				.executeScript("window.scrollBy(0,-3000);");
+		((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + y
+				+ ");");
 	}
 
 	public void navigateBack(){
@@ -302,8 +328,7 @@ public class BasePageObject{
 	/**
 	 * Checks if the element is present in DOM
 	 *
-	 * @param element
-	 *            The element to be checked
+	 * @param locator The element to be checked
 	 */
 	public void waitForElementPresenceByBy(By locator) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -423,15 +448,15 @@ public class BasePageObject{
 				.textToBePresentInElement(temp, text));
 	}
 
+	public void waitForStringInURL(String givenString) {
+		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
+		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
+	}
+
 	public void waitForClassRemovedFromElement(WebElement element,
 			String className) {
 		wait.until(CommonExpectedConditions.classRemovedFromElement(element,
 				className));
-	}
-
-	public void waitForStringInURL(String givenString) {
-		wait.until(CommonExpectedConditions
-				.givenStringtoBePresentInURL(givenString));
 	}
 
 	public String getTimeStamp() {
@@ -440,24 +465,35 @@ public class BasePageObject{
 		return String.valueOf(timeCurrent);
 	}
 
-	public String getTimeStamp(int length) {
-		Date time = new Date();
-		long timeCurrent = time.getTime();
-		String timeStamp = String.valueOf(timeCurrent);
+	public String getRandomDigits(int length) {
+		String timeStamp = getTimeStamp();
 		int timeStampLenght = timeStamp.length();
 		int timeStampCut = timeStampLenght-length;
 		return timeStamp.substring(timeStampCut);
 	}
 
-
+	public String getRandomString(int length) {
+		char [] alphabet = {
+				'A','B','C','D','E','F','G','H','I',
+				'J','K','L','M','N','O','P','Q','R',
+				'S','T','U','V','W','X','Y','Z',
+				'a','b','c','d','e','f','g','h','i',
+				'j','l','k','l','m','n','o','p','r',
+				's','t','u','v','w','x','y','z'};
+		Random rnd = new Random();
+		StringBuilder sb = new StringBuilder();
+		for (int i=0; i<length; i++) {
+			sb.append(alphabet[rnd.nextInt(alphabet.length)]);
+		}
+		return sb.toString();
+	}
 
 	/**
 	 * <p>
 	 * Verify if js alert is or isn't there. You can expect alert with certain
 	 * message, or not expect alert with certain message <br>
 	 *
-	 * @param alert
-	 *            message that we do or do not expect
+	 * @param alertMessage that we do or do not expect
 	 * @param ifAlertExpected
 	 *            if we expect JS alert - true. If we don't expect JS alert -
 	 *            false
@@ -494,11 +530,6 @@ public class BasePageObject{
 		}
 	}
 
-	public void openWikiPage() {
-		getUrl(Global.DOMAIN + URLsContent.noexternals);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
-	}
-
 	/*
 	 * Wait for expected conditions methods
 	 */
@@ -506,10 +537,8 @@ public class BasePageObject{
 	/**
 	 * Wait for tags that are visible and are bigger then 1px x 1px
 	 *
-	 * @param String
-	 *            tagNameOne - first tag name
-	 * @param String
-	 *            tagNameTwo - second tag name
+	 * @param tagNameOne - first tag name
+	 * @param tagNameTwo - second tag name
 	 */
 	public void waitForOneOfTagsPresentInElement(WebElement slot,
 			String tagNameOne, String tagNameTwo) {
@@ -538,7 +567,7 @@ public class BasePageObject{
 	public void notifications_clickOnNotificationsLogo() {
 		waitForElementByElement(notifications_ShowNotificationsLogo);
 		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		clickAndWait(notifications_ShowNotificationsLogo);
+		scrollAndClick(notifications_ShowNotificationsLogo);
 		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
 				"click on notifications logo on the upper right corner", true,
 				driver);
@@ -555,7 +584,7 @@ public class BasePageObject{
 	public void notifications_showNotificationsForWikiOnMenu() {
 		waitForElementByElement(notifications_NotificationsForWiki);
 		waitForElementClickableByElement(notifications_NotificationsForWiki);
-		clickAndWait(notifications_NotificationsForWiki);
+		scrollAndClick(notifications_NotificationsForWiki);
 		PageObjectLogging.log("notifications_showNotificationsForWiki",
 				"show the upper wiki notifications on menu", true, driver);
 	}
@@ -568,13 +597,13 @@ public class BasePageObject{
 	public void notifications_clickMarkAllAsRead(boolean allWikis) {
 		waitForElementByElement(notifications_MarkAllAsReadButton);
 		waitForElementClickableByElement(notifications_MarkAllAsReadButton);
-		clickAndWait(notifications_MarkAllAsReadButton);
+		scrollAndClick(notifications_MarkAllAsReadButton);
 		if (allWikis) {
 			waitForElementClickableByElement(notifications_MarkAllWikisAsReadButton);
-			clickAndWait(notifications_MarkAllWikisAsReadButton);
+			scrollAndClick(notifications_MarkAllWikisAsReadButton);
 		} else {
 			waitForElementClickableByElement(notifications_MarkOnlyThisWikiAsReadButton);
-			clickAndWait(notifications_MarkOnlyThisWikiAsReadButton);
+			scrollAndClick(notifications_MarkOnlyThisWikiAsReadButton);
 		}
 		PageObjectLogging.log("notifications_clickMarkAllAsRead",
 				(allWikis ? "all wikis" : "only one wiki") + " marked as read",
@@ -585,7 +614,7 @@ public class BasePageObject{
      * Determine whether username contains underscore
      * if so replace it with space
      *
-     * @param username
+     * @param userName
      */
     protected String purifyUserName(String userName) {
         if (userName.contains("_")) {
@@ -636,16 +665,6 @@ public class BasePageObject{
         );
     };
 
-    /**
-     * Determine if tests are ran on preview or live enviroment
-     */
-    public String determineEnviroment() {
-        if (Global.DOMAIN.contains(URLsContent.previewPrefix)) {
-            return "preview";
-        } else {
-            return "";
-        }
-    }
 	public void enableWikiaTracker() {
 		if (driver.getCurrentUrl().contains("?")) {
 			appendToUrl("&log_level=info");

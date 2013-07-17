@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -14,7 +13,7 @@ public class ShareToolbarComponentObject extends BasePageObject {
 	public ShareToolbarComponentObject(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(css="a[data-id='shareButton']")
 	private WebElement shareButton;
 	@FindBy(css="iframe.twitter-share-button")
@@ -41,22 +40,22 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		shareButton.click();
 		PageObjectLogging.log("clickShareButton", "Share button was clicked", true, driver);
 	}
-	
-	public void verifyTwitterIframeVisibility() {	
+
+	public void verifyTwitterIframeVisibility() {
 		waitForElementByElement(twitterIframe);
 		PageObjectLogging.log("VerifyTwitterIframePresence", "Verify that the Twitter Iframe Is Present", true, driver);
 	}
-	
-	public void verifyFBIframeVisibility() {	
+
+	public void verifyFBIframeVisibility() {
 		waitForElementByElement(fBIframe);
 		PageObjectLogging.log("VerifyFBIframeVisibility", "Verify that the FB Iframe Is Present", true, driver);
 	}
-	
-	public void verifyEmailButtonVisibility() {	
+
+	public void verifyEmailButtonVisibility() {
 		waitForElementByElement(emailButton);
 		PageObjectLogging.log("verifyEmailButtonVisibility", "Verify that the Email Button Is Present", true, driver);
 	}
-	
+
 	public void navigteTweetButtonUrl() {
 		waitForElementByElement(twitterIframe);
 		driver.switchTo().frame(twitterIframe);
@@ -65,12 +64,12 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		getUrl(href);
 		PageObjectLogging.log("clickTweetButton", "Twitter button was clicked", true, driver);
 	}
-	
+
 	public void verifyTwitterModalURL() {
 		Assertion.assertStringContains(getCurrentUrl(), "twitter.com");
 		PageObjectLogging.log("VerifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true, driver);
 	}
-	
+
 	public void clickFBLikeButton() {
 		waitForElementByElement(fBIframe);
 		driver.switchTo().frame(fBIframe);
@@ -78,23 +77,23 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickFBLikeButton", "FB Like button was clicked", true, driver);
 	}
-	
+
 	public void verifyFBModalURL() {
-		CommonFunctions.waitForWindow("", "");
+		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
 		Assertion.assertStringContains(getCurrentUrl(), "facebook.com");
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("VerifyFBModalURL", "Verify that the FB Modal URL is correct", true, driver);
 	}
-	
+
 	public void clickEmailButton() {
 		waitForElementByElement(emailButton);
 		emailButton.click();
 		PageObjectLogging.log("clickEmailButton", "Email button was clicked", true, driver);
 	}
-    
-	public void verifyEmailModalElements() {	
+
+	public void verifyEmailModalElements() {
 		waitForElementByElement(emailModalSendButton);
 		waitForElementByElement(emailModalCancelButton);
 		waitForElementByElement(emailModalCloseButton);

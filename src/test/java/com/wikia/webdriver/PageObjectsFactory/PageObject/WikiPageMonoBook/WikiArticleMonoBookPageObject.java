@@ -1,9 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook;
 
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,12 +13,13 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BaseMonoBookPageObject;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author lukaszk
  */
 public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
-
 
 	@FindBy(css = "#mw-content-text")
 	private WebElement articleContentLocator;
@@ -96,12 +94,12 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 	}
 
 	public void clickEdit() {
-		clickAndWait(editLink);
+		scrollAndClick(editLink);
 		PageObjectLogging.log("clickEdit", "click on Edit link", true);
 	}
 
 	public String deleteArticle() {
-		clickAndWait(deleteArticleLink);
+		scrollAndClick(deleteArticleLink);
 		PageObjectLogging.log(
 				"DeleteForm",
 				"Eneter article delete form",
@@ -114,14 +112,14 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 				"deletion reason selected",
 				true, driver
 		);
-		clickAndWait(submitDelete);
+		scrollAndClick(submitDelete);
 		return articleTitle;
 	}
 
 	public String editContent() {
 		String articleContent = enterDefaultContent();
 		waitForElementByElement(submitEditButton);
-		clickAndWait(submitEditButton);
+		scrollAndClick(submitEditButton);
 		PageObjectLogging.log(
 				"submitEditForm",
 				"new content is added to form",
@@ -147,7 +145,7 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 
 	public String enterEdition() {
 		waitForElementByElement(editLink);
-		clickAndWait(editLink);
+		scrollAndClick(editLink);
 		waitForElementByElement(submitEditButton);
 		PageObjectLogging.log(
 				"editArticlePageMonobook",
@@ -181,7 +179,7 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 		);
 
 		waitForElementClickableByElement(submitDiscussion);
-		clickAndWait(submitDiscussion);
+		scrollAndClick(submitDiscussion);
 
 		HashMap content = new HashMap();
 		content.put("discussionTitle", discussionTitle);
@@ -204,27 +202,27 @@ public class WikiArticleMonoBookPageObject extends BaseMonoBookPageObject {
 	public String postComment() {
 		String comment = PageContent.commentText + getTimeStamp();
 		postCommentLocator.sendKeys(comment);
-		clickAndWait(postCommentSubmit);
+		scrollAndClick(postCommentSubmit);
 		return comment;
 	}
 
 	public String replyComment() {
 		waitForElementByElement(replyButton);
-		clickAndWait(replyButton);
+		scrollAndClick(replyButton);
 		waitForElementByElement(replyArea);
 		String reply =  getTimeStamp();
 		replyArea.sendKeys(reply);
-		clickAndWait(submitReply);
+		scrollAndClick(submitReply);
 		return reply;
 	}
 
 	public String renameArticle() {
-		clickAndWait(renameLink);
+		scrollAndClick(renameLink);
 		String newName = PageContent.articleNamePrefix + getTimeStamp();
 		newTitleLocator.clear();
 		newTitleLocator.sendKeys(newName);
 
-		clickAndWait(submitRename);
+		scrollAndClick(submitRename);
 		return newName;
 	}
 

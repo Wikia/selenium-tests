@@ -19,13 +19,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.
 
 public class HomePageObject extends BasePageObject{
 
-	@FindBy(css="header.wikiahomepage-header a.button") 
+	@FindBy(css="header.wikiahomepage-header a.button")
 	private WebElement startWikiButton;
-	@FindBy(css="section.grid-2.videogames a img") 
+	@FindBy(css="section.grid-2.videogames a img")
 	private WebElement OpenVideoGamesHub;
-	@FindBy(css="section.grid-2.entertainment a img") 
+	@FindBy(css="section.grid-2.entertainment a img")
 	private WebElement OpenEntertainmentHub;
-	@FindBy(css="section.grid-2.lifestyle a img") 
+	@FindBy(css="section.grid-2.lifestyle a img")
 	private WebElement OpenLifestyleHub;
 	@FindBy(css="a.ajaxLogin")
 	private WebElement LoginOverlay;
@@ -39,15 +39,15 @@ public class HomePageObject extends BasePageObject{
     private WebElement searchInput;
 //	@FindBy(css=".wikia-mosaic-slider-panorama")
 //	private WebElement hubsHeroCarousel;
-	
+
 	private By hubsHeroCarousel = By.cssSelector(".wikia-mosaic-slider-panorama");
-	
-	public HomePageObject(WebDriver driver) 
+
+	public HomePageObject(WebDriver driver)
 	{
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void openHomePage()
 	{
 		try{
@@ -65,29 +65,29 @@ public class HomePageObject extends BasePageObject{
 			PageObjectLogging.log("openHomePage", "timeouted when opening homepage", true);
 		}
 	}
-	
+
 	public void triggerLoginOverlay()
 	{
-		clickAndWait(LoginOverlay);
+		scrollAndClick(LoginOverlay);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='username']")));
 	}
-	
+
 	public void typeInUserName(String userName)
-	{	
+	{
 		waitForElementByElement(UserNameField);
 		UserNameField.sendKeys(userName);
 	}
-	
+
 	public void forgotYourPasswordClick()
 	{
 		waitForElementByElement(ForgotYourPassword);
-		clickAndWait(ForgotYourPassword);
+		scrollAndClick(ForgotYourPassword);
 		waitForElementByCss("div#UserLoginDropdown div.error-msg");
 	}
-	
+
 	public CreateNewWikiPageObjectStep1 startAWiki()
 	{
-		clickAndWait(startWikiButton);
+		scrollAndClick(startWikiButton);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
 		if (Global.LIVE_DOMAIN.contains("preview"))
 		{
@@ -97,7 +97,7 @@ public class HomePageObject extends BasePageObject{
 		}
 		return new CreateNewWikiPageObjectStep1(driver);
 	}
-	
+
 	public HubBasePageObject OpenHub(String Hub){
 		if (Hub.equals("VideoGamesHub")) {
 			PageObjectLogging.log("open hub", "before hub page opened", true, driver);
@@ -131,7 +131,7 @@ public class HomePageObject extends BasePageObject{
 				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
 			PageObjectLogging.log("OpenHub", "Open "+Hub, true, driver);
-			return new EntertainmentHubPageObject(driver);	
+			return new EntertainmentHubPageObject(driver);
 		}
 		if (Hub.equals("LifestyleHub")) {
 			PageObjectLogging.log("open hub", "before hub page opened", true, driver);
@@ -148,7 +148,7 @@ public class HomePageObject extends BasePageObject{
 				waitForElementByElement(driver.findElement(hubsHeroCarousel));
 			}
 			PageObjectLogging.log("OpenHub", "Open "+Hub, true, driver);
-			return new LifestyleHubPageObject(driver);	
+			return new LifestyleHubPageObject(driver);
 		}
 		else {
 			PageObjectLogging.log("OpenHub", "Incorrect parameter. Hub name: '"+Hub+"' is wrong and won't open any hub", false, driver);
@@ -158,7 +158,7 @@ public class HomePageObject extends BasePageObject{
 
     public CrossWikiSearchPageObject searchFor(String queryString) {
         searchInput.sendKeys(queryString);
-        clickAndWait(searchButton);
+        scrollAndClick(searchButton);
         PageObjectLogging.log("searchFor", "Enter search string \"" + queryString + "\" and click ok.", true, driver);
         return new CrossWikiSearchPageObject(driver);
     }

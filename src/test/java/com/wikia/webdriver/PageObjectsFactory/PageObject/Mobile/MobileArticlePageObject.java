@@ -74,7 +74,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	private void showCommentsSection(){
 		waitForElementByElement(commentsSectionShowButton);
-		clickAndWait(commentsSectionShowButton);
+		scrollAndClick(commentsSectionShowButton);
 		waitForElementByElement(postCommentButton);
 		waitForElementByElement(commentInputArea);
 		PageObjectLogging.log("showCommentsSection", "comments sections is visible", true, driver);
@@ -89,7 +89,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		showCommentsSection();
 		commentInputArea.sendKeys(comment);
 		commentInputArea.sendKeys(Keys.TAB);
-		clickAndWait(postCommentButton);
+		scrollAndClick(postCommentButton);
 		verifyAddedComment(comment);
 		PageObjectLogging.log("addComment", "comment "+comment+" added", true);
 	}
@@ -116,7 +116,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	{
 		showCommentsSection();
 		waitForElementByElement(loadMoreCommentsButton);
-		clickAndWait(loadMoreCommentsButton);
+		scrollAndClick(loadMoreCommentsButton);
 		//loadMoreCommentsButton.click();
 		waitForElementByElement(loadPreviousCommentsButton);
 		loadPreviousCommentsButton.click();
@@ -171,7 +171,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public MobileModalComponentObject clickModal(){
 		String url = driver.getCurrentUrl();
-		clickAndWait(imageModalTrigger);
+		scrollAndClick(imageModalTrigger);
 		PageObjectLogging.log("clickModal", "modal trigger clicked", true, driver);
 		Assertion.assertEquals(url+"#Modal", driver.getCurrentUrl());
 		waitForElementByElement(currentImageModal);

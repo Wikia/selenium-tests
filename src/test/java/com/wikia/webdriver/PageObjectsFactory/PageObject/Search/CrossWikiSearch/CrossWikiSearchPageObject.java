@@ -90,7 +90,7 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		searchBox.clear();
 		searchBox.sendKeys( term );
 		PageObjectLogging.log("searchFor", "Typed search term" +term, true, driver);
-		clickAndWait(searchButton);
+		scrollAndClick(searchButton);
 		waitForElementByElement(searchBox);
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPageObject(driver);
@@ -168,19 +168,19 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	 */
 	public WikiArticleHomePage openResult(int resultNumber) {
 		WebElement webElement = getResultWikiNameLink(resultNumber);
-		clickAndWait(webElement);
+		webElement.click();
 		return new WikiArticleHomePage(driver);
 	}
 
 	public CrossWikiSearchPageObject prevPage() {
-		clickAndWait(paginatorPrevButton);
+		scrollAndClick(paginatorPrevButton);
 		PageObjectLogging.log("prevPage", "Moving to prev page of search results.",
 				true, driver);
 		return new CrossWikiSearchPageObject(driver);
 	}
 
 	public CrossWikiSearchPageObject nextPage() {
-		clickAndWait(paginatorNextButton);
+		scrollAndClick(paginatorNextButton);
 		PageObjectLogging.log("nextPage", "Moving to next page of search results.",
 				true, driver);
 		return new CrossWikiSearchPageObject(driver);

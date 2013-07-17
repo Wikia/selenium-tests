@@ -4,9 +4,10 @@ package com.wikia.webdriver.Common.Templates;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +18,6 @@ import org.testng.annotations.BeforeMethod;
  */
 public class AdsTestTemplate extends NewTestTemplate {
 
-    private static HashMap adsConfiguration;
     private static DesiredCapabilities adCap;
     private static GeoEdgeProxyServer adServer;
 
@@ -50,4 +50,9 @@ public class AdsTestTemplate extends NewTestTemplate {
             e.printStackTrace();
         }
     }
+
+	private void startBrowserWithCapabilities(DesiredCapabilities caps) {
+		NewDriverProvider.setDriverCapabilities(caps);
+		startBrowser();
+	}
 }

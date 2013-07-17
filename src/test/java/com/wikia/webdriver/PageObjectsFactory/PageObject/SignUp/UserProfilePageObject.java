@@ -1,18 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class UserProfilePageObject extends WikiArticlePageObject {
 
@@ -22,7 +20,7 @@ public class UserProfilePageObject extends WikiArticlePageObject {
 	private WebElement blogTab;
 	@FindBy(css="a[data-id='createblogpost']")
 	private WebElement createBlogPostButton;
-	
+
 	public UserProfilePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -34,30 +32,6 @@ public class UserProfilePageObject extends WikiArticlePageObject {
 				"navigate to username page: " + Global.DOMAIN + "wiki/User:"
 						+ userName, true, driver);
 		return new UserProfilePageObject(driver);
-	}
-
-	/**
-	 * @author Karol Kujawiak
-	 */
-	private void verifyLogInInvisiblity()
-	{
-		wait.until(ExpectedConditions.stalenessOf(logInLink));	
-		PageObjectLogging.log("verifyLogInInvisiblity ", "Log in is not visible", true);
-	}
-
-	/**
-	 * @author Karol Kujawiak
-	 */
-	private void verifyRegisterInvisiblity()
-	{
-		try
-		{
-			waitForElementNotVisibleByBy(By.cssSelector("header#WikiaHeader a.ajaxRegister"));
-		}
-		catch (NoSuchElementException e)
-		{
-			PageObjectLogging.log("verifyLogInInvisiblity ", "Register in is not visible", true);
-		}
 	}
 
 	/**
@@ -91,13 +65,13 @@ public class UserProfilePageObject extends WikiArticlePageObject {
 
 	/**
 	 * @author Michal Nowierski
-	 * @return 
+	 * @return
 	 */
 	public SpecialCreateBlogPageObject clickOnCreateBlogPost() {
 		waitForElementByElement(createBlogPostButton);
 		waitForElementClickableByElement(createBlogPostButton);
-		clickAndWait(createBlogPostButton);
-		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);		
+		scrollAndClick(createBlogPostButton);
+		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);
 		return new SpecialCreateBlogPageObject(driver);
 	}
 }

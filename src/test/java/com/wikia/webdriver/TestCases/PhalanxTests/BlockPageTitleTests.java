@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.DataProvider.PhalanxDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
@@ -43,7 +41,7 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
@@ -68,7 +66,7 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         WikiArticleEditMode article = new WikiArticleEditMode(driver);
@@ -94,7 +92,7 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -121,7 +119,7 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         WikiArticlePageObject base = new WikiArticlePageObject(driver);
@@ -146,7 +144,7 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
@@ -155,7 +153,7 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.verifyMessageAboutBlockPresent();
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
         phalanx.openSpecialPage(phalanxSpecialPage);
@@ -163,7 +161,7 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(modifiedBlock);
         String modifiedBlockedContent = (String) modifiedBlock.get("content");
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
@@ -187,7 +185,7 @@ public class BlockPageTitleTests extends TestTemplate {
         phalanx.testBlock(block);
         String blockedContent = (String) block.get("content");
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);
@@ -196,13 +194,13 @@ public class BlockPageTitleTests extends TestTemplate {
 
         phalanx.verifyMessageAboutBlockPresent();
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 
         phalanx.openSpecialPage(phalanxSpecialPage);
         phalanx.unblockFilter(blockedContent);
 
-        CommonFunctions.logOut(driver);
+        login.logOut(driver);
         login.loginAndVerify(Properties.userName, Properties.password);
 
         phalanx.openSpecialPage(specialCreatePage);

@@ -105,7 +105,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	public void clickReplyButton() {
 		waitForElementByElement(replyButton);
 		waitForElementClickableByElement(replyButton);
-		clickAndWait(replyButton);
+		scrollAndClick(replyButton);
 		PageObjectLogging.log("clickReplyButton", "reply button clicked", true, driver);					
 	}
 
@@ -124,7 +124,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
 		waitForElementByElement(quoteButton);
 		waitForElementClickableByElement(quoteButton);
-		clickAndWait(quoteButton);
+		scrollAndClick(quoteButton);
 		PageObjectLogging.log("clickOnQuoteButton", "clicked on Quote button", true, driver);								
 	}
 
@@ -135,7 +135,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		removeThreadModal_Textarea.sendKeys(reason);
 		waitForElementByElement(removeThreadModal_removeButton);
 		waitForElementClickableByElement(removeThreadModal_removeButton);
-		clickAndWait(removeThreadModal_removeButton);		
+		scrollAndClick(removeThreadModal_removeButton);		
 		PageObjectLogging.log("removeThread", "removed thread with the following reason: "+reason, true, driver);								
 	}
 
@@ -159,21 +159,21 @@ public class ForumThreadPageObject extends BasePageObject{
 		executeScript("document.getElementsByClassName(\"buttons\")[1].style.display = \"block\"");
 		waitForElementByElement(moreButton);
 		waitForElementClickableByElement(moreButton);
-		clickAndWait(moreButton);	
+		scrollAndClick(moreButton);	
 		PageObjectLogging.log("clickOnMoreButton", "click on 'more' button on a message", true);								
 	}
 
 	public void clickOnCloseThreadButton() {
 		waitForElementByElement(closeThreadButton);
 		waitForElementClickableByElement(closeThreadButton);
-		clickAndWait(closeThreadButton);
+		scrollAndClick(closeThreadButton);
 		PageObjectLogging.log("clickOnCloseThreadButton", "click on 'close thread' button on a message", true);
 	}
 
 	public void clickOnReopenThreadButton() {
 		waitForElementByElement(reopenThreadButton);
 		waitForElementClickableByElement(reopenThreadButton);
-		clickAndWait(reopenThreadButton);
+		scrollAndClick(reopenThreadButton);
 		PageObjectLogging.log("clickOnReopenThreadButton", "click on 'reopen thread' button on a message", true);
 	}
 
@@ -197,7 +197,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	public void undoRemove() {
 		waitForElementByElement(undoThreadRemoveButton);
 		waitForElementClickableByElement(undoThreadRemoveButton);
-		clickAndWait(undoThreadRemoveButton);		
+		scrollAndClick(undoThreadRemoveButton);		
 		PageObjectLogging.log("undoRemove", "click on 'undo' button", true, driver);
 	}
 
@@ -208,7 +208,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		Select dropList = new Select(moveThreadModal_selectElement);
 		dropList.selectByVisibleText(forumBoardName);
 		waitForElementClickableByElement(moveThreadModal_moveThreadButton);
-		clickAndWait(moveThreadModal_moveThreadButton);		
+		scrollAndClick(moveThreadModal_moveThreadButton);		
 		PageObjectLogging.log("moveThread", "thread moved to the following board: "+forumBoardName, true, driver);									
 	}
 
@@ -219,7 +219,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		closeThreadTextarea.sendKeys(reason);
 		waitForElementByElement(removeThreadModal_removeButton);
 		waitForElementClickableByElement(removeThreadModal_removeButton);
-		click(removeThreadModal_removeButton);
+		scrollAndClick(removeThreadModal_removeButton);
 		PageObjectLogging.log("closeThread", "closed thread with the following reason: "+reason, true, driver);
 	}
 
