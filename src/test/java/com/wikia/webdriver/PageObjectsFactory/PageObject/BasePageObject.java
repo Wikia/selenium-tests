@@ -116,10 +116,10 @@ public class BasePageObject{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
 			js.executeScript(
-					"var x = $(arguments[0]);"
-					+ "window.scroll(0,x.position()['top']+x.height()+100);"
-					+ "$(window).trigger('scroll');",
-					element
+				"var x = $(arguments[0]);"
+				+ "window.scroll(0,x.position()['top']+x.height()+100);"
+				+ "$(window).trigger('scroll');",
+				element
 			);
 		} catch (WebDriverException e) {
 			if (e.getMessage().contains(XSSContent.noJQueryError)) {
@@ -131,8 +131,13 @@ public class BasePageObject{
 	}
 
 	public void jQueryClick(String cssSelector){
-		executeScript("$('"+cssSelector+"').click()");
-		}
+		executeScript("$('" + cssSelector + "').click()");
+	}
+
+	protected void jsClick(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click()", element);
+	}
 
 	public void jQueryFocus(String cssSelector){
 		executeScript("$('" + cssSelector + "').focus()");
@@ -222,10 +227,6 @@ public class BasePageObject{
 		}
 	}
 
-	/*
-	 * Script execution helpers
-	 */
-
 	public void executeScript(String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(script);
@@ -256,10 +257,6 @@ public class BasePageObject{
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Send keys to WebElement
-	 */
 
 	public void sendKeys(WebElement pageElem, String KeysToSend) {
 		try {

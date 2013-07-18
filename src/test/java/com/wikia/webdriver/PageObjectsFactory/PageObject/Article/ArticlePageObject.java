@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
@@ -32,7 +33,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement articleEditDropdown;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
-	@FindBy(css="#WikiHeader .drop img")
+	@FindBy(css="#WikiHeader .drop")
 	protected WebElement contributeDropdown;
 	@FindBy(css="#ca-delete")
 	protected WebElement deleteDropdown;
@@ -87,7 +88,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
-		contributeDropdown.click();
+		Actions actions = new Actions(driver);
+		actions.click(contributeDropdown);
+		actions.perform();
 		waitForElementVisibleByElement(addArticleInDropdown);
 		addArticleInDropdown.click();
 		articleTitleInputModal.sendKeys(articleTitle);
@@ -96,7 +99,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditModePageObject editArticleUsingDropdown() {
-		editDropdown.click();
+		jsClick(editDropdown);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -174,7 +177,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public DeleteArticlePageObject deleteArticleUsingDropdown() {
-		articleEditDropdown.click();
+		jsClick(articleEditDropdown);
 		waitForElementVisibleByElement(deleteDropdown);
 		deleteDropdown.click();
 		return new DeleteArticlePageObject(driver);
@@ -185,14 +188,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public RenameArticlePageObject renameArticleUsingDropdown() {
-		articleEditDropdown.click();
+		jsClick(articleEditDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		renameDropdown.click();
 		return new RenameArticlePageObject(driver);
 	}
 
 	public void verifyDropdownForAdmin() {
-		articleEditDropdown.click();
+		jsClick(articleEditDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		waitForElementVisibleByElement(deleteDropdown);
 		waitForElementVisibleByElement(historyDropdown);
@@ -202,7 +205,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyDropdownForUser() {
-		articleEditDropdown.click();
+		jsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 2);
@@ -210,7 +213,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyDropdownForAnon() {
-		articleEditDropdown.click();
+		jsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 1);
 		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
