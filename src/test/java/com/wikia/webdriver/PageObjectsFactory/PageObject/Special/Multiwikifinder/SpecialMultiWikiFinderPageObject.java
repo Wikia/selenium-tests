@@ -18,14 +18,12 @@ import org.openqa.selenium.support.FindBys;
 public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 
 	private final String listOfLinksSelector = ".special > li > a";
-	private final String linksLimit = "a[href*=\"/wiki/Special:Multiwikifinder?limit=%limit%\"]";
+	private final String linksLimit = "a[href*='/wiki/Special:Multiwikifinder?limit=%limit%']";
 
 	@FindBy(css="#mw-content-text input[type=submit]")
 	private WebElement findButton;
 	@FindBy(css="input[name=target]")
 	private WebElement enterPagenameField;
-	@FindBy(css=".AdminDashboardArticleHeader > h1")
-	private WebElement multiWikiFinderPageHeader;
 	@FindBy(css = ".mw-nextlink")
 	private WebElement nextResultsButton;
 	@FindBy(css = ".mw-prevlink")
@@ -54,7 +52,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 	}
 
 	public void compareResultsCount(int limit){
-		if(limit==0){
+		if(limit==0) {
 			waitForElementNotPresent(listOfLinksSelector);
 			PageObjectLogging.log(
 				"verifyNoPagenameFounded",
@@ -62,23 +60,20 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 				true, driver
 			);
 		}
-		else{
+		else {
 			waitForElementByElement(listOfLinks.get(0));
-			int amountOfLinks = listOfLinks.size();
-			Assertion.assertTrue(amountOfLinks <= limit);
+			Assertion.assertTrue(listOfLinks.size() <= limit);
 		}
 	}
 
 	public void verifyPagination(){
 		String firstLinkOnFirstPage = listOfLinks.get(0).getAttribute("href");
 		String lastLinkOnFirstPage = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
-		waitForElementByElement(nextResultsButton);
 		nextResultsButton.click();
 		String firstLinkOnSecondPage = listOfLinks.get(0).getAttribute("href");
 		String lastLinkOnSecondPage = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
 		Assertion.assertNotEquals(firstLinkOnFirstPage, firstLinkOnSecondPage);
 		Assertion.assertNotEquals(lastLinkOnFirstPage, lastLinkOnSecondPage);
-		waitForElementByElement(previousResultsButton);
 		previousResultsButton.click();
 		String firstLinkAfterBack = listOfLinks.get(0).getAttribute("href");
 		String lastLinkAfterBack = listOfLinks.get(listOfLinks.size()-1).getAttribute("href");
@@ -87,13 +82,13 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 	}
 
 	public void verifyAllLinksHavePagenameInPath(String pageName){
-		for(int i=0; i<listOfLinks.size(); i++){
+		for(int i=0; i<listOfLinks.size(); i++) {
 			Assertion.assertTrue(listOfLinks.get(i).getAttribute("href").endsWith("/" + pageName));
 		}
 	}
 
 	public void checkAllLimits(){
-		for(int limit : SearchDataProvider.getSearchLimits()){
+		for(int limit : SearchDataProvider.getSearchLimits()) {
 			String limitCssSelector = linksLimit.replace("%limit%", Integer.toString(limit));
 			WebElement limitButton = driver.findElement(By.cssSelector(limitCssSelector));
 			limitButton.click();
