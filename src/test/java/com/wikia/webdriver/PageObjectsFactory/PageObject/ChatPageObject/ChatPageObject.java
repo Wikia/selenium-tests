@@ -3,16 +3,16 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class ChatPageObject extends BasePageObject {
+public class ChatPageObject extends WikiBasePageObject {
 
 	@FindBy(css="textarea[name='message']")
 	private WebElement messageWritingArea;
@@ -33,26 +33,19 @@ public class ChatPageObject extends BasePageObject {
 	@FindBy(css="#PrivateChatList .splotch")
 	private WebElement notification;
 
+	By userNameBy = By.cssSelector(".username");
+	By messageBy = By.cssSelector(".message");
+
 	String userButtonSelector = "#WikiChatList > li#user-%userName%";
 	String userPrivateButtonSelectorUnselected = "#PrivateChatList > li#priv-user-%userName%";
 	String userPrivateButtonSelectorSelected = "#PrivateChatList > li.selected#priv-user-%userName%";
 
 	public ChatPageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
-	}
-
-	public void openChatPage(String wikiURL) {
-		getUrl(wikiURL+"wiki/Special:Chat");
-		waitForElementByElement(chatInlineAlert);
-		PageObjectLogging.log(
-			"openChatPage",
-			"Chat page "+wikiURL+"wiki/Special:Chat opened",
-			true
-		);
 	}
 
 	public void verifyChatPage() {
+		waitForElementByElement(chatInlineAlert);
 		waitForElementByElement(messageWritingArea);
 		waitForElementByElement(chatInlineAlert);
 		waitForElementByElement(sideBar);
@@ -62,20 +55,20 @@ public class ChatPageObject extends BasePageObject {
 	}
 
 	public void verifyMessageOnChat(int index, String message, String username) {
-		String userNameText = messageslist.get(index).findElement(By.cssSelector(".username")).getText();
-		String messageText = messageslist.get(index).findElement(By.cssSelector(".message")).getText();
+		String userNameText = messageslist.get(index).findElement(userNameBy).getText();
+		String messageText = messageslist.get(index).findElement(messageBy).getText();
 		Assertion.assertEquals(username, userNameText);
 		Assertion.assertEquals(message, messageText);
 		PageObjectLogging.log("verifyMessageOnChat", "Message: "+message+" from "+username+" is visible on chat board", true);
 	}
 
-	public void verifyUserJoinToChat(String userName) {
+	public void verifyUserJoinedChat(String userName) {
 		waitForElementByElement(chatInlineAlertContinued);
-		Assertion.assertStringContains(chatInlineAlertContinued.getText(), userName +" has joined the chat.");
-		PageObjectLogging.log("verifyUserJoinToChat", userName+" has joined the chat.", true);
+		Assertion.assertStringContains(chatInlineAlertContinued.getText(), userName);
+		PageObjectLogging.log("verifyUserJoinedChat", userName+" has joined the chat.", true);
 	}
 
-	public void verifyPrivateMessageNotification(int notificationNumber) {
+	public void verifyPrivateMessageNotificationCount(int notificationNumber) {
 		waitForElementByElement(notification);
 		Assertion.assertEquals(Integer.toString(notificationNumber), notification.getText());
 		PageObjectLogging.log(
@@ -87,10 +80,11 @@ public class ChatPageObject extends BasePageObject {
 
 	public void writeOnChat(String message) {
 		messageWritingArea.sendKeys(message);
-		executeScript("e = jQuery.Event(\"keypress\"); " +
-				"e.which = 13; " +
-				"e.keyCode = 13; " +
-				"$('textarea[name=\"message\"]').trigger(e);");
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$e = $.Event(\"keypress\"); " +
+				"$e.which = 13; " +
+				"$e.keyCode = 13; " +
+				"$(arguments[0]).trigger($e);", messageWritingArea);
 		PageObjectLogging.log("writeOnChat", "Message: "+message+" written", true, driver);
 	}
 
@@ -99,7 +93,8 @@ public class ChatPageObject extends BasePageObject {
 				userButtonSelector.replace("%userName%", messageRecipient)));
 		userButton.click();
 		waitForElementVisibleByElement(privateMassageButton);
-		privateMassageButton.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click()", privateMassageButton);
 		PageObjectLogging.log("selectPrivateMessage", "private message selected from dropdown", true, driver);
 	}
 

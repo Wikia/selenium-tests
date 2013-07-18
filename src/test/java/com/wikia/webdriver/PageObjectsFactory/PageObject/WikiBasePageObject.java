@@ -37,6 +37,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
@@ -185,6 +186,18 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUploadPageObject openSpecialUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);
+	}
+
+
+	public ChatPageObject openChatPage(String wikiURL) {
+		getUrl(wikiURL+URLsContent.specialChatPage);
+		PageObjectLogging.log(
+			"openChatPage",
+			"Chat page "+wikiURL+"wiki/Special:Chat opened",
+			true
+		);
+
+		return new ChatPageObject(driver);
 	}
 
 	/**

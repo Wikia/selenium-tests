@@ -1,18 +1,20 @@
 package com.wikia.webdriver.Common.Templates;
 
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
-import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.Properties.Properties;
 
 public class TestTemplate_Two_Drivers {
 
@@ -75,7 +77,6 @@ public class TestTemplate_Two_Drivers {
 	{
 		stopBrowsers();
 	}
-
 
 	private void startBrowsers()
 	{
