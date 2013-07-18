@@ -1,9 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.HttpEntity;
@@ -20,7 +17,6 @@ import org.apache.http.util.EntityUtils;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.*;
@@ -43,6 +39,14 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -166,6 +170,17 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(Global.DOMAIN + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);
 	}
+
+	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
+		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
+		PageObjectLogging.log(
+			"openSpecialMultiWikiFinderPage",
+			"Special MultiWikiFinder page was opened",
+			true
+		);
+		return new SpecialMultiWikiFinderPageObject(driver);
+	}
+
 
 	/**
 	 * Verify that the Object appears on the page

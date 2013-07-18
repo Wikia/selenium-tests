@@ -62,6 +62,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.editingLocalCssTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpValidationTests"/>
+			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>

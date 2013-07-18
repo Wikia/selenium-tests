@@ -21,8 +21,18 @@ public class ArticleDataProvider {
 			{"QAarticleĄŻŁ"},
 			{"QAarticle國歷史"},
 			{"QAarticle/"},
-			{"QAarticle QAarticle"},
+			{"QAarticle QAarticle"}
 		};
 	}
 
+	@DataProvider
+	public static final Object[][] getPageNames() {
+		return new Object[][] {
+			{"Muppets"},
+			{"Gta"},
+			{"Star_trek"},
+			{"Harry_potter"},
+			{"Star_wars"}
+		};
+	}
 }
