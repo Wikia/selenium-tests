@@ -32,13 +32,19 @@ public class ChatPageObject extends WikiBasePageObject {
 	private List<WebElement> messageslist;
 	@FindBy(css="#PrivateChatList .splotch")
 	private WebElement notification;
+	@FindBy(css="#UserStatsMenu .info")
+	private WebElement dropdownInfoBox;
+	@FindBy(css=".regular-actions li")
+	private List<WebElement> dropdownActionsRegularList;
+	@FindBy(css=".admin-actions li")
+	private List<WebElement> dropdownActionsAdminList;
 
 	By userNameBy = By.cssSelector(".username");
 	By messageBy = By.cssSelector(".message");
 
-	String userButtonSelector = "#WikiChatList > li#user-%userName%";
+	String userButtonSelector = "#WikiChatList > li#user-%userName% > img";
 	String userPrivateButtonSelectorUnselected = "#PrivateChatList > li#priv-user-%userName%";
-	String userPrivateButtonSelectorSelected = "#PrivateChatList > li.selected#priv-user-%userName%";
+	String userPrivateButtonSelectorSelected = "#PrivateChatList > li.selected#priv-user-%userName% > img";
 
 	public ChatPageObject(WebDriver driver) {
 		super(driver);
@@ -89,9 +95,7 @@ public class ChatPageObject extends WikiBasePageObject {
 	}
 
 	public void selectPrivateMessage(String messageRecipient) {
-		WebElement userButton = driver.findElement(By.cssSelector(
-				userButtonSelector.replace("%userName%", messageRecipient)));
-		userButton.click();
+		clickUserButton(messageRecipient);
 		waitForElementVisibleByElement(privateMassageButton);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click()", privateMassageButton);
@@ -105,5 +109,51 @@ public class ChatPageObject extends WikiBasePageObject {
 		driver.findElement(By.cssSelector(
 				userPrivateButtonSelectorSelected.replace("%userName%", userName)));
 		PageObjectLogging.log("clickOnPrivateChat", "private chat is clicked", true, driver);
+	}
+
+	public void verifyDropdownUser(String userName) {
+		clickUserButton(userName);
+		waitForElementByElement(dropdownInfoBox);
+		Assertion.assertNumber(3, dropdownActionsRegularList.size(), "checking drop down regular actions");
+		Assertion.assertEquals("message-wall", dropdownActionsRegularList.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", dropdownActionsRegularList.get(1).getAttribute("class"));
+		Assertion.assertEquals("private", dropdownActionsRegularList.get(2).getAttribute("class"));
+		clickUserButton(userName);
+	}
+
+	public void verifyDropdownAdmin(String userName) {
+		clickUserButton(userName);
+		waitForElementByElement(dropdownInfoBox);
+		Assertion.assertNumber(3, dropdownActionsAdminList.size(), "checking drop down admin actions");
+		Assertion.assertEquals("give-chat-mod", dropdownActionsAdminList.get(0).getAttribute("class"));
+		Assertion.assertEquals("kick", dropdownActionsAdminList.get(1).getAttribute("class"));
+		Assertion.assertEquals("ban", dropdownActionsAdminList.get(2).getAttribute("class"));
+		clickUserButton(userName);
+	}
+
+	private void clickUserButton(String userName) {
+		WebElement userButton = driver.findElement(By.cssSelector(
+				userButtonSelector.replace("%userName%", userName)));
+		userButton.click();
+	}
+
+	/**
+	 * Pre-condition: private chat has to be selected.
+	 * @param userName
+	 */
+	private void clickUserButtonPrivateChat(String userName) {
+		WebElement userButtonPrivateChat = driver.findElement(By.cssSelector(
+				userPrivateButtonSelectorSelected.replace("%userName%", userName)));
+		userButtonPrivateChat.click();
+	}
+
+	public void blockPrivateChat(String userName) {
+		clickUserButtonPrivateChat(userName);
+		dropdownActionsRegularList.get(2).click();
+	}
+
+	public void unblockPrivateChat(String userName) {
+		clickUserButton(userName);
+		dropdownActionsRegularList.get(2).click();
 	}
 }
