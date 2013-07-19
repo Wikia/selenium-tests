@@ -245,7 +245,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		String hideButton = "<button type=\"button\" onclick=\"hideLowLevelActions()\">hide low level actions</button>";
 		String showButton = "<button type=\"button\" onclick=\"showLowLevelActions()\">show low level actions</button>";
 		StringBuilder builder = new StringBuilder();
-		builder.append(hideButton+showButton);
+		builder.append(hideButton);
+		builder.append(showButton);
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
 
