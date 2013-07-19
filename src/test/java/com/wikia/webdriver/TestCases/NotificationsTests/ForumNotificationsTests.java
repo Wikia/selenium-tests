@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
@@ -33,7 +32,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(2);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
@@ -66,7 +65,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 				driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(Properties.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
+		String anchoredLink = notifications.getNotificationLink(credentials.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
@@ -108,7 +107,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 				driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(Properties.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
+		String anchoredLink = notifications.getNotificationLink(credentials.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
@@ -151,7 +150,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 				driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(Properties.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
+		String anchoredLink = notifications.getNotificationLink(credentials.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
@@ -203,7 +202,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 				driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(Properties.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
+		String anchoredLink = notifications.getNotificationLink(credentials.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
@@ -265,7 +264,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 				driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(Properties.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
+		String anchoredLink = notifications.getNotificationLink(credentials.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
@@ -334,7 +333,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 				driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(Properties.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
+		String anchoredLink = notifications.getNotificationLink(credentials.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
@@ -419,7 +418,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 				driver);
 		notifications.showNotifications();
 		notifications.clickNotifications();
-		String anchoredLink = notifications.getNotificationLink(Properties.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
+		String anchoredLink = notifications.getNotificationLink(credentials.userName2+" replied to your thread on the "+forumBoardTitle.replace("_", " "));
 		String anchor = anchoredLink.substring(anchoredLink.indexOf("#"));
 		Assertion.assertEquals("#2", anchor);
 	}
