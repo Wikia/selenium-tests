@@ -33,6 +33,23 @@ function markMethodAsFailed()
 		b.style.backgroundColor = "red";
 	}
 }
+function hideLowLevelActions() {
+// get all elements with class lowLevelAction
+var elements = document.getElementsByClassName("lowLevelAction");
+	//hide them
+	for(var i=0; i<elements.length; i++) {
+		elements[i].style.display="none";
+	}
+}
+function showLowLevelActions()
+{
+// get all elements with class lowLevelAction
+var elements = document.getElementsByClassName("lowLevelAction");
+	//show them
+	for(var i=0; i<elements.length; i++) {
+		elements[i].style.display="";
+	}
+}
 window.addEventListener("load", markMethodAsFailed);
 window.addEventListener("load", createToc);
 </script>
