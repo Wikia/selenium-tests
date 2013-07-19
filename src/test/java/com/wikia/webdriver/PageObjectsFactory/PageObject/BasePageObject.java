@@ -54,11 +54,6 @@ public class BasePageObject{
 		return element.getAttribute(attributeName);
 	}
 
-	/*
-	 * Mouse events
-	 */
-
-
 	public void clickActions(WebElement pageElem) {
 		try {
 			Actions builder = new Actions(driver);

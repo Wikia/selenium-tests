@@ -798,7 +798,7 @@ public class WikiBasePageObject extends BasePageObject {
 					+ "Token', '" + xmlResponseArr[9]
 					+ "', {'domain': 'wikia.com' , 'path': '/'})");
 			try {
-				driver.get(wikiURL + "Special:Random");
+				driver.get(wikiURL);
 			} catch (TimeoutException e) {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);

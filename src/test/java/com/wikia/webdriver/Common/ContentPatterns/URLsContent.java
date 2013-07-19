@@ -21,7 +21,6 @@ public class URLsContent {
 	//Special Urls - links to special pages
 	public static final String specialUserLogin = "wiki/Special:UserLogin";
 	public static final String specialUserSignup = "wiki/Special:UserSignup";
-	public static final String specialAddBlogPost = "wiki/Special:CreateBlogPage";
 	public static final String specialAddBlogListingPage = "wiki/Special:CreateBlogListingPage";
 	public static final String specialNewFiles = "wiki/Special:NewFiles";
 	public static final String specialNewVideo = "wiki/Special:Videos";
@@ -39,6 +38,7 @@ public class URLsContent {
 	public static final String specialForum = "wiki/Special:Forum";
 	public static final String userMessageWall = "wiki/Message_Wall:";
 	public static final String specialMultiWikiFinderPage = "wiki/Special:Multiwikifinder";
+	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
@@ -53,13 +53,8 @@ public class URLsContent {
  	// WAM Scores page url
  	public static final String wamPageUrl = "WAM";
 
-	// Extra sites - useful for monobook
-	// replace %user% with username
-	public static final String userBlog = "User_blog:%user%";
 	// replace %title% with new article name
 	public static final String addArticle = "index.php?title=%title%&action=edit";
-	// replace %user% with username
-	public static final String userPrefix = "User:%user%";
 
 	public static final String apiUrl = Global.DOMAIN + "api.php";
 

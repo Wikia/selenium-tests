@@ -1,5 +1,14 @@
 package com.wikia.webdriver.Common.Templates;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
 
@@ -11,15 +20,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
-
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
-import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
 public class NewTestTemplate {
@@ -46,7 +46,7 @@ public class NewTestTemplate {
 		startBrowser();
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
-		driver.get(wikiURL);
+		driver.get(wikiURL + URLsContent.logout);
 	}
 
 	@AfterMethod(alwaysRun = true)
