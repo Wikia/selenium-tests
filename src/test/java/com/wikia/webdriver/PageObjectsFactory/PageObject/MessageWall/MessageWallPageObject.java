@@ -79,11 +79,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement closeThread;
 	@FindBy(css=".WikiaMenuElement .reopen-thread")
 	private WebElement reopenThread;
+        @FindBy (css="div.msg-toolbar nav.wikia-menu-button.secondary.combined")
+        private WebElement secondaryCombinedMoreButton;
 	By messageList = By.cssSelector("div.msg-body");
 	By sortingList = By.cssSelector("ul.SortingList li a");
 
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
+        String reopenThreadCSS = ".WikiaMenuElement .reopen-thread";
+        String closeThreadCSS = ".WikiaMenuElement .close-thread";
+        String msgToolbarNav = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 
 	private String wikiaEditorTextarea = "textarea.replyBody";
 
@@ -296,7 +301,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		setStyle(".buttons", "1", "block");
 		waitForElementByElement(moreButton);
 		mouseOver(moreButtonCss);
-                jQueryClick("div.msg-toolbar nav.wikia-menu-button.secondary.combined");
+                jQueryClick(msgToolbarNav);
 		mouseOver(".WikiaMenuElement .remove-message");
 		jQueryNthElemClick(".WikiaMenuElement .remove-message", 0);
 		waitForElementByElement(removeCloseOverLay);
@@ -459,8 +464,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	{
 		waitForElementByElement(msgToolbar);
 		setStyle(".buttons", "1", "block");
-                driver.findElement(By.cssSelector("div.msg-toolbar nav.wikia-menu-button.secondary.combined")).click();
-		mouseOver(".WikiaMenuElement .close-thread");
+                secondaryCombinedMoreButton.click();
+		mouseOver(closeThreadCSS);
 		click(closeThread);
 		waitForElementByElement(removeCloseOverLay);
 		waitForElementByElement(removeCloseConfirmButton);
@@ -474,8 +479,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	{
 		waitForElementByElement(msgToolbar);
 		setStyle(".buttons", "1", "block");
-                driver.findElement(By.cssSelector("div.msg-toolbar nav.wikia-menu-button.secondary.combined")).click();
-                mouseOver(".WikiaMenuElement .reopen-thread");
+                secondaryCombinedMoreButton.click();
+                mouseOver(reopenThreadCSS);
 		click(reopenThread);
                 refreshPage();
 		PageObjectLogging.log("reopenThread", "Thread is reopen", true);
