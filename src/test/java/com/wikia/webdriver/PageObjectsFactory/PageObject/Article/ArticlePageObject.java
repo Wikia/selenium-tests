@@ -88,9 +88,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
-		Actions actions = new Actions(driver);
-		actions.click(contributeDropdown);
-		actions.perform();
+		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
 		addArticleInDropdown.click();
 		articleTitleInputModal.sendKeys(articleTitle);
@@ -99,7 +97,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditModePageObject editArticleUsingDropdown() {
-		jsClick(editDropdown);
+		actionsClick(editDropdown);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -177,7 +175,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public DeleteArticlePageObject deleteArticleUsingDropdown() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(deleteDropdown);
 		deleteDropdown.click();
 		return new DeleteArticlePageObject(driver);
@@ -188,14 +186,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public RenameArticlePageObject renameArticleUsingDropdown() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		renameDropdown.click();
 		return new RenameArticlePageObject(driver);
 	}
 
 	public void verifyDropdownForAdmin() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		waitForElementVisibleByElement(deleteDropdown);
 		waitForElementVisibleByElement(historyDropdown);
@@ -205,7 +203,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyDropdownForUser() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 2);
@@ -213,7 +211,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyDropdownForAnon() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 1);
 		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);

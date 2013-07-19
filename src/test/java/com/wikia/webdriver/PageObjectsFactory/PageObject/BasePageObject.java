@@ -134,9 +134,10 @@ public class BasePageObject{
 		executeScript("$('" + cssSelector + "').click()");
 	}
 
-	protected void jsClick(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click()", element);
+	protected void actionsClick(WebElement element) {
+		Actions actions = new Actions(driver);
+		actions.click(element);
+		actions.perform();
 	}
 
 	public void jQueryFocus(String cssSelector){
