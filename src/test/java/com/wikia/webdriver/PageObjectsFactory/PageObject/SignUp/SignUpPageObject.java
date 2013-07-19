@@ -14,9 +14,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -26,20 +27,19 @@ public class SignUpPageObject extends BasePageObject {
 
 	public SignUpPageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css = "form#WikiaSignupForm input[name='username']")
+	@FindBy(css = "#WikiaSignupForm input[name='username']")
 	private WebElement userNameField;
-	@FindBy(css = "form#WikiaSignupForm input[name='email']")
+	@FindBy(css = "#WikiaSignupForm input[name='email']")
 	private WebElement emailField;
-	@FindBy(css = "form#WikiaSignupForm input[name='password']")
+	@FindBy(css = "#WikiaSignupForm input[name='password']")
 	private WebElement passwordField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthmonth']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthmonth']")
 	private WebElement birthMonthField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthday']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthday']")
 	private WebElement birthDayField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthyear']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthyear']")
 	private WebElement birthYearField;
 	@FindBy(css = "input#wpCaptchaWord")
 	private WebElement blurryWordField;
@@ -47,32 +47,37 @@ public class SignUpPageObject extends BasePageObject {
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
 	private WebElement createAccountButton;
+	@FindBy(css = ".input-group.required.error .error-msg")
+	private WebElement tooYoungError;
 
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Oops, please fill in the username field.')]")
-	 private WebElement emptyUserNameValidationError;
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Someone already has this username. Try a different one!')]")
-	 private WebElement occupiedUserNameValidationError;
-	 @FindBy(css=".input-group.captcha.error.required .error-msg")
-	 private WebElement WrongBlurryWordValidationError;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
+	@FindBy(
+		xpath="//div[@class='error-msg' and contains(text(), "
+		+ "'Oops, please fill in the username field.')]"
+	)
+	private WebElement emptyUserNameValidationError;
+	@FindBy(
+		xpath="//div[@class='error-msg' and contains(text(), "
+		+ "'Someone already has this username. Try a different one!')]"
+	)
+	private WebElement occupiedUserNameValidationError;
 
+	private Select yearSelect;
+	private Select daySelect;
+	private Select monthSelect;
 	/**
 	 * @author Karol Kujawiak
 	 */
 	public void openSignUpPage()
 	{
-		getUrl(Global.DOMAIN+"wiki/Special:UserSignup");
-		waitForElementByElement(blurryWordField);
-		PageObjectLogging.log("openSignUpPage ", "Sign up page opened " +driver.getCurrentUrl(), true, driver);
+		getUrl(Global.DOMAIN+ URLsContent.specialUserSignup);
+		yearSelect = new Select(birthYearField);
+		daySelect = new Select(birthDayField);
+		monthSelect = new Select(birthMonthField);
+		PageObjectLogging.log(
+		    "openSignUpPage ",
+		    "Sign up page opened " +driver.getCurrentUrl(),
+		    true, driver
+		);
 	}
 
 	/**
@@ -83,7 +88,11 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		userNameField.sendKeys(userName);
 		userNameField.sendKeys(Keys.TAB);
-		PageObjectLogging.log("typeInUserName ", "User name field populated " +userName, true, driver);
+		PageObjectLogging.log(
+			"typeInUserName ",
+			"User name field populated "
+			+ userName, true
+		);
 	}
 
 
@@ -96,7 +105,6 @@ public class SignUpPageObject extends BasePageObject {
 		PageObjectLogging.log("typeInEmail ", "Email field populated", true, driver);
 	}
 
-
 	/**
 	 * @author Karol Kujawiak
 	 * @param password
@@ -105,7 +113,14 @@ public class SignUpPageObject extends BasePageObject {
 	public void typeInPassword(String password)
 	{
 		passwordField.sendKeys(password);
-		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
+		PageObjectLogging.log("typeInPassword ", "Password field populated", true);
+	}
+
+	public void waitForTooYoungErrorMsg()
+	{
+		waitForElementByElement(tooYoungError);
+		Assertion.assertTrue(tooYoungError.isDisplayed());
+		PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true);
 	}
 
 	/**
@@ -116,44 +131,35 @@ public class SignUpPageObject extends BasePageObject {
 	 */
 	public void enterBirthDate(String month, String day, String year)
 	{
-			Select m = new Select(birthMonthField);
-			Select d = new Select(birthDayField);
-			Select y = new Select(birthYearField);
-			m.selectByVisibleText(month);
-			d.selectByVisibleText(day);
-			y.selectByVisibleText(year);
-			d.selectByVisibleText(day);
-			y.selectByVisibleText(year);
-			m.selectByVisibleText(month);
-			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);
+		try
+		{
+			monthSelect.selectByVisibleText(month);
+			Thread.sleep(150);
+			daySelect.selectByVisibleText(day);
+			Thread.sleep(150);
+			yearSelect.selectByVisibleText(year);
+			Thread.sleep(150);
+			daySelect.selectByVisibleText(day);
+			Thread.sleep(150);
+			yearSelect.selectByVisibleText(year);
+			Thread.sleep(150);
+			monthSelect.selectByVisibleText(month);
+			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true);
 		}
+		catch(InterruptedException e)
+		{
+                    e.printStackTrace();
+		}
+	}
 
-
-	/**
-	 * @author Karol Kujawiak
-	 */
 	public void enterBlurryWord()
 	{
 		String word = getWordFromCaptcha();
 		blurryWordField.sendKeys(word);
-		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true, driver);
-	}
-
-	public void enterWrongBlurryWord(){
-		String word = getTimeStamp();
-		blurryWordField.sendKeys(word);
-		PageObjectLogging.log("enterWrongBlurryWord ", "Blurry word field populated incorrectly", true);
-	}
-
-	public void clickCreateAccountButton(){
-		waitForElementClickableByElement(createAccountButton);
-		createAccountButton.click();
+		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true);
 	}
 
 
-	/**
-	 * @author Karol Kujawiak
-	 */
 	public AlmostTherePageObject submit(String email, String password)
 	{
 		MailFunctions.deleteAllMails(email, password);
@@ -162,36 +168,6 @@ public class SignUpPageObject extends BasePageObject {
 		return new AlmostTherePageObject(driver);
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void verifyEmptyUserNameValidation()
-	{
-		waitForElementByElement(emptyUserNameValidationError);
-		PageObjectLogging.log("verifyUserNameValidation ", "empty user name validation verified", true);
-	}
-
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void verifyOccupiedUserNameValidation()
-	{
-		waitForElementByElement(occupiedUserNameValidationError);
-		PageObjectLogging.log("verifyUserNameValidation ", "occupied user name validation verified", true);
-	}
-
-	public void verifyWrongBlurryWordValidation(){
-		waitForElementByElement(WrongBlurryWordValidationError);
-		PageObjectLogging.log(
-			"verifyWrongBlurryWordValidation ",
-			"wrong blurry word validation verified",
-			true, driver
-		);
-	}
-
-	/**
-	 * @author Karol Kujawiak
-	 */
 	private String getWordFromCaptcha()
 	{
 		try
@@ -233,9 +209,6 @@ public class SignUpPageObject extends BasePageObject {
 
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 */
 	private static String md5(InputStream is)
 		{
 		try
@@ -269,5 +242,4 @@ public class SignUpPageObject extends BasePageObject {
 			return null;
 		}
 	}
-
 }
