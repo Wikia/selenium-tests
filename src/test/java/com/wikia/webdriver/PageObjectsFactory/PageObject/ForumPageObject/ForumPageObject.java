@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -52,13 +50,6 @@ public class ForumPageObject extends WikiArticlePageObject{
 		openFaqLightBox();
 		checkFaqLightBoxOpened();
 		closeFaqLightBox();
-	}
-
-	public ForumPageObject openForumMainPage() {
-		getUrl(Global.DOMAIN + URLsContent.specialForum);
-		waitForElementByElement(faqButton);
-		PageObjectLogging.log("openForumPage", "forum page opened", true);
-		return new ForumPageObject(driver);
 	}
 
 	public ForumManageBoardsPageObject clickManageBoardsButton() {

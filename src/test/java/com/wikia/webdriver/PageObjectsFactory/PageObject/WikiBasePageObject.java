@@ -39,6 +39,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
@@ -181,6 +182,12 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
+		public ForumPageObject openForumMainPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialForum);
+		PageObjectLogging.log("openForumPage", "forum page opened", true);
+		return new ForumPageObject(driver);
+	}
+
 
 	/**
 	 * Verify that the Object appears on the page
@@ -212,8 +219,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyDeletedArticlePage(String pageName) {
 		pageName = pageName.replace("_", " ");
 		waitForElementByXPath("//h1[contains(text(), '" + pageName + "')]");
-		// waitForElementByXPath("//p[contains(text(), 'This page has been deleted.')]");
-		// waitForElementByXPath("//a[@class='wikia-button' and contains(text(), 'Create')]");
 		waitForElementByXPath("//b[contains(text(), 'This page needs content. You can help by adding a sentence or a photo!')]");
 		PageObjectLogging.log("verifyDeletedArticlePage",
 				"deleted article page verified", true);
@@ -754,8 +759,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 			String[] xmlResponseArr = xmlResponse.split("\"");
 			String token = xmlResponseArr[5];
-
-			// System.out.println(token);
 
 			while (xmlResponseArr.length < 11) {// sometimes first request
 				// does

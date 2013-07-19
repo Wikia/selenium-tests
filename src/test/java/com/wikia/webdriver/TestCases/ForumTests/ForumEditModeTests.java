@@ -4,13 +4,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
-public class ForumEditModeTests extends TestTemplate{
+public class ForumEditModeTests extends NewTestTemplate{
 
 	/*
 	 * StoryQA0128 - Create test cases for forum
@@ -18,15 +17,13 @@ public class ForumEditModeTests extends TestTemplate{
 	 */
 
 	private String title, description, first, second;
+	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"Forum_001","Forum","ForumEditMode"})
 	public void forumEditModeTests_001_faq(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openRandomArticleByUrl();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumMainPage.verifyFaqLightBox();
 	}
 
@@ -45,57 +42,49 @@ public class ForumEditModeTests extends TestTemplate{
 
 	@Test(dataProvider="getForumName", groups={"Forum_002", "Forum","ForumEditMode"})
 	public void forumEditModeTests_002_createNewBoard(String name){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		title = name+manageForum.getTimeStamp();
 		description = PageContent.forumDescriptionPrefix+manageForum.getTimeStamp();
 		manageForum.createNewBoard(title, description);
 		manageForum.verifyBoardCreated(title, description);
-		manageForum.verifyForumExists(title);
+		manageForum.verifyForumExists(title, wikiURL);
 	}
 
 	@Test(groups = {"Forum_003","Forum","ForumEditMode"})
 	public void forumEditModeTests_003_deleteBoard(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		first = manageForum.getFirstForumName();
 		second = manageForum.getSecondForumName();
-		manageForum.verifyForumExists(first);
+		manageForum.verifyForumExists(first, wikiURL);
 		manageForum.deleteForum(first, second);
-		manageForum.verifyForumNotExists(first);
+		manageForum.verifyForumNotExists(first, wikiURL);
 	}
 
 	@Test(groups = {"Forum_004","Forum","ForumEditMode"})
 	public void forumEditModeTests_004_editBoard(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		first = manageForum.getFirstForumName();
 		title = PageContent.forumTitleEditPrefix+manageForum.getTimeStamp();
 		description = PageContent.forumDescriptionEditPrefix+manageForum.getTimeStamp();
 		manageForum.editForum(first, title, description);
 		manageForum.verifyBoardCreated(title, description);
-		manageForum.verifyForumExists(title);
+		manageForum.verifyForumExists(title, wikiURL);
 	}
 
 	@Test(groups = {"Forum_005","Forum","ForumEditMode"})
 	public void forumEditModeTests_005_moveBoard(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		first = manageForum.getFirstForumName();
 		manageForum.clickMoveDown(first);

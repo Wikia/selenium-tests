@@ -4,19 +4,20 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
-public class ForumNotificationsTests extends TestTemplate {
+public class ForumNotificationsTests extends NewTestTemplate {
 
 	private String title;
 	private String forumBoardTitle;
 	private String message;
+	Credentials credentials = config.getCredentials();
 
 	/**
 	 * Test case created to check possible regression of DAR-112 defect
@@ -27,26 +28,20 @@ public class ForumNotificationsTests extends TestTemplate {
 			"NotificationsTests" })
 	public void forumNotificationsTests_001_notificationsRepliesAnchor_userLeaves5replies() {
 		// user 1 creates a thread
-
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
-
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-
-
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 2 leaves 5 replies on user 1 thread
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
@@ -59,15 +54,14 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumThread.verifyReplyMessage(4, message);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(5, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
-
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
 		notifications.showNotifications();
@@ -81,26 +75,20 @@ public class ForumNotificationsTests extends TestTemplate {
 			"NotificationsTests" })
 	public void forumNotificationsTests_002_notificationsRepliesAnchor_userLeaves2replies() {
 		// user 1 creates a thread
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
-
-		login.logOut(driver);
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-
-
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 2 leaves 2 replies on user 1 thread
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
@@ -108,15 +96,14 @@ public class ForumNotificationsTests extends TestTemplate {
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(2, message);
 		forumThread.reply(message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
-
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
 		notifications.showNotifications();
@@ -134,36 +121,32 @@ public class ForumNotificationsTests extends TestTemplate {
 			"NotificationsTests" })
 	public void forumNotificationsTests_003_notificationsRepliesAnchor_userLeaves1reply() {
 		// user 1 creates a thread
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
-
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 2 leaves 1 reply on user 1 thread
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
-
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
 		notifications.showNotifications();
@@ -181,43 +164,40 @@ public class ForumNotificationsTests extends TestTemplate {
 			"NotificationsTests" })
 	public void forumNotificationsTests_004_notificationsRepliesAnchor_TwoUsersLeaveTwoReplies() {
 		// user 1 creates a thread
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
-
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logOut(wikiURL);
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
@@ -236,55 +216,50 @@ public class ForumNotificationsTests extends TestTemplate {
 			"NotificationsTests" })
 	public void forumNotificationsTests_005_notificationsRepliesAnchor_TwoUsersLeaveThreeReplies() {
 		// user 1 creates a thread
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
-
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logOut(wikiURL);
+		forumMainPage.logInCookie(credentials.userName, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 reply on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff,
-				Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 2 leaves 2nd reply on user 1 thread and logs out
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName2,
-				Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
@@ -303,60 +278,57 @@ public class ForumNotificationsTests extends TestTemplate {
 			"NotificationsTests" })
 	public void forumNotificationsTests_006_notificationsRepliesAnchor_TwoUsersLeaveFourReplies() {
 		// user 1 creates a thread
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
-
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logOut(wikiURL);
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logOut(wikiURL);
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);
@@ -374,77 +346,74 @@ public class ForumNotificationsTests extends TestTemplate {
 			"NotificationsTests" })
 	public void forumNotificationsTests_007_notificationsRepliesAnchor_TwoUsersLeaveSixReplies() {
 		// user 1 creates a thread
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
-
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
 		forumBoardTitle = forumBoard.getTitle();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title,
 				message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logOut(wikiURL);
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logOut(wikiURL);
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
-		login.loginAndVerify(Properties.userName2, Properties.password2);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logOut(wikiURL);
+		forumMainPage.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 2 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		forumThread = forumBoard.openDiscussion(title);
 		// user 3 leaves 1 replies on user 1 thread and logs out
 		forumThread.reply(message);
 		forumThread.verifyReplyMessage(1, message);
-		login.logOut(driver);
+		forumMainPage.logOut(wikiURL);
 		// user 1 verifies his notifications
 		forumMainPage = new ForumPageObject(driver);
-		login.loginAndVerify(Properties.userName, Properties.password);
+		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		forumBoard = forumMainPage.openForumBoard(forumBoardTitle);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(
 				driver);

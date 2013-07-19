@@ -28,10 +28,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement historyHeadLine;
 	@FindBy(css="section.RelatedVideosModule")
 	private WebElement rVModule;
-	@FindBy(css="#VideoEmbedUrl")
-	private WebElement videoRVmodalInput;
-	@FindBy(css="div[class='editarea']")
-	private WebElement editCommentTrigger;
 	@FindBy(css="body[id='bodyContent']")
 	private WebElement editCommentArea;
 	@FindBy(css="div.cke_contents iframe")
@@ -40,10 +36,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement submitCommentButton;
 	@FindBy(css="#WikiaArticleFooter")
 	private WebElement commentHolder;
-	@FindBy(css="a.article-comm-delete")
-	private WebElement deleteCommentButton;
-	@FindBy(css="span.edit-link a")
-	private WebElement editCommentButton;
 	@FindBy(css="input[id*='article-comm-reply']")
 	private WebElement submitReplyButton;
 	@FindBy(css="table.article-table")
@@ -60,26 +52,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement replyCommentButton;
 	@FindBy(css="a[title='View photo details']")
 	private WebElement videoDetailsButton;
-	@FindBy(css="img.thumbimage")
-	private WebElement thumbnailImage;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
-	@FindBy(css="#mw-content-text")
-	private WebElement articleContent;
-	@FindBy(css="#VideoEmbedUrlSubmit")
-	private WebElement VideoModalAddButton;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
 	@FindBy(css="#WikiaRail .addVideo")
     private WebElement addVideoWikiaRail;
-	@FindBy(css="#SPOTLIGHT_FOOTER_1 a img")
-	private WebElement spotlightImage1;
-	@FindBy(css="#SPOTLIGHT_FOOTER_2 a img")
-	private WebElement spotlightImage2;
-	@FindBy(css="#SPOTLIGHT_FOOTER_3 a img")
-	private WebElement spotlightImage3;
-	@FindBy(css="#SPOTLIGHT_FOOTER")
-	private WebElement spotlightFooter;
 	@FindBy(css=".wikia-photogallery-add")
 	private WebElement addPhotoToGalleryButton;
 	@FindBy(css=".wikia-slideshow-addimage")
