@@ -27,7 +27,7 @@ import com.wikia.webdriver.Common.Core.Global;
 public class NewDriverProvider {
 
 	private static EventFiringWebDriver driver;
-	private static EventFiringWebDriver driver2;
+	private static EventFiringWebDriver driverFF;
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 
@@ -61,8 +61,8 @@ public class NewDriverProvider {
 	}
 
 	public static EventFiringWebDriver getDriverInstanceFirefox() {
-		driver2 = getFFInstance();
-		return driver2;
+		driverFF = getFFInstance();
+		return driverFF;
 	}
 
 	public static  WebDriver getWebDriver() {
@@ -70,7 +70,7 @@ public class NewDriverProvider {
 	}
 
 	public static WebDriver getWebDriverFirefox() {
-		return driver2;
+		return driverFF;
 	}
 
 	private static EventFiringWebDriver getIEInstance() {
