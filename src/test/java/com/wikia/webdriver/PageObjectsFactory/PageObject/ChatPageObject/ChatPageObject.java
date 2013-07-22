@@ -38,6 +38,10 @@ public class ChatPageObject extends WikiBasePageObject {
 	private List<WebElement> dropdownActionsRegularList;
 	@FindBy(css=".admin-actions li")
 	private List<WebElement> dropdownActionsAdminList;
+	@FindBy(css=".private-allow")
+	private WebElement allowPrivateMessage;
+	@FindBy(css=".private-block")
+	private WebElement blockPrivateMessage;
 
 	By userNameBy = By.cssSelector(".username");
 	By messageBy = By.cssSelector(".message");
@@ -102,12 +106,21 @@ public class ChatPageObject extends WikiBasePageObject {
 		PageObjectLogging.log("selectPrivateMessage", "private message selected from dropdown", true, driver);
 	}
 
-	public void clickOnPrivateChat(String userName) {
+	public void clickOnPrivateChatUnselected(String userName) {
 		WebElement userPrivateButton = driver.findElement(By.cssSelector(
-				userPrivateButtonSelectorUnselected.replace("%userName%", userName)));
+				userPrivateButtonSelectorSelected.replace("%userName%", userName)));
 		userPrivateButton.click();
 		driver.findElement(By.cssSelector(
 				userPrivateButtonSelectorSelected.replace("%userName%", userName)));
+		PageObjectLogging.log("clickOnPrivateChat", "private chat is clicked", true, driver);
+	}
+
+	public void clickOnPrivateChatSelected(String userName) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement userPrivateButton = driver.findElement(By.cssSelector(
+				userPrivateButtonSelectorSelected.replace("%userName%", userName)));
+		js.executeScript("$(arguments[0]).click()", userPrivateButton);
+		js.executeScript("$(arguments[0]).click()", userPrivateButton);
 		PageObjectLogging.log("clickOnPrivateChat", "private chat is clicked", true, driver);
 	}
 
@@ -131,29 +144,18 @@ public class ChatPageObject extends WikiBasePageObject {
 		clickUserButton(userName);
 	}
 
-	private void clickUserButton(String userName) {
+	public void clickUserButton(String userName) {
 		WebElement userButton = driver.findElement(By.cssSelector(
 				userButtonSelector.replace("%userName%", userName)));
 		userButton.click();
 	}
 
-	/**
-	 * Pre-condition: private chat has to be selected.
-	 * @param userName
-	 */
-	private void clickUserButtonPrivateChat(String userName) {
-		WebElement userButtonPrivateChat = driver.findElement(By.cssSelector(
-				userPrivateButtonSelectorSelected.replace("%userName%", userName)));
-		userButtonPrivateChat.click();
-	}
-
 	public void blockPrivateChat(String userName) {
-		clickUserButtonPrivateChat(userName);
-		dropdownActionsRegularList.get(2).click();
+		blockPrivateMessage.click();
+		waitForElementNotVisibleByCss(userPrivateButtonSelectorUnselected.replace("%userName%", userName));
 	}
 
-	public void unblockPrivateChat(String userName) {
-		clickUserButton(userName);
-		dropdownActionsRegularList.get(2).click();
+	public void unblockPrivateChat() {
+		allowPrivateMessage.click();
 	}
 }

@@ -27,8 +27,8 @@ public class ChatMessagesTests extends NewTestTemplate_TwoDrivers{
 		chat.openChatPage(wikiURL);
 		chat.verifyChatPage();
 
-		switchToWindow(driver2);
-		WikiBasePageObject base2 = new WikiBasePageObject(driver2);
+		switchToWindow(driverFF);
+		WikiBasePageObject base2 = new WikiBasePageObject(driverFF);
 		base2.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		ChatPageObject chat2 = base2.openChatPage(wikiURL);
 		chat2.openChatPage(wikiURL);
@@ -38,7 +38,7 @@ public class ChatMessagesTests extends NewTestTemplate_TwoDrivers{
 		chat.verifyUserJoinedChat(credentials.userName2);
 		chat.writeOnChat("message1");
 
-		switchToWindow(driver2);
+		switchToWindow(driverFF);
 		chat2.verifyMessageOnChat(0, "message1", credentials.userName);
 		chat2.writeOnChat("message2");
 
@@ -55,8 +55,8 @@ public class ChatMessagesTests extends NewTestTemplate_TwoDrivers{
 		chat.openChatPage(wikiURL);
 		chat.verifyChatPage();
 
-		switchToWindow(driver2);
-		WikiBasePageObject base2 = new WikiBasePageObject(driver2);
+		switchToWindow(driverFF);
+		WikiBasePageObject base2 = new WikiBasePageObject(driverFF);
 		base2.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		ChatPageObject chat2 = base2.openChatPage(wikiURL);
 		chat2.openChatPage(wikiURL);
@@ -67,9 +67,9 @@ public class ChatMessagesTests extends NewTestTemplate_TwoDrivers{
 		chat.selectPrivateMessage(credentials.userName2);
 		chat.writeOnChat("private message1");
 
-		switchToWindow(driver2);
+		switchToWindow(driverFF);
 		chat2.verifyPrivateMessageNotificationCount(1);
-		chat2.clickOnPrivateChat(credentials.userName);
+		chat2.clickOnPrivateChatUnselected(credentials.userName);
 		chat2.verifyMessageOnChat(0, "private message1", credentials.userName);
 		chat2.writeOnChat("private message2");
 

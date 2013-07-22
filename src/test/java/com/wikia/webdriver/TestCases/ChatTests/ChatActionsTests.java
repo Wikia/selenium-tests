@@ -30,8 +30,8 @@ public class ChatActionsTests extends NewTestTemplate_TwoDrivers{
 		chat.openChatPage(wikiURL);
 		chat.verifyChatPage();
 
-		switchToWindow(driver2);
-		WikiBasePageObject base2 = new WikiBasePageObject(driver2);
+		switchToWindow(driverFF);
+		WikiBasePageObject base2 = new WikiBasePageObject(driverFF);
 		base2.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		ChatPageObject chat2 = base2.openChatPage(wikiURL);
 		chat2.openChatPage(wikiURL);
@@ -41,7 +41,7 @@ public class ChatActionsTests extends NewTestTemplate_TwoDrivers{
 		chat.verifyUserJoinedChat(credentials.userName2);
 		chat.verifyDropdownUser(credentials.userName2);
 
-		switchToWindow(driver2);
+		switchToWindow(driverFF);
 		chat2.verifyDropdownUser(credentials.userName);
 	}
 
@@ -54,8 +54,8 @@ public class ChatActionsTests extends NewTestTemplate_TwoDrivers{
 		chat.openChatPage(wikiURL);
 		chat.verifyChatPage();
 
-		switchToWindow(driver2);
-		WikiBasePageObject base2 = new WikiBasePageObject(driver2);
+		switchToWindow(driverFF);
+		WikiBasePageObject base2 = new WikiBasePageObject(driverFF);
 		base2.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		ChatPageObject chat2 = base2.openChatPage(wikiURL);
 		chat2.openChatPage(wikiURL);
@@ -66,7 +66,33 @@ public class ChatActionsTests extends NewTestTemplate_TwoDrivers{
 		chat.verifyDropdownUser(credentials.userName2);
 		chat.verifyDropdownAdmin(credentials.userName2);
 
-		switchToWindow(driver2);
+		switchToWindow(driverFF);
 		chat2.verifyDropdownUser(credentials.userNameStaff);
+	}
+
+	@Test(groups = {"ChatActions", "ChatActions001"})
+	public void ChatActions_003_blockUnblock() {
+		switchToWindow(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		ChatPageObject chat = base.openChatPage(wikiURL);
+		chat.openChatPage(wikiURL);
+		chat.verifyChatPage();
+
+		switchToWindow(driverFF);
+		WikiBasePageObject base2 = new WikiBasePageObject(driverFF);
+		base2.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		ChatPageObject chat2 = base2.openChatPage(wikiURL);
+		chat2.openChatPage(wikiURL);
+		chat2.verifyChatPage();
+
+		switchToWindow(driver);
+		chat.selectPrivateMessage(credentials.userName2);
+		chat.clickOnPrivateChatSelected(credentials.userName2);
+		chat.blockPrivateChat(credentials.userName2);
+
+		chat.clickUserButton(credentials.userName2);
+		chat.clickUserButton(credentials.userName2);//https://wikia-inc.atlassian.net/browse/MAIN-469
+		chat.unblockPrivateChat();
 	}
 }
