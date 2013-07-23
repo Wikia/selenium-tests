@@ -186,9 +186,6 @@ public class BasePageObject{
 						"%page%", url), false);
 			return;
 		}
-
-		PageObjectLogging.log("getUrl",
-				"page loaded for less then 30 seconds after click", true, true);
 	}
 
 	public void refreshPage() {
