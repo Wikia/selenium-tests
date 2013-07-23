@@ -63,7 +63,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		log(command, description, success, false);
 	}
 
-	public static void log(String command, String description, boolean success,
+	private static void log(String command, String description, boolean success,
 			boolean ifLowLevel) {
 		String className = success ? "success" : "error";
 		StringBuilder builder = new StringBuilder();
@@ -242,8 +242,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	private void appendShowHideButtons() {
-		String hideButton = "<button type=\"button\" onclick=\"hideLowLevelActions()\">hide low level actions</button>";
-		String showButton = "<button type=\"button\" onclick=\"showLowLevelActions()\">show low level actions</button>";
+		String hideButton = "<button id=\"hideLowLevel\">hide low level actions</button>";
+		String showButton = "<button id=\"showLowLevel\">show low level actions</button>";
 		StringBuilder builder = new StringBuilder();
 		builder.append(hideButton);
 		builder.append(showButton);
