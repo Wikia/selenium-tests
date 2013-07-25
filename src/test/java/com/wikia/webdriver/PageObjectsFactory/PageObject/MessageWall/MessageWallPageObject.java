@@ -19,7 +19,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-//public class MessageWallPageObject extends MiniEditorComponentObject{
 	public class MessageWallPageObject extends WikiBasePageObject{
 
 	@FindBy(css="#WallMessageTitle")
@@ -83,7 +82,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
 
 	private String wikiaEditorTextarea = "textarea.replyBody";
-
 	MiniEditorComponentObject miniEditor;
 
 	public MessageWallPageObject(WebDriver driver) {
@@ -200,7 +198,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	public void clickPostButton()
 	{
-		waitForElementByElement(postButton);
+                waitForElementByElement(postButton);
 		waitForElementClickableByElement(postButton);
 		postButton.click();
 		PageObjectLogging.log("clickPostButton", "post button is clicked", true);
@@ -243,7 +241,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	 */
 	public void verifyPostedReplyWithMessage(String message, int replyNumber)
 	{
-		waitForTextToBePresentInElementByBy(By.cssSelector("ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message);
+		waitForTextToBePresentInElementByBy(By.cssSelector(
+                        "ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message
+                );
 		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
 
@@ -262,10 +262,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		);
 	}
 
-	public void verifyPostedMessageWithLinks(String internallink, String externallink){
-		waitForElementByElement(newMessageBubble);
-		Assertion.assertEquals(messageBody.get(0).getText(), internallink);
-		Assertion.assertEquals(messageBody.get(1).getText(), externallink);
+	public void verifyPostedMessageWithLinks(String link){
+		waitForTextToBePresentInElementByElement(newMessageBubble, link);
+		Assertion.assertEquals(messageBody.get(0).getText(), link);
 		PageObjectLogging.log("verifyPostedMessageWithLinks", "message with links", true);
 	}
 
@@ -348,21 +347,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	private void writeEditMessage(String title, String message)
 	{
-		WebElement elem = driver.switchTo().activeElement();
-//		miniEditorIframe = elem;
-
-		driver.switchTo().frame(elem);
+                driver.switchTo().frame(miniEditor.miniEditorIframe);
 
 		messageBodyField.clear();
 		miniEditor.writeMiniEditor(message);
-//		messageBodyField.sendKeys(message);
 		driver.switchTo().defaultContent();
 
-		waitForElementByElement(elem);
+		waitForElementByElement(miniEditor.miniEditorIframe);
 		scrollAndClick(messageTitleEditField2);
 		messageTitleEditField2.sendKeys(Keys.TAB);
-		driver.switchTo().frame(elem);
-//		messageBodyField.sendKeys(message);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(message);
 
 		driver.switchTo().defaultContent();
@@ -373,12 +367,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		waitForElementByElement(saveEditButton);
 
 		if (Global.BROWSER.equals("IE")) {
-			driver.switchTo().frame(elem);
+			driver.switchTo().frame(miniEditor.miniEditorIframe);
 			scrollAndClick(messageBodyField);
 			miniEditor.writeMiniEditor(Keys.TAB);
 			miniEditor.writeMiniEditor(Keys.ENTER);
-//			messageBodyField.sendKeys(Keys.TAB);
-//			messageBodyField.sendKeys(Keys.ENTER);
 			driver.switchTo().defaultContent();
 		}
 		else {
@@ -400,31 +392,49 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		PageObjectLogging.log("clickPublishButton", "publish button is clicked", true, driver);
 	}
 
-	public void writeMessageWithLink(String internalLink, String externalLink, String title) {
+	public void writeMessageWithExternalLink(String externallink, String title) {
 		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-		miniEditor.addInternalLink(internalLink);
+		miniEditor.addExternalLink(externallink);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
-		miniEditor.writeMiniEditor(Keys.END);
-		miniEditor.writeMiniEditor(Keys.ENTER);
-		driver.switchTo().defaultContent();
-		miniEditor.addExternalLink(externalLink);
+                miniEditor.writeMiniEditor(Keys.END);
 		PageObjectLogging.log(
 			"writeMessageWithLink",
-			"internal and external links: "+internalLink+" and" +externalLink+ "added",
+			"internal and external links: "+externallink+" added",
 			true
 		);
+                driver.switchTo().defaultContent();
+	}
+
+        public void writeMessageWithInternalLink(String internallink, String title) {
+		scrollAndClick(messageTitleField);
+		messageTitleField.sendKeys(title);
+		triggerMessageArea();
+		miniEditor.addInternalLink(internallink);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+                miniEditor.writeMiniEditor(Keys.END);
+		PageObjectLogging.log(
+			"writeMessageWithLink",
+			"internal and external links: "+internallink+" added",
+			true
+		);
+                driver.switchTo().defaultContent();
 	}
 
 	public void writeMessageSourceMode(String title, String message) {
 		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
+                waitForElementClickableByElement(sourceModeButton);
 		scrollAndClick(sourceModeButton);
 		waitForElementByElement(sourceModeTextarea);
 		sourceModeTextarea.sendKeys(message);
-		PageObjectLogging.log("writeMessageSourceMode", "message in source mode is written, title: "+title+" body: "+message, true, driver);
+		PageObjectLogging.log(
+                        "writeMessageSourceMode",
+                        "message in source mode is written, " + "title: "+title+" body: "+message,
+                        true, driver
+                );
 	}
 
 	/**
@@ -448,7 +458,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	 * @param order - specifies order of sorting <br><br> possible values: <br> "NewestThreads", "OldestThreads", "NewestReplies"}
 	 * 	 */
 	public void sortThreads(String order) {
-//		scrollAndClick(sortingMenu);
 		executeScript("document.getElementsByClassName('SortingList')[0].style.display=\"block\"");
 		List<WebElement> list = driver.findElements(sortingList);
 		if (order.equals("NewestThreads")) {
