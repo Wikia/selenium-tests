@@ -25,7 +25,7 @@ public class ForumThreadTests extends NewTestTemplate{
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.reply(message);
@@ -39,7 +39,7 @@ public class ForumThreadTests extends NewTestTemplate{
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.removeThread("QA reason");
@@ -53,7 +53,7 @@ public class ForumThreadTests extends NewTestTemplate{
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.removeThread("QA reason");
@@ -70,7 +70,7 @@ public class ForumThreadTests extends NewTestTemplate{
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		List<String> forumNames = forumMainPage.getForumNamesList();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.moveThread(forumNames.get(1));
@@ -84,7 +84,7 @@ public class ForumThreadTests extends NewTestTemplate{
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		ForumHistoryPageObject forumHistory = forumThread.openHistory();
@@ -98,7 +98,7 @@ public class ForumThreadTests extends NewTestTemplate{
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.closeThread(PageContent.closeReason);
@@ -112,7 +112,7 @@ public class ForumThreadTests extends NewTestTemplate{
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.closeThread(PageContent.closeReason);

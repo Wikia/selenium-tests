@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +60,20 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return new ForumManageBoardsPageObject(driver);
 	}
 
-	public ForumBoardPageObject openForumBoard(int forumBoardNumber) {
-		WebElement forumBoardLink = getForumElementsList().get(
-				forumBoardNumber - 1);
+	public ForumBoardPageObject openForumBoard() {
+		WebElement forumBoardLink = null;
+		found:
+			for(int i = 0; i < getForumElementsList().size(); i++) {
+				if(!getForumElementsList().get(i).toString().contains("%")) {
+					forumBoardLink = getForumElementsList().get(i);
+					break found;
+				}
+			}
 		waitForElementByElement(forumBoardLink);
 		waitForElementClickableByElement(forumBoardLink);
 		scrollAndClick(forumBoardLink);
 		PageObjectLogging.log("openForumBoard",
-				"click on the forum Board number " + forumBoardNumber, true,
+				"click on the forum Board", true,
 				driver);
 		return new ForumBoardPageObject(driver);
 	}
@@ -89,7 +96,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 			PageObjectLogging.log("openForumBoard",
 					"click on the forum Board with title " + forumBoardTitle,
 					true, driver);
-			return openForumBoard(forumNumber);
+			return openForumBoard();
 		}
 	}
 

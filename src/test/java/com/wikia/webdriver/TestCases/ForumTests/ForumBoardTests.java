@@ -28,7 +28,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 	}
@@ -39,7 +39,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussionWithoutTitle(message);
 		//"Message from" default title appears after posting message without title
 		forumThread.verifyDiscussionTitleAndMessage("Message from", message);
@@ -51,7 +51,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		forumBoard.startDiscussionWithImgae(title);
 		forumBoard.clickPostButton();
 		forumBoard.verifyDiscussionWithImage();
@@ -65,7 +65,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		forumBoard.startDiscussionWithLink(Internallink, Externallink, title);
 		forumBoard.clickPostButton();
 		forumBoard.verifyStartedDiscussionWithLinks(Internallink, Externallink);
@@ -77,7 +77,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		forumBoard.startDiscussionWithVideo(VideoContent.youtubeVideoURL3, title);
 		forumBoard.clickPostButton();
 	}
@@ -88,7 +88,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		forumBoard.unfollowIfDiscussionIsFollowed(1);
 		forumBoard.verifyTextOnFollowButton(1, "Follow");
 		forumBoard.clickOnFollowButton(1);
@@ -104,7 +104,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, true);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
  		forumThread.notifications_verifyLatestNotificationTitle(title);
