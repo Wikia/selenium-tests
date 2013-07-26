@@ -25,6 +25,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 
@@ -239,16 +240,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	}
 
-	/**
-	 * Verify that the image appears in the preview
-	 *
-	 * @author Michal Nowierski
-	 */
-	public void verifyTheImageOnThePreview() {
-		waitForElementByElement(imageOnPreview);
-		PageObjectLogging.log("VerifyTheImageOnThePreview", "Verify that the image appears in the preview", true, driver);
-
-	}
 
 	/**
 	 * Verify that the caption of image appears in the preview
@@ -280,13 +271,13 @@ public class WikiArticleEditMode extends WikiEditMode {
 	 *
 	 * @author Michal Nowierski
 	 */
-	public WikiArticleSourceEditMode clickOnSourceButton() {
+	public SourceEditModePageObject clickOnSourceButton() {
 		waitForElementByElement(sourceModeButton);
 		waitForElementClickableByElement(sourceModeButton);
 		scrollAndClick(sourceModeButton);
 		waitForElementByElement(sourceModeTextArea);
 		PageObjectLogging.log("ClickOnSourceButton", "Click on 'Source' button", true, driver);
-		return new WikiArticleSourceEditMode(driver);
+		return new SourceEditModePageObject(driver);
 	}
 
 	/**
@@ -390,16 +381,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		jQueryClick(editButtonArticleItem);
 		PageObjectLogging.log("ClickModifyButtonOfImage", "Click on 'modify button' of image with caption: '"+caption+"'", true, driver);
 		return new PhotoOptionsComponentObject(driver);
-	}
-
-	public GalleryBuilderComponentObject clickModifyButtonGallery()
-	{
-		waitForElementByElement(iFrame);
-		mouseOverInArticleIframe(galleryArticleIFrame);
-		waitForElementByElement(modifyButton);
-		jQueryClick(editButtonArticleItem);
-		PageObjectLogging.log("clickModifyButtonGallery", "Click on 'modify button' on gallery", true, driver);
-		return new GalleryBuilderComponentObject(driver);
 	}
 
 	public SlideshowBuilderComponentObject clickModifyButtonSlideshow()

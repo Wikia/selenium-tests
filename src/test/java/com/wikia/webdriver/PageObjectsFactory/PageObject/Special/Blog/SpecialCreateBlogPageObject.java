@@ -6,12 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
-public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
+public class SpecialCreateBlogPageObject extends VisualEditModePageObject {
 
 
 	@FindBy(css="input[name='wpTitle']")
@@ -64,12 +63,5 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		waitForElementByBy(editButtonBy);
 		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
 		return new BlogPageObject(driver);
-	}
-
-	public SpecialCreateBlogPageObject createBlogFormUrl(String blogPostTitle){
-		getUrl(Global.DOMAIN+"wiki/Special:CreateBlogPage");
-		typeBlogPostTitle(blogPostTitle);
-		clickOk();
-		return new SpecialCreateBlogPageObject(driver);
 	}
 }

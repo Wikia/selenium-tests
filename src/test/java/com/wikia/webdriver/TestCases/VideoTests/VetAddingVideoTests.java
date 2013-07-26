@@ -12,7 +12,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -156,41 +155,41 @@ public class VetAddingVideoTests extends TestTemplate {
 		article.verifyVideoOnThePage();
 	}
 
-	@Test(groups = {"VetTests009", "VetTests", "VetAddVideo"})
-	public void Vet_Tests_009_BlogProvider() {
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
-		blogEdit.openWikiPage();
-		login.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
-		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
-		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.setCaption(PageContent.caption);
-		vetOptions.submit();
-		blogEdit.verifyVideoInEditMode(PageContent.caption);
-		WikiArticlePageObject article = blogEdit.clickOnPublishButton();
-		article.verifyVideoOnThePage();
-	}
-
-	@Test(groups = {"VetTests010", "VetTests", "VetAddVideo"})
-	public void Vet_Tests_010_BlogLibrary() {
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
-		blogEdit.openWikiPage();
-		login.logInCookie(Properties.userName, Properties.password);
-		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
-		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
-		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
-		vetOptions.setCaption(PageContent.caption);
-		vetOptions.submit();
-		blogEdit.verifyVideoInEditMode(PageContent.caption);
-		WikiArticlePageObject article = blogEdit.clickOnPublishButton();
-		article.verifyVideoOnThePage();
-	}
+//	@Test(groups = {"VetTests009", "VetTests", "VetAddVideo"})
+//	public void Vet_Tests_009_BlogProvider() {
+//		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+//		login.logOut(driver);
+//		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
+//		blogEdit.openWikiPage();
+//		login.logInCookie(Properties.userName, Properties.password);
+//		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
+//		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
+//		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
+//		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+//		vetOptions.setCaption(PageContent.caption);
+//		vetOptions.submit();
+//		blogEdit.verifyVideoInEditMode(PageContent.caption);
+//		WikiArticlePageObject article = blogEdit.clickOnPublishButton();
+//		article.verifyVideoOnThePage();
+//	}
+//
+//	@Test(groups = {"VetTests010", "VetTests", "VetAddVideo"})
+//	public void Vet_Tests_010_BlogLibrary() {
+//		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+//		login.logOut(driver);
+//		SpecialCreateBlogPageObject blogEdit = new SpecialCreateBlogPageObject(driver);
+//		blogEdit.openWikiPage();
+//		login.logInCookie(Properties.userName, Properties.password);
+//		String blogPostTitle = PageContent.blogPostNamePrefix + blogEdit.getTimeStamp();
+//		blogEdit = blogEdit.createBlogFormUrl(blogPostTitle);
+//		VetAddVideoComponentObject vetAddingVideo = blogEdit.clickVideoButton();
+//		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+//		vetOptions.setCaption(PageContent.caption);
+//		vetOptions.submit();
+//		blogEdit.verifyVideoInEditMode(PageContent.caption);
+//		WikiArticlePageObject article = blogEdit.clickOnPublishButton();
+//		article.verifyVideoOnThePage();
+//	}
 
 	@Test(groups = {"VetTests011", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_011_CommentsProvider() {

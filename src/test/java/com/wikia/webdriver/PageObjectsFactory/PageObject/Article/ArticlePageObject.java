@@ -1,21 +1,21 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 
 /**
  *
@@ -24,12 +24,13 @@ import java.util.List;
 public class ArticlePageObject extends WikiBasePageObject {
 
 	private final String editButtonSelector = ".article-comm-edit";
+	private final String deleteButtonSelector = ".article-comm-delete";
 	private final String commentAuthorLink = ".edited-by";
 	private final String replyCommentSelector = ".article-comm-reply";
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
-	@FindBy(css="#WikiaPageHeader .drop img")
+	@FindBy(css="#WikiaMainContent .drop img")
 	protected WebElement articleEditDropdown;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
@@ -71,6 +72,18 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement replyCommentLoadingIndicator;
 	@FindBy(css="blockquote .article-comm-edit-box .actionButton[name='wpArticleSubmit']")
 	protected WebElement replyCommentSubmitButton;
+	@FindBy(css=".WikiaArticle.article-comm-text")
+	protected List<WebElement> commentTextList;
+	@FindBy(css="#mw-content-text .thumbimage")
+	protected WebElement imageArticle;
+	@FindBy(css="#mw-content-text .wikia-gallery")
+	protected WebElement galleryArticle;
+	@FindBy(css="#mw-content-text .wikia-slideshow")
+	protected WebElement slideshowArticle;
+	@FindBy(css="#mw-content-text .wikiaPhotoGallery-slider-body")
+	protected WebElement sliderArticle;
+	@FindBy(css="#mw-content-text .Wikia-video-play-button")
+	protected WebElement videoArticle;
 
 
 	public ArticlePageObject(WebDriver driver) {
@@ -137,6 +150,29 @@ public class ArticlePageObject extends WikiBasePageObject {
 			mostRecentComment, editButtonSelector
 		);
 		return new MiniEditorComponentObject(driver);
+	}
+
+	public DeleteArticlePageObject deleteComment() {
+		scrollToElement(allCommentsArea);
+		WebElement mostRecentComment = articleComments.get(0);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(
+				"arguments[0].querySelector(arguments[1]).click()",
+				mostRecentComment, deleteButtonSelector
+				);
+		return new DeleteArticlePageObject(driver);
+	}
+
+	public void verifyCommentDeleted(String comment) {
+		for(WebElement elem:commentTextList) {
+			Assertion.assertTrue(
+					!comment.equals(elem.getText())
+					);
+		}
+	}
+
+	public String getFirstCommentText() {
+		return commentTextList.get(0).getText();
 	}
 
 	public void verifyCommentCreator(String userName) {
@@ -215,5 +251,25 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementVisibleByElement(historyDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 1);
 		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
+	}
+
+	public void verifyPhoto() {
+		waitForElementByElement(imageArticle);
+	}
+
+	public void verifyGallery() {
+		waitForElementByElement(galleryArticle);
+	}
+
+	public void verifySlideshow() {
+		waitForElementByElement(slideshowArticle);
+	}
+
+	public void verifySlider() {
+		waitForElementByElement(sliderArticle);
+	}
+
+	public void verifyVideo() {
+		waitForElementByElement(videoArticle);
 	}
 }

@@ -14,7 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoC
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
- * 
+ *
  * @author Karol 'kkarolk' Kujawiak
  *
  */
@@ -34,13 +34,13 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	private WebElement spacing;
 	@FindBy(css="ul#WikiaPhotoGalleryOrientation")
 	private WebElement orientation;
-	
+
 	private By orintationNone = By.cssSelector("[id*='none']");
 	private By orintationSquare = By.cssSelector("[id*='square']");
 	private By orintationLandscape = By.cssSelector("[id*='landscape']");
 	private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
-	
+
 	public GalleryBuilderComponentObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -49,19 +49,24 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	public void adjustSize(int size){
 		//TODO
 	}
-	
+
 	/**
 	 * @param positionNo
  	 * Left
 	 * Center
 	 * Right
 	 */
-	public void adjustPosition(String positionNo){
+
+	public enum PositionsGallery {
+		Left, Center, Right
+	}
+
+	public void adjustPosition(PositionsGallery pos){
 		waitForElementByElement(position);
 		Select positionDropdown = new Select(position);
-		positionDropdown.selectByVisibleText(positionNo);
+		positionDropdown.selectByVisibleText(pos.toString());
 	}
-	
+
 	/**
 	 * @param columnsNo
 	 * fit to page
@@ -77,23 +82,27 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 		Select columnsDropdown = new Select(columns);
 		columnsDropdown.selectByVisibleText(columnsNo);
 	}
-	
+
+	public enum SpacingGallery {
+		Small, Medium, Large
+	}
+
 	/**
 	 * 0 - small
 	 * 1 - medium
 	 * 2 - large
 	 * @param spacingNo
 	 */
-	public void adjustSpacing(String spacingNo){
+	public void adjustSpacing(SpacingGallery spac){
 		waitForElementByElement(spacing);
 		Select spacingDropdown = new Select(spacing);
-		spacingDropdown.selectByVisibleText(spacingNo);
+		spacingDropdown.selectByVisibleText(spac.toString());
 	}
-	
+
 	public enum Orientation{
 		none, square, landscape, portrait
 	}
-	
+
 	/**
 	 * 0 - none
 	 * 1 - square
@@ -104,7 +113,7 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	public void adjustOrientation(Orientation orient){
 		waitForElementByElement(orientation);
 		switch(orient){
-		case none: 
+		case none:
 			orientation.findElement(orintationNone);
 			break;
 		case square:
@@ -118,23 +127,23 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 			break;
 		}
 		PageObjectLogging.log("adjustOrientation", "dropdown selected", true);
-		
+
 	}
-	
+
 	public AddPhotoComponentObject clickAddPhoto(){
 		waitForElementByElement(addPhotoButton);
 		scrollAndClick(addPhotoButton);
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 		return new AddPhotoComponentObject(driver);
 	}
-	
+
 	public void verifyPhotosVisible(int photos){
 		for (int i=0; i<photos; i++){
 			waitForElementByElement(galleryPreviewPhotos.get(i));
 			PageObjectLogging.log("verifyPhotosVisible", "photo no. "+i+1+"/photos is visible", true);
 		}
 	}
-	
+
 	public void clickFinish(){
 		waitForElementByElement(finishButton);
 		finishButton.click();
