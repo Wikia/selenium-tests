@@ -154,6 +154,11 @@ public class BasePageObject{
 	public void jQueryNthElemClick(String cssSelector, int n){
 		executeScript("$('"+cssSelector+"')["+n+"].click()");
 	}
+
+	public void jQueryFocus(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$(arguments[0]).focus()", element);
+	}
 	/*
 	 * Url helpers
 	 */
@@ -571,15 +576,16 @@ public class BasePageObject{
     };
 
 	public void enableWikiaTracker() {
-		if (driver.getCurrentUrl().contains("?")) {
-			appendToUrl("&log_level=info");
-		} else {
-			appendToUrl("?log_level=info");
-		}
+		driver.get(
+				URLsContent.buildUrl(
+						driver.getCurrentUrl(),
+						URLsContent.wikiaTracker
+						)
+		);
 	}
 
 	public void appendToUrl(String additionToUrl) {
-		driver.get(getCurrentUrl()+additionToUrl);
+		driver.get(URLsContent.buildUrl(driver.getCurrentUrl(), additionToUrl));
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 

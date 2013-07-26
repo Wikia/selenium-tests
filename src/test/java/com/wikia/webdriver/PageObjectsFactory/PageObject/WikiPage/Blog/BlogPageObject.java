@@ -1,18 +1,22 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog;
 
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BlogPageObject extends UserProfilePageObject {
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
+
+public class BlogPageObject extends ArticlePageObject {
 
 	@FindBy(css="div.author-details")
 	private WebElement usernameField;
+	@FindBy(css=".WikiaBlogPostHeader h1")
+	private WebElement blogHeader;
 
 	By image = By.cssSelector("img");
 	By firstSpan = By.cssSelector("span:nth-child(2) a");
@@ -73,5 +77,15 @@ public class BlogPageObject extends UserProfilePageObject {
 		getUrl(Global.DOMAIN+"index.php?title=User_blog:"+userName+"&action=unwatch");
 		scrollAndClick(followSubmit);
 		waitForElementByElement(unfollowedButton);
+	}
+
+	public void verifyBlogTitle(String title) {
+		waitForElementByElement(blogHeader);
+		Assertion.assertEquals(title, blogHeader.getText());
+	}
+
+
+	public String getBlogName() {
+		return blogHeader.getText();
 	}
 }

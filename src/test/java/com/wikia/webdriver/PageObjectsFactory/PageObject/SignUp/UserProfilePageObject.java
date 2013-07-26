@@ -1,18 +1,20 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
-public class UserProfilePageObject extends WikiArticlePageObject {
+public class UserProfilePageObject extends WikiBasePageObject {
 
 	@FindBy(css="header#WikiaHeader a.ajaxLogin")
 	private WebElement logInLink;
@@ -20,18 +22,12 @@ public class UserProfilePageObject extends WikiArticlePageObject {
 	private WebElement blogTab;
 	@FindBy(css="a[data-id='createblogpost']")
 	private WebElement createBlogPostButton;
+	@FindBy(css=".WikiaBlogListingPost h1>a")
+	private List<WebElement> blogPostList;
 
 	public UserProfilePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	}
-
-	public UserProfilePageObject navigateToProfilePage(String userName) {
-		driver.get(Global.DOMAIN + "wiki/User:" + userName);
-		PageObjectLogging.log("UserProfilePageObject ",
-				"navigate to username page: " + Global.DOMAIN + "wiki/User:"
-						+ userName, true, driver);
-		return new UserProfilePageObject(driver);
 	}
 
 	/**
@@ -63,15 +59,28 @@ public class UserProfilePageObject extends WikiArticlePageObject {
 		PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
 	}
 
+	public BlogPageObject openBlogPage(int blogNumber) {
+		blogPostList.get(blogNumber).click();
+		PageObjectLogging.log("openBlogPage",
+				"blog post " + blogPostList.get(0).getText() + " opened",
+				true);
+		return new BlogPageObject(driver);
+	}
+
+	public BlogPageObject openFirstPost() {
+		openBlogPage(0);
+		return new BlogPageObject(driver);
+	}
+
 	/**
 	 * @author Michal Nowierski
 	 * @return
 	 */
-	public SpecialCreateBlogPageObject clickOnCreateBlogPost() {
+	public SpecialCreatePagePageObject clickOnCreateBlogPost() {
 		waitForElementByElement(createBlogPostButton);
 		waitForElementClickableByElement(createBlogPostButton);
 		scrollAndClick(createBlogPostButton);
 		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);
-		return new SpecialCreateBlogPageObject(driver);
+		return new SpecialCreatePagePageObject(driver);
 	}
 }
