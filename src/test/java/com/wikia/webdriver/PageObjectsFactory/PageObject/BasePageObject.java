@@ -477,6 +477,11 @@ public class BasePageObject{
 		getUrl(Global.DOMAIN + URLsContent.noexternals);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
+	
+	public void openVideoSuggestionsPage() {
+		getUrl(URLsContent.videoSuggestionsUrl);
+		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	}
 
 	/**
 	 * Wait for tags that are visible and are bigger then 1px x 1px

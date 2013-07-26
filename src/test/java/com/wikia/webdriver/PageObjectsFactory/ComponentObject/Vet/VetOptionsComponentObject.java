@@ -55,6 +55,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement videoThumbnail;
 		@FindBy(css="div#VideoEmbedNameRow p")
 		private WebElement videoNameCaption;
+		
 
 		public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
@@ -229,4 +230,5 @@ public class VetOptionsComponentObject extends BasePageObject{
 		waitForElementByElement(editableVideoNameField);
 		PageObjectLogging.log("verifyVideoNameFieldIsEditable", "Verified that Video Name Field is editable",  true, driver);
 	}
+	
 }

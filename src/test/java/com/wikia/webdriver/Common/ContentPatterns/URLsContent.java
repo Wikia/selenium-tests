@@ -50,8 +50,11 @@ public class URLsContent {
 	public static final String noexternals = "?noexternals=1";
 	public static final String actionEditParameter = "?action=edit";
 
- 	// WAM Scores page url
- 	public static final String wamPageUrl = "WAM";
+	// WAM Scores page url
+	public static final String wamPageUrl = "WAM";
+
+	//Preview url for testing video suggestions
+	public static final String videoSuggestionsUrl = "http://preview.callofduty.wikia.com/wiki/Frank_Woods";
 
 	// replace %title% with new article name
 	public static final String addArticle = "index.php?title=%title%&action=edit";
