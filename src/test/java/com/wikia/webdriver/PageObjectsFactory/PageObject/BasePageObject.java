@@ -4,15 +4,22 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -129,6 +136,11 @@ public class BasePageObject{
 		executeScript("$('" + cssSelector + "').click()");
 	}
 
+	public void jQueryClick(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$(arguments[0]).click()", element);
+	}
+
 	protected void actionsClick(WebElement element) {
 		Actions actions = new Actions(driver);
 		actions.click(element);
@@ -141,6 +153,11 @@ public class BasePageObject{
 
 	public void jQueryNthElemClick(String cssSelector, int n){
 		executeScript("$('"+cssSelector+"')["+n+"].click()");
+	}
+
+	public void jQueryFocus(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$(arguments[0]).focus()", element);
 	}
 	/*
 	 * Url helpers
@@ -564,15 +581,16 @@ public class BasePageObject{
     };
 
 	public void enableWikiaTracker() {
-		if (driver.getCurrentUrl().contains("?")) {
-			appendToUrl("&log_level=info");
-		} else {
-			appendToUrl("?log_level=info");
-		}
+		driver.get(
+				URLsContent.buildUrl(
+						driver.getCurrentUrl(),
+						URLsContent.wikiaTracker
+						)
+		);
 	}
 
 	public void appendToUrl(String additionToUrl) {
-		driver.get(getCurrentUrl()+additionToUrl);
+		driver.get(URLsContent.buildUrl(driver.getCurrentUrl(), additionToUrl));
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 

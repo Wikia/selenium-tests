@@ -1,18 +1,19 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
  */
 public class SpecialRestorePageObject extends WikiBasePageObject {
 
-	@FindBy(css=".mw-undelete-pagetitle .new")
+	@FindBy(css=".mw-undelete-pagetitle")
 	private WebElement articleToRestore;
 	@FindBy(css="#wpComment")
 	private WebElement reasonInput;

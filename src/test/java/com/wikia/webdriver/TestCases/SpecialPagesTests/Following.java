@@ -9,7 +9,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFollowPa
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogListingPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
@@ -43,29 +42,29 @@ public class Following extends TestTemplate{
 		follow.verifyFollowedBlog(Properties.userName);
 	}
 
-	@Test(groups = {"Follow003", "Follow"})
-	public void follow003_BlogPosts(){
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
-		blogPostTitle = PageContent.blogPostNamePrefix+article.getTimeStamp();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userName, Properties.password);
-		BlogPageObject blog = new BlogPageObject(driver);
-		blog.openBlogPage(Properties.userName);
-		SpecialCreateBlogPageObject createBlogPage = blog.clickOnCreateBlogPost();
-		createBlogPage.typeBlogPostTitle(blogPostTitle);
-		createBlogPage.clickOk();
-		createBlogPage.typeInContent(PageContent.blogContent);
-		BlogPageObject blogPage = createBlogPage.clickOnPublishBlogPostButton();
-		blogPage.verifyArticleText(PageContent.blogContent);
-		blogPage.verifyPageTitle(blogPostTitle);
-		blogPage.verifyUsernameFieldPresent(Properties.userName);
-		blogPage.categories_verifyCategoryPresent("Blog posts");
-		blogPage.followBlogPostPage(Properties.userName, blogPostTitle);
-		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
-		follow.openFollowingPage();
-		follow.verifyFollowedBlogPost(blogPostTitle);
-	}
+//	@Test(groups = {"Follow003", "Follow"})
+//	public void follow003_BlogPosts(){
+//		WikiArticlePageObject article = new WikiArticlePageObject(driver);
+//		article.openWikiPage();
+//		blogPostTitle = PageContent.blogPostNamePrefix+article.getTimeStamp();
+//		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+//		login.logInCookie(Properties.userName, Properties.password);
+//		BlogPageObject blog = new BlogPageObject(driver);
+//		blog.openBlogPage(Properties.userName);
+//		SpecialCreateBlogPageObject createBlogPage = blog.clickOnCreateBlogPost();
+//		createBlogPage.typeBlogPostTitle(blogPostTitle);
+//		createBlogPage.clickOk();
+//		createBlogPage.typeInContent(PageContent.blogContent);
+//		BlogPageObject blogPage = createBlogPage.clickOnPublishBlogPostButton();
+//		blogPage.verifyArticleText(PageContent.blogContent);
+//		blogPage.verifyPageTitle(blogPostTitle);
+//		blogPage.verifyUsernameFieldPresent(Properties.userName);
+//		blogPage.categories_verifyCategoryPresent("Blog posts");
+//		blogPage.followBlogPostPage(Properties.userName, blogPostTitle);
+//		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver);
+//		follow.openFollowingPage();
+//		follow.verifyFollowedBlogPost(blogPostTitle);
+//	}
 
 	@Test(groups = {"Follow004", "Follow"})
 	public void follow004_Photos(){

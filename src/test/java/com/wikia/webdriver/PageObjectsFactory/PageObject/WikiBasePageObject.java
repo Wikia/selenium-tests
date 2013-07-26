@@ -1,8 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -14,13 +18,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.*;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -29,6 +26,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -39,14 +37,20 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -143,11 +147,18 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
 
-	/**
-	 * @author Michal Nowierski
-	 * */
+	public UserProfilePageObject navigateToProfilePage(String userName, String wikiURL) {
+		getUrl(wikiURL + "wiki/User:" + userName);
+		return new UserProfilePageObject(driver);
+	}
+
 	public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
+		return new SpecialVideosPageObject(driver);
+	}
+
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialNewVideo);
 		return new SpecialVideosPageObject(driver);
 	}
 
@@ -171,6 +182,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialUploadPageObject(driver);
 	}
 
+	public SpecialCreatePagePageObject openSpecialCreateBlogPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCreateBlogPage);
+		return new SpecialCreatePagePageObject(driver);
+	}
+
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
 		PageObjectLogging.log(
@@ -179,22 +195,6 @@ public class WikiBasePageObject extends BasePageObject {
 			true
 		);
 		return new SpecialMultiWikiFinderPageObject(driver);
-	}
-
-
-	/**
-	 * Verify that the Object appears on the page
-	 *
-	 * @author Michal Nowierski
-	 * @param Object Object = {gallery, slideshow}
-	 * 	 */
-	public void verifyObjectOnThePage(String Object) {
-		waitForElementByBy(By.cssSelector("#WikiaArticle div[id*='" + Object + "']"));
-		PageObjectLogging.log(
-				"VerifyTheObjetOnThePage",
-				"Verify that the " + Object + " appears on the page",
-				true, driver
-		);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
@@ -238,12 +238,27 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
-		getUrl(driver.getCurrentUrl() + URLsContent.actionEditParameter);
+		getUrl(URLsContent.buildUrl(
+				driver.getCurrentUrl(),
+				URLsContent.actionEditParameter
+				)
+			);
 		return new VisualEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
-		getUrl(wikiURL + URLsContent.wikiDir + article + URLsContent.actionEditParameter);
+		getUrl(URLsContent.buildUrl(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+				)
+			);
+		return new VisualEditModePageObject(driver);
+	}
+
+	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
+		getUrl(URLsContent.buildUrl(
+				URLsContent.buildUrl(
+						wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+						), URLsContent.useDefaultFormat));
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -732,7 +747,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
-
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
