@@ -587,5 +587,4 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		addPhotoToSlideShowButton.click();
 		return new SlideshowBuilderComponentObject(driver);
 	}
-
 }

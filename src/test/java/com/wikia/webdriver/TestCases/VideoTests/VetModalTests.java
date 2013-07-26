@@ -544,29 +544,4 @@ public class VetModalTests extends TestTemplate {
 		vetOptions.submit();
 		edit.clickOnPublishButton();
 	}
-
-	/**
-	 * TC018 - Verifies video name field is editable for Non-Premium Wikia
-	 * videos
-	 *
-	 * @author Rodrigo 'RodriGomez' Molinero
-	 */
-
-	@Test(groups = { "VetModalTests018", "VetModalTests" })
-	public void Vet_Tests_018_VerifyVideoNameFieldIsEditable() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userName,
-				Properties.password);
-		pageName = PageContent.articleNamePrefix + article.getTimeStamp();
-		WikiArticleEditMode edit = article.createNewArticle(pageName, 1);
-		edit.deleteArticleContent();
-		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL2);
-		vetOptions.verifyVideoNameFieldIsEditable();
-		vetOptions.submit();
-		edit.clickOnPublishButton();
-	}
 }
