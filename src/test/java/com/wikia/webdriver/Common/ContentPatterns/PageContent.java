@@ -60,7 +60,8 @@ public class PageContent {
 	public static String forumBoard = "QABoardForMoveThreadTest";
 	public static String closeReason = "QA reason";
 
-	// Messages
+
+	//Messages
 	public static String articleDeletedMessage = "This page has been deleted.";
 	public static String createNewBlogPostMessage = "Create a new blog post";
 	public static String loginRequired = "Login required";
@@ -69,7 +70,7 @@ public class PageContent {
 	public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
 	public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
 
-	// Blocks for Phalanx
+	//Blocks for Phalanx
 	public static String titleFilterPlain = "BadContent";
 
 	//wikiText
@@ -83,5 +84,6 @@ public class PageContent {
 	public static String wikiSignUpBirthMonth = "11";
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
+
 
 }

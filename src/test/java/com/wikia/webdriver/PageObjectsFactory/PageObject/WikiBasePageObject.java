@@ -39,7 +39,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
@@ -147,11 +147,18 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
 
-	/**
-	 * @author Michal Nowierski
-	 * */
+	public UserProfilePageObject navigateToProfilePage(String userName, String wikiURL) {
+		getUrl(wikiURL + "wiki/User:" + userName);
+		return new UserProfilePageObject(driver);
+	}
+
 	public SpecialVideosPageObject openSpecialVideoPage(){
 		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
+		return new SpecialVideosPageObject(driver);
+	}
+
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialNewVideo);
 		return new SpecialVideosPageObject(driver);
 	}
 
@@ -175,6 +182,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialUploadPageObject(driver);
 	}
 
+	public SpecialCreatePagePageObject openSpecialCreateBlogPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCreateBlogPage);
+		return new SpecialCreatePagePageObject(driver);
+	}
+
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
 		PageObjectLogging.log(
@@ -183,28 +195,6 @@ public class WikiBasePageObject extends BasePageObject {
 			true
 		);
 		return new SpecialMultiWikiFinderPageObject(driver);
-	}
-
-	public ForumPageObject openForumMainPage(String wikiURL) {
-		getUrl(wikiURL + URLsContent.specialForum);
-		PageObjectLogging.log("openForumPage", "forum page opened", true);
-		return new ForumPageObject(driver);
-	}
-
-
-	/**
-	 * Verify that the Object appears on the page
-	 *
-	 * @author Michal Nowierski
-	 * @param Object Object = {gallery, slideshow}
-	 * 	 */
-	public void verifyObjectOnThePage(String Object) {
-		waitForElementByBy(By.cssSelector("#WikiaArticle div[id*='" + Object + "']"));
-		PageObjectLogging.log(
-				"VerifyTheObjetOnThePage",
-				"Verify that the " + Object + " appears on the page",
-				true, driver
-		);
 	}
 
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
@@ -246,12 +236,27 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
-		getUrl(driver.getCurrentUrl() + URLsContent.actionEditParameter);
+		getUrl(URLsContent.buildUrl(
+				driver.getCurrentUrl(),
+				URLsContent.actionEditParameter
+				)
+			);
 		return new VisualEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
-		getUrl(wikiURL + URLsContent.wikiDir + article + URLsContent.actionEditParameter);
+		getUrl(URLsContent.buildUrl(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+				)
+			);
+		return new VisualEditModePageObject(driver);
+	}
+
+	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
+		getUrl(URLsContent.buildUrl(
+				URLsContent.buildUrl(
+						wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+						), URLsContent.useDefaultFormat));
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -741,7 +746,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
-
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
