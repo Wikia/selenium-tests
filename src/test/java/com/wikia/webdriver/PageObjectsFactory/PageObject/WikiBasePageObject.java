@@ -157,6 +157,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialVideosPageObject(driver);
 	}
 
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialNewVideo);
+		return new SpecialVideosPageObject(driver);
+	}
+
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
 		getUrl(Global.DOMAIN + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
@@ -238,7 +243,18 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
-		getUrl(wikiURL + URLsContent.wikiDir + article + URLsContent.actionEditParameter);
+		getUrl(URLsContent.buildUrl(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+				)
+			);
+		return new VisualEditModePageObject(driver);
+	}
+
+	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
+		getUrl(URLsContent.buildUrl(
+				URLsContent.buildUrl(
+						wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+						), URLsContent.useDefaultFormat));
 		return new VisualEditModePageObject(driver);
 	}
 

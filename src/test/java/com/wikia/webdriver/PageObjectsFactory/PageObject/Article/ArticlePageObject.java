@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
@@ -84,7 +85,16 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement sliderArticle;
 	@FindBy(css="#mw-content-text .Wikia-video-play-button")
 	protected WebElement videoArticle;
+	@FindBy(css="section.RelatedVideosModule")
+	protected WebElement rVModule;
+	@FindBy(css=".button.addVideo")
+	protected WebElement rVAddVideo;
+	@FindBy(css="#WikiaImagePlaceholderInner0")
+	private WebElement videoAddPlaceholder;
 
+	protected By rvFirstVideo = By.cssSelector(
+			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
+			);
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -271,5 +281,26 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideo() {
 		waitForElementByElement(videoArticle);
+	}
+
+	public void verifyRVModulePresence() {
+		waitForElementByElement(rVModule);
+		PageObjectLogging.log("VerifyRVModulePresence", "Verify that the RV Module Is Present", true, driver);
+	}
+
+	public VetAddVideoComponentObject clickAddRelatedVideo() {
+		waitForElementByElement(rVAddVideo);
+		scrollAndClick(rVAddVideo);
+		return new VetAddVideoComponentObject(driver);
+	}
+
+	public void verifyRelatedVideoAdded(String videoName) {
+		waitForTextToBePresentInElementByBy(rvFirstVideo, videoName);
+	}
+
+	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
+		waitForElementByElement(videoAddPlaceholder);
+		scrollAndClick(videoAddPlaceholder);
+		return new VetAddVideoComponentObject(driver);
 	}
 }

@@ -412,15 +412,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new VetOptionsComponentObject(driver);
 	}
 
-	public VetAddVideoComponentObject clickModifyButtonVideoPlaceholder()
-	{
-		waitForElementByElement(iFrame);
-		mouseOverInArticleIframe(videoPlaceholder);
-		waitForElementByElement(modifyButtonVideoPlaceholder);
-		jQueryClick(editButtonVideoPlaceholder);
-		PageObjectLogging.log("clickModifyButtonOfVideoPlaceholder", "modify button on video placeholder clicked", true, driver);
-		return new VetAddVideoComponentObject(driver);
-	}
+
 
 	/**
 	 * Click on 'remove button' of image with given caption
@@ -658,59 +650,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void clickClosePreviewModalButton() {
 		waitForElementByElement(closePreviewModal);
 		PageObjectLogging.log("clickClosePreviewModalButton", "Verify that the close button in the preview modal is clicked", true, driver);
-	}
-
-	/**
-	 * Get text of source mode text of message article page. Remmember that source mode must be turned on to invoke this method. Just invoke 'ClickOnSourceButton'
-	 * Message article page is e.g http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList
-	 *
-	 * @author Michal Nowierski
-	 */
-	public String getMessageSourceText() {
-		waitForElementByElement(messageSourceModeTextArea);
-		PageObjectLogging.log("getMessageSourceText", "Get text of source mode text of message article page.", true, driver);
-		return messageSourceModeTextArea.getText();
-	}
-
-	/**
-	 * Delete unwanted video by its name.
-	 * Message article page is e.g http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList
-	 * This method destination is exactly related videos message article
-	 *
-	 * @author Michal Nowierski
-	 * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
-	 */
-	public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
-		ArrayList<String> videos = new ArrayList<String>();
-		String sourceText = getMessageSourceText();
-		int index = 0;
-		while (true) {
-			int previousStarIndex = sourceText.indexOf("*", index);
-			int nextStarIndex = sourceText.indexOf("*", previousStarIndex+1);
-			if (nextStarIndex<0) {
-				break;
-			}
-			String video = sourceText.substring(previousStarIndex, nextStarIndex);
-			if (!video.contains(unwantedVideoName)) {
-				videos.add(video);
-			}
-			index = previousStarIndex+1;
-		}
-		waitForElementByElement(messageSourceModeTextArea);
-		messageSourceModeTextArea.clear();
-		messageSourceModeTextArea.sendKeys("WHITELIST");
-		messageSourceModeTextArea.sendKeys(Keys.ENTER);
-		messageSourceModeTextArea.sendKeys(Keys.ENTER);
-		String builder = "";
-		for (int i = 0; i<videos.size(); i++)
-		{
-			builder+=videos.get(i);
-			builder+="\n";
-		}
-		CommonUtils.setClipboardContents(builder);
-		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-
-		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
 	}
 
 
@@ -1217,4 +1156,44 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickGallery", "gallery button clicked", true);
 		return new GalleryBuilderComponentObject(driver);
 	}
+
+	public String getMessageSourceText() {
+		waitForElementByElement(messageSourceModeTextArea);
+		PageObjectLogging.log("getMessageSourceText", "Get text of source mode text of message article page.", true, driver);
+		return messageSourceModeTextArea.getText();
+	}
+
+	public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
+		ArrayList<String> videos = new ArrayList<String>();
+		String sourceText = getMessageSourceText();
+		int index = 0;
+		while (true) {
+			int previousStarIndex = sourceText.indexOf("*", index);
+			int nextStarIndex = sourceText.indexOf("*", previousStarIndex+1);
+			if (nextStarIndex<0) {
+				break;
+			}
+			String video = sourceText.substring(previousStarIndex, nextStarIndex);
+			if (!video.contains(unwantedVideoName)) {
+				videos.add(video);
+			}
+			index = previousStarIndex+1;
+		}
+		waitForElementByElement(messageSourceModeTextArea);
+		messageSourceModeTextArea.clear();
+		messageSourceModeTextArea.sendKeys("WHITELIST");
+		messageSourceModeTextArea.sendKeys(Keys.ENTER);
+		messageSourceModeTextArea.sendKeys(Keys.ENTER);
+		String builder = "";
+		for (int i = 0; i<videos.size(); i++)
+		{
+			builder+=videos.get(i);
+			builder+="\n";
+		}
+		CommonUtils.setClipboardContents(builder);
+		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+
+		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
+	}
+
 }

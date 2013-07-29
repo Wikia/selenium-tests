@@ -49,7 +49,8 @@ public class URLsContent {
 
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
-	public static final String actionEditParameter = "?action=edit";
+	public static final String actionEditParameter = "action=edit";
+	public static final String useDefaultFormat = "useFormat=1";
 
  	// WAM Scores page url
  	public static final String wamPageUrl = "WAM";

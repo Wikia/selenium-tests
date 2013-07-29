@@ -23,8 +23,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	@FindBy(css="div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
-	@FindBy(css="section.RelatedVideosModule")
-	private WebElement rVModule;
 	@FindBy(css="#VideoEmbedUrl")
 	private WebElement videoRVmodalInput;
 	@FindBy(css="div[class='editarea']")
@@ -65,8 +63,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement articleContent;
 	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement VideoModalAddButton;
-	@FindBy(css="#WikiaImagePlaceholderInner0")
-	private WebElement videoAddPlaceholder;
 	@FindBy(css="#WikiaRail .addVideo")
     private WebElement addVideoWikiaRail;
 	@FindBy(css="#SPOTLIGHT_FOOTER_1 a img")
@@ -85,6 +81,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement randomPageButton;
 	@FindBy(css = ".sprite.search")
 	private WebElement searchButton;
+	@FindBy(css=".button.addVideo")
+	protected WebElement rVAddVideo;
 
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
@@ -94,6 +92,9 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
 	private By articleContentBy = By.cssSelector("#mw-content-text");
+	protected By rvFirstVideo = By.cssSelector(
+			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
+			);
 	private String pageName;
 
 	public WikiArticlePageObject(WebDriver driver) {
@@ -227,43 +228,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void verifyVideoOnThePage() {
 		waitForElementByBy(VideoOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheVideoOnThePage", "Verify that the Video appears on the page", true, driver);
-	}
-
-	/**
-	 * Verify that the RV Module Is Present
-	 *
-	 * @author Michal Nowierski
-	 * 	 */
-	public void verifyRVModulePresence() {
-		waitForElementByElement(rVModule);
-		PageObjectLogging.log("VerifyRVModulePresence", "Verify that the RV Module Is Present", true, driver);
-
-	}
-
-	/**
-	 * Click On 'Add a video' button on RV module
-	 *
-	 * @author Michal Nowierski
-	 * 	 */
-	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
-		waitForElementByBy(AddVideoRVButton);
-		scrollToElement(driver.findElement(AddVideoRVButton));
-		waitForElementClickableByBy(AddVideoRVButton);
-		scrollAndClick(driver.findElement(AddVideoRVButton));
-		PageObjectLogging.log("ClickOnAddVideoRVModule", "Click On 'Add a video' button on RV module", true, driver);
-		return new VetAddVideoComponentObject(driver);
-	}
-
-	/**
-	 * Verify that video given by its name has been added to RV module
-	 *
-	 * @author Michal Nowierski
-	 * @param videoURL2name The name of the video, or any fragment of the video name
-	 * 	 */
-	public void verifyVideoAddedToRVModule(String videoURL2name) {
-		waitForElementByCss(".RVBody img[data-video-name*=\""+videoURL2name+"\"]");
-		PageObjectLogging.log("VerifyVideoAddedToRVModule", "Verify that video given by its name has been added to RV module", true, driver);
-
 	}
 
 	public void verifyGalleryPosion(String position) {
@@ -406,12 +370,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new LightboxPageObject(driver);
 	}
 
-	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
-		waitForElementByElement(videoAddPlaceholder);
-		scrollAndClick(videoAddPlaceholder);
-		return new VetAddVideoComponentObject(driver);
-	}
-
     public void clickAddVideoFromRail() {
         waitForElementByElement(addVideoWikiaRail);
         scrollAndClick(addVideoWikiaRail);
@@ -427,4 +385,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
         renameArticle(oldName, newName);
     }
 
+
+	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
+		waitForElementByElement(rVAddVideo);
+		scrollAndClick(rVAddVideo);
+		return new VetAddVideoComponentObject(driver);
+	}
+
+	public void verifyVideoAddedToRVModule(String videoName) {
+		waitForTextToBePresentInElementByBy(rvFirstVideo, videoName);
+	}
 }

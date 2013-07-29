@@ -246,8 +246,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		vetOptions.update();
 		visualEditMode.removeComponent(Components.Video);
 		visualEditMode.verifyComponentRemoved(Components.Video);
-		visualEditMode.submit(PageType.Article);
-		//TODO
 	}
 
 	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDAdmin", "Smoke"})
@@ -288,6 +286,5 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.editArticleUsingDropdown();
 		visualEditMode.removeComponent(Components.Photo);
 		visualEditMode.verifyComponentRemoved(Components.Photo);
-		visualEditMode.submit(PageType.Article);
 	}
 }
