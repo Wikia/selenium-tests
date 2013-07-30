@@ -26,7 +26,7 @@ public class BlogCommentsTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups = { "BlogComments_001", "BlogTests", "BlogComments"})
-	public void BlogCommentsAnon_001_commentReply() {
+	public void BlogComments_001_Anon_commentReply() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
@@ -46,7 +46,7 @@ public class BlogCommentsTests extends NewTestTemplate{
 	}
 
 	@Test(groups = { "BlogComments_002", "BlogTests", "BlogComments"})
-	public void BlogCommentsUser_002_commentReply() {
+	public void BlogComments_002_User_commentReply() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
@@ -68,7 +68,7 @@ public class BlogCommentsTests extends NewTestTemplate{
 
 
 	@Test(groups = { "BlogComments_003", "BlogTests", "BlogComments"})
-	public void BlogCommentsUser_003_editComment() {
+	public void BlogComments_003_User_editComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
@@ -82,7 +82,7 @@ public class BlogCommentsTests extends NewTestTemplate{
 	}
 
 	@Test(groups = { "BlogComments_004", "BlogTests", "BlogComments"})
-	public void BlogCommentsAdmin_004_deleteComment() {
+	public void BlogComments_004_Admin_deleteComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);

@@ -68,11 +68,11 @@ public class BlogTests extends NewTestTemplate{
 	public void BlogTests_003_editFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String blogTitle = PageContent.blogPostNamePrefix + base.getTimeStamp();
 		String blogContent = PageContent.blogContent + base.getTimeStamp();
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
+		String blogTitle = blogPage.getBlogName();
 		VisualEditModePageObject visualEditMode = blogPage.editArticleUsingDropdown();
 		visualEditMode.addContent(blogContent);
 		visualEditMode.submit(PageType.Blog);
