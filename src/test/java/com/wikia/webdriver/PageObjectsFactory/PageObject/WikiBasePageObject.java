@@ -238,7 +238,11 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
-		getUrl(driver.getCurrentUrl() + URLsContent.actionEditParameter);
+		getUrl(URLsContent.buildUrl(
+				driver.getCurrentUrl(),
+				URLsContent.actionEditParameter
+				)
+			);
 		return new VisualEditModePageObject(driver);
 	}
 
