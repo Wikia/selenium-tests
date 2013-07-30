@@ -60,13 +60,15 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return new ForumManageBoardsPageObject(driver);
 	}
 
+    /*
+     * this method choose first link on the board which doesn't contain chinese signs
+     */
 	public ForumBoardPageObject openForumBoard() {
 		WebElement forumBoardLink = null;
-		found:
 			for(int i = 0; i < getForumElementsList().size(); i++) {
 				if(!getForumElementsList().get(i).toString().contains("%")) {
 					forumBoardLink = getForumElementsList().get(i);
-					break found;
+					break;
 				}
 			}
 		waitForElementByElement(forumBoardLink);

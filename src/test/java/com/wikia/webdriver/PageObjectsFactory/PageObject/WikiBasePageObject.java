@@ -182,7 +182,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
-		public ForumPageObject openForumMainPage(String wikiURL) {
+	public ForumPageObject openForumMainPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialForum);
 		PageObjectLogging.log("openForumPage", "forum page opened", true);
 		return new ForumPageObject(driver);
