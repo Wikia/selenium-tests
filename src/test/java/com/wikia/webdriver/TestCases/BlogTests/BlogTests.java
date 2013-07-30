@@ -84,7 +84,7 @@ public class BlogTests extends NewTestTemplate{
 	public void BlogTests_004_deleteUndelete() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userNameStaff, wikiURL);
+		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		String blogTitle = blogPage.getBlogName();
@@ -102,7 +102,7 @@ public class BlogTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		String blogTitleMove = PageContent.blogPostNamePrefix + base.getTimeStamp();
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userNameStaff, wikiURL);
+		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		RenameArticlePageObject renamePage = blogPage.renameArticleUsingDropdown();
