@@ -68,6 +68,8 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>			
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleActionsAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleEditDropdownTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnon"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsUser"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.ArticleCommentsTests"/>
 		</classes>
 	</test>

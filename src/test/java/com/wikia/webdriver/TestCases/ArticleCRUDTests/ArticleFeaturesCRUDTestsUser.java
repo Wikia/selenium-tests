@@ -32,7 +32,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_001", "ArticleFeaturesCRUDAdmin", "Smoke"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_001", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleCRUDAdmin_001_addModifyGallery() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -69,7 +69,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyGallery();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_002", "ArticleFeaturesCRUDAdmin"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_002", "ArticleFeaturesCRUDUser"})
 	public void ArticleCRUDAdmin_002_addDeleteGallery() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -95,7 +95,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Gallery);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_003", "ArticleFeaturesCRUDAdmin", "Smoke"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_003", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleCRUDAdmin_003_addModifySlideshow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -126,7 +126,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifySlideshow();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_009", "ArticleFeaturesCRUDAdmin"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_009", "ArticleFeaturesCRUDUser"})
 	public void ArticleCRUDAdmin_004_addDeleteSlideshow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -149,7 +149,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Slideshow);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_007", "ArticleFeaturesCRUDAdmin", "Smoke"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_007", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleCRUDAdmin_005_addModifySlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -180,7 +180,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifySlider();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_008", "ArticleFeaturesCRUDAdmin"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_008", "ArticleFeaturesCRUDUser"})
 	public void ArticleCRUDAdmin_006_addDeleteSlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -203,7 +203,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Slider);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_010", "ArticleFeaturesCRUDAdmin", "Smoke"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_010", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleCRUDAdmin_007_addModifyVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -226,7 +226,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyVideo();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_011", "ArticleFeaturesCRUDAdmin"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_011", "ArticleFeaturesCRUDUser"})
 	public void ArticleCRUDAdmin_008_addDeleteVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -248,7 +248,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Video);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDAdmin", "Smoke"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleCRUDAdmin_009_addingModifyImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -270,7 +270,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyPhoto();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_014", "ArticleFeaturesCRUDAdmin"})
+	@Test(groups={"ArticleFeaturesCRUDAdmin_014", "ArticleFeaturesCRUDUser"})
 	public void ArticleCRUDAdmin_010_addDeleteImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
