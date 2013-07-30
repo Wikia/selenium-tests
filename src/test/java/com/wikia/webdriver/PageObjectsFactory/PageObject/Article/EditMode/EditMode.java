@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,8 @@ public class EditMode extends WikiBasePageObject {
 	@FindBy(css="a.RTESliderButton")
 	private WebElement sliderButton;
 
+	private By submitButtonBy = By.cssSelector("#wpSave");
+
 	public EditMode(WebDriver driver) {
 		super(driver);
 	}
@@ -43,6 +46,7 @@ public class EditMode extends WikiBasePageObject {
 	public Object submit(PageType type) {
 		driver.switchTo().defaultContent();
 		submitButton.click();
+		waitForElementNotPresent(submitButtonBy);
 		PageObjectLogging.log("ArticleSubmited", "Article submited", true);
 		switch (type) {
 			case Article :
