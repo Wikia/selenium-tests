@@ -31,8 +31,8 @@
 			<class name="com.wikia.webdriver.TestCases.Mobile.ModalTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.TocTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogTests"/>
-			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogReplyTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>
+			<class name="com.wikia.webdriver.TestCases.CommentsTests.BlogCommentsTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
@@ -65,7 +65,8 @@
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleActionsAdminTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>			
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleActionsAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleEditDropdownTests"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.ArticleCommentsTests"/>
 		</classes>
