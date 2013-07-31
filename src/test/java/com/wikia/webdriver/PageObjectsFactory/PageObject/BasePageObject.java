@@ -136,6 +136,11 @@ public class BasePageObject{
 		executeScript("$('" + cssSelector + "').click()");
 	}
 
+	public void jQueryClick(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$(arguments[0]).click()", element);
+	}
+
 	protected void actionsClick(WebElement element) {
 		Actions actions = new Actions(driver);
 		actions.click(element);
@@ -477,7 +482,7 @@ public class BasePageObject{
 		getUrl(Global.DOMAIN + URLsContent.noexternals);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
-	
+
 	public void openVideoSuggestionsPage() {
 		getUrl(URLsContent.videoSuggestionsUrl);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);

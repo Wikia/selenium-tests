@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+//import org.openqa.selenium.JavascriptExecutor;
 
 public class CustomizedToolbarComponentObject extends BasePageObject{
 
@@ -30,7 +31,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	protected WebElement saveItemDialogInput;
 	@FindBy(css="input.save-button")
 	protected WebElement saveButton;
-	@FindBy(css="span.reset-defaults a")
+	@FindBy(css="span.reset-defaults img")
 	protected WebElement resetDefaultsButton;
 	@FindBy(css="li.mytools.menu")
 	protected WebElement myToolsMenuButton;
@@ -58,9 +59,8 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickCustomize() {
 		waitForElementByElement(customizeButton);
 		waitForElementClickableByElement(customizeButton);
-		customizeButton.click();
+		jQueryClick(customizeButton);
 		PageObjectLogging.log("customizeToolbar_ClickCustomize", "Clicks on 'Customize' button.", true, driver);
-
 	}
 
 
@@ -72,9 +72,8 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickResetDefaults() {
 		waitForElementByElement(resetDefaultsButton);
 		waitForElementClickableByElement(resetDefaultsButton);
-		scrollAndClick(resetDefaultsButton);
+		jQueryClick(resetDefaultsButton);
 		PageObjectLogging.log("customizeToolbar_ClickOnResetDefaults", "Click on 'ResetDefaults' button.", true, driver);
-
 	}
 
 	/**
@@ -148,11 +147,11 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 			// Unfortunately Firefox can't click on this parent element, so the code must be browser-dependent
 			WebElement parent = element.findElement(By.xpath(".."));
 			waitForElementClickableByElement(parent);
-			scrollAndClick(parent);
+			jQueryClick(parent);
 		}
 		else {
 			waitForElementClickableByElement(element);
-			scrollAndClick(element);
+			jQueryClick(element);
 		}
 		PageObjectLogging.log("customizeToolbar_ClickOnFoundTool", "Click on "+Tool_dataname, true, driver);
 	}
@@ -203,6 +202,12 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	 */
 	public void verifyToolOnList(String Tool) {
 		waitForElementByCss("ul.options-list li[data-caption='"+Tool+"']");
+		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbarList", "Check if "+Tool+" appears on list", true);
+
+	}
+
+	public void verifyToolNotOnList(String Tool) {
+		waitForElementNotPresent("ul.options-list li[data-caption='"+Tool+"']");
 		PageObjectLogging.log("customizeToolbar_VerifyToolOnToolbarList", "Check if "+Tool+" appears on list", true);
 
 	}

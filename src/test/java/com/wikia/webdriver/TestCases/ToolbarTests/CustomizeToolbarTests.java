@@ -14,7 +14,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 
 	@Test(groups = {"CustomizeToolbar001", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Adding
-	public void CustomizeToolbar001_Adding()
+	public void CustomizeToolbar005_Adding()
 	{
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
@@ -99,7 +99,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 
 	@Test(groups = {"CustomizeToolbar005", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
-	public void CustomizeToolbar005_ResetDefaults()
+	public void CustomizeToolbar001_ResetDefaults()
 	{
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
@@ -110,15 +110,16 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.searchTool("Up");
-		toolbar.clickSearchSuggestion("Upload photo");
-		toolbar.verifyToolOnList("Upload photo");
+		toolbar.searchTool("Do");
+		toolbar.clickSearchSuggestion("Double redirects");
+		toolbar.verifyToolOnList("Double redirects");
 		toolbar.clickSave();
-		toolbar.verifyToolOnToolbar("Upload photo");
+		toolbar.verifyToolOnToolbar("Double redirects");
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
+		toolbar.verifyToolNotOnList("Double redirects");
 		toolbar.clickSave();
-		toolbar.verifyToolRemoved("Upload photo");
+		toolbar.verifyToolRemoved("Double redirects");
 	}
 
 	@Test(groups = {"CustomizeToolbar006", "Toolbar", "CustomizeToolbar"})
