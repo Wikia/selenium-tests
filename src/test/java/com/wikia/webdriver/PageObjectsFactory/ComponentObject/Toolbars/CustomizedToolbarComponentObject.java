@@ -58,7 +58,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	public void clickCustomize() {
 		waitForElementByElement(customizeButton);
 		waitForElementClickableByElement(customizeButton);
-		scrollAndClick(customizeButton);
+		customizeButton.click();
 		PageObjectLogging.log("customizeToolbar_ClickCustomize", "Clicks on 'Customize' button.", true, driver);
 
 	}
