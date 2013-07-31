@@ -5,29 +5,27 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumThreadPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
-public class ForumThreadTests extends TestTemplate{
+public class ForumThreadTests extends NewTestTemplate{
 
 	private String title;
 	private String message;
+	Credentials credentials = config.getCredentials();
 
 	@Test(groups= {"ForumThreadTests_001", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_001_replyToThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.reply(message);
@@ -37,13 +35,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_003", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_003_removeThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.removeThread("QA reason");
@@ -53,13 +49,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_004", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_004_removeThreadAndUndo(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.removeThread("QA reason");
@@ -71,14 +65,12 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_005_moveThreadToOtherBoard(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
+		forumMainPage.openForumMainPage(wikiURL);
 		List<String> forumNames = forumMainPage.getForumNamesList();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.moveThread(forumNames.get(1));
@@ -88,13 +80,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_006", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_006_threadHistory(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		ForumHistoryPageObject forumHistory = forumThread.openHistory();
@@ -104,13 +94,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_007", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_007_closeThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.closeThread(PageContent.closeReason);
@@ -120,13 +108,11 @@ public class ForumThreadTests extends TestTemplate{
 	@Test(groups= {"ForumThreadTests_008", "ForumThreadTests", "Forum"} )
 	public void forumThreadTests_008_closeThreadAndReopen(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
 		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage();
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard(1);
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 		forumThread.closeThread(PageContent.closeReason);
