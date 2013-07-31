@@ -1,15 +1,17 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  *
@@ -34,7 +36,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
     //Selectors
     private String addPhotoModalSelector = "#UploadPhotosWrapper";
-    private String WikiaPreviewImgCssSelector = "div.wikia-gallery span.wikia-gallery-item img";
+    private String WikiaPreviewImgCssSelector = "div.wikia-gallery div.wikia-gallery-item img";
 
     public SpecialNewFilesPageObject(WebDriver driver) {
         super(driver);
@@ -89,7 +91,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
      * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests
      * - this is where those files are stored
      */
-    public void typeInFileToUploadPath(String file){    
+    public void typeInFileToUploadPath(String file){
     File fileCheck = new File("." + File.separator + "src" + File.separator
             + "test" + File.separator + "resources" + File.separator + "ImagesForUploadTests"
             + File.separator + file);
@@ -99,7 +101,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} 
+	}
 	sendKeys(
             BrowseForFileInput,fileCheck.getAbsoluteFile().toString()
         );
