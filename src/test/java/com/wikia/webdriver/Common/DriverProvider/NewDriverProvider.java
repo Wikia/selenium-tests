@@ -3,6 +3,7 @@ package com.wikia.webdriver.Common.DriverProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -90,6 +91,24 @@ public class NewDriverProvider {
 				+ "Firefox.exe"
 			);
 		}
+
+		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
+		if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
+			File mozillaPath = new File(System.getProperty("user.home") + File.separator + ".mozilla" + File.separator);
+			File tempFile;
+			if (!mozillaPath.exists()) {
+				if (!mozillaPath.mkdir()) {
+					throw new RuntimeException("Can't create %s dir".replace("%s", mozillaPath.getAbsolutePath()));
+				}
+			}
+			try {
+				tempFile = File.createTempFile("webdriver", UUID.randomUUID().toString(), mozillaPath);
+			} catch (IOException ex) {
+				throw new RuntimeException(ex.getMessage());
+			}
+			tempFile.delete();
+		}
+
 		//If browserName contains CONSOLE activate JSErrorConsole
 		if (browserName.contains("CONSOLE")) {
 			try {
@@ -136,13 +155,13 @@ public class NewDriverProvider {
 
 		if (browserName.equals("CHROMEMOBILE")) {
 			ChromeOptions options = new ChromeOptions();
-            options.addArguments(
-                "--user-agent="+
-                "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) " +
-                "AppleWebKit/420+ (KHTML, like Gecko) " +
-                "Version/3.0 Mobile/1A543a Safari/419.3"
-            );
-            return new EventFiringWebDriver(new ChromeDriver(options));
+			options.addArguments(
+				"--user-agent="+
+				"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) " +
+				"AppleWebKit/420+ (KHTML, like Gecko) " +
+				"Version/3.0 Mobile/1A543a Safari/419.3"
+			);
+			return new EventFiringWebDriver(new ChromeDriver(options));
 		}
 
 		return new EventFiringWebDriver(new ChromeDriver(caps));
