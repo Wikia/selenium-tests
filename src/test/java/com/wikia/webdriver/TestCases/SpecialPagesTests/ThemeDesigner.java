@@ -2,12 +2,13 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.ThemeDesigner.SpecialThemeDesignerPageObject;
 
-public class ThemeDesigner extends TestTemplate{
+public class ThemeDesigner extends TestTemplate {
 
 	private String themeName;
 
@@ -76,7 +77,7 @@ public class ThemeDesigner extends TestTemplate{
 		designer.verifyCustomizeTab();
 	}
 
-	@Test(groups={"ThemeDesigner005", "ThemeDesigner"})
+	@Test(groups={"ThemeDesigner006", "ThemeDesigner"})
 	public void themeDesigner006_wordmarkTab(){
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
@@ -86,5 +87,24 @@ public class ThemeDesigner extends TestTemplate{
 		designer.openSpecialDesignerPage();
 		designer.selectTab("Wordmark");
 		designer.verifyWordmarkTab();
+	}
+
+	/**
+	 * https://wikia-inc.atlassian.net/browse/DAR-1194
+	 * check that color choosing dialog is closed by click outside of the dialog
+	 */
+	@Test(groups={"ThemeDesigner007", "ThemeDesigner"})
+	public void themeDesigner007_closeColorDialogWithOutsideClick(){
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
+		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
+		designer.openWikiPage();
+		login.loginAndVerifyOnWiki(Properties.userNameStaff, Properties.passwordStaff, Global.DOMAIN);
+		designer.openSpecialDesignerPage();
+		designer.selectTab("Customize");
+		designer.verifyCustomizeTab();
+		designer.openImagePicker();
+		designer.clickOutsideImagePicker();
+		designer.verifyImagePickerDisappeared();
 	}
 }
