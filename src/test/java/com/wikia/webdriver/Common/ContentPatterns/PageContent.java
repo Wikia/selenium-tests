@@ -6,8 +6,10 @@ public class PageContent {
 	public static String articleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 	public static String articleTextEdit = "Brand new content";
 	public static String commentText = "Lorem ipsum dolor sit amet, comment";
+	public static String commentText2 = "QAComment";
 	public static String commentTextEdit = "Brand new comment";
 	public static String replyText = "Brand new reply";
+	public static String replyText2 = "QAReply";
 	//blogs
 	public static String blogPostNamePrefix = "blogPost";
 	public static String blogContent = "blogContent";

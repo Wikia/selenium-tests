@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import org.openqa.selenium.support.FindBys;
 
 public class MobileCategoryPageObject extends MobileBasePageObject {
 
@@ -19,6 +19,8 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	// UI Mapping
 
+	private String categoryPmg = "wiki/Category:PMG";
+
 	@FindBy(css = "#expAll:not(.exp)")
 	private WebElement showAllButton;
 
@@ -28,8 +30,27 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	@FindBy(css = "h2.collSec")
 	private List<WebElement> chevronList;
 
-	public MobileArticlePageObject openCategory(){
-		getUrl(Global.DOMAIN+"wiki/Category:PMG");
+	@FindBy(css = ".cnt")
+	private WebElement numberOfArticles;
+
+	@FindBy(css = ".pagMore.visible")
+	private WebElement loadMoreButton;
+
+	@FindBy(css = ".pagLess.visible")
+	private WebElement loadPreviousButton;
+
+	@FindBys(@FindBy(css = ".wkExhItm"))
+	private List<WebElement> categoryExhibition;
+
+	@FindBys(@FindBy(css = ".collSec"))
+	private List<WebElement> articleList;
+
+	@FindBys(@FindBy(css = ".artSec.open .wkLst>li>a"))
+	private List<WebElement> articleListWithPagination;
+
+
+	public MobileArticlePageObject openCategory(String wikiURL){
+		getUrl(wikiURL+ categoryPmg);
 		waitForElementByElement(showAllButton);
 		PageObjectLogging.log("openCategory", "category page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
@@ -63,6 +84,40 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	public void verifyHideAll() {
 		waitForElementByElement(hideAllButton);
+	}
+
+	public void verifyCategoryExhibition(){
+		Assertion.assertTrue(categoryExhibition.size() == 4);
+	}
+
+	public void openArticlesWithPagination(){
+		for(int i=0; i < articleList.size(); i++) {
+			articleList.get(i).click();
+			if(loadMoreButton.isDisplayed()) {
+				break;
+			}
+			else {
+				articleList.get(i).click();
+			}
+		}
+	}
+
+	public void verifyPagination(){
+		Assertion.assertTrue(articleListWithPagination.size() == 25);
+		String firstArticle = articleListWithPagination.get(0).getAttribute("href");
+		String lastArticle = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
+		loadMoreButton.click();
+		waitForElementByElement(loadPreviousButton);
+		Assertion.assertTrue(articleListWithPagination.size() <= 25);
+		String firstArticle2 = articleListWithPagination.get(0).getAttribute("href");
+		Assertion.assertNotEquals(firstArticle, firstArticle2);
+		loadPreviousButton.click();
+		waitForElementByElement(loadMoreButton);
+		Assertion.assertTrue(articleListWithPagination.size() == 25);
+		String firstArticle3 = articleListWithPagination.get(0).getAttribute("href");
+		String lastArticle3 = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
+		Assertion.assertEquals(firstArticle, firstArticle3);
+		Assertion.assertEquals(lastArticle, lastArticle3);
 	}
 
 }
