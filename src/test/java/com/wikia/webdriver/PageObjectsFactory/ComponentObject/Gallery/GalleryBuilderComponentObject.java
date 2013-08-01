@@ -80,9 +80,9 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	}
 
 
-	public void adjustOrientation(Orientation orient){
+	public void adjustOrientation(Orientation orientionGallery){
 		waitForElementByElement(orientation);
-		switch(orient){
+		switch(orientionGallery){
 		case none:
 			orientation.findElement(orintationNone);
 			break;
