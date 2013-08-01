@@ -18,39 +18,26 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	}
 
 	// UI Mapping
-
 	private String categoryPmg = "wiki/Category:PMG";
-
 	@FindBy(css = "#expAll:not(.exp)")
 	private WebElement showAllButton;
-
 	@FindBy(css = "#expAll.exp")
 	private WebElement hideAllButton;
-
 	@FindBy(css = "h2.collSec")
 	private List<WebElement> chevronList;
-
-	@FindBy(css = ".cnt")
-	private WebElement numberOfArticles;
-
 	@FindBy(css = ".pagMore.visible")
 	private WebElement loadMoreButton;
-
 	@FindBy(css = ".pagLess.visible")
 	private WebElement loadPreviousButton;
-
 	@FindBys(@FindBy(css = ".wkExhItm"))
 	private List<WebElement> categoryExhibition;
-
 	@FindBys(@FindBy(css = ".collSec"))
 	private List<WebElement> articleList;
-
 	@FindBys(@FindBy(css = ".artSec.open .wkLst>li>a"))
 	private List<WebElement> articleListWithPagination;
 
-
 	public MobileArticlePageObject openCategory(String wikiURL){
-		getUrl(wikiURL+ categoryPmg);
+		getUrl(wikiURL + categoryPmg);
 		waitForElementByElement(showAllButton);
 		PageObjectLogging.log("openCategory", "category page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
@@ -90,11 +77,26 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		Assertion.assertTrue(categoryExhibition.size() == 4);
 	}
 
+	/*
+	 *  this method open list which has more than 25 articles
+	 */
 	public void openArticlesWithPagination(){
 		for(int i=0; i < articleList.size(); i++) {
 			articleList.get(i).click();
 			if(loadMoreButton.isDisplayed()) {
+				PageObjectLogging.log(
+					"openArticlesWithPagination",
+					"article with pagination was opened",
+					true, driver
+				);
 				break;
+			}
+			else if(i == articleList.size()-1) {
+				PageObjectLogging.log(
+					"openArticlesWithPagination",
+					"article with pagination was not found and opened",
+					false, driver
+				);
 			}
 			else {
 				articleList.get(i).click();
@@ -102,6 +104,10 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		}
 	}
 
+	/*
+	 *  this method check amount of results on page, more/previous buttons are displaying correctly
+	 *  and articles are switching correctly
+	 */
 	public void verifyPagination(){
 		Assertion.assertTrue(articleListWithPagination.size() == 25);
 		String firstArticle = articleListWithPagination.get(0).getAttribute("href");

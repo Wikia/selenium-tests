@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -25,7 +24,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private String wikiTOC2 = "wiki/TOC#";
 	private String articleSections = "wiki/Sections";
 	private String articleModal = "wiki/Modal";
-	private String ahref = "href";
+	private String hrefAttribute = "href";
 	private String modal = "#Modal";
 
 	@FindBy(css="#wkArtCom .collSec.addChev")
@@ -106,7 +105,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		verifyURL(url + modal);
 		replyInputArea.sendKeys(reply);
 		replyInputArea.submit();
-		verifyURL(url+modal);
+		verifyURL(url + modal);
 		verifyAddedReplyOnCommentPage(reply);
 		PageObjectLogging.log("addReply", "reply "+reply+" added", true, driver);
 	}
@@ -123,16 +122,16 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public MobileArticlePageObject openSections(String wikiURL){
-		getUrl(wikiURL+articleSections);
+		getUrl(wikiURL + articleSections);
 		waitForElementByElement(tocWrapper);
 		PageObjectLogging.log("openSections", "sections page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
 	public MobileArticlePageObject openTOCPage(String wikiURL){
-		getUrl(wikiURL+wikiTOC);
+		getUrl(wikiURL + wikiTOC);
 		waitForElementByElement(tocWrapper);
-		PageObjectLogging.log("openTOC", "TOC page was opened", true, driver);
+		PageObjectLogging.log("openTOCPage", "TOC page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
@@ -145,12 +144,12 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void verifySectionVisibility(){
 		waitForElementByElement(sectionVisibilityElement);
-		PageObjectLogging.log("verifySectionVisibility", "section is opened and visible", true, driver);
+		PageObjectLogging.log("verifySectionVisibility", "section is opened and visible", true);
 	}
 
 	public void verifySectionInvisibility(){
 		waitForElementByElement(sectionInvisibilityElement);
-		PageObjectLogging.log("verifySectionInvisibility", "section is not visible", true, driver);
+		PageObjectLogging.log("verifySectionInvisibility", "section is not visible", true);
 	}
 
 	public void clickHideButton(){
@@ -171,7 +170,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		String url = driver.getCurrentUrl();
 		scrollAndClick(imageModalTrigger);
 		PageObjectLogging.log("clickModal", "modal trigger clicked", true, driver);
-		Assertion.assertEquals(url+modal, driver.getCurrentUrl());
+		Assertion.assertEquals(url + modal, driver.getCurrentUrl());
 		waitForElementByElement(currentImageModal);
 		PageObjectLogging.log("clickModal", "modal url verified", true, driver);
 		return new MobileModalComponentObject(driver);
@@ -202,34 +201,34 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public String clickOnLevel1SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel1Sections.get(number);
-		String href = tocElement.getAttribute(ahref);
+		String href = tocElement.getAttribute(hrefAttribute);
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel1SectionInToc", "toc level 1 clicked", true);
-		return href.replace(wikiURL+wikiTOC2,"");
+		return href.replace(wikiURL + wikiTOC2,"");
 	}
 
 	public String clickOnLevel2SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel2Sections.get(number);
-		String href = tocElement.getAttribute(ahref);
+		String href = tocElement.getAttribute(hrefAttribute);
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel2SectionInToc", "toc level 2 clicked: "+href, true);
-		return href.replace(wikiURL+wikiTOC2,"");
+		return href.replace(wikiURL + wikiTOC2,"");
 	}
 
 	public String clickOnLevel3SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel3Sections.get(number);
-		String href = tocElement.getAttribute(ahref);
+		String href = tocElement.getAttribute(hrefAttribute);
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel3SectionInToc", "toc level 3 clicked: "+href, true);
-		return href.replace(wikiURL+wikiTOC2,"");
+		return href.replace(wikiURL + wikiTOC2,"");
 	}
 
 	public String clickOnLevel4SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel4Sections.get(number);
-		String href = tocElement.getAttribute(ahref);
+		String href = tocElement.getAttribute(hrefAttribute);
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel4SectionInToc", "toc level 4 clicked: "+href, true);
-		return href.replace(wikiURL+wikiTOC2,"");
+		return href.replace(wikiURL + wikiTOC2,"");
 	}
 
 	public void verifySectionHeaderOpened(String desiredId){
