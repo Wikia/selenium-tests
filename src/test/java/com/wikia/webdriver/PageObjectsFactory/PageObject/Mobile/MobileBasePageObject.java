@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,7 +13,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -23,6 +23,14 @@ public class MobileBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 		driver.manage().window().setSize(new Dimension(640, 960));
 	}
+
+	private String span = "span";
+	private String title = "title";
+	private String value = "value";
+	private String block = "block";
+	private String none = "none";
+	private String display = "display";
+	private String articleComments = "wiki/Article_comments";
 
 	// UI Mapping
 	@FindBy(css = ".tgl.lgdout")
@@ -35,8 +43,6 @@ public class MobileBasePageObject extends BasePageObject {
 	private WebElement loginButton;
 	@FindBy(css = "#ssoFbBtn")
 	private WebElement loginFbButton;
-	@FindBy(css = ".tgl.lgdin")
-	private WebElement avatarButton;
 	@FindBy(css = ".tiapl.input[type='email']")
 	private WebElement fbUserName;
 	@FindBy(css = ".tiapl.input[type='password']")
@@ -62,14 +68,12 @@ public class MobileBasePageObject extends BasePageObject {
 	@FindBy(css="h2.collSec.open")
 	protected WebElement sectionHeaderOpened;
 
-	 @FindBys(@FindBy(css="ul[id='wkSrhSug'] li[class='show']"))
-	 private List<WebElement> searchSuggestion;
+	@FindBys(@FindBy(css="ul[id='wkSrhSug'] li[class='show']"))
+	private List<WebElement> searchSuggestion;
 
-	 @FindBys(@FindBy(css="ul[id='wkSrhSug'] li[class='show'] span[title]"))
-	 private List<WebElement> searchSuggestionText;
 
-	 @FindBys(@FindBy(css="ul[id='wkSrhSug'] li span[class='copySrh']"))
-	 private List<WebElement> addSuggestionButton;
+	@FindBys(@FindBy(css="ul[id='wkSrhSug'] li span[class='copySrh']"))
+	private List<WebElement> addSuggestionButton;
 
 	public void triggerLoginDropDown() {
 		waitForElementByElement(loginDropDownTrigger);
@@ -146,8 +150,8 @@ public class MobileBasePageObject extends BasePageObject {
 				true, driver);
 	}
 
-	public MobileBasePageObject openHome() {
-		getUrl(Global.DOMAIN);
+	public MobileBasePageObject openHome(String wikiURL) {
+		getUrl(wikiURL);
 		return new MobileBasePageObject(driver);
 	}
 
@@ -161,8 +165,8 @@ public class MobileBasePageObject extends BasePageObject {
 		return new MobileArticlePageObject(driver);
 	}
 
-	public MobileArticlePageObject openCommentsWithPagination() {
-		getUrl(Global.DOMAIN + "wiki/Article_comments");
+	public MobileArticlePageObject openCommentsWithPagination(String wikiURL) {
+		getUrl(wikiURL + articleComments);
 		return new MobileArticlePageObject(driver);
 	}
 
@@ -221,9 +225,9 @@ public class MobileBasePageObject extends BasePageObject {
 
 	public void selectPlusFromSuggestions(int n){
 		waitForElementByElement(addSuggestionButton.get(n));
-		String text = searchSuggestion.get(n).findElement(By.cssSelector("span")).getAttribute("title");
+		String text = searchSuggestion.get(n).findElement(By.cssSelector(span)).getAttribute(title);
 		addSuggestionButton.get(n).click();
-		Assertion.assertEquals(text, searchField.getAttribute("value"));
+		Assertion.assertEquals(text, searchField.getAttribute(value));
 	}
 
 	public long getPosition()
@@ -237,17 +241,17 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void verifyCurtainOpened(){
-		Assertion.assertEquals("block", curtain.getCssValue("display"));
+		Assertion.assertEquals(block, curtain.getCssValue(display));
 	}
 
 	public void verifyCurtainClosed(){
-		Assertion.assertEquals("none", curtain.getCssValue("display"));
+		Assertion.assertEquals(none, curtain.getCssValue(display));
 	}
 
-	public void logOutMobile() {
+	public void logOutMobile(String wikiURL){
 		try {
 			driver.manage().deleteAllCookies();
-			driver.get(Global.DOMAIN + "wiki/Special:UserLogout?noexternals=1");
+			driver.get(wikiURL + URLsContent.logout);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("logOut",
 					"page loads for more than 30 seconds", true);

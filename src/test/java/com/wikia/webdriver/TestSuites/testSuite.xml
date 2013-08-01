@@ -26,6 +26,7 @@
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.ArticleCommentTests"/>
+			<class name="com.wikia.webdriver.TestCases.Mobile.CategoriesTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.SearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>
