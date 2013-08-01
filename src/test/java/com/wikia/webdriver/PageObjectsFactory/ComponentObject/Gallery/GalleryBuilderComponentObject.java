@@ -40,42 +40,32 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	private By orintationLandscape = By.cssSelector("[id*='landscape']");
 	private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
+	public enum PositionsGallery {
+		left, center, right
+	}
+
+	public enum SpacingGallery {
+		small, medium, large
+	}
+
+	public enum Orientation{
+		none, square, landscape, portrait
+	}
 
 	public GalleryBuilderComponentObject(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 
-	public void adjustSize(int size){
-		//TODO
-	}
-
-	/**
-	 * @param positionNo
- 	 * Left
-	 * Center
-	 * Right
-	 */
-
-	public enum PositionsGallery {
-		Left, Center, Right
-	}
-
-	public void adjustPosition(PositionsGallery pos){
+	public void adjustPosition(PositionsGallery positionGallery){
 		waitForElementByElement(position);
 		Select positionDropdown = new Select(position);
-		positionDropdown.selectByVisibleText(pos.toString());
+		positionDropdown.selectByValue(positionGallery.toString());
 	}
 
 	/**
 	 * @param columnsNo
 	 * fit to page
-	 * 1
-	 * 2
-	 * 3
-	 * 4
-	 * 5
-	 * 6
+	 * 1 - 6
 	 */
 	public void adjustColumns(String columnsNo){
 		waitForElementByElement(columns);
@@ -83,33 +73,13 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 		columnsDropdown.selectByVisibleText(columnsNo);
 	}
 
-	public enum SpacingGallery {
-		Small, Medium, Large
-	}
-
-	/**
-	 * 0 - small
-	 * 1 - medium
-	 * 2 - large
-	 * @param spacingNo
-	 */
-	public void adjustSpacing(SpacingGallery spac){
+	public void adjustSpacing(SpacingGallery spacingGallery){
 		waitForElementByElement(spacing);
 		Select spacingDropdown = new Select(spacing);
-		spacingDropdown.selectByVisibleText(spac.toString());
+		spacingDropdown.selectByValue(spacingGallery.toString());
 	}
 
-	public enum Orientation{
-		none, square, landscape, portrait
-	}
 
-	/**
-	 * 0 - none
-	 * 1 - square
-	 * 2 - landscape
-	 * 3 - portrait
-	 * @param orientationNo
-	 */
 	public void adjustOrientation(Orientation orient){
 		waitForElementByElement(orientation);
 		switch(orient){
@@ -137,7 +107,7 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 		return new AddPhotoComponentObject(driver);
 	}
 
-	public void verifyPhotosVisible(int photos){
+	public void verifyPhotosCount(int photos){
 		for (int i=0; i<photos; i++){
 			waitForElementByElement(galleryPreviewPhotos.get(i));
 			PageObjectLogging.log("verifyPhotosVisible", "photo no. "+i+1+"/photos is visible", true);

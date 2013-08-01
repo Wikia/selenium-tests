@@ -11,7 +11,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
-public class BlogCommentsTests extends NewTestTemplate{
+public class BlogCommentsTests extends NewTestTemplate {
 
 	/**
 	 * @author Karol 'kkarolk' Kujawiak

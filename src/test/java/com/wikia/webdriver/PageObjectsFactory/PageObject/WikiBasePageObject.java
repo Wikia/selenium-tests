@@ -747,7 +747,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
-
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 

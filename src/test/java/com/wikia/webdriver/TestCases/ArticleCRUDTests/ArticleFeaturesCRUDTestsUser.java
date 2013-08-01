@@ -44,9 +44,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
 		galleryAddPhoto.clickSelect();
-		galleryBuiler.adjustPosition(PositionsGallery.Center);
+		galleryBuiler.adjustPosition(PositionsGallery.center);
 		galleryBuiler.adjustColumns("2");
-		galleryBuiler.adjustSpacing(SpacingGallery.Small);
+		galleryBuiler.adjustSpacing(SpacingGallery.small);
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		visualEditMode.verifyGallery();
@@ -59,9 +59,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(2);
 		galleryAddPhoto.clickSelect();
-		galleryBuiler.adjustPosition(PositionsGallery.Right);
+		galleryBuiler.adjustPosition(PositionsGallery.right);
 		galleryBuiler.adjustColumns("3");
-		galleryBuiler.adjustSpacing(SpacingGallery.Medium);
+		galleryBuiler.adjustSpacing(SpacingGallery.medium);
 		galleryBuiler.adjustOrientation(Orientation.portrait);
 		galleryBuiler.clickFinish();
 		visualEditMode.verifyGallery();
@@ -81,9 +81,9 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
 		galleryAddPhoto.clickSelect();
-		galleryBuiler.adjustPosition(PositionsGallery.Center);
+		galleryBuiler.adjustPosition(PositionsGallery.center);
 		galleryBuiler.adjustColumns("2");
-		galleryBuiler.adjustSpacing(SpacingGallery.Small);
+		galleryBuiler.adjustSpacing(SpacingGallery.small);
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		visualEditMode.verifyGallery();

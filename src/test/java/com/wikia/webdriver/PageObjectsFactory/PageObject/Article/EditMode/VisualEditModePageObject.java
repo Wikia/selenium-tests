@@ -177,9 +177,18 @@ public class VisualEditModePageObject extends EditMode {
 		PageObjectLogging.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
 	}
 
+	/**
+	 * Delete unwanted video by its name.
+	 * Message article page is e.g http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList
+	 * This method destination is exactly related videos message article
+	 *
+	 * @author Michal Nowierski
+	 * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
+	 */
 	public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
 		ArrayList<String> videos = new ArrayList<String>();
-		String sourceText = getMessageSourceText();
+		waitForElementByElement(messageSourceModeTextArea);
+		String sourceText = messageSourceModeTextArea.getText();
 		int index = 0;
 		while (true) {
 			int previousStarIndex = sourceText.indexOf("*", index);
@@ -199,20 +208,12 @@ public class VisualEditModePageObject extends EditMode {
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		String builder = "";
-		for (int i = 0; i<videos.size(); i++)
-		{
+		for (int i = 0; i<videos.size(); i++) {
 			builder+=videos.get(i);
 			builder+="\n";
 		}
 		CommonUtils.setClipboardContents(builder);
 		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-
 		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
-	}
-
-	public String getMessageSourceText() {
-		waitForElementByElement(messageSourceModeTextArea);
-		PageObjectLogging.log("getMessageSourceText", "Get text of source mode text of message article page.", true, driver);
-		return messageSourceModeTextArea.getText();
 	}
 }

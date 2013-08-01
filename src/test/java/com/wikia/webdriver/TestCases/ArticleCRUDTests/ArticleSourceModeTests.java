@@ -243,9 +243,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		galleryAddPhoto.search("image");
 		List<String> photoNames = galleryAddPhoto.choosePhotos(4);
 		galleryAddPhoto.clickSelect();
-		galleryBuiler.adjustPosition(PositionsGallery.Center);
+		galleryBuiler.adjustPosition(PositionsGallery.center);
 		galleryBuiler.adjustColumns("2");
-		galleryBuiler.adjustSpacing(SpacingGallery.Small);
+		galleryBuiler.adjustSpacing(SpacingGallery.small);
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");

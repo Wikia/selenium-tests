@@ -41,9 +41,9 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
 		galleryAddPhoto.clickSelect();
-		galleryBuiler.adjustPosition(PositionsGallery.Center);
+		galleryBuiler.adjustPosition(PositionsGallery.center);
 		galleryBuiler.adjustColumns("2");
-		galleryBuiler.adjustSpacing(SpacingGallery.Small);
+		galleryBuiler.adjustSpacing(SpacingGallery.small);
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		blogEdit.verifyGallery();

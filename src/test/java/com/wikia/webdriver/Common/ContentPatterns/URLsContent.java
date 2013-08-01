@@ -13,6 +13,9 @@ public class URLsContent {
 
 	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 
+	//Related videos
+	public static String relatedVideosList = "MediaWiki:RelatedVideosGlobalList";
+
 	// Hubs
 	public static String VideoGamesHub = Global.LIVE_DOMAIN+"Video_Games";
 	public static String EntertainmentHub = Global.LIVE_DOMAIN+"Entertainment";
@@ -51,6 +54,7 @@ public class URLsContent {
 	public static final String noexternals = "?noexternals=1";
 	public static final String actionEditParameter = "action=edit";
 	public static final String useDefaultFormat = "useFormat=1";
+	public static final String wikiaTracker = "og_level=info";
 
  	// WAM Scores page url
  	public static final String wamPageUrl = "WAM";

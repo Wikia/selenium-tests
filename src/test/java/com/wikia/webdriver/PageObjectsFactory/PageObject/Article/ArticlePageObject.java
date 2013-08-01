@@ -91,10 +91,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement rVAddVideo;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
-
-	protected By rvFirstVideo = By.cssSelector(
-			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
-			);
+	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
+	private WebElement rvFirstVideo;
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -295,7 +293,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyRelatedVideoAdded(String videoName) {
-		waitForTextToBePresentInElementByBy(rvFirstVideo, videoName);
+		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){

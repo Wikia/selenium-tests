@@ -71,11 +71,6 @@ public class BasePageObject{
 		}
 	}
 
-	public void mouseOverInArticleIframe(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find(arguments[0])).mouseenter()", element);
-	}
-
 	public void mouseOverInArticleIframe(String cssSelecotr) {
 		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
 				+ cssSelecotr + "')).mouseenter()");
@@ -581,11 +576,12 @@ public class BasePageObject{
     };
 
 	public void enableWikiaTracker() {
-		if (driver.getCurrentUrl().contains("?")) {
-			appendToUrl("&log_level=info");
-		} else {
-			appendToUrl("?log_level=info");
-		}
+		driver.get(
+				URLsContent.buildUrl(
+						driver.getCurrentUrl(),
+						URLsContent.wikiaTracker
+						)
+		);
 	}
 
 	public void appendToUrl(String additionToUrl) {

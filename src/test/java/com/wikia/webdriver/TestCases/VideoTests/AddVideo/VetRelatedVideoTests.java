@@ -5,6 +5,7 @@ package com.wikia.webdriver.TestCases.VideoTests.AddVideo;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -27,7 +28,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 	public void RelatedVideo_001_Provider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, "MediaWiki:RelatedVideosGlobalList");
+		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		ArticlePageObject article = (ArticlePageObject) rVmoduleMessageEdit.submit(PageType.Article);
 		article.openRandomArticle(wikiURL);
@@ -41,7 +42,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 	public void RelatedVideo_002_Library() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, "MediaWiki:RelatedVideosGlobalList");
+		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		ArticlePageObject article = (ArticlePageObject) rVmoduleMessageEdit.submit(PageType.Article);
 		article.openRandomArticle(wikiURL);
