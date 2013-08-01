@@ -67,11 +67,8 @@ public class MobileBasePageObject extends BasePageObject {
 	private WebElement curtain;
 	@FindBy(css="h2.collSec.open")
 	protected WebElement sectionHeaderOpened;
-
 	@FindBys(@FindBy(css="ul[id='wkSrhSug'] li[class='show']"))
 	private List<WebElement> searchSuggestion;
-
-
 	@FindBys(@FindBy(css="ul[id='wkSrhSug'] li span[class='copySrh']"))
 	private List<WebElement> addSuggestionButton;
 
