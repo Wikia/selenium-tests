@@ -15,7 +15,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
-
 	@FindBy(css=".save")
 	private WebElement saveButton;
 	//theme tab
@@ -57,9 +56,6 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	private WebElement secondThemesSet;
 	@FindBy(css="ul[style='margin-left: -1520px;']")
 	private WebElement thirdThemesSet;
-
-
-
 
 	public SpecialThemeDesignerPageObject(WebDriver driver) {
 		super(driver);
@@ -137,7 +133,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
 	public void openImagePicker() {
 		waitForElementByElement(bgImage);
-		scrollAndClick(bgImage);
+		bgImage.click();
 		waitForElementByElement(bgImagePicker);
 		PageObjectLogging.log("openImagePicker", "image picker opened", true, driver);
 	}
