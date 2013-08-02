@@ -17,7 +17,9 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
 	@FindBy(css=".save")
 	private WebElement saveButton;
-	//theme tab
+	String tabSelector = "a[rel='%tabName%Tab']";
+	String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
+		//theme tab
 	@FindBys(@FindBy(css="li[data-theme]"))
 	private List<WebElement> themes;
 	@FindBy(css=".next.chevron")
@@ -113,10 +115,10 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 
 	public void selectTab(Tab tabName){
-		WebElement tab = waitForElementByCss("a[rel='"+tabName.toString()+"Tab']");
+		WebElement tab = waitForElementByCss(tabSelector.replace("%tabName%", tabName.toString()));
 		scrollAndClick(tab);
-		waitForElementByCss("li.selected a[rel='"+tabName.toString()+"Tab']");
-		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
+		waitForElementByCss(selectedTabSelector.replace("%tabName%", tabName.toString()));
+		PageObjectLogging.log("selectTab", tabName.toString()+" tab has been selected", true);
 	}
 
 	public void verifyCustomizeTab(){
