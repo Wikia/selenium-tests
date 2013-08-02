@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -17,6 +17,8 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
 	@FindBy(css=".save")
 	private WebElement saveButton;
+	String tabSelector = "a[rel='%tabName%Tab']";
+	String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
 	//theme tab
 	@FindBys(@FindBy(css="li[data-theme]"))
 	private List<WebElement> themes;
@@ -61,8 +63,8 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		super(driver);
 	}
 
-	public void openSpecialDesignerPage(){
-		getUrl(Global.DOMAIN+"wiki/Special:ThemeDesigner");
+	public void openSpecialDesignerPage(String wikiURL) {
+		getUrl(wikiURL+URLsContent.specialThemeDesigner);
 		PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
 	}
 
@@ -108,11 +110,15 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
 	}
 
-	public void selectTab(String tabName){
-		WebElement tab = waitForElementByCss("a[rel='"+tabName+"Tab']");
+	public enum Tab {
+		Theme, Customize, Wordmark
+	}
+
+	public void selectTab(Tab tabName){
+		WebElement tab = waitForElementByCss(tabSelector.replace("%tabName%", tabName.toString()));
 		scrollAndClick(tab);
-		waitForElementByCss("li.selected a[rel='"+tabName+"Tab']");
-		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
+		waitForElementByCss(selectedTabSelector.replace("%tabName%", tabName.toString()));
+		PageObjectLogging.log("selectTab", tabName.toString()+" tab has been selected", true);
 	}
 
 	public void verifyCustomizeTab(){
@@ -148,4 +154,5 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		waitForElementNotVisibleByElement(bgImagePicker);
 		PageObjectLogging.log("verifyImagePickerDisappeared", "Image Picker is invisible", true);
 	}
+
 }

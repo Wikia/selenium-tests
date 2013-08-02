@@ -692,19 +692,20 @@ public class WikiBasePageObject extends BasePageObject {
 					xmlResponseArr = xmlResponse.split("\"");
 				}
 
+				String domain = (Global.DOMAIN.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "_session', '" + xmlResponseArr[13]
-						+ "', {'domain': 'wikia.com', 'path': '/'})");
+						+ "', {'domain': '"+domain+"', 'path': '/'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "UserName', '" + xmlResponseArr[7]
-						+ "', {'domain': 'wikia.com', 'path': '/'})");
+						+ "', {'domain': '"+domain+"', 'path': '/'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "UserID', '" + xmlResponseArr[5]
-						+ "', {'domain': 'wikia.com', 'path': '/'})");
+						+ "', {'domain': '"+domain+"', 'path': '/'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "Token', '" + xmlResponseArr[9]
-						+ "', {'domain': 'wikia.com' , 'path': '/'})");
+						+ "', {'domain': '"+domain+"' , 'path': '/'})");
 				try {
 					driver.get(Global.DOMAIN + "Special:Random");
 				} catch (TimeoutException e) {
@@ -789,6 +790,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 				xmlResponseArr = xmlResponse.split("\"");
 			}
+
 			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
