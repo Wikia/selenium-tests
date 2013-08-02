@@ -87,7 +87,7 @@ public class EditMode extends WikiBasePageObject {
 	public GalleryBuilderComponentObject clickGalleryButton(){
 		waitForElementByElement(galleryButton);
 		scrollAndClick(galleryButton);
-		PageObjectLogging.log("clickGallery", "gallery button clicked", true);
+		PageObjectLogging.log("clickGalleryButton", "gallery button clicked", true);
 		return new GalleryBuilderComponentObject(driver);
 	}
 }
