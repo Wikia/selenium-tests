@@ -31,7 +31,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
 		article.openRandomArticle(wikiURL);
-		article.verifyRVModulePresence();
+		article.verifyRelatedVideosModule();
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddRelatedVideo();
 		vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
 		article.verifyRelatedVideoAdded(VideoContent.youtubeVideoURL2name);
@@ -45,7 +45,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
 		article.openRandomArticle(wikiURL);
-		article.verifyRVModulePresence();
+		article.verifyRelatedVideosModule();
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddRelatedVideo();
 		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 1);
 		article.verifyRelatedVideoAdded(vetAddingVideo.getVideoName());

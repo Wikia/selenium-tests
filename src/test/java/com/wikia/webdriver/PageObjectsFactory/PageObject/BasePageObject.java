@@ -154,6 +154,11 @@ public class BasePageObject{
 	public void jQueryNthElemClick(String cssSelector, int n){
 		executeScript("$('"+cssSelector+"')["+n+"].click()");
 	}
+
+	public void jQueryFocus(WebElement element){
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$(arguments[0]).focus()", element);
+	}
 	/*
 	 * Url helpers
 	 */

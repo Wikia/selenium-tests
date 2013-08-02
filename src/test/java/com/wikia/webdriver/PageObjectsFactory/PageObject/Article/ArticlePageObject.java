@@ -125,7 +125,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public MiniEditorComponentObject triggerCommentArea() {
 		scrollToElement(allCommentsArea);
 		waitForElementVisibleByElement(commentArea);
-		commentArea.click();
+		jQueryFocus(commentArea);
 		waitForElementNotVisibleByElement(commentAreaLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
 	}
@@ -263,27 +263,32 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyPhoto() {
 		waitForElementByElement(imageArticle);
+		PageObjectLogging.log("verifyPhoto", "photo is visible", true);
 	}
 
 	public void verifyGallery() {
 		waitForElementByElement(galleryArticle);
+		PageObjectLogging.log("verifyGallery", "gallery is visible", true);
 	}
 
 	public void verifySlideshow() {
 		waitForElementByElement(slideshowArticle);
+		PageObjectLogging.log("verifySlideshow", "slideshow is visible", true);
 	}
 
 	public void verifySlider() {
 		waitForElementByElement(sliderArticle);
+		PageObjectLogging.log("verifySlider", "slider is visible", true);
 	}
 
 	public void verifyVideo() {
 		waitForElementByElement(videoArticle);
+		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
-	public void verifyRVModulePresence() {
+	public void verifyRelatedVideosModule() {
 		waitForElementByElement(rVModule);
-		PageObjectLogging.log("VerifyRVModulePresence", "Verify that the RV Module Is Present", true, driver);
+		PageObjectLogging.log("verifyRelatedVideosModule", "related videos module is visible", true);
 	}
 
 	public VetAddVideoComponentObject clickAddRelatedVideo() {

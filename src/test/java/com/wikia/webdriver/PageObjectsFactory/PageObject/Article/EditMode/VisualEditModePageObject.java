@@ -68,6 +68,7 @@ public class VisualEditModePageObject extends EditMode {
 		contentInput.clear();
 		contentInput.sendKeys(content);
 		driver.switchTo().defaultContent();
+		PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
 	}
 
 	private void verifyComponent(WebElement component){
