@@ -2,64 +2,57 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.ThemeDesigner.SpecialThemeDesignerPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.ThemeDesigner.SpecialThemeDesignerPageObject.Tab;
 
-public class ThemeDesigner extends TestTemplate {
+public class ThemeDesigner extends NewTestTemplate {
 
+	Credentials credentials = config.getCredentials();
 	private String themeName;
 
 	@Test(groups={"ThemeDesigner001", "ThemeDesigner"})
 	public void themeDesigner001_selectThemeFromFirstPage(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
-		designer.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		designer.openSpecialDesignerPage();
-		designer.selectTab("Theme");
+		designer.openSpecialDesignerPage(wikiURL);
+		designer.selectTab(Tab.Theme);
 		themeName = designer.selectTheme(3);
 		designer.verifyThemeSelected(themeName);
 	}
 
 	@Test(groups={"ThemeDesigner002", "ThemeDesigner"})
 	public void themeDesigner002_selectThemeFromMiddlePage(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
-		designer.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		designer.openSpecialDesignerPage();
-		designer.selectTab("Theme");
+		designer.openSpecialDesignerPage(wikiURL);
+		designer.selectTab(Tab.Theme);
 		themeName = designer.selectTheme(6);
 		designer.verifyThemeSelected(themeName);
 	}
 
 	@Test(groups={"ThemeDesigner003", "ThemeDesigner"})
 	public void themeDesigner003_selectThemeFromLastPage(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
-		designer.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		designer.openSpecialDesignerPage();
-		designer.selectTab("Theme");
+		designer.openSpecialDesignerPage(wikiURL);
+		designer.selectTab(Tab.Theme);
 		themeName = designer.selectTheme(10);
 		designer.verifyThemeSelected(themeName);
 	}
 
 	@Test(groups={"ThemeDesigner004", "ThemeDesigner"})
 	public void themeDesigner004_selectThemeSubmit(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
-		designer.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		designer.openSpecialDesignerPage();
-		designer.selectTab("Theme");
+		designer.openSpecialDesignerPage(wikiURL);
+		designer.selectTab(Tab.Theme);
 		themeName = designer.selectTheme(1);
 		designer.verifyThemeSelected(themeName);
 		designer.submitThemeSelection();
@@ -67,25 +60,21 @@ public class ThemeDesigner extends TestTemplate {
 
 	@Test(groups={"ThemeDesigner005", "ThemeDesigner"})
 	public void themeDesigner005_customizeTab(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
-		designer.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		designer.openSpecialDesignerPage();
-		designer.selectTab("Customize");
+		designer.openSpecialDesignerPage(wikiURL);
+		designer.selectTab(Tab.Customize);
 		designer.verifyCustomizeTab();
 	}
 
 	@Test(groups={"ThemeDesigner006", "ThemeDesigner"})
 	public void themeDesigner006_wordmarkTab(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
-		designer.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		designer.openSpecialDesignerPage();
-		designer.selectTab("Wordmark");
+		designer.openSpecialDesignerPage(wikiURL);
+		designer.selectTab(Tab.Wordmark);
 		designer.verifyWordmarkTab();
 	}
 
@@ -95,13 +84,11 @@ public class ThemeDesigner extends TestTemplate {
 	 */
 	@Test(groups={"ThemeDesigner007", "ThemeDesigner"})
 	public void themeDesigner007_closeColorDialogWithOutsideClick(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
-		designer.openWikiPage();
-		login.loginAndVerifyOnWiki(Properties.userNameStaff, Properties.passwordStaff, Global.DOMAIN);
-		designer.openSpecialDesignerPage();
-		designer.selectTab("Customize");
+		designer.openSpecialDesignerPage(wikiURL);
+		designer.selectTab(Tab.Customize);
 		designer.verifyCustomizeTab();
 		designer.openImagePicker();
 		designer.clickOutsideImagePicker();

@@ -346,15 +346,8 @@ public class BasePageObject{
 	}
 
 	public void waitForElementNotVisibleByElement(WebElement element) {
-		try {
-			Global.LOG_ENABLED = false;
-			wait.until(CommonExpectedConditions
-					.invisibilityOfElementLocated(element));
-			Global.LOG_ENABLED = true;
-		} catch (Exception e) {
-			PageObjectLogging.log("waitForElementNotVisibleByElement",
-					e.toString(), false);
-		}
+		wait.until(CommonExpectedConditions
+				.invisibilityOfElementLocated(element));
 	}
 
 	public void waitForElementClickableByCss(String css) {
