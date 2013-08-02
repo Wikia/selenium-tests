@@ -40,7 +40,7 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement videoPlaceholder;
 	@FindBy(css=".RTEMediaOverlayEdit")
 	private WebElement modifyComponentButton;
-	@FindBy(css=".RTEMediaOverlayDelete")
+	@FindBy(css="[style*=\"block\"] .RTEMediaOverlayDelete")
 	private WebElement removeComponentButton;
 	@FindBy(css="#RTEConfirmOk > span")
 	private WebElement removeConfirmationButton;
