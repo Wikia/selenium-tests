@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -61,8 +60,8 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		super(driver);
 	}
 
-	public void openSpecialDesignerPage(){
-		getUrl(Global.DOMAIN+"wiki/Special:ThemeDesigner");
+	public void openSpecialDesignerPage(String wikiURL) {
+		getUrl(wikiURL+"wiki/Special:ThemeDesigner");
 		PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
 	}
 
@@ -148,4 +147,6 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		waitForElementNotVisibleByElement(bgImagePicker);
 		PageObjectLogging.log("verifyImagePickerDisappeared", "Image Picker is invisible", true);
 	}
+
+
 }
