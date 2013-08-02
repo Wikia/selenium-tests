@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -61,7 +62,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 
 	public void openSpecialDesignerPage(String wikiURL) {
-		getUrl(wikiURL+"wiki/Special:ThemeDesigner");
+		getUrl(wikiURL+URLsContent.specialThemeDesigner);
 		PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
 	}
 
@@ -107,10 +108,14 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
 	}
 
-	public void selectTab(String tabName){
-		WebElement tab = waitForElementByCss("a[rel='"+tabName+"Tab']");
+	public enum Tab {
+		Theme, Customize, Wordmark
+	}
+
+	public void selectTab(Tab tabName){
+		WebElement tab = waitForElementByCss("a[rel='"+tabName.toString()+"Tab']");
 		scrollAndClick(tab);
-		waitForElementByCss("li.selected a[rel='"+tabName+"Tab']");
+		waitForElementByCss("li.selected a[rel='"+tabName.toString()+"Tab']");
 		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
 	}
 
@@ -147,6 +152,5 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		waitForElementNotVisibleByElement(bgImagePicker);
 		PageObjectLogging.log("verifyImagePickerDisappeared", "Image Picker is invisible", true);
 	}
-
 
 }

@@ -84,9 +84,4 @@ public class PageContent {
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
 
-	//ThemeDesigner
-	public static String themeTab = "Theme";
-	public static String WordmarkTab = "Wordmark";
-	public static String CustomizeTab = "Customize";
-
 }
