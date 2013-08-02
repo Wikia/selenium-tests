@@ -1,8 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -14,13 +18,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.*;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -29,6 +26,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -39,15 +37,20 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -786,20 +789,20 @@ public class WikiBasePageObject extends BasePageObject {
 
 				xmlResponseArr = xmlResponse.split("\"");
 			}
-
+			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "_session', '" + xmlResponseArr[13]
-					+ "', {'domain': 'wikia.com', 'path': '/'})");
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "UserName', '" + xmlResponseArr[7]
-					+ "', {'domain': 'wikia.com', 'path': '/'})");
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "UserID', '" + xmlResponseArr[5]
-					+ "', {'domain': 'wikia.com', 'path': '/'})");
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "Token', '" + xmlResponseArr[9]
-					+ "', {'domain': 'wikia.com' , 'path': '/'})");
+					+ "', {'domain': '"+domain+"' , 'path': '/'})");
 			try {
 				driver.get(wikiURL);
 			} catch (TimeoutException e) {
