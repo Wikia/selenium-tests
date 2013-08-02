@@ -39,23 +39,21 @@ public class EditMode extends WikiBasePageObject {
 		super(driver);
 	}
 
-	public enum PageType{
-		Article, Blog
-	}
-
-	public Object submit(PageType type) {
+	private void submit() {
 		driver.switchTo().defaultContent();
 		submitButton.click();
 		waitForElementNotPresent(submitButtonBy);
-		PageObjectLogging.log("ArticleSubmited", "Article submited", true);
-		switch (type) {
-			case Article :
-				return new ArticlePageObject(driver);
-			case Blog :
-				return new BlogPageObject(driver);
-		}
-		PageObjectLogging.log("ArticleSubmited", "article type not supported", false);
-		return null;
+		PageObjectLogging.log("submit", "Page submitted", true);
+	}
+
+	public ArticlePageObject submitArticle() {
+		submit();
+		return new ArticlePageObject(driver);
+	}
+
+	public BlogPageObject submitBlog() {
+		submit();
+		return new BlogPageObject(driver);
 	}
 
 	public PhotoAddComponentObject clickPhotoButton(){

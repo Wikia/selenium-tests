@@ -20,7 +20,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.EditMode.PageType;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
@@ -47,7 +46,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		blogEdit.verifyGallery();
-		BlogPageObject blogPage = (BlogPageObject) blogEdit.submit(PageType.Blog);
+		BlogPageObject blogPage = blogEdit.submitBlog();
 		blogPage.verifyGallery();
 	}
 
@@ -66,7 +65,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 		blogEdit.verifySlideshow();
-		BlogPageObject blogPage = (BlogPageObject) blogEdit.submit(PageType.Blog);
+		BlogPageObject blogPage = blogEdit.submitBlog();
 		blogPage.verifySlideshow();
 	}
 
@@ -85,7 +84,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		blogEdit.verifySlider();
-		BlogPageObject blogPage = (BlogPageObject) blogEdit.submit(PageType.Blog);
+		BlogPageObject blogPage = blogEdit.submitBlog();
 		blogPage.verifySlider();
 	}
 
@@ -101,7 +100,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		blogEdit.verifyVideo();
-		BlogPageObject blogPage = (BlogPageObject) blogEdit.submit(PageType.Blog);
+		BlogPageObject blogPage = blogEdit.submitBlog();
 		blogPage.verifyVideo();
 	}
 
@@ -117,7 +116,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		photoOptions.setCaption(PageContent.caption);
 		photoOptions.clickAddPhoto();
 		blogEdit.verifyPhoto();
-		BlogPageObject blogPage = (BlogPageObject) blogEdit.submit(PageType.Blog);
+		BlogPageObject blogPage = blogEdit.submitBlog();
 		blogPage.verifyPhoto();
 	}
 }

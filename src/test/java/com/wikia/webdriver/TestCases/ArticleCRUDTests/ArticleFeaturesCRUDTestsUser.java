@@ -21,7 +21,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.EditMode.PageType;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject.Components;
 
@@ -32,8 +31,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_001", "ArticleFeaturesCRUDUser", "Smoke"})
-	public void ArticleCRUDAdmin_001_addModifyGallery() {
+	@Test(groups={"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})
+	public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -50,7 +49,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		visualEditMode.verifyGallery();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifyGallery();
 
 		article.editArticleUsingDropdown();
@@ -65,12 +64,12 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		galleryBuiler.adjustOrientation(Orientation.portrait);
 		galleryBuiler.clickFinish();
 		visualEditMode.verifyGallery();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifyGallery();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_002", "ArticleFeaturesCRUDUser"})
-	public void ArticleCRUDAdmin_002_addDeleteGallery() {
+	@Test(groups={"ArticleFeaturesCRUDUser_002", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_002_addDeleteGallery() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -87,7 +86,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		visualEditMode.verifyGallery();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifyGallery();
 
 		article.editArticleUsingDropdown();
@@ -95,8 +94,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Gallery);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_003", "ArticleFeaturesCRUDUser", "Smoke"})
-	public void ArticleCRUDAdmin_003_addModifySlideshow() {
+	@Test(groups={"ArticleFeaturesCRUDUser_003", "ArticleFeaturesCRUDUser", "Smoke"})
+	public void ArticleFeaturesCRUDUser_003_addModifySlideshow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -110,7 +109,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 		visualEditMode.verifySlideshow();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifySlideshow();
 
 		article.editArticleUsingDropdown();
@@ -122,12 +121,12 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		slideshowBuilder.adjustPosition(Positions.Right);
 		slideshowBuilder.clickFinish();
 		visualEditMode.verifySlideshow();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifySlideshow();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_009", "ArticleFeaturesCRUDUser"})
-	public void ArticleCRUDAdmin_004_addDeleteSlideshow() {
+	@Test(groups={"ArticleFeaturesCRUDUser_004", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_004_addDeleteSlideshow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -141,7 +140,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 		visualEditMode.verifySlideshow();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifySlideshow();
 
 		article.editArticleUsingDropdown();
@@ -149,8 +148,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Slideshow);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_007", "ArticleFeaturesCRUDUser", "Smoke"})
-	public void ArticleCRUDAdmin_005_addModifySlider() {
+	@Test(groups={"ArticleFeaturesCRUDUser_005", "ArticleFeaturesCRUDUser", "Smoke"})
+	public void ArticleFeaturesCRUDUser_005_addModifySlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -164,7 +163,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		visualEditMode.verifySlider();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifySlider();
 
 		article.editArticleUsingDropdown();
@@ -176,12 +175,12 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		visualEditMode.verifySlider();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifySlider();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_008", "ArticleFeaturesCRUDUser"})
-	public void ArticleCRUDAdmin_006_addDeleteSlider() {
+	@Test(groups={"ArticleFeaturesCRUDUser_006", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_006_addDeleteSlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -195,7 +194,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		visualEditMode.verifySlider();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifySlider();
 
 		article.editArticleUsingDropdown();
@@ -203,8 +202,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Slider);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_010", "ArticleFeaturesCRUDUser", "Smoke"})
-	public void ArticleCRUDAdmin_007_addModifyVideo() {
+	@Test(groups={"ArticleFeaturesCRUDUser_007", "ArticleFeaturesCRUDUser", "Smoke"})
+	public void ArticleFeaturesCRUDUser_007_addModifyVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -215,19 +214,19 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifyVideo();
 		article.editArticleUsingDropdown();
 		visualEditMode.modifyComponent(Components.Video);
 		vetOptions.setCaption(PageContent.caption2);
 		vetOptions.update();
 		visualEditMode.verifyVideo();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifyVideo();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_011", "ArticleFeaturesCRUDUser"})
-	public void ArticleCRUDAdmin_008_addDeleteVideo() {
+	@Test(groups={"ArticleFeaturesCRUDUser_008", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_008_addDeleteVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -238,7 +237,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifyVideo();
 		article.editArticleUsingDropdown();
 		visualEditMode.modifyComponent(Components.Video);
@@ -248,8 +247,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Video);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_013", "ArticleFeaturesCRUDUser", "Smoke"})
-	public void ArticleCRUDAdmin_009_addingModifyImage() {
+	@Test(groups={"ArticleFeaturesCRUDUser_009", "ArticleFeaturesCRUDUser", "Smoke"})
+	public void ArticleFeaturesCRUDUser_009_addingModifyImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -260,18 +259,18 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		photoOptions.setCaption(PageContent.caption);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.editArticleUsingDropdown();
 		visualEditMode.modifyComponent(Components.Photo);
 		photoOptions.setCaption(PageContent.caption2);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.verifyPhoto();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDAdmin_014", "ArticleFeaturesCRUDUser"})
-	public void ArticleCRUDAdmin_010_addDeleteImage() {
+	@Test(groups={"ArticleFeaturesCRUDUser_010", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_010_addDeleteImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -282,7 +281,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		photoOptions.setCaption(PageContent.caption);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
-		visualEditMode.submit(PageType.Article);
+		visualEditMode.submitArticle();
 		article.editArticleUsingDropdown();
 		visualEditMode.removeComponent(Components.Photo);
 		visualEditMode.verifyComponentRemoved(Components.Photo);

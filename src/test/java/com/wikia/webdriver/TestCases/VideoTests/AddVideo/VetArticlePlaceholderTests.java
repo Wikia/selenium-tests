@@ -13,7 +13,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.EditMode.PageType;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject.Components;
 
@@ -32,7 +31,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		ArticlePageObject article  = (ArticlePageObject) visualEditMode.submit(PageType.Article);
+		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -47,7 +46,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		ArticlePageObject article  = (ArticlePageObject) visualEditMode.submit(PageType.Article);
+		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
@@ -67,7 +66,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		ArticlePageObject article = (ArticlePageObject) visualEditMode.submit(PageType.Article);
+		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyTitle(articleTitle);
 		article.verifyVideo();
 	}
@@ -84,7 +83,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		ArticlePageObject article = (ArticlePageObject) visualEditMode.submit(PageType.Article);
+		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyTitle(articleTitle);
 		article.verifyVideo();
 	}

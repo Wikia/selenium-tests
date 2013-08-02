@@ -12,7 +12,6 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.EditMode.PageType;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 
 /**
@@ -30,7 +29,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
-		ArticlePageObject article = (ArticlePageObject) rVmoduleMessageEdit.submit(PageType.Article);
+		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
 		article.openRandomArticle(wikiURL);
 		article.verifyRVModulePresence();
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddRelatedVideo();
@@ -44,14 +43,11 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
-		ArticlePageObject article = (ArticlePageObject) rVmoduleMessageEdit.submit(PageType.Article);
+		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
 		article.openRandomArticle(wikiURL);
 		article.verifyRVModulePresence();
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddRelatedVideo();
 		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 1);
 		article.verifyRelatedVideoAdded(vetAddingVideo.getVideoName());
 	}
-
-
-
 }

@@ -21,7 +21,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject.Positions;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.EditMode.PageType;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
@@ -44,7 +43,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickBold();
 		source.checkSourceContent("'''Bold text'''");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_002"})
@@ -58,7 +57,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickItalic();
 		source.checkSourceContent("''Italic text''");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_003"})
@@ -72,7 +71,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickInternalLink();
 		source.checkSourceContent("[[Link title]]");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_004"})
@@ -86,7 +85,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickExternalLink();
 		source.checkSourceContent("[http://www.example.com link title]");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_005"})
@@ -100,7 +99,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickLvl2Headline();
 		source.checkSourceContent("\n== Headline text ==\n");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_006"})
@@ -114,7 +113,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickEmbedFile();
 		source.checkSourceContent("[[File:Example.jpg]]");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_007"})
@@ -128,7 +127,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickEmbedMedia();
 		source.checkSourceContent("[[Media:Example.ogg]]");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_008"})
@@ -142,7 +141,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickMath();
 		source.checkSourceContent("<math>Insert formula here</math>");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_009"})
@@ -156,7 +155,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickNowiki();
 		source.checkSourceContent("<nowiki>Insert non-formatted text here</nowiki>");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_010"})
@@ -170,7 +169,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickSignature();
 		source.checkSourceContent("--~~~~");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_011"})
@@ -184,7 +183,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clearSource();
 		source.clickHorizontalLine();
 		source.checkSourceContent("\n----\n");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_012"})
@@ -202,7 +201,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		photoOptions.clickAddPhoto();
 		String photoName = photoAddPhoto.getPhotoName();
 		source.checkSourceContent(String.format(PageContent.wikiTextPhoto.replace("%photoName%", photoName), PageContent.caption));
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_013"})
@@ -224,7 +223,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		slideshowBuilder.adjustPosition(Positions.Center);
 		slideshowBuilder.clickFinish();
 		source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_014"})
@@ -249,7 +248,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		galleryBuiler.adjustOrientation(Orientation.landscape);
 		galleryBuiler.clickFinish();
 		source.checkSourceContent("<gallery position=\"center\" columns=\"2\" spacing=\"small\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_015"})
@@ -271,7 +270,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		sliderAddPhoto.clickSelect();
 		sliderBuilder.clickFinish();
 		source.checkSourceContent("<gallery type=\"slider\" orientation=\"right\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_016"})
@@ -288,7 +287,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		source.checkSourceVideoContent("[["+VideoContent.youtubeVideoWikiText+PageContent.caption+"]]");
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 
@@ -301,7 +300,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.checkMainTools();
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_018"})
@@ -313,7 +312,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.checkWikiMarkupTools();
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_019"})
@@ -325,6 +324,6 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
 		source.createNewArticleSource(pageName, 1);
 		source.checkSymbolsTools();
-		source.submit(PageType.Article);
+		source.submitArticle();
 	}
 }

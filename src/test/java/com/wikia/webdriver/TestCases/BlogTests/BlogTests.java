@@ -9,7 +9,6 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.EditMode.PageType;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
@@ -42,7 +41,7 @@ public class BlogTests extends NewTestTemplate{
 		SpecialCreatePagePageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
 		visualEditMode.addContent(blogContent);
-		BlogPageObject blogPage = (BlogPageObject) visualEditMode.submit(PageType.Blog);
+		BlogPageObject blogPage = visualEditMode.submitBlog();
 		blogPage.verifyBlogTitle(blogTitle);
 		blogPage.verifyContent(blogContent);
 	}
@@ -59,7 +58,7 @@ public class BlogTests extends NewTestTemplate{
 		SpecialCreatePagePageObject createBlogPage = base.openSpecialCreateBlogPage(wikiURL);
 		VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
 		visualEditMode.addContent(blogContent);
-		BlogPageObject blogPage = (BlogPageObject) visualEditMode.submit(PageType.Blog);
+		BlogPageObject blogPage = visualEditMode.submitBlog();
 		blogPage.verifyBlogTitle(blogTitle);
 		blogPage.verifyContent(blogContent);
 	}
@@ -75,7 +74,7 @@ public class BlogTests extends NewTestTemplate{
 		String blogTitle = blogPage.getBlogName();
 		VisualEditModePageObject visualEditMode = blogPage.editArticleUsingDropdown();
 		visualEditMode.addContent(blogContent);
-		visualEditMode.submit(PageType.Blog);
+		visualEditMode.submitArticle();
 		blogPage.verifyBlogTitle(blogTitle);
 		blogPage.verifyContent(blogContent);
 	}
