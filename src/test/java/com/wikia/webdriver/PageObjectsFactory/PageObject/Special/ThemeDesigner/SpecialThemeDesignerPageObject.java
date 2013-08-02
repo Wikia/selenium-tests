@@ -19,7 +19,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	private WebElement saveButton;
 	String tabSelector = "a[rel='%tabName%Tab']";
 	String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
-		//theme tab
+	//theme tab
 	@FindBys(@FindBy(css="li[data-theme]"))
 	private List<WebElement> themes;
 	@FindBy(css=".next.chevron")
