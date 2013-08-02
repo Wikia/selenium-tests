@@ -4,9 +4,8 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
@@ -20,11 +19,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
  * https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
  */
 
-public class VetAddingVideoTests extends NewTestTemplate {
+public class VetAddingVideoTests extends TestTemplate {
 
 	String desiredVideoName;
-
-	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"VetTests011", "VetTests", "VetAddVideo"})
 	public void Vet_Tests_009_CommentsProvider() {
