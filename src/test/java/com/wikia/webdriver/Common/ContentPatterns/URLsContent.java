@@ -13,9 +13,6 @@ public class URLsContent {
 
 	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 
-	//Related videos
-	public static String relatedVideosList = "MediaWiki:RelatedVideosGlobalList";
-
 	// Hubs
 	public static String VideoGamesHub = Global.LIVE_DOMAIN+"Video_Games";
 	public static String EntertainmentHub = Global.LIVE_DOMAIN+"Entertainment";
@@ -33,7 +30,6 @@ public class URLsContent {
 	public static final String specialPhalanx = "wiki/Special:Phalanx";
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
-	public static final String specialCreateBlogPage = "wiki/Special:CreateBlogPage";
 	public static final String specialPreferences = "wiki/Special:Preferences";
 	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	public static final String specialCSS = "wiki/Special:CSS";
@@ -53,9 +49,7 @@ public class URLsContent {
 
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
-	public static final String actionEditParameter = "action=edit";
-	public static final String useDefaultFormat = "useFormat=1";
-	public static final String wikiaTracker = "og_level=info";
+	public static final String actionEditParameter = "?action=edit";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "WAM";

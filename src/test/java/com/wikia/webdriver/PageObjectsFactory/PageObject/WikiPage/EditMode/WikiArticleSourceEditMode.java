@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 
-public class SourceEditModePageObject extends EditMode{
+public class WikiArticleSourceEditMode extends WikiEditMode{
 
 
 	@FindBy(css="#mw-editbutton-bold")
@@ -62,16 +62,16 @@ public class SourceEditModePageObject extends EditMode{
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
 
-	public SourceEditModePageObject(WebDriver driver) {
+	public WikiArticleSourceEditMode(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public SourceEditModePageObject createNewArticleSource(String pageName, int layoutNum){
+	public WikiArticleSourceEditMode createNewArticleSource(String pageName, int layoutNum){
 		getUrl(Global.DOMAIN+"index.php?title="+pageName+"&action=edit&useFormat="+layoutNum+"&useeditor=source");
 		waitForElementByElement(more);
 		PageObjectLogging.log("createNewArticleSource", "create article page in source mode opened", true, driver);
-		return new SourceEditModePageObject(driver);
+		return new WikiArticleSourceEditMode(driver);
 	}
 	public void focusTextArea()
 	{

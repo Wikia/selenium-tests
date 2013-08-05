@@ -60,7 +60,6 @@ public class PageContent {
 	public static String forumBoard = "QABoardForMoveThreadTest";
 	public static String closeReason = "QA reason";
 
-
 	//Messages
 	public static String articleDeletedMessage = "This page has been deleted.";
 	public static String createNewBlogPostMessage = "Create a new blog post";
@@ -84,6 +83,5 @@ public class PageContent {
 	public static String wikiSignUpBirthMonth = "11";
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
-
 
 }

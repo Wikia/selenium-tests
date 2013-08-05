@@ -15,6 +15,8 @@
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation"/>
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAdmin"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnonymous"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsAnonymous"/>
@@ -31,8 +33,8 @@
 			<class name="com.wikia.webdriver.TestCases.Mobile.ModalTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.TocTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogTests"/>
+			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogReplyTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>
-			<class name="com.wikia.webdriver.TestCases.CommentsTests.BlogCommentsTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
@@ -49,9 +51,7 @@
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetModalTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetAddingVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetProvidersTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetArticlePlaceholderTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetRelatedVideoTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetSpecialVideosTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.VideoSuggestionsTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.OnWikiSearchTest"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.ForumNotificationsTests"/>
@@ -65,11 +65,10 @@
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>			
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDAnonTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleActionsAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleEditDropdownTests"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnon"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsUser"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.ArticleCommentsTests"/>
 		</classes>
 	</test>

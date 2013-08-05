@@ -1,5 +1,7 @@
 package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
+import java.awt.List;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -12,8 +14,8 @@ import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class Maintenance extends TestTemplate{
-
-
+	
+	
 	private static String[] specialAnonUrl()
 	{
 		return new String[] {
@@ -76,7 +78,7 @@ public class Maintenance extends TestTemplate{
 		};
 	}
 
-
+	
 	@DataProvider
 	private static final Iterator<Object[]> getSpecialUrlAnonAvailable()
 	{
@@ -84,8 +86,8 @@ public class Maintenance extends TestTemplate{
 		ArrayList al = new ArrayList();
 		al.add(new Object[] { Arrays.copyOfRange(urls, 0, urls.length) } );
 		return al.iterator();
-	}
-
+	}	
+	
 	@Test(dataProvider="getSpecialUrlAnonAvailable", groups = {"SpecialPagesAnon","SpecialPages"})
 	public  void availableAnon(String[] url)
 	{

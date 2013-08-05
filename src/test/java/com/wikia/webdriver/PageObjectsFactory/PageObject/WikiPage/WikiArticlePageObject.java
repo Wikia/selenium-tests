@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -23,10 +26,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	@FindBy(css="div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
-	@FindBy(css="#VideoEmbedUrl")
-	private WebElement videoRVmodalInput;
-	@FindBy(css="div[class='editarea']")
-	private WebElement editCommentTrigger;
+	@FindBy(css="section.RelatedVideosModule")
+	private WebElement rVModule;
 	@FindBy(css="body[id='bodyContent']")
 	private WebElement editCommentArea;
 	@FindBy(css="div.cke_contents iframe")
@@ -53,10 +54,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement videoDetailsButton;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
-	@FindBy(css="#mw-content-text")
-	private WebElement articleContent;
-	@FindBy(css="#VideoEmbedUrlSubmit")
-	private WebElement VideoModalAddButton;
+	@FindBy(css="#WikiaImagePlaceholderInner0")
+	private WebElement videoAddPlaceholder;
 	@FindBy(css="#WikiaRail .addVideo")
     private WebElement addVideoWikiaRail;
 	@FindBy(css=".wikia-photogallery-add")
@@ -67,8 +66,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement randomPageButton;
 	@FindBy(css = ".sprite.search")
 	private WebElement searchButton;
-	@FindBy(css=".button.addVideo")
-	protected WebElement rVAddVideo;
 
 	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
@@ -78,9 +75,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
 	private By videoOnPublish = By.cssSelector("figure a.image.video");
 	private By articleContentBy = By.cssSelector("#mw-content-text");
-	protected By rvFirstVideo = By.cssSelector(
-			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
-			);
 	private String pageName;
 
 	public WikiArticlePageObject(WebDriver driver) {
@@ -151,10 +145,42 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
 	}
 
+	public void writeOnCommentArea(String comment)
+	{
+		driver.switchTo().frame(iframe);
+		waitForElementByElement(editCommentArea);
+		editCommentArea.clear();
+		if (Global.BROWSER.equals("FF"))
+		{
+			((JavascriptExecutor) driver).executeScript("document.body.innerHTML='" + comment + "'");
+		}
+		else
+		{
+			editCommentArea.sendKeys(comment);
+		}
+		driver.switchTo().defaultContent();
+	}
+
 	public void clickSubmitButton()
 	{
 		executeScript("document.querySelectorAll('#article-comm-submit')[0].click()");
 		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
+	}
+
+	public void clickSubmitButton(String userName)
+	{
+		//submit button taken by username which edited comment
+		scrollAndClick(
+			driver.findElement(By.xpath("//a[contains(text(), '"+userName+"')]/../../..//input[@class='actionButton']"))
+		);
+		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
+	}
+
+	public void verifyCommentText(String message, String userName)
+	{
+		waitForElementByXPath("//blockquote//p[contains(text(), '"+message+"')]");
+		waitForElementByXPath("//div[@class='edited-by']//a[contains(text(), '"+userName+"')]");
+		PageObjectLogging.log("verifyComment", "comment: "+message+" is visible", true, driver);
 	}
 
 	public void verifyCommentVideo(String videoName){
@@ -162,8 +188,67 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
 	}
 
+	private void clickReplyCommentButton(String comment)
+	{
+		WebElement commentReplyButton = waitForElementByXPath(
+			"//p[contains(text(), '" + comment
+			+ "')]//..//..//button[contains(@class,'article-comm-reply')]"
+		);
+		commentReplyButton.click();
+		PageObjectLogging.log("clickReplyCommentButton", "reply comment button clicked", true);
+	}
 
+	private void writeReply(String reply)
+	{
+		waitForElementByElement(iframe);
+		driver.switchTo().frame(iframe);
+		editCommentArea.sendKeys(reply);
+		driver.switchTo().defaultContent();
+		waitForElementByElement(submitReplyButton);
+		submitReplyButton.click();
+		waitForElementByXPath("//p[contains(text(), '" + reply + "')]");
+		PageObjectLogging.log("writeReply", "reply comment written", true, driver);
+	}
 
+	public void replyComment(String comment, String reply)
+	{
+		refreshPage();
+		clickReplyCommentButton(comment);
+		writeReply(reply);
+		PageObjectLogging.log(
+			"reply comment", "reply comment written and checked", true, driver
+		);
+	}
+
+	private void clickDeleteCommentButton()
+	{
+		executeScript("document.querySelectorAll('.article-comm-delete')[0].click()");
+		PageObjectLogging.log("clickDeleteCommentButton", "delete comment button clicked", true, driver);
+	}
+
+	private void clickEditCommentButton()
+	{
+		try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
+		executeScript("document.querySelectorAll('.article-comm-edit')[0].click()");
+		waitForElementByElement(iframe);
+		PageObjectLogging.log("clickEditCommentButton", "edit comment button clicked", true, driver);
+	}
+
+	public void deleteComment(String comment)
+	{
+		((JavascriptExecutor)driver).executeScript("window.scrollTo(0,0)");
+		clickDeleteCommentButton();
+		clickCommentDeleteConfirmationButton();
+		PageObjectLogging.log("deleteComment", "comment deleted", true, driver);
+	}
+
+	public void editComment(String comment)
+	{
+		refreshPage();
+		scrollToElement(commentHolder);
+		waitForElementByElement(replyCommentButton);
+		clickEditCommentButton();
+	}
 
 	public void verifyPageTitle(String title)
 	{
@@ -205,6 +290,31 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
 	}
 
+	/**
+	 * Verify that the image does not appear on the page
+	 *
+	 * @author Michal Nowierski
+	 */
+	public void verifyImageNotOnThePage() {
+		waitForElementNotVisibleByBy(ImageOnWikiaArticle);
+		PageObjectLogging.log("VerifyTheImageNotOnThePage", "Verify that the image does not appear on the page", true, driver);
+	}
+
+	public void verifyGalleryNotOnThePage() {
+		waitForElementNotVisibleByBy(galleryOnPublish);
+		PageObjectLogging.log("verifyTheGalleryNotOnThePage", "Verify that the gallery does not appear on the page", true, driver);
+	}
+
+	public void verifySlideshowNotOnThePage()
+	{
+		waitForElementNotVisibleByBy(slideShowOnPublish);
+		PageObjectLogging.log("verifyTheSlideshowNotOnThePage", "Verify that the slideshow does not appear on the page", true, driver);
+	}
+
+	public void verifyVideoNotOnThePage() {
+		waitForElementNotPresent(videoOnPublish);
+		PageObjectLogging.log("verifyTheVideoNotOnThePage", "Verify that the video does not appear on the page", true, driver);
+	}
 
 	/**
 	 * Verify that the Video appears on the page
@@ -216,9 +326,68 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("VerifyTheVideoOnThePage", "Verify that the Video appears on the page", true, driver);
 	}
 
+	/**
+	 * Verify that the RV Module Is Present
+	 *
+	 * @author Michal Nowierski
+	 * 	 */
+	public void verifyRVModulePresence() {
+		waitForElementByElement(rVModule);
+		PageObjectLogging.log("VerifyRVModulePresence", "Verify that the RV Module Is Present", true, driver);
+
+	}
+
+	/**
+	 * Click On 'Add a video' button on RV module
+	 *
+	 * @author Michal Nowierski
+	 * 	 */
+	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
+		waitForElementByBy(AddVideoRVButton);
+		scrollToElement(driver.findElement(AddVideoRVButton));
+		waitForElementClickableByBy(AddVideoRVButton);
+		scrollAndClick(driver.findElement(AddVideoRVButton));
+		PageObjectLogging.log("ClickOnAddVideoRVModule", "Click On 'Add a video' button on RV module", true, driver);
+		return new VetAddVideoComponentObject(driver);
+	}
+
+	/**
+	 * Verify that video given by its name has been added to RV module
+	 *
+	 * @author Michal Nowierski
+	 * @param videoURL2name The name of the video, or any fragment of the video name
+	 * 	 */
+	public void verifyVideoAddedToRVModule(String videoURL2name) {
+		waitForElementByCss(".RVBody img[data-video-name*=\""+videoURL2name+"\"]");
+		PageObjectLogging.log("VerifyVideoAddedToRVModule", "Verify that video given by its name has been added to RV module", true, driver);
+
+	}
+
 	public void verifyGalleryPosion(String position) {
 		waitForElementByCss("div.wikia-gallery-position-"+position);
 		PageObjectLogging.log("verifyGalleryPosion", "Gallery position verified: "+position, true, driver);
+	}
+
+	public void verifySlideshowPosition(String position) {
+		if (position.equals("left")||position.equals("right"))
+		{
+			waitForElementByCss("div.wikia-slideshow.float"+position);
+			PageObjectLogging.log("verifySlideshowPosion", "Slideshow position verified: "+position, true, driver);
+		}
+		else if (position.equals("center"))
+		{
+			waitForElementByCss("div.wikia-slideshow.slideshow-center");
+			PageObjectLogging.log("verifySlideshowPosion", "Slideshow position verified: "+position, true, driver);
+		}
+
+	}
+/**
+ *
+ * @param position available values (vertical, horizontal)
+ */
+	public void verifySliderThumbnailsPosition(String position) {
+		waitForElementByCss(".wikiaPhotoGallery-slider-body div."+position);
+		PageObjectLogging.log("verifySliderThumbnailsPosition", "Slider thumbnails position verified: "+position, true, driver);
 	}
 
 	public WikiHistoryPageObject openHistoryPage()
@@ -228,6 +397,17 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiHistoryPageObject(driver);
 	}
 
+	/**
+	* Verify that the table appears on the page
+	*
+	*
+	@author Michal Nowierski
+	*/
+
+	public void VerifyTheTableOnThePage() {
+	waitForElementByElement(tableOnWikiaArticle);
+	PageObjectLogging.log("VerifyTheTableOnThePage", "Verify that the table appears on the page", true, driver);
+	}
 
 	/**
 	* Click on 'add Category' Button
@@ -356,6 +536,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new LightboxPageObject(driver);
 	}
 
+	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
+		waitForElementByElement(videoAddPlaceholder);
+		scrollAndClick(videoAddPlaceholder);
+		return new VetAddVideoComponentObject(driver);
+	}
+
     public void clickAddVideoFromRail() {
         waitForElementByElement(addVideoWikiaRail);
         scrollAndClick(addVideoWikiaRail);
@@ -371,14 +557,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
         renameArticle(oldName, newName);
     }
 
-
-	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
-		waitForElementByElement(rVAddVideo);
-		scrollAndClick(rVAddVideo);
-		return new VetAddVideoComponentObject(driver);
+	public GalleryBuilderComponentObject clickAddPhotoToGallery(){
+		scrollAndClick(addPhotoToGalleryButton);
+		return new GalleryBuilderComponentObject(driver);
 	}
-
-	public void verifyVideoAddedToRVModule(String videoName) {
-		waitForTextToBePresentInElementByBy(rvFirstVideo, videoName);
+	public SlideshowBuilderComponentObject clickAddPhotoToSlideshow(){
+		addPhotoToSlideShowButton.click();
+		return new SlideshowBuilderComponentObject(driver);
 	}
 }

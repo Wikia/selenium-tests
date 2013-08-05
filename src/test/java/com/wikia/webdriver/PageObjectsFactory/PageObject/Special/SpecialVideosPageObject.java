@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 
@@ -29,8 +30,15 @@ public class SpecialVideosPageObject extends SpecialPageObject{
             PageFactory.initElements(driver, this);
 	}
 
-	public String followRandomVideo(){
 
+
+        public SpecialVideosPageObject openSpecialVideoPage(){
+		getUrl(Global.DOMAIN+"wiki/Special:Videos");
+		return new SpecialVideosPageObject(driver);
+	}
+	
+	public String followRandomVideo(){
+		
 		List<String> hrefs = new ArrayList();
 		for (WebElement elem:videos)
 		{
@@ -64,6 +72,6 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 		waitForElementByElement(newestVideo);
 		List<WebElement> videoDescriptonElem = newestVideo.findElements(By.cssSelector("a.image.video span.info-overlay-title"));
 		Assertion.assertEquals(videoDescription, videoDescriptonElem.get(0).getText());
-		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);
+		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);	
 	}
 }

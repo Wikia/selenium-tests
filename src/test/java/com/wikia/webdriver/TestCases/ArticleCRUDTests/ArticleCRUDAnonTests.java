@@ -1,14 +1,13 @@
 package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.ArticleDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -25,7 +24,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
 		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article  = visualEditMode.submit();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -39,7 +38,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article  = visualEditMode.submit();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -54,7 +53,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.createArticleUsingDropdown(articleTitle);
 		visualEditMode.addContent(articleContent);
-		visualEditMode.submitArticle();
+		visualEditMode.submit();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -70,7 +69,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		articleTitle = articleTitle + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article  = visualEditMode.submit();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -84,7 +83,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.addContent(articleContent);
-		visualEditMode.submitArticle();
+		visualEditMode.submit();
 		article.verifyContent(articleContent);
 	}
 
@@ -97,7 +96,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
 		visualEditMode.addContent(articleContent);
-		visualEditMode.submitArticle();
+		visualEditMode.submit();
 		article.verifyContent(articleContent);
 	}
 }

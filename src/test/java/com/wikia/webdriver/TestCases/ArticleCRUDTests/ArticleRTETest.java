@@ -5,20 +5,19 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
-public class ArticleRTETest extends NewTestTemplate {
-
+public class ArticleRTETest extends TestTemplate{
 	private static final int WIKI_TEXTS_PER_CYCLE = 300;
 
 	static public String[] createWikitexts() {
@@ -299,6 +298,51 @@ public class ArticleRTETest extends NewTestTemplate {
 				// BugID: 11537
 				"<div>\n<h2>Test</h2>\n* Test\n</div>",
 				"<div>\n<h2>Test</h2>\n: Test\n</div>",
+
+				///**********************************
+//				"\n\n\n\n\n\n\n1g",
+//				"1\nb",//bug jeden enter
+//				"1\n\n\n\n\nf\n3",//bug jeden enter
+//				"1\n\n\n\n\n\ng\n3",//bug jeden enter
+//				"1\n\n\n\n\n\n\nh\n3",//bug jeden enter
+//				"1\n\n\n\n\n\n\n\ni\n3",//bug jeden enter
+//				"1\n\n\n\n\n\n\n\n\nj\n3",//bug jeden enter
+//				"1\n\n\n\n\n\n\nm\n\n\n\n\n\n3\n\n\n\n4\n\n\n\n\n5\n6\n\n\n\n\n\n\n\n\n\n7\n8\n\n9",//bug jeden enter
+//				"1 \na",//bug jeden enter
+//				"1  \nb",//bug jeden enter
+//				"1   \nc",//bug jeden enter
+//				"1    \nd",//bug jeden enter
+//				"1 b\n3 4\n\n5 6\n\n\ny 8",//bug jeden enter
+//				"* 1a\n* 2\n*  3\n*     10\n*      11\n*      12\n*  4\n*   5\n*   6\n*    7\n*    8\n*     9",
+//				"# 1b\n# 2\n#  3\n#     10\n#      11\n#      12\n#  4\n#   5\n#   6\n#    7\n#    8\n#     9",
+//				"\n\n\n\n=1=\na\nb\n\n\n=2=\n\na\n\nb\n==     3     ==\n*a\n*b\n#c\n#d\n1\n*1\n\n1\n=== 4===\n=5 =\n=== 6 ===\n1 2 3 4\n a\n2\n\n3\n\n\n\n\n\n a",
+//				"{|\n|123\n|}",
+//				"{|\n|123\n|}\n\n\n{|\n|123\n|}",
+//				"{|\n|123\n{|\n|123\n|}\n{|\n|123\n|}\n|}",
+//				"{|\n|\n123\n|}",
+//				"{|\n|\n 123\n|}",
+//				"{| style=\"color: blue\"\n|123\n|}\n\n{|style=\"color: #f00;border:solid 1px green\"\n|123\n|}",
+//				"[[File:Wiki.png|thumb|caption [[test]] ''aaa'' '''bar''']]",
+//				"[http://wp.pl]\n\n[http://wp.pl foo]\n\n[mailto:info@example.org email me]\n\n[http://wp.pl]\n\n[mailto:info@example.org?Subject=URL%20Encoded%20Subject&body=Body%20Text info]",
+//				"123<br />456\n\n123\n<br />\n456\n\n123<br />\n456\n\n123\n<br />456",
+//				":::*:#foo\n:::#  bar",
+//				"__TOC__\n\n{{PAGENAME}}\n\n__NOTOC__",
+//				":: __TOC__\n\n{|\n|\n\n {{PAGENAME}}\n| __NOTOC__\n|}",
+//				"<includeonly>abc\n</includeonly>\n\n<includeonly>abc</includeonly>\n\n<includeonly>\nabc</includeonly>",
+//				"I'm, you're\n\"ąźół\"",
+//				"\n\n\n~~~\n\n\n~~~\n*~~~\n* ~~~\n*  ~~~\n*   ~~~\n**~~~\n***~~~\n\n#~~~\n# ~~~\n#  ~~~\n#   ~~~\n##~~~\n ~~~\n  ~~~~\n   ~~~~\n~~~~",
+//				"[a]\n[[a]\n[[[a]\n[[[[a]\n[[[[[a]\n[[[[[[a]\n[[[[[[[a]\n[a]]\n[a]]]\n[a]]]]\n[a]]]]]\n[a]]]]]]\n[a]]]]]]]\n[a]\n[[a]]\n[[[a]]]\n[[[[a]]]]\n[[[[[a]]]]]\n[[[[[[a]]]]]]\n[[[[[[[a]]]]]]]\n[[[[[[[[a]]]]]]]]\n[[[[[[[[[a]]]]]]]]]",
+//				"[[Sideshow_Bob_Roberts[[Sideshow_Bob_Roberts[[Sideshow_Bob_Roberts]]]]]][[Sideshow Bob Roberts[[Sideshow Bob Roberts[[Sideshow Bob Roberts]]]]]]",
+//				"[[&]]\n\n[[&amp;]]\n\n[[foo & bar]]es\n\n[[Flip & Flap]]\n\n[[Flip & Flap|and &amp; entity]]\n\n[[Flip &amp; Entity]]\n\nfoo & bar\n\nfoo &amp; entity\n\n[[foo|&amp;]]\n\n[[foo|Caption with &amp; entity]]",
+//				"[[/foo]]\n\n[[/foo/]]\n\n[[/foo bar]]\n\n[[/foo bar/]]",
+//				"[[RTE_test_page/foo|foo]]\n\n[[/foo/]]\n\n[[RTE_test_page/foo|bar]]\n\n[[RTE_test_page/foo]]",
+//				"<div>\n\n\n123\n</div>",
+//				"<div>\n<ul>\n<li>foo</li></ul>\n</div>",
+//				"<div><div><span>foo</span></div>\n\n<!-- bar -->\n</div>",
+//				"<p style=\"text-align: center; height: 3em;\">&#160;</p>",
+//				"[[Media:Wiki.png]]\n\n[[File:Wiki.png]]\n\n[[Media:Foo.png]]",
+//				"{|\n|  foo ||    || bar  ||\n|}",
+
 		};
 	}
 
