@@ -39,6 +39,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
@@ -186,6 +187,13 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL + URLsContent.specialCreateBlogPage);
 		return new SpecialCreatePagePageObject(driver);
 	}
+
+	public ForumPageObject openForumMainPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialForum);
+		PageObjectLogging.log("openForumPage", "forum page opened", true);
+		return new ForumPageObject(driver);
+	}
+
 
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
