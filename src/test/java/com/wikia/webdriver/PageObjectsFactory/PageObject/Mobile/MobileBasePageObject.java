@@ -24,14 +24,6 @@ public class MobileBasePageObject extends BasePageObject {
 		driver.manage().window().setSize(new Dimension(640, 960));
 	}
 
-	private String span = "span";
-	private String title = "title";
-	private String value = "value";
-	private String block = "block";
-	private String none = "none";
-	private String display = "display";
-	private String articleComments = "wiki/Article_comments";
-
 	// UI Mapping
 	@FindBy(css = ".tgl.lgdout")
 	private WebElement loginDropDownTrigger;
@@ -163,7 +155,7 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public MobileArticlePageObject openCommentsWithPagination(String wikiURL) {
-		getUrl(wikiURL + articleComments);
+		getUrl(wikiURL + URLsContent.articleComments);
 		return new MobileArticlePageObject(driver);
 	}
 
@@ -222,9 +214,9 @@ public class MobileBasePageObject extends BasePageObject {
 
 	public void selectPlusFromSuggestions(int n){
 		waitForElementByElement(addSuggestionButton.get(n));
-		String text = searchSuggestion.get(n).findElement(By.cssSelector(span)).getAttribute(title);
+		String text = searchSuggestion.get(n).findElement(By.cssSelector("span")).getAttribute("title");
 		addSuggestionButton.get(n).click();
-		Assertion.assertEquals(text, searchField.getAttribute(value));
+		Assertion.assertEquals(text, searchField.getAttribute("value"));
 	}
 
 	public long getPosition()
@@ -238,11 +230,11 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void verifyCurtainOpened(){
-		Assertion.assertEquals(block, curtain.getCssValue(display));
+		Assertion.assertEquals("block", curtain.getCssValue("display"));
 	}
 
 	public void verifyCurtainClosed(){
-		Assertion.assertEquals(none, curtain.getCssValue(display));
+		Assertion.assertEquals("none", curtain.getCssValue("display"));
 	}
 
 	public void logOutMobile(String wikiURL){
