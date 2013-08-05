@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,6 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	}
 
 	// UI Mapping
-	private String categoryPmg = "wiki/Category:PMG";
 	@FindBy(css = "#expAll:not(.exp)")
 	private WebElement showAllButton;
 	@FindBy(css = "#expAll.exp")
@@ -37,7 +37,7 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	private List<WebElement> articleListWithPagination;
 
 	public MobileArticlePageObject openCategory(String wikiURL){
-		getUrl(wikiURL + categoryPmg);
+		getUrl(wikiURL + URLsContent.categoryPmg);
 		waitForElementByElement(showAllButton);
 		PageObjectLogging.log("openCategory", "category page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
@@ -78,6 +78,7 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	}
 
 	/*
+	 *  @llukaszj
 	 *  this method open list which has more than 25 articles
 	 */
 	public void openArticlesWithPagination(){
@@ -105,6 +106,7 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	}
 
 	/*
+	 *  @llukaszj
 	 *  this method check amount of results on page, more/previous buttons are displaying correctly
 	 *  and articles are switching correctly
 	 */
