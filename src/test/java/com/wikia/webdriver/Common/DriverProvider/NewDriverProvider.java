@@ -93,23 +93,25 @@ public class NewDriverProvider {
 		}
 
 		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
-		if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
-			File homePath = new File(System.getenv("HOME") + File.separator);
-			File mozillaPath = new File(homePath + File.separator + ".mozilla");
-			if (mozillaPath.exists()) {
-				try {
-					File.createTempFile("webdriver", UUID.randomUUID().toString(), mozillaPath);
-				} catch (IOException ex) {
-					throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
-				}
-			} else {
-				try {
-					File.createTempFile("webdriver", UUID.randomUUID().toString(), homePath);
-				} catch (IOException ex) {
-					throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
-				}
-			}
-		}
+		 if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
+                        File homePath = new File(System.getenv("HOME") + File.separator);
+                        File mozillaPath = new File(homePath + File.separator + ".mozilla");
+                        File tmpFile;
+                        if (mozillaPath.exists()) {
+                                try {
+                                        tmpFile = File.createTempFile("webdriver", null, mozillaPath);
+                                } catch (IOException ex) {
+                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
+                                }
+                        } else {
+                                try {
+                                        tmpFile = File.createTempFile("webdriver", null, homePath);
+                                } catch (IOException ex) {
+                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
+                                }
+                        }
+                        tmpFile.delete();
+                }
 
 		//If browserName contains CONSOLE activate JSErrorConsole
 		if (browserName.contains("CONSOLE")) {
