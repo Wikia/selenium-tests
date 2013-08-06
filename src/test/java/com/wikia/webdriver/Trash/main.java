@@ -1,28 +1,12 @@
 package com.wikia.webdriver.Trash;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.StringWriter;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.googlecode.jatl.Html;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 
 
@@ -31,13 +15,13 @@ public class main extends TestTemplate{
 
 	/**
 	 * @param args
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
+	 * @throws IOException
+	 * @throws ClientProtocolException
 	 */
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 //		Car mercedes = new Car();
 ////		Car bmw = new Car();
-////		
+////
 ////		mercedes.setNumberOfDoors(5);
 ////		mercedes.getNumberOfDoors();
 ////		mercedes.setNumberOfWheels(4);
@@ -46,49 +30,49 @@ public class main extends TestTemplate{
 ////		mercedes.getNumberOfWindows();
 ////		mercedes.driveForward();
 ////		mercedes.driveBackward();
-////		
-////		
+////
+////
 ////		bmw.setNumberOfDoors(3);
 ////		bmw.getNumberOfDoors();
 //
 //		mercedes.ifelse(0);
-//		
+//
 //		Properties.setProperties();
-//		
+//
 //		DefaultHttpClient httpclient = new DefaultHttpClient();
-//		
+//
 //		HttpPost httpPost = new HttpPost("http://mediawiki119.wikia.com/api.php");
 //		List <NameValuePair> nvps = new ArrayList<NameValuePair>();
-//		
+//
 //		nvps.add(new BasicNameValuePair("action", "login"));
 //		nvps.add(new BasicNameValuePair("format", "xml"));
 //		nvps.add(new BasicNameValuePair("lgname", Properties.userName));
 //		nvps.add(new BasicNameValuePair("lgpassword", Properties.password));
-//		
+//
 //		httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-//		
+//
 //		HttpResponse response = httpclient.execute(httpPost);
 //        HttpEntity entity = response.getEntity();
 //        String xmlResponse = EntityUtils.toString(entity);
 //        String[] xmlResponseArr = xmlResponse.split("\"");
 //        String token = xmlResponseArr[5];
-//        
-//   
+//
+//
 //        List <NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-//        
+//
 //        nvps2.add(new BasicNameValuePair("action", "login"));
 //		nvps2.add(new BasicNameValuePair("format", "xml"));
 //		nvps2.add(new BasicNameValuePair("lgname", Properties.userName));
 //		nvps2.add(new BasicNameValuePair("lgpassword", Properties.password));
 //		nvps2.add(new BasicNameValuePair("lgtoken", token));
-//		
+//
 //		httpPost.setEntity(new UrlEncodedFormEntity(nvps2, HTTP.UTF_8));
-//		
+//
 //		response = httpclient.execute(httpPost);
 //        entity = response.getEntity();
 //        xmlResponse = EntityUtils.toString(entity);
 //        xmlResponseArr = xmlResponse.split("\"");
-//        
+//
 //        File file = new File("."+File.separator+
 //				"src"+File.separator+
 //				"test"+File.separator+
@@ -98,30 +82,130 @@ public class main extends TestTemplate{
 //			System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 //		WebDriver d = new ChromeDriver();
 //        d.get("http://mediawiki119.wikia.com/wiki/");
-//        
+//
 //        System.out.println(xmlResponseArr[13]);
 //        System.out.println(xmlResponseArr[7]);
 //        System.out.println(xmlResponseArr[5]);
 //        System.out.println(xmlResponseArr[9]);
-//        
+//
 //        Cookie c1 = new Cookie(xmlResponseArr[11]+"_session", xmlResponseArr[13]);
 //        Cookie c2 = new Cookie(xmlResponseArr[11]+"UserName", xmlResponseArr[7]);
 //        Cookie c3 = new Cookie(xmlResponseArr[11]+"UserID", xmlResponseArr[5]);
 //        Cookie c4 = new Cookie(xmlResponseArr[11]+"Token", xmlResponseArr[9]);
-////        
-//        
+////
+//
 //        d.manage().addCookie(c1);
 //        d.manage().addCookie(c2);
 //        d.manage().addCookie(c3);
 //        d.manage().addCookie(c4);
-//        
-     
-        
+//
 
-		
+	//head
+		String httpEquiv = "content type";
+		String content = "text/html";
+		String charset = "UTF-8";
+	//styles
+		String tableStyle = "table {margin:0 auto;}";
+		String tdStyle = "td {border-top: 1px solid grey;}";
+		String tdFirstChildStyle = "td:first-child {width:200px;}";
+		String tdSecondChilgStyle = "td:nth-child(2) {width:660px;}";
+		String tdThirdChildStyle = "td:nth-child(3) {width:100px;}";
+		String trSucces= "tr.success {color:black;background-color:#CCFFCC;}";
+		String trError = "tr.error {color:black;background-color:#FFCCCC;}";
+		String trStep = "tr.step {color:white;background:grey}";
+		String nl = "\n";
+	//scripts
+		//jquery
+		String scriptType = "text/javascript";
+		String jQyeryScriptSource = "http://code.jquery.com/jquery-1.8.2.min.js";
+		//custom wikia qa scripts
+		String wikiaScriptSource = "./src/test/resources/script.js";
+
+	//test information paragraphs
+		String pDate = "asd";
+		String pBrowser = "sdf";
+		String pOS = "dfg";
+		String pScreenRes = "fgh";
+		String pTestEnv = "ghj";
+		String pTestEnv2 = "hjk";
+		String pTestVersion = "jkl";
+	//buttons
+		//hide low level action button
+		String hllButtonID = "hideLowLevel";
+		String hllButtonText = "hide low level actions";
+		//show low level action button
+		String sllButtonID = "showLowLevel";
+		String sllButtonText = "show low level actions";
+	//onStart table
+		String testClassName = "asd";
+		String testName = "sdf";
+
+
+
+		//test information paragraphs
+
+//			"<p>Date: " + dateFormat.format(date) + " UTC</p>" +
+//			"<p>Browser: " + Global.BROWSER + "</p>" +
+//			"<p>OS: " + System.getProperty("os.name") + "</p>" +
+//			"<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>" +
+//			"<p>Testing environment: "+ Global.DOMAIN+"</p>" +
+//			"<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>" +
+//			"<p>Tested version: "+ Global.WIKI_VERSION+"</p>" +
+
+
+// onStart
+		StringWriter writer = new StringWriter();
+		Html builder = new Html(writer);
+		builder.html();
+			builder.style().text(nl+tableStyle+nl+tdFirstChildStyle+nl+tdSecondChilgStyle+nl+tdThirdChildStyle+nl+trSucces+nl+trError+nl+trStep).end();
+			builder.head();
+				builder.meta().httpEquiv(httpEquiv).content(content).charset(charset);
+				//TODO: check if you can extract below style to previous styles
+				builder.style().text(nl+tdStyle).end();
+			builder.end();
+			builder.body();
+				builder.script().type(scriptType).src(jQyeryScriptSource).end();
+				builder.p().text(pDate).end();
+				builder.p().text(pBrowser).end();
+				builder.p().text(pOS).end();
+				builder.p().text(pScreenRes).end();
+				builder.p().text(pTestEnv).end();
+				builder.p().text(pTestEnv2).end();
+				builder.p().text(pTestVersion).end();
+				builder.div().id("toc").end();
+				builder.button().id(hllButtonID).text(hllButtonText).end();
+				builder.button().id(sllButtonID).text(sllButtonText).end();
+				builder.script().src(wikiaScriptSource).end();
+// onTestStart
+				builder.h1().text("Class: ");
+					builder.em().text(testClassName+"." +testName).end();
+				builder.end();
+				builder.tr().classAttr("step");
+					builder.td().text("&nbsp").end();
+					builder.td().h1().em().text(testName).end().end().end();
+					builder.td().br().text("&nbsp").end(); //TODO: sprawdz czy dziala &nbsp zamiast &nbsp; Jesli tak wywal nbsp do zmiennej
+				builder.end();
+// log with driver
+
+// onTestSuccess
+				builder.tr().classAttr("step");
+					builder.td().text("&nbsp").end();
+					builder.td().text("STOP LOGGING METHOD");
+						builder.div().style("text-align:center").end();
+				builder.end();
+
+		builder.div().title("first");
+		builder.span().id("hello").end();
+		builder.div().title("second");
+		builder.text("Second");
+		builder.start("custom1").attr("data", "value").end();
+		builder.start("custom2").text("hello").end();
+		builder.end();
+		builder.end();
+		System.out.println(writer.getBuffer().toString());
 //		api.php ? action=login & lgname=Bob & lgpassword=secret
 		Assertion.assertStringContains("asddddfg", "dddda");
 		Assertion.assertStringContains("asddddfg", "dddd");
-	}	
+	}
 
 }

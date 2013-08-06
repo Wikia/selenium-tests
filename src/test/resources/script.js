@@ -1,0 +1,62 @@
+function createToc()
+{
+	var h1 = $('td h1');
+	var l = h1.length;
+	var toc = "<ul>";
+	for (var i=0; i<l; i++){
+		var ident = "toc"+i;
+		var tr = h1[i].parentNode.parentNode;
+		h1[i].setAttribute('id', ident);
+		if (tr.style.backgroundColor == "red")
+		{
+			var temp = "<li><a style=\"color:red;\" href='#" + ident + "' >" + h1[i].textContent + "</a></li>";
+		}
+		else
+		{
+			var temp = "<li><a href='#" + ident + "' >" + h1[i].textContent + "</a></li>";
+		}
+		toc += temp;
+	}
+	toc+="</ul>";
+	var tocWrapper = document.getElementById('toc');
+	console.log(toc);
+	tocWrapper.innerHTML += toc;
+}
+function markMethodAsFailed() {
+	var a = $('table tr.error').parent();
+	var l = a.length;
+	for (var i=0; i<l; i++)
+	{
+		var b = a[i].children[0];
+		b.style.backgroundColor = "red";
+	}
+}
+window.addEventListener("load", markMethodAsFailed);
+window.addEventListener("load", createToc);
+
+(function (ctx) {
+    var hideButton, showButton, document;
+    document = ctx.document;
+    hideButton = document.getElementById('hideLowLevel');
+    showButton = document.getElementById('showLowLevel');
+
+    function manageActions(direction) {
+        // get all elements with class lowLevelAction
+        var elements = document.getElementsByClassName("lowLevelAction");
+        for (var i = 0; i < elements.length; i++) {
+            if (direction === 'hide') {
+                //hide lowLevelActions
+                elements[i].style.display = "none";
+            } else if (direction === 'show') {
+                //show lowLevelActions
+                elements[i].style.display = "";
+            }
+        }
+    }
+    hideButton.addEventListener('click', function () {
+        manageActions('hide');
+    }, false);
+    showButton.addEventListener('click', function () {
+        manageActions('show');
+    }, false);
+}(this));
