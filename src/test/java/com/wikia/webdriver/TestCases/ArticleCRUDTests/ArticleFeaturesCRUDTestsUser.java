@@ -34,7 +34,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -71,7 +71,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_002", "ArticleFeaturesCRUDUser"})
 	public void ArticleFeaturesCRUDUser_002_addDeleteGallery() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -97,7 +97,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_003", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_003_addModifySlideshow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -128,7 +128,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_004", "ArticleFeaturesCRUDUser"})
 	public void ArticleFeaturesCRUDUser_004_addDeleteSlideshow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -151,7 +151,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_005", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_005_addModifySlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -182,7 +182,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_006", "ArticleFeaturesCRUDUser"})
 	public void ArticleFeaturesCRUDUser_006_addDeleteSlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -205,7 +205,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_007", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_007_addModifyVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -228,7 +228,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_008", "ArticleFeaturesCRUDUser"})
 	public void ArticleFeaturesCRUDUser_008_addDeleteVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -250,7 +250,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_009", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_009_addingModifyImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
@@ -272,7 +272,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(groups={"ArticleFeaturesCRUDUser_010", "ArticleFeaturesCRUDUser"})
 	public void ArticleFeaturesCRUDUser_010_addDeleteImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();

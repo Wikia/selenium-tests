@@ -30,7 +30,7 @@ public class BlogTests extends NewTestTemplate{
 	 * 5. Move existing blog post
 	 */
 
-	@Test(groups = { "BlogTests_001", "BlogTests", "Blog"})
+	@Test(groups = { "BlogTests_001", "BlogTests"})
 	public void BlogTests_001_addFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -49,7 +49,7 @@ public class BlogTests extends NewTestTemplate{
 	@Test(
 			dataProviderClass = ArticleDataProvider.class,
 			dataProvider = "articleTitles",
-			groups = { "BlogTests_002", "BlogTests", "Blog"})
+			groups = { "BlogTests_002", "BlogTests"})
 	public void BlogTests_002_addByUrl(String blogTitle) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -63,7 +63,7 @@ public class BlogTests extends NewTestTemplate{
 		blogPage.verifyContent(blogContent);
 	}
 
-	@Test(groups = { "BlogTests_003", "BlogTests", "Blog"})
+	@Test(groups = { "BlogTests_003", "BlogTests"})
 	public void BlogTests_003_editFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -79,7 +79,7 @@ public class BlogTests extends NewTestTemplate{
 		blogPage.verifyContent(blogContent);
 	}
 
-	@Test(groups = { "BlogTests_004", "BlogTests", "Blog"})
+	@Test(groups = { "BlogTests_004", "BlogTests"})
 	public void BlogTests_004_deleteUndelete() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -96,7 +96,7 @@ public class BlogTests extends NewTestTemplate{
 		blogPage.verifyNotificationMessage();
 	}
 
-	@Test(groups = { "BlogTests_005", "BlogTests", "Blog"})
+	@Test(groups = { "BlogTests_005", "BlogTests"})
 	public void BlogTests_005_move() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
