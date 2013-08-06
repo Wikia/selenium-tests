@@ -113,7 +113,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	private static void log(String command, String description, boolean success,
-			boolean ifLowLevel) {
+			boolean ifLowLevel) {//jtal DONE
 		String className = success ? "success" : "error";
 		StringBuilder builder = new StringBuilder();
 		if (ifLowLevel) {
@@ -130,7 +130,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	public static void log(String command, String description, boolean success,
-			WebDriver driver) {
+			WebDriver driver) { //jtal DONE
 		imageCounter += 1;
 		CommonUtils.captureScreenshot(screenPath + imageCounter, driver);
 		CommonUtils.appendTextToFile(screenPath + imageCounter + ".html",
@@ -149,7 +149,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	@Override
-	public void onTestSuccess(ITestResult result) {
+	public void onTestSuccess(ITestResult result) { //jatl DONE
 		StringBuilder builder = new StringBuilder();
 		builder.append(
 				"<tr class=\"step\">" +
@@ -163,7 +163,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		driver = DriverProvider.getWebDriver();
+		driver = DriverProvider.getWebDriver(); //jatl DONE
 		if (driver == null){
 			driver = NewDriverProvider.getWebDriver();
 		}
@@ -197,7 +197,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	@Override
-	public void afterChangeValueOf(WebElement element, WebDriver driver) {
+	public void afterChangeValueOf(WebElement element, WebDriver driver) { //jatl DONE
 		StringBuilder builder = new StringBuilder();
 		builder.append("<tr class=\"success lowLevelAction\"><td>ChangeValueOfField</td><td>" + lastFindBy
 				+ "</td><td> <br/> &nbsp;</td></tr>");
@@ -205,7 +205,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	@Override
-	public void afterClickOn(WebElement element, WebDriver driver) {
+	public void afterClickOn(WebElement element, WebDriver driver) { //jtal DONE
 		StringBuilder builder = new StringBuilder();
 		builder.append("<tr class=\"success lowLevelAction\"><td>click</td><td>" + lastFindBy
 				+ "</td><td> <br/> &nbsp;</td></tr>");
@@ -213,7 +213,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	@Override
-	public void afterNavigateTo(String url, WebDriver driver) {
+	public void afterNavigateTo(String url, WebDriver driver) { //jtal DONE
 		StringBuilder builder = new StringBuilder();
 		builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
 				+ "</td><td> <br/> &nbsp;</td></tr>");
@@ -221,7 +221,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		logJSError(driver);
 	}
 
-	private static void logJSError(WebDriver driver){
+	private static void logJSError(WebDriver driver){ //jtal DONE
 		if (Global.JS_ERROR_ENABLED){
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");

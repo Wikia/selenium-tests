@@ -180,28 +180,77 @@ public class main extends TestTemplate{
 				builder.h1().text("Class: ");
 					builder.em().text(testClassName+"." +testName).end();
 				builder.end();
+				builder.table(); //open table (will not be closed till onTestSucces)
 				builder.tr().classAttr("step");
 					builder.td().text("&nbsp").end();
 					builder.td().h1().em().text(testName).end().end().end();
 					builder.td().br().text("&nbsp").end(); //TODO: sprawdz czy dziala &nbsp zamiast &nbsp; Jesli tak wywal nbsp do zmiennej
 				builder.end();
-// log with driver
-
+// log without driver (private)
+				String className = "";
+				builder.tr().classAttr(className+"lowLevelAction");
+					builder.td().text("description").end();
+					builder.td().text("command").end();
+					builder.td().br().text("&nbsp").end();
+				builder.end();
+				//TODO: tego ifa nie opieraj na dwoch blokach z pelnym budowaniem, tylko zmodyfikuj zmienna opdowiednio dla lowLewelAction
+// log with driver (private)
+				builder.tr().classAttr(className+"lowLevelAction");
+					builder.td().text("description").end();
+					builder.td().text("command").end();
+					builder.td();
+						builder.br().a().href("screenshots/screenshot"+"imageCounter"+".png").text("screenshot").end();
+						builder.br().a().href("screenshots/screenshot"+"imageCounter"+".html").text("HTML Source").end();
+					builder.end();
+				builder.end();
 // onTestSuccess
 				builder.tr().classAttr("step");
 					builder.td().text("&nbsp").end();
 					builder.td().text("STOP LOGGING METHOD");
-						builder.div().style("text-align:center").end();
+						builder.div().style("text-align:center");
+							builder.a().style("color:blue");
+								builder.b().text("BACK TO MENU").end();
+							builder.end();
+						builder.end();
+					builder.end();
+					builder.td().br().text("&nbsp").end();
+				builder.end();
+				builder.end(); //close table
+// onTestFailure
+				builder.tr().classAttr("error");
+					builder.td().text("error").end();
+					builder.td().text("exception").end();
+					builder.td();
+						builder.br().a().href("screenshots/screenshot"+"imageCounter"+".png").text("screenshot").end();
+						builder.br().a().href("screenshots/screenshot"+"imageCounter"+".html").text("HTML Source").end();
+						builder.end();
+					builder.end();
+				builder.end();
+// afterChangeValueOf
+				builder.tr().classAttr("class name + loweLevel");
+					builder.td().text("ChangeValueOfField").end();
+					builder.td().text("lastfindby").end();
+					builder.td().br().text("&nbsp").end();
+				builder.end();
+// afterClickOn
+				builder.tr().classAttr("class name + loweLevel");
+					builder.td().text("click").end();
+					builder.td().text("lastfindby").end();
+					builder.td().br().text("&nbsp").end();
+				builder.end();
+// afterNavigateTo
+				builder.tr().classAttr("class name + loweLevel");
+					builder.td().text("Navigate to").end();
+					builder.td().text("url").end();
+					builder.td().br().text("&nbsp").end();
+				builder.end();
+// logJSError
+				builder.tr().classAttr("error");
+					builder.td().text("click").end();
+					builder.td().text("VarError").end();
+					builder.td().br().text("&nbsp").end();
 				builder.end();
 
-		builder.div().title("first");
-		builder.span().id("hello").end();
-		builder.div().title("second");
-		builder.text("Second");
-		builder.start("custom1").attr("data", "value").end();
-		builder.start("custom2").text("hello").end();
-		builder.end();
-		builder.end();
 		System.out.println(writer.getBuffer().toString());
 //		api.php ? action=login & lgname=Bob & lgpassword=secret
 		Assertion.assertStringContains("asddddfg", "dddda");
