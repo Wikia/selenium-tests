@@ -153,7 +153,7 @@ public class main extends TestTemplate{
 //			"<p>Tested version: "+ Global.WIKI_VERSION+"</p>" +
 
 
-// onStart
+// onStart  | done
 		StringWriter writer = new StringWriter();
 		Html builder = new Html(writer);
 		builder.html();
@@ -176,7 +176,7 @@ public class main extends TestTemplate{
 				builder.button().id(hllButtonID).text(hllButtonText).end();
 				builder.button().id(sllButtonID).text(sllButtonText).end();
 				builder.script().src(wikiaScriptSource).end();
-// onTestStart
+// onTestStart | done
 				builder.h1().text("Class: ");
 					builder.em().text(testClassName+"." +testName).end();
 				builder.end();
@@ -186,14 +186,13 @@ public class main extends TestTemplate{
 					builder.td().h1().em().text(testName).end().end().end();
 					builder.td().br().text("&nbsp").end(); //TODO: sprawdz czy dziala &nbsp zamiast &nbsp; Jesli tak wywal nbsp do zmiennej
 				builder.end();
-// log without driver (private)
+// log without driver (private) | done
 				String className = "";
 				builder.tr().classAttr(className+"lowLevelAction");
 					builder.td().text("description").end();
 					builder.td().text("command").end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
-				//TODO: tego ifa nie opieraj na dwoch blokach z pelnym budowaniem, tylko zmodyfikuj zmienna opdowiednio dla lowLewelAction
 // log with driver (private)
 				builder.tr().classAttr(className+"lowLevelAction");
 					builder.td().text("description").end();
@@ -215,7 +214,7 @@ public class main extends TestTemplate{
 					builder.end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
-				builder.end(); //close table
+				builder.end(); // end </table>
 // onTestFailure
 				builder.tr().classAttr("error");
 					builder.td().text("error").end();
@@ -250,6 +249,9 @@ public class main extends TestTemplate{
 					builder.td().text("VarError").end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
+//onFinish
+			builder.end();  // end </body>
+		builder.end(); // end </html>
 
 		System.out.println(writer.getBuffer().toString());
 //		api.php ? action=login & lgname=Bob & lgpassword=secret

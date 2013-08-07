@@ -3,14 +3,12 @@ package com.wikia.webdriver.Common.Logging;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +19,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.googlecode.jatl.Html;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
@@ -30,6 +29,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	private By lastFindBy;
 	private WebDriver driver;
+	private StringWriter htmlWriter;
+	private static Html builder;
 
 	private static long imageCounter;
 	private static String reportPath = "." + File.separator + "logs"
@@ -39,6 +40,46 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	private static String screenPath = screenDirPath + "screenshot";
 	private static String logFileName = "log.html";
 	private static String logPath = reportPath + logFileName;
+
+//head
+	String httpEquiv = "content type";
+	String content = "text/html";
+	String charset = "UTF-8";
+//styles
+	String tableStyle = "table {margin:0 auto;}";
+	String tdStyle = "td {border-top: 1px solid grey;}";
+	String tdFirstChildStyle = "td:first-child {width:200px;}";
+	String tdSecondChilgStyle = "td:nth-child(2) {width:660px;}";
+	String tdThirdChildStyle = "td:nth-child(3) {width:100px;}";
+	String trSucces= "tr.success {color:black;background-color:#CCFFCC;}";
+	String trError = "tr.error {color:black;background-color:#FFCCCC;}";
+	String trStep = "tr.step {color:white;background:grey}";
+	String nl = "\n";
+//scripts
+	//jquery
+	String scriptType = "text/javascript";
+	String jQyeryScriptSource = "http://code.jquery.com/jquery-1.8.2.min.js";
+	//custom wikia qa scripts
+	String wikiaScriptSource = "./src/test/resources/script.js";
+	//test information paragraphs
+	String pDate = "asd";
+	String pBrowser = "sdf";
+	String pOS = "dfg";
+	String pScreenRes = "fgh";
+	String pTestEnv = "ghj";
+	String pTestEnv2 = "hjk";
+	String pTestVersion = "jkl";
+//buttons
+	//hide low level action button
+	String hllButtonID = "hideLowLevel";
+	String hllButtonText = "hide low level actions";
+	//show low level action button
+	String sllButtonID = "showLowLevel";
+	String sllButtonText = "show low level actions";
+//onStart table
+	String testClassName = "asd";
+	String testName = "sdf";
+
 
 	public static void log(String command, String description, boolean success) {
 		log(command, description, success, false);
@@ -59,7 +100,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	@Override
-	public void onStart(ITestContext context) { //jatl DONE
+	public void onStart(ITestContext context) {
+		//TODO: wywal te ustawianie zmiennych do osobnej metody albo gdzies
 		CommonUtils.createDirectory(screenDirPath);
 		imageCounter = 0;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -67,65 +109,83 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension dim = toolkit.getScreenSize();
 
-		StringBuilder builder = new StringBuilder();
-		builder.append(
-				"<html><style>" +
-				"table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) " +
-				"{width:100px;}tr.success{color:black;background-color:#CCFFCC;}" +
-				"tr.error{color:black;background-color:#FFCCCC;}" +
-				"tr.step{color:white;background:grey}" +
-				"</style><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">" +
-				"<style>td { border-top: 1px solid grey; } </style></head><body>" +
-				"<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-1.8.2.min.js\"></script>" +
-				"<p>Date: " + dateFormat.format(date) + " UTC</p>" +
-				"<p>Browser: " + Global.BROWSER + "</p>" +
-				"<p>OS: " + System.getProperty("os.name") + "</p>" +
-				"<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>" +
-				"<p>Testing environment: "+ Global.DOMAIN+"</p>" +
-				"<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>" +
-				"<p>Tested version: "+ Global.WIKI_VERSION+"</p>" +
-				"<div id='toc'></div>"
-				);
-		CommonUtils.appendTextToFile(logPath, builder.toString());
-		appendShowHideButtons();
-		try{
-			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
-			String content = IOUtils.toString(input);
-			CommonUtils.appendTextToFile(logPath, content);
-		}
-		catch(IOException e){
-			System.out.println("no script.txt file available");
-		}
+		pDate = "Date: " + dateFormat.format(date) + " UTC";
+		pBrowser = "Browser: " + Global.BROWSER;
+		pOS = "OS: " + System.getProperty("os.name");
+		pScreenRes = "Screen resolution: " + dim.width + "x"+dim.height;
+		pTestEnv = "Testing environment: "+ Global.DOMAIN;
+		pTestEnv2 = "Testing environment: "+ Global.LIVE_DOMAIN;
+		pTestVersion = "Tested version: "+ Global.WIKI_VERSION;
+
+		htmlWriter = new StringWriter();
+		this.builder = new Html(htmlWriter);
+
+		builder.html();
+			builder.style().text(nl+tableStyle+nl+tdFirstChildStyle+nl+tdSecondChilgStyle+nl+tdThirdChildStyle+nl+trSucces+nl+trError+nl+trStep).end();
+			builder.head();
+				builder.meta().httpEquiv(httpEquiv).content(content).charset(charset);
+				//TODO: check if you can extract below style to previous styles
+				builder.style().text(nl+tdStyle).end();
+			builder.end();
+			builder.body();
+				builder.script().type(scriptType).src(jQyeryScriptSource).end();
+				builder.p().text(pDate).end();
+				builder.p().text(pBrowser).end();
+				builder.p().text(pOS).end();
+				builder.p().text(pScreenRes).end();
+				builder.p().text(pTestEnv).end();
+				builder.p().text(pTestEnv2).end();
+				builder.p().text(pTestVersion).end();
+				builder.div().id("toc").end();
+				builder.button().id(hllButtonID).text(hllButtonText).end();
+				builder.button().id(sllButtonID).text(sllButtonText).end();
+				builder.script().src(wikiaScriptSource).end();
+//		CommonUtils.appendTextToFile(logPath, builder.toString());
+//		try{
+//			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
+//			String content = IOUtils.toString(input);
+//			CommonUtils.appendTextToFile(logPath, content);
+//		}
+//		catch(IOException e){
+//			System.out.println("no script.txt file available");
+//		}
 	}
 
 	@Override
-	public void onTestStart(ITestResult result) { //jtal DONE
-		StringBuilder builder = new StringBuilder();
-		String testName = result.getName().toString();
-		String className = result.getTestClass().getName().toString();
-		builder.append(
-				"<table>" +
-				"<h1>Class: <em>" +className+ "." + testName + " </em></h1>" +
-				"<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName + "</em></h1></td><td> <br/> &nbsp;</td></tr>"
-				);
-		CommonUtils.appendTextToFile(logPath, builder.toString());
-		System.out.println(className + " " + testName);
+	public void onTestStart(ITestResult result) {
+		this.testName = result.getName().toString();
+		this.testClassName = result.getTestClass().getName().toString();
+
+		builder.h1().text("Class: ");
+			builder.em().text(testClassName+"." +testName).end();
+		builder.end();
+		builder.table(); //open table (will not be closed till onTestSucces)
+		builder.tr().classAttr("step");
+			builder.td().text("&nbsp").end();
+			builder.td().h1().em().text(testName).end().end().end();
+			builder.td().br().text("&nbsp").end(); //TODO: sprawdz czy dziala &nbsp zamiast &nbsp; Jesli tak wywal nbsp do zmiennej
+		builder.end();
+
+		System.out.println(testClassName + " " + testName);
 	}
 
 	private static void log(String command, String description, boolean success,
-			boolean ifLowLevel) {//jtal DONE
+			boolean ifLowLevel) {
+
+
 		String className = success ? "success" : "error";
-		StringBuilder builder = new StringBuilder();
+
 		if (ifLowLevel) {
-			builder.append("<tr class=\"" + className + " lowLevelAction"
-					+ "\"><td>" + command + "</td><td>" + description
-					+ "</td><td> <br/> &nbsp;</td></tr>");
-		} else {
-			builder.append("<tr class=\"" + className + "\"><td>" + command
-					+ "</td><td>" + description
-					+ "</td><td> <br/> &nbsp;</td></tr>");
+			className = className.concat(" lowLevelAction");
 		}
-		CommonUtils.appendTextToFile(logPath, builder.toString());
+
+		builder.tr().classAttr(className);
+			builder.td().text(description).end();
+			builder.td().text(command).end();
+			builder.td().br().text("&nbsp").end();
+		builder.end();
+
+//		CommonUtils.appendTextToFile(logPath, builder.toString());
 		logJSError(DriverProvider.getWebDriver());
 	}
 
@@ -251,7 +311,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	@Override
-	public void onFinish(ITestContext context) {
+	public void onFinish(ITestContext context) { //jatl DONE
 		CommonUtils.appendTextToFile(logPath, "</body></html>");
 	}
 }
