@@ -11,7 +11,7 @@ public class ModalTests extends NewTestTemplate{
 
 	// next image
 	@Test(groups={"modalTest_001", "mobile"})
-	public void modalTest_001(){
+	public void modalTest_001_nextImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -24,7 +24,7 @@ public class ModalTests extends NewTestTemplate{
 
 	// previous image
 	@Test(groups={"modalTest_002", "mobile"})
-	public void modalTest_002(){
+	public void modalTest_002_previousImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -37,7 +37,7 @@ public class ModalTests extends NewTestTemplate{
 
 	//test top bar visible/hidden
 	@Test(groups={"modalTest_003", "mobile"})
-	public void modalTest_003(){
+	public void modalTest_003_modalTopbar(){
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();

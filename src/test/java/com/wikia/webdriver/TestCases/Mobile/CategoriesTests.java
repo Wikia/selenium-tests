@@ -7,7 +7,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPa
 public class CategoriesTests extends NewTestTemplate {
 
 	@Test(groups={"categoryTest_001", "categoryTest", "mobile"})
-	public void categoryTest_001(){
+	public void categoryTest_001() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
 		mobile.verifyShowAll();
@@ -21,18 +21,29 @@ public class CategoriesTests extends NewTestTemplate {
 	}
 
 	@Test(groups={"categoryTest_002", "categoryTest", "mobile"})
-	public void categoryTest_002_checkCategoryExhibitionButtons(){
+	public void categoryTest_002_checkCategoryExhibitionButtons() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
 		mobile.verifyCategoryExhibition();
 	}
 
 	@Test(groups={"categoryTest_003", "categoryTest", "mobile"})
-	public void categoryTest_003_checkPagination(){
+	public void categoryTest_003_checkPagination() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
-		mobile.openArticlesWithPagination();
-		mobile.verifyPagination();
+		mobile.openArticle(2);
+		mobile.verifyArticlesCount(25);
+		String firstArticle = mobile.getFirstArticleName();
+		String lastArticle = mobile.getLastArticleName();
+		mobile.showNextArticles();
+		String firstArticle2 = mobile.getFirstArticleName();
+		mobile.verifyArticlesNotEquals(firstArticle, firstArticle2);
+		mobile.showPreviousArticles();
+		mobile.verifyArticlesCount(25);
+		String firstArticle3 = mobile.getFirstArticleName();
+		String lastArticle3 = mobile.getLastArticleName();
+		mobile.verifyArticlesEquals(firstArticle, firstArticle3);
+		mobile.verifyArticlesEquals(lastArticle, lastArticle3);
 	}
 
 }
