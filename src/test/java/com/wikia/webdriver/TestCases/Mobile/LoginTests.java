@@ -11,14 +11,13 @@ public class LoginTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups={"loginTest", "mobile"})
-	public void Login(){
+	public void Login() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
 		String url = driver.getCurrentUrl();
 		mobile.login(credentials.userName, credentials.password);
 		mobile.verifyURLcontains(url);
-		mobile.logOutMobile(wikiURL);
 	}
 
 /*	@Test(groups={"mobile", "mobile_facebook_login"})
@@ -29,6 +28,5 @@ public class LoginTests extends NewTestTemplate{
 		url = driver.getCurrentUrl();
 		mobile.loginFB(Properties.emailFB, Properties.passwordFB);
 		mobile.verifyURLcontains(url);
-		CommonFunctions.logOutMobile(driver);
 	}*/
 }

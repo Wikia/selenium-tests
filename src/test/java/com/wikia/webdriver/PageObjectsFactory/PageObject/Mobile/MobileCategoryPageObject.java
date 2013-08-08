@@ -18,7 +18,6 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	// UI Mapping
 	@FindBy(css = "#expAll:not(.exp)")
 	private WebElement showAllButton;
 	@FindBy(css = "#expAll.exp")
@@ -36,36 +35,36 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	@FindBys(@FindBy(css = ".artSec.open .wkLst>li>a"))
 	private List<WebElement> articleListWithPagination;
 
-	public MobileArticlePageObject openCategory(String wikiURL){
+	public MobileArticlePageObject openCategory(String wikiURL) {
 		getUrl(wikiURL + URLsContent.categoryPmg);
 		waitForElementByElement(showAllButton);
 		PageObjectLogging.log("openCategory", "category page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
-	public void clickShowAllButton(){
+	public void clickShowAllButton() {
 		waitForElementByElement(showAllButton);
 		showAllButton.click();
 	}
 
-	public void clickHideAllButton (){
+	public void clickHideAllButton() {
 		waitForElementByElement(hideAllButton);
 		hideAllButton.click();
 	}
 
-	public void verifyChevronOpened(){
+	public void verifyChevronOpened() {
 		for(WebElement elem:chevronList){
 			Assertion.assertEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
 
-	public void verifyChevronClosed(){
+	public void verifyChevronClosed() {
 		for(WebElement elem:chevronList){
 			Assertion.assertNotEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
 
-	public void verifyShowAll (){
+	public void verifyShowAll() {
 		waitForElementByElement(showAllButton);
 	}
 
@@ -73,59 +72,45 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		waitForElementByElement(hideAllButton);
 	}
 
-	public void verifyCategoryExhibition(){
+	public void verifyCategoryExhibition() {
 		Assertion.assertTrue(categoryExhibition.size() == 4);
 	}
 
-	/*
-	 *  @llukaszj
-	 *  this method open list which has more than 25 articles
-	 */
-	public void openArticlesWithPagination(){
-		for(int i=0; i < articleList.size(); i++) {
-			articleList.get(i).click();
-			if(loadMoreButton.isDisplayed()) {
-				PageObjectLogging.log(
-					"openArticlesWithPagination",
-					"article with pagination was opened",
-					true, driver
-				);
-				break;
-			}
-			else if(i == articleList.size()-1) {
-				PageObjectLogging.log(
-					"openArticlesWithPagination",
-					"article with pagination was not found and opened",
-					false, driver
-				);
-			}
-			else {
-				articleList.get(i).click();
-			}
-		}
+	public void openArticle(int i) {
+		articleList.get(i).click();
+		waitForElementByElement(loadMoreButton);
 	}
 
-	/*
-	 *  @llukaszj
-	 *  this method check amount of results on page, more/previous buttons are displaying correctly
-	 *  and articles are switching correctly
-	 */
-	public void verifyPagination(){
-		Assertion.assertTrue(articleListWithPagination.size() == 25);
-		String firstArticle = articleListWithPagination.get(0).getAttribute("href");
-		String lastArticle = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
+	public void showNextArticles() {
 		loadMoreButton.click();
 		waitForElementByElement(loadPreviousButton);
-		Assertion.assertTrue(articleListWithPagination.size() <= 25);
-		String firstArticle2 = articleListWithPagination.get(0).getAttribute("href");
-		Assertion.assertNotEquals(firstArticle, firstArticle2);
+	}
+
+	public void showPreviousArticles() {
 		loadPreviousButton.click();
 		waitForElementByElement(loadMoreButton);
-		Assertion.assertTrue(articleListWithPagination.size() == 25);
-		String firstArticle3 = articleListWithPagination.get(0).getAttribute("href");
-		String lastArticle3 = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
-		Assertion.assertEquals(firstArticle, firstArticle3);
-		Assertion.assertEquals(lastArticle, lastArticle3);
+	}
+
+	public void verifyArticlesCount(int count) {
+		Assertion.assertTrue(articleListWithPagination.size() == count);
+	}
+
+	public String getFirstArticleName() {
+		String firstArticle = articleListWithPagination.get(0).getAttribute("href");
+		return firstArticle;
+	}
+
+	public String getLastArticleName() {
+		String lastArticle = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
+		return lastArticle;
+	}
+
+	public void verifyArticlesEquals(String article, String article2) {
+		Assertion.assertEquals(article, article2);
+	}
+
+	public void verifyArticlesNotEquals(String article, String article2) {
+		Assertion.assertNotEquals(article, article2);
 	}
 
 }
