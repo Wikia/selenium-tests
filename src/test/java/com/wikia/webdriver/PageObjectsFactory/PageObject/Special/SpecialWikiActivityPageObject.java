@@ -16,6 +16,8 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 	private List<WebElement> editActivitiesList;
 	@FindBys(@FindBy(css="li.activity-type-new"))
 	private List<WebElement> newPageActivitiesList;
+	@FindBys(@FindBy(css="li.activity-type-categorization"))
+	private List<WebElement> categorizationActivitiesList;
 
 	public SpecialWikiActivityPageObject(WebDriver driver) {
 		super(driver);
@@ -85,6 +87,30 @@ public class SpecialWikiActivityPageObject extends SpecialPageObject {
 			PageObjectLogging.log("verifyRecentNewBlogPage",
 					"WikiActivity module didn't find recent new blog titled as: '" + blogTitle
 					+ "' that was created by user: " + userName+" and containted content: "+blogContent, false, driver);
+		}
+
+	}
+
+	/**
+	 * verifies if there is the wanted new Categorization on WikiActivity, searching through 5 recent categorizations.
+	 */
+	public void verifyRecentNewCategorization(String articleName,
+			String userName) {
+		Boolean ifPassed = false;
+		for (int i = 0; i < 4; i++) {
+			ifPassed = ifDetailsPresent(categorizationActivitiesList.get(i), articleName,
+					userName);
+			if (ifPassed) {
+				PageObjectLogging.log("verifyRecentNewCategorization",
+						"WikiActivity module found recent new Categorization on artile: '" + articleName
+								+ "' that was done by user: " + userName, true);
+				break;
+			}
+		}
+		if (!ifPassed) {
+			PageObjectLogging.log("verifyRecentNewCategorization",
+					"WikiActivity didn't find recent new Categorization on artile: '" + articleName
+								+ "' that was done by user: " + userName, false, driver);
 		}
 
 	}
