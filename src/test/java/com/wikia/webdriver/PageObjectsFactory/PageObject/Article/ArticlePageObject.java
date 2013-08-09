@@ -245,7 +245,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public String getArticleName() {
-		return articleHeader.getText();
+		String articleName = articleHeader.getText();
+		PageObjectLogging.log("getArticleName", "the name of the article is: "+articleName, true);
+		return articleName;
 	}
 
 	public RenameArticlePageObject renameArticleUsingDropdown() {
