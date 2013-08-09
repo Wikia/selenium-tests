@@ -17,7 +17,8 @@
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
-			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsAnonymous"/>
+			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesArticleTests"/>
+			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsEditMode"/>
 			<class name="com.wikia.webdriver.TestCases.Top_10_list_Tests.Top_10_list_Tests"/>
 			<class name="com.wikia.webdriver.TestCases.MessageWallTests.MessageWallTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
@@ -25,6 +26,7 @@
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.ArticleCommentTests"/>
+			<class name="com.wikia.webdriver.TestCases.Mobile.CategoriesTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.SearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>

@@ -54,7 +54,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActi
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
 
@@ -450,13 +449,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);
-	}
-
-	public WikiCategoryPageObject openCategoryPage(String category) {
-		getUrl(Global.DOMAIN + "wiki/" + "Category:" + category);
-		PageObjectLogging.log("openCategoryPage", category + " page opened",
-				true, driver);
-		return new WikiCategoryPageObject(driver);
 	}
 
 	public void verifyPermissionsErrorsPresent() {

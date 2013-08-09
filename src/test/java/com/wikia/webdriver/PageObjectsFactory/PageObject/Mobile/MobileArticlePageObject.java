@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,7 +12,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class MobileArticlePageObject extends MobileBasePageObject{
@@ -20,6 +20,9 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
+
+	private String wikiTOC = "wiki/TOC#";
+	private String modal = "#Modal";
 
 	@FindBy(css="#wkArtCom .collSec.addChev")
 	private WebElement commentsSectionShowButton;
@@ -31,12 +34,6 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement replyCommentButton;
 	@FindBy(css="[placeholder='Post a reply']")
 	private WebElement replyInputArea;
-	@FindBy(css="#wkMdlCnt [name='wpArticleSubmit']")
-	private WebElement replySubmitButton;
-	@FindBy(css="#wkMdlClo")
-	private WebElement closeModalButton;
-	@FindBy(css=".collSec.addChev.open")
-	private WebElement commentsSectionHideButton;
 	@FindBy(css="#commMore")
 	private WebElement loadMoreCommentsButton;
 	@FindBy(css="#commPrev")
@@ -55,8 +52,6 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement tocClosed;
 	@FindBy(css=".toc.open")
 	private WebElement tocOpened;
-	@FindBy(css=".toctext")
-	private WebElement tocText;
 	@FindBys(@FindBy(css=".toclevel-1>a"))
 	private List<WebElement> tocLevel1Sections;
 	@FindBys(@FindBy(css=".toclevel-2>a"))
@@ -67,10 +62,11 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private List<WebElement> tocLevel4Sections;
 	@FindBy(css="section.artSec.open")
 	private WebElement sectionOpened;
+	@FindBy(css="div.mw-content-ltr h2.collSec.open")
+	private WebElement sectionVisibilityElement;
+	@FindBy(css="div.mw-content-ltr h2.collSec:not(.open)")
+	private WebElement sectionInvisibilityElement;
 
-
-	//@FindBy(css="h2.collSec")
-	//private WebElement sectionClosed;
 
 	private void showCommentsSection(){
 		waitForElementByElement(commentsSectionShowButton);
@@ -102,12 +98,11 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	public void addReply(String reply){
 		waitForElementByElement(replyCommentButton);
 		String url = driver.getCurrentUrl();
-		executeScript("document.querySelectorAll('.cmnRpl')[0].click()");
-//		scrollAndClick(replyCommentButton);
-		verifyURL(url+"#Modal");
+		replyCommentButton.click();
+		verifyURL(url + modal);
 		replyInputArea.sendKeys(reply);
 		replyInputArea.submit();
-		verifyURL(url+"#Modal");
+		verifyURL(url + modal);
 		verifyAddedReplyOnCommentPage(reply);
 		PageObjectLogging.log("addReply", "reply "+reply+" added", true, driver);
 	}
@@ -117,24 +112,23 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		showCommentsSection();
 		waitForElementByElement(loadMoreCommentsButton);
 		scrollAndClick(loadMoreCommentsButton);
-		//loadMoreCommentsButton.click();
 		waitForElementByElement(loadPreviousCommentsButton);
 		loadPreviousCommentsButton.click();
 		waitForElementByElement(loadMoreCommentsButton);
 		PageObjectLogging.log("verifyPagination", "pagination added", true);
 	}
 
-	public MobileArticlePageObject openSections(){
-		getUrl(Global.DOMAIN+"wiki/Sections");
+	public MobileArticlePageObject openSections(String wikiURL){
+		getUrl(wikiURL + URLsContent.articleSections);
 		waitForElementByElement(tocWrapper);
 		PageObjectLogging.log("openSections", "sections page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
-	public MobileArticlePageObject openTOCPage(){
-		getUrl(Global.DOMAIN+"wiki/TOC");
+	public MobileArticlePageObject openTOCPage(String wikiURL){
+		getUrl(wikiURL + wikiTOC);
 		waitForElementByElement(tocWrapper);
-		PageObjectLogging.log("openTOC", "TOC page was opened", true, driver);
+		PageObjectLogging.log("openTOCPage", "TOC page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
@@ -146,23 +140,23 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public void verifySectionVisibility(){
-		waitForElementByCss("div.mw-content-ltr h2.collSec.open");
-		PageObjectLogging.log("verifySectionVisibility", "section is opened and visible", true, driver);
+		waitForElementByElement(sectionVisibilityElement);
+		PageObjectLogging.log("verifySectionVisibility", "section is opened and visible", true);
 	}
 
 	public void verifySectionInvisibility(){
-		waitForElementByCss("div.mw-content-ltr h2.collSec:not(.open)");
-		PageObjectLogging.log("verifySectionInvisibility", "section is not visible", true, driver);
+		waitForElementByElement(sectionInvisibilityElement);
+		PageObjectLogging.log("verifySectionInvisibility", "section is not visible", true);
 	}
 
 	public void clickHideButton(){
 		waitForElementByElement(hideSectionButton);
-		executeScript("document.querySelectorAll('.artSec.open .goBck')[0].click()");
+		hideSectionButton.click();
 		PageObjectLogging.log("clickHideButton", "hide section button clicked", true, driver);
 	}
 
-	public MobileArticlePageObject openModals(){
-		getUrl(Global.DOMAIN+"wiki/Modal");
+	public MobileArticlePageObject openModals(String wikiURL){
+		getUrl(wikiURL + URLsContent.articleModal);
 		waitForElementByElement(modalWrapper);
 		PageObjectLogging.log("openModals", "modals page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
@@ -173,7 +167,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		String url = driver.getCurrentUrl();
 		scrollAndClick(imageModalTrigger);
 		PageObjectLogging.log("clickModal", "modal trigger clicked", true, driver);
-		Assertion.assertEquals(url+"#Modal", driver.getCurrentUrl());
+		Assertion.assertEquals(url + modal, driver.getCurrentUrl());
 		waitForElementByElement(currentImageModal);
 		PageObjectLogging.log("clickModal", "modal url verified", true, driver);
 		return new MobileModalComponentObject(driver);
@@ -202,36 +196,36 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		PageObjectLogging.log("clickChevronToChangeTocState", "toc state changed", true);
 	}
 
-	public String clickOnLevel1SectionInToc(int number){
+	public String clickOnLevel1SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel1Sections.get(number);
 		String href = tocElement.getAttribute("href");
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel1SectionInToc", "toc level 1 clicked", true);
-		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+		return href.replace(wikiURL + wikiTOC,"");
 	}
 
-	public String clickOnLevel2SectionInToc(int number){
+	public String clickOnLevel2SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel2Sections.get(number);
 		String href = tocElement.getAttribute("href");
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel2SectionInToc", "toc level 2 clicked: "+href, true);
-		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+		return href.replace(wikiURL + wikiTOC,"");
 	}
 
-	public String clickOnLevel3SectionInToc(int number){
+	public String clickOnLevel3SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel3Sections.get(number);
 		String href = tocElement.getAttribute("href");
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel3SectionInToc", "toc level 3 clicked: "+href, true);
-		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+		return href.replace(wikiURL + wikiTOC,"");
 	}
 
-	public String clickOnLevel4SectionInToc(int number){
+	public String clickOnLevel4SectionInToc(int number, String wikiURL){
 		WebElement tocElement = tocLevel4Sections.get(number);
 		String href = tocElement.getAttribute("href");
 		tocElement.click();
 		PageObjectLogging.log("clickOnLevel4SectionInToc", "toc level 4 clicked: "+href, true);
-		return href.replace(Global.DOMAIN+"wiki/TOC#","");
+		return href.replace(wikiURL + wikiTOC,"");
 	}
 
 	public void verifySectionHeaderOpened(String desiredId){

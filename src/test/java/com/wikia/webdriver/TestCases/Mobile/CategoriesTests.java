@@ -1,16 +1,15 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
 import org.testng.annotations.Test;
-
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPageObject;
 
-public class CategoriesTests extends TestTemplate {
+public class CategoriesTests extends NewTestTemplate {
 
-	@Test(groups={"mobile"})
-	public void categoryTest_001(){
+	@Test(groups={"categoryTest_001", "categoryTest", "mobile"})
+	public void categoryTest_001() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
-		mobile.openCategory();
+		mobile.openCategory(wikiURL);
 		mobile.verifyShowAll();
 		mobile.verifyChevronClosed();
 		mobile.clickShowAllButton();
@@ -19,6 +18,32 @@ public class CategoriesTests extends TestTemplate {
 		mobile.clickHideAllButton();
 		mobile.verifyShowAll();
 		mobile.verifyChevronClosed();
+	}
+
+	@Test(groups={"categoryTest_002", "categoryTest", "mobile"})
+	public void categoryTest_002_checkCategoryExhibitionButtons() {
+		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
+		mobile.openCategory(wikiURL);
+		mobile.verifyCategoryExhibition();
+	}
+
+	@Test(groups={"categoryTest_003", "categoryTest", "mobile"})
+	public void categoryTest_003_checkPagination() {
+		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
+		mobile.openCategory(wikiURL);
+		mobile.openArticle(2);
+		mobile.verifyArticlesCount(25);
+		String firstArticle = mobile.getFirstArticleName();
+		String lastArticle = mobile.getLastArticleName();
+		mobile.showNextArticles();
+		String firstArticle2 = mobile.getFirstArticleName();
+		mobile.verifyArticlesNotEquals(firstArticle, firstArticle2);
+		mobile.showPreviousArticles();
+		mobile.verifyArticlesCount(25);
+		String firstArticle3 = mobile.getFirstArticleName();
+		String lastArticle3 = mobile.getLastArticleName();
+		mobile.verifyArticlesEquals(firstArticle, firstArticle3);
+		mobile.verifyArticlesEquals(lastArticle, lastArticle3);
 	}
 
 }
