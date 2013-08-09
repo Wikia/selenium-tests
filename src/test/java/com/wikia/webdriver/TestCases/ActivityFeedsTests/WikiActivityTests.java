@@ -86,7 +86,7 @@ public class WikiActivityTests extends NewTestTemplate {
 	@Test(groups = { "WikiActivity", "WikiActivity_004", "darwin" })
 	public void WikiActivityTests_004_newCategorizationIsRecordedOnAvtivityModule() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String articleName = article.getArticleName();
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
