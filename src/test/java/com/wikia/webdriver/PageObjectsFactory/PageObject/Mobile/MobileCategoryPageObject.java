@@ -73,6 +73,7 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	}
 
 	public void verifyCategoryExhibition() {
+		waitForElementByElement(categoryExhibition.get(0));
 		Assertion.assertTrue(categoryExhibition.size() == 4);
 	}
 
