@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -88,10 +87,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement tableModalOKbutton;
 	@FindBy(css="table.article-table")
 	private WebElement VisualModeTable;
-	@FindBy(css="#CategorySelectInput")
-	private WebElement categories_CategoryInputField;
-	@FindBy(css="#csWikitext")
-	private WebElement categories_CategorySourceInputField;
 	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
 	private WebElement blockedUserMessage1;
 	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
@@ -166,21 +161,17 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By videoOnArticleEditMode = By.cssSelector("img.video");
-	private By categories_listOfCategoriyPrompts = By.cssSelector("li.ui-menu-item");
 	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
 	private String imageArticleIFrame = "img";
 	private String videoArticleIFrame = "img.video";
 	private String previewButtonSelector = "#wpPreview";
 	private String publishButtonSelector = "div.neutral.modalToolbar a[id=\"publish\"]";
 	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
-	private String categories_listOfCategories = "li.category";
-
 
 	public WikiArticleEditMode(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-
 
 	/**
 	 * @author Karol Kujawiak
@@ -437,157 +428,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 
-	/**
-	* type category name
-	*
-	@author Michal Nowierski
-	*/
-	public void categories_addCategoryEditMode(String categoryName) {
-		waitForElementByElement(categories_CategoryInputField);
-		waitForElementClickableByElement(categories_CategoryInputField);
-		scrollAndClick(categories_CategoryInputField);
-		jQueryFocus("#CategorySelectInput");
-		categories_CategoryInputField.sendKeys(categoryName);
-		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
-		executeScript("var e = jQuery.Event(\"keydown\"); e.which=13; $('#CategorySelectInput').trigger(e);");
-		PageObjectLogging.log("categories_typeCategoryNameEditMode", "category "+categoryName+" typed", true, driver);
-	}
-
-	/**
-	* type category name in source mode
-	*
-	@author Michal Nowierski
-	*/
-	public void categories_addToCategorySourceEditMode(String textToBeAdded) {
-		waitForElementByElement(categories_CategorySourceInputField);
-		waitForElementClickableByElement(categories_CategorySourceInputField);
-		scrollAndClick(categories_CategorySourceInputField);
-		categories_CategorySourceInputField.sendKeys(textToBeAdded);
-		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();};
-		PageObjectLogging.log("categories_addCategorySourceEditMode", "category "+textToBeAdded.replaceAll("<", "&lt").replaceAll(">", "&gt")+" typed in the source mode", true, driver);
-	}
-
-	/**
-	 * check category name in source mode
-	 *
-	@author Michal Nowierski
-	 */
-	public void categories_verifyCategoryAddedSourceEditMode(String textToBeChecked) {
-		waitForElementByElement(categories_CategorySourceInputField);
-		String text = categories_CategorySourceInputField.getAttribute("value");
-		if (text.contains(textToBeChecked)) {
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked.replaceAll("<", "&lt").replaceAll(">", "&gt")+" present in the source mode", true, driver);
-		}
-		else {
-			PageObjectLogging.log("categories_verifyCategoryAddedSourceEditMode", "category "+textToBeChecked.replaceAll("<", "&lt").replaceAll(">", "&gt")+" NOT present in the source mode", false, driver);
-
-		}
-	}
-
-	public String categories_addSuggestedCategoryEditMode(String givenString) {
-		waitForElementByElement(categories_CategoryInputField);
-		waitForElementClickableByElement(categories_CategoryInputField);
-		scrollAndClick(categories_CategoryInputField);
-		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
-		categories_CategoryInputField.sendKeys(givenString);
-		List<WebElement> PromptsList  = driver.findElements(categories_listOfCategoriyPrompts);
-		WebElement category = PromptsList.get(3);
-		try {Thread.sleep(500);	} catch (InterruptedException e) {e.printStackTrace();}
-		waitForElementByElement(category);
-		String categoryName = category.getText();
-		waitForElementClickableByElement(category);
-		scrollAndClick(category);
-		PageObjectLogging.log("categories_addSuggestedCategoryEditMode", "suggested category "+categoryName+" added", true, driver);
-		return categoryName;
-	}
-
-	/**
-	* categories_verifyCategoryAdded in edit mode
-	*
-	@author Michal Nowierski
-	*/
-	public void categories_verifyCategoryAddedEditMode(String categoryName) {
-		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories));
-		Boolean result = false;
-		// there might be more than one category on a random page. Thus - loop over all of them.
-		for (WebElement webElement : lista) {
-			waitForElementByElement(webElement);
-			if (webElement.getText().equalsIgnoreCase(categoryName)) {
-				result = true;
-			}
-		}
-		if (result) {
-			PageObjectLogging.log("categories_verifyCategoryAddedEditMode", "category "+categoryName+" succesfully added", true, driver);
-		}
-		else {
-			PageObjectLogging.log("categories_verifyCategoryAddedEditMode", "category "+categoryName+" NOT added", false, driver);
-		}
-
-	}
-
-	public void categories_removeCategoryEditMode(String categoryName) {
-		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories));
-		WebElement categoryItem = null;
-		WebElement categoryItemRemove = null;
-		Boolean isTheCategoryOnList = false;
-		By categoryItemBy = By.cssSelector("span");
-		By categoryItemRemoveBy = By.cssSelector("img.delete");
-
-		// We want item with given name. there might be more than one category on a random page. Thus - loop over all of them.
-		for (WebElement webElement : lista) {
-			waitForElementByElement(webElement);
-			//if the element is the one we want
-			if (webElement.findElement(categoryItemBy).getText().equalsIgnoreCase(categoryName)) {
-				categoryItem = webElement.findElement(categoryItemBy);
-				categoryItemRemove = webElement.findElement(categoryItemRemoveBy);
-				isTheCategoryOnList = true;
-			}
-		}
-		if (!isTheCategoryOnList) {
-			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+" not found on list", false, driver);
-			return;
-		}
-		List<WebElement> l = driver.findElements(By.cssSelector("li.category span"));
-		int counter = 0;
-		for (WebElement element:l)
-		{
-			if (element.getText().equals(categoryName))
-			{
-				counter = l.indexOf(element);
-				counter+=1;
-				jQueryClick("li.category:nth-child("+counter+") .delete");
-			}
-		}
-		if (isTheCategoryOnList) {
-			PageObjectLogging.log("categories_removeCategoryEditMode", "category "+categoryName+"  removed", true, driver);
-			return;
-		}
-
-	}
 
 
-	public void categories_verifyCategoryRemovedEditMode(String categoryName) {
-		List<WebElement> lista  = driver.findElements(By.cssSelector(categories_listOfCategories+" span"));
-		Boolean result = false;
 
-		// there might be more than one category on a random page. Thus - loop over all of them.
-		if (lista.size()>0) {
 
-			for (WebElement webElement : lista) {
-				waitForElementByElement(webElement);
-				if (webElement.getText().equalsIgnoreCase(categoryName)) {
-					result = true;
-				}
-			}
-		}
-		if (result) {
-			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" not removed - found on the list", false, driver);
-		}
-		else {
-			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);
-		}
-
-	}
 
 	public void verifyBlockedUserMessage(){
 		waitForElementByElement(blockedUserMessage1);
