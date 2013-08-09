@@ -1,7 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -39,12 +37,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement submitReplyButton;
 	@FindBy(css="table.article-table")
 	private WebElement tableOnWikiaArticle;
-	@FindBy(css="#CategorySelectAdd")
-	private WebElement categories_AddCategoryButton;
-	@FindBy(css="#CategorySelectInput")
-	private WebElement categories_CategoryInputField;
-	@FindBy(css="#CategorySelectSave")
-	private WebElement categories_saveButton;
 	@FindBy(css="textarea#article-comm")
 	private WebElement commentAreaDisabled;
 	@FindBy(css=".article-comm-reply")
@@ -70,13 +62,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	@FindBy(css=".button.addVideo")
 	protected WebElement rVAddVideo;
 
-	private By categories_listOfCategories = By.cssSelector(".WikiaArticleCategories li a");
 	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
 	private By VideoOnWikiaArticle = By.cssSelector("#WikiaArticle img.sprite.play");
-	private By AddVideoRVButton = By.cssSelector("a.addVideo");
-	private By galleryOnPublish = By.cssSelector("div[class*='gallery']");
-	private By slideShowOnPublish = By.cssSelector("div.wikia-slideshow");
-	private By videoOnPublish = By.cssSelector("figure a.image.video");
 	private By articleContentBy = By.cssSelector("#mw-content-text");
 	protected By rvFirstVideo = By.cssSelector(
 			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
@@ -228,89 +215,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiHistoryPageObject(driver);
 	}
 
-
-	/**
-	* Click on 'add Category' Button
-	*
-	@author Michal Nowierski
-	*/
-	public void categories_clickAddCategory() {
-		waitForElementByElement(categories_AddCategoryButton);
-		waitForElementClickableByElement(categories_AddCategoryButton);
-		scrollAndClick(categories_AddCategoryButton);
-		PageObjectLogging.log("categories_clickAddCategory", "Click on 'add Category' Button", true, driver);
-	}
-
-	/**
-	* type a category to field
-	*
-	@author Michal Nowierski
-	*/
-	public void categories_typeCategoryName(String categoryName) {
-		waitForElementByElement(categories_CategoryInputField);
-		categories_CategoryInputField.sendKeys(categoryName);
-		executeScript("var e = jQuery.Event(\"keydown\"); e.which=13; $('#CategorySelectInput').trigger(e);");
-//		categories_CategoryInputField.sendKeys(Keys.ENTER);
-		PageObjectLogging.log("categories_clickAddCategory", "type "+categoryName+" to category input field", true, driver);
-
-	}
-	/**
-	* click SaveButton
-	*
-	@author Michal Nowierski
-	*/
-	public void categories_clickOnSave() {
-		waitForElementByElement(categories_saveButton);
-		waitForElementClickableByElement(categories_saveButton);
-		scrollAndClick(categories_saveButton);
-		PageObjectLogging.log("categories_clickOnSave", "Click on 'Save' Button", true, driver);
-
-	}
-
-	/**
-	* click SaveButton
-	*
-	@author Michal Nowierski
-	*/
-	public void categories_verifyCategoryPresent(String categoryName) {
-		List<WebElement> lista  = driver.findElements(categories_listOfCategories);
-		Boolean result = false;
-		// there might be more than one category on a random page. Thus - loop over all of them.
-		for (WebElement webElement : lista) {
-			waitForElementByElement(webElement);
-			if (webElement.getText().equalsIgnoreCase(categoryName)) {
-				result = true;
-			}
-		}
-		if (result) {
-			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" prsesnce succesfully verified", true);
-		}
-		else {
-			PageObjectLogging.log("categories_verifyCategory", "category "+categoryName+" NOT present", false);
-		}
-
-	}
-
-	public void categories_verifyCategoryRemoved(String categoryName) {
-		List<WebElement> lista  = driver.findElements(categories_listOfCategories);
-		Boolean result = false;
-		// there might be more than one category on a random page. Thus - loop over all of them.
-		if (lista.size()>0) {
-
-		for (WebElement webElement : lista) {
-			waitForElementByElement(webElement);
-			if (webElement.getText().equalsIgnoreCase(categoryName)) {
-				result = true;
-			}
-		}
-		}
-		if (result) {
-			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" not removed - found on the list", false, driver);
-		}
-		else {
-			PageObjectLogging.log("categories_verifyCategoryRemoved", "category "+categoryName+" removed", true, driver);
-		}
-	}
 	/**
 	* getArticleNameFromURL
 	*
