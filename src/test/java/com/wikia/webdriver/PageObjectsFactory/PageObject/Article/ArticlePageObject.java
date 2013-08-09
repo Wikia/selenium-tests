@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -93,6 +94,24 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
 	private WebElement rvFirstVideo;
+	@FindBy(css="#CategorySelectAdd")
+	private WebElement addCategory;
+	@FindBy(css="#CategorySelectInput")
+	private WebElement addCategoryInput;
+	@FindBy(css="#CategorySelectSave")
+	private WebElement saveCategory;
+	@FindBy(css=".WikiaArticleCategories li>span a")
+	private List<WebElement> categoryList;
+	@FindBy(css=".ui-autocomplete")
+	private WebElement categorySuggestionsList;
+	@FindBy(css=".categories")
+	private WebElement categoriesContainer;
+
+
+	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item>a");
+
+	String editCategorySelector = "li[data-name='%categoryName%'] li.editCategory > img";
+	String removeCategorySelector = "li[data-name='%categoryName%'] li.removeCategory > img";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -305,5 +324,95 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(videoAddPlaceholder);
 		scrollAndClick(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
+	}
+
+	private void clickAddCategoryButton() {
+		scrollAndClick(addCategory);
+		waitForElementByElement(addCategoryInput);
+	}
+
+	private void typeCategoryName(String category) {
+		addCategoryInput.sendKeys(category);
+	}
+
+
+	public void verifySubmitCategoryEnabled() {
+		Assertion.assertTrue(!saveCategory.isEnabled(), "submit category is disabled");
+	}
+
+	public void verifySubmitCategoryDisabled() {
+		Assertion.assertTrue(!saveCategory.isEnabled(), "submit category is enabled");
+	}
+
+	public void submitCategory() {
+		waitForElementClickableByElement(saveCategory);
+		saveCategory.click();
+		waitForElementNotVisibleByElement(addCategoryInput);
+	}
+
+	public void addCategory(String category) {
+		clickAddCategoryButton();
+		typeCategoryName(category);
+		pressEnter(addCategoryInput);
+		PageObjectLogging.log("addCategory", category + " category added", true);
+	}
+
+	public EditCategoryComponentObject editCategory(String category) {
+		WebElement editCategory = driver.findElement(
+				By.cssSelector(
+						editCategorySelector.replace("%categoryName%", category)
+				)
+		);
+		scrollAndClick(editCategory);
+		PageObjectLogging.log("editCategory", "edit button on category " + category + " clicked", true);
+		return new EditCategoryComponentObject(driver);
+	}
+
+	public void removeCategory(String category) {
+		WebElement editCategory = driver.findElement(
+				By.cssSelector(
+						removeCategorySelector.replace("%categoryName%", category)
+						)
+				);
+		scrollAndClick(editCategory);
+		PageObjectLogging.log("removeCategory", "remove button on category " + category + " clicked", true);
+	}
+
+	public String addCategorySuggestions(String category, int categoryNumber) {
+		clickAddCategoryButton();
+		typeCategoryName(category);
+
+		waitForElementByElement(categorySuggestionsList);
+		List<WebElement> suggestionsList = categorySuggestionsList.findElements(categorySuggestionsListItems);
+		WebElement desiredCategory = suggestionsList.get(categoryNumber);
+		String desiredCategoryText = desiredCategory.getText();
+		desiredCategory.click();
+
+		waitForElementNotVisibleByElement(categorySuggestionsList);
+
+		PageObjectLogging.log("addCategorySuggestions", "category " + category + " added from suggestions", true);
+		return desiredCategoryText;
+	}
+
+	public void verifyCategoryPresent(String category) {
+		boolean categoryVisible = false;
+		for (WebElement elem : categoryList) {
+			if (elem.getText().equals(category)) {
+				categoryVisible = true;
+			}
+		}
+
+		Assertion.assertTrue(categoryVisible, "category "+category+" not present");
+	}
+
+	public void verifyCategoryNotPresent(String category) {
+		boolean categoryVisible = true;
+		for (WebElement elem : categoryList) {
+			if (elem.getText().equals(category)) {
+				categoryVisible = false;
+			}
+		}
+
+		Assertion.assertTrue(categoryVisible, "category "+category+" present");
 	}
 }
