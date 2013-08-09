@@ -50,6 +50,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFiles
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
@@ -187,6 +188,12 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL + URLsContent.specialCreateBlogPage);
 		return new SpecialCreatePagePageObject(driver);
 	}
+
+	public SpecialWikiActivityPageObject openSpecialWikiActivity(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialWikiActivity);
+		return new SpecialWikiActivityPageObject(driver);
+	}
+
 
 	public ForumPageObject openForumMainPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialForum);
