@@ -100,7 +100,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement addCategoryInput;
 	@FindBy(css="#CategorySelectSave")
 	private WebElement saveCategory;
-	@FindBy(css=".WikiaArticleCategories li>span a")
+	@FindBy(css=".WikiaArticleCategories li > span a")
 	private List<WebElement> categoryList;
 	@FindBy(css=".ui-autocomplete")
 	private WebElement categorySuggestionsList;
@@ -108,7 +108,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement categoriesContainer;
 
 
-	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item>a");
+	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 
 	String editCategorySelector = "li[data-name='%categoryName%'] li.editCategory > img";
 	String removeCategorySelector = "li[data-name='%categoryName%'] li.removeCategory > img";
@@ -348,6 +348,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementClickableByElement(saveCategory);
 		saveCategory.click();
 		waitForElementNotVisibleByElement(addCategoryInput);
+		PageObjectLogging.log("submitCategory", "submit category clicked", true);
 	}
 
 	public void addCategory(String category) {
@@ -381,15 +382,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public String addCategorySuggestions(String category, int categoryNumber) {
 		clickAddCategoryButton();
 		typeCategoryName(category);
-
 		waitForElementByElement(categorySuggestionsList);
 		List<WebElement> suggestionsList = categorySuggestionsList.findElements(categorySuggestionsListItems);
 		WebElement desiredCategory = suggestionsList.get(categoryNumber);
 		String desiredCategoryText = desiredCategory.getText();
 		desiredCategory.click();
-
 		waitForElementNotVisibleByElement(categorySuggestionsList);
-
 		PageObjectLogging.log("addCategorySuggestions", "category " + category + " added from suggestions", true);
 		return desiredCategoryText;
 	}
@@ -401,8 +399,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 				categoryVisible = true;
 			}
 		}
-
-		Assertion.assertTrue(categoryVisible, "category "+category+" not present");
+		Assertion.assertTrue(categoryVisible, "category " + category + " not present");
 	}
 
 	public void verifyCategoryNotPresent(String category) {
@@ -412,7 +409,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 				categoryVisible = false;
 			}
 		}
-
-		Assertion.assertTrue(categoryVisible, "category "+category+" present");
+		Assertion.assertTrue(categoryVisible, "category " + category + " present");
 	}
 }

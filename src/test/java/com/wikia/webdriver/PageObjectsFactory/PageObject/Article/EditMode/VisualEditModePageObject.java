@@ -258,6 +258,7 @@ public class VisualEditModePageObject extends EditMode {
 
 	public void submitCategory() {
 		pressEnter(categoryInput);
+		PageObjectLogging.log("submitCategory", "category submitted", true);
 	}
 
 	public void verifyCategoryPresent(String category) {
@@ -267,7 +268,6 @@ public class VisualEditModePageObject extends EditMode {
 				categoryVisible = true;
 			}
 		}
-
 		Assertion.assertTrue(categoryVisible, "category "+category+" not present");
 	}
 
@@ -279,7 +279,6 @@ public class VisualEditModePageObject extends EditMode {
 				categoryVisible = false;
 			}
 		}
-
 		Assertion.assertTrue(categoryVisible, "category "+category+" present");
 	}
 
@@ -291,7 +290,6 @@ public class VisualEditModePageObject extends EditMode {
 		String categoryName = categoryItem.getText();
 		categoryItem.click();
 		waitForElementNotVisibleByElement(categorySuggestionsContainer);
-
 		PageObjectLogging.log("selectCategorySuggestions", categoryNumber + " category selected from suggestions", true);
 		return categoryName;
 	}
@@ -299,7 +297,9 @@ public class VisualEditModePageObject extends EditMode {
 	public EditCategoryComponentObject editCategory(String categoryName) {
 		WebElement category = driver.findElement(
 				By.cssSelector(
-						categoryEditSelector.replace("%categoryName%", categoryName)));
+						categoryEditSelector.replace("%categoryName%", categoryName)
+				)
+		);
 		jQueryClick(category);
 		PageObjectLogging.log("editCategory", "edit category button clicked on category " + categoryName, true);
 		return new EditCategoryComponentObject(driver);
@@ -308,7 +308,9 @@ public class VisualEditModePageObject extends EditMode {
 	public void removeCategory(String categoryName) {
 		WebElement category = driver.findElement(
 				By.cssSelector(
-						categoryRemoveSelector.replace("%categoryName%", categoryName)));
+						categoryRemoveSelector.replace("%categoryName%", categoryName)
+				)
+		);
 		jQueryClick(category);
 		PageObjectLogging.log("removeCategory", "remove category button clicked on category " + categoryName, true);
 	}

@@ -594,18 +594,13 @@ public class BasePageObject{
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
-	/**
-	 * 13 - enter
-	 * 39 - right arrow
-	 * http://mikemurko.com/general/jquery-keycode-cheatsheet/
-	 * @param element
-	 */
 	public void pressEnter(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
 				"var e = jQuery.Event(\"keydown\"); " +
 				"e.which=13; $(arguments[0]).trigger(e);",
-				element);
+				element
+		);
 	}
 
 	public void pressDownArrow(WebElement element) {
@@ -613,6 +608,7 @@ public class BasePageObject{
 		js.executeScript(
 				"var e = jQuery.Event(\"keydown\"); " +
 				"e.which=40; $(arguments[0]).trigger(e);",
-				element);
+				element
+		);
 	}
 }

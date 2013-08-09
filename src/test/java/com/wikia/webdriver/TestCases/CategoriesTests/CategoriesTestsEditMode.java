@@ -19,11 +19,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Visual
 public class CategoriesTestsEditMode extends NewTestTemplate {
 
 	/*
-	 * Add category to article as anon
-	 * Add category to article from suggestion list as anon
-	 * Add category to article as user
-	 * Add category to article from suggestion list as user
-	 * Add category to article as anon edit, delete
+	 * Add category to article edit mode as anon
+	 * Add category to article edit mode from suggestion list as anon
+	 * Add category to article edit mode as user
+	 * Add category to article edit mode from suggestion list as user
+	 * Add category to article edit mode as anon edit, delete
 	 */
 
 	Credentials credentials = config.getCredentials();
@@ -37,7 +37,6 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 		visual.typeCategoryName(categoryName);
 		visual.submitCategory();
 		visual.verifyCategoryPresent(categoryName);
-
 		EditCategoryComponentObject editCategory = visual.editCategory(categoryName);
 		categoryName = PageContent.categoryNamePrefix + visual.getTimeStamp();
 		editCategory.editCategoryName(categoryName);
@@ -53,7 +52,6 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 		visual.typeCategoryName(categoryName);
 		visual.submitCategory();
 		visual.verifyCategoryPresent(categoryName);
-
 		visual.removeCategory(categoryName);
 		visual.verifyCategoryNotPresent(categoryName);
 	}

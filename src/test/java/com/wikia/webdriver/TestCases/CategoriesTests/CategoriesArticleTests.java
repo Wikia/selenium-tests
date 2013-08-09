@@ -17,7 +17,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Visual
  * @author Karol 'kkarolk' Kujawiak
  *
  */
-public class CategoriesArticleTests extends NewTestTemplate{
+public class CategoriesArticleTests extends NewTestTemplate {
 
 	/*
 	 * Add category to article as anon
@@ -71,7 +71,7 @@ public class CategoriesArticleTests extends NewTestTemplate{
 		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(
 				wikiURL,
 				PageContent.articleNamePrefix + base.getTimeStamp()
-				);
+		);
 		visualEditMode.addContent(PageContent.articleText);
 		ArticlePageObject article = visualEditMode.submitArticle();
 		String desiredCategory = article.addCategorySuggestions(PageContent.categoryNamePrefix, 2);
