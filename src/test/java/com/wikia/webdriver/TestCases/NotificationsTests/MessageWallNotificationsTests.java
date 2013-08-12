@@ -95,7 +95,7 @@ public class MessageWallNotificationsTests extends TestTemplate {
 
 		String notificationMessageBody = notificationsListForTitle.get(0)
 				.findElement(By.cssSelector("div.msg-body")).getText();
-		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName5));
+		Assertion.assertTrue(notificationMessageBody.contains(Properties.userName6));
 		Assertion.assertTrue(notificationMessageBody.contains("replied to your message"));
 	}
 
