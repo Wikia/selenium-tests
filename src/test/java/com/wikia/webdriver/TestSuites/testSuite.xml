@@ -73,6 +73,7 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnon"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsUser"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.ArticleCommentsTests"/>
+			<class name="com.wikia.webdriver.TestCases.ActivityFeedsTests.WikiActivityTests"/>
 		</classes>
 	</test>
 </suite>
