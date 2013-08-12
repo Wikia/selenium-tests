@@ -24,6 +24,12 @@ public class Properties {
 	public static String userName4;
 	public static String password4;
 
+	public static String userName5;
+	public static String password5;
+
+	public static String userName6;
+	public static String password6;
+
 	public static String userNameNonLatin;
 	public static String userNameNonLatinEncoded;
 	public static String passwordNonLatin;
@@ -82,6 +88,10 @@ public class Properties {
 		password3 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular3.password");
 		userName4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular4.username");
 		password4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular4.password");
+		userName5 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular5.username");
+		password5 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular5.password");
+		userName6 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular6.username");
+		password6 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular6.password");
 
 		userNameNonLatin = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.username");
 		userNameNonLatinEncoded = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.usernameenc");
