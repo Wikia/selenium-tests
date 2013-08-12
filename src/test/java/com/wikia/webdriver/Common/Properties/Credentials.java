@@ -1,8 +1,8 @@
 package com.wikia.webdriver.Common.Properties;
 
-import com.wikia.webdriver.Common.Core.XMLFunctions;
-
 import java.io.File;
+
+import com.wikia.webdriver.Common.Core.XMLFunctions;
 
 /**
  *
@@ -21,6 +21,12 @@ public class Credentials {
 
 	public String userName4;
 	public String password4;
+
+	public String userName5;
+	public String password5;
+
+	public String userName6;
+	public String password6;
 
 	public String userNameNonLatin;
 	public String userNameNonLatinEncoded;
@@ -77,6 +83,10 @@ public class Credentials {
 		password3 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular3.password");
 		userName4 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular4.username");
 		password4 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular4.password");
+		userName5 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular5.username");
+		password5 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular5.password");
+		userName6 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular6.username");
+		password6 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular6.password");
 
 		userNameNonLatin = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.username");
 		userNameNonLatinEncoded = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.usernameenc");
