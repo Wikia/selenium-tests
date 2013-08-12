@@ -41,6 +41,7 @@ public class URLsContent {
 	public static final String specialFollow = "wiki/Special:Following";
 	public static final String specialForum = "wiki/Special:Forum";
 	public static final String specialThemeDesigner = "wiki/Special:ThemeDesigner";
+	public static final String specialWikiActivity = "wiki/Special:WikiActivity";
 	public static final String userMessageWall = "wiki/Message_Wall:";
 	public static final String specialMultiWikiFinderPage = "wiki/Special:Multiwikifinder";
 	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
