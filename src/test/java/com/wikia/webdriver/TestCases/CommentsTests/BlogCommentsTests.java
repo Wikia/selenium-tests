@@ -74,7 +74,13 @@ public class BlogCommentsTests extends NewTestTemplate {
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
-		MiniEditorComponentObject editor = blogPage.triggerEditCommentArea();
+		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
+		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		editor.switchAndWrite(comment);
+		blogPage.submitComment();
+		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentCreator(credentials.userName);
+		blogPage.triggerEditCommentArea();
 		String commentEdited = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndEditComment(commentEdited);
 		blogPage.submitEditComment();
@@ -88,6 +94,12 @@ public class BlogCommentsTests extends NewTestTemplate {
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
+		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
+		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		editor.switchAndWrite(comment);
+		blogPage.submitComment();
+		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentCreator(credentials.userName);
 		String commentText = blogPage.getFirstCommentText();
 		DeleteArticlePageObject delete = blogPage.deleteComment();
 		delete.submitDeletion();
