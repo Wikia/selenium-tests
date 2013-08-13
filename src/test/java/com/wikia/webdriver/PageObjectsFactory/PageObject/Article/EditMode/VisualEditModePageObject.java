@@ -8,7 +8,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -117,31 +116,34 @@ public class VisualEditModePageObject extends EditMode {
 	}
 
 	private void mouseOverComponent (Components component) {
-		Actions actions = new Actions(driver);
-		driver.switchTo().frame(iframe);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		switch (component) {
 		case Gallery:
-			actions.moveToElement(gallery).build().perform();
+			verifyComponent(gallery);
+			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery').mouseenter()");
 			break;
 		case Slideshow:
-			actions.moveToElement(slideshow).build().perform();
+			verifyComponent(slideshow);
+			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-slideshow').mouseenter()");
 			break;
 		case Slider:
-			actions.moveToElement(slider).build().perform();
+			verifyComponent(slider);
+			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery-slider').mouseenter()");
 			break;
 		case Video:
-			actions.moveToElement(video).build().perform();
+			verifyComponent(video);
+			js.executeScript("$('div.cke_contents>iframe').contents().find('img.video').mouseenter()");
 			break;
 		case Photo:
-			actions.moveToElement(image).build().perform();
+			verifyComponent(image);
+			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image').mouseenter()");
 			break;
 		case VideoPlaceholder:
-			actions.moveToElement(videoPlaceholder).build().perform();
+			js.executeScript("$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
 			break;
 		default:
 			break;
 		}
-		driver.switchTo().defaultContent();
 	}
 
 	public Object modifyComponent(Components component) {

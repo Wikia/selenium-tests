@@ -240,9 +240,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifyVideo();
 		article.editArticleUsingDropdown();
-		visualEditMode.modifyComponent(Components.Video);
-		vetOptions.setCaption(PageContent.caption2);
-		vetOptions.update();
 		visualEditMode.removeComponent(Components.Video);
 		visualEditMode.verifyComponentRemoved(Components.Video);
 	}
