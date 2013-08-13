@@ -8,8 +8,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePag
 
 public class TocTests extends NewTestTemplate{
 
-	@Test(groups={"tocTest_001", "mobile"})
-	public void Sections_001_tocTest(){
+	@Test(groups={"tocTest_001", "tocTests", "mobile"})
+	public void Sections_001_tocTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
 		article.verifyTocClosed();
@@ -19,8 +19,8 @@ public class TocTests extends NewTestTemplate{
 		article.verifyTocClosed();
 	}
 
-	@Test(groups={"tocTest_002", "mobile1", "mobile"}) // TODO create assertNotEq method
-	public void Sections_002_tocToSectionLevel1Test(){
+	@Test(groups={"tocTest_002", "tocTests", "mobile"}) // TODO create assertNotEq method
+	public void Sections_002_tocToSectionLevel1Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
 		article.clickChevronToOpenToc();
@@ -31,8 +31,8 @@ public class TocTests extends NewTestTemplate{
 		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
 	}
 
-	@Test(groups={"tocTest_003", "mobile1", "mobile"}) // TODO create assertNotEq method
-	public void Sections_003_tocToSectionLevel2Test(){
+	@Test(groups={"tocTest_003", "tocTests", "mobile"}) // TODO create assertNotEq method
+	public void Sections_003_tocToSectionLevel2Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
 		article.clickChevronToOpenToc();
@@ -43,8 +43,8 @@ public class TocTests extends NewTestTemplate{
 		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
 	}
 
-	@Test(groups={"tocTest_004", "mobile1", "mobile"}) // TODO create assertNotEq method
-	public void Sections_004_tocToSectionLevel3Test(){
+	@Test(groups={"tocTest_004", "tocTests", "mobile"}) // TODO create assertNotEq method
+	public void Sections_004_tocToSectionLevel3Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
 		article.clickChevronToOpenToc();
@@ -55,8 +55,8 @@ public class TocTests extends NewTestTemplate{
 		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
 	}
 
-	@Test(groups={"tocTest_005", "mobile1", "mobile"}) // TODO create assertNotEq method
-	public void Sections_005_tocToSectionLevel4Test(){
+	@Test(groups={"tocTest_005", "tocTests", "mobile"}) // TODO create assertNotEq method
+	public void Sections_005_tocToSectionLevel4Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
 		article.clickChevronToOpenToc();
@@ -67,8 +67,8 @@ public class TocTests extends NewTestTemplate{
 		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
 	}
 
-	@Test(groups={"tocTest_006", "mobile1", "mobile"})
-	public void Sections_006_tocClickOutsideOfToc(){
+	@Test(groups={"tocTest_006", "tocTests", "mobile"})
+	public void Sections_006_tocClickOutsideOfToc() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
 		article.clickChevronToOpenToc();

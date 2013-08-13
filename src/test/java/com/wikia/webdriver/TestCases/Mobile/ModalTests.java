@@ -9,9 +9,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileModalCompo
 
 public class ModalTests extends NewTestTemplate{
 
-	// next image
-	@Test(groups={"modalTest_001", "mobile"})
-	public void modalTest_001(){
+	@Test(groups={"modalTest_001", "modalTests", "mobile"})
+	public void modalTest_001_nextImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -19,12 +18,11 @@ public class ModalTests extends NewTestTemplate{
 		modal.goToNextImage();
 		Assertion.assertStringContains(current, modal.getCurrentImageUrl());
 		modal.closeModal();
-
+		modal.verifyModalClosed();
 	}
 
-	// previous image
-	@Test(groups={"modalTest_002", "mobile"})
-	public void modalTest_002(){
+	@Test(groups={"modalTest_002", "modalTests", "mobile"})
+	public void modalTest_002_previousImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -32,12 +30,11 @@ public class ModalTests extends NewTestTemplate{
 		modal.goToPreviousImage();
 		Assertion.assertStringContains(current, modal.getCurrentImageUrl());
 		modal.closeModal();
-
+		modal.verifyModalClosed();
 	}
 
-	//test top bar visible/hidden
-	@Test(groups={"modalTest_003", "mobile"})
-	public void modalTest_003(){
+	@Test(groups={"modalTest_003", "modalTests", "mobile"})
+	public void modalTest_003_topBarVisibleOrNot() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -48,8 +45,28 @@ public class ModalTests extends NewTestTemplate{
 		modal.verifyTopBarVisible();
 	}
 
+	@Test(groups={"modalTest_004", "modalTests", "mobile"})
+	public void modalTest_004_backButton() {
+		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
+		mobile.openModals(wikiURL);
+		MobileModalComponentObject modal = mobile.clickModal();
+		modal.closeModalWithBackButton();
+		modal.verifyModalClosed();
+	}
 
-
+	@Test(groups={"modalTest_005", "modalTests", "mobile"})
+	public void modalTest_005_positionAfterCloseModal() {
+		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
+		mobile.openModals(wikiURL);
+		MobileModalComponentObject modal = mobile.clickOpenedImage(5);
+		modal.closeModal();
+		modal.verifyModalClosed();
+		Long positionBeforeModal = modal.getPosition();
+		mobile.clickOpenedImage();
+		modal.closeModal();
+		modal.verifyModalClosed();
+		Long positionAfterModal = modal.getPosition();
+		Assertion.assertEquals(positionBeforeModal, positionAfterModal);
+	}
 
 }
-

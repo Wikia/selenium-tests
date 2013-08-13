@@ -49,36 +49,36 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	private List<WebElement> articleListWithPagination;
 
 
-	public MobileArticlePageObject openCategory(String wikiURL){
+	public MobileArticlePageObject openCategory(String wikiURL) {
 		getUrl(wikiURL+ categoryPmg);
 		waitForElementByElement(showAllButton);
 		PageObjectLogging.log("openCategory", "category page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
-	public void clickShowAllButton(){
+	public void clickShowAllButton() {
 		waitForElementByElement(showAllButton);
 		showAllButton.click();
 	}
 
-	public void clickHideAllButton (){
+	public void clickHideAllButton () {
 		waitForElementByElement(hideAllButton);
 		hideAllButton.click();
 	}
 
-	public void verifyChevronOpened(){
-		for(WebElement elem:chevronList){
+	public void verifyChevronOpened() {
+		for(WebElement elem:chevronList) {
 			Assertion.assertEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
 
-	public void verifyChevronClosed(){
-		for(WebElement elem:chevronList){
+	public void verifyChevronClosed() {
+		for(WebElement elem:chevronList) {
 			Assertion.assertNotEquals("collSec open", elem.getAttribute("class"));
 		}
 	}
 
-	public void verifyShowAll (){
+	public void verifyShowAll() {
 		waitForElementByElement(showAllButton);
 	}
 
@@ -86,7 +86,8 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		waitForElementByElement(hideAllButton);
 	}
 
-	public void verifyCategoryExhibition(){
+	public void verifyCategoryExhibition() {
+		waitForElementByElement(categoryExhibition.get(0));
 		Assertion.assertTrue(categoryExhibition.size() == 4);
 	}
 

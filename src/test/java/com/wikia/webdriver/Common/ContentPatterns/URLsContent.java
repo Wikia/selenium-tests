@@ -40,6 +40,12 @@ public class URLsContent {
 	public static final String specialMultiWikiFinderPage = "wiki/Special:Multiwikifinder";
 	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
 
+	//Urls for mobile
+	public static final String mobileTestMainPage = "http://mobileregressiontesting.wikia.com/wiki/Mobileregressiontesting_Wiki";
+	public static final String articleSections = "wiki/Sections";
+	public static final String articleModal = "wiki/Modal";
+	public static final String articleTopbar = "wiki/Topbar";
+
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
 
