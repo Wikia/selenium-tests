@@ -106,6 +106,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement categorySuggestionsList;
 	@FindBy(css=".categories")
 	private WebElement categoriesContainer;
+	@FindBy(css=".category.new")
+	private WebElement categoryNew;
+	@FindBy(css="button.save:not([disabled])")
+	private WebElement categorySaveButtonEnabled;
+	@FindBy(css="button.save[disabled]")
+	private WebElement categorySaveButtonDisabled;
 
 
 	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
@@ -339,11 +345,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 
 	public void verifySubmitCategoryEnabled() {
-		Assertion.assertTrue(!saveCategory.isEnabled(), "submit category is disabled");
+		waitForElementByElement(categorySaveButtonEnabled);
 	}
 
 	public void verifySubmitCategoryDisabled() {
-		Assertion.assertTrue(!saveCategory.isEnabled(), "submit category is enabled");
+		waitForElementByElement(categorySaveButtonDisabled);
 	}
 
 	public void submitCategory() {
@@ -357,6 +363,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		clickAddCategoryButton();
 		typeCategoryName(category);
 		pressEnter(addCategoryInput);
+		waitForElementByElement(categoryNew);
 		PageObjectLogging.log("addCategory", category + " category added", true);
 	}
 
