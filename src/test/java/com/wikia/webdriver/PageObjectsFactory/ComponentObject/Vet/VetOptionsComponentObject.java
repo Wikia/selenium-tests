@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +21,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		@FindBy(css="#VideoEmbedLayoutRow")
 		private WebElement videoEmbedLayotRow;
 		@FindBy(css=".vet-style-label.VideoEmbedThumbOption")
-		private WebElement styleWithCation;
+		private WebElement styleWithCaption;
 		@FindBy(css="#VideoEmbedCaption")
 		private WebElement captionField;
 		@FindBy(css="#VideoEmbedManualWidth")
@@ -31,7 +32,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement positionLayoutCenter;
 		@FindBy(css="#VET_LayoutRightBox label")
 		private WebElement positionLayoutRight;
-		@FindBy(css="label.VideoEmbedNoThumbOption")
+		@FindBy(css="span#VET_StyleNoThumb")
 		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
 		private WebElement videoName;
@@ -55,7 +56,7 @@ public class VetOptionsComponentObject extends BasePageObject{
 		private WebElement videoThumbnail;
 		@FindBy(css="div#VideoEmbedNameRow p")
 		private WebElement videoNameCaption;
-		
+
 
 		public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
@@ -73,10 +74,10 @@ public class VetOptionsComponentObject extends BasePageObject{
 	public void adjustStyle(int i){
 		waitForTextToBePresentInElementByElement(videoOptionsHeader, "Video display options");
 		switch (i){
-		case 1: styleWithCation.click();
+		case 1: styleWithCaption.click();
 				PageObjectLogging.log("adjustStyle", "first style selected",  true);
 				break;
-		case 2: styleWithoutCaption.click();
+		case 2: styleWithoutCaption.findElement(By.cssSelector("label")).click();
 				PageObjectLogging.log("adjustStyle", "second style selected",  true);
 				break;
 		default: PageObjectLogging.log("adjustStyle", "invalid style selected",  false);
@@ -211,14 +212,8 @@ public class VetOptionsComponentObject extends BasePageObject{
 		PageObjectLogging.log("verifyCaptionInVETModal", "Verify that the caption of the video set previously appears in the VET modal", true, driver);
 	}
 
-
 	public void verifyNoCaptionInVETModal() {
-		if (styleWithoutCaption.isSelected()){
-			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with no caption is selected in VET modal", true);
-			}
-		else{
-			PageObjectLogging.log("verifyNoCaptionInVETModal", "Video with caption is selected in VET modal", false);
-		}
+		Assertion.assertEquals("selected", styleWithoutCaption.getAttribute("class"));
 	}
 
 	public void verifyVideoNameFieldIsNotEditable(){
@@ -230,5 +225,5 @@ public class VetOptionsComponentObject extends BasePageObject{
 		waitForElementByElement(editableVideoNameField);
 		PageObjectLogging.log("verifyVideoNameFieldIsEditable", "Verified that Video Name Field is editable",  true, driver);
 	}
-	
+
 }
