@@ -33,10 +33,10 @@ public class BlogTests extends NewTestTemplate{
 	@Test(groups = { "BlogTests_001", "BlogTests"})
 	public void BlogTests_001_addFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
 		String blogTitle = PageContent.blogPostNamePrefix + base.getTimeStamp();
 		String blogContent = PageContent.blogContent + base.getTimeStamp();
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName4, wikiURL);
 		userProfile.clickOnBlogTab();
 		SpecialCreatePagePageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);
@@ -83,7 +83,7 @@ public class BlogTests extends NewTestTemplate{
 	public void BlogTests_004_deleteUndelete() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName4, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		String blogTitle = blogPage.getBlogName();
