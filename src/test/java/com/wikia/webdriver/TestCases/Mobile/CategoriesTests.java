@@ -6,7 +6,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPa
 
 public class CategoriesTests extends NewTestTemplate {
 
-	@Test(groups={"categoryTest_001", "categoryTest", "mobile"})
+	@Test(groups={"categoryTest_001", "categoriesTests", "mobile"})
 	public void categoryTest_001() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
@@ -20,14 +20,14 @@ public class CategoriesTests extends NewTestTemplate {
 		mobile.verifyChevronClosed();
 	}
 
-	@Test(groups={"categoryTest_002", "categoryTest", "mobile"})
+	@Test(groups={"categoryTest_002", "categoriesTests", "mobile"})
 	public void categoryTest_002_checkCategoryExhibitionButtons() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
 		mobile.verifyCategoryExhibition();
 	}
 
-	@Test(groups={"categoryTest_003", "categoryTest", "mobile"})
+	@Test(groups={"categoryTest_003", "categoriesTests", "mobile"})
 	public void categoryTest_003_checkPagination() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);

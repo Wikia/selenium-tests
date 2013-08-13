@@ -7,8 +7,8 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 
 public class SectionsTests extends NewTestTemplate{
 
-	@Test(groups={"sectionTest_001", "mobile"})
-	public void Sections_001_chevronTest(){
+	@Test(groups={"sectionTest_001", "sectionsTests", "mobile"})
+	public void Sections_001_chevronTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openSections(wikiURL);
 		article.clickSection(1);
@@ -17,8 +17,8 @@ public class SectionsTests extends NewTestTemplate{
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"sectionTest_002", "mobile"})
-	public void Sections_002_hideTest(){
+	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"})
+	public void Sections_002_hideTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openSections(wikiURL);
 		article.clickSection(1);
@@ -26,6 +26,5 @@ public class SectionsTests extends NewTestTemplate{
 		article.clickHideButton();
 		article.verifySectionInvisibility();
 	}
-
 
 }

@@ -10,7 +10,7 @@ public class LoginTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"loginTest", "mobile"})
+	@Test(groups={"loginTest_001", "mobile"})
 	public void Login() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -20,13 +20,13 @@ public class LoginTests extends NewTestTemplate{
 		mobile.verifyURLcontains(url);
 	}
 
-/*	@Test(groups={"mobile", "mobile_facebook_login"})
-	public void LoginFacebook(){
+	@Test(groups={"loginTest_002", "mobile"})
+	public void LoginFacebook() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
-		mobile.openHome();
+		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
-		url = driver.getCurrentUrl();
-		mobile.loginFB(Properties.emailFB, Properties.passwordFB);
-		mobile.verifyURLcontains(url);
-	}*/
+		mobile.clickLoginFBButton();
+		mobile.verifyFBLogin();
+	}
+
 }

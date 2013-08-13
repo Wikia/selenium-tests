@@ -32,6 +32,7 @@
 			<class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.ModalTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.TocTests"/>
+			<class name="com.wikia.webdriver.TestCases.Mobile.TopbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.BlogCommentsTests"/>

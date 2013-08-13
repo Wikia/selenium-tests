@@ -47,10 +47,12 @@ public class URLsContent {
 	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
 
 	//Urls for mobile
+	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";
 	public static final String articleSections = "wiki/Sections";
 	public static final String articleModal = "wiki/Modal";
 	public static final String articleComments = "wiki/Article_comments";
 	public static final String categoryPmg = "wiki/Category:PMG";
+	public static final String articleTopbar = "wiki/Topbar";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
