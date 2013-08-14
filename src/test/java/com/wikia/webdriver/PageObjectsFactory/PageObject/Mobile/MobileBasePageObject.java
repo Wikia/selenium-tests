@@ -215,14 +215,16 @@ public class MobileBasePageObject extends BasePageObject {
 	public void verifySuggestions(String query) {
 		waitForElementByElement(searchSuggestion.get(0));
 		for (WebElement elem:searchSuggestion) {
-			Assertion.assertTrue(elem.getAttribute(title).startsWith(query));
+			Assertion.assertTrue(elem.getAttribute(title).startsWith(query),
+				"title Attribute doesn't start with given string"
+			);
 		}
 		PageObjectLogging.log("verifySuggestions", "search suggestions verified", true, driver);
 	}
 
 	public void verifySuggestionsPlusButton() {
 		waitForElementByElement(addSuggestionButton.get(0));
-		Assertion.assertEquals(addSuggestionButton.size(), searchSuggestion.size());
+		Assertion.assertEquals(addSuggestionButton.size(), searchSuggestion.size(), "sizes are not equals");
 		PageObjectLogging.log("verifySuggestionsPlusButton", "search suggestions plus button verified", true, driver);
 	}
 
@@ -230,14 +232,14 @@ public class MobileBasePageObject extends BasePageObject {
 		waitForElementByElement(addSuggestionButton.get(n));
 		String text = searchSuggestion.get(n).getAttribute(title);
 		addSuggestionButton.get(n).click();
-		Assertion.assertEquals(text, searchField.getAttribute(value));
+		Assertion.assertEquals(text, searchField.getAttribute(value), "strings are not equals");
 	}
 
 	public void selectAndVerifyClickOnSuggestion(int n) {
 		String selectedSuggestionText = searchSuggestion.get(n).getAttribute("innerText").replace("+", "");
 		searchSuggestion.get(n).click();
 		waitForElementByElement(selectedPageHeader);
-		Assertion.assertTrue(getCurrentUrl().endsWith("/" + selectedSuggestionText));
+		Assertion.assertTrue(getCurrentUrl().endsWith("/" + selectedSuggestionText) ,"Url doesn't end with correct string");
 	}
 
 	public long getPosition() {
@@ -245,7 +247,7 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void verifyPositionDifferent(Long firstPosition){
-		Assertion.assertTrue(firstPosition < getPosition());
+		Assertion.assertTrue(firstPosition < getPosition(), "position is still the same");
 	}
 
 	public void clickOnWikiaTopPageLogo() {
@@ -259,11 +261,11 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void verifyCurtainOpened() {
-		Assertion.assertEquals(block, curtain.getCssValue(display));
+		Assertion.assertEquals(block, curtain.getCssValue(display), "curtain is not opened");
 	}
 
 	public void verifyCurtainClosed() {
-		Assertion.assertEquals(none, curtain.getCssValue(display));
+		Assertion.assertEquals(none, curtain.getCssValue(display), "curtain is not closed");
 	}
 
 	public void logOutMobile(String wikiURL) {

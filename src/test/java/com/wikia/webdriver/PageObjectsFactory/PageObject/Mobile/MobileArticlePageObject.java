@@ -97,16 +97,14 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	private void verifyAddedCommentOnTop(String comment) {
-		waitForElementByXPath(
-			"//li[@class='comment']/blockquote/div[@class='txt']/p[contains(text(), '"
-			+ comment + "')]"
-		);
-		Assertion.assertEquals(listOfComments.get(0).getAttribute("innerText"), comment);
+		Assertion.assertEquals(listOfComments.get(0).getAttribute("innerText"), comment, "comment is not added on top");
 	}
 
 	private void verifyNumberOfComments(Integer number) {
 		waitForElementByElement(numberOfComments);
-		Assertion.assertEquals(Integer.parseInt(numberOfComments.getAttribute("innerText")), number + 1);
+		Assertion.assertEquals(Integer.parseInt(numberOfComments.getAttribute("innerText")), number + 1,
+			"number of comments was not increased"
+		);
 	}
 
 	public void addComment(String comment) {
@@ -118,8 +116,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 			"//li[@class='comment']/blockquote/div[@class='txt']/p[contains(text(), '"
 			+ comment + "')]"
 		);
-		Integer currentNumberOfComments =  listOfComments.size();
-		Assertion.assertTrue(currentNumberOfComments == (firstNumberOfComments + 1));
+		Assertion.assertTrue(listOfComments.size() == (firstNumberOfComments + 1), "size of list was not increased");
 		verifyAddedCommentOnTop(comment);
 		PageObjectLogging.log("addComment", "comment " + comment + " added", true);
 	}
@@ -130,7 +127,9 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		commentInputArea.sendKeys(comment);
 		String inputExpandedHeight = commentInputArea.getCssValue("height");
 		Assertion.assertTrue(Integer.parseInt(inputExpandedHeight.substring(0, 1))
-			> Integer.parseInt(inputHeight.substring(0, 1)));
+			> Integer.parseInt(inputHeight.substring(0, 1)),
+			"input is not bigger"
+		);
 	}
 
 	public void verifyNumberOfComments(String comment) {
@@ -164,27 +163,30 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void clickLoadMoreButton() {
 		waitForElementByElement(loadMoreCommentsButton);
-		loadMoreCommentsButton.click();
+		scrollAndClick(loadMoreCommentsButton);
 		waitForElementByElement(loadPreviousCommentsButton);
 	}
 
 	public void clickLoadPreviousButton() {
 		waitForElementByElement(loadPreviousCommentsButton);
-		loadPreviousCommentsButton.click();
+		scrollAndClick(loadPreviousCommentsButton);
 		waitForElementByElement(loadMoreCommentsButton);
 	}
 
 	public void verifyFirstCommentsNotEquals(String firstComment) {
-		Assertion.assertNotEquals(firstComment, listOfComments.get(0).getAttribute("innerText"));
+		Assertion.assertNotEquals(firstComment, listOfComments.get(0).getAttribute("innerText"),
+			"comments are the same"
+		);
 	}
 
 	public void verifyFirstCommentsEquals(String firstComment) {
-		Assertion.assertNotEquals(firstComment, listOfComments.get(0).getAttribute("innerText"));
+		Assertion.assertNotEquals(firstComment, listOfComments.get(0).getAttribute("innerText"),
+			"comments are not the same"
+		);
 	}
 
 	public String getCommentInnerText() {
-		String innerText = listOfComments.get(0).getAttribute("innerText");
-		return innerText;
+		 return listOfComments.get(0).getAttribute("innerText");
 	}
 
 	public MobileArticlePageObject openSections(String wikiURL) {
@@ -311,7 +313,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	public void verifySectionHeaderOpened(String desiredId) {
 		waitForElementByElement(sectionHeaderOpened);
 		String currentId = sectionHeaderOpened.getAttribute("id");
-		Assertion.assertEquals(desiredId, currentId);
+		Assertion.assertEquals(desiredId, currentId, "id's are not equals");
 		PageObjectLogging.log("verifySectionHeaderOpened", "header section opened", true);
 	}
 
@@ -329,9 +331,9 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	public void verifyTopbarButton(WebElement element) {
 		waitForElementByElement(topbarLoginButton);
 		element.click();
-		Assertion.assertEquals("block", curtain.getCssValue("display"));
+		Assertion.assertEquals("block", curtain.getCssValue("display"), "menu is not opened");
 		element.click();
-		Assertion.assertEquals("none", curtain.getCssValue("display"));
+		Assertion.assertEquals("none", curtain.getCssValue("display"), "menu is not closed");
 	}
 
 	public void verifyAllTopbarButtons() {
@@ -345,9 +347,9 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		wikiaTopPageLogo.click();
 	}
 
-	public void verifyMainPageOpened() {
+	public void verifyMainPageOpened(String wikiURL) {
 		waitForValueToBePresentInElementsAttributeByElement(wikiHeader, "innerText", mainPageTitle);
-		Assertion.assertEquals(URLsContent.mobileTestMainPage, getCurrentUrl());
+		Assertion.assertEquals(wikiURL + URLsContent.mobileTestMainPage, getCurrentUrl(), "URLs are not equals");
 	}
 
 	public void openMenu() {
@@ -378,7 +380,9 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 				break;
 			}
 		}
-		Assertion.assertEquals(firstTab, menuTabs.get(0).getAttribute("innerText"));
+		Assertion.assertEquals(firstTab, menuTabs.get(0).getAttribute("innerText"),
+			"firts tabs are not the same"
+		);
 		PageObjectLogging.log("verifyMenu", "menu was veryfied", true);
 	}
 

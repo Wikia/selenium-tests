@@ -61,14 +61,14 @@ public class MobileSearchPageObject extends MobileBasePageObject{
 	public void compareResultsEquals(List<String> beforePagination, List<String> afterPagination) {
 		Assertion.assertNumber(beforePagination.size(), afterPagination.size(), "checking length");
 		for (int i=0; i<beforePagination.size(); i++){
-			Assertion.assertEquals(beforePagination.get(i), afterPagination.get(i));
+			Assertion.assertEquals(beforePagination.get(i), afterPagination.get(i), "list's elements are not equals");
 		}
 	}
 
 	public void compareResultsNotEquals(List<String> beforePagination, List<String> afterPagination) {
-		Assertion.assertTrue(beforePagination.size()!=afterPagination.size());
+		Assertion.assertTrue(beforePagination.size()!=afterPagination.size(), "sizes of lists are the same");
 		for (int i=0; i<beforePagination.size(); i++) {
-			Assertion.assertNotEquals(beforePagination.get(i), afterPagination.get(i));
+			Assertion.assertNotEquals(beforePagination.get(i), afterPagination.get(i), "list's elements are equals");
 		}
 	}
 }

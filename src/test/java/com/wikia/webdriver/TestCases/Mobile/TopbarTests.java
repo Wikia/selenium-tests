@@ -19,7 +19,7 @@ public class TopbarTests extends NewTestTemplate{
 		MobileArticlePageObject topbar = new MobileArticlePageObject(driver);
 		topbar.openTopbarPage(wikiURL);
 		topbar.clickWordmark();
-		topbar.verifyMainPageOpened();
+		topbar.verifyMainPageOpened(wikiURL);
 	}
 
 	@Test(groups={"topbarTest_003", "topbarTests", "mobile"})
