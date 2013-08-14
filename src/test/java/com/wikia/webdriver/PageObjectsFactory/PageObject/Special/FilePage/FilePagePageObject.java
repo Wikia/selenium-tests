@@ -9,22 +9,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
- * 
+ *
  * @author liz_lux
  *
  */
-public class FilePagePageObject extends BasePageObject {
+public class FilePagePageObject extends WikiBasePageObject {
 
 	public FilePagePageObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@FindBys(@FindBy(css="ul.tabs li a"))
 	private List<WebElement> tabList;
 
@@ -44,23 +43,23 @@ public class FilePagePageObject extends BasePageObject {
 		currentTab.click();
 		PageObjectLogging.log("selectTab", tab+" selected", true);
 	}
-	
+
 	public void verifySelectedTab(String tabName) {
 		driver.findElement(By.cssSelector(selectedTab.replace("%name%", tabName)));
 		PageObjectLogging.log("verified selected tab", tabName+" selected", true);
 	}
-	
+
 	public void openFilePage(String fileName) {
 		getUrl(URLsContent.filePage + fileName);
 		waitForElementByElement(tabList.get(0));
 		PageObjectLogging.log("Open file page", "file page opened", true);
-		
+
 	}
-	
+
 	public void refreshAndVerifyTabs(int tab) {
-		
+
 		String tabName;
-		
+
 		if(tab == 0) {
 			tabName = "about";
 		} else if(tab == 1) {
@@ -68,7 +67,7 @@ public class FilePagePageObject extends BasePageObject {
 		} else {
 			tabName = "metadata";
 		}
-		
+
 		selectTab(tab);
 		verifySelectedTab(tabName);
 		refreshPage();

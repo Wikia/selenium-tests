@@ -11,7 +11,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
 /**
  *
@@ -31,7 +33,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     private WebElement IgnoreAnyWarnings;
     @FindBy(css="section[id='UploadPhotosWrapper']")
     private WebElement UploadPhotoDialog;
-    @FindBys(@FindBy(css=".wikia-gallery .image"))
+    @FindBys(@FindBy(css="#mw-content-text img"))
     private List<WebElement> imagesNewFiles;
 
     //Selectors
@@ -83,30 +85,22 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
         );
     }
 
-    /**
-     * Selects given image in upload browser.
-     *
-     * @author Michal Nowierski
-     * @param file file to Be uploaded
-     * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests
-     * - this is where those files are stored
-     */
-    public void typeInFileToUploadPath(String file){
-    File fileCheck = new File("." + File.separator + "src" + File.separator
-            + "test" + File.separator + "resources" + File.separator + "ImagesForUploadTests"
-            + File.separator + file);
-    if (!fileCheck.isFile()) {
-		try {
-			throw new Exception("the file doesn't exist");
-		} catch (Exception e) {
-			e.printStackTrace();
+    public void typeInFileToUploadPath(String file) {
+		File fileCheck = new File("." + File.separator + "src" + File.separator
+				+ "test" + File.separator + "resources" + File.separator + "ImagesForUploadTests"
+				+ File.separator + file);
+		if (!fileCheck.isFile()) {
+			try {
+				throw new Exception("the file doesn't exist");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		sendKeys(
+				BrowseForFileInput,fileCheck.getAbsoluteFile().toString()
+		);
+		PageObjectLogging.log("typeInFileToUploadPath", "type file "+file+" to upload it", true, driver);
 	}
-	sendKeys(
-            BrowseForFileInput,fileCheck.getAbsoluteFile().toString()
-        );
-	PageObjectLogging.log("typeInFileToUploadPath", "type file "+file+" to upload it", true, driver);
-    }
 
     public void waitForFile(String FileName) {
         driver.navigate().refresh();
@@ -120,24 +114,23 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
         );
     }
 
-    public String followRandomImage(){
-        List<String> hrefs = new ArrayList<String>();
-        for (WebElement elem:imagesNewFiles) {
-            hrefs.add(elem.getAttribute("href"));
-        }
-        Random r = new Random();
-        String imageName = hrefs.get((r.nextInt(hrefs.size()-1))+1);
-		unfollowImage(imageName);
-        getUrl(imageName+"?action=watch");
-        scrollAndClick(followSubmit);
-        waitForElementByElement(followedButton);
-        PageObjectLogging.log("followRandomImage", "folow image named "+imageName, true);
-        return imageName;
+    public String getRandomImage() {
+		List<String> hrefs = new ArrayList<String>();
+		for (WebElement elem:imagesNewFiles) {
+			hrefs.add(elem.getAttribute("data-image-name"));
+		}
+		Random r = new Random();
+		return hrefs.get((r.nextInt(hrefs.size()-1))+1);
     }
 
-    public void unfollowImage(String imageName){
-        getUrl(imageName+"?action=unwatch");
-        scrollAndClick(followSubmit);
-        waitForElementByElement(unfollowedButton);
-    }
+    public WatchPageObject unfollowImage(String wikiURL, String imageName) {
+		getUrl(
+				wikiURL +
+				URLsContent.wikiDir +
+				URLsContent.fileNS +
+				imageName+
+				"?action=unwatch"
+	    );
+	    return new WatchPageObject(driver);
+	}
 }

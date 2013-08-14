@@ -56,7 +56,8 @@ public class URLsContent {
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
 
 	//Blog list page url
-	public static final String blogList = "wiki/Blog:%listName%";
+	public static final String blogList = "wiki/Blog:%listName%/";
+	public static final String blogNS = "wiki/User_blog:%userName%/";
 
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
