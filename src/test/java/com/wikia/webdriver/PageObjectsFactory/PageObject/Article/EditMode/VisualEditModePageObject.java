@@ -237,7 +237,8 @@ public class VisualEditModePageObject extends EditMode {
 
 	public void typeCategoryName(String categoryName) {
 		waitForElementByElement(categoryInput);
-		categoryInput.sendKeys(categoryName);
+		CommonUtils.setClipboardContents(categoryName);
+		categoryInput.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		PageObjectLogging.log("typeCategoryName", categoryName + " typed", true);
 	}
 
