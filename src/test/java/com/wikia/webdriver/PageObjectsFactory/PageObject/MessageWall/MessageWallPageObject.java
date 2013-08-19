@@ -30,7 +30,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement messageTitleEditField;
 	@FindBy(css="body#bodyContent")
 	private WebElement messageBodyField;
-	@FindBy(css=".wikia-button.save-edit")
+	@FindBy(css="div[style*=block] > .wikia-button.save-edit")
 	private WebElement saveEditButton;
 	@FindBy(css="#WallMessageSubmit")
 	private WebElement postButton;
@@ -72,6 +72,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement messageMainBody;
 	@FindBy (css="ul.comments li[style]")
 	private WebElement newMessageBubble;
+	@FindBy (css=".cke_contents > iframe")
+	private WebElement messageFrame;
 
 	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
@@ -346,44 +348,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		return new MessageWallHistoryPageObject(driver);
 	}
 
-	private void writeEditMessage(String title, String message)
-	{
-		WebElement elem = driver.switchTo().activeElement();
-//		miniEditorIframe = elem;
-
-		driver.switchTo().frame(elem);
-
-		messageBodyField.clear();
+	private void writeEditMessage(String title, String message) {
+		driver.switchTo().frame(messageFrame);
 		miniEditor.writeMiniEditor(message);
-//		messageBodyField.sendKeys(message);
-		driver.switchTo().defaultContent();
-
-		waitForElementByElement(elem);
-		scrollAndClick(messageTitleEditField2);
-		messageTitleEditField2.sendKeys(Keys.TAB);
-		driver.switchTo().frame(elem);
-//		messageBodyField.sendKeys(message);
-		miniEditor.writeMiniEditor(message);
-
 		driver.switchTo().defaultContent();
 
 		waitForElementByElement(messageTitleEditField);
 		messageTitleEditField2.clear();
 		messageTitleEditField2.sendKeys(title);
 		waitForElementByElement(saveEditButton);
-
-		if (Global.BROWSER.equals("IE")) {
-			driver.switchTo().frame(elem);
-			scrollAndClick(messageBodyField);
-			miniEditor.writeMiniEditor(Keys.TAB);
-			miniEditor.writeMiniEditor(Keys.ENTER);
-//			messageBodyField.sendKeys(Keys.TAB);
-//			messageBodyField.sendKeys(Keys.ENTER);
-			driver.switchTo().defaultContent();
-		}
-		else {
-			scrollAndClick(saveEditButton);
-		}
+		jQueryClick(saveEditButton);
 		PageObjectLogging.log("writeEditMessage", "message edited", true, driver);
 	}
 

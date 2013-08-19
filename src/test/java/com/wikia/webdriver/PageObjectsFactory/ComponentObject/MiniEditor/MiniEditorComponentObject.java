@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
@@ -50,6 +50,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement linkExternalIcon;
 
 	public void writeMiniEditor(String text){
+		messageBodyField.clear();
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(text);
 	}
@@ -77,9 +78,9 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(message);
 		messageBodyField.sendKeys(Keys.LEFT_CONTROL + "a" );
-		messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey );	
+		messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey );
 	}
-	
+
 	public void addVideoMiniEditor(String url){
 		waitForElementByElement(addVideoButton);
 		scrollAndClick(addVideoButton);
