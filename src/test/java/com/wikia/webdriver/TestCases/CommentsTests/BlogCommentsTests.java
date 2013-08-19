@@ -99,7 +99,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
 		blogPage.verifyArticleComment(comment);
-		blogPage.verifyCommentCreator(credentials.userName);
+		blogPage.verifyCommentCreator(credentials.userNameStaff);
 		String commentText = blogPage.getFirstCommentText();
 		DeleteArticlePageObject delete = blogPage.deleteComment();
 		delete.submitDeletion();
