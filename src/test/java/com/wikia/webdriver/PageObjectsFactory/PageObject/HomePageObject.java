@@ -87,7 +87,7 @@ public class HomePageObject extends BasePageObject{
 
 	public CreateNewWikiPageObjectStep1 startAWiki()
 	{
-		scrollAndClick(startWikiButton);
+		startWikiButton.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
 		if (Global.LIVE_DOMAIN.contains("preview"))
 		{
