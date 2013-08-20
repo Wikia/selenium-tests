@@ -51,8 +51,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement iFrame;
 	@FindBy(css="header.WikiaHeader")
 	private WebElement header;
-//	@FindBy(css="tr.ImageUploadFindLinks td a")
-//	private WebElement addThisPhotoLink;
 	@FindBy(css="#wpPreview")
 	private WebElement previewButton;
 	@FindBy(css="div.neutral.modalToolbar a[id='publish']")
@@ -173,66 +171,32 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageFactory.initElements(driver, this);
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 * @param name
-	 * @return WikiArticleByName
-	 */
-	public WikiArticleEditMode editArticleByName(String name)
-	{
-            String newUrl = URLsContent.addArticle.replace("%title%", name);
-            getUrl(Global.DOMAIN + newUrl);
+	public WikiArticleEditMode editArticleByName(String name) {
+		String newUrl = URLsContent.addArticle.replace("%title%", name);
+		getUrl(Global.DOMAIN + newUrl);
 		return new WikiArticleEditMode(driver);
 	}
 
-	/**
-	 * Verify that the photo appears in the visual mode
-	 *
-	 * @author Michal Nowierski
-	 */
 	public void verifyThatThePhotoAppears(String caption) {
 		waitForElementByElement(visualModeIFrame);
-		//The Editor is iframe so we have to switch to the iframe in order to investigate its content
 		driver.switchTo().frame(visualModeIFrame);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[data-rte-meta*='"+caption+"']")));
-		// Now switch back to the normal DOM
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode", true, driver);
 	}
 
-	/**
-	 * Left Click on 'Preview' Button
-	 *
-	 * @author Michal Nowierski
-	 */
 	public void clickOnPreviewButton() {
-
 		waitForElementByElement(previewButton);
 		waitForElementClickableByElement(previewButton);
 		jQueryClick(previewButtonSelector);
 		PageObjectLogging.log("LeftClickOnPreviewButton", "Left Click on 'Preview' Button", true, driver);
-
-
 	}
 
-
-	/**
-	 * Verify that the caption of image appears in the preview
-	 *
-	 * @author Michal Nowierski
-	 */
 	public void verifyTheCaptionOnThePreview(String caption) {
 		wait.until(ExpectedConditions.textToBePresentInElement(captionInPreview, caption));
 		PageObjectLogging.log("VerifyTheCaptionOnThePreview", "Verify that the caption of image appears in the preview", true, driver);
-
-
 	}
 
-	/**
-	 * Click on 'Publish' button
-	 *
-	 * @author Michal Nowierski
-	 */
 	public WikiArticlePageObject clickOnPublishButtonInPreviewMode() {
 		waitForElementByElement(publishButtonPreview);
 		waitForElementClickableByElement(publishButtonPreview);
@@ -241,11 +205,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new WikiArticlePageObject(driver);
 	}
 
-	/**
-	 * Click on 'Source' button
-	 *
-	 * @author Michal Nowierski
-	 */
 	public SourceEditModePageObject clickOnSourceButton() {
 		waitForElementByElement(sourceModeButton);
 		waitForElementClickableByElement(sourceModeButton);
@@ -255,66 +214,37 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new SourceEditModePageObject(driver);
 	}
 
-	/**
-	 * Click on 'Source' button
-	 *
-	 * @author Michal Nowierski
-	 */
 	public void clickOnVisualButton() {
 		waitForElementByElement(visualModeButton);
 		waitForElementClickableByElement(visualModeButton);
 		scrollAndClick(visualModeButton);
 		waitForElementByElement(iFrame);
 		PageObjectLogging.log("ClickOnVisualButton", "Click on 'Visual' button", true);
-
 	}
 
-        public void clickOnPublish() {
-            waitForElementClickableByElement(publishButton);
-            scrollAndClick(publishButton);
-        }
-
-	/**
-	 * <p> Verify if js alert is or isn't there. You can expect alert with certain message, or not expect alert with certain message <br>
-	 *
-	 * @param alert message that we do or do not expect
-	 * @param ifAlertExpected  if we expect JS alert - true. If we don't expect JS alert - false
-	 * @author Michal Nowierski
-	 */
-	public void clickOnVisualButtonAndCheckJSalertThere(String alertMessage, Boolean ifAlertExpected) {
-		waitForElementByElement(visualModeButton);
-		waitForElementClickableByElement(visualModeButton);
-		scrollAndClick(visualModeButton);
-		//The potential alert must be served right after alert-sensitive action:
-		//The alert check must come right after the action that might cause it. If it appear anywhere later, the potential alert will not be served.
-		checkJSalertIsThere(alertMessage, ifAlertExpected);
-		waitForElementByElement(iFrame);
-		PageObjectLogging.log("clickOnVisualButtonAndCheckJSalertNotThere", "Click on 'Visual' button and check there is no JS alert", true, driver);
+	public void clickOnPublish() {
+		waitForElementClickableByElement(publishButton);
+		scrollAndClick(publishButton);
+		PageObjectLogging.log("clickOnPublish", "publish button clicked", true, driver);
 	}
 
-	/**
-	 * Delete all source code on the article
-	 *
-	 * @author Michal Nowierski
-	 */
 	public void deleteArticleContent() {
 		driver.switchTo().frame(iFrame);
 		bodyContent.clear();
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true, driver);
+		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
 
 	}
 
-	public void clearSource(){
+	public void clearSource() {
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.clear();
-		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true, driver);
+		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
 	}
 
-	public void writeSourceMode(String source)
-	{
+	public void writeSourceMode(String source) {
 		sourceModeTextArea.sendKeys();
-		PageObjectLogging.log("writeSourceMode", "Write in source mode: "+source, true, driver);
+		PageObjectLogging.log("writeSourceMode", "Write in source mode: "+source, true);
 	}
 
 
@@ -323,12 +253,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementClickableByElement(publishButtonPreview);
 		scrollAndClick(publishButtonPreview);
 		PageObjectLogging.log("ClickOnPublishButtonPreview", "Click on 'Publish' button in preview", true, driver);
-
 		return new WikiArticlePageObject(driver);
 	}
 
-	public void typeInContent(String content)
-	{
+	public void typeInContent(String content) {
 		waitForElementByElement(visualModeIFrame);
 		driver.switchTo().frame(visualModeIFrame);
 		waitForElementByElement(bodyContent);
@@ -346,14 +274,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new VetOptionsComponentObject(driver);
 	}
 
-
-
-	/**
-	 * Verify that video appears in edit mode
-	 *
-	 * @author Michal Nowierski
-	 *
-	 */
 	public void verifyVideoInEditMode(String caption) {
 		waitForElementByElement(iFrame);
 		driver.switchTo().frame(iFrame);
@@ -371,7 +291,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().frame(iFrame);
 		waitForElementByElement(leftAlignedVideoOnEditor);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyLeftVideoInEditMode", "Verify that video appears in the left at the editor", true, driver);
+		PageObjectLogging.log("verifyLeftVideoInEditMode", "Verify that video appears in the left at the editor", true);
 
 	}
 
@@ -380,7 +300,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().frame(iFrame);
 		waitForElementByElement(rightAlignedVideoOnEditor);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyRighttVideoInEditMode", "Verify that video appears in the right at the editor", true, driver);
+		PageObjectLogging.log("verifyRighttVideoInEditMode", "Verify that video appears in the right at the editor", true);
 
 	}
 
@@ -389,54 +309,34 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().frame(iFrame);
 		waitForElementByElement(centerAlignedVideoOnEditor);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyCenterVideoInEditMode", "Verify that video appears in the center at the editor", true, driver);
+		PageObjectLogging.log("verifyCenterVideoInEditMode", "Verify that video appears in the center at the editor", true);
 	}
-
-
-
-	/**
-	 * Verify that the video appears in the left hand side in preview
-	 *
-	 * @author Rodrigo Molinero
-	 * 	 */
 
 	public void verifyVideoOnTheLeftInPreview() {
 		waitForElementByElement(leftAlignedVideoOnPreview);
-		PageObjectLogging.log("verifyVideoOnTheLeftOnPreview", "Verify that the video appears on the left in preview", true, driver);
+		PageObjectLogging.log("verifyVideoOnTheLeftOnPreview", "Verify that the video appears on the left in preview", true);
 	}
-
-	/**
-	 * Verify that the video appears in the right hand side in preview
-	 *
-	 * @author Rodrigo Molinero
-	 * 	 */
 
 	public void verifyVideoOnTheRightInPreview() {
 		waitForElementByElement(rightAlignedVideoOnPreview);
-		PageObjectLogging.log("verifyRightVideoOnTheLeftOnPreview", "Verify that the video appears on the right in preview", true, driver);
+		PageObjectLogging.log("verifyRightVideoOnTheLeftOnPreview", "Verify that the video appears on the right in preview", true);
 	}
 
 	public void verifyVideoOnTheCenterInPreview() {
 		waitForElementByElement(centerAlignedVideoOnPreview);
-		PageObjectLogging.log("verifyVideoOnTheCenterInPreview", "Verify that the video appears on the center in preview", true, driver);
+		PageObjectLogging.log("verifyVideoOnTheCenterInPreview", "Verify that the video appears on the center in preview", true);
 	}
-
 
 	public void clickClosePreviewModalButton() {
 		waitForElementByElement(closePreviewModal);
+		closePreviewModal.click();
 		PageObjectLogging.log("clickClosePreviewModalButton", "Verify that the close button in the preview modal is clicked", true, driver);
 	}
 
-
-
-
-
-
-
-	public void verifyBlockedUserMessage(){
+	public void verifyBlockedUserMessage() {
 		waitForElementByElement(blockedUserMessage1);
 		waitForElementByElement(blockedUserMessage2);
-		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true, driver);
+		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true);
 	}
 
 	public void clickAddVideoButton() {
@@ -445,25 +345,22 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickAddVideoButton", "Add Video button is clicked", true, driver);
 	}
 
-	public void clickSubmitVideoButton()
-	{
+	public void clickSubmitVideoButton() {
 		waitForElementByElement(addVideoButton);
 		addVideoButton.click();
 		PageObjectLogging.log("clickSubmitVideoButton", "Submit Video button is clicked", true, driver);
 	}
 
-	public void verifySuccessAfterAddingVideo(){
+	public void verifySuccessAfterAddingVideo() {
 		waitForElementByXPath("//h1[contains(text(), \"Success\")]");
-		PageObjectLogging.log("verifySuccessAfterAddingVideo", "Verified Success after adding video modal is visible", true, driver);
+		PageObjectLogging.log("verifySuccessAfterAddingVideo", "Verified Success after adding video modal is visible", true);
 	}
 
 	public void clickReturnToEditingButton() {
 		waitForElementByElement(returnToEditingButton);
 		returnToEditingButton.click();
 		PageObjectLogging.log("clickReturnToEditingButton", "Return to editing button is clicked", true, driver);
-
 	}
-
 
 	public void clickImageLeftAlignment() {
 		waitForElementByElement(imageLeftAlignmentOption);
@@ -482,10 +379,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().frame(iFrame);
 		waitForElementByElement(captionInEditor);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyCaptionInEditMode", "Verified existence of caption in editor", true, driver);
+		PageObjectLogging.log("verifyCaptionInEditMode", "Verified existence of caption in editor", true);
 	}
-
-
 
 	public void verifyWikiTextInSourceMode(String text) {
 		String wikiText = sourceModeTextArea.getAttribute("value");
@@ -503,34 +398,28 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().frame(iFrame);
 		waitForElementByElement(videoWidthEditor);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyVideoWidthInEditMode", "Video width in editor is exactly the same as value set in VET modal", true, driver);
+		PageObjectLogging.log("verifyVideoWidthInEditMode", "Video width in editor is exactly the same as value set in VET modal", true);
 	}
 
 	public void verifyVideoWidthOnPreview(String width) {
 		waitForElementByElement(videoOnPreview);
 		Assertion.assertEquals(width, videoOnPreview.getCssValue("width"));
-		PageObjectLogging.log("verifyVideoWidthOnPreview", "Video width in preview is exactly the same as value set in VET modal", true, driver);
+		PageObjectLogging.log("verifyVideoWidthOnPreview", "Video width in preview is exactly the same as value set in VET modal", true);
 	}
-
-
 
 	public void verifyLeftAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
 		clickOnModifyImageLink();
 		waitForElementByElement(imageLeftAlignmentOption);
 
-		if (imageLeftAlignmentOption.isSelected())
-		{
+		if (imageLeftAlignmentOption.isSelected()) {
 			PageObjectLogging.log("verifyLeftAlignmentIsSelected", "Left allignment option is selected in modal", true);
-			}
-		else
-			{
+		} else {
 			PageObjectLogging.log("verifyLeftAlignmentIsSelected", "Left allignment option is NOT selected in modal", false);
 		}
 
 		waitForElementByElement(imageUploadCloseButton);
 		imageUploadCloseButton.click();
-
 	}
 
 	public void verifyRightAlignmentIsSelected() {
@@ -538,12 +427,12 @@ public class WikiArticleEditMode extends WikiEditMode {
 		clickOnModifyImageLink();
 		waitForElementByElement(imageRightAlignmentOption);
 
-		if (imageRightAlignmentOption.isSelected()){
+		if (imageRightAlignmentOption.isSelected()) {
 			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is selected in modal", true);
-		}
-		else{
+		} else {
 			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is NOT selected in modal", false);
 		}
+
 		waitForElementByElement(imageUploadCloseButton);
 		imageUploadCloseButton.click();
 	}
@@ -564,40 +453,38 @@ public class WikiArticleEditMode extends WikiEditMode {
 		return new WikiArticlePageObject(driver);
 	}
 
-
-
 	public void verifyNoVideoCaptionInEditMode() {
 		waitForElementNotVisibleByElement(captionInEditor);
 		PageObjectLogging.log("verifyNoCaptionInEditMode", "Verify that the video does not have a caption in the editor", true);
 	}
 
-	public PhotoAddComponentObject clickPhotoButton(){
+	public PhotoAddComponentObject clickPhotoButton() {
 		waitForElementByElement(photoButton);
 		scrollAndClick(photoButton);
 		PageObjectLogging.log("clickPhotoButton", "photo button clicked", true);
 		return new PhotoAddComponentObject(driver);
 	}
 
-	public VetAddVideoComponentObject clickVideoButton(){
+	public VetAddVideoComponentObject clickVideoButton() {
 		waitForElementByElement(videoButton);
 		scrollAndClick(videoButton);
 		PageObjectLogging.log("clickVideoButton", "video button clicked", true);
 		return new VetAddVideoComponentObject(driver);
 	}
 
-	public SliderBuilderComponentObject clickSliderButton(){
+	public SliderBuilderComponentObject clickSliderButton() {
 		waitForElementByElement(sliderButton);
 		scrollAndClick(sliderButton);
 		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
 		return new SliderBuilderComponentObject(driver);
 	}
-	public SlideshowBuilderComponentObject clickSlideshowButton(){
+	public SlideshowBuilderComponentObject clickSlideshowButton() {
 		waitForElementByElement(slideshowButton);
 		scrollAndClick(slideshowButton);
 		PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
 		return new SlideshowBuilderComponentObject(driver);
 	}
-	public GalleryBuilderComponentObject clickGalleryButton(){
+	public GalleryBuilderComponentObject clickGalleryButton() {
 		waitForElementByElement(galleryButton);
 		scrollAndClick(galleryButton);
 		PageObjectLogging.log("clickGallery", "gallery button clicked", true);
@@ -606,7 +493,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public String getMessageSourceText() {
 		waitForElementByElement(messageSourceModeTextArea);
-		PageObjectLogging.log("getMessageSourceText", "Get text of source mode text of message article page.", true, driver);
+		PageObjectLogging.log("getMessageSourceText", "Get text of source mode text of message article page.", true);
 		return messageSourceModeTextArea.getText();
 	}
 
@@ -642,5 +529,4 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
 	}
-
 }
