@@ -36,7 +36,6 @@
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.BlogCommentsTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>
-			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.PhalanxTests.BlockPageTitleTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsInContent"/>
@@ -74,6 +73,10 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsUser"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.ArticleCommentsTests"/>
 			<class name="com.wikia.webdriver.TestCases.ActivityFeedsTests.WikiActivityTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowArticleTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowBlogTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowPhotosTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowVideosTests"/>
 		</classes>
 	</test>
 </suite>

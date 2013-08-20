@@ -1,6 +1,5 @@
 package com.wikia.webdriver.Common.ContentPatterns;
 
-import java.io.File;
 
 public class EventsContent {
 

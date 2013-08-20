@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
@@ -18,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
 /**
  *
@@ -112,7 +114,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement categorySaveButtonEnabled;
 	@FindBy(css="button.save[disabled]")
 	private WebElement categorySaveButtonDisabled;
-
+	@FindBy(css = ".WikiaPageHeader h1")
+	private WebElement articleTitle;
 
 	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 
@@ -419,5 +422,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 			}
 		}
 		Assertion.assertTrue(categoryVisible, "category " + category + " present");
+	}
+
+	public WatchPageObject unfollowArticle(String wikiURL) {
+		String url = URLsContent.buildUrl(wikiURL, "title=" + articleTitle.getText());
+		url = URLsContent.buildUrl(url, URLsContent.unfollowParameter);
+		getUrl(url);
+		return new WatchPageObject(driver);
 	}
 }
