@@ -830,7 +830,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void follow() {
-		followButton.click();
+		scrollAndClick(followButton);
 		waitForTextToBePresentInElementByElement(followButton, "Following");
 		PageObjectLogging.log("followArticle", "page is followed", true, driver);
 	}
