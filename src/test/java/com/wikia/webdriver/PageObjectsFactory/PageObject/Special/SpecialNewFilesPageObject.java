@@ -131,13 +131,14 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	}
 
 	public WatchPageObject unfollowImage(String wikiURL, String imageName) {
-		getUrl(
+		String url = URLsContent.buildUrl(
 				wikiURL +
 				URLsContent.wikiDir +
 				URLsContent.fileNameSpace +
-				imageName +
-				"?action=unwatch"
+				imageName,
+				URLsContent.unfollowParameter
 		);
+		getUrl(url);
 		return new WatchPageObject(driver);
 	}
 }

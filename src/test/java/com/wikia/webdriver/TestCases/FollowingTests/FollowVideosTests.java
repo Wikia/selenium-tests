@@ -33,7 +33,7 @@ public class FollowVideosTests extends NewTestTemplate{
 		special.verifyPageUnfollowed();
 	}
 
-	@Test(dependsOnMethods={"follow_setup"})
+	@Test(dependsOnMethods={"FollowVideo_001_setup"})
 	public void FollowVideo_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -41,7 +41,7 @@ public class FollowVideosTests extends NewTestTemplate{
 		file.follow();
 	}
 
-	@Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods={"follow_video"})
+	@Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods={"FollowVideo_002_follow"})
 	public void FollowVideo_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

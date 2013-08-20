@@ -14,7 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
  * @author Karol 'kkarolk' Kujawiak
  *
  */
-public class WatchPageObject extends BasePageObject{
+public class WatchPageObject extends BasePageObject {
 
 
 	@FindBy(css="[value=OK]")

@@ -32,7 +32,7 @@ public class FollowArticleTests extends NewTestTemplate{
 		article.verifyPageUnfollowed();
 	}
 
-	@Test(dependsOnMethods={"follow_setup"})
+	@Test(dependsOnMethods={"FollowArticle_001_setup"})
 	public void FollowArticle_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -40,7 +40,7 @@ public class FollowArticleTests extends NewTestTemplate{
 		article.follow();
 	}
 
-	@Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods={"follow_article"})
+	@Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods={"FollowArticle_002_follow"})
 	public void FollowArticle_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
