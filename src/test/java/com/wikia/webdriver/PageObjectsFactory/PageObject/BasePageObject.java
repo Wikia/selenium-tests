@@ -188,7 +188,6 @@ public class BasePageObject{
 	}
 
 	public String getCurrentUrl() {
-		System.out.println(driver.getCurrentUrl());
 		return driver.getCurrentUrl();
 	}
 
