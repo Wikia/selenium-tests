@@ -22,12 +22,12 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 		getUrl(wikiURL + URLsContent.specialFollow);
 	}
 
-	public void verifyFollowedArticle(String articleName){
-		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-article']//a[contains(text(), '"+articleName+"')]");
-		PageObjectLogging.log("verifyFollowedArticle", articleName + "is visible on followed list", true, driver);
+	public void verifyFollowedArticle(String articleName) {
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-article']//a[contains(text(), '" + articleName + "')]");
+		PageObjectLogging.log("verifyFollowedArticle", articleName + "is visible on followed list", true);
 	}
 
-	public void verifyFollowedImageVideo(String image){
+	public void verifyFollowedImageVideo(String image) {
 		boolean isPresent = false;
 		for (WebElement elem:imagesList) {
 			String title = elem.getAttribute("title");
@@ -39,20 +39,20 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 		PageObjectLogging.log("verifyFollowedArticle", image + "is visible on followed list", true);
 	}
 
-	public void verifyFollowedBlog(String userName, String blogTitle){
+	public void verifyFollowedBlog(String userName, String blogTitle) {
 		boolean isPresent = false;
 		for (WebElement elem:blogList) {
 			String title = elem.getAttribute("title");
-			if (title.contains(userName) && title.contains(blogTitle)){
+			if (title.contains(userName) && title.contains(blogTitle)) {
 				isPresent = true;
 			}
 		}
-		Assertion.assertTrue(isPresent, "blog "+blogTitle+" is not present on the following list");
+		Assertion.assertTrue(isPresent, "blog " + blogTitle + " is not present on the following list");
 		PageObjectLogging.log("verifyFollowedArticle", userName + " blog is visible on followed list", true);
 	}
 
-	public void verifyFollowedBlogPost(String bloPostName){
-		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '"+bloPostName+"')]");
+	public void verifyFollowedBlogPost(String bloPostName) {
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '" + bloPostName + "')]");
 		PageObjectLogging.log("verifyFollowedArticle", bloPostName + " blog post is visible on followed list", true);
 	}
 }

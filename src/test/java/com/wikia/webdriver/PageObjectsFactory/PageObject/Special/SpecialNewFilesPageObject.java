@@ -37,7 +37,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
     private List<WebElement> imagesNewFiles;
 
     //Selectors
-    private String addPhotoModalSelector = "#UploadPhotosWrapper";
     private String WikiaPreviewImgCssSelector = "div.wikia-gallery div.wikia-gallery-item img";
 
     public SpecialNewFilesPageObject(WebDriver driver) {
@@ -128,7 +127,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 				wikiURL +
 				URLsContent.wikiDir +
 				URLsContent.fileNS +
-				imageName+
+				imageName +
 				"?action=unwatch"
 	    );
 	    return new WatchPageObject(driver);

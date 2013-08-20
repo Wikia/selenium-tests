@@ -21,39 +21,37 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 	public FilePagePageObject(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 
 	@FindBys(@FindBy(css="ul.tabs li a"))
 	private List<WebElement> tabList;
 
-    @FindBy(css="section[data-listing-type='local'] h3.page-listing-title a")
-    private WebElement appearsListing;
+	@FindBy(css="section[data-listing-type='local'] h3.page-listing-title a")
+	private WebElement appearsListing;
 
-    @FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.right")
-    private WebElement localPageNext;
+	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.right")
+	private WebElement localPageNext;
 
-    @FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
-    private WebElement localPagePrev;
+	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
+	private WebElement localPagePrev;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
 	public void selectTab(int tab) {
 		WebElement currentTab = tabList.get(tab);
 		currentTab.click();
-		PageObjectLogging.log("selectTab", tab+" selected", true);
+		PageObjectLogging.log("selectTab", tab + " selected", true);
 	}
 
 	public void verifySelectedTab(String tabName) {
 		driver.findElement(By.cssSelector(selectedTab.replace("%name%", tabName)));
-		PageObjectLogging.log("verified selected tab", tabName+" selected", true);
+		PageObjectLogging.log("verified selected tab", tabName + " selected", true);
 	}
 
 	public void openFilePage(String fileName) {
 		getUrl(URLsContent.filePage + fileName);
 		waitForElementByElement(tabList.get(0));
 		PageObjectLogging.log("Open file page", "file page opened", true);
-
 	}
 
 	public void refreshAndVerifyTabs(int tab) {
@@ -74,18 +72,18 @@ public class FilePagePageObject extends WikiBasePageObject {
 		verifySelectedTab(tabName);
 	}
 
-    // Page forward in the local "appears on" section
-    public void localAppearsPageNext() {
-        localPageNext.click();
-    }
+	// Page forward in the local "appears on" section
+	public void localAppearsPageNext() {
+		localPageNext.click();
+	}
 
-    // Page backward in the local "appears on" section
-    public void localAppearsPagePrev() {
-        localPagePrev.click();
-    }
+	// Page backward in the local "appears on" section
+	public void localAppearsPagePrev() {
+		localPagePrev.click();
+	}
 
-    // Verify that a specific video title is in the "Appears on these pages" list
-    public void verifyAppearsOn(String articleName) {
-        PageObjectLogging.log("Verify correct article title", "title correct", appearsListing.getText().equals(articleName));
-    }
+	// Verify that a specific video title is in the "Appears on these pages" list
+	public void verifyAppearsOn(String articleName) {
+		PageObjectLogging.log("Verify correct article title", "title correct", appearsListing.getText().equals(articleName));
+	}
 }

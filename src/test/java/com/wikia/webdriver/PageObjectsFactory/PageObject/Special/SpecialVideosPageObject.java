@@ -27,8 +27,8 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 	private List<WebElement> videos;
 
 	public SpecialVideosPageObject(WebDriver driver) {
-            super(driver);
-            PageFactory.initElements(driver, this);
+		super(driver);
+		PageFactory.initElements(driver, this);
 	}
 
 	public String getRandomVideo() {
@@ -46,10 +46,10 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 				wikiURL +
 				URLsContent.wikiDir +
 				URLsContent.fileNS +
-				videoName+
+				videoName +
 				"?action=unwatch"
-        );
-        return new WatchPageObject(driver);
+		);
+		return new WatchPageObject(driver);
 	}
 
 	public VetAddVideoComponentObject clickAddAVideo() {
