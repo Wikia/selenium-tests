@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
@@ -23,8 +24,9 @@ public class WatchPageObject extends BasePageObject{
 		super(driver);
 	}
 
-	public void confirm() {
+	public void confirmWatchUnwatch() {
 		followUnfollowConfirmation.click();
+		PageObjectLogging.log("confirmWatchUnwatch", "follow/unfollow confirmation button clicked", true);
 	}
 
 

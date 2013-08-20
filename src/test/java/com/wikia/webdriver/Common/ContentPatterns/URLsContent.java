@@ -57,13 +57,14 @@ public class URLsContent {
 
 	//Blog list page url
 	public static final String blogList = "wiki/Blog:%listName%/";
-	public static final String blogNS = "wiki/User_blog:%userName%/";
+	public static final String blogNameSpace = "wiki/User_blog:%userName%/";
 
 	// Extra switches - appear after ? in link
 	public static final String noexternals = "?noexternals=1";
 	public static final String actionEditParameter = "action=edit";
 	public static final String useDefaultFormat = "useFormat=1";
 	public static final String wikiaTracker = "og_level=info";
+	public static final String unfollowParameter = "action=unwatch";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "WAM";
@@ -88,10 +89,10 @@ public class URLsContent {
 	}
 
 	// File Pages
-	public static String fileNS = "File:";
+	public static String fileNameSpace = "File:";
 	public static String fileName001 = "Grammy_Muppet_Critics";
 	public static String fileName002 = "New_Batman_Year_One_Clip";
-	public static String filePage = Global.DOMAIN + wikiDir + fileNS;
+	public static String filePage = Global.DOMAIN + wikiDir + fileNameSpace;
 
 	// History Pages
 	public static String historyAction = "action=history";

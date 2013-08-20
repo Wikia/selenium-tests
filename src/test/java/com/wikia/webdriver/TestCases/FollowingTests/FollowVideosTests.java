@@ -23,18 +23,18 @@ public class FollowVideosTests extends NewTestTemplate{
 	String videoName;
 
 	@Test
-	public void follow_setup() {
+	public void FollowVideo_001_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialVideosPageObject special = base.openSpecialVideoPage(wikiURL);
 		videoName = special.getRandomVideo();
 		WatchPageObject watch = special.unfollowVideo(wikiURL, videoName);
-		watch.confirm();
+		watch.confirmWatchUnwatch();
 		special.verifyPageUnfollowed();
 	}
 
 	@Test(dependsOnMethods={"follow_setup"})
-	public void follow_video() {
+	public void FollowVideo_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		FilePagePageObject file = base.openFilePage(wikiURL, videoName);
@@ -42,7 +42,7 @@ public class FollowVideosTests extends NewTestTemplate{
 	}
 
 	@Test(groups = {"FollowPhoto", "Follow"}, dependsOnMethods={"follow_video"})
-	public void follow_verification() {
+	public void FollowVideo_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);

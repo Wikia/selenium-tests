@@ -22,18 +22,18 @@ public class FollowArticleTests extends NewTestTemplate{
 	String articleName;
 
 	@Test
-	public void follow_setup() {
+	public void FollowArticle_001_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		articleName = article.getArticleName();
 		WatchPageObject watch = article.unfollowArticle(wikiURL);
-		watch.confirm();
+		watch.confirmWatchUnwatch();
 		article.verifyPageUnfollowed();
 	}
 
 	@Test(dependsOnMethods={"follow_setup"})
-	public void follow_article() {
+	public void FollowArticle_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
@@ -41,7 +41,7 @@ public class FollowArticleTests extends NewTestTemplate{
 	}
 
 	@Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods={"follow_article"})
-	public void follow_verification() {
+	public void FollowArticle_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);

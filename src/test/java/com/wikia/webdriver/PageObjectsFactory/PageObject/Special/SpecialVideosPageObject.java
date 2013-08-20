@@ -45,7 +45,7 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 		getUrl(
 				wikiURL +
 				URLsContent.wikiDir +
-				URLsContent.fileNS +
+				URLsContent.fileNameSpace +
 				videoName +
 				"?action=unwatch"
 		);

@@ -255,6 +255,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public String getArticleName() {
 		String articleName = articleHeader.getText();
+		PageObjectLogging.log("getArticleName", "the name of the article is: "+articleName, true);
 		return articleName;
 	}
 
@@ -425,7 +426,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public WatchPageObject unfollowArticle(String wikiURL) {
 		String url = URLsContent.buildUrl(wikiURL, "title=" + articleTitle.getText());
-		url = URLsContent.buildUrl(url, "&action=unwatch");
+		url = URLsContent.buildUrl(url, URLsContent.unfollowParameter);
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}

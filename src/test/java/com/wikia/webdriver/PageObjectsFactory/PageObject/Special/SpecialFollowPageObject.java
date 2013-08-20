@@ -27,16 +27,16 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 		PageObjectLogging.log("verifyFollowedArticle", articleName + "is visible on followed list", true);
 	}
 
-	public void verifyFollowedImageVideo(String image) {
+	public void verifyFollowedImageVideo(String imageVideo) {
 		boolean isPresent = false;
 		for (WebElement elem:imagesList) {
 			String title = elem.getAttribute("title");
-			if (title.contains(image)){
+			if (title.contains(imageVideo)){
 				isPresent = true;
 			}
 		}
-		Assertion.assertTrue(isPresent, "image " + image + " is not present on the following list");
-		PageObjectLogging.log("verifyFollowedArticle", image + "is visible on followed list", true);
+		Assertion.assertTrue(isPresent, "image " + imageVideo + " is not present on the following list");
+		PageObjectLogging.log("verifyFollowedImageVideo", imageVideo + "is visible on followed list", true);
 	}
 
 	public void verifyFollowedBlog(String userName, String blogTitle) {
@@ -48,11 +48,11 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 			}
 		}
 		Assertion.assertTrue(isPresent, "blog " + blogTitle + " is not present on the following list");
-		PageObjectLogging.log("verifyFollowedArticle", userName + " blog is visible on followed list", true);
+		PageObjectLogging.log("verifyFollowedBlog", userName + " blog is visible on followed list", true);
 	}
 
-	public void verifyFollowedBlogPost(String bloPostName) {
-		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '" + bloPostName + "')]");
-		PageObjectLogging.log("verifyFollowedArticle", bloPostName + " blog post is visible on followed list", true);
+	public void verifyFollowedBlogPost(String blogPostName) {
+		waitForElementByXPath("//ul[@id='wikiafollowedpages-special-heading-blogs']//a[contains(text(), '" + blogPostName + "')]");
+		PageObjectLogging.log("verifyFollowedBlogPost", blogPostName + " blog post is visible on followed list", true);
 	}
 }

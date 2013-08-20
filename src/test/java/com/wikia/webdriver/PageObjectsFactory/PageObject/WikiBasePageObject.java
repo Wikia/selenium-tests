@@ -136,7 +136,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-    public String resetForgotPasswordTime(String userName) {
+	public String resetForgotPasswordTime(String userName) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},
@@ -221,7 +221,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public FilePagePageObject openFilePage(String wikiURL, String fileName) {
-		getUrl(wikiURL + URLsContent.wikiDir + URLsContent.fileNS + fileName);
+		getUrl(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName);
 		return new FilePagePageObject(driver);
 	}
 
@@ -391,7 +391,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
 		getUrl(
 				wikiURL +
-				URLsContent.blogNS.replace("%userName%", userName) +
+				URLsContent.blogNameSpace.replace("%userName%", userName) +
 				blogTitle
 		);
 		return new BlogPageObject(driver);
@@ -826,11 +826,12 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyPageUnfollowed() {
 		waitForTextToBePresentInElementByElement(followButton, "Follow");
+		PageObjectLogging.log("verifyPageUnfollowed", "page is not followed", true);
 	}
 
 	public void follow() {
 		followButton.click();
 		waitForTextToBePresentInElementByElement(followButton, "Following");
-		PageObjectLogging.log("followArticle", "page followed", true, driver);
+		PageObjectLogging.log("followArticle", "page is followed", true, driver);
 	}
 }

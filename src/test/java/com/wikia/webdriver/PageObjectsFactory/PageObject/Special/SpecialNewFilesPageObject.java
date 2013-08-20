@@ -21,70 +21,72 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
  */
 public class SpecialNewFilesPageObject extends SpecialPageObject {
 
-    @FindBy(css = "a.upphotos[title*='Add a photo']")
-    private WebElement addPhotoButton;
-    @FindBy(css="input[name='wpUploadFile']")
-    private WebElement BrowseForFileInput;
-    @FindBy(css="div.step-1 input[value*='Upload']")
-    private WebElement UploadFileInput;
-    @FindBy(css="div.advanced a")
-    private WebElement MoreOrFewerOptions;
-    @FindBy(css="div.toggles input[name='wpIgnoreWarning']")
-    private WebElement IgnoreAnyWarnings;
-    @FindBy(css="section[id='UploadPhotosWrapper']")
-    private WebElement UploadPhotoDialog;
-    @FindBys(@FindBy(css="#mw-content-text img"))
-    private List<WebElement> imagesNewFiles;
+	@FindBy(css = "a.upphotos[title*='Add a photo']")
+	private WebElement addPhotoButton;
+	@FindBy(css="input[name='wpUploadFile']")
+	private WebElement BrowseForFileInput;
+	@FindBy(css="div.step-1 input[value*='Upload']")
+	private WebElement UploadFileInput;
+	@FindBy(css="div.advanced a")
+	private WebElement MoreOrFewerOptions;
+	@FindBy(css="div.toggles input[name='wpIgnoreWarning']")
+	private WebElement IgnoreAnyWarnings;
+	@FindBy(css="section[id='UploadPhotosWrapper']")
+	private WebElement UploadPhotoDialog;
+	@FindBys(@FindBy(css="#mw-content-text img"))
+	private List<WebElement> imagesNewFiles;
 
-    //Selectors
-    private String WikiaPreviewImgCssSelector = "div.wikia-gallery div.wikia-gallery-item img";
+	private String WikiaPreviewImgCssSelector = "div.wikia-gallery div.wikia-gallery-item img";
 
-    public SpecialNewFilesPageObject(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-    }
+	public SpecialNewFilesPageObject(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+	}
 
-    public void addPhoto() {
-        waitForElementByElement(addPhotoButton);
-        scrollAndClick(addPhotoButton);
-        PageObjectLogging.log(
-            "ClickAddPhotoButton",
-            "Add photo button clicked",
-            true
-        );
-    }
+	public void addPhoto() {
+		waitForElementByElement(addPhotoButton);
+		scrollAndClick(addPhotoButton);
+		PageObjectLogging.log(
+			"ClickAddPhotoButton",
+			"Add photo button clicked",
+			true
+		);
+	}
 
-    public void clickOnUploadaPhoto() {
-        waitForElementByElement(UploadFileInput);
-        scrollAndClick(UploadFileInput);
-        PageObjectLogging.log(
-            "ClickOnUploadaPhoto",
-            "Click on upload a photo button",
-            true, driver
-        );
-    }
+	public void clickOnUploadaPhoto() {
+		waitForElementByElement(UploadFileInput);
+		scrollAndClick(UploadFileInput);
+		PageObjectLogging.log(
+			"ClickOnUploadaPhoto",
+			"Click on upload a photo button",
+			true,
+			driver
+		);
+	}
 
-    public void clickOnMoreOrFewerOptions() {
-        waitForElementByElement(MoreOrFewerOptions);
-        scrollAndClick(MoreOrFewerOptions);
-        PageObjectLogging.log(
-            "ClickOnMoreOrFewerOptions",
-            "Click on More or Fewer options (depends on which of those two is currently visible)",
-            true, driver
-        );
-    }
+	public void clickOnMoreOrFewerOptions() {
+		waitForElementByElement(MoreOrFewerOptions);
+		scrollAndClick(MoreOrFewerOptions);
+		PageObjectLogging.log(
+			"ClickOnMoreOrFewerOptions",
+			"Click on More or Fewer options (depends on which of those two is currently visible)",
+			true,
+			driver
+		);
+	}
 
-    public void checkIgnoreAnyWarnings() {
-        waitForElementByElement(IgnoreAnyWarnings);
-        scrollAndClick(IgnoreAnyWarnings);
-        PageObjectLogging.log(
-            "CheckIgnoreAnyWarnings",
-            "Check 'Ignore Any Warnings' option",
-            true, driver
-        );
-    }
+	public void checkIgnoreAnyWarnings() {
+		waitForElementByElement(IgnoreAnyWarnings);
+		scrollAndClick(IgnoreAnyWarnings);
+		PageObjectLogging.log(
+			"CheckIgnoreAnyWarnings",
+			"Check 'Ignore Any Warnings' option",
+			true,
+			driver
+		);
+	}
 
-    public void typeInFileToUploadPath(String file) {
+	public void typeInFileToUploadPath(String file) {
 		File fileCheck = new File("." + File.separator + "src" + File.separator
 				+ "test" + File.separator + "resources" + File.separator + "ImagesForUploadTests"
 				+ File.separator + file);
@@ -101,35 +103,41 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		PageObjectLogging.log("typeInFileToUploadPath", "type file "+file+" to upload it", true, driver);
 	}
 
-    public void waitForFile(String FileName) {
-        driver.navigate().refresh();
-        waitForValueToBePresentInElementsAttributeByCss(
-            WikiaPreviewImgCssSelector, "src", FileName
-        );
-        PageObjectLogging.log(
-            "waitForFile",
-            "Verify if "+FileName+" has been succesfully uploaded",
-            true, driver
-        );
-    }
+	public void waitForFile(String FileName) {
+		driver.navigate().refresh();
+		waitForValueToBePresentInElementsAttributeByCss(
+			WikiaPreviewImgCssSelector,
+			"src",
+			FileName
+		);
+		PageObjectLogging.log(
+			"waitForFile",
+			"Verify if "+FileName+" has been succesfully uploaded",
+			true,
+			driver
+		);
+	}
 
-    public String getRandomImage() {
+	/**
+	 * @return name of random image on Special:NewFiles page
+	 */
+	public String getRandomImage() {
 		List<String> hrefs = new ArrayList<String>();
 		for (WebElement elem:imagesNewFiles) {
 			hrefs.add(elem.getAttribute("data-image-name"));
 		}
 		Random r = new Random();
 		return hrefs.get((r.nextInt(hrefs.size()-1))+1);
-    }
+	}
 
-    public WatchPageObject unfollowImage(String wikiURL, String imageName) {
+	public WatchPageObject unfollowImage(String wikiURL, String imageName) {
 		getUrl(
 				wikiURL +
 				URLsContent.wikiDir +
-				URLsContent.fileNS +
+				URLsContent.fileNameSpace +
 				imageName +
 				"?action=unwatch"
-	    );
-	    return new WatchPageObject(driver);
+		);
+		return new WatchPageObject(driver);
 	}
 }

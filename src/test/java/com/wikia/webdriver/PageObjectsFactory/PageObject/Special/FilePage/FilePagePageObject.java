@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -73,17 +74,19 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 
 	// Page forward in the local "appears on" section
-	public void localAppearsPageNext() {
+	public void clickLocalAppearsPageNext() {
 		localPageNext.click();
+		PageObjectLogging.log("clickLocalAppearsPageNext", "local appears page next button clicked", true);
 	}
 
 	// Page backward in the local "appears on" section
-	public void localAppearsPagePrev() {
+	public void clickLocalAppearsPagePrev() {
 		localPagePrev.click();
+		PageObjectLogging.log("clickLocalAppearsPagePrev", "local appears page preview button clicked", true);
 	}
 
 	// Verify that a specific video title is in the "Appears on these pages" list
 	public void verifyAppearsOn(String articleName) {
-		PageObjectLogging.log("Verify correct article title", "title correct", appearsListing.getText().equals(articleName));
+		Assertion.assertTrue(appearsListing.getText().equals(articleName));
 	}
 }

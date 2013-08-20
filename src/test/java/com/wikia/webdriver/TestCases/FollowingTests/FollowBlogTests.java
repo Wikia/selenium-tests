@@ -23,7 +23,7 @@ public class FollowBlogTests extends NewTestTemplate {
 	String blogTitle;
 
 	@Test
-	public void follow_setup() {
+	public void FollowBlog_001_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
@@ -31,12 +31,12 @@ public class FollowBlogTests extends NewTestTemplate {
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		blogTitle = blogPage.getBlogName();
 		WatchPageObject watch = blogPage.unfollowBlogPage();
-		watch.confirm();
+		watch.confirmWatchUnwatch();
 		blogPage.verifyPageUnfollowed();
 	}
 
 	@Test(dependsOnMethods={"follow_setup"})
-	public void follow_blog() {
+	public void FollowBlog_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		BlogPageObject blog = base.openBlogByName(wikiURL, blogTitle, credentials.userName);
@@ -44,7 +44,7 @@ public class FollowBlogTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"FollowBlog", "Follow"}, dependsOnMethods={"follow_blog"})
-	public void follow_verification() {
+	public void FollowBlog_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialFollowPageObject follow = new SpecialFollowPageObject(driver, wikiURL);
