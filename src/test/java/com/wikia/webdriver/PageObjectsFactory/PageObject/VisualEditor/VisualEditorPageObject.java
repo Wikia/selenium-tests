@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
@@ -69,48 +70,54 @@ public class VisualEditorPageObject extends BasePageObject{
 	@FindBy(css="ul.ve-ce-branchNode > li")
 	private List<WebElement> bullList;
 
-	public void openVisualEditor() {
-		getUrl("http://public.inez.wikia-dev.com/VisualEditor/demos/ve/");
-	}
-
 	public void write(String text) {
 		editArea.sendKeys(text);
+		PageObjectLogging.log("write", "text " + text + "written", true);
 	}
 
 	public void write(Keys key) {
 		editArea.sendKeys(key);
+		PageObjectLogging.log("write", "text " + key.toString() + "pressed", true);
 	}
 
 	public void clear() {
 		editArea.clear();
+		PageObjectLogging.log("clear", "editor area cleared", true);
 	}
 
 	public void clickBoldButton() {
 		boldButton.click();
+		PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
 	}
 
 	public void clickItalicButton() {
 		italicButton.click();
+		PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
 	}
 
 	public void clickLinkButton() {
 		linkButton.click();
+		PageObjectLogging.log("clickLinkButton", "link button clicked", true);
 	}
 
 	public void clickCodeButton() {
 		codeButton.click();
+		PageObjectLogging.log("clickCodeButton", "code button clicked", true);
 	}
 
 	public void clickClearButton() {
 		clearButton.click();
+		PageObjectLogging.log("clickClearButton", "clear styles button clicked", true);
 	}
 
 	public void clickNumListButton() {
 		numListButton.click();
+		PageObjectLogging.log("clickNumListButton", "numered list button clicked", true);
 	}
 
 	public void clickBullListButton() {
 		bulletListButton.click();
+		PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
 	}
 
 	public void typeHyperlink(String hyperlink) {
@@ -119,6 +126,7 @@ public class VisualEditorPageObject extends BasePageObject{
 		linkInputField.sendKeys(hyperlink);
 		linkInputField.sendKeys(Keys.ENTER);
 		driver.switchTo().defaultContent();
+		PageObjectLogging.log("typeHyperlink", "hyperlink added", true);
 	}
 
 	public void verifyLink(String text, String hyperlink) {
@@ -142,22 +150,25 @@ public class VisualEditorPageObject extends BasePageObject{
 		Assertion.assertEquals(text, codeLine.getText());
 	}
 
-	public void selectBoldText() {
+	public void highlightBoldText() {
 		waitForElementByElement(boldLine);
 		Actions actions = new Actions(driver);
 		actions.doubleClick(boldLine).build().perform();
+		PageObjectLogging.log("highlightBoldText", "bold text highlighted", true);
 	}
 
-	public void selectItalicText() {
+	public void highlightItalicText() {
 		waitForElementByElement(italicLine);
 		Actions actions = new Actions(driver);
 		actions.doubleClick(italicLine).build().perform();
+		PageObjectLogging.log("highlightItalicText", "italic text highlighted", true);
 	}
 
-	public void selectCodeText() {
+	public void hightlightCodeText() {
 		waitForElementByElement(codeLine);
 		Actions actions = new Actions(driver);
 		actions.doubleClick(codeLine).build().perform();
+		PageObjectLogging.log("hightlightCodeText", "code text highlighted", true);
 	}
 
 	public void verifyTextNotFormatted(String text) {
@@ -178,8 +189,4 @@ public class VisualEditorPageObject extends BasePageObject{
 			Assertion.assertEquals(elements.get(i), bullList.get(i).getText());
 		}
 	}
-
-
-
-
 }

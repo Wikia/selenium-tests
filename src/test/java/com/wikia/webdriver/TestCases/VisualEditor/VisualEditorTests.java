@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.TestCases.VisualEditor;
 
 import java.util.ArrayList;
@@ -11,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VisualEditorContent;
-import com.wikia.webdriver.Common.Templates.VeTestTemplate;
+import com.wikia.webdriver.Common.Templates.VisualEditorTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
@@ -26,34 +23,34 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * 6. Write bullet list
  */
 
-public class VisualEditorTests extends VeTestTemplate{
+public class VisualEditorTests extends VisualEditorTestTemplate{
 
-	@Test(groups = {"VE", "VE_001"})
-	public void VE_001_writeBoldText() {
+	@Test(groups = {"VisualEditor", "VisualEditor_001"})
+	public void VisualEditor_001_writeBoldText() {
 		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
 		ve.clear();
 		ve.clickBoldButton();
 		ve.write(VisualEditorContent.text);
 		ve.verifyTextBold(VisualEditorContent.text);
-		ve.selectBoldText();
+		ve.highlightBoldText();
 		ve.clickClearButton();
 		ve.verifyTextNotFormatted(VisualEditorContent.text);
 	}
 
-	@Test(groups = {"VE", "VE_002"})
-	public void VE_002_writeItalicText() {
+	@Test(groups = {"VisualEditor", "VisualEditor_002"})
+	public void VisualEditor_002_writeItalicText() {
 		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
 		ve.clear();
 		ve.clickItalicButton();
 		ve.write(VisualEditorContent.text);
 		ve.verifyTextItalic(VisualEditorContent.text);
-		ve.selectItalicText();
+		ve.highlightItalicText();
 		ve.clickClearButton();
 		ve.verifyTextNotFormatted(VisualEditorContent.text);
 	}
 
-	@Test(groups = {"VE", "VE_003"})
-	public void VE_003_addLink() {
+	@Test(groups = {"VisualEditor", "VisualEditor_003"})
+	public void VisualEditor_003_addLink() {
 		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
 		ve.clear();
 		ve.write(VisualEditorContent.text);
@@ -62,20 +59,20 @@ public class VisualEditorTests extends VeTestTemplate{
 		ve.verifyLink(VisualEditorContent.text, PageContent.wikiaGlobalUrl);
 	}
 
-	@Test(groups = {"VE", "VE_004"})
-	public void VE_004_writeCodeText() {
+	@Test(groups = {"VisualEditor", "VisualEditor_004"})
+	public void VisualEditor_004_writeCodeText() {
 		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
 		ve.clear();
 		ve.clickCodeButton();
 		ve.write(VisualEditorContent.text);
 		ve.verifyCodeText(VisualEditorContent.text);
-		ve.selectCodeText();
+		ve.hightlightCodeText();
 		ve.clickClearButton();
 		ve.verifyTextNotFormatted(VisualEditorContent.text);
 	}
 
-	@Test(groups = {"VE", "VE_005"})
-	public void VE_005_writeNumList() {
+	@Test(groups = {"VisualEditor", "VisualEditor_005"})
+	public void VisualEditor_005_writeNumList() {
 		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
 		ve.clear();
 		ve.clickNumListButton();
@@ -91,8 +88,8 @@ public class VisualEditorTests extends VeTestTemplate{
 		ve.verifyNumList(elements);
 	}
 
-	@Test(groups = {"VE", "VE_006"})
-	public void VE_006_writeBulletList() {
+	@Test(groups = {"VisualEditor", "VisualEditor_006"})
+	public void VisualEditor_006_writeBulletList() {
 		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
 		ve.clear();
 		ve.clickBullListButton();
