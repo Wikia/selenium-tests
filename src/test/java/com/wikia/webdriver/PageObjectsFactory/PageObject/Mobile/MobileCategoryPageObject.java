@@ -80,34 +80,41 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		Assertion.assertTrue(categoryExhibition.size() == 4);
 	}
 
-	public void openArticlesWithPagination(){
-		for(int i=0; i < articleList.size(); i++) {
-			articleList.get(i).click();
-			if(loadMoreButton.isDisplayed()) {
-				break;
-			}
-			else {
-				articleList.get(i).click();
-			}
-		}
+	public void openArticle(int i) {
+		articleList.get(i).click();
+		waitForElementByElement(loadMoreButton);
 	}
 
-	public void verifyPagination(){
-		Assertion.assertTrue(articleListWithPagination.size() == 25);
-		String firstArticle = articleListWithPagination.get(0).getAttribute("href");
-		String lastArticle = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
+	public void showNextArticles() {
 		loadMoreButton.click();
 		waitForElementByElement(loadPreviousButton);
-		Assertion.assertTrue(articleListWithPagination.size() <= 25);
-		String firstArticle2 = articleListWithPagination.get(0).getAttribute("href");
-		Assertion.assertNotEquals(firstArticle, firstArticle2);
+	}
+
+	public void showPreviousArticles() {
 		loadPreviousButton.click();
 		waitForElementByElement(loadMoreButton);
-		Assertion.assertTrue(articleListWithPagination.size() == 25);
-		String firstArticle3 = articleListWithPagination.get(0).getAttribute("href");
-		String lastArticle3 = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
-		Assertion.assertEquals(firstArticle, firstArticle3);
-		Assertion.assertEquals(lastArticle, lastArticle3);
+	}
+
+	public void verifyArticlesCount(int count) {
+		Assertion.assertTrue(articleListWithPagination.size() == count);
+	}
+
+	public String getFirstArticleName() {
+		String firstArticle = articleListWithPagination.get(0).getAttribute("href");
+		return firstArticle;
+	}
+
+	public String getLastArticleName() {
+		String lastArticle = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
+		return lastArticle;
+	}
+
+	public void verifyArticlesEquals(String article, String article2) {
+		Assertion.assertEquals(article, article2);
+	}
+
+	public void verifyArticlesNotEquals(String article, String article2) {
+		Assertion.assertNotEquals(article, article2);
 	}
 
 }
