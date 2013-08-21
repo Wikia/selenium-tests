@@ -19,7 +19,7 @@ public class TocTests extends NewTestTemplate{
 		article.verifyTocClosed();
 	}
 
-	@Test(groups={"tocTest_002", "tocTests", "mobile"}) // TODO create assertNotEq method
+	@Test(groups={"tocTest_002", "tocTests", "mobile"})
 	public void Sections_002_tocToSectionLevel1Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
@@ -27,11 +27,10 @@ public class TocTests extends NewTestTemplate{
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel1SectionInToc(5, wikiURL);
 		article.verifySectionHeaderOpened(clickedItem);
-		Long positionAfterClick = article.getPosition();
-		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
+		article.verifyPositionsNotEquals(positionBeforeClick);
 	}
 
-	@Test(groups={"tocTest_003", "tocTests", "mobile"}) // TODO create assertNotEq method
+	@Test(groups={"tocTest_003", "tocTests", "mobile"})
 	public void Sections_003_tocToSectionLevel2Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
@@ -39,11 +38,10 @@ public class TocTests extends NewTestTemplate{
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel2SectionInToc(0, wikiURL);
 		article.verifySectionOpened(clickedItem,3);
-		Long positionAfterClick = article.getPosition();
-		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
+		article.verifyPositionsNotEquals(positionBeforeClick);
 	}
 
-	@Test(groups={"tocTest_004", "tocTests", "mobile"}) // TODO create assertNotEq method
+	@Test(groups={"tocTest_004", "tocTests", "mobile"})
 	public void Sections_004_tocToSectionLevel3Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
@@ -51,11 +49,10 @@ public class TocTests extends NewTestTemplate{
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel3SectionInToc(0, wikiURL);
 		article.verifySectionOpened(clickedItem,4);
-		Long positionAfterClick = article.getPosition();
-		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
+		article.verifyPositionsNotEquals(positionBeforeClick);
 	}
 
-	@Test(groups={"tocTest_005", "tocTests", "mobile"}) // TODO create assertNotEq method
+	@Test(groups={"tocTest_005", "tocTests", "mobile"})
 	public void Sections_005_tocToSectionLevel4Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
@@ -63,8 +60,7 @@ public class TocTests extends NewTestTemplate{
 		Long positionBeforeClick = article.getPosition();
 		String clickedItem = article.clickOnLevel4SectionInToc(0, wikiURL);
 		article.verifySectionOpened(clickedItem,5);
-		Long positionAfterClick = article.getPosition();
-		Assertion.assertNotEquals(positionBeforeClick, positionAfterClick);
+		article.verifyPositionsNotEquals(positionBeforeClick);
 	}
 
 	@Test(groups={"tocTest_006", "tocTests", "mobile"})

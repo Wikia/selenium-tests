@@ -21,15 +21,13 @@ public class LoginTests extends NewTestTemplate{
 		mobile.logOutMobile(wikiURL);
 	}
 
-//	@Test(groups={"loginTest_002", "mobile"})
-//	public void LoginFacebook() {
-//		MobileBasePageObject mobile = new MobileBasePageObject(driver);
-//		mobile.openHome(wikiURL);
-//		mobile.openRandomPage();
-//		String url = driver.getCurrentUrl();
-//		mobile.loginFB(credentials.emailFB, credentials.passwordFB);
-//		mobile.verifyURLcontains(url);
-//		mobile.logOutMobile(wikiURL);
-//	}
+	@Test(groups={"loginTest_002", "mobile"})
+	public void LoginFacebook() {
+		MobileBasePageObject mobile = new MobileBasePageObject(driver);
+		mobile.openHome(wikiURL);
+		mobile.openRandomPage();
+		mobile.clickLoginFBButton();
+		mobile.verifyFBLogin();
+	}
 
 }

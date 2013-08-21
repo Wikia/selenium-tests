@@ -117,20 +117,11 @@ public class MobileBasePageObject extends BasePageObject {
 				"facebook button clicked in login drop-down", true, driver);
 	}
 
-	public void typeInUserNameAndPasswordAndSubmitFacebook(String username,
-			String password) {
+	public void verifyFBLogin() {
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForElementByElement(fbUserName);
-		waitForElementByElement(fbPassword);
-		waitForElementByElement(fbLogin);
-		fbUserName.sendKeys(username);
-		fbPassword.sendKeys(password);
-		fbLogin.click();
-		driver.switchTo().window(windows[0].toString());
-		waitForElementByElement(avatar);
-		PageObjectLogging.log("typeInUserNameAndPasswordAndSubmitFacebook",
-				"user logged in by facebook", true, driver);
+		Assertion.assertStringContains(getCurrentUrl(), "facebook.com");
+		PageObjectLogging.log("VerifyFBLogin", "FB login window was opened", true, driver);
 	}
 
 	public void submitLogin() {
@@ -148,11 +139,10 @@ public class MobileBasePageObject extends BasePageObject {
 				driver);
 	}
 
-	public void loginFB(String username, String password) {
+	public void clickLoginFBButton() {
 		triggerLoginDropDown();
 		clickFbWindowTriggerButton();
-		typeInUserNameAndPasswordAndSubmitFacebook(username, password);
-		PageObjectLogging.log("login facebook", "user logged in successfully",
+		PageObjectLogging.log("clickLoginFBButton", "FB button was clicked",
 				true, driver);
 	}
 

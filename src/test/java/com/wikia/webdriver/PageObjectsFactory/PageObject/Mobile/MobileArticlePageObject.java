@@ -23,6 +23,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private String wikiTOC = "wiki/TOC#";
 	private String modal = "#Modal";
 	private String mainPageTitle = "Mobileregressiontesting Wiki";
+	private String curtainNotOpened = ".ads";
 
 	@FindBy(css="#wkArtCom .collSec.addChev")
 	private WebElement commentsSectionShowButton;
@@ -86,6 +87,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement level2Visible;
 	@FindBy(css=".lvl3.cur")
 	private WebElement level3Visible;
+	@FindBy(css=".ads")
+	private WebElement curtainClosed;
 
 	public void showCommentsSection() {
 		waitForElementNotVisibleByElement(commentInputArea);
@@ -310,6 +313,10 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		return href.replace(wikiURL + wikiTOC, "");
 	}
 
+	public void verifyPositionsNotEquals(Long positionBeforeClick) {
+		Assertion.assertNotEquals(positionBeforeClick, getPosition());
+	}
+
 	public void verifySectionHeaderOpened(String desiredId) {
 		waitForElementByElement(sectionHeaderOpened);
 		String currentId = sectionHeaderOpened.getAttribute("id");
@@ -328,11 +335,13 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		openedImage.click();
 	}
 
-	public void verifyTopbarButton(WebElement element) {
+	private void verifyTopbarButton(WebElement element) {
 		waitForElementByElement(topbarLoginButton);
 		element.click();
+		waitForElementNotPresent(curtainNotOpened);
 		Assertion.assertEquals("block", curtain.getCssValue("display"), "menu is not opened");
 		element.click();
+		waitForElementByElement(curtainClosed);
 		Assertion.assertEquals("none", curtain.getCssValue("display"), "menu is not closed");
 	}
 

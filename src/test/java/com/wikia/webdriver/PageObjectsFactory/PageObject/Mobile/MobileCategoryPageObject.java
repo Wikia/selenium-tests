@@ -18,36 +18,25 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	}
 
 	// UI Mapping
-
 	private String categoryPmg = "wiki/Category:PMG";
-
 	@FindBy(css = "#expAll:not(.exp)")
 	private WebElement showAllButton;
-
 	@FindBy(css = "#expAll.exp")
 	private WebElement hideAllButton;
-
 	@FindBy(css = "h2.collSec")
 	private List<WebElement> chevronList;
-
 	@FindBy(css = ".cnt")
 	private WebElement numberOfArticles;
-
 	@FindBy(css = ".pagMore.visible")
 	private WebElement loadMoreButton;
-
 	@FindBy(css = ".pagLess.visible")
 	private WebElement loadPreviousButton;
-
 	@FindBys(@FindBy(css = ".wkExhItm"))
 	private List<WebElement> categoryExhibition;
-
 	@FindBys(@FindBy(css = ".collSec"))
 	private List<WebElement> articleList;
-
 	@FindBys(@FindBy(css = ".artSec.open .wkLst>li>a"))
 	private List<WebElement> articleListWithPagination;
-
 
 	public MobileArticlePageObject openCategory(String wikiURL) {
 		getUrl(wikiURL+ categoryPmg);
