@@ -69,16 +69,4 @@ public class VisualEditorTestTemplate {
 			driver.quit();
 		}
 	}
-
-//	protected DesiredCapabilities getCapsWithProxyServerSet(GeoEdgeProxyServer server) {
-//		DesiredCapabilities capabilities = new DesiredCapabilities();
-//		try {
-//			capabilities.setCapability(
-//				CapabilityType.PROXY, server.seleniumProxy()
-//			);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return capabilities;
-//	}
 }
