@@ -14,6 +14,8 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 		// TODO Auto-generated constructor stub
 	}
 
+	@FindBy(css=".zoomer.open.imgMdl")
+	private WebElement openedModal;
 	@FindBy(css="#wkMdlClo")
 	private WebElement closeModalButton;
 	@FindBy(css="#prvImg")
@@ -32,7 +34,8 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 	private List<WebElement> listOfMediaElements;
 
 	public void closeModal() {
-		waitForElementByElement(closeModalButton);
+		waitForElementByElement(openedModal);
+		waitForElementClickableByElement(closeModalButton);
 		closeModalButton.click();
 	}
 
@@ -53,7 +56,6 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 	public String getCurrentImageUrl() {
 		return currentImage.getAttribute("src");
 	}
-
 
 	public void verifyTopBarVisible() {
 		waitForElementByElement(topBarVisible);

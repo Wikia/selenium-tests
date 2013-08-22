@@ -49,7 +49,7 @@ public class ModalTests extends NewTestTemplate{
 	public void modalTest_004_backButton() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
-		MobileModalComponentObject modal = mobile.clickModal();
+		MobileModalComponentObject modal = mobile.clickOpenedImage(5);
 		modal.closeModalWithBackButton();
 		modal.verifyModalClosed();
 	}
@@ -65,8 +65,7 @@ public class ModalTests extends NewTestTemplate{
 		mobile.clickOpenedImage();
 		modal.closeModal();
 		modal.verifyModalClosed();
-		Long positionAfterModal = modal.getPosition();
-		Assertion.assertEquals(positionBeforeModal, positionAfterModal);
+		modal.verifyPositionTheSame(positionBeforeModal);
 	}
 
 }

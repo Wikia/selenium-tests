@@ -240,6 +240,10 @@ public class MobileBasePageObject extends BasePageObject {
 		Assertion.assertTrue(firstPosition < getPosition(), "position is still the same");
 	}
 
+	public void verifyPositionTheSame(Long firstPosition){
+		Assertion.assertTrue(firstPosition == getPosition(), "position is different");
+	}
+
 	public void clickOnWikiaTopPageLogo() {
 		waitForElementByElement(wikiaTopPageLogo);
 		clickActions(wikiaTopPageLogo);
