@@ -139,9 +139,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 		case right:
 			positionLayoutRight.click();
 			break;
-		default:
-			PageObjectLogging.log("adjustPosition", "invalid style selected",  false);
-			break;
 		}
 		PageObjectLogging.log("adjustPosition", "position " + pos.toString() + " selected", true);
 	}

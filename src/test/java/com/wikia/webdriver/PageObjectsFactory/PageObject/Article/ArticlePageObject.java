@@ -348,11 +348,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 				"width should be " + widthDesired + " but is " + videoWidth);
 	}
 
-	public void verifyVideoCaption(String desiredCaption) {
+	public void verifyVideoCaption(String captionDesired) {
 		String caption = videoArticle.findElement(
 				By.xpath("./../../figcaption")
 				).getText();
-		Assertion.assertStringContains(caption,desiredCaption);
+		Assertion.assertStringContains(caption,captionDesired);
 		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
 	}
 

@@ -69,6 +69,10 @@ public class VisualEditModePageObject extends EditMode {
 	private String categoryRemoveSelector = "li.category[data-name='%categoryName%'] li.removeCategory";
 	private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
 
+	public enum Components {
+		Photo, Gallery, Slideshow, Slider, Video, VideoPlaceholder
+	}
+
 	public VisualEditModePageObject(WebDriver driver) {
 		super(driver);
 	}
@@ -128,8 +132,6 @@ public class VisualEditModePageObject extends EditMode {
 			case right:
 				Assertion.assertStringContains(positionClass, "alignRight");
 				break;
-			default:
-				break;
 		}
 	}
 
@@ -141,7 +143,8 @@ public class VisualEditModePageObject extends EditMode {
 		Assertion.assertNumber(
 				widthDesired,
 				widthCurrent,
-				"width should be " + widthDesired + " but is " + widthCurrent);
+				"width should be " + widthDesired + " but is " + widthCurrent
+		);
 	}
 
 	public void verifyVideoCaption(String captionDesired) {
@@ -153,11 +156,6 @@ public class VisualEditModePageObject extends EditMode {
 		driver.switchTo().frame(iframe);
 		String videoClass = video.getAttribute("class");
 		Assertion.assertTrue(!videoClass.contains("thumb"), "video with thumbnail is displayed");
-	}
-
-
-	public enum Components {
-		Photo, Gallery, Slideshow, Slider, Video, VideoPlaceholder
 	}
 
 	private void mouseOverComponent (Components component) {

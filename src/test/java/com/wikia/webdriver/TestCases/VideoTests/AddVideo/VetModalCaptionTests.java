@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.TestCases.VideoTests.AddVideo;
 
 import org.testng.annotations.Test;

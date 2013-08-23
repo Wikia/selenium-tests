@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
 
 import org.openqa.selenium.By;
@@ -53,14 +50,14 @@ public class PreviewEditModePageObject extends EditMode {
 				By.cssSelector(
 						videoPostionSelector.replace("%position%", position)
 						)
-				);
+		);
 		PageObjectLogging.log("verifyVideoAlignment", "video alignment is as exepected " + positions.toString(), true);
 	}
 
 	public void verifyVideoWidth(int desiredWidth) {
 		int width = Integer.parseInt(previewModal.findElement(
 				videoWidthSelector
-				).getAttribute("width"));
+		).getAttribute("width"));
 		Assertion.assertNumber(desiredWidth, width, "width should be " + desiredWidth + " but is "+width);
 	}
 
