@@ -110,4 +110,15 @@ public class AdsDataProvider {
 			{"fr.wikia", "Mode_de_vie/Failsafe"}
 		};
 	}
+
+	@DataProvider
+	public static final Object[][] mobileDesktopOverlapping() {
+		return new Object[][] {
+			{
+				"adtest", "Mobile:MobileDesktopOverlapping",
+				"http://pagead2.googlesyndication.com/simgad/13365248683236755956",
+				"http://pagead2.googlesyndication.com/simgad/1444156043613737882"
+			}
+		};
+	}
 }

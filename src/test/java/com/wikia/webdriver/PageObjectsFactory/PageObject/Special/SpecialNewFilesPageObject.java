@@ -131,7 +131,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	}
 
 	public WatchPageObject unfollowImage(String wikiURL, String imageName) {
-		String url = URLsContent.buildUrl(
+		String url = urlBuilder.appendQueryStringToURL(
 				wikiURL +
 				URLsContent.wikiDir +
 				URLsContent.fileNameSpace +

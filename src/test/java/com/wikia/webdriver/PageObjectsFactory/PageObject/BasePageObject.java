@@ -1,13 +1,21 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -17,13 +25,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  *
@@ -37,6 +38,7 @@ public class BasePageObject{
 	protected int timeOut = 30;
 	public WebDriverWait wait;
 	public Actions builder;
+	protected UrlBuilder urlBuilder;
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
@@ -55,6 +57,7 @@ public class BasePageObject{
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
+		urlBuilder = new UrlBuilder();
 	}
 
 	public static String getAttributeValue(WebElement element, String attributeName) {
@@ -79,6 +82,40 @@ public class BasePageObject{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/*
+	 * Simple method for checking if element is on page or not.
+	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
+	 */
+	protected boolean checkIfElementOnPage(String cssSelector) {
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		try {
+			driver.findElement(By.cssSelector(cssSelector));
+		} catch (NoSuchElementException ex) {
+			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			return false;
+		} catch (StaleElementReferenceException ex) {
+			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			return false;
+		}
+		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+		return true;
+	}
+
+	protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		try {
+			element.findElement(By.cssSelector(cssSelector));
+		} catch (NoSuchElementException ex) {
+			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			return false;
+		} catch (StaleElementReferenceException ex) {
+			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			return false;
+		}
+		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+		return true;
 	}
 
 	public void mouseOverByBy(By by) {
@@ -228,6 +265,53 @@ public class BasePageObject{
 				PageObjectLogging.log(windowName, comment, false);
 				break;
 			}
+		}
+	}
+
+	protected Boolean scrollToSelector(String selector) {
+		if (checkIfElementOnPage(selector)) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			try {
+				js.executeScript(
+					"var x = $(arguments[0]);"
+					+ "window.scroll(0,x.position()['top']+x.height()+100);"
+					+ "$(window).trigger('scroll');",
+					selector
+				);
+			} catch (WebDriverException e) {
+				if (e.getMessage().contains(XSSContent.noJQueryError)) {
+					PageObjectLogging.log(
+						"JSError", "JQuery is not defined", false
+					);
+				}
+			}
+			return true;
+		} else {
+			PageObjectLogging.log(
+				"SelectorNotFound",
+				"Selector " + selector + " not found on page",
+				true
+			);
+			return false;
+		}
+	}
+
+	protected Boolean scrollToSelectorNoJQ(String selector) {
+		if (checkIfElementOnPage(selector)) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript(
+				"var x = document.querySelector(arguments[0]);"
+				+ "window.scroll(0,x.offsetTop + x.clientHeight + 100);",
+				selector
+			);
+			return true;
+		} else {
+			PageObjectLogging.log(
+				"SelectorNotFound",
+				"Selector " + selector + " not found on page",
+				true
+			);
+			return false;
 		}
 	}
 
@@ -581,15 +665,15 @@ public class BasePageObject{
 
 	public void enableWikiaTracker() {
 		driver.get(
-				URLsContent.buildUrl(
-						driver.getCurrentUrl(),
-						URLsContent.wikiaTracker
-						)
+			urlBuilder.appendQueryStringToURL(
+				driver.getCurrentUrl(),
+				URLsContent.wikiaTracker
+			)
 		);
 	}
 
 	public void appendToUrl(String additionToUrl) {
-		driver.get(URLsContent.buildUrl(driver.getCurrentUrl(), additionToUrl));
+		driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 

@@ -7,7 +7,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.Collection;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -122,7 +124,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		verifyNoAds();
 	}
 
-	public void verifyAdsInContent() {
+	public boolean verifyAdsInContent() {
 		String aicSelector = AdsContent.getSlotSelector("AdsInContent");
 		WebElement aicContainer = driver.findElement(By.cssSelector(aicSelector));
 
@@ -134,12 +136,95 @@ public class AdsBaseObject extends WikiBasePageObject {
 				false,
 				driver
 			);
+			return false;
 		}
 		waitForElementByElement(aicContainer.findElement(By.cssSelector("div")));
-		checkTagsPresent(aicContainer);
+		return checkTagsPresent(aicContainer);
 	}
 
-	private void checkTagsPresent(WebElement slotElement) {
+	public boolean verifyCorrectAdInMedrec(
+		String acceptableAd, String unacceptableAd
+	) throws Exception {
+		int refreshNumber = 0;
+		while(refreshNumber < 5) {
+			verifyMedrecPresent();
+			Dimension acceptableDimension = new Dimension(1, 1);
+			List<WebElement> iframes = presentMD.findElements(By.cssSelector("iframe"));
+			for (WebElement iframe : iframes) {
+				if (
+					iframe.isDisplayed()
+					&&(iframe.getSize().height >= acceptableDimension.height
+					&&iframe.getSize().width >= acceptableDimension.width)
+				) {
+					driver.switchTo().frame(iframe);
+					if (checkIfElementOnPage("img[src='" + acceptableAd + "']")) {
+						PageObjectLogging.log(
+							"AdFound", "Expected ad found",
+							true
+						);
+						return true;
+					} else if (checkIfElementOnPage("img[src='" + unacceptableAd + "']")) {
+						throw new Exception("Found element that was not expected!");
+					} else {
+						PageObjectLogging.log(
+							"AdNotFound", "Expected ad not found, refreshing the page",
+							true, driver
+						);
+						refreshNumber = refreshNumber +=1;
+						driver.navigate().refresh();
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean verifyCorrectAdInFloatingMedrec (
+		String acceptableAd, String unacceptableAd
+	) throws Exception {
+		int refreshNumber = 0;
+		while(refreshNumber < 5) {
+			verifyAdsInContent();
+			WebElement floatingMedrec = driver.findElement(
+				By.cssSelector(AdsContent.getSlotSelector("AdsInContent"))
+			);
+			Dimension acceptableDimension = new Dimension(1, 1);
+			List<WebElement> iframes = floatingMedrec.findElements(By.cssSelector("iframe"));
+			for (WebElement iframe : iframes) {
+				if (
+					iframe.isDisplayed()
+					&&(iframe.getSize().height >= acceptableDimension.height
+					&&iframe.getSize().width >= acceptableDimension.width)
+				) {
+					driver.switchTo().frame(iframe);
+					if (checkIfElementOnPage("img[src='" + acceptableAd + "']")) {
+						PageObjectLogging.log(
+							"AdFound", "Expected ad found",
+							true
+						);
+						return true;
+					} else if (checkIfElementOnPage("img[src='" + unacceptableAd + "']")) {
+						throw new Exception("Found element that was not expected!");
+					} else {
+						PageObjectLogging.log(
+							"AdNotFound", "Expected ad not found, refreshing the page",
+							true, driver
+						);
+						refreshNumber = refreshNumber +=1;
+						driver.navigate().refresh();
+					}
+				}
+			}
+		}
+		PageObjectLogging.log(
+			"AdNotFound",
+			"Expected ad not found, after refreshing 5 times",
+			false, driver
+		);
+		throw new NoSuchElementException("Expected ad not found: " + acceptableAd);
+	}
+
+	private boolean checkTagsPresent(WebElement slotElement) {
 		try {
 			waitForOneOfTagsPresentInElement(slotElement, "img", "iframe");
 			PageObjectLogging.log(
@@ -148,6 +233,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 				true,
 				driver
 			);
+			return true;
 		} catch (TimeoutException e) {
 			PageObjectLogging.log(
 				"IFrameOrImgNotFound",
@@ -155,6 +241,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 				false,
 				driver
 			);
+			return false;
 		}
 	}
 
@@ -205,35 +292,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 		return selectorAll;
 	}
-
-	private Boolean scrollToSelector(String selector) {
-		if (driver.findElements(By.cssSelector((selector))).size() > 0) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			try {
-				js.executeScript(
-					"var x = $(arguments[0]);"
-					+ "window.scroll(0,x.position()['top']+x.height()+100);"
-					+ "$(window).trigger('scroll');",
-					selector
-				);
-			} catch (WebDriverException e) {
-				if (e.getMessage().contains(XSSContent.noJQueryError)) {
-					PageObjectLogging.log(
-						"JSError", "JQuery is not defined", false
-					);
-				}
-			}
-			return true;
-		} else {
-			PageObjectLogging.log(
-				"SelectorNotFound",
-				"Selector " + selector + " not found on page",
-				true
-			);
-			return false;
-		}
-	}
-
 
     private void verifyNoAds() throws Exception {
 		List <WebElement> adsElements = driver.findElements(

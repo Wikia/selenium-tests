@@ -425,8 +425,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WatchPageObject unfollowArticle(String wikiURL) {
-		String url = URLsContent.buildUrl(wikiURL, "title=" + articleTitle.getText());
-		url = URLsContent.buildUrl(url, URLsContent.unfollowParameter);
+		String url = urlBuilder.appendQueryStringToURL(wikiURL, "title=" + articleTitle.getText());
+		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}
