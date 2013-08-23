@@ -58,10 +58,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		article.verifyVideoAlignment(PositionsVideo.left);
 	}
 
-	@Test(
-			groups = {"VetModalAlignment", "VetModalAlignment_002"},
-			dependsOnMethods="Vet_Modal_001_leftOnPage"
-	)
+	@Test(groups = {"VetModalAlignment", "VetModalAlignment_002"})
 	public void Vet_Modal_002_leftInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -92,10 +89,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		article.verifyVideoAlignment(PositionsVideo.center);
 	}
 
-	@Test(
-			groups = {"VetModalAlignment", "VetModalAlignment_004"},
-			dependsOnMethods = "Vet_Modal_003_centerOnPage"
-	)
+	@Test(groups = {"VetModalAlignment", "VetModalAlignment_004"})
 	public void Vet_Modal_004_centerInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -126,10 +120,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		article.verifyVideoAlignment(PositionsVideo.right);
 	}
 
-	@Test(
-			groups = {"VetModalAlignment", "VetModalAlignment_006"},
-			dependsOnMethods = "Vet_Modal_005_rightOnPage"
-	)
+	@Test(groups = {"VetModalAlignment", "VetModalAlignment_006"})
 	public void Vet_Modal_006_rightInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

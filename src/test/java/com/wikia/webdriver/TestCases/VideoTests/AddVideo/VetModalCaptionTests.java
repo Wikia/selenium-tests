@@ -57,10 +57,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		article.verifyVideoCaption(caption);
 	}
 
-	@Test(
-			groups = {"VetModalCaption", "VetModalCaption_002"},
-			dependsOnMethods = "Vet_Modal_001_captionOnPage"
-	)
+	@Test(groups = {"VetModalCaption", "VetModalCaption_002"})
 	public void Vet_Modal_002_captionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -90,10 +87,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		article.verifyVideoNoCaption();
 	}
 
-	@Test(
-			groups = {"VetModalCaption", "VetModalCaption_004"},
-			dependsOnMethods = "Vet_Modal_003_noCaptionOnPage"
-	)
+	@Test(groups = {"VetModalCaption", "VetModalCaption_004"})
 	public void Vet_Modal_004_noCaptionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
