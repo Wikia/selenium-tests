@@ -103,7 +103,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		Assertion.assertEquals(listOfComments.get(0).getAttribute("innerText"), comment, "comment is not added on top");
 	}
 
-	private void verifyNumberOfComments(Integer number) {
+	private void verifyNumberOfComments(int number) {
 		waitForElementByElement(numberOfComments);
 		Assertion.assertEquals(Integer.parseInt(numberOfComments.getAttribute("innerText")), number + 1,
 			"number of comments was not increased"
@@ -112,7 +112,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void addComment(String comment) {
 		showCommentsSection();
-		Integer firstNumberOfComments = listOfComments.size();
+		int firstNumberOfComments = listOfComments.size();
 		commentInputArea.sendKeys(comment);
 		postCommentButton.click();
 		waitForElementByXPath(
@@ -126,18 +126,15 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void verifyInputExpand(String comment) {
 		showCommentsSection();
-		String inputHeight = commentInputArea.getCssValue("height");
+		int inputHeight = Integer.parseInt(commentInputArea.getCssValue("height").substring(0, 1));
 		commentInputArea.sendKeys(comment);
-		String inputExpandedHeight = commentInputArea.getCssValue("height");
-		Assertion.assertTrue(Integer.parseInt(inputExpandedHeight.substring(0, 1))
-			> Integer.parseInt(inputHeight.substring(0, 1)),
-			"input is not bigger"
-		);
+		int inputExpandedHeight = Integer.parseInt(commentInputArea.getCssValue("height").substring(0, 1));
+		Assertion.assertTrue(inputExpandedHeight > inputHeight, "input is not bigger");
 	}
 
 	public void verifyNumberOfComments(String comment) {
 		showCommentsSection();
-		Integer number = Integer.parseInt(numberOfComments.getAttribute("innerText"));
+		int number = Integer.parseInt(numberOfComments.getAttribute("innerText"));
 		commentInputArea.sendKeys(comment);
 		postCommentButton.click();
 		waitForElementByXPath(
@@ -250,7 +247,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		return new MobileModalComponentObject(driver);
 	}
 
-	public MobileModalComponentObject clickOpenedImage(Integer n) {
+	public MobileModalComponentObject clickOpenedImage(int n) {
 		waitForElementByElement(listOfMediaElements.get(n));
 		listOfMediaElements.get(n).click();
 		waitForElementByElement(openedImage);
