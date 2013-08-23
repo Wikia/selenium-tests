@@ -18,7 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBui
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -55,6 +55,8 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement categorySuggestionsContainer;
 	@FindBy(css="li.category")
 	private List<WebElement> categoryList;
+	@FindBy(css=".RTEMediaCaption")
+	private WebElement caption;
 
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
@@ -111,6 +113,49 @@ public class VisualEditModePageObject extends EditMode {
 		verifyComponent(video);
 	}
 
+	public void verifyVideoPosition(PositionsVideo position) {
+		verifyComponent(video);
+		driver.switchTo().frame(iframe);
+		String positionClass = video.getAttribute("class");
+		driver.switchTo().defaultContent();
+		switch (position) {
+			case left:
+				Assertion.assertStringContains(positionClass, "alignLeft");
+				break;
+			case center:
+				Assertion.assertStringContains(positionClass, "alignCenter");
+				break;
+			case right:
+				Assertion.assertStringContains(positionClass, "alignRight");
+				break;
+			default:
+				break;
+		}
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		verifyComponent(video);
+		driver.switchTo().frame(iframe);
+		int widthCurrent = Integer.parseInt(video.getAttribute("width"));
+		driver.switchTo().defaultContent();
+		Assertion.assertNumber(
+				widthDesired,
+				widthCurrent,
+				"width should be " + widthDesired + " but is " + widthCurrent);
+	}
+
+	public void verifyVideoCaption(String captionDesired) {
+		mouseOverComponent(Components.Video);
+		Assertion.assertEquals(captionDesired, caption.getText());
+	}
+
+	public void verifyVideoNoCaption() {
+		driver.switchTo().frame(iframe);
+		String videoClass = video.getAttribute("class");
+		Assertion.assertTrue(!videoClass.contains("thumb"), "video with thumbnail is displayed");
+	}
+
+
 	public enum Components {
 		Photo, Gallery, Slideshow, Slider, Video, VideoPlaceholder
 	}
@@ -160,9 +205,9 @@ public class VisualEditModePageObject extends EditMode {
 		case Slideshow:
 			return new SlideshowBuilderComponentObject(driver);
 		case Video:
-			return new VetAddVideoComponentObject(driver);
+			return new VetOptionsComponentObject(driver);
 		case VideoPlaceholder:
-			return new VetAddVideoComponentObject(driver);
+			return new VetOptionsComponentObject(driver);
 		default:
 			return null;
 		}

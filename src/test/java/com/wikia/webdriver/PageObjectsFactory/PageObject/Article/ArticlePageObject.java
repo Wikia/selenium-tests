@@ -316,6 +316,54 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
+	public void verifyVideoAlignment(PositionsVideo positions) {
+		String videoClass = videoArticle.findElement(
+				By.xpath("./../..")
+				).getAttribute("class");
+		String position;
+		switch(positions) {
+		case left:
+			position = "left";
+			break;
+		case center:
+			position = "none";
+			break;
+		case right:
+			position = "right";
+			break;
+		default:
+			position = "position is not provided";
+			break;
+		}
+		Assertion.assertStringContains(videoClass, position);
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		int videoWidth = Integer.parseInt(videoArticle.findElement(
+				By.xpath("./../img")
+				).getAttribute("width"));
+		Assertion.assertNumber(
+				widthDesired,
+				videoWidth,
+				"width should be " + widthDesired + " but is " + videoWidth);
+	}
+
+	public void verifyVideoCaption(String desiredCaption) {
+		String caption = videoArticle.findElement(
+				By.xpath("./../../figcaption")
+				).getText();
+		Assertion.assertStringContains(caption,desiredCaption);
+		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
+	}
+
+	public void verifyVideoNoCaption() {
+		String videoClass = videoArticle.findElement(
+				By.xpath("./../img")
+				).getAttribute("class");
+		Assertion.assertTrue(!videoClass.contains("thumbimage"));
+		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
+	}
+
 	public void verifyRelatedVideosModule() {
 		waitForElementByElement(rVModule);
 		PageObjectLogging.log("verifyRelatedVideosModule", "related videos module is visible", true);

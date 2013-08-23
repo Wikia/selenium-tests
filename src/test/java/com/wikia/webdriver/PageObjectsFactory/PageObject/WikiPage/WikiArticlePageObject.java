@@ -260,20 +260,20 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new LightboxPageObject(driver);
 	}
 
-    public void clickAddVideoFromRail() {
-        waitForElementByElement(addVideoWikiaRail);
-        scrollAndClick(addVideoWikiaRail);
-        PageObjectLogging.log(
-            "clickAndVideoOnWikiaRail",
-            "Button add video on wikia rail is clicked",
-            true, driver
-        );
-    }
+	public void clickAddVideoFromRail() {
+		waitForElementByElement(addVideoWikiaRail);
+		scrollAndClick(addVideoWikiaRail);
+		PageObjectLogging.log(
+			"clickAndVideoOnWikiaRail",
+			"Button add video on wikia rail is clicked",
+			true, driver
+		);
+	}
 
-    public void renameRandomArticle(String newName) {
-        String oldName = getArticleNameFromURL();
-        renameArticle(oldName, newName);
-    }
+	public void renameRandomArticle(String newName) {
+		String oldName = getArticleNameFromURL();
+		renameArticle(oldName, newName);
+	}
 
 
 	public VetAddVideoComponentObject clickOnAddVideoRVModule() {

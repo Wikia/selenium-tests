@@ -53,6 +53,9 @@
 			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetArticlePlaceholderTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetRelatedVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetSpecialVideosTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetModalAlignmentTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetModalCaptionTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetModalWidthTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.OnWikiSearchTest"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.ForumNotificationsTests"/>
