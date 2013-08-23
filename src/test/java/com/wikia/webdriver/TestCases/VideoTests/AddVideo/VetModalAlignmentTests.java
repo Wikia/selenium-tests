@@ -112,7 +112,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.right);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
-		sourceEditMode.verifyVideoAlignment(PositionsVideo.center);
+		sourceEditMode.verifyVideoAlignment(PositionsVideo.right);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
 		previewMode.verifyVideoAlignment(PositionsVideo.right);
 		previewMode.closePreviewModal();
