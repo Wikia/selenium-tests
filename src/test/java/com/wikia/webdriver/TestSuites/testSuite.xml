@@ -47,7 +47,6 @@
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.ShareToolbarTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.VetModalTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetAddingVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetProvidersTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetArticlePlaceholderTests"/>
