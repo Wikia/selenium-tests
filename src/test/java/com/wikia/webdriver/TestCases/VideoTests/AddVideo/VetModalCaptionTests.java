@@ -35,7 +35,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	String articleTitle;
 	String caption;
 
-	@Test
+	@Test(groups = {"VetModalCaption", "VetModalCaption_001"})
 	public void Vet_Modal_001_captionOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -57,7 +57,10 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		article.verifyVideoCaption(caption);
 	}
 
-	@Test(groups = {"VetModalCaption", "VetModalCaption_001"}, dependsOnMethods = "Vet_Modal_001_captionOnPage")
+	@Test(
+			groups = {"VetModalCaption", "VetModalCaption_002"},
+			dependsOnMethods = "Vet_Modal_001_captionOnPage"
+	)
 	public void Vet_Modal_002_captionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -67,7 +70,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		vetOptions.verifyCaption(caption);
 	}
 
-	@Test
+	@Test(groups = {"VetModalCaption", "VetModalCaption_003"})
 	public void Vet_Modal_003_noCaptionOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -87,7 +90,10 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		article.verifyVideoNoCaption();
 	}
 
-	@Test(groups = {"VetModalCaption", "VetModalCaption_002"}, dependsOnMethods = "Vet_Modal_003_noCaptionOnPage")
+	@Test(
+			groups = {"VetModalCaption", "VetModalCaption_004"},
+			dependsOnMethods = "Vet_Modal_003_noCaptionOnPage"
+	)
 	public void Vet_Modal_004_noCaptionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -97,7 +103,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		vetOptions.verifyNoCaption();
 	}
 
-	@Test(groups = {"VetModalCaption", "VetModalCaption_003"})
+	@Test(groups = {"VetModalCaption", "VetModalCaption_005"})
 	public void Vet_Modal_005_videoNameNotEditable() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
