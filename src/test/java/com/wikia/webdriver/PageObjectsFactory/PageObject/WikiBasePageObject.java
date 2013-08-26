@@ -1,12 +1,42 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.MailFunctions;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActivityPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -26,38 +56,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.MailFunctions;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActivityPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -244,27 +242,33 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
-		getUrl(URLsContent.buildUrl(
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
 				driver.getCurrentUrl(),
 				URLsContent.actionEditParameter
-				)
-			);
+			)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
-		getUrl(URLsContent.buildUrl(
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
-				)
-			);
+			)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
-		getUrl(URLsContent.buildUrl(
-				URLsContent.buildUrl(
-						wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
-						), URLsContent.useDefaultFormat));
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				urlBuilder.appendQueryStringToURL(
+					wikiURL + URLsContent.wikiDir + article,
+					URLsContent.actionEditParameter
+			),
+			URLsContent.useDefaultFormat)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
