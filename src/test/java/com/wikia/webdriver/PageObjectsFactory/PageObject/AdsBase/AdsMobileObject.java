@@ -61,12 +61,12 @@ public class AdsMobileObject extends WikiBasePageObject {
 				);
 				throw new Exception("Found element that was not expected!");
 			} else {
-				refreshNumber += 1;
 				PageObjectLogging.log(
 					"AdNotFound", "Expected ad not found, refreshing the page",
 					true, driver
 				);
 				driver.navigate().refresh();
+				refreshNumber += 1;
 			}
 		}
 		PageObjectLogging.log(
@@ -120,12 +120,12 @@ public class AdsMobileObject extends WikiBasePageObject {
 				);
 				throw new Exception("Found element that was not expected!");
 			} else {
-				refreshNumber += 1;
 				PageObjectLogging.log(
 					"AdNotFound", "Expected ad not found, refreshing the page",
 					true, driver
 				);
 				driver.navigate().refresh();
+				refreshNumber += 1;
 			}
 		}
 		PageObjectLogging.log(

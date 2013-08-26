@@ -20,10 +20,10 @@ public class AdsTestTemplate extends NewTestTemplate {
 	private boolean isGeoEdgeSet = true;
 
 	/**
-     * Start browser with configured desired capabilities and start logging
-     *
-     * @param Method method
-     */
+	 * Start browser with configured desired capabilities and start logging
+	 *
+	 * @param Method method
+	 */
 	@BeforeMethod(alwaysRun=true)
 	@Override
 	public void start(Method method, Object[] data) {

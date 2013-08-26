@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.Collection;
@@ -12,7 +11,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -170,8 +168,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 							"AdNotFound", "Expected ad not found, refreshing the page",
 							true, driver
 						);
-						refreshNumber = refreshNumber +=1;
 						driver.navigate().refresh();
+						refreshNumber += 1;
 					}
 				}
 			}
@@ -210,8 +208,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 							"AdNotFound", "Expected ad not found, refreshing the page",
 							true, driver
 						);
-						refreshNumber = refreshNumber +=1;
 						driver.navigate().refresh();
+						refreshNumber += 1;
 					}
 				}
 			}

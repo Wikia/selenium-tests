@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 public class CssChromeTests extends TestTemplate {
 
-	//TODO - remove this lone when TestSuite will be migrated to NewTestTemplate
+	//TODO - remove this line when TestSuite will be migrated to NewTestTemplate
 	private UrlBuilder urlBuilder;
 
 	/**

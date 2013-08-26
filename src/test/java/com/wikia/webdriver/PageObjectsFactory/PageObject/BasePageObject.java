@@ -90,32 +90,28 @@ public class BasePageObject{
 	 */
 	protected boolean checkIfElementOnPage(String cssSelector) {
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		boolean isElementOnPage = true;
 		try {
 			driver.findElement(By.cssSelector(cssSelector));
-		} catch (NoSuchElementException ex) {
+		} catch (Exception ex) {
+			isElementOnPage = false;
+		} finally {
 			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-			return false;
-		} catch (StaleElementReferenceException ex) {
-			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-			return false;
 		}
-		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-		return true;
+		return isElementOnPage;
 	}
 
 	protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		boolean isElementInElement = true;
 		try {
 			element.findElement(By.cssSelector(cssSelector));
-		} catch (NoSuchElementException ex) {
+		} catch (Exception ex) {
+			isElementInElement = false;
+		} finally {
 			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-			return false;
-		} catch (StaleElementReferenceException ex) {
-			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-			return false;
 		}
-		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-		return true;
+		return isElementInElement;
 	}
 
 	public void mouseOverByBy(By by) {
