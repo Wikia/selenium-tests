@@ -67,6 +67,8 @@ public class MobileBasePageObject extends BasePageObject {
 	protected WebElement sectionHeaderOpened;
 	@FindBys(@FindBy(css="ul#wkSrhSug li.show"))
 	private List<WebElement> searchSuggestion;
+	@FindBys(@FindBy(css=".show > span"))
+	private List<WebElement> suggestions;
 	@FindBys(@FindBy(css="ul#wkSrhSug li span.copySrh"))
 	private List<WebElement> addSuggestionButton;
 	@FindBy(css="#wkMainCntHdr > h1")
@@ -194,8 +196,8 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void verifySuggestions(String query) {
-		waitForElementByElement(searchSuggestion.get(0));
-		for (WebElement elem:searchSuggestion) {
+		waitForElementByElement(suggestions.get(0));
+		for (WebElement elem:suggestions) {
 			Assertion.assertTrue(elem.getAttribute("title").startsWith(query),
 				"title Attribute doesn't start with given string"
 			);
@@ -217,8 +219,8 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void selectAndVerifyClickOnSuggestion(int n) {
-		String selectedSuggestionText = searchSuggestion.get(n).getAttribute("innerText").replace("+", "");
-		searchSuggestion.get(n).click();
+		String selectedSuggestionText = suggestions.get(n).getAttribute("innerText").replace("+", "");
+		suggestions.get(n).click();
 		waitForElementByElement(selectedPageHeader);
 		Assertion.assertTrue(getCurrentUrl().endsWith("/" + selectedSuggestionText) ,"Url doesn't end with correct string");
 	}
