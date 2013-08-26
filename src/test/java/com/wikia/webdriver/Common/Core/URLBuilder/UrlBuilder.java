@@ -13,6 +13,10 @@ public class UrlBuilder {
 		env = environment;
 	}
 
+	public UrlBuilder() {
+		env = null;
+	}
+
 	public String getUrlForPath(String wikiName, String wikiPath) {
 		String url = getUrlForWiki(wikiName);
 		if (!(isWikia)) {
@@ -49,5 +53,16 @@ public class UrlBuilder {
 			System.out.println("ENV property is not set!");
 		}
 		return url;
+	}
+
+	public String appendQueryStringToURL(String url, String qs) {
+		String temp;
+		if (url.contains("?")) {
+			temp = url + "&" + qs;
+			return temp;
+		} else {
+			temp = url + "?" + qs;
+			return temp;
+		}
 	}
 }

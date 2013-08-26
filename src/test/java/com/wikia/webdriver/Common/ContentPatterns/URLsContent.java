@@ -79,17 +79,6 @@ public class URLsContent {
 
 	public static final String apiUrl = Global.DOMAIN + "api.php";
 
-	public static String buildUrl(String url, String parameter) {
-		String temp;
-		if (url.contains("?")) {
-			temp = url + "&" + parameter;
-			return temp;
-		} else {
-			temp = url + "?" + parameter;
-			return temp;
-		}
-	}
-
 	// File Pages
 	public static String fileNameSpace = "File:";
 	public static String fileName001 = "Grammy_Muppet_Critics";
