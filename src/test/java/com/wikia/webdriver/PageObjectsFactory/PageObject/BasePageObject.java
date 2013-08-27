@@ -14,8 +14,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -92,7 +90,9 @@ public class BasePageObject{
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		boolean isElementOnPage = true;
 		try {
-			driver.findElement(By.cssSelector(cssSelector));
+			if (driver.findElements(By.cssSelector(cssSelector)).size() < 1) {
+				isElementOnPage = false;
+			}
 		} catch (Exception ex) {
 			isElementOnPage = false;
 		} finally {
@@ -105,7 +105,9 @@ public class BasePageObject{
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		boolean isElementInElement = true;
 		try {
-			element.findElement(By.cssSelector(cssSelector));
+			if (element.findElements(By.cssSelector(cssSelector)).size() < 1) {
+				isElementInElement = false;
+			}
 		} catch (Exception ex) {
 			isElementInElement = false;
 		} finally {
