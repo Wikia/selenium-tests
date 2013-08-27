@@ -20,14 +20,12 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 
 public class WikiArticleEditMode extends WikiEditMode {
 
-	//right rail toolbox - will be moved to edit mode
 	@FindBy(css="a.RTEImageButton")
 	private WebElement photoButton;
 	@FindBy(css="a.RTEVideoButton")
@@ -38,7 +36,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement slideshowButton;
 	@FindBy(css="a.RTESliderButton")
 	private WebElement sliderButton;
-
 	@FindBy(css="div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
 	@FindBy(css="div.cke_skin_wikia.visible div.cke_contents iframe")
@@ -137,7 +134,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement videoCaptionTextArea;
 	@FindBy(css = "div.input-group.VideoEmbedNoBorder input")
 	private WebElement videoAddVideoButton;
-
 	@FindBy(css="img.alignLeft")
 	private WebElement leftAlignedVideoOnEditor;
 	@FindBy(css="img.alignRight")
@@ -183,13 +179,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[data-rte-meta*='"+caption+"']")));
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode", true, driver);
-	}
-
-	public void clickOnPreviewButton() {
-		waitForElementByElement(previewButton);
-		waitForElementClickableByElement(previewButton);
-		jQueryClick(previewButtonSelector);
-		PageObjectLogging.log("LeftClickOnPreviewButton", "Left Click on 'Preview' Button", true, driver);
 	}
 
 	public void verifyTheCaptionOnThePreview(String caption) {
@@ -265,15 +254,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}
 
-	public VetOptionsComponentObject clickModifyButtonVideo() {
-		waitForElementByElement(iFrame);
-		mouseOverInArticleIframe(videoArticleIFrame);
-		waitForElementByElement(modifyButton);
-		jQueryClick(editButtonArticleItem);
-		PageObjectLogging.log("clickModifyButtonVideo", "Click on 'modify button' on video", true, driver);
-		return new VetOptionsComponentObject(driver);
-	}
-
 	public void verifyVideoInEditMode(String caption) {
 		waitForElementByElement(iFrame);
 		driver.switchTo().frame(iFrame);
@@ -286,74 +266,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("VerifyVideoInEditMode", "Verify that video appears in edit mode", true);
 	}
 
-	public void verifyLeftVideoInEditMode() {
-		waitForElementByElement(iFrame);
-		driver.switchTo().frame(iFrame);
-		waitForElementByElement(leftAlignedVideoOnEditor);
-		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyLeftVideoInEditMode", "Verify that video appears in the left at the editor", true);
-
-	}
-
-	public void verifyRightVideoInEditMode() {
-		waitForElementByElement(iFrame);
-		driver.switchTo().frame(iFrame);
-		waitForElementByElement(rightAlignedVideoOnEditor);
-		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyRighttVideoInEditMode", "Verify that video appears in the right at the editor", true);
-
-	}
-
-	public void verifyCenterVideoInEditMode() {
-		waitForElementByElement(iFrame);
-		driver.switchTo().frame(iFrame);
-		waitForElementByElement(centerAlignedVideoOnEditor);
-		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyCenterVideoInEditMode", "Verify that video appears in the center at the editor", true);
-	}
-
-	public void verifyVideoOnTheLeftInPreview() {
-		waitForElementByElement(leftAlignedVideoOnPreview);
-		PageObjectLogging.log("verifyVideoOnTheLeftOnPreview", "Verify that the video appears on the left in preview", true);
-	}
-
-	public void verifyVideoOnTheRightInPreview() {
-		waitForElementByElement(rightAlignedVideoOnPreview);
-		PageObjectLogging.log("verifyRightVideoOnTheLeftOnPreview", "Verify that the video appears on the right in preview", true);
-	}
-
-	public void verifyVideoOnTheCenterInPreview() {
-		waitForElementByElement(centerAlignedVideoOnPreview);
-		PageObjectLogging.log("verifyVideoOnTheCenterInPreview", "Verify that the video appears on the center in preview", true);
-	}
-
-	public void clickClosePreviewModalButton() {
-		waitForElementByElement(closePreviewModal);
-		closePreviewModal.click();
-		PageObjectLogging.log("clickClosePreviewModalButton", "Verify that the close button in the preview modal is clicked", true, driver);
-	}
-
 	public void verifyBlockedUserMessage() {
 		waitForElementByElement(blockedUserMessage1);
 		waitForElementByElement(blockedUserMessage2);
 		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true);
-	}
-
-	public void clickAddVideoButton() {
-		waitForElementByElement(videoSubmitButton);
-		videoSubmitButton.click();
-		PageObjectLogging.log("clickAddVideoButton", "Add Video button is clicked", true, driver);
-	}
-
-	public void clickSubmitVideoButton() {
-		waitForElementByElement(addVideoButton);
-		addVideoButton.click();
-		PageObjectLogging.log("clickSubmitVideoButton", "Submit Video button is clicked", true, driver);
-	}
-
-	public void verifySuccessAfterAddingVideo() {
-		waitForElementByXPath("//h1[contains(text(), \"Success\")]");
-		PageObjectLogging.log("verifySuccessAfterAddingVideo", "Verified Success after adding video modal is visible", true);
 	}
 
 	public void clickReturnToEditingButton() {
@@ -393,20 +309,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
 	}
 
-	public void verifyVideoWidthInEditMode() {
-		waitForElementByElement(iFrame);
-		driver.switchTo().frame(iFrame);
-		waitForElementByElement(videoWidthEditor);
-		driver.switchTo().defaultContent();
-		PageObjectLogging.log("verifyVideoWidthInEditMode", "Video width in editor is exactly the same as value set in VET modal", true);
-	}
-
-	public void verifyVideoWidthOnPreview(String width) {
-		waitForElementByElement(videoOnPreview);
-		Assertion.assertEquals(width, videoOnPreview.getCssValue("width"));
-		PageObjectLogging.log("verifyVideoWidthOnPreview", "Video width in preview is exactly the same as value set in VET modal", true);
-	}
-
 	public void verifyLeftAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
 		clickOnModifyImageLink();
@@ -416,21 +318,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 			PageObjectLogging.log("verifyLeftAlignmentIsSelected", "Left allignment option is selected in modal", true);
 		} else {
 			PageObjectLogging.log("verifyLeftAlignmentIsSelected", "Left allignment option is NOT selected in modal", false);
-		}
-
-		waitForElementByElement(imageUploadCloseButton);
-		imageUploadCloseButton.click();
-	}
-
-	public void verifyRightAlignmentIsSelected() {
-		mouseOverInArticleIframe(imageArticleIFrame);
-		clickOnModifyImageLink();
-		waitForElementByElement(imageRightAlignmentOption);
-
-		if (imageRightAlignmentOption.isSelected()) {
-			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is selected in modal", true);
-		} else {
-			PageObjectLogging.log("verifyRightAlignmentIsSelected", "Right allignment option is NOT selected in modal", false);
 		}
 
 		waitForElementByElement(imageUploadCloseButton);
@@ -451,11 +338,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		finalAddPhotoButton.click();
 		clickOnPublishButton();
 		return new WikiArticlePageObject(driver);
-	}
-
-	public void verifyNoVideoCaptionInEditMode() {
-		waitForElementNotVisibleByElement(captionInEditor);
-		PageObjectLogging.log("verifyNoCaptionInEditMode", "Verify that the video does not have a caption in the editor", true);
 	}
 
 	public PhotoAddComponentObject clickPhotoButton() {

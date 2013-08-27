@@ -22,6 +22,8 @@ public class EditMode extends WikiBasePageObject {
 
 	@FindBy(css="#wpSave")
 	private WebElement submitButton;
+	@FindBy(css="#wpPreview")
+	private WebElement previewButton;
 	@FindBy(css="a.RTEImageButton")
 	private WebElement photoButton;
 	@FindBy(css="a.RTEVideoButton")
@@ -32,6 +34,10 @@ public class EditMode extends WikiBasePageObject {
 	private WebElement slideshowButton;
 	@FindBy(css="a.RTESliderButton")
 	private WebElement sliderButton;
+	@FindBy(css="a.cke_button_ModeWysiwyg > span#cke_23_label")
+	private WebElement visualButton;
+	@FindBy(css="a.cke_button_ModeSource > span#cke_22_label")
+	private WebElement sourceButton;
 
 	private By submitButtonBy = By.cssSelector("#wpSave");
 
@@ -49,6 +55,13 @@ public class EditMode extends WikiBasePageObject {
 	public ArticlePageObject submitArticle() {
 		submit();
 		return new ArticlePageObject(driver);
+	}
+
+	public PreviewEditModePageObject previewArticle() {
+		driver.switchTo().defaultContent();
+		previewButton.click();
+		PageObjectLogging.log("preview", "Page preview displayed", true);
+		return new PreviewEditModePageObject(driver);
 	}
 
 	public BlogPageObject submitBlog() {
@@ -89,5 +102,17 @@ public class EditMode extends WikiBasePageObject {
 		scrollAndClick(galleryButton);
 		PageObjectLogging.log("clickGalleryButton", "gallery button clicked", true);
 		return new GalleryBuilderComponentObject(driver);
+	}
+
+	public SourceEditModePageObject clickSourceButton() {
+		sourceButton.click();
+		PageObjectLogging.log("clickSourceButton", "source button clicked", true);
+		return new SourceEditModePageObject(driver);
+	}
+
+	public VisualEditModePageObject clickVisualButton() {
+		visualButton.click();
+		PageObjectLogging.log("clickVisualButton", "visual button clicked", true);
+		return new VisualEditModePageObject(driver);
 	}
 }
