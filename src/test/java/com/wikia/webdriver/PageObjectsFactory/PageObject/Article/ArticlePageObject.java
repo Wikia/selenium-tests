@@ -379,7 +379,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyRelatedVideoAdded(String videoName) {
-		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
+		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName.substring(0, 45));
+		PageObjectLogging.log("verifyRelatedVideoAdded", videoName + " is visible in related video module", true);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
