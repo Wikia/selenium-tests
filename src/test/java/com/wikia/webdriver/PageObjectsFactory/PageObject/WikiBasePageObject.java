@@ -3,8 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
@@ -57,7 +55,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-
 public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "a.createpage")
@@ -86,16 +83,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement premissionErrorMessage;
 	@FindBy(css="div.mw-warning-with-logexcerpt p")
 	private WebElement pageDeletedInfo;
-	@FindBy(css="figure.tleft")
-	private WebElement videoOnLeftOfArticle;
-	@FindBy(css="figure.tright")
-	private WebElement videoOnRightOfArticle;
-	@FindBy(css="figure.tnone")
-	private WebElement videoOnCenterOfArticle;
-	@FindBy(css="#WikiaArticle div.Wikia-video-play-button")
-	private WebElement videoOnArticle;
-	@FindBy(css="figcaption.thumbcaption")
-	private WebElement videoCaptionOnArticle;
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
 	@FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
@@ -128,6 +115,14 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement followButton;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
+
+	public enum PositionsVideo {
+		left, center, right
+	}
+
+	public enum StyleVideo {
+		caption, nocaption;
+	}
 
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
@@ -447,44 +442,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(premissionErrorMessage);
 		PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
 				true, driver);
-	}
-
-	public void verifyVideoOnTheLeftOnAritcle()
-	{
-		waitForElementByElement(videoOnLeftOfArticle);
-		PageObjectLogging.log("verifyVideoOnTheLeftOnAritcle", "Video appears on the left of the article page once published", true, driver);
-	}
-
-	public void verifyVideoOnTheRightOnAritcle()
-	{
-		waitForElementByElement(videoOnRightOfArticle);
-		PageObjectLogging.log("verifyVideoOnTheRightOnAritcle", "Video appears on the right of the article page once published", true, driver);
-	}
-
-	public void verifyVideoOnTheCenterOnArticle()
-	{
-		waitForElementByElement(videoOnCenterOfArticle);
-		PageObjectLogging.log("verifyVideoOnTheCenterOnAritcle", "Video appears on the center of the article page once published", true, driver);
-	}
-
-	public void verifyVideoWidthOnAritcle(String width)
-	{
-		waitForElementByElement(videoOnArticle);
-		Assertion.assertEquals(width, videoOnArticle.getCssValue("width"));
-		PageObjectLogging.log("verifyVideoWidthOnAritcle", "Video width is correct article page when page is published", true, driver);
-	}
-
-	public void verifyVideoCaptionOnAritcle()
-	{
-		waitForElementByElement(videoCaptionOnArticle);
-		CommonExpectedConditions.textToBePresentInElement(videoCaptionOnArticle, "QAWebdriverCaption1");
-		PageObjectLogging.log("verifyVideoCaptionOnAritcle", "Video caption appears correctly in article page", true, driver);
-	}
-
-	public void verifyNoVideoCaptionOnAritcle() {
-		waitForElementNotVisibleByElement(videoCaptionOnArticle);
-		PageObjectLogging.log("verifyNoVideoCaptionOnAritcle", "Verify that the video does not have a caption in the article page", true);
-
 	}
 
 	public void verifyUrl(String url) {

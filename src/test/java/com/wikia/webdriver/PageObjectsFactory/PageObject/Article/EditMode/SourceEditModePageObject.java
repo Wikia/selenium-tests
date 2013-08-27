@@ -259,4 +259,29 @@ public class SourceEditModePageObject extends EditMode{
 			checkSourceContent(content);
 		}
 	}
+
+	private String getContent() {
+		return sourceModeTextArea.getAttribute("value");
+	}
+
+	public void verifyVideoAlignment(PositionsVideo position) {
+		Assertion.assertStringContains(getContent(),
+				position.toString().toLowerCase());
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		String content = getContent();
+		int width = Integer.parseInt(
+				content.substring(content.indexOf("px")-6, content.indexOf("px")-3)
+		);
+		Assertion.assertNumber(
+				width,
+				widthDesired,
+				"width is " + width + " should be " + widthDesired
+		);
+	}
+
+	public void verifyVideoCaption(String desiredCaption) {
+		Assertion.assertStringContains(getContent(), desiredCaption);
+	}
 }
