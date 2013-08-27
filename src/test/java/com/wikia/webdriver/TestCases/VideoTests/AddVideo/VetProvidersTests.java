@@ -1,0 +1,65 @@
+package com.wikia.webdriver.TestCases.VideoTests.AddVideo;
+
+import org.testng.annotations.Test;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.DataProvider.VideoUrlProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
+
+/**
+ * @author Karol 'kkarolk' Kujawiak
+ *
+ */
+public class VetProvidersTests extends NewTestTemplate {
+
+	Credentials credentials = config.getCredentials();
+
+	@Test(
+			dataProviderClass=VideoUrlProvider.class,
+			dataProvider="videoUrl",
+			groups={"VetProviders", "VetProviders_001"}
+		)
+	public void VetProvidersTests_001_article(String videoUrl, String videoName) {
+		PageObjectLogging.log("", videoUrl, true);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+		visualEditMode.clearContent();
+		VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
+		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(videoUrl);
+		vetOptions.submit();
+		visualEditMode.verifyVideo();
+		visualEditMode.submitArticle();
+		article.verifyVideo();
+		FileDetailsPageObject fileDetails = article.clickVideoDetailsButton();
+		fileDetails.verifyEmbeddedVideoIsPresent();
+		fileDetails.verifyHeader(videoName);
+	}
+
+	@Test(
+			dataProviderClass=VideoUrlProvider.class,
+			dataProvider="videoUrl",
+			groups={"VetProviders", "VetProviders_002"}
+		)
+	public void VetProvidersTests_002_relatedVideo(String videoUrl, String videoName) {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
+		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(videoName);
+		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
+		article.openRandomArticle(wikiURL);
+		article.verifyRelatedVideosModule();
+		VetAddVideoComponentObject vetAddingVideo = article.clickAddRelatedVideo();
+		vetAddingVideo.addVideoByUrl(videoUrl);
+		article.verifyRelatedVideoAdded(videoName);
+	}
+}

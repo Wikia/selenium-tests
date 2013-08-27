@@ -254,18 +254,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}
 
-	public void verifyVideoInEditMode(String caption) {
-		waitForElementByElement(iFrame);
-		driver.switchTo().frame(iFrame);
-		waitForElementPresenceByBy(videoOnArticleEditMode);
-		mouseOverByBy(videoOnArticleEditMode);
-		driver.switchTo().defaultContent();
-		waitForElementByXPath(
-			"//div[@class='RTEMediaCaption' and contains(text(), '"+caption+"')]"
-		);
-		PageObjectLogging.log("VerifyVideoInEditMode", "Verify that video appears in edit mode", true);
-	}
-
 	public void verifyBlockedUserMessage() {
 		waitForElementByElement(blockedUserMessage1);
 		waitForElementByElement(blockedUserMessage2);

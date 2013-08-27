@@ -41,8 +41,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement commentAreaDisabled;
 	@FindBy(css=".article-comm-reply")
 	private WebElement replyCommentButton;
-	@FindBy(css="a[title='View photo details']")
-	private WebElement videoDetailsButton;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
 	@FindBy(css="#mw-content-text")
@@ -50,7 +48,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement VideoModalAddButton;
 	@FindBy(css="#WikiaRail .addVideo")
-    private WebElement addVideoWikiaRail;
+	private WebElement addVideoWikiaRail;
 	@FindBy(css=".wikia-photogallery-add")
 	private WebElement addPhotoToGalleryButton;
 	@FindBy(css=".wikia-slideshow-addimage")
@@ -172,14 +170,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 */
 	public WikiArticleEditMode edit() {
-            waitForElementByElement(editButton);
-            scrollAndClick(editButton);
-            PageObjectLogging.log(
-                "edit",
-                "Edit article",
-                true
-            );
-            return new WikiArticleEditMode(driver);
+		waitForElementByElement(editButton);
+		scrollAndClick(editButton);
+		PageObjectLogging.log(
+			"edit",
+			"Edit article",
+			true
+		);
+		return new WikiArticleEditMode(driver);
 	}
 
 	/**
@@ -190,17 +188,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void verifyImageOnThePage() {
 		waitForElementByBy(ImageOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
-	}
-
-
-	/**
-	 * Verify that the Video appears on the page
-	 *
-	 * @author Michal Nowierski
-	 * 	 */
-	public void verifyVideoOnThePage() {
-		waitForElementByBy(VideoOnWikiaArticle);
-		PageObjectLogging.log("VerifyTheVideoOnThePage", "Verify that the Video appears on the page", true, driver);
 	}
 
 	public void verifyGalleryPosion(String position) {
@@ -246,13 +233,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
 	}
 
-	public FileDetailsPageObject clickVideoDetailsButton() {
-		waitForElementByElement(videoDetailsButton);
-		videoDetailsButton.click();
-		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-		return new FileDetailsPageObject(driver);
-	}
-
 	public LightboxPageObject clickThumbnailImage() {
 		waitForElementByElement(thumbnailImageArticle);
 		thumbnailImageArticle.click();
@@ -280,9 +260,5 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(rVAddVideo);
 		scrollAndClick(rVAddVideo);
 		return new VetAddVideoComponentObject(driver);
-	}
-
-	public void verifyVideoAddedToRVModule(String videoName) {
-		waitForTextToBePresentInElementByBy(rvFirstVideo, videoName);
 	}
 }

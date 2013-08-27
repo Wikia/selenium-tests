@@ -20,6 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
 
 /**
  *
@@ -94,6 +95,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement rVAddVideo;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
+	@FindBy(css="a[title='View photo details']")
+	private WebElement videoDetailsButton;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
 	private WebElement rvFirstVideo;
 	@FindBy(css="#CategorySelectAdd")
@@ -383,6 +386,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(videoAddPlaceholder);
 		scrollAndClick(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
+	}
+
+	public FileDetailsPageObject clickVideoDetailsButton() {
+		waitForElementByElement(videoDetailsButton);
+		videoDetailsButton.click();
+		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
+		return new FileDetailsPageObject(driver);
 	}
 
 	private void clickAddCategoryButton() {
