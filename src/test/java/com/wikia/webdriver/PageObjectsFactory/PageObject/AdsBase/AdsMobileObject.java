@@ -101,7 +101,7 @@ public class AdsMobileObject extends WikiBasePageObject {
 			WebElement intersitialAd = driver.findElement(
 				By.cssSelector(
 					AdsMobileContent.getSlotSelector(
-						AdsMobileContent.adInContent
+						AdsMobileContent.interstitial
 					)
 				)
 			);
