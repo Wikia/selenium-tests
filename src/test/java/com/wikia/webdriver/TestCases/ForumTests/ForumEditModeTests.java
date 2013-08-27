@@ -1,10 +1,5 @@
 package com.wikia.webdriver.TestCases.ForumTests;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -12,19 +7,21 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class ForumEditModeTests extends TestTemplate{
-	
-	/* 
+
+	/*
 	 * StoryQA0128 - Create test cases for forum
 	 * https://wikia.fogbugz.com/default.asp?95449
 	 */
-	
+
 	private String title, description, first, second;
-	
+
 	@Test(groups = {"Forum_001","Forum","ForumEditMode"})
 	public void forumEditModeTests_001_faq(){
 		CommonFunctions.logOut(driver);
@@ -34,7 +31,7 @@ public class ForumEditModeTests extends TestTemplate{
 		forumMainPage.openForumMainPage();
 		forumMainPage.verifyFaqLightBox();
 	}
-	
+
 	@DataProvider
 	private static final Object[][] getForumName()
 	{
@@ -46,8 +43,8 @@ public class ForumEditModeTests extends TestTemplate{
 					{PageContent.forumTitleSlashPrefix},
 					{PageContent.forumTitleUnderScorePrefix}
 				};
-	}	
-	
+	}
+
 	@Test(dataProvider="getForumName", groups={"Forum_002", "Forum","ForumEditMode"})
 	public void forumEditModeTests_002_createNewBoard(String name){
 		CommonFunctions.logOut(driver);
@@ -62,7 +59,7 @@ public class ForumEditModeTests extends TestTemplate{
 		manageForum.verifyBoardCreated(title, description);
 		manageForum.verifyForumExists(title);
 	}
-	
+
 	@Test(groups = {"Forum_003","Forum","ForumEditMode"})
 	public void forumEditModeTests_003_deleteBoard(){
 		CommonFunctions.logOut(driver);
@@ -77,7 +74,7 @@ public class ForumEditModeTests extends TestTemplate{
 		manageForum.deleteForum(first, second);
 		manageForum.verifyForumNotExists(first);
 	}
-	
+
 	@Test(groups = {"Forum_004","Forum","ForumEditMode"})
 	public void forumEditModeTests_004_editBoard(){
 		CommonFunctions.logOut(driver);
@@ -93,7 +90,7 @@ public class ForumEditModeTests extends TestTemplate{
 		manageForum.verifyBoardCreated(title, description);
 		manageForum.verifyForumExists(title);
 	}
-	
+
 	@Test(groups = {"Forum_005","Forum","ForumEditMode"})
 	public void forumEditModeTests_005_moveBoard(){
 		CommonFunctions.logOut(driver);
@@ -109,7 +106,9 @@ public class ForumEditModeTests extends TestTemplate{
 	}
 
 	@Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
-	public void testTemplatesInBoardDescription() {
+	public void forumEditModeTests_006_templatesInBoardDescription() {
+		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		ForumPageObject forumMainPage = new ForumPageObject( driver );
 
 		// create a template
@@ -118,7 +117,7 @@ public class ForumEditModeTests extends TestTemplate{
 		article.createNewTemplate( templateNameAndContent, templateNameAndContent );
 
 		// login & open forum page and create new board
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
 		forumMainPage.openForumMainPage();
 		ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
 
