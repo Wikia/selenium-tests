@@ -172,9 +172,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
 	}
 
-
-
-
 	public void verifyPageTitle(String title)
 	{
 		title = title.replace("_", " ");
@@ -238,12 +235,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiHistoryPageObject(driver);
 	}
 
-	/**
-<<<<<<< HEAD
-	* getArticleNameFromURL
-	*
-	@author Michal Nowierski
-	*/
 	public String getArticleNameFromURL() {
 		//TODO: To Michal: use Regular Expression here, when its syntax is learned.
 		String URL= driver.getCurrentUrl();

@@ -1,18 +1,16 @@
 package com.wikia.webdriver.TestCases.ForumTests;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumManageBoardsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class ForumEditModeTests extends NewTestTemplate{
 
@@ -98,7 +96,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 	}
 
 	@Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
-	public void testTemplatesInBoardDescription() {
+	public void forumEditModeTests_006_templatesInBoardDescription() {
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		ForumPageObject forumMainPage = new ForumPageObject( driver );
 
 		// create a template
@@ -107,8 +106,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 		article.createNewTemplate( templateNameAndContent, templateNameAndContent );
 
 		// login & open forum page and create new board
-		CommonFunctions.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		forumMainPage.openForumMainPage();
+		login.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
 
 		// create new board and verify its creation
@@ -120,7 +119,7 @@ public class ForumEditModeTests extends NewTestTemplate{
 		forumManageBoardPage.verifyBoardCreated(boardTitle, boardDescWithoutTpl);
 
 		// open the board and verify there is the template's content in description
-		ForumBoardPageObject boardPage = forumMainPage.openForumBoard( 1 );
+		ForumBoardPageObject boardPage = forumMainPage.openForumBoard( );
 		boardPage.verifyBoardDescription( boardDescWithTplParsed );
 	}
 

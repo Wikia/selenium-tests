@@ -31,6 +31,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 	}
 
 	private void openFaqLightBox() {
+		waitForElementByElement(faqButton);
 		scrollAndClick(faqButton);
 		PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
 	}
@@ -110,7 +111,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return forumNames;
 	}
 
-	private List<WebElement> getForumElementsList() {
+	private List<WebElement> getForumElementsList(){
 		List<WebElement> listWebElements = driver.findElements(forumBoardsList);
 		return listWebElements;
 	}

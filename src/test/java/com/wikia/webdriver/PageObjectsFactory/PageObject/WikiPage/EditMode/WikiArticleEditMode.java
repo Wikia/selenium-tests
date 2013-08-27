@@ -213,9 +213,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void clickOnPublish() {
 		waitForElementClickableByElement(publishButton);
-		scrollAndClick(publishButton);
+		publishButton.click();
 		PageObjectLogging.log("clickOnPublish", "publish button clicked", true, driver);
-
 	}
 
 	public void deleteArticleContent() {
