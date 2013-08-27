@@ -15,7 +15,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
- */public class VetOptionsComponentObject extends WikiBasePageObject{
+ */
+public class VetOptionsComponentObject extends WikiBasePageObject {
 
 		@FindBy(css=".main-header")
 		private WebElement videoOptionsHeader;
@@ -24,7 +25,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 		@FindBy(css="#VideoEmbedCaption")
 		private WebElement captionField;
 		@FindBy(css="#VideoEmbedManualWidth")
-		private WebElement withInputField;
+		private WebElement widthInputField;
 		@FindBy(css="#VET_LayoutLeftBox label")
 		private WebElement positionLayoutLeft;
 		@FindBy(css="#VET_LayoutCenterBox label")
@@ -90,9 +91,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 
 	public void adjustWith(int Width) {
 		String width = Integer.toString(Width);
-		waitForElementByElement(withInputField);
-		withInputField.clear();
-		withInputField.sendKeys(width);
+		waitForElementByElement(widthInputField);
+		widthInputField.clear();
+		widthInputField.sendKeys(width);
 		PageObjectLogging.log("adjustWith", "width set to: "+Width,  true, driver);
 	}
 
@@ -127,9 +128,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 		clickAddaVideo();
 	}
 
-	public void adjustPosition(PositionsVideo pos){
+	public void adjustPosition(PositionsVideo position){
 		waitForElementByElement(videoEmbedLayotRow);
-		switch (pos){
+		switch (position){
 		case left:
 			positionLayoutLeft.click();
 			break;
@@ -140,7 +141,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 			positionLayoutRight.click();
 			break;
 		}
-		PageObjectLogging.log("adjustPosition", "position " + pos.toString() + " selected", true);
+		PageObjectLogging.log("adjustPosition", "position " + position.toString() + " selected", true);
 	}
 
 	public void verifyVideoAlignmentSelected(PositionsVideo positions) {
@@ -173,12 +174,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 
 
 	public void verifyVideoWidth(int widthDesired) {
-		waitForElementByElement(withInputField);
-		int width = Integer.parseInt(withInputField.getAttribute("value"));
-		Assertion.assertNumber(
+		waitForElementByElement(widthInputField);
+		int width = Integer.parseInt(widthInputField.getAttribute("value"));
+		Assertion.assertEquals(
 				widthDesired,
-				width,
-				"video width is " + width + " should be " + widthDesired);
+				width);
 		PageObjectLogging.log("verifyVideoWidth", "video width verified", true);
 	}
 

@@ -52,19 +52,15 @@ public class EditMode extends WikiBasePageObject {
 		PageObjectLogging.log("submit", "Page submitted", true);
 	}
 
-	private void preview() {
-		driver.switchTo().defaultContent();
-		previewButton.click();
-		PageObjectLogging.log("preview", "Page preview displayed", true);
-	}
-
 	public ArticlePageObject submitArticle() {
 		submit();
 		return new ArticlePageObject(driver);
 	}
 
 	public PreviewEditModePageObject previewArticle() {
-		preview();
+		driver.switchTo().defaultContent();
+		previewButton.click();
+		PageObjectLogging.log("preview", "Page preview displayed", true);
 		return new PreviewEditModePageObject(driver);
 	}
 

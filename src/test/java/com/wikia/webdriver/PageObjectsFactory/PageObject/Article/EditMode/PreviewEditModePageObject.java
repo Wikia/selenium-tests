@@ -49,9 +49,13 @@ public class PreviewEditModePageObject extends EditMode {
 		previewModal.findElement(
 				By.cssSelector(
 						videoPostionSelector.replace("%position%", position)
-						)
+				)
 		);
-		PageObjectLogging.log("verifyVideoAlignment", "video alignment is as exepected " + positions.toString(), true);
+		PageObjectLogging.log(
+				"verifyVideoAlignment",
+				"video alignment is as exepected " + positions.toString(),
+				true
+		);
 	}
 
 	public void verifyVideoWidth(int desiredWidth) {
