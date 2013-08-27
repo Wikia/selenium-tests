@@ -28,11 +28,9 @@ public class FileDetailsPageObject extends WikiBasePageObject{
 		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
 	}
 
-
 	public void verifyThumbnailIsPresent() {
 		waitForElementByElement(videoThumbnail);
 		PageObjectLogging.log("verifythumbnailIsPresent", "Verified thumbnail is visible", true);
-
 	}
 
 	public void verifyHeader(String fileName) {

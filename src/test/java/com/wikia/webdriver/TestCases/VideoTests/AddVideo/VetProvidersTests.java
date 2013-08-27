@@ -25,8 +25,8 @@ public class VetProvidersTests extends NewTestTemplate {
 	@Test(
 			dataProviderClass=VideoUrlProvider.class,
 			dataProvider="videoUrl",
-			groups={"VetProviders", "VetProviders_001"}
-		)
+			groups={"VetProvidersArticle"}
+	)
 	public void VetProvidersTests_001_article(String videoUrl, String videoName) {
 		PageObjectLogging.log("", videoUrl, true);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -48,8 +48,8 @@ public class VetProvidersTests extends NewTestTemplate {
 	@Test(
 			dataProviderClass=VideoUrlProvider.class,
 			dataProvider="videoUrl",
-			groups={"VetProviders", "VetProviders_002"}
-		)
+			groups={"VetProvidersRV"}
+	)
 	public void VetProvidersTests_002_relatedVideo(String videoUrl, String videoName) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
