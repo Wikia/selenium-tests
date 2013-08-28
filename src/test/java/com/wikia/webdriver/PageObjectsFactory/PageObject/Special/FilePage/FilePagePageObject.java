@@ -16,37 +16,54 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 /**
  *
  * @author liz_lux
+ * @author Karol 'kkarolk' Kujawiak
  *
  */
 public class FilePagePageObject extends WikiBasePageObject {
+
+	private String fileName;
 
 	public FilePagePageObject(WebDriver driver) {
 		super(driver);
 	}
 
+	public FilePagePageObject(WebDriver driver, String fileName) {
+		super(driver);
+		this.fileName = fileName;
+	}
+
 	@FindBys(@FindBy(css="ul.tabs li a"))
 	private List<WebElement> tabList;
-
 	@FindBy(css="section[data-listing-type='local'] h3.page-listing-title a")
 	private WebElement appearsListing;
-
 	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.right")
 	private WebElement localPageNext;
-
 	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
 	private WebElement localPagePrev;
+	@FindBy(css="div.fullImageLink")
+	private WebElement videoEmbedded;
+	@FindBy(css=".filehistory img.Wikia-video-thumb")
+	private WebElement videoThumbnail;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
 	public void selectTab(int tab) {
 		WebElement currentTab = tabList.get(tab);
 		currentTab.click();
-		PageObjectLogging.log("selectTab", tab + " selected", true);
+		PageObjectLogging.log(
+				"selectTab",
+				tab + " selected",
+				true
+		);
 	}
 
 	public void verifySelectedTab(String tabName) {
 		driver.findElement(By.cssSelector(selectedTab.replace("%name%", tabName)));
-		PageObjectLogging.log("verified selected tab", tabName + " selected", true);
+		PageObjectLogging.log(
+				"verified selected tab",
+				tabName + " selected",
+				true
+		);
 	}
 
 	public void openFilePage(String fileName) {
@@ -88,5 +105,25 @@ public class FilePagePageObject extends WikiBasePageObject {
 	// Verify that a specific video title is in the "Appears on these pages" list
 	public void verifyAppearsOn(String articleName) {
 		Assertion.assertTrue(appearsListing.getText().equals(articleName));
+	}
+
+	public void verifyEmbeddedVideoIsPresent() {
+		waitForElementByElement(videoEmbedded);
+		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+	}
+
+	public void verifyThumbnailIsPresent() {
+		waitForElementByElement(videoThumbnail);
+		PageObjectLogging.log("verifythumbnailIsPresent", "Verified thumbnail is visible", true);
+	}
+
+	public void verifyHeader(String fileName) {
+		waitForElementByElement(wikiFirstHeader);
+		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
+	}
+
+	public void verifyCorrectFilePage() {
+		waitForStringInURL("File:"+fileName);
+		PageObjectLogging.log("VerifyCorrectFilePage", "Verify that the page represents "+fileName+" file", true, driver);
 	}
 }

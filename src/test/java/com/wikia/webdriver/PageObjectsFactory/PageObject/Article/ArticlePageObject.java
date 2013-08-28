@@ -19,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
 /**
@@ -94,6 +95,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement rVAddVideo;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
+	@FindBy(css="a[title='View photo details']")
+	private WebElement videoDetailsButton;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
 	private WebElement rvFirstVideo;
 	@FindBy(css="#CategorySelectAdd")
@@ -366,7 +369,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyRelatedVideosModule() {
 		waitForElementByElement(rVModule);
-		PageObjectLogging.log("verifyRelatedVideosModule", "related videos module is visible", true);
+		PageObjectLogging.log(
+				"verifyRelatedVideosModule",
+				"related videos module is visible",
+				true
+		);
 	}
 
 	public VetAddVideoComponentObject clickAddRelatedVideo() {
@@ -376,13 +383,25 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyRelatedVideoAdded(String videoName) {
-		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
+		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName.substring(0, 45));
+		PageObjectLogging.log(
+				"verifyRelatedVideoAdded",
+				videoName + " is visible in related video module",
+				true
+		);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
 		waitForElementByElement(videoAddPlaceholder);
 		scrollAndClick(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
+	}
+
+	public FilePagePageObject clickVideoDetailsButton() {
+		waitForElementByElement(videoDetailsButton);
+		videoDetailsButton.click();
+		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
+		return new FilePagePageObject(driver);
 	}
 
 	private void clickAddCategoryButton() {
