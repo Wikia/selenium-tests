@@ -29,7 +29,7 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
@@ -42,7 +42,7 @@ public class MessageWallTests extends NewTestTemplate
 		timeStamp = wall.getTimeStamp();
 		message = PageContent.messageWallMessagePrefix + timeStamp;
                 wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageNoTitle(message);
 		wall.clickPostNotitleButton();
 		wall.verifyPostedMessageWithoutTitle(credentials.userName, message);
@@ -55,7 +55,7 @@ public class MessageWallTests extends NewTestTemplate
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageImage(title);
 		wall.clickPostButton();
 		wall.verifyPostedMessageImage(title);
@@ -68,7 +68,7 @@ public class MessageWallTests extends NewTestTemplate
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageVideo(title, VideoContent.youtubeVideoURL3);
 		wall.clickPostButton();
 		wall.verifyPostedMessageVideo(title);
@@ -83,7 +83,7 @@ public class MessageWallTests extends NewTestTemplate
 		titleEdit = PageContent.messageWallTitleEditPrefix + timeStamp;
 		messageEdit = PageContent.messageWallMessageEditPrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageNoTitle(message);
 		wall.clickPostNotitleButton();
 		wall.verifyPostedMessageWithoutTitle(credentials.userName, message);
@@ -99,7 +99,7 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessage(title, message);
 		wall.clickPreviewButton();
 		wall.clickPublishButton();
@@ -113,7 +113,7 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		Internallink = PageContent.internalLink;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageWithInternalLink(Internallink, title);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithLinks(Internallink);
@@ -126,7 +126,7 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
@@ -142,7 +142,7 @@ public class MessageWallTests extends NewTestTemplate
 		titleEdit = PageContent.messageWallTitleEditPrefix + timeStamp;
 		messageEdit = PageContent.messageWallMessageEditPrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
@@ -158,11 +158,10 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessageNonLatinPrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
-		wall.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall012", "MessageWall" })
@@ -172,7 +171,7 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeItalicMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedItalicMessageWithTitle(title, message);
@@ -186,7 +185,7 @@ public class MessageWallTests extends NewTestTemplate
 		sourceMessage = "'''bold" + timeStamp + "'''";
 		message = "bold" + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageSourceMode(title, sourceMessage);
 		wall.clickPostButton();
 		wall.verifyPostedBoldMessageWithTitle(title, message);
@@ -199,7 +198,7 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
@@ -207,7 +206,6 @@ public class MessageWallTests extends NewTestTemplate
 		threadHistory.verifyThreadHistory();
 		threadHistory.verifyThreadHistoryElements();
 		threadHistory.navigateBackToMessageWall();
-		wall.logOut(driver);
 	}
 
 	@Test(groups = { "MessageWall015", "MessageWall" })
@@ -218,11 +216,10 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessagePrefix + timeStamp;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeBoldMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedBoldMessageWithTitle(title, message);
-		wall.logOut(driver);
 	}
 
         @Test(groups = { "MessageWall016", "MessageWall" })
@@ -232,10 +229,39 @@ public class MessageWallTests extends NewTestTemplate
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		Externallink = PageContent.externalLink;
 		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
-		wall.openMessageWall(credentials.userName);
+		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageWithExternalLink(Externallink, title);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithLinks(Externallink);
 	}
+        
+        @Test(groups = {"MessageWall017", "MessageWall" })
+        public void MessageWall_017_CloseThread() {
+                MessageWallPageObject wall = new MessageWallPageObject(driver);
+		timeStamp = wall.getTimeStamp();
+		title = PageContent.messageWallTitlePrefix + timeStamp;
+		message = PageContent.messageWallMessagePrefix + timeStamp;
+                wall.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		wall.openMessageWall(credentials.userName, wikiURL);
+		wall.writeMessage(title, message);
+		wall.clickPostButton();
+		wall.verifyPostedMessageWithTitle(title, message);
+		wall.closeThread(PageContent.messageWallCloseReopenReason);
+        }
+        
+        @Test(groups = {"MessageWall018", "MessageWall" })
+        public void MessageWall_018_CloseAndReopenThread() {
+                MessageWallPageObject wall = new MessageWallPageObject(driver);
+		timeStamp = wall.getTimeStamp();
+		title = PageContent.messageWallTitlePrefix + timeStamp;
+		message = PageContent.messageWallMessagePrefix + timeStamp;
+                wall.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		wall.openMessageWall(credentials.userName, wikiURL);
+		wall.writeMessage(title, message);
+		wall.clickPostButton();
+		wall.verifyPostedMessageWithTitle(title, message);
+		wall.closeThread(PageContent.messageWallCloseReopenReason);
+                wall.reopenThread();
+        }
 
 }

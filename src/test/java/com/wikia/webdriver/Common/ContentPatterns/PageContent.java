@@ -36,6 +36,7 @@ public class PageContent {
 	public static String messageWallMessagePrefix = "QAMessageWallMessage";
 	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
+        public static String messageWallCloseReopenReason = "reason";
 
 	//top 10 list
 	public static String top10Description = "DescriptionForList";

@@ -44,11 +44,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	@FindBy(css="a.edit-message")
 	private WebElement editMessageButton;
 	@FindBy(css="#WikiaConfirm")
-	private WebElement removeMessageOverLay;
+	private WebElement removeCloseOverLay;
 	@FindBy(css="#reason")
-	private WebElement removeMessageReason;
+	private WebElement removeCloseReason;
 	@FindBy(css="#WikiaConfirmOk")
-	private WebElement removeMessageConfirmButton;
+	private WebElement removeCloseConfirmButton;
 	@FindBy(css=".speech-bubble-message-removed")
 	private WebElement removeMessageConfirmation;
 	@FindBy(css="div.msg-title a")
@@ -71,6 +71,14 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement messageMainBody;
 	@FindBy (css="ul.comments li[style]")
 	private WebElement newMessageBubble;
+       @FindBy(css="div.msg-toolbar")
+       private WebElement msgToolbar;
+       @FindBy(css=".WikiaMenuElement .close-thread")
+       private WebElement closeThread;
+       @FindBy(css=".WikiaMenuElement .reopen-thread")
+       private WebElement reopenThread;
+       @FindBy (css="div.msg-toolbar nav.wikia-menu-button.secondary.combined")
+       private WebElement secondaryCombinedMoreButton;
 
 	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
@@ -80,6 +88,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
+       String reopenThreadCSS = ".WikiaMenuElement .reopen-thread";
+       String closeThreadCSS = ".WikiaMenuElement .close-thread";
+       String msgToolbarNav = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 
 	private String wikiaEditorTextarea = "textarea.replyBody";
 	MiniEditorComponentObject miniEditor;
@@ -90,9 +101,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		PageFactory.initElements(driver, this);
 	}
 
-	public MessageWallPageObject openMessageWall(String userName)
+	public MessageWallPageObject openMessageWall(String userName, String wikiURL)
 	{
-		getUrl(Global.DOMAIN + URLsContent.userMessageWall + userName);
+		getUrl(wikiURL + URLsContent.userMessageWall + userName);
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
 		return new MessageWallPageObject(driver);
@@ -300,19 +311,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		mouseOver(".WikiaMenuElement .remove-message");
 		jQueryNthElemClick(".WikiaMenuElement .remove-message", 0);
-		waitForElementByElement(removeMessageOverLay);
-		waitForElementByElement(removeMessageConfirmButton);
+		waitForElementByElement(removeCloseOverLay);
+		waitForElementByElement(removeCloseConfirmButton);
 
 		if (Global.BROWSER.equals("IE")) {
 
-			WebElement removeMessageReasonParent = getParentElement(removeMessageReason);
+			WebElement removeMessageReasonParent = getParentElement(removeCloseReason);
 			scrollAndClick(removeMessageReasonParent);
 			removeMessageReasonParent.sendKeys(reason);
-			scrollAndClick(removeMessageConfirmButton);
+			scrollAndClick(removeCloseConfirmButton);
 		}
 		else {
-			removeMessageReason.sendKeys(reason);
-			scrollAndClick(removeMessageConfirmButton);
+			removeCloseReason.sendKeys(reason);
+			scrollAndClick(removeCloseConfirmButton);
 		}
 
 		waitForElementByElement(removeMessageConfirmation);
@@ -473,5 +484,31 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 			scrollAndClick(list.get(2));
 		}
 		PageObjectLogging.log("sortThreads", "order of messages sorted: "+order, true, driver);
+	}
+
+        public void closeThread(String reason)
+	{
+		waitForElementByElement(msgToolbar);
+		setStyle(".buttons", "1", "block");
+                secondaryCombinedMoreButton.click();
+		mouseOver(closeThreadCSS);
+		clickActions(closeThread);
+		waitForElementByElement(removeCloseOverLay);
+		waitForElementByElement(removeCloseConfirmButton);
+		removeCloseReason.sendKeys(reason);
+		clickActions(removeCloseConfirmButton);
+		refreshPage();
+		PageObjectLogging.log("closeThread", "Thread is closed" + reason, true);
+	}
+
+	public void reopenThread()
+	{
+		waitForElementByElement(msgToolbar);
+		setStyle(".buttons", "1", "block");
+                secondaryCombinedMoreButton.click();
+                mouseOver(reopenThreadCSS);
+		clickActions(reopenThread);
+                refreshPage();
+		PageObjectLogging.log("reopenThread", "Thread is reopen", true);
 	}
 }
