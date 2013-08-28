@@ -23,7 +23,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
-
 public class WikiArticleEditMode extends WikiEditMode {
 
 	@FindBy(css="a.RTEImageButton")
@@ -181,6 +180,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode", true, driver);
 	}
 
+
 	public void verifyTheCaptionOnThePreview(String caption) {
 		wait.until(ExpectedConditions.textToBePresentInElement(captionInPreview, caption));
 		PageObjectLogging.log("VerifyTheCaptionOnThePreview", "Verify that the caption of image appears in the preview", true, driver);
@@ -213,7 +213,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void clickOnPublish() {
 		waitForElementClickableByElement(publishButton);
-		scrollAndClick(publishButton);
+		publishButton.click();
 		PageObjectLogging.log("clickOnPublish", "publish button clicked", true, driver);
 	}
 
@@ -297,6 +297,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
 	}
 
+
 	public void verifyLeftAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
 		clickOnModifyImageLink();
@@ -310,6 +311,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 		waitForElementByElement(imageUploadCloseButton);
 		imageUploadCloseButton.click();
+
 	}
 
 	public WikiArticlePageObject addImageForLightboxTesting () {
@@ -397,6 +399,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		CommonUtils.setClipboardContents(builder);
 		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 
-		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
+		PageObjectLogging.log("deleteUnwantedVideoFromMessage",
+				"Delete all source code on the article", true, driver);
+	}
+
+	public void typeInTemplateContent(String content) {
+		waitForElementByElement(messageSourceModeTextArea);
+		messageSourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log("typeInContent",
+				"content type into source mode textarea", true, driver);
 	}
 }

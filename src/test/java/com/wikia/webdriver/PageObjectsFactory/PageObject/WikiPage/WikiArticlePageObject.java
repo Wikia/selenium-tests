@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -83,13 +84,37 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewArticle(String pageName,
-			int layoutNumber) {
+												int layoutNumber) {
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
 				+ "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
 				+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver);
+	}
+
+	public WikiArticleEditMode createNewArticle(String wikiURL,
+			WikiArticlePageObject article) {
+		String pageName = article.getPageName();
+		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir
+				+ pageName, URLsContent.actionEditParameter));
+		String pageNameEnc = pageName.replace("_", " ");
+		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
+				+ pageNameEnc + "']")));
+
+		return new WikiArticleEditMode(driver);
+	}
+
+	public WikiArticleEditMode createNewTemplate(String wikiURL, String templateName, String templateContent ) {
+		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.templateNs + ":" + templateName );
+		WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle );
+		edit.typeInTemplateContent( templateContent );
+		edit.clickOnPublish();
+		this.waitForElementByCss("#WikiaArticle");
+
+		PageObjectLogging.log("createNewTemplate", "new template created: " + templateName, true);
+
+		return edit;
 	}
 
 	public WikiArticleEditMode createNewDefaultArticle(){
@@ -143,17 +168,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyCommentVideo(String videoName){
-		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='"+videoName+"']");
+		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='" + videoName + "']");
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
 	}
-
-
-
 
 	public void verifyPageTitle(String title)
 	{
 		title = title.replace("_", " ");
-		waitForElementByXPath("//h1[contains(text(), '"+title+"')]");
+		waitForElementByXPath("//h1[contains(text(), '" + title + "')]");
 		PageObjectLogging.log("verifyPageTitle", "page title is verified", true);
 	}
 
@@ -202,11 +224,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiHistoryPageObject(driver);
 	}
 
-	/**
-	* getArticleNameFromURL
-	*
-	@author Michal Nowierski
-	*/
 	public String getArticleNameFromURL() {
 		//TODO: To Michal: use Regular Expression here, when its syntax is learned.
 		String URL= driver.getCurrentUrl();
@@ -219,7 +236,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		openRandomArticle();
 		String name = driver.findElement(By.cssSelector(".WikiaPageHeader h1")).getText();
 		unfollowArticleByApi(name);
-		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=watch");
+		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=watch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(followedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
@@ -227,7 +244,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void unfollowArticleByApi(String name){
-		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=unwatch");
+		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=unwatch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(unfollowedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);

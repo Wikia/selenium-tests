@@ -22,6 +22,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	private WebElement discussionTitleArea;
 	@FindBy(css="button.submit")
 	private WebElement postButton;
+	@FindBy(css="div.msg-title a")
+	private WebElement discussionTitle;
 	@FindBys(@FindBy(css="div.msg-body p"))
 	private List<WebElement> discussionBody;
 	@FindBys(@FindBy(css="li.SpeechBubble img.thumbimage"))
@@ -30,7 +32,8 @@ public class ForumBoardPageObject extends BasePageObject{
 	private List<WebElement> threadTitlesList;
 	@FindBy(css=".notify-everyone")
 	private WebElement highlight;
-
+	@FindBy(css="#Forum .board-description")
+	private WebElement boardDescription;
 	private String discussionTextarea = "textarea.title:nth-child(2)";
 	private String wikiaEditorTextarea = "#WikiaEditor-0";
 
@@ -100,6 +103,18 @@ public class ForumBoardPageObject extends BasePageObject{
 		PageObjectLogging.log("clickPostButton", "post button clicked", true,
 				driver);
 	}
+
+	public void verifyDiscussionTitleAndMessage(String title, String message)
+	{
+		waitForTextToBePresentInElementByElement(discussionTitle, title);
+		waitForTextToBePresentInElementByElement(discussionBody.get(0), message);
+		PageObjectLogging.log("verifyDiscussionWithTitle", "discussion with title and message verified", true);
+	}
+
+    public void verifyBoardDescription( String description ) {
+        waitForTextToBePresentInElementByElement( boardDescription, description );
+        PageObjectLogging.log("verifyBoardDescription", "board description verified", true);
+    }
 
 	public void clickPostNotitleButton()
 	{
