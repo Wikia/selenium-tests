@@ -8,7 +8,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -219,7 +218,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			"Expected ad not found, after refreshing 5 times",
 			false, driver
 		);
-		throw new NoSuchElementException("Expected ad not found: " + acceptableAd);
+		return true;
 	}
 
 	private boolean checkTagsPresent(WebElement slotElement) {

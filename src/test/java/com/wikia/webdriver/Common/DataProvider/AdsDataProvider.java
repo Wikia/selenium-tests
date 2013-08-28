@@ -118,6 +118,10 @@ public class AdsDataProvider {
 				"adtest", "Mobile:MobileDesktopOverlapping",
 				"http://pagead2.googlesyndication.com/simgad/13365248683236755956",
 				"http://pagead2.googlesyndication.com/simgad/1444156043613737882"
+			}, {
+				"adtest", "Mobile:MobileDesktopOverlapping_postSwitch",
+				"http://pagead2.googlesyndication.com/simgad/2078293277703974918",
+				"http://pagead2.googlesyndication.com/simgad/10332844232748374153"
 			}
 		};
 	}
