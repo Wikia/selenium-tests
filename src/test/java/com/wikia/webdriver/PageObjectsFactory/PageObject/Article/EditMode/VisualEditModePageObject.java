@@ -18,6 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBui
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 
 /**
@@ -205,7 +206,7 @@ public class VisualEditModePageObject extends EditMode {
 		case Video:
 			return new VetOptionsComponentObject(driver);
 		case VideoPlaceholder:
-			return new VetOptionsComponentObject(driver);
+			return new VetAddVideoComponentObject(driver);
 		default:
 			return null;
 		}
