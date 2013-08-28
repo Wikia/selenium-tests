@@ -12,7 +12,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -40,7 +40,7 @@ public class VetProvidersTests extends NewTestTemplate {
 		visualEditMode.verifyVideo();
 		visualEditMode.submitArticle();
 		article.verifyVideo();
-		FileDetailsPageObject fileDetails = article.clickVideoDetailsButton();
+		FilePagePageObject fileDetails = article.clickVideoDetailsButton();
 		fileDetails.verifyEmbeddedVideoIsPresent();
 		fileDetails.verifyHeader(videoName);
 	}
