@@ -95,19 +95,21 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
-	public WikiArticleEditMode createNewArticle(WikiArticlePageObject article) {
+	public WikiArticleEditMode createNewArticle(String wikiURL,
+			WikiArticlePageObject article) {
 		String pageName = article.getPageName();
-		getUrl(Global.DOMAIN + URLsContent.wikiDir + pageName + URLsContent.actionEditParameter );
-
+		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir
+				+ pageName, URLsContent.actionEditParameter));
 		String pageNameEnc = pageName.replace("_", " ");
-		waitForElementByElement( driver.findElement( By.cssSelector( "a[title='" + pageNameEnc + "']" ) ) );
+		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
+				+ pageNameEnc + "']")));
 
 		return new WikiArticleEditMode(driver);
 	}
 
-	public WikiArticleEditMode createNewTemplate( String templateName, String templateContent ) {
+	public WikiArticleEditMode createNewTemplate(String wikiURL, String templateName, String templateContent ) {
 		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.templateNs + ":" + templateName );
-		WikiArticleEditMode edit = templateArticle.createNewArticle( templateArticle );
+		WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle );
 		edit.typeInTemplateContent( templateContent );
 		edit.clickOnPublish();
 		this.waitForElementByCss("#WikiaArticle");

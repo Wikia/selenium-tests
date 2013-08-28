@@ -103,7 +103,7 @@ public class ForumEditModeTests extends NewTestTemplate{
 		// create a template
 		String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
 		WikiArticlePageObject article = new WikiArticlePageObject( driver );
-		article.createNewTemplate( templateNameAndContent, templateNameAndContent );
+		article.createNewTemplate(wikiURL, templateNameAndContent, templateNameAndContent );
 
 		// login & open forum page and create new board
 		login.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
