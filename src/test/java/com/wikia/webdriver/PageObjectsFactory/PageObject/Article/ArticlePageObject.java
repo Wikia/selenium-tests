@@ -19,8 +19,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.FileDetailsPageObject;
 
 /**
  *
@@ -369,7 +369,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyRelatedVideosModule() {
 		waitForElementByElement(rVModule);
-		PageObjectLogging.log("verifyRelatedVideosModule", "related videos module is visible", true);
+		PageObjectLogging.log(
+				"verifyRelatedVideosModule",
+				"related videos module is visible",
+				true
+		);
 	}
 
 	public VetAddVideoComponentObject clickAddRelatedVideo() {
@@ -380,7 +384,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyRelatedVideoAdded(String videoName) {
 		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName.substring(0, 45));
-		PageObjectLogging.log("verifyRelatedVideoAdded", videoName + " is visible in related video module", true);
+		PageObjectLogging.log(
+				"verifyRelatedVideoAdded",
+				videoName + " is visible in related video module",
+				true
+		);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
@@ -389,11 +397,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new VetAddVideoComponentObject(driver);
 	}
 
-	public FileDetailsPageObject clickVideoDetailsButton() {
+	public FilePagePageObject clickVideoDetailsButton() {
 		waitForElementByElement(videoDetailsButton);
 		videoDetailsButton.click();
 		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-		return new FileDetailsPageObject(driver);
+		return new FilePagePageObject(driver);
 	}
 
 	private void clickAddCategoryButton() {
