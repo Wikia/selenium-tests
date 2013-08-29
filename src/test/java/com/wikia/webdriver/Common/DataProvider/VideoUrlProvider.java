@@ -35,8 +35,8 @@ public class VideoUrlProvider {
 			},
 			// Non-Premium Provider Links
 			{
-				"http://blip.tv/q-tv/s-gus-unger-hamilton-and-gwil-sainsbury-in-studio-q-6587602",
-				"Q with Jian Ghomeshi - ∆'s Gus Unger-Hamilton and Gwil Sainsbury in Studio Q"
+				"http://blip.tv/q-tv/ken-jeong-in-studio-q-6609739",
+				"Q with Jian Ghomeshi - Ken Jeong in Studio Q"
 			}, {
 				"http://www.dailymotion.com/video/x101vdw_robert-pattison-y-kristen-stewart-se-dan-un-tiempo_people#.UZovsrWnqXw",
 				"Robert Pattison y Kristen Stewart se dan un tiempo"
