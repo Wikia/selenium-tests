@@ -13,6 +13,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
+ * 1. Close user account,
+ * 2. Verify user account closed,
+ * 3. Reopen user account,
+ * 4. Verify user account reopened
  */
 public class EditAccountTests extends NewTestTemplate {
 
