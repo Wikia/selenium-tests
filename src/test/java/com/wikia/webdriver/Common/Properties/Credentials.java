@@ -42,6 +42,9 @@ public class Credentials {
 	public String userNameLong;
 	public String passwordLong;
 
+	public String userNameClosedAccount;
+	public String passwordClosedAccount;
+
 	public String email;
 	public String emailPassword;
 	public String emailQaart1;
@@ -101,6 +104,9 @@ public class Credentials {
 
 		userNameLong = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.long.username");
 		passwordLong = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.long.password");
+
+		userNameClosedAccount = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.closeAccountUser.username");
+		passwordClosedAccount = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.closeAccountUser.password");
 
 		userNameStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.username");
 		passwordStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.password");

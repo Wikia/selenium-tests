@@ -42,10 +42,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	@FindBy (css=".UserLogin .error-msg")
 	private WebElement messagePlaceholder;
 
-	/**
-	 * Special:UserLogin user name field
-	 * @param name
-	 */
 	private void typeInUserName(String name){
 		waitForElementByElement(userName);
 		userName.clear();
@@ -53,10 +49,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		PageObjectLogging.log("typeInUserName", name+" user name typed", true);
 	}
 
-	/**
-	 * Special:UserLogin password field
-	 * @param pass
-	 */
 	private void typeInPassword(String pass){
 		waitForElementByElement(password);
 		password.clear();
@@ -64,52 +56,29 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		PageObjectLogging.log("typeInUserPassword", "password typed", true);
 	}
 
-	/**
-	 * Special:UserLogin for forgot password
-	 * @param pass
-	 */
 	private void typeInNewPassword(String pass){
 		waitForElementByElement(newPassword);
 		newPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
 
-	/**
-	 * Special:UserLogin for forgot password
-	 * @param pass
-	 */
 	private void retypeInNewPassword(String pass){
 		waitForElementByElement(retypeNewPassword);
 		retypeNewPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
 
-
-	/**
-	 * Special:UserLogin login button
-	 */
 	private void clickLoginButton(){
 		waitForElementByElement(loginButton);
 		loginButton.click();
 		PageObjectLogging.log("clickLoginButton", "login button clicked", true);
 	}
 
-        /**
-	 * Special:UserLogin forgot password
-	 */
 	private void clickForgotPasswordLink(){
 		waitForElementByElement(forgotPasswordLink);
 		scrollAndClick(forgotPasswordLink);
 	}
 
-	/**
-	 * Special:UserLogin
-	 * use if user is not on Special:UserLogin page
-	 * and verification after logging in is needed
-	 *
-	 * @param name
-	 * @param pass
-	 */
 	public void loginAndVerify(String name, String pass){
 		openSpecialUserLogin();
 		login(name, pass);
@@ -122,24 +91,12 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		verifyUserLoggedIn(name);
 	}
 
-	/**
-	 * Special:UserLogin
-	 * use if user is on Special:UserLogin page
-	 * and no verification after logging in is needed
-	 *
-	 * @param name
-	 * @param pass
-	 */
 	public void login(String name, String pass){
 		typeInUserName(name);
 		typeInPassword(pass);
 		clickLoginButton();
 	}
 
-	/**
-	 * Special:UserLogin forgot password
-	 * @param name
-	 */
 	public void remindPassword(String name){
 		Assertion.assertEquals(
 			ApiActions.apiActionForgotPasswordResponse,
@@ -148,9 +105,6 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		clickForgotPasswordLink();
 	}
 
-	/**
-	 * opens Special:UserLogin page
-	 */
 	public void openSpecialUserLogin(){
 		getUrl(Global.DOMAIN+ URLsContent.specialUserLogin);
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
@@ -177,6 +131,14 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 			"newPasswordSentMessage",
 			"Message about new password sent present",
 			true, driver
+		);
+	}
+
+	public void verifyClosedAccountMessage() {
+		waitForElementByElement(messagePlaceholder);
+		Assertion.assertEquals(
+				"Your account has been disabled by Wikia.",
+				messagePlaceholder.getText()
 		);
 	}
 }
