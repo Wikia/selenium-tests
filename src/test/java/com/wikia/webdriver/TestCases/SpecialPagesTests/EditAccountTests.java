@@ -36,6 +36,7 @@ public class EditAccountTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		EditAccount editAccount = new EditAccount(driver, testedWiki, credentials.userNameClosedAccount);
 		editAccount.closeAccount(PageContent.caption);
+		editAccount.verifyAccountClosedMessage();
 	}
 
 	@Test(dependsOnMethods="EditAccount_001_closeAccount")
@@ -52,6 +53,7 @@ public class EditAccountTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		EditAccount editAccount = new EditAccount(driver, testedWiki, credentials.userNameClosedAccount);
 		editAccount.reopenAccount(credentials.passwordClosedAccount);
+		editAccount.verifyAccountReopenedMessage();
 	}
 
 	@Test(groups = {"EditAccountTest", "EditAccountTest_001"}, dependsOnMethods="EditAccount_003_reopenAccount")
