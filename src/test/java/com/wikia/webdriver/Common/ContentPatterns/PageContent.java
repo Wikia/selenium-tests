@@ -36,7 +36,7 @@ public class PageContent {
 	public static String messageWallMessagePrefix = "QAMessageWallMessage";
 	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
-        public static String messageWallCloseReopenReason = "reason";
+	public static String messageWallCloseReopenReason = "reason";
 
 	//top 10 list
 	public static String top10Description = "DescriptionForList";
@@ -61,17 +61,17 @@ public class PageContent {
 	public static String forumBoard = "QABoardForMoveThreadTest";
 	public static String closeReason = "QA reason";
 
-        //Messages
-        public static String articleDeletedMessage = "This page has been deleted.";
-        public static String createNewBlogPostMessage = "Create a new blog post";
-        public static String loginRequired = "Login required";
-        public static String notLoggedInMessage = "Not logged in";
-        public static String newPasswordSentMessage = "We've sent a new password to the email address for %userName%.";
-        public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
-        public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
+	//Messages
+	public static String articleDeletedMessage = "This page has been deleted.";
+	public static String createNewBlogPostMessage = "Create a new blog post";
+	public static String loginRequired = "Login required";
+	public static String notLoggedInMessage = "Not logged in";
+	public static String newPasswordSentMessage = "We've sent a new password to the email address for %userName%.";
+	public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
+	public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
 
-        //Blocks for Phalanx
-        public static String titleFilterPlain = "BadContent";
+	//Blocks for Phalanx
+	public static String titleFilterPlain = "BadContent";
 
 	//wikiText
 	public static String wikiTextPhoto = "[[File:%photoName%|thumb|%s]]";
@@ -84,5 +84,4 @@ public class PageContent {
 	public static String wikiSignUpBirthMonth = "11";
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
-
 }
