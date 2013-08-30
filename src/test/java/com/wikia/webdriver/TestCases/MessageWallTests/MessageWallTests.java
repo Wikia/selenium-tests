@@ -11,16 +11,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWall
 
 public class MessageWallTests extends NewTestTemplate
 {
-        Credentials credentials = config.getCredentials();
+	Credentials credentials = config.getCredentials();
 
-        String timeStamp;
-        String title;
-        String message;
-        String titleEdit;
-        String messageEdit;
-        String Externallink;
-        String Internallink;
-        String sourceMessage;
+	String timeStamp;
+	String title;
+	String message;
+	String titleEdit;
+	String messageEdit;
+	String Externallink;
+	String Internallink;
+	String sourceMessage;
 
 	@Test(groups = { "MessageWall001", "MessageWall" })
 	public void MessageWall_001_WriteMessage() {
@@ -37,11 +37,10 @@ public class MessageWallTests extends NewTestTemplate
 
 	@Test(groups = { "MessageWall002", "MessageWall" })
 	public void MessageWall_002_WriteMessageNoTitle() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		message = PageContent.messageWallMessagePrefix + timeStamp;
-                wall.logInCookie(credentials.userName, credentials.password, wikiURL);
+		wall.logInCookie(credentials.userName, credentials.password, wikiURL);
 		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessageNoTitle(message);
 		wall.clickPostNotitleButton();
@@ -50,7 +49,6 @@ public class MessageWallTests extends NewTestTemplate
 
 	@Test(groups = { "MessageWall003", "MessageWall" })
 	public void MessageWall_003_WriteMessageImage() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -63,7 +61,6 @@ public class MessageWallTests extends NewTestTemplate
 
 	@Test(groups = { "MessageWall004", "MessageWall" })
 	public void MessageWall_004_WriteMessageVideo() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -76,7 +73,6 @@ public class MessageWallTests extends NewTestTemplate
 
 	@Test(groups = { "MessageWall005", "MessageWall" })
 	public void MessageWall_005_WriteAndEditMessageWithoutTitle() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		message = PageContent.messageWallMessagePrefix + timeStamp;
@@ -93,7 +89,6 @@ public class MessageWallTests extends NewTestTemplate
 
 	@Test(groups = { "MessageWall006", "MessageWall" })
 	public void MessageWall_006_WriteMessagePreview() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -222,7 +217,7 @@ public class MessageWallTests extends NewTestTemplate
 		wall.verifyPostedBoldMessageWithTitle(title, message);
 	}
 
-        @Test(groups = { "MessageWall016", "MessageWall" })
+	@Test(groups = { "MessageWall016", "MessageWall" })
 	public void MessageWall_016_WriteMessageWithExternalLink() {
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
@@ -234,22 +229,21 @@ public class MessageWallTests extends NewTestTemplate
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithLinks(Externallink);
 	}
-        
-        @Test(groups = {"MessageWall017", "MessageWall" })
-        public void MessageWall_017_CloseThread() {
-                MessageWallPageObject wall = new MessageWallPageObject(driver);
+
+	@Test(groups = {"MessageWall017", "MessageWall" })
+	public void MessageWall_017_CloseThread() {
+		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
 		message = PageContent.messageWallMessagePrefix + timeStamp;
-                wall.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		wall.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		wall.openMessageWall(credentials.userName, wikiURL);
 		wall.writeMessage(title, message);
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
 		wall.closeThread(PageContent.messageWallCloseReopenReason);
-                wall.verifyClosedThread();
-                wall.reopenThread();
-                wall.verifyReopenThread();
-        }
-
+		wall.verifyClosedThread();
+		wall.reopenThread();
+		wall.verifyReopenThread();
+	}
 }
