@@ -247,21 +247,9 @@ public class MessageWallTests extends NewTestTemplate
 		wall.clickPostButton();
 		wall.verifyPostedMessageWithTitle(title, message);
 		wall.closeThread(PageContent.messageWallCloseReopenReason);
-        }
-        
-        @Test(groups = {"MessageWall018", "MessageWall" })
-        public void MessageWall_018_CloseAndReopenThread() {
-                MessageWallPageObject wall = new MessageWallPageObject(driver);
-		timeStamp = wall.getTimeStamp();
-		title = PageContent.messageWallTitlePrefix + timeStamp;
-		message = PageContent.messageWallMessagePrefix + timeStamp;
-                wall.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		wall.openMessageWall(credentials.userName, wikiURL);
-		wall.writeMessage(title, message);
-		wall.clickPostButton();
-		wall.verifyPostedMessageWithTitle(title, message);
-		wall.closeThread(PageContent.messageWallCloseReopenReason);
+                wall.verifyClosedThread();
                 wall.reopenThread();
+                wall.verifyReopenThread();
         }
 
 }

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEdi
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.browsermob.proxy.jetty.util.Credential;
 
 	public class MessageWallPageObject extends WikiBasePageObject{
 
@@ -71,14 +73,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement messageMainBody;
 	@FindBy (css="ul.comments li[style]")
 	private WebElement newMessageBubble;
-       @FindBy(css="div.msg-toolbar")
-       private WebElement msgToolbar;
-       @FindBy(css=".WikiaMenuElement .close-thread")
-       private WebElement closeThread;
-       @FindBy(css=".WikiaMenuElement .reopen-thread")
-       private WebElement reopenThread;
-       @FindBy (css="div.msg-toolbar nav.wikia-menu-button.secondary.combined")
-       private WebElement secondaryCombinedMoreButton;
+        @FindBy(css="div.msg-toolbar")
+        private WebElement msgToolbar;
+        @FindBy(css=".WikiaMenuElement .close-thread")
+        private WebElement closeThread;
+        @FindBy(css=".WikiaMenuElement .reopen-thread")
+        private WebElement reopenThread;
+        @FindBy (css="div.msg-toolbar nav.wikia-menu-button.secondary.combined")
+        private WebElement secondaryCombinedMoreButton;
+        @FindBy (css=".deleteorremove-infobox")
+        private WebElement infobox;
 
 	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
@@ -88,9 +92,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
-       String reopenThreadCSS = ".WikiaMenuElement .reopen-thread";
-       String closeThreadCSS = ".WikiaMenuElement .close-thread";
-       String msgToolbarNav = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
+        String reopenThreadCSS = ".WikiaMenuElement .reopen-thread";
+        String closeThreadCSS = ".WikiaMenuElement .close-thread";
+        String msgToolbarNav = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 
 	private String wikiaEditorTextarea = "textarea.replyBody";
 	MiniEditorComponentObject miniEditor;
@@ -101,9 +105,17 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		PageFactory.initElements(driver, this);
 	}
 
-	public MessageWallPageObject openMessageWall(String userName, String wikiURL)
+        public MessageWallPageObject openMessageWall(String userName, String wikiURL)
 	{
 		getUrl(wikiURL + URLsContent.userMessageWall + userName);
+		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
+		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
+		return new MessageWallPageObject(driver);
+	}
+
+        public MessageWallPageObject openMessageWall(String userName)
+	{
+		getUrl(Global.DOMAIN + URLsContent.userMessageWall + userName);
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
 		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
 		return new MessageWallPageObject(driver);
@@ -483,11 +495,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 			waitForElementByElement(list.get(2));
 			scrollAndClick(list.get(2));
 		}
-		PageObjectLogging.log("sortThreads", "order of messages sorted: "+order, true, driver);
+		PageObjectLogging.log(
+                        "sortThreads",
+                        "order of messages sorted: "+order,
+                        true,
+                        driver
+                );
 	}
 
         public void closeThread(String reason)
-	{
+        {
 		waitForElementByElement(msgToolbar);
 		setStyle(".buttons", "1", "block");
                 secondaryCombinedMoreButton.click();
@@ -498,7 +515,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		removeCloseReason.sendKeys(reason);
 		clickActions(removeCloseConfirmButton);
 		refreshPage();
-		PageObjectLogging.log("closeThread", "Thread is closed" + reason, true);
+		PageObjectLogging.log(
+                        "closeThread",
+                        "Thread is closed with the following reason: " + reason, 
+                        true
+                );
 	}
 
 	public void reopenThread()
@@ -509,6 +530,35 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
                 mouseOver(reopenThreadCSS);
 		clickActions(reopenThread);
                 refreshPage();
-		PageObjectLogging.log("reopenThread", "Thread is reopen", true);
+		PageObjectLogging.log("reopenThread", "Thread is reopened", true);
 	}
+
+        public void verifyClosedThread()
+	{
+		waitForElementByElement(infobox);
+		waitForTextToBePresentInElementByElement(
+                        infobox,
+                        PageContent.messageWallCloseReopenReason
+                );
+		PageObjectLogging.log(
+                        "verifyCloseThread",
+                        "closed thread verified",
+                        true,
+                        driver
+                );
+	}
+
+        public void verifyReopenThread()
+        {
+                waitForElementByElement(msgToolbar);
+		setStyle(".buttons", "1", "block");
+                secondaryCombinedMoreButton.click();
+                waitForElementByElement(closeThread);
+                PageObjectLogging.log(
+                        "verifyReopenThread",
+                        "reopen thread verified",
+                        true,
+                        driver
+                );
+        }
 }

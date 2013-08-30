@@ -237,9 +237,9 @@ public class BasePageObject{
 		}
 	}
 
-	public Object executeScriptRet(String script) {
+	public String executeScriptRet(String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		return (Object) js.executeScript("return " + script);
+		return (String) js.executeScript("return " + script);
 	}
 
 	public long executeScriptRetLong(String script)
@@ -580,12 +580,13 @@ public class BasePageObject{
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
-        public void setStyle(String selector, String index, String style){
+        public void setStyle(String selector, String index, String style) {
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript(
-                    "document.querySelectorAll(arguments[0])[arguments[1]]"
-                     + ".style.display=arguments[2]",
-                selector, index, style
+                        "document.querySelectorAll(arguments[0])[arguments[1]].style.display=arguments[2]", 
+                        selector,
+                        index,
+                        style
                 );
         }
 
