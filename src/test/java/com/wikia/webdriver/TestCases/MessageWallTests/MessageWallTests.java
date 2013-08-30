@@ -147,7 +147,6 @@ public class MessageWallTests extends NewTestTemplate
 
 	@Test(groups = { "MessageWall011", "MessageWall" })
 	public void MessageWall_011_WriteNonLatinMessage() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
@@ -205,7 +204,6 @@ public class MessageWallTests extends NewTestTemplate
 
 	@Test(groups = { "MessageWall015", "MessageWall" })
 	public void MessageWall_015_WriteBoldMessage() {
-
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		timeStamp = wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix + timeStamp;
