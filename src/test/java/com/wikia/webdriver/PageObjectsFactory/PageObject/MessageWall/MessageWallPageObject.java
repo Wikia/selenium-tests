@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
@@ -19,9 +19,8 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEdi
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import org.browsermob.proxy.jetty.util.Credential;
 
-	public class MessageWallPageObject extends WikiBasePageObject{
+public class MessageWallPageObject extends WikiBasePageObject {
 
 	@FindBy(css="#WallMessageTitle")
 	private WebElement messageTitleField;
@@ -73,16 +72,16 @@ import org.browsermob.proxy.jetty.util.Credential;
 	private WebElement messageMainBody;
 	@FindBy (css="ul.comments li[style]")
 	private WebElement newMessageBubble;
-        @FindBy(css="div.msg-toolbar")
-        private WebElement msgToolbar;
-        @FindBy(css=".WikiaMenuElement .close-thread")
-        private WebElement closeThread;
-        @FindBy(css=".WikiaMenuElement .reopen-thread")
-        private WebElement reopenThread;
-        @FindBy (css="div.msg-toolbar nav.wikia-menu-button.secondary.combined")
-        private WebElement secondaryCombinedMoreButton;
-        @FindBy (css=".deleteorremove-infobox")
-        private WebElement infobox;
+	@FindBy(css="div.msg-toolbar")
+	private WebElement msgToolbar;
+	@FindBy(css=".WikiaMenuElement .close-thread")
+	private WebElement closeThread;
+	@FindBy(css=".WikiaMenuElement .reopen-thread")
+	private WebElement reopenThread;
+	@FindBy (css="div.msg-toolbar nav.wikia-menu-button.secondary.combined")
+	private WebElement secondaryCombinedMoreButton;
+	@FindBy (css=".deleteorremove-infobox")
+	private WebElement infobox;
 
 	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
@@ -92,9 +91,10 @@ import org.browsermob.proxy.jetty.util.Credential;
 
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
-        String reopenThreadCSS = ".WikiaMenuElement .reopen-thread";
-        String closeThreadCSS = ".WikiaMenuElement .close-thread";
-        String msgToolbarNav = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
+
+	String reopenThreadCSS = ".WikiaMenuElement .reopen-thread";
+	String closeThreadCSS = ".WikiaMenuElement .close-thread";
+	String msgToolbarNav = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 
 	private String wikiaEditorTextarea = "textarea.replyBody";
 	MiniEditorComponentObject miniEditor;
@@ -105,7 +105,7 @@ import org.browsermob.proxy.jetty.util.Credential;
 		PageFactory.initElements(driver, this);
 	}
 
-        public MessageWallPageObject openMessageWall(String userName, String wikiURL)
+	public MessageWallPageObject openMessageWall(String userName, String wikiURL)
 	{
 		getUrl(wikiURL + URLsContent.userMessageWall + userName);
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
@@ -113,7 +113,7 @@ import org.browsermob.proxy.jetty.util.Credential;
 		return new MessageWallPageObject(driver);
 	}
 
-        public MessageWallPageObject openMessageWall(String userName)
+	public MessageWallPageObject openMessageWall(String userName)
 	{
 		getUrl(Global.DOMAIN + URLsContent.userMessageWall + userName);
 		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
@@ -221,7 +221,7 @@ import org.browsermob.proxy.jetty.util.Credential;
 
 	public void clickPostButton()
 	{
-                waitForElementByElement(postButton);
+		waitForElementByElement(postButton);
 		waitForElementClickableByElement(postButton);
 		postButton.click();
 		PageObjectLogging.log("clickPostButton", "post button is clicked", true);
@@ -265,8 +265,8 @@ import org.browsermob.proxy.jetty.util.Credential;
 	public void verifyPostedReplyWithMessage(String message, int replyNumber)
 	{
 		waitForTextToBePresentInElementByBy(By.cssSelector(
-                        "ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message
-                );
+				"ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message
+		);
 		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
 
@@ -370,7 +370,7 @@ import org.browsermob.proxy.jetty.util.Credential;
 
 	private void writeEditMessage(String title, String message)
 	{
-                driver.switchTo().frame(miniEditor.miniEditorIframe);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
 
 		messageBodyField.clear();
 		miniEditor.writeMiniEditor(message);
@@ -421,43 +421,43 @@ import org.browsermob.proxy.jetty.util.Credential;
 		triggerMessageArea();
 		miniEditor.addExternalLink(externallink);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
-                miniEditor.writeMiniEditor(Keys.END);
+		miniEditor.writeMiniEditor(Keys.END);
 		PageObjectLogging.log(
 			"writeMessageWithLink",
 			"internal and external links: "+externallink+" added",
 			true
 		);
-                driver.switchTo().defaultContent();
+		driver.switchTo().defaultContent();
 	}
 
-        public void writeMessageWithInternalLink(String internallink, String title) {
+	public void writeMessageWithInternalLink(String internallink, String title) {
 		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
 		miniEditor.addInternalLink(internallink);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
-                miniEditor.writeMiniEditor(Keys.END);
+		miniEditor.writeMiniEditor(Keys.END);
 		PageObjectLogging.log(
 			"writeMessageWithLink",
 			"internal and external links: "+internallink+" added",
 			true
 		);
-                driver.switchTo().defaultContent();
+		driver.switchTo().defaultContent();
 	}
 
 	public void writeMessageSourceMode(String title, String message) {
 		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-                waitForElementClickableByElement(sourceModeButton);
+		waitForElementClickableByElement(sourceModeButton);
 		scrollAndClick(sourceModeButton);
 		waitForElementByElement(sourceModeTextarea);
 		sourceModeTextarea.sendKeys(message);
 		PageObjectLogging.log(
-                        "writeMessageSourceMode",
-                        "message in source mode is written, " + "title: "+title+" body: "+message,
-                        true, driver
-                );
+				"writeMessageSourceMode",
+				"message in source mode is written, " + "title: "+title+" body: "+message,
+				true, driver
+		);
 	}
 
 	/**
@@ -496,18 +496,20 @@ import org.browsermob.proxy.jetty.util.Credential;
 			scrollAndClick(list.get(2));
 		}
 		PageObjectLogging.log(
-                        "sortThreads",
-                        "order of messages sorted: "+order,
-                        true,
-                        driver
-                );
+				"sortThreads",
+				"order of messages sorted: "+order,
+				true,
+				driver
+		);
 	}
 
-        public void closeThread(String reason)
-        {
+
+	public void closeThread(String reason)
+	{
+
 		waitForElementByElement(msgToolbar);
 		setStyle(".buttons", "1", "block");
-                secondaryCombinedMoreButton.click();
+		secondaryCombinedMoreButton.click();
 		mouseOver(closeThreadCSS);
 		clickActions(closeThread);
 		waitForElementByElement(removeCloseOverLay);
@@ -516,49 +518,49 @@ import org.browsermob.proxy.jetty.util.Credential;
 		clickActions(removeCloseConfirmButton);
 		refreshPage();
 		PageObjectLogging.log(
-                        "closeThread",
-                        "Thread is closed with the following reason: " + reason, 
-                        true
-                );
+				"closeThread",
+				"Thread is closed with the following reason: " + reason,
+				true
+		);
 	}
 
 	public void reopenThread()
 	{
 		waitForElementByElement(msgToolbar);
 		setStyle(".buttons", "1", "block");
-                secondaryCombinedMoreButton.click();
-                mouseOver(reopenThreadCSS);
+		secondaryCombinedMoreButton.click();
+		mouseOver(reopenThreadCSS);
 		clickActions(reopenThread);
-                refreshPage();
-		PageObjectLogging.log("reopenThread", "Thread is reopened", true);
+		refreshPage();
+		PageObjectLogging.log("reopenThread", "Thread is reopen", true);
 	}
 
-        public void verifyClosedThread()
+	public void verifyClosedThread()
 	{
 		waitForElementByElement(infobox);
 		waitForTextToBePresentInElementByElement(
-                        infobox,
-                        PageContent.messageWallCloseReopenReason
-                );
+				infobox,
+				PageContent.messageWallCloseReopenReason
+		);
 		PageObjectLogging.log(
-                        "verifyCloseThread",
-                        "closed thread verified",
-                        true,
-                        driver
-                );
+				"verifyCloseThread",
+				"closed thread verified",
+				true,
+				driver
+		);
 	}
 
-        public void verifyReopenThread()
-        {
-                waitForElementByElement(msgToolbar);
+	public void verifyReopenThread()
+	{
+		waitForElementByElement(msgToolbar);
 		setStyle(".buttons", "1", "block");
-                secondaryCombinedMoreButton.click();
-                waitForElementByElement(closeThread);
-                PageObjectLogging.log(
-                        "verifyReopenThread",
-                        "reopen thread verified",
-                        true,
-                        driver
-                );
-        }
+		secondaryCombinedMoreButton.click();
+		waitForElementByElement(closeThread);
+		PageObjectLogging.log(
+				"verifyReopenThread",
+				"reopen thread verified",
+				true,
+				driver
+		);
+	}
 }
