@@ -4,15 +4,22 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
@@ -525,47 +532,47 @@ public class BasePageObject{
 				driver);
 	}
 
-    /**
-     * Wait for element to not be present in DOM
-     *
-     * @param cssSelector
-     */
-    public void waitForElementNotPresent(final String cssSelector) {
-    	this.waitForElementNotPresent(By.cssSelector(cssSelector));
-    }
+	/**
+	 * Wait for element to not be present in DOM
+	 *
+	 * @param cssSelector
+	 */
+	public void waitForElementNotPresent(final String cssSelector) {
+		this.waitForElementNotPresent(By.cssSelector(cssSelector));
+	}
 
-    /**
-     * Wait for element to not be present in DOM
-     * @param selector
-     */
-    public void waitForElementNotPresent(final By selector) {
-    	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    	wait.until(
+	/**
+	 * Wait for element to not be present in DOM
+	 * @param selector
+	 */
+	public void waitForElementNotPresent(final By selector) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		wait.until(
 			CommonExpectedConditions.elementNotPresent(selector)
 		);
-    	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    }
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	}
 
-    /**
-     * Wait for element to be in viewport
-     * Either position top or left is bigger then -1
-     *
-     * @param element
-     */
-    public void waitForElementInViewPort(final WebElement element) {
-        wait.until(
-            CommonExpectedConditions.elementInViewPort(element)
-        );
-    }
+	/**
+	 * Wait for element to be in viewport
+	 * Either position top or left is bigger then -1
+	 *
+	 * @param element
+	 */
+	public void waitForElementInViewPort(final WebElement element) {
+		wait.until(
+				CommonExpectedConditions.elementInViewPort(element)
+		);
+	}
 
-    /**
-     * Wait for new window present
-     */
-    public void waitForNewWindow() {
-        wait.until(
-            CommonExpectedConditions.newWindowPresent()
-        );
-    };
+	/**
+	 * Wait for new window present
+	 */
+	public void waitForNewWindow() {
+		wait.until(
+				CommonExpectedConditions.newWindowPresent()
+		);
+	};
 
 	public void enableWikiaTracker() {
 		if (driver.getCurrentUrl().contains("?")) {
@@ -580,14 +587,13 @@ public class BasePageObject{
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
-        public void setStyle(String selector, String index, String style) {
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                js.executeScript(
-                        "document.querySelectorAll(arguments[0])[arguments[1]].style.display=arguments[2]", 
-                        selector,
-                        index,
-                        style
-                );
-        }
-
+	public void setStyle(String selector, String index, String style) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(
+				"document.querySelectorAll(arguments[0])[arguments[1]].style.display=arguments[2]",
+				selector,
+				index,
+				style
+		);
+	}
 }
