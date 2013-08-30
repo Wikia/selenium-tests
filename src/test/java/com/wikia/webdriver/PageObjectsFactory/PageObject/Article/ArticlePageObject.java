@@ -28,10 +28,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
-	private final String editButtonSelector = ".article-comm-edit";
-	private final String deleteButtonSelector = ".article-comm-delete";
-	private final String commentAuthorLink = ".edited-by";
-	private final String replyCommentSelector = ".article-comm-reply";
+
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
@@ -122,8 +119,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 
+	final String editButtonSelector = ".article-comm-edit";
+	final String deleteButtonSelector = ".article-comm-delete";
+	final String commentAuthorLink = ".edited-by";
+	final String replyCommentSelector = ".article-comm-reply";
+
 	String editCategorySelector = "li[data-name='%categoryName%'] li.editCategory > img";
 	String removeCategorySelector = "li[data-name='%categoryName%'] li.removeCategory > img";
+	String videoInCommentsSelector = ".speech-bubble-message img.Wikia-video-thumb[data-video-name*='%videoName%']";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -173,10 +176,17 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementNotVisibleByElement(editCommentSubmitButton);
 	}
 
-	public void verifyArticleComment(String comment) {
+	public void verifyCommentText(String comment) {
 		WebElement mostRecentComment = articleComments.get(0);
 		waitForTextToBePresentInElementByElement(mostRecentComment, comment);
 		Assertion.assertStringContains(mostRecentComment.getText(), comment);
+	}
+
+	public void verifyCommentVideo(String videoName) {
+		driver.findElement(
+				By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName))
+		);
+		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
 	}
 
 	public MiniEditorComponentObject triggerEditCommentArea() {
@@ -415,7 +425,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private void typeCategoryName(String category) {
 		addCategoryInput.sendKeys(category);
 	}
-
 
 	public void verifySubmitCategoryEnabled() {
 		waitForElementByElement(categorySaveButtonEnabled);
