@@ -514,11 +514,11 @@ public class MessageWallPageObject extends WikiBasePageObject {
 		setStyle(".buttons", "1", "block");
 		secondaryCombinedMoreButton.click();
 		mouseOver(closeThreadCSS);
-		clickActions(closeThread);
+		scrollAndClick(closeThread);
 		waitForElementByElement(removeCloseOverLay);
 		waitForElementByElement(removeCloseConfirmButton);
 		removeCloseReason.sendKeys(reason);
-		clickActions(removeCloseConfirmButton);
+		removeCloseConfirmButton.click();
 		refreshPage();
 		PageObjectLogging.log(
 				"closeThread",
@@ -533,7 +533,7 @@ public class MessageWallPageObject extends WikiBasePageObject {
 		setStyle(".buttons", "1", "block");
 		secondaryCombinedMoreButton.click();
 		mouseOver(reopenThreadCSS);
-		clickActions(reopenThread);
+		scrollAndClick(reopenThread);
 		refreshPage();
 		PageObjectLogging.log("reopenThread", "Thread is reopen", true);
 	}
