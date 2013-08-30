@@ -30,7 +30,7 @@ public class MessageWallPageObject extends WikiBasePageObject {
 	private WebElement messageTitleEditField;
 	@FindBy(css="body#bodyContent")
 	private WebElement messageBodyField;
-	@FindBy(css=".wikia-button.save-edit")
+	@FindBy(css="div[style*=block] > .wikia-button.save-edit")
 	private WebElement saveEditButton;
 	@FindBy(css="#WallMessageSubmit")
 	private WebElement postButton;
@@ -82,6 +82,8 @@ public class MessageWallPageObject extends WikiBasePageObject {
 	private WebElement secondaryCombinedMoreButton;
 	@FindBy (css=".deleteorremove-infobox")
 	private WebElement infobox;
+	@FindBy (css=".cke_contents > iframe")
+	private WebElement messageFrame;
 
 	By messageToolbarDivBy = By.cssSelector("div.msg-toolbar");
 	By messageList = By.cssSelector("div.msg-body");
@@ -367,6 +369,7 @@ public class MessageWallPageObject extends WikiBasePageObject {
 		PageObjectLogging.log("openHistory", "open History page of the newest thread", true, driver);
 		return new MessageWallHistoryPageObject(driver);
 	}
+
 
 	private void writeEditMessage(String title, String message)
 	{

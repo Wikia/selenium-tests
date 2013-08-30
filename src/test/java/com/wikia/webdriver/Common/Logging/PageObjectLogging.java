@@ -1,9 +1,5 @@
 package com.wikia.webdriver.Common.Logging;
 
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
-import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -13,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.By;
@@ -23,6 +20,11 @@ import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -58,11 +60,22 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	public static void log(String command, String description, boolean success) {
+		log(command, description, success, false);
+	}
+
+	private static void log(String command, String description, boolean success,
+			boolean ifLowLevel) {
 		String className = success ? "success" : "error";
 		StringBuilder builder = new StringBuilder();
-		builder.append("<tr class=\"" + className + "\"><td>" + command
-				+ "</td><td>" + description
-				+ "</td><td> <br/> &nbsp;</td></tr>");
+		if (ifLowLevel) {
+			builder.append("<tr class=\"" + className + " lowLevelAction"
+					+ "\"><td>" + command + "</td><td>" + description
+					+ "</td><td> <br/> &nbsp;</td></tr>");
+		} else {
+			builder.append("<tr class=\"" + className + "\"><td>" + command
+					+ "</td><td>" + description
+					+ "</td><td> <br/> &nbsp;</td></tr>");
+		}
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 		logJSError(DriverProvider.getWebDriver());
 	}
@@ -93,7 +106,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	@Override
 	public void afterClickOn(WebElement element, WebDriver driver) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("<tr class=\"success\"><td>click</td><td>" + lastFindBy
+		builder.append("<tr class=\"success lowLevelAction\"><td>click</td><td>" + lastFindBy
 				+ "</td><td> <br/> &nbsp;</td></tr>");
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
@@ -113,7 +126,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	@Override
 	public void afterChangeValueOf(WebElement element, WebDriver driver) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("<tr class=\"success\"><td>ChangeValueOfField</td><td>" + lastFindBy
+		builder.append("<tr class=\"success lowLevelAction\"><td>ChangeValueOfField</td><td>" + lastFindBy
 				+ "</td><td> <br/> &nbsp;</td></tr>");
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
@@ -217,6 +230,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 				"<div id='toc'></div>"
 				);
 		CommonUtils.appendTextToFile(logPath, builder.toString());
+		appendShowHideButtons();
 		try{
 			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
 			String content = IOUtils.toString(input);
@@ -225,6 +239,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		catch(IOException e){
 			System.out.println("no script.txt file available");
 		}
+	}
+
+	private void appendShowHideButtons() {
+		String hideButton = "<button id=\"hideLowLevel\">hide low level actions</button>";
+		String showButton = "<button id=\"showLowLevel\">show low level actions</button>";
+		StringBuilder builder = new StringBuilder();
+		builder.append(hideButton);
+		builder.append(showButton);
+		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
 
 	@Override

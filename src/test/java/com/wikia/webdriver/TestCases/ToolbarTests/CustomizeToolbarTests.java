@@ -12,9 +12,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 public class CustomizeToolbarTests extends TestTemplate{
 //	private String wikiArticle = "QAautoPage";
 
-	@Test(groups = {"CustomizeToolbar001", "Toolbar"})
+	@Test(groups = {"CustomizeToolbar001", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Adding
-	public void CustomizeToolbar001_Adding()
+	public void CustomizeToolbar005_Adding()
 	{
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
@@ -32,7 +32,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolOnToolbar("Edit");
 	}
 
-	@Test(groups = {"CustomizeToolbar002", "Toolbar"})
+	@Test(groups = {"CustomizeToolbar002", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Editing
 	public void CustomizeToolbar002_Editing()
 	{
@@ -56,7 +56,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolOnToolbar("Edit123");
 	}
 
-	@Test(groups = {"CustomizeToolbar003", "Toolbar"})
+	@Test(groups = {"CustomizeToolbar003", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Deleting
 	public void CustomizeToolbar003_Deleteing()
 	{
@@ -77,7 +77,7 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolRemoved("Edit");
 	}
 
-	@Test(groups = {"CustomizeToolbar004", "Toolbar"})
+	@Test(groups = {"CustomizeToolbar004", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Finding
 	public void CustomizeToolbar004_Finding()
 	{
@@ -97,9 +97,9 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.verifyToolOnToolbar("Upload photo");
 	}
 
-	@Test(groups = {"CustomizeToolbar005", "Toolbar"})
+	@Test(groups = {"CustomizeToolbar005", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
-	public void CustomizeToolbar005_ResetDefaults()
+	public void CustomizeToolbar001_ResetDefaults()
 	{
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
@@ -110,18 +110,19 @@ public class CustomizeToolbarTests extends TestTemplate{
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.searchTool("Up");
-		toolbar.clickSearchSuggestion("Upload photo");
-		toolbar.verifyToolOnList("Upload photo");
+		toolbar.searchTool("Do");
+		toolbar.clickSearchSuggestion("Double redirects");
+		toolbar.verifyToolOnList("Double redirects");
 		toolbar.clickSave();
-		toolbar.verifyToolOnToolbar("Upload photo");
+		toolbar.verifyToolOnToolbar("Double redirects");
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
+		toolbar.verifyToolNotOnList("Double redirects");
 		toolbar.clickSave();
-		toolbar.verifyToolRemoved("Upload photo");
+		toolbar.verifyToolRemoved("Double redirects");
 	}
 
-	@Test(groups = {"CustomizeToolbar006", "Toolbar"})
+	@Test(groups = {"CustomizeToolbar006", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
 	public void CustomizeToolbar006_ButtonsActions()
 	{

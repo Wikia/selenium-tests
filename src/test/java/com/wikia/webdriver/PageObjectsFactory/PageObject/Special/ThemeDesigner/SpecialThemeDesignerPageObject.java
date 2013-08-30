@@ -8,16 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
-	
 	@FindBy(css=".save")
 	private WebElement saveButton;
+	String tabSelector = "a[rel='%tabName%Tab']";
+	String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
 	//theme tab
 	@FindBys(@FindBy(css="li[data-theme]"))
 	private List<WebElement> themes;
@@ -31,7 +32,9 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	@FindBy(css=".color-body")
 	private WebElement bgColor;
 	@FindBy(css=".background-image")
-	private WebElement bgGraphic;
+	private WebElement bgImage;
+	@FindBy(css=".ThemeDesignerPicker.image")
+	private WebElement bgImagePicker;
 	@FindBy(css=".color-buttons")
 	private WebElement pgButtons;
 	@FindBy(css=".color-links")
@@ -40,9 +43,11 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	private WebElement pgHeader;
 	@FindBy(css=".color-page")
 	private WebElement pgColor;
+	@FindBy(css=".page h1")
+	private WebElement pgSectionTitle;
 	//wordmark tab
 	@FindBy(css="#WordMarkUploadForm [value=Upload]")
-	private WebElement wordmarkSubmit;	
+	private WebElement wordmarkSubmit;
 	@FindBy(css="#WordMarkUploadFile")
 	private WebElement wordmarkUpload;
 	@FindBy(css="#FaviconUploadForm [value=Upload]")
@@ -53,16 +58,13 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	private WebElement secondThemesSet;
 	@FindBy(css="ul[style='margin-left: -1520px;']")
 	private WebElement thirdThemesSet;
-	
-	
-	
-	
+
 	public SpecialThemeDesignerPageObject(WebDriver driver) {
 		super(driver);
 	}
 
-	public void openSpecialDesignerPage(){
-		getUrl(Global.DOMAIN+"wiki/Special:ThemeDesigner");
+	public void openSpecialDesignerPage(String wikiURL) {
+		getUrl(wikiURL+URLsContent.specialThemeDesigner);
 		PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
 	}
 
@@ -95,40 +97,62 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 		PageObjectLogging.log("selectTheme", "theme "+themeName+" selected", true);
 		return themeName;
 	}
-	
+
 	public void verifyThemeSelected(String themeName){
 		waitForElementByCss("li.selected[data-theme='"+themeName+"']");
 		Assertion.assertEquals(themeName, executeScriptRet("ThemeDesigner.settings.theme"));
 		PageObjectLogging.log("verifyThemeSelected", "theme "+themeName+" selection verified", true);
 	}
-	
+
 	public void submitThemeSelection(){
 		scrollAndClick(saveButton);
 		waitForElementByElement(editButton);
 		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
 	}
-	
-	public void selectTab(String tabName){
-		WebElement tab = waitForElementByCss("a[rel='"+tabName+"Tab']");
-		scrollAndClick(tab);
-		waitForElementByCss("li.selected a[rel='"+tabName+"Tab']");
-		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
+
+	public enum Tab {
+		Theme, Customize, Wordmark
 	}
-	
+
+	public void selectTab(Tab tabName){
+		WebElement tab = waitForElementByCss(tabSelector.replace("%tabName%", tabName.toString()));
+		scrollAndClick(tab);
+		waitForElementByCss(selectedTabSelector.replace("%tabName%", tabName.toString()));
+		PageObjectLogging.log("selectTab", tabName.toString()+" tab has been selected", true);
+	}
+
 	public void verifyCustomizeTab(){
 		waitForElementByElement(bgColor);
-		waitForElementByElement(bgGraphic);
+		waitForElementByElement(bgImage);
 		waitForElementByElement(pgButtons);
 		waitForElementByElement(pgLinks);
 		waitForElementByElement(pgHeader);
 		waitForElementByElement(pgColor);
 	}
-	
+
 	public void verifyWordmarkTab(){
 		waitForElementByElement(wordmarkSubmit);
 		waitForElementByElement(wordmarkUpload);
 		waitForElementByElement(faviconSubmit);
 		waitForElementByElement(faviconUpload);
 	}
-	
+
+	public void openImagePicker() {
+		waitForElementByElement(bgImage);
+		bgImage.click();
+		waitForElementByElement(bgImagePicker);
+		PageObjectLogging.log("openImagePicker", "image picker opened", true, driver);
+	}
+
+	public void clickOutsideImagePicker() {
+		waitForElementByElement(pgSectionTitle);
+		pgSectionTitle.click();
+		PageObjectLogging.log("clickOutsideImageSelectionDialog", "clicked outside Image Picker", true);
+	}
+
+	public void verifyImagePickerDisappeared() {
+		waitForElementNotVisibleByElement(bgImagePicker);
+		PageObjectLogging.log("verifyImagePickerDisappeared", "Image Picker is invisible", true);
+	}
+
 }

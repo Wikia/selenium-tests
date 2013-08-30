@@ -65,8 +65,9 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	protected List<WebElement> statisticsImages;
 	@FindBy(css=".wiki-statistics>li:nth-child(3)")
 	protected List<WebElement> statisticsVideos;
+	@FindBy(css="h1 > a.result-link")
+	protected List<WebElement> resultLinks;
 
-	protected By resultLinks = By.cssSelector(".Results .result > a");
 	private By paginationContainer = By.cssSelector(".wikia-paginator");
 
 
@@ -151,9 +152,8 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	 */
 	public void verifyResultsPosForPage(int pageNumber, int resultsPerPage) {
 		waitForElementByElement(resultsContainer);
-		List<WebElement> elements = driver.findElements(resultLinks);
 		int curNo = pageNumber * resultsPerPage + 1;
-		for(WebElement link: elements) {
+		for(WebElement link: resultLinks) {
 			String dataPos = link.getAttribute("data-pos");
 			int pos = Integer.parseInt(dataPos);
 			Assertion.assertEquals( pos, curNo, "Wrong data-pos. Verify paging.");
@@ -166,9 +166,8 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	 * @param resultNumber zero based number of result to click
 	 * @return result page
 	 */
-	public WikiArticleHomePage openResult(int resultNumber) {
-		WebElement webElement = getResultWikiNameLink(resultNumber);
-		webElement.click();
+	public WikiArticleHomePage openResult(int resultNumeber) {
+		resultLinks.get(resultNumeber).click();
 		return new WikiArticleHomePage(driver);
 	}
 
@@ -184,10 +183,6 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		PageObjectLogging.log("nextPage", "Moving to next page of search results.",
 				true, driver);
 		return new CrossWikiSearchPageObject(driver);
-	}
-
-	protected WebElement getResultWikiNameLink(int no) {
-		return driver.findElements(resultLinks).get(no);
 	}
 
 	public void verifyResultsNumber(int number){

@@ -12,17 +12,17 @@ public class CrossWikiSearchProvider {
     public static final Object[][] getExactMatchQueries() {
         return new Object[][]{
             {
-                "call of duty", "Call of Duty Wiki", "GAMING"
+                "call of duty", "Call of Duty Wiki", "VIDEO GAMES"
             }, {
-                "call-of-duty", "Call of Duty Wiki", "GAMING"
+                "call-of-duty", "Call of Duty Wiki", "VIDEO GAMES"
             }, {
-                "call_of_duty", "Call of Duty Wiki", "GAMING"
+                "call_of_duty", "Call of Duty Wiki", "VIDEO GAMES"
             }, {
-                "callofduty", "Call of Duty Wiki", "GAMING"
+                "callofduty", "Call of Duty Wiki", "VIDEO GAMES"
             }, {
-                "cod", "Call of Duty Wiki", "GAMING"
+                "cod", "Call of Duty Wiki", "VIDEO GAMES"
             }, {
-                "lohgame", "Legacy of Heroes Wiki", "GAMING" // no exact match if solr result set is empty bug.
+                "lohgame", "Legacy of Heroes Wiki", "VIDEO GAMES" // no exact match if solr result set is empty bug.
             }
         };
     }

@@ -5,11 +5,11 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.FilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 //https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 
@@ -46,7 +46,7 @@ public class ImageServing extends TestTemplate {
 		SpecialUploadPageObject wikiSpecialU = wiki.openSpecialUpload();
 		wikiSpecialU.typeInFileToUploadPath(PageContent.file);
 		wikiSpecialU.checkIgnoreAnyWarnings();
-		FilePageObject filePage = wikiSpecialU.clickOnUploadFile(PageContent.file);
+		FilePagePageObject filePage = wikiSpecialU.clickOnUploadFile(PageContent.file);
 		filePage.verifyCorrectFilePage();
 		login.logOut(driver);
 	}

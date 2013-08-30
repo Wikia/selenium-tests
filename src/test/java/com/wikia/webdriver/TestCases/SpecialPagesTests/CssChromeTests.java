@@ -1,20 +1,23 @@
 package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
+import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.CssEditorContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
-
 public class CssChromeTests extends TestTemplate {
+
+	//TODO - remove this line when TestSuite will be migrated to NewTestTemplate
+	private UrlBuilder urlBuilder;
 
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-285
@@ -75,7 +78,9 @@ public class CssChromeTests extends TestTemplate {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.sendEditSummaryText(currentTimestamp);
 		specialCss.saveCssContent(currentTimestamp, wiki);
-		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
+		wiki.openArticle(urlBuilder.appendQueryStringToURL(
+			URLsContent.mediaWikiCss, URLsContent.historyAction)
+		);
 		String editSummary = wiki.getFirstCssRevision();
 		Assertion.assertStringContains(editSummary, currentTimestamp);
 	}
@@ -113,7 +118,9 @@ public class CssChromeTests extends TestTemplate {
 		specialCss.verifyMinorEditAppears();
 		specialCss.clickMinorCheckbox();
 		specialCss.saveCssContent(currentTimestamp, wiki);
-		wiki.openArticle(URLsContent.buildUrl(URLsContent.mediaWikiCss, URLsContent.historyAction));
+		wiki.openArticle(urlBuilder.appendQueryStringToURL(
+			URLsContent.mediaWikiCss, URLsContent.historyAction)
+		);
 		wiki.verifyRevisionMarkedAsMinor();
 	}
 

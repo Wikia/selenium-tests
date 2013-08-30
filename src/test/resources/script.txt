@@ -23,8 +23,7 @@ function createToc()
 	console.log(toc);
 	tocWrapper.innerHTML += toc;
 }
-function markMethodAsFailed()
-{
+function markMethodAsFailed() {
 	var a = $('table tr.error').parent();
 	var l = a.length;
 	for (var i=0; i<l; i++)
@@ -35,4 +34,31 @@ function markMethodAsFailed()
 }
 window.addEventListener("load", markMethodAsFailed);
 window.addEventListener("load", createToc);
+
+(function (ctx) {
+    var hideButton, showButton, document;
+    document = ctx.document;
+    hideButton = document.getElementById('hideLowLevel');
+    showButton = document.getElementById('showLowLevel');
+
+    function manageActions(direction) {
+        // get all elements with class lowLevelAction
+        var elements = document.getElementsByClassName("lowLevelAction");
+        for (var i = 0; i < elements.length; i++) {
+            if (direction === 'hide') {
+                //hide lowLevelActions
+                elements[i].style.display = "none";
+            } else if (direction === 'show') {
+                //show lowLevelActions
+                elements[i].style.display = "";
+            }
+        }
+    }
+    hideButton.addEventListener('click', function () {
+        manageActions('hide');
+    }, false);
+    showButton.addEventListener('click', function () {
+        manageActions('show');
+    }, false);
+}(this));
 </script>

@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -23,8 +22,6 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	
 	@FindBy(css="#CreateNewBoardButton")
 	private WebElement createBoardButton;
-	@FindBy(xpath="//section[@id='modalWrapper' and contains(text(), 'Create a new board')]")
-	private WebElement createBoardModalHeader;
 	@FindBy(css="[name='boardTitle']")
 	private WebElement boardTitleField;
 	@FindBy(css="[name='boardDescription']")
@@ -71,8 +68,8 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		submitNewBoard();
 	}
 	
-	public void verifyBoardCreated(String title, String description){
-		waitForElementByXPath("//ul/li//a[contains(text(), '"+title.replaceAll("_", " ")+"')]/../../../p[contains(text(), '"+description+"')]");
+	public void verifyBoardCreated(String title, String description) {
+		waitForElementByXPath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ") + "')]/../../../p[contains(text(), '" + description + "')]");
 		PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);		
 	}
 
@@ -119,11 +116,11 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		return secondForumLink.getText();
 	}
 	
-	public void verifyForumExists(String forumName){
+	public void verifyForumExists(String forumName, String wikiURL){
 		String temp = driver.getCurrentUrl();
 		try {
 			
-			getUrl(Global.DOMAIN+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
+			getUrl(wikiURL+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -133,9 +130,9 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
 	}
 	
-	public void verifyForumNotExists(String forumName){
+	public void verifyForumNotExists(String forumName, String wikiURL){
 		try {
-			getUrl(Global.DOMAIN+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8"));
+			getUrl(wikiURL+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

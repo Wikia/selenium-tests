@@ -1,21 +1,26 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import java.util.List;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
 /**
  *
@@ -24,12 +29,13 @@ import java.util.List;
 public class ArticlePageObject extends WikiBasePageObject {
 
 	private final String editButtonSelector = ".article-comm-edit";
+	private final String deleteButtonSelector = ".article-comm-delete";
 	private final String commentAuthorLink = ".edited-by";
 	private final String replyCommentSelector = ".article-comm-reply";
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
-	@FindBy(css="#WikiaPageHeader .drop img")
+	@FindBy(css="#WikiaMainContent .drop img")
 	protected WebElement articleEditDropdown;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
@@ -71,7 +77,53 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement replyCommentLoadingIndicator;
 	@FindBy(css="blockquote .article-comm-edit-box .actionButton[name='wpArticleSubmit']")
 	protected WebElement replyCommentSubmitButton;
+	@FindBy(css=".WikiaArticle.article-comm-text")
+	protected List<WebElement> commentTextList;
+	@FindBy(css="#mw-content-text .thumbimage")
+	protected WebElement imageArticle;
+	@FindBy(css="#mw-content-text .wikia-gallery")
+	protected WebElement galleryArticle;
+	@FindBy(css="#mw-content-text .wikia-slideshow")
+	protected WebElement slideshowArticle;
+	@FindBy(css="#mw-content-text .wikiaPhotoGallery-slider-body")
+	protected WebElement sliderArticle;
+	@FindBy(css="#mw-content-text .Wikia-video-play-button")
+	protected WebElement videoArticle;
+	@FindBy(css="section.RelatedVideosModule")
+	protected WebElement rVModule;
+	@FindBy(css=".button.addVideo")
+	protected WebElement rVAddVideo;
+	@FindBy(css="#WikiaImagePlaceholderInner0")
+	private WebElement videoAddPlaceholder;
+	@FindBy(css="a[title='View photo details']")
+	private WebElement videoDetailsButton;
+	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
+	private WebElement rvFirstVideo;
+	@FindBy(css="#CategorySelectAdd")
+	private WebElement addCategory;
+	@FindBy(css="#CategorySelectInput")
+	private WebElement addCategoryInput;
+	@FindBy(css="#CategorySelectSave")
+	private WebElement saveCategory;
+	@FindBy(css=".WikiaArticleCategories li > span a")
+	private List<WebElement> categoryList;
+	@FindBy(css=".ui-autocomplete")
+	private WebElement categorySuggestionsList;
+	@FindBy(css=".categories")
+	private WebElement categoriesContainer;
+	@FindBy(css=".category.new")
+	private WebElement categoryNew;
+	@FindBy(css="button.save:not([disabled])")
+	private WebElement categorySaveButtonEnabled;
+	@FindBy(css="button.save[disabled]")
+	private WebElement categorySaveButtonDisabled;
+	@FindBy(css = ".WikiaPageHeader h1")
+	private WebElement articleTitle;
 
+	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
+
+	String editCategorySelector = "li[data-name='%categoryName%'] li.editCategory > img";
+	String removeCategorySelector = "li[data-name='%categoryName%'] li.removeCategory > img";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -88,9 +140,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
-		Actions actions = new Actions(driver);
-		actions.click(contributeDropdown);
-		actions.perform();
+		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
 		addArticleInDropdown.click();
 		articleTitleInputModal.sendKeys(articleTitle);
@@ -99,14 +149,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditModePageObject editArticleUsingDropdown() {
-		jsClick(editDropdown);
+		actionsClick(editDropdown);
 		return new VisualEditModePageObject(driver);
 	}
 
 	public MiniEditorComponentObject triggerCommentArea() {
 		scrollToElement(allCommentsArea);
 		waitForElementVisibleByElement(commentArea);
-		commentArea.click();
+		jQueryFocus(commentArea);
 		waitForElementNotVisibleByElement(commentAreaLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
 	}
@@ -139,6 +189,29 @@ public class ArticlePageObject extends WikiBasePageObject {
 			mostRecentComment, editButtonSelector
 		);
 		return new MiniEditorComponentObject(driver);
+	}
+
+	public DeleteArticlePageObject deleteComment() {
+		scrollToElement(allCommentsArea);
+		WebElement mostRecentComment = articleComments.get(0);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(
+				"arguments[0].querySelector(arguments[1]).click()",
+				mostRecentComment, deleteButtonSelector
+				);
+		return new DeleteArticlePageObject(driver);
+	}
+
+	public void verifyCommentDeleted(String comment) {
+		for(WebElement elem:commentTextList) {
+			Assertion.assertTrue(
+					!comment.equals(elem.getText())
+					);
+		}
+	}
+
+	public String getFirstCommentText() {
+		return commentTextList.get(0).getText();
 	}
 
 	public void verifyCommentCreator(String userName) {
@@ -177,25 +250,27 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public DeleteArticlePageObject deleteArticleUsingDropdown() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(deleteDropdown);
 		deleteDropdown.click();
 		return new DeleteArticlePageObject(driver);
 	}
 
 	public String getArticleName() {
-		return articleHeader.getText();
+		String articleName = articleHeader.getText();
+		PageObjectLogging.log("getArticleName", "the name of the article is: "+articleName, true);
+		return articleName;
 	}
 
 	public RenameArticlePageObject renameArticleUsingDropdown() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		renameDropdown.click();
 		return new RenameArticlePageObject(driver);
 	}
 
 	public void verifyDropdownForAdmin() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		waitForElementVisibleByElement(deleteDropdown);
 		waitForElementVisibleByElement(historyDropdown);
@@ -205,7 +280,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyDropdownForUser() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		waitForElementVisibleByElement(renameDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 2);
@@ -213,9 +288,216 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyDropdownForAnon() {
-		jsClick(articleEditDropdown);
+		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		Assertion.assertEquals(editDropdownElements.size(), 1);
 		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
+	}
+
+	public void verifyPhoto() {
+		waitForElementByElement(imageArticle);
+		PageObjectLogging.log("verifyPhoto", "photo is visible", true);
+	}
+
+	public void verifyGallery() {
+		waitForElementByElement(galleryArticle);
+		PageObjectLogging.log("verifyGallery", "gallery is visible", true);
+	}
+
+	public void verifySlideshow() {
+		waitForElementByElement(slideshowArticle);
+		PageObjectLogging.log("verifySlideshow", "slideshow is visible", true);
+	}
+
+	public void verifySlider() {
+		waitForElementByElement(sliderArticle);
+		PageObjectLogging.log("verifySlider", "slider is visible", true);
+	}
+
+	public void verifyVideo() {
+		waitForElementByElement(videoArticle);
+		PageObjectLogging.log("verifyVideo", "video is visible", true);
+	}
+
+	public void verifyVideoAlignment(PositionsVideo positions) {
+		String videoClass = videoArticle.findElement(
+				By.xpath("./../..")
+				).getAttribute("class");
+		String position;
+		switch(positions) {
+		case left:
+			position = "left";
+			break;
+		case center:
+			position = "none";
+			break;
+		case right:
+			position = "right";
+			break;
+		default:
+			position = "position is not provided";
+			break;
+		}
+		Assertion.assertStringContains(videoClass, position);
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		int videoWidth = Integer.parseInt(videoArticle.findElement(
+				By.xpath("./../img")
+				).getAttribute("width"));
+		Assertion.assertNumber(
+				widthDesired,
+				videoWidth,
+				"width should be " + widthDesired + " but is " + videoWidth);
+	}
+
+	public void verifyVideoCaption(String captionDesired) {
+		String caption = videoArticle.findElement(
+				By.xpath("./../../figcaption")
+				).getText();
+		Assertion.assertStringContains(caption,captionDesired);
+		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
+	}
+
+	public void verifyVideoNoCaption() {
+		String videoClass = videoArticle.findElement(
+				By.xpath("./../img")
+				).getAttribute("class");
+		Assertion.assertTrue(!videoClass.contains("thumbimage"));
+		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
+	}
+
+	public void verifyRelatedVideosModule() {
+		waitForElementByElement(rVModule);
+		PageObjectLogging.log(
+				"verifyRelatedVideosModule",
+				"related videos module is visible",
+				true
+		);
+	}
+
+	public VetAddVideoComponentObject clickAddRelatedVideo() {
+		waitForElementByElement(rVAddVideo);
+		scrollAndClick(rVAddVideo);
+		return new VetAddVideoComponentObject(driver);
+	}
+
+	public void verifyRelatedVideoAdded(String videoName) {
+		if (videoName.length() > 45) {
+			videoName = videoName.substring(0, 45);
+		}
+		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
+		PageObjectLogging.log(
+				"verifyRelatedVideoAdded",
+				videoName + " is visible in related video module",
+				true
+		);
+	}
+
+	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
+		waitForElementByElement(videoAddPlaceholder);
+		scrollAndClick(videoAddPlaceholder);
+		return new VetAddVideoComponentObject(driver);
+	}
+
+	public FilePagePageObject clickVideoDetailsButton() {
+		waitForElementByElement(videoDetailsButton);
+		videoDetailsButton.click();
+		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
+		return new FilePagePageObject(driver);
+	}
+
+	private void clickAddCategoryButton() {
+		scrollAndClick(addCategory);
+		waitForElementByElement(addCategoryInput);
+	}
+
+	private void typeCategoryName(String category) {
+		addCategoryInput.sendKeys(category);
+	}
+
+
+	public void verifySubmitCategoryEnabled() {
+		waitForElementByElement(categorySaveButtonEnabled);
+	}
+
+	public void verifySubmitCategoryDisabled() {
+		waitForElementByElement(categorySaveButtonDisabled);
+	}
+
+	public void submitCategory() {
+		waitForElementClickableByElement(saveCategory);
+		saveCategory.click();
+		waitForElementNotVisibleByElement(addCategoryInput);
+		PageObjectLogging.log("submitCategory", "submit category clicked", true);
+	}
+
+	public void addCategory(String category) {
+		clickAddCategoryButton();
+		typeCategoryName(category);
+		pressEnter(addCategoryInput);
+		waitForElementByElement(categoryNew);
+		PageObjectLogging.log("addCategory", category + " category added", true);
+	}
+
+	public EditCategoryComponentObject editCategory(String category) {
+		WebElement editCategory = driver.findElement(
+				By.cssSelector(
+						editCategorySelector.replace("%categoryName%", category)
+				)
+		);
+		scrollAndClick(editCategory);
+		PageObjectLogging.log("editCategory", "edit button on category " + category + " clicked", true);
+		return new EditCategoryComponentObject(driver);
+	}
+
+	public void removeCategory(String category) {
+		WebElement editCategory = driver.findElement(
+				By.cssSelector(
+						removeCategorySelector.replace("%categoryName%", category)
+						)
+				);
+		scrollAndClick(editCategory);
+		PageObjectLogging.log("removeCategory", "remove button on category " + category + " clicked", true);
+	}
+
+	public String addCategorySuggestions(String category, int categoryNumber) {
+		clickAddCategoryButton();
+		typeCategoryName(category);
+		waitForElementByElement(categorySuggestionsList);
+		List<WebElement> suggestionsList = categorySuggestionsList.findElements(categorySuggestionsListItems);
+		WebElement desiredCategory = suggestionsList.get(categoryNumber);
+		String desiredCategoryText = desiredCategory.getText();
+		desiredCategory.click();
+		waitForElementNotVisibleByElement(categorySuggestionsList);
+		PageObjectLogging.log("addCategorySuggestions", "category " + category + " added from suggestions", true);
+		return desiredCategoryText;
+	}
+
+	public void verifyCategoryPresent(String category) {
+		boolean categoryVisible = false;
+		for (WebElement elem : categoryList) {
+			if (elem.getText().equals(category)) {
+				categoryVisible = true;
+			}
+		}
+		Assertion.assertTrue(categoryVisible, "category " + category + " not present");
+	}
+
+	public void verifyCategoryNotPresent(String category) {
+		boolean categoryVisible = true;
+		for (WebElement elem : categoryList) {
+			if (elem.getText().equals(category)) {
+				categoryVisible = false;
+			}
+		}
+		Assertion.assertTrue(categoryVisible, "category " + category + " present");
+	}
+
+	public WatchPageObject unfollowArticle(String wikiURL) {
+		String url = urlBuilder.appendQueryStringToURL(wikiURL, "title=" + articleTitle.getText());
+		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
+		getUrl(url);
+		return new WatchPageObject(driver);
 	}
 }

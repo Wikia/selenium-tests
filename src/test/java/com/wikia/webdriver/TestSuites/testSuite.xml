@@ -2,7 +2,6 @@
 <suite name="Wikia test suite">
 	<listeners>
 		<listener class-name="com.wikia.webdriver.Common.TestNGListeners.InvokeMethodAdapter" />
-		<listener class-name="com.wikia.webdriver.Common.Logging.PageObjectLogging" />
 	</listeners>
 	<test name="testing" preserve-order = "true"> <!-- parallel="classes" thread-count="2"  -->
 		<classes>
@@ -16,11 +15,10 @@
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation"/>
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAdmin"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnonymous"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
-			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsAnonymous"/>
+			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesArticleTests"/>
+			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsEditMode"/>
 			<class name="com.wikia.webdriver.TestCases.Top_10_list_Tests.Top_10_list_Tests"/>
 			<class name="com.wikia.webdriver.TestCases.MessageWallTests.MessageWallTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
@@ -28,19 +26,22 @@
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.ArticleCommentTests"/>
+			<class name="com.wikia.webdriver.TestCases.Mobile.CategoriesTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.SearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.SectionsTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.ModalTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.TocTests"/>
+			<class name="com.wikia.webdriver.TestCases.Mobile.TopbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogTests"/>
-			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogReplyTests"/>
 			<class name="com.wikia.webdriver.TestCases.BlogTests.BlogFeaturesTests"/>
+			<class name="com.wikia.webdriver.TestCases.CommentsTests.BlogCommentsTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>
-			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Following"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditAccountTests"/>
 			<class name="com.wikia.webdriver.TestCases.PhalanxTests.BlockPageTitleTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsInContent"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestMobileDesktopOverlapping"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestBasicLayout"/>
@@ -49,9 +50,15 @@
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.ShareToolbarTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.VetModalTests"/>
 			<class name="com.wikia.webdriver.TestCases.VideoTests.VetAddingVideoTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.VetProvidersTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.Providers.VetProvidersTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.Suggestions.VideoSuggestionsTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetArticlePlaceholderTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetRelatedVideoTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetSpecialVideosTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.Modal.VetModalAlignmentTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.Modal.VetModalCaptionTests"/>
+			<class name="com.wikia.webdriver.TestCases.VideoTests.Modal.VetModalWidthTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.OnWikiSearchTest"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.ForumNotificationsTests"/>
@@ -65,11 +72,18 @@
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>			
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDAnonTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleActionsAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleEditDropdownTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsAnon"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleFeaturesCRUDTestsUser"/>
 			<class name="com.wikia.webdriver.TestCases.CommentsTests.ArticleCommentsTests"/>
+			<class name="com.wikia.webdriver.TestCases.ActivityFeedsTests.WikiActivityTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowArticleTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowBlogTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowPhotosTests"/>
+			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowVideosTests"/>
 		</classes>
 	</test>
 </suite>

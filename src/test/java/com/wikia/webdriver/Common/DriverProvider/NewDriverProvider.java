@@ -1,14 +1,14 @@
 package com.wikia.webdriver.Common.DriverProvider;
 
-import com.wikia.webdriver.Common.Core.Global;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.browsermob.proxy.ProxyServer;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -18,6 +18,8 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import com.wikia.webdriver.Common.Core.Global;
 
 /**
  *
@@ -89,6 +91,28 @@ public class NewDriverProvider {
 				+ "Firefox.exe"
 			);
 		}
+
+		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
+		 if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
+                        File homePath = new File(System.getenv("HOME") + File.separator);
+                        File mozillaPath = new File(homePath + File.separator + ".mozilla");
+                        File tmpFile;
+                        if (mozillaPath.exists()) {
+                                try {
+                                        tmpFile = File.createTempFile("webdriver", null, mozillaPath);
+                                } catch (IOException ex) {
+                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
+                                }
+                        } else {
+                                try {
+                                        tmpFile = File.createTempFile("webdriver", null, homePath);
+                                } catch (IOException ex) {
+                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
+                                }
+                        }
+                        tmpFile.delete();
+                }
+
 		//If browserName contains CONSOLE activate JSErrorConsole
 		if (browserName.contains("CONSOLE")) {
 			try {
@@ -134,14 +158,14 @@ public class NewDriverProvider {
 		}
 
 		if (browserName.equals("CHROMEMOBILE")) {
-			caps.setCapability(
-				"chrome.switches",
-				Arrays.asList(
-					"--user-agent=Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) "
-					+ "AppleWebKit/420+ (KHTML, like Gecko) "
-					+ "Version/3.0 Mobile/1A543a Safari/419.3"
-				)
-			);
+			ChromeOptions options = new ChromeOptions();
+            options.addArguments(
+                "--user-agent="+
+                "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) " +
+                "AppleWebKit/420+ (KHTML, like Gecko) " +
+                "Version/3.0 Mobile/1A543a Safari/419.3"
+            );
+            return new EventFiringWebDriver(new ChromeDriver(options));
 		}
 
 		return new EventFiringWebDriver(new ChromeDriver(caps));

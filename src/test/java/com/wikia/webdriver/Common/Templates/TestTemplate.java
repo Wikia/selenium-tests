@@ -11,6 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
@@ -18,7 +19,7 @@ import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 
-
+@Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
 public class TestTemplate {
 
 	public WebDriver driver;

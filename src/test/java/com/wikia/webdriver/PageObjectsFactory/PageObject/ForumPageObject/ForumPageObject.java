@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
@@ -33,6 +31,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 	}
 
 	private void openFaqLightBox() {
+		waitForElementByElement(faqButton);
 		scrollAndClick(faqButton);
 		PageObjectLogging.log("openFaqLightBox", "faq lightbox opened", true);
 	}
@@ -54,13 +53,6 @@ public class ForumPageObject extends WikiArticlePageObject{
 		closeFaqLightBox();
 	}
 
-	public ForumPageObject openForumMainPage() {
-		getUrl(Global.DOMAIN + URLsContent.specialForum);
-		waitForElementByElement(faqButton);
-		PageObjectLogging.log("openForumPage", "forum page opened", true);
-		return new ForumPageObject(driver);
-	}
-
 	public ForumManageBoardsPageObject clickManageBoardsButton() {
 		scrollAndClick(manageBoardsButton);
 		PageObjectLogging.log("clickManageBoardsButton",
@@ -68,14 +60,22 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return new ForumManageBoardsPageObject(driver);
 	}
 
-	public ForumBoardPageObject openForumBoard(int forumBoardNumber) {
-		WebElement forumBoardLink = getForumElementsList().get(
-				forumBoardNumber - 1);
+    /*
+     * this method choose first link on the board which doesn't contain chinese signs
+     */
+	public ForumBoardPageObject openForumBoard() {
+		WebElement forumBoardLink = null;
+			for(int i = 0; i < getForumElementsList().size(); i++) {
+				if(!getForumElementsList().get(i).toString().contains("%")) {
+					forumBoardLink = getForumElementsList().get(i);
+					break;
+				}
+			}
 		waitForElementByElement(forumBoardLink);
 		waitForElementClickableByElement(forumBoardLink);
 		scrollAndClick(forumBoardLink);
 		PageObjectLogging.log("openForumBoard",
-				"click on the forum Board number " + forumBoardNumber, true,
+				"click on the forum Board", true,
 				driver);
 		return new ForumBoardPageObject(driver);
 	}
@@ -98,7 +98,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 			PageObjectLogging.log("openForumBoard",
 					"click on the forum Board with title " + forumBoardTitle,
 					true, driver);
-			return openForumBoard(forumNumber);
+			return openForumBoard();
 		}
 	}
 
@@ -111,7 +111,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return forumNames;
 	}
 
-	private List<WebElement> getForumElementsList() {
+	private List<WebElement> getForumElementsList(){
 		List<WebElement> listWebElements = driver.findElements(forumBoardsList);
 		return listWebElements;
 	}

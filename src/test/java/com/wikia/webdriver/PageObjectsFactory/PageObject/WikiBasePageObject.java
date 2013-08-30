@@ -1,8 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -14,13 +18,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.*;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -29,29 +26,37 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActivityPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiCategoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
-
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -81,16 +86,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement premissionErrorMessage;
 	@FindBy(css="div.mw-warning-with-logexcerpt p")
 	private WebElement pageDeletedInfo;
-	@FindBy(css="figure.tleft")
-	private WebElement videoOnLeftOfArticle;
-	@FindBy(css="figure.tright")
-	private WebElement videoOnRightOfArticle;
-	@FindBy(css="figure.tnone")
-	private WebElement videoOnCenterOfArticle;
-	@FindBy(css="#WikiaArticle div.Wikia-video-play-button")
-	private WebElement videoOnArticle;
-	@FindBy(css="figcaption.thumbcaption")
-	private WebElement videoCaptionOnArticle;
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
 	@FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
@@ -119,15 +114,25 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement cssEditSummary;
 	@FindBy(css = "ul#pagehistory > li:first-child .minoredit")
 	protected WebElement cssMinorEdit;
+	@FindBy(css = "#ca-watch")
+	protected WebElement followButton;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
+
+	public enum PositionsVideo {
+		left, center, right
+	}
+
+	public enum StyleVideo {
+		caption, nocaption;
+	}
 
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-    public String resetForgotPasswordTime(String userName) {
+	public String resetForgotPasswordTime(String userName) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},
@@ -143,12 +148,19 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
 
-	/**
-	 * @author Michal Nowierski
-	 * */
-	public SpecialVideosPageObject openSpecialVideoPage(){
-		getUrl(Global.DOMAIN+URLsContent.specialNewVideo);
+	public UserProfilePageObject navigateToProfilePage(String userName, String wikiURL) {
+		getUrl(wikiURL + "wiki/User:" + userName);
+		return new UserProfilePageObject(driver);
+	}
+
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialNewVideo);
 		return new SpecialVideosPageObject(driver);
+	}
+
+	public SpecialNewFilesPageObject openSpecialNewFiles(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialNewFiles);
+		return new SpecialNewFilesPageObject(driver);
 	}
 
 	public SpecialNewFilesPageObject openSpecialNewFiles() {
@@ -171,6 +183,29 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialUploadPageObject(driver);
 	}
 
+	public SpecialCreatePagePageObject openSpecialCreateBlogPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCreateBlogPage);
+		return new SpecialCreatePagePageObject(driver);
+	}
+
+	public SpecialWikiActivityPageObject openSpecialWikiActivity(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialWikiActivity);
+		return new SpecialWikiActivityPageObject(driver);
+	}
+
+	public SpecialFBConnectPageObject openSpecialFBConnectPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialConnect);
+		return new SpecialFBConnectPageObject(driver);
+	}
+
+
+	public ForumPageObject openForumMainPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialForum);
+		PageObjectLogging.log("openForumPage", "forum page opened", true);
+		return new ForumPageObject(driver);
+	}
+
+
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
 		PageObjectLogging.log(
@@ -181,25 +216,14 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
-
-	/**
-	 * Verify that the Object appears on the page
-	 *
-	 * @author Michal Nowierski
-	 * @param Object Object = {gallery, slideshow}
-	 * 	 */
-	public void verifyObjectOnThePage(String Object) {
-		waitForElementByBy(By.cssSelector("#WikiaArticle div[id*='" + Object + "']"));
-		PageObjectLogging.log(
-				"VerifyTheObjetOnThePage",
-				"Verify that the " + Object + " appears on the page",
-				true, driver
-		);
-	}
-
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialMultipleUpload);
 		return new SpecialMultipleUploadPageObject(driver);
+	}
+
+	public FilePagePageObject openFilePage(String wikiURL, String fileName) {
+		getUrl(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName);
+		return new FilePagePageObject(driver);
 	}
 
 	private void clickContributeButton() {
@@ -208,15 +232,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(createArticleButton);
 		PageObjectLogging.log("clickOnContributeButton",
 				"contribute button clicked", true);
-	}
-	public void verifyDeletedArticlePage(String pageName) {
-		pageName = pageName.replace("_", " ");
-		waitForElementByXPath("//h1[contains(text(), '" + pageName + "')]");
-		// waitForElementByXPath("//p[contains(text(), 'This page has been deleted.')]");
-		// waitForElementByXPath("//a[@class='wikia-button' and contains(text(), 'Create')]");
-		waitForElementByXPath("//b[contains(text(), 'This page needs content. You can help by adding a sentence or a photo!')]");
-		PageObjectLogging.log("verifyDeletedArticlePage",
-				"deleted article page verified", true);
 	}
 
 	public WikiArticleEditMode clickEditButton() {
@@ -229,21 +244,34 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
-	public WikiArticleEditMode navigateToEditPage() {
-		String URL = getCurrentUrl();
-		String targetURL = URL+"?action=edit";
-		driver.navigate().to(targetURL);
-		PageObjectLogging.log("navigateToEditPage()", "navigating to edit page via URL", true, driver);
-		return new WikiArticleEditMode(driver);
-	}
-
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
-		getUrl(driver.getCurrentUrl() + URLsContent.actionEditParameter);
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				driver.getCurrentUrl(),
+				URLsContent.actionEditParameter
+			)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
-		getUrl(wikiURL + URLsContent.wikiDir + article + URLsContent.actionEditParameter);
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+			)
+		);
+		return new VisualEditModePageObject(driver);
+	}
+
+	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				urlBuilder.appendQueryStringToURL(
+					wikiURL + URLsContent.wikiDir + article,
+					URLsContent.actionEditParameter
+			),
+			URLsContent.useDefaultFormat)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -257,21 +285,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialUserLoginPageObject(driver);
 	}
 
-	protected void clickCommentDeleteConfirmationButton() {
-		waitForElementByElement(deleteConfirmationButton);
-		waitForElementByElement(deleteCommentReasonField);
-		deleteCommentReasonField.clear();
-		deleteCommentReasonField.sendKeys("QAReason");
-		scrollAndClick(deleteConfirmationButton);
-		waitForElementByElement(deleteCommentConfirmationMessage);
-	}
-
-	/**
-     * Verify if user is logged in
-     * Check if link to user's Profile contains user's name
-     *
-     * @param userName
-     */
     public void verifyUserLoggedIn(String userName) {
 		waitForElementByElement(userProfileAvatar);
 		waitForElementByElement(navigationLogoutLink);
@@ -288,15 +301,6 @@ public class WikiBasePageObject extends BasePageObject {
 		deleteCommentReasonField.clear();
 		deleteCommentReasonField.sendKeys("QAReason");
 		deleteConfirmationButton.click();
-	}
-
-	public void deleteArticle(String articleName) {
-		getUrl(driver.getCurrentUrl() + "?action=delete");
-		// clickDeleteButtonInDropDown();
-		clickArticleDeleteConfirmationButton(articleName);
-		waitForElementByXPath("//div[@class='msg' and contains(text(), 'has been deleted.')]");
-		PageObjectLogging.log("deleteArticle", "article "+articleName+" has been deleted",
-				true, driver);
 	}
 
 	public void deleteTop10List(String top10listName) {
@@ -324,13 +328,13 @@ public class WikiBasePageObject extends BasePageObject {
 		scrollAndClick(confirmRenamePageButton);
 	}
 
-		public void verifyEditButtonNotPresent() {
-			waitForElementNotVisibleByElement(editButton);
-			PageObjectLogging.log(
-				"verifyEditButtonNotPresent",
-				"edit button is not present", true
-			);
-		}
+	public void verifyEditButtonNotPresent() {
+		waitForElementNotVisibleByElement(editButton);
+		PageObjectLogging.log(
+			"verifyEditButtonNotPresent",
+			"edit button is not present", true
+		);
+	}
 
 	protected void clickRestoreArticleButton() {
 		waitForElementByElement(restoreButton);
@@ -382,6 +386,24 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticlePageObject(driver);
 	}
 
+	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
+		getUrl(
+				wikiURL +
+				URLsContent.wikiDir +
+				articleName
+		);
+		return new ArticlePageObject(driver);
+	}
+
+	public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
+		getUrl(
+				wikiURL +
+				URLsContent.blogNameSpace.replace("%userName%", userName) +
+				blogTitle
+		);
+		return new BlogPageObject(driver);
+	}
+
 	public Top_10_list openTop10List(String topTenListName) {
 		URI uri;
 		try {
@@ -424,55 +446,10 @@ public class WikiBasePageObject extends BasePageObject {
 		return new ArticlePageObject(driver);
 	}
 
-	public WikiCategoryPageObject openCategoryPage(String category) {
-		getUrl(Global.DOMAIN + "wiki/" + "Category:" + category);
-		PageObjectLogging.log("openCategoryPage", category + " page opened",
-				true, driver);
-		return new WikiCategoryPageObject(driver);
-	}
-
 	public void verifyPermissionsErrorsPresent() {
 		waitForElementByElement(premissionErrorMessage);
 		PageObjectLogging.log("verifyPermissionsErrors", "premission error found, as expected",
 				true, driver);
-	}
-
-	public void verifyVideoOnTheLeftOnAritcle()
-	{
-		waitForElementByElement(videoOnLeftOfArticle);
-		PageObjectLogging.log("verifyVideoOnTheLeftOnAritcle", "Video appears on the left of the article page once published", true, driver);
-	}
-
-	public void verifyVideoOnTheRightOnAritcle()
-	{
-		waitForElementByElement(videoOnRightOfArticle);
-		PageObjectLogging.log("verifyVideoOnTheRightOnAritcle", "Video appears on the right of the article page once published", true, driver);
-	}
-
-	public void verifyVideoOnTheCenterOnArticle()
-	{
-		waitForElementByElement(videoOnCenterOfArticle);
-		PageObjectLogging.log("verifyVideoOnTheCenterOnAritcle", "Video appears on the center of the article page once published", true, driver);
-	}
-
-	public void verifyVideoWidthOnAritcle(String width)
-	{
-		waitForElementByElement(videoOnArticle);
-		Assertion.assertEquals(width, videoOnArticle.getCssValue("width"));
-		PageObjectLogging.log("verifyVideoWidthOnAritcle", "Video width is correct article page when page is published", true, driver);
-	}
-
-	public void verifyVideoCaptionOnAritcle()
-	{
-		waitForElementByElement(videoCaptionOnArticle);
-		CommonExpectedConditions.textToBePresentInElement(videoCaptionOnArticle, "QAWebdriverCaption1");
-		PageObjectLogging.log("verifyVideoCaptionOnAritcle", "Video caption appears correctly in article page", true, driver);
-	}
-
-	public void verifyNoVideoCaptionOnAritcle() {
-		waitForElementNotVisibleByElement(videoCaptionOnArticle);
-		PageObjectLogging.log("verifyNoVideoCaptionOnAritcle", "Verify that the video does not have a caption in the article page", true);
-
 	}
 
 	public void verifyUrl(String url) {
@@ -488,96 +465,92 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialCreatePagePageObject(driver);
 	}
 
-        public void verifyLoginReguiredMessage() {
-            waitForTextToBePresentInElementByElement(
-                wikiFirstHeader, PageContent.loginRequired
-            );
-            PageObjectLogging.log(
-                "LoginRequiredMessage",
-                "Login required message in first header present",
-                true, driver
-            );
-        }
+	public void verifyLoginReguiredMessage() {
+		waitForTextToBePresentInElementByElement(
+				wikiFirstHeader, PageContent.loginRequired
+		);
+		PageObjectLogging.log(
+				"LoginRequiredMessage",
+				"Login required message in first header present",
+				true, driver
+		);
+	}
 
-        public void clickLoginOnSpecialPage() {
-            waitForElementByElement(specialUserLoginLink);
-            PageObjectLogging.log(
-                "LoginLinkPresent",
-                "Link to login special page present",
-                true, driver
-            );
-            scrollAndClick(specialUserLoginLink);
-            PageObjectLogging.log(
-                "LoginLinkClicked",
-                "Link to login special page clicked",
-                true, driver
-            );
-        }
+	public void clickLoginOnSpecialPage() {
+		waitForElementByElement(specialUserLoginLink);
+		PageObjectLogging.log(
+				"LoginLinkPresent",
+				"Link to login special page present",
+				true, driver
+		);
+		scrollAndClick(specialUserLoginLink);
+		PageObjectLogging.log(
+				"LoginLinkClicked",
+				"Link to login special page clicked",
+				true, driver
+		);
+	}
 
-        public void verifyNotLoggedInMessage() {
-            waitForTextToBePresentInElementByElement(
-					wikiFirstHeader, PageContent.notLoggedInMessage
-			);
-            PageObjectLogging.log(
-					"NotLoggedInMessage",
-					"Not logged in message present",
-					true, driver
-			);
-        }
+	public void verifyNotLoggedInMessage() {
+		waitForTextToBePresentInElementByElement(
+				wikiFirstHeader, PageContent.notLoggedInMessage
+		);
+		PageObjectLogging.log(
+				"NotLoggedInMessage",
+				"Not logged in message present",
+				true, driver
+		);
+	}
 
-        public void clickContributeNewPage() {
-            clickContributeButton();
-            waitForElementVisibleByElement(contributeAddPage);
-            scrollAndClick(contributeAddPage);
-        }
+	public void clickContributeNewPage() {
+		clickContributeButton();
+		waitForElementVisibleByElement(contributeAddPage);
+		scrollAndClick(contributeAddPage);
+	}
 
-        public void logInViaModal(String userName, String password) {
-            waitForElementByElement(modalUserNameInput);
-            modalUserNameInput.sendKeys(userName);
-            waitForElementByElement(modalPasswordInput);
-            modalPasswordInput.sendKeys(password);
-            PageObjectLogging.log(
-                "FillLoginForm",
-                "Login form in modal is filled",
-                true, driver
-            );
+	public void logInViaModal(String userName, String password) {
+		waitForElementByElement(modalUserNameInput);
+		modalUserNameInput.sendKeys(userName);
+		waitForElementByElement(modalPasswordInput);
+		modalPasswordInput.sendKeys(password);
+		PageObjectLogging.log(
+				"FillLoginForm",
+				"Login form in modal is filled",
+				true, driver
+		);
 
-            scrollAndClick(modalLoginSubmit);
-            PageObjectLogging.log(
-                "LoginFormSubmitted",
-                "Login form is submitted",
-                true
-            );
+		scrollAndClick(modalLoginSubmit);
+		PageObjectLogging.log(
+				"LoginFormSubmitted",
+				"Login form is submitted",
+				true
+		);
 
-            waitForElementNotVisibleByElement(logInModal);
-            PageObjectLogging.log(
-                "LoginModalDissapears",
-                "Login modal is no longer visible",
-                true
-            );
-        }
+		waitForElementNotVisibleByElement(logInModal);
+		PageObjectLogging.log(
+				"LoginModalDissapears",
+				"Login modal is no longer visible",
+				true
+		);
+	}
 
-        public String receiveMailWithNewPassowrd() {
-            MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
-            String newPassword = MailFunctions.getPasswordFromMailContent((
-                MailFunctions.getFirstMailContent(
-                    Properties.email, Properties.emailPassword)
-                )
-            );
-            PageObjectLogging.log(
-                "NewPasswordRecived",
-                "New password recived from mail",
-                true
-            );
+	public String receiveMailWithNewPassowrd() {
+		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
+		String newPassword = MailFunctions.getPasswordFromMailContent((
+				MailFunctions.getFirstMailContent(
+						Properties.email, Properties.emailPassword
+						)
+				)
+		);
+		PageObjectLogging.log(
+				"NewPasswordRecived",
+				"New password recived from mail",
+				true
+		);
 
-            return newPassword;
-        }
+		return newPassword;
+	}
 
-    /**
-     * Method checks if current wiki page is main page of this wiki
-     *
-     * @return Boolean
-     */
 	protected Boolean checkIfMainPage() {
 		WebElement body = driver.findElement(By.cssSelector("body"));
 		return (body.getAttribute("class").contains("mainpage"));
@@ -614,20 +587,6 @@ public class WikiBasePageObject extends BasePageObject {
 				.cssSelector("a[data-id='login']")));
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
-
-	public void logOut(String wikiURL) {
-		try {
-			driver.manage().deleteAllCookies();
-			driver.get(wikiURL + "wiki/Special:UserLogout?noexternals=1");
-		} catch (TimeoutException e) {
-			PageObjectLogging.log("logOut",
-					"page loads for more than 30 seconds", true);
-		}
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.cssSelector("a[data-id='login']")));
-		PageObjectLogging.log("logOut", "user is logged out", true, driver);
-	}
-
 
 	public String logInCookie(String userName, String password) {
 			try {
@@ -684,19 +643,20 @@ public class WikiBasePageObject extends BasePageObject {
 					xmlResponseArr = xmlResponse.split("\"");
 				}
 
+				String domain = (Global.DOMAIN.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "_session', '" + xmlResponseArr[13]
-						+ "', {'domain': 'wikia.com', 'path': '/'})");
+						+ "', {'domain': '"+domain+"', 'path': '/'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "UserName', '" + xmlResponseArr[7]
-						+ "', {'domain': 'wikia.com', 'path': '/'})");
+						+ "', {'domain': '"+domain+"', 'path': '/'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "UserID', '" + xmlResponseArr[5]
-						+ "', {'domain': 'wikia.com', 'path': '/'})");
+						+ "', {'domain': '"+domain+"', 'path': '/'})");
 				js.executeScript("$.cookie('" + xmlResponseArr[11]
 						+ "Token', '" + xmlResponseArr[9]
-						+ "', {'domain': 'wikia.com' , 'path': '/'})");
+						+ "', {'domain': '"+domain+"' , 'path': '/'})");
 				try {
 					driver.get(Global.DOMAIN + "Special:Random");
 				} catch (TimeoutException e) {
@@ -732,7 +692,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
-
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
@@ -754,8 +713,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 			String[] xmlResponseArr = xmlResponse.split("\"");
 			String token = xmlResponseArr[5];
-
-			// System.out.println(token);
 
 			while (xmlResponseArr.length < 11) {// sometimes first request
 				// does
@@ -784,21 +741,22 @@ public class WikiBasePageObject extends BasePageObject {
 				xmlResponseArr = xmlResponse.split("\"");
 			}
 
+			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "_session', '" + xmlResponseArr[13]
-					+ "', {'domain': 'wikia.com', 'path': '/'})");
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "UserName', '" + xmlResponseArr[7]
-					+ "', {'domain': 'wikia.com', 'path': '/'})");
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "UserID', '" + xmlResponseArr[5]
-					+ "', {'domain': 'wikia.com', 'path': '/'})");
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
 			js.executeScript("$.cookie('" + xmlResponseArr[11]
 					+ "Token', '" + xmlResponseArr[9]
-					+ "', {'domain': 'wikia.com' , 'path': '/'})");
+					+ "', {'domain': '"+domain+"' , 'path': '/'})");
 			try {
-				driver.get(wikiURL + "Special:Random");
+				driver.get(wikiURL);
 			} catch (TimeoutException e) {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);
@@ -835,8 +793,15 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
-	public void openWikiPage(String wikiURL) {
-		getUrl(wikiURL + URLsContent.noexternals);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	public void verifyPageUnfollowed() {
+		waitForTextToBePresentInElementByElement(followButton, "Follow");
+		PageObjectLogging.log("verifyPageUnfollowed", "page is not followed", true);
+	}
+
+	public void follow() {
+		waitForElementByElement(followButton);
+		jQueryClick(followButton);
+		waitForTextToBePresentInElementByElement(followButton, "Following");
+		PageObjectLogging.log("followArticle", "page is followed", true, driver);
 	}
 }

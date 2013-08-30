@@ -26,6 +26,7 @@ public class CreateAWikiTests_lang extends TestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
+		createNewWiki1.selectLanguage(lang);
 		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
 		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
