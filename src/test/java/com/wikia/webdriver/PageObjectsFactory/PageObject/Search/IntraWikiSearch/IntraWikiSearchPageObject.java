@@ -125,13 +125,13 @@ public class IntraWikiSearchPageObject extends BasePageObject{
 
 	public void clickNextPaginator() {
 		waitForElementByElement(paginatorNext);
-		clickAndWait(paginatorNext);
+		scrollAndClick(paginatorNext);
 		PageObjectLogging.log("clickNextPaginator", "next paginator clicked", true);
 	}
 
 	public void clickPrevPaginator() {
 		waitForElementByElement(paginatorPrev);
-		clickAndWait(paginatorPrev);
+		scrollAndClick(paginatorPrev);
 		PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
 	}
 

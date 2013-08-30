@@ -3,24 +3,24 @@ package com.wikia.webdriver.TestCases.ToolbarTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class CustomizeToolbarTests extends TestTemplate{
 //	private String wikiArticle = "QAautoPage";
-	
-	@Test(groups = {"CustomizeToolbar001", "Toolbar"}) 
+
+	@Test(groups = {"CustomizeToolbar001", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Adding
-	public void CustomizeToolbar001_Adding()
+	public void CustomizeToolbar005_Adding()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		login.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.clickCustomize();
@@ -31,15 +31,16 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.clickSave();
 		toolbar.verifyToolOnToolbar("Edit");
 	}
-	
-	@Test(groups = {"CustomizeToolbar002", "Toolbar"}) 
+
+	@Test(groups = {"CustomizeToolbar002", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Editing
 	public void CustomizeToolbar002_Editing()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		login.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.clickCustomize();
@@ -54,15 +55,16 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.clickSave();
 		toolbar.verifyToolOnToolbar("Edit123");
 	}
-	
-	@Test(groups = {"CustomizeToolbar003", "Toolbar"}) 
+
+	@Test(groups = {"CustomizeToolbar003", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Deleting
 	public void CustomizeToolbar003_Deleteing()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		login.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.clickCustomize();
@@ -74,15 +76,16 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.clickSave();
 		toolbar.verifyToolRemoved("Edit");
 	}
-	
-	@Test(groups = {"CustomizeToolbar004", "Toolbar"}) 
+
+	@Test(groups = {"CustomizeToolbar004", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Finding
 	public void CustomizeToolbar004_Finding()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		login.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.clickCustomize();
@@ -93,38 +96,41 @@ public class CustomizeToolbarTests extends TestTemplate{
 		toolbar.clickSave();
 		toolbar.verifyToolOnToolbar("Upload photo");
 	}
-	
-	@Test(groups = {"CustomizeToolbar005", "Toolbar"}) 
+
+	@Test(groups = {"CustomizeToolbar005", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
-	public void CustomizeToolbar005_ResetDefaults()
+	public void CustomizeToolbar001_ResetDefaults()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		login.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.searchTool("Up");
-		toolbar.clickSearchSuggestion("Upload photo");
-		toolbar.verifyToolOnList("Upload photo");
+		toolbar.searchTool("Do");
+		toolbar.clickSearchSuggestion("Double redirects");
+		toolbar.verifyToolOnList("Double redirects");
 		toolbar.clickSave();
-		toolbar.verifyToolOnToolbar("Upload photo");
+		toolbar.verifyToolOnToolbar("Double redirects");
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
+		toolbar.verifyToolNotOnList("Double redirects");
 		toolbar.clickSave();
-		toolbar.verifyToolRemoved("Upload photo");
+		toolbar.verifyToolRemoved("Double redirects");
 	}
-	
-	@Test(groups = {"CustomizeToolbar006", "Toolbar"}) 
+
+	@Test(groups = {"CustomizeToolbar006", "Toolbar", "CustomizeToolbar"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
 	public void CustomizeToolbar006_ButtonsActions()
 	{
-		CommonFunctions.logOut(driver);
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.logOut(driver);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
-		CommonFunctions.logInCookie(Properties.userName2, Properties.password2);
+		login.logInCookie(Properties.userName2, Properties.password2);
 		wiki.openArticle(URLsContent.followingToolbarTest);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.unfollowIfFollowed();

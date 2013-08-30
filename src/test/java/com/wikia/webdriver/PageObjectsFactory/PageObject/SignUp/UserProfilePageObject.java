@@ -1,23 +1,20 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Blog.SpecialCreateBlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
-public class UserProfilePageObject extends BasePageObject{
+public class UserProfilePageObject extends WikiBasePageObject {
 
 	@FindBy(css="header#WikiaHeader a.ajaxLogin")
 	private WebElement logInLink;
@@ -25,52 +22,12 @@ public class UserProfilePageObject extends BasePageObject{
 	private WebElement blogTab;
 	@FindBy(css="a[data-id='createblogpost']")
 	private WebElement createBlogPostButton;
-	
+	@FindBy(css=".WikiaBlogListingPost h1>a")
+	private List<WebElement> blogPostList;
+
 	public UserProfilePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	}
-
-	public UserProfilePageObject navigateToProfilePage(String userName) {
-		driver.navigate().to(Global.DOMAIN + "wiki/User:" + userName);
-		PageObjectLogging.log("UserProfilePageObject ",
-				"navigate to username page: " + Global.DOMAIN + "wiki/User:"
-						+ userName, true, driver);
-		return new UserProfilePageObject(driver);
-	}
-	
-	/**
-	 * @author Karol Kujawiak
-	 * @param userName
-	 */
-	public void verifyUserLoggedIn(String userName)
-	{
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/User:"+userName+"']")));
-		PageObjectLogging.log("verifyUserLoggedIn ", "Verified user is logged in", true);
-	}
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
-	private void verifyLogInInvisiblity()
-	{
-		wait.until(ExpectedConditions.stalenessOf(logInLink));	
-		PageObjectLogging.log("verifyLogInInvisiblity ", "Log in is not visible", true);			
-	}
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
-	private void verifyRegisterInvisiblity()
-	{
-		try
-		{
-			waitForElementNotVisibleByBy(By.cssSelector("header#WikiaHeader a.ajaxRegister"));			
-		}
-		catch (NoSuchElementException e)
-		{
-			PageObjectLogging.log("verifyLogInInvisiblity ", "Register in is not visible", true);						
-		}
 	}
 
 	/**
@@ -80,10 +37,7 @@ public class UserProfilePageObject extends BasePageObject{
 	{
 		PageObjectLogging.log("verifyWelcomeEmail ", "start of email verification", true);
 		String[] mailContent = MailFunctions.getWelcomeMailContent(MailFunctions.getFirstMailContent(mailUserName, mailPassword));
-//		Assertion.assertEquals("We're happy to welcome you to Wikia and Wikia! Here are some things you can= do to get started.", mailContent[2]);
 		Assertion.assertEquals("Edit your profile.", mailContent[4]);
-//		Assertion.assertEquals("Add a profile photo and a few quick facts about yourself on your Wikia prof=ile.", mailContent[6]);
-//		Assertion.assertEquals("Go to http://www.wikia.com/User:"+userName, mailContent[8].replace("=", ""));
 		Assertion.assertEquals("Learn the basics.", mailContent[10]);
 		Assertion.assertEquals("Get a quick tutorial on the basics of Wikia: how to edit a page, your user =profile, change your preferences, and more.", mailContent[12]);
 		Assertion.assertEquals("Check it out (http://community.wikia.com/wiki/Help:Wikia_Basics)", mailContent[14]);
@@ -101,22 +55,32 @@ public class UserProfilePageObject extends BasePageObject{
 	public void clickOnBlogTab() {
 		waitForElementByElement(blogTab);
 		waitForElementClickableByElement(blogTab);
-		clickAndWait(blogTab);
-		PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true, driver);		
+		blogTab.click();
+		PageObjectLogging.log("clickOnBlogTab", "Click on blog tab", true);
 	}
+
+	public BlogPageObject openBlogPage(int blogNumber) {
+		blogPostList.get(blogNumber).click();
+		PageObjectLogging.log("openBlogPage",
+				"blog post " + blogPostList.get(0).getText() + " opened",
+				true);
+		return new BlogPageObject(driver);
+	}
+
+	public BlogPageObject openFirstPost() {
+		openBlogPage(0);
+		return new BlogPageObject(driver);
+	}
+
 	/**
 	 * @author Michal Nowierski
-	 * @return 
+	 * @return
 	 */
-	public SpecialCreateBlogPageObject clickOnCreateBlogPost() {
+	public SpecialCreatePagePageObject clickOnCreateBlogPost() {
 		waitForElementByElement(createBlogPostButton);
 		waitForElementClickableByElement(createBlogPostButton);
-		clickAndWait(createBlogPostButton);
-		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);		
-		return new SpecialCreateBlogPageObject(driver);
+		scrollAndClick(createBlogPostButton);
+		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);
+		return new SpecialCreatePagePageObject(driver);
 	}
-	
-	
-	
-	
 }

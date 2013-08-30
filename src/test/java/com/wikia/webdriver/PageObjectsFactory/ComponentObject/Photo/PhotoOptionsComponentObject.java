@@ -1,17 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class PhotoOptionsComponentObject extends BasePageObject{
 
 	@FindBy(css="#ImageUploadCaption")
 	private WebElement captionField;
-	@FindBy(css="[value='Add photo']")
+	@FindBy(css="#ImageUploadDetails input[type='submit']")
 	private WebElement addPhotoButton;
 	@FindBy(css="#ImageLayoutRow")
 	private WebElement alignmentRow;
@@ -33,7 +32,7 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 	}
 	public void clickAddPhoto(){
 		waitForElementByElement(addPhotoButton);
-		clickAndWait(addPhotoButton);
+		scrollAndClick(addPhotoButton);
 		waitForElementNotVisibleByElement(addPhotoButton);
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 	}

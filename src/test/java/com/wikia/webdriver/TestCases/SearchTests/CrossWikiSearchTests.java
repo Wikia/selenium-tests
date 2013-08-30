@@ -16,7 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
  * Time: 11:22
  */
 public class CrossWikiSearchTests extends TestTemplate {
-	private static final int resultsPerPage = 7;
+	private static final int resultsPerPage = 10;
 	private static final String searchPhrase = "muppets";
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 	private static final String searchPhraseOnePageResults = "muppet_wiki";

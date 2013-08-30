@@ -2,29 +2,27 @@ package com.wikia.webdriver.Trash;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.NewWikiaHomePage;
 
 public class CreateAWiki_1 extends TestTemplate{
-	
+
 	private String wikiName;
-	
+
 	@Test
 	public void CreateNewWiki()
-	{	
-		HomePageObject home = new HomePageObject(driver);	
+	{
+		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
 //		CommonFunctions.logIn();
 		CreateNewWikiPageObjectStep1 createNewWikistep1 = home.startAWiki();
 		String timeStamp = createNewWikistep1.getTimeStamp();
 		wikiName = "QaTest"+timeStamp;
-		
+
 		createNewWikistep1.submit();
 		//create new wiki step 1
 		createNewWikistep1.waitForElementNotVisibleByCss("span.submit-error.error-msg");
@@ -39,12 +37,12 @@ public class CreateAWiki_1 extends TestTemplate{
 		//create new wiki step 3
 		CreateNewWikiPageObjectStep3 createNewWikiStep3 = createNewWikistep2.submit();
 		createNewWikiStep3.selectTheme(3);
-		NewWikiaHomePage newWikia = createNewWikiStep3.submit(wikiName);
+		NewWikiaHomePage newWikia = createNewWikiStep3.submit();
 		newWikia.waitForCongratulationsLightBox(wikiName);
 		//logout
-		CommonFunctions.logOut(driver);
-		
-		
+
+
+
 		//delete created wiki
 //		CommonFunctions.logInAsStaff();
 //		SpecialFactoryPageObject factory = new SpecialFactoryPageObject(driver);
@@ -57,9 +55,9 @@ public class CreateAWiki_1 extends TestTemplate{
 //		factory.confirmClose();
 //		factory.clickClosedWikiaLink();
 //		factory.verifyWikiaClosed();
-	
+
 	}
-	
-	
+
+
 
 }

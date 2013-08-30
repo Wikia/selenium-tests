@@ -43,7 +43,7 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
 	private void clickSearchButton()
 	{
 		waitForElementByElement(searchButton);
-		clickAndWait(searchButton);
+		scrollAndClick(searchButton);
 		PageObjectLogging.log("clickSearchButton", "search button clicked", true);				
 	}
 	

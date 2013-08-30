@@ -5,26 +5,34 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
-public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
+public class SpecialCreateBlogPageObject extends VisualEditModePageObject {
 
-	
+
 	@FindBy(css="input[name='wpTitle']")
 	private WebElement blogTitleInput;
 	@FindBy(css="#ok")
 	private WebElement okButton;
 	@FindBy(css="input.control-button")
 	private WebElement publishButtonGeneral;
-	
+
+	private String blogName;
+
 	public SpecialCreateBlogPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	
+		blogName = PageContent.blogPostNamePrefix + getRandomDigits(5) + getRandomDigits(5);
 	}
+
+	public String getBlogName() {
+		return this.blogName;
+	}
+
 
 	/**
 	 * @author Michal Nowierski
@@ -33,8 +41,10 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 		waitForElementByElement(blogTitleInput);
 		waitForElementClickableByElement(blogTitleInput);
 		blogTitleInput.sendKeys(blogPostTitle);
-		PageObjectLogging.log("typeBlogPostTitle", "type title to blog post: <b>"+blogPostTitle+"</b>", true, driver);		
-		
+		PageObjectLogging.log(
+			"typeBlogPostTitle",
+			"type title to blog post: <b>"+blogPostTitle+"</b>", true
+		);
 	}
 
 	/**
@@ -43,26 +53,23 @@ public class SpecialCreateBlogPageObject extends WikiArticleEditMode {
 	public void clickOk() {
 		waitForElementByElement(okButton);
 		waitForElementClickableByElement(okButton);
-		clickAndWait(okButton);
-		PageObjectLogging.log("clickOk", "click OK button", true, driver);		
+		okButton.click();
+		PageObjectLogging.log("clickOk", "click OK button", true);
 	}
-	
-	public BlogPageObject clickOnPublishButton() {
-		mouseOver("#GlobalNavigation li:nth(1)");
-		mouseRelease("#GlobalNavigation li:nth(1)");
+
+	public BlogPageObject clickOnPublishBlogPostButton() {
 		waitForElementByElement(publishButtonGeneral);
 		waitForElementClickableByElement(publishButtonGeneral);
-//		clickAndWait(publishButtonGeneral);
-		jQueryClick("input.control-button");
-		waitForElementByElement(editButton);
-		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true, driver);
+		publishButtonGeneral.click();
+		waitForElementByBy(editButtonBy);
+		PageObjectLogging.log("ClickOnPublishButton", "Click on 'Publish' button", true);
 		return new BlogPageObject(driver);
 	}
-	
+
 	public SpecialCreateBlogPageObject createBlogFormUrl(String blogPostTitle){
 		getUrl(Global.DOMAIN+"wiki/Special:CreateBlogPage");
 		typeBlogPostTitle(blogPostTitle);
 		clickOk();
 		return new SpecialCreateBlogPageObject(driver);
-	}
+		}
 }

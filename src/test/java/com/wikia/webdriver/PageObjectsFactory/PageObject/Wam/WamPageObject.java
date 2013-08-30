@@ -38,16 +38,13 @@ public class WamPageObject extends BasePageObject {
 	@FindBy(css=".wam-index-search .searching input[name=searchPhrase]")
 	private WebElement wamSearchPhrase;
 
-	@FindBy(css="#wam-index table")
-	private WebElement wamIndexTable;
-
 	@FindBy(css=".wam-tabs")
 	private List<WebElement> wamTabs;
 
 	@FindBy(css="#wam-index table tr")
 	private List<WebElement> wamIndexRows;
 
-	@FindBys(@FindBy(css="ul.wam-tabs li"))
+	@FindBys(@FindBy(css="ul.wam-tabs li a"))
 	private List<WebElement> tabsList;
 
 	@FindBy(css="a.paginator-next")
@@ -64,6 +61,8 @@ public class WamPageObject extends BasePageObject {
 
 	@FindBy(css="div.wam-header h2")
 	private WebElement selectedHeaderName;
+
+	By wamIndexTable = By.cssSelector("#wam-index table");
 
 	/**
 	 * @desc Wikia verticals (hubs)
@@ -144,7 +143,7 @@ public class WamPageObject extends BasePageObject {
 	 * @desc Checks if there is a table row different than head one in WAM index table
 	 */
 	public void verifyWamIndexIsNotEmpty() {
-		waitForElementByElement(wamIndexTable);
+		waitForElementByBy(wamIndexTable);
 		int rows = wamIndexRows.size();
 
 		if( rows > 1 ) {
@@ -160,7 +159,7 @@ public class WamPageObject extends BasePageObject {
 	 * @param expectedRowsNo the number of expecting table rows
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
-		waitForElementByElement(wamIndexTable);
+		waitForElementByBy(wamIndexTable);
 		Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals " + expectedRowsNo );
 	}
 
@@ -199,14 +198,14 @@ public class WamPageObject extends BasePageObject {
 		waitForElementByElement(wamVerticalFilterSelect);
 		Select verticalSelectBox = new Select(wamVerticalFilterSelect);
 		verticalSelectBox.selectByValue( verticalId.getIdAsString() );
-		waitForElementByElement(wamIndexTable);
+		waitForElementByBy(wamIndexTable);
 	}
 
 	/**
 	 * @desc Checks if "Vertical" column in WAM index has the same values for each row
 	 */
 	public void verifyVerticalColumnValuesAreTheSame() {
-		waitForElementByElement(wamIndexTable);
+		waitForElementByBy(wamIndexTable);
 		waitForElementByElement(wamVerticalFilterSelect);
 		Select verticalSelectBox = new Select(wamVerticalFilterSelect);
 		String selectedValue = verticalSelectBox.getFirstSelectedOption().getText();
@@ -231,7 +230,7 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
-		waitForElementByElement(wamIndexTable);
+		waitForElementByBy(wamIndexTable);
 		List<String> current = getCurrentIndexNo();
 		for (int i=0; i<=endElement - startElement; i++) {
 			Assertion.assertEquals(current.get(i), Integer.toString(i + startElement));
@@ -241,7 +240,7 @@ public class WamPageObject extends BasePageObject {
 
 	public void clickNextPaginator() {
 		waitForElementByElement(paginationNext);
-		paginationNext.click();
+		scrollAndClick(paginationNext);
 		PageObjectLogging.log("clickNextPaginator", "next button in pagination was clicked", true);
 	}
 

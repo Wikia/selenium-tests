@@ -1,12 +1,10 @@
 package com.wikia.webdriver.Common.Templates;
 
+
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,40 +15,49 @@ import org.testng.annotations.BeforeMethod;
  */
 public class AdsTestTemplate extends NewTestTemplate {
 
-    private static HashMap adsConfiguration;
-    private static DesiredCapabilities adCap;
-    private static GeoEdgeProxyServer adServer;
+	private static DesiredCapabilities adCap;
+	private static GeoEdgeProxyServer adServer;
+	private boolean isGeoEdgeSet = true;
 
-    /**
-     * Start browser with configured desired capabilities and start logging
-     *
-     * @param Method method
-     */
-    @BeforeMethod(alwaysRun=true)
-    @Override
-    public void start(Method method, Object[] data) {
-        try {
-            GeoEdgeProxy country = method.getAnnotation(GeoEdgeProxy.class);
-            adServer = new GeoEdgeProxyServer(
-                country.country(), 4444
-            );
-            adServer.runGeoEdgeServer();
-            adCap = getCapsWithProxyServerSet(adServer);
-            startBrowserWithCapabilities(adCap);
-            PageObjectLogging.startLoggingMethod(
-                getClass().getSimpleName().toString(), method.getName()
-            );
-        } catch (Exception ex) {
-            Logger.getLogger(AdsTestTemplate.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	/**
+	 * Start browser with configured desired capabilities and start logging
+	 *
+	 * @param Method method
+	 */
+	@BeforeMethod(alwaysRun=true)
+	@Override
+	public void start(Method method, Object[] data) {
+		try {
+			if (method.getAnnotation(GeoEdgeProxy.class) != null) {
+				GeoEdgeProxy country = method.getAnnotation(GeoEdgeProxy.class);
+				adServer = new GeoEdgeProxyServer(
+					country.country(), 4444
+				);
+				adServer.runGeoEdgeServer();
+				adCap = getCapsWithProxyServerSet(adServer);
+				startBrowserWithCapabilities(adCap);
+			} else {
+				isGeoEdgeSet = false;
+				startBrowser();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 
-    @AfterMethod(alwaysRun=true)
-    public void stopServer() {
-        try {
-            adServer.stop();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	@AfterMethod(alwaysRun=true)
+	public void stopServer() {
+		if (isGeoEdgeSet) {
+			try {
+				adServer.stop();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void startBrowserWithCapabilities(DesiredCapabilities caps) {
+		NewDriverProvider.setDriverCapabilities(caps);
+		startBrowser();
+	}
 }

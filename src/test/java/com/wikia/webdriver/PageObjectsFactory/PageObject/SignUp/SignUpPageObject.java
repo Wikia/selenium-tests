@@ -11,39 +11,35 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Proxy.ProxyType;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class SignUpPageObject extends BasePageObject {
 
 	public SignUpPageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css = "form#WikiaSignupForm input[name='username']")
+	@FindBy(css = "#WikiaSignupForm input[name='username']")
 	private WebElement userNameField;
-	@FindBy(css = "form#WikiaSignupForm input[name='email']")
+	@FindBy(css = "#WikiaSignupForm input[name='email']")
 	private WebElement emailField;
-	@FindBy(css = "form#WikiaSignupForm input[name='password']")
+	@FindBy(css = "#WikiaSignupForm input[name='password']")
 	private WebElement passwordField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthmonth']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthmonth']")
 	private WebElement birthMonthField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthday']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthday']")
 	private WebElement birthDayField;
-	@FindBy(css = "form#WikiaSignupForm select[name='birthyear']")
+	@FindBy(css = "#WikiaSignupForm select[name='birthyear']")
 	private WebElement birthYearField;
 	@FindBy(css = "input#wpCaptchaWord")
 	private WebElement blurryWordField;
@@ -51,34 +47,39 @@ public class SignUpPageObject extends BasePageObject {
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
 	private WebElement createAccountButton;
-	
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Oops, please fill in the username field.')]")
-	 private WebElement emptyUserNameValidationError;
-	 @FindBy(xpath="//div[@class='error-msg' and contains(text(), 'Someone already has this username. Try a different one!')]")
-	 private WebElement occupiedUserNameValidationError;
-//	 @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
-	// @FindBy(css="")
-	// private WebElement;
+	@FindBy(css = ".input-group.required.error .error-msg")
+	private WebElement tooYoungError;
 
+	@FindBy(
+		xpath="//div[@class='error-msg' and contains(text(), "
+		+ "'Oops, please fill in the username field.')]"
+	)
+	private WebElement emptyUserNameValidationError;
+	@FindBy(
+		xpath="//div[@class='error-msg' and contains(text(), "
+		+ "'Someone already has this username. Try a different one!')]"
+	)
+	private WebElement occupiedUserNameValidationError;
+
+	private Select yearSelect;
+	private Select daySelect;
+	private Select monthSelect;
 	/**
 	 * @author Karol Kujawiak
 	 */
 	public void openSignUpPage()
 	{
-		getUrl(Global.DOMAIN+"wiki/Special:UserSignup");
-		waitForElementByElement(blurryWordField);
-		PageObjectLogging.log("openSignUpPage ", "Sign up page opened " +driver.getCurrentUrl(), true, driver);
+		getUrl(Global.DOMAIN+ URLsContent.specialUserSignup);
+		yearSelect = new Select(birthYearField);
+		daySelect = new Select(birthDayField);
+		monthSelect = new Select(birthMonthField);
+		PageObjectLogging.log(
+		    "openSignUpPage ",
+		    "Sign up page opened " +driver.getCurrentUrl(),
+		    true, driver
+		);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName
@@ -87,10 +88,14 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		userNameField.sendKeys(userName);
 		userNameField.sendKeys(Keys.TAB);
-		PageObjectLogging.log("typeInUserName ", "User name field populated " +userName, true, driver);
+		PageObjectLogging.log(
+			"typeInUserName ",
+			"User name field populated "
+			+ userName, true
+		);
 	}
-	
-	
+
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -99,19 +104,25 @@ public class SignUpPageObject extends BasePageObject {
 		emailField.sendKeys(email);
 		PageObjectLogging.log("typeInEmail ", "Email field populated", true, driver);
 	}
-	
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param password
 	 */
-	 
+
 	public void typeInPassword(String password)
 	{
 		passwordField.sendKeys(password);
-		PageObjectLogging.log("typeInPassword ", "Password field populated", true, driver);
+		PageObjectLogging.log("typeInPassword ", "Password field populated", true);
 	}
-	
+
+	public void waitForTooYoungErrorMsg()
+	{
+		waitForElementByElement(tooYoungError);
+		Assertion.assertTrue(tooYoungError.isDisplayed());
+		PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true);
+	}
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param month
@@ -122,94 +133,63 @@ public class SignUpPageObject extends BasePageObject {
 	{
 		try
 		{
-			Select m = new Select(birthMonthField);
-			Select d = new Select(birthDayField);
-			Select y = new Select(birthYearField);
-			m.selectByVisibleText(month);
+			monthSelect.selectByVisibleText(month);
 			Thread.sleep(150);
-			d.selectByVisibleText(day);
+			daySelect.selectByVisibleText(day);
 			Thread.sleep(150);
-			y.selectByVisibleText(year);
+			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
-			d.selectByVisibleText(day);
+			daySelect.selectByVisibleText(day);
 			Thread.sleep(150);
-			y.selectByVisibleText(year);
+			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
-			m.selectByVisibleText(month);
-			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true, driver);			
+			monthSelect.selectByVisibleText(month);
+			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true);
 		}
 		catch(InterruptedException e)
 		{
                     e.printStackTrace();
 		}
 	}
-	
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
+
 	public void enterBlurryWord()
 	{
 		String word = getWordFromCaptcha();
 		blurryWordField.sendKeys(word);
-		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true, driver);
+		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true);
 	}
-	
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
+
+
 	public AlmostTherePageObject submit(String email, String password)
 	{
 		MailFunctions.deleteAllMails(email, password);
-		clickAndWait(createAccountButton);
+		scrollAndClick(createAccountButton);
 		PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
 		return new AlmostTherePageObject(driver);
 	}
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void verifyEmptyUserNameValidation()
-	{
-		waitForElementByElement(emptyUserNameValidationError);
-		PageObjectLogging.log("verifyUserNameValidation ", "empty user name validation verified", true);
-	}
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void verifyOccupiedUserNameValidation()
-	{
-		waitForElementByElement(occupiedUserNameValidationError);
-		PageObjectLogging.log("verifyUserNameValidation ", "occupied user name validation verified", true);
-	}
-	
-	/**
-	 * @author Karol Kujawiak
-	 */
-	private String getWordFromCaptcha() 
+
+	private String getWordFromCaptcha()
 	{
 		try
 		{
-			String captchaId = CommonFunctions.getAttributeValue(blurryWordHidden, "value");
+			String captchaId = getAttributeValue(blurryWordHidden, "value");
 			String urlAd = Global.DOMAIN+ "wiki/Special:Captcha/image?wpCaptchaId="+ captchaId;
 			URL url = new URL(urlAd);
-			
-			
+
+
 			String md5 = md5(url.openStream());
-			if (md5 == null) 
+			if (md5 == null)
 			{
 				PageObjectLogging.log("getWordFromCaptcha", "mdp error", false);
 			}
-	
+
 			File file = Global.CAPTCHA_FILE;
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String strLine;
-			while ((strLine = in.readLine()) != null) 
+			while ((strLine = in.readLine()) != null)
 			{
 				String[] field = strLine.split(" ");
-				if (field[1].equals(md5)) 
+				if (field[1].equals(md5))
 				{
 					in.close();
 					PageObjectLogging.log("getWordFromCaptcha", "Captcha word decoded", true);
@@ -225,14 +205,11 @@ public class SignUpPageObject extends BasePageObject {
 			PageObjectLogging.log("getWordFromCaptcha", e.toString(), false);
 			e.printStackTrace();
 			return null;
-		} 
-		
+		}
+
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 */
-	private static String md5(InputStream is) 
+	private static String md5(InputStream is)
 		{
 		try
 		{
@@ -265,5 +242,4 @@ public class SignUpPageObject extends BasePageObject {
 			return null;
 		}
 	}
-
 }

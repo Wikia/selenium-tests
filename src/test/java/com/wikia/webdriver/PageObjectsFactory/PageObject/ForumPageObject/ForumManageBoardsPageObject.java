@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.net.URLEncoder;
 
 import org.openqa.selenium.WebDriver;
@@ -11,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -24,8 +22,6 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	
 	@FindBy(css="#CreateNewBoardButton")
 	private WebElement createBoardButton;
-	@FindBy(xpath="//section[@id='modalWrapper' and contains(text(), 'Create a new board')]")
-	private WebElement createBoardModalHeader;
 	@FindBy(css="[name='boardTitle']")
 	private WebElement boardTitleField;
 	@FindBy(css="[name='boardDescription']")
@@ -61,7 +57,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	}
 	private void submitNewBoard(){
 		waitForElementByElement(boardSubmitButton);
-		clickAndWait(boardSubmitButton);
+		scrollAndClick(boardSubmitButton);
 		PageObjectLogging.log("submitNewBoard", "new board submitted", true);
 	}
 	
@@ -72,14 +68,14 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		submitNewBoard();
 	}
 	
-	public void verifyBoardCreated(String title, String description){
-		waitForElementByXPath("//ul/li//a[contains(text(), '"+title.replaceAll("_", " ")+"')]/../../../p[contains(text(), '"+description+"')]");
+	public void verifyBoardCreated(String title, String description) {
+		waitForElementByXPath("//ul/li//a[contains(text(), '" + title.replaceAll("_", " ") + "')]/../../../p[contains(text(), '" + description + "')]");
 		PageObjectLogging.log("verifyBoardCreated", "recently created board verified", true);		
 	}
 
 	private void clickDeleteForum(String name){
 		WebElement deleteButton = waitForElementByXPath("//a[contains(text(), '"+name+"')]/../..//img[@class='sprite trash']");
-		clickAndWait(deleteButton);
+		scrollAndClick(deleteButton);
 		PageObjectLogging.log("clickDeleteForum", "delete forum button clicked", true);				
 	}
 	
@@ -93,7 +89,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	
 	private void clickDeleteAndMergeForum(){
 		waitForElementByElement(deleteAndMergeButton);
-		clickAndWait(deleteAndMergeButton);
+		scrollAndClick(deleteAndMergeButton);
 		PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true);
 	}
 	
@@ -120,11 +116,11 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		return secondForumLink.getText();
 	}
 	
-	public void verifyForumExists(String forumName){
+	public void verifyForumExists(String forumName, String wikiURL){
 		String temp = driver.getCurrentUrl();
 		try {
 			
-			getUrl(Global.DOMAIN+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
+			getUrl(wikiURL+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8").replace("+", "_"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,9 +130,9 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyForumExists", "verified forum exists", true);
 	}
 	
-	public void verifyForumNotExists(String forumName){
+	public void verifyForumNotExists(String forumName, String wikiURL){
 		try {
-			getUrl(Global.DOMAIN+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8"));
+			getUrl(wikiURL+"wiki/Board:"+URLEncoder.encode(forumName, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +143,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	
 	private void clickModifyForum(String forumName){
 		WebElement editPecil = waitForElementByXPath("//a[contains(text(), '"+forumName+"')]/../..//img[@class='sprite edit-pencil']");
-		clickAndWait(editPecil);
+		scrollAndClick(editPecil);
 		PageObjectLogging.log("clickModifyForum", "modify forum button clicked", true);
 	}
 	

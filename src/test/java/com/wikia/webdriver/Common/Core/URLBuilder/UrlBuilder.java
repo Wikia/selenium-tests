@@ -7,12 +7,14 @@ package com.wikia.webdriver.Common.Core.URLBuilder;
 public class UrlBuilder {
 
 	private String env;
-	private String qs;
 	private Boolean isWikia;
 
-	public UrlBuilder(String environment, String queryString) {
+	public UrlBuilder(String environment) {
 		env = environment;
-		qs = queryString;
+	}
+
+	public UrlBuilder() {
+		env = null;
 	}
 
 	public String getUrlForPath(String wikiName, String wikiPath) {
@@ -53,17 +55,14 @@ public class UrlBuilder {
 		return url;
 	}
 
-	public static String buildUrl(String wikiUrl, String suffix) {
-		return wikiUrl + suffix;
-	}
-
-	public static String addQueryString(String wikiUrl, String queryString) {
-		String url = wikiUrl;
-		if (wikiUrl.contains("?")) {
-			url += "&" + queryString;
+	public String appendQueryStringToURL(String url, String qs) {
+		String temp;
+		if (url.contains("?")) {
+			temp = url + "&" + qs;
+			return temp;
 		} else {
-			url += "?" + queryString;
+			temp = url + "?" + qs;
+			return temp;
 		}
-		return url;
 	}
 }

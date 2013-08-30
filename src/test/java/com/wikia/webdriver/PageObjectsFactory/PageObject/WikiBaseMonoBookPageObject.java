@@ -4,14 +4,14 @@
  */
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  *
@@ -66,7 +66,7 @@ public class WikiBaseMonoBookPageObject extends BaseMonoBookPageObject {
 
     public void openUserProfile() {
         waitForElementByElement(userPageLink);
-        clickAndWait(userPageLink);
+        scrollAndClick(userPageLink);
         changeToMonoBook();
         PageObjectLogging.log(
             "enterUserProfile",

@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -42,7 +40,7 @@ public class NewWikiaHomePage extends WikiBasePageObject{
 	public void closeCongratulationsLightBox()
 	{
 		waitForElementByElement(congratulationLightBoxCloseButton);
-		clickAndWait(congratulationLightBoxCloseButton);
+		scrollAndClick(congratulationLightBoxCloseButton);
 		PageObjectLogging.log("closeCongratulationsLightBox ", "Congratulations lightbox closed", true);
 	}
 	

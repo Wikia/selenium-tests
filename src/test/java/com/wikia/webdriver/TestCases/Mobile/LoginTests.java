@@ -1,35 +1,32 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
+import com.wikia.webdriver.Common.Properties.Credentials;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.CommonFunctions;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 
-public class LoginTests extends TestTemplate{
+public class LoginTests extends NewTestTemplate{
 
-	String url;
+	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"mobile"})
-	public void Login(){//String userName, String password){
+	@Test(groups={"loginTest_001", "mobile"})
+	public void Login() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
-		mobile.openHome();
+		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
-		url = driver.getCurrentUrl();
-		mobile.login(Properties.userName, Properties.password);
+		String url = driver.getCurrentUrl();
+		mobile.login(credentials.userName, credentials.password);
 		mobile.verifyURLcontains(url);
-		CommonFunctions.logOutMobile(driver);
 	}
 
-/*	@Test(groups={"mobile", "mobile_facebook_login"})
-	public void LoginFacebook(){
+	@Test(groups={"loginTest_002", "mobile"})
+	public void LoginFacebook() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
-		mobile.openHome();
+		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
-		url = driver.getCurrentUrl();
-		mobile.loginFB(Properties.emailFB, Properties.passwordFB);
-		mobile.verifyURLcontains(url);
-		CommonFunctions.logOutMobile(driver);
-	}*/
+		mobile.clickLoginFBButton();
+		mobile.verifyFBLogin();
+	}
+
 }

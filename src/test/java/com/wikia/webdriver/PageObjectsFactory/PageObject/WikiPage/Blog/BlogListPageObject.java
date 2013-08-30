@@ -45,7 +45,7 @@ public class BlogListPageObject extends BasePageObject{
 	
 	public BlogListPageObject followBlogListingPage(String name){
 		getUrl(Global.DOMAIN+"wiki/Blog:"+name+"?action=watch");
-		clickAndWait(followSubmit);
+		scrollAndClick(followSubmit);
 		waitForElementByElement(followedButton);
 		return this;
 	}

@@ -86,11 +86,11 @@ public class IntraWikiSearch extends TestTemplate{
 		search.openIntraWikiSearch();
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
-		search.verifyNamespacesInTitles(URLsContent.fileNS);
+		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
 		search.selectPhotosOnly();
-		search.verifyNamespacesInTitles(URLsContent.fileNS);
+		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
 		search.verifyAllResultsImages(resultsPerPage);
-		search.verifyNamespacesInTitles(URLsContent.fileNS);
+		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
 		search.selectVideosOnly();
 		search.verifyAllResultsVideos(resultsPerPage);
 	}
@@ -101,7 +101,7 @@ public class IntraWikiSearch extends TestTemplate{
 		search.openIntraWikiSearch();
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
-		search.verifyNamespacesInTitles(URLsContent.fileNS);
+		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
 		search.sortBy(sortOptions.duration);
 		List<String> titles1 = search.getTitles();
 		search.sortBy(sortOptions.relevancy);
