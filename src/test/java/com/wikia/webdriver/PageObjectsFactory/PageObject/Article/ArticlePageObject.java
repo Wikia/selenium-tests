@@ -124,9 +124,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 	final String commentAuthorLink = ".edited-by";
 	final String replyCommentSelector = ".article-comm-reply";
 
-	String editCategorySelector = "li[data-name='%categoryName%'] li.editCategory > img";
-	String removeCategorySelector = "li[data-name='%categoryName%'] li.removeCategory > img";
-	String videoInCommentsSelector = ".speech-bubble-message img.Wikia-video-thumb[data-video-name*='%videoName%']";
+	String editCategorySelector =
+			"li[data-name='%categoryName%'] li.editCategory > img";
+	String removeCategorySelector =
+			"li[data-name='%categoryName%'] li.removeCategory > img";
+	String videoInCommentsSelector =
+			".speech-bubble-message img.Wikia-video-thumb[data-video-name*='%videoName%']";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
