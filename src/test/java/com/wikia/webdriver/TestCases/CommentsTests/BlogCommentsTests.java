@@ -35,7 +35,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 		String comment = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
-		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(PageContent.wikiaContributor);
 		blogPage.triggerCommentReply();
 		String commentReply = PageContent.commentText + blogPage.getTimeStamp();
@@ -56,7 +56,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 		String comment = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
-		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userName);
 		blogPage.triggerCommentReply();
 		String commentReply = PageContent.commentText + blogPage.getTimeStamp();
@@ -78,13 +78,13 @@ public class BlogCommentsTests extends NewTestTemplate {
 		String comment = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
-		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userName);
 		blogPage.triggerEditCommentArea();
 		String commentEdited = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndEditComment(commentEdited);
 		blogPage.submitEditComment();
-		blogPage.verifyArticleComment(commentEdited);
+		blogPage.verifyCommentText(commentEdited);
 	}
 
 	@Test(groups = { "BlogComments_004", "BlogCommentsTests"})
@@ -98,7 +98,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 		String comment = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
-		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userNameStaff);
 		String commentText = blogPage.getFirstCommentText();
 		DeleteArticlePageObject delete = blogPage.deleteComment();

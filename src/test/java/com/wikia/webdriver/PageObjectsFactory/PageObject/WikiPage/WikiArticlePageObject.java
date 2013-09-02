@@ -161,17 +161,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
 	}
 
-	public void clickSubmitButton()
-	{
-		executeScript("document.querySelectorAll('#article-comm-submit')[0].click()");
-		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
-	}
-
-	public void verifyCommentVideo(String videoName){
-		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='" + videoName + "']");
-		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
-	}
-
 	public void verifyPageTitle(String title)
 	{
 		title = title.replace("_", " ");
