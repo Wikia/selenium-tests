@@ -25,13 +25,13 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		editor.switchAndWrite(comment);
 		article.submitComment();
-		article.verifyArticleComment(comment);
+		article.verifyCommentText(comment);
 		article.verifyCommentCreator(credentials.userName);
 		article.triggerEditCommentArea();
 		String commentEdited = PageContent.commentText + article.getTimeStamp();
 		editor.switchAndEditComment(commentEdited);
 		article.submitEditComment();
-		article.verifyArticleComment(commentEdited);
+		article.verifyCommentText(commentEdited);
 	}
 
 	@Test(groups = {"ArticleCommentsUser_002", "ArticleComments"})
@@ -43,7 +43,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		editor.switchAndWrite(comment);
 		article.submitComment();
-		article.verifyArticleComment(comment);
+		article.verifyCommentText(comment);
 		article.verifyCommentCreator(credentials.userName);
 		article.triggerCommentReply();
 		String commentReply = PageContent.replyText + article.getTimeStamp();
@@ -61,7 +61,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		editor.switchAndWrite(comment);
 		article.submitComment();
-		article.verifyArticleComment(comment);
+		article.verifyCommentText(comment);
 		article.verifyCommentCreator(PageContent.wikiaContributor);
 		article.triggerCommentReply();
 		String commentReply = PageContent.replyText + article.getTimeStamp();
