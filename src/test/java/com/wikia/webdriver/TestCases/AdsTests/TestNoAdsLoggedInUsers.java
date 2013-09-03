@@ -31,6 +31,9 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		testedWiki = urlBuilder.getUrlForWiki(wikiName);
+		if (config.getQS() != null) {
+			testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+		}
 	}
 
 	private void loginSteps() {
