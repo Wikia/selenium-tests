@@ -17,7 +17,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 
 	public IntraWikiSearch() {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
-		testedWiki = urlBuilder.getUrlForWiki("fallout");
+		testedWiki = urlBuilder.getUrlForWiki("muppet");
 	}
 
 	/*
@@ -46,7 +46,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 	private static final String searchPhraseResults = "a";
 	private static final String searchPaginationResults = "what";
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
-	private static final String searchPhraseSuggestions = "Tes";
+	private static final String searchPhraseSuggestions = "Gon";
 
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",
