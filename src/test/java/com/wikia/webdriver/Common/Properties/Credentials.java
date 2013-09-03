@@ -28,6 +28,27 @@ public class Credentials {
 	public String userName6;
 	public String password6;
 
+	public String userName7;
+	public String password7;
+
+	public String userName8;
+	public String password8;
+
+	public String userName9;
+	public String password9;
+
+	public String userName10;
+	public String password10;
+
+	public String userName11;
+	public String password11;
+
+	public String userName12;
+	public String password12;
+
+	public String userName13;
+	public String password13;
+
 	public String userNameNonLatin;
 	public String userNameNonLatinEncoded;
 	public String passwordNonLatin;
@@ -90,6 +111,20 @@ public class Credentials {
 		password5 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular5.password");
 		userName6 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular6.username");
 		password6 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular6.password");
+		userName7 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular7.username");
+		password7 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular7.password");
+		userName8 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular8.username");
+		password8 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular8.password");
+		userName9 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular9.username");
+		password9 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular9.password");
+		userName10 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular10.username");
+		password10 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular10.password");
+		userName11 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular11.username");
+		password11 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular11.password");
+		userName12 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular12.username");
+		password12 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular12.password");
+		userName13 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular13.username");
+		password13 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular13.password");
 
 		userNameNonLatin = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.username");
 		userNameNonLatinEncoded = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.usernameenc");
