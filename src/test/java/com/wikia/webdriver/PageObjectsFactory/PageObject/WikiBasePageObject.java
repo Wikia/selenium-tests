@@ -813,6 +813,11 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
+	public void openWikiPage(String wikiURL) {
+		getUrl(wikiURL);
+		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	}
+
 	public void verifyPageUnfollowed() {
 		waitForTextToBePresentInElementByElement(followButton, "Follow");
 		PageObjectLogging.log("verifyPageUnfollowed", "page is not followed", true);

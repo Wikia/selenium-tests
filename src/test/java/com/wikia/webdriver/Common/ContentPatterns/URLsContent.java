@@ -61,7 +61,6 @@ public class URLsContent {
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
 
 	//Blog list page url
-
 	public static final String blogList = "wiki/Blog:%listName%/";
 	public static final String blogNameSpace = "wiki/User_blog:%userName%/";
 

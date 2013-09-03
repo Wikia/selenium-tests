@@ -4,14 +4,18 @@ import org.testng.annotations.DataProvider;
 
 public class IntraWikiSearchProvider {
 
-
 	@DataProvider
 	private static final Object[][] getArticleName() {
 		return new Object[][] {
-				{ "QAarticle" },
-				{ "QAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName" },
-				{ "QA_article" },
-				{ "123123123123" } };
+			{ "Gonzo" },
+			{ "100" },
+			{ "What's" },
+			{ "Kermit_the_Frog" },
+			{ "3, 2, 1" },
+			{ "1-2-3-4-5!" },
+			{ "(Sumpin' New)" },
+			{ "109:" },
+		};
 	}
 
 }
