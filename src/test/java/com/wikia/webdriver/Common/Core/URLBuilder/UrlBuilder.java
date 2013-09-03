@@ -40,8 +40,8 @@ public class UrlBuilder {
 		try {
 			if (env.equals("prod")) {
 				url += wikiName + suffix;
-			} else if (env.equals("preview")) {
-				url += "preview." + wikiName + suffix;
+			} else if (env.equals("preview") || env.contains("sandbox")) {
+				url += env + "." + wikiName + suffix;
 			} else if (env.contains("dev")) {
 				String devBoxOwner = env.split("-")[1];
 				if (isWikia) {
