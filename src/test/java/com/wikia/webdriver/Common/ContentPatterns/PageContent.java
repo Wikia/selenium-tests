@@ -38,6 +38,7 @@ public class PageContent {
 	public static String messageWallMessagePrefix = "QAMessageWallMessage";
 	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
+	public static String messageWallCloseReopenReason = "reason";
 
 	//top 10 list
 	public static String top10Description = "DescriptionForList";
@@ -85,6 +86,4 @@ public class PageContent {
 	public static String wikiSignUpBirthMonth = "11";
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
-
-
 }

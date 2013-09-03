@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
@@ -19,8 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-//public class MessageWallPageObject extends MiniEditorComponentObject{
-	public class MessageWallPageObject extends WikiBasePageObject{
+public class MessageWallPageObject extends WikiBasePageObject {
 
 	@FindBy(css="#WallMessageTitle")
 	private WebElement messageTitleField;
@@ -45,11 +45,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	@FindBy(css="a.edit-message")
 	private WebElement editMessageButton;
 	@FindBy(css="#WikiaConfirm")
-	private WebElement removeMessageOverLay;
+	private WebElement removeCloseOverLay;
 	@FindBy(css="#reason")
-	private WebElement removeMessageReason;
+	private WebElement removeCloseReason;
 	@FindBy(css="#WikiaConfirmOk")
-	private WebElement removeMessageConfirmButton;
+	private WebElement removeCloseConfirmButton;
 	@FindBy(css=".speech-bubble-message-removed")
 	private WebElement removeMessageConfirmation;
 	@FindBy(css="div.msg-title a")
@@ -72,6 +72,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	private WebElement messageMainBody;
 	@FindBy (css="ul.comments li[style]")
 	private WebElement newMessageBubble;
+	@FindBy(css="div.msg-toolbar")
+	private WebElement msgToolbar;
+	@FindBy(css=".WikiaMenuElement .close-thread")
+	private WebElement closeThread;
+	@FindBy(css=".WikiaMenuElement .reopen-thread")
+	private WebElement reopenThread;
+	@FindBy (css="div.msg-toolbar nav.wikia-menu-button.secondary.combined")
+	private WebElement secondaryCombinedMoreButton;
+	@FindBy (css=".deleteorremove-infobox")
+	private WebElement infobox;
 	@FindBy (css=".cke_contents > iframe")
 	private WebElement messageFrame;
 
@@ -84,14 +94,25 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	String moreButtonCss = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 	String removeMessageConfirmButtonCSS = "#WikiaConfirmOk";
 
-	private String wikiaEditorTextarea = "textarea.replyBody";
+	String reopenThreadCSS = ".WikiaMenuElement .reopen-thread";
+	String closeThreadCSS = ".WikiaMenuElement .close-thread";
+	String msgToolbarNav = "div.msg-toolbar nav.wikia-menu-button.secondary.combined";
 
+	private String wikiaEditorTextarea = "textarea.replyBody";
 	MiniEditorComponentObject miniEditor;
 
 	public MessageWallPageObject(WebDriver driver) {
 		super(driver);
 		miniEditor = new MiniEditorComponentObject(driver);
 		PageFactory.initElements(driver, this);
+	}
+
+	public MessageWallPageObject openMessageWall(String userName, String wikiURL)
+	{
+		getUrl(wikiURL + URLsContent.userMessageWall + userName);
+		waitForElementByXPath("//h1[@itemprop='name' and contains(text(), '"+userName+"')]");
+		PageObjectLogging.log("openMessageWall", "message wall for user "+userName+" was opened", true, driver);
+		return new MessageWallPageObject(driver);
 	}
 
 	public MessageWallPageObject openMessageWall(String userName)
@@ -245,7 +266,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	 */
 	public void verifyPostedReplyWithMessage(String message, int replyNumber)
 	{
-		waitForTextToBePresentInElementByBy(By.cssSelector("ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message);
+		waitForTextToBePresentInElementByBy(By.cssSelector(
+				"ul.replies li.message[id=\""+replyNumber+"\"] div.msg-body p") , message
+		);
 		PageObjectLogging.log("verifyPostedReplyWithMessage", "message with title verified", true);
 	}
 
@@ -264,10 +287,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		);
 	}
 
-	public void verifyPostedMessageWithLinks(String internallink, String externallink){
-		waitForElementByElement(newMessageBubble);
-		Assertion.assertEquals(messageBody.get(0).getText(), internallink);
-		Assertion.assertEquals(messageBody.get(1).getText(), externallink);
+	public void verifyPostedMessageWithLinks(String link){
+		waitForTextToBePresentInElementByElement(newMessageBubble, link);
+		Assertion.assertEquals(messageBody.get(0).getText(), link);
 		PageObjectLogging.log("verifyPostedMessageWithLinks", "message with links", true);
 	}
 
@@ -303,19 +325,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		executeScript("document.querySelectorAll(\"div.msg-toolbar nav.wikia-menu-button.secondary.combined\")[0].click()");
 		mouseOver(".WikiaMenuElement .remove-message");
 		jQueryNthElemClick(".WikiaMenuElement .remove-message", 0);
-		waitForElementByElement(removeMessageOverLay);
-		waitForElementByElement(removeMessageConfirmButton);
+		waitForElementByElement(removeCloseOverLay);
+		waitForElementByElement(removeCloseConfirmButton);
 
 		if (Global.BROWSER.equals("IE")) {
 
-			WebElement removeMessageReasonParent = getParentElement(removeMessageReason);
+			WebElement removeMessageReasonParent = getParentElement(removeCloseReason);
 			scrollAndClick(removeMessageReasonParent);
 			removeMessageReasonParent.sendKeys(reason);
-			scrollAndClick(removeMessageConfirmButton);
+			scrollAndClick(removeCloseConfirmButton);
 		}
 		else {
-			removeMessageReason.sendKeys(reason);
-			scrollAndClick(removeMessageConfirmButton);
+			removeCloseReason.sendKeys(reason);
+			scrollAndClick(removeCloseConfirmButton);
 		}
 
 		waitForElementByElement(removeMessageConfirmation);
@@ -348,16 +370,38 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		return new MessageWallHistoryPageObject(driver);
 	}
 
-	private void writeEditMessage(String title, String message) {
-		driver.switchTo().frame(messageFrame);
+
+	private void writeEditMessage(String title, String message)
+	{
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+
+		messageBodyField.clear();
 		miniEditor.writeMiniEditor(message);
+		driver.switchTo().defaultContent();
+
+		waitForElementByElement(miniEditor.miniEditorIframe);
+		scrollAndClick(messageTitleEditField2);
+		messageTitleEditField2.sendKeys(Keys.TAB);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+		miniEditor.writeMiniEditor(message);
+
 		driver.switchTo().defaultContent();
 
 		waitForElementByElement(messageTitleEditField);
 		messageTitleEditField2.clear();
 		messageTitleEditField2.sendKeys(title);
 		waitForElementByElement(saveEditButton);
-		jQueryClick(saveEditButton);
+
+		if (Global.BROWSER.equals("IE")) {
+			driver.switchTo().frame(miniEditor.miniEditorIframe);
+			scrollAndClick(messageBodyField);
+			miniEditor.writeMiniEditor(Keys.TAB);
+			miniEditor.writeMiniEditor(Keys.ENTER);
+			driver.switchTo().defaultContent();
+		}
+		else {
+			scrollAndClick(saveEditButton);
+		}
 		PageObjectLogging.log("writeEditMessage", "message edited", true, driver);
 	}
 
@@ -374,31 +418,49 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 		PageObjectLogging.log("clickPublishButton", "publish button is clicked", true, driver);
 	}
 
-	public void writeMessageWithLink(String internalLink, String externalLink, String title) {
+	public void writeMessageWithExternalLink(String externallink, String title) {
 		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
-		miniEditor.addInternalLink(internalLink);
+		miniEditor.addExternalLink(externallink);
 		driver.switchTo().frame(miniEditor.miniEditorIframe);
 		miniEditor.writeMiniEditor(Keys.END);
-		miniEditor.writeMiniEditor(Keys.ENTER);
-		driver.switchTo().defaultContent();
-		miniEditor.addExternalLink(externalLink);
 		PageObjectLogging.log(
 			"writeMessageWithLink",
-			"internal and external links: "+internalLink+" and" +externalLink+ "added",
+			"internal and external links: "+externallink+" added",
 			true
 		);
+		driver.switchTo().defaultContent();
+	}
+
+	public void writeMessageWithInternalLink(String internallink, String title) {
+		scrollAndClick(messageTitleField);
+		messageTitleField.sendKeys(title);
+		triggerMessageArea();
+		miniEditor.addInternalLink(internallink);
+		driver.switchTo().frame(miniEditor.miniEditorIframe);
+		miniEditor.writeMiniEditor(Keys.END);
+		PageObjectLogging.log(
+			"writeMessageWithLink",
+			"internal and external links: "+internallink+" added",
+			true
+		);
+		driver.switchTo().defaultContent();
 	}
 
 	public void writeMessageSourceMode(String title, String message) {
 		scrollAndClick(messageTitleField);
 		messageTitleField.sendKeys(title);
 		triggerMessageArea();
+		waitForElementClickableByElement(sourceModeButton);
 		scrollAndClick(sourceModeButton);
 		waitForElementByElement(sourceModeTextarea);
 		sourceModeTextarea.sendKeys(message);
-		PageObjectLogging.log("writeMessageSourceMode", "message in source mode is written, title: "+title+" body: "+message, true, driver);
+		PageObjectLogging.log(
+				"writeMessageSourceMode",
+				"message in source mode is written, " + "title: "+title+" body: "+message,
+				true, driver
+		);
 	}
 
 	/**
@@ -422,7 +484,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 	 * @param order - specifies order of sorting <br><br> possible values: <br> "NewestThreads", "OldestThreads", "NewestReplies"}
 	 * 	 */
 	public void sortThreads(String order) {
-//		scrollAndClick(sortingMenu);
 		executeScript("document.getElementsByClassName('SortingList')[0].style.display=\"block\"");
 		List<WebElement> list = driver.findElements(sortingList);
 		if (order.equals("NewestThreads")) {
@@ -437,6 +498,72 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 			waitForElementByElement(list.get(2));
 			scrollAndClick(list.get(2));
 		}
-		PageObjectLogging.log("sortThreads", "order of messages sorted: "+order, true, driver);
+		PageObjectLogging.log(
+				"sortThreads",
+				"order of messages sorted: "+order,
+				true,
+				driver
+		);
+	}
+
+
+	public void closeThread(String reason)
+	{
+
+		waitForElementByElement(msgToolbar);
+		setStyle(".buttons", "1", "block");
+		secondaryCombinedMoreButton.click();
+		mouseOver(closeThreadCSS);
+		scrollAndClick(closeThread);
+		waitForElementByElement(removeCloseOverLay);
+		waitForElementByElement(removeCloseConfirmButton);
+		removeCloseReason.sendKeys(reason);
+		removeCloseConfirmButton.click();
+		refreshPage();
+		PageObjectLogging.log(
+				"closeThread",
+				"Thread is closed with the following reason: " + reason,
+				true
+		);
+	}
+
+	public void reopenThread()
+	{
+		waitForElementByElement(msgToolbar);
+		setStyle(".buttons", "1", "block");
+		secondaryCombinedMoreButton.click();
+		mouseOver(reopenThreadCSS);
+		scrollAndClick(reopenThread);
+		refreshPage();
+		PageObjectLogging.log("reopenThread", "Thread is reopen", true);
+	}
+
+	public void verifyClosedThread()
+	{
+		waitForElementByElement(infobox);
+		waitForTextToBePresentInElementByElement(
+				infobox,
+				PageContent.messageWallCloseReopenReason
+		);
+		PageObjectLogging.log(
+				"verifyCloseThread",
+				"closed thread verified",
+				true,
+				driver
+		);
+	}
+
+	public void verifyReopenThread()
+	{
+		waitForElementByElement(msgToolbar);
+		setStyle(".buttons", "1", "block");
+		secondaryCombinedMoreButton.click();
+		waitForElementByElement(closeThread);
+		PageObjectLogging.log(
+				"verifyReopenThread",
+				"reopen thread verified",
+				true,
+				driver
+		);
 	}
 }

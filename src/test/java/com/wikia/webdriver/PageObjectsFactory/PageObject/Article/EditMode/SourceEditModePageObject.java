@@ -80,7 +80,7 @@ public class SourceEditModePageObject extends EditMode{
 
 	public String getSourceContent()
 	{
-		return executeScriptRet("$('.cke_source').attr('value')");
+		return (String) executeScriptRet("$('.cke_source').attr('value')");
 	}
 
 	public void checkSourceContent(String desiredContent){
@@ -243,7 +243,7 @@ public class SourceEditModePageObject extends EditMode{
 			j=i+1;
 			clearSource();
 			clickMore();
-			String content = executeScriptRet("$('.modalContent #edittools_wikimarkup a:nth-child("+j+")').text()");
+			String content = (String) executeScriptRet("$('.modalContent #edittools_wikimarkup a:nth-child("+j+")').text()");
 			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).click();
 			checkSourceContent(content);
 		}
