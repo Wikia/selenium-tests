@@ -216,10 +216,17 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyCommentDeleted(String comment) {
-		for(WebElement elem:commentTextList) {
-			Assertion.assertTrue(
-					!comment.equals(elem.getText())
-					);
+		if (commentTextList.isEmpty()) {
+			PageObjectLogging.log("verifyCommentDeleted", "comment: " + comment
+					+ " was deleted as no comments were found on the article",
+					true);
+		} else {
+			PageObjectLogging.log("verifyCommentDeleted",
+					"comments were found on the article, next step will make sure if comment: "
+							+ comment + " is not among them", true);
+			for (WebElement elem : commentTextList) {
+				Assertion.assertTrue(!comment.equals(elem.getText()));
+			}
 		}
 	}
 
