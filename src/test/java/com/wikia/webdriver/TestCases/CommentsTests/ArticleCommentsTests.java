@@ -1,13 +1,14 @@
 package com.wikia.webdriver.TestCases.CommentsTests;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -69,5 +70,23 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		article.submitReplyComment();
 		article.verifyCommentReply(commentReply);
 		article.verifyReplyCreator(PageContent.wikiaContributor);
+	}
+
+	@Test(groups = {"ArticleCommentsSTAFF_001", "ArticleComments"})
+	public void ArticleCommentsSTAFF_004_deleteComment() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		String comment = PageContent.commentText + article.getTimeStamp();
+		MiniEditorComponentObject editor = article.triggerCommentArea();
+		editor.switchAndWrite(comment);
+		article.submitComment();
+		article.verifyCommentText(comment);
+		article.verifyCommentCreator(credentials.userNameStaff);
+		String commentText = article.getFirstCommentText();
+		DeleteArticlePageObject delete = article.deleteComment();
+		delete.submitDeletion();
+		article.verifyNotificationMessage();
+		article.verifyCommentDeleted(commentText);
 	}
 }
