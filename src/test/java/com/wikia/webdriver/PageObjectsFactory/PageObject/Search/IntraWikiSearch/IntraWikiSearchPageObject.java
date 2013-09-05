@@ -19,12 +19,19 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		driver.get(intraWikiURL);
 	}
 
+	private String ggx = "&uselang=qqx";
+	private String fileNamespace = "File:";
+	private String photoExtension = ".jpg";
+	private String thumbnailsVideosGroup = ".Results a.image.video.lightbox";
+
 	@FindBy(css=".photos-and-videos")
 	private WebElement photosVideos;
 	@FindBy(css="#WikiaSearchHeader input[name=search]")
 	private WebElement searchField;
 	@FindBy(css="#WikiaSearchHeader .wikia-button")
 	private WebElement searchButton;
+	@FindBy(css="#search-v2-button")
+	private WebElement intraSearchButton;
 	@FindBy(css="[value=is_image]")
 	private WebElement filterPhotos;
 	@FindBy(css="[value=is_video]")
@@ -33,11 +40,11 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private WebElement sortingOptions;
 	@FindBy(css="li.result:nth-child(1) a")
 	private WebElement firstResult;
-	@FindBy(css=".Results article h1")
+	@FindBy(css=".Results article h1 .result-link")
 	private List<WebElement> titles;
 	@FindBy(css=".Results article")
 	private List<WebElement> descriptions;
-	@FindBy(css=".Results article li>a")
+	@FindBy(css=".Results article li > a")
 	private List<WebElement> urls;
 	@FindBy(css=".wikia-paginator")
 	private WebElement paginationContainer;
@@ -49,26 +56,41 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private WebElement paginatorPrev;
 	@FindBy(css=".results-wrapper i")
 	private WebElement noResultsCaption;
+	@FindBy(css=".result-count.subtle")
+	private WebElement resultCountMessage;
+	@FindBy(css=".SearchInput .grid-1.alpha")
+	private WebElement searchHeadline;
+	@FindBy(css="#advanced-link")
+	private WebElement advancedButton;
+	@FindBy(css="#AdvancedSearch")
+	private WebElement advancedField;
+	@FindBy(css="#AdvancedSearch label")
+	private List<WebElement> advancedOptions;
+	@FindBy(css="#AdvancedSearch label input")
+	private List<WebElement> advancedOptionInputs;
 	@FindBy(css=".Results .image")
 	private List<WebElement> thumbnailsImages;
 	@FindBy(css=".Results a.image.video.lightbox")
 	private List<WebElement> thumbnailsVideos;
 	@FindBy(css=".autocomplete")
 	private List<WebElement> suggestionsList;
+	@FindBy(css=".search-tabs.grid-1.alpha")
+	private List<WebElement> filterOptions;
+	@FindBy(css=".sprite.play.small")
+	private List<WebElement> playMovieImage;
 
-	public void typeSearchQuery(String query) {
-		waitForElementByElement(searchField);
-		searchField.sendKeys(query);
+	public void addQqxUselang() {
+		String url = getCurrentUrl();
+		getUrl(url + ggx);
 	}
 
-	private void clickSearchbutton() {
-		waitForElementByElement(searchButton);
-		searchButton.click();
+	public void typeSearchQuery(String query) {
+		searchField.sendKeys(query);
 	}
 
 	public void searchFor(String query) {
 		typeSearchQuery(query);
-		clickSearchbutton();
+		searchButton.click();
 		PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
 	}
 
@@ -79,25 +101,30 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		}
 	}
 
-	private void verifyFirstResultName(String query) {
-		waitForElementByElement(firstResult);
-		Assertion.assertStringContains(firstResult.getText(), query.replaceAll("_", " "));
+	private void verifyLanguageTranslation(WebElement element) {
+		Assertion.assertTrue(element.getText().startsWith("("), "some phrases are not translatable");
+		Assertion.assertTrue(element.getText().endsWith(")"), "some phrases are not translatable");
 	}
 
-	private void verifyDescriptions() {
-		for (WebElement elem:descriptions) {
-			Assertion.assertTrue(!elem.getText().isEmpty());
+	public void verifyLanguageTranslation() {
+		for(int i = 0; i < filterOptions.size(); i++) {
+			verifyLanguageTranslation(filterOptions.get(i));
 		}
-	}
-
-	private void verifyUrl() {
-			Assertion.assertEquals(titles.size(), urls.size());
+		verifyLanguageTranslation(resultCountMessage);
+		verifyLanguageTranslation(searchHeadline);
+		verifyLanguageTranslation(advancedButton);
 	}
 
 	public void verifyFirstResult(String query) {
-		verifyFirstResultName(query);
-		verifyDescriptions();
-		verifyUrl();
+		Assertion.assertStringContains(firstResult.getText(), query.replaceAll("_", " "));
+		for (WebElement elem:descriptions) {
+			Assertion.assertTrue(!elem.getText().isEmpty());
+		}
+		Assertion.assertEquals(titles.size(), urls.size());
+	}
+
+	public void verifyFirstResultExtension(String query) {
+		Assertion.assertTrue(titles.get(0).getText().endsWith(query + photoExtension));
 	}
 
 	public void verifyPagination() {
@@ -122,27 +149,23 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void verifyArticlesTheSame(String firstResult) {
-		waitForElementByElement(paginationContainer);
 		Assertion.assertEquals(firstResult, titles.get(0).getText());
 	}
 
-	public String getInnerText() {
+	public String getTitleInnerText() {
 		return titles.get(0).getText();
 	}
 
 	public void verifyArticlesNotTheSame(String firstResult) {
-		waitForElementByElement(paginationContainer);
 		Assertion.assertNotEquals(firstResult, titles.get(0).getText());
 	}
 
 	public void clickNextPaginator() {
-		waitForElementByElement(paginatorNext);
 		scrollAndClick(paginatorNext);
 		PageObjectLogging.log("clickNextPaginator", "next paginator clicked", true);
 	}
 
 	public void clickPrevPaginator() {
-		waitForElementByElement(paginatorPrev);
 		scrollAndClick(paginatorPrev);
 		PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
 	}
@@ -152,18 +175,66 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void verifyNoResults() {
-		waitForElementByElement(noResultsCaption);
 		Assertion.assertEquals("No results found.", noResultsCaption.getText());
 	}
 
+	public void clickAdvancedButton() {
+		advancedButton.click();
+	}
+
+	public void chooseAdvancedOption(int i) {
+		waitForElementByElement(advancedField);
+		advancedOptionInputs.get(i).click();
+		intraSearchButton.click();
+	}
+
+	public void selectAllAdvancedOptions() {
+		clickAdvancedButton();
+		chooseAdvancedOption(0);
+	}
+
+	public void verifyDefaultNamespaces() {
+		waitForElementVisibleByElement(advancedField);
+		for(int i = 0; i < advancedOptions.size(); i++) {
+			if(advancedOptions.get(i).getText().equals("Articles")) {
+				Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
+			}
+			else if(advancedOptions.get(i).getText().equals("Category")) {
+				Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
+			}
+			else {
+				Assertion.assertNull(advancedOptionInputs.get(i).getAttribute("checked"));
+			}
+		}
+	}
+
 	public void selectPhotosVideos() {
-		waitForElementByElement(photosVideos);
 		photosVideos.click();
 		waitForElementByElement(sortingOptions);
 	}
 
+	public void verifyPhotosOnly() {
+		waitForElementByElement(thumbnailsImages.get(0));
+		waitForElementNotPresent(thumbnailsVideosGroup);
+		for(int i = 0; i < thumbnailsImages.size(); i++) {
+			Assertion.assertTrue(titles.get(i).getText().startsWith(fileNamespace));
+		}
+	}
+
+	public void verifyVideosOnly() {
+		Assertion.assertTrue(thumbnailsVideos.size() == 25);
+		Assertion.assertEquals(playMovieImage.size(), thumbnailsVideos.size());
+		for(int i = 0; i < thumbnailsVideos.size(); i++) {
+			verifyNamespace(fileNamespace);
+		}
+	}
+
+	public void verifyNamespace(String namespace) {
+		waitForElementByElement(titles.get(0));
+		Assertion.assertTrue(titles.get(0).getText().startsWith(namespace));
+	}
+
 	public void selectPhotosOnly() {
-		waitForElementByElement(sortingOptions);
 		filterPhotos.click();
 	}
 
@@ -176,7 +247,6 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void selectVideosOnly() {
-		waitForElementByElement(sortingOptions);
 		filterVideos.click();
 	}
 
@@ -191,7 +261,6 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void sortBy(sortOptions option) {
-		waitForElementByElement(sortingOptions);
 		Select dropDown = new Select(sortingOptions);
 		switch (option) {
 		case relevancy:

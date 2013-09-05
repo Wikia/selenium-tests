@@ -5,7 +5,6 @@ import org.testng.annotations.DataProvider;
 public class ArticleDataProvider {
 
 	@DataProvider
-
 	public static final Object[][] getArticleName() {
 		return new Object[][] {
 			{"QAarticle"},

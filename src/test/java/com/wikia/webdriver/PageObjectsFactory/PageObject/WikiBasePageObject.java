@@ -67,8 +67,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement editDropDown;
 	@FindBy(css = "input#wpConfirmB")
 	private WebElement deleteConfirmationButton;
-	@FindBy(xpath = "//div[@class='msg' and contains(text(), 'The comment has been deleted.')]")
-	private WebElement deleteCommentConfirmationMessage;
 	@FindBy(css = ".global-notification div.msg a")
 	private WebElement undeleteLink;
 	@FindBy(css = ".global-notification")
@@ -103,8 +101,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement userProfileAvatar;
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
-	@FindBy(css="input[name=search]")
-	private WebElement searchInput;
 	@FindBy(css=".autocomplete div")
 	private List<WebElement> searchSuggestions;
 	@FindBy(css=".autocomplete div:nth-child(7)")
@@ -153,12 +149,6 @@ public class WikiBasePageObject extends BasePageObject {
 	{
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
-	}
-
-	public void typeSearchQuery(String query){
-		waitForElementByElement(searchInput);
-		builder.sendKeys(searchInput, query).build().perform();
-		PageObjectLogging.log("typeSearchquery", "search query typed on home page", true);
 	}
 
 	public void verifySuggestionDropdown(String query) {

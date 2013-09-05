@@ -18,4 +18,12 @@ public class IntraWikiSearchProvider {
 		};
 	}
 
+	@DataProvider
+	private static final Object[][] getNamespaces() {
+		return new Object[][] {
+			{ "characters", "Category:" },
+			{ "ironwolf", "User:" },
+		};
+	}
+
 }
