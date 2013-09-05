@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,6 +29,10 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	protected WebElement miniEditorEditCommentIFrame;
 	@FindBy(css=".article-comm-edit-box iframe")
 	protected WebElement replyCommentIFrame;
+	@FindBy(css=".comments .cke_contents iframe")
+	public WebElement editMessageWallFrame;
+	@FindBy(css=".replies .cke_contents iframe")
+	public WebElement quoteMessageWallFrame;
 	@FindBy(css=".RTEImageButton .cke_icon")
 	private WebElement addImageButton;
 	@FindBy(css=".RTEVideoButton .cke_icon")
@@ -149,5 +154,20 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		messageBodyField.clear();
 		messageBodyField.sendKeys(reply);
 		PageObjectLogging.log("CommentReplied", "Comment replied", true);
+	}
+
+	public void switchAndEditMessageWall(String reply) {
+		driver.switchTo().frame(editMessageWallFrame);
+		messageBodyField.clear();
+		messageBodyField.sendKeys(reply);
+		PageObjectLogging.log("switchAndEditMessageWall", "message edited", true);
+	}
+
+	public void switchAndQuoteMessageWall(String reply) {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(quoteMessageWallFrame);
+		driver.findElement(By.cssSelector("body#bodyContent")).clear();
+		driver.findElement(By.cssSelector("body#bodyContent")).sendKeys(reply);
+		PageObjectLogging.log("switchAndQuoteMessageWall", "quote typed", true);
 	}
 }

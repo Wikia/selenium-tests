@@ -1,15 +1,9 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,6 +17,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  *
@@ -480,10 +482,13 @@ public class BasePageObject{
 		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
 	}
 
+	public void waitForTextNotPresentInElementByElement(WebElement element, String text) {
+		wait.until(CommonExpectedConditions.textNotPresentInElement(element, text));
+	}
+
 	public void waitForTextToBePresentInElementByBy(By by, String text) {
-		WebElement temp = driver.findElement(by);
 		wait.until(CommonExpectedConditions
-				.textToBePresentInElement(temp, text));
+				.textToBePresentInElement(by, text));
 	}
 
 	public void waitForStringInURL(String givenString) {
@@ -691,5 +696,10 @@ public class BasePageObject{
 				"e.which=40; $(arguments[0]).trigger(e);",
 				element
 		);
+	}
+
+	public void setStyle(String  selector, String style) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector(arguments[0]).style.display = '"+style+"'", selector);
 	}
 }

@@ -20,7 +20,6 @@
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesArticleTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsEditMode"/>
 			<class name="com.wikia.webdriver.TestCases.Top_10_list_Tests.Top_10_list_Tests"/>
-			<class name="com.wikia.webdriver.TestCases.MessageWallTests.MessageWallTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForcedLoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
@@ -85,6 +84,8 @@
 			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowBlogTests"/>
 			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowPhotosTests"/>
 			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowVideosTests"/>
+			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallTests"/>
+			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallFeaturesTests"/>
 		</classes>
 	</test>
 </suite>
