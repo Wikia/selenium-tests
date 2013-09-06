@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,6 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		driver.get(intraWikiURL);
 	}
 
-	private String ggx = "&uselang=qqx";
-	private String fileNamespace = "File:";
 	private String photoExtension = ".jpg";
 	private String thumbnailsVideosGroup = ".Results a.image.video.lightbox";
 
@@ -80,8 +79,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private List<WebElement> playMovieImage;
 
 	public void addQqxUselang() {
-		String url = getCurrentUrl();
-		getUrl(url + ggx);
+		appendToUrl(URLsContent.translatableLanguage);
 	}
 
 	public void typeSearchQuery(String query) {
@@ -180,17 +178,20 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 
 	public void clickAdvancedButton() {
 		advancedButton.click();
+		PageObjectLogging.log("clickAdvancedButton", "Advance button was clicked", true, driver);
 	}
 
 	public void chooseAdvancedOption(int i) {
 		waitForElementByElement(advancedField);
 		advancedOptionInputs.get(i).click();
 		intraSearchButton.click();
+		PageObjectLogging.log("chooseAdvancedOption", "chosen advance option is selected", true, driver);
 	}
 
 	public void selectAllAdvancedOptions() {
 		clickAdvancedButton();
 		chooseAdvancedOption(0);
+		PageObjectLogging.log("selectAllAdvancedOptions", "All advance options are selected", true, driver);
 	}
 
 	public void verifyDefaultNamespaces() {
@@ -211,13 +212,14 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	public void selectPhotosVideos() {
 		photosVideos.click();
 		waitForElementByElement(sortingOptions);
+		PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected", true, driver);
 	}
 
 	public void verifyPhotosOnly() {
 		waitForElementByElement(thumbnailsImages.get(0));
 		waitForElementNotPresent(thumbnailsVideosGroup);
 		for(int i = 0; i < thumbnailsImages.size(); i++) {
-			Assertion.assertTrue(titles.get(i).getText().startsWith(fileNamespace));
+			Assertion.assertTrue(titles.get(i).getText().startsWith(URLsContent.fileNameSpace));
 		}
 	}
 
@@ -225,7 +227,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		Assertion.assertTrue(thumbnailsVideos.size() == 25);
 		Assertion.assertEquals(playMovieImage.size(), thumbnailsVideos.size());
 		for(int i = 0; i < thumbnailsVideos.size(); i++) {
-			verifyNamespace(fileNamespace);
+			verifyNamespace(URLsContent.fileNameSpace);
 		}
 	}
 
@@ -236,6 +238,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 
 	public void selectPhotosOnly() {
 		filterPhotos.click();
+		PageObjectLogging.log("selectPhotosOnly", "Photos option is selected", true, driver);
 	}
 
 	public void verifyAllResultsImages(int numberOfResults) {
@@ -248,6 +251,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 
 	public void selectVideosOnly() {
 		filterVideos.click();
+		PageObjectLogging.log("selectVideosOnly", "Videos option is selected", true, driver);
 	}
 
 	public void verifyNamespacesInTitles(String nameSpace) {

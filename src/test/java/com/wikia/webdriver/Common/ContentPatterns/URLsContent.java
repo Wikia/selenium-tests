@@ -103,8 +103,8 @@ public class URLsContent {
 
 	public static String intraWikiSearchPage = "wiki/Special:Search";
 
-	//query strings
-	public static String disableMessages = "uselang=qqx";
+	//languages
+	public static String translatableLanguage = "uselang=qqx";
 
 	//External sites
 	public static String facebookDomain = "facebook.com";

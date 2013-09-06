@@ -86,5 +86,4 @@ public class PageContent {
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
 
-
 }
