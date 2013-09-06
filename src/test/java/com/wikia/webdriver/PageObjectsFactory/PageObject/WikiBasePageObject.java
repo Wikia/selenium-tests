@@ -198,7 +198,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialFBConnectPageObject(driver);
 	}
 
-
 	public ForumPageObject openForumMainPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialForum);
 		PageObjectLogging.log("openForumPage", "forum page opened", true);

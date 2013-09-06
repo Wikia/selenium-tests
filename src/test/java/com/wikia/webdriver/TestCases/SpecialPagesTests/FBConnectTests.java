@@ -34,8 +34,7 @@ public class FBConnectTests extends NewTestTemplate {
 	public void FBConnect_002_verifyFBLibraryIsLoaded_logged() {
 		SpecialFBConnectPageObject fbConnectPage = new SpecialFBConnectPageObject(
 				driver);
-		fbConnectPage.openWikiPage();
-		fbConnectPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
+		fbConnectPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		fbConnectPage.openSpecialFBConnectPage(wikiURL);
 		fbConnectPage.verifyFacebookButtonAppeared();
 	}

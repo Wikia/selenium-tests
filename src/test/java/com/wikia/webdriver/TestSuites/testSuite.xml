@@ -85,6 +85,7 @@
 			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowBlogTests"/>
 			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowPhotosTests"/>
 			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowVideosTests"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FBConnectTests"/>
 		</classes>
 	</test>
 </suite>
