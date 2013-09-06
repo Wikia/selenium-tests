@@ -17,8 +17,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"ArticleCommentsUser_001", "ArticleComments"})
-	public void ArticleCommentsUser_001_editComment() {
+	@Test(groups = {"ArticleComments_001", "ArticleComments"})
+	public void ArticleComments_001_editComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -35,8 +35,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		article.verifyCommentText(commentEdited);
 	}
 
-	@Test(groups = {"ArticleCommentsUser_002", "ArticleComments"})
-	public void ArticleCommentsUser_002_replyComment() {
+	@Test(groups = {"ArticleComments_002", "ArticleComments"})
+	public void ArticleComments_002_replyComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -54,8 +54,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		article.verifyReplyCreator(credentials.userName);
 	}
 
-	@Test(groups = {"ArticleCommentsAnon_001", "ArticleComments"})
-	public void ArticleCommentsAnon_003_replyComment() {
+	@Test(groups = {"ArticleComments_003", "ArticleComments"})
+	public void ArticleComments_003_anonReplyComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String comment = PageContent.commentText + article.getTimeStamp();
@@ -72,8 +72,8 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		article.verifyReplyCreator(PageContent.wikiaContributor);
 	}
 
-	@Test(groups = {"ArticleCommentsSTAFF_001", "ArticleComments"})
-	public void ArticleCommentsSTAFF_004_deleteComment() {
+	@Test(groups = {"ArticleComments_004", "ArticleComments"})
+	public void ArticleComments_004_deleteComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
