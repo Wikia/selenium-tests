@@ -204,7 +204,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new MiniEditorComponentObject(driver);
 	}
 
-	public DeleteArticlePageObject deleteComment() {
+	public DeleteArticlePageObject deleteFirstComment() {
 		scrollToElement(allCommentsArea);
 		WebElement mostRecentComment = articleComments.get(0);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -216,18 +216,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyCommentDeleted(String comment) {
-		if (commentTextList.isEmpty()) {
-			PageObjectLogging.log("verifyCommentDeleted", "comment: " + comment
-					+ " was deleted as no comments were found on the article",
-					true);
-		} else {
-			PageObjectLogging.log("verifyCommentDeleted",
-					"comments were found on the article, next step will make sure if comment: "
-							+ comment + " is not among them", true);
+		if (!commentTextList.isEmpty()) {
 			for (WebElement elem : commentTextList) {
 				Assertion.assertTrue(!comment.equals(elem.getText()));
 			}
 		}
+		PageObjectLogging.log("verifyCommentDeleted", "comment " + comment
+				+ " was deleted", true);
 	}
 
 	public String getFirstCommentText() {
