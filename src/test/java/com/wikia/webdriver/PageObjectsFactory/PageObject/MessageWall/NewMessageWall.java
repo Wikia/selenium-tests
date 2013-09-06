@@ -1,5 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,6 +43,8 @@ public class NewMessageWall extends WikiBasePageObject {
 	private WebElement editMessageWrapper;
 	@FindBy (css=".speech-bubble-message-removed")
 	private WebElement removedThreadMessage;
+	@FindBy (css=".msg-title > a")
+	private List<WebElement> threadList;
 
 	By messageTitleBy = By.cssSelector(".msg-title");
 	By messageBodyBy = By.cssSelector(".msg-body");
@@ -60,6 +64,7 @@ public class NewMessageWall extends WikiBasePageObject {
 	By closeThreadInfobox = By.cssSelector(".deleteorremove-bubble > .message");
 	By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
 	By replyButtonBy = By.cssSelector(".replyButton");
+	By replyBodyBy = By.cssSelector(".replyBody");
 
 	String newMessageMenu = ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
 	String newMessageWrapper = ".comments li.SpeechBubble.message.message-main:nth-child(1)";
@@ -71,6 +76,11 @@ public class NewMessageWall extends WikiBasePageObject {
 
 	public MiniEditorComponentObject triggerMessageArea() {
 		messageMainBody.click();
+		return new MiniEditorComponentObject(driver);
+	}
+
+	public MiniEditorComponentObject triggerReplyMessageArea() {
+		driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy).click();
 		return new MiniEditorComponentObject(driver);
 	}
 
@@ -244,5 +254,15 @@ public class NewMessageWall extends WikiBasePageObject {
 	public void verifyImageAdded(String title) {
 		waitForTextToBePresentInElementByBy(messageTitleBy, title);
 		driver.findElement(firstMessageWrapperBy).findElement(imageBy);
+	}
+
+	public NewMessageWallThreadPageObject openThread(String threadName) {
+		for (WebElement thread:threadList) {
+			if (thread.getText().contains(threadName)){
+				scrollAndClick(thread);
+			}
+			break;
+		}
+		return new NewMessageWallThreadPageObject(driver);
 	}
 }

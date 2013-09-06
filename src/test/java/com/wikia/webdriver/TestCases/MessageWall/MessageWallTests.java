@@ -19,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageW
  * 3. Write message, close,
  * 4. Write message, quote,
  * 5. Write message, preview
+ * 6. Write message, reply
  *
  */
 public class MessageWallTests extends NewTestTemplate {
@@ -114,5 +115,24 @@ public class MessageWallTests extends NewTestTemplate {
 		preview.verifyTextContent(message);
 		preview.publish();
 		wall.verifyMessageText(title, message, credentials.userName);
+	}
+
+	@Test(groups = {"MessageWall_005", "MessageWall"})
+	public void MessageWall_006_writeReply() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+		MiniEditorComponentObject mini = wall.triggerMessageArea();
+		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		mini.switchAndWrite(message);
+		wall.writeTitle(title);
+		wall.submit();
+		wall.verifyMessageText(title, message, credentials.userName);
+		MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
+		String reply = PageContent.messageWallQuotePrefix + wall.getTimeStamp();
+		miniReply.switchAndQuoteMessageWall(reply);;
+		wall.submitQuote();
+		wall.verifyQuote(reply);
 	}
 }

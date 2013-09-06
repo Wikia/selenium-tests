@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -47,9 +48,8 @@ public class NotificationsComponentObject extends BasePageObject {
 	/**
 	 * hover the mouse over the notification bubble and wait for it to expand
 	 */
-	protected void openNotifications() {
+	private void openNotifications() {
 		executeScript("$('#WallNotifications li ul.subnav').addClass('show');$('#WallNotifications').mouseover();");
-		builder.moveToElement(notifications).build().perform();
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * loaded using ajax request. This method waits until this requests
 	 * completes.
 	 */
-	protected void waitForNotificationsMessagesToLoad() {
+	private void waitForNotificationsMessagesToLoad() {
 		waitForElementVisibleByElement(notificationsSubnav);
 		waitForElementPresenceByBy(notificationDropdownForCurrentWiki);
 		waitForElementNotPresent(emptyNotificationDropdownForCurrentWiki);
@@ -92,20 +92,8 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * Wait until ajax call updates the notifications status (showing the number
 	 * of unread notifications)
 	 */
-	public void waitForNotificationsLoaded() {
+	private void waitForNotificationsLoaded() {
 		waitForElementNotPresent(emptyNumberOfUnreadNotifications);
-	}
-
-	/**
-	 * Fetches the address that of n-th notification points to. Keep in mind the
-	 * the notification index starts with 1, not 0.
-	 */
-	public String getNotificationLink(int notificationNumber) {
-		waitForElementByElement(notificationsList.get(notificationNumber - 1));
-		PageObjectLogging.log("getNotificationLink", "get addres that of "
-				+ notificationNumber + " notification points to", true, driver);
-		return notificationsList.get(notificationNumber - 1).getAttribute(
-				"href");
 	}
 
 	/**
@@ -131,7 +119,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	/**
 	 * Return the number of unread notifications
 	 */
-	public int getNumberOfUnreadNotifications() {
+	private int getNumberOfUnreadNotifications() {
 		this.waitForNotificationsLoaded();
 		String text = bubblesCount.getText();
 		if (!text.isEmpty()) {
@@ -144,7 +132,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * This should be called after expanding the notifications dropdown It will
 	 * return a list of unread notifications that have a given title
 	 */
-	public ArrayList<WebElement> getUnreadNotificationsForTitle(String title) {
+	private ArrayList<WebElement> getUnreadNotificationsForTitle(String title) {
 		ArrayList<WebElement> notifications = new ArrayList<WebElement>();
 		for (int i = 0; i < this.notificationsList.size(); i++) {
 			WebElement n = this.notificationsList.get(i);
@@ -163,7 +151,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * marks all the notifications as read
 	 *
 	 */
-	public void markNotificationsAsRead() {
+	public void clickMarkNotificationsAsRead() {
 		if (this.getNumberOfUnreadNotifications() > 0) {
 			if (this.markNotificationsAsReadThisWiki.isDisplayed()) {
 				this.scrollAndClick(this.markNotificationsAsReadThisWiki);
@@ -173,6 +161,42 @@ public class NotificationsComponentObject extends BasePageObject {
 				this.scrollAndClick(this.markNotificationsAsReadAllWikis);
 			}
 			this.waitForElementNotPresent(unreadNotificationReddot);
+		}
+	}
+
+	/**
+	 * This should be called after showNotifications method
+	 * @param messageTitle
+	 * @param messageAuthor
+	 */
+	public void verifyNotification(String messageTitle, String messageAuthor) {
+		Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
+		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
+		Assertion.assertEquals(1, notificationsListForTitle.size());
+		String notificationMessageBody = notificationsListForTitle.get(0)
+				.findElement(By.cssSelector("div.msg-body")).getText();
+		Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
+	}
+
+	/**
+	 * This should be called after showNotifications method
+	 * @param messageTitle
+	 * @param messageAuthor
+	 */
+	public void verifyNotification(String messageTitle, String messageAuthor, String messageContent) {
+		Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
+		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
+		Assertion.assertEquals(1, notificationsListForTitle.size());
+		String notificationMessageBody = notificationsListForTitle.get(0)
+				.findElement(By.cssSelector("div.msg-body")).getText();
+		Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
+		Assertion.assertTrue(notificationMessageBody.contains(messageContent));
+	}
+
+	public void markAllNotificationsAsRead() {
+		if (getNumberOfUnreadNotifications() > 0) {
+			showNotifications();
+			clickMarkNotificationsAsRead();
 		}
 	}
 }
