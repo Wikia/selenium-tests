@@ -101,7 +101,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userNameStaff);
 		String commentText = blogPage.getFirstCommentText();
-		DeleteArticlePageObject delete = blogPage.deleteComment();
+		DeleteArticlePageObject delete = blogPage.deleteFirstComment();
 		delete.submitDeletion();
 		blogPage.verifyNotificationMessage();
 		blogPage.verifyCommentDeleted(commentText);
