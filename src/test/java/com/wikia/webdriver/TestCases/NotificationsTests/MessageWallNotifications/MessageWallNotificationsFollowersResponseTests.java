@@ -19,6 +19,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
+ * 1. User 5 is unfollowing user 6 message wall,
+ * 2. User 6 is writing message on his own message wall,
+ * 3. User 5 is following user 6 message wall,
+ * 4. User 6 is replying to his message on his own message wall,
+ * 5. User 5 is notified about user 6 reply
+ *
  */
 public class MessageWallNotificationsFollowersResponseTests extends NewTestTemplate {
 

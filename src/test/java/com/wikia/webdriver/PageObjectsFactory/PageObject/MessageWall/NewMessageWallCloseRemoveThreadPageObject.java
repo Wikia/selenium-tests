@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
@@ -24,6 +25,7 @@ public class NewMessageWallCloseRemoveThreadPageObject extends WikiBasePageObjec
 	public NewMessageWall closeRemoveThread(String reason) {
 		removeReasonField.sendKeys(reason);
 		removeConfirmButton.click();
+		PageObjectLogging.log("closeRemoveThread", "thread removed with reason " + reason, true);
 		return new NewMessageWall(driver);
 	}
 }

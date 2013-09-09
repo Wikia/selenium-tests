@@ -698,8 +698,8 @@ public class BasePageObject{
 		);
 	}
 
-	public void setStyle(String  selector, String style) {
+	public void setDisplayStyle(String  selector, String style) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("document.querySelector(arguments[0]).style.display = '"+style+"'", selector);
+		js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector, style);
 	}
 }

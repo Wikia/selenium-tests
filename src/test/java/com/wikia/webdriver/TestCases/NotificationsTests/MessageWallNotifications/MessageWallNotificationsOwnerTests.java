@@ -17,8 +17,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageW
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
- *1. User 5 is posting message on user 6 message wall
- *2. User 6 is notified about user 6 message
+ * 1. User 5 is posting message on user 6 message wall
+ * 2. User 6 is notified about user 6 message
+ *
  */
 public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 

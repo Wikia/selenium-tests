@@ -18,7 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageW
  * 1. User 5 is writing message on his message wall,
  * 2. User 6 is replying on user 5 message wall,
  * 3. User 5 is replying on user 6 message wall,
- * 3. USer 6 is notified about reply on user's 5 message wall
+ * 3. User 6 is notified about reply on user's 5 message wall
  *
  */
 public class MessageWallNotificationsThreadParticipantTests extends NewTestTemplate{

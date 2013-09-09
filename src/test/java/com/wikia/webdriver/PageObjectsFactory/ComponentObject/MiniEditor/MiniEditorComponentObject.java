@@ -164,7 +164,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	}
 
 	public void switchAndQuoteMessageWall(String reply) {
-		driver.switchTo().defaultContent();
 		driver.switchTo().frame(quoteMessageWallFrame);
 		driver.findElement(By.cssSelector("body#bodyContent")).clear();
 		driver.findElement(By.cssSelector("body#bodyContent")).sendKeys(reply);

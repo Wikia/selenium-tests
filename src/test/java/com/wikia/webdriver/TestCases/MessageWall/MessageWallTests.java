@@ -14,13 +14,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageW
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
- * 1. Write message, edit
- * 2. Write message, remove,
- * 3. Write message, close,
- * 4. Write message, quote,
- * 5. Write message, preview
- * 6. Write message, reply
- *
+ * 1. Write and edit message,
+ * 2. Write and remove message,
+ * 3. Write and close message,,
+ * 4. Write and quote message,
+ * 5. Write and preview message,
+ * 6. Write and reply message,
  */
 public class MessageWallTests extends NewTestTemplate {
 

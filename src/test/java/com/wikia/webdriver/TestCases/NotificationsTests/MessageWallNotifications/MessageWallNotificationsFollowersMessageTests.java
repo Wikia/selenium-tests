@@ -18,6 +18,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
+ * 1. User 5 is following user 6 message wall
+ * 2. User 6 is writig a message on his own message wall,
+ * 3. User 5 is notified about the message
+ *
  */
 public class MessageWallNotificationsFollowersMessageTests extends NewTestTemplate {
 
