@@ -196,15 +196,15 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		CommonUtils.appendTextToFile(screenPath + imageCounter + ".html",
 				driver.getPageSource());
 		String className = success ? "success" : "error";
-		StringBuilder builder = new StringBuilder();
-		builder.append(
-				"<tr class=\"" + className + "\"><td>" + command
-				+ "</td><td>" + description
-				+ "</td><td> <br/><a href='screenshots/screenshot"
-				+ imageCounter
-				+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
-				+ imageCounter + ".html'>HTML Source</a></td></tr>");
-		CommonUtils.appendTextToFile(logPath, builder.toString());
+
+		builder.tr().classAttr(className+"lowLevelAction");
+			builder.td().text(description).end();
+			builder.td().text(command).end();
+			builder.td();
+				builder.br().a().href("screenshots/screenshot"+imageCounter+".png").text("screenshot").end();
+				builder.br().a().href("screenshots/screenshot"+imageCounter+".html").text("HTML Source").end();
+			builder.end();
+		builder.end();
 		logJSError(driver);
 	}
 

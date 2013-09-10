@@ -193,7 +193,7 @@ public class main extends TestTemplate{
 					builder.td().text("command").end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
-// log with driver (private)
+// log with driver (private) | done
 				builder.tr().classAttr(className+"lowLevelAction");
 					builder.td().text("description").end();
 					builder.td().text("command").end();
