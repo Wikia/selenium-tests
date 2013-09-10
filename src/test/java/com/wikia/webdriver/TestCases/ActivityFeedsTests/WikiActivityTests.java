@@ -68,7 +68,7 @@ public class WikiActivityTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String blogTitle = PageContent.blogPostNamePrefix + base.getTimeStamp();
 		String blogContent = PageContent.blogContent + base.getTimeStamp();
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		SpecialCreatePagePageObject createBlogPage = userProfile.clickOnCreateBlogPost();
 		VisualEditModePageObject visualEditMode = createBlogPage.populateTitleField(blogTitle);

@@ -21,6 +21,8 @@ public class PreviewEditModePageObject extends EditMode {
 	By videoWidthSelector = By.cssSelector("img.thumbimage");
 	By videoCaptionSelector = By.cssSelector(".thumbcaption");
 	By videoNoCaptionSelector = By.cssSelector(".Wikia-video-thumb:not(.thumbimage)");
+	By contentWrapper = By.cssSelector("#mw-content-text");
+	By publishButton = By.cssSelector("#publish");
 
 	String videoPostionSelector = "figure.t%position%";
 
@@ -81,5 +83,13 @@ public class PreviewEditModePageObject extends EditMode {
 		previewModal.findElement(closeButton).click();
 		waitForElementNotPresent(closeButton);
 		PageObjectLogging.log("closePreviewModal", "preview modal closed", true);
+	}
+
+	public void verifyTextContent(String desiredText) {
+		Assertion.assertEquals(desiredText, previewModal.findElement(contentWrapper).getText());
+	}
+
+	public void publish() {
+		previewModal.findElement(publishButton).click();
 	}
 }

@@ -36,8 +36,9 @@ public class PageContent {
 	public static String messageWallTitlePrefix = "QAMessageWallTitle";
 	public static String messageWallTitleEditPrefix = "QAMessageWallTitleEdit";
 	public static String messageWallMessagePrefix = "QAMessageWallMessage";
-	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
+	public static String messageWallMessageEditPrefix = "QAMessageWallEditMessage";
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
+	public static String messageWallQuotePrefix = "QAQuote";
 
 	//top 10 list
 	public static String top10Description = "DescriptionForList";
@@ -46,8 +47,9 @@ public class PageContent {
 	public static String top10listNamePrefix = "Top10list";
 	public static String relatedPageName = "PageToCheckTop10ListFetching";
 	//links
-	public static String externalLink = "www.wikia.com";
+	public static String externalLink = "http://www.wikia.com/";
 	public static String internalLink = "Formatting";
+	public static String textLink = "qaLink";
 
 	//forum
 	public static String forumTitlePrefix = "QABoardTitle ";

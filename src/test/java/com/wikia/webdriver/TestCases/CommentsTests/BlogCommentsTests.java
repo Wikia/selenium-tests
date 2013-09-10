@@ -28,7 +28,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 	@Test(groups = { "BlogComments_001", "BlogCommentsTests"})
 	public void BlogComments_001_Anon_commentReply() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
@@ -49,7 +49,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 	public void BlogComments_002_User_commentReply() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
@@ -71,7 +71,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 	public void BlogComments_003_User_editComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
@@ -91,7 +91,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 	public void BlogComments_004_Admin_deleteComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
