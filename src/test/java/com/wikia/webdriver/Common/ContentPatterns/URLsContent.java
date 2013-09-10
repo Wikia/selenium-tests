@@ -34,6 +34,7 @@ public class URLsContent {
 	public static final String specialPhalanx = "wiki/Special:Phalanx";
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
+
 	public static final String specialCreateBlogPage = "wiki/Special:CreateBlogPage";
 	public static final String specialPreferences = "wiki/Special:Preferences";
 	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
@@ -60,7 +61,6 @@ public class URLsContent {
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
 
 	//Blog list page url
-
 	public static final String blogList = "wiki/Blog:%listName%/";
 	public static final String blogNameSpace = "wiki/User_blog:%userName%/";
 
@@ -95,9 +95,16 @@ public class URLsContent {
 	// History Pages
 	public static String historyAction = "action=history";
 
-    // Article Pages
-    public static String articleName001 = "TestVid001";
-    public static String articleName002 = "TestVid003";
+	// Article Pages
+	public static String articleName001 = "TestVid001";
+	public static String articleName002 = "TestVid002";
+	public static String articleName003 = "TestVid003";
+	public static String articleName004 = "TestVid004";
+
+	public static String intraWikiSearchPage = "wiki/Special:Search";
+
+	//languages
+	public static String translatableLanguage = "uselang=qqx";
 
 	//External sites
 	public static String facebookDomain = "facebook.com";

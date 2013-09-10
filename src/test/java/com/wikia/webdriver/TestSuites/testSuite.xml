@@ -62,6 +62,7 @@
 			<class name="com.wikia.webdriver.TestCases.VideoTests.Modal.VetModalWidthTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.OnWikiSearchTest"/>
+			<class name="com.wikia.webdriver.TestCases.SearchTests.IntraWikiSearch"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.ForumNotificationsTests"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotificationsTests"/>
 			<class name="com.wikia.webdriver.TestCases.EventTrackingTests.EditorEventTrackingTests"/>
