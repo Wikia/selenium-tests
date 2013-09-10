@@ -1,7 +1,6 @@
 package com.wikia.webdriver.Common.Core.Configuration;
 
 import com.wikia.webdriver.Common.Properties.Credentials;
-
 import java.io.File;
 
 /**
@@ -13,6 +12,7 @@ public abstract class AbstractConfiguration {
 	public abstract String getBrowser();
 	public abstract String getEnv();
 	public abstract String getWikiName();
+	public abstract String getQS();
 	public abstract File getCaptchaFile();
 	public abstract boolean loginCookieAvailable();
 	protected abstract String getCredentialsFilePath();

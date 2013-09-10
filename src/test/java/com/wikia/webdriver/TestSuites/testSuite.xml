@@ -90,6 +90,7 @@
 			<class name="com.wikia.webdriver.TestCases.FollowingTests.FollowVideosTests"/>
 			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallTests"/>
 			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallFeaturesTests"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FBConnectTests"/>
 		</classes>
 	</test>
 </suite>
