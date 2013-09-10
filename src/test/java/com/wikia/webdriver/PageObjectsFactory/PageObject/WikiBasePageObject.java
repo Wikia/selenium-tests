@@ -38,6 +38,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
@@ -53,6 +54,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActi
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -148,7 +150,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
 
-	public UserProfilePageObject navigateToProfilePage(String userName, String wikiURL) {
+	public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
 		getUrl(wikiURL + "wiki/User:" + userName);
 		return new UserProfilePageObject(driver);
 	}
@@ -223,6 +225,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public FilePagePageObject openFilePage(String wikiURL, String fileName) {
 		getUrl(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName);
 		return new FilePagePageObject(driver);
+	}
+
+	public NewMessageWall openMessageWall(String userName, String wikiURL) {
+		getUrl(wikiURL + URLsContent.userMessageWall + userName);
+		return new NewMessageWall(driver);
 	}
 
 	private void clickContributeButton() {
@@ -802,5 +809,10 @@ public class WikiBasePageObject extends BasePageObject {
 		jQueryClick(followButton);
 		waitForTextToBePresentInElementByElement(followButton, "Following");
 		PageObjectLogging.log("followArticle", "page is followed", true, driver);
+	}
+
+	public WatchPageObject unfollowCurrentUrl() {
+		driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.unfollowParameter));
+		return new WatchPageObject(driver);
 	}
 }

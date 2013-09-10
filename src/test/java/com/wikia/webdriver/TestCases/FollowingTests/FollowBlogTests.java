@@ -26,7 +26,7 @@ public class FollowBlogTests extends NewTestTemplate {
 	public void FollowBlog_001_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		blogTitle = blogPage.getBlogName();
