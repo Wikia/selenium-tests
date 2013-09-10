@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
@@ -76,7 +75,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 		base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
-		notifications.verifyNotification(title, Properties.userName6);
+		notifications.verifyNotification(title, credentials.userName6);
 	}
 
 

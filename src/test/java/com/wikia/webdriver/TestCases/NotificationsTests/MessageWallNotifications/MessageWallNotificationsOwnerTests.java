@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Notifications.NotificationsComponentObject;
@@ -35,15 +34,15 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 	)
 	public void wallOwnerReceivesNotification_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
-		NewMessageWall wall = base.openMessageWall(credentials.userName6, wikiURL);
+		base.logInCookie(credentials.userName9, credentials.userName9, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userName10, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
 		title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
-		wall.verifyMessageText(title, message, credentials.userName5);
+		wall.verifyMessageText(title, message, credentials.userName9);
 	}
 
 	@Test(
@@ -55,10 +54,10 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 	)
 	public void wallOwnerReceivesNotification_verification() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName6, credentials.password6, wikiURL);
+		base.logInCookie(credentials.userName10, credentials.userName10, wikiURL);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
-		notifications.verifyNotification(title, Properties.userName5);
+		notifications.verifyNotification(title, credentials.userName9);
 	}
 
 }
