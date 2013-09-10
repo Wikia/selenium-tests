@@ -76,13 +76,13 @@ public class NewMessageWall extends WikiBasePageObject {
 	}
 
 	public MiniEditorComponentObject triggerMessageArea() {
-		messageMainBody.click();
+		jQueryFocus(messageMainBody);
 		PageObjectLogging.log("triggerMessageArea", "message area triggered", true);
 		return new MiniEditorComponentObject(driver);
 	}
 
 	public MiniEditorComponentObject triggerReplyMessageArea() {
-		driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy).click();
+		jQueryFocus(driver.findElement(firstMessageWrapperBy).findElement(replyBodyBy));
 		PageObjectLogging.log("triggerReplyMessageArea", "reply message area triggered", true);
 		return new MiniEditorComponentObject(driver);
 	}
