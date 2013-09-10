@@ -78,6 +78,10 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	@FindBy(css=".sprite.play.small")
 	private List<WebElement> playMovieImage;
 
+	/*
+	 * This method is checking whether text is translatable
+	 * by adding "&uselang=qqx" to URl
+	 */
 	public void addQqxUselang() {
 		appendToUrl(URLsContent.translatableLanguage);
 	}
@@ -146,7 +150,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		Assertion.assertTrue(titles.size() < 25);
 	}
 
-	public void verifyArticlesTheSame(String firstResult) {
+	public void verifyFirstArticleNameTheSame(String firstResult) {
 		Assertion.assertEquals(firstResult, titles.get(0).getText());
 	}
 
@@ -154,7 +158,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		return titles.get(0).getText();
 	}
 
-	public void verifyArticlesNotTheSame(String firstResult) {
+	public void verifyFirstArticleNameNotTheSame(String firstResult) {
 		Assertion.assertNotEquals(firstResult, titles.get(0).getText());
 	}
 
@@ -227,7 +231,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		Assertion.assertTrue(thumbnailsVideos.size() == 25);
 		Assertion.assertEquals(playMovieImage.size(), thumbnailsVideos.size());
 		for(int i = 0; i < thumbnailsVideos.size(); i++) {
-			verifyNamespace(URLsContent.fileNameSpace);
+			Assertion.assertTrue(titles.get(i).getText().startsWith(URLsContent.fileNameSpace));
 		}
 	}
 

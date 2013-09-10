@@ -805,7 +805,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void openWikiPage(String wikiURL) {
 		getUrl(wikiURL);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+		PageObjectLogging.log("openWikiPage", "Wiki page is opened", true);
 	}
 
 	public void verifyPageUnfollowed() {

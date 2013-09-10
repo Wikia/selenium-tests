@@ -11,6 +11,23 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject.sortOptions;
 
+/*
+ *  1. Search for different phrases and verify if they give correct first result
+ *  2. Check search page pagination
+ *  3. Verify number of results on page
+ *  4. Search for not existing phrase and verify there is no results
+ *  5. Search for some phrase and verify filtering options work correctly and give correct results
+ *  6. Search for some phrase and verify sorting options for video give correct results
+ *  7. Search for some phrase and verify sorting options for images give correct results
+ *  8. Type at least 3 chars and verify suggestions are displaying and contain given phrase
+ *  9. Verify search page hubs and titles are translatable
+ *  10. Select photos only option and verify there are only photos,
+ *		then select videos only option and verify there are only videos
+ *  11. Verify if there are correct advanced option set as a default
+ *  12. Search for some image without typing extension (.jpg) and verify photo is found
+ *  13. Search for different phrases and verify there are correct namespaces in result titles
+ */
+
 public class IntraWikiSearch extends NewTestTemplate {
 
 	private String testedWiki;
@@ -44,10 +61,10 @@ public class IntraWikiSearch extends NewTestTemplate {
 		String firstResult = search.getTitleInnerText();
 		search.verifyPagination();
 		search.clickNextPaginator();
-		search.verifyArticlesNotTheSame(firstResult);
+		search.verifyFirstArticleNameNotTheSame(firstResult);
 		search.verifyPagination();
 		search.clickPrevPaginator();
-		search.verifyArticlesTheSame(firstResult);
+		search.verifyFirstArticleNameTheSame(firstResult);
 		search.verifyPagination();
 		search.verifyLastResultPage();
 	}
