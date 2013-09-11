@@ -21,6 +21,22 @@ public class SearchDataProvider {
     			{ "http://callofduty.wikia.com/", "Frank Woods", "http://callofduty.wikia.com/wiki/Frank_Woods" }
     	};
     }
+    
+    @DataProvider
+    public static final Object[][] getExpectedWikiResults() {
+    	return new Object[][] {
+    			{ "Marvel Database"},
+    			{ "Marvel Movies"},
+    			{ "Marvel: Avengers Alliance Wiki"},
+    			{ "Marvel: War of Heroes Wiki"},
+    			{ "Marvel-Microheroes Wiki"},
+    			{ "Marvel Cinematic Universe Wiki"},
+    			{ "Marvel Fanon"},
+    			{ "Marvel Answers"},
+    			{ "Marvel Heroes Wiki"},
+    			{ "MARVEL Crossroads Wiki"}
+    	};
+    }
 
 	public static final List<Integer> getSearchLimits() {
 		List<Integer> limits = new ArrayList<Integer>();

@@ -21,9 +21,28 @@ public class CrossWikiSearchProvider {
                 "callofduty", "Call of Duty Wiki", "VIDEO GAMES"
             }, {
                 "cod", "Call of Duty Wiki", "VIDEO GAMES"
-            }, {
-                "lohgame", "Legacy of Heroes Wiki", "VIDEO GAMES" // no exact match if solr result set is empty bug.
-            }
+            }, 
         };
+    }
+
+    @DataProvider
+    public static final Object[][] getPushToTopQueries() {
+    return new Object[][]{
+    		{
+            "Gauzz's Sandbox", "Gauzz's Sandbox Wiki"
+    		}, {
+            "Marvel: Avengers Alliance Wiki", "Marvel: Avengers Alliance Wiki"
+    		}, {
+            "Red vs. Blue", "Red vs. Blue Wiki"
+    		}, {
+            "PlayStation All-Stars FanFiction Royale", "PlayStation All-Stars FanFiction Royale Wiki"
+    		}, {
+            "Yu-Gi-Oh!", "Yu-Gi-Oh!"
+    		}, {
+            "007", "James Bond Wiki"
+    		}, {
+    		"lohgame", "Legacy of Heroes Wiki"	
+    		}
+    	};
     }
 }
