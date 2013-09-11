@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -43,7 +43,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement tocWrapper;
 	@FindBy(css=".artSec.open .goBck")
 	private WebElement hideSectionButton;
-	@FindBy(css=".lazy.media.noSect.load.loaded")
+	@FindBy(css=".lazy.media.load.loaded")
 	private WebElement modalWrapper;
 	@FindBy(css=".swiperPage.current")
 	private WebElement currentImageModal;
@@ -249,7 +249,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public MobileModalComponentObject clickOpenedImage(int n) {
 		waitForElementByElement(listOfMediaElements.get(n));
-		listOfMediaElements.get(n).click();
+		scrollAndClick(listOfMediaElements.get(n));
 		waitForElementByElement(openedImage);
 		openedImage.click();
 		PageObjectLogging.log("clickModal", "modal url verified", true, driver);
