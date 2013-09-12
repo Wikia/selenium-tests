@@ -11,6 +11,7 @@
 			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateAWikiTests_logInFieldValidation"/>
 			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateAWikiTests_lang"/>
 			<class name="com.wikia.webdriver.TestCases.ImageServingTests.ImageServing"/>
+			<class name="com.wikia.webdriver.TestCases.ImageServingTests.ImageStorageTests"/>
 			<class name="com.wikia.webdriver.TestCases.HubsTests.HubsTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation"/>
