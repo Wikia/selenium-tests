@@ -806,8 +806,8 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("followArticle", "page is followed", true, driver);
 	}
 	
-	public void openSpecialPromote() {
-		getUrl(Global.DOMAIN + URLsContent.specialPromote);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	public void openSpecialPromote(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
 }
