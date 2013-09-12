@@ -48,6 +48,7 @@ public class URLsContent {
 	public static final String userMessageWall = "wiki/Message_Wall:";
 	public static final String specialMultiWikiFinderPage = "wiki/Special:Multiwikifinder";
 	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
+	public static final String specialUndelete = "wiki/Special:Undelete";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";
@@ -75,6 +76,7 @@ public class URLsContent {
 	public static final String useDefaultFormat = "useFormat=1";
 	public static final String wikiaTracker = "og_level=info";
 	public static final String unfollowParameter = "action=unwatch";
+	public static final String deleteParameter = "action=delete";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "WAM";

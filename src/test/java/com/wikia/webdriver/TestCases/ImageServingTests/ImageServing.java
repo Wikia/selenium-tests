@@ -15,7 +15,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 
 public class ImageServing extends TestTemplate {
 
-
 	@Test(groups = {"ImageServing001", "Smoke", "ImageServing"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 	public void ImageServing001_SpecialNewFilesTest()

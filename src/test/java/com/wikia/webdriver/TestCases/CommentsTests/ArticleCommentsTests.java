@@ -7,8 +7,8 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -84,7 +84,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		article.verifyCommentText(comment);
 		article.verifyCommentCreator(credentials.userNameStaff);
 		String commentText = article.getFirstCommentText();
-		DeleteArticlePageObject delete = article.deleteFirstComment();
+		DeletePageObject delete = article.deleteFirstComment();
 		delete.submitDeletion();
 		article.verifyNotificationMessage();
 		article.verifyCommentDeleted(commentText);

@@ -1,9 +1,15 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,6 +29,7 @@ import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.Purge.PurgeMethod;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -701,5 +708,64 @@ public class BasePageObject{
 	public void setDisplayStyle(String  selector, String style) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector, style);
+	}
+
+	private void purge(String URL) throws Exception {
+		HttpClient client = new HttpClient();
+		HttpMethod method = new PurgeMethod(URL);
+		try {
+			int status = client.executeMethod(method);
+			if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
+				throw new Exception("HTTP PURGE failed for: " + URL + "(" + status + ")");
+			}
+			PageObjectLogging.log("purge", URL, true);
+			return;
+		} finally {
+			method.releaseConnection();
+		}
+	}
+
+	public int getURLStatus(String URL) {
+		try {
+			purge(URL);
+			HttpURLConnection.setFollowRedirects(false);
+			HttpURLConnection connection = (HttpURLConnection) new URL(URL).openConnection();
+			connection.disconnect();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty(
+					"User-Agent",
+					"Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) " +
+					"Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)"
+			);
+			int status = connection.getResponseCode();
+			connection.disconnect();
+			return status;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 2;
+		}
+	}
+
+	public void verifyURLStatus(int desiredStatus, String URL) {
+		int timeOut = 500;
+		int status = getURLStatus(URL);
+		while (!(status == desiredStatus)) {
+			try {
+				status = getURLStatus(URL);
+				System.out.println(timeOut + " " + status + " " + URL);
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			timeOut += 500;
+			if (timeOut > 20000) {
+				break;
+			}
+		}
+		Assertion.assertEquals(status, desiredStatus);
+		PageObjectLogging.log("verifyURLStatus", URL + " has status " + status, true);
 	}
 }

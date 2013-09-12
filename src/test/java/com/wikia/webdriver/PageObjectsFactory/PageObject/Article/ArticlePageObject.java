@@ -16,7 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditC
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
@@ -204,7 +204,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new MiniEditorComponentObject(driver);
 	}
 
-	public DeleteArticlePageObject deleteFirstComment() {
+	public DeletePageObject deleteFirstComment() {
 		scrollToElement(allCommentsArea);
 		WebElement mostRecentComment = articleComments.get(0);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -212,7 +212,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 				"arguments[0].querySelector(arguments[1]).click()",
 				mostRecentComment, deleteButtonSelector
 				);
-		return new DeleteArticlePageObject(driver);
+		return new DeletePageObject(driver);
 	}
 
 	public void verifyCommentDeleted(String comment) {
@@ -264,11 +264,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertStringContains(editedByArea.getText(), userName);
 	}
 
-	public DeleteArticlePageObject deleteArticleUsingDropdown() {
+	public DeletePageObject deleteArticleUsingDropdown() {
 		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(deleteDropdown);
 		deleteDropdown.click();
-		return new DeleteArticlePageObject(driver);
+		return new DeletePageObject(driver);
 	}
 
 	public String getArticleName() {
