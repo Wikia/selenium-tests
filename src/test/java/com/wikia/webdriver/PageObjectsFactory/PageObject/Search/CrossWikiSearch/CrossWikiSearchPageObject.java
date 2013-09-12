@@ -244,48 +244,46 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	}
 	
 	public String getFirstDescription() {
-		waitForElementByElement(firstResult);
 		return firstResultDescription.getText();
 	}
 	
 	public String getFirstImageText() {
-		waitForElementByElement(thumbnails.get(0));
-		int firstNumber = thumbnails.get(0).getAttribute("src").indexOf("px-");
-		int secondNumber = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
-		return thumbnails.get(0).getAttribute("src").substring(firstNumber + 3, secondNumber - 1);
+		int indexComparisonStart = thumbnails.get(0).getAttribute("src").indexOf("px-");
+		int indexComparisonFinish = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
+		return thumbnails.get(0).getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
 	}
 	
-	public void verifyFirstGTAResult(){
+	public void verifyFirstResult(String wikiName){
 		waitForElementByElement(firstResult);
 		String gtaWikiTitle = firstResultLink.getText();
-		Assertion.assertStringContains(gtaWikiTitle, "GTA V");
-		PageObjectLogging.log("verifyFirstGTAResult", "first result ",
+		Assertion.assertStringContains(gtaWikiTitle, wikiName);
+		PageObjectLogging.log("verifyFirstResult", "first result verified",
 				true);
 	}
 	
-	public void verifyFourthGTAResult(){
+	public void verifyFourthResult(String wikiName){
 		waitForElementByElement(fourthResult);
-		String gtaFourthResultLink = fourthResult.getText();
-		Assertion.assertStringContains(gtaFourthResultLink, "GTA V");
-		PageObjectLogging.log("getFourthGTAResult", "GTA wiki title saved",
+		String fourthResultLink = fourthResult.getText();
+		Assertion.assertStringContains(fourthResultLink, wikiName);
+		PageObjectLogging.log("getFourthResult", "fourth result verified",
 				true);
-	}
-	
-	public void openSpecialPromote() {
-		String firstLink = firstResultLink.getAttribute("href");
-		getUrl(firstLink + URLsContent.specialPromote);
 	}
 	
 	public void verifyCrossWikiSearchDescription(String firstDescription) {
 		waitForElementByElement(specialPromoteDescription);
-		int lastChar = firstDescription.length();
-		Assertion.assertStringContains(specialPromoteDescription.getText(), firstDescription.substring(0, lastChar-3));
+		int descriptionLength = firstDescription.length();
+		Assertion.assertStringContains(specialPromoteDescription.getText(), firstDescription.substring(0, descriptionLength-3));
 	}
 	
 	public void verifyCrossWikiSearchImage(String firstImage) {
 		waitForElementByElement(specialPromoteThumbnail);
-		int firstNumber = specialPromoteThumbnail.getAttribute("src").indexOf("px-");
-		int secondNumber = specialPromoteThumbnail.getAttribute("src").indexOf("-Wikia-Visualization-Main");
-		Assertion.assertEquals(firstImage, specialPromoteThumbnail.getAttribute("src").substring(firstNumber + 3, secondNumber - 1));
+		String secondImage = getSecondImageText();
+		Assertion.assertEquals(firstImage, secondImage);
+	}
+	
+	public String getSecondImageText() {
+		int indexComparisonStart = specialPromoteThumbnail.getAttribute("src").indexOf("px-");
+		int indexComparisonFinish = specialPromoteThumbnail.getAttribute("src").indexOf("-Wikia-Visualization-Main");
+		return specialPromoteThumbnail.getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
 	}
 }

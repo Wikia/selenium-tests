@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.SearchTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.SearchContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.CrossWikiSearchProvider;
 import com.wikia.webdriver.Common.DataProvider.SearchDataProvider;
@@ -19,17 +20,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
  * Time: 11:22
  */
 public class CrossWikiSearchTests extends NewTestTemplate {
+	
 	Credentials credentials = config.getCredentials();
-	private static final int resultsPerPage = 10;
-	private static final String searchPhrase = "muppets";
+	
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 	private static final String searchPhraseOnePageResults = "muppet_wiki";
 	private static final String searchPhraseResultsSameOrder = "marvel";
 	private static final String searchPhraseDecimalNumber = "GTA 5";
 	private static final String searchPhraseRomanNumber = "GTA V";
+	private static final String wikiName = "GTA V";
 	
-
-
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getExactMatchQueries",
 			groups = {"CrossWikiSearchTests_001", "Search"})
@@ -49,34 +49,34 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	public void crossWikiSearch_002_pagination() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
-		CrossWikiSearchPageObject searchPage = home.searchFor(searchPhrase);
+		CrossWikiSearchPageObject searchPage = home.searchFor(SearchContent.searchPhrase);
 		// verify results pos parameter for first page
-		searchPage.verifyResultsPosForPage(0, resultsPerPage);
-		searchPage.verifyResultsCount(resultsPerPage);
-		searchPage.verifyThumbnails(resultsPerPage);
-		searchPage.verifyDescription(resultsPerPage);
-		searchPage.verifyStatistics(resultsPerPage);
+		searchPage.verifyResultsPosForPage(0, SearchContent.resultsPerPage);
+		searchPage.verifyResultsCount(SearchContent.resultsPerPage);
+		searchPage.verifyThumbnails(SearchContent.resultsPerPage);
+		searchPage.verifyDescription(SearchContent.resultsPerPage);
+		searchPage.verifyStatistics(SearchContent.resultsPerPage);
 		searchPage.nextPage();
 		// verify results pos parameter for second page
-		searchPage.verifyResultsPosForPage(1, resultsPerPage);
-		searchPage.verifyResultsCount(resultsPerPage);
-		searchPage.verifyThumbnails(resultsPerPage);
-		searchPage.verifyDescription(resultsPerPage);
-		searchPage.verifyStatistics(resultsPerPage);
+		searchPage.verifyResultsPosForPage(1, SearchContent.resultsPerPage);
+		searchPage.verifyResultsCount(SearchContent.resultsPerPage);
+		searchPage.verifyThumbnails(SearchContent.resultsPerPage);
+		searchPage.verifyDescription(SearchContent.resultsPerPage);
+		searchPage.verifyStatistics(SearchContent.resultsPerPage);
 		searchPage.prevPage();
 		// verify results pos parameter for first page
-		searchPage.verifyResultsPosForPage(0, resultsPerPage);
-		searchPage.verifyResultsCount(resultsPerPage);
-		searchPage.verifyThumbnails(resultsPerPage);
-		searchPage.verifyDescription(resultsPerPage);
-		searchPage.verifyStatistics(resultsPerPage);
+		searchPage.verifyResultsPosForPage(0, SearchContent.resultsPerPage);
+		searchPage.verifyResultsCount(SearchContent.resultsPerPage);
+		searchPage.verifyThumbnails(SearchContent.resultsPerPage);
+		searchPage.verifyDescription(SearchContent.resultsPerPage);
+		searchPage.verifyStatistics(SearchContent.resultsPerPage);
 	}
 
 	@Test(groups= {"CrossWikiSearchTests_003" , "Search"} )
 	public void crossWikiSearch_003_resultClick() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
-		CrossWikiSearchPageObject searchPage = home.searchFor(searchPhrase);
+		CrossWikiSearchPageObject searchPage = home.searchFor(SearchContent.searchPhrase);
 		WikiArticleHomePage wikiArticleHomePage = searchPage.openResult(0);
 		wikiArticleHomePage.verifyThisIsWikiHomePage();
 		searchPage.navigateBack();
@@ -126,10 +126,10 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
-		CrossWikiSearchPageObject searchPage = search.searchFor(searchPhrase);
+		CrossWikiSearchPageObject searchPage = search.searchFor(SearchContent.searchPhrase);
 		String searchDescription = searchPage.getFirstDescription();
 		String searchImage = searchPage.getFirstImageText();
-		searchPage.openSpecialPromote();
+		base.openSpecialPromote();
 		searchPage.verifyCrossWikiSearchDescription(searchDescription);
 		searchPage.verifyCrossWikiSearchImage(searchImage);
 	}
@@ -149,10 +149,9 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
 		search.searchFor(searchPhraseRomanNumber);
-		search.verifyFirstGTAResult();
+		search.verifyFirstResult(wikiName);
 		search.searchFor(searchPhraseDecimalNumber);
-		search.verifyFourthGTAResult();
+		search.verifyFourthResult(wikiName);
 	}
 }
-
 
