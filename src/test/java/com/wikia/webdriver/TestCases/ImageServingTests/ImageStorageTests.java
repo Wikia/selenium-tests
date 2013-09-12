@@ -16,6 +16,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePa
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
+ * 1. Delete image, verify 404 status, restore image, verify 200 status
+ * 2. Move image, verify status
  */
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -24,7 +26,7 @@ public class ImageStorageTests extends NewTestTemplate {
 	String imageURL;
 	String imageThumbnailURL;
 
-	@Test
+	@Test(groups = {"ImageStorageTests", "ImageStorageTests_001"})
 	public void ImageStorage_001_deleteImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);

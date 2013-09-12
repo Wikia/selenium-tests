@@ -133,7 +133,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	}
 
 	/**
-	 * @return name of random image on Special:NewFiles page
+	 * @return url of random image on Special:NewFiles page
 	 */
 	public String getRandomImageUrl() {
 		List<String> hrefs = new ArrayList<String>();
