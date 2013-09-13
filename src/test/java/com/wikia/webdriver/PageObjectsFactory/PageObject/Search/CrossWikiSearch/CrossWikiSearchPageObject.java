@@ -255,8 +255,8 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	
 	public void verifyFirstResult(String wikiName){
 		waitForElementByElement(firstResult);
-		String gtaWikiTitle = firstResultLink.getText();
-		Assertion.assertStringContains(gtaWikiTitle, wikiName);
+		String wikiTitle = firstResultLink.getText();
+		Assertion.assertStringContains(wikiTitle, wikiName);
 		PageObjectLogging.log("verifyFirstResult", "first result verified",
 				true);
 	}
@@ -271,8 +271,11 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	
 	public void verifyCrossWikiSearchDescription(String firstDescription) {
 		waitForElementByElement(specialPromoteDescription);
-		int descriptionLength = firstDescription.length();
-		Assertion.assertStringContains(specialPromoteDescription.getText(), firstDescription.substring(0, descriptionLength-3));
+		Assertion.assertStringContains(
+			specialPromoteDescription.getText(),
+			firstDescription.substring(0,
+			firstDescription.length()-3)
+		);
 	}
 	
 	public void verifyCrossWikiSearchImage(String firstImage) {
