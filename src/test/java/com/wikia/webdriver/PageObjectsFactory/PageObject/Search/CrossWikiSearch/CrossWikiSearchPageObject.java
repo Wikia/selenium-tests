@@ -247,6 +247,10 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		return firstResultDescription.getText();
 	}
 	
+	/*
+	 * Method fetches specific string related to an image by storing index start position and 
+	 * finish position, and then selects characters in between those indexes by using substring method. 
+	 */
 	public String getFirstImageText() {
 		int indexComparisonStart = thumbnails.get(0).getAttribute("src").indexOf("px-");
 		int indexComparisonFinish = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
