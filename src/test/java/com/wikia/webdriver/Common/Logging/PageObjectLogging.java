@@ -49,7 +49,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	String tableStyle = "table {margin:0 auto;}";
 	String tdStyle = "td {border-top: 1px solid grey;}";
 	String tdFirstChildStyle = "td:first-child {width:200px;}";
-	String tdSecondChilgStyle = "td:nth-child(2) {width:660px;}";
+	String tdSecondChildStyle = "td:nth-child(2) {width:660px;}";
 	String tdThirdChildStyle = "td:nth-child(3) {width:100px;}";
 	String trSucces= "tr.success {color:black;background-color:#CCFFCC;}";
 	String trError = "tr.error {color:black;background-color:#FFCCCC;}";
@@ -121,7 +121,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		this.builder = new Html(htmlWriter);
 
 		builder.html();
-			builder.style().text(nl+tableStyle+nl+tdFirstChildStyle+nl+tdSecondChilgStyle+nl+tdThirdChildStyle+nl+trSucces+nl+trError+nl+trStep).end();
+			builder.style().text(nl+tableStyle+nl+tdFirstChildStyle+nl+tdSecondChildStyle+nl+tdThirdChildStyle+nl+trSucces+nl+trError+nl+trStep).end();
 			builder.head();
 				builder.meta().httpEquiv(httpEquiv).content(content).charset(charset);
 				//TODO: check if you can extract below style to previous styles
@@ -210,15 +210,19 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	@Override
 	public void onTestSuccess(ITestResult result) { //jatl DONE
-		StringBuilder builder = new StringBuilder();
-		builder.append(
-				"<tr class=\"step\">" +
-				"<td>&nbsp</td><td>STOP LOGGING METHOD  " +
-				"<div style=\"text-align:center\">" +
-				"<a href=\"#toc\" style=\"color:blue\">" +
-				"<b>BACK TO MENU</b></a></div> </td><td> <br/> &nbsp;</td></tr>" +
-				"</table>");
-		CommonUtils.appendTextToFile(logPath, builder.toString());
+		builder.tr().classAttr("step");
+		builder.td().text("&nbsp").end();
+			builder.td().text("STOP LOGGING METHOD");
+				builder.div().style("text-align:center");
+					builder.a().style("color:blue");
+						builder.b().text("BACK TO MENU").end();
+						builder.end();
+					builder.end();
+				builder.end();
+			builder.td().br().text("&nbsp").end();
+		builder.end();
+		builder.end(); // end </table>
+//		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
 
 	@Override
@@ -227,6 +231,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		if (driver == null){
 			driver = NewDriverProvider.getWebDriver();
 		}
+
+
+
 		if (Global.LOG_ENABLED) {
 			try {
 				CommonUtils
@@ -242,14 +249,16 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 			String exception = result.getThrowable().toString() +
 					"\n" +ExceptionUtils.getStackTrace(result.getThrowable());
 
-			StringBuilder builder = new StringBuilder();
-			builder.append("<tr class=\"error\"><td>error</td><td>"
-					+ exception
-					+ "</td><td> <br/><a href='screenshots/screenshot"
-					+ imageCounter
-					+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
-					+ imageCounter + ".html'>HTML Source</a></td></tr>");
-			CommonUtils.appendTextToFile(logPath, builder.toString());
+			builder.tr().classAttr("error");
+				builder.td().text("error").end();
+				builder.td().text(exception).end();
+				builder.td();
+					builder.br().a().href("screenshots/screenshot"+imageCounter+".png").text("Screenshot").end();
+					builder.br().a().href("screenshots/screenshot"+imageCounter+".html").text("HTML Source").end();
+					builder.end();
+				builder.end();
+			builder.end();
+
 			imageCounter += 1;
 			logJSError(driver);
 			onTestSuccess(result);
@@ -258,26 +267,33 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	@Override
 	public void afterChangeValueOf(WebElement element, WebDriver driver) { //jatl DONE
-		StringBuilder builder = new StringBuilder();
-		builder.append("<tr class=\"success lowLevelAction\"><td>ChangeValueOfField</td><td>" + lastFindBy
-				+ "</td><td> <br/> &nbsp;</td></tr>");
-		CommonUtils.appendTextToFile(logPath, builder.toString());
+		builder.tr().classAttr("success lowLevelAction");
+			builder.td().text("ChangeValueOfField").end();
+			builder.td().text(lastFindBy.toString()).end(); //TODO: verify if lastFindBy.ToString works properly. Before it was lastFindBy alone
+			builder.td().br().text("&nbsp").end();
+		builder.end();
+//		CommonUtils.appendTextToFile(logPath, builder.toString());
+
 	}
 
 	@Override
 	public void afterClickOn(WebElement element, WebDriver driver) { //jtal DONE
-		StringBuilder builder = new StringBuilder();
-		builder.append("<tr class=\"success lowLevelAction\"><td>click</td><td>" + lastFindBy
-				+ "</td><td> <br/> &nbsp;</td></tr>");
-		CommonUtils.appendTextToFile(logPath, builder.toString());
+		builder.tr().classAttr("success lowLevelAction");
+			builder.td().text("click").end();
+			builder.td().text(lastFindBy.toString()).end();
+			builder.td().br().text("&nbsp").end();
+		builder.end();
+//		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
 
 	@Override
 	public void afterNavigateTo(String url, WebDriver driver) { //jtal DONE
-		StringBuilder builder = new StringBuilder();
-		builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
-				+ "</td><td> <br/> &nbsp;</td></tr>");
-		CommonUtils.appendTextToFile(logPath, builder.toString());
+		builder.tr().classAttr("succes");
+			builder.td().text("Navigate to").end();
+			builder.td().text(url).end();
+			builder.td().br().text("&nbsp").end();
+		builder.end();
+//		CommonUtils.appendTextToFile(logPath, builder.toString());
 		logJSError(driver);
 	}
 
@@ -286,9 +302,12 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
 			if (!error.isEmpty()) {
-				StringBuilder builder = new StringBuilder();
-				builder.append("<tr class=\"error\"><td>click</td><td>"+error+"</td><td> <br/> &nbsp;</td></tr>");
-				CommonUtils.appendTextToFile(logPath, builder.toString());
+				builder.tr().classAttr("error");
+					builder.td().text("click").end();
+					builder.td().text(error.toString()).end(); //TODO: check if it can be toString, originally was 'error' alone
+					builder.td().br().text("&nbsp").end();
+				builder.end();
+//				CommonUtils.appendTextToFile(logPath, builder.toString());
 			}
 		}
 	}
@@ -301,17 +320,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 	}
 
-	private void appendShowHideButtons() { //jatl DONE
-		String hideButton = "<button id=\"hideLowLevel\">hide low level actions</button>";
-		String showButton = "<button id=\"showLowLevel\">show low level actions</button>";
-		StringBuilder builder = new StringBuilder();
-		builder.append(hideButton);
-		builder.append(showButton);
-		CommonUtils.appendTextToFile(logPath, builder.toString());
-	}
-
 	@Override
 	public void onFinish(ITestContext context) { //jatl DONE
-		CommonUtils.appendTextToFile(logPath, "</body></html>");
+			builder.end();  // end </body>
+		builder.end(); // end </html>
+//		CommonUtils.appendTextToFile(logPath, "</body></html>");
 	}
 }

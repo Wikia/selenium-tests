@@ -202,7 +202,7 @@ public class main extends TestTemplate{
 						builder.br().a().href("screenshots/screenshot"+"imageCounter"+".html").text("HTML Source").end();
 					builder.end();
 				builder.end();
-// onTestSuccess
+// onTestSuccess | done
 				builder.tr().classAttr("step");
 					builder.td().text("&nbsp").end();
 					builder.td().text("STOP LOGGING METHOD");
@@ -215,7 +215,7 @@ public class main extends TestTemplate{
 					builder.td().br().text("&nbsp").end();
 				builder.end();
 				builder.end(); // end </table>
-// onTestFailure
+// onTestFailure | done
 				builder.tr().classAttr("error");
 					builder.td().text("error").end();
 					builder.td().text("exception").end();
@@ -225,31 +225,31 @@ public class main extends TestTemplate{
 						builder.end();
 					builder.end();
 				builder.end();
-// afterChangeValueOf
+// afterChangeValueOf | done
 				builder.tr().classAttr("class name + loweLevel");
 					builder.td().text("ChangeValueOfField").end();
 					builder.td().text("lastfindby").end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
-// afterClickOn
+// afterClickOn | done
 				builder.tr().classAttr("class name + loweLevel");
 					builder.td().text("click").end();
 					builder.td().text("lastfindby").end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
-// afterNavigateTo
+// afterNavigateTo | done
 				builder.tr().classAttr("class name + loweLevel");
 					builder.td().text("Navigate to").end();
 					builder.td().text("url").end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
-// logJSError
+// logJSError| done
 				builder.tr().classAttr("error");
 					builder.td().text("click").end();
 					builder.td().text("VarError").end();
 					builder.td().br().text("&nbsp").end();
 				builder.end();
-//onFinish
+//onFinish | done
 			builder.end();  // end </body>
 		builder.end(); // end </html>
 
