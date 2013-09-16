@@ -444,7 +444,7 @@ public class BasePageObject{
 		wait.until(CommonExpectedConditions.elementNotPresent(by));
 	}
 
-	public void waitForElementNotVisibleByElementCutomWait (
+	public void waitForElementNotVisibleByElementCustomWait (
 		WebElement element, WebDriverWait customWait
 	) {
 		customWait.until (
