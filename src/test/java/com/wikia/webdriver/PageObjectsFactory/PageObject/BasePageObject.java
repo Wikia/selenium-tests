@@ -444,6 +444,20 @@ public class BasePageObject{
 		wait.until(CommonExpectedConditions.elementNotPresent(by));
 	}
 
+	/*
+	 * Wait for element not visible. Timeout is specified by customWait value
+	 *
+	 * @param WebElement element - element meant to disappearance
+	 * @param WebDriverWait customWait - time before TimeOutException is thrown
+	 */
+	public void waitForElementNotVisibleByElementCustomWait (
+		WebElement element, WebDriverWait customWait
+	) {
+		customWait.until (
+			CommonExpectedConditions.invisibilityOfElementLocated(element)
+		);
+	}
+
 	public void waitForElementNotVisibleByElement(WebElement element) {
 		wait.until(CommonExpectedConditions
 				.invisibilityOfElementLocated(element));
