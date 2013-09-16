@@ -35,6 +35,8 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
@@ -118,8 +120,20 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement cssMinorEdit;
 	@FindBy(css = "#ca-watch")
 	protected WebElement followButton;
+	@FindBy(css="#WikiaMainContent .drop img")
+	protected WebElement articleEditDropdown;
+	@FindBy(css="#ca-delete")
+	protected WebElement deleteDropdown;
+	@FindBy(css="#ca-protect")
+	protected WebElement protectDropdown;
+	@FindBy(css="#ca-move")
+	protected WebElement renameDropdown;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
+
+	protected String buildUrlFile(String wikiURL, String fileName) {
+		return wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName;
+	}
 
 	public enum PositionsVideo {
 		left, center, right
@@ -319,10 +333,11 @@ public class WikiBasePageObject extends BasePageObject {
 				true, driver);
 	}
 
-	public void clickOnDeleteButton() {
-		getUrl(driver.getCurrentUrl() + "?action=delete");
-		PageObjectLogging.log("deleteArticle", "article deletion invoked",
-				true, driver);
+	public DeletePageObject deletePage() {
+		String url = urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.deleteParameter);
+		getUrl(url);
+		PageObjectLogging.log("deletePage", "delete page opened", true);
+		return new DeletePageObject(driver);
 	}
 
 	public void renameArticle(String articleName, String articleNewName) {
@@ -353,16 +368,25 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public SpecialRestorePageObject undeleteArticle() {
+	public SpecialRestorePageObject undeleteByFlashMessage() {
 		waitForElementByElement(undeleteLink);
 		undeleteLink.click();
 		return new SpecialRestorePageObject(driver);
 	}
 
-	public void verifyNotificationMessage() {
+	public SpecialRestorePageObject undeleteFileByUrl(String name, String wikiURL) {
+		driver.get(wikiURL + URLsContent.specialUndelete + "/" + URLsContent.fileNameSpace + name);
+		return new SpecialRestorePageObject(driver);
+	}
+
+	public void verifyCloseNotificationMessage() {
 		waitForElementVisibleByElement(flashMessage);
 		flashMessageClose.click();
 		waitForElementNotVisibleByElement(flashMessage);
+	}
+
+	public void verifyNotificationMessage() {
+		waitForElementVisibleByElement(flashMessage);
 	}
 
 	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
@@ -815,4 +839,20 @@ public class WikiBasePageObject extends BasePageObject {
 		driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.unfollowParameter));
 		return new WatchPageObject(driver);
 	}
+
+	public RenamePageObject renameUsingDropdown() {
+		actionsClick(articleEditDropdown);
+		waitForElementVisibleByElement(renameDropdown);
+		renameDropdown.click();
+		return new RenamePageObject(driver);
+	}
+
+
+	public DeletePageObject deleteUsingDropdown() {
+		actionsClick(articleEditDropdown);
+		waitForElementVisibleByElement(deleteDropdown);
+		deleteDropdown.click();
+		return new DeletePageObject(driver);
+	}
+
 }

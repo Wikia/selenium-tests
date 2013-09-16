@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
@@ -101,7 +101,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userNameStaff);
 		String commentText = blogPage.getFirstCommentText();
-		DeleteArticlePageObject delete = blogPage.deleteFirstComment();
+		DeletePageObject delete = blogPage.deleteFirstComment();
 		delete.submitDeletion();
 		blogPage.verifyNotificationMessage();
 		blogPage.verifyCommentDeleted(commentText);

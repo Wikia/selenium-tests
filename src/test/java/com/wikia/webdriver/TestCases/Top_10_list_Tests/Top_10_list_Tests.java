@@ -149,7 +149,7 @@ public class Top_10_list_Tests extends TestTemplate {
 	public void Top_10_list_Tests_008_deleteTop10listAnonymous() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);
-		top10list.clickOnDeleteButton();
+		top10list.deletePage();
 		top10list.verifyPermissionsErrorsPresent();
 	}
 
@@ -209,7 +209,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logInCookie(Properties.userName, Properties.password);
 		Top_10_list top10list = wiki.openTop10List(PageContent.top10TestListQAfull);
-		top10list.clickOnDeleteButton();
+		top10list.deletePage();
 		top10list.verifyPermissionsErrorsPresent();
 	}
 

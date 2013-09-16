@@ -27,7 +27,7 @@ public class FollowPhotosTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialNewFilesPageObject special = base.openSpecialNewFiles(wikiURL);
-		imageName = special.getRandomImage();
+		imageName = special.getRandomImageName();
 		WatchPageObject watch = special.unfollowImage(wikiURL, imageName);
 		watch.confirmWatchUnwatch();
 		special.verifyPageUnfollowed();
