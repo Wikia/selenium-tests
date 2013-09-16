@@ -18,7 +18,7 @@ public class AdsMobileObject extends WikiBasePageObject {
 
 	private final String adFooter = "#wkMdlFtr .wkAdLabel";
 
-	@FindBy(css=".lazy.media.noSect.loaded")
+	@FindBy(css=".lazy.media.load.loaded")
 	private WebElement galleryThumb;
 	@FindBy(css="#wkMdlWrp")
 	private WebElement modalWrapper;

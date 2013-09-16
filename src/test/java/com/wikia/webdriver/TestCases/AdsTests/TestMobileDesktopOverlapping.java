@@ -31,7 +31,7 @@ public class TestMobileDesktopOverlapping extends AdsTestTemplate {
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="mobileDesktopOverlapping",
 		groups={"Ads", "MobileDesktopOverlapping_001"},
-		invocationCount=10
+		invocationCount=5
 	)
 	public void TestMobileNotOverlapsDesktop_Medrec(
 		String wikiName, String path, String desktopAd, String mobileAd
@@ -45,7 +45,7 @@ public class TestMobileDesktopOverlapping extends AdsTestTemplate {
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="mobileDesktopOverlapping",
 		groups={"Ads", "MobileDesktopOverlapping_002"},
-		invocationCount=10
+		invocationCount=5
 	)
 	public void TestDesktopNotOverlapsMobile_InContent(
 		String wikiName, String path, String desktopAd, String mobileAd
@@ -65,7 +65,7 @@ public class TestMobileDesktopOverlapping extends AdsTestTemplate {
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="mobileDesktopOverlapping",
 		groups={"Ads", "MobileDesktopOverlapping_003"},
-		invocationCount=10
+		invocationCount=5
 	)
 	public void TestMobileNotOverlapsDesktop_FloatingMedrec(
 		String wikiName, String path, String desktopAd, String mobileAd
@@ -79,7 +79,7 @@ public class TestMobileDesktopOverlapping extends AdsTestTemplate {
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="mobileDesktopOverlapping",
 		groups={"Ads", "MobileDesktopOverlapping_004"},
-		invocationCount=10
+		invocationCount=5
 	)
 	public void TestDesktopNotOverlapsMobile_Interstitial(
 		String wikiName, String path, String desktopAd, String mobileAd
