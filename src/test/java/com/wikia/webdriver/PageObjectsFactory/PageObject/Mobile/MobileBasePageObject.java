@@ -1,8 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,10 +11,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import org.openqa.selenium.By;
 
 public class MobileBasePageObject extends BasePageObject {
 
@@ -67,6 +67,8 @@ public class MobileBasePageObject extends BasePageObject {
 	protected WebElement sectionHeaderOpened;
 	@FindBys(@FindBy(css="ul#wkSrhSug li.show"))
 	private List<WebElement> searchSuggestion;
+	@FindBys(@FindBy(css=".show:nth-child(10)"))
+	private WebElement searchSuggestionLast;
 	@FindBys(@FindBy(css=".show > span"))
 	private List<WebElement> suggestions;
 	@FindBys(@FindBy(css="ul#wkSrhSug li span.copySrh"))
@@ -206,7 +208,7 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void verifySuggestionsPlusButton() {
-		waitForElementByElement(addSuggestionButton.get(0));
+		waitForElementByElement(searchSuggestionLast);
 		Assertion.assertEquals(addSuggestionButton.size(), searchSuggestion.size(), "sizes are not equals");
 		PageObjectLogging.log("verifySuggestionsPlusButton", "search suggestions plus button verified", true, driver);
 	}
