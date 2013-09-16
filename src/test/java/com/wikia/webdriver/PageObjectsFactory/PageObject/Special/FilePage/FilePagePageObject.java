@@ -41,7 +41,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
 	private WebElement localPagePrev;
 	@FindBy(css="div.fullImageLink")
-	private WebElement videoEmbedded;
+	private WebElement fileEmbedded;
 	@FindBy(css=".filehistory img.Wikia-video-thumb")
 	private WebElement videoThumbnail;
 
@@ -108,7 +108,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyEmbeddedVideoIsPresent() {
-		waitForElementByElement(videoEmbedded);
+		waitForElementByElement(fileEmbedded);
 		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
 	}
 
@@ -125,5 +125,12 @@ public class FilePagePageObject extends WikiBasePageObject {
 	public void verifyCorrectFilePage() {
 		waitForStringInURL("File:"+fileName);
 		PageObjectLogging.log("VerifyCorrectFilePage", "Verify that the page represents "+fileName+" file", true, driver);
+	}
+
+	public String getImageUrl() {
+		return fileEmbedded.findElement(By.cssSelector("a")).getAttribute("href");
+	}
+	public String getImageThumbnailUrl() {
+		return fileEmbedded.findElement(By.cssSelector("img")).getAttribute("src");
 	}
 }

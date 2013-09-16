@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.Actions;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -9,14 +9,14 @@ import org.openqa.selenium.support.FindBy;
 /**
  * @author: Bogna 'bognix' Knychała
  */
-public class RenameArticlePageObject extends ArticlePageObject {
+public class RenamePageObject extends ArticlePageObject {
 
 	@FindBy(css="#wpNewTitleMain")
 	private WebElement newNameInput;
 	@FindBy(css=".mw-submit [name='wpMove']")
 	private WebElement submitRename;
 
-	public RenameArticlePageObject(WebDriver driver) {
+	public RenamePageObject(WebDriver driver) {
 		super(driver);
 	}
 
