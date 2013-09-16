@@ -17,7 +17,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEdi
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
@@ -32,18 +31,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
-	@FindBy(css="#WikiaMainContent .drop img")
-	protected WebElement articleEditDropdown;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
 	@FindBy(css="#WikiHeader .drop")
 	protected WebElement contributeDropdown;
-	@FindBy(css="#ca-delete")
-	protected WebElement deleteDropdown;
-	@FindBy(css="#ca-protect")
-	protected WebElement protectDropdown;
-	@FindBy(css="#ca-move")
-	protected WebElement renameDropdown;
 	@FindBy(css="#ca-history")
 	protected WebElement historyDropdown;
 	@FindBy(css=".WikiaMenuElement .createpage")
@@ -196,7 +187,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 		scrollToElement(allCommentsArea);
 		WebElement mostRecentComment = articleComments.get(0);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		//TODO Action chains not working on Firefox for some reason
 		js.executeScript(
 			"arguments[0].querySelector(arguments[1]).click()",
 			mostRecentComment, editButtonSelector
@@ -264,24 +254,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertStringContains(editedByArea.getText(), userName);
 	}
 
-	public DeletePageObject deleteArticleUsingDropdown() {
-		actionsClick(articleEditDropdown);
-		waitForElementVisibleByElement(deleteDropdown);
-		deleteDropdown.click();
-		return new DeletePageObject(driver);
-	}
-
 	public String getArticleName() {
 		String articleName = articleHeader.getText();
 		PageObjectLogging.log("getArticleName", "the name of the article is: "+articleName, true);
 		return articleName;
-	}
-
-	public RenameArticlePageObject renameArticleUsingDropdown() {
-		actionsClick(articleEditDropdown);
-		waitForElementVisibleByElement(renameDropdown);
-		renameDropdown.click();
-		return new RenameArticlePageObject(driver);
 	}
 
 	public void verifyDropdownForAdmin() {

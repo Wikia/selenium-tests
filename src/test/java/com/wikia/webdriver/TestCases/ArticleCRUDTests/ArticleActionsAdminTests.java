@@ -7,8 +7,8 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 
 /**
@@ -24,7 +24,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String articleName = article.getArticleName();
-		DeletePageObject deletePage = article.deleteArticleUsingDropdown();
+		DeletePageObject deletePage = article.deleteUsingDropdown();
 		deletePage.submitDeletion();
 		SpecialRestorePageObject restore = base.undeleteByFlashMessage();
 		restore.verifyArticleName(articleName);
@@ -40,7 +40,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String articleNewName = PageContent.articleNamePrefix + article.getTimeStamp();
-		RenameArticlePageObject renamePage = article.renameArticleUsingDropdown();
+		RenamePageObject renamePage = article.renameUsingDropdown();
 		renamePage.rename(articleNewName);
 		article.verifyArticleTitle(articleNewName);
 		article.verifyNotificationMessage();

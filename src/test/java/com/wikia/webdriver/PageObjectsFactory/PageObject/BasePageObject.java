@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
@@ -725,6 +724,11 @@ public class BasePageObject{
 		}
 	}
 
+	/**
+	 * return status code of given URL
+	 * @param URL
+	 * @return
+	 */
 	public int getURLStatus(String URL) {
 		try {
 			purge(URL);
@@ -740,32 +744,37 @@ public class BasePageObject{
 			int status = connection.getResponseCode();
 			connection.disconnect();
 			return status;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return 1;
 		} catch (Exception e) {
-			e.printStackTrace();
-			return 2;
+			throw new RuntimeException(e);
 		}
 	}
 
+	/**
+	 * check if current HTTP status of given URL is the same as expected
+	 * @param desiredStatus
+	 * @param URL
+	 */
 	public void verifyURLStatus(int desiredStatus, String URL) {
 		int timeOut = 500;
-		int status = getURLStatus(URL);
-		while (!(status == desiredStatus)) {
+		int statusCode = 0;
+		boolean status = false;
+		while (!status) {
 			try {
-				status = getURLStatus(URL);
-				System.out.println(timeOut + " " + status + " " + URL);
-				Thread.sleep(500);
+				statusCode = getURLStatus(URL);
+				if (statusCode == desiredStatus){
+					status = true;
+				} else {
+					Thread.sleep(500);
+					timeOut += 500;
+				}
+				if (timeOut > 20000) {
+					break;
+				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			timeOut += 500;
-			if (timeOut > 20000) {
-				break;
+				throw new RuntimeException(e);
 			}
 		}
-		Assertion.assertEquals(status, desiredStatus);
-		PageObjectLogging.log("verifyURLStatus", URL + " has status " + status, true);
+		Assertion.assertEquals(statusCode, desiredStatus);
+		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
 	}
 }

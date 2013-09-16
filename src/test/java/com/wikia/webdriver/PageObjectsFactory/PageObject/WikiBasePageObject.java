@@ -36,6 +36,7 @@ import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
@@ -119,6 +120,14 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement cssMinorEdit;
 	@FindBy(css = "#ca-watch")
 	protected WebElement followButton;
+	@FindBy(css="#WikiaMainContent .drop img")
+	protected WebElement articleEditDropdown;
+	@FindBy(css="#ca-delete")
+	protected WebElement deleteDropdown;
+	@FindBy(css="#ca-protect")
+	protected WebElement protectDropdown;
+	@FindBy(css="#ca-move")
+	protected WebElement renameDropdown;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 
@@ -830,4 +839,20 @@ public class WikiBasePageObject extends BasePageObject {
 		driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.unfollowParameter));
 		return new WatchPageObject(driver);
 	}
+
+	public RenamePageObject renameUsingDropdown() {
+		actionsClick(articleEditDropdown);
+		waitForElementVisibleByElement(renameDropdown);
+		renameDropdown.click();
+		return new RenamePageObject(driver);
+	}
+
+
+	public DeletePageObject deleteUsingDropdown() {
+		actionsClick(articleEditDropdown);
+		waitForElementVisibleByElement(deleteDropdown);
+		deleteDropdown.click();
+		return new DeletePageObject(driver);
+	}
+
 }

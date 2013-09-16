@@ -141,7 +141,9 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 			hrefs.add(elem.findElement(By.xpath("./..")).getAttribute("href"));
 		}
 		Random r = new Random();
-		return hrefs.get((r.nextInt(hrefs.size()-1))+1);
+		String href = hrefs.get((r.nextInt(hrefs.size()-1))+1);
+		PageObjectLogging.log("getRandomImageUrl", href + " image is selected", true);
+		return href;
 	}
 
 	public FilePagePageObject openRandomImage() {
