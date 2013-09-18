@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
@@ -70,8 +71,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement editDropDown;
 	@FindBy(css = "input#wpConfirmB")
 	private WebElement deleteConfirmationButton;
-	@FindBy(xpath = "//div[@class='msg' and contains(text(), 'The comment has been deleted.')]")
-	private WebElement deleteCommentConfirmationMessage;
 	@FindBy(css = ".global-notification div.msg a")
 	private WebElement undeleteLink;
 	@FindBy(css = ".global-notification")
@@ -106,6 +105,10 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement userProfileAvatar;
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
+	@FindBy(css=".autocomplete div")
+	private List<WebElement> searchSuggestions;
+	@FindBy(css=".autocomplete div:nth-child(7)")
+	private WebElement searchSuggestionsLast;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
 	@FindBy(css = "#WikiaMainContent a[data-id='edit']")
@@ -162,6 +165,13 @@ public class WikiBasePageObject extends BasePageObject {
 	{
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
+	}
+
+	public void verifySuggestionDropdown(String query) {
+		waitForElementByElement(searchSuggestionsLast);
+		for(WebElement elem:searchSuggestions) {
+			Assertion.assertStringContains(elem.getAttribute("title").toUpperCase(), query.toUpperCase());
+		}
 	}
 
 	public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
@@ -305,7 +315,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialUserLoginPageObject(driver);
 	}
 
-    public void verifyUserLoggedIn(String userName) {
+	public void verifyUserLoggedIn(String userName) {
 		waitForElementByElement(userProfileAvatar);
 		waitForElementByElement(navigationLogoutLink);
 		PageObjectLogging.log(
@@ -821,6 +831,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public void openWikiPage() {
 		getUrl(Global.DOMAIN + URLsContent.noexternals);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
+	}
+
+	public void openWikiPage(String wikiURL) {
+		getUrl(wikiURL);
+		PageObjectLogging.log("openWikiPage", "Wiki page is opened", true);
 	}
 
 	public void verifyPageUnfollowed() {

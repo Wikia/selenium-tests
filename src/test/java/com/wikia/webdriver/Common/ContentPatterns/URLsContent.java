@@ -62,7 +62,6 @@ public class URLsContent {
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";
 
 	//Blog list page url
-
 	public static final String blogList = "wiki/Blog:%listName%/";
 	public static final String blogNameSpace = "wiki/User_blog:%userName%/";
 
@@ -106,8 +105,8 @@ public class URLsContent {
 
 	public static String intraWikiSearchPage = "wiki/Special:Search";
 
-	//query strings
-	public static String disableMessages = "uselang=qqx";
+	//languages
+	public static String translatableLanguage = "uselang=qqx";
 
 	//External sites
 	public static String facebookDomain = "facebook.com";
