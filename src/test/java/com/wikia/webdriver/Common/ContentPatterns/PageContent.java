@@ -7,6 +7,7 @@ public class PageContent {
 	public static String articleTextEdit = "Brand new content";
 	public static String commentText = "Lorem ipsum dolor sit amet, comment";
 	public static String commentText2 = "QAComment";
+	public static String commentTextNonLatin = "QAComment 한국어 위키백과에 На Вама је да одлучите 佛教藝術";
 	public static String commentTextEdit = "Brand new comment";
 	public static String replyText = "Brand new reply";
 	public static String replyText2 = "QAReply";

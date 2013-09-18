@@ -1,9 +1,9 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 
@@ -17,7 +17,7 @@ public class ArticleCommentTests extends NewTestTemplate {
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
-		article.addComment(PageContent.commentText2 + timeStamp);
+		article.addComment(PageContent.commentTextNonLatin + timeStamp);
 	}
 
 	@Test(groups={"articleCommentTest_002", "articleCommentTests", "mobile"})
@@ -26,7 +26,7 @@ public class ArticleCommentTests extends NewTestTemplate {
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
-		article.addComment(PageContent.commentText2 + timeStamp);
+		article.addComment(PageContent.commentTextNonLatin + timeStamp);
 		article.addReply(PageContent.replyText2 + timeStamp);
 	}
 
