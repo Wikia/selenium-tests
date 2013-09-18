@@ -222,7 +222,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	public void verifyPhotosOnly() {
 		waitForElementByElement(thumbnailsImages.get(0));
 		waitForElementNotPresent(thumbnailsVideosGroup);
-		for(int i = 0; i < thumbnailsImages.size(); i++) {
+		for(int i = 0; i < titles.size(); i++) {
 			Assertion.assertTrue(titles.get(i).getText().startsWith(URLsContent.fileNameSpace));
 		}
 	}
@@ -230,7 +230,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	public void verifyVideosOnly() {
 		Assertion.assertTrue(thumbnailsVideos.size() == 25);
 		Assertion.assertEquals(playMovieImage.size(), thumbnailsVideos.size());
-		for(int i = 0; i < thumbnailsVideos.size(); i++) {
+		for(int i = 0; i < titles.size(); i++) {
 			Assertion.assertTrue(titles.get(i).getText().startsWith(URLsContent.fileNameSpace));
 		}
 	}
