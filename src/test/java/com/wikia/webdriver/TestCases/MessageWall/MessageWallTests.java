@@ -25,7 +25,7 @@ public class MessageWallTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"MessageWall_001", "MessageWall"})
+	@Test(groups = {"MessageWall_001", "MessageWall", "Smoke3"})
 	public void MessageWall_001_writeEdit() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

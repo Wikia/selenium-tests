@@ -21,7 +21,7 @@ public class ForumBoardTests extends NewTestTemplate {
 	private String message;
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups= {"ForumBoardTests_001", "ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_001", "ForumBoardTests", "Forum", "Smoke3"} )
 	public void forumBoardTests_001_startDiscussionWithTitleAndMessage(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

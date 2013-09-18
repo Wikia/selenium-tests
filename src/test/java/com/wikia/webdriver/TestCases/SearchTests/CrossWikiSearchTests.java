@@ -36,7 +36,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 		searchPage.verifyFirstResultPageVideos();
 	}
 
-	@Test(groups= {"CrossWikiSearchTests_002", "Search"})
+	@Test(groups= {"CrossWikiSearchTests_002", "Search", "Smoke4"})
 	public void crossWikiSearch_002_pagination() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
