@@ -10,7 +10,7 @@ public class OnWikiSearchTest extends TestTemplate {
 
 	@Test(dataProviderClass=SearchDataProvider.class,
 			dataProvider="getOnWikiHostsTermsAndMatchUrls",
-	          groups = {"OnWikiSearch_001_articlematch", "", "Search"})
+	          groups = {"OnWikiSearch_001_articlematch", "OnWikiSearch", "Search"})
 		public void OnWikiSearch_001_articlematch( String searchHost, String searchTerm, String expectedUrl ) {
 			CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 			search.goToSearchPage(searchHost);

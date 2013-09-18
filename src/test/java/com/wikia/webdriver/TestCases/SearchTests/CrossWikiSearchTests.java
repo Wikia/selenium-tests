@@ -23,7 +23,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getExactMatchQueries",
-			groups = {"CrossWikiSearchTests_001", "Search"})
+			groups = {"CrossWikiSearchTests_001", "CrossWikiSearch"})
 	public void crossWikiSearch_001_exactMatch(String query, String wikiName, String vertical) {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
@@ -36,7 +36,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 		searchPage.verifyFirstResultPageVideos();
 	}
 
-	@Test(groups= {"CrossWikiSearchTests_002", "Search"})
+	@Test(groups= {"CrossWikiSearchTests_002", "Search", "CrossWikiSearch"})
 	public void crossWikiSearch_002_pagination() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
@@ -63,7 +63,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 		searchPage.verifyStatistics(resultsPerPage);
 	}
 
-	@Test(groups= {"CrossWikiSearchTests_003" , "Search"} )
+	@Test(groups= {"CrossWikiSearchTests_003" , "Search", "CrossWikiSearch"} )
 	public void crossWikiSearch_003_resultClick() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openHomePage();
@@ -77,7 +77,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 
 	@Test(dataProviderClass=SearchDataProvider.class,
 			dataProvider="getCrossWikiTermsAndUrls",
-			groups = {"CrossWikiSearchTests_004", "Search"})
+			groups = {"CrossWikiSearchTests_004", "Search", "CrossWikiSearch"})
 	public void crossWikiSearch_004_wikimatch( String searchTerm, String expectedUrl ) {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
@@ -85,7 +85,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 		search.verifyMatchResultUrl(expectedUrl);
 	}
 
-	@Test(groups = {"CrossWikiSearchTests_005", "Search"})
+	@Test(groups = {"CrossWikiSearchTests_005", "Search", "CrossWikiSearch"})
 	public void crossWikiSearch_005_noResults() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
@@ -94,7 +94,7 @@ public class CrossWikiSearchTests extends TestTemplate {
 		search.verifyNoResultsCaption();
 	}
 
-	@Test(groups = {"CrossWikiSearchTests_006", "Search"})
+	@Test(groups = {"CrossWikiSearchTests_006", "Search", "CrossWikiSearch"})
 	public void crossWikiSearch_006_onePageResult() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);

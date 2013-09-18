@@ -46,7 +46,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",
-			groups={"intraSearch001", "intraSearch", "Search"}
+			groups={"IntraSearch001", "IntraWikiSearch", "Search"}
 	)
 	public void intraWikiSearch_001_exactMatch(String query) {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
@@ -54,7 +54,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.verifyFirstResult(query);
 	}
 
-	@Test(groups={"intraSearch002", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch002", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_002_pagination() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPaginationResults);
@@ -69,7 +69,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.verifyLastResultPage();
 	}
 
-	@Test(groups={"intraSearch003", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch003", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_003_resultsCount() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
@@ -78,14 +78,14 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.verifyResultsCount(resultsPerPage);
 	}
 
-	@Test(groups={"intraSearch004", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch004", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_004_noResults() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseNoResults);
 		search.verifyNoResults();
 	}
 
-	@Test(groups={"intraSearch005", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch005", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_005_filtering() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
@@ -99,7 +99,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.verifyAllResultsVideos(resultsPerPage);
 	}
 
-	@Test(groups={"intraSearch006", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch006", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_006_sortingVideos() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
@@ -117,7 +117,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.compareTitleListsNotEquals(titles2, titles3);
 	}
 
-	@Test(groups={"intraSearch007", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch007", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_007_sortingImages() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
@@ -131,14 +131,14 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.compareTitleListsNotEquals(titles1, titles2);
 	}
 
-	@Test(groups={"intraSearch008", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch008", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_008_dropDownSuggestions() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.typeSearchQuery(searchPhraseSuggestions);
 		search.verifySuggestions(searchPhraseSuggestions);
 	}
 
-	@Test(groups={"intraSearch009", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch009", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_009_languageTranslation() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
@@ -146,7 +146,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.verifyLanguageTranslation();
 	}
 
-	@Test(groups={"intraSearch010", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch010", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_010_imagesAndVideosOnly() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
@@ -157,7 +157,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.verifyVideosOnly();
 	}
 
-	@Test(groups={"intraSearch011", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch011", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_011_defaultNamespaces() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
@@ -165,7 +165,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.verifyDefaultNamespaces();
 	}
 
-	@Test(groups={"intraSearch012", "intraSearch", "Search"})
+	@Test(groups={"IntraSearch012", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_012_extensionNotNeeded() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchResultWithExtension);
@@ -175,7 +175,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getNamespaces",
-			groups={"intraSearch013", "intraSearch", "Search"}
+			groups={"IntraSearch013", "IntraWikiSearch", "Search"}
 	)
 	public void intraWikiSearch_013_namespaces(String searchPhrase, String namespace) {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
@@ -183,5 +183,4 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.selectAllAdvancedOptions();
 		search.verifyNamespace(namespace);
 	}
-
 }
