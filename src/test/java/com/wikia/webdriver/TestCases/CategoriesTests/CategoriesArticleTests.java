@@ -29,7 +29,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"CategoriesTestsArticle001", "CategoriesTestsArticle"})
+	@Test(groups = {"CategoriesTestsArticle001", "CategoriesTestsArticle", "Smoke2"})
 	public void CategoriesTestsArticle001_anon() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);

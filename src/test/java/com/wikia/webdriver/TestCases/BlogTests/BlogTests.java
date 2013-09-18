@@ -30,7 +30,7 @@ public class BlogTests extends NewTestTemplate{
 	 * 5. Move existing blog post
 	 */
 
-	@Test(groups = { "BlogTests_001", "BlogTests"})
+	@Test(groups = { "BlogTests_001", "BlogTests", "Smoke1"})
 	public void BlogTests_001_addFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
