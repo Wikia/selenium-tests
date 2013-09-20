@@ -205,8 +205,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		imageCounter = 0;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-//		Toolkit toolkit = Toolkit.getDefaultToolkit();
-//		Dimension dim = toolkit.getScreenSize();
 
 		StringBuilder builder = new StringBuilder();
 		builder.append(
@@ -221,7 +219,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 				"<p>Date: " + dateFormat.format(date) + " UTC</p>" +
 				"<p>Browser: " + Global.BROWSER + "</p>" +
 				"<p>OS: " + System.getProperty("os.name") + "</p>" +
-//				"<p>Screen resolution: " + dim.width + "x"+dim.height+"</p>" +
 				"<p>Testing environment: "+ Global.DOMAIN+"</p>" +
 				"<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>" +
 				"<p>Tested version: "+ Global.WIKI_VERSION+"</p>" +

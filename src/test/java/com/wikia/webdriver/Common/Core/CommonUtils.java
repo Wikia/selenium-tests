@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -31,7 +32,7 @@ public class CommonUtils {
 
 	/**
 	 * appends given text to specified file
-	 * 
+	 *
 	 * @param filePath
 	 * @param textToWrite
 	 * @author Karol Kujawiak
@@ -126,19 +127,12 @@ public class CommonUtils {
 	 * @param fileName
 	 * @author Karol Kujawiak
 	 */
-	public static void createDirectory(String fileName)
-	{
-		Boolean dirCreated = new File(fileName).mkdir();
-		int numberOftakes = 0;
-		while (!dirCreated && numberOftakes < 5) {
-			dirCreated = new File(fileName).mkdir();
-			numberOftakes++;
-			System.out.println("directory "+fileName+" not created, trying to create it again");
-		}
-		if(dirCreated) {
+	public static void createDirectory(String fileName) {
+		try {
+			new File(fileName).mkdir();
 			System.out.println("directory "+fileName+" created");
-		} else {
-			System.out.println("directory "+fileName+" not created");
+		} catch (SecurityException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -147,7 +141,7 @@ public class CommonUtils {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(apiUrl);
 			List<NameValuePair> paramPairs = new ArrayList<NameValuePair>();
-			
+
 			for (int i=0; i<param.length; i++){
 				paramPairs.add(new BasicNameValuePair(param[i][0], param[i][1]));
 			}
