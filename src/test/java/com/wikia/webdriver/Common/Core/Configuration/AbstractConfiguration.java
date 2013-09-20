@@ -1,7 +1,8 @@
 package com.wikia.webdriver.Common.Core.Configuration;
 
-import com.wikia.webdriver.Common.Properties.Credentials;
 import java.io.File;
+
+import com.wikia.webdriver.Common.Properties.Credentials;
 
 /**
  *

@@ -81,8 +81,6 @@ public class PageContent {
 	public static String wikiTextPhoto = "[[File:%photoName%|thumb|%s]]";
 	public static String wikiTextSlideshow = "<gallery type=\"slideshow\" position=\"center\">\n%image1%\n%image2%\n%image3%\n%image4%\n</gallery>";
 
-	public static String wikiaGlobalUrl = "http://www.wikia.com/";
-
 	//SignUp correct
 	public static String wikiSignUpBirthDay = "11";
 	public static String wikiSignUpBirthMonth = "11";

@@ -49,6 +49,7 @@ public class URLsContent {
 	public static final String specialMultiWikiFinderPage = "wiki/Special:Multiwikifinder";
 	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
 	public static final String specialUndelete = "wiki/Special:Undelete";
+	public static final String specialPromote = "wiki/Special:Promote";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";

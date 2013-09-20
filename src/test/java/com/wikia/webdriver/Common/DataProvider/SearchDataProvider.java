@@ -2,25 +2,36 @@ package com.wikia.webdriver.Common.DataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.testng.annotations.DataProvider;
 
 public class SearchDataProvider {
 
-    @DataProvider
-    public static final Object[][] getCrossWikiTermsAndUrls() {
-        return new Object[][] {
-        		{"runescape", "http://runescape.wikia.com/"},
-        		{"star wars", "http://starwars.wikia.com/"}
-        };
-    }
-
-    @DataProvider
-    public static final Object[][] getOnWikiHostsTermsAndMatchUrls() {
-    	return new Object[][] {
-    			{ "http://starwars.wikia.com/", "darth vader", "http://starwars.wikia.com/wiki/Anakin_Skywalker" },
-    			{ "http://callofduty.wikia.com/", "Frank Woods", "http://callofduty.wikia.com/wiki/Frank_Woods" }
-    	};
-    }
+	@DataProvider
+	public static final Object[][] getOnWikiHostsTermsAndMatchUrls() {
+		return new Object[][] {
+				{ "http://starwars.wikia.com/", "darth vader", "http://starwars.wikia.com/wiki/Anakin_Skywalker" },
+				{ "http://callofduty.wikia.com/", "Frank Woods", "http://callofduty.wikia.com/wiki/Frank_Woods" }
+		};
+	}
+	/*
+	 *
+	 */
+	@DataProvider
+	public static final Object[][] getExpectedWikiResults() {
+		return new Object[][] {
+				{ "Marvel Database"},
+				{ "Marvel Movies"},
+				{ "Marvel: War of Heroes Wiki"},
+				{ "Marvel: Avengers Alliance Wiki"},
+				{ "Marvel Fanon"},
+				{ "Marvel-Microheroes Wiki"},
+				{ "Marvel Heroes Wiki"},
+				{ "Marvel Cinematic Universe Wiki"},
+				{ "Comic Crossroads"},
+				{ "Marvel Animated Universe Wiki"},
+		};
+	}
 
 	public static final List<Integer> getSearchLimits() {
 		List<Integer> limits = new ArrayList<Integer>();

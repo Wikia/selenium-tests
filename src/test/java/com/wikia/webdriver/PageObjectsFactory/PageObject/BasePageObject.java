@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
@@ -790,5 +791,12 @@ public class BasePageObject{
 		}
 		Assertion.assertEquals(statusCode, desiredStatus);
 		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
+	}
+
+	public void openSpecialPromoteOnCurrentWiki() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String url = (String) js.executeScript("return wgServer");
+		getUrl(url + "/" + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
 }
