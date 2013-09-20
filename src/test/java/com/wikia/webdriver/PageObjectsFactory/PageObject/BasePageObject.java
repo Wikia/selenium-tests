@@ -1,15 +1,9 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,6 +17,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  *
@@ -692,13 +694,12 @@ public class BasePageObject{
 				element
 		);
 	}
-	
+
 	public void openSpecialPromoteOnCurrentWiki() {
-		String url = getCurrentUrl();
-		int indexStart = url.indexOf("wiki/");
-		url = url.substring(0, indexStart);
-		getUrl(url + URLsContent.specialPromote);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String url = (String) js.executeScript("return wgServer");
+		getUrl(url + "/" + URLsContent.specialPromote);
 		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
-	
+
 }

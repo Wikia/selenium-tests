@@ -2,13 +2,11 @@ package com.wikia.webdriver.Common.DataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Factory;
 
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import org.testng.annotations.DataProvider;
 
 public class SearchDataProvider {
-	
+
 	@DataProvider
 	public static final Object[][] getOnWikiHostsTermsAndMatchUrls() {
 		return new Object[][] {
@@ -16,7 +14,9 @@ public class SearchDataProvider {
 				{ "http://callofduty.wikia.com/", "Frank Woods", "http://callofduty.wikia.com/wiki/Frank_Woods" }
 		};
 	}
-	
+	/*
+	 *
+	 */
 	@DataProvider
 	public static final Object[][] getExpectedWikiResults() {
 		return new Object[][] {

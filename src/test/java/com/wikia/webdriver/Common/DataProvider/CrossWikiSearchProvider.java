@@ -7,6 +7,9 @@ import org.testng.annotations.DataProvider;
  * Date: 02.04.13
  * Time: 16:27
  */
+/**
+ * (query, expected wiki result, hub)
+ */
 public class CrossWikiSearchProvider {
 	@DataProvider
 	public static final Object[][] getExactMatchQueries() {
@@ -21,12 +24,15 @@ public class CrossWikiSearchProvider {
 				"callofduty", "Call of Duty Wiki", "VIDEO GAMES"
 			}, {
 				"cod", "Call of Duty Wiki", "VIDEO GAMES"
-			}, 
+			},
 		};
 	}
 
-    @DataProvider
-    public static final Object[][] getPushToTopQueries() {
+/**
+ * (query, expected wiki result)
+ */
+	@DataProvider
+	public static final Object[][] getPushToTopQueries() {
 		return new Object[][]{
 			{
 				"Gauzz's Sandbox", "Gauzz's Sandbox Wiki"
@@ -44,5 +50,5 @@ public class CrossWikiSearchProvider {
 				"lohgame", "Legacy of Heroes Wiki"
 			}
 		};
-    }
+	}
 }

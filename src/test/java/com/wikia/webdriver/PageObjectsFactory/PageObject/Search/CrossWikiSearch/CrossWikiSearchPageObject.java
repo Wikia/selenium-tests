@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -74,7 +73,7 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	protected WebElement fourthResult;
 	@FindBy(css=".Results > :nth-child(4) h1 > a")
 	protected WebElement fourthResultLink;
-	
+
 	private By paginationContainer = By.cssSelector(".wikia-paginator");
 
 
@@ -83,13 +82,14 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void verifyQuery(String query) {
-		boolean flag = false;
+		boolean isPresent = false;
 		for (WebElement element:resultLinks) {
 			if (element.getText().contains(query)){
-				flag=true;
+				isPresent = true;
+				break;
 			}
 		}
-		Assertion.assertTrue(flag, "there is no result link in the page");
+		Assertion.assertTrue(isPresent, "there is no result link in the page");
 	}
 
 	public void goToSearchPage(String searchUrl) {
@@ -110,12 +110,6 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		waitForElementByElement(searchBox);
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPageObject(driver);
-	}
-
-	public void verifyMatchResultUrl( String url ) {
-		waitForElementByElement(firstResultLink);
-		String firstUrl = getAttributeValue(firstResultLink, "href");
-		Assertion.assertEquals(url, firstUrl, "Expected url and fetched url match");
 	}
 
 	public void verifyFirstResultTitle(String wikiName) {
@@ -242,14 +236,14 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 			Assertion.assertStringContains(statisticsVideos.get(i).getText(), "VIDEO");
 		}
 	}
-	
+
 	public String getFirstDescription() {
 		return firstResultDescription.getText();
 	}
-	
+
 	/*
-	 * Method fetches specific string related to an image by storing index start position and 
-	 * finish position, and then selects characters in between those indexes by using substring method. 
+	 * Method fetches specific string related to an image by storing index start position and
+	 * finish position, and then selects characters in between those indexes by using substring method.
 	 */
 	public String getFirstImageText() {
 		int indexComparisonStart = thumbnails.get(0).getAttribute("src").indexOf("px-");
