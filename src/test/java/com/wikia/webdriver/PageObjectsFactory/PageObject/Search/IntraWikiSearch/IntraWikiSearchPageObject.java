@@ -27,6 +27,8 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private WebElement photosVideos;
 	@FindBy(css="#WikiaSearchHeader input[name=search]")
 	private WebElement searchField;
+	@FindBy(css="#search-v2-input")
+	private WebElement intraSearchField;
 	@FindBy(css="#WikiaSearchHeader .wikia-button")
 	private WebElement searchButton;
 	@FindBy(css="#search-v2-button")
@@ -59,10 +61,20 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private WebElement resultCountMessage;
 	@FindBy(css=".SearchInput .grid-1.alpha")
 	private WebElement searchHeadline;
+	@FindBy(css=".search-tabs.grid-1.alpha")
+	private WebElement searchTabs;
 	@FindBy(css="#advanced-link")
 	private WebElement advancedButton;
 	@FindBy(css="#AdvancedSearch")
 	private WebElement advancedField;
+	@FindBy(css=".top-wiki-articles.RailModule")
+	private WebElement topModule;
+	@FindBy(css=".top-wiki-article-thumbnail")
+	private List<WebElement> topModuleArticleThumbnail;
+	@FindBy(css=".top-wiki-article-text")
+	private List<WebElement> topModuleArticleText;
+	@FindBy(css=".top-wiki-article.result")
+	private List<WebElement> topModuleResults;
 	@FindBy(css="#AdvancedSearch label")
 	private List<WebElement> advancedOptions;
 	@FindBy(css="#AdvancedSearch label input")
@@ -238,6 +250,21 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	public void verifyNamespace(String namespace) {
 		waitForElementByElement(titles.get(0));
 		Assertion.assertTrue(titles.get(0).getText().startsWith(namespace));
+	}
+
+	public void verifySearchPageOpened() {
+		Assertion.assertTrue(searchHeadline.isDisplayed());
+		Assertion.assertTrue(searchTabs.isDisplayed());
+		Assertion.assertTrue(intraSearchField.isDisplayed());
+	}
+
+	public void verifyTopModule() {
+		waitForElementByElement(topModule);
+		Assertion.assertNumber(7, topModuleResults.size(), "Top module has correct amount of results");
+		for(int i = 0; i < topModuleResults.size(); i++) {
+			Assertion.assertTrue(topModuleArticleThumbnail.get(i).isDisplayed());
+			Assertion.assertTrue(topModuleArticleText.get(i).isDisplayed());
+		}
 	}
 
 	public void selectPhotosOnly() {
