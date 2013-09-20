@@ -10,4 +10,5 @@ public class SearchContent {
 	public static final String searchPhraseDecimalNumber = "GTA 5";
 	public static final String searchPhraseRomanNumber = "GTA V";
 	public static final String wikiName = "GTA V";
+	public static final String expectedUrl = "http://gtav.wikia.com/wiki/GTA_V_Wiki";
 }

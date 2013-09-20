@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPromotePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHomePage;
 
 /**
@@ -77,14 +78,11 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		wikiArticleHomePage.verifyThisIsWikiHomePage();
 	}
 
-	@Test(dataProviderClass=SearchDataProvider.class,
-			dataProvider="getCrossWikiTermsAndUrls",
-			groups = {"CrossWikiSearchTests_004", "Search"})
-	public void crossWikiSearch_004_wikimatch( String searchTerm, String expectedUrl ) {
+	public void crossWikiSearch_004_wikiUrlmatch() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
-		search.searchFor(searchTerm);
-		search.verifyMatchResultUrl(expectedUrl);
+		search.searchFor(SearchContent.wikiName);
+		search.verifyMatchResultUrl(SearchContent.expectedUrl);
 	}
 
 	@Test(groups = {"CrossWikiSearchTests_005", "Search"})
@@ -122,19 +120,22 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		search.searchFor(SearchContent.searchPhrase);
 		String searchDescription = search.getFirstDescription();
 		String searchImage = search.getFirstImageText();
-		base.openSpecialPromote(wikiURL);
-		search.verifyCrossWikiSearchDescription(searchDescription);
-		search.verifyCrossWikiSearchImage(searchImage);
+		search.openResult(0);
+		base.openSpecialPromoteOnCurrentWiki();
+		SpecialPromotePageObject promote = new SpecialPromotePageObject(driver);
+		promote.verifyCrossWikiSearchDescription(searchDescription);
+		promote.verifyCrossWikiSearchImage(searchImage);
 	}
 	
-	@Test(dataProviderClass=SearchDataProvider.class,
-			dataProvider="getExpectedWikiResults",
-			groups = {"CrossWikiSearchTests_009", "Search"})
-	public void crossWikiSearch_009_wikimatch( String expectedUrl ) {
+	//TODO
+//	@Test(dataProviderClass=SearchDataProvider.class,
+//			dataProvider="getExpectedWikiResults",
+//			groups = {"CrossWikiSearchTests_009", "Search"})
+	public void crossWikiSearch_009_wikimatch( String expectedWikiTitle ) {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
 		search.searchFor(SearchContent.searchPhraseResultsSameOrder);
-		search.verifyMatchResultUrl(expectedUrl);
+		search.verifyQuery(expectedWikiTitle);
 	}
 	
 	@Test(groups = {"CrossWikiSearchTests_010", "Search"})
@@ -142,9 +143,8 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(PageContent.wikiaGlobalUrl);
 		search.searchFor(SearchContent.searchPhraseRomanNumber);
-		search.verifyFirstResult(SearchContent.wikiName);
+		search.verifyQuery(SearchContent.wikiName);
 		search.searchFor(SearchContent.searchPhraseDecimalNumber);
-		search.verifyFourthResult(SearchContent.wikiName);
+		search.verifyQuery(SearchContent.wikiName);
 	}
 }
-

@@ -692,4 +692,13 @@ public class BasePageObject{
 				element
 		);
 	}
+	
+	public void openSpecialPromoteOnCurrentWiki() {
+		String url = getCurrentUrl();
+		int indexStart = url.indexOf("wiki/");
+		url = url.substring(0, indexStart);
+		getUrl(url + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
+	}
+	
 }

@@ -805,9 +805,5 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForTextToBePresentInElementByElement(followButton, "Following");
 		PageObjectLogging.log("followArticle", "page is followed", true, driver);
 	}
-	
-	public void openSpecialPromote(String wikiURL) {
-		getUrl(wikiURL + URLsContent.specialPromote);
-		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
-	}
+
 }

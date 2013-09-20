@@ -74,10 +74,6 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	protected WebElement fourthResult;
 	@FindBy(css=".Results > :nth-child(4) h1 > a")
 	protected WebElement fourthResultLink;
-	@FindBy(css="#curMainImageName")
-	protected WebElement specialPromoteThumbnail;
-	@FindBy(css=".description-wrapper")
-	protected WebElement specialPromoteDescription;
 	
 	private By paginationContainer = By.cssSelector(".wikia-paginator");
 
@@ -86,7 +82,15 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		super(driver);
 	}
 
-
+	public void verifyQuery(String query) {
+		boolean flag = false;
+		for (WebElement element:resultLinks) {
+			if (element.getText().contains(query)){
+				flag=true;
+			}
+		}
+		Assertion.assertTrue(flag, "there is no result link in the page");
+	}
 
 	public void goToSearchPage(String searchUrl) {
 		try{
@@ -109,14 +113,10 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void verifyMatchResultUrl( String url ) {
-		String href = match.getAttribute("href");
-		if ( href.contains(url) ) {
-			PageObjectLogging.log("verifyMatchResultUrl", "match result page matches url "+url+ ": "+href, true, driver);
-		} else {
-			PageObjectLogging.log("verifyMatchResultUrl", "match result page does not match url "+url+ ": "+href, false, driver);
-		}
+		waitForElementByElement(firstResultLink);
+		String firstUrl = getAttributeValue(firstResultLink, "href");
+		Assertion.assertEquals(url, firstUrl, "Expected url and fetched url match");
 	}
-
 
 	public void verifyFirstResultTitle(String wikiName) {
 		waitForTextToBePresentInElementByElement(firstResultLink, wikiName);
@@ -256,41 +256,5 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		int indexComparisonFinish = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
 		return thumbnails.get(0).getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
 	}
-	
-	public void verifyFirstResult(String wikiName){
-		waitForElementByElement(firstResult);
-		String wikiTitle = firstResultLink.getText();
-		Assertion.assertStringContains(wikiTitle, wikiName);
-		PageObjectLogging.log("verifyFirstResult", "first result verified",
-				true);
-	}
-	
-	public void verifyFourthResult(String wikiName){
-		waitForElementByElement(fourthResult);
-		String fourthResultLink = fourthResult.getText();
-		Assertion.assertStringContains(fourthResultLink, wikiName);
-		PageObjectLogging.log("getFourthResult", "fourth result verified",
-				true);
-	}
-	
-	public void verifyCrossWikiSearchDescription(String firstDescription) {
-		waitForElementByElement(specialPromoteDescription);
-		Assertion.assertStringContains(
-			specialPromoteDescription.getText(),
-			firstDescription.substring(0,
-			firstDescription.length()-3)
-		);
-	}
-	
-	public void verifyCrossWikiSearchImage(String firstImage) {
-		waitForElementByElement(specialPromoteThumbnail);
-		String secondImage = getSecondImageText();
-		Assertion.assertEquals(firstImage, secondImage);
-	}
-	
-	public String getSecondImageText() {
-		int indexComparisonStart = specialPromoteThumbnail.getAttribute("src").indexOf("px-");
-		int indexComparisonFinish = specialPromoteThumbnail.getAttribute("src").indexOf("-Wikia-Visualization-Main");
-		return specialPromoteThumbnail.getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
-	}
+
 }
