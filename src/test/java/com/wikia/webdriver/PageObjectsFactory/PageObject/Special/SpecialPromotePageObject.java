@@ -15,8 +15,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 	@FindBy(css=".description-wrapper")
 	protected WebElement specialPromoteDescription;
 
-	public SpecialPromotePageObject(WebDriver driver)
-	{
+	public SpecialPromotePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
