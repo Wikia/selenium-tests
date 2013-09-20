@@ -12,7 +12,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 public class CustomizeToolbarTests extends TestTemplate{
 //	private String wikiArticle = "QAautoPage";
 
-	@Test(groups = {"CustomizeToolbar001", "Toolbar", "CustomizeToolbar"})
+	@Test(groups = {"CustomizeToolbar001", "Toolbar", "CustomizeToolbar", "Smoke4"})
 //	https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Adding
 	public void CustomizeToolbar005_Adding()
 	{

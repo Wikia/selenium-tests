@@ -19,7 +19,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-		groups={"ArticleCRUDUser", "ArticleCRUDUser_001", "Smoke"}
+		groups={"ArticleCRUDUser", "ArticleCRUDUser_001"}
 	)
 	public void ArticleCRUDUser_001_specialPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -35,7 +35,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	}
 
 	@Test(
-		groups={"ArticleCRUDUser", "ArticleCRUDUser_002", "Smoke"}
+		groups={"ArticleCRUDUser", "ArticleCRUDUser_002"}
 	)
 	public void ArticleCRUDUser_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -50,7 +50,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"ArticleCRUDUser", "ArticleCRUDUser_003", "Smoke"}
+		groups = {"ArticleCRUDUser", "ArticleCRUDUser_003", "Smoke1"}
 	)
 	public void ArticleCRUDUser_003_addDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

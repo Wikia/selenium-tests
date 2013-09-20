@@ -17,7 +17,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"ArticleComments_001", "ArticleComments"})
+	@Test(groups = {"ArticleComments_001", "ArticleComments", "Smoke2"})
 	public void ArticleComments_001_editComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
