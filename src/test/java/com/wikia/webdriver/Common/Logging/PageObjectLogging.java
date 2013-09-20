@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Logging;
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -205,7 +206,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		imageCounter = 0;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-//		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
 //		Dimension dim = toolkit.getScreenSize();
 
 		StringBuilder builder = new StringBuilder();
