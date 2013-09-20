@@ -1,16 +1,8 @@
 package com.wikia.webdriver.Common.Templates;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
-import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
 import java.io.File;
 import java.lang.reflect.Method;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -20,12 +12,23 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.CommonUtils;
+import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Properties;
+
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
 public class NewTestTemplate {
 
 	protected WebDriver driver;
 	protected AbstractConfiguration config;
 	protected String wikiURL;
+	protected String wikiCorporateURL;
 
 	public NewTestTemplate() {
 		config = ConfigurationFactory.getConfig();
@@ -45,6 +48,7 @@ public class NewTestTemplate {
 		startBrowser();
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
+		wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
 		driver.get(wikiURL + URLsContent.logout);
 	}
 
