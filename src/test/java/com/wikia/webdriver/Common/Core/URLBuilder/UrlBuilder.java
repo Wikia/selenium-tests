@@ -27,13 +27,16 @@ public class UrlBuilder {
 	}
 
 	public String getUrlForWiki(String wikiName) {
+		String prefix;
 		String suffix;
 		isWikia = wikiName.endsWith("wikia");
 		String url = "http://";
 
 		if (isWikia) {
+			prefix = "www.";
 			suffix = ".com/";
 		} else {
+			prefix = "";
 			suffix = ".wikia.com/";
 		}
 
@@ -41,7 +44,7 @@ public class UrlBuilder {
 			if (env.equals("prod")) {
 				url += wikiName + suffix;
 			} else if (env.equals("preview") || env.contains("sandbox")) {
-				url += env + "." + wikiName + suffix;
+				url += env + "." + prefix + wikiName + suffix;
 			} else if (env.contains("dev")) {
 				String devBoxOwner = env.split("-")[1];
 				if (isWikia) {

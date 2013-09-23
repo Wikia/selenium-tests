@@ -94,7 +94,7 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 
 	public void goToSearchPage(String searchUrl) {
 		try{
-			getUrl(searchUrl+"wiki/Special:Search");
+			getUrl(searchUrl+"index.php?title=Special:Search");
 		}
 		catch (TimeoutException e)
 		{
