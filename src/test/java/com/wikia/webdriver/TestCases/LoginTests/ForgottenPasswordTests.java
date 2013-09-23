@@ -67,5 +67,5 @@ public class ForgottenPasswordTests extends TestTemplate {
 		login.verifyUserLoggedIn(userName);
 
 		login.logOut(driver);
-    }
+	}
 }
