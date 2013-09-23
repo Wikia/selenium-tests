@@ -48,7 +48,7 @@ public class AdsMobileObject extends WikiBasePageObject {
 			WebElement adInContent = driver.findElement(
 				By.cssSelector(AdsMobileContent.getSlotSelector(AdsMobileContent.adInContent))
 			);
-			if (checkIfElementOnPage("img[src='" + acceptableAd + "']")) {
+			if (checkIfElementInElement("img[src='" + acceptableAd + "']", adInContent)) {
 				PageObjectLogging.log(
 					"AdFound", "Expected ad found",
 					true
@@ -138,6 +138,7 @@ public class AdsMobileObject extends WikiBasePageObject {
 
 	private boolean verifyAd(String slotName) {
 		if (checkIfElementOnPage(AdsMobileContent.getSlotSelector(slotName))) {
+			scrollToSelectorNoJQ(AdsMobileContent.getSlotSelector(slotName));
 			WebElement ad = driver.findElement(By.cssSelector(AdsMobileContent.getSlotSelector(slotName)));
 			List<WebElement> scripts = ad.findElements(By.tagName("script"));
 			for (WebElement script: scripts) {

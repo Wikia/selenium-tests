@@ -308,7 +308,9 @@ public class BasePageObject{
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(
 				"var x = document.querySelector(arguments[0]);"
-				+ "window.scroll(0,x.offsetTop + x.clientHeight + 100);",
+				+ "var event = new Event('scroll');"
+				+ "window.scroll(0,x.offsetTop + x.clientHeight);"
+				+ "window.dispatchEvent(event)",
 				selector
 			);
 			return true;
