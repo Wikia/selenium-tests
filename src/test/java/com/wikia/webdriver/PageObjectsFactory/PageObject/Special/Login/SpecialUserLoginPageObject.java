@@ -9,6 +9,7 @@ import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
@@ -79,12 +80,12 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		waitForElementByElement(forgotPasswordLink);
 		scrollAndClick(forgotPasswordLink);
 	}
-//
-//	public void loginAndVerify(String name, String password){
-//		openSpecialUserLogin();
-//		login(name, password);
-//		verifyUserLoggedIn(name);
-//	}
+
+	public void loginAndVerify(String name, String password){
+		openSpecialUserLogin();
+		login(name, password);
+		verifyUserLoggedIn(name);
+	}
 
 	public void loginAndVerify(String name, String password, String wikiURL){
 		openSpecialUserLogin(wikiURL);
@@ -112,11 +113,11 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		clickForgotPasswordLink();
 	}
 
-//	public void openSpecialUserLogin(){
-//		getUrl(Global.DOMAIN+ URLsContent.specialUserLogin);
-//		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
-//	}
-//
+	public void openSpecialUserLogin(){
+		getUrl(Global.DOMAIN+ URLsContent.specialUserLogin);
+		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);
+	}
+
 	public void openSpecialUserLogin(String wikiURL){
 		getUrl(wikiURL+ URLsContent.specialUserLogin);
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true, driver);

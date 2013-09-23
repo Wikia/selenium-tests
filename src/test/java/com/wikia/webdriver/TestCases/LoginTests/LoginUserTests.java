@@ -14,18 +14,20 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
+ * 1. Login user using Special:UserLogin page,
+ * 2. Login user using drop-down
  */
 public class LoginUserTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test
+	@Test(groups = {"LoginUser_001", "LoginUser", "Smoke5"})
 	public void Login_001_specialPageUser() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerify(credentials.userName, credentials.password, wikiURL);
 	}
 
-	@Test
+	@Test(groups = {"LoginUser_002", "LoginUser", "Smoke5"})
 	public void Login_002_dropDownUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
