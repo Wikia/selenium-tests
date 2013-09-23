@@ -21,13 +21,13 @@ public class LoginStaffTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"LoginStaff_001", "LoginUser"})
+	@Test(groups = {"LoginStaff_001", "LoginStaff"})
 	public void Login_001_specialPageStaff() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerify(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 	}
 
-	@Test(groups = {"LoginStaff_002", "LoginUser"})
+	@Test(groups = {"LoginStaff_002", "LoginStaff"})
 	public void Login_002_dropDownStaff() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
