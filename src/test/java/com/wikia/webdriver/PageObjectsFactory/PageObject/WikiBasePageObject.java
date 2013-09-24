@@ -174,6 +174,18 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
+	public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL){
+		getUrl(wikiURL+ URLsContent.specialUserLogin);
+		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
+		return new SpecialUserLoginPageObject(driver);
+	}
+
+	public SpecialUserLoginPageObject openSpecialUserLogin(){
+		getUrl(Global.DOMAIN+ URLsContent.specialUserLogin);
+		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
+		return new SpecialUserLoginPageObject(driver);
+	}
+
 	public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
 		getUrl(wikiURL + "wiki/User:" + userName);
 		return new UserProfilePageObject(driver);
