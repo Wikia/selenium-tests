@@ -72,7 +72,7 @@ public class NotificationsComponentObject extends BasePageObject {
 		openNotifications();
 		waitForNotificationsMessagesToLoad();
 		PageObjectLogging.log("#WallNotifications li ul.subnav",
-				"show notifications", true, driver);
+				"show notifications", true);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class NotificationsComponentObject extends BasePageObject {
 		waitForElementByElement(notificationsBubbles);
 		scrollAndClick(notificationsBubbles);
 		PageObjectLogging.log("clickshowNotifications",
-				"click on notifications bubbles", true, driver);
+				"click on notifications bubbles", true);
 	}
 
 	/**
@@ -106,13 +106,13 @@ public class NotificationsComponentObject extends BasePageObject {
 					.contains(text)) {
 				PageObjectLogging.log("getNotificationLink",
 						"get addres that of " + i + 1
-								+ " notification points to", true, driver);
+								+ " notification points to", true);
 				return notificationsList.get(i).getAttribute("href");
 			}
 		}
 		PageObjectLogging.log("getNotificationLink",
 				"No notification that contains the following text: " + text,
-				false, driver);
+				false);
 		return null;
 	}
 
