@@ -244,7 +244,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Video);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDUser_009", "ArticleFeaturesCRUDUser"})
+	@Test(groups={"ArticleFeaturesCRUDUser_009", "ArticleFeaturesCRUDUser", "Smoke4"})
 	public void ArticleFeaturesCRUDUser_009_addingModifyImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

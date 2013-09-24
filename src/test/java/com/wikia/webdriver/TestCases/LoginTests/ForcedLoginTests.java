@@ -120,7 +120,7 @@ public class ForcedLoginTests extends TestTemplate{
 		login.logOut(driver);
 	}
 
-	@Test(groups = {"ForcedLogin_006_rail", "ForcedLogin"})
+	@Test(groups = {"ForcedLogin_006_rail", "ForcedLogin", "Smoke2"})
 	public void ForcedLogin_006_rail () {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
