@@ -1,50 +1,57 @@
+/**
+ *
+ */
 package com.wikia.webdriver.TestCases.LoginTests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.DataProvider.LoginDataProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject.DropDownComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
-public class LoginTests extends TestTemplate {
+/**
+ * @author Karol 'kkarolk' Kujawiak
+ *
+ * 1. Login user using Special:UserLogin page,
+ * 2. Login user using drop-down
+ * 3. Login staff user using Special:UserLogin page,
+ * 4. Login staff user using drop-down
+ */
+public class LoginTests extends NewTestTemplate {
 
-	@Test(
-            dataProviderClass=LoginDataProvider.class,
-            dataProvider="getUserCredentials",
-            groups = { "Login_001", "Login" }
-        )
-	public void Login_001_SpecialPage(
-            String userName, String password,
-            String userNameEnc
-        ) {
-            PageObjectLogging.log("Login_001_SpecialPage", userName, true);
-            SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-            login.logOut(driver);
-            login.loginAndVerify(userName, password);
-            login.logOut(driver);
+	Credentials credentials = config.getCredentials();
+
+	@Test(groups = {"Login_001", "Login", "Smoke5"})
+	public void Login_001_specialPageUser() {
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.loginAndVerify(credentials.userName, credentials.password, wikiURL);
 	}
 
-	@Test(
-            dataProviderClass=LoginDataProvider.class,
-            dataProvider="getUserCredentials",
-            groups = { "Login_002", "Login" }
-        )
-	public void Login_002_DropDown(
-            String userName, String password,
-            String userNameEnc
-        ) {
-            PageObjectLogging.log("Login_002_DropDown", userName, true);
-            SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-            login.logOut(driver);
-            WikiBasePageObject base = new WikiBasePageObject(driver);
-            base.openWikiPage();
-            DropDownComponentObject dropDown = new DropDownComponentObject(driver);
-            dropDown.openDropDown();
-            dropDown.logIn(userName, password);
-            base.verifyUserLoggedIn(userName);
-            login.logOut(driver);
+	@Test(groups = {"Login_002", "Login", "Smoke5"})
+	public void Login_002_dropDownUser() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
+		DropDownComponentObject dropDown = new DropDownComponentObject(driver);
+		dropDown.openDropDown();
+		dropDown.logIn(credentials.userName2, credentials.password2);
+		base.verifyUserLoggedIn(credentials.userName2);
+	}
+
+	@Test(groups = {"Login_003", "Login"})
+	public void Login_003_specialPageStaff() {
+		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+		login.loginAndVerify(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+	}
+
+	@Test(groups = {"Login_004", "Login"})
+	public void Login_004_dropDownStaff() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
+		DropDownComponentObject dropDown = new DropDownComponentObject(driver);
+		dropDown.openDropDown();
+		dropDown.logIn(credentials.userNameStaff, credentials.passwordStaff);
+		base.verifyUserLoggedIn(credentials.userNameStaff);
 	}
 }
