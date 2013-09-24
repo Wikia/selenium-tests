@@ -79,7 +79,7 @@ public class URLsContent {
 	public static final String deleteParameter = "action=delete";
 
 	// WAM Scores page url
-	public static final String wamPageUrl = "WAM";
+	public static final String wamPageUrl = "wiki/WAM";
 
 	//Preview url for testing video suggestions
 	public static final String videoSuggestionsUrl = "http://preview.callofduty.wikia.com/wiki/Frank_Woods";
