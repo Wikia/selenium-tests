@@ -60,7 +60,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	}
 
 	public BlogPageObject openBlogPage(int blogNumber) {
-		blogPostList.get(blogNumber).click();
+		getUrl(blogPostList.get(blogNumber).getAttribute("href"));
 		PageObjectLogging.log("openBlogPage",
 				"blog post " + blogPostList.get(0).getText() + " opened",
 				true);
