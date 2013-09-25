@@ -53,7 +53,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 		article.verifyVideoWidth(width);
 	}
 
-	@Test(groups = {"VetModalWidth", "VetModalwidth_002"})
+	@Test(groups = {"VetModalWidth", "VetModalwidth_002"}, dependsOnMethods = "Vet_Modal_001_widthOnPage")
 	public void Vet_Modal_002_widthInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
