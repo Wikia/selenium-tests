@@ -73,6 +73,9 @@ public class PageContent {
 	public static String newPasswordSentMessage = "We've sent a new password to the email address for %userName%.";
 	public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
 	public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
+	public static String signUpTooYoungMessage = "Sorry, we're not able to register your account at this time.";
+	public static String signUpInvalidCaptchaMessage = "The word you entered didn't match the word in the box, try again!";
+	public static String signUpUserExistsMessage = "Someone already has this username. Try a different one!";
 
 	//Blocks for Phalanx
 	public static String titleFilterPlain = "BadContent";
