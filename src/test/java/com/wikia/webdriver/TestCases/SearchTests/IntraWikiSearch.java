@@ -26,6 +26,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.
  *  11. Verify if there are correct advanced option set as a default
  *  12. Search for some image without typing extension (.jpg) and verify photo is found
  *  13. Search for different phrases and verify there are correct namespaces in result titles
+ *  14. Search for empty field and verify if search page is opened
+ *  15. Verify top module
  */
 
 public class IntraWikiSearch extends NewTestTemplate {
@@ -134,7 +136,6 @@ public class IntraWikiSearch extends NewTestTemplate {
 	@Test(groups={"IntraSearch008", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_008_dropDownSuggestions() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
-		search.typeSearchQuery(searchPhraseSuggestions);
 		search.verifySuggestions(searchPhraseSuggestions);
 	}
 
@@ -183,4 +184,19 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.selectAllAdvancedOptions();
 		search.verifyNamespace(namespace);
 	}
+
+	@Test(groups={"IntraSearch014", "IntraWikiSearch", "Search"})
+	public void intraWikiSearch_014_searchPageOpened() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
+		search.searchFor("");
+		search.verifySearchPageOpened();
+	}
+
+	@Test(groups={"IntraSearch015", "IntraWikiSearch", "Search"})
+	public void intraWikiSearch_015_topModule() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
+		search.searchFor(searchPhraseResults);
+		search.verifyTopModule();
+	}
+
 }

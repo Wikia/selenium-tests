@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import org.openqa.selenium.By;
 
 public class IntraWikiSearchPageObject extends BasePageObject {
 
@@ -27,6 +28,8 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private WebElement photosVideos;
 	@FindBy(css="#WikiaSearchHeader input[name=search]")
 	private WebElement searchField;
+	@FindBy(css="#search-v2-input")
+	private WebElement intraSearchField;
 	@FindBy(css="#WikiaSearchHeader .wikia-button")
 	private WebElement searchButton;
 	@FindBy(css="#search-v2-button")
@@ -59,10 +62,20 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private WebElement resultCountMessage;
 	@FindBy(css=".SearchInput .grid-1.alpha")
 	private WebElement searchHeadline;
+	@FindBy(css=".search-tabs.grid-1.alpha")
+	private WebElement searchTabs;
 	@FindBy(css="#advanced-link")
 	private WebElement advancedButton;
 	@FindBy(css="#AdvancedSearch")
 	private WebElement advancedField;
+	@FindBy(css=".top-wiki-articles.RailModule")
+	private WebElement topModule;
+	@FindBy(css=".top-wiki-article-thumbnail")
+	private List<WebElement> topModuleArticleThumbnail;
+	@FindBy(css=".top-wiki-article-text")
+	private List<WebElement> topModuleArticleText;
+	@FindBy(css=".top-wiki-article.result")
+	private List<WebElement> topModuleResults;
 	@FindBy(css="#AdvancedSearch label")
 	private List<WebElement> advancedOptions;
 	@FindBy(css="#AdvancedSearch label input")
@@ -78,6 +91,8 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	@FindBy(css=".sprite.play.small")
 	private List<WebElement> playMovieImage;
 
+	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
+
 	/*
 	 * This method is checking whether text is translatable
 	 * by adding "&uselang=qqx" to URl
@@ -86,18 +101,17 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		appendToUrl(URLsContent.translatableLanguage);
 	}
 
-	public void typeSearchQuery(String query) {
-		searchField.sendKeys(query);
-	}
-
 	public void searchFor(String query) {
-		typeSearchQuery(query);
+		searchField.sendKeys(query);
 		searchButton.click();
 		PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
 	}
 
 	public void verifySuggestions(String query) {
-		waitForElementVisibleByElement(suggestionsList.get(0));
+		searchField.click();
+		waitForElementByBy(jqueryAutocompleteBy);
+		searchField.sendKeys(query);
+		waitForElementByElement(suggestionsList.get(0));
 		for(int i = 0; i < suggestionsList.size(); i++) {
 			Assertion.assertStringContains(suggestionsList.get(i).getText(), query);
 		}
@@ -139,11 +153,10 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void verifyLastResultPage() {
-		waitForElementByElement(paginationPages.get(paginationPages.size()-1));
-		paginationPages.get(paginationPages.size()-1).click();
+		waitForElementClickableByElement(paginationPages.get(paginationPages.size()-1));
 		do {
 			waitForElementByElement(paginationPages.get(paginationPages.size()-1));
-			paginationPages.get(paginationPages.size()-1).click();
+			scrollAndClick(paginationPages.get(paginationPages.size()-1));
 		}
 		while(paginationPages.size() > 6);
 		Assertion.assertEquals(paginationPages.size(), 6);
@@ -238,6 +251,21 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	public void verifyNamespace(String namespace) {
 		waitForElementByElement(titles.get(0));
 		Assertion.assertTrue(titles.get(0).getText().startsWith(namespace));
+	}
+
+	public void verifySearchPageOpened() {
+		Assertion.assertTrue(searchHeadline.isDisplayed());
+		Assertion.assertTrue(searchTabs.isDisplayed());
+		Assertion.assertTrue(intraSearchField.isDisplayed());
+	}
+
+	public void verifyTopModule() {
+		waitForElementByElement(topModule);
+		Assertion.assertNumber(7, topModuleResults.size(), "Top module has correct amount of results");
+		for(int i = 0; i < topModuleResults.size(); i++) {
+			Assertion.assertTrue(topModuleArticleThumbnail.get(i).isDisplayed());
+			Assertion.assertTrue(topModuleArticleText.get(i).isDisplayed());
+		}
 	}
 
 	public void selectPhotosOnly() {
