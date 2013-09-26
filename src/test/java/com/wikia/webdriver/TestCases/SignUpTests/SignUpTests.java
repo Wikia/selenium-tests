@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -22,7 +23,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
- * 1. Sign up without/wrong blurry word,
+ * 1. Sign up wrong blurry word,
  * 2. Sign up of too young user,
  * 3. Sign up with existing user name,
  * 4. Sign up with users from data provider.
@@ -35,7 +36,8 @@ public class SignUpTests extends NewTestTemplate {
 
 	@Test(groups = {"SignUp_001", "SignUp"})
 	public void Signup_001_wrongBlurryWord() {
-		SignUpPageObject signUp = new SignUpPageObject(driver, wikiURL);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
 		signUp.typeEmail(credentials.email);
 		signUp.typePassword(signUp.getTimeStamp());
@@ -52,7 +54,8 @@ public class SignUpTests extends NewTestTemplate {
 
 	@Test(groups = {"SignUp_002", "SignUp"})
 	public void Signup_002_tooYoungUser() {
-		SignUpPageObject signUp = new SignUpPageObject(driver, wikiURL);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
 		signUp.typeEmail(credentials.email);
 		signUp.typePassword(signUp.getTimeStamp());
@@ -69,7 +72,8 @@ public class SignUpTests extends NewTestTemplate {
 
 	@Test(groups = {"SignUp_003", "SignUp"})
 	public void Signup_003_existingUserName() {
-		SignUpPageObject signUp = new SignUpPageObject(driver, wikiURL);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(credentials.userName);
 		signUp.verifyUserExistsMessage();
 		signUp.verifySubmitButtonDisabled();
@@ -77,7 +81,8 @@ public class SignUpTests extends NewTestTemplate {
 
 	@Test(groups = {"SignUp_account_creation_TC_001", "SignUp", "Smoke4"})
 	public void Signup_004_signup() {
-		SignUpPageObject signUp = new SignUpPageObject(driver, wikiURL);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 
 		String userName = "user" + signUp.getTimeStamp();
 		String password = "pass" + signUp.getTimeStamp();

@@ -42,6 +42,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
@@ -174,6 +175,12 @@ public class WikiBasePageObject extends BasePageObject {
 		for(WebElement elem:searchSuggestions) {
 			Assertion.assertStringContains(elem.getAttribute("title").toUpperCase(), query.toUpperCase());
 		}
+	}
+
+	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUserSignup);
+		PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
+		return new SignUpPageObject(driver);
 	}
 
 	public PreferencesPageObject openSpecialPreferencesPage(String wikiURL){

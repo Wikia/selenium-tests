@@ -18,7 +18,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
@@ -32,9 +31,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  */
 public class SignUpPageObject extends WikiBasePageObject {
 
-	public SignUpPageObject(WebDriver driver, String wikiURL) {
+	public SignUpPageObject(WebDriver driver) {
 		super(driver);
-		driver.get(wikiURL + URLsContent.specialUserSignup);
 		yearSelect = new Select(birthYearField);
 		daySelect = new Select(birthDayField);
 		monthSelect = new Select(birthMonthField);
@@ -73,11 +71,21 @@ public class SignUpPageObject extends WikiBasePageObject {
 	public void typeEmail(String email) {
 		emailField.sendKeys(email);
 		emailField.sendKeys(Keys.TAB);
+		PageObjectLogging.log(
+				"typeEmail",
+				email + " typed into email field",
+				true
+		);
 	}
 
 	public void typePassword(String password) {
 		passwordField.sendKeys(password);
 		passwordField.sendKeys(Keys.TAB);
+		PageObjectLogging.log(
+				"typePassword",
+				"password typed into password field",
+				true
+		);
 	}
 
 	public void verifyTooYoungMessage() {
@@ -105,7 +113,11 @@ public class SignUpPageObject extends WikiBasePageObject {
 			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
 			monthSelect.selectByVisibleText(month);
-			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true);
+			PageObjectLogging.log(
+					"enterBirthDate ",
+					"Birth date: " + day +" - "+ month +" - "+ year + " selected",
+					true
+			);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -117,6 +129,11 @@ public class SignUpPageObject extends WikiBasePageObject {
 
 	public void typeCaptcha(String captchaWord) {
 		captchaField.sendKeys(captchaWord);
+		PageObjectLogging.log(
+				"typeCaptcha ",
+				"captcha typed into captcha field",
+				true
+		);
 	}
 
 	public AlmostTherePageObject submit(String email, String password) {
@@ -126,6 +143,11 @@ public class SignUpPageObject extends WikiBasePageObject {
 
 	public AlmostTherePageObject submit() {
 		scrollAndClick(signupButton);
+		PageObjectLogging.log(
+				"submit ",
+				"sign up button clicked",
+				true
+		);
 		return new AlmostTherePageObject(driver);
 	}
 
