@@ -136,7 +136,6 @@ public class IntraWikiSearch extends NewTestTemplate {
 	@Test(groups={"IntraSearch008", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_008_dropDownSuggestions() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
-		search.typeSearchQuery(searchPhraseSuggestions);
 		search.verifySuggestions(searchPhraseSuggestions);
 	}
 
