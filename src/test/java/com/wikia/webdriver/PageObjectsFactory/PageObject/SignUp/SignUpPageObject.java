@@ -38,11 +38,11 @@ public class SignUpPageObject extends WikiBasePageObject {
 		monthSelect = new Select(birthMonthField);
 	}
 
-	@FindBy(css = "#WikiaSignupForm input[name='username']")
+	@FindBy(css = "#WikiaSignupForm input[name='userloginext01']")
 	private WebElement userNameField;
 	@FindBy(css = "input[name='email']")
 	private WebElement emailField;
-	@FindBy(css = "#WikiaSignupForm input[name='password']")
+	@FindBy(css = "#WikiaSignupForm input[name='userloginext02']")
 	private WebElement passwordField;
 	@FindBy(css = "select[name='birthmonth']")
 	private WebElement birthMonthField;
@@ -115,7 +115,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 			monthSelect.selectByVisibleText(month);
 			PageObjectLogging.log(
 					"enterBirthDate ",
-					"Birth date: " + day +" - "+ month +" - "+ year + " selected",
+					"Birth date: " + day +"/"+ month +"/"+ year + " selected",
 					true
 			);
 		} catch (InterruptedException e) {
