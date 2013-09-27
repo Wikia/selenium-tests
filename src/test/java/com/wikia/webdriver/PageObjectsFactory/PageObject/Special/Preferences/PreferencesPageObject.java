@@ -7,13 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class PreferencesPageObject extends BasePageObject{
+public class PreferencesPageObject extends WikiBasePageObject{
 
 	public PreferencesPageObject(WebDriver driver) {
 		super(driver);
@@ -26,12 +24,6 @@ public class PreferencesPageObject extends BasePageObject{
 
 	public enum tabNames{
 		Info, Email, Editing, Under, Facebook
-	}
-
-	public void openSpecialPreferencesPage(){
-		getUrl(Global.DOMAIN+URLsContent.specialPreferences);
-		waitForElementByElement(tabs.get(0));
-		PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 	}
 
 	public PreferencesPageObject selectTab(tabNames tab){

@@ -14,7 +14,7 @@
 			<class name="com.wikia.webdriver.TestCases.ImageServingTests.ImageStorageTests"/>
 			<class name="com.wikia.webdriver.TestCases.HubsTests.HubsTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
-			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests_account_creation"/>
+			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests"/>
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
@@ -72,7 +72,6 @@
 			<class name="com.wikia.webdriver.TestCases.LightboxTests.ImageLightboxTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.editingLocalCssTests"/>
-			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpValidationTests"/>
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>

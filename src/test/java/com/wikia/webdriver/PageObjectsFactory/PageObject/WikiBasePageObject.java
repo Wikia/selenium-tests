@@ -42,6 +42,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
@@ -57,6 +58,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActi
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
@@ -133,6 +135,7 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement renameDropdown;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
+	protected By parentBy = By.xpath("./..");
 
 	protected String buildUrlFile(String wikiURL, String fileName) {
 		return wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName;
@@ -172,6 +175,18 @@ public class WikiBasePageObject extends BasePageObject {
 		for(WebElement elem:searchSuggestions) {
 			Assertion.assertStringContains(elem.getAttribute("title").toUpperCase(), query.toUpperCase());
 		}
+	}
+
+	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUserSignup);
+		PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
+		return new SignUpPageObject(driver);
+	}
+
+	public PreferencesPageObject openSpecialPreferencesPage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialPreferences);
+		PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
+		return new PreferencesPageObject(driver);
 	}
 
 	public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL){
