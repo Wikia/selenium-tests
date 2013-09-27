@@ -21,6 +21,7 @@ import org.testng.ITestResult;
 
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 
@@ -41,7 +42,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public static void log(String command, String description, boolean success,
 			WebDriver driver) {
 		imageCounter += 1;
-		CommonUtils.captureScreenshot(screenPath + imageCounter, driver);
+		new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
 		CommonUtils.appendTextToFile(screenPath + imageCounter + ".html",
 				driver.getPageSource());
 		String className = success ? "success" : "error";
@@ -164,8 +165,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		}
 		if (Global.LOG_ENABLED) {
 			try {
-				CommonUtils
-						.captureScreenshot(screenPath + imageCounter, driver);
+				new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
 				CommonUtils.appendTextToFile(screenPath + imageCounter
 						+ ".html", driver.getPageSource());
 			} catch (Exception e) {

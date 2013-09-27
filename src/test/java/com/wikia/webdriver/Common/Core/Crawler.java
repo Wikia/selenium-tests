@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -172,7 +173,7 @@ public class Crawler extends WikiArticlePageObject {
 		for (int i = 0; i < ImportedListOfURLs.size(); i++) {
 			driver.get(ImportedListOfURLs.get(i));
 			hideAds();
-			CommonUtils.captureScreenshot(screenPath + (i), driver);			
+			new Shooter().savePageScreenshot(screenPath + (i), driver);
 		}
 	}
 
