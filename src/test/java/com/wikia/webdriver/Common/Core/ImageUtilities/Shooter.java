@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
+ * Class responsible for taking and saving screenshots
  *
  * @author Bogna 'bognix' Knychala
  */
@@ -45,8 +46,17 @@ public class Shooter {
 		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 	}
 
+	/**
+	 * Create a screenshot of passed element
+	 * and save screenshot as image file in given path
+	 *
+	 * @param String path - path to save an image
+	 * @param element     - WebElement you want to capture
+	 * @param driver      - instace of WebDriver
+	 * @return File path  - file's handler which was saved in given path
+	 */
 	public File captureWebElement(String path, WebElement element, WebDriver driver) {
-		File screen = ((TakesScreenshot) driver) .getScreenshotAs(OutputType.FILE);
+		File screen = capturePage(driver);
 		Point p = element.getLocation();
 		int width = element.getSize().getWidth();
 		int height = element.getSize().getHeight();
@@ -67,6 +77,14 @@ public class Shooter {
 		return subImg;
 	}
 
+	/**
+	 * Create a screenshot of passed element
+	 * and save screenshot as image file in temp dir
+	 *
+	 * @param element     - WebElement you want to capture
+	 * @param driver      - instace of WebDriver
+	 * @return File path  - file's handler which was saved in given path
+	 */
 	public File captureWebElement(WebElement element, WebDriver driver) {
 		File screen = ((TakesScreenshot) driver) .getScreenshotAs(OutputType.FILE);
 		Point p = element.getLocation();
