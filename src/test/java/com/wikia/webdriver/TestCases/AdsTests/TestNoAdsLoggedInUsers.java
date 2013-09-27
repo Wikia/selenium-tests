@@ -1,5 +1,8 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
@@ -7,8 +10,6 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
 
 /**
  *
@@ -31,6 +32,9 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		testedWiki = urlBuilder.getUrlForWiki(wikiName);
+		if (config.getQS() != null) {
+			testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());
+		}
 	}
 
 	private void loginSteps() {

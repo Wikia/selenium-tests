@@ -43,6 +43,8 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	protected WebElement firstResultStatisticsPageImages;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(3)")
 	protected WebElement firstResultStatisticsPageVideos;
+	@FindBy(css=".Results > :nth-child(1) .result-description > .description")
+	protected WebElement firstResultDescription;
 	@FindBy(css = "#search-v2-input")
 	private WebElement searchBox;
 	@FindBys(@FindBy(css = "li.result"))
@@ -65,8 +67,13 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	protected List<WebElement> statisticsImages;
 	@FindBy(css=".wiki-statistics>li:nth-child(3)")
 	protected List<WebElement> statisticsVideos;
+	@FindBy(css="h1 > a.result-link")
+	protected List<WebElement> resultLinks;
+	@FindBy(css=".Results > :nth-child(4)")
+	protected WebElement fourthResult;
+	@FindBy(css=".Results > :nth-child(4) h1 > a")
+	protected WebElement fourthResultLink;
 
-	protected By resultLinks = By.cssSelector(".Results .result > a");
 	private By paginationContainer = By.cssSelector(".wikia-paginator");
 
 
@@ -74,11 +81,20 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		super(driver);
 	}
 
-
+	public void verifyQuery(String query) {
+		boolean isPresent = false;
+		for (WebElement element:resultLinks) {
+			if (element.getText().contains(query)){
+				isPresent = true;
+				break;
+			}
+		}
+		Assertion.assertTrue(isPresent, "there is no result link in the page");
+	}
 
 	public void goToSearchPage(String searchUrl) {
 		try{
-			getUrl(searchUrl+"wiki/Special:Search");
+			getUrl(searchUrl+"index.php?title=Special:Search");
 		}
 		catch (TimeoutException e)
 		{
@@ -95,16 +111,6 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPageObject(driver);
 	}
-
-	public void verifyMatchResultUrl( String url ) {
-		String href = match.getAttribute("href");
-		if ( href.contains(url) ) {
-			PageObjectLogging.log("verifyMatchResultUrl", "match result page matches url "+url+ ": "+href, true, driver);
-		} else {
-			PageObjectLogging.log("verifyMatchResultUrl", "match result page does not match url "+url+ ": "+href, false, driver);
-		}
-	}
-
 
 	public void verifyFirstResultTitle(String wikiName) {
 		waitForTextToBePresentInElementByElement(firstResultLink, wikiName);
@@ -151,9 +157,8 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	 */
 	public void verifyResultsPosForPage(int pageNumber, int resultsPerPage) {
 		waitForElementByElement(resultsContainer);
-		List<WebElement> elements = driver.findElements(resultLinks);
 		int curNo = pageNumber * resultsPerPage + 1;
-		for(WebElement link: elements) {
+		for(WebElement link: resultLinks) {
 			String dataPos = link.getAttribute("data-pos");
 			int pos = Integer.parseInt(dataPos);
 			Assertion.assertEquals( pos, curNo, "Wrong data-pos. Verify paging.");
@@ -166,9 +171,8 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	 * @param resultNumber zero based number of result to click
 	 * @return result page
 	 */
-	public WikiArticleHomePage openResult(int resultNumber) {
-		WebElement webElement = getResultWikiNameLink(resultNumber);
-		webElement.click();
+	public WikiArticleHomePage openResult(int resultNumeber) {
+		resultLinks.get(resultNumeber).click();
 		return new WikiArticleHomePage(driver);
 	}
 
@@ -184,10 +188,6 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		PageObjectLogging.log("nextPage", "Moving to next page of search results.",
 				true, driver);
 		return new CrossWikiSearchPageObject(driver);
-	}
-
-	protected WebElement getResultWikiNameLink(int no) {
-		return driver.findElements(resultLinks).get(no);
 	}
 
 	public void verifyResultsNumber(int number){
@@ -236,4 +236,19 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 			Assertion.assertStringContains(statisticsVideos.get(i).getText(), "VIDEO");
 		}
 	}
+
+	public String getFirstDescription() {
+		return firstResultDescription.getText();
+	}
+
+	/*
+	 * Method fetches specific string related to an image by storing index start position and
+	 * finish position, and then selects characters in between those indexes by using substring method.
+	 */
+	public String getFirstImageText() {
+		int indexComparisonStart = thumbnails.get(0).getAttribute("src").indexOf("px-");
+		int indexComparisonFinish = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
+		return thumbnails.get(0).getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
+	}
+
 }

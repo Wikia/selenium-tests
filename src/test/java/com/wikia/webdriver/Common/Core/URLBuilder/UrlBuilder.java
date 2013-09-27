@@ -13,6 +13,10 @@ public class UrlBuilder {
 		env = environment;
 	}
 
+	public UrlBuilder() {
+		env = null;
+	}
+
 	public String getUrlForPath(String wikiName, String wikiPath) {
 		String url = getUrlForWiki(wikiName);
 		if (!(isWikia)) {
@@ -23,21 +27,24 @@ public class UrlBuilder {
 	}
 
 	public String getUrlForWiki(String wikiName) {
+		String prefix;
 		String suffix;
 		isWikia = wikiName.endsWith("wikia");
 		String url = "http://";
 
 		if (isWikia) {
+			prefix = "www.";
 			suffix = ".com/";
 		} else {
+			prefix = "";
 			suffix = ".wikia.com/";
 		}
 
 		try {
 			if (env.equals("prod")) {
 				url += wikiName + suffix;
-			} else if (env.equals("preview")) {
-				url += "preview." + wikiName + suffix;
+			} else if (env.equals("preview") || env.contains("sandbox")) {
+				url += env + "." + prefix + wikiName + suffix;
 			} else if (env.contains("dev")) {
 				String devBoxOwner = env.split("-")[1];
 				if (isWikia) {
@@ -49,5 +56,16 @@ public class UrlBuilder {
 			System.out.println("ENV property is not set!");
 		}
 		return url;
+	}
+
+	public String appendQueryStringToURL(String url, String qs) {
+		String temp;
+		if (url.contains("?")) {
+			temp = url + "&" + qs;
+			return temp;
+		} else {
+			temp = url + "?" + qs;
+			return temp;
+		}
 	}
 }

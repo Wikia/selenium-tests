@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
 /**
@@ -121,7 +123,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	/**
 	 * @return name of random image on Special:NewFiles page
 	 */
-	public String getRandomImage() {
+	public String getRandomImageName() {
 		List<String> hrefs = new ArrayList<String>();
 		for (WebElement elem:imagesNewFiles) {
 			hrefs.add(elem.getAttribute("data-image-name"));
@@ -130,8 +132,29 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		return hrefs.get((r.nextInt(hrefs.size()-1))+1);
 	}
 
+	/**
+	 * @return url of random image on Special:NewFiles page
+	 */
+	public String getRandomImageUrl() {
+		List<String> hrefs = new ArrayList<String>();
+		for (WebElement elem:imagesNewFiles) {
+			hrefs.add(elem.findElement(By.xpath("./..")).getAttribute("href"));
+		}
+		Random r = new Random();
+		String href = hrefs.get((r.nextInt(hrefs.size()-1))+1);
+		PageObjectLogging.log("getRandomImageUrl", href + " image is selected", true);
+		return href;
+	}
+
+	public FilePagePageObject openRandomImage() {
+		driver.get(
+				getRandomImageUrl()
+		);
+		return new FilePagePageObject(driver);
+	}
+
 	public WatchPageObject unfollowImage(String wikiURL, String imageName) {
-		String url = URLsContent.buildUrl(
+		String url = urlBuilder.appendQueryStringToURL(
 				wikiURL +
 				URLsContent.wikiDir +
 				URLsContent.fileNameSpace +

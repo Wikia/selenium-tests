@@ -37,6 +37,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	{
 		PageObjectLogging.log("verifyWelcomeEmail ", "start of email verification", true);
 		String[] mailContent = MailFunctions.getWelcomeMailContent(MailFunctions.getFirstMailContent(mailUserName, mailPassword));
+
 		Assertion.assertEquals("Edit your profile.", mailContent[4]);
 		Assertion.assertEquals("Learn the basics.", mailContent[10]);
 		Assertion.assertEquals("Get a quick tutorial on the basics of Wikia: how to edit a page, your user =profile, change your preferences, and more.", mailContent[12]);
@@ -60,7 +61,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	}
 
 	public BlogPageObject openBlogPage(int blogNumber) {
-		blogPostList.get(blogNumber).click();
+		getUrl(blogPostList.get(blogNumber).getAttribute("href"));
 		PageObjectLogging.log("openBlogPage",
 				"blog post " + blogPostList.get(0).getText() + " opened",
 				true);

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.Common.Core.Configuration;
 
-import com.wikia.webdriver.Common.Properties.Credentials;
 
 import java.io.File;
 
@@ -64,5 +63,10 @@ public class POMConfiguration extends AbstractConfiguration {
 	@Override
 	public String getCredentialsFilePath() {
 		return this.credentialsFilePath;
+	}
+
+	@Override
+	public String getQS() {
+		return System.getProperty("qs");
 	}
 }

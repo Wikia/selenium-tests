@@ -9,7 +9,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
 public class ShareToolbarTests extends TestTemplate {
-	@Test(groups = { "ShareToolbar001", "Toolbar" })
+	@Test(groups = { "ShareToolbar001", "Toolbar" , "Smoke4"})
 	public void ShareToolbar001_VerifyingElements() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);

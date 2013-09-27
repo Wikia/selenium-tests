@@ -30,6 +30,27 @@ public class Properties {
 	public static String userName6;
 	public static String password6;
 
+	public static String userName7;
+	public static String password7;
+
+	public static String userName8;
+	public static String password8;
+
+	public static String userName9;
+	public static String password9;
+
+	public static String userName10;
+	public static String password10;
+
+	public static String userName11;
+	public static String password11;
+
+	public static String userName12;
+	public static String password12;
+
+	public static String userName13;
+	public static String password13;
+
 	public static String userNameNonLatin;
 	public static String userNameNonLatinEncoded;
 	public static String passwordNonLatin;
@@ -92,6 +113,20 @@ public class Properties {
 		password5 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular5.password");
 		userName6 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular6.username");
 		password6 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular6.password");
+		userName7 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular7.username");
+		password7 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular7.password");
+		userName8 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular8.username");
+		password8 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular8.password");
+		userName9 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular9.username");
+		password9 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular9.password");
+		userName10 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular10.username");
+		password10 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular10.password");
+		userName11 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular11.username");
+		password11 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular11.password");
+		userName12 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular12.username");
+		password12 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular12.password");
+		userName13 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular13.username");
+		password13 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular13.password");
 
 		userNameNonLatin = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.username");
 		userNameNonLatinEncoded = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.nonLatin.usernameenc");

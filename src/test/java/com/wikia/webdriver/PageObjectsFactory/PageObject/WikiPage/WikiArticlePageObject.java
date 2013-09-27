@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -41,8 +42,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private WebElement commentAreaDisabled;
 	@FindBy(css=".article-comm-reply")
 	private WebElement replyCommentButton;
-	@FindBy(css="a[title='View photo details']")
-	private WebElement videoDetailsButton;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
 	@FindBy(css="#mw-content-text")
@@ -50,7 +49,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement VideoModalAddButton;
 	@FindBy(css="#WikiaRail .addVideo")
-    private WebElement addVideoWikiaRail;
+	private WebElement addVideoWikiaRail;
 	@FindBy(css=".wikia-photogallery-add")
 	private WebElement addPhotoToGalleryButton;
 	@FindBy(css=".wikia-slideshow-addimage")
@@ -85,13 +84,37 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewArticle(String pageName,
-			int layoutNumber) {
+												int layoutNumber) {
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
 				+ "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
 				+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver);
+	}
+
+	public WikiArticleEditMode createNewArticle(String wikiURL,
+			WikiArticlePageObject article) {
+		String pageName = article.getPageName();
+		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir
+				+ pageName, URLsContent.actionEditParameter));
+		String pageNameEnc = pageName.replace("_", " ");
+		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
+				+ pageNameEnc + "']")));
+
+		return new WikiArticleEditMode(driver);
+	}
+
+	public WikiArticleEditMode createNewTemplate(String wikiURL, String templateName, String templateContent ) {
+		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.templateNs + ":" + templateName );
+		WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle );
+		edit.typeInTemplateContent( templateContent );
+		edit.clickOnPublish();
+		this.waitForElementByCss("#WikiaArticle");
+
+		PageObjectLogging.log("createNewTemplate", "new template created: " + templateName, true);
+
+		return edit;
 	}
 
 	public WikiArticleEditMode createNewDefaultArticle(){
@@ -138,24 +161,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
 	}
 
-	public void clickSubmitButton()
-	{
-		executeScript("document.querySelectorAll('#article-comm-submit')[0].click()");
-		PageObjectLogging.log("clickSubmitButton", "submit article button clicked", true, driver);
-	}
-
-	public void verifyCommentVideo(String videoName){
-		waitForElementByCss(".speech-bubble-message img.Wikia-video-thumb[data-video-name*='"+videoName+"']");
-		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true, driver);
-	}
-
-
-
-
 	public void verifyPageTitle(String title)
 	{
 		title = title.replace("_", " ");
-		waitForElementByXPath("//h1[contains(text(), '"+title+"')]");
+		waitForElementByXPath("//h1[contains(text(), '" + title + "')]");
 		PageObjectLogging.log("verifyPageTitle", "page title is verified", true);
 	}
 
@@ -172,14 +181,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 */
 	public WikiArticleEditMode edit() {
-            waitForElementByElement(editButton);
-            scrollAndClick(editButton);
-            PageObjectLogging.log(
-                "edit",
-                "Edit article",
-                true
-            );
-            return new WikiArticleEditMode(driver);
+		waitForElementByElement(editButton);
+		scrollAndClick(editButton);
+		PageObjectLogging.log(
+			"edit",
+			"Edit article",
+			true
+		);
+		return new WikiArticleEditMode(driver);
 	}
 
 	/**
@@ -190,17 +199,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void verifyImageOnThePage() {
 		waitForElementByBy(ImageOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
-	}
-
-
-	/**
-	 * Verify that the Video appears on the page
-	 *
-	 * @author Michal Nowierski
-	 * 	 */
-	public void verifyVideoOnThePage() {
-		waitForElementByBy(VideoOnWikiaArticle);
-		PageObjectLogging.log("VerifyTheVideoOnThePage", "Verify that the Video appears on the page", true, driver);
 	}
 
 	public void verifyGalleryPosion(String position) {
@@ -215,11 +213,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiHistoryPageObject(driver);
 	}
 
-	/**
-	* getArticleNameFromURL
-	*
-	@author Michal Nowierski
-	*/
 	public String getArticleNameFromURL() {
 		//TODO: To Michal: use Regular Expression here, when its syntax is learned.
 		String URL= driver.getCurrentUrl();
@@ -232,7 +225,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		openRandomArticle();
 		String name = driver.findElement(By.cssSelector(".WikiaPageHeader h1")).getText();
 		unfollowArticleByApi(name);
-		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=watch");
+		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=watch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(followedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
@@ -240,17 +233,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void unfollowArticleByApi(String name){
-		getUrl(Global.DOMAIN+"index.php?title="+name+"&action=unwatch");
+		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=unwatch");
 		driver.findElement(By.cssSelector("[value=OK]")).click();
 		waitForElementByElement(unfollowedButton);
 		PageObjectLogging.log("followRandomArticle", "random article followed", true);
-	}
-
-	public FileDetailsPageObject clickVideoDetailsButton() {
-		waitForElementByElement(videoDetailsButton);
-		videoDetailsButton.click();
-		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
-		return new FileDetailsPageObject(driver);
 	}
 
 	public LightboxPageObject clickThumbnailImage() {
@@ -260,29 +246,25 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new LightboxPageObject(driver);
 	}
 
-    public void clickAddVideoFromRail() {
-        waitForElementByElement(addVideoWikiaRail);
-        scrollAndClick(addVideoWikiaRail);
-        PageObjectLogging.log(
-            "clickAndVideoOnWikiaRail",
-            "Button add video on wikia rail is clicked",
-            true, driver
-        );
-    }
+	public void clickAddVideoFromRail() {
+		waitForElementByElement(addVideoWikiaRail);
+		scrollAndClick(addVideoWikiaRail);
+		PageObjectLogging.log(
+			"clickAndVideoOnWikiaRail",
+			"Button add video on wikia rail is clicked",
+			true, driver
+		);
+	}
 
-    public void renameRandomArticle(String newName) {
-        String oldName = getArticleNameFromURL();
-        renameArticle(oldName, newName);
-    }
+	public void renameRandomArticle(String newName) {
+		String oldName = getArticleNameFromURL();
+		renameArticle(oldName, newName);
+	}
 
 
 	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
 		waitForElementByElement(rVAddVideo);
 		scrollAndClick(rVAddVideo);
 		return new VetAddVideoComponentObject(driver);
-	}
-
-	public void verifyVideoAddedToRVModule(String videoName) {
-		waitForTextToBePresentInElementByBy(rvFirstVideo, videoName);
 	}
 }

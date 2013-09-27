@@ -12,27 +12,27 @@ public class SearchTests extends NewTestTemplate {
 
 	private String query = "PMG";
 
-	@Test(groups={"searchTest_001", "mobile"})
+	@Test(groups={"searchTest_001", "searchTests", "mobile"})
 	public void SearchTests_001_Suggestions() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.triggerSearch();
 		mobile.typeInSearchQuery(query);
-		mobile.verifySuggestions();
+		mobile.verifySuggestions(query);
 	}
 
-	@Test(groups={"searchTest_002", "mobile"})
+	@Test(groups={"searchTest_002", "searchTests", "mobile"})
 	public void SearchTests_002_SuggestionsPlus() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.triggerSearch();
 		mobile.typeInSearchQuery(query);
-		mobile.verifySuggestions();
+		mobile.verifySuggestions(query);
 		mobile.verifySuggestionsPlusButton();
 		mobile.selectPlusFromSuggestions(3);
 	}
 
-	@Test(groups={"searchTest_003", "mobile"})
+	@Test(groups={"searchTest_003", "searchTests", "mobile"})
 	public void SearchTests_003_SearchPage() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -40,7 +40,7 @@ public class SearchTests extends NewTestTemplate {
 		search.verifySearchResultsList();
 	}
 
-	@Test(groups={"searchTest_004", "mobile"})
+	@Test(groups={"searchTest_004", "searchTests", "mobile"})
 	public void SearchTests_004_SearchPageButtons() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -53,8 +53,7 @@ public class SearchTests extends NewTestTemplate {
 		search.verifyNextPageButtonIsVisible();
 	}
 
-
-	@Test(groups={"searchTest_005", "mobile"})
+	@Test(groups={"searchTest_005", "searchTests", "mobile"})
 	public void SearchTests_005_SearchPageResults() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -70,6 +69,16 @@ public class SearchTests extends NewTestTemplate {
 		List<String> thirdPage = search.getResult();
 		search.compareResultsEquals(firstPage, thirdPage);
 		search.compareResultsNotEquals(secondPage, firstPage);
+	}
+
+	@Test(groups={"searchTest_006", "searchTests", "mobile"})
+	public void SearchTests_006_clickOnSuggestions() {
+		MobileBasePageObject mobile = new MobileBasePageObject(driver);
+		mobile.openHome(wikiURL);
+		mobile.triggerSearch();
+		mobile.typeInSearchQuery(query);
+		mobile.verifySuggestions(query);
+		mobile.selectAndVerifyClickOnSuggestion(1);
 	}
 
 }

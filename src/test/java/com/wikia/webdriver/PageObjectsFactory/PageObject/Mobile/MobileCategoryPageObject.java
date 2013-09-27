@@ -47,7 +47,7 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		showAllButton.click();
 	}
 
-	public void clickHideAllButton() {
+	public void clickHideAllButton () {
 		waitForElementByElement(hideAllButton);
 		hideAllButton.click();
 	}

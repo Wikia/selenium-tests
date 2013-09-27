@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -21,7 +21,7 @@ public class MobileBasePageObject extends BasePageObject {
 	public MobileBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		driver.manage().window().setSize(new Dimension(640, 960));
+		driver.manage().window().setSize(new Dimension(400, 600));
 	}
 
 	// UI Mapping
@@ -31,7 +31,7 @@ public class MobileBasePageObject extends BasePageObject {
 	private WebElement userNameField;
 	@FindBy(css = ".wkInp[name='password']")
 	private WebElement passwordField;
-	@FindBy(css = "#wkLgnBtn")
+	@FindBy(css = ".wkBtn.main.round")
 	private WebElement loginButton;
 	@FindBy(css = "#ssoFbBtn")
 	private WebElement loginFbButton;
@@ -55,14 +55,26 @@ public class MobileBasePageObject extends BasePageObject {
 	private WebElement searchButton;
 	@FindBy(css = "#wkWrdMrk")
 	protected WebElement wikiaTopPageLogo;
+	@FindBy(css = "#wkPrfTgl")
+	protected WebElement topbarLoginButton;
+	@FindBy(css = "#wkNavTgl")
+	protected WebElement topbarMenuButton;
+	@FindBy(css = "#wkSrhTgl")
+	protected WebElement topbarSearchButton;
 	@FindBy(css = "#wkCurtain")
 	private WebElement curtain;
 	@FindBy(css="h2.collSec.open")
 	protected WebElement sectionHeaderOpened;
 	@FindBys(@FindBy(css="ul#wkSrhSug li.show"))
 	private List<WebElement> searchSuggestion;
+	@FindBys(@FindBy(css=".show:nth-child(10)"))
+	private WebElement searchSuggestionLast;
+	@FindBys(@FindBy(css=".show > span"))
+	private List<WebElement> suggestions;
 	@FindBys(@FindBy(css="ul#wkSrhSug li span.copySrh"))
 	private List<WebElement> addSuggestionButton;
+	@FindBy(css="#wkMainCntHdr > h1")
+	protected WebElement selectedPageHeader;
 
 	public void triggerLoginDropDown() {
 		waitForElementByElement(loginDropDownTrigger);
@@ -100,24 +112,15 @@ public class MobileBasePageObject extends BasePageObject {
 				"facebook button clicked in login drop-down", true, driver);
 	}
 
-	public void typeInUserNameAndPasswordAndSubmitFacebook(String username,
-			String password) {
+	public void verifyFBLogin() {
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForElementByElement(fbUserName);
-		waitForElementByElement(fbPassword);
-		waitForElementByElement(fbLogin);
-		fbUserName.sendKeys(username);
-		fbPassword.sendKeys(password);
-		fbLogin.click();
-		driver.switchTo().window(windows[0].toString());
-		waitForElementByElement(avatar);
-		PageObjectLogging.log("typeInUserNameAndPasswordAndSubmitFacebook",
-				"user logged in by facebook", true, driver);
+		Assertion.assertStringContains(getCurrentUrl(), "facebook.com");
+		PageObjectLogging.log("VerifyFBLogin", "FB login window was opened", true, driver);
 	}
 
 	public void submitLogin() {
-		scrollAndClick(loginButton);
+		loginButton.click();
 		waitForElementByElement(avatar);
 		PageObjectLogging.log("submitLogin", "login submit button clicked",
 				true, driver);
@@ -131,11 +134,10 @@ public class MobileBasePageObject extends BasePageObject {
 				driver);
 	}
 
-	public void loginFB(String username, String password) {
+	public void clickLoginFBButton() {
 		triggerLoginDropDown();
 		clickFbWindowTriggerButton();
-		typeInUserNameAndPasswordAndSubmitFacebook(username, password);
-		PageObjectLogging.log("login facebook", "user logged in successfully",
+		PageObjectLogging.log("clickLoginFBButton", "FB button was clicked",
 				true, driver);
 	}
 
@@ -191,22 +193,23 @@ public class MobileBasePageObject extends BasePageObject {
 		triggerSearch();
 		typeInSearchQuery(query);
 		submitSearchQuery();
-		PageObjectLogging.log("searchQuery", "searching for "+query, true, driver);
+		PageObjectLogging.log("searchQuery", "searching for " + query, true, driver);
 		return new MobileSearchPageObject(driver);
 	}
 
-	public void verifySuggestions() {
-		for (WebElement elem:searchSuggestion) {
-			waitForElementByElement(elem);
+	public void verifySuggestions(String query) {
+		waitForElementByElement(suggestions.get(0));
+		for (WebElement elem:suggestions) {
+			Assertion.assertTrue(elem.getAttribute("title").startsWith(query),
+				"title Attribute doesn't start with given string"
+			);
 		}
 		PageObjectLogging.log("verifySuggestions", "search suggestions verified", true, driver);
 	}
 
-
 	public void verifySuggestionsPlusButton() {
-		for (WebElement elem:addSuggestionButton) {
-			waitForElementByElement(elem);
-		}
+		waitForElementByElement(searchSuggestionLast);
+		Assertion.assertEquals(addSuggestionButton.size(), searchSuggestion.size(), "sizes are not equals");
 		PageObjectLogging.log("verifySuggestionsPlusButton", "search suggestions plus button verified", true, driver);
 	}
 
@@ -214,11 +217,26 @@ public class MobileBasePageObject extends BasePageObject {
 		waitForElementByElement(addSuggestionButton.get(n));
 		String text = searchSuggestion.get(n).findElement(By.cssSelector("span")).getAttribute("title");
 		addSuggestionButton.get(n).click();
-		Assertion.assertEquals(text, searchField.getAttribute("value"));
+		Assertion.assertEquals(text, searchField.getAttribute("value"), "strings are not equals");
+	}
+
+	public void selectAndVerifyClickOnSuggestion(int n) {
+		String selectedSuggestionText = suggestions.get(n).getAttribute("innerText").replace("+", "");
+		suggestions.get(n).click();
+		waitForElementByElement(selectedPageHeader);
+		Assertion.assertTrue(getCurrentUrl().endsWith("/" + selectedSuggestionText) ,"Url doesn't end with correct string");
 	}
 
 	public long getPosition() {
 		return executeScriptRetLong("window.pageYOffset");
+	}
+
+	public void verifyPositionDifferent(Long firstPosition){
+		Assertion.assertTrue(firstPosition < getPosition(), "position is still the same");
+	}
+
+	public void verifyPositionTheSame(Long firstPosition){
+		Assertion.assertTrue(firstPosition == getPosition(), "position is different");
 	}
 
 	public void clickOnWikiaTopPageLogo() {
@@ -227,11 +245,16 @@ public class MobileBasePageObject extends BasePageObject {
 	}
 
 	public void verifyCurtainOpened() {
-		Assertion.assertEquals("block", curtain.getCssValue("display"));
+		Assertion.assertEquals("block", curtain.getCssValue("display"), "curtain is not opened");
+	}
+
+	public void clickOutsideSearchField() {
+		waitForElementByElement(curtain);
+		curtain.click();
 	}
 
 	public void verifyCurtainClosed() {
-		Assertion.assertEquals("none", curtain.getCssValue("display"));
+		Assertion.assertEquals("none", curtain.getCssValue("display"), "curtain is not closed");
 	}
 
 	public void logOutMobile(String wikiURL) {

@@ -1,9 +1,15 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,6 +29,8 @@ import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.Purge.PurgeMethod;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
@@ -37,6 +45,7 @@ public class BasePageObject{
 	protected int timeOut = 30;
 	public WebDriverWait wait;
 	public Actions builder;
+	protected UrlBuilder urlBuilder;
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
@@ -55,6 +64,7 @@ public class BasePageObject{
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		driver.manage().window().maximize();
+		urlBuilder = new UrlBuilder();
 	}
 
 	public static String getAttributeValue(WebElement element, String attributeName) {
@@ -79,6 +89,40 @@ public class BasePageObject{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/*
+	 * Simple method for checking if element is on page or not.
+	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
+	 */
+	protected boolean checkIfElementOnPage(String cssSelector) {
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		boolean isElementOnPage = true;
+		try {
+			if (driver.findElements(By.cssSelector(cssSelector)).size() < 1) {
+				isElementOnPage = false;
+			}
+		} catch (Exception ex) {
+			isElementOnPage = false;
+		} finally {
+			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+		}
+		return isElementOnPage;
+	}
+
+	protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		boolean isElementInElement = true;
+		try {
+			if (element.findElements(By.cssSelector(cssSelector)).size() < 1) {
+				isElementInElement = false;
+			}
+		} catch (Exception ex) {
+			isElementInElement = false;
+		} finally {
+			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+		}
+		return isElementInElement;
 	}
 
 	public void mouseOverByBy(By by) {
@@ -231,6 +275,55 @@ public class BasePageObject{
 		}
 	}
 
+	protected Boolean scrollToSelector(String selector) {
+		if (checkIfElementOnPage(selector)) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			try {
+				js.executeScript(
+					"var x = $(arguments[0]);"
+					+ "window.scroll(0,x.position()['top']+x.height()+100);"
+					+ "$(window).trigger('scroll');",
+					selector
+				);
+			} catch (WebDriverException e) {
+				if (e.getMessage().contains(XSSContent.noJQueryError)) {
+					PageObjectLogging.log(
+						"JSError", "JQuery is not defined", false
+					);
+				}
+			}
+			return true;
+		} else {
+			PageObjectLogging.log(
+				"SelectorNotFound",
+				"Selector " + selector + " not found on page",
+				true
+			);
+			return false;
+		}
+	}
+
+	protected Boolean scrollToSelectorNoJQ(String selector) {
+		if (checkIfElementOnPage(selector)) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript(
+				"var x = document.querySelector(arguments[0]);"
+				+ "var event = new Event('scroll');"
+				+ "window.scroll(0,x.offsetTop + x.clientHeight);"
+				+ "window.dispatchEvent(event)",
+				selector
+			);
+			return true;
+		} else {
+			PageObjectLogging.log(
+				"SelectorNotFound",
+				"Selector " + selector + " not found on page",
+				true
+			);
+			return false;
+		}
+	}
+
 	public void navigateBack(){
 		try{
 			driver.navigate().back();
@@ -354,6 +447,20 @@ public class BasePageObject{
 		wait.until(CommonExpectedConditions.elementNotPresent(by));
 	}
 
+	/*
+	 * Wait for element not visible. Timeout is specified by customWait value
+	 *
+	 * @param WebElement element - element meant to disappearance
+	 * @param WebDriverWait customWait - time before TimeOutException is thrown
+	 */
+	public void waitForElementNotVisibleByElementCustomWait (
+		WebElement element, WebDriverWait customWait
+	) {
+		customWait.until (
+			CommonExpectedConditions.invisibilityOfElementLocated(element)
+		);
+	}
+
 	public void waitForElementNotVisibleByElement(WebElement element) {
 		wait.until(CommonExpectedConditions
 				.invisibilityOfElementLocated(element));
@@ -398,10 +505,13 @@ public class BasePageObject{
 		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
 	}
 
+	public void waitForTextNotPresentInElementByElement(WebElement element, String text) {
+		wait.until(CommonExpectedConditions.textNotPresentInElement(element, text));
+	}
+
 	public void waitForTextToBePresentInElementByBy(By by, String text) {
-		WebElement temp = driver.findElement(by);
 		wait.until(CommonExpectedConditions
-				.textToBePresentInElement(temp, text));
+				.textToBePresentInElement(by, text));
 	}
 
 	public void waitForStringInURL(String givenString) {
@@ -581,15 +691,15 @@ public class BasePageObject{
 
 	public void enableWikiaTracker() {
 		driver.get(
-				URLsContent.buildUrl(
-						driver.getCurrentUrl(),
-						URLsContent.wikiaTracker
-						)
+			urlBuilder.appendQueryStringToURL(
+				driver.getCurrentUrl(),
+				URLsContent.wikiaTracker
+			)
 		);
 	}
 
 	public void appendToUrl(String additionToUrl) {
-		driver.get(URLsContent.buildUrl(driver.getCurrentUrl(), additionToUrl));
+		driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
@@ -609,5 +719,86 @@ public class BasePageObject{
 				"e.which=40; $(arguments[0]).trigger(e);",
 				element
 		);
+	}
+
+	public void setDisplayStyle(String  selector, String style) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector, style);
+	}
+
+	private void purge(String URL) throws Exception {
+		HttpClient client = new HttpClient();
+		HttpMethod method = new PurgeMethod(URL);
+		try {
+			int status = client.executeMethod(method);
+			if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
+				throw new Exception("HTTP PURGE failed for: " + URL + "(" + status + ")");
+			}
+			PageObjectLogging.log("purge", URL, true);
+			return;
+		} finally {
+			method.releaseConnection();
+		}
+	}
+
+	/**
+	 * return status code of given URL
+	 * @param URL
+	 * @return
+	 */
+	public int getURLStatus(String URL) {
+		try {
+			purge(URL);
+			HttpURLConnection.setFollowRedirects(false);
+			HttpURLConnection connection = (HttpURLConnection) new URL(URL).openConnection();
+			connection.disconnect();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty(
+					"User-Agent",
+					"Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) " +
+					"Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)"
+			);
+			int status = connection.getResponseCode();
+			connection.disconnect();
+			return status;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * check if current HTTP status of given URL is the same as expected
+	 * @param desiredStatus
+	 * @param URL
+	 */
+	public void verifyURLStatus(int desiredStatus, String URL) {
+		int timeOut = 500;
+		int statusCode = 0;
+		boolean status = false;
+		while (!status) {
+			try {
+				statusCode = getURLStatus(URL);
+				if (statusCode == desiredStatus){
+					status = true;
+				} else {
+					Thread.sleep(500);
+					timeOut += 500;
+				}
+				if (timeOut > 20000) {
+					break;
+				}
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		Assertion.assertEquals(statusCode, desiredStatus);
+		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
+	}
+
+	public void openSpecialPromoteOnCurrentWiki() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String url = (String) js.executeScript("return wgServer");
+		getUrl(url + "/" + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
 }

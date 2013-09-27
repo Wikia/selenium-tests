@@ -7,6 +7,7 @@ public class PageContent {
 	public static String articleTextEdit = "Brand new content";
 	public static String commentText = "Lorem ipsum dolor sit amet, comment";
 	public static String commentText2 = "QAComment";
+	public static String commentTextNonLatin = "QAComment 한국어 위키백과에 На Вама је да одлучите 佛教藝術";
 	public static String commentTextEdit = "Brand new comment";
 	public static String replyText = "Brand new reply";
 	public static String replyText2 = "QAReply";
@@ -36,8 +37,9 @@ public class PageContent {
 	public static String messageWallTitlePrefix = "QAMessageWallTitle";
 	public static String messageWallTitleEditPrefix = "QAMessageWallTitleEdit";
 	public static String messageWallMessagePrefix = "QAMessageWallMessage";
-	public static String messageWallMessageEditPrefix = "QAMessageWallMessage";
+	public static String messageWallMessageEditPrefix = "QAMessageWallEditMessage";
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
+	public static String messageWallQuotePrefix = "QAQuote";
 
 	//top 10 list
 	public static String top10Description = "DescriptionForList";
@@ -46,8 +48,9 @@ public class PageContent {
 	public static String top10listNamePrefix = "Top10list";
 	public static String relatedPageName = "PageToCheckTop10ListFetching";
 	//links
-	public static String externalLink = "www.wikia.com";
+	public static String externalLink = "http://www.wikia.com/";
 	public static String internalLink = "Formatting";
+	public static String textLink = "qaLink";
 
 	//forum
 	public static String forumTitlePrefix = "QABoardTitle ";
@@ -70,6 +73,9 @@ public class PageContent {
 	public static String newPasswordSentMessage = "We've sent a new password to the email address for %userName%.";
 	public static String phalanxBlockMessage = "The page you wanted to save was blocked by the spam filter.";
 	public static String phalanxBlockTitleMessage = "Sorry, the page title was rejected by our spam filter. Please use a different title.";
+	public static String signUpTooYoungMessage = "Sorry, we're not able to register your account at this time.";
+	public static String signUpInvalidCaptchaMessage = "The word you entered didn't match the word in the box, try again!";
+	public static String signUpUserExistsMessage = "Someone already has this username. Try a different one!";
 
 	//Blocks for Phalanx
 	public static String titleFilterPlain = "BadContent";
@@ -78,13 +84,10 @@ public class PageContent {
 	public static String wikiTextPhoto = "[[File:%photoName%|thumb|%s]]";
 	public static String wikiTextSlideshow = "<gallery type=\"slideshow\" position=\"center\">\n%image1%\n%image2%\n%image3%\n%image4%\n</gallery>";
 
-	public static String wikiaGlobalUrl = "http://www.wikia.com/";
-
 	//SignUp correct
 	public static String wikiSignUpBirthDay = "11";
 	public static String wikiSignUpBirthMonth = "11";
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
-
 
 }

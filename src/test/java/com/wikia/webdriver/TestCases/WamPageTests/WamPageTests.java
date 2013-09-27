@@ -29,7 +29,7 @@ public class WamPageTests extends TestTemplate {
 		}
 	}
 
-	@Test(groups = {"WamPage003", "WamPageTests"})
+	@Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
 	public void wam_003_verifyPaginationByNextButton() {
 		WamPageObject pageObject = new WamPageObject(driver);
 		pageObject.openWamPage();

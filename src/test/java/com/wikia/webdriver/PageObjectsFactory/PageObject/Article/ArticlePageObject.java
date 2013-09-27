@@ -16,9 +16,9 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditC
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.RenameArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
 /**
@@ -27,25 +27,14 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
-	private final String editButtonSelector = ".article-comm-edit";
-	private final String deleteButtonSelector = ".article-comm-delete";
-	private final String commentAuthorLink = ".edited-by";
-	private final String replyCommentSelector = ".article-comm-reply";
+
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
-	@FindBy(css="#WikiaMainContent .drop img")
-	protected WebElement articleEditDropdown;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
 	@FindBy(css="#WikiHeader .drop")
 	protected WebElement contributeDropdown;
-	@FindBy(css="#ca-delete")
-	protected WebElement deleteDropdown;
-	@FindBy(css="#ca-protect")
-	protected WebElement protectDropdown;
-	@FindBy(css="#ca-move")
-	protected WebElement renameDropdown;
 	@FindBy(css="#ca-history")
 	protected WebElement historyDropdown;
 	@FindBy(css=".WikiaMenuElement .createpage")
@@ -94,6 +83,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement rVAddVideo;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
+	@FindBy(css="a[title='View photo details']")
+	private WebElement videoDetailsButton;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
 	private WebElement rvFirstVideo;
 	@FindBy(css="#CategorySelectAdd")
@@ -119,8 +110,17 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 
-	String editCategorySelector = "li[data-name='%categoryName%'] li.editCategory > img";
-	String removeCategorySelector = "li[data-name='%categoryName%'] li.removeCategory > img";
+	final String editButtonSelector = ".article-comm-edit";
+	final String deleteButtonSelector = ".article-comm-delete";
+	final String commentAuthorLink = ".edited-by";
+	final String replyCommentSelector = ".article-comm-reply";
+
+	String editCategorySelector =
+			"li[data-name='%categoryName%'] li.editCategory > img";
+	String removeCategorySelector =
+			"li[data-name='%categoryName%'] li.removeCategory > img";
+	String videoInCommentsSelector =
+			".speech-bubble-message img.Wikia-video-thumb[data-video-name*='%videoName%']";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -170,17 +170,23 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementNotVisibleByElement(editCommentSubmitButton);
 	}
 
-	public void verifyArticleComment(String comment) {
+	public void verifyCommentText(String comment) {
 		WebElement mostRecentComment = articleComments.get(0);
 		waitForTextToBePresentInElementByElement(mostRecentComment, comment);
 		Assertion.assertStringContains(mostRecentComment.getText(), comment);
+	}
+
+	public void verifyCommentVideo(String videoName) {
+		driver.findElement(
+				By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName))
+		);
+		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
 	}
 
 	public MiniEditorComponentObject triggerEditCommentArea() {
 		scrollToElement(allCommentsArea);
 		WebElement mostRecentComment = articleComments.get(0);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		//TODO Action chains not working on Firefox for some reason
 		js.executeScript(
 			"arguments[0].querySelector(arguments[1]).click()",
 			mostRecentComment, editButtonSelector
@@ -188,7 +194,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new MiniEditorComponentObject(driver);
 	}
 
-	public DeleteArticlePageObject deleteComment() {
+	public DeletePageObject deleteFirstComment() {
 		scrollToElement(allCommentsArea);
 		WebElement mostRecentComment = articleComments.get(0);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -196,15 +202,17 @@ public class ArticlePageObject extends WikiBasePageObject {
 				"arguments[0].querySelector(arguments[1]).click()",
 				mostRecentComment, deleteButtonSelector
 				);
-		return new DeleteArticlePageObject(driver);
+		return new DeletePageObject(driver);
 	}
 
 	public void verifyCommentDeleted(String comment) {
-		for(WebElement elem:commentTextList) {
-			Assertion.assertTrue(
-					!comment.equals(elem.getText())
-					);
+		if (!commentTextList.isEmpty()) {
+			for (WebElement elem : commentTextList) {
+				Assertion.assertTrue(!comment.equals(elem.getText()));
+			}
 		}
+		PageObjectLogging.log("verifyCommentDeleted", "comment " + comment
+				+ " was deleted", true);
 	}
 
 	public String getFirstCommentText() {
@@ -246,24 +254,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertStringContains(editedByArea.getText(), userName);
 	}
 
-	public DeleteArticlePageObject deleteArticleUsingDropdown() {
-		actionsClick(articleEditDropdown);
-		waitForElementVisibleByElement(deleteDropdown);
-		deleteDropdown.click();
-		return new DeleteArticlePageObject(driver);
-	}
-
 	public String getArticleName() {
 		String articleName = articleHeader.getText();
 		PageObjectLogging.log("getArticleName", "the name of the article is: "+articleName, true);
 		return articleName;
-	}
-
-	public RenameArticlePageObject renameArticleUsingDropdown() {
-		actionsClick(articleEditDropdown);
-		waitForElementVisibleByElement(renameDropdown);
-		renameDropdown.click();
-		return new RenameArticlePageObject(driver);
 	}
 
 	public void verifyDropdownForAdmin() {
@@ -316,9 +310,61 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
+	public void verifyVideoAlignment(PositionsVideo positions) {
+		String videoClass = videoArticle.findElement(
+				By.xpath("./../..")
+				).getAttribute("class");
+		String position;
+		switch(positions) {
+		case left:
+			position = "left";
+			break;
+		case center:
+			position = "none";
+			break;
+		case right:
+			position = "right";
+			break;
+		default:
+			position = "position is not provided";
+			break;
+		}
+		Assertion.assertStringContains(videoClass, position);
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		int videoWidth = Integer.parseInt(videoArticle.findElement(
+				By.xpath("./../img")
+				).getAttribute("width"));
+		Assertion.assertNumber(
+				widthDesired,
+				videoWidth,
+				"width should be " + widthDesired + " but is " + videoWidth);
+	}
+
+	public void verifyVideoCaption(String captionDesired) {
+		String caption = videoArticle.findElement(
+				By.xpath("./../../figcaption")
+				).getText();
+		Assertion.assertStringContains(caption,captionDesired);
+		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
+	}
+
+	public void verifyVideoNoCaption() {
+		String videoClass = videoArticle.findElement(
+				By.xpath("./../img")
+				).getAttribute("class");
+		Assertion.assertTrue(!videoClass.contains("thumbimage"));
+		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
+	}
+
 	public void verifyRelatedVideosModule() {
 		waitForElementByElement(rVModule);
-		PageObjectLogging.log("verifyRelatedVideosModule", "related videos module is visible", true);
+		PageObjectLogging.log(
+				"verifyRelatedVideosModule",
+				"related videos module is visible",
+				true
+		);
 	}
 
 	public VetAddVideoComponentObject clickAddRelatedVideo() {
@@ -328,13 +374,28 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyRelatedVideoAdded(String videoName) {
+		if (videoName.length() > 45) {
+			videoName = videoName.substring(0, 45);
+		}
 		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
+		PageObjectLogging.log(
+				"verifyRelatedVideoAdded",
+				videoName + " is visible in related video module",
+				true
+		);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
 		waitForElementByElement(videoAddPlaceholder);
 		scrollAndClick(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
+	}
+
+	public FilePagePageObject clickVideoDetailsButton() {
+		waitForElementByElement(videoDetailsButton);
+		videoDetailsButton.click();
+		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
+		return new FilePagePageObject(driver);
 	}
 
 	private void clickAddCategoryButton() {
@@ -345,7 +406,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private void typeCategoryName(String category) {
 		addCategoryInput.sendKeys(category);
 	}
-
 
 	public void verifySubmitCategoryEnabled() {
 		waitForElementByElement(categorySaveButtonEnabled);
@@ -425,8 +485,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WatchPageObject unfollowArticle(String wikiURL) {
-		String url = URLsContent.buildUrl(wikiURL, "title=" + articleTitle.getText());
-		url = URLsContent.buildUrl(url, URLsContent.unfollowParameter);
+		String url = urlBuilder.appendQueryStringToURL(wikiURL, "title=" + articleTitle.getText());
+		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}

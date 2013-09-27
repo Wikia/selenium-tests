@@ -18,7 +18,7 @@ public class ForumThreadTests extends NewTestTemplate{
 	private String message;
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups= {"ForumThreadTests_001", "ForumThreadTests", "Forum"} )
+	@Test(groups= {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"} )
 	public void forumThreadTests_001_replyToThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

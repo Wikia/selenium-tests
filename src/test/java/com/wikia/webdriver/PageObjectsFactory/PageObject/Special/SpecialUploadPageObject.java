@@ -6,8 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.FilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 
 public class SpecialUploadPageObject extends WikiBasePageObject {
 
@@ -47,11 +47,11 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 
 	}
 
-	public FilePageObject clickOnUploadFile(String file) {
+	public FilePagePageObject clickOnUploadFile(String file) {
 		waitForElementByElement(UploadFileInput);
 		scrollAndClick(UploadFileInput);
 		PageObjectLogging.log("ClickOnUploadFile", "Click on Upload file button. The method returns FilePageObject", true, driver);
-		return new FilePageObject(driver, file);
+		return new FilePagePageObject(driver, file);
 	}
 
 
