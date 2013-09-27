@@ -27,7 +27,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
  * 2. Sign up of too young user,
  * 3. Sign up with existing user name,
  * 4. Sign up with users from data provider.
- * 5. Sign up drop-down from from article,
+ * 5. Sign up drop-down from from article, //TODO
  */
 public class SignUpTests extends NewTestTemplate {
 
