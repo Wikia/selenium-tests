@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.ImageComparisonHelper;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 
@@ -35,15 +36,15 @@ public class DiffTest extends TestTemplate {
 				url = url.substring(url.indexOf("/")+2);
 				Thread.sleep(1000);
 				hideDynamicContent();
-				CommonUtils.captureScreenshot("./logs/diff/" + i + "live.png",
-						driver);
+				new Shooter().savePageScreenshot("./logs/diff/" + i + "live.png" + (i), driver);
 				getHarFile("./temp/traffic_live"+i+".har");
 				driver.get("http://preview."+url);
 				Thread.sleep(1000);
 				getHarFile("./temp/traffic_preview"+i+".har");
 				hideDynamicContent();
-				CommonUtils.captureScreenshot("./logs/diff/" + i
-						+ "preview.png", driver);
+				new Shooter().savePageScreenshot(
+					"./logs/diff/" + i + "preview.png", driver
+				);
 				File preview = new File("./logs/diff/" + i + "preview.png");
 				File live = new File("./logs/diff/" + i + "live.png");
 				if (!(preview.length()==live.length())){

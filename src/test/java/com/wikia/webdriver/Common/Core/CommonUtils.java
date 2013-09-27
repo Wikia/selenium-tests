@@ -80,34 +80,6 @@ public class CommonUtils {
 	}
 
 	/**
-	 * captures screenshot with given path, returns output file path
-	 * @param outputFilePath
-	 * @param driver
-	 * @return captured screen path
-	 * @author Karol Kujawiak
-	 */
-	public static String captureScreenshot(String outputFilePath, WebDriver driver)
-	{
-		if (Global.LOG_VERBOSE == 2) {
-			if (!outputFilePath.endsWith(".png")) {
-				outputFilePath = outputFilePath + ".png";
-			}
-			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			try {
-				FileUtils.copyFile(scrFile, new File(outputFilePath));
-			}
-			catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return outputFilePath;
-		} else {
-			return "Switch Global.LOG_VERBOSE to get test screenshots";
-		}
-	}
-
-	/**
 	 * delete directory by path
 	 * @param fileName
 	 * @author Karol Kujawiak

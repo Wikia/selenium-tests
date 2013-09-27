@@ -18,13 +18,12 @@ import org.openqa.selenium.WebElement;
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
-	private Boolean isWikiMainPage;
+	protected Boolean isWikiMainPage;
 
 	private WebElement presentLB;
-	private String presentLBName;
-
+	protected String presentLBName;
 	private WebElement presentMD;
-	private String presentMDName;
+	protected String presentMDName;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
@@ -33,7 +32,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		isWikiMainPage = checkIfMainPage();
 	}
 
-	public void verifyTopLeaderBoardPresent() throws Exception {
+	protected void setPresentTopLeaderboard() {
 		if (isWikiMainPage) {
 			presentLB = driver.findElement(
 				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeTopLB))
@@ -45,10 +44,30 @@ public class AdsBaseObject extends WikiBasePageObject {
 			);
 			presentLBName = AdsContent.topLB;
 		}
-		waitForElementByElement(presentLB);
-		checkScriptPresentInSlotScripts(presentLBName, presentLB);
-		checkTagsPresent(presentLB);
 	}
+
+	protected void setPresentMedrec() {
+		if (isWikiMainPage) {
+			presentMD = driver.findElement(
+				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeMedrec))
+			);
+			presentMDName = AdsContent.homeMedrec;
+		} else {
+			presentMD = driver.findElement(
+				By.cssSelector(AdsContent.getSlotSelector(AdsContent.medrec))
+			);
+			presentMDName = AdsContent.medrec;
+		}
+	}
+
+	protected WebElement getPresentTopLeaderBoard() {
+		return presentLB;
+	}
+
+	protected WebElement getPresentMedrec() {
+		return presentMD;
+	}
+
 
 	public void verifyMedrecPresent() throws Exception {
 		if (isWikiMainPage) {
@@ -84,8 +103,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyTopLeaderBoardAndMedrec() throws Exception {
-		verifyTopLeaderBoardPresent();
-		verifyMedrecPresent();
+		setPresentTopLeaderboard();
+		waitForElementByElement(presentLB);
+		checkScriptPresentInSlotScripts(presentLBName, presentLB);
+		checkTagsPresent(presentLB);
+
+		setPresentMedrec();
+		waitForElementByElement(presentMD);
+		checkScriptPresentInSlotScripts(presentMDName, presentMD);
+		checkTagsPresent(presentMD);
 	}
 
 	public void verifyHubTopLeaderboard() throws Exception {
