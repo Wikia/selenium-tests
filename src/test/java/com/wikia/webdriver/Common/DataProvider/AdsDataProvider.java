@@ -39,7 +39,9 @@ public class AdsDataProvider {
 			{"de.community", "Forum:%C3%9Cbersicht"},
 			{"it.creepypastaitalia", "Slenderman"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
-			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
+			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
+			{"wowwiki", "Portal:Main"},
+			{"memory-alpha", "Portal:Main"}
         };
     }
 

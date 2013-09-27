@@ -55,7 +55,7 @@ public class AdsComparenceObject extends AdsBaseObject {
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
 				+ "Most probable ad is not present; CSS "
-				+ AdsContent.getSlotSelector(presentLBName)
+				+ AdsContent.getSlotSelector(presentMDName)
 			);
 		} else {
 			PageObjectLogging.log(
@@ -73,11 +73,17 @@ public class AdsComparenceObject extends AdsBaseObject {
 			true
 		);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement iframe = (WebElement) js.executeScript(
-			"return $(arguments[0] + ' iframe:visible:first-child')[0]",
+		WebElement adContainer = (WebElement) js.executeScript(
+			"var iframe = arguments[0] + ' iframe:visible:first, ';"
+			+ "var object = arguments[0] + ' object:visible:first, ';"
+			+ "var img = arguments[0] + ' img:visible:first';"
+			+ "return $(iframe + object + img)[0]",
 			elementSelector
 		);
-		driver.switchTo().frame(iframe);
+		boolean isIframe = adContainer.getTagName().equals("iframe");
+		if (isIframe) {
+			driver.switchTo().frame(adContainer);
+		}
 		js.executeScript(
 			"document.getElementsByTagName('body')[0].style['display'] = 'none';"
 		);
@@ -92,7 +98,9 @@ public class AdsComparenceObject extends AdsBaseObject {
 			true
 		);
 		ImageComparer comparer = new ImageComparer();
-
-		return comparer.compareImagesBasedOnBytes(preSwitch, postSwitch);
+		boolean result = comparer.compareImagesBasedOnBytes(preSwitch, postSwitch);
+		preSwitch.delete();
+		postSwitch.delete();
+		return result;
 	}
 }
