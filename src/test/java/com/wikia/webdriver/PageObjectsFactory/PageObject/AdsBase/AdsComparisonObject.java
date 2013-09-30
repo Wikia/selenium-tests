@@ -66,6 +66,11 @@ public class AdsComparisonObject extends AdsBaseObject {
 
 	private boolean compareSlotOnOff(WebElement element, String elementSelector) {
 		Shooter shooter = new Shooter();
+		if (element.getSize().height <= 1 || element.getSize().width <= 1) {
+			throw new NoSuchElementException(
+				"Element has size 1px x 1px or smaller. Most probable is not displayed"
+			);
+		}
 		File preSwitch = shooter.captureWebElement(element, driver);
 		PageObjectLogging.log(
 			"ScreenshotElement",
@@ -73,28 +78,17 @@ public class AdsComparisonObject extends AdsBaseObject {
 			true
 		);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement adContainer = (WebElement) js.executeScript(
+		// Find ad-containing element and set visibility = hidden on it
+		// Example selector:
+		// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
+		js.executeScript(
 			"var iframe = arguments[0] + ' iframe:visible:first, ';"
 			+ "var object = arguments[0] + ' object:visible:first, ';"
 			+ "var img = arguments[0] + ' img:visible:first';"
-			+ "return $(iframe + object + img)[0]",
+			+ "var element = $(iframe + object + img)[0];"
+			+ "if (element) element.style['visibility'] = 'hidden';",
 			elementSelector
 		);
-		boolean isIframe = adContainer.getTagName().equals("iframe");
-		if (isIframe) {
-			driver.switchTo().frame(adContainer);
-			js.executeScript(
-				"document.getElementsByTagName('body')[0].style['display'] = 'none';"
-			);
-			driver.switchTo().defaultContent();
-		} else {
-			js.executeScript(
-				"var object = arguments[0] + ' object:visible:first, ';"
-				+ "var img = arguments[0] + ' img:visible:first';"
-				+ "$(object + img)[0].style['display'] = 'none';",
-				elementSelector
-			);
-		}
 		PageObjectLogging.log(
 			"HideElement", "Element is hidden; CSS " + elementSelector, true
 		);
