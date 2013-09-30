@@ -78,6 +78,9 @@ public class AdsComparisonObject extends AdsBaseObject {
 			true
 		);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
+		// Find ad-containing element and set visibility = hidden on it
+		// Example selector:
+		// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
 		js.executeScript(
 			"var iframe = arguments[0] + ' iframe:visible:first, ';"
 			+ "var object = arguments[0] + ' object:visible:first, ';"
