@@ -14,45 +14,22 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
  */
-public class VisualEditorPageObject extends BasePageObject{
+public class VisualEditorPageObject extends VisualEditorMenu {
 
-	/**
-	 * @param driver
-	 */
+	public VisualEditorMenu menu;
+
 	public VisualEditorPageObject(WebDriver driver) {
 		super(driver);
+		this.menu = new VisualEditorMenu(driver);
 	}
 
-	@FindBy(css="")
-	private WebElement undoButton;
-	@FindBy(css="")
-	private WebElement redoButton;
-	@FindBy(css="")
-	private WebElement paragraphDropdown;
-	@FindBy(css=".ve-ui-icon-bold-b")
-	private WebElement boldButton;
-	@FindBy(css=".ve-ui-icon-italic-i")
-	private WebElement italicButton;
-	@FindBy(css=".ve-ui-icon-link")
-	private WebElement linkButton;
-	@FindBy(css=".ve-ui-frame")
-	private WebElement linkIframe;
 	@FindBy(css=".ve-ui-linkTargetInputWidget > input")
 	private WebElement linkInputField;
-	@FindBy(css=".ve-ui-icon-code")
-	private WebElement codeButton;
-	@FindBy(css=".ve-ui-icon-clear")
-	private WebElement clearButton;
-	@FindBy(css=".ve-ui-icon-number-list")
-	private WebElement numListButton;
-	@FindBy(css=".ve-ui-icon-bullet-list")
-	private WebElement bulletListButton;
 	@FindBy(css=".ve-ce-documentNode")
 	private WebElement editArea;
 	@FindBy(css="p.ve-ce-branchNode")
@@ -85,46 +62,13 @@ public class VisualEditorPageObject extends BasePageObject{
 		PageObjectLogging.log("clear", "editor area cleared", true);
 	}
 
-	public void clickBoldButton() {
-		boldButton.click();
-		PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
-	}
-
-	public void clickItalicButton() {
-		italicButton.click();
-		PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
-	}
-
-	public void clickLinkButton() {
-		linkButton.click();
-		PageObjectLogging.log("clickLinkButton", "link button clicked", true);
-	}
-
-	public void clickCodeButton() {
-		codeButton.click();
-		PageObjectLogging.log("clickCodeButton", "code button clicked", true);
-	}
-
-	public void clickClearButton() {
-		clearButton.click();
-		PageObjectLogging.log("clickClearButton", "clear styles button clicked", true);
-	}
-
-	public void clickNumListButton() {
-		numListButton.click();
-		PageObjectLogging.log("clickNumListButton", "numered list button clicked", true);
-	}
-
-	public void clickBullListButton() {
-		bulletListButton.click();
-		PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
-	}
 
 	public void typeHyperlink(String hyperlink) {
-		waitForElementByElement(linkIframe);
-		driver.switchTo().frame(linkIframe);
-		linkInputField.sendKeys(hyperlink);
-		linkInputField.sendKeys(Keys.ENTER);
+//		waitForElementByElement(linkIframe);
+//		driver.switchTo().frame(linkIframe);
+		Actions a = new Actions(driver);
+		a.sendKeys(linkInputField, hyperlink);
+		a.sendKeys(linkInputField, Keys.ENTER);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("typeHyperlink", "hyperlink added", true);
 	}
@@ -188,5 +132,9 @@ public class VisualEditorPageObject extends BasePageObject{
 		for (int i=0; i<elements.size(); i++) {
 			Assertion.assertEquals(elements.get(i), bullList.get(i).getText());
 		}
+	}
+
+	public void verifyFormatting (Formatting format, String text) {
+		Assertion.assertEquals(text, editArea.findElement(format.getTag()).getText());
 	}
 }

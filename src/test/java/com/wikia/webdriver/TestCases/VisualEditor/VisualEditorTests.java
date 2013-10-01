@@ -6,9 +6,10 @@ import java.util.List;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VisualEditorContent;
-import com.wikia.webdriver.Common.Templates.VisualEditorTestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
@@ -23,12 +24,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * 6. Write bullet list
  */
 
-public class VisualEditorTests extends VisualEditorTestTemplate{
+public class VisualEditorTests extends NewTestTemplate {
+
+	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"VisualEditor", "VisualEditor_001"})
 	public void VisualEditor_001_writeBoldText() {
-		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
-		ve.clear();
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickBoldButton();
 		ve.write(VisualEditorContent.text);
 		ve.verifyTextBold(VisualEditorContent.text);
@@ -39,8 +43,9 @@ public class VisualEditorTests extends VisualEditorTestTemplate{
 
 	@Test(groups = {"VisualEditor", "VisualEditor_002"})
 	public void VisualEditor_002_writeItalicText() {
-		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
-		ve.clear();
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickItalicButton();
 		ve.write(VisualEditorContent.text);
 		ve.verifyTextItalic(VisualEditorContent.text);
@@ -49,20 +54,22 @@ public class VisualEditorTests extends VisualEditorTestTemplate{
 		ve.verifyTextNotFormatted(VisualEditorContent.text);
 	}
 
-	@Test(groups = {"VisualEditor", "VisualEditor_003"})
+//	@Test(groups = {"VisualEditor", "VisualEditor_003"})
 	public void VisualEditor_003_addLink() {
-		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
-		ve.clear();
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.write(VisualEditorContent.text);
 		ve.clickLinkButton();
-		ve.typeHyperlink(PageContent.wikiaGlobalUrl);
-		ve.verifyLink(VisualEditorContent.text, PageContent.wikiaGlobalUrl);
+		ve.typeHyperlink("http://wikia.com/");
+		ve.verifyLink(VisualEditorContent.text, "http://wikia.com/");
 	}
 
-	@Test(groups = {"VisualEditor", "VisualEditor_004"})
+//	@Test(groups = {"VisualEditor", "VisualEditor_004"})
 	public void VisualEditor_004_writeCodeText() {
-		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
-		ve.clear();
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickCodeButton();
 		ve.write(VisualEditorContent.text);
 		ve.verifyCodeText(VisualEditorContent.text);
@@ -73,8 +80,9 @@ public class VisualEditorTests extends VisualEditorTestTemplate{
 
 	@Test(groups = {"VisualEditor", "VisualEditor_005"})
 	public void VisualEditor_005_writeNumList() {
-		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
-		ve.clear();
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickNumListButton();
 		List<String> elements = new ArrayList<String>();
 		elements.add("row1");
@@ -90,8 +98,9 @@ public class VisualEditorTests extends VisualEditorTestTemplate{
 
 	@Test(groups = {"VisualEditor", "VisualEditor_006"})
 	public void VisualEditor_006_writeBulletList() {
-		VisualEditorPageObject ve = new VisualEditorPageObject(driver);
-		ve.clear();
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickBullListButton();
 		List<String> elements = new ArrayList<String>();
 		elements.add("row1");
