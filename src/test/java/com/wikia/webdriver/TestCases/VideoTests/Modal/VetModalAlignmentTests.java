@@ -35,14 +35,16 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
-	String articleTitle;
+	String articleTitle1;
+	String articleTitle2;
+	String articleTitle3;
 
 	@Test(groups = {"VetModalAlignment", "VetModalAlignment_001"})
 	public void Vet_Modal_001_leftOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		articleTitle1 = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle1);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -58,11 +60,11 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		article.verifyVideoAlignment(PositionsVideo.left);
 	}
 
-	@Test(groups = {"VetModalAlignment", "VetModalAlignment_002"})
+	@Test(groups = {"VetModalAlignment", "VetModalAlignment_002"}, dependsOnMethods="Vet_Modal_001_leftOnPage")
 	public void Vet_Modal_002_leftInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle1);
 		VetOptionsComponentObject vetOptions =
 				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
 		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.left);
@@ -72,8 +74,8 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 	public void Vet_Modal_003_centerOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		articleTitle2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle2);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -89,11 +91,11 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		article.verifyVideoAlignment(PositionsVideo.center);
 	}
 
-	@Test(groups = {"VetModalAlignment", "VetModalAlignment_004"})
+	@Test(groups = {"VetModalAlignment", "VetModalAlignment_004"}, dependsOnMethods = "Vet_Modal_003_centerOnPage")
 	public void Vet_Modal_004_centerInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle2);
 		VetOptionsComponentObject vetOptions =
 				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
 		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.center);
@@ -103,8 +105,8 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 	public void Vet_Modal_005_rightOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		articleTitle3 = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle3);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -120,11 +122,11 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		article.verifyVideoAlignment(PositionsVideo.right);
 	}
 
-	@Test(groups = {"VetModalAlignment", "VetModalAlignment_006"})
+	@Test(groups = {"VetModalAlignment", "VetModalAlignment_006"}, dependsOnMethods = "Vet_Modal_005_rightOnPage")
 	public void Vet_Modal_006_rightInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle3);
 		VetOptionsComponentObject vetOptions =
 				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
 		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.right);

@@ -1,18 +1,18 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import org.openqa.selenium.By;
 
 public class IntraWikiSearchPageObject extends BasePageObject {
 
@@ -320,9 +320,6 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	}
 
 	public void compareTitleListsNotEquals(List<String> titles1, List<String> titles2) {
-		Assertion.assertNumber(titles1.size(), titles2.size(), "checking list length");
-		for (int i=0; i<titles1.size(); i++){
-			Assertion.assertTrue(!titles1.get(i).equals(titles2.get(i)));
-		}
+		Assertion.assertNotEquals(titles1, titles2, "titles are the same");
 	}
 }
