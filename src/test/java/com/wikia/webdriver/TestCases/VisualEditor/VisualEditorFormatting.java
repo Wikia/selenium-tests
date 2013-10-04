@@ -49,7 +49,7 @@ public class VisualEditorFormatting extends VisualEditorTestTemplate {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getFormatting"
 	)
-	public void VisualEditorFormatting_001_paragraph(Formatting format) {
+	public void VisualEditorFormatting_001(Formatting format) {
 		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
 		ve.selectFormatting(format);
 		ve.write(text);

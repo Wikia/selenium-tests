@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VisualEditorContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -28,17 +29,19 @@ public class VisualEditorTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
+	private String text = PageContent.articleText;
+
 	@Test(groups = {"VisualEditor", "VisualEditor_001"})
 	public void VisualEditor_001_writeBoldText() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickBoldButton();
-		ve.write(VisualEditorContent.text);
-		ve.verifyTextBold(VisualEditorContent.text);
+		ve.write(text);
+		ve.verifyTextBold(text);
 		ve.highlightBoldText();
 		ve.clickClearButton();
-		ve.verifyTextNotFormatted(VisualEditorContent.text);
+		ve.verifyTextNotFormatted(text);
 	}
 
 	@Test(groups = {"VisualEditor", "VisualEditor_002"})
