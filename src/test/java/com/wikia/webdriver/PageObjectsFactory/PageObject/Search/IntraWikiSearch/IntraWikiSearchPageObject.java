@@ -1,18 +1,19 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import org.openqa.selenium.By;
 
 public class IntraWikiSearchPageObject extends BasePageObject {
 
@@ -90,6 +91,10 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private List<WebElement> filterOptions;
 	@FindBy(css=".sprite.play.small")
 	private List<WebElement> playMovieImage;
+	@FindBy(css=".result-description .result-link")
+	private WebElement pushToTopWikiResult;
+	@FindBy(css=".wikiPromoteThumbnail")
+	private WebElement pushToTopWikithumbnail;
 
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -324,5 +329,29 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		for (int i=0; i<titles1.size(); i++){
 			Assertion.assertTrue(!titles1.get(i).equals(titles2.get(i)));
 		}
+	}
+
+	public void verifyPushToTopWikiTitle(String searchWiki) {
+		Assertion.assertStringContains(pushToTopWikiResult.getText(), searchWiki);
+	}
+
+	public void verifyPushToTopWikiThumbnail() {
+		waitForElementByElement(pushToTopWikithumbnail);
+	}
+
+	public void goToSearchPage(String searchUrl) {
+		try{
+			getUrl(searchUrl+"index.php?title=Special:Search");
+		}
+		catch (TimeoutException e)
+		{
+			PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", false);
+		}
+	}
+
+	public void searchCommunityFor(String query) {
+		intraSearchField.sendKeys(query);
+		intraSearchButton.click();
+		PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
 	}
 }
