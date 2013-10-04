@@ -29,6 +29,7 @@ public class NewTestTemplate {
 	protected AbstractConfiguration config;
 	protected String wikiURL;
 	protected String wikiCorporateURL;
+	protected String wikiCommunityURL;
 
 	public NewTestTemplate() {
 		config = ConfigurationFactory.getConfig();
@@ -49,6 +50,7 @@ public class NewTestTemplate {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
 		wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
+		wikiCommunityURL = urlBuilder.getUrlForWiki("community");
 		driver.get(wikiURL + URLsContent.logout);
 	}
 

@@ -145,4 +145,5 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		search.searchFor(SearchContent.searchPhraseDecimalNumber);
 		search.verifyQuery(SearchContent.wikiName);
 	}
+
 }

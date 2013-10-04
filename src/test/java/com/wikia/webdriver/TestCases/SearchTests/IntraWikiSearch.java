@@ -28,6 +28,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.
  *  13. Search for different phrases and verify there are correct namespaces in result titles
  *  14. Search for empty field and verify if search page is opened
  *  15. Verify top module
+ *  16. Verify push to top is working in community.wikia.com
  */
 
 public class IntraWikiSearch extends NewTestTemplate {
@@ -45,6 +46,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 	private static final String searchResultWithExtension = "betweenlions";
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 	private static final String searchPhraseSuggestions = "Gon";
+	private static final String searchWiki = "Marvel";
 
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",
@@ -197,6 +199,15 @@ public class IntraWikiSearch extends NewTestTemplate {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhraseResults);
 		search.verifyTopModule();
+	}
+
+	@Test(groups={"IntraSearch016", "IntraWikiSearch", "Search"})
+	public void intraWikiSearch_016_communityPushToTopWikiResult() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
+		search.goToSearchPage(wikiCommunityURL);
+		search.searchCommunityFor(searchWiki);
+		search.verifyPushToTopWikiTitle(searchWiki);
+		search.verifyPushToTopWikiThumbnail();
 	}
 
 }
