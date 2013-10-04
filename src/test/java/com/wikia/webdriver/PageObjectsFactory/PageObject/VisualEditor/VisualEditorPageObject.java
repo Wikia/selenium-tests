@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**

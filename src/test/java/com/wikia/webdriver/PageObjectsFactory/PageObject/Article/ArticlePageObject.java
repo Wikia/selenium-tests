@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -20,6 +21,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+
 
 /**
  *
@@ -31,6 +33,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
+	@FindBy(css="#mw-content-text")
+	protected WebElement articleContentContainer;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
 	@FindBy(css="#WikiHeader .drop")
@@ -134,6 +138,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyContent(String content) {
 		waitForElementVisibleByElement(articleContent);
 		Assertion.assertStringContains(articleContent.getText(), content);
+	}
+
+	public void verifyContent(Formatting format, String content) {
+		waitForElementVisibleByElement(articleContentContainer);
+		Assertion.assertStringContains(articleContentContainer.findElement(format.getTag()).getText(), content);
 	}
 
 	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {

@@ -3,13 +3,18 @@
  */
 package com.wikia.webdriver.TestCases.VisualEditor;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.Common.Templates.VisualEditorTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorMenu.Formatting;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorSaveChangesDialog;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -24,29 +29,33 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * Verify page title formatting
  */
 
-public class VisualEditorFormatting extends NewTestTemplate {
+public class VisualEditorFormatting extends VisualEditorTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	private String text = "text";
+	VisualEditorPageObject ve;
 
-	@Test
-	public void VisualEditorFormatting_001_paragraph() {
+	private String text = PageContent.articleText;
+
+	@BeforeClass
+	public void setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject visual = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
-		visual.selectFormatting(Formatting.PARAGRAPH);
-		visual.write(text);
-		visual.verifyFormatting(Formatting.PARAGRAPH, text);
+		ve = new VisualEditorPageObject(driver);
 	}
 
-	@Test
-	public void VisualEditorFormatting_002_heading() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject visual = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
-		visual.selectFormatting(Formatting.HEADING);
-		visual.write(text);
-		visual.verifyFormatting(Formatting.HEADING, text);
+	@Test(
+			groups = {"VisualEditorFormatting", "VisualEditorFormatting_001"},
+			dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getFormatting"
+	)
+	public void VisualEditorFormatting_001_paragraph(Formatting format) {
+		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
+		ve.selectFormatting(format);
+		ve.write(text);
+		ve.verifyFormatting(format, text);
+		VisualEditorSaveChangesDialog save = ve.savePage();
+		ArticlePageObject article = save.savePage();
+		article.verifyContent(format, text);
 	}
 }

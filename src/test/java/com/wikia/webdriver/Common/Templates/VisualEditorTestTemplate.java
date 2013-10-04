@@ -6,13 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
 import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
@@ -23,9 +24,6 @@ public class VisualEditorTestTemplate {
 	protected WebDriver driver;
 	protected AbstractConfiguration config;
 	protected String wikiURL;
-
-	private static String visualEditorUrl =
-			"http://public.inez.wikia-dev.com/VisualEditor/demos/ve/";
 
 	public VisualEditorTestTemplate() {
 		config = ConfigurationFactory.getConfig();
@@ -43,16 +41,14 @@ public class VisualEditorTestTemplate {
 	@BeforeClass(alwaysRun = true)
 	public void start() {
 		startBrowser();
+		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
+		driver.get(wikiURL + URLsContent.logout);
 	}
 
 	@AfterClass(alwaysRun = true)
 	public void stop() {
 		stopBrowser();
-	}
-
-	@BeforeMethod()
-	public void setup() {
-		driver.get(visualEditorUrl);
 	}
 
 	protected void startBrowser() {

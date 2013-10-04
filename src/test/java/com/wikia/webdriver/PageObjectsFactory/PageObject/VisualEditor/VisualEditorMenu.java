@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -47,7 +48,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement bulletListButton;
 	@FindBy(css=".ve-ui-menuToolGroup .ve-ui-icon-down")
 	private WebElement formattingDropDown;
-
+	@FindBy(css=".ve-ui-toolbar-saveButton")
+	private WebElement savePageButton;
 
 	public void clickBoldButton() {
 		boldButton.click();
@@ -84,27 +86,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
 	}
 
-	public enum Formatting {
-		PARAGRAPH (By.cssSelector("p")),
-		HEADING (By.cssSelector("h2")),
-		SUBHEADING1 (By.cssSelector("h3")),
-		SUBHEADING2 (By.cssSelector("h4")),
-		SUBHEADING3 (By.cssSelector("h5")),
-		SUBHEADING4 (By.cssSelector("h6")),
-		PREFORMATTED (By.cssSelector("pre")),
-		TITLE (By.cssSelector("h1"));
-
-		private By tag;
-
-		private Formatting(By tag) {
-			this.tag = tag;
-		}
-
-		public By getTag() {
-			return tag;
-		};
-	}
-
 	public void selectFormatting(Formatting format) {
 		formattingDropDown.click();
 		List<WebElement> list = formattingDropDown
@@ -112,5 +93,12 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		.findElement(parentBy)
 		.findElements(By.cssSelector("a.ve-ui-tool"));
 		list.get(format.ordinal()).click();
+	}
+
+	public VisualEditorSaveChangesDialog savePage() {
+		waitForElementNotPresent(".ve-ui-toolbar-saveButton.ve-ui-widget-disabled");
+		waitForElementClickableByElement(savePageButton);
+		savePageButton.click();
+		return new VisualEditorSaveChangesDialog(driver);
 	}
 }
