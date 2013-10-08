@@ -5,6 +5,12 @@ import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -16,8 +22,11 @@ import org.openqa.selenium.WebElement;
  */
 public class AdsComparisonObject extends AdsBaseObject {
 
+	private ImageComparison imageComparison;
+
 	public AdsComparisonObject(WebDriver driver, String page) {
 		super(driver, page);
+		imageComparison = new ImageComparison();
 	}
 
 	public void checkTopLeaderboard() {
@@ -64,6 +73,38 @@ public class AdsComparisonObject extends AdsBaseObject {
 		}
 	}
 
+	public void checkToolbarAdBySize(String adBaseLocation, Dimension size) throws IOException {
+		Shooter shooter = new Shooter();
+		String encodedExpectedAd = IOUtils.toString(new FileInputStream(new File(adBaseLocation)), "UTF-8");
+		Base64 coder = new Base64();
+		PageObjectLogging.log(
+			"ScreenshotElement",
+			"Screenshot of the element taken, Selector: " + AdsContent.wikiaBarSelector,
+			true, driver
+		);
+		File toolbarScreen =  shooter.captureWebElementWithSize(toolbar, driver, size);
+		String encodedToolbarScreen = IOUtils.toString(
+			coder.encode(FileUtils.readFileToByteArray(toolbarScreen)), "UTF-8"
+		);
+		toolbarScreen.delete();
+		if (
+			imageComparison.comapareBaseEncodedImagesBasedOnBytes(encodedExpectedAd, encodedToolbarScreen)
+		) {
+			PageObjectLogging.log(
+				"ExpectedAdFound", "Expected ad found in toolbar", true
+			);
+		} else {
+			PageObjectLogging.log(
+				"ExpectedAdNotFound", "Expected ad not found in toolbar", false
+			);
+			throw new NoSuchElementException(
+				"Expected ad not found on page"
+				+ "CSS: "
+				+ AdsContent.wikiaBarSelector
+			);
+		}
+	}
+
 	private boolean compareSlotOnOff(WebElement element, String elementSelector) {
 		Shooter shooter = new Shooter();
 		if (element.getSize().height <= 1 || element.getSize().width <= 1) {
@@ -71,12 +112,12 @@ public class AdsComparisonObject extends AdsBaseObject {
 				"Element has size 1px x 1px or smaller. Most probable is not displayed"
 			);
 		}
-		File preSwitch = shooter.captureWebElement(element, driver);
 		PageObjectLogging.log(
 			"ScreenshotElement",
 			"Screenshot of the element taken, Selector: " + elementSelector,
-			true
+			true, driver
 		);
+		File preSwitch = shooter.captureWebElement(element, driver);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		// Find ad-containing element and set visibility = hidden on it
 		// Example selector:
@@ -98,8 +139,7 @@ public class AdsComparisonObject extends AdsBaseObject {
 			"Screenshot of element off taken; CSS " + elementSelector,
 			true
 		);
-		ImageComparison comparer = new ImageComparison();
-		boolean result = comparer.compareImagesBasedOnBytes(preSwitch, postSwitch);
+		boolean result = imageComparison.compareImagesBasedOnBytes(preSwitch, postSwitch);
 		preSwitch.delete();
 		postSwitch.delete();
 		return result;

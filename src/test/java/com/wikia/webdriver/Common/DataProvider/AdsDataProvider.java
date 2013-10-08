@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.DataProvider;
 
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
 
 /**
@@ -124,6 +125,21 @@ public class AdsDataProvider {
 				"adtest", "Mobile:MobileDesktopOverlapping_postSwitch",
 				"http://pagead2.googlesyndication.com/simgad/2078293277703974918",
 				"http://pagead2.googlesyndication.com/simgad/10332844232748374153"
+			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] gptAdsInToolbar() {
+		return new Object[][] {
+			{
+				"adtest", "Toolbar/320x70",
+				"src/test/resources/adsResources/toolbar320x50",
+				new Dimension(320, 70)
+			}, {
+				"adtest", "Toolbar/320x50",
+				"src/test/resources/adsResources/toolbar320x50",
+				new Dimension(320, 50)
 			}
 		};
 	}
