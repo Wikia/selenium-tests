@@ -1,13 +1,8 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.VisualEditorContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -29,7 +24,8 @@ public class VisualEditorTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	private String text = PageContent.articleText;
+	private String articleText = PageContent.articleText;
+	private String linkText = PageContent.textLink;
 
 	@Test(groups = {"VisualEditor", "VisualEditor_001"})
 	public void VisualEditor_001_writeBoldText() {
@@ -37,11 +33,11 @@ public class VisualEditorTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickBoldButton();
-		ve.write(text);
-		ve.verifyTextBold(text);
-		ve.highlightBoldText();
+		ve.write(articleText);
+		ve.verifyTextBold(articleText);
+		ve.selectText(0, articleText.length()+1);
 		ve.clickClearButton();
-		ve.verifyTextNotFormatted(text);
+		ve.verifyTextNotFormatted(articleText);
 	}
 
 	@Test(groups = {"VisualEditor", "VisualEditor_002"})
@@ -50,70 +46,70 @@ public class VisualEditorTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
 		ve.clickItalicButton();
-		ve.write(VisualEditorContent.text);
-		ve.verifyTextItalic(VisualEditorContent.text);
-		ve.highlightItalicText();
+		ve.write(articleText);
+		ve.verifyTextItalic(articleText);
+		ve.selectText(0, articleText.length()+1);
 		ve.clickClearButton();
-		ve.verifyTextNotFormatted(VisualEditorContent.text);
+		ve.verifyTextNotFormatted(articleText);
 	}
 
 //	@Test(groups = {"VisualEditor", "VisualEditor_003"})
-	public void VisualEditor_003_addLink() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
-		ve.write(VisualEditorContent.text);
-		ve.clickLinkButton();
-		ve.typeHyperlink("http://wikia.com/");
-		ve.verifyLink(VisualEditorContent.text, "http://wikia.com/");
-	}
-
-//	@Test(groups = {"VisualEditor", "VisualEditor_004"})
-	public void VisualEditor_004_writeCodeText() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
-		ve.clickCodeButton();
-		ve.write(VisualEditorContent.text);
-		ve.verifyCodeText(VisualEditorContent.text);
-		ve.hightlightCodeText();
-		ve.clickClearButton();
-		ve.verifyTextNotFormatted(VisualEditorContent.text);
-	}
-
-	@Test(groups = {"VisualEditor", "VisualEditor_005"})
-	public void VisualEditor_005_writeNumList() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
-		ve.clickNumListButton();
-		List<String> elements = new ArrayList<String>();
-		elements.add("row1");
-		elements.add("row2");
-		elements.add("row3");
-		ve.write(elements.get(0));
-		ve.write(Keys.ENTER);
-		ve.write(elements.get(1));
-		ve.write(Keys.ENTER);
-		ve.write(elements.get(2));
-		ve.verifyNumList(elements);
-	}
-
-	@Test(groups = {"VisualEditor", "VisualEditor_006"})
-	public void VisualEditor_006_writeBulletList() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
-		ve.clickBullListButton();
-		List<String> elements = new ArrayList<String>();
-		elements.add("row1");
-		elements.add("row2");
-		elements.add("row3");
-		ve.write(elements.get(0));
-		ve.write(Keys.ENTER);
-		ve.write(elements.get(1));
-		ve.write(Keys.ENTER);
-		ve.write(elements.get(2));
-		ve.verifyBullList(elements);
-	}
+//	public void VisualEditor_003_addLink() {
+//		WikiBasePageObject base = new WikiBasePageObject(driver);
+//		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+//		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
+//		ve.write(linkText);
+//		ve.clickLinkButton();
+//		ve.typeHyperlink("http://wikia.com/");
+//		ve.verifyLink(linkText, "http://wikia.com/");
+//	}
+//
+////	@Test(groups = {"VisualEditor", "VisualEditor_004"})
+//	public void VisualEditor_004_writeCodeText() {
+//		WikiBasePageObject base = new WikiBasePageObject(driver);
+//		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+//		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
+//		ve.clickCodeButton();
+//		ve.write(articleText);
+//		ve.verifyCodeText(articleText);
+//		ve.selectText(0, articleText.length()+1);
+//		ve.clickClearButton();
+//		ve.verifyTextNotFormatted(articleText);
+//	}
+//
+//	@Test(groups = {"VisualEditor", "VisualEditor_005"})
+//	public void VisualEditor_005_writeNumList() {
+//		WikiBasePageObject base = new WikiBasePageObject(driver);
+//		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+//		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
+//		ve.clickNumListButton();
+//		List<String> elements = new ArrayList<String>();
+//		elements.add("row1");
+//		elements.add("row2");
+//		elements.add("row3");
+//		ve.write(elements.get(0));
+//		ve.write(Keys.ENTER);
+//		ve.write(elements.get(1));
+//		ve.write(Keys.ENTER);
+//		ve.write(elements.get(2));
+//		ve.verifyNumList(elements);
+//	}
+//
+//	@Test(groups = {"VisualEditor", "VisualEditor_006"})
+//	public void VisualEditor_006_writeBulletList() {
+//		WikiBasePageObject base = new WikiBasePageObject(driver);
+//		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+//		VisualEditorPageObject ve = base.gotoArticleEditModeVisual(wikiURL, base.getTimeStamp());
+//		ve.clickBullListButton();
+//		List<String> elements = new ArrayList<String>();
+//		elements.add("row1");
+//		elements.add("row2");
+//		elements.add("row3");
+//		ve.write(elements.get(0));
+//		ve.write(Keys.ENTER);
+//		ve.write(elements.get(1));
+//		ve.write(Keys.ENTER);
+//		ve.write(elements.get(2));
+//		ve.verifyBullList(elements);
+//	}
 }

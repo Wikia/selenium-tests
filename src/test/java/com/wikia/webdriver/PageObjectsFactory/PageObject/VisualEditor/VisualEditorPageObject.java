@@ -9,7 +9,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -65,11 +64,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 
 	public void typeHyperlink(String hyperlink) {
-//		waitForElementByElement(linkIframe);
-//		driver.switchTo().frame(linkIframe);
-		Actions a = new Actions(driver);
-		a.sendKeys(linkInputField, hyperlink);
-		a.sendKeys(linkInputField, Keys.ENTER);
+		waitForElementByElement(linkIframe);
+		driver.switchTo().frame(linkIframe);
+		linkInputField.sendKeys(hyperlink);
+		linkInputField.click();
+		linkInputField.sendKeys(Keys.ENTER);
+//		Actions a = new Actions(driver);
+//		a.sendKeys(linkInputField, hyperlink);
+//		a.sendKeys(linkInputField, Keys.ENTER);
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		js.executeScript("arguments[0].trigger(\"change\")", linkInputField);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("typeHyperlink", "hyperlink added", true);
 	}
@@ -95,25 +99,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		Assertion.assertEquals(text, codeLine.getText());
 	}
 
-	public void highlightBoldText() {
-		waitForElementByElement(boldLine);
-		Actions actions = new Actions(driver);
-		actions.doubleClick(boldLine).build().perform();
-		PageObjectLogging.log("highlightBoldText", "bold text highlighted", true);
-	}
-
-	public void highlightItalicText() {
-		waitForElementByElement(italicLine);
-		Actions actions = new Actions(driver);
-		actions.doubleClick(italicLine).build().perform();
-		PageObjectLogging.log("highlightItalicText", "italic text highlighted", true);
-	}
-
-	public void hightlightCodeText() {
-		waitForElementByElement(codeLine);
-		Actions actions = new Actions(driver);
-		actions.doubleClick(codeLine).build().perform();
-		PageObjectLogging.log("hightlightCodeText", "code text highlighted", true);
+	public void selectText(int from, int to) {
+		String showSelectiontJS = "ve.instances[0].model.change( null, new ve.Range( " + from + ", " + to + " ) );";
+		((JavascriptExecutor) driver).executeScript(showSelectiontJS);
 	}
 
 	public void verifyTextNotFormatted(String text) {

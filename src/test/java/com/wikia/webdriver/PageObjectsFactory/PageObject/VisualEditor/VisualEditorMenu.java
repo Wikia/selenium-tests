@@ -37,7 +37,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	@FindBy(css=".ve-ui-icon-link")
 	private WebElement linkButton;
 	@FindBy(css=".ve-ui-frame")
-	private WebElement linkIframe;
+	protected WebElement linkIframe;
 	@FindBy(css=".ve-ui-icon-code")
 	private WebElement codeButton;
 	@FindBy(css=".ve-ui-icon-clear")
