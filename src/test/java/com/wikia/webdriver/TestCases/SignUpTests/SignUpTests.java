@@ -74,7 +74,7 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.verifySubmitButtonDisabled();
 	}
 
-	@Test(groups = {"SignUp_account_creation_TC_001", "SignUp", "Smoke4"})
+	@Test(enabled = false, groups = {"SignUp_account_creation_TC_001", "SignUp", "Smoke4"})
 	public void Signup_004_signup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);

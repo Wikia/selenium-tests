@@ -50,7 +50,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 	private WebElement birthDayField;
 	@FindBy(css = "select[name='birthyear']")
 	private WebElement birthYearField;
-	@FindBy(css = "#wpCaptchaWord")
+	@FindBy(css = "#recaptcha_response_field")
 	private WebElement captchaField;
 	@FindBy(css = "#wpCaptchaId")
 	private WebElement blurryWordHidden;
@@ -153,6 +153,11 @@ public class SignUpPageObject extends WikiBasePageObject {
 
 	public void verifyCaptchaInvalidMessage() {
 		String message = captchaField
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
 				.findElement(parentBy)
 				.findElement(parentBy)
 				.findElement(parentBy)
