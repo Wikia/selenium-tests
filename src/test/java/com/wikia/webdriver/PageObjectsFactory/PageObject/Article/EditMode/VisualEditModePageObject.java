@@ -84,12 +84,25 @@ public class VisualEditModePageObject extends EditMode {
 		driver.switchTo().defaultContent();
 	}
 
+	/**
+	 * clears article content and adds new content to the article
+	 */
 	public void addContent(String content) {
 		driver.switchTo().frame(iframe);
 		contentInput.clear();
 		contentInput.sendKeys(content);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("addContent", "content " + content + " added to the article", true);
+	}
+
+	/**
+	 * adds new content to an article without the existing content
+	 */
+	public void appendContent(String content) {
+		driver.switchTo().frame(iframe);
+		contentInput.sendKeys(content);
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("appendContent", "content " + content + " added to the article", true);
 	}
 
 	private void verifyComponent(WebElement component){

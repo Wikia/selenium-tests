@@ -490,4 +490,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}
+
+	/**
+	 * verifies that there is 'Table of contents' component on the article
+	 */
+	public void verifyTOCpresent() {
+		// TODO Auto-generated method stub
+
+	}
 }

@@ -11,6 +11,15 @@ public class PageContent {
 	public static String commentTextEdit = "Brand new comment";
 	public static String replyText = "Brand new reply";
 	public static String replyText2 = "QAReply";
+	//articles with TOC
+	public static String articleWithTOCline01 = "==First Heading==";
+	public static String articleWithTOCline02 = "text of the first heading";
+	public static String articleWithTOCline03 = "==Second heading==";
+	public static String articleWithTOCline04 = "text of the second heading";
+	public static String articleWithTOCline05 = "===sub-heading number 1===";
+	public static String articleWithTOCline06 = "text of the sub-heading number 1";
+	public static String articleWithTOCline07 = "===sub-heading number 2===";
+	public static String articleWithTOCline08 = "text of the sub-heading number 2";
 	//blogs
 	public static String blogPostNamePrefix = "blogPost";
 	public static String blogContent = "blogContent";
