@@ -32,16 +32,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement linkInputField;
 	@FindBy(css=".ve-ce-documentNode")
 	private WebElement editArea;
-	@FindBy(css="p.ve-ce-branchNode")
-	private WebElement textLine;
-	@FindBy(css="b.ve-ce-TextStyleAnnotation.ve-ce-TextStyleBoldAnnotation")
-	private WebElement boldLine;
-	@FindBy(css="i.ve-ce-TextStyleAnnotation.ve-ce-TextStyleItalicAnnotation")
-	private WebElement italicLine;
-	@FindBy(css=".ve-ce-LinkAnnotation")
-	private WebElement linkLine;
-	@FindBy(css="code.ve-ce-TextStyleCodeAnnotation")
-	private WebElement codeLine;
 	@FindBy(css="ol.ve-ce-branchNode > li")
 	private List<WebElement> numList;
 	@FindBy(css="ul.ve-ce-branchNode > li")
@@ -57,58 +47,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		PageObjectLogging.log("write", "text " + key.toString() + "pressed", true);
 	}
 
-	public void clear() {
-		editArea.clear();
-		PageObjectLogging.log("clear", "editor area cleared", true);
-	}
-
-
-	public void typeHyperlink(String hyperlink) {
-		waitForElementByElement(linkIframe);
-		driver.switchTo().frame(linkIframe);
-		linkInputField.sendKeys(hyperlink);
-		linkInputField.click();
-		linkInputField.sendKeys(Keys.ENTER);
-//		Actions a = new Actions(driver);
-//		a.sendKeys(linkInputField, hyperlink);
-//		a.sendKeys(linkInputField, Keys.ENTER);
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("arguments[0].trigger(\"change\")", linkInputField);
-		driver.switchTo().defaultContent();
-		PageObjectLogging.log("typeHyperlink", "hyperlink added", true);
-	}
-
-	public void verifyLink(String text, String hyperlink) {
-		waitForElementByElement(linkLine);
-		Assertion.assertEquals(hyperlink, linkLine.getAttribute("href"));
-		Assertion.assertEquals(text, linkLine.getText());
-	}
-
-	public void verifyTextBold(String text) {
-		waitForElementByElement(boldLine);
-		Assertion.assertEquals(text, boldLine.getText());
-	}
-
-	public void verifyTextItalic(String text) {
-		waitForElementByElement(italicLine);
-		Assertion.assertEquals(text, italicLine.getText());
-	}
-
-	public void verifyCodeText(String text) {
-		waitForElementByElement(codeLine);
-		Assertion.assertEquals(text, codeLine.getText());
-	}
-
 	public void selectText(int from, int to) {
 		String showSelectiontJS = "ve.instances[0].model.change( null, new ve.Range( " + from + ", " + to + " ) );";
 		((JavascriptExecutor) driver).executeScript(showSelectiontJS);
-	}
-
-	public void verifyTextNotFormatted(String text) {
-		waitForElementByElement(textLine);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String currentText = js.executeScript("return $(arguments[0]).html()", textLine).toString();
-		Assertion.assertEquals(text, currentText);
 	}
 
 	public void verifyNumList(List<String> elements) {
