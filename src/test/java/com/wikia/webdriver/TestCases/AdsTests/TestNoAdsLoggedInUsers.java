@@ -1,8 +1,5 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
@@ -10,6 +7,8 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
 
 /**
  *

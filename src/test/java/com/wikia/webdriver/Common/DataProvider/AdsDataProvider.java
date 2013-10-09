@@ -62,7 +62,6 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] noAdsForUsers () {
 		return new Object[][] {
-			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
 			{"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
