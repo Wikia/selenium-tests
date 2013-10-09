@@ -160,7 +160,9 @@ public class NewMessageWall extends WikiBasePageObject {
 	public NewMessageWallCloseRemoveThreadPageObject clickCloseThread() {
 		setDisplayStyle(newMessageMenu, "block");
 		scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
-		scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(closeButtonBy));
+		WebElement closeButton = driver.findElement(firstMessageWrapperBy).findElement(closeButtonBy);
+		waitForElementClickableByElement(closeButton);
+		closeButton.click();
 		setDisplayStyle(newMessageMenu, "none");
 		PageObjectLogging.log("clickCloseThread", "close thread button clicked", true);
 		return new NewMessageWallCloseRemoveThreadPageObject(driver);

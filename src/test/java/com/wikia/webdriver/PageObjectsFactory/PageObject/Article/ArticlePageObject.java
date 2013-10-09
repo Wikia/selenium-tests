@@ -237,7 +237,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void submitReplyComment() {
 		driver.switchTo().defaultContent();
 		waitForElementClickableByElement(replyCommentSubmitButton);
-		replyCommentSubmitButton.click();
+		scrollAndClick(replyCommentSubmitButton);
 		waitForElementNotVisibleByElement(replyCommentSubmitButton);
 	}
 
