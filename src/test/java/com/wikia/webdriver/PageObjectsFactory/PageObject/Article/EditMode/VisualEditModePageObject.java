@@ -96,7 +96,7 @@ public class VisualEditModePageObject extends EditMode {
 	}
 
 	/**
-	 * adds new content to an article without the existing content
+	 * adds new content to an article without clearing the existing content
 	 */
 	public void appendContent(String content) {
 		driver.switchTo().frame(iframe);

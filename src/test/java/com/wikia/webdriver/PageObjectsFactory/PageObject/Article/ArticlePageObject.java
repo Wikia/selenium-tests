@@ -75,6 +75,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement slideshowArticle;
 	@FindBy(css="#mw-content-text .wikiaPhotoGallery-slider-body")
 	protected WebElement sliderArticle;
+	@FindBy(css="#toc")
+	protected WebElement tableOfContents;
+	@FindBy(css="#toc ol")
+	protected WebElement tableOfContentsOrderedList;
+	@FindBy(css="#togglelink[title='show']")
+	protected WebElement tableOfContentsShowButton;
+	@FindBy(css="#togglelink[title='hide']")
+	protected WebElement tableOfContentsHideButton;
 	@FindBy(css="#mw-content-text .Wikia-video-play-button")
 	protected WebElement videoArticle;
 	@FindBy(css="section.RelatedVideosModule")
@@ -491,10 +499,34 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new WatchPageObject(driver);
 	}
 
-	/**
-	 * verifies that there is 'Table of contents' component on the article
-	 */
 	public void verifyTOCpresent() {
+		waitForElementByElement(tableOfContents);
+		PageObjectLogging.log("verifyTOCpresent", "toc is present", true);
+	}
+
+	public void verifyTOCexpanded() {
+		waitForElementByElement(tableOfContentsOrderedList);
+		PageObjectLogging.log("verifyTOCexpanded", "toc is expanded", true);
+	}
+
+	public void verifyTOCcollapsed() {
+		waitForElementNotVisibleByElement(tableOfContentsOrderedList);
+		PageObjectLogging.log("verifyTOCcollapsed", "toc is collapsed", true);
+	}
+
+	public void clickTOCshowButton() {
+		waitForElementByElement(tableOfContentsShowButton);
+		scrollAndClick(tableOfContentsShowButton);
+		PageObjectLogging.log("clickTOCshowButton", "table of contents 'show' button clicked", true);
+	}
+
+	public void clickTOChideButton() {
+		waitForElementByElement(tableOfContentsHideButton);
+		scrollAndClick(tableOfContentsHideButton);
+		PageObjectLogging.log("clickTOChideButton", "table of contents 'hide' button clicked", true);
+	}
+
+	public void verifyTOCsectionLnkWorks(int numberOfTheSection) {
 		// TODO Auto-generated method stub
 
 	}

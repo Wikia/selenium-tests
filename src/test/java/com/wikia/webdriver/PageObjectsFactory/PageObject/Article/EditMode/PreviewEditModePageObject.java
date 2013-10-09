@@ -23,6 +23,8 @@ public class PreviewEditModePageObject extends EditMode {
 	By videoNoCaptionSelector = By.cssSelector(".Wikia-video-thumb:not(.thumbimage)");
 	By contentWrapper = By.cssSelector("#mw-content-text");
 	By publishButton = By.cssSelector("#publish");
+	By tableOfContents = By.cssSelector("#toc");
+	By tableOfContentsOrderedList = By.cssSelector("#toc ol");
 
 	String videoPostionSelector = "figure.t%position%";
 
@@ -92,4 +94,20 @@ public class PreviewEditModePageObject extends EditMode {
 	public void publish() {
 		previewModal.findElement(publishButton).click();
 	}
+
+	public void verifyTOCpresentOnPreview() {
+		waitForElementByElement(previewModal.findElement(tableOfContents));
+		PageObjectLogging.log("verifyTOCpresentOnPreview", "toc is present on preview", true);
+	}
+
+	public void verifyTOCexpandedOnPreview() {
+		waitForElementByElement(previewModal.findElement(tableOfContentsOrderedList));
+		PageObjectLogging.log("verifyTOCexpandedOnPreview", "toc is expanded on preview", true);
+	}
+
+	public void verifyTOCcollapsedOnPreview() {
+		waitForElementNotVisibleByElement(previewModal.findElement(tableOfContentsOrderedList));
+		PageObjectLogging.log("verifyTOCcollapsedOnPreview", "toc is collapsed on preview", true);
+	}
+
 }
