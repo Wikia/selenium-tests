@@ -30,21 +30,19 @@ public class ImageComparison {
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
-		boolean isTheSame = false;
 		if (Arrays.equals(fileInBytes1, fileInBytes2)) {
-			isTheSame = true;
+			return true;
 		}
-		return isTheSame;
+		return false;
 	}
 
 	public boolean comapareBaseEncodedImagesBasedOnBytes(String base1, String base2) {
 		Base64 coder = new Base64();
 		byte[] baseInBytes1 = coder.decode(base1);
 		byte[] baseInBytes2 = coder.decode(base2);
-		boolean isTheSame = false;
 		if (Arrays.equals(baseInBytes1, baseInBytes2)) {
-			isTheSame = true;
+			return true;
 		}
-		return isTheSame;
+		return false;
 	}
 }
