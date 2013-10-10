@@ -12,13 +12,13 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
-public class SearchPageObject extends BasePageObject{
+public class SearchPageObject extends WikiBasePageObject {
 
-	public SearchPageObject (WebDriver driver)
-	{
+	public SearchPageObject (WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
+
 	@FindBy(css="#search-v2-input")
 	protected WebElement searchInput;
 	@FindBy(css="#search-v2-button")
@@ -48,7 +48,7 @@ public class SearchPageObject extends BasePageObject{
 	@FindBy(css=".results-wrapper i")
 	protected WebElement noResultsCaption;
 
-	protected By paginationContainer = By.cssSelector(".wikia-paginator");
+	protected By paginationContainerBy = By.cssSelector(".wikia-paginator");
 
 	public void clickNextPaginator() {
 		scrollAndClick(paginatorNext);
@@ -65,7 +65,7 @@ public class SearchPageObject extends BasePageObject{
 	}
 
 	public void verifyPagination() {
-		waitForElementByBy(paginationContainer);
+		waitForElementByBy(paginationContainerBy);
 		int i=1;
 		for (WebElement elem:paginationPages) {
 			Assertion.assertEquals(Integer.toString(i), elem.getText());

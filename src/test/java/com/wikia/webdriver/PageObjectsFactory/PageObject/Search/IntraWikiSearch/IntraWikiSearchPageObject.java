@@ -16,9 +16,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.SearchPageObject;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
 
-	public IntraWikiSearchPageObject(WebDriver driver, String wikiURL) {
+	public IntraWikiSearchPageObject(WebDriver driver) {
 		super(driver);
-		driver.get(wikiURL);
 	}
 
 	private String photoExtension = ".jpg";

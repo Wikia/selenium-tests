@@ -896,9 +896,4 @@ public class WikiBasePageObject extends BasePageObject {
 		deleteDropdown.click();
 		return new DeletePageObject(driver);
 	}
-
-	public void goToSearchPage(String searchUrl) {
-			getUrl(searchUrl + "Special:Search");
-			PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", false);
-	}
 }
