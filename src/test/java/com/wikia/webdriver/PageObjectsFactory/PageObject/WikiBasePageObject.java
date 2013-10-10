@@ -179,21 +179,9 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
-	public SignUpPageObject openSpecialSignUpPage(String wikiURL, Boolean disableCaptcha) {
+	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
 		getUrl(wikiURL);
 		signUpLink.click();
-		if (disableCaptcha) {
-			String currentURL = driver.getCurrentUrl();
-			if (currentURL.contains("?")) {
-				currentURL += "&";
-			}
-			else {
-				currentURL += "?";
-			}
-			currentURL += "nocaptchatest=1";
-			getUrl(currentURL);
-		}
-
 		PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
 		return new SignUpPageObject(driver);
 	}

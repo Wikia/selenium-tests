@@ -9,7 +9,10 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInSignUpPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -32,7 +35,7 @@ public class SignUpTests extends NewTestTemplate {
 	@Test(groups = {"SignUp_001", "SignUp"})
 	public void Signup_001_wrongBlurryWord() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, false);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
 		signUp.typeEmail(credentials.email);
 		signUp.typePassword(signUp.getTimeStamp());
@@ -50,7 +53,7 @@ public class SignUpTests extends NewTestTemplate {
 	@Test(groups = {"SignUp_002", "SignUp"})
 	public void Signup_002_tooYoungUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, false);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
 		signUp.typeEmail(credentials.email);
 		signUp.typePassword(signUp.getTimeStamp());
@@ -68,7 +71,7 @@ public class SignUpTests extends NewTestTemplate {
 	@Test(groups = {"SignUp_003", "SignUp"})
 	public void Signup_003_existingUserName() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, false);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(credentials.userName);
 		signUp.verifyUserExistsMessage();
 		signUp.verifySubmitButtonDisabled();
@@ -77,8 +80,8 @@ public class SignUpTests extends NewTestTemplate {
 	@Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
 	public void Signup_004_signup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, true);
-
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+		signUp.disableCaptcha();
 		String userName = "user" + signUp.getTimeStamp();
 		String password = "pass" + signUp.getTimeStamp();
 		String email = credentials.emailQaart2;
@@ -105,5 +108,38 @@ public class SignUpTests extends NewTestTemplate {
 		PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
 		preferences.selectTab(tabNames.Email);
 		preferences.verifyEmailMeSection();
+	}
+
+	@Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
+	public void SignUp_005_forced_signup_CNW(){
+		HomePageObject home = new HomePageObject(driver);
+		home.openHomePage();
+		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
+		String wikiName = createNewWiki1.getWikiName();
+		createNewWiki1.typeInWikiName(wikiName);
+		createNewWiki1.waitForSuccessIcon();
+		CreateNewWikiLogInSignUpPageObject CNWSignUpPage = createNewWiki1.submitToLogInSignUp();
+		SignUpPageObject signUp = CNWSignUpPage.submitSignup();
+		signUp.disableCaptcha();
+		String userName = "user" + signUp.getTimeStamp();
+		String password = "pass" + signUp.getTimeStamp();
+		String email = credentials.emailQaart2;
+		String emailPassword = credentials.emailPasswordQaart2;
+
+		signUp.typeEmail(email);
+		signUp.typeUserName(userName);
+		signUp.typePassword(password);
+		signUp.enterBirthDate(
+			PageContent.wikiSignUpBirthMonth,
+			PageContent.wikiSignUpBirthDay,
+			PageContent.wikiSignUpBirthYear
+		);
+		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
+		almostTherePage.verifyAlmostTherePage();
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword);
+		confirmPageAlmostThere.typeInUserName(userName);
+		confirmPageAlmostThere.typeInPassword(password);
+		createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);
+		createNewWiki1.verifyWikiName(wikiName);
 	}
 }

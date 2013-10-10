@@ -63,6 +63,18 @@ public class SignUpPageObject extends WikiBasePageObject {
 	private Select daySelect;
 	private Select monthSelect;
 
+	public void disableCaptcha() {
+		String currentURL = driver.getCurrentUrl();
+		if (currentURL.contains("?")) {
+			currentURL += "&";
+		}
+		else {
+			currentURL += "?";
+		}
+		currentURL += "nocaptchatest=1";
+		getUrl(currentURL);
+	}
+
 	public void typeUserName(String userName) {
 		userNameField.sendKeys(userName);
 		userNameField.sendKeys(Keys.TAB);

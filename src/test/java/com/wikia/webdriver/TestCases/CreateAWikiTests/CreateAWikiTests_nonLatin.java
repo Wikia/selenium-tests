@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
@@ -31,7 +31,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
 		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
-		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
+		CreateNewWikiLogInSignUpPageObject logInPage = createNewWiki1.submitToLogInSignUp();
 		logInPage.typeInUserName("查爾斯和");
 		logInPage.submitLogin();
 		logInPage.verifyInvalidUserNameValidation();
@@ -66,7 +66,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
 		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
-		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
+		CreateNewWikiLogInSignUpPageObject logInPage = createNewWiki1.submitToLogInSignUp();
 		logInPage.typeInUserName(Properties.userNameNonLatin);
 		logInPage.submitLogin();
 		logInPage.verifyBlankPasswordValidation();
@@ -101,7 +101,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
 		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
-		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
+		CreateNewWikiLogInSignUpPageObject logInPage = createNewWiki1.submitToLogInSignUp();
 		logInPage.typeInUserName(Properties.userNameNonLatin);
 		logInPage.typeInPassword("Invalid password");
 		logInPage.submitLogin();
@@ -137,7 +137,7 @@ public class CreateAWikiTests_nonLatin extends TestTemplate
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
 		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
-		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
+		CreateNewWikiLogInSignUpPageObject logInPage = createNewWiki1.submitToLogInSignUp();
 		logInPage.typeInUserName(Properties.userNameNonLatin);
 		logInPage.typeInPassword(Properties.passwordNonLatin);
 		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();
