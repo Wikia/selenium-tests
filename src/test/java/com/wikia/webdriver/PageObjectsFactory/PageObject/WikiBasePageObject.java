@@ -69,6 +69,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "a.createpage")
 	private WebElement createArticleButton;
+	@FindBy(css = "a.ajaxRegister")
+	private WebElement signUpLink;
 	@FindBy(css = "article span.drop")
 	private WebElement editDropDown;
 	@FindBy(css = "input#wpConfirmB")
@@ -177,8 +179,21 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
-	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
-		getUrl(wikiURL + URLsContent.specialUserSignup);
+	public SignUpPageObject openSpecialSignUpPage(String wikiURL, Boolean disableCaptcha) {
+		getUrl(wikiURL);
+		signUpLink.click();
+		if (disableCaptcha) {
+			String currentURL = driver.getCurrentUrl();
+			if (currentURL.contains("?")) {
+				currentURL += "&";
+			}
+			else {
+				currentURL += "?";
+			}
+			currentURL += "nocaptchatest=1";
+			getUrl(currentURL);
+		}
+
 		PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
 		return new SignUpPageObject(driver);
 	}

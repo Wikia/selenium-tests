@@ -32,7 +32,7 @@ public class SignUpTests extends NewTestTemplate {
 	@Test(groups = {"SignUp_001", "SignUp"})
 	public void Signup_001_wrongBlurryWord() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, false);
 		signUp.typeUserName(signUp.getTimeStamp());
 		signUp.typeEmail(credentials.email);
 		signUp.typePassword(signUp.getTimeStamp());
@@ -50,7 +50,7 @@ public class SignUpTests extends NewTestTemplate {
 	@Test(groups = {"SignUp_002", "SignUp"})
 	public void Signup_002_tooYoungUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, false);
 		signUp.typeUserName(signUp.getTimeStamp());
 		signUp.typeEmail(credentials.email);
 		signUp.typePassword(signUp.getTimeStamp());
@@ -68,16 +68,16 @@ public class SignUpTests extends NewTestTemplate {
 	@Test(groups = {"SignUp_003", "SignUp"})
 	public void Signup_003_existingUserName() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, false);
 		signUp.typeUserName(credentials.userName);
 		signUp.verifyUserExistsMessage();
 		signUp.verifySubmitButtonDisabled();
 	}
 
-	@Test(enabled = false, groups = {"SignUp_account_creation_TC_001", "SignUp", "Smoke4"})
+	@Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
 	public void Signup_004_signup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL, true);
 
 		String userName = "user" + signUp.getTimeStamp();
 		String password = "pass" + signUp.getTimeStamp();
@@ -92,7 +92,6 @@ public class SignUpTests extends NewTestTemplate {
 			PageContent.wikiSignUpBirthDay,
 			PageContent.wikiSignUpBirthYear
 		);
-		signUp.typeCaptcha(captchaFile);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
 		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword);
