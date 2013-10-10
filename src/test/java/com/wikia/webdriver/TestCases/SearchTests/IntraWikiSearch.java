@@ -8,6 +8,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.IntraWikiSearchProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SearchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.IntraWikiSearchPageObject.sortOptions;
 
@@ -34,10 +35,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.
 public class IntraWikiSearch extends NewTestTemplate {
 
 	private String testedWiki;
+	private String communityWiki;
 
 	public IntraWikiSearch() {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		testedWiki = urlBuilder.getUrlForWiki("muppet");
+		communityWiki = urlBuilder.getUrlForWiki("community");
 	}
 
 	private static final int resultsPerPage = 25;
@@ -184,6 +187,8 @@ public class IntraWikiSearch extends NewTestTemplate {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
 		search.searchFor(searchPhrase);
 		search.selectAllAdvancedOptions();
+		SearchPageObject searchPage = new SearchPageObject(driver);
+		searchPage.clickSearchButton();
 		search.verifyNamespace(namespace);
 	}
 
@@ -203,11 +208,9 @@ public class IntraWikiSearch extends NewTestTemplate {
 
 	@Test(groups={"IntraSearch016", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_016_communityPushToTopWikiResult() {
-		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, testedWiki);
-		search.goToSearchPage(wikiCommunityURL);
-		search.searchCommunityFor(searchWiki);
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver, communityWiki);
+		search.searchFor(searchWiki);
 		search.verifyPushToTopWikiTitle(searchWiki);
 		search.verifyPushToTopWikiThumbnail();
 	}
-
 }

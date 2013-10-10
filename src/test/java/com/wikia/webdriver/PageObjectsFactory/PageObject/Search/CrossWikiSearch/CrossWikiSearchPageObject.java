@@ -2,16 +2,14 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SearchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHomePage;
 
 /**
@@ -19,20 +17,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
  * Date: 28.03.13
  * Time: 19:29
  */
-public class CrossWikiSearchPageObject extends BasePageObject {
+public class CrossWikiSearchPageObject extends SearchPageObject {
 
-	@FindBy(css="#search-v2-input")
-	protected WebElement searchInput;
-	@FindBy(css="#search-v2-button")
-	protected WebElement searchButton;
 	@FindBy(css=".result")
 	protected List<WebElement> searchResultList;
-	@FindBy(css=".Results")
-	protected WebElement resultsContainer;
 	@FindBy(css=".Results > :nth-child(1)")
 	protected WebElement firstResult;
-	@FindBy(css=".Results > :nth-child(1) h1 > a")
-	protected WebElement firstResultLink;
 	@FindBy(css=".Results > :nth-child(1) > .result-description > :nth-child(2)")
 	protected WebElement firstResultVertical;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle")
@@ -45,16 +35,8 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	protected WebElement firstResultStatisticsPageVideos;
 	@FindBy(css=".Results > :nth-child(1) .result-description > .description")
 	protected WebElement firstResultDescription;
-	@FindBy(css = "#search-v2-input")
-	private WebElement searchBox;
-	@FindBys(@FindBy(css = "li.result"))
-	private List<WebElement> results;
 	@FindBy(css = "a[data-event=\"search_click_match\"]")
 	private WebElement match;
-	@FindBy(css=".paginator-next.button.secondary")
-	protected WebElement paginatorNextButton;
-	@FindBy(css=".paginator-prev.button.secondary")
-	protected WebElement paginatorPrevButton;
 	@FindBy(css=".results-wrapper i")
 	protected WebElement noResultsCaption;
 	@FindBy(css=".wikiPromoteThumbnail")
@@ -67,15 +49,6 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	protected List<WebElement> statisticsImages;
 	@FindBy(css=".wiki-statistics>li:nth-child(3)")
 	protected List<WebElement> statisticsVideos;
-	@FindBy(css="h1 > a.result-link")
-	protected List<WebElement> resultLinks;
-	@FindBy(css=".Results > :nth-child(4)")
-	protected WebElement fourthResult;
-	@FindBy(css=".Results > :nth-child(4) h1 > a")
-	protected WebElement fourthResultLink;
-
-	private By paginationContainer = By.cssSelector(".wikia-paginator");
-
 
 	public CrossWikiSearchPageObject(WebDriver driver) {
 		super(driver);
@@ -103,11 +76,11 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	}
 
 	public CrossWikiSearchPageObject searchFor( String term ) {
-		searchBox.clear();
-		searchBox.sendKeys( term );
+		searchInput.clear();
+		searchInput.sendKeys( term );
 		PageObjectLogging.log("searchFor", "Typed search term" +term, true, driver);
 		scrollAndClick(searchButton);
-		waitForElementByElement(searchBox);
+		waitForElementByElement(searchInput);
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPageObject(driver);
 	}
@@ -177,14 +150,14 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 	}
 
 	public CrossWikiSearchPageObject prevPage() {
-		scrollAndClick(paginatorPrevButton);
+		scrollAndClick(paginatorPrev);
 		PageObjectLogging.log("prevPage", "Moving to prev page of search results.",
 				true, driver);
 		return new CrossWikiSearchPageObject(driver);
 	}
 
 	public CrossWikiSearchPageObject nextPage() {
-		scrollAndClick(paginatorNextButton);
+		scrollAndClick(paginatorNext);
 		PageObjectLogging.log("nextPage", "Moving to next page of search results.",
 				true, driver);
 		return new CrossWikiSearchPageObject(driver);
@@ -250,5 +223,4 @@ public class CrossWikiSearchPageObject extends BasePageObject {
 		int indexComparisonFinish = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
 		return thumbnails.get(0).getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
 	}
-
 }

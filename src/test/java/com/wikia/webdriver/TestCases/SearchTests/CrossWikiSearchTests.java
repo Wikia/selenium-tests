@@ -79,7 +79,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
 		wikiArticleHomePage.verifyThisIsWikiHomePage();
 		search.navigateBack();
-		search.openResult(1);
+		search.openResult(2);
 		wikiArticleHomePage.verifyThisIsWikiHomePage();
 	}
 

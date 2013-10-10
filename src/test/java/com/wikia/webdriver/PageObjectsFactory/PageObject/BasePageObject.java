@@ -801,5 +801,4 @@ public class BasePageObject{
 		getUrl(url + "/" + URLsContent.specialPromote);
 		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
-
 }
