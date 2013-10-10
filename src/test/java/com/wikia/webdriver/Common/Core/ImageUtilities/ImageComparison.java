@@ -3,6 +3,7 @@ package com.wikia.webdriver.Common.Core.ImageUtilities;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -29,10 +30,19 @@ public class ImageComparison {
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
-		boolean isTheSame = false;
 		if (Arrays.equals(fileInBytes1, fileInBytes2)) {
-			isTheSame = true;
+			return true;
 		}
-		return isTheSame;
+		return false;
+	}
+
+	public boolean comapareBaseEncodedImagesBasedOnBytes(String base1, String base2) {
+		Base64 coder = new Base64();
+		byte[] baseInBytes1 = coder.decode(base1);
+		byte[] baseInBytes2 = coder.decode(base2);
+		if (Arrays.equals(baseInBytes1, baseInBytes2)) {
+			return true;
+		}
+		return false;
 	}
 }
