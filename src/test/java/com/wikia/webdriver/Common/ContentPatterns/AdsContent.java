@@ -28,6 +28,12 @@ public class AdsContent {
 	public static String leftSkyscraper3 = "LEFT_SKYSCRAPER_3";
 	public static String prefooterLeft = "PREFOOTER_LEFT_BOXAD";
 	public static String prefooterRight = "PREFOOTER_RIGHT_BOXAD";
+	public static final String wikiaBar = "WIKIA_BAR_BOXAD_1";
+	public static final String wikiaBar_gpt = "WIKIA_BAR_BOXAD_1_gpt";
+
+	//SLOTS SELECTORS
+	public static final String wikiaBarSelector = "#" + wikiaBar;
+	public static final String wikiaBar_gptSelector = "#" + wikiaBar_gpt;
 
 
 	public static String getSlotSelector(String slotName) {

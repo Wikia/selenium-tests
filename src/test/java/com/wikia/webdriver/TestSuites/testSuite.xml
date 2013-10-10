@@ -40,6 +40,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditAccountTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsInContent"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestToolbarAdGPT"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestMobileDesktopOverlapping"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>

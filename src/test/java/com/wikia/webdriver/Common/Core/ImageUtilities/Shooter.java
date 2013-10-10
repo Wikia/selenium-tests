@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
@@ -90,6 +92,33 @@ public class Shooter {
 		Point p = element.getLocation();
 		int width = element.getSize().getWidth();
 		int height = element.getSize().getHeight();
+		Rectangle rect = new Rectangle(width, height);
+		BufferedImage img = null;
+		File subImg = null;
+		try {
+			 subImg = File.createTempFile("screenshot", ".png");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			img = ImageIO.read(screen);
+		} catch (IOException e){
+			throw new RuntimeException(e);
+		}
+		BufferedImage dest = img.getSubimage(p.getX(), p.getY(), rect.width, rect.height);
+		try {
+			ImageIO.write(dest, "png", subImg);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return subImg;
+	}
+
+	public File captureWebElementWithSize(WebElement element, WebDriver driver, Dimension size) {
+		File screen = ((TakesScreenshot) driver) .getScreenshotAs(OutputType.FILE);
+		Point p = element.getLocation();
+		int width = size.width;
+		int height = size.height;
 		Rectangle rect = new Rectangle(width, height);
 		BufferedImage img = null;
 		File subImg = null;

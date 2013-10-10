@@ -11,12 +11,16 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 /**
  *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsBaseObject extends WikiBasePageObject {
+
+	@FindBy(css=AdsContent.wikiaBarSelector)
+	protected WebElement toolbar;
 
 	protected Boolean isWikiMainPage;
 
