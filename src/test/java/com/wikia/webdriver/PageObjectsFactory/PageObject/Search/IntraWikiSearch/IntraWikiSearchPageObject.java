@@ -293,5 +293,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
 	public void verifyPushToTopWikiThumbnail() {
 		waitForElementByElement(pushToTopWikiThumbnail);
+		PageObjectLogging.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified", true, driver);
 	}
 }

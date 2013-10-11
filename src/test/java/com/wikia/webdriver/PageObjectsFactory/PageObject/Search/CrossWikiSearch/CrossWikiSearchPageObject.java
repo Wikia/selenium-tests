@@ -20,35 +20,35 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
 public class CrossWikiSearchPageObject extends SearchPageObject {
 
 	@FindBy(css=".result")
-	protected List<WebElement> searchResultList;
+	private List<WebElement> searchResultList;
 	@FindBy(css=".Results > :nth-child(1)")
-	protected WebElement firstResult;
+	private WebElement firstResult;
 	@FindBy(css=".Results > :nth-child(1) > .result-description > :nth-child(2)")
-	protected WebElement firstResultVertical;
+	private WebElement firstResultVertical;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle")
-	protected WebElement firstResultStatistics;
+	private WebElement firstResultStatistics;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(1)")
-	protected WebElement firstResultStatisticsPageCount;
+	private WebElement firstResultStatisticsPageCount;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(2)")
-	protected WebElement firstResultStatisticsPageImages;
+	private WebElement firstResultStatisticsPageImages;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(3)")
-	protected WebElement firstResultStatisticsPageVideos;
+	private WebElement firstResultStatisticsPageVideos;
 	@FindBy(css=".Results > :nth-child(1) .result-description > .description")
-	protected WebElement firstResultDescription;
+	private WebElement firstResultDescription;
 	@FindBy(css = "a[data-event=\"search_click_match\"]")
 	private WebElement match;
 	@FindBy(css=".results-wrapper i")
-	protected WebElement noResultsCaption;
+	private WebElement noResultsCaption;
 	@FindBy(css=".wikiPromoteThumbnail")
-	protected List<WebElement> thumbnails;
+	private List<WebElement> thumbnails;
 	@FindBy(css=".description")
-	protected List<WebElement> descriptions;
+	private List<WebElement> descriptions;
 	@FindBy(css=".wiki-statistics>li:nth-child(1)")
-	protected List<WebElement> statisticsPages;
+	private List<WebElement> statisticsPages;
 	@FindBy(css=".wiki-statistics>li:nth-child(2)")
-	protected List<WebElement> statisticsImages;
+	private List<WebElement> statisticsImages;
 	@FindBy(css=".wiki-statistics>li:nth-child(3)")
-	protected List<WebElement> statisticsVideos;
+	private List<WebElement> statisticsVideos;
 
 	public CrossWikiSearchPageObject(WebDriver driver) {
 		super(driver);
