@@ -64,9 +64,9 @@ public class ArticleTOCTests extends NewTestTemplate {
 				articleTitle);
 		article.verifyTOCpresent();
 		article.verifyTOCcollapsed();
-		article.clickTOCshowButton();
+		article.clickTOCshowHideButton();
 		article.verifyTOCexpanded();
-		article.clickTOChideButton();
+		article.clickTOCshowHideButton();
 		article.verifyTOCcollapsed();
 	}
 
@@ -100,8 +100,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 				articleTitle);
 		article.verifyTOCpresent();
 		article.verifyTOCcollapsed();
-		article.clickTOCshowButton();
-		article.verifyTOCsectionLnkWorks(1);
-
+		article.clickTOCshowHideButton();
+		article.verifyTOCsectionLinkWorks(1);
 	}
 }

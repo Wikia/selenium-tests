@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -79,10 +80,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement tableOfContents;
 	@FindBy(css="#toc ol")
 	protected WebElement tableOfContentsOrderedList;
-	@FindBy(css="#togglelink[title='show']")
-	protected WebElement tableOfContentsShowButton;
-	@FindBy(css="#togglelink[title='hide']")
-	protected WebElement tableOfContentsHideButton;
+	@FindBys(@FindBy(css="#toc ol a"))
+	protected List<WebElement> tableOfContentsSectionsList;
+	@FindBy(css="#togglelink")
+	protected WebElement tableOfContentsShowHideButton;
 	@FindBy(css="#mw-content-text .Wikia-video-play-button")
 	protected WebElement videoArticle;
 	@FindBy(css="section.RelatedVideosModule")
@@ -514,20 +515,34 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyTOCcollapsed", "toc is collapsed", true);
 	}
 
-	public void clickTOCshowButton() {
-		waitForElementByElement(tableOfContentsShowButton);
-		scrollAndClick(tableOfContentsShowButton);
-		PageObjectLogging.log("clickTOCshowButton", "table of contents 'show' button clicked", true);
+	/**
+	 * the method click on button show or hide, 
+	 * depending of which one is currently visible
+	 */
+	public void clickTOCshowHideButton() {
+		waitForElementByElement(tableOfContentsShowHideButton);
+		scrollAndClick(tableOfContentsShowHideButton);
+		PageObjectLogging.log("clickTOCshowHideButton", "table of contents 'show/hide' button clicked", true);
 	}
 
-	public void clickTOChideButton() {
-		waitForElementByElement(tableOfContentsHideButton);
-		scrollAndClick(tableOfContentsHideButton);
-		PageObjectLogging.log("clickTOChideButton", "table of contents 'hide' button clicked", true);
-	}
-
-	public void verifyTOCsectionLnkWorks(int numberOfTheSection) {
-		// TODO Auto-generated method stub
-
+	/**
+	 * 1. remmember the section that TOC link points to
+	 * 2. click on the TOC link
+	 * 3. verify that the section went up on the screen 
+	 * 4. verify that the wanted section is almost on the top of the screen
+	 * 
+	 * @param numberOfTheSection - TOC link counting from the top
+	 */
+	public void verifyTOCsectionLinkWorks(int numberOfTheSection) {
+		WebElement sectionTOClink = tableOfContentsSectionsList.get(numberOfTheSection-1);
+		String sectionID = sectionTOClink.getAttribute("href").substring(getCurrentUrl().length());
+		WebElement sectionOnArticle = driver.findElement(By.cssSelector(sectionID));
+		int sectionYbefore = sectionOnArticle.getLocation().getY();
+		PageObjectLogging.log("verifyTOCsectionLinkWorks", "Y before: "+sectionYbefore, true);
+		tableOfContentsSectionsList.get(numberOfTheSection-1).click();
+		int sectionYafter = sectionOnArticle.getLocation().getY();
+		PageObjectLogging.log("verifyTOCsectionLinkWorks", "Y after: "+sectionYafter, true);
+		Assertion.assertNotEquals(sectionYbefore, sectionYafter);
+//		Assertion.asser
 	}
 }
