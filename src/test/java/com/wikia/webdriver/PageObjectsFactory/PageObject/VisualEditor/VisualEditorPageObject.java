@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
@@ -52,6 +53,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		((JavascriptExecutor) driver).executeScript(showSelectiontJS);
 	}
 
+	public void selectText(String text) {
+		String textDump = editArea.getText();
+		int from = textDump.indexOf(text);
+		int to = from  +text.length();
+		from += 1;
+		to += 1;
+		selectText(from, to);
+	}
+
 	public void verifyNumList(List<String> elements) {
 		for (int i=0; i<elements.size(); i++) {
 			Assertion.assertEquals(elements.get(i), numList.get(i).getText());
@@ -66,5 +76,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void verifyFormatting (Formatting format, String text) {
 		Assertion.assertEquals(text, editArea.findElement(format.getTag()).getText());
+	}
+
+	public void verifyStyle (Style style, String text) {
+		Assertion.assertEquals(text, editArea.findElement(style.getTag()).getText());
 	}
 }

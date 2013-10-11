@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider;
-import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.VisualEditorTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -18,18 +18,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- * https://wikia-inc.atlassian.net/browse/QAART-241
- * Verify paragraph formatting
- * Verify heading formatting
- * Verify sub-heading 1 formatting
- * Verify sub-heading 2 formatting
- * Verify sub-heading 3 formatting
- * Verify sub-heading 4 formatting
- * Verify preformatted formatting
- * Verify page title formatting
+ *
  */
-
-public class VisualEditorFormatting extends VisualEditorTestTemplate {
+public class VisualEditorStyles extends VisualEditorTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
@@ -44,18 +35,31 @@ public class VisualEditorFormatting extends VisualEditorTestTemplate {
 		ve = new VisualEditorPageObject(driver);
 	}
 
-	@Test(
-			groups = {"VisualEditorFormatting", "VisualEditorFormatting_001"},
-			dataProviderClass = VisualEditorDataProvider.class,
-			dataProvider = "getFormatting"
-	)
-	public void VisualEditorFormatting_001(Formatting format) {
+	@Test(dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getStyles")
+	public void VisualEditorStyles_001_FullText(Style style) {
 		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
-		ve.selectFormatting(format);
+		ve.selectStyle(style);
 		ve.write(text);
-		ve.verifyFormatting(format, text);
+		ve.verifyStyle(style, text);
 		VisualEditorSaveChangesDialog save = ve.savePage();
 		ArticlePageObject article = save.savePage();
-		article.verifyFormatting(format, text);
+		article.verifyStyle(style, text);
+	}
+
+	@Test(dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getStyles")
+	public void VisualEditorStyles_002_SelectedText(Style style) {
+		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
+		ve.write(text);
+
+		String selectText = text.substring(12, 17);
+
+		ve.selectText(selectText);
+		ve.selectStyle(style);
+		ve.verifyStyle(style, selectText);
+		VisualEditorSaveChangesDialog save = ve.savePage();
+		ArticlePageObject article = save.savePage();
+		article.verifyStyle(style, selectText);
 	}
 }

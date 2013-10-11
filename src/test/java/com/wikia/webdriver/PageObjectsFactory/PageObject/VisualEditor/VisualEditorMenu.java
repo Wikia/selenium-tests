@@ -8,9 +8,11 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -50,15 +52,53 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement formattingDropDown;
 	@FindBy(css=".ve-ui-toolbar-saveButton")
 	private WebElement savePageButton;
+	@FindBy(css=".ve-ui-listToolGroup")
+	private WebElement moreOptionsWrapper;
 
-	public void clickBoldButton() {
-		boldButton.click();
-		PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
+	private By genericDropDownBy = By.cssSelector(".ve-ui-icon-down");
+	private By codeStyleBy = By.cssSelector(".ve-ui-tool-code");
+	private By strikeStyleBy = By.cssSelector(".ve-ui-tool-strikethrough");
+	private By underlineStyleBy = By.cssSelector(".ve-ui-tool-underline");
+	private By subscriptStyleBy = By.cssSelector(".ve-ui-tool-subscript");
+	private By superscriptStyleBy = By.cssSelector(".ve-ui-tool-superscript");
+
+	private void clickStyleFromMoreDropDown(By styleBy) {
+		Actions actions = new Actions(driver);
+		actions
+			.click(moreOptionsWrapper.findElement(genericDropDownBy))
+			.click(moreOptionsWrapper.findElement(styleBy))
+			.build()
+			.perform();
 	}
 
-	public void clickItalicButton() {
-		italicButton.click();
-		PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
+	public void selectStyle(Style style) {
+
+		switch (style) {
+		case BOLD:
+			boldButton.click();
+			break;
+		case ITALIC:
+			italicButton.click();
+			break;
+		case CODE:
+			clickStyleFromMoreDropDown(codeStyleBy);
+			break;
+		case STRIKETHROUGH:
+			clickStyleFromMoreDropDown(strikeStyleBy);
+			break;
+		case SUBSCRIPT:
+			clickStyleFromMoreDropDown(subscriptStyleBy);
+			break;
+		case SUPERSCRIPT:
+			clickStyleFromMoreDropDown(superscriptStyleBy);
+			break;
+		case UNDERLINE:
+			clickStyleFromMoreDropDown(underlineStyleBy);
+			break;
+		default:
+			break;
+		}
+		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
 	}
 
 	public void clickLinkButton() {

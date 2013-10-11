@@ -13,18 +13,38 @@ import org.testng.annotations.DataProvider;
 public class VisualEditorDataProvider {
 
 	public enum Formatting {
-		PARAGRAPH (By.cssSelector("p")),
-		HEADING (By.cssSelector("h2")),
-		SUBHEADING1 (By.cssSelector("h3")),
-		SUBHEADING2 (By.cssSelector("h4")),
-		SUBHEADING3 (By.cssSelector("h5")),
-		SUBHEADING4 (By.cssSelector("h6")),
-		PREFORMATTED (By.cssSelector("pre")),
-		TITLE (By.cssSelector("h1"));
+		PARAGRAPH (By.tagName("p")),
+		HEADING (By.tagName("h2")),
+		SUBHEADING1 (By.tagName("h3")),
+		SUBHEADING2 (By.tagName("h4")),
+		SUBHEADING3 (By.tagName("h5")),
+		SUBHEADING4 (By.tagName("h6")),
+		PREFORMATTED (By.tagName("pre")),
+		TITLE (By.tagName("h1"));
 
 		private By tag;
 
 		private Formatting(By tag) {
+			this.tag = tag;
+		}
+
+		public By getTag() {
+			return tag;
+		};
+	}
+
+	public enum Style {
+		BOLD (By.tagName("b")),
+		ITALIC (By.tagName("i")),
+		CODE (By.tagName("code")),
+		STRIKETHROUGH (By.tagName("s")),
+		UNDERLINE (By.tagName("u")),
+		SUBSCRIPT (By.tagName("sub")),
+		SUPERSCRIPT (By.tagName("sup"));
+
+		private By tag;
+
+		private Style(By tag) {
 			this.tag = tag;
 		}
 
@@ -47,6 +67,22 @@ public class VisualEditorDataProvider {
 			{Formatting.SUBHEADING3},
 			{Formatting.SUBHEADING4},
 			{Formatting.TITLE},
+		};
+	}
+
+	/**
+	 * Data provider with text formatting
+	 */
+	@DataProvider
+	public static final Object[][] getStyles() {
+		return new Object[][] {
+				{Style.BOLD},
+				{Style.ITALIC},
+				{Style.CODE},
+				{Style.STRIKETHROUGH},
+				{Style.SUBSCRIPT},
+				{Style.SUPERSCRIPT},
+				{Style.UNDERLINE},
 		};
 	}
 }

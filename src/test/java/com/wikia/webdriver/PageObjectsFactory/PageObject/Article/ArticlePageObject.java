@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -140,9 +141,28 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertStringContains(articleContent.getText(), content);
 	}
 
-	public void verifyContent(Formatting format, String content) {
+
+	public void verifyFormatting(Formatting format, String content) {
 		waitForElementVisibleByElement(articleContentContainer);
-		Assertion.assertStringContains(articleContentContainer.findElement(format.getTag()).getText(), content);
+		List<WebElement> elements = articleContentContainer.findElements(format.getTag());
+		boolean isPresent = false;
+		for (WebElement elem : elements) {
+			if(elem.getText().contains(content)) {
+				isPresent = true;
+			}
+		}
+		Assertion.assertTrue(isPresent, "text is not present in the article");
+	}
+
+	public void verifyStyle(Style style, String content) {
+		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
+		boolean isPresent = false;
+		for (WebElement elem : elements) {
+			if(elem.getText().equals(content)) {
+				isPresent = true;
+			}
+		}
+		Assertion.assertTrue(isPresent, "text is not present in the article");
 	}
 
 	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
