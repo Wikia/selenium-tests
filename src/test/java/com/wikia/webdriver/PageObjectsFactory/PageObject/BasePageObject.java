@@ -166,7 +166,12 @@ public class BasePageObject{
 	protected void scrollToElement(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			js.executeScript("$(arguments[0])[0].scrokllIntoView(true);", element);
+			js.executeScript(
+					"var x = $(arguments[0]);"
+					+ "window.scroll(0,x.position()['top']+x.height()+100);"
+					+ "$(window).trigger('scroll');",
+					element
+			);
 		} catch (WebDriverException e) {
 			if (e.getMessage().contains(XSSContent.noJQueryError)) {
 				PageObjectLogging.log(
