@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,12 +22,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePa
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
 /**
- *
  * @author Bogna 'bognix' Knychała
  */
 public class ArticlePageObject extends WikiBasePageObject {
-
-
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
@@ -516,7 +512,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	/**
-	 * the method clicks on button show or hide, 
+	 * the method clicks on button show or hide,
 	 * depending on which one is currently visible
 	 */
 	public void clickTOCshowHideButton() {
@@ -528,9 +524,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	/**
 	 * 1. remember the section that TOC link points to
 	 * 2. click on the TOC link
-	 * 3. verify that the section went up on the screen 
+	 * 3. verify that the section went up on the screen
 	 * 4. verify that the wanted section is almost on the top of the screen
-	 * 
+	 *
 	 * @param numberOfTheSection - TOC link counting from the top
 	 */
 	public void verifyTOCsectionLinkWorks(int numberOfTheSection) {

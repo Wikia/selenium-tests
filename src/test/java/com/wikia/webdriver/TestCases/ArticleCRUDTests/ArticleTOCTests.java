@@ -23,7 +23,6 @@ public class ArticleTOCTests extends NewTestTemplate {
 	/**
 	 * 1. as anon create an article with TOC
 	 * 2. verify TOC is present on the article
-	 *
 	 */
 	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_001" })
 	public void ArticleTOCTests_001_CreateArticleWithTOCasAnon() {
@@ -44,7 +43,10 @@ public class ArticleTOCTests extends NewTestTemplate {
 	 * 1. as anon open an article with TOC
 	 * 2. verify TOC is collapsed
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_002" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_002" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
 	public void ArticleTOCTests_002_verifyTOCisCollapsedForAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
@@ -57,7 +59,10 @@ public class ArticleTOCTests extends NewTestTemplate {
 	 * 1. as anon open an article with TOC
 	 * 2. verify that show/hide buttons work
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_003" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_003" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
 	public void ArticleTOCTests_003_verifyTOChideShowButtonsWorkForAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
@@ -75,7 +80,10 @@ public class ArticleTOCTests extends NewTestTemplate {
 	 * 2. user edits the article
 	 * 3. user is able to see collapsed TOC on the preview
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_004" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_004" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
 	public void ArticleTOCTests_004_verifyTOCisCollapsedOnPreviewForAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
@@ -92,9 +100,12 @@ public class ArticleTOCTests extends NewTestTemplate {
 	 * 1. as anon open an article with TOC
 	 * 2. user expands the TOC
 	 * 3. user clicks on the first link in TOC
-	 * 3. user view is sent to the choosen section
+	 * 3. user view is sent to the chosen section
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_004" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_005" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
 	public void ArticleTOCTests_005_verifyTOCtakesAnonToSectionClicked() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
@@ -104,13 +115,16 @@ public class ArticleTOCTests extends NewTestTemplate {
 		article.clickTOCshowHideButton();
 		article.verifyTOCsectionLinkWorks(1);
 	}
-	
+
 	/**
 	 * 1. as logged in user open an article with TOC
 	 * 2. verify TOC is expanded
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_006" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
-	public void ArticleTOCTests_006_verifyTOCisExpandedForLoggedIn() {
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_006" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
+	public void ArticleTOCTests_006_verifyTOCisExpandedForLoggedInUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
@@ -118,33 +132,40 @@ public class ArticleTOCTests extends NewTestTemplate {
 		article.verifyTOCpresent();
 		article.verifyTOCexpanded();
 	}
-	
+
 	/**
 	 * 1. as logged in user open an article with TOC
 	 * 2. verify that show/hide buttons work
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_007" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
-	public void ArticleTOCTests_007_verifyTOChideShowButtonsWorkForLoggedIn() {
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_007" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
+	public void ArticleTOCTests_007_verifyTOChideShowButtonsWorkForLoggedInUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
 				articleTitle);
 		article.verifyTOCpresent();
-		article.verifyTOCcollapsed();
-		article.clickTOCshowHideButton();
 		article.verifyTOCexpanded();
 		article.clickTOCshowHideButton();
 		article.verifyTOCcollapsed();
+		article.clickTOCshowHideButton();
+		article.verifyTOCexpanded();
 	}
-	
+
 	/**
 	 * 1. as logged in user open an article with TOC
 	 * 2. user edits the article
 	 * 3. user is able to see expanded TOC on the preview
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_008" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
-	public void ArticleTOCTests_008_verifyTOCisExpandedOnPreviewForAnon() {
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_008" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
+	public void ArticleTOCTests_008_verifyTOCisExpandedOnPreviewForLoggedInUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
 				articleTitle);
 		article.verifyTOCpresent();
@@ -154,21 +175,23 @@ public class ArticleTOCTests extends NewTestTemplate {
 		preview.verifyTOCpresentOnPreview();
 		preview.verifyTOCexpandedOnPreview();
 	}
-	
+
 	/**
 	 * 1. as logged in user open an article with TOC
-	 * 2. user expands the TOC
-	 * 3. user clicks on the first link in TOC
-	 * 3. user view is sent to the choosen section
+	 * 2. user clicks on the first link in TOC
+	 * 3. user view is sent to the chosen section
 	 */
-	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_009" }, dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon")
-	public void ArticleTOCTests_009_verifyTOCtakesUserToSectionClicked() {
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_009" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
+	public void ArticleTOCTests_009_verifyTOCtakesLoggedInUserToSectionClicked() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
 				articleTitle);
 		article.verifyTOCpresent();
-		article.verifyTOCcollapsed();
-		article.clickTOCshowHideButton();
+		article.verifyTOCexpanded();
 		article.verifyTOCsectionLinkWorks(1);
 	}
 }
