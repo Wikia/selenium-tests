@@ -1,13 +1,15 @@
 package com.wikia.webdriver.Common.Templates;
 
 
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
-import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import java.lang.reflect.Method;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 
 /**
  *

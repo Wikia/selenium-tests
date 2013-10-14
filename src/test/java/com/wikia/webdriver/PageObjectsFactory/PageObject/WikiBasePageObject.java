@@ -60,6 +60,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -330,6 +331,20 @@ public class WikiBasePageObject extends BasePageObject {
 			URLsContent.useDefaultFormat)
 		);
 		return new VisualEditModePageObject(driver);
+	}
+
+	/**
+	 * method used to navigate to new visual editor
+	 * @param wikiURL
+	 * @param article
+	 */
+	public VisualEditorPageObject gotoArticleEditModeVisual(String wikiURL, String article) {
+		getUrl(
+				urlBuilder.appendQueryStringToURL(
+					wikiURL + URLsContent.wikiDir + article, URLsContent.actionVisualEditParameter
+				)
+		);
+		return new VisualEditorPageObject(driver);
 	}
 
 	public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
