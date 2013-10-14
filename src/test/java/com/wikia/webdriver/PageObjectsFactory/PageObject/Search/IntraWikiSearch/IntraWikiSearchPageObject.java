@@ -12,13 +12,12 @@ import org.openqa.selenium.support.ui.Select;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SearchPageObject;
 
-public class IntraWikiSearchPageObject extends BasePageObject {
+public class IntraWikiSearchPageObject extends SearchPageObject {
 
-	public IntraWikiSearchPageObject(WebDriver driver, String intraWikiURL) {
+	public IntraWikiSearchPageObject(WebDriver driver) {
 		super(driver);
-		driver.get(intraWikiURL);
 	}
 
 	private String photoExtension = ".jpg";
@@ -28,38 +27,20 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private WebElement photosVideos;
 	@FindBy(css="#WikiaSearchHeader input[name=search]")
 	private WebElement searchField;
-	@FindBy(css="#search-v2-input")
-	private WebElement intraSearchField;
 	@FindBy(css="#WikiaSearchHeader .wikia-button")
 	private WebElement searchButton;
-	@FindBy(css="#search-v2-button")
-	private WebElement intraSearchButton;
 	@FindBy(css="[value=is_image]")
 	private WebElement filterPhotos;
 	@FindBy(css="[value=is_video]")
 	private WebElement filterVideos;
 	@FindBy(css="[name=rank]")
 	private WebElement sortingOptions;
-	@FindBy(css="li.result:nth-child(1) a")
-	private WebElement firstResult;
 	@FindBy(css=".Results article h1 .result-link")
 	private List<WebElement> titles;
 	@FindBy(css=".Results article")
 	private List<WebElement> descriptions;
 	@FindBy(css=".Results article li > a")
 	private List<WebElement> urls;
-	@FindBy(css=".wikia-paginator")
-	private WebElement paginationContainer;
-	@FindBy(css=".paginator-page")
-	private List<WebElement> paginationPages;
-	@FindBy(css=".paginator-next")
-	private WebElement paginatorNext;
-	@FindBy(css=".paginator-prev")
-	private WebElement paginatorPrev;
-	@FindBy(css=".results-wrapper i")
-	private WebElement noResultsCaption;
-	@FindBy(css=".result-count.subtle")
-	private WebElement resultCountMessage;
 	@FindBy(css=".SearchInput .grid-1.alpha")
 	private WebElement searchHeadline;
 	@FindBy(css=".search-tabs.grid-1.alpha")
@@ -90,6 +71,10 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	private List<WebElement> filterOptions;
 	@FindBy(css=".sprite.play.small")
 	private List<WebElement> playMovieImage;
+	@FindBy(css=".result-description .result-link")
+	private WebElement pushToTopWikiResult;
+	@FindBy(css=".wikiPromoteThumbnail")
+	private WebElement pushToTopWikiThumbnail;
 
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -143,15 +128,6 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		Assertion.assertTrue(titles.get(0).getText().endsWith(query + photoExtension));
 	}
 
-	public void verifyPagination() {
-		waitForElementByElement(paginationContainer);
-		int i=1;
-		for (WebElement elem:paginationPages) {
-			Assertion.assertEquals(Integer.toString(i), elem.getText());
-			i++;
-		}
-	}
-
 	public void verifyLastResultPage() {
 		waitForElementClickableByElement(paginationPages.get(paginationPages.size()-1));
 		do {
@@ -175,22 +151,8 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 		Assertion.assertNotEquals(firstResult, titles.get(0).getText());
 	}
 
-	public void clickNextPaginator() {
-		scrollAndClick(paginatorNext);
-		PageObjectLogging.log("clickNextPaginator", "next paginator clicked", true);
-	}
-
-	public void clickPrevPaginator() {
-		scrollAndClick(paginatorPrev);
-		PageObjectLogging.log("clickPrevPaginator", "prev paginator clicked", true);
-	}
-
 	public void verifyResultsCount(int i) {
 		Assertion.assertNumber(i, titles.size(), "checking results count");
-	}
-
-	public void verifyNoResults() {
-		Assertion.assertEquals("No results found.", noResultsCaption.getText());
 	}
 
 	public void clickAdvancedButton() {
@@ -201,7 +163,6 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	public void chooseAdvancedOption(int i) {
 		waitForElementByElement(advancedField);
 		advancedOptionInputs.get(i).click();
-		intraSearchButton.click();
 		PageObjectLogging.log("chooseAdvancedOption", "chosen advance option is selected", true, driver);
 	}
 
@@ -256,7 +217,7 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 	public void verifySearchPageOpened() {
 		Assertion.assertTrue(searchHeadline.isDisplayed());
 		Assertion.assertTrue(searchTabs.isDisplayed());
-		Assertion.assertTrue(intraSearchField.isDisplayed());
+		Assertion.assertTrue(searchInput.isDisplayed());
 	}
 
 	public void verifyTopModule() {
@@ -321,5 +282,14 @@ public class IntraWikiSearchPageObject extends BasePageObject {
 
 	public void compareTitleListsNotEquals(List<String> titles1, List<String> titles2) {
 		Assertion.assertNotEquals(titles1, titles2, "titles are the same");
+	}
+
+	public void verifyPushToTopWikiTitle(String searchWiki) {
+		Assertion.assertStringContains(pushToTopWikiResult.getText(), searchWiki);
+	}
+
+	public void verifyPushToTopWikiThumbnail() {
+		waitForElementByElement(pushToTopWikiThumbnail);
+		PageObjectLogging.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified", true, driver);
 	}
 }

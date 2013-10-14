@@ -911,5 +911,4 @@ public class WikiBasePageObject extends BasePageObject {
 		deleteDropdown.click();
 		return new DeletePageObject(driver);
 	}
-
 }
