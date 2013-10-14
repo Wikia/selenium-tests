@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
@@ -26,12 +23,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="")
-	private WebElement undoButton;
-	@FindBy(css="")
-	private WebElement redoButton;
-	@FindBy(css="")
-	private WebElement paragraphDropdown;
 	@FindBy(css=".ve-ui-icon-bold-b")
 	private WebElement boldButton;
 	@FindBy(css=".ve-ui-icon-italic-i")

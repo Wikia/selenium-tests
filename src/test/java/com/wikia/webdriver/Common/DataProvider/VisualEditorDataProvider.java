@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.Common.DataProvider;
 
 import org.openqa.selenium.By;

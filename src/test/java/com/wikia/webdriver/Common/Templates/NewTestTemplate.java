@@ -5,9 +5,7 @@ import java.lang.reflect.Method;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 
-@Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
 public class NewTestTemplate extends NewTestTemplateCore {
 
 	public NewTestTemplate() {

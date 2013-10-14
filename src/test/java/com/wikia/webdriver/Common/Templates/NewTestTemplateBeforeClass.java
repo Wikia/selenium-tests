@@ -2,9 +2,7 @@ package com.wikia.webdriver.Common.Templates;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 
-@Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
 public class NewTestTemplateBeforeClass extends NewTestTemplateCore {
 
 	public NewTestTemplateBeforeClass() {
