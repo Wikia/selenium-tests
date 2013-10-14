@@ -5,9 +5,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
-public class VisualEditorTestTemplate extends NewTestTemplateSkeleton {
+public class NewTestTemplateBeforeClass extends NewTestTemplateCore {
 
-	public VisualEditorTestTemplate() {
+	public NewTestTemplateBeforeClass() {
 		super();
 	}
 

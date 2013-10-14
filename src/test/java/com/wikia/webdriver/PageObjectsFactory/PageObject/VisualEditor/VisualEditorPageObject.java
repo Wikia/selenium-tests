@@ -22,11 +22,8 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
  */
 public class VisualEditorPageObject extends VisualEditorMenu {
 
-	public VisualEditorMenu menu;
-
 	public VisualEditorPageObject(WebDriver driver) {
 		super(driver);
-		this.menu = new VisualEditorMenu(driver);
 	}
 
 	@FindBy(css=".ve-ui-linkTargetInputWidget > input")
@@ -45,7 +42,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void write(Keys key) {
 		editArea.sendKeys(key);
-		PageObjectLogging.log("write", "text " + key.toString() + "pressed", true);
+		PageObjectLogging.log("press", "key " + key.toString() + "pressed", true);
 	}
 
 	public void selectText(int from, int to) {
@@ -55,10 +52,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void selectText(String text) {
 		String textDump = editArea.getText();
-		int from = textDump.indexOf(text);
-		int to = from  +text.length();
-		from += 1;
-		to += 1;
+		int from = textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
+		int to = from  +text.length() + 1;
 		selectText(from, to);
 	}
 
@@ -74,11 +69,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		}
 	}
 
-	public void verifyFormatting (Formatting format, String text) {
+	public void verifyFormatting(Formatting format, String text) {
 		Assertion.assertEquals(text, editArea.findElement(format.getTag()).getText());
 	}
 
-	public void verifyStyle (Style style, String text) {
+	public void verifyStyle(Style style, String text) {
 		Assertion.assertEquals(text, editArea.findElement(style.getTag()).getText());
 	}
 }

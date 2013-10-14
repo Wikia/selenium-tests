@@ -149,6 +149,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		for (WebElement elem : elements) {
 			if(elem.getText().contains(content)) {
 				isPresent = true;
+				break;
 			}
 		}
 		Assertion.assertTrue(isPresent, "text is not present in the article");
@@ -160,6 +161,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		for (WebElement elem : elements) {
 			if(elem.getText().equals(content)) {
 				isPresent = true;
+				break;
 			}
 		}
 		Assertion.assertTrue(isPresent, "text is not present in the article");

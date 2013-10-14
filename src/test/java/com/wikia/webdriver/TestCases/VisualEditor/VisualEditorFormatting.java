@@ -10,7 +10,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Templates.VisualEditorTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
@@ -29,7 +29,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * Verify page title formatting
  */
 
-public class VisualEditorFormatting extends VisualEditorTestTemplate {
+public class VisualEditorFormatting extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 

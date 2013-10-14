@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.Common.Templates;
 
 import java.io.File;
@@ -27,14 +24,14 @@ import com.wikia.webdriver.Common.Properties.Properties;
  *
  */
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
-public class NewTestTemplateSkeleton {
+public class NewTestTemplateCore {
 
 	protected WebDriver driver;
 	protected AbstractConfiguration config;
 	protected String wikiURL;
 	protected String wikiCorporateURL;
 
-	public NewTestTemplateSkeleton() {
+	public NewTestTemplateCore() {
 		config = ConfigurationFactory.getConfig();
 	}
 
@@ -42,7 +39,6 @@ public class NewTestTemplateSkeleton {
 	public void beforeSuite() {
 		prepareDirectories();
 	}
-
 
 	protected void prepareDirectories() {
 		Properties.setProperties();

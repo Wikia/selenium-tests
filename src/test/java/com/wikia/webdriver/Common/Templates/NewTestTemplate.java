@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
-public class NewTestTemplate extends NewTestTemplateSkeleton {
+public class NewTestTemplate extends NewTestTemplateCore {
 
 	public NewTestTemplate() {
 		super();

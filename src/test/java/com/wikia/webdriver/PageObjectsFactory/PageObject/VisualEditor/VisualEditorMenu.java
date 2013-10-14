@@ -61,6 +61,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By underlineStyleBy = By.cssSelector(".ve-ui-tool-underline");
 	private By subscriptStyleBy = By.cssSelector(".ve-ui-tool-subscript");
 	private By superscriptStyleBy = By.cssSelector(".ve-ui-tool-superscript");
+	private By toolWrapper = By.cssSelector("a.ve-ui-tool");
+	private By saveButtonDisabled = By.cssSelector(".ve-ui-toolbar-saveButton.ve-ui-widget-disabled");
 
 	private void clickStyleFromMoreDropDown(By styleBy) {
 		Actions actions = new Actions(driver);
@@ -95,8 +97,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		case UNDERLINE:
 			clickStyleFromMoreDropDown(underlineStyleBy);
 			break;
-		default:
-			break;
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
 	}
@@ -129,14 +129,15 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public void selectFormatting(Formatting format) {
 		formattingDropDown.click();
 		List<WebElement> list = formattingDropDown
-		.findElement(parentBy)
-		.findElement(parentBy)
-		.findElements(By.cssSelector("a.ve-ui-tool"));
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElements(toolWrapper);
 		list.get(format.ordinal()).click();
 	}
 
 	public VisualEditorSaveChangesDialog savePage() {
-		waitForElementNotPresent(".ve-ui-toolbar-saveButton.ve-ui-widget-disabled");
+		waitForElementNotPresent(saveButtonDisabled);
+//		waitForElementNotPresent(".ve-ui-toolbar-saveButton.ve-ui-widget-disabled");
 		waitForElementClickableByElement(savePageButton);
 		savePageButton.click();
 		return new VisualEditorSaveChangesDialog(driver);
