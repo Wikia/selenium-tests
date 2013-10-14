@@ -538,11 +538,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 		String sectionID = sectionTOClink.getAttribute("href").substring(getCurrentUrl().length());
 		WebElement sectionOnArticle = driver.findElement(By.cssSelector(sectionID));
 		int sectionYbefore = sectionOnArticle.getLocation().getY();
-		PageObjectLogging.log("verifyTOCsectionLinkWorks", "Y before: "+sectionYbefore, true);
 		tableOfContentsSectionsList.get(numberOfTheSection-1).click();
 		int sectionYafter = sectionOnArticle.getLocation().getY();
-		PageObjectLogging.log("verifyTOCsectionLinkWorks", "Y after: "+sectionYafter, true);
 		Assertion.assertNotEquals(sectionYbefore, sectionYafter);
-//		Assertion.asser
+		// assume that if section is less than 5px from top, it is scrolled up properly
+		Assertion.assertLowerThan(sectionYafter, 5);
+		PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section "+sectionID+" was scrolled up", true);
 	}
 }

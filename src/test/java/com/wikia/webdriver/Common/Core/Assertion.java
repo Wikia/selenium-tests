@@ -99,4 +99,21 @@ public class Assertion extends Assert{
 		List verificationFailures = verificationFailuresMap.get(result);
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}
+
+	public static boolean assertLowerThan(Number toBeCompared, Number base) {
+		try{
+			if (toBeCompared.doubleValue() < base.doubleValue()){				
+				PageObjectLogging.log("assertLowerThan", "assertion passed<br/>pattern: "+base+"<br/>current: "+toBeCompared,  true);
+				return true;
+			}
+			else{
+				throw new AssertionError();
+			}
+		}
+		catch(AssertionError ass){
+			addVerificationFailure(ass);
+			PageObjectLogging.log("assertLowerThan", "assertion failed<br/>pattern: "+base+"<br/>current: "+toBeCompared,  false);
+			return false;
+		}		
+	}
 }

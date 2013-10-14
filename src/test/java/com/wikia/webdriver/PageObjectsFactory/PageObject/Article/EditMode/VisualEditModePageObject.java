@@ -131,6 +131,12 @@ public class VisualEditModePageObject extends EditMode {
 		verifyComponent(video);
 	}
 
+	public void verifyContentLoaded() {
+		driver.switchTo().frame(iframe);
+		waitForElementByElement(contentInput);
+		driver.switchTo().defaultContent();
+	}
+
 	public void verifyVideoPosition(PositionsVideo position) {
 		verifyComponent(video);
 		driver.switchTo().frame(iframe);
