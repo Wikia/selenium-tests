@@ -97,17 +97,17 @@ public class PreviewEditModePageObject extends EditMode {
 
 	public void verifyTOCpresentOnPreview() {
 		waitForElementByElement(previewModal.findElement(tableOfContents));
-		PageObjectLogging.log("verifyTOCpresentOnPreview", "toc is present on preview", true);
+		PageObjectLogging.log("verifyTOCpresentOnPreview", "TOC is present on preview", true);
 	}
 
 	public void verifyTOCexpandedOnPreview() {
 		waitForElementByElement(previewModal.findElement(tableOfContentsOrderedList));
-		PageObjectLogging.log("verifyTOCexpandedOnPreview", "toc is expanded on preview", true);
+		PageObjectLogging.log("verifyTOCexpandedOnPreview", "TOC is expanded on preview", true);
 	}
 
 	public void verifyTOCcollapsedOnPreview() {
 		waitForElementNotVisibleByElement(previewModal.findElement(tableOfContentsOrderedList));
-		PageObjectLogging.log("verifyTOCcollapsedOnPreview", "toc is collapsed on preview", true);
+		PageObjectLogging.log("verifyTOCcollapsedOnPreview", "TOC is collapsed on preview", true);
 	}
 
 }

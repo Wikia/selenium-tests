@@ -516,8 +516,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	/**
-	 * the method click on button show or hide, 
-	 * depending of which one is currently visible
+	 * the method clicks on button show or hide, 
+	 * depending on which one is currently visible
 	 */
 	public void clickTOCshowHideButton() {
 		waitForElementByElement(tableOfContentsShowHideButton);
@@ -526,7 +526,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	/**
-	 * 1. remmember the section that TOC link points to
+	 * 1. remember the section that TOC link points to
 	 * 2. click on the TOC link
 	 * 3. verify that the section went up on the screen 
 	 * 4. verify that the wanted section is almost on the top of the screen
