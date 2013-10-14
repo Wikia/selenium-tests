@@ -40,7 +40,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		PageObjectLogging.log("write", "text " + text + "written", true);
 	}
 
-	public void write(Keys key) {
+	public void press(Keys key) {
 		editArea.sendKeys(key);
 		PageObjectLogging.log("press", "key " + key.toString() + "pressed", true);
 	}

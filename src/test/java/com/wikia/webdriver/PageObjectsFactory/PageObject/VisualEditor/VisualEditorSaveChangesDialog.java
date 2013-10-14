@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import org.openqa.selenium.WebDriver;

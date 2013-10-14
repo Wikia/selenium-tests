@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.TestCases.VisualEditor;
 
 import org.testng.annotations.BeforeClass;

@@ -137,7 +137,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
 	public VisualEditorSaveChangesDialog savePage() {
 		waitForElementNotPresent(saveButtonDisabled);
-//		waitForElementNotPresent(".ve-ui-toolbar-saveButton.ve-ui-widget-disabled");
 		waitForElementClickableByElement(savePageButton);
 		savePageButton.click();
 		return new VisualEditorSaveChangesDialog(driver);
