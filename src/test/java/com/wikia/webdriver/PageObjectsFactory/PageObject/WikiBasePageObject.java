@@ -203,7 +203,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public UserProfilePageObject openProfilePage(String userName, String wikiURL) {
-		getUrl(wikiURL + "wiki/User:" + userName);
+		getUrl(wikiURL + URLsContent.userProfile.replace("%userName%", userName));
 		return new UserProfilePageObject(driver);
 	}
 

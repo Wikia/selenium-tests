@@ -2,14 +2,16 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp;
 
 import java.util.List;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditProfile.AvatarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
@@ -24,17 +26,22 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	private WebElement createBlogPostButton;
 	@FindBy(css=".WikiaBlogListingPost h1>a")
 	private List<WebElement> blogPostList;
+	@FindBy(css=".masthead-avatar")
+	private WebElement avatarWrapper;
+	@FindBy(css="#userAvatarEdit")
+	private WebElement avatarEditButton;
+	@FindBy(css="#UserAvatarRemove")
+	private WebElement avatarRemoveButton;
+
+	private By image = By.cssSelector("img");
+
+	private String avatarSelector = ".masthead-avatar > img[src*='%imageName%']";
 
 	public UserProfilePageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void verifyWelcomeEmail(String userName, String mailUserName, String mailPassword)
-	{
+	public void verifyWelcomeEmail(String userName, String mailUserName, String mailPassword) {
 		PageObjectLogging.log("verifyWelcomeEmail ", "start of email verification", true);
 		String[] mailContent = MailFunctions.getWelcomeMailContent(MailFunctions.getFirstMailContent(mailUserName, mailPassword));
 
@@ -50,9 +57,6 @@ public class UserProfilePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyWelcomeEmail ", "end of email verification", true);
 	}
 
-	/**
-	 * @author Michal Nowierski
-	 */
 	public void clickOnBlogTab() {
 		waitForElementByElement(blogTab);
 		waitForElementClickableByElement(blogTab);
@@ -73,15 +77,43 @@ public class UserProfilePageObject extends WikiBasePageObject {
 		return new BlogPageObject(driver);
 	}
 
-	/**
-	 * @author Michal Nowierski
-	 * @return
-	 */
 	public SpecialCreatePagePageObject clickOnCreateBlogPost() {
 		waitForElementByElement(createBlogPostButton);
 		waitForElementClickableByElement(createBlogPostButton);
 		scrollAndClick(createBlogPostButton);
 		PageObjectLogging.log("clickOnCreateBlogPost", "Click on create blog post button", true, driver);
 		return new SpecialCreatePagePageObject(driver);
+	}
+
+	private void showAvatarControls() {
+		setDisplayStyle(".avatar-controls", "block");
+	}
+
+	private void hideAvatarControls() {
+		setDisplayStyle(".avatar-controls", "none");
+	}
+
+	public AvatarComponentObject clickEditAvatar() {
+		showAvatarControls();
+		avatarEditButton.click();
+		hideAvatarControls();
+		return new AvatarComponentObject(driver);
+	}
+
+	public String getAvatarUrl() {
+		return avatarWrapper.findElement(image).getAttribute("src");
+	}
+
+	public void clickRemoveAvatar() {
+		showAvatarControls();
+		avatarRemoveButton.click();
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+		hideAvatarControls();
+		waitForElementByElement(avatarWrapper);
+	}
+
+	public void verifyAvatar(String fileName) {
+		waitForElementByCss(avatarSelector.replace("%imageName%", fileName));
 	}
 }
