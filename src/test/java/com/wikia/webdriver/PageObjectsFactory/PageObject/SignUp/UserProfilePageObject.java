@@ -97,6 +97,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 		showAvatarControls();
 		avatarEditButton.click();
 		hideAvatarControls();
+		PageObjectLogging.log("clickEditAvatar", "avatar edit button clicked", true);
 		return new AvatarComponentObject(driver);
 	}
 
@@ -111,9 +112,11 @@ public class UserProfilePageObject extends WikiBasePageObject {
 		alert.accept();
 		hideAvatarControls();
 		waitForElementByElement(avatarWrapper);
+		PageObjectLogging.log("clickRemoveAvatar", "avatar remove button clicked", true);
 	}
 
 	public void verifyAvatar(String fileName) {
 		waitForElementByCss(avatarSelector.replace("%imageName%", fileName));
+		PageObjectLogging.log("verifyAvatar", "desired avatar is visible", true);
 	}
 }

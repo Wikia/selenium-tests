@@ -15,7 +15,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 public class AvatarComponentObject extends EditProfileComponentObject {
 
 	@FindBy(css="#UPPLightboxAvatar")
-	private WebElement uplaodInput;
+	private WebElement uploadInput;
 	@FindBy(css=".modalToolbar > .save")
 	private WebElement saveButton;
 
@@ -34,8 +34,8 @@ public class AvatarComponentObject extends EditProfileComponentObject {
 				e.printStackTrace();
 			}
 		}
-		uplaodInput.sendKeys(fileCheck.getAbsoluteFile().toString());
-		PageObjectLogging.log("typeInFileToUploadPath", "type file "+file+" to upload it", true, driver);
+		uploadInput.sendKeys(fileCheck.getAbsoluteFile().toString());
+		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true, driver);
 	}
 
 	public void saveProfile() {
