@@ -538,7 +538,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		int sectionYafter = sectionOnArticle.getLocation().getY();
 		Assertion.assertNotEquals(sectionYbefore, sectionYafter);
 		// assume that if section is less than 5px from top, it is scrolled up properly
-		Assertion.assertLowerThan(sectionYafter, 5);
+		Assertion.assertTrue(sectionYafter < 5);
 		PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section "+sectionID+" was scrolled up", true);
 	}
 }

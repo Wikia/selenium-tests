@@ -12,11 +12,11 @@ import org.testng.Reporter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class Assertion extends Assert{
-
+	
 	public static boolean assertStringContains(String bigger, String smaller){
 		boolean isAssertPassed = true;
 		try{
-			if (bigger.contains(smaller)){
+			if (bigger.contains(smaller)){				
 				PageObjectLogging.log("assertStringContains", "assertion passed<br/>pattern: "+bigger+"<br/>current: "+smaller,  true);
 				return true;
 			}
@@ -31,7 +31,7 @@ public class Assertion extends Assert{
 			return false;
 		}
 	}
-
+	
 	public static void assertEquals(String pattern, String current){
 		boolean isAssertPassed = true;
 		try{
@@ -62,8 +62,8 @@ public class Assertion extends Assert{
 			PageObjectLogging.log("assertEquals", "assertion failed<br/>pattern: "+pattern+"<br/>current: "+current,  false);
 		}
 	}
-
-
+	
+	
 	public static void assertNumber(Number expected, Number actual,
 			String message) {
 		boolean isAssertPassed = true;
@@ -78,48 +78,25 @@ public class Assertion extends Assert{
 					+ expected + ", got: " + actual, false);
 		}
 	}
-
+	
 	private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
-
-	private static void addVerificationFailure(Throwable e)
+	
+	private static void addVerificationFailure(Throwable e) 
 	{
 		List verificationFailures = getVerificationFailures();
 		verificationFailuresMap.put(Reporter.getCurrentTestResult(), verificationFailures);
 		verificationFailures.add(e);
-	}
-
-	public static List getVerificationFailures()
+	}	
+	
+	public static List getVerificationFailures() 
 	{
 		List verificationFailures = verificationFailuresMap.get(Reporter.getCurrentTestResult());
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}
-
-	public static List getVerificationFailures(ITestResult result)
+	
+	public static List getVerificationFailures(ITestResult result) 
 	{
 		List verificationFailures = verificationFailuresMap.get(result);
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
-	}
-
-	public static boolean assertLowerThan(Number toBeCompared, Number base) {
-		try{
-			if (toBeCompared.doubleValue() < base.doubleValue()){
-				PageObjectLogging.log(
-						"assertLowerThan", "assertion passed<br/>"
-						+ "pattern: "+base+"<br/>current: "+toBeCompared,  true
-				);
-				return true;
-			}
-			else{
-				throw new AssertionError();
-			}
-		}
-		catch(AssertionError ass){
-			addVerificationFailure(ass);
-			PageObjectLogging.log(
-					"assertLowerThan", "assertion failed<br/>"
-					+ "pattern: "+base+"<br/>current: "+toBeCompared,  false
-			);
-			return false;
-		}
 	}
 }
