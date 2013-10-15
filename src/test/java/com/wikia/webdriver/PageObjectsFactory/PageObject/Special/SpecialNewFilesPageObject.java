@@ -99,6 +99,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 				e.printStackTrace();
 			}
 		}
+
 		sendKeys(
 				BrowseForFileInput,fileCheck.getAbsoluteFile().toString()
 		);
