@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
@@ -38,6 +39,8 @@ public class EditMode extends WikiBasePageObject {
 	private WebElement visualButton;
 	@FindBy(css="a.cke_button_ModeSource > span#cke_22_label")
 	private WebElement sourceButton;
+	@FindBy(css="a.cke_off.cke_button_table")
+	private WebElement addTableButton;
 
 	private By submitButtonBy = By.cssSelector("#wpSave");
 
@@ -82,6 +85,13 @@ public class EditMode extends WikiBasePageObject {
 		scrollAndClick(videoButton);
 		PageObjectLogging.log("clickVideoButton", "video button clicked", true);
 		return new VetAddVideoComponentObject(driver);
+	}
+
+	public TableBuilderComponentObject clickAddTableButton(){
+		waitForElementClickableByElement(addTableButton);
+		addTableButton.click();
+		PageObjectLogging.log("addTable", "add table button clicked", true);
+		return new TableBuilderComponentObject(driver);
 	}
 
 	public SliderBuilderComponentObject clickSliderButton(){
