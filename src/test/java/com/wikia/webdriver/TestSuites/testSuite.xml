@@ -92,6 +92,7 @@
 			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallTests"/>
 			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallFeaturesTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FBConnectTests"/>
+			<class name="com.wikia.webdriver.TestCases.UserProfileTests.UserAvatarTests"/>
 		</classes>
 	</test>
 </suite>
