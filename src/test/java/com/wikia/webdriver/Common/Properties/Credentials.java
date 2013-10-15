@@ -78,6 +78,7 @@ public class Credentials {
 	public String emailPasswordQaart4;
 
 	public String userNameStaff;
+	public String userNameStaffId;
 	public String passwordStaff;
 
 	public String userNameMonobook;
@@ -144,6 +145,7 @@ public class Credentials {
 		passwordClosedAccount = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.closeAccountUser.password");
 
 		userNameStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.username");
+		userNameStaffId = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.id");
 		passwordStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.password");
 
 		userNameMonobook = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiamonobook.username");

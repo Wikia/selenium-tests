@@ -50,6 +50,7 @@ public class URLsContent {
 	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
 	public static final String specialUndelete = "wiki/Special:Undelete";
 	public static final String specialPromote = "wiki/Special:Promote";
+	public static final String userProfile = "wiki/User:%userName%";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";
@@ -116,4 +117,7 @@ public class URLsContent {
 	public static String googleDomain = "accounts.google.com";
 	public static String redditDomain = "reddit.com";
 	public static String stumpleUponDomain = "stumbleupon.com";
+
+	//avatars
+	public static String avatarGeneric = "150px-Avatar.jpg";
 }
