@@ -35,7 +35,7 @@ public class NewTestTemplateCore {
 		config = ConfigurationFactory.getConfig();
 	}
 
-	@BeforeSuite
+	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {
 		prepareDirectories();
 	}

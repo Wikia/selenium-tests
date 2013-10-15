@@ -12,17 +12,17 @@ public class NewTestTemplate extends NewTestTemplateCore {
 		super();
 	}
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void beforeClass() {
 		prepareURLs();
 	}
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void start(Method method, Object[] data) {
 		startBrowser();
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void stop() {
 		stopBrowser();
 	}

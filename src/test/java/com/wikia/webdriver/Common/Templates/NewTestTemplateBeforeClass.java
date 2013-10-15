@@ -9,13 +9,13 @@ public class NewTestTemplateBeforeClass extends NewTestTemplateCore {
 		super();
 	}
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void start() {
 		prepareURLs();
 		startBrowser();
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void stop() {
 		stopBrowser();
 	}
