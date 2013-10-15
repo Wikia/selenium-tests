@@ -20,6 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -58,6 +59,16 @@ public class VisualEditModePageObject extends EditMode {
 	private List<WebElement> categoryList;
 	@FindBy(css=".RTEMediaCaption")
 	private WebElement caption;
+	@FindBy(css=".cke_button_tabledelete > span.cke_label")
+	private WebElement deleteItem;
+	@FindBy(css=".cke_button_table")
+	private WebElement propertiesItem;
+	@FindBy(css=".article-table")
+	private WebElement VisualModeTable;
+	@FindBy(css=".cke_contextmenu iframe")
+	private WebElement contextFrame;
+	@FindBy(css=".cke_dialog_body")
+	private WebElement addTableLightbox;
 
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
@@ -65,6 +76,7 @@ public class VisualEditModePageObject extends EditMode {
 	private By sliderBy = By.cssSelector("img.image-gallery-slider");
 	private By videoBy = By.cssSelector("img.video");
 	private By categorySuggestionsList = By.cssSelector("li > a");
+	private By articleTableBy = By.cssSelector(".article-table");
 
 	private String categoryEditSelector = "li.category[data-name='%categoryName%'] li.editCategory";
 	private String categoryRemoveSelector = "li.category[data-name='%categoryName%'] li.removeCategory";
@@ -361,4 +373,29 @@ public class VisualEditModePageObject extends EditMode {
 		jQueryClick(category);
 		PageObjectLogging.log("removeCategory", "remove category button clicked on category " + categoryName, true);
 	}
+
+	public void clickDeleteTableButton() {
+		waitForElementByElement(iframe);
+		driver.switchTo().frame(iframe);
+		Actions actions = new Actions(driver);
+		actions.contextClick(VisualModeTable).build().perform();
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(contextFrame);
+		deleteItem.click();
+		driver.switchTo().defaultContent();
+		waitForElementNotPresent(articleTableBy);
+	}
+
+	public void clickPropertiesTableButton() {
+		waitForElementByElement(iframe);
+		driver.switchTo().frame(iframe);
+		Actions actions = new Actions(driver);
+		actions.contextClick(VisualModeTable).build().perform();
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(contextFrame);
+		propertiesItem.click();
+		driver.switchTo().defaultContent();
+		waitForElementByElement(addTableLightbox);
+	}
+
 }

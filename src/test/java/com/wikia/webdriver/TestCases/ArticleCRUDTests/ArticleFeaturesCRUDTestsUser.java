@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.PositionsGallery;
@@ -30,6 +31,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Visual
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
+
+	private Integer border = 2;
+	private Integer width = 500;
+	private Integer height = 50;
+	private Integer cellspacing = 3;
+	private Integer cellpadding = 5;
+	private String alignment = "right";
 
 	@Test(groups={"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
@@ -283,4 +291,78 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.removeComponent(Components.Photo);
 		visualEditMode.verifyComponentRemoved(Components.Photo);
 	}
+
+	@Test(groups={"ArticleFeaturesCRUDUser_011", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_011_addingTable() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+		visualEditMode.clearContent();
+		TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
+		addTable.verifyAddTableLightbox();
+		addTable.typeAmountOfRows(3);
+		addTable.typeAmountOfColumns(2);
+		addTable.selectHeader(TableBuilderComponentObject.Headers.FirstRow);
+		addTable.typeBorderSize(border);
+		addTable.selectAlignment(TableBuilderComponentObject.Alignment.Right);
+		addTable.typeWidth(width);
+		addTable.typeHeight(height);
+		addTable.typeCellSpacing(cellspacing);
+		addTable.typeCellPadding(cellpadding);
+		addTable.clickOKButton();
+		visualEditMode.submitArticle();
+		article.verifyTableProperty("border", border);
+		article.verifyTableProperty("cellspacing", cellspacing);
+		article.verifyTableProperty("cellpadding", cellpadding);
+		article.verifyTableAlignment("float", alignment);
+		article.verifyTableSize(width, height);
+	}
+
+	@Test(groups={"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_012_modifyTable() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+		visualEditMode.clearContent();
+		TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
+		addTable.verifyAddTableLightbox();
+		addTable.typeBorderSize(border);
+		addTable.typeCellSpacing(cellspacing);
+		addTable.typeCellPadding(cellpadding);
+		addTable.clickOKButton();
+		visualEditMode.submitArticle();
+		article.verifyTableProperty("border", border);
+		article.verifyTableProperty("cellspacing", cellspacing);
+		article.verifyTableProperty("cellpadding", cellpadding);
+		article.editArticleUsingDropdown();
+		visualEditMode.clickPropertiesTableButton();
+		addTable.typeBorderSize(border + 10);
+		addTable.typeCellSpacing(cellspacing + 10);
+		addTable.typeCellPadding(cellpadding +10);
+		addTable.clickOKButton();
+		visualEditMode.submitArticle();
+		article.verifyTableProperty("border", border + 10);
+		article.verifyTableProperty("cellspacing", cellspacing + 10);
+		article.verifyTableProperty("cellpadding", cellpadding + 10);
+	}
+
+	@Test(groups={"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_013_deleteTable() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+		visualEditMode.clearContent();
+		TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
+		addTable.verifyAddTableLightbox();
+		addTable.clickOKButton();
+		visualEditMode.submitArticle();
+		article.editArticleUsingDropdown();
+		visualEditMode.clickDeleteTableButton();
+		visualEditMode.submitArticle();
+		article.verifyTableRemoved();
+	}
+
 }

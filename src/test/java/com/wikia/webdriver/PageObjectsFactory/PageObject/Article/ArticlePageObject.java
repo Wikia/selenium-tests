@@ -97,8 +97,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private List<WebElement> categoryList;
 	@FindBy(css=".ui-autocomplete")
 	private WebElement categorySuggestionsList;
-	@FindBy(css=".categories")
-	private WebElement categoriesContainer;
 	@FindBy(css=".category.new")
 	private WebElement categoryNew;
 	@FindBy(css="button.save:not([disabled])")
@@ -107,8 +105,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement categorySaveButtonDisabled;
 	@FindBy(css = ".WikiaPageHeader h1")
 	private WebElement articleTitle;
+	@FindBy(css=".article-table-selected")
+	private List<WebElement> tables;
 
-	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
+	private By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
+	private By articleTableBy = By.cssSelector(".article-table");
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -310,6 +311,33 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
+	public void verifyTableProperty(String propertyName, Integer propertyValue) {
+		waitForElementByElement(tables.get(tables.size()-1));
+		Assertion.assertEquals(tables.get(tables.size()-1).getAttribute(propertyName), propertyValue.toString());
+		PageObjectLogging.log("verifyTableProperty", "table has correct " + propertyName + " property", true);
+	}
+
+	public void verifyTableAlignment(String propertyName, String propertyValue) {
+		waitForElementByElement(tables.get(tables.size()-1));
+		Assertion.assertEquals(tables.get(tables.size()-1).getCssValue(propertyName), propertyValue);
+		PageObjectLogging.log("verifyTableAlignment", "table has correct alignment", true);
+	}
+
+	public void verifyTableSize(Integer width, Integer height) {
+		waitForElementByElement(tables.get(tables.size()-1));
+		Integer chromeWidth = width - 1;
+		Integer chromeHeight = height - 1;
+		Assertion.assertTrue(
+			tables.get(tables.size()-1).getCssValue("width").equals(width.toString() + "px") ||
+			tables.get(tables.size()-1).getCssValue("width").equals(chromeWidth.toString() + "px")
+		);
+		Assertion.assertTrue(
+			tables.get(tables.size()-1).getCssValue("height").equals(height.toString() + "px") ||
+			tables.get(tables.size()-1).getCssValue("height").equals(chromeHeight.toString() + "px")
+		);
+		PageObjectLogging.log("verifyTableSize", "table has correct size", true);
+	}
+
 	public void verifyVideoAlignment(PositionsVideo positions) {
 		String videoClass = videoArticle.findElement(
 				By.xpath("./../..")
@@ -489,5 +517,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
 		getUrl(url);
 		return new WatchPageObject(driver);
+	}
+
+	public void verifyTableRemoved() {
+		waitForElementNotPresent(articleTableBy);
+		PageObjectLogging.log(commentAuthorLink, commentAuthorLink, true);
 	}
 }
