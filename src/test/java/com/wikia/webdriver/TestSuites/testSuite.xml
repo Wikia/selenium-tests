@@ -93,6 +93,8 @@
 			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallFeaturesTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FBConnectTests"/>
 			<class name="com.wikia.webdriver.TestCases.UserProfileTests.UserAvatarTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorFormatting"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStyles"/>
 		</classes>
 	</test>
 </suite>
