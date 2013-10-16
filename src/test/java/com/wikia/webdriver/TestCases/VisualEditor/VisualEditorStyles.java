@@ -32,7 +32,8 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		ve = new VisualEditorPageObject(driver);
 	}
 
-	@Test(dataProviderClass = VisualEditorDataProvider.class,
+	@Test(groups = {"VisualEditorStyles", "VisualEditorStyles_001"},
+			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_001_FullText(Style style) {
 		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
@@ -44,7 +45,8 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		article.verifyStyle(style, text);
 	}
 
-	@Test(dataProviderClass = VisualEditorDataProvider.class,
+	@Test(groups = {"VisualEditorStyles", "VisualEditorStyles_002"},
+			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_002_SelectedText(Style style) {
 		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
