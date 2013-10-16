@@ -119,11 +119,16 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 		return new CreateNewWikiPageObjectStep2(driver);
 	}
 
-	public CreateNewWikiLogInPageObject submitToLogIn()
+	public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp()
 	{
 		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
-		return new CreateNewWikiLogInPageObject(driver);
+		return new CreateNewWikiLogInSignUpPageObject(driver);
+	}
+
+	public void verifyWikiName(String expectedWikiName) {
+		PageObjectLogging.log("verifyWikiName", "Verifyimg wiki name equals: " + expectedWikiName, true, driver);
+		Assertion.assertEquals(expectedWikiName, wikiName.getAttribute("value"));
 	}
 
 }

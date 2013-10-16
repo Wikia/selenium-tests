@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
 
 
 /**
@@ -17,9 +18,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
  * @author Karol
  *
  */
-public class CreateNewWikiLogInPageObject extends BasePageObject{
+public class CreateNewWikiLogInSignUpPageObject extends BasePageObject{
 
-	public CreateNewWikiLogInPageObject(WebDriver driver) {
+	public CreateNewWikiLogInSignUpPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -32,32 +33,36 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 	WebElement submitButton;
 	@FindBy(css="div.UserLoginModal div.error-msg")
 	WebElement usernameValidationText;
+	@FindBy(css="form#SignupRedirect input[type='submit']")
+	WebElement signUpSubmitButton;
 
-	public void typeInUserName(String userName)
-	{
+	public void typeInUserName(String userName) {
 		waitForElementByElement(userNameField);
 		userNameField.sendKeys(userName);
 		PageObjectLogging.log("typeInUserName", "user name was typed", true);
 	}
 
-	public void typeInPassword(String password)
-	{
+	public void typeInPassword(String password) {
 		waitForElementByElement(passwordField);
 		passwordField.sendKeys(password);
 		PageObjectLogging.log("typeInPassword", "password name was typed", true);
 	}
 
-	public CreateNewWikiPageObjectStep2 submitLogin()
-	{
+	public CreateNewWikiPageObjectStep2 submitLogin() {
 		waitForElementByElement(submitButton);
 		scrollAndClick(submitButton);
 		PageObjectLogging.log("submitLogin", "submit button was clicked", true, driver);
 		return new CreateNewWikiPageObjectStep2(driver);
 	}
 
+	public SignUpPageObject submitSignup() {
+		waitForElementByElement(signUpSubmitButton);
+		scrollAndClick(signUpSubmitButton);
+		PageObjectLogging.log("submitSignUp", "signup submit button was clicked", true, driver);
+		return new SignUpPageObject(driver);
+	}
 
-	public void verifyEmptyUserNameValidation()
-	{
+	public void verifyEmptyUserNameValidation() {
 		waitForElementByBy(By.cssSelector("div.UserLoginModal div.input-group div.error-msg"));
 		waitForElementByElement(usernameValidationText);
 		String text = usernameValidationText.getText();
@@ -65,22 +70,19 @@ public class CreateNewWikiLogInPageObject extends BasePageObject{
 		userNameField.clear();
 	}
 
-	public void verifyInvalidUserNameValidation()
-	{
+	public void verifyInvalidUserNameValidation() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
 		Assertion.assertEquals("Hm, we don't recognize this name. Don't forget usernames are case sensitive.", usernameValidationText.getText());
 		userNameField.clear();
 	}
 
-	public void verifyBlankPasswordValidation()
-	{
+	public void verifyBlankPasswordValidation() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
 		Assertion.assertEquals("Oops, please fill in the password field.", usernameValidationText.getText());
 		userNameField.clear();
 	}
 
-	public void verifyInvalidPasswordValidation()
-	{
+	public void verifyInvalidPasswordValidation() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserLoginModal div.input-group div.error-msg")));
 		Assertion.assertEquals("Oops, wrong password. Make sure caps lock is off and try again.", usernameValidationText.getText());
 		userNameField.clear();

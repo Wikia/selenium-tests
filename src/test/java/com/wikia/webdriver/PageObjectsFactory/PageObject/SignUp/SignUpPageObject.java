@@ -10,6 +10,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -62,6 +63,14 @@ public class SignUpPageObject extends WikiBasePageObject {
 	private Select yearSelect;
 	private Select daySelect;
 	private Select monthSelect;
+
+	public void disableCaptcha() {
+		String url = urlBuilder.appendQueryStringToURL(
+			driver.getCurrentUrl(),
+			URLsContent.disableCaptchaParameter
+		);
+		getUrl(url);
+	}
 
 	public void typeUserName(String userName) {
 		userNameField.sendKeys(userName);

@@ -70,6 +70,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "a.createpage")
 	private WebElement createArticleButton;
+	@FindBy(css = "a.ajaxRegister")
+	private WebElement signUpLink;
 	@FindBy(css = "article span.drop")
 	private WebElement editDropDown;
 	@FindBy(css = "input#wpConfirmB")
@@ -179,7 +181,8 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
-		getUrl(wikiURL + URLsContent.specialUserSignup);
+		getUrl(wikiURL);
+		signUpLink.click();
 		PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
 		return new SignUpPageObject(driver);
 	}

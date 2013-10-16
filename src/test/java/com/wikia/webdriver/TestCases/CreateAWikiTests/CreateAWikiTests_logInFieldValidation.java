@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.DataProvider.LoginDataProvider;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
@@ -27,7 +27,7 @@ public class CreateAWikiTests_logInFieldValidation extends TestTemplate{
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki();
 		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
-		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
+		CreateNewWikiLogInSignUpPageObject logInPage = createNewWiki1.submitToLogInSignUp();
 		logInPage.typeInUserName(userName);
 		logInPage.typeInPassword(password);
 		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();

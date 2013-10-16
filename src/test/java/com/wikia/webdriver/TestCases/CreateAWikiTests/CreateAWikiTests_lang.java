@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.DataProvider.CreateNewWikiDataProvider;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.TestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
@@ -29,7 +29,7 @@ public class CreateAWikiTests_lang extends TestTemplate {
 		createNewWiki1.selectLanguage(lang);
 		createNewWiki1.typeInWikiName(createNewWiki1.getWikiName());
 		createNewWiki1.waitForSuccessIcon();
-		CreateNewWikiLogInPageObject logInPage = createNewWiki1.submitToLogIn();
+		CreateNewWikiLogInSignUpPageObject logInPage = createNewWiki1.submitToLogInSignUp();
 		logInPage.typeInUserName(Properties.userName);
 		logInPage.typeInPassword(Properties.password);
 		CreateNewWikiPageObjectStep2 createNewWiki2 = logInPage.submitLogin();
