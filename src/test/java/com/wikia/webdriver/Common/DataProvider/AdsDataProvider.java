@@ -28,6 +28,17 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] GermanCorpPages() {
+		return new Object[][] {
+			{"de.wikia", "Wikia"},
+			{"de.wikia", "WAM"},
+			{"de.wikia", "Spezial:Kontakt"},
+			{"de.wikia", "Videospiele"},
+			{"de.wikia", "Videospiele/gamescom"}
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] popularSites() {
 		return new Object[][] {
 			{"elderscrolls", "Skyrim"},
@@ -51,8 +62,6 @@ public class AdsDataProvider {
 	public static final Object[][] corporatePages() {
 		return new Object[][] {
 			{"wikia", "Wikia"},
-			{"de.wikia", "Wikia"},
-			{"de.wikia", "Spezial:Kontakt"},
 			{"fr.wikia", "Wikia"},
 			{"es.wikia", "Wikia"},
 			{"wikia", "WAM"},
