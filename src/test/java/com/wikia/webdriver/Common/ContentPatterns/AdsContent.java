@@ -9,8 +9,7 @@ import java.util.HashMap;
 public class AdsContent {
 
     //HashMap with slots selector
-	public static HashMap<String, String> slotsSelectors;
-	public static HashMap<String, String> adsProviders;
+    public static HashMap<String, String> slotsSelectors;
 
     //SCIPTS
     public static String adsPushSlotScript =
@@ -39,19 +38,6 @@ public class AdsContent {
 
 	public static String getSlotSelector(String slotName) {
 		return slotsSelectors.get(slotName);
-	}
-
-	public static String getElementForProvider(String providerName) {
-		setAdsProviders();
-		return adsProviders.get(providerName);
-	}
-
-	private static void setAdsProviders() {
-		adsProviders = new HashMap<String, String>();
-		adsProviders.put(
-			"IDG",
-			"script[src*='http://ad-emea.doubleclick.net/N7503/adj/DE-OW-netzwerk']"
-		);
 	}
 
 	public static void setSlotsSelectors() {

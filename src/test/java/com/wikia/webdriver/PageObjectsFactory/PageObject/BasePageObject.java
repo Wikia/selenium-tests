@@ -110,24 +110,6 @@ public class BasePageObject{
 		return isElementOnPage;
 	}
 
-	/*
-	 * Simple method for checking if element is on page or not.
-	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
-	 */
-	protected boolean checkIfElementOnPage(WebElement element) {
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		boolean isElementOnPage = true;
-		try {
-			//Get location on WebElement is rising exception when element is not present
-			element.getLocation();
-		} catch (Exception ex) {
-			isElementOnPage = false;
-		} finally {
-			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-		}
-		return isElementOnPage;
-	}
-
 	protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		boolean isElementInElement = true;

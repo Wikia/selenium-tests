@@ -58,9 +58,6 @@ public class NewTestTemplateCore {
 		);
 		eventDriver.register(new PageObjectLogging());
 		driver = eventDriver;
-	}
-
-	protected void logOut() {
 		driver.get(wikiURL + URLsContent.logout);
 	}
 
@@ -81,10 +78,5 @@ public class NewTestTemplateCore {
 			e.printStackTrace();
 		}
 		return capabilities;
-	}
-
-	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
-		NewDriverProvider.setDriverCapabilities(caps);
-		startBrowser();
 	}
 }

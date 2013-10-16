@@ -8,7 +8,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -351,30 +350,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 				"Ads not found",
 				true,
 				driver
-			);
-		}
-	}
-
-	protected void verifyAdsFromProvider(String providerName, List<WebElement> slots) {
-		String providerSpecificSelector = AdsContent.getElementForProvider(providerName);
-		for (WebElement slot: slots) {
-			if (!checkIfElementInElement(providerSpecificSelector, slot)) {
-				PageObjectLogging.log(
-					"NoAdsFromProvider",
-					"Ads from " + providerName
-					+ " not found in slot: " + slot.getAttribute("id"),
-					false
-				);
-				throw new NoSuchElementException(
-					"Call to provider: " + providerName
-					+ " in slot: " + slot.getAttribute("id") + " not found!"
-				);
-			}
-			PageObjectLogging.log(
-				"AdsFromProviderFound",
-				"Ads from " + providerName
-				+ " found in slot: " + providerSpecificSelector,
-				true
 			);
 		}
 	}
