@@ -25,7 +25,7 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 
 	private String text = PageContent.articleText;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public void setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

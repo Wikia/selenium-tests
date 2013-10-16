@@ -46,10 +46,16 @@ public class NewTestTemplateCore {
 		CommonUtils.createDirectory("." + File.separator + "logs");
 	}
 
+	private void printProperties() {
+		System.out.println("Wiki url: " + wikiURL);
+		System.out.println("Wiki corporate url: " + wikiCorporateURL);
+	}
+
 	protected void prepareURLs() {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
 		wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
+		printProperties();
 	}
 
 	protected void startBrowser() {
