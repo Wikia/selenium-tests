@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.wikia.webdriver.TestCases.AdsTests;
 
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
@@ -50,15 +46,6 @@ public class TestAdsOnCorporatePages extends AdsTestTemplate {
 		groups={"Ads_Corporate_Page_002", "GB"}
 	)
 	public void TestCorporatePage_GB() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="DE")
-	@Test (
-		groups={"Ads_Corporate_Page_003", "DE"}
-	)
-	public void TestCorporatePage_DE() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
