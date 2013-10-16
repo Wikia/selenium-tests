@@ -12,14 +12,15 @@ public class PageContent {
 	public static String replyText = "Brand new reply";
 	public static String replyText2 = "QAReply";
 	//articles with TOC
-	public static String articleWithTOClines = "==First Heading==\n"+
-											   "text of the sub-heading number 2\n"+
-											   "==Second heading==\n"+
-											   "text of the second heading\n"+
-											   "===sub-heading number 1===\n"+
-											   "text of the sub-heading number 1\n"+
-											   "===sub-heading number 2===\n"+
-											   "text of the sub-heading number 2\n";
+	public static String articleWithTOClines =
+			"==First Heading==\n"+
+			"text of the sub-heading number 2\n"+
+			"==Second heading==\n"+
+			"text of the second heading\n"+
+			"===sub-heading number 1===\n"+
+			"text of the sub-heading number 1\n"+
+			"===sub-heading number 2===\n"+
+			"text of the sub-heading number 2\n";
 	//blogs
 	public static String blogPostNamePrefix = "blogPost";
 	public static String blogContent = "blogContent";
