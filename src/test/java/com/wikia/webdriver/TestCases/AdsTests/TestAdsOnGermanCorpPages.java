@@ -9,8 +9,15 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
+ * Class contains tests checking ad provider on German corporate pages
  *
  * @author Bogna 'bognix' Knychala
+ *
+ * 1. Test ads from IDG on corporate pages when geo=US
+ * 2. Test ads from IDG on corporate pages when geo=AU
+ * 3. Test ads from IDG on corporate pages when geo=CA
+ * 4. Test ads from IDG on corporate pages when geo=DE
+ * 5. Test ads from IDG on corporate pages when geo=HR
  */
 public class TestAdsOnGermanCorpPages extends AdsTestTemplate {
 

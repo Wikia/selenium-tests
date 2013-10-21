@@ -373,7 +373,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			PageObjectLogging.log(
 				"AdsFromProviderFound",
 				"Ads from " + providerName
-				+ " found in slot: " + providerSpecificSelector,
+				+ " found in slot: " + slot.getAttribute("id"),
 				true
 			);
 		}

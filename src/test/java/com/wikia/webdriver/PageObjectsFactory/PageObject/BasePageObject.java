@@ -115,7 +115,7 @@ public class BasePageObject{
 	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
 	 */
 	protected boolean checkIfElementOnPage(WebElement element) {
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		boolean isElementOnPage = true;
 		try {
 			//Get location on WebElement is rising exception when element is not present
