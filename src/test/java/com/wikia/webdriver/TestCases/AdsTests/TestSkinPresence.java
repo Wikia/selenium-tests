@@ -28,7 +28,8 @@ public class TestSkinPresence extends AdsTestTemplate {
 		invocationCount=5
 	)
 	public void TestSkinPresence_001(
-		String wikiName, String article, String screenImageUrl, Dimension windowSize, int adWidth, String leftPart, String rightPart
+		String wikiName, String article, String screenImageUrl,
+		Dimension windowSize, int adWidth, String leftPart, String rightPart
 	) throws IOException {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsComparisonObject adsComparison = new AdsComparisonObject(driver, testedPage);

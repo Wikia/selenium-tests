@@ -124,8 +124,12 @@ public class AdsComparisonObject extends AdsBaseObject {
 		leftScreen.delete();
 
 		if (
-			imageComparison.comapareBaseEncodedImagesBasedOnBytes(encodedExpectedLeft, encodedLeftScreen)
-			&& imageComparison.comapareBaseEncodedImagesBasedOnBytes(encodedExpectedRight, encodedRightScreen)
+			imageComparison.comapareBaseEncodedImagesBasedOnBytes(
+				encodedExpectedLeft, encodedLeftScreen
+			)
+			&& imageComparison.comapareBaseEncodedImagesBasedOnBytes(
+				encodedExpectedRight, encodedRightScreen
+			)
 		) {
 			PageObjectLogging.log(
 				"ExpectedSkinFound", "Expected ad skin found on page", true
