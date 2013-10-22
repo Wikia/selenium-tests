@@ -139,6 +139,24 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
+	protected void hideSlot(String slotSelector) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		// Find ad-containing element and set visibility = hidden on it
+		// Example selector:
+		// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
+		js.executeScript(
+			"var iframe = arguments[0] + ' iframe:visible:first, ';"
+			+ "var object = arguments[0] + ' object:visible:first, ';"
+			+ "var img = arguments[0] + ' img:visible:first';"
+			+ "var element = $(iframe + object + img)[0];"
+			+ "if (element) element.style['visibility'] = 'hidden';",
+			slotSelector
+		);
+		PageObjectLogging.log(
+			"HideElement", "Element is hidden; CSS " + slotSelector, true
+		);
+	}
+
 	public void verifyNoLiftiumAdsOnPage() throws Exception {
 		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
 		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
