@@ -87,7 +87,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		top10list.verifyPhotoOnTop10page("Image001.jpg");
 	}
 
-	@Test(groups = { "Top_10_list_Tests_005", "Top_10_list_Tests" }) //story 94880
+	@Test(enabled = false, groups = { "Top_10_list_Tests_005", "Top_10_list_Tests" }) //story 94880
 	public void Top_10_list_Tests_005_createTop10listPageWithSelectedPhoto() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		this.top_10_list_Name = PageContent.top10listNamePrefix + wiki.getTimeStamp();
@@ -106,7 +106,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		top10list.verifyRelatedPhotoOnTop10page(relatedPageName);
 	}
 
-	@Test(groups = { "Top_10_list_Tests_006", "Top_10_list_Tests" }) //story 93947
+	@Test(enabled = false, groups = { "Top_10_list_Tests_006", "Top_10_list_Tests" }) //story 93947
 	public void Top_10_list_Tests_006_deleteItemFromTop10listPage() {
 		if (Global.BROWSER.equals("CHROME") || Global.BROWSER.equals("IE")) {
 			PageObjectLogging.log("ACTIVE BUG 35690", "after the bug is fixed, remove the line 'refreshpage(). It is added only to work around the bug", false);
@@ -172,7 +172,7 @@ public class Top_10_list_Tests extends TestTemplate {
 		top10history.verifyImportandPageElements();
 	}
 
-	@Test(groups = { "Top_10_list_Tests_011", "Top_10_list_Tests" })
+	@Test(enabled = false, groups = { "Top_10_list_Tests_011", "Top_10_list_Tests" })
 	public void Top_10_list_Tests_011_voteTop10listLoggedIn() {
 		PageObjectLogging.log("ACTIVE BUG 35690", "verifyItemPresent steps are likely to fail, which will make it impossible to vote for an item. NOTE: the defect SOMETIMES does not occur", false);
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
