@@ -25,12 +25,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 
 
 /**
- *
  * @author Bogna 'bognix' Knychała
  */
 public class ArticlePageObject extends WikiBasePageObject {
-
-
 
 	@FindBy(css="#WikiaPageHeader h1")
 	protected WebElement articleHeader;
@@ -80,6 +77,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement slideshowArticle;
 	@FindBy(css="#mw-content-text .wikiaPhotoGallery-slider-body")
 	protected WebElement sliderArticle;
+	@FindBy(css="#toc")
+	protected WebElement tableOfContents;
+	@FindBy(css="#toc ol")
+	protected WebElement tableOfContentsOrderedList;
+	@FindBys(@FindBy(css="#toc ol a"))
+	protected List<WebElement> tableOfContentsSectionsList;
+	@FindBy(css="#togglelink")
+	protected WebElement tableOfContentsShowHideButton;
 	@FindBy(css="#mw-content-text .Wikia-video-play-button")
 	protected WebElement videoArticle;
 	@FindBy(css="section.RelatedVideosModule")
@@ -520,5 +525,51 @@ public class ArticlePageObject extends WikiBasePageObject {
 		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
 		getUrl(url);
 		return new WatchPageObject(driver);
+	}
+
+	public void verifyTOCpresent() {
+		waitForElementByElement(tableOfContents);
+		PageObjectLogging.log("verifyTOCpresent", "toc is present", true);
+	}
+
+	public void verifyTOCexpanded() {
+		waitForElementByElement(tableOfContentsOrderedList);
+		PageObjectLogging.log("verifyTOCexpanded", "toc is expanded", true);
+	}
+
+	public void verifyTOCcollapsed() {
+		waitForElementNotVisibleByElement(tableOfContentsOrderedList);
+		PageObjectLogging.log("verifyTOCcollapsed", "toc is collapsed", true);
+	}
+
+	/**
+	 * the method clicks on button show or hide,
+	 * depending on which one is currently visible
+	 */
+	public void clickTOCshowHideButton() {
+		waitForElementByElement(tableOfContentsShowHideButton);
+		scrollAndClick(tableOfContentsShowHideButton);
+		PageObjectLogging.log("clickTOCshowHideButton", "table of contents 'show/hide' button clicked", true);
+	}
+
+	/**
+	 * 1. remember the section that TOC link points to
+	 * 2. click on the TOC link
+	 * 3. verify that the section went up on the screen
+	 * 4. verify that the wanted section is almost on the top of the screen
+	 *
+	 * @param numberOfTheSection - TOC link counting from the top
+	 */
+	public void verifyTOCsectionLinkWorks(int numberOfTheSection) {
+		WebElement sectionTOClink = tableOfContentsSectionsList.get(numberOfTheSection-1);
+		String sectionID = sectionTOClink.getAttribute("href").substring(getCurrentUrl().length());
+		WebElement sectionOnArticle = driver.findElement(By.cssSelector(sectionID));
+		int sectionYbefore = sectionOnArticle.getLocation().getY();
+		sectionTOClink.click();
+		int sectionYafter = sectionOnArticle.getLocation().getY();
+		Assertion.assertNotEquals(sectionYbefore, sectionYafter);
+		// assume that if section is less than 5px from top, it is scrolled up properly
+		Assertion.assertTrue(sectionYafter < 5);
+		PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section "+sectionID+" was scrolled up", true);
 	}
 }
