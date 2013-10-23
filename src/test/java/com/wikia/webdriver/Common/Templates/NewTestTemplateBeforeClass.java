@@ -13,6 +13,7 @@ public class NewTestTemplateBeforeClass extends NewTestTemplateCore {
 	public void start() {
 		prepareURLs();
 		startBrowser();
+		logOut();
 	}
 
 	@AfterClass(alwaysRun = true)

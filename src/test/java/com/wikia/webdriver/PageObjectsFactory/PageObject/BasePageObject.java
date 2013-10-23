@@ -96,7 +96,7 @@ public class BasePageObject{
 	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
 	 */
 	protected boolean checkIfElementOnPage(String cssSelector) {
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		changeImplicitWait(500, TimeUnit.MILLISECONDS);
 		boolean isElementOnPage = true;
 		try {
 			if (driver.findElements(By.cssSelector(cssSelector)).size() < 1) {
@@ -105,13 +105,31 @@ public class BasePageObject{
 		} catch (Exception ex) {
 			isElementOnPage = false;
 		} finally {
-			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			restoreDeaultImplicitWait();
+		}
+		return isElementOnPage;
+	}
+
+	/*
+	 * Simple method for checking if element is on page or not.
+	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
+	 */
+	protected boolean checkIfElementOnPage(WebElement element) {
+		changeImplicitWait(500, TimeUnit.MILLISECONDS);
+		boolean isElementOnPage = true;
+		try {
+			//Get location on WebElement is rising exception when element is not present
+			element.getLocation();
+		} catch (Exception ex) {
+			isElementOnPage = false;
+		} finally {
+			restoreDeaultImplicitWait();
 		}
 		return isElementOnPage;
 	}
 
 	protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		changeImplicitWait(500, TimeUnit.MILLISECONDS);
 		boolean isElementInElement = true;
 		try {
 			if (element.findElements(By.cssSelector(cssSelector)).size() < 1) {
@@ -120,7 +138,7 @@ public class BasePageObject{
 		} catch (Exception ex) {
 			isElementInElement = false;
 		} finally {
-			driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+			restoreDeaultImplicitWait();
 		}
 		return isElementInElement;
 	}
@@ -800,5 +818,13 @@ public class BasePageObject{
 		String url = (String) js.executeScript("return wgServer");
 		getUrl(url + "/" + URLsContent.specialPromote);
 		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
+	}
+
+	private void changeImplicitWait(int value, TimeUnit timeUnit) {
+		driver.manage().timeouts().implicitlyWait(value, timeUnit);
+	}
+
+	private void restoreDeaultImplicitWait() {
+		changeImplicitWait(timeOut, TimeUnit.SECONDS);
 	}
 }
