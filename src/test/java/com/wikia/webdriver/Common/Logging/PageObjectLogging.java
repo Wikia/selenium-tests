@@ -145,15 +145,16 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 				builder.button().id(hllButtonID).raw(hllButtonText).end();
 				builder.button().id(sllButtonID).raw(sllButtonText).end();
 				FileInputStream input;
+				String scriptContent = null;
 				try {
 					input = new FileInputStream(wikiaScriptSource);
-					String content = IOUtils.toString(input);
+					scriptContent = IOUtils.toString(input);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				builder.script().raw(content).end();
+				builder.script().raw(scriptContent).end();
 //		CommonUtils.appendTextToFile(logPath, builder.toString());
 //		try{
 //			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
@@ -269,10 +270,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 				builder.td();
 					builder.br().a().href("screenshots/screenshot"+imageCounter+".png").raw("Screenshot").end();
 					builder.br().a().href("screenshots/screenshot"+imageCounter+".html").raw("HTML Source").end();
-					builder.end();
 				builder.end();
 			builder.end();
-
 			imageCounter += 1;
 			logJSError(driver);
 			onTestSuccess(result);
