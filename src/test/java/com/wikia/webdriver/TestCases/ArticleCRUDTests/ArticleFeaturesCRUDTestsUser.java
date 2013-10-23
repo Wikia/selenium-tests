@@ -32,11 +32,11 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	private Integer border = 2;
-	private Integer width = 500;
-	private Integer height = 50;
-	private Integer cellspacing = 3;
-	private Integer cellpadding = 5;
+	private int border = 2;
+	private int width = 500;
+	private int height = 50;
+	private int cellspacing = 3;
+	private int cellpadding = 5;
 	private String alignment = "right";
 
 	@Test(groups={"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})

@@ -311,9 +311,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
-	public void verifyTableProperty(String propertyName, Integer propertyValue) {
+	public void verifyTableProperty(String propertyName, int propertyValue) {
 		waitForElementByElement(tables.get(tables.size()-1));
-		Assertion.assertEquals(tables.get(tables.size()-1).getAttribute(propertyName), propertyValue.toString());
+		Assertion.assertEquals(tables.get(tables.size()-1).getAttribute(propertyName), Integer.toString(propertyValue));
 		PageObjectLogging.log("verifyTableProperty", "table has correct " + propertyName + " property", true);
 	}
 
@@ -323,17 +323,17 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyTableAlignment", "table has correct alignment", true);
 	}
 
-	public void verifyTableSize(Integer width, Integer height) {
+	public void verifyTableSize(int width, int height) {
 		waitForElementByElement(tables.get(tables.size()-1));
-		Integer chromeWidth = width - 1;
-		Integer chromeHeight = height - 1;
+		int chromeWidth = width - 1;
+		int chromeHeight = height - 1;
 		Assertion.assertTrue(
-			tables.get(tables.size()-1).getCssValue("width").equals(width.toString() + "px") ||
-			tables.get(tables.size()-1).getCssValue("width").equals(chromeWidth.toString() + "px")
+			tables.get(tables.size()-1).getCssValue("width").equals(Integer.toString(width) + "px") ||
+			tables.get(tables.size()-1).getCssValue("width").equals(Integer.toString(chromeWidth) + "px")
 		);
 		Assertion.assertTrue(
-			tables.get(tables.size()-1).getCssValue("height").equals(height.toString() + "px") ||
-			tables.get(tables.size()-1).getCssValue("height").equals(chromeHeight.toString() + "px")
+			tables.get(tables.size()-1).getCssValue("height").equals(Integer.toString(height) + "px") ||
+			tables.get(tables.size()-1).getCssValue("height").equals(Integer.toString(chromeHeight) + "px")
 		);
 		PageObjectLogging.log("verifyTableSize", "table has correct size", true);
 	}
