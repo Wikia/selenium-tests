@@ -81,8 +81,19 @@ public class AdsComparisonObject extends AdsBaseObject {
 		}
 	}
 
-	public void checkSkinOnResolution(
-		String adSkinUrl, Dimension windowSize, int adwidth, String expectedLeft, String expectedRight
+	/**
+	 * Check Ad skin on page with provided resolution.
+	 * Compare left and right sides of skin with provided Base64.
+	 * @param adSkinUrl - DFP link with ad skin image
+	 * @param windowResolution - resolution
+	 * @param skinWidth - skin width on the sides of the article
+	 * @param expectedAdSkinLeftPart - path to file with expected skin encoded in Base64
+	 * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
+	 * @throws IOException
+	 */
+	public void checkAdSkinPresenceOnGivenResolution(
+		String adSkinUrl, Dimension windowResolution, int skinWidth,
+		String expectedAdSkinLeftPart, String expectedAdSkinRightPart
 	) throws IOException {
 		Shooter shooter = new Shooter();
 
@@ -97,7 +108,7 @@ public class AdsComparisonObject extends AdsBaseObject {
 		Assertion.assertStringContains(backgroundImageUrlBefore, adSkinUrl);
 
 
-		driver.manage().window().setSize(windowSize);
+		driver.manage().window().setSize(windowResolution);
 
 		PageObjectLogging.log(
 			"ScreenshotPage",
@@ -105,15 +116,15 @@ public class AdsComparisonObject extends AdsBaseObject {
 			true, driver
 		);
 
-		String encodedExpectedLeft = readFileAsString(expectedLeft);
-		String encodedExpectedRight = readFileAsString(expectedRight);
+		String encodedExpectedLeft = readFileAsString(expectedAdSkinLeftPart);
+		String encodedExpectedRight = readFileAsString(expectedAdSkinRightPart);
 
-		Dimension adScreenSize = new Dimension(adwidth, 500);
+		Dimension adScreenSize = new Dimension(skinWidth, 500);
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
 
 		File leftScreen =  shooter.capturePartOfPage(
-			new Point(articleLocationX - adwidth,100), adScreenSize, driver
+			new Point(articleLocationX - skinWidth,100), adScreenSize, driver
 		);
 		File rightScreen =  shooter.capturePartOfPage(
 			new Point(articleLocationX + articleWidth,100), adScreenSize, driver

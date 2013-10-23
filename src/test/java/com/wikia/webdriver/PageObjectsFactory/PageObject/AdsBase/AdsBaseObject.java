@@ -153,7 +153,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			slotSelector
 		);
 		PageObjectLogging.log(
-			"HideElement", "Element is hidden; CSS " + slotSelector, true
+			"AdInSlotHidden", "Ad in slot hidden; Slot CSS " + slotSelector, true
 		);
 	}
 

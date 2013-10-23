@@ -43,7 +43,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestToolbarAdGPT"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestMobileDesktopOverlapping"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestSkinPresence"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdSkinPresence"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestBasicLayout"/>

@@ -12,15 +12,26 @@ import org.testng.annotations.Test;
  *
  * @author Bogna 'bognix' Knychala
  */
-public class TestSkinPresence extends AdsTestTemplate {
+public class TestAdSkinPresence extends AdsTestTemplate {
 
 	UrlBuilder urlBuilder;
 
-	public TestSkinPresence() {
+	public TestAdSkinPresence() {
 		super();
 		urlBuilder = new UrlBuilder(config.getEnv());
 	}
 
+	/**
+	 * Test ad skin presence on given resolution.
+	 * @param wikiName - name of the wiki
+	 * @param article - name of the article
+	 * @param screenImageUrl - DFP link with ad skin image
+	 * @param windowResolution - window resolution
+	 * @param skinWidth - ad skin width on both sides of the article
+	 * @param skinLeftSide - path to file with decoded using Base64 ad skin
+	 * @param skinRightSide - path to file with decoded using Base64 ad skin
+	 * @throws IOException
+	 */
 	@Test(
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="skin",
@@ -29,10 +40,10 @@ public class TestSkinPresence extends AdsTestTemplate {
 	)
 	public void TestSkinPresence_001(
 		String wikiName, String article, String screenImageUrl,
-		Dimension windowSize, int adWidth, String leftPart, String rightPart
+		Dimension windowResolution, int skinWidth, String skinLeftSide, String skinRightSide
 	) throws IOException {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsComparisonObject adsComparison = new AdsComparisonObject(driver, testedPage);
-		adsComparison.checkSkinOnResolution(screenImageUrl, windowSize, adWidth, leftPart, rightPart);
+		adsComparison.checkAdSkinPresenceOnGivenResolution(screenImageUrl, windowResolution, skinWidth, skinLeftSide, skinRightSide);
 	}
 }
