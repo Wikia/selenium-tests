@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable;
 
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import java.util.List;
@@ -18,14 +17,10 @@ public class TableBuilderComponentObject extends BasePageObject {
 	private WebElement okLightboxButton;
 	@FindBy(css=".cke_dialog_body")
 	private WebElement addTableLightbox;
-	@FindBy(css=".cke_dialog_background_cover")
-	private WebElement lightboxBackground;
 	@FindBy(css="input.cke_dialog_ui_input_text")
 	private List<WebElement> tablePropertiesInputs;
 	@FindBy(css=".cke_dialog_ui_input_select > option")
 	private List<WebElement> selectingInputs;
-
-	private String backgroundLigthboxColor = "rgba(0, 0, 0, 1)";
 
 	public TableBuilderComponentObject(WebDriver driver) {
 		super(driver);
@@ -33,56 +28,55 @@ public class TableBuilderComponentObject extends BasePageObject {
 
 	public void verifyAddTableLightbox() {
 		waitForElementByElement(addTableLightbox);
-		Assertion.assertTrue(lightboxBackground.getCssValue("background-color").equals(backgroundLigthboxColor));
 	}
 
-	public void typeAmountOfRows(Integer i) {
+	public void typeAmountOfRows(int rows) {
 		tablePropertiesInputs.get(0).clear();
-		tablePropertiesInputs.get(0).sendKeys(i.toString());
+		tablePropertiesInputs.get(0).sendKeys(Integer.toString(rows));
 		PageObjectLogging.log("typeAmountOfRows", "amount of rows was typed", true, driver);
 	}
 
-	public void typeAmountOfColumns(Integer i) {
+	public void typeAmountOfColumns(int columns) {
 		tablePropertiesInputs.get(1).clear();
-		tablePropertiesInputs.get(1).sendKeys(i.toString());
+		tablePropertiesInputs.get(1).sendKeys(Integer.toString(columns));
 		PageObjectLogging.log("typeAmountOfColumns", "amount of columns was typed", true, driver);
 	}
 
-	public void typeBorderSize(Integer i) {
+	public void typeBorderSize(int border) {
 		tablePropertiesInputs.get(2).clear();
-		tablePropertiesInputs.get(2).sendKeys(i.toString());
+		tablePropertiesInputs.get(2).sendKeys(Integer.toString(border));
 		PageObjectLogging.log("typeBorderSize", "border size was typed", true, driver);
 	}
 
-	public void typeWidth(Integer width) {
+	public void typeWidth(int width) {
 		tablePropertiesInputs.get(3).clear();
-		tablePropertiesInputs.get(3).sendKeys(width.toString());
+		tablePropertiesInputs.get(3).sendKeys(Integer.toString(width));
 		PageObjectLogging.log("typeWidth", "width was typed", true, driver);
 	}
 
-	public void typeHeight(Integer height) {
+	public void typeHeight(int height) {
 		tablePropertiesInputs.get(4).clear();
-		tablePropertiesInputs.get(4).sendKeys(height.toString());
+		tablePropertiesInputs.get(4).sendKeys(Integer.toString(height));
 		PageObjectLogging.log("typeHeight", "height was typed", true, driver);
 	}
 
-	public void typeCellSpacing(Integer i) {
+	public void typeCellSpacing(int cellSpacing) {
 		tablePropertiesInputs.get(5).clear();
-		tablePropertiesInputs.get(5).sendKeys(i.toString());
+		tablePropertiesInputs.get(5).sendKeys(Integer.toString(cellSpacing));
 		PageObjectLogging.log("typeCellSpacing", "cell spacing was typed", true, driver);
 	}
 
-	public void typeCellPadding(Integer i) {
+	public void typeCellPadding(int cellPadding) {
 		tablePropertiesInputs.get(6).clear();
-		tablePropertiesInputs.get(6).sendKeys(i.toString());
+		tablePropertiesInputs.get(6).sendKeys(Integer.toString(cellPadding));
 		PageObjectLogging.log("typeCellPadding", "cell padding was typed", true, driver);
 	}
 
-	public enum Headers{
+	public enum Headers {
 		None, FirstRow, FirstColumn, Both
 	}
 
-	public void selectHeader(Headers head){
+	public void selectHeader(Headers head) {
 		waitForElementByElement(selectingInputs.get(0));
 		switch(head) {
 		case None:
@@ -101,11 +95,11 @@ public class TableBuilderComponentObject extends BasePageObject {
 		PageObjectLogging.log("selectHeader", head.toString()+" header selected", true, driver);
 	}
 
-	public enum Alignment{
+	public enum Alignment {
 		Left, Center, Right
 	}
 
-	public void selectAlignment(Alignment position){
+	public void selectAlignment(Alignment position) {
 		waitForElementByElement(selectingInputs.get(4));
 		switch(position) {
 		case Left:
@@ -121,7 +115,7 @@ public class TableBuilderComponentObject extends BasePageObject {
 		PageObjectLogging.log("selectPosition", position.toString() + " position selected", true, driver);
 	}
 
-	public void clickOKButton(){
+	public void clickOKButton() {
 		waitForElementByElement(okLightboxButton);
 		okLightboxButton.click();
 		PageObjectLogging.log("clickOKButton", "OK button clicked", true);
