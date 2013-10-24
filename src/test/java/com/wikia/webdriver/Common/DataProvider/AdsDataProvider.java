@@ -151,4 +151,18 @@ public class AdsDataProvider {
 			}
 		};
 	}
+
+	@DataProvider
+	public static final Object[][] skin() {
+		return new Object[][] {
+			{
+				"adtest-fluid", "Skin",
+				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				new Dimension(2000, 800),
+				150,
+				"src/test/resources/adsResources/skin2000_left",
+				"src/test/resources/adsResources/skin2000_right",
+			}
+		};
+	}
 }

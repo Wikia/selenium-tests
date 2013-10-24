@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
@@ -27,7 +26,7 @@ public class Shooter {
 		return this;
 	}
 
-	public void saveImageFile(File imageFile, String path) {
+	private void saveImageFile(File imageFile, String path) {
 		Pattern pattern = Pattern.compile("/*.jpg|/*.png|/*.jpeg");
 		Matcher matcher = pattern.matcher(path);
 		if (!matcher.matches()) {
@@ -59,24 +58,7 @@ public class Shooter {
 	 */
 	public File captureWebElement(String path, WebElement element, WebDriver driver) {
 		File screen = capturePage(driver);
-		Point p = element.getLocation();
-		int width = element.getSize().getWidth();
-		int height = element.getSize().getHeight();
-		Rectangle rect = new Rectangle(width, height);
-		BufferedImage img = null;
-		File subImg = new File(path);
-		try {
-			img = ImageIO.read(screen);
-		} catch (IOException e){
-			throw new RuntimeException(e);
-		}
-		BufferedImage dest = img.getSubimage(p.getX(), p.getY(), rect.width, rect.height);
-		try {
-			ImageIO.write(dest, "png", subImg);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return subImg;
+		return cropImage(element.getLocation(), element.getSize(), screen);
 	}
 
 	/**
@@ -88,35 +70,23 @@ public class Shooter {
 	 * @return File path  - file's handler which was saved in given path
 	 */
 	public File captureWebElement(WebElement element, WebDriver driver) {
-		File screen = ((TakesScreenshot) driver) .getScreenshotAs(OutputType.FILE);
-		Point p = element.getLocation();
-		int width = element.getSize().getWidth();
-		int height = element.getSize().getHeight();
-		Rectangle rect = new Rectangle(width, height);
-		BufferedImage img = null;
-		File subImg = null;
-		try {
-			 subImg = File.createTempFile("screenshot", ".png");
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		try {
-			img = ImageIO.read(screen);
-		} catch (IOException e){
-			throw new RuntimeException(e);
-		}
-		BufferedImage dest = img.getSubimage(p.getX(), p.getY(), rect.width, rect.height);
-		try {
-			ImageIO.write(dest, "png", subImg);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return subImg;
+		File screen = capturePage(driver);
+		Point start = element.getLocation();
+		return cropImage(start, element.getSize(), screen);
 	}
 
-	public File captureWebElementWithSize(WebElement element, WebDriver driver, Dimension size) {
-		File screen = ((TakesScreenshot) driver) .getScreenshotAs(OutputType.FILE);
-		Point p = element.getLocation();
+	public File captureWebElementAndCrop(WebElement element, Dimension size, WebDriver driver) {
+		File screen = capturePage(driver);
+		Point start = element.getLocation();
+		return cropImage(start, size, screen);
+	}
+
+	public File capturePageAndCrop(Point start, Dimension size, WebDriver driver) {
+		File screen = capturePage(driver);
+		return cropImage(start, size, screen);
+	}
+
+	private File cropImage(Point start, Dimension size, File image) {
 		int width = size.width;
 		int height = size.height;
 		Rectangle rect = new Rectangle(width, height);
@@ -128,11 +98,13 @@ public class Shooter {
 			throw new RuntimeException(e);
 		}
 		try {
-			img = ImageIO.read(screen);
+			img = ImageIO.read(image);
 		} catch (IOException e){
 			throw new RuntimeException(e);
 		}
-		BufferedImage dest = img.getSubimage(p.getX(), p.getY(), rect.width, rect.height);
+		BufferedImage dest = img.getSubimage(
+			start.getX(), start.getY(), rect.width, rect.height
+		);
 		try {
 			ImageIO.write(dest, "png", subImg);
 		} catch (IOException e) {

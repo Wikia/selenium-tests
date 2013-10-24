@@ -174,6 +174,14 @@ public class BasePageObject{
 		}
 	}
 
+	protected String getPseudoElementValue(WebElement element, String pseudoElement, String cssValue) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String value = (String) js.executeScript(
+			"return getComputedStyle(arguments[0], arguments[1])[arguments[2]];",
+			element, pseudoElement, cssValue
+		);
+		return value;
+	}
 
 	protected void scrollAndClick(WebElement element)
 	{
