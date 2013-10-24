@@ -123,10 +123,10 @@ public class AdsComparisonObject extends AdsBaseObject {
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
 
-		File leftScreen =  shooter.capturePartOfPage(
+		File leftScreen =  shooter.capturePageAndCrop(
 			new Point(articleLocationX - skinWidth,100), adScreenSize, driver
 		);
-		File rightScreen =  shooter.capturePartOfPage(
+		File rightScreen =  shooter.capturePageAndCrop(
 			new Point(articleLocationX + articleWidth,100), adScreenSize, driver
 		);
 		String encodedLeftScreen = readFileAndEncodeToBase(leftScreen);
@@ -164,7 +164,7 @@ public class AdsComparisonObject extends AdsBaseObject {
 			"Screenshot of the element taken, Selector: " + AdsContent.wikiaBarSelector,
 			true, driver
 		);
-		File toolbarScreen =  shooter.captureWebElementWithSize(toolbar, size, driver);
+		File toolbarScreen =  shooter.captureWebElementAndCrop(toolbar, size, driver);
 		String encodedToolbarScreen = readFileAndEncodeToBase(toolbarScreen);
 		toolbarScreen.delete();
 		if (

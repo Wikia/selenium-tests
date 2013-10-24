@@ -26,7 +26,7 @@ public class Shooter {
 		return this;
 	}
 
-	public void saveImageFile(File imageFile, String path) {
+	private void saveImageFile(File imageFile, String path) {
 		Pattern pattern = Pattern.compile("/*.jpg|/*.png|/*.jpeg");
 		Matcher matcher = pattern.matcher(path);
 		if (!matcher.matches()) {
@@ -72,17 +72,16 @@ public class Shooter {
 	public File captureWebElement(WebElement element, WebDriver driver) {
 		File screen = capturePage(driver);
 		Point start = element.getLocation();
-		int width = element.getSize().getWidth();
 		return cropImage(start, element.getSize(), screen);
 	}
 
-	public File captureWebElementWithSize(WebElement element, Dimension size, WebDriver driver) {
+	public File captureWebElementAndCrop(WebElement element, Dimension size, WebDriver driver) {
 		File screen = capturePage(driver);
 		Point start = element.getLocation();
 		return cropImage(start, size, screen);
 	}
 
-	public File capturePartOfPage(Point start, Dimension size, WebDriver driver) {
+	public File capturePageAndCrop(Point start, Dimension size, WebDriver driver) {
 		File screen = capturePage(driver);
 		return cropImage(start, size, screen);
 	}
