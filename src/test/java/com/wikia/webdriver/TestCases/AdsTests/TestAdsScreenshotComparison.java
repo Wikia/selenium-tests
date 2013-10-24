@@ -102,4 +102,14 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
+
+	@GeoEdgeProxy(country="AU")
+	@Test (
+		groups={"Ads_Screenshot_008", "AU"}
+	)
+	public void TestAdsInContent_AU() throws Exception {
+		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		wikiPage.checkTopLeaderboard();
+		wikiPage.checkMedrec();
+	}
 }
