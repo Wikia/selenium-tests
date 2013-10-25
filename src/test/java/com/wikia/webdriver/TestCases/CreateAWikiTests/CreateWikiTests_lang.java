@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.CreateAWikiTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.CreateWikiMessages;
 import com.wikia.webdriver.Common.DataProvider.CreateNewWikiDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -10,6 +11,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
+
+/**
+ *
+ * @author Karol 'kkarolk' Kujawiak
+ * 1. Create wiki in different languages
+ */
 
 public class CreateWikiTests_lang extends NewTestTemplate {
 
@@ -28,9 +35,9 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 		cnw1.typeInWikiName(cnw1.getWikiName());
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-		cnw2.selectCategory("Auto");
+		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName("carbon");
+		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
 		ArticlePageObject article = cnw3.submit();
 		article.closeNewWikiCongratulationsLightBox();
 		article.verifyUserLoggedIn(credentials.userName);

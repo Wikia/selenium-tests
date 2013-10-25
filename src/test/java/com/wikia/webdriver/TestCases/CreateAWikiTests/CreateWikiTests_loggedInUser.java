@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.CreateAWikiTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.CreateWikiMessages;
 import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -37,9 +38,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		cnw1.typeInWikiName(cnw1.getWikiName());
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-		cnw2.selectCategory("Auto");
+		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName("carbon");
+		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
 		ArticlePageObject article = cnw3.submit();
 		article.closeNewWikiCongratulationsLightBox();
 		article.verifyUserLoggedIn(credentials.userName);
@@ -59,10 +60,10 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		cnw1.typeInWikiName(wikiName);
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-		cnw2.selectCategory("Auto");
+		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
 		cnw2.selectAllAgesCheckbox();
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName("carbon");
+		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
 		ArticlePageObject article = cnw3.submit();
 		article.closeNewWikiCongratulationsLightBox();
 		article.verifyUserLoggedIn(credentials.userName);
@@ -87,9 +88,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		cnw1.typeInWikiDomain(wikiDomain);
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-		cnw2.selectCategory("Auto");
+		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName("carbon");
+		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
 		ArticlePageObject article = cnw3.submit();
 		article.closeNewWikiCongratulationsLightBox();
 		article.verifyUserLoggedIn(credentials.userName);

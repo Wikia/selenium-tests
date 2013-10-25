@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.CreateAWikiTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.CreateWikiMessages;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -11,6 +12,17 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNew
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep2;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep3;
 
+/**
+ *
+ * @author Karol 'kkarolk' Kujawiak
+ * 1. Create wiki as logged out user
+ * 2. Try to create wiki with wrong user password
+ * 3. Try to create wiki with blank user password
+ * 4. Try to create wiki with blank user name
+ * 5. Try to create wiki with blank user name
+ * 6. Try to create wiki with invalid user name
+ *
+ */
 public class CreateWikiTests_loggedOutUser extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
@@ -25,9 +37,9 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate{
 		cnwLogin.typeInUserName(credentials.userName);
 		cnwLogin.typeInPassword(credentials.password);
 		CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
-		cnw2.selectCategory("Auto");
+		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName("carbon");
+		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
 		ArticlePageObject article = cnw3.submit();
 		article.closeNewWikiCongratulationsLightBox();
 		article.verifyUserLoggedIn(credentials.userName);
