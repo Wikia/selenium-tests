@@ -132,4 +132,7 @@ public class URLsContent {
 
 	//avatars
 	public static String avatarGeneric = "150px-Avatar.jpg";
+
+	//edit mode
+	public static String sourceMode = "action=edit&useeditor=source";
 }

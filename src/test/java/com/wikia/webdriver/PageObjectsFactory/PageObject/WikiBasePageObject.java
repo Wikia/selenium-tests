@@ -39,6 +39,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
@@ -331,6 +332,11 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void openSpecialWatchListPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialWatchList);
+        }
+
+	public SourceEditModePageObject openCurrectArticleSourceMode() {
+		appendToUrl(URLsContent.sourceMode);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public WikiArticleEditMode clickEditButton() {

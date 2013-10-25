@@ -201,8 +201,12 @@ public class SourceEditModePageObject extends EditMode{
 		moreClose.click();
 	}
 
-	public void verifyComponentSelector()
-	{
+	public void addContent(String content) {
+		sourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log("addContent", "content was added", true, driver);
+	}
+
+	public void verifyComponentSelector() {
 		waitForElementByElement(componentSelector);
 		PageObjectLogging.log("verifyComponentSelector", "component selector is visible", true, driver);
 	}

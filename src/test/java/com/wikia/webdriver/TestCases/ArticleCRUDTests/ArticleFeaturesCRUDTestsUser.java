@@ -3,7 +3,9 @@ package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
+import com.wikia.webdriver.Common.DataProvider.ArticleFeaturesCRUDDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
@@ -22,6 +24,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoCom
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject.Components;
 
@@ -31,13 +34,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Visual
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
-
-	private int border = 2;
-	private int width = 500;
-	private int height = 50;
-	private int cellspacing = 3;
-	private int cellpadding = 5;
-	private String alignment = "right";
 
 	@Test(groups={"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
@@ -292,8 +288,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Photo);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDUser_011", "ArticleFeaturesCRUDUser"})
-	public void ArticleFeaturesCRUDUser_011_addingTable() {
+	@Test(
+		dataProviderClass=ArticleFeaturesCRUDDataProvider.class,
+		dataProvider="getTableProperties",
+		groups={"ArticleFeaturesCRUDUser_011", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"}
+	)
+	public void ArticleFeaturesCRUDUser_011_addingTable(
+		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -319,25 +321,27 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyTableSize(width, height);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser"})
-	public void ArticleFeaturesCRUDUser_012_modifyTable() {
+	@Test(
+		dataProviderClass=ArticleFeaturesCRUDDataProvider.class,
+		dataProvider="getTableProperties",
+		groups={"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"}
+	)
+	public void ArticleFeaturesCRUDUser_012_modifyTable(
+		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-		visualEditMode.clearContent();
-		TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
-		addTable.verifyAddTableLightbox();
-		addTable.typeBorderSize(border);
-		addTable.typeCellSpacing(cellspacing);
-		addTable.typeCellPadding(cellpadding);
-		addTable.clickOKButton();
-		visualEditMode.submitArticle();
+		SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
+		sourceEditMode.clearSource();
+		sourceEditMode.addContent(SourceModeContent.table);
+		sourceEditMode.submitArticle();
 		article.verifyTableProperty("border", border);
 		article.verifyTableProperty("cellspacing", cellspacing);
 		article.verifyTableProperty("cellpadding", cellpadding);
-		article.editArticleUsingDropdown();
+		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clickPropertiesTableButton();
+		TableBuilderComponentObject addTable = new TableBuilderComponentObject(driver);
 		addTable.typeBorderSize(border + 10);
 		addTable.typeCellSpacing(cellspacing + 10);
 		addTable.typeCellPadding(cellpadding +10);
@@ -348,18 +352,16 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyTableProperty("cellpadding", cellpadding + 10);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser"})
+	@Test(groups={"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"})
 	public void ArticleFeaturesCRUDUser_013_deleteTable() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
+		sourceEditMode.clearSource();
+		sourceEditMode.addContent(SourceModeContent.table);
+		sourceEditMode.submitArticle();
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-		visualEditMode.clearContent();
-		TableBuilderComponentObject addTable = visualEditMode.clickAddTableButton();
-		addTable.verifyAddTableLightbox();
-		addTable.clickOKButton();
-		visualEditMode.submitArticle();
-		article.editArticleUsingDropdown();
 		visualEditMode.clickDeleteTableButton();
 		visualEditMode.submitArticle();
 		article.verifyTableRemoved();

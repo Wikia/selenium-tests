@@ -121,6 +121,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private List<WebElement> welcomeLightBoxParagraphs;
 	@FindBy(css=".article-table-selected")
 	private List<WebElement> tables;
+	@FindBy(css=".article-table")
+	private WebElement table;
 
 	private By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 	private By articleTableBy = By.cssSelector(".article-table");
@@ -353,28 +355,32 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyTableProperty(String propertyName, int propertyValue) {
-		waitForElementByElement(tables.get(tables.size()-1));
-		Assertion.assertEquals(tables.get(tables.size()-1).getAttribute(propertyName), Integer.toString(propertyValue));
-		PageObjectLogging.log("verifyTableProperty", "table has correct " + propertyName + " property", true);
+		waitForElementByElement(table);
+		Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
+		PageObjectLogging.log(
+			"verifyTableProperty",
+			"table has correct " + propertyName + " property",
+			true
+		);
 	}
 
 	public void verifyTableAlignment(String propertyName, String propertyValue) {
-		waitForElementByElement(tables.get(tables.size()-1));
-		Assertion.assertEquals(tables.get(tables.size()-1).getCssValue(propertyName), propertyValue);
+		waitForElementByElement(table);
+		Assertion.assertEquals(table.getCssValue(propertyName), propertyValue);
 		PageObjectLogging.log("verifyTableAlignment", "table has correct alignment", true);
 	}
 
 	public void verifyTableSize(int width, int height) {
-		waitForElementByElement(tables.get(tables.size()-1));
+		waitForElementByElement(table);
 		int chromeWidth = width - 1;
 		int chromeHeight = height - 1;
 		Assertion.assertTrue(
-			tables.get(tables.size()-1).getCssValue("width").equals(Integer.toString(width) + "px") ||
-			tables.get(tables.size()-1).getCssValue("width").equals(Integer.toString(chromeWidth) + "px")
+			table.getCssValue("width").contains(Integer.toString(width)) ||
+			table.getCssValue("width").contains(Integer.toString(chromeWidth))
 		);
 		Assertion.assertTrue(
-			tables.get(tables.size()-1).getCssValue("height").equals(Integer.toString(height) + "px") ||
-			tables.get(tables.size()-1).getCssValue("height").equals(Integer.toString(chromeHeight) + "px")
+			table.getCssValue("height").contains(Integer.toString(height)) ||
+			table.getCssValue("height").contains(Integer.toString(chromeHeight))
 		);
 		PageObjectLogging.log("verifyTableSize", "table has correct size", true);
 	}
