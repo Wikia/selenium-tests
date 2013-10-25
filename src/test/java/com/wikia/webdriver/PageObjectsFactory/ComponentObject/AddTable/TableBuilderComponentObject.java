@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- *
  * @author llukaszj
  */
 public class TableBuilderComponentObject extends BasePageObject {

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
 
+import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -198,6 +199,19 @@ public class SourceEditModePageObject extends EditMode{
 	public void addContent(String content) {
 		sourceModeTextArea.sendKeys(content);
 		PageObjectLogging.log("addContent", "content was added", true, driver);
+	}
+
+	public String buildTablePropertiesContent(
+		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+	) {
+		String tablePropertiesContent = SourceModeContent.table
+		.replace("%a%", Integer.toString(border))
+		.replace("%b%", Integer.toString(cellpadding))
+		.replace("%c%", Integer.toString(cellspacing))
+		.replace("%d%", alignment)
+		.replace("%e%", Integer.toString(height))
+		.replace("%f%", Integer.toString(width));
+		return tablePropertiesContent;
 	}
 
 	public void verifyComponentSelector() {

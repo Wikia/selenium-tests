@@ -12,8 +12,8 @@ public class SourceModeContent {
 			"[[File:Placeholder|right|300px]]";
 
 	public static String table =
-			"{| border=\"2\" cellpadding=\"5\" cellspacing=\"3\" class=\"article-table\"" +
-			" style=\"float: right; height: 50px; width: 500px;\"\n" +
+			"{| border=\"%a%\" cellpadding=\"%b%\" cellspacing=\"%c%\" class=\"article-table\"" +
+			" style=\"float: %d%; height: %e%px; width: %f%px;\"\n" +
 			"|-\n" +
 			"! scope=\"col\"|\n" +
 			"! scope=\"col\"|\n" +
