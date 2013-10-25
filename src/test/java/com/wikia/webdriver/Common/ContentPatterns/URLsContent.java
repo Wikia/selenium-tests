@@ -114,4 +114,7 @@ public class URLsContent {
 	public static String googleDomain = "accounts.google.com";
 	public static String redditDomain = "reddit.com";
 	public static String stumpleUponDomain = "stumbleupon.com";
+
+	//edit mode
+	public static String sourceMode = "action=edit&useeditor=source";
 }
