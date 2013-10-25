@@ -334,7 +334,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
 		sourceEditMode.clearSource();
-		sourceEditMode.addContent(SourceModeContent.table);
+		String table = sourceEditMode.buildTablePropertiesContent(
+			border, width, height, cellspacing, cellpadding, alignment
+		);
+		sourceEditMode.addContent(table);
 		sourceEditMode.submitArticle();
 		article.verifyTableProperty("border", border);
 		article.verifyTableProperty("cellspacing", cellspacing);
@@ -352,14 +355,22 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyTableProperty("cellpadding", cellpadding + 10);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"})
-	public void ArticleFeaturesCRUDUser_013_deleteTable() {
+	@Test(
+		dataProviderClass=ArticleFeaturesCRUDDataProvider.class,
+		dataProvider="getTableProperties",
+		groups={"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"})
+	public void ArticleFeaturesCRUDUser_013_deleteTable(
+		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		SourceEditModePageObject sourceEditMode = article.openCurrectArticleSourceMode();
 		sourceEditMode.clearSource();
-		sourceEditMode.addContent(SourceModeContent.table);
+		String table = sourceEditMode.buildTablePropertiesContent(
+			border, width, height, cellspacing, cellpadding, alignment
+		);
+		sourceEditMode.addContent(table);
 		sourceEditMode.submitArticle();
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clickDeleteTableButton();
