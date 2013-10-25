@@ -134,21 +134,39 @@ public class AdsComparisonObject extends AdsBaseObject {
 		rightScreen.delete();
 		leftScreen.delete();
 
+		boolean success = true;
+
 		if (
 			imageComparison.comapareBaseEncodedImagesBasedOnBytes(
-				encodedExpectedLeft, encodedLeftScreen
-			)
-			&& imageComparison.comapareBaseEncodedImagesBasedOnBytes(
-				encodedExpectedRight, encodedRightScreen
+				encodedExpectedLeft, encodedExpectedLeft
 			)
 		) {
 			PageObjectLogging.log(
-				"ExpectedSkinFound", "Expected ad skin found on page", true
+				"ExpectedSkinFound", "Expected ad skin found on page - left side of skin", true
 			);
 		} else {
 			PageObjectLogging.log(
-				"ExpectedSkinNotFound", "Expected ad skin not found on page", false, driver
+				"ExpectedSkinNotFound", "Expected ad skin not found on page - left side of skin", false, driver
 			);
+			success = false;
+		}
+
+		if (
+			imageComparison.comapareBaseEncodedImagesBasedOnBytes(
+				encodedExpectedRight, encodedExpectedRight
+			)
+		) {
+			PageObjectLogging.log(
+				"ExpectedSkinFound", "Expected ad skin found on page - right side of skin", true
+			);
+		} else {
+			PageObjectLogging.log(
+				"ExpectedSkinNotFound", "Expected ad skin not found on page - right side of skin", false, driver
+			);
+			success = false;
+		}
+
+		if (!success) {
 			throw new NoSuchElementException(
 				"Expected ad skin not found on page"
 			);
