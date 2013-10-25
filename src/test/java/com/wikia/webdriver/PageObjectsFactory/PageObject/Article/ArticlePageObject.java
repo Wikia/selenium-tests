@@ -112,6 +112,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement categorySaveButtonDisabled;
 	@FindBy(css = ".WikiaPageHeader h1")
 	private WebElement articleTitle;
+	@FindBy(css="section#WikiWelcomeWrapper > .close")
+	private WebElement welcomeLightBoxCloseButton;
+	@FindBy(css=".WikiWelcome p")
+	private List<WebElement> welcomeLightBoxParagraphs;
 
 	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 
@@ -520,5 +524,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
 		getUrl(url);
 		return new WatchPageObject(driver);
+	}
+
+	public void closeNewWikiCongratulationsLightBox() {
+		scrollAndClick(welcomeLightBoxCloseButton);
+		PageObjectLogging.log("waitForCongratulationsLightBox ", "Congratulations lightbox verified", true, driver);
 	}
 }

@@ -40,6 +40,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -49,6 +50,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePa
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
@@ -142,6 +144,11 @@ public class WikiBasePageObject extends BasePageObject {
 
 	protected String buildUrlFile(String wikiURL, String fileName) {
 		return wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName;
+	}
+
+	public String getWikiUrl() {
+		String currentURL = driver.getCurrentUrl();
+		return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
 	}
 
 	public enum PositionsVideo {
@@ -285,6 +292,19 @@ public class WikiBasePageObject extends BasePageObject {
 	public NewMessageWall openMessageWall(String userName, String wikiURL) {
 		getUrl(wikiURL + URLsContent.userMessageWall + userName);
 		return new NewMessageWall(driver);
+	}
+
+	public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCreateNewWiki);
+		return new CreateNewWikiPageObjectStep1(driver);
+	}
+
+	public SpecialFactoryPageObject openWikiFactoryPage(String wikiURL) {
+		getUrl(
+				wikiURL+
+				URLsContent.specialWikiFactory
+		);
+		return new SpecialFactoryPageObject(driver);
 	}
 
 	private void clickContributeButton() {
@@ -673,6 +693,18 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 
+	public void logOut(String wikiURL) {
+		try {
+			getUrl(wikiURL + URLsContent.logout);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.cssSelector("a[data-id='login']")));
+		PageObjectLogging.log("logOut", "user is logged out", true, driver);
+	}
+
 	public String logInCookie(String userName, String password) {
 			try {
 				DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -743,15 +775,15 @@ public class WikiBasePageObject extends BasePageObject {
 						+ "Token', '" + xmlResponseArr[9]
 						+ "', {'domain': '"+domain+"' , 'path': '/'})");
 				try {
-					driver.get(Global.DOMAIN + "Special:Random");
+					driver.get(Global.DOMAIN + "wiki/Special:Random");
 				} catch (TimeoutException e) {
 					PageObjectLogging.log("loginCookie",
 							"page timeout after login by cookie", true);
 				}
 
 				driver.findElement(By
-						.cssSelector(".AccountNavigation a[href*='User:"
-								+ userName + "']"));// only for verification
+						.cssSelector(".AccountNavigation a[href*="
+								+ userName + "]"));// only for verification
 				PageObjectLogging.log("loginCookie",
 						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
@@ -848,8 +880,8 @@ public class WikiBasePageObject extends BasePageObject {
 			}
 
 			driver.findElement(By
-					.cssSelector(".AccountNavigation a[href*='User:"
-							+ userName + "']"));// only for verification
+					.cssSelector(".AccountNavigation a[href*="
+							+ userName + "]"));// only for verification
 			PageObjectLogging.log("loginCookie",
 					"user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];

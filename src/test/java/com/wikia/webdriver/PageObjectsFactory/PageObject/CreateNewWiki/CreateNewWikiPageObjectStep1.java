@@ -5,10 +5,9 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.CreateWikiMessages;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -35,16 +34,17 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	private WebElement languageSelectorTrigger;
 	@FindBy(css=".domain-country")
 	private WebElement languageSelectedIndicator;
+	@FindBy(css=".wiki-domain-error.error-msg")
+	private WebElement wikiDomainErrorMessage;;
 
 	private String wikiNameString;
 
 	public CreateNewWikiPageObjectStep1(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
-		wikiNameString = PageContent.wikiNamePrefix + getRandomDigits(3) + getRandomString(5);
 	}
 
 	public String getWikiName(){
+		wikiNameString = CreateWikiMessages.wikiNamePrefix + getRandomDigits(3) + getRandomString(5);
 		return this.wikiNameString;
 	}
 
@@ -67,29 +67,12 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 		}
 	}
 
-	/**
-	 *
-	 * @param name
-	 * @author Karol Kujawiak
-	 */
-	public void typeInWikiName(String name)
-	{
+	public void typeInWikiName(String name) {
 		wikiName.sendKeys(name);
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		PageObjectLogging.log("typeInWikiName ", "Typed wiki name" +name, true);
 	}
 
-	/**
-	 *
-	 * @param domain
-	 * @author Karol Kujawiak
-	 */
-	public void typeInWikiDomain(String domain)
-	{
+	public void typeInWikiDomain(String domain) {
 		wikiDomain.clear();
 		wikiDomain.sendKeys(domain);
 		PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain" +domain, true);
@@ -98,37 +81,37 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public void waitForSuccessIcon()
-	{
+	public void verifySuccessIcon() {
 		waitForElementByElement(successIcon);
 		waitForElementByElement(submitButton);
 		PageObjectLogging.log("waitForSuccessIcon", "Success icon found", true, driver);
 	}
 
-	public void verifyOccupiedWikiAddress(String wikiName)
-	{
-		wikiName = wikiName.toLowerCase();
-		waitForElementByCss("div.wiki-domain-error a[href='http://"+wikiName+".wikia.com']");
-		PageObjectLogging.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", true, driver);
+	public void verifyOccupiedWikiAddress(String wikiName) {
+		waitForTextToBePresentInElementByElement(wikiDomainErrorMessage, wikiName.toLowerCase());
+		PageObjectLogging.log("verifyOccupiedWikiAddress", "Verified occupied wiki address", true);
 	}
 
-	public CreateNewWikiPageObjectStep2 submit()
-	{
+	public void verifyIncorrectWikiName() {
+		waitForTextToBePresentInElementByElement(wikiDomainErrorMessage, CreateWikiMessages.wikiNameViolatesPolicy);
+		PageObjectLogging.log("verifyIncorrectWikiName", "Verified wiki name violates naming policy", true);
+	}
+
+	public CreateNewWikiPageObjectStep2 submit() {
 		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
 		return new CreateNewWikiPageObjectStep2(driver);
 	}
 
-	public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp()
-	{
+	public CreateNewWikiLogInSignUpPageObject submitToLogInSignUp() {
 		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
 		return new CreateNewWikiLogInSignUpPageObject(driver);
 	}
 
 	public void verifyWikiName(String expectedWikiName) {
-		PageObjectLogging.log("verifyWikiName", "Verifyimg wiki name equals: " + expectedWikiName, true, driver);
 		Assertion.assertEquals(expectedWikiName, wikiName.getAttribute("value"));
+		PageObjectLogging.log("verifyWikiName", "Verifyimg wiki name equals: " + expectedWikiName, true, driver);
 	}
 
 }

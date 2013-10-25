@@ -222,7 +222,7 @@ public class BasePageObject{
 
 	public void verifyURLcontains(String GivenString) {
 		String currentURL = driver.getCurrentUrl();
-		Assertion.assertStringContains(currentURL, GivenString);
+		Assertion.assertStringContains(currentURL.toLowerCase(), GivenString.toLowerCase());
 		PageObjectLogging.log("verifyURLcontains",
 				"current url is the same as expetced url", true, driver);
 	}
@@ -701,6 +701,11 @@ public class BasePageObject{
 	public void appendToUrl(String additionToUrl) {
 		driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
+	}
+
+	public void removeQsFromUrl() {
+		driver.get(urlBuilder.removeQueryStringsFromURL(driver.getCurrentUrl()));
+		PageObjectLogging.log("removeQSfromUrl", "qs removed form url", true);
 	}
 
 	public void pressEnter(WebElement element) {
