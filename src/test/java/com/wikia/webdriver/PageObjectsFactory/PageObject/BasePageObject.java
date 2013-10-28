@@ -183,10 +183,13 @@ public class BasePageObject{
 		return value;
 	}
 
-	protected void scrollAndClick(WebElement element)
-	{
-		scrollToElement(element);
-		element.click();
+	protected void scrollAndClick(WebElement element) {
+		Actions action = new Actions(driver);
+		action
+			.moveToElement(element)
+			.click()
+			.build()
+			.perform();
 	}
 
 	protected void scrollToElement(WebElement element) {
