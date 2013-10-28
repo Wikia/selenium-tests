@@ -18,7 +18,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 	private WebElement faqButton;
 	@FindBy(css="#ForumPoliciesModal")
 	private WebElement faqLightBox;
-	@FindBy(css="#ForumPoliciesModal .close")
+	@FindBy(css="#close")
 	private WebElement closeFaqLightBoxButton;
 	@FindBy(css=".button.admin-link")
 	private WebElement manageBoardsButton;
@@ -37,7 +37,10 @@ public class ForumPageObject extends WikiArticlePageObject{
 	}
 
 	private void closeFaqLightBox() {
-		scrollAndClick(closeFaqLightBoxButton);
+		waitForElementClickableByElement(closeFaqLightBoxButton);
+		scrollToElement(closeFaqLightBoxButton);
+//		jQueryClick(closeFaqLightBoxButton);
+		closeFaqLightBoxButton.click();
 		PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
 	}
 
