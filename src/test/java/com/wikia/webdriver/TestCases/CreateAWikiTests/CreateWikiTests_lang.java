@@ -29,7 +29,7 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 	)
 	public void CreateNewWiki_lang_TC001(String lang) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
 		cnw1.selectLanguage(lang);
 		cnw1.typeInWikiName(cnw1.getWikiName());

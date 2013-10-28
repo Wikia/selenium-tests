@@ -75,7 +75,7 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 	public void typeInWikiDomain(String domain) {
 		wikiDomain.clear();
 		wikiDomain.sendKeys(domain);
-		PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain" +domain, true);
+		PageObjectLogging.log("typeInWikiDomain ", "Typed wiki domain " + domain, true);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class CreateNewWikiPageObjectStep1 extends BasePageObject{
 
 	public void verifyWikiName(String expectedWikiName) {
 		Assertion.assertEquals(expectedWikiName, wikiName.getAttribute("value"));
-		PageObjectLogging.log("verifyWikiName", "Verifyimg wiki name equals: " + expectedWikiName, true, driver);
+		PageObjectLogging.log("verifyWikiName", "verified wiki name equals: " + expectedWikiName, true);
 	}
 
 }

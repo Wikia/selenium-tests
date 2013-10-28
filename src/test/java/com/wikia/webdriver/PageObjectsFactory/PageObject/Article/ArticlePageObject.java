@@ -528,6 +528,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void closeNewWikiCongratulationsLightBox() {
 		scrollAndClick(welcomeLightBoxCloseButton);
-		PageObjectLogging.log("waitForCongratulationsLightBox ", "Congratulations lightbox verified", true, driver);
+		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
 	}
 }

@@ -18,4 +18,5 @@ public class CreateWikiMessages {
 	public static String wikiTopic = "Duis quam ante, fringilla at cursus tristique, laoreet vel elit. Nullam rhoncus, magna ut dictum ultrices, mauris lectus consectetur tellus, sed dignissim elit justo vel ante.";
 	public static String wikiCategory = "Auto";
 	public static String wikiTheme = "carbon";
+	public static String categoryErrorMessage = "Please choose a category";
 }

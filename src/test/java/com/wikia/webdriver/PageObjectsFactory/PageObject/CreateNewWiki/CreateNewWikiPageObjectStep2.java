@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.ContentPatterns.CreateWikiMessages;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -62,6 +63,6 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 
 	public void verifyCategoryError() {
 		waitForElementByElement(categoryErrorMsg);
-		Assertion.assertEquals("Please choose a category", categoryErrorMsg.getText());
+		Assertion.assertEquals(CreateWikiMessages.categoryErrorMessage, categoryErrorMsg.getText());
 	}
 }
