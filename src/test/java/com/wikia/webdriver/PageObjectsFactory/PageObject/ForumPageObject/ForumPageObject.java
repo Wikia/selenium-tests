@@ -16,9 +16,9 @@ public class ForumPageObject extends WikiArticlePageObject{
 
 	@FindBy(css=".button.policies-link")
 	private WebElement faqButton;
-	@FindBy(css=".modalWrapper.policies")
+	@FindBy(css="#ForumPoliciesModal")
 	private WebElement faqLightBox;
-	@FindBy(css=".close.wikia-chiclet-button")
+	@FindBy(css="#ForumPoliciesModal .close")
 	private WebElement closeFaqLightBoxButton;
 	@FindBy(css=".button.admin-link")
 	private WebElement manageBoardsButton;
