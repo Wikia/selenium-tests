@@ -10,6 +10,8 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Headers;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.Orientation;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject.PositionsGallery;
@@ -291,10 +293,10 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(
 		dataProviderClass=ArticleFeaturesCRUDDataProvider.class,
 		dataProvider="getTableProperties",
-		groups={"ArticleFeaturesCRUDUser_011", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"}
+		groups={"ArticleFeaturesCRUDUser_011", "ArticleFeaturesCRUDUser"}
 	)
 	public void ArticleFeaturesCRUDUser_011_addingTable(
-		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
 	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -305,29 +307,29 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		addTable.verifyAddTableLightbox();
 		addTable.typeAmountOfRows(3);
 		addTable.typeAmountOfColumns(2);
-		addTable.selectHeader(TableBuilderComponentObject.Headers.FirstRow);
+		addTable.selectHeader(Headers.First_Row);
 		addTable.typeBorderSize(border);
-		addTable.selectAlignment(TableBuilderComponentObject.Alignment.Right);
+		addTable.selectAlignment(alignment);
 		addTable.typeWidth(width);
 		addTable.typeHeight(height);
 		addTable.typeCellSpacing(cellspacing);
 		addTable.typeCellPadding(cellpadding);
-		addTable.clickOKButton();
+		addTable.submitTable();
 		visualEditMode.submitArticle();
-		article.verifyTableProperty("border", border);
-		article.verifyTableProperty("cellspacing", cellspacing);
-		article.verifyTableProperty("cellpadding", cellpadding);
-		article.verifyTableAlignment("float", alignment);
+		article.verifyTableBorder(border);
+		article.verifyTableCellspacing(cellspacing);
+		article.verifyTableCellpadding(cellpadding);
+		article.verifyTableAlignment(alignment);
 		article.verifyTableSize(width, height);
 	}
 
 	@Test(
 		dataProviderClass=ArticleFeaturesCRUDDataProvider.class,
 		dataProvider="getTableProperties",
-		groups={"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"}
+		groups={"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser"}
 	)
 	public void ArticleFeaturesCRUDUser_012_modifyTable(
-		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
 	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -339,28 +341,28 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		);
 		sourceEditMode.addContent(table);
 		sourceEditMode.submitArticle();
-		article.verifyTableProperty("border", border);
-		article.verifyTableProperty("cellspacing", cellspacing);
-		article.verifyTableProperty("cellpadding", cellpadding);
+		article.verifyTableBorder(border);
+		article.verifyTableCellspacing(cellspacing);
+		article.verifyTableCellpadding(cellpadding);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clickPropertiesTableButton();
 		TableBuilderComponentObject addTable = new TableBuilderComponentObject(driver);
 		addTable.typeBorderSize(border + 10);
 		addTable.typeCellSpacing(cellspacing + 10);
 		addTable.typeCellPadding(cellpadding +10);
-		addTable.clickOKButton();
+		addTable.submitTable();
 		visualEditMode.submitArticle();
-		article.verifyTableProperty("border", border + 10);
-		article.verifyTableProperty("cellspacing", cellspacing + 10);
-		article.verifyTableProperty("cellpadding", cellpadding + 10);
+		article.verifyTableBorder(border + 10);
+		article.verifyTableCellspacing(cellspacing + 10);
+		article.verifyTableCellpadding(cellpadding + 10);
 	}
 
 	@Test(
 		dataProviderClass=ArticleFeaturesCRUDDataProvider.class,
 		dataProvider="getTableProperties",
-		groups={"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser", "ArticleFeaturesCRUDUsers"})
+		groups={"ArticleFeaturesCRUDUser_013", "ArticleFeaturesCRUDUser"})
 	public void ArticleFeaturesCRUDUser_013_deleteTable(
-		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
 	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

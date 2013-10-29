@@ -374,28 +374,24 @@ public class VisualEditModePageObject extends EditMode {
 		PageObjectLogging.log("removeCategory", "remove category button clicked on category " + categoryName, true);
 	}
 
-	public void clickDeleteTableButton() {
+	private void clickContextMenuOption(WebElement option) {
 		waitForElementByElement(iframe);
 		driver.switchTo().frame(iframe);
 		Actions actions = new Actions(driver);
 		actions.contextClick(VisualModeTable).build().perform();
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(contextFrame);
-		deleteItem.click();
+		option.click();
 		driver.switchTo().defaultContent();
 		waitForElementNotPresent(articleTableBy);
 	}
 
+	public void clickDeleteTableButton() {
+		clickContextMenuOption(deleteItem);
+	}
+
 	public void clickPropertiesTableButton() {
-		waitForElementByElement(iframe);
-		driver.switchTo().frame(iframe);
-		Actions actions = new Actions(driver);
-		actions.contextClick(VisualModeTable).build().perform();
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(contextFrame);
-		propertiesItem.click();
-		driver.switchTo().defaultContent();
-		waitForElementByElement(addTableLightbox);
+		clickContextMenuOption(propertiesItem);
 	}
 
 }

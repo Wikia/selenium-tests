@@ -87,7 +87,6 @@ public class EditMode extends WikiBasePageObject {
 	}
 
 	public TableBuilderComponentObject clickAddTableButton(){
-		waitForElementClickableByElement(addTableButton);
 		addTableButton.click();
 		PageObjectLogging.log("addTable", "add table button clicked", true);
 		return new TableBuilderComponentObject(driver);

@@ -116,5 +116,6 @@ public class URLsContent {
 	public static String stumpleUponDomain = "stumbleupon.com";
 
 	//edit mode
-	public static String sourceMode = "action=edit&useeditor=source";
+	public static String editMode = "action=edit";
+	public static String sourceMode = "useeditor=source";
 }
