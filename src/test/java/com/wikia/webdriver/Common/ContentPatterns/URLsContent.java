@@ -51,6 +51,8 @@ public class URLsContent {
 	public static final String specialUndelete = "wiki/Special:Undelete";
 	public static final String specialPromote = "wiki/Special:Promote";
 	public static final String userProfile = "wiki/User:%userName%";
+	public static final String specialCreateNewWiki = "Special:CreateNewWiki";
+	public static final String specialWikiFactory = "wiki/Special:WikiFactory";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";

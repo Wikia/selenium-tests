@@ -117,6 +117,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement categorySaveButtonDisabled;
 	@FindBy(css = ".WikiaPageHeader h1")
 	private WebElement articleTitle;
+	@FindBy(css="section#WikiWelcomeWrapper > .close")
+	private WebElement welcomeLightBoxCloseButton;
+	@FindBy(css=".WikiWelcome p")
+	private List<WebElement> welcomeLightBoxParagraphs;
 
 	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 
@@ -571,5 +575,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 		// assume that if section is less than 5px from top, it is scrolled up properly
 		Assertion.assertTrue(sectionYafter < 5);
 		PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section "+sectionID+" was scrolled up", true);
+	}
+
+	public void closeNewWikiCongratulationsLightBox() {
+		scrollAndClick(welcomeLightBoxCloseButton);
+		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
 	}
 }

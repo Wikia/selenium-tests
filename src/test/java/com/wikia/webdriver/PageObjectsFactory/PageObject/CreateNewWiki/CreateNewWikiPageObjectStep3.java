@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 
 /**
@@ -50,12 +51,10 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 		PageObjectLogging.log("selectTheme", "skin number: " + skinNumber + " selected", true, driver);
 	}
 
-	public NewWikiaHomePage submit()
-	{
+	public ArticlePageObject submit() {
 		waitForElementNotPresent(loadingIndicatorBy);
-		waitForElementByElement(submitButton);
 		scrollAndClick(submitButton);
 		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
-		return new NewWikiaHomePage(driver);
+		return new ArticlePageObject(driver);
 	}
 }
