@@ -159,7 +159,7 @@ public class WamPageObject extends BasePageObject {
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
 		waitForElementByBy(wamIndexTable);
-		Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals " + expectedRowsNo );
+		Assertion.assertNumber(expectedRowsNo, wamIndexRows.size(), "wam index rows equals " + expectedRowsNo );
 	}
 
 	/**
