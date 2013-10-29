@@ -73,6 +73,6 @@ public class UrlBuilder {
 		if (url.contains("?")) {
 			return url.substring(0, url.indexOf("?"));
 		}
-		else return url;
+		return url;
 	}
 }

@@ -25,7 +25,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 	private WebElement wikiCategory;
 	@FindBy(css="form[name='desc-form'] input[class='next']")
 	private WebElement submitButton;
-	@FindBy(css="[name='all-ages']")
+	@FindBy(name = "all-ages")
 	private WebElement allAgesCheckBox;
 	@FindBy(css="#DescWiki .submit-error.error-msg")
 	private WebElement categoryErrorMsg;
@@ -39,20 +39,20 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 	{
 		waitForElementByElement(descriptionField);
 		descriptionField.sendKeys(description);
-		PageObjectLogging.log("describeYourTopic", "describe your topic populated with: "+description, true);
+		PageObjectLogging.log("describeYourTopic", "describe your topic populated with: " + description, true);
 	}
 
 	public void selectCategory(String category) {
 		waitForElementByElement(wikiCategory);
 		Select dropList = new Select(wikiCategory);
 		dropList.selectByVisibleText(category);
-		PageObjectLogging.log("selectCategory", "selected "+category+" category", true);
+		PageObjectLogging.log("selectCategory", "selected " + category + " category", true);
 	}
 
 	public CreateNewWikiPageObjectStep3 submit() {
 		waitForElementByElement(submitButton);
 		scrollAndClick(submitButton);
-		PageObjectLogging.log("submit", "Submit button clicked", true, driver);
+		PageObjectLogging.log("submit", "Submit button clicked", true);
 		return new CreateNewWikiPageObjectStep3(driver);
 	}
 

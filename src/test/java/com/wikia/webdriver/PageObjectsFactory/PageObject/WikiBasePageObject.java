@@ -118,6 +118,8 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement searchSuggestionsLast;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
+	@FindBy(css="a[data-id='login']")
+	protected WebElement loginButton;
 	@FindBy(css = "#WikiaMainContent a[data-id='edit']")
 	protected WebElement editButton;
 	@FindBy(css=".msg")
@@ -141,6 +143,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
+
+	private String loggedInUserSelector = ".AccountNavigation a[href*=%userName%]";
 
 	protected String buildUrlFile(String wikiURL, String fileName) {
 		return wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName;
@@ -301,8 +305,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialFactoryPageObject openWikiFactoryPage(String wikiURL) {
 		getUrl(
-				wikiURL+
-				URLsContent.specialWikiFactory
+				wikiURL + URLsContent.specialWikiFactory
 		);
 		return new SpecialFactoryPageObject(driver);
 	}
@@ -700,8 +703,7 @@ public class WikiBasePageObject extends BasePageObject {
 			PageObjectLogging.log("logOut",
 					"page loads for more than 30 seconds", true);
 		}
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.cssSelector("a[data-id='login']")));
+		waitForElementByElement(loginButton);
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 
@@ -782,8 +784,7 @@ public class WikiBasePageObject extends BasePageObject {
 				}
 
 				driver.findElement(By
-						.cssSelector(".AccountNavigation a[href*="
-								+ userName + "]"));// only for verification
+						.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
 				PageObjectLogging.log("loginCookie",
 						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
@@ -880,8 +881,7 @@ public class WikiBasePageObject extends BasePageObject {
 			}
 
 			driver.findElement(By
-					.cssSelector(".AccountNavigation a[href*="
-							+ userName + "]"));// only for verification
+					.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
 			PageObjectLogging.log("loginCookie",
 					"user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];

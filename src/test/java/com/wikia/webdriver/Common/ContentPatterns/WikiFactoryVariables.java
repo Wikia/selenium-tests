@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.Common.ContentPatterns;
 
 /**
