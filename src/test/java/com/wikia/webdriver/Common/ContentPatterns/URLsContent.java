@@ -134,5 +134,6 @@ public class URLsContent {
 	public static String avatarGeneric = "150px-Avatar.jpg";
 
 	//edit mode
-	public static String sourceMode = "action=edit&useeditor=source";
+	public static String editMode = "action=edit";
+	public static String sourceMode = "useeditor=source";
 }

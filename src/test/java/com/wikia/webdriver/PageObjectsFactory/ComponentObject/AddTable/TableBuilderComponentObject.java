@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * @author llukaszj
@@ -18,7 +19,7 @@ public class TableBuilderComponentObject extends BasePageObject {
 	private WebElement addTableLightbox;
 	@FindBy(css="input.cke_dialog_ui_input_text")
 	private List<WebElement> tablePropertiesInputs;
-	@FindBy(css=".cke_dialog_ui_input_select > option")
+	@FindBy(css=".cke_dialog_ui_input_select")
 	private List<WebElement> tablePropertiesDropdownOptions;
 
 	public TableBuilderComponentObject(WebDriver driver) {
@@ -88,23 +89,25 @@ public class TableBuilderComponentObject extends BasePageObject {
 	}
 
 	public enum Headers {
-		None, FirstRow, FirstColumn, Both
+		None, First_Row, First_Column, Both
 	}
 
 	public void selectHeader(Headers header) {
 		waitForElementByElement(tablePropertiesDropdownOptions.get(0));
+		Select headerDropdown = new Select(tablePropertiesDropdownOptions.get(0));
 		switch(header) {
 		case None:
-			tablePropertiesDropdownOptions.get(0).click();
+			headerDropdown.selectByVisibleText(header.toString());
 			break;
-		case FirstRow:
-			tablePropertiesDropdownOptions.get(1).click();
+		case First_Row:
+			System.out.println(header.toString().replace("_", " "));
+			headerDropdown.selectByVisibleText(header.toString().replace("_", " "));
 			break;
-		case FirstColumn:
-			tablePropertiesDropdownOptions.get(2).click();
+		case First_Column:
+			headerDropdown.selectByVisibleText(header.toString().replace("_", " "));
 			break;
 		case Both:
-			tablePropertiesDropdownOptions.get(3).click();
+			headerDropdown.selectByVisibleText(header.toString());
 			break;
 		}
 		PageObjectLogging.log("selectHeader", header.toString() + " header selected", true, driver);
@@ -115,25 +118,26 @@ public class TableBuilderComponentObject extends BasePageObject {
 	}
 
 	public void selectAlignment(Alignment position) {
-		waitForElementByElement(tablePropertiesDropdownOptions.get(4));
+		waitForElementByElement(tablePropertiesDropdownOptions.get(1));
+		Select positionDropdown = new Select(tablePropertiesDropdownOptions.get(1));
 		switch(position) {
 		case Left:
-			tablePropertiesDropdownOptions.get(5).click();
+			positionDropdown.selectByVisibleText(position.toString());
 			break;
 		case Center:
-			tablePropertiesDropdownOptions.get(6).click();
+			positionDropdown.selectByVisibleText(position.toString());
 			break;
 		case Right:
-			tablePropertiesDropdownOptions.get(7).click();
+			positionDropdown.selectByVisibleText(position.toString());
 			break;
 		}
 		PageObjectLogging.log("selectPosition", position.toString() + " position selected", true, driver);
 	}
 
-	public void clickOKButton() {
+	public void submitTable() {
 		waitForElementByElement(okLightboxButton);
 		okLightboxButton.click();
-		PageObjectLogging.log("clickOKButton", "OK button clicked", true);
+		PageObjectLogging.log("submitButton", "Table submited", true);
 	}
 
 }

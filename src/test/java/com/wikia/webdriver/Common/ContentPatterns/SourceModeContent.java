@@ -16,8 +16,8 @@ public class SourceModeContent {
 			"{| border=\"1\"\n|<div style=\"border:1px solid blue;\">unclosed-div\n|}";
 
 	public static String table =
-			"{| border=\"%a%\" cellpadding=\"%b%\" cellspacing=\"%c%\" class=\"article-table\"" +
-			" style=\"float: %d%; height: %e%px; width: %f%px;\"\n" +
+			"{| border=\"%border%\" cellpadding=\"%cellpadding%\" cellspacing=\"%cellspacing%\" class=\"article-table\"" +
+			" style=\"float: %float%; height: %height%px; width: %width%px;\"\n" +
 			"|-\n" +
 			"! scope=\"col\"|\n" +
 			"! scope=\"col\"|\n" +

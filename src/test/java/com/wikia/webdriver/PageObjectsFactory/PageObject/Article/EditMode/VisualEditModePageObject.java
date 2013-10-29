@@ -405,28 +405,24 @@ public class VisualEditModePageObject extends EditMode {
 		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true);
 	}
 
-	public void clickDeleteTableButton() {
+	private void clickContextMenuOption(WebElement option) {
 		waitForElementByElement(iframe);
 		driver.switchTo().frame(iframe);
 		Actions actions = new Actions(driver);
 		actions.contextClick(VisualModeTable).build().perform();
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(contextFrame);
-		deleteItem.click();
+		option.click();
 		driver.switchTo().defaultContent();
 		waitForElementNotPresent(articleTableBy);
 	}
 
+	public void clickDeleteTableButton() {
+		clickContextMenuOption(deleteItem);
+	}
+
 	public void clickPropertiesTableButton() {
-		waitForElementByElement(iframe);
-		driver.switchTo().frame(iframe);
-		Actions actions = new Actions(driver);
-		actions.contextClick(VisualModeTable).build().perform();
-		driver.switchTo().defaultContent();
-		driver.switchTo().frame(contextFrame);
-		propertiesItem.click();
-		driver.switchTo().defaultContent();
-		waitForElementByElement(addTableLightbox);
+		clickContextMenuOption(propertiesItem);
 	}
 
 }

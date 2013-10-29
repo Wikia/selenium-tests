@@ -14,6 +14,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -354,7 +355,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
-	public void verifyTableProperty(String propertyName, int propertyValue) {
+	private void verifyTableProperty(String propertyName, int propertyValue) {
 		waitForElementByElement(table);
 		Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
 		PageObjectLogging.log(
@@ -364,9 +365,24 @@ public class ArticlePageObject extends WikiBasePageObject {
 		);
 	}
 
-	public void verifyTableAlignment(String propertyName, String propertyValue) {
+	public void verifyTableBorder(int propertyValue) {
+		verifyTableProperty("border", propertyValue);
+	}
+
+	public void verifyTableCellpadding(int propertyValue) {
+		verifyTableProperty("cellpadding", propertyValue);
+	}
+
+	public void verifyTableCellspacing(int propertyValue) {
+		verifyTableProperty("cellspacing", propertyValue);
+	}
+
+	public void verifyTableAlignment(Alignment alignment) {
 		waitForElementByElement(table);
-		Assertion.assertEquals(table.getCssValue(propertyName), propertyValue);
+		Assertion.assertEquals(
+			table.getCssValue("float").toLowerCase(),
+			alignment.toString().toLowerCase()
+		);
 		PageObjectLogging.log("verifyTableAlignment", "table has correct alignment", true);
 	}
 

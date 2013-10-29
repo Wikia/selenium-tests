@@ -12,6 +12,8 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
@@ -208,15 +210,15 @@ public class SourceEditModePageObject extends EditMode{
 	}
 
 	public String buildTablePropertiesContent(
-		int border, int width, int height, int cellspacing, int cellpadding, String alignment
+		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
 	) {
 		String tablePropertiesContent = SourceModeContent.table
-		.replace("%a%", Integer.toString(border))
-		.replace("%b%", Integer.toString(cellpadding))
-		.replace("%c%", Integer.toString(cellspacing))
-		.replace("%d%", alignment)
-		.replace("%e%", Integer.toString(height))
-		.replace("%f%", Integer.toString(width));
+		.replace("%border%", Integer.toString(border))
+		.replace("%cellpadding%", Integer.toString(cellpadding))
+		.replace("%cellspacing%", Integer.toString(cellspacing))
+		.replace("%float%", alignment.toString())
+		.replace("%height%", Integer.toString(height))
+		.replace("%width%", Integer.toString(width));
 		return tablePropertiesContent;
 	}
 
