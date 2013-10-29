@@ -22,6 +22,8 @@ public class ForumPageObject extends WikiArticlePageObject{
 	private WebElement closeFaqLightBoxButton;
 	@FindBy(css=".button.admin-link")
 	private WebElement manageBoardsButton;
+	@FindBy(css="div.wikiaThrobber")
+	private WebElement faqModalLoadingState;
 
 	private By forumBoardsList = By.cssSelector("ul.boards h4 a");
 
@@ -37,9 +39,8 @@ public class ForumPageObject extends WikiArticlePageObject{
 	}
 
 	private void closeFaqLightBox() {
-		waitForElementClickableByElement(closeFaqLightBoxButton);
-		scrollToElement(closeFaqLightBoxButton);
-//		jQueryClick(closeFaqLightBoxButton);
+		waitForElementNotVisibleByElement(faqModalLoadingState);
+		waitForElementByElement(closeFaqLightBoxButton);
 		closeFaqLightBoxButton.click();
 		PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
 	}

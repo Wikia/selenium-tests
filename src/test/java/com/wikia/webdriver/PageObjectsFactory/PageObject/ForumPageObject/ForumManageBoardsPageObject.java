@@ -26,13 +26,13 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private WebElement boardTitleField;
 	@FindBy(css="[name='boardDescription']")
 	private WebElement boardDescriptionField;
-	@FindBy(css="#submit")
+	@FindBy(css=".submit")
 	private WebElement boardSubmitButton;
 	@FindBy(css="[name='boardTitle']")
 	private WebElement deleteBoardConfirmationField;
 	@FindBy(css="[name='destinationBoardId']")
 	private WebElement mergeToBoard;
-	@FindBy(css=".modalToolbar .submit")
+	@FindBy(css=".submit")
 	private WebElement deleteAndMergeButton;
 	@FindBy(xpath="//ul[@class='boards']/li//a")
 	private WebElement firstForumLink;
@@ -48,12 +48,12 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private void typeBoardTitle(String title){
 		waitForElementByElement(boardTitleField);
 		boardTitleField.sendKeys(title);
-		PageObjectLogging.log("typeBoardTitle", "board title typed in", true);
+		PageObjectLogging.log("typeBoardTitle", "board title: '"+title+"' typed in", true);
 	}
 	private void typeBoradDescription(String description){
 		waitForElementByElement(boardDescriptionField);
 		boardDescriptionField.sendKeys(description);
-		PageObjectLogging.log("typeBoardDescription", "board description typed in", true);
+		PageObjectLogging.log("typeBoardDescription", "board description: '"+description+"' typed in", true);
 	}
 	private void submitNewBoard(){
 		waitForElementByElement(boardSubmitButton);
@@ -90,7 +90,7 @@ public class ForumManageBoardsPageObject extends BasePageObject{
 	private void clickDeleteAndMergeForum(){
 		waitForElementByElement(deleteAndMergeButton);
 		scrollAndClick(deleteAndMergeButton);
-		PageObjectLogging.log("confirmDeleteForum", "delete forum form populated", true);
+		PageObjectLogging.log("clickDeleteAndMergeForum", "delete and merge button clicked", true);
 	}
 
 	private void verifyForumDeletedText(String deletedName){
