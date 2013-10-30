@@ -32,23 +32,31 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	 * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
 	 *  */
 
-	public void typeInFileToUploadPath(String file){
+	public void selectFileToUpload(String file){
 		browseForFileInput.sendKeys(
 				getAbsolutePath(PageContent.resourcesPath + file)
 		);
-		PageObjectLogging.log("typeInFileToUploadPath", "Type file "+file+" to Special:Upload upload path", true);
+		PageObjectLogging.log(
+				"typeInFileToUploadPath",
+				"file " + file + " added to upload",
+				true
+		);
 
 	}
 
 	public void checkIgnoreAnyWarnings() {
 		scrollAndClick(ignoreAnyWarnings);
-		PageObjectLogging.log("checkIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
+		PageObjectLogging.log(
+				"checkIgnoreAnyWarnings",
+				"ignore warnings checkbox selected",
+				true
+		);
 
 	}
 
-	public FilePagePageObject clickOnUploadFile() {
+	public FilePagePageObject clickUploadButton() {
 		scrollAndClick(uploadFileInput);
-		PageObjectLogging.log("clickOnUploadFile", "Click on Upload file button. The method returns FilePageObject", true);
+		PageObjectLogging.log("clickOnUploadFile", "upload file button clicked.", true);
 		return new FilePagePageObject(driver);
 	}
 }

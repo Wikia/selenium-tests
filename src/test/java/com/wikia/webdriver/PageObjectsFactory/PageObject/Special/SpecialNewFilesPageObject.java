@@ -51,7 +51,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		);
 	}
 
-	public void clickOnUploadaPhoto() {
+	public void clickUploadButton() {
 		scrollAndClick(uploadFileInput);
 		PageObjectLogging.log(
 			"ClickOnUploadaPhoto",
@@ -79,7 +79,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		);
 	}
 
-	public void typeInFileToUploadPath(String file) {
+	public void selectFileToUpload(String file) {
 		browseForFileInput.sendKeys(
 				getAbsolutePath(PageContent.resourcesPath + file)
 		);
@@ -132,7 +132,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 				return href;
 			}
 		}
-		return null;
+		throw new RuntimeException("there is no " + imageName + " on Special:NewFiles page");
 	}
 
 	public FilePagePageObject openRandomImage() {

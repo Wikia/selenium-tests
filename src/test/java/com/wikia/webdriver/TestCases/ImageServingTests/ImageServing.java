@@ -33,8 +33,8 @@ public class ImageServing extends NewTestTemplate {
 		newFiles.clickOnMoreOrFewerOptions();
 		newFiles.checkIgnoreAnyWarnings();
 		newFiles.clickOnMoreOrFewerOptions();
-		newFiles.typeInFileToUploadPath(PageContent.file);
-		newFiles.clickOnUploadaPhoto();
+		newFiles.selectFileToUpload(PageContent.file);
+		newFiles.clickUploadButton();
 		newFiles.waitForFile(PageContent.file);
 
 		String imageURL = newFiles.getImageUrl(PageContent.file);
@@ -47,9 +47,9 @@ public class ImageServing extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
-		upload.typeInFileToUploadPath(PageContent.file);
+		upload.selectFileToUpload(PageContent.file);
 		upload.checkIgnoreAnyWarnings();
-		FilePagePageObject filePage = upload.clickOnUploadFile();
+		FilePagePageObject filePage = upload.clickUploadButton();
 		filePage.verifyHeader(PageContent.file);
 
 		String imageURL = filePage.getImageUrl();
@@ -64,10 +64,10 @@ public class ImageServing extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialMultipleUploadPageObject wikiSpecialMU = base.openSpecialMultipleUpload(wikiURL);
-		wikiSpecialMU.typeInFilesToUpload(PageContent.listOfFiles);
+		wikiSpecialMU.selectFilesToUpload(PageContent.listOfFiles);
 		wikiSpecialMU.typeInMultiUploadSummary(PageContent.caption);
 		wikiSpecialMU.checkIgnoreAnyWarnings();
-		wikiSpecialMU.clickOnUploadFile();
+		wikiSpecialMU.clickUploadButton();
 		wikiSpecialMU.verifySuccessfulUpload(PageContent.listOfFiles);
 	}
 }
