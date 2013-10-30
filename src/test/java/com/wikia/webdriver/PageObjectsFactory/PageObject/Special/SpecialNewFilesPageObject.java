@@ -81,8 +81,8 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	}
 
 	public void typeInFileToUploadPath(String file) {
-		sendKeys(
-				browseForFileInput, getAbsolutePath(PageContent.resourcesPath + file)
+		browseForFileInput.sendKeys(
+				getAbsolutePath(PageContent.resourcesPath + file)
 		);
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 	}

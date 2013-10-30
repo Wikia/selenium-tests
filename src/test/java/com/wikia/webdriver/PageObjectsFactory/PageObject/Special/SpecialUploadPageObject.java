@@ -33,7 +33,9 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	 *  */
 
 	public void typeInFileToUploadPath(String file){
-		sendKeys(browseForFileInput, getAbsolutePath(PageContent.resourcesPath + file));
+		browseForFileInput.sendKeys(
+				getAbsolutePath(PageContent.resourcesPath + file)
+		);
 		PageObjectLogging.log("typeInFileToUploadPath", "Type file "+file+" to Special:Upload upload path", true);
 
 	}
