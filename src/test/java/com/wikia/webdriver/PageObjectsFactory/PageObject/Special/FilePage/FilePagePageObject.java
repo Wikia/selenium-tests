@@ -21,15 +21,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  */
 public class FilePagePageObject extends WikiBasePageObject {
 
-	private String fileName;
-
 	public FilePagePageObject(WebDriver driver) {
 		super(driver);
 	}
 
 	public FilePagePageObject(WebDriver driver, String fileName) {
 		super(driver);
-		this.fileName = fileName;
 	}
 
 	@FindBys(@FindBy(css="ul.tabs li a"))
@@ -120,11 +117,6 @@ public class FilePagePageObject extends WikiBasePageObject {
 	public void verifyHeader(String fileName) {
 		waitForElementByElement(wikiFirstHeader);
 		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
-	}
-
-	public void verifyCorrectFilePage() {
-		waitForStringInURL("File:"+fileName);
-		PageObjectLogging.log("VerifyCorrectFilePage", "Verify that the page represents "+fileName+" file", true, driver);
 	}
 
 	public String getImageUrl() {

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.Common.ContentPatterns;
 
+import java.io.File;
+
 public class PageContent {
 	//articles
 	public static String articleNamePrefix = "QAarticle";
@@ -37,8 +39,14 @@ public class PageContent {
 	public static String wikiaContributor = "A Wikia contributor";
 	//image serving
 	public static String file = "Image001.jpg";
-	public static String[] listOfFiles = {"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg", "Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"};
-
+	public static String[] listOfFiles = {
+			"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
+			"Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"
+	};
+	public static String resourcesPath =
+			"." + File.separator + "src" + File.separator +
+			"test" + File.separator + "resources" + File.separator +
+			"ImagesForUploadTests" + File.separator;
 	//message wall
 	public static String messageWallTitlePrefix = "QAMessageWallTitle";
 	public static String messageWallTitleEditPrefix = "QAMessageWallTitleEdit";
