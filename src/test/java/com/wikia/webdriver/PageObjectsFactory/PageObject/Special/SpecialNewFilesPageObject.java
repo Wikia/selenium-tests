@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -118,7 +117,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	public String getRandomImageUrl() {
 		List<String> hrefs = new ArrayList<String>();
 		for (WebElement elem:imagesNewFiles) {
-			hrefs.add(elem.findElement(By.xpath("./..")).getAttribute("href"));
+			hrefs.add(elem.findElement(parentBy).getAttribute("href"));
 		}
 		Random r = new Random();
 		String href = hrefs.get((r.nextInt(hrefs.size()-1))+1);
@@ -128,7 +127,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
 	public String getImageUrl(String imageName) {
 		for (WebElement elem:imagesNewFiles) {
-			String href = elem.findElement(By.xpath("./..")).getAttribute("href");
+			String href = elem.findElement(parentBy).getAttribute("href");
 			if (href.contains(imageName)){
 				return href;
 			}
