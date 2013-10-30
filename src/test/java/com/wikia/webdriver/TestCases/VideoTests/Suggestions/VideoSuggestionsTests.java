@@ -57,7 +57,7 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 		WikiArticleEditMode edit = article.edit();
 		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
 		vetAddingVideo.verifySuggestionsIsDisplayed();
-		vetAddingVideo.clickSuggestionsCloseButton();
+		vetAddingVideo.clickCloseButton();
 		edit.clickOnPublishButton();
 	}
 
