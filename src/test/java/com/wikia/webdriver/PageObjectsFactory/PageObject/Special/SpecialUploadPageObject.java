@@ -40,17 +40,13 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 
 	public void checkIgnoreAnyWarnings() {
 		scrollAndClick(ignoreAnyWarnings);
-		PageObjectLogging.log("checkIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true, driver);
+		PageObjectLogging.log("checkIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
 
 	}
 
 	public FilePagePageObject clickOnUploadFile() {
 		scrollAndClick(uploadFileInput);
-		PageObjectLogging.log("clickOnUploadFile", "Click on Upload file button. The method returns FilePageObject", true, driver);
+		PageObjectLogging.log("clickOnUploadFile", "Click on Upload file button. The method returns FilePageObject", true);
 		return new FilePagePageObject(driver);
 	}
-
-
-
-
 }

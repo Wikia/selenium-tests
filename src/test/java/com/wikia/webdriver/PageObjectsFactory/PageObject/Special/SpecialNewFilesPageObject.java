@@ -34,10 +34,10 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	private WebElement ignoreAnyWarnings;
 	@FindBy(css="section[id='UploadPhotosWrapper']")
 	private WebElement uploadPhotoDialog;
+	@FindBy(css="div.wikia-gallery div.wikia-gallery-item img")
+	private WebElement wikiaPreviewImgCssSelector;
 	@FindBys(@FindBy(css="#mw-content-text img"))
 	private List<WebElement> imagesNewFiles;
-
-	private String wikiaPreviewImgCssSelector = "div.wikia-gallery div.wikia-gallery-item img";
 
 	public SpecialNewFilesPageObject(WebDriver driver) {
 		super(driver);
@@ -89,11 +89,10 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
 	public void waitForFile(String fileName) {
 		driver.navigate().refresh();
-		waitForValueToBePresentInElementsAttributeByCss(
-			wikiaPreviewImgCssSelector,
-			"src",
-			fileName
-		);
+		waitForValueToBePresentInElementsAttributeByElement(
+				wikiaPreviewImgCssSelector,
+				"src",
+				fileName);
 		PageObjectLogging.log(
 			"waitForFile",
 			"Verify if " + fileName + " has been succesfully uploaded",
