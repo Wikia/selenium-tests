@@ -246,6 +246,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialCssPageObject(driver);
 	}
 
+	public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUpload);
+		return new SpecialUploadPageObject(driver);
+	}
+
 	public SpecialUploadPageObject openSpecialUpload() {
 		getUrl(Global.DOMAIN + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);
@@ -308,6 +313,10 @@ public class WikiBasePageObject extends BasePageObject {
 				wikiURL + URLsContent.specialWikiFactory
 		);
 		return new SpecialFactoryPageObject(driver);
+	}
+
+	public void openSpecialWatchListPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialWatchList);
 	}
 
 	private void clickContributeButton() {
@@ -564,10 +573,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForStringInURL(url);
 	}
 
-	public void openSpecialPage(String specialPage) {
-		getUrl(Global.DOMAIN + specialPage);
-	}
-
 	public SpecialCreatePagePageObject openSpecialCreatePage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialCreatePage);
 		return new SpecialCreatePagePageObject(driver);
@@ -584,7 +589,7 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public void clickLoginOnSpecialPage() {
+	public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
 		waitForElementByElement(specialUserLoginLink);
 		PageObjectLogging.log(
 				"LoginLinkPresent",
@@ -597,6 +602,8 @@ public class WikiBasePageObject extends BasePageObject {
 				"Link to login special page clicked",
 				true, driver
 		);
+
+		return new SpecialUserLoginPageObject(driver);
 	}
 
 	public void verifyNotLoggedInMessage() {

@@ -10,9 +10,9 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class VetAddVideoComponentObject extends BasePageObject{
+public class VetAddVideoComponentObject extends WikiBasePageObject{
 
 	@FindBy(css="#VideoEmbedUrl")
 	private WebElement urlField;
@@ -83,6 +83,12 @@ public class VetAddVideoComponentObject extends BasePageObject{
 		PageObjectLogging.log("checkIfLibraryIsPresent", "library carousel present", true);
 	}
 
+	public void verifyAddVideoModal() {
+		waitForElementByElement(urlField);
+		waitForElementByElement(addUrlButton);
+		PageObjectLogging.log("verifyAddVideoModal", "add video modal is displayed", true);
+	}
+
 	public VetOptionsComponentObject addVideoByUrl(String url) {
 		typeInUrl(url);
 		clickAddButtonProvider();
@@ -118,7 +124,7 @@ public class VetAddVideoComponentObject extends BasePageObject{
 		PageObjectLogging.log("verifySuggestionsIsDisplayed", "Verified suggested module appeared", true, driver);
 	}
 
-	public void clickSuggestionsCloseButton() {
+	public void clickCloseButton() {
 		waitForElementByElement(closeButton);
 		scrollAndClick(closeButton);
 		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true, driver);

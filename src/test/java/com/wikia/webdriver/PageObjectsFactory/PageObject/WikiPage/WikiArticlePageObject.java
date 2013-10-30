@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,7 +10,6 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -22,47 +20,14 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	@FindBy(css="div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
-	@FindBy(css="#VideoEmbedUrl")
-	private WebElement videoRVmodalInput;
-	@FindBy(css="div[class='editarea']")
-	private WebElement editCommentTrigger;
-	@FindBy(css="body[id='bodyContent']")
-	private WebElement editCommentArea;
-	@FindBy(css="div.cke_contents iframe")
-	private WebElement iframe;
-	@FindBy(css="input[id*='article-comm-submit']")
-	private WebElement submitCommentButton;
-	@FindBy(css="#WikiaArticleFooter")
-	private WebElement commentHolder;
-	@FindBy(css="input[id*='article-comm-reply']")
-	private WebElement submitReplyButton;
-	@FindBy(css="table.article-table")
-	private WebElement tableOnWikiaArticle;
-	@FindBy(css="textarea#article-comm")
-	private WebElement commentAreaDisabled;
-	@FindBy(css=".article-comm-reply")
-	private WebElement replyCommentButton;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
-	@FindBy(css="#mw-content-text")
-	private WebElement articleContent;
-	@FindBy(css="#VideoEmbedUrlSubmit")
-	private WebElement VideoModalAddButton;
-	@FindBy(css="#WikiaRail .addVideo")
-	private WebElement addVideoWikiaRail;
-	@FindBy(css=".wikia-photogallery-add")
-	private WebElement addPhotoToGalleryButton;
-	@FindBy(css=".wikia-slideshow-addimage")
-	private WebElement addPhotoToSlideShowButton;
 	@FindBy(css = "a[data-canonical='random']")
 	private WebElement randomPageButton;
 	@FindBy(css = ".sprite.search")
 	private WebElement searchButton;
-	@FindBy(css=".button.addVideo")
-	protected WebElement rVAddVideo;
 
 	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
-	private By VideoOnWikiaArticle = By.cssSelector("#WikiaArticle img.sprite.play");
 	private By articleContentBy = By.cssSelector("#mw-content-text");
 	protected By rvFirstVideo = By.cssSelector(
 			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
@@ -130,44 +95,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiArticlePageObject(driver);
 	}
 
-	public void triggerCommentArea()
-	{
-		waitForElementByElement(commentHolder);
-		scrollToElement(commentHolder);
-		waitForElementByElement(submitCommentButton);
-		waitForElementByElement(commentAreaDisabled);
-		int delay = 500;
-		int sumDelay = 500;
-		while (commentAreaDisabled.isDisplayed())
-		{
-			try {
-				Thread.sleep(delay);
-				jQueryFocus("textarea#article-comm");
-			}
-			catch(WebDriverException e){
-				PageObjectLogging.log("triggerCommentArea", "comment are visible after "+delay+" ms", true);
-			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			sumDelay+=500;
-			if (sumDelay > 3000)
-			{
-				break;
-			}
-		}
-
-		waitForElementByElement(iframe);
-		PageObjectLogging.log("triggerCommentArea", "comment area triggered", true, driver);
-	}
-
-	public void verifyPageTitle(String title)
-	{
-		title = title.replace("_", " ");
-		waitForElementByXPath("//h1[contains(text(), '" + title + "')]");
-		PageObjectLogging.log("verifyPageTitle", "page title is verified", true);
-	}
-
 	public void verifyArticleText(String content)
 	{
 		waitForElementByBy(articleContentBy);
@@ -201,11 +128,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
 	}
 
-	public void verifyGalleryPosion(String position) {
-		waitForElementByCss("div.wikia-gallery-position-"+position);
-		PageObjectLogging.log("verifyGalleryPosion", "Gallery position verified: "+position, true, driver);
-	}
-
 	public WikiHistoryPageObject openHistoryPage()
 	{
 		getUrl(driver.getCurrentUrl() + "?action=history");
@@ -213,58 +135,10 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return new WikiHistoryPageObject(driver);
 	}
 
-	public String getArticleNameFromURL() {
-		//TODO: To Michal: use Regular Expression here, when its syntax is learned.
-		String URL= driver.getCurrentUrl();
-		int articlenameIndex = URL.indexOf("wiki/");
-		String articleName = URL.substring(articlenameIndex+5);
-		return articleName;
-	}
-
-	public String followRandomArticle(){
-		openRandomArticle();
-		String name = driver.findElement(By.cssSelector(".WikiaPageHeader h1")).getText();
-		unfollowArticleByApi(name);
-		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=watch");
-		driver.findElement(By.cssSelector("[value=OK]")).click();
-		waitForElementByElement(followedButton);
-		PageObjectLogging.log("followRandomArticle", "random article followed", true);
-		return name;
-	}
-
-	public void unfollowArticleByApi(String name){
-		getUrl(Global.DOMAIN + "index.php?title=" + name + "&action=unwatch");
-		driver.findElement(By.cssSelector("[value=OK]")).click();
-		waitForElementByElement(unfollowedButton);
-		PageObjectLogging.log("followRandomArticle", "random article followed", true);
-	}
-
 	public LightboxPageObject clickThumbnailImage() {
 		waitForElementByElement(thumbnailImageArticle);
 		thumbnailImageArticle.click();
 		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
 		return new LightboxPageObject(driver);
-	}
-
-	public void clickAddVideoFromRail() {
-		waitForElementByElement(addVideoWikiaRail);
-		scrollAndClick(addVideoWikiaRail);
-		PageObjectLogging.log(
-			"clickAndVideoOnWikiaRail",
-			"Button add video on wikia rail is clicked",
-			true, driver
-		);
-	}
-
-	public void renameRandomArticle(String newName) {
-		String oldName = getArticleNameFromURL();
-		renameArticle(oldName, newName);
-	}
-
-
-	public VetAddVideoComponentObject clickOnAddVideoRVModule() {
-		waitForElementByElement(rVAddVideo);
-		scrollAndClick(rVAddVideo);
-		return new VetAddVideoComponentObject(driver);
 	}
 }
