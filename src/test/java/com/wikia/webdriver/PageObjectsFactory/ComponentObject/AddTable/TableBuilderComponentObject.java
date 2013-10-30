@@ -100,7 +100,6 @@ public class TableBuilderComponentObject extends BasePageObject {
 			headerDropdown.selectByVisibleText(header.toString());
 			break;
 		case First_Row:
-			System.out.println(header.toString().replace("_", " "));
 			headerDropdown.selectByVisibleText(header.toString().replace("_", " "));
 			break;
 		case First_Column:

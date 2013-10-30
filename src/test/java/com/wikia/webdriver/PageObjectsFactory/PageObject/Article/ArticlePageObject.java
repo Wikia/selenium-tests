@@ -23,6 +23,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import org.openqa.selenium.Dimension;
 
 
 /**
@@ -388,16 +389,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyTableSize(int width, int height) {
 		waitForElementByElement(table);
-		int chromeWidth = width - 1;
-		int chromeHeight = height - 1;
-		Assertion.assertTrue(
-			table.getCssValue("width").contains(Integer.toString(width)) ||
-			table.getCssValue("width").contains(Integer.toString(chromeWidth))
-		);
-		Assertion.assertTrue(
-			table.getCssValue("height").contains(Integer.toString(height)) ||
-			table.getCssValue("height").contains(Integer.toString(chromeHeight))
-		);
+		Dimension size = table.getSize();
+		Assertion.assertEquals(size.getHeight(), height);
+		Assertion.assertEquals(size.getWidth(), width);
 		PageObjectLogging.log("verifyTableSize", "table has correct size", true);
 	}
 
