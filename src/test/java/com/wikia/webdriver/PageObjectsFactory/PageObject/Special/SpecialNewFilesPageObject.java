@@ -86,7 +86,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 	}
 
-	public void waitForFile(String fileName) {
+	public void verifyFileUploaded(String fileName) {
 		driver.navigate().refresh();
 		waitForValueToBePresentInElementsAttributeByElement(
 				wikiaPreviewImgCssSelector,

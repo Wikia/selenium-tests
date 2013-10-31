@@ -845,11 +845,7 @@ public class BasePageObject{
 	protected String getAbsolutePath(String relativePath) {
 		File fileCheck  = new File(relativePath);
 		if (!fileCheck.isFile()) {
-			try {
-				throw new Exception("File doesn't exist");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			throw new RuntimeException("file " + relativePath + " doesn't exists");
 		}
 		return fileCheck.getAbsolutePath();
 	}
