@@ -231,11 +231,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialNewFilesPageObject(driver);
 	}
 
-	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Global.DOMAIN + URLsContent.specialNewFiles);
-		return new SpecialNewFilesPageObject(driver);
-	}
-
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
 		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
@@ -246,8 +241,8 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialCssPageObject(driver);
 	}
 
-	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Global.DOMAIN + URLsContent.specialUpload);
+	public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);
 	}
 
@@ -283,8 +278,8 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
-	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Global.DOMAIN + URLsContent.specialMultipleUpload);
+	public SpecialMultipleUploadPageObject openSpecialMultipleUpload(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialMultipleUpload);
 		return new SpecialMultipleUploadPageObject(driver);
 	}
 

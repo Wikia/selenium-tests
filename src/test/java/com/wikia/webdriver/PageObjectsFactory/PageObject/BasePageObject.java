@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 
+import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
@@ -839,5 +840,13 @@ public class BasePageObject{
 
 	private void restoreDeaultImplicitWait() {
 		changeImplicitWait(timeOut, TimeUnit.SECONDS);
+	}
+
+	protected String getAbsolutePath(String relativePath) {
+		File fileCheck  = new File(relativePath);
+		if (!fileCheck.isFile()) {
+			throw new RuntimeException("file " + relativePath + " doesn't exists");
+		}
+		return fileCheck.getAbsolutePath();
 	}
 }

@@ -20,7 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePa
  * 3. Upload file using Special:MultipleUpload page
  *
  */
-public class ImageServing extends NewTestTemplate {
+public class ImageServingTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
@@ -35,7 +35,7 @@ public class ImageServing extends NewTestTemplate {
 		newFiles.clickOnMoreOrFewerOptions();
 		newFiles.selectFileToUpload(PageContent.file);
 		newFiles.clickUploadButton();
-		newFiles.waitForFile(PageContent.file);
+		newFiles.verifyFileUploaded(PageContent.file);
 
 		String imageURL = newFiles.getImageUrl(PageContent.file);
 
