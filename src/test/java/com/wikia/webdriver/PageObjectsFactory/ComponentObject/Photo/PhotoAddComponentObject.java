@@ -29,6 +29,11 @@ public class PhotoAddComponentObject extends BasePageObject{
 		// TODO Auto-generated constructor stub
 	}
 
+	public void verifyAddPhotoModal() {
+		waitForElementByElement(searchField);
+		waitForElementByElement(searchButton);
+	}
+
 	private void typeSearchQuery(String photoName){
 		waitForElementByElement(searchField);
 		searchField.sendKeys(photoName);

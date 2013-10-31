@@ -134,10 +134,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		return new PhotoAddComponentObject(driver);
 	}
 
-	public void waitForEditorReady() {
-		waitForElementNotVisibleByElement(loader);
-	}
-
 	public void switchAndEditComment(String comment) {
 		waitForElementByElement(miniEditorEditCommentIFrame);
 		driver.switchTo().frame(miniEditorEditCommentIFrame);

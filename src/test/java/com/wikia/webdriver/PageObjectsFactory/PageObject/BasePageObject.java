@@ -251,7 +251,7 @@ public class BasePageObject{
 		String currentURL = driver.getCurrentUrl();
 		Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
 		PageObjectLogging.log("verifyURLcontains",
-				"current url is the same as expetced url", true, driver);
+				"current url is the same as expetced url", true);
 	}
 
 	public void verifyURL(String givenURL) {
