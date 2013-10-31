@@ -20,13 +20,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
  *
  * @author Bogna 'bognix' Knychala
  * @author Karol 'kkarolk' Kujawiak
+ *
  */
 public class ForcedLoginTests extends NewTestTemplate {
-
-	private String newFiles = URLsContent.specialNewFiles;
-	private String newVideo = URLsContent.specialNewVideo;
-	private String upload = URLsContent.specialUpload;
-	private String watchList = URLsContent.specialWatchList;
 
 	Credentials credentials = config.getCredentials();
 
