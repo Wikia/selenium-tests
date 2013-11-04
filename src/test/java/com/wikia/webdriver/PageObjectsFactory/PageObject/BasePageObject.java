@@ -842,7 +842,7 @@ public class BasePageObject{
 		changeImplicitWait(timeOut, TimeUnit.SECONDS);
 	}
 
-	protected String getAbsolutePath(String relativePath) {
+	protected String getAbsolutePathForFile(String relativePath) {
 		File fileCheck  = new File(relativePath);
 		if (!fileCheck.isFile()) {
 			throw new RuntimeException("file " + relativePath + " doesn't exists");
