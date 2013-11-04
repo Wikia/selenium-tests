@@ -32,22 +32,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.verifyReplyMessage(1, message);
 	}
 
-	@Test(groups= {"ForumThreadTests_003", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_003_removeThread(){
-		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
-		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		forumThread.removeThread("QA reason");
-		forumThread.verifyThreadRemoved();
-	}
-
-	@Test(groups= {"ForumThreadTests_004", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_004_removeThreadAndUndo(){
+	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_002_removeThreadAndUndo(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -62,8 +48,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 	}
 
-	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_005_moveThreadToOtherBoard(){
+	@Test(groups= {"ForumThreadTests_003", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_003_moveThreadToOtherBoard(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -77,8 +63,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.verifyParentBoard(forumNames.get(1));
 	}
 
-	@Test(groups= {"ForumThreadTests_006", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_006_threadHistory(){
+	@Test(groups= {"ForumThreadTests_004", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_004_threadHistory(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -91,8 +77,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumHistory.verifyImportandPageElements();
 	}
 
-	@Test(groups= {"ForumThreadTests_007", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_007_closeThread(){
+	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_005_closeThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -105,8 +91,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.verifyThreadClosed();
 	}
 
-	@Test(groups= {"ForumThreadTests_008", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_008_closeThreadAndReopen(){
+	@Test(groups= {"ForumThreadTests_006", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_006_closeThreadAndReopen(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
