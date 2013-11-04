@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.DataProvider.ArticleFeaturesCRUDDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -36,6 +35,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Visual
 public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
+	private int additionalPropertyValue = 10;
 
 	@Test(groups={"ArticleFeaturesCRUDUser_001", "ArticleFeaturesCRUDUser", "Smoke"})
 	public void ArticleFeaturesCRUDUser_001_addModifyGallery() {
@@ -307,7 +307,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		addTable.verifyAddTableLightbox();
 		addTable.typeAmountOfRows(3);
 		addTable.typeAmountOfColumns(2);
-		addTable.selectHeader(Headers.First_Row);
+		addTable.selectHeader(Headers.FirstColumn);
 		addTable.typeBorderSize(border);
 		addTable.selectAlignment(alignment);
 		addTable.typeWidth(width);
@@ -347,14 +347,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clickPropertiesTableButton();
 		TableBuilderComponentObject addTable = new TableBuilderComponentObject(driver);
-		addTable.typeBorderSize(border + 10);
-		addTable.typeCellSpacing(cellspacing + 10);
-		addTable.typeCellPadding(cellpadding +10);
+		addTable.typeBorderSize(border + additionalPropertyValue);
+		addTable.typeCellSpacing(cellspacing + additionalPropertyValue);
+		addTable.typeCellPadding(cellpadding +additionalPropertyValue);
 		addTable.submitTable();
 		visualEditMode.submitArticle();
-		article.verifyTableBorder(border + 10);
-		article.verifyTableCellspacing(cellspacing + 10);
-		article.verifyTableCellpadding(cellpadding + 10);
+		article.verifyTableBorder(border + additionalPropertyValue);
+		article.verifyTableCellspacing(cellspacing + additionalPropertyValue);
+		article.verifyTableCellpadding(cellpadding + additionalPropertyValue);
 	}
 
 	@Test(

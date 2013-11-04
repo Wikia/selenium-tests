@@ -76,6 +76,7 @@ public class URLsContent {
 	public static final String wikiaTracker = "og_level=info";
 	public static final String unfollowParameter = "action=unwatch";
 	public static final String deleteParameter = "action=delete";
+	public static final String sourceMode = "useeditor=source";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "WAM";
@@ -115,7 +116,4 @@ public class URLsContent {
 	public static String redditDomain = "reddit.com";
 	public static String stumpleUponDomain = "stumbleupon.com";
 
-	//edit mode
-	public static String editMode = "action=edit";
-	public static String sourceMode = "useeditor=source";
 }

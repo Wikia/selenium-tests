@@ -535,6 +535,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyTableRemoved() {
 		waitForElementNotPresent(articleTableBy);
-		PageObjectLogging.log(commentAuthorLink, commentAuthorLink, true);
+		PageObjectLogging.log("verifyTableRemoved", "table was removedcd", true);
 	}
 }

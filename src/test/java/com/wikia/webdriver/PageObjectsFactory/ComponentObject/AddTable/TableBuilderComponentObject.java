@@ -1,7 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,10 +11,10 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * @author llukaszj
  */
-public class TableBuilderComponentObject extends BasePageObject {
+public class TableBuilderComponentObject extends WikiBasePageObject {
 
 	@FindBy(css=".cke_dialog_ui_button.wikia-button")
-	private WebElement okLightboxButton;
+	private WebElement submitLightboxButton;
 	@FindBy(css=".cke_dialog_body")
 	private WebElement addTableLightbox;
 	@FindBy(css="input.cke_dialog_ui_input_text")
@@ -89,7 +89,7 @@ public class TableBuilderComponentObject extends BasePageObject {
 	}
 
 	public enum Headers {
-		None, First_Row, First_Column, Both
+		None, FirstRow, FirstColumn, Both
 	}
 
 	public void selectHeader(Headers header) {
@@ -97,16 +97,16 @@ public class TableBuilderComponentObject extends BasePageObject {
 		Select headerDropdown = new Select(tablePropertiesDropdownOptions.get(0));
 		switch(header) {
 		case None:
-			headerDropdown.selectByVisibleText(header.toString());
+			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case First_Row:
-			headerDropdown.selectByVisibleText(header.toString().replace("_", " "));
+		case FirstRow:
+			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case First_Column:
-			headerDropdown.selectByVisibleText(header.toString().replace("_", " "));
+		case FirstColumn:
+			headerDropdown.selectByIndex(header.ordinal());
 			break;
 		case Both:
-			headerDropdown.selectByVisibleText(header.toString());
+			headerDropdown.selectByIndex(header.ordinal());
 			break;
 		}
 		PageObjectLogging.log("selectHeader", header.toString() + " header selected", true, driver);
@@ -134,8 +134,8 @@ public class TableBuilderComponentObject extends BasePageObject {
 	}
 
 	public void submitTable() {
-		waitForElementByElement(okLightboxButton);
-		okLightboxButton.click();
+		waitForElementByElement(submitLightboxButton);
+		submitLightboxButton.click();
 		PageObjectLogging.log("submitButton", "Table submited", true);
 	}
 
