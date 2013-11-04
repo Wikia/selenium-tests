@@ -42,7 +42,6 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		ve.verifyStyle(style, text);
 		VisualEditorSaveChangesDialog save = ve.savePage();
 		ArticlePageObject article = save.savePage();
-		article.refreshPage();
 		article.verifyStyle(style, text);
 	}
 
@@ -60,7 +59,6 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		ve.verifyStyle(style, selectText);
 		VisualEditorSaveChangesDialog save = ve.savePage();
 		ArticlePageObject article = save.savePage();
-		article.refreshPage();
 		article.verifyStyle(style, selectText);
 	}
 }
