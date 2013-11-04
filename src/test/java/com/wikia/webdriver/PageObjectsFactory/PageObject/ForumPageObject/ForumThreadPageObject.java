@@ -157,10 +157,8 @@ public class ForumThreadPageObject extends BasePageObject{
 	}
 
 	public void verifyThreadReopened() {
-		clickOnMoreButton();
-		waitForElementVisibleByElement(closeThreadButton);
 		waitForElementNotVisibleByElement(closeThreadMessage);
-		PageObjectLogging.log("verifyThreadClosed", "Thread has been closed", true);
+		PageObjectLogging.log("verifyThreadReopened", "Thread has been reopened", true);
 	}
 
 	public void undoRemove() {
@@ -195,7 +193,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	public void reopenThread() {
 		clickOnMoreButton();
 		clickOnReopenThreadButton();
-		PageObjectLogging.log("closeThread", "reopened thread", true, driver);
+		PageObjectLogging.log("reopenThread", "reopened thread", true, driver);
 	}
 
 	public void verifyParentBoard(String forumBoardName) {

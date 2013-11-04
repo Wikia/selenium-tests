@@ -78,21 +78,7 @@ public class ForumThreadTests extends NewTestTemplate{
 	}
 
 	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_005_closeThread(){
-		ForumPageObject forumMainPage = new ForumPageObject(driver);
-		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
-		forumMainPage.openForumMainPage(wikiURL);
-		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
-		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
-		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		forumThread.closeThread(PageContent.closeReason);
-		forumThread.verifyThreadClosed();
-	}
-
-	@Test(groups= {"ForumThreadTests_006", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_006_closeThreadAndReopen(){
+	public void forumThreadTests_005_closeThreadAndReopen(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
