@@ -55,8 +55,8 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement linkExternalIcon;
 
 	public void writeMiniEditor(String text){
-		messageBodyField.clear();
 		waitForElementByElement(messageBodyField);
+		messageBodyField.clear();
 		messageBodyField.sendKeys(text);
 	}
 
