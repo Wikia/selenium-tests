@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponent
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -20,7 +19,6 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
 	public DropDownComponentObject(WebDriver driver) {
 			super(driver);
-			PageFactory.initElements(driver, this);
 	}
 
 	@FindBy (css=".ajaxLogin")

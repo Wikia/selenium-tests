@@ -62,7 +62,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		login.verifyUserLoggedIn(userName);
 
 		login.logOut(wikiURL);
-		login.openSpecialUserLogin();
+		login.openSpecialUserLogin(wikiURL);
 		login.login(userName, newPassword);
 		login.verifyUserLoggedIn(userName);
 	}
