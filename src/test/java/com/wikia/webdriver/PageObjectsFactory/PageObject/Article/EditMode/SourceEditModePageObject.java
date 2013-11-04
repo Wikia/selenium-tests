@@ -206,19 +206,19 @@ public class SourceEditModePageObject extends EditMode{
 
 	public void addContent(String content) {
 		sourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("addContent", "content was added", true, driver);
+		PageObjectLogging.log("addContent", "content was added", true);
 	}
 
 	public String buildTablePropertiesContent(
 		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
 	) {
 		String tablePropertiesContent = SourceModeContent.table
-		.replace("%border%", Integer.toString(border))
-		.replace("%cellpadding%", Integer.toString(cellpadding))
-		.replace("%cellspacing%", Integer.toString(cellspacing))
-		.replace("%float%", alignment.toString())
-		.replace("%height%", Integer.toString(height))
-		.replace("%width%", Integer.toString(width));
+			.replace("%border%", Integer.toString(border))
+			.replace("%cellpadding%", Integer.toString(cellpadding))
+			.replace("%cellspacing%", Integer.toString(cellspacing))
+			.replace("%float%", alignment.toString())
+			.replace("%height%", Integer.toString(height))
+			.replace("%width%", Integer.toString(width));
 		return tablePropertiesContent;
 	}
 

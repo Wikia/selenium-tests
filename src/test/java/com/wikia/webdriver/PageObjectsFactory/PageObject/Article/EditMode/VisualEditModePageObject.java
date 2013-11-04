@@ -68,11 +68,11 @@ public class VisualEditModePageObject extends EditMode {
 	@FindBy(css=".cke_button_table")
 	private WebElement propertiesItem;
 	@FindBy(css=".article-table")
-	private WebElement VisualModeTable;
+	private WebElement visualModeTable;
 	@FindBy(css=".cke_contextmenu iframe")
 	private WebElement contextFrame;
-	@FindBy(css=".cke_dialog_body")
-	private WebElement addTableLightbox;
+	@FindBy(css="input.cke_dialog_ui_input_text")
+	private List<WebElement> tablePropertiesInputs;
 
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
@@ -405,11 +405,11 @@ public class VisualEditModePageObject extends EditMode {
 		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true);
 	}
 
-	private void clickContextMenuOption(WebElement option) {
+	private void selectFromContextMenu(WebElement option) {
 		waitForElementByElement(iframe);
 		driver.switchTo().frame(iframe);
 		Actions actions = new Actions(driver);
-		actions.contextClick(VisualModeTable).build().perform();
+		actions.contextClick(visualModeTable).build().perform();
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(contextFrame);
 		option.click();
@@ -418,11 +418,12 @@ public class VisualEditModePageObject extends EditMode {
 	}
 
 	public void clickDeleteTableButton() {
-		clickContextMenuOption(deleteItem);
+		selectFromContextMenu(deleteItem);
 	}
 
 	public void clickPropertiesTableButton() {
-		clickContextMenuOption(propertiesItem);
+		selectFromContextMenu(propertiesItem);
+		waitForElementByElement(tablePropertiesInputs.get(2));
 	}
 
 }

@@ -92,6 +92,7 @@ public class URLsContent {
 	public static final String unfollowParameter = "action=unwatch";
 	public static final String deleteParameter = "action=delete";
 	public static final String disableCaptchaParameter = "nocaptchatest=1";
+	public static final String sourceMode = "useeditor=source";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "wiki/WAM";
@@ -132,8 +133,4 @@ public class URLsContent {
 
 	//avatars
 	public static String avatarGeneric = "150px-Avatar.jpg";
-
-	//edit mode
-	public static String editMode = "action=edit";
-	public static String sourceMode = "useeditor=source";
 }
