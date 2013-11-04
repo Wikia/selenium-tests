@@ -165,6 +165,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyStyle(Style style, String content) {
+		waitForElementVisibleByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
 		boolean isPresent = false;
 		for (WebElement elem : elements) {
