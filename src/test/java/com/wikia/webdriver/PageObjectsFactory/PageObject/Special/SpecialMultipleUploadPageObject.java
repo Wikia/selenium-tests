@@ -1,15 +1,13 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-
-
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -23,15 +21,15 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 	private WebElement multipleUploadForm;
 	@FindBy(css="#wpUploadDescription")
 	private WebElement multipleUploadSummaryField;
-
-
-	private By FileInputs = By.cssSelector("tr.mw-htmlform-field-UploadSourceField td.mw-input input");
-	private By UploadedFilesListContener = By.cssSelector("div[id='mw-content-text']");
-	private By UploadedFilesList = By.cssSelector("div[id='mw-content-text'] ul li a");
+	@FindBy(css="tr.mw-htmlform-field-UploadSourceField td.mw-input input")
+	private List<WebElement> fileInputs;
+	@FindBy(css="div[id='mw-content-text'] ul li a")
+	private List<WebElement> uploadedFileslist;
+	@FindBy(css="div[id='mw-content-text']")
+	private WebElement uploadedFilesListContener;
 
 	public SpecialMultipleUploadPageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
 	/**
@@ -39,44 +37,38 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 	 *
 	 *
 	 * @author Michal Nowierski
+	 * @author Karol 'kkarolk' Kujawiak
 	 * ** @param FilesNamesList List of files to be uploaded
-	 * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
+	 * <p> Look at folder PageContent.resourcesPath
 	 *  */
-	public void typeInFilesToUpload(String[] FilesNamesList) {
-		if (FilesNamesList==null) {
-			PageObjectLogging.log("TypeInFilesToUpload", "File names list can not be null", false, driver);
-								}
-		else if (FilesNamesList.length>10 || FilesNamesList.length == 0) {
-			PageObjectLogging.log("TypeInFilesToUpload", "You can upload from 1 to 10 files using MultipleUpload. "+FilesNamesList.length+" files is unaccpetable", false, driver);
-					}
-		else {
+	public void selectFilesToUpload(String[] filesNamesList) {
 		waitForElementByElement(multipleUploadForm);
-		List<WebElement> FileInputsLits = driver.findElements(FileInputs);
-		for (int i = 0; i < FilesNamesList.length; i++) {
-			scrollToElement(FileInputsLits.get(i));
-			FileInputsLits.get(i).sendKeys(System.getProperty("user.dir")+"\\src\\test\\resources\\ImagesForUploadTests\\"+FilesNamesList[i]);
+		for (int i = 0; i < filesNamesList.length; i++) {
+			scrollToElement(fileInputs.get(i));
+			fileInputs.get(i).sendKeys(getAbsolutePathForFile(PageContent.resourcesPath + filesNamesList[i]));
 		}
-		PageObjectLogging.log("TypeInFilesToUpload", "Upload "+FilesNamesList.length+" files, specified in FilesNamesList", true, driver);
-		}
+		PageObjectLogging.log(
+				"typeInFilesToUpload",
+				filesNamesList.length + " files added to upload list",
+				true
+		);
 	}
 
+
 	public void typeInMultiUploadSummary(String summary){
-		waitForElementByElement(multipleUploadSummaryField);
 		multipleUploadSummaryField.sendKeys(summary);
-		PageObjectLogging.log("typeInMultiUploadSummary", "summary: "+summary+" added to multiupload", true, driver);
+		PageObjectLogging.log("typeInMultiUploadSummary", "summary: "+summary+" added to multiupload", true);
 	}
 
 	public void checkIgnoreAnyWarnings() {
-		waitForElementByElement(ignoreAnyWarnings);
 		scrollAndClick(ignoreAnyWarnings);
-		PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true, driver);
+		PageObjectLogging.log("CheckIgnoreAnyWarnings", "Check 'Ignore Any Warnings' option", true);
 
 	}
 
-	public void clickOnUploadFile() {
-		waitForElementByElement(uploadFileButton);
+	public void clickUploadButton() {
 		scrollAndClick(uploadFileButton);
-		PageObjectLogging.log("ClickOnUploadFile", "Click on Upload File button", true, driver);
+		PageObjectLogging.log("ClickOnUploadFile", "Click on Upload File button", true);
 
 	}
 
@@ -85,20 +77,13 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 	 * <p> The method checks if the uploaded files correspond to those in FilesNamesList. FFilesNamesList is a parameter of the method
 	 *
 	 *  @author Michal Nowierski
-	 ** @param FilesNamesList list of expected names of files
+	 *  @author Karol 'kkarolk' Kujawiak
+	 ** @param filesNamesList list of expected names of files
 	 */
-	public void verifySuccessfulUpload(String[] FilesNamesList) {
-		waitForElementByBy(UploadedFilesListContener);
-
-		List<WebElement> UploadedFileslist = driver.findElements(UploadedFilesList);
-		for (int i = 0; i < FilesNamesList.length; i++) {
-			if (!UploadedFileslist.get(i).getText().contains(FilesNamesList[i])) {
-				PageObjectLogging.log("VerifySuccessfulUpload", "the uploaded list element number "+(i+1)+"does not contain expected string: "+FilesNamesList[i]+"<br> The element Text is: "+UploadedFileslist.get(i).getText(), false, driver);
-							}
+	public void verifySuccessfulUpload(String[] filesNamesList) {
+		waitForElementByElement(uploadedFilesListContener);
+		for (int i = 0; i < filesNamesList.length; i++) {
+			Assertion.assertStringContains(uploadedFileslist.get(i).getText(), filesNamesList[i]);
 		}
-		PageObjectLogging.log("VerifySuccessfulUpload", "Verify that the upload was succesful by checking the list of uploaded files", true, driver);
-
 	}
-
-
 }

@@ -30,7 +30,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
@@ -40,6 +39,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -49,6 +49,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePa
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
@@ -68,8 +69,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_l
 
 public class WikiBasePageObject extends BasePageObject {
 
-	@FindBy(css = "a.createpage")
-	private WebElement createArticleButton;
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
 	@FindBy(css = "article span.drop")
@@ -80,14 +79,8 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement undeleteLink;
 	@FindBy(css = ".global-notification")
 	private WebElement flashMessage;
-	@FindBy(css = ".global-notification .close")
-	private WebElement flashMessageClose;
 	@FindBy(css = "input#mw-undelete-submit")
 	private WebElement restoreButton;
-	@FindBy(css = "input#wpNewTitleMain")
-	private WebElement renameArticleField;
-	@FindBy(css = "input[name='wpMove']")
-	private WebElement confirmRenamePageButton;
 	@FindBy(css = "input#wpReason")
 	private WebElement deleteCommentReasonField;
 	@FindBy(css="div.permissions-errors")
@@ -96,8 +89,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement pageDeletedInfo;
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
-	@FindBy(css = ".WikiaMenuElement a[data-id='createpage']")
-	protected WebElement contributeAddPage;
 	@FindBy(css = ".UserLoginModal input[name='password']")
 	protected WebElement modalPasswordInput;
 	@FindBy (css = "#WikiaPageHeader h1")
@@ -110,12 +101,10 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement userProfileAvatar;
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
-	@FindBy(css=".autocomplete div")
-	private List<WebElement> searchSuggestions;
-	@FindBy(css=".autocomplete div:nth-child(7)")
-	private WebElement searchSuggestionsLast;
 	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
+	@FindBy(css="a[data-id='login']")
+	protected WebElement loginButton;
 	@FindBy(css = "#WikiaMainContent a[data-id='edit']")
 	protected WebElement editButton;
 	@FindBy(css=".msg")
@@ -140,8 +129,11 @@ public class WikiBasePageObject extends BasePageObject {
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
 
-	protected String buildUrlFile(String wikiURL, String fileName) {
-		return wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + fileName;
+	private String loggedInUserSelector = ".AccountNavigation a[href*=%userName%]";
+
+	public String getWikiUrl() {
+		String currentURL = driver.getCurrentUrl();
+		return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
 	}
 
 	public enum PositionsVideo {
@@ -171,13 +163,6 @@ public class WikiBasePageObject extends BasePageObject {
 	{
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
-	}
-
-	public void verifySuggestionDropdown(String query) {
-		waitForElementByElement(searchSuggestionsLast);
-		for(WebElement elem:searchSuggestions) {
-			Assertion.assertStringContains(elem.getAttribute("title").toUpperCase(), query.toUpperCase());
-		}
 	}
 
 	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
@@ -220,11 +205,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialNewFilesPageObject(driver);
 	}
 
-	public SpecialNewFilesPageObject openSpecialNewFiles() {
-		getUrl(Global.DOMAIN + URLsContent.specialNewFiles);
-		return new SpecialNewFilesPageObject(driver);
-	}
-
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
 		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
@@ -235,8 +215,8 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialCssPageObject(driver);
 	}
 
-	public SpecialUploadPageObject openSpecialUpload() {
-		getUrl(Global.DOMAIN + URLsContent.specialUpload);
+	public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);
 	}
 
@@ -272,8 +252,8 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
-	public SpecialMultipleUploadPageObject openSpecialMultipleUpload() {
-		getUrl(Global.DOMAIN + URLsContent.specialMultipleUpload);
+	public SpecialMultipleUploadPageObject openSpecialMultipleUpload(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialMultipleUpload);
 		return new SpecialMultipleUploadPageObject(driver);
 	}
 
@@ -287,12 +267,20 @@ public class WikiBasePageObject extends BasePageObject {
 		return new NewMessageWall(driver);
 	}
 
-	private void clickContributeButton() {
-		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
-		executeScript("document.querySelectorAll(\".wikia-menu-button\")[0].click()");
-		waitForElementByElement(createArticleButton);
-		PageObjectLogging.log("clickOnContributeButton",
-				"contribute button clicked", true);
+	public CreateNewWikiPageObjectStep1 openSpecialCreateNewWikiPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCreateNewWiki);
+		return new CreateNewWikiPageObjectStep1(driver);
+	}
+
+	public SpecialFactoryPageObject openWikiFactoryPage(String wikiURL) {
+		getUrl(
+				wikiURL + URLsContent.specialWikiFactory
+		);
+		return new SpecialFactoryPageObject(driver);
+	}
+
+	public void openSpecialWatchListPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialWatchList);
 	}
 
 	public WikiArticleEditMode clickEditButton() {
@@ -395,15 +383,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new DeletePageObject(driver);
 	}
 
-	public void renameArticle(String articleName, String articleNewName) {
-		getUrl(Global.DOMAIN + "wiki/Special:MovePage/" + articleName);
-		waitForElementByElement(renameArticleField);
-		waitForElementByElement(confirmRenamePageButton);
-		renameArticleField.clear();
-		renameArticleField.sendKeys(articleNewName);
-		scrollAndClick(confirmRenamePageButton);
-	}
-
 	public void verifyEditButtonNotPresent() {
 		waitForElementNotVisibleByElement(editButton);
 		PageObjectLogging.log(
@@ -427,17 +406,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(undeleteLink);
 		undeleteLink.click();
 		return new SpecialRestorePageObject(driver);
-	}
-
-	public SpecialRestorePageObject undeleteFileByUrl(String name, String wikiURL) {
-		driver.get(wikiURL + URLsContent.specialUndelete + "/" + URLsContent.fileNameSpace + name);
-		return new SpecialRestorePageObject(driver);
-	}
-
-	public void verifyCloseNotificationMessage() {
-		waitForElementVisibleByElement(flashMessage);
-		flashMessageClose.click();
-		waitForElementNotVisibleByElement(flashMessage);
 	}
 
 	public void verifyNotificationMessage() {
@@ -541,10 +509,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForStringInURL(url);
 	}
 
-	public void openSpecialPage(String specialPage) {
-		getUrl(Global.DOMAIN + specialPage);
-	}
-
 	public SpecialCreatePagePageObject openSpecialCreatePage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialCreatePage);
 		return new SpecialCreatePagePageObject(driver);
@@ -561,7 +525,7 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public void clickLoginOnSpecialPage() {
+	public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
 		waitForElementByElement(specialUserLoginLink);
 		PageObjectLogging.log(
 				"LoginLinkPresent",
@@ -574,6 +538,8 @@ public class WikiBasePageObject extends BasePageObject {
 				"Link to login special page clicked",
 				true, driver
 		);
+
+		return new SpecialUserLoginPageObject(driver);
 	}
 
 	public void verifyNotLoggedInMessage() {
@@ -585,12 +551,6 @@ public class WikiBasePageObject extends BasePageObject {
 				"Not logged in message present",
 				true, driver
 		);
-	}
-
-	public void clickContributeNewPage() {
-		clickContributeButton();
-		waitForElementVisibleByElement(contributeAddPage);
-		scrollAndClick(contributeAddPage);
 	}
 
 	public void logInViaModal(String userName, String password) {
@@ -673,6 +633,17 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 
+	public void logOut(String wikiURL) {
+		try {
+			getUrl(wikiURL + URLsContent.logout);
+		} catch (TimeoutException e) {
+			PageObjectLogging.log("logOut",
+					"page loads for more than 30 seconds", true);
+		}
+		waitForElementByElement(loginButton);
+		PageObjectLogging.log("logOut", "user is logged out", true, driver);
+	}
+
 	public String logInCookie(String userName, String password) {
 			try {
 				DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -743,15 +714,14 @@ public class WikiBasePageObject extends BasePageObject {
 						+ "Token', '" + xmlResponseArr[9]
 						+ "', {'domain': '"+domain+"' , 'path': '/'})");
 				try {
-					driver.get(Global.DOMAIN + "Special:Random");
+					driver.get(Global.DOMAIN + "wiki/Special:Random");
 				} catch (TimeoutException e) {
 					PageObjectLogging.log("loginCookie",
 							"page timeout after login by cookie", true);
 				}
 
 				driver.findElement(By
-						.cssSelector(".AccountNavigation a[href*='User:"
-								+ userName + "']"));// only for verification
+						.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
 				PageObjectLogging.log("loginCookie",
 						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
@@ -848,8 +818,7 @@ public class WikiBasePageObject extends BasePageObject {
 			}
 
 			driver.findElement(By
-					.cssSelector(".AccountNavigation a[href*='User:"
-							+ userName + "']"));// only for verification
+					.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
 			PageObjectLogging.log("loginCookie",
 					"user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];
@@ -906,7 +875,6 @@ public class WikiBasePageObject extends BasePageObject {
 		renameDropdown.click();
 		return new RenamePageObject(driver);
 	}
-
 
 	public DeletePageObject deleteUsingDropdown() {
 		actionsClick(articleEditDropdown);

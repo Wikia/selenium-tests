@@ -6,11 +6,10 @@
 	<test name="testing" preserve-order = "true"> <!-- parallel="classes" thread-count="2"  -->
 		<classes>
 			<!-- Base functionality tests -->
-			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateAWikiTests_latin"/>
-			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateAWikiTests_nonLatin"/>
-			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateAWikiTests_logInFieldValidation"/>
-			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateAWikiTests_lang"/>
-			<class name="com.wikia.webdriver.TestCases.ImageServingTests.ImageServing"/>
+			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateWikiTests_loggedInUser"/>
+			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateWikiTests_loggedOutUser"/>
+			<class name="com.wikia.webdriver.TestCases.CreateAWikiTests.CreateWikiTests_lang"/>
+			<class name="com.wikia.webdriver.TestCases.ImageServingTests.ImageServingTests"/>
 			<class name="com.wikia.webdriver.TestCases.ImageServingTests.ImageStorageTests"/>
 			<class name="com.wikia.webdriver.TestCases.HubsTests.HubsTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>

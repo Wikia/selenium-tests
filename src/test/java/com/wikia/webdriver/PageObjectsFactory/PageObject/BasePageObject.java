@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 
+import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
@@ -249,11 +250,11 @@ public class BasePageObject{
 		return true;
 	}
 
-	public void verifyURLcontains(String GivenString) {
+	public void verifyURLcontains(String givenString) {
 		String currentURL = driver.getCurrentUrl();
-		Assertion.assertStringContains(currentURL, GivenString);
+		Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
 		PageObjectLogging.log("verifyURLcontains",
-				"current url is the same as expetced url", true, driver);
+				"current url is the same as expetced url", true);
 	}
 
 	public void verifyURL(String givenURL) {
@@ -732,6 +733,11 @@ public class BasePageObject{
 		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
 	}
 
+	public void removeQsFromUrl() {
+		driver.get(urlBuilder.removeQueryStringsFromURL(driver.getCurrentUrl()));
+		PageObjectLogging.log("removeQSfromUrl", "qs removed form url", true);
+	}
+
 	public void pressEnter(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
@@ -837,5 +843,13 @@ public class BasePageObject{
 
 	private void restoreDeaultImplicitWait() {
 		changeImplicitWait(timeOut, TimeUnit.SECONDS);
+	}
+
+	protected String getAbsolutePathForFile(String relativePath) {
+		File fileCheck  = new File(relativePath);
+		if (!fileCheck.isFile()) {
+			throw new RuntimeException("file " + relativePath + " doesn't exists");
+		}
+		return fileCheck.getAbsolutePath();
 	}
 }

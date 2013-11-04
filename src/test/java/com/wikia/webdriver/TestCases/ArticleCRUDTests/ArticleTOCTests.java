@@ -89,6 +89,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 	 * 3. user view is sent to the chosen section
 	 */
 	@Test(
+			enabled = false, //QAART-262
 			groups = { "ArticleTOCTests", "ArticleTOCTests_004" },
 			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
 		 )
@@ -152,6 +153,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 	 * 3. user view is sent to the chosen section
 	 */
 	@Test(
+			enabled = false, //QAART-262
 			groups = { "ArticleTOCTests", "ArticleTOCTests_007" },
 			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
 		 )

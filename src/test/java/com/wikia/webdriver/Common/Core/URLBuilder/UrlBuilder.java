@@ -68,4 +68,11 @@ public class UrlBuilder {
 			return temp;
 		}
 	}
+
+	public String removeQueryStringsFromURL(String url) {
+		if (url.contains("?")) {
+			return url.substring(0, url.indexOf("?"));
+		}
+		return url;
+	}
 }

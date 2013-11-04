@@ -18,23 +18,10 @@ public class UserAvatarTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"AvatarTest", "AvatarTest_001"})
-	public void AvatarTest_001_removeAvatar() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
-		String avatarURL = profile.getAvatarUrl();
-		profile.verifyURLStatus(200, avatarURL);
-		profile.clickRemoveAvatar();
-		profile.verifyAvatar(URLsContent.avatarGeneric);
-		profile.verifyURLStatus(404, avatarURL);
-	}
-
 	@Test(
-			groups = {"AvatarTest", "AvatarTest_001"},
-			dependsOnMethods = "AvatarTest_001_removeAvatar"
+			groups = {"AvatarTest", "AvatarTest_001"}
 	)
-	public void AvatarTest_002_uploadAvatar() {
+	public void AvatarTest_001_uploadAvatar() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
@@ -44,5 +31,20 @@ public class UserAvatarTests extends NewTestTemplate {
 		profile.verifyAvatar(credentials.userNameStaffId);
 		String avatarURL = profile.getAvatarUrl();
 		profile.verifyURLStatus(200, avatarURL);
+	}
+
+	@Test(
+			groups = {"AvatarTest", "AvatarTest_002"},
+			dependsOnMethods = "AvatarTest_001_uploadAvatar"
+	)
+	public void AvatarTest_002_removeAvatar() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
+		String avatarURL = profile.getAvatarUrl();
+		profile.verifyURLStatus(200, avatarURL);
+		profile.clickRemoveAvatar();
+		profile.verifyAvatar(URLsContent.avatarGeneric);
+		profile.verifyURLStatus(404, avatarURL);
 	}
 }

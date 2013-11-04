@@ -117,7 +117,7 @@ public class SignUpTests extends NewTestTemplate {
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
 		String wikiName = createNewWiki1.getWikiName();
 		createNewWiki1.typeInWikiName(wikiName);
-		createNewWiki1.waitForSuccessIcon();
+		createNewWiki1.verifySuccessIcon();
 		CreateNewWikiLogInSignUpPageObject CNWSignUpPage = createNewWiki1.submitToLogInSignUp();
 		SignUpPageObject signUp = CNWSignUpPage.submitSignup();
 		signUp.disableCaptcha();
