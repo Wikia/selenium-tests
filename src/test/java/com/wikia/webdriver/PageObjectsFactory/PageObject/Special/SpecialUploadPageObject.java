@@ -34,7 +34,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 
 	public void selectFileToUpload(String file){
 		browseForFileInput.sendKeys(
-				getAbsolutePath(PageContent.resourcesPath + file)
+				getAbsolutePathForFile(PageContent.resourcesPath + file)
 		);
 		PageObjectLogging.log(
 				"typeInFileToUploadPath",

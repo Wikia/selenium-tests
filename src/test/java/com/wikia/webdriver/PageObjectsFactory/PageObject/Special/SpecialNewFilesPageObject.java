@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +35,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	@FindBy(css="section[id='UploadPhotosWrapper']")
 	private WebElement uploadPhotoDialog;
 	@FindBy(css="div.wikia-gallery div.wikia-gallery-item img")
-	private WebElement wikiaPreviewImgCssSelector;
+	private WebElement wikiaPreviewImg;
 	@FindBys(@FindBy(css="#mw-content-text img"))
 	private List<WebElement> imagesNewFiles;
 
@@ -81,7 +82,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
 	public void selectFileToUpload(String file) {
 		browseForFileInput.sendKeys(
-				getAbsolutePath(PageContent.resourcesPath + file)
+				getAbsolutePathForFile(PageContent.resourcesPath + file)
 		);
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 	}
@@ -89,7 +90,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	public void verifyFileUploaded(String fileName) {
 		driver.navigate().refresh();
 		waitForValueToBePresentInElementsAttributeByElement(
-				wikiaPreviewImgCssSelector,
+				wikiaPreviewImg,
 				"src",
 				fileName);
 		PageObjectLogging.log(
@@ -132,7 +133,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 				return href;
 			}
 		}
-		throw new RuntimeException("there is no " + imageName + " on Special:NewFiles page");
+		throw new NoSuchElementException("there is no " + imageName + " on Special:NewFiles page");
 	}
 
 	public FilePagePageObject openRandomImage() {
