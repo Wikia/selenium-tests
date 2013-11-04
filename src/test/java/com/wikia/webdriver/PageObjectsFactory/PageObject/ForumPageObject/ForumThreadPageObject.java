@@ -15,7 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEdi
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
- * Abstract representation of a Forum Thread. 
+ * Abstract representation of a Forum Thread.
  * Example: http://mediawiki119.wikia.com/wiki/Thread:41679
  */
 
@@ -37,9 +37,9 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement closeThreadButton;
 	@FindBy(css=".WikiaMenuElement .reopen-thread")
 	private WebElement reopenThreadButton;
-	@FindBy(css="#WallMoveModal select")
+	@FindBy(css="#WallMoveModalWrapper select")
 	private WebElement moveThreadModal_selectElement;
-	@FindBy(css="#WallMoveModal button.submit")
+	@FindBy(css="#WallMoveModalWrapper button.submit")
 	private WebElement moveThreadModal_moveThreadButton;
 	@FindBy(css=".wall-action-reason")
 	private WebElement removeThreadModal_Textarea;
@@ -59,11 +59,11 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement movedThreadText;
 
 	By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
-	
+
 	private String wikiaEditorTextarea = "textarea.replyBody";
-	
+
 	MiniEditorComponentObject miniEditor;
-	
+
 	public ForumThreadPageObject(WebDriver driver) {
 		super(driver);
 		miniEditor = new MiniEditorComponentObject(driver);
