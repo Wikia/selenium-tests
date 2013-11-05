@@ -87,7 +87,7 @@ public class editingLocalCssTests extends TestTemplate {
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-298
 	 */
-	@Test(groups = {"editingLocalCss_006", "editingLocalCss", "AdminDashboard"})
+	@Test(enabled = false, groups = {"editingLocalCss_006", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_006_UserWithAdminRightsTriesToEditWikiaCssUsingParameter() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.openWikiPage();
@@ -101,7 +101,7 @@ public class editingLocalCssTests extends TestTemplate {
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-299
 	 */
-	@Test(groups = {"editingLocalCss_007", "editingLocalCss", "AdminDashboard"})
+	@Test(enabled = false, groups = {"editingLocalCss_007", "editingLocalCss", "AdminDashboard"})
 	public void editingLocalCss_007_MonobookUserWithAdminRightsEditsWikiaCss() {
 		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
 		loginMonobook.open();

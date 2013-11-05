@@ -215,6 +215,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialCssPageObject(driver);
 	}
 
+	public SpecialCssPageObject openSpecialCss(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCSS);
+		return new SpecialCssPageObject(driver);
+	}
+
 	public SpecialUploadPageObject openSpecialUpload(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUpload);
 		return new SpecialUploadPageObject(driver);

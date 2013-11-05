@@ -546,6 +546,14 @@ public class BasePageObject{
 		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
 	}
 
+	public void waitForAlertAndAccept() {
+		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert = driver.switchTo().alert();
+		String alertText = alert.getText();
+		alert.accept();
+		PageObjectLogging.log("waitForAlertAndAccept", "detected and closed alert with text " + alertText, true);
+	}
+
 	public String getTimeStamp() {
 		Date time = new Date();
 		long timeCurrent = time.getTime();
