@@ -32,7 +32,7 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		ve = new VisualEditorPageObject(driver);
 	}
 
-	@Test(groups = {"VisualEditorStyles", "VisualEditorStyles_001"},
+	@Test(groups = {"VisualEditorStylesFullText", "VisualEditorStyles_001"},
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_001_FullText(Style style) {
@@ -45,7 +45,7 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		article.verifyStyle(style, text);
 	}
 
-	@Test(groups = {"VisualEditorStyles", "VisualEditorStyles_002"},
+	@Test(groups = {"VisualEditorStylesSelectedText", "VisualEditorStyles_002"},
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_002_SelectedText(Style style) {
