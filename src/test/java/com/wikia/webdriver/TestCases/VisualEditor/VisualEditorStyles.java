@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -32,10 +33,11 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		ve = new VisualEditorPageObject(driver);
 	}
 
-	@Test(groups = {"VisualEditorStyles", "VisualEditorStyles_001"},
+	@Test(groups = {"VisualEditorStylesFullText", "VisualEditorStyles_001"},
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_001_FullText(Style style) {
+		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
 		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
 		ve.selectStyle(style);
 		ve.write(text);
@@ -45,10 +47,11 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 		article.verifyStyle(style, text);
 	}
 
-	@Test(groups = {"VisualEditorStyles", "VisualEditorStyles_002"},
+	@Test(groups = {"VisualEditorStylesSelectedText", "VisualEditorStyles_002"},
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_002_SelectedText(Style style) {
+		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
 		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
 		ve.write(text);
 

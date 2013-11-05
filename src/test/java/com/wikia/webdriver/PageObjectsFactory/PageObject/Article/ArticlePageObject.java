@@ -152,7 +152,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 
 	public void verifyFormatting(Formatting format, String content) {
-		waitForElementVisibleByElement(articleContentContainer);
+		waitForElementByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(format.getTag());
 		boolean isPresent = false;
 		for (WebElement elem : elements) {
@@ -165,6 +165,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyStyle(Style style, String content) {
+		waitForElementByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
 		boolean isPresent = false;
 		for (WebElement elem : elements) {
