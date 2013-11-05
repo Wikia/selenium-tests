@@ -188,6 +188,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void selectPhotosVideos() {
+		waitForElementVisibleByElement(photosVideos);
 		photosVideos.click();
 		waitForElementByElement(sortingOptions);
 		PageObjectLogging.log("selectPhotosVideos", "Photos and videos option is selected", true, driver);
