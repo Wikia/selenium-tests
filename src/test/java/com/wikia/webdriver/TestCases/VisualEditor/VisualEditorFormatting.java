@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -47,6 +48,7 @@ public class VisualEditorFormatting extends NewTestTemplateBeforeClass {
 			dataProvider = "getFormatting"
 	)
 	public void VisualEditorFormatting_001(Formatting format) {
+		PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
 		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
 		ve.selectFormatting(format);
 		ve.write(text);
