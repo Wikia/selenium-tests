@@ -129,7 +129,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
 
-	private String loggedInUserSelector = ".AccountNavigation a[href*=%userName%]";
+	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
+	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
 
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
@@ -207,6 +208,11 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
 		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
+		return new SpecialAdminDashboardPageObject(driver);
+	}
+
+	public SpecialAdminDashboardPageObject openSpecialAdminDashboard(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
 	}
 
@@ -726,7 +732,7 @@ public class WikiBasePageObject extends BasePageObject {
 				}
 
 				driver.findElement(By
-						.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
+						.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
 				PageObjectLogging.log("loginCookie",
 						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
@@ -821,9 +827,15 @@ public class WikiBasePageObject extends BasePageObject {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);
 			}
-
-			driver.findElement(By
-					.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
+			if (executeScriptRet("skin").equals("monobook")) {
+				driver.findElement(By
+						.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName)));// only for verification
+			}
+			else {
+				//oasis
+				driver.findElement(By
+						.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
+			}
 			PageObjectLogging.log("loginCookie",
 					"user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];

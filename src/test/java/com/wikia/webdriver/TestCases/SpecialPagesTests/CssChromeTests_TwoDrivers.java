@@ -15,7 +15,7 @@ public class CssChromeTests_TwoDrivers extends TestTemplate_Two_Drivers {
 	 * https://wikia-inc.atlassian.net/browse/DAR-731 stories description
 	 * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
 	 */
-	@Test(groups = {"cssChromeTwoDrivers_001", "cssChrome"})
+	@Test(enabled = false, groups = {"cssChromeTwoDrivers_001", "cssChrome"})
 	public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision()
 	{
 		//first user opens the special:CSS

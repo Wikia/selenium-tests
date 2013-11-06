@@ -3,13 +3,12 @@ package com.wikia.webdriver.TestCases.AdminDashboardTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginMonobookPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiArticleMonoBookPageObject;
 
 
@@ -18,98 +17,53 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPageMonoBook.WikiAr
  *
  * @author wikia
  */
-public class editingLocalCssTests extends TestTemplate {
+public class EditingLocalCssTests extends NewTestTemplate {
+
+	Credentials credentials = config.getCredentials();
 
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-293
+	 * https://wikia-inc.atlassian.net/browse/DAR-298
 	 */
-	@Test(groups = {"editingLocalCss_001", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_001_UserWithAdminRightsTriesToEditWikiaCss() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		wiki.openArticle(URLsContent.mediaWikiCss);
-		wiki.clickEditButton();
-		wiki.verifyUrl(URLsContent.specialCSS);
+	@Test(groups = {"EditingLocalCss_001", "editingLocalCss", "AdminDashboard"})
+	public void EditingLocalCss_001_UserWithAdminRightsTriesToEditWikiaCss() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
+		VisualEditModePageObject edit = article.goToCurrentArticleEditPage();
+		edit.verifyUrl(URLsContent.specialCSS);
 	}
 
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-294
-	 */
-	@Test(groups = {"editingLocalCss_002", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userName, Properties.password);
-		wiki.openArticle(URLsContent.mediaWikiCss);
-		wiki.verifyEditButtonNotPresent();
-	}
-
-	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-295
-	 */
-	@Test(groups = {"editingLocalCss_003", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_003_UserWithoutAdminRightsTriesToAccessWikiaCssUsingParameter() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userName, Properties.password);
-		wiki.openArticle(URLsContent.mediaWikiCss);
-		wiki.appendToUrl(URLsContent.actionEditParameter);
-		wiki.verifyPermissionsErrorsPresent();
-	}
-
-	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-296
-	 */
-	@Test(groups = {"editingLocalCss_004", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_004_AnonHasNoEditOptionOnMediawikiWikiaCss() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		wiki.openArticle(URLsContent.mediaWikiCss);
-		wiki.verifyEditButtonNotPresent();
-	}
-
-	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-297
+	 *
 	 */
-	@Test(groups = {"editingLocalCss_005", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_005_AnonTriesToAccessWikiaCssUsingParameter() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		wiki.openArticle(URLsContent.mediaWikiCss);
-		wiki.appendToUrl(URLsContent.actionEditParameter);
-		wiki.verifyPermissionsErrorsPresent();
-	}
-
-	/**
-	 * https://wikia-inc.atlassian.net/browse/DAR-298
-	 */
-	@Test(enabled = false, groups = {"editingLocalCss_006", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_006_UserWithAdminRightsTriesToEditWikiaCssUsingParameter() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		wiki.openArticle(URLsContent.mediaWikiCss);
-		wiki.appendToUrl(URLsContent.actionEditParameter);
-		wiki.verifyUrl(URLsContent.specialCSS);
+	@Test(groups = {"EditingLocalCss_002", "editingLocalCss", "AdminDashboard"})
+	public void EditingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
+		article.verifyEditButtonNotPresent();
+		article.goToCurrentArticleEditPage();
+		article.verifyPermissionsErrorsPresent();
+		article.logInCookie(credentials.userName, credentials.password, wikiURL);
+		article.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
+		article.verifyEditButtonNotPresent();
+		article.goToCurrentArticleEditPage();
+		article.verifyPermissionsErrorsPresent();
 	}
 
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-299
 	 */
-	@Test(enabled = false, groups = {"editingLocalCss_007", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_007_MonobookUserWithAdminRightsEditsWikiaCss() {
-		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
-		loginMonobook.open();
-		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordMonobook, "");
-		loginMonobook.submitForm();
-		loginMonobook.verifyLogin();
+	@Test(groups = {"EditingLocalCss_003", "editingLocalCss", "AdminDashboard"})
+	public void EditingLocalCss_003_MonobookUserWithAdminRightsEditsWikiaCss() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
 		WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
-		monobookArticle.openArticle(URLsContent.mediaWikiCss);
+		monobookArticle.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
 		monobookArticle.clickEdit();
 		monobookArticle.verifyEditionArea();
 	}
@@ -117,30 +71,24 @@ public class editingLocalCssTests extends TestTemplate {
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-300
 	 */
-	@Test(groups = {"editingLocalCss_008", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_008_MonobookUserWithAdminRightsOpensSpecialCss() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		SpecialUserLoginMonobookPageObject loginMonobook = new SpecialUserLoginMonobookPageObject(driver);
-		loginMonobook.open();
-		loginMonobook.fillLoginForm(Properties.userNameMonobook, Properties.passwordMonobook, "");
-		loginMonobook.submitForm();
-		loginMonobook.verifyLogin();
+	@Test(groups = {"EditingLocalCss_004", "editingLocalCss", "AdminDashboard"})
+	public void EditingLocalCss_004_MonobookUserWithAdminRightsOpensSpecialCss() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameMonobook, credentials.passwordMonobook, wikiURL);
 		WikiArticleMonoBookPageObject monobookArticle = new WikiArticleMonoBookPageObject(driver);
-		SpecialCssPageObject specialCss = wiki.openSpecialCss();
+		monobookArticle.openSpecialCss(wikiURL);
 		monobookArticle.verifyOasisOnly();
 	}
 
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-302
 	 */
-	@Test(groups = {"editingLocalCss_009", "editingLocalCss", "AdminDashboard"})
-	public void editingLocalCss_009_UserWithAdminRightsTriesToAccesSpecialCssFromAdminDashboard() {
-		WikiBasePageObject wiki = new WikiBasePageObject(driver);
-		wiki.openWikiPage();
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		SpecialAdminDashboardPageObject adminDashboard = wiki.openSpecialAdminDashboard();
+	@Test(groups = {"EditingLocalCss_005", "editingLocalCss", "AdminDashboard"})
+	public void EditingLocalCss_005_UserWithAdminRightsTriesToAccesSpecialCssFromAdminDashboard() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialAdminDashboardPageObject adminDashboard = base.openSpecialAdminDashboard(wikiURL);
 		adminDashboard.clickCssTool();
-		wiki.verifyUrl(URLsContent.specialCSS);
+		adminDashboard.verifyUrl(URLsContent.specialCSS);
 	}
 }
