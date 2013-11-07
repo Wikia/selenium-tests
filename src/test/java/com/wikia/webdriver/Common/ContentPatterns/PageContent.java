@@ -78,6 +78,8 @@ public class PageContent {
 	public static String forumMessage = "QAforumMessage";
 	public static String forumBoard = "QABoardForMoveThreadTest";
 	public static String closeReason = "QA reason";
+	public static String followAttributeName = "data-iswatched";
+	public static String followAttributeValue = "1";
 
 	//Messages
 	public static String articleDeletedMessage = "This page has been deleted.";

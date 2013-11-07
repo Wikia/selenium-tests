@@ -134,4 +134,34 @@ public class MessageWallTests extends NewTestTemplate {
 		wall.submitQuote();
 		wall.verifyQuote(reply);
 	}
+
+	/**
+	 * DAR-2318
+	 * 1. As a logged user open another user's Wall
+	 * 2. Leave a message on the wall
+	 * 3. Check if you follow the last message
+	 * 4. Edit the last message
+	 * 5. Check if you follow the last message
+	 */
+	@Test(groups = {"MessageWall_007", "MessageWall"})
+	public void MessageWall_007_followThread() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userName2, wikiURL);
+		MiniEditorComponentObject mini = wall.triggerMessageArea();
+		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		mini.switchAndWrite(message);
+		wall.writeTitle(title);
+		wall.submit();
+		wall.verifyMessageText(title, message, credentials.userName);
+		wall.verifyDiscussionFollow(title, true);
+		wall.triggerEditMessageArea();
+		String messageEdit = PageContent.messageWallMessageEditPrefix + wall.getTimeStamp();
+		mini.switchAndEditMessageWall(messageEdit);
+		wall.submitEdition();
+		wall.verifyMessageEditText(title, messageEdit, credentials.userName);
+		wall.verifyDiscussionFollow(title, true);
+	}
+
 }

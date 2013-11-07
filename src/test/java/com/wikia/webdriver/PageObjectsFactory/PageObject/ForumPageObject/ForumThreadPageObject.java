@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -57,6 +59,10 @@ public class ForumThreadPageObject extends BasePageObject{
 	private List<WebElement> discussionBody;
 	@FindBy(xpath="//div[@class='msg-toolbar']//a[contains(text(), 'Thread moved by')]")
 	private WebElement movedThreadText;
+	@FindBy(css="a.follow")
+	private WebElement followButton;
+	@FindBy(css=".WikiaMenuElement .edit-notifyeveryone")
+	private WebElement hightlightThreadButton;
 
 	By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
 	
@@ -210,4 +216,48 @@ public class ForumThreadPageObject extends BasePageObject{
 		PageObjectLogging.log("openHistory", "thread history page opened", true, driver);
 		return new ForumHistoryPageObject(driver);
 	}
+
+	/**
+	 * Checks if discussion is followed
+	 * @param title - title of the discussion to verify
+	 * @param isFollowing - with this variable you decide what is the expected discussion follow state
+	 */
+	public void verifyDiscussionFollow(String title, boolean isFollowing) {
+		waitForElementByElement(discussionTitle);
+		waitForElementByElement(followButton);
+		waitForTextToBePresentInElementByElement(discussionTitle, title);
+		Assertion.assertEquals(
+				getAttributeValue(followButton, PageContent.followAttributeName).equals(PageContent.followAttributeValue),
+				isFollowing
+		);
+		PageObjectLogging.log("verifyDiscussionFollow", "thread: " + title + "following checked", true, driver);
+	}
+
+	/**
+	 * Clicks the highlight thread button in forum
+	 * @param highlight - decide if you wan't to highlight or unhighlight the Thread
+	 */
+	public void clickOnHightlightThreadButton(boolean highlight) {
+		waitForElementByElement(hightlightThreadButton);
+		waitForElementClickableByElement(hightlightThreadButton);
+		scrollAndClick(hightlightThreadButton);
+		if (highlight) {
+			waitForElementByCss(".removed");
+		} else {
+			waitForElementNotVisibleByBy(By.cssSelector(".removed"));
+		}
+		PageObjectLogging.log("clickOnHightlightThreadButton", "click on '" +
+			(highlight ? "highlight": "unhighlight") + " thread' button on a message", true);
+	}
+
+	public void highlightThread() {
+		clickOnMoreButton();
+		clickOnHightlightThreadButton(true);
+	}
+
+	public void unHighlightThread() {
+		clickOnMoreButton();
+		clickOnHightlightThreadButton(false);
+	}
+
 }
