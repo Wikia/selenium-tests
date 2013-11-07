@@ -225,7 +225,7 @@ public class ForumThreadPageObject extends BasePageObject{
 				getAttributeValue(followButton, PageContent.followAttributeName).equals(PageContent.followAttributeValue),
 				isFollowing
 		);
-		PageObjectLogging.log("verifyDiscussionFollow", "thread following checked", true, driver);
+		PageObjectLogging.log("verifyDiscussionFollow", "thread: " + title + "following checked", true, driver);
 	}
 
 	public void clickOnHightlightThreadButton(boolean highlight) {
