@@ -134,4 +134,26 @@ public class MessageWallTests extends NewTestTemplate {
 		wall.submitQuote();
 		wall.verifyQuote(reply);
 	}
+
+	@Test(groups = {"MessageWall_007", "MessageWall", "Smoke3"})
+	public void MessageWall_007_followThread() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userName2, wikiURL);
+		MiniEditorComponentObject mini = wall.triggerMessageArea();
+		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		mini.switchAndWrite(message);
+		wall.writeTitle(title);
+		wall.submit();
+		wall.verifyMessageText(title, message, credentials.userName);
+		wall.verifyDiscussionFollow(title, true);
+		wall.triggerEditMessageArea();
+		String messageEdit = PageContent.messageWallMessageEditPrefix + wall.getTimeStamp();
+		mini.switchAndEditMessageWall(messageEdit);
+		wall.submitEdition();
+		wall.verifyMessageEditText(title, messageEdit, credentials.userName);
+		wall.verifyDiscussionFollow(title, true);
+	}
+
 }
