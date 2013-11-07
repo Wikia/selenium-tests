@@ -135,7 +135,7 @@ public class MessageWallTests extends NewTestTemplate {
 		wall.verifyQuote(reply);
 	}
 
-	@Test(groups = {"MessageWall_007", "MessageWall", "Smoke3"})
+	@Test(groups = {"MessageWall_007", "MessageWall"})
 	public void MessageWall_007_followThread() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
