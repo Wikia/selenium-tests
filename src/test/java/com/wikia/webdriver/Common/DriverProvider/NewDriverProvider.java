@@ -3,7 +3,6 @@ package com.wikia.webdriver.Common.DriverProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -28,6 +27,7 @@ import com.wikia.webdriver.Common.Core.Global;
 public class NewDriverProvider {
 
 	private static EventFiringWebDriver driver;
+	private static EventFiringWebDriver driverFF;
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 
@@ -61,7 +61,11 @@ public class NewDriverProvider {
 	}
 
 	public static  WebDriver getWebDriver() {
-            return driver;
+		return driver;
+	}
+
+	public static  WebDriver getWebDriverFirefox() {
+		return driverFF;
 	}
 
 	private static EventFiringWebDriver getIEInstance() {

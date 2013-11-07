@@ -1,6 +1,7 @@
 package com.wikia.webdriver.Common.Templates;
 
 import java.lang.reflect.Method;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

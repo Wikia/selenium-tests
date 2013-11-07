@@ -81,6 +81,9 @@ public class Credentials {
 	public String userNameStaffId;
 	public String passwordStaff;
 
+	public String userNameStaff2;
+	public String passwordStaff2;
+
 	public String userNameMonobook;
 	public String passwordMonobook;
 
@@ -147,6 +150,9 @@ public class Credentials {
 		userNameStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.username");
 		userNameStaffId = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.id");
 		passwordStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.password");
+
+		userNameStaff2 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff2.username");
+		passwordStaff2 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff2.password");
 
 		userNameMonobook = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiamonobook.username");
 		passwordMonobook = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiamonobook.password");

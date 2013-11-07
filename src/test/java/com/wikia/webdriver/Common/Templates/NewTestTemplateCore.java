@@ -27,6 +27,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 public class NewTestTemplateCore {
 
 	protected WebDriver driver;
+	protected WebDriver driverFF;
 	protected AbstractConfiguration config;
 	protected String wikiURL;
 	protected String wikiCorporateURL;
@@ -66,14 +67,31 @@ public class NewTestTemplateCore {
 		driver = eventDriver;
 	}
 
+	protected void startBrowserFirefox() {
+		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser (
+				"FF"
+				);
+		eventDriver.register(new PageObjectLogging());
+		driverFF = eventDriver;
+	}
+
 	protected void logOut() {
 		driver.get(wikiURL + URLsContent.logout);
 	}
 
+	protected void logOutFirefox() {
+		driverFF.get(wikiURL + URLsContent.logout);
+	}
+
 	protected void stopBrowser() {
-		driver = NewDriverProvider.getWebDriver();
 		if (driver != null) {
 			driver.quit();
+		}
+	}
+
+	protected void stopBrowserFirefox() {
+		if (driverFF != null) {
+			driverFF.quit();
 		}
 	}
 
