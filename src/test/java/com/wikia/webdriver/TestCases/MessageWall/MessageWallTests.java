@@ -161,6 +161,7 @@ public class MessageWallTests extends NewTestTemplate {
 		mini.switchAndEditMessageWall(messageEdit);
 		wall.submitEdition();
 		wall.verifyMessageEditText(title, messageEdit, credentials.userName);
+		wall.refreshPage();
 		wall.verifyDiscussionFollow(title, true);
 	}
 

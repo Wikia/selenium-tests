@@ -227,8 +227,10 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementByElement(followButton);
 		waitForTextToBePresentInElementByElement(discussionTitle, title);
 		Assertion.assertEquals(
-				getAttributeValue(followButton, PageContent.followAttributeName).equals(PageContent.followAttributeValue),
-				isFollowing
+				getAttributeValue(followButton, PageContent.followAttributeName).equals(PageContent.followAttributeValue) ?
+						"Following" :
+						"Not Following",
+				isFollowing ? "Following" : "Not Following"
 		);
 		PageObjectLogging.log("verifyDiscussionFollow", "thread: " + title + "following checked", true, driver);
 	}

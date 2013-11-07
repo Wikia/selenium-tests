@@ -349,8 +349,10 @@ public class NewMessageWall extends WikiBasePageObject {
 	public void verifyDiscussionFollow(String title, boolean isFollowing) {
 		waitForTextToBePresentInElementByBy(messageTitleBy, title);
 		Assertion.assertEquals(
-				driver.findElement(firstMessageWrapperBy).findElement(followButtonBy).getAttribute(PageContent.followAttributeName).equals(PageContent.followAttributeValue),
-				isFollowing
+				driver.findElement(firstMessageWrapperBy).findElement(followButtonBy).getAttribute(PageContent.followAttributeName).equals(PageContent.followAttributeValue) ?
+						"Following" :
+						"Not following",
+				isFollowing ? "Following" : "Not following"
 		);
 		PageObjectLogging.log("verifyDiscussionFollow", title + " message " + (isFollowing ? "followed" : "unfollowed"), true, driver);
 	}
