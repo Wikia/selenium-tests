@@ -184,8 +184,7 @@ public class BasePageObject{
 		return value;
 	}
 
-	protected void scrollAndClick(WebElement element)
-	{
+	protected void scrollAndClick(WebElement element) {
 		scrollToElement(element);
 		element.click();
 	}
@@ -195,8 +194,7 @@ public class BasePageObject{
 		try {
 			js.executeScript(
 					"var x = $(arguments[0]);"
-					+ "window.scroll(0,x.position()['top']+x.height()+100);"
-					+ "$(window).trigger('scroll');",
+					+ "window.scroll(0,parseInt(x.offset().top));",
 					element
 			);
 		} catch (WebDriverException e) {
