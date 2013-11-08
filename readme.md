@@ -26,15 +26,15 @@ Using Maven, you may now run any tests you want on whatever database and domain 
 
 Example command:
 
-#### Running tests on preview for mediawiki119 wikia
+##### Running tests on preview for mediawiki119 wikia
 
     mvn clean test -Dbrowser=FF -Denv=preview -DwikiName=mediawiki119 -Dgroups=Login
 
-#### Running tests on production for mediawiki119 wikia
+##### Running tests on production for mediawiki119 wikia
 
     mvn clean test -Dbrowser=FF -Denv=prod -DwikiName=mediawiki119 -Dgroups=Login
 
-#### Running tests on devbox for muppets wikia
+##### Running tests on devbox for muppets wikia
 
     mvn clean test -Dbrowser=CHROME -Denv=dev-karol -DwikiName=muppets -Dgroups=Login
 
