@@ -52,20 +52,68 @@ The following are valid for use in the `-Dbrowser` parameter:
 
 The following are valid for use in the `-Dgroups` parameter:
 
-* ArticleCRUDAdmin
-* ArticleCRUDAnonymous
-* ArticleFeaturesCRUDAdmin
-* CategoriesTestsAnonymous
+* ArticleCRUDUser
+* ArticleCRUDAnon
+* ArticleComments
+* ArticleEditDropdown
+* ArticleActionsAdmin
+* ArticleFeaturesCRUDAnon
+* ArticleFeaturesCRUDUser
+* ArticleTOCTests
+* AvatarTest
+* BlogTests
+* BlogFeaturesTests
+* BlogCommentsTests
+* CategoriesTestsArticle
+* CategoriesTestsArticleEditMode
 * Chat
 * CNW_lang
 * CNW
+* EditAccountTest
+* FollowArticle
+* FollowBlog
+* FollowPhoto
+* FollowVideo
+* ForumBoardTests
+* ForumEditMode
+* ForumThreadTests
+* ForumNotificationsTests
+* ForgottenPassword
+* ForcedLogin
 * Hubs
 * ImageServing
+* ImageStorageTests
 * Login
 * MessageWall
+* MessageWallFeatures
+* MessageWallNotificationsFollowersMessageTests
+* MessageWallNotificationsFollowersResponseTests
+* MessageWallNotificationsOwnerTests
+* MessageWallNotificationsThreadCreatorTests
+* MessageWallNotificationsThreadParticipantTests
+* MultiWikiFinder
+* RelatedVideo
 * RTE
-* Search
+* RTE_extended
+* CrossWikiSearch
+* IntraWikiSearch
+* IntraWikiSearchExactMatch
+* SignUp
+* SpecialVideo
+* ThemeDesigner
 * Toolbar
+* Top_10_list_Tests
+* UsersAndRights
+* VetAddVideo
+* VetModalAlignment
+* VetModalCaption
+* VetModalWidth
+* VetProvidersRV
+* VetProvidersArticle
+* VideoSuggestions
+* VideoArticlePlacehoder
+* WamPageTests
+* WikiActivity
 
 ## Reading Logs
 
