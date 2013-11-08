@@ -22,11 +22,21 @@ The following steps should get you set up for running Selenium tests locally on 
 
 Using Maven, you may now run any tests you want on whatever database and domain you want:
 
-    mvn clean test -Dbrowser=FF -Dbase-address=<address> -Dgroups=<group> -Dlive-domain=<address>
+    mvn clean test -Dbrowser=<browser> -Denv=<environment> -DwikiName=<wiki> -Dgroups=<group>
 
 Example command:
 
-    mvn clean test -Dbrowser=FF -Dbase-address=http://mediawiki119.wikia.com/ -Dgroups=Login
+#### Running tests on preview for mediawiki119 wikia
+
+    mvn clean test -Dbrowser=FF -Denv=preview -DwikiName=mediawiki119 -Dgroups=Login
+
+#### Running tests on production for mediawiki119 wikia
+
+    mvn clean test -Dbrowser=FF -Denv=prod -DwikiName=mediawiki119 -Dgroups=Login
+
+#### Running tests on devbox for muppets wikia
+
+    mvn clean test -Dbrowser=CHROME -Denv=dev-karol -DwikiName=muppets -Dgroups=Login
 
 If everything goes right it should log in as a QATestsUser.
 
@@ -35,7 +45,9 @@ If everything goes right it should log in as a QATestsUser.
 The following are valid test parameters:
 
 * `-Dbrowser` - Which browser to use, for example "CHROME"
-* `-Dbase-address` - The base URL to run in the browser, for example "http://yourname.wikia-dev.com/"
+* `-Dbase-address` - (Deprecated) The base URL to run in the browser, for example "http://yourname.wikia-dev.com/"
+* `-Denv` - The environment on which the test(s) should be run in, for example "prod", "preview", "dev-<name>", "sandbox-<number>"
+* `-DwikiName` - The wiki where the test(s) should be run on, for example "mediawiki119", "muppet"
 * `-Dgroups` - (Optional) Which test groups to run, for example "Chat". Optional. Uses all tests if omitted
 * `-Dlive-domain` - (Optional) The base URL to run in the browser, for example "http://www.wikia.com/". Only required for Hubs tests
 
