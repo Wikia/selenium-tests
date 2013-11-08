@@ -141,6 +141,7 @@ public class MessageWallTests extends NewTestTemplate {
 	 * 2. Leave a message on the wall
 	 * 3. Check if you follow the last message
 	 * 4. Edit the last message
+	 * 6. Refresh the page
 	 * 5. Check if you follow the last message
 	 */
 	@Test(groups = {"MessageWall_007", "MessageWall"})
