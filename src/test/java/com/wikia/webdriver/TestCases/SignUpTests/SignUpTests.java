@@ -104,7 +104,6 @@ public class SignUpTests extends NewTestTemplate {
 		userProfile.verifyUserLoggedIn(userName);
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
-		userProfile.verifyWelcomeEmail(userName, email, emailPassword);
 		PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
 		preferences.selectTab(tabNames.Email);
 		preferences.verifyEmailMeSection();
