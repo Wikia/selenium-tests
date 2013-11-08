@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +11,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
@@ -61,9 +59,7 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 	}
 
 	public void verifyVideoAdded(String videoDescription) {
-		waitForElementByElement(newestVideo);
-		List<WebElement> videoDescriptonElem = newestVideo.findElements(By.cssSelector("a.image.video span.info-overlay-title"));
-		Assertion.assertEquals(videoDescription, videoDescriptonElem.get(0).getText());
+		waitForTextToBePresentInElementByElement(newestVideo, videoDescription);
 		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);
 	}
 }
