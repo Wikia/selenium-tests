@@ -3,7 +3,8 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsComparisonObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import java.io.IOException;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
@@ -43,7 +44,9 @@ public class TestAdSkinPresence extends AdsTestTemplate {
 		Dimension windowResolution, int skinWidth, String skinLeftSide, String skinRightSide
 	) throws IOException {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-		AdsComparisonObject adsComparison = new AdsComparisonObject(driver, testedPage);
-		adsComparison.checkAdSkinPresenceOnGivenResolution(screenImageUrl, windowResolution, skinWidth, skinLeftSide, skinRightSide);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.checkAdSkinPresenceOnGivenResolution(
+			screenImageUrl, windowResolution, skinWidth, skinLeftSide, skinRightSide
+		);
 	}
 }

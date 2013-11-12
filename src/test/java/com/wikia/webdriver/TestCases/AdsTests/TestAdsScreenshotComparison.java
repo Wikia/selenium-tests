@@ -5,7 +5,7 @@ import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsComparisonObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -38,7 +38,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_001", "PL"}
 	)
 	public void TestAdsInContent_PL() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
@@ -48,7 +48,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_002", "DE"}
 	)
 	public void TestAdsInContent_DE() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
@@ -58,7 +58,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_003", "RU"}
 	)
 	public void TestAdsInContent_RU() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
@@ -68,7 +68,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_004", "JP"}
 	)
 	public void TestAdsInContent_JP() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
@@ -78,7 +78,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_005", "IT"}
 	)
 	public void TestAdsInContent_IT() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
@@ -88,7 +88,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_006", "US"}
 	)
 	public void TestAdsInContent_US() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
@@ -98,7 +98,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_007", "HR"}
 	)
 	public void TestAdsInContent_HR() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
@@ -108,7 +108,7 @@ public class TestAdsScreenshotComparison extends AdsTestTemplate {
 		groups={"Ads_Screenshot_008", "AU"}
 	)
 	public void TestAdsInContent_AU() throws Exception {
-		AdsComparisonObject wikiPage = new AdsComparisonObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}

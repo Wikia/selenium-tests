@@ -4,7 +4,8 @@ import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsComparisonObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -31,8 +32,8 @@ public class TestToolbarAdGPT extends AdsTestTemplate {
 		String wikiName, String path, String base64FilePath, Dimension adSize
 	) throws Exception {
 		String page = urlBuilder.getUrlForPath(wikiName, path);
-		AdsComparisonObject adsComparisonObject = new AdsComparisonObject(driver, page);
-		adsComparisonObject.checkToolbarAdBySize(base64FilePath, adSize);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.checkExpectedToolbar(base64FilePath, adSize);
 	}
 
 	@GeoEdgeProxy(country="GB")
@@ -45,7 +46,7 @@ public class TestToolbarAdGPT extends AdsTestTemplate {
 		String wikiName, String path, String base64FilePath, Dimension adSize
 	) throws Exception {
 		String page = urlBuilder.getUrlForPath(wikiName, path);
-		AdsComparisonObject adsComparisonObject = new AdsComparisonObject(driver, page);
-		adsComparisonObject.checkToolbarAdBySize(base64FilePath, adSize);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, page);
+		wikiPage.checkExpectedToolbar(base64FilePath, adSize);
 	}
 }

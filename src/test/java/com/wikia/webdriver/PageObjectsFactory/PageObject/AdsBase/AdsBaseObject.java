@@ -1,14 +1,19 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +27,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	protected WebElement toolbar;
+	@FindBy(css="#WikiaPage")
+	private WebElement wikiaArticle;
 
 	protected Boolean isWikiMainPage;
 
@@ -35,9 +42,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 		AdsContent.setSlotsSelectors();
 		getUrl(page);
 		isWikiMainPage = checkIfMainPage();
+		setPresentTopLeaderboard();
+		setPresentMedrec();
 	}
 
-	protected void setPresentTopLeaderboard() {
+	protected final void setPresentTopLeaderboard() {
 		if (isWikiMainPage) {
 			presentLB = driver.findElement(
 				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeTopLB))
@@ -51,7 +60,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	protected void setPresentMedrec() {
+	protected final void setPresentMedrec() {
 		if (isWikiMainPage) {
 			presentMD = driver.findElement(
 				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeMedrec))
@@ -65,30 +74,142 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	protected WebElement getPresentTopLeaderBoard() {
-		return presentLB;
-	}
-
-	protected WebElement getPresentMedrec() {
-		return presentMD;
-	}
-
-
-	public void verifyMedrecPresent() throws Exception {
-		if (isWikiMainPage) {
-			presentMD = driver.findElement(
-				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeMedrec))
+	public void checkMedrec() {
+		AdsComparison adsComparison = new AdsComparison();
+		boolean result = adsComparison.compareSlotOnOff(
+			presentMD, AdsContent.getSlotSelector(presentMDName), driver
+		);
+		if(result) {
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots look the same", false
 			);
-			presentMDName = AdsContent.homeMedrec;
+			throw new NoSuchElementException(
+				"Screenshots of element on/off look the same."
+				+ "Most probable ad is not present; CSS "
+				+ AdsContent.getSlotSelector(presentMDName)
+			);
 		} else {
-			presentMD = driver.findElement(
-				By.cssSelector(AdsContent.getSlotSelector(AdsContent.medrec))
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots are different", true
 			);
-			presentMDName = AdsContent.medrec;
 		}
-		waitForElementByElement(presentMD);
-		checkScriptPresentInSlotScripts(presentMDName, presentMD);
-		checkTagsPresent(presentMD);
+	}
+
+	public void checkTopLeaderboard() {
+		AdsComparison adsComparison = new AdsComparison();
+		boolean result = adsComparison.compareSlotOnOff(
+			presentLB, AdsContent.getSlotSelector(presentLBName), driver
+		);
+		if(result) {
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots look the same", false
+			);
+			throw new NoSuchElementException(
+				"Screenshots of element on/off look the same."
+				+ "Most probable ad is not present; CSS "
+				+ AdsContent.getSlotSelector(presentLBName)
+			);
+		} else {
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots are different", true
+			);
+		}
+	}
+
+	/**
+	 * Check Ad skin on page with provided resolution.
+	 * Compare left and right sides of skin with provided Base64.
+	 * @param adSkinUrl - DFP link with ad skin image
+	 * @param windowResolution - resolution
+	 * @param skinWidth - skin width on the sides of the article
+	 * @param expectedAdSkinLeftPart - path to file with expected skin encoded in Base64
+	 * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
+	 * @throws IOException
+	 */
+	public void checkAdSkinPresenceOnGivenResolution(
+		String adSkinUrl, Dimension windowResolution, int skinWidth,
+		String expectedAdSkinLeftPart, String expectedAdSkinRightPart
+	) throws IOException {
+		Shooter shooter = new Shooter();
+
+		String backgroundImageUrlAfter = getPseudoElementValue(
+			body, ":after", "backgroundImage"
+		);
+		Assertion.assertStringContains(backgroundImageUrlAfter, adSkinUrl);
+
+		String backgroundImageUrlBefore = getPseudoElementValue(
+			body, ":before", "backgroundImage"
+		);
+		Assertion.assertStringContains(backgroundImageUrlBefore, adSkinUrl);
+
+
+		driver.manage().window().setSize(windowResolution);
+
+		PageObjectLogging.log(
+			"ScreenshotPage",
+			"Screenshot of the page taken",
+			true, driver
+		);
+
+		AdsComparison adsComparison = new AdsComparison();
+		int articleLocationX = wikiaArticle.getLocation().x;
+		int articleWidth = wikiaArticle.getSize().width;
+		Point articleLeftSideStartPoint = new Point(articleLocationX - skinWidth,100);
+		Point articleRightSideStartPoint = new Point(articleLocationX + articleWidth,100);
+		Dimension skinSize = new Dimension(skinWidth, 500);
+
+		boolean successLeft = adsComparison.compareImageWithScreenshot(
+			expectedAdSkinLeftPart, skinSize, articleLeftSideStartPoint, driver
+		);
+		if (successLeft) {
+			PageObjectLogging.log(
+				"ExpectedSkinFound", "Expected ad skin found on page - left side of skin", true
+			);
+		} else {
+			PageObjectLogging.log(
+				"ExpectedSkinNotFound", "Expected ad skin not found on page - left side of skin", false, driver
+			);
+		}
+
+		boolean successRight = adsComparison.compareImageWithScreenshot(
+			expectedAdSkinRightPart, skinSize, articleRightSideStartPoint, driver
+		);
+		if (successRight) {
+			PageObjectLogging.log(
+				"ExpectedSkinFound", "Expected ad skin found on page - right side of skin", true
+			);
+		} else {
+			PageObjectLogging.log(
+				"ExpectedSkinNotFound", "Expected ad skin not found on page - right side of skin", false, driver
+			);
+		}
+
+		if (!successLeft || !successRight) {
+			throw new NoSuchElementException("Skin not found on page");
+		}
+	}
+
+	public void checkExpectedToolbar(
+		String expectedToolbarFilePath, Dimension expectedToolbarSize
+	) throws IOException {
+		AdsComparison adsComparison = new AdsComparison();
+		boolean result = adsComparison.compareElementWithScreenshot(
+			toolbar, expectedToolbarFilePath, expectedToolbarSize, driver
+		);
+		if (result) {
+			PageObjectLogging.log(
+				"ExpectedAdFound", "Expected ad found in toolbar", true
+			);
+		} else {
+			PageObjectLogging.log(
+				"ExpectedAdNotFound", "Expected ad not found in toolbar", false
+			);
+			throw new NoSuchElementException(
+				"Expected ad not found on page"
+				+ "CSS: "
+				+ AdsContent.wikiaBarSelector
+			);
+		}
 	}
 
 	public void verifyPrefooters() {
@@ -140,24 +261,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	protected void hideSlot(String slotSelector) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		// Find ad-containing element and set visibility = hidden on it
-		// Example selector:
-		// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
-		js.executeScript(
-			"var iframe = arguments[0] + ' iframe:visible:first, ';"
-			+ "var object = arguments[0] + ' object:visible:first, ';"
-			+ "var img = arguments[0] + ' img:visible:first';"
-			+ "var element = $(iframe + object + img)[0];"
-			+ "if (element) element.style['visibility'] = 'hidden';",
-			slotSelector
-		);
-		PageObjectLogging.log(
-			"AdInSlotHidden", "Ad in slot hidden; Slot CSS " + slotSelector, true
-		);
-	}
-
 	public void verifyNoLiftiumAdsOnPage() throws Exception {
 		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
 		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
@@ -186,88 +289,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 		waitForElementByElement(aicContainer.findElement(By.cssSelector("div")));
 		return checkTagsPresent(aicContainer);
-	}
-
-	public boolean verifyCorrectAdInMedrec(
-		String acceptableAd, String unacceptableAd
-	) throws Exception {
-		int refreshNumber = 0;
-		while(refreshNumber < 5) {
-			verifyMedrecPresent();
-			Dimension acceptableDimension = new Dimension(1, 1);
-			List<WebElement> iframes = presentMD.findElements(By.cssSelector("iframe"));
-			for (WebElement iframe : iframes) {
-				if (
-					iframe.isDisplayed()
-					&&(iframe.getSize().height >= acceptableDimension.height
-					&&iframe.getSize().width >= acceptableDimension.width)
-				) {
-					driver.switchTo().frame(iframe);
-					if (checkIfElementOnPage("img[src='" + acceptableAd + "']")) {
-						PageObjectLogging.log(
-							"AdFound", "Expected ad found",
-							true
-						);
-						return true;
-					} else if (checkIfElementOnPage("img[src='" + unacceptableAd + "']")) {
-						throw new Exception("Found element that was not expected!");
-					} else {
-						PageObjectLogging.log(
-							"AdNotFound", "Expected ad not found, refreshing the page",
-							true, driver
-						);
-						driver.navigate().refresh();
-						refreshNumber += 1;
-					}
-				}
-			}
-		}
-		return true;
-	}
-
-	public boolean verifyCorrectAdInFloatingMedrec (
-		String acceptableAd, String unacceptableAd
-	) throws Exception {
-		int refreshNumber = 0;
-		while(refreshNumber < 5) {
-			verifyAdsInContent();
-			WebElement floatingMedrec = driver.findElement(
-				By.cssSelector(AdsContent.getSlotSelector("AdsInContent"))
-			);
-			Dimension acceptableDimension = new Dimension(1, 1);
-			List<WebElement> iframes = floatingMedrec.findElements(By.cssSelector("iframe"));
-			for (WebElement iframe : iframes) {
-				if (
-					iframe.isDisplayed()
-					&&(iframe.getSize().height >= acceptableDimension.height
-					&&iframe.getSize().width >= acceptableDimension.width)
-				) {
-					driver.switchTo().frame(iframe);
-					if (checkIfElementOnPage("img[src='" + acceptableAd + "']")) {
-						PageObjectLogging.log(
-							"AdFound", "Expected ad found",
-							true
-						);
-						return true;
-					} else if (checkIfElementOnPage("img[src='" + unacceptableAd + "']")) {
-						throw new Exception("Found element that was not expected!");
-					} else {
-						PageObjectLogging.log(
-							"AdNotFound", "Expected ad not found, refreshing the page",
-							true, driver
-						);
-						driver.navigate().refresh();
-						refreshNumber += 1;
-					}
-				}
-			}
-		}
-		PageObjectLogging.log(
-			"AdNotFound",
-			"Expected ad not found, after refreshing 5 times",
-			false, driver
-		);
-		return true;
 	}
 
 	private boolean checkTagsPresent(WebElement slotElement) {

@@ -73,6 +73,8 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement body;
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
+	@FindBy(css = "body")
+	protected WebElement body;
 	@FindBy(css = "article span.drop")
 	private WebElement editDropDown;
 	@FindBy(css = "input#wpConfirmB")
@@ -610,7 +612,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	protected Boolean checkIfMainPage() {
-		WebElement body = driver.findElement(By.cssSelector("body"));
 		return (body.getAttribute("class").contains("mainpage"));
 	}
 
