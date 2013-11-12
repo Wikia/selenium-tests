@@ -69,6 +69,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_l
 
 public class WikiBasePageObject extends BasePageObject {
 
+	@FindBy(css = "body")
+	private WebElement body;
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
 	@FindBy(css = "article span.drop")
@@ -827,7 +829,8 @@ public class WikiBasePageObject extends BasePageObject {
 				PageObjectLogging.log("loginCookie",
 						"page timeout after login by cookie", true);
 			}
-			if (executeScriptRet("skin").equals("monobook")) {
+
+			if (body.getAttribute("class").contains("skin-monobook")) {
 				driver.findElement(By
 						.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName)));// only for verification
 			}

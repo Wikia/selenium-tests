@@ -60,11 +60,11 @@ public class NewDriverProvider {
 		return driver;
 	}
 
-	public static  WebDriver getWebDriver() {
+	public static WebDriver getWebDriver() {
 		return driver;
 	}
 
-	public static  WebDriver getWebDriverFirefox() {
+	public static WebDriver getWebDriverFirefox() {
 		return driverFF;
 	}
 
