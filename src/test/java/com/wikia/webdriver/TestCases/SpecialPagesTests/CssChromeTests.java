@@ -27,7 +27,7 @@ public class CssChromeTests extends NewTestTemplate {
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-285
 	 */
-	@Test(groups = {"CssChrome_001", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_001", "CssChrome", "AdminDashboard"})
 	public void CssChrome_001_showingErrorWhenWrongSyntax() {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyHighlighting();
@@ -39,7 +39,7 @@ public class CssChromeTests extends NewTestTemplate {
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
-	@Test(groups = {"CssChrome_002", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"})
 	public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.saveCssContent(currentTimestamp);
@@ -50,7 +50,7 @@ public class CssChromeTests extends NewTestTemplate {
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
-	@Test(groups = {"CssChrome_003", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"})
 	public void CssChrome_003_verifyEditSummaryAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.sendEditSummaryText(currentTimestamp);
@@ -64,7 +64,7 @@ public class CssChromeTests extends NewTestTemplate {
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
-	@Test(groups = {"CssChrome_004", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_004", "CssChrome", "AdminDashboard"})
 	public void CssChrome_004_verifyChangesAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.insertCssText("\n" + currentTimestamp);
@@ -78,7 +78,7 @@ public class CssChromeTests extends NewTestTemplate {
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
-	@Test(groups = {"CssChrome_005", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_005", "CssChrome", "AdminDashboard"})
 	public void CssChrome_005_verifyMinorEditAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.verifyMinorEditAppears();
@@ -89,14 +89,14 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyRevisionMarkedAsMinor();
 	}
 
-	@Test(groups = {"CssChrome_006", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_006", "CssChrome", "AdminDashboard"})
 	public void CssChrome_006_verifyHistoryButtonAppearsAndWorks() {
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickHistoryButton();
 		specialCss.verifyUrl("action=history");
 	}
 
-	@Test(groups = {"CssChrome_007", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_007", "CssChrome", "AdminDashboard"})
 	public void CssChrome_007_verifyDeleteButtonAppearsAndWorks() {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved();
@@ -120,7 +120,7 @@ public class CssChromeTests extends NewTestTemplate {
 	 * https://wikia-inc.atlassian.net/browse/DAR-731 story description
 	 * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
 	 */
-	@Test(groups = {"CssChrome_008", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"})
 	public void CssChrome_008_verifyOnLeaveMessageWorks() {
 		specialCss.verifyAceEditorPresence();
 		specialCss.sendCssText(CssEditorContent.validCss);
@@ -131,7 +131,7 @@ public class CssChromeTests extends NewTestTemplate {
 	/**
 	 * https://wikia-inc.atlassian.net/browse/DAR-999
 	 */
-	@Test(groups = {"CssChrome_009", "cssChrome", "AdminDashboard"})
+	@Test(groups = {"CssChrome_009", "CssChrome", "AdminDashboard"})
 	public void CssChrome_009_verifyTalkButtonWorks() {
 		specialCss.verifyTalkBubblePresence();
 		int commentsFromSpecialCss = specialCss.getNumberFromCssTalkBubble();

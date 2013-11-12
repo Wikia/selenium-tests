@@ -16,7 +16,7 @@ public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 	 * https://wikia-inc.atlassian.net/browse/DAR-731 stories description
 	 * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
 	 */
-	@Test(groups = {"cssChromeTwoDrivers_001", "cssChrome"})
+	@Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"})
 	public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision() {
 		//first user opens the special:CSS
 		switchToWindow(driver);
