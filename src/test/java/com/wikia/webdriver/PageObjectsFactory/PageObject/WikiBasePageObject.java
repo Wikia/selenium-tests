@@ -69,6 +69,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_l
 
 public class WikiBasePageObject extends BasePageObject {
 
+	@FindBy(css = "body")
+	private WebElement body;
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
 	@FindBy(css = "article span.drop")
@@ -129,7 +131,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
 
-	private String loggedInUserSelector = ".AccountNavigation a[href*=%userName%]";
+	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
+	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
 
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
@@ -210,8 +213,18 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialAdminDashboardPageObject(driver);
 	}
 
+	public SpecialAdminDashboardPageObject openSpecialAdminDashboard(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialAdminDashboard);
+		return new SpecialAdminDashboardPageObject(driver);
+	}
+
 	public SpecialCssPageObject openSpecialCss() {
 		getUrl(Global.DOMAIN + URLsContent.specialCSS);
+		return new SpecialCssPageObject(driver);
+	}
+
+	public SpecialCssPageObject openSpecialCss(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCSS);
 		return new SpecialCssPageObject(driver);
 	}
 
@@ -721,7 +734,7 @@ public class WikiBasePageObject extends BasePageObject {
 				}
 
 				driver.findElement(By
-						.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
+						.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
 				PageObjectLogging.log("loginCookie",
 						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
@@ -817,8 +830,15 @@ public class WikiBasePageObject extends BasePageObject {
 						"page timeout after login by cookie", true);
 			}
 
-			driver.findElement(By
-					.cssSelector(loggedInUserSelector.replace("%userName%", userName)));// only for verification
+			if (body.getAttribute("class").contains("skin-monobook")) {
+				driver.findElement(By
+						.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName)));// only for verification
+			}
+			else {
+				//oasis
+				driver.findElement(By
+						.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
+			}
 			PageObjectLogging.log("loginCookie",
 					"user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];
