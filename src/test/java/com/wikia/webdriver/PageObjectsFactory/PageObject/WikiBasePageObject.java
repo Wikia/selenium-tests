@@ -70,11 +70,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_l
 public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "body")
-	private WebElement body;
+	protected WebElement body;
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
-	@FindBy(css = "body")
-	protected WebElement body;
 	@FindBy(css = "article span.drop")
 	private WebElement editDropDown;
 	@FindBy(css = "input#wpConfirmB")
