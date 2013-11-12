@@ -283,4 +283,21 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 		waitForElementNotVisibleByBy(tool);
 		PageObjectLogging.log("customizeToolbar_VerifyToolNotOnToolbar","Verify that "+ToolName+" tool does not appear in Toolbar.", true);
 	}
+
+	public void addManyItems(String name, Integer count){
+		for (int i=0; i<count; i++){
+			searchTool(name.substring(0, 2));
+			clickSearchSuggestion(name);
+			verifyToolOnList(name);
+		}
+	}
+
+	public void openMoreMenu() {
+		executeScript("$('.overflow-menu').mouseover();");
+	}
+
+	public void verifyToolInMoreTool(String toolName) {
+		waitForElementByXPath("//ul[@class='tools']//li[@class='menu overflow-menu']//a[contains(text(), '"+toolName+"')]");
+		PageObjectLogging.log("customizeToolbar_verifyToolInMoreTool","Verify that "+toolName+" appears in ToolbarMoreTool.", true);
+	}
 }
