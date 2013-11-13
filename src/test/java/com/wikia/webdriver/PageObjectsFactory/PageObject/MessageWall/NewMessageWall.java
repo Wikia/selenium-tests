@@ -101,7 +101,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
 	public void submit() {
 		driver.switchTo().defaultContent();
-		postButton.click();
+		scrollAndClick(postButton);
 		PageObjectLogging.log("submit", "message submitted", true);
 	}
 
@@ -123,7 +123,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
 	public PreviewEditModePageObject preview() {
 		driver.switchTo().defaultContent();
-		previewButton.click();
+		scrollAndClick(previewButton);
 		PageObjectLogging.log("preview", "message preview opened", true);
 		return new PreviewEditModePageObject(driver);
 	}
@@ -186,32 +186,32 @@ public class NewMessageWall extends WikiBasePageObject {
 
 	public void clickSourceModeButton() {
 		waitForElementByElement(sourceModeButton);
-		sourceModeButton.click();
+		scrollAndClick(sourceModeButton);
 		PageObjectLogging.log("clickSourceModeButton", "source mode button clicked", true);
 	}
 
 	public void clickBoldButton() {
 		waitForElementByElement(boldButton);
-		boldButton.click();
+		scrollAndClick(boldButton);
 		PageObjectLogging.log("clickBoldButton", "bold button clicked", true);
 	}
 
 	public void clickItalicButton() {
 		waitForElementByElement(italicButton);
-		italicButton.click();
+		scrollAndClick(italicButton);
 		PageObjectLogging.log("clickItalicButton", "italic button clicked", true);
 	}
 
 	public NewMessageWallAddLinkComponentObject clickLinkButton() {
 		waitForElementByElement(linkButton);
-		linkButton.click();
+		scrollAndClick(linkButton);
 		PageObjectLogging.log("clickLinkButton", "link button clicked", true);
 		return new NewMessageWallAddLinkComponentObject(driver);
 	}
 
 	public PhotoAddComponentObject clickImageButton() {
 		waitForElementByElement(imageButton);
-		imageButton.click();
+		scrollAndClick(imageButton);
 		PageObjectLogging.log("clickImageButton", "image button clicked", true);
 		return new PhotoAddComponentObject(driver);
 	}
