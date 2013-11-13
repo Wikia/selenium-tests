@@ -201,7 +201,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void submitComment() {
 		driver.switchTo().defaultContent();
-		commentSubmitButton.click();
+		scrollAndClick(commentSubmitButton);
 		waitForElementNotVisibleByElement(commentSubmitButton);
 	}
 
