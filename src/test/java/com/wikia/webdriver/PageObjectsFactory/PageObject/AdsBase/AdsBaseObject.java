@@ -42,8 +42,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		AdsContent.setSlotsSelectors();
 		getUrl(page);
 		isWikiMainPage = checkIfMainPage();
-		setPresentTopLeaderboard();
-		setPresentMedrec();
 	}
 
 	protected final void setPresentTopLeaderboard() {
@@ -75,6 +73,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void checkMedrec() {
+		setPresentMedrec();
 		AdsComparison adsComparison = new AdsComparison();
 		boolean result = adsComparison.compareSlotOnOff(
 			presentMD, AdsContent.getSlotSelector(presentMDName), driver
@@ -96,6 +95,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void checkTopLeaderboard() {
+		setPresentTopLeaderboard();
 		AdsComparison adsComparison = new AdsComparison();
 		boolean result = adsComparison.compareSlotOnOff(
 			presentLB, AdsContent.getSlotSelector(presentLBName), driver
