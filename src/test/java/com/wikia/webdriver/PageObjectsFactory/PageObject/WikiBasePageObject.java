@@ -361,6 +361,15 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialUserLoginPageObject(driver);
 	}
 
+	public void verifyAvatarPresent() {
+		waitForElementByElement(userProfileAvatar);
+		PageObjectLogging.log(
+				"verifyAvatarPresent",
+				"avatar is visible",
+				true
+				);
+	}
+
 	public void verifyUserLoggedIn(String userName) {
 		if (body.getAttribute("class").contains("skin-monobook")) {
 			driver.findElement(By

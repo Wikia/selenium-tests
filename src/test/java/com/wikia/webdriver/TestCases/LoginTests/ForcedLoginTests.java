@@ -103,6 +103,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
 		vetAddingVideo.verifyAddVideoModal();
 		vetAddingVideo.clickCloseButton();
+		article.verifyAvatarPresent();
 		article.verifyUserLoggedIn(credentials.userName);
 	}
 }
