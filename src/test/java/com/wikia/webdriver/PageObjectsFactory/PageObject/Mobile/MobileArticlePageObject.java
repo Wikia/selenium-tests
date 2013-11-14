@@ -41,8 +41,6 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement loadPreviousCommentsButton;
 	@FindBy(css="#toctitle")
 	private WebElement tocWrapper;
-	@FindBy(css=".artSec.open .goBck")
-	private WebElement hideSectionButton;
 	@FindBy(css=".lazy.media.load.loaded")
 	private WebElement modalWrapper;
 	@FindBy(css=".swiperPage.current")
@@ -65,7 +63,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private List<WebElement> listOfComments;
 	@FindBy(css="section.artSec.open")
 	private WebElement sectionOpened;
-	@FindBy(css="div.mw-content-ltr h2.collSec.open")
+	@FindBy(css="div#mw-content-text h2.collSec.open")
 	private WebElement sectionVisibilityElement;
 	@FindBy(css="#wkArtCnt")
 	private WebElement numberOfComments;
@@ -89,6 +87,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement level3Visible;
 	@FindBy(css=".ads")
 	private WebElement curtainClosed;
+
+	String backCssSelector = ".goBck";
 
 	public void showCommentsSection() {
 		waitForElementNotVisibleByElement(commentInputArea);
@@ -212,8 +212,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public void clickSection(int sectionNumber) {
-		WebElement chev = waitForElementByXPath("//div[@class='mw-content-ltr']/h2["+sectionNumber+"]");
-		chev.click();
+		WebElement chev = waitForElementByXPath("//div[@id='mw-content-text']/h2["+sectionNumber+"]");
+		scrollAndClick(chev);
 		PageObjectLogging.log("clickSection", "section " + chev.getText() + " clicked", true, driver);
 	}
 
@@ -228,7 +228,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public void clickHideButton() {
-		waitForElementByElement(hideSectionButton);
+		WebElement hideSectionButton = waitForElementByCss(backCssSelector);
 		hideSectionButton.click();
 		PageObjectLogging.log("clickHideButton", "hide section button clicked", true, driver);
 	}
