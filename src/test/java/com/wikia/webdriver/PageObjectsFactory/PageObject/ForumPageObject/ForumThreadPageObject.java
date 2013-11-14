@@ -63,6 +63,8 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement followButton;
 	@FindBy(css=".WikiaMenuElement .edit-notifyeveryone")
 	private WebElement hightlightThreadButton;
+	@FindBy(css="span.removed")
+	private WebElement highlightLabel;
 
 	By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
 	
@@ -239,14 +241,14 @@ public class ForumThreadPageObject extends BasePageObject{
 	 * Clicks the highlight thread button in forum
 	 * @param highlight - decide if you wan't to highlight or unhighlight the Thread
 	 */
-	public void clickOnHightlightThreadButton(boolean highlight) {
+	private void clickOnHightlightThreadButton(boolean highlight) {
 		waitForElementByElement(hightlightThreadButton);
 		waitForElementClickableByElement(hightlightThreadButton);
 		scrollAndClick(hightlightThreadButton);
 		if (highlight) {
-			waitForElementByCss(".removed");
+			waitForElementByElement(highlightLabel);
 		} else {
-			waitForElementNotVisibleByBy(By.cssSelector(".removed"));
+			waitForElementNotVisibleByElement(highlightLabel);
 		}
 		PageObjectLogging.log("clickOnHightlightThreadButton", "click on '" +
 			(highlight ? "highlight": "unhighlight") + " thread' button on a message", true);
