@@ -278,24 +278,20 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_007_send_private_message()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
 		loginUser1.logInCookie(Properties.userName, Properties.password);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat
-		switchToWindow(driver2);
 		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
 		loginUser2.logInCookie(Properties.userName2, Properties.password2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
-		switchToWindow(driver);
 		chat1.openChatPage();
 		//test
-		switchToWindow(driver2);
 		chat2.verifyUserJoinToChat(Properties.userName);
 		chat2.verifyUserIsVisibleOnContactsList(Properties.userName);
 		chat1.verifyUserIsVisibleOnContactsList(Properties.userName2);
@@ -304,7 +300,6 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat2.clickOnDifferentUser(Properties.userName, driver2);
 		chat2.selectPrivateMessage(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification();
 		chat1.clickOnPrivateChat(Properties.userName2, driver);
@@ -326,24 +321,20 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_008_notifications()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
 		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
 		loginUser1.logInCookie(Properties.userName, Properties.password);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat
-		switchToWindow(driver2);
 		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
 		loginUser2.logInCookie(Properties.userName2, Properties.password2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
-		switchToWindow(driver);
 		chat1.openChatPage();
 		//test
-		switchToWindow(driver2);
 		chat2.verifyUserJoinToChat(Properties.userName);
 		chat2.verifyUserIsVisibleOnContactsList(Properties.userName);
 		chat1.verifyUserIsVisibleOnContactsList(Properties.userName2);
@@ -352,40 +343,23 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat2.clickOnDifferentUser(Properties.userName, driver2);
 		chat2.selectPrivateMessage(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification(1);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(2);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(3);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(4);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(5);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(6);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(7);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(8);
-		switchToWindow(driver2);
 		chat2.writeOnChat("This is private message from "+Properties.userName2);
-		switchToWindow(driver);
 		chat1.verifyPrivateMessageNotification(9);
 	}
 }
