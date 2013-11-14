@@ -362,11 +362,18 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void verifyUserLoggedIn(String userName) {
-		waitForElementByElement(userProfileAvatar);
-		waitForElementByElement(navigationLogoutLink);
+		if (body.getAttribute("class").contains("skin-monobook")) {
+			driver.findElement(By
+					.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName)));// only for verification
+		}
+		else {
+			//oasis
+			driver.findElement(By
+					.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
+		}
 		PageObjectLogging.log(
-				"LgoutLinkPresent",
-				"Verify that logout link is present in navigation dropdown",
+				"verifyUserLoggedIn",
+				"user " + userName + " logged in",
 				true
 		);
 	}
@@ -731,11 +738,8 @@ public class WikiBasePageObject extends BasePageObject {
 					PageObjectLogging.log("loginCookie",
 							"page timeout after login by cookie", true);
 				}
+				verifyUserLoggedIn(userName);
 
-				driver.findElement(By
-						.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
-				PageObjectLogging.log("loginCookie",
-						"user was logged in by cookie", true, driver);
 				return xmlResponseArr[11];
 			} catch (UnsupportedEncodingException e) {
 				PageObjectLogging.log("logInCookie",
@@ -829,15 +833,8 @@ public class WikiBasePageObject extends BasePageObject {
 						"page timeout after login by cookie", true);
 			}
 
-			if (body.getAttribute("class").contains("skin-monobook")) {
-				driver.findElement(By
-						.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName)));// only for verification
-			}
-			else {
-				//oasis
-				driver.findElement(By
-						.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
-			}
+			verifyUserLoggedIn(userName);
+
 			PageObjectLogging.log("loginCookie",
 					"user was logged in by cookie", true, driver);
 			return xmlResponseArr[11];

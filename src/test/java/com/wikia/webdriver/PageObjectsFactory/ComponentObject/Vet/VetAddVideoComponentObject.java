@@ -127,6 +127,6 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	public void clickCloseButton() {
 		waitForElementByElement(closeButton);
 		scrollAndClick(closeButton);
-		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true, driver);
+		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true);
 	}
 }

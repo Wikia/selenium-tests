@@ -579,6 +579,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void closeNewWikiCongratulationsLightBox() {
+		waitForElementByElement(welcomeLightBoxCloseButton);
 		scrollAndClick(welcomeLightBoxCloseButton);
 		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
 	}
