@@ -120,8 +120,8 @@ public class SignUpTests extends NewTestTemplate {
 		CreateNewWikiLogInSignUpPageObject CNWSignUpPage = createNewWiki1.submitToLogInSignUp();
 		SignUpPageObject signUp = CNWSignUpPage.submitSignup();
 		signUp.disableCaptcha();
-		String userName = "user" + signUp.getTimeStamp();
-		String password = "pass" + signUp.getTimeStamp();
+		String userName = "User" + signUp.getTimeStamp();
+		String password = "Pass" + signUp.getTimeStamp();
 		String email = credentials.emailQaart2;
 		String emailPassword = credentials.emailPasswordQaart2;
 
