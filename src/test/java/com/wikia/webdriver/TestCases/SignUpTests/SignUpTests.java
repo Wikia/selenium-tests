@@ -37,7 +37,7 @@ public class SignUpTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
-		signUp.typeEmail(credentials.email);
+		signUp.typeEmail(credentials.emailQaart1);
 		signUp.typePassword(signUp.getTimeStamp());
 		signUp.enterBirthDate(
 				PageContent.wikiSignUpBirthMonth,
@@ -55,7 +55,7 @@ public class SignUpTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
-		signUp.typeEmail(credentials.email);
+		signUp.typeEmail(credentials.emailQaart1);
 		signUp.typePassword(signUp.getTimeStamp());
 		Calendar currentDate = Calendar.getInstance();
 		signUp.enterBirthDate(
