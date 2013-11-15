@@ -3,6 +3,7 @@ package com.wikia.webdriver.Common.Logging;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -39,5 +40,20 @@ public class PageObjectLoggingTests extends NewTestTemplate{
 		article.openRandomArticle(wikiURL);
 		WikiArticleEditMode articleEdit = article.clickEditButton();
 		articleEdit.writeSourceMode(PageContent.articleText);
+	}
+
+	/**
+	 * the test will produce log file with all assertions possible states
+	 */
+	@Test( groups= {"PageObjectLoggingTests_001", "PageObjectLoggingTests"})
+	public void produceLogFileWithAllEvents_assertionsTest() {
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.openRandomArticle(wikiURL);
+		Assertion.assertEquals("expected", "expected");
+		Assertion.assertEquals("expected", "notExpected");
+		Assertion.assertNumber(6, 6, "message");
+		Assertion.assertNumber(6, 5, "message");
+		Assertion.assertStringContains("BiggerString", "String");
+		Assertion.assertStringContains("BiggerString", "notExpected");
 	}
 }
