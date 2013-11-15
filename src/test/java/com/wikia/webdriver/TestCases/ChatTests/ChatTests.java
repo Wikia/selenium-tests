@@ -290,7 +290,9 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		loginUser2.logInCookie(Properties.userName2, Properties.password2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
+		chat2.verifyChatPage();
 		chat1.openChatPage();
+		chat1.verifyChatPage();
 		//test
 		chat2.verifyUserJoinToChat(Properties.userName);
 		chat2.verifyUserIsVisibleOnContactsList(Properties.userName);
@@ -333,7 +335,9 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		loginUser2.logInCookie(Properties.userName2, Properties.password2);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
+		chat2.verifyChatPage();
 		chat1.openChatPage();
+		chat1.verifyChatPage();
 		//test
 		chat2.verifyUserJoinToChat(Properties.userName);
 		chat2.verifyUserIsVisibleOnContactsList(Properties.userName);
