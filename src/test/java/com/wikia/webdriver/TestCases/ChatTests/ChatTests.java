@@ -281,31 +281,31 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName, Properties.password);
+		loginUser1.logInCookie(Properties.userName3, Properties.password3);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat
 		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
+		loginUser2.logInCookie(Properties.userName4, Properties.password4);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//test
-		chat2.verifyUserJoinToChat(Properties.userName);
-		chat2.verifyUserIsVisibleOnContactsList(Properties.userName);
-		chat1.verifyUserIsVisibleOnContactsList(Properties.userName2);
+		chat2.verifyUserJoinToChat(Properties.userName3);
+		chat2.verifyUserIsVisibleOnContactsList(Properties.userName3);
+		chat1.verifyUserIsVisibleOnContactsList(Properties.userName4);
 		chat2.writeOnChat("test message");
 		chat1.verifyMessageOnChat("test message");
-		chat2.clickOnDifferentUser(Properties.userName, driver2);
+		chat2.clickOnDifferentUser(Properties.userName3, driver2);
 		chat2.selectPrivateMessage(driver2);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName4);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification();
-		chat1.clickOnPrivateChat(Properties.userName2, driver);
-		chat1.verifyMessageOnChat("This is private message from "+Properties.userName2);
+		chat1.clickOnPrivateChat(Properties.userName4, driver);
+		chat1.verifyMessageOnChat("This is private message from "+Properties.userName4);
 	}
 
 	/*
@@ -326,44 +326,44 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		WikiArticlePageObject home = new WikiArticlePageObject(driver);
 		home.openWikiPage();
 		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName, Properties.password);
+		loginUser1.logInCookie(Properties.userName5, Properties.password5);
 		ChatPageObject chat1 = new ChatPageObject(driver);
 		//second user opens the chat
 		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
 		home2.openWikiPage();
 		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
+		loginUser2.logInCookie(Properties.userName6, Properties.password6);
 		ChatPageObject chat2 = new ChatPageObject(driver2);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//test
-		chat2.verifyUserJoinToChat(Properties.userName);
-		chat2.verifyUserIsVisibleOnContactsList(Properties.userName);
-		chat1.verifyUserIsVisibleOnContactsList(Properties.userName2);
+		chat2.verifyUserJoinToChat(Properties.userName5);
+		chat2.verifyUserIsVisibleOnContactsList(Properties.userName5);
+		chat1.verifyUserIsVisibleOnContactsList(Properties.userName6);
 		chat2.writeOnChat("test message");
 		chat1.verifyMessageOnChat("test message");
-		chat2.clickOnDifferentUser(Properties.userName, driver2);
+		chat2.clickOnDifferentUser(Properties.userName5, driver2);
 		chat2.selectPrivateMessage(driver2);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification(1);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(2);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(3);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(4);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(5);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(6);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(7);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(8);
-		chat2.writeOnChat("This is private message from "+Properties.userName2);
+		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(9);
 	}
 }
