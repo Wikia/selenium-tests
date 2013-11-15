@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -110,8 +109,8 @@ public class WamPageObject extends BasePageObject {
 	/**
 	 * @desc Opens "WAM Scores" page in example: www.wikia.com/WAM
 	 */
-	public void openWamPage() {
-		getUrl(Global.LIVE_DOMAIN + URLsContent.wamPageUrl);
+	public void openWamPage(String wikiCorporateURL) {
+		getUrl(wikiCorporateURL + URLsContent.wamPageUrl);
 		PageObjectLogging.log("openWamPage", "WAM page opened", true);
 	}
 
@@ -160,7 +159,7 @@ public class WamPageObject extends BasePageObject {
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
 		waitForElementByBy(wamIndexTable);
-		Assertion.assertNumber(wamIndexRows.size(), expectedRowsNo, "wam index rows equals " + expectedRowsNo );
+		Assertion.assertNumber(expectedRowsNo, wamIndexRows.size(), "wam index rows equals " + expectedRowsNo );
 	}
 
 	/**

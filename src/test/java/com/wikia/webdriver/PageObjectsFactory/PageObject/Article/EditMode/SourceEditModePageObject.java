@@ -1,11 +1,13 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -58,6 +60,8 @@ public class SourceEditModePageObject extends EditMode{
 	private WebElement createGallery;
 	@FindBy(css="a.wikia-button[type='3']")
 	private WebElement createSlider;
+	@FindBy(css="#wpSave")
+	private WebElement submitButton;
 
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
@@ -258,5 +262,57 @@ public class SourceEditModePageObject extends EditMode{
 			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).click();
 			checkSourceContent(content);
 		}
+	}
+
+	private String getContent() {
+		return sourceModeTextArea.getAttribute("value");
+	}
+
+	public void verifyVideoAlignment(PositionsVideo position) {
+		Assertion.assertStringContains(getContent(),
+				position.toString().toLowerCase());
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		String content = getContent();
+		int width = Integer.parseInt(
+				content.substring(content.indexOf("px")-6, content.indexOf("px")-3)
+		);
+		Assertion.assertNumber(
+				width,
+				widthDesired,
+				"width is " + width + " should be " + widthDesired
+		);
+	}
+
+	public void verifyVideoCaption(String desiredCaption) {
+		Assertion.assertStringContains(getContent(), desiredCaption);
+	}
+
+	/**
+	 * adds source code that will create Table of Contents on the article
+	 */
+	public void addTOC() {
+		clearContent();
+		appendContent(PageContent.articleWithTOClines);
+	}
+
+	private void appendContent(String content) {
+		waitForElementByElement(sourceModeTextArea);
+		sourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log("appendContent", "text: '"+content+"', added to the source mode", true);
+	}
+
+	private void appendNewLine(String content) {
+		waitForElementByElement(sourceModeTextArea);
+		sourceModeTextArea.sendKeys(Keys.ENTER);
+		sourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log("appendNewLine", "text "+content+" added to the source mode in new line", true);
+	}
+
+	public void clearContent() {
+		waitForElementByElement(sourceModeTextArea);
+		sourceModeTextArea.clear();
+		PageObjectLogging.log("clearContent", "source mode cleared", true);
 	}
 }

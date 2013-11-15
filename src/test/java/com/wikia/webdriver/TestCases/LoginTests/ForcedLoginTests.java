@@ -2,140 +2,108 @@ package com.wikia.webdriver.TestCases.LoginTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.AddMediaModalComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 /**
  *
  * @author Bogna 'bognix' Knychala
+ * @author Karol 'kkarolk' Kujawiak
+ *
  */
-public class ForcedLoginTests extends TestTemplate{
+public class ForcedLoginTests extends NewTestTemplate {
 
-    private String newFiles = URLsContent.specialNewFiles;
-    private String newVideo = URLsContent.specialNewVideo;
-    private String upload = URLsContent.specialUpload;
-    private String watchList = URLsContent.specialWatchList;
+	Credentials credentials = config.getCredentials();
 
-    @Test(groups = {"ForcedLogin_001_newFile", "ForcedLogin"})
-    public void ForcedLogin_001_newFile () {
-        SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    	login.logOut(driver);
+	@Test(groups = {"ForcedLogin_001_newFile", "ForcedLogin"})
+	public void ForcedLogin_001_newFile () {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
+		specialPage.verifySpecialPage();
+		specialPage.addPhoto();
+		specialPage.verifyModalLoginAppeared();
+		specialPage.logInViaModal(credentials.userName, credentials.password);
 
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.openWikiPage();
-        base.openSpecialPage(newFiles);
-        SpecialNewFilesPageObject specialPage = new SpecialNewFilesPageObject(driver);
-        specialPage.verifySpecialPage();
-        specialPage.addPhoto();
-        specialPage.verifyModalLoginAppeared();
-        specialPage.logInViaModal(Properties.userName, Properties.password);
+		AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
+		modal.closeAddPhotoModal();
 
-        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
-        modal.closeAddPhotoModal();
+		specialPage.verifyUserLoggedIn(credentials.userName);
+	}
 
-        specialPage.verifyUserLoggedIn(Properties.userName);
+	@Test(groups = {"ForcedLogin_002_video", "ForcedLogin"})
+	public void ForcedLogin_002_video () {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
+		specialPage.clickAddAVideo();
+		specialPage.verifyModalLoginAppeared();
+		specialPage.logInViaModal(credentials.userName, credentials.password);
 
-        login.logOut(driver);
-    }
+		AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
+		modal.closeAddVideoModal();
 
-    @Test(groups = {"ForcedLogin_002_video", "ForcedLogin"})
-    public void ForcedLogin_002_video () {
-    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    	login.logOut(driver);
+		specialPage.verifyUserLoggedIn(credentials.userName);
+	}
 
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.openWikiPage();
-        base.openSpecialPage(newVideo);
-        SpecialVideosPageObject specialPage = new SpecialVideosPageObject(driver);
-        specialPage.clickAddAVideo();
-        specialPage.verifyModalLoginAppeared();
-        specialPage.logInViaModal(Properties.userName, Properties.password);
+	@Test(groups = {"ForcedLogin_003_loginRequired", "ForcedLogin"})
+	public void ForcedLogin_003_loginRequired () {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openSpecialUpload(wikiURL);
+		base.verifyLoginReguiredMessage();
+		SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
+		special.login(credentials.userName, credentials.password);
+		special.verifyUserLoggedIn(credentials.userName);
+		special.verifyURLcontains(URLsContent.specialUpload);
+	}
 
-        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
-        modal.closeAddVideoModal();
+	@Test(groups = {"ForcedLogin_004_notLoggedIn", "ForcedLogin"})
+	public void ForcedLogin_004_notLoggedIn () {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage();
+		base.openSpecialWatchListPage(wikiURL);
+		base.verifyNotLoggedInMessage();
+		base.clickLoginOnSpecialPage();
+		SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
+		special.login(credentials.userName, credentials.password);
+		special.verifyUserLoggedIn(credentials.userName);
+		special.verifyURLcontains(URLsContent.specialWatchList);
+	}
 
-        specialPage.verifyUserLoggedIn(Properties.userName);
+	@Test(groups = {"ForcedLogin_005_addMedia", "ForcedLogin"})
+	public void ForcedLogin_005_addMedia () {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject edit = base.goToArticleEditPage(wikiURL, articleName);
+		edit.clickPhotoButton();
+		edit.logInViaModal(credentials.userName, credentials.password);
+		edit.verifyUserLoggedIn(credentials.userName);
+		edit.verifyURLcontains(articleName);
+		edit.verifyURLcontains(URLsContent.actionEditParameter);
+		PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
+		addPhoto.verifyAddPhotoModal();
 
-        login.logOut(driver);
-    }
+	}
 
-    @Test(groups = {"ForcedLogin_003_loginRequired", "ForcedLogin"})
-    public void ForcedLogin_003_loginRequired () {
-    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    	login.logOut(driver);
-
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.openWikiPage();
-        base.openSpecialPage(upload);
-        base.verifyLoginReguiredMessage();
-        base.clickLoginOnSpecialPage();
-        SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
-        special.login(Properties.userName, Properties.password);
-        special.verifyUserLoggedIn(Properties.userName);
-        special.verifySpecialPageRedirection(upload);
-
-        login.logOut(driver);
-    }
-
-    @Test(groups = {"ForcedLogin_004_notLoggedIn", "ForcedLogin"})
-    public void ForcedLogin_004_notLoggedIn () {
-    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    	login.logOut(driver);
-
-        WikiBasePageObject base = new WikiBasePageObject(driver);
-        base.openWikiPage();
-        base.openSpecialPage(watchList);
-        base.verifyNotLoggedInMessage();
-        base.clickLoginOnSpecialPage();
-        SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
-        special.login(Properties.userName, Properties.password);
-        special.verifyUserLoggedIn(Properties.userName);
-        special.verifySpecialPageRedirection(watchList);
-
-        login.logOut(driver);
-    }
-
-    @Test(groups = {"ForcedLogin_005_addMedia", "ForcedLogin"})
-    public void ForcedLogin_005_addMedia () {
-    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    	login.logOut(driver);
-
-        WikiArticlePageObject base = new WikiArticlePageObject(driver);
-        base.openWikiPage();
-        WikiArticlePageObject article = base.openRandomArticle();
-        article.edit();
-        MiniEditorComponentObject miniEditor = new MiniEditorComponentObject(driver);
-        miniEditor.clickAddImage();
-        base.logInViaModal(Properties.userName, Properties.password);
-        base.verifyUserLoggedIn(Properties.userName);
-        miniEditor.waitForEditorReady();
-        login.logOut(driver);
-    }
-
-    @Test(groups = {"ForcedLogin_006_rail", "ForcedLogin"})
-    public void ForcedLogin_006_rail () {
-    	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    	login.logOut(driver);
-
-        WikiArticlePageObject base = new WikiArticlePageObject(driver);
-        base.openWikiPage();
-        WikiArticlePageObject article = base.openRandomArticle();
-        article.clickAddVideoFromRail();
-        article.logInViaModal(Properties.userName, Properties.password);
-
-        AddMediaModalComponentObject modal = new AddMediaModalComponentObject(driver);
-        modal.closeAddVideoModal();
-
-        base.verifyUserLoggedIn(Properties.userName);
-
-        login.logOut(driver);
-    }
+	@Test(groups = {"ForcedLogin_006_rail", "ForcedLogin", "Smoke2"})
+	public void ForcedLogin_006_rail () {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		article.clickAddRelatedVideo();
+		article.logInViaModal(credentials.userName, credentials.password);
+		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
+		vetAddingVideo.verifyAddVideoModal();
+		vetAddingVideo.clickCloseButton();
+		article.verifyAvatarPresent();
+		article.verifyUserLoggedIn(credentials.userName);
+	}
 }

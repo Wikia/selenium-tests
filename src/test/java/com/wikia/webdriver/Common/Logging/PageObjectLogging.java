@@ -26,6 +26,7 @@ import org.testng.ITestResult;
 import com.googlecode.jatl.Html;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 
@@ -44,6 +45,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	private static String screenPath = screenDirPath + "screenshot";
 	private static String logFileName = "log.html";
 	private static String logPath = reportPath + logFileName;
+
 
 //head
 	private String httpEquiv = "content type";
@@ -84,7 +86,6 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 //onStart table
 	private String testClassName = "asd";
 	private String testName = "sdf";
-
 
 	public static void log(String command, String description, boolean success) {
 		log(command, description, success, false);
@@ -207,7 +208,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public static void log(String command, String description, boolean success,
 			WebDriver driver) { //jtal DONE
 		imageCounter += 1;
-		CommonUtils.captureScreenshot(screenPath + imageCounter, driver);
+		new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
 		CommonUtils.appendTextToFile(screenPath + imageCounter + ".html",
 				driver.getPageSource());
 		String className = success ? "success" : "error";
@@ -251,8 +252,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 		if (Global.LOG_ENABLED) {
 			try {
-				CommonUtils
-						.captureScreenshot(screenPath + imageCounter, driver);
+				new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
 				CommonUtils.appendTextToFile(screenPath + imageCounter
 						+ ".html", driver.getPageSource());
 			} catch (Exception e) {

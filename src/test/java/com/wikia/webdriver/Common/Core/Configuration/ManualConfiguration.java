@@ -60,4 +60,9 @@ public class ManualConfiguration extends AbstractConfiguration {
 	public String getCredentialsFilePath() {
 		return config.get("credentialsPath");
 	}
+
+	@Override
+	public String getQS() {
+		return config.get("qs");
+	}
 }

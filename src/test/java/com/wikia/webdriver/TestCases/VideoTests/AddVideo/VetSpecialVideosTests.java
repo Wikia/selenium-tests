@@ -29,7 +29,7 @@ public class VetSpecialVideosTests extends NewTestTemplate{
 		specialVideos.verifyVideoAdded(VideoContent.youtubeVideoURL2name);
 	}
 
-	@Test(groups = {"VetTests002", "VetTests", "SpecialVideo"})
+	@Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo"})
 	public void SpecialVideos_002_Library() {
 		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver) ;
 		specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);

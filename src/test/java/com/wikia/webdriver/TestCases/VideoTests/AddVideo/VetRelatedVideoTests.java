@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.TestCases.VideoTests.AddVideo;
 
 import org.testng.annotations.Test;
@@ -21,7 +18,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Visual
 public class VetRelatedVideoTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
-
 
 	@Test(groups = {"RelatedVideo_001", "RelatedVideo"})
 	public void RelatedVideo_001_Provider() {

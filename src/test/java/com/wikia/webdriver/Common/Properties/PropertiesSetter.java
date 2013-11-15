@@ -18,7 +18,7 @@ public class PropertiesSetter {
 	 */
 
 	public static void setPropertiesManually()	{
-		Global.BROWSER = "CHROME";
+		Global.BROWSER = "FF";
 		Global.DOMAIN = "http://mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
 		String seleniumConfigDir = "c:"+File.separator+"selenium-config";

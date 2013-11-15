@@ -29,7 +29,7 @@ public class HubsTests extends TestTemplate {
 				{ LHub, "LifestyleHub", Global.LIVE_DOMAIN + "Lifestyle" } };
 	}
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests001", "Hubs" })
+	@Test(dataProvider = "provideHub", groups = { "HubsTests001", "Hubs" , "Smoke4"})
 	/** https://internal.wikia-inc.com/wiki/Hubs/QA/Hubs_Test_Cases#Module_1_.28Mosaic_Slider.29_Test_Cases
 	* 	Verify that slider is displayed at the top left of the Hubs page
 	*   Verify that when transitioning, the old large image is replaced by the new large image

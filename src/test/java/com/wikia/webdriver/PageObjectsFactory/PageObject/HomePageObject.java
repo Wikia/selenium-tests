@@ -17,7 +17,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.LifestyleHubPageOb
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Hubs.VideoGamesHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
 
-public class HomePageObject extends BasePageObject{
+public class HomePageObject extends WikiBasePageObject{
 
 	@FindBy(css="header.wikiahomepage-header a.button")
 	private WebElement startWikiButton;
@@ -87,9 +87,22 @@ public class HomePageObject extends BasePageObject{
 
 	public CreateNewWikiPageObjectStep1 startAWiki()
 	{
-		scrollAndClick(startWikiButton);
+		startWikiButton.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
 		if (Global.LIVE_DOMAIN.contains("preview"))
+		{
+			String currentUrl = driver.getCurrentUrl();
+			String desiredUrl = currentUrl.replace("www.wikia.com", "preview.www.wikia.com");
+			getUrl(desiredUrl);
+		}
+		return new CreateNewWikiPageObjectStep1(driver);
+	}
+
+	public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL)
+	{
+		startWikiButton.click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
+		if (wikiURL.contains("preview"))
 		{
 			String currentUrl = driver.getCurrentUrl();
 			String desiredUrl = currentUrl.replace("www.wikia.com", "preview.www.wikia.com");

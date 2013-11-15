@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 
 public class ConfirmationPageObject extends BasePageObject{
 
@@ -17,7 +18,7 @@ public class ConfirmationPageObject extends BasePageObject{
 	private WebElement passwordField;
 	@FindBy(css="div.UserConfirm input[type='submit']")
 	private WebElement confirmationButton;
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param driver
@@ -26,7 +27,7 @@ public class ConfirmationPageObject extends BasePageObject{
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName
@@ -36,7 +37,7 @@ public class ConfirmationPageObject extends BasePageObject{
 		userNameField.sendKeys(userName);
 		PageObjectLogging.log("typeInUserName ", "user name field populated", true, driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param password
@@ -46,7 +47,7 @@ public class ConfirmationPageObject extends BasePageObject{
 		passwordField.sendKeys(password);
 		PageObjectLogging.log("typeInUserPassword ", "password field populated", true, driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -57,11 +58,12 @@ public class ConfirmationPageObject extends BasePageObject{
 		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);
 		return new UserProfilePageObject(driver);
 	}
-	
-	
-	
-	
-	
-	
 
+	public CreateNewWikiPageObjectStep1 CNWSubmitButton(String email, String password)
+	{
+		MailFunctions.deleteAllMails(email, password);
+		scrollAndClick(confirmationButton);
+		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);
+		return new CreateNewWikiPageObjectStep1(driver);
+	}
 }

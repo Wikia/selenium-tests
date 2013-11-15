@@ -7,3 +7,4 @@ wikiName: mediawiki119 #default testing wiki
 env: prod #acceptable values: prod, preview, sandbox-number dev-name
 credentialsPath: c:/selenium-config/config.xml #Path to your config.xml file
 captchaPath: c:/selenium-config/captcha.txt #Path to your captcha.txt file
+qs: null

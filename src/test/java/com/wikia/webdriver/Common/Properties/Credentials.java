@@ -1,8 +1,8 @@
 package com.wikia.webdriver.Common.Properties;
 
-import com.wikia.webdriver.Common.Core.XMLFunctions;
-
 import java.io.File;
+
+import com.wikia.webdriver.Common.Core.XMLFunctions;
 
 /**
  *
@@ -22,6 +22,33 @@ public class Credentials {
 	public String userName4;
 	public String password4;
 
+	public String userName5;
+	public String password5;
+
+	public String userName6;
+	public String password6;
+
+	public String userName7;
+	public String password7;
+
+	public String userName8;
+	public String password8;
+
+	public String userName9;
+	public String password9;
+
+	public String userName10;
+	public String password10;
+
+	public String userName11;
+	public String password11;
+
+	public String userName12;
+	public String password12;
+
+	public String userName13;
+	public String password13;
+
 	public String userNameNonLatin;
 	public String userNameNonLatinEncoded;
 	public String passwordNonLatin;
@@ -36,6 +63,9 @@ public class Credentials {
 	public String userNameLong;
 	public String passwordLong;
 
+	public String userNameClosedAccount;
+	public String passwordClosedAccount;
+
 	public String email;
 	public String emailPassword;
 	public String emailQaart1;
@@ -48,7 +78,11 @@ public class Credentials {
 	public String emailPasswordQaart4;
 
 	public String userNameStaff;
+	public String userNameStaffId;
 	public String passwordStaff;
+
+	public String userNameStaff2;
+	public String passwordStaff2;
 
 	public String userNameMonobook;
 	public String passwordMonobook;
@@ -77,6 +111,24 @@ public class Credentials {
 		password3 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular3.password");
 		userName4 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular4.username");
 		password4 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular4.password");
+		userName5 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular5.username");
+		password5 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular5.password");
+		userName6 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular6.username");
+		password6 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular6.password");
+		userName7 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular7.username");
+		password7 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular7.password");
+		userName8 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular8.username");
+		password8 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular8.password");
+		userName9 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular9.username");
+		password9 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular9.password");
+		userName10 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular10.username");
+		password10 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular10.password");
+		userName11 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular11.username");
+		password11 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular11.password");
+		userName12 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular12.username");
+		password12 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular12.password");
+		userName13 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular13.username");
+		password13 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.regular13.password");
 
 		userNameNonLatin = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.username");
 		userNameNonLatinEncoded = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.nonLatin.usernameenc");
@@ -92,8 +144,15 @@ public class Credentials {
 		userNameLong = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.long.username");
 		passwordLong = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.long.password");
 
+		userNameClosedAccount = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.closeAccountUser.username");
+		passwordClosedAccount = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.closeAccountUser.password");
+
 		userNameStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.username");
+		userNameStaffId = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.id");
 		passwordStaff = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff.password");
+
+		userNameStaff2 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff2.username");
+		passwordStaff2 = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiastaff2.password");
 
 		userNameMonobook = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiamonobook.username");
 		passwordMonobook = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiamonobook.password");

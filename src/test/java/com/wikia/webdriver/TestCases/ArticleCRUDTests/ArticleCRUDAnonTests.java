@@ -16,7 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePa
 public class ArticleCRUDAnonTests extends NewTestTemplate {
 
 	@Test(
-		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_001", "Smoke"}
+		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_001"}
 	)
 	public void ArticleCRUDUser_001_addBySpecialPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -31,7 +31,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	}
 
 	@Test(
-		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_002", "Smoke"}
+		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_002"}
 	)
 	public void ArticleCRUDUser_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -45,7 +45,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_003", "Smoke"}
+		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_003"}
 	)
 	public void ArticleCRUDUser_003_addDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

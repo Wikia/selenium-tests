@@ -14,7 +14,6 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialCssPageObject extends SpecialPageObject {
 
@@ -65,7 +64,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement talkLink;
 		@FindBy(css = "a.talk .commentsbubble")
 		private WebElement mwTalkBubble;
-		
+
 		public SpecialCssPageObject( WebDriver driver ) {
 			super(driver);
 		}
@@ -80,12 +79,12 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("verifyHighlighting", "There are elements highlighted by ace library", true);
 		}
 
-		public void saveCssContent(String randomText, WikiBasePageObject wiki) {
+		public void saveCssContent(String randomText) {
 			verifyPublishButtonAppears();
 			clearCssText();
 			sendCssText(randomText);
 			clickPublishButton();
-			wiki.verifyUrl(URLsContent.specialCSS);
+			verifyUrl(URLsContent.specialCSS);
 			verifySaveComplete();
 		}
 
@@ -217,27 +216,23 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("verifyLatestRevision", "verify that latest revision is shown", true);
 		}
 
-		public void navigateToHistoryPage() {
-			getUrl(Global.DOMAIN+"wiki/MediaWiki:Wikia.css?action=edit");
-		}
-		
 		public void verifyTalkBubblePresence() {
 			waitForElementByElement(talkBubble);
 			PageObjectLogging.log("verifyTalkBubblePresence", "Talk bubble is present.", true);
 		}
-		
+
 		/**
 		 * Return the number of comments from talk button bubble
 		 */
 		public int getNumberFromCssTalkBubble() {
 			return Integer.parseInt(talkBubble.getText());
 		}
-		
+
 		public void clickTalkButton() {
 			scrollAndClick(talkLink);
 			verifyUrl("/MediaWiki_talk:Wikia.css");
 		}
-		
+
 		/**
 		 * go to mediawiki:wikia.css and return the number of comments from talk button bubble
 		 */
@@ -246,5 +241,5 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			waitForElementByElement(mwTalkBubble);
 			return Integer.parseInt(mwTalkBubble.getText());
 		}
-		
+
 }

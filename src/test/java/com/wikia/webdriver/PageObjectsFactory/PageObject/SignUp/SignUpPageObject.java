@@ -10,129 +10,107 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class SignUpPageObject extends BasePageObject {
+/**
+ *
+ * @author Karol 'kkarolk' Kujawiak
+ *
+ */
+public class SignUpPageObject extends WikiBasePageObject {
 
 	public SignUpPageObject(WebDriver driver) {
 		super(driver);
+		yearSelect = new Select(birthYearField);
+		daySelect = new Select(birthDayField);
+		monthSelect = new Select(birthMonthField);
 	}
 
-	@FindBy(css = "#WikiaSignupForm input[name='username']")
+	@FindBy(css = "#WikiaSignupForm input[name='userloginext01']")
 	private WebElement userNameField;
-	@FindBy(css = "#WikiaSignupForm input[name='email']")
+	@FindBy(css = "input[name='email']")
 	private WebElement emailField;
-	@FindBy(css = "#WikiaSignupForm input[name='password']")
+	@FindBy(css = "#WikiaSignupForm input[name='userloginext02']")
 	private WebElement passwordField;
-	@FindBy(css = "#WikiaSignupForm select[name='birthmonth']")
+	@FindBy(css = "select[name='birthmonth']")
 	private WebElement birthMonthField;
-	@FindBy(css = "#WikiaSignupForm select[name='birthday']")
+	@FindBy(css = "select[name='birthday']")
 	private WebElement birthDayField;
-	@FindBy(css = "#WikiaSignupForm select[name='birthyear']")
+	@FindBy(css = "select[name='birthyear']")
 	private WebElement birthYearField;
-	@FindBy(css = "input#wpCaptchaWord")
-	private WebElement blurryWordField;
-	@FindBy(css = "div.fancy-captcha input[type='hidden']")
+	@FindBy(css = "#recaptcha_response_field")
+	private WebElement captchaField;
+	@FindBy(css = "#wpCaptchaId")
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
-	private WebElement createAccountButton;
-	@FindBy(css = ".input-group.required.error .error-msg")
-	private WebElement tooYoungError;
+	private WebElement signupButton;
 
-	@FindBy(
-		xpath="//div[@class='error-msg' and contains(text(), "
-		+ "'Oops, please fill in the username field.')]"
-	)
-	private WebElement emptyUserNameValidationError;
-	@FindBy(
-		xpath="//div[@class='error-msg' and contains(text(), "
-		+ "'Someone already has this username. Try a different one!')]"
-	)
-	private WebElement occupiedUserNameValidationError;
+	private By errorMsgBy = By.className("error-msg");
 
 	private Select yearSelect;
 	private Select daySelect;
 	private Select monthSelect;
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void openSignUpPage()
-	{
-		getUrl(Global.DOMAIN+ URLsContent.specialUserSignup);
-		yearSelect = new Select(birthYearField);
-		daySelect = new Select(birthDayField);
-		monthSelect = new Select(birthMonthField);
-		PageObjectLogging.log(
-		    "openSignUpPage ",
-		    "Sign up page opened " +driver.getCurrentUrl(),
-		    true, driver
+
+	public void disableCaptcha() {
+		String url = urlBuilder.appendQueryStringToURL(
+			driver.getCurrentUrl(),
+			URLsContent.disableCaptchaParameter
 		);
+		getUrl(url);
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 * @param userName
-	 */
-	public void typeInUserName(String userName)
-	{
+	public void typeUserName(String userName) {
 		userNameField.sendKeys(userName);
 		userNameField.sendKeys(Keys.TAB);
+	}
+
+	public void typeEmail(String email) {
+		emailField.sendKeys(email);
+		emailField.sendKeys(Keys.TAB);
 		PageObjectLogging.log(
-			"typeInUserName ",
-			"User name field populated "
-			+ userName, true
+				"typeEmail",
+				email + " typed into email field",
+				true
 		);
 	}
 
-
-	/**
-	 * @author Karol Kujawiak
-	 */
-	public void typeInEmail(String email)
-	{
-		emailField.sendKeys(email);
-		PageObjectLogging.log("typeInEmail ", "Email field populated", true, driver);
-	}
-
-	/**
-	 * @author Karol Kujawiak
-	 * @param password
-	 */
-
-	public void typeInPassword(String password)
-	{
+	public void typePassword(String password) {
 		passwordField.sendKeys(password);
-		PageObjectLogging.log("typeInPassword ", "Password field populated", true);
+		passwordField.sendKeys(Keys.TAB);
+		PageObjectLogging.log(
+				"typePassword",
+				"password typed into password field",
+				true
+		);
 	}
 
-	public void waitForTooYoungErrorMsg()
-	{
-		waitForElementByElement(tooYoungError);
-		Assertion.assertTrue(tooYoungError.isDisplayed());
-		PageObjectLogging.log("typeInBirthDate ", "BirthDate field selected", true);
+	public void verifyTooYoungMessage() {
+		String message = birthYearField
+				.findElement(parentBy)
+				.findElement(errorMsgBy)
+				.getText();
+		Assertion.assertEquals(message, PageContent.signUpTooYoungMessage);
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 * @param month
-	 * @param day
-	 * @param year
-	 */
-	public void enterBirthDate(String month, String day, String year)
-	{
-		try
-		{
+	public void verifySubmitButtonDisabled() {
+		Assertion.assertEquals("true", signupButton.getAttribute("disabled"));
+	}
+
+	public void enterBirthDate(String month, String day, String year) {
+		try {
 			monthSelect.selectByVisibleText(month);
 			Thread.sleep(150);
 			daySelect.selectByVisibleText(day);
@@ -144,53 +122,83 @@ public class SignUpPageObject extends BasePageObject {
 			yearSelect.selectByVisibleText(year);
 			Thread.sleep(150);
 			monthSelect.selectByVisibleText(month);
-			PageObjectLogging.log("enterBirthDate ", "Birth date selected", true);
-		}
-		catch(InterruptedException e)
-		{
-                    e.printStackTrace();
+			PageObjectLogging.log(
+					"enterBirthDate ",
+					"Birth date: " + day +"/"+ month +"/"+ year + " selected",
+					true
+			);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void enterBlurryWord()
-	{
-		String word = getWordFromCaptcha();
-		blurryWordField.sendKeys(word);
-		PageObjectLogging.log("enterBlurryWord ", "Blurry word field populated", true);
+	public void typeCaptcha(File captchaFile) {
+		typeCaptcha(getWordFromCaptcha(captchaFile));
 	}
 
+	public void typeCaptcha(String captchaWord) {
+		captchaField.sendKeys(captchaWord);
+		PageObjectLogging.log(
+				"typeCaptcha ",
+				"captcha typed into captcha field",
+				true
+		);
+	}
 
-	public AlmostTherePageObject submit(String email, String password)
-	{
+	public AlmostTherePageObject submit(String email, String password) {
 		MailFunctions.deleteAllMails(email, password);
-		scrollAndClick(createAccountButton);
-		PageObjectLogging.log("submit ", "Submit button clicked", true, driver);
+		return submit();
+	}
+
+	public AlmostTherePageObject submit() {
+		scrollAndClick(signupButton);
+		PageObjectLogging.log(
+				"submit ",
+				"sign up button clicked",
+				true
+		);
 		return new AlmostTherePageObject(driver);
 	}
 
-	private String getWordFromCaptcha()
-	{
-		try
-		{
+	public void verifyCaptchaInvalidMessage() {
+		String message = captchaField
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(parentBy)
+				.findElement(errorMsgBy)
+				.getText();
+		Assertion.assertEquals(message, PageContent.signUpInvalidCaptchaMessage);
+	}
+
+	public void verifyUserExistsMessage() {
+		String message = userNameField
+				.findElement(parentBy)
+				.findElement(errorMsgBy)
+				.getText();
+		Assertion.assertEquals(message, PageContent.signUpUserExistsMessage);
+	}
+
+	private String getWordFromCaptcha(File captchaFile) {
+		try {
 			String captchaId = getAttributeValue(blurryWordHidden, "value");
 			String urlAd = Global.DOMAIN+ "wiki/Special:Captcha/image?wpCaptchaId="+ captchaId;
 			URL url = new URL(urlAd);
 
-
 			String md5 = md5(url.openStream());
-			if (md5 == null)
-			{
-				PageObjectLogging.log("getWordFromCaptcha", "mdp error", false);
+			if (md5 == null) {
+				throw new Exception("Provided captcha url doesn't exists");
 			}
 
-			File file = Global.CAPTCHA_FILE;
-			BufferedReader in = new BufferedReader(new FileReader(file));
+			BufferedReader in = new BufferedReader(new FileReader(captchaFile));
 			String strLine;
-			while ((strLine = in.readLine()) != null)
-			{
+			while ((strLine = in.readLine()) != null) {
 				String[] field = strLine.split(" ");
-				if (field[1].equals(md5))
-				{
+				if (field[1].equals(md5)) {
 					in.close();
 					PageObjectLogging.log("getWordFromCaptcha", "Captcha word decoded", true);
 					return field[0];
@@ -200,19 +208,16 @@ public class SignUpPageObject extends BasePageObject {
 			PageObjectLogging.log("getWordFromCaptcha", "Captcha word not decoded", false);
 			return null;
 		}
-		catch(IOException e)
-		{
-			PageObjectLogging.log("getWordFromCaptcha", e.toString(), false);
-			e.printStackTrace();
-			return null;
+		catch(IOException e) {
+			throw new RuntimeException(e);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 
 	}
 
-	private static String md5(InputStream is)
-		{
-		try
-		{
+	private static String md5(InputStream is) {
+		try {
 			String output;
 			MessageDigest digest = MessageDigest.getInstance("MD5");
 			byte[] buffer = new byte[8192];
@@ -226,20 +231,13 @@ public class SignUpPageObject extends BasePageObject {
 				output = String.format("%0" + (md5sum.length << 1) + "x", bigInt);
 			} finally {
 				is.close();
-			}
-			return output;
-		}
-		catch(NoSuchAlgorithmException e)
-		{
+			} return output;
+		} catch(NoSuchAlgorithmException e) {
 			PageObjectLogging.log("md5", e.toString(), false);
-			e.printStackTrace();
-			return null;
-		}
-		catch(IOException e)
-		{
+			throw new RuntimeException(e);
+		} catch(IOException e) {
 			PageObjectLogging.log("md5", e.toString(), false);
-			e.printStackTrace();
-			return null;
+			throw new RuntimeException(e);
 		}
 	}
 }

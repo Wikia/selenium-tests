@@ -3,7 +3,6 @@ package com.wikia.webdriver.Common.DriverProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -28,6 +27,7 @@ import com.wikia.webdriver.Common.Core.Global;
 public class NewDriverProvider {
 
 	private static EventFiringWebDriver driver;
+	private static EventFiringWebDriver driverFF;
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 
@@ -60,8 +60,12 @@ public class NewDriverProvider {
 		return driver;
 	}
 
-	public static  WebDriver getWebDriver() {
-            return driver;
+	public static WebDriver getWebDriver() {
+		return driver;
+	}
+
+	public static WebDriver getWebDriverFirefox() {
+		return driverFF;
 	}
 
 	private static EventFiringWebDriver getIEInstance() {
@@ -93,23 +97,25 @@ public class NewDriverProvider {
 		}
 
 		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
-		if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
-			File homePath = new File(System.getenv("HOME") + File.separator);
-			File mozillaPath = new File(homePath + File.separator + ".mozilla");
-			if (mozillaPath.exists()) {
-				try {
-					File.createTempFile("webdriver", UUID.randomUUID().toString(), mozillaPath);
-				} catch (IOException ex) {
-					throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
-				}
-			} else {
-				try {
-					File.createTempFile("webdriver", UUID.randomUUID().toString(), homePath);
-				} catch (IOException ex) {
-					throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
-				}
-			}
-		}
+		 if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
+                        File homePath = new File(System.getenv("HOME") + File.separator);
+                        File mozillaPath = new File(homePath + File.separator + ".mozilla");
+                        File tmpFile;
+                        if (mozillaPath.exists()) {
+                                try {
+                                        tmpFile = File.createTempFile("webdriver", null, mozillaPath);
+                                } catch (IOException ex) {
+                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
+                                }
+                        } else {
+                                try {
+                                        tmpFile = File.createTempFile("webdriver", null, homePath);
+                                } catch (IOException ex) {
+                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
+                                }
+                        }
+                        tmpFile.delete();
+                }
 
 		//If browserName contains CONSOLE activate JSErrorConsole
 		if (browserName.contains("CONSOLE")) {
@@ -157,13 +163,13 @@ public class NewDriverProvider {
 
 		if (browserName.equals("CHROMEMOBILE")) {
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments(
-				"--user-agent="
-				+ "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) "
-				+ "AppleWebKit/420+ (KHTML, like Gecko) "
-				+ "Version/3.0 Mobile/1A543a Safari/419.3"
-			);
-			return new EventFiringWebDriver(new ChromeDriver(options));
+            options.addArguments(
+                "--user-agent="+
+                "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) " +
+                "AppleWebKit/420+ (KHTML, like Gecko) " +
+                "Version/3.0 Mobile/1A543a Safari/419.3"
+            );
+            return new EventFiringWebDriver(new ChromeDriver(options));
 		}
 
 		return new EventFiringWebDriver(new ChromeDriver(caps));

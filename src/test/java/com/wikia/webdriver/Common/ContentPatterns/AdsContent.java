@@ -9,7 +9,8 @@ import java.util.HashMap;
 public class AdsContent {
 
     //HashMap with slots selector
-    public static HashMap<String, String> slotsSelectors;
+	public static HashMap<String, String> slotsSelectors;
+	public static HashMap<String, String> adsProviders;
 
     //SCIPTS
     public static String adsPushSlotScript =
@@ -28,10 +29,29 @@ public class AdsContent {
 	public static String leftSkyscraper3 = "LEFT_SKYSCRAPER_3";
 	public static String prefooterLeft = "PREFOOTER_LEFT_BOXAD";
 	public static String prefooterRight = "PREFOOTER_RIGHT_BOXAD";
+	public static final String wikiaBar = "WIKIA_BAR_BOXAD_1";
+	public static final String wikiaBar_gpt = "WIKIA_BAR_BOXAD_1_gpt";
+
+	//SLOTS SELECTORS
+	public static final String wikiaBarSelector = "#" + wikiaBar;
+	public static final String wikiaBar_gptSelector = "#" + wikiaBar_gpt;
 
 
 	public static String getSlotSelector(String slotName) {
 		return slotsSelectors.get(slotName);
+	}
+
+	public static String getElementForProvider(String providerName) {
+		setAdsProviders();
+		return adsProviders.get(providerName);
+	}
+
+	private static void setAdsProviders() {
+		adsProviders = new HashMap<String, String>();
+		adsProviders.put(
+			"IDG",
+			"script[src*='http://ad-emea.doubleclick.net/N7503/adj/DE-OW-netzwerk']"
+		);
 	}
 
 	public static void setSlotsSelectors() {

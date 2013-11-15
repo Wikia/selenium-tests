@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticleActions.DeleteArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
@@ -25,17 +25,17 @@ public class BlogCommentsTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "BlogComments_001", "BlogTests", "BlogComments"})
+	@Test(groups = { "BlogComments_001", "BlogCommentsTests"})
 	public void BlogComments_001_Anon_commentReply() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
 		String comment = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
-		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(PageContent.wikiaContributor);
 		blogPage.triggerCommentReply();
 		String commentReply = PageContent.commentText + blogPage.getTimeStamp();
@@ -45,18 +45,18 @@ public class BlogCommentsTests extends NewTestTemplate {
 		blogPage.verifyReplyCreator(PageContent.wikiaContributor);
 	}
 
-	@Test(groups = { "BlogComments_002", "BlogTests", "BlogComments"})
+	@Test(groups = { "BlogComments_002", "BlogCommentsTests"})
 	public void BlogComments_002_User_commentReply() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
 		String comment = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
-		blogPage.verifyArticleComment(comment);
+		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userName);
 		blogPage.triggerCommentReply();
 		String commentReply = PageContent.commentText + blogPage.getTimeStamp();
@@ -67,29 +67,41 @@ public class BlogCommentsTests extends NewTestTemplate {
 	}
 
 
-	@Test(groups = { "BlogComments_003", "BlogTests", "BlogComments"})
+	@Test(groups = { "BlogComments_003", "BlogCommentsTests"})
 	public void BlogComments_003_User_editComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
-		MiniEditorComponentObject editor = blogPage.triggerEditCommentArea();
+		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
+		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		editor.switchAndWrite(comment);
+		blogPage.submitComment();
+		blogPage.verifyCommentText(comment);
+		blogPage.verifyCommentCreator(credentials.userName);
+		blogPage.triggerEditCommentArea();
 		String commentEdited = PageContent.commentText + blogPage.getTimeStamp();
 		editor.switchAndEditComment(commentEdited);
 		blogPage.submitEditComment();
-		blogPage.verifyArticleComment(commentEdited);
+		blogPage.verifyCommentText(commentEdited);
 	}
 
-	@Test(groups = { "BlogComments_004", "BlogTests", "BlogComments"})
+	@Test(groups = { "BlogComments_004", "BlogCommentsTests"})
 	public void BlogComments_004_Admin_deleteComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		UserProfilePageObject userProfile = base.navigateToProfilePage(credentials.userName, wikiURL);
+		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
+		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
+		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		editor.switchAndWrite(comment);
+		blogPage.submitComment();
+		blogPage.verifyCommentText(comment);
+		blogPage.verifyCommentCreator(credentials.userNameStaff);
 		String commentText = blogPage.getFirstCommentText();
-		DeleteArticlePageObject delete = blogPage.deleteComment();
+		DeletePageObject delete = blogPage.deleteFirstComment();
 		delete.submitDeletion();
 		blogPage.verifyNotificationMessage();
 		blogPage.verifyCommentDeleted(commentText);
