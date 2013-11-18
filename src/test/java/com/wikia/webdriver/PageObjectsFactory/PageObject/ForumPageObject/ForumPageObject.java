@@ -16,12 +16,14 @@ public class ForumPageObject extends WikiArticlePageObject{
 
 	@FindBy(css=".button.policies-link")
 	private WebElement faqButton;
-	@FindBy(css=".modalWrapper.policies")
+	@FindBy(css="#ForumPoliciesModal")
 	private WebElement faqLightBox;
-	@FindBy(css=".close.wikia-chiclet-button")
+	@FindBy(css="#close")
 	private WebElement closeFaqLightBoxButton;
 	@FindBy(css=".button.admin-link")
 	private WebElement manageBoardsButton;
+	@FindBy(css="div.wikiaThrobber")
+	private WebElement faqModalLoadingState;
 
 	private By forumBoardsList = By.cssSelector("ul.boards h4 a");
 
@@ -37,7 +39,9 @@ public class ForumPageObject extends WikiArticlePageObject{
 	}
 
 	private void closeFaqLightBox() {
-		scrollAndClick(closeFaqLightBoxButton);
+		waitForElementNotVisibleByElement(faqModalLoadingState);
+		waitForElementByElement(closeFaqLightBoxButton);
+		closeFaqLightBoxButton.click();
 		PageObjectLogging.log("closeFaqLightBox", "faq lightbox closed", true);
 	}
 
