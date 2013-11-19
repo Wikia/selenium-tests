@@ -62,7 +62,7 @@ public class AdsComparison {
 			startPoint, screenshotSize, driver
 		);
 		String encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
-		capturedScreen.delete();
+//		capturedScreen.delete();
 		boolean success = true;
 
 		if (!(

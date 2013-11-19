@@ -158,10 +158,10 @@ public class AdsDataProvider {
 			{
 				"adtest-fluid", "Skin",
 				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
-				new Dimension(2000, 800),
-				100,
-				"src/test/resources/adsResources/skin2000_left",
-				"src/test/resources/adsResources/skin2000_right",
+				new Dimension(1366, 768),
+				130,
+				"src/test/resources/adsResources/skin1366_left",
+				"src/test/resources/adsResources/skin1366_right",
 			}
 		};
 	}
