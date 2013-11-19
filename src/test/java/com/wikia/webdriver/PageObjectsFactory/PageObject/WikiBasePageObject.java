@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
@@ -909,5 +910,15 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementVisibleByElement(deleteDropdown);
 		deleteDropdown.click();
 		return new DeletePageObject(driver);
+	}
+
+	public String getHeaderText() {
+		waitForElementByElement(wikiFirstHeader);
+		return wikiFirstHeader.getText();
+	}
+
+	public void verifyHeader(String fileName) {
+		waitForElementByElement(wikiFirstHeader);
+		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
 	}
 }

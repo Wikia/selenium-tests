@@ -27,10 +27,10 @@ public class FollowVideosTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialVideosPageObject special = base.openSpecialVideoPage(wikiURL);
-		videoName = special.getRandomVideo();
-		WatchPageObject watch = special.unfollowVideo(wikiURL, videoName);
+		WatchPageObject watch = special.unfollowVideo(wikiURL, special.getRandomVideo());
 		watch.confirmWatchUnwatch();
 		special.verifyPageUnfollowed();
+		videoName = special.getHeaderText();
 	}
 
 	@Test(dependsOnMethods={"FollowVideo_001_setup"})

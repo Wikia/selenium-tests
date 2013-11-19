@@ -114,11 +114,6 @@ public class FilePagePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifythumbnailIsPresent", "Verified thumbnail is visible", true);
 	}
 
-	public void verifyHeader(String fileName) {
-		waitForElementByElement(wikiFirstHeader);
-		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
-	}
-
 	public String getImageUrl() {
 		return fileEmbedded.findElement(By.cssSelector("a")).getAttribute("href");
 	}
