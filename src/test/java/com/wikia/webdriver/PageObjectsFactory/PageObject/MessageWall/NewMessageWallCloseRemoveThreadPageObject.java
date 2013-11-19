@@ -25,6 +25,7 @@ public class NewMessageWallCloseRemoveThreadPageObject extends WikiBasePageObjec
 	public NewMessageWall closeRemoveThread(String reason) {
 		removeReasonField.sendKeys(reason);
 		removeConfirmButton.click();
+		waitForElementNotPresent(modalWrapper);
 		PageObjectLogging.log("closeRemoveThread", "thread removed with reason " + reason, true);
 		return new NewMessageWall(driver);
 	}

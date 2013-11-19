@@ -211,6 +211,7 @@ public class VisualEditModePageObject extends EditMode {
 
 	public Object modifyComponent(Components component) {
 		mouseOverComponent(component);
+		waitForElementByElement(modifyComponentButton);
 		modifyComponentButton.click();
 		PageObjectLogging.log("modifyGallery", "Click on 'modify button' on gallery", true, driver);
 		switch (component) {

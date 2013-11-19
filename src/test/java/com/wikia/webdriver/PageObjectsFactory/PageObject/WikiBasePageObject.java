@@ -131,8 +131,11 @@ public class WikiBasePageObject extends BasePageObject {
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
 
+	protected String modalWrapper = "#WikiaConfirm";
+
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+
 
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
