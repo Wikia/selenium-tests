@@ -32,7 +32,7 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 	public String getRandomVideo() {
 		List<String> names = new ArrayList();
 		for (WebElement elem:videos) {
-			names.add(elem.getAttribute("data-video-name"));
+			names.add(elem.getAttribute("data-video-key"));
 		}
 		Random r = new Random();
 		int rnd = r.nextInt(names.size()-1);
