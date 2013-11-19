@@ -2,6 +2,7 @@ package com.wikia.webdriver.Common.Templates;
 
 import java.io.File;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -110,5 +111,10 @@ public class NewTestTemplateCore {
 	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
 		NewDriverProvider.setDriverCapabilities(caps);
 		startBrowser();
+	}
+
+	protected void setWindowSize(int width, int height, WebDriver desiredDriver) {
+		Dimension dimension = new Dimension(width, height);
+		desiredDriver.manage().window().setSize(dimension);
 	}
 }
