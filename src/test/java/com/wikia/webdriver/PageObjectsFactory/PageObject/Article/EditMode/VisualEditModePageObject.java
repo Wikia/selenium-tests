@@ -202,6 +202,7 @@ public class VisualEditModePageObject extends EditMode {
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image').mouseenter()");
 			break;
 		case VideoPlaceholder:
+			verifyComponent(videoPlaceholder);
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
 			break;
 		default:

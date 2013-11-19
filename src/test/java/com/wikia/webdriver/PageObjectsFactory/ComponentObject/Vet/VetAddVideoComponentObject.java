@@ -73,7 +73,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 		waitForElementByElement(listElem);
 		String videoName = listElem.findElement(By.cssSelector("a[data-pos]")).getAttribute("title");
 		WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
-		addVideoLink.click();
+		scrollAndClick(addVideoLink);
 		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked", true, driver);
 		this.videoName =  videoName;
 	}
