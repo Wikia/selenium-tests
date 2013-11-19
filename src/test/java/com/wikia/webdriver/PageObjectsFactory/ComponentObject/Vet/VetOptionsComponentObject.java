@@ -9,14 +9,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.AddMediaModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
  *
  */
-public class VetOptionsComponentObject extends WikiBasePageObject {
+public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
 		@FindBy(css=".main-header")
 		private WebElement videoOptionsHeader;
@@ -99,6 +99,7 @@ public class VetOptionsComponentObject extends WikiBasePageObject {
 
 	private void clickAddaVideo() {
 		waitForElementByElement(addAvideo);
+		waitForElementClickableByElement(addAvideo);
 		scrollAndClick(addAvideo);
 		PageObjectLogging.log("clickAddaVideo", "add video button clicked",  true, driver);
 	}
@@ -117,15 +118,21 @@ public class VetOptionsComponentObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideoThumbnail", "video thumbnail is visible",  true);
 	}
 
+	private void verifyVideoModalNotVisible() {
+		waitForElementNotVisibleByElement(addVideoModal);
+	}
+
 	public WikiArticleEditMode submit(){
 		verifyVideoThumbnail();
 		clickAddaVideo();
 		clickRetunToEditing();
+		verifyVideoModalNotVisible();
 		return new WikiArticleEditMode(driver);
 	}
 
 	public void update(){
 		clickAddaVideo();
+		verifyVideoModalNotVisible();
 	}
 
 	public void adjustPosition(PositionsVideo position){

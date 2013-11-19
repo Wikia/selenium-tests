@@ -20,7 +20,7 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
 	@FindBy (css = "#VideoEmbedBackWrapper button.close")
 	private WebElement modalAddVideoClose;
 	@FindBy (css = "#VideoEmbedBackWrapper")
-	private WebElement addVideoModal;
+	protected WebElement addVideoModal;
 
 	public AddMediaModalComponentObject(WebDriver driver) {
 		super(driver);
