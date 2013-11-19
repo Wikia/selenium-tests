@@ -99,6 +99,7 @@ public class UserAndRights extends TestTemplate{
 		edit.deleteArticleContent();
 		edit.typeInContent(pageContent);
 		edit.clickOnPublishButton();
+		article.verifyArticleText(pageContent);
 		SpecialContributionsPageObject contribution = new SpecialContributionsPageObject(driver);
 		contribution = contribution.openContributionsPage();
 		contribution.searchContributions(Properties.userNameStaff);
