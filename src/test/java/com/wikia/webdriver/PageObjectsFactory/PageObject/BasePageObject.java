@@ -1,20 +1,13 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
-import com.wikia.webdriver.Common.Core.Global;
-import com.wikia.webdriver.Common.Core.Purge.PurgeMethod;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
@@ -31,6 +24,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.Purge.PurgeMethod;
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  *
@@ -696,7 +698,7 @@ public class BasePageObject{
     	wait.until(
 			CommonExpectedConditions.elementNotPresent(selector)
 		);
-    	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
     /**

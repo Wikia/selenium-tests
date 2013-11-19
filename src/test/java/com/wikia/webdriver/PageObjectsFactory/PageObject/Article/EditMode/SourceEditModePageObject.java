@@ -265,6 +265,7 @@ public class SourceEditModePageObject extends EditMode{
 	}
 
 	private String getContent() {
+		waitForElementByElement(sourceModeTextArea);
 		return sourceModeTextArea.getAttribute("value");
 	}
 

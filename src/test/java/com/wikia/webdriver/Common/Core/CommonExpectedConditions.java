@@ -249,7 +249,7 @@ public class CommonExpectedConditions {
 				try {
 					driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 					Boolean isDisplayed = element.isDisplayed();
-					driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+					driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 					return !isDisplayed;
 				}
 				catch (StaleElementReferenceException e) {
@@ -258,6 +258,7 @@ public class CommonExpectedConditions {
 					return true;
 				}
 				catch (NoSuchElementException e) {
+					driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 					return true;
 				}
 			}
