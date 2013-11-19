@@ -400,7 +400,7 @@ public class BasePageObject{
 	 * Returns parent element of the given element
 	 *
 	 * @author Michal Nowierski ** @param childElement - the element whose
-	 *         parent we are looking for
+	 *		 parent we are looking for
 	 */
 	public WebElement getParentElement(WebElement childElement) {
 		return childElement.findElement(By.xpath(".."));
@@ -410,7 +410,7 @@ public class BasePageObject{
 	 * Checks if the element is visible on browser
 	 *
 	 ** @param by
-	 *            The By class defined for the element
+	 *			The By class defined for the element
 	 */
 	public WebElement waitForElementByBy(By by) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -421,7 +421,7 @@ public class BasePageObject{
 	 * Checks if the element is visible on browser
 	 *
 	 ** @param element
-	 *            The element to be checked
+	 *			The element to be checked
 	 * @throws Exception
 	 */
 	public void waitForElementByElement(WebElement element) {
@@ -586,8 +586,8 @@ public class BasePageObject{
 	 *
 	 * @param alertMessage that we do or do not expect
 	 * @param ifAlertExpected
-	 *            if we expect JS alert - true. If we don't expect JS alert -
-	 *            false
+	 *			if we expect JS alert - true. If we don't expect JS alert -
+	 *			false
 	 * @author Michal Nowierski
 	 */
 	public void checkJSalertIsThere(String alertMessage, Boolean ifAlertExpected) {
@@ -678,47 +678,47 @@ public class BasePageObject{
 				driver);
 	}
 
-    /**
-     * Wait for element to not be present in DOM
-     *
-     * @param cssSelector
-     */
-    public void waitForElementNotPresent(final String cssSelector) {
-    	this.waitForElementNotPresent(By.cssSelector(cssSelector));
-    }
+	/**
+	 * Wait for element to not be present in DOM
+	 *
+	 * @param cssSelector
+	 */
+	public void waitForElementNotPresent(final String cssSelector) {
+		this.waitForElementNotPresent(By.cssSelector(cssSelector));
+	}
 
-    /**
-     * Wait for element to not be present in DOM
-     * @param selector
-     */
-    public void waitForElementNotPresent(final By selector) {
-    	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    	wait.until(
+	/**
+	 * Wait for element to not be present in DOM
+	 * @param selector
+	 */
+	public void waitForElementNotPresent(final By selector) {
+		changeImplicitWait(0, TimeUnit.SECONDS);
+		wait.until(
 			CommonExpectedConditions.elementNotPresent(selector)
 		);
-    	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    }
+		restoreDeaultImplicitWait();
+	}
 
-    /**
-     * Wait for element to be in viewport
-     * Either position top or left is bigger then -1
-     *
-     * @param element
-     */
-    public void waitForElementInViewPort(final WebElement element) {
-        wait.until(
-            CommonExpectedConditions.elementInViewPort(element)
-        );
-    }
+	/**
+	 * Wait for element to be in viewport
+	 * Either position top or left is bigger then -1
+	 *
+	 * @param element
+	 */
+	public void waitForElementInViewPort(final WebElement element) {
+		wait.until(
+			CommonExpectedConditions.elementInViewPort(element)
+		);
+	}
 
-    /**
-     * Wait for new window present
-     */
-    public void waitForNewWindow() {
-        wait.until(
-            CommonExpectedConditions.newWindowPresent()
-        );
-    };
+	/**
+	 * Wait for new window present
+	 */
+	public void waitForNewWindow() {
+		wait.until(
+			CommonExpectedConditions.newWindowPresent()
+		);
+	};
 
 	public void enableWikiaTracker() {
 		driver.get(
