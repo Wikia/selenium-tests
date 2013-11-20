@@ -62,6 +62,8 @@ public class SourceEditModePageObject extends EditMode{
 	private WebElement createSlider;
 	@FindBy(css="#wpSave")
 	private WebElement submitButton;
+	@FindBy(css=".loading-indicator")
+	private WebElement sourceModeLoadingIndicator;
 
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
@@ -277,7 +279,7 @@ public class SourceEditModePageObject extends EditMode{
 	public void verifyVideoWidth(int widthDesired) {
 		String content = getContent();
 		int width = Integer.parseInt(
-				content.substring(content.indexOf("px")-6, content.indexOf("px")-3)
+				content.substring(content.indexOf("px")-4, content.indexOf("px")-1)
 		);
 		Assertion.assertNumber(
 				width,
@@ -319,6 +321,7 @@ public class SourceEditModePageObject extends EditMode{
 
 	public void verifySourceModeEnabled() {
 		waitForElementByElement(sourceModeTextArea);
+		waitForElementNotVisibleByElement(sourceModeLoadingIndicator);
 		PageObjectLogging.log("verifySourceModeEnabled", "source mode enabled", true);
 	}
 }
