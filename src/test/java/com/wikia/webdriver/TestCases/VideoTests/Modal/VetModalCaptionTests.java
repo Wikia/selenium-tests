@@ -32,15 +32,17 @@ public class VetModalCaptionTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	String articleTitle;
+	String articleTitle_caption;
+	String articleTitle_noCaption;
+	String articleTitle_notEditable;
 	String caption;
 
 	@Test(groups = {"VetModalCaption", "VetModalCaption_001"})
 	public void Vet_Modal_001_captionOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		articleTitle_caption = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle_caption);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -61,7 +63,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	public void Vet_Modal_002_captionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle_caption);
 		VetOptionsComponentObject vetOptions =
 				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
 		vetOptions.verifyCaption(caption);
@@ -71,12 +73,11 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	public void Vet_Modal_003_noCaptionOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		articleTitle_noCaption = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle_noCaption);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
-		caption = PageContent.caption + vetOptions.getTimeStamp();
 		vetOptions.adjustStyle(StyleVideo.nocaption);
 		vetOptions.submit();
 		visualEditMode.verifyVideoNoCaption();
@@ -91,7 +92,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	public void Vet_Modal_004_noCaptionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle_noCaption);
 		VetOptionsComponentObject vetOptions =
 				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
 		vetOptions.verifyNoCaption();
@@ -101,8 +102,8 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	public void Vet_Modal_005_videoNameNotEditable() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		articleTitle_notEditable = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle_notEditable);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByQuery(VideoContent.wikiaVideoQuery, 1);

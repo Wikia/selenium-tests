@@ -195,10 +195,12 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 	}
 
 	public void verifyNoCaption() {
-		String styleClass = styleWithoutCaption.findElement(
+		waitForElementByElement(styleWithoutCaption);
+		WebElement styleClass = styleWithoutCaption.findElement(
 				By.xpath("./..")
-		).getAttribute("class");
-		Assertion.assertEquals("selected", styleClass);
+		);
+		waitForValueToBePresentInElementsAttributeByElement(styleClass, "class", "selected");
+		PageObjectLogging.log("verifyNoCaption", "no caption option verified", true);
 	}
 
 	public void verifyNameNotEditable() {
