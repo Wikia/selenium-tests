@@ -21,6 +21,8 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 
 	@FindBy(css=".result")
 	private List<WebElement> searchResultList;
+	@FindBy(css=".result .result-link")
+	private List<WebElement> searchResultLinks;
 	@FindBy(css=".Results > :nth-child(1)")
 	private WebElement firstResult;
 	@FindBy(css=".Results > :nth-child(1) > .result-description > :nth-child(2)")
@@ -222,5 +224,12 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 		int indexComparisonStart = thumbnails.get(0).getAttribute("src").indexOf("px-");
 		int indexComparisonFinish = thumbnails.get(0).getAttribute("src").indexOf("-Wikia-Visualization-Main");
 		return thumbnails.get(0).getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
+	}
+
+	public void verifyTopResultsAre(List<String> headers) {
+		for ( int i=0; i<headers.size(); i++ ) {
+			 WebElement link = searchResultLinks.get(i);
+			Assertion.assertEquals(link.getText(), headers.get(i));
+		}
 	}
 }
