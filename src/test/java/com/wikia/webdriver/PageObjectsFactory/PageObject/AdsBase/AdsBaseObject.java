@@ -40,6 +40,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
 		AdsContent.setSlotsSelectors();
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 		getUrl(page);
 		isWikiMainPage = checkIfMainPage();
 	}
