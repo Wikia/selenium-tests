@@ -45,6 +45,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 		vetOptions.submit();
 		visualEditMode.verifyVideoWidth(width);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
+		sourceEditMode.verifySourceModeEnabled();
 		sourceEditMode.verifyVideoWidth(width);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
 		previewMode.verifyVideoWidth(width);

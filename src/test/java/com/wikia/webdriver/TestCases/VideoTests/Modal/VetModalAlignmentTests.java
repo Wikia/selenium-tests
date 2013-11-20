@@ -52,6 +52,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.left);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
+		sourceEditMode.verifySourceModeEnabled();
 		sourceEditMode.verifyVideoAlignment(PositionsVideo.left);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
 		previewMode.verifyVideoAlignment(PositionsVideo.left);
@@ -83,6 +84,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.center);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
+		sourceEditMode.verifySourceModeEnabled();
 		sourceEditMode.verifyVideoAlignment(PositionsVideo.center);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
 		previewMode.verifyVideoAlignment(PositionsVideo.center);
@@ -114,6 +116,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.right);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
+		sourceEditMode.verifySourceModeEnabled();
 		sourceEditMode.verifyVideoAlignment(PositionsVideo.right);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
 		previewMode.verifyVideoAlignment(PositionsVideo.right);

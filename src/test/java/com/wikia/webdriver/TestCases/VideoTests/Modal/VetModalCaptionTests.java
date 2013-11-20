@@ -51,6 +51,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		vetOptions.submit();
 		visualEditMode.verifyVideoCaption(caption);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
+		sourceEditMode.verifySourceModeEnabled();
 		sourceEditMode.verifyVideoCaption(caption);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
 		previewMode.verifyVideoCaption(caption);

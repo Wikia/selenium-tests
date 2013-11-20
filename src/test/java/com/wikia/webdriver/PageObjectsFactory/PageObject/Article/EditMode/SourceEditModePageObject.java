@@ -316,4 +316,9 @@ public class SourceEditModePageObject extends EditMode{
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("clearContent", "source mode cleared", true);
 	}
+
+	public void verifySourceModeEnabled() {
+		waitForElementByElement(sourceModeTextArea);
+		PageObjectLogging.log("verifySourceModeEnabled", "source mode enabled", true);
+	}
 }

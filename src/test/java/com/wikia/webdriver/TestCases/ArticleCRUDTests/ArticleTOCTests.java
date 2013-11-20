@@ -34,6 +34,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 				.populateTitleField(articleTitle);
 		SourceEditModePageObject sourceEditMode = visualEditMode
 				.clickSourceButton();
+		sourceEditMode.verifySourceModeEnabled();
 		sourceEditMode.addTOC();
 		ArticlePageObject article = sourceEditMode.submitArticle();
 		article.verifyTOCpresent();
