@@ -3,14 +3,16 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.DiffPage.DiffPagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HistoryPage.HistoryPagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 
-public class FilePageTests extends TestTemplate {
+public class FilePageTests extends NewTestTemplate {
+
+	Credentials credentials = config.getCredentials();
 
 	/**
 	 * Verify functionality of tabs on file pages in Oasis.  When a tab
@@ -21,7 +23,7 @@ public class FilePageTests extends TestTemplate {
 	@Test(groups = {"FilePage", "filePage001_tabs"})
 	public void filePage001_tabs() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
-		filePage.openFilePage(URLsContent.fileName001);
+		filePage.openFilePage(wikiURL, URLsContent.fileName001);
 
 		filePage.verifySelectedTab("about");
 
@@ -43,13 +45,10 @@ public class FilePageTests extends TestTemplate {
 	 */
 	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn"})
 	public void filePage002_tabsLoggedIn() {
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password);
 
-		login.logInCookie(Properties.userName, Properties.password);
-
-		FilePagePageObject filePage = new FilePagePageObject(driver);
-		filePage.openFilePage(URLsContent.fileName001);
+		FilePagePageObject filePage = base.openFilePage(wikiURL, URLsContent.fileName001);
 
 		filePage.refreshAndVerifyTabs(0);
 		filePage.refreshAndVerifyTabs(1);
@@ -65,34 +64,10 @@ public class FilePageTests extends TestTemplate {
 	@Test(groups = {"FilePage", "filePage003_diffPage"})
 	public void filePage003_diffPage() {
 
-		HistoryPagePageObject historyPage = new HistoryPagePageObject(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		HistoryPagePageObject historyPage = base.openFileHistoryPage(URLsContent.fileName001, wikiURL);
 
-		historyPage.openFileHistoryPage(URLsContent.filePage + URLsContent.fileName001);
-		historyPage.goToDiffPageFromHistoryPage();
-
-		DiffPagePageObject diffPage = new DiffPagePageObject(driver);
-
+		DiffPagePageObject diffPage = historyPage.goToDiffPageFromHistoryPage();
 		diffPage.verifyDiffTablePresent();
-	}
-
-	/**
-	 * Testing "Appears on these pages"
-	 *
-	 * @author Garth Webb
-	 */
-	@Test(groups = {"FilePage", "filePage004_appearsOn"})
-	public void filePage004_appearsOn() {
-		FilePagePageObject filePage = new FilePagePageObject(driver);
-		filePage.openFilePage(URLsContent.fileName002);
-
-		// Make sure you're on the "about" tab
-		filePage.selectTab(0);
-
-		// This should be the first article in the list
-		filePage.verifyAppearsOn(URLsContent.articleName001);
-
-		// After paging, article #4 should be at the top of the list
-		filePage.clickLocalAppearsPageNext();
-		filePage.verifyAppearsOn(URLsContent.articleName002);
 	}
 }

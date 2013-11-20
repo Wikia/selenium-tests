@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -61,12 +60,6 @@ public class FilePagePageObject extends WikiBasePageObject {
 				tabName + " selected",
 				true
 		);
-	}
-
-	public void openFilePage(String fileName) {
-		getUrl(URLsContent.filePage + fileName);
-		waitForElementByElement(tabList.get(0));
-		PageObjectLogging.log("Open file page", "file page opened", true);
 	}
 
 	public void refreshAndVerifyTabs(int tab) {

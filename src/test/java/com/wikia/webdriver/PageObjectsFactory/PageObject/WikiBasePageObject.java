@@ -42,6 +42,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HistoryPage.HistoryPagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
@@ -170,6 +171,13 @@ public class WikiBasePageObject extends BasePageObject {
 	{
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
+	}
+
+	public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
+		//public static String filePage = Global.DOMAIN + wikiDir + fileNameSpace;
+		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + articlePage, URLsContent.historyAction));
+		PageObjectLogging.log("Open history page", "history page opened", true);
+		return new HistoryPagePageObject(driver);
 	}
 
 	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {

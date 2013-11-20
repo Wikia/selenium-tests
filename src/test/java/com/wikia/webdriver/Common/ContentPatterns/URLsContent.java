@@ -98,7 +98,6 @@ public class URLsContent {
 	public static String fileNameSpace = "File:";
 	public static String fileName001 = "Grammy_Muppet_Critics";
 	public static String fileName002 = "New_Batman_Year_One_Clip";
-	public static String filePage = Global.DOMAIN + wikiDir + fileNameSpace;
 
 	// History Pages
 	public static String historyAction = "action=history";
