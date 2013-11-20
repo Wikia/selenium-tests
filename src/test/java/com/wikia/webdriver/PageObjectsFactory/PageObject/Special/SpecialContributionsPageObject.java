@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -11,7 +10,6 @@ public class SpecialContributionsPageObject extends SpecialPageObject {
 
 	public SpecialContributionsPageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
 	@FindBy(css=".mw-contributions-table #user")

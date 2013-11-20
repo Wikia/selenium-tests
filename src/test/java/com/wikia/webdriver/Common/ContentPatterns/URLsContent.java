@@ -34,7 +34,6 @@ public class URLsContent {
 	public static final String specialPhalanx = "wiki/Special:Phalanx";
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
-
 	public static final String specialCreateBlogPage = "wiki/Special:CreateBlogPage";
 	public static final String specialPreferences = "wiki/Special:Preferences";
 	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
@@ -53,6 +52,11 @@ public class URLsContent {
 	public static final String userProfile = "wiki/User:%userName%";
 	public static final String specialCreateNewWiki = "Special:CreateNewWiki";
 	public static final String specialWikiFactory = "wiki/Special:WikiFactory";
+	public static final String specialContributions = "wiki/Special:Contributions";
+	public static final String specialBlockList = "wiki/Special:BlockList";
+	public static final String specialUnblock = "wiki/Special:Unblock";
+	public static final String specialBlock = "wiki/Special:Block";
+
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";

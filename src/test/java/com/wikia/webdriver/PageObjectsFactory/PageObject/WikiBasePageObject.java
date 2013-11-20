@@ -179,33 +179,32 @@ public class WikiBasePageObject extends BasePageObject {
 
 
 	public SpecialContributionsPageObject openContributionsPage(String wikiURL) {
-		getUrl(wikiURL + "wiki/Special:Contributions");
+		getUrl(wikiURL + URLsContent.specialContributions);
 		PageObjectLogging.log("openContributionsPage", "contributions page is opened", true);
 		return new SpecialContributionsPageObject(driver);
 	}
 
 	public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL){
-		getUrl(wikiURL+"wiki/Special:BlockList");
+		getUrl(wikiURL + URLsContent.specialBlockList);
 		PageObjectLogging.log("Special:BlockList openSpecialBlockListPage", "blocked users list page opened", true);
 		return new SpecialBlockListPageObject(driver);
 	}
 
 
 	public SpecialUnblockPageObject openSpecialUnblockPage(String wikiURL) {
-		getUrl(wikiURL +"wiki/Special:Unblock");
+		getUrl(wikiURL + URLsContent.specialUnblock);
 		PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
 		return new SpecialUnblockPageObject(driver);
 	}
 
 
 	public SpecialBlockPageObject openSpecialBlockPage(String wikiURL){
-		getUrl(wikiURL+"wiki/Special:Block");
+		getUrl(wikiURL + URLsContent.specialBlock);
 		PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
 		return new SpecialBlockPageObject(driver);
 	}
 
 	public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
-		//public static String filePage = Global.DOMAIN + wikiDir + fileNameSpace;
 		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + articlePage, URLsContent.historyAction));
 		PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
 		return new HistoryPagePageObject(driver);
@@ -259,11 +258,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialAdminDashboard);
 		return new SpecialAdminDashboardPageObject(driver);
-	}
-
-	public SpecialCssPageObject openSpecialCss() {
-		getUrl(Global.DOMAIN + URLsContent.specialCSS);
-		return new SpecialCssPageObject(driver);
 	}
 
 	public SpecialCssPageObject openSpecialCss(String wikiURL) {

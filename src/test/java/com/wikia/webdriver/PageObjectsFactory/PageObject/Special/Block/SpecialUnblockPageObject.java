@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -16,16 +15,9 @@ public class SpecialUnblockPageObject extends WikiBasePageObject{
 	private WebElement submitButton;
 	@FindBy(xpath="//h1[contains(text(), 'Unblock')]")
 	private WebElement unblockedUserHead;
-//	@FindBy(xpath="//a[@class='new' and @href='/wiki/User:TooManyLogInAttempts' and contains(text(), 'TooManyLogInAttempts')]")
-//	private WebElement unblockedUserMassage1;
-//	@FindBy(xpath="//p[contains(text(), 'has been unblocked (')]")
-//	private WebElement unblockedUserMassage2;
-//	@FindBy(xpath="//a[@href='/wiki/Special:Block/TooManyLogInAttempts' and contains(text(), 're-block')]")
-//	private WebElement unblockedUserMassage3;
 
 	public SpecialUnblockPageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
 	private void typeInUserName(String userName){
