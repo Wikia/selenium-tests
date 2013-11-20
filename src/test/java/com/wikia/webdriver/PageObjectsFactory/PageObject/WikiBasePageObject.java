@@ -47,6 +47,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageW
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialContributionsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
@@ -58,6 +59,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestoreP
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActivityPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockListPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialUnblockPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
@@ -173,10 +177,37 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
 
+
+	public SpecialContributionsPageObject openContributionsPage(String wikiURL) {
+		getUrl(wikiURL + "wiki/Special:Contributions");
+		PageObjectLogging.log("openContributionsPage", "contributions page is opened", true);
+		return new SpecialContributionsPageObject(driver);
+	}
+
+	public SpecialBlockListPageObject openSpecialBlockListPage(String wikiURL){
+		getUrl(wikiURL+"wiki/Special:BlockList");
+		PageObjectLogging.log("Special:BlockList openSpecialBlockListPage", "blocked users list page opened", true);
+		return new SpecialBlockListPageObject(driver);
+	}
+
+
+	public SpecialUnblockPageObject openSpecialUnblockPage(String wikiURL) {
+		getUrl(wikiURL +"wiki/Special:Unblock");
+		PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
+		return new SpecialUnblockPageObject(driver);
+	}
+
+
+	public SpecialBlockPageObject openSpecialBlockPage(String wikiURL){
+		getUrl(wikiURL+"wiki/Special:Block");
+		PageObjectLogging.log("openSpecialBlockPage", "history page opened", true);
+		return new SpecialBlockPageObject(driver);
+	}
+
 	public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
 		//public static String filePage = Global.DOMAIN + wikiDir + fileNameSpace;
 		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + articlePage, URLsContent.historyAction));
-		PageObjectLogging.log("Open history page", "history page opened", true);
+		PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
 		return new HistoryPagePageObject(driver);
 	}
 

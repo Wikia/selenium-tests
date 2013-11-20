@@ -2,108 +2,90 @@ package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialContributionsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialUnblockPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
-public class UserAndRights extends TestTemplate{
+public class UserAndRights extends NewTestTemplate {
+
+	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"usersAndRights001", "UsersAndRights"})
-	public void usersAndRights001_Block(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		SpecialBlockPageObject block = new SpecialBlockPageObject(driver);
-		block.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		block = block.openSpecialBlockPage();
+	public void usersAndRights001_Block() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialBlockPageObject block  = base.openSpecialBlockPage(wikiURL);
 		block.deselectAllSelections();
-		block.typeInUserName(Properties.userNameBlocked);
+		block.typeInUserName(credentials.userNameBlocked);
 		block.selectExpiration("2 hours");
 		block.clickBlockButton();
-		login.logOut(driver);
 	}
 
 	@Test(groups = {"usersAndRights002", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
-	public void usersAndRights002_VerifyBlockedUser(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
-		login.logInCookie(Properties.userNameBlocked, Properties.passwordBlocked);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
+	public void usersAndRights002_VerifyBlockedUser() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
+		VisualEditModePageObject edit = base.goToArticleDefaultContentEditPage(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		edit.verifyBlockedUserMessage();
 	}
 
 	@Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
-	public void usersAndRights003_BlockListBlocked(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		SpecialBlockListPageObject list = new SpecialBlockListPageObject(driver);
-		list.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		list = list.openSpecialBlockListPage();
-		list.searchForUser(Properties.userNameBlocked);
-		list.verifyUserBlocked(Properties.userNameBlocked);
+	public void usersAndRights003_BlockListBlocked() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialBlockListPageObject list = base.openSpecialBlockListPage(wikiURL);
+		list.searchForUser(credentials.userNameBlocked);
+		list.verifyUserBlocked(credentials.userNameBlocked);
 	}
 
 	@Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
-	public void usersAndRights004_Unblock(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		SpecialUnblockPageObject unblock = new SpecialUnblockPageObject(driver);
-		unblock.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		unblock = unblock.openSpecialUnblockPage();
-		unblock.unblockUser(Properties.userNameBlocked);
-		unblock.verifyUnblockMessage(Properties.userNameBlocked);
+	public void usersAndRights004_Unblock() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialUnblockPageObject unblock = base.openSpecialUnblockPage(wikiURL);
+		unblock.unblockUser(credentials.userNameBlocked);
+		unblock.verifyUnblockMessage(credentials.userNameBlocked);
 	}
 
 	@Test(groups = {"usersAndRights005", "UsersAndRights"}, dependsOnMethods={"usersAndRights004_Unblock"})
-	public void usersAndRights005_VerifyUnblockedUser(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.openWikiPage();
-		login.logInCookie(Properties.userNameBlocked, Properties.passwordBlocked);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
-		edit.clickOnPublishButton();
+	public void usersAndRights005_VerifyUnblockedUser() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
+		String title = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject edit = base.goToArticleEditPage(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		ArticlePageObject article = edit.submitArticle();
+		article.verifyArticleTitle(title);
 	}
 
 	@Test(groups = {"usersAndRights006", "UsersAndRights"}, dependsOnMethods={"usersAndRights004_Unblock"})
-	public void usersAndRights006_BlockListUnblocked(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		SpecialBlockListPageObject list = new SpecialBlockListPageObject(driver);
-		list.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		list = list.openSpecialBlockListPage();
-		list.searchForUser(Properties.userNameBlocked);
+	public void usersAndRights006_BlockListUnblocked() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
+		SpecialBlockListPageObject list = base.openSpecialBlockListPage(wikiURL);
+		list.searchForUser(credentials.userNameBlocked);
 		list.verifyUserUnblocked();
 	}
 
 	@Test(groups = {"usersAndRights007", "UsersAndRights"})
 	public void usersAndRights007_Contributions(){
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		String pageContent = article.getTimeStamp() + "Special:Contributions test article content";
-		article.openWikiPage();
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		WikiArticleEditMode edit = article.createNewDefaultArticle();
-		edit.deleteArticleContent();
-		edit.typeInContent(pageContent);
-		edit.clickOnPublishButton();
-		article.verifyArticleText(pageContent);
-		SpecialContributionsPageObject contribution = new SpecialContributionsPageObject(driver);
-		contribution = contribution.openContributionsPage();
-		contribution.searchContributions(Properties.userNameStaff);
-		contribution.verifyNewPageOnList(article.getPageName(), pageContent);
-		login.logOut(driver);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		String pageContent = base.getTimeStamp();
+		String pageName = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject edit = base.goToArticleEditPage(wikiURL, pageName);
+		edit.clearContent();
+		edit.addContent(pageContent);
+		ArticlePageObject article = edit.submitArticle();
+		article.verifyContent(pageContent);
+		SpecialContributionsPageObject contribution = base.openContributionsPage(wikiURL);
+		contribution.searchContributions(credentials.userNameStaff);
+		contribution.verifyNewPageOnList(pageName, pageContent);
 	}
 }

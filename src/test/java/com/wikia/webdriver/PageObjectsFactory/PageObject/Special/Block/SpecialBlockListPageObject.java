@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -15,7 +14,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	@FindBy(css="#mw-input-wpTarget")
 	private WebElement userNameField;
 	@FindBy(css="input.mw-htmlform-submit")
@@ -24,13 +23,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 	private WebElement blockListTable;
 	@FindBy(xpath="//p[contains(text(), 'The requested IP address or username is not blocked.')]")
 	private WebElement userUnblockedMessage;
-	
-	public SpecialBlockListPageObject openSpecialBlockListPage(){
-		getUrl(Global.DOMAIN+"wiki/Special:BlockList");
-		PageObjectLogging.log("Special:BlockList openSpecialBlockListPage", "blocked users list page opened", true, driver);
-		return new SpecialBlockListPageObject(driver);
-	}
-	
+
 	private void typeInUserName(String userName){
 		waitForElementByElement(userNameField);
 		userNameField.sendKeys(userName);
@@ -42,17 +35,17 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 		scrollAndClick(searchButton);
 		PageObjectLogging.log("Special:BlockList clickSearchButton", "search button clicked", true);
 	}
-	
+
 	public void searchForUser(String userName){
 		typeInUserName(userName);
 		clickSearchButton();
 	}
-	
+
 	public void verifyUserUnblocked(){
 		waitForElementByElement(userUnblockedMessage);
 		PageObjectLogging.log("Special:BlockList verifyUSerUnblocked", "verified that user is not on blocked users list", true, driver);
 	}
-	
+
 	public void verifyUserBlocked(String userName){
 		waitForElementByCss("table td.TablePager_col_ipb_target a[href='/wiki/User:"+userName+"']");
 		PageObjectLogging.log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list", true, driver);

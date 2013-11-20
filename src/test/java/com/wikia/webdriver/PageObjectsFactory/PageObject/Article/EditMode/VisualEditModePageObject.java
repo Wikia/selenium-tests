@@ -58,6 +58,11 @@ public class VisualEditModePageObject extends EditMode {
 	private List<WebElement> categoryList;
 	@FindBy(css=".RTEMediaCaption")
 	private WebElement caption;
+	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
+	private WebElement blockedUserMessage1;
+	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
+	private WebElement blockedUserMessage2;
+
 
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
@@ -381,5 +386,11 @@ public class VisualEditModePageObject extends EditMode {
 		);
 		jQueryClick(category);
 		PageObjectLogging.log("removeCategory", "remove category button clicked on category " + categoryName, true);
+	}
+
+	public void verifyBlockedUserMessage() {
+		waitForElementByElement(blockedUserMessage1);
+		waitForElementByElement(blockedUserMessage2);
+		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true);
 	}
 }

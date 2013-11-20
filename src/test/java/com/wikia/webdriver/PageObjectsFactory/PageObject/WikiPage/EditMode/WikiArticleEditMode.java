@@ -81,10 +81,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement tableModalOKbutton;
 	@FindBy(css="table.article-table")
 	private WebElement VisualModeTable;
-	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
-	private WebElement blockedUserMessage1;
-	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
-	private WebElement blockedUserMessage2;
 	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement videoSubmitButton;
 	@FindBy(css=".VideoEmbedNoBorder input[type='submit']")
@@ -252,12 +248,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		bodyContent.sendKeys(content);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
-	}
-
-	public void verifyBlockedUserMessage() {
-		waitForElementByElement(blockedUserMessage1);
-		waitForElementByElement(blockedUserMessage2);
-		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true);
 	}
 
 	public void clickReturnToEditingButton() {

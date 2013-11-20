@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialBlockPageObject extends WikiBasePageObject{
@@ -27,13 +26,7 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	public SpecialBlockPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	}
-
-	public SpecialBlockPageObject openSpecialBlockPage(){
-		getUrl(Global.DOMAIN+"wiki/Special:Block");
-		waitForElementByElement(blockPageHeader);
-		Assertion.assertEquals(Global.DOMAIN+"wiki/Special:Block", driver.getCurrentUrl());
-		return new SpecialBlockPageObject(driver);
+		waitForElementByElement(blockButton);
 	}
 
 	public void typeInUserName(String userName){
