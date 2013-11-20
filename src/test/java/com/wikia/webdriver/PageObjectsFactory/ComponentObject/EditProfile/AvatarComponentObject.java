@@ -39,7 +39,7 @@ public class AvatarComponentObject extends EditProfileComponentObject {
 	}
 
 	public void saveProfile() {
-		saveButton.click();
+		scrollAndClick(saveButton);
 		PageObjectLogging.log("save", "save profile button clicked", true);
 	}
 
