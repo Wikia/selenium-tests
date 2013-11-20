@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
@@ -33,6 +34,7 @@ public class TestAdSkinPresence extends AdsTestTemplate {
 	 * @param skinRightSide - path to file with decoded using Base64 ad skin
 	 * @throws IOException
 	 */
+	@GeoEdgeProxy(country="US")
 	@Test(
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="skin",
