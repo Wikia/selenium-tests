@@ -10,8 +10,6 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
-
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -103,7 +101,7 @@
 			<version>2.2.3</version>
 		</dependency>
 
-        <!-- Cucumber integration -->
+		<!-- Cucumber integration -->
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-core</artifactId>
