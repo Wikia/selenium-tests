@@ -367,36 +367,39 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
     private void verifyNoAds() throws Exception {
-		List <WebElement> adsElements = driver.findElements(
-			By.cssSelector(createSelectorAll())
-		);
-		if (adsElements.isEmpty()) {
-			PageObjectLogging.log(
-				"AdsNotFound",
-				"Ads not found",
-				true,
-				driver
-			);
-		} else {
-			for (WebElement element : adsElements) {
-				if (element.isDisplayed()
-					&& (element.getSize().height > 1 && element.getSize().width > 1)
+		Collection<String> slotsSelectors = AdsContent.slotsSelectors.values();
+		for (String selector: slotsSelectors) {
+			if (checkIfElementOnPage(selector)) {
+				WebElement element = driver.findElement(By.cssSelector(selector));
+				if (
+					element.isDisplayed()
+					&& element.getSize().getHeight() > 1
+					&& element.getSize().getWidth() > 1
 				) {
 					PageObjectLogging.log(
 						"AdsFound",
-						"Ads found on page",
+						"Ads found on page with selector: " + selector,
 						false,
 						driver
 					);
-					throw new Exception("Found element that was not expected!");
+				} else {
+					PageObjectLogging.log(
+						"AdsFoundButNotVisible",
+						"Ads found on page with selector: "
+						+ selector
+						+ " but is smaller then 1x1 or hidden",
+						true
+					);
 				}
+			} else {
+				PageObjectLogging.log(
+					"AdNotFound",
+					"Ad with selector: "
+					+ selector
+					+ " not found on page",
+					true
+				);
 			}
-			PageObjectLogging.log(
-				"AdsNotFound",
-				"Ads not found",
-				true,
-				driver
-			);
 		}
 	}
 

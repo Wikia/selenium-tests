@@ -165,4 +165,18 @@ public class AdsDataProvider {
 			}
 		};
 	}
+
+	@DataProvider
+	public static final Object[][] adFreeWikis() {
+		return new Object[][] {
+			{"api", "Wikia_API_Wiki"},
+			{"api", "Documentation"},
+			{"sfhomeless", "San_Francisco_Homeless_Resource"},
+			{"sfhomeless", "Glide_Memorial_Church"},
+			{"alamedahomeless", "Alameda_County_Child_Support_Services"},
+			{"alamedahomeless", "Alameda_Homeless_Resource_Wiki"},
+			{"ru.affectedzone", "Affected_Zone_Wiki"},
+			{"ru.affectedzone", "Encircling_Flames "}
+		};
+	}
 }
