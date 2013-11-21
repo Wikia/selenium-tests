@@ -40,6 +40,8 @@ public class NewMessageWall extends WikiBasePageObject {
 	private WebElement postButton;
 	@FindBy (css="#WallMessagePreview")
 	private WebElement previewButton;
+	@FindBy (css=".new-reply .speech-bubble-avatar img")
+	private WebElement replyAreaAvatars;
 	@FindBy (css="[data-is-reply]:nth-child(1)")
 	private WebElement editMessageWrapper;
 	@FindBy (css=".speech-bubble-message-removed")
@@ -241,6 +243,11 @@ public class NewMessageWall extends WikiBasePageObject {
 		PageObjectLogging.log("verifyThreadReopened", "verifyed thread reopened", true);
 	}
 
+	public void verifyMessageTitle(String title) {
+		waitForTextToBePresentInElementByBy(messageTitleBy, title);
+		PageObjectLogging.log("verifyMessageTitle", "message with title: "+title+", verified", true);
+	}
+
 	public void verifyMessageText(String title, String message, String userName) {
 		waitForTextToBePresentInElementByBy(messageTitleBy, title);
 		Assertion.assertEquals(
@@ -339,5 +346,14 @@ public class NewMessageWall extends WikiBasePageObject {
 			}
 		}
 		return new NewMessageWallThreadPageObject(driver);
+	}
+
+	public void verifyReplyAreaAvatarNotVisible() {
+		waitForElementNotVisibleByElement(replyAreaAvatars);
+		PageObjectLogging.log(
+				"verifyReplyAreaAvatarNotVisible",
+				"as expected, avatar next to reply area is not visible",
+				true
+		);
 	}
 }
