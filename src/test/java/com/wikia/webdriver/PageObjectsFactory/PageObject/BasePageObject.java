@@ -58,6 +58,8 @@ public class BasePageObject{
 	protected WebElement followedButton;
 	@FindBy(css = "#ca-watch")
 	protected WebElement unfollowedButton;
+	@FindBy(css = "body")
+	protected WebElement body;
 
 	public BasePageObject(WebDriver driver) {
 		wait = new WebDriverWait(driver, timeOut);
@@ -854,5 +856,15 @@ public class BasePageObject{
 			throw new RuntimeException("file " + relativePath + " doesn't exists");
 		}
 		return fileCheck.getAbsolutePath();
+	}
+
+	public void waitForText(String phrase) {
+		wait.until(CommonExpectedConditions.textToBePresentInElement(body, phrase));
+	}
+
+	public void clickLink(String buttonOrLinkText) {
+		WebElement element = body.findElement(By.linkText(buttonOrLinkText));
+		Assertion.assertNotNull(element, "Link not found.");
+		element.click();
 	}
 }
