@@ -12,14 +12,7 @@
 	</properties>
 
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>cukes</id>
-            <url>http://cukes.info/maven</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
@@ -110,7 +103,7 @@
 			<version>2.2.3</version>
 		</dependency>
 
-
+        <!-- Cucumber integration -->
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-core</artifactId>
