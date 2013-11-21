@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -36,6 +37,7 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		}
 	}
 
+	@BeforeMethod(alwaysRun=true)
 	private void loginSteps() {
 		SpecialUserLoginPageObject userLogin = new SpecialUserLoginPageObject(driver);
 		Credentials credentials = config.getCredentials();
@@ -49,7 +51,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_001", "US"}
 	)
 	public void TestNoAdsForUsers_US() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -59,7 +60,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_002", "CA"}
 	)
 	public void TestNoAdsForUsers_CA() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -69,7 +69,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_003", "DE"}
 	)
 	public void TestNoAdsForUsers_DE() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -79,7 +78,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_004", "GB"}
 	)
 	public void TestNoAdsForUsers_GB() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -89,7 +87,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_005", "AU"}
 	)
 	public void TestNoAdsForUsers_AU() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -99,7 +96,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_006", "UA"}
 	)
 	public void TestNoAdsForUsers_UA() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -109,7 +105,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_007", "PL"}
 	)
 	public void TestNoAdsForUsers_PL() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -119,7 +114,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_007", "RU"}
 	)
 	public void TestNoAdsForUsers_RU() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -129,7 +123,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_009", "JP"}
 	)
 	public void TestNoAdsForUsers_JP() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
@@ -139,7 +132,6 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 		groups={"NoAdsForUsers_010", "IT"}
 	)
 	public void TestNoAdsForUsers_IT() throws Exception {
-		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}

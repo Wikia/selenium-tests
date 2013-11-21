@@ -46,9 +46,9 @@ public class TestAdSkinPresence extends AdsTestTemplate {
 		Dimension windowResolution, int skinWidth, String skinLeftSide, String skinRightSide
 	) throws IOException {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		AdsBaseObject wikiPage = new AdsBaseObject(driver);
 		wikiPage.checkAdSkinPresenceOnGivenResolution(
-			screenImageUrl, windowResolution, skinWidth, skinLeftSide, skinRightSide
+			testedPage, screenImageUrl, windowResolution, skinWidth, skinLeftSide, skinRightSide
 		);
 	}
 }

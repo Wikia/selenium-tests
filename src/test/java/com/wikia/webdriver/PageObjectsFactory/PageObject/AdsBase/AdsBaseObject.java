@@ -40,9 +40,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
 		AdsContent.setSlotsSelectors();
-		driver.manage().window().setSize(new Dimension(1920, 1080));
 		getUrl(page);
 		isWikiMainPage = checkIfMainPage();
+	}
+
+	public AdsBaseObject(WebDriver driver) {
+		super(driver);
 	}
 
 	protected final void setPresentTopLeaderboard() {
@@ -120,6 +123,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	/**
 	 * Check Ad skin on page with provided resolution.
 	 * Compare left and right sides of skin with provided Base64.
+	 * @param page - url
 	 * @param adSkinUrl - DFP link with ad skin image
 	 * @param windowResolution - resolution
 	 * @param skinWidth - skin width on the sides of the article
@@ -128,10 +132,14 @@ public class AdsBaseObject extends WikiBasePageObject {
 	 * @throws IOException
 	 */
 	public void checkAdSkinPresenceOnGivenResolution(
-		String adSkinUrl, Dimension windowResolution, int skinWidth,
+		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
 		String expectedAdSkinLeftPart, String expectedAdSkinRightPart
 	) throws IOException {
 		Shooter shooter = new Shooter();
+		driver.manage().window().setSize(windowResolution);
+		getUrl(page);
+		AdsContent.setSlotsSelectors();
+		isWikiMainPage = checkIfMainPage();
 
 		String backgroundImageUrlAfter = getPseudoElementValue(
 			body, ":after", "backgroundImage"
@@ -142,9 +150,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 			body, ":before", "backgroundImage"
 		);
 		Assertion.assertStringContains(backgroundImageUrlBefore, adSkinUrl);
-
-
-		driver.manage().window().setSize(windowResolution);
 
 		PageObjectLogging.log(
 			"ScreenshotPage",
