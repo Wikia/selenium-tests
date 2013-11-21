@@ -1,4 +1,4 @@
-package com.wikia.webdriver.bdd;
+package com.wikia.webdriver.bdd.steps;
 
 import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
 import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
@@ -10,19 +10,20 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import cucumber.api.DataTable;
-import cucumber.api.java.en.*;
-import cucumber.api.java.*;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class CommonSteps {
-	private static Logger logger = LoggerFactory.getLogger(CommonSteps.class);
-
 	private WebDriver driver;
 	private AbstractConfiguration config;
+	@SuppressWarnings("unused")
 	private String wikiURL;
+	@SuppressWarnings("unused")
 	private String wikiCorporateURL;
 	private WikiBasePageObject page;
 

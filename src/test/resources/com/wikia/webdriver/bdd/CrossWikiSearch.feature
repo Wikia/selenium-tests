@@ -7,13 +7,12 @@ Feature: As a user I want to have cross wikia search functionality
     When I search for "<phrase>"
     Then I see following search results first:
       | Muppet Wiki |
+    Then I should see "Muppet Wiki"
     When I click "Muppet Wiki"
     Then I should see "Muppet Wiki"
     And I should see "Home"
   Examples:
     | phrase    |
     | mupPet      |
-    | Muppet Wiki |
     | Muppets     |
-    | Mu#$%$ppets |
 
