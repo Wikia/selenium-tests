@@ -142,7 +142,7 @@ public class MessageWallTests extends NewTestTemplate {
 	 * details jira:    https://wikia-inc.atlassian.net/browse/DAR-985
 	 * 1. Go to a messageWall and add unClosedDivComment
 	 * 2. refresh the page
-	 * 3. make sure that reply area buttons don't appear on default
+	 * 3. make sure that reply area avatar doesn't appear by default
 	 */
 	@Test(groups = {"MessageWall_007", "MessageWall"})
 	public void MessageWall_007_Dar985bugPrevention_unclosedTagPost() {
