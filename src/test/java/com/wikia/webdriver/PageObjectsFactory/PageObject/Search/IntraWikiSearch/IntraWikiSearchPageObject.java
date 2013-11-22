@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -310,7 +309,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		for(int i = 0; i < newSuggestionsList.size(); i++) {
 			Assertion.assertStringContains(suggestionText.get(i).getText(), query);
 			Assertion.assertTrue(suggestionImage.get(i).isDisplayed());
-			PageObjectLogging.log("assertTrue", "Image next to suggestion verified", true, driver);
+			PageObjectLogging.log("assertTrue", "Image next to suggestion verified", true);
 		}
 	}	
 }
