@@ -162,14 +162,21 @@ public class AdsDataProvider {
 //				100,
 //				"src/test/resources/adsResources/skin1366_left",
 //				"src/test/resources/adsResources/skin1366_right",
+//			}, {
+//				"adtest-fluid", "Skin",
+//				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+//				new Dimension(1920, 1080),
+//				170,
+//				"src/test/resources/adsResources/skin1920_left",
+//				"src/test/resources/adsResources/skin1920_right",
 //			},
 			{
 				"adtest-fluid", "Skin",
 				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
-				new Dimension(1920, 1080),
-				170,
-				"src/test/resources/adsResources/skin1920_left",
-				"src/test/resources/adsResources/skin1920_right",
+				new Dimension(2400, 1080),
+				350,
+				"src/test/resources/adsResources/skin2400_left",
+				"src/test/resources/adsResources/skin2400_right",
 			}
 		};
 	}
