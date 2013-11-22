@@ -10,6 +10,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -74,6 +75,48 @@ public class CommonSteps {
 	@When("^I click \"([^\"]*)\"$")
 	public void I_click(String buttonOrLinkText) throws Throwable {
 		page.clickLink(buttonOrLinkText);
+	}
+
+	@Given("^I am on \"([^\"]*)\"$")
+	public void I_am_on(String arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
+	@When("^I go to API v(\\d+) documentation page$")
+	public void I_go_to_API_v_documentation_page(int arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
+	@Then("^I want to see \"([^\"]*)\"$")
+	public void I_want_to_see(String arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
+	@Then("^I want to see description for \"([^\"]*)\" property$")
+	public void I_want_to_see_description_for_property(String arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
+	@Then("^I want to see \"([^\"]*)\" in model description$")
+	public void I_want_to_see_in_model_description(String arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
+	@When("^I put valid articleId on current wiki as \"([^\"]*)\"$")
+	public void I_put_valid_articleId_on_current_wiki_as(String arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
+	@Then("^I want to see successful response$")
+	public void I_want_to_see_successful_response() throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
 	}
 
 }

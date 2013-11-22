@@ -862,8 +862,9 @@ public class BasePageObject{
 		wait.until(CommonExpectedConditions.textToBePresentInElement(body, phrase));
 	}
 
-	public void clickLink(String buttonOrLinkText) {
-		WebElement element = body.findElement(By.linkText(buttonOrLinkText));
+	public void clickLink(String text) {
+		wait.until(CommonExpectedConditions.pageLoaded());
+		WebElement element = body.findElement(By.linkText(text));
 		Assertion.assertNotNull(element, "Link not found.");
 		element.click();
 	}
