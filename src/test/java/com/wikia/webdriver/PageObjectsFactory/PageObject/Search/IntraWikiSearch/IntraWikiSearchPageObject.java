@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -75,6 +76,12 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	private WebElement pushToTopWikiResult;
 	@FindBy(css=".wikiPromoteThumbnail")
 	private WebElement pushToTopWikiThumbnail;
+	@FindBy(css=".search-suggest-img-wrapper")
+	private List<WebElement> suggestionImage;
+	@FindBy(css="#WikiaSearchHeader .search-suggest li:not(.all)")
+	private List<WebElement> newSuggestionsList;
+	@FindBy(css=".block")
+	private List<WebElement> suggestionText;
 
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -293,4 +300,17 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementByElement(pushToTopWikiThumbnail);
 		PageObjectLogging.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified", true, driver);
 	}
+
+	public void verifyNewSuggestionsTextAndImages(String query) {
+		searchField.click();
+		waitForElementByBy(jqueryAutocompleteBy);
+		searchField.sendKeys(query);
+		waitForElementByElement(newSuggestionsList.get(0));
+		System.out.println(newSuggestionsList.size() );
+		for(int i = 0; i < newSuggestionsList.size(); i++) {
+			Assertion.assertStringContains(suggestionText.get(i).getText(), query);
+			Assertion.assertTrue(suggestionImage.get(i).isDisplayed());
+			PageObjectLogging.log("assertTrue", "Image next to suggestion verified", true, driver);
+		}
+	}	
 }

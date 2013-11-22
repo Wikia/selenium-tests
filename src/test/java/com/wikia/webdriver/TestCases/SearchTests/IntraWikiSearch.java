@@ -36,11 +36,13 @@ public class IntraWikiSearch extends NewTestTemplate {
 
 	private String testedWiki;
 	private String communityWiki;
+	private String searchSuggestionsWiki;
 
 	public IntraWikiSearch() {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		testedWiki = urlBuilder.getUrlForWiki("muppet");
 		communityWiki = urlBuilder.getUrlForWiki("community");
+		searchSuggestionsWiki = urlBuilder.getUrlForWiki("communitycouncil");
 	}
 
 	private static final int resultsPerPage = 25;
@@ -50,6 +52,7 @@ public class IntraWikiSearch extends NewTestTemplate {
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 	private static final String searchPhraseSuggestions = "Gon";
 	private static final String searchWiki = "Marvel";
+	private static final String searchPhraseNewSuggestions = "vehicle";
 
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",
@@ -228,5 +231,12 @@ public class IntraWikiSearch extends NewTestTemplate {
 		search.searchFor(searchWiki);
 		search.verifyPushToTopWikiTitle(searchWiki);
 		search.verifyPushToTopWikiThumbnail();
+	}
+	
+	@Test(groups={"IntraSearch017", "IntraWikiSearch", "Search"})
+	public void intraWikiSearch_017_searchSuggestionsVisibility() {
+		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
+		search.openWikiPage(searchSuggestionsWiki);
+		search.verifyNewSuggestionsTextAndImages("Council");	
 	}
 }
