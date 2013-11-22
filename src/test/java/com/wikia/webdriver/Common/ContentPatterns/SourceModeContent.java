@@ -14,7 +14,7 @@ public class SourceModeContent {
 			"[[File:Placeholder|right|300px]]";
 
 	// MessageWall source Content
-	public static String unClosedDivComment =
+	public static String unclosedDivComment =
 			"{| border=\"1\"\n|<div style=\"border:1px solid blue;\">unclosed-div\n|}";
 
 }
