@@ -39,7 +39,7 @@ public class TestAdSkinPresence extends AdsTestTemplate {
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="skin",
 		groups={"Skin"},
-		invocationCount=1
+		invocationCount=5
 	)
 	public void TestSkinPresence_001(
 		String wikiName, String article, String screenImageUrl,

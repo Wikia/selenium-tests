@@ -136,7 +136,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		String expectedAdSkinLeftPart, String expectedAdSkinRightPart
 	) throws IOException {
 		Shooter shooter = new Shooter();
-		driver.manage().window().setPosition(new Point(0, 0));
 		driver.manage().window().setSize(windowResolution);
 		getUrl(page);
 		AdsContent.setSlotsSelectors();
