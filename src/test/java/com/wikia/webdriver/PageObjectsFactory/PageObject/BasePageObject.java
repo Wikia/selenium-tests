@@ -863,9 +863,8 @@ public class BasePageObject{
 	}
 
 	public void clickLink(String text) {
-		wait.until(CommonExpectedConditions.pageLoaded());
 		WebElement element = body.findElement(By.linkText(text));
-		Assertion.assertNotNull(element, "Link not found.");
-		element.click();
+		Assertion.assertNotNull(element, String.format("Link with text\"%s\" not found.", text));
+		scrollAndClick(element);
 	}
 }
