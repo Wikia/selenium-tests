@@ -53,7 +53,6 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 	private static final String searchPhraseNoResults = "qazwsxedcrfvtgb";
 	private static final String searchPhraseSuggestions = "Gon";
 	private static final String searchWiki = "Marvel";
-	private static final String searchPhraseNewSuggestions = "vehicle";
 
 	@Test(dataProviderClass=IntraWikiSearchProvider.class,
 			dataProvider="getArticleName",

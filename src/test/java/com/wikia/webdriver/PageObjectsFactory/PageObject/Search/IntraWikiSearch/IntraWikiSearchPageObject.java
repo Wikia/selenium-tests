@@ -310,6 +310,6 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 			Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
 			Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
 		}
-		PageObjectLogging.log("verifyNewSuggestionsTextAndImages", "Image and text next to every verified", true);
+		PageObjectLogging.log("verifyNewSuggestionsTextAndImages", "Image and text next to every suggestion is verified", true);
 	}	
 }
