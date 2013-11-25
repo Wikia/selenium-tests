@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.SearchContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.IntraWikiSearchProvider;
@@ -32,13 +33,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.
  *  16. Verify push to top is working in community.wikia.com
  */
 
-public class IntraWikiSearch extends NewTestTemplate {
+public class IntraWikiSearchTests extends NewTestTemplate {
 
 	private String testedWiki;
 	private String communityWiki;
 	private String searchSuggestionsWiki;
 
-	public IntraWikiSearch() {
+	public IntraWikiSearchTests() {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		testedWiki = urlBuilder.getUrlForWiki("muppet");
 		communityWiki = urlBuilder.getUrlForWiki("community");
@@ -237,6 +238,6 @@ public class IntraWikiSearch extends NewTestTemplate {
 	public void intraWikiSearch_017_searchSuggestionsVisibility() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openWikiPage(searchSuggestionsWiki);
-		search.verifyNewSuggestionsTextAndImages("Council");	
+		search.verifyNewSuggestionsTextAndImages(SearchContent.searchPhraseNewSuggestions);	
 	}
 }
