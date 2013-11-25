@@ -1,8 +1,6 @@
 package com.wikia.webdriver.bdd;
 
-import com.wikia.webdriver.bdd.integration.FeatureExecutor;
-import com.wikia.webdriver.bdd.integration.FeatureExecutorImpl;
-import com.wikia.webdriver.bdd.integration.FeatureProviderImpl;
+import com.wikia.webdriver.bdd.integration.*;
 import cucumber.runtime.io.ClasspathResourceLoader;
 import cucumber.runtime.model.CucumberFeature;
 import org.testng.annotations.DataProvider;
@@ -16,7 +14,11 @@ public class BddTests {
 	public Object[][] create() throws Throwable {
 		ClassLoader classLoader = BddTests.class.getClassLoader();
 		FeatureExecutor executor = new FeatureExecutorImpl(classLoader, "com.wikia.webdriver.bdd.steps");
-		FeatureProviderImpl featureProvider = new FeatureProviderImpl(new ClasspathResourceLoader(classLoader));
+		FeatureProvider featureProvider = new FeatureProviderImpl(new ClasspathResourceLoader(classLoader));
+		String featurePrefix = System.getProperties().getProperty("feature", null);
+		if ( featurePrefix != null ) {
+			featureProvider = new FeatureProviderPrefixFilter(featureProvider, featurePrefix);
+		}
 
 		List<Object[]> featureList = new ArrayList<Object[]>();
 		for (CucumberFeature feature: featureProvider.getFeatures()) {
