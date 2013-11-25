@@ -1,12 +1,15 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ApiDocs;
 
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ApiDocsPage extends WikiBasePageObject {
 	private static Logger logger = LoggerFactory.getLogger(ApiDocsPage.class);
+
+    private By propertyNames = By.cssSelector(".propName");
 
 	public ApiDocsPage(WebDriver driver) {
 		super(driver);
@@ -19,4 +22,9 @@ public class ApiDocsPage extends WikiBasePageObject {
             throw new IllegalArgumentException(String.format("invalid apiVersion parameter: '%s'.", apiVersion));
         }
     }
+
+    public void waitForPropertyDescription( String propertyName ) {
+        waitForTextToBePresentInElementByBy(propertyNames, propertyName);
+    }
+
 }

@@ -103,9 +103,8 @@ public class CommonSteps {
     }
 
 	@Then("^I should see description for \"([^\"]*)\" property$")
-	public void I_want_to_see_description_for_property(String arg1) throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
+	public void I_want_to_see_description_for_property(String propertyName) throws Throwable {
+        ((ApiDocsPage) page).waitForPropertyDescription(propertyName);
 	}
 
 	@Then("^I should see \"([^\"]*)\" in model description$")
