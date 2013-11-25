@@ -63,6 +63,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private List<WebElement> listOfComments;
 	@FindBy(css="section.artSec.open")
 	private WebElement sectionOpened;
+	@FindBy(css="section.artSec.open")
+	private List<WebElement> sectionOpenedList;
 	@FindBy(css="div#mw-content-text h2.collSec.open")
 	private WebElement sectionVisibilityElement;
 	@FindBy(css="#wkArtCnt")
@@ -87,6 +89,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement level3Visible;
 	@FindBy(css=".ads")
 	private WebElement curtainClosed;
+	@FindBy(css=".editsection > a")
+	private List<WebElement> editSectionList;
 
 	String backCssSelector = ".goBck";
 
@@ -215,6 +219,15 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		WebElement chev = waitForElementByXPath("//div[@id='mw-content-text']/h2["+sectionNumber+"]");
 		scrollAndClick(chev);
 		PageObjectLogging.log("clickSection", "section " + chev.getText() + " clicked", true, driver);
+	}
+
+	public MobileEditModePageObject editSection(int sectionNumber) {
+		scrollAndClick(editSectionList.get(sectionNumber));
+		return new MobileEditModePageObject(driver);
+	}
+
+	public String getSectionText(int sectionNumber) {
+		return sectionOpenedList.get(sectionNumber).getText();
 	}
 
 	public void verifySectionVisibility() {

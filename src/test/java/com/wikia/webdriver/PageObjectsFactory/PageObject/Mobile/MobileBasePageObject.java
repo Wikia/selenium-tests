@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +20,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	public MobileBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		driver.manage().window().setSize(new Dimension(768, 1280));
+		//driver.manage().window().setSize(new Dimension(768, 1280));
 	}
 
 	// UI Mapping
