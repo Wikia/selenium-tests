@@ -1,5 +1,6 @@
 package com.wikia.webdriver.bdd.steps;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ApiDocs.ApiDocsPage;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
 import com.wikia.webdriver.bdd.context.TestingContext;
@@ -14,6 +15,7 @@ import cucumber.api.java.en.When;
 
 public class CommonSteps {
 	private TestingContext testingContext;
+	private String currentWikiUrl;
 
 	@Before
 	public void init() {
@@ -55,37 +57,27 @@ public class CommonSteps {
 		testingContext.getPage().clickLink(buttonOrLinkText);
 	}
 
-    @Given("^non-corporate Wiki$")
-    public void non_corporate_Wiki() throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        currentWikiUrl = wikiURL;
-    }
-
-    @Given("^I am on \"([^\"]*)\"$")
-	public void I_am_on(String wikiName) throws Throwable {
-		page = new WikiBasePageObject( driver );
-        BddHelper helper = new BddHelper( config );
-        String url = helper.getWikiUrl( helper.getWikiSubdomainByName( wikiName ) );
-
-        page.getUrl( url );
+	@Given("^non-corporate Wiki$")
+	public void non_corporate_Wiki() throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		currentWikiUrl = testingContext.getWikiURL();
 	}
 
 	@When("^I go to API (.+) documentation page$")
 	public void I_go_to_API_v_documentation_page(String apiVersion) throws Throwable {
-        ApiDocsPage apiDocsPage = new ApiDocsPage(driver);
-        apiDocsPage.openApiDocsPage(currentWikiUrl, apiVersion);
-        page = apiDocsPage;
-    }
+		ApiDocsPage apiDocsPage = new ApiDocsPage(testingContext.getDriver());
+		apiDocsPage.openApiDocsPage(currentWikiUrl, apiVersion);
+		testingContext.setPage(apiDocsPage);
+	}
 
-	@Then("^I should see description for \"([^\"]*)\" property$")
-	public void I_want_to_see_description_for_property(String propertyName) throws Throwable {
-        ((ApiDocsPage) page).waitForPropertyDescription(propertyName);
+	@Then("^I should see description for \"([^\"]*)\" parameter$")
+	public void I_want_to_see_description_for_parameter$(String propertyName) throws Throwable {
+		((ApiDocsPage) testingContext.getPage()).waitForParameterDescription(propertyName);
 	}
 
 	@Then("^I should see \"([^\"]*)\" in model description$")
-	public void I_want_to_see_in_model_description(String arg1) throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
+	public void I_want_to_see_in_model_description(String parameterName) throws Throwable {
+		((ApiDocsPage) testingContext.getPage()).waitForModelPropertyDescription(parameterName);
 	}
 
 	@When("^I put valid articleId on current wiki as \"([^\"]*)\"$")

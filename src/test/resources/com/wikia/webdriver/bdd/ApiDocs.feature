@@ -7,7 +7,7 @@ Feature: As a user I want to have our Apis documented.
     When I click "/Articles"
     Then I should see "/api/v1/Articles/AsSimpleJson"
     When I click "/api/v1/Articles/AsSimpleJson"
-    Then I should see description for "id" property
+    Then I should see description for "id" parameter
 
   Scenario: I want to see all Articles/AsSimpleJson response fields in api docs
     Given non-corporate Wiki
