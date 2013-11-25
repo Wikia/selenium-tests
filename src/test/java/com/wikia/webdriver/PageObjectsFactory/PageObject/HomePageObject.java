@@ -170,6 +170,7 @@ public class HomePageObject extends WikiBasePageObject{
 	}
 
     public CrossWikiSearchPageObject searchFor(String queryString) {
+        scrollToElement( searchInput );
         searchInput.sendKeys(queryString);
         scrollAndClick(searchButton);
         PageObjectLogging.log("searchFor", "Enter search string \"" + queryString + "\" and click ok.", true, driver);
