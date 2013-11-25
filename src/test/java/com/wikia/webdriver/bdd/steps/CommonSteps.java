@@ -55,31 +55,34 @@ public class CommonSteps {
 		testingContext.getPage().clickLink(buttonOrLinkText);
 	}
 
-	@Given("^I am on \"([^\"]*)\"$")
-	public void I_am_on(String arg1) throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
+    @Given("^non-corporate Wiki$")
+    public void non_corporate_Wiki() throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        currentWikiUrl = wikiURL;
+    }
+
+    @Given("^I am on \"([^\"]*)\"$")
+	public void I_am_on(String wikiName) throws Throwable {
+		page = new WikiBasePageObject( driver );
+        BddHelper helper = new BddHelper( config );
+        String url = helper.getWikiUrl( helper.getWikiSubdomainByName( wikiName ) );
+
+        page.getUrl( url );
 	}
 
-	@When("^I go to API v(\\d+) documentation page$")
-	public void I_go_to_API_v_documentation_page(int arg1) throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
+	@When("^I go to API (.+) documentation page$")
+	public void I_go_to_API_v_documentation_page(String apiVersion) throws Throwable {
+        ApiDocsPage apiDocsPage = new ApiDocsPage(driver);
+        apiDocsPage.openApiDocsPage(currentWikiUrl, apiVersion);
+        page = apiDocsPage;
+    }
+
+	@Then("^I should see description for \"([^\"]*)\" property$")
+	public void I_want_to_see_description_for_property(String propertyName) throws Throwable {
+        ((ApiDocsPage) page).waitForPropertyDescription(propertyName);
 	}
 
-	@Then("^I want to see \"([^\"]*)\"$")
-	public void I_want_to_see(String arg1) throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
-	}
-
-	@Then("^I want to see description for \"([^\"]*)\" property$")
-	public void I_want_to_see_description_for_property(String arg1) throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
-	}
-
-	@Then("^I want to see \"([^\"]*)\" in model description$")
+	@Then("^I should see \"([^\"]*)\" in model description$")
 	public void I_want_to_see_in_model_description(String arg1) throws Throwable {
 		// Express the Regexp above with the code you wish you had
 		throw new PendingException();
@@ -91,7 +94,7 @@ public class CommonSteps {
 		throw new PendingException();
 	}
 
-	@Then("^I want to see successful response$")
+	@Then("^I should see successful response$")
 	public void I_want_to_see_successful_response() throws Throwable {
 		// Express the Regexp above with the code you wish you had
 		throw new PendingException();

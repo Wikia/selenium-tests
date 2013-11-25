@@ -863,7 +863,7 @@ public class BasePageObject{
 	}
 
 	public void clickLink(String text) {
-		WebElement element = body.findElement(By.linkText(text));
+		WebElement element = body.findElement(By.partialLinkText(text));
 		Assertion.assertNotNull(element, String.format("Link with text\"%s\" not found.", text));
 		scrollAndClick(element);
 	}
