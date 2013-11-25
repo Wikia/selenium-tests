@@ -75,6 +75,12 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	private WebElement pushToTopWikiResult;
 	@FindBy(css=".wikiPromoteThumbnail")
 	private WebElement pushToTopWikiThumbnail;
+	@FindBy(css=".search-suggest-img-wrapper")
+	private List<WebElement> suggestionImagesList;
+	@FindBy(css="#WikiaSearchHeader .search-suggest li:not(.all)")
+	private List<WebElement> newSuggestionsList;
+	@FindBy(css=".block")
+	private List<WebElement> suggestionTextsList;
 
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -293,4 +299,17 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementByElement(pushToTopWikiThumbnail);
 		PageObjectLogging.log("verifyPushToTopWikiThumbnail", "Push to top wiki thumbnail verified", true, driver);
 	}
+
+	public void verifyNewSuggestionsTextAndImages(String query) {
+		searchField.click();
+		waitForElementByBy(jqueryAutocompleteBy);
+		searchField.sendKeys(query);
+		waitForElementByElement(newSuggestionsList.get(0));
+		System.out.println(newSuggestionsList.size() );
+		for(int i = 0; i < newSuggestionsList.size(); i++) {
+			Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
+			Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
+		}
+		PageObjectLogging.log("verifyNewSuggestionsTextAndImages", "Image and text next to every suggestion is verified", true);
+	}	
 }
