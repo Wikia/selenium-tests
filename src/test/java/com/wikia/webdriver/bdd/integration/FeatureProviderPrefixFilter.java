@@ -5,15 +5,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import cucumber.runtime.model.CucumberFeature;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * Filters features by filename prefix.
+ */
 public class FeatureProviderPrefixFilter implements FeatureProvider {
-	private static final Logger logger = LoggerFactory.getLogger(FeatureProviderPrefixFilter.class);
 	private final FeatureProvider provider;
 	private final String prefix;
 
@@ -28,14 +27,21 @@ public class FeatureProviderPrefixFilter implements FeatureProvider {
 	}
 
 	private class CucumberFeaturePredicate implements Predicate<CucumberFeature> {
+		/**
+		 * Checks if Feature filename starts with given prefix
+		 * @param cucumberFeature feature to filter by prefix.
+		 * @return true if filename of this feature starts with prefix
+		 */
 		@Override
 		public boolean apply(@Nullable CucumberFeature cucumberFeature) {
 			if ( cucumberFeature != null ) {
 				URI uri = URI.create(cucumberFeature.getUri());
 				String[] split = uri.toString().split("/");
-				String file = split[split.length-1];
-				if ( file != null && file.toLowerCase().startsWith(prefix.toLowerCase()) ) {
-					return true;
+				if ( split.length >= 1 ) {
+					String file = split[split.length-1];
+					if ( file != null && file.toLowerCase().startsWith(prefix.toLowerCase()) ) {
+						return true;
+					}
 				}
 			}
 			return false;
