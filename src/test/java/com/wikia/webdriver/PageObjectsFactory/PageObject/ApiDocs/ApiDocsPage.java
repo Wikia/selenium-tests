@@ -22,10 +22,10 @@ public class ApiDocsPage extends WikiBasePageObject {
 	}
 
 	public void waitForParameterDescription(String parameterName) {
-		waitForTextToBePresentInElementByBy(parameterNames, parameterName);
+		waitForTextToBePresentInOneOfElementByBy(parameterNames, parameterName);
 	}
 
 	public void waitForModelPropertyDescription(String propertyName) {
-		waitForTextToBePresentInElementByBy(modelPropertyNames, propertyName);
+		waitForTextToBePresentInOneOfElementByBy(modelPropertyNames, propertyName);
 	}
 }

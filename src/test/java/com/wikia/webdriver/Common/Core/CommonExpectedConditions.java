@@ -197,7 +197,30 @@ public class CommonExpectedConditions {
 			}
 		};
 	}
+	/**
+	 * An expectation for checking if the given text is present in one of matched elements
+	 */
+	public static ExpectedCondition<Boolean> textToBePresentInOneOfTElements(
+			final By selectorBy, final String text) {
 
+		return new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				List<WebElement> elements = driver.findElements(selectorBy);
+				for( WebElement element: elements ) {
+					if ( element.getText().contains(text) ) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public String toString() {
+				return String.format("text ('%s') to be present in on of elements matched by %s",
+						text, selectorBy.toString());
+			}
+		};
+	}
 	/**
 	 * An expectation for checking if the given text is present in the specified
 	 * element.
@@ -218,6 +241,8 @@ public class CommonExpectedConditions {
 			}
 		};
 	}
+
+
 
 	/**
 	 * Looks up an element. Logs and re-throws WebDriverException if thrown. <p/>

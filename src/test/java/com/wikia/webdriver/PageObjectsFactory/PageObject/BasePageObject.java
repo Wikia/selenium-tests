@@ -541,6 +541,11 @@ public class BasePageObject{
 				.textToBePresentInElement(by, text));
 	}
 
+	public void waitForTextToBePresentInOneOfElementByBy(By by, String text) {
+		wait.until(CommonExpectedConditions
+				.textToBePresentInOneOfTElements(by, text));
+	}
+
 	public void waitForStringInURL(String givenString) {
 		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
 		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
