@@ -28,9 +28,7 @@ public class SectionsTests extends NewTestTemplate{
 		article.verifySectionInvisibility();
 	}
 
-
-
-	//@Test(groups={"sectionTest_002", "sectionsTests", "mobile"})
+	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"}, enabled = false)
 	public void Sections_003_editSection() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openSections(wikiURL);
@@ -39,5 +37,4 @@ public class SectionsTests extends NewTestTemplate{
 		MobileEditModePageObject mobileEdit = article.editSection(0);
 		mobileEdit.verifyEditModeContent(sectionText);
 	}
-
 }

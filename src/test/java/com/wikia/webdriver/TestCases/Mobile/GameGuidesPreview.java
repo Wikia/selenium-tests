@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.TestCases.Mobile;
 
 import org.testng.annotations.Test;
@@ -14,7 +11,16 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileModalCompo
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author PMG
  *
+ * Below test cases are executed against Special:GameGuidesPreview
+ * 1. Verify that sections are opened in article view
+ * 2. Verify that hide button in section works
+ * 3. Verify that next image button in modal works
+ * 4. Verify that previous image button in modal works
+ * 5. Verify that you are able to hide top bar in modal
+ * 6. Verify that back button close modal
+ * 7. Verify that when you go to modal and go back you are in the same place as previously.
  */
 public class GameGuidesPreview extends NewTestTemplate {
 
@@ -24,10 +30,10 @@ public class GameGuidesPreview extends NewTestTemplate {
 	public void GameGuidesPreview_001_sections_chevronTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		driver.get(wikiURL + URLsContent.wikiaPhp);   //mobileregressiontesting.wikia.com/wikia.php
-		article.appendToUrl(URLsContent.gameGuidesControllerQS); //mobileregressiontesting.wikia.com/wikia.php?controller=GameGuides
-		article.appendToUrl(URLsContent.renderFullQS); //mobileregressiontesting.wikia.com/wikia.php?controller=GameGuides&method=renderFullPage
-		article.appendToUrl(URLsContent.pageName + "Sections"); //mobileregressiontesting.wikia.com/wikia.php?controller=GameGuides&method=renderFullPage&page=Sections
+		driver.get(wikiURL + URLsContent.wikiaPhp);
+		article.appendToUrl(URLsContent.gameGuidesControllerQS);
+		article.appendToUrl(URLsContent.renderFullQS);
+		article.appendToUrl(URLsContent.pageName + "Sections");
 		article.clickSection(1);
 		article.verifySectionVisibility();
 		article.clickSection(1);
@@ -63,7 +69,6 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 	}
 
-
 	@Test(groups={"GameGuidesPreview_004", "ModalTests", "MobileGG"})
 	public void GameGuidesPreview_004_modalTest_previousImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
@@ -78,7 +83,6 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.closeModal();
 		modal.verifyModalClosed();
 	}
-
 
 	@Test(groups={"GameGuidesPreview_005", "ModalTests", "MobileGG"})
 	public void GameGuidesPreview_005_topBarVisibleOrNot() {
@@ -95,7 +99,6 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyTopBarVisible();
 	}
 
-
 	@Test(groups={"GameGuidesPreview_006", "ModalTests", "MobileGG"})
 	public void GameGuidesPreview_006_backButton() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
@@ -107,7 +110,6 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.closeModalWithBackButton();
 		modal.verifyModalClosed();
 	}
-
 
 	@Test(groups={"GameGuidesPreview_007", "ModalTests", "MobileGG"})
 	public void GameGuidesPreview_007_positionAfterCloseModal() {
@@ -125,7 +127,4 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 		modal.verifyPositionTheSame(positionBeforeModal);
 	}
-
-
-
 }
