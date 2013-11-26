@@ -43,7 +43,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement addArticleInDropdown;
 	@FindBy(css="#wpCreatePageDialogTitle")
 	protected WebElement articleTitleInputModal;
-	@FindBy(css="#CreatePageDialogButton .createpage")
+	@FindBy(css="#CreatePageModalDialog .primary")
 	protected WebElement submitModal;
 	@FindBy(css="#ca-edit")
 	protected WebElement editDropdown;
