@@ -30,7 +30,7 @@ public class TestingContextImpl implements TestingContext {
         wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
     }
 
-
+	@Override
     public void close() {
         driver.close();
     }

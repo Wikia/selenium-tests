@@ -17,4 +17,6 @@ public interface TestingContext {
 	BasePageObject getPage();
 
 	void setPage(WikiBasePageObject page);
+
+	void close();
 }

@@ -26,6 +26,7 @@ public class CommonSteps {
 
 	@After
 	public void destroy() {
+		testingContext.close();
 		testingContext = null;
 	}
 
