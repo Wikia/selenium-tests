@@ -1,12 +1,12 @@
 package com.wikia.webdriver.bdd.integration;
 
-import cucumber.runtime.ClassFinder;
-import cucumber.runtime.Env;
+import com.google.common.collect.Lists;
+import cucumber.runtime.*;
 import cucumber.runtime.Runtime;
-import cucumber.runtime.RuntimeOptions;
 import cucumber.runtime.io.MultiLoader;
 import cucumber.runtime.io.ResourceLoader;
 import cucumber.runtime.io.ResourceLoaderClassFinder;
+import cucumber.runtime.java.JavaBackend;
 import cucumber.runtime.model.CucumberFeature;
 import cucumber.runtime.snippets.SummaryPrinter;
 import gherkin.formatter.Formatter;
@@ -46,7 +46,11 @@ public class FeatureExecutorImpl implements FeatureExecutor {
 
 		ResourceLoader resourceLoader = new MultiLoader(classLoader);
 		ClassFinder classFinder = new ResourceLoaderClassFinder(resourceLoader, classLoader);
-		cucumber.runtime.Runtime runtime = new Runtime(resourceLoader, classFinder, classLoader, runtimeOptions);
+		cucumber.runtime.Runtime runtime = new Runtime(
+				resourceLoader,
+				classLoader,
+				Lists.newArrayList((Backend) new JavaBackend(new GuiceObjectFactory(), classFinder)),
+				runtimeOptions);
 
 		Formatter formatter = runtimeOptions.formatter(classLoader);
 		Reporter reporter = runtimeOptions.reporter(classLoader);
@@ -62,7 +66,7 @@ public class FeatureExecutorImpl implements FeatureExecutor {
 		formatter.close();
 		new SummaryPrinter(System.out).print(runtime);
 
-		if (!runtime.getErrors().isEmpty()) {
+		if (runtime.exitStatus() != 0) {
 			Assert.fail("At least one scenario failed.");
 		}
 	}
@@ -82,3 +86,4 @@ public class FeatureExecutorImpl implements FeatureExecutor {
 		return parameters.toArray(new String[parameters.size()]);
 	}
 }
+
