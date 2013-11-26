@@ -12,13 +12,14 @@ Feature: As a user I want to have our Apis documented.
     When I go to API v1 documentation page
     And I click "/Articles"
     And I click "/api/v1/Articles/AsSimpleJson"
-    Then I should see "sections" in model description
-    And I should see "text" in model description
-    And I should see "level" in model description
-    And I should see "content" in model description
-    And I should see "type" in model description
-    And I should see "images" in model description
-    And I should see "elements" in model description
+    Then I should see following fields in model description:
+      | sections |
+      | text     |
+      | level    |
+      | content  |
+      | type     |
+      | images   |
+      | elements |
 
   Scenario: I should be able to test Articles/AsSimpleJson in api docs
     Given non-corporate Wiki

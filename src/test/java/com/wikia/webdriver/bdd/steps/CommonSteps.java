@@ -80,6 +80,13 @@ public class CommonSteps {
 		((ApiDocsPage) testingContext.getPage()).waitForModelPropertyDescription(parameterName);
 	}
 
+	@Then("^I should see following fields in model description:$")
+	public void I_should_see_following_fields_in_model_description(DataTable listOfFields) throws Throwable {
+		for ( String field: listOfFields.<String>asList(String.class) ) {
+			I_want_to_see_in_model_description(field);
+		}
+	}
+
 	@When("^I put valid articleId on current wiki as \"([^\"]*)\"$")
 	public void I_put_valid_articleId_on_current_wiki_as(String id) throws Throwable {
 		((ApiDocsPage) testingContext.getPage()).putParameter(id, String.valueOf(8736));
@@ -94,5 +101,4 @@ public class CommonSteps {
 	public void I_want_to_see_successful_response() throws Throwable {
 		((ApiDocsPage) testingContext.getPage()).validateResponseCode(200);
 	}
-
 }
