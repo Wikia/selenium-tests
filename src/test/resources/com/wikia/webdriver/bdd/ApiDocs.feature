@@ -32,4 +32,5 @@ Feature: As a user I want to have our Apis documented.
     Then I should see "/api/v1/Articles/AsSimpleJson"
     When I click "/api/v1/Articles/AsSimpleJson"
     And I put valid articleId on current wiki as "id"
+    And I click try it out
     Then I should see successful response

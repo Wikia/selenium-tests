@@ -6,7 +6,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.
 import com.wikia.webdriver.bdd.context.TestingContext;
 import com.wikia.webdriver.bdd.context.TestingContextImpl;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -82,15 +81,18 @@ public class CommonSteps {
 	}
 
 	@When("^I put valid articleId on current wiki as \"([^\"]*)\"$")
-	public void I_put_valid_articleId_on_current_wiki_as(String arg1) throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
+	public void I_put_valid_articleId_on_current_wiki_as(String id) throws Throwable {
+		((ApiDocsPage) testingContext.getPage()).putParameter(id, String.valueOf(8736));
+	}
+
+	@When("^I click try it out$")
+	public void I_click_try_it_out() throws Throwable {
+		((ApiDocsPage) testingContext.getPage()).clickTryItOut();
 	}
 
 	@Then("^I should see successful response$")
 	public void I_want_to_see_successful_response() throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		throw new PendingException();
+		((ApiDocsPage) testingContext.getPage()).validateResponseCode(200);
 	}
 
 }
