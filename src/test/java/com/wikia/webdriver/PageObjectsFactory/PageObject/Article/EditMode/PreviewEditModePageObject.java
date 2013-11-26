@@ -14,7 +14,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
  */
 public class PreviewEditModePageObject extends EditMode {
 
-	@FindBy(css=".modalWrapper.preview")
+	@FindBy(css="#WallPreviewModal")
 	private WebElement previewModal;
 
 	By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
@@ -22,7 +22,7 @@ public class PreviewEditModePageObject extends EditMode {
 	By videoCaptionSelector = By.cssSelector(".thumbcaption");
 	By videoNoCaptionSelector = By.cssSelector(".Wikia-video-thumb:not(.thumbimage)");
 	By contentWrapper = By.cssSelector("#mw-content-text");
-	By publishButton = By.cssSelector("#publish");
+	By publishButton = By.cssSelector(".buttons .primary");
 	By tableOfContents = By.cssSelector("#toc");
 	By tableOfContentsOrderedList = By.cssSelector("#toc ol");
 
