@@ -145,7 +145,7 @@ public class MessageWallTests extends NewTestTemplate {
 	 * 3. make sure that reply area avatar doesn't appear by default
 	 */
 	@Test(groups = {"MessageWall_007", "MessageWall"})
-	public void MessageWall_007_Dar985bugPrevention_unclosedTagPost() {
+	public void MessageWall_007_unclosedTagPost() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName11, wikiURL);

@@ -41,7 +41,7 @@ public class NewMessageWall extends WikiBasePageObject {
 	@FindBy (css="#WallMessagePreview")
 	private WebElement previewButton;
 	@FindBy (css=".new-reply .speech-bubble-avatar img")
-	private WebElement replyAreaAvatar;
+	private WebElement replyAreaAvatars;
 	@FindBy (css="[data-is-reply]:nth-child(1)")
 	private WebElement editMessageWrapper;
 	@FindBy (css=".speech-bubble-message-removed")
