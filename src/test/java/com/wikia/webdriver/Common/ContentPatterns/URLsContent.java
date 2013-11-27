@@ -4,6 +4,9 @@ import com.wikia.webdriver.Common.Core.Global;
 
 public class URLsContent {
 
+	//api
+	public static String wikiaPhp = "wikia.php";
+
 	//Image lightbox test page
 	public static String lightboxImageTest = "LightboxTesting";
 	public static String followingToolbarTest = "QAautoPage";
@@ -65,6 +68,9 @@ public class URLsContent {
 	public static final String articleComments = "wiki/Article_comments";
 	public static final String categoryPmg = "wiki/Category:PMG";
 	public static final String articleTopbar = "wiki/Topbar";
+	public static final String gameGuidesControllerQS = "controller=GameGuides";
+	public static final String renderFullQS = "method=renderFullPage";
+	public static final String pageName = "page=";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";

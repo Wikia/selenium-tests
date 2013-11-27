@@ -1,17 +1,18 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 public class MobileModalComponentObject extends MobileBasePageObject {
 
 	public MobileModalComponentObject(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 
 	@FindBy(css=".zoomer.open.imgMdl")
@@ -33,6 +34,8 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 	@FindBys(@FindBy(css=".collSec"))
 	private List<WebElement> listOfMediaElements;
 
+	String modalTransition = "section[style*='transition']";
+
 	public void closeModal() {
 		waitForElementByElement(openedModal);
 		waitForElementClickableByElement(closeModalButton);
@@ -46,11 +49,13 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 	public void goToPreviousImage() {
 		waitForElementByElement(previousImageButton);
 		previousImageButton.click();
+		waitForElementNotPresent(modalTransition);
 	}
 
 	public void goToNextImage() {
 		waitForElementByElement(nextImageButton);
 		nextImageButton.click();
+		waitForElementNotPresent(modalTransition);
 	}
 
 	public String getCurrentImageUrl() {

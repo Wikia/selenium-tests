@@ -14,14 +14,14 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-public class MobileBasePageObject extends BasePageObject {
+public class MobileBasePageObject extends WikiBasePageObject {
 
 	public MobileBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		driver.manage().window().setSize(new Dimension(400, 600));
+		driver.manage().window().setSize(new Dimension(768, 1280));
 	}
 
 	// UI Mapping
