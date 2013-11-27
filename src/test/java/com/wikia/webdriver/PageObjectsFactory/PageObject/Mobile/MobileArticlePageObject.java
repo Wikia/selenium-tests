@@ -25,8 +25,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private String mainPageTitle = "Mobileregressiontesting Wiki";
 	private String curtainNotOpened = ".ads";
 
-	@FindBy(css="#wkArtCom .collSec.addChev")
-	private WebElement commentsSectionShowButton;
+	@FindBy(css="#wkArtComHeader")
+	private WebElement commentsSectionHeader;
 	@FindBy(css=".commSbt.wkBtn.main")
 	private WebElement postCommentButton;
 	@FindBy(css=".commText[name='wpArticleComment']")
@@ -96,8 +96,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void showCommentsSection() {
 		waitForElementNotVisibleByElement(commentInputArea);
-		waitForElementByElement(commentsSectionShowButton);
-		scrollAndClick(commentsSectionShowButton);
+		waitForElementByElement(commentsSectionHeader);
+		scrollToElement(commentsSectionHeader);
 		waitForElementByElement(postCommentButton);
 		waitForElementByElement(commentInputArea);
 		PageObjectLogging.log("showCommentsSection", "comments sections is visible", true, driver);
