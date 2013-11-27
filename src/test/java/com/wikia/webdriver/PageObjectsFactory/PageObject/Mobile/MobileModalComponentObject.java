@@ -1,11 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -31,8 +28,6 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 	private WebElement topBarHidden;
 	@FindBy(css=".swiperPage.current")
 	private WebElement currentImageModal;
-	@FindBys(@FindBy(css=".collSec"))
-	private List<WebElement> listOfMediaElements;
 
 	String modalTransition = "section[style*='transition']";
 
@@ -72,7 +67,7 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 
 	public void verifyModalClosed() {
 		waitForElementNotVisibleByElement(currentImageModal);
-		waitForElementByElement(listOfMediaElements.get(0));
+		waitForElementNotVisibleByElement(openedModal);
 		PageObjectLogging.log("verifyModalClosed", "modal was closed", true);
 	}
 
