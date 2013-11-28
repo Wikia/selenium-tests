@@ -20,6 +20,10 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	private WebElement userNameField;
 	@FindBy(css="select#mw-input-wpExpiry")
 	private WebElement expiry;
+	@FindBy(css="#mw-input-wpExpiry-other")
+	private WebElement expiryInput;
+	@FindBy(css="#mw-input-wpReason-other")
+	private WebElement reasonInput;
 	@FindBy(css=".mw-htmlform-submit")
 	private WebElement blockButton;
 
@@ -38,6 +42,19 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 		waitForElementByElement(expiry);
 		Select exp = new Select(expiry);
 		exp.selectByValue(period);
+	}
+
+	/**
+	 * @param period you can type here '5 min', '10 year', ...
+	 */
+	public void typeExpiration(String period){
+		waitForElementByElement(expiryInput);
+		expiryInput.sendKeys(period);
+	}
+
+	public void typeReason(String reason){
+		waitForElementByElement(reasonInput);
+		reasonInput.sendKeys(reason);
 	}
 
 	public void clickBlockButton(){

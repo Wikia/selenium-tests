@@ -11,6 +11,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.PreviewEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWallCloseRemoveThreadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockListPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockPageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -158,5 +160,47 @@ public class MessageWallTests extends NewTestTemplate {
 		wall.verifyMessageTitle(title);
 		wall.refreshPage();
 		wall.verifyReplyAreaAvatarNotVisible();
+	}
+
+	/**
+	 * DAR-2133 bug prevention test case
+	 * details jira:    https://wikia-inc.atlassian.net/browse/DAR-2133
+	 * 1. user QATestsBlockedUser is allowed to post on his own MessageWall
+	 * 2. as QATestsBlockedUser go to his messageWall
+	 * 3. QATestsBlockedUser should be able to post on his MessageWall
+	 * QATestsBlockedUser is blocked till 16:35, November 28, 2023.
+	 * After that date the test will fail for not valid reason.
+	 */
+	@Test(groups = {"MessageWall_008", "MessageWall"})
+	public void MessageWall_008_blockedUserPostsOnHisWall() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
+		boolean ifUserBlocked = blockListPage.ifUserIsBlockedForReason(
+				credentials.userNameBlockedAccount, "block QATestsBlockedUser"
+				);
+		// TODO: sprawdz czy tego nie da sie uzaleznic od sprawdzenia czy on w tym momencie jest zablokowany, czy tez mu minelo
+		if (!ifUserBlocked) {
+			SpecialBlockPageObject blockPage = base.openSpecialBlockPage(wikiURL);
+			blockPage.typeInUserName(credentials.userNameBlockedAccount);
+			blockPage.typeExpiration("10 year");
+			blockPage.typeReason("block QATestsBlockedUser");
+			blockPage.clickBlockButton();
+		}
+		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userNameBlockedAccount, wikiURL);
+		MiniEditorComponentObject mini = wall.triggerMessageArea();
+
+		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		mini.switchAndWrite(message);
+		wall.writeTitle(title);
+		wall.submit();
+		wall.verifyMessageText(title, message, credentials.userName);
+		MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
+		String reply = PageContent.messageWallQuotePrefix + wall.getTimeStamp();
+		miniReply.switchAndQuoteMessageWall(reply);;
+		wall.submitQuote();
+		wall.verifyQuote(reply);
 	}
 }
