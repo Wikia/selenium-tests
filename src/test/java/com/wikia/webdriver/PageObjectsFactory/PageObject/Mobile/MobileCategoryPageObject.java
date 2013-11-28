@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,16 +24,16 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	private WebElement hideAllButton;
 	@FindBy(css = "h2.collSec")
 	private List<WebElement> chevronList;
-	@FindBy(css = ".pagMore.visible")
-	private WebElement loadMoreButton;
-	@FindBy(css = ".pagLess.visible")
-	private WebElement loadPreviousButton;
 	@FindBys(@FindBy(css = ".wkExhItm"))
 	private List<WebElement> categoryExhibition;
-	@FindBys(@FindBy(css = ".collSec"))
-	private List<WebElement> articleList;
+	@FindBys(@FindBy(css = ".artSec .wkLst"))
+	private List<WebElement> articlesList;
 	@FindBys(@FindBy(css = ".artSec.open .wkLst>li>a"))
 	private List<WebElement> articleListWithPagination;
+
+	String articlesListSelector = "#%articlesFirstLetter% .wkLst li";
+	String loadMoreButtonSelector = "#%articlesFirstLetter% .pagMore.visible";
+	String loadPeviousButtonSelector = "#%articlesFirstLetter% .pagLess.visible";
 
 	public MobileArticlePageObject openCategory(String wikiURL) {
 		getUrl(wikiURL + URLsContent.categoryPmg);
@@ -76,32 +77,55 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 		PageObjectLogging.log("verifyCategoryExhibition", "Category exibition size (should equal 4) verified", true);
 	}
 
-	public void openArticle(int i) {
-		articleList.get(i).click();
-		waitForElementByElement(loadMoreButton);
+	public void verifyArticlesCount(String articlesFirstLetter, int count) {
+		List<WebElement> articlesList = getArticleList(articlesFirstLetter);
+		Assertion.assertTrue(articlesList.size() == count);
 	}
 
-	public void showNextArticles() {
-		loadMoreButton.click();
-		waitForElementByElement(loadPreviousButton);
+	private List<WebElement> getArticleList(String articlesFirstLetter) {
+		List<WebElement> articlesList = driver.findElements(
+				By.cssSelector(
+						articlesListSelector.replace(
+								"%articlesFirstLetter%", articlesFirstLetter
+								)
+						)
+				);
+		return articlesList;
 	}
 
-	public void showPreviousArticles() {
-		loadPreviousButton.click();
-		waitForElementByElement(loadMoreButton);
+	private WebElement getLoadMoreButton(String articlesFirstLetter) {
+		WebElement loadMoreButton = driver.findElement(
+				By.cssSelector(
+						loadMoreButtonSelector.replace(
+								"%articlesFirstLetter%", articlesFirstLetter
+								)
+						)
+				);
+		return loadMoreButton;
 	}
 
-	public void verifyArticlesCount(int count) {
-		Assertion.assertTrue(articleListWithPagination.size() == count);
+	private WebElement getLoadPreviousButton(String articlesFirstLetter) {
+		WebElement loadPeviousButton = driver.findElement(
+				By.cssSelector(
+						loadPeviousButtonSelector.replace(
+								"%articlesFirstLetter%", articlesFirstLetter
+								)
+						)
+				);
+		return loadPeviousButton;
 	}
 
-	public String getFirstArticleName() {
-		String firstArticle = articleListWithPagination.get(0).getAttribute("href");
+	public String getFirstArticleName(String articlesFirstLetter) {
+		List<WebElement> articlesList = getArticleList(articlesFirstLetter);
+		String firstArticle = articlesList.get(0).getText();
 		return firstArticle;
 	}
 
-	public String getLastArticleName() {
-		String lastArticle = articleListWithPagination.get(articleListWithPagination.size()-1).getAttribute("href");
+	public String getLastArticleName(String articlesFirstLetter) {
+		List<WebElement> articlesList = getArticleList(articlesFirstLetter);
+		String lastArticle = articlesList
+				.get(articlesList.size()-1)
+				.getText();
 		return lastArticle;
 	}
 
@@ -111,6 +135,16 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	public void verifyArticlesNotEquals(String article, String article2) {
 		Assertion.assertNotEquals(article, article2);
+	}
+
+	public void showNextArticles(String articlesFirstLetter) {
+		getLoadMoreButton(articlesFirstLetter).click();;
+		waitForElementByElement(getLoadPreviousButton(articlesFirstLetter));
+	}
+
+	public void showPreviousArticles(String articlesFirstLetter) {
+		getLoadPreviousButton(articlesFirstLetter).click();;
+		waitForElementByElement(getLoadMoreButton(articlesFirstLetter));
 	}
 
 }

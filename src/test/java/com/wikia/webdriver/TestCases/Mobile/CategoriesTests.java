@@ -18,17 +18,16 @@ public class CategoriesTests extends NewTestTemplate {
 	public void categoryTest_002_checkPagination() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
-		mobile.openArticle(2);
-		mobile.verifyArticlesCount(25);
-		String firstArticle = mobile.getFirstArticleName();
-		String lastArticle = mobile.getLastArticleName();
-		mobile.showNextArticles();
-		String firstArticle2 = mobile.getFirstArticleName();
+		mobile.verifyArticlesCount("P", 25);
+		String firstArticle = mobile.getFirstArticleName("P");
+		String lastArticle = mobile.getLastArticleName("P");
+		mobile.showNextArticles("P");
+		String firstArticle2 = mobile.getFirstArticleName("P");
 		mobile.verifyArticlesNotEquals(firstArticle, firstArticle2);
-		mobile.showPreviousArticles();
-		mobile.verifyArticlesCount(25);
-		String firstArticle3 = mobile.getFirstArticleName();
-		String lastArticle3 = mobile.getLastArticleName();
+		mobile.showPreviousArticles("P");
+		mobile.verifyArticlesCount("P", 25);
+		String firstArticle3 = mobile.getFirstArticleName("P");
+		String lastArticle3 = mobile.getLastArticleName("P");
 		mobile.verifyArticlesEquals(firstArticle, firstArticle3);
 		mobile.verifyArticlesEquals(lastArticle, lastArticle3);
 	}
