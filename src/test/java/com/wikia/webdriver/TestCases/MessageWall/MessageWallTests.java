@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.MessageWall;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -116,7 +117,7 @@ public class MessageWallTests extends NewTestTemplate {
 		wall.verifyMessageText(title, message, credentials.userName);
 	}
 
-	@Test(groups = {"MessageWall_005", "MessageWall"})
+	@Test(groups = {"MessageWall_006", "MessageWall"})
 	public void MessageWall_006_writeReply() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -133,5 +134,29 @@ public class MessageWallTests extends NewTestTemplate {
 		miniReply.switchAndQuoteMessageWall(reply);;
 		wall.submitQuote();
 		wall.verifyQuote(reply);
+	}
+
+	/**
+	 * DAR-985 bug prevention test case
+	 * details fogbugz: https://wikia.fogbugz.com/default.asp?31293,
+	 * details jira:    https://wikia-inc.atlassian.net/browse/DAR-985
+	 * 1. Go to a messageWall and add unClosedDivComment
+	 * 2. refresh the page
+	 * 3. make sure that reply area avatar doesn't appear by default
+	 */
+	@Test(groups = {"MessageWall_007", "MessageWall"})
+	public void MessageWall_007_unclosedTagPost() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userName11, wikiURL);
+		wall.triggerMessageArea();
+		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		wall.clickSourceModeButton();
+		wall.writeSourceMode(SourceModeContent.unclosedDivComment);
+		wall.writeTitle(title);
+		wall.submit();
+		wall.verifyMessageTitle(title);
+		wall.refreshPage();
+		wall.verifyReplyAreaAvatarNotVisible();
 	}
 }
