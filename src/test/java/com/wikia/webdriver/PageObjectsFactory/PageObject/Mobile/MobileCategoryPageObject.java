@@ -1,21 +1,20 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import org.openqa.selenium.support.FindBys;
 
 public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	public MobileCategoryPageObject(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 	}
 
 	@FindBy(css = "#expAll:not(.exp)")
@@ -37,8 +36,7 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 
 	public MobileArticlePageObject openCategory(String wikiURL) {
 		getUrl(wikiURL + URLsContent.categoryPmg);
-		waitForElementByElement(showAllButton);
-		PageObjectLogging.log("openCategory", "category page was opened", true, driver);
+		PageObjectLogging.log("openCategory", "category page: "+URLsContent.categoryPmg+", was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 
