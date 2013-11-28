@@ -108,8 +108,8 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	private void verifyNumberOfComments(int number) {
-		waitForElementByElement(numberOfComments);
-		Assertion.assertEquals(Integer.parseInt(numberOfComments.getAttribute("innerText")), number + 1,
+		waitForElementByElement(commentsSectionHeader);
+		Assertion.assertEquals(Integer.parseInt(commentsSectionHeader.getAttribute("data-count")), number + 1,
 			"number of comments was not increased"
 		);
 	}
@@ -138,7 +138,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void verifyNumberOfComments(String comment) {
 		showCommentsSection();
-		int number = Integer.parseInt(numberOfComments.getAttribute("innerText"));
+		int number = Integer.parseInt(commentsSectionHeader.getAttribute("data-count"));
 		commentInputArea.sendKeys(comment);
 		postCommentButton.click();
 		waitForElementByXPath(
