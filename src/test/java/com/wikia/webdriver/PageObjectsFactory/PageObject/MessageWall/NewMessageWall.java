@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -66,6 +67,7 @@ public class NewMessageWall extends WikiBasePageObject {
 	By firstMessageWrapperBy = By.cssSelector(".comments li.SpeechBubble.message.message-main:nth-child(1)");
 	By replyButtonBy = By.cssSelector(".replyButton");
 	By replyBodyBy = By.cssSelector(".replyBody");
+	By followButtonBy = By.cssSelector("a.follow");
 
 	String newMessageMenu = ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
 	String newMessageWrapper = ".comments li.SpeechBubble.message.message-main:nth-child(1)";
@@ -340,4 +342,21 @@ public class NewMessageWall extends WikiBasePageObject {
 		}
 		return new NewMessageWallThreadPageObject(driver);
 	}
+
+	/**
+	 * Checks if discussion is followed
+	 * @param title - title of the message to verify
+	 * @param isFollowing - with this variable you decide what is the expected message follow state
+	 */
+	public void verifyDiscussionFollow(String title, boolean isFollowing) {
+		waitForTextToBePresentInElementByBy(messageTitleBy, title);
+		Assertion.assertEquals(
+				driver.findElement(firstMessageWrapperBy).findElement(followButtonBy).getAttribute(PageContent.followAttributeName).equals(PageContent.followAttributeValue) ?
+						"Following" :
+						"Not following",
+				isFollowing ? "Following" : "Not following"
+		);
+		PageObjectLogging.log("verifyDiscussionFollow", title + " message " + (isFollowing ? "followed" : "unfollowed"), true, driver);
+	}
+
 }

@@ -92,4 +92,51 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.reopenThread();
 		forumThread.verifyThreadReopened();
 	}
+
+	/**
+	 * DAR-2318
+	 * 1. As a logged user open the forum main page
+	 * 2. Open the first board
+	 * 3. Start a new thread and check if you follow the thread
+	 * 4. Highlight the thread
+	 * 5. Check if you follow the thread
+	 */
+	@Test(groups= {"ForumThreadTests_009", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_009_createThreadAndHighlight(){
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		forumThread.verifyDiscussionFollow(title, true);
+		forumThread.highlightThread();
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		forumThread.verifyDiscussionFollow(title, true);
+	}
+
+	/**
+	 * DAR-2318
+	 * 1. As a logged user open the forum main page
+	 * 2. Open the first board
+	 * 3. Start a new highlighted thread and check if you follow the thread
+	 * 4. Check if you follow the thread
+	 */
+	@Test(groups= {"ForumThreadTests_010", "ForumThreadTests", "Forum"} )
+	public void forumThreadTests_009_createHighlightedThreadAndUnHighlighted(){
+		ForumPageObject forumMainPage = new ForumPageObject(driver);
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
+		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		forumMainPage.openForumMainPage(wikiURL);
+		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
+		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, true);
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		forumThread.verifyDiscussionFollow(title, true);
+		forumThread.unHighlightThread();
+		forumThread.verifyDiscussionTitleAndMessage(title, message);
+		forumThread.verifyDiscussionFollow(title, true);
+	}
 }
