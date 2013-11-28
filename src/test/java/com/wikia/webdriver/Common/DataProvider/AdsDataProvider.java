@@ -155,22 +155,21 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] skin() {
 		return new Object[][] {
-//			{
-//				"adtest-fluid", "Skin",
-//				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
-//				new Dimension(1366, 768),
-//				100,
-//				"src/test/resources/adsResources/skin1366_left",
-//				"src/test/resources/adsResources/skin1366_right",
-//			}, {
-//				"adtest-fluid", "Skin",
-//				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
-//				new Dimension(1920, 1080),
-//				170,
-//				"src/test/resources/adsResources/skin1920_left",
-//				"src/test/resources/adsResources/skin1920_right",
-//			},
 			{
+				"adtest-fluid", "Skin",
+				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				new Dimension(1366, 768),
+				100,
+				"src/test/resources/adsResources/skin1366_left",
+				"src/test/resources/adsResources/skin1366_right",
+			}, {
+				"adtest-fluid", "Skin",
+				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				new Dimension(1920, 1080),
+				170,
+				"src/test/resources/adsResources/skin1920_left",
+				"src/test/resources/adsResources/skin1920_right",
+			}, {
 				"adtest-fluid", "Skin",
 				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(2400, 1080),
