@@ -20,14 +20,15 @@ public class TocTests extends NewTestTemplate{
 	}
 
 	@Test(groups={"tocTest_002", "tocTests", "mobile"})
-	public void Sections_002_tocToSectionLevel1Test() {
+	public void TocTests_002_tocToSectionLevel1Test() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openTOCPage(wikiURL);
-		article.openToc();
-		Long positionBeforeClick = article.getPosition();
-		String clickedItem = article.clickOnLevel1SectionInToc(5, wikiURL);
-		article.verifySectionHeaderOpened(clickedItem);
+		TableOfContentsComponentObject toc = article.openToc();
+		Long positionBeforeClick = toc.getPosition();
+		String clickedItem = toc.clickOnLevel1Section(5, wikiURL);
 		article.verifyPositionsNotEquals(positionBeforeClick);
+		//TODO: fix the verification method, so it verifies that view was scrolled to the header.
+		article.verifySectionHeaderOpened(clickedItem);
 	}
 
 	@Test(groups={"tocTest_003", "tocTests", "mobile"})

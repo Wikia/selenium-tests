@@ -50,14 +50,6 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement openTOCbutton;
 	@FindBy(css="#wkMainCntHdr>h1")
 	private WebElement wikiHeader;
-	@FindBys(@FindBy(css=".toclevel-1 > a"))
-	private List<WebElement> tocLevel1Sections;
-	@FindBys(@FindBy(css=".toclevel-2 > a"))
-	private List<WebElement> tocLevel2Sections;
-	@FindBys(@FindBy(css=".toclevel-3 > a"))
-	private List<WebElement> tocLevel3Sections;
-	@FindBys(@FindBy(css=".toclevel-4 > a"))
-	private List<WebElement> tocLevel4Sections;
 	@FindBys(@FindBy(css=".txt > p"))
 	private List<WebElement> listOfComments;
 	@FindBy(css="section.artSec.open")
@@ -280,35 +272,40 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public String clickOnLevel1SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel1Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel1SectionInToc", "toc level 1 clicked", true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel1Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel1SectionInToc", "toc level 1 clicked", true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
+
 	public String clickOnLevel2SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel2Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel2SectionInToc", "toc level 2 clicked: " + href, true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel2Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel2SectionInToc", "toc level 2 clicked: " + href, true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
 	public String clickOnLevel3SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel3Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel3SectionInToc", "toc level 3 clicked: " + href, true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel3Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel3SectionInToc", "toc level 3 clicked: " + href, true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
 	public String clickOnLevel4SectionInToc(int number, String wikiURL) {
-		WebElement tocElement = tocLevel4Sections.get(number);
-		String href = tocElement.getAttribute("href");
-		tocElement.click();
-		PageObjectLogging.log("clickOnLevel4SectionInToc", "toc level 4 clicked: " + href, true);
-		return href.replace(wikiURL + wikiTOC, "");
+//		WebElement tocElement = tocLevel4Sections.get(number);
+//		String href = tocElement.getAttribute("href");
+//		tocElement.click();
+//		PageObjectLogging.log("clickOnLevel4SectionInToc", "toc level 4 clicked: " + href, true);
+//		return href.replace(wikiURL + wikiTOC, "");
+		return null;
 	}
 
 	public void verifyPositionsNotEquals(Long positionBeforeClick) {
