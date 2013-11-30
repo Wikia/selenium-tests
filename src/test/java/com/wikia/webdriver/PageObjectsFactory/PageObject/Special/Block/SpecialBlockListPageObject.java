@@ -1,5 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -28,6 +31,8 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 	private WebElement userUnblockedMessage;
 	@FindBys(@FindBy(css=".mw-blocklist td:nth-child(6)"))
 	protected List<WebElement> reasonsList;
+	@FindBy(css=".mw-blocklist td:nth-child(3)")
+	private WebElement expirationDate;
 
 	private void typeInUserName(String userName){
 		waitForElementByElement(userNameField);
@@ -62,14 +67,30 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 	 * @param reasonDesired reason that we want to check if he has been blocked for
 	 * @return boolean value with the answer for the question
 	 */
-	public boolean ifUserIsBlockedForReason(String username, String reasonDesired) {
-		searchForUser(username);
+	public boolean ifUserIsBlocked(String username) {
+//		searchForUser(username);
 		boolean isBlockedForTheReason = false;
-		for (WebElement reasonElem : reasonsList) {
-			if (reasonElem.getText().equals(reasonDesired)) {
-				isBlockedForTheReason = true;
-			}
-		}
+
+
+
+		String s2 = "16:35, November 28, 2023";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
+		String s = expirationDate.getText();
+        SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
+        try
+        {
+            Date date = simpleDateFormat.parse(s);
+            Date currentDate = new Date();
+            System.out.println("date : "+simpleDateFormat.format(date));
+            System.out.println("date : "+simpleDateFormat.format(currentDate));
+
+            System.out.println("is later?: "+currentDate.after(date) );
+        }
+        catch (ParseException ex)
+        {
+            System.out.println("Exception "+ex);
+        }
+
 		return isBlockedForTheReason;
 	}
 }

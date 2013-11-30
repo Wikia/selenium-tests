@@ -176,9 +176,7 @@ public class MessageWallTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
-		boolean ifUserBlocked = blockListPage.ifUserIsBlockedForReason(
-				credentials.userNameBlockedAccount, "block QATestsBlockedUser"
-				);
+		boolean ifUserBlocked = blockListPage.ifUserIsBlocked(credentials.userNameBlockedAccount);
 		// TODO: sprawdz czy tego nie da sie uzaleznic od sprawdzenia czy on w tym momencie jest zablokowany, czy tez mu minelo
 		if (!ifUserBlocked) {
 			SpecialBlockPageObject blockPage = base.openSpecialBlockPage(wikiURL);
