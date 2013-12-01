@@ -165,20 +165,19 @@ public class MessageWallTests extends NewTestTemplate {
 	/**
 	 * DAR-2133 bug prevention test case
 	 * details jira:    https://wikia-inc.atlassian.net/browse/DAR-2133
+	 * pre: test makes sure that QATestsBlockedUser is blocked on tested wikia.
 	 * 1. user QATestsBlockedUser is allowed to post on his own MessageWall
 	 * 2. as QATestsBlockedUser go to his messageWall
 	 * 3. QATestsBlockedUser should be able to post on his MessageWall
-	 * QATestsBlockedUser is blocked till 16:35, November 28, 2023.
-	 * After that date the test will fail for not valid reason.
+	 * 4. QATestsBlockedUser should be able to respond on his MessageWall
 	 */
 	@Test(groups = {"MessageWall_008", "MessageWall"})
 	public void MessageWall_008_blockedUserPostsOnHisWall() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
 		boolean ifUserBlocked = blockListPage.ifUserIsBlocked(credentials.userNameBlockedAccount);
-		// TODO: sprawdz czy tego nie da sie uzaleznic od sprawdzenia czy on w tym momencie jest zablokowany, czy tez mu minelo
 		if (!ifUserBlocked) {
+			base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 			SpecialBlockPageObject blockPage = base.openSpecialBlockPage(wikiURL);
 			blockPage.typeInUserName(credentials.userNameBlockedAccount);
 			blockPage.typeExpiration("10 year");
@@ -188,7 +187,6 @@ public class MessageWallTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userNameBlockedAccount, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-
 		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
 		mini.switchAndWrite(message);

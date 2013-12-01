@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -62,35 +63,26 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 	}
 
 	/**
-	 * this method checks if specified user has ever been blocked for the specified reason
+	 * this method checks if specified user is currently blocked
 	 * @param username user to be checked
-	 * @param reasonDesired reason that we want to check if he has been blocked for
 	 * @return boolean value with the answer for the question
 	 */
 	public boolean ifUserIsBlocked(String username) {
-//		searchForUser(username);
-		boolean isBlockedForTheReason = false;
-
-
-
-		String s2 = "16:35, November 28, 2023";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
-		String s = expirationDate.getText();
-        SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
+		boolean isBlocked = false;
+		searchForUser(username);
+		SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
+		String expirationDateText = expirationDate.getText();
         try
         {
-            Date date = simpleDateFormat.parse(s);
+            Date expirationDate = blockListDateFormat.parse(expirationDateText);
             Date currentDate = new Date();
-            System.out.println("date : "+simpleDateFormat.format(date));
-            System.out.println("date : "+simpleDateFormat.format(currentDate));
-
-            System.out.println("is later?: "+currentDate.after(date) );
+            isBlocked = currentDate.before(expirationDate);
         }
         catch (ParseException ex)
         {
             System.out.println("Exception "+ex);
         }
 
-		return isBlockedForTheReason;
+        return isBlocked;
 	}
 }
