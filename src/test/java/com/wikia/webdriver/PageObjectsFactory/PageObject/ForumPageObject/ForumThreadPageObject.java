@@ -39,7 +39,7 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement reopenThreadButton;
 	@FindBy(css="#WallMoveModalWrapper select")
 	private WebElement moveThreadModal_selectElement;
-	@FindBy(css="#WallMoveModalWrapper button.submit")
+	@FindBy(css="#WallMoveModalWrapper .primary")
 	private WebElement moveThreadModal_moveThreadButton;
 	@FindBy(css=".wall-action-reason")
 	private WebElement removeThreadModal_Textarea;
