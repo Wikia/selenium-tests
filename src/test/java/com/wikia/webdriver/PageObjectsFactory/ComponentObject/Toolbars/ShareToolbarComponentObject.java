@@ -26,11 +26,11 @@ public class ShareToolbarComponentObject extends BasePageObject {
 	private WebElement fBLikeButton;
 	@FindBy(css="a.email-link")
 	private WebElement emailButton;
-	@FindBy(css="a[id='ok']")
+	@FindBy(css="#ShareEmailModal .primary")
 	private WebElement emailModalSendButton;
-	@FindBy(css="a[id='cancel']")
+	@FindBy(css="#ShareEmailModal .secondary")
 	private WebElement emailModalCancelButton;
-	@FindBy(css="button.wikia-chiclet-button")
+	@FindBy(css="#ShareEmailModal .close")
 	private WebElement emailModalCloseButton;
 	@FindBy(css="input#lightbox-share-email-text")
 	private WebElement emailModalEmailInputField;
