@@ -1,5 +1,9 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,10 +23,10 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 	private WebElement userNameField;
 	@FindBy(css="input.mw-htmlform-submit")
 	private WebElement searchButton;
-	@FindBy(css=".mw-blocklist")
-	private WebElement blockListTable;
 	@FindBy(xpath="//p[contains(text(), 'The requested IP address or username is not blocked.')]")
 	private WebElement userUnblockedMessage;
+	@FindBy(css=".mw-blocklist td:nth-child(3)")
+	private WebElement expirationDate;
 
 	private void typeInUserName(String userName){
 		waitForElementByElement(userNameField);
@@ -49,5 +53,32 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 	public void verifyUserBlocked(String userName){
 		waitForElementByCss("table td.TablePager_col_ipb_target a[href='/wiki/User:"+userName+"']");
 		PageObjectLogging.log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list", true, driver);
+	}
+
+	/**
+	 * this method checks if specified user is currently blocked
+	 * @param username user to be checked
+	 * @return boolean value with the answer for the question
+	 */
+	public boolean isUserBlocked(String username) {
+		boolean isBlocked = false;
+		searchForUser(username);
+		if (!checkIfElementOnPage(expirationDate)) {
+			return isBlocked;
+		}
+		SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
+		String expirationDateText = expirationDate.getText();
+        try
+        {
+            Date expirationDate = blockListDateFormat.parse(expirationDateText);
+            Date currentDate = new Date();
+            isBlocked = currentDate.before(expirationDate);
+        }
+        catch (ParseException ex)
+        {
+            System.out.println("Exception "+ex);
+        }
+        PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked?" blocked":"n't blocked"), true);
+        return isBlocked;
 	}
 }
