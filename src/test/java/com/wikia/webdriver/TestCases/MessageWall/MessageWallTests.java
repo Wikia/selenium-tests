@@ -175,8 +175,8 @@ public class MessageWallTests extends NewTestTemplate {
 	public void MessageWall_008_blockedUserPostsOnHisWall() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
-		boolean ifUserBlocked = blockListPage.ifUserIsBlocked(credentials.userNameBlockedAccount);
-		if (!ifUserBlocked) {
+		boolean isUserBlocked = blockListPage.isUserBlocked(credentials.userNameBlockedAccount);
+		if (!isUserBlocked) {
 			base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 			SpecialBlockPageObject blockPage = base.openSpecialBlockPage(wikiURL);
 			blockPage.typeInUserName(credentials.userNameBlockedAccount);
@@ -192,10 +192,10 @@ public class MessageWallTests extends NewTestTemplate {
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
-		wall.verifyMessageText(title, message, credentials.userName);
+		wall.verifyMessageText(title, message, credentials.userNameBlockedAccount);
 		MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
 		String reply = PageContent.messageWallQuotePrefix + wall.getTimeStamp();
-		miniReply.switchAndQuoteMessageWall(reply);;
+		miniReply.switchAndQuoteMessageWall(reply);
 		wall.submitQuote();
 		wall.verifyQuote(reply);
 	}
