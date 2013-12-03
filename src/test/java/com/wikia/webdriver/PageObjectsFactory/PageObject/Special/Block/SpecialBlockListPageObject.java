@@ -76,7 +76,7 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
         }
         catch (ParseException ex)
         {
-            System.out.println("Exception "+ex);
+        	throw new RuntimeException("Can't parse expirationDateText: "+expirationDateText);
         }
         PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked?" blocked":"n't blocked"), true);
         return isBlocked;
