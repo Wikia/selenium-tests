@@ -3,6 +3,7 @@ package com.wikia.webdriver.bdd.steps;
 import com.google.inject.Inject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
+import com.wikia.webdriver.bdd.context.ScenarioContext;
 import com.wikia.webdriver.bdd.context.TestingContext;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -12,7 +13,9 @@ import cucumber.api.java.en.When;
 public class CommonSteps {
 	@Inject
 	private TestingContext testingContext;
-	public static String currentWikiUrl;
+
+	@Inject
+	private ScenarioContext scenarioContext;
 
 	@Given("I am on wikia global")
 	public void I_am_on_wikia_global() throws Throwable {
@@ -44,7 +47,6 @@ public class CommonSteps {
 
 	@Given("^non-corporate Wiki$")
 	public void non_corporate_Wiki() throws Throwable {
-		// Express the Regexp above with the code you wish you had
-		currentWikiUrl = testingContext.getWikiURL();
+		scenarioContext.setCurrentWiki( testingContext.getWiki() );
 	}
 }

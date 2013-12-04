@@ -7,16 +7,10 @@ import org.openqa.selenium.WebDriver;
 
 public interface TestingContext {
 	WebDriver getDriver();
-
 	AbstractConfiguration getConfig();
-
-	String getWikiURL();
-
-	String getWikiCorporateURL();
-
+	WikiContext getWiki();
+	WikiContext getCorporateWiki();
 	BasePageObject getPage();
-
 	void setPage(WikiBasePageObject page);
-
 	void close();
 }

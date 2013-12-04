@@ -11,18 +11,18 @@ import java.util.Map;
 
 public class GuiceObjectFactory implements ObjectFactory {
 	private Injector injector;
-	private TestingContext testingContext;
+	private GuiceModule guiceModule;
 	private final Map<Class, Object> cache = new HashMap<Class, Object>();
 
 	@Override
 	public void start() {
-		testingContext = new TestingContextImpl() {{ init(); }};
-		injector = Guice.createInjector(new GuiceModule(testingContext));
+		guiceModule = new GuiceModule();
+		injector = Guice.createInjector(guiceModule);
 	}
 
 	@Override
 	public void stop() {
-		testingContext.close();
+		guiceModule.destroy();
 		cache.clear();
 	}
 

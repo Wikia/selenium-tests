@@ -2,6 +2,7 @@ package com.wikia.webdriver.bdd.steps;
 
 import com.google.inject.Inject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ApiDocs.ApiDocsPage;
+import com.wikia.webdriver.bdd.context.ScenarioContext;
 import com.wikia.webdriver.bdd.context.TestingContext;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
@@ -11,10 +12,13 @@ public class ApiDocsSteps {
 	@Inject
 	private TestingContext testingContext;
 
+	@Inject
+	private ScenarioContext scenarioContext;
+
 	@When("^I go to API (.+) documentation page$")
 	public void I_go_to_API_v_documentation_page(String apiVersion) throws Throwable {
 		ApiDocsPage apiDocsPage = new ApiDocsPage(testingContext.getDriver());
-		apiDocsPage.openApiDocsPage(CommonSteps.currentWikiUrl, apiVersion);
+		apiDocsPage.openApiDocsPage(scenarioContext.getCurrentWiki().getUrl(), apiVersion);
 		testingContext.setPage(apiDocsPage);
 	}
 
