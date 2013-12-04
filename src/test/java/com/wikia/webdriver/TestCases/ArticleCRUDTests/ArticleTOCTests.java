@@ -169,6 +169,8 @@ public class ArticleTOCTests extends NewTestTemplate {
 	}
 
 	/**
+	 * DAR-2707 bug prevention test case
+	 * details jira:    https://wikia-inc.atlassian.net/browse/DAR-2707
 	 * 1. As anon create an article with heading in hidden section
 	 * 2. Verify that the hidden section is not present in TOC
 	 */
