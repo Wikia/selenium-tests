@@ -121,6 +121,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement welcomeLightBoxCloseButton;
 	@FindBy(css=".WikiWelcome p")
 	private List<WebElement> welcomeLightBoxParagraphs;
+	@FindBy(css="#toc a[href='#Hidden_section']")
+	private WebElement hiddenTOCSectionLink;
 
 	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
 
@@ -545,6 +547,19 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyTOCcollapsed() {
 		waitForElementNotVisibleByElement(tableOfContentsOrderedList);
 		PageObjectLogging.log("verifyTOCcollapsed", "toc is collapsed", true);
+	}
+
+	/**
+	 * Checks if hidden section is present in the TOC
+	 */
+	public void verifyTOChiddenSectionExcluded() {
+		boolean headingPresent;
+		headingPresent = checkIfElementOnPage(hiddenTOCSectionLink);
+		Assertion.assertEquals(headingPresent ? "present" : "not present",
+				"not present",
+				"Hidden section found in TOC");
+		PageObjectLogging.log("verifyTOChiddenSectionExcluded",
+				"Hidden section missing from TOC", !headingPresent);
 	}
 
 	/**

@@ -167,4 +167,22 @@ public class ArticleTOCTests extends NewTestTemplate {
 		article.verifyTOCexpanded();
 		article.verifyTOCsectionLinkWorks(1);
 	}
+
+	/**
+	 * 1. As anon create an article with heading in hidden section
+	 * 2. Verify that the hidden section is not present in TOC
+	 */
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_008" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
+	public void ArticleTOCTests_008_verifyTOCexcludesHiddenHeadings() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		ArticlePageObject article = base.openArticleByName(wikiURL,
+				articleTitle);
+		article.verifyTOCpresent();
+		article.verifyTOCcollapsed();
+		article.clickTOCshowHideButton();
+		article.verifyTOChiddenSectionExcluded();
+	}
 }
