@@ -117,7 +117,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement categorySaveButtonDisabled;
 	@FindBy(css = ".WikiaPageHeader h1")
 	private WebElement articleTitle;
-	@FindBy(css="section#WikiWelcomeWrapper > .close")
+	@FindBy(css="#WikiWelcomeModal .close")
 	private WebElement welcomeLightBoxCloseButton;
 	@FindBy(css=".WikiWelcome p")
 	private List<WebElement> welcomeLightBoxParagraphs;
