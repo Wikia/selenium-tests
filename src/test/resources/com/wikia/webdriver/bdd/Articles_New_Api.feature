@@ -13,20 +13,19 @@ Feature: As a Mobile team member
       | ns       |
       | abstract |
 
-
-  Scenario: I want to see results in certain format
+  Scenario: I want to be able to filter results by namespace
     Given non-corporate Wiki
     When I ask "v1" api for "Articles/New" with parameters:
-      | paramName | value |
-      | ns         | 0     |
+      | key        | value |
+      | namespaces | 8     |
     Then I should get list of no more than 20 most recent articles created on wiki
-    And all results should have integer field "ns" equal to "0"
+    And all results should have integer field "ns" equal to "8"
 
 
-  Scenario: I want to see results in certain format
+  Scenario: I want to be able to filter results by multiple namespaces
     Given non-corporate Wiki
     When I ask "v1" api for "Articles/New" with parameters:
-      | param_name | value |
-      | ns         | 0,6   |
+      | key        | value |
+      | namespaces | 8,6   |
     Then I should get list of no more than 20 most recent articles created on wiki
-    And all results should have integer field "ns" equal to "0" or "6"
+    And all results should have integer field "ns" equal to "8" or "6"
