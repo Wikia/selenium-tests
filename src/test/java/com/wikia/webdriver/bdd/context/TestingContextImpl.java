@@ -16,15 +16,11 @@ public class TestingContextImpl implements TestingContext {
 	private WikiContext wiki;
 	private WikiContext corporateWiki;
 	private WikiBasePageObject page;
+	private boolean driverInitialized = false;
 
 	public void init() {
 		Properties.setProperties();
 		config = ConfigurationFactory.getConfig();
-		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser(
-				config.getBrowser()
-		);
-		eventDriver.register(new PageObjectLogging());
-		driver = eventDriver;
 		final UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		wiki = new WikiContextImpl() {{
 			setUrl(urlBuilder.getUrlForWiki(config.getWikiName()));
@@ -34,13 +30,29 @@ public class TestingContextImpl implements TestingContext {
 		}};
 	}
 
+	private void initDriver() {
+		if ( !driverInitialized ) {
+			EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser(
+					config.getBrowser()
+			);
+			eventDriver.register(new PageObjectLogging());
+			driver = eventDriver;
+			driverInitialized = true;
+		}
+	}
+
+
 	@Override
 	public void close() {
-		driver.close();
+		if (driverInitialized) {
+			driver.close();
+			driverInitialized = false;
+		}
 	}
 
 	@Override
 	public WebDriver getDriver() {
+		initDriver();
 		return driver;
 	}
 

@@ -1,12 +1,10 @@
 package com.wikia.webdriver.bdd.steps;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.wikia.webdriver.bdd.context.ScenarioContext;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.io.IOUtils;
@@ -18,8 +16,8 @@ import org.hamcrest.Matchers;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.*;
-
 
 import static com.jayway.jsonassert.JsonAssert.with;
 
@@ -28,11 +26,14 @@ public class ApiSteps {
 	private ScenarioContext scenarioContext;
 
 	private String responseAsString;
-	private int responseCode = 0;
 	private Response response;
 
 	private void performQuery(String url, Map<String, String> stringStringMap) throws IOException {
 		char joinChar = '?';
+		for ( Map.Entry<String,String> entry: stringStringMap.entrySet() ) {
+			url += joinChar + entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "utf8");
+			joinChar = '&';
+		}
 		System.out.println(url);
 		WebClient client = WebClient.create(url);
 		response = client.accept("application/json").get();
@@ -43,8 +44,7 @@ public class ApiSteps {
 	public void I_go_to_ask_api_for(String apiVersion, String apiGroup, String apiEndpoint) throws Throwable {
 		I_ask_api_for_with_parameters(apiVersion,
 				apiGroup,
-				apiEndpoint,
-				Lists.<Map<String, String>>newArrayList(new HashMap<String, String>()));
+				apiEndpoint);
 	}
 
 	@Then("^I should get list of no more than (\\d+) most recent articles created on wiki$")
@@ -69,6 +69,14 @@ public class ApiSteps {
 		}
 	}
 
+	public void I_ask_api_for_with_parameters(String apiVersion, String apiGroup, String apiEndpoint, Map<String,String> parameters) throws Throwable {
+		I_ask_api_for_with_parameters(apiVersion, apiGroup, apiEndpoint, Lists.newArrayList(parameters));
+	}
+
+	public void I_ask_api_for_with_parameters(String apiVersion, String apiGroup, String apiEndpoint) throws Throwable {
+		I_ask_api_for_with_parameters(apiVersion, apiGroup, apiEndpoint, new HashMap<String, String>());
+	}
+
 	@Then("^I should get list of most recent articles created on wiki$")
 	public void I_should_get_list_of_most_recent_articles_in_namespace_created_on_wiki() throws Throwable {
 		with(responseAsString).assertThat("$.items[*].id", new InDescendingOrder());
@@ -84,7 +92,7 @@ public class ApiSteps {
 		with(responseAsString).assertThat("$.items[*]." + fieldName, new AllInSet<Integer>(Sets.newHashSet(value, value2)));
 	}
 
-	public static class InDescendingOrder extends BaseMatcher {
+	public static class InDescendingOrder extends BaseMatcher<Iterable<Comparable>> {
 
 		@Override
 		public boolean matches(Object o) {
@@ -118,7 +126,7 @@ public class ApiSteps {
 
 		@Override
 		public boolean matches(Object o) {
-			Iterable<T> iterable = ((Iterable<T>) o);
+			Iterable<T> iterable = (Iterable<T>) o;
 
 			for( T element :iterable ) {
 				if ( !allowedElements.contains(element) ) {
