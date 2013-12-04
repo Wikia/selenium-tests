@@ -33,6 +33,7 @@ public class ApiSteps {
 
 	private void performQuery(String url, Map<String, String> stringStringMap) throws IOException {
 		char joinChar = '?';
+		System.out.println(url);
 		WebClient client = WebClient.create(url);
 		response = client.accept("application/json").get();
 		responseAsString = IOUtils.toString((InputStream) response.getEntity());
@@ -42,7 +43,7 @@ public class ApiSteps {
 	public void I_go_to_ask_api_for(String apiVersion, String apiGroup, String apiEndpoint) throws Throwable {
 		I_ask_api_for_with_parameters(apiVersion,
 				apiGroup,
-				"List",
+				apiEndpoint,
 				Lists.<Map<String, String>>newArrayList(new HashMap<String, String>()));
 	}
 
@@ -57,7 +58,7 @@ public class ApiSteps {
 	@Then("^I see in each result following fields:$")
 	public void I_see_in_each_result_following_fields(DataTable table) throws Throwable {
 		for ( String fieldName: table.<String>asList(String.class) ) {
-			with(responseAsString).assertThat("$.itmes[*]." + fieldName, Matchers.notNullValue());
+			with(responseAsString).assertThat("$.items[*]." + fieldName, Matchers.notNullValue());
 		}
 	}
 
@@ -69,18 +70,18 @@ public class ApiSteps {
 	}
 
 	@Then("^I should get list of most recent articles created on wiki$")
-	public void I_should_get_list_of_most_recent_articles_in_namespace_created_on_wiki(long nsId) throws Throwable {
-		with(responseAsString).assertThat("$.itmes[*].id", new InDescendingOrder());
+	public void I_should_get_list_of_most_recent_articles_in_namespace_created_on_wiki() throws Throwable {
+		with(responseAsString).assertThat("$.items[*].id", new InDescendingOrder());
 	}
 
 	@Then("^all results should have integer field \"([^\"]*)\" equal to \"([^\"]*)\"$")
-	public void all_results_should_have_field_equal_to(String fieldName, long value) throws Throwable {
-		with(responseAsString).assertThat("$.itmes[*]." + fieldName, new AllInSet<Long>(Sets.newHashSet(value)));
+	public void all_results_should_have_field_equal_to(String fieldName, int value) throws Throwable {
+		with(responseAsString).assertThat("$.items[*]." + fieldName, new AllInSet<Integer>(Sets.newHashSet(value)));
 	}
 
 	@Then("^all results should have integer field \"([^\"]*)\" equal to \"([^\"]*)\" or \"([^\"]*)\"$")
-	public void all_results_should_have_field_equal_to_or(String fieldName, long value, long value2) throws Throwable {
-		with(responseAsString).assertThat("$.itmes[*]." + fieldName, new AllInSet<Long>(Sets.newHashSet(value, value2)));
+	public void all_results_should_have_field_equal_to_or(String fieldName, int value, int value2) throws Throwable {
+		with(responseAsString).assertThat("$.items[*]." + fieldName, new AllInSet<Integer>(Sets.newHashSet(value, value2)));
 	}
 
 	public static class InDescendingOrder extends BaseMatcher {
@@ -129,7 +130,7 @@ public class ApiSteps {
 
 		@Override
 		public void describeTo(Description description) {
-			description.appendText("values needs to be ordered");
+			description.appendText("All values needs to be in set");
 		}
 	}
 }

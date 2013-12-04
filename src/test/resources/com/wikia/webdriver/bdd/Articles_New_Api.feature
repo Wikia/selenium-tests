@@ -20,7 +20,7 @@ Feature: As a Mobile team member
       | paramName | value |
       | ns         | 0     |
     Then I should get list of no more than 20 most recent articles created on wiki
-    And all results should have integer field "namespaces" equal to "0"
+    And all results should have integer field "ns" equal to "0"
 
 
   Scenario: I want to see results in certain format
@@ -29,4 +29,4 @@ Feature: As a Mobile team member
       | param_name | value |
       | ns         | 0,6   |
     Then I should get list of no more than 20 most recent articles created on wiki
-    And all results should have integer field "namespaces" equal to "0" or "6"
+    And all results should have integer field "ns" equal to "0" or "6"
