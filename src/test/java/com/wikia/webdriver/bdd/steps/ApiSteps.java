@@ -61,6 +61,14 @@ public class ApiSteps {
 		}
 	}
 
+	@Then("^I see in each result following fields not empty:$")
+	public void I_see_in_each_result_following_fields_not_empty(DataTable table) throws Throwable {
+		for ( String fieldName: table.<String>asList(String.class) ) {
+			with(responseAsString).assertThat(String.format("$.items[*].%s" , fieldName),
+					CollectionMatchers.allElementsShouldContainNotEmptyField());
+		}
+	}
+
 	@Then("^I see in each result \\\"([^\\\"]*)\\\" object with following fields:$")
 	public void I_see_in_each_result_object_with_following_fields(String object, DataTable table) {
 		with(responseAsString).assertThat("$.items[*]", CollectionMatchers.allElementsShouldContainField(object));
