@@ -38,12 +38,10 @@ public class CollectionMatchers {
 			if ( o instanceof Iterable ) {
 				Iterable iterable = (Iterable) o;
 				for( Object element: iterable ) {
-					if ( !matcher.matches(element) ) {
-						return false;
-					}
+					return matcher.matches(element);
 				}
 			}
-			return true;
+			return false;
 		}
 
 		@Override

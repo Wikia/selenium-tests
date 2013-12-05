@@ -6,12 +6,16 @@ Feature: As a Mobile team member
     Given non-corporate Wiki
     When I ask "v1" api for "Articles/New"
     Then I should get list of no more than 20 most recent articles created on wiki
-    Then I see in each result following fields:
-      | id       |
-      | title    |
-      | url      |
-      | ns       |
-      | abstract |
+    And I see in each result following fields:
+      | id            |
+      | title         |
+      | url           |
+      | ns            |
+      | abstract      |
+      | creation_date |
+    And I see in each result "creator" object with following fields:
+      | avatar |
+      | name   |
 
   Scenario: I want to be able to filter results by namespace
     Given non-corporate Wiki
