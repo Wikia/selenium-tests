@@ -7,8 +7,8 @@ import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.PreviewEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWallCloseRemoveThreadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockListPageObject;
@@ -113,7 +113,7 @@ public class MessageWallTests extends NewTestTemplate {
 		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
-		PreviewEditModePageObject preview = wall.preview();
+		MiniEditorPreviewComponentObject preview = wall.preview();
 		preview.verifyTextContent(message);
 		preview.publish();
 		wall.verifyMessageText(title, message, credentials.userName);

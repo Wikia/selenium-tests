@@ -10,9 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorPreviewComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.PreviewEditModePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -123,11 +123,11 @@ public class NewMessageWall extends WikiBasePageObject {
 		PageObjectLogging.log("submitQuote", "message quote submitted", true);
 	}
 
-	public PreviewEditModePageObject preview() {
+	public MiniEditorPreviewComponentObject preview() {
 		driver.switchTo().defaultContent();
 		scrollAndClick(previewButton);
-		PageObjectLogging.log("preview", "message preview opened", true);
-		return new PreviewEditModePageObject(driver);
+		PageObjectLogging.log("preview", "MiniEditor preview opened", true);
+		return new MiniEditorPreviewComponentObject(driver);
 	}
 
 	public void writeTitle(String title) {
