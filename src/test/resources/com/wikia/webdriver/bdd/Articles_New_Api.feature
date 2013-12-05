@@ -12,12 +12,8 @@ Feature: As a Mobile team member
       | url           |
       | ns            |
       | abstract      |
-      | creation_date |
     And I see in each result following fields not empty:
       | creation_date |
-    And I see in each result "creator" object with following fields:
-      | avatar |
-      | name   |
     And I see in each result "creator" object with following fields not empty:
       | avatar |
       | name   |
