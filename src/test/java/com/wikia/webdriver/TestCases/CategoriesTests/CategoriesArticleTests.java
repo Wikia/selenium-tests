@@ -56,7 +56,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	@Test(groups = {"CategoriesTestsArticle003", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle003_user() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
 		article.addCategory(categoryName);
@@ -67,7 +67,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	@Test(groups = {"CategoriesTestsArticle004", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle004_userSuggestions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(
 				wikiURL,
 				PageContent.articleNamePrefix + base.getTimeStamp()
@@ -92,7 +92,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(categoryName);
 	}
 
-	@Test(groups = {"CategoriesTestsArticle005", "CategoriesTestsArticle"})
+	@Test(groups = {"CategoriesTestsArticle006", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle006_anonDelete() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
