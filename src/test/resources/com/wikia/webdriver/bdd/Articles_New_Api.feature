@@ -16,6 +16,9 @@ Feature: As a Mobile team member
     And I see in each result "creator" object with following fields:
       | avatar |
       | name   |
+    And I see in each result "creator" object with following fields not empty:
+      | avatar |
+      | name   |
 
   Scenario: I want to be able to filter results by namespace
     Given non-corporate Wiki

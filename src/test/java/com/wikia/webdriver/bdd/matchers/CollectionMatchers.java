@@ -26,6 +26,10 @@ public class CollectionMatchers {
 		return CollectionMatchers.allShould(JsonAssert.mapContainingKey(Matchers.equalTo(fieldName)));
 	}
 
+	public static Matcher allElementsShouldContainNotEmptyField() {
+		return CollectionMatchers.allShould(Matchers.notNullValue());
+	}
+
 	public static class AllShouldMatcher extends BaseMatcher {
 		private final Matcher matcher;
 

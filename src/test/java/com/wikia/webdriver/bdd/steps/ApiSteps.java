@@ -70,6 +70,15 @@ public class ApiSteps {
 		}
 	}
 
+	@Then("^I see in each result \\\"([^\\\"]*)\\\" object with following fields not empty:$")
+	public void I_see_in_each_result_object_with_following_fields_not_empty(String object, DataTable table) {
+		with(responseAsString).assertThat("$.items[*]", CollectionMatchers.allElementsShouldContainField(object));
+		for ( String fieldName: table.<String>asList(String.class) ) {
+			with(responseAsString).assertThat(String.format("$.items[*].%s.%s" , object, fieldName),
+					CollectionMatchers.allElementsShouldContainNotEmptyField());
+		}
+	}
+
 	@When("^I ask \\\"([^\\\"]*)\\\" api for \\\"([^\\\"]*)/([^\\\"]*)\\\" with parameters:$")
 	public void I_ask_api_for_with_parameters(String apiVersion, String apiGroup, String apiEndpoint, List<ApiParameter> parameters) throws Throwable {
 		if ( apiVersion.contains("v1") ) {
