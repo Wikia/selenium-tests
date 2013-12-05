@@ -2,6 +2,7 @@ package com.wikia.webdriver.bdd.steps;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.jayway.jsonpath.JsonPath;
 import com.wikia.webdriver.bdd.context.ScenarioContext;
 import com.wikia.webdriver.bdd.matchers.CollectionMatchers;
 import cucumber.api.DataTable;
@@ -10,6 +11,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.io.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.hamcrest.Matchers;
+import org.testng.Assert;
 
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -17,6 +19,7 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.jayway.jsonassert.JsonAssert.with;
 
@@ -88,6 +91,21 @@ public class ApiSteps {
 			with(responseAsString).assertThat(String.format("$.items[*].%s.%s" , object, fieldName),
 					CollectionMatchers.allElementsShouldContainNotEmptyField());
 		}
+	}
+
+	@Then("^Together with \\\"([^\\\"]*)\\\" I see in each result \\\"([^\\\"]*)\\\" object with following fields:$")
+	public void I_see_in_each_result_object_with_following_fields(String mandatoryField, String object, DataTable table) {
+		List<Map<String,Object>> items = JsonPath.read( responseAsString, "$.items[*]" );
+		for( Map<String,Object> item: items ) {
+			Assert.assertTrue( item.containsKey( mandatoryField ) );
+			if ( item.get( mandatoryField ) != null ) {
+				for ( String fieldName: table.<String>asList(String.class) ) {
+					with(responseAsString).assertThat(String.format("$.items[*].%s" , object),
+							CollectionMatchers.allElementsShouldContainField(fieldName));
+				}
+			}
+		}
+
 	}
 
 	@When("^I ask \\\"([^\\\"]*)\\\" api for \\\"([^\\\"]*)/([^\\\"]*)\\\" with parameters:$")

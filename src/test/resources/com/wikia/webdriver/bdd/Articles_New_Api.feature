@@ -14,9 +14,13 @@ Feature: As a Mobile team member
       | abstract      |
     And I see in each result following fields not empty:
       | creation_date |
+      | thumbnail     |
     And I see in each result "creator" object with following fields not empty:
       | avatar |
       | name   |
+    And Together with "thumbnail" I see in each result "original_dimensions" object with following fields:
+      | width   |
+      | height  |
 
   Scenario: I want to be able to filter results by namespace
     Given non-corporate Wiki
@@ -38,13 +42,13 @@ Feature: As a Mobile team member
   Scenario: I want to see results certain number of results
     Given non-corporate Wiki
     When I ask "v1" api for "Articles/New" with parameters:
-      | limit |  ns |
-      | 7     |  6  |
+      | key   |  value |
+      | limit |  7     |
     Then I should get list of no more than 7 most recent articles created on wiki
 
   Scenario: I want to ignore limit larger than 100
     Given non-corporate Wiki
     When I ask "v1" api for "Articles/New" with parameters:
-      | limit   |
-      | 101     |
+      | key   | value |
+      | limit | 101   |
     Then I should get list of no more than 100 most recent articles created on wiki
