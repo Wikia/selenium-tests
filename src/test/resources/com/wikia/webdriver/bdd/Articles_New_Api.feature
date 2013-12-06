@@ -52,3 +52,10 @@ Feature: As a Mobile team member
       | key   | value |
       | limit | 101   |
     Then I should get list of no more than 100 most recent articles created on wiki
+
+  Scenario: I want to abstract to have no longer than 200 characters
+    Given non-corporate Wiki
+    When I ask "v1" api for "Articles/New" with parameters:
+      | key   | value |
+      | limit | 10    |
+    Then I should get "abstract" object with no more than 200 characters

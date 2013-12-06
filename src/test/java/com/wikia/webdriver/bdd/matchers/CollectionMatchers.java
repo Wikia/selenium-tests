@@ -30,6 +30,30 @@ public class CollectionMatchers {
 		return CollectionMatchers.allShould(Matchers.notNullValue());
 	}
 
+	public static Matcher allElementsShouldContainLimitedLengthField(int limit) {
+		return CollectionMatchers.allShould( new StringLengthMatcher( limit ) );
+	}
+
+	public static class StringLengthMatcher extends BaseMatcher{
+		private final int Limit;
+
+		public StringLengthMatcher(int Limit)
+		{
+			this.Limit = Limit;
+		}
+
+		@Override
+		public boolean matches( Object o ) {
+			return (o instanceof String )   &&  ( (String) o ).length() <= Limit;
+		}
+
+		@Override
+		public void describeTo(Description description) {
+			description.appendText("String length should be less or equal to:" + Limit );
+		}
+
+	}
+
 	public static class AllShouldMatcher extends BaseMatcher {
 		private final Matcher matcher;
 

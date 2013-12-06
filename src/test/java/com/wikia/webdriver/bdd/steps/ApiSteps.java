@@ -49,6 +49,7 @@ public class ApiSteps {
 				apiEndpoint);
 	}
 
+
 	@Then("^I should get list of no more than (\\d+) most recent articles created on wiki$")
 	public void I_should_get_list_of_no_more_than_most_recent_articles_created_on_wiki(int count) throws Throwable {
 		// items should have ordered
@@ -132,6 +133,14 @@ public class ApiSteps {
 	@Then("^all results should have integer field \"([^\"]*)\" equal to \"([^\"]*)\" or \"([^\"]*)\"$")
 	public void all_results_should_have_field_equal_to_or(String fieldName, int value, int value2) throws Throwable {
 		with(responseAsString).assertThat("$.items[*]." + fieldName, CollectionMatchers.allValuesShouldBeInSet(Sets.newHashSet(value, value2)));
+	}
+
+	@Then( "^I should get \"([^\"]*)\" object with no more than (\\d+) characters$" )
+	public void I_should_get_object_with_no_more_than_characters( String object, int limit ) throws Throwable {
+		with(responseAsString).assertThat("$.items[*]", CollectionMatchers.allElementsShouldContainField(object));
+		with(responseAsString).assertThat(String.format("$.items[*].%s" , object),
+					CollectionMatchers.allElementsShouldContainLimitedLengthField(limit));
+
 	}
 
 	public class ApiParameter {
