@@ -100,9 +100,10 @@ public class ApiSteps {
 		for( Map<String,Object> item: items ) {
 			Assert.assertTrue( item.containsKey( mandatoryField ) );
 			if ( item.get( mandatoryField ) != null ) {
+				Map<String,Object> og = (Map<String, Object>) item.get(object);
+				Assert.assertNotNull(og);
 				for ( String fieldName: table.<String>asList(String.class) ) {
-					with(responseAsString).assertThat(String.format("$.items[*].%s" , object),
-							CollectionMatchers.allElementsShouldContainField(fieldName));
+					Assert.assertNotNull(og.get(fieldName));
 				}
 			}
 		}
