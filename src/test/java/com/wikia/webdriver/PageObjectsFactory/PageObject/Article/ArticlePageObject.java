@@ -119,15 +119,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement articleTitle;
 	@FindBy(css="#WikiWelcomeModal .close")
 	private WebElement welcomeLightBoxCloseButton;
-	@FindBy(css=".WikiWelcome p")
-	private List<WebElement> welcomeLightBoxParagraphs;
-	@FindBy(css=".article-table-selected")
-	private List<WebElement> tables;
+	@FindBy(css="li.ui-menu-item > a")
+	private List<WebElement> categorySuggestionsListItems;
 	@FindBy(css=".article-table")
 	private WebElement table;
-
-	private By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
-	private By articleTableBy = By.cssSelector(".article-table");
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -540,8 +535,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		clickAddCategoryButton();
 		typeCategoryName(category);
 		waitForElementByElement(categorySuggestionsList);
-		List<WebElement> suggestionsList = categorySuggestionsList.findElements(categorySuggestionsListItems);
-		WebElement desiredCategory = suggestionsList.get(categoryNumber);
+		WebElement desiredCategory = categorySuggestionsListItems.get(categoryNumber);
 		String desiredCategoryText = desiredCategory.getText();
 		desiredCategory.click();
 		waitForElementNotVisibleByElement(categorySuggestionsList);
@@ -629,7 +623,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         }
 
 	public void verifyTableRemoved() {
-		waitForElementNotPresent(articleTableBy);
+		checkIfElementOnPage(table);
 		PageObjectLogging.log("verifyTableRemoved", "table was removedcd", true);
 	}
 }

@@ -736,7 +736,7 @@ public class BasePageObject{
 		PageObjectLogging.log("appendToUrl", additionToUrl + " has been appended to url", true);
 	}
 
-	public void appendToUrl(String [] queryStrings) {
+	public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
 		String currentUrl = getCurrentUrl();
 		for(int i = 0; i < queryStrings.length; i++) {
 			currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryStrings[i]);

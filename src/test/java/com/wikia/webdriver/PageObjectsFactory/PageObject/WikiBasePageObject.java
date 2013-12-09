@@ -336,7 +336,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SourceEditModePageObject openCurrectArticleSourceMode() {
 		String queryStrings [] = {URLsContent.actionEditParameter, URLsContent.sourceMode};
-		appendToUrl(queryStrings);
+		appendMultipleQueryStringsToUrl(queryStrings);
 		return new SourceEditModePageObject(driver);
 	}
 

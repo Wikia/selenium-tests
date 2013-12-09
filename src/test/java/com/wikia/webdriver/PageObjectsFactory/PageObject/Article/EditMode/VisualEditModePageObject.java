@@ -80,7 +80,6 @@ public class VisualEditModePageObject extends EditMode {
 	private By sliderBy = By.cssSelector("img.image-gallery-slider");
 	private By videoBy = By.cssSelector("img.video");
 	private By categorySuggestionsList = By.cssSelector("li > a");
-	private By articleTableBy = By.cssSelector(".article-table");
 
 	private String categoryEditSelector = "li.category[data-name='%categoryName%'] li.editCategory";
 	private String categoryRemoveSelector = "li.category[data-name='%categoryName%'] li.removeCategory";
@@ -414,7 +413,7 @@ public class VisualEditModePageObject extends EditMode {
 		driver.switchTo().frame(contextFrame);
 		option.click();
 		driver.switchTo().defaultContent();
-		waitForElementNotPresent(articleTableBy);
+		checkIfElementOnPage(visualModeTable);
 	}
 
 	public void clickDeleteTableButton() {
