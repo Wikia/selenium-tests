@@ -16,7 +16,7 @@ public class AvatarComponentObject extends EditProfileComponentObject {
 
 	@FindBy(css="#UPPLightboxAvatar")
 	private WebElement uploadInput;
-	@FindBy(css=".modalToolbar > .save")
+	@FindBy(css="#UPPLightboxWrapper [data-event=save]")
 	private WebElement saveButton;
 
 	public AvatarComponentObject(WebDriver driver) {
