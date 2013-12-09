@@ -41,10 +41,7 @@ public class UserAvatarTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
-		String avatarURL = profile.getAvatarUrl();
-		profile.verifyURLStatus(200, avatarURL);
 		profile.clickRemoveAvatar();
 		profile.verifyAvatar(URLsContent.avatarGeneric);
-		profile.verifyURLStatus(404, avatarURL);
 	}
 }
