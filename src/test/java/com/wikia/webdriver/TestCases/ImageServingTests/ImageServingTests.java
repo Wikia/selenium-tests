@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.ImageServingTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.DataProvider.FileDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -42,15 +43,19 @@ public class ImageServingTests extends NewTestTemplate {
 		newFiles.verifyURLStatus(200, imageURL);
 	}
 
-	@Test(groups = {"ImageServing002", "ImageServing"})
-	public void ImageServing002_SpecialUploadTest() {
+	@Test(
+			groups = {"ImageServing002", "ImageServing"},
+			dataProviderClass = FileDataProvider.class,
+			dataProvider = "getFileNames"
+	)
+	public void ImageServing002_SpecialUploadTest(String fileName) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
-		upload.selectFileToUpload(PageContent.file);
+		upload.selectFileToUpload(fileName);
 		upload.checkIgnoreAnyWarnings();
 		FilePagePageObject filePage = upload.clickUploadButton();
-		filePage.verifyHeader(PageContent.file);
+		filePage.verifyHeader(fileName);
 
 		String imageURL = filePage.getImageUrl();
 		String imageThumbnailURL = filePage.getImageThumbnailUrl();
