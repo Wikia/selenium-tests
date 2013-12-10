@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.Common.DataProvider;
 
 import org.testng.annotations.DataProvider;
@@ -18,5 +15,4 @@ public class FileDataProvider {
 			{"Image001.jpg"},
 		};
 	}
-
 }
