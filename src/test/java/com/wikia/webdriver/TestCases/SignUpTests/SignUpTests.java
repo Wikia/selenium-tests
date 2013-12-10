@@ -22,11 +22,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject.tabNames;
 
  /*
- * 1. Sign up wrong blurry word,
- * 2. Sign up of too young user,
- * 3. Sign up with existing user name,
- * 4. Sign up with users from data provider.
- * 5. Sign up drop-down from from article, //TODO
+ * 1. Attempt to sign up wrong blurry word,
+ * 2. Attempt to sign up of too young user,
+ * 3. Attempt to sign up with existing user name,
+ * 4. Sign up,
+ * 5. Sign up during CNW process,
+ * 6. Login in using not verified user
  */
 public class SignUpTests extends NewTestTemplate {
 
