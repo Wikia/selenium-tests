@@ -109,7 +109,7 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement userProfileAvatar;
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
-	@FindBy(css="#userForceLoginModal")
+	@FindBy(css="section.modalWrapper .UserLoginModal")
 	protected WebElement logInModal;
 	@FindBy(css="a[data-id='login']")
 	protected WebElement loginButton;
