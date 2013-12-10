@@ -86,7 +86,6 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	String backCssSelector = ".goBck";
 
 	public void showCommentsSection() {
-		waitForElementNotVisibleByElement(commentInputArea);
 		waitForElementByElement(commentsSectionHeader);
 		scrollToElement(commentsSectionHeader);
 		waitForElementByElement(postCommentButton);
