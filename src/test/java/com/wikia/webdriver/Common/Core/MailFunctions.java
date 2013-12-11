@@ -1,10 +1,8 @@
 package com.wikia.webdriver.Common.Core;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.util.Properties;
 
 import javax.mail.Flags;
@@ -15,84 +13,72 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
+/**
+ *
+ * @author Karol 'kkarolk' Kujawiak
+ *
+ */
 public class MailFunctions {
-	
-	
-	
-	public static String getFirstMailContent(String userName, String password) 
-	{
+
+	public static String getFirstMailContent(String userName, String password) {
 		try {
-			
 			//establishing connections
 			Properties props = System.getProperties();
 			props.setProperty("mail.store.protocol", "imaps");
 			Session session = Session.getDefaultInstance(props, null);
-//			session.setDebug(true);
 			Store store = session.getStore("imaps");
-			
 			store.connect("imap.googlemail.com", userName, password);
 			//getInbox
 			Folder inbox = store.getFolder("Inbox");
 			inbox.open(Folder.READ_ONLY);
 			Message messages[] = inbox.getMessages();
-			
+
 			int counter = 0;
-			while (messages.length==0)
-			{
+			while (messages.length == 0) {
 				Thread.sleep(150);
 				messages = inbox.getMessages();
 				counter+=1;
-				if ((counter % 10) == 0){
+				if ((counter % 10) == 0) {
 					System.out.println("Checking mail... \r");
 				}
-				if (counter >2500)
-				{
+				if (counter >2500) {
 					break;
 				}
 			}
 			System.out.println("Mail arrived... \r");
-			if (messages.length!=0)
-			{
+			if (messages.length != 0) {
 				Message m = messages[0];
 				String line;
 				StringBuffer buffer = new StringBuffer();
 				InputStreamReader in = new InputStreamReader(m.getInputStream());
 				BufferedReader reader = new BufferedReader(in);
-				while((line = reader.readLine()) != null)
-				{
+				while((line = reader.readLine()) != null) {
 					buffer.append(line);
 				}
 				store.close();
 				return buffer.toString();
-			}
-			else
-			{
+			} else {
 				store.close();
 				return "no messages";
 			}
-		} 
-		catch (NoSuchProviderException e) 
-		{
+		}
+		catch (NoSuchProviderException e) {
 			System.out.println("problems : " + e.getMessage());
 			return e.getMessage();
 		}
-		catch (MessagingException e) 
-		{
+		catch (MessagingException e) {
 			System.out.println("problems : " + e.getMessage());
 			return e.getMessage();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return e.getMessage();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return e.getMessage();
 		}
 	}
 
-	public static void deleteAllMails(String userName, String password)
-	{
+	public static void deleteAllMails(String userName, String password) {
 		try {
 			//establishing connections
 			Properties props = System.getProperties();
@@ -105,56 +91,32 @@ public class MailFunctions {
 			Folder inbox = store.getFolder("Inbox");
 			inbox.open(Folder.READ_WRITE);
 			Message messages[] = inbox.getMessages();
-			if (messages.length != 0)
-			{
-				for (int i=0; i< messages.length; i++)
-				{
+			if (messages.length != 0) {
+				for (int i=0; i< messages.length; i++) {
 					messages[i].setFlag(Flags.Flag.DELETED, true);
 				}
-			}
-			else
-			{
+			} else {
 				System.out.println("There is no messages in inbox");
 			}
-			
 			store.close();
-		} 
-		catch (NoSuchProviderException e) 
-		{
+		}
+		catch (NoSuchProviderException e) {
 			System.out.println("problems : " + e.getMessage());
 		}
-		catch (MessagingException e) 
-		{
+		catch (MessagingException e) {
 			System.out.println("problems : " + e.getMessage());
-		} 
+		}
 	}
-	
-	public static String getPasswordFromMailContent(String content)
-	{
+
+	public static String getPasswordFromMailContent(String content) {
 		content = content.replace("\"","\n");
 		String [] lines = content.split("\n");
 		return lines[1];
 	}
 
-	public static String getActivationLinkFromMailContent(String content)
-	{
+	public static String getActivationLinkFromMailContent(String content) {
 		content = content.replace("=0D","\n" );
 		String [] lines = content.split("\n");
 		return lines[4];
 	}
-	
-	public static String getActivationTextFromMailContent(String content)
-	{
-		content = content.replace("=0D","\n" );
-		String [] lines = content.split("\n");
-		return lines[4];
-	}
-	
-	public static String[] getWelcomeMailContent(String content)
-	{
-		content = content.replace("=0D","\n" );
-		String [] lines = content.split("\n");
-		return lines;
-	}
-
 }
