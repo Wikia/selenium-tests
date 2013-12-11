@@ -52,7 +52,8 @@ public class ImageServingTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
-		upload.selectFileToUpload(fileName);
+		upload.selectFileToUpload(PageContent.file);
+		upload.typeFileName(fileName);
 		upload.checkIgnoreAnyWarnings();
 		FilePagePageObject filePage = upload.clickUploadButton();
 		filePage.verifyHeader(fileName);

@@ -18,6 +18,8 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	private WebElement ignoreAnyWarnings;
 	@FindBy(css="input.mw-htmlform-submit[value*='Upload']")
 	private WebElement uploadFileInput;
+	@FindBy(css="#wpDestFile")
+	private WebElement uploadFileName;
 
 	public SpecialUploadPageObject(WebDriver driver) {
 		super(driver);
@@ -58,5 +60,11 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 		scrollAndClick(uploadFileInput);
 		PageObjectLogging.log("clickOnUploadFile", "upload file button clicked.", true);
 		return new FilePagePageObject(driver);
+	}
+
+	public void typeFileName(String fileName) {
+		uploadFileName.clear();
+		uploadFileName.sendKeys(fileName);
+		PageObjectLogging.log("typeFileName", fileName + " typed into file name field", true);
 	}
 }
