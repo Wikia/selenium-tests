@@ -99,7 +99,7 @@ public class SignUpTests extends NewTestTemplate {
 		);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword);
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword, wikiURL);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
@@ -137,7 +137,7 @@ public class SignUpTests extends NewTestTemplate {
 		);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword);
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword, wikiURL);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
 		createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);

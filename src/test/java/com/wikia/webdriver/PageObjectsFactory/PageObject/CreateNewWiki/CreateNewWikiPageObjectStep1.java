@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.wikia.webdriver.Common.ContentPatterns.CreateWikiMessages;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  *
@@ -18,7 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
  *
  */
 
-public class CreateNewWikiPageObjectStep1 extends BasePageObject{
+public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject{
 
 	@FindBy(name="wiki-name")
 	private WebElement wikiName;

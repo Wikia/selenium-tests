@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Flags;
 import javax.mail.Folder;
@@ -108,15 +110,21 @@ public class MailFunctions {
 		}
 	}
 
+	public static String getActivationLinkFromMailContent(String content) {
+		content = content.replace("=","" ); //mail content contain '=' chars, which has to be removed
+		Pattern p = Pattern.compile("Special:WikiaConfirmEmail/*\\w{3,}<"); //getting activation URL from mail content
+		Matcher m = p.matcher(content);
+		if (m.find()) {
+			return m.group(0).substring(0, m.group(0).length()-1); //last character is '<' so has to be removed
+		}
+		else {
+			throw new RuntimeException("There was no match in the following content: \n" + content);
+		}
+	}
+
 	public static String getPasswordFromMailContent(String content) {
 		content = content.replace("\"","\n");
 		String [] lines = content.split("\n");
 		return lines[1];
-	}
-
-	public static String getActivationLinkFromMailContent(String content) {
-		content = content.replace("=0D","\n" );
-		String [] lines = content.split("\n");
-		return lines[4];
 	}
 }
