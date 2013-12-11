@@ -172,7 +172,6 @@ public class MessageWallTests extends NewTestTemplate {
 	 * 4. QATestsBlockedUser should be able to respond on his MessageWall
 	 */
 	@Test(
-			enabled = true, //fix blocking user IP together with his username
 			groups = {"MessageWall_008", "MessageWall"}
 	)
 	public void MessageWall_008_blockedUserPostsOnHisWall() {
