@@ -587,7 +587,48 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void compareTrackedEventsTo() {
 //		ArrayList<String> jsonArray = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		Object result = js.executeScript("return window.seleniumEventsArray");
 
+		Object event1 = js.executeScript("return window.seleniumEventsArray.pop()");
+
+		Object event2 = js.executeScript("return window.seleniumEventsArray.pop()");
+		Object event3 = js.executeScript("return window.seleniumEventsArray.pop()");
+
+		String eventString = extractEventLabel(event1.toString());
+		String event2String = extractEventLabel(event2.toString());
+		String event3String = extractEventLabel(event3.toString());
+//		try {
+//			String stringo = event1.toString();
+
+//			JSONObject jsnobject = new JSONObject(JsonArrayString3);
+//			JSONArray array = jsnobject.getJSONArray("event");
+//
+//			for (int i = 0; i < array.length(); i++) {  // **line 2**
+//				JSONObject jsonOBJ= array.getJSONObject(i);
+//				String key = "label";
+//				if (jsonOBJ.has(key)) {
+//					String eventString = (String) jsonOBJ.get(key);
+//				}
+//			}
+
+//			HashMap map = gsonAllEvents.fromJson(event1.toString(), HashMap.class);
+
+//			Gson gson2singularEvent = new Gson();
+//			HashMap map2 = gson2singularEvent.fromJson(map2.get(key), HashMap.class);
+
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//		}
+	}
+
+	private String extractEventLabel(String rawString) {
+		String finalLabelValue = null;
+		if (rawString.contains("label")) {
+		int labelValueStart = rawString.indexOf("\"label\":");
+		String nextString = rawString.substring(labelValueStart+9);
+		int labelValueEnd = nextString.indexOf("\"}}");
+		finalLabelValue = nextString.substring(0, labelValueEnd);
+		}
+		return finalLabelValue;
 	}
 }
