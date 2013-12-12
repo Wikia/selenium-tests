@@ -79,10 +79,24 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(desiredCategory);
 	}
 
+	String trackingEngine = "document.cookie='log_level=3';"
+			+ "document.cookie='log_group=Wikia.Tracker';"
++ "var eventsArray = new Array();"
++ "var i = 0;"
++ "window.seleniumOriginalTrack = Wikia.Tracker.track;"
++ "Wikia.Tracker.track = function() {"
++ "    var args = arguments; "
++ "    console.log('intercepted the call to Tracker.track() ' + JSON.stringify(args));"
++ "eventsArray[i] = JSON.stringify(args); "
++ "    i++;"
++ "    window.seleniumOriginalTrack.apply(null, args); "
++ "}";
+
 	@Test(groups = {"CategoriesTestsArticle005", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle005_anonEdit() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
+		article.executeScript(trackingEngine);
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
 		article.addCategory(categoryName);
 		EditCategoryComponentObject editCategory = article.editCategory(categoryName);
@@ -90,7 +104,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		editCategory.editCategoryName(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);
-	}
+		article.compareTrackedEventsTo();
+		}
 
 	@Test(groups = {"CategoriesTestsArticle005", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle006_anonDelete() {
