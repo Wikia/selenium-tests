@@ -81,14 +81,12 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
 	String trackingEngine = "document.cookie='log_level=3';"
 			+ "document.cookie='log_group=Wikia.Tracker';"
-+ "var eventsArray = new Array();"
-+ "var i = 0;"
++ "window.seleniumEventsArray = [];"
 + "window.seleniumOriginalTrack = Wikia.Tracker.track;"
 + "Wikia.Tracker.track = function() {"
 + "    var args = arguments; "
-+ "    console.log('intercepted the call to Tracker.track() ' + JSON.stringify(args));"
-+ "eventsArray[i] = JSON.stringify(args); "
-+ "    i++;"
++ "window.seleniumEventsArray.push(JSON.stringify(args));"
++ "    console.log('intercepted the call to Tracker.track() ' + JSON.stringify(args) + 'added to array as element');"
 + "    window.seleniumOriginalTrack.apply(null, args); "
 + "}";
 

@@ -585,7 +585,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void compareTrackedEventsTo() {
-		// TODO Auto-generated method stub
+//		ArrayList<String> jsonArray = new ArrayList<String>();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		Object result = js.executeScript("return window.seleniumEventsArray");
 
 	}
 }
