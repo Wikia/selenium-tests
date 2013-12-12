@@ -584,14 +584,53 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
 	}
 
+	String popEventScript=
+"function selenium_popEvent() {"
++ "var events = selenium_getEvents();"
++ "var result = events.pop();"
++ "localStorage.setItem('seleniumEvents', JSON.stringify(events));"
++ "return result;"
++ "};";
+
+	String popEventScript2=
+"window.selenium_popEvent = function(){ "
++ "var events = window.selenium_getEvent();"
++ "var result = events.pop();"
++ "localStorage.setItem('seleniumEvents', JSON.stringify(events));"
++ "return result;"
++ "};";
+
+	String getEventScript=
+"function selenium_getEvents() {"
++ "var events = localStorage.getItem('seleniumEvents');"
++ "events = events ? JSON.parse( events ) : [];"
++ "return events;"
++ "};";
+
+	String getEventScript2=
+"window.selenium_getEvent = function(){"
++ "var events = localStorage.getItem('seleniumEvents');"
++ "events = events ? JSON.parse( events ) : [];"
++ "return events;"
++ "};";
+
 	public void compareTrackedEventsTo() {
 //		ArrayList<String> jsonArray = new ArrayList<String>();
+//		executeScript(getEventScript);
+		executeScript(popEventScript);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-
-		Object event1 = js.executeScript("return window.seleniumEventsArray.pop()");
-
-		Object event2 = js.executeScript("return window.seleniumEventsArray.pop()");
-		Object event3 = js.executeScript("return window.seleniumEventsArray.pop()");
+		js.executeScript(getEventScript2);
+		js.executeScript(popEventScript2);
+		Object event1 = js.executeScript("return selenium_popEvent()");
+		Object event2 = js.executeScript("return selenium_popEvent()");
+		Object event3 = js.executeScript("return selenium_popEvent()");
+		// TODO: jak juz nie ma obiektow to event3 = null, ale trzeba to sprawdzic uzwajac event.toString;
+		// czyli ogolnie uzywac jakiejs petli While
+//		boolean ifNull = (Boolean) event1;
+//		if (ifNull) {
+//			System.out.println("asdas");
+//		}
+//		Object event3 = js.executeScript("return selenium_popEvent()");
 
 		String eventString = extractEventLabel(event1.toString());
 		String event2String = extractEventLabel(event2.toString());
