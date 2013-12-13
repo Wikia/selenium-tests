@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Clicktracking.ClicktrackingScripts;
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScripts;
 import com.wikia.webdriver.Common.Clicktracking.TestExpectedEvents.EventsArticleEditModeTests;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -23,7 +23,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
 		visualEditMode.verifyContentLoaded();
-		visualEditMode.executeScript(ClicktrackingScripts.trackerInstallation);
+		visualEditMode.executeScript(ClickTrackingScripts.trackerInstallation);
 //		PreviewEditModePageObject preview = visualEditMode.previewArticle();
 //		preview.closePreviewModal();
 

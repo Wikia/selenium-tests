@@ -5,7 +5,7 @@ package com.wikia.webdriver.Common.Clicktracking;
  * @author Michal 'justnpT' Nowierski
  * @author Rodrigo 'RodriGomez' Molinero
  */
-public class ClicktrackingScripts {
+public class ClickTrackingScripts {
 
 
 	private static String enableWikiaTracker =

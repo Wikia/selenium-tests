@@ -6,7 +6,7 @@ import java.util.List;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
-public class ClicktrackingSupport {
+public class ClickTrackingSupport {
 
 	public void compareTrackedEventsTo(List<String> expectedEventsList, List<String> currentEventsList) {
 

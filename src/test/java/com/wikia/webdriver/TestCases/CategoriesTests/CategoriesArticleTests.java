@@ -5,7 +5,6 @@ package com.wikia.webdriver.TestCases.CategoriesTests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Clicktracking.ClicktrackingScripts;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -80,32 +79,10 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(desiredCategory);
 	}
 
-	String trackingEngine = "document.cookie='log_level=3';"
-			+ "document.cookie='log_group=Wikia.Tracker';"
-+ "window.seleniumOriginalTrack = Wikia.Tracker.track;"
-+ "Wikia.Tracker.track = function() {"
-+ "    var args = arguments; "
-+ "    selenium_addEvent(JSON.stringify(args)); "
-+ "    console.log('intercepted the call to Tracker.track() ' + JSON.stringify(args) + 'added using selenium_addEvent');"
-+ "    window.seleniumOriginalTrack.apply(null, args); "
-+ "};"
-+ "function selenium_getEvents() {"
-+ "var events = localStorage.getItem('seleniumEvents');"
-+ "events = events ? JSON.parse( events ) : [];"
-+ "return events;"
-+ "};"
-+ "function selenium_addEvent(args) {"
-+ "var events = selenium_getEvents();"
-+ "events.push( args ); "
-+ "localStorage.setItem('seleniumEvents', JSON.stringify(events));"
-+ "};"
-;
-
 	@Test(groups = {"CategoriesTestsArticle005", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle005_anonEdit() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
-		article.executeScript(ClicktrackingScripts.trackerInstallation);
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
 		article.addCategory(categoryName);
 		EditCategoryComponentObject editCategory = article.editCategory(categoryName);
@@ -113,7 +90,6 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		editCategory.editCategoryName(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);
-		article.compareTrackedEventsTo();
 		}
 
 	@Test(groups = {"CategoriesTestsArticle005", "CategoriesTestsArticle"})
