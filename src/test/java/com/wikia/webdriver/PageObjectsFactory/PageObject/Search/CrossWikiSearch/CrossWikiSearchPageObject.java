@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch
 
 import java.util.List;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -82,6 +83,16 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 		scrollAndClick(searchButton);
 		waitForElementByElement(searchInput);
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
+		return new CrossWikiSearchPageObject(driver);
+	}
+	
+	public CrossWikiSearchPageObject searchForEnter( String term ) {
+		searchInput.clear();
+		searchInput.sendKeys( term );
+		PageObjectLogging.log("searchForEnter", "Typed search term" +term, true, driver);
+		searchInput.sendKeys(Keys.ENTER);
+		waitForElementByElement(searchInput);
+		PageObjectLogging.log("searchForEnter", "Search button entered", true, driver);
 		return new CrossWikiSearchPageObject(driver);
 	}
 
