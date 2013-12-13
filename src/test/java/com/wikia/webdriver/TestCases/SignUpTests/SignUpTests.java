@@ -99,7 +99,7 @@ public class SignUpTests extends NewTestTemplate {
 		);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword);
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword, wikiURL);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
 		UserProfilePageObject userProfile = confirmPageAlmostThere.clickSubmitButton(email, emailPassword);
@@ -116,12 +116,12 @@ public class SignUpTests extends NewTestTemplate {
 		HomePageObject home = new HomePageObject(driver);
 		home.openWikiPage(wikiCorporateURL);
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
+		createNewWiki1.disableCaptcha();
 		String wikiName = createNewWiki1.getWikiName();
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.verifySuccessIcon();
 		CreateNewWikiLogInSignUpPageObject CNWSignUpPage = createNewWiki1.submitToLogInSignUp();
 		SignUpPageObject signUp = CNWSignUpPage.submitSignup();
-		signUp.disableCaptcha();
 		String userName = "User" + signUp.getTimeStamp();
 		String password = "Pass" + signUp.getTimeStamp();
 		String email = credentials.emailQaart2;
@@ -137,7 +137,7 @@ public class SignUpTests extends NewTestTemplate {
 		);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
-		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword);
+		ConfirmationPageObject confirmPageAlmostThere = almostTherePage.enterActivationLink(email, emailPassword, wikiCorporateURL);
 		confirmPageAlmostThere.typeInUserName(userName);
 		confirmPageAlmostThere.typeInPassword(password);
 		createNewWiki1 = confirmPageAlmostThere.CNWSubmitButton(email, emailPassword);

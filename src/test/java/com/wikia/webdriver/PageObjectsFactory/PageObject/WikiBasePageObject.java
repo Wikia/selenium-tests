@@ -646,9 +646,9 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public String receiveMailWithNewPassowrd() {
-		MailFunctions.deleteAllMails(Properties.email, Properties.emailPassword);
-		String newPassword = MailFunctions.getPasswordFromMailContent((
-				MailFunctions.getFirstMailContent(
+		MailFunctions.deleteAllEmails(Properties.email, Properties.emailPassword);
+		String newPassword = MailFunctions.getPasswordFromEmailContent((
+				MailFunctions.getFirstEmailContent(
 						Properties.email, Properties.emailPassword
 						)
 				)
@@ -953,5 +953,13 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyHeader(String fileName) {
 		waitForElementByElement(wikiFirstHeader);
 		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
+	}
+
+	public void disableCaptcha() {
+		String url = urlBuilder.appendQueryStringToURL(
+			driver.getCurrentUrl(),
+			URLsContent.disableCaptchaParameter
+		);
+		getUrl(url);
 	}
 }
