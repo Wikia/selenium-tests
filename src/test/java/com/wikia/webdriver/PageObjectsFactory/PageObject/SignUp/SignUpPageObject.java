@@ -146,7 +146,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 	}
 
 	public AlmostTherePageObject submit(String email, String password) {
-		MailFunctions.deleteAllMails(email, password);
+		MailFunctions.deleteAllEmails(email, password);
 		return submit();
 	}
 

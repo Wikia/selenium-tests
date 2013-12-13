@@ -53,7 +53,7 @@ public class ConfirmationPageObject extends BasePageObject{
 	 */
 	public UserProfilePageObject clickSubmitButton(String email, String password)
 	{
-		MailFunctions.deleteAllMails(email, password);
+		MailFunctions.deleteAllEmails(email, password);
 		scrollAndClick(confirmationButton);
 		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);
 		return new UserProfilePageObject(driver);
@@ -61,7 +61,7 @@ public class ConfirmationPageObject extends BasePageObject{
 
 	public CreateNewWikiPageObjectStep1 CNWSubmitButton(String email, String password)
 	{
-		MailFunctions.deleteAllMails(email, password);
+		MailFunctions.deleteAllEmails(email, password);
 		scrollAndClick(confirmationButton);
 		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);
 		return new CreateNewWikiPageObjectStep1(driver);
