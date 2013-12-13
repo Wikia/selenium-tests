@@ -4,7 +4,9 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.Clicktracking.ClicktrackingScripts;
+import com.wikia.webdriver.Common.Clicktracking.ClicktrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -40,6 +44,10 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
  *
  */
 
+/**
+ * @author wikia
+ *
+ */
 public class BasePageObject{
 
 	public WebDriver driver;
@@ -855,4 +863,29 @@ public class BasePageObject{
 		}
 		return fileCheck.getAbsolutePath();
 	}
+
+	/**
+	 * this method should be called after clicktracking test, in order
+	 * to verify if expected events were tracked
+	 *
+	 * @param expectedEventsList - the expected tracked events
+	 * @author Michal 'justnpT' Nowierski
+	 */
+	public void compareTrackedEventsTo(List<String> expectedEventsList){
+		executeScript(ClicktrackingScripts.eventsCaptureInstallation);
+		ArrayList<String> trackedEventsArrayList = new ArrayList<String>();
+		List<String> trackedEventsList;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//prepare list of tracked events
+		Object event = js.executeScript("return selenium_popEvent()");
+		while (!(event==null)) {
+			trackedEventsArrayList.add(event.toString());
+			event = js.executeScript("return selenium_popEvent()");
+		}
+		trackedEventsList = trackedEventsArrayList;
+		//use comparison method from ClicktrackingSupport class
+		ClicktrackingSupport support = new ClicktrackingSupport();
+		support.compareTrackedEventsTo(expectedEventsList, trackedEventsList);
+	}
+
 }

@@ -5,6 +5,7 @@ package com.wikia.webdriver.TestCases.CategoriesTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.Clicktracking.ClicktrackingScripts;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -104,7 +105,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	public void CategoriesTestsArticle005_anonEdit() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
-		article.executeScript(trackingEngine);
+		article.executeScript(ClicktrackingScripts.trackerInstallation);
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
 		article.addCategory(categoryName);
 		EditCategoryComponentObject editCategory = article.editCategory(categoryName);
