@@ -954,4 +954,12 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(wikiFirstHeader);
 		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
 	}
+
+	public void disableCaptcha() {
+		String url = urlBuilder.appendQueryStringToURL(
+			driver.getCurrentUrl(),
+			URLsContent.disableCaptchaParameter
+		);
+		getUrl(url);
+	}
 }
