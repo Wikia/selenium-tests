@@ -67,7 +67,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		photoAddPhoto.clickUpload();
 
 		List<String> expectedEvents;
-		expectedEvents = EventsArticleEditModeTests.getExpectedEventsForTest001();
+		expectedEvents = EventsArticleEditModeTests.getExpectedEventsForTest002();
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
 	}
 }
