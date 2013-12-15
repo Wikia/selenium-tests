@@ -58,11 +58,11 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		visualEditMode.executeScript(ClickTrackingScripts.trackerInstallation);
 		PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
 		photoAddPhoto.clickFlickr();
-		photoAddPhoto.clickFlickr();
-		photoAddPhoto.typeSearchQuery(SearchContent.searchPhrase);
-		photoAddPhoto.clickFind();
+		photoAddPhoto.clickThisWiki();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.clickAddThisPhoto(0);
 		photoAddPhoto = photoOptions.selectAnotherPhoto();
+		photoAddPhoto.typeSearchQuery(SearchContent.searchPhrase);
+		photoAddPhoto.clickFind();
 		photoAddPhoto.chooseFileToUpload(PageContent.file);
 		photoAddPhoto.clickUpload();
 

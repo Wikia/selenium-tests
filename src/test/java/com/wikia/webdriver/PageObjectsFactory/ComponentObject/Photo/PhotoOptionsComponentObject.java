@@ -18,7 +18,7 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 	private WebElement alignmentLeft;
 	@FindBy(css="#ImageUploadLayoutRight")
 	private WebElement alignmentRight;
-	@FindBy(css="..yui-back")
+	@FindBy(css=".yui-back")
 	private WebElement selectAnotherPhotoButton;
 
 	public PhotoOptionsComponentObject(WebDriver driver) {
