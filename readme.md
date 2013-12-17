@@ -70,10 +70,6 @@ The following are valid for use in the `-Dgroups` parameter:
 * ArticleEditDropdown
 * ArticleActionsAdmin
 * ArticleFeaturesCRUDAnon
-
-
-
-
 * ArticleFeaturesCRUDUser
 * ArticleTOCTests
 * AvatarTest
