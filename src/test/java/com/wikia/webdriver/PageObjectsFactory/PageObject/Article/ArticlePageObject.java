@@ -583,4 +583,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 		scrollAndClick(welcomeLightBoxCloseButton);
 		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
 	}
+
+	public void verifyToclimitPresent(int toclimit) {
+		// TODO Auto-generated method stub
+
+	}
 }

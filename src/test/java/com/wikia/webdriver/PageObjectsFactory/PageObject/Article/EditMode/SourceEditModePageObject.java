@@ -306,7 +306,7 @@ public class SourceEditModePageObject extends EditMode{
 		PageObjectLogging.log("appendContent", "text: '"+content+"', added to the source mode", true);
 	}
 
-	private void appendNewLine(String content) {
+	public void appendNewLine(String content) {
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.sendKeys(Keys.ENTER);
 		sourceModeTextArea.sendKeys(content);

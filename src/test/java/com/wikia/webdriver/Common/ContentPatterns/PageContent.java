@@ -23,6 +23,9 @@ public class PageContent {
 			"text of the sub-heading number 1\n"+
 			"===sub-heading number 2===\n"+
 			"text of the sub-heading number 2\n";
+	//TOC class modifier
+	public static String tocClassModifier = "<div class=\"toclimit-2\">_TOC_</div>";
+
 	//blogs
 	public static String blogPostNamePrefix = "blogPost";
 	public static String blogContent = "blogContent";
