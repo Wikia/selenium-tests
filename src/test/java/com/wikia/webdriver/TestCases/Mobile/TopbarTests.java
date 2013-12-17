@@ -1,8 +1,9 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
-import org.testng.annotations.Test;
 
 
 public class TopbarTests extends NewTestTemplate{
@@ -35,7 +36,7 @@ public class TopbarTests extends NewTestTemplate{
 	}
 
 	@Test(groups={"topbarTest_004", "topbarTests", "mobile"})
-	public void TopbarTests_004_menuPagination() {
+	public void TopbarTests_004_menuPagination_MOB_676() {
 		MobileArticlePageObject topbar = new MobileArticlePageObject(driver);
 		topbar.openTopbarPage(wikiURL);
 		topbar.verifyMenuPagination();

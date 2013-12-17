@@ -77,7 +77,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement level2Visible;
 	@FindBy(css=".lvl3.cur")
 	private WebElement level3Visible;
-	@FindBy(css=".ads")
+	@FindBy(css="#wkCurtain:not(.active)")
 	private WebElement curtainClosed;
 	@FindBy(css=".editsection > a")
 	private List<WebElement> editSectionList;
@@ -299,7 +299,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		waitForElementNotPresent(curtainNotOpened);
 		Assertion.assertEquals("block", curtain.getCssValue("display"), "menu is not opened");
 		element.click();
-		waitForElementByElement(curtainClosed);
+		waitForElementNotVisibleByElement(curtainClosed);
 		Assertion.assertEquals("none", curtain.getCssValue("display"), "menu is not closed");
 	}
 
@@ -338,6 +338,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 						waitForElementNotVisibleByElement(level3);
 						elem2.click();
 						waitForElementVisibleByElement(level3Visible);
+						waitForElementClickableByElement(menuBackButton);
 						menuBackButton.click();
 						break;
 					}
