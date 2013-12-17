@@ -496,9 +496,9 @@ public class BasePageObject{
 		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(css)));
 	}
 
-	public void waitForElementClickableByBy(By by) {
-
+	public WebElement waitForElementClickableByBy(By by) {
 		wait.until(ExpectedConditions.elementToBeClickable(by));
+		return driver.findElement(by);
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {

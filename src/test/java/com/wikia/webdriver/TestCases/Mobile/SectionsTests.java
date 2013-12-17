@@ -8,7 +8,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileEditModePa
 
 public class SectionsTests extends NewTestTemplate{
 
-	@Test(groups={"sectionTest_001", "sectionsTests", "mobile"})
+	@Test(groups={"sectionTest_001", "sectionsTests", "mobile"}, enabled = false)
 	public void Sections_001_chevronTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openSections(wikiURL);
@@ -18,7 +18,7 @@ public class SectionsTests extends NewTestTemplate{
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"})
+	@Test(groups={"sectionTest_002", "sectionsTests", "mobile"}, enabled = false)
 	public void Sections_002_hideTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.openSections(wikiURL);
