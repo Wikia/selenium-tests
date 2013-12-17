@@ -59,13 +59,13 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private WebElement sectionVisibilityElement;
 	@FindBy(css="#wkArtCnt")
 	private WebElement numberOfComments;
-	@FindBy(css=".artSec.open .lazy.media.loaded")
+	@FindBy(css="#wkMdlImages > .current > img")
 	private WebElement openedImage;
 	@FindBy(css = "#wkCurtain")
 	private WebElement curtain;
 	@FindBy(css = "#wkNavBack")
 	private WebElement menuBackButton;
-	@FindBys(@FindBy(css=".collSec"))
+	@FindBys(@FindBy(css=".thumb > img"))
 	private List<WebElement> listOfMediaElements;
 	@FindBys(@FindBy(css="#lvl1>li"))
 	private List<WebElement> menuTabs;
@@ -149,10 +149,10 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		String url = driver.getCurrentUrl();
 		replyCommentButton.click();
 		waitForElementByElement(replyInputArea);
-		verifyURL(url + modal);
+		verifyURL(url);
 		replyInputArea.sendKeys(reply);
 		replyInputArea.submit();
-		verifyURL(url + modal);
+		verifyURL(url);
 		verifyAddedReplyOnCommentPage(reply);
 		PageObjectLogging.log("addReply", "reply "+reply+" added", true, driver);
 	}
@@ -167,6 +167,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		waitForElementByElement(loadPreviousCommentsButton);
 		scrollAndClick(loadPreviousCommentsButton);
 		waitForElementByElement(loadMoreCommentsButton);
+		waitForElementNotVisibleByElement(loadPreviousCommentsButton);
 	}
 
 	public void verifyFirstCommentsNotEquals(String firstComment) {
@@ -176,7 +177,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public void verifyFirstCommentsEquals(String firstComment) {
-		Assertion.assertNotEquals(firstComment, listOfComments.get(0).getAttribute("innerText"),
+		Assertion.assertEquals(firstComment, listOfComments.get(0).getAttribute("innerText"),
 			"comments are not the same"
 		);
 	}
@@ -248,6 +249,11 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		waitForElementByElement(currentImageModal);
 		PageObjectLogging.log("clickModal", "modal url verified", true, driver);
 		return new MobileModalComponentObject(driver);
+	}
+
+	public void scrollToImage(int imageNumber) {
+		waitForElementByElement(listOfMediaElements.get(imageNumber));
+		scrollToElement(listOfMediaElements.get(imageNumber));
 	}
 
 	public MobileModalComponentObject clickOpenedImage(int n) {

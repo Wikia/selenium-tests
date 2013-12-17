@@ -34,7 +34,7 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 	public void closeModal() {
 		waitForElementByElement(openedModal);
 		waitForElementClickableByElement(closeModalButton);
-		closeModalButton.click();
+		scrollAndClick(closeModalButton);
 	}
 
 	public void closeModalWithBackButton() {

@@ -58,11 +58,9 @@ public class ModalTests extends NewTestTemplate{
 	public void modalTest_005_positionAfterCloseModal() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
+		mobile.scrollToImage(5);
+		Long positionBeforeModal = mobile.getPosition();
 		MobileModalComponentObject modal = mobile.clickOpenedImage(5);
-		modal.closeModal();
-		modal.verifyModalClosed();
-		Long positionBeforeModal = modal.getPosition();
-		mobile.clickOpenedImage();
 		modal.closeModal();
 		modal.verifyModalClosed();
 		modal.verifyPositionTheSame(positionBeforeModal);
