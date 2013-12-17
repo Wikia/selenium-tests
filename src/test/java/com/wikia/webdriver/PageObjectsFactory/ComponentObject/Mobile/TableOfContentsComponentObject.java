@@ -6,16 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 
-public class TableOfContentsComponentObject extends MobileBasePageObject{
+public class TableOfContentsComponentObject extends MobileBasePageObject {
 
 	public TableOfContentsComponentObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
 	private String wikiTOC = "wiki/TOC#";
@@ -26,7 +24,6 @@ public class TableOfContentsComponentObject extends MobileBasePageObject{
 	private WebElement tocList;
 	@FindBy(css="#wkTOCHandle")
 	private WebElement closeTOCbutton;
-
 	@FindBys(@FindBy(css=".toc-list:first-child > li > a"))
 	private List<WebElement> tocLevel1Sections;
 	@FindBys(@FindBy(css=".toclevel-2 > a"))
@@ -55,10 +52,4 @@ public class TableOfContentsComponentObject extends MobileBasePageObject{
 		PageObjectLogging.log("clickOnLevel1Section", "toc level 1 clicked", true);
 		return href.replace(wikiURL + wikiTOC, "");
 	}
-
-//	public void clickButtonToCloseToc() {
-//		waitForElementByElement(tocOpened);
-//		tocOpened.click();
-//		PageObjectLogging.log("clickChevronToChangeTocState", "toc state changed", true);
-//	}
 }
