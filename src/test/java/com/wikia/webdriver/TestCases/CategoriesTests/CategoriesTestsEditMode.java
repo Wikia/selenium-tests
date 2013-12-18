@@ -70,7 +70,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 	@Test(groups = {"CategoriesEditModeTestsArticle001", "CategoriesTestsArticleEditMode"})
 	public void CategoriesTestsArticleEdit004_user() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditModePageObject visual = base.goToArticleEditPage(wikiURL, articleName);
 		String categoryName = PageContent.categoryNamePrefix + visual.getTimeStamp();
@@ -82,7 +82,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 	@Test(groups = {"CategoriesEditModeTestsArticle001", "CategoriesTestsArticleEditMode"})
 	public void CategoriesTestsArticleEdit005_userSuggestions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditModePageObject visual = base.goToArticleEditPage(wikiURL, articleName);
 		visual.typeCategoryName(PageContent.categoryNamePrefix);
