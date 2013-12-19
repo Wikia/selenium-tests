@@ -179,7 +179,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 			groups = { "ArticleTOCTests", "ArticleTOCTests_009" },
 			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
 		 )
-	public void ArticleTOCTests_009_verifyToclimitClassesAppear() {
+	public void ArticleTOCTests_009_verifyToclevelClassesAppear() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
@@ -188,9 +188,8 @@ public class ArticleTOCTests extends NewTestTemplate {
 		article.verifyTOCexpanded();
 		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
-		sourceEditMode.appendNewLine(PageContent.tocClassModifier);
 		article = sourceEditMode.submitArticle();
 		article.verifyTOCpresent();
-		article.verifyToclimitPresent(2, 4);
+		article.verifyToclevelClassesPresent(3);
 	}
 }

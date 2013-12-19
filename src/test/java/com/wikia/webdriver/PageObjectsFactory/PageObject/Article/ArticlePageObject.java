@@ -590,21 +590,19 @@ public class ArticlePageObject extends WikiBasePageObject {
 	 * ==heading==   get toclevel-2, even its 1st heading, toc level is 2
 	 * ===heading=== get toclevel-3, even its 2nd heading, toc level is 3
 	 *
-	 * @param toclimit - at what level
-	 *
-	 *  toclimit starts
-	 * @param tocLevels - number of expected TOC levels to appear on the article, as defined
+	 * @param tocLevels - number of expected TOC levels to appear on the article.
+	 * 					  Minimal value for tocLevel is 2
 	 * @author Michal 'justnpT' Nowierski
 	 */
-	public void verifyToclimitPresent(int toclimit, int tocLevels) {
-		for (int i = toclimit; i <= tocLevels; i++) {
+	public void verifyToclevelClassesPresent(int tocLevels) {
+		for (int i = 2; i <= tocLevels; i++) {
 			driver.findElement(
 					By.cssSelector(tocItemWithTocLevelClass.replace("%tocLevel%", ""+i))
 					);
 		}
 		PageObjectLogging.log(
 				"verifyToclimitPresent",
-				"verify classes added from toclimit = "+toclimit+", for "+tocLevels+" toc levels",
+				"toc-level classes with values from 2 to "+tocLevels+", found",
 				true);
 	}
 }
