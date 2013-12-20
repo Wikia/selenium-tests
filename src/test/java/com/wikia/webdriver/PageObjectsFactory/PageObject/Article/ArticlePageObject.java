@@ -135,6 +135,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 			"li[data-name='%categoryName%'] li.removeCategory > img";
 	String videoInCommentsSelector =
 			".speech-bubble-message img.Wikia-video-thumb[data-video-name*='%videoName%']";
+	String tocItemWithTocLevelClass =
+			"#toc li.toclevel-%tocLevel%";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -582,5 +584,25 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(welcomeLightBoxCloseButton);
 		scrollAndClick(welcomeLightBoxCloseButton);
 		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
+	}
+
+	/**
+	 * ==heading==   get toclevel-2, even its 1st heading, toc level is 2
+	 * ===heading=== get toclevel-3, even its 2nd heading, toc level is 3
+	 *
+	 * @param tocLevels - number of expected TOC levels to appear on the article.
+	 * 					  Minimal value for tocLevel is 2
+	 * @author Michal 'justnpT' Nowierski
+	 */
+	public void verifyToclevelClassesPresent(int tocLevels) {
+		for (int i = 2; i <= tocLevels; i++) {
+			driver.findElement(
+					By.cssSelector(tocItemWithTocLevelClass.replace("%tocLevel%", ""+i))
+					);
+		}
+		PageObjectLogging.log(
+				"verifyToclimitPresent",
+				"toc-level classes with values from 2 to "+tocLevels+", found",
+				true);
 	}
 }

@@ -167,4 +167,29 @@ public class ArticleTOCTests extends NewTestTemplate {
 		article.verifyTOCexpanded();
 		article.verifyTOCsectionLinkWorks(1);
 	}
+
+	/**
+	 * DAR-2616 bug prevention test case
+	 * details jira:	https://wikia-inc.atlassian.net/browse/DAR-2616
+	 * 1. as logged in user open an article with TOC
+	 * 2. add toc class modifier, which should add a class to each toc li elem
+	 * 3. make sure classes appear on TOC li elements
+	 */
+	@Test(
+			groups = { "ArticleTOCTests", "ArticleTOCTests_009" },
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
+		 )
+	public void ArticleTOCTests_009_verifyToclevelClassesAppear() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName10, credentials.password10, wikiURL);
+		ArticlePageObject article = base.openArticleByName(wikiURL,
+				articleTitle);
+		article.verifyTOCpresent();
+		article.verifyTOCexpanded();
+		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
+		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
+		article = sourceEditMode.submitArticle();
+		article.verifyTOCpresent();
+		article.verifyToclevelClassesPresent(3);
+	}
 }
