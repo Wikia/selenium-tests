@@ -193,4 +193,22 @@ public class AdsDataProvider {
 			{"ru.affectedzone", "Encircling_Flames "}
 		};
 	}
+
+	@DataProvider
+	public static final Object[][] germanArticles() {
+		return new Object[][] {
+			{"de.naruto", "Narutopedia"},
+			{"de.clashofclans", "Clash_of_Clans_Wiki"},
+			{"de.terraria", "Terraria_Wiki"},
+			{"de.gta", "Fahrzeuge_(V)"},
+			{"de.jedipedia", "Jedipedia:Hauptseite"},
+			{"de.jedipedia", "Obi-Wan_Kenobi"},
+			{"de.gameofthrones", "Staffel_4"},
+			{"de.memory-alpha", "Hauptseite"},
+			{"de.bindingofisaac", "The_Binding_of_Isaac_Wiki"},
+			{"de.vroniplag", "Home"},
+			{"de.avengersalliance", "Marvel:_Avengers_Alliance_Wiki"},
+			{"de.vroniplag", "VroniPlag_Wiki:Pressespiegel"}
+		};
+	}
 }

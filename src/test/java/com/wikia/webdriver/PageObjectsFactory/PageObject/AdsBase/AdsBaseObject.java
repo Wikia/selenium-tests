@@ -26,16 +26,16 @@ import org.openqa.selenium.support.FindBy;
 public class AdsBaseObject extends WikiBasePageObject {
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
-	protected WebElement toolbar;
+	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
 	private WebElement wikiaArticle;
 
 	protected Boolean isWikiMainPage;
 
 	private WebElement presentLB;
-	protected String presentLBName;
+	private String presentLBName;
 	private WebElement presentMD;
-	protected String presentMDName;
+	private String presentMDName;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);

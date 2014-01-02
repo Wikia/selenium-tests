@@ -34,7 +34,7 @@ public class AdsComparison {
 		imageComparison = new ImageComparison();
 	}
 
-	protected void hideSlot(String slotSelector, WebDriver driver) {
+	public void hideSlot(String slotSelector, WebDriver driver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		// Find ad-containing element and set visibility = hidden on it
 		// Example selector:
