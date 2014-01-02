@@ -326,7 +326,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	@Test(
 		dataProviderClass=ArticleFeaturesCRUDDataProvider.class,
 		dataProvider="getTableProperties",
-		groups={"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser"}
+		groups={"ArticleFeaturesCRUDUser_012", "ArticleFeaturesCRUDUser"},
+		enabled = false
 	)
 	public void ArticleFeaturesCRUDUser_012_modifyTable(
 		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
