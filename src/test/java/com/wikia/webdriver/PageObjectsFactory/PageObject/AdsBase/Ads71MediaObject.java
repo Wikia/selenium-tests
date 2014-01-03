@@ -44,13 +44,11 @@ public class Ads71MediaObject extends AdsBaseObject {
 		List<String> wp_intern = new ArrayList<String>();
 
 		billboard.add("#ad-skyscraper1-outer");
-		billboard.add("#ad-fullbanner2-outer");
 		billboardMap.put("name", "billboard");
 		billboardMap.put("slots", billboard);
 
 		fireplace.add("#soi_wp_skyscraper2_outer");
 		fireplace.add("#soi_wp_skyscraper1_outer");
-		fireplace.add("#soi_wp_fullbanner2_outer");
 		fireplaceMap.put("name", "fireplace");
 		fireplaceMap.put("slots", fireplace);
 
@@ -58,7 +56,6 @@ public class Ads71MediaObject extends AdsBaseObject {
 		flashtalkingMap.put("name", "flashtalking");
 		flashtalkingMap.put("slots", flashtalking);
 
-		wp_intern.add("#soi_wp_fullbanner2_outer");
 		wp_intern.add("#soi_wp_skyscraper1_outer");
 		wp_internMap.put("name", "wp_intern");
 		wp_internMap.put("slots", wp_intern);
@@ -110,12 +107,8 @@ public class Ads71MediaObject extends AdsBaseObject {
 
 	private boolean checkIfCombinationOnPage(List<String> combination) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String script = "var iframe = arguments[0] + ' iframe:visible:first, ';"
-			+ "var object = arguments[0] + ' object:visible:first, ';"
-			+ "var img = arguments[0] + ' img:visible:first';"
-			+ "var elements = $(iframe + object + img);"
-			+ "return elements.length;";
-		Boolean result = true;
+		String script = "return $(arguments[0]).find('iframe, object, img').filter(':visible').length;";
+
 		for (String elementSelector: combination) {
 			if (checkIfElementOnPage(elementSelector)) {
 				if ((Long)js.executeScript(script, elementSelector) < 1) {
@@ -125,6 +118,6 @@ public class Ads71MediaObject extends AdsBaseObject {
 				return false;
 			}
 		}
-		return result;
+		return true;
 	}
 }
