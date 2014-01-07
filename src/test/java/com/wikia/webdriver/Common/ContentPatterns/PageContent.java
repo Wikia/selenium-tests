@@ -22,7 +22,10 @@ public class PageContent {
 			"===sub-heading number 1===\n"+
 			"text of the sub-heading number 1\n"+
 			"===sub-heading number 2===\n"+
-			"text of the sub-heading number 2\n";
+			"text of the sub-heading number 2\n"+
+			"<div style=\"display:none\">\n"+
+			"===Hidden section===\n"+
+			"</div>\n";
 	//blogs
 	public static String blogPostNamePrefix = "blogPost";
 	public static String blogContent = "blogContent";
