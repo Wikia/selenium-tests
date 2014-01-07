@@ -97,7 +97,6 @@ public class NewDriverProvider {
 		}
 
 		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
-		 System.out.println("***************************"+System.getProperty("os.name"));
 		 if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
                         File homePath = new File(System.getenv("HOME") + File.separator);
                         File mozillaPath = new File(homePath + File.separator + ".mozilla");
