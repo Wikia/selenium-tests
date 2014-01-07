@@ -28,11 +28,11 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	protected WebElement pageWatchlistStatusMessage;
 	@FindBy(css="div.search-box input.search")
 	protected WebElement findAToolField;
-	@FindBy(css="div.MyToolsRenameItem input.input-box")
+	@FindBy(css="#MyToolsRenameItem input.input-box")
 	protected WebElement renameItemDialogInput;
-	@FindBy(css="div.MyToolsRenameItem input.save-button")
+	@FindBy(css="#MyToolsRenameItem button.primary")
 	protected WebElement saveItemDialogInput;
-	@FindBy(css="input.save-button")
+	@FindBy(css="#MyToolsConfigurationWrapper footer button.primary")
 	protected WebElement saveButton;
 	@FindBy(css="span.reset-defaults img")
 	protected WebElement resetDefaultsButton;
@@ -48,8 +48,8 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	private String toolsListToolCss = "ul.options-list li[data-caption=\"%s\"]";
 	private String toolsListToolDeleteCss = " img.trash";
 	private String toolsListToolEditCss = " img.edit-pencil";
-	private String toolbarAddedToolxPath = "//ul[@class='tools']//a[contains(text(), \"%s\")]";
-	private String toolbarMoreMenuAddedToolxPath = "//ul[@class='tools']//li[@class='menu overflow-menu']//a[contains(text(), \"%s\")]";
+	private String addedToolsPath = "//ul[@class='tools']//a[text() = '%s']";
+	private String moreMenuAddedToolsPath = "//ul[@class='tools']//li[@class='menu overflow-menu']//a[text() = '%s']";
 
 	/**
 	 * Verifies that user toolbar buttons are visible
@@ -241,7 +241,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	}
 
 	public void verifyToolOnToolbar(String toolName) {
-		waitForElementByXPath(String.format(toolbarAddedToolxPath, toolName));
+		waitForElementByXPath(String.format(addedToolsPath, toolName));
 		PageObjectLogging.log("verifyToolOnToolbar","tool " + toolName + " visible on toolbar", true);
 	}
 
@@ -270,7 +270,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 
 	public void verifyToolRemoved(String toolName) {
 		waitForElementNotPresent(
-				By.xpath(String.format(toolbarAddedToolxPath, toolName))
+				By.xpath(String.format(addedToolsPath, toolName))
 		);
 		PageObjectLogging.log("verifyToolRemoved",toolName + " removed from toolbar", true);
 	}
@@ -289,7 +289,7 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	}
 
 	public void verifyToolInMoreTool(String toolName) {
-		waitForElementByXPath(String.format(toolbarMoreMenuAddedToolxPath, toolName));
+		waitForElementByXPath(String.format(moreMenuAddedToolsPath, toolName));
 		PageObjectLogging.log("verifyToolInMoreTool",toolName + " appears in ToolbarMoreTool.", true);
 	}
 }
