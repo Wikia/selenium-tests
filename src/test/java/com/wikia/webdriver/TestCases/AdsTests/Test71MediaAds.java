@@ -18,7 +18,7 @@ public class Test71MediaAds extends AdsTestTemplate {
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
-		dataProvider="germanArticles"
+		dataProvider="popularGermanArticles"
 	)
 	public Test71MediaAds(String wikiName, String path) {
 		super();
