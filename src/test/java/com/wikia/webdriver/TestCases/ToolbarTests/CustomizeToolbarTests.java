@@ -29,7 +29,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	String toolEdit = "Edit";
 	String toolDoubleRedirects = "Double redirects";
 	String toolUploadPhoto = "Upload photo";
-	String toolMore = "more";
+	String toolMore = "more…";
 	String toolFollow = "Follow";
 	String toolFollowing = "Following";
 
@@ -143,7 +143,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	public void CustomizeToolbar007_MoreButton() {
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.addManyItems(toolEdit, 30);
+		toolbar.addManyItems(toolEdit, 20);
 		toolbar.clickSave();
 		setWindowSize(800, 600, driver);
 		toolbar.verifyToolOnToolbar(toolMore);
