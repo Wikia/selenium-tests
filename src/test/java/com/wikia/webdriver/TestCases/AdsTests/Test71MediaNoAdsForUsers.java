@@ -35,7 +35,6 @@ public class Test71MediaNoAdsForUsers extends AdsTestTemplate {
 	}
 
 	@BeforeMethod(alwaysRun=true)
-
 	private void loginSteps() {
 		SpecialUserLoginPageObject userLogin = new SpecialUserLoginPageObject(driver);
 		Credentials credentials = config.getCredentials();
