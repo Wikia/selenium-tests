@@ -139,7 +139,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		driver.manage().window().setSize(windowResolution);
 		getUrl(page);
 		AdsContent.setSlotsSelectors();
-		isWikiMainPage = checkIfMainPage();
 
 		String backgroundImageUrlAfter = getPseudoElementValue(
 			body, ":after", "backgroundImage"
@@ -158,6 +157,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 		);
 
 		AdsComparison adsComparison = new AdsComparison();
+		adsComparison.hideSlot(AdsContent.wikiaBar, driver);
+
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
 		Point articleLeftSideStartPoint = new Point(articleLocationX - skinWidth,100);
@@ -169,11 +170,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 		);
 		if (successLeft) {
 			PageObjectLogging.log(
-				"ExpectedSkinFound", "Expected ad skin found on page - left side of skin", true
+				"ExpectedSkinFound",
+				"Expected ad skin found on page - left side of skin",
+				true
 			);
 		} else {
 			PageObjectLogging.log(
-				"ExpectedSkinNotFound", "Expected ad skin not found on page - left side of skin", false, driver
+				"ExpectedSkinNotFound",
+				"Expected ad skin not found on page - left side of skin",
+				false, driver
 			);
 		}
 
@@ -182,11 +187,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 		);
 		if (successRight) {
 			PageObjectLogging.log(
-				"ExpectedSkinFound", "Expected ad skin found on page - right side of skin", true
+				"ExpectedSkinFound",
+				"Expected ad skin found on page - right side of skin",
+				true
 			);
 		} else {
 			PageObjectLogging.log(
-				"ExpectedSkinNotFound", "Expected ad skin not found on page - right side of skin", false, driver
+				"ExpectedSkinNotFound",
+				"Expected ad skin not found on page - right side of skin",
+				false, driver
 			);
 		}
 
