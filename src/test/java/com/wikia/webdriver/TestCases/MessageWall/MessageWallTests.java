@@ -171,10 +171,9 @@ public class MessageWallTests extends NewTestTemplate {
 	 * 3. QATestsBlockedUser should be able to post on his MessageWall
 	 * 4. QATestsBlockedUser should be able to respond on his MessageWall
 	 */
-	//@Test(
-	//		enabled = false, //fix blocking user IP together with his username
-	//		groups = {"MessageWall_008", "MessageWall"}
-	//)
+	@Test(
+			groups = {"MessageWall_008", "MessageWall"}
+	)
 	public void MessageWall_008_blockedUserPostsOnHisWall() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialBlockListPageObject blockListPage = base.openSpecialBlockListPage(wikiURL);
@@ -185,6 +184,7 @@ public class MessageWallTests extends NewTestTemplate {
 			blockPage.typeInUserName(credentials.userNameBlockedAccount);
 			blockPage.typeExpiration("10 year");
 			blockPage.typeReason("block QATestsBlockedUser");
+			blockPage.deselectAllSelections();
 			blockPage.clickBlockButton();
 		}
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);

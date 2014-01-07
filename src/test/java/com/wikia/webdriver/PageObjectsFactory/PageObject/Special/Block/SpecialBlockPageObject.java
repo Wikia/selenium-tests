@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialBlockPageObject extends WikiBasePageObject{
@@ -26,6 +26,8 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	private WebElement reasonInput;
 	@FindBy(css=".mw-htmlform-submit")
 	private WebElement blockButton;
+	@FindBy(css=".mw-input [type='checkbox']")
+	private List<WebElement> checkBoxes;
 
 	public SpecialBlockPageObject(WebDriver driver) {
 		super(driver);
@@ -63,7 +65,6 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	}
 
 	public void deselectAllSelections(){
-		List<WebElement> checkBoxes = driver.findElements(By.cssSelector(".mw-htmlform-field-HTMLCheckField .mw-input [type='checkbox']"));
 		for (WebElement checkBox:checkBoxes){
 			if(checkBox.isSelected()){
 				checkBox.click();
@@ -72,15 +73,12 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 		for (WebElement checkBox:checkBoxes){
 			Assertion.assertFalse(checkBox.isSelected());
 		}
+		PageObjectLogging.log("deselectAllSelections", "all selections deselected", true);
 	}
 
 	public void verifyBlockedUserSubmitPage(String userName, String password){
 		waitForElementByXPath("//p/a[contains(text(), '"+userName+"')]");
 		waitForElementByXPath("//p[contains(text(), 'has been blocked')]");
 		logOut(driver);
-	}
-
-	public void verifyUserBlocked(){
-
 	}
 }
