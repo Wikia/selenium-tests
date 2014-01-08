@@ -105,6 +105,32 @@ public class Ads71MediaObject extends AdsBaseObject {
 		}
 	}
 
+	public void verifyNo71MediaAds() throws Exception {
+		AdsComparison adsComparison = new AdsComparison();
+		boolean combinationFound = false;
+		PageObjectLogging.log("PageOpened", "Page opened", true, driver);
+		for (HashMap<String,Object> combination: combinations) {
+			List<String> combinationSlots = (List)combination.get("slots");
+			if (!checkIfCombinationOnPage(combinationSlots)) {
+				PageObjectLogging.log(
+					"Combination not present",
+					"Combination not present: " + combination.get("name"),
+					true
+				);
+			} else {
+				PageObjectLogging.log(
+					"Combination present",
+					"Combination present: " + combination.get("name"),
+					false
+				);
+				combinationFound = true;
+			}
+		}
+		if (combinationFound) {
+			throw new Exception("Ads found on page");
+		}
+	}
+
 	private boolean checkIfCombinationOnPage(List<String> combination) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String script = "return $(arguments[0]).find('iframe, object, img').filter(':visible').length;";
