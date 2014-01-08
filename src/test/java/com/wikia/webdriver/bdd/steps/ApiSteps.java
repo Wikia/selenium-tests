@@ -141,7 +141,31 @@ public class ApiSteps {
 		with(responseAsString).assertThat("$.items[*]", CollectionMatchers.allElementsShouldContainField(object));
 		with(responseAsString).assertThat(String.format("$.items[*].%s" , object),
 					CollectionMatchers.allElementsShouldContainLimitedLengthField(limit));
+	}
 
+	@Then( "^I should get list of \"([^\"]*)\"$" )
+	public void I_should_get_object_with_articles_array(String object) throws Throwable {
+		with(responseAsString).assertNotNull("$." + object + "[*]");
+	}
+
+	@Then( "^I see \"([^\"]*)\" array with each element having following fields not empty:$" )
+	public void all_results_in_array_should_have_fields(String object, DataTable table) {
+		for ( String fieldName: table.<String>asList(String.class) ) {
+			with(responseAsString).assertThat(String.format("$.%s[*]" , object),
+													 CollectionMatchers.allElementsShouldContainField(fieldName));
+			with(responseAsString).assertThat(String.format("$.%s[*].%s", object, fieldName),
+													 CollectionMatchers.allElementsShouldContainNotEmptyField());
+		}
+	}
+
+	@Then( "^I see \"([^\"]*)\" array with \"([^\"]*)\" array field with each element having following fields not empty:$" )
+	public void all_results_in_array_should_have_fields(String object, String subObject, DataTable table) {
+		for ( String fieldName: table.<String>asList(String.class) ) {
+			with(responseAsString).assertThat(String.format("$.%s[*].%s" , object, subObject),
+													 CollectionMatchers.allElementsShouldContainField(fieldName));
+			with(responseAsString).assertThat(String.format("$.%s[*].%s[*].%s", object, subObject, fieldName),
+													 CollectionMatchers.allElementsShouldContainNotEmptyField());
+		}
 	}
 
 	public class ApiParameter {
