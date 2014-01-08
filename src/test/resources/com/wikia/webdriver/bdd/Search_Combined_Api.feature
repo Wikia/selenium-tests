@@ -35,3 +35,16 @@ Feature: As a Sony
       | snippet        |
       | image          |
       | articleQuality |
+
+  Scenario: I want to filter results by articleQuality
+    Given non-corporate Wiki
+    When I ask "v1" api for "Search/Combined" with parameters:
+      | key               | value |
+      | query             | alien |
+      | namespaces        | 0     |
+      | langs             | en    |
+      | minArticleQuality | 10    |
+    Then I should get list of "articles"
+    And I see "articles" array with each element having following fields not empty:
+      | articleQuality |
+    And all elements in "articles" array should have field "articleQuality" equal to or greater than "10"

@@ -22,6 +22,10 @@ public class CollectionMatchers {
 		return new AllInSet<E>(values);
 	}
 
+	public static Matcher allValuesShouldBeGreaterThanOrEqualTo(int value) {
+		return CollectionMatchers.allShould(Matchers.greaterThanOrEqualTo(value));
+	}
+
 	public static Matcher allElementsShouldContainField(String fieldName) {
 		return CollectionMatchers.allShould(JsonAssert.mapContainingKey(Matchers.equalTo(fieldName)));
 	}

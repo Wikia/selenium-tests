@@ -131,9 +131,16 @@ public class ApiSteps {
 		with(responseAsString).assertThat("$.items[*]." + fieldName, CollectionMatchers.allValuesShouldBeInSet(Sets.newHashSet(value)));
 	}
 
+	@Then("^all elements in \"([^\"]*)\" array should have field \"([^\"]*)\" equal to or greater than \"([^\"]*)\"$")
+	public void all_results_should_have_field_equal_to(String object, String field, int value) throws Throwable {
+		with(responseAsString).assertThat(String.format("$.%s[*].%s" , object, field),
+												 CollectionMatchers.allValuesShouldBeGreaterThanOrEqualTo(value));
+	}
+
 	@Then("^all results should have integer field \"([^\"]*)\" equal to \"([^\"]*)\" or \"([^\"]*)\"$")
 	public void all_results_should_have_field_equal_to_or(String fieldName, int value, int value2) throws Throwable {
-		with(responseAsString).assertThat("$.items[*]." + fieldName, CollectionMatchers.allValuesShouldBeInSet(Sets.newHashSet(value, value2)));
+		with(responseAsString).assertThat("$.items[*]." + fieldName,
+												 CollectionMatchers.allValuesShouldBeInSet(Sets.newHashSet(value, value2)));
 	}
 
 	@Then( "^I should get \"([^\"]*)\" object with no more than (\\d+) characters$" )
