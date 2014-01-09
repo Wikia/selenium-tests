@@ -623,7 +623,7 @@ public class ArticlePageObject extends WikiBasePageObject {
         }
 
 	public void verifyTableRemoved() {
-		checkIfElementOnPage(table);
-		PageObjectLogging.log("verifyTableRemoved", "table was removedcd", true);
+		Assertion.assertTrue(!checkIfElementOnPage(table));
+		PageObjectLogging.log("verifyTableRemoved", "table was removed", true);
 	}
 }

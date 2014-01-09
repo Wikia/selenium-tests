@@ -71,8 +71,8 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement visualModeTable;
 	@FindBy(css=".cke_contextmenu iframe")
 	private WebElement contextFrame;
-	@FindBy(css="input.cke_dialog_ui_input_text")
-	private List<WebElement> tablePropertiesInputs;
+	@FindBy(css=".cke_dialog_body")
+	private WebElement addTableLightbox;
 
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
@@ -422,7 +422,7 @@ public class VisualEditModePageObject extends EditMode {
 
 	public void clickPropertiesTableButton() {
 		selectFromContextMenu(propertiesItem);
-		waitForElementByElement(tablePropertiesInputs.get(2));
+		waitForElementByElement(addTableLightbox);
 	}
 
 }

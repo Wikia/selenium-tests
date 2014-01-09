@@ -350,7 +350,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		TableBuilderComponentObject addTable = new TableBuilderComponentObject(driver);
 		addTable.typeBorderSize(border + additionalPropertyValue);
 		addTable.typeCellSpacing(cellspacing + additionalPropertyValue);
-		addTable.typeCellPadding(cellpadding +additionalPropertyValue);
+		addTable.typeCellPadding(cellpadding + additionalPropertyValue);
 		addTable.submitTable();
 		visualEditMode.submitArticle();
 		article.verifyTableBorder(border + additionalPropertyValue);
