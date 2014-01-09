@@ -225,7 +225,6 @@ public class AdsDataProvider {
 			{"de.gta", "Fahrzeuge_(V)"},
 			{"de.jedipedia", "Obi-Wan_Kenobi"},
 			{"de.gameofthrones", "Staffel_4"},
-			{"de.bindingofisaac", "The_Binding_of_Isaac_Wiki"},
 			{"de.vroniplag", "VroniPlag_Wiki:Pressespiegel"},
 			{"de.lotr", "Frodo_Beutlin"},
 			{"de.sonic", "Portal:_Comics"},
