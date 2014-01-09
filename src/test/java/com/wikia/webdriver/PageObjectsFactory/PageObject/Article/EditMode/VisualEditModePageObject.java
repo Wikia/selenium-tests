@@ -20,6 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -62,7 +63,16 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement blockedUserMessage1;
 	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
 	private WebElement blockedUserMessage2;
-
+	@FindBy(css=".cke_button_tabledelete > span.cke_label")
+	private WebElement deleteItem;
+	@FindBy(css=".cke_button_table")
+	private WebElement propertiesItem;
+	@FindBy(css=".article-table")
+	private WebElement visualModeTable;
+	@FindBy(css=".cke_contextmenu iframe")
+	private WebElement contextFrame;
+	@FindBy(css=".cke_dialog_body")
+	private WebElement addTableLightbox;
 
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
@@ -393,4 +403,26 @@ public class VisualEditModePageObject extends EditMode {
 		waitForElementByElement(blockedUserMessage2);
 		PageObjectLogging.log("verifyBlockedUserMessage", "blocked user message when attempting to create article verified", true);
 	}
+
+	private void selectFromContextMenu(WebElement option) {
+		waitForElementByElement(iframe);
+		driver.switchTo().frame(iframe);
+		Actions actions = new Actions(driver);
+		actions.contextClick(visualModeTable).build().perform();
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(contextFrame);
+		option.click();
+		driver.switchTo().defaultContent();
+		checkIfElementOnPage(visualModeTable);
+	}
+
+	public void clickDeleteTableButton() {
+		selectFromContextMenu(deleteItem);
+	}
+
+	public void clickPropertiesTableButton() {
+		selectFromContextMenu(propertiesItem);
+		waitForElementByElement(addTableLightbox);
+	}
+
 }

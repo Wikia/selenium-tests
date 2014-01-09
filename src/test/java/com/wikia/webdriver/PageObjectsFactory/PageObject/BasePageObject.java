@@ -733,7 +733,16 @@ public class BasePageObject{
 
 	public void appendToUrl(String additionToUrl) {
 		driver.get(urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), additionToUrl));
-		PageObjectLogging.log("appendToUrl", additionToUrl+" has been appended to url", true);
+		PageObjectLogging.log("appendToUrl", additionToUrl + " has been appended to url", true);
+	}
+
+	public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
+		String currentUrl = getCurrentUrl();
+		for(int i = 0; i < queryStrings.length; i++) {
+			currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryStrings[i]);
+		}
+		driver.get(currentUrl);
+		PageObjectLogging.log("appendToUrl", queryStrings + " have been appended to url", true);
 	}
 
 	public void removeQsFromUrl() {
