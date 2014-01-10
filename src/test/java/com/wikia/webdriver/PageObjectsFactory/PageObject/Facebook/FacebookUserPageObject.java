@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -22,5 +23,10 @@ public class FacebookUserPageObject extends WikiBasePageObject {
 	public void verifyPageLogo() {
 		waitForElementByElement(pageLogo);
 		PageObjectLogging.log("verifyPageLogo", "Page logo is present", true);
+	}
+
+	public FacebookSettingsPageObject fbOpenSettings() {
+		getUrl(URLsContent.facebookSettingsPage);
+		return new FacebookSettingsPageObject(driver);
 	}
 }

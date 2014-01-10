@@ -132,6 +132,9 @@ public class URLsContent {
 
 	//Facebook
 	public static String facebookMainPage = "http://www.facebook.com/";
+	public static String facebookSettingsPage = "http://www.facebook.com/settings";
+	public static String facebookSettingsAppTab = "?tab=applications";
+	public static String facebookWikiaAppID = "112328095453510";
 
 	//avatars
 	public static String avatarGeneric = "150px-Avatar.jpg";
