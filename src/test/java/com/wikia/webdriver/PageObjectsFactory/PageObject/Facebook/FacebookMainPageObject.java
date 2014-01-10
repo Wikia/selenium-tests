@@ -23,10 +23,11 @@ public class FacebookMainPageObject extends WikiBasePageObject {
 	@FindBy(css = "#loginbutton")
 	private WebElement loginButton;
 
-	public void login(String facebookEmail, String facebookPassword) {
+	public FacebookUserPageObject login(String facebookEmail, String facebookPassword) {
 		typeEmail(facebookEmail);
 		typePassword(facebookPassword);
 		clickLoginButton();
+		return new FacebookUserPageObject(driver);
 	}
 
 	public void clickLoginButton() {

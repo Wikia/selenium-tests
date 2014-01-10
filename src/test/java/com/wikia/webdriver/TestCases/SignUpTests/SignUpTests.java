@@ -14,6 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookUserPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -175,7 +176,9 @@ public class SignUpTests extends NewTestTemplate {
 	public void Signup_007_signUpWithFacebook() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		FacebookMainPageObject fbLogin = base.openFacebookMainPage();
-		fbLogin.login(credentials.emailFB, credentials.passwordFB);
+		FacebookUserPageObject userFB;
+		userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
+		userFB.verifyPageLogo();
 		SignUpPageObject signUp = fbLogin.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();
 		String userName = "User" + signUp.getTimeStamp();
