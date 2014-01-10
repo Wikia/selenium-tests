@@ -56,6 +56,8 @@ public class SignUpPageObject extends WikiBasePageObject {
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
 	private WebElement signupButton;
+	@FindBy(css = "#mw-content-text .wikia-button-facebook")
+	private WebElement facebookSignUpButton;
 
 	private By errorMsgBy = By.className("error-msg");
 
@@ -135,6 +137,13 @@ public class SignUpPageObject extends WikiBasePageObject {
 				true
 		);
 	}
+
+	public void clickFacebookSignUp(File captchaFile) {
+		waitForElementByElement(facebookSignUpButton);
+		facebookSignUpButton.click();
+		PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
+	}
+
 
 	public AlmostTherePageObject submit(String email, String password) {
 		MailFunctions.deleteAllEmails(email, password);

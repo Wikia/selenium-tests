@@ -130,6 +130,9 @@ public class URLsContent {
 	public static String redditDomain = "reddit.com";
 	public static String stumpleUponDomain = "stumbleupon.com";
 
+	//Facebook
+	public static String facebookMainPage = "http://www.facebook.com/";
+
 	//avatars
 	public static String avatarGeneric = "150px-Avatar.jpg";
 }

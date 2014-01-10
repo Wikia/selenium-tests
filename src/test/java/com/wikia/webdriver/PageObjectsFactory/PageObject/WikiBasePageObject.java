@@ -41,6 +41,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HistoryPage.HistoryPagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
@@ -961,5 +962,10 @@ public class WikiBasePageObject extends BasePageObject {
 			URLsContent.disableCaptchaParameter
 		);
 		getUrl(url);
+	}
+
+	public FacebookMainPageObject openFacebookMainPage() {
+		getUrl(URLsContent.facebookMainPage);
+		return new FacebookMainPageObject(driver);
 	}
 }

@@ -13,6 +13,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -148,6 +149,34 @@ public class SignUpTests extends NewTestTemplate {
 	public void Signup_006_loginNotVerifiedUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
+		signUp.disableCaptcha();
+		String userName = "User" + signUp.getTimeStamp();
+		String password = "Pass" + signUp.getTimeStamp();
+		String email = credentials.emailQaart2;
+		String emailPassword = credentials.emailPasswordQaart2;
+
+		signUp.typeEmail(email);
+		signUp.typeUserName(userName);
+		signUp.typePassword(password);
+		signUp.enterBirthDate(
+				PageContent.wikiSignUpBirthMonth,
+				PageContent.wikiSignUpBirthDay,
+				PageContent.wikiSignUpBirthYear
+				);
+		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
+		almostTherePage.verifyAlmostTherePage();
+
+		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
+		login.login(userName, password);
+		almostTherePage.verifyAlmostTherePage();
+	}
+
+	@Test(groups = {"SignUp_007", "SignUp"})
+	public void Signup_007_signUpWithFacebook() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		FacebookMainPageObject fbLogin = base.openFacebookMainPage();
+		fbLogin.login(credentials.emailFB, credentials.passwordFB);
+		SignUpPageObject signUp = fbLogin.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();
 		String userName = "User" + signUp.getTimeStamp();
 		String password = "Pass" + signUp.getTimeStamp();
