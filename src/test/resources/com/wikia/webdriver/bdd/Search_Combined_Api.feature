@@ -24,7 +24,6 @@ Feature: As a Sony
       | url            |
       | lang           |
       | snippet        |
-      | image          |
     Then I should get list of "articles"
     And I see "articles" array with each element having following fields not empty:
       | wikiId         |
@@ -33,9 +32,7 @@ Feature: As a Sony
       | url            |
       | lang           |
       | snippet        |
-      | image          |
-      | articleQuality |
-
+      | quality        |
   Scenario: I want to filter results by articleQuality
     Given non-corporate Wiki
     When I ask "v1" api for "Search/Combined" with parameters:
@@ -46,5 +43,5 @@ Feature: As a Sony
       | minArticleQuality | 10    |
     Then I should get list of "articles"
     And I see "articles" array with each element having following fields not empty:
-      | articleQuality |
-    And all elements in "articles" array should have field "articleQuality" equal to or greater than "10"
+      | quality |
+    And all elements in "articles" array should have field "quality" equal to or greater than "10"
