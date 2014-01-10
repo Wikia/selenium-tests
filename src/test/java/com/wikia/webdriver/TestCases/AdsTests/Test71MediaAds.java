@@ -31,28 +31,28 @@ public class Test71MediaAds extends AdsTestTemplate {
 
 	@GeoEdgeProxy(country="US")
 	@Test (groups={"Ads", "Ads71Media_001", "Ads71Media"})
-	public void Test71MediaAds_001() {
+	public void Test71MediaAds_US() {
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
 
 	@GeoEdgeProxy(country="DE")
 	@Test (groups={"Ads", "Ads71Media_002", "Ads71Media"})
-	public void Test71MediaAds_002() {
+	public void Test71MediaAds_DE() {
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
 
 	@GeoEdgeProxy(country="HR")
 	@Test (groups={"Ads", "Ads71Media_003", "Ads71Media"})
-	public void Test71MediaAds_003() {
+	public void Test71MediaAds_HR() {
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
 
 	@GeoEdgeProxy(country="AU")
 	@Test (groups={"Ads", "Ads71Media_004", "Ads71Media"})
-	public void Test71MediaAds_004() {
+	public void Test71MediaAds_AU() {
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
