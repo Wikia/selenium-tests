@@ -61,7 +61,7 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement caption;
 	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
 	private WebElement blockedUserMessage1;
-	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
+	@FindBy(xpath="//b[contains(text(), 'Your username or IP address has been blocked.')]")
 	private WebElement blockedUserMessage2;
 	@FindBy(css=".cke_button_tabledelete > span.cke_label")
 	private WebElement deleteItem;
