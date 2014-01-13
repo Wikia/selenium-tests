@@ -42,6 +42,7 @@ public class Ads71MediaObject extends AdsBaseObject {
 		List<String> fireplace = new ArrayList<String>();
 		List<String> flashtalking = new ArrayList<String>();
 		List<String> wp_intern = new ArrayList<String>();
+		List<String> leaderboard = new ArrayList<String>();
 
 		billboard.add("#ad-skyscraper1-outer");
 		billboardMap.put("name", "billboard");
@@ -59,6 +60,10 @@ public class Ads71MediaObject extends AdsBaseObject {
 		wp_intern.add("#soi_wp_skyscraper1_outer");
 		wp_internMap.put("name", "wp_intern");
 		wp_internMap.put("slots", wp_intern);
+
+		leaderboard.add("#ad-fullbanner2-outer");
+		wp_internMap.put("name", "leaderboard");
+		wp_internMap.put("slots", leaderboard);
 
 		combinations.add(billboardMap);
 		combinations.add(fireplaceMap);

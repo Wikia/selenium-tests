@@ -14,6 +14,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -22,6 +23,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import org.openqa.selenium.Dimension;
 
 
 /**
@@ -107,8 +109,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private List<WebElement> categoryList;
 	@FindBy(css=".ui-autocomplete")
 	private WebElement categorySuggestionsList;
-	@FindBy(css=".categories")
-	private WebElement categoriesContainer;
 	@FindBy(css=".category.new")
 	private WebElement categoryNew;
 	@FindBy(css="button.save:not([disabled])")
@@ -119,10 +119,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement articleTitle;
 	@FindBy(css="#WikiWelcomeModal .close")
 	private WebElement welcomeLightBoxCloseButton;
-	@FindBy(css=".WikiWelcome p")
-	private List<WebElement> welcomeLightBoxParagraphs;
-
-	By categorySuggestionsListItems = By.cssSelector("li.ui-menu-item > a");
+	@FindBy(css="li.ui-menu-item > a")
+	private List<WebElement> categorySuggestionsListItems;
+	@FindBy(css=".article-table")
+	private WebElement table;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -351,6 +351,45 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
+	private void verifyTableProperty(String propertyName, int propertyValue) {
+		waitForElementByElement(table);
+		Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
+		PageObjectLogging.log(
+			"verifyTableProperty",
+			"table has correct " + propertyName + " property",
+			true
+		);
+	}
+
+	public void verifyTableBorder(int propertyValue) {
+		verifyTableProperty("border", propertyValue);
+	}
+
+	public void verifyTableCellpadding(int propertyValue) {
+		verifyTableProperty("cellpadding", propertyValue);
+	}
+
+	public void verifyTableCellspacing(int propertyValue) {
+		verifyTableProperty("cellspacing", propertyValue);
+	}
+
+	public void verifyTableAlignment(Alignment alignment) {
+		waitForElementByElement(table);
+		Assertion.assertEquals(
+			table.getCssValue("float").toLowerCase(),
+			alignment.toString().toLowerCase()
+		);
+		PageObjectLogging.log("verifyTableAlignment", "table has correct alignment", true);
+	}
+
+	public void verifyTableSize(int width, int height) {
+		waitForElementByElement(table);
+		Dimension size = table.getSize();
+		Assertion.assertEquals(size.getHeight(), height);
+		Assertion.assertEquals(size.getWidth(), width);
+		PageObjectLogging.log("verifyTableSize", "table has correct size", true);
+	}
+
 	public void verifyVideoAlignment(PositionsVideo positions) {
 		String videoClass = videoArticle.findElement(
 				By.xpath("./../..")
@@ -496,8 +535,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		clickAddCategoryButton();
 		typeCategoryName(category);
 		waitForElementByElement(categorySuggestionsList);
-		List<WebElement> suggestionsList = categorySuggestionsList.findElements(categorySuggestionsListItems);
-		WebElement desiredCategory = suggestionsList.get(categoryNumber);
+		WebElement desiredCategory = categorySuggestionsListItems.get(categoryNumber);
 		String desiredCategoryText = desiredCategory.getText();
 		desiredCategory.click();
 		waitForElementNotVisibleByElement(categorySuggestionsList);
@@ -582,5 +620,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(welcomeLightBoxCloseButton);
 		scrollAndClick(welcomeLightBoxCloseButton);
 		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
+        }
+
+	public void verifyTableRemoved() {
+		Assertion.assertTrue(!checkIfElementOnPage(table));
+		PageObjectLogging.log("verifyTableRemoved", "table was removed", true);
 	}
 }

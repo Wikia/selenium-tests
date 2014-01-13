@@ -39,6 +39,7 @@ import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
@@ -109,7 +110,7 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement userProfileAvatar;
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
-	@FindBy(css="section.modalWrapper .UserLoginModal")
+	@FindBy(css="#userForceLoginModal")
 	protected WebElement logInModal;
 	@FindBy(css="a[data-id='login']")
 	protected WebElement loginButton;
@@ -331,6 +332,12 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void openSpecialWatchListPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialWatchList);
+        }
+
+	public SourceEditModePageObject openCurrectArticleSourceMode() {
+		String queryStrings [] = {URLsContent.actionEditParameter, URLsContent.sourceMode};
+		appendMultipleQueryStringsToUrl(queryStrings);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public WikiArticleEditMode clickEditButton() {

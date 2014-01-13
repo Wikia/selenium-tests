@@ -40,8 +40,7 @@ public class SpecialUnblockPageObject extends WikiBasePageObject{
 	public void verifyUnblockMessage(String userName){
 		waitForElementByElement(unblockedUserHead);
 		waitForElementByXPath("//div[@id='mw-content-text']//a[@href='/wiki/User:"+userName+"' and contains(text(), '"+userName+"')]");
-		waitForElementByXPath("//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked (')]");
-		waitForElementByXPath("//div[@id='mw-content-text']//a[@href='/wiki/Special:Block/"+userName+"' and contains(text(), 're-block')]");
+		waitForElementByXPath("//div[@id='mw-content-text']//p[contains(text(), 'has been unblocked')]");
 		PageObjectLogging.log("verifyUnblockMessage", "unblock user messages verified", true, driver);
 	}
 
