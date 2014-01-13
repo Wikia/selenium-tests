@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Article;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,7 +24,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
-import org.openqa.selenium.Dimension;
 
 
 /**
@@ -95,7 +95,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement rVAddVideo;
 	@FindBy(css="#WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
-	@FindBy(css="a[title='View photo details']")
+	@FindBy(css="a.details.magnify")
 	private WebElement videoDetailsButton;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
 	private WebElement rvFirstVideo;
@@ -473,7 +473,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public FilePagePageObject clickVideoDetailsButton() {
 		waitForElementByElement(videoDetailsButton);
-		videoDetailsButton.click();
+		scrollAndClick(videoDetailsButton);
 		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
 		return new FilePagePageObject(driver);
 	}
