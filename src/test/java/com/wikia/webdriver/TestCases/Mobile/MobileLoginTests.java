@@ -1,17 +1,24 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
-import com.wikia.webdriver.Common.Properties.Credentials;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 
-public class LoginTests extends NewTestTemplate{
+/**
+ * @author PMG
+ *
+ * 1. Verify that user is able to login successfully using standard login
+ * 2. Verify that user is not logged in when he is using incorrect credentials
+ * 3. Verify that user is able to login successfully using FB login
+ */
+public class MobileLoginTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"loginTest_001", "mobile"})
-	public void Login() {
+	@Test(groups={"MobileLogin_001", "mobile"})
+	public void MobileLogin_001_successLogin() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
@@ -20,8 +27,10 @@ public class LoginTests extends NewTestTemplate{
 		mobile.verifyURLcontains(url);
 	}
 
-	@Test(groups={"loginTest_002", "mobile"})
-	public void LoginFacebook() {
+	//TODO: add unsucessfull login test_002
+
+	@Test(groups={"MobileLogin_003", "mobile"})
+	public void MobileLogin_003_facebookLogin() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
