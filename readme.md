@@ -73,6 +73,7 @@ The following are valid for use in the `-Dgroups` parameter:
 * ArticleFeaturesCRUDUser
 * ArticleTOCTests
 * AvatarTest
+
 * BlogTests
 * BlogFeaturesTests
 * BlogCommentsTests
