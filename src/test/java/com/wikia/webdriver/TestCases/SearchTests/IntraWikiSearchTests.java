@@ -232,11 +232,11 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.verifyPushToTopWikiTitle(searchWiki);
 		search.verifyPushToTopWikiThumbnail();
 	}
-	
-	@Test(groups={"IntraSearch017", "IntraWikiSearch", "Search"})
+
+	@Test(enabled = false, groups={"IntraSearch017", "IntraWikiSearch", "Search"})
 	public void intraWikiSearch_017_searchSuggestionsVisibility() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openWikiPage(searchSuggestionsWiki);
-		search.verifyNewSuggestionsTextAndImages(SearchContent.searchPhraseNewSuggestions);	
+		search.verifyNewSuggestionsTextAndImages(SearchContent.searchPhraseNewSuggestions);
 	}
 }
