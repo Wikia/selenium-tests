@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 
-public class ArticleCommentTests extends NewTestTemplate {
+public class MobileArticleCommentTests extends NewTestTemplate {
 
 	String timeStamp;
 

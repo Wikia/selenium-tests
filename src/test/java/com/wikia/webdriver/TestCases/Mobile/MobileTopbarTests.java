@@ -6,7 +6,7 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 
 
-public class TopbarTests extends NewTestTemplate{
+public class MobileTopbarTests extends NewTestTemplate{
 
 	@Test(groups={"topbarTest_001", "topbarTests", "mobile"})
 	public void TopbarTests_001_topbarButtons() {

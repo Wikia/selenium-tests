@@ -7,7 +7,7 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileModalComponentObject;
 
-public class ModalTests extends NewTestTemplate{
+public class MobileModalTests extends NewTestTemplate{
 
 	@Test(groups={"modalTest_001", "modalTests", "mobile"})
 	public void modalTest_001_nextImage() {

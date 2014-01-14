@@ -6,7 +6,7 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileEditModePageObject;
 
-public class SectionsTests extends NewTestTemplate{
+public class MobileSectionsTests extends NewTestTemplate{
 
 	@Test(groups={"sectionTest_001", "sectionsTests", "mobile"}, enabled = false)
 	public void Sections_001_chevronTest() {

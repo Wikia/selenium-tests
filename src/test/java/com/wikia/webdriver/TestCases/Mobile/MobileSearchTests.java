@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileSearchPageObject;
 
-public class SearchTests extends NewTestTemplate {
+public class MobileSearchTests extends NewTestTemplate {
 
 	private String query = "PMG";
 
