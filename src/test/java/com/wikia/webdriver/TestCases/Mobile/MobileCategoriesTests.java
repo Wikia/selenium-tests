@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPageObject;
 
-public class CategoriesTests extends NewTestTemplate {
+public class MobileCategoriesTests extends NewTestTemplate {
 
 	@Test(groups={"categoryTest_001", "categoriesTests", "mobile"})
 	public void categoryTest_001_checkCategoryExhibitionButtons() {
