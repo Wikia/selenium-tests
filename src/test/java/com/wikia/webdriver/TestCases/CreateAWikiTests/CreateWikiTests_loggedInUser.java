@@ -35,6 +35,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
+		CreateNewWikiPageObjectStep1 cnw6 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
 		cnw1.typeInWikiName(cnw1.getWikiName());
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
