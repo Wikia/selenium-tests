@@ -156,6 +156,10 @@ public class WikiBasePageObject extends BasePageObject {
 		caption, nocaption;
 	}
 
+	public enum HubName {
+		Video_Games, Entertainment, Lifestyle
+	}
+
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -961,5 +965,10 @@ public class WikiBasePageObject extends BasePageObject {
 			URLsContent.disableCaptchaParameter
 		);
 		getUrl(url);
+	}
+
+	public HubBasePageObject openHubByUrl(HubName hub, String wikiCorporateURL) {
+		getUrl(wikiCorporateURL + hub.name());
+		return new HubBasePageObject(driver);
 	}
 }

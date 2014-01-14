@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 
-public class HomePageObject extends WikiBasePageObject{
+public class HomePageObject extends WikiBasePageObject {
 
 	@FindBy(css="header.wikiahomepage-header a.button")
 	private WebElement startWikiButton;
@@ -47,14 +47,5 @@ public class HomePageObject extends WikiBasePageObject{
 			getUrl(desiredUrl);
 		}
 		return new CreateNewWikiPageObjectStep1(driver);
-	}
-
-	public enum HubName {
-		Video_Games, Entertainment, Lifestyle
-	}
-
-	public HubBasePageObject openHub(HubName hub, String wikiCorporateURL) {
-		getUrl(wikiCorporateURL + hub.name());
-		return new HubBasePageObject(driver);
 	}
 }
