@@ -22,6 +22,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
@@ -138,10 +139,12 @@ public class SignUpPageObject extends WikiBasePageObject {
 		);
 	}
 
-	public void clickFacebookSignUp(File captchaFile) {
+	public FacebookSignupModalComponentObject clickFacebookSignUp() {
+		String winHandleBefore = driver.getWindowHandle();
 		waitForElementByElement(facebookSignUpButton);
 		facebookSignUpButton.click();
 		PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
+		return new FacebookSignupModalComponentObject(driver, winHandleBefore);
 	}
 
 

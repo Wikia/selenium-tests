@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -184,7 +185,9 @@ public class SignUpTests extends NewTestTemplate {
 		settingsFB.openApps();
 		settingsFB.removeWikiaApp();
 		SignUpPageObject signUp = settingsFB.openSpecialSignUpPage(wikiURL);
-		signUp.disableCaptcha();
+		FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
+		fbModal.acceptWikiaAppPolicy();
+		//TODO: continue from here, fill signup form and create an account
 		String userName = "User" + signUp.getTimeStamp();
 		String password = "Pass" + signUp.getTimeStamp();
 		String email = credentials.emailQaart2;

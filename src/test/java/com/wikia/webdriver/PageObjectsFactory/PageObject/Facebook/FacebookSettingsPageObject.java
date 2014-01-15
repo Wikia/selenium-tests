@@ -23,6 +23,10 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 	private WebElement wikiAppRemoveButton;
 	@FindBy(css = "#pop_content .uiButtonConfirm")
 	private WebElement removeButton;
+	@FindBy(css = ".pop_container_advanced")
+	private WebElement removeAppConfirmationModal;
+	@FindBy(css = ".fbSettingsList ")
+	private WebElement settingsList ;
 	@FindBy(css = "#app-settings-page .fbApplicationsList li")
 	private List<WebElement> applicationList;
 
@@ -49,6 +53,9 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 			wikiAppRemoveButton.click();
 			waitForElementByElement(removeButton);
 			removeButton.click();
+			waitForElementNotVisibleByElement(removeAppConfirmationModal);
+			waitForElementNotVisibleByElement(wikiAppRemoveButton);
+			waitForElementByElement(settingsList);
 			Assert.assertFalse(isWikiaAppPresent());
 			PageObjectLogging.log("removeWikiaApp", "Wikia app removed", true);
 		}
