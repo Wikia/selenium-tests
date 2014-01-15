@@ -31,7 +31,8 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate{
 	public void CreateNewWiki_001_loggedOutUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
-		cnw1.typeInWikiName(cnw1.getWikiName());
+		String wikiName = cnw1.getWikiName();
+		cnw1.typeInWikiName(wikiName);
 		cnw1.verifySuccessIcon();
 		CreateNewWikiLogInSignUpPageObject cnwLogin = cnw1.submitToLogInSignUp();
 		cnwLogin.typeInUserName(credentials.userName);
@@ -41,7 +42,9 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate{
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
 		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
 		ArticlePageObject article = cnw3.submit();
+		article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
 		article.closeNewWikiCongratulationsLightBox();
+		article.verifyWikiTitleHeader(wikiName);
 		article.verifyUserLoggedIn(credentials.userName);
 	}
 
