@@ -119,10 +119,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement articleTitle;
 	@FindBy(css="#WikiWelcomeModal .close")
 	private WebElement welcomeLightBoxCloseButton;
+	@FindBy(css="#WikiWelcomeModal h3")
+	private WebElement welcomeLightBoxTitle;
 	@FindBy(css="li.ui-menu-item > a")
 	private List<WebElement> categorySuggestionsListItems;
 	@FindBy(css=".article-table")
 	private WebElement table;
+	@FindBy(css=".WikiHeader > h1 > a")
+	private WebElement wikiNameHeader;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -616,11 +620,19 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section "+sectionID+" was scrolled up", true);
 	}
 
+	public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
+		Assertion.assertStringContains(welcomeLightBoxTitle.getText(), wikiName);
+	}
+
 	public void closeNewWikiCongratulationsLightBox() {
 		waitForElementByElement(welcomeLightBoxCloseButton);
 		scrollAndClick(welcomeLightBoxCloseButton);
 		PageObjectLogging.log("closeNewWikiCongratulationsLightBox ", "congratulations lightbox closed", true);
-        }
+	}
+
+	public void verifyWikiTitleHeader(String wikiName) {
+		Assertion.assertStringContains(wikiNameHeader.getText(), wikiName);
+	}
 
 	public void verifyTableRemoved() {
 		Assertion.assertTrue(!checkIfElementOnPage(table));
