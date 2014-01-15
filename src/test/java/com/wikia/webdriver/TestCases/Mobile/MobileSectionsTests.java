@@ -6,6 +6,13 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileEditModePageObject;
 
+/**
+ * @author PMG
+ *
+ *1. all testcases should be deleted
+ *
+ * */
+
 public class MobileSectionsTests extends NewTestTemplate{
 
 	@Test(groups={"sectionTest_001", "sectionsTests", "mobile"}, enabled = false)

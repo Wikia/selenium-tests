@@ -1,19 +1,31 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
-import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileSearchPageObject;
+
+/**
+ * @author PMG
+ *
+ *Below test cases are executed against mobileregressiontesting wikiName with CHROMEMOBILE browser
+ *1. Verify that user is able to see suggestions
+ *2. Verify that when user click on + on suggestions text is copied to search field
+ *3. Verify that when user go to Search page when he press search button
+ *4. Verify that search results page looks correctly with pagination (1->2->1)
+ *5. Verify that search results on second page are different than on first page
+ *6. Verify that user is able to go to suggested from search suggestions
+ */
 
 public class MobileSearchTests extends NewTestTemplate {
 
 	private String query = "PMG";
 
-	@Test(groups={"searchTest_001", "searchTests", "mobile"})
-	public void SearchTests_001_Suggestions() {
+	@Test(groups={"MobileSearch_001", "MobileSearch", "Mobile"})
+	public void MobileSearch_001_Suggestions() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.triggerSearch();
@@ -21,8 +33,8 @@ public class MobileSearchTests extends NewTestTemplate {
 		mobile.verifySuggestions(query);
 	}
 
-	@Test(groups={"searchTest_002", "searchTests", "mobile"})
-	public void SearchTests_002_SuggestionsPlus() {
+	@Test(groups={"MobileSearch_002", "MobileSearch", "Mobile"})
+	public void MobileSearch_002_SuggestionsPlus() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.triggerSearch();
@@ -32,16 +44,16 @@ public class MobileSearchTests extends NewTestTemplate {
 		mobile.selectPlusFromSuggestions(3);
 	}
 
-	@Test(groups={"searchTest_003", "searchTests", "mobile"})
-	public void SearchTests_003_SearchPage() {
+	@Test(groups={"MobileSearch_003", "MobileSearch", "Mobile"})
+	public void MobileSearch_003_SearchPage() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileSearchPageObject search = mobile.searchQuery(query);
 		search.verifySearchResultsList();
 	}
 
-	@Test(groups={"searchTest_004", "searchTests", "mobile"})
-	public void SearchTests_004_SearchPageButtons() {
+	@Test(groups={"MobileSearch_004", "MobileSearch", "Mobile"})
+	public void MobileSearch_004_SearchPageButtons() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileSearchPageObject search = mobile.searchQuery(query);
@@ -53,8 +65,8 @@ public class MobileSearchTests extends NewTestTemplate {
 		search.verifyNextPageButtonIsVisible();
 	}
 
-	@Test(groups={"searchTest_005", "searchTests", "mobile"})
-	public void SearchTests_005_SearchPageResults() {
+	@Test(groups={"MobileSearch_005", "MobileSearch", "Mobile"})
+	public void MobileSearch_005_SearchPageResults() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileSearchPageObject search = mobile.searchQuery(query);
@@ -71,8 +83,8 @@ public class MobileSearchTests extends NewTestTemplate {
 		search.compareResultsNotEquals(secondPage, firstPage);
 	}
 
-	@Test(groups={"searchTest_006", "searchTests", "mobile"})
-	public void SearchTests_006_clickOnSuggestions() {
+	@Test(groups={"MobileSearch_006", "MobileSearch", "Mobile"})
+	public void MobileSearch_006_clickOnSuggestions() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.triggerSearch();
