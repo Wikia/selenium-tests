@@ -26,9 +26,9 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	String searchQueryUploadPhoto = "Up";
 
 	//tools
-	String toolEdit = "Edit count";
+	String toolEdit = "Edit";
 	String toolDoubleRedirects = "Double redirects";
-	String toolUploadPhoto = "Upload file";
+	String toolUploadPhoto = "Upload photo";
 	String toolMore = "more…";
 	String toolFollow = "Follow";
 	String toolFollowing = "Following";
