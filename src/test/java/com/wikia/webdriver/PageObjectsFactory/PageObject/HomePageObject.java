@@ -87,6 +87,16 @@ public class HomePageObject extends WikiBasePageObject {
 					lifestyle += 1;
 					break;
 			}
+			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); //example: [ Video Games ] to Video_Games
+				if (hubName.equals(HubName.Video_Games.toString().toLowerCase())) {
+					video += 1;
+				}
+				if (hubName.equals(HubName.Entertainment.toString().toLowerCase())) {
+					entertainment += 1;
+				}
+				if (hubName.equals(HubName.Lifestyle.toString().toLowerCase())) {
+					lifestyle += 1;
+				}
 		}
 		visualizationSetup.put(HubName.Video_Games.toString(), video);
 		visualizationSetup.put(HubName.Entertainment.toString(), entertainment);
