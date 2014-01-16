@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPageObject;
+
 /**
  * @author PMG
  *
