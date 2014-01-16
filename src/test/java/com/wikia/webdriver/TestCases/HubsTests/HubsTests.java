@@ -1,5 +1,7 @@
 package com.wikia.webdriver.TestCases.HubsTests;
 
+import java.util.HashMap;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -7,7 +9,9 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HubBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject.HubName;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWikiaHome;
 
 /**
  *
@@ -53,7 +57,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	}
 
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests008", "Hubs", "new" })
+	@Test(dataProvider = "provideHub", groups = { "HubsTests002", "Hubs"})
 	/**
 	 *  verify that from community module has its elements
 	 */
@@ -66,7 +70,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		hub.verifyFromModuleHasQuatation();
 	}
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs", "new" })
+	@Test(dataProvider = "provideHub", groups = { "HubsTests003", "Hubs"})
 	/**
 	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
 	 */
@@ -89,5 +93,16 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		hub.verifySuggestVideoOrArticleButtonNotClickable();
 		hub.closeSuggestAVideoOrArticleCancelButton();
 		hub.verifySuggestAVideoOrArticleModalDisappeared();
+	}
+
+	@Test(groups = { "HubsTests004", "Hubs"})
+	public void HubsTests004_VerifyCorporateSlotCollection() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
+		SpecialManageWikiaHome manageWikia = base.openSpecialManageWikiaHomePage(wikiCorpSetupURL);
+		HashMap<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
+		HomePageObject home = base.openCorporateHomePage(wikiCorporateURL);
+		HashMap<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
+		home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
 	}
 }

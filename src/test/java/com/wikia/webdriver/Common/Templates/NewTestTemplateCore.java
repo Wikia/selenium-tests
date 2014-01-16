@@ -32,6 +32,7 @@ public class NewTestTemplateCore {
 	protected AbstractConfiguration config;
 	protected String wikiURL;
 	protected String wikiCorporateURL;
+	protected String wikiCorpSetupURL;
 
 	public NewTestTemplateCore() {
 		config = ConfigurationFactory.getConfig();
@@ -57,6 +58,7 @@ public class NewTestTemplateCore {
 		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
 		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
 		wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
+		wikiCorpSetupURL = urlBuilder.getUrlForWiki("corp");
 		printProperties();
 	}
 

@@ -54,6 +54,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTo
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWikiaHome;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
@@ -182,6 +183,17 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
 	}
 
+	public SpecialManageWikiaHome openSpecialManageWikiaHomePage(String wikiCorpSetupURL) {
+		getUrl(wikiCorpSetupURL + URLsContent.specialManageWikiaHome);
+		PageObjectLogging.log("openCorpSetupHomePage", "Special:ManageWikiaHome opened", true);
+		return new SpecialManageWikiaHome(driver);
+	}
+
+	public HomePageObject openCorporateHomePage(String wikiCorporateURL) {
+		getUrl(wikiCorporateURL);
+		PageObjectLogging.log("openCorporateHomePage", "corporate home page opened", true);
+		return new HomePageObject(driver);
+	}
 
 	public SpecialContributionsPageObject openContributionsPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialContributions);
