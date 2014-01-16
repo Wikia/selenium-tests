@@ -16,6 +16,11 @@ public class AdsContent {
     public static String adsPushSlotScript =
 	    "window.adslots2.push([\"%slot%\",null,\"AdEngine2\"]);";
 
+	public static String slotTweakerHideSlotScript =
+			"top.window.adDriver2ForcedStatus['%slot%']='success';"
+			+ "varst=top.window.SlotTweaker(top.window.Wikia.log,top.document,top.window);"
+			+ "st.hide('%slot%');";
+
     //SLOTS NAMES
 	public static String homeTopLB = "HOME_TOP_LEADERBOARD";
 	public static String hubLB = "HUB_TOP_LEADERBOARD";
