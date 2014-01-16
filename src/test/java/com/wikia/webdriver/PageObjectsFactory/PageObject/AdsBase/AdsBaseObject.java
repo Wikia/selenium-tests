@@ -79,21 +79,32 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public void checkMedrec() {
 		setPresentMedrec();
 		AdsComparison adsComparison = new AdsComparison();
-		boolean result = adsComparison.compareSlotOnOff(
-			presentMD, AdsContent.getSlotSelector(presentMDName), driver
-		);
-		if(result) {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look the same", false
+
+		boolean isHidden = checkIfSlotHiddenBySlotTweaker(presentMD, presentMDName);
+
+		if (!isHidden) {
+			boolean result = adsComparison.compareSlotOnOff(
+				presentMD, AdsContent.getSlotSelector(presentMDName), driver
 			);
-			throw new NoSuchElementException(
-				"Screenshots of element on/off look the same."
-				+ "Most probable ad is not present; CSS "
-				+ AdsContent.getSlotSelector(presentMDName)
-			);
+			if(result) {
+				PageObjectLogging.log(
+					"CompareScreenshot", "Screenshots look the same", false
+				);
+				throw new NoSuchElementException(
+					"Screenshots of element on/off look the same."
+					+ "Most probable ad is not present; CSS "
+					+ AdsContent.getSlotSelector(presentMDName)
+				);
+			} else {
+				PageObjectLogging.log(
+					"CompareScreenshot", "Screenshots are different", true
+				);
+			}
 		} else {
 			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots are different", true
+				"SlotHiddenBySlotTweaker",
+				"Slot is hidden by slotTweaker, slotTweaker scrpit found inside",
+				true
 			);
 		}
 	}
@@ -327,28 +338,33 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	private List checkScriptPresentInSlotScripts(String slotName, WebElement slotElement) throws Exception {
-		List<WebElement> scriptsTags = slotElement.findElements(By.tagName("script"));
+	private boolean checkScriptPresentInSlot(WebElement slot, String script) {
+		List<WebElement> scriptsTags = slot.findElements(By.tagName("script"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		Boolean scriptFound = false;
-		String scriptExpectedResult = AdsContent.adsPushSlotScript.replace(
-			"%slot%", slotName
-		);
 		for (WebElement scriptNode : scriptsTags) {
 			String result = (String) js.executeScript(
 				"return arguments[0].innerHTML", scriptNode
 			);
 			String trimedResult = result.replaceAll("\\s", "");
-			if (scriptExpectedResult.equals(trimedResult)) {
-				PageObjectLogging.log(
-					"PushSlotsScriptFound",
-					"Script " + scriptExpectedResult + " found",
-					true
-				);
-				scriptFound = true;
+			if (trimedResult.contains(script)) {
+				return true;
 			}
 		}
-		if (!scriptFound) {
+		return false;
+	}
+
+	private boolean checkScriptPresentInSlotScripts(String slotName, WebElement slotElement) throws Exception {
+		String scriptExpectedResult = AdsContent.adsPushSlotScript.replace(
+			"%slot%", slotName
+		);
+		boolean scriptFound = checkScriptPresentInSlot(slotElement, scriptExpectedResult);
+		if (scriptFound) {
+			PageObjectLogging.log(
+				"PushSlotsScriptFound",
+				"Script " + scriptExpectedResult + " found",
+				true
+			);
+		} else {
 			PageObjectLogging.log(
 				"PushSlotsScriptNotFound",
 				"Script " + scriptExpectedResult + " not found",
@@ -357,7 +373,23 @@ public class AdsBaseObject extends WikiBasePageObject {
 			);
 			throw new Exception("Script for pushing ads not found in element");
 		}
-		return scriptsTags;
+		return scriptFound;
+	}
+
+	protected boolean checkIfSlotHiddenBySlotTweaker(WebElement slot, String slotName) {
+		WebElement firstLevelIframe = slot.findElement(
+			By.cssSelector("iframe[id*=" + slotName + "]")
+		);
+
+		//Prepate slotTweaker script's draft and look for it inside slot's iframe
+		driver.switchTo().frame(firstLevelIframe);
+		String slotTweakerHideMedrecScript = AdsContent.slotTweakerHideSlotScript.replaceAll(
+			"%slot%", slotName
+		);
+		boolean result = checkScriptPresentInSlot(body, slotTweakerHideMedrecScript);
+
+		driver.switchTo().defaultContent();
+		return result;
 	}
 
 	private String createSelectorAll () {
