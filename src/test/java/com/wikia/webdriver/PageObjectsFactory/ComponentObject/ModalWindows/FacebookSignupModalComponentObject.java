@@ -16,6 +16,12 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 	private WebElement appTermsConfirmButton;
 	@FindBy(css = "#u_1_7")
 	private WebElement postingPolicyWindowIndicator;
+	@FindBy(css = "#FacebookSignUp input[name='username']")
+	private WebElement usernameField;
+	@FindBy(css = "#FacebookSignUp input[name='password']")
+	private WebElement passwordField;
+	@FindBy(css = "#FacebookSignUp input[type='submit']")
+	private WebElement createAccountButton;
 
 	String winHandleBefore;
 
@@ -38,6 +44,21 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 		PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
 		//Switch back to original browser (first window)
 		driver.switchTo().window(winHandleBefore);
+	}
+
+	public void typeUserName(String userName) {
+		waitForElementByElement(usernameField);
+//		userName.se
+	}
+
+	public void typePassword(String password) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void createAccount() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

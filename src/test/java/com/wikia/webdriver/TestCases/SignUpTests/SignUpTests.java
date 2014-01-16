@@ -187,21 +187,15 @@ public class SignUpTests extends NewTestTemplate {
 		SignUpPageObject signUp = settingsFB.openSpecialSignUpPage(wikiURL);
 		FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 		fbModal.acceptWikiaAppPolicy();
-		//TODO: continue from here, fill signup form and create an account
+		//TODO: continue from here, fill signUp form and create an account
+		//TODO: move facebook setup to a dependency
 		String userName = "User" + signUp.getTimeStamp();
 		String password = "Pass" + signUp.getTimeStamp();
-		String email = credentials.emailQaart2;
-		String emailPassword = credentials.emailPasswordQaart2;
+		fbModal.typeUserName(userName);
+		fbModal.typePassword(password);
+		fbModal.createAccount();
 
-		signUp.typeEmail(email);
-		signUp.typeUserName(userName);
-		signUp.typePassword(password);
-		signUp.enterBirthDate(
-				PageContent.wikiSignUpBirthMonth,
-				PageContent.wikiSignUpBirthDay,
-				PageContent.wikiSignUpBirthYear
-				);
-		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
+		AlmostTherePageObject almostTherePage = fbModal.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
 
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
