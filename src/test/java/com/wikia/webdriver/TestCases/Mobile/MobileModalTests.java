@@ -7,10 +7,21 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileModalComponentObject;
 
-public class ModalTests extends NewTestTemplate{
+/**
+ * @author PMG
+ *
+ * Below test cases are executed against mobileregressiontesting wikiName with CHROMEMOBILE browser
+ * 1. Verify that user is able to go to next image in modal
+ * 2. Verify that user is able to go to previous image in modal
+ * 3. Verify that user is able to hide/show top bar in modal
+ * 4. Verify that user is able to go back to page from modal using back button
+ * 5. Verify that user is back on the same place of page when he go in and back from modal
+ */
 
-	@Test(groups={"modalTest_001", "modalTests", "mobile"})
-	public void modalTest_001_nextImage() {
+public class MobileModalTests extends NewTestTemplate{
+
+	@Test(groups={"MobileModal_001", "MobileModal", "Mobile"})
+	public void MobileModal_001_nextImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -21,8 +32,8 @@ public class ModalTests extends NewTestTemplate{
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"modalTest_002", "modalTests", "mobile"})
-	public void modalTest_002_previousImage() {
+	@Test(groups={"MobileModal_002", "MobileModal", "Mobile"})
+	public void MobileModal_002_previousImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -33,8 +44,8 @@ public class ModalTests extends NewTestTemplate{
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"modalTest_003", "modalTests", "mobile"})
-	public void modalTest_003_topBarVisibleOrNot() {
+	@Test(groups={"MobileModal_003", "MobileModal", "Mobile"})
+	public void MobileModal_003_topBarVisibleOrNot() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickModal();
@@ -45,8 +56,8 @@ public class ModalTests extends NewTestTemplate{
 		modal.verifyTopBarVisible();
 	}
 
-	@Test(groups={"modalTest_004", "modalTests", "mobile"})
-	public void modalTest_004_backButton() {
+	@Test(groups={"MobileModal_004", "MobileModal", "Mobile"})
+	public void MobileModal_004_backButton() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		MobileModalComponentObject modal = mobile.clickOpenedImage(5);
@@ -54,8 +65,8 @@ public class ModalTests extends NewTestTemplate{
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"modalTest_005", "modalTests", "mobile"})
-	public void modalTest_005_positionAfterCloseModal() {
+	@Test(groups={"MobileModal_005", "MobileModal", "Mobile"})
+	public void MobileModal_005_positionAfterCloseModal() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		mobile.openModals(wikiURL);
 		mobile.scrollToImage(5);
