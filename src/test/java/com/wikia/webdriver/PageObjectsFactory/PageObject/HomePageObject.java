@@ -75,15 +75,17 @@ public class HomePageObject extends WikiBasePageObject {
 			getUrl(URL);
 			String hubName = hubIndicator.getText().toLowerCase();
 			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); //example: [ Video Games ] to Video_Games
-				if (hubName.equals(HubName.Video_Games.toString().toLowerCase())) {
+			switch (hubName) {
+				case "video_games":
 					video += 1;
-				}
-				if (hubName.equals(HubName.Entertainment.toString().toLowerCase())) {
+					break;
+				case "entertainment":
 					entertainment += 1;
-				}
-				if (hubName.equals(HubName.Lifestyle.toString().toLowerCase())) {
+					break;
+				case "lifestyle":
 					lifestyle += 1;
-				}
+					break;
+			}
 		}
 		visualizationSetup.put(HubName.Video_Games.toString(), video);
 		visualizationSetup.put(HubName.Entertainment.toString(), entertainment);
