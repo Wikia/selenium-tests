@@ -48,17 +48,20 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
 	public void typeUserName(String userName) {
 		waitForElementByElement(usernameField);
-//		userName.se
+		usernameField.sendKeys(userName);
+		PageObjectLogging.log("typeUserName", "username "+userName+" typed into the field", true);
 	}
 
 	public void typePassword(String password) {
-		// TODO Auto-generated method stub
-
+		waitForElementByElement(passwordField);
+		usernameField.sendKeys(password);
+		PageObjectLogging.log("typePassword", "password typed into the field", true);
 	}
 
 	public void createAccount() {
-		// TODO Auto-generated method stub
-
+		waitForElementByElement(createAccountButton);
+		createAccountButton.click();
+		PageObjectLogging.log("createAccount", "Create account button clicked", true);
 	}
 
 }
