@@ -27,7 +27,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScripts;
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
@@ -872,7 +872,7 @@ public class BasePageObject{
 	 * @author Michal 'justnpT' Nowierski
 	 */
 	public void compareTrackedEventsTo(List<String> expectedEventsList){
-		executeScript(ClickTrackingScripts.eventsCaptureInstallation);
+		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
 		ArrayList<String> trackedEventsArrayList = new ArrayList<String>();
 		List<String> trackedEventsList;
 		JavascriptExecutor js = (JavascriptExecutor) driver;

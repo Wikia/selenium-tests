@@ -5,8 +5,19 @@ package com.wikia.webdriver.Common.Clicktracking;
  * @author Michal 'justnpT' Nowierski
  * @author Rodrigo 'RodriGomez' Molinero
  */
-public class ClickTrackingScripts {
+public class ClickTrackingScriptsProvider {
 
+	private String tracker;
+	private String log_level;
+
+	/**
+	 * @param log_level normally log_level = 3
+	 * @param log_group normally log_group = Wikia.Tracker
+	 */
+	public ClickTrackingScriptsProvider(String log_level, String tracker) {
+		this.tracker = tracker;
+		this.log_level = log_level;
+	}
 
 	private static String enableWikiaTracker =
 			  "document.cookie='log_level=3';"
@@ -62,28 +73,5 @@ public class ClickTrackingScripts {
 
 				windowSelenium_getEventsFunction
 			+	windowSelenium_popEventsFunction;
-
-			String trackingEngine = "document.cookie='log_level=3';"
-			+ "document.cookie='log_group=Wikia.Tracker';"
-+ "window.seleniumOriginalTrack = Wikia.Tracker.track;"
-+ "Wikia.Tracker.track = function() {"
-+ "    var args = arguments; "
-+ "    selenium_addEvent(JSON.stringify(args)); "
-+ "    console.log('intercepted the call to Tracker.track() ' + JSON.stringify(args) + 'added using selenium_addEvent');"
-+ "    window.seleniumOriginalTrack.apply(null, args); "
-+ "};"
-+ "function selenium_getEvents() {"
-+ "var events = localStorage.getItem('seleniumEvents');"
-+ "events = events ? JSON.parse( events ) : [];"
-+ "return events;"
-+ "};"
-+ "function selenium_addEvent(args) {"
-+ "var events = selenium_getEvents();"
-+ "events.push( args ); "
-+ "localStorage.setItem('seleniumEvents', JSON.stringify(events));"
-+ "};"
-;
-
-
 
 }

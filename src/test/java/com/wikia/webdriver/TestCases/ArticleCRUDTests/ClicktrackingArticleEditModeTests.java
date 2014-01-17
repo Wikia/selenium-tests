@@ -1,14 +1,14 @@
 package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
+import java.util.Arrays;
 import java.util.List;
 
-import javax.sql.CommonDataSource;
-
-import org.openqa.selenium.remote.server.handler.UploadFile;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScripts;
-import com.wikia.webdriver.Common.Clicktracking.TestExpectedEvents.EventsArticleEditModeTests;
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.Common.Clicktracking.Events.EventsArticleEditMode;
+import com.wikia.webdriver.Common.Clicktracking.Events.EventsModalAddPhoto;
+import com.wikia.webdriver.Common.Clicktracking.Events.EventsModalAddPhotoOptions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.SearchContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -17,11 +17,9 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.PreviewEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject.Components;
 
-public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
+public class ClickTrackingArticleEditModeTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
@@ -36,11 +34,13 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
 		visualEditMode.verifyContentLoaded();
-		visualEditMode.executeScript(ClickTrackingScripts.trackerInstallation);
-		PreviewEditModePageObject preview = visualEditMode.previewArticle();
-		
-		List<String> expectedEvents;
-		expectedEvents = EventsArticleEditModeTests.getExpectedEventsForTest001();
+		visualEditMode.executeScript(ClickTrackingScriptsProvider.trackerInstallation);
+		visualEditMode.previewArticle();
+
+		List<String> expectedEvents = Arrays.asList(
+				EventsArticleEditMode.EventPreviewButtonClick
+				);
+
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
 	}
 
@@ -55,7 +55,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
-		visualEditMode.executeScript(ClickTrackingScripts.trackerInstallation);
+		visualEditMode.executeScript(ClickTrackingScriptsProvider.trackerInstallation);
 		PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
 		photoAddPhoto.clickFlickr();
 		photoAddPhoto.clickThisWiki();
@@ -66,8 +66,14 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		photoAddPhoto.chooseFileToUpload(PageContent.file);
 		photoAddPhoto.clickUpload();
 
-		List<String> expectedEvents;
-		expectedEvents = EventsArticleEditModeTests.getExpectedEventsForTest002();
+		List<String> expectedEvents = Arrays.asList(
+				EventsModalAddPhoto.EventAddRecentPhotoClick,
+				EventsModalAddPhoto.EventFindButtonClick,
+				EventsModalAddPhoto.EventThisWikiLinkClick,
+				EventsModalAddPhoto.EventUploadButtonClick,
+				EventsModalAddPhotoOptions.EventBackButtonClick
+				);
+
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
 	}
 }
