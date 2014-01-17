@@ -20,6 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWi
  */
 public class HubsTests extends NewTestTemplateBeforeClass {
 
+
 	@DataProvider
 	private static final Object[][] provideHub() {
 		return new Object[][] {
@@ -30,6 +31,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	}
 
 	Credentials credentials = config.getCredentials();
+	String corpWikiName = "corp";
 
 	@Test(dataProvider = "provideHub", groups = { "HubsTests001", "Hubs" , "Smoke4"})
 	public void HubsTest001_verifyMosaicSliderShowsImagesOnHover(HubName hubName) {
@@ -99,6 +101,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	public void HubsTests004_VerifyCorporateSlotCollection() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
+		String wikiCorpSetupURL = urlBuilder.getUrlForWiki(corpWikiName);
 		SpecialManageWikiaHome manageWikia = base.openSpecialManageWikiaHomePage(wikiCorpSetupURL);
 		HashMap<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
 		HomePageObject home = base.openCorporateHomePage(wikiCorporateURL);

@@ -74,7 +74,8 @@ public class HomePageObject extends WikiBasePageObject {
 		for (String URL : wikiList) {
 			getUrl(URL);
 			String hubName = hubIndicator.getText().toLowerCase();
-			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); //example: [ Video Games ] to Video_Games
+			//example: [ Video Games ] to Video_Games
+			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_");
 			switch (hubName) {
 				case "video_games":
 					video += 1;
