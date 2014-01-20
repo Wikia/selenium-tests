@@ -119,19 +119,22 @@ public class MobileBasePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("VerifyFBLogin", "FB login window was opened", true, driver);
 	}
 
-	public void submitLogin() {
-		loginButton.click();
-		waitForElementByElement(avatar);
-		PageObjectLogging.log("submitLogin", "login submit button clicked",
-				true, driver);
-	}
-
-	public void login(String username, String password) {
+	public void loginDropDown(String username, String password) {
 		triggerLoginDropDown();
 		typeInUserNameAndPassword(username, password);
-		submitLogin();
+		loginButton.click();
+		waitForElementByElement(avatar);
 		PageObjectLogging.log("login", "user logged in successfully", true,
 				driver);
+	}
+
+	public MobileSpecialUserLogin loginFailedDropDown(String username, String password) {
+		triggerLoginDropDown();
+		typeInUserNameAndPassword(username, password);
+		loginButton.click();
+		PageObjectLogging.log("login", "user logged in successfully", true,
+				driver);
+		return new MobileSpecialUserLogin(driver);
 	}
 
 	public void clickLoginFBButton() {
