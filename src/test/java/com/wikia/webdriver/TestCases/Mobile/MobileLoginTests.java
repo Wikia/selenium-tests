@@ -50,8 +50,18 @@ public class MobileLoginTests extends NewTestTemplate{
 		login.verifyWrongLoginErrorMessage();
 	}
 
-	@Test(groups={"MobileLogin_004", "MobileLogin","Mobile"})
-	public void MobileLogin_004_facebookLogin() {
+	@Test(groups={"MobileLogin_004", "MobileLogin", "Mobile"})
+	public void MobileLogin_004_failedLoginEmptyPassword_MOB-760() {
+		MobileBasePageObject mobile = new MobileBasePageObject(driver);
+		mobile.openHome(wikiURL);
+		mobile.openRandomPage();
+		System.out.println(credentials.userName12);
+		MobileSpecialUserLogin login = mobile.loginFailedDropDown(credentials.userName12, "");
+		login.verifyEmptyPasswordErrorMessage();
+	}
+
+	@Test(groups={"MobileLogin_005", "MobileLogin","Mobile"})
+	public void MobileLogin_005_facebookLogin() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();

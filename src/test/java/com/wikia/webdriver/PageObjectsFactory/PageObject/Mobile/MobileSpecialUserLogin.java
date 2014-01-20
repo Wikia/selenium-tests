@@ -33,4 +33,13 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
 		);
 	}
 
+	public void verifyEmptyPasswordErrorMessage() {
+		waitForElementByElement(errorMessage);
+		Assertion.assertEquals(
+				"Oops, please fill in the password field.",
+				errorMessage.getText()
+		);
+	}
+
+
 }
