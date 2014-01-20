@@ -12,8 +12,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileSpecialUse
  *
  * Below test cases are executed against mobileregressiontesting wikiName with CHROMEMOBILE browser
  * 1. Verify that user is able to login successfully using standard login
- * 2. Verify that user is not logged in when he is using incorrect credentials
- * 3. Verify that user is able to login successfully using FB login
+ * 2. Verify that user is not logged in when he is using correct login and incorrect password
+ * 3. Verify that user is not logged in when he is using incorrect login and incorrect password
+ * 4. Verify that user is able to login successfully using FB login
  */
 public class MobileLoginTests extends NewTestTemplate{
 
@@ -39,9 +40,18 @@ public class MobileLoginTests extends NewTestTemplate{
 		login.verifyWrongPasswordErrorMessage();
 	}
 
+	@Test(groups={"MobileLogin_003", "MobileLogin", "Mobile"})
+	public void MobileLogin_003_failedLoginWrongLogin() {
+		MobileBasePageObject mobile = new MobileBasePageObject(driver);
+		mobile.openHome(wikiURL);
+		mobile.openRandomPage();
+		System.out.println(credentials.userName12);
+		MobileSpecialUserLogin login = mobile.loginFailedDropDown(mobile.getTimeStamp(), mobile.getTimeStamp());
+		login.verifyWrongLoginErrorMessage();
+	}
 
-	@Test(groups={"MobileLogin_003", "MobileLogin","Mobile"})
-	public void MobileLogin_003_facebookLogin() {
+	@Test(groups={"MobileLogin_004", "MobileLogin","Mobile"})
+	public void MobileLogin_004_facebookLogin() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();

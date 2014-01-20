@@ -25,10 +25,10 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
 		);
 	}
 
-	public void verifyWrongPasswordErrorMessage() {
+	public void verifyWrongLoginErrorMessage() {
 		waitForElementByElement(errorMessage);
 		Assertion.assertEquals(
-				"Oops, wrong password. Make sure caps lock is off and try again.",
+				"Hm, we don't recognize this name. Don't forget usernames are case sensitive.",
 				errorMessage.getText()
 		);
 	}
