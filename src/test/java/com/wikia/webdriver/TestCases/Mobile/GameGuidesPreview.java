@@ -26,7 +26,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"GameGuidesPreview_001", "SectionsTests", "MobileGG"})
+	@Test(groups={"GameGuidesPreview_001", "MobileGG"})
 	public void GameGuidesPreview_001_sections_chevronTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -40,7 +40,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"GameGuidesPreview_002", "SectionsTests", "MobileGG"})
+	@Test(groups={"GameGuidesPreview_002", "MobileGG"})
 	public void GameGuidesPreview_002_sections_hideTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -54,7 +54,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"GameGuidesPreview_003", "ModalTests", "MobileGG"})
+	@Test(groups={"GameGuidesPreview_003", "MobileGG"})
 	public void GameGuidesPreview_003_modalTest_nextImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.wikiaPhp);
@@ -69,7 +69,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"GameGuidesPreview_004", "ModalTests", "MobileGG"})
+	@Test(groups={"GameGuidesPreview_004", "MobileGG"})
 	public void GameGuidesPreview_004_modalTest_previousImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.wikiaPhp);
@@ -84,7 +84,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"GameGuidesPreview_005", "ModalTests", "MobileGG"})
+	@Test(groups={"GameGuidesPreview_005", "MobileGG"})
 	public void GameGuidesPreview_005_topBarVisibleOrNot() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.wikiaPhp);
@@ -99,7 +99,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyTopBarVisible();
 	}
 
-	@Test(groups={"GameGuidesPreview_006", "ModalTests", "MobileGG"})
+	@Test(groups={"GameGuidesPreview_006", "MobileGG"})
 	public void GameGuidesPreview_006_backButton() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.wikiaPhp);
@@ -111,7 +111,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"GameGuidesPreview_007", "ModalTests", "MobileGG"})
+	@Test(groups={"GameGuidesPreview_007", "MobileGG"})
 	public void GameGuidesPreview_007_positionAfterCloseModal() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.wikiaPhp);

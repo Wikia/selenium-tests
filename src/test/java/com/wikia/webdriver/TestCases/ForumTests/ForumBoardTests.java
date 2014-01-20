@@ -71,7 +71,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumBoard.verifyStartedDiscussionWithLinks(Internallink, Externallink);
 	}
 
-	@Test(groups= {"ForumBoardTests_005, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_005", "ForumBoardTests", "Forum"} )
 	public void forumBoardTests_005_startDiscussionWithVideo(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -82,7 +82,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumBoard.clickPostButton();
 	}
 
-	@Test(groups= {"ForumBoardTests_006, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_006", "ForumBoardTests", "Forum"} )
 	public void forumBoardTests_006_followDiscussion(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -97,7 +97,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumBoard.verifyTextOnFollowButton(1, "Follow");
 	}
 
-	@Test(groups= {"ForumBoardTests_007, ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_007", "ForumBoardTests", "Forum"} )
 	public void forumBoardTests_007_highlightDiscussion(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

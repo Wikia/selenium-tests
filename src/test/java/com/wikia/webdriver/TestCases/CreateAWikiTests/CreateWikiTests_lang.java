@@ -32,14 +32,17 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		CreateNewWikiPageObjectStep1 cnw1 = base.openSpecialCreateNewWikiPage(wikiCorporateURL);
 		cnw1.selectLanguage(lang);
-		cnw1.typeInWikiName(cnw1.getWikiName());
+		String wikiName = cnw1.getWikiName();
+		cnw1.typeInWikiName(wikiName);
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
 		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
 		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
 		ArticlePageObject article = cnw3.submit();
+		article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
 		article.closeNewWikiCongratulationsLightBox();
+		article.verifyWikiTitleHeader(wikiName);
 		article.verifyUserLoggedIn(credentials.userName);
 	}
 }

@@ -38,22 +38,22 @@ public class ShareToolbarComponentObject extends BasePageObject {
 	public void clickShareButton() {
 		waitForElementByElement(shareButton);
 		shareButton.click();
-		PageObjectLogging.log("clickShareButton", "Share button was clicked", true, driver);
+		PageObjectLogging.log("clickShareButton", "Share button was clicked", true);
 	}
 
 	public void verifyTwitterIframeVisibility() {
 		waitForElementByElement(twitterIframe);
-		PageObjectLogging.log("VerifyTwitterIframePresence", "Verify that the Twitter Iframe Is Present", true, driver);
+		PageObjectLogging.log("verifyTwitterIframeVisibility", "Verify that the Twitter Iframe Is Present", true);
 	}
 
 	public void verifyFBIframeVisibility() {
 		waitForElementByElement(fBIframe);
-		PageObjectLogging.log("VerifyFBIframeVisibility", "Verify that the FB Iframe Is Present", true, driver);
+		PageObjectLogging.log("verifyFBIframeVisibility", "Verify that the FB Iframe Is Present", true);
 	}
 
 	public void verifyEmailButtonVisibility() {
 		waitForElementByElement(emailButton);
-		PageObjectLogging.log("verifyEmailButtonVisibility", "Verify that the Email Button Is Present", true, driver);
+		PageObjectLogging.log("verifyEmailButtonVisibility", "Verify that the Email Button Is Present", true);
 	}
 
 	public void navigteTweetButtonUrl() {
@@ -62,12 +62,12 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		String href = twitterButton.getAttribute("href");
 		driver.switchTo().defaultContent();
 		getUrl(href);
-		PageObjectLogging.log("clickTweetButton", "Twitter button was clicked", true, driver);
+		PageObjectLogging.log("navigteTweetButtonUrl", "Twitter button was clicked", true);
 	}
 
 	public void verifyTwitterModalURL() {
 		Assertion.assertStringContains(getCurrentUrl(), "twitter.com");
-		PageObjectLogging.log("VerifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true, driver);
+		PageObjectLogging.log("verifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true);
 	}
 
 	public void clickFBLikeButton() {
@@ -75,7 +75,7 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		driver.switchTo().frame(fBIframe);
 		fBLikeButton.click();
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("clickFBLikeButton", "FB Like button was clicked", true, driver);
+		PageObjectLogging.log("clickFBLikeButton", "FB Like button was clicked", true);
 	}
 
 	public void verifyFBModalURL() {
@@ -84,13 +84,13 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		driver.switchTo().window(windows[1].toString());
 		Assertion.assertStringContains(getCurrentUrl(), "facebook.com");
 		driver.switchTo().window(windows[0].toString());
-		PageObjectLogging.log("VerifyFBModalURL", "Verify that the FB Modal URL is correct", true, driver);
+		PageObjectLogging.log("verifyFBModalURL", "Verify that the FB Modal URL is correct", true);
 	}
 
 	public void clickEmailButton() {
 		waitForElementByElement(emailButton);
 		emailButton.click();
-		PageObjectLogging.log("clickEmailButton", "Email button was clicked", true, driver);
+		PageObjectLogging.log("clickEmailButton", "Email button was clicked", true);
 	}
 
 	public void verifyEmailModalElements() {
@@ -98,6 +98,6 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		waitForElementByElement(emailModalCancelButton);
 		waitForElementByElement(emailModalCloseButton);
 		waitForElementByElement(emailModalEmailInputField);
-		PageObjectLogging.log("VerifyEmailModalElements", "Verify that the Email Modal elements are present", true, driver);
+		PageObjectLogging.log("verifyEmailModalElements", "Verify that the Email Modal elements are present", true);
 	}
 }

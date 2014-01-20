@@ -6,13 +6,22 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileBasePageObject;
-
-public class ArticleCommentTests extends NewTestTemplate {
+/*
+ * @author PMG
+ *
+ * Below test cases are executed against mobileregressiontesting wikiName with CHROMEMOBILE browser
+ * 1. Verify that you are able to post a comment
+ * 2. Verify that you are able to post a reply comment
+ * 3. Verify that pagination of comments is correct
+ * 4. Verify that comments counter is updated correctly
+ * 5. Verify that when user go to input comment field - this field will expand
+ */
+public class MobileArticleCommentTests extends NewTestTemplate {
 
 	String timeStamp;
 
-	@Test(groups={"articleCommentTest_001", "articleCommentTests", "mobile"})
-	public void ArticleCommentTest_001_PostComment() {
+	@Test(groups={"MobileArticleComment_001", "MobileArticleComment", "Mobile"})
+	public void MobileArticleComment_001_PostComment() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
@@ -20,8 +29,8 @@ public class ArticleCommentTests extends NewTestTemplate {
 		article.addComment(PageContent.commentTextNonLatin + timeStamp);
 	}
 
-	@Test(groups={"articleCommentTest_002", "articleCommentTests", "mobile"})
-	public void ArticleCommentTest_002_PostCommentReply() {
+	@Test(groups={"MobileArticleComment_002", "MobileArticleComment", "Mobile"})
+	public void MobileArticleComment_002_PostCommentReply() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
@@ -30,8 +39,8 @@ public class ArticleCommentTests extends NewTestTemplate {
 		article.addReply(PageContent.replyText2 + timeStamp);
 	}
 
-	@Test(groups={"articleCommentTest_003", "articleCommentTests", "mobile"})
-	public void ArticleCommentTest_003_CommentPagination() {
+	@Test(groups={"MobileArticleComment_003", "MobileArticleComment", "Mobile"})
+	public void MobileArticleComment_003_CommentPagination() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openCommentsWithPagination(wikiURL);
@@ -43,8 +52,8 @@ public class ArticleCommentTests extends NewTestTemplate {
 		article.verifyFirstCommentsEquals(firstComment);
 	}
 
-	@Test(groups={"articleCommentTest_004", "articleCommentTests", "mobile"})
-	public void ArticleCommentTest_004_numberOfComments() {
+	@Test(groups={"MobileArticleComment_004", "MobileArticleComment", "Mobile"})
+	public void MobileArticleComment_004_numberOfComments() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
@@ -52,8 +61,8 @@ public class ArticleCommentTests extends NewTestTemplate {
 		article.verifyNumberOfComments(PageContent.commentText2 + timeStamp);
 	}
 
-	@Test(groups={"articleCommentTest_005", "articleCommentTests", "mobile"})
-	public void ArticleCommentTest_005_expandInput() {
+	@Test(groups={"MobileArticleComment_005", "MobileArticleComment", "Mobile"})
+	public void MobileArticleComment_005_expandInput() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();

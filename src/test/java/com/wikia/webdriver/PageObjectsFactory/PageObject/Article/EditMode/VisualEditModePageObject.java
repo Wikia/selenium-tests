@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -20,7 +21,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import org.openqa.selenium.interactions.Actions;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -61,7 +61,7 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement caption;
 	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
 	private WebElement blockedUserMessage1;
-	@FindBy(xpath="//b[contains(text(), 'Your username or IP address has been blocked.')]")
+	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
 	private WebElement blockedUserMessage2;
 	@FindBy(css=".cke_button_tabledelete > span.cke_label")
 	private WebElement deleteItem;

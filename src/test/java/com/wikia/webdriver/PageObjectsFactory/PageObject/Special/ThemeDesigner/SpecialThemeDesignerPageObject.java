@@ -15,10 +15,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
-	@FindBy(css=".save")
+	@FindBy(css=".save:not([disabled=true])")
 	private WebElement saveButton;
-	String tabSelector = "a[rel='%tabName%Tab']";
-	String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
+	@FindBy(css=".save[disabled]")
+	private WebElement saveButtonDisabled;
 	//theme tab
 	@FindBys(@FindBy(css="li[data-theme]"))
 	private List<WebElement> themes;
@@ -58,6 +58,9 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	private WebElement secondThemesSet;
 	@FindBy(css="ul[style='margin-left: -1520px;']")
 	private WebElement thirdThemesSet;
+
+	String tabSelector = "a[rel='%tabName%Tab']";
+	String selectedTabSelector = "li.selected a[rel='%tabName%Tab']";
 
 	public SpecialThemeDesignerPageObject(WebDriver driver) {
 		super(driver);
@@ -106,7 +109,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 
 	public void submitThemeSelection(){
 		scrollAndClick(saveButton);
-		waitForElementByElement(editButton);
+		waitForElementByElement(saveButtonDisabled);
 		PageObjectLogging.log("submitSelection", "selection of new skin saved", true);
 	}
 

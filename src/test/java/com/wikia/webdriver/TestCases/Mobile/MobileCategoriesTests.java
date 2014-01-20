@@ -5,17 +5,24 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileCategoryPageObject;
 
-public class CategoriesTests extends NewTestTemplate {
+/**
+ * @author PMG
+ *
+ * Below test cases are executed against mobileregressiontesting wikiName with CHROMEMOBILE browser
+ * 1. Verify that user is able to see category exhibition buttons grid
+ * 2. Verify that category with more than 25 entries for one letter have pagination of entries
+ */
+public class MobileCategoriesTests extends NewTestTemplate {
 
-	@Test(groups={"categoryTest_001", "categoriesTests", "mobile"})
-	public void categoryTest_001_checkCategoryExhibitionButtons() {
+	@Test(groups={"MobileCategory_001", "MobileCategories", "Mobile"})
+	public void MobileCategory_001_checkCategoryExhibitionButtons() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
 		mobile.verifyCategoryExhibition();
 	}
 
-	@Test(groups={"categoryTest_002", "categoriesTests", "mobile"})
-	public void categoryTest_002_checkPagination() {
+	@Test(groups={"MobileCategory_002", "MobileCategories", "Mobile"})
+	public void MobileCategory_002_checkPagination() {
 		MobileCategoryPageObject mobile = new MobileCategoryPageObject(driver);
 		mobile.openCategory(wikiURL);
 		mobile.verifyArticlesCount("P", 25);
