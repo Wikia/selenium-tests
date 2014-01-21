@@ -174,7 +174,7 @@ public class SignUpTests extends NewTestTemplate {
 		almostTherePage.verifyAlmostTherePage();
 	}
 
-	@Test(groups = {"SignUp_007", "SignUp"})
+	@Test(groups = {"SignUp_007", "SignUp", "Modals"})
 	public void Signup_007_signUpWithFacebook() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		FacebookMainPageObject fbLogin = base.openFacebookMainPage();
@@ -188,17 +188,16 @@ public class SignUpTests extends NewTestTemplate {
 		FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
 		fbModal.acceptWikiaAppPolicy();
 		//TODO: move facebook setup to a dependency
-		String userName = "User" + signUp.getTimeStamp();
+		String userName = "QATestAccount" + signUp.getTimeStamp();
 		String password = "Pass" + signUp.getTimeStamp();
 		fbModal.typeUserName(userName);
 		fbModal.typePassword(password);
 		fbModal.createAccount();
-
-//		AlmostTherePageObject almostTherePage = fbModal.submit(email, emailPassword);
-//		almostTherePage.verifyAlmostTherePage();
-//
-//		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
-//		login.login(userName, password);
-//		almostTherePage.verifyAlmostTherePage();
+		signUp.verifyUserLoggedIn(userName);
+		// disconnect new account from facebook
+		PreferencesPageObject preferences;
+		preferences = signUp.openSpecialPreferencesPage(wikiURL);
+		preferences.selectTab(tabNames.Facebook);
+		preferences.disconnectFromFacebook();
 	}
 }

@@ -1,5 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows;
 
+import java.util.Set;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,19 +33,34 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 	}
 
 	public void acceptWikiaAppPolicy() {
-		//Switch to new window opened
-		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
+		//if policies are already accepted
+		//give facebook popup window time to disappear
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			PageObjectLogging.log("acceptWikiaAppPolicy", e.getMessage(), false);
 		}
-		waitForElementByElement(appTermsConfirmButton);
-		appTermsConfirmButton.click();
-		PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
-		waitForElementByElement(postingPolicyWindowIndicator);
-		waitForElementByElement(appTermsConfirmButton);
-		appTermsConfirmButton.click();
-		PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
-		//Switch back to original browser (first window)
-		driver.switchTo().window(winHandleBefore);
+
+		Set<String> handles = driver.getWindowHandles();
+
+		if (handles.size()>1) {
+			for(String winHandle : handles){
+				//Switch to new window opened
+				driver.switchTo().window(winHandle);
+			}
+			waitForElementByElement(appTermsConfirmButton);
+			appTermsConfirmButton.click();
+			PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps privacy policy", true);
+			waitForElementByElement(postingPolicyWindowIndicator);
+			waitForElementByElement(appTermsConfirmButton);
+			appTermsConfirmButton.click();
+			PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
+			//Switch back to original browser (first window)
+			driver.switchTo().window(winHandleBefore);
+		}
+		else {
+			PageObjectLogging.log("acceptWikiaAppPolicy", "wikia apps policies allready accepted", true);
+		}
 	}
 
 	public void typeUserName(String userName) {
@@ -54,7 +71,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
 	public void typePassword(String password) {
 		waitForElementByElement(passwordField);
-		usernameField.sendKeys(password);
+		passwordField.sendKeys(password);
 		PageObjectLogging.log("typePassword", "password typed into the field", true);
 	}
 
