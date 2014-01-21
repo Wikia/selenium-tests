@@ -60,7 +60,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	}
 
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests008", "Hubs", "new" })
+	@Test(dataProvider = "provideHub", groups = { "HubsTests008", "Hubs"})
 	/**
 	 *  verify that from community module has its elements
 	 */
@@ -73,7 +73,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		hub.verifyFromModuleHasQuatation();
 	}
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs", "new" })
+	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs"})
 	/**
 	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
 	 */
@@ -117,6 +117,6 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	public void HubsTest005_VerifyLanguagesSelection() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openCorporateHomePage(wikiCorporateURL);
-		home.goToLanguagePages();
+		home.verifyLanguageDropdownURLs();
 	}
 }
