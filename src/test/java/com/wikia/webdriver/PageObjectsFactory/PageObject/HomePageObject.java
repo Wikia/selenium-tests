@@ -11,7 +11,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 
 public class HomePageObject extends WikiBasePageObject {
@@ -40,8 +42,9 @@ public class HomePageObject extends WikiBasePageObject {
 	private List<WebElement> visualizationWikis;
 	@FindBy(css="section.grid-1 nav")
 	private WebElement languageButton;
-	By languageSelector = By.cssSelector(".wikia-menu-button li > a");
-	By languageButtonSelector = By.cssSelector("section.grid-1 nav");
+	
+	private By languageSelector = By.cssSelector(".wikia-menu-button li > a");
+	private By languageButtonSelector = By.cssSelector("section.grid-1 nav");
 	
 	public HomePageObject(WebDriver driver)
 	{
@@ -110,6 +113,7 @@ public class HomePageObject extends WikiBasePageObject {
 		languageButton.click();
 		List<WebElement> languagesList = driver.findElements(languageSelector);
 		languagesList.get(index).click();;
+		PageObjectLogging.log("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
 		return new HomePageObject(driver);
 	}
 	
@@ -126,10 +130,10 @@ public class HomePageObject extends WikiBasePageObject {
 		List<WebElement> languagesList = driver.findElements(languageSelector);
 		return languagesList.size();
 	}
-	public void goToLanguagePages() {
+	public void verifyLanguageDropdownURLs() {
 		int numOfLanguages = getNumOfLanguages();
 		for (int i=0; i<numOfLanguages; i++) {
-			String languageURL = getLanguageURL(i)+"Wikia";
+			String languageURL = getLanguageURL(i) + URLsContent.wikiaDir;
 			selectLanguage(i);
 			verifyLanguageButton();
 			verifyURL(languageURL);
