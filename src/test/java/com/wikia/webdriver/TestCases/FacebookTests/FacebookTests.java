@@ -14,7 +14,7 @@ public class FacebookTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 
 	/**
-	 * dependent methods: Signup_007_signUpWithFacebook
+	 * dependent method: Signup_007_signUpWithFacebook
 	 *
 	 * Steps:
 	 * 1. Log in to facebook
@@ -32,5 +32,4 @@ public class FacebookTests extends NewTestTemplate{
 		settingsFB.openApps();
 		settingsFB.removeWikiaApp();
 	}
-
 }

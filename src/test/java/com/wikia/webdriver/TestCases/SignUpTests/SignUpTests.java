@@ -173,8 +173,6 @@ public class SignUpTests extends NewTestTemplate {
 		almostTherePage.verifyAlmostTherePage();
 	}
 
-
-
 	/**
 	 * Jira ticket: CONN-78
 	 *

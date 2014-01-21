@@ -147,7 +147,6 @@ public class SignUpPageObject extends WikiBasePageObject {
 		return new FacebookSignupModalComponentObject(driver, winHandleBefore);
 	}
 
-
 	public AlmostTherePageObject submit(String email, String password) {
 		MailFunctions.deleteAllEmails(email, password);
 		return submit();

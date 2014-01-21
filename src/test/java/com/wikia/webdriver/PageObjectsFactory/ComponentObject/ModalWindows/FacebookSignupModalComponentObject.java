@@ -33,8 +33,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 	}
 
 	public void acceptWikiaAppPolicy() {
-		//if policies are already accepted
-		//give facebook popup window time to disappear
+		// If policies are already accepted, give facebook popup window time to disappear
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -55,7 +54,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 			waitForElementByElement(appTermsConfirmButton);
 			appTermsConfirmButton.click();
 			PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
-			//Switch back to original browser (first window)
+			// Switch back to original browser (first window)
 			driver.switchTo().window(winHandleBefore);
 		}
 		else {
