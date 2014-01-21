@@ -38,7 +38,11 @@ public class HomePageObject extends WikiBasePageObject {
 	private WebElement hubIndicator;
 	@FindBy(css=".preview-pane a.goVisit")
 	private List<WebElement> visualizationWikis;
-
+	@FindBy(css="section.grid-1 nav")
+	private WebElement languageButton;
+	By languageSelector = By.cssSelector(".wikia-menu-button li > a");
+	By languageButtonSelector = By.cssSelector("section.grid-1 nav");
+	
 	public HomePageObject(WebDriver driver)
 	{
 		super(driver);
@@ -113,5 +117,36 @@ public class HomePageObject extends WikiBasePageObject {
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.Video_Games.toString()), slotDesiredSetup.get(HubName.Video_Games.toString()));
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.Entertainment.toString()), slotDesiredSetup.get(HubName.Entertainment.toString()));
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.Lifestyle.toString()), slotDesiredSetup.get(HubName.Lifestyle.toString()));
+	}
+	
+	public HomePageObject selectLanguage(int index) {
+		languageButton.click();
+		List<WebElement> languagesList = driver.findElements(languageSelector);
+		languagesList.get(index).click();;
+		return new HomePageObject(driver);
+	}
+	
+	public void verifyLanguageButton() {
+		waitForElementByBy(languageButtonSelector);
+	}
+	
+	public String getLanguageURL(int index) {
+		List<WebElement> languagesList = driver.findElements(languageSelector);
+		return languagesList.get(index).getAttribute("href");
+	}
+	
+	public int getNumOfLanguages() {
+		List<WebElement> languagesList = driver.findElements(languageSelector);
+		return languagesList.size();
+	}
+	public void goToLanguagePages() {
+		int numOfLanguages = getNumOfLanguages();
+		for (int i=0; i<numOfLanguages; i++) {
+			String languageURL = getLanguageURL(i)+"Wikia";
+			selectLanguage(i);
+			verifyLanguageButton();
+			verifyURL(languageURL);
+			navigateBack();
+		}
 	}
 }
