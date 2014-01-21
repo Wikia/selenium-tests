@@ -14,6 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileSpecialUse
  * 1. Verify that user is able to login successfully using standard login
  * 2. Verify that user is not logged in when he is using correct login and incorrect password
  * 3. Verify that user is not logged in when he is using incorrect login and incorrect password
+ * 3. Verify that user is not logged in when he is using correct login and empty password
  * 4. Verify that user is able to login successfully using FB login
  */
 public class MobileLoginTests extends NewTestTemplate{
@@ -51,7 +52,7 @@ public class MobileLoginTests extends NewTestTemplate{
 	}
 
 	@Test(groups={"MobileLogin_004", "MobileLogin", "Mobile"})
-	public void MobileLogin_004_failedLoginEmptyPassword_MOB-760() {
+	public void MobileLogin_004_failedLoginEmptyPassword_MOB_760() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();

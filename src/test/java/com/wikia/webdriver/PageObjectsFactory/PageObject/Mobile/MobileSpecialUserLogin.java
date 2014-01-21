@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.MobilePageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 
 public class MobileSpecialUserLogin extends MobileBasePageObject {
@@ -20,7 +21,7 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
 	public void verifyWrongPasswordErrorMessage() {
 		waitForElementByElement(errorMessage);
 		Assertion.assertEquals(
-				"Oops, wrong password. Make sure caps lock is off and try again.",
+				MobilePageContent.loginWrongPasswordErrorMessage,
 				errorMessage.getText()
 		);
 	}
@@ -28,7 +29,7 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
 	public void verifyWrongLoginErrorMessage() {
 		waitForElementByElement(errorMessage);
 		Assertion.assertEquals(
-				"Hm, we don't recognize this name. Don't forget usernames are case sensitive.",
+				MobilePageContent.loginWrongLoginErrorMessage,
 				errorMessage.getText()
 		);
 	}
@@ -36,7 +37,7 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
 	public void verifyEmptyPasswordErrorMessage() {
 		waitForElementByElement(errorMessage);
 		Assertion.assertEquals(
-				"Oops, please fill in the password field.",
+				MobilePageContent.loginEmptyPasswordErrorMessage,
 				errorMessage.getText()
 		);
 	}
