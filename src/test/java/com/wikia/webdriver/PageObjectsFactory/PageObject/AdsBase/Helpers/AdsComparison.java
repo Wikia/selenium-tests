@@ -40,11 +40,11 @@ public class AdsComparison {
 		// Example selector:
 		// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
 		js.executeScript(
-			"var iframe = arguments[0] + ' iframe:visible:first, ';"
-			+ "var object = arguments[0] + ' object:visible:first, ';"
-			+ "var img = arguments[0] + ' img:visible:first';"
-			+ "var element = $(iframe + object + img)[0];"
-			+ "if (element) element.style['visibility'] = 'hidden';",
+			"var iframes = arguments[0] + ' iframe:visible, ';"
+			+ "var objects = arguments[0] + ' object:visible, ';"
+			+ "var imgs = arguments[0] + ' img:visible';"
+			+ "var elements = $(iframes + objects + imgs);"
+			+ "for (var i=0; i < elements.length; i++) { elements[i].style.visibility = 'hidden'; }",
 			slotSelector
 		);
 		PageObjectLogging.log(

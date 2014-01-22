@@ -73,6 +73,7 @@ public class AdsContent {
 		slotsSelectors.put(floatingMedrec, "#INCONTENT_BOXAD_1");
 		slotsSelectors.put(prefooterLeft, "#PREFOOTER_LEFT_BOXAD");
 		slotsSelectors.put(prefooterRight, "#PREFOOTER_RIGHT_BOXAD");
+		slotsSelectors.put(wikiaBar, "#WIKIA_BAR_BOXAD_1");
 		slotsSelectors.put("AdsInContent", "#WikiaAdInContentPlaceHolder");
 		slotsSelectors.put("Prefooters", "#WikiaArticleBottomAd");
 	}
