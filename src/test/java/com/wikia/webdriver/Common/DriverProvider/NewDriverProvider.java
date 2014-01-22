@@ -179,6 +179,23 @@ public class NewDriverProvider {
 			
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
 		}
+		
+		else if (OSName.contains("MAC")) {
+			
+			chromeBinaryName = "chromedriver";
+
+			File chromeBinary = new File (
+				"." + File.separator
+				+ "src" + File.separator
+				+ "test" + File.separator
+				+ "resources" + File.separator
+				+ "ChromeDriver" + File.separator
+				+ "ChromeDriver_OSX" + File.separator
+				+ chromeBinaryName
+			);
+			
+			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
+		}
 
 
 		if (browserName.equals("CHROMEMOBILE")) {
