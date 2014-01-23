@@ -43,6 +43,7 @@ public class HomePageObject extends WikiBasePageObject {
 	@FindBy(css="section.grid-1 nav")
 	private WebElement languageButton;
 	
+	//These Bys are being used to prevent stale browser exception
 	private By languageSelector = By.cssSelector(".wikia-menu-button li > a");
 	private By languageButtonSelector = By.cssSelector("section.grid-1 nav");
 	
@@ -130,6 +131,7 @@ public class HomePageObject extends WikiBasePageObject {
 		List<WebElement> languagesList = driver.findElements(languageSelector);
 		return languagesList.size();
 	}
+	
 	public void verifyLanguageDropdownURLs() {
 		int numOfLanguages = getNumOfLanguages();
 		for (int i=0; i<numOfLanguages; i++) {

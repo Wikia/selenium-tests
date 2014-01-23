@@ -94,7 +94,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	
 	@Test(groups = { "HubsTests011", "Hubs"})
 	/**
-	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
+	 * Verify that each language drop the down drop goes to the correct page
 	 */
 	public void HubsTest004_VerifyLanguagesSelection() {
 		HomePageObject home = new HomePageObject(driver);
