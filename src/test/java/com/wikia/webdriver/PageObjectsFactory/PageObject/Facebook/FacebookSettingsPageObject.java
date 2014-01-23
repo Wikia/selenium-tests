@@ -66,8 +66,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 			waitForElementByElement(settingsList);
 			Assert.assertFalse(isAppPresent(appID));
 			PageObjectLogging.log("removeApp", "App with id "+appID+" removed", true);
-		}
-		else {
+		} else {
 			PageObjectLogging.log("removeApp", "App with id "+appID+" not found", true);
 		}
 	}
