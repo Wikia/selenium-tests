@@ -4,6 +4,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +31,8 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 	@FindBy(css = "#app-settings-page .fbApplicationsList li")
 	private List<WebElement> applicationList;
 
+	String removeAppSelector = "#application-li-%appID% .uiCloseButtonSmall";
+
 	public FacebookSettingsPageObject(WebDriver driver) {
 		super(driver);
 	}
@@ -45,10 +48,15 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 	}
 
 	/**
-	 * This method removes Wikia App from facebook Apps.
+	 * This method removes App from facebook Apps, based on its ID.
 	 */
-	public void removeWikiaApp() {
-		if (isWikiaAppPresent()) {
+	public void removeApp(String appID) {
+		if (isAppPresent(appID)) {
+			WebElement wikiAppRemoveButton = driver.findElement(
+					By.cssSelector(
+							removeAppSelector.replace("%appID%", appID)
+							)
+					);
 			waitForElementByElement(wikiAppRemoveButton);
 			wikiAppRemoveButton.click();
 			waitForElementByElement(removeButton);
@@ -56,24 +64,24 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 			waitForElementNotVisibleByElement(removeAppConfirmationModal);
 			waitForElementNotVisibleByElement(wikiAppRemoveButton);
 			waitForElementByElement(settingsList);
-			Assert.assertFalse(isWikiaAppPresent());
-			PageObjectLogging.log("removeWikiaApp", "Wikia app removed", true);
+			Assert.assertFalse(isAppPresent(appID));
+			PageObjectLogging.log("removeApp", "App with id "+appID+" removed", true);
 		}
 		else {
-			PageObjectLogging.log("removeWikiaApp", "Wikia app not found", true);
+			PageObjectLogging.log("removeApp", "App with id "+appID+" not found", true);
 		}
 	}
 
 	/**
-	 * This method verifies if Wikia App is present on facebook apps list.
-	 * It searches for uniqe Wikia App id, defined in facebookWikiaAppID field.
+	 * This method verifies if App is present on facebook apps list.
+	 * It searches for uniqe App id.
 	 */
-	private boolean isWikiaAppPresent() {
+	private boolean isAppPresent(String appID) {
 		boolean isPresent = false;
 		if (!applicationList.isEmpty()) {
 			for (WebElement elem : applicationList) {
 				String elemId = elem.getAttribute("id");
-				if (elemId.contains(URLsContent.facebookWikiaAppID)) {
+				if (elemId.contains(appID)) {
 					isPresent = true;
 				}
 			}

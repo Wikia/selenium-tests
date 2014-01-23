@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.FacebookTests;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -22,7 +23,7 @@ public class FacebookTests extends NewTestTemplate{
 	 * 3. Remove Wikia App
 	 */
 	@Test(groups = {"Facebook_001", "Facebook"})
-	public void Facebook_001_removeWikiaApp() {
+	public void Facebook_001_removeWikiaApps() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		FacebookMainPageObject fbLogin = base.openFacebookMainPage();
 		FacebookUserPageObject userFB;
@@ -30,6 +31,7 @@ public class FacebookTests extends NewTestTemplate{
 		userFB.verifyPageLogo();
 		FacebookSettingsPageObject settingsFB = userFB.fbOpenSettings();
 		settingsFB.openApps();
-		settingsFB.removeWikiaApp();
+		settingsFB.removeApp(URLsContent.facebookWikiaAppID);
+		settingsFB.removeApp(URLsContent.facebookWikiaDevAppID);
 	}
 }
