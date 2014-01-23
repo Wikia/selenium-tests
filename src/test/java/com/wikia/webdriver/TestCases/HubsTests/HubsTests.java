@@ -112,7 +112,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	
 	@Test(groups = { "HubsTests005", "Hubs", "new" })
 	/**
-	 * Verify each of the language button would go to each of the language's homepage
+	 * Verify that each language drop down  goes to the correct page
 	 */
 	public void HubsTest005_VerifyLanguagesSelection() {
 		HomePageObject home = new HomePageObject(driver);
