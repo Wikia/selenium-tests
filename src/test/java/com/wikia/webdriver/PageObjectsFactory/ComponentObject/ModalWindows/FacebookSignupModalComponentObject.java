@@ -56,8 +56,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 			PageObjectLogging.log("acceptWikiaAppPolicy", "confirmed wikia apps posting policy", true);
 			// Switch back to original browser (first window)
 			driver.switchTo().window(winHandleBefore);
-		}
-		else {
+		} else {
 			PageObjectLogging.log("acceptWikiaAppPolicy", "wikia apps policies allready accepted", true);
 		}
 	}
