@@ -146,9 +146,8 @@ public class NewDriverProvider {
 	private static EventFiringWebDriver getChromeInstance() {
 		String chromeBinaryName;
 		String OSName = System.getProperty("os.name").toUpperCase();
-		if (OSName.contains("WINDOWS")) {
-//		chromeBinaryName = (OSName.contains("MAC")) ? "chromedriver_OSX" : "chromedriver.exe";
-		chromeBinaryName="chromedriver.exe";
+		
+		chromeBinaryName = (OSName.contains("MAC")) ? "chromedriver" : "chromedriver.exe";
 
 		File chromeBinary = new File (
 			"." + File.separator
@@ -156,47 +155,10 @@ public class NewDriverProvider {
 			+ "test" + File.separator
 			+ "resources" + File.separator
 			+ "ChromeDriver" + File.separator
-			+ "ChromeDriver_OSX" + File.separator
 			+ chromeBinaryName
 		);
 
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
-		}
-		
-		else if (OSName.contains("MAC")) {
-			
-			chromeBinaryName = "chromedriver";
-
-			File chromeBinary = new File (
-				"." + File.separator
-				+ "src" + File.separator
-				+ "test" + File.separator
-				+ "resources" + File.separator
-				+ "ChromeDriver" + File.separator
-//				+ "ChromeDriver_OSX" + File.separator
-				+ chromeBinaryName
-			);
-			
-			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
-		}
-		
-		else if (OSName.contains("MAC")) {
-			
-			chromeBinaryName = "chromedriver";
-
-			File chromeBinary = new File (
-				"." + File.separator
-				+ "src" + File.separator
-				+ "test" + File.separator
-				+ "resources" + File.separator
-				+ "ChromeDriver" + File.separator
-				+ "ChromeDriver_OSX" + File.separator
-				+ chromeBinaryName
-			);
-			
-			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
-		}
-
 
 		if (browserName.equals("CHROMEMOBILE")) {
 			ChromeOptions options = new ChromeOptions();
