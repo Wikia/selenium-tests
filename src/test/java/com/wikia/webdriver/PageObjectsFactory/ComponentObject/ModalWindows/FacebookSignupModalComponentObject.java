@@ -16,7 +16,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
 	@FindBy(css = "button[name='__CONFIRM__']")
 	private WebElement appTermsConfirmButton;
-	@FindBy(css = "#u_1_2 span")
+	@FindBy(css = ".uiButtonText")
 	private WebElement postingPolicyWindowIndicator;
 	@FindBy(css = "#FacebookSignUp input[name='username']")
 	private WebElement usernameField;
