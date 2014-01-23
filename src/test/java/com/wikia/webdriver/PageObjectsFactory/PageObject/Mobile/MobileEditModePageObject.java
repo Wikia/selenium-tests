@@ -4,7 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class MobileEditModePageObject extends MobileBasePageObject {
 
@@ -12,7 +15,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="textarea")
+	@FindBy(css="#wpTextbox1")
 	private WebElement textArea;
 	@FindBy(css="#wkMainCntHdr > h1")
 	private WebElement selectedPageHeader;
@@ -37,5 +40,34 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	public MobileEditPreviewPageObject clickPreview() {
 		editPreviewButton.click();
 		return new MobileEditPreviewPageObject(driver);
+	}
+	
+	public String getEditArticleName() {
+		String header = getHeader();
+		return header.substring(header.indexOf(' ') + 1);
+	}
+	
+	public String getModeName() {
+		String header = getHeader();
+		return header.substring(0, header.indexOf(' '));
+	}
+	
+	public void verifyEditArticleName() {
+		String url = driver.getCurrentUrl();
+		String urlArticleName =
+			url.substring(url.indexOf(PageContent.articleNamePrefix), url.indexOf('?'));
+		Assertion.assertEquals(urlArticleName, getEditArticleName());
+		PageObjectLogging.log("verifyModeName", 
+				"verifying the article shows '" + urlArticleName + "'", true);
+	}
+	
+	public void verifyModeName() {
+		Assertion.assertEquals("Editing", getModeName());
+		PageObjectLogging.log("verifyModeName", 
+				"verifying the header shows 'Editing'", true);
+	}
+	
+	public void enterText(String text) {
+		textArea.sendKeys(text);
 	}
 }

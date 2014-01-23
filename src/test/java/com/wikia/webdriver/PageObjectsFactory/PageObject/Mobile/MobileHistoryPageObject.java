@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class MobileHistoryPageObject extends MobileBasePageObject {
 
@@ -36,7 +37,10 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 	public MobileEditModePageObject goToNewPageWithEdit(String URL) {
 //		if (isNewPage()) {
 			driver.get(URL);
+			PageObjectLogging.log("goToNewPageWithEdit", 
+					"going to edit mobile edit mode", true);
 			return new MobileEditModePageObject(driver);
+			
 //		} else {
 //			return null;
 //		}
