@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -75,6 +76,8 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	private List<WebElement> addSuggestionButton;
 	@FindBy(css="#wkMainCntHdr > h1")
 	protected WebElement selectedPageHeader;
+	@FindBy(css="#wkMainCntHdr > a")
+	private WebElement editButton;
 
 	public void triggerLoginDropDown() {
 		waitForElementByElement(loginDropDownTrigger);
@@ -270,5 +273,15 @@ public class MobileBasePageObject extends WikiBasePageObject {
 		}
 		waitForElementByElement(loginDropDownTrigger);
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
+	}
+	
+	public MobileEditModePageObject clickEdit() {
+		editButton.click();
+		return new MobileEditModePageObject(driver);
+	}
+	
+	public MobileHistoryPageObject goToRandomMobileHistoryPage(String URL) {
+		driver.get(URL);
+		return new MobileHistoryPageObject(driver);
 	}
 }

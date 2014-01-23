@@ -73,6 +73,8 @@ public class URLsContent {
 	public static final String gameGuidesControllerQS = "controller=GameGuides";
 	public static final String renderFullQS = "method=renderFullPage";
 	public static final String pageName = "page=";
+	public static final String mobileEditPage = "action=edit";
+	public static final String mobileHistoryPage = "action=history";
 
 	//Mediawiki Urls
 	public static final String mediaWikiCss = "MediaWiki:Wikia.css";

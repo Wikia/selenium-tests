@@ -6,9 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 
-public class MobileEditModePageObject extends MobileBasePageObject {
+public class MobileEditPreviewPageObject extends MobileBasePageObject {
 
-	public MobileEditModePageObject(WebDriver driver) {
+	public MobileEditPreviewPageObject(WebDriver driver) {
 		super(driver);
 	}
 
@@ -16,26 +16,28 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	private WebElement textArea;
 	@FindBy(css="#wkMainCntHdr > h1")
 	private WebElement selectedPageHeader;
-	@FindBy(css="#wkMobileCancel")
-	private WebElement editCancelButton;
-	@FindBy(css="#wkPreview")
-	private WebElement editPreviewButton;
+	@FindBy(css="#wkContinueEditing")
+	private WebElement keepEditingButton;
+	@FindBy(css="#wkSave")
+	private WebElement publishButton;
+	@FindBy(css="#wkSummary")
+	private WebElement summaryTextBox;
 
 	public void verifyEditModeContent(String text) {
 		Assertion.assertStringContains(textArea.getText(), text);
 	}
 	
-	public MobileArticlePageObject clickCancel() {
-		editCancelButton.click();
-		return new MobileArticlePageObject(driver);
+	public MobileEditModePageObject clickKeepEditing() {
+		keepEditingButton.click();
+		return new MobileEditModePageObject(driver);
 	}
 	
 	public String getHeader(){
 		return selectedPageHeader.getText();
 	}
 	
-	public MobileEditPreviewPageObject clickPreview() {
-		editPreviewButton.click();
-		return new MobileEditPreviewPageObject(driver);
+	public MobileArticlePageObject clickPublish() {
+		publishButton.click();
+		return new MobileArticlePageObject(driver);
 	}
 }
