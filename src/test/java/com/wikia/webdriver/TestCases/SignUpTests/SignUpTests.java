@@ -177,7 +177,7 @@ public class SignUpTests extends NewTestTemplate {
 	 * Jira ticket: CONN-78
 	 *
 	 * pre-conditions:
-	 * Facebook_001 test removes Wikia App from Facebook
+	 * Facebook_001 test removes Wikia and Wikia Development App from Facebook
 	 *
 	 * Steps:
 	 * 1. Log in to Facebook

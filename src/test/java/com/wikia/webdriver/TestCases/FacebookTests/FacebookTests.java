@@ -20,7 +20,7 @@ public class FacebookTests extends NewTestTemplate{
 	 * Steps:
 	 * 1. Log in to facebook
 	 * 2. Open Facebook settings
-	 * 3. Remove Wikia App
+	 * 3. Remove Wikia and Wikia Development App
 	 */
 	@Test(groups = {"Facebook_001", "Facebook"})
 	public void Facebook_001_removeWikiaApps() {
