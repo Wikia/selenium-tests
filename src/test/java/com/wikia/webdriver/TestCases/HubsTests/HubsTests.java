@@ -60,7 +60,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	}
 
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests008", "Hubs"})
+	@Test(dataProvider = "provideHub", groups = { "HubsTests002", "Hubs"})
 	/**
 	 *  verify that from community module has its elements
 	 */
@@ -73,7 +73,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		hub.verifyFromModuleHasQuatation();
 	}
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests011", "Hubs"})
+	@Test(dataProvider = "provideHub", groups = { "HubsTests003", "Hubs"})
 	/**
 	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
 	 */
