@@ -51,7 +51,7 @@ public class MobileLoginTests extends NewTestTemplate {
 		login.verifyWrongLoginErrorMessage();
 	}
 
-	@Test(groups={"MobileLogin_004", "MobileLogin", "Mobile"})
+	@Test(groups={"MobileLogin_004", "MobileLogin", "Mobile"}, enabled = false)
 	public void MobileLogin_004_failedLoginEmptyPassword_MOB_760() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);

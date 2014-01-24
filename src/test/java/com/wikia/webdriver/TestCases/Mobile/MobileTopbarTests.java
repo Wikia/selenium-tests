@@ -44,7 +44,7 @@ public class MobileTopbarTests extends NewTestTemplate{
 		topbar.verifyPositionDifferent(startPosition);
 	}
 
-	@Test(groups={"MobileTopbar_004", "MobileTopbar", "Mobile"})
+	@Test(groups={"MobileTopbar_004", "MobileTopbar", "Mobile"}, enabled = false)
 	public void TopbarTests_004_menuPagination_MOB_676() {
 		MobileArticlePageObject topbar = new MobileArticlePageObject(driver);
 		topbar.openTopbarPage(wikiURL);
