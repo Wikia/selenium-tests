@@ -22,6 +22,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
@@ -56,6 +57,8 @@ public class SignUpPageObject extends WikiBasePageObject {
 	private WebElement blurryWordHidden;
 	@FindBy(css = "input.big")
 	private WebElement signupButton;
+	@FindBy(css = "#mw-content-text .wikia-button-facebook")
+	private WebElement facebookSignUpButton;
 
 	private By errorMsgBy = By.className("error-msg");
 
@@ -134,6 +137,14 @@ public class SignUpPageObject extends WikiBasePageObject {
 				"captcha typed into captcha field",
 				true
 		);
+	}
+
+	public FacebookSignupModalComponentObject clickFacebookSignUp() {
+		String winHandleBefore = driver.getWindowHandle();
+		waitForElementByElement(facebookSignUpButton);
+		facebookSignUpButton.click();
+		PageObjectLogging.log("clickFacebookSignUp", "clicked on sign up with facebok button", true);
+		return new FacebookSignupModalComponentObject(driver, winHandleBefore);
 	}
 
 	public AlmostTherePageObject submit(String email, String password) {

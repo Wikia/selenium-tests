@@ -131,6 +131,13 @@ public class URLsContent {
 	public static String redditDomain = "reddit.com";
 	public static String stumpleUponDomain = "stumbleupon.com";
 
+	//Facebook
+	public static String facebookMainPage = "http://www.facebook.com/";
+	public static String facebookSettingsPage = "http://www.facebook.com/settings";
+	public static String facebookSettingsAppTab = "tab=applications";
+	public static String facebookWikiaAppID = "112328095453510";
+	public static String facebookWikiaDevAppID = "116800565037587";
+
 	//avatars
 	public static String avatarGeneric = "150px-Avatar.jpg";
 }

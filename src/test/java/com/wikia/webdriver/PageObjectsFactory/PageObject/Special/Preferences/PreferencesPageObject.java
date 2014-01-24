@@ -17,6 +17,10 @@ public class PreferencesPageObject extends WikiBasePageObject{
 		super(driver);
 	}
 
+	@FindBy(css="#fbConnectDisconnect")
+	private WebElement facebookDisconnect;
+	@FindBy(css="#fbDisconnectDone")
+	private WebElement disconnectDone;
 	@FindBy(css="#preftoc li")
 	private List<WebElement> tabs;
 	@FindBy(css="#mw-htmlform-email-me-v2 td.mw-input")
@@ -60,5 +64,12 @@ public class PreferencesPageObject extends WikiBasePageObject{
 			PageObjectLogging.log("verifyEmailSection", "verifying "+elem.getText(), true);
 			Assertion.assertEquals("true", elem.findElement(By.cssSelector("input")).getAttribute("checked"));
 		}
+	}
+
+	public void disconnectFromFacebook() {
+		waitForElementByElement(facebookDisconnect);
+		facebookDisconnect.click();
+		waitForElementByElement(disconnectDone);
+		PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook", true);
 	}
 }

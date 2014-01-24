@@ -42,6 +42,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HistoryPage.HistoryPagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
@@ -977,5 +978,10 @@ public class WikiBasePageObject extends BasePageObject {
 	public HubBasePageObject openHubByUrl(HubName hub, String wikiCorporateURL) {
 		getUrl(wikiCorporateURL + hub.name());
 		return new HubBasePageObject(driver);
+	}	
+
+	public FacebookMainPageObject openFacebookMainPage() {
+		getUrl(URLsContent.facebookMainPage);
+		return new FacebookMainPageObject(driver);
 	}
 }

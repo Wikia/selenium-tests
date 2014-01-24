@@ -98,6 +98,7 @@
 			<class name="com.wikia.webdriver.TestCases.UserProfileTests.UserAvatarTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorFormatting"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStyles"/>
+			<class name="com.wikia.webdriver.TestCases.FacebookTests.FacebookTests"/>
 		</classes>
 	</test>
 </suite>
