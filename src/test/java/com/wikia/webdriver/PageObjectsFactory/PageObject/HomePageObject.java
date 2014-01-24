@@ -42,11 +42,13 @@ public class HomePageObject extends WikiBasePageObject {
 	private List<WebElement> visualizationWikis;
 	@FindBy(css="section.grid-1 nav")
 	private WebElement languageButton;
-	
+
 	//These Bys are being used to prevent stale browser exception
-	private By languageSelector = By.cssSelector(".wikia-menu-button li > a");
-	private By languageButtonSelector = By.cssSelector("section.grid-1 nav");
-	
+	private By languageSelectorBy = By.cssSelector(".wikia-menu-button li > a");
+	private By languageButtonSelectorBy = By.cssSelector("section.grid-1 nav");
+
+	private String languageDropdownString = "nav.wikia-menu-button";
+
 	public HomePageObject(WebDriver driver)
 	{
 		super(driver);
@@ -109,33 +111,36 @@ public class HomePageObject extends WikiBasePageObject {
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.Entertainment.toString()), slotDesiredSetup.get(HubName.Entertainment.toString()));
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.Lifestyle.toString()), slotDesiredSetup.get(HubName.Lifestyle.toString()));
 	}
-	
+
 	public HomePageObject selectLanguage(int index) {
 		scrollAndClick(languageButton);
-		List<WebElement> languagesList = driver.findElements(languageSelector);
-		languagesList.get(index).click();;
+		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
+		String languageClass = languagesList.get(index).getAttribute("class");
+		languagesList.get(index).click();
+		waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
 		PageObjectLogging.log("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
 		return new HomePageObject(driver);
 	}
-	
+
 	public void verifyLanguageButton() {
-		waitForElementByBy(languageButtonSelector);
+		waitForElementByBy(languageButtonSelectorBy);
 	}
-	
+
 	public String getLanguageURL(int index) {
-		List<WebElement> languagesList = driver.findElements(languageSelector);
+		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		return languagesList.get(index).getAttribute("href");
 	}
-	
+
 	public int getNumOfLanguages() {
-		List<WebElement> languagesList = driver.findElements(languageSelector);
+		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		return languagesList.size();
 	}
-	
+
 	public void verifyLanguageDropdownURLs() {
 		int numOfLanguages = getNumOfLanguages();
 		HomePageObject newHome;
 		for (int i=0; i<numOfLanguages; i++) {
+			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
 			String languageURL = getLanguageURL(i) + URLsContent.wikiaDir;
 			newHome = selectLanguage(i);
 			newHome.verifyLanguageButton();
