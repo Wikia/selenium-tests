@@ -111,7 +111,7 @@ public class HomePageObject extends WikiBasePageObject {
 	}
 	
 	public HomePageObject selectLanguage(int index) {
-		languageButton.click();
+		scrollAndClick(languageButton);
 		List<WebElement> languagesList = driver.findElements(languageSelector);
 		languagesList.get(index).click();;
 		PageObjectLogging.log("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
