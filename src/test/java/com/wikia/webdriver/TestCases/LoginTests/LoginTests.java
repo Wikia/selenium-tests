@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.wikia.webdriver.TestCases.LoginTests;
 
 import org.testng.annotations.Test;
