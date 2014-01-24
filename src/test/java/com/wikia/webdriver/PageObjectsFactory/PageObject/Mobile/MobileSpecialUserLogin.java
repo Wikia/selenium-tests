@@ -39,6 +39,4 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
 				errorMessage.getText()
 		);
 	}
-
-
 }
