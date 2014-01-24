@@ -134,12 +134,13 @@ public class HomePageObject extends WikiBasePageObject {
 	
 	public void verifyLanguageDropdownURLs() {
 		int numOfLanguages = getNumOfLanguages();
+		HomePageObject newHome;
 		for (int i=0; i<numOfLanguages; i++) {
 			String languageURL = getLanguageURL(i) + URLsContent.wikiaDir;
-			HomePageObject newHome = selectLanguage(i);
+			newHome = selectLanguage(i);
 			newHome.verifyLanguageButton();
 			newHome.verifyURL(languageURL);
-			navigateBack();
+			newHome.navigateBack();
 		}
 	}
 }
