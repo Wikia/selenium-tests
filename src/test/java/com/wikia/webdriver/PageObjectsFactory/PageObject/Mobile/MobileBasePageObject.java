@@ -124,7 +124,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 		typeInUserNameAndPassword(username, password);
 		loginButton.click();
 		waitForElementByElement(avatar);
-		PageObjectLogging.log("login", "user logged in successfully", true,
+		PageObjectLogging.log("loginDropDown", "user logged in successfully", true,
 				driver);
 	}
 
@@ -132,7 +132,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 		triggerLoginDropDown();
 		typeInUserNameAndPassword(username, password);
 		loginButton.click();
-		PageObjectLogging.log("login", "user logged in successfully", true,
+		PageObjectLogging.log("loginFailedDropDown", "user logged in successfully", true,
 				driver);
 		return new MobileSpecialUserLogin(driver);
 	}

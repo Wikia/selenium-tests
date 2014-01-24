@@ -17,7 +17,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileSpecialUse
  * 3. Verify that user is not logged in when he is using correct login and empty password
  * 4. Verify that user is able to login successfully using FB login
  */
-public class MobileLoginTests extends NewTestTemplate{
+public class MobileLoginTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
@@ -36,8 +36,8 @@ public class MobileLoginTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
-		System.out.println(credentials.userName12);
-		MobileSpecialUserLogin login = mobile.loginFailedDropDown(credentials.userName12, mobile.getTimeStamp());
+		MobileSpecialUserLogin login =
+				mobile.loginFailedDropDown(credentials.userName12, mobile.getTimeStamp());
 		login.verifyWrongPasswordErrorMessage();
 	}
 
@@ -46,8 +46,8 @@ public class MobileLoginTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
-		System.out.println(credentials.userName12);
-		MobileSpecialUserLogin login = mobile.loginFailedDropDown(mobile.getTimeStamp(), mobile.getTimeStamp());
+		MobileSpecialUserLogin login =
+				mobile.loginFailedDropDown(mobile.getTimeStamp(), mobile.getTimeStamp());
 		login.verifyWrongLoginErrorMessage();
 	}
 
@@ -56,7 +56,6 @@ public class MobileLoginTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.openRandomPage();
-		System.out.println(credentials.userName12);
 		MobileSpecialUserLogin login = mobile.loginFailedDropDown(credentials.userName12, "");
 		login.verifyEmptyPasswordErrorMessage();
 	}

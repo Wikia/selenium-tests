@@ -3,7 +3,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.MobilePageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -15,7 +14,6 @@ public class MobileSpecialUserLogin extends MobileBasePageObject {
 
 	public MobileSpecialUserLogin(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
 	public void verifyWrongPasswordErrorMessage() {
