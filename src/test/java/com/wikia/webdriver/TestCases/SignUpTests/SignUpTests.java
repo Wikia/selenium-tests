@@ -178,7 +178,8 @@ public class SignUpTests extends NewTestTemplate {
 	 *
 	 * pre-conditions:
 	 * Facebook_001 test removes Wikia and Wikia Development App from Facebook
-	 *
+	 * Facebokk_001 test stored in TestCases/FacebookTests/FacebookTests.java path
+	 * 
 	 * Steps:
 	 * 1. Log in to Facebook
 	 * 2. Open finish signup with facebook modal
