@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -63,7 +64,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 	
 	public String getSummaryText() {
-		waitForElementById("wkSummary");
+		waitForElementByBy(By.cssSelector("#wkSummary"));
 		return summaryTextBox.getAttribute("value");
 	}
 	
