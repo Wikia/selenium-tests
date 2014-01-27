@@ -21,12 +21,12 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	CustomizedToolbarComponentObject toolbar;
 
 	//search queries
-	String searchQueryEdit = "e";
+	String searchQueryPreferences = "p";
 	String searchQueryDoubleRedirects = "Do";
 	String searchQueryUploadPhoto = "Up";
 
 	//tools
-	String toolEdit = "Edit";
+	String toolPreferences = "Preferences";
 	String toolDoubleRedirects = "Double redirects";
 	String toolUploadPhoto = "Upload photo";
 	String toolMore = "more…";
@@ -54,11 +54,11 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	public void CustomizeToolbar_001_adding() {
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.searchTool(searchQueryEdit);
-		toolbar.clickSearchSuggestion(toolEdit);
-		toolbar.verifyToolOnList(toolEdit);
+		toolbar.searchTool(searchQueryPreferences);
+		toolbar.clickSearchSuggestion(toolPreferences);
+		toolbar.verifyToolOnList(toolPreferences);
 		toolbar.clickSave();
-		toolbar.verifyToolOnToolbar(toolEdit);
+		toolbar.verifyToolOnToolbar(toolPreferences);
 	}
 
 	@Test(groups = { "CustomizeToolbar002", "Toolbar", "CustomizeToolbar" })
@@ -66,15 +66,15 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	public void CustomizeToolbar002_Editing() {
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.searchTool(searchQueryEdit);
-		toolbar.clickSearchSuggestion(toolEdit);
-		toolbar.verifyToolOnList(toolEdit);
-		toolbar.clickRename(toolEdit);
-		toolbar.typeNewName(toolEdit + editSuffix);
+		toolbar.searchTool(searchQueryPreferences);
+		toolbar.clickSearchSuggestion(toolPreferences);
+		toolbar.verifyToolOnList(toolPreferences);
+		toolbar.clickRename(toolPreferences);
+		toolbar.typeNewName(toolPreferences + editSuffix);
 		toolbar.clickSaveNewName();
-		toolbar.verifyToolOnList(toolEdit + editSuffix);
+		toolbar.verifyToolOnList(toolPreferences + editSuffix);
 		toolbar.clickSave();
-		toolbar.verifyToolOnToolbar(toolEdit + editSuffix);
+		toolbar.verifyToolOnToolbar(toolPreferences + editSuffix);
 	}
 
 	@Test(groups = { "CustomizeToolbar003", "Toolbar", "CustomizeToolbar" })
@@ -82,12 +82,12 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	public void CustomizeToolbar003_Deleteing() {
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.searchTool(searchQueryEdit);
-		toolbar.clickSearchSuggestion(toolEdit);
-		toolbar.verifyToolOnList(toolEdit);
-		toolbar.clickRemove(toolEdit);
+		toolbar.searchTool(searchQueryPreferences);
+		toolbar.clickSearchSuggestion(toolPreferences);
+		toolbar.verifyToolOnList(toolPreferences);
+		toolbar.clickRemove(toolPreferences);
 		toolbar.clickSave();
-		toolbar.verifyToolRemoved(toolEdit);
+		toolbar.verifyToolRemoved(toolPreferences);
 	}
 
 	@Test(groups = { "CustomizeToolbar004", "Toolbar", "CustomizeToolbar" })
@@ -143,11 +143,11 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	public void CustomizeToolbar007_MoreButton() {
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.addManyItems(toolEdit, 20);
+		toolbar.addManyItems(toolPreferences, 20);
 		toolbar.clickSave();
 		setWindowSize(800, 600, driver);
 		toolbar.verifyToolOnToolbar(toolMore);
 		toolbar.openMoreMenu();
-		toolbar.verifyToolInMoreTool(toolEdit);
+		toolbar.verifyToolInMoreTool(toolPreferences);
 	}
 }
