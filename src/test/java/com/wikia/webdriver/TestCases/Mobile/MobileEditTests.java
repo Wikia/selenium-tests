@@ -28,7 +28,7 @@ public class MobileEditTests extends NewTestTemplate{
 	public void MobileEdit_001_Edit() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
-		mobile.login(credentials.userName, credentials.password);
+		mobile.loginDropDown(credentials.userName, credentials.password);
 		String randomPageURL = wikiURL + URLsContent.wikiDir 
 				+ PageContent.articleNamePrefix + mobile.getTimeStamp();
 		String pageHistoryURL = urlBuilder.appendQueryStringToURL(
@@ -49,7 +49,7 @@ public class MobileEditTests extends NewTestTemplate{
 	public void MobileEdit_002_Edit() {	
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
-		mobile.login(credentials.userName, credentials.password);
+		mobile.loginDropDown(credentials.userName, credentials.password);
 		//go to a random page with ?action=history suffix
 		String randomPageURL = wikiURL + URLsContent.wikiDir 
 				+ PageContent.articleNamePrefix + mobile.getTimeStamp();
@@ -76,7 +76,7 @@ public class MobileEditTests extends NewTestTemplate{
 	public void MobileEdit_003_Edit() {	
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
-		mobile.login(credentials.userName, credentials.password);
+		mobile.loginDropDown(credentials.userName, credentials.password);
 		//go to a random page with ?action=history suffix
 		String articleName = PageContent.articleNamePrefix + mobile.getTimeStamp();
 		String randomPageURL = wikiURL + URLsContent.wikiDir + articleName;
