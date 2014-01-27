@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -64,7 +65,8 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 	
 	public String getSummaryText() {
-		waitForElementByBy(By.cssSelector("#wkSummary"));
+//		waitForElementByBy(By.cssSelector("#wkSummary"));
+		waitForValueToBePresentInElementsAttributeByCss("#wkSummary", "value", PageContent.summaryText);
 		return summaryTextBox.getAttribute("value");
 	}
 	
