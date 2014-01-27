@@ -147,18 +147,20 @@ public class NewDriverProvider {
 		String chromeBinaryName;
 		String OSName = System.getProperty("os.name").toUpperCase();
 		
-		chromeBinaryName = (OSName.contains("MAC")) ? "chromedriver" : "chromedriver.exe";
+		if (OSName.contains("WINDOWS")) {
+			chromeBinaryName = "chromedriver.exe";
 
-		File chromeBinary = new File (
-			"." + File.separator
-			+ "src" + File.separator
-			+ "test" + File.separator
-			+ "resources" + File.separator
-			+ "ChromeDriver" + File.separator
-			+ chromeBinaryName
-		);
+			File chromeBinary = new File (
+				"." + File.separator
+				+ "src" + File.separator
+				+ "test" + File.separator
+				+ "resources" + File.separator
+				+ "ChromeDriver" + File.separator
+				+ chromeBinaryName
+			);
 
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
+		}
 
 		if (browserName.equals("CHROMEMOBILE")) {
 			ChromeOptions options = new ChromeOptions();

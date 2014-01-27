@@ -103,5 +103,13 @@ public class PageContent {
 	public static String wikiSignUpBirthMonth = "11";
 	public static String wikiSignUpBirthYear = "1954";
 	public static final int MIN_AGE = 12;
+	
+	//mobile article
+	public static String editModeHeader = "Editing";
+	public static String previewHeader = "Preview";
+	public static String summaryText = "This is a sample summary text";
+	public static String historySummaryText = "(This is a sample summary text)";
+	public static String historyHeader = "Revision history of";
+	public static String mobileEditTag = "(Mobile)";
 
 }

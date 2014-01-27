@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class MobileEditPreviewPageObject extends MobileBasePageObject {
 
@@ -12,19 +13,27 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="textarea")
-	private WebElement textArea;
-	@FindBy(css="#wkMainCntHdr > h1")
-	private WebElement selectedPageHeader;
 	@FindBy(css="#wkContinueEditing")
 	private WebElement keepEditingButton;
 	@FindBy(css="#wkSave")
 	private WebElement publishButton;
 	@FindBy(css="#wkSummary")
 	private WebElement summaryTextBox;
+	@FindBy(css="#wkMdlCnt #mw-content-text > p")
+	private WebElement articleText;
+	@FindBy(css="#wkMdlTlBar > span")
+	private WebElement selectedPageHeader;
 
-	public void verifyEditModeContent(String text) {
-		Assertion.assertStringContains(textArea.getText(), text);
+	public void verifyEditModeContent(String targetText) {
+		Assertion.assertStringContains(targetText, getArticleText());
+		PageObjectLogging.log("verifyEditModeContent", 
+				"verifying the article shows " + targetText, true);
+	}
+	
+	public void verifyPreviewPageHeader(String targetText) {
+		Assertion.assertStringContains(targetText, getPageHeaderText());
+		PageObjectLogging.log("verifyPreviewPageHeader", 
+				"verifying the summary shows " + targetText, true);
 	}
 	
 	public MobileEditModePageObject clickKeepEditing() {
@@ -40,4 +49,27 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		publishButton.click();
 		return new MobileArticlePageObject(driver);
 	}
+	
+	public String getArticleText() {
+		return articleText.getText();
+	}
+	
+	public String getPageHeaderText() {
+		return selectedPageHeader.getText();
+	}
+	
+	public void enterSummaryText(String text) {
+		summaryTextBox.sendKeys(text);
+	}
+	
+	public String getSummaryText() {
+		return summaryTextBox.getAttribute("value");
+	}
+	
+	public void verifySummaryText(String targetText) {
+		Assertion.assertEquals(targetText, getSummaryText());
+		PageObjectLogging.log("verifySummaryText", 
+				"verifying the summary shows " + targetText, true);
+	}
+	
 }

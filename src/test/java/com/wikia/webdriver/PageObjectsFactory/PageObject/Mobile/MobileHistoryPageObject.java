@@ -24,9 +24,47 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 	private WebElement selectedPageHeader;
 	@FindBy(css="#mw-content-text")
 	private WebElement mainContentText;
+	@FindBy(css="#pagehistory > li.mw-tag-mobileedit")
+	private List<WebElement> editHistories;
+	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.mw-tag-markers")
+	private List<WebElement> editHistoriesDevice;
+	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.comment")
+	private List<WebElement> editHistoriesSummary;
 
-	public void verifyEditModeContent(String text) {
-		Assertion.assertStringContains(textArea.getText(), text);
+	public String getHeader(){
+		return selectedPageHeader.getText();
+	}
+	
+	public String getArticleName() {
+		String header = getHeader();
+		return header.substring(header.indexOf('"') + 1, header.length() - 1); 
+	}
+	
+	public String getModeName() {
+		String header = getHeader();
+		return header.substring(0, header.indexOf('"') - 1);
+	}
+	
+	public void verifyArticleName(String targetText) {
+		Assertion.assertStringContains(targetText, getArticleName());
+		PageObjectLogging.log("verifyArticleName", 
+				"verifying the article shows " + targetText, true);
+	}
+	
+	public void verifyHistoryPageHeader(String targetText) {
+		Assertion.assertStringContains(targetText, getModeName());
+		PageObjectLogging.log("verifyHistoryPageHeader", 
+				"verifying the summary shows " + targetText, true);
+	}
+	
+	public String getLastEditHistoryDevice() {
+		return editHistoriesDevice.get(0).getText();
+	}
+	
+	public void verifyLastEditHistoryDevice(String targetText) {
+		Assertion.assertStringContains(targetText, getLastEditHistoryDevice());
+		PageObjectLogging.log("verifyLastEditHistoryDevice", 
+				"verifying the last edit shows " + targetText, true);
 	}
 	
 //	public boolean isNewPage() {
@@ -44,6 +82,16 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 //		} else {
 //			return null;
 //		}
+	}
+
+	public void verifyLastEditHistorySummary(String targetText) {
+		Assertion.assertStringContains(targetText, getLastHistorySummary());
+		PageObjectLogging.log("verifyLastEditHistorySummary", 
+				"verifying the last edit summary shows " + targetText, true);	
+	}
+
+	private String getLastHistorySummary() {
+		return editHistoriesSummary.get(0).getText();
 	}
 
 }

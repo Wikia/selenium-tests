@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Mobile.TableOfContentsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 
 public class MobileArticlePageObject extends MobileBasePageObject{
 
@@ -358,6 +359,16 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 			"firts tabs are not the same"
 		);
 		PageObjectLogging.log("verifyMenu", "menu was veryfied", true);
+	}
+	
+	public MobileHistoryPageObject goToCurrentArticleHistoryPage() {
+		getUrl(
+				urlBuilder.appendQueryStringToURL(
+					driver.getCurrentUrl(),
+					URLsContent.mobileHistoryPage
+				)
+			);
+			return new MobileHistoryPageObject(driver);
 	}
 
 }

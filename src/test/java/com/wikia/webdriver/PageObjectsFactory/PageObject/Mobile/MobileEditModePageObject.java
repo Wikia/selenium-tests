@@ -24,10 +24,6 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	@FindBy(css="#wkPreview")
 	private WebElement editPreviewButton;
 
-	public void verifyEditModeContent(String text) {
-		Assertion.assertStringContains(textArea.getText(), text);
-	}
-	
 	public MobileArticlePageObject clickCancel() {
 		editCancelButton.click();
 		return new MobileArticlePageObject(driver);
@@ -62,12 +58,22 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 	
 	public void verifyModeName() {
-		Assertion.assertEquals("Editing", getModeName());
+		Assertion.assertEquals(PageContent.editModeHeader, getModeName());
 		PageObjectLogging.log("verifyModeName", 
-				"verifying the header shows 'Editing'", true);
+				"verifying the header shows '" + PageContent.editModeHeader + "'", true);
 	}
 	
-	public void enterText(String text) {
+	public void enterEditText(String text) {
 		textArea.sendKeys(text);
+	}
+	
+	public String getEditText() {
+		return textArea.getAttribute("value");
+	}
+	
+	public void verifyEditText(String targetText) {
+		Assertion.assertEquals(targetText, getEditText());
+		PageObjectLogging.log("verifyEditText", 
+				"verifying the summary shows " + targetText, true);
 	}
 }
