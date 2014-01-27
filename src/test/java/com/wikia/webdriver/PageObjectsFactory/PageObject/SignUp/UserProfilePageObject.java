@@ -47,9 +47,10 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	}
 
 	public BlogPageObject openBlogPage(int blogNumber) {
-		getUrl(blogPostList.get(blogNumber).getAttribute("href"));
+		String blogURL = blogPostList.get(blogNumber).getAttribute("href");
+		getUrl(blogURL);
 		PageObjectLogging.log("openBlogPage",
-				"blog post " + blogPostList.get(0).getText() + " opened",
+				"blog post " + blogURL + " opened",
 				true);
 		return new BlogPageObject(driver);
 	}
