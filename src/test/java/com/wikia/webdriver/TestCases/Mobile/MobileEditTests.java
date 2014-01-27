@@ -69,7 +69,7 @@ public class MobileEditTests extends NewTestTemplate{
 		mobilePreview.enterSummaryText(PageContent.summaryText);
 		MobileEditModePageObject continueMobileEdit = mobilePreview.clickKeepEditing();
 		continueMobileEdit.verifyEditText(PageContent.articleText);
-		MobileEditPreviewPageObject continueMobilePreview = mobileEdit.clickPreview();
+		MobileEditPreviewPageObject continueMobilePreview = continueMobileEdit.clickPreview();
 		continueMobilePreview.verifySummaryText(PageContent.summaryText);
 	}
 	@Test(groups={"MobileEdit_003", "MobileEdit", "Mobile"})
