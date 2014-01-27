@@ -29,6 +29,7 @@ public class NewTestTemplateCore {
 
 	protected WebDriver driver;
 	protected WebDriver driverFF;
+	protected UrlBuilder urlBuilder;
 	protected AbstractConfiguration config;
 	protected String wikiURL;
 	protected String wikiCorporateURL;
@@ -54,7 +55,7 @@ public class NewTestTemplateCore {
 	}
 
 	protected void prepareURLs() {
-		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+		urlBuilder = new UrlBuilder(config.getEnv());
 		wikiURL = urlBuilder.getUrlForWiki(config.getWikiName());
 		wikiCorporateURL = urlBuilder.getUrlForWiki("wikia");
 		printProperties();

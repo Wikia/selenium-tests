@@ -168,7 +168,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		);
 
 		AdsComparison adsComparison = new AdsComparison();
-		adsComparison.hideSlot(AdsContent.wikiaBar, driver);
+		adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.wikiaBar), driver);
 
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
