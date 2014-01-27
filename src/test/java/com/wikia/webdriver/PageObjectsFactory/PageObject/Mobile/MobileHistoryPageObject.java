@@ -2,13 +2,10 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -67,21 +64,11 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 				"verifying the last edit shows " + targetText, true);
 	}
 	
-//	public boolean isNewPage() {
-//		List<WebElement> mainContents = mainContentText.findElements(By.xpath("//*"));
-//		return (mainContents.size() > 1) ? true : false;		
-//	}
-	
 	public MobileEditModePageObject goToNewPageWithEdit(String URL) {
-//		if (isNewPage()) {
-			driver.get(URL);
-			PageObjectLogging.log("goToNewPageWithEdit", 
-					"going to edit mobile edit mode", true);
-			return new MobileEditModePageObject(driver);
-			
-//		} else {
-//			return null;
-//		}
+		driver.get(URL);
+		PageObjectLogging.log("goToNewPageWithEdit", 
+				"going to edit mobile edit mode", true);
+		return new MobileEditModePageObject(driver);
 	}
 
 	public void verifyLastEditHistorySummary(String targetText) {

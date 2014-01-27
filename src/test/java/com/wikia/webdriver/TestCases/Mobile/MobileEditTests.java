@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.Mobile;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -30,14 +29,18 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.login(credentials.userName, credentials.password);
-		String randomPageURL = wikiURL + URLsContent.wikiDir + PageContent.articleNamePrefix + mobile.getTimeStamp();
-		String pageHistoryURL = urlBuilder.appendQueryStringToURL(randomPageURL, URLsContent.mobileHistoryPage);
-		String pageEditURL = urlBuilder.appendQueryStringToURL(randomPageURL, URLsContent.mobileEditPage);
+		String randomPageURL = wikiURL + URLsContent.wikiDir 
+				+ PageContent.articleNamePrefix + mobile.getTimeStamp();
+		String pageHistoryURL = urlBuilder.appendQueryStringToURL(
+				randomPageURL, URLsContent.mobileHistoryPage);
+		String pageEditURL = urlBuilder.appendQueryStringToURL(
+				randomPageURL, URLsContent.mobileEditPage);
 		//go to a random page with ?action=history suffix
-		MobileHistoryPageObject mobileHistory = mobile.goToRandomMobileHistoryPage(pageHistoryURL);
-		//make sure there is no history
+		MobileHistoryPageObject mobileHistory = 
+				mobile.goToRandomMobileHistoryPage(pageHistoryURL);
 		//go into edit mode ?action=edit
-		MobileEditModePageObject mobileEdit = mobileHistory.goToNewPageWithEdit(pageEditURL);
+		MobileEditModePageObject mobileEdit = 
+				mobileHistory.goToNewPageWithEdit(pageEditURL);
 		mobileEdit.verifyModeName();
 		mobileEdit.verifyEditArticleName();
 	}
@@ -48,13 +51,17 @@ public class MobileEditTests extends NewTestTemplate{
 		mobile.openHome(wikiURL);
 		mobile.login(credentials.userName, credentials.password);
 		//go to a random page with ?action=history suffix
-		String randomPageURL = wikiURL + URLsContent.wikiDir + PageContent.articleNamePrefix + mobile.getTimeStamp();
-		String pageHistoryURL = urlBuilder.appendQueryStringToURL(randomPageURL, URLsContent.mobileHistoryPage);
-		String pageEditURL = urlBuilder.appendQueryStringToURL(randomPageURL, URLsContent.mobileEditPage);
-		MobileHistoryPageObject mobileHistory = mobile.goToRandomMobileHistoryPage(pageHistoryURL);
-		//make sure there is no history
+		String randomPageURL = wikiURL + URLsContent.wikiDir 
+				+ PageContent.articleNamePrefix + mobile.getTimeStamp();
+		String pageHistoryURL = urlBuilder.appendQueryStringToURL(
+				randomPageURL, URLsContent.mobileHistoryPage);
+		String pageEditURL = urlBuilder.appendQueryStringToURL(
+				randomPageURL, URLsContent.mobileEditPage);
+		MobileHistoryPageObject mobileHistory = 
+				mobile.goToRandomMobileHistoryPage(pageHistoryURL);
 		//go into edit mode ?action=edit
-		MobileEditModePageObject mobileEdit = mobileHistory.goToNewPageWithEdit(pageEditURL);
+		MobileEditModePageObject mobileEdit = 
+				mobileHistory.goToNewPageWithEdit(pageEditURL);
 		mobileEdit.enterEditText(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
 		mobilePreview.verifyEditModeContent(PageContent.articleText);
@@ -73,19 +80,23 @@ public class MobileEditTests extends NewTestTemplate{
 		//go to a random page with ?action=history suffix
 		String articleName = PageContent.articleNamePrefix + mobile.getTimeStamp();
 		String randomPageURL = wikiURL + URLsContent.wikiDir + articleName;
-		String pageHistoryURL = urlBuilder.appendQueryStringToURL(randomPageURL, URLsContent.mobileHistoryPage);
-		String pageEditURL = urlBuilder.appendQueryStringToURL(randomPageURL, URLsContent.mobileEditPage);
-		MobileHistoryPageObject mobileHistory = mobile.goToRandomMobileHistoryPage(pageHistoryURL);
-		//make sure there is no history
+		String pageHistoryURL = urlBuilder.appendQueryStringToURL(
+				randomPageURL, URLsContent.mobileHistoryPage);
+		String pageEditURL = urlBuilder.appendQueryStringToURL(
+				randomPageURL, URLsContent.mobileEditPage);
+		MobileHistoryPageObject mobileHistory = 
+				mobile.goToRandomMobileHistoryPage(pageHistoryURL);
 		//go into edit mode ?action=edit
-		MobileEditModePageObject mobileEdit = mobileHistory.goToNewPageWithEdit(pageEditURL);
+		MobileEditModePageObject mobileEdit = 
+				mobileHistory.goToNewPageWithEdit(pageEditURL);
 		mobileEdit.enterEditText(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
 		mobilePreview.verifyEditModeContent(PageContent.articleText);
 		mobilePreview.verifyPreviewPageHeader(PageContent.previewHeader);
 		mobilePreview.enterSummaryText(PageContent.summaryText);
 		MobileArticlePageObject mobileArticle = mobilePreview.clickPublish();
-		MobileHistoryPageObject mobileArticleHistory = mobileArticle.goToCurrentArticleHistoryPage();
+		MobileHistoryPageObject mobileArticleHistory = 
+				mobileArticle.goToCurrentArticleHistoryPage();
 		mobileArticleHistory.verifyHistoryPageHeader(PageContent.historyHeader);
 		mobileArticleHistory.verifyArticleName(articleName);
 		mobileArticleHistory.verifyLastEditHistorySummary(PageContent.historySummaryText);
