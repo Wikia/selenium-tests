@@ -63,6 +63,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 	
 	public String getSummaryText() {
+		waitForElementByCss("#wkSummary");
 		return summaryTextBox.getAttribute("value");
 	}
 	
