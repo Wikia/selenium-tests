@@ -26,6 +26,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	
 	private String summaryTextString = "#wkSummary";
 	private String keepEditingButtonString = "#wkContinueEditing";
+	private String publishButtonString = "#wkSave";
 
 	public void verifyEditModeContent(String targetText) {
 		Assertion.assertStringContains(targetText, getArticleText());
@@ -51,6 +52,8 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 
 	public MobileArticlePageObject clickPublish() {
+		WebElement publishButton = waitForElementByCss(publishButtonString);
+		waitForElementClickableByElement(publishButton);
 		publishButton.click();
 		return new MobileArticlePageObject(driver);
 	}
