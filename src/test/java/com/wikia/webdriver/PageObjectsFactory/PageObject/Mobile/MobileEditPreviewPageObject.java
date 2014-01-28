@@ -54,7 +54,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	public MobileArticlePageObject clickPublish() {
 		WebElement publishButton = waitForElementByCss(publishButtonString);
 		waitForElementClickableByElement(publishButton);
-		publishButton.click();
+		jQueryClick(publishButton);
 		return new MobileArticlePageObject(driver);
 	}
 
