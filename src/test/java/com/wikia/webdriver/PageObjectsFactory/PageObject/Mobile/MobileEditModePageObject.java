@@ -33,7 +33,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 	
 	public MobileEditPreviewPageObject clickPreview() {
-		waitForElementByCss("#wkPreview");
+//		waitForElementByCss("#wkPreview");
 		editPreviewButton.click();
 		return new MobileEditPreviewPageObject(driver);
 	}
