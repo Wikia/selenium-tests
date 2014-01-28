@@ -144,6 +144,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 		super(driver);
 	}
 
+	public String getAtricleTextRaw() {
+		return articleContentContainer.getText();
+
+	}
+
 	public void verifyArticleTitle(String title) {
 		waitForElementVisibleByElement(articleHeader);
 		Assertion.assertEquals(articleHeader.getText(), title);

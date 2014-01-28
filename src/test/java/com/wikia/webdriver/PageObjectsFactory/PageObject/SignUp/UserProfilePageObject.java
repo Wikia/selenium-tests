@@ -56,7 +56,15 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	}
 
 	public BlogPageObject openFirstPost() {
-		openBlogPage(0);
+		for (int i = 0; i < blogPostList.size(); i++) {
+			BlogPageObject blogPage = openBlogPage(i);
+			if (!blogPage.getAtricleTextRaw().contains("deleted")) {
+				PageObjectLogging.log("openFirstPost", "valid post found on " + i + " position", true);
+				break;
+			}
+			PageObjectLogging.log("openFirstPost", "deleted post found on " + i + " position, trying next one", true);
+			navigateBack();
+		}
 		return new BlogPageObject(driver);
 	}
 
