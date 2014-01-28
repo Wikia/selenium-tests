@@ -66,17 +66,23 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		summaryTextBox.sendKeys(text);
 	}
 
-//	public String getSummaryText() {
-////		waitForElementByBy(By.cssSelector("#wkSummary"));
-////		waitForValueToBePresentInElementsAttributeByCss("#wkSummary", "value", PageContent.summaryText);
-//		WebElement summaryTextBox = waitForElementByCss("#wkSummary");
-//		return summaryTextBox.getAttribute("value");
-//	}
+	public String getSummaryText() {
+//		waitForElementByBy(By.cssSelector("#wkSummary"));
+//		waitForValueToBePresentInElementsAttributeByCss("#wkSummary", "value", PageContent.summaryText);
+		WebElement summaryTextBox = waitForElementByCss("#wkSummary");
+		return summaryTextBox.getAttribute("value");
+	}
 
 	public void verifySummaryText(String targetText) {
-		WebElement summaryTextBox = waitForElementByCss("#wkSummary");
-		waitForTextToBePresentInElementByElement(summaryTextBox, targetText);
-//		Assertion.assertEquals(targetText, getSummaryText());
+//		WebElement summaryTextBox = waitForElementByCss("#wkSummary");
+//		waitForTextToBePresentInElementByElement(summaryTextBox, targetText);
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Assertion.assertEquals(targetText, getSummaryText());
 		PageObjectLogging.log("verifySummaryText",
 				"verifying the summary shows " + targetText, true);
 	}
