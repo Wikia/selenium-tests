@@ -23,6 +23,9 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	private WebElement articleText;
 	@FindBy(css="#wkMdlTlBar > span")
 	private WebElement selectedPageHeader;
+	
+	private String summaryTextString = "#wkSummary";
+	private String keepEditingButtonString = "#wkContinueEditing";
 
 	public void verifyEditModeContent(String targetText) {
 		Assertion.assertStringContains(targetText, getArticleText());
@@ -37,11 +40,9 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 
 	public MobileEditModePageObject clickKeepEditing() {
-		WebElement keepEditingButton = waitForElementByCss("#wkContinueEditing");
-//		scrollAndClick(keepEditingButton);
+		WebElement keepEditingButton = waitForElementByCss(keepEditingButtonString);
 		waitForElementClickableByElement(keepEditingButton);
 		jQueryClick(keepEditingButton);
-//		keepEditingButton.click();
 		return new MobileEditModePageObject(driver);
 	}
 
@@ -66,23 +67,9 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		summaryTextBox.sendKeys(text);
 	}
 
-	public String getSummaryText() {
-//		waitForElementByBy(By.cssSelector("#wkSummary"));
-		WebElement summaryTextBox = waitForElementByCss("#wkSummary");
-		return summaryTextBox.getAttribute("value");
-	}
-
 	public void verifySummaryText(String targetText) {
-//		WebElement summaryTextBox = waitForElementByCss("#wkSummary");
-//		waitForTextToBePresentInElementByElement(summaryTextBox, targetText);
-		waitForValueToBePresentInElementsAttributeByCss("#wkSummary", "value", targetText);
-//		try {
-//			Thread.sleep(1500);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		Assertion.assertEquals(targetText, getSummaryText());
+		waitForValueToBePresentInElementsAttributeByCss(
+				summaryTextString, "value", targetText);
 		PageObjectLogging.log("verifySummaryText",
 				"verifying the summary shows " + targetText, true);
 	}

@@ -19,6 +19,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileHistoryPag
  * 1. Verify that user can go to edit mode.
  * 2. Verify that edit text and summary text are retained when switching between preview mode and edit mode
  * 3. Verify that edit on a mobile browser would show the '(Mobile)' tag on the edit history page
+ * 4. Cancel from edit mode goes back to article
+ * 5. Editing the correct section from article.
+ * 6. Non signed in user do not have edit option on article
+ * 7. Preview is non-interactive, only scrolling
+ * 8. Opening license to see if opens in new tab
+ * 9. check for the new article banner can be dismissed
  */
 public class MobileEditTests extends NewTestTemplate{
 

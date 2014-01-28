@@ -22,6 +22,8 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	private WebElement editCancelButton;
 	@FindBy(css="#wkPreview")
 	private WebElement editPreviewButton;
+	
+	private String editPreviewButtonString = "#wkPreview";
 
 	public MobileArticlePageObject clickCancel() {
 		editCancelButton.click();
@@ -33,10 +35,8 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 	
 	public MobileEditPreviewPageObject clickPreview() {
-//		waitForElementByCss("#wkPreview");
-		WebElement editPreviewButton = waitForElementByCss("#wkPreview");
+		WebElement editPreviewButton = waitForElementByCss(editPreviewButtonString);
 		scrollAndClick(editPreviewButton);
-//		editPreviewButton.click();
 		return new MobileEditPreviewPageObject(driver);
 	}
 	
