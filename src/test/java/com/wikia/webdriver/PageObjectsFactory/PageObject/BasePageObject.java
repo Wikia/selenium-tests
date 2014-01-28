@@ -212,7 +212,7 @@ public class BasePageObject{
 
 	public void jQueryClick(WebElement element){
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("$(arguments[0]).click()", element);
+		js.executeScript("$(arguments[0])[0].click()", element);
 	}
 
 	protected void actionsClick(WebElement element) {
