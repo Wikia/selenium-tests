@@ -66,7 +66,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	
 	public String getSummaryText() {
 //		waitForElementByBy(By.cssSelector("#wkSummary"));
-		waitForValueToBePresentInElementsAttributeByCss("#wkSummary", "value", PageContent.summaryText);
+//		waitForValueToBePresentInElementsAttributeByCss("#wkSummary", "value", PageContent.summaryText);
 		return summaryTextBox.getAttribute("value");
 	}
 	
