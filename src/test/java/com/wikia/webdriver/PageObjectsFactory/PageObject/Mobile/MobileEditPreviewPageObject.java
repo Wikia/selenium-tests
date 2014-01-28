@@ -40,7 +40,8 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	
 	public MobileEditModePageObject clickKeepEditing() {
 		WebElement keepEditingButton = waitForElementByCss("#wkContinueEditing");
-		keepEditingButton.click();
+		scrollAndClick(keepEditingButton);
+//		keepEditingButton.click();
 		return new MobileEditModePageObject(driver);
 	}
 	

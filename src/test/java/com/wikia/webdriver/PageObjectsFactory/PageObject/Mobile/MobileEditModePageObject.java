@@ -35,7 +35,8 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	public MobileEditPreviewPageObject clickPreview() {
 //		waitForElementByCss("#wkPreview");
 		WebElement editPreviewButton = waitForElementByCss("#wkPreview");
-		editPreviewButton.click();
+		scrollAndClick(editPreviewButton);
+//		editPreviewButton.click();
 		return new MobileEditPreviewPageObject(driver);
 	}
 	
