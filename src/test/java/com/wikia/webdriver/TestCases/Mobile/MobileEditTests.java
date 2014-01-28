@@ -31,7 +31,7 @@ public class MobileEditTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 	
 	@Test(groups={"MobileEdit_001", "MobileEdit", "Mobile"})
-	public void MobileEdit_001_Edit() {
+	public void MobileEdit_001_signedInCanEdit() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
@@ -52,7 +52,7 @@ public class MobileEditTests extends NewTestTemplate{
 	}
 	
 	@Test(groups={"MobileEdit_002", "MobileEdit", "Mobile"})
-	public void MobileEdit_002_Edit() {	
+	public void MobileEdit_002_editAndSummaryRetain() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
@@ -79,7 +79,7 @@ public class MobileEditTests extends NewTestTemplate{
 		continueMobilePreview.verifySummaryText(PageContent.summaryText);
 	}
 	@Test(groups={"MobileEdit_003", "MobileEdit", "Mobile"})
-	public void MobileEdit_003_Edit() {	
+	public void MobileEdit_003_publishHistory() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
