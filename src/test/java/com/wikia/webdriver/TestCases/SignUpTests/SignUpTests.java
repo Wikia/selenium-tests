@@ -8,11 +8,14 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.FacebookSignupModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars.CustomizedToolbarComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiLogInSignUpPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookUserPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.AlmostTherePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.ConfirmationPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.SignUpPageObject;
@@ -168,5 +171,43 @@ public class SignUpTests extends NewTestTemplate {
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
 		login.login(userName, password);
 		almostTherePage.verifyAlmostTherePage();
+	}
+
+	/**
+	 * Jira ticket: CONN-78
+	 *
+	 * pre-conditions:
+	 * Facebook_001 test removes Wikia and Wikia Development App from Facebook
+	 * Facebokk_001 test stored in TestCases/FacebookTests/FacebookTests.java path
+	 * 
+	 * Steps:
+	 * 1. Log in to Facebook
+	 * 2. Open finish signup with facebook modal
+	 * 3. create and verify account
+	 * 4. disconnect created account from facebook
+	 */
+	@Test(
+			groups = {"SignUp_007", "SignUp", "Modals"},
+			dependsOnGroups = "Facebook_001"
+		 )
+	public void Signup_007_signUpWithFacebook() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		FacebookMainPageObject fbLogin = base.openFacebookMainPage();
+		FacebookUserPageObject userFB;
+		userFB = fbLogin.login(credentials.emailFB, credentials.passwordFB);
+		userFB.verifyPageLogo();
+		SignUpPageObject signUp = userFB.openSpecialSignUpPage(wikiURL);
+		FacebookSignupModalComponentObject fbModal = signUp.clickFacebookSignUp();
+		fbModal.acceptWikiaAppPolicy();
+		String userName = "QATestAccount" + signUp.getTimeStamp();
+		String password = "Pass" + signUp.getTimeStamp();
+		fbModal.typeUserName(userName);
+		fbModal.typePassword(password);
+		fbModal.createAccount();
+		signUp.verifyUserLoggedIn(userName);
+		PreferencesPageObject preferences;
+		preferences = signUp.openSpecialPreferencesPage(wikiURL);
+		preferences.selectTab(tabNames.Facebook);
+		preferences.disconnectFromFacebook();
 	}
 }
