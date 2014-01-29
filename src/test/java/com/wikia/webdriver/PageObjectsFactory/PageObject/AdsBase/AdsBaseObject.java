@@ -16,6 +16,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -507,7 +508,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		for (WebElement spotlight: spotlights) {
 			if (spotlight.isDisplayed()) {
 				PageObjectLogging.log("SpotlightVisible", "Spotlight visible, should be hidden", false);
-				throw new NoSuchElementException("Spotlight visible, should be hidden");
+				throw new WebDriverException("Spotlight visible, should be hidden");
 			}
 		}
 		PageObjectLogging.log("SpotlightsHidden", "Spotlights are hidden", true);

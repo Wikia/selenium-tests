@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -133,7 +134,7 @@ public class Ads71MediaObject extends AdsBaseObject {
 							"Combination present: " + combination.get("name"),
 							false
 						);
-						throw new NoSuchElementException("Ads found on page");
+						throw new WebDriverException("Ads found on page");
 					}
 				}
 			}
