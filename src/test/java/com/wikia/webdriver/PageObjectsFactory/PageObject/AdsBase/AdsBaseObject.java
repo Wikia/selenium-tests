@@ -29,6 +29,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
 	private WebElement wikiaArticle;
+	@FindBy(css=".WikiaSpotlight")
+	private List<WebElement> spotlights;
 
 	protected Boolean isWikiMainPage;
 
@@ -293,7 +295,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		verifyNoLiftiumAds();
 	}
 
-	public void verifyNoAdsOnPage() throws Exception {
+	public void verifyNoAdsOnPage() {
 		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
 		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
 		verifyNoAds();
@@ -407,7 +409,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return selectorAll;
 	}
 
-    private void verifyNoAds() throws Exception {
+    private void verifyNoAds() {
 		Collection<String> slotsSelectors = AdsContent.slotsSelectors.values();
 		for (String selector: slotsSelectors) {
 			if (checkIfElementOnPage(selector)) {
@@ -499,5 +501,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 				}
 			}
 		}
+	}
+
+	public void verifyNoSpotlights() {
+		for (WebElement spotlight: spotlights) {
+			if (spotlight.isDisplayed()) {
+				PageObjectLogging.log("SpotlightVisible", "Spotlight visible, should be hidden", false);
+				throw new NoSuchElementException("Spotlight visible, should be hidden");
+			}
+		}
+		PageObjectLogging.log("SpotlightsHidden", "Spotlights are hidden", true);
 	}
 }

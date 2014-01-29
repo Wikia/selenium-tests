@@ -49,6 +49,8 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnHubs"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsForSony"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNo71MediaAdsForSony"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>

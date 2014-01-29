@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  *
@@ -110,7 +111,7 @@ public class Ads71MediaObject extends AdsBaseObject {
 		}
 	}
 
-	public void verifyNo71MediaAds() throws Exception {
+	public void verifyNo71MediaAds() {
 		AdsComparison adsComparison = new AdsComparison();
 		boolean combinationFound = false;
 		PageObjectLogging.log("PageOpened", "Page opened", true, driver);
@@ -122,17 +123,20 @@ public class Ads71MediaObject extends AdsBaseObject {
 					"Combination not present: " + combination.get("name"),
 					true
 				);
+				return;
 			} else {
-				PageObjectLogging.log(
-					"Combination present",
-					"Combination present: " + combination.get("name"),
-					false
-				);
-				combinationFound = true;
+				for (String elementSelector: combinationSlots) {
+					WebElement combinationElement = driver.findElement(By.cssSelector(elementSelector));
+					if (combinationElement.isDisplayed()) {
+						PageObjectLogging.log(
+							"Combination present",
+							"Combination present: " + combination.get("name"),
+							false
+						);
+						throw new NoSuchElementException("Ads found on page");
+					}
+				}
 			}
-		}
-		if (combinationFound) {
-			throw new Exception("Ads found on page");
 		}
 	}
 

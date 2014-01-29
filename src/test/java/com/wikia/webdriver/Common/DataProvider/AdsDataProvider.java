@@ -90,7 +90,6 @@ public class AdsDataProvider {
 			{"dragoncity", "Category:Dragons"},
 			{"elderscrolls", "Skyrim"},
 			{"ffxiclopedia", "Category:Jobs"}
-
 		};
 	}
 
@@ -219,7 +218,7 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
-	public static final Object[][] germanArticles() {
+	public static final Object[][] noGermanAdsForUsers() {
 		return new Object[][] {
 			{"de.gta", "Fahrzeuge_(V)"},
 			{"de.jedipedia", "Obi-Wan_Kenobi"},
