@@ -72,7 +72,7 @@ public class NewDriverProvider {
 				return getChromeInstanceWithUserAgent(userAgent);
 			default:
 				throw new RuntimeException(
-					"Bad browser provided. Browser " + browser + " not known"
+					"Wrong browser provided. Browser " + browser + " not known"
 				);
 		}
 	}

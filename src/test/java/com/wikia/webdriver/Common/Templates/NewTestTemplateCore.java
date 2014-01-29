@@ -65,8 +65,8 @@ public class NewTestTemplateCore {
 
 	protected void startBrowser() {
 		driver = registerDriverListener(
-					NewDriverProvider.getDriverInstanceForBrowser (config.getBrowser()
-				));
+			NewDriverProvider.getDriverInstanceForBrowser (config.getBrowser())
+		);
 	}
 
 	protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
@@ -76,8 +76,8 @@ public class NewTestTemplateCore {
 
 	protected void startBrowserFirefox() {
 		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser (
-				"FF"
-				);
+			"FF"
+		);
 		eventDriver.register(new PageObjectLogging());
 		driverFF = eventDriver;
 	}
