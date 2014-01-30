@@ -4,7 +4,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.MobilePageContent;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileArticlePageObject;
@@ -36,18 +35,9 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
-		String randomPageURL = wikiURL + URLsContent.wikiDir
-				+ PageContent.articleNamePrefix + mobile.getTimeStamp();
-		String pageHistoryURL = urlBuilder.appendQueryStringToURL(
-				randomPageURL, URLsContent.historyAction);
-		String pageEditURL = urlBuilder.appendQueryStringToURL(
-				randomPageURL, URLsContent.actionEditParameter);
-		//go to a random page with ?action=history suffix
-		MobileHistoryPageObject mobileHistory =
-				mobile.goToRandomMobileHistoryPage(pageHistoryURL);
 		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobileHistory.goToNewPageWithEdit(pageEditURL);
+				mobile.goToNewPageWithEdit(wikiURL);
 		mobileEdit.verifyModeName();
 		mobileEdit.verifyEditArticleName();
 	}
@@ -57,18 +47,9 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
-		//go to a random page with ?action=history suffix
-		String randomPageURL = wikiURL + URLsContent.wikiDir
-				+ PageContent.articleNamePrefix + mobile.getTimeStamp();
-		String pageHistoryURL = urlBuilder.appendQueryStringToURL(
-				randomPageURL, URLsContent.historyAction);
-		String pageEditURL = urlBuilder.appendQueryStringToURL(
-				randomPageURL, URLsContent.actionEditParameter);
-		MobileHistoryPageObject mobileHistory =
-				mobile.goToRandomMobileHistoryPage(pageHistoryURL);
 		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobileHistory.goToNewPageWithEdit(pageEditURL);
+				mobile.goToNewPageWithEdit(wikiURL);
 		mobileEdit.enterEditText(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
 		mobilePreview.verifyEditModeContent(PageContent.articleText);
@@ -84,18 +65,10 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
-		//go to a random page with ?action=history suffix
-		String articleName = PageContent.articleNamePrefix + mobile.getTimeStamp();
-		String randomPageURL = wikiURL + URLsContent.wikiDir + articleName;
-		String pageHistoryURL = urlBuilder.appendQueryStringToURL(
-				randomPageURL, URLsContent.historyAction);
-		String pageEditURL = urlBuilder.appendQueryStringToURL(
-				randomPageURL, URLsContent.actionEditParameter);
-		MobileHistoryPageObject mobileHistory =
-				mobile.goToRandomMobileHistoryPage(pageHistoryURL);
 		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobileHistory.goToNewPageWithEdit(pageEditURL);
+				mobile.goToNewPageWithEdit(wikiURL);
+		String articleName = mobile.getCurrentUrl();
 		mobileEdit.enterEditText(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
 		mobilePreview.verifyEditModeContent(PageContent.articleText);

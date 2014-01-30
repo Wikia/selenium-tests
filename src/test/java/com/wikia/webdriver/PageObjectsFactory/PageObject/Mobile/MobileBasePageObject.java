@@ -273,14 +273,19 @@ public class MobileBasePageObject extends WikiBasePageObject {
 		waitForElementByElement(loginDropDownTrigger);
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
 	}
-	
+
 	public MobileEditModePageObject clickEdit() {
-		editButton.click();
+		scrollAndClick(editButton);
 		return new MobileEditModePageObject(driver);
 	}
-	
-	public MobileHistoryPageObject goToRandomMobileHistoryPage(String URL) {
-		driver.get(URL);
-		return new MobileHistoryPageObject(driver);
+
+	public MobileEditModePageObject goToNewPageWithEdit(String wikiURL) {
+		wikiURL = urlBuilder.appendQueryStringToURL(wikiURL
+				+ URLsContent.wikiDir +	getRandomArticle()
+				, URLsContent.actionEditParameter);
+		getUrl(wikiURL);
+		PageObjectLogging.log("goToNewPageWithEdit",
+				"going to edit mobile edit mode", true);
+		return new MobileEditModePageObject(driver);
 	}
 }

@@ -64,13 +64,6 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 				"verifying the last edit shows " + targetText, true);
 	}
 
-	public MobileEditModePageObject goToNewPageWithEdit(String URL) {
-		driver.get(URL);
-		PageObjectLogging.log("goToNewPageWithEdit",
-				"going to edit mobile edit mode", true);
-		return new MobileEditModePageObject(driver);
-	}
-
 	public void verifyLastEditHistorySummary(String targetText) {
 		Assertion.assertStringContains(targetText, getLastHistorySummary());
 		PageObjectLogging.log("verifyLastEditHistorySummary",

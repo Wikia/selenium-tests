@@ -990,10 +990,14 @@ public class WikiBasePageObject extends BasePageObject {
 	public HubBasePageObject openHubByUrl(HubName hub, String wikiCorporateURL) {
 		getUrl(wikiCorporateURL + hub.name());
 		return new HubBasePageObject(driver);
-	}	
+	}
 
 	public FacebookMainPageObject openFacebookMainPage() {
 		getUrl(URLsContent.facebookMainPage);
 		return new FacebookMainPageObject(driver);
+	}
+
+	public String getRandomArticle () {
+		return PageContent.articleNamePrefix + getTimeStamp();
 	}
 }
