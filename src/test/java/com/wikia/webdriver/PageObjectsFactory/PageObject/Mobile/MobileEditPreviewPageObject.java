@@ -13,20 +13,20 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#wkContinueEditing")
-	private WebElement keepEditingButton;
-	@FindBy(css="#wkSave")
-	private WebElement publishButton;
-	@FindBy(css="#wkSummary")
+	private final String summaryTextString = "#wkSummary";
+	private final String keepEditingButtonString = "#wkContinueEditing";
+	private final String publishButtonString = "#wkSave";
+
+	@FindBy(css=summaryTextString)
 	private WebElement summaryTextBox;
+	@FindBy(css=keepEditingButtonString)
+	private WebElement keepEditingButton;
+	@FindBy(css=publishButtonString)
+	private WebElement publishButton;
 	@FindBy(css="#wkMdlCnt #mw-content-text > p")
 	private WebElement articleText;
 	@FindBy(css="#wkMdlTlBar > span")
 	private WebElement selectedPageHeader;
-	
-	private String summaryTextString = "#wkSummary";
-	private String keepEditingButtonString = "#wkContinueEditing";
-	private String publishButtonString = "#wkSave";
 
 	public void verifyEditModeContent(String targetText) {
 		Assertion.assertStringContains(targetText, getArticleText());

@@ -15,12 +15,6 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="textarea")
-	private WebElement textArea;
-	@FindBy(css="#wkMainCntHdr > h1")
-	private WebElement selectedPageHeader;
-	@FindBy(css="#mw-content-text")
-	private WebElement mainContentText;
 	@FindBy(css="#pagehistory > li.mw-tag-mobileedit")
 	private List<WebElement> editHistories;
 	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.mw-tag-markers")

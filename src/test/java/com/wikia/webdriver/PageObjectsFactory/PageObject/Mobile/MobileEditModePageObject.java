@@ -15,14 +15,14 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
+	private final String editPreviewButtonString = "#wkPreview";
+
+	@FindBy(css=editPreviewButtonString)
+	private WebElement editPreviewButton;
 	@FindBy(css="#wpTextbox1")
 	private WebElement textArea;
 	@FindBy(css="#wkMobileCancel")
 	private WebElement editCancelButton;
-	@FindBy(css="#wkPreview")
-	private WebElement editPreviewButton;
-
-	private String editPreviewButtonString = "#wkPreview";
 
 	public MobileArticlePageObject clickCancel() {
 		editCancelButton.click();
