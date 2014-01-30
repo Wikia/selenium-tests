@@ -37,7 +37,7 @@ public class MobileEditTests extends NewTestTemplate{
 		mobile.loginDropDown(credentials.userName, credentials.password);
 		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobile.goToNewPageWithEdit(wikiURL);
+				mobile.goToNewArticleEditMode(wikiURL);
 		mobileEdit.verifyModeName();
 		mobileEdit.verifyEditArticleName();
 	}
@@ -49,7 +49,7 @@ public class MobileEditTests extends NewTestTemplate{
 		mobile.loginDropDown(credentials.userName, credentials.password);
 		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobile.goToNewPageWithEdit(wikiURL);
+				mobile.goToNewArticleEditMode(wikiURL);
 		mobileEdit.enterEditText(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
 		mobilePreview.verifyEditModeContent(PageContent.articleText);
@@ -60,6 +60,7 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileEditPreviewPageObject continueMobilePreview = continueMobileEdit.clickPreview();
 		continueMobilePreview.verifySummaryText(MobilePageContent.summaryText);
 	}
+
 	@Test(groups={"MobileEdit_003", "MobileEdit", "Mobile"})
 	public void MobileEdit_003_publishHistory() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
@@ -67,7 +68,7 @@ public class MobileEditTests extends NewTestTemplate{
 		mobile.loginDropDown(credentials.userName, credentials.password);
 		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobile.goToNewPageWithEdit(wikiURL);
+				mobile.goToNewArticleEditMode(wikiURL);
 		String articleName = mobile.getCurrentUrl();
 		mobileEdit.enterEditText(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();

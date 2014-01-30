@@ -13,31 +13,37 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	private final String summaryTextString = "#wkSummary";
-	private final String keepEditingButtonString = "#wkContinueEditing";
-	private final String publishButtonString = "#wkSave";
-
-	@FindBy(css=summaryTextString)
+	@FindBy(css="#wkSummary")
 	private WebElement summaryTextBox;
-	@FindBy(css=keepEditingButtonString)
+	@FindBy(css="#wkContinueEditing")
 	private WebElement keepEditingButton;
-	@FindBy(css=publishButtonString)
+	@FindBy(css="#wkSave")
 	private WebElement publishButton;
 	@FindBy(css="#wkMdlCnt #mw-content-text > p")
 	private WebElement articleText;
 	@FindBy(css="#wkMdlTlBar > span")
 	private WebElement selectedPageHeader;
 
+	private final String summaryTextString = "#wkSummary";
+	private final String keepEditingButtonString = "#wkContinueEditing";
+	private final String publishButtonString = "#wkSave";
+
 	public void verifyEditModeContent(String targetText) {
-		Assertion.assertStringContains(targetText, getArticleText());
-		PageObjectLogging.log("verifyEditModeContent",
-				"verifying the article shows " + targetText, true);
+		Assertion.assertStringContains(targetText, articleText.getText());
+		PageObjectLogging.log(
+				"verifyEditModeContent",
+				"verifying the article shows " + targetText,
+				true
+		);
 	}
 
 	public void verifyPreviewPageHeader(String targetText) {
-		Assertion.assertStringContains(targetText, getPageHeaderText());
-		PageObjectLogging.log("verifyPreviewPageHeader",
-				"verifying the summary shows " + targetText, true);
+		Assertion.assertStringContains(targetText, selectedPageHeader.getText());
+		PageObjectLogging.log(
+				"verifyPreviewPageHeader",
+				"verifying the summary shows " + targetText,
+				true
+		);
 	}
 
 	public MobileEditModePageObject clickKeepEditing() {
@@ -47,23 +53,11 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		return new MobileEditModePageObject(driver);
 	}
 
-	public String getHeader(){
-		return selectedPageHeader.getText();
-	}
-
 	public MobileArticlePageObject clickPublish() {
 		WebElement publishButton = waitForElementByCss(publishButtonString);
 		waitForElementClickableByElement(publishButton);
 		jQueryClick(publishButton);
 		return new MobileArticlePageObject(driver);
-	}
-
-	public String getArticleText() {
-		return articleText.getText();
-	}
-
-	public String getPageHeaderText() {
-		return selectedPageHeader.getText();
 	}
 
 	public void enterSummaryText(String text) {
@@ -72,9 +66,14 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 
 	public void verifySummaryText(String targetText) {
 		waitForValueToBePresentInElementsAttributeByCss(
-				summaryTextString, "value", targetText);
-		PageObjectLogging.log("verifySummaryText",
-				"verifying the summary shows " + targetText, true);
+				summaryTextString,
+				"value",
+				targetText
+		);
+		PageObjectLogging.log(
+				"verifySummaryText",
+				"verifying the summary shows " + targetText,
+				true
+		);
 	}
-
 }

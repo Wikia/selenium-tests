@@ -279,13 +279,18 @@ public class MobileBasePageObject extends WikiBasePageObject {
 		return new MobileEditModePageObject(driver);
 	}
 
-	public MobileEditModePageObject goToNewPageWithEdit(String wikiURL) {
-		wikiURL = urlBuilder.appendQueryStringToURL(wikiURL
-				+ URLsContent.wikiDir +	getRandomArticle()
-				, URLsContent.actionEditParameter);
-		getUrl(wikiURL);
-		PageObjectLogging.log("goToNewPageWithEdit",
-				"going to edit mobile edit mode", true);
+	public MobileEditModePageObject goToNewArticleEditMode(String wikiURL) {
+		getUrl(
+				urlBuilder.appendQueryStringToURL(
+						wikiURL + URLsContent.wikiDir +	getRandomArticleName(),
+						URLsContent.actionEditParameter
+				)
+		);
+		PageObjectLogging.log(
+				"goToNewPageWithEdit",
+				"going to edit mobile edit mode",
+				true
+		);
 		return new MobileEditModePageObject(driver);
 	}
 }

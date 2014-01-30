@@ -15,44 +15,37 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	private final String editPreviewButtonString = "#wkPreview";
-	private final String textBoxString = "#wpTextbox1";
-
-	@FindBy(css=editPreviewButtonString)
+	@FindBy(css="#wkPreview")
 	private WebElement editPreviewButton;
-	@FindBy(css=textBoxString)
+	@FindBy(css="#wpTextbox1")
 	private WebElement textArea;
 	@FindBy(css="#wkMobileCancel")
 	private WebElement editCancelButton;
+
+	private final String editPreviewButtonString = "#wkPreview";
 
 	public MobileArticlePageObject clickCancel() {
 		editCancelButton.click();
 		return new MobileArticlePageObject(driver);
 	}
 
-	public String getHeader(){
+	private String getHeader(){
 		return selectedPageHeader.getText();
 	}
 
 	public MobileEditPreviewPageObject clickPreview() {
-		try {
-			wait(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		WebElement editPreviewButton = waitForElementByCss(editPreviewButtonString);
 		waitForElementClickableByElement(editPreviewButton);
 		jQueryClick(editPreviewButton);
 		return new MobileEditPreviewPageObject(driver);
 	}
 
-	public String getEditArticleName() {
+	private String getEditArticleName() {
 		String header = getHeader();
 		return header.substring(header.indexOf(' ') + 1);
 	}
 
-	public String getModeName() {
+	private String getModeName() {
 		String header = getHeader();
 		return header.substring(0, header.indexOf(' '));
 	}
@@ -62,21 +55,27 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		String urlArticleName =
 			url.substring(url.indexOf(PageContent.articleNamePrefix), url.indexOf('?'));
 		Assertion.assertEquals(urlArticleName, getEditArticleName());
-		PageObjectLogging.log("verifyModeName",
-				"verifying the article shows '" + urlArticleName + "'", true);
+		PageObjectLogging.log(
+				"verifyModeName",
+				"verifying the article shows '" + urlArticleName + "'",
+				true
+		);
 	}
 
 	public void verifyModeName() {
 		Assertion.assertEquals(MobilePageContent.editModeHeader, getModeName());
-		PageObjectLogging.log("verifyModeName",
-				"verifying the header shows '" + MobilePageContent.editModeHeader + "'", true);
+		PageObjectLogging.log(
+				"verifyModeName",
+				"verifying the header shows '" + MobilePageContent.editModeHeader + "'",
+				true
+		);
 	}
 
 	public void enterEditText(String text) {
 		textArea.sendKeys(text);
 	}
 
-	public String getEditText() {
+	private String getEditText() {
 		return textArea.getAttribute("value");
 	}
 
