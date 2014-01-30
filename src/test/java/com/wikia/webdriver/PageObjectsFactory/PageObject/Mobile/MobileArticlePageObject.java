@@ -12,7 +12,6 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Mobile.TableOfContentsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 
 public class MobileArticlePageObject extends MobileBasePageObject{
 
@@ -365,7 +364,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		getUrl(
 				urlBuilder.appendQueryStringToURL(
 					driver.getCurrentUrl(),
-					URLsContent.mobileHistoryPage
+					URLsContent.historyAction
 				)
 			);
 			return new MobileHistoryPageObject(driver);

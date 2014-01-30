@@ -146,7 +146,7 @@ public class NewDriverProvider {
 	private static EventFiringWebDriver getChromeInstance() {
 		String chromeBinaryName;
 		String OSName = System.getProperty("os.name").toUpperCase();
-		
+
 		if (OSName.contains("WINDOWS")) {
 			chromeBinaryName = "chromedriver.exe";
 

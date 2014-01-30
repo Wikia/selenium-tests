@@ -31,54 +31,53 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 	public String getHeader(){
 		return selectedPageHeader.getText();
 	}
-	
+
 	public String getArticleName() {
 		String header = getHeader();
-		return header.substring(header.indexOf('"') + 1, header.length() - 1); 
+		return header.substring(header.indexOf('"') + 1, header.length() - 1);
 	}
-	
+
 	public String getModeName() {
 		String header = getHeader();
 		return header.substring(0, header.indexOf('"') - 1);
 	}
-	
+
 	public void verifyArticleName(String targetText) {
 		Assertion.assertStringContains(targetText, getArticleName());
-		PageObjectLogging.log("verifyArticleName", 
+		PageObjectLogging.log("verifyArticleName",
 				"verifying the article shows " + targetText, true);
 	}
-	
+
 	public void verifyHistoryPageHeader(String targetText) {
 		Assertion.assertStringContains(targetText, getModeName());
-		PageObjectLogging.log("verifyHistoryPageHeader", 
+		PageObjectLogging.log("verifyHistoryPageHeader",
 				"verifying the summary shows " + targetText, true);
 	}
-	
+
 	public String getLastEditHistoryDevice() {
 		return editHistoriesDevice.get(0).getText();
 	}
-	
+
 	public void verifyLastEditHistoryDevice(String targetText) {
 		Assertion.assertStringContains(targetText, getLastEditHistoryDevice());
-		PageObjectLogging.log("verifyLastEditHistoryDevice", 
+		PageObjectLogging.log("verifyLastEditHistoryDevice",
 				"verifying the last edit shows " + targetText, true);
 	}
-	
+
 	public MobileEditModePageObject goToNewPageWithEdit(String URL) {
 		driver.get(URL);
-		PageObjectLogging.log("goToNewPageWithEdit", 
+		PageObjectLogging.log("goToNewPageWithEdit",
 				"going to edit mobile edit mode", true);
 		return new MobileEditModePageObject(driver);
 	}
 
 	public void verifyLastEditHistorySummary(String targetText) {
 		Assertion.assertStringContains(targetText, getLastHistorySummary());
-		PageObjectLogging.log("verifyLastEditHistorySummary", 
-				"verifying the last edit summary shows " + targetText, true);	
+		PageObjectLogging.log("verifyLastEditHistorySummary",
+				"verifying the last edit summary shows " + targetText, true);
 	}
 
 	private String getLastHistorySummary() {
 		return editHistoriesSummary.get(0).getText();
 	}
-
 }
