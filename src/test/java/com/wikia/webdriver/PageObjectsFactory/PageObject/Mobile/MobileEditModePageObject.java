@@ -35,6 +35,12 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 
 	public MobileEditPreviewPageObject clickPreview() {
+		try {
+			wait(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WebElement editPreviewButton = waitForElementByCss(editPreviewButtonString);
 		waitForElementClickableByElement(editPreviewButton);
 		jQueryClick(editPreviewButton);
