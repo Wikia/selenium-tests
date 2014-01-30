@@ -64,17 +64,20 @@ public class NewTestTemplateCore {
 	}
 
 	protected void startBrowser() {
-		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser (
-			config.getBrowser()
+		driver = registerDriverListener(
+			NewDriverProvider.getDriverInstanceForBrowser (config.getBrowser())
 		);
-		eventDriver.register(new PageObjectLogging());
-		driver = eventDriver;
+	}
+
+	protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
+		driver.register(new PageObjectLogging());
+		return driver;
 	}
 
 	protected void startBrowserFirefox() {
 		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser (
-				"FF"
-				);
+			"FF"
+		);
 		eventDriver.register(new PageObjectLogging());
 		driverFF = eventDriver;
 	}
@@ -111,13 +114,18 @@ public class NewTestTemplateCore {
 		return capabilities;
 	}
 
-	protected void startBrowserWithCapabilities(DesiredCapabilities caps) {
+	protected void setDriverCapabilities(DesiredCapabilities caps) {
 		NewDriverProvider.setDriverCapabilities(caps);
-		startBrowser();
 	}
 
 	protected void setWindowSize(int width, int height, WebDriver desiredDriver) {
 		Dimension dimension = new Dimension(width, height);
 		desiredDriver.manage().window().setSize(dimension);
+	}
+
+	protected void startBrowserWithModifiedUserAgent(String userAgent) {
+		driver = registerDriverListener(
+			NewDriverProvider.getDriverInstanceForBrowser(config.getBrowser(), userAgent)
+		);
 	}
 }

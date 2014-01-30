@@ -22,7 +22,7 @@ public class Test71MediaNoAdsForUsers extends AdsTestTemplate {
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
-		dataProvider="germanArticles"
+		dataProvider="noGermanAdsForUsers"
 	)
 	public Test71MediaNoAdsForUsers(String wikiName, String path) {
 		super();

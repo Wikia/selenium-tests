@@ -1,6 +1,7 @@
 package com.wikia.webdriver.Common.Templates;
 
 
+import com.wikia.webdriver.Common.Core.Annotations.UserAgent;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
 import java.lang.reflect.Method;
@@ -34,9 +35,12 @@ public class AdsTestTemplate extends NewTestTemplate {
 				);
 				adServer.runGeoEdgeServer();
 				adCap = getCapsWithProxyServerSet(adServer);
-				startBrowserWithCapabilities(adCap);
+				setDriverCapabilities(adCap);
 			} else {
 				isGeoEdgeSet = false;
+			} if (method.getAnnotation(UserAgent.class) != null) {
+				startBrowserWithModifiedUserAgent(method.getAnnotation(UserAgent.class).userAgent());
+			} else {
 				startBrowser();
 			}
 		} catch (Exception ex) {

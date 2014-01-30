@@ -30,6 +30,9 @@ public class NewDriverProvider {
 	private static EventFiringWebDriver driverFF;
 	private static String browserName;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
+	private static FirefoxProfile firefoxProfile = new FirefoxProfile();
+	private static ChromeOptions chromeOptions = new ChromeOptions();
+	private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
 
 	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
 		browserName = browser;
@@ -60,6 +63,20 @@ public class NewDriverProvider {
 		return driver;
 	}
 
+	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser, String userAgent) {
+		browserName = browser;
+		switch (browser.toUpperCase()) {
+			case "FF":
+				return getFFInstanceWithUserAgent(userAgent);
+			case "CHROME":
+				return getChromeInstanceWithUserAgent(userAgent);
+			default:
+				throw new RuntimeException(
+					"Wrong browser provided. Browser " + browser + " not known"
+				);
+		}
+	}
+
 	public static WebDriver getWebDriver() {
 		return driver;
 	}
@@ -82,8 +99,6 @@ public class NewDriverProvider {
 	}
 
 	private static EventFiringWebDriver getFFInstance() {
-		FirefoxProfile profile = new FirefoxProfile();
-
 		//Windows 8 requires to set webdriver.firefox.bin system variable
 		//to path where executive file of FF is placed
 		if (System.getProperty("os.name").toUpperCase().equals("WINDOWS 8")){
@@ -98,24 +113,24 @@ public class NewDriverProvider {
 
 		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
 		 if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
-                        File homePath = new File(System.getenv("HOME") + File.separator);
-                        File mozillaPath = new File(homePath + File.separator + ".mozilla");
-                        File tmpFile;
-                        if (mozillaPath.exists()) {
-                                try {
-                                        tmpFile = File.createTempFile("webdriver", null, mozillaPath);
-                                } catch (IOException ex) {
-                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
-                                }
-                        } else {
-                                try {
-                                        tmpFile = File.createTempFile("webdriver", null, homePath);
-                                } catch (IOException ex) {
-                                        throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
-                                }
-                        }
-                        tmpFile.delete();
-                }
+			File homePath = new File(System.getenv("HOME") + File.separator);
+			File mozillaPath = new File(homePath + File.separator + ".mozilla");
+			File tmpFile;
+			if (mozillaPath.exists()) {
+				try {
+					tmpFile = File.createTempFile("webdriver", null, mozillaPath);
+				} catch (IOException ex) {
+					throw new RuntimeException("Can't create file in path: %s".replace("%s", mozillaPath.getAbsolutePath()));
+				}
+			} else {
+				try {
+					tmpFile = File.createTempFile("webdriver", null, homePath);
+				} catch (IOException ex) {
+					throw new RuntimeException("Can't create file in path: %s".replace("%s", homePath.getAbsolutePath()));
+				}
+			}
+			tmpFile.delete();
+		}
 
 		//If browserName contains CONSOLE activate JSErrorConsole
 		if (browserName.contains("CONSOLE")) {
@@ -128,7 +143,7 @@ public class NewDriverProvider {
 					+ "Firebug" + File.separator
 					+ "JSErrorCollector.xpi"
 				);
-				profile.addExtension(jsErr);
+				firefoxProfile.addExtension(jsErr);
 				//TODO!
 				Global.JS_ERROR_ENABLED = true;
 			} catch(FileNotFoundException e) {
@@ -138,9 +153,16 @@ public class NewDriverProvider {
 			}
 		}
 
-		caps.setCapability(FirefoxDriver.PROFILE, profile);
-		FirefoxDriver a = new FirefoxDriver(caps);	
-	return new EventFiringWebDriver(a);
+		caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+		return new EventFiringWebDriver(new FirefoxDriver(caps));
+	}
+
+	private static EventFiringWebDriver getFFInstanceWithUserAgent(String userAgent) {
+		firefoxProfile.setPreference(
+			"general.useragent.override",
+			userAgentRegistry.getUserAgent(userAgent)
+		);
+		return getFFInstance();
 	}
 
 	private static EventFiringWebDriver getChromeInstance() {
@@ -162,18 +184,25 @@ public class NewDriverProvider {
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
 		}
 
+		//TODO change mobile tests to use @UserAgent annotation
 		if (browserName.equals("CHROMEMOBILE")) {
-			ChromeOptions options = new ChromeOptions();
-            options.addArguments(
-                "--user-agent="+
-                "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) " +
-                "AppleWebKit/420+ (KHTML, like Gecko) " +
-                "Version/3.0 Mobile/1A543a Safari/419.3"
+			chromeOptions.addArguments(
+				"--user-agent="
+				+ userAgentRegistry.getUserAgent("iPhone")
             );
-            return new EventFiringWebDriver(new ChromeDriver(options));
+            return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
 		}
 
 		return new EventFiringWebDriver(new ChromeDriver(caps));
+	}
+
+	private static EventFiringWebDriver getChromeInstanceWithUserAgent(String userAgent) {
+		chromeOptions.addArguments(
+			"--user-agent="
+			+ userAgentRegistry.getUserAgent(userAgent)
+		);
+		caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		return getChromeInstance();
 	}
 
 	private static EventFiringWebDriver getPhantomJSInstance() {
