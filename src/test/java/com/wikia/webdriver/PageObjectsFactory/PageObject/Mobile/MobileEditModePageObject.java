@@ -16,10 +16,11 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 
 	private final String editPreviewButtonString = "#wkPreview";
+	private final String textBoxString = "#wpTextbox1";
 
 	@FindBy(css=editPreviewButtonString)
 	private WebElement editPreviewButton;
-	@FindBy(css="#wpTextbox1")
+	@FindBy(css=textBoxString)
 	private WebElement textArea;
 	@FindBy(css="#wkMobileCancel")
 	private WebElement editCancelButton;
@@ -73,6 +74,8 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 
 	public void verifyEditText(String targetText) {
+		waitForValueToBePresentInElementsAttributeByElement(
+				textArea, "value", targetText);
 		Assertion.assertEquals(targetText, getEditText());
 		PageObjectLogging.log("verifyEditText",
 				"verifying the summary shows " + targetText, true);
