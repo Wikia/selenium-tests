@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.ContentPatterns.MobilePageContent;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -41,8 +42,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 
 	private String getEditArticleName() {
-		String header = getHeader();
-		return header.substring(header.indexOf(' ') + 1);
+		return executeScriptRet(WikiaGlobalVariables.wgPageName);
 	}
 
 	private String getModeName() {
