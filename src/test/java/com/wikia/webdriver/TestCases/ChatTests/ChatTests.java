@@ -366,4 +366,44 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(9);
 	}
+
+	/**
+	 * Test 9: CONN-197: Test if Chat ban user modal is showing and is operational
+	 *
+	 * 1. There are two users in the chat room user A and user B (Staff member).
+	 * 2. User B opens the drop-down menu for user A and clicks Ban user.
+	 * 3. Modal dialog to ban the user appears.
+	 * 4. user B clicks on the ban user button.
+	 * 5. user B un-bans user A.
+	 */
+	@Test(groups = {"Chat_009", "Chat"})
+	public void Chat_009_ban_user()
+	{
+		//first user opens the chat
+		WikiArticlePageObject home = new WikiArticlePageObject(driver);
+		home.openWikiPage();
+		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
+		loginUser1.logInCookie(Properties.userName3, Properties.password3);
+		ChatPageObject chat1 = new ChatPageObject(driver);
+		//second user opens the chat
+		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
+		home2.openWikiPage();
+		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
+		loginUser2.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		ChatPageObject chat2 = new ChatPageObject(driver2);
+
+		chat2.openChatPage();
+		chat2.verifyChatPage();
+		chat1.openChatPage();
+		chat1.verifyChatPage();
+
+		//test
+		chat2.verifyUserJoinToChat(Properties.userName3);
+		chat2.verifyUserIsVisibleOnContactsList(Properties.userName3);
+		chat1.verifyUserIsVisibleOnContactsList(Properties.userNameStaff);
+
+		chat2.clickOnDifferentUser(Properties.userName3, driver2);
+		chat2.banUser(Properties.userName3, driver2);
+		chat2.unBanUser(Properties.userName3, driver2);
+	}
 }
