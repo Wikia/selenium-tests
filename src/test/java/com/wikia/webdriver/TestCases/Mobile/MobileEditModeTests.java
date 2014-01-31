@@ -20,13 +20,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Mobile.MobileHistoryPag
  * 2. Verify that edit text and summary text are retained when switching between preview mode and edit mode
  * 3. Verify that edit on a mobile browser would show the '(Mobile)' tag on the edit history page
  * 4. Cancel from edit mode goes back to article
- * 5. Editing the correct section from article.
- * 6. Non signed in user do not have edit option on article
- * 7. Preview is non-interactive, only scrolling
+ * 5. Verify that clicking edit on a section only shows the correct section in edit mode
+ * 6. Anon user does not have edit option on article
+ * 7. Verify that preview is non-interactive, only scrolling
  * 8. Opening license to see if opens in new tab
  * 9. check for the new article banner can be dismissed
  */
-public class MobileEditTests extends NewTestTemplate{
+public class MobileEditModeTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
@@ -35,9 +35,8 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
-		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobile.goToNewArticleEditMode(wikiURL);
+				mobile.openNewArticleEditMode(wikiURL);
 		mobileEdit.verifyModeName();
 	}
 
@@ -46,14 +45,13 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
-		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobile.goToNewArticleEditMode(wikiURL);
-		mobileEdit.enterEditText(PageContent.articleText);
+				mobile.openNewArticleEditMode(wikiURL);
+		mobileEdit.typIntoEditArea(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
 		mobilePreview.verifyEditModeContent(PageContent.articleText);
 		mobilePreview.verifyPreviewPageHeader(MobilePageContent.previewHeader);
-		mobilePreview.enterSummaryText(MobilePageContent.summaryText);
+		mobilePreview.typeSummaryText(MobilePageContent.summaryText);
 		MobileEditModePageObject continueMobileEdit = mobilePreview.clickKeepEditing();
 		continueMobileEdit.verifyEditText(PageContent.articleText);
 		MobileEditPreviewPageObject continueMobilePreview = continueMobileEdit.clickPreview();
@@ -65,15 +63,14 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
 		mobile.loginDropDown(credentials.userName, credentials.password);
-		//go into edit mode ?action=edit
 		MobileEditModePageObject mobileEdit =
-				mobile.goToNewArticleEditMode(wikiURL);
+				mobile.openNewArticleEditMode(wikiURL);
 		String articleName = mobile.getCurrentUrl();
-		mobileEdit.enterEditText(PageContent.articleText);
+		mobileEdit.typIntoEditArea(PageContent.articleText);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
 		mobilePreview.verifyEditModeContent(PageContent.articleText);
 		mobilePreview.verifyPreviewPageHeader(MobilePageContent.previewHeader);
-		mobilePreview.enterSummaryText(MobilePageContent.summaryText);
+		mobilePreview.typeSummaryText(MobilePageContent.summaryText);
 		MobileArticlePageObject mobileArticle = mobilePreview.clickPublish();
 		MobileHistoryPageObject mobileArticleHistory =
 				mobileArticle.goToCurrentArticleHistoryPage();

@@ -359,15 +359,15 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		);
 		PageObjectLogging.log("verifyMenu", "menu was veryfied", true);
 	}
-	
+
 	public MobileHistoryPageObject goToCurrentArticleHistoryPage() {
 		getUrl(
-				urlBuilder.appendQueryStringToURL(
-					driver.getCurrentUrl(),
-					URLsContent.historyAction
-				)
-			);
-			return new MobileHistoryPageObject(driver);
+			urlBuilder.appendQueryStringToURL(
+				driver.getCurrentUrl(),
+				URLsContent.historyAction
+			)
+		);
+		return new MobileHistoryPageObject(driver);
 	}
 
 }

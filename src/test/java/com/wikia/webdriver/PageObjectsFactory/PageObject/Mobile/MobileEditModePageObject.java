@@ -17,11 +17,9 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	@FindBy(css="#wkPreview")
 	private WebElement editPreviewButton;
 	@FindBy(css="#wpTextbox1")
-	private WebElement textArea;
+	private WebElement editArea;
 	@FindBy(css="#wkMobileCancel")
 	private WebElement editCancelButton;
-
-	private final String editPreviewButtonString = "#wkPreview";
 
 	public MobileArticlePageObject clickCancel() {
 		editCancelButton.click();
@@ -33,7 +31,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 
 	public MobileEditPreviewPageObject clickPreview() {
-		WebElement editPreviewButton = waitForElementByCss(editPreviewButtonString);
+		waitForElementByElement(editPreviewButton);
 		waitForElementClickableByElement(editPreviewButton);
 		jQueryClick(editPreviewButton);
 		return new MobileEditPreviewPageObject(driver);
@@ -47,25 +45,27 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	public void verifyModeName() {
 		Assertion.assertEquals(MobilePageContent.editModeHeader, getModeName());
 		PageObjectLogging.log(
-				"verifyModeName",
-				"verifying the header shows '" + MobilePageContent.editModeHeader + "'",
-				true
+			"verifyModeName",
+			"The header shows '" + MobilePageContent.editModeHeader + "'",
+			true
 		);
 	}
 
-	public void enterEditText(String text) {
-		textArea.sendKeys(text);
+	public void typIntoEditArea(String text) {
+		editArea.sendKeys(text);
 	}
 
 	private String getEditText() {
-		return textArea.getAttribute("value");
+		return editArea.getAttribute("value");
 	}
 
 	public void verifyEditText(String targetText) {
 		waitForValueToBePresentInElementsAttributeByElement(
-				textArea, "value", targetText);
+			editArea, "value", targetText);
 		Assertion.assertEquals(targetText, getEditText());
-		PageObjectLogging.log("verifyEditText",
-				"verifying the summary shows " + targetText, true);
+		PageObjectLogging.log(
+			"verifyEditText",
+			"The summary shows " + targetText,
+			true);
 	}
 }

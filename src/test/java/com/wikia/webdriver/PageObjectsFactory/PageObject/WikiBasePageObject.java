@@ -997,7 +997,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new FacebookMainPageObject(driver);
 	}
 
-	public String getRandomArticleName () {
+	public String getNameForArticle () {
 		return PageContent.articleNamePrefix + getTimeStamp();
 	}
 }

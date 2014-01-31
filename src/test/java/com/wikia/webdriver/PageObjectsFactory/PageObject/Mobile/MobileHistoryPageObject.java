@@ -39,18 +39,18 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 	public void verifyArticleName(String targetText) {
 		Assertion.assertStringContains(targetText, getArticleName());
 		PageObjectLogging.log(
-				"verifyArticleName",
-				"verifying the article shows " + targetText,
-				true
+			"verifyArticleName",
+			"The article shows " + targetText,
+			true
 		);
 	}
 
 	public void verifyHistoryPageHeader(String targetText) {
 		Assertion.assertStringContains(targetText, getModeName());
 		PageObjectLogging.log(
-				"verifyHistoryPageHeader",
-				"verifying the summary shows " + targetText,
-				true
+			"verifyHistoryPageHeader",
+			"The summary shows " + targetText,
+			true
 		);
 	}
 
@@ -61,18 +61,18 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 	public void verifyLastEditHistoryDevice(String targetText) {
 		Assertion.assertStringContains(targetText, getLastEditHistoryDevice());
 		PageObjectLogging.log(
-				"verifyLastEditHistoryDevice",
-				"verifying the last edit shows " + targetText,
-				true
+			"verifyLastEditHistoryDevice",
+			"The last edit shows " + targetText,
+			true
 		);
 	}
 
 	public void verifyLastEditHistorySummary(String targetText) {
 		Assertion.assertStringContains(targetText, getLastHistorySummary());
 		PageObjectLogging.log(
-				"verifyLastEditHistorySummary",
-				"verifying the last edit summary shows " + targetText,
-				true
+			"verifyLastEditHistorySummary",
+			"The last edit summary shows " + targetText,
+			true
 		);
 	}
 
