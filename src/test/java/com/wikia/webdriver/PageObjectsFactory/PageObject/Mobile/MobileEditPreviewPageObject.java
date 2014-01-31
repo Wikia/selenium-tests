@@ -65,7 +65,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	public void verifySummaryText(String targetText) {
 //		waitForElementByElement(previewZoomer);
 		try {
-			wait(1000);
+			wait(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
