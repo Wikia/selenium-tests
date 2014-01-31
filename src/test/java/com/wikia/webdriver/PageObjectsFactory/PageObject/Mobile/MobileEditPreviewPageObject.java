@@ -63,7 +63,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 
 	public void verifySummaryText(String targetText) {
-		waitForElementClickableByElement(previewZoomer);
+		waitForElementByElement(previewZoomer);
 		waitForValueToBePresentInElementsAttributeByElement(
 			summaryTextBox,
 			"value",

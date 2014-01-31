@@ -31,8 +31,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 
 	public MobileEditPreviewPageObject clickPreview() {
-		waitForElementByCss("#wkMdlWrp[class=zoomer]");
-//		waitForElementByElement(editPreviewButton);
+		waitForElementByElement(editPreviewButton);
 		waitForElementClickableByElement(editPreviewButton);
 		jQueryClick(editPreviewButton);
 		return new MobileEditPreviewPageObject(driver);
