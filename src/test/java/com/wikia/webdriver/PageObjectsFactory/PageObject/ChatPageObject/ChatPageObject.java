@@ -351,8 +351,8 @@ public class ChatPageObject extends BasePageObject
 
 	/**
 	 * @author Evgeniy (aquilax)
-	 * @param userName
-	 * @param driver
+	 * @param userName User name of the user to be banned
+	 * @param driver WebDriver in context
 	 * clicks on ban user modal
 	 */
 	private void clickBanUser(String userName, WebDriver driver)
@@ -364,8 +364,8 @@ public class ChatPageObject extends BasePageObject
 
 	/**
 	 * @author Evgeniy (aquilax)
-	 * @param userName
-	 * @param driver
+	 * @param userName User name of the user to be banned
+	 * @param driver WebDriver in context
 	 * Ban user from chat
 	 * method should be executed after clickOnDifferentUser()
 	 */
@@ -375,12 +375,12 @@ public class ChatPageObject extends BasePageObject
 		chatBanModalButton.click();
 		waitForElementNotVisibleByElement(chatBanModal);
 		PageObjectLogging.log("clickBanUser", userName+" ban modal is closed",
-			true, driver);
+			true);
 	}
 
 	/**
 	 * @author Evgeniy (aquilax)
-	 * @param userName
+	 * @param userName User name of the user that was unbanned
 	 * Check for unban notification message
 	 */
 	private void verifyChatUnbanMessage(String userName)
@@ -390,8 +390,8 @@ public class ChatPageObject extends BasePageObject
 
 	/**
 	 * @author Evgeniy (aquilax)
-	 * @param userName
-	 * @param driver
+	 * @param userName User name of the user to be unbanned
+	 * @param driver WebDriver in context
 	 * Unban user from chat after the user is banned. Note that the function
 	 * relies that the user is banned in the current session.
 	 * method should be executed after banUser()
@@ -405,7 +405,7 @@ public class ChatPageObject extends BasePageObject
 		unbanLink.click();
 		verifyChatUnbanMessage(userName);
 		PageObjectLogging.log("unBanUser", userName+" is no longer banned",
-			true, driver);
+			true);
 	}
 
 	/**

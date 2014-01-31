@@ -13,9 +13,9 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 
 	/**
 	 * Create ChatPageObject with logged in user
-	 * @param driver
-	 * @param userName
-	 * @param password
+	 * @param driver WebDriver in context
+	 * @param userName User name to be used for the chat
+	 * @param password User password to be used for the chat
 	 * @return ChatPageObject
 	 */
 	private ChatPageObject createChatPageObject(WebDriver driver,
