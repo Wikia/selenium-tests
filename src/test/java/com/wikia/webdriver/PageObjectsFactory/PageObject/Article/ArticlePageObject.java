@@ -17,6 +17,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -127,6 +128,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement table;
 	@FindBy(css=".WikiHeader > h1 > a")
 	private WebElement wikiNameHeader;
+	@FindBy(css="#mw-content-text img.thumbimage")
+	private WebElement thumbnailImageArticle;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -637,5 +640,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyTableRemoved() {
 		Assertion.assertTrue(!checkIfElementOnPage(table));
 		PageObjectLogging.log("verifyTableRemoved", "table was removed", true);
+	}
+
+	public LightboxComponentObject clickThumbnailImage() {
+		waitForElementClickableByElement(thumbnailImageArticle);
+		thumbnailImageArticle.click();
+		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
+		return new LightboxComponentObject(driver);
 	}
 }
