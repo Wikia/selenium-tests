@@ -23,6 +23,8 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	private WebElement articleText;
 	@FindBy(css="#wkMdlTlBar > span")
 	private WebElement selectedPageHeader;
+	@FindBy(css="#wkMdlWrp.open")
+	private WebElement previewZoomer;
 
 	public void verifyEditModeContent(String targetText) {
 		Assertion.assertStringContains(targetText, articleText.getText());
@@ -61,6 +63,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 
 	public void verifySummaryText(String targetText) {
+		waitForElementByElement(previewZoomer);
 		waitForValueToBePresentInElementsAttributeByElement(
 			summaryTextBox,
 			"value",
