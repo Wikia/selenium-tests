@@ -39,7 +39,6 @@ public class MobileEditTests extends NewTestTemplate{
 		MobileEditModePageObject mobileEdit =
 				mobile.goToNewArticleEditMode(wikiURL);
 		mobileEdit.verifyModeName();
-		mobileEdit.verifyEditArticleName();
 	}
 
 	@Test(groups={"MobileEdit_002", "MobileEdit", "Mobile"})

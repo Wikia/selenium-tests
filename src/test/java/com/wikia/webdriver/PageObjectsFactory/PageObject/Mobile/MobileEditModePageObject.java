@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.ContentPatterns.MobilePageContent;
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -41,25 +39,9 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		return new MobileEditPreviewPageObject(driver);
 	}
 
-	private String getEditArticleName() {
-		return executeScriptRet(WikiaGlobalVariables.wgPageName);
-	}
-
 	private String getModeName() {
 		String header = getHeader();
 		return header.substring(0, header.indexOf(' '));
-	}
-
-	public void verifyEditArticleName() {
-		String url = driver.getCurrentUrl();
-		String urlArticleName =
-			url.substring(url.indexOf(PageContent.articleNamePrefix), url.indexOf('?'));
-		Assertion.assertEquals(urlArticleName, getEditArticleName());
-		PageObjectLogging.log(
-				"verifyModeName",
-				"verifying the article shows '" + urlArticleName + "'",
-				true
-		);
 	}
 
 	public void verifyModeName() {

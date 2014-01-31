@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -27,8 +28,7 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 	}
 
 	private String getArticleName() {
-		String header = getHeader();
-		return header.substring(header.indexOf('"') + 1, header.length() - 1);
+		return executeScriptRet(WikiaGlobalVariables.wgPageName);
 	}
 
 	private String getModeName() {
