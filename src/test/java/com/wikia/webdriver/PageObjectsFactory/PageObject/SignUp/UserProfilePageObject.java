@@ -47,15 +47,24 @@ public class UserProfilePageObject extends WikiBasePageObject {
 	}
 
 	public BlogPageObject openBlogPage(int blogNumber) {
-		getUrl(blogPostList.get(blogNumber).getAttribute("href"));
+		String blogURL = blogPostList.get(blogNumber).getAttribute("href");
+		getUrl(blogURL);
 		PageObjectLogging.log("openBlogPage",
-				"blog post " + blogPostList.get(0).getText() + " opened",
+				"blog post " + blogURL + " opened",
 				true);
 		return new BlogPageObject(driver);
 	}
 
 	public BlogPageObject openFirstPost() {
-		openBlogPage(0);
+		for (int i = 0; i < blogPostList.size(); i++) {
+			BlogPageObject blogPage = openBlogPage(i);
+			if (!blogPage.getAtricleTextRaw().contains("deleted")) {
+				PageObjectLogging.log("openFirstPost", "valid post found on " + i + " position", true);
+				break;
+			}
+			PageObjectLogging.log("openFirstPost", "deleted post found on " + i + " position, trying next one", true);
+			navigateBack();
+		}
 		return new BlogPageObject(driver);
 	}
 

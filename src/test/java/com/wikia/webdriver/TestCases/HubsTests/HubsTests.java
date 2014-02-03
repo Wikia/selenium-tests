@@ -17,6 +17,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWi
  *
  * @author Karol 'kkarolk' Kujawiak
  * @author Michal 'justptT' Nowierski
+ * @author Robert 'rochan' Chan
  */
 public class HubsTests extends NewTestTemplateBeforeClass {
 
@@ -107,5 +108,15 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		HomePageObject home = base.openCorporateHomePage(wikiCorporateURL);
 		HashMap<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
 		home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
+	}
+	
+	@Test(groups = { "HubsTests005", "Hubs", "new" })
+	/**
+	 * Verify that each language drop down  goes to the correct page
+	 */
+	public void HubsTest005_VerifyLanguagesSelection() {
+		HomePageObject home = new HomePageObject(driver);
+		home.openCorporateHomePage(wikiCorporateURL);
+		home.verifyLanguageDropdownURLs();
 	}
 }

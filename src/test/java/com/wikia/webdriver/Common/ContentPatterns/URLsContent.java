@@ -13,6 +13,7 @@ public class URLsContent {
 
 	// Common url component
 	public static String wikiDir = "wiki/";
+	public static String wikiaDir = "Wikia";
 
 	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
 
