@@ -19,7 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 
-public class ClickTrackingArticleEditModeTests extends NewTestTemplate{
+public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 

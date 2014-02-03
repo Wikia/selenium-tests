@@ -1,11 +1,12 @@
 package com.wikia.webdriver.TestCases.SearchTests;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
-import com.wikia.webdriver.Common.Clicktracking.TestExpectedEvents.EventsCrossWikiSearchTests;
+import com.wikia.webdriver.Common.Clicktracking.Events.EventsCrossWikiSearch;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.CrossWikiSearch.CrossWikiSearchPageObject;
@@ -31,8 +32,19 @@ public class ClickTrackingCrossWikiSearchTests extends NewTestTemplate {
 		search.searchFor("noresultsatall");
 		search.executeScript(ClickTrackingScriptsProvider.trackerInstallation);
 
-		List<String> expectedEvents;
-		expectedEvents = EventsCrossWikiSearchTests.getExpectedEventsForTest001();
+		List<String> expectedEvents = Arrays.asList(
+				EventsCrossWikiSearch.EventHitEnterCrossWikiSearchInput,
+				EventsCrossWikiSearch.EventPushToTop,
+				EventsCrossWikiSearch.EventFirstCrossWikiSearchResult,
+				EventsCrossWikiSearch.EventSecondCrossWikiSearchResult,
+				EventsCrossWikiSearch.EventThirdCrossWikiSearchResult,
+				EventsCrossWikiSearch.EventFourthCrossWikiSearchResult,
+				EventsCrossWikiSearch.EventFifthCrossWikiSearchResult,
+				EventsCrossWikiSearch.EventSixthCrossWikiSearchResult,
+				EventsCrossWikiSearch.EventClickSearchButton,
+				EventsCrossWikiSearch.EventEmptySearchResultPage
+				);
+
 		search.compareTrackedEventsTo(expectedEvents);
 	}
 }
