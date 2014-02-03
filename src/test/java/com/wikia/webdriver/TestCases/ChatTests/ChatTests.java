@@ -334,7 +334,7 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	 * 4. user B clicks on the ban user button.
 	 * 5. user B un-bans user A.
 	 */
-	@Test(groups = {"Chat_009", "Chat"})
+	@Test(groups = {"Chat_009", "Chat", "Modals"})
 	public void Chat_009_ban_user()
 	{
 		//first user opens the chat
