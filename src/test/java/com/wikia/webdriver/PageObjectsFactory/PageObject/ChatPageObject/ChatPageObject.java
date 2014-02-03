@@ -50,11 +50,11 @@ public class ChatPageObject extends BasePageObject
 	private WebElement giveChatModStatusButton;
 	@FindBy(css=".continued.inline-alert")
 	private WebElement chatInlineAlertContinued;
-	@FindBy(css="div#UserStatsMenu li.ban")
+	@FindBy(css="#UserStatsMenu li.ban")
 	private WebElement banUserButton;
-	@FindBy(css="div#ChatBanModal")
+	@FindBy(css="#ChatBanModal")
 	private WebElement chatBanModal;
-	@FindBy(css="div#ChatBanModal button.primary")
+	@FindBy(css="#ChatBanModal button.primary")
 	private WebElement chatBanModalButton;
 
 	By userContextMenu = By.cssSelector("ul.regular-actions li");
