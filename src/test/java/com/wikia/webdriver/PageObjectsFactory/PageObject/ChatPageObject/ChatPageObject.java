@@ -50,11 +50,22 @@ public class ChatPageObject extends BasePageObject
 	private WebElement giveChatModStatusButton;
 	@FindBy(css=".continued.inline-alert")
 	private WebElement chatInlineAlertContinued;
+	@FindBy(css="#UserStatsMenu li.ban")
+	private WebElement banUserButton;
+	@FindBy(css="#ChatBanModal")
+	private WebElement chatBanModal;
+	@FindBy(css="#ChatBanModal button.primary")
+	private WebElement chatBanModalButton;
 
 	By userContextMenu = By.cssSelector("ul.regular-actions li");
 	By adminContextMenu = By.cssSelector("ul.admin-actions li");
 	By privateMessageHeader = By.cssSelector("#Rail h1.private");
 	By privateChatHeader = By.cssSelector("#ChatHeader h1.private");
+
+	final private String userUnbanLink = "//a[@data-type='ban-undo' "
+			+ "and @data-user='%s']";
+	final private String userUnbanConfirmMessage = "//div[@class='Chat']"
+			+ "//li[contains(text(), 'has ended the Chat ban for %s')]";
 
 	public ChatPageObject(WebDriver driver)
 	{
@@ -339,6 +350,65 @@ public class ChatPageObject extends BasePageObject
 	}
 
 	/**
+	 * @author Evgeniy (aquilax)
+	 * @param userName User name of the user to be banned
+	 * @param driver WebDriver in context
+	 * clicks on ban user modal
+	 */
+	private void clickBanUser(String userName, WebDriver driver)
+	{
+		banUserButton.click();
+		waitForElementByElement(chatBanModal);
+		PageObjectLogging.log("clickBanUser", "ban user "+userName+" is clicked", true, driver);
+	}
+
+	/**
+	 * @author Evgeniy (aquilax)
+	 * @param userName User name of the user to be banned
+	 * @param driver WebDriver in context
+	 * Ban user from chat
+	 * method should be executed after clickOnDifferentUser()
+	 */
+	public void banUser(String userName, WebDriver driver)
+	{
+		clickBanUser(userName, driver);
+		chatBanModalButton.click();
+		waitForElementNotVisibleByElement(chatBanModal);
+		PageObjectLogging.log("clickBanUser", userName+" ban modal is closed",
+			true);
+	}
+
+	/**
+	 * @author Evgeniy (aquilax)
+	 * @param userName User name of the user that was unbanned
+	 * Check for unban notification message
+	 */
+	private void verifyChatUnbanMessage(String userName)
+	{
+		waitForElementByXPath(String.format(userUnbanConfirmMessage, userName));
+	}
+
+	/**
+	 * @author Evgeniy (aquilax)
+	 * @param userName User name of the user to be unbanned
+	 * @param driver WebDriver in context
+	 * Unban user from chat after the user is banned. Note that the function
+	 * relies that the user is banned in the current session.
+	 * method should be executed after banUser()
+	 */
+	public void unBanUser(String userName, WebDriver driver)
+	{
+		WebElement unbanLink = driver.findElement(By.xpath(
+			String.format(userUnbanLink, userName)
+		));
+		waitForElementByElement(unbanLink);
+		unbanLink.click();
+		verifyChatUnbanMessage(userName);
+		PageObjectLogging.log("unBanUser", userName+" is no longer banned",
+			true);
+	}
+
+	/**
 	 * @author Karol Kujawiak
 	 * @param userName
 	 * @param driver
@@ -361,8 +431,7 @@ public class ChatPageObject extends BasePageObject
 		executeScript("document.querySelectorAll('#user-"+userName+"')[0].click()", driver);
 		PageObjectLogging.log("clickOnDifferentUser", userName+" button clicked", true, driver);
 	}
-	
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param driver
@@ -379,7 +448,7 @@ public class ChatPageObject extends BasePageObject
 //		executeScript("document.querySelectorAll('.private-block')[0].click()", driver);
 		PageObjectLogging.log("blockPrivateMessageFromUser", "private messages are blocked now", true, driver);
 	}
-	
+
 	/**
 	 * @author Karol Kujawiak
 	 * @param userName
@@ -388,7 +457,6 @@ public class ChatPageObject extends BasePageObject
 	 */
 	public void allowPrivateMessageFromUser(String userName, WebDriver driver)
 	{
-		
 //		Point p = allowPrivateMassageButton.getLocation();
 //		CommonFunctions.MoveCursorToElement(p, driver);
 //		CommonFunctions.ClickElement();
@@ -396,7 +464,7 @@ public class ChatPageObject extends BasePageObject
 		waitForElementByBy(By.xpath("//li[@id='priv-user-"+userName+"']"));
 		PageObjectLogging.log("allowPrivateMessageFromUser", "private messages from "+userName+" are allowed now", true, driver);
 	}
-	
+
 	/**
 	 * @author Karol
 	 * @return
@@ -406,7 +474,7 @@ public class ChatPageObject extends BasePageObject
 	{
 		waitForElementByBy(userContextMenu);
 		List<WebElement> list = driver.findElements(userContextMenu); 
-		return list;		
+		return list;
 	}
 
 	/**
@@ -417,7 +485,7 @@ public class ChatPageObject extends BasePageObject
 	private  List<WebElement> getAdminDropDownListOfElements()
 	{
 		List<WebElement> list = driver.findElements(adminContextMenu); 
-		return list;		
+		return list;
 	}
 	
 }
