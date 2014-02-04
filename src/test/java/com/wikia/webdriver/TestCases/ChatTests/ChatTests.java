@@ -13,19 +13,22 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 
 	/**
 	 * Create ChatPageObject with logged in user
-	 * @param driver WebDriver in context
+	 * @param webDriver WebDriver in context
 	 * @param userName User name to be used for the chat
 	 * @param password User password to be used for the chat
+	 * @param switchToWindow Should switch to window be used
 	 * @return ChatPageObject
 	 */
-	private ChatPageObject createChatPageObject(WebDriver driver,
-			String userName, String password) {
-		switchToWindow(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
+	private ChatPageObject createChatPageObject(WebDriver webDriver,
+			String userName, String password, Boolean switchToWindow) {
+		if (switchToWindow) {
+			switchToWindow(webDriver);
+		}
+		WikiArticlePageObject home = new WikiArticlePageObject(webDriver);
 		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser = new SpecialUserLoginPageObject(driver);
+		SpecialUserLoginPageObject loginUser = new SpecialUserLoginPageObject(webDriver);
 		loginUser.logInCookie(userName, password);
-		return new ChatPageObject(driver);
+		return new ChatPageObject(webDriver);
 	}
 
 	/*
@@ -59,12 +62,12 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password);
+				Properties.userName, Properties.password, true);
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2);
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		switchToWindow(driver);
@@ -83,11 +86,11 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password);
+				Properties.userName, Properties.password, true);
 		chat1.openChatPage();
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2);
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		//Test
@@ -108,10 +111,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password);
+				Properties.userName, Properties.password, true);
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2);
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -140,10 +143,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userNameStaff, Properties.passwordStaff);
+				Properties.userNameStaff, Properties.passwordStaff, true);
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2);
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -181,10 +184,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password);
+				Properties.userName, Properties.password, true);
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2);
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -215,10 +218,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password);
+				Properties.userName, Properties.password, true);
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2);
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -249,10 +252,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName3, Properties.password3);
+				Properties.userName3, Properties.password3, false);
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName4, Properties.password4);
+				Properties.userName4, Properties.password4, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
@@ -288,10 +291,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName5, Properties.password5);
+				Properties.userName5, Properties.password5, false);
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName6, Properties.password6);
+				Properties.userName6, Properties.password6, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
@@ -339,10 +342,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-			Properties.userName3, Properties.password3);
+			Properties.userName3, Properties.password3, false);
 		//second user opens the chat
 		ChatPageObject chat2 = createChatPageObject(driver2,
-			Properties.userNameStaff, Properties.passwordStaff);
+			Properties.userNameStaff, Properties.passwordStaff, false);
 
 		chat2.openChatPage();
 		chat2.verifyChatPage();
