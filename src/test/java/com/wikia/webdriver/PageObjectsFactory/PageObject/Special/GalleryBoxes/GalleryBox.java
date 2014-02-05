@@ -11,7 +11,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class GalleryBox extends WikiBasePageObject {
 
@@ -20,24 +19,17 @@ public class GalleryBox extends WikiBasePageObject {
 	@FindBy(css = ".gallerybox a.image img:not(.play)")
 	private List<WebElement> galleryImageBox;
 
-	/**
-	 * @param driver
-	 */
 	public GalleryBox(WebDriver driver) {
 		super(driver);
 	}
 
 	public LightboxComponentObject openLightboxForGridImage(int itemNumber) {
-		scrollAndClick(
-				galleryImageBox.get(itemNumber)
-		);
+		scrollAndClick(galleryImageBox.get(itemNumber));
 		return new LightboxComponentObject(driver);
 	}
 
 	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
-		scrollAndClick(
-				galleryVideoBox.get(itemNumber)
-		);
+		scrollAndClick(galleryVideoBox.get(itemNumber));
 		return new LightboxComponentObject(driver);
 	}
 

@@ -11,7 +11,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class RelatedVideoComponentObject extends WikiBasePageObject {
 
@@ -26,6 +25,4 @@ public class RelatedVideoComponentObject extends WikiBasePageObject {
 		scrollAndClick(relatedVideoThumbnails.get(0));
 		return new LightboxComponentObject(driver);
 	}
-
-
 }

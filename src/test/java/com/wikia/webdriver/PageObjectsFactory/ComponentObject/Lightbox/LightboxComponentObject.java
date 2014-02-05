@@ -6,12 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class LightboxComponentObject extends WikiBasePageObject {
 	public LightboxComponentObject(WebDriver driver) {
@@ -34,11 +31,11 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement facebookShareLink;
 	@FindBy(css="a.twitter")
 	private WebElement twitterShareLink;
-	@FindBy(css="a[class='stumbleupon']")
+	@FindBy(css="a.stumbleupon")
 	private WebElement stumbleUponShareLink;
-	@FindBy(css="a[class='reddit']")
+	@FindBy(css="a.reddit")
 	private WebElement redditShareLink;
-	@FindBy(css="a[class='plusone']")
+	@FindBy(css="a.plusone")
 	private WebElement plusoneShareLink;
 
 	public void verifyLightboxPopup() {
@@ -100,11 +97,5 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void clickPlusOneShareButton() {
 		plusoneShareLink.click();
 		PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
-	}
-
-	public ArticlePageObject clickCloseButton() {
-		jQueryClick(closeModalButton);
-		PageObjectLogging.log("clickCloseButton", "close button is clicked", true);
-		return new ArticlePageObject(driver);
 	}
 }

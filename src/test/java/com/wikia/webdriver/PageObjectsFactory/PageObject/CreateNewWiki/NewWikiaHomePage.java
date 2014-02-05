@@ -14,9 +14,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  */
 public class NewWikiaHomePage extends WikiBasePageObject {
 
-	@FindBy(css = "section#WikiWelcomeWrapper")
+	@FindBy(css = "#WikiWelcomeWrapper")
 	private WebElement welcomeWrapper;
-	@FindBy(css = "div#WikiWelcome")
+	@FindBy(css = "#WikiWelcome")
 	private WebElement welcomeLightbox;
 
 	public NewWikiaHomePage(WebDriver driver){
@@ -27,11 +27,5 @@ public class NewWikiaHomePage extends WikiBasePageObject {
 		waitForElementByElement(welcomeWrapper);
 		waitForElementByElement(welcomeLightbox);
 		PageObjectLogging.log("waitForCongratulationsLightBox ", "congratulations lightbox verified", true);
-	}
-
-	public void closeCongratulationsLightBox() {
-		waitForElementByElement(closeModalButton);
-		scrollAndClick(closeModalButton);
-		PageObjectLogging.log("closeCongratulationsLightBox ", "congratulations lightbox closed", true);
 	}
 }

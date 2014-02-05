@@ -10,6 +10,9 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
+/**
+ * @author Karol 'kkarolk' Kujawiak
+ */
 public class LatestPhotosComponentObject extends WikiBasePageObject {
 
 	@FindBy(css=".carousel li.thumbs")
@@ -24,6 +27,4 @@ public class LatestPhotosComponentObject extends WikiBasePageObject {
 		PageObjectLogging.log("openLightboxForImage", "lightbox for image opened", true);
 		return new LightboxComponentObject(driver);
 	}
-
-
 }

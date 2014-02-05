@@ -20,7 +20,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
  *
  * 1. Open lightbox from latest photo,
@@ -31,7 +30,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
  * 6. Open lightbox from Special:UncategorizedFiles page
  * 7. Open lightbox from Special:MostLinkedFiles page
  * 8. Open lightbox from article image and verify social buttons
- *
  */
 public class LightboxTests extends NewTestTemplateBeforeClass {
 
@@ -115,6 +113,6 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyUrlInNewWindow(URLsContent.redditDomain);
 		lightbox.clickPlusOneShareButton();
 		lightbox.verifyUrlInNewWindow(URLsContent.googleDomain);
-		lightbox.clickCloseButton();
+		lightbox.closeLightbox();
 	}
 }

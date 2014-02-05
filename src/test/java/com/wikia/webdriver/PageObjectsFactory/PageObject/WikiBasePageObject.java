@@ -172,6 +172,12 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
+	public void closeLightbox() {
+		waitForElementByElement(closeModalButton);
+		scrollAndClick(closeModalButton);
+		PageObjectLogging.log("closeLightbox ", "lightbox closed", true);
+	}
+
 	public String resetForgotPasswordTime(String userName) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
@@ -182,10 +188,9 @@ public class WikiBasePageObject extends BasePageObject {
 		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
 	}
 
-	public void verifyModalLoginAppeared()
-	{
+	public void verifyModalLoginAppeared() {
 		waitForElementByElement(logInModal);
-		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
+		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
 	}
 
 	public SpecialUnusedFilesPageObject openSpecialUnusedFilesPage(String wikiURL) {
@@ -369,9 +374,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialFactoryPageObject openWikiFactoryPage(String wikiURL) {
-		getUrl(
-				wikiURL + URLsContent.specialWikiFactory
-		);
+		getUrl(wikiURL + URLsContent.specialWikiFactory);
 		return new SpecialFactoryPageObject(driver);
 	}
 

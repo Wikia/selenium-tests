@@ -4,15 +4,10 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class SpecialUnusedVideosPageObject extends GalleryBox {
 
-	/**
-	 * @param driver
-	 */
 	public SpecialUnusedVideosPageObject(WebDriver driver) {
 		super(driver);
 	}
-
 }
