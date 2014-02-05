@@ -61,7 +61,10 @@ public class URLsContent {
 	public static final String specialUnblock = "wiki/Special:Unblock";
 	public static final String specialBlock = "wiki/Special:Block";
 	public static final String specialManageWikiaHome = "wiki/Special:ManageWikiaHome";
-
+	public static final String specialUnusedFiles = "wiki/Special:UnusedFiles";
+	public static final String specialUnusedVideos = "wiki/Special:UnusedVideos";
+	public static final String specialUncategorizedFiles = "wiki/Special:UncategorizedFiles";
+	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";

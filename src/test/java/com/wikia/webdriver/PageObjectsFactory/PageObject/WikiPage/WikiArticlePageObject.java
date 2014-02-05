@@ -10,7 +10,6 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.LightboxPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
@@ -132,12 +131,5 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		getUrl(driver.getCurrentUrl() + "?action=history");
 		waitForElementByElement(historyHeadLine);
 		return new WikiHistoryPageObject(driver);
-	}
-
-	public LightboxPageObject clickThumbnailImage() {
-		waitForElementByElement(thumbnailImageArticle);
-		thumbnailImageArticle.click();
-		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
-		return new LightboxPageObject(driver);
 	}
 }
