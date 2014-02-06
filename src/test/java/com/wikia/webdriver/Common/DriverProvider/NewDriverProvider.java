@@ -63,13 +63,14 @@ public class NewDriverProvider {
 		return driver;
 	}
 
-	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser, String userAgent) {
-		browserName = browser;
+	public static void setBrowserUserAgent(String browser, String userAgent) {
 		switch (browser.toUpperCase()) {
 			case "FF":
-				return getFFInstanceWithUserAgent(userAgent);
+				setFFUserAgent(userAgent);
+				break;
 			case "CHROME":
-				return getChromeInstanceWithUserAgent(userAgent);
+				setChromeUserAgent(userAgent);
+				break;
 			default:
 				throw new RuntimeException(
 					"Wrong browser provided. Browser " + browser + " not known"
@@ -157,12 +158,11 @@ public class NewDriverProvider {
 		return new EventFiringWebDriver(new FirefoxDriver(caps));
 	}
 
-	private static EventFiringWebDriver getFFInstanceWithUserAgent(String userAgent) {
+	private static void setFFUserAgent(String userAgent) {
 		firefoxProfile.setPreference(
 			"general.useragent.override",
 			userAgentRegistry.getUserAgent(userAgent)
 		);
-		return getFFInstance();
 	}
 
 	private static EventFiringWebDriver getChromeInstance() {
@@ -196,13 +196,12 @@ public class NewDriverProvider {
 		return new EventFiringWebDriver(new ChromeDriver(caps));
 	}
 
-	private static EventFiringWebDriver getChromeInstanceWithUserAgent(String userAgent) {
+	private static void setChromeUserAgent(String userAgent) {
 		chromeOptions.addArguments(
 			"--user-agent="
 			+ userAgentRegistry.getUserAgent(userAgent)
 		);
 		caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		return getChromeInstance();
 	}
 
 	private static EventFiringWebDriver getPhantomJSInstance() {

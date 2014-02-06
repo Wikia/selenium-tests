@@ -990,4 +990,11 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiCorporateURL + hub.name());
 		return new HubBasePageObject(driver);
 	}
+
+	public void openSpecialPromoteOnCurrentWiki() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String url = (String) js.executeScript("return wgServer");
+		getUrl(url + "/" + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
+	}
 }

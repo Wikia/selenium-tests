@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
+import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -34,6 +35,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	private List<WebElement> spotlights;
 
 	protected Boolean isWikiMainPage;
+	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
 	private WebElement presentLB;
 	private String presentLBName;
@@ -47,8 +49,20 @@ public class AdsBaseObject extends WikiBasePageObject {
 		isWikiMainPage = checkIfMainPage();
 	}
 
+	public AdsBaseObject(
+		WebDriver driver, String page,
+		NetworkTrafficInterceptor networkTrafficInterceptor
+	) {
+		super(driver);
+		AdsContent.setSlotsSelectors();
+		networkTrafficInterceptor.startIntercepting(page);
+		getUrl(page);
+		this.networkTrafficInterceptor = networkTrafficInterceptor;
+	}
+
 	public AdsBaseObject(WebDriver driver) {
 		super(driver);
+		AdsContent.setSlotsSelectors();
 	}
 
 	protected final void setPresentTopLeaderboard() {
@@ -343,8 +357,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	private boolean checkScriptPresentInSlot(WebElement slot, String script) {
 		List<WebElement> scriptsTags = slot.findElements(By.tagName("script"));
+		return checkIfScriptInsideScripts(scriptsTags, script);
+	}
+
+	protected boolean checkIfScriptInsideScripts(List<WebElement> scripts, String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement scriptNode : scriptsTags) {
+		for (WebElement scriptNode : scripts) {
 			String result = (String) js.executeScript(
 				"return arguments[0].innerHTML", scriptNode
 			);

@@ -4,7 +4,7 @@ import com.wikia.webdriver.Common.Core.Annotations.UserAgent;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  *
  * @author Bogna 'bognix' Knychala
  */
-public class TestNoAdsForSony extends AdsTestTemplate {
+public class TestNoAdsForSony extends NewTestTemplate {
 
 	private String testedPage;
 

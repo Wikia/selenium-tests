@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,7 +24,6 @@ public class DriverProvider {
 
 	private static final DriverProvider instance = new DriverProvider();
 	private static WebDriver driver;
-	private static ProxyServer server;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 	private static FirefoxProfile profile = new FirefoxProfile();
 
@@ -170,10 +168,6 @@ public class DriverProvider {
             return driver;
 	}
 
-	public static ProxyServer getServer() {
-            return server;
-	}
-
 	/**
 	 * @author Karol Kujawiak
 	 */
@@ -210,13 +204,5 @@ public class DriverProvider {
 
 			System.setProperty("webdriver.chrome.driver", chromeBinary.getAbsolutePath());
 		}
-	}
-
-	public static void setCapabilities(DesiredCapabilities newCaps) {
-		caps = newCaps;
-	}
-	
-	public static void setFirefoxProfile(FirefoxProfile newFFprofile) {
-		profile = newFFprofile;
 	}
 }
