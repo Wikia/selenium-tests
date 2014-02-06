@@ -46,26 +46,26 @@ public class NetworkTrafficInterceptor extends ProxyServer {
 	}
 
 	public void changeHeader(final String headerName, final String newValue) {
-        addRequestInterceptor(new RequestInterceptor() {
-            @Override
-            public void process(BrowserMobHttpRequest request, Har har) {
-                request.getMethod().removeHeaders(headerName);
-                try {
-                    request.getMethod().addHeader(
-                        headerName,
-                        newValue
-                    );
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+		addRequestInterceptor(new RequestInterceptor() {
+			@Override
+			public void process(BrowserMobHttpRequest request, Har har) {
+				request.getMethod().removeHeaders(headerName);
+				try {
+					request.getMethod().addHeader(
+						headerName,
+						newValue
+					);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	public void setProxyServer(String IP) {
 		Map<String, String> options = new HashMap<>();
-        options.put("httpProxy", IP);
-        setOptions(options);
+		options.put("httpProxy", IP);
+		setOptions(options);
 	}
 
 	@Override

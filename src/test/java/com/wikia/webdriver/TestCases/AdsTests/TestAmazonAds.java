@@ -62,4 +62,16 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyGPTParams();
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
+
+	@GeoEdgeProxy(country="UK")
+	@NetworkTrafficDump
+	@Test(groups = {"AmazonAds", "AmazonAds_UK_debugMode", "Ads"})
+	public void AmazonAdsTest_UK_debugMode() {
+		testedPage = urlBuilder.appendQueryStringToURL(testedPage, amazonForceResponse);
+		AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
+		amazonAds.verifyAmazonScriptIncluded();
+		amazonAds.verifyCallToAmazonIssued();
+		amazonAds.verifyGPTParams();
+		amazonAds.verifyResponseFromAmazonPresent();
+	}
 }
