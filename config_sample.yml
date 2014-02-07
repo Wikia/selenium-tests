@@ -1,7 +1,7 @@
 #THIS IS SAMPLE FILE
 #Copy its content to config.yml file
 #It is used only when you run tests using IDE
-
+test
 browser: FF #acceptable values: FF, CHROME, GHOST
 wikiName: mediawiki119 #default testing wiki
 env: prod #acceptable values: prod, preview, sandbox-number dev-name
