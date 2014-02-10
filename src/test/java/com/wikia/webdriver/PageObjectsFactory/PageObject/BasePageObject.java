@@ -864,4 +864,14 @@ public class BasePageObject{
 		}
 		return fileCheck.getAbsolutePath();
 	}
+
+	public void verifyUrlInNewWindow(String URL) {
+		waitForWindow("", "");
+		Object[] windows = driver.getWindowHandles().toArray();
+		driver.switchTo().window(windows[1].toString());
+		waitForStringInURL(URL);
+		driver.close();
+		driver.switchTo().window(windows[0].toString());
+		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
+	}
 }

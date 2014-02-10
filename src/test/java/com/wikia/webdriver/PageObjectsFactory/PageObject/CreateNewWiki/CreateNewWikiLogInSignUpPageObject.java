@@ -53,6 +53,7 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject{
 	}
 
 	public SignUpPageObject submitSignup() {
+		waitForElementByElement(signUpSubmitButton);
 		signUpSubmitButton.click();
 		PageObjectLogging.log("submitSignUp", "signup submit button was clicked", true, driver);
 		return new SignUpPageObject(driver);
