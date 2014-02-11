@@ -230,4 +230,18 @@ public class AdsDataProvider {
 			{"de.naruto", "Episoden%C3%BCbersicht"}
 		};
 	}
+
+	@DataProvider
+	public static final Object[][] getWikisWithNonStandardHVC() {
+		return new Object[][] {
+			{"mediawiki119"},
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] getWikisWithStandardHVC() {
+		return new Object[][] {
+			{"adeng-test"}
+		};
+	}
 }

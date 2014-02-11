@@ -1,22 +1,21 @@
 package com.wikia.webdriver.TestCases.MarketingToolboxTests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.MarketingToolbox.DashBoardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import org.testng.annotations.Test;
 
 /**
  * User: kvas
  */
-public class DashboardTests extends TestTemplate{
+public class DashboardTests extends NewTestTemplate {
     @Test(groups = {"MarketingToolbox001", "MarketingToolbox"})
     public void dashboardSelectVertical() {
 
     	SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-    	login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+    	login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 
     	DashBoardPageObject pageObject = new DashBoardPageObject(driver);
         login.logOut(driver);
@@ -30,7 +29,7 @@ public class DashboardTests extends TestTemplate{
 
         login.logOut(driver);
 
-        login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff);
+        login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 
         pageObject.openDashboard();
         Assertion.assertTrue(pageObject.checkActiveVertical(DashBoardPageObject.vertical.Video_games));

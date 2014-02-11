@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -78,6 +79,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.openqa.selenium.WebDriverException;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -277,12 +282,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL){
 		getUrl(wikiURL+ URLsContent.specialUserLogin);
-		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
-		return new SpecialUserLoginPageObject(driver);
-	}
-
-	public SpecialUserLoginPageObject openSpecialUserLogin(){
-		getUrl(Global.DOMAIN+ URLsContent.specialUserLogin);
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
 		return new SpecialUserLoginPageObject(driver);
 	}
@@ -1000,5 +999,39 @@ public class WikiBasePageObject extends BasePageObject {
 		String url = (String) js.executeScript("return wgServer");
 		getUrl(url + "/" + URLsContent.specialPromote);
 		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
+	}
+
+	public void verifyWgVariableValueSameAsDefault(
+		wikiFactoryVariables variableName, String defaultValue, String url
+	) {
+		getUrl(url);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		Map<String, Integer> variableValueFromPage = (Map<String, Integer>) js.executeScript(
+			"return window[arguments[0]]", variableName.toString()
+		);
+		List<String> keysFromDefault = new ArrayList<>();
+		Pattern pattern = Pattern.compile("\'.*\'");
+		Matcher matcher = pattern.matcher(defaultValue);
+		while (matcher.find()) {
+			keysFromDefault.add(matcher.group().replaceAll("'", ""));
+		}
+
+		for (String keyFromDefault: keysFromDefault) {
+			if (!variableValueFromPage.containsKey(keyFromDefault)) {
+				throw new WebDriverException("Values on community and on wiki are different");
+			}
+		}
+
+		for (String key: variableValueFromPage.keySet()) {
+			if (!keysFromDefault.contains(key)) {
+				throw new WebDriverException("Values on community and on wiki are different");
+			}
+		}
+
+		PageObjectLogging.log(
+			"VariablesAreTheSame",
+			"Variable on wiki and on community are the same",
+			true
+		);
 	}
 }

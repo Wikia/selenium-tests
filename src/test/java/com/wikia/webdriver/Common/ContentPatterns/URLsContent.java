@@ -15,7 +15,7 @@ public class URLsContent {
 	public static String wikiDir = "wiki/";
 	public static String wikiaDir = "Wikia";
 
-	public static String wikiFactoryLiveDomain = "http://community.wikia.com/wiki/Special:WikiFactory";
+	public static String wikiFactoryWikiName = "community";
 
 	//Related videos
 	public static String relatedVideosList = "MediaWiki:RelatedVideosGlobalList";

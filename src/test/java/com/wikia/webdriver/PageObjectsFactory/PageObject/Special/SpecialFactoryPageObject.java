@@ -1,14 +1,21 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class SpecialFactoryPageObject extends SpecialPageObject
 {
@@ -32,15 +39,11 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 	private WebElement variableList;
 	@FindBy(css="div > div[style*=left] > pre")
 	private WebElement variableValue;
+	@FindBy(css="div > div[style*=right] > pre")
+	private WebElement defaultVariableValue;
 
 	public SpecialFactoryPageObject(WebDriver driver) {
 		super(driver);
-	}
-
-	public SpecialFactoryPageObject openWikiFactoryPage() {
-		getUrl(URLsContent.wikiFactoryLiveDomain);
-		PageObjectLogging.log("openWikiFactoryPage ", "Wiki factory page opened", true, driver);
-		return new SpecialFactoryPageObject(driver);
 	}
 
 	private void clickCloseWikiButton() {
@@ -84,9 +87,28 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 		verifyWikiaClosed();
 	}
 
+	public void verifyVariableValueDifferentThenDefault(wikiFactoryVariables variableName) {
+		selectVariableByVisibleText(variableName);
+		Assertion.assertNotEquals(defaultVariableValue.getText(), variableValue.getText());
+	}
+
+	public void verifyVariableValueSameAsDefault(wikiFactoryVariables variableName) {
+		selectVariableByVisibleText(variableName);
+		Assertion.assertEquals(variableValue.getText(), defaultVariableValue.getText());
+	}
+
 	public void verifyVariableValue(wikiFactoryVariables variableName, String expectedValue) {
+		selectVariableByVisibleText(variableName);
+		Assertion.assertEquals(expectedValue, variableValue.getText());
+	}
+
+	public String getVariableDefaultValue(wikiFactoryVariables variableName) {
+		selectVariableByVisibleText(variableName);
+		return defaultVariableValue.getText();
+	}
+
+	private void selectVariableByVisibleText(wikiFactoryVariables variableName) {
 		Select select = new Select(variableList);
 		select.selectByVisibleText(variableName.toString());
-		Assertion.assertEquals(expectedValue, variableValue.getText());
 	}
 }
