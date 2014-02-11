@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.Annotations.UserAgent;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  *
  '* @author Bogna 'bognix' Knychala
  */
-public class TestNo71MediaAdsForSony extends AdsTestTemplate {
+public class TestNo71MediaAdsForSony extends NewTestTemplate {
 
 	private String testedPage;
 

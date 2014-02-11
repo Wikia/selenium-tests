@@ -990,4 +990,11 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(URLsContent.facebookMainPage);
 		return new FacebookMainPageObject(driver);
 	}
+
+	public void openSpecialPromoteOnCurrentWiki() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String url = (String) js.executeScript("return wgServer");
+		getUrl(url + "/" + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
+	}
 }

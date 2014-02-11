@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import java.io.IOException;
 import org.openqa.selenium.Dimension;
@@ -13,9 +13,7 @@ import org.testng.annotations.Test;
  *
  * @author Bogna 'bognix' Knychala
  */
-public class TestAdSkinPresence extends AdsTestTemplate {
-
-	UrlBuilder urlBuilder;
+public class TestAdSkinPresence extends NewTestTemplate {
 
 	public TestAdSkinPresence() {
 		super();

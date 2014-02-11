@@ -53,7 +53,7 @@ public class UrlBuilder {
 				url += wikiName + "." + devBoxOwner + "." + "wikia-dev.com/";
 			}
 		} catch (NullPointerException ex) {
-			System.out.println("ENV property is not set!");
+			throw new RuntimeException("ENV property is not set!");
 		}
 		return url;
 	}
