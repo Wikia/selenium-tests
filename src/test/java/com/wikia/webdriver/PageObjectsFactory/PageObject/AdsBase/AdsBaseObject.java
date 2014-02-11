@@ -22,7 +22,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsBaseObject extends WikiBasePageObject {

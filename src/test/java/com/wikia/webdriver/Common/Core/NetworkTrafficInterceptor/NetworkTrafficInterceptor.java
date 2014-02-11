@@ -11,7 +11,6 @@ import net.lightbody.bmp.proxy.http.RequestInterceptor;
 import org.openqa.selenium.Proxy;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class NetworkTrafficInterceptor extends ProxyServer {

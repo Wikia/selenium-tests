@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsAmazonObject extends AdsBaseObject {
@@ -24,8 +23,11 @@ public class AdsAmazonObject extends AdsBaseObject {
 	private final String amazonEmptyResponse = "void(0)";
 	private final String amazonScript = "amazon-adsystem.com/e/dtb/bid";
 
-
-	public AdsAmazonObject(WebDriver driver, String testedPage, NetworkTrafficInterceptor networkTrafficInterceptor) {
+	public AdsAmazonObject(
+		WebDriver driver,
+		String testedPage,
+		NetworkTrafficInterceptor networkTrafficInterceptor
+	) {
 		super(driver, testedPage, networkTrafficInterceptor);
 	}
 

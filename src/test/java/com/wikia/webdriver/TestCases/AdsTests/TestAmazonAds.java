@@ -10,7 +10,6 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class TestAmazonAds extends NewTestTemplate {

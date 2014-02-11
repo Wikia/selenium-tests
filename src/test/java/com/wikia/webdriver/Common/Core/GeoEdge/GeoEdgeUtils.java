@@ -12,7 +12,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class GeoEdgeUtils {
@@ -48,25 +47,25 @@ public class GeoEdgeUtils {
 	}
 
 	private String getGeoEdgeUserName() {
-        Element geoEdgeCredentials = (Element) doc.getElementsByTagName("GeoEdgeCredentials").item(0);
+		Element geoEdgeCredentials = (Element) doc.getElementsByTagName("GeoEdgeCredentials").item(0);
 		return (String) geoEdgeCredentials.getElementsByTagName("userName").item(0).getTextContent();
 	}
 
 	private String getGeoEdgePassword() {
-        Element geoEdgeCredentials = (Element) doc.getElementsByTagName("GeoEdgeCredentials").item(0);
+		Element geoEdgeCredentials = (Element) doc.getElementsByTagName("GeoEdgeCredentials").item(0);
 		return (String) geoEdgeCredentials.getElementsByTagName("password").item(0).getTextContent();
 	}
 
-    private void setIPsForCountries() {
+	private void setIPsForCountries() {
 
 		NodeList listOfCountries = doc.getElementsByTagName("Country");
 
-        for (int s = 0; s < listOfCountries.getLength(); s++) {
-            Element oneCountry = (Element) listOfCountries.item(s);
-            countriesConfiguration.put(
-                (String) oneCountry.getElementsByTagName("Name").item(0).getTextContent(),
-                (String) oneCountry.getElementsByTagName("IP").item(0).getTextContent()
-            );
-        }
-    }
+		for (int s = 0; s < listOfCountries.getLength(); s++) {
+			Element oneCountry = (Element) listOfCountries.item(s);
+			countriesConfiguration.put(
+				(String) oneCountry.getElementsByTagName("Name").item(0).getTextContent(),
+				(String) oneCountry.getElementsByTagName("IP").item(0).getTextContent()
+			);
+		}
+	}
 }
