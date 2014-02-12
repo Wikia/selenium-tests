@@ -218,7 +218,7 @@ public class BasePageObject{
 
 	public void jQueryClick(WebElement element){
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("$(arguments[0]).click()", element);
+		js.executeScript("$(arguments[0])[0].click()", element);
 	}
 
 	protected void actionsClick(WebElement element) {
@@ -380,10 +380,9 @@ public class BasePageObject{
 		return (String) js.executeScript("return " + script);
 	}
 
-	public long executeScriptRetLong(String script)
-	{
+	public long executeScriptRetLong(String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		return (Long) js.executeScript("return "+script);
+		return (Long) js.executeScript("return " + script);
 	}
 
 	protected void executeScript(String script, WebDriver driver) {

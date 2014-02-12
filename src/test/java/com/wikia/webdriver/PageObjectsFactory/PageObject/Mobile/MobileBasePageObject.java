@@ -75,6 +75,8 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	private List<WebElement> addSuggestionButton;
 	@FindBy(css="#wkMainCntHdr > h1")
 	protected WebElement selectedPageHeader;
+	@FindBy(css="#wkMainCntHdr > a")
+	private WebElement editButton;
 
 	public void triggerLoginDropDown() {
 		waitForElementByElement(loginDropDownTrigger);
@@ -270,5 +272,25 @@ public class MobileBasePageObject extends WikiBasePageObject {
 		}
 		waitForElementByElement(loginDropDownTrigger);
 		PageObjectLogging.log("logOut", "uses is logged out", true, driver);
+	}
+
+	public MobileEditModePageObject clickEdit() {
+		scrollAndClick(editButton);
+		return new MobileEditModePageObject(driver);
+	}
+
+	public MobileEditModePageObject openNewArticleEditMode(String wikiURL) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+				URLsContent.actionEditParameter
+			)
+		);
+		PageObjectLogging.log(
+			"openNewArticleEditMode",
+			"going to edit mobile edit mode",
+			true
+		);
+		return new MobileEditModePageObject(driver);
 	}
 }
