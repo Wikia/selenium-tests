@@ -4,7 +4,9 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -40,6 +44,10 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
  *
  */
 
+/**
+ * @author wikia
+ *
+ */
 public class BasePageObject{
 
 	public WebDriver driver;
@@ -864,5 +872,29 @@ public class BasePageObject{
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
+	}
+
+	/**
+	 * this method should be called after clicktracking test, in order
+	 * to verify if expected events were tracked
+	 *
+	 * @param expectedEventsList - the expected tracked events
+	 * @author Michal 'justnpT' Nowierski
+	 */
+	public void compareTrackedEventsTo(List<String> expectedEventsList){
+		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
+		ArrayList<String> trackedEventsArrayList = new ArrayList<String>();
+		List<String> trackedEventsList;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//prepare list of tracked events
+		Object event = js.executeScript("return selenium_popEvent()");
+		while (!(event==null)) {
+			trackedEventsArrayList.add(event.toString());
+			event = js.executeScript("return selenium_popEvent()");
+		}
+		trackedEventsList = trackedEventsArrayList;
+		//use comparison method from ClicktrackingSupport class
+		ClickTrackingSupport support = new ClickTrackingSupport();
+		support.compareTrackedEventsTo(expectedEventsList, trackedEventsList);
 	}
 }
