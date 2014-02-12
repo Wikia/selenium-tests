@@ -50,7 +50,7 @@ public class BasePageObject{
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
-	@FindBy(css = "#WallNotifications li")
+	@FindBy(css = "#WallNotifications > li")
 	protected WebElement notifications_ShowNotificationsLogo;
 	@FindBy(css = ".mw-htmlform-submit")
 	protected WebElement followSubmit;
@@ -664,7 +664,7 @@ public class BasePageObject{
 	public void notifications_clickOnNotificationsLogo() {
 		waitForElementByElement(notifications_ShowNotificationsLogo);
 		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		scrollAndClick(notifications_ShowNotificationsLogo);
+		notifications_ShowNotificationsLogo.click();
 		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
 				"click on notifications logo on the upper right corner", true,
 				driver);

@@ -20,7 +20,7 @@ public class ShareToolbarComponentObject extends BasePageObject {
 	private WebElement twitterIframe;
 	@FindBy(css="a#b")
 	private WebElement twitterButton;
-	@FindBy(css="iframe.fb_ltr")
+	@FindBy(css="iframe[title*='fb:like']")
 	private WebElement fBIframe;
 	@FindBy(css="div.pluginConnectButton .pluginConnectButtonDisconnected button")
 	private WebElement fBLikeButton;

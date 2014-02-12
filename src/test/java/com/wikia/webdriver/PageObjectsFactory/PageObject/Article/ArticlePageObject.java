@@ -36,6 +36,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement articleHeader;
 	@FindBy(css="#mw-content-text")
 	protected WebElement articleContentContainer;
+	@FindBy(css="#WikiaMainContentContainer")
+	protected WebElement pageContentContainer;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
 	@FindBy(css="#WikiHeader .drop")
@@ -148,7 +150,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public String getAtricleTextRaw() {
-		return articleContentContainer.getText();
+		return pageContentContainer.getText();
 
 	}
 
