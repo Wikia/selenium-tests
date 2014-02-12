@@ -4,7 +4,7 @@ import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 @Test (
 	groups={"No_Ads_For_Users", "Ads"}
 )
-public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
+public class TestNoAdsLoggedInUsers extends NewTestTemplate {
 
 	private String testedPage;
 	private String testedWiki;
@@ -29,7 +29,7 @@ public class TestNoAdsLoggedInUsers extends AdsTestTemplate {
 	)
 	public TestNoAdsLoggedInUsers(String wikiName, String path) {
 		super();
-		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		testedWiki = urlBuilder.getUrlForWiki(wikiName);
 		if (config.getQS() != null) {

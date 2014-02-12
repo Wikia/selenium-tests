@@ -34,7 +34,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	private final String corpWikiName = "corp";
 
-	@Test(dataProvider = "provideHub", groups = { "HubsTests001", "Hubs" , "Smoke4"})
+	@Test(enabled = false, dataProvider = "provideHub", groups = { "HubsTests001", "Hubs" , "Smoke4"})
 	public void HubsTest001_verifyMosaicSliderShowsImagesOnHover(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
 		HubBasePageObject hub = home.openHubByUrl(hubName, wikiCorporateURL);
@@ -109,7 +109,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		HashMap<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
 		home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
 	}
-	
+
 	@Test(groups = { "HubsTests005", "Hubs", "new" })
 	/**
 	 * Verify that each language drop down  goes to the correct page

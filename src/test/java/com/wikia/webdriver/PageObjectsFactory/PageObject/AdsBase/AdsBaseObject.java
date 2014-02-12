@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
+import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -16,11 +17,11 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsBaseObject extends WikiBasePageObject {
@@ -29,8 +30,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
 	private WebElement wikiaArticle;
+	@FindBy(css=".WikiaSpotlight")
+	private List<WebElement> spotlights;
 
 	protected Boolean isWikiMainPage;
+	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
 	private WebElement presentLB;
 	private String presentLBName;
@@ -44,8 +48,20 @@ public class AdsBaseObject extends WikiBasePageObject {
 		isWikiMainPage = checkIfMainPage();
 	}
 
+	public AdsBaseObject(
+		WebDriver driver, String page,
+		NetworkTrafficInterceptor networkTrafficInterceptor
+	) {
+		super(driver);
+		AdsContent.setSlotsSelectors();
+		networkTrafficInterceptor.startIntercepting(page);
+		getUrl(page);
+		this.networkTrafficInterceptor = networkTrafficInterceptor;
+	}
+
 	public AdsBaseObject(WebDriver driver) {
 		super(driver);
+		AdsContent.setSlotsSelectors();
 	}
 
 	protected final void setPresentTopLeaderboard() {
@@ -293,7 +309,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		verifyNoLiftiumAds();
 	}
 
-	public void verifyNoAdsOnPage() throws Exception {
+	public void verifyNoAdsOnPage() {
 		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
 		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
 		verifyNoAds();
@@ -340,8 +356,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	private boolean checkScriptPresentInSlot(WebElement slot, String script) {
 		List<WebElement> scriptsTags = slot.findElements(By.tagName("script"));
+		return checkIfScriptInsideScripts(scriptsTags, script);
+	}
+
+	protected boolean checkIfScriptInsideScripts(List<WebElement> scripts, String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement scriptNode : scriptsTags) {
+		for (WebElement scriptNode : scripts) {
 			String result = (String) js.executeScript(
 				"return arguments[0].innerHTML", scriptNode
 			);
@@ -407,7 +427,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return selectorAll;
 	}
 
-    private void verifyNoAds() throws Exception {
+    private void verifyNoAds() {
 		Collection<String> slotsSelectors = AdsContent.slotsSelectors.values();
 		for (String selector: slotsSelectors) {
 			if (checkIfElementOnPage(selector)) {
@@ -499,5 +519,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 				}
 			}
 		}
+	}
+
+	public void verifyNoSpotlights() {
+		for (WebElement spotlight: spotlights) {
+			if (spotlight.isDisplayed()) {
+				PageObjectLogging.log("SpotlightVisible", "Spotlight visible, should be hidden", false);
+				throw new WebDriverException("Spotlight visible, should be hidden");
+			}
+		}
+		PageObjectLogging.log("SpotlightsHidden", "Spotlights are hidden", true);
 	}
 }

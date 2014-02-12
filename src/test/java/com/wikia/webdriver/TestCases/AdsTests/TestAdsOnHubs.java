@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test (
 	groups={"Ads_Hubs_Pages", "Ads"}
 )
-public class TestAdsOnHubs extends AdsTestTemplate {
+public class TestAdsOnHubs extends NewTestTemplate {
 
 	private String testedPage;
 
@@ -25,7 +25,7 @@ public class TestAdsOnHubs extends AdsTestTemplate {
 	)
 	public TestAdsOnHubs(String wikiName, String path) {
 		super();
-		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		if (config.getQS() != null) {
 			testedPage = urlBuilder.appendQueryStringToURL(testedPage, config.getQS());

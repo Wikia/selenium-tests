@@ -7,8 +7,29 @@ import com.wikia.webdriver.Common.Templates.TestTemplate_Two_Drivers;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import org.openqa.selenium.WebDriver;
 
 public class ChatTests extends TestTemplate_Two_Drivers{
+
+	/**
+	 * Create ChatPageObject with logged in user
+	 * @param webDriver WebDriver in context
+	 * @param userName User name to be used for the chat
+	 * @param password User password to be used for the chat
+	 * @param switchToWindow Should switch to window be used
+	 * @return ChatPageObject
+	 */
+	private ChatPageObject createChatPageObject(WebDriver webDriver,
+			String userName, String password, Boolean switchToWindow) {
+		if (switchToWindow) {
+			switchToWindow(webDriver);
+		}
+		WikiArticlePageObject home = new WikiArticlePageObject(webDriver);
+		home.openWikiPage();
+		SpecialUserLoginPageObject loginUser = new SpecialUserLoginPageObject(webDriver);
+		loginUser.logInCookie(userName, password);
+		return new ChatPageObject(webDriver);
+	}
 
 	/*
 	 *  Test 1: One user opens chat
@@ -40,21 +61,13 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_001_two_users_open_chat()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName, Properties.password);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userName, Properties.password, true);
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//second user opens the chat
-		switchToWindow(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		switchToWindow(driver);
@@ -72,20 +85,12 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_002_changes_in_drop_down_menu_1()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName, Properties.password);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userName, Properties.password, true);
 		chat1.openChatPage();
 		//second user opens the chat
-		switchToWindow(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		//Test
@@ -105,19 +110,11 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_003_changes_in_drop_down_menu_2()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName, Properties.password);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userName, Properties.password, true);
 		//second user opens the chat
-		switchToWindow(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -145,19 +142,11 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_004_changes_in_drop_down_menu_staff()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userNameStaff, Properties.passwordStaff, true);
 		//second user opens the chat
-		switchToWindow(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -194,19 +183,11 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_005_private_chat_validation()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName, Properties.password);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userName, Properties.password, true);
 		//second user opens the chat
-		switchToWindow(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -236,19 +217,11 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_006_current_chat_messages_area_changes()
 	{
 		//first user opens the chat
-		switchToWindow(driver);
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName, Properties.password);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userName, Properties.password, true);
 		//second user opens the chat
-		switchToWindow(driver2);
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName2, Properties.password2);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName2, Properties.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
@@ -278,17 +251,11 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_007_send_private_message()
 	{
 		//first user opens the chat
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName3, Properties.password3);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userName3, Properties.password3, false);
 		//second user opens the chat
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName4, Properties.password4);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName4, Properties.password4, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
@@ -323,17 +290,11 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	public void Chat_008_notifications()
 	{
 		//first user opens the chat
-		WikiArticlePageObject home = new WikiArticlePageObject(driver);
-		home.openWikiPage();
-		SpecialUserLoginPageObject loginUser1 = new SpecialUserLoginPageObject(driver);
-		loginUser1.logInCookie(Properties.userName5, Properties.password5);
-		ChatPageObject chat1 = new ChatPageObject(driver);
+		ChatPageObject chat1 = createChatPageObject(driver,
+				Properties.userName5, Properties.password5, false);
 		//second user opens the chat
-		WikiArticlePageObject home2 = new WikiArticlePageObject(driver2);
-		home2.openWikiPage();
-		SpecialUserLoginPageObject loginUser2 = new SpecialUserLoginPageObject(driver2);
-		loginUser2.logInCookie(Properties.userName6, Properties.password6);
-		ChatPageObject chat2 = new ChatPageObject(driver2);
+		ChatPageObject chat2 = createChatPageObject(driver2,
+				Properties.userName6, Properties.password6, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
@@ -365,5 +326,39 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat1.verifyPrivateMessageNotification(8);
 		chat2.writeOnChat("This is private message from "+Properties.userName6);
 		chat1.verifyPrivateMessageNotification(9);
+	}
+
+	/**
+	 * Test 9: CONN-197: Test if Chat ban user modal is showing and is operational
+	 *
+	 * 1. There are two users in the chat room user A and user B (Staff member).
+	 * 2. User B opens the drop-down menu for user A and clicks Ban user.
+	 * 3. Modal dialog to ban the user appears.
+	 * 4. user B clicks on the ban user button.
+	 * 5. user B un-bans user A.
+	 */
+	@Test(groups = {"Chat_009", "Chat", "Modals"})
+	public void Chat_009_ban_user()
+	{
+		//first user opens the chat
+		ChatPageObject chat1 = createChatPageObject(driver,
+			Properties.userName3, Properties.password3, false);
+		//second user opens the chat
+		ChatPageObject chat2 = createChatPageObject(driver2,
+			Properties.userNameStaff, Properties.passwordStaff, false);
+
+		chat2.openChatPage();
+		chat2.verifyChatPage();
+		chat1.openChatPage();
+		chat1.verifyChatPage();
+
+		//test
+		chat2.verifyUserJoinToChat(Properties.userName3);
+		chat2.verifyUserIsVisibleOnContactsList(Properties.userName3);
+		chat1.verifyUserIsVisibleOnContactsList(Properties.userNameStaff);
+
+		chat2.clickOnDifferentUser(Properties.userName3, driver2);
+		chat2.banUser(Properties.userName3, driver2);
+		chat2.unBanUser(Properties.userName3, driver2);
 	}
 }

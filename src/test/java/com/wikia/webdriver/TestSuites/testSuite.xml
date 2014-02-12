@@ -50,6 +50,9 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnHubs"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsForSony"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNo71MediaAdsForSony"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>
@@ -74,7 +77,7 @@
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsThreadParticipantTests"/>
 			<class name="com.wikia.webdriver.TestCases.EventTrackingTests.EditorEventTrackingTests"/>
 			<class name="com.wikia.webdriver.TestCases.WamPageTests.WamPageTests"/>
-			<class name="com.wikia.webdriver.TestCases.LightboxTests.ImageLightboxTests"/>
+			<class name="com.wikia.webdriver.TestCases.LightboxTests.LightboxTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.EditingLocalCssTests"/>
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>

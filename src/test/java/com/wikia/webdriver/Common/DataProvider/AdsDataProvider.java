@@ -90,7 +90,6 @@ public class AdsDataProvider {
 			{"dragoncity", "Category:Dragons"},
 			{"elderscrolls", "Skyrim"},
 			{"ffxiclopedia", "Category:Jobs"}
-
 		};
 	}
 
@@ -102,7 +101,6 @@ public class AdsDataProvider {
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"es.pokemon", "Lista_de_Pok%C3%A9mon"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-			{"ja.gundam", "%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"},
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"elderscrolls", "Skyrim"},
 			{"dragonvale", "Eggs"},
@@ -219,7 +217,7 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
-	public static final Object[][] germanArticles() {
+	public static final Object[][] noGermanAdsForUsers() {
 		return new Object[][] {
 			{"de.gta", "Fahrzeuge_(V)"},
 			{"de.jedipedia", "Obi-Wan_Kenobi"},

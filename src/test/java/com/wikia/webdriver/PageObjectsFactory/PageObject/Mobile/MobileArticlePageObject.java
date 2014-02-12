@@ -73,9 +73,9 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private List<WebElement> level2;
 	@FindBy(css=".lvl3")
 	private WebElement level3;
-	@FindBy(css=".lvl2.cur")
+	@FindBy(css=".lvl2.cur.anim-done")
 	private WebElement level2Visible;
-	@FindBy(css=".lvl3.cur")
+	@FindBy(css=".lvl3.cur.anim-done")
 	private WebElement level3Visible;
 	@FindBy(css="#wkCurtain:not(.active)")
 	private WebElement curtainClosed;

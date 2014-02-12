@@ -3,56 +3,29 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
-
 /**
- * 
- * @author Karol
+ *
+ * @author Karol 'kkarolk' Kujawiak
  *
  */
-public class NewWikiaHomePage extends WikiBasePageObject{
+public class NewWikiaHomePage extends WikiBasePageObject {
 
-	@FindBy(css="button.close.wikia-chiclet-button")
-	WebElement congratulationLightBoxCloseButton;
-	
+	@FindBy(css = "#WikiWelcomeWrapper")
+	private WebElement welcomeWrapper;
+	@FindBy(css = "#WikiWelcome")
+	private WebElement welcomeLightbox;
+
 	public NewWikiaHomePage(WebDriver driver){
 		super(driver);
-		PageFactory.initElements(driver, this);	
-	}
-	
-	public void VerifyCongratulationsLightBox()
-	{
-		
-	}
-	
-	public void waitForCongratulationsLightBox(String wikiaName)
-	{
-		waitForElementByCss("section#WikiWelcomeWrapper");
-		waitForElementByCss("div#WikiWelcome");
-		waitForElementByCss("div.WikiWelcome");		
-		PageObjectLogging.log("waitForCongratulationsLightBox ", "Congratulations lightbox verified", true, driver);
-	}
-	
-	public void closeCongratulationsLightBox()
-	{
-		waitForElementByElement(congratulationLightBoxCloseButton);
-		scrollAndClick(congratulationLightBoxCloseButton);
-		PageObjectLogging.log("closeCongratulationsLightBox ", "Congratulations lightbox closed", true);
-	}
-	
-	public void verifyUserLoggedIn(String userName)
-	{
-		waitForElementByCss("header#WikiaHeader a[href*=':"+userName+"']");
-		PageObjectLogging.log("vefifyUserLoggedIn ", "Verified that user: "+userName+" is logged in", true);
 	}
 
-	
-	
-	
-
-
+	public void waitForCongratulationsLightBox(String wikiaName) {
+		waitForElementByElement(welcomeWrapper);
+		waitForElementByElement(welcomeLightbox);
+		PageObjectLogging.log("waitForCongratulationsLightBox ", "congratulations lightbox verified", true);
+	}
 }

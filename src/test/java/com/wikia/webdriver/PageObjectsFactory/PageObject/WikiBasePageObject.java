@@ -66,12 +66,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBl
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialBlockPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Block.SpecialUnblockPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialMostLinkedFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUncategorizedFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
@@ -136,6 +139,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement protectDropdown;
 	@FindBy(css="#ca-move")
 	protected WebElement renameDropdown;
+	@FindBy(css="button.close.wikia-chiclet-button")
+	protected WebElement closeModalButton;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -168,6 +173,12 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
+	public void closeLightbox() {
+		waitForElementByElement(closeModalButton);
+		scrollAndClick(closeModalButton);
+		PageObjectLogging.log("closeLightbox ", "lightbox closed", true);
+	}
+
 	public String resetForgotPasswordTime(String userName) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
@@ -178,10 +189,33 @@ public class WikiBasePageObject extends BasePageObject {
 		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
 	}
 
-	public void verifyModalLoginAppeared()
-	{
+	public void verifyModalLoginAppeared() {
 		waitForElementByElement(logInModal);
-		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true, driver);
+		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
+	}
+
+	public SpecialUnusedFilesPageObject openSpecialUnusedFilesPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUnusedFiles);
+		PageObjectLogging.log("openSpecialUnusedFilesPage", URLsContent.specialUnusedFiles + " opened", true);
+		return new SpecialUnusedFilesPageObject(driver);
+	}
+
+	public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUnusedVideos);
+		PageObjectLogging.log("openSpecialUnusedVideosPage", URLsContent.specialUnusedVideos + " opened", true);
+		return new SpecialUnusedVideosPageObject(driver);
+	}
+
+	public SpecialUncategorizedFilesPageObject openSpecialUncategorizedFilesPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialUncategorizedFiles);
+		PageObjectLogging.log("openSpecialUncategorizedFilesPage", URLsContent.specialUncategorizedFiles + " opened", true);
+		return new SpecialUncategorizedFilesPageObject(driver);
+	}
+
+	public SpecialMostLinkedFilesPageObject openSpecialMostLinkedFilesPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialMostLinkedFiles);
+		PageObjectLogging.log("openSpecialMostLinkedFilesPage", URLsContent.specialMostLinkedFiles + " opened", true);
+		return new SpecialMostLinkedFilesPageObject(driver);
 	}
 
 	public SpecialManageWikiaHome openSpecialManageWikiaHomePage(String wikiCorpSetupURL) {
@@ -341,15 +375,13 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialFactoryPageObject openWikiFactoryPage(String wikiURL) {
-		getUrl(
-				wikiURL + URLsContent.specialWikiFactory
-		);
+		getUrl(wikiURL + URLsContent.specialWikiFactory);
 		return new SpecialFactoryPageObject(driver);
 	}
 
 	public void openSpecialWatchListPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialWatchList);
-        }
+	}
 
 	public SourceEditModePageObject openCurrectArticleSourceMode() {
 		String queryStrings [] = {URLsContent.actionEditParameter, URLsContent.sourceMode};
@@ -510,25 +542,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	}
 
-	public WikiArticlePageObject openArticle(String articleName) {
-		URI uri;
-		try {
-			uri = new URI(Global.DOMAIN + "wiki/" + articleName);
-			String url = uri.toASCIIString();
-			getUrl(url);
-		} catch (URISyntaxException e) {
-
-			e.printStackTrace();
-		}
-		catch (TimeoutException e) {
-			PageObjectLogging.log("OpenArticle",
-					"page loads for more than 30 seconds", true);
-		}
-		PageObjectLogging.log("openArticle", "article " + articleName
-				+ " opened", true);
-		return new WikiArticlePageObject(driver);
-	}
-
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
 		getUrl(
 				wikiURL +
@@ -565,25 +578,6 @@ public class WikiBasePageObject extends BasePageObject {
 				+ " opened", true);
 		return new Top_10_list(driver);
 	}
-
-	public WikiArticlePageObject openRandomArticleByUrl() {
-		try {
-			getUrl(Global.DOMAIN + URLsContent.specialRandom);
-		} catch (TimeoutException e) {
-			PageObjectLogging.log(
-				"Loading page",
-				"Page loads for more than 30 seconds", false
-			);
-		}
-		waitForElementByElement(editDropDown);
-		PageObjectLogging.log(
-				"openRandomArticle",
-				"Random article opened",
-				true
-		);
-		return new WikiArticlePageObject(driver, wikiFirstHeader.getText());
-	}
-
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);
@@ -999,5 +993,12 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public String getNameForArticle () {
 		return PageContent.articleNamePrefix + getTimeStamp();
+	}
+
+	public void openSpecialPromoteOnCurrentWiki() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String url = (String) js.executeScript("return wgServer");
+		getUrl(url + "/" + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
 }

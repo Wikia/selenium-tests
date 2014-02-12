@@ -41,7 +41,7 @@ public class VetAddingVideoTests extends TestTemplate {
 	}
 
 	@Test(groups = {"VetTests014", "VetTests", "VetAddVideo"})
-	public void Vet_Tests_012_MessageWallLibrary() {
+	public void Vet_Tests_012_MessageWallLibrary_VID_1244() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
 		MessageWallPageObject wall = new MessageWallPageObject(driver);

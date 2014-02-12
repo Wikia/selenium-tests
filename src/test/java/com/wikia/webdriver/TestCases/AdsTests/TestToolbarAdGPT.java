@@ -3,9 +3,8 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -13,9 +12,7 @@ import org.testng.annotations.Test;
  *
  * @author Bogna 'bognix' Knychala
  */
-public class TestToolbarAdGPT extends AdsTestTemplate {
-
-	private UrlBuilder urlBuilder;
+public class TestToolbarAdGPT extends NewTestTemplate {
 
 	public TestToolbarAdGPT() {
 		super();

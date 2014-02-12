@@ -4,7 +4,7 @@ import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import org.testng.annotations.BeforeMethod;
@@ -15,18 +15,18 @@ import org.testng.annotations.Test;
  *
  * @author Bogna 'bognix' Knychala
  */
-public class Test71MediaNoAdsForUsers extends AdsTestTemplate {
+public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 
 	private String testedPage;
 	private String testedWiki;
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
-		dataProvider="germanArticles"
+		dataProvider="noGermanAdsForUsers"
 	)
 	public Test71MediaNoAdsForUsers(String wikiName, String path) {
 		super();
-		UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
+		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		testedWiki = urlBuilder.getUrlForWiki(wikiName);
 		if (config.getQS() != null) {
