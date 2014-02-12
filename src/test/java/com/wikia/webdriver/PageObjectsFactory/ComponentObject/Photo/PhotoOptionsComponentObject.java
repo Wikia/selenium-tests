@@ -1,10 +1,11 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class PhotoOptionsComponentObject extends BasePageObject{
 
@@ -59,7 +60,7 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 		//TODO
 	}
 
-	public PhotoAddComponentObject selectAnotherPhoto() {
+	public PhotoAddComponentObject clickSelectAnotherPhoto() {
 		selectAnotherPhotoButton.click();
 		PageObjectLogging.log("selectAnotherPhoto", "select Another Photo button clicked", true);
 		return new PhotoAddComponentObject(driver);

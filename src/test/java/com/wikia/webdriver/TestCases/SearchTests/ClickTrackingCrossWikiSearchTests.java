@@ -16,7 +16,12 @@ public class ClickTrackingCrossWikiSearchTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"CrossWikiSearchTests_001", "Search", "CrossWikiSearch"})
+	@Test(groups = {
+			"ClickTrackingCrossWikiSearchTests_001",
+			"Search",
+			"CrossWikiSearch",
+			"ClickTracking"
+	})
 	public void ClicktrackingCrossWikiSearch_001_verifyEvents() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
@@ -43,7 +48,7 @@ public class ClickTrackingCrossWikiSearchTests extends NewTestTemplate {
 				EventsCrossWikiSearch.EventSixthCrossWikiSearchResult,
 				EventsCrossWikiSearch.EventClickSearchButton,
 				EventsCrossWikiSearch.EventEmptySearchResultPage
-				);
+		);
 
 		search.compareTrackedEventsTo(expectedEvents);
 	}

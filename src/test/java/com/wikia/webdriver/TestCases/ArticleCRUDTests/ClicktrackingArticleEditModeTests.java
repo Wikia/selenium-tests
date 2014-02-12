@@ -23,12 +23,11 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(
-			groups = {
-					"ClickTracking",
-					"ClickTrackingArticleEditModeTests",
-					"ClickTrackingArticleEditModeTests_001" }
-		 )
+	@Test(groups = {
+			"ClickTracking",
+			"ClickTrackingArticleEditModeTests",
+			"ClickTrackingArticleEditModeTests_001"
+	})
 	public void ClicktrackingArticleEditMode_001_verifyPreviewModalEvents() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -39,17 +38,16 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 
 		List<String> expectedEvents = Arrays.asList(
 				EventsArticleEditMode.EventPreviewButtonClick
-				);
+		);
 
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
 	}
 
-	@Test(
-			groups = {
-					"ClickTracking",
-					"ClicktrackingArticleEditModeTests",
-					"ClicktrackingArticleEditModeTests_002" }
-		 )
+	@Test(groups = {
+			"ClickTracking",
+			"ClicktrackingArticleEditModeTests",
+			"ClicktrackingArticleEditModeTests_002"
+	})
 	public void ClicktrackingArticleEditMode_002_verifyAddPhotoModalEvents() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -60,7 +58,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		photoAddPhoto.clickFlickr();
 		photoAddPhoto.clickThisWiki();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.clickAddThisPhoto(0);
-		photoAddPhoto = photoOptions.selectAnotherPhoto();
+		photoAddPhoto = photoOptions.clickSelectAnotherPhoto();
 		photoAddPhoto.typeSearchQuery(SearchContent.searchPhrase);
 		photoAddPhoto.clickFind();
 		photoAddPhoto.chooseFileToUpload(PageContent.file);
@@ -72,7 +70,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 				EventsModalAddPhoto.EventThisWikiLinkClick,
 				EventsModalAddPhoto.EventUploadButtonClick,
 				EventsModalAddPhotoOptions.EventBackButtonClick
-				);
+		);
 
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
 	}
