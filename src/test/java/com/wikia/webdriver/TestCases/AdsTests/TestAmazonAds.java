@@ -40,7 +40,7 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
 
-	@GeoEdgeProxy(country="UK")
+	@GeoEdgeProxy(country="GB")
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_UK", "Ads"})
 	public void AmazonAdsTest_UK() {
@@ -62,7 +62,7 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
 
-	@GeoEdgeProxy(country="UK")
+	@GeoEdgeProxy(country="GB")
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_UK_debugMode", "Ads"})
 	public void AmazonAdsTest_UK_debugMode() {
