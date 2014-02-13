@@ -10,7 +10,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class TestHighValueCountries extends NewTestTemplate {

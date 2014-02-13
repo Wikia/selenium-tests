@@ -1018,13 +1018,21 @@ public class WikiBasePageObject extends BasePageObject {
 
 		for (String keyFromDefault: keysFromDefault) {
 			if (!variableValueFromPage.containsKey(keyFromDefault)) {
-				throw new WebDriverException("Values on community and on wiki are different");
+				throw new WebDriverException(
+					"Values on community and on wiki are different. Community value: "
+					+ defaultValue + "; Value on page: "
+					+ variableValueFromPage
+				);
 			}
 		}
 
 		for (String key: variableValueFromPage.keySet()) {
 			if (!keysFromDefault.contains(key)) {
-				throw new WebDriverException("Values on community and on wiki are different");
+				throw new WebDriverException(
+					"Values on community and on wiki are different. Community value: "
+					+ defaultValue + "; Value on page: "
+					+ variableValueFromPage
+				);
 			}
 		}
 

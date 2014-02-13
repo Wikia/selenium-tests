@@ -43,9 +43,9 @@ public class Assertion extends Assert {
 				true
 			);
 		}
-		catch(AssertionError ass){
+		catch(AssertionError err){
 			isAssertPassed = false;
-			addVerificationFailure(ass);
+			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertEquals",
 				"assertion failed<br/>pattern: "
@@ -69,9 +69,9 @@ public class Assertion extends Assert {
 				+ current,
 				true
 			);
-		} catch(AssertionError ass) {
+		} catch(AssertionError err) {
 			isAssertPassed = false;
-			addVerificationFailure(ass);
+			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertNotEquals",
 				"assertion failed<br/>pattern: "
@@ -117,6 +117,14 @@ public class Assertion extends Assert {
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}
 
+	/*
+	 * Method responsive for encoding special characters
+	 * like ">" and "<" inside provided string.
+	 * Special characters are changed to characters entities
+	 *
+	 * @param   String pattern
+	 * @rerturn String pattern - with characters entities
+	 */
 	private static String encodeSpecialChars(String pattern) {
 		if (pattern.contains("<") || pattern.contains(">")) {
 			String tmp = pattern.replaceAll("<", "&lt");
