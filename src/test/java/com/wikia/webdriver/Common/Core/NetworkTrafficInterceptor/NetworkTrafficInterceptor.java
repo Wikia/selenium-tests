@@ -3,11 +3,11 @@ package com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.core.har.HarEntry;
-import net.lightbody.bmp.proxy.ProxyServer;
-import net.lightbody.bmp.proxy.http.BrowserMobHttpRequest;
-import net.lightbody.bmp.proxy.http.RequestInterceptor;
+import org.browsermob.core.har.Har;
+import org.browsermob.core.har.HarEntry;
+import org.browsermob.proxy.ProxyServer;
+import org.browsermob.proxy.http.BrowserMobHttpRequest;
+import org.browsermob.proxy.http.RequestInterceptor;
 import org.openqa.selenium.Proxy;
 
 /**
@@ -47,7 +47,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
 	public void changeHeader(final String headerName, final String newValue) {
 		addRequestInterceptor(new RequestInterceptor() {
 			@Override
-			public void process(BrowserMobHttpRequest request, Har har) {
+			public void process(BrowserMobHttpRequest request) {
 				request.getMethod().removeHeaders(headerName);
 				try {
 					request.getMethod().addHeader(

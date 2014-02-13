@@ -23,7 +23,7 @@ import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import java.lang.reflect.Method;
-import net.lightbody.bmp.proxy.ProxyServer;
+import org.browsermob.proxy.ProxyServer;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
