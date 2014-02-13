@@ -211,7 +211,7 @@ public class WamPageObject extends BasePageObject {
 		waitForElementByElement(wamVerticalFilterSelect);
 		Select verticalSelectBox = new Select(wamVerticalFilterSelect);
 		String selectedValue = verticalSelectBox.getFirstSelectedOption().getText();
-		for (WebElement item  : verticalColumn) {
+		for (WebElement item : verticalColumn) {
 			Assertion.assertEquals(item.getText(), selectedValue);
 		}
 	}

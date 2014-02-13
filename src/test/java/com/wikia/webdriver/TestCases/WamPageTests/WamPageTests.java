@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.WamPageTests;
 
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
