@@ -1,10 +1,11 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Actions;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -23,7 +24,7 @@ public class RenamePageObject extends ArticlePageObject {
 	public ArticlePageObject rename(String newName) {
 		newNameInput.clear();
 		newNameInput.sendKeys(newName);
-		submitRename.click();
+		scrollAndClick(submitRename);
 		PageObjectLogging.log("ArticleRenamed", "Article renamed", true);
 		return new ArticlePageObject(driver);
 	}
