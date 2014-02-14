@@ -49,6 +49,24 @@ public class ApiSteps {
 				apiEndpoint);
 	}
 
+    @Then("^I should get list of \\\"([^\\\"]*)\\\" in descending or equal order$")
+    public void I_should_get_list_of_in_descended_order(String fieldName) throws Throwable {
+
+        List<Map<String,Object>> items = JsonPath.read( responseAsString, "$.items[*]" );
+        int prevValue = 0;
+        int currValue = 0;
+        for( Map<String,Object> item: items ) {
+            Assert.assertTrue( item.containsKey( fieldName ) );
+            if ( item.get( fieldName ) != null ) {
+                currValue = Integer.parseInt( item.get( fieldName ).toString() );
+                if ( prevValue == 0 ) {
+                    prevValue = currValue;
+                }
+                Assert.assertTrue( currValue <= prevValue );
+                prevValue = currValue;
+            }
+        }
+    }
 
 	@Then("^I should get list of no more than (\\d+) most recent articles created on wiki$")
 	public void I_should_get_list_of_no_more_than_most_recent_articles_created_on_wiki(int count) throws Throwable {
