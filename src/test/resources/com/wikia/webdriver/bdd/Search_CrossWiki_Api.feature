@@ -1,6 +1,17 @@
 Feature: As a Mobile Team
   I would like to search for any Wikia
 
+  Scenario: I want to see results in cerain format
+    Given non-corporate Wiki
+    When I ask "v1" api for "Search/CrossWiki" with parameters:
+      | key       | value   |
+      | query     | lost    |
+    Then I should get list of "items"
+    And I see "items" array with each element having following fields not empty:
+      | id         |
+      | language   |
+    And all elements in "items" array should have field "language" equal to "en"
+
   Scenario: I want to see results in certain format
     Given non-corporate Wiki
     When I ask "v1" api for "Search/CrossWiki" with parameters:
@@ -11,6 +22,7 @@ Feature: As a Mobile Team
     And I see "items" array with each element having following fields not empty:
       | id         |
       | language   |
+    And all elements in "items" array should have field "language" equal to "en"
 
   Scenario: I want to see results in certain format
     Given non-corporate Wiki

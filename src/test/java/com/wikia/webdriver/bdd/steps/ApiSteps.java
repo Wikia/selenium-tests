@@ -137,6 +137,12 @@ public class ApiSteps {
 												 CollectionMatchers.allValuesShouldBeGreaterThanOrEqualTo(value));
 	}
 
+	@Then("^all elements in \"([^\"]*)\" array should have field \"([^\"]*)\" equal to \"([^\"]*)\"$")
+	public void all_results_should_have_field_equal(String object, String field, String value) throws Throwable {
+		with(responseAsString).assertThat(String.format("$.%s[*].%s" , object, field),
+												 CollectionMatchers.allValuesShouldBeEqualTo(value));
+	}
+
 	@Then("^all results should have integer field \"([^\"]*)\" equal to \"([^\"]*)\" or \"([^\"]*)\"$")
 	public void all_results_should_have_field_equal_to_or(String fieldName, int value, int value2) throws Throwable {
 		with(responseAsString).assertThat("$.items[*]." + fieldName,
