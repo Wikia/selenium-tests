@@ -78,16 +78,6 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 		verifyWikiaClosed();
 	}
 
-	public void verifyVariableValueDifferentThenDefault(wikiFactoryVariables variableName) {
-		selectVariableByVisibleText(variableName);
-		Assertion.assertNotEquals(defaultVariableValue.getText(), variableValue.getText());
-	}
-
-	public void verifyVariableValueSameAsDefault(wikiFactoryVariables variableName) {
-		selectVariableByVisibleText(variableName);
-		Assertion.assertEquals(variableValue.getText(), defaultVariableValue.getText());
-	}
-
 	public void verifyVariableValue(wikiFactoryVariables variableName, String expectedValue) {
 		selectVariableByVisibleText(variableName);
 		Assertion.assertEquals(expectedValue, variableValue.getText());
@@ -96,6 +86,11 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 	public String getVariableDefaultValue(wikiFactoryVariables variableName) {
 		selectVariableByVisibleText(variableName);
 		return defaultVariableValue.getText();
+	}
+
+	public String getVariableSetValue(wikiFactoryVariables variableName) {
+		selectVariableByVisibleText(variableName);
+		return variableValue.getText();
 	}
 
 	private void selectVariableByVisibleText(wikiFactoryVariables variableName) {

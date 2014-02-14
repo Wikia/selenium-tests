@@ -79,6 +79,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1001,45 +1002,42 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
 
-	public void verifyWgVariableValueSameAsDefault(
-		wikiFactoryVariables variableName, String defaultValue, String url
+	public void verifyWgVariableValueSameAsProvided(
+		wikiFactoryVariables variableName, String providedValue, String url
 	) {
+		Object[] keysFromPage = getVaribaleValueFromPage(url, variableName.toString());
+		Object[] keysFromProvided = extractKeysFromWgVariable(providedValue);
+
+		Arrays.sort(keysFromProvided);
+		Arrays.sort(keysFromPage);
+
+		if (Arrays.equals(keysFromProvided, keysFromPage)) {
+			PageObjectLogging.log(
+				"VariablesAreTheSame",
+				"Variable on wiki and on community are the same",
+				true
+			);
+		} else {
+			throw new WebDriverException("Values on community and on wiki are different");
+		}
+	}
+
+	private Object[] getVaribaleValueFromPage(String url, String variableName) {
 		getUrl(url);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Map<String, Integer> variableValueFromPage = (Map<String, Integer>) js.executeScript(
-			"return window[arguments[0]]", variableName.toString()
+			"return window[arguments[0]]", variableName
 		);
-		List<String> keysFromDefault = new ArrayList<>();
+		return variableValueFromPage.keySet().toArray();
+	}
+
+	private Object[] extractKeysFromWgVariable(String variableValue) {
+		List<String> keysFromDefaultList = new ArrayList<>();
 		Pattern pattern = Pattern.compile("\'.*\'");
-		Matcher matcher = pattern.matcher(defaultValue);
+		Matcher matcher = pattern.matcher(variableValue);
 		while (matcher.find()) {
-			keysFromDefault.add(matcher.group().replaceAll("'", ""));
+			keysFromDefaultList.add(matcher.group().replaceAll("'", ""));
 		}
-
-		for (String keyFromDefault: keysFromDefault) {
-			if (!variableValueFromPage.containsKey(keyFromDefault)) {
-				throw new WebDriverException(
-					"Values on community and on wiki are different. Community value: "
-					+ defaultValue + "; Value on page: "
-					+ variableValueFromPage
-				);
-			}
-		}
-
-		for (String key: variableValueFromPage.keySet()) {
-			if (!keysFromDefault.contains(key)) {
-				throw new WebDriverException(
-					"Values on community and on wiki are different. Community value: "
-					+ defaultValue + "; Value on page: "
-					+ variableValueFromPage
-				);
-			}
-		}
-
-		PageObjectLogging.log(
-			"VariablesAreTheSame",
-			"Variable on wiki and on community are the same",
-			true
-		);
+		return keysFromDefaultList.toArray();
 	}
 }

@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 public class TestHighValueCountries extends NewTestTemplate {
 
 	private Credentials credentials = config.getCredentials();
-	private String communityHVC;
 	private SpecialFactoryPageObject wikiFactory;
 
 	@BeforeMethod(alwaysRun=true)
@@ -32,7 +31,12 @@ public class TestHighValueCountries extends NewTestTemplate {
 		String testedWiki = urlBuilder.getUrlForWiki(wikiName);
 		wikiFactory = new SpecialFactoryPageObject(driver);
 		wikiFactory.openWikiFactoryPage(testedWiki);
-		wikiFactory.verifyVariableValueDifferentThenDefault(wikiFactoryVariables.wgHighValueCountries);
+		String valueOnCommunity = wikiFactory.getVariableSetValue(
+			wikiFactoryVariables.wgHighValueCountries
+		);
+		wikiFactory.verifyWgVariableValueSameAsProvided(
+			wikiFactoryVariables.wgHighValueCountries, valueOnCommunity, testedWiki
+		);
 	}
 
 	@Test(
@@ -46,7 +50,7 @@ public class TestHighValueCountries extends NewTestTemplate {
 		String valueOnCommunity = wikiFactory.getVariableDefaultValue(
 			wikiFactoryVariables.wgHighValueCountries
 		);
-		wikiFactory.verifyWgVariableValueSameAsDefault(
+		wikiFactory.verifyWgVariableValueSameAsProvided(
 			wikiFactoryVariables.wgHighValueCountries, valueOnCommunity, testedWiki
 		);
 	}
