@@ -26,6 +26,10 @@ public class CollectionMatchers {
 		return CollectionMatchers.allShould(Matchers.greaterThanOrEqualTo(value));
 	}
 
+	public static Matcher allValuesShouldBeEqualTo(String value) {
+		return CollectionMatchers.allShould(Matchers.equalTo(value));
+	}
+
 	public static Matcher allElementsShouldContainField(String fieldName) {
 		return CollectionMatchers.allShould(JsonAssert.mapContainingKey(Matchers.equalTo(fieldName)));
 	}
