@@ -7,9 +7,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.MarketingToolbox.DashBo
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import org.testng.annotations.Test;
 
-/**
- * User: kvas
- */
+
 public class DashboardTests extends NewTestTemplate {
     @Test(groups = {"MarketingToolbox001", "MarketingToolbox"})
     public void dashboardSelectVertical() {

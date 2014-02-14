@@ -3,10 +3,10 @@ package com.wikia.webdriver.Common.ContentPatterns;
 /**
  * @author Karol 'kkarolk' Kujawiak
  */
-public class WikiFactoryVariables {
+public class WikiFactoryVariablesProvider {
 
-	public enum wikiFactoryVariables {
+	public enum WikiFactoryVariables {
 		wgWikiDirectedAtChildrenByFounder,
-		wgHighValueCountries
+		wgHighValueCountries,
 	}
 }

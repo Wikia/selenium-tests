@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -1003,7 +1003,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void verifyWgVariableValueSameAsProvided(
-		wikiFactoryVariables variableName, String providedValue, String url
+		WikiFactoryVariables variableName, String providedValue, String url
 	) {
 		Object[] keysFromPage = getVaribaleValueFromPage(url, variableName.toString());
 		Object[] keysFromProvided = extractKeysFromWgVariable(providedValue);

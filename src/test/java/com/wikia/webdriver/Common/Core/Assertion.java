@@ -29,56 +29,53 @@ public class Assertion extends Assert {
 			return false;
 		}
 	}
-	
+
 	public static void assertEquals(String pattern, String current){
 		boolean isAssertPassed = true;
-		pattern = encodeSpecialChars(pattern);
-		current = encodeSpecialChars(current);
+		String patternEncoded = encodeSpecialChars(pattern);
+		String currentEncoded = encodeSpecialChars(current);
 		try {
 			Assert.assertEquals(pattern, current);
-			PageObjectLogging.log(
-				"assertEquals",
-				"assertion passed<br/>pattern: "
-				+ pattern + "<br/>current: " + current,
-				true
-			);
-		}
-		catch(AssertionError err){
+		} catch(AssertionError err){
 			isAssertPassed = false;
 			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertEquals",
-				"assertion failed<br/>pattern: "
-				+ pattern + "<br/>current: "
-				+ current,
+				"assertion failed<br/>pattern: " + patternEncoded
+				+ "<br/>current: " + currentEncoded,
 				false
 			);
 		}
+		PageObjectLogging.log(
+			"assertEquals",
+			"assertion passed<br/>pattern: " + patternEncoded
+			+ "<br/>current: " + currentEncoded,
+			true
+		);
 	}
 
 	public static void assertNotEquals(String pattern, String current){
 		boolean isAssertPassed = true;
-		pattern = encodeSpecialChars(pattern);
-		current = encodeSpecialChars(current);
+		String patternEncoded = encodeSpecialChars(pattern);
+		String currentEncoded = encodeSpecialChars(current);
 		try {
 			Assert.assertNotEquals(pattern, current);
-			PageObjectLogging.log(
-				"assertNotEquals",
-				"assertion passed<br/>pattern: "
-				+ pattern + "<br/>current: "
-				+ current,
-				true
-			);
 		} catch(AssertionError err) {
 			isAssertPassed = false;
 			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertNotEquals",
-				"assertion failed<br/>pattern: "
-				+ pattern + "<br/>current: " + current,
+				"assertion failed<br/>pattern: " + patternEncoded
+				+ "<br/>current: " + currentEncoded,
 				false
 			);
 		}
+		PageObjectLogging.log(
+			"assertNotEquals",
+			"assertion passed<br/>pattern: " + patternEncoded
+			+ "<br/>current: " + currentEncoded,
+			true
+		);
 	}
 
 	public static void assertNumber(Number expected, Number actual,
@@ -103,8 +100,8 @@ public class Assertion extends Assert {
 		List verificationFailures = getVerificationFailures();
 		verificationFailuresMap.put(Reporter.getCurrentTestResult(), verificationFailures);
 		verificationFailures.add(e);
-	}	
-	
+	}
+
 	public static List getVerificationFailures() 
 	{
 		List verificationFailures = verificationFailuresMap.get(Reporter.getCurrentTestResult());

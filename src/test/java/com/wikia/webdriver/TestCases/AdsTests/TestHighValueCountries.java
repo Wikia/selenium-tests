@@ -1,6 +1,6 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -32,10 +32,10 @@ public class TestHighValueCountries extends NewTestTemplate {
 		wikiFactory = new SpecialFactoryPageObject(driver);
 		wikiFactory.openWikiFactoryPage(testedWiki);
 		String valueOnCommunity = wikiFactory.getVariableSetValue(
-			wikiFactoryVariables.wgHighValueCountries
+			WikiFactoryVariables.wgHighValueCountries
 		);
 		wikiFactory.verifyWgVariableValueSameAsProvided(
-			wikiFactoryVariables.wgHighValueCountries, valueOnCommunity, testedWiki
+			WikiFactoryVariables.wgHighValueCountries, valueOnCommunity, testedWiki
 		);
 	}
 
@@ -48,10 +48,10 @@ public class TestHighValueCountries extends NewTestTemplate {
 		wikiFactory = new SpecialFactoryPageObject(driver);
 		wikiFactory.openWikiFactoryPage(testedWiki);
 		String valueOnCommunity = wikiFactory.getVariableDefaultValue(
-			wikiFactoryVariables.wgHighValueCountries
+			WikiFactoryVariables.wgHighValueCountries
 		);
 		wikiFactory.verifyWgVariableValueSameAsProvided(
-			wikiFactoryVariables.wgHighValueCountries, valueOnCommunity, testedWiki
+			WikiFactoryVariables.wgHighValueCountries, valueOnCommunity, testedWiki
 		);
 	}
 }

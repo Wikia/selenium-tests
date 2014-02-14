@@ -1,6 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
@@ -78,22 +78,22 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 		verifyWikiaClosed();
 	}
 
-	public void verifyVariableValue(wikiFactoryVariables variableName, String expectedValue) {
+	public void verifyVariableValue(WikiFactoryVariables variableName, String expectedValue) {
 		selectVariableByVisibleText(variableName);
 		Assertion.assertEquals(expectedValue, variableValue.getText());
 	}
 
-	public String getVariableDefaultValue(wikiFactoryVariables variableName) {
+	public String getVariableDefaultValue(WikiFactoryVariables variableName) {
 		selectVariableByVisibleText(variableName);
 		return defaultVariableValue.getText();
 	}
 
-	public String getVariableSetValue(wikiFactoryVariables variableName) {
+	public String getVariableSetValue(WikiFactoryVariables variableName) {
 		selectVariableByVisibleText(variableName);
 		return variableValue.getText();
 	}
 
-	private void selectVariableByVisibleText(wikiFactoryVariables variableName) {
+	private void selectVariableByVisibleText(WikiFactoryVariables variableName) {
 		Select select = new Select(variableList);
 		select.selectByVisibleText(variableName.toString());
 	}

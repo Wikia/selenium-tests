@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.CreateAWikiTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.CreateWikiMessages;
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -75,7 +75,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
 		SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
 		factory.verifyVariableValue(
-				wikiFactoryVariables.wgWikiDirectedAtChildrenByFounder,
+				WikiFactoryVariables.wgWikiDirectedAtChildrenByFounder,
 				"true"
 		);
 	}
