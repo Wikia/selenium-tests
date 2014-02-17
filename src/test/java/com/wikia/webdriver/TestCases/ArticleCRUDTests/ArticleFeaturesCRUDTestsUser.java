@@ -381,4 +381,20 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyTableRemoved();
 	}
 
+	@Test(groups={"ArticleFeaturesCRUDUser_014", "ArticleFeaturesCRUDUser"})
+	public void ArticleFeaturesCRUDUser_014_addingImagePlaceholder_MAIN_1740() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		base.openRandomArticle(wikiURL);
+		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
+		ArticlePageObject article  = visualEditMode.submitArticle();
+		article.verifyArticleTitle(articleTitle);
+		PhotoAddComponentObject photoAddPhoto = article.clickAddImagePlaceholder();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 2);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
+		visualEditMode.submitArticle();
+		article.verifyPhoto();
+	}
 }

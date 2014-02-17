@@ -26,6 +26,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileArticleCommentTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileCategoriesTests"/>
+			<class name="com.wikia.webdriver.TestCases.Mobile.MobileEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileLoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileModalTests"/>
@@ -51,6 +52,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsForSony"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNo71MediaAdsForSony"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>

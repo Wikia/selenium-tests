@@ -16,7 +16,7 @@ public abstract class AbstractConfiguration {
 	public abstract String getQS();
 	public abstract File getCaptchaFile();
 	public abstract boolean loginCookieAvailable();
-	protected abstract String getCredentialsFilePath();
+	public abstract String getCredentialsFilePath();
 	public Credentials getCredentials() {
 		return new Credentials(new File(this.getCredentialsFilePath()));
 	}

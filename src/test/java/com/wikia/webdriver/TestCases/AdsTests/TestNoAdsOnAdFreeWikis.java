@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Templates.AdsTestTemplate;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Test (
 	groups={"NoAdsOnAdFreeWikis", "Ads"}
 )
-public class TestNoAdsOnAdFreeWikis extends AdsTestTemplate {
+public class TestNoAdsOnAdFreeWikis extends NewTestTemplate {
 
 	private String testedPage;
 

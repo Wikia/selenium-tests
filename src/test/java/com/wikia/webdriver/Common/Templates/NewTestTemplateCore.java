@@ -11,14 +11,19 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Annotations.NetworkTrafficDump;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
 import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxyServer;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
+import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeUtils;
+import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import java.lang.reflect.Method;
+import org.browsermob.proxy.ProxyServer;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -34,6 +39,9 @@ public class NewTestTemplateCore {
 	protected String wikiURL;
 	protected String wikiCorporateURL;
 	protected String wikiCorpSetupURL;
+	private DesiredCapabilities capabilities;
+	protected NetworkTrafficInterceptor networkTrafficIntereceptor;
+	protected boolean isProxyServerRunning = false;
 
 	public NewTestTemplateCore() {
 		config = ConfigurationFactory.getConfig();
@@ -102,14 +110,14 @@ public class NewTestTemplateCore {
 		}
 	}
 
-	protected DesiredCapabilities getCapsWithProxyServerSet(GeoEdgeProxyServer server) {
-		DesiredCapabilities capabilities = new DesiredCapabilities();
+	protected DesiredCapabilities getCapsWithProxyServerSet(ProxyServer server) {
+		capabilities = new DesiredCapabilities();
 		try {
 			capabilities.setCapability(
 				CapabilityType.PROXY, server.seleniumProxy()
 			);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return capabilities;
 	}
@@ -123,9 +131,41 @@ public class NewTestTemplateCore {
 		desiredDriver.manage().window().setSize(dimension);
 	}
 
-	protected void startBrowserWithModifiedUserAgent(String userAgent) {
-		driver = registerDriverListener(
-			NewDriverProvider.getDriverInstanceForBrowser(config.getBrowser(), userAgent)
-		);
+	protected void setBrowserUserAgent(String userAgent) {
+		NewDriverProvider.setBrowserUserAgent(config.getBrowser(), userAgent);
+	}
+
+	protected void runProxyServerIfNeeded(Method method) {
+		boolean isGeoEdgeSet = false;
+		boolean isNetworkTrafficDumpSet = false;
+		String countryCode = null;
+
+		if (method.getAnnotation(GeoEdgeProxy.class) != null) {
+			isGeoEdgeSet = true;
+			countryCode = method.getAnnotation(GeoEdgeProxy.class).country();
+		}
+
+		if (method.getAnnotation(NetworkTrafficDump.class) != null) {
+			isNetworkTrafficDumpSet = true;
+		}
+
+		if (isGeoEdgeSet || isNetworkTrafficDumpSet) {
+			isProxyServerRunning = true;
+			networkTrafficIntereceptor = new NetworkTrafficInterceptor();
+			networkTrafficIntereceptor.startSeleniumProxyServer();
+		} else {
+			return;
+		}
+
+		if (isGeoEdgeSet) {
+			GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
+			String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
+			String IP = geoEdgeUtils.getIPForCountry(countryCode);
+			networkTrafficIntereceptor.setProxyServer(IP);
+			networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
+		}
+
+		capabilities = getCapsWithProxyServerSet(networkTrafficIntereceptor);
+		setDriverCapabilities(capabilities);
 	}
 }

@@ -7,8 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 
 /**
@@ -16,30 +17,32 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
  * @author Karol 'kkarolk' Kujawiak
  *
  */
-public class CustomizedToolbarComponentObject extends BasePageObject{
+public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 
 	public CustomizedToolbarComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
 	@FindBy(css="div[class*='wikia-bar'] a.tools-customize[data-name='customize']")
-	protected WebElement customizeButton;
+	private WebElement customizeButton;
 	@FindBy(css="div.msg")
-	protected WebElement pageWatchlistStatusMessage;
+	private WebElement pageWatchlistStatusMessage;
 	@FindBy(css="div.search-box input.search")
-	protected WebElement findAToolField;
+	private WebElement findAToolField;
 	@FindBy(css="#MyToolsRenameItem input.input-box")
-	protected WebElement renameItemDialogInput;
+	private WebElement renameItemDialogInput;
 	@FindBy(css="#MyToolsRenameItem button.primary")
-	protected WebElement saveItemDialogInput;
+	private WebElement saveItemDialogInput;
 	@FindBy(css="#MyToolsConfigurationWrapper footer button.primary")
-	protected WebElement saveButton;
+	private WebElement saveButton;
 	@FindBy(css="span.reset-defaults img")
-	protected WebElement resetDefaultsButton;
+	private WebElement resetDefaultsButton;
 	@FindBy(css="li.mytools.menu")
-	protected WebElement myToolsMenuButton;
+	private WebElement myToolsMenuButton;
 	@FindBy(css="ul[id='my-tools-menu']")
-	protected WebElement myToolsMenu;
+	private WebElement myToolsMenu;
+	@FindBy(css=".overflow-menu > .tools-menu li > a[href*=Special]")
+	private List<WebElement> myToolsList;
 
 	private By toolsList = By.cssSelector("ul.tools li");
 
@@ -49,7 +52,6 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 	private String toolsListToolDeleteCss = " img.trash";
 	private String toolsListToolEditCss = " img.edit-pencil";
 	private String addedToolsPath = "//ul[@class='tools']//a[text() = '%s']";
-	private String moreMenuAddedToolsPath = "//ul[@class='tools']//li[@class='menu overflow-menu']//a[text() = '%s']";
 
 	/**
 	 * Verifies that user toolbar buttons are visible
@@ -285,11 +287,14 @@ public class CustomizedToolbarComponentObject extends BasePageObject{
 
 	public void openMoreMenu() {
 		executeScript("$('.overflow-menu').mouseover();");
+		waitForElementByCss(".overflow-menu > .tools-menu");
 		PageObjectLogging.log("openMoreMenu","more menu opened", true);
 	}
 
 	public void verifyToolInMoreTool(String toolName) {
-		waitForElementByXPath(String.format(moreMenuAddedToolsPath, toolName));
+		for (WebElement elem : myToolsList) {
+			Assertion.assertEquals(toolName.toLowerCase(), elem.getAttribute("data-name").toLowerCase());
+		}
 		PageObjectLogging.log("verifyToolInMoreTool",toolName + " appears in ToolbarMoreTool.", true);
 	}
 }

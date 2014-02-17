@@ -27,6 +27,11 @@
 			<version>2.0-beta-7</version>
 		</dependency>
 		<dependency>
+		  <groupId>de.sstoehr</groupId>
+		  <artifactId>har-reader</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		<dependency>
    			<groupId>xmlunit</groupId>
    			<artifactId>xmlunit</artifactId>
    			<version>1.3</version>

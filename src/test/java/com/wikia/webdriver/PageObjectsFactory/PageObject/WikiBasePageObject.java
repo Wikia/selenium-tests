@@ -984,10 +984,21 @@ public class WikiBasePageObject extends BasePageObject {
 	public HubBasePageObject openHubByUrl(HubName hub, String wikiCorporateURL) {
 		getUrl(wikiCorporateURL + hub.name());
 		return new HubBasePageObject(driver);
-	}	
+	}
 
 	public FacebookMainPageObject openFacebookMainPage() {
 		getUrl(URLsContent.facebookMainPage);
 		return new FacebookMainPageObject(driver);
+	}
+
+	public String getNameForArticle () {
+		return PageContent.articleNamePrefix + getTimeStamp();
+	}
+
+	public void openSpecialPromoteOnCurrentWiki() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String url = (String) js.executeScript("return wgServer");
+		getUrl(url + "/" + URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
 }

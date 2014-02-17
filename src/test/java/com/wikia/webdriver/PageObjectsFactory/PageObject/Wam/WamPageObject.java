@@ -61,6 +61,9 @@ public class WamPageObject extends BasePageObject {
 	@FindBy(css="div.wam-header h2")
 	private WebElement selectedHeaderName;
 
+	@FindBy(css="tr td:nth-child(5)")
+	private List<WebElement> verticalColumn;
+
 	By wamIndexTable = By.cssSelector("#wam-index table");
 
 	/**
@@ -208,13 +211,8 @@ public class WamPageObject extends BasePageObject {
 		waitForElementByElement(wamVerticalFilterSelect);
 		Select verticalSelectBox = new Select(wamVerticalFilterSelect);
 		String selectedValue = verticalSelectBox.getFirstSelectedOption().getText();
-		wamIndexRows.remove(0); // we don't need first headline row
-
-		for( int i = 0; i < wamIndexRows.size(); i++ ) {
-			List<WebElement> cells = wamIndexRows.get(i).findElements(By.tagName("td"));
-			if( !cells.isEmpty() && cells.size() > VERTICAL_COLUMN_INDEX ) {
-				Assertion.assertEquals( cells.get(VERTICAL_COLUMN_INDEX).getText(), selectedValue);
-			}
+		for (WebElement item : verticalColumn) {
+			Assertion.assertEquals(item.getText(), selectedValue);
 		}
 	}
 

@@ -143,9 +143,10 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	public void CustomizeToolbar007_MoreButton() {
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();
-		toolbar.addManyItems(toolPreferences, 20);
+		toolbar.addManyItems(toolPreferences, 5);
 		toolbar.clickSave();
 		setWindowSize(800, 600, driver);
+		toolbar.refreshPage();
 		toolbar.verifyToolOnToolbar(toolMore);
 		toolbar.openMoreMenu();
 		toolbar.verifyToolInMoreTool(toolPreferences);

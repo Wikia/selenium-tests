@@ -19,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuil
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
@@ -36,6 +37,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement articleHeader;
 	@FindBy(css="#mw-content-text")
 	protected WebElement articleContentContainer;
+	@FindBy(css="#WikiaMainContentContainer")
+	protected WebElement pageContentContainer;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
 	@FindBy(css="#WikiHeader .drop")
@@ -94,8 +97,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement rVModule;
 	@FindBy(css=".button.addVideo")
 	protected WebElement rVAddVideo;
-	@FindBy(css="#WikiaImagePlaceholderInner0")
+	@FindBy(css=".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
+	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
+	private WebElement imageAddPlaceholder;
 	@FindBy(css="a.details.magnify")
 	private WebElement videoDetailsButton;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
@@ -148,7 +153,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public String getAtricleTextRaw() {
-		return articleContentContainer.getText();
+		return pageContentContainer.getText();
 
 	}
 
@@ -481,6 +486,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementByElement(videoAddPlaceholder);
 		scrollAndClick(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
+	}
+
+	public PhotoAddComponentObject clickAddImagePlaceholder(){
+		waitForElementByElement(imageAddPlaceholder);
+		scrollAndClick(imageAddPlaceholder);
+		return new PhotoAddComponentObject(driver);
 	}
 
 	public FilePagePageObject clickVideoDetailsButton() {

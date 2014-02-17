@@ -90,7 +90,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		editCategory.editCategoryName(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);
-	}
+		}
 
 	@Test(groups = {"CategoriesTestsArticle006", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle006_anonDelete() {

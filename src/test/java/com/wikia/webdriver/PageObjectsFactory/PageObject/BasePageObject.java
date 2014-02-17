@@ -4,7 +4,9 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -40,6 +44,10 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
  *
  */
 
+/**
+ * @author wikia
+ *
+ */
 public class BasePageObject{
 
 	public WebDriver driver;
@@ -50,14 +58,12 @@ public class BasePageObject{
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
-	@FindBy(css = "#WallNotifications li")
+	@FindBy(css = "#WallNotifications > li")
 	protected WebElement notifications_ShowNotificationsLogo;
 	@FindBy(css = ".mw-htmlform-submit")
 	protected WebElement followSubmit;
 	@FindBy(css = "#ca-unwatch")
 	protected WebElement followedButton;
-	@FindBy(css = "#ca-watch")
-	protected WebElement unfollowedButton;
 
 	public BasePageObject(WebDriver driver) {
 		wait = new WebDriverWait(driver, timeOut);
@@ -212,7 +218,7 @@ public class BasePageObject{
 
 	public void jQueryClick(WebElement element){
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("$(arguments[0]).click()", element);
+		js.executeScript("$(arguments[0])[0].click()", element);
 	}
 
 	protected void actionsClick(WebElement element) {
@@ -374,10 +380,9 @@ public class BasePageObject{
 		return (String) js.executeScript("return " + script);
 	}
 
-	public long executeScriptRetLong(String script)
-	{
+	public long executeScriptRetLong(String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		return (Long) js.executeScript("return "+script);
+		return (Long) js.executeScript("return " + script);
 	}
 
 	protected void executeScript(String script, WebDriver driver) {
@@ -666,7 +671,7 @@ public class BasePageObject{
 	public void notifications_clickOnNotificationsLogo() {
 		waitForElementByElement(notifications_ShowNotificationsLogo);
 		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		scrollAndClick(notifications_ShowNotificationsLogo);
+		notifications_ShowNotificationsLogo.click();
 		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
 				"click on notifications logo on the upper right corner", true,
 				driver);
@@ -842,13 +847,6 @@ public class BasePageObject{
 		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
 	}
 
-	public void openSpecialPromoteOnCurrentWiki() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String url = (String) js.executeScript("return wgServer");
-		getUrl(url + "/" + URLsContent.specialPromote);
-		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
-	}
-
 	private void changeImplicitWait(int value, TimeUnit timeUnit) {
 		driver.manage().timeouts().implicitlyWait(value, timeUnit);
 	}
@@ -873,5 +871,29 @@ public class BasePageObject{
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
+	}
+
+	/**
+	 * this method should be called after clicktracking test, in order
+	 * to verify if expected events were tracked
+	 *
+	 * @param expectedEventsList - the expected tracked events
+	 * @author Michal 'justnpT' Nowierski
+	 */
+	public void compareTrackedEventsTo(List<String> expectedEventsList){
+		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
+		ArrayList<String> trackedEventsArrayList = new ArrayList<String>();
+		List<String> trackedEventsList;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//prepare list of tracked events
+		Object event = js.executeScript("return selenium_popEvent()");
+		while (!(event==null)) {
+			trackedEventsArrayList.add(event.toString());
+			event = js.executeScript("return selenium_popEvent()");
+		}
+		trackedEventsList = trackedEventsArrayList;
+		//use comparison method from ClicktrackingSupport class
+		ClickTrackingSupport support = new ClickTrackingSupport();
+		support.compareTrackedEventsTo(expectedEventsList, trackedEventsList);
 	}
 }

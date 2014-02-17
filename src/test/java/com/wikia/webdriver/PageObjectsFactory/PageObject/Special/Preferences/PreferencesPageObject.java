@@ -68,7 +68,7 @@ public class PreferencesPageObject extends WikiBasePageObject{
 
 	public void disconnectFromFacebook() {
 		waitForElementByElement(facebookDisconnect);
-		facebookDisconnect.click();
+		scrollAndClick(facebookDisconnect);
 		waitForElementByElement(disconnectDone);
 		PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook", true);
 	}
