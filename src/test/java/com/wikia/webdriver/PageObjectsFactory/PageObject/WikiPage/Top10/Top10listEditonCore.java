@@ -18,7 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 // Special:EditTopList   extends Top_10_list_EditonCore
 // Both of the two PageObjects share many methods from Top_10_list_EditonCore. However, they have some unique methods specific to their own nature. Those are distinguished in their class-bodies
 
-public class Top_10_list_EditonCore extends WikiBasePageObject {
+public class Top10listEditonCore extends WikiBasePageObject {
 
 	@FindBy(css="#description")
 	private WebElement descriptionField; 
@@ -38,7 +38,7 @@ public class Top_10_list_EditonCore extends WikiBasePageObject {
 	By itemInputsList = new By.ByCssSelector("li.ListItem div.ItemName input");
 	By itemDeleteButtonsList = new By.ByCssSelector("li.ListItem .ItemRemove img");
 	
-	public Top_10_list_EditonCore(WebDriver driver) {
+	public Top10listEditonCore(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
