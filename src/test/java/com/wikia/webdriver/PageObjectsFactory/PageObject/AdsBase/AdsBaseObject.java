@@ -10,6 +10,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,26 +28,34 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
+	private final String liftiumIframeSelector = "iframe[id*='Liftium']";
+
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
 	private WebElement wikiaArticle;
 	@FindBy(css=".WikiaSpotlight")
 	private List<WebElement> spotlights;
+	@FindBy(css=liftiumIframeSelector)
+	private List<WebElement> liftiumIframes;
+	@FindBy(css="div[id*='TOP_LEADERBOARD']")
+	private WebElement presentLeaderboard;
+	@FindBy(css="div[id*='TOP_RIGHT_BOXAD']")
+	private WebElement presentMedrec;
 
 	protected Boolean isWikiMainPage;
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
-	private WebElement presentLB;
-	private String presentLBName;
-	private WebElement presentMD;
-	private String presentMDName;
+	private String presentLeaderboardName;
+	private String presentLeaderboardSelector;
+	private String presentMedrecName;
+	private String presentMedrecSelector;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
 		AdsContent.setSlotsSelectors();
 		getUrl(page);
-		isWikiMainPage = checkIfMainPage();
+		setSlots();
 	}
 
 	public AdsBaseObject(
@@ -57,50 +67,30 @@ public class AdsBaseObject extends WikiBasePageObject {
 		networkTrafficInterceptor.startIntercepting(page);
 		getUrl(page);
 		this.networkTrafficInterceptor = networkTrafficInterceptor;
+		setSlots();
 	}
 
 	public AdsBaseObject(WebDriver driver) {
 		super(driver);
 		AdsContent.setSlotsSelectors();
+		setSlots();
 	}
 
-	protected final void setPresentTopLeaderboard() {
-		if (isWikiMainPage) {
-			presentLB = driver.findElement(
-				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeTopLB))
-			);
-			presentLBName = AdsContent.homeTopLB;
-		} else {
-			presentLB = driver.findElement(
-				By.cssSelector(AdsContent.getSlotSelector(AdsContent.topLB))
-			);
-			presentLBName = AdsContent.topLB;
-		}
-	}
-
-	protected final void setPresentMedrec() {
-		if (isWikiMainPage) {
-			presentMD = driver.findElement(
-				By.cssSelector(AdsContent.getSlotSelector(AdsContent.homeMedrec))
-			);
-			presentMDName = AdsContent.homeMedrec;
-		} else {
-			presentMD = driver.findElement(
-				By.cssSelector(AdsContent.getSlotSelector(AdsContent.medrec))
-			);
-			presentMDName = AdsContent.medrec;
-		}
+	private void setSlots() {
+		presentLeaderboardName = presentLeaderboard.getAttribute("id");
+		presentLeaderboardSelector = "#" + presentLeaderboardName;
+		presentMedrecName = presentMedrec.getAttribute("id");
+		presentMedrecSelector = "#" + presentMedrecName;
 	}
 
 	public void checkMedrec() {
-		setPresentMedrec();
 		AdsComparison adsComparison = new AdsComparison();
-
-		boolean isHidden = checkIfSlotHiddenBySlotTweaker(presentMD, presentMDName);
+		extractLiftiumTagId(presentMedrecSelector);
+		boolean isHidden = checkIfSlotHiddenBySlotTweaker(presentMedrec, presentMedrecName);
 
 		if (!isHidden) {
 			boolean result = adsComparison.compareSlotOnOff(
-				presentMD, AdsContent.getSlotSelector(presentMDName), driver
+				presentMedrec, presentMedrecSelector, driver
 			);
 			if(result) {
 				PageObjectLogging.log(
@@ -109,7 +99,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 				throw new NoSuchElementException(
 					"Screenshots of element on/off look the same."
 					+ "Most probable ad is not present; CSS "
-					+ AdsContent.getSlotSelector(presentMDName)
+					+ presentMedrecName
 				);
 			} else {
 				PageObjectLogging.log(
@@ -126,10 +116,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void checkTopLeaderboard() {
-		setPresentTopLeaderboard();
 		AdsComparison adsComparison = new AdsComparison();
+		extractLiftiumTagId(presentLeaderboardSelector);
 		boolean result = adsComparison.compareSlotOnOff(
-			presentLB, AdsContent.getSlotSelector(presentLBName), driver
+			presentLeaderboard, presentLeaderboardSelector, driver
 		);
 		if(result) {
 			PageObjectLogging.log(
@@ -138,7 +128,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
 				+ "Most probable ad is not present; CSS "
-				+ AdsContent.getSlotSelector(presentLBName)
+				+ presentLeaderboardSelector
 			);
 		} else {
 			PageObjectLogging.log(
@@ -271,15 +261,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyTopLeaderBoardAndMedrec() throws Exception {
-		setPresentTopLeaderboard();
-		waitForElementByElement(presentLB);
-		checkScriptPresentInSlotScripts(presentLBName, presentLB);
-		checkTagsPresent(presentLB);
+		waitForElementByElement(presentLeaderboard);
+		checkScriptPresentInSlotScripts(presentLeaderboardName, presentLeaderboard);
+		checkTagsPresent(presentLeaderboard);
 
-		setPresentMedrec();
-		waitForElementByElement(presentMD);
-		checkScriptPresentInSlotScripts(presentMDName, presentMD);
-		checkTagsPresent(presentMD);
+		waitForElementByElement(presentMedrec);
+		checkScriptPresentInSlotScripts(presentMedrecName, presentMedrec);
+		checkTagsPresent(presentMedrec);
 	}
 
 	public void verifyHubTopLeaderboard() throws Exception {
@@ -303,7 +291,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	public void verifyNoLiftiumAdsOnPage() throws Exception {
+	public void verifyNoLiftiumAdsOnPage() {
 		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
 		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
 		verifyNoLiftiumAds();
@@ -488,36 +476,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	private void verifyNoLiftiumAds() throws Exception {
-		List <WebElement> adsElements = driver.findElements(
-			By.cssSelector(createSelectorAll())
-		);
-		if (adsElements.isEmpty()) {
-			PageObjectLogging.log(
-				"AdsNotFound",
-				"Ads not found",
-				true,
-				driver
-			);
-		} else {
-			for (WebElement element : adsElements) {
-				if (element.getAttribute("id").contains("liftium")) {
-					PageObjectLogging.log(
-						"LiftiumAdFound",
-						"Liftium ads found on page",
-						false,
-						driver
-					);
-					throw new Exception("Found element that was not expected!");
-				} else {
-					PageObjectLogging.log(
-						"LiftiumAdsNotFound",
-						"Liftium Ads not found",
-						true,
-						driver
-					);
-				}
-			}
+	private void verifyNoLiftiumAds() {
+		if (liftiumIframes.size() > 0) {
+			throw new WebDriverException("Liftium ads found!");
 		}
 	}
 
@@ -529,5 +490,38 @@ public class AdsBaseObject extends WikiBasePageObject {
 			}
 		}
 		PageObjectLogging.log("SpotlightsHidden", "Spotlights are hidden", true);
+	}
+
+	private String extractLiftiumTagId(String slotSelector) {
+		String liftiumTagId = null;
+		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+		if (slot.findElements(By.cssSelector(liftiumIframeSelector)).size() > 0) {
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			WebElement currentLiftiumIframe = (WebElement)js.executeScript(
+				"return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];", slotSelector);
+			String liftiumAdSrc = currentLiftiumIframe.getAttribute("src");
+			Pattern pattern = Pattern.compile("tag_id=\\d*");
+			Matcher matcher = pattern.matcher(liftiumAdSrc);
+			if (matcher.find()) {
+				liftiumTagId = matcher.group().replaceAll("[^\\d]", "");
+			}
+		}
+
+		if (liftiumTagId != null) {
+			PageObjectLogging.log(
+				"LiftiumTagId",
+				"Present liftium tag id is: "
+				+ liftiumTagId + "; in slot: " + slotSelector,
+				true
+			);
+		} else {
+			PageObjectLogging.log(
+				"LiftiumTagId",
+				"Liftium not present in slot: " + slotSelector,
+				true
+			);
+		}
+
+		return liftiumTagId;
 	}
 }
