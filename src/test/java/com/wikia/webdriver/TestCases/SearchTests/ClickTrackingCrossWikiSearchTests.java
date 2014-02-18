@@ -38,16 +38,16 @@ public class ClickTrackingCrossWikiSearchTests extends NewTestTemplate {
 		search.executeScript(ClickTrackingScriptsProvider.trackerInstallation);
 
 		List<String> expectedEvents = Arrays.asList(
-				EventsCrossWikiSearch.EventHitEnterCrossWikiSearchInput,
-				EventsCrossWikiSearch.EventPushToTop,
-				EventsCrossWikiSearch.EventFirstCrossWikiSearchResult,
-				EventsCrossWikiSearch.EventSecondCrossWikiSearchResult,
-				EventsCrossWikiSearch.EventThirdCrossWikiSearchResult,
-				EventsCrossWikiSearch.EventFourthCrossWikiSearchResult,
-				EventsCrossWikiSearch.EventFifthCrossWikiSearchResult,
-				EventsCrossWikiSearch.EventSixthCrossWikiSearchResult,
-				EventsCrossWikiSearch.EventClickSearchButton,
-				EventsCrossWikiSearch.EventEmptySearchResultPage
+				EventsCrossWikiSearch.eventHitEnterCrossWikiSearchInput,
+				EventsCrossWikiSearch.eventPushToTop,
+				EventsCrossWikiSearch.eventFirstCrossWikiSearchResult,
+				EventsCrossWikiSearch.eventSecondCrossWikiSearchResult,
+				EventsCrossWikiSearch.eventThirdCrossWikiSearchResult,
+				EventsCrossWikiSearch.eventFourthCrossWikiSearchResult,
+				EventsCrossWikiSearch.eventFifthCrossWikiSearchResult,
+				EventsCrossWikiSearch.eventSixthCrossWikiSearchResult,
+				EventsCrossWikiSearch.eventClickSearchButton,
+				EventsCrossWikiSearch.eventEmptySearchResultPage
 		);
 
 		search.compareTrackedEventsTo(expectedEvents);

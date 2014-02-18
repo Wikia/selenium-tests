@@ -43,8 +43,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	public void CategoriesTestsArticle002_anonSuggestions() {
 		VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver);
 		visualEditMode.goToArticleEditPage(
-				wikiURL,
-				PageContent.articleNamePrefix + visualEditMode.getTimeStamp()
+			wikiURL,
+			PageContent.articleNamePrefix + visualEditMode.getTimeStamp()
 		);
 		visualEditMode.addContent(PageContent.articleText);
 		ArticlePageObject article = visualEditMode.submitArticle();
@@ -69,8 +69,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(
-				wikiURL,
-				PageContent.articleNamePrefix + base.getTimeStamp()
+			wikiURL,
+			PageContent.articleNamePrefix + base.getTimeStamp()
 		);
 		visualEditMode.addContent(PageContent.articleText);
 		ArticlePageObject article = visualEditMode.submitArticle();
@@ -90,7 +90,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		editCategory.editCategoryName(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);
-		}
+	}
 
 	@Test(groups = {"CategoriesTestsArticle006", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle006_anonDelete() {

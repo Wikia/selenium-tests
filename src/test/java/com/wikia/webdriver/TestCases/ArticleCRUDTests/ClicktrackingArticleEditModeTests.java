@@ -37,7 +37,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		visualEditMode.previewArticle();
 
 		List<String> expectedEvents = Arrays.asList(
-				EventsArticleEditMode.EventPreviewButtonClick
+				EventsArticleEditMode.eventPreviewButtonClick
 		);
 
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
@@ -65,11 +65,11 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		photoAddPhoto.clickUpload();
 
 		List<String> expectedEvents = Arrays.asList(
-				EventsModalAddPhoto.EventAddRecentPhotoClick,
-				EventsModalAddPhoto.EventFindButtonClick,
-				EventsModalAddPhoto.EventThisWikiLinkClick,
-				EventsModalAddPhoto.EventUploadButtonClick,
-				EventsModalAddPhotoOptions.EventBackButtonClick
+				EventsModalAddPhoto.eventAddRecentPhotoClick,
+				EventsModalAddPhoto.eventFindButtonClick,
+				EventsModalAddPhoto.eventThisWikiLinkClick,
+				EventsModalAddPhoto.eventUploadButtonClick,
+				EventsModalAddPhotoOptions.eventBackButtonClick
 		);
 
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
