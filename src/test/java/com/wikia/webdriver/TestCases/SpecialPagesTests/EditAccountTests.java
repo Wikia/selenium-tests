@@ -60,6 +60,6 @@ public class EditAccountTests extends NewTestTemplate {
 	public void EditAccount_004_verifyAccountReopened() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUserLoginPageObject login = base.openSpecialUserLoginOnWiki(wikiURL);
-		login.loginAndVerifyOnWiki(credentials.userNameClosedAccount, credentials.passwordClosedAccount, wikiURL);
+		login.loginAndVerify(credentials.userNameClosedAccount, credentials.passwordClosedAccount, wikiURL);
 	}
 }
