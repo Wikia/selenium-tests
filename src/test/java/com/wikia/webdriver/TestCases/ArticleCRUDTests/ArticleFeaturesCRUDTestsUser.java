@@ -394,7 +394,6 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 2);
 		photoOptions.setCaption(PageContent.caption);
 		photoOptions.clickAddPhoto();
-		visualEditMode.submitArticle();
 		article.verifyPhoto();
 	}
 }
