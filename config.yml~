@@ -1,0 +1,10 @@
+#THIS IS SAMPLE FILE
+#Copy its content to config.yml file
+#It is used only when you run tests using IDE
+
+browser: FF #acceptable values: FF, CHROME, GHOST
+wikiName: mediawiki119 #default testing wiki
+env: prod #acceptable values: prod, preview, sandbox-number dev-name
+credentialsPath: /selenium-config/config.xml #Path to your config.xml file
+captchaPath: /selenium-config/captcha.txt #Path to your captcha.txt file
+qs: null

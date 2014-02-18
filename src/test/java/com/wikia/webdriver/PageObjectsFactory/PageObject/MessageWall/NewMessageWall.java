@@ -49,6 +49,10 @@ public class NewMessageWall extends WikiBasePageObject {
 	@FindBy (css=".msg-title > a")
 	private List<WebElement> threadList;
 
+	private String newMessageMenu = ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
+	private String firstMessageMenu = ".comments li:nth-child(1) .buttons ";
+	private String closeButton = ".close-thread";
+
 	By messageTitleBy = By.cssSelector(".msg-title");
 	By messageBodyBy = By.cssSelector(".msg-body");
 	By imageBy = By.cssSelector(".thumbimage");
@@ -59,7 +63,7 @@ public class NewMessageWall extends WikiBasePageObject {
 	By moreButtonBy = By.cssSelector(".wikia-menu-button.secondary.combined");
 	By editButtonBy = By.cssSelector(".edit-message");
 	By removeButtonBy = By.cssSelector(".remove-message");
-	By closeButtonBy = By.cssSelector(".close-thread");
+	By closeButtonBy = By.cssSelector(firstMessageMenu + closeButton);
 	By reopenButtonBy = By.cssSelector(".reopen-thread");
 	By quoteButtonBy = By.cssSelector(".quote-button.secondary");
 	By quoteMessageBy = By.cssSelector(".replies p");
@@ -69,9 +73,6 @@ public class NewMessageWall extends WikiBasePageObject {
 	By replyButtonBy = By.cssSelector(".replyButton");
 	By replyBodyBy = By.cssSelector(".replyBody");
 
-	String newMessageMenu = ".comments li.SpeechBubble.message.message-main:nth-child(1) .buttons";
-	String newMessageWrapper = ".comments li.SpeechBubble.message.message-main:nth-child(1)";
-	String firstMessageMenu = ".comments li:nth-child(1) .buttons";
 
 	public NewMessageWall(WebDriver driver) {
 		super(driver);
@@ -164,7 +165,7 @@ public class NewMessageWall extends WikiBasePageObject {
 		refreshPage();
 		setDisplayStyle(newMessageMenu, "block");
 		scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
-		WebElement closeButton = driver.findElement(firstMessageWrapperBy).findElement(closeButtonBy);
+		WebElement closeButton = driver.findElement(closeButtonBy);
 		waitForElementClickableByElement(closeButton);
 		scrollAndClick(closeButton);
 		setDisplayStyle(newMessageMenu, "none");
@@ -235,10 +236,10 @@ public class NewMessageWall extends WikiBasePageObject {
 	}
 
 	public void verifyThreadReopened() {
-		refreshPage();
+		waitForElementPresenceByBy(closeButtonBy);
 		setDisplayStyle(firstMessageMenu, "block");
 		scrollAndClick(driver.findElement(firstMessageWrapperBy).findElement(moreButtonBy));
-		driver.findElement(firstMessageWrapperBy).findElement(closeButtonBy);
+		waitForElementByBy(closeButtonBy);
 		setDisplayStyle(firstMessageMenu, "none");
 		PageObjectLogging.log("verifyThreadReopened", "verifyed thread reopened", true);
 	}
