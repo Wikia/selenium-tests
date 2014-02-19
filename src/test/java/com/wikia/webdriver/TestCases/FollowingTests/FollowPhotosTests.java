@@ -22,7 +22,7 @@ public class FollowPhotosTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 	String imageName;
 
-	@Test
+	@Test(groups = "FollowPhoto")
 	public void FollowPhoto_001_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -33,7 +33,7 @@ public class FollowPhotosTests extends NewTestTemplate{
 		special.verifyPageUnfollowed();
 	}
 
-	@Test(dependsOnMethods={"FollowPhoto_001_setup"})
+	@Test(groups = "FollowPhoto", dependsOnMethods={"FollowPhoto_001_setup"})
 	public void FollowPhoto_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

@@ -22,7 +22,7 @@ public class FollowVideosTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 	String videoName;
 
-	@Test
+	@Test(groups = "FollowVideo")
 	public void FollowVideo_001_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -33,7 +33,7 @@ public class FollowVideosTests extends NewTestTemplate{
 		videoName = special.getHeaderText();
 	}
 
-	@Test(dependsOnMethods={"FollowVideo_001_setup"})
+	@Test(groups = "FollowVideo", dependsOnMethods={"FollowVideo_001_setup"})
 	public void FollowVideo_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
