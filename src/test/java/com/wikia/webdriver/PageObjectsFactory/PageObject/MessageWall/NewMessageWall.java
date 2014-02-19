@@ -73,7 +73,6 @@ public class NewMessageWall extends WikiBasePageObject {
 	By replyButtonBy = By.cssSelector(".replyButton");
 	By replyBodyBy = By.cssSelector(".replyBody");
 
-
 	public NewMessageWall(WebDriver driver) {
 		super(driver);
 	}

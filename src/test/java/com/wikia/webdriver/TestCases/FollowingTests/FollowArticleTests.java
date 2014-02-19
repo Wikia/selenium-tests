@@ -21,7 +21,7 @@ public class FollowArticleTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 	String articleName;
 
-	@Test
+	@Test(groups = "FollowArticle")
 	public void FollowArticle_001_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -32,7 +32,7 @@ public class FollowArticleTests extends NewTestTemplate{
 		article.verifyPageUnfollowed();
 	}
 
-	@Test(dependsOnMethods={"FollowArticle_001_setup"})
+	@Test(groups = "FollowArticle", dependsOnMethods={"FollowArticle_001_setup"})
 	public void FollowArticle_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
