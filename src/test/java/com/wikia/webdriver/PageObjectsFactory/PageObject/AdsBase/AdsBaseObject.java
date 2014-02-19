@@ -498,7 +498,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 		if (slot.findElements(By.cssSelector(liftiumIframeSelector)).size() > 0) {
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			WebElement currentLiftiumIframe = (WebElement)js.executeScript(
-				"return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];", slotSelector);
+				"return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
+				slotSelector
+			);
 			String liftiumAdSrc = currentLiftiumIframe.getAttribute("src");
 			Pattern pattern = Pattern.compile("tag_id=\\d*");
 			Matcher matcher = pattern.matcher(liftiumAdSrc);
