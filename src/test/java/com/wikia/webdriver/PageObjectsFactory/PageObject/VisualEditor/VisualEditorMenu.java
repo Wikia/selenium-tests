@@ -39,12 +39,14 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement numListButton;
 	@FindBy(css=".ve-ui-icon-bullet-list")
 	private WebElement bulletListButton;
-	@FindBy(css=".ve-ui-menuToolGroup .ve-ui-icon-down")
+	@FindBy(css=".oo-ui-widget.oo-ui-toolGroup.oo-ui-popupToolGroup.oo-ui-menuToolGroup")
 	private WebElement formattingDropDown;
 	@FindBy(css=".ve-ui-toolbar-saveButton")
 	private WebElement savePageButton;
 	@FindBy(css=".ve-ui-listToolGroup")
 	private WebElement moreOptionsWrapper;
+	@FindBy(css=".oo-ui-widget.oo-ui-toolGroup.oo-ui-popupToolGroup.oo-ui-menuToolGroup>div>span")
+	private List<WebElement> formattingDropDownItem;
 
 	private By genericDropDownBy = By.cssSelector(".ve-ui-icon-down");
 	private By codeStyleBy = By.cssSelector(".ve-ui-tool-code");
@@ -119,11 +121,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
 	public void selectFormatting(Formatting format) {
 		formattingDropDown.click();
-		List<WebElement> list = formattingDropDown
-			.findElement(parentBy)
-			.findElement(parentBy)
-			.findElements(toolWrapper);
-		list.get(format.ordinal()).click();
+		formattingDropDownItem.get(format.ordinal()).click();
 	}
 
 	public VisualEditorSaveChangesDialog savePage() {
