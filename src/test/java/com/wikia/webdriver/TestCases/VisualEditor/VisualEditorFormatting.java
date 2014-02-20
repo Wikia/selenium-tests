@@ -49,7 +49,10 @@ public class VisualEditorFormatting extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorFormatting_001(Formatting format) {
 		PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
-		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
+		ve.gotoArticleEditModeVisual(
+			wikiURL,
+			PageContent.articleNamePrefix + ve.getTimeStamp()
+		);
 		ve.selectFormatting(format);
 		ve.write(text);
 		ve.verifyFormatting(format, text);

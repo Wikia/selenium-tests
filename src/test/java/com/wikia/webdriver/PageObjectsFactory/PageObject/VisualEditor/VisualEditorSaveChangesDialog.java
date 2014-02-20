@@ -15,17 +15,21 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 
 	@FindBy(
 			css=
-			".ve-init-mw-viewPageTarget-saveDialog-slide-save" +
-			" .ve-ui-flaggableElement-constructive[role='button']"
+			".oo-ui-widget.oo-ui-flaggableElement-constructive" +
+			".oo-ui-buttonWidget.oo-ui-pushButtonWidget"
 	)
-	private WebElement saveButton;
+	private WebElement publishButton;
+	@FindBy(css=".oo-ui-frame")
+	private WebElement saveDialogIFrame;
 
 	public VisualEditorSaveChangesDialog(WebDriver driver) {
 		super(driver);
 	}
 
 	public ArticlePageObject savePage() {
-		saveButton.click();
+		driver.switchTo().frame(saveDialogIFrame);
+		publishButton.click();
+		driver.switchTo().defaultContent();
 		return new ArticlePageObject(driver);
 	}
 
