@@ -16,6 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Robert 'rochan' Chan
  * https://wikia-inc.atlassian.net/browse/QAART-241
  * Verify paragraph formatting
  * Verify heading formatting
@@ -56,7 +57,7 @@ public class VisualEditorFormattingTest extends NewTestTemplateBeforeClass {
 		ve.selectFormatting(format);
 		ve.write(text);
 		ve.verifyFormatting(format, text);
-		VisualEditorSaveChangesDialog save = ve.savePage();
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyFormatting(format, text);
 	}

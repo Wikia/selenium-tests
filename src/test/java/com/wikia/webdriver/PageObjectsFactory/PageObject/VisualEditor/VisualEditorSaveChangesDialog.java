@@ -28,6 +28,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 
 	public ArticlePageObject savePage() {
 		driver.switchTo().frame(saveDialogIFrame);
+		waitForElementClickableByElement(publishButton);
 		publishButton.click();
 		driver.switchTo().defaultContent();
 		return new ArticlePageObject(driver);
