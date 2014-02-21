@@ -135,6 +135,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement wikiNameHeader;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
+	@FindBy(css=".tally")
+	private WebElement pageTally;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -182,6 +184,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyStyle(Style style, String content) {
+		waitForElementByElement(pageTally);
 		waitForElementByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
 		boolean isPresent = false;
