@@ -24,7 +24,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * Verify subscript formatting
  * Verify superscript formatting
  */
-public class VisualEditorStyles extends NewTestTemplateBeforeClass {
+public class VisualEditorStylesTest extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
