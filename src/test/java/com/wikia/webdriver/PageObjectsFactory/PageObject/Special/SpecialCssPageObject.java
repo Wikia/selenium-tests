@@ -110,7 +110,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void sendCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
 			aceInputTextArea.sendKeys(cssText);
-			PageObjectLogging.log("sendCssText", "the following text was send to ace editor: "+cssText, true, driver);
+			PageObjectLogging.log("sendCssText", "the following text was send to ace editor: "+cssText, true);
 		}
 
 		public void verifyAceError() {
@@ -210,6 +210,9 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("verifyConflictArea", "verify that conflict area is present", true);
 		}
 
+		/**
+		 * Above the editor area, there should be a box with comparison of yours and the latest changes
+		 */
 		public void verifyLatestRevision() {
 			waitForElementByElement(oRevisionTitle);
 			waitForTextToBePresentInElementByElement(oRevisionTitle, "Latest revision");
