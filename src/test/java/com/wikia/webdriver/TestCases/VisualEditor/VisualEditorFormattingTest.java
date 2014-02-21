@@ -27,7 +27,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * Verify page title formatting
  */
 
-public class VisualEditorFormatting extends NewTestTemplateBeforeClass {
+public class VisualEditorFormattingTest extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
