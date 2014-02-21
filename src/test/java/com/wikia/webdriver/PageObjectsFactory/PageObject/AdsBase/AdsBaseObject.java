@@ -72,15 +72,25 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	public AdsBaseObject(WebDriver driver) {
 		super(driver);
-		AdsContent.setSlotsSelectors();
-		setSlots();
 	}
 
 	private void setSlots() {
-		presentLeaderboardName = presentLeaderboard.getAttribute("id");
-		presentLeaderboardSelector = "#" + presentLeaderboardName;
-		presentMedrecName = presentMedrec.getAttribute("id");
-		presentMedrecSelector = "#" + presentMedrecName;
+		if (checkIfElementOnPage(presentLeaderboard)) {
+			presentLeaderboardName = presentLeaderboard.getAttribute("id");
+			presentLeaderboardSelector = "#" + presentLeaderboardName;
+		} else {
+			presentLeaderboardName = null;
+			presentLeaderboardSelector = null;
+			presentLeaderboard = null;
+		}
+		if (checkIfElementOnPage(presentMedrec)) {
+			presentMedrecName = presentMedrec.getAttribute("id");
+			presentMedrecSelector = "#" + presentMedrecName;
+		} else {
+			presentMedrec = null;
+			presentMedrecName = null;
+			presentMedrecSelector = null;
+		}
 	}
 
 	public void checkMedrec() {
@@ -477,8 +487,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void verifyNoLiftiumAds() {
-		if (liftiumIframes.size() > 0) {
+		if (checkIfElementOnPage(liftiumIframeSelector)) {
 			throw new WebDriverException("Liftium ads found!");
+		} else {
+			PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
 		}
 	}
 
