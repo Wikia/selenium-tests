@@ -5,7 +5,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,6 +26,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -79,11 +84,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import org.openqa.selenium.WebDriverException;
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -1039,5 +1039,20 @@ public class WikiBasePageObject extends BasePageObject {
 			keysFromDefaultList.add(matcher.group().replaceAll("'", ""));
 		}
 		return keysFromDefaultList.toArray();
+	}
+
+	/**
+	 * method used to navigate to new visual editor
+	 * @param wikiURL
+	 * @param article
+	 */
+	public VisualEditorPageObject gotoNewArticleEditModeVisual(String wikiURL) {
+		getUrl(
+				urlBuilder.appendQueryStringToURL(
+					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+					URLsContent.actionVisualEditParameter
+				)
+		);
+		return new VisualEditorPageObject(driver);
 	}
 }

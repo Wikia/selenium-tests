@@ -33,7 +33,6 @@ public class VisualEditorDataProvider {
 	public enum Style {
 		BOLD (By.tagName("b")),
 		ITALIC (By.tagName("i")),
-		CODE (By.tagName("code")),
 		STRIKETHROUGH (By.tagName("s")),
 		UNDERLINE (By.tagName("u")),
 		SUBSCRIPT (By.tagName("sub")),
@@ -75,7 +74,6 @@ public class VisualEditorDataProvider {
 		return new Object[][] {
 				{Style.BOLD},
 				{Style.ITALIC},
-				{Style.CODE},
 				{Style.STRIKETHROUGH},
 				{Style.SUBSCRIPT},
 				{Style.SUPERSCRIPT},
