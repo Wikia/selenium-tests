@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider;
-import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
@@ -17,14 +17,18 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Robert 'rochan' Chan
- * Verify bold formatting
- * Verify italic formatting
- * Verify strikethrough formatting
- * Verify underline formatting
- * Verify subscript formatting
- * Verify superscript formatting
+ * https://wikia-inc.atlassian.net/browse/QAART-241
+ * Verify paragraph formatting
+ * Verify heading formatting
+ * Verify sub-heading 1 formatting
+ * Verify sub-heading 2 formatting
+ * Verify sub-heading 3 formatting
+ * Verify sub-heading 4 formatting
+ * Verify preformatted formatting
+ * Verify page title formatting
  */
-public class VisualEditorStylesTest extends NewTestTemplateBeforeClass {
+
+public class VisualEditorFormattingTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
@@ -39,35 +43,22 @@ public class VisualEditorStylesTest extends NewTestTemplateBeforeClass {
 		ve = new VisualEditorPageObject(driver);
 	}
 
-	@Test(groups = {"VisualEditorStylesFullText", "VisualEditorStyles_001"},
+	@Test(
+			groups = {"VisualEditorFormatting", "VisualEditorFormatting_001"},
 			dataProviderClass = VisualEditorDataProvider.class,
-			dataProvider = "getStyles")
-	public void VisualEditorStyles_001_FullText(Style style) {
-		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
-		ve.gotoNewArticleEditModeVisual(wikiURL);
-		ve.selectStyle(style);
+			dataProvider = "getFormatting"
+	)
+	public void VisualEditorFormatting_001(Formatting format) {
+		PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
+		ve.gotoArticleEditModeVisual(
+			wikiURL,
+			PageContent.articleNamePrefix + ve.getTimeStamp()
+		);
+		ve.selectFormatting(format);
 		ve.write(text);
-		ve.verifyStyle(style, text);
-		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-		ArticlePageObject article = saveDialog.savePage();
-		article.verifyStyle(style, text);
-	}
-
-	@Test(groups = {"VisualEditorStylesSelectedText", "VisualEditorStyles_002"},
-			dataProviderClass = VisualEditorDataProvider.class,
-			dataProvider = "getStyles")
-	public void VisualEditorStyles_002_SelectedText(Style style) {
-		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
-		ve.gotoNewArticleEditModeVisual(wikiURL);
-		ve.write(text);
-
-		String selectText = text.substring(12, 17);
-
-		ve.selectText(selectText);
-		ve.selectStyle(style);
-		ve.verifyStyle(style, selectText);
+		ve.verifyFormatting(format, text);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
-		article.verifyStyle(style, selectText);
+		article.verifyFormatting(format, text);
 	}
 }
