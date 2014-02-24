@@ -98,19 +98,31 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			waitForElementByElement(aceLayerTextArea);
 			executeScript("ace.edit('cssEditorContainer').navigateFileEnd();");
 			sendCssText(cssText);
-			PageObjectLogging.log("sendAceCssText", "the following text was send to ace editor: "+cssText, true);
+			PageObjectLogging.log(
+				"sendAceCssText",
+				"the following text was send to ace editor: " + cssText,
+				true
+			);
 		}
 
 		public void sendEditSummaryText(String summaryText) {
 			waitForElementByElement(editSummaryField);
 			editSummaryField.sendKeys(summaryText);
-			PageObjectLogging.log("editSummaryField", "the following text was send to ace editor: "+summaryText, true);
+			PageObjectLogging.log(
+				"editSummaryField",
+				"the following text was send to ace editor: " + summaryText,
+				true
+			);
 		}
 
 		public void sendCssText(String cssText) {
 			waitForElementByElement(aceLayerTextArea);
 			aceInputTextArea.sendKeys(cssText);
-			PageObjectLogging.log("sendCssText", "the following text was send to ace editor: "+cssText, true, driver);
+			PageObjectLogging.log(
+				"sendCssText",
+				"the following text was send to ace editor: " + cssText,
+				true
+			);
 		}
 
 		public void verifyAceError() {
@@ -210,6 +222,9 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("verifyConflictArea", "verify that conflict area is present", true);
 		}
 
+		/**
+		 * Above the editor area, there should be a box with comparison of yours and the latest changes
+		 */
 		public void verifyLatestRevision() {
 			waitForElementByElement(oRevisionTitle);
 			waitForTextToBePresentInElementByElement(oRevisionTitle, "Latest revision");
