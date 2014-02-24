@@ -100,7 +100,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			sendCssText(cssText);
 			PageObjectLogging.log(
 				"sendAceCssText",
-				"the following text was send to ace editor: "+cssText,
+				"the following text was send to ace editor: " + cssText,
 				true
 			);
 		}
@@ -110,7 +110,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			editSummaryField.sendKeys(summaryText);
 			PageObjectLogging.log(
 				"editSummaryField",
-				"the following text was send to ace editor: "+summaryText,
+				"the following text was send to ace editor: " + summaryText,
 				true
 			);
 		}
@@ -120,7 +120,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			aceInputTextArea.sendKeys(cssText);
 			PageObjectLogging.log(
 				"sendCssText",
-				"the following text was send to ace editor: "+cssText,
+				"the following text was send to ace editor: " + cssText,
 				true
 			);
 		}
