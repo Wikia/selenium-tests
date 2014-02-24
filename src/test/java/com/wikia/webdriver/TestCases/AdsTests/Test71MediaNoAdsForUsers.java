@@ -38,7 +38,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	private void loginSteps() {
 		SpecialUserLoginPageObject userLogin = new SpecialUserLoginPageObject(driver);
 		Credentials credentials = config.getCredentials();
-		userLogin.loginAndVerifyOnWiki(
+		userLogin.loginAndVerify(
 			credentials.userName, credentials.password, testedWiki
 		);
 	}

@@ -12,7 +12,7 @@ tmp.exe
 bin/
 src/test/java/com/wikia/webdriver/Trash/
 test-output/
-Wikia.iml
+*.iml
 captcha.txt
 config.xml
 src/test/java/com/wikia/webdriver/Common/Properties/PropertiesSetter.java

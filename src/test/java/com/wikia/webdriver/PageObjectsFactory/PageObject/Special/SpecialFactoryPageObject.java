@@ -1,14 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariables.wikiFactoryVariables;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class SpecialFactoryPageObject extends SpecialPageObject
 {
@@ -32,15 +30,11 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 	private WebElement variableList;
 	@FindBy(css="div > div[style*=left] > pre")
 	private WebElement variableValue;
+	@FindBy(css="div > div[style*=right] > pre")
+	private WebElement defaultVariableValue;
 
 	public SpecialFactoryPageObject(WebDriver driver) {
 		super(driver);
-	}
-
-	public SpecialFactoryPageObject openWikiFactoryPage() {
-		getUrl(URLsContent.wikiFactoryLiveDomain);
-		PageObjectLogging.log("openWikiFactoryPage ", "Wiki factory page opened", true, driver);
-		return new SpecialFactoryPageObject(driver);
 	}
 
 	private void clickCloseWikiButton() {
@@ -84,9 +78,23 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 		verifyWikiaClosed();
 	}
 
-	public void verifyVariableValue(wikiFactoryVariables variableName, String expectedValue) {
+	public void verifyVariableValue(WikiFactoryVariables variableName, String expectedValue) {
+		selectVariableByVisibleText(variableName);
+		Assertion.assertEquals(expectedValue, variableValue.getText());
+	}
+
+	public String getVariableDefaultValue(WikiFactoryVariables variableName) {
+		selectVariableByVisibleText(variableName);
+		return defaultVariableValue.getText();
+	}
+
+	public String getVariableSetValue(WikiFactoryVariables variableName) {
+		selectVariableByVisibleText(variableName);
+		return variableValue.getText();
+	}
+
+	private void selectVariableByVisibleText(WikiFactoryVariables variableName) {
 		Select select = new Select(variableList);
 		select.selectByVisibleText(variableName.toString());
-		Assertion.assertEquals(expectedValue, variableValue.getText());
 	}
 }

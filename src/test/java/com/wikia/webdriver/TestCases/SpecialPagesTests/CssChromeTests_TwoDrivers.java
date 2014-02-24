@@ -16,19 +16,19 @@ public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 	 * https://wikia-inc.atlassian.net/browse/DAR-731 stories description
 	 * https://wikia-inc.atlassian.net/browse/DAR-880 development ticket
 	 */
-	@Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"})
+	@Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"}, enabled=false)
 	public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision() {
 		//first user opens the special:CSS
 		switchToWindow(driver);
 		WikiBasePageObject base1 = new WikiBasePageObject(driver);
-		base1.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
+		base1.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialCssPageObject specialCss1 = base1.openSpecialCss(wikiURL);
 		specialCss1.verifyAceEditorPresence();
 		specialCss1.sendCssText(CssEditorContent.validCss);
 		//second user opens the special:CSS
 		switchToWindow(driverFF);
 		WikiBasePageObject base2 = new WikiBasePageObject(driverFF);
-		base2.logInCookie(credentials.userNameStaff2, credentials.passwordStaff2);
+		base2.logInCookie(credentials.userNameStaff2, credentials.passwordStaff2, wikiURL);
 		SpecialCssPageObject specialCss2 = base2.openSpecialCss(wikiURL);
 		specialCss2.verifyAceEditorPresence();
 		specialCss2.sendCssText(CssEditorContent.validCss2);

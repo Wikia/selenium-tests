@@ -20,20 +20,26 @@ public class ClickTrackingSupport {
 
 		for (String expectedEvent : expectedEventsList) {
 			if (!currentEventsList.contains(expectedEvent)) {
-				PageObjectLogging.log("compareTrackedEventsTo", "event: '"+expectedEvent+"' has not been tracked", false);
+				PageObjectLogging.log(
+						"compareTrackedEventsTo",
+						"event: '"+expectedEvent+"' has not been tracked",
+						false);
 			}
 			Assertion.assertTrue(currentEventsList.contains(expectedEvent));
-			PageObjectLogging.log("compareTrackedEventsTo", "event: '"+expectedEvent+"' has been tracked", true);
+			PageObjectLogging.log(
+					"compareTrackedEventsTo",
+					"event: '"+expectedEvent+"' has been tracked",
+					true);
 		}
 	}
 
 	private String extractEventLabel(String rawString) {
 		String finalLabelValue = null;
 		if (rawString.contains("label")) {
-		int labelValueStart = rawString.indexOf("\"label\":");
-		String nextString = rawString.substring(labelValueStart+9);
-		int labelValueEnd = nextString.indexOf("\"}}");
-		finalLabelValue = nextString.substring(0, labelValueEnd);
+			int labelValueStart = rawString.indexOf("\"label\":");
+			String nextString = rawString.substring(labelValueStart+9);
+			int labelValueEnd = nextString.indexOf("\"}}");
+			finalLabelValue = nextString.substring(0, labelValueEnd);
 		}
 		return finalLabelValue;
 	}

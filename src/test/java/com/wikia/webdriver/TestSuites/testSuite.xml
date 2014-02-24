@@ -53,6 +53,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsForSony"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNo71MediaAdsForSony"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>
@@ -80,6 +81,7 @@
 			<class name="com.wikia.webdriver.TestCases.LightboxTests.LightboxTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.EditingLocalCssTests"/>
+			<class name="com.wikia.webdriver.TestCases.MarketingToolboxTests.DashboardTests"/>
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>

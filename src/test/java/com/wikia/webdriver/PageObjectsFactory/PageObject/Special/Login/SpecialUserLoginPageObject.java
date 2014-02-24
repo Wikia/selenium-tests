@@ -80,21 +80,9 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		scrollAndClick(forgotPasswordLink);
 	}
 
-	public void loginAndVerify(String name, String password){
-		openSpecialUserLogin();
-		login(name, password);
-		verifyUserLoggedIn(name);
-	}
-
 	public void loginAndVerify(String name, String password, String wikiURL){
 		openSpecialUserLogin(wikiURL);
 		login(name, password);
-		verifyUserLoggedIn(name);
-	}
-
-	public void loginAndVerifyOnWiki(String name, String pass, String url) {
-		openSpecialUserLoginOnWiki(url);
-		login(name, pass);
 		verifyUserLoggedIn(name);
 	}
 

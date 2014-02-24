@@ -24,7 +24,8 @@ public class Ads71MediaObject extends AdsBaseObject {
 	}
 
 	public Ads71MediaObject(WebDriver driver, String page) {
-		super(driver, page);
+		super(driver);
+		getUrl(page);
 		setSlots();
 	}
 

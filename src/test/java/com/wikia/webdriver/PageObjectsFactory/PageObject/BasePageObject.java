@@ -39,14 +39,7 @@ import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
- *
  * @author Karol
- *
- */
-
-/**
- * @author wikia
- *
  */
 public class BasePageObject{
 
@@ -887,7 +880,7 @@ public class BasePageObject{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		//prepare list of tracked events
 		Object event = js.executeScript("return selenium_popEvent()");
-		while (!(event==null)) {
+		while (!(event == null)) {
 			trackedEventsArrayList.add(event.toString());
 			event = js.executeScript("return selenium_popEvent()");
 		}

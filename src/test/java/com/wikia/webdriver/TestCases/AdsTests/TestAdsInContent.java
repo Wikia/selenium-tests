@@ -49,7 +49,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_AU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -60,7 +59,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_CA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -71,7 +69,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_DE() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -82,7 +79,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_GB() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -93,7 +89,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_PL() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -104,7 +99,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_UA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -115,7 +109,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_RU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -126,7 +119,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_IT() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}
@@ -137,7 +129,6 @@ public class TestAdsInContent extends NewTestTemplate {
 	)
 	public void TestAdsInContent_JP() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyTopLeaderBoardAndMedrec();
 		wikiPage.verifyAdsInContent();
 		wikiPage.verifyPrefooters();
 	}

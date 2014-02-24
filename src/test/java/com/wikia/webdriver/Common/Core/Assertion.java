@@ -1,17 +1,15 @@
 package com.wikia.webdriver.Common.Core;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-
-public class Assertion extends Assert{
+public class Assertion extends Assert {
 	
 	public static boolean assertStringContains(String bigger, String smaller){
 		boolean isAssertPassed = true;
@@ -31,39 +29,55 @@ public class Assertion extends Assert{
 			return false;
 		}
 	}
-	
+
 	public static void assertEquals(String pattern, String current){
 		boolean isAssertPassed = true;
-		try{
+		String patternEncoded = encodeSpecialChars(pattern);
+		String currentEncoded = encodeSpecialChars(current);
+		try {
 			Assert.assertEquals(pattern, current);
-			if (pattern.contains("<")||current.contains("<"))
-			{
-				String tmp1 = pattern.replaceAll("<", "&lt");
-				tmp1 = tmp1.replaceAll(">", "&gt");
-				String tmp2 = current.replaceAll("<", "&lt");
-				tmp2 = tmp2.replaceAll(">", "&gt");
-				pattern = tmp1;
-				current = tmp2;
-			}
-			PageObjectLogging.log("assertEquals", "assertion passed<br/>pattern: "+pattern+"<br/>current: "+current,  true);
-		}
-		catch(AssertionError ass){
+		} catch(AssertionError err){
 			isAssertPassed = false;
-			addVerificationFailure(ass);
-			if (pattern.contains("<")||current.contains("<"))
-			{
-				String tmp1 = pattern.replaceAll("<", "&lt");
-				tmp1 = tmp1.replaceAll(">", "&gt");
-				String tmp2 = current.replaceAll("<", "&lt");
-				tmp2 = tmp2.replaceAll(">", "&gt");
-				pattern = tmp1;
-				current = tmp2;
-			}
-			PageObjectLogging.log("assertEquals", "assertion failed<br/>pattern: "+pattern+"<br/>current: "+current,  false);
+			addVerificationFailure(err);
+			PageObjectLogging.log(
+				"assertEquals",
+				"assertion failed<br/>pattern: " + patternEncoded
+				+ "<br/>current: " + currentEncoded,
+				false
+			);
 		}
+		PageObjectLogging.log(
+			"assertEquals",
+			"assertion passed<br/>pattern: " + patternEncoded
+			+ "<br/>current: " + currentEncoded,
+			true
+		);
 	}
-	
-	
+
+	public static void assertNotEquals(String pattern, String current){
+		boolean isAssertPassed = true;
+		String patternEncoded = encodeSpecialChars(pattern);
+		String currentEncoded = encodeSpecialChars(current);
+		try {
+			Assert.assertNotEquals(pattern, current);
+		} catch(AssertionError err) {
+			isAssertPassed = false;
+			addVerificationFailure(err);
+			PageObjectLogging.log(
+				"assertNotEquals",
+				"assertion failed<br/>pattern: " + patternEncoded
+				+ "<br/>current: " + currentEncoded,
+				false
+			);
+		}
+		PageObjectLogging.log(
+			"assertNotEquals",
+			"assertion passed<br/>pattern: " + patternEncoded
+			+ "<br/>current: " + currentEncoded,
+			true
+		);
+	}
+
 	public static void assertNumber(Number expected, Number actual,
 			String message) {
 		boolean isAssertPassed = true;
@@ -86,8 +100,8 @@ public class Assertion extends Assert{
 		List verificationFailures = getVerificationFailures();
 		verificationFailuresMap.put(Reporter.getCurrentTestResult(), verificationFailures);
 		verificationFailures.add(e);
-	}	
-	
+	}
+
 	public static List getVerificationFailures() 
 	{
 		List verificationFailures = verificationFailuresMap.get(Reporter.getCurrentTestResult());
@@ -98,5 +112,21 @@ public class Assertion extends Assert{
 	{
 		List verificationFailures = verificationFailuresMap.get(result);
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
+	}
+
+	/*
+	 * Method responsive for encoding special characters
+	 * like ">" and "<" inside provided string.
+	 * Special characters are changed to characters entities
+	 *
+	 * @param   String pattern
+	 * @rerturn String pattern - with characters entities
+	 */
+	private static String encodeSpecialChars(String pattern) {
+		if (pattern.contains("<") || pattern.contains(">")) {
+			String tmp = pattern.replaceAll("<", "&lt");
+			pattern = tmp.replaceAll(">", "&gt");
+		}
+		return pattern;
 	}
 }
