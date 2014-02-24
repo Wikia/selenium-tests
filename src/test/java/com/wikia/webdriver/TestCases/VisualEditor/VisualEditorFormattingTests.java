@@ -55,7 +55,7 @@ public class VisualEditorFormattingTests extends NewTestTemplateBeforeClass {
 			PageContent.articleNamePrefix + ve.getTimeStamp()
 		);
 		ve.selectFormatting(format);
-		ve.write(text);
+		ve.typeTextArea(text);
 		ve.verifyFormatting(format, text);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();

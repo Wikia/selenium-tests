@@ -1048,10 +1048,10 @@ public class WikiBasePageObject extends BasePageObject {
 	 */
 	public VisualEditorPageObject gotoNewArticleEditModeVisual(String wikiURL) {
 		getUrl(
-				urlBuilder.appendQueryStringToURL(
-					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
-					URLsContent.actionVisualEditParameter
-				)
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+				URLsContent.actionVisualEditParameter
+			)
 		);
 		return new VisualEditorPageObject(driver);
 	}
