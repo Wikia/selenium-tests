@@ -9,14 +9,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
+ * @author Robert 'rochan' Chan
  */
 public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 
 	@FindBy(
 			css=
 			".oo-ui-widget.oo-ui-flaggableElement-constructive" +
-			".oo-ui-buttonWidget.oo-ui-pushButtonWidget"
+			".oo-ui-buttonWidget.oo-ui-pushButtonWidget" +
+			" .oo-ui-labeledElement-label"
 	)
 	private WebElement publishButton;
 	@FindBy(css=".oo-ui-frame")

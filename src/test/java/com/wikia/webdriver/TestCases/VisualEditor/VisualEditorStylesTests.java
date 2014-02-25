@@ -45,6 +45,7 @@ public class VisualEditorStylesTests extends NewTestTemplateBeforeClass {
 	public void VisualEditorStyles_001_FullText(Style style) {
 		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
 		ve.gotoNewArticleEditModeVisual(wikiURL);
+		ve.typeTextArea(" ");
 		ve.selectStyle(style);
 		ve.typeTextArea(text);
 		ve.verifyStyle(style, text);

@@ -15,6 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Robert 'rochan' Chan
  *
  */
 public class VisualEditorMenu extends WikiBasePageObject {
@@ -41,7 +42,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement bulletListButton;
 	@FindBy(css=".oo-ui-menuToolGroup")
 	private WebElement formattingDropDown;
-	@FindBy(css=".ve-ui-toolbar-saveButton")
+	@FindBy(css=".ve-ui-toolbar-saveButton .oo-ui-labeledElement-label")
 	private WebElement savePageButton;
 	@FindBy(css=".oo-ui-listToolGroup")
 	private WebElement moreOptionsWrapper;
@@ -51,10 +52,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private List<WebElement> moreOptionsDrownDownItems;
 
 	private By genericDropDownBy = By.cssSelector(".oo-ui-icon-down");
-	private By strikeStyleBy = By.cssSelector(".oo-ui-tool-name-strikethrough");
-	private By underlineStyleBy = By.cssSelector(".oo-ui-tool-name-underline");
-	private By subscriptStyleBy = By.cssSelector(".oo-ui-tool-name-subscript");
-	private By superscriptStyleBy = By.cssSelector(".oo-ui-tool-name-superscript");
+	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
+	private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
+	private By subscriptStyleBy = By.cssSelector(".oo-ui-icon-subscript");
+	private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
 	private By toolWrapper = By.cssSelector("a.oo-ui-tool");
 	private By saveButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
 
