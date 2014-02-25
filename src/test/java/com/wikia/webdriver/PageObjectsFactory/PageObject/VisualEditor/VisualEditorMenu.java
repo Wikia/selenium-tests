@@ -43,7 +43,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	@FindBy(css=".oo-ui-menuToolGroup")
 	private WebElement formattingDropDown;
 	@FindBy(css=".ve-ui-toolbar-saveButton .oo-ui-labeledElement-label")
-	private WebElement savePageButton;
+	private WebElement publishPageButton;
 	@FindBy(css=".oo-ui-listToolGroup")
 	private WebElement moreOptionsWrapper;
 	@FindBy(css=".oo-ui-menuToolGroup>div>span")
@@ -57,7 +57,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By subscriptStyleBy = By.cssSelector(".oo-ui-icon-subscript");
 	private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
 	private By toolWrapper = By.cssSelector("a.oo-ui-tool");
-	private By saveButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
+	private By publishButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
 
 	private void clickStyleFromMoreDropDown(By styleBy) {
 		Actions actions = new Actions(driver);
@@ -124,9 +124,9 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	public VisualEditorSaveChangesDialog clickPublishButton() {
-		waitForElementNotPresent(saveButtonDisabled);
-		waitForElementClickableByElement(savePageButton);
-		savePageButton.click();
+		waitForElementNotPresent(publishButtonDisabled);
+		waitForElementClickableByElement(publishPageButton);
+		publishPageButton.click();
 		return new VisualEditorSaveChangesDialog(driver);
 	}
 }
