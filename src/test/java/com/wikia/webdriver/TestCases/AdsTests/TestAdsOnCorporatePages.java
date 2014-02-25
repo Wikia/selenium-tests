@@ -52,52 +52,25 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 
 	@GeoEdgeProxy(country="CA")
 	@Test (
-		groups={"Ads_Corporate_Page_004", "CA"}
+		groups={"Ads_Corporate_Page_003", "CA"}
 	)
 	public void TestCorporatePage_CA() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
-	@GeoEdgeProxy(country="AU")
-	@Test (
-		groups={"Ads_Corporate_Page_005", "AU"}
-	)
-	public void TestCorporatePage_AU() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
-
 	@GeoEdgeProxy(country="PL")
 	@Test (
-		groups={"Ads_Corporate_Page_006", "PL"}
+		groups={"Ads_Corporate_Page_004", "PL"}
 	)
 	public void TestCorporatePage_PL() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
 	}
 
-	@GeoEdgeProxy(country="UA")
-	@Test (
-		groups={"Ads_Corporate_Page_007", "UA"}
-	)
-	public void TestCorporatePage_UA() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="IT")
-	@Test (
-		groups={"Ads_Corporate_Page_008", "IT"}
-	)
-	public void TestCorporatePage_IT() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
-
 	@GeoEdgeProxy(country="RU")
 	@Test (
-		groups={"Ads_Corporate_Page_009", "RU"}
+		groups={"Ads_Corporate_Page_005", "RU"}
 	)
 	public void TestCorporatePage_RU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
@@ -106,7 +79,7 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 
 	@GeoEdgeProxy(country="JP")
 	@Test (
-		groups={"Ads_Corporate_Page_010", "JP"}
+		groups={"Ads_Corporate_Page_006", "JP"}
 	)
 	public void TestCorporatePage_JP() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
