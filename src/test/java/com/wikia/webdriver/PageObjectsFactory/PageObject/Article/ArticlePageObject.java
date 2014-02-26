@@ -171,7 +171,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 
 	public void verifyFormatting(Formatting format, String content) {
-		waitForElementVisibleByElement(articleEditButton);
 		waitForElementByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(format.getTag());
 		boolean isPresent = false;
@@ -181,11 +180,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 				break;
 			}
 		}
+		waitForElementByElement(articleEditButton);
 		Assertion.assertTrue(isPresent, "text is not present in the article");
 	}
 
 	public void verifyStyle(Style style, String content) {
-		waitForElementVisibleByElement(articleEditButton);
 		waitForElementByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
 		boolean isPresent = false;
@@ -195,6 +194,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 				break;
 			}
 		}
+		waitForElementByElement(articleEditButton);
 		Assertion.assertTrue(isPresent, "text is not present in the article");
 	}
 
