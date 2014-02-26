@@ -135,14 +135,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement wikiNameHeader;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
-	@FindBy(css=".tally")
-	private WebElement pageTally;
+	@FindBy(css=".wikia-menu-button")
+	private WebElement articleEditButton;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
 	final String commentAuthorLink = ".edited-by";
 	final String replyCommentSelector = ".article-comm-reply";
-	private By editTextBy = By.cssSelector("#mw-content-text");
 
 	String editCategorySelector =
 			"li[data-name='%categoryName%'] li.editCategory > img";
@@ -172,7 +171,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 
 	public void verifyFormatting(Formatting format, String content) {
-		waitForElementByElement(pageTally);
+		waitForElementVisibleByElement(articleEditButton);
 		waitForElementByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(format.getTag());
 		boolean isPresent = false;
@@ -186,7 +185,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyStyle(Style style, String content) {
-		waitForElementByElement(pageTally);
+		waitForElementVisibleByElement(articleEditButton);
 		waitForElementByElement(articleContentContainer);
 		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
 		boolean isPresent = false;
