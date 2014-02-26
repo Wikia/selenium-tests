@@ -119,6 +119,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	public void selectFormatting(Formatting format) {
+		waitForElementClickableByElement(formattingDropDown);
 		formattingDropDown.click();
 		formattingDropDownItem.get(format.ordinal()).click();
 	}
