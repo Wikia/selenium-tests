@@ -94,7 +94,10 @@ public class ForcedLoginTests extends NewTestTemplate {
 
 	}
 
-	@Test(groups = {"ForcedLogin_006_rail", "ForcedLogin", "Smoke2"})
+	/**
+	 * skipped due VID-1325
+	 */
+	@Test(enabled=false, groups = {"ForcedLogin_006_rail", "ForcedLogin", "Smoke2"})
 	public void ForcedLogin_006_rail () {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
