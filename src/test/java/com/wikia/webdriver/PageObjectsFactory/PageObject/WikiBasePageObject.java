@@ -1041,11 +1041,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return keysFromDefaultList.toArray();
 	}
 
-	/**
-	 * method used to navigate to new visual editor
-	 * @param wikiURL
-	 * @param article
-	 */
 	public VisualEditorPageObject gotoNewArticleEditModeVisual(String wikiURL) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(

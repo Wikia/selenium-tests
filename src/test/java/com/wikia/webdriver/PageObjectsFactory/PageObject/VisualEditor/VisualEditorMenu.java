@@ -48,8 +48,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement moreOptionsWrapper;
 	@FindBy(css=".oo-ui-menuToolGroup>div>span")
 	private List<WebElement> formattingDropDownItem;
-	@FindBy(css=".oo-ui-listToolGroup>.oo-ui-clippableElement-clippable>span")
-	private List<WebElement> moreOptionsDrownDownItems;
 
 	private By genericDropDownBy = By.cssSelector(".oo-ui-icon-down");
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
