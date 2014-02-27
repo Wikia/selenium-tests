@@ -35,7 +35,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"Lightbox", "Lightobox001"})
+	@Test(groups = {"Lightbox", "Lightbox001"})
 	public void LightboxTest_001_latestPhotos() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);
@@ -44,7 +44,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightobox002"})
+	@Test(groups = {"Lightbox", "Lightbox002"})
 	public void LightboxTest_002_releatedVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);
@@ -53,7 +53,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightobox003"})
+	@Test(groups = {"Lightbox", "Lightbox003"})
 	public void LightboxTest_003_unusedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
@@ -61,7 +61,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightobox004"})
+	@Test(groups = {"Lightbox", "Lightbox004"})
 	public void LightboxTest_004_unusedVideos() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
@@ -69,7 +69,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightobox005"})
+	@Test(groups = {"Lightbox", "Lightbox005"})
 	public void LightboxTest_005_uncategorizedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUncategorizedFilesPageObject unusedFiles = base.openSpecialUncategorizedFilesPage(wikiURL);
@@ -77,7 +77,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightobox006"})
+	@Test(groups = {"Lightbox", "Lightbox006"})
 	public void LightboxTest_006_mostLinkedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
@@ -85,7 +85,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightobox007"})
+	@Test(groups = {"Lightbox", "Lightbox007"})
 	public void LightboxTest_007_verifyExistenceAndURLsOfSocialButtons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
