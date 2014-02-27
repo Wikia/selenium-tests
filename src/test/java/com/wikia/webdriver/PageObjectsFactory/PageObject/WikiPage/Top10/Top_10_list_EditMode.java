@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
-public class Top_10_list_EditMode extends Top_10_list_EditonCore{
+public class Top_10_list_EditMode extends Top10listEditonCore{
 	@FindBy(css=".FormButtons input[type='Submit']")
 	WebElement savelistButton;
 

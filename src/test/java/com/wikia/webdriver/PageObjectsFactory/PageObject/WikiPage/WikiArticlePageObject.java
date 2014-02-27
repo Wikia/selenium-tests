@@ -17,8 +17,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	protected String articlename;
 
-	@FindBy(css="div.WikiaPageHeaderDiffHistory")
-	private WebElement historyHeadLine;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
 	@FindBy(css = "a[data-canonical='random']")
@@ -124,12 +122,5 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public void verifyImageOnThePage() {
 		waitForElementByBy(ImageOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
-	}
-
-	public WikiHistoryPageObject openHistoryPage()
-	{
-		getUrl(driver.getCurrentUrl() + "?action=history");
-		waitForElementByElement(historyHeadLine);
-		return new WikiHistoryPageObject(driver);
 	}
 }

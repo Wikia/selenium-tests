@@ -2,8 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +74,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
@@ -147,6 +146,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement renameDropdown;
 	@FindBy(css="button.close.wikia-chiclet-button")
 	protected WebElement closeModalButton;
+	@FindBy(css="div.WikiaPageHeaderDiffHistory")
+	protected WebElement historyHeadLine;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -534,10 +535,13 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementVisibleByElement(flashMessage);
 	}
 
-	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
-		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);
-		PageObjectLogging.log("SpecialCreateTopListPageObject",
-				"create top 10 list with name: "+top_10_list_Name, true, driver);
+	public SpecialCreateTopListPageObject createNewTop10list(String top_10_list_Name, String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialCreateTopTenList + "/" + top_10_list_Name);
+		PageObjectLogging.log(
+				"SpecialCreateTopListPageObject",
+				"create top 10 list with name: " + top_10_list_Name,
+				true
+		);
 		return new SpecialCreateTopListPageObject(driver);
 
 	}
@@ -560,24 +564,19 @@ public class WikiBasePageObject extends BasePageObject {
 		return new BlogPageObject(driver);
 	}
 
-	public Top_10_list openTop10List(String topTenListName) {
-		URI uri;
-		try {
-			uri = new URI(Global.DOMAIN + "wiki/" + topTenListName);
-			String url = uri.toASCIIString();
-			getUrl(url);
-		} catch (URISyntaxException e) {
-
-			e.printStackTrace();
-		}
-		catch (TimeoutException e) {
-			PageObjectLogging.log("openTop10List",
-					"page loads for more than 30 seconds", true, driver);
-		}
+	public Top_10_list openTop10List(String topTenListName, String wikiURL) {
+		getUrl(wikiURL + URLsContent.wikiDir + topTenListName);
 		PageObjectLogging.log("openTop10List", topTenListName
 				+ " opened", true);
 		return new Top_10_list(driver);
 	}
+
+	public WikiHistoryPageObject openHistoryForCurrentPage() {
+		appendToUrl(URLsContent.historyAction);
+		waitForElementByElement(historyHeadLine);
+		return new WikiHistoryPageObject(driver);
+	}
+
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);
