@@ -145,8 +145,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement protectDropdown;
 	@FindBy(css="#ca-move")
 	protected WebElement renameDropdown;
-	@FindBy(css="button.close.wikia-chiclet-button")
-	protected WebElement closeModalButton;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -177,12 +175,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	}
-
-	public void closeLightbox() {
-		waitForElementByElement(closeModalButton);
-		scrollAndClick(closeModalButton);
-		PageObjectLogging.log("closeLightbox ", "lightbox closed", true);
 	}
 
 	public String resetForgotPasswordTime(String userName) {
@@ -1039,5 +1031,10 @@ public class WikiBasePageObject extends BasePageObject {
 			keysFromDefaultList.add(matcher.group().replaceAll("'", ""));
 		}
 		return keysFromDefaultList.toArray();
+	}
+
+	public ArticlePageObject openLightboxArticle(String wikiURL) {
+		getUrl(wikiURL + URLsContent.lightboxSelenium);
+		return new ArticlePageObject(driver);
 	}
 }

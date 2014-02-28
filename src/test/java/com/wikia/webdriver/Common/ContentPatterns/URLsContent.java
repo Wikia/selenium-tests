@@ -8,8 +8,8 @@ public class URLsContent {
 	public static String wikiaPhp = "wikia.php";
 
 	//Image lightbox test page
-	public static String lightboxImageTest = "LightboxTesting";
 	public static String followingToolbarTest = "QAautoPage";
+	public static String lightboxSelenium = "wiki/LightboxSelenium";
 
 	// Common url component
 	public static String wikiDir = "wiki/";

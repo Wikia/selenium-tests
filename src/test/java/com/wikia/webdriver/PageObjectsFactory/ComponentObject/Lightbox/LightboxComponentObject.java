@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.Common.Core.Assertion;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -37,6 +38,16 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement redditShareLink;
 	@FindBy(css="a.plusone")
 	private WebElement plusoneShareLink;
+	@FindBy(css="span.carousel-arrow.next")
+	private WebElement carouselRight;
+	@FindBy(css="span.carousel-arrow.previous:not(.disabled)")
+	private WebElement carouselLeft;
+	@FindBy(css="span.carousel-arrow.previous.disabled")
+	private WebElement carouselLeftDisabled;
+	@FindBy(css="button.more-info-close")
+	private WebElement shareScreenClose;
+	@FindBy(css=".LightboxHeader button.close.wikia-chiclet-button")
+	protected WebElement closeModalButton;
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxHeader);
@@ -48,6 +59,12 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		scrollAndClick(imageThumbnail);
 		PageObjectLogging.log("openLightbox", "opened ligthbox", true);
 		return new LightboxComponentObject(driver);
+	}
+
+	public void closeLightbox() {
+		waitForElementByElement(closeModalButton);
+		scrollAndClick(closeModalButton);
+		PageObjectLogging.log("closeLightbox ", "lightbox closed", true);
 	}
 
 	public void clickPinButton() {
@@ -63,6 +80,11 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		shareButton.click();
 		waitForElementByElement(moreInfoThumbnail);
 		PageObjectLogging.log("clickShareButton", "share button is clicked", true);
+	}
+
+	public void closeShareScreen() {
+		waitForElementByElement(shareScreenClose);
+		shareScreenClose.click();
 	}
 
 	public void verifyShareButtons() {
@@ -98,4 +120,21 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		plusoneShareLink.click();
 		PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
 	}
+
+	public void clickCarouselRight() {
+		carouselRight.click();
+		PageObjectLogging.log("clickCarouselRight", "carousel right button is clicked", true);
+	}
+
+	public void clickCarouselLeft() {
+		waitForElementByElement(carouselLeft);
+		carouselLeft.click();
+		PageObjectLogging.log("clickCarouselLeft", "carousel left button is clicked", true);
+	}
+
+	public void verifyCarouselLeftDisabled() {
+		waitForElementByElement(carouselLeftDisabled);
+		PageObjectLogging.log("verifyCarouselLeftDisabled", "carousel left button is disabled", true);
+	}
+
 }
