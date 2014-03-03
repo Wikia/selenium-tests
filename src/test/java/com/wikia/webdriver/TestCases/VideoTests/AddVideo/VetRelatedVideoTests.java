@@ -19,7 +19,10 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"RelatedVideo_001", "RelatedVideo"})
+	/**
+	 * skipped due VID-1325
+	 */
+	@Test(enabled = false, groups = {"RelatedVideo_001", "RelatedVideo"})
 	public void RelatedVideo_001_Provider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -33,7 +36,10 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 		article.verifyRelatedVideoAdded(VideoContent.youtubeVideoURL2name);
 	}
 
-	@Test(groups = {"RelatedVideo_002", "RelatedVideo"})
+	/**
+	 * skipped due VID-1325
+	 */
+	@Test(enabled = false, groups = {"RelatedVideo_002", "RelatedVideo"})
 	public void RelatedVideo_002_Library() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

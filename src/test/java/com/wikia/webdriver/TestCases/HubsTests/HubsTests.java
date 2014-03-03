@@ -98,7 +98,10 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		hub.verifySuggestAVideoOrArticleModalDisappeared();
 	}
 
-	@Test(groups = { "HubsTests004", "Hubs"})
+	/**
+	 * skipped due "promoted wikis" feature
+	 */
+	@Test(enabled = false, groups = { "HubsTests004", "Hubs"})
 	public void HubsTests004_VerifyCorporateSlotCollection() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
