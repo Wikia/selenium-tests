@@ -15,6 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Robert 'rochan' Chan
  *
  */
 public class VisualEditorMenu extends WikiBasePageObject {
@@ -23,37 +24,38 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css=".ve-ui-icon-bold-b")
+	@FindBy(css=".oo-ui-icon-bold-b")
 	private WebElement boldButton;
-	@FindBy(css=".ve-ui-icon-italic-i")
+	@FindBy(css=".oo-ui-icon-italic-i")
 	private WebElement italicButton;
-	@FindBy(css=".ve-ui-icon-link")
+	@FindBy(css=".oo-ui-icon-link")
 	private WebElement linkButton;
-	@FindBy(css=".ve-ui-frame")
+	@FindBy(css=".oo-ui-frame")
 	protected WebElement linkIframe;
-	@FindBy(css=".ve-ui-icon-code")
+	@FindBy(css=".oo-ui-icon-code")
 	private WebElement codeButton;
-	@FindBy(css=".ve-ui-icon-clear")
+	@FindBy(css=".oo-ui-icon-clear")
 	private WebElement clearButton;
-	@FindBy(css=".ve-ui-icon-number-list")
+	@FindBy(css=".oo-ui-icon-number-list")
 	private WebElement numListButton;
-	@FindBy(css=".ve-ui-icon-bullet-list")
+	@FindBy(css=".oo-ui-icon-bullet-list")
 	private WebElement bulletListButton;
-	@FindBy(css=".ve-ui-menuToolGroup .ve-ui-icon-down")
+	@FindBy(css=".oo-ui-menuToolGroup")
 	private WebElement formattingDropDown;
-	@FindBy(css=".ve-ui-toolbar-saveButton")
-	private WebElement savePageButton;
-	@FindBy(css=".ve-ui-listToolGroup")
+	@FindBy(css=".ve-ui-toolbar-saveButton .oo-ui-labeledElement-label")
+	private WebElement publishPageButton;
+	@FindBy(css=".oo-ui-listToolGroup")
 	private WebElement moreOptionsWrapper;
+	@FindBy(css=".oo-ui-menuToolGroup>div>span")
+	private List<WebElement> formattingDropDownItem;
 
-	private By genericDropDownBy = By.cssSelector(".ve-ui-icon-down");
-	private By codeStyleBy = By.cssSelector(".ve-ui-tool-code");
-	private By strikeStyleBy = By.cssSelector(".ve-ui-tool-strikethrough");
-	private By underlineStyleBy = By.cssSelector(".ve-ui-tool-underline");
-	private By subscriptStyleBy = By.cssSelector(".ve-ui-tool-subscript");
-	private By superscriptStyleBy = By.cssSelector(".ve-ui-tool-superscript");
-	private By toolWrapper = By.cssSelector("a.ve-ui-tool");
-	private By saveButtonDisabled = By.cssSelector(".ve-ui-toolbar-saveButton.ve-ui-widget-disabled");
+	private By genericDropDownBy = By.cssSelector(".oo-ui-icon-down");
+	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
+	private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
+	private By subscriptStyleBy = By.cssSelector(".oo-ui-icon-subscript");
+	private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
+	private By toolWrapper = By.cssSelector("a.oo-ui-tool");
+	private By publishButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
 
 	private void clickStyleFromMoreDropDown(By styleBy) {
 		Actions actions = new Actions(driver);
@@ -72,9 +74,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			break;
 		case ITALIC:
 			italicButton.click();
-			break;
-		case CODE:
-			clickStyleFromMoreDropDown(codeStyleBy);
 			break;
 		case STRIKETHROUGH:
 			clickStyleFromMoreDropDown(strikeStyleBy);
@@ -118,18 +117,15 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	public void selectFormatting(Formatting format) {
+		waitForElementClickableByElement(formattingDropDown);
 		formattingDropDown.click();
-		List<WebElement> list = formattingDropDown
-			.findElement(parentBy)
-			.findElement(parentBy)
-			.findElements(toolWrapper);
-		list.get(format.ordinal()).click();
+		formattingDropDownItem.get(format.ordinal()).click();
 	}
 
-	public VisualEditorSaveChangesDialog savePage() {
-		waitForElementNotPresent(saveButtonDisabled);
-		waitForElementClickableByElement(savePageButton);
-		savePageButton.click();
+	public VisualEditorSaveChangesDialog clickPublishButton() {
+		waitForElementNotPresent(publishButtonDisabled);
+		waitForElementClickableByElement(publishPageButton);
+		publishPageButton.click();
 		return new VisualEditorSaveChangesDialog(driver);
 	}
 }

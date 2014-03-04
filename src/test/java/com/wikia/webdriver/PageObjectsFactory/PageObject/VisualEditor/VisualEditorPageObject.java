@@ -15,7 +15,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
+ * @author Robert 'rochan' Chan
  */
 public class VisualEditorPageObject extends VisualEditorMenu {
 
@@ -32,7 +32,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	@FindBy(css="ul.ve-ce-branchNode > li")
 	private List<WebElement> bullList;
 
-	public void write(String text) {
+	public void typeTextArea(String text) {
+		waitForElementVisibleByElement(editArea);
 		editArea.sendKeys(text);
 		PageObjectLogging.log("write", "text " + text + "written", true);
 	}
