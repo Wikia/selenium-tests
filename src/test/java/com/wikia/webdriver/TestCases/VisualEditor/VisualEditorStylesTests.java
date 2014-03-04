@@ -51,7 +51,7 @@ public class VisualEditorStylesTests extends NewTestTemplateBeforeClass {
 		ve.verifyStyle(style, text);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		ArticlePageObject article = saveDialog.savePage();
-		article.verifyStyle(style, text);
+		article.verifyStyleFromVE(style, text);
 	}
 
 	@Test(groups = {"VisualEditorStylesSelectedText", "VisualEditorStyles_002"},
@@ -69,6 +69,6 @@ public class VisualEditorStylesTests extends NewTestTemplateBeforeClass {
 		ve.verifyStyle(style, selectText);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
-		article.verifyStyle(style, selectText);
+		article.verifyStyleFromVE(style, selectText);
 	}
 }

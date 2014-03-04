@@ -59,6 +59,6 @@ public class VisualEditorFormattingTests extends NewTestTemplateBeforeClass {
 		ve.verifyFormatting(format, text);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
-		article.verifyFormatting(format, text);
+		article.verifyFormattingFromVE(format, text);
 	}
 }
