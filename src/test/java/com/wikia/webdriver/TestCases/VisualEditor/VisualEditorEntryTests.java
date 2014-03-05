@@ -11,8 +11,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Robert 'Rochan' Chan
- * https://wikia-inc.atlassian.net/browse/VE-881
- * Verify Visual Editor is loaded for signed in user by clicking on Edit on article on VE enabled wiki
+ *
+ * VE-881 Verify Visual Editor is loaded for signed in user by clicking on Edit on article on VE enabled wiki
+ * VE-884 Verify VE is loaded for signed is user by using ?veaction=edit in the URL on VE enabled wiki
+ * VE-884 Verify VE is loaded for signed is user by using ?veaction=edit in the URL on VE disabled wiki
  */
 
 public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
@@ -24,7 +26,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getVEWikis"
 	)
-	public void VisualEditorEntryTest_001_loggedIn(String wiki) {
+	public void VisualEditorEntryTest_001_editLoggedIn(String wiki) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article =
@@ -33,6 +35,32 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 				base.getTimeStamp()
 			);
 		VisualEditorPageObject ve = article.clickVEEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+	}
+
+	@Test(
+			groups = {"VisualEditorEntry", "VisualEditorEntryTest_002"},
+			dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getVEWikis"
+	)
+	public void VisualEditorEntryTest_002_urlLoggedIn_veEnabled(String wiki) {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(urlBuilder.getUrlForWiki(wiki));
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+	}
+
+	@Test(
+			groups = {"VisualEditorEntry", "VisualEditorEntryTest_003"},
+			dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getNonVEWikis"
+	)
+	public void VisualEditorEntryTest_003_urlLoggedIn_veDisabled(String wiki) {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(urlBuilder.getUrlForWiki(wiki));
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 	}

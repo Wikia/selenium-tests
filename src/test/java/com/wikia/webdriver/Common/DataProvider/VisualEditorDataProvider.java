@@ -91,4 +91,15 @@ public class VisualEditorDataProvider {
 				{ "area-x"},
 		};
 	}
+
+	/**
+	 * Data provider with VE disabled wikis
+	 */
+	@DataProvider
+	public static final Object[][] getNonVEWikis() {
+		return new Object[][] {
+				{ "ru.arma"},
+				{ "official-babies"},
+		};
+	}
 }
