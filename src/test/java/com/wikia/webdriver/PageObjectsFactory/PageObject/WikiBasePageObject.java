@@ -2,8 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +55,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageO
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialContributionsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
@@ -83,7 +80,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
+
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -488,16 +485,6 @@ public class WikiBasePageObject extends BasePageObject {
 		deleteConfirmationButton.click();
 	}
 
-	public void deleteTop10List(String top10listName) {
-		String top10listURL = driver.getCurrentUrl();
-		getUrl(top10listURL + "?action=delete");
-		clickArticleDeleteConfirmationButton(top10listName);
-		getUrl(top10listURL);
-		waitForTextToBePresentInElementByElement(pageDeletedInfo, "has been deleted.");
-		PageObjectLogging.log("deleteArticle", "top 10 list: "+top10listName+" has been deleted",
-				true, driver);
-	}
-
 	public DeletePageObject deletePage() {
 		String url = urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.deleteParameter);
 		getUrl(url);
@@ -534,14 +521,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementVisibleByElement(flashMessage);
 	}
 
-	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
-		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);
-		PageObjectLogging.log("SpecialCreateTopListPageObject",
-				"create top 10 list with name: "+top_10_list_Name, true, driver);
-		return new SpecialCreateTopListPageObject(driver);
-
-	}
-
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
 		getUrl(
 				wikiURL +
@@ -560,24 +539,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new BlogPageObject(driver);
 	}
 
-	public Top_10_list openTop10List(String topTenListName) {
-		URI uri;
-		try {
-			uri = new URI(Global.DOMAIN + "wiki/" + topTenListName);
-			String url = uri.toASCIIString();
-			getUrl(url);
-		} catch (URISyntaxException e) {
-
-			e.printStackTrace();
-		}
-		catch (TimeoutException e) {
-			PageObjectLogging.log("openTop10List",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		PageObjectLogging.log("openTop10List", topTenListName
-				+ " opened", true);
-		return new Top_10_list(driver);
-	}
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);

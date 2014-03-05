@@ -19,7 +19,6 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesArticleTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsEditMode"/>
-			<class name="com.wikia.webdriver.TestCases.Top_10_list_Tests.Top_10_list_Tests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForcedLoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
