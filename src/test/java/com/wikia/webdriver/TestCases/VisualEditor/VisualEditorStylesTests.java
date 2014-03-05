@@ -16,9 +16,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
+ * @author Robert 'rochan' Chan
+ * Verify bold formatting
+ * Verify italic formatting
+ * Verify strikethrough formatting
+ * Verify underline formatting
+ * Verify subscript formatting
+ * Verify superscript formatting
  */
-public class VisualEditorStyles extends NewTestTemplateBeforeClass {
+public class VisualEditorStylesTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
@@ -38,13 +44,14 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_001_FullText(Style style) {
 		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
-		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
+		ve.gotoNewArticleEditModeVisual(wikiURL);
+		ve.typeTextArea(" ");
 		ve.selectStyle(style);
-		ve.write(text);
+		ve.typeTextArea(text);
 		ve.verifyStyle(style, text);
-		VisualEditorSaveChangesDialog save = ve.savePage();
-		ArticlePageObject article = save.savePage();
-		article.verifyStyle(style, text);
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyStyleFromVE(style, text);
 	}
 
 	@Test(groups = {"VisualEditorStylesSelectedText", "VisualEditorStyles_002"},
@@ -52,16 +59,16 @@ public class VisualEditorStyles extends NewTestTemplateBeforeClass {
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_002_SelectedText(Style style) {
 		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
-		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
-		ve.write(text);
+		ve.gotoNewArticleEditModeVisual(wikiURL);
+		ve.typeTextArea(text);
 
 		String selectText = text.substring(12, 17);
 
 		ve.selectText(selectText);
 		ve.selectStyle(style);
 		ve.verifyStyle(style, selectText);
-		VisualEditorSaveChangesDialog save = ve.savePage();
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
-		article.verifyStyle(style, selectText);
+		article.verifyStyleFromVE(style, selectText);
 	}
 }

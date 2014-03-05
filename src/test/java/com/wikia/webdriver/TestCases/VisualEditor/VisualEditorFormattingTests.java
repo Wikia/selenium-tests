@@ -16,6 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Robert 'rochan' Chan
  * https://wikia-inc.atlassian.net/browse/QAART-241
  * Verify paragraph formatting
  * Verify heading formatting
@@ -27,7 +28,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * Verify page title formatting
  */
 
-public class VisualEditorFormatting extends NewTestTemplateBeforeClass {
+public class VisualEditorFormattingTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
@@ -49,12 +50,15 @@ public class VisualEditorFormatting extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorFormatting_001(Formatting format) {
 		PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
-		ve.gotoArticleEditModeVisual(wikiURL, ve.getTimeStamp());
+		ve.gotoArticleEditModeVisual(
+			wikiURL,
+			PageContent.articleNamePrefix + ve.getTimeStamp()
+		);
 		ve.selectFormatting(format);
-		ve.write(text);
+		ve.typeTextArea(text);
 		ve.verifyFormatting(format, text);
-		VisualEditorSaveChangesDialog save = ve.savePage();
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
-		article.verifyFormatting(format, text);
+		article.verifyFormattingFromVE(format, text);
 	}
 }
