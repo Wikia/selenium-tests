@@ -149,6 +149,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement closeModalButton;
 	@FindBy(css="#ca-ve-edit")
 	protected WebElement veEditButton;
+	@FindBy(css="body.ve")
+	protected WebElement veMode;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");

@@ -26,7 +26,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getVEWikis"
 	)
-	public void VisualEditorEntryTest_001_editLoggedIn(String wiki) {
+	public void VisualEditorEntryTest_001_editLoggedIn_veEnabled(String wiki) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article =
