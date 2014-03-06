@@ -4,8 +4,8 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
@@ -17,18 +17,20 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
  * https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
  */
 
-public class VetAddingVideoTests extends TestTemplate {
+public class VetAddingVideoTests extends NewTestTemplate {
 
-	@Test(groups = {"VetTests013", "VetTests", "VetAddVideo"})
-	public void Vet_Tests_011_MessageWallProvider() {
+	Credentials credentials = config.getCredentials();
+
+	@Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo"})
+	public void VetAddVideo_001_MessageWallProvider() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		wall.openWikiPage();
-		login.logInCookie(Properties.userName, Properties.password);
-		wall.openMessageWall(Properties.userName);
+		login.logInCookie(credentials.userName, credentials.password, wikiURL);
+		wall.openMessageWall(credentials.userName);
 		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver);
 		wall.writeMessage(title, "");
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
@@ -40,16 +42,16 @@ public class VetAddingVideoTests extends TestTemplate {
 		wall.verifyPostedMessageVideo(title);
 	}
 
-	@Test(groups = {"VetTests014", "VetTests", "VetAddVideo"})
-	public void Vet_Tests_012_MessageWallLibrary_VID_1244() {
+	@Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo"})
+	public void VetAddVideo_002_MessageWallLibrary() {
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.logOut(driver);
 		MessageWallPageObject wall = new MessageWallPageObject(driver);
 		String timeStamp = wall.getTimeStamp();
 		String title = PageContent.messageWallTitlePrefix + timeStamp;
 		wall.openWikiPage();
-		login.logInCookie(Properties.userName, Properties.password);
-		wall.openMessageWall(Properties.userName);
+		login.logInCookie(credentials.userName, credentials.password, wikiURL);
+		wall.openMessageWall(credentials.userName);
 		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver);
 		wall.writeMessage(title, "");
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
