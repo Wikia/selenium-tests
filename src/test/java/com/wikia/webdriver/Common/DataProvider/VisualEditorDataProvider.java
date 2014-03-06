@@ -88,7 +88,7 @@ public class VisualEditorDataProvider {
 	public static final Object[][] getVEWikis() {
 		return new Object[][] {
 				{ "leagueoflegends"},
-				{ "area-x"},
+				{ "bbc-online"},
 		};
 	}
 
@@ -98,8 +98,8 @@ public class VisualEditorDataProvider {
 	@DataProvider
 	public static final Object[][] getNonVEWikis() {
 		return new Object[][] {
-				{ "ru.arma"},
-				{ "official-babies"},
+				{ "runescape"},
+				{ "disney"},
 		};
 	}
 }
