@@ -16,13 +16,18 @@ import org.openqa.selenium.Proxy;
 public class NetworkTrafficInterceptor extends ProxyServer {
 
 	private Har har;
+	private final int Max = 8888;
+	private final int Min = 4444;
+	private final int portNumber;
 
 	public NetworkTrafficInterceptor() {
-		super(4444);
+		super();
+		portNumber = Min + (int)(Math.random() * ((Max - Min) + 1));
 	}
 
 	public Proxy startSeleniumProxyServer() {
 		try {
+			setPort(portNumber);
 			start();
 			return seleniumProxy();
 		} catch (Exception ex) {
