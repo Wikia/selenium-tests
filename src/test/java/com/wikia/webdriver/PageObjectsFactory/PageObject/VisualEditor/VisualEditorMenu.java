@@ -48,6 +48,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement moreOptionsWrapper;
 	@FindBy(css=".oo-ui-menuToolGroup>div>span")
 	private List<WebElement> formattingDropDownItem;
+	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
+	private WebElement veToolMenu;
 
 	private By genericDropDownBy = By.cssSelector(".oo-ui-icon-down");
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
@@ -127,5 +129,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		waitForElementClickableByElement(publishPageButton);
 		publishPageButton.click();
 		return new VisualEditorSaveChangesDialog(driver);
+	}
+
+	public void verifyVEToolBarPresent() {
+		waitForElementVisibleByElement(veToolMenu);
+		PageObjectLogging.log("verifyVEToolBar", "VE toolbar is displayed", true);
 	}
 }

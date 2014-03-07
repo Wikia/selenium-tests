@@ -80,4 +80,15 @@ public class VisualEditorDataProvider {
 				{Style.UNDERLINE},
 		};
 	}
+
+	/**
+	 * Data provider with VE enabled wikis
+	 */
+	@DataProvider
+	public static final Object[][] getVEWikis() {
+		return new Object[][] {
+				{ "leagueoflegends"},
+				{ "area-x"},
+		};
+	}
 }

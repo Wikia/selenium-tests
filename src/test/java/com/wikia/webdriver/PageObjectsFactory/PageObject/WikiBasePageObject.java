@@ -144,6 +144,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement renameDropdown;
 	@FindBy(css="button.close.wikia-chiclet-button")
 	protected WebElement closeModalButton;
+	@FindBy(css="#ca-ve-edit")
+	protected WebElement veEditButton;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -394,6 +396,13 @@ public class WikiBasePageObject extends BasePageObject {
 		scrollAndClick(editButton);
 		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
 		return new WikiArticleEditMode(driver);
+	}
+
+	public VisualEditorPageObject clickVEEditButton() {
+		waitForElementByElement(veEditButton);
+		veEditButton.click();
+		PageObjectLogging.log("clickVEEditButton", "VE edit button clicked", true, driver);
+		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
