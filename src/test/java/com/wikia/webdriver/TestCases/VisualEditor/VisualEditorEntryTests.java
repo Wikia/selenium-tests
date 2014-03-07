@@ -64,4 +64,36 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 	}
+
+	@Test(
+			groups = {"VisualEditorEntry", "VisualEditorEntryTest_004"},
+			dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getVEWikis"
+	)
+	public void VisualEditorEntryTest_004_urlLoggedIn_veEnabled_redLink(String wiki) {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve =
+			base.gotoNewArticleEditModeVisualWithRedlink(
+				urlBuilder.getUrlForWiki(wiki)
+			);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+	}
+
+	@Test(
+			groups = {"VisualEditorEntry", "VisualEditorEntryTest_005"},
+			dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getNonVEWikis"
+	)
+	public void VisualEditorEntryTest_005_urlLoggedIn_veDisabled_redLink(String wiki) {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		VisualEditorPageObject ve =
+			base.gotoNewArticleEditModeVisualWithRedlink(
+				urlBuilder.getUrlForWiki(wiki)
+			);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+	}
 }

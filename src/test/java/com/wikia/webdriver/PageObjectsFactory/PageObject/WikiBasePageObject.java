@@ -1061,4 +1061,17 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 		return new VisualEditorPageObject(driver);
 	}
+
+	public VisualEditorPageObject gotoNewArticleEditModeVisualWithRedlink(String wikiURL) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				urlBuilder.appendQueryStringToURL(
+					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+					URLsContent.actionVisualEditParameter
+				),
+				URLsContent.redLink
+			)
+		);
+		return new VisualEditorPageObject(driver);
+	}
 }
