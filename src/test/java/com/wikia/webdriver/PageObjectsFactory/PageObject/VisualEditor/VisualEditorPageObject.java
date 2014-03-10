@@ -80,6 +80,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	public void verifyEditorSurfacePresent() {
 		waitForElementVisibleByElement(veMode);
 		waitForElementVisibleByElement(veEditorSurface);
-		PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true);
+		PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
 	}
 }
