@@ -32,7 +32,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		dropdown.remindPassword(userName);
 
 		dropdown.verifyMessageAboutNewPassword(userName);
-		String newPassword = dropdown.receiveMailWithNewPassowrd();
+		String newPassword = dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		dropdown.openDropDown();
 		dropdown.logIn(userName, newPassword);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
@@ -56,7 +56,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
 		login.remindPassword(userName);
 		login.verifyMessageAboutNewPassword(userName);
-		String newPassword = login.receiveMailWithNewPassowrd();
+		String newPassword = login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		login.login(userName, newPassword);
 		newPassword = login.setNewPassword();
 		login.verifyUserLoggedIn(userName);
