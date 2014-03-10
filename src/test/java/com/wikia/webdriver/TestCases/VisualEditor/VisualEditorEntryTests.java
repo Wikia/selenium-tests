@@ -13,8 +13,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * @author Robert 'Rochan' Chan
  *
  * VE-881 Verify Visual Editor is loaded for signed in user by clicking on Edit on article on VE enabled wiki
- * VE-884 Verify VE is loaded for signed is user by using ?veaction=edit in the URL on VE enabled wiki
- * VE-884 Verify VE is loaded for signed is user by using ?veaction=edit in the URL on VE disabled wiki
+ * VE-884 Verify VE is loaded for signed in user by using ?veaction=edit in the URL on VE enabled wiki
+ * VE-884 Verify VE is loaded for signed in user by using ?veaction=edit in the URL on VE disabled wiki
+ * VE-884 Verify VE is loaded for signed in user by using ?veaction=edit via redlink on VE enabled wiki
+ * VE-884 Verify VE is loaded for signed in user by using ?veaction=edit via redlink on VE disabled wiki
  */
 
 public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
