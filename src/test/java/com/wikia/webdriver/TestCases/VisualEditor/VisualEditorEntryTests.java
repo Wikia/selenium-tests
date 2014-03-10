@@ -49,7 +49,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(wikiURL);
+		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.logOut(wikiURL);
@@ -64,7 +64,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(wikiURL);
+		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.logOut(wikiURL);
@@ -80,7 +80,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve =
-			base.gotoNewArticleEditModeVisualWithRedlink(wikiURL);
+			base.openNewArticleEditModeVisualWithRedlink(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.logOut(wikiURL);
@@ -96,7 +96,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve =
-			base.gotoNewArticleEditModeVisualWithRedlink(wikiURL);
+			base.openNewArticleEditModeVisualWithRedlink(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.logOut(wikiURL);

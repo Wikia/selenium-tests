@@ -1052,7 +1052,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return keysFromDefaultList.toArray();
 	}
 
-	public VisualEditorPageObject gotoNewArticleEditModeVisual(String wikiURL) {
+	public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
@@ -1062,7 +1062,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditorPageObject gotoNewArticleEditModeVisualWithRedlink(String wikiURL) {
+	public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				urlBuilder.appendQueryStringToURL(
