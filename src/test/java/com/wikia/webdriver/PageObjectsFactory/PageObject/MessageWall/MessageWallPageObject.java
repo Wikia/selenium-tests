@@ -71,14 +71,6 @@ public class MessageWallPageObject extends WikiBasePageObject{
 		PageObjectLogging.log("writeMessage", "message is written, title: "+title+" body: "+message, true, driver);
 	}
 
-	public void clickPostButton()
-	{
-		waitForElementByElement(postButton);
-		waitForElementClickableByElement(postButton);
-		scrollAndClick(postButton);
-		PageObjectLogging.log("clickPostButton", "post button is clicked", true);
-	}
-
 	public void verifyPostedMessageVideo(String title)
 	{
 		waitForElementByXPath("//div[@class='msg-title']/a[contains(text(), '"+title+"')]/../../div[@class='editarea']//a[@class='video image lightbox']");
