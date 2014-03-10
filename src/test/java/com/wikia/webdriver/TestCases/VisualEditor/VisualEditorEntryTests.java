@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.VisualEditor;
 
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
@@ -17,6 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-884 Verify VE is loaded for signed in user by using ?veaction=edit in the URL on VE disabled wiki
  * VE-884 Verify VE is loaded for signed in user by using ?veaction=edit via redlink on VE enabled wiki
  * VE-884 Verify VE is loaded for signed in user by using ?veaction=edit via redlink on VE disabled wiki
+ * VE-884 Verify Visual Editor is loaded for signed in user by clicking on Edit on section on VE enabled wiki
  */
 
 public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
@@ -97,6 +99,23 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve =
 			base.openNewArticleEditModeVisualWithRedlink(wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		ve.logOut(wikiURL);
+	}
+
+	@Test(
+			groups = {"VisualEditorEntry", "VisualEditorEntryTest_001"},
+			dataProviderClass = VisualEditorDataProvider.class,
+			dataProvider = "getVEWikis"
+	)
+	public void VisualEditorEntryTest_006_editSectionLoggedIn_veEnabled(String wikiName) {
+		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.veTestMainPage);
+		VisualEditorPageObject ve = article.clickVESectionEditButton(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.logOut(wikiURL);
