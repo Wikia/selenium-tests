@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -21,12 +22,14 @@ public class Ads71MediaObject extends AdsBaseObject {
 	public Ads71MediaObject(WebDriver driver) {
 		super(driver);
 		setSlots();
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 	}
 
 	public Ads71MediaObject(WebDriver driver, String page) {
 		super(driver);
 		getUrl(page);
 		setSlots();
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 	}
 
 	/*

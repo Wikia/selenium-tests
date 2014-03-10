@@ -31,6 +31,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private List<WebElement> numList;
 	@FindBy(css="ul.ve-ce-branchNode > li")
 	private List<WebElement> bullList;
+	@FindBy(css=".ve-init-mw-viewPageTarget-surface")
+	private WebElement veEditorSurface;
 
 	public void typeTextArea(String text) {
 		waitForElementVisibleByElement(editArea);
@@ -73,5 +75,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void verifyStyle(Style style, String text) {
 		Assertion.assertEquals(text, editArea.findElement(style.getTag()).getText());
+	}
+
+	public void verifyEditorSurfacePresent() {
+		waitForElementVisibleByElement(veEditorSurface);
+		PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true);
 	}
 }

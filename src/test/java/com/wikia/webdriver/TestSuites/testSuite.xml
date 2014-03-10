@@ -103,6 +103,7 @@
 			<class name="com.wikia.webdriver.TestCases.UserProfileTests.UserAvatarTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorFormattingTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStylesTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorEntryTests"/>
 			<class name="com.wikia.webdriver.TestCases.FacebookTests.FacebookTests"/>
 		</classes>
 	</test>
