@@ -151,7 +151,7 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement veEditButton;
 	@FindBy(css="body.ve")
 	protected WebElement veMode;
-	@FindBy(css=".editsection")
+	@FindBy(css=".editsection>a")
 	protected List<WebElement> sectionEditButtons;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");

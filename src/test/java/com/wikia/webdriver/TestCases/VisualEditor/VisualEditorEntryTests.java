@@ -105,7 +105,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-			groups = {"VisualEditorEntry", "VisualEditorEntryTest_001"},
+			groups = {"VisualEditorEntry", "VisualEditorEntryTest_006"},
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getVEWikis"
 	)
