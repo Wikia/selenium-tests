@@ -28,17 +28,16 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getVEWikis"
 	)
-	public void VisualEditorEntryTest_001_editLoggedIn_veEnabled(String wiki) {
+	public void VisualEditorEntryTest_001_editLoggedIn_veEnabled(String wikiName) {
+		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article =
-			base.openArticleByName(
-				urlBuilder.getUrlForWiki(wiki),
-				base.getTimeStamp()
-			);
+			base.openArticleByName(wikiURL, base.getTimeStamp());
 		VisualEditorPageObject ve = article.clickVEEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
+		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -46,12 +45,14 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getVEWikis"
 	)
-	public void VisualEditorEntryTest_002_urlLoggedIn_veEnabled(String wiki) {
+	public void VisualEditorEntryTest_002_urlLoggedIn_veEnabled(String wikiName) {
+		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(urlBuilder.getUrlForWiki(wiki));
+		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
+		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -59,12 +60,14 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getNonVEWikis"
 	)
-	public void VisualEditorEntryTest_003_urlLoggedIn_veDisabled(String wiki) {
+	public void VisualEditorEntryTest_003_urlLoggedIn_veDisabled(String wikiName) {
+		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(urlBuilder.getUrlForWiki(wiki));
+		VisualEditorPageObject ve = base.gotoNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
+		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -72,15 +75,15 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getVEWikis"
 	)
-	public void VisualEditorEntryTest_004_urlLoggedIn_veEnabled_redLink(String wiki) {
+	public void VisualEditorEntryTest_004_urlLoggedIn_veEnabled_redLink(String wikiName) {
+		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve =
-			base.gotoNewArticleEditModeVisualWithRedlink(
-				urlBuilder.getUrlForWiki(wiki)
-			);
+			base.gotoNewArticleEditModeVisualWithRedlink(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
+		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -88,14 +91,14 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 			dataProviderClass = VisualEditorDataProvider.class,
 			dataProvider = "getNonVEWikis"
 	)
-	public void VisualEditorEntryTest_005_urlLoggedIn_veDisabled_redLink(String wiki) {
+	public void VisualEditorEntryTest_005_urlLoggedIn_veDisabled_redLink(String wikiName) {
+		String wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditorPageObject ve =
-			base.gotoNewArticleEditModeVisualWithRedlink(
-				urlBuilder.getUrlForWiki(wiki)
-			);
+			base.gotoNewArticleEditModeVisualWithRedlink(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
+		ve.logOut(wikiURL);
 	}
 }
