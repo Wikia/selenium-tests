@@ -147,4 +147,5 @@ public class URLsContent {
 
 	//Urls for VE editor
 	public static final String veEnabledTestMainPage = "vetest";
+	public static final String veDisabledTestMainPage = "vedisabledtest";
 }
