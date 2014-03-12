@@ -56,6 +56,7 @@ public class ImageServingTests extends NewTestTemplate {
 		upload.typeFileName(fileName);
 		upload.checkIgnoreAnyWarnings();
 		FilePagePageObject filePage = upload.clickUploadButton();
+		filePage.verifySelectedTab("about");
 		filePage.verifyHeader(fileName);
 
 		String imageURL = filePage.getImageUrl();

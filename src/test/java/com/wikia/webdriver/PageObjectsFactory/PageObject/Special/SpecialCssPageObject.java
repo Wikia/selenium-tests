@@ -21,7 +21,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement aceEditor;
 		@FindBy(css = "textarea.ace_text-input")
 		private WebElement aceInputTextArea;
-		@FindBy(css = ".ace_text-layer")
+		@FindBy(css = ".ace_text-layer > .ace_line")
 		private WebElement aceLayerTextArea;
 		@FindBys(@FindBy(css = ".ace_content div[class*='ace']"))
 		private List<WebElement> aceElementsList;
