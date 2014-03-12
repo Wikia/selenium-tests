@@ -132,6 +132,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	public void verifyVEToolBarPresent() {
+		waitForElementVisibleByElement(veMode);
 		waitForElementVisibleByElement(veToolMenu);
 		PageObjectLogging.log("verifyVEToolBar", "VE toolbar is displayed", true);
 	}
