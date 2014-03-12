@@ -291,7 +291,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public MiniEditorComponentObject triggerCommentReply() {
 		WebElement mostRecentComment = articleComments.get(0);
 		WebElement replyButton = mostRecentComment.findElement(By.cssSelector(replyCommentSelector));
-		replyButton.click();
+		scrollAndClick(replyButton);
 		waitForElementNotVisibleByElement(replyCommentLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
 	}

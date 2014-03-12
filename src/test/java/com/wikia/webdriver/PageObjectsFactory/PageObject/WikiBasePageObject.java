@@ -650,11 +650,11 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public String receiveMailWithNewPassowrd() {
-		MailFunctions.deleteAllEmails(Properties.email, Properties.emailPassword);
+	public String receiveMailWithNewPassowrd(String email, String password) {
+		MailFunctions.deleteAllEmails(email, password);
 		String newPassword = MailFunctions.getPasswordFromEmailContent((
 				MailFunctions.getFirstEmailContent(
-						Properties.email, Properties.emailPassword
+						email, password
 						)
 				)
 		);
