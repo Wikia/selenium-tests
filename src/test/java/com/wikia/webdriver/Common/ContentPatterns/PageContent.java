@@ -7,6 +7,9 @@ public class PageContent {
 	public static String articleNamePrefix = "QAarticle";
 	public static String articleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 	public static String articleTextEdit = "Brand new content";
+	public static String articleTextSecondEdit =
+		"Ut enim ad minim veniam, quis nostrud exercitation "+
+		"ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 	public static String commentText = "Lorem ipsum dolor sit amet, comment";
 	public static String commentText2 = "QAComment";
 	public static String commentTextNonLatin = "QAComment 한국어 위키백과에 На Вама је да одлучите 佛教藝術";
