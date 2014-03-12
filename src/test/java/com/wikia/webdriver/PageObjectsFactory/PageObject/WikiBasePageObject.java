@@ -423,7 +423,6 @@ public class WikiBasePageObject extends BasePageObject {
 			driver
 		);
 		return new VisualEditorPageObject(driver);
-
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
