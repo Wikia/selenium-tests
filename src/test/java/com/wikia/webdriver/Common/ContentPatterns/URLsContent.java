@@ -146,5 +146,5 @@ public class URLsContent {
 	public static String avatarGeneric = "150px-Avatar.jpg";
 
 	//Urls for VE editor
-	public static final String veTestMainPage = "vetest";
+	public static final String veEnabledTestMainPage = "vetest";
 }
