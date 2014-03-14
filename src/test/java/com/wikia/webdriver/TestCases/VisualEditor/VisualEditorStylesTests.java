@@ -44,7 +44,7 @@ public class VisualEditorStylesTests extends NewTestTemplateBeforeClass {
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_001_FullText(Style style) {
 		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
-		ve.gotoNewArticleEditModeVisual(wikiURL);
+		ve.openNewArticleEditModeVisual(wikiURL);
 		ve.typeTextArea(" ");
 		ve.selectStyle(style);
 		ve.typeTextArea(text);
@@ -59,7 +59,7 @@ public class VisualEditorStylesTests extends NewTestTemplateBeforeClass {
 			dataProvider = "getStyles")
 	public void VisualEditorStyles_002_SelectedText(Style style) {
 		PageObjectLogging.log("Style selection", style.toString() + " selected", true);
-		ve.gotoNewArticleEditModeVisual(wikiURL);
+		ve.openNewArticleEditModeVisual(wikiURL);
 		ve.typeTextArea(text);
 
 		String selectText = text.substring(12, 17);

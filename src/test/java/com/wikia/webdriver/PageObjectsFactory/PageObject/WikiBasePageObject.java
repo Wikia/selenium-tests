@@ -146,6 +146,10 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement closeModalButton;
 	@FindBy(css="#ca-ve-edit")
 	protected WebElement veEditButton;
+	@FindBy(css="body.ve")
+	protected WebElement veMode;
+	@FindBy(css=".editsection>a")
+	protected List<WebElement> sectionEditButtons;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -402,6 +406,19 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("clickVEEditButton", "VE edit button clicked", true, driver);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditorPageObject clickVESectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"clickVESectionEditButton",
+			"VE edit button clicked at section: " + section,
+			true,
+			driver
+		);
 		return new VisualEditorPageObject(driver);
 	}
 
@@ -1011,11 +1028,24 @@ public class WikiBasePageObject extends BasePageObject {
 		return keysFromDefaultList.toArray();
 	}
 
-	public VisualEditorPageObject gotoNewArticleEditModeVisual(String wikiURL) {
+	public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
 				URLsContent.actionVisualEditParameter
+			)
+		);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				urlBuilder.appendQueryStringToURL(
+					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+					URLsContent.actionVisualEditParameter
+				),
+				URLsContent.redLink
 			)
 		);
 		return new VisualEditorPageObject(driver);
