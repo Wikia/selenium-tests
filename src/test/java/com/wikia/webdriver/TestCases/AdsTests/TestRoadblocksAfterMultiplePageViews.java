@@ -3,49 +3,40 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
-import java.io.IOException;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
+ * 
+ * 1. Check if roadblock is present after 3 PV
  */
-public class TestAdSkinPresence extends NewTestTemplate {
+public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 
-	public TestAdSkinPresence() {
+	public TestRoadblocksAfterMultiplePageViews() {
 		super();
 		urlBuilder = new UrlBuilder(config.getEnv());
 	}
 
-	/**
-	 * Test ad skin presence on given resolution.
-	 * @param wikiName - name of the wiki
-	 * @param article - name of the article
-	 * @param screenImageUrl - DFP link with ad skin image
-	 * @param windowResolution - window resolution
-	 * @param skinWidth - ad skin width on both sides of the article
-	 * @param skinLeftSide - path to file with decoded using Base64 ad skin
-	 * @param skinRightSide - path to file with decoded using Base64 ad skin
-	 * @throws IOException
-	 */
 	@GeoEdgeProxy(country="US")
 	@Test(
 		dataProviderClass=AdsDataProvider.class,
-		dataProvider="skin",
-		groups={"Skin"},
-		invocationCount=5
+		dataProvider="skinLimited",
+		groups={"Roadblock_001", "Roadblock"},
+		invocationCount=3
 	)
-	public void TestSkinPresence_001(
+	public void TestRoadblock_001(
 		String wikiName, String article, String screenImageUrl,
 		Dimension windowResolution, int skinWidth, String skinLeftSide, String skinRightSide
-	) throws IOException {
+	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-		wikiPage.verifyAdSkinPresenceOnGivenResolution(
-			testedPage, screenImageUrl, windowResolution, skinWidth, skinLeftSide, skinRightSide
+		wikiPage.verifyRoadblockServedAfterMultiplePageViews(
+			testedPage, screenImageUrl, windowResolution,
+			skinWidth, skinLeftSide, skinRightSide, 3
 		);
 	}
 }

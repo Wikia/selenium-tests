@@ -185,6 +185,20 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] skinLimited() {
+		return new Object[][] {
+			{
+				"adtest-fluid", "Skin",
+				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				new Dimension(1920, 1080),
+				170,
+				"src/test/resources/adsResources/skin1920_left",
+				"src/test/resources/adsResources/skin1920_right",
+			}
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] adFreeWikis() {
 		return new Object[][] {
 			{"api", "Wikia_API_Wiki"},
