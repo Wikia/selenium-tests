@@ -7,7 +7,6 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -34,7 +33,6 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 		}
 	}
 
-	@BeforeMethod(alwaysRun=true)
 	private void loginSteps() {
 		SpecialUserLoginPageObject userLogin = new SpecialUserLoginPageObject(driver);
 		Credentials credentials = config.getCredentials();
@@ -46,6 +44,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	@GeoEdgeProxy(country="US")
 	@Test (groups={"Ads", "NoAds71Media_001", "NoAds71Media"})
 	public void TestNo71MediaAds_001() throws Exception {
+		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
@@ -53,6 +52,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	@GeoEdgeProxy(country="DE")
 	@Test (groups={"Ads", "NoAds71Media_002", "NoAds71Media"})
 	public void TestNo71MediaAds_002() throws Exception {
+		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
@@ -60,6 +60,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	@GeoEdgeProxy(country="HR")
 	@Test (groups={"Ads", "NoAds71Media_003", "NoAds71Media"})
 	public void TestNo71MediaAds_003() throws Exception {
+		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
@@ -67,6 +68,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	@GeoEdgeProxy(country="AU")
 	@Test (groups={"Ads", "NoAds71Media_004", "NoAds71Media"})
 	public void TestNo71MediaAds_004() throws Exception {
+		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
