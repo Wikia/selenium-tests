@@ -106,7 +106,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	}
 
 	private void clickVideoThumbnail(int i) {
-		videoThumbnailsList.get(i).click();
+		scrollAndClick(videoThumbnailsList.get(i));
 		PageObjectLogging.log("clickVideoThumbnail", "video thumbnails clicked", true);
 	}
 

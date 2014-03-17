@@ -96,6 +96,7 @@ public class URLsContent {
 	public static final String deleteParameter = "action=delete";
 	public static final String disableCaptchaParameter = "nocaptchatest=1";
 	public static final String sourceMode = "useeditor=source";
+	public static final String redLink = "redlink=1";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "wiki/WAM";
@@ -143,4 +144,7 @@ public class URLsContent {
 
 	//avatars
 	public static String avatarGeneric = "150px-Avatar.jpg";
+
+	//Urls for VE editor
+	public static final String veTestMainPage = "vetest";
 }

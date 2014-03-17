@@ -137,8 +137,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImageArticle;
 	@FindBy(css=".wikia-menu-button")
 	private WebElement articleEditButton;
-	@FindBy(css="body.ve")
-	private WebElement veMode;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -293,7 +291,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public MiniEditorComponentObject triggerCommentReply() {
 		WebElement mostRecentComment = articleComments.get(0);
 		WebElement replyButton = mostRecentComment.findElement(By.cssSelector(replyCommentSelector));
-		replyButton.click();
+		scrollAndClick(replyButton);
 		waitForElementNotVisibleByElement(replyCommentLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
 	}

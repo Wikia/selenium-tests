@@ -87,8 +87,17 @@ public class VisualEditorDataProvider {
 	@DataProvider
 	public static final Object[][] getVEWikis() {
 		return new Object[][] {
-				{ "leagueoflegends"},
-				{ "area-x"},
+				{"vetest"},
+		};
+	}
+
+	/**
+	 * Data provider with VE disabled wikis
+	 */
+	@DataProvider
+	public static final Object[][] getNonVEWikis() {
+		return new Object[][] {
+				{"vedisabledtest"},
 		};
 	}
 }
