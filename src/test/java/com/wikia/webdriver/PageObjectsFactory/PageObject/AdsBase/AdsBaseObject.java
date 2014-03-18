@@ -139,15 +139,23 @@ public class AdsBaseObject extends WikiBasePageObject {
 		String leaderboardAd = getSlotImageAd(presentLeaderboard);
 		String medrecAd = getSlotImageAd(presentMedrec);
 		verifyAdSkinPresenceOnGivenResolution(
-			page, adSkinUrl, windowResolution, skinWidth,
-			expectedAdSkinLeftPart, expectedAdSkinRightPart
+			page,
+			adSkinUrl,
+			windowResolution,
+			skinWidth,
+			expectedAdSkinLeftPart,
+			expectedAdSkinRightPart
 		);
 
 		for (int i=0; i <= numberOfPageViews; i++) {
 			refreshPage();
 			verifyAdSkinPresenceOnGivenResolution(
-				page, adSkinUrl, windowResolution, skinWidth,
-				expectedAdSkinLeftPart, expectedAdSkinRightPart
+				page,
+				adSkinUrl,
+				windowResolution,
+				skinWidth,
+				expectedAdSkinLeftPart,
+				expectedAdSkinRightPart
 			);
 			Assertion.assertEquals(leaderboardAd, getSlotImageAd(presentLeaderboard));
 			Assertion.assertEquals(medrecAd, getSlotImageAd(presentMedrec));
@@ -185,7 +193,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 	 * @param skinWidth - skin width on the sides of the article
 	 * @param expectedAdSkinLeftPart - path to file with expected skin encoded in Base64
 	 * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
-	 * @throws IOException
 	 */
 	public void verifyAdSkinPresenceOnGivenResolution(
 		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,

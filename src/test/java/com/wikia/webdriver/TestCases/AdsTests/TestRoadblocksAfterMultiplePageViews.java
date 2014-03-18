@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 import org.openqa.selenium.Dimension;
@@ -15,6 +14,8 @@ import org.testng.annotations.Test;
  * 1. Check if roadblock is present after 3 PV
  */
 public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
+
+	private final int pageViewsCount = 3;
 
 	public TestRoadblocksAfterMultiplePageViews() {
 		super();
@@ -35,8 +36,13 @@ public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
 		wikiPage.verifyRoadblockServedAfterMultiplePageViews(
-			testedPage, screenImageUrl, windowResolution,
-			skinWidth, skinLeftSide, skinRightSide, 3
+			testedPage,
+			screenImageUrl,
+			windowResolution,
+			skinWidth,
+			skinLeftSide,
+			skinRightSide,
+			pageViewsCount
 		);
 	}
 }
