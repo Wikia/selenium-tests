@@ -103,6 +103,18 @@ public class Credentials {
 	public String geoEdgeUserName;
 	public String geoEdgeUserPass;
 
+	public String userNameVEPreferred;
+	public String passwordVEPreferred;
+
+	public String userNameCKPreferred;
+	public String passwordCKPreferred;
+
+	public String userNameSourcePreferred;
+	public String passwordSourcePreferred;
+
+	public String userNameDefaultPreferred;
+	public String passwordDefaultPreferred;
+
 	public String apiToken;
 
 	public Credentials(File credentialsFile) {
@@ -187,6 +199,18 @@ public class Credentials {
 
 		geoEdgeUserName = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.AdsConfig.GeoEdgeCredentials.userName");
 		geoEdgeUserPass = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.AdsConfig.GeoEdgeCredentials.password");
+
+		userNameVEPreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.vePreferredUser.username");
+		passwordVEPreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.vePreferredUser.password");
+
+		userNameCKPreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.ckPreferredUser.username");
+		passwordCKPreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.ckPreferredUser.password");
+
+		userNameSourcePreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.sourcePreferredUser.username");
+		passwordSourcePreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.sourcePreferredUser.password");
+
+		userNameDefaultPreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.defaultPreferredUser.username");
+		passwordDefaultPreferred = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.defaultPreferredUser.password");
 
 		apiToken = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.api.token");
 	}
