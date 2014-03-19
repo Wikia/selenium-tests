@@ -148,6 +148,8 @@ public class URLsContent {
 	//Urls for VE editor
 	public static final String veEnabledTestMainPage = "vetest";
 	public static final String veDisabledTestMainPage = "vedisabledtest";
+	public static final String rteDisabledTestMainPage = "ckdisabledtest";
+	public static final String veAndrteDisabledTestMainPage = "veandckdisabledtest";
 
 	//Urls for different namespace pages
 	public static final String wikiMainPage = "Main_Page";
