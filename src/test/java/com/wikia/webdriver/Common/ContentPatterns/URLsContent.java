@@ -150,7 +150,7 @@ public class URLsContent {
 	public static final String veDisabledTestMainPage = "vedisabledtest";
 
 	//Urls for different namespace pages
-	public static final String wikiMainPage = "wiki/Main_Page";
-	public static final String categoryPage = "wiki/Category:General_wiki_templates";
-	public static final String templatePage = "wiki/Template:Infobox";
+	public static final String wikiMainPage = "Main_Page";
+	public static final String categoryPage = "Category:General_wiki_templates";
+	public static final String templatePage = "Template:Infobox";
 }
