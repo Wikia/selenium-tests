@@ -45,6 +45,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
@@ -201,6 +202,20 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyModalLoginAppeared() {
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
+	}
+
+	/**
+	 * @author Karol Kujawiak
+	 * opens chat page, should be launched when user is logged in
+	 */
+	public ChatPageObject openChatPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialChat);
+		PageObjectLogging.log(
+			"openChatPage",
+			"Chat page " + wikiURL + URLsContent.specialChat + " opened",
+			true
+		);
+		return new ChatPageObject(driver);
 	}
 
 	public SpecialUnusedFilesPageObject openSpecialUnusedFilesPage(String wikiURL) {
