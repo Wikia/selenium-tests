@@ -16,8 +16,8 @@ import org.openqa.selenium.Proxy;
 public class NetworkTrafficInterceptor extends ProxyServer {
 
 	private Har har;
-	private final int Max = 8888;
-	private final int Min = 4444;
+	private final int Max = 8080;
+	private final int Min = 7070;
 	private final int portNumber;
 
 	public NetworkTrafficInterceptor() {
