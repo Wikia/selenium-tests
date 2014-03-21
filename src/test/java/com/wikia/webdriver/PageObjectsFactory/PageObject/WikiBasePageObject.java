@@ -458,7 +458,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @param wikiURL
 	 * @param article
 	 */
-	public VisualEditorPageObject gotoArticleEditModeVisual(String wikiURL, String article) {
+	public VisualEditorPageObject navigateToArticleEditModeVisual(String wikiURL, String article) {
 		getUrl(
 				urlBuilder.appendQueryStringToURL(
 					wikiURL + URLsContent.wikiDir + article, URLsContent.actionVisualEditParameter
