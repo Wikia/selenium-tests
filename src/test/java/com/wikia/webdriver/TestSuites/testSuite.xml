@@ -43,6 +43,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnAdFreeWikis"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdSkinPresence"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestRoadblocksAfterMultiplePageViews"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestBasicLayout"/>

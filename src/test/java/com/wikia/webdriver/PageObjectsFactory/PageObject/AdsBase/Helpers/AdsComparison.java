@@ -55,13 +55,24 @@ public class AdsComparison {
 
 	public boolean compareImageWithScreenshot(
 		String filePath, Dimension screenshotSize, Point startPoint, WebDriver driver
-	) throws IOException {
-		String encodedExpectedScreen = readFileAsString(filePath);
+	) {
+		String encodedExpectedScreen = null;
+		try {
+			encodedExpectedScreen = readFileAsString(filePath);
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		}
 		Shooter shooter = new Shooter();
 		File capturedScreen =  shooter.capturePageAndCrop(
 			startPoint, screenshotSize, driver
 		);
-		String encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
+
+		String encodedCapturedScreen = null;
+		try {
+			encodedCapturedScreen = readFileAndEncodeToBase(capturedScreen);
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		}
 		capturedScreen.delete();
 		boolean success = true;
 
