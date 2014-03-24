@@ -74,6 +74,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 		super(driver);
 	}
 
+	public AdsBaseObject(WebDriver driver, String testedPage, Dimension resolution) {
+		super(driver);
+		driver.manage().window().setSize(resolution);
+		getUrl(testedPage);
+	}
+
 	private void setSlots() {
 		if (checkIfElementOnPage(presentLeaderboard)) {
 			presentLeaderboardName = presentLeaderboard.getAttribute("id");
@@ -125,6 +131,37 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
+	public void verifyRoadblockServedAfterMultiplePageViews(
+		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
+		String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
+	) {
+		setSlots();
+		String leaderboardAd = getSlotImageAd(presentLeaderboard);
+		String medrecAd = getSlotImageAd(presentMedrec);
+		verifyAdSkinPresenceOnGivenResolution(
+			page,
+			adSkinUrl,
+			windowResolution,
+			skinWidth,
+			expectedAdSkinLeftPart,
+			expectedAdSkinRightPart
+		);
+
+		for (int i=0; i <= numberOfPageViews; i++) {
+			refreshPage();
+			verifyAdSkinPresenceOnGivenResolution(
+				page,
+				adSkinUrl,
+				windowResolution,
+				skinWidth,
+				expectedAdSkinLeftPart,
+				expectedAdSkinRightPart
+			);
+			Assertion.assertEquals(leaderboardAd, getSlotImageAd(presentLeaderboard));
+			Assertion.assertEquals(medrecAd, getSlotImageAd(presentMedrec));
+		}
+	}
+
 	public void checkTopLeaderboard() {
 		AdsComparison adsComparison = new AdsComparison();
 		extractLiftiumTagId(presentLeaderboardSelector);
@@ -156,15 +193,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 	 * @param skinWidth - skin width on the sides of the article
 	 * @param expectedAdSkinLeftPart - path to file with expected skin encoded in Base64
 	 * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
-	 * @throws IOException
 	 */
-	public void checkAdSkinPresenceOnGivenResolution(
+	public void verifyAdSkinPresenceOnGivenResolution(
 		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
 		String expectedAdSkinLeftPart, String expectedAdSkinRightPart
-	) throws IOException {
+	) {
 		Shooter shooter = new Shooter();
-		driver.manage().window().setSize(windowResolution);
-		getUrl(page);
 		AdsContent.setSlotsSelectors();
 
 		String backgroundImageUrlAfter = getPseudoElementValue(
@@ -399,7 +433,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			By.cssSelector("iframe[id*=" + slotName + "]")
 		);
 
-		//Prepate slotTweaker script's draft and look for it inside slot's iframe
+		//Prepare slotTweaker script's draft and look for it inside slot's iframe
 		driver.switchTo().frame(firstLevelIframe);
 		String slotTweakerHideMedrecScript = AdsContent.slotTweakerHideSlotScript.replaceAll(
 			"%slot%", slotName
@@ -537,5 +571,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 
 		return liftiumTagId;
+	}
+
+	private String getSlotImageAd(WebElement slot) {
+		WebElement iframeWithAd = slot.findElement(
+			By.cssSelector("div > iframe:not([id*='hidden'])")
+		);
+		driver.switchTo().frame(iframeWithAd);
+		String imageAd = driver.findElement(
+			By.cssSelector("img.img_ad")
+		).getAttribute("src");
+		driver.switchTo().defaultContent();
+		return imageAd;
 	}
 }
