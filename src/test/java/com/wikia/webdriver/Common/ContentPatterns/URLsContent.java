@@ -150,6 +150,7 @@ public class URLsContent {
 	public static final String veDisabledTestMainPage = "vedisabledtest";
 	public static final String rteDisabledTestMainPage = "ckdisabledtest";
 	public static final String veAndrteDisabledTestMainPage = "veandckdisabledtest";
+	public static final String testingPage = "Testingpage";
 
 	//Urls for different namespace pages
 	public static final String wikiMainPage = "Main_Page";

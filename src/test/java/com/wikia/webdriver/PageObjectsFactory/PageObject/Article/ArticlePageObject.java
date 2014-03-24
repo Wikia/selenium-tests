@@ -26,6 +26,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 
 /**
@@ -205,6 +206,15 @@ public class ArticlePageObject extends WikiBasePageObject {
 		articleTitleInputModal.sendKeys(articleTitle);
 		submitModal.click();
 		return new VisualEditModePageObject(driver);
+	}
+
+	public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
+		actionsClick(contributeDropdown);
+		waitForElementVisibleByElement(addArticleInDropdown);
+		addArticleInDropdown.click();
+		articleTitleInputModal.sendKeys(articleTitle);
+		submitModal.click();
+		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditModePageObject editArticleUsingDropdown() {

@@ -150,6 +150,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement veMode;
 	@FindBy(css=".editsection>a")
 	protected List<WebElement> sectionEditButtons;
+	@FindBy(css="a.new[href$='redlink=1']")
+	protected List<WebElement> redLinks;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -1048,6 +1050,13 @@ public class WikiBasePageObject extends BasePageObject {
 				URLsContent.redLink
 			)
 		);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditorPageObject clickRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		waitForElementClickableByElement(redLinkToClick);
+		jQueryClick(redLinkToClick);
 		return new VisualEditorPageObject(driver);
 	}
 }
