@@ -37,7 +37,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
@@ -68,7 +68,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		articleTitle = articleTitle + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
