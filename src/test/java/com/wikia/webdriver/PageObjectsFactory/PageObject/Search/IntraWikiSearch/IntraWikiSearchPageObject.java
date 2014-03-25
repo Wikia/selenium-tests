@@ -142,7 +142,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		}
 		while(paginationPages.size() > 6);
 		Assertion.assertEquals(paginationPages.size(), 6);
-		Assertion.assertTrue(titles.size() < 25);
+		Assertion.assertTrue(titles.size() <= 25);
 	}
 
 	public void verifyFirstArticleNameTheSame(String firstResult) {
@@ -311,5 +311,5 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 			Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
 		}
 		PageObjectLogging.log("verifyNewSuggestionsTextAndImages", "Image and text next to every suggestion is verified", true);
-	}	
+	}
 }

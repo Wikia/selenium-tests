@@ -25,8 +25,8 @@ public class ImageServingTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"ImageServing001", "ImageServing", "Smoke3"})
-	public void ImageServing001_SpecialNewFilesTest() {
+	@Test(groups = {"ImageServing_001", "ImageServing", "Smoke3"})
+	public void ImageServing_001_SpecialNewFilesTest() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
@@ -44,11 +44,11 @@ public class ImageServingTests extends NewTestTemplate {
 	}
 
 	@Test(
-			groups = {"ImageServing002", "ImageServing"},
+			groups = {"ImageServing_002", "ImageServing"},
 			dataProviderClass = FileDataProvider.class,
 			dataProvider = "getFileNames"
 	)
-	public void ImageServing002_SpecialUploadTest(String fileName) {
+	public void ImageServing_002_SpecialUploadTest(String fileName) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialUploadPageObject upload = base.openSpecialUpload(wikiURL);
@@ -56,6 +56,7 @@ public class ImageServingTests extends NewTestTemplate {
 		upload.typeFileName(fileName);
 		upload.checkIgnoreAnyWarnings();
 		FilePagePageObject filePage = upload.clickUploadButton();
+		filePage.verifySelectedTab("about");
 		filePage.verifyHeader(fileName);
 
 		String imageURL = filePage.getImageUrl();
@@ -65,8 +66,8 @@ public class ImageServingTests extends NewTestTemplate {
 		filePage.verifyURLStatus(200, imageThumbnailURL);
 	}
 
-	@Test(groups = {"ImageServing003", "ImageServing"})
-	public void ImageServing003_SpecialMultipleUploadTest() {
+	@Test(groups = {"ImageServing_003", "ImageServing"})
+	public void ImageServing_003_SpecialMultipleUploadTest() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialMultipleUploadPageObject wikiSpecialMU = base.openSpecialMultipleUpload(wikiURL);

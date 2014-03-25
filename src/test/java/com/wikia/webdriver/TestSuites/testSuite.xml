@@ -19,7 +19,6 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesArticleTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesTestsEditMode"/>
-			<class name="com.wikia.webdriver.TestCases.Top_10_list_Tests.Top_10_list_Tests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForcedLoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
@@ -44,6 +43,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnAdFreeWikis"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdSkinPresence"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestRoadblocksAfterMultiplePageViews"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestBasicLayout"/>
@@ -102,8 +102,9 @@
 			<class name="com.wikia.webdriver.TestCases.MessageWall.MessageWallFeaturesTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FBConnectTests"/>
 			<class name="com.wikia.webdriver.TestCases.UserProfileTests.UserAvatarTests"/>
-			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorFormatting"/>
-			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStyles"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorFormattingTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStylesTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorEntryTests"/>
 			<class name="com.wikia.webdriver.TestCases.FacebookTests.FacebookTests"/>
 		</classes>
 	</test>

@@ -58,9 +58,6 @@ public class VideoUrlProvider {
 			}, {
 				"http://www.youtube.com/watch?v=d9r5_DDMMjY",
 				"Top 5 Plays of the Night May 19th"
-			}, {
-				"http://www.viddler.com/v/f97fc5b0",
-				"Times-Shamrock Communications Spotlight"
 			},
 		};
 	}

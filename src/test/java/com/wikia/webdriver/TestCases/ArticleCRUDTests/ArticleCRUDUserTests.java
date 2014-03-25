@@ -42,7 +42,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
@@ -75,7 +75,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
 		articleTitle = articleTitle + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);

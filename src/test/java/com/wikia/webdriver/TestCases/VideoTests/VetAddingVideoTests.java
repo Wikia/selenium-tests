@@ -4,60 +4,60 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.MessageWallPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall.NewMessageWall;
 
 /*
  * Documentation:
  * https://docs.google.com/a/wikia-inc.com/spreadsheet/ccc?key=0AtG89yMxyGSadEtPY28ydDB4czkydXNmMkJVQ2NGR0E#gid=7
  */
 
-public class VetAddingVideoTests extends TestTemplate {
+public class VetAddingVideoTests extends NewTestTemplate {
 
-	@Test(groups = {"VetTests013", "VetTests", "VetAddVideo"})
-	public void Vet_Tests_011_MessageWallProvider() {
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		MessageWallPageObject wall = new MessageWallPageObject(driver);
-		String timeStamp = wall.getTimeStamp();
-		String title = PageContent.messageWallTitlePrefix + timeStamp;
-		wall.openWikiPage();
-		login.logInCookie(Properties.userName, Properties.password);
-		wall.openMessageWall(Properties.userName);
-		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver);
-		wall.writeMessage(title, "");
+	Credentials credentials = config.getCredentials();
+
+	@Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo"})
+	public void VetAddVideo_001_MessageWallProvider() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		MiniEditorComponentObject mini = wall.triggerMessageArea();
+		wall.clickBoldButton();
+		mini.switchAndWrite(message);
+		wall.writeTitle(title);
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();
-		wall.clickPostButton();
+		wall.submit();
 		wall.verifyPostedMessageVideo(title);
 	}
 
-	@Test(groups = {"VetTests014", "VetTests", "VetAddVideo"})
-	public void Vet_Tests_012_MessageWallLibrary_VID_1244() {
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logOut(driver);
-		MessageWallPageObject wall = new MessageWallPageObject(driver);
-		String timeStamp = wall.getTimeStamp();
-		String title = PageContent.messageWallTitlePrefix + timeStamp;
-		wall.openWikiPage();
-		login.logInCookie(Properties.userName, Properties.password);
-		wall.openMessageWall(Properties.userName);
-		MiniEditorComponentObject mini = new MiniEditorComponentObject(driver);
-		wall.writeMessage(title, "");
+	@Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo"})
+	public void VetAddVideo_002_MessageWallLibrary() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
+		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
+		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		MiniEditorComponentObject mini = wall.triggerMessageArea();
+		wall.clickBoldButton();
+		mini.switchAndWrite(message);
+		wall.writeTitle(title);
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
 		vetOptions.setCaption(PageContent.caption);
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();
-		wall.clickPostButton();
+		wall.submit();
 		wall.verifyPostedMessageVideo(title);
 	}
 }

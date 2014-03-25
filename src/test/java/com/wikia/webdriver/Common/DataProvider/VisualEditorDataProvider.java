@@ -33,7 +33,6 @@ public class VisualEditorDataProvider {
 	public enum Style {
 		BOLD (By.tagName("b")),
 		ITALIC (By.tagName("i")),
-		CODE (By.tagName("code")),
 		STRIKETHROUGH (By.tagName("s")),
 		UNDERLINE (By.tagName("u")),
 		SUBSCRIPT (By.tagName("sub")),
@@ -75,11 +74,30 @@ public class VisualEditorDataProvider {
 		return new Object[][] {
 				{Style.BOLD},
 				{Style.ITALIC},
-				{Style.CODE},
 				{Style.STRIKETHROUGH},
 				{Style.SUBSCRIPT},
 				{Style.SUPERSCRIPT},
 				{Style.UNDERLINE},
+		};
+	}
+
+	/**
+	 * Data provider with VE enabled wikis
+	 */
+	@DataProvider
+	public static final Object[][] getVEWikis() {
+		return new Object[][] {
+				{"vetest"},
+		};
+	}
+
+	/**
+	 * Data provider with VE disabled wikis
+	 */
+	@DataProvider
+	public static final Object[][] getNonVEWikis() {
+		return new Object[][] {
+				{"vedisabledtest"},
 		};
 	}
 }

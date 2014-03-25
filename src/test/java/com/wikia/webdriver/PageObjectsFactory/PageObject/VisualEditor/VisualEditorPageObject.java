@@ -15,7 +15,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
+ * @author Robert 'rochan' Chan
  */
 public class VisualEditorPageObject extends VisualEditorMenu {
 
@@ -31,8 +31,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private List<WebElement> numList;
 	@FindBy(css="ul.ve-ce-branchNode > li")
 	private List<WebElement> bullList;
+	@FindBy(css=".ve-init-mw-viewPageTarget-surface")
+	private WebElement veEditorSurface;
 
-	public void write(String text) {
+	public void typeTextArea(String text) {
+		waitForElementVisibleByElement(editArea);
 		editArea.sendKeys(text);
 		PageObjectLogging.log("write", "text " + text + "written", true);
 	}
@@ -72,5 +75,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void verifyStyle(Style style, String text) {
 		Assertion.assertEquals(text, editArea.findElement(style.getTag()).getText());
+	}
+
+	public void verifyEditorSurfacePresent() {
+		waitForElementVisibleByElement(veMode);
+		waitForElementVisibleByElement(veEditorSurface);
+		PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
 	}
 }
