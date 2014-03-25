@@ -207,7 +207,11 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void verifyArticleIsNotRemoved(String page) {
 			if (checkIfElementOnPage(removedWarning)) {
 				undeleteArticle(page);
-				PageObjectLogging.log("articleIsRemoved", "Article is removed, needs to be restored", true);
+				PageObjectLogging.log(
+					"articleIsRemoved",
+					"Article is removed, needs to be restored",
+					true
+				);
 			} else {
 				PageObjectLogging.log("verifyArticleIsNotRemoved", "Article is not removed.", true);
 			}
