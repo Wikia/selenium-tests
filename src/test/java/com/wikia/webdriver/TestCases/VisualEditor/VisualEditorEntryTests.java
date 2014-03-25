@@ -36,7 +36,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, base.getTimeStamp());
-		VisualEditorPageObject ve = article.clickVEEditButton();
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.logOut(wikiURL);
@@ -115,7 +115,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.veEnabledTestMainPage);
-		VisualEditorPageObject ve = article.clickVESectionEditButton(0);
+		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.logOut(wikiURL);

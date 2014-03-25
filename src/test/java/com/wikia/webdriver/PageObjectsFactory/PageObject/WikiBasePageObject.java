@@ -152,6 +152,10 @@ public class WikiBasePageObject extends BasePageObject {
 	protected List<WebElement> sectionEditButtons;
 	@FindBy(css="a.new[href$='redlink=1']")
 	protected List<WebElement> redLinks;
+	@FindBy(css="body.rte_wysiwyg")
+	protected WebElement rteMode;
+	@FindBy(css="body.rte_source")
+	protected WebElement srcInRteMode;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -404,24 +408,37 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
-	public VisualEditorPageObject clickVEEditButton() {
+	public VisualEditorPageObject openVEModeWithMainEditButton() {
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
-		PageObjectLogging.log("clickVEEditButton", "VE edit button clicked", true, driver);
+		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditorPageObject clickVESectionEditButton(int section) {
+	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
 		WebElement sectionEditButton = sectionEditButtons.get(section);
 		waitForElementByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-			"clickVESectionEditButton",
+			"openVEModeWithSectionEditButton",
 			"VE edit button clicked at section: " + section,
 			true,
 			driver
 		);
 		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"openCKModeWithSectionEditButton",
+			"VE edit button clicked at section: " + section,
+			true,
+			driver
+		);
+		return new VisualEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
@@ -1053,10 +1070,17 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditorPageObject clickRedLinks(int linkNumber) {
+	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {
 		WebElement redLinkToClick = redLinks.get(linkNumber);
 		waitForElementClickableByElement(redLinkToClick);
 		jQueryClick(redLinkToClick);
 		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		waitForElementClickableByElement(redLinkToClick);
+		jQueryClick(redLinkToClick);
+		return new VisualEditModePageObject(driver);
 	}
 }
