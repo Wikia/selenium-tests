@@ -29,8 +29,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"CategoriesTestsArticle001", "CategoriesTestsArticle", "Smoke2"})
-	public void CategoriesTestsArticle001_anon() {
+	@Test(groups = {"CategoriesTestsArticle_001", "CategoriesTestsArticle", "Smoke2"})
+	public void CategoriesTestsArticle_001_anon() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
@@ -39,12 +39,12 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(categoryName);
 	}
 
-	@Test(groups = {"CategoriesTestsArticle002", "CategoriesTestsArticle"})
-	public void CategoriesTestsArticle002_anonSuggestions() {
+	@Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
+	public void CategoriesTestsArticle_002_anonSuggestions() {
 		VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver);
-		visualEditMode.goToArticleEditPage(
-			wikiURL,
-			PageContent.articleNamePrefix + visualEditMode.getTimeStamp()
+		visualEditMode.navigateToArticleEditPage(
+				wikiURL,
+				PageContent.articleNamePrefix + visualEditMode.getTimeStamp()
 		);
 		visualEditMode.addContent(PageContent.articleText);
 		ArticlePageObject article = visualEditMode.submitArticle();
@@ -53,8 +53,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(desiredCategory);
 	}
 
-	@Test(groups = {"CategoriesTestsArticle003", "CategoriesTestsArticle"})
-	public void CategoriesTestsArticle003_user() {
+	@Test(groups = {"CategoriesTestsArticle_003", "CategoriesTestsArticle"})
+	public void CategoriesTestsArticle_003_user() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
@@ -64,13 +64,13 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(categoryName);
 	}
 
-	@Test(groups = {"CategoriesTestsArticle004", "CategoriesTestsArticle"})
-	public void CategoriesTestsArticle004_userSuggestions() {
+	@Test(groups = {"CategoriesTestsArticle_004", "CategoriesTestsArticle"})
+	public void CategoriesTestsArticle_004_userSuggestions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(
-			wikiURL,
-			PageContent.articleNamePrefix + base.getTimeStamp()
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(
+				wikiURL,
+				PageContent.articleNamePrefix + base.getTimeStamp()
 		);
 		visualEditMode.addContent(PageContent.articleText);
 		ArticlePageObject article = visualEditMode.submitArticle();
@@ -79,8 +79,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(desiredCategory);
 	}
 
-	@Test(groups = {"CategoriesTestsArticle005", "CategoriesTestsArticle"})
-	public void CategoriesTestsArticle005_anonEdit() {
+	@Test(groups = {"CategoriesTestsArticle_005", "CategoriesTestsArticle"})
+	public void CategoriesTestsArticle_005_anonEdit() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
@@ -92,8 +92,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		article.verifyCategoryPresent(categoryName);
 	}
 
-	@Test(groups = {"CategoriesTestsArticle006", "CategoriesTestsArticle"})
-	public void CategoriesTestsArticle006_anonDelete() {
+	@Test(groups = {"CategoriesTestsArticle_006", "CategoriesTestsArticle"})
+	public void CategoriesTestsArticle_006_anonDelete() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
 		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();

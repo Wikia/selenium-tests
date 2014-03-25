@@ -16,12 +16,14 @@ public class CssChromeTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	SpecialCssPageObject specialCss;
+	private String testedPage;
 
 	@BeforeMethod(alwaysRun = true)
 	public void CssChrome_loginAndOpenSpecialCSS() {
 		WikiBasePageObject wiki = new WikiBasePageObject(driver);
 		wiki.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		specialCss = wiki.openSpecialCss(wikiURL);
+		testedPage = specialCss.getCurrentUrl();
 	}
 
 	/**
@@ -99,7 +101,7 @@ public class CssChromeTests extends NewTestTemplate {
 	@Test(groups = {"CssChrome_007", "CssChrome", "AdminDashboard"})
 	public void CssChrome_007_verifyDeleteButtonAppearsAndWorks() {
 		specialCss.verifyAceEditorPresence();
-		specialCss.verifyArticleIsNotRemoved();
+		specialCss.verifyArticleIsNotRemoved(testedPage);
 		specialCss.clickPublishButtonDropdown();
 		specialCss.clickDeleteButton();
 		specialCss.confirmDelete();
@@ -107,13 +109,11 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.openSpecialCss(wikiURL);
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsRemoved();
-		specialCss.clickPublishButtonDropdown();
-		specialCss.clickUndeleteButton();
-		specialCss.confirmUndelete();
+		specialCss.undeleteArticle(testedPage);
 
 		specialCss.openSpecialCss(wikiURL);
 		specialCss.verifyAceEditorPresence();
-		specialCss.verifyArticleIsNotRemoved();
+		specialCss.verifyArticleIsNotRemoved(testedPage);
 	}
 
 	/**
