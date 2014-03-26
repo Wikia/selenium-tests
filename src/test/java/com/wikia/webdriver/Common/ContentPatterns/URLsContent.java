@@ -7,9 +7,7 @@ public class URLsContent {
 	//api
 	public static String wikiaPhp = "wikia.php";
 
-	//Image lightbox test page
 	public static String followingToolbarTest = "QAautoPage";
-	public static String lightboxSelenium = "wiki/LightboxSelenium";
 
 	// Common url component
 	public static String wikiDir = "wiki/";

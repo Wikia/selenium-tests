@@ -123,8 +123,8 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
     @Test(groups = {"Lightbox", "Lightbox008"})
     public void LightboxTest_008_verifyCarousel() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		ArticlePageObject article = base.openLightboxArticle(wikiURL);
-		LightboxComponentObject lightbox = article.clickThumbnailImage();
+		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
+		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
 		lightbox.clickPinButton();
 		lightbox.clickCarouselRight();
 		lightbox.clickCarouselLeft();
