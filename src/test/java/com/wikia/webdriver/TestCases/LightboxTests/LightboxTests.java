@@ -116,11 +116,11 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyUrlInNewWindow(URLsContent.redditDomain);
 		lightbox.clickPlusOneShareButton();
 		lightbox.verifyUrlInNewWindow(URLsContent.googleDomain);
-		lightbox.closeShareScreen();
-		lightbox.closeLightbox();
+		lightbox.clickCloseShareScreenButton();
+		lightbox.clickCloseButton();
 	}
 
-    @Test(groups = {"Lightbox", "Lightbox008"})
+    @Test(groups = {"LightboxTest", "Lightbox008"})
     public void LightboxTest_008_verifyCarousel() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -129,7 +129,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.clickCarouselRight();
 		lightbox.clickCarouselLeft();
 		lightbox.verifyCarouselLeftDisabled();
-		lightbox.closeLightbox();
+		lightbox.clickCloseButton();
     }
 
 	@Test(groups = {"LightboxTest", "LightboxTest_009"})

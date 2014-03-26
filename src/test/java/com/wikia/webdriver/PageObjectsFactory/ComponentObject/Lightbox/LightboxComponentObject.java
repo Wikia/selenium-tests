@@ -45,7 +45,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	@FindBy(css="span.carousel-arrow.previous.disabled")
 	private WebElement carouselLeftDisabled;
 	@FindBy(css="button.more-info-close")
-	private WebElement shareScreenClose;
+	private WebElement closeShareScreenButton;
 	@FindBy(css=".LightboxHeader button.close.wikia-chiclet-button")
 	protected WebElement closeModalButton;
 	@FindBy(css="div.video-media")
@@ -68,10 +68,10 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		return new LightboxComponentObject(driver);
 	}
 
-	public void closeLightbox() {
+	public void clickCloseButton() {
 		waitForElementByElement(closeModalButton);
 		scrollAndClick(closeModalButton);
-		PageObjectLogging.log("closeLightbox ", "lightbox closed", true);
+		PageObjectLogging.log("clickCloseButton ", "lightbox closed", true);
 	}
 
 	public void clickPinButton() {
@@ -89,9 +89,9 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		PageObjectLogging.log("clickShareButton", "share button is clicked", true);
 	}
 
-	public void closeShareScreen() {
-		waitForElementByElement(shareScreenClose);
-		shareScreenClose.click();
+	public void clickCloseShareScreenButton() {
+		waitForElementByElement(closeShareScreenButton);
+		closeShareScreenButton.click();
 	}
 
 	public void verifyShareButtons() {
@@ -129,6 +129,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	}
 
 	public void clickCarouselRight() {
+		waitForElementByElement(carouselRight);
 		carouselRight.click();
 		PageObjectLogging.log("clickCarouselRight", "carousel right button is clicked", true);
 	}
