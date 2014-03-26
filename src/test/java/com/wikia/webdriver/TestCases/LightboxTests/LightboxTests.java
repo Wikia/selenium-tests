@@ -91,7 +91,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 	@Test(groups = {"LightboxTest", "LightboxTest_007"})
 	public void LightboxTest_008_verifyExistenceAndURLsOfSocialButtons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
