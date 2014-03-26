@@ -16,6 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  *
  * @author liz_lux
  * @author Karol 'kkarolk' Kujawiak
+ * @author Saipetch Kongkatong
  *
  */
 public class FilePagePageObject extends WikiBasePageObject {
@@ -40,6 +41,8 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement fileEmbedded;
 	@FindBy(css=".filehistory img.Wikia-video-thumb")
 	private WebElement videoThumbnail;
+	@FindBys(@FindBy(css="ul.tabs li"))
+	private List<WebElement> tabs;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
@@ -112,5 +115,18 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 	public String getImageThumbnailUrl() {
 		return fileEmbedded.findElement(By.cssSelector("img")).getAttribute("src");
+	}
+
+	public void verifyTabsExistVideo() {
+		String[] expectedTabs = { "about", "history", "metadata" };
+		verifyTabsExist(expectedTabs);
+	}
+
+	public void verifyTabsExist(String[] expectedTabs) {
+		Assertion.assertEquals(expectedTabs.length, tabs.size());
+		for (int i=0; i<expectedTabs.length; i++) {
+			String tab = tabs.get(i).getAttribute("data-tab");
+			Assertion.assertEquals(expectedTabs[i], tab);
+		}
 	}
 }

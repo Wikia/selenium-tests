@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.LightboxTests;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -15,13 +14,16 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.RightRail.RelatedV
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialMostLinkedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Saipetch Kongkatong
  *
  * 1. Open lightbox from latest photo,
  * 2. Open lightbox from related video,
@@ -32,6 +34,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
  * 7. Open lightbox from Special:MostLinkedFiles page
  * 8. Open lightbox from article image and verify social buttons
  * 9. Open lightbox from Special:Videos and verify video
+ * 10. Open lightbox from Special:Videos, verify title url and verify file page
  */
 public class LightboxTests extends NewTestTemplateBeforeClass {
 
@@ -140,5 +143,22 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxVideo();
+	}
+
+	@Test(groups = {"LightboxTest", "LightboxTest_010"})
+	public void LightboxTest_010_filepage_video() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
+
+		int itemNumber = 0;
+		String fileUrl = specialVideos.getFileUrl(wikiURL, itemNumber);
+
+		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
+		lightbox.verifyLightboxPopup();
+		lightbox.verifyLightboxVideo();
+		lightbox.verifyTitleUrl(fileUrl);
+		FilePagePageObject filePage = lightbox.clickTitle();
+		filePage.verifyTabsExistVideo();
+		filePage.verifyEmbeddedVideoIsPresent();
 	}
 }

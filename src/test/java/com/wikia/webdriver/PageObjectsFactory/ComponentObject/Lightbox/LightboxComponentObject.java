@@ -4,11 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Saipetch Kongkatong
  */
 public class LightboxComponentObject extends WikiBasePageObject {
 	public LightboxComponentObject(WebDriver driver) {
@@ -39,6 +42,8 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement plusoneShareLink;
 	@FindBy(css="div.video-media")
 	private WebElement mediaContainer;
+	@FindBy(css=".LightboxHeader h1 a")
+	private WebElement titleUrl;
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxHeader);
@@ -104,5 +109,22 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void clickPlusOneShareButton() {
 		plusoneShareLink.click();
 		PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
+	}
+
+	public void verifyTitleUrl(String fileUrl) {
+		Assertion.assertEquals(fileUrl, getTitleUrl());
+	}
+
+	public String getTitleUrl() {
+		String url = titleUrl.getAttribute("href");
+		PageObjectLogging.log("getTitleUrl", "Title url: " + url, true);
+		return url;
+	}
+
+	public FilePagePageObject clickTitle() {
+		waitForElementByElement(titleUrl);
+		titleUrl.click();
+		PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
+		return new FilePagePageObject(driver);
 	}
 }
