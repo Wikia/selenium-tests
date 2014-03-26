@@ -26,24 +26,24 @@ import javax.xml.ws.WebEndpoint;
 
 
 public class LicensedVideoSwapPageObject extends SpecialPageObject {
-    @FindBy(css = ".lvs-history-btn") private WebElement lvsHistoryBtn;
+	@FindBy(css = ".lvs-history-btn") private WebElement lvsHistoryBtn;
 
-    public LicensedVideoSwapPageObject(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-    }
+	public LicensedVideoSwapPageObject(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+	}
 
-    public LicensedVideoSwapHistoryPageObject navigateToHistoryPage() {
-        lvsHistoryBtn.click();
-        PageObjectLogging.log("navigateToHistoryPage", "verify that the lvs history button navigates to right page", true);
-        return new LicensedVideoSwapHistoryPageObject(driver);
-    }
+	public LicensedVideoSwapHistoryPageObject navigateToHistoryPage() {
+		lvsHistoryBtn.click();
+		PageObjectLogging.log("navigateToHistoryPage", "verify that the lvs history button navigates to right page", true);
+		return new LicensedVideoSwapHistoryPageObject(driver);
+	}
 
-    public void verifyOnLvsPage() {
-        String url = driver.getCurrentUrl();
-        String[] urlParts = url.split("/");
-        Assertion.assertEquals(urlParts[urlParts.length - 2] + '/' +urlParts[urlParts.length - 1], URLsContent.specialLicensedVideoSwap);
-        PageObjectLogging.log("verifyOnLvsPage", "verify that the url is the correct one for LVS page", true);
-    }
+	public void verifyOnLvsPage() {
+		String url = driver.getCurrentUrl();
+		String[] urlParts = url.split("/");
+		Assertion.assertEquals(urlParts[urlParts.length - 2] + '/' +urlParts[urlParts.length - 1], URLsContent.specialLicensedVideoSwap);
+		PageObjectLogging.log("verifyOnLvsPage", "verify that the url is the correct one for LVS page", true);
+	}
 }
 

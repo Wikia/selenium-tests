@@ -63,7 +63,7 @@ public class URLsContent {
 	public static final String specialUnusedVideos = "wiki/Special:UnusedVideos";
 	public static final String specialUncategorizedFiles = "wiki/Special:UncategorizedFiles";
 	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
-    public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
+	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";

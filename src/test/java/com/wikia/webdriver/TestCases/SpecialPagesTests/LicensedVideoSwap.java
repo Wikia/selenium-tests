@@ -14,36 +14,36 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  */
 public class LicensedVideoSwap extends NewTestTemplate {
 
-    LicensedVideoSwapPageObject licensedVideoSwap;
+	LicensedVideoSwapPageObject licensedVideoSwap;
 
-    Credentials credentials = config.getCredentials();
+	Credentials credentials = config.getCredentials();
 
-    @BeforeMethod(alwaysRun = true)
-    public void lvsSetup() {
-        WikiBasePageObject wiki = new WikiBasePageObject(driver);
-        wiki.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-        licensedVideoSwap = wiki.openLicensedVideoSwap(wikiURL);
-    }
+	@BeforeMethod(alwaysRun = true)
+	public void lvsSetup() {
+		WikiBasePageObject wiki = new WikiBasePageObject(driver);
+		wiki.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		licensedVideoSwap = wiki.openLicensedVideoSwap(wikiURL);
+	}
 
-    @Test(groups =  {"LicensedVideoSwap001", "LicensedVideoSwap"})
-    public void licensedVideoSwap_navigateToHistory() {
-        LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
-        historyPage.verifyOnHistoryPage();
-    }
+	@Test(groups =  {"LicensedVideoSwap001", "LicensedVideoSwap"})
+	public void licensedVideoSwap_navigateToHistory() {
+		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
+		historyPage.verifyOnHistoryPage();
+	}
 
-    @Test(groups =  {"LicensedVideoSwap002", "LicensedVideoSwap"})
-    public void licensedVideoSwap_navigateToHistoryAndBackToLvs() {
-        LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
-        historyPage.verifyOnHistoryPage();
-        historyPage.navigateToLvsPage();
-        licensedVideoSwap.verifyOnLvsPage();
-    }
+	@Test(groups =  {"LicensedVideoSwap002", "LicensedVideoSwap"})
+	public void licensedVideoSwap_navigateToHistoryAndBackToLvs() {
+		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
+		historyPage.verifyOnHistoryPage();
+		historyPage.navigateToLvsPage();
+		licensedVideoSwap.verifyOnLvsPage();
+	}
 
-    @Test(groups =  {"LicensedVideoSwap003", "LicensedVideoSwap"})
-    public void licensedVideoSwap_undoSwap() {
-        LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
-        historyPage.verifyOnHistoryPage();
-        historyPage.clickUndoSwapLink();
-        historyPage.verifyUndoSucceeded();
-    }
+	@Test(groups =  {"LicensedVideoSwap003", "LicensedVideoSwap"})
+	public void licensedVideoSwap_undoSwap() {
+		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
+		historyPage.verifyOnHistoryPage();
+		historyPage.clickUndoSwapLink();
+		historyPage.verifyUndoSucceeded();
+	}
 }
