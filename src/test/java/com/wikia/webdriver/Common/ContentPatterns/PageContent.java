@@ -55,12 +55,6 @@ public class PageContent {
 	public static String messageWallMessageNonLatinPrefix = "Гсторыя śćąęłńó";
 	public static String messageWallQuotePrefix = "QAQuote";
 
-	//top 10 list
-	public static String top10Description = "DescriptionForList";
-	public static String top10TestListQAfull = "Top_10_list:TestListQA";
-	public static String top10TestListQAshort = "TestListQA";
-	public static String top10listNamePrefix = "Top10list";
-	public static String relatedPageName = "PageToCheckTop10ListFetching";
 	//links
 	public static String externalLink = "http://www.wikia.com/";
 	public static String internalLink = "Formatting";

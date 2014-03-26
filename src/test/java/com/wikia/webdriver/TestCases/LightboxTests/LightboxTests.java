@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.LightboxTests;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -31,11 +32,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
  * 7. Open lightbox from article image and verify social buttons
  * 8. Open lightbox from article image and verify carousel
  */
+
 public class LightboxTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"Lightbox", "Lightbox001"})
+	@Test(groups = {"LightboxTest", "LightboxTest_001"})
 	public void LightboxTest_001_latestPhotos() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);
@@ -44,8 +46,8 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightbox002"})
-	public void LightboxTest_002_releatedVideo() {
+	@Test(groups = {"LightboxTest", "LightboxTest_002"})
+	public void LightboxTest_002_relatedVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);
 		RelatedVideoComponentObject relatedVideos = new RelatedVideoComponentObject(driver);
@@ -53,42 +55,53 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightbox003"})
-	public void LightboxTest_003_unusedFiles() {
+
+	@Test(groups = {"LightboxTest", "LightboxTest_003"})
+	public void LightboxTest_004_unusedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
 		LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightbox004"})
-	public void LightboxTest_004_unusedVideos() {
+	@Test(groups = {"LightboxTest", "LightboxTest_004"})
+	public void LightboxTest_005_unusedVideos() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
 		LightboxComponentObject lightbox = unusedFiles.openLightboxForGridVideo(0);
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightbox005"})
-	public void LightboxTest_005_uncategorizedFiles() {
+	@Test(groups = {"LightboxTest", "LightboxTest_005"})
+	public void LightboxTest_006_uncategorizedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUncategorizedFilesPageObject unusedFiles = base.openSpecialUncategorizedFilesPage(wikiURL);
 		LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightbox006"})
-	public void LightboxTest_006_mostLinkedFiles() {
+	@Test(groups = {"LightboxTest", "LightboxTest_006"})
+	public void LightboxTest_007_mostLinkedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
 		LightboxComponentObject lightbox = unusedFiles.openLightboxForGridImage(0);
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"Lightbox", "Lightbox007"})
-	public void LightboxTest_007_verifyExistenceAndURLsOfSocialButtons() {
+	@Test(groups = {"LightboxTest", "LightboxTest_007"})
+	public void LightboxTest_008_verifyExistenceAndURLsOfSocialButtons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		ArticlePageObject article = base.openLightboxArticle(wikiURL);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
+		ArticlePageObject article = base.openRandomArticle(wikiURL);
+		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
+		visualEditMode.clearContent();
+		PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
+		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
+		photoOptions.setCaption(PageContent.caption);
+		photoOptions.clickAddPhoto();
+		visualEditMode.verifyPhoto();
+		visualEditMode.submitArticle();
+		article.verifyPhoto();
 		LightboxComponentObject lightbox = article.clickThumbnailImage();
 		lightbox.clickPinButton();
 		lightbox.clickShareButton();
@@ -118,4 +131,13 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyCarouselLeftDisabled();
 		lightbox.closeLightbox();
     }
+
+	@Test(groups = {"LightboxTest", "LightboxTest_009"})
+	public void LightboxTest_009_specialVideo() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
+		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
+		lightbox.verifyLightboxPopup();
+		lightbox.verifyLightboxVideo();
+	}
 }

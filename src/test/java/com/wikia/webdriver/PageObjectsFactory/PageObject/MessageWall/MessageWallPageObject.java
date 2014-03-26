@@ -75,7 +75,7 @@ public class MessageWallPageObject extends WikiBasePageObject{
 	{
 		waitForElementByElement(postButton);
 		waitForElementClickableByElement(postButton);
-		postButton.click();
+		scrollAndClick(postButton);
 		PageObjectLogging.log("clickPostButton", "post button is clicked", true);
 	}
 

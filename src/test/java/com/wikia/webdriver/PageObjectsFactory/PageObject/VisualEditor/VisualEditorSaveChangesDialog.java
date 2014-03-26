@@ -9,23 +9,31 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
+ * @author Robert 'rochan' Chan
  */
 public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 
 	@FindBy(
-			css=
-			".ve-init-mw-viewPageTarget-saveDialog-slide-save" +
-			" .ve-ui-flaggableElement-constructive[role='button']"
+		css=
+		".oo-ui-widget.oo-ui-flaggableElement-constructive" +
+		".oo-ui-buttonWidget.oo-ui-pushButtonWidget" +
+		" .oo-ui-labeledElement-label"
 	)
-	private WebElement saveButton;
+	private WebElement publishButton;
+	@FindBy(css=".oo-ui-frame")
+	private WebElement saveDialogIFrame;
 
 	public VisualEditorSaveChangesDialog(WebDriver driver) {
 		super(driver);
 	}
 
 	public ArticlePageObject savePage() {
-		saveButton.click();
+		waitForElementVisibleByElement(saveDialogIFrame);
+		driver.switchTo().frame(saveDialogIFrame);
+		waitForElementByElement(publishButton);
+		waitForElementClickableByElement(publishButton);
+		publishButton.click();
+		driver.switchTo().defaultContent();
 		return new ArticlePageObject(driver);
 	}
 

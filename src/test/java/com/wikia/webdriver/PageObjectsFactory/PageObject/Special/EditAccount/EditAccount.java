@@ -48,7 +48,7 @@ public class EditAccount extends BasePageObject {
 	}
 
 	public void closeAccount(String reason) {
-		closeAccountButton.click();
+		scrollAndClick(closeAccountButton);
 		closeResonField.sendKeys(reason);
 		closeResonField.submit();
 		PageObjectLogging.log(

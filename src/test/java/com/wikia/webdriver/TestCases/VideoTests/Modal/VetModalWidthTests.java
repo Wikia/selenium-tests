@@ -37,7 +37,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
@@ -58,7 +58,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 	public void Vet_Modal_002_widthInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditModePageObject = base.goToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPage(wikiURL, articleTitle);
 		VetOptionsComponentObject vetOptions =
 				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
 		vetOptions.verifyVideoWidth(width);

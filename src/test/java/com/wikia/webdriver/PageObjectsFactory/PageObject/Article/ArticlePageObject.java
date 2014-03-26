@@ -135,6 +135,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement wikiNameHeader;
 	@FindBy(css="#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
+	@FindBy(css=".wikia-menu-button")
+	private WebElement articleEditButton;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -168,8 +170,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 
-	public void verifyFormatting(Formatting format, String content) {
-		waitForElementByElement(articleContentContainer);
+	public void verifyFormattingFromVE(Formatting format, String content) {
+		waitForElementNotVisibleByElement(veMode);
 		List<WebElement> elements = articleContentContainer.findElements(format.getTag());
 		boolean isPresent = false;
 		for (WebElement elem : elements) {
@@ -178,11 +180,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 				break;
 			}
 		}
+		waitForElementByElement(articleEditButton);
 		Assertion.assertTrue(isPresent, "text is not present in the article");
 	}
 
-	public void verifyStyle(Style style, String content) {
-		waitForElementByElement(articleContentContainer);
+	public void verifyStyleFromVE(Style style, String content) {
+		waitForElementNotVisibleByElement(veMode);
 		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
 		boolean isPresent = false;
 		for (WebElement elem : elements) {
@@ -191,6 +194,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 				break;
 			}
 		}
+		waitForElementByElement(articleEditButton);
 		Assertion.assertTrue(isPresent, "text is not present in the article");
 	}
 
@@ -287,7 +291,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public MiniEditorComponentObject triggerCommentReply() {
 		WebElement mostRecentComment = articleComments.get(0);
 		WebElement replyButton = mostRecentComment.findElement(By.cssSelector(replyCommentSelector));
-		replyButton.click();
+		scrollAndClick(replyButton);
 		waitForElementNotVisibleByElement(replyCommentLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
 	}

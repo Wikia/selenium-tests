@@ -2,10 +2,12 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,6 +24,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -52,7 +55,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.SignUp.UserProfilePageO
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialContributionsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreateTopListPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
@@ -78,12 +80,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Top10.Top_10_list;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import org.openqa.selenium.WebDriverException;
+
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -145,6 +142,12 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement protectDropdown;
 	@FindBy(css="#ca-move")
 	protected WebElement renameDropdown;
+	@FindBy(css="#ca-ve-edit")
+	protected WebElement veEditButton;
+	@FindBy(css="body.ve")
+	protected WebElement veMode;
+	@FindBy(css=".editsection>a")
+	protected List<WebElement> sectionEditButtons;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -391,6 +394,26 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
+	public VisualEditorPageObject clickVEEditButton() {
+		waitForElementByElement(veEditButton);
+		veEditButton.click();
+		PageObjectLogging.log("clickVEEditButton", "VE edit button clicked", true, driver);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditorPageObject clickVESectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"clickVESectionEditButton",
+			"VE edit button clicked at section: " + section,
+			true,
+			driver
+		);
+		return new VisualEditorPageObject(driver);
+	}
+
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
@@ -401,7 +424,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditModePageObject(driver);
 	}
 
-	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
+	public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
@@ -480,16 +503,6 @@ public class WikiBasePageObject extends BasePageObject {
 		deleteConfirmationButton.click();
 	}
 
-	public void deleteTop10List(String top10listName) {
-		String top10listURL = driver.getCurrentUrl();
-		getUrl(top10listURL + "?action=delete");
-		clickArticleDeleteConfirmationButton(top10listName);
-		getUrl(top10listURL);
-		waitForTextToBePresentInElementByElement(pageDeletedInfo, "has been deleted.");
-		PageObjectLogging.log("deleteArticle", "top 10 list: "+top10listName+" has been deleted",
-				true, driver);
-	}
-
 	public DeletePageObject deletePage() {
 		String url = urlBuilder.appendQueryStringToURL(driver.getCurrentUrl(), URLsContent.deleteParameter);
 		getUrl(url);
@@ -526,14 +539,6 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementVisibleByElement(flashMessage);
 	}
 
-	public SpecialCreateTopListPageObject createNewTop_10_list(String top_10_list_Name) {
-		getUrl(Global.DOMAIN + "wiki/Special:CreateTopList/" + top_10_list_Name);
-		PageObjectLogging.log("SpecialCreateTopListPageObject",
-				"create top 10 list with name: "+top_10_list_Name, true, driver);
-		return new SpecialCreateTopListPageObject(driver);
-
-	}
-
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
 		getUrl(
 				wikiURL +
@@ -552,24 +557,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new BlogPageObject(driver);
 	}
 
-	public Top_10_list openTop10List(String topTenListName) {
-		URI uri;
-		try {
-			uri = new URI(Global.DOMAIN + "wiki/" + topTenListName);
-			String url = uri.toASCIIString();
-			getUrl(url);
-		} catch (URISyntaxException e) {
-
-			e.printStackTrace();
-		}
-		catch (TimeoutException e) {
-			PageObjectLogging.log("openTop10List",
-					"page loads for more than 30 seconds", true, driver);
-		}
-		PageObjectLogging.log("openTop10List", topTenListName
-				+ " opened", true);
-		return new Top_10_list(driver);
-	}
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);
@@ -655,11 +642,11 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	public String receiveMailWithNewPassowrd() {
-		MailFunctions.deleteAllEmails(Properties.email, Properties.emailPassword);
+	public String receiveMailWithNewPassowrd(String email, String password) {
+		MailFunctions.deleteAllEmails(email, password);
 		String newPassword = MailFunctions.getPasswordFromEmailContent((
 				MailFunctions.getFirstEmailContent(
-						Properties.email, Properties.emailPassword
+						email, password
 						)
 				)
 		);
@@ -1033,8 +1020,26 @@ public class WikiBasePageObject extends BasePageObject {
 		return keysFromDefaultList.toArray();
 	}
 
-	public ArticlePageObject openLightboxArticle(String wikiURL) {
-		getUrl(wikiURL + URLsContent.lightboxSelenium);
-		return new ArticlePageObject(driver);
+	public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+				URLsContent.actionVisualEditParameter
+			)
+		);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				urlBuilder.appendQueryStringToURL(
+					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+					URLsContent.actionVisualEditParameter
+				),
+				URLsContent.redLink
+			)
+		);
+		return new VisualEditorPageObject(driver);
 	}
 }
