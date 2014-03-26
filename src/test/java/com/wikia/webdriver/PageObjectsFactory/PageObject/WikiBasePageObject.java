@@ -40,6 +40,7 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -83,7 +84,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 
 
-public class WikiBasePageObject extends com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject {
+public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "body")
 	protected WebElement body;
@@ -199,7 +200,7 @@ public class WikiBasePageObject extends com.wikia.webdriver.PageObjectsFactory.P
 		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
 	}
 
-public void verifyModalLoginAppeared() {
+	public void verifyModalLoginAppeared() {
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
 	}
@@ -351,10 +352,10 @@ public void verifyModalLoginAppeared() {
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
 		PageObjectLogging.log(
-                "openSpecialMultiWikiFinderPage",
-                "Special MultiWikiFinder page was opened",
-                true
-        );
+				"openSpecialMultiWikiFinderPage",
+				"Special MultiWikiFinder page was opened",
+				true
+		);
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
@@ -425,11 +426,11 @@ public void verifyModalLoginAppeared() {
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
 		getUrl(
-                urlBuilder.appendQueryStringToURL(
-                        driver.getCurrentUrl(),
-                        URLsContent.actionEditParameter
-                )
-        );
+				urlBuilder.appendQueryStringToURL(
+						driver.getCurrentUrl(),
+						URLsContent.actionEditParameter
+				)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -444,13 +445,13 @@ public void verifyModalLoginAppeared() {
 
 	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
 		getUrl(
-                urlBuilder.appendQueryStringToURL(
-                        urlBuilder.appendQueryStringToURL(
-                                wikiURL + URLsContent.wikiDir + article,
-                                URLsContent.actionEditParameter
-                        ),
-                        URLsContent.useDefaultFormat)
-        );
+				urlBuilder.appendQueryStringToURL(
+						urlBuilder.appendQueryStringToURL(
+								wikiURL + URLsContent.wikiDir + article,
+								URLsContent.actionEditParameter
+						),
+						URLsContent.useDefaultFormat)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
