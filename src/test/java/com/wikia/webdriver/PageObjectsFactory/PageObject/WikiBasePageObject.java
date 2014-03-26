@@ -80,9 +80,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 
 
-public class WikiBasePageObject extends BasePageObject {
+public class WikiBasePageObject extends com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject {
 
 	@FindBy(css = "body")
 	protected WebElement body;
@@ -198,7 +199,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
 	}
 
-	public void verifyModalLoginAppeared() {
+public void verifyModalLoginAppeared() {
 		waitForElementByElement(logInModal);
 		PageObjectLogging.log("verifyModalLogin", "verify modal login form is displayed", true);
 	}
@@ -350,10 +351,10 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
 		PageObjectLogging.log(
-			"openSpecialMultiWikiFinderPage",
-			"Special MultiWikiFinder page was opened",
-			true
-		);
+                "openSpecialMultiWikiFinderPage",
+                "Special MultiWikiFinder page was opened",
+                true
+        );
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
@@ -424,11 +425,11 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
 		getUrl(
-			urlBuilder.appendQueryStringToURL(
-				driver.getCurrentUrl(),
-				URLsContent.actionEditParameter
-			)
-		);
+                urlBuilder.appendQueryStringToURL(
+                        driver.getCurrentUrl(),
+                        URLsContent.actionEditParameter
+                )
+        );
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -443,13 +444,13 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
 		getUrl(
-			urlBuilder.appendQueryStringToURL(
-				urlBuilder.appendQueryStringToURL(
-					wikiURL + URLsContent.wikiDir + article,
-					URLsContent.actionEditParameter
-			),
-			URLsContent.useDefaultFormat)
-		);
+                urlBuilder.appendQueryStringToURL(
+                        urlBuilder.appendQueryStringToURL(
+                                wikiURL + URLsContent.wikiDir + article,
+                                URLsContent.actionEditParameter
+                        ),
+                        URLsContent.useDefaultFormat)
+        );
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -476,6 +477,16 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 		return new SpecialUserLoginPageObject(driver);
 	}
+
+    public LicensedVideoSwapPageObject openLicensedVideoSwap (String wikiURL) {
+        getUrl(wikiURL + URLsContent.specialLicensedVideoSwap);
+        PageObjectLogging.log(
+                "LicensedVideoSwapPageObject",
+                "Special:LicensedVideoSwap opened on: " + wikiURL,
+                true
+        );
+        return new LicensedVideoSwapPageObject(driver);
+    }
 
 	public void verifyAvatarPresent() {
 		waitForElementByElement(userProfileAvatar);
@@ -558,10 +569,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
 		getUrl(
-				wikiURL +
-				URLsContent.blogNameSpace.replace("%userName%", userName) +
-				blogTitle
-		);
+                wikiURL +
+                        URLsContent.blogNameSpace.replace("%userName%", userName) +
+                        blogTitle
+        );
 		return new BlogPageObject(driver);
 	}
 
@@ -599,24 +610,24 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
 		waitForElementByElement(specialUserLoginLink);
 		PageObjectLogging.log(
-				"LoginLinkPresent",
-				"Link to login special page present",
-				true, driver
-		);
+                "LoginLinkPresent",
+                "Link to login special page present",
+                true, driver
+        );
 		scrollAndClick(specialUserLoginLink);
 		PageObjectLogging.log(
-				"LoginLinkClicked",
-				"Link to login special page clicked",
-				true, driver
-		);
+                "LoginLinkClicked",
+                "Link to login special page clicked",
+                true, driver
+        );
 
 		return new SpecialUserLoginPageObject(driver);
 	}
 
 	public void verifyNotLoggedInMessage() {
 		waitForTextToBePresentInElementByElement(
-				wikiFirstHeader, PageContent.notLoggedInMessage
-		);
+                wikiFirstHeader, PageContent.notLoggedInMessage
+        );
 		PageObjectLogging.log(
 				"NotLoggedInMessage",
 				"Not logged in message present",
@@ -653,11 +664,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public String receiveMailWithNewPassowrd(String email, String password) {
 		MailFunctions.deleteAllEmails(email, password);
 		String newPassword = MailFunctions.getPasswordFromEmailContent((
-				MailFunctions.getFirstEmailContent(
-						email, password
-						)
-				)
-		);
+                MailFunctions.getFirstEmailContent(
+                        email, password
+                )
+        )
+        );
 		PageObjectLogging.log(
 				"NewPasswordRecived",
 				"New password recived from mail",
