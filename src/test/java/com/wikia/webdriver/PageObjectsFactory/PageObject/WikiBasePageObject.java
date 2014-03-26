@@ -296,7 +296,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
-		getUrl(wikiURL+URLsContent.specialNewVideo);
+		getUrl(wikiURL+URLsContent.specialVideos);
 		return new SpecialVideosPageObject(driver);
 	}
 
