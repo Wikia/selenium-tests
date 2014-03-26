@@ -7,5 +7,6 @@ package com.wikia.webdriver.Common.ContentPatterns;
 public class WikiaGlobalVariables {
 
 	public static String wgPageName = "wgPageName";
+	public static String wgIsArticle = "wgIsArticle";
 
 }

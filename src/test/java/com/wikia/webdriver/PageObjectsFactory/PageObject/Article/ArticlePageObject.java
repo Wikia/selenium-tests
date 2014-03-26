@@ -23,6 +23,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
@@ -217,9 +218,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditModePageObject editArticleUsingDropdown() {
+	public VisualEditModePageObject editArticleInRTEUsingDropdown() {
 		actionsClick(editDropdown);
 		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject editArticleInSrcUsingDropdown() {
+		actionsClick(editDropdown);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public MiniEditorComponentObject triggerCommentArea() {
@@ -677,5 +683,30 @@ public class ArticlePageObject extends WikiBasePageObject {
 		thumbnailImageArticle.click();
 		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
 		return new LightboxComponentObject(driver);
+	}
+
+	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		waitForElementClickableByElement(redLinkToClick);
+		jQueryClick(redLinkToClick);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		waitForElementClickableByElement(redLinkToClick);
+		jQueryClick(redLinkToClick);
+//		articleTitleInputModal.sendKeys(articleTitle);
+		submitModal.click();
+		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject openSrcModeWithRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		waitForElementClickableByElement(redLinkToClick);
+		jQueryClick(redLinkToClick);
+//		articleTitleInputModal.sendKeys(articleTitle);
+		submitModal.click();
+		return new SourceEditModePageObject(driver);
 	}
 }

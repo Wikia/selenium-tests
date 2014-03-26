@@ -104,7 +104,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleContent = PageContent.articleText;
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
+		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submitArticle();
 		article.verifyContent(articleContent);

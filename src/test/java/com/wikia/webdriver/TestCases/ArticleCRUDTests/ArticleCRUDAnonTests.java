@@ -95,7 +95,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
+		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submitArticle();
 		article.verifyContent(articleContent);

@@ -58,7 +58,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifyGallery();
 
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.Gallery);
 		galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
@@ -95,7 +95,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifyGallery();
 
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.removeComponent(Components.Gallery);
 		visualEditMode.verifyComponentRemoved(Components.Gallery);
 	}
@@ -118,7 +118,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifySlideshow();
 
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.Slideshow);
 		slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
@@ -149,7 +149,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifySlideshow();
 
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.removeComponent(Components.Slideshow);
 		visualEditMode.verifyComponentRemoved(Components.Slideshow);
 	}
@@ -172,7 +172,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifySlider();
 
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.Slider);
 		sliderBuilder.selectMenuPosition(MenuPositions.Horizontal);
 		sliderAddPhoto = sliderBuilder.clickAddPhoto();
@@ -203,7 +203,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifySlider();
 
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.removeComponent(Components.Slider);
 		visualEditMode.verifyComponentRemoved(Components.Slider);
 	}
@@ -222,7 +222,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyVideo();
 		visualEditMode.submitArticle();
 		article.verifyVideo();
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.Video);
 		vetOptions.setCaption(PageContent.caption2);
 		vetOptions.update();
@@ -245,7 +245,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyVideo();
 		visualEditMode.submitArticle();
 		article.verifyVideo();
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.removeComponent(Components.Video);
 		visualEditMode.verifyComponentRemoved(Components.Video);
 	}
@@ -263,7 +263,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.Photo);
 		photoOptions.setCaption(PageContent.caption2);
 		photoOptions.clickAddPhoto();
@@ -285,7 +285,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();
-		article.editArticleUsingDropdown();
+		article.editArticleInRTEUsingDropdown();
 		visualEditMode.removeComponent(Components.Photo);
 		visualEditMode.verifyComponentRemoved(Components.Photo);
 	}

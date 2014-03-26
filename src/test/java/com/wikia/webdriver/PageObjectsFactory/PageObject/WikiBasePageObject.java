@@ -156,6 +156,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement rteMode;
 	@FindBy(css="body.rte_source")
 	protected WebElement srcInRteMode;
+	@FindBy(css="body:not(.rte_source):not(.ve):not(.rte_wysiwyg)")
+	protected WebElement srcOnlyMode;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -398,6 +400,13 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SourceEditModePageObject(driver);
 	}
 
+	public SourceEditModePageObject openSrcModeWithMainEditButton() {
+		waitForElementByElement(editButton);
+		editButton.click();
+		PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true, driver);
+		return new SourceEditModePageObject(driver);
+	}
+
 	public WikiArticleEditMode clickEditButton() {
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
@@ -434,11 +443,24 @@ public class WikiBasePageObject extends BasePageObject {
 		sectionEditButton.click();
 		PageObjectLogging.log(
 			"openCKModeWithSectionEditButton",
-			"VE edit button clicked at section: " + section,
+			"RTE edit button clicked at section: " + section,
 			true,
 			driver
 		);
 		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"openSrcModeWithSectionEditButton",
+			"Src edit button clicked at section: " + section,
+			true,
+			driver
+		);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
@@ -1068,19 +1090,5 @@ public class WikiBasePageObject extends BasePageObject {
 			)
 		);
 		return new VisualEditorPageObject(driver);
-	}
-
-	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {
-		WebElement redLinkToClick = redLinks.get(linkNumber);
-		waitForElementClickableByElement(redLinkToClick);
-		jQueryClick(redLinkToClick);
-		return new VisualEditorPageObject(driver);
-	}
-
-	public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
-		WebElement redLinkToClick = redLinks.get(linkNumber);
-		waitForElementClickableByElement(redLinkToClick);
-		jQueryClick(redLinkToClick);
-		return new VisualEditModePageObject(driver);
 	}
 }
