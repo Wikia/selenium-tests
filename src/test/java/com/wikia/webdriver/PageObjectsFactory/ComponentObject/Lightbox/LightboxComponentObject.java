@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.Common.Core.Assertion;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -16,14 +15,14 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(className="WikiaLightbox")
-	private WebElement lightBoxHeader;
 	@FindBy(css=".thumb.thumbinner")
 	private WebElement imageThumbnail;
 	@FindBy(css="#LightboxModal")
 	private WebElement lightBoxModal;
 	@FindBy(css="span[data-pinned-title='Unpin top and bottom bars']")
 	private WebElement pinButton;
+	@FindBy(css=".WikiaLightbox .share")
+	private WebElement shareScreen;
 	@FindBy(css="button.share-button.secondary")
 	private WebElement shareButton;
 	@FindBy(css="div.hero-inner")
@@ -52,7 +51,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement mediaContainer;
 
 	public void verifyLightboxPopup() {
-		waitForElementByElement(lightBoxHeader);
+		waitForElementByElement(lightBoxModal);
 		PageObjectLogging.log("verifyLightboxPopup", "verify lightbox appeared", true);
 	}
 
@@ -92,6 +91,16 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void clickCloseShareScreenButton() {
 		waitForElementByElement(closeShareScreenButton);
 		closeShareScreenButton.click();
+	}
+
+	public void verifyShareScreenClosed() {
+		waitForElementNotVisibleByElement(shareScreen);
+		PageObjectLogging.log("verifyShareScreenClosed", "share screen is closed", true);
+	}
+
+	public void verifyLightboxClosed() {
+		waitForElementNotVisibleByElement(lightBoxModal);
+		PageObjectLogging.log("verifyShareScreenClosed", "share screen is closed", true);
 	}
 
 	public void verifyShareButtons() {

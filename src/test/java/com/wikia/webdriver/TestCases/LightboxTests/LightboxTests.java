@@ -117,7 +117,9 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.clickPlusOneShareButton();
 		lightbox.verifyUrlInNewWindow(URLsContent.googleDomain);
 		lightbox.clickCloseShareScreenButton();
+		lightbox.verifyShareScreenClosed();
 		lightbox.clickCloseButton();
+		lightbox.verifyLightboxClosed();
 	}
 
     @Test(groups = {"LightboxTest", "Lightbox008"})
@@ -129,7 +131,6 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.clickCarouselRight();
 		lightbox.clickCarouselLeft();
 		lightbox.verifyCarouselLeftDisabled();
-		lightbox.clickCloseButton();
     }
 
 	@Test(groups = {"LightboxTest", "LightboxTest_009"})
