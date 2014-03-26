@@ -113,7 +113,6 @@ public class VEEnabledEditorEntryTests extends NewTestTemplateBeforeClass {
 			PageContent.articleNamePrefix + articleName
 		);
 		ck.verifyContentLoaded();
-//		ck.logOut(wikiURL);
 	}
 
 	@Test(
