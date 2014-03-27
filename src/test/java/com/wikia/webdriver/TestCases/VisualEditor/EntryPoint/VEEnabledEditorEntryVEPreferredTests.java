@@ -32,7 +32,7 @@ public class VEEnabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEEanbledEditorEntryTests_VEPreferred", "VEEnabledEditorEntryVEPreferredTests_001"}
+		groups = {"VEEnabledEditorEntryVEPreferred", "VEEnabledEditorEntryVEPreferredTests_001"}
 	)
 	public void VEEnabledEditorEntryVEPreferredTests_001_CreatePageEntry() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -45,7 +45,7 @@ public class VEEnabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEEanbledEditorEntryTests_VEPreferred", "VEEnabledEditorEntryVEPreferredTests_002"}
+		groups = {"VEEnabledEditorEntryVEPreferred", "VEEnabledEditorEntryVEPreferredTests_002"}
 	)
 	public void VEEnabledEditorEntryVEPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
@@ -57,7 +57,7 @@ public class VEEnabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEEanbledEditorEntryTests_VEPreferred", "VEEnabledEditorEntryVEPreferredTests_003"}
+		groups = {"VEEnabledEditorEntryVEPreferred", "VEEnabledEditorEntryVEPreferredTests_003"}
 	)
 	public void VEEnabledEditorEntryVEPreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
@@ -69,7 +69,7 @@ public class VEEnabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEEanbledEditorEntryTests_VEPreferred", "VEEnabledEditorEntryVEPreferredTests_004"}
+		groups = {"VEEnabledEditorEntryVEPreferred", "VEEnabledEditorEntryVEPreferredTests_004"}
 	)
 	public void VEEnabledEditorEntryVEPreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
@@ -81,7 +81,7 @@ public class VEEnabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEEanbledEditorEntryTests_VEPreferred", "VEEnabledEditorEntryVEPreferredTests_005"}
+		groups = {"VEEnabledEditorEntryVEPreferred", "VEEnabledEditorEntryVEPreferredTests_005"}
 	)
 	public void VEEnabledEditorEntryVEPreferredTests_005_URLEntry() {
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
