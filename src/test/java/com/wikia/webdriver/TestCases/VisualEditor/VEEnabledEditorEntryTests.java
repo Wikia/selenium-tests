@@ -109,10 +109,9 @@ public class VEEnabledEditorEntryTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
-		VisualEditModePageObject ck = article.createArticleUsingDropdown(
-			PageContent.articleNamePrefix + articleName
-		);
+		VisualEditModePageObject ck = article.createArticleUsingDropdown(articleName);
 		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -126,6 +125,7 @@ public class VEEnabledEditorEntryTests extends NewTestTemplateBeforeClass {
 			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		VisualEditModePageObject ck = article.editArticleInRTEUsingDropdown();
 		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -139,8 +139,7 @@ public class VEEnabledEditorEntryTests extends NewTestTemplateBeforeClass {
 				base.openArticleByName(wikiURL, URLsContent.testingPage);
 		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
 		ck.verifyContentLoaded();
-		ck.navigateBack();
-		ck.logOut(wikiURL);
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -154,6 +153,7 @@ public class VEEnabledEditorEntryTests extends NewTestTemplateBeforeClass {
 				base.openArticleByName(wikiURL, URLsContent.testingPage);
 		VisualEditModePageObject ck = article.openCKModeWithSectionEditButton(0);
 		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
