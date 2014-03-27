@@ -4,16 +4,9 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoS
  * Created by kenkouot on 3/19/14.
  */
 
-import java.util.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -22,11 +15,9 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapHistoryPageObject;
 
-import javax.xml.ws.WebEndpoint;
-
-
 public class LicensedVideoSwapPageObject extends SpecialPageObject {
-	@FindBy(css = ".lvs-history-btn") private WebElement lvsHistoryBtn;
+	@FindBy(css = ".lvs-history-btn")
+	private WebElement lvsHistoryBtn;
 
 	public LicensedVideoSwapPageObject(WebDriver driver) {
 		super(driver);
