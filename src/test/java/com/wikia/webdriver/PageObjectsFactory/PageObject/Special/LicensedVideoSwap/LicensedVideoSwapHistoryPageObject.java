@@ -48,13 +48,13 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
 		firstUndoLink.click();
 		PageObjectLogging.log("undoSwap", "undo link clicked", true);
 	}
-	
+
 	public void verifyUndoSucceeded() {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		waitForElementByElement(notification);
 		String notificationMsg = notification.getText();
 		Assertion.assertEquals(notificationMsg, "This page has been restored.");
-		PageObjectLogging.log("verifyUndoSucceeded", "able to undo a swapped videokkkkkkkll", true);
+		PageObjectLogging.log("verifyUndoSucceeded", "able to undo a swapped video", true);
 	}
 }
 
