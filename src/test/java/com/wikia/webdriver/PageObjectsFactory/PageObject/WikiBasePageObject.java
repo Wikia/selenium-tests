@@ -416,10 +416,10 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-			"clickVESectionEditButton",
-			"VE edit button clicked at section: " + section,
-			true,
-			driver
+				"clickVESectionEditButton",
+				"VE edit button clicked at section: " + section,
+				true,
+				driver
 		);
 		return new VisualEditorPageObject(driver);
 	}
@@ -436,9 +436,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
 		getUrl(
-			urlBuilder.appendQueryStringToURL(
-				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
-			)
+				urlBuilder.appendQueryStringToURL(
+						wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+				)
 		);
 		return new VisualEditModePageObject(driver);
 	}
@@ -463,7 +463,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public VisualEditorPageObject gotoArticleEditModeVisual(String wikiURL, String article) {
 		getUrl(
 				urlBuilder.appendQueryStringToURL(
-					wikiURL + URLsContent.wikiDir + article, URLsContent.actionVisualEditParameter
+						wikiURL + URLsContent.wikiDir + article, URLsContent.actionVisualEditParameter
 				)
 		);
 		return new VisualEditorPageObject(driver);
@@ -472,22 +472,22 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUserLogin);
 		PageObjectLogging.log(
-			"SpecialUserLoginOnWiki",
-			"Special:UserLogin opened on: " + wikiURL,
-			true
+				"SpecialUserLoginOnWiki",
+				"Special:UserLogin opened on: " + wikiURL,
+				true
 		);
 		return new SpecialUserLoginPageObject(driver);
 	}
 
-    public LicensedVideoSwapPageObject openLicensedVideoSwap (String wikiURL) {
-        getUrl(wikiURL + URLsContent.specialLicensedVideoSwap);
-        PageObjectLogging.log(
-                "LicensedVideoSwapPageObject",
-                "Special:LicensedVideoSwap opened on: " + wikiURL,
-                true
-        );
-        return new LicensedVideoSwapPageObject(driver);
-    }
+	public LicensedVideoSwapPageObject openLicensedVideoSwap (String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialLicensedVideoSwap);
+		PageObjectLogging.log(
+				"LicensedVideoSwapPageObject",
+				"Special:LicensedVideoSwap opened on: " + wikiURL,
+				true
+		);
+		return new LicensedVideoSwapPageObject(driver);
+	}
 
 	public void verifyAvatarPresent() {
 		waitForElementByElement(userProfileAvatar);
@@ -495,7 +495,7 @@ public class WikiBasePageObject extends BasePageObject {
 				"verifyAvatarPresent",
 				"avatar is visible",
 				true
-				);
+		);
 	}
 
 	public void verifyUserLoggedIn(String userName) {
@@ -533,8 +533,8 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyEditButtonNotPresent() {
 		waitForElementNotVisibleByElement(editButton);
 		PageObjectLogging.log(
-			"verifyEditButtonNotPresent",
-			"edit button is not present", true
+				"verifyEditButtonNotPresent",
+				"edit button is not present", true
 		);
 	}
 
@@ -562,18 +562,18 @@ public class WikiBasePageObject extends BasePageObject {
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
 		getUrl(
 				wikiURL +
-				URLsContent.wikiDir +
-				articleName
+						URLsContent.wikiDir +
+						articleName
 		);
 		return new ArticlePageObject(driver);
 	}
 
 	public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
 		getUrl(
-                wikiURL +
-                        URLsContent.blogNameSpace.replace("%userName%", userName) +
-                        blogTitle
-        );
+				wikiURL +
+						URLsContent.blogNameSpace.replace("%userName%", userName) +
+						blogTitle
+		);
 		return new BlogPageObject(driver);
 	}
 
@@ -611,24 +611,24 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
 		waitForElementByElement(specialUserLoginLink);
 		PageObjectLogging.log(
-                "LoginLinkPresent",
-                "Link to login special page present",
-                true, driver
-        );
+				"LoginLinkPresent",
+				"Link to login special page present",
+				true, driver
+		);
 		scrollAndClick(specialUserLoginLink);
 		PageObjectLogging.log(
-                "LoginLinkClicked",
-                "Link to login special page clicked",
-                true, driver
-        );
+				"LoginLinkClicked",
+				"Link to login special page clicked",
+				true, driver
+		);
 
 		return new SpecialUserLoginPageObject(driver);
 	}
 
 	public void verifyNotLoggedInMessage() {
 		waitForTextToBePresentInElementByElement(
-                wikiFirstHeader, PageContent.notLoggedInMessage
-        );
+				wikiFirstHeader, PageContent.notLoggedInMessage
+		);
 		PageObjectLogging.log(
 				"NotLoggedInMessage",
 				"Not logged in message present",
@@ -665,11 +665,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public String receiveMailWithNewPassowrd(String email, String password) {
 		MailFunctions.deleteAllEmails(email, password);
 		String newPassword = MailFunctions.getPasswordFromEmailContent((
-                MailFunctions.getFirstEmailContent(
-                        email, password
-                )
-        )
-        );
+				MailFunctions.getFirstEmailContent(
+						email, password
+				)
+		)
+		);
 		PageObjectLogging.log(
 				"NewPasswordRecived",
 				"New password recived from mail",
@@ -727,101 +727,101 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public String logInCookie(String userName, String password) {
-			try {
-				DefaultHttpClient httpclient = new DefaultHttpClient();
+		try {
+			DefaultHttpClient httpclient = new DefaultHttpClient();
 
-				HttpPost httpPost = new HttpPost(Global.DOMAIN + "api.php");
-				List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+			HttpPost httpPost = new HttpPost(Global.DOMAIN + "api.php");
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
-				nvps.add(new BasicNameValuePair("action", "login"));
-				nvps.add(new BasicNameValuePair("format", "xml"));
-				nvps.add(new BasicNameValuePair("lgname", userName));
-				nvps.add(new BasicNameValuePair("lgpassword", password));
+			nvps.add(new BasicNameValuePair("action", "login"));
+			nvps.add(new BasicNameValuePair("format", "xml"));
+			nvps.add(new BasicNameValuePair("lgname", userName));
+			nvps.add(new BasicNameValuePair("lgpassword", password));
 
-				httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
-				HttpResponse response = null;
+			HttpResponse response = null;
+
+			response = httpclient.execute(httpPost);
+
+			HttpEntity entity = response.getEntity();
+			String xmlResponse = null;
+
+			xmlResponse = EntityUtils.toString(entity);
+
+			String[] xmlResponseArr = xmlResponse.split("\"");
+			String token = xmlResponseArr[5];
+
+			// System.out.println(token);
+
+			while (xmlResponseArr.length < 11) {// sometimes first request
+				// does
+				// not contain full
+				// information,
+				// in such situation
+				// xmlResponseArr.length <
+				// 11
+				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
+
+				nvps2.add(new BasicNameValuePair("action", "login"));
+				nvps2.add(new BasicNameValuePair("format", "xml"));
+				nvps2.add(new BasicNameValuePair("lgname", userName));
+				nvps2.add(new BasicNameValuePair("lgpassword", password));
+				nvps2.add(new BasicNameValuePair("lgtoken", token));
+
+				httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
+						HTTP.UTF_8));
 
 				response = httpclient.execute(httpPost);
 
-				HttpEntity entity = response.getEntity();
-				String xmlResponse = null;
+				entity = response.getEntity();
 
 				xmlResponse = EntityUtils.toString(entity);
 
-				String[] xmlResponseArr = xmlResponse.split("\"");
-				String token = xmlResponseArr[5];
-
-				// System.out.println(token);
-
-				while (xmlResponseArr.length < 11) {// sometimes first request
-					// does
-					// not contain full
-					// information,
-					// in such situation
-					// xmlResponseArr.length <
-					// 11
-					List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-
-					nvps2.add(new BasicNameValuePair("action", "login"));
-					nvps2.add(new BasicNameValuePair("format", "xml"));
-					nvps2.add(new BasicNameValuePair("lgname", userName));
-					nvps2.add(new BasicNameValuePair("lgpassword", password));
-					nvps2.add(new BasicNameValuePair("lgtoken", token));
-
-					httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
-							HTTP.UTF_8));
-
-					response = httpclient.execute(httpPost);
-
-					entity = response.getEntity();
-
-					xmlResponse = EntityUtils.toString(entity);
-
-					xmlResponseArr = xmlResponse.split("\"");
-				}
-
-				String domain = (Global.DOMAIN.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("$.cookie('" + xmlResponseArr[11]
-						+ "_session', '" + xmlResponseArr[13]
-						+ "', {'domain': '"+domain+"', 'path': '/'})");
-				js.executeScript("$.cookie('" + xmlResponseArr[11]
-						+ "UserName', '" + xmlResponseArr[7]
-						+ "', {'domain': '"+domain+"', 'path': '/'})");
-				js.executeScript("$.cookie('" + xmlResponseArr[11]
-						+ "UserID', '" + xmlResponseArr[5]
-						+ "', {'domain': '"+domain+"', 'path': '/'})");
-				js.executeScript("$.cookie('" + xmlResponseArr[11]
-						+ "Token', '" + xmlResponseArr[9]
-						+ "', {'domain': '"+domain+"' , 'path': '/'})");
-				try {
-					driver.get(Global.DOMAIN + "wiki/Special:Random");
-				} catch (TimeoutException e) {
-					PageObjectLogging.log("loginCookie",
-							"page timeout after login by cookie", true);
-				}
-				verifyUserLoggedIn(userName);
-
-				return xmlResponseArr[11];
-			} catch (UnsupportedEncodingException e) {
-				PageObjectLogging.log("logInCookie",
-						"UnsupportedEncodingException", false);
-				return null;
-			} catch (ClientProtocolException e) {
-				PageObjectLogging.log("logInCookie", "ClientProtocolException",
-						false);
-				return null;
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
+				xmlResponseArr = xmlResponse.split("\"");
 			}
+
+			String domain = (Global.DOMAIN.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "_session', '" + xmlResponseArr[13]
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "UserName', '" + xmlResponseArr[7]
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "UserID', '" + xmlResponseArr[5]
+					+ "', {'domain': '"+domain+"', 'path': '/'})");
+			js.executeScript("$.cookie('" + xmlResponseArr[11]
+					+ "Token', '" + xmlResponseArr[9]
+					+ "', {'domain': '"+domain+"' , 'path': '/'})");
+			try {
+				driver.get(Global.DOMAIN + "wiki/Special:Random");
+			} catch (TimeoutException e) {
+				PageObjectLogging.log("loginCookie",
+						"page timeout after login by cookie", true);
+			}
+			verifyUserLoggedIn(userName);
+
+			return xmlResponseArr[11];
+		} catch (UnsupportedEncodingException e) {
+			PageObjectLogging.log("logInCookie",
+					"UnsupportedEncodingException", false);
+			return null;
+		} catch (ClientProtocolException e) {
+			PageObjectLogging.log("logInCookie", "ClientProtocolException",
+					false);
+			return null;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
+	}
 
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
@@ -974,8 +974,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void disableCaptcha() {
 		String url = urlBuilder.appendQueryStringToURL(
-			driver.getCurrentUrl(),
-			URLsContent.disableCaptchaParameter
+				driver.getCurrentUrl(),
+				URLsContent.disableCaptchaParameter
 		);
 		getUrl(url);
 	}
@@ -1002,7 +1002,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void verifyWgVariableValueSameAsProvided(
-		WikiFactoryVariables variableName, String providedValue, String url
+			WikiFactoryVariables variableName, String providedValue, String url
 	) {
 		Object[] keysFromPage = getVaribaleValueFromPage(url, variableName.toString());
 		Object[] keysFromProvided = extractKeysFromWgVariable(providedValue);
@@ -1012,9 +1012,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 		if (Arrays.equals(keysFromProvided, keysFromPage)) {
 			PageObjectLogging.log(
-				"VariablesAreTheSame",
-				"Variable on wiki and on community are the same",
-				true
+					"VariablesAreTheSame",
+					"Variable on wiki and on community are the same",
+					true
 			);
 		} else {
 			throw new WebDriverException("Values on community and on wiki are different");
@@ -1025,7 +1025,7 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(url);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Map<String, Integer> variableValueFromPage = (Map<String, Integer>) js.executeScript(
-			"return window[arguments[0]]", variableName
+				"return window[arguments[0]]", variableName
 		);
 		return variableValueFromPage.keySet().toArray();
 	}
@@ -1042,23 +1042,23 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
 		getUrl(
-			urlBuilder.appendQueryStringToURL(
-				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
-				URLsContent.actionVisualEditParameter
-			)
+				urlBuilder.appendQueryStringToURL(
+						wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+						URLsContent.actionVisualEditParameter
+				)
 		);
 		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
 		getUrl(
-			urlBuilder.appendQueryStringToURL(
 				urlBuilder.appendQueryStringToURL(
-					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
-					URLsContent.actionVisualEditParameter
-				),
-				URLsContent.redLink
-			)
+						urlBuilder.appendQueryStringToURL(
+								wikiURL + URLsContent.wikiDir +	getNameForArticle(),
+								URLsContent.actionVisualEditParameter
+						),
+						URLsContent.redLink
+				)
 		);
 		return new VisualEditorPageObject(driver);
 	}
