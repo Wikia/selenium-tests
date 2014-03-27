@@ -25,7 +25,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 
 	@BeforeMethod(groups = {"RTEDisabledEditorEntryDefaultPreferred"})
 	public void setup_defaultPreferred() {
-//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.rteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 	}

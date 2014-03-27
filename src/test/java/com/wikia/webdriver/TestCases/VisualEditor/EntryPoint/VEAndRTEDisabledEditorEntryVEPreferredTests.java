@@ -25,7 +25,7 @@ public class VEAndRTEDisabledEditorEntryVEPreferredTests extends NewTestTemplate
 
 	@BeforeMethod(groups = {"VEAndRTEDisabledEditorEntryVEPreferred"})
 	public void setup_VEPreferred() {
-//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 	}
