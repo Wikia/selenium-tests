@@ -24,7 +24,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
  * @author Karol 'kkarolk' Kujawiak
  *
  * 1. Open lightbox from latest photo,
- * 2. Open lightbox from raletad video,
+ * 2. Open lightbox from related video,
  * 3. Open lightbox from Special:UnusedFiles page
  * 4. Open lightbox from Special:UnusedVideos page
  * 5. Open lightbox from Special:UncategorizedFiles page
