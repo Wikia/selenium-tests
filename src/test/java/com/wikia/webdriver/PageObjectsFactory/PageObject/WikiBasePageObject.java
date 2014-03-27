@@ -473,7 +473,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditModePageObject(driver);
 	}
 
-	public VisualEditModePageObject goToArticleEditPage(String wikiURL, String article) {
+	public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter

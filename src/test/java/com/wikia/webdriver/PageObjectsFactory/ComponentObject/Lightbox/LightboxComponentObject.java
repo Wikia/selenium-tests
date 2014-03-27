@@ -37,10 +37,17 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement redditShareLink;
 	@FindBy(css="a.plusone")
 	private WebElement plusoneShareLink;
+	@FindBy(css="div.video-media")
+	private WebElement mediaContainer;
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxHeader);
 		PageObjectLogging.log("verifyLightboxPopup", "verify lightbox appeared", true);
+	}
+
+	public void verifyLightboxVideo() {
+		waitForElementByElement(mediaContainer);
+		PageObjectLogging.log("verifyLightboxVideo", "verify lightbox video appeared", true);
 	}
 
 	public LightboxComponentObject openLightbox() {

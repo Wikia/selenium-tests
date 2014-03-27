@@ -10,7 +10,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 
 	private WamPageObject wam;
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void wam_000_setup() {
 		wam = new WamPageObject(driver);
 		wam.openWamPage(wikiCorporateURL);

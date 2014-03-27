@@ -26,7 +26,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 	public void RelatedVideo_001_Provider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
+		VisualEditModePageObject rVmoduleMessageEdit = base.navigateToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
 		article.openRandomArticle(wikiURL);
@@ -43,7 +43,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 	public void RelatedVideo_002_Library() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		VisualEditModePageObject rVmoduleMessageEdit = base.goToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
+		VisualEditModePageObject rVmoduleMessageEdit = base.navigateToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(VideoContent.youtubeVideoURL2name);
 		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
 		article.openRandomArticle(wikiURL);
