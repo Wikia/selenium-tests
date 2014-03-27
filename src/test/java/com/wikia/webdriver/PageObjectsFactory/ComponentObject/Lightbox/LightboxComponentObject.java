@@ -43,7 +43,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	@FindBy(css="div.video-media")
 	private WebElement videoContainer;
 	@FindBy(css=".LightboxHeader h1 a")
-	private WebElement titleUrl;
+	private WebElement titleLink;
 	@FindBy(css=".WikiaLightbox div:not(.video-media)")
 	private WebElement imageContainer;
 
@@ -123,14 +123,14 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	}
 
 	public String getTitleUrl() {
-		String url = titleUrl.getAttribute("href");
+		String url = titleLink.getAttribute("href");
 		PageObjectLogging.log("getTitleUrl", "Title url: " + url, true);
 		return url;
 	}
 
 	public FilePagePageObject clickTitle() {
-		waitForElementByElement(titleUrl);
-		titleUrl.click();
+		waitForElementByElement(titleLink);
+		titleLink.click();
 		PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
 		return new FilePagePageObject(driver);
 	}
