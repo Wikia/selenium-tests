@@ -122,7 +122,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxClosed();
 	}
 
-    @Test(groups = {"LightboxTest", "Lightbox008"})
+    @Test(groups = {"LightboxTest", "Lightbox_008"})
     public void LightboxTest_008_verifyCarousel() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
