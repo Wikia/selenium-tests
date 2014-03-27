@@ -25,22 +25,22 @@ public class LicensedVideoSwap extends NewTestTemplate {
 		licensedVideoSwap = wiki.openLicensedVideoSwap(wikiURL);
 	}
 
-	@Test(groups =  {"LicensedVideoSwap001", "LicensedVideoSwap"})
-	public void licensedVideoSwap_navigateToHistory() {
+	@Test(groups =  {"LicensedVideoSwap_001", "LicensedVideoSwap"})
+	public void LicensedVideoSwap_001_navigateToHistory() {
 		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
 		historyPage.verifyOnHistoryPage();
 	}
 
-	@Test(groups =  {"LicensedVideoSwap002", "LicensedVideoSwap"})
-	public void licensedVideoSwap_navigateToHistoryAndBackToLvs() {
+	@Test(groups =  {"LicensedVideoSwap_002", "LicensedVideoSwap"})
+	public void LicensedVideoSwap_002_navigateToHistoryAndBackToLvs() {
 		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
 		historyPage.verifyOnHistoryPage();
 		historyPage.navigateToLvsPage();
 		licensedVideoSwap.verifyOnLvsPage();
 	}
 
-	@Test(groups =  {"LicensedVideoSwap003", "LicensedVideoSwap"})
-	public void licensedVideoSwap_undoSwap() {
+	@Test(groups =  {"LicensedVideoSwap_003", "LicensedVideoSwap"})
+	public void LicensedVideoSwap_003_undoSwap() {
 		LicensedVideoSwapHistoryPageObject historyPage = licensedVideoSwap.navigateToHistoryPage();
 		historyPage.verifyOnHistoryPage();
 		historyPage.clickUndoSwapLink();
