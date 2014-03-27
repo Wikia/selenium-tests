@@ -91,6 +91,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void clickCloseShareScreenButton() {
 		waitForElementByElement(closeShareScreenButton);
 		closeShareScreenButton.click();
+		PageObjectLogging.log("clickCloseShareScreenButton", "close share screen button was clicked", true);
 	}
 
 	public void verifyShareScreenClosed() {
@@ -100,7 +101,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
 	public void verifyLightboxClosed() {
 		waitForElementNotVisibleByElement(lightBoxModal);
-		PageObjectLogging.log("verifyShareScreenClosed", "share screen is closed", true);
+		PageObjectLogging.log("verifyShareScreenClosed", "share lightbox is closed", true);
 	}
 
 	public void verifyShareButtons() {
