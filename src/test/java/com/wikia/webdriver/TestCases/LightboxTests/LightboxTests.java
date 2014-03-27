@@ -162,6 +162,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		FilePagePageObject filePage = lightbox.clickTitle();
 		filePage.verifyTabsExistVideo();
 		filePage.verifyEmbeddedVideoIsPresent();
+		filePage.verifyVideoAutoplay(true);
 	}
 
 	@Test(groups = {"LightboxTest", "LightboxTest_011"})
