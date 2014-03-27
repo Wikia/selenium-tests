@@ -109,10 +109,9 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
-		VisualEditModePageObject ck = article.createArticleUsingDropdown(
-			PageContent.articleNamePrefix + articleName
-		);
+		VisualEditModePageObject ck = article.createArticleUsingDropdown(articleName);
 		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -126,6 +125,7 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		VisualEditModePageObject ck = article.editArticleInRTEUsingDropdown();
 		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -139,6 +139,7 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 				base.openArticleByName(wikiURL, URLsContent.testingPage);
 		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
 		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -152,6 +153,7 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 				base.openArticleByName(wikiURL, URLsContent.testingPage);
 		VisualEditModePageObject ck = article.openCKModeWithSectionEditButton(0);
 		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -178,6 +180,7 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 				base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
 		src.verifySourceOnlyMode();
+
 	}
 
 	@Test(
@@ -242,10 +245,9 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
-		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
+		VisualEditModePageObject ck = article.createArticleUsingDropdown(articleName);
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -256,11 +258,10 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, base.getTimeStamp());
-		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
+			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		VisualEditModePageObject ck = article.editArticleInRTEUsingDropdown();
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -271,11 +272,10 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.testingPage);
-		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
+				base.openArticleByName(wikiURL, URLsContent.testingPage);
+		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(
@@ -286,11 +286,10 @@ public class VEDisabledEditorEntryTests extends NewTestTemplateBeforeClass {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.testingPage);
-		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
+				base.openArticleByName(wikiURL, URLsContent.testingPage);
+		VisualEditModePageObject ck = article.openCKModeWithSectionEditButton(0);
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 
 	@Test(

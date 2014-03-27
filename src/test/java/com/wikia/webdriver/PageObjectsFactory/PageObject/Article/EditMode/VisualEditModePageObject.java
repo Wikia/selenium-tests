@@ -21,6 +21,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -73,6 +74,8 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement contextFrame;
 	@FindBy(css=".cke_dialog_body")
 	private WebElement addTableLightbox;
+	@FindBy(css="#wpSave")
+	private WebElement publishButton;
 
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
@@ -424,6 +427,12 @@ public class VisualEditModePageObject extends EditMode {
 	public void clickPropertiesTableButton() {
 		selectFromContextMenu(propertiesItem);
 		waitForElementByElement(addTableLightbox);
+	}
+
+	public ArticlePageObject clickPublishButton() {
+		waitForElementByElement(publishButton);
+		publishButton.click();
+		return new ArticlePageObject(driver);
 	}
 
 }

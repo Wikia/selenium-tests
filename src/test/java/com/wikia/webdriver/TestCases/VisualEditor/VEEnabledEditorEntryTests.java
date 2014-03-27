@@ -139,6 +139,8 @@ public class VEEnabledEditorEntryTests extends NewTestTemplateBeforeClass {
 				base.openArticleByName(wikiURL, URLsContent.testingPage);
 		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
 		ck.verifyContentLoaded();
+		ck.navigateBack();
+		ck.logOut(wikiURL);
 	}
 
 	@Test(
