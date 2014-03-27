@@ -19,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 
 /**
@@ -35,6 +36,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPa
  * 8. Open lightbox from article image and verify social buttons
  * 9. Open lightbox from Special:Videos and verify video
  * 10. Open lightbox from Special:Videos, verify title url and verify file page
+ * 10. Open lightbox from Special:NewFiles, verify title url and verify file page
  */
 public class LightboxTests extends NewTestTemplateBeforeClass {
 
@@ -161,4 +163,21 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		filePage.verifyTabsExistVideo();
 		filePage.verifyEmbeddedVideoIsPresent();
 	}
+
+	@Test(groups = {"LightboxTest", "LightboxTest_011"})
+	public void LightboxTest_011_filepage_image() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
+
+		int itemNumber = 0;
+		String fileUrl = specialNewFiles.getFileUrl(wikiURL, itemNumber);
+
+		LightboxComponentObject lightbox = specialNewFiles.openLightboxForGridVideo(itemNumber);
+		lightbox.verifyLightboxPopup();
+		lightbox.verifyLightboxImage();
+		lightbox.verifyTitleUrl(fileUrl);
+		FilePagePageObject filePage = lightbox.clickTitle();
+		filePage.verifyTabsExistImage();
+	}
+
 }

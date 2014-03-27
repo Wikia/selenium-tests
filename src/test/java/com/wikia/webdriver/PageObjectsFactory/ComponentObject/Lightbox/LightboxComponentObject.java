@@ -41,9 +41,11 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	@FindBy(css="a.plusone")
 	private WebElement plusoneShareLink;
 	@FindBy(css="div.video-media")
-	private WebElement mediaContainer;
+	private WebElement videoContainer;
 	@FindBy(css=".LightboxHeader h1 a")
 	private WebElement titleUrl;
+	@FindBy(css=".WikiaLightbox div:not(.video-media)")
+	private WebElement imageContainer;
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxHeader);
@@ -51,8 +53,13 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	}
 
 	public void verifyLightboxVideo() {
-		waitForElementByElement(mediaContainer);
+		waitForElementByElement(videoContainer);
 		PageObjectLogging.log("verifyLightboxVideo", "verify lightbox video appeared", true);
+	}
+
+	public void verifyLightboxImage() {
+		waitForElementByElement(imageContainer);
+		PageObjectLogging.log("verifyLightboxImage", "Verify lightbox image appeared", true);
 	}
 
 	public LightboxComponentObject openLightbox() {
