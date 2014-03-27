@@ -28,7 +28,7 @@ public class RTEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateB
 	@BeforeMethod(groups = {"RTEDisabledEditorEntrySourcePreferred"})
 	public void setup_sourcePreferred() {
 //		wikiURL = urlBuilder.getUrlForWiki(URLsContent.rteDisabledTestMainPage);
-		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 	}
 

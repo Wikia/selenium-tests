@@ -28,7 +28,7 @@ public class VEAndRTEDisabledEditorEntryDefaultPreferredTests extends NewTestTem
 	@BeforeMethod(groups = {"VEAndRTEDisabledEditorEntryDefaultPreferred"})
 	public void setup_defaultPreferred() {
 //		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
-		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 	}
 

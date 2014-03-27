@@ -28,7 +28,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	@BeforeMethod(groups = {"VEDisabledEditorEntrySourcePreferred"})
 	public void setup_sourcePreferred() {
 //		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
-		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 	}
 
