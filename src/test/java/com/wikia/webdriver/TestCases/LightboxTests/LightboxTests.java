@@ -159,6 +159,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxVideo();
 		lightbox.verifyTitleUrl(fileUrl);
+		lightbox.verifyMoreInfoUrl(fileUrl);
 		FilePagePageObject filePage = lightbox.clickTitle();
 		filePage.verifyTabsExistVideo();
 		filePage.verifyEmbeddedVideoIsPresent();
@@ -177,6 +178,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxImage();
 		lightbox.verifyTitleUrl(fileUrl);
+		lightbox.verifyMoreInfoUrl(fileUrl);
 		FilePagePageObject filePage = lightbox.clickTitle();
 		filePage.verifyTabsExistImage();
 	}

@@ -44,6 +44,8 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement videoContainer;
 	@FindBy(css=".LightboxHeader h1 a")
 	private WebElement titleLink;
+	@FindBy(css="a.more-info-button")
+	private WebElement moreInfoLink;
 	@FindBy(css=".WikiaLightbox div:not(.video-media)")
 	private WebElement imageContainer;
 
@@ -119,7 +121,9 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	}
 
 	public void verifyTitleUrl(String fileUrl) {
-		Assertion.assertEquals(fileUrl, getTitleUrl());
+		String titleUrl = getTitleUrl();
+		Assertion.assertEquals(fileUrl, titleUrl);
+		verifyMoreInfoUrl(titleUrl);
 	}
 
 	public String getTitleUrl() {
@@ -133,5 +137,13 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		titleLink.click();
 		PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
 		return new FilePagePageObject(driver);
+	}
+
+	public void verifyMoreInfoUrl(String fileUrl) {
+		Assertion.assertEquals(fileUrl, getMoreInfoUrl());
+	}
+
+	public String getMoreInfoUrl() {
+		return moreInfoLink.getAttribute("href");
 	}
 }
