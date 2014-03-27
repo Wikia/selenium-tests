@@ -23,7 +23,7 @@ public class RTEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateB
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
-	String wikiURL;
+//	String wikiURL;
 
 	@BeforeMethod(groups = {"RTEDisabledEditorEntrySourcePreferred"})
 	public void setup_sourcePreferred() {

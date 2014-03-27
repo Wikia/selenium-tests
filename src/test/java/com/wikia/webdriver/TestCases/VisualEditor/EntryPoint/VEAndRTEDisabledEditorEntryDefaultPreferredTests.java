@@ -23,7 +23,7 @@ public class VEAndRTEDisabledEditorEntryDefaultPreferredTests extends NewTestTem
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
-	String wikiURL;
+//	String wikiURL;
 
 	@BeforeMethod(groups = {"VEAndRTEDisabledEditorEntryDefaultPreferred"})
 	public void setup_defaultPreferred() {

@@ -22,7 +22,7 @@ public class VEEnabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeC
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
-	String wikiURL;
+//	String wikiURL;
 
 	@BeforeMethod(groups = {"VEEnabledEditorEntryVEPreferred"})
 	public void setup_VEPreferred() {
