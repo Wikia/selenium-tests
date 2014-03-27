@@ -23,7 +23,7 @@ public class VEEnabledEditorEntryDefaultPreferredTests extends NewTestTemplateBe
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 
-	@BeforeMethod(groups = {"VEEanbledEditorEntryTests_defaultPreferred"})
+	@BeforeMethod(groups = {"VEEnabledEditorEntryDefaultPreferred"})
 	public void setup_defaultPreferred() {
 //		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
