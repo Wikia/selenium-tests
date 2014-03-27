@@ -32,6 +32,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
 	}
 
 	public LicensedVideoSwapPageObject navigateToLvsPage() {
+		waitForElementByBy(backToLvsBtn);
 		backToLvsBtn.click();
 		PageObjectLogging.log("navigateToLvsPage", "lvs back button navigates to lvs page", true);
 		return new LicensedVideoSwapPageObject(driver);
@@ -47,13 +48,13 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
 		firstUndoLink.click();
 		PageObjectLogging.log("undoSwap", "undo link clicked", true);
 	}
-
+	
 	public void verifyUndoSucceeded() {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		waitForElementByElement(notification);
 		String notificationMsg = notification.getText();
 		Assertion.assertEquals(notificationMsg, "This page has been restored.");
-		PageObjectLogging.log("verifyUndoSucceeded", "able to undo a swapped video", true);
+		PageObjectLogging.log("verifyUndoSucceeded", "able to undo a swapped videokkkkkkkll", true);
 	}
 }
 
