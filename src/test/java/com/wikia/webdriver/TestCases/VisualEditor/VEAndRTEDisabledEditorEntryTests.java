@@ -26,7 +26,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_VEPreferred", "VEAndRTEDisabledEditorEntryTests_001"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_001_CreatePageEntry_vePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
@@ -44,7 +44,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_VEPreferred", "VEAndRTEDisabledEditorEntryTests_002"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_002_MainEditEntry_vePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		ArticlePageObject article =
@@ -59,7 +59,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_VEPreferred", "VEAndRTEDisabledEditorEntryTests_003"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_003_RedlinkEntry_vePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		ArticlePageObject article =
@@ -74,7 +74,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_VEPreferred", "VEAndRTEDisabledEditorEntryTests_004"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_004_SectionEditEntry_vePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		ArticlePageObject article =
@@ -89,7 +89,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_VEPreferred", "VEAndRTEDisabledEditorEntryTests_005"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_005_URLEntry_vePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -102,7 +102,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_CKPreferred", "VEAndRTEDisabledEditorEntryTests_006"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_006_CreatePageEntry_ckPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 		ArticlePageObject article =
@@ -115,7 +115,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_CKPreferred", "VEAndRTEDisabledEditorEntryTests_007"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_007_MainEditEntry_ckPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 		ArticlePageObject article =
@@ -128,7 +128,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_CKPreferred", "VEAndRTEDisabledEditorEntryTests_008"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_008_RedlinkEntry_ckPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 		ArticlePageObject article =
@@ -141,7 +141,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_CKPreferred", "VEAndRTEDisabledEditorEntryTests_009"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_009_SectionEditEntry_ckPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 		ArticlePageObject article =
@@ -154,7 +154,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_CKPreferred", "VEAndRTEDisabledEditorEntryTests_010"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_010_URLEntry_ckPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -167,7 +167,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_sourcePreferred", "VEAndRTEDisabledEditorEntryTests_011"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_011_CreatePageEntry_sourcePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 		ArticlePageObject article =
@@ -180,7 +180,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_sourcePreferred", "VEAndRTEDisabledEditorEntryTests_012"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_012_MainEditEntry_sourcePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 		ArticlePageObject article =
@@ -193,7 +193,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_sourcePreferred", "VEAndRTEDisabledEditorEntryTests_013"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_013_RedlinkEntry_sourcePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 		ArticlePageObject article =
@@ -206,7 +206,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_sourcePreferred", "VEAndRTEDisabledEditorEntryTests_014"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_014_SectionEditEntry_sourcePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 		ArticlePageObject article =
@@ -219,7 +219,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_sourcePreferred", "VEAndRTEDisabledEditorEntryTests_015"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_015_URLEntry_sourcePreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -232,7 +232,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_defaultPreferred", "VEAndRTEDisabledEditorEntryTests_016"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_016_CreatePageEntry_defaultPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
@@ -245,7 +245,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_defaultPreferred", "VEAndRTEDisabledEditorEntryTests_017"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_017_MainEditEntry_defaultPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
@@ -258,7 +258,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_defaultPreferred", "VEAndRTEDisabledEditorEntryTests_018"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_018_RedlinkEntry_defaultPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
@@ -271,7 +271,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_defaultPreferred", "VEAndRTEDisabledEditorEntryTests_019"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_019_SectionEditEntry_defaultPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		ArticlePageObject article =
@@ -284,7 +284,7 @@ public class VEAndRTEDisabledEditorEntryTests extends NewTestTemplateBeforeClass
 			groups = {"VEAndRTEDisabledEditorEntryTests", "VEAndRTEDisabledEditorEntryTests_defaultPreferred", "VEAndRTEDisabledEditorEntryTests_020"}
 	)
 	public void VEAndRTEDisabledEditorEntryTests_020_URLEntry_defaultPreferred() {
-//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+//			String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
