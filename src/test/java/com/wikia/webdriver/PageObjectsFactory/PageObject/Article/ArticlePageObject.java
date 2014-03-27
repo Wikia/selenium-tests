@@ -19,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuil
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -139,6 +140,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImageArticle;
 	@FindBy(css=".wikia-menu-button")
 	private WebElement articleEditButton;
+	@FindBy(css="#CreatePageDialogBlank")
+	private WebElement blankPageRadioButton;
+	@FindBy(css="#CreatePageDialogFormat")
+	private WebElement standardLayoutPageRadioButton;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -694,11 +699,16 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
 		WebElement redLinkToClick = redLinks.get(linkNumber);
-		waitForElementClickableByElement(redLinkToClick);
-		jQueryClick(redLinkToClick);
+		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
 //		articleTitleInputModal.sendKeys(articleTitle);
-		submitModal.click();
+		articleModal.createPageWithBlankLayout("");
 		return new VisualEditModePageObject(driver);
+	}
+
+	private CreateArticleModalComponentObject clickRedLink(WebElement redLink) {
+		waitForElementClickableByElement(redLink);
+		jQueryClick(redLink);
+		return new CreateArticleModalComponentObject(driver);
 	}
 
 	public SourceEditModePageObject openSrcModeWithRedLinks(int linkNumber) {

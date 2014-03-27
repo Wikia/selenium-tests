@@ -1,12 +1,13 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  *
@@ -22,7 +23,7 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
     private WebElement standardRadioButton;
     @FindBy (css = "#CreatePageDialogBlank")
     private WebElement blankRadioButton;
-    @FindBy (css = ".wikia-button.createpage")
+    @FindBy (css = ".button.normal.primary")
     private WebElement createPageButton;
     @FindBy (css = "#createPageErrorMsg")
     private WebElement phalanxBlockMessageContainer;
@@ -34,6 +35,10 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
 
     public void createPageWithStandardLayout(String title) {
         createPage(title, "standard");
+    }
+
+    public void createPageWithBlankLayout(String title) {
+    	createPage(title, "blank");
     }
 
     private void createPage(String title, String layout) {
