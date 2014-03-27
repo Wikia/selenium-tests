@@ -24,7 +24,7 @@ public class VEEnabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeC
 	WikiBasePageObject base;
 	String wikiURL;
 
-	@BeforeMethod(groups = {"VEEanbledEditorEntryTests_VEPreferred"})
+	@BeforeMethod(groups = {"VEEnabledEditorEntryVEPreferred"})
 	public void setup_VEPreferred() {
 //		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
 		base = new WikiBasePageObject(driver);
