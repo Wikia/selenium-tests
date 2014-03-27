@@ -142,8 +142,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement protectDropdown;
 	@FindBy(css="#ca-move")
 	protected WebElement renameDropdown;
-	@FindBy(css="button.close.wikia-chiclet-button")
-	protected WebElement closeModalButton;
 	@FindBy(css="#ca-ve-edit")
 	protected WebElement veEditButton;
 	@FindBy(css="body.ve")
@@ -180,12 +178,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	}
-
-	public void closeLightbox() {
-		waitForElementByElement(closeModalButton);
-		scrollAndClick(closeModalButton);
-		PageObjectLogging.log("closeLightbox ", "lightbox closed", true);
 	}
 
 	public String resetForgotPasswordTime(String userName) {
