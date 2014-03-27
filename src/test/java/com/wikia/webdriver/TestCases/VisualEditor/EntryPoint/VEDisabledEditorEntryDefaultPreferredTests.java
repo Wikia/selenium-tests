@@ -23,10 +23,11 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
+	String wikiURL;
 
 	@BeforeMethod(groups = {"VEDisabledEditorEntryDefaultPreferred"})
 	public void setup_defaultPreferred() {
-//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
+//		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 	}

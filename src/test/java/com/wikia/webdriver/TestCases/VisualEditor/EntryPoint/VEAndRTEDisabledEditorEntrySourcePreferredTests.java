@@ -23,10 +23,11 @@ public class VEAndRTEDisabledEditorEntrySourcePreferredTests extends NewTestTemp
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
+	String wikiURL;
 
 	@BeforeMethod(groups = {"VEAndRTEDisabledEditorEntrySourcePreferred"})
 	public void setup_sourcePreferred() {
-//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
+//		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSourcePreferred, credentials.passwordSourcePreferred, wikiURL);
 	}

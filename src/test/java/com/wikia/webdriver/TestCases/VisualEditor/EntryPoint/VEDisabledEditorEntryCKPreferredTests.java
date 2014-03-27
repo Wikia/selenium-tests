@@ -23,10 +23,11 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
+	String wikiURL;
 
 	@BeforeMethod(groups = {"VEDisabledEditorEntryCKPreferred"})
 	public void setup_CKPreferred() {
-		//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 	}

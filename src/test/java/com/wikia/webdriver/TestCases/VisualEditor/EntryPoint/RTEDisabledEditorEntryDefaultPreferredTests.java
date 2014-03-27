@@ -22,10 +22,11 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
+	String wikiURL;
 
 	@BeforeMethod(groups = {"RTEDisabledEditorEntryDefaultPreferred"})
 	public void setup_defaultPreferred() {
-//		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.rteDisabledTestMainPage);
+//		wikiURL = urlBuilder.getUrlForWiki(URLsContent.rteDisabledTestMainPage);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 	}
