@@ -120,16 +120,9 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
 	}
 
-	public void verifyTitleUrl(String fileUrl) {
-		String titleUrl = getTitleUrl();
-		Assertion.assertEquals(fileUrl, titleUrl);
-		verifyMoreInfoUrl(titleUrl);
-	}
-
-	public String getTitleUrl() {
-		String url = titleLink.getAttribute("href");
-		PageObjectLogging.log("getTitleUrl", "Title url: " + url, true);
-		return url;
+	public void verifyTitleUrl(String expectedUrl) {
+		String titleUrl = titleLink.getAttribute("href");
+		Assertion.assertEquals(expectedUrl, titleUrl);
 	}
 
 	public FilePagePageObject clickTitle() {
@@ -139,11 +132,8 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		return new FilePagePageObject(driver);
 	}
 
-	public void verifyMoreInfoUrl(String fileUrl) {
-		Assertion.assertEquals(fileUrl, getMoreInfoUrl());
-	}
-
-	public String getMoreInfoUrl() {
-		return moreInfoLink.getAttribute("href");
+	public void verifyMoreInfoUrl(String expectedUrl) {
+		String moreInfoUrl = moreInfoLink.getAttribute("href");
+		Assertion.assertEquals(expectedUrl, moreInfoUrl);
 	}
 }

@@ -158,7 +158,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		return new WatchPageObject(driver);
 	}
 
-	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
+	public LightboxComponentObject openLightbox(int itemNumber) {
 		scrollAndClick(galleryImageBox.get(itemNumber));
 		return new LightboxComponentObject(driver);
 	}

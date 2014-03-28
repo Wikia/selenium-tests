@@ -47,7 +47,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement provider;
 	@FindBy(css="div.fullImageLink iframe")
 	private WebElement playerIframe;
-	@FindBy(css="div.fullImageLink object")
+	@FindBy(css="div.fullImageLink [name=flashvars]")
 	private WebElement playerObject;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
@@ -151,7 +151,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 		switch (providerName) {
 			case "screenplay":
 				autoplayStr = "autostart=" + status;
-				embedCode = playerObject.findElement(By.cssSelector("[name=flashvars]")).getAttribute("value");
+				embedCode = playerObject.getAttribute("value");
 				break;
 			case "ign":
 				autoplayStr = "&autoplay=" + status;
@@ -159,11 +159,11 @@ public class FilePagePageObject extends WikiBasePageObject {
 				break;
 			case "realgravity":
 				autoplayStr = "/ac330d90-cb46-012e-f91c-12313d18e962/";
-				embedCode = playerObject.findElement(By.cssSelector("[name=flashvars]")).getAttribute("value");
+				embedCode = playerObject.getAttribute("value");
 				break;
 			case "anyclip":
 				autoplayStr = "&autoPlay=" + status;
-				embedCode = playerObject.findElement(By.cssSelector("[name=flashvars]")).getAttribute("value");
+				embedCode = playerObject.getAttribute("value");
 				break;
 			case "youtube":
 				autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
@@ -173,7 +173,6 @@ public class FilePagePageObject extends WikiBasePageObject {
 				autoplayStr = "?autoplay=" + ((status) ? 1 : 0);
 				embedCode = playerIframe.getAttribute("src");
 				break;
-			// TODO: add autoplayStr and embedCode
 			case "gamestar":
 			case "hulu":
 			case "dailymotion":
@@ -193,12 +192,10 @@ public class FilePagePageObject extends WikiBasePageObject {
 			// for ooyala videos
 			default:
 				autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
-				embedCode = playerObject.findElement(By.cssSelector("[name=flashvars]")).getAttribute("value");
+				embedCode = playerObject.getAttribute("value");
 				break;
 		}
 
-		PageObjectLogging.log("verifyVideoAutoplay", "autoplay: " + autoplayStr, true);
-		PageObjectLogging.log("verifyVideoAutoplay", "embedCode: " + embedCode, true);
 		Assertion.assertStringContains(embedCode, autoplayStr);
 	}
 }
