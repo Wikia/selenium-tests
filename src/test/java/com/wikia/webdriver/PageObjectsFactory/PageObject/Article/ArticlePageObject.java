@@ -208,10 +208,15 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
 		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
-		addArticleInDropdown.click();
-		articleTitleInputModal.sendKeys(articleTitle);
-		submitModal.click();
+		CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+		articleModal.createPageWithBlankLayout(articleTitle);
 		return new VisualEditModePageObject(driver);
+	}
+
+	private CreateArticleModalComponentObject clickArticleInDropDown(WebElement articleDropDown) {
+		waitForElementClickableByElement(addArticleInDropdown);
+		addArticleInDropdown.click();
+		return new CreateArticleModalComponentObject(driver);
 	}
 
 	public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
