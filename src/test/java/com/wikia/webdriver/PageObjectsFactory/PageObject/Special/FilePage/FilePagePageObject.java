@@ -37,17 +37,17 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement localPageNext;
 	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
 	private WebElement localPagePrev;
-	@FindBy(css="div.fullImageLink")
+	@FindBy(css=".fullImageLink")
 	private WebElement fileEmbedded;
 	@FindBy(css=".filehistory img.Wikia-video-thumb")
 	private WebElement videoThumbnail;
-	@FindBys(@FindBy(css="ul.tabs li"))
+	@FindBys(@FindBy(css=".tabs li"))
 	private List<WebElement> tabs;
-	@FindBy(css="p.video-provider a")
+	@FindBy(css=".video-provider a")
 	private WebElement provider;
-	@FindBy(css="div.fullImageLink iframe")
+	@FindBy(css=".fullImageLink iframe")
 	private WebElement playerIframe;
-	@FindBy(css="div.fullImageLink [name=flashvars]")
+	@FindBy(css=".fullImageLink [name=flashvars]")
 	private WebElement playerObject;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
