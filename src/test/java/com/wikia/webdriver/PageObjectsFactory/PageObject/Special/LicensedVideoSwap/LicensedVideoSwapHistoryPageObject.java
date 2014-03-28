@@ -46,7 +46,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
 
 	public void clickUndoSwapLink() {
 		firstUndoLink.click();
-		PageObjectLogging.log("undoSwap", "undo link clicked", true);
+		PageObjectLogging.log("clickUndoSwapLink", "undo link clicked", true);
 	}
 
 	public void verifyUndoSucceeded() {
