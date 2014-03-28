@@ -705,7 +705,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
 		WebElement redLinkToClick = redLinks.get(linkNumber);
 		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
-//		articleTitleInputModal.sendKeys(articleTitle);
 		articleModal.createPageWithBlankLayout("");
 		return new VisualEditModePageObject(driver);
 	}
@@ -718,10 +717,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public SourceEditModePageObject openSrcModeWithRedLinks(int linkNumber) {
 		WebElement redLinkToClick = redLinks.get(linkNumber);
-		waitForElementClickableByElement(redLinkToClick);
-		jQueryClick(redLinkToClick);
-//		articleTitleInputModal.sendKeys(articleTitle);
-		submitModal.click();
+		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
+		articleModal.createPageWithBlankLayout("");
 		return new SourceEditModePageObject(driver);
 	}
 }
