@@ -50,7 +50,6 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
 	}
 
 	public void verifyUndoSucceeded() {
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		waitForElementByElement(notification);
 		String notificationMsg = notification.getText();
 		Assertion.assertEquals(notificationMsg, "This page has been restored.");
