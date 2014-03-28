@@ -32,7 +32,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
 	}
 
 	public LicensedVideoSwapPageObject navigateToLvsPage() {
-		waitForElementByBy(backToLvsBtn);
+		waitForElementByElement(backToLvsBtn);
 		backToLvsBtn.click();
 		PageObjectLogging.log("navigateToLvsPage", "lvs back button navigates to lvs page", true);
 		return new LicensedVideoSwapPageObject(driver);
