@@ -146,7 +146,7 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement veEditButton;
 	@FindBy(css="body.ve")
 	protected WebElement veMode;
-	@FindBy(css=".editsection>a")
+	@FindBy(css=".editsection")
 	protected List<WebElement> sectionEditButtons;
 	@FindBy(css="a.new[href$='redlink=1']")
 	protected List<WebElement> redLinks;
