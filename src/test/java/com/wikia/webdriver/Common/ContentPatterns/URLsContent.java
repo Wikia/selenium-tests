@@ -97,6 +97,7 @@ public class URLsContent {
 	public static final String disableCaptchaParameter = "nocaptchatest=1";
 	public static final String sourceMode = "useeditor=source";
 	public static final String redLink = "redlink=1";
+	public static final String mostRecent = "?sort=recent";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "wiki/WAM";
