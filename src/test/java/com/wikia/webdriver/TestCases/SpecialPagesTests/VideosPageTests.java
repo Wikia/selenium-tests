@@ -15,6 +15,14 @@ public class VideosPageTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
+	/**
+	 * Checks if a video can successfully be deleted from the Special:Videos page. Specifically, this
+	 * test checks if, after the video has been deleted, it's title shows up in the delete confirmation
+	 * presented by Global Notifications. (Note: This test also adds a video beforehand to make sure
+	 * running this test is sustainable).
+	 *
+	 * @author James Sutterfield
+	 */
     @Test(groups = {"VideosPage", "VideosPageTest_001"})
     public void VideosPageTest_001() {
         WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -23,8 +31,17 @@ public class VideosPageTests extends NewTestTemplate {
 	    specialVideos.verifyDeleteViaGlobalNotifications();
     }
 
-	@Test(groups = {"VideosPage", "VideosPageTest_001"})
-	public void VideosPageTest_001() {
+	/**
+	 * Checks if a video can successfully be deleted from the Special:Videos page. Specifically, this
+	 * test checks if, after the video has been deleted, it is no longer present in the list of most
+	 * recent videos on Special:Videos. (Note: in order to accomplish this the test also adds a video
+	 * before hand to ensure that 1.) the test is sustainable, and 2.) it knows what the most recent
+	 * video is.
+	 *
+	 * * @author James Sutterfield
+	 */
+	@Test(groups = {"VideosPage", "VideosPageTest_002"})
+	public void VideosPageTest_002() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
