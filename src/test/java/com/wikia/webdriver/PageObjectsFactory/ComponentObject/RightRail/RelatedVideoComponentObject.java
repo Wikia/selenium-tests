@@ -14,7 +14,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  */
 public class RelatedVideoComponentObject extends WikiBasePageObject {
 
-	@FindBy(css=".video.lightbox")
+	@FindBy(css=".RelatedVideos .video.lightbox")
 	private List<WebElement> relatedVideoThumbnails;
 
 	public RelatedVideoComponentObject(WebDriver driver) {
@@ -22,7 +22,7 @@ public class RelatedVideoComponentObject extends WikiBasePageObject {
 	}
 
 	public LightboxComponentObject openLightboxForVideo(int videoNumber) {
-		scrollAndClick(relatedVideoThumbnails.get(0));
+		scrollAndClick(relatedVideoThumbnails.get(videoNumber));
 		return new LightboxComponentObject(driver);
 	}
 }
