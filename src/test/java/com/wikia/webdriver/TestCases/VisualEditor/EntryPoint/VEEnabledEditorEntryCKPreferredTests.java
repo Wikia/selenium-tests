@@ -89,6 +89,5 @@ public class VEEnabledEditorEntryCKPreferredTests extends NewTestTemplateBeforeC
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 }

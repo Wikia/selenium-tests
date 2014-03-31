@@ -89,6 +89,5 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 }

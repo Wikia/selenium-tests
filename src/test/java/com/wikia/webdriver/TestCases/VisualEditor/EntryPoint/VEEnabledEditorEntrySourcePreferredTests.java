@@ -84,6 +84,5 @@ public class VEEnabledEditorEntrySourcePreferredTests extends NewTestTemplateBef
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 }

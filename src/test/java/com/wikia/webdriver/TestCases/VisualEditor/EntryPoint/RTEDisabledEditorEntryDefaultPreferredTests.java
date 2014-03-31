@@ -45,7 +45,6 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -56,7 +55,6 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -67,7 +65,6 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -79,7 +76,6 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -89,6 +85,5 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 }

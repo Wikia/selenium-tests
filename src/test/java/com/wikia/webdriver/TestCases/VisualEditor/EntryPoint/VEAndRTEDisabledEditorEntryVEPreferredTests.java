@@ -48,7 +48,6 @@ public class VEAndRTEDisabledEditorEntryVEPreferredTests extends NewTestTemplate
 		);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -60,7 +59,6 @@ public class VEAndRTEDisabledEditorEntryVEPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -72,7 +70,6 @@ public class VEAndRTEDisabledEditorEntryVEPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -84,7 +81,6 @@ public class VEAndRTEDisabledEditorEntryVEPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 
 	@Test(
@@ -94,6 +90,5 @@ public class VEAndRTEDisabledEditorEntryVEPreferredTests extends NewTestTemplate
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.logOut(wikiURL);
 	}
 }
