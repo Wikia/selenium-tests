@@ -7,8 +7,6 @@ public class URLsContent {
 	//api
 	public static String wikiaPhp = "wikia.php";
 
-	//Image lightbox test page
-	public static String lightboxImageTest = "LightboxTesting";
 	public static String followingToolbarTest = "QAautoPage";
 
 	// Common url component
@@ -63,6 +61,7 @@ public class URLsContent {
 	public static final String specialUnusedVideos = "wiki/Special:UnusedVideos";
 	public static final String specialUncategorizedFiles = "wiki/Special:UncategorizedFiles";
 	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
+	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";

@@ -106,6 +106,7 @@
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStylesTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorEntryTests"/>
 			<class name="com.wikia.webdriver.TestCases.FacebookTests.FacebookTests"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.LicensedVideoSwap"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.VideosPageTests"/>
 		</classes>
 	</test>
