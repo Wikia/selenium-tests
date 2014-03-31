@@ -154,4 +154,6 @@ public class URLsContent {
 	public static final String wikiMainPage = "Main_Page";
 	public static final String categoryPage = "Category:General_wiki_templates";
 	public static final String templatePage = "Template:Infobox";
+	public static final String listPage = "List:Listing";
+	public static final String mediaWiki = "mediawiki119";
 }
