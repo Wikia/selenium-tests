@@ -1,15 +1,17 @@
 package com.wikia.webdriver.TestCases.ChatTests;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.Common.Templates.TestTemplate_Two_Drivers;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import org.openqa.selenium.WebDriver;
 
-public class ChatTests extends TestTemplate_Two_Drivers{
+public class ChatTests extends NewTestTemplate_TwoDrivers {
+
+	Credentials credentials = config.getCredentials();
 
 	/**
 	 * Create ChatPageObject with logged in user
@@ -62,16 +64,16 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password, true);
+				credentials.userName, credentials.password, true);
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2, true);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		switchToWindow(driver);
-		chat1.verifyUserJoinToChat(Properties.userName2);
+		chat1.verifyUserJoinToChat(credentials.userName2);
 	}
 
 	/*
@@ -86,16 +88,16 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password, true);
+				credentials.userName, credentials.password, true);
 		chat1.openChatPage();
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2, true);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		//Test
 		chat1.verifyChatPage();
-		chat1.clickOnDifferentUser(Properties.userName2, driver);
+		chat1.clickOnDifferentUser(credentials.userName2, driver);
 		chat1.verifyNormalUserDropdown();
 	}
 
@@ -111,23 +113,23 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password, true);
+				credentials.userName, credentials.password, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2, true);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
 		//Test
 		chat1.verifyChatPage();
-		chat1.clickOnDifferentUser(Properties.userName2, driver);
+		chat1.clickOnDifferentUser(credentials.userName2, driver);
 		chat1.selectPrivateMessage(driver);
-		chat1.clickPrivateMessageUser(Properties.userName2, driver);
+		chat1.clickPrivateMessageUser(credentials.userName2, driver);
 		chat1.verifyPrivateUserDropdown();
 		chat1.blockPrivateMessage(driver);
-		chat1.clickOnBlockedDifferentUser(Properties.userName2, driver);
+		chat1.clickOnBlockedDifferentUser(credentials.userName2, driver);
 		chat1.verifyBlockingUserDropdown();
-		chat1.allowPrivateMessageFromUser(Properties.userName2, driver);
+		chat1.allowPrivateMessageFromUser(credentials.userName2, driver);
 	}
 
 	/*
@@ -143,16 +145,16 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userNameStaff, Properties.passwordStaff, true);
+				credentials.userNameStaff, credentials.passwordStaff, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2, true);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
 		//Test
 		chat1.verifyChatPage();
-		chat1.clickOnDifferentUser(Properties.userName2, driver);
+		chat1.clickOnDifferentUser(credentials.userName2, driver);
 		chat1.verifyAdminUserDropdown();
 	}
 
@@ -184,24 +186,24 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password, true);
+				credentials.userName, credentials.password, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2, true);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
 		//Test
 		chat1.verifyChatPage();
-		chat1.clickOnDifferentUser(Properties.userName2, driver);
+		chat1.clickOnDifferentUser(credentials.userName2, driver);
 		chat1.selectPrivateMessage(driver);
 		chat1.verifyPrivateMessageHeader();
-		chat1.verifyPrivateMessageIsHighLighted(Properties.userName2);
-		chat1.verifyPrivateChatTitle(Properties.userName2);
+		chat1.verifyPrivateMessageIsHighLighted(credentials.userName2);
+		chat1.verifyPrivateChatTitle(credentials.userName2);
 		chat1.clickOnMainChat(driver);
 		chat1.verifyMainChatIsHighLighted();
-		chat1.clickOnPrivateChat(Properties.userName2, driver);
-		chat1.verifyPrivateMessageIsHighLighted(Properties.userName2);
+		chat1.clickOnPrivateChat(credentials.userName2, driver);
+		chat1.verifyPrivateMessageIsHighLighted(credentials.userName2);
 	}
 
 	/*
@@ -218,24 +220,24 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName, Properties.password, true);
+				credentials.userName, credentials.password, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName2, Properties.password2, true);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
 		//test
-		switchToWindow(driver2);
-		chat2.writeOnChat("Hello this is user "+Properties.userName2);
+		switchToWindow(driverFF);
+		chat2.writeOnChat("Hello this is user "+credentials.userName2);
 		switchToWindow(driver);
-		chat1.verifyMessageOnChat("Hello this is user "+Properties.userName2);
-		chat1.clickOnDifferentUser(Properties.userName2, driver);
+		chat1.verifyMessageOnChat("Hello this is user "+credentials.userName2);
+		chat1.clickOnDifferentUser(credentials.userName2, driver);
 		chat1.selectPrivateMessage(driver);
 		chat1.verifyPrivateMessageHeader();
 		chat1.clickOnMainChat(driver);
 		chat1.verifyMainChatIsHighLighted();
-		chat1.verifyMessageOnChat("Hello this is user "+Properties.userName2);
+		chat1.verifyMessageOnChat("Hello this is user "+credentials.userName2);
 	}
 
 	/*
@@ -252,27 +254,27 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName3, Properties.password3, false);
+				credentials.userName3, credentials.password3, false);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName4, Properties.password4, false);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName4, credentials.password4, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//test
-		chat2.verifyUserJoinToChat(Properties.userName3);
-		chat2.verifyUserIsVisibleOnContactsList(Properties.userName3);
-		chat1.verifyUserIsVisibleOnContactsList(Properties.userName4);
+		chat2.verifyUserJoinToChat(credentials.userName3);
+		chat2.verifyUserIsVisibleOnContactsList(credentials.userName3);
+		chat1.verifyUserIsVisibleOnContactsList(credentials.userName4);
 		chat2.writeOnChat("test message");
 		chat1.verifyMessageOnChat("test message");
-		chat2.clickOnDifferentUser(Properties.userName3, driver2);
-		chat2.selectPrivateMessage(driver2);
-		chat2.writeOnChat("This is private message from "+Properties.userName4);
+		chat2.clickOnDifferentUser(credentials.userName3, driverFF);
+		chat2.selectPrivateMessage(driverFF);
+		chat2.writeOnChat("This is private message from "+credentials.userName4);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification();
-		chat1.clickOnPrivateChat(Properties.userName4, driver);
-		chat1.verifyMessageOnChat("This is private message from "+Properties.userName4);
+		chat1.clickOnPrivateChat(credentials.userName4, driver);
+		chat1.verifyMessageOnChat("This is private message from "+credentials.userName4);
 	}
 
 	/*
@@ -291,40 +293,40 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-				Properties.userName5, Properties.password5, false);
+				credentials.userName5, credentials.password5, false);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-				Properties.userName6, Properties.password6, false);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+				credentials.userName6, credentials.password6, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//test
-		chat2.verifyUserJoinToChat(Properties.userName5);
-		chat2.verifyUserIsVisibleOnContactsList(Properties.userName5);
-		chat1.verifyUserIsVisibleOnContactsList(Properties.userName6);
+		chat2.verifyUserJoinToChat(credentials.userName5);
+		chat2.verifyUserIsVisibleOnContactsList(credentials.userName5);
+		chat1.verifyUserIsVisibleOnContactsList(credentials.userName6);
 		chat2.writeOnChat("test message");
 		chat1.verifyMessageOnChat("test message");
-		chat2.clickOnDifferentUser(Properties.userName5, driver2);
-		chat2.selectPrivateMessage(driver2);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.clickOnDifferentUser(credentials.userName5, driverFF);
+		chat2.selectPrivateMessage(driverFF);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification(1);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(2);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(3);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(4);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(5);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(6);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(7);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(8);
-		chat2.writeOnChat("This is private message from "+Properties.userName6);
+		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageNotification(9);
 	}
 
@@ -342,10 +344,10 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 	{
 		//first user opens the chat
 		ChatPageObject chat1 = createChatPageObject(driver,
-			Properties.userName3, Properties.password3, false);
+			credentials.userName3, credentials.password3, false);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driver2,
-			Properties.userNameStaff, Properties.passwordStaff, false);
+		ChatPageObject chat2 = createChatPageObject(driverFF,
+			credentials.userNameStaff, credentials.passwordStaff, false);
 
 		chat2.openChatPage();
 		chat2.verifyChatPage();
@@ -353,12 +355,12 @@ public class ChatTests extends TestTemplate_Two_Drivers{
 		chat1.verifyChatPage();
 
 		//test
-		chat2.verifyUserJoinToChat(Properties.userName3);
-		chat2.verifyUserIsVisibleOnContactsList(Properties.userName3);
-		chat1.verifyUserIsVisibleOnContactsList(Properties.userNameStaff);
+		chat2.verifyUserJoinToChat(credentials.userName3);
+		chat2.verifyUserIsVisibleOnContactsList(credentials.userName3);
+		chat1.verifyUserIsVisibleOnContactsList(credentials.userNameStaff);
 
-		chat2.clickOnDifferentUser(Properties.userName3, driver2);
-		chat2.banUser(Properties.userName3, driver2);
-		chat2.unBanUser(Properties.userName3, driver2);
+		chat2.clickOnDifferentUser(credentials.userName3, driverFF);
+		chat2.banUser(credentials.userName3, driverFF);
+		chat2.unBanUser(credentials.userName3, driverFF);
 	}
 }
