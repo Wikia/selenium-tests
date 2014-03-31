@@ -53,11 +53,11 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement conflictArea;
 		@FindBy(css = "td.diff-otitle")
 		private WebElement oRevisionTitle;
-		//@FindBy(css = ".css-editor .mw-warning-with-logexcerpt")
-		//private WebElement removedWarning;
+		@FindBy(css = ".css-editor .mw-warning-with-logexcerpt")
+		private WebElement removedWarning;
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"Special:Undelete\"]")
 		private WebElement undeleteButton;
-		private By removedWarning = By.cssSelector(".css-editor .mw-warning-with-logexcerpt");
+		private By removedWarningBy = By.cssSelector(".css-editor .mw-warning-with-logexcerpt");
 		@FindBy(css = ".css-edit-box a.talk .commentsbubble")
 		private WebElement talkBubble;
 		@FindBy(css = ".css-edit-box a.talk")
@@ -193,16 +193,31 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void verifyArticleIsRemoved() {
-			waitForElementByBy(removedWarning);
+			waitForElementByBy(removedWarningBy);
 			PageObjectLogging.log("verifyArticleIsRemoved", "Article is removed.", true);
 		}
 
-		public void verifyArticleIsNotRemoved() {
-			waitForElementNotPresent(removedWarning);
-			PageObjectLogging.log("verifyArticleIsNotRemoved", "Article is not removed.", true);
+		public void undeleteArticle(String article) {
+			clickPublishButtonDropdown();
+			clickUndeleteButton();
+			confirmUndelete();
+			getUrl(article);
 		}
 
-		public void clickUndeleteButton() {
+		public void verifyArticleIsNotRemoved(String page) {
+			if (checkIfElementOnPage(removedWarning)) {
+				undeleteArticle(page);
+				PageObjectLogging.log(
+					"articleIsRemoved",
+					"Article is removed, needs to be restored",
+					true
+				);
+			} else {
+				PageObjectLogging.log("verifyArticleIsNotRemoved", "Article is not removed.", true);
+			}
+		}
+
+		private void clickUndeleteButton() {
 			scrollAndClick(undeleteButton);
 			try {
 				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.mediaWikiCss, "UTF-8"));
@@ -213,7 +228,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("undeleteButton", "click on undelete button", true);
 		}
 
-		public void confirmUndelete() {
+		private void confirmUndelete() {
 			clickRestoreArticleButton();
 		}
 

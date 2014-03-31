@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
-public class SpecialVideosPageObject extends SpecialPageObject{
+public class SpecialVideosPageObject extends SpecialPageObject {
 
 	@FindBy(css = "a.addVideo")
 	private WebElement addVideo;
@@ -23,6 +24,8 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 	private WebElement newestVideo;
 	@FindBys(@FindBy(css=".image.video > img"))
 	private List<WebElement> videos;
+	@FindBy(css = ".VideoGrid a.video img.play")
+	private List<WebElement> galleryVideoBox;
 
 	public SpecialVideosPageObject(WebDriver driver) {
 		super(driver);
@@ -61,5 +64,10 @@ public class SpecialVideosPageObject extends SpecialPageObject{
 	public void verifyVideoAdded(String videoDescription) {
 		waitForTextToBePresentInElementByElement(newestVideo, videoDescription);
 		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);
+	}
+
+	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
+		scrollAndClick(galleryVideoBox.get(itemNumber));
+		return new LightboxComponentObject(driver);
 	}
 }

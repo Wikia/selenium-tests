@@ -15,14 +15,14 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(className="WikiaLightbox")
-	private WebElement lightBoxHeader;
 	@FindBy(css=".thumb.thumbinner")
 	private WebElement imageThumbnail;
 	@FindBy(css="#LightboxModal")
 	private WebElement lightBoxModal;
 	@FindBy(css="span[data-pinned-title='Unpin top and bottom bars']")
 	private WebElement pinButton;
+	@FindBy(css=".WikiaLightbox .share")
+	private WebElement shareScreen;
 	@FindBy(css="button.share-button.secondary")
 	private WebElement shareButton;
 	@FindBy(css="div.hero-inner")
@@ -37,10 +37,27 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement redditShareLink;
 	@FindBy(css="a.plusone")
 	private WebElement plusoneShareLink;
+	@FindBy(css="span.carousel-arrow.next")
+	private WebElement carouselRight;
+	@FindBy(css="span.carousel-arrow.previous:not(.disabled)")
+	private WebElement carouselLeft;
+	@FindBy(css="span.carousel-arrow.previous.disabled")
+	private WebElement carouselLeftDisabled;
+	@FindBy(css="button.more-info-close")
+	private WebElement closeShareScreenButton;
+	@FindBy(css=".LightboxHeader button.close.wikia-chiclet-button")
+	protected WebElement closeModalButton;
+	@FindBy(css="div.video-media")
+	private WebElement mediaContainer;
 
 	public void verifyLightboxPopup() {
-		waitForElementByElement(lightBoxHeader);
+		waitForElementByElement(lightBoxModal);
 		PageObjectLogging.log("verifyLightboxPopup", "verify lightbox appeared", true);
+	}
+
+	public void verifyLightboxVideo() {
+		waitForElementByElement(mediaContainer);
+		PageObjectLogging.log("verifyLightboxVideo", "verify lightbox video appeared", true);
 	}
 
 	public LightboxComponentObject openLightbox() {
@@ -48,6 +65,12 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		scrollAndClick(imageThumbnail);
 		PageObjectLogging.log("openLightbox", "opened ligthbox", true);
 		return new LightboxComponentObject(driver);
+	}
+
+	public void clickCloseButton() {
+		waitForElementByElement(closeModalButton);
+		scrollAndClick(closeModalButton);
+		PageObjectLogging.log("clickCloseButton ", "lightbox closed", true);
 	}
 
 	public void clickPinButton() {
@@ -63,6 +86,22 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		shareButton.click();
 		waitForElementByElement(moreInfoThumbnail);
 		PageObjectLogging.log("clickShareButton", "share button is clicked", true);
+	}
+
+	public void clickCloseShareScreenButton() {
+		waitForElementByElement(closeShareScreenButton);
+		closeShareScreenButton.click();
+		PageObjectLogging.log("clickCloseShareScreenButton", "close share screen button was clicked", true);
+	}
+
+	public void verifyShareScreenClosed() {
+		waitForElementNotVisibleByElement(shareScreen);
+		PageObjectLogging.log("verifyShareScreenClosed", "share screen is closed", true);
+	}
+
+	public void verifyLightboxClosed() {
+		waitForElementNotVisibleByElement(lightBoxModal);
+		PageObjectLogging.log("verifyShareScreenClosed", "share lightbox is closed", true);
 	}
 
 	public void verifyShareButtons() {
@@ -98,4 +137,22 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		plusoneShareLink.click();
 		PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
 	}
+
+	public void clickCarouselRight() {
+		waitForElementByElement(carouselRight);
+		carouselRight.click();
+		PageObjectLogging.log("clickCarouselRight", "carousel right button is clicked", true);
+	}
+
+	public void clickCarouselLeft() {
+		waitForElementByElement(carouselLeft);
+		carouselLeft.click();
+		PageObjectLogging.log("clickCarouselLeft", "carousel left button is clicked", true);
+	}
+
+	public void verifyCarouselLeftDisabled() {
+		waitForElementByElement(carouselLeftDisabled);
+		PageObjectLogging.log("verifyCarouselLeftDisabled", "carousel left button is disabled", true);
+	}
+
 }
