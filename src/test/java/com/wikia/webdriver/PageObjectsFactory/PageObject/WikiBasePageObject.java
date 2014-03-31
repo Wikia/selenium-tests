@@ -293,6 +293,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialVideosPageObject(driver);
 	}
 
+	public SpecialVideosPageObject openSpecialVideoPageMostRecent(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialNewVideo+URLsContent.mostRecent);
+		return new SpecialVideosPageObject(driver);
+	}
+
 	public SpecialNewFilesPageObject openSpecialNewFiles(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
@@ -549,6 +554,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyNotificationMessage() {
 		waitForElementVisibleByElement(flashMessage);
+	}
+
+	public String getFlashMessageText() {
+		return flashMessage.getText();
 	}
 
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
@@ -1053,5 +1062,11 @@ public class WikiBasePageObject extends BasePageObject {
 			)
 		);
 		return new VisualEditorPageObject(driver);
+	}
+
+	public void addVideoViaAjax(String videoURL) {
+		executeScript("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
+				"data: {url: '" + videoURL + "'}," +
+				"type: 'POST' } );");
 	}
 }
