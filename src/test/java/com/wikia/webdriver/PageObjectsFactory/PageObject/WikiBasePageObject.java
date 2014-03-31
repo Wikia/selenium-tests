@@ -33,6 +33,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -1058,5 +1059,11 @@ public class WikiBasePageObject extends BasePageObject {
 			)
 		);
 		return new VisualEditorPageObject(driver);
+	}
+
+	public void addVideoViaAjax(String videoURL) {
+		executeScript("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
+				"data: {url: '" + videoURL + "'}," +
+				"type: 'POST' } );");
 	}
 }

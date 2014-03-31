@@ -84,35 +84,31 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 		return newestVideoTitle.getText();
 	}
 
-	public void addVideoViaAjax() {
-		executeScript("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
-				"data: {url: '" + VideoContent.youtubeVideoURL2 + "'}," +
-				"type: 'POST' } );");
-		refreshPage();
-	}
-
 	public void deleteVideo(){
 		executeScript("$('div.WikiaGrid div:nth-child(1).grid-2 .remove').show()");
+		waitForElementByElement(newestVideo);
 		newestVideoDeleteIcon.click();
+		waitForElementByElement(deleteConfirmButton);
 		deleteConfirmButton.click();
 	}
 
 	public void verifyDeleteViaGlobalNotifications() {
-		addVideoViaAjax();
+		addVideoViaAjax(VideoContent.youtubeVideoURL2);
+		refreshPage();
 		deleteVideo();
-		Assertion.assertEquals("\"File:" + VideoContent.youtubeVideoURL2name + "\" has been deleted. (undelete)", getFlashMessageText());
-		PageObjectLogging.log("verifyDeleteVideoGlobalNotifications",
-				"verify that video with following title was deleted: " + VideoContent.youtubeVideoURL2name,
-				true);
+		String deletedVideo = "\"File:" + VideoContent.youtubeVideoURL2name + "\" has been deleted. (undelete)";
+		Assertion.assertEquals(deletedVideo, getFlashMessageText());
+		PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo + " was deleted", true);
 	}
 
 	public void verifyDeleteViaVideoNotPresent() {
-		addVideoViaAjax();
+		addVideoViaAjax(VideoContent.youtubeVideoURL2);
+		refreshPage();
 		deleteVideo();
 		verifyNotificationMessage();
 		Assertion.assertNotEquals(VideoContent.youtubeVideoURL2name, getNewestVideoTitle());
 		PageObjectLogging.log("verifyDeleteVideoNotPresent",
-				"verify that video with following title was deleted: " + VideoContent.youtubeVideoURL2name,
+				"verify video " + VideoContent.youtubeVideoURL2name + " was deleted",
 				true);
 	}
 
