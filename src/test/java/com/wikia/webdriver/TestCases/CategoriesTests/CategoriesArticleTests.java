@@ -42,7 +42,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	@Test(groups = {"CategoriesTestsArticle_002", "CategoriesTestsArticle"})
 	public void CategoriesTestsArticle_002_anonSuggestions() {
 		VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver);
-		visualEditMode.navigateToArticleEditPage(
+		visualEditMode.navigateToArticleEditPageCK(
 				wikiURL,
 				PageContent.articleNamePrefix + visualEditMode.getTimeStamp()
 		);
@@ -68,7 +68,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	public void CategoriesTestsArticle_004_userSuggestions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(
 				wikiURL,
 				PageContent.articleNamePrefix + base.getTimeStamp()
 		);

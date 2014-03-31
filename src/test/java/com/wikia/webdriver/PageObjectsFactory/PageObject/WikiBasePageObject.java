@@ -472,13 +472,22 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditModePageObject(driver);
 	}
 
-	public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
+	public VisualEditModePageObject navigateToArticleEditPageCK(String wikiURL, String article) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
 			)
 		);
 		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+			)
+		);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {

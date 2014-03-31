@@ -57,7 +57,7 @@ public class VetProvidersTests extends NewTestTemplate {
 	public void VetProvidersTests_002_relatedVideo(String videoUrl, String videoName) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		VisualEditModePageObject rVmoduleMessageEdit = base.navigateToArticleEditPage(wikiURL, URLsContent.relatedVideosList);
+		VisualEditModePageObject rVmoduleMessageEdit = base.navigateToArticleEditPageCK(wikiURL, URLsContent.relatedVideosList);
 		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(videoName);
 		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
 		article.openRandomArticle(wikiURL);

@@ -125,7 +125,7 @@ public class VEEnabledEditorEntryCKPreferredTests extends NewTestTemplateBeforeC
 	}
 
 	@Test(
-		groups = {"VEEnabledEditorEntryCKPreferred", "VEEnabledEditorEntryCKPreferredTests_009"}
+		groups = {"VEEnabledEditorEntryCKPreferred", "VEEnabledEditorEntryCKPreferredTests_010"}
 	)
 	public void VEEnabledEditorEntryCKPreferredTests_009_MediawikiNamespace() {
 		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.mediaWiki);
@@ -139,9 +139,8 @@ public class VEEnabledEditorEntryCKPreferredTests extends NewTestTemplateBeforeC
 		groups = {"VEEnabledEditorEntryCKPreferred", "VEEnabledEditorEntryCKPreferredTests_010"}
 	)
 	public void VEEnabledEditorEntryCKPreferredTests_010_actionEdit() {
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
-		VisualEditModePageObject ck = article.goToCurrentArticleEditPage();
+		VisualEditModePageObject ck =
+			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
 	}
