@@ -15,7 +15,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * @author Robert 'Rochan' Chan
  *
  * Editor Entry Point Test on wiki that has wgEnabledRTEExt = false, wgVisualEditorUI = true
- *
+ * User Editor Preference is set to Default Editor
+ * VE-958 verify VE Editor is loaded when clicking Add Page from the contribution drop down
+ * VE-958 verify VE Editor is loaded when clicking the main edit button on the top of the article
+ * VE-958 verify VE Editor is loaded when clicking the red link in the article
+ * VE-958 verify VE Editor is loaded when clicking the section edit link in the article
+ * VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
  */
 
 public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateBeforeClass {
@@ -24,7 +29,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	WikiBasePageObject base;
 //	String wikiURL;
 
-	@BeforeMethod(groups = {"RTEDisabledEditorEntryDefaultPreferred"})
+	@BeforeMethod(alwaysRun = true)
 	public void setup_defaultPreferred() {
 //		wikiURL = urlBuilder.getUrlForWiki(URLsContent.rteDisabledTestMainPage);
 		base = new WikiBasePageObject(driver);
@@ -36,8 +41,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_001_CreatePageEntry() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, articleName);
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -48,8 +52,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		groups = {"RTEDisabledEditorEntryDefaultPreferred", "RTEDisabledEditorEntryDefaultPreferredTests_002"}
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_002_MainEditEntry() {
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, base.getTimeStamp());
+		ArticlePageObject article = base.openArticleByName(wikiURL, base.getTimeStamp());
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -60,8 +63,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		groups = {"RTEDisabledEditorEntryDefaultPreferred", "RTEDisabledEditorEntryDefaultPreferredTests_003"}
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_003_RedlinkEntry() {
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.testingPage);
+		ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.testingPage);
 		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();

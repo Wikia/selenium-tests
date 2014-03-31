@@ -52,7 +52,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.createArticleUsingDropdown(articleTitle);
+		VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submitArticle();
 		article.verifyContent(articleContent);

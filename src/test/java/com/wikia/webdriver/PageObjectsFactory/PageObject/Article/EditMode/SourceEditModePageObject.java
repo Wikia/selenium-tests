@@ -1,9 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
 
-import java.util.NoSuchElementException;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -355,7 +354,7 @@ public class SourceEditModePageObject extends EditMode{
 			waitForElementByElement(srcOnlyMode);
 			PageObjectLogging.log("verifySourceOnlyMode", "source only mode enabled", true, driver);
 		} else {
-			throw new NoSuchElementException();
+			throw new NoSuchElementException("Can not detect the page to be in Edit mode");
 		}
 	}
 }

@@ -16,7 +16,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * @author Robert 'Rochan' Chan
  *
  * Editor Entry Point Test on wiki that has wgEnabledRTEExt = false, wgVisualEditorUI = false
- *
+ * User Editor Preference is set to RTE Editor
+ * VE-958 verify Src Editor is loaded when clicking Add Page from the contribution drop down
+ * VE-958 verify Src Editor is loaded when clicking the main edit button on the top of the article
+ * VE-958 verify Src Editor is loaded when clicking the red link in the article
+ * VE-958 verify Src Editor is loaded when clicking the section edit link in the article
+ * VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
  */
 
 public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBeforeClass {
@@ -25,7 +30,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	WikiBasePageObject base;
 //	String wikiURL;
 
-	@BeforeMethod(groups = {"VEAndRTEDisabledEditorEntryCKPreferred"})
+	@BeforeMethod(alwaysRun = true)
 	public void setup_CKPreferred() {
 //		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		base = new WikiBasePageObject(driver);
@@ -36,9 +41,10 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 		groups = {"VEAndRTEDisabledEditorEntryCKPreferred", "VEAndRTEDisabledEditorEntryCKPreferredTests_001"}
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_001_CreatePageEntry() {
+		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
-		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+				base.openArticleByName(wikiURL, articleName);
+		SourceEditModePageObject src = article.createArticleInSrcUsingDropdown(articleName);
 		src.verifySourceOnlyMode();
 	}
 
@@ -48,7 +54,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
 				base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
-		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
 		src.verifySourceOnlyMode();
 	}
 

@@ -74,11 +74,9 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement contextFrame;
 	@FindBy(css=".cke_dialog_body")
 	private WebElement addTableLightbox;
-	@FindBy(css="#wpSave")
-	private WebElement publishButton;
-
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
+
 	private By slideshowBy = By.cssSelector("img.image-slideshow");
 	private By sliderBy = By.cssSelector("img.image-gallery-slider");
 	private By videoBy = By.cssSelector("img.video");
@@ -430,8 +428,8 @@ public class VisualEditModePageObject extends EditMode {
 	}
 
 	public ArticlePageObject clickPublishButton() {
-		waitForElementByElement(publishButton);
-		publishButton.click();
+		waitForElementByElement(submitButton);
+		submitButton.click();
 		return new ArticlePageObject(driver);
 	}
 

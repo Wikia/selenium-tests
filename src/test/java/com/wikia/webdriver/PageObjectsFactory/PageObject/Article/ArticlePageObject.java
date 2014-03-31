@@ -205,12 +205,20 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertTrue(isPresent, "text is not present in the article");
 	}
 
-	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
+	public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
 		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
 		CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
 		articleModal.createPageWithBlankLayout(articleTitle);
 		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
+		actionsClick(contributeDropdown);
+		waitForElementVisibleByElement(addArticleInDropdown);
+		CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+		articleModal.createPageWithBlankLayout(articleTitle);
+		return new SourceEditModePageObject(driver);
 	}
 
 	private CreateArticleModalComponentObject clickArticleInDropDown(WebElement articleDropDown) {

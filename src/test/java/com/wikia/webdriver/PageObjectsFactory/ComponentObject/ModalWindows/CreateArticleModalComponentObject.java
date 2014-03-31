@@ -33,10 +33,6 @@ public class CreateArticleModalComponentObject extends WikiBasePageObject {
         PageFactory.initElements(driver, this);
     }
 
-    public void createPageWithStandardLayout(String title) {
-        createPage(title, "standard");
-    }
-
     public void createPageWithBlankLayout(String title) {
     	createPage(title, "blank");
     }

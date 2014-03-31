@@ -399,6 +399,13 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SourceEditModePageObject(driver);
 	}
 
+	public VisualEditModePageObject openCKModeWithMainEditButton() {
+		waitForElementByElement(editButton);
+		editButton.click();
+		PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true, driver);
+		return new VisualEditModePageObject(driver);
+	}
+
 	public WikiArticleEditMode clickEditButton() {
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
