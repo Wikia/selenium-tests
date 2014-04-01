@@ -44,9 +44,7 @@ public class RTEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBefor
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
-		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(
-			PageContent.articleNamePrefix + articleName
-		);
+		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 	}
