@@ -86,4 +86,54 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 	}
+
+	@Test(
+		groups = {"RTEDisabledEditorEntryCKPreferred", "RTEDisabledEditorEntryCKPreferredTests_006"}
+	)
+	public void RTEDisabledEditorEntryCKPreferredTests_006_ListNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.listPage);
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"RTEDisabledEditorEntryCKPreferred", "RTEDisabledEditorEntryCKPreferredTests_007"}
+	)
+	public void RTEDisabledEditorEntryCKPreferredTests_007_CategoryNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"RTEDisabledEditorEntryCKPreferred", "RTEDisabledEditorEntryCKPreferredTests_008"}
+	)
+	public void RTEDisabledEditorEntryCKPreferredTests_008_TemplateNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.templatePage);
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"RTEDisabledEditorEntryCKPreferred", "RTEDisabledEditorEntryCKPreferredTests_009"}
+	)
+	public void RTEDisabledEditorEntryCKPreferredTests_009_MediawikiNamespace() {
+		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.mediaWiki);
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"RTEDisabledEditorEntryCKPreferred", "RTEDisabledEditorEntryCKPreferredTests_010"}
+	)
+	public void RTEDisabledEditorEntryCKPreferredTests_010_actionEdit() {
+		SourceEditModePageObject src =
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		src.verifySourceOnlyMode();
+	}
 }
