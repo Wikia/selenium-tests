@@ -9,6 +9,7 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
@@ -89,5 +90,58 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
+	}
+
+	@Test(
+		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_006"}
+	)
+	public void VEDisabledEditorEntryDefaultPreferredTests_006_ListNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.listPage);
+		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
+	}
+
+	@Test(
+		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_007"}
+	)
+	public void VEDisabledEditorEntryDefaultPreferredTests_007_CategoryNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
+	}
+
+	@Test(
+		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_008"}
+	)
+	public void VEDisabledEditorEntryDefaultPreferredTests_008_TemplateNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.templatePage);
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_010"}
+	)
+	public void VEDisabledEditorEntryDefaultPreferredTests_009_MediawikiNamespace() {
+		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.mediaWiki);
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_010"}
+	)
+	public void VEDisabledEditorEntryDefaultPreferredTests_010_actionEdit() {
+		VisualEditModePageObject ck =
+			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 }
