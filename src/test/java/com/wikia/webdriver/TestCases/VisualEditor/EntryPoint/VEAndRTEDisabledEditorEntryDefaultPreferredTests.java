@@ -85,4 +85,54 @@ public class VEAndRTEDisabledEditorEntryDefaultPreferredTests extends NewTestTem
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 	}
+
+	@Test(
+		groups = {"VEAndRTEDisabledEditorEntryDefaultPreferred", "VEAndRTEDisabledEditorEntryDefaultPreferredTests_006"}
+	)
+	public void VEAndRTEDisabledEditorEntryDefaultPreferredTests_006_ListNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.listPage);
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"VEAndRTEDisabledEditorEntryDefaultPreferred", "VEAndRTEDisabledEditorEntryDefaultPreferredTests_007"}
+	)
+	public void RTEDisabledEditorEntryDefaultPreferredTests_007_CategoryNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"VEAndRTEDisabledEditorEntryDefaultPreferred", "VEAndRTEDisabledEditorEntryDefaultPreferredTests_008"}
+	)
+	public void VEAndRTEDisabledEditorEntryDefaultPreferredTests_008_TemplateNamespace() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.templatePage);
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"VEAndRTEDisabledEditorEntryDefaultPreferred", "VEAndRTEDisabledEditorEntryDefaultPreferredTests_009"}
+	)
+	public void VEAndRTEDisabledEditorEntryDefaultPreferredTests_009_MediawikiNamespace() {
+		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.mediaWiki);
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
+	}
+
+	@Test(
+		groups = {"VEAndRTEDisabledEditorEntryDefaultPreferred", "VEAndRTEDisabledEditorEntryDefaultPreferredTests_010"}
+	)
+	public void VEAndRTEDisabledEditorEntryDefaultPreferredTests_010_actionEdit() {
+		SourceEditModePageObject src =
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		src.verifySourceOnlyMode();
+	}
 }
