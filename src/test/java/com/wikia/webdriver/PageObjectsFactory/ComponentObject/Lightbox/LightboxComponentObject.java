@@ -51,17 +51,17 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxHeader);
-		PageObjectLogging.log("verifyLightboxPopup", "verify lightbox appeared", true);
+		PageObjectLogging.log("verifyLightboxPopup", "Lightbox appeared", true);
 	}
 
 	public void verifyLightboxVideo() {
 		waitForElementByElement(videoContainer);
-		PageObjectLogging.log("verifyLightboxVideo", "verify lightbox video appeared", true);
+		PageObjectLogging.log("verifyLightboxVideo", "Lightbox video appeared", true);
 	}
 
 	public void verifyLightboxImage() {
 		waitForElementByElement(imageContainer);
-		PageObjectLogging.log("verifyLightboxImage", "Verify lightbox image appeared", true);
+		PageObjectLogging.log("verifyLightboxImage", "Lightbox image appeared", true);
 	}
 
 	public LightboxComponentObject openLightbox() {
@@ -123,6 +123,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void verifyTitleUrl(String expectedUrl) {
 		String titleUrl = titleLink.getAttribute("href");
 		Assertion.assertEquals(expectedUrl, titleUrl);
+		PageObjectLogging.log("verifyTitleUrl", "Title URL is correct", true);
 	}
 
 	public FilePagePageObject clickTitle() {
@@ -135,5 +136,6 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void verifyMoreInfoUrl(String expectedUrl) {
 		String moreInfoUrl = moreInfoLink.getAttribute("href");
 		Assertion.assertEquals(expectedUrl, moreInfoUrl);
+		PageObjectLogging.log("verifyMoreInfoUrl", "More Info URL is correct", true);
 	}
 }
