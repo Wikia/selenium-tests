@@ -22,6 +22,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-958 verify VE Editor is loaded when clicking the red link in the article
  * VE-958 verify VE Editor is loaded when clicking the section edit link in the article
  * VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
+ * VE-898 verify VE Editor is loaded on List namespace
+ * VE-898 verify Src Editor is loaded on Category namespace
+ * VE-898 verify Src Editor is loaded on Template namespace
+ * VE-898 verify Src Editor is loaded when using ?action=edit in the URL
  */
 
 public class RTEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeClass {
@@ -125,18 +129,7 @@ public class RTEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBefor
 	@Test(
 		groups = {"RTEDisabledEditorEntryVEPreferred", "RTEDisabledEditorEntryVEPreferredTests_009"}
 	)
-	public void RTEDisabledEditorEntryVEPreferredTests_009_MediawikiNamespace() {
-		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.mediaWiki);
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
-		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
-		src.verifySourceOnlyMode();
-	}
-
-	@Test(
-		groups = {"RTEDisabledEditorEntryVEPreferred", "RTEDisabledEditorEntryVEPreferredTests_010"}
-	)
-	public void RTEDisabledEditorEntryVEPreferredTests_010_actionEdit() {
+	public void RTEDisabledEditorEntryVEPreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
 			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		src.verifySourceOnlyMode();

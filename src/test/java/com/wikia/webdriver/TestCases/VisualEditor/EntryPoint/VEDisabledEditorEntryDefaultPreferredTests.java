@@ -23,6 +23,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-958 verify CK Editor is loaded when clicking the red link in the article
  * VE-958 verify CK Editor is loaded when clicking the section edit link in the article
  * VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
+ * VE-898 verify CK Editor is loaded on List namespace
+ * VE-898 verify Src Editor is loaded on Category namespace
+ * VE-898 verify Src Editor is loaded on Template namespace
+ * VE-898 verify CK Editor is loaded when using ?action=edit in the URL
  */
 
 public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateBeforeClass {
@@ -125,20 +129,9 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_010"}
+		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_090"}
 	)
-	public void VEDisabledEditorEntryDefaultPreferredTests_009_MediawikiNamespace() {
-		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.mediaWiki);
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
-		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
-		src.verifySourceOnlyMode();
-	}
-
-	@Test(
-		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_010"}
-	)
-	public void VEDisabledEditorEntryDefaultPreferredTests_010_actionEdit() {
+	public void VEDisabledEditorEntryDefaultPreferredTests_009_actionEdit() {
 		VisualEditModePageObject ck =
 			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		ck.verifyContentLoaded();
