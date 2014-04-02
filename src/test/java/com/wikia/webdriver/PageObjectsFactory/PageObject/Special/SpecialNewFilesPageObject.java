@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
@@ -38,6 +39,8 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	private WebElement wikiaPreviewImg;
 	@FindBys(@FindBy(css="#mw-content-text img"))
 	private List<WebElement> imagesNewFiles;
+	@FindBy(css = ".wikia-gallery div.wikia-gallery-item a.image")
+	private List<WebElement> galleryImageBox;
 
 	public SpecialNewFilesPageObject(WebDriver driver) {
 		super(driver);
@@ -154,4 +157,22 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}
+
+	public LightboxComponentObject openLightbox(int itemNumber) {
+		scrollAndClick(galleryImageBox.get(itemNumber));
+		return new LightboxComponentObject(driver);
+	}
+
+	public String getFileUrl(String wikiURL, int itemNumber) {
+		String fileUrl = wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + getImageKey(itemNumber);
+		PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
+		return fileUrl;
+	}
+
+	public String getImageKey(int itemNumber) {
+		String imageKey = imagesNewFiles.get(itemNumber).getAttribute("data-image-key");
+		PageObjectLogging.log("getImageKey", "Image key: " + imageKey, true);
+		return imageKey;
+	}
+
 }

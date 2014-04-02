@@ -7,8 +7,6 @@ public class URLsContent {
 	//api
 	public static String wikiaPhp = "wikia.php";
 
-	//Image lightbox test page
-	public static String lightboxImageTest = "LightboxTesting";
 	public static String followingToolbarTest = "QAautoPage";
 
 	// Common url component
@@ -29,7 +27,7 @@ public class URLsContent {
 	public static final String specialAddBlogListingPage = "wiki/Special:CreateBlogListingPage";
 	public static final String specialNewFiles = "wiki/Special:NewFiles";
 	public static final String specialConnect = "wiki/Special:Connect";
-	public static final String specialNewVideo = "wiki/Special:Videos";
+	public static final String specialVideos = "wiki/Special:Videos";
 	public static final String specialUpload = "wiki/Special:Upload";
 	public static final String specialMultipleUpload = "wiki/Special:MultipleUpload";
 	public static final String specialWatchList = "wiki/Special:Watchlist";
@@ -63,6 +61,7 @@ public class URLsContent {
 	public static final String specialUnusedVideos = "wiki/Special:UnusedVideos";
 	public static final String specialUncategorizedFiles = "wiki/Special:UncategorizedFiles";
 	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
+	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";
@@ -97,6 +96,7 @@ public class URLsContent {
 	public static final String disableCaptchaParameter = "nocaptchatest=1";
 	public static final String sourceMode = "useeditor=source";
 	public static final String redLink = "redlink=1";
+	public static final String mostRecent = "?sort=recent";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "wiki/WAM";
