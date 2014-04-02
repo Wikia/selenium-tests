@@ -61,6 +61,7 @@ public class URLsContent {
 	public static final String specialUnusedVideos = "wiki/Special:UnusedVideos";
 	public static final String specialUncategorizedFiles = "wiki/Special:UncategorizedFiles";
 	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
+	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";
@@ -95,6 +96,7 @@ public class URLsContent {
 	public static final String disableCaptchaParameter = "nocaptchatest=1";
 	public static final String sourceMode = "useeditor=source";
 	public static final String redLink = "redlink=1";
+	public static final String mostRecent = "?sort=recent";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "wiki/WAM";
