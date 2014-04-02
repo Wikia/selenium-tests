@@ -294,7 +294,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialVideosPageObject openSpecialVideoPageMostRecent(String wikiURL){
-		getUrl(wikiURL+URLsContent.specialNewVideo+URLsContent.mostRecent);
+		getUrl(wikiURL+URLsContent.specialVideos+URLsContent.mostRecent);
 		return new SpecialVideosPageObject(driver);
 	}
 
