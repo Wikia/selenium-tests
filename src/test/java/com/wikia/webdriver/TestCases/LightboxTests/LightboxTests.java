@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.LightboxTests;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -15,13 +14,17 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.RightRail.RelatedV
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialMostLinkedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Saipetch Kongkatong
  *
  * 1. Open lightbox from latest photo,
  * 2. Open lightbox from related video,
@@ -31,8 +34,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
  * 6. Open lightbox from Special:MostLinkedFiles page
  * 7. Open lightbox from article image and verify social buttons
  * 8. Open lightbox from article image and verify carousel
+ * 9. Open lightbox from Special:Videos and verify video
+ * 10. Open lightbox from Special:Videos, verify title url and verify file page (logged-in user)
+ * 11. Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in user)
  */
-
 public class LightboxTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
@@ -141,4 +146,49 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxVideo();
 	}
+
+	@Test(groups = {"LightboxTest", "LightboxTest_010"})
+	/**
+	 * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file page (logged-in user)
+	 */
+	public void LightboxTest_010_filepage_video() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
+
+		int itemNumber = 0;
+		String fileUrl = specialVideos.getFileUrl(wikiURL, itemNumber);
+
+		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
+		lightbox.verifyLightboxPopup();
+		lightbox.verifyLightboxVideo();
+		//lightbox.verifyTitleUrl(fileUrl);
+		//lightbox.verifyMoreInfoUrl(fileUrl);
+		FilePagePageObject filePage = lightbox.clickTitle();
+		filePage.verifyTabsExistVideo();
+		filePage.verifyEmbeddedVideoIsPresent();
+		filePage.verifyVideoAutoplay(true);
+	}
+
+	@Test(groups = {"LightboxTest", "LightboxTest_011"})
+	/**
+	 * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
+	 */
+	public void LightboxTest_011_filepage_image() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
+
+		int itemNumber = 0;
+		String fileUrl = specialNewFiles.getFileUrl(wikiURL, itemNumber);
+
+		LightboxComponentObject lightbox = specialNewFiles.openLightbox(itemNumber);
+		lightbox.verifyLightboxPopup();
+		lightbox.verifyLightboxImage();
+		//lightbox.verifyTitleUrl(fileUrl);
+		//lightbox.verifyMoreInfoUrl(fileUrl);
+		FilePagePageObject filePage = lightbox.clickTitle();
+		filePage.verifyTabsExistImage();
+	}
+
 }

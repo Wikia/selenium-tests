@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,9 +14,14 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 
+/**
+ * @author Garth Webb
+ * @author Saipetch Kongkatong
+ */
 public class SpecialVideosPageObject extends SpecialPageObject {
 
 	@FindBy(css = "a.addVideo")
@@ -77,6 +81,18 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
 		scrollAndClick(galleryVideoBox.get(itemNumber));
 		return new LightboxComponentObject(driver);
+	}
+
+	public String getFileUrl(String wikiURL, int itemNumber) {
+		String fileUrl = wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + getVideoKey(itemNumber);
+		PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
+		return fileUrl;
+	}
+
+	public String getVideoKey(int itemNumber) {
+		String videoKey = videos.get(itemNumber).getAttribute("data-video-key");
+		PageObjectLogging.log("getVideoKey", "Video key: " + videoKey, true);
+		return videoKey;
 	}
 
 	public String getNewestVideoTitle() {

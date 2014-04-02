@@ -16,6 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  *
  * @author liz_lux
  * @author Karol 'kkarolk' Kujawiak
+ * @author Saipetch Kongkatong
  *
  */
 public class FilePagePageObject extends WikiBasePageObject {
@@ -36,10 +37,18 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement localPageNext;
 	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
 	private WebElement localPagePrev;
-	@FindBy(css="div.fullImageLink")
+	@FindBy(css=".fullImageLink")
 	private WebElement fileEmbedded;
 	@FindBy(css=".filehistory img.Wikia-video-thumb")
 	private WebElement videoThumbnail;
+	@FindBys(@FindBy(css=".tabs li"))
+	private List<WebElement> tabs;
+	@FindBy(css=".video-provider a")
+	private WebElement provider;
+	@FindBy(css=".fullImageLink iframe")
+	private WebElement playerIframe;
+	@FindBy(css=".fullImageLink [name=flashvars]")
+	private WebElement playerObject;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
@@ -112,5 +121,81 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 	public String getImageThumbnailUrl() {
 		return fileEmbedded.findElement(By.cssSelector("img")).getAttribute("src");
+	}
+
+	public void verifyTabsExistVideo() {
+		String[] expectedTabs = { "about", "history", "metadata" };
+		Assertion.assertEquals(expectedTabs.length, tabs.size());
+		verifyTabsExist(expectedTabs);
+	}
+
+	public void verifyTabsExistImage() {
+		String[] expectedTabs = { "about", "history" };
+		Assertion.assertTrue(expectedTabs.length <= tabs.size());
+		verifyTabsExist(expectedTabs);
+	}
+
+	public void verifyTabsExist(String[] expectedTabs) {
+		for (int i=0; i<expectedTabs.length; i++) {
+			String tab = tabs.get(i).getAttribute("data-tab");
+			Assertion.assertEquals(expectedTabs[i], tab);
+		}
+	}
+
+	public void verifyVideoAutoplay(boolean status) {
+		String providerName = provider.getText().toLowerCase();
+		PageObjectLogging.log("verifyVideoAutoplay", "Provider: "+providerName, true);
+
+		String autoplayStr = "";
+		String embedCode = "";
+		switch (providerName) {
+			case "screenplay":
+				autoplayStr = "autostart=" + status;
+				embedCode = playerObject.getAttribute("value");
+				break;
+			case "ign":
+				autoplayStr = "&autoplay=" + status;
+				embedCode = playerIframe.getAttribute("src");
+				break;
+			case "realgravity":
+				autoplayStr = "/ac330d90-cb46-012e-f91c-12313d18e962/";
+				embedCode = playerObject.getAttribute("value");
+				break;
+			case "anyclip":
+				autoplayStr = "&autoPlay=" + status;
+				embedCode = playerObject.getAttribute("value");
+				break;
+			case "youtube":
+				autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
+				embedCode = playerIframe.getAttribute("src");
+				break;
+			case "vimeo":
+				autoplayStr = "?autoplay=" + ((status) ? 1 : 0);
+				embedCode = playerIframe.getAttribute("src");
+				break;
+			case "gamestar":
+			case "hulu":
+			case "dailymotion":
+			case "myvideo":
+			case "snappytv":
+			case "ustream":
+			case "fivemin":
+			case "metacafe":
+			case "movieclips":
+			case "sevenload":
+			case "gametrailers":
+			case "viddler":
+			case "bliptv":
+			case "twitchtv":
+			case "youku":
+				break;
+			// for ooyala videos
+			default:
+				autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
+				embedCode = playerObject.getAttribute("value");
+				break;
+		}
+
+		Assertion.assertStringContains(embedCode, autoplayStr);
 	}
 }
