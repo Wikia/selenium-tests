@@ -1,22 +1,19 @@
 package com.wikia.webdriver.Common.Clicktracking.Events;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+
 import com.wikia.webdriver.Common.Clicktracking.EventParameter;
-import com.wikia.webdriver.Common.Clicktracking.ExpectedEvent;
 
 public class EventsSearchResultPage {
 
-	private static EventParameter[] pushToTopKeys = new EventParameter[]{
-		EventParameter.category,
-		EventParameter.action,
-		EventParameter.label,
-		EventParameter.trackingMethod};
-
-	private static String[] pushToTopValues = new String[]{
-		"special-search",
-		"click",
-		"result-push-top",
-		"ga"};
-
-	public static ExpectedEvent pushToTop = new ExpectedEvent(pushToTopKeys, pushToTopValues);
+	public static JsonObject searchButton = Json.createObjectBuilder()
+			.add("0", Json.createObjectBuilder()
+					.add(EventParameter.action.toString(), "click")
+					.add(EventParameter.trackingMethod.toString(), "ga"))
+			.add("1", Json.createObjectBuilder()
+					.add(EventParameter.category.toString(), "special-search")
+					.add(EventParameter.label.toString(), "search-button"))
+			.build();
 
 }
