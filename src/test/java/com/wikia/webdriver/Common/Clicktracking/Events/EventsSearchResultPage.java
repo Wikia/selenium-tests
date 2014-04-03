@@ -5,9 +5,18 @@ import com.wikia.webdriver.Common.Clicktracking.ExpectedEvent;
 
 public class EventsSearchResultPage {
 
-	private static EventParameter[] lista = new EventParameter[]{EventParameter.action, EventParameter.category};
-	private static String[] lista2 = new String[]{"asd", "Asd"};
+	private static EventParameter[] pushToTopKeys = new EventParameter[]{
+		EventParameter.category,
+		EventParameter.action,
+		EventParameter.label,
+		EventParameter.trackingMethod};
 
-	public static ExpectedEvent pushToTop = new ExpectedEvent(lista, lista2);
+	private static String[] pushToTopValues = new String[]{
+		"special-search",
+		"click",
+		"result-push-top",
+		"ga"};
+
+	public static ExpectedEvent pushToTop = new ExpectedEvent(pushToTopKeys, pushToTopValues);
 
 }
