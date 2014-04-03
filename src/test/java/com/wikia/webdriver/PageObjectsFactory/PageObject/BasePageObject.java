@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.json.JsonObject;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
@@ -889,4 +891,22 @@ public class BasePageObject{
 		ClickTrackingSupport support = new ClickTrackingSupport();
 		support.compareTrackedEventsTo(expectedEventsList, trackedEventsList);
 	}
+
+	public void compareTrackedEventsTo2(List<JsonObject> expectedEventsList){
+		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
+		ArrayList<String> trackedEventsArrayList = new ArrayList<String>();
+		List<String> trackedEventsList;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//prepare list of tracked events
+		Object event = js.executeScript("return selenium_popEvent()");
+		while (!(event == null)) {
+			trackedEventsArrayList.add(event.toString());
+			event = js.executeScript("return selenium_popEvent()");
+		}
+		trackedEventsList = trackedEventsArrayList;
+		//use comparison method from ClicktrackingSupport class
+		ClickTrackingSupport support = new ClickTrackingSupport();
+		support.compareTrackedEventsTo2(expectedEventsList, trackedEventsList);
+	}
+
 }

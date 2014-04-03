@@ -3,6 +3,8 @@ package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.json.JsonObject;
+
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
@@ -40,7 +42,12 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 				EventsArticleEditMode.eventPreviewButtonClick
 		);
 
+		List<JsonObject> expectedEvents2 = Arrays.asList(
+				EventsArticleEditMode.preview
+		);
+
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
+		visualEditMode.compareTrackedEventsTo2(expectedEvents2);
 	}
 
 	@Test(groups = {
