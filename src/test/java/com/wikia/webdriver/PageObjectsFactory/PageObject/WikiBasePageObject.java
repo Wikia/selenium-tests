@@ -14,6 +14,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.NewChatPageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -293,7 +294,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL){
-		getUrl(wikiURL+ URLsContent.specialUserLogin);
+		getUrl(wikiURL + URLsContent.specialUserLogin);
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
 		return new SpecialUserLoginPageObject(driver);
 	}
@@ -316,11 +317,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialNewFilesPageObject openSpecialNewFiles(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
-	}
-
-	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
-		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
-		return new SpecialAdminDashboardPageObject(driver);
 	}
 
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard(String wikiURL) {
@@ -419,16 +415,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditModePageObject(driver);
 	}
 
-	public WikiArticleEditMode clickEditButton() {
-		mouseOver("#GlobalNavigation li:nth(1)");
-		mouseRelease("#GlobalNavigation li:nth(1)");
-		waitForElementByElement(editButton);
-		waitForElementClickableByElement(editButton);
-		scrollAndClick(editButton);
-		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
-		return new WikiArticleEditMode(driver);
-	}
-
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
@@ -477,10 +463,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
 		getUrl(
-			urlBuilder.appendQueryStringToURL(
-				driver.getCurrentUrl(),
-				URLsContent.actionEditParameter
-			)
+				urlBuilder.appendQueryStringToURL(
+						driver.getCurrentUrl(),
+						URLsContent.actionEditParameter
+				)
 		);
 		return new VisualEditModePageObject(driver);
 	}
@@ -533,9 +519,9 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUserLogin);
 		PageObjectLogging.log(
-			"SpecialUserLoginOnWiki",
-			"Special:UserLogin opened on: " + wikiURL,
-			true
+				"SpecialUserLoginOnWiki",
+				"Special:UserLogin opened on: " + wikiURL,
+				true
 		);
 		return new SpecialUserLoginPageObject(driver);
 	}
@@ -642,6 +628,14 @@ public class WikiBasePageObject extends BasePageObject {
 		return new BlogPageObject(driver);
 	}
 
+	public NewChatPageObject openChat(String wikiURL) {
+		getUrl(
+			wikiURL + URLsContent.specialChat
+		);
+		return new NewChatPageObject(driver);
+	}
+
+
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
 		return new ArticlePageObject(driver);
@@ -742,10 +736,6 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 
 		return newPassword;
-	}
-
-	protected Boolean checkIfMainPage() {
-		return (body.getAttribute("class").contains("mainpage"));
 	}
 
 	public String getWikiaCssContent() {

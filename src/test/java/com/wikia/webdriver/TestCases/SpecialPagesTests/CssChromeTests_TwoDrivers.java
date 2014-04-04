@@ -26,8 +26,8 @@ public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 		specialCss1.verifyAceEditorPresence();
 		specialCss1.sendCssText(CssEditorContent.validCss);
 		//second user opens the special:CSS
-		switchToWindow(driverFF);
-		WikiBasePageObject base2 = new WikiBasePageObject(driverFF);
+		switchToWindow(driverTwo);
+		WikiBasePageObject base2 = new WikiBasePageObject(driverTwo);
 		base2.logInCookie(credentials.userNameStaff2, credentials.passwordStaff2, wikiURL);
 		SpecialCssPageObject specialCss2 = base2.openSpecialCss(wikiURL);
 		specialCss2.verifyAceEditorPresence();
@@ -37,7 +37,7 @@ public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 		specialCss1.clickPublishButton();
 		specialCss1.verifyAceEditorPresence(); //make sure page reloaded
 		//second user publishes his changes
-		switchToWindow(driverFF);
+		switchToWindow(driverTwo);
 		specialCss2.clickPublishButton();
 		specialCss2.verifyConflictArea();
 		specialCss2.verifyLatestRevision();

@@ -56,6 +56,7 @@ public class URLsContent {
 	public static final String specialBlockList = "wiki/Special:BlockList";
 	public static final String specialUnblock = "wiki/Special:Unblock";
 	public static final String specialBlock = "wiki/Special:Block";
+	public static final String specialChat = "wiki/Special:Chat";
 	public static final String specialManageWikiaHome = "wiki/Special:ManageWikiaHome";
 	public static final String specialUnusedFiles = "wiki/Special:UnusedFiles";
 	public static final String specialUnusedVideos = "wiki/Special:UnusedVideos";

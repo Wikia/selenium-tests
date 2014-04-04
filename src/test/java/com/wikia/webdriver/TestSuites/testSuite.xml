@@ -15,6 +15,7 @@
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.CustomizeToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.SignUpTests.SignUpTests"/>
 			<class name="com.wikia.webdriver.TestCases.ChatTests.ChatTests"/>
+			<class name="com.wikia.webdriver.TestCases.ChatTests.NewChatTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleRTETest"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleSourceModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.CategoriesTests.CategoriesArticleTests"/>
