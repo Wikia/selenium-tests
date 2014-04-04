@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -23,11 +24,16 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplateBeforeClass
 	VisualEditorPageObject ve;
 	VisualEditorSaveChangesDialog save;
 	ArticlePageObject article;
+	WikiBasePageObject base;
+
+	@BeforeMethod(alwaysRun = true)
+	public void setup() {
+		base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+	}
 
 	@Test(groups = {"VisualEditorMultiplePublish", "VisualEditorMultiplePublish_001"})
 	public void VisualEditorMultiplePublish_001() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String targetText = PageContent.articleText;
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		article = base.openArticleByName(wikiURL, articleName);
