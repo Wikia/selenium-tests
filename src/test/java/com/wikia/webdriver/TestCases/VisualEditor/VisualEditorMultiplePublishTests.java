@@ -14,36 +14,33 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 /**
  * @author Robert 'rochan' Chan
  *
- * VE-888 Verify VE is able to handle multiple edit on the same article in one session
+ * VE-888 Verify VE is able to perform multiple publish on the same article in one logged in session
  */
 
 public class VisualEditorMultiplePublishTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
+	VisualEditorPageObject ve;
+	VisualEditorSaveChangesDialog save;
+	ArticlePageObject article;
 
 	@Test(groups = {"VisualEditorMultiplePublish", "VisualEditorMultiplePublish_001"})
 	public void VisualEditorMultiplePublish_001() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		String targetText = PageContent.articleText;
-		String articleName = PageContent.articleNamePrefix + ve.getTimeStamp();
-		ve.navigateToArticleEditModeVisual(wikiURL,articleName);
-		ve.typeTextArea(targetText);
-		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
-		ArticlePageObject article = save.savePage();
+		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		article = base.openArticleByName(wikiURL, articleName);
+		ve = article.clickVEEditButton();
+		article = ve.editAndPublish(wikiURL, articleName, targetText);
 		article.verifyFormattingFromVE(Formatting.PARAGRAPH, targetText);
 		targetText = PageContent.articleTextEdit + targetText;
-		ve.navigateToArticleEditModeVisual(wikiURL,articleName);
-		ve.typeTextArea(PageContent.articleTextEdit);
-		save = ve.clickPublishButton();
-		article = save.savePage();
+		ve = article.clickVEEditButton();
+		article = ve.editAndPublish(wikiURL, articleName, PageContent.articleTextEdit);
 		article.verifyFormattingFromVE(Formatting.PARAGRAPH, targetText);
 		targetText = PageContent.articleTextSecondEdit + targetText;
-		ve.navigateToArticleEditModeVisual(wikiURL,articleName);
-		ve.typeTextArea(PageContent.articleTextSecondEdit);
-		save = ve.clickPublishButton();
-		article = save.savePage();
+		ve = article.clickVEEditButton();
+		article = ve.editAndPublish(wikiURL, articleName, PageContent.articleTextSecondEdit);
 		article.verifyFormattingFromVE(Formatting.PARAGRAPH, targetText);
 	}
 }
