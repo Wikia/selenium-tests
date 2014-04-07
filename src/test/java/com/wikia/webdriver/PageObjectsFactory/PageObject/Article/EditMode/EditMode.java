@@ -22,7 +22,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageO
 public class EditMode extends WikiBasePageObject {
 
 	@FindBy(css="#wpSave")
-	private WebElement submitButton;
+	protected WebElement submitButton;
 	@FindBy(css="#wpPreview")
 	private WebElement previewButton;
 	@FindBy(css="a.RTEImageButton")

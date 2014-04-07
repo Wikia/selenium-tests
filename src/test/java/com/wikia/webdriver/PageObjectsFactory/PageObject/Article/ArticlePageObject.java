@@ -19,13 +19,16 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuil
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 
 /**
@@ -137,6 +140,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImageArticle;
 	@FindBy(css=".wikia-menu-button")
 	private WebElement articleEditButton;
+	@FindBy(css="#CreatePageDialogBlank")
+	private WebElement blankPageRadioButton;
+	@FindBy(css="#CreatePageDialogFormat")
+	private WebElement standardLayoutPageRadioButton;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -198,18 +205,45 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertTrue(isPresent, "text is not present in the article");
 	}
 
-	public VisualEditModePageObject createArticleUsingDropdown(String articleTitle) {
+	public VisualEditModePageObject createArticleInCKUsingDropdown(String articleTitle) {
+		actionsClick(contributeDropdown);
+		waitForElementVisibleByElement(addArticleInDropdown);
+		CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+		articleModal.createPageWithBlankLayout(articleTitle);
+		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject createArticleInSrcUsingDropdown(String articleTitle) {
+		actionsClick(contributeDropdown);
+		waitForElementVisibleByElement(addArticleInDropdown);
+		CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
+		articleModal.createPageWithBlankLayout(articleTitle);
+		return new SourceEditModePageObject(driver);
+	}
+
+	private CreateArticleModalComponentObject clickArticleInDropDown(WebElement articleDropDown) {
+		waitForElementClickableByElement(addArticleInDropdown);
+		addArticleInDropdown.click();
+		return new CreateArticleModalComponentObject(driver);
+	}
+
+	public VisualEditorPageObject createArticleInVEUsingDropdown(String articleTitle) {
 		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
 		addArticleInDropdown.click();
 		articleTitleInputModal.sendKeys(articleTitle);
 		submitModal.click();
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditModePageObject editArticleInRTEUsingDropdown() {
+		actionsClick(editDropdown);
 		return new VisualEditModePageObject(driver);
 	}
 
-	public VisualEditModePageObject editArticleUsingDropdown() {
+	public SourceEditModePageObject editArticleInSrcUsingDropdown() {
 		actionsClick(editDropdown);
-		return new VisualEditModePageObject(driver);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public MiniEditorComponentObject triggerCommentArea() {
@@ -667,5 +701,32 @@ public class ArticlePageObject extends WikiBasePageObject {
 		thumbnailImageArticle.click();
 		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
 		return new LightboxComponentObject(driver);
+	}
+
+	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		waitForElementClickableByElement(redLinkToClick);
+		jQueryClick(redLinkToClick);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
+		articleModal.createPageWithBlankLayout("");
+		return new VisualEditModePageObject(driver);
+	}
+
+	private CreateArticleModalComponentObject clickRedLink(WebElement redLink) {
+		waitForElementClickableByElement(redLink);
+		jQueryClick(redLink);
+		return new CreateArticleModalComponentObject(driver);
+	}
+
+	public SourceEditModePageObject openSrcModeWithRedLinks(int linkNumber) {
+		WebElement redLinkToClick = redLinks.get(linkNumber);
+		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
+		articleModal.createPageWithBlankLayout("");
+		return new SourceEditModePageObject(driver);
 	}
 }

@@ -37,7 +37,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
@@ -52,7 +52,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.createArticleUsingDropdown(articleTitle);
+		VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
@@ -68,7 +68,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		articleTitle = articleTitle + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPage(wikiURL, articleTitle);
+		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
@@ -95,7 +95,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
+		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
 		visualEditMode.addContent(articleContent);
 		visualEditMode.submitArticle();
 		article.verifyContent(articleContent);

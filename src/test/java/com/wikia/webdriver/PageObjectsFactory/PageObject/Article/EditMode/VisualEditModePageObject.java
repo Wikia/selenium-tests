@@ -21,6 +21,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuild
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -73,9 +74,9 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement contextFrame;
 	@FindBy(css=".cke_dialog_body")
 	private WebElement addTableLightbox;
-
 	private By imageBy = By.cssSelector("img.image");
 	private By galleryBy = By.cssSelector("img.image-gallery");
+
 	private By slideshowBy = By.cssSelector("img.image-slideshow");
 	private By sliderBy = By.cssSelector("img.image-gallery-slider");
 	private By videoBy = By.cssSelector("img.video");
@@ -149,6 +150,7 @@ public class VisualEditModePageObject extends EditMode {
 	public void verifyContentLoaded() {
 		driver.switchTo().frame(iframe);
 		waitForElementByElement(contentInput);
+		PageObjectLogging.log("verifyContentLoaded", "RTE editor loaded", true, driver);
 		driver.switchTo().defaultContent();
 	}
 
@@ -423,6 +425,12 @@ public class VisualEditModePageObject extends EditMode {
 	public void clickPropertiesTableButton() {
 		selectFromContextMenu(propertiesItem);
 		waitForElementByElement(addTableLightbox);
+	}
+
+	public ArticlePageObject clickPublishButton() {
+		waitForElementByElement(submitButton);
+		submitButton.click();
+		return new ArticlePageObject(driver);
 	}
 
 }

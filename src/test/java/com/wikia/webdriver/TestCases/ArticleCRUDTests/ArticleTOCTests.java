@@ -76,7 +76,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 		ArticlePageObject article = base.openArticleByName(wikiURL,
 				articleTitle);
 		article.verifyTOCpresent();
-		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
+		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
 		visualEditMode.verifyContentLoaded();
 		PreviewEditModePageObject preview = visualEditMode.previewArticle();
 		preview.verifyTOCpresentOnPreview();
@@ -141,7 +141,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 		ArticlePageObject article = base.openArticleByName(wikiURL,
 				articleTitle);
 		article.verifyTOCpresent();
-		VisualEditModePageObject visualEditMode = article.editArticleUsingDropdown();
+		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
 		visualEditMode.verifyContentLoaded();
 		PreviewEditModePageObject preview = visualEditMode.previewArticle();
 		preview.verifyTOCpresentOnPreview();

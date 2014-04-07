@@ -146,5 +146,16 @@ public class URLsContent {
 	public static String avatarGeneric = "150px-Avatar.jpg";
 
 	//Urls for VE editor
-	public static final String veTestMainPage = "vetest";
+	public static final String veEnabledTestMainPage = "vetest";
+	public static final String veDisabledTestMainPage = "vedisabledtest";
+	public static final String rteDisabledTestMainPage = "ckdisabledtest";
+	public static final String veAndrteDisabledTestMainPage = "veandckdisabledtest";
+	public static final String testingPage = "Testingpage";
+
+	//Urls for different namespace pages
+	public static final String wikiMainPage = "Main_Page";
+	public static final String categoryPage = "Category:General_wiki_templates";
+	public static final String templatePage = "Template:Infobox";
+	public static final String listPage = "List:Listing";
+	public static final String mediaWiki = "mediawiki119";
 }
