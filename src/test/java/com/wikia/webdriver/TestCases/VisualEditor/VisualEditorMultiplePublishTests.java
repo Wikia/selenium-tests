@@ -37,15 +37,15 @@ public class VisualEditorMultiplePublishTests extends NewTestTemplateBeforeClass
 		String targetText = PageContent.articleText;
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		article = base.openArticleByName(wikiURL, articleName);
-		ve = article.clickVEEditButton();
+		ve = article.openVEModeWithMainEditButton();
 		article = ve.editAndPublish(wikiURL, articleName, targetText);
 		article.verifyFormattingFromVE(Formatting.PARAGRAPH, targetText);
 		targetText = PageContent.articleTextEdit + targetText;
-		ve = article.clickVEEditButton();
+		ve = article.openVEModeWithMainEditButton();
 		article = ve.editAndPublish(wikiURL, articleName, PageContent.articleTextEdit);
 		article.verifyFormattingFromVE(Formatting.PARAGRAPH, targetText);
 		targetText = PageContent.articleTextSecondEdit + targetText;
-		ve = article.clickVEEditButton();
+		ve = article.openVEModeWithMainEditButton();
 		article = ve.editAndPublish(wikiURL, articleName, PageContent.articleTextSecondEdit);
 		article.verifyFormattingFromVE(Formatting.PARAGRAPH, targetText);
 	}
