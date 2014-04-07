@@ -32,7 +32,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 	public void CategoriesTestsArticleEdit_001_anonEdit() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
+		VisualEditModePageObject visual = base.navigateToArticleEditPageCK(wikiURL, articleName);
 		String categoryName = PageContent.categoryNamePrefix + visual.getTimeStamp();
 		visual.typeCategoryName(categoryName);
 		visual.submitCategory();
@@ -47,7 +47,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 	public void CategoriesTestsArticleEdit_002_anonDelete() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
+		VisualEditModePageObject visual = base.navigateToArticleEditPageCK(wikiURL, articleName);
 		String categoryName = PageContent.categoryNamePrefix + visual.getTimeStamp();
 		visual.typeCategoryName(categoryName);
 		visual.submitCategory();
@@ -60,7 +60,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 	public void CategoriesTestsArticleEdit_003_anonSuggestions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
+		VisualEditModePageObject visual = base.navigateToArticleEditPageCK(wikiURL, articleName);
 		visual.typeCategoryName(PageContent.categoryNamePrefix);
 		visual.triggerCategorySuggestions();
 		String categoryName = visual.selectCategorySuggestions(1);
@@ -72,7 +72,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
+		VisualEditModePageObject visual = base.navigateToArticleEditPageCK(wikiURL, articleName);
 		String categoryName = PageContent.categoryNamePrefix + visual.getTimeStamp();
 		visual.typeCategoryName(categoryName);
 		visual.submitCategory();
@@ -84,7 +84,7 @@ public class CategoriesTestsEditMode extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visual = base.navigateToArticleEditPage(wikiURL, articleName);
+		VisualEditModePageObject visual = base.navigateToArticleEditPageCK(wikiURL, articleName);
 		visual.typeCategoryName(PageContent.categoryNamePrefix);
 		visual.triggerCategorySuggestions();
 		String categoryName = visual.selectCategorySuggestions(1);

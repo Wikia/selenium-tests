@@ -1,18 +1,19 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode;
 
-import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
+import com.wikia.webdriver.Common.ContentPatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
@@ -67,6 +68,8 @@ public class SourceEditModePageObject extends EditMode{
 	private WebElement submitButton;
 	@FindBy(css=".loading-indicator")
 	private WebElement sourceModeLoadingIndicator;
+	@FindBy(css=".editpage-editarea")
+	private WebElement sourceOnlyModeTextArea;
 
 	@FindBy(css=".cke_source")
 	private WebElement sourceModeTextArea;
@@ -343,5 +346,15 @@ public class SourceEditModePageObject extends EditMode{
 		waitForElementByElement(sourceModeTextArea);
 		waitForElementNotVisibleByElement(sourceModeLoadingIndicator);
 		PageObjectLogging.log("verifySourceModeEnabled", "source mode enabled", true);
+	}
+
+	public void verifySourceOnlyMode() {
+		waitForElementByElement(sourceOnlyModeTextArea);
+		if (!executeScriptRetBool(WikiaGlobalVariables.wgIsArticle)) {
+			waitForElementByElement(srcOnlyMode);
+			PageObjectLogging.log("verifySourceOnlyMode", "source only mode enabled", true, driver);
+		} else {
+			throw new NoSuchElementException("Can not detect the page to be in Edit mode");
+		}
 	}
 }

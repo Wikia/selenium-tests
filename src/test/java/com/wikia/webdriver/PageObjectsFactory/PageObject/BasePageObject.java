@@ -373,6 +373,11 @@ public class BasePageObject{
 		return (String) js.executeScript("return " + script);
 	}
 
+	public Boolean executeScriptRetBool(String script) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		return (Boolean) js.executeScript("return " + script);
+	}
+
 	public long executeScriptRetLong(String script) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		return (Long) js.executeScript("return " + script);

@@ -147,8 +147,16 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement veEditButton;
 	@FindBy(css="body.ve")
 	protected WebElement veMode;
-	@FindBy(css=".editsection>a")
+	@FindBy(css=".editsection")
 	protected List<WebElement> sectionEditButtons;
+	@FindBy(css="a.new[href$='redlink=1']")
+	protected List<WebElement> redLinks;
+	@FindBy(css="body.rte_wysiwyg")
+	protected WebElement rteMode;
+	@FindBy(css="body.rte_source")
+	protected WebElement srcInRteMode;
+	@FindBy(css="body:not(.rte_source):not(.ve):not(.rte_wysiwyg)")
+	protected WebElement srcOnlyMode;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -390,6 +398,20 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SourceEditModePageObject(driver);
 	}
 
+	public SourceEditModePageObject openSrcModeWithMainEditButton() {
+		waitForElementByElement(editButton);
+		editButton.click();
+		PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true, driver);
+		return new SourceEditModePageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithMainEditButton() {
+		waitForElementByElement(editButton);
+		editButton.click();
+		PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true, driver);
+		return new VisualEditModePageObject(driver);
+	}
+
 	public WikiArticleEditMode clickEditButton() {
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
@@ -400,24 +422,50 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
-	public VisualEditorPageObject clickVEEditButton() {
+	public VisualEditorPageObject openVEModeWithMainEditButton() {
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
-		PageObjectLogging.log("clickVEEditButton", "VE edit button clicked", true, driver);
+		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditorPageObject clickVESectionEditButton(int section) {
+	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
 		WebElement sectionEditButton = sectionEditButtons.get(section);
-		waitForElementByElement(sectionEditButton);
+		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-			"clickVESectionEditButton",
+			"openVEModeWithSectionEditButton",
 			"VE edit button clicked at section: " + section,
 			true,
 			driver
 		);
 		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"openCKModeWithSectionEditButton",
+			"RTE edit button clicked at section: " + section,
+			true,
+			driver
+		);
+		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"openSrcModeWithSectionEditButton",
+			"Src edit button clicked at section: " + section,
+			true,
+			driver
+		);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
@@ -430,13 +478,22 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditModePageObject(driver);
 	}
 
-	public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
+	public VisualEditModePageObject navigateToArticleEditPageCK(String wikiURL, String article) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
 			)
 		);
 		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+			)
+		);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
