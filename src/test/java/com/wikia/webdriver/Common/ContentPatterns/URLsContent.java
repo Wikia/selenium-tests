@@ -27,7 +27,7 @@ public class URLsContent {
 	public static final String specialAddBlogListingPage = "wiki/Special:CreateBlogListingPage";
 	public static final String specialNewFiles = "wiki/Special:NewFiles";
 	public static final String specialConnect = "wiki/Special:Connect";
-	public static final String specialNewVideo = "wiki/Special:Videos";
+	public static final String specialVideos = "wiki/Special:Videos";
 	public static final String specialUpload = "wiki/Special:Upload";
 	public static final String specialMultipleUpload = "wiki/Special:MultipleUpload";
 	public static final String specialWatchList = "wiki/Special:Watchlist";
@@ -96,6 +96,7 @@ public class URLsContent {
 	public static final String disableCaptchaParameter = "nocaptchatest=1";
 	public static final String sourceMode = "useeditor=source";
 	public static final String redLink = "redlink=1";
+	public static final String mostRecent = "?sort=recent";
 
 	// WAM Scores page url
 	public static final String wamPageUrl = "wiki/WAM";

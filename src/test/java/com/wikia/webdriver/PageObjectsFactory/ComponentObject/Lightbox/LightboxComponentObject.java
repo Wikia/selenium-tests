@@ -4,11 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @author Saipetch Kongkatong
  */
 public class LightboxComponentObject extends WikiBasePageObject {
 	public LightboxComponentObject(WebDriver driver) {
@@ -37,6 +40,14 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement redditShareLink;
 	@FindBy(css="a.plusone")
 	private WebElement plusoneShareLink;
+	@FindBy(css=".video-media")
+	private WebElement videoContainer;
+	@FindBy(css=".LightboxHeader h1 a")
+	private WebElement titleLink;
+	@FindBy(css=".more-info-button")
+	private WebElement moreInfoLink;
+	@FindBy(css=".WikiaLightbox div:not(.video-media)")
+	private WebElement imageContainer;
 	@FindBy(css="span.carousel-arrow.next")
 	private WebElement carouselRight;
 	@FindBy(css="span.carousel-arrow.previous:not(.disabled)")
@@ -52,12 +63,17 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxModal);
-		PageObjectLogging.log("verifyLightboxPopup", "verify lightbox appeared", true);
+		PageObjectLogging.log("verifyLightboxPopup", "Lightbox appeared", true);
 	}
 
 	public void verifyLightboxVideo() {
-		waitForElementByElement(mediaContainer);
-		PageObjectLogging.log("verifyLightboxVideo", "verify lightbox video appeared", true);
+		waitForElementByElement(videoContainer);
+		PageObjectLogging.log("verifyLightboxVideo", "Lightbox video appeared", true);
+	}
+
+	public void verifyLightboxImage() {
+		waitForElementByElement(imageContainer);
+		PageObjectLogging.log("verifyLightboxImage", "Lightbox image appeared", true);
 	}
 
 	public LightboxComponentObject openLightbox() {
@@ -136,6 +152,25 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void clickPlusOneShareButton() {
 		plusoneShareLink.click();
 		PageObjectLogging.log("clickPlusOneShareButton", "plus one share button is clicked", true);
+	}
+
+	public void verifyTitleUrl(String expectedUrl) {
+		String titleUrl = titleLink.getAttribute("href");
+		Assertion.assertEquals(expectedUrl, titleUrl);
+		PageObjectLogging.log("verifyTitleUrl", "Title URL is correct", true);
+	}
+
+	public FilePagePageObject clickTitle() {
+		waitForElementByElement(titleLink);
+		titleLink.click();
+		PageObjectLogging.log("clickTitleUrl", "Title url is clicked", true);
+		return new FilePagePageObject(driver);
+	}
+
+	public void verifyMoreInfoUrl(String expectedUrl) {
+		String moreInfoUrl = moreInfoLink.getAttribute("href");
+		Assertion.assertEquals(expectedUrl, moreInfoUrl);
+		PageObjectLogging.log("verifyMoreInfoUrl", "More Info URL is correct", true);
 	}
 
 	public void clickCarouselRight() {
