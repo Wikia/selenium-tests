@@ -139,6 +139,8 @@
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
 						<env>${env}</env>
+						<platform>${platform}</platform>
+						<platform-version>${platform-version}</platform-version>
 						<config>/selenium-config/config.xml</config>
 						<captcha>/selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>

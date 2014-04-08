@@ -52,6 +52,16 @@ public class ManualConfiguration extends AbstractConfiguration {
 	}
 
 	@Override
+	public String getVersion() {
+		return config.get("platform-version");
+	}
+
+	@Override
+	public String getPlatform() {
+		return config.get("platform");
+	}
+
+	@Override
 	public boolean loginCookieAvailable() {
 		return !((config.get("env").contains("dev")) || (config.get("env").contains("sandbox")));
 	}

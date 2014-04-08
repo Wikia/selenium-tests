@@ -56,6 +56,16 @@ public class POMConfiguration extends AbstractConfiguration {
 	}
 
 	@Override
+	public String getVersion() {
+		return System.getProperty("platform-version");
+	}
+
+	@Override
+	public String getPlatform() {
+		return System.getProperty("platform");
+	}
+
+	@Override
 	public boolean loginCookieAvailable() {
 		return !(env.contains("dev") || (env.contains("sandbox")));
 	}
