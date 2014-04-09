@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 
 import java.io.File;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,7 +11,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonReader;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -871,42 +874,27 @@ public class BasePageObject{
 	/**
 	 * this method should be called after clicktracking test, in order
 	 * to verify if expected events were tracked
-	 *
-	 * @param expectedEventsList - the expected tracked events
 	 * @author Michal 'justnpT' Nowierski
 	 */
-	public void compareTrackedEventsTo(List<String> expectedEventsList){
-		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
-		ArrayList<String> trackedEventsArrayList = new ArrayList<String>();
-		List<String> trackedEventsList;
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		//prepare list of tracked events
-		Object event = js.executeScript("return selenium_popEvent()");
-		while (!(event == null)) {
-			trackedEventsArrayList.add(event.toString());
-			event = js.executeScript("return selenium_popEvent()");
-		}
-		trackedEventsList = trackedEventsArrayList;
-		//use comparison method from ClicktrackingSupport class
-		ClickTrackingSupport support = new ClickTrackingSupport();
-		support.compareTrackedEventsTo(expectedEventsList, trackedEventsList);
-	}
-
 	public void compareTrackedEventsTo2(List<JsonObject> expectedEventsList){
 		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
-		ArrayList<String> trackedEventsArrayList = new ArrayList<String>();
-		List<String> trackedEventsList;
+		ArrayList<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
+		List<JsonObject> trackedEventsList;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		//prepare list of tracked events
 		Object event = js.executeScript("return selenium_popEvent()");
+		StringReader reader = new StringReader(event.toString());
+		JsonReader jsonReader = Json.createReader(reader);
 		while (!(event == null)) {
-			trackedEventsArrayList.add(event.toString());
+			reader = new StringReader(event.toString());
+			jsonReader = Json.createReader(reader);
+			trackedEventsArrayList.add(jsonReader.readObject());
+			// take next tracked event
 			event = js.executeScript("return selenium_popEvent()");
 		}
 		trackedEventsList = trackedEventsArrayList;
-		//use comparison method from ClicktrackingSupport class
 		ClickTrackingSupport support = new ClickTrackingSupport();
-		support.compareTrackedEventsTo2(expectedEventsList, trackedEventsList);
+		support.compare(expectedEventsList, trackedEventsList);
 	}
 
 }
