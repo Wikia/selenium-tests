@@ -13,7 +13,7 @@ public class ClickTrackingSupport {
 		Boolean equals = false;
 		for (JsonObject expectedEvent : expectedEventList) {
 			for (JsonObject event : currentEventList) {
-				PageObjectLogging.log("compareTrackedEventsTo2",
+				PageObjectLogging.log("compare",
 						"comparing clicktracked events to expected event \n"
 						+ "expected event: "+expectedEvent.toString() + "\n"
 						+ "compared event: "+event.toString(), true);
@@ -23,7 +23,7 @@ public class ClickTrackingSupport {
 				}
 			}
 			if (!equals) {
-				PageObjectLogging.log("compareTrackedEventsTo2",
+				PageObjectLogging.log("compare",
 						"didn't find match for expected event: "+expectedEvent.toString(),
 						false);
 			}

@@ -876,7 +876,7 @@ public class BasePageObject{
 	 * to verify if expected events were tracked
 	 * @author Michal 'justnpT' Nowierski
 	 */
-	public void compareTrackedEventsTo2(List<JsonObject> expectedEventsList){
+	public void compareTrackedEventsTo(List<JsonObject> expectedEventsList){
 		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
 		ArrayList<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
 		List<JsonObject> trackedEventsList;

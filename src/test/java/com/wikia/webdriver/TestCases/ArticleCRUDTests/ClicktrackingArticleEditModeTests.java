@@ -35,6 +35,6 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		List<JsonObject> expectedEvents = Arrays.asList(
 				EventsArticleEditMode.preview
 		);
-		visualEditMode.compareTrackedEventsTo2(expectedEvents);
+		visualEditMode.compareTrackedEventsTo(expectedEvents);
 	}
 }
