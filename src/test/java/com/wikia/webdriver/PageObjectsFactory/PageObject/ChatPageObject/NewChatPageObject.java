@@ -44,7 +44,7 @@ public class NewChatPageObject extends WikiBasePageObject
 	private WebElement blockPrivateMassageButton;
 	@FindBy(css="div#Rail img.wordmark")
 	private WebElement mainChatButton;
-	@FindBy(css="h1[class='public wordmark selected']")
+	@FindBy(css="h1.public.wordmark.selected")
 	private WebElement mainChatSelection;
 	@FindBy(css="ul.PrivateChatList span.splotch")
 	private WebElement privateMessageNotificator;
@@ -60,8 +60,14 @@ public class NewChatPageObject extends WikiBasePageObject
 	private WebElement chatBanModal;
 	@FindBy(css="#ChatBanModal button.primary")
 	private WebElement chatBanModalButton;
-	@FindBy (css="#UserStatsMenu .actions li")
+	@FindBy (css="#UserStatsMenu .regular-actions li")
 	private List<WebElement> userDropDownActionsElements;
+	@FindBy (css="#UserStatsMenu .admin-actions li")
+	private List<WebElement> adminDropDownActionsElements;
+	@FindBy (css="#Rail h1.private")
+	private WebElement privateAreaHeader;
+	@FindBy (css="#Rail img.wordmark")
+	private WebElement chatWordmarkImage;
 
 	By userContextMenu = By.cssSelector("ul.regular-actions li");
 	By adminContextMenu = By.cssSelector("ul.admin-actions li");
@@ -73,8 +79,9 @@ public class NewChatPageObject extends WikiBasePageObject
 	final private String userUnbanConfirmMessage = "//div[@class='Chat']"
 			+ "//li[contains(text(), 'has ended the Chat ban for %s')]";
 
-	private final String userSelector = "#user-%user%";
-	private final String privateMessageUserSelector = "#priv-user-%user%";
+	private final String userSelector = "#user-%s";
+	private final String privateMessageUserSelector = "#priv-user-%s";
+	private final String privateMessageSelectedUserSelector = "#priv-user-%s.User.selected";
 
 	public NewChatPageObject(WebDriver driver) {
 		super(driver);
@@ -110,14 +117,8 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("verifyUserIsVisibleOnContactsList", userName+" is visible on contacts list", true, driver);
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 * verifies if there is private message header in right hand sidebar
-	 * method should be executed after selectPrivateMeaage()
-	 */
-	public void verifyPrivateMessageHeader()
-	{
-		waitForElementByBy(privateMessageHeader);
+	public void verifyPrivateMessageHeader() {
+		waitForElementByElement(privateAreaHeader);
 		PageObjectLogging.log(
 			"verifyPrivateMessageHeader",
 			"private message header is visible", true, driver
@@ -140,9 +141,8 @@ public class NewChatPageObject extends WikiBasePageObject
 		);
 	}
 
-	public void verifyPrivateMessageIsHighLighted(String user)
-	{
-		waitForElementByXPath("//li[contains(@class, 'User') and contains(@class, 'selected') and @id='priv-user-"+user+"']");
+	public void verifyPrivateMessageIsHighLighted(String user) {
+		getElementForUser(user, privateMessageSelectedUserSelector);
 		PageObjectLogging.log("verifyPrivateMessageIsHighLighted", "private message section is highlighted", true, driver);
 	}
 
@@ -152,10 +152,9 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("verifyPrivateChatTitle", "private chat title is correct", true, driver);
 	}
 
-	public void verifyMainChatIsHighLighted()
-	{
+	public void verifyMainChatIsHighLighted() {
 		waitForElementByElement(mainChatSelection);
-		PageObjectLogging.log("verifyPrivateMessageIsHighLighted", "private message section is highlighted", true, driver);
+		PageObjectLogging.log("verifyPrivateMessageIsHighLighted", "private message section is highlighted", true);
 	}
 
 	public void verifyNormalUserDropdown(String userName) {
@@ -184,38 +183,21 @@ public class NewChatPageObject extends WikiBasePageObject
 
 	public void verifyPrivateUserDropdown(String userName) {
 		clickOnDifferentUserInPrivateMessageSection(userName);
-		List<WebElement> list = userDropDownActionsElements;
-		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
-		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
-		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
-		Assertion.assertEquals("private-block", list.get(2).getAttribute("class"));	
+		Assertion.assertNumber(3, userDropDownActionsElements.size(), "Checking number of elements in the drop-down");
+		Assertion.assertEquals("message-wall", userDropDownActionsElements.get(0).getAttribute("class"));
+		Assertion.assertEquals("contribs", userDropDownActionsElements.get(1).getAttribute("class"));
+		Assertion.assertEquals("private-block", userDropDownActionsElements.get(2).getAttribute("class"));
 	}
 
-	/**
-	 * @author Karol Kujawiak
-	 * verifies admin user drop-down content, should be executed after clickOnDifferentUser() execution
-	 */
-	public void verifyAdminUserDropdown()
-	{
-		List<WebElement> list = userDropDownActionsElements;
-		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
-		for (int i=0; i<list.size(); i++)
-		{
-			PageObjectLogging.log("verifyAdminUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
-		}
-		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
-		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
-		Assertion.assertEquals("private", list.get(2).getAttribute("class"));
-		
-		list = getAdminDropDownListOfElements();
-		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
-		for (int i=0; i<list.size(); i++)
-		{
-			PageObjectLogging.log("verifyAdminUserDropdown", i+" item in drop-down is "+ list.get(i).getAttribute("class"), true);
-		}
-		Assertion.assertEquals("give-chat-mod", list.get(0).getAttribute("class"));
-		Assertion.assertEquals("kick", list.get(1).getAttribute("class"));
-		Assertion.assertEquals("ban", list.get(2).getAttribute("class"));
+	public void verifyAdminUserDropdown(String userName) {
+		//Admin dropDown consists of two parts: regular dropdown
+		verifyNormalUserDropdown(userName);
+
+		//and admin dropDown
+		Assertion.assertNumber(3, adminDropDownActionsElements.size(), "Checking number of elements in the drop-down");
+		Assertion.assertEquals("give-chat-mod", adminDropDownActionsElements.get(0).getAttribute("class"));
+		Assertion.assertEquals("kick", adminDropDownActionsElements.get(1).getAttribute("class"));
+		Assertion.assertEquals("ban", adminDropDownActionsElements.get(2).getAttribute("class"));
 	}
 
 	public void verifyUserIsGreyedOut()
@@ -286,10 +268,9 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("selectChatModStatus", "chat mod status is clicked", true, driver);
 	}
 
-	public void clickOnMainChat(WebDriver driver)
-	{
-		executeScript("document.querySelectorAll('.public.wordmark img.wordmark')[0].click()", driver);
-		PageObjectLogging.log("clickOnMainChat", "main chat is clicked", true, driver);
+	public void clickOnMainChat() {
+		chatWordmarkImage.click();
+		PageObjectLogging.log("clickOnMainChat", "main chat is clicked", true);
 	}
 
 	public void clickOnPrivateChat(String user, WebDriver driver)
@@ -446,19 +427,8 @@ public class NewChatPageObject extends WikiBasePageObject
 		return checkIfElementOnPage(allowPrivateMassageButton);
 	}
 
-	/**
-	 * @author Karol
-	 * @return
-	 * method gathers all WebElements from admin drop-down, and returns list of them
-	 */
-	private  List<WebElement> getAdminDropDownListOfElements()
-	{
-		List<WebElement> list = driver.findElements(adminContextMenu); 
-		return list;
-	}
-
 	private WebElement getElementForUser(String userName, String selector) {
-		String userCss = selector.replace("%user%", userName);
+		String userCss = String.format(selector, userName);
 		waitForElementByCss(userCss);
 		return driver.findElement(By.cssSelector(userCss));
 	}

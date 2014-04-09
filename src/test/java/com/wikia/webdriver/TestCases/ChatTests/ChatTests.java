@@ -68,7 +68,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		chat1.openChatPage();
 		chat1.verifyChatPage();
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
@@ -91,7 +91,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 				credentials.userName, credentials.password, true);
 		chat1.openChatPage();
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
@@ -115,7 +115,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		ChatPageObject chat1 = createChatPageObject(driver,
 				credentials.userName, credentials.password, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
@@ -147,7 +147,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		ChatPageObject chat1 = createChatPageObject(driver,
 				credentials.userNameStaff, credentials.passwordStaff, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
@@ -188,7 +188,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		ChatPageObject chat1 = createChatPageObject(driver,
 				credentials.userName, credentials.password, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
@@ -222,13 +222,13 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		ChatPageObject chat1 = createChatPageObject(driver,
 				credentials.userName, credentials.password, true);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName2, credentials.password2, true);
 		chat2.openChatPage();
 		switchToWindow(driver);
 		chat1.openChatPage();
 		//test
-		switchToWindow(driverFF);
+		switchToWindow(driverTwo);
 		chat2.writeOnChat("Hello this is user "+credentials.userName2);
 		switchToWindow(driver);
 		chat1.verifyMessageOnChat("Hello this is user "+credentials.userName2);
@@ -256,7 +256,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		ChatPageObject chat1 = createChatPageObject(driver,
 				credentials.userName3, credentials.password3, false);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName4, credentials.password4, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
@@ -268,8 +268,8 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		chat1.verifyUserIsVisibleOnContactsList(credentials.userName4);
 		chat2.writeOnChat("test message");
 		chat1.verifyMessageOnChat("test message");
-		chat2.clickOnDifferentUser(credentials.userName3, driverFF);
-		chat2.selectPrivateMessage(driverFF);
+		chat2.clickOnDifferentUser(credentials.userName3, driverTwo);
+		chat2.selectPrivateMessage(driverTwo);
 		chat2.writeOnChat("This is private message from "+credentials.userName4);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification();
@@ -295,7 +295,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		ChatPageObject chat1 = createChatPageObject(driver,
 				credentials.userName5, credentials.password5, false);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 				credentials.userName6, credentials.password6, false);
 		chat2.openChatPage();
 		chat2.verifyChatPage();
@@ -307,8 +307,8 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		chat1.verifyUserIsVisibleOnContactsList(credentials.userName6);
 		chat2.writeOnChat("test message");
 		chat1.verifyMessageOnChat("test message");
-		chat2.clickOnDifferentUser(credentials.userName5, driverFF);
-		chat2.selectPrivateMessage(driverFF);
+		chat2.clickOnDifferentUser(credentials.userName5, driverTwo);
+		chat2.selectPrivateMessage(driverTwo);
 		chat2.writeOnChat("This is private message from "+credentials.userName6);
 		chat1.verifyPrivateMessageHeader();
 		chat1.verifyPrivateMessageNotification(1);
@@ -346,7 +346,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		ChatPageObject chat1 = createChatPageObject(driver,
 			credentials.userName3, credentials.password3, false);
 		//second user opens the chat
-		ChatPageObject chat2 = createChatPageObject(driverFF,
+		ChatPageObject chat2 = createChatPageObject(driverTwo,
 			credentials.userNameStaff, credentials.passwordStaff, false);
 
 		chat2.openChatPage();
@@ -359,8 +359,8 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		chat2.verifyUserIsVisibleOnContactsList(credentials.userName3);
 		chat1.verifyUserIsVisibleOnContactsList(credentials.userNameStaff);
 
-		chat2.clickOnDifferentUser(credentials.userName3, driverFF);
-		chat2.banUser(credentials.userName3, driverFF);
-		chat2.unBanUser(credentials.userName3, driverFF);
+		chat2.clickOnDifferentUser(credentials.userName3, driverTwo);
+		chat2.banUser(credentials.userName3, driverTwo);
+		chat2.unBanUser(credentials.userName3, driverTwo);
 	}
 }
