@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 public class TestHighValueCountries extends NewTestTemplate {
 

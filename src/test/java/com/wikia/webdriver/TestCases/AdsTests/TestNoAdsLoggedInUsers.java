@@ -11,8 +11,8 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 @Test (
 	groups={"No_Ads_For_Users", "Ads"}

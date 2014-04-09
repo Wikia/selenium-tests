@@ -10,8 +10,8 @@ import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 public class TestAdSkinPresence extends NewTestTemplate {
 
