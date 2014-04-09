@@ -9,8 +9,8 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- *
- '* @author Bogna 'bognix' Knychala
+ * @author Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 public class TestNo71MediaAdsForSony extends NewTestTemplate {
 
