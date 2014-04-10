@@ -14,7 +14,6 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -139,14 +138,6 @@ public class BasePageObject{
 		return isElementInElement;
 	}
 
-	public void mouseOverByBy(By by) {
-		waitForElementByBy(by);
-		WebElement element = driver.findElement(by);
-		Actions action = new Actions(driver);
-		action.moveToElement(element);
-		action.perform();
-	}
-
 	public void mouseOver(WebElement elem) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("$(arguments[0]).mouseenter()", elem);
@@ -218,10 +209,6 @@ public class BasePageObject{
 
 	public void jQueryFocus(String cssSelector){
 		executeScript("$('" + cssSelector + "').focus()");
-	}
-
-	public void jQueryNthElemClick(String cssSelector, int n){
-		executeScript("$('"+cssSelector+"')["+n+"].click()");
 	}
 
 	public void jQueryFocus(WebElement element){
@@ -398,16 +385,6 @@ public class BasePageObject{
 	}
 
 	/**
-	 * Returns parent element of the given element
-	 *
-	 * @author Michal Nowierski ** @param childElement - the element whose
-	 *		 parent we are looking for
-	 */
-	public WebElement getParentElement(WebElement childElement) {
-		return childElement.findElement(By.xpath(".."));
-	}
-
-	/**
 	 * Checks if the element is visible on browser
 	 *
 	 ** @param by
@@ -460,44 +437,9 @@ public class BasePageObject{
 		return driver.findElement(By.xpath(xPath));
 	}
 
-	public void waitForElementNotVisibleByCss(String css) {
-		Global.LOG_ENABLED = false;
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-				.cssSelector(css)));
-		Global.LOG_ENABLED = true;
-	}
-
-	public void waitForElementNotVisibleByBy(By by) {
-		wait.until(CommonExpectedConditions.elementNotPresent(by));
-	}
-
-	/*
-	 * Wait for element not visible. Timeout is specified by customWait value
-	 *
-	 * @param WebElement element - element meant to disappearance
-	 * @param WebDriverWait customWait - time before TimeOutException is thrown
-	 */
-	public void waitForElementNotVisibleByElementCustomWait (
-		WebElement element, WebDriverWait customWait
-	) {
-		customWait.until (
-			CommonExpectedConditions.invisibilityOfElementLocated(element)
-		);
-	}
-
 	public void waitForElementNotVisibleByElement(WebElement element) {
 		wait.until(CommonExpectedConditions
 				.invisibilityOfElementLocated(element));
-	}
-
-	public void waitForElementClickableByCss(String css) {
-
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(css)));
-	}
-
-	public WebElement waitForElementClickableByBy(By by) {
-		wait.until(ExpectedConditions.elementToBeClickable(by));
-		return driver.findElement(by);
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {
@@ -527,10 +469,6 @@ public class BasePageObject{
 
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
 		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
-	}
-
-	public void waitForTextNotPresentInElementByElement(WebElement element, String text) {
-		wait.until(CommonExpectedConditions.textNotPresentInElement(element, text));
 	}
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {
@@ -580,55 +518,8 @@ public class BasePageObject{
 		return sb.toString();
 	}
 
-	/**
-	 * <p>
-	 * Verify if js alert is or isn't there. You can expect alert with certain
-	 * message, or not expect alert with certain message <br>
-	 *
-	 * @param alertMessage that we do or do not expect
-	 * @param ifAlertExpected
-	 *			if we expect JS alert - true. If we don't expect JS alert -
-	 *			false
-	 * @author Michal Nowierski
-	 */
-	public void checkJSalertIsThere(String alertMessage, Boolean ifAlertExpected) {
-
-		try {
-			Thread.sleep(1000);
-			Alert alert = driver.switchTo().alert();
-			if (alert.getText().equals(alertMessage)) {
-				alert.accept();
-				PageObjectLogging.log("checkJSalertIsThere",
-						"We expect an alret = " + ifAlertExpected
-								+ ". JS alert found", ifAlertExpected, driver);
-			} else {
-				alert.accept();
-				PageObjectLogging
-						.log("checkJSalertIsThere",
-								"We expect an alret = "
-										+ ifAlertExpected
-										+ ". JS alert found, and it has unexpected message: "
-										+ alert.getText()
-										+ " while it should be: "
-										+ alertMessage, false, driver);
-
-			}
-		} catch (NoAlertPresentException Ex) {
-			PageObjectLogging.log("checkJSalertIsThere",
-					"We expect an alret = " + ifAlertExpected
-							+ ". JS alert not found", !ifAlertExpected, driver);
-		} catch (InterruptedException e) {
-
-		}
-	}
-
 	public void openWikiPage() {
 		getUrl(Global.DOMAIN + URLsContent.noexternals);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
-	}
-
-	public void openVideoSuggestionsPage() {
-		getUrl(URLsContent.videoSuggestionsUrl);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
@@ -742,11 +633,6 @@ public class BasePageObject{
 		}
 		driver.get(currentUrl);
 		PageObjectLogging.log("appendToUrl", queryStrings + " have been appended to url", true);
-	}
-
-	public void removeQsFromUrl() {
-		driver.get(urlBuilder.removeQueryStringsFromURL(driver.getCurrentUrl()));
-		PageObjectLogging.log("removeQSfromUrl", "qs removed form url", true);
 	}
 
 	public void pressEnter(WebElement element) {
