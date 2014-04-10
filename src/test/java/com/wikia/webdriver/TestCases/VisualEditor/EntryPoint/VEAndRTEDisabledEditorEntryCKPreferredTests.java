@@ -36,7 +36,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_CKPreferred() {
-		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 	}
