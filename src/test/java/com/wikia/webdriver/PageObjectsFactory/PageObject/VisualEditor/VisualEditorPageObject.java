@@ -84,7 +84,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
 	}
 
-	public ArticlePageObject editAndPublish(String wikiURL, String articleName, String content) {
+	public ArticlePageObject clickVEEditAndPublish(String wikiURL, String articleName, String content) {
 		typeTextArea(content);
 		VisualEditorSaveChangesDialog save = clickPublishButton();
 		save.savePage();
