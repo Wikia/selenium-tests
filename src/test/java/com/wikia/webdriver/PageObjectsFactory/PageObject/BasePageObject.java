@@ -638,9 +638,10 @@ public class BasePageObject{
 	public void pressEnter(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
-				"var e = jQuery.Event(\"keydown\"); " +
-				"e.which=13; $(arguments[0]).trigger(e);",
-				element
+			"var e = $.Event('keypress'); " +
+			"e.keyCode = 13; e.which=13;" +
+			"$(arguments[0]).trigger(e);",
+			element
 		);
 	}
 

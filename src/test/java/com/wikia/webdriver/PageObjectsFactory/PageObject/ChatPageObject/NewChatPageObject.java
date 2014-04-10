@@ -5,7 +5,6 @@ import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,7 +46,7 @@ public class NewChatPageObject extends WikiBasePageObject
 	@FindBy(css="h1.public.wordmark.selected")
 	private WebElement mainChatSelection;
 	@FindBy(css="ul.PrivateChatList span.splotch")
-	private WebElement privateMessageNotificator;
+	private WebElement privateMessageNotification;
 	@FindBy(css="li.User.selected.blocked")
 	private WebElement userDisconnectedButton;
 	@FindBy(css="li.give-chat-mod span.label")
@@ -65,9 +64,11 @@ public class NewChatPageObject extends WikiBasePageObject
 	@FindBy (css="#UserStatsMenu .admin-actions li")
 	private List<WebElement> adminDropDownActionsElements;
 	@FindBy (css="#Rail h1.private")
-	private WebElement privateAreaHeader;
+	private WebElement privateMessagesHeader;
 	@FindBy (css="#Rail img.wordmark")
 	private WebElement chatWordmarkImage;
+	@FindBy (css="#WikiChatList li")
+	private WebElement chatLoadedIndicator;
 
 	By userContextMenu = By.cssSelector("ul.regular-actions li");
 	By adminContextMenu = By.cssSelector("ul.admin-actions li");
@@ -82,6 +83,7 @@ public class NewChatPageObject extends WikiBasePageObject
 	private final String userSelector = "#user-%s";
 	private final String privateMessageUserSelector = "#priv-user-%s";
 	private final String privateMessageSelectedUserSelector = "#priv-user-%s.User.selected";
+	private final String messageOnChat = "//span[@class='message'][contains(text(), '%s')]";
 
 	public NewChatPageObject(WebDriver driver) {
 		super(driver);
@@ -96,10 +98,9 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("verifyChatPage", "Chat page verified", true, driver);
 	}
 
-	public void verifyMessageOnChat(String message)
-	{
-		waitForElementByBy(By.xpath("//span[@class='message' and contains(text(), '"+message+"')]"));
-		PageObjectLogging.log("writeOnChat", "Message: "+message+" is visible on chat board", true, driver);
+	public void verifyMessageOnChat(String message) {
+		waitForElementByXPath(String.format(messageOnChat, message));
+		PageObjectLogging.log("VerifyMessageOnChatPresent", "Message: " + message + " is present on chat board", true, driver);
 	}
 
 	public void verifyUserJoinToChat(String userName) {
@@ -118,17 +119,19 @@ public class NewChatPageObject extends WikiBasePageObject
 	}
 
 	public void verifyPrivateMessageHeader() {
-		waitForElementByElement(privateAreaHeader);
+		waitForElementByElement(privateMessagesHeader);
 		PageObjectLogging.log(
 			"verifyPrivateMessageHeader",
 			"private message header is visible", true, driver
 		);
 	}
 
-	public void verifyPrivateMessageNotification()
-	{
-		waitForElementByElement(privateMessageNotificator);
-		PageObjectLogging.log("verifyPrivateMessageNotification", "private message notification is visible", true, driver);
+	public void verifyPrivateMessageNotification() {
+		waitForElementByElement(privateMessageNotification);
+		PageObjectLogging.log(
+			"verifyPrivateMessageNotification",
+			"private message notification is visible", true, driver
+		);
 	}
 	
 	public void verifyPrivateMessageNotification(int notificationNumber)
@@ -182,7 +185,7 @@ public class NewChatPageObject extends WikiBasePageObject
 	}
 
 	public void verifyPrivateUserDropdown(String userName) {
-		clickOnDifferentUserInPrivateMessageSection(userName);
+		openUserDropDownInPrivateMessageSection(userName);
 		Assertion.assertNumber(3, userDropDownActionsElements.size(), "Checking number of elements in the drop-down");
 		Assertion.assertEquals("message-wall", userDropDownActionsElements.get(0).getAttribute("class"));
 		Assertion.assertEquals("contribs", userDropDownActionsElements.get(1).getAttribute("class"));
@@ -230,23 +233,14 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("disconnectFromChat", "User is disconnected from the chat", true, driver);
 	}
 
-	
-	/**
-	 * @author Karol Kujawiak
-	 * @param message
-	 * writes on chat and submits message, 
-	 * verifies if message is visible in chat area 
-	 */
-	public void writeOnChat(String message)
-	{
+	public void writeOnChat(String message) {
+		waitForElementByElement(chatLoadedIndicator);
 		messageWritingArea.sendKeys(message);
-		executeScript("e = jQuery.Event(\"keypress\"); e.which = 13; e.keyCode = 13; $('textarea[name=\"message\"]').trigger(e);", driver);
-//		messageForm.submit();
-		PageObjectLogging.log("writeOnChat", "Message: "+message+" written", true, driver);
-		waitForElementByBy(By.xpath("//span[@class='message' and contains(text(), '"+message+"')]"));
-		PageObjectLogging.log("writeOnChat", "Message: "+message+" is visible on chat board", true, driver);
+		pressEnter(messageWritingArea);
+		PageObjectLogging.log("writeOnChat", "Message: " + message + " written", true, driver);
+		verifyMessageOnChat(message);
 	}
-	
+
 	public void selectPrivateMessageToUser(String userName) {
 		//This check is needed in case some of the previous tests failed
 		//We need to do the clean up in this place - allow provided user to send private messages
@@ -273,11 +267,9 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("clickOnMainChat", "main chat is clicked", true);
 	}
 
-	public void clickOnPrivateChat(String user, WebDriver driver)
-	{
-		executeScript("document.querySelectorAll('#priv-user-"+user+"')[0].click()", driver);
-		verifyPrivateMessageIsHighLighted(user);
-		PageObjectLogging.log("clickOnPrivateChat", "private chat is clicked", true, driver);
+	public void clickOnPrivateChat(String userName) {
+		WebElement privateMessageUser = getElementForUser(userName, privateMessageUserSelector);
+		verifyPrivateMessageIsHighLighted(userName);
 	}
 
 	public void clickOnUserInPrivateMessageSection(String userName) {
@@ -375,8 +367,7 @@ public class NewChatPageObject extends WikiBasePageObject
 		}
 	}
 
-
-	public void clickOnDifferentUserInPrivateMessageSection(String userName) {
+	public void openUserDropDownInPrivateMessageSection(String userName) {
 		WebElement userOnPrivateMessagesList = getElementForUser(userName, privateMessageUserSelector);
 		boolean hidden = !userStatsMenu.isDisplayed();
 		int i = 0;
@@ -387,11 +378,11 @@ public class NewChatPageObject extends WikiBasePageObject
 			}
 			i++;
 		}
-		PageObjectLogging.log("clickOnDifferentUserInPrivateMessageSection", userName + " button clicked", true);
+		PageObjectLogging.log("openUserDropDownInPrivateMessageSection", userName + " button clicked", true);
 	}
 
 	public void blockPrivateMessageFromUser(String userName) {
-		clickOnDifferentUserInPrivateMessageSection(userName);
+		openUserDropDownInPrivateMessageSection(userName);
 		blockPrivateMassageButton.click();
 		waitForElementNotVisibleByElement(userStatsMenu);
 	}
