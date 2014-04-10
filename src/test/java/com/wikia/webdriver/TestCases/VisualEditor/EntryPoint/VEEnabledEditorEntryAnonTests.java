@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.VisualEditor.EntryPoint;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -44,9 +43,8 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 		groups = {"VEEnabledEditorEntryAnonTests", "VEEnabledEditorEntryAnonTests_001"}
 	)
 	public void VEEnabledEditorEntryAnonTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, articleName);
+		String articleName = base.getNameForArticle();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -57,7 +55,7 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEEnabledEditorEntryAnonTests_002_MainEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.openArticleByName(wikiURL, base.getNameForArticle());
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -131,7 +129,7 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEEnabledEditorEntryAnonTests_009_actionEdit() {
 		VisualEditModePageObject ck =
-			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageCK(wikiURL, base.getNameForArticle());
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
 	}

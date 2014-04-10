@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.VisualEditor.EntryPoint;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -44,9 +43,8 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_001"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, articleName);
+		String articleName = base.getNameForArticle();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		VisualEditModePageObject ck = article.createArticleInCKUsingDropdown(articleName);
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -57,8 +55,8 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_002_MainEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
-		VisualEditModePageObject ck = article.editArticleInRTEUsingDropdown();
+			base.openArticleByName(wikiURL, base.getNameForArticle());
+		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
 	}
@@ -131,7 +129,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_009_actionEdit() {
 		VisualEditModePageObject ck =
-			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageCK(wikiURL, base.getNameForArticle());
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
 	}

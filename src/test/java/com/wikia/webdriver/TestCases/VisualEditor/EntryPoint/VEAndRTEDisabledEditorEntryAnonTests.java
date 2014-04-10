@@ -3,7 +3,6 @@ package com.wikia.webdriver.TestCases.VisualEditor.EntryPoint;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -43,9 +42,8 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 		groups = {"VEAndRTEDisabledEditorEntryAnonTests", "VEAndRTEDisabledEditorEntryAnonTests_001"}
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, articleName);
+		String articleName = base.getNameForArticle();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -56,7 +54,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_002_MainEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.openArticleByName(wikiURL, base.getNameForArticle());
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -129,7 +127,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_009_actionEdit() {
 		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageSrc(wikiURL, base.getNameForArticle());
 		src.verifySourceOnlyMode();
 	}
 }
