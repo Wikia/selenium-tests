@@ -20,9 +20,9 @@ public class ClickTrackingSupport {
 				equals = currentEvent.equals(expectedEvent);
 				if (equals) {
 					PageObjectLogging.log("compare",
-							"match for expected event found: \n"
-							+ "expected event: "+expectedEvent.toString() + "\n"
-							+ "compared event: "+currentEvent.toString(), true);
+						"match for expected event found: \n"
+						+ "expected event: "+expectedEvent.toString() + "\n"
+						+ "compared event: "+currentEvent.toString(), true);
 					currentEventList.remove(currentEvent);
 					break;
 				}
