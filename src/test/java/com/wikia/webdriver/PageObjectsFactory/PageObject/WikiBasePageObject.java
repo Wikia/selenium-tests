@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,6 +35,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -1125,5 +1132,31 @@ public class WikiBasePageObject extends BasePageObject {
 		executeScript("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
 				"data: {url: '" + videoURL + "'}," +
 				"type: 'POST' } );");
+	}
+
+	/**
+	 * this method should be called after clicktracking test, in order
+	 * to verify if expected events were tracked
+	 * @author Michal 'justnpT' Nowierski
+	 */
+	public void compareTrackedEventsTo(List<JsonObject> expectedEventsList){
+		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
+		ArrayList<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
+		List<JsonObject> trackedEventsList;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//prepare list of tracked events
+		Object event = js.executeScript("return selenium_popEvent()");
+		StringReader reader = new StringReader(event.toString());
+		JsonReader jsonReader = Json.createReader(reader);
+		while (!(event == null)) {
+			reader = new StringReader(event.toString());
+			jsonReader = Json.createReader(reader);
+			trackedEventsArrayList.add(jsonReader.readObject());
+			// take next tracked event
+			event = js.executeScript("return selenium_popEvent()");
+		}
+		trackedEventsList = trackedEventsArrayList;
+		ClickTrackingSupport support = new ClickTrackingSupport();
+		support.compare(expectedEventsList, trackedEventsList);
 	}
 }
