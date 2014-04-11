@@ -7,13 +7,13 @@ import com.wikia.webdriver.Common.Clicktracking.EventParameter;
 
 public class EventsArticleEditMode {
 
-	public static JsonObject preview = Json.createObjectBuilder()
+	public static JsonObject previewEvent = Json.createObjectBuilder()
 			.add("0", Json.createObjectBuilder()
-					.add(EventParameter.action.toString(), "click")
-					.add(EventParameter.trackingMethod.toString(), "both")
-					.add(EventParameter.category.toString(), "editor-ck"))
+				.add(EventParameter.action.toString(), "click")
+				.add(EventParameter.trackingMethod.toString(), "both")
+				.add(EventParameter.category.toString(), "editor-ck"))
 			.add("1", Json.createObjectBuilder()
-					.add(EventParameter.label.toString(), "preview"))
+				.add(EventParameter.label.toString(), "preview"))
 			.build();
 
 }
