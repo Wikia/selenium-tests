@@ -14,7 +14,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.NewChatPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -580,8 +580,8 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyEditButtonNotPresent() {
 		waitForElementNotVisibleByElement(editButton);
 		PageObjectLogging.log(
-			"verifyEditButtonNotPresent",
-			"edit button is not present", true
+				"verifyEditButtonNotPresent",
+				"edit button is not present", true
 		);
 	}
 
@@ -612,9 +612,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
 		getUrl(
-			wikiURL +
-			URLsContent.wikiDir +
-			articleName
+				wikiURL +
+						URLsContent.wikiDir +
+						articleName
 		);
 		return new ArticlePageObject(driver);
 	}
@@ -628,11 +628,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new BlogPageObject(driver);
 	}
 
-	public NewChatPageObject openChat(String wikiURL) {
+	public ChatPageObject openChat(String wikiURL) {
 		getUrl(
 			wikiURL + URLsContent.specialChat
 		);
-		return new NewChatPageObject(driver);
+		return new ChatPageObject(driver);
 	}
 
 
@@ -1107,13 +1107,13 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
 		getUrl(
-			urlBuilder.appendQueryStringToURL(
 				urlBuilder.appendQueryStringToURL(
-					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
-					URLsContent.actionVisualEditParameter
-				),
-				URLsContent.redLink
-			)
+						urlBuilder.appendQueryStringToURL(
+								wikiURL + URLsContent.wikiDir + getNameForArticle(),
+								URLsContent.actionVisualEditParameter
+						),
+						URLsContent.redLink
+				)
 		);
 		return new VisualEditorPageObject(driver);
 	}
