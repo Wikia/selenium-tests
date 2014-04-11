@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewChatPageObject extends WikiBasePageObject
@@ -84,6 +85,7 @@ public class NewChatPageObject extends WikiBasePageObject
 	private final String privateMessageUserSelector = "#priv-user-%s";
 	private final String privateMessageSelectedUserSelector = "#priv-user-%s.User.selected";
 	private final String messageOnChat = "//span[@class='message'][contains(text(), '%s')]";
+	private final String notificationCounter = "//span[@class='splotch' and contains(text(), '%s')]";
 
 	public NewChatPageObject(WebDriver driver) {
 		super(driver);
@@ -103,19 +105,22 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("VerifyMessageOnChatPresent", "Message: " + message + " is present on chat board", true, driver);
 	}
 
-	public void verifyUserJoinToChat(String userName) {
+	public void verifyUserJoinToChatMessage(String userName) {
 		waitForElementByElement(chatInlineAlertContinued);
-		if (!checkIfElementOnPage(userSelector.replace("%user%", userName))) {
+		if (!checkIfElementOnPage(String.format(userSelector, userName))) {
 			PageObjectLogging.log("VerifyUserJoinsChat", "User: " + userName + " not visible on chat's guests list", false);
 			throw new NoSuchElementException("User: " + userName + " not visible on chat's guests list");
 		}
-		PageObjectLogging.log("verifyUserJoinToChat", userName + " has joined the chat.", true, driver);
+		PageObjectLogging.log("verifyUserJoinToChatMessage", userName + " has joined the chat.", true, driver);
 	}
 
-	public void verifyUserIsVisibleOnContactsList(String userName)
-	{
-		waitForElementByXPath("//li[@id='user-"+userName+"']");
-		PageObjectLogging.log("verifyUserIsVisibleOnContactsList", userName+" is visible on contacts list", true, driver);
+	public void verifyUserIsVisibleOnContactsList(String userName) {
+		waitForElementByCss(String.format(userSelector, userName));
+		PageObjectLogging.log(
+			"verifyUserIsVisibleOnContactsList",
+			userName + " is visible on contacts list",
+			true, driver
+		);
 	}
 
 	public void verifyPrivateMessageHeader() {
@@ -134,12 +139,11 @@ public class NewChatPageObject extends WikiBasePageObject
 		);
 	}
 	
-	public void verifyPrivateMessageNotification(int notificationNumber)
-	{
-		waitForElementByXPath("//span[@class='splotch' and contains(text(), '"+notificationNumber+"')]");
+	public void verifyPrivateMessageNotification(int notificationCount) {
+		waitForElementByXPath(String.format(notificationCounter, notificationCount));
 		PageObjectLogging.log(
 			"verifyPrivateMessageNotification",
-			"private message notification number " + notificationNumber + " is visible",
+			"private message notification number " + notificationCount + " is visible",
 			true
 		);
 	}
@@ -424,4 +428,26 @@ public class NewChatPageObject extends WikiBasePageObject
 		return driver.findElement(By.cssSelector(userCss));
 	}
 
+	public String generateMessageFromUser(String userName) {
+		return String.format("Hello this is %s timestamp: ", userName) + getTimeStamp();
+	}
+
+	public List<String> sendMultipleMessagesFromUser(String userName, int messagesCount) {
+		List<String> messagesSent = new ArrayList<>();
+		for (int i=0; i<messagesCount; i++) {
+			String message = generateMessageFromUser(userName);
+			writeOnChat(message);
+			messagesSent.add(message);
+		}
+		return  messagesSent;
+	}
+
+	public void verifyMultiplePrivateMessages(List<String> messagesReceived, String senderUser) {
+		verifyPrivateMessageHeader();
+		verifyPrivateMessageNotification(messagesReceived.size());
+		clickOnUserInPrivateMessageSection(senderUser);
+		for (String message: messagesReceived) {
+			verifyMessageOnChat(message);
+		}
+	}
 }

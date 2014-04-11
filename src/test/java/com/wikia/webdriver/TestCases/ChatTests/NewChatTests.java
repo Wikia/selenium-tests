@@ -7,7 +7,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -19,6 +19,7 @@ import java.util.Date;
  * 4. Verify admin user dropdown
  * 5. Verify switching between main and private message sections when one of the users has written public message
  * 6. Verify switching between main and private message sections when one of the users has written private message
+ * 7. Verify notifications counter when sending multiple private messages
  */
 public class NewChatTests extends NewTestTemplate_TwoDrivers {
 
@@ -31,8 +32,14 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 	private String userThreePassword = credentials.password3;
 	private String userFour = credentials.userName4;
 	private String userFourPassword = credentials.password4;
+	private String userFive = credentials.userName5;
+	private String userFivePassword = credentials.password5;
+	private String userSix = credentials.userName6;
+	private String userSixPassword = credentials.password6;
 	private String userStaff = credentials.userNameStaff;
 	private String userStaffPassword = credentials.passwordStaff;
+
+	private final int numberOfPrivateMessages = 10;
 
 	private NewChatPageObject openChatForUser (
 			WebDriver driver, String userName, String password
@@ -40,11 +47,6 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(userName, password, wikiURL);
 		return base.openChat(wikiURL);
-	}
-
-	private String generateMessageFromUser(String userName) {
-		String timestamp = String.valueOf(new Date().getTime());
-		return String.format("Hello this is %s timestamp: ", userName) + timestamp;
 	}
 
 	@Test(groups = {"NewChat_001", "Chat"})
@@ -62,7 +64,7 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 		chatUserTwo.verifyChatPage();
 		switchToWindow(driverOne);
 
-		chatUserOne.verifyUserJoinToChat(userTwo);
+		chatUserOne.verifyUserJoinToChatMessage(userTwo);
 	}
 
 	@Test(groups = {"NewChat_002", "Chat"})
@@ -134,7 +136,7 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 				driverTwo, userTwo, userTwoPassword
 		);
 
-		String userTwoMessage = generateMessageFromUser(userTwo);
+		String userTwoMessage = chatUserTwo.generateMessageFromUser(userTwo);
 		chatUserTwo.writeOnChat(userTwoMessage);
 
 		switchToWindow(driverOne);
@@ -162,14 +164,14 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 				driverTwo, userFour, userFourPassword
 		);
 
-		String userFourPublicMessage = generateMessageFromUser(userFour);
+		String userFourPublicMessage = chatUserFour.generateMessageFromUser(userFour);
 		chatUserFour.writeOnChat(userFourPublicMessage);
 
 		switchToWindow(driverOne);
 		chatUserThree.verifyMessageOnChat(userFourPublicMessage);
 
 		switchToWindow(driverTwo);
-		String userFourPrivateMessage = generateMessageFromUser(userFour);
+		String userFourPrivateMessage = chatUserFour.generateMessageFromUser(userFour);
 		chatUserFour.selectPrivateMessageToUser(userThree);
 		chatUserFour.writeOnChat(userFourPrivateMessage);
 
@@ -178,5 +180,33 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 		chatUserThree.verifyPrivateMessageNotification();
 		chatUserThree.clickOnUserInPrivateMessageSection(userFour);
 		chatUserThree.verifyMessageOnChat(userFourPrivateMessage);
+	}
+
+	@Test(groups = {"NewChat_007", "Chat"})
+	public void Chat_007_multipleNotifications() {
+		switchToWindow(driverOne);
+		NewChatPageObject chatUserFive = openChatForUser(
+				driverOne, userFive, userFivePassword
+		);
+
+		switchToWindow(driverTwo);
+		NewChatPageObject chatUserSix = openChatForUser(
+				driverTwo, userSix, userSixPassword
+		);
+
+		String publicMessageFromUserSix = chatUserSix.generateMessageFromUser(userSix);
+		chatUserSix.verifyUserIsVisibleOnContactsList(userFive);
+		chatUserSix.writeOnChat(publicMessageFromUserSix);
+
+		switchToWindow(driverOne);
+		chatUserFive.verifyUserJoinToChatMessage(userFive);
+		chatUserFive.verifyMessageOnChat(publicMessageFromUserSix);
+
+		switchToWindow(driverTwo);
+		chatUserSix.selectPrivateMessageToUser(userFive);
+		List<String> messagesSent = chatUserSix.sendMultipleMessagesFromUser(userSix, numberOfPrivateMessages);
+
+		switchToWindow(driverOne);
+		chatUserFive.verifyMultiplePrivateMessages(messagesSent, userSix);
 	}
 }
