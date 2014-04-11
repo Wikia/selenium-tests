@@ -20,6 +20,7 @@ import java.util.List;
  * 5. Verify switching between main and private message sections when one of the users has written public message
  * 6. Verify switching between main and private message sections when one of the users has written private message
  * 7. Verify notifications counter when sending multiple private messages
+ * 8. Ban and unban user
  */
 public class NewChatTests extends NewTestTemplate_TwoDrivers {
 
@@ -36,6 +37,8 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 	private String userFivePassword = credentials.password5;
 	private String userSix = credentials.userName6;
 	private String userSixPassword = credentials.password6;
+	private String userToBeBanned = credentials.userName7;
+	private String userToBeBannedPassword = credentials.password7;
 	private String userStaff = credentials.userNameStaff;
 	private String userStaffPassword = credentials.passwordStaff;
 
@@ -145,7 +148,7 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 		chatUserOne.selectPrivateMessageToUser(userTwo);
 		chatUserOne.verifyPrivateMessageHeader();
 		chatUserOne.verifyPrivateMessageIsHighLighted(userTwo);
-		chatUserOne.verifyPrivateChatTitle(userTwo);
+		chatUserOne.verifyPrivateChatTitle();
 
 		chatUserOne.clickOnMainChat();
 		chatUserOne.verifyMainChatIsHighLighted();
@@ -208,5 +211,21 @@ public class NewChatTests extends NewTestTemplate_TwoDrivers {
 
 		switchToWindow(driverOne);
 		chatUserFive.verifyMultiplePrivateMessages(messagesSent, userSix);
+	}
+
+	@Test(groups = {"Chat_009", "Chat", "Modals"})
+	public void Chat_009_ban_user() {
+		switchToWindow(driverOne);
+		openChatForUser(
+			driverOne, userToBeBanned, userToBeBannedPassword
+		);
+
+		NewChatPageObject chatUserStaff = openChatForUser(
+			driverOne, userStaff, userStaffPassword
+		);
+
+		chatUserStaff.clickOnDifferentUser(userToBeBanned);
+		chatUserStaff.banUser(userToBeBanned);
+		chatUserStaff.unBanUser(userToBeBanned);
 	}
 }

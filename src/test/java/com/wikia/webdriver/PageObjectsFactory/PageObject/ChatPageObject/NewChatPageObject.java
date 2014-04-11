@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject;
 
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.openqa.selenium.By;
@@ -18,16 +17,8 @@ public class NewChatPageObject extends WikiBasePageObject
 
 	@FindBy(css="textarea[name='message']")
 	private WebElement messageWritingArea;
-	@FindBy(css="form.Write")
-	private WebElement messageForm;
-	@FindBy(css="form[class='Write blocked']")
-	private WebElement messageWriteAreaBlocked;//when user is disconnected
-	@FindBy(xpath="//div[@class='Chat']//li[contains(text(), 'Welcome to the ')]")
-	private WebElement welcomeMessage;
 	@FindBy(css="div.Rail")
 	private WebElement sideBar;
-	@FindBy(css="h1[class=public wordmark''] img")
-	private WebElement wordmark;
 	@FindBy(css="div.User span.username")
 	private WebElement userName;
 	@FindBy(css="[id*='Chat'] .inline-alert[id*='entry']")
@@ -42,16 +33,10 @@ public class NewChatPageObject extends WikiBasePageObject
 	private WebElement allowPrivateMassageButton;
 	@FindBy(css="li.private-block")
 	private WebElement blockPrivateMassageButton;
-	@FindBy(css="div#Rail img.wordmark")
-	private WebElement mainChatButton;
 	@FindBy(css="h1.public.wordmark.selected")
 	private WebElement mainChatSelection;
 	@FindBy(css="ul.PrivateChatList span.splotch")
 	private WebElement privateMessageNotification;
-	@FindBy(css="li.User.selected.blocked")
-	private WebElement userDisconnectedButton;
-	@FindBy(css="li.give-chat-mod span.label")
-	private WebElement giveChatModStatusButton;
 	@FindBy(css=".continued.inline-alert")
 	private WebElement chatInlineAlertContinued;
 	@FindBy(css="#UserStatsMenu li.ban")
@@ -70,17 +55,13 @@ public class NewChatPageObject extends WikiBasePageObject
 	private WebElement chatWordmarkImage;
 	@FindBy (css="#WikiChatList li")
 	private WebElement chatLoadedIndicator;
+	@FindBy (css="#ChatHeader h1.private")
+	private WebElement privateChatHeader;
 
-	By userContextMenu = By.cssSelector("ul.regular-actions li");
-	By adminContextMenu = By.cssSelector("ul.admin-actions li");
-	By privateMessageHeader = By.cssSelector("#Rail h1.private");
-	By privateChatHeader = By.cssSelector("#ChatHeader h1.private");
-
-	final private String userUnbanLink = "//a[@data-type='ban-undo' "
-			+ "and @data-user='%s']";
-	final private String userUnbanConfirmMessage = "//div[@class='Chat']"
-			+ "//li[contains(text(), 'has ended the Chat ban for %s')]";
-
+	private final String userUnbanLink =
+		"//a[@data-type='ban-undo' and @data-user='%s']";
+	private final String userUnbanConfirmMessage =
+		"//div[@class='Chat']//li[contains(text(), 'has ended the Chat ban for %s')]";
 	private final String userSelector = "#user-%s";
 	private final String privateMessageUserSelector = "#priv-user-%s";
 	private final String privateMessageSelectedUserSelector = "#priv-user-%s.User.selected";
@@ -102,16 +83,27 @@ public class NewChatPageObject extends WikiBasePageObject
 
 	public void verifyMessageOnChat(String message) {
 		waitForElementByXPath(String.format(messageOnChat, message));
-		PageObjectLogging.log("VerifyMessageOnChatPresent", "Message: " + message + " is present on chat board", true, driver);
+		PageObjectLogging.log(
+			"VerifyMessageOnChatPresent",
+			"Message: " + message + " is present on chat board",
+			true, driver
+		);
 	}
 
 	public void verifyUserJoinToChatMessage(String userName) {
 		waitForElementByElement(chatInlineAlertContinued);
 		if (!checkIfElementOnPage(String.format(userSelector, userName))) {
-			PageObjectLogging.log("VerifyUserJoinsChat", "User: " + userName + " not visible on chat's guests list", false);
+			PageObjectLogging.log(
+				"VerifyUserJoinsChat",
+				"User: " + userName + " not visible on chat's guests list",
+				false
+			);
 			throw new NoSuchElementException("User: " + userName + " not visible on chat's guests list");
 		}
-		PageObjectLogging.log("verifyUserJoinToChatMessage", userName + " has joined the chat.", true, driver);
+		PageObjectLogging.log(
+			"verifyUserJoinToChatMessage",
+			userName + " has joined the chat.", true, driver
+		);
 	}
 
 	public void verifyUserIsVisibleOnContactsList(String userName) {
@@ -150,18 +142,30 @@ public class NewChatPageObject extends WikiBasePageObject
 
 	public void verifyPrivateMessageIsHighLighted(String user) {
 		getElementForUser(user, privateMessageSelectedUserSelector);
-		PageObjectLogging.log("verifyPrivateMessageIsHighLighted", "private message section is highlighted", true, driver);
+		PageObjectLogging.log(
+			"verifyPrivateMessageIsHighLighted",
+			"private message section is highlighted",
+			true,
+			driver
+		);
 	}
 
-	public void verifyPrivateChatTitle(String userName)
-	{
-		waitForElementByBy(privateChatHeader);
-		PageObjectLogging.log("verifyPrivateChatTitle", "private chat title is correct", true, driver);
+	public void verifyPrivateChatTitle() {
+		waitForElementByElement(privateChatHeader);
+		PageObjectLogging.log(
+			"verifyPrivateChatTitle",
+			"private chat title is correct",
+			true,
+			driver
+		);
 	}
 
 	public void verifyMainChatIsHighLighted() {
 		waitForElementByElement(mainChatSelection);
-		PageObjectLogging.log("verifyPrivateMessageIsHighLighted", "private message section is highlighted", true);
+		PageObjectLogging.log(
+			"verifyPrivateMessageIsHighLighted",
+			"private message section is highlighted", true
+		);
 	}
 
 	public void verifyNormalUserDropdown(String userName) {
@@ -207,36 +211,6 @@ public class NewChatPageObject extends WikiBasePageObject
 		Assertion.assertEquals("ban", adminDropDownActionsElements.get(2).getAttribute("class"));
 	}
 
-	public void verifyUserIsGreyedOut()
-	{
-		waitForElementByElement(userDisconnectedButton);
-		PageObjectLogging.log("verifyUserIsGreyedOut", "Verified user disconnected from the chat", true, driver);
-	}
-	
-	public void verifyWritingAreaIsBlocked()
-	{
-		waitForElementByElement(messageWriteAreaBlocked);
-		PageObjectLogging.log("verifyWritingAreaIsBlocked", "Verified user writing area is blocked", true, driver);
-	}
-	
-	public void verifyUserLeftFromChatMessage(String userName)
-	{
-		waitForElementByXPath("//li[@class='inline-alert' and contains(text(), '"+userName+" has left the chat.')]");
-		PageObjectLogging.log("verifyUserLeftFromChatMessage", "Verified user left message is visible", true, driver);
-	}
-	
-	public void verifyChatModMessage(String userStaff, String userName)
-	{
-		waitForElementByXPath("//li[contains(text(), '"+userStaff+" has made')]");
-		waitForElementByXPath("//li/strong[contains(text(), '"+userName+"')]");
-	}
-	
-	public void disconnectFromChat()
-	{
-		getUrl(Global.DOMAIN);
-		PageObjectLogging.log("disconnectFromChat", "User is disconnected from the chat", true, driver);
-	}
-
 	public void writeOnChat(String message) {
 		waitForElementByElement(chatLoadedIndicator);
 		messageWritingArea.sendKeys(message);
@@ -259,86 +233,55 @@ public class NewChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log("selectPrivateMessageToUser", "private message selected from dropdown", true);
 	}
 
-	public void selectChatModStatus(WebDriver driver)
-	{
-		waitForElementByElement(giveChatModStatusButton);
-		jQueryClick("li.give-chat-mod span.label");
-		PageObjectLogging.log("selectChatModStatus", "chat mod status is clicked", true, driver);
-	}
-
 	public void clickOnMainChat() {
 		chatWordmarkImage.click();
 		PageObjectLogging.log("clickOnMainChat", "main chat is clicked", true);
 	}
 
-	public void clickOnPrivateChat(String userName) {
-		WebElement privateMessageUser = getElementForUser(userName, privateMessageUserSelector);
-		verifyPrivateMessageIsHighLighted(userName);
-	}
-
 	public void clickOnUserInPrivateMessageSection(String userName) {
 		WebElement privateMessagesUserElement = getElementForUser(userName, privateMessageUserSelector);
 		privateMessagesUserElement.click();
-		PageObjectLogging.log("clickOnUserInPrivateMessageSection", "private messages user " + userName + " is clicked", true);
+		PageObjectLogging.log(
+			"clickOnUserInPrivateMessageSection",
+			"private messages user " + userName + " is clicked",
+			true
+		);
 	}
 
-	/**
-	 * @author Evgeniy (aquilax)
-	 * @param userName User name of the user to be banned
-	 * @param driver WebDriver in context
-	 * clicks on ban user modal
-	 */
-	private void clickBanUser(String userName, WebDriver driver)
-	{
+	private void clickBanUser(String userName) {
 		banUserButton.click();
 		waitForElementByElement(chatBanModal);
-		PageObjectLogging.log("clickBanUser", "ban user "+userName+" is clicked", true, driver);
+		PageObjectLogging.log("clickBanUser", "ban user " + userName + " is clicked", true);
 	}
 
-	/**
-	 * @author Evgeniy (aquilax)
-	 * @param userName User name of the user to be banned
-	 * @param driver WebDriver in context
-	 * Ban user from chat
-	 * method should be executed after clickOnDifferentUser()
-	 */
-	public void banUser(String userName, WebDriver driver)
-	{
-		clickBanUser(userName, driver);
+	public void banUser(String userName) {
+		clickOnDifferentUser(userName);
+		clickBanUser(userName);
 		chatBanModalButton.click();
 		waitForElementNotVisibleByElement(chatBanModal);
-		PageObjectLogging.log("clickBanUser", userName + " ban modal is closed",
-				true);
+		PageObjectLogging.log(
+			"clickBanUser",
+			userName + " ban modal is closed",
+			true
+		);
 	}
 
-	/**
-	 * @author Evgeniy (aquilax)
-	 * @param userName User name of the user that was unbanned
-	 * Check for unban notification message
-	 */
-	private void verifyChatUnbanMessage(String userName)
-	{
+	private void verifyChatUnbanMessage(String userName) {
 		waitForElementByXPath(String.format(userUnbanConfirmMessage, userName));
 	}
 
-	/**
-	 * @author Evgeniy (aquilax)
-	 * @param userName User name of the user to be unbanned
-	 * @param driver WebDriver in context
-	 * Unban user from chat after the user is banned. Note that the function
-	 * relies that the user is banned in the current session.
-	 * method should be executed after banUser()
-	 */
-	public void unBanUser(String userName, WebDriver driver)
-	{
+	public void unBanUser(String userName) {
 		WebElement unbanLink = driver.findElement(By.xpath(
-				String.format(userUnbanLink, userName)
+			String.format(userUnbanLink, userName)
 		));
 		waitForElementByElement(unbanLink);
 		unbanLink.click();
 		verifyChatUnbanMessage(userName);
-		PageObjectLogging.log("unBanUser", userName+" is no longer banned",
-			true);
+		PageObjectLogging.log(
+			"unBanUser",
+			userName + " is no longer banned",
+			true
+		);
 	}
 
 	public void clickOnDifferentUser(String userName) {
@@ -410,7 +353,11 @@ public class NewChatPageObject extends WikiBasePageObject
 			}
 			i++;
 		}
-		PageObjectLogging.log("allowPrivateMessageFromUser", "private messages from " + userName + " are allowed now", true);
+		PageObjectLogging.log(
+			"allowPrivateMessageFromUser",
+			"private messages from " + userName + " are allowed now",
+			true
+		);
 	}
 
 	private boolean checkIfPrivateMessagesNotAllowed(String userName) {
