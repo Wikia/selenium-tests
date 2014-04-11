@@ -362,7 +362,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 		waitForElementVisibleByElement(deleteDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		waitForElementVisibleByElement(protectDropdown);
-		Assertion.assertEquals(editDropdownElements.size(), 4);
+		waitForElementVisibleByElement(veEditButton);
+		Assertion.assertEquals(editDropdownElements.size(), 5);
 		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for admin", true);
 	}
 
@@ -370,14 +371,16 @@ public class ArticlePageObject extends WikiBasePageObject {
 		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
 		waitForElementVisibleByElement(renameDropdown);
-		Assertion.assertEquals(editDropdownElements.size(), 2);
+		waitForElementVisibleByElement(veEditButton);
+		Assertion.assertEquals(editDropdownElements.size(), 3);
 		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for user", true);
 	}
 
 	public void verifyDropdownForAnon() {
 		actionsClick(articleEditDropdown);
 		waitForElementVisibleByElement(historyDropdown);
-		Assertion.assertEquals(editDropdownElements.size(), 1);
+		waitForElementVisibleByElement(veEditButton);
+		Assertion.assertEquals(editDropdownElements.size(), 2);
 		PageObjectLogging.log("DropdownVerified", "Edit dropdown verified for anon", true);
 	}
 
