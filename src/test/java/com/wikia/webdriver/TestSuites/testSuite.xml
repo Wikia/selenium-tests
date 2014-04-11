@@ -108,6 +108,7 @@
 			<class name="com.wikia.webdriver.TestCases.FacebookTests.FacebookTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.LicensedVideoSwap"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.VideosPageTests"/>
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ClicktrackingArticleEditModeTests"/>
 		</classes>
 	</test>
 </suite>
