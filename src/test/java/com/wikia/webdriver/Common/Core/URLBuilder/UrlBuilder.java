@@ -51,6 +51,8 @@ public class UrlBuilder {
 					wikiName = "wikiaglobal";
 				}
 				url += wikiName + "." + devBoxOwner + "." + "wikia-dev.com/";
+			} else if (env != null) {
+				url += env + "." + prefix + wikiName + suffix;
 			}
 		} catch (NullPointerException ex) {
 			throw new RuntimeException("ENV property is not set!");
