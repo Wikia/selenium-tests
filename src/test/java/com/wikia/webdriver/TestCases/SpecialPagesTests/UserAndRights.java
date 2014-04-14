@@ -59,7 +59,7 @@ public class UserAndRights extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
 		String title = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		ArticlePageObject article = edit.submitArticle();
 		article.verifyArticleTitle(title);
 	}
@@ -79,7 +79,7 @@ public class UserAndRights extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		String pageContent = base.getTimeStamp();
 		String pageName = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject edit = base.navigateToArticleEditPage(wikiURL, pageName);
+		VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, pageName);
 		edit.clearContent();
 		edit.addContent(pageContent);
 		ArticlePageObject article = edit.submitArticle();

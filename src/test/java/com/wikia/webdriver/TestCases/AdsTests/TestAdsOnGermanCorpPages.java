@@ -12,7 +12,9 @@ import org.testng.annotations.Test;
  * Class contains tests checking ad provider on German corporate pages
  *
  * @author Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  *
+ * @description
  * 1. Test ads from IDG on corporate pages when geo=US
  * 2. Test ads from IDG on corporate pages when geo=AU
  * 3. Test ads from IDG on corporate pages when geo=CA

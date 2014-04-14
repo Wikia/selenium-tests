@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,6 +35,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
+import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -147,8 +154,16 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement veEditButton;
 	@FindBy(css="body.ve")
 	protected WebElement veMode;
-	@FindBy(css=".editsection>a")
+	@FindBy(css=".editsection")
 	protected List<WebElement> sectionEditButtons;
+	@FindBy(css="a.new[href$='redlink=1']")
+	protected List<WebElement> redLinks;
+	@FindBy(css="body.rte_wysiwyg")
+	protected WebElement rteMode;
+	@FindBy(css="body.rte_source")
+	protected WebElement srcInRteMode;
+	@FindBy(css="body:not(.rte_source):not(.ve):not(.rte_wysiwyg)")
+	protected WebElement srcOnlyMode;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -390,6 +405,20 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SourceEditModePageObject(driver);
 	}
 
+	public SourceEditModePageObject openSrcModeWithMainEditButton() {
+		waitForElementByElement(editButton);
+		editButton.click();
+		PageObjectLogging.log("openSrcModeWithMainEditButton", "Src main edit button clicked", true, driver);
+		return new SourceEditModePageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithMainEditButton() {
+		waitForElementByElement(editButton);
+		editButton.click();
+		PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true, driver);
+		return new VisualEditModePageObject(driver);
+	}
+
 	public WikiArticleEditMode clickEditButton() {
 		mouseOver("#GlobalNavigation li:nth(1)");
 		mouseRelease("#GlobalNavigation li:nth(1)");
@@ -400,24 +429,50 @@ public class WikiBasePageObject extends BasePageObject {
 		return new WikiArticleEditMode(driver);
 	}
 
-	public VisualEditorPageObject clickVEEditButton() {
+	public VisualEditorPageObject openVEModeWithMainEditButton() {
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
-		PageObjectLogging.log("clickVEEditButton", "VE edit button clicked", true, driver);
+		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditorPageObject clickVESectionEditButton(int section) {
+	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
 		WebElement sectionEditButton = sectionEditButtons.get(section);
-		waitForElementByElement(sectionEditButton);
+		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-			"clickVESectionEditButton",
+			"openVEModeWithSectionEditButton",
 			"VE edit button clicked at section: " + section,
 			true,
 			driver
 		);
 		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditModePageObject openCKModeWithSectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"openCKModeWithSectionEditButton",
+			"RTE edit button clicked at section: " + section,
+			true,
+			driver
+		);
+		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject openSrcModeWithSectionEditButton(int section) {
+		WebElement sectionEditButton = sectionEditButtons.get(section);
+		waitForElementByElement(sectionEditButton);
+		sectionEditButton.click();
+		PageObjectLogging.log(
+			"openSrcModeWithSectionEditButton",
+			"Src edit button clicked at section: " + section,
+			true,
+			driver
+		);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
@@ -430,13 +485,22 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditModePageObject(driver);
 	}
 
-	public VisualEditModePageObject navigateToArticleEditPage(String wikiURL, String article) {
+	public VisualEditModePageObject navigateToArticleEditPageCK(String wikiURL, String article) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
 			)
 		);
 		return new VisualEditModePageObject(driver);
+	}
+
+	public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
+		getUrl(
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+			)
+		);
+		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
@@ -457,7 +521,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @param wikiURL
 	 * @param article
 	 */
-	public VisualEditorPageObject gotoArticleEditModeVisual(String wikiURL, String article) {
+	public VisualEditorPageObject navigateToArticleEditModeVisual(String wikiURL, String article) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir + article, URLsContent.actionVisualEditParameter
@@ -1068,5 +1132,31 @@ public class WikiBasePageObject extends BasePageObject {
 		executeScript("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
 				"data: {url: '" + videoURL + "'}," +
 				"type: 'POST' } );");
+	}
+
+	/**
+	 * this method should be called after clicktracking test, in order
+	 * to verify if expected events were tracked
+	 * @author Michal 'justnpT' Nowierski
+	 */
+	public void compareTrackedEventsTo(List<JsonObject> expectedEventsList){
+		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
+		ArrayList<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
+		List<JsonObject> trackedEventsList;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//prepare list of tracked events
+		Object event = js.executeScript("return selenium_popEvent()");
+		StringReader reader = new StringReader(event.toString());
+		JsonReader jsonReader = Json.createReader(reader);
+		while (!(event == null)) {
+			reader = new StringReader(event.toString());
+			jsonReader = Json.createReader(reader);
+			trackedEventsArrayList.add(jsonReader.readObject());
+			// take next tracked event
+			event = js.executeScript("return selenium_popEvent()");
+		}
+		trackedEventsList = trackedEventsArrayList;
+		ClickTrackingSupport support = new ClickTrackingSupport();
+		support.compare(expectedEventsList, trackedEventsList);
 	}
 }

@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -81,5 +82,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(veMode);
 		waitForElementVisibleByElement(veEditorSurface);
 		PageObjectLogging.log("verifyEditorSurface", "VE editor surface is displayed", true, driver);
+	}
+
+	public ArticlePageObject clickVEEditAndPublish(String wikiURL, String articleName, String content) {
+		typeTextArea(content);
+		VisualEditorSaveChangesDialog save = clickPublishButton();
+		save.savePage();
+		return new ArticlePageObject(driver);
 	}
 }

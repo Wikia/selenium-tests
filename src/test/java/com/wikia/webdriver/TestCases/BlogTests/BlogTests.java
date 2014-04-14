@@ -72,7 +72,7 @@ public class BlogTests extends NewTestTemplate{
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		String blogTitle = blogPage.getBlogName();
-		VisualEditModePageObject visualEditMode = blogPage.editArticleUsingDropdown();
+		VisualEditModePageObject visualEditMode = blogPage.editArticleInRTEUsingDropdown();
 		visualEditMode.addContent(blogContent);
 		visualEditMode.submitArticle();
 		blogPage.verifyBlogTitle(blogTitle);

@@ -10,8 +10,8 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 @Test (
 	groups={"Ads_In_Content", "Ads"}

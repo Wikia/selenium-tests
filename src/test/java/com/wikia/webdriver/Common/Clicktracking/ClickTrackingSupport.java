@@ -1,47 +1,39 @@
 package com.wikia.webdriver.Common.Clicktracking;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.json.JsonObject;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 public class ClickTrackingSupport {
 
-	public void compareTrackedEventsTo(List<String> expectedEventsList, List<String> currentEventsList) {
-
-		ArrayList<String> eventLabelValues = new ArrayList<String>();
-		for (String currentEvent : currentEventsList) {
-			String eventLabelValue = extractEventLabel(currentEvent);
-			eventLabelValues.add(eventLabelValue);
-		}
-
-		currentEventsList = eventLabelValues;
-
-		for (String expectedEvent : expectedEventsList) {
-			if (!currentEventsList.contains(expectedEvent)) {
-				PageObjectLogging.log(
-						"compareTrackedEventsTo",
-						"event: '"+expectedEvent+"' has not been tracked",
-						false);
+	public void compare(List<JsonObject> expectedEventList, List<JsonObject> currentEventList) {
+		for (JsonObject expectedEvent : expectedEventList) {
+			Boolean equals = false;
+			for (JsonObject currentEvent : currentEventList) {
+				PageObjectLogging.log("compare",
+					"comparing clicktracked events to expected event: \n"
+					+ "expected event: "+expectedEvent.toString() + "\n"
+					+ "compared event: "+currentEvent.toString(), true);
+				equals = currentEvent.equals(expectedEvent);
+				if (equals) {
+					PageObjectLogging.log("compare",
+						"match for expected event found: \n"
+						+ "expected event: "+expectedEvent.toString() + "\n"
+						+ "compared event: "+currentEvent.toString(), true);
+					currentEventList.remove(currentEvent);
+					break;
+				}
 			}
-			Assertion.assertTrue(currentEventsList.contains(expectedEvent));
-			PageObjectLogging.log(
-					"compareTrackedEventsTo",
-					"event: '"+expectedEvent+"' has been tracked",
-					true);
+			if (!equals) {
+				PageObjectLogging.log("compare",
+					"didn't find match for expected event: "+expectedEvent.toString(),
+					false);
+			}
+			Assertion.assertTrue(equals);
 		}
-	}
-
-	private String extractEventLabel(String rawString) {
-		String finalLabelValue = null;
-		if (rawString.contains("label")) {
-			int labelValueStart = rawString.indexOf("\"label\":");
-			String nextString = rawString.substring(labelValueStart+9);
-			int labelValueEnd = nextString.indexOf("\"}}");
-			finalLabelValue = nextString.substring(0, labelValueEnd);
-		}
-		return finalLabelValue;
 	}
 
 }
