@@ -86,7 +86,8 @@ public class ChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log(
 			"VerifyMessageOnChatPresent",
 			"Message: " + message + " is present on chat board",
-			true, driver
+			true,
+			driver
 		);
 	}
 
@@ -102,7 +103,9 @@ public class ChatPageObject extends WikiBasePageObject
 		}
 		PageObjectLogging.log(
 			"verifyUserJoinToChatMessage",
-			userName + " has joined the chat.", true, driver
+			userName + " has joined the chat.",
+			true,
+			driver
 		);
 	}
 
@@ -111,7 +114,8 @@ public class ChatPageObject extends WikiBasePageObject
 		PageObjectLogging.log(
 			"verifyUserIsVisibleOnContactsList",
 			userName + " is visible on contacts list",
-			true, driver
+			true,
+			driver
 		);
 	}
 
@@ -119,7 +123,9 @@ public class ChatPageObject extends WikiBasePageObject
 		waitForElementByElement(privateMessagesHeader);
 		PageObjectLogging.log(
 			"verifyPrivateMessageHeader",
-			"private message header is visible", true, driver
+			"private message header is visible",
+			true,
+			driver
 		);
 	}
 
@@ -127,7 +133,9 @@ public class ChatPageObject extends WikiBasePageObject
 		waitForElementByElement(privateMessageNotification);
 		PageObjectLogging.log(
 			"verifyPrivateMessageNotification",
-			"private message notification is visible", true, driver
+			"private message notification is visible",
+			true,
+			driver
 		);
 	}
 	
@@ -140,10 +148,10 @@ public class ChatPageObject extends WikiBasePageObject
 		);
 	}
 
-	public void verifyPrivateMessageIsHighLighted(String user) {
+	public void verifyPrivateMessageIsHighlighted(String user) {
 		getElementForUser(user, privateMessageSelectedUserSelector);
 		PageObjectLogging.log(
-			"verifyPrivateMessageIsHighLighted",
+			"verifyPrivateMessageIsHighlighted",
 			"private message section is highlighted",
 			true,
 			driver
@@ -160,11 +168,12 @@ public class ChatPageObject extends WikiBasePageObject
 		);
 	}
 
-	public void verifyMainChatIsHighLighted() {
+	public void verifyMainChatIsHighlighted() {
 		waitForElementByElement(mainChatSelection);
 		PageObjectLogging.log(
-			"verifyPrivateMessageIsHighLighted",
-			"private message section is highlighted", true
+			"verifyPrivateMessageIsHighlighted",
+			"private message section is highlighted",
+			true
 		);
 	}
 
@@ -325,7 +334,11 @@ public class ChatPageObject extends WikiBasePageObject
 			}
 			i++;
 		}
-		PageObjectLogging.log("openUserDropDownInPrivateMessageSection", userName + " button clicked", true);
+		PageObjectLogging.log(
+			"openUserDropDownInPrivateMessageSection",
+			userName + " button clicked",
+			true
+		);
 	}
 
 	public void blockPrivateMessageFromUser(String userName) {

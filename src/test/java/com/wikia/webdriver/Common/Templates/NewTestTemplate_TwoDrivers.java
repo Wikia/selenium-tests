@@ -20,6 +20,7 @@ public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
 		logOutCustomDriver(driverOne);
 		driverTwo = startCustomBrowser("FF");
 		logOutCustomDriver(driverTwo);
+		this.driver = driverOne;
 	}
 
 	@Override

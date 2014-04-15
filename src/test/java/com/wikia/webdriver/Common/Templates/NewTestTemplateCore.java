@@ -24,9 +24,6 @@ import org.testng.annotations.Listeners;
 import java.io.File;
 import java.lang.reflect.Method;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- */
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
 public class NewTestTemplateCore {
 
@@ -76,7 +73,7 @@ public class NewTestTemplateCore {
 
 	protected WebDriver startCustomBrowser(String browserName) {
 		driver = registerDriverListener(
-				NewDriverProvider.getDriverInstanceForBrowser(browserName)
+			NewDriverProvider.getDriverInstanceForBrowser(browserName)
 		);
 		return driver;
 	}
@@ -93,7 +90,6 @@ public class NewTestTemplateCore {
 	protected void logOutCustomDriver(WebDriver customDriver) {
 		customDriver.get(wikiURL + URLsContent.logout);
 	}
-
 
 	protected void stopBrowser() {
 		if (driver != null) {

@@ -463,10 +463,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
 		getUrl(
-				urlBuilder.appendQueryStringToURL(
-						driver.getCurrentUrl(),
-						URLsContent.actionEditParameter
-				)
+			urlBuilder.appendQueryStringToURL(
+				driver.getCurrentUrl(),
+				URLsContent.actionEditParameter
+			)
 		);
 		return new VisualEditModePageObject(driver);
 	}
@@ -519,9 +519,9 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUserLogin);
 		PageObjectLogging.log(
-				"SpecialUserLoginOnWiki",
-				"Special:UserLogin opened on: " + wikiURL,
-				true
+			"SpecialUserLoginOnWiki",
+			"Special:UserLogin opened on: " + wikiURL,
+			true
 		);
 		return new SpecialUserLoginPageObject(driver);
 	}
@@ -580,8 +580,8 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyEditButtonNotPresent() {
 		waitForElementNotVisibleByElement(editButton);
 		PageObjectLogging.log(
-				"verifyEditButtonNotPresent",
-				"edit button is not present", true
+			"verifyEditButtonNotPresent",
+			"edit button is not present", true
 		);
 	}
 
@@ -590,9 +590,9 @@ public class WikiBasePageObject extends BasePageObject {
 		scrollAndClick(restoreButton);
 		waitForElementByElement(userMessage);
 		PageObjectLogging.log(
-				"clickUndeleteArticle",
-				"undelete article button clicked",
-				true, driver
+			"clickUndeleteArticle",
+			"undelete article button clicked",
+			true, driver
 		);
 	}
 
@@ -611,11 +611,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
-		getUrl(
-				wikiURL +
-						URLsContent.wikiDir +
-						articleName
-		);
+		getUrl(wikiURL + URLsContent.wikiDir + articleName);
 		return new ArticlePageObject(driver);
 	}
 
@@ -629,9 +625,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public ChatPageObject openChat(String wikiURL) {
-		getUrl(
-			wikiURL + URLsContent.specialChat
-		);
+		getUrl(wikiURL + URLsContent.specialChat);
 		return new ChatPageObject(driver);
 	}
 
@@ -1106,15 +1100,14 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
-		getUrl(
-				urlBuilder.appendQueryStringToURL(
-						urlBuilder.appendQueryStringToURL(
-								wikiURL + URLsContent.wikiDir + getNameForArticle(),
-								URLsContent.actionVisualEditParameter
-						),
-						URLsContent.redLink
-				)
+		String randomArticle = wikiURL + URLsContent.wikiDir + getNameForArticle();
+		String randomArticleWithVETrigger = urlBuilder.appendQueryStringToURL(
+			randomArticle, URLsContent.actionVisualEditParameter
 		);
+		String randomArticleWithVEAndRedLink = urlBuilder.appendQueryStringToURL(
+			randomArticleWithVETrigger, URLsContent.redLink
+		);
+		getUrl(randomArticleWithVEAndRedLink);
 		return new VisualEditorPageObject(driver);
 	}
 

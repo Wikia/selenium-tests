@@ -62,7 +62,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
 		switchToWindow(driverTwo);
 		ChatPageObject chatUserTwo = openChatForUser(
-				driverTwo, userTwo, userTwoPassword
+			driverTwo, userTwo, userTwoPassword
 		);
 		chatUserTwo.verifyChatPage();
 		switchToWindow(driverOne);
@@ -78,9 +78,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 		);
 
 		switchToWindow(driverTwo);
-		openChatForUser(
-			driverTwo, userTwo, userTwoPassword
-		);
+		openChatForUser(driverTwo, userTwo, userTwoPassword);
 
 		switchToWindow(driverOne);
 		chatUserOne.verifyNormalUserDropdown(userTwo);
@@ -90,13 +88,11 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	public void Chat_003_dropDownMenuForBlockedUser() {
 		switchToWindow(driverOne);
 		ChatPageObject chatUserOne = openChatForUser(
-				driverOne, userOne, userOnePassword
+			driverOne, userOne, userOnePassword
 		);
 
 		switchToWindow(driverTwo);
-		openChatForUser(
-				driverTwo, userTwo, userTwoPassword
-		);
+		openChatForUser(driverTwo, userTwo, userTwoPassword);
 
 		switchToWindow(driverOne);
 		chatUserOne.verifyChatPage();
@@ -114,13 +110,11 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	public void Chat_004_verifyAdminDropDown() {
 		switchToWindow(driverOne);
 		ChatPageObject chatStaffUser = openChatForUser(
-				driverOne, userStaff, userStaffPassword
+			driverOne, userStaff, userStaffPassword
 		);
 
 		switchToWindow(driverTwo);
-		openChatForUser(
-				driverTwo, userTwo, userTwoPassword
-		);
+		openChatForUser(driverTwo, userTwo, userTwoPassword);
 
 		switchToWindow(driverOne);
 		chatStaffUser.verifyChatPage();
@@ -131,12 +125,12 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	public void Chat_005_verifySwitchingBetweenMainAndPrivateSections() {
 		switchToWindow(driverOne);
 		ChatPageObject chatUserOne = openChatForUser(
-				driverOne, userOne, userOnePassword
+			driverOne, userOne, userOnePassword
 		);
 
 		switchToWindow(driverTwo);
 		ChatPageObject chatUserTwo = openChatForUser(
-				driverTwo, userTwo, userTwoPassword
+			driverTwo, userTwo, userTwoPassword
 		);
 
 		String userTwoMessage = chatUserTwo.generateMessageFromUser(userTwo);
@@ -147,11 +141,11 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
 		chatUserOne.selectPrivateMessageToUser(userTwo);
 		chatUserOne.verifyPrivateMessageHeader();
-		chatUserOne.verifyPrivateMessageIsHighLighted(userTwo);
+		chatUserOne.verifyPrivateMessageIsHighlighted(userTwo);
 		chatUserOne.verifyPrivateChatTitle();
 
 		chatUserOne.clickOnMainChat();
-		chatUserOne.verifyMainChatIsHighLighted();
+		chatUserOne.verifyMainChatIsHighlighted();
 		chatUserOne.verifyMessageOnChat(userTwoMessage);
 	}
 
@@ -159,12 +153,12 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	public void Chat_006_sendPrivateMessage() {
 		switchToWindow(driverOne);
 		ChatPageObject chatUserThree = openChatForUser(
-				driverOne, userThree, userThreePassword
+			driverOne, userThree, userThreePassword
 		);
 
 		switchToWindow(driverTwo);
 		ChatPageObject chatUserFour = openChatForUser(
-				driverTwo, userFour, userFourPassword
+			driverTwo, userFour, userFourPassword
 		);
 
 		String userFourPublicMessage = chatUserFour.generateMessageFromUser(userFour);
@@ -189,12 +183,12 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	public void Chat_007_multipleNotifications() {
 		switchToWindow(driverOne);
 		ChatPageObject chatUserFive = openChatForUser(
-				driverOne, userFive, userFivePassword
+			driverOne, userFive, userFivePassword
 		);
 
 		switchToWindow(driverTwo);
 		ChatPageObject chatUserSix = openChatForUser(
-				driverTwo, userSix, userSixPassword
+			driverTwo, userSix, userSixPassword
 		);
 
 		String publicMessageFromUserSix = chatUserSix.generateMessageFromUser(userSix);
@@ -216,12 +210,10 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	@Test(groups = {"Chat_009", "Chat", "Modals"})
 	public void Chat_009_banUser() {
 		switchToWindow(driverOne);
-		openChatForUser(
-			driverOne, userToBeBanned, userToBeBannedPassword
-		);
+		openChatForUser(driverOne, userToBeBanned, userToBeBannedPassword);
 
 		ChatPageObject chatUserStaff = openChatForUser(
-				driverOne, userStaff, userStaffPassword
+			driverOne, userStaff, userStaffPassword
 		);
 
 		chatUserStaff.clickOnDifferentUser(userToBeBanned);
