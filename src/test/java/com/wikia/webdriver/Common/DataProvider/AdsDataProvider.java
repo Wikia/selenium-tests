@@ -59,7 +59,7 @@ public class AdsDataProvider {
 			{"zh.chain-chronicle", "Chain_Chronicle_维基"},
 			{"avengersalliance", "Marvel:_Avengers_Alliance_Wiki"},
 			{"zh.pad", "Homepage/Mobile"},
-			{"zh.pad", "Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
+			{"zh.pad", "wiki/Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
 		};
 	}
 

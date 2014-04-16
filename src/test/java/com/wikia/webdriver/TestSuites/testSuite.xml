@@ -23,7 +23,7 @@
 			<class name="com.wikia.webdriver.TestCases.LoginTests.LoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForcedLoginTests"/>
 			<class name="com.wikia.webdriver.TestCases.LoginTests.ForgottenPasswordTests"/>
-			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.Maintenance"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.SpecialPagesForAnons"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileArticleCommentTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileCategoriesTests"/>
 			<class name="com.wikia.webdriver.TestCases.Mobile.MobileEditModeTests"/>
