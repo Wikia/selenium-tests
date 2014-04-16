@@ -1,15 +1,5 @@
 package com.wikia.webdriver.Common.Templates;
 
-import java.io.File;
-
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Annotations.NetworkTrafficDump;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -22,18 +12,22 @@ import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
-import java.lang.reflect.Method;
 import org.browsermob.proxy.ProxyServer;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- *
- */
+import java.io.File;
+import java.lang.reflect.Method;
+
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
 public class NewTestTemplateCore {
 
 	protected WebDriver driver;
-	protected WebDriver driverFF;
 	protected UrlBuilder urlBuilder;
 	protected AbstractConfiguration config;
 	protected String wikiURL;
@@ -77,25 +71,24 @@ public class NewTestTemplateCore {
 		);
 	}
 
-	protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
-		driver.register(new PageObjectLogging());
+	protected WebDriver startCustomBrowser(String browserName) {
+		driver = registerDriverListener(
+			NewDriverProvider.getDriverInstanceForBrowser(browserName)
+		);
 		return driver;
 	}
 
-	protected void startBrowserFirefox() {
-		EventFiringWebDriver eventDriver = NewDriverProvider.getDriverInstanceForBrowser (
-			"FF"
-		);
-		eventDriver.register(new PageObjectLogging());
-		driverFF = eventDriver;
+	protected WebDriver registerDriverListener(EventFiringWebDriver driver) {
+		driver.register(new PageObjectLogging());
+		return driver;
 	}
 
 	protected void logOut() {
 		driver.get(wikiURL + URLsContent.logout);
 	}
 
-	protected void logOutFirefox() {
-		driverFF.get(wikiURL + URLsContent.logout);
+	protected void logOutCustomDriver(WebDriver customDriver) {
+		customDriver.get(wikiURL + URLsContent.logout);
 	}
 
 	protected void stopBrowser() {
@@ -104,9 +97,9 @@ public class NewTestTemplateCore {
 		}
 	}
 
-	protected void stopBrowserFirefox() {
-		if (driverFF != null) {
-			driverFF.quit();
+	protected void stopCustomBrowser(WebDriver customDriver) {
+		if (customDriver != null) {
+			customDriver.quit();
 		}
 	}
 
