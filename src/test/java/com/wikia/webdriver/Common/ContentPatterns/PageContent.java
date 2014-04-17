@@ -3,6 +3,10 @@ package com.wikia.webdriver.Common.ContentPatterns;
 import java.io.File;
 
 public class PageContent {
+	//wiki
+	public static String wikiHeadline = "Lorem ipsum dolor";
+	public static String wikiDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
 	//articles
 	public static String articleNamePrefix = "QAarticle";
 	public static String articleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";

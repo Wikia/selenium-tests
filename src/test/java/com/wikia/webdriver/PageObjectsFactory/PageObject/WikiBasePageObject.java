@@ -14,7 +14,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -53,6 +52,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
@@ -69,6 +69,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryP
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWikiaHome;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPromotePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
@@ -88,7 +89,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -291,6 +291,12 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL+URLsContent.specialPreferences);
 		PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 		return new PreferencesPageObject(driver);
+	}
+
+	public SpecialPromotePageObject openSpecialPromotePage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
+		return new SpecialPromotePageObject(driver);
 	}
 
 	public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL){
