@@ -16,22 +16,31 @@ public class SpecialPageObject extends WikiBasePageObject {
 	protected WebElement specialPageHeader;
 
 	private final String headerTextSelector = "//h1[contains(text(), '%s')]";
+
 	public SpecialPageObject(WebDriver driver) {
 		super(driver);
 	}
 
 	public void verifySpecialPage() {
 		waitForTextToBePresentInElementByElement(
-			specialPageHeader, "Special page"
+			specialPageHeader,
+			"Special page"
 		);
 		PageObjectLogging.log(
 			"SpecialPageLoaded",
 			"Special Page is loaded",
-			true, driver
+			true,
+			driver
 		);
 	}
 
 	public void verifyPageHeader(String expectedHeader) {
 		waitForElementByXPath(String.format(headerTextSelector, expectedHeader));
+		PageObjectLogging.log(
+			"SpecialPageHeader",
+			"Special Page Header is the same as expected",
+			true,
+			driver
+		);
 	}
 }
