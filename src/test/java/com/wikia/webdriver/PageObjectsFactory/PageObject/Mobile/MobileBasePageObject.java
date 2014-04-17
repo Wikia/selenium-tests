@@ -20,7 +20,10 @@ public class MobileBasePageObject extends WikiBasePageObject {
 
 	public MobileBasePageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
+	}
+
+	@Override
+	protected void setWindowSize() {
 		driver.manage().window().setSize(new Dimension(768, 1280));
 	}
 

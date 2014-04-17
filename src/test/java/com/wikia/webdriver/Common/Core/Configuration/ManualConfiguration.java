@@ -52,13 +52,18 @@ public class ManualConfiguration extends AbstractConfiguration {
 	}
 
 	@Override
-	public String getVersion() {
+	public String getPlatformVersion() {
 		return config.get("platform-version");
 	}
 
 	@Override
 	public String getPlatform() {
 		return config.get("platform");
+	}
+
+	@Override
+	public String getDeviceId() {
+		return config.get("device-id");
 	}
 
 	@Override

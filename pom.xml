@@ -141,6 +141,7 @@
 						<env>${env}</env>
 						<platform>${platform}</platform>
 						<platform-version>${platform-version}</platform-version>
+						<device-id>${device-id}</device-id>
 						<config>/selenium-config/config.xml</config>
 						<captcha>/selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>

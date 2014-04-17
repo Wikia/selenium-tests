@@ -1,7 +1,9 @@
 package com.wikia.webdriver.Common.DriverProvider.MobileProvider;
 
+import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -14,45 +16,52 @@ import java.net.URL;
  */
 public class MobileDriverProvider {
 
-	private final String chromeDriverDefaultPort = "9515";
-	private final String remoteDefaultURL = "http://localhost";
-
 	private MobileDriversRegistry driversRegistry;
+	private String platform;
+	private String platformVersion;
+	private String deviceId;
 
-	public WebDriver getDriverInstance(String platform, String version) {
+	public MobileDriverProvider(AbstractConfiguration config) {
+		platform = config.getPlatform();
+		platformVersion = config.getPlatformVersion();
+		deviceId = config.getDeviceId();
+	}
+
+	public WebDriver getDriverInstance() {
 		WebDriver driver = null;
 
 		switch (platform.toUpperCase()) {
 			case "ANDROID":
-				driver = getChromeDriver(version);
+				driver = getChromeDriver(platformVersion, deviceId);
 				break;
 			case "IOS":
 				//@TODO
 				break;
 			default:
-				throw new WebDriverException("Bad platform provided");
+				throw new WebDriverException(
+					"Unknown platform provided \n" +
+					"Available platforms:" +
+					"\n\t android" +
+					"\n\t ios"
+				);
 		}
 		return driver;
 	}
 
-	private WebDriver getChromeDriver(String version) {
+	private WebDriver getChromeDriver(String platformVersion, String deviceId) {
 		driversRegistry = new MobileDriversRegistry();
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.setExperimentalOption("androidPackage", "com.android.chrome");
-		if (version != null) {
+		if (deviceId != null) {
 			chromeOptions.setExperimentalOption(
-					"androidDeviceSerial", driversRegistry.getDeviceForAndroidVersion(version)
+				"androidDeviceSerial", deviceId
+			);
+		} else if (platformVersion != null) {
+			chromeOptions.setExperimentalOption(
+				"androidDeviceSerial",
+				driversRegistry.getDeviceForAndroidVersion(platformVersion)
 			);
 		}
-		DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-		desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		URL url;
-		try {
-			url = new URL(remoteDefaultURL + ":" + chromeDriverDefaultPort);
-		} catch (MalformedURLException ex) {
-			throw new RuntimeException(ex);
-		}
-		RemoteWebDriver remoteDriver = new RemoteWebDriver(url, desiredCapabilities);
-		return remoteDriver;
+		return new ChromeDriver(chromeOptions);
 	}
 }
