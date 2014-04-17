@@ -77,7 +77,6 @@
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsOwnerTests"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsThreadCreatorTests"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsThreadParticipantTests"/>
-			<class name="com.wikia.webdriver.TestCases.EventTrackingTests.EditorEventTrackingTests"/>
 			<class name="com.wikia.webdriver.TestCases.WamPageTests.WamPageTests"/>
 			<class name="com.wikia.webdriver.TestCases.LightboxTests.LightboxTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
@@ -86,7 +85,7 @@
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
-			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>			
+			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDUserTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleCRUDAnonTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleActionsAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ArticleEditDropdownTests"/>
