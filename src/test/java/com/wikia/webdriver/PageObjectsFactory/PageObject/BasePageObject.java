@@ -14,6 +14,7 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -636,13 +637,9 @@ public class BasePageObject{
 	}
 
 	public void pressEnter(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript(
-			"var e = $.Event('keypress'); " +
-			"e.keyCode = 13; e.which=13;" +
-			"$(arguments[0]).trigger(e);",
-			element
-		);
+		Actions actions = new Actions(driver);
+		actions.sendKeys(element, "\n");
+		actions.build().perform();
 	}
 
 	public void pressDownArrow(WebElement element) {
