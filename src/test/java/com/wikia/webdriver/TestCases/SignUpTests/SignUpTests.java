@@ -56,7 +56,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_002", "SignUp"})
-	public void Signup_002_tooYoungUser() {
+	public void Signup_002_tooYoungUser_MAIN_2158() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
@@ -74,7 +74,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_003", "SignUp"})
-	public void Signup_003_existingUserName() {
+	public void Signup_003_existingUserName_MAIN_2159() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(credentials.userName);
