@@ -6,6 +6,11 @@ public class PageContent {
 	//wiki
 	public static String wikiHeadline = "Lorem ipsum dolor";
 	public static String wikiDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+	public static String wikiPromoteHeadline = "Lorem ipsum dolor Lorem";
+	public static String wikiPromoteDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit "
+		+ "Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur "
+		+ "adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet,"
+		+ " consectetur adipiscing elit Lorem ipsum dolor sit adipiscing";
 
 	//articles
 	public static String articleNamePrefix = "QAarticle";
@@ -46,6 +51,8 @@ public class PageContent {
 	public static String wikiaContributor = "A Wikia contributor";
 	//image serving
 	public static String file = "Image001.jpg";
+	public static String filePng = "Image001.png";
+	public static String file2Png = "Image002.png";
 	public static String[] listOfFiles = {
 			"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
 			"Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"

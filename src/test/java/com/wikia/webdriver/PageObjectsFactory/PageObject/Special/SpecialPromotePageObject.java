@@ -1,5 +1,12 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -35,6 +43,72 @@ public class SpecialPromotePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
+	public void clickPublishButton(){
+		waitForElementByElement(publishButton);
+		scrollAndClick(publishButton);
+		PageObjectLogging.log("clickPublishButton", "publish button click", true);
+	}
+
+	public String getUniqueThumbnailTextSpecialPromotePage() {
+		int indexComparisonStart = thumbnailImage.getAttribute("src").indexOf("px-");
+		int indexComparisonFinish = thumbnailImage.getAttribute("src").indexOf("-Wikia-Visualization-Main");
+		return thumbnailImage.getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
+	}
+
+	public void modifyThumnailImage(String file){
+		waitForElementByElement(thumbnailImage);
+		scrollAndClick(thumbnailImage);
+		waitForElementByElement(modifyThumbnailButton);
+		modifyThumbnailButton.click();
+		waitForElementByElement(uploadFileInput);
+		uploadFileInput.sendKeys(
+				getAbsolutePathForFile(PageContent.resourcesPath + file)
+				);
+		PageObjectLogging.log(
+				"modifyThumnailImage",
+				"file " + file + " added to upload",
+				true
+				);
+	}
+
+	public void typeIntoHeadline(String text){
+		waitForElementByElement(wikiaHeadline);
+		wikiaHeadline.clear();
+		wikiaHeadline.sendKeys(text);
+		PageObjectLogging.log(
+				"typeIntoHeadline",
+				"text " + text + " typed into headline",
+				true
+				);
+	}
+
+	public void typeIntoDescription(String text){
+		waitForElementByElement(wikiaDescription);
+		wikiaDescription.clear();
+		wikiaDescription.sendKeys(text);
+		PageObjectLogging.log(
+				"typeIntoDescription",
+				"text " + text + " typed into description",
+				true
+				);
+	}
+
+	public void uploadThumbnailImage(String file){
+		waitForElementByElement(addPhotoButton);
+		scrollAndClick(addPhotoButton);
+		waitForElementByElement(uploadFileInput);
+		uploadFileInput.sendKeys(
+				getAbsolutePathForFile(PageContent.resourcesPath + file)
+				);
+		PageObjectLogging.log(
+				"uploadThumbnailImage",
+				"file " + file + " added to upload",
+				true
+				);
+		waitForElementByElement(submitButton);
+		submitButton.click();
+	}
+
 	public void verifyCrossWikiSearchDescription(String firstDescription) {
 		waitForElementByElement(wikiaDescription);
 		Assertion.assertStringContains(
@@ -50,69 +124,25 @@ public class SpecialPromotePageObject extends BasePageObject {
 		Assertion.assertEquals(firstImage, secondImage);
 	}
 
-	public String getUniqueThumbnailTextSpecialPromotePage() {
-		int indexComparisonStart = thumbnailImage.getAttribute("src").indexOf("px-");
-		int indexComparisonFinish = thumbnailImage.getAttribute("src").indexOf("-Wikia-Visualization-Main");
-		return thumbnailImage.getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
-	}
+	public void verifyUploadedImage(String fileName) {
+		File expectedImage = new File(PageContent.resourcesPath + fileName);
+		File actualImage = getUploadedImage();
+		ImageComparison comparer = new ImageComparison();
+		Boolean ifEqual = comparer.compareImagesBasedOnBytes(expectedImage, actualImage);
+		Assertion.assertTrue(ifEqual);
 
-	public void uploadThumbnailImage(String file){
-		waitForElementByElement(addPhotoButton);
-		scrollAndClick(addPhotoButton);
-		waitForElementByElement(uploadFileInput);
-		uploadFileInput.sendKeys(
-			getAbsolutePathForFile(PageContent.resourcesPath + file)
-		);
-		PageObjectLogging.log(
-			"uploadThumbnailImage",
-			"file " + file + " added to upload",
-			true
-		);
-		waitForElementByElement(submitButton);
-		submitButton.click();
 	}
-
-	public void modifyThumnailImage(String file){
+	public File getUploadedImage() {
 		waitForElementByElement(thumbnailImage);
-		scrollAndClick(thumbnailImage);
-		waitForElementByElement(modifyThumbnailButton);
-		modifyThumbnailButton.click();
-		waitForElementByElement(uploadFileInput);
-		uploadFileInput.sendKeys(
-			getAbsolutePathForFile(PageContent.resourcesPath + file)
-		);
-		PageObjectLogging.log(
-			"modifyThumnailImage",
-			"file " + file + " added to upload",
-			true
-		);
+		File uploadedImageFile = new File("test.png");
+        try {
+        	URL url = new URL(thumbnailImage.getAttribute("src"));
+        	BufferedImage bufImgOne = ImageIO.read(url);
+        	ImageIO.write(bufImgOne, "png", uploadedImageFile);
+        } catch (IOException e) {
+			e.printStackTrace();
+		}
+        return uploadedImageFile;
 	}
 
-	public void typeIntoHeadline(String text){
-		waitForElementByElement(wikiaHeadline);
-		wikiaHeadline.clear();
-		wikiaHeadline.sendKeys(text);
-		PageObjectLogging.log(
-			"typeIntoHeadline",
-			"text " + text + " typed into headline",
-			true
-		);
-	}
-
-	public void typeIntoDescription(String text){
-		waitForElementByElement(wikiaDescription);
-		wikiaDescription.clear();
-		wikiaDescription.sendKeys(text);
-		PageObjectLogging.log(
-				"typeIntoDescription",
-				"text " + text + " typed into description",
-				true
-				);
-	}
-
-	public void clickPublishButton(){
-		waitForElementByElement(publishButton);
-		scrollAndClick(publishButton);
-		PageObjectLogging.log("clickPublishButton", "publish button click", true);
-	}
 }
