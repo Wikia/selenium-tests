@@ -67,7 +67,7 @@ public class ForumNotificationsTests extends NewTestTemplate {
 	@Test(groups = { "ForumNotificationsTests_004", "ForumNotificationsTests",
 		"NotificationsTests" }, 
 		dependsOnMethods={"forumNotificationsTests_003_userCLeavesReply"})
-	public void forumNotificationsTests_004_userAVerifiesNotifications() {
+	public void forumNotificationsTests_004_userAVerifiesNotifications_MAIN_2175() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
 		forumMainPage.openForumMainPage(wikiURL);
