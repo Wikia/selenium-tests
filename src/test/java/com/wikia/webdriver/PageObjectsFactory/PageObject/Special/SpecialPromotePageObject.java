@@ -125,16 +125,18 @@ public class SpecialPromotePageObject extends BasePageObject {
 	}
 
 	public void verifyUploadedImage(String fileName) {
-		File expectedImage = new File(PageContent.resourcesPath + fileName);
-		File actualImage = getUploadedImage();
+		File expectedImageFile = new File(PageContent.resourcesPath + fileName);
+		File actualImageFile = getUploadedImage();
 		ImageComparison comparer = new ImageComparison();
-		Boolean ifEqual = comparer.compareImagesBasedOnBytes(expectedImage, actualImage);
+		Boolean ifEqual = comparer.compareImagesBasedOnBytes(expectedImageFile, actualImageFile);
+		actualImageFile.delete();
 		Assertion.assertTrue(ifEqual);
+
 
 	}
 	public File getUploadedImage() {
 		waitForElementByElement(thumbnailImage);
-		File uploadedImageFile = new File("test.png");
+		File uploadedImageFile = new File(PageContent.resourcesPath + "shouldBeDeleted.png");
         try {
         	URL url = new URL(thumbnailImage.getAttribute("src"));
         	BufferedImage bufImgOne = ImageIO.read(url);
