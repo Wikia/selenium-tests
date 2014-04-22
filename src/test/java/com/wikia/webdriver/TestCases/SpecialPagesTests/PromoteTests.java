@@ -23,9 +23,9 @@ public class PromoteTests extends NewTestTemplate {
 		SpecialPromotePageObject promote = base.openSpecialPromotePage(wikiURL);
 		promote.typeIntoHeadline(PageContent.wikiPromoteHeadline);
 		promote.typeIntoDescription(PageContent.wikiPromoteDescription);
-		promote.uploadThumbnailImage(PageContent.filePng);
-		promote.verifyUploadedImage(PageContent.filePng);
+		promote.uploadThumbnailImage(PageContent.file2Png);
 		promote.verifyUploadedImage(PageContent.file2Png);
+		promote.verifyUploadedImage(PageContent.filePng);
 		promote.verifyCrossWikiSearchImage(PageContent.filePng);
 		promote.modifyThumnailImage(PageContent.file2Png);
 		promote.verifyCrossWikiSearchImage(PageContent.file2Png);
