@@ -62,13 +62,12 @@ public class SpecialPromotePageObject extends BasePageObject {
 		modifyThumbnailButton.click();
 		waitForElementByElement(uploadFileInput);
 		uploadFileInput.sendKeys(
-				getAbsolutePathForFile(PageContent.resourcesPath + file)
-				);
+			getAbsolutePathForFile(PageContent.resourcesPath + file)
+			);
 		PageObjectLogging.log(
-				"modifyThumnailImage",
-				"file " + file + " added to upload",
-				true
-				);
+			"modifyThumnailImage",
+			"file " + file + " added to upload",
+			true);
 	}
 
 	public void typeIntoHeadline(String text){
@@ -76,10 +75,9 @@ public class SpecialPromotePageObject extends BasePageObject {
 		wikiaHeadline.clear();
 		wikiaHeadline.sendKeys(text);
 		PageObjectLogging.log(
-				"typeIntoHeadline",
-				"text " + text + " typed into headline",
-				true
-				);
+			"typeIntoHeadline",
+			"text " + text + " typed into headline",
+			true);
 	}
 
 	public void typeIntoDescription(String text){
@@ -87,10 +85,9 @@ public class SpecialPromotePageObject extends BasePageObject {
 		wikiaDescription.clear();
 		wikiaDescription.sendKeys(text);
 		PageObjectLogging.log(
-				"typeIntoDescription",
-				"text " + text + " typed into description",
-				true
-				);
+			"typeIntoDescription",
+			"text " + text + " typed into description",
+			true);
 	}
 
 	public void uploadThumbnailImage(String file){
@@ -98,13 +95,12 @@ public class SpecialPromotePageObject extends BasePageObject {
 		scrollAndClick(addPhotoButton);
 		waitForElementByElement(uploadFileInput);
 		uploadFileInput.sendKeys(
-				getAbsolutePathForFile(PageContent.resourcesPath + file)
-				);
+			getAbsolutePathForFile(PageContent.resourcesPath + file)
+			);
 		PageObjectLogging.log(
-				"uploadThumbnailImage",
-				"file " + file + " added to upload",
-				true
-				);
+			"uploadThumbnailImage",
+			"file " + file + " added to upload",
+			true);
 		waitForElementByElement(submitButton);
 		submitButton.click();
 	}
@@ -131,9 +127,14 @@ public class SpecialPromotePageObject extends BasePageObject {
 		Boolean ifEqual = comparer.compareImagesBasedOnBytes(expectedImageFile, actualImageFile);
 		actualImageFile.delete();
 		Assertion.assertTrue(ifEqual);
-
-
 	}
+
+	/**
+	 * This method creates a file in the process.
+	 * recomended: after call, delete the physical file using file.delete()
+	 *
+	 * @return file uploaded as main thumbnail on special:Promote
+	 */
 	public File getUploadedImage() {
 		waitForElementByElement(thumbnailImage);
 		File uploadedImageFile = new File(PageContent.resourcesPath + "shouldBeDeleted.png");
