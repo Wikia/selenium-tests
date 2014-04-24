@@ -77,7 +77,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	/**
 	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
 	 */
-	public void HubsTest003_VerifyArticleSuggestionWorksProperly(HubName hubName) {
+	public void HubsTest003_VerifyArticleSuggestionWorksProperly_QAART_348(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
 		home.logInCookie(credentials.userName2, credentials.password2);
 		HubBasePageObject hub = home.openHubByUrl(hubName, wikiCorporateURL);
