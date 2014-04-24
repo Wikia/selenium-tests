@@ -55,7 +55,6 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNo71MediaAdsForSony"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.Mobile.TestTopLeaderboardOnMobile"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>

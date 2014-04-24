@@ -67,8 +67,8 @@ public class ManualConfiguration extends AbstractConfiguration {
 	}
 
 	@Override
-	public boolean loginCookieAvailable() {
-		return !((config.get("env").contains("dev")) || (config.get("env").contains("sandbox")));
+	public String geMobileConfig() {
+		return config.get("mobile-config");
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -24,7 +25,15 @@ public class MobileBasePageObject extends WikiBasePageObject {
 
 	@Override
 	protected void setWindowSize() {
-		driver.manage().window().setSize(new Dimension(768, 1280));
+		try {
+			driver.manage().window().setSize(new Dimension(768, 1280));
+		} catch (WebDriverException ex) {
+			PageObjectLogging.log(
+				"ResizeWindowForMobile",
+				"Resize window method not available - possibly running on real device",
+				true
+			);
+		}
 	}
 
 	// UI Mapping

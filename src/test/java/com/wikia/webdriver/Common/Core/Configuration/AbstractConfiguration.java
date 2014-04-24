@@ -18,7 +18,7 @@ public abstract class AbstractConfiguration {
 	public abstract String getPlatformVersion();
 	public abstract String getPlatform();
 	public abstract String getDeviceId();
-	public abstract boolean loginCookieAvailable();
+	public abstract String geMobileConfig();
 	public abstract String getCredentialsFilePath();
 	public Credentials getCredentials() {
 		return new Credentials(new File(this.getCredentialsFilePath()));

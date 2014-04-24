@@ -70,8 +70,8 @@ public class POMConfiguration extends AbstractConfiguration {
 	}
 
 	@Override
-	public boolean loginCookieAvailable() {
-		return !(env.contains("dev") || (env.contains("sandbox")));
+	public String geMobileConfig() {
+		return System.getProperty("mobile-config");
 	}
 
 	@Override

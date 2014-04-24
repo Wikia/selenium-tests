@@ -41,9 +41,4 @@ public class AdsMobileBaseObject extends MobileBasePageObject {
 			);
 		}
 	}
-
-	@Override
-	protected void setWindowSize() {
-		return;
-	}
 }
