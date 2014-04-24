@@ -33,9 +33,10 @@ public class URLsContent {
 	public static final String specialWatchList = "wiki/Special:Watchlist";
 	public static final String specialPhalanx = "wiki/Special:Phalanx";
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
+	public static final String specialPreferences = "wiki/Special:Preferences";
+	public static final String specialPromote = "wiki/Special:Promote";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
 	public static final String specialCreateBlogPage = "wiki/Special:CreateBlogPage";
-	public static final String specialPreferences = "wiki/Special:Preferences";
 	public static final String specialAdminDashboard = "wiki/Special:AdminDashboard";
 	public static final String specialCSS = "wiki/Special:CSS";
 	public static final String specialRandom = "wiki/Special:Random";
@@ -48,7 +49,6 @@ public class URLsContent {
 	public static final String specialMultiWikiFinderPage = "wiki/Special:Multiwikifinder";
 	public static final String logout = "wiki/Special:UserLogout?noexternals=1";
 	public static final String specialUndelete = "wiki/Special:Undelete";
-	public static final String specialPromote = "wiki/Special:Promote";
 	public static final String userProfile = "wiki/User:%userName%";
 	public static final String specialCreateNewWiki = "Special:CreateNewWiki";
 	public static final String specialWikiFactory = "wiki/Special:WikiFactory";
