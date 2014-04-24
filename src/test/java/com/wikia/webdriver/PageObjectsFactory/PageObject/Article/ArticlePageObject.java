@@ -155,7 +155,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	String removeCategorySelector =
 			"li[data-name='%categoryName%'] li.removeCategory > img";
 	String videoInCommentsSelector =
-			".speech-bubble-message img.Wikia-video-thumb[data-video-name*='%videoName%']";
+			".speech-bubble-message img[data-video-name*='%videoName%']";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
