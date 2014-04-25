@@ -57,6 +57,8 @@ public class NewDriverProvider {
 			driver = new EventFiringWebDriver(new HtmlUnitDriver());
 		} else if (browserName.equals("GHOST")){
 			driver = getPhantomJSInstance();
+		} else {
+			throw new RuntimeException("Provided driver is not supported.");
 		}
 
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
