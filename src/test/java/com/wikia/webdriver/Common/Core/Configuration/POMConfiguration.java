@@ -4,7 +4,6 @@ package com.wikia.webdriver.Common.Core.Configuration;
 import java.io.File;
 
 /**
- *
  * @author Bogna 'bognix' Knychała
  */
 public class POMConfiguration extends AbstractConfiguration {
@@ -56,8 +55,23 @@ public class POMConfiguration extends AbstractConfiguration {
 	}
 
 	@Override
-	public boolean loginCookieAvailable() {
-		return !(env.contains("dev") || (env.contains("sandbox")));
+	public String getPlatformVersion() {
+		return System.getProperty("platform-version");
+	}
+
+	@Override
+	public String getPlatform() {
+		return System.getProperty("platform");
+	}
+
+	@Override
+	public String getDeviceId() {
+		return System.getProperty("device-id");
+	}
+
+	@Override
+	public String geMobileConfig() {
+		return System.getProperty("mobile-config");
 	}
 
 	@Override
