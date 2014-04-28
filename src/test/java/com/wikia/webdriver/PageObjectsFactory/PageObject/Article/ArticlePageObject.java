@@ -453,8 +453,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideoAlignment(PositionsVideo positions) {
 		String videoClass = videoArticle.findElement(
-				By.xpath("./..")
-				).getAttribute("class");
+			By.xpath("./..")
+		).getAttribute("class");
 		String position;
 		switch(positions) {
 		case left:
@@ -475,7 +475,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideoWidth(int widthDesired) {
 		int videoWidth = Integer.parseInt(videoArticle.findElement(
-				By.tagName("img")
+			By.tagName("img")
 		).getAttribute("width"));
 		Assertion.assertNumber(
 			widthDesired,
@@ -500,9 +500,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyRelatedVideosModule() {
 		waitForElementByElement(rVModule);
 		PageObjectLogging.log(
-				"verifyRelatedVideosModule",
-				"related videos module is visible",
-				true
+			"verifyRelatedVideosModule",
+			"related videos module is visible",
+			true
 		);
 	}
 
@@ -518,9 +518,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 		}
 		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
 		PageObjectLogging.log(
-				"verifyRelatedVideoAdded",
-				videoName + " is visible in related video module",
-				true
+			"verifyRelatedVideoAdded",
+			videoName + " is visible in related video module",
+			true
 		);
 	}
 
@@ -577,9 +577,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public EditCategoryComponentObject editCategory(String category) {
 		WebElement editCategory = driver.findElement(
-				By.cssSelector(
-						editCategorySelector.replace("%categoryName%", category)
-				)
+			By.cssSelector(
+				editCategorySelector.replace("%categoryName%", category)
+			)
 		);
 		scrollAndClick(editCategory);
 		PageObjectLogging.log("editCategory", "edit button on category " + category + " clicked", true);
@@ -588,10 +588,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void removeCategory(String category) {
 		WebElement editCategory = driver.findElement(
-				By.cssSelector(
-						removeCategorySelector.replace("%categoryName%", category)
-						)
-				);
+			By.cssSelector(
+				removeCategorySelector.replace("%categoryName%", category)
+			)
+		);
 		scrollAndClick(editCategory);
 		PageObjectLogging.log("removeCategory", "remove button on category " + category + " clicked", true);
 	}
