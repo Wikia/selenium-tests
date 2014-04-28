@@ -35,7 +35,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	@FindBy(css="a.bottom-close-button")
 	private WebElement closeButton;
 
-	private By addVideoLibraryLink = By.cssSelector("li a[href*='http']");
+	private By addVideoLibraryLink = By.cssSelector("li > a");
 
 	public VetAddVideoComponentObject(WebDriver driver) {
 		super(driver);
@@ -71,11 +71,11 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	private void clickAddVideoLibrary(int videoListItem) {
 		WebElement listElem = videoList.get(videoListItem);
 		waitForElementByElement(listElem);
-		String videoName = listElem.findElement(By.cssSelector("a[data-pos]")).getAttribute("title");
 		WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
+		String videoName = addVideoLink.getAttribute("title");
 		scrollAndClick(addVideoLink);
-		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked", true, driver);
 		this.videoName =  videoName;
+		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked: " + videoName, true, driver);
 	}
 
 	private void checkIfLibraryIsPresent() {
