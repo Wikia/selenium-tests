@@ -39,7 +39,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement localPagePrev;
 	@FindBy(css=".fullImageLink")
 	private WebElement fileEmbedded;
-	@FindBy(css=".filehistory img.Wikia-video-thumb")
+	@FindBy(css=".filehistory .video-thumb")
 	private WebElement videoThumbnail;
 	@FindBys(@FindBy(css=".tabs li"))
 	private List<WebElement> tabs;
