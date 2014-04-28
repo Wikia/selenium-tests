@@ -260,6 +260,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		driver.switchTo().defaultContent();
 		scrollAndClick(commentSubmitButton);
 		waitForElementNotVisibleByElement(commentSubmitButton);
+		PageObjectLogging.log("submitComment", "comment has been submitted", true);
 	}
 
 	public void submitEditComment() {
@@ -276,7 +277,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyCommentVideo(String videoName) {
 		driver.findElement(
-				By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName))
+			By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName))
 		);
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
 	}

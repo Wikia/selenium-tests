@@ -26,7 +26,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	private WebElement findButton;
 	@FindBys(@FindBy(css="#VET-suggestions li"))
 	private List<WebElement> videoList;
-	@FindBys(@FindBy(css="#VET-suggestions .Wikia-video-play-button, #VET-suggestions .video-thumbnail"))
+	@FindBys(@FindBy(css="#VET-suggestions .video-thumbnail"))
 	private List<WebElement> videoThumbnailsList;
 	@FindBy(css=".Wikia-video-enabledEmbedCode")
 	private WebElement videoThumbnail;

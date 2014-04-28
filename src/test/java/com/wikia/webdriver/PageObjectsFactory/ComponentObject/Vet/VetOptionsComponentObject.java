@@ -54,7 +54,7 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 		private WebElement uneditableVideoNameField;
 		@FindBy(css="input[type='text'][id='VideoEmbedName']")
 		private WebElement editableVideoNameField;
-		@FindBy(css="div#VideoEmbedThumb div")
+		@FindBy(css="#VideoEmbedThumb .video-embed")
 		private WebElement videoThumbnail;
 		@FindBy(css="div#VideoEmbedNameRow p")
 		private WebElement videoNameCaption;
