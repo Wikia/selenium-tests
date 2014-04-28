@@ -73,9 +73,9 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 		return new VetAddVideoComponentObject(driver);
 	}
 
-	public void verifyVideoAdded(String videoDescription) {
-		waitForTextToBePresentInElementByElement(newestVideo, videoDescription);
-		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);
+	public void verifyVideoAdded(String videoTitle) {
+		waitForTextToBePresentInElementByElement(newestVideoTitle, videoTitle);
+		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoTitle, true);
 	}
 
 	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
