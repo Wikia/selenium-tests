@@ -16,11 +16,14 @@ public class PreviewEditModePageObject extends EditMode {
 
 	@FindBy(css=".modalWrapper.preview")
 	private WebElement previewModal;
+	@FindBy(css=".article-thumb figcaption")
+	private WebElement figcaption;
+	@FindBy(css=".preview .video-thumbnail")
+	protected WebElement videoArticle;
 
 	By closeButton = By.cssSelector(".close.wikia-chiclet-button > img");
 	By videoWidthSelector = By.cssSelector("img.thumbimage");
 	By videoCaptionSelector = By.cssSelector(".thumbcaption");
-	By videoNoCaptionSelector = By.cssSelector(".Wikia-video-thumb:not(.thumbimage)");
 	By contentWrapper = By.cssSelector("#mw-content-text");
 	By publishButton = By.cssSelector("#publish");
 	By tableOfContents = By.cssSelector("#toc");
@@ -75,9 +78,7 @@ public class PreviewEditModePageObject extends EditMode {
 	}
 
 	public void verifyVideoNoCaption() {
-		previewModal.findElement(
-				videoNoCaptionSelector
-		);
+		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoArticle));
 		PageObjectLogging.log("verifyNoVideoCaption", "video has no caption as expected", true);
 	}
 

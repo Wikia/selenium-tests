@@ -44,6 +44,8 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement video;
 	@FindBy(css="img.video-placeholder")
 	private WebElement videoPlaceholder;
+	@FindBy(css=".video-thumbnail")
+	protected WebElement videoArticle;
 	@FindBy(css=".RTEMediaOverlayEdit")
 	private WebElement modifyComponentButton;
 	@FindBy(css="[style*=\"block\"] .RTEMediaOverlayDelete")

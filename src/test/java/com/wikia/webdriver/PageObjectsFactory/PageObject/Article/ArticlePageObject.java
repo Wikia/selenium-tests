@@ -94,8 +94,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected List<WebElement> tableOfContentsSectionsList;
 	@FindBy(css="#togglelink")
 	protected WebElement tableOfContentsShowHideButton;
-	@FindBy(css="#mw-content-text .Wikia-video-play-button")
+	@FindBy(css="#mw-content-text .video-thumbnail")
 	protected WebElement videoArticle;
+	@FindBy(css="#mw-content-text .video-thumbnail figcaption")
+	protected WebElement videoArticleCaption;
 	@FindBy(css="section.RelatedVideosModule")
 	protected WebElement rVModule;
 	@FindBy(css=".button.addVideo")
@@ -450,7 +452,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideoAlignment(PositionsVideo positions) {
 		String videoClass = videoArticle.findElement(
-				By.xpath("./../..")
+				By.xpath("./..")
 				).getAttribute("class");
 		String position;
 		switch(positions) {
@@ -472,27 +474,25 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideoWidth(int widthDesired) {
 		int videoWidth = Integer.parseInt(videoArticle.findElement(
-				By.xpath("./../img")
-				).getAttribute("width"));
+				By.tagName("img")
+		).getAttribute("width"));
 		Assertion.assertNumber(
-				widthDesired,
-				videoWidth,
-				"width should be " + widthDesired + " but is " + videoWidth);
+			widthDesired,
+			videoWidth,
+			"width should be " + widthDesired + " but is " + videoWidth
+		);
 	}
 
 	public void verifyVideoCaption(String captionDesired) {
 		String caption = videoArticle.findElement(
-				By.xpath("./../../figcaption")
-				).getText();
+			By.className("caption")
+		).getText();
 		Assertion.assertStringContains(caption,captionDesired);
 		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
 	}
 
 	public void verifyVideoNoCaption() {
-		String videoClass = videoArticle.findElement(
-				By.xpath("./../img")
-				).getAttribute("class");
-		Assertion.assertTrue(!videoClass.contains("thumbimage"));
+		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoArticle));
 		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
 	}
 

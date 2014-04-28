@@ -89,7 +89,7 @@ public class BasePageObject{
 
 	/*
 	 * Simple method for checking if element is on page or not.
-	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
+	 * Changing the implicitWait value allows us no need for waiting 30 seconds
 	 */
 	protected boolean checkIfElementOnPage(String cssSelector) {
 		changeImplicitWait(500, TimeUnit.MILLISECONDS);
@@ -108,7 +108,7 @@ public class BasePageObject{
 
 	/*
 	 * Simple method for checking if element is on page or not.
-	 * Changing the implecitlyWait value allows us no need for waiting 30 seconds
+	 * Changing the implicitWait value allows us no need for waiting 30 seconds
 	 */
 	protected boolean checkIfElementOnPage(WebElement element) {
 		changeImplicitWait(500, TimeUnit.MILLISECONDS);
