@@ -1,39 +1,41 @@
-/**
- *
- */
 package com.wikia.webdriver.Common.Templates;
 
-import java.lang.reflect.Method;
-
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import java.lang.reflect.Method;
 
-/**
- * @author Karol 'kkarolk' Kujawiak
- *
- */
+
 public class NewTestTemplate_TwoDrivers extends NewTestTemplate {
 
+	protected WebDriver driverOne;
+	protected WebDriver driverTwo;
+
+	@Override
 	@BeforeMethod(alwaysRun = true)
-	public void startFF(Method method, Object[] data) {
-		startBrowserFirefox();
-		logOutFirefox();
+	public void start(Method method, Object[] data) {
+		driverOne = startCustomBrowser("FF");
+		logOutCustomDriver(driverOne);
+		driverTwo = startCustomBrowser("FF");
+		logOutCustomDriver(driverTwo);
+		this.driver = driverOne;
 	}
 
+	@Override
 	@AfterMethod(alwaysRun = true)
-	public void stopFF() {
-		stopBrowserFirefox();
+	public void stop() {
+		stopCustomBrowser(driverOne);
+		stopCustomBrowser(driverTwo);
 	}
 
 	protected void switchToWindow(WebDriver maximized) {
-		setWindowSize(10, 10, driver);
-		setWindowSize(10, 10, driverFF);
+		setWindowSize(10, 10, driverOne);
+		setWindowSize(10, 10, driverTwo);
 		maximized.manage().window().maximize();
 
-		String driverName = maximized.equals(driver) ? "primary window" : "secondary window";
+		String driverName = maximized.equals(driverOne) ? "primary window" : "secondary window";
 		PageObjectLogging.log("switchToWindow", "================ " + driverName + " ================", true);
 	}
 

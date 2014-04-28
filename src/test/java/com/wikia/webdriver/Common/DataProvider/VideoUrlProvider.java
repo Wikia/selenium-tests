@@ -28,10 +28,6 @@ public class VideoUrlProvider {
 				//screenplay
 				"http://video.wikia.com/wiki/File:Greek_Chapter_Four_(2010)_-_Clip_What_Would_You_Do%3F",
 				"Greek Chapter Four (2010) - Clip What Would You Do?"
-			}, {
-				//real gravity
-				"http://video.wikia.com/wiki/File:Psychedelic_70s_Makeup",
-				"Psychedelic 70s Makeup"
 			},
 			// Non-Premium Provider Links
 			{

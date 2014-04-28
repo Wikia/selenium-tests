@@ -95,6 +95,16 @@
 			<artifactId>gson</artifactId>
 			<version>2.2.3</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.0.4</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -119,14 +129,17 @@
 						<live-domain>${live-domain}</live-domain>
 						<browser>${browser}</browser>
 						<env>${env}</env>
-						<qs>${qs}</qs>
+						<platform>${platform}</platform>
+						<platform-version>${platform-version}</platform-version>
+						<device-id>${device-id}</device-id>
+						<mobile-config>/selenium-config/mobile-config.xml</mobile-config>
 						<config>/selenium-config/config.xml</config>
 						<captcha>/selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/suiteFailed.xml</suiteXmlFile>
 					</suiteXmlFiles>
-					<argLine>-Xms800m -Xmx800m -XX:MaxPermSize=1000m</argLine>
+					<argLine>-Xms800m -Xmx800m -XX:MaxPermSize=1024m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>

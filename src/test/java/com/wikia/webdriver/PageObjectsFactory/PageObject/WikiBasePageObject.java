@@ -52,6 +52,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObjec
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Facebook.FacebookMainPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.ForumPageObject.ForumPageObject;
@@ -68,6 +69,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryP
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWikiaHome;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPromotePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
@@ -87,7 +89,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -292,8 +293,14 @@ public class WikiBasePageObject extends BasePageObject {
 		return new PreferencesPageObject(driver);
 	}
 
+	public SpecialPromotePageObject openSpecialPromotePage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialPromote);
+		PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
+		return new SpecialPromotePageObject(driver);
+	}
+
 	public SpecialUserLoginPageObject openSpecialUserLogin(String wikiURL){
-		getUrl(wikiURL+ URLsContent.specialUserLogin);
+		getUrl(wikiURL + URLsContent.specialUserLogin);
 		PageObjectLogging.log("openSpecialUserLogin", "Special:UserLogin page opened", true);
 		return new SpecialUserLoginPageObject(driver);
 	}
@@ -316,11 +323,6 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialNewFilesPageObject openSpecialNewFiles(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialNewFiles);
 		return new SpecialNewFilesPageObject(driver);
-	}
-
-	public SpecialAdminDashboardPageObject openSpecialAdminDashboard() {
-		getUrl(Global.DOMAIN + URLsContent.specialAdminDashboard);
-		return new SpecialAdminDashboardPageObject(driver);
 	}
 
 	public SpecialAdminDashboardPageObject openSpecialAdminDashboard(String wikiURL) {
@@ -417,16 +419,6 @@ public class WikiBasePageObject extends BasePageObject {
 		editButton.click();
 		PageObjectLogging.log("openCKModeWithMainEditButton", "CK main edit button clicked", true, driver);
 		return new VisualEditModePageObject(driver);
-	}
-
-	public WikiArticleEditMode clickEditButton() {
-		mouseOver("#GlobalNavigation li:nth(1)");
-		mouseRelease("#GlobalNavigation li:nth(1)");
-		waitForElementByElement(editButton);
-		waitForElementClickableByElement(editButton);
-		scrollAndClick(editButton);
-		PageObjectLogging.log("clickEditButton", "edit button clicked", true, driver);
-		return new WikiArticleEditMode(driver);
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
@@ -604,9 +596,9 @@ public class WikiBasePageObject extends BasePageObject {
 		scrollAndClick(restoreButton);
 		waitForElementByElement(userMessage);
 		PageObjectLogging.log(
-				"clickUndeleteArticle",
-				"undelete article button clicked",
-				true, driver
+			"clickUndeleteArticle",
+			"undelete article button clicked",
+			true, driver
 		);
 	}
 
@@ -625,11 +617,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public ArticlePageObject openArticleByName(String wikiURL, String articleName) {
-		getUrl(
-			wikiURL +
-			URLsContent.wikiDir +
-			articleName
-		);
+		getUrl(wikiURL + URLsContent.wikiDir + articleName);
 		return new ArticlePageObject(driver);
 	}
 
@@ -641,6 +629,12 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 		return new BlogPageObject(driver);
 	}
+
+	public ChatPageObject openChat(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialChat);
+		return new ChatPageObject(driver);
+	}
+
 
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
@@ -742,10 +736,6 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 
 		return newPassword;
-	}
-
-	protected Boolean checkIfMainPage() {
-		return (body.getAttribute("class").contains("mainpage"));
 	}
 
 	public String getWikiaCssContent() {
@@ -1116,15 +1106,14 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openNewArticleEditModeVisualWithRedlink(String wikiURL) {
-		getUrl(
-			urlBuilder.appendQueryStringToURL(
-				urlBuilder.appendQueryStringToURL(
-					wikiURL + URLsContent.wikiDir +	getNameForArticle(),
-					URLsContent.actionVisualEditParameter
-				),
-				URLsContent.redLink
-			)
+		String randomArticle = wikiURL + URLsContent.wikiDir + getNameForArticle();
+		String randomArticleWithVETrigger = urlBuilder.appendQueryStringToURL(
+			randomArticle, URLsContent.actionVisualEditParameter
 		);
+		String randomArticleWithVEAndRedLink = urlBuilder.appendQueryStringToURL(
+			randomArticleWithVETrigger, URLsContent.redLink
+		);
+		getUrl(randomArticleWithVEAndRedLink);
 		return new VisualEditorPageObject(driver);
 	}
 

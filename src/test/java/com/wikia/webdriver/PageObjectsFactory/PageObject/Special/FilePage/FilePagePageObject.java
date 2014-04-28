@@ -157,10 +157,6 @@ public class FilePagePageObject extends WikiBasePageObject {
 				autoplayStr = "&autoplay=" + status;
 				embedCode = playerIframe.getAttribute("src");
 				break;
-			case "realgravity":
-				autoplayStr = "/ac330d90-cb46-012e-f91c-12313d18e962/";
-				embedCode = playerObject.getAttribute("value");
-				break;
 			case "anyclip":
 				autoplayStr = "&autoPlay=" + status;
 				embedCode = playerObject.getAttribute("value");

@@ -28,27 +28,27 @@ public class HubBasePageObject extends WikiBasePageObject {
 	private WebElement NewsTabsNav;
 	@FindBy(css="section.modalWrapper")
 	private WebElement VideoPlayer;
-	@FindBy(css="button.wikia-chiclet-button img")
+	@FindBy(css="#suggestArticleDialogModal a")
 	private WebElement modalWrapper_X_CloseButton;
-	@FindBy(css="button.cancel")
+	@FindBy(css="#suggestArticleDialogModal button.secondary")
 	private WebElement modalWrapper_Cancel_CloseButton;
 	@FindBy(css="button[id='suggestVideo']")
 	private WebElement suggestVideoButton;
 	@FindBy(css="button[id='suggestArticle']")
 	private WebElement getPromotedButton;
-	@FindBy(css="section.modalWrapper")
+	@FindBy(css="#suggestArticleDialogModal")
 	private WebElement suggestVideoOrArticleModal;
-	@FindBy(css="section.modalWrapper h1")
+	@FindBy(css="#suggestArticleDialogModal h3")
 	private WebElement suggestVideoOrArticleModalTopic;
 	@FindBy(css="div.videourl input")
 	private WebElement suggestVideoWhatInput;
-	@FindBy(css="div.articleurl input")
+	@FindBy(css="#suggestArticleDialogModal input")
 	private WebElement suggestArticleWhatInput;
 	@FindBy(css="div.wikiname input")
 	private WebElement suggestVideoWhichWikiInput;
-	@FindBy(css="div.required textarea")
+	@FindBy(css="#suggestArticleDialogModal textarea")
 	private WebElement suggestArticleWhyCooliInput;
-	@FindBy(css="button.submit")
+	@FindBy(css="#suggestArticleDialogModal button.primary")
 	private WebElement submitButton;
 	@FindBy(css="section.wikiahubs-pulse")
 	private WebElement pulseModule;
