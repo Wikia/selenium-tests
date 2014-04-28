@@ -43,7 +43,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 
 	@GeoEdgeProxy(country="US")
 	@Test (groups={"Ads", "NoAds71Media_001", "NoAds71Media"})
-	public void TestNo71MediaAds_001() throws Exception {
+	public void TestNo71MediaAds_US() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
@@ -51,7 +51,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 
 	@GeoEdgeProxy(country="DE")
 	@Test (groups={"Ads", "NoAds71Media_002", "NoAds71Media"})
-	public void TestNo71MediaAds_002() throws Exception {
+	public void TestNo71MediaAds_DE() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
@@ -59,7 +59,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 
 	@GeoEdgeProxy(country="HR")
 	@Test (groups={"Ads", "NoAds71Media_003", "NoAds71Media"})
-	public void TestNo71MediaAds_003() throws Exception {
+	public void TestNo71MediaAds_HR() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
@@ -67,7 +67,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 
 	@GeoEdgeProxy(country="AU")
 	@Test (groups={"Ads", "NoAds71Media_004", "NoAds71Media"})
-	public void TestNo71MediaAds_004() throws Exception {
+	public void TestNo71MediaAds_AU() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
