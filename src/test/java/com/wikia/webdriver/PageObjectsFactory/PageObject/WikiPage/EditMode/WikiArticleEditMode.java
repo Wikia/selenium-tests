@@ -65,8 +65,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement oKbutton;
 	@FindBy(css="img.video")
 	private WebElement videoInEditMode;
-	@FindBy(css="div.ArticlePreview div.Wikia-video-play-button")
-	private WebElement videoOnPreview;
 	@FindBy(css="span.cke_button_ModeWysiwyg a")
 	private WebElement visualModeButton;
 	@FindBy(css="section.modalWrapper.preview section.modalContent figure a img")
