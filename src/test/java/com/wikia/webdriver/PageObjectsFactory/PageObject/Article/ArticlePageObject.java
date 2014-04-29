@@ -106,7 +106,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement imageAddPlaceholder;
-	@FindBy(css="a.details.magnify")
+	@FindBy(css="figcaption p")
+	private WebElement videoTitle;
+	@FindBy(css="a.details.sprite")
 	private WebElement videoDetailsButton;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
 	private WebElement rvFirstVideo;
@@ -537,8 +539,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public FilePagePageObject clickVideoDetailsButton() {
+		waitForElementByElement(videoTitle);
+		executeScript("$('a.details.sprite').css('visibility', 'visible')");
 		waitForElementByElement(videoDetailsButton);
-		scrollAndClick(videoDetailsButton);
+		videoDetailsButton.click();
 		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
 		return new FilePagePageObject(driver);
 	}
