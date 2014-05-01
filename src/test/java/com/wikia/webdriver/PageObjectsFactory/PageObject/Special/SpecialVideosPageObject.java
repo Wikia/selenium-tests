@@ -24,18 +24,18 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
  */
 public class SpecialVideosPageObject extends SpecialPageObject {
 
-	@FindBy(css = "a.addVideo")
+	@FindBy(css = "a.button.addVideo")
 	private WebElement addVideo;
-	@FindBy(css = "div.WikiaGrid div:nth-child(1).grid-2")
+	@FindBy(css = ".special-videos-grid li:nth-child(1)")
 	private WebElement newestVideo;
-	@FindBy(css = "div.WikiaGrid div:nth-child(1).grid-2 .info-overlay-title")
+	@FindBy(css = ".special-videos-grid li:nth-child(1) .title")
 	private WebElement newestVideoTitle;
-	@FindBy(css = "div.WikiaGrid div:nth-child(1).grid-2 .remove")
+	@FindBy(css = ".special-videos-grid li:nth-child(1) .remove")
 	private WebElement newestVideoDeleteIcon;
 	@FindBys(@FindBy(css=".image.video > img"))
 	private List<WebElement> videos;
-	@FindBy(css = ".VideoGrid a.video img.play")
-	private List<WebElement> galleryVideoBox;
+	@FindBy(css = ".special-videos-grid a.video")
+	private List<WebElement> videoItem;
 	@FindBy(css = "#WikiaConfirmOk")
 	private WebElement deleteConfirmButton;
 
@@ -73,13 +73,13 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 		return new VetAddVideoComponentObject(driver);
 	}
 
-	public void verifyVideoAdded(String videoDescription) {
-		waitForTextToBePresentInElementByElement(newestVideo, videoDescription);
-		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoDescription, true);
+	public void verifyVideoAdded(String videoTitle) {
+		waitForTextToBePresentInElementByElement(newestVideoTitle, videoTitle);
+		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoTitle, true);
 	}
 
 	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
-		scrollAndClick(galleryVideoBox.get(itemNumber));
+		scrollAndClick(videoItem.get(itemNumber));
 		return new LightboxComponentObject(driver);
 	}
 

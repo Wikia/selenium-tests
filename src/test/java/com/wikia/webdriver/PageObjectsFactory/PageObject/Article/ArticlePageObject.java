@@ -94,8 +94,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected List<WebElement> tableOfContentsSectionsList;
 	@FindBy(css="#togglelink")
 	protected WebElement tableOfContentsShowHideButton;
-	@FindBy(css="#mw-content-text .Wikia-video-play-button")
+	@FindBy(css="#mw-content-text .video-thumbnail")
 	protected WebElement videoArticle;
+	@FindBy(css="#mw-content-text .video-thumbnail figcaption")
+	protected WebElement videoArticleCaption;
 	@FindBy(css="section.RelatedVideosModule")
 	protected WebElement rVModule;
 	@FindBy(css=".button.addVideo")
@@ -104,7 +106,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement imageAddPlaceholder;
-	@FindBy(css="a.details.magnify")
+	@FindBy(css="figcaption p")
+	private WebElement videoTitle;
+	@FindBy(css="a.details.sprite")
 	private WebElement videoDetailsButton;
 	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
 	private WebElement rvFirstVideo;
@@ -155,7 +159,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	String removeCategorySelector =
 			"li[data-name='%categoryName%'] li.removeCategory > img";
 	String videoInCommentsSelector =
-			".speech-bubble-message img.Wikia-video-thumb[data-video-name*='%videoName%']";
+			".speech-bubble-message img[data-video-name*='%videoName%']";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -258,6 +262,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		driver.switchTo().defaultContent();
 		scrollAndClick(commentSubmitButton);
 		waitForElementNotVisibleByElement(commentSubmitButton);
+		PageObjectLogging.log("submitComment", "comment has been submitted", true);
 	}
 
 	public void submitEditComment() {
@@ -274,7 +279,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyCommentVideo(String videoName) {
 		driver.findElement(
-				By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName))
+			By.cssSelector(videoInCommentsSelector.replace("%videoName%", videoName))
 		);
 		PageObjectLogging.log("verifyCommentVideo", "video is visible in comments section", true);
 	}
@@ -450,8 +455,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideoAlignment(PositionsVideo positions) {
 		String videoClass = videoArticle.findElement(
-				By.xpath("./../..")
-				).getAttribute("class");
+			By.xpath("./..")
+		).getAttribute("class");
 		String position;
 		switch(positions) {
 		case left:
@@ -472,36 +477,34 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideoWidth(int widthDesired) {
 		int videoWidth = Integer.parseInt(videoArticle.findElement(
-				By.xpath("./../img")
-				).getAttribute("width"));
+			By.tagName("img")
+		).getAttribute("width"));
 		Assertion.assertNumber(
-				widthDesired,
-				videoWidth,
-				"width should be " + widthDesired + " but is " + videoWidth);
+			widthDesired,
+			videoWidth,
+			"width should be " + widthDesired + " but is " + videoWidth
+		);
 	}
 
 	public void verifyVideoCaption(String captionDesired) {
 		String caption = videoArticle.findElement(
-				By.xpath("./../../figcaption")
-				).getText();
+			By.className("caption")
+		).getText();
 		Assertion.assertStringContains(caption,captionDesired);
 		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
 	}
 
 	public void verifyVideoNoCaption() {
-		String videoClass = videoArticle.findElement(
-				By.xpath("./../img")
-				).getAttribute("class");
-		Assertion.assertTrue(!videoClass.contains("thumbimage"));
+		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoArticle));
 		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
 	}
 
 	public void verifyRelatedVideosModule() {
 		waitForElementByElement(rVModule);
 		PageObjectLogging.log(
-				"verifyRelatedVideosModule",
-				"related videos module is visible",
-				true
+			"verifyRelatedVideosModule",
+			"related videos module is visible",
+			true
 		);
 	}
 
@@ -517,9 +520,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 		}
 		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
 		PageObjectLogging.log(
-				"verifyRelatedVideoAdded",
-				videoName + " is visible in related video module",
-				true
+			"verifyRelatedVideoAdded",
+			videoName + " is visible in related video module",
+			true
 		);
 	}
 
@@ -536,8 +539,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public FilePagePageObject clickVideoDetailsButton() {
+		waitForElementByElement(videoTitle);
+		executeScript("$('a.details.sprite').css('visibility', 'visible')");
 		waitForElementByElement(videoDetailsButton);
-		scrollAndClick(videoDetailsButton);
+		videoDetailsButton.click();
 		PageObjectLogging.log("clickVideoDetailsButton", "Video Details link is clicked", true);
 		return new FilePagePageObject(driver);
 	}
@@ -576,9 +581,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public EditCategoryComponentObject editCategory(String category) {
 		WebElement editCategory = driver.findElement(
-				By.cssSelector(
-						editCategorySelector.replace("%categoryName%", category)
-				)
+			By.cssSelector(
+				editCategorySelector.replace("%categoryName%", category)
+			)
 		);
 		scrollAndClick(editCategory);
 		PageObjectLogging.log("editCategory", "edit button on category " + category + " clicked", true);
@@ -587,10 +592,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void removeCategory(String category) {
 		WebElement editCategory = driver.findElement(
-				By.cssSelector(
-						removeCategorySelector.replace("%categoryName%", category)
-						)
-				);
+			By.cssSelector(
+				removeCategorySelector.replace("%categoryName%", category)
+			)
+		);
 		scrollAndClick(editCategory);
 		PageObjectLogging.log("removeCategory", "remove button on category " + category + " clicked", true);
 	}
