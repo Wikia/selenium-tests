@@ -3,6 +3,8 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers;
 import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,20 +17,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsComparison {
 
-	@FindBy(css="#WikiaPage")
-	private WebElement wikiaArticle;
-	@FindBy(css="body")
-	private WebElement body;
-
 	protected ImageComparison imageComparison;
+	//Chromedriver has an open issue and all screenshots made in chromedriver on mobile are scaled
+	private final double chromeDriverScreenshotScale = 0.5;
 
 	public AdsComparison() {
 		imageComparison = new ImageComparison();
@@ -36,17 +33,25 @@ public class AdsComparison {
 
 	public void hideSlot(String slotSelector, WebDriver driver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		// Find ad-containing element and set visibility = hidden on it
-		// Example selector:
-		// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
-		js.executeScript(
-			"var iframes = arguments[0] + ' iframe:visible, ';"
-			+ "var objects = arguments[0] + ' object:visible, ';"
-			+ "var imgs = arguments[0] + ' img:visible';"
-			+ "var elements = $(iframes + objects + imgs);"
-			+ "for (var i=0; i < elements.length; i++) { elements[i].style.visibility = 'hidden'; }",
-			slotSelector
-		);
+		// Check if we are using mobile skin. Since mobile skin uses different version of jQuery
+		if (slotSelector.toUpperCase().contains("MOBILE")) {
+			js.executeScript(
+					"$(arguments[0]).css('visibility', 'hidden')",
+					slotSelector
+			);
+		} else {
+			// Find ad-containing element and set visibility = hidden on it
+			// Example selector:
+			// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
+			js.executeScript(
+					"var iframes = arguments[0] + ' iframe:visible, ';"
+							+ "var objects = arguments[0] + ' object:visible, ';"
+							+ "var imgs = arguments[0] + ' img:visible';"
+							+ "var elements = $(iframes + objects + imgs);"
+							+ "for (var i=0; i < elements.length; i++) { elements[i].style.visibility = 'hidden'; }",
+					slotSelector
+			);
+		}
 		PageObjectLogging.log(
 			"AdInSlotHidden", "Ad in slot hidden; Slot CSS " + slotSelector, true
 		);
@@ -119,14 +124,22 @@ public class AdsComparison {
 		hideSlot(elementSelector, driver);
 		File postSwitch = shooter.captureWebElement(element, driver);
 		PageObjectLogging.log(
-			"ScreenshotElement",
-			"Screenshot of element off taken; CSS " + elementSelector,
-			true
+				"ScreenshotElement",
+				"Screenshot of element off taken; CSS " + elementSelector,
+				true
 		);
 		boolean result = imageComparison.compareImagesBasedOnBytes(preSwitch, postSwitch);
 		preSwitch.delete();
 		postSwitch.delete();
 		return result;
+	}
+
+	public File getMobileSlotScreenshot(WebElement element, WebDriver driver) {
+		Shooter shooter = new Shooter();
+		File page = shooter.capturePage(driver);
+		BufferedImage scaledPage = shooter.scaleImage(page, chromeDriverScreenshotScale, chromeDriverScreenshotScale);
+		File slotScreenshot = shooter.cropImage(element.getLocation(), element.getSize(), scaledPage);
+		return slotScreenshot;
 	}
 
 	private String readFileAndEncodeToBase(File file) throws IOException {

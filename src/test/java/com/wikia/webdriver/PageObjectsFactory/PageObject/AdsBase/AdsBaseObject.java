@@ -39,17 +39,16 @@ public class AdsBaseObject extends WikiBasePageObject {
 	@FindBy(css=liftiumIframeSelector)
 	private List<WebElement> liftiumIframes;
 	@FindBy(css="div[id*='TOP_LEADERBOARD']")
-	private WebElement presentLeaderboard;
+	protected WebElement presentLeaderboard;
 	@FindBy(css="div[id*='TOP_RIGHT_BOXAD']")
-	private WebElement presentMedrec;
+	protected WebElement presentMedrec;
 
-	protected Boolean isWikiMainPage;
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
-	private String presentLeaderboardName;
-	private String presentLeaderboardSelector;
-	private String presentMedrecName;
-	private String presentMedrecSelector;
+	protected String presentLeaderboardName;
+	protected String presentLeaderboardSelector;
+	protected String presentMedrecName;
+	protected String presentMedrecSelector;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
@@ -99,38 +98,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	public void checkMedrec() {
-		AdsComparison adsComparison = new AdsComparison();
-		extractLiftiumTagId(presentMedrecSelector);
-		boolean isHidden = checkIfSlotHiddenBySlotTweaker(presentMedrec, presentMedrecName);
-
-		if (!isHidden) {
-			boolean result = adsComparison.compareSlotOnOff(
-				presentMedrec, presentMedrecSelector, driver
-			);
-			if(result) {
-				PageObjectLogging.log(
-					"CompareScreenshot", "Screenshots look the same", false
-				);
-				throw new NoSuchElementException(
-					"Screenshots of element on/off look the same."
-					+ "Most probable ad is not present; CSS "
-					+ presentMedrecName
-				);
-			} else {
-				PageObjectLogging.log(
-					"CompareScreenshot", "Screenshots are different", true
-				);
-			}
-		} else {
-			PageObjectLogging.log(
-				"SlotHiddenBySlotTweaker",
-				"Slot is hidden by slotTweaker, slotTweaker scrpit found inside",
-				true
-			);
-		}
-	}
-
 	public void verifyRoadblockServedAfterMultiplePageViews(
 		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
 		String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
@@ -162,11 +129,19 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
+	public void checkMedrec() {
+		checkAdVisibleInSlot(presentMedrecSelector, presentMedrec);
+	}
+
 	public void checkTopLeaderboard() {
+		checkAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
+	}
+
+	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
 		AdsComparison adsComparison = new AdsComparison();
-		extractLiftiumTagId(presentLeaderboardSelector);
+		extractLiftiumTagId(slotSelector);
 		boolean result = adsComparison.compareSlotOnOff(
-			presentLeaderboard, presentLeaderboardSelector, driver
+			slot, slotSelector, driver
 		);
 		if(result) {
 			PageObjectLogging.log(
@@ -175,7 +150,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
 				+ "Most probable ad is not present; CSS "
-				+ presentLeaderboardSelector
+				+ slotSelector
 			);
 		} else {
 			PageObjectLogging.log(
@@ -540,8 +515,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	private String extractLiftiumTagId(String slotSelector) {
 		String liftiumTagId = null;
-		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-		if (slot.findElements(By.cssSelector(liftiumIframeSelector)).size() > 0) {
+		if (checkIfElementOnPage(liftiumIframeSelector)) {
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			WebElement currentLiftiumIframe = (WebElement)js.executeScript(
 				"return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
@@ -583,5 +557,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 		).getAttribute("src");
 		driver.switchTo().defaultContent();
 		return imageAd;
+	}
+
+	protected boolean checkIfSlotExpanded(WebElement slot) {
+		return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
 	}
 }
