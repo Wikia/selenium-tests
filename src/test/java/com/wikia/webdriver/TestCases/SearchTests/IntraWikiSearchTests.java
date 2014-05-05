@@ -24,7 +24,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Search.IntraWikiSearch.
  *  8. Type at least 3 chars and verify suggestions are displaying and contain given phrase
  *  9. Verify search page hubs and titles are translatable
  *  10. Select photos only option and verify there are only photos,
- *		then select videos only option and verify there are only videos
+ *		then select videos only option and verify:
+ *			1. the number of videos = 25
+ *			2. the number of videos equals the number of play buttons
+ *			3. video titles start with "file" prefix
  *  11. Verify if there are correct advanced option set as a default
  *  12. Search for some image without typing extension (.jpg) and verify photo is found
  *  13. Search for different phrases and verify there are correct namespaces in result titles

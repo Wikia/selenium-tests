@@ -69,8 +69,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	private List<WebElement> suggestionsList;
 	@FindBy(css=".search-tabs.grid-1.alpha")
 	private List<WebElement> filterOptions;
-	@FindBy(css=".sprite.play.small")
-	private List<WebElement> playMovieImage;
+	@FindBy(css=".play-circle")
+	private List<WebElement> playMovieImages;
 	@FindBy(css=".result-description .result-link")
 	private WebElement pushToTopWikiResult;
 	@FindBy(css=".wikiPromoteThumbnail")
@@ -209,8 +209,11 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void verifyVideosOnly() {
+		waitForElementByElement(thumbnailsVideos.get(0));
 		Assertion.assertTrue(thumbnailsVideos.size() == 25);
-		Assertion.assertEquals(playMovieImage.size(), thumbnailsVideos.size());
+		//make sure there are as many videos as play buttons
+		waitForElementByElement(playMovieImages.get(0));
+		Assertion.assertEquals(playMovieImages.size(), thumbnailsVideos.size());
 		for(int i = 0; i < titles.size(); i++) {
 			Assertion.assertTrue(titles.get(i).getText().startsWith(URLsContent.fileNameSpace));
 		}
@@ -250,7 +253,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void selectVideosOnly() {
-		filterVideos.click();
+		scrollAndClick(filterVideos);
 		PageObjectLogging.log("selectVideosOnly", "Videos option is selected", true, driver);
 	}
 
