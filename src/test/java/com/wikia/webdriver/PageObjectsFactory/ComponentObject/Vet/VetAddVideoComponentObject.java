@@ -26,16 +26,16 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	private WebElement findButton;
 	@FindBys(@FindBy(css="#VET-suggestions li"))
 	private List<WebElement> videoList;
-	@FindBys(@FindBy(css="#VET-suggestions .Wikia-video-play-button"))
+	@FindBys(@FindBy(css="#VET-suggestions .video-thumbnail"))
 	private List<WebElement> videoThumbnailsList;
 	@FindBy(css=".Wikia-video-enabledEmbedCode")
 	private WebElement videoThumbnail;
-	@FindBy(css="div.Wikia-video-play-button")
+	@FindBy(css="div.Wikia-video-play-button, .video-thumbnail")
 	private WebElement suggestedVideo;
 	@FindBy(css="a.bottom-close-button")
 	private WebElement closeButton;
 
-	private By addVideoLibraryLink = By.cssSelector("li a[href*='http']");
+	private By addVideoLibraryLink = By.cssSelector("li > a");
 
 	public VetAddVideoComponentObject(WebDriver driver) {
 		super(driver);
@@ -71,11 +71,11 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	private void clickAddVideoLibrary(int videoListItem) {
 		WebElement listElem = videoList.get(videoListItem);
 		waitForElementByElement(listElem);
-		String videoName = listElem.findElement(By.cssSelector("a[data-pos]")).getAttribute("title");
 		WebElement addVideoLink = listElem.findElement(addVideoLibraryLink);
+		String videoName = addVideoLink.getAttribute("title");
 		scrollAndClick(addVideoLink);
-		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked", true, driver);
 		this.videoName =  videoName;
+		PageObjectLogging.log("clickAddVideoLibrary", "add video button clicked: " + videoName, true, driver);
 	}
 
 	private void checkIfLibraryIsPresent() {

@@ -40,7 +40,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 	}
 
 	@Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder"})
-	public void Placeholders_002_PublishedLibrary_VID_1244() {
+	public void Placeholders_002_PublishedLibrary() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -72,7 +72,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 	}
 
 	@Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder"})
-	public void Placeholders_004_EditModeLibrary_VID_1244() {
+	public void Placeholders_004_EditModeLibrary() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openRandomArticle(wikiURL);
