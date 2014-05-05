@@ -49,6 +49,9 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
 			);
 		}
+		PageObjectLogging.log(
+			"CompareScreenshot", "Page before hidding ads", true, driver
+		);
 		if (checkIfAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard)) {
 			PageObjectLogging.log(
 				"CompareScreenshot", "Screenshots look the same", false
