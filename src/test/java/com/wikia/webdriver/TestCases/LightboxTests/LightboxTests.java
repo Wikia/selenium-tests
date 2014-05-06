@@ -10,7 +10,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxC
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.RightRail.LatestPhotosComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.RightRail.RelatedVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
@@ -27,7 +26,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPa
  * @author Saipetch Kongkatong
  *
  * 1. Open lightbox from latest photo,
- * 2. Open lightbox from related video,
  * 3. Open lightbox from Special:UnusedFiles page
  * 4. Open lightbox from Special:UnusedVideos page
  * 5. Open lightbox from Special:UncategorizedFiles page
@@ -50,19 +48,6 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		LightboxComponentObject lightbox = latestPhotos.openLightboxForImage(0);
 		lightbox.verifyLightboxPopup();
 	}
-
-	/**
-	 * Skipped due to VID-1609
-	 */
-	@Test(enabled = false, groups = {"LightboxTest", "LightboxTest_002"})
-	public void LightboxTest_002_relatedVideo() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.openRandomArticle(wikiURL);
-		RelatedVideoComponentObject relatedVideos = new RelatedVideoComponentObject(driver);
-		LightboxComponentObject lightbox = relatedVideos.openLightboxForVideo(0);
-		lightbox.verifyLightboxPopup();
-	}
-
 
 	@Test(groups = {"LightboxTest", "LightboxTest_003"})
 	public void LightboxTest_004_unusedFiles() {

@@ -118,7 +118,6 @@ The following are valid for use in the `-Dgroups` parameter:
 * MessageWallNotificationsThreadCreatorTests
 * MessageWallNotificationsThreadParticipantTests
 * MultiWikiFinder
-* RelatedVideo
 * RTE
 * RTE_extended
 * CrossWikiSearch
