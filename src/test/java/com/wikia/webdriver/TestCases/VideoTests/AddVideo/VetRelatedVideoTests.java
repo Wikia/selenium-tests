@@ -20,7 +20,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	/**
-	 * skipped due VID-1325
+	 * skipped due VID-1609
 	 */
 	@Test(enabled = false, groups = {"RelatedVideo_001", "RelatedVideo"})
 	public void RelatedVideo_001_Provider() {
@@ -37,7 +37,7 @@ public class VetRelatedVideoTests extends NewTestTemplate {
 	}
 
 	/**
-	 * skipped due VID-1325
+	 * skipped due VID-1609
 	 */
 	@Test(enabled = false, groups = {"RelatedVideo_002", "RelatedVideo"})
 	public void RelatedVideo_002_Library() {

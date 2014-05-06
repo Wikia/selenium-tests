@@ -51,7 +51,10 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_002"})
+	/**
+	 * Skipped due to VID-1609
+	 */
+	@Test(enabled = false, groups = {"LightboxTest", "LightboxTest_002"})
 	public void LightboxTest_002_relatedVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);

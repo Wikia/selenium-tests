@@ -46,7 +46,7 @@ public class VetProvidersTests extends NewTestTemplate {
 	}
 
 	/**
-	 * skipped due VID-1325
+	 * skipped due VID-1609
 	 */
 	@Test(
 			enabled = false,

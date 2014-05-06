@@ -95,7 +95,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 	}
 
 	/**
-	 * skipped due VID-1325
+	 * skipped due VID-1609
 	 */
 	@Test(enabled=false, groups = {"ForcedLogin_006_rail", "ForcedLogin", "Smoke2"})
 	public void ForcedLogin_006_rail () {
