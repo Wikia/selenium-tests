@@ -119,7 +119,6 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 		return this.videoName;
 	}
 
-	// TODO: check on this because of generic css selector
 	public void verifySuggestionsIsDisplayed() {
 		waitForElementByElement(suggestedVideo);
 		PageObjectLogging.log("verifySuggestionsIsDisplayed", "Verified suggested module appeared", true, driver);
