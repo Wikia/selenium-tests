@@ -122,4 +122,30 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		home.openCorporateHomePage(wikiCorporateURL);
 		home.verifyLanguageDropdownURLs();
 	}
+
+	/**
+	 * Verify that links in Global Navigation are working
+	 */
+	@Test(dataProvider = "provideHub", groups = { "HubsTests006", "Hubs" })
+	public void HubsTest006_VerifyLinkInGlobalNavigation(HubName hubName) {
+		HomePageObject home = new HomePageObject(driver);
+		home.openCorporateHomePage(wikiCorporateURL);
+		HubBasePageObject hub = home.openHubByUrl(hubName, wikiCorporateURL);
+		hub.clickGlobalNavLink(hubName);
+		hub.verifyHubTitle(hubName);
+		hub.verifyHubUrl(hubName);
+	}
+
+	/**
+	 * Verify that links in WikiaBar are working
+	 */
+	@Test(dataProvider = "provideHub", groups = { "HubsTests007", "Hubs" })
+	public void HubsTest007_VerifyLinkInWikiaBar(HubName hubName) {
+		HomePageObject home = new HomePageObject(driver);
+		home.openCorporateHomePage(wikiCorporateURL);
+		HubBasePageObject hub = home.openHubByUrl(hubName, wikiCorporateURL);
+		hub.clickWikiaBarLink(hubName);
+		hub.verifyHubTitle(hubName);
+		hub.verifyHubUrl(hubName);
+	}
 }
