@@ -24,14 +24,6 @@ Using Maven, you may now run any tests you want on whatever database and domain 
 
     mvn clean test -Dbrowser=<browser> -Denv=<environment> -Dwiki-name=<wiki> -Dgroups=<group>
 
-It is also possible to run mobile tests on real devices (Currently only Android is supported). In case of running tests on real devices additional parameters are supported:
-
-1. -Dplatform - determine if IOS or ANDROID should be used
-2. -Dplatform-version - get device's uuid from mobile config for provided platform version
-3. -Ddevice-id - get device with provided uuid
-
-If both platform-version and device-id are provided device with provided uuid would be chosen.
-
 Example command:
 
 ##### Running tests on preview for mediawiki119 wikia
@@ -47,12 +39,6 @@ Example command:
     mvn clean test -Dbrowser=CHROME -Denv=dev-karol -Dwiki-name=muppets -Dgroups=Login
 
 If everything goes right it should log in as a QATestsUser.
-
-##### Running tests on real device
-
-    mvn clean test -Dplatform=ANDROID -Ddevice-id=0243e69a8ec7e8de -Dgroups=MobileLogin
-
-    mvn clean test -Dplatform=ANDROID -Dplatform-version=4.4 -Dgroups=MobileLogin
 
 ### Parameters
 

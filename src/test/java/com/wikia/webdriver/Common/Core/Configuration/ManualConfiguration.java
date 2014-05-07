@@ -52,23 +52,8 @@ public class ManualConfiguration extends AbstractConfiguration {
 	}
 
 	@Override
-	public String getPlatformVersion() {
-		return config.get("platform-version");
-	}
-
-	@Override
-	public String getPlatform() {
-		return config.get("platform");
-	}
-
-	@Override
-	public String getDeviceId() {
-		return config.get("device-id");
-	}
-
-	@Override
-	public String geMobileConfig() {
-		return config.get("mobile-config");
+	public boolean loginCookieAvailable() {
+		return !((config.get("env").contains("dev")) || (config.get("env").contains("sandbox")));
 	}
 
 	@Override
