@@ -17,7 +17,7 @@ public class PropertiesSetter {
 	 * This method is used by Properties.class when developer is running tests using IDE
 	 */
 
-	public static void setPropertiesManually() {
+	public static void setPropertiesManually()	{
 		Global.BROWSER = "FF";
 		Global.DOMAIN = "http://mediawiki119.wikia.com/";
 		Global.LIVE_DOMAIN = "http://www.wikia.com/";
