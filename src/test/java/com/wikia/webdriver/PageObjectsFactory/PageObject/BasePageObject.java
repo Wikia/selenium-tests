@@ -59,12 +59,8 @@ public class BasePageObject{
 		this.driver = driver;
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		this.setWindowSize();
-		urlBuilder = new UrlBuilder();
-	}
-
-	protected void setWindowSize() {
 		driver.manage().window().maximize();
+		urlBuilder = new UrlBuilder();
 	}
 
 	public static String getAttributeValue(WebElement element, String attributeName) {
