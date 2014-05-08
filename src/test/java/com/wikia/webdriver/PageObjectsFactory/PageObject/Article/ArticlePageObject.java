@@ -98,7 +98,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement videoArticle;
 	@FindBy(css="#mw-content-text .video-thumbnail figcaption")
 	protected WebElement videoArticleCaption;
-	@FindBy(css=".button.addVideo")
+	@FindBy(css=".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement imageAddPlaceholder;
