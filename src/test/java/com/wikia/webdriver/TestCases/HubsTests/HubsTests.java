@@ -130,7 +130,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	public void HubsTest006_VerifyLinkInGlobalNavigation(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
 		home.openCorporateHomePage(wikiCorporateURL);
-		HubBasePageObject hub = home.openHubByUrl(hubName, wikiCorporateURL);
+		HubBasePageObject hub = new HubBasePageObject(driver);
 		hub.clickGlobalNavLink(hubName);
 		hub.verifyHubTitle(hubName);
 		hub.verifyHubUrl(hubName);
@@ -143,7 +143,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	public void HubsTest007_VerifyLinkInWikiaBar(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
 		home.openCorporateHomePage(wikiCorporateURL);
-		HubBasePageObject hub = home.openHubByUrl(hubName, wikiCorporateURL);
+		HubBasePageObject hub = new HubBasePageObject(driver);
 		hub.clickWikiaBarLink(hubName);
 		hub.verifyHubTitle(hubName);
 		hub.verifyHubUrl(hubName);
