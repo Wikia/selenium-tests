@@ -74,7 +74,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 	List<WebElement> fromCommunityQuatations;
 
 	@FindBy(css="#WikiaHubs .hubs-header h1")
-	private WebElement WikiaHubsHeaderElement;
+	private WebElement wikiaHubsHeaderElement;
 	@FindBy(css="li.topNav.Video_Games a")
 	private WebElement VideoGamesTopNavLink;
 	@FindBy(css="li.topNav.Entertainment a")
@@ -364,7 +364,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyHubTitle(HubName hubName) {
-		waitForElementByElement(WikiaHubsHeaderElement);
+		waitForElementByElement(wikiaHubsHeaderElement);
 		String header;
 		switch (hubName) {
 			case Video_Games:
@@ -378,7 +378,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 				header = "Lifestyle";
 				break;
 		}
-		Assert.assertEquals(WikiaHubsHeaderElement.getText(), header);
+		Assert.assertEquals(wikiaHubsHeaderElement.getText(), header);
 
 		PageObjectLogging.log(
 				"verifyHubTitle",
@@ -388,7 +388,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyHubUrl(HubName hubName) {
-		waitForElementByElement(WikiaHubsHeaderElement);
+		waitForElementByElement(wikiaHubsHeaderElement);
 		String url;
 		switch (hubName) {
 			case Video_Games:
