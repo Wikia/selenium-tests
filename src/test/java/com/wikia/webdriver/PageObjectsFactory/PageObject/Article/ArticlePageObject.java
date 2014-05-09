@@ -20,6 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditC
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.CreateArticleModalComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.VECreateArticleModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -713,8 +714,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {
 		WebElement redLinkToClick = redLinks.get(linkNumber);
-		waitForElementClickableByElement(redLinkToClick);
-		jQueryClick(redLinkToClick);
+		VECreateArticleModalComponentObject veArticleModal = clickVERedLink(redLinkToClick);
+		veArticleModal.createPage();
 		return new VisualEditorPageObject(driver);
 	}
 
@@ -723,6 +724,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
 		articleModal.createPageWithBlankLayout("");
 		return new VisualEditModePageObject(driver);
+	}
+
+	private VECreateArticleModalComponentObject clickVERedLink(WebElement redLink) {
+		waitForElementClickableByElement(redLink);
+		jQueryClick(redLink);
+		return new VECreateArticleModalComponentObject(driver);
 	}
 
 	private CreateArticleModalComponentObject clickRedLink(WebElement redLink) {
