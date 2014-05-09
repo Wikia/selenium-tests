@@ -98,10 +98,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement videoThumbnail;
 	@FindBy(css="#mw-content-text .article-thumb")
 	protected WebElement videoThumbnailWrapper;
-	@FindBy(css="section.RelatedVideosModule")
-	protected WebElement rVModule;
-	@FindBy(css=".button.addVideo")
-	protected WebElement rVAddVideo;
 	@FindBy(css=".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
@@ -110,8 +106,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement videoTitle;
 	@FindBy(css="a.details.sprite")
 	private WebElement videoDetailsButton;
-	@FindBy(css=".RVBody .item:nth-child(1) .lightbox[data-video-name]")
-	private WebElement rvFirstVideo;
 	@FindBy(css="#CategorySelectAdd")
 	private WebElement addCategory;
 	@FindBy(css="#CategorySelectInput")
@@ -497,33 +491,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyVideoNoCaption() {
 		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoThumbnail));
 		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
-	}
-
-	public void verifyRelatedVideosModule() {
-		waitForElementByElement(rVModule);
-		PageObjectLogging.log(
-			"verifyRelatedVideosModule",
-			"related videos module is visible",
-			true
-		);
-	}
-
-	public VetAddVideoComponentObject clickAddRelatedVideo() {
-		waitForElementByElement(rVAddVideo);
-		scrollAndClick(rVAddVideo);
-		return new VetAddVideoComponentObject(driver);
-	}
-
-	public void verifyRelatedVideoAdded(String videoName) {
-		if (videoName.length() > 45) {
-			videoName = videoName.substring(0, 45);
-		}
-		waitForTextToBePresentInElementByElement(rvFirstVideo, videoName);
-		PageObjectLogging.log(
-			"verifyRelatedVideoAdded",
-			videoName + " is visible in related video module",
-			true
-		);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){

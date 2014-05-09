@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.util.List;
+import junit.framework.Assert;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,13 +10,14 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject.HubName;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 
 /**
  * @author Michal 'justnpT' Nowierski
  * @author Karol 'kkarolk' Kujawiak
  */
 public class HubBasePageObject extends WikiBasePageObject {
-
 	@FindBy(css="div.button.scrollleft p")
 	private WebElement RelatedVideosScrollLeft;
 	@FindBy(css="div.button.scrollright p")
@@ -70,6 +72,21 @@ public class HubBasePageObject extends WikiBasePageObject {
 	List<WebElement> fromCommunityWikinameAndUsernameFields;
 	@FindBy(css="ul.wikiahubs-ftc-list div.wikiahubs-ftc-creative")
 	List<WebElement> fromCommunityQuatations;
+
+	@FindBy(css="#WikiaHubs .hubs-header h1")
+	private WebElement wikiaHubsHeaderElement;
+	@FindBy(css="li.topNav.Video_Games a")
+	private WebElement VideoGamesTopNavLink;
+	@FindBy(css="li.topNav.Entertainment a")
+	private WebElement EntertainmentTopNavLink;
+	@FindBy(css="li.topNav.Lifestyle a")
+	private WebElement LifestyleTopNavLink;
+	@FindBy(css=".wikiabar-button[href$='Video_Games']")
+	private WebElement VideoGamesWikiaBarLink;
+	@FindBy(css=".wikiabar-button[href$='Entertainment']")
+	private WebElement EntertainmentWikiaBarLink;
+	@FindBy(css=".wikiabar-button[href$='Lifestyle']")
+	private WebElement LifestyleWikiaBarLink;
 
 	private String mosaicSliderLargeImageDescriptionString =
 			"div.wikia-mosaic-slider-description[style*='1'] span.image-description b";
@@ -294,6 +311,102 @@ public class HubBasePageObject extends WikiBasePageObject {
 		PageObjectLogging.log(
 				"verifySuggestAVideoOrArticleModalDisappeared",
 				"Verify that video 'suggest video or article' modal disppeared",
+				true
+		);
+	}
+
+	public void clickGlobalNavLink(HubName hubName) {
+		WebElement element;
+		switch (hubName) {
+			case Video_Games:
+				element = VideoGamesTopNavLink;
+				break;
+			case Entertainment:
+				element = EntertainmentTopNavLink;
+				break;
+			case Lifestyle:
+			default:
+				element = LifestyleTopNavLink;
+				break;
+		}
+		waitForElementClickableByElement(element);
+		element.click();
+
+		PageObjectLogging.log(
+				"clickGlobalNavLink",
+				"Click hub link in Global Navigation",
+				true
+		);
+	}
+
+	public void clickWikiaBarLink(HubName hubName) {
+		WebElement element;
+		switch (hubName) {
+			case Video_Games:
+				element = VideoGamesWikiaBarLink;
+				break;
+			case Entertainment:
+				element = EntertainmentWikiaBarLink;
+				break;
+			case Lifestyle:
+			default:
+				element = LifestyleWikiaBarLink;
+				break;
+		}
+		waitForElementClickableByElement(element);
+		element.click();
+
+		PageObjectLogging.log(
+				"clickWikiaBarLink",
+				"Click hub link in WikiaBar",
+				true
+		);
+	}
+
+	public void verifyHubTitle(HubName hubName) {
+		waitForElementByElement(wikiaHubsHeaderElement);
+		String header;
+		switch (hubName) {
+			case Video_Games:
+				header = "Video Games";
+				break;
+			case Entertainment:
+				header = "Entertainment";
+				break;
+			case Lifestyle:
+			default:
+				header = "Lifestyle";
+				break;
+		}
+		Assert.assertEquals(wikiaHubsHeaderElement.getText(), header);
+
+		PageObjectLogging.log(
+				"verifyHubTitle",
+				"Verify title",
+				true
+		);
+	}
+
+	public void verifyHubUrl(HubName hubName) {
+		waitForElementByElement(wikiaHubsHeaderElement);
+		String url;
+		switch (hubName) {
+			case Video_Games:
+				url = URLsContent.VideoGamesHubUrl;
+				break;
+			case Entertainment:
+				url = URLsContent.EntertainmentHubUrl;
+				break;
+			case Lifestyle:
+			default:
+				url = URLsContent.LifestyleHubUrl;
+				break;
+		}
+		Assert.assertTrue(getCurrentUrl().contains(url));
+
+		PageObjectLogging.log(
+				"verifyHubUrl",
+				"Verify URL",
 				true
 		);
 	}
