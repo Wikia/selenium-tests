@@ -95,9 +95,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	@FindBy(css="#togglelink")
 	protected WebElement tableOfContentsShowHideButton;
 	@FindBy(css="#mw-content-text .video-thumbnail")
-	protected WebElement videoArticle;
-	@FindBy(css="#mw-content-text .video-thumbnail figcaption")
-	protected WebElement videoArticleCaption;
+	protected WebElement videoThumbnail;
+	@FindBy(css="#mw-content-text .article-thumb")
+	protected WebElement videoThumbnailWrapper;
 	@FindBy(css=".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
@@ -404,7 +404,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideo() {
-		waitForElementByElement(videoArticle);
+		waitForElementByElement(videoThumbnail);
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
@@ -448,7 +448,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideoAlignment(PositionsVideo positions) {
-		String videoClass = videoArticle.findElement(
+		String videoClass = videoThumbnail.findElement(
 			By.xpath("./..")
 		).getAttribute("class");
 		String position;
@@ -470,7 +470,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideoWidth(int widthDesired) {
-		int videoWidth = Integer.parseInt(videoArticle.findElement(
+		int videoWidth = Integer.parseInt(videoThumbnail.findElement(
 			By.tagName("img")
 		).getAttribute("width"));
 		Assertion.assertNumber(
@@ -481,7 +481,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideoCaption(String captionDesired) {
-		String caption = videoArticle.findElement(
+		String caption = videoThumbnailWrapper.findElement(
 			By.className("caption")
 		).getText();
 		Assertion.assertStringContains(caption,captionDesired);
@@ -489,7 +489,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideoNoCaption() {
-		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoArticle));
+		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoThumbnail));
 		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
 	}
 
