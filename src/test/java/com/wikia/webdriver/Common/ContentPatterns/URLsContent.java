@@ -13,13 +13,13 @@ public class URLsContent {
 	public static String wikiDir = "wiki/";
 	public static String wikiaDir = "Wikia";
 
-	//Related videos
-	public static String relatedVideosList = "MediaWiki:RelatedVideosGlobalList";
-
 	// Hubs
 	public static String VideoGamesHub = Global.LIVE_DOMAIN+"Video_Games";
 	public static String EntertainmentHub = Global.LIVE_DOMAIN+"Entertainment";
 	public static String LifestyleHub = Global.LIVE_DOMAIN+"Lifestyle";
+	public static String VideoGamesHubUrl = "/Video_Games";
+	public static String EntertainmentHubUrl = "/Entertainment";
+	public static String LifestyleHubUrl = "/Lifestyle";
 
 	//Special Urls - links to special pages
 	public static final String specialUserLogin = "wiki/Special:UserLogin";
