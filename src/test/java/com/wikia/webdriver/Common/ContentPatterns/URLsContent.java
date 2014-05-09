@@ -13,9 +13,6 @@ public class URLsContent {
 	public static String wikiDir = "wiki/";
 	public static String wikiaDir = "Wikia";
 
-	//Related videos
-	public static String relatedVideosList = "MediaWiki:RelatedVideosGlobalList";
-
 	// Hubs
 	public static String VideoGamesHub = Global.LIVE_DOMAIN+"Video_Games";
 	public static String EntertainmentHub = Global.LIVE_DOMAIN+"Entertainment";

@@ -44,26 +44,4 @@ public class VetProvidersTests extends NewTestTemplate {
 		fileDetails.verifyEmbeddedVideoIsPresent();
 		fileDetails.verifyHeader(videoName);
 	}
-
-	/**
-	 * skipped due VID-1325
-	 */
-	@Test(
-			enabled = false,
-			dataProviderClass = VideoUrlProvider.class,
-			dataProvider = "videoUrl",
-			groups = {"VetProvidersRV"}
-	)
-	public void VetProvidersTests_002_relatedVideo(String videoUrl, String videoName) {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		VisualEditModePageObject rVmoduleMessageEdit = base.navigateToArticleEditPageCK(wikiURL, URLsContent.relatedVideosList);
-		rVmoduleMessageEdit.deleteUnwantedVideoFromMessage(videoName);
-		ArticlePageObject article = rVmoduleMessageEdit.submitArticle();
-		article.openRandomArticle(wikiURL);
-		article.verifyRelatedVideosModule();
-		VetAddVideoComponentObject vetAddingVideo = article.clickAddRelatedVideo();
-		vetAddingVideo.addVideoByUrl(videoUrl);
-		article.verifyRelatedVideoAdded(videoName);
-	}
 }
