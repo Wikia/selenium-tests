@@ -93,20 +93,4 @@ public class ForcedLoginTests extends NewTestTemplate {
 		addPhoto.verifyAddPhotoModal();
 
 	}
-
-	/**
-	 * skipped due VID-1325
-	 */
-	@Test(enabled=false, groups = {"ForcedLogin_006_rail", "ForcedLogin", "Smoke2"})
-	public void ForcedLogin_006_rail () {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		article.clickAddRelatedVideo();
-		article.logInViaModal(credentials.userName, credentials.password);
-		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
-		vetAddingVideo.verifyAddVideoModal();
-		vetAddingVideo.clickCloseButton();
-		article.verifyAvatarPresent();
-		article.verifyUserLoggedIn(credentials.userName);
-	}
 }

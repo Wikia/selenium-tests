@@ -18,24 +18,24 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	private WebElement urlField;
 	@FindBy(css="#VideoEmbedUrlSubmit")
 	private WebElement addUrlButton;
-	@FindBy(css="figure")
-	private WebElement libraryFigures;
+	@FindBy(css="#VET-suggestions .carousel li")
+	private WebElement libraryLIs;
 	@FindBy(css="#VET-search-field")
 	private WebElement findField;
 	@FindBy(css="#VET-search-submit")
 	private WebElement findButton;
-	@FindBys(@FindBy(css="#VET-suggestions li"))
+	@FindBys(@FindBy(css="#VET-suggestions .carousel li"))
 	private List<WebElement> videoList;
 	@FindBys(@FindBy(css="#VET-suggestions .video-thumbnail"))
 	private List<WebElement> videoThumbnailsList;
-	@FindBy(css=".Wikia-video-enabledEmbedCode")
-	private WebElement videoThumbnail;
-	@FindBy(css="div.Wikia-video-play-button, .video-thumbnail")
+	@FindBy(css="#VET-video-wrapper .Wikia-video-enabledEmbedCode")
+	private WebElement videoPlayer;
+	@FindBy(css=".video-thumbnail")
 	private WebElement suggestedVideo;
 	@FindBy(css="a.bottom-close-button")
 	private WebElement closeButton;
 
-	private By addVideoLibraryLink = By.cssSelector("li > a");
+	private By addVideoLibraryLink = By.cssSelector("figure + a");
 
 	public VetAddVideoComponentObject(WebDriver driver) {
 		super(driver);
@@ -79,7 +79,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	}
 
 	private void checkIfLibraryIsPresent() {
-		waitForElementByElement(libraryFigures);
+		waitForElementByElement(libraryLIs);
 		PageObjectLogging.log("checkIfLibraryIsPresent", "library carousel present", true);
 	}
 
@@ -111,7 +111,7 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 	}
 
 	private void checkVideoPreviewAppearing() {
-		waitForElementByElement(videoThumbnail);
+		waitForElementByElement(videoPlayer);
 		PageObjectLogging.log("checkVideoPreviewAppearing", "video preview appeared", true);
 	}
 

@@ -127,6 +127,7 @@
 						<run_mvn>true</run_mvn>
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
+						<wiki-name>${wiki-name}</wiki-name>
 						<browser>${browser}</browser>
 						<env>${env}</env>
 						<qs>${qs}</qs>
