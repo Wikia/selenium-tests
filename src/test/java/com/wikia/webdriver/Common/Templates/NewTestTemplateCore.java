@@ -1,5 +1,15 @@
 package com.wikia.webdriver.Common.Templates;
 
+import java.io.File;
+
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Annotations.NetworkTrafficDump;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -13,15 +23,6 @@ import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import org.browsermob.proxy.ProxyServer;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-
-import java.io.File;
 import java.lang.reflect.Method;
 
 @Listeners({ com.wikia.webdriver.Common.Logging.PageObjectLogging.class })
