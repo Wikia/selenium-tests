@@ -21,15 +21,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 				method.getAnnotation(UserAgent.class).userAgent()
 			);
 		}
-	}
-
-	@BeforeMethod(alwaysRun = true)
-	public void createDriver() {
 		startBrowser();
-	}
-
-	@BeforeMethod(alwaysRun = true, dependsOnMethods = {"createDriver"})
-	public void logOutMethod() {
 		logOut();
 	}
 
