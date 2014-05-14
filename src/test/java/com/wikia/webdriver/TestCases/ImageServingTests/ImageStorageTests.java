@@ -28,7 +28,7 @@ public class ImageStorageTests extends NewTestTemplate {
 	String imageURL;
 	String imageThumbnailURL;
 
-	@Test(groups = {"ImageStorageTests", "ImageStorageTests_001"})
+	@Test(groups = {"ImageStorageTests", "ImageStorage_001"})
 	public void ImageStorage_001_deleteImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -55,7 +55,7 @@ public class ImageStorageTests extends NewTestTemplate {
 		newFiles.verifyURLStatus(200, imageThumbnailURL);
 	}
 
-	@Test(groups = {"ImageStorageTests", "ImageStorageTests_002"})
+	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
 	public void ImageStorage_002_moveImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
