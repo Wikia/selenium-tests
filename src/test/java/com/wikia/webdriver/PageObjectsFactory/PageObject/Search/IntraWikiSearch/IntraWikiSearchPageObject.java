@@ -37,6 +37,10 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	private WebElement sortingOptions;
 	@FindBy(css=".Results article h1 .result-link")
 	private List<WebElement> titles;
+	@FindBy(css=".Results article img")
+	private List<WebElement> images;
+	@FindBy(css=".Results article a img")
+	private List<WebElement> videoImages;
 	@FindBy(css=".Results article")
 	private List<WebElement> descriptions;
 	@FindBy(css=".Results article li > a")
@@ -204,7 +208,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementByElement(thumbnailsImages.get(0));
 		waitForElementNotPresent(thumbnailsVideosGroup);
 		for(int i = 0; i < titles.size(); i++) {
-			Assertion.assertTrue(titles.get(i).getText().startsWith(URLsContent.fileNameSpace));
+			waitForElementByElement(titles.get(i));
+			waitForElementByElement(images.get(i));
 		}
 	}
 
@@ -215,7 +220,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementByElement(playMovieImages.get(0));
 		Assertion.assertEquals(playMovieImages.size(), thumbnailsVideos.size());
 		for(int i = 0; i < titles.size(); i++) {
-			Assertion.assertTrue(titles.get(i).getText().startsWith(URLsContent.fileNameSpace));
+			waitForElementByElement(titles.get(i));
+			scrollToElement(titles.get(i));
+			waitForElementByElement(videoImages.get(i));
 		}
 	}
 
