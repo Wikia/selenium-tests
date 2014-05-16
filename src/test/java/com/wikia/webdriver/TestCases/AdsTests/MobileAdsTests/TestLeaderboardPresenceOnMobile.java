@@ -15,20 +15,19 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 	private String testedPage;
 
 	@Factory(
-			dataProviderClass=MobileAdsDataProvider.class,
-			dataProvider="articlesWithTopLeaderboard"
+		dataProviderClass=MobileAdsDataProvider.class,
+		dataProvider="articlesWithTopLeaderboard"
 	)
 	public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
 		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, article);
 	}
 
-
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_001"}
 	)
 	public void TopLeaderboardPresenceTest_001() {
 		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.checkMobileTopLeaderboard();
+		mobileAds.verifyMobileTopLeaderboard();
 	}
 }

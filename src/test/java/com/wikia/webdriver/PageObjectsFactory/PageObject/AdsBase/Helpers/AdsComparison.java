@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers;
 
 import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageEditor;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
@@ -36,20 +37,20 @@ public class AdsComparison {
 		// Check if we are using mobile skin. Since mobile skin uses different version of jQuery
 		if (slotSelector.toUpperCase().contains("MOBILE")) {
 			js.executeScript(
-					"$(arguments[0]).css('visibility', 'hidden')",
-					slotSelector
+				"$(arguments[0]).css('visibility', 'hidden')",
+				slotSelector
 			);
 		} else {
 			// Find ad-containing element and set visibility = hidden on it
 			// Example selector:
 			// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
 			js.executeScript(
-					"var iframes = arguments[0] + ' iframe:visible, ';"
-							+ "var objects = arguments[0] + ' object:visible, ';"
-							+ "var imgs = arguments[0] + ' img:visible';"
-							+ "var elements = $(iframes + objects + imgs);"
-							+ "for (var i=0; i < elements.length; i++) { elements[i].style.visibility = 'hidden'; }",
-					slotSelector
+				"var iframes = arguments[0] + ' iframe:visible, ';"
+				+ "var objects = arguments[0] + ' object:visible, ';"
+				+ "var imgs = arguments[0] + ' img:visible';"
+				+ "var elements = $(iframes + objects + imgs);"
+				+ "for (var i=0; i < elements.length; i++) { elements[i].style.visibility = 'hidden'; }",
+				slotSelector
 			);
 		}
 		PageObjectLogging.log(
@@ -124,9 +125,9 @@ public class AdsComparison {
 		hideSlot(elementSelector, driver);
 		File postSwitch = shooter.captureWebElement(element, driver);
 		PageObjectLogging.log(
-				"ScreenshotElement",
-				"Screenshot of element off taken; CSS " + elementSelector,
-				true
+			"ScreenshotElement",
+			"Screenshot of element off taken; CSS " + elementSelector,
+			true
 		);
 		boolean result = imageComparison.compareImagesBasedOnBytes(preSwitch, postSwitch);
 		preSwitch.delete();
@@ -135,10 +136,13 @@ public class AdsComparison {
 	}
 
 	public File getMobileSlotScreenshot(WebElement element, WebDriver driver) {
+		ImageEditor imageEditor = new ImageEditor();
 		Shooter shooter = new Shooter();
 		File page = shooter.capturePage(driver);
-		BufferedImage scaledPage = shooter.scaleImage(page, chromeDriverScreenshotScale, chromeDriverScreenshotScale);
-		File slotScreenshot = shooter.cropImage(element.getLocation(), element.getSize(), scaledPage);
+		BufferedImage scaledPage = imageEditor.scaleImage(
+			page, chromeDriverScreenshotScale, chromeDriverScreenshotScale
+		);
+		File slotScreenshot = imageEditor.cropImage(element.getLocation(), element.getSize(), scaledPage);
 		return slotScreenshot;
 	}
 

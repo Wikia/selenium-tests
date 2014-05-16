@@ -42,7 +42,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		}
 	}
 
-	public void checkMobileTopLeaderboard() {
+	public void verifyMobileTopLeaderboard() {
 		removeSmartBanner();
 		if (!checkIfSlotExpanded(presentLeaderboard)) {
 			throw new NoSuchElementException(
