@@ -264,7 +264,7 @@ public class BasePageObject{
 			PageObjectLogging.log("refreshPage", "page refreshed", true);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("refreshPage",
-					"page loaded for more then 30 seconds after click", true);
+				"page loaded for more then 30 seconds after click", true);
 		}
 	}
 
