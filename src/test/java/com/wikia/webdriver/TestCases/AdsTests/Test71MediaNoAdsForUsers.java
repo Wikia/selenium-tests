@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -34,40 +35,38 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	}
 
 	private void loginSteps() {
-		SpecialUserLoginPageObject userLogin = new SpecialUserLoginPageObject(driver);
 		Credentials credentials = config.getCredentials();
-		userLogin.loginAndVerify(
-			credentials.userName, credentials.password, testedWiki
-		);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, testedWiki);
 	}
 
 	@GeoEdgeProxy(country="US")
-	@Test (groups={"Ads", "NoAds71Media_001", "NoAds71Media"})
-	public void TestNo71MediaAds_US() throws Exception {
+	@Test (groups={"Ads", "NoAds71Media_US", "NoAds71Media"})
+	public void NoAds71Media_US() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
 
 	@GeoEdgeProxy(country="DE")
-	@Test (groups={"Ads", "NoAds71Media_002", "NoAds71Media"})
-	public void TestNo71MediaAds_DE() throws Exception {
+	@Test (groups={"Ads", "NoAds71Media_DE", "NoAds71Media"})
+	public void NoAds71Media_DE() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
 
 	@GeoEdgeProxy(country="HR")
-	@Test (groups={"Ads", "NoAds71Media_003", "NoAds71Media"})
-	public void TestNo71MediaAds_HR() throws Exception {
+	@Test (groups={"Ads", "NoAds71Media_HR", "NoAds71Media"})
+	public void NoAds71Media_HR() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
 
 	@GeoEdgeProxy(country="AU")
-	@Test (groups={"Ads", "NoAds71Media_004", "NoAds71Media"})
-	public void TestNo71MediaAds_AU() throws Exception {
+	@Test (groups={"Ads", "NoAds71Media_AU", "NoAds71Media"})
+	public void NoAds71Media_AU() throws Exception {
 		loginSteps();
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
