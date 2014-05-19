@@ -14,6 +14,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialEditHubPageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -401,6 +402,11 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL + URLsContent.specialWatchList);
 	}
 
+	public SpecialEditHubPageObject openSpecialEditHub(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialEditHub);
+		return new SpecialEditHubPageObject(driver);
+	}
+
 	public SourceEditModePageObject openCurrectArticleSourceMode() {
 		String queryStrings [] = {URLsContent.actionEditParameter, URLsContent.sourceMode};
 		appendMultipleQueryStringsToUrl(queryStrings);
@@ -553,13 +559,13 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyUserLoggedIn(String userName) {
 		if (body.getAttribute("class").contains("skin-monobook")) {
-			driver.findElement(By
-					.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(" ", "_"))));// only for verification
+			driver.findElement(
+				By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(" ", "_"))));// only for verification
 		}
 		else {
 			//oasis
-			driver.findElement(By
-					.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName.replace(" ", "_"))));// only for verification
+			driver.findElement(
+				By.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName.replace(" ", "_"))));// only for verification
 		}
 		PageObjectLogging.log(
 				"verifyUserLoggedIn",

@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.EditHub;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -6,19 +6,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class DashBoardPageObject extends BasePageObject {
+public class SpecialEditHubPageObject extends BasePageObject {
 	@FindBy(css = "#date-picker .ui-datepicker")
 	private WebElement edithub_dashboardCalendar;
 
-	public DashBoardPageObject(WebDriver driver) {
+	public SpecialEditHubPageObject(WebDriver driver) {
 		super(driver);
-	}
-
-	public void openDashboard(String hubUrl) {
-		getUrl(hubUrl + URLsContent.specialEditHub);
-		PageObjectLogging.log("openDashboard", "dashboard opened", true);
 	}
 
 	public void verifyCalendarAppears() {
