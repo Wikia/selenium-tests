@@ -43,7 +43,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_001"}
+		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_001", "createPageEntry"}
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_001_CreatePageEntry() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -55,7 +55,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_002"}
+		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_002", "articleEditEntry"}
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
@@ -66,7 +66,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_003"}
+		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_003", "redlinkEntry"}
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
@@ -77,7 +77,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_004"}
+		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_004", "sectionEditEntry"}
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
@@ -88,7 +88,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_005"}
+		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_005", "veactionURLEntry"}
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_005_URLEntry() {
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -129,7 +129,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_009"}
+		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_009", "actionURLEntry"}
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_009_actionEdit() {
 		VisualEditModePageObject ck =

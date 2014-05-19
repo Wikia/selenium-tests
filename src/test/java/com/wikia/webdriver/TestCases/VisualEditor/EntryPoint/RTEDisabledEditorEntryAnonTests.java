@@ -39,7 +39,7 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass 
 	}
 
 	@Test(
-		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_001"}
+		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_001", "createPageEntry"}
 	)
 	public void RTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
 		String articleName = base.getNameForArticle();
@@ -50,7 +50,7 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass 
 	}
 
 	@Test(
-		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_002"}
+		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_002", "articleEditEntry"}
 	)
 	public void RTEDisabledEditorEntryAnonTests_002_MainEditEntry() {
 		ArticlePageObject article =
@@ -61,7 +61,7 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass 
 	}
 
 	@Test(
-		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_003"}
+		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_003", "redlinkEntry"}
 	)
 	public void RTEDisabledEditorEntryAnonTests_003_RedlinkEntry() {
 		ArticlePageObject article =
@@ -72,7 +72,7 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass 
 	}
 
 	@Test(
-		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_004"}
+		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_004", "sectionEditEntry"}
 	)
 	public void RTEDisabledEditorEntryAnonTests_004_SectionEditEntry() {
 		ArticlePageObject article =
@@ -83,7 +83,7 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass 
 	}
 
 	@Test(
-		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_005"}
+		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_005", "veactionURLEntry"}
 	)
 	public void RTEDisabledEditorEntryAnonTests_005_URLEntry() {
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -123,7 +123,7 @@ public class RTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass 
 	}
 
 	@Test(
-		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_009"}
+		groups = {"RTEDisabledEditorEntryAnonTests", "RTEDisabledEditorEntryAnonTests_009", "actionURLEntry"}
 	)
 	public void RTEDisabledEditorEntryAnonTests_009_actionEdit() {
 		SourceEditModePageObject src =
