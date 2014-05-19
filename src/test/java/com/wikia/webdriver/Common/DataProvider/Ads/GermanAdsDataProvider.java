@@ -23,6 +23,14 @@ public class GermanAdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] germanArticles() {
+		return new Object[][] {
+			{"de.gta", "Fahrzeuge_(V)"},
+			{"de.gameofthrones", "Staffel_4"}
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] germanArticlesWithRedirect() {
 		return new Object[][]{
 			{"de.jedipedia", "Obi-Wan_Kenobi"},
