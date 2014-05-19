@@ -19,7 +19,7 @@ public class ForumThreadTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups= {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"} )
-	public void forumThreadTests_001_replyToThread(){
+	public void ForumThreadTests_001_replyToThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -33,7 +33,7 @@ public class ForumThreadTests extends NewTestTemplate{
 	}
 
 	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_002_removeThreadAndUndo(){
+	public void ForumThreadTests_002_removeThreadAndUndo(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -49,7 +49,7 @@ public class ForumThreadTests extends NewTestTemplate{
 	}
 
 	@Test(groups= {"ForumThreadTests_003", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_003_moveThreadToOtherBoard(){
+	public void ForumThreadTests_003_moveThreadToOtherBoard(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -64,7 +64,7 @@ public class ForumThreadTests extends NewTestTemplate{
 	}
 
 	@Test(groups= {"ForumThreadTests_004", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_004_threadHistory(){
+	public void ForumThreadTests_004_threadHistory(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
@@ -78,7 +78,7 @@ public class ForumThreadTests extends NewTestTemplate{
 	}
 
 	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
-	public void forumThreadTests_005_closeThreadAndReopen(){
+	public void ForumThreadTests_005_closeThreadAndReopen(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();

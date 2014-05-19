@@ -38,7 +38,7 @@ public class SignUpTests extends NewTestTemplate {
 	File captchaFile = config.getCaptchaFile();
 
 	@Test(groups = {"SignUp_001", "SignUp"})
-	public void Signup_001_wrongBlurryWord_MAIN_2157() {
+	public void SignUp_001_wrongBlurryWord_MAIN_2157() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
@@ -56,7 +56,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_002", "SignUp"})
-	public void Signup_002_tooYoungUser_MAIN_2158() {
+	public void SignUp_002_tooYoungUser_MAIN_2158() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
@@ -74,7 +74,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_003", "SignUp"})
-	public void Signup_003_existingUserName_MAIN_2159() {
+	public void SignUp_003_existingUserName_MAIN_2159() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(credentials.userName);
@@ -83,7 +83,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-	public void Signup_004_signup() {
+	public void SignUp_004_signup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();
@@ -148,7 +148,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_006", "SignUp"})
-	public void Signup_006_loginNotVerifiedUser() {
+	public void SignUp_006_loginNotVerifiedUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();
@@ -191,7 +191,7 @@ public class SignUpTests extends NewTestTemplate {
 			dependsOnGroups = "Facebook_001",
 			enabled = false
 		 )
-	public void Signup_007_signUpWithFacebook() {
+	public void SignUp_007_signUpWithFacebook() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		FacebookMainPageObject fbLogin = base.openFacebookMainPage();
 		FacebookUserPageObject userFB;
