@@ -694,6 +694,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	private VECreateArticleModalComponentObject clickVERedLink(WebElement redLink) {
+		waitForElementByElement(redLink);
 		waitForElementClickableByElement(redLink);
 		jQueryClick(redLink);
 		return new VECreateArticleModalComponentObject(driver);
