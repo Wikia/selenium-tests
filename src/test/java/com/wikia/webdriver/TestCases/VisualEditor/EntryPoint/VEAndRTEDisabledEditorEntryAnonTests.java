@@ -76,9 +76,8 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	public void VEAndRTEDisabledEditorEntryAnonTests_004_SectionEditEntry() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.testingPage);
-		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
+		SourceEditModePageObject src = article.openSrcModeWithSectionEditButton(0);
+		src.verifySourceOnlyMode();
 	}
 
 	@Test(
