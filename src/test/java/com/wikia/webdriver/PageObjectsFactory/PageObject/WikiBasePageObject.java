@@ -1035,8 +1035,8 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(url);
 	}
 
-	public HubBasePageObject openHubByUrl(HubName hub, String wikiCorporateURL) {
-		getUrl(wikiCorporateURL + hub.name());
+	public HubBasePageObject openHubByUrl(String HubUrl) {
+		getUrl(HubUrl);
 		return new HubBasePageObject(driver);
 	}
 
