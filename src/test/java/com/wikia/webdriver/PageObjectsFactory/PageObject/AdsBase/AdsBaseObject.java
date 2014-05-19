@@ -42,6 +42,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentLeaderboard;
 	@FindBy(css="div[id*='TOP_RIGHT_BOXAD']")
 	protected WebElement presentMedrec;
+	@FindBy(css="#WikiaNotifications div[id*='msg']")
+	protected WebElement wikiaMessageBuble;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
@@ -194,6 +196,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 		AdsComparison adsComparison = new AdsComparison();
 		adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.wikiaBar), driver);
+		hideMessage();
 
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
@@ -240,12 +243,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
+	private void hideMessage() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$(arguments[0]).css('visibility', 'hidden')", wikiaMessageBuble);
+	}
+
 	public void checkExpectedToolbar(
 		String expectedToolbarFilePath, Dimension expectedToolbarSize
 	) throws IOException {
 		AdsComparison adsComparison = new AdsComparison();
 		boolean result = adsComparison.compareElementWithScreenshot(
-			toolbar, expectedToolbarFilePath, expectedToolbarSize, driver
+				toolbar, expectedToolbarFilePath, expectedToolbarSize, driver
 		);
 		if (result) {
 			PageObjectLogging.log(
