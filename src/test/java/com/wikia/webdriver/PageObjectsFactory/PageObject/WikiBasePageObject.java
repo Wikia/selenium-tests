@@ -554,12 +554,12 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyUserLoggedIn(String userName) {
 		if (body.getAttribute("class").contains("skin-monobook")) {
 			driver.findElement(By
-					.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName)));// only for verification
+					.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(" ", "_"))));// only for verification
 		}
 		else {
 			//oasis
 			driver.findElement(By
-					.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName)));// only for verification
+					.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName.replace(" ", "_"))));// only for verification
 		}
 		PageObjectLogging.log(
 				"verifyUserLoggedIn",
