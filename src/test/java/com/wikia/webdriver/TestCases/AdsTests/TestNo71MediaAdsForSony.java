@@ -2,7 +2,8 @@ package com.wikia.webdriver.TestCases.AdsTests;
 
 import com.wikia.webdriver.Common.Core.Annotations.UserAgent;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
+import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
+import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
 import org.testng.annotations.Factory;
@@ -17,7 +18,7 @@ public class TestNo71MediaAdsForSony extends NewTestTemplate {
 	private String testedPage;
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
+		dataProviderClass=GermanAdsDataProvider.class,
 		dataProvider="popularGermanArticles"
 	)
 	public TestNo71MediaAdsForSony(String wikiName, String path) {
