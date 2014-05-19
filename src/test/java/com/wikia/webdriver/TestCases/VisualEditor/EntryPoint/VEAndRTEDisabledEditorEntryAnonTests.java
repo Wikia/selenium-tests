@@ -66,9 +66,8 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	public void VEAndRTEDisabledEditorEntryAnonTests_003_RedlinkEntry() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, URLsContent.testingPage);
-		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
+		SourceEditModePageObject src = article.openSrcModeWithRedLinks(0);
+		src.verifySourceOnlyMode();
 	}
 
 	@Test(

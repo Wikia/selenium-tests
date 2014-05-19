@@ -66,10 +66,10 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		groups = {"RTEDisabledEditorEntryDefaultPreferred", "RTEDisabledEditorEntryDefaultPreferredTests_003", "redlinkEntry"}
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_003_RedlinkEntry() {
-		ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.testingPage);
-		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, URLsContent.testingPage);
+		SourceEditModePageObject src = article.openSrcModeWithRedLinks(0);
+		src.verifySourceOnlyMode();
 	}
 
 	@Test(
