@@ -234,7 +234,6 @@ public class AdsDataProvider {
 	public static final Object[][] noGermanAdsForUsers() {
 		return new Object[][] {
 			{"de.gta", "Fahrzeuge_(V)"},
-			{"de.jedipedia", "Obi-Wan_Kenobi"},
 			{"de.gameofthrones", "Staffel_4"},
 			{"de.vroniplag", "VroniPlag_Wiki:Pressespiegel"},
 			{"de.lotr", "Frodo_Beutlin"},

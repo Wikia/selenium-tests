@@ -43,7 +43,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 	@FindBy(css="div[id*='TOP_RIGHT_BOXAD']")
 	private WebElement presentMedrec;
 
-	protected Boolean isWikiMainPage;
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 
 	private String presentLeaderboardName;
@@ -444,22 +443,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return result;
 	}
 
-	private String createSelectorAll () {
-		Collection slotsSelectors = AdsContent.slotsSelectors.values();
-		Integer size = slotsSelectors.size();
-		Integer i = 1;
-		String selectorAll = "";
-		for (Object selector : slotsSelectors) {
-			selectorAll += (String) selector;
-			if (!i.equals(size)) {
-				selectorAll += ",";
-			}
-			i += 1;
-		}
-		return selectorAll;
-	}
-
-    private void verifyNoAds() {
+	private void verifyNoAds() {
 		Collection<String> slotsSelectors = AdsContent.slotsSelectors.values();
 		for (String selector: slotsSelectors) {
 			if (checkIfElementOnPage(selector)) {

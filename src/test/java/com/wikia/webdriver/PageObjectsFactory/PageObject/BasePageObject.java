@@ -59,8 +59,12 @@ public class BasePageObject{
 		this.driver = driver;
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		driver.manage().window().maximize();
+		this.setWindowSize();
 		urlBuilder = new UrlBuilder();
+	}
+
+	protected void setWindowSize() {
+		driver.manage().window().maximize();
 	}
 
 	public static String getAttributeValue(WebElement element, String attributeName) {
@@ -260,7 +264,7 @@ public class BasePageObject{
 			PageObjectLogging.log("refreshPage", "page refreshed", true);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("refreshPage",
-					"page loaded for more then 30 seconds after click", true);
+				"page loaded for more then 30 seconds after click", true);
 		}
 	}
 

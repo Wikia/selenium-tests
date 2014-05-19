@@ -117,8 +117,6 @@ public class Ads71MediaObject extends AdsBaseObject {
 	}
 
 	public void verifyNo71MediaAds() {
-		AdsComparison adsComparison = new AdsComparison();
-		boolean combinationFound = false;
 		PageObjectLogging.log("PageOpened", "Page opened", true, driver);
 		for (HashMap<String,Object> combination: combinations) {
 			List<String> combinationSlots = (List)combination.get("slots");
@@ -128,7 +126,6 @@ public class Ads71MediaObject extends AdsBaseObject {
 					"Combination not present: " + combination.get("name"),
 					true
 				);
-				return;
 			} else {
 				for (String elementSelector: combinationSlots) {
 					WebElement combinationElement = driver.findElement(By.cssSelector(elementSelector));
