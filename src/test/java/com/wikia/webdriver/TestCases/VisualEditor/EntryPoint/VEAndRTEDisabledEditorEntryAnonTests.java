@@ -44,8 +44,9 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	public void VEAndRTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
 		String articleName = base.getNameForArticle();
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
-		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
-		src.verifySourceOnlyMode();
+		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 	}
 
 	@Test(
