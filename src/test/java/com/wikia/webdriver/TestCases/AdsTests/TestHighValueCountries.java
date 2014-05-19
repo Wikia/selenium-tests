@@ -1,7 +1,7 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
 import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
-import com.wikia.webdriver.Common.DataProvider.AdsDataProvider;
+import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
