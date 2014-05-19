@@ -10,11 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class DashBoardPageObject extends BasePageObject {
 	@FindBy(css = "#date-picker .ui-datepicker")
-	protected WebElement edithub_dashboardCalendar;
+	private WebElement edithub_dashboardCalendar;
 
 	public DashBoardPageObject(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
 	}
 
 	public void openDashboard(String hubUrl) {

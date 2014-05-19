@@ -42,8 +42,8 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	private final String corpWikiName = "corp";
 
-	@Test(enabled = false, dataProvider = "provideHubUrl", groups = { "HubsTests001", "Hubs" , "Smoke4"})
-	public void HubsTest001_verifyMosaicSliderShowsImagesOnHover(String hubUrl) {
+	@Test(enabled = false, dataProvider = "provideHubUrl", groups = { "HubsTests_001", "Hubs" , "Smoke4"})
+	public void HubsTest_001_verifyMosaicSliderShowsImagesOnHover(String hubUrl) {
 		HomePageObject home = new HomePageObject(driver);
 		HubBasePageObject hub = home.openHubByUrl(hubUrl);
 		hub.verifyMosaicSliderImages();
@@ -68,11 +68,11 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	}
 
 
-	@Test(dataProvider = "provideHubUrl", groups = { "HubsTests002", "Hubs"})
+	@Test(dataProvider = "provideHubUrl", groups = { "HubsTests_002", "Hubs"})
 	/**
 	 *  verify that from community module has its elements
 	 */
-	public void HubsTest002_verifyFromCommunityModuleHasItsElements(String hubUrl) {
+	public void HubsTest_002_verifyFromCommunityModuleHasItsElements(String hubUrl) {
 		HomePageObject home = new HomePageObject(driver);
 		HubBasePageObject hub= home.openHubByUrl(hubUrl);
 		hub.verifyFromModuleHasImages();
@@ -81,11 +81,11 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		hub.verifyFromModuleHasQuatation();
 	}
 
-	@Test(dataProvider = "provideHubUrl", groups = { "HubsTests003", "Hubs"})
+	@Test(dataProvider = "provideHubUrl", groups = { "HubsTests_003", "Hubs"})
 	/**
 	 * click on 'Get Promoted' button and verify if modal appears and if its fields/buttons are working properly
 	 */
-	public void HubsTest003_VerifyArticleSuggestionWorksProperly(String hubUrl) {
+	public void HubsTest_003_VerifyArticleSuggestionWorksProperly(String hubUrl) {
 		HomePageObject home = new HomePageObject(driver);
 		home.logInCookie(credentials.userName2, credentials.password2);
 		HubBasePageObject hub = home.openHubByUrl(hubUrl);
@@ -109,8 +109,8 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	/**
 	 * skipped due "promoted wikis" feature
 	 */
-	@Test(enabled = false, groups = { "HubsTests004", "Hubs"})
-	public void HubsTests004_VerifyCorporateSlotCollection() {
+	@Test(enabled = false, groups = { "HubsTests_004", "Hubs"})
+	public void HubsTests_004_VerifyCorporateSlotCollection() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
 		String wikiCorpSetupURL = urlBuilder.getUrlForWiki(corpWikiName);
@@ -121,11 +121,11 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
 	}
 
-	@Test(groups = { "HubsTests005", "Hubs", "new" })
+	@Test(groups = { "HubsTests_005", "Hubs", "new" })
 	/**
 	 * Verify that each language drop down  goes to the correct page
 	 */
-	public void HubsTest005_VerifyLanguagesSelection() {
+	public void HubsTest_005_VerifyLanguagesSelection() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openCorporateHomePage(wikiCorporateURL);
 		home.verifyLanguageDropdownURLs();
@@ -134,8 +134,8 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	/**
 	 * Verify that links in Global Navigation are working
 	 */
-	@Test(dataProvider = "provideHubName", groups = { "HubsTests006", "Hubs" })
-	public void HubsTest006_VerifyLinkInGlobalNavigation(HubName hubName) {
+	@Test(dataProvider = "provideHubName", groups = { "HubsTests_006", "Hubs" })
+	public void HubsTest_006_VerifyLinkInGlobalNavigation(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
 		home.openCorporateHomePage(wikiCorporateURL);
 		HubBasePageObject hub = new HubBasePageObject(driver);
@@ -147,8 +147,8 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	/**
 	 * Verify that links in WikiaBar are working
 	 */
-	@Test(dataProvider = "provideHubName", groups = { "HubsTests007", "Hubs" })
-	public void HubsTest007_VerifyLinkInWikiaBar(HubName hubName) {
+	@Test(dataProvider = "provideHubName", groups = { "HubsTests_007", "Hubs" })
+	public void HubsTest_007_VerifyLinkInWikiaBar(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
 		home.openCorporateHomePage(wikiCorporateURL);
 		HubBasePageObject hub = new HubBasePageObject(driver);

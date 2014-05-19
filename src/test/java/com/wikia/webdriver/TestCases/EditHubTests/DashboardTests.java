@@ -20,8 +20,8 @@ public class DashboardTests extends NewTestTemplate {
 		};
 	}
 
-	@Test(dataProvider = "provideHubUrl", groups = {"EditHub001", "EditHub"})
-	public void dashboardSelectVertical(String hubUrl) {
+	@Test(dataProvider = "provideHubUrl", groups = {"EditHub_001", "EditHub"})
+	public void EditHub_001_dashboardSelectVertical(String hubUrl) {
 
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
 		login.loginAndVerify(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
