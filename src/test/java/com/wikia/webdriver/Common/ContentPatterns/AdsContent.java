@@ -35,11 +35,9 @@ public class AdsContent {
 	public static String prefooterLeft = "PREFOOTER_LEFT_BOXAD";
 	public static String prefooterRight = "PREFOOTER_RIGHT_BOXAD";
 	public static final String wikiaBar = "WIKIA_BAR_BOXAD_1";
-	public static final String wikiaBar_gpt = "WIKIA_BAR_BOXAD_1_gpt";
 
 	//SLOTS SELECTORS
 	public static final String wikiaBarSelector = "#" + wikiaBar;
-	public static final String wikiaBar_gptSelector = "#" + wikiaBar_gpt;
 
 
 	public static String getSlotSelector(String slotName) {
@@ -52,7 +50,7 @@ public class AdsContent {
 	}
 
 	private static void setAdsProviders() {
-		adsProviders = new HashMap<String, String>();
+		adsProviders = new HashMap<>();
 		adsProviders.put(
 			"IDG",
 			"script[src*='http://ad-emea.doubleclick.net/N7503/adj/DE-OW-netzwerk']"
@@ -60,7 +58,7 @@ public class AdsContent {
 	}
 
 	public static void setSlotsSelectors() {
-		slotsSelectors = new HashMap<String, String>();
+		slotsSelectors = new HashMap<>();
 		slotsSelectors.put(homeTopLB, "#HOME_TOP_LEADERBOARD");
 		slotsSelectors.put(corpTopLB, "#CORP_TOP_LEADERBOARD");
 		slotsSelectors.put(hubLB, "#HUB_TOP_LEADERBOARD");

@@ -256,6 +256,11 @@ public class BasePageObject{
 						"%page%", url), false);
 			return;
 		}
+		PageObjectLogging.log(
+			"NavigateTo",
+			String.format("Navigate to %s", url),
+			true
+		);
 	}
 
 	public void refreshPage() {
