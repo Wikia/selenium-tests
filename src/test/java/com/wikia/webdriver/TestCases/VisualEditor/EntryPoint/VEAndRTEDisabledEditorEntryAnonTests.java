@@ -44,9 +44,8 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	public void VEAndRTEDisabledEditorEntryAnonTests_001_CreatePageEntry() {
 		String articleName = base.getNameForArticle();
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
-		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
+		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
+		src.verifySourceOnlyMode();
 	}
 
 	@Test(
@@ -55,9 +54,8 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	public void VEAndRTEDisabledEditorEntryAnonTests_002_MainEditEntry() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, base.getNameForArticle());
-		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
-		ve.verifyVEToolBarPresent();
-		ve.verifyEditorSurfacePresent();
+		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
+		src.verifySourceOnlyMode();
 	}
 
 	@Test(
