@@ -21,7 +21,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 
 	@Factory(
 		dataProviderClass=GermanAdsDataProvider.class,
-		dataProvider="noGermanAdsForUsers"
+		dataProvider="popularGermanArticles"
 	)
 	public Test71MediaNoAdsForUsers(String wikiName, String path) {
 		super();

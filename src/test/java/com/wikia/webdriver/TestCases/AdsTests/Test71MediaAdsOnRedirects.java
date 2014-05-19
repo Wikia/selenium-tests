@@ -9,14 +9,15 @@ import org.testng.annotations.Test;
 
 /**
  * Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 public class Test71MediaAdsOnRedirects extends NewTestTemplate {
 
 	private String testedPage;
 
 	@Factory(
-			dataProviderClass=GermanAdsDataProvider.class,
-			dataProvider="germanArticlesWithRedirect"
+		dataProviderClass=GermanAdsDataProvider.class,
+		dataProvider="germanArticlesWithRedirect"
 	)
 	public Test71MediaAdsOnRedirects(String wikiName, String path) {
 		super();
