@@ -209,6 +209,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementNotPresent(thumbnailsVideosGroup);
 		for(int i = 0; i < titles.size(); i++) {
 			waitForElementByElement(titles.get(i));
+			scrollToElement(titles.get(i));
 			waitForElementByElement(images.get(i));
 		}
 	}
@@ -264,9 +265,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		PageObjectLogging.log("selectVideosOnly", "Videos option is selected", true, driver);
 	}
 
-	public void verifyNamespacesInTitles(String nameSpace) {
+	public void verifyTitles() {
 		for (WebElement elem:titles) {
-			Assertion.assertStringContains(elem.getText(), nameSpace);
+			Assertion.assertNotNull(elem.getText());
 		}
 	}
 
