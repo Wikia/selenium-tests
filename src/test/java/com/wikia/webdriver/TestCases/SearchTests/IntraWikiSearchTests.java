@@ -107,12 +107,12 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.openWikiPage(testedWiki);
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
-		search.verifyTitles();
+		search.verifyTitlesNotEmpty();
 		search.selectPhotosOnly();
-		search.verifyTitles();
+		search.verifyTitlesNotEmpty();
 		search.verifyAllResultsImages(resultsPerPage);
 		search.selectVideosOnly();
-		search.verifyTitles();
+		search.verifyTitlesNotEmpty();
 		search.verifyAllResultsVideos(resultsPerPage);
 	}
 
@@ -123,7 +123,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
 		search.selectVideosOnly();
-		search.verifyTitles();
+		search.verifyTitlesNotEmpty();
 		search.sortBy(sortOptions.duration);
 		List<String> titles1 = search.getTitles();
 		search.sortBy(sortOptions.relevancy);
@@ -142,7 +142,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
 		search.selectPhotosOnly();
-		search.verifyTitles();
+		search.verifyTitlesNotEmpty();
 		search.sortBy(sortOptions.relevancy);
 		List<String> titles1 = search.getTitles();
 		search.sortBy(sortOptions.publishDate);

@@ -265,7 +265,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		PageObjectLogging.log("selectVideosOnly", "Videos option is selected", true, driver);
 	}
 
-	public void verifyTitles() {
+	public void verifyTitlesNotEmpty() {
 		for (WebElement elem:titles) {
 			Assertion.assertNotNull(elem.getText());
 		}
