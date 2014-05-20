@@ -28,6 +28,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
+	private final String  wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
 	private final String liftiumIframeSelector = "iframe[id*='Liftium']";
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
@@ -42,11 +43,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentLeaderboard;
 	@FindBy(css="div[id*='TOP_RIGHT_BOXAD']")
 	protected WebElement presentMedrec;
-	@FindBy(css="#WikiaNotifications div[id*='msg']")
-	protected WebElement wikiaMessageBuble;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
-
 	protected String presentLeaderboardName;
 	protected String presentLeaderboardSelector;
 	protected String presentMedrecName;
@@ -244,8 +242,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void hideMessage() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("$(arguments[0]).css('visibility', 'hidden')", wikiaMessageBuble);
+		if (checkIfElementOnPage(wikiaMessageBuble)) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$(arguments[0]).css('visibility', 'hidden')", wikiaMessageBuble);
+		}
 	}
 
 	public void checkExpectedToolbar(
