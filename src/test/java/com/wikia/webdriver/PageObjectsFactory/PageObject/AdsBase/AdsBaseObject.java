@@ -131,6 +131,29 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
+	public void verifyForcedSuccessInSlots(List<String> slots) {
+		for (String slot : slots) {
+			WebElement slotElement = driver.findElement(By.id(slot));
+			WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
+			driver.switchTo().frame(slotGptIframe);
+			List<WebElement> scriptsInFrame = driver.findElements(By.tagName("script"));
+			String adDriverForcedSuccessFormatted = String.format(
+				AdsContent.adDriverForcedStatusSuccessScript, slot
+			);
+			if (checkIfScriptInsideScripts(scriptsInFrame, adDriverForcedSuccessFormatted)) {
+				PageObjectLogging.log(
+					"AdDriver2ForceStatus script",
+					"adDriverForcedSuccess script found in slot " + slot,
+					true
+				);
+			} else {
+				throw new NoSuchElementException(
+					"AdDriver2ForcedStatus script not found in slot " + slot
+				);
+			}
+			driver.switchTo().defaultContent();
+		}
+	}
 	public void checkMedrec() {
 		checkAdVisibleInSlot(presentMedrecSelector, presentMedrec);
 	}
@@ -554,5 +577,16 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected boolean checkIfSlotExpanded(WebElement slot) {
 		return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
+	}
+
+	public void verifyNoLiftiumAdsInSlots(List<String> slots) {
+		for (String slot : slots) {
+			WebElement slotElement = driver.findElement(By.id(slot));
+			if (checkIfElementInElement(liftiumIframeSelector, slotElement)) {
+				throw new NoSuchElementException("Liftium found in slot " + slot);
+			} else {
+				PageObjectLogging.log("LiftiumNotFound", "Liftium not found in slot " + slot, true);
+			}
+		}
 	}
 }

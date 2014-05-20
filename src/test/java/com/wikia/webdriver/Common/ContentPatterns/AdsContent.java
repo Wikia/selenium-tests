@@ -12,9 +12,11 @@ public class AdsContent {
 	public static HashMap<String, String> slotsSelectors;
 	public static HashMap<String, String> adsProviders;
 
-    //SCIPTS
-    public static String adsPushSlotScript =
-	    "window.adslots2.push([\"%slot%\",null,\"AdEngine2\"]);";
+	//SCIPTS
+	public static String adsPushSlotScript =
+		"window.adslots2.push([\"%slot%\",null,\"AdEngine2\"]);";
+	public static String adDriverForcedStatusSuccessScript =
+		"top.window.adDriver2ForcedStatus['%s']='success';";
 
 	public static String slotTweakerHideSlotScript =
 			"top.window.adDriver2ForcedStatus['%slot%']='success';"

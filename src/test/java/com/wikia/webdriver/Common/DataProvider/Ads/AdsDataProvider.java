@@ -2,9 +2,9 @@ package com.wikia.webdriver.Common.DataProvider.Ads;
 
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
+import java.util.Arrays;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsDataProvider {
@@ -222,6 +222,16 @@ public class AdsDataProvider {
 	public static final Object[][] getWikisWithStandardHVC() {
 		return new Object[][] {
 			{"adeng-test"}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] adDriverForcedStatusSuccess() {
+		return new Object[][] {
+			{
+				"adtest",
+				"AdDriver2ForceStatus/Success",
+				Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")}
 		};
 	}
 }
