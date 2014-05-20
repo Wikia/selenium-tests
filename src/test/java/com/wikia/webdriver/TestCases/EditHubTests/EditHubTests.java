@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.EditHubTests;
 
+import com.wikia.webdriver.Common.DataProvider.HubsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialEditHubPageObject;
@@ -13,26 +14,17 @@ import org.testng.annotations.Test;
  * 1. Open edit hub dashboard and check if calendar exists
  *
  */
-public class DashboardTests extends NewTestTemplate {
+public class EditHubTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@DataProvider
-	private final Object[][] provideHubUrl() {
-		return new Object[][] {
-				{urlBuilder.getUrlForWiki("gameshub")},
-				{urlBuilder.getUrlForWiki("movieshub")},
-				{urlBuilder.getUrlForWiki("lifestylehub")}
-		};
-	}
-
-	@Test(dataProvider = "provideHubUrl", groups = {"EditHub_001", "EditHub"})
-	public void EditHub_001_dashboardSelectVertical(String hubUrl) {
+	@Test(groups = {"EditHub_001", "EditHub"},
+			dataProviderClass = HubsDataProvider.class,
+			dataProvider = "provideHubDBName")
+	public void EditHub_001_dashboardSelectVertical(String hubDBName) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-
-		SpecialEditHubPageObject pageObject = base.openSpecialEditHub(hubUrl);
-
+		SpecialEditHubPageObject pageObject = base.openSpecialEditHub(urlBuilder.getUrlForWiki(hubDBName));
 		pageObject.verifyCalendarAppears();
 	}
 }

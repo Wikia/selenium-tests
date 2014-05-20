@@ -373,10 +373,10 @@ public class HubBasePageObject extends WikiBasePageObject {
 				break;
 			case Lifestyle:
 			default:
-				header = "Lifestylehub Wiki";
+				header = "LifestyleHub Wiki";
 				break;
 		}
-		Assert.assertEquals(wordmarkImage.getAttribute("alt"), header);
+		Assert.assertEquals(header, wordmarkImage.getAttribute("alt"));
 
 		PageObjectLogging.log(
 				"verifyHubTitle",
