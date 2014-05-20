@@ -40,7 +40,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_001"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_001", "createPageEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_001_CreatePageEntry() {
 		String articleName = base.getNameForArticle();
@@ -51,7 +51,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_002"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_002", "articleEditEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_002_MainEditEntry() {
 		ArticlePageObject article =
@@ -62,7 +62,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_003"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_003", "redlinkEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_003_RedlinkEntry() {
 		ArticlePageObject article =
@@ -73,7 +73,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_004"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_004", "sectionEditEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_004_SectionEditEntry() {
 		ArticlePageObject article =
@@ -84,7 +84,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_005"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_005", "veactionURLEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_005_URLEntry() {
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -125,7 +125,7 @@ public class VEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_009"}
+		groups = {"VEDisabledEditorEntryAnonTests", "VEDisabledEditorEntryAnonTestsTests_009", "actionURLEntry"}
 	)
 	public void VEDisabledEditorEntryAnonTestsTests_009_actionEdit() {
 		VisualEditModePageObject ck =

@@ -42,7 +42,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_001"}
+		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_001", "createPageEntry"}
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_001_CreatePageEntry_sourcePreferred() {
 		ArticlePageObject article =
@@ -52,7 +52,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_002"}
+		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_002", "articleEditEntry"}
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
@@ -62,7 +62,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_003"}
+		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_003", "redlinkEntry"}
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
@@ -72,7 +72,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_004"}
+		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_004", "sectionEditEntry"}
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
@@ -82,7 +82,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_005"}
+		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_005", "veactionURLEntry"}
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_005_URLEntry() {
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -121,7 +121,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	}
 
 	@Test(
-		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_009"}
+		groups = {"VEDisabledEditorEntrySourcePreferred", "VEDisabledEditorEntrySourcePreferredTests_009", "actionURLEntry"}
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
