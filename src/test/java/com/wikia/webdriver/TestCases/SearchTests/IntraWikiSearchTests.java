@@ -5,7 +5,6 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.SearchContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.IntraWikiSearchProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -108,12 +107,12 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.openWikiPage(testedWiki);
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
-		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
+		search.verifyTitlesNotEmpty();
 		search.selectPhotosOnly();
-		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
+		search.verifyTitlesNotEmpty();
 		search.verifyAllResultsImages(resultsPerPage);
 		search.selectVideosOnly();
-		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
+		search.verifyTitlesNotEmpty();
 		search.verifyAllResultsVideos(resultsPerPage);
 	}
 
@@ -124,7 +123,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
 		search.selectVideosOnly();
-		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
+		search.verifyTitlesNotEmpty();
 		search.sortBy(sortOptions.duration);
 		List<String> titles1 = search.getTitles();
 		search.sortBy(sortOptions.relevancy);
@@ -143,7 +142,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.searchFor(searchPhraseResults);
 		search.selectPhotosVideos();
 		search.selectPhotosOnly();
-		search.verifyNamespacesInTitles(URLsContent.fileNameSpace);
+		search.verifyTitlesNotEmpty();
 		search.sortBy(sortOptions.relevancy);
 		List<String> titles1 = search.getTitles();
 		search.sortBy(sortOptions.publishDate);
