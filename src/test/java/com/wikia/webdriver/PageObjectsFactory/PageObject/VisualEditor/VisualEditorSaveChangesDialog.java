@@ -16,8 +16,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 	@FindBy(
 		css=
 		".oo-ui-widget.oo-ui-flaggableElement-constructive" +
-		".oo-ui-buttonWidget.oo-ui-pushButtonWidget" +
-		" .oo-ui-labeledElement-label"
+		".oo-ui-buttonWidget .oo-ui-labeledElement-label"
 	)
 	private WebElement publishButton;
 	@FindBy(css=".oo-ui-frame")
