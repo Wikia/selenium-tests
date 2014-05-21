@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
@@ -60,7 +61,7 @@ public class BasePageObject{
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		this.setWindowSize();
-		urlBuilder = new UrlBuilder();
+		urlBuilder = new UrlBuilder(ConfigurationFactory.getConfig().getEnv());
 	}
 
 	protected void setWindowSize() {
