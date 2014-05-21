@@ -131,7 +131,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	public void verifyForcedSuccessInSlots(List<String> slots) {
+	public void verifyForcedSuccessScriptInSlots(List<String> slots) {
 		for (String slot : slots) {
 			WebElement slotElement = driver.findElement(By.id(slot));
 			WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
@@ -436,7 +436,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected boolean checkIfSlotHiddenBySlotTweaker(WebElement slot, String slotName) {
 		WebElement firstLevelIframe = slot.findElement(
-			By.cssSelector("iframe[id*=" + slotName + "]")
+				By.cssSelector("iframe[id*=" + slotName + "]")
 		);
 
 		//Prepare slotTweaker script's draft and look for it inside slot's iframe

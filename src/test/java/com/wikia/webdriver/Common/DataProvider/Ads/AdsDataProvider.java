@@ -231,7 +231,8 @@ public class AdsDataProvider {
 			{
 				"adtest",
 				"AdDriver2ForceStatus/Success",
-				Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")}
+				Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")
+			}
 		};
 	}
 }
