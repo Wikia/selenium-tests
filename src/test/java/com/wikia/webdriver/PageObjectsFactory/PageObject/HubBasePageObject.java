@@ -10,8 +10,6 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject.HubName;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 
 /**
  * @author Michal 'justnpT' Nowierski
@@ -73,8 +71,8 @@ public class HubBasePageObject extends WikiBasePageObject {
 	@FindBy(css="ul.wikiahubs-ftc-list div.wikiahubs-ftc-creative")
 	List<WebElement> fromCommunityQuatations;
 
-	@FindBy(css="#WikiaHubs .hubs-header h1")
-	private WebElement wikiaHubsHeaderElement;
+	@FindBy(css="#WikiHeader h1 img")
+	private WebElement wordmarkImage;
 	@FindBy(css="li.topNav.Video_Games a")
 	private WebElement VideoGamesTopNavLink;
 	@FindBy(css="li.topNav.Entertainment a")
@@ -364,21 +362,21 @@ public class HubBasePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyHubTitle(HubName hubName) {
-		waitForElementByElement(wikiaHubsHeaderElement);
+		waitForElementByElement(wordmarkImage);
 		String header;
 		switch (hubName) {
 			case Video_Games:
-				header = "Video Games";
+				header = "Games Wiki";
 				break;
 			case Entertainment:
-				header = "Entertainment";
+				header = "Movies Hub Wiki";
 				break;
 			case Lifestyle:
 			default:
-				header = "Lifestyle";
+				header = "LifestyleHub Wiki";
 				break;
 		}
-		Assert.assertEquals(wikiaHubsHeaderElement.getText(), header);
+		Assert.assertEquals(header, wordmarkImage.getAttribute("alt"));
 
 		PageObjectLogging.log(
 				"verifyHubTitle",
@@ -388,18 +386,18 @@ public class HubBasePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyHubUrl(HubName hubName) {
-		waitForElementByElement(wikiaHubsHeaderElement);
+		waitForElementByElement(wordmarkImage);
 		String url;
 		switch (hubName) {
 			case Video_Games:
-				url = URLsContent.VideoGamesHubUrl;
+				url = urlBuilder.getUrlForWiki("gameshub");
 				break;
 			case Entertainment:
-				url = URLsContent.EntertainmentHubUrl;
+				url = urlBuilder.getUrlForWiki("movieshub");
 				break;
 			case Lifestyle:
 			default:
-				url = URLsContent.LifestyleHubUrl;
+				url = urlBuilder.getUrlForWiki("lifestylehub");
 				break;
 		}
 		Assert.assertTrue(getCurrentUrl().contains(url));

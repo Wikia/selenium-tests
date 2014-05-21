@@ -14,9 +14,6 @@ public class URLsContent {
 	public static String wikiaDir = "Wikia";
 
 	// Hubs
-	public static String VideoGamesHub = Global.LIVE_DOMAIN+"Video_Games";
-	public static String EntertainmentHub = Global.LIVE_DOMAIN+"Entertainment";
-	public static String LifestyleHub = Global.LIVE_DOMAIN+"Lifestyle";
 	public static String VideoGamesHubUrl = "/Video_Games";
 	public static String EntertainmentHubUrl = "/Entertainment";
 	public static String LifestyleHubUrl = "/Lifestyle";
@@ -63,6 +60,7 @@ public class URLsContent {
 	public static final String specialUncategorizedFiles = "wiki/Special:UncategorizedFiles";
 	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
 	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
+	public static final String specialEditHub = "wiki/Special:EditHub";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";

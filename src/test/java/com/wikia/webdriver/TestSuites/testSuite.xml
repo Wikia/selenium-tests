@@ -82,7 +82,7 @@
 			<class name="com.wikia.webdriver.TestCases.LightboxTests.LightboxTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.EditingLocalCssTests"/>
-			<class name="com.wikia.webdriver.TestCases.MarketingToolboxTests.DashboardTests"/>
+			<class name="com.wikia.webdriver.TestCases.EditHubTests.EditHubTests"/>
 			<class name="com.wikia.webdriver.TestCases.MultiwikifinderTests.MultiWikiFinderTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.CssChromeTests_TwoDrivers"/>
