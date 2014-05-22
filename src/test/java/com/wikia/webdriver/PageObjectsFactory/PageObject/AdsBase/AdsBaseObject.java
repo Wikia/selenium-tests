@@ -531,7 +531,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	private String extractLiftiumTagId(String slotSelector) {
 		String liftiumTagId = null;
-		if (checkIfElementOnPage(liftiumIframeSelector)) {
+		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+		if (checkIfElementInElement(liftiumIframeSelector, slot)) {
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			WebElement currentLiftiumIframe = (WebElement)js.executeScript(
 				"return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
