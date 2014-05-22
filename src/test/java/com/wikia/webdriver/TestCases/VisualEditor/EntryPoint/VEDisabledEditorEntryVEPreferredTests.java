@@ -132,8 +132,9 @@ public class VEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBefore
 		groups = {"VEDisabledEditorEntryVEPreferred", "VEDisabledEditorEntryVEPreferredTests_009", "actionURLEntry"}
 	)
 	public void VEDisabledEditorEntryVEPreferredTests_009_actionEdit() {
-		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
-		src.verifySourceOnlyMode();
+		VisualEditModePageObject ck =
+			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		ck.verifyContentLoaded();
+		ck.clickPublishButton();
 	}
 }
