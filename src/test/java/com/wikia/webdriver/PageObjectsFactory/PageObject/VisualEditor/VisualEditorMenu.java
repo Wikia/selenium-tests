@@ -128,6 +128,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		waitForElementNotPresent(publishButtonDisabled);
 		waitForElementClickableByElement(publishPageButton);
 		publishPageButton.click();
+		PageObjectLogging.log("clickPublishButton", "Publish button on the VE toolbar is clicked", true);
 		return new VisualEditorSaveChangesDialog(driver);
 	}
 

@@ -9,6 +9,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -52,9 +53,10 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		String articleContent = PageContent.articleText;
 		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
-		visualEditMode.addContent(articleContent);
-		visualEditMode.submitArticle();
+		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleTitle);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		article = ve.clickVEEditAndPublish(articleContent);
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -94,10 +96,12 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	public void ArticleCRUDAnon_006_editDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleContent = PageContent.articleText;
-		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
-		visualEditMode.addContent(articleContent);
-		visualEditMode.submitArticle();
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		article = ve.clickVEEditAndPublish(articleContent);
 		article.verifyContent(articleContent);
 	}
 }
