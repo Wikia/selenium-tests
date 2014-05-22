@@ -46,9 +46,10 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 	}
 
 	@Test(
-			groups = { "ForgottenPassword_002", "ForgottenPassword"}
+			groups = { "ForgottenPassword_002", "ForgottenPassword"},
+			enabled = false
 	)
-	public void ForgottenPassword_002_specialPage() {
+	public void ForgottenPassword_002_specialPage_QAART_358() {
 		String userName = credentials.userNameForgottenPassword2;
 
 		WikiBasePageObject base = new WikiBasePageObject(driver);
