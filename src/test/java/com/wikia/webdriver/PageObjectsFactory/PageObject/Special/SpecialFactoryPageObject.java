@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider;
 import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -88,13 +89,12 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 		return defaultVariableValue.getText();
 	}
 
-	public String getVariableSetValue(WikiFactoryVariables variableName) {
-		selectVariableByVisibleText(variableName);
-		return variableValue.getText();
-	}
-
 	private void selectVariableByVisibleText(WikiFactoryVariables variableName) {
 		Select select = new Select(variableList);
 		select.selectByVisibleText(variableName.toString());
+	}
+
+	public Object[] getVariableDefaultValueKeys(WikiFactoryVariables wgHighValueCountries) {
+		return extractKeysFromWgVariable(getVariableDefaultValue(wgHighValueCountries));
 	}
 }
