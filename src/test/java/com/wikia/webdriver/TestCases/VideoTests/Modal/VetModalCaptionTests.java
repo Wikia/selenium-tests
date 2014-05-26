@@ -38,7 +38,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	String caption;
 
 	@Test(groups = {"VetModalCaption", "VetModalCaption_001"})
-	public void Vet_Modal_001_captionOnPage() {
+	public void VetModalCaption_001_captionOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		articleTitle_caption = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -61,7 +61,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"VetModalCaption", "VetModalCaption_002"}, dependsOnMethods = "Vet_Modal_001_captionOnPage")
-	public void Vet_Modal_002_captionInModal() {
+	public void VetModalCaption_002_captionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle_caption);
@@ -71,7 +71,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"VetModalCaption", "VetModalCaption_003"})
-	public void Vet_Modal_003_noCaptionOnPage() {
+	public void VetModalCaption_003_noCaptionOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		articleTitle_noCaption = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -90,7 +90,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"VetModalCaption", "VetModalCaption_004"}, dependsOnMethods = "Vet_Modal_003_noCaptionOnPage")
-	public void Vet_Modal_004_noCaptionInModal() {
+	public void VetModalCaption_004_noCaptionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle_noCaption);
@@ -100,7 +100,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"VetModalCaption", "VetModalCaption_005"})
-	public void Vet_Modal_005_videoNameNotEditable() {
+	public void VetModalCaption_005_videoNameNotEditable() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		articleTitle_notEditable = PageContent.articleNamePrefix + base.getTimeStamp();
