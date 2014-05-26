@@ -141,7 +141,6 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		HubBasePageObject hub = new HubBasePageObject(driver);
 		hub.clickGlobalNavLink(hubName);
 		hub.verifyHubTitle(hubName);
-		hub.verifyHubUrl(hubName);
 	}
 
 	/**
@@ -154,6 +153,5 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		HubBasePageObject hub = new HubBasePageObject(driver);
 		hub.clickWikiaBarLink(hubName);
 		hub.verifyHubTitle(hubName);
-		hub.verifyHubUrl(hubName);
 	}
 }
