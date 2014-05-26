@@ -35,8 +35,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	private final String corpWikiName = "corp";
 
-	@Test(enabled = false,
-			groups = { "HubsTests_001", "Hubs" , "Smoke4"},
+	@Test(groups = { "HubsTests_001", "Hubs" , "Smoke4"},
 			dataProviderClass = HubsDataProvider.class,
 			dataProvider = "provideHubDBName")
 	public void HubsTest_001_verifyMosaicSliderShowsImagesOnHover(String hubDBName) {

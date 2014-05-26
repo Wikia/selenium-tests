@@ -95,7 +95,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 
 	public void verifyMosaicSliderImages() {
 		for (WebElement thumbnail : mosaicSliderThumbRegionImages) {
-			waitForElementByElement(thumbnail);
+			waitForElementVisibleByElement(thumbnail);
 		}
 		PageObjectLogging.log("verifyMosaicSliderImages", "Verify that WikiaMosaicSlider has images", true);
 	}
