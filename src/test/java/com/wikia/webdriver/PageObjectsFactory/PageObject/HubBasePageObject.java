@@ -384,28 +384,4 @@ public class HubBasePageObject extends WikiBasePageObject {
 				true
 		);
 	}
-
-	public void verifyHubUrl(HubName hubName) {
-		waitForElementByElement(wordmarkImage);
-		String url;
-		switch (hubName) {
-			case Video_Games:
-				url = urlBuilder.getUrlForWiki("gameshub");
-				break;
-			case Entertainment:
-				url = urlBuilder.getUrlForWiki("movieshub");
-				break;
-			case Lifestyle:
-			default:
-				url = urlBuilder.getUrlForWiki("lifestylehub");
-				break;
-		}
-		Assert.assertTrue(getCurrentUrl().contains(url));
-
-		PageObjectLogging.log(
-				"verifyHubUrl",
-				"Verify URL",
-				true
-		);
-	}
 }
