@@ -56,7 +56,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	@FindBy(css="#CreatePageModalDialog .primary")
 	protected WebElement submitModal;
 	@FindBy(css="#ca-edit")
-	protected WebElement editDropdown;
+	protected WebElement editUsingClassicEditor;
 	@FindBy(css="#article-comm")
 	protected WebElement commentArea;
 	@FindBy(css="#article-comm-form .loading-indicator")
@@ -143,6 +143,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement blankPageRadioButton;
 	@FindBy(css="#CreatePageDialogFormat")
 	private WebElement standardLayoutPageRadioButton;
+	@FindBy(css="#WikiaPageHeader .chevron")
+	private WebElement openEditDropdown;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -236,12 +238,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public VisualEditModePageObject editArticleInRTEUsingDropdown() {
-		actionsClick(editDropdown);
+		openEditDropdown.click();
+		waitForElementVisibleByElement(editUsingClassicEditor);
+		editUsingClassicEditor.click();
 		return new VisualEditModePageObject(driver);
 	}
 
 	public SourceEditModePageObject editArticleInSrcUsingDropdown() {
-		actionsClick(editDropdown);
+		actionsClick(editUsingClassicEditor);
 		return new SourceEditModePageObject(driver);
 	}
 
