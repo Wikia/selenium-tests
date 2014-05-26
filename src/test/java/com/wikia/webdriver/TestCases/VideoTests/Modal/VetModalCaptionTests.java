@@ -70,7 +70,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		vetOptions.verifyCaption(caption);
 	}
 
-	@Test(groups = {"VetModalCaption", "VetModalCaption_003"})
+	@Test(groups = {"VetModalCaption", "VetModalCaption_003"}, enabled = false)
 	public void VetModalCaption_003_noCaptionOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

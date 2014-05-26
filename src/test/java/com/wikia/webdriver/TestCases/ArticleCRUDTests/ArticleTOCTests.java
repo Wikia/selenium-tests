@@ -69,8 +69,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 	 */
 	@Test(
 			groups = { "ArticleTOCTests", "ArticleTOCTests_003" },
-			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon",
-			enabled = false
+			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
 		 )
 	public void ArticleTOCTests_003_verifyTOCisCollapsedOnPreviewForAnon_QAART_359() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

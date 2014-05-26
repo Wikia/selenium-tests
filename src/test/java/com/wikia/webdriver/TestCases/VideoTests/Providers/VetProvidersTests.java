@@ -2,7 +2,6 @@ package com.wikia.webdriver.TestCases.VideoTests.Providers;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DataProvider.VideoUrlProvider;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -25,7 +24,8 @@ public class VetProvidersTests extends NewTestTemplate {
 	@Test(
 			dataProviderClass = VideoUrlProvider.class,
 			dataProvider = "videoUrl",
-			groups = {"VetProvidersArticle"}
+			groups = {"VetProvidersArticle", "VetProvidersTests_001"},
+			enabled = false
 	)
 	public void VetProvidersTests_001_article(String videoUrl, String videoName) {
 		PageObjectLogging.log("", videoUrl, true);
