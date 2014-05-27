@@ -110,7 +110,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch"})
-	public void crossWikiSearch_007_specialPromoteData_MAIN_1732() {
+	public void crossWikiSearch_007_specialPromoteData_PLA_1504() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
