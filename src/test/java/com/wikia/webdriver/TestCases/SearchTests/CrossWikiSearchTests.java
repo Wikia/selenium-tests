@@ -84,7 +84,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CrossWikiSearchTests_004", "Search", "CrossWikiSearch"})
-	public void crossWikiSearch_004_noResults() {
+	public void CrossWikiSearchTests_004_noResults() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(SearchContent.searchPhraseNoResults);
@@ -93,7 +93,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CrossWikiSearchTests_005", "Search", "CrossWikiSearch"})
-	public void crossWikiSearch_005_onePageResult() {
+	public void CrossWikiSearchTests_005_onePageResult() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(SearchContent.searchPhraseOnePageResults);
@@ -102,7 +102,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getPushToTopQueries",
 			groups = {"CrossWikiSearchTests_006", "Search", "CrossWikiSearch"})
-	public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
+	public void CrossWikiSearchTests_006_pushToTop(String query, String wikiName) {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(query);

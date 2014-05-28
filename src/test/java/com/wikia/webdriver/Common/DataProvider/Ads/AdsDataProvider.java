@@ -212,16 +212,11 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
-	public static final Object[][] getWikisWithNonStandardHVC() {
-		return new Object[][] {
-			{"mediawiki119"},
-		};
-	}
-
-	@DataProvider
 	public static final Object[][] getWikisWithStandardHVC() {
 		return new Object[][] {
-			{"adeng-test"}
+			{"adtest"},
+			{"de.icarly"},
+			{"memory-alpha"}
 		};
 	}
 

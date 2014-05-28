@@ -1062,16 +1062,11 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("openSpecialPromote", "special promote page opened", true);
 	}
 
-	public void verifyWgVariableValueSameAsProvided(
-		WikiFactoryVariables variableName, String providedValue, String url
-	) {
-		Object[] keysFromPage = getVaribaleValueFromPage(url, variableName.toString());
-		Object[] keysFromProvided = extractKeysFromWgVariable(providedValue);
+	public void verifyWgVariableValuesTheSame(Object[] value1, Object[] value2) {
+		Arrays.sort(value1);
+		Arrays.sort(value2);
 
-		Arrays.sort(keysFromProvided);
-		Arrays.sort(keysFromPage);
-
-		if (Arrays.equals(keysFromProvided, keysFromPage)) {
+		if (Arrays.equals(value1, value2)) {
 			PageObjectLogging.log(
 				"VariablesAreTheSame",
 				"Variable on wiki and on community are the same",
@@ -1082,16 +1077,16 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
-	private Object[] getVaribaleValueFromPage(String url, String variableName) {
+	public Object[] getWgVariableKeysFromPage(String url, String variableName) {
 		getUrl(url);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		Map<String, Integer> variableValueFromPage = (Map<String, Integer>) js.executeScript(
-			"return window[arguments[0]]", variableName
+			"return eval(arguments[0])", variableName
 		);
 		return variableValueFromPage.keySet().toArray();
 	}
 
-	private Object[] extractKeysFromWgVariable(String variableValue) {
+	protected Object[] extractKeysFromWgVariable(String variableValue) {
 		List<String> keysFromDefaultList = new ArrayList<>();
 		Pattern pattern = Pattern.compile("\'.*\'");
 		Matcher matcher = pattern.matcher(variableValue);

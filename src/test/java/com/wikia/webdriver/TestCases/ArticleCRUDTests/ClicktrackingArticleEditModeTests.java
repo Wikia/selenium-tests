@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.Common.Clicktracking.Events.EventsArticleEditMode;
-import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -17,14 +16,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Visual
 
 public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 
-	Credentials credentials = config.getCredentials();
-
 	@Test(groups = {
 			"ClickTracking",
 			"ClickTrackingArticleEditModeTests",
-			"ClickTrackingArticleEditModeTests_001"
+			"ClickTrackingArticleEditMode_001"
 	})
-	public void ClicktrackingArticleEditMode_001_verifyPreviewModalEvents() {
+	public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
