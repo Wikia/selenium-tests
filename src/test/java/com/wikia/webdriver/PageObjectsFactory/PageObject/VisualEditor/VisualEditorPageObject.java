@@ -35,7 +35,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private List<WebElement> bullList;
 	@FindBy(css=".ve-init-mw-viewPageTarget-surface")
 	private WebElement veEditorSurface;
-	@FindBy(css=".ve-ce-relocatableNode-marker")
+	@FindBy(css=".image.video.video-thumbnail.medium")
 	private WebElement mediaNode;
 
 	public void typeTextArea(String text) {

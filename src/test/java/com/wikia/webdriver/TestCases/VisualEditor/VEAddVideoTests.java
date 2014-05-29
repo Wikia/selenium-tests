@@ -40,7 +40,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo"}
 	)
-	public void VEEnabledEditorEntryVEPreferredTests_001_AddYoutubeVid() {
+	public void VEEnabledEditorEntryVEPreferredTests_001_AddYoutubeVid() throws InterruptedException {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
@@ -51,6 +51,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
 		VisualEditorPageObject veNew = mediaDialog.addMedia("http://www.youtube.com/watch?v=d9r5_DDMMjY");
 		veNew.verifyVideo();
+		veNew.verifyVEToolBarPresent();
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		article = save.savePage();
 	}

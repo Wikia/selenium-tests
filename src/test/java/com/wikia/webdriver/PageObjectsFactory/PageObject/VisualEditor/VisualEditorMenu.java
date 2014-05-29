@@ -60,6 +60,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement veToolMenu;
 	@FindBy(css=".oo-ui-listToolGroup")
 	private List<WebElement> toolListDropDowns;
+	@FindBy(css=".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
+	private WebElement enabledPublishButton;
 
 	private final int STYLELIST = 0;
 	private final int INSERTLIST = 1;
@@ -195,7 +197,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
 	public VisualEditorSaveChangesDialog clickPublishButton() {
 		waitForElementNotPresent(publishButtonDisabled);
-		waitForElementClickableByElement(publishPageButton);
+		waitForElementClickableByElement(enabledPublishButton);
 		publishPageButton.click();
 		PageObjectLogging.log("clickPublishButton", "Publish button on the VE toolbar is clicked", true);
 		return new VisualEditorSaveChangesDialog(driver);
