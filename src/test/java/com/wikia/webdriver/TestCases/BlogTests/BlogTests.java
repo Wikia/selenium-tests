@@ -64,7 +64,7 @@ public class BlogTests extends NewTestTemplate{
 	}
 
 	@Test(groups = { "BlogTests_003", "BlogTests"})
-	public void BlogTests_003_editFromProfile() {
+	public void BlogTests_003_editFromProfile_QAART_360() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String blogContent = PageContent.blogContent + base.getTimeStamp();
