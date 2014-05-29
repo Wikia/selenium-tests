@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
+package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +20,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		".oo-ui-buttonWidget .oo-ui-labeledElement-label"
 	)
 	private WebElement publishButton;
-	@FindBy(css=".oo-ui-frame")
+	@FindBy(css=".oo-ui-dialog-open .oo-ui-frame")
 	private WebElement saveDialogIFrame;
 
 	public VisualEditorSaveChangesDialog(WebDriver driver) {
