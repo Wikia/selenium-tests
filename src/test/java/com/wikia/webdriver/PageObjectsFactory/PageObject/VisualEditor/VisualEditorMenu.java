@@ -32,6 +32,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		super(driver);
 	}
 
+	private final int STYLELIST = 0;
+	private final int INSERTLIST = 1;
+	private final int HAMBURGERLIST = 2;
+
 	@FindBy(css=".oo-ui-icon-bold-b")
 	private WebElement boldButton;
 	@FindBy(css=".oo-ui-icon-italic-i")
@@ -58,27 +62,25 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private List<WebElement> formattingDropDownItem;
 	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
 	private WebElement veToolMenu;
-	@FindBy(css=".oo-ui-listToolGroup")
+	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")
 	private List<WebElement> toolListDropDowns;
+	@FindBy(css=".oo-ui-listToolGroup")
+	private List<WebElement> toolListItems;
 	@FindBy(css=".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
 	private WebElement enabledPublishButton;
-
-	private final int STYLELIST = 0;
-	private final int INSERTLIST = 1;
-	private final int HAMBURGERLIST = 2;
 	private WebElement styleList = toolListDropDowns.get(STYLELIST);
 	private WebElement insertList = toolListDropDowns.get(INSERTLIST);
 	private WebElement hamburgerList = toolListDropDowns.get(HAMBURGERLIST);
+	private WebElement styleItems = toolListItems.get(STYLELIST);
+	private WebElement insertItems = toolListItems.get(INSERTLIST);
+	private WebElement hamburgerItems = toolListItems.get(HAMBURGERLIST);
 
-
-	private By genericDropDownBy = By.cssSelector(".oo-ui-indicator-down");
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
 	private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
 	private By subscriptStyleBy = By.cssSelector(".oo-ui-icon-subscript");
 	private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
-	private By toolWrapper = By.cssSelector("a.oo-ui-tool");
 	private By publishButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
-	private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert");
+	private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
 	private By numberbedListBy = By.cssSelector(".oo-ui-icon-number-list");
 	private By bulletListBy = By.cssSelector(".oo-ui-icon-bullet-list");
 	private By templateBy = By.cssSelector(".oo-ui-icon-template");
@@ -149,17 +151,19 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			clickInsertFromInsertDropDown(bulletListBy);
 			break;
 		case NUMBERED_LIST:
-			clickInsertFromInsertDropDown(bulletListBy);
+			clickInsertFromInsertDropDown(numberbedListBy);
 			break;
 		}
 		PageObjectLogging.log("selectInsertToInsertList", insert.toString() + " selected", true);
 	}
 
 	private void clickInsertFromInsertDropDown(By insertBy) {
+		waitForElementVisibleByElement(insertList);
+		waitForElementClickableByElement(insertList);
 		Actions actions = new Actions(driver);
 		actions
 		.click(insertList)
-		.click(insertList.findElement(insertBy))
+		.click(insertItems.findElement(insertBy))
 		.build()
 		.perform();
 	}
