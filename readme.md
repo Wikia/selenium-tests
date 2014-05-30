@@ -8,6 +8,7 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
     * in Linux OS family it would be in /usr/bin/ for example
     * in Windows OS family you should export your chromedriver localization to system path
 3. On Mac, make sure your $JAVA_HOME is set, e.g. a line like this in your .profile:
+
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
 
 ## Adding Tests
