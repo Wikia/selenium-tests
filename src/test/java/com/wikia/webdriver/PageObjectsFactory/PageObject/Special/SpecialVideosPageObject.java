@@ -101,7 +101,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public void deleteVideo(){
-		executeScript("$('div.WikiaGrid div:nth-child(1).grid-2 .remove').show()");
+		executeScript("$('.special-videos-grid .remove').first().show()");
 		waitForElementByElement(newestVideo);
 		newestVideoDeleteIcon.click();
 		waitForElementByElement(deleteConfirmButton);
