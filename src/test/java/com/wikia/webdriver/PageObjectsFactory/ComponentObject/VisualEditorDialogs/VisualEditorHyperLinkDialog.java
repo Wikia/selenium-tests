@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
+package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs;
 
 import org.openqa.selenium.WebDriver;
 

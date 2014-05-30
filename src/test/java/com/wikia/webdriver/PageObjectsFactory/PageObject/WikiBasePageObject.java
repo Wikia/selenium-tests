@@ -14,7 +14,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialEditHubPageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -65,6 +64,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDas
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialContributionsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialEditHubPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWikiaHome;
@@ -166,6 +166,10 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement srcInRteMode;
 	@FindBy(css="body:not(.rte_source):not(.ve):not(.rte_wysiwyg)")
 	protected WebElement srcOnlyMode;
+	@FindBy(css=".oo-ui-widget-enabled.ve-ui-wikiaFocusWidget")
+	protected WebElement focusMode;
+	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
+	protected WebElement veToolMenu;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -1148,5 +1152,11 @@ public class WikiBasePageObject extends BasePageObject {
 		trackedEventsList = trackedEventsArrayList;
 		ClickTrackingSupport support = new ClickTrackingSupport();
 		support.compare(expectedEventsList, trackedEventsList);
+	}
+
+	public void verifyVEPublishComplete () {
+		waitForElementNotVisibleByElement(veMode);
+		waitForElementNotVisibleByElement(focusMode);
+		waitForElementNotVisibleByElement(veToolMenu);
 	}
 }

@@ -9,8 +9,16 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorNewTemplateDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceListDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
@@ -23,6 +31,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public VisualEditorMenu(WebDriver driver) {
 		super(driver);
 	}
+
+	private final int STYLELIST = 0;
+	private final int INSERTLIST = 1;
+	private final int HAMBURGERLIST = 2;
 
 	@FindBy(css=".oo-ui-icon-bold-b")
 	private WebElement boldButton;
@@ -48,25 +60,40 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement moreOptionsWrapper;
 	@FindBy(css=".oo-ui-menuToolGroup>div>span")
 	private List<WebElement> formattingDropDownItem;
-	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
-	private WebElement veToolMenu;
+	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")
+	private List<WebElement> toolListDropDowns;
+	@FindBy(css=".oo-ui-listToolGroup")
+	private List<WebElement> toolListItems;
+	@FindBy(css=".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
+	private WebElement enabledPublishButton;
+	private WebElement styleList = toolListDropDowns.get(STYLELIST);
+	private WebElement insertList = toolListDropDowns.get(INSERTLIST);
+	private WebElement hamburgerList = toolListDropDowns.get(HAMBURGERLIST);
+	private WebElement styleItems = toolListItems.get(STYLELIST);
+	private WebElement insertItems = toolListItems.get(INSERTLIST);
+	private WebElement hamburgerItems = toolListItems.get(HAMBURGERLIST);
 
-	private By genericDropDownBy = By.cssSelector(".oo-ui-icon-down");
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
 	private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
 	private By subscriptStyleBy = By.cssSelector(".oo-ui-icon-subscript");
 	private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
-	private By toolWrapper = By.cssSelector("a.oo-ui-tool");
 	private By publishButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
+	private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
+	private By numberbedListBy = By.cssSelector(".oo-ui-icon-number-list");
+	private By bulletListBy = By.cssSelector(".oo-ui-icon-bullet-list");
+	private By templateBy = By.cssSelector(".oo-ui-icon-template");
+	private By referenceBy = By.cssSelector(".oo-ui-icon-reference");
+	private By referenceListBy = By.cssSelector(".oo-ui-icon-references");
 
-	private void clickStyleFromMoreDropDown(By styleBy) {
+	private void clickStyleFromStyleDropDown(By styleBy) {
 		Actions actions = new Actions(driver);
 		actions
-			.click(moreOptionsWrapper.findElement(genericDropDownBy))
-			.click(moreOptionsWrapper.findElement(styleBy))
+			.click(styleList)
+			.click(styleList.findElement(styleBy))
 			.build()
 			.perform();
 	}
+
 
 	public void selectStyle(Style style) {
 
@@ -78,19 +105,65 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			italicButton.click();
 			break;
 		case STRIKETHROUGH:
-			clickStyleFromMoreDropDown(strikeStyleBy);
+			clickStyleFromStyleDropDown(strikeStyleBy);
 			break;
 		case SUBSCRIPT:
-			clickStyleFromMoreDropDown(subscriptStyleBy);
+			clickStyleFromStyleDropDown(subscriptStyleBy);
 			break;
 		case SUPERSCRIPT:
-			clickStyleFromMoreDropDown(superscriptStyleBy);
+			clickStyleFromStyleDropDown(superscriptStyleBy);
 			break;
 		case UNDERLINE:
-			clickStyleFromMoreDropDown(underlineStyleBy);
+			clickStyleFromStyleDropDown(underlineStyleBy);
 			break;
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
+	}
+
+	public VisualEditorDialog selectInsertToOpenDialog(InsertDialog insert) {
+		switch (insert) {
+		case MEDIA:
+			clickInsertFromInsertDropDown(mediaBy);
+			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+			return new VisualEditorAddMediaDialog(driver);
+		case REFERENCE:
+			clickInsertFromInsertDropDown(referenceBy);
+			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+			return new VisualEditorReferenceDialog(driver);
+		case REFERENCE_LIST:
+			clickInsertFromInsertDropDown(referenceListBy);
+			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+			return new VisualEditorReferenceListDialog(driver);
+		case TEMPLATE:
+			clickInsertFromInsertDropDown(templateBy);
+			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+			return new VisualEditorNewTemplateDialog(driver);
+		default:
+			return null;
+		}
+	}
+
+	public void insertList(InsertList insert) {
+		switch (insert) {
+		case BULLET_LIST:
+			clickInsertFromInsertDropDown(bulletListBy);
+			break;
+		case NUMBERED_LIST:
+			clickInsertFromInsertDropDown(numberbedListBy);
+			break;
+		}
+		PageObjectLogging.log("selectInsertToInsertList", insert.toString() + " selected", true);
+	}
+
+	private void clickInsertFromInsertDropDown(By insertBy) {
+		waitForElementVisibleByElement(insertList);
+		waitForElementClickableByElement(insertList);
+		Actions actions = new Actions(driver);
+		actions
+		.click(insertList)
+		.click(insertItems.findElement(insertBy))
+		.build()
+		.perform();
 	}
 
 	public void clickLinkButton() {
@@ -126,7 +199,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
 	public VisualEditorSaveChangesDialog clickPublishButton() {
 		waitForElementNotPresent(publishButtonDisabled);
-		waitForElementClickableByElement(publishPageButton);
+		waitForElementClickableByElement(enabledPublishButton);
 		publishPageButton.click();
 		PageObjectLogging.log("clickPublishButton", "Publish button on the VE toolbar is clicked", true);
 		return new VisualEditorSaveChangesDialog(driver);
@@ -136,5 +209,11 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		waitForElementVisibleByElement(veMode);
 		waitForElementVisibleByElement(veToolMenu);
 		PageObjectLogging.log("verifyVEToolBar", "VE toolbar is displayed", true);
+	}
+
+	public void verifyVEToolBarNotPresent() {
+		waitForElementNotVisibleByElement(veMode);
+		waitForElementNotVisibleByElement(veToolMenu);
+		PageObjectLogging.log("verifyVEToolBarNotPresent", "VE toolbar is not visible", true);
 	}
 }
