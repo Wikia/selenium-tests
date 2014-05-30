@@ -58,6 +58,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdDriverForcedStatus"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestLeaderboardPresenceOnMobile"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestAdTypeMobile"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>
