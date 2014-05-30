@@ -7,6 +7,8 @@ This repository contains [Selenium](http://seleniumhq.org/) tests for the [Wikia
 2. In order to run tests in CHROME browser make sure you have [chromedriver](http://code.google.com/p/chromedriver/downloads/list) and it is accessibile
     * in Linux OS family it would be in /usr/bin/ for example
     * in Windows OS family you should export your chromedriver localization to system path
+3. On Mac, make sure your $JAVA_HOME is set, e.g. a line like this in your .profile:
+   export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
 
 ## Adding Tests
 Please remember to keep this repository up to date as the tests become worthless otherwise. A good rule of thumb is to add a new test that covers whatever bug you're fixing so we can track regressions on it. Also, make sure to code your tests in a cross-operating system compliant manor as it's valid to run them in Windows, Mac or Linux environments.
