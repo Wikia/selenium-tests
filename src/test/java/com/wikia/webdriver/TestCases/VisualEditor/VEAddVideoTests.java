@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
-import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
@@ -40,7 +40,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo"}
 	)
-	public void VEEnabledEditorEntryVEPreferredTests_001_AddYoutubeVid() throws InterruptedException {
+	public void VEEnabledEditorEntryVEPreferredTests_001_AddNonPremiumVid() throws InterruptedException {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
@@ -49,17 +49,19 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
-		VisualEditorPageObject veNew = mediaDialog.addMedia("http://www.youtube.com/watch?v=d9r5_DDMMjY");
+		VisualEditorPageObject veNew = mediaDialog.addMedia(VideoContent.nonPremiumVideoURL);
 		veNew.verifyVideo();
 		veNew.verifyVEToolBarPresent();
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 
 	@Test(
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
 	)
-	public void VEEnabledEditorEntryVEPreferredTests_002_CreatePageEntry() {
+	public void VEEnabledEditorEntryVEPreferredTests_002_AddPremiumVid() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
@@ -68,7 +70,12 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
-		ve = mediaDialog.closeDialog();
-		ve.selectStyle(Style.BOLD);
+		VisualEditorPageObject veNew = mediaDialog.addMedia(VideoContent.premiumVideoURL);
+		veNew.verifyVideo();
+		veNew.verifyVEToolBarPresent();
+		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
+		article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 }

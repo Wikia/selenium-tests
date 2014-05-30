@@ -34,6 +34,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		waitForElementClickableByElement(publishButton);
 		publishButton.click();
 		PageObjectLogging.log("savePage", "The 2nd Publish Button is clicked", true);
+		waitForElementNotVisibleByElement(saveDialogIFrame);
 		driver.switchTo().defaultContent();
 		return new ArticlePageObject(driver);
 	}

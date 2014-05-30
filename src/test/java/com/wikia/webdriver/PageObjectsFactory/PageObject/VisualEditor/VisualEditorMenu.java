@@ -60,8 +60,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement moreOptionsWrapper;
 	@FindBy(css=".oo-ui-menuToolGroup>div>span")
 	private List<WebElement> formattingDropDownItem;
-	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
-	private WebElement veToolMenu;
 	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")
 	private List<WebElement> toolListDropDowns;
 	@FindBy(css=".oo-ui-listToolGroup")
@@ -211,5 +209,11 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		waitForElementVisibleByElement(veMode);
 		waitForElementVisibleByElement(veToolMenu);
 		PageObjectLogging.log("verifyVEToolBar", "VE toolbar is displayed", true);
+	}
+
+	public void verifyVEToolBarNotPresent() {
+		waitForElementNotVisibleByElement(veMode);
+		waitForElementNotVisibleByElement(veToolMenu);
+		PageObjectLogging.log("verifyVEToolBarNotPresent", "VE toolbar is not visible", true);
 	}
 }
