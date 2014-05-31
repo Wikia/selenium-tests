@@ -120,6 +120,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	public void verifyDeleteViaVideoNotPresent() {
 		addVideoViaAjax(VideoContent.youtubeVideoURL2);
 		refreshPage();
+		refreshPage();
 		deleteVideo();
 		verifyNotificationMessage();
 		Assertion.assertNotEquals(VideoContent.youtubeVideoURL2name, getNewestVideoTitle());
