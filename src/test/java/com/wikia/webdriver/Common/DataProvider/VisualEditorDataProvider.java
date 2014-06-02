@@ -49,6 +49,18 @@ public class VisualEditorDataProvider {
 		};
 	}
 
+	public enum InsertDialog {
+		MEDIA,
+		TEMPLATE,
+		REFERENCE,
+		REFERENCE_LIST;
+	}
+
+	public enum InsertList {
+		NUMBERED_LIST,
+		BULLET_LIST;
+	}
+
 	/**
 	 * Data provider with text formatting
 	 */

@@ -564,13 +564,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return liftiumTagId;
 	}
 
-	private String getSlotImageAd(WebElement slot) {
+	protected String getSlotImageAd(WebElement slot) {
 		WebElement iframeWithAd = slot.findElement(
 			By.cssSelector("div > iframe:not([id*='hidden'])")
 		);
 		driver.switchTo().frame(iframeWithAd);
 		String imageAd = driver.findElement(
-			By.cssSelector("img.img_ad")
+			By.cssSelector("img")
 		).getAttribute("src");
 		driver.switchTo().defaultContent();
 		return imageAd;

@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 /**
  * Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 
