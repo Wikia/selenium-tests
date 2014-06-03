@@ -1129,6 +1129,23 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	/**
+	 * Refresh the page limit number of times until element appears. Return true of false
+	 * depending on success of finding element.
+	 * @param element
+	 * @param limit
+	 * @return bool
+	 */
+	public boolean refreshUntilElementOnPage(WebElement element, int limit) {
+		for (int refreshCount = 0; refreshCount < limit; refreshCount++) {
+			if (checkIfElementOnPage(element)) {
+				return true;
+			}
+			refreshPage();
+		}
+		return false;
+	}
+
+	/**
 	 * this method should be called after clicktracking test, in order
 	 * to verify if expected events were tracked
 	 * @author Michal 'justnpT' Nowierski
