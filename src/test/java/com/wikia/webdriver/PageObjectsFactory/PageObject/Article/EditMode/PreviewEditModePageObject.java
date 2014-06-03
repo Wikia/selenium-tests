@@ -77,11 +77,6 @@ public class PreviewEditModePageObject extends EditMode {
 		Assertion.assertStringContains(caption, desiredCaption);
 	}
 
-	public void verifyVideoNoCaption() {
-		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoArticle));
-		PageObjectLogging.log("verifyNoVideoCaption", "video has no caption as expected", true);
-	}
-
 	public void closePreviewModal() {
 		previewModal.findElement(closeButton).click();
 		waitForElementNotPresent(closeButton);

@@ -191,12 +191,6 @@ public class VisualEditModePageObject extends EditMode {
 		Assertion.assertEquals(captionDesired, caption.getText());
 	}
 
-	public void verifyVideoNoCaption() {
-		driver.switchTo().frame(iframe);
-		String videoClass = video.getAttribute("class");
-		Assertion.assertTrue(!videoClass.contains("thumb"), "video with thumbnail is displayed");
-	}
-
 	private void mouseOverComponent (Components component) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		switch (component) {

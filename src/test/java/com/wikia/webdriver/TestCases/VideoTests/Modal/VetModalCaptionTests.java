@@ -70,35 +70,6 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		vetOptions.verifyCaption(caption);
 	}
 
-	@Test(groups = {"VetModalCaption", "VetModalCaption_003"}, enabled = false)
-	public void VetModalCaption_003_noCaptionOnPage() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle_noCaption = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle_noCaption);
-		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.adjustStyle(StyleVideo.nocaption);
-		vetOptions.submit();
-		visualEditMode.verifyVideoNoCaption();
-		PreviewEditModePageObject previewMode = visualEditMode.previewArticle();
-		previewMode.verifyVideoNoCaption();
-		previewMode.closePreviewModal();
-		ArticlePageObject article = visualEditMode.submitArticle();
-		article.verifyVideoNoCaption();
-	}
-
-	@Test(groups = {"VetModalCaption", "VetModalCaption_004"}, dependsOnMethods = "Vet_Modal_003_noCaptionOnPage")
-	public void VetModalCaption_004_noCaptionInModal() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle_noCaption);
-		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
-		vetOptions.verifyNoCaption();
-	}
-
 	@Test(groups = {"VetModalCaption", "VetModalCaption_005"})
 	public void VetModalCaption_005_videoNameNotEditable() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
