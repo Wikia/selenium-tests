@@ -38,7 +38,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	private List<WebElement> videoItem;
 	@FindBy(css = "#WikiaConfirmOk")
 	private WebElement deleteConfirmButton;
-	@FindBy(css = "img[data-video-key='The_Sims_3_Into_the_Future_Producer_Walkthrough']")
+	@FindBy(css = VideoContent.youtubeVideo2Selector)
 	private WebElement newestVideo2;
 
 	private int refreshLimit = 3;
