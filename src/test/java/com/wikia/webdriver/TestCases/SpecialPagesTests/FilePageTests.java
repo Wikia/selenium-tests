@@ -1,5 +1,9 @@
 package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
+import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -20,7 +24,7 @@ public class FilePageTests extends NewTestTemplate {
 	 *
 	 * @author "Liz Lee"
 	 */
-	@Test(groups = {"FilePage", "filePage001_tabs"})
+	@Test(groups = {"FilePage", "filePage001_tabs", "Media"})
 	public void filePage001_tabs() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
 		filePage.openFilePage(wikiURL, URLsContent.fileName001);
@@ -43,7 +47,7 @@ public class FilePageTests extends NewTestTemplate {
 	 *
 	 * @author "Liz Lee"
 	 */
-	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn"})
+	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
 	public void filePage002_tabsLoggedIn() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password);
@@ -61,7 +65,7 @@ public class FilePageTests extends NewTestTemplate {
 	 *
 	 * @author "Liz Lee"
 	 */
-	@Test(groups = {"FilePage", "filePage003_diffPage"})
+	@Test(groups = {"FilePage", "filePage003_diffPage", "Media"})
 	public void filePage003_diffPage() {
 
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -69,5 +73,33 @@ public class FilePageTests extends NewTestTemplate {
 
 		DiffPagePageObject diffPage = historyPage.goToDiffPageFromHistoryPage();
 		diffPage.verifyDiffTablePresent();
+	}
+
+	/**
+	 * Verify that a video can be deleted from the File page
+	 *
+	 * @author garth
+	 */
+	@Test(groups = {"FilePage", "filePage004_delete", "Media"})
+	public void filePage004_delete() {
+		// Go to Special:Videos to add a video
+		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver) ;
+		specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		specialVideos.openSpecialVideoPage(wikiURL);
+
+		// Add a Youtube video we'll delete
+		VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
+		vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL4);
+
+		// Now delete the video
+		FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, VideoContent.youtubeVideoURL4FileName);
+		filePage.verifyEmbeddedVideoIsPresent();
+
+		DeletePageObject deletePage = filePage.deletePage();
+		deletePage.submitDeletion();
+
+		// Go back to the file page and make sure its gone
+		filePage = specialVideos.openFilePage(wikiURL, VideoContent.youtubeVideoURL4FileName);
+		filePage.verifyEmptyFilePage();
 	}
 }

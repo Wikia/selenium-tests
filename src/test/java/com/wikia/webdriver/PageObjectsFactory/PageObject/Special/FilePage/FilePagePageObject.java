@@ -49,6 +49,8 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement playerIframe;
 	@FindBy(css=".fullImageLink [name=flashvars]")
 	private WebElement playerObject;
+	@FindBy(css="div#mw-imagepage-nofile")
+	private WebElement noFileText;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
@@ -108,6 +110,11 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 	public void verifyEmbeddedVideoIsPresent() {
 		waitForElementByElement(fileEmbedded);
+		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+	}
+
+	public void verifyEmptyFilePage() {
+		waitForElementByElement(noFileText);
 		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
 	}
 

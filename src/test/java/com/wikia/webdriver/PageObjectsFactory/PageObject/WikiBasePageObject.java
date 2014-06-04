@@ -90,6 +90,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePageObject;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -221,6 +222,12 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL + URLsContent.specialUnusedFiles);
 		PageObjectLogging.log("openSpecialUnusedFilesPage", URLsContent.specialUnusedFiles + " opened", true);
 		return new SpecialUnusedFilesPageObject(driver);
+	}
+
+	public VideoHomePageObject openVideoHomePageObject(String wikiURL) {
+		getUrl(wikiURL);
+		PageObjectLogging.log("openVideoHomePageObject", wikiURL + " opened", true);
+		return new VideoHomePageObject(driver);
 	}
 
 	public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {

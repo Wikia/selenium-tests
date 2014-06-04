@@ -8,6 +8,8 @@ public class VideoContent {
 	public static String youtubeVideoURL2Filename = "The_Sims_3_Into_the_Future_Producer_Walkthrough";
 	public static final String youtubeVideo2Selector = "img[data-video-key='The_Sims_3_Into_the_Future_Producer_Walkthrough']";
 	public static String youtubeVideoURL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
+	public static String youtubeVideoURL4 = "https://www.youtube.com/watch?v=bKHz7wOjb9w";
+	public static String youtubeVideoURL4FileName = "The_JET_Bicycle_-_The_most_dangerous_unsafe_bike_EVER";
 	public static String wikiaVideoQuery = "wikia";
 	public static String wikiaVideoURL = "http://mediawiki119.wikia.com/wiki/File:Jimmy_Wales_-_What_is_Wikia%3F";
 	public static String nonPremiumVideoURL = "http://www.youtube.com/watch?v=d9r5_DDMMjY";
