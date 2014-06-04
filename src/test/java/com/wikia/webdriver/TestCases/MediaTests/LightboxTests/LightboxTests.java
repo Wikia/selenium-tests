@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.LightboxTests;
+package com.wikia.webdriver.TestCases.MediaTests.LightboxTests;
 
 import org.testng.annotations.Test;
 
