@@ -23,14 +23,8 @@ public class VideoHomePageObject extends WikiBasePageObject {
 
 	@FindBy(css=".featured-video-slider .bx-controls")
 	private WebElement featuredModuleControls;
-
-	@FindBy(css="#featured-video-bxslider li")
-	private WebElement featuredSlide;
 	@FindBys(@FindBy(css="#featured-video-bxslider li"))
 	private List<WebElement> featuredSlides;
-
-	@FindBy(css=".latest-videos-wrapper .carousel-wrapper")
-	private WebElement latestVideoRow;
 	@FindBys(@FindBy(css=".latest-videos-wrapper .carousel-wrapper"))
 	private List<WebElement> latestVideoRows;
 
@@ -45,13 +39,13 @@ public class VideoHomePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyFeaturedSliderSlides(int count) {
-		waitForElementByElement(featuredSlide);
+		waitForElementByElement(featuredSlides.get(0));
 		Assertion.assertTrue(featuredSlides.size() >= count);
 		PageObjectLogging.log("verifyFeaturedSliderSlides", "At least " + count + "latest Videos modules have rendered", true);
 	}
 
 	public void verifyLatestVideosRows(int count) {
-		waitForElementByElement(latestVideoRow);
+		waitForElementByElement(latestVideoRows.get(0));
 		Assertion.assertTrue(latestVideoRows.size() >= count);
 		PageObjectLogging.log("verifyLatestVideosRows", "At least " + count + "latest Videos modules have rendered", true);
 	}
