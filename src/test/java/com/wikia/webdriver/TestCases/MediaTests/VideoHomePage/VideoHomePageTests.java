@@ -25,7 +25,7 @@ public class VideoHomePageTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
-		videoHomePageObject.verifyLatestVideosRendered();
+		videoHomePageObject.verify3LatestVideosRows();
 
 	}
 

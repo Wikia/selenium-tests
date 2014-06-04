@@ -20,8 +20,8 @@ public class VideoHomePageObject extends WikiBasePageObject {
 
 	@FindBy(css=".featured-video-slider .bx-controls")
 	private WebElement featuredModuleControls;
-	@FindBy(css=".latest-videos-wrapper .owl-item")
-	private WebElement latestVideoItem;
+	@FindBy(css=".latest-videos-wrapper .carousel-wrapper")
+	private WebElement thirdLatestVideoRow;
 
 
 	public VideoHomePageObject(WebDriver driver) {
@@ -31,12 +31,11 @@ public class VideoHomePageObject extends WikiBasePageObject {
 
 	public void verifyFeaturedSliderInitialized() {
 		waitForElementByElement(featuredModuleControls);
-		PageObjectLogging.log("verifyFeaturedSlider", "Featured video slider has initialized", true);
+		PageObjectLogging.log("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
 	}
 
-	public void verifyLatestVideosRendered() {
-		waitForElementByElement(latestVideoItem);
-		PageObjectLogging.log("verifyLatestVideosRendered", "At least one latest Videos module has rendered", true);
-
+	public void verify3LatestVideosRows() {
+		waitForElementByElement(thirdLatestVideoRow);
+		PageObjectLogging.log("verify3LatestVideosRows", "At least three latest Videos modules have rendered", true);
 	}
 }
