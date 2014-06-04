@@ -806,8 +806,6 @@ public class WikiBasePageObject extends BasePageObject {
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
 			HttpResponse response = null;
-
-			System.err.println( "================== POST: " + httpPost.toString() );
 			response = httpclient.execute(httpPost);
 
 			HttpEntity entity = response.getEntity();
