@@ -18,8 +18,6 @@ public class VideoHomePageTests extends NewTestTemplate {
 		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
 		videoHomePageObject.verifyFeaturedSliderInitialized();
 		videoHomePageObject.verifyFeaturedSliderSlides(5);
-
-
 	}
 
 	@Test(groups = {"VideoHomePage_002", "Media", "VideoHomePageTests"})
