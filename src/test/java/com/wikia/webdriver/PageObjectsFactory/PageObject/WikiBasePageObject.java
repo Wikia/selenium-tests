@@ -807,6 +807,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 			HttpResponse response = null;
 
+			System.err.println( "================== POST: " + httpPost.toString() );
 			response = httpclient.execute(httpPost);
 
 			HttpEntity entity = response.getEntity();
