@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Core.Assertion;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 
 /**
@@ -20,9 +23,16 @@ public class VideoHomePageObject extends WikiBasePageObject {
 
 	@FindBy(css=".featured-video-slider .bx-controls")
 	private WebElement featuredModuleControls;
-	@FindBy(css=".latest-videos-wrapper .carousel-wrapper")
-	private WebElement thirdLatestVideoRow;
 
+	@FindBy(css="#featured-video-bxslider li")
+	private WebElement featuredSlide;
+	@FindBys(@FindBy(css="#featured-video-bxslider li"))
+	private List<WebElement> featuredSlides;
+
+	@FindBy(css=".latest-videos-wrapper .carousel-wrapper")
+	private WebElement latestVideoRow;
+	@FindBys(@FindBy(css=".latest-videos-wrapper .carousel-wrapper"))
+	private List<WebElement> latestVideoRows;
 
 	public VideoHomePageObject(WebDriver driver) {
 		super(driver);
@@ -34,8 +44,15 @@ public class VideoHomePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyFeaturedSliderInitialized", "Featured video slider has initialized", true);
 	}
 
-	public void verify3LatestVideosRows() {
-		waitForElementByElement(thirdLatestVideoRow);
-		PageObjectLogging.log("verify3LatestVideosRows", "At least three latest Videos modules have rendered", true);
+	public void verifyFeaturedSliderSlides(int count) {
+		waitForElementByElement(featuredSlide);
+		Assertion.assertTrue(featuredSlides.size() >= count);
+		PageObjectLogging.log("verifyFeaturedSliderSlides", "At least " + count + "latest Videos modules have rendered", true);
+	}
+
+	public void verifyLatestVideosRows(int count) {
+		waitForElementByElement(latestVideoRow);
+		Assertion.assertTrue(latestVideoRows.size() >= count);
+		PageObjectLogging.log("verifyLatestVideosRows", "At least " + count + "latest Videos modules have rendered", true);
 	}
 }

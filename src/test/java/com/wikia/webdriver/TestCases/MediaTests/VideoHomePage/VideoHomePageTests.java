@@ -17,6 +17,8 @@ public class VideoHomePageTests extends NewTestTemplate {
 		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
 		videoHomePageObject.verifyFeaturedSliderInitialized();
+		videoHomePageObject.verifyFeaturedSliderSlides(5);
+
 
 	}
 
@@ -25,7 +27,7 @@ public class VideoHomePageTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
-		videoHomePageObject.verify3LatestVideosRows();
+		videoHomePageObject.verifyLatestVideosRows(3);
 
 	}
 
