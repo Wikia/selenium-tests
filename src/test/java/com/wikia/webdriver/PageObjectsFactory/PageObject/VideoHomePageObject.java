@@ -18,18 +18,25 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VideoHomePageObject extends WikiBasePageObject {
 
-	@FindBy(css=".featured-video-slider")
-	private WebElement sliderWrapper;
+	@FindBy(css=".featured-video-slider .bx-controls")
+	private WebElement featuredModuleControls;
+	@FindBy(css=".latest-videos-wrapper .owl-item")
+	private WebElement latestVideoItem;
+
 
 	public VideoHomePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public void verifyDiv() {
-		waitForElementByElement(sliderWrapper);
-		PageObjectLogging.log("verifyDiv", "Div found", true);
+	public void verifyFeaturedSliderInitialized() {
+		waitForElementByElement(featuredModuleControls);
+		PageObjectLogging.log("verifyFeaturedSlider", "Featured video slider has initialized", true);
 	}
 
+	public void verifyLatestVideosRendered() {
+		waitForElementByElement(latestVideoItem);
+		PageObjectLogging.log("verifyLatestVideosRendered", "At least one latest Videos module has rendered", true);
 
+	}
 }

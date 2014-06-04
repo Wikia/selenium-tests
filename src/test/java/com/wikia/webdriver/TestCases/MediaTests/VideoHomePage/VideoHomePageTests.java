@@ -11,12 +11,22 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
  * Created by Liz Lee on 6/4/14.
  */
 public class VideoHomePageTests extends NewTestTemplate {
-	@Test(groups = {"Media", "VideoHomePageTests"})
-	public void VideoHomePage_001() {
+	@Test(groups = {"VideoHomePage_001", "Media", "VideoHomePageTests"})
+	public void VideoHomePage_001_FeaturedVideoSlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
-		videoHomePageObject.verifyDiv();
+		videoHomePageObject.verifyFeaturedSliderInitialized();
 
 	}
+
+	@Test(groups = {"VideoHomePage_002", "Media", "VideoHomePageTests"})
+	public void VideoHomePage_002_LatestVideos() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
+		videoHomePageObject.verifyLatestVideosRendered();
+
+	}
+
 }
