@@ -230,7 +230,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VideoHomePageObject(driver);
 	}
 
-
 	public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUnusedVideos);
 		PageObjectLogging.log("openSpecialUnusedVideosPage", URLsContent.specialUnusedVideos + " opened", true);
