@@ -81,7 +81,7 @@
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsThreadCreatorTests"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsThreadParticipantTests"/>
 			<class name="com.wikia.webdriver.TestCases.WamPageTests.WamPageTests"/>
-			<class name="com.wikia.webdriver.TestCases.LightboxTests.LightboxTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.LightboxTests.LightboxTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.EditingLocalCssTests"/>
 			<class name="com.wikia.webdriver.TestCases.EditHubTests.EditHubTests"/>
