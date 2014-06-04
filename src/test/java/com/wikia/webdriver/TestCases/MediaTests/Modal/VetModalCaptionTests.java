@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.VideoTests.Modal;
+package com.wikia.webdriver.TestCases.MediaTests.Modal;
 
 import org.testng.annotations.Test;
 

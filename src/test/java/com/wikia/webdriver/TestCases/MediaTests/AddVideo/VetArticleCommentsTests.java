@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.wikia.webdriver.TestCases.VideoTests.AddVideo;
+package com.wikia.webdriver.TestCases.MediaTests.AddVideo;
 
 import org.testng.annotations.Test;
 

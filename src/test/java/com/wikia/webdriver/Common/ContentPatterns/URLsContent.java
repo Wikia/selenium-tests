@@ -157,4 +157,7 @@ public class URLsContent {
 	public static final String templatePage = "Template:Infobox";
 	public static final String listPage = "List:Listing";
 	public static final String mediaWiki = "mediawiki119";
+
+	//Other wikis to test on
+	public static final String videoTestWiki = "sktest123";
 }
