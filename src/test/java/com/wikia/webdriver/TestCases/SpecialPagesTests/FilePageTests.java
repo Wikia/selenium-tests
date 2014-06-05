@@ -50,7 +50,7 @@ public class FilePageTests extends NewTestTemplate {
 	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
 	public void filePage002_tabsLoggedIn() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 
 		FilePagePageObject filePage = base.openFilePage(wikiURL, URLsContent.fileName001);
 
