@@ -154,12 +154,12 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public void verifyElementsOnPage() {
 		verifyH1();
-		PageObjectLogging.log("verifyElements", "verify that H1 is present", true);
+		PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
 		verifyAddVideoButton();
-		PageObjectLogging.log("verifyElements", "verify that Add Video button is present", true);
+		PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
 		verifySortDropdown();
-		PageObjectLogging.log("verifyElements", "verify that sort dropdown is present", true);
+		PageObjectLogging.log("verifyElementsOnPage", "verify that sort dropdown is present", true);
 		verifyNewestVideo();
-		PageObjectLogging.log("verifyElements", "verify that there is at least one video present", true);
+		PageObjectLogging.log("verifyElementsOnPage", "verify that there is at least one video present", true);
 	}
 }

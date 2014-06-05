@@ -17,7 +17,7 @@ public class VideosPageTests extends NewTestTemplate {
 	 *
 	 * @author Armon Rabiyan
 	 */
-	@Test(groups = {"VideosPage", "VideosPageTest_000", "Media"})
+	@Test(groups = {"VideosPage", "VideosPageTest_001", "Media"})
 	public void VideosPageTest_000() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
@@ -32,7 +32,7 @@ public class VideosPageTests extends NewTestTemplate {
 	 *
 	 * @author James Sutterfield
 	 */
-	@Test(groups = {"VideosPage", "VideosPageTest_001"})
+	@Test(groups = {"VideosPage", "VideosPageTest_002"})
 	public void VideosPageTest_001() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -49,7 +49,7 @@ public class VideosPageTests extends NewTestTemplate {
 	 *
 	 * * @author James Sutterfield
 	 */
-	@Test(groups = {"VideosPage", "VideosPageTest_002"})
+	@Test(groups = {"VideosPage", "VideosPageTest_003"})
 	public void VideosPageTest_002() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
