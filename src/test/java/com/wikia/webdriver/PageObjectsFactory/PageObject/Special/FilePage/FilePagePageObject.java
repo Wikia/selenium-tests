@@ -68,19 +68,25 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
-	public void selectTab(int tab) {
+	public void clickTab(int tab) {
 		WebElement currentTab = tabList.get(tab);
 		scrollAndClick(currentTab);
 		PageObjectLogging.log(
-				"selectTab",
+				"clickTab",
 				tab + " selected",
 				true
 		);
 	}
 
-	public void selectAboutTab() { selectTab(ABOUT_TAB); }
-	public void selectHistoryTab() { selectTab(HISTORY_TAB); }
-	public void selectMetadataTab() { selectTab(METADATA_TAB); }
+	public void selectAboutTab() {
+		clickTab(ABOUT_TAB);
+	}
+	public void selectHistoryTab() {
+		clickTab(HISTORY_TAB);
+	}
+	public void selectMetadataTab() {
+		clickTab(METADATA_TAB);
+	}
 
 	public void verifySelectedTab(String tabName) {
 		driver.findElement(By.cssSelector(selectedTab.replace("%name%", tabName)));
@@ -103,7 +109,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 			tabName = "metadata";
 		}
 
-		selectTab(tab);
+		clickTab(tab);
 		verifySelectedTab(tabName);
 		refreshPage();
 		verifySelectedTab(tabName);

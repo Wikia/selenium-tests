@@ -31,13 +31,13 @@ public class FilePageTests extends NewTestTemplate {
 
 		filePage.verifySelectedTab("about");
 
-		filePage.selectTab(1);
+		filePage.clickTab( FilePagePageObject.HISTORY_TAB );
 		filePage.verifySelectedTab("history");
 
-		filePage.selectTab(0);
+		filePage.clickTab( FilePagePageObject.ABOUT_TAB );
 		filePage.verifySelectedTab("about");
 
-		filePage.selectTab(2);
+		filePage.clickTab( FilePagePageObject.METADATA_TAB );
 		filePage.verifySelectedTab("metadata");
 	}
 
