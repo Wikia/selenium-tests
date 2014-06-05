@@ -12,6 +12,19 @@ public class VideosPageTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	/**
+	 * Verify UI elements on the Special:Videos page
+	 * Logged-Out
+	 *
+	 * @author Armon Rabiyan
+	 */
+	@Test(groups = {"VideosPage", "VideosPageTest_000", "Media"})
+	public void VideosPageTest_000() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
+		specialVideos.verifyElementsOnPage();
+	}
+
+	/**
 	 * Checks if a video can successfully be deleted from the Special:Videos page. Specifically, this
 	 * test checks if, after the video has been deleted, its title shows up in the delete confirmation
 	 * presented by Global Notifications. (Note: This test also adds a video beforehand to make sure
