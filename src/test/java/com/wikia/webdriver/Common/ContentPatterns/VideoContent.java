@@ -4,7 +4,8 @@ public class VideoContent {
 	public static String youtubeVideoURL = "https://www.youtube.com/watch?v=QE32HghV8-I";
 	public static String youtubeVideoWikiText = "File:WikiEvolution - Poznańska Wiki-1354533479|thumb|right|335 px|";
 	public static String youtubeVideoURL2 = "http://www.youtube.com/watch?v=stZNi4kyuXE";
-	public static String youtubeVideoURL2name = "The Sims 3 Into the Future Producer Walkthrough";
+	public static String youtubeVideoURL2Name = "The Sims 3 Into the Future Producer Walkthrough";
+	public static String youtubeVideoURL2Filename = "The_Sims_3_Into_the_Future_Producer_Walkthrough";
 	public static final String youtubeVideo2Selector = "img[data-video-key='The_Sims_3_Into_the_Future_Producer_Walkthrough']";
 	public static String youtubeVideoURL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
 	public static String youtubeVideoURL4 = "https://www.youtube.com/watch?v=bKHz7wOjb9w";
