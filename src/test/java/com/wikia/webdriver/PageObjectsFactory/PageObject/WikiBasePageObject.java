@@ -1136,15 +1136,15 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	/**
-	 * Refresh the page limit number of times until element appears. Return true of false
+	 * Refresh the page limit number of times until element found by cssSelector appears. Return true of false
 	 * depending on success of finding element.
-	 * @param element
+	 * @param cssSelector
 	 * @param limit
 	 * @return bool
 	 */
-	public boolean refreshUntilElementOnPage(WebElement element, int limit) {
+	public boolean refreshUntilElementOnPage(String cssSelector, int limit) {
 		for (int refreshCount = 0; refreshCount < limit; refreshCount++) {
-			if (checkIfElementOnPage(element)) {
+			if (checkIfElementOnPage(cssSelector)) {
 				return true;
 			}
 			refreshPage();

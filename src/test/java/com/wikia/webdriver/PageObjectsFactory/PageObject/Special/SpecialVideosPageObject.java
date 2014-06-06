@@ -40,8 +40,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	private List<WebElement> videoItem;
 	@FindBy(css = "#WikiaConfirmOk")
 	private WebElement deleteConfirmButton;
-	@FindBy(css = VideoContent.youtubeVideo2Selector)
-	private WebElement newestVideo2;
 	@FindBy(css = "#sorting-dropdown")
 	private WebElement sortDropdown;
 
@@ -134,7 +132,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public void verifyDeleteViaGlobalNotifications() {
 		addVideoViaAjax(VideoContent.youtubeVideoURL2);
-		refreshUntilElementOnPage(newestVideo2, refreshLimit);
+		refreshUntilElementOnPage(VideoContent.youtubeVideo2Selector, refreshLimit);
 		deleteVideo();
 		String deletedVideo = "\"File:" + VideoContent.youtubeVideoURL2name + "\" has been deleted. (undelete)";
 		Assertion.assertEquals(deletedVideo, getFlashMessageText());
@@ -143,7 +141,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public void verifyDeleteViaVideoNotPresent() {
 		addVideoViaAjax(VideoContent.youtubeVideoURL2);
-		refreshUntilElementOnPage(newestVideo2, refreshLimit);
+		refreshUntilElementOnPage(VideoContent.youtubeVideo2Selector, refreshLimit);
 		deleteVideo();
 		verifyNotificationMessage();
 		Assertion.assertNotEquals(VideoContent.youtubeVideoURL2name, getNewestVideoTitle());
