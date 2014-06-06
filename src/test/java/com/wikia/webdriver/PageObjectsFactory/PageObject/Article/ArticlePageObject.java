@@ -18,6 +18,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.VECreateArticleModalComponentObject;
@@ -99,6 +100,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement videoThumbnail;
 	@FindBy(css="#mw-content-text .article-thumb")
 	protected WebElement videoThumbnailWrapper;
+	@FindBy(css="#mw-content-text .inline-video")
+	protected WebElement videoInline;
 	@FindBy(css=".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
@@ -413,6 +416,20 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
+	public void verifyVideoInline() {
+		waitForElementByElement(videoInline);
+		PageObjectLogging.log("verifyVideoInline", "Inline video is visible", true);
+	}
+
+	public void verifyVideoAutoplay(String providerName) {
+		VideoComponentObject video = new VideoComponentObject(driver, videoInline);
+		video.verifyVideoAutoplay(providerName, true);
+	}
+
+	public VideoComponentObject getVideoPlayer() {
+		return new VideoComponentObject(driver, videoInline);
+	}
+
 	private void verifyTableProperty(String propertyName, int propertyValue) {
 		waitForElementByElement(table);
 		Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
@@ -474,10 +491,16 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertStringContains(videoClass, position);
 	}
 
-	public void verifyVideoWidth(int widthDesired) {
+	public Integer getVideoWidth() {
 		int videoWidth = Integer.parseInt(videoThumbnail.findElement(
 			By.tagName("img")
 		).getAttribute("width"));
+		PageObjectLogging.log("getVideoWidth", "Video width is "+videoWidth, true);
+		return videoWidth;
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		int videoWidth = getVideoWidth();
 		Assertion.assertNumber(
 			widthDesired,
 			videoWidth,
@@ -676,6 +699,21 @@ public class ArticlePageObject extends WikiBasePageObject {
 		thumbnailImageArticle.click();
 		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
 		return new LightboxComponentObject(driver);
+	}
+
+	public LightboxComponentObject clickThumbnailVideo() {
+		waitForElementClickableByElement(videoThumbnail);
+		videoThumbnail.click();
+		PageObjectLogging.log("clickThumbnailVideo", "Thumbnail video is clicked", true);
+		return new LightboxComponentObject(driver);
+	}
+
+	public VideoComponentObject clickThumbnailVideoInline() {
+		waitForElementClickableByElement(videoThumbnail);
+		videoThumbnail.click();
+		PageObjectLogging.log("clickThumbnailVideoInline", "Thumbnail video is clicked", true);
+		verifyVideoInline();
+		return new VideoComponentObject(driver, videoInline);
 	}
 
 	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {
