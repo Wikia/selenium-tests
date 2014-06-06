@@ -43,13 +43,26 @@ public class VideoComponentObject extends WikiBasePageObject{
 	public void verifyVideoOoyalaEmbed() {
 		WebElement container = videoEmbed.findElement(By.tagName("div"));
 
-		String playerId = "ooyalaplayer-";
-		Assertion.assertStringContains(container.getAttribute("id"), playerId);
+		String containerId = "ooyalaplayer-";
+		Assertion.assertStringContains(container.getAttribute("id"), containerId);
 
 		WebElement object = container.findElement(By.tagName("object"));
 		Assertion.assertTrue( object.isDisplayed() );
 
 		PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
+	}
+
+	public void verifyVideoAnyclipEmbed() {
+		WebElement container = videoEmbed.findElement(By.tagName("div"));
+
+		String containerId = "ACPContainer0";
+		Assertion.assertStringContains(container.getAttribute("id"), containerId);
+
+		WebElement object = container.findElement(By.tagName("object"));
+		Assertion.assertTrue( object.isDisplayed() );
+		Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"), object.getAttribute("id"));
+
+		PageObjectLogging.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
 	}
 
 	public void verifyVideoAutoplay(String providerName, boolean status) {

@@ -74,4 +74,23 @@ public class PlayingVideoTests extends NewTestTemplate {
 		video.verifyVideoOoyalaEmbed();
 	}
 
+	// Test: Anyclip video in lightbox
+	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004" })
+	public void PlayingVideoTests_004_anyclip() {
+		int itemNumber = 0;
+		String providerName = "anyclip";
+		String queryString = "provider="+providerName;
+
+		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
+
+		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
+		lightbox.verifyLightboxPopup();
+		lightbox.verifyLightboxVideo();
+		lightbox.verifyVideoAutoplay(providerName);
+
+		VideoComponentObject video = lightbox.getVideoPlayer();
+		video.verifyVideoEmbedWidth(videoWidthLightbox);
+		video.verifyVideoAnyclipEmbed();
+	}
+
 }
