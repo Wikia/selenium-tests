@@ -32,8 +32,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Source
  */
 public class ArticleSourceModeTests extends NewTestTemplate{
 
-	String articleName;
-
 	WikiBasePageObject base;
 	SourceEditModePageObject source;
 
@@ -41,13 +39,13 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 	public void setup_VEPreferred() {
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
-		articleName = PageContent.articleNamePrefix+base.getTimeStamp();
-		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
-		source = article.openCurrectArticleSourceMode();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_001"})
 	public void RTE_001_Bold(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickBold();
 		source.checkSourceContent("'''Bold text'''");
 		source.submitArticle();
@@ -55,6 +53,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_002"})
 	public void RTE_002_Italic(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickItalic();
 		source.checkSourceContent("''Italic text''");
 		source.submitArticle();
@@ -62,6 +63,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_003"})
 	public void RTE_003_InternalLink(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickInternalLink();
 		source.checkSourceContent("[[Link title]]");
 		source.submitArticle();
@@ -69,6 +73,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_004"})
 	public void RTE_004_ExternalLink(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickExternalLink();
 		source.checkSourceContent("[http://www.example.com link title]");
 		source.submitArticle();
@@ -76,6 +83,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_005"})
 	public void RTE_005_HeadLine(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickLvl2Headline();
 		source.checkSourceContent("\n== Headline text ==\n");
 		source.submitArticle();
@@ -83,6 +93,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_006"})
 	public void RTE_006_EmbedFile(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickEmbedFile();
 		source.checkSourceContent("[[File:Example.jpg]]");
 		source.submitArticle();
@@ -90,6 +103,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_007"})
 	public void RTE_007_EmbedMedia(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickEmbedMedia();
 		source.checkSourceContent("[[Media:Example.ogg]]");
 		source.submitArticle();
@@ -97,6 +113,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_008"})
 	public void RTE_008_Math(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickMath();
 		source.checkSourceContent("<math>Insert formula here</math>");
 		source.submitArticle();
@@ -104,6 +123,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_009"})
 	public void RTE_009_Nowiki(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickNowiki();
 		source.checkSourceContent("<nowiki>Insert non-formatted text here</nowiki>");
 		source.submitArticle();
@@ -111,6 +133,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_010"})
 	public void RTE_010_Signature(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickSignature();
 		source.checkSourceContent("--~~~~");
 		source.submitArticle();
@@ -118,6 +143,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_011"})
 	public void RTE_011_HLine(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickHorizontalLine();
 		source.checkSourceContent("\n----\n");
 		source.submitArticle();
@@ -125,6 +153,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_012"})
 	public void RTE_012_Photo(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
 		photoOptions.setCaption(PageContent.caption);
@@ -136,6 +167,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_013"})
 	public void RTE_013_Slideshow(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
 		SlideshowBuilderComponentObject slideshowBuilder = (SlideshowBuilderComponentObject)source.addComponent("slideshow");
@@ -151,6 +185,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_014"})
 	public void RTE_014_Gallery(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
 		GalleryBuilderComponentObject galleryBuiler = (GalleryBuilderComponentObject) source.addComponent("gallery");
@@ -169,6 +206,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_015"})
 	public void RTE_015_Slider(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.clickAddGallery();
 		source.verifyComponentSelector();
 		SliderBuilderComponentObject sliderBuilder = (SliderBuilderComponentObject)source.addComponent("slider");
@@ -184,6 +224,9 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_016"})
 	public void RTE_016_Video(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
 		vetOptions.setCaption(PageContent.caption);
@@ -195,18 +238,27 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 
 	@Test(groups={"RTE_extended","RTE_extended_017"})
 	public void RTE_017_MoreMainTools(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.checkMainTools();
 		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_018"})
 	public void RTE_018_MoreWikiMarkupTools(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.checkWikiMarkupTools();
 		source.submitArticle();
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_019"})
 	public void RTE_019_MoreSympolsTools(){
+		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		source = article.openCurrectArticleSourceMode();
 		source.checkSymbolsTools();
 		source.submitArticle();
 	}
