@@ -18,7 +18,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 	WikiBasePageObject base;
 	String wikiURL;
 
-	private static final int videoWidthLightbox = 737;
+	private final int videoWidthLightbox = 737;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_Preferred() {
@@ -51,6 +51,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
 		video.verifyVideoEmbedWidth(videoWidth);
 		video.verifyVideoOoyalaAgeGate();
+		video.verifyVideoObjectVisible();
 		video.verifyVideoOoyalaEmbed();
 	}
 
@@ -71,7 +72,28 @@ public class PlayingVideoTests extends NewTestTemplate {
 		VideoComponentObject video = lightbox.getVideoPlayer();
 		video.verifyVideoEmbedWidth(videoWidthLightbox);
 		video.verifyVideoOoyalaAgeGate();
+		video.verifyVideoObjectVisible();
 		video.verifyVideoOoyalaEmbed();
+	}
+
+	// Test: IGN video in lightbox
+	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_003" })
+	public void PlayingVideoTests_003_ign() {
+		int itemNumber = 0;
+		String providerName = "ign";
+		String queryString = "provider="+providerName;
+
+		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
+
+		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
+		lightbox.verifyLightboxPopup();
+		lightbox.verifyLightboxVideo();
+		lightbox.verifyVideoAutoplay(providerName);
+
+		VideoComponentObject video = lightbox.getVideoPlayer();
+		video.verifyVideoIframeVisible();
+		video.verifyVideoIframeWidth(videoWidthLightbox);
+		video.verifyVideoIgnEmbed();
 	}
 
 	// Test: Anyclip video in lightbox
@@ -90,6 +112,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
 		VideoComponentObject video = lightbox.getVideoPlayer();
 		video.verifyVideoEmbedWidth(videoWidthLightbox);
+		video.verifyVideoObjectVisible();
 		video.verifyVideoAnyclipEmbed();
 	}
 

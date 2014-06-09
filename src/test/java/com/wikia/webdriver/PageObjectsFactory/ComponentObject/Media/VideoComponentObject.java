@@ -29,9 +29,9 @@ public class VideoComponentObject extends WikiBasePageObject{
 		PageObjectLogging.log("verifyVideoEmbedWidth", "Width: "+videoWidth, true);
 	}
 
-	public void verifyVideoEmbedWidthIframe(Integer videoWidth) {
-		Assertion.assertEquals(videoEmbed.findElement(By.tagName("iframe")).getAttribute("width"), videoWidth);
-		PageObjectLogging.log("verifyVideoEmbedWidthIframe", "Width: "+videoWidth, true);
+	public void verifyVideoIframeWidth(Integer videoWidth) {
+		Assertion.assertEquals(videoEmbed.findElement(By.tagName("iframe")).getAttribute("width"), videoWidth.toString());
+		PageObjectLogging.log("verifyVideoIframeWidth", "Width: "+videoWidth, true);
 	}
 
 	public void verifyVideoOoyalaAgeGate() {
@@ -50,6 +50,23 @@ public class VideoComponentObject extends WikiBasePageObject{
 		Assertion.assertTrue( object.isDisplayed() );
 
 		PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
+	}
+
+	public void verifyVideoObjectVisible() {
+		Assertion.assertTrue(videoEmbed.findElement(By.tagName("object")).isDisplayed());
+		PageObjectLogging.log("verifyVideoObjectVisible", "Video object is visible", true);
+	}
+
+	public void verifyVideoIframeVisible() {
+		Assertion.assertTrue(videoEmbed.findElement(By.tagName("iframe")).isDisplayed());
+		PageObjectLogging.log("verifyVideoIframeVisible", "Video iframe is visible", true);
+	}
+
+	public void verifyVideoIgnEmbed() {
+		String iframeSrc = "http://widgets.ign.com/video/embed/content.html?url=";
+		Assertion.assertStringContains(getVideoPlayerIframe().getAttribute("src"), iframeSrc);
+
+		PageObjectLogging.log("verifyVideoIgnEmbed", "IGN video is embedded", true);
 	}
 
 	public void verifyVideoAnyclipEmbed() {
