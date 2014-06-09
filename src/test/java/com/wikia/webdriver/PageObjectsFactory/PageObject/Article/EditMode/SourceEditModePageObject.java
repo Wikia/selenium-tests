@@ -12,7 +12,6 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.SourceModeContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
@@ -79,13 +78,6 @@ public class SourceEditModePageObject extends EditMode{
 		PageFactory.initElements(driver, this);
 	}
 
-	@Deprecated
-	public SourceEditModePageObject createNewArticleSource(String pageName, int layoutNum){
-		getUrl(Global.DOMAIN+"index.php?title="+pageName+"&action=edit&useFormat="+layoutNum+"&useeditor=source");
-		waitForElementByElement(more);
-		PageObjectLogging.log("createNewArticleSource", "create article page in source mode opened", true, driver);
-		return new SourceEditModePageObject(driver);
-	}
 	public void focusTextArea()
 	{
 		jQueryFocus(".cke_source");
