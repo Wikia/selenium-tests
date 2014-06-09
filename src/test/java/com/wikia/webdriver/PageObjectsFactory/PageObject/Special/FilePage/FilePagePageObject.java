@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage;
 
 import java.util.List;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  * @author Saipetch Kongkatong
  *
  */
+
 public class FilePagePageObject extends WikiBasePageObject {
+
+	public static final int ABOUT_TAB = 0;
+	public static final int HISTORY_TAB = 1;
+	public static final int METADATA_TAB = 2;
 
 	public FilePagePageObject(WebDriver driver) {
 		super(driver);
@@ -49,17 +55,37 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement playerIframe;
 	@FindBy(css=".fullImageLink [name=flashvars]")
 	private WebElement playerObject;
+	@FindBy(css="div#mw-imagepage-nofile")
+	private WebElement noFileText;
+	@FindBy(css="li#mw-imagepage-reupload-link a")
+	private WebElement reuploadLink;
+	@FindBy(css="#wpWikiaVideoAddUrl")
+	private WebElement uploadFileURL;
+	@FindBy(css="div.submits input")
+	private WebElement addButton;
+	@FindBys(@FindBy(css="table.filehistory tr td:nth-child(1)>a"))
+	private List<WebElement> historyDeleteLinks;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
-	public void selectTab(int tab) {
+	public void clickTab(int tab) {
 		WebElement currentTab = tabList.get(tab);
 		scrollAndClick(currentTab);
 		PageObjectLogging.log(
-				"selectTab",
+				"clickTab",
 				tab + " selected",
 				true
 		);
+	}
+
+	public void selectAboutTab() {
+		clickTab(ABOUT_TAB);
+	}
+	public void selectHistoryTab() {
+		clickTab(HISTORY_TAB);
+	}
+	public void selectMetadataTab() {
+		clickTab(METADATA_TAB);
 	}
 
 	public void verifySelectedTab(String tabName) {
@@ -75,15 +101,15 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 		String tabName;
 
-		if(tab == 0) {
+		if (tab == ABOUT_TAB) {
 			tabName = "about";
-		} else if(tab == 1) {
+		} else if (tab == HISTORY_TAB) {
 			tabName = "history";
 		} else {
 			tabName = "metadata";
 		}
 
-		selectTab(tab);
+		clickTab(tab);
 		verifySelectedTab(tabName);
 		refreshPage();
 		verifySelectedTab(tabName);
@@ -108,6 +134,11 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 	public void verifyEmbeddedVideoIsPresent() {
 		waitForElementByElement(fileEmbedded);
+		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
+	}
+
+	public void verifyEmptyFilePage() {
+		waitForElementByElement(noFileText);
 		PageObjectLogging.log("verifyEmbeddedVideoIsPresent", "Verified embedded video is visible", true);
 	}
 
@@ -193,5 +224,29 @@ public class FilePagePageObject extends WikiBasePageObject {
 		}
 
 		Assertion.assertStringContains(embedCode, autoplayStr);
+	}
+
+	public void replaceVideo(String url) {
+		waitForElementByElement(reuploadLink);
+		scrollAndClick(reuploadLink);
+
+		uploadFileURL.sendKeys(url);
+		PageObjectLogging.log("replaceVideo", url + " typed into url field", true);
+
+		waitForElementByElement(addButton);
+		scrollAndClick(addButton);
+		PageObjectLogging.log("replaceVideo", "add url button clicked", true, driver);
+	}
+
+	public void verifyVersionCountAtLeast( int count ) {
+		Assertion.assertTrue( historyDeleteLinks.size() - 1 >= count, "Version count is at least " + count );
+	}
+
+	public DeletePageObject deleteVersion( int num ) {
+		scrollAndClick(historyDeleteLinks.get(num - 1));
+
+		PageObjectLogging.log("deletePage", "delete page opened", true);
+
+		return new DeletePageObject(driver);
 	}
 }

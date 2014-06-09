@@ -32,10 +32,6 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 		private WebElement positionLayoutCenter;
 		@FindBy(css="#VET_LayoutRightBox label")
 		private WebElement positionLayoutRight;
-		@FindBy(css=".vet-style-label.VideoEmbedThumbOption")
-		private WebElement styleWithCaption;
-		@FindBy(css=".vet-style-label.VideoEmbedNoThumbOption")
-		private WebElement styleWithoutCaption;
 		@FindBy(css="#VideoEmbedName")
 		private WebElement videoName;
 		@FindBy(css=".input-group.button-group input")
@@ -64,18 +60,6 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 		public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver,  this);
-	}
-
-	public void adjustStyle(StyleVideo style) {
-		switch (style) {
-		case caption:
-			styleWithCaption.click();
-			break;
-		case nocaption:
-			styleWithoutCaption.click();
-			break;
-		}
-		PageObjectLogging.log("adjustStyle", "style selected " + style.toString(), true);
 	}
 
 	public String getVideoName(){
@@ -192,15 +176,6 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 	public void verifyCaption(String captionDesired) {
 		String caption = captionField.getAttribute("value");
 		Assertion.assertEquals(captionDesired, caption);
-	}
-
-	public void verifyNoCaption() {
-		waitForElementByElement(styleWithoutCaption);
-		WebElement styleClass = styleWithoutCaption.findElement(
-				By.xpath("./..")
-		);
-		waitForValueToBePresentInElementsAttributeByElement(styleClass, "class", "selected");
-		PageObjectLogging.log("verifyNoCaption", "no caption option verified", true);
 	}
 
 	public void verifyNameNotEditable() {

@@ -63,15 +63,15 @@
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumThreadTests"/>
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.ShareToolbarTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.VetAddingVideoTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.Providers.VetProvidersTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.Suggestions.VideoSuggestionsTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetArticleCommentsTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetArticlePlaceholderTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.AddVideo.VetSpecialVideosTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.Modal.VetModalAlignmentTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.Modal.VetModalCaptionTests"/>
-			<class name="com.wikia.webdriver.TestCases.VideoTests.Modal.VetModalWidthTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.VetAddingVideoTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.Providers.VetProvidersTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.Suggestions.VideoSuggestionsTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.AddVideo.VetArticleCommentsTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.AddVideo.VetArticlePlaceholderTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.AddVideo.VetSpecialVideosTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.Modal.VetModalAlignmentTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.Modal.VetModalCaptionTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.Modal.VetModalWidthTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.CrossWikiSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.SearchTests.IntraWikiSearchTests"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.ForumNotificationsTests"/>
@@ -81,7 +81,7 @@
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsThreadCreatorTests"/>
 			<class name="com.wikia.webdriver.TestCases.NotificationsTests.MessageWallNotifications.MessageWallNotificationsThreadParticipantTests"/>
 			<class name="com.wikia.webdriver.TestCases.WamPageTests.WamPageTests"/>
-			<class name="com.wikia.webdriver.TestCases.LightboxTests.LightboxTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.LightboxTests.LightboxTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FilePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdminDashboardTests.EditingLocalCssTests"/>
 			<class name="com.wikia.webdriver.TestCases.EditHubTests.EditHubTests"/>
@@ -134,6 +134,8 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.LicensedVideoSwap"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.VideosPageTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ClicktrackingArticleEditModeTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.VideosModule.VideosModuleTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoHomePageTests"/>
 		</classes>
 	</test>
 </suite>
