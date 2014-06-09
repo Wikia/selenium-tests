@@ -38,7 +38,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickBold();
@@ -52,7 +52,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickItalic();
@@ -66,7 +66,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickInternalLink();
@@ -80,7 +80,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickExternalLink();
@@ -94,7 +94,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickLvl2Headline();
@@ -108,7 +108,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickEmbedFile();
@@ -122,7 +122,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickEmbedMedia();
@@ -136,7 +136,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickMath();
@@ -150,7 +150,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickNowiki();
@@ -164,7 +164,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickSignature();
@@ -178,7 +178,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickHorizontalLine();
@@ -192,7 +192,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		PhotoAddComponentObject photoAddPhoto = source.clickAddPhoto();
@@ -210,7 +210,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddGallery();
@@ -232,7 +232,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddGallery();
@@ -257,7 +257,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		source.clickAddGallery();
@@ -279,7 +279,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.clearSource();
 		VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
@@ -297,7 +297,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.checkMainTools();
 		source.submitArticle();
@@ -309,7 +309,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.checkWikiMarkupTools();
 		source.submitArticle();
@@ -321,7 +321,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		pageName = PageContent.articleNamePrefix+source.getTimeStamp();
 		source.openWikiPage();
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff);
+		login.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
 		source.createNewArticleSource(pageName, 1);
 		source.checkSymbolsTools();
 		source.submitArticle();

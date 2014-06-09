@@ -2,10 +2,10 @@ package com.wikia.webdriver.TestCases.HubsTests;
 
 import java.util.HashMap;
 
-import com.wikia.webdriver.Common.DataProvider.HubsDataProvider;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.DataProvider.HubsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
@@ -87,7 +87,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	 */
 	public void HubsTest_003_VerifyArticleSuggestionWorksProperly(String hubDBName) {
 		HomePageObject home = new HomePageObject(driver);
-		home.logInCookie(credentials.userName2, credentials.password2);
+		home.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		HubBasePageObject hub = home.openHubByUrl(urlBuilder.getUrlForWiki(hubDBName));
 		hub.clickGetPromoted();
 		hub.verifySuggestAVideoOrArticleModalAppeared();
@@ -112,7 +112,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	@Test(enabled = false, groups = { "HubsTest_004", "Hubs"})
 	public void HubsTests_004_VerifyCorporateSlotCollection() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		String wikiCorpSetupURL = urlBuilder.getUrlForWiki(corpWikiName);
 		SpecialManageWikiaHome manageWikia = base.openSpecialManageWikiaHomePage(wikiCorpSetupURL);
 		HashMap<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
