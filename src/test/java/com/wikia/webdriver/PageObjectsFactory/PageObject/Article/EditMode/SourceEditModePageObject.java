@@ -79,6 +79,7 @@ public class SourceEditModePageObject extends EditMode{
 		PageFactory.initElements(driver, this);
 	}
 
+	@Deprecated
 	public SourceEditModePageObject createNewArticleSource(String pageName, int layoutNum){
 		getUrl(Global.DOMAIN+"index.php?title="+pageName+"&action=edit&useFormat="+layoutNum+"&useeditor=source");
 		waitForElementByElement(more);
