@@ -22,8 +22,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 	private String title, description, first, second;
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"Forum_001","Forum","ForumEditMode"})
-	public void forumEditModeTests_001_faq(){
+	@Test(groups = {"ForumEditModeTests_001","Forum","ForumEditMode"})
+	public void ForumEditModeTests_001_faq(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		forumMainPage.openForumMainPage(wikiURL);
@@ -43,8 +43,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 				};
 	}
 
-	@Test(dataProvider="getForumName", groups={"Forum_002", "Forum","ForumEditMode"})
-	public void forumEditModeTests_002_createNewBoard(String name){
+	@Test(dataProvider="getForumName", groups={"ForumEditModeTests_002", "Forum","ForumEditMode"})
+	public void ForumEditModeTests_002_createNewBoard(String name){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		forumMainPage.openForumMainPage(wikiURL);
@@ -56,8 +56,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 		manageForum.verifyForumExists(title, wikiURL);
 	}
 
-	@Test(groups = {"Forum_003","Forum","ForumEditMode"})
-	public void forumEditModeTests_003_deleteBoard(){
+	@Test(groups = {"ForumEditModeTests_003","Forum","ForumEditMode"})
+	public void ForumEditModeTests_003_deleteBoard(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		forumMainPage.openForumMainPage(wikiURL);
@@ -69,8 +69,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 		manageForum.verifyForumNotExists(first, wikiURL);
 	}
 
-	@Test(groups = {"Forum_004","Forum","ForumEditMode"})
-	public void forumEditModeTests_004_editBoard(){
+	@Test(groups = {"ForumEditModeTests_004","Forum","ForumEditMode"})
+	public void ForumEditModeTests_004_editBoard(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		forumMainPage.openForumMainPage(wikiURL);
