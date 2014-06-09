@@ -144,7 +144,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 	public void RTE_011_HLine(){
 		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
-		source = article.openCurrectArticleSourceMode();
+		SourceEditModePageObject source = article.openCurrectArticleSourceMode();
 		source.clickHorizontalLine();
 		source.checkSourceContent("\n----\n");
 		source.submitArticle();
