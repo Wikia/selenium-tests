@@ -501,11 +501,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideoName", "video has expected name", true);
 	}
 
-	public void verifyVideoNoCaption() {
-		Assertion.assertTrue(!checkIfElementInElement("figcaption", videoThumbnail));
-		PageObjectLogging.log("verifyVideoNoCaption", "video has no caption", true);
-	}
-
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
 		waitForElementByElement(videoAddPlaceholder);
 		scrollAndClick(videoAddPlaceholder);

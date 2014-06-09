@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
@@ -34,6 +35,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private List<WebElement> bullList;
 	@FindBy(css=".ve-init-mw-viewPageTarget-surface")
 	private WebElement veEditorSurface;
+	@FindBy(css=".image.video.video-thumbnail.medium")
+	private WebElement mediaNode;
 
 	public void typeTextArea(String text) {
 		waitForElementVisibleByElement(editArea);
@@ -89,5 +92,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		VisualEditorSaveChangesDialog save = clickPublishButton();
 		save.savePage();
 		return new ArticlePageObject(driver);
+	}
+
+	public void verifyVideo() {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
 	}
 }

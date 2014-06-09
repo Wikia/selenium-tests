@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.wikia.webdriver.TestCases.VideoTests.Suggestions;
+package com.wikia.webdriver.TestCases.MediaTests.Suggestions;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;

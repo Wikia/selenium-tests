@@ -64,7 +64,7 @@ public class BlogTests extends NewTestTemplate{
 	}
 
 	@Test(groups = { "BlogTests_003", "BlogTests"})
-	public void BlogTests_003_editFromProfile_QAART_360() {
+	public void BlogTests_003_editFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		String blogContent = PageContent.blogContent + base.getTimeStamp();
@@ -72,7 +72,7 @@ public class BlogTests extends NewTestTemplate{
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		String blogTitle = blogPage.getBlogName();
-		VisualEditModePageObject visualEditMode = blogPage.editArticleInRTEUsingDropdown();
+		VisualEditModePageObject visualEditMode = blogPage.openCKModeWithMainEditButton();
 		visualEditMode.addContent(blogContent);
 		visualEditMode.submitArticle();
 		blogPage.verifyBlogTitle(blogTitle);

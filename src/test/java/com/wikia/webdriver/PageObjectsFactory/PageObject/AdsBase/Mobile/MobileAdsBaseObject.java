@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Mobile;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
@@ -27,6 +28,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		super(driver, page);
 		adsComparison = new AdsComparison();
 		imageComparison = new ImageComparison();
+		PageObjectLogging.log("", "Page screenshot", true, driver);
 	}
 
 	@Override
@@ -68,6 +70,42 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		}
 	}
 
+	public void verifyNoAdInSlot(String slotName) {
+		scrollToSlotOnMobile(slotName);
+		WebElement slot = driver.findElement(By.id(slotName));
+		if (!checkIfSlotExpanded(slot)) {
+			if (!slot.isDisplayed()) {
+				PageObjectLogging.log("AdInSlot", "Ad not found in slot as expected", true);
+				return;
+			} else {
+				throw new NoSuchElementException("Slot is displayed, should be hidden");
+			}
+		}
+		throw new NoSuchElementException("Slot expanded, should be collapsed");
+	}
+
+	public void verifySlotExpanded(String slotName) {
+		scrollToSlotOnMobile(slotName);
+		WebElement slot = driver.findElement(By.id(slotName));
+		if (checkIfSlotExpanded(slot)) {
+			PageObjectLogging.log("AdInSlot", "Slot expanded as expecting", true);
+		} else {
+			throw new NoSuchElementException("Slot is collapsed - should be expanded");
+		}
+	}
+
+	public void verifyImgAdLoadedInSlot(String slotName, String expectedImg) {
+		scrollToSlotOnMobile(slotName);
+		WebElement slot = driver.findElement(By.id(slotName));
+		if (checkIfSlotExpanded(slot)) {
+			String foundImg = getSlotImageAd(slot);
+			Assertion.assertEquals(foundImg, expectedImg);
+		} else {
+			throw new NoSuchElementException("Slot is collapsed - should be expanded");
+		}
+		PageObjectLogging.log("AdInSlot", "Ad found in slot", true);
+	}
+
 	private boolean checkIfAdVisibleInSlot(String slotSelector, WebElement slot) {
 		File preSwitch = adsComparison.getMobileSlotScreenshot(slot, driver);
 		adsComparison.hideSlot(slotSelector, driver);
@@ -86,5 +124,14 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 			js.executeScript("$(arguments[0]).css('display', 'none')", smartBanner);
 			waitForElementNotVisibleByElement(smartBanner);
 		}
+	}
+
+	private void scrollToSlotOnMobile(String slotName) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(
+			"var elementY = document.getElementById(arguments[0]).offsetTop;" +
+			"window.scrollTo(0, elementY);",
+			slotName
+		);
 	}
 }
