@@ -89,7 +89,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePageObject;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -993,6 +992,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 
+	@Deprecated
 	public void openWikiPage() {
 		getUrl(Global.DOMAIN + URLsContent.noexternals);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
