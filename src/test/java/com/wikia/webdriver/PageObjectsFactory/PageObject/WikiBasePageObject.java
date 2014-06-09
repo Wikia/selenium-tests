@@ -40,7 +40,6 @@ import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -798,6 +797,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 
+	@Deprecated
 	public String logInCookie(String userName, String password) {
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
