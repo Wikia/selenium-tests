@@ -62,6 +62,8 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	@FindBy(css="div.video-media")
 	private WebElement mediaContainer;
 
+	private final Integer videoWidthLightbox = 737;
+
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxModal);
 		PageObjectLogging.log("verifyLightboxPopup", "Lightbox appeared", true);
@@ -197,7 +199,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	}
 
 	public VideoComponentObject getVideoPlayer() {
-		return new VideoComponentObject(driver, videoContainer);
+		return new VideoComponentObject(driver, videoContainer, videoWidthLightbox);
 	}
 
 }

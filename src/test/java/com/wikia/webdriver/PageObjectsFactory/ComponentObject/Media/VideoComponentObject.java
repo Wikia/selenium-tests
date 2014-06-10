@@ -10,10 +10,17 @@ import org.openqa.selenium.WebElement;
 public class VideoComponentObject extends WikiBasePageObject{
 
 	protected WebElement videoEmbed;
+	protected Integer videoWidth;
 
 	public VideoComponentObject(WebDriver driver, WebElement fileEmbed) {
 		super(driver);
 		videoEmbed = fileEmbed;
+	}
+
+	public VideoComponentObject(WebDriver driver, WebElement fileEmbed, Integer width) {
+		super(driver);
+		videoEmbed = fileEmbed;
+		videoWidth = width;
 	}
 
 	public WebElement getVideoPlayerObject() {
@@ -24,12 +31,12 @@ public class VideoComponentObject extends WikiBasePageObject{
 		return videoEmbed.findElement(By.cssSelector("iframe"));
 	}
 
-	public void verifyVideoEmbedWidth(Integer videoWidth) {
+	public void verifyVideoEmbedWidth() {
 		Assertion.assertEquals(videoEmbed.findElement(By.tagName("div")).getCssValue("width"), videoWidth+"px");
 		PageObjectLogging.log("verifyVideoEmbedWidth", "Width: "+videoWidth, true);
 	}
 
-	public void verifyVideoIframeWidth(Integer videoWidth) {
+	public void verifyVideoIframeWidth() {
 		Assertion.assertEquals(videoEmbed.findElement(By.tagName("iframe")).getAttribute("width"), videoWidth.toString());
 		PageObjectLogging.log("verifyVideoIframeWidth", "Width: "+videoWidth, true);
 	}
@@ -42,13 +49,11 @@ public class VideoComponentObject extends WikiBasePageObject{
 
 	public void verifyVideoOoyalaEmbed() {
 		WebElement container = videoEmbed.findElement(By.tagName("div"));
-
 		String containerId = "ooyalaplayer-";
 		Assertion.assertStringContains(container.getAttribute("id"), containerId);
 
 		WebElement object = container.findElement(By.tagName("object"));
 		Assertion.assertTrue( object.isDisplayed() );
-
 		PageObjectLogging.log("verifyVideoOoyalaEmbed", "Ooyala video is embedded", true);
 	}
 
@@ -65,20 +70,17 @@ public class VideoComponentObject extends WikiBasePageObject{
 	public void verifyVideoIgnEmbed() {
 		String iframeSrc = "http://widgets.ign.com/video/embed/content.html?url=";
 		Assertion.assertStringContains(getVideoPlayerIframe().getAttribute("src"), iframeSrc);
-
 		PageObjectLogging.log("verifyVideoIgnEmbed", "IGN video is embedded", true);
 	}
 
 	public void verifyVideoAnyclipEmbed() {
 		WebElement container = videoEmbed.findElement(By.tagName("div"));
-
 		String containerId = "ACPContainer0";
 		Assertion.assertStringContains(container.getAttribute("id"), containerId);
 
 		WebElement object = container.findElement(By.tagName("object"));
 		Assertion.assertTrue( object.isDisplayed() );
 		Assertion.assertStringContains(getVideoPlayerObject().getAttribute("value"), object.getAttribute("id"));
-
 		PageObjectLogging.log("verifyVideoAnyclipEmbed", "Anyclip video is embedded", true);
 	}
 

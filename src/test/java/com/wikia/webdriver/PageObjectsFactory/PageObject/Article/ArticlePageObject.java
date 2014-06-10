@@ -98,6 +98,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement tableOfContentsShowHideButton;
 	@FindBy(css="#mw-content-text .video-thumbnail")
 	protected WebElement videoThumbnail;
+	@FindBys(@FindBy(css="#mw-content-text .video-thumbnail"))
+	protected List<WebElement> videoThumbnailList;
 	@FindBy(css="#mw-content-text .article-thumb")
 	protected WebElement videoThumbnailWrapper;
 	@FindBy(css="#mw-content-text .inline-video")
@@ -153,6 +155,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	final String deleteButtonSelector = ".article-comm-delete";
 	final String commentAuthorLink = ".edited-by";
 	final String replyCommentSelector = ".article-comm-reply";
+
+	final Integer minInlineVideoSize = 400;
 
 	String editCategorySelector =
 			"li[data-name='%categoryName%'] li.editCategory > img";
@@ -418,7 +422,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyVideoInline() {
 		waitForElementByElement(videoInline);
-		PageObjectLogging.log("verifyVideoInline", "Inline video is visible", true);
+		PageObjectLogging.log("verifyVideoInline", "Video is visible", true);
 	}
 
 	public void verifyVideoAutoplay(String providerName) {
@@ -491,8 +495,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertStringContains(videoClass, position);
 	}
 
-	public Integer getVideoWidth() {
-		int videoWidth = Integer.parseInt(videoThumbnail.findElement(
+	public Integer getVideoWidth(WebElement thumbnail) {
+		int videoWidth = Integer.parseInt(thumbnail.findElement(
 			By.tagName("img")
 		).getAttribute("width"));
 		PageObjectLogging.log("getVideoWidth", "Video width is "+videoWidth, true);
@@ -500,7 +504,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideoWidth(int widthDesired) {
-		int videoWidth = getVideoWidth();
+		int videoWidth = getVideoWidth(videoThumbnail);
 		Assertion.assertNumber(
 			widthDesired,
 			videoWidth,
@@ -701,19 +705,47 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new LightboxComponentObject(driver);
 	}
 
-	public LightboxComponentObject clickThumbnailVideo() {
+	public VideoComponentObject clickThumbnailVideo(String providerName) {
+		VideoComponentObject video;
+		if ( getVideoWidth(videoThumbnail) > minInlineVideoSize ) {
+			video = clickThumbnailVideoInline();
+			verifyVideoAutoplay(providerName);
+		} else {
+			LightboxComponentObject lightbox = clickThumbnailVideoLightbox();
+			lightbox.verifyLightboxVideo();
+			lightbox.verifyVideoAutoplay(providerName);
+			video = lightbox.getVideoPlayer();
+		}
+		return video;
+	}
+
+	public LightboxComponentObject clickThumbnailVideoLightbox() {
 		waitForElementClickableByElement(videoThumbnail);
 		videoThumbnail.click();
-		PageObjectLogging.log("clickThumbnailVideo", "Thumbnail video is clicked", true);
+		PageObjectLogging.log("clickThumbnailVideoLightbox", "Video thumbnail is clicked", true);
 		return new LightboxComponentObject(driver);
 	}
 
 	public VideoComponentObject clickThumbnailVideoInline() {
-		waitForElementClickableByElement(videoThumbnail);
-		videoThumbnail.click();
-		PageObjectLogging.log("clickThumbnailVideoInline", "Thumbnail video is clicked", true);
+		WebElement thumbnail = getThumbnailVideoInline();
+		waitForElementClickableByElement(thumbnail);
+		thumbnail.click();
+		PageObjectLogging.log("clickThumbnailVideoInline", "Video thumbnail is clicked", true);
 		verifyVideoInline();
-		return new VideoComponentObject(driver, videoInline);
+		Integer videoWidth = getVideoWidth(thumbnail);
+		return new VideoComponentObject(driver, videoInline, videoWidth);
+	}
+
+	public WebElement getThumbnailVideoInline() {
+		for (WebElement thumbnail : videoThumbnailList) {
+			Integer width = getVideoWidth(thumbnail);
+			if(width > minInlineVideoSize) {
+				PageObjectLogging.log("getThumbnailVideoInline", "Video thumbnail found", true);
+				return thumbnail;
+			}
+		}
+		PageObjectLogging.log("getThumbnailVideoInline", "Video thumbnail not found", true);
+		return null;
 	}
 
 	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {

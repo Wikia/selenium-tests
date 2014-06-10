@@ -16,9 +16,6 @@ import org.testng.annotations.Test;
 public class PlayingVideoTests extends NewTestTemplate {
 
 	WikiBasePageObject base;
-	String wikiURL;
-
-	private final int videoWidthLightbox = 737;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_Preferred() {
@@ -29,62 +26,64 @@ public class PlayingVideoTests extends NewTestTemplate {
 	// Test: Ooyala video in lightbox or inline
 	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001" })
 	public void PlayingVideoTests_001_ooyala() {
-		VideoComponentObject video;
-
 		String providerName = "ooyala";
 		String articleName = "VideoOoyala";
 
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		article.verifyVideo();
 
-		Integer videoWidth = article.getVideoWidth();
-		if ( videoWidth > 400 ) {
-			video = article.clickThumbnailVideoInline();
-			article.verifyVideoAutoplay(providerName);
-		} else {
-			LightboxComponentObject lightbox = article.clickThumbnailVideo();
-			lightbox.verifyLightboxVideo();
-			lightbox.verifyVideoAutoplay(providerName);
-			video = lightbox.getVideoPlayer();
-			videoWidth = videoWidthLightbox;
-		}
+		VideoComponentObject video = article.clickThumbnailVideo(providerName);
+		video.verifyVideoEmbedWidth();
+		video.verifyVideoOoyalaAgeGate();
+		video.verifyVideoObjectVisible();
+		video.verifyVideoOoyalaEmbed();
+	}
 
-		video.verifyVideoEmbedWidth(videoWidth);
+	// Test: Ooyala video in inline
+	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002" })
+	public void PlayingVideoTests_002_ooyala() {
+		String providerName = "ooyala";
+		String articleName = "VideoOoyala";
+
+		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
+		article.verifyVideo();
+
+		VideoComponentObject video = article.clickThumbnailVideoInline();
+		article.verifyVideoAutoplay(providerName);
+		video.verifyVideoEmbedWidth();
 		video.verifyVideoOoyalaAgeGate();
 		video.verifyVideoObjectVisible();
 		video.verifyVideoOoyalaEmbed();
 	}
 
 	// Test: Ooyala video in lightbox
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002" })
-	public void PlayingVideoTests_002_ooyala() {
+	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_003" })
+	public void PlayingVideoTests_003_ooyala() {
 		int itemNumber = 0;
 		String providerName = "ooyala";
 		String queryString = "provider="+providerName;
 
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
-
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxVideo();
 		lightbox.verifyVideoAutoplay(providerName);
 
 		VideoComponentObject video = lightbox.getVideoPlayer();
-		video.verifyVideoEmbedWidth(videoWidthLightbox);
+		video.verifyVideoEmbedWidth();
 		video.verifyVideoOoyalaAgeGate();
 		video.verifyVideoObjectVisible();
 		video.verifyVideoOoyalaEmbed();
 	}
 
 	// Test: IGN video in lightbox
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_003" })
-	public void PlayingVideoTests_003_ign() {
+	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004" })
+	public void PlayingVideoTests_004_ign() {
 		int itemNumber = 0;
 		String providerName = "ign";
 		String queryString = "provider="+providerName;
 
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
-
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxVideo();
@@ -92,26 +91,25 @@ public class PlayingVideoTests extends NewTestTemplate {
 
 		VideoComponentObject video = lightbox.getVideoPlayer();
 		video.verifyVideoIframeVisible();
-		video.verifyVideoIframeWidth(videoWidthLightbox);
+		video.verifyVideoIframeWidth();
 		video.verifyVideoIgnEmbed();
 	}
 
 	// Test: Anyclip video in lightbox
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004" })
-	public void PlayingVideoTests_004_anyclip() {
+	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_005" })
+	public void PlayingVideoTests_005_anyclip() {
 		int itemNumber = 0;
 		String providerName = "anyclip";
 		String queryString = "provider="+providerName;
 
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
-
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxVideo();
 		lightbox.verifyVideoAutoplay(providerName);
 
 		VideoComponentObject video = lightbox.getVideoPlayer();
-		video.verifyVideoEmbedWidth(videoWidthLightbox);
+		video.verifyVideoEmbedWidth();
 		video.verifyVideoObjectVisible();
 		video.verifyVideoAnyclipEmbed();
 	}
