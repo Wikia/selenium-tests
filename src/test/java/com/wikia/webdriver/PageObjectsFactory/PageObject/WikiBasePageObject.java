@@ -893,13 +893,6 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
-
-	@Deprecated
-	public void openWikiPage() {
-		getUrl(Global.DOMAIN + URLsContent.noexternals);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
-	}
-
 	public void openWikiPage(String wikiURL) {
 		getUrl(wikiURL);
 		PageObjectLogging.log("openWikiPage", "Wiki page is opened", true);
