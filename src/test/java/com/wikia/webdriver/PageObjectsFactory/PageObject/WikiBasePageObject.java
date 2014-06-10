@@ -445,6 +445,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
+		disableOptimizely();
 		WebElement sectionEditButton = sectionEditButtons.get(section);
 		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
@@ -1107,6 +1108,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
+		disableOptimizely();
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
@@ -1183,7 +1185,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(veToolMenu);
 	}
 
-	private void disableOptimizely() {
+	public void disableOptimizely() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window['optimizely'].push(['disable']);");
 	}
