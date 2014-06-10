@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
@@ -60,6 +61,8 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	protected WebElement closeModalButton;
 	@FindBy(css="div.video-media")
 	private WebElement mediaContainer;
+
+	private final Integer videoWidthLightbox = 737;
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxModal);
@@ -188,6 +191,15 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	public void verifyCarouselLeftDisabled() {
 		waitForElementByElement(carouselLeftDisabled);
 		PageObjectLogging.log("verifyCarouselLeftDisabled", "carousel left button is disabled", true);
+	}
+
+	public void verifyVideoAutoplay(String providerName) {
+		VideoComponentObject video = new VideoComponentObject(driver, videoContainer);
+		video.verifyVideoAutoplay(providerName, true);
+	}
+
+	public VideoComponentObject getVideoPlayer() {
+		return new VideoComponentObject(driver, videoContainer, videoWidthLightbox);
 	}
 
 }
