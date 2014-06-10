@@ -444,7 +444,6 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditorPageObject(driver);
 	}
 
-
 	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
 		WebElement sectionEditButton = sectionEditButtons.get(section);
 		waitForElementClickableByElement(sectionEditButton);
@@ -1186,6 +1185,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private void disableOptimizely() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("optimizely.disable;");
+		js.executeScript("window['optimizely'].push(['disable']);");
 	}
 }
