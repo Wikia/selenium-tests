@@ -437,7 +437,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
-		disableOptimizely();
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
@@ -445,7 +444,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
-		disableOptimizely();
 		WebElement sectionEditButton = sectionEditButtons.get(section);
 		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
@@ -1108,7 +1106,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
-		disableOptimizely();
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
