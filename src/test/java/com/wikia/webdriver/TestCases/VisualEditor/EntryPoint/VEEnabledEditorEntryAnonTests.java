@@ -31,6 +31,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 public class VEEnabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 
 	WikiBasePageObject base;
+	String wikiURL;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
