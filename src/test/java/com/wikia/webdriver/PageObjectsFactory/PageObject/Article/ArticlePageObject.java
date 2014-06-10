@@ -516,8 +516,16 @@ public class ArticlePageObject extends WikiBasePageObject {
 		String caption = videoThumbnailWrapper.findElement(
 			By.className("caption")
 		).getText();
-		Assertion.assertStringContains(caption,captionDesired);
-		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
+		Assertion.assertStringContains(caption, captionDesired);
+		PageObjectLogging.log("verifyVideoCaption", "video has expected caption", true);
+	}
+
+	public void verifyVideoName(String nameDesired) {
+		String name = videoThumbnailWrapper.findElement(
+			By.className("title")
+		).getText();
+		Assertion.assertStringContains(name, nameDesired);
+		PageObjectLogging.log("verifyVideoName", "video has expected name", true);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){

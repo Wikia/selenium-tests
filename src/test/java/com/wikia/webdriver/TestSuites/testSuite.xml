@@ -135,6 +135,8 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.LicensedVideoSwap"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.VideosPageTests"/>
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ClicktrackingArticleEditModeTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.VideosModule.VideosModuleTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoHomePageTests"/>
 		</classes>
 	</test>
 </suite>

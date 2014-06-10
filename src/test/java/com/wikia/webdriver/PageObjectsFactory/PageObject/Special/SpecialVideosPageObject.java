@@ -24,6 +24,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
  */
 public class SpecialVideosPageObject extends SpecialPageObject {
 
+	@FindBy(css = ".WikiaPageHeader h1")
+	private WebElement h1Header;
 	@FindBy(css = "a.button.addVideo")
 	private WebElement addVideo;
 	@FindBy(css = ".special-videos-grid li:nth-child(1)")
@@ -40,6 +42,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	private WebElement deleteConfirmButton;
 	@FindBy(css = VideoContent.youtubeVideo2Selector)
 	private WebElement newestVideo2;
+	@FindBy(css = "#sorting-dropdown")
+	private WebElement sortDropdown;
 
 	private int refreshLimit = 3;
 
@@ -69,9 +73,25 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 		return new WatchPageObject(driver);
 	}
 
-	public VetAddVideoComponentObject clickAddAVideo() {
+	protected void verifyH1() {
+		waitForElementByElement(h1Header);
+	}
+
+	protected void verifyNewestVideo() {
+		waitForElementByElement(newestVideo);
+	}
+
+	protected void verifyAddVideoButton() {
 		waitForElementByElement(addVideo);
 		waitForElementClickableByElement(addVideo);
+	}
+
+	protected void verifySortDropdown() {
+		waitForElementByElement(sortDropdown);
+	}
+
+	public VetAddVideoComponentObject clickAddAVideo() {
+		verifyAddVideoButton();
 		scrollAndClick(addVideo);
 		PageObjectLogging.log("clickAddAVideo", "click on 'add a video' button", true, driver);
 		return new VetAddVideoComponentObject(driver);
@@ -132,4 +152,14 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 				true);
 	}
 
+	public void verifyElementsOnPage() {
+		verifyH1();
+		PageObjectLogging.log("verifyElementsOnPage", "verify that H1 is present", true);
+		verifyAddVideoButton();
+		PageObjectLogging.log("verifyElementsOnPage", "verify that Add Video button is present", true);
+		verifySortDropdown();
+		PageObjectLogging.log("verifyElementsOnPage", "verify that sort dropdown is present", true);
+		verifyNewestVideo();
+		PageObjectLogging.log("verifyElementsOnPage", "verify that there is at least one video present", true);
+	}
 }
