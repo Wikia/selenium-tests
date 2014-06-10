@@ -40,7 +40,6 @@ import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -90,7 +89,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.Pre
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePageObject;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -439,11 +437,13 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
+		disableOptimizely();
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
 		return new VisualEditorPageObject(driver);
 	}
+
 
 	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
 		WebElement sectionEditButton = sectionEditButtons.get(section);
@@ -1182,5 +1182,10 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(veMode);
 		waitForElementNotVisibleByElement(focusMode);
 		waitForElementNotVisibleByElement(veToolMenu);
+	}
+
+	private void disableOptimizely() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("optimizely.disable;");
 	}
 }
