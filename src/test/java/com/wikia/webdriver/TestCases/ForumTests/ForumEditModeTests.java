@@ -70,7 +70,7 @@ public class ForumEditModeTests extends NewTestTemplate{
 	}
 
 	@Test(groups = {"Forum_004","Forum","ForumEditMode"})
-	public void forumEditModeTests_004_editBoard(){
+	public void forumEditModeTests_004_editBoard_MAIN_2407(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		forumMainPage.openForumMainPage(wikiURL);
