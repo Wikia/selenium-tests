@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage;
 
 import java.util.List;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +11,7 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 
 /**
  *
@@ -239,7 +239,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVersionCountAtLeast( int count ) {
-		Assertion.assertTrue( historyDeleteLinks.size() - 1 >= count, "Version count is at least " + count );
+		Assertion.assertTrue( historyDeleteLinks.size() >= count, "Version count is at least " + count );
 	}
 
 	public DeletePageObject deleteVersion( int num ) {
