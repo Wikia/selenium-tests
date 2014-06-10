@@ -37,7 +37,6 @@ public class VEEnabledEditorEntryAnonTests extends NewTestTemplateBeforeClass {
 	public void setup_VEPreferred() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
 		base = new WikiBasePageObject(driver);
-		base.disableOptimizely();
 	}
 
 	@Test(
