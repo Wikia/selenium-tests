@@ -25,7 +25,8 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	@Test(groups = { "ShareToolbar001", "Toolbar" , "Smoke4"})
 	public void ShareToolbar001_VerifyingElements_CON_526() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName2, credentials.password2);
+		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		base.openRandomArticle(wikiURL);
 		ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
 		share.clickShareButton();
 		share.verifyTwitterIframeVisibility();
@@ -36,7 +37,8 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	@Test(groups = { "ShareToolbar002", "Toolbar" })
 	public void ShareToolbar002_VerifyingTwitterModal_CON_526() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName2, credentials.password2);
+		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		base.openRandomArticle(wikiURL);
 		ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
 		share.clickShareButton();
 		share.navigteTweetButtonUrl();
@@ -47,7 +49,8 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	@Test(enabled = false, groups = { "ShareToolbar003", "Toolbar" })
 	public void ShareToolbar003_VerifyingFBModal_CON_526() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName2, credentials.password2);
+		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		base.openRandomArticle(wikiURL);
 		ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
 		share.clickShareButton();
 		share.clickFBLikeButton();
@@ -68,7 +71,8 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	@Test(groups = { "ShareToolbar005", "Toolbar" })
 	public void ShareToolbar005_VerifyingEmailModalElements_CON_526() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName2, credentials.password2);
+		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
+		base.openRandomArticle(wikiURL);
 		ShareToolbarComponentObject share = new ShareToolbarComponentObject(driver);
 		share.clickShareButton();
 		share.clickEmailButton();
