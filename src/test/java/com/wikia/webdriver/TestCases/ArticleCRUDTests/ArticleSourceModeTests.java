@@ -29,6 +29,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Source
 
 /**
  * @author Karol 'kkarolk' Kujawiak
+ * @ownership Contribution
  */
 public class ArticleSourceModeTests extends NewTestTemplate{
 
