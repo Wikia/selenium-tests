@@ -25,6 +25,12 @@ public class PreferencesPageObject extends WikiBasePageObject{
 	private List<WebElement> tabs;
 	@FindBy(css="#mw-htmlform-email-me-v2 td.mw-input")
 	private List<WebElement> emailMeSectionRows;
+	@FindBy(css=".mw-htmlform-submit")
+	private WebElement saveButton;
+	@FindBy(css=".mw-prefs-buttons a")
+	private WebElement restoreDefaultLink;
+	@FindBy(css=".global-notification.confirm")
+	private WebElement saveNotfication;
 
 	public enum tabNames{
 		Info, Email, Editing, Under, Facebook
@@ -71,5 +77,16 @@ public class PreferencesPageObject extends WikiBasePageObject{
 		scrollAndClick(facebookDisconnect);
 		waitForElementByElement(disconnectDone);
 		PageObjectLogging.log("disconnectFromFacebook", "account has been disconnected from Facebook", true);
+	}
+
+	public PreferencesPageObject clickSaveButton() {
+		waitForElementClickableByElement(saveButton);
+		saveButton.click();
+		return new PreferencesPageObject(driver);
+	}
+
+	public void clickRestoreLink() {
+		waitForElementClickableByElement(restoreDefaultLink);
+		restoreDefaultLink.click();
 	}
 }
