@@ -69,8 +69,9 @@ public class ForumEditModeTests extends NewTestTemplate{
 		manageForum.verifyForumNotExists(first, wikiURL);
 	}
 
-	@Test(groups = {"Forum_004","Forum","ForumEditMode"})
-	public void forumEditModeTests_004_editBoard_MAIN_2407(){
+	@Test(	groups = {"Forum_004","Forum","ForumEditMode"},
+			enabled = false	)
+	public void forumEditModeTests_004_editBoard_CONN_546(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		forumMainPage.openForumMainPage(wikiURL);
