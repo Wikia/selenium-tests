@@ -327,6 +327,12 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialVideosPageObject(driver);
 	}
 
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL, String queryString){
+		String url = urlBuilder.appendQueryStringToURL(wikiURL+URLsContent.specialVideos, queryString);
+		getUrl(url);
+		return new SpecialVideosPageObject(driver);
+	}
+
 	public SpecialVideosPageObject openSpecialVideoPageMostRecent(String wikiURL){
 		getUrl(wikiURL+URLsContent.specialVideos+URLsContent.mostRecent);
 		return new SpecialVideosPageObject(driver);

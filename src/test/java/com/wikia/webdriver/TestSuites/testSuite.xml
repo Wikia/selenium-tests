@@ -65,6 +65,7 @@
 			<class name="com.wikia.webdriver.TestCases.ToolbarTests.ShareToolbarTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VetAddingVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.Providers.VetProvidersTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.Providers.PlayingVideoTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.Suggestions.VideoSuggestionsTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.AddVideo.VetArticleCommentsTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.AddVideo.VetArticlePlaceholderTests"/>
