@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 public class EditingPreferencesPageObject extends PreferencesPageObject {
 
 	public EditingPreferencesPageObject(WebDriver driver) {
@@ -20,21 +22,11 @@ public class EditingPreferencesPageObject extends PreferencesPageObject {
 	@FindBy(css="#mw-htmlform-editing-experience .mw-htmlform-field-HTMLSelectField .mw-input")
 	private WebElement dropdown;
 
-	public void selectPreferredEditor(int option) {
-		waitForElementByElement(preferredEditorDropdown);
+	public void selectPreferredEditor(String value) {
+		waitForElementClickableByElement(preferredEditorDropdown);
 		Select select = new Select(preferredEditorDropdown);
-		select.selectByIndex(option);
-//		waitForElementClickableByElement(preferredEditorDropdown);
-//		WebElement selected = preferredEditorOptions.get(option);
-//		dropdown.click();
-//		preferredEditorDropdown.click();
-//		selected.click();
-//		Actions actions = new Actions(driver);
-//		actions
-//			.click(preferredEditorDropdown)
-//			.click(selected)
-//			.build()
-//			.perform();
+		select.selectByValue(value);
+		PageObjectLogging.log("selectPreferredEditor", "Selected " + value + " from preference", true);
 	}
 
 }

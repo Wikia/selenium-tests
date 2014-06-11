@@ -82,11 +82,18 @@ public class PreferencesPageObject extends WikiBasePageObject{
 	public PreferencesPageObject clickSaveButton() {
 		waitForElementClickableByElement(saveButton);
 		saveButton.click();
+		PageObjectLogging.log("clickSaveButton", "Save button clicked", true);
 		return new PreferencesPageObject(driver);
 	}
 
 	public void clickRestoreLink() {
 		waitForElementClickableByElement(restoreDefaultLink);
 		restoreDefaultLink.click();
+		PageObjectLogging.log("clickRestoreLink", "Restore Deault Link clicked", true);
+	}
+
+	public void verifySaveNotification() {
+		waitForElementVisibleByElement(saveNotfication);
+		PageObjectLogging.log("verifySaveNotification", "Restore Deault Link clicked", true);
 	}
 }
