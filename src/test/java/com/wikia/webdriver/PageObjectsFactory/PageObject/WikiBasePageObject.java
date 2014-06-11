@@ -1108,7 +1108,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openNewArticleEditModeVisual(String wikiURL) {
-		disableOptimizely();
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
