@@ -17,6 +17,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Robert 'rochan' Chan
+ * @ownership Contribution
  *
  * VE-1202 Select VE from editor preference page then clicking on main article edit would launch VE
  * VE-1202 Select CK from editor preference page then clicking on main article edit would launch CK
