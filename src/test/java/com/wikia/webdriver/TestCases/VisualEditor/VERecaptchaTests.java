@@ -25,7 +25,6 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setupd() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
 		base = new WikiBasePageObject(driver);
 	}
 
@@ -39,7 +38,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.typeTextArea("http://www.wikia.com");
+		ve.typeTextArea(URLsContent.externalURL);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		saveDialog.verifyRecaptchaIsNotVisible();
 		saveDialog.clickSaveWithRecaptcha();
