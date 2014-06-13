@@ -44,18 +44,27 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		return new ArticlePageObject(driver);
 	}
 
-	public void verifyIsRecaptcha() {
-		waitForElementByElement(recaptchaArea);
-		PageObjectLogging.log("verifyIsRecaptcha", "ReCAPTCHA is showing on the dialog", true);
+	private void verifyRecaptchaIsVisible() {
+		waitForElementVisibleByElement(recaptchaArea);
+		PageObjectLogging.log("verifyRecaptchaIsVisible", "ReCAPTCHA is showing on the dialog", true, driver);
+	}
+
+	public void verifyRecaptchaIsNotVisible() {
+		waitForElementVisibleByElement(saveDialogIFrame);
+		driver.switchTo().frame(saveDialogIFrame);
+		waitForElementNotVisibleByElement(recaptchaArea);
+		PageObjectLogging.log("verifyRecaptchaIsNotVisible", "ReCAPTCHA is not showing on the dialog", true, driver);
+		driver.switchTo().defaultContent();
 	}
 
 	public String getRecaptchaImageSrc() {
 		waitForElementVisibleByElement(saveDialogIFrame);
 		driver.switchTo().frame(saveDialogIFrame);
-		verifyIsRecaptcha();
+		verifyRecaptchaIsVisible();
 		waitForElementByElement(recaptchaImage);
+		String imageSrc = recaptchaImage.getAttribute("src");
 		driver.switchTo().defaultContent();
-		return recaptchaImage.getAttribute("src");
+		return imageSrc;
 	}
 
 	public void clickSaveWithRecaptcha() {
@@ -64,10 +73,12 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		waitForElementClickableByElement(publishButton);
 		publishButton.click();
 		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickSaveWithRecaptcha", "The 2nd Publish Button is clicked", true);
 	}
 
 	public void verifyIsNewRecaptcha(String target) {
 		String current = getRecaptchaImageSrc();
 		Assertion.assertNotEquals(target, current);
+		PageObjectLogging.log("verifyIsNewRecaptcha", "A new ReCAPTCHA appeared", true);
 	}
 }
