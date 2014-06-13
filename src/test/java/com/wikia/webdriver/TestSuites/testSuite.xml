@@ -138,6 +138,7 @@
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideosModule.VideosModuleTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoHomePageTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditingPreferencesTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VERecaptchaTests"/>
 		</classes>
 	</test>
 </suite>
