@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -102,13 +101,24 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	public void copyAndPaste() {
-//		waitForElementClickableByElement(editArea);
+		waitForElementClickableByElement(editArea);
 		editArea.sendKeys("COPYa");
-		WebElement textbox = driver.findElement(By.cssSelector("p.ve-ce-branchNode"));
-		editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-		editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
-		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+//		WebElement textbox = driver.findElement(By.cssSelector("p.ve-ce-branchNode"));
+//		editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+//		editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
+//		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+//		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+//		editArea.sendKeys(
+//			Keys.chord(Keys.COMMAND, "a"),
+//			Keys.chord(Keys.COMMAND, "c"),
+//			Keys.chord(Keys.COMMAND, "v"),
+//			Keys.chord(Keys.COMMAND, "v")
+//		);
+		editArea.sendKeys(Keys.chord(Keys.COMMAND, "a"));
+		editArea.sendKeys(Keys.chord(Keys.COMMAND, "c"));
+		editArea.sendKeys(Keys.chord(Keys.COMMAND, "v"));
+		editArea.sendKeys(Keys.chord(Keys.COMMAND, "v"));
+
 		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
 	}
 
