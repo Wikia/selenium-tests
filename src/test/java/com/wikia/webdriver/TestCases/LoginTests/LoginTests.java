@@ -58,6 +58,5 @@ public class LoginTests extends NewTestTemplate {
 		login = login.openSpecialUserLogin(wikiURL);
 		login.typeInUserName("ABCd");
 		login.copyandpaste();
-		login.loginAndVerify(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 	}
 }

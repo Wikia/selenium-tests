@@ -136,9 +136,13 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	public void copyandpaste() {
 		// TODO Auto-generated method stub
 //		userName.sendKeys(Keys.CONTROL, "a");
-		userName.sendKeys(Keys.COMMAND, "a");
+		userName.sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		userName.sendKeys(Keys.chord(Keys.CONTROL, "c"));
 		userName.sendKeys(Keys.chord(Keys.CONTROL, "v"));
-
+		PageObjectLogging.log(
+			"copyandpaste",
+			"Copy and pasted username",
+			true, driver
+		);
 	}
 }
