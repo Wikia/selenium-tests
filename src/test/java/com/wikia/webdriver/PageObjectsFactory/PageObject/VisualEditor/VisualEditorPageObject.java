@@ -105,10 +105,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 //		waitForElementClickableByElement(editArea);
 //		editArea.sendKeys("COPYa");
 		WebElement textbox = driver.findElement(By.cssSelector("p.ve-ce-branchNode"));
-		editArea.sendKeys(Keys.chord(Keys.COMMAND, "a"));
-		editArea.sendKeys(Keys.chord(Keys.COMMAND, "c"));
-		editArea.sendKeys(Keys.chord(Keys.COMMAND, "v"));
-		editArea.sendKeys(Keys.chord(Keys.COMMAND, "v"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
 	}
 
