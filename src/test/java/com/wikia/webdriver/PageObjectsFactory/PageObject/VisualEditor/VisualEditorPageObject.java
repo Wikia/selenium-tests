@@ -109,7 +109,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		editArea.sendKeys(Keys.chord(Keys.COMMAND, "c"));
 		editArea.sendKeys(Keys.chord(Keys.COMMAND, "v"));
 		editArea.sendKeys(Keys.chord(Keys.COMMAND, "v"));
-		PageObjectLogging.log("copyAndPaste", editArea.getText(), true);
+		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
 	}
 
 	public void pasteCopiedText() {
