@@ -19,12 +19,6 @@ import org.openqa.selenium.WebElement;
  */
 public class Ads71MediaObject extends AdsBaseObject {
 
-	public Ads71MediaObject(WebDriver driver) {
-		super(driver);
-		setSlots();
-		driver.manage().window().setSize(new Dimension(1920, 1080));
-	}
-
 	public Ads71MediaObject(WebDriver driver, String page) {
 		super(driver);
 		getUrl(page);

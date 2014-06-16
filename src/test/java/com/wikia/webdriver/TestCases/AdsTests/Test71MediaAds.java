@@ -29,23 +29,9 @@ public class Test71MediaAds extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="US")
-	@Test (groups={"Ads", "Test71MediaAds_US", "Ads71Media"})
-	public void Test71MediaAds_US() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
-	}
-
 	@GeoEdgeProxy(country="DE")
 	@Test (groups={"Ads", "Test71MediaAds_DE", "Ads71Media"})
 	public void Test71MediaAds_DE() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
-	}
-
-	@GeoEdgeProxy(country="HR")
-	@Test (groups={"Ads", "Test71MediaAds_HR", "Ads71Media"})
-	public void Test71MediaAds_HR() {
 		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
