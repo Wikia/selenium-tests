@@ -139,6 +139,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		userName.sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		userName.sendKeys(Keys.chord(Keys.CONTROL, "c"));
 		userName.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		userName.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		PageObjectLogging.log(
 			"copyandpaste",
 			"Copy and pasted username",
