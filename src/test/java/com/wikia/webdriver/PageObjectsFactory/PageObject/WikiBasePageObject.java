@@ -40,7 +40,6 @@ import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -86,11 +85,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePageObject;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -305,6 +304,12 @@ public class WikiBasePageObject extends BasePageObject {
 		return new PreferencesPageObject(driver);
 	}
 
+	public EditingPreferencesPageObject openSpecialEditingPreferencesPage(String wikiURL) {
+		getUrl(wikiURL+URLsContent.specialEditingPreferences);
+		PageObjectLogging.log("EditingPreferencesPageObject", "Special:Prefereces#mw-prefsection-editing page opened", true);
+		return new EditingPreferencesPageObject(driver);
+	}
+
 	public SpecialPromotePageObject openSpecialPromotePage(String wikiURL){
 		getUrl(wikiURL+URLsContent.specialPromote);
 		PageObjectLogging.log("openSpecialPromotePage", "Special:Promote page opened", true);
@@ -324,6 +329,12 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
 		getUrl(wikiURL+URLsContent.specialVideos);
+		return new SpecialVideosPageObject(driver);
+	}
+
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL, String queryString){
+		String url = urlBuilder.appendQueryStringToURL(wikiURL+URLsContent.specialVideos, queryString);
+		getUrl(url);
 		return new SpecialVideosPageObject(driver);
 	}
 
@@ -439,6 +450,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
+		disableOptimizely();
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
@@ -446,6 +458,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
+		disableOptimizely();
 		WebElement sectionEditButton = sectionEditButtons.get(section);
 		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
@@ -798,103 +811,6 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log("logOut", "user is logged out", true, driver);
 	}
 
-	public String logInCookie(String userName, String password) {
-		try {
-			DefaultHttpClient httpclient = new DefaultHttpClient();
-
-			HttpPost httpPost = new HttpPost(Global.DOMAIN + "api.php");
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-
-			nvps.add(new BasicNameValuePair("action", "login"));
-			nvps.add(new BasicNameValuePair("format", "xml"));
-			nvps.add(new BasicNameValuePair("lgname", userName));
-			nvps.add(new BasicNameValuePair("lgpassword", password));
-
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-
-			HttpResponse response = null;
-
-			response = httpclient.execute(httpPost);
-
-			HttpEntity entity = response.getEntity();
-			String xmlResponse = null;
-
-			xmlResponse = EntityUtils.toString(entity);
-
-			String[] xmlResponseArr = xmlResponse.split("\"");
-			String token = xmlResponseArr[5];
-
-			// System.out.println(token);
-
-			while (xmlResponseArr.length < 11) {// sometimes first request
-				// does
-				// not contain full
-				// information,
-				// in such situation
-				// xmlResponseArr.length <
-				// 11
-				List<NameValuePair> nvps2 = new ArrayList<NameValuePair>();
-
-				nvps2.add(new BasicNameValuePair("action", "login"));
-				nvps2.add(new BasicNameValuePair("format", "xml"));
-				nvps2.add(new BasicNameValuePair("lgname", userName));
-				nvps2.add(new BasicNameValuePair("lgpassword", password));
-				nvps2.add(new BasicNameValuePair("lgtoken", token));
-
-				httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
-					HTTP.UTF_8));
-
-				response = httpclient.execute(httpPost);
-
-				entity = response.getEntity();
-
-				xmlResponse = EntityUtils.toString(entity);
-
-				xmlResponseArr = xmlResponse.split("\"");
-			}
-
-			String domain = (Global.DOMAIN.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "_session', '" + xmlResponseArr[13]
-					+ "', {'domain': '"+domain+"', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "UserName', '" + xmlResponseArr[7]
-					+ "', {'domain': '"+domain+"', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "UserID', '" + xmlResponseArr[5]
-					+ "', {'domain': '"+domain+"', 'path': '/'})");
-			js.executeScript("$.cookie('" + xmlResponseArr[11]
-				+ "Token', '" + xmlResponseArr[9]
-					+ "', {'domain': '"+domain+"' , 'path': '/'})");
-			try {
-				driver.get(Global.DOMAIN + "wiki/Special:Random");
-			} catch (TimeoutException e) {
-				PageObjectLogging.log("loginCookie",
-					"page timeout after login by cookie", true);
-			}
-			verifyUserLoggedIn(userName);
-
-			return xmlResponseArr[11];
-		} catch (UnsupportedEncodingException e) {
-			PageObjectLogging.log("logInCookie",
-				"UnsupportedEncodingException", false);
-			return null;
-		} catch (ClientProtocolException e) {
-			PageObjectLogging.log("logInCookie", "ClientProtocolException",
-				false);
-			return null;
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
 			DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -990,12 +906,6 @@ public class WikiBasePageObject extends BasePageObject {
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-
-	public void openWikiPage() {
-		getUrl(Global.DOMAIN + URLsContent.noexternals);
-		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
 	public void openWikiPage(String wikiURL) {
@@ -1136,15 +1046,15 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	/**
-	 * Refresh the page limit number of times until element appears. Return true of false
+	 * Refresh the page limit number of times until element found by cssSelector appears. Return true of false
 	 * depending on success of finding element.
-	 * @param element
+	 * @param cssSelector
 	 * @param limit
 	 * @return bool
 	 */
-	public boolean refreshUntilElementOnPage(WebElement element, int limit) {
+	public boolean refreshUntilElementOnPage(String cssSelector, int limit) {
 		for (int refreshCount = 0; refreshCount < limit; refreshCount++) {
-			if (checkIfElementOnPage(element)) {
+			if (checkIfElementOnPage(cssSelector)) {
 				return true;
 			}
 			refreshPage();
@@ -1182,5 +1092,10 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(veMode);
 		waitForElementNotVisibleByElement(focusMode);
 		waitForElementNotVisibleByElement(veToolMenu);
+	}
+
+	public void disableOptimizely() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window['optimizely'].push(['disable']);");
 	}
 }

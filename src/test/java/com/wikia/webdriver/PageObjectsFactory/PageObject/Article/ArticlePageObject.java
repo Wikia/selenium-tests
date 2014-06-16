@@ -18,6 +18,7 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.CreateArticleModalComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.ModalWindows.VECreateArticleModalComponentObject;
@@ -97,8 +98,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement tableOfContentsShowHideButton;
 	@FindBy(css="#mw-content-text .video-thumbnail")
 	protected WebElement videoThumbnail;
+	@FindBys(@FindBy(css="#mw-content-text .video-thumbnail"))
+	protected List<WebElement> videoThumbnailList;
 	@FindBy(css="#mw-content-text .article-thumb")
 	protected WebElement videoThumbnailWrapper;
+	@FindBy(css="#mw-content-text .inline-video")
+	protected WebElement videoInline;
 	@FindBy(css=".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
 	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
@@ -150,6 +155,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	final String deleteButtonSelector = ".article-comm-delete";
 	final String commentAuthorLink = ".edited-by";
 	final String replyCommentSelector = ".article-comm-reply";
+
+	final Integer minInlineVideoSize = 400;
 
 	String editCategorySelector =
 			"li[data-name='%categoryName%'] li.editCategory > img";
@@ -413,6 +420,20 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
+	public void verifyVideoInline() {
+		waitForElementByElement(videoInline);
+		PageObjectLogging.log("verifyVideoInline", "Video is visible", true);
+	}
+
+	public void verifyVideoAutoplay(String providerName) {
+		VideoComponentObject video = new VideoComponentObject(driver, videoInline);
+		video.verifyVideoAutoplay(providerName, true);
+	}
+
+	public VideoComponentObject getVideoPlayer() {
+		return new VideoComponentObject(driver, videoInline);
+	}
+
 	private void verifyTableProperty(String propertyName, int propertyValue) {
 		waitForElementByElement(table);
 		Assertion.assertEquals(table.getAttribute(propertyName), Integer.toString(propertyValue));
@@ -474,10 +495,16 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertStringContains(videoClass, position);
 	}
 
-	public void verifyVideoWidth(int widthDesired) {
-		int videoWidth = Integer.parseInt(videoThumbnail.findElement(
+	public Integer getVideoWidth(WebElement thumbnail) {
+		int videoWidth = Integer.parseInt(thumbnail.findElement(
 			By.tagName("img")
 		).getAttribute("width"));
+		PageObjectLogging.log("getVideoWidth", "Video width is "+videoWidth, true);
+		return videoWidth;
+	}
+
+	public void verifyVideoWidth(int widthDesired) {
+		int videoWidth = getVideoWidth(videoThumbnail);
 		Assertion.assertNumber(
 			widthDesired,
 			videoWidth,
@@ -489,8 +516,16 @@ public class ArticlePageObject extends WikiBasePageObject {
 		String caption = videoThumbnailWrapper.findElement(
 			By.className("caption")
 		).getText();
-		Assertion.assertStringContains(caption,captionDesired);
-		PageObjectLogging.log("verifyVideoCaption", "video has caption", true);
+		Assertion.assertStringContains(caption, captionDesired);
+		PageObjectLogging.log("verifyVideoCaption", "video has expected caption", true);
+	}
+
+	public void verifyVideoName(String nameDesired) {
+		String name = videoThumbnailWrapper.findElement(
+			By.className("title")
+		).getText();
+		Assertion.assertStringContains(name, nameDesired);
+		PageObjectLogging.log("verifyVideoName", "video has expected name", true);
 	}
 
 	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
@@ -676,6 +711,49 @@ public class ArticlePageObject extends WikiBasePageObject {
 		thumbnailImageArticle.click();
 		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
 		return new LightboxComponentObject(driver);
+	}
+
+	public VideoComponentObject clickThumbnailVideo(String providerName) {
+		VideoComponentObject video;
+		if ( getVideoWidth(videoThumbnail) > minInlineVideoSize ) {
+			video = clickThumbnailVideoInline();
+			verifyVideoAutoplay(providerName);
+		} else {
+			LightboxComponentObject lightbox = clickThumbnailVideoLightbox();
+			lightbox.verifyLightboxVideo();
+			lightbox.verifyVideoAutoplay(providerName);
+			video = lightbox.getVideoPlayer();
+		}
+		return video;
+	}
+
+	public LightboxComponentObject clickThumbnailVideoLightbox() {
+		waitForElementClickableByElement(videoThumbnail);
+		videoThumbnail.click();
+		PageObjectLogging.log("clickThumbnailVideoLightbox", "Video thumbnail is clicked", true);
+		return new LightboxComponentObject(driver);
+	}
+
+	public VideoComponentObject clickThumbnailVideoInline() {
+		WebElement thumbnail = getThumbnailVideoInline();
+		waitForElementClickableByElement(thumbnail);
+		thumbnail.click();
+		PageObjectLogging.log("clickThumbnailVideoInline", "Video thumbnail is clicked", true);
+		verifyVideoInline();
+		Integer videoWidth = getVideoWidth(thumbnail);
+		return new VideoComponentObject(driver, videoInline, videoWidth);
+	}
+
+	public WebElement getThumbnailVideoInline() {
+		for (WebElement thumbnail : videoThumbnailList) {
+			Integer width = getVideoWidth(thumbnail);
+			if(width > minInlineVideoSize) {
+				PageObjectLogging.log("getThumbnailVideoInline", "Video thumbnail found", true);
+				return thumbnail;
+			}
+		}
+		PageObjectLogging.log("getThumbnailVideoInline", "Video thumbnail not found", true);
+		return null;
 	}
 
 	public VisualEditorPageObject openVEModeWithRedLinks(int linkNumber) {

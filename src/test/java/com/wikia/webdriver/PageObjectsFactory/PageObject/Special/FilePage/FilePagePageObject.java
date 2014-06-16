@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage;
 
 import java.util.List;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,9 @@ import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 
 /**
  *
@@ -150,6 +151,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 	public String getImageUrl() {
 		return fileEmbedded.findElement(By.cssSelector("a")).getAttribute("href");
 	}
+
 	public String getImageThumbnailUrl() {
 		return fileEmbedded.findElement(By.cssSelector("img")).getAttribute("src");
 	}
@@ -175,55 +177,8 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 	public void verifyVideoAutoplay(boolean status) {
 		String providerName = provider.getText().toLowerCase();
-		PageObjectLogging.log("verifyVideoAutoplay", "Provider: "+providerName, true);
-
-		String autoplayStr = "";
-		String embedCode = "";
-		switch (providerName) {
-			case "screenplay":
-				autoplayStr = "autostart=" + status;
-				embedCode = playerObject.getAttribute("value");
-				break;
-			case "ign":
-				autoplayStr = "&autoplay=" + status;
-				embedCode = playerIframe.getAttribute("src");
-				break;
-			case "anyclip":
-				autoplayStr = "&autoPlay=" + status;
-				embedCode = playerObject.getAttribute("value");
-				break;
-			case "youtube":
-				autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
-				embedCode = playerIframe.getAttribute("src");
-				break;
-			case "vimeo":
-				autoplayStr = "?autoplay=" + ((status) ? 1 : 0);
-				embedCode = playerIframe.getAttribute("src");
-				break;
-			case "gamestar":
-			case "hulu":
-			case "dailymotion":
-			case "myvideo":
-			case "snappytv":
-			case "ustream":
-			case "fivemin":
-			case "metacafe":
-			case "movieclips":
-			case "sevenload":
-			case "gametrailers":
-			case "viddler":
-			case "bliptv":
-			case "twitchtv":
-			case "youku":
-				break;
-			// for ooyala videos
-			default:
-				autoplayStr = "&autoplay=" + ((status) ? 1 : 0);
-				embedCode = playerObject.getAttribute("value");
-				break;
-		}
-
-		Assertion.assertStringContains(embedCode, autoplayStr);
+		VideoComponentObject video = new VideoComponentObject(driver, fileEmbedded);
+		video.verifyVideoAutoplay(providerName, status);
 	}
 
 	public void replaceVideo(String url) {
@@ -239,7 +194,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVersionCountAtLeast( int count ) {
-		Assertion.assertTrue( historyDeleteLinks.size() - 1 >= count, "Version count is at least " + count );
+		Assertion.assertTrue( historyDeleteLinks.size() >= count, "Version count is at least " + count );
 	}
 
 	public DeletePageObject deleteVersion( int num ) {
@@ -249,4 +204,5 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 		return new DeletePageObject(driver);
 	}
+
 }

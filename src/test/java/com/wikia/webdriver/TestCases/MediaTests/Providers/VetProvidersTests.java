@@ -11,7 +11,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -24,8 +23,7 @@ public class VetProvidersTests extends NewTestTemplate {
 	@Test(
 			dataProviderClass = VideoUrlProvider.class,
 			dataProvider = "videoUrl",
-			groups = {"VetProvidersArticle", "VetProvidersTests_001"},
-			enabled = false
+			groups = {"VetProvidersArticle", "VetProvidersTests_001"}
 	)
 	public void VetProvidersTests_001_article(String videoUrl, String videoName) {
 		PageObjectLogging.log("", videoUrl, true);
@@ -40,8 +38,6 @@ public class VetProvidersTests extends NewTestTemplate {
 		visualEditMode.verifyVideo();
 		visualEditMode.submitArticle();
 		article.verifyVideo();
-		FilePagePageObject fileDetails = article.clickVideoDetailsButton();
-		fileDetails.verifyEmbeddedVideoIsPresent();
-		fileDetails.verifyHeader(videoName);
+		article.verifyVideoName(videoName);
 	}
 }
