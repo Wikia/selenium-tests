@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,7 +43,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	private final String disabledAccountMessage = "Your account has been disabled by Wikia.";
 
-	private void typeInUserName(String name){
+	public void typeInUserName(String name){
 		waitForElementByElement(userName);
 		userName.clear();
 		userName.sendKeys(name);
@@ -130,5 +131,14 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 				disabledAccountMessage,
 				messagePlaceholder.getText()
 		);
+	}
+
+	public void copyandpaste() {
+		// TODO Auto-generated method stub
+//		userName.sendKeys(Keys.CONTROL, "a");
+		userName.sendKeys(Keys.COMMAND, "a");
+		userName.sendKeys(Keys.chord(Keys.CONTROL, "c"));
+		userName.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+
 	}
 }
