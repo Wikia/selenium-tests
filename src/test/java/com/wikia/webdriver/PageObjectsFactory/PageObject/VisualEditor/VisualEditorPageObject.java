@@ -103,7 +103,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void copyAndPaste() {
 //		waitForElementClickableByElement(editArea);
-//		editArea.sendKeys("COPYa");
+		editArea.sendKeys("COPYa");
 		WebElement textbox = driver.findElement(By.cssSelector("p.ve-ce-branchNode"));
 		editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
