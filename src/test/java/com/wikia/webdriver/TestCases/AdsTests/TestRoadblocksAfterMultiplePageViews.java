@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -17,21 +16,20 @@ import org.testng.annotations.Test;
  */
 public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 
-	private final int pageViewsCount = 3;
+	private final int pageViewsCount = 5;
 
 	public TestRoadblocksAfterMultiplePageViews() {
 		super();
 		urlBuilder = new UrlBuilder(config.getEnv());
 	}
 
-	@GeoEdgeProxy(country="US")
 	@Test(
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="skinLimited",
-		groups={"Roadblock_001", "Roadblock"},
+		groups={"TestRoadblock_GeoEdgeFree"},
 		invocationCount=3
 	)
-	public void TestRoadblock_001(
+	public void TestRoadblock_GeoEdgeFree(
 		String wikiName, String article, String screenImageUrl,
 		Dimension windowResolution, int skinWidth, String skinLeftSide, String skinRightSide
 	) {

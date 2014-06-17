@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
@@ -14,27 +13,12 @@ import java.util.List;
  */
 public class TestAdDriverForcedStatus extends NewTestTemplate {
 
-	@GeoEdgeProxy(country = "US")
 	@Test(
 		dataProviderClass = AdsDataProvider.class,
 		dataProvider = "adDriverForcedStatusSuccess",
-		groups = {"TestAdDriverForcedStatusSuccess_US", "Ads"}
+		groups = {"TestAdDriverForcedStatusSuccess_GeoEdgeFree", "Ads"}
 	)
-	public void TestAdDriverForcedStatusSuccess_US(
-		String wikiName, String article, List<String> slots
-	) {
-		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-		AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
-		ads.verifyForcedSuccessScriptInSlots(slots);
-		ads.verifyNoLiftiumAdsInSlots(slots);
-	}
-
-	@Test(
-		dataProviderClass = AdsDataProvider.class,
-		dataProvider = "adDriverForcedStatusSuccess",
-		groups = {"TestAdDriverForcedStatusSuccess_geoEdgeFree", "Ads"}
-	)
-	public void TestAdDriverForcedStatusSuccess_geoEdgeFree(
+	public void TestAdDriverForcedStatusSuccess_GeoEdgeFree(
 		String wikiName, String article, List<String> slots
 	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);

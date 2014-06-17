@@ -32,38 +32,28 @@ public class TestNoAdsOnAdFreeWikis extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="US")
-	@Test (
-		groups={"NoAdsOnAdFreeWikis_001", "US"}
-	)
-	public void TestNoAdsForUsers_US() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="DE")
-	@Test (
-		groups={"NoAdsOnAdFreeWikis_002", "DE"}
-	)
-	public void TestNoAdsForUsers_DE() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="HR")
-	@Test (
-		groups={"NoAdsOnAdFreeWikis_003", "HR"}
-	)
-	public void TestNoAdsForUsers_HR() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
-	}
-
 	@GeoEdgeProxy(country="AU")
 	@Test (
-		groups={"NoAdsOnAdFreeWikis_004", "AU"}
+		groups={"TestNoAdsOnAdsFreeWikis_AU"}
 	)
-	public void TestNoAdsForUsers_AU() throws Exception {
+	public void TestNoAdsOnAdsFreeWikis_AU() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
+
+	@GeoEdgeProxy(country="VE")
+	@Test (
+		groups={"TestNoAdsOnAdsFreeWikis_VE"}
+	)
+	public void TestNoAdsOnAdsFreeWikis_VE() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnPage();
+	}
+
+	@Test (
+		groups={"TestNoAdsOnAdsFreeWikis_GeoEdgeFree"}
+	)
+	public void TestNoAdsOnAdsFreeWikis_GeoEdgeFree() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
