@@ -52,12 +52,4 @@ public class LoginTests extends NewTestTemplate {
 		base.verifyUserLoggedIn(credentials.userNameStaff);
 	}
 
-	@Test(groups = {"Login_005", "Login", "Smoke5"})
-	public void Login_005_specialPageUser() {
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		login = login.openSpecialUserLogin(wikiURL);
-		login.typeInUserName("ABCd");
-		login.copyandpaste();
-		login.loginAndVerify(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-	}
 }
