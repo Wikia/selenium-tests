@@ -33,19 +33,9 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="PL")
-	@Test (
-		groups={"Ads_Screenshot_PL", "PL"}
-	)
-	public void Ads_Screenshot_PL() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.checkTopLeaderboard();
-		wikiPage.checkMedrec();
-	}
-
 	@GeoEdgeProxy(country="DE")
 	@Test (
-		groups={"Ads_Screenshot_DE", "DE"}
+		groups={"Ads_Screenshot_DE"}
 	)
 	public void Ads_Screenshot_DE() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
@@ -53,63 +43,33 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
 		wikiPage.checkMedrec();
 	}
 
-	@GeoEdgeProxy(country="RU")
-	@Test (
-		groups={"Ads_Screenshot_RU", "RU"}
-	)
-	public void Ads_Screenshot_RU() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.checkTopLeaderboard();
-		wikiPage.checkMedrec();
-	}
-
-	@GeoEdgeProxy(country="JP")
-	@Test (
-		groups={"Ads_Screenshot_JP", "JP"}
-	)
-	public void Ads_Screenshot_JP() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.checkTopLeaderboard();
-		wikiPage.checkMedrec();
-	}
-
-	@GeoEdgeProxy(country="IT")
-	@Test (
-		groups={"Ads_Screenshot_IT", "IT"}
-	)
-	public void Ads_Screenshot_IT() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.checkTopLeaderboard();
-		wikiPage.checkMedrec();
-	}
-
-	@GeoEdgeProxy(country="US")
-	@Test (
-		groups={"Ads_Screenshot_US", "US"}
-	)
-	public void Ads_Screenshot_US() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.checkTopLeaderboard();
-		wikiPage.checkMedrec();
-	}
-
-	@GeoEdgeProxy(country="HR")
-	@Test (
-		groups={"Ads_Screenshot_HR", "HR"}
-	)
-	public void Ads_Screenshot_HR() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.checkTopLeaderboard();
-		wikiPage.checkMedrec();
-	}
-
 	@GeoEdgeProxy(country="AU")
 	@Test (
-		groups={"Ads_Screenshot_AU", "AU"}
+		groups={"Ads_Screenshot_AU"}
 	)
 	public void Ads_Screenshot_AU() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.checkTopLeaderboard();
 		wikiPage.checkMedrec();
 	}
+
+	@GeoEdgeProxy(country="VE")
+	@Test (
+		groups={"Ads_Screenshot_VE"}
+	)
+	public void Ads_Screenshot_VE() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.checkTopLeaderboard();
+		wikiPage.checkMedrec();
+	}
+
+	@Test (
+		groups={"Ads_Screenshot_GeoEdgeFree"}
+	)
+	public void Ads_Screenshot_GeoEdgeFree() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.checkTopLeaderboard();
+		wikiPage.checkMedrec();
+	}
 }
+

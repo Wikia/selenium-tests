@@ -11,14 +11,10 @@ public class GermanAdsDataProvider {
 	public static final Object[][] popularGermanArticles() {
 		return new Object[][] {
 			{"de.naruto", "Narutopedia"},
-			{"de.clashofclans", "Clash_of_Clans_Wiki"},
-			{"de.terraria", "Terraria_Wiki"},
-			{"de.gta", "Fahrzeuge_(V)"},
 			{"de.gameofthrones", "Staffel_4"},
-			{"de.bindingofisaac", "The_Binding_of_Isaac_Wiki"},
-			{"de.vroniplag", "Home"},
-			{"de.avengersalliance", "Marvel:_Avengers_Alliance_Wiki"},
-			{"de.vroniplag", "VroniPlag_Wiki:Pressespiegel"}
+			{"de.gta", "Fahrzeuge_(V)"},
+			{"de.fahrrad", "Reifenumfang_%28Tabelle%29"},
+			{"de.bindingofisaac", "Items"}
 		};
 	}
 
