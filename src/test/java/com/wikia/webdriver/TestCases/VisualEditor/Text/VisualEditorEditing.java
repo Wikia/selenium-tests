@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
@@ -49,6 +50,12 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 			ve.typeReturn();
 		}
 
+		for (Style style : Style.values()) {
+			PageObjectLogging.log("Style selection", style.toString() + " selected", true);
+			ve.selectStyle(style);
+			ve.typeTextArea(text);
+			ve.typeReturn();
+		}
 //		ve.verifyFormatting(format, text);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 //		ArticlePageObject article = save.savePage();

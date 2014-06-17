@@ -86,14 +86,14 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By referenceListBy = By.cssSelector(".oo-ui-icon-references");
 
 	private void clickStyleFromStyleDropDown(By styleBy) {
+		waitForElementByElement(styleList);
 		Actions actions = new Actions(driver);
 		actions
 			.click(styleList)
-			.click(styleList.findElement(styleBy))
+			.click(styleItems.findElement(styleBy))
 			.build()
 			.perform();
 	}
-
 
 	public void selectStyle(Style style) {
 
