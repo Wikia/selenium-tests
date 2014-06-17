@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -56,6 +57,14 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 			ve.typeTextArea(text);
 			ve.typeReturn();
 		}
+		ve.typeTextArea(text);
+		ve.insertList(InsertList.BULLET_LIST);
+		ve.typeReturn();
+		ve.typeReturn();
+		ve.typeTextArea(text);
+		ve.insertList(InsertList.NUMBERED_LIST);
+		ve.typeReturn();
+		ve.typeReturn();
 //		ve.verifyFormatting(format, text);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 //		ArticlePageObject article = save.savePage();
