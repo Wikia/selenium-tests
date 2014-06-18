@@ -3,8 +3,11 @@ package com.wikia.webdriver.TestCases.VisualEditor.Text;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
@@ -29,15 +32,18 @@ public class VECopyAndPasteTests extends NewTestTemplateBeforeClass {
 		groups = {"VECopyAndPasteTests", "VECopyAndPasteTests_001"}
 	)
 	public void VECopyAndPasteTests_001_copyAndPaste() throws InterruptedException {
-//		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		String articleName = "QAarticle1402698128122";
+		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
-//		article.CopyText();
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-//		ve.pasteCopiedText();
+		String text = PageContent.articleText;
+		ve.typeTextArea(text);
 		ve.copyAndPaste();
+		ve.verifyFormatting(Formatting.PARAGRAPH, text + text);
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		article = saveDialog.savePage();
+		article.verifyFormattingFromVE(Formatting.PARAGRAPH, text + text);
 	}
 }
