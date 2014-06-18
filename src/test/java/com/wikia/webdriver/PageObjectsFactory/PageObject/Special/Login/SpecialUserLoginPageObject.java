@@ -42,7 +42,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	private final String disabledAccountMessage = "Your account has been disabled by Wikia.";
 
-	public void typeInUserName(String name){
+	private void typeInUserName(String name){
 		waitForElementByElement(userName);
 		userName.clear();
 		userName.sendKeys(name);
