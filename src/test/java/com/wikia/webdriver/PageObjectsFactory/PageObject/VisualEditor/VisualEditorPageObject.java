@@ -113,4 +113,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			typeReturn();
 		}
 	}
+
+	public void typeTextInAllStyle(String text) {
+		for (Style style : Style.values()) {
+			PageObjectLogging.log("Style selection", style.toString() + " selected", true);
+			selectStyle(style);
+			typeTextArea(text);
+			typeReturn();
+		}
+	}
 }
