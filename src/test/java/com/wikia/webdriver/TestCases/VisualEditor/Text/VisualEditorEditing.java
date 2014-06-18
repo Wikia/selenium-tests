@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiTextContent;
-import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -63,13 +62,7 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		for (Formatting format : Formatting.values()){
-			PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
-			ve.selectFormatting(format);
-			ve.typeTextArea(text);
-			ve.typeReturn();
-		}
-
+		ve.typeTextInAllFormat(text);
 		for (Style style : Style.values()) {
 			PageObjectLogging.log("Style selection", style.toString() + " selected", true);
 			ve.selectStyle(style);

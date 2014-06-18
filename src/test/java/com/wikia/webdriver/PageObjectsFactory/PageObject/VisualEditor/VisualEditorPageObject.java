@@ -104,4 +104,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(editArea);
 		editArea.sendKeys(Keys.ENTER);
 	}
+
+	public void typeTextInAllFormat(String text) {
+		for (Formatting format : Formatting.values()){
+			PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
+			selectFormatting(format);
+			typeTextArea(text);
+			typeReturn();
+		}
+	}
 }

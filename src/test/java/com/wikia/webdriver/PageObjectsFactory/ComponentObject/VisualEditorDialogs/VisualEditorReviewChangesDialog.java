@@ -84,6 +84,6 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 	}
 
 	private void verifyAddedDiff(String target) {
-
+		// TODO Auto-generated method stub
 	}
 }
