@@ -16,4 +16,5 @@ public class VideoContent {
 	public static String nonPremiumVideoURL = "http://www.youtube.com/watch?v=d9r5_DDMMjY";
 	public static String premiumVideoURL = "http://video.wikia.com/wiki/File:Batman_-_Following";
 	public static String premiumVideoFile = "File:Batman_-_Following";
+	public static String premiumVideoName = "Batman - Following";
 }
