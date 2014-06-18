@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiTextContent;
-import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
@@ -62,14 +61,7 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 		ve.verifyEditorSurfacePresent();
 		ve.typeTextInAllFormat(text);
 		ve.typeTextInAllStyle(text);
-		ve.typeTextArea(text);
-		ve.insertList(InsertList.BULLET_LIST);
-		ve.typeReturn();
-		ve.typeReturn();
-		ve.typeTextArea(text);
-		ve.insertList(InsertList.NUMBERED_LIST);
-		ve.typeReturn();
-		ve.typeReturn();
+		ve.typeTextInAllList(text);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
 		reviewDialog.verifyAddedDiffs(wikiTexts);

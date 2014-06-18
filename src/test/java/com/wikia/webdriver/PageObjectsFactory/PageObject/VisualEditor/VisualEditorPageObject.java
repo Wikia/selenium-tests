@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
@@ -121,5 +122,17 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			typeTextArea(text);
 			typeReturn();
 		}
+	}
+
+	public void typeTextInAllList(String text) {
+		typeTextArea(text);
+		insertList(InsertList.BULLET_LIST);
+		typeReturn();
+		typeReturn();
+		typeTextArea(text);
+		insertList(InsertList.NUMBERED_LIST);
+		typeReturn();
+		typeReturn();
+
 	}
 }
