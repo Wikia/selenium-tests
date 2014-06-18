@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,8 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 	private WebElement wikiaAritlceFirstPreview;
 	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle")
 	private WebElement wikiaArticleDiffTable;
+	@FindBy(css=".diff-addedline")
+	private List<WebElement> addedLines;
 
 	public VisualEditorReviewChangesDialog(WebDriver driver) {
 		super(driver);
@@ -63,17 +66,31 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 	public void verifyAddedDiffs(ArrayList<String> targets) {
 		waitForElementVisibleByElement(reviewDialogIFrame);
 		driver.switchTo().frame(reviewDialogIFrame);
-		if (wikiaAritlceFirstPreview != null) {
-			verifyNewArticleDiffs(targets);
-		} else {
+//		if (wikiaAritlceFirstPreview.isDisplayed()) {
+//			verifyNewArticleDiffs(targets);
+//		} else {
 			verifyModifiedArticleDiffs(targets);
-		}
+//		}
 		waitForElementNotVisibleByElement(reviewDialogIFrame);
 		driver.switchTo().defaultContent();
 	}
 
 	private void verifyModifiedArticleDiffs(ArrayList<String> targets) {
-		// TODO Auto-generated method stub
+		int count = 0;
+		int expectedCount = addedLines.size();
+		for (WebElement current : addedLines) {
+			String currentText = current.getText();
+			if (!currentText.isEmpty()) {
+				if(foundAddedDiff(targets, currentText)) {
+					targets.remove(currentText);
+					count++;
+				}
+			} else {
+				expectedCount--;
+			}
+		}
+		Assertion.assertNumber(expectedCount, count, "Number of diffs expected is incorrect.");
+		Assertion.assertNumber(0, targets.size(), "Number of diffs expected is incorrect.");
 	}
 
 	private void verifyNewArticleDiffs(ArrayList<String> targets) {
@@ -83,7 +100,11 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 		}
 	}
 
-	private void verifyAddedDiff(String target) {
-		// TODO Auto-generated method stub
+	private boolean foundAddedDiff(ArrayList<String> targets, String source) {
+		for (String target : targets) {
+			if (source.contains(target))
+				return true;
+		}
+		return false;
 	}
 }
