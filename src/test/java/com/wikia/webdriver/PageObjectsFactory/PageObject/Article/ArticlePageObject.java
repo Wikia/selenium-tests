@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -788,12 +787,5 @@ public class ArticlePageObject extends WikiBasePageObject {
 		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
 		articleModal.createPageWithBlankLayout("");
 		return new SourceEditModePageObject(driver);
-	}
-
-	public void CopyText() {
-		waitForElementByElement(articleContentContainer);
-		WebElement targetText = driver.findElement(By.cssSelector("#mw-content-text p"));
-		waitForElementByElement(targetText);
-		targetText.sendKeys(Keys.chord(Keys.COMMAND, "a"));
 	}
 }
