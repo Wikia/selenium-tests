@@ -1,15 +1,19 @@
 package com.wikia.webdriver.TestCases.VisualEditor.Text;
 
+import java.util.ArrayList;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.WikiTextContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -26,12 +30,27 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 
-	private String text = PageContent.articleText;
+	private String text = WikiTextContent.text;
+	private ArrayList<String> wikiTexts;
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+		wikiTexts = new ArrayList<>();
+		wikiTexts.add(WikiTextContent.paragraphText);
+		wikiTexts.add(WikiTextContent.headingText);
+		wikiTexts.add(WikiTextContent.subHeading1Text);
+		wikiTexts.add(WikiTextContent.subHeading2Text);
+		wikiTexts.add(WikiTextContent.subHeading3Text);
+		wikiTexts.add(WikiTextContent.subHeading4Text);
+		wikiTexts.add(WikiTextContent.preformattedText);
+		wikiTexts.add(WikiTextContent.boldText);
+		wikiTexts.add(WikiTextContent.italicText);
+		wikiTexts.add(WikiTextContent.striketroughText);
+		wikiTexts.add(WikiTextContent.underlineText);
+		wikiTexts.add(WikiTextContent.subscriptText);
+		wikiTexts.add(WikiTextContent.superscriptText);
 	}
 
 	@Test(
@@ -65,9 +84,10 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 		ve.insertList(InsertList.NUMBERED_LIST);
 		ve.typeReturn();
 		ve.typeReturn();
-//		ve.verifyFormatting(format, text);
-		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
-//		ArticlePageObject article = save.savePage();
-//		article.verifyFormattingFromVE(format, text);
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(wikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		saveDialog.savePage();
 	}
 }

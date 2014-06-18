@@ -27,6 +27,8 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 	private WebElement recaptchaArea;
 	@FindBy(css="#recaptcha_challenge_image")
 	private WebElement recaptchaImage;
+	@FindBy(css=".secondary .oo-ui-labeledElement-label")
+	private WebElement reviewChangesButton;
 
 	public VisualEditorSaveChangesDialog(WebDriver driver) {
 		super(driver);
@@ -80,5 +82,15 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		String current = getRecaptchaImageSrc();
 		Assertion.assertNotEquals(target, current);
 		PageObjectLogging.log("verifyIsNewRecaptcha", "A new ReCAPTCHA appeared", true);
+	}
+
+	public VisualEditorReviewChangesDialog clickReviewYourChanges() {
+		waitForElementVisibleByElement(saveDialogIFrame);
+		driver.switchTo().frame(saveDialogIFrame);
+		waitForElementClickableByElement(reviewChangesButton);
+		reviewChangesButton.click();
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickReviewYourChanges", "Review Your Changes Button is clicked", true);
+		return new VisualEditorReviewChangesDialog(driver);
 	}
 }
