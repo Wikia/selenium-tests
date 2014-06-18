@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -112,6 +113,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			selectFormatting(format);
 			typeTextArea(text);
 			typeReturn();
+			if (format.name().equals("PREFORMATTED")) {
+				selectFormatting(Formatting.PARAGRAPH);
+			}
 		}
 	}
 
@@ -125,14 +129,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	public void typeTextInAllList(String text) {
+		typeReturn();
 		typeTextArea(text);
 		insertList(InsertList.BULLET_LIST);
 		typeReturn();
-		typeReturn();
+		selectIndentation(Indentation.DECREASE);
 		typeTextArea(text);
 		insertList(InsertList.NUMBERED_LIST);
 		typeReturn();
-		typeReturn();
-
+		selectIndentation(Indentation.DECREASE);
 	}
 }

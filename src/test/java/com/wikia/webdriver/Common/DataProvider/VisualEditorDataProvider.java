@@ -60,6 +60,11 @@ public class VisualEditorDataProvider {
 		BULLET_LIST;
 	}
 
+	public enum Indentation {
+		INCREASE,
+		DECREASE;
+	}
+
 	/**
 	 * Data provider with text formatting
 	 */

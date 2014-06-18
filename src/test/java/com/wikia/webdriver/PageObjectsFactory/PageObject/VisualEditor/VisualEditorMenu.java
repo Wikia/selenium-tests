@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
@@ -77,6 +78,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
 	private By subscriptStyleBy = By.cssSelector(".oo-ui-icon-subscript");
 	private By superscriptStyleBy = By.cssSelector(".oo-ui-icon-superscript");
+	private By indentBy = By.cssSelector(".oo-ui-icon-indent-list");
+	private By outdentBy = By.cssSelector(".oo-ui-icon-outdent-list");
 	private By publishButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
 	private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
 	private By numberbedListBy = By.cssSelector(".oo-ui-icon-number-list");
@@ -118,6 +121,17 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			break;
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
+	}
+
+	public void selectIndentation(Indentation indent) {
+		switch (indent) {
+		case INCREASE:
+			clickStyleFromStyleDropDown(indentBy);
+			break;
+		case DECREASE:
+			clickStyleFromStyleDropDown(outdentBy);
+			break;
+		}
 	}
 
 	public VisualEditorDialog selectInsertToOpenDialog(InsertDialog insert) {
