@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage;
 
+import com.google.sitebricks.client.Web;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -17,6 +18,8 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 
 	@FindBy(css=".featured-video:first-child")
 	private WebElement featuredVideoForm;
+	@FindBy(css=".WikiaForm input[type=submit]")
+	private WebElement saveButton;
 
 	public FeaturedVideoAdminPageObject(WebDriver driver) {
 		super(driver);
@@ -32,9 +35,16 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideoAdded(String name) {
+		waitForElementByElement(featuredVideoForm);
 		WebElement videoTitle = featuredVideoForm.findElement(By.cssSelector(".video-title"));
 		String title = videoTitle.getText();
-		Assertion.assertEquals(name, title);
-		PageObjectLogging.log("verifyVideoAdded", "Video" + name + " was successfully added.", true );
+		Assertion.assertEquals(title, name);
+		PageObjectLogging.log("verifyVideoAdded", "Video" + name + " was successfully added.", true);
+	}
+
+	public LatestVideoAdminPageObject clickSaveFeaturedVideoForm(WebDriver driver) {
+		scrollAndClick(saveButton);
+		PageObjectLogging.log("clickSaveFeaturedVideoForm", "Featured video form has been saved", true);
+		return new LatestVideoAdminPageObject(driver);
 	}
 }
