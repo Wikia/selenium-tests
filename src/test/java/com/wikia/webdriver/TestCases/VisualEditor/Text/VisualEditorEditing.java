@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiTextContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
@@ -51,12 +52,9 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 	@Test(
 			groups = {"VisualEditorEditing", "VisualEditorEditing_001"}
 	)
-	public void VisualEditorFormatting_001() {
-
-//		ArticlePageObject article =
-//			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+	public void VisualEditorEditing_001_inserts() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, "12345");
+			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();

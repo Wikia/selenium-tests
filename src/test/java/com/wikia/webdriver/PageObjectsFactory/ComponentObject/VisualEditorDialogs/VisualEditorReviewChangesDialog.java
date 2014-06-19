@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialo
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -66,11 +67,12 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 	public void verifyAddedDiffs(ArrayList<String> targets) {
 		waitForElementVisibleByElement(reviewDialogIFrame);
 		driver.switchTo().frame(reviewDialogIFrame);
-//		if (wikiaAritlceFirstPreview.isDisplayed()) {
-//			verifyNewArticleDiffs(targets);
-//		} else {
+		boolean isNewArticle = driver.findElements(By.cssSelector(".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")).size() > 0;
+		if (isNewArticle) {
+			verifyNewArticleDiffs(targets);
+		} else {
 			verifyModifiedArticleDiffs(targets);
-//		}
+		}
 		waitForElementNotVisibleByElement(reviewDialogIFrame);
 		driver.switchTo().defaultContent();
 	}
