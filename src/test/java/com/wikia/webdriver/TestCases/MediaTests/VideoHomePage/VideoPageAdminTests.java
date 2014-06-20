@@ -29,17 +29,19 @@ public class VideoPageAdminTests extends NewTestTemplate {
 		FeaturedVideoAdminPageObject featuredVideoAdminObject = base.openVideoPageAdminObject(wikiURL);
 
 		// Add video 1
-		VetAddVideoComponentObject vetAddingVideo1 = featuredVideoAdminObject.clickAddVideo();
-		vetAddingVideo1.addVideoByUrl(VideoContent.premiumVideoURL);
-
-		// Save the form and check video title
-		LatestVideoAdminPageObject latestVideoAdminPageObject = featuredVideoAdminObject.clickSaveFeaturedVideoForm(driver);
-		latestVideoAdminPageObject.clickFeaturedTab(driver);
+		VetAddVideoComponentObject vetAddingVideo = featuredVideoAdminObject.clickAddVideo();
+		vetAddingVideo.addVideoByUrl(VideoContent.premiumVideoURL);
 		featuredVideoAdminObject.verifyVideoAdded(VideoContent.premiumVideoName);
 
-		// Add video 2 and make sure video title has changed (don't save this time)
-		VetAddVideoComponentObject vetAddingVideo2 = featuredVideoAdminObject.clickAddVideo();
-		vetAddingVideo2.addVideoByUrl(VideoContent.premiumVideoURL2);
+		// Save the form and navigate back to featured form
+		LatestVideoAdminPageObject latestVideoAdminPageObject = featuredVideoAdminObject.clickSaveFeaturedVideoForm(driver);
+		featuredVideoAdminObject = latestVideoAdminPageObject.clickFeaturedTab(driver);
+		featuredVideoAdminObject.verifyVideoAdded(VideoContent.premiumVideoName);
+
+		// Add video 2 and make sure video title has changed
+		vetAddingVideo = featuredVideoAdminObject.clickAddVideo();
+		vetAddingVideo.addVideoByUrl(VideoContent.premiumVideoURL2);
 		featuredVideoAdminObject.verifyVideoAdded(VideoContent.premiumVideoName2);
+		featuredVideoAdminObject.clickSaveFeaturedVideoForm(driver);
 	}
 }

@@ -18,7 +18,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 
 	@FindBy(css=".featured-video:first-child")
 	private WebElement featuredVideoForm;
-	@FindBy(css=".WikiaForm input[type=submit]")
+	@FindBy(css=".vpt-form button[type=submit]")
 	private WebElement saveButton;
 
 	public FeaturedVideoAdminPageObject(WebDriver driver) {
@@ -35,11 +35,25 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideoAdded(String name) {
+		verifyVideoTitleUpdated(name);
+		verifyVideoDisplayTitleUpdated(name);
+		PageObjectLogging.log("verifyVideoAdded", "Video" + name + " was successfully added.", true);
+	}
+
+	public void verifyVideoTitleUpdated(String name) {
 		waitForElementByElement(featuredVideoForm);
 		WebElement videoTitle = featuredVideoForm.findElement(By.cssSelector(".video-title"));
 		String title = videoTitle.getText();
 		Assertion.assertEquals(title, name);
-		PageObjectLogging.log("verifyVideoAdded", "Video" + name + " was successfully added.", true);
+		PageObjectLogging.log("verifyVideoTitleUpdated", "Video title was updated", true);
+	}
+
+	public void verifyVideoDisplayTitleUpdated(String name) {
+		waitForElementByElement(featuredVideoForm);
+		WebElement displayTitle = featuredVideoForm.findElement(By.cssSelector(".display-title"));
+		String title = displayTitle.getAttribute("value");
+		Assertion.assertEquals(title, name);
+		PageObjectLogging.log("verifyVideoDisplayTitleUpdated", "Video display title input was populated", true);
 	}
 
 	public LatestVideoAdminPageObject clickSaveFeaturedVideoForm(WebDriver driver) {
