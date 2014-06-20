@@ -13,7 +13,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 
 /**
- * Created by liz_lux on 6/18/14.
+ * Created by Liz Lee on 6/18/14.
  */
 public class VideoPageAdminTests extends NewTestTemplate {
 

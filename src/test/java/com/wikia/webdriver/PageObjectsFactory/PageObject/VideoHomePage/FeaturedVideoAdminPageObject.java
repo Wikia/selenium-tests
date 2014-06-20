@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * Created by liz_lux on 6/18/14.
+ * Created by Liz Lee on 6/18/14.
  */
 public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 
