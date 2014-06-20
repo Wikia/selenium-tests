@@ -93,11 +93,10 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] hubsPages() {
 		return new Object[][] {
-			{"wikia", "Video_Games"},
-			{"wikia", "Entertainment/TV_Schedule"},
-			{"wikia", "Lifestyle/21_December_2012"},
-			{"es.wikia", "Entretenimiento"},
-			{"fr.wikia", "Mode_de_vie/Failsafe"}
+			{"gameshub", "Games_Hub"},
+			{"movieshub", "Communities"},
+			{"es.filmhub", "Wiki_Películas_Hub"},
+			{"portail-modedevie", "Mode_de_vie/Failsafe"}
 		};
 	}
 
