@@ -1,8 +1,9 @@
 package com.wikia.webdriver.Common.DataProvider.Ads;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
-import java.util.Arrays;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -31,8 +32,7 @@ public class AdsDataProvider {
 	public static final Object[][] GermanCorpPages() {
 		return new Object[][] {
 			{"de.wikia", "Wikia"},
-			{"de.wikia", "Videospiele"},
-			{"de.wikia", "Videospiele/gamescom"}
+			{"de.videospielehub", "Videospiele_Hub"}
 		};
 	}
 
@@ -93,11 +93,10 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] hubsPages() {
 		return new Object[][] {
-			{"wikia", "Video_Games"},
-			{"wikia", "Entertainment/TV_Schedule"},
-			{"wikia", "Lifestyle/21_December_2012"},
-			{"es.wikia", "Entretenimiento"},
-			{"fr.wikia", "Mode_de_vie/Failsafe"}
+			{"gameshub", "Games_Hub"},
+			{"movieshub", "Communities"},
+			{"es.filmhub", "Wiki_Películas_Hub"},
+			{"portail-modedevie", "Mode_de_vie/Failsafe"}
 		};
 	}
 
