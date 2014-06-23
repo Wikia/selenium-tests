@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
@@ -32,30 +31,10 @@ public class TestAdsOnHubs extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="US")
 	@Test (
-		groups={"Ads_Hubs_Pages_001"}
+		groups={"TestAdsOnHubs_GeoEdgeFree"}
 	)
-	public void TestAdsHubsPages_US() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyHubTopLeaderboard();
-	}
-
-	@GeoEdgeProxy(country="IT")
-	@Test (
-		groups={"Ads_Hubs_Pages_002"}
-	)
-	public void TestAdsHubsPages_IT() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyHubTopLeaderboard();
-	}
-
-
-	@GeoEdgeProxy(country="GB")
-	@Test (
-		groups={"Ads_Hubs_Pages_003"}
-	)
-	public void TestAdsHubsPages_GB() throws Exception {
+	public void TestAdsOnHubs_GeoEdgeFree() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyHubTopLeaderboard();
 	}

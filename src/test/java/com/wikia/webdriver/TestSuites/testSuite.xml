@@ -38,8 +38,6 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditAccountTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsInContent"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestToolbarAdGPT"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnGermanCorpPages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnAdFreeWikis"/>
@@ -47,13 +45,10 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestRoadblocksAfterMultiplePageViews"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestBasicLayout"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnHubs"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAdsOnRedirects"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsForSony"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNo71MediaAdsForSony"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdDriverForcedStatus"/>

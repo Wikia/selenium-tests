@@ -14,9 +14,6 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
-@Test (
-	groups={"No_Ads_For_Users", "Ads"}
-)
 public class TestNoAdsLoggedInUsers extends NewTestTemplate {
 
 	private String testedPage;
@@ -44,61 +41,30 @@ public class TestNoAdsLoggedInUsers extends NewTestTemplate {
 		);
 	}
 
-	@GeoEdgeProxy(country="US")
-	@Test (
-		groups={"NoAdsForUsers_001", "US"}
-	)
-	public void TestNoAdsForUsers_US() throws Exception {
-		loginSteps();
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="DE")
-	@Test (
-		groups={"NoAdsForUsers_002", "DE"}
-	)
-	public void TestNoAdsForUsers_DE() throws Exception {
-		loginSteps();
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="GB")
-	@Test (
-		groups={"NoAdsForUsers_003", "GB"}
-	)
-	public void TestNoAdsForUsers_GB() throws Exception {
-		loginSteps();
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoAdsOnPage();
-	}
-
 	@GeoEdgeProxy(country="AU")
 	@Test (
-		groups={"NoAdsForUsers_004", "AU"}
+		groups={"TestNoAdsForUsers_AU"}
 	)
-	public void TestNoAdsForUsers_AU() throws Exception {
+	public void TestNoAdsForUsers_AU() {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
 
-	@GeoEdgeProxy(country="PL")
+	@GeoEdgeProxy(country="VE")
 	@Test (
-		groups={"NoAdsForUsers_005", "PL"}
+		groups={"TestNoAdsForUsers_VE"}
 	)
-	public void TestNoAdsForUsers_PL() throws Exception {
+	public void TestNoAdsForUsers_VE() {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
 	}
 
-	@GeoEdgeProxy(country="JP")
 	@Test (
-		groups={"NoAdsForUsers_006", "JP"}
+		groups={"TestNoAdsForUsers_GeoEdgeFree"}
 	)
-	public void TestNoAdsForUsers_JP() throws Exception {
+	public void TestNoAdsForUsers_GeoEdgeFree() throws Exception {
 		loginSteps();
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();

@@ -31,8 +31,6 @@ public class AdsDataProvider {
 	public static final Object[][] GermanCorpPages() {
 		return new Object[][] {
 			{"de.wikia", "Wikia"},
-			{"de.wikia", "WAM"},
-			{"de.wikia", "Spezial:Kontakt"},
 			{"de.wikia", "Videospiele"},
 			{"de.wikia", "Videospiele/gamescom"}
 		};
@@ -42,22 +40,13 @@ public class AdsDataProvider {
 	public static final Object[][] popularSites() {
 		return new Object[][] {
 			{"elderscrolls", "Skyrim"},
-			{"dragonvale", "Eggs"},
-			{"zh.againstwar", "%E9%80%86%E8%BD%89%E4%B8%89%E5%9C%8B_%E7%BB%B4%E5%9F%BA"},
 			{"zh.tos" ,"Category:%E5%9C%96%E9%91%92"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
 			{"it.creepypastaitalia", "Slenderman"},
-			{"it.creepypastaitalia", "Categoria:Creepypasta"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
 			{"wowwiki", "Portal:Main"},
-			{"muppet", "Kermit"},
-			{"memory-alpha", "Portal:Main"},
-			{"warframe", "WARFRAME_Wiki"},
 			{"gameofthrones", "Season_4"},
-			{"dragon-story", "Battle_Arena"},
-			{"zh.chain-chronicle", "Chain_Chronicle_维基"},
-			{"avengersalliance", "Marvel:_Avengers_Alliance_Wiki"},
 			{"zh.pad", "Homepage/Mobile"},
 			{"zh.pad", "wiki/Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
 		};
@@ -67,9 +56,7 @@ public class AdsDataProvider {
 	public static final Object[][] corporatePages() {
 		return new Object[][] {
 			{"wikia", "Wikia"},
-			{"fr.wikia", "Wikia"},
 			{"es.wikia", "Wikia"},
-			{"wikia", "WAM"},
 			{"wikia", "About_Us"}
 		};
 	}
@@ -78,17 +65,11 @@ public class AdsDataProvider {
 	public static final Object[][] noAdsForUsers () {
 		return new Object[][] {
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
-			{"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
-			{"ja.gundam", "%E3%83%9E%E3%83%AA%E3%83%BC%E3%83%80%E3%83%BB%E3%82%AF%E3%83%AB%E3%82%B9"},
-			{"de.gta", "Welding_%26_Weddings"},
 			{"wikia", "Wikia"},
 			{"wikia", "Video_Games/Lizzunchbox"},
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"monsterhunter", "Portal:MH3U"},
-			{"dragoncity", "Category:Dragons"},
-			{"elderscrolls", "Skyrim"},
-			{"ffxiclopedia", "Category:Jobs"}
 		};
 	}
 
@@ -112,16 +93,10 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] hubsPages() {
 		return new Object[][] {
-			{"wikia", "Video_Games"},
-			{"wikia", "Video_Games/Lizzunchbox"},
-			{"wikia", "Entertainment"},
-			{"wikia", "Entertainment/TV_Schedule"},
-			{"wikia", "Lifestyle"},
-			{"wikia", "Lifestyle/21_December_2012"},
-			{"es.wikia", "Entretenimiento"},
-			{"es.wikia", "Entretenimiento/11_febrero_2013"},
-			{"fr.wikia", "Mode_de_vie"},
-			{"fr.wikia", "Mode_de_vie/Failsafe"}
+			{"gameshub", "Games_Hub"},
+			{"movieshub", "Communities"},
+			{"es.filmhub", "Wiki_Películas_Hub"},
+			{"portail-modedevie", "Mode_de_vie/Failsafe"}
 		};
 	}
 
@@ -201,13 +176,7 @@ public class AdsDataProvider {
 	public static final Object[][] adFreeWikis() {
 		return new Object[][] {
 			{"api", "Wikia_API_Wiki"},
-			{"api", "Documentation"},
-			{"sfhomeless", "San_Francisco_Homeless_Resource"},
 			{"sfhomeless", "Glide_Memorial_Church"},
-			{"alamedahomeless", "Alameda_County_Child_Support_Services"},
-			{"alamedahomeless", "Alameda_Homeless_Resource_Wiki"},
-			{"ru.affectedzone", "Affected_Zone_Wiki"},
-			{"ru.affectedzone", "Encircling_Flames "}
 		};
 	}
 
@@ -228,6 +197,15 @@ public class AdsDataProvider {
 				"AdDriver2ForceStatus/Success",
 				Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")
 			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] amazonSites() {
+		return new Object[][] {
+			{"memory-alpha", "Portal:Main"},
+			{"gameofthrones", "Season_4"},
+			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
 		};
 	}
 }
