@@ -1,8 +1,9 @@
 package com.wikia.webdriver.Common.DataProvider.Ads;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
-import java.util.Arrays;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -31,8 +32,7 @@ public class AdsDataProvider {
 	public static final Object[][] GermanCorpPages() {
 		return new Object[][] {
 			{"de.wikia", "Wikia"},
-			{"de.wikia", "Videospiele"},
-			{"de.wikia", "Videospiele/gamescom"}
+			{"de.videospielehub", "Videospiele_Hub"}
 		};
 	}
 
