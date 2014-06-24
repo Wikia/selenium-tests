@@ -1,4 +1,4 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject;
+package com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage;
 
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
