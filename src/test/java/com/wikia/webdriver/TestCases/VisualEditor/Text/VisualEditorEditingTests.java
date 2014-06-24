@@ -95,7 +95,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 
 	@Test(
 		groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
-		dependsOnMethods = "VisualEditorEditing_001_inserts"
+		dependsOnGroups = "VisualEditorEditing_001"
 	)
 	public void VisualEditorEditing_003_insertToExistingArticle() {
 		ArticlePageObject article =
