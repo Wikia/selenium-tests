@@ -62,6 +62,7 @@ public class URLsContent {
 	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
 	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
 	public static final String specialEditHub = "wiki/Special:EditHub";
+	public static final String specialVideoPageAdmin = "wiki/Special:VideoPageAdmin/edit";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";
@@ -161,7 +162,6 @@ public class URLsContent {
 
 	//Other wikis to test on
 	public static final String videoTestWiki = "sktest123";
-	public static final String specialVideoPageAdmin = "wiki/Special:VideoPageAdmin/edit";
 
 	//External URL
 	public static final String externalURL = "http://www.wikia.com";
