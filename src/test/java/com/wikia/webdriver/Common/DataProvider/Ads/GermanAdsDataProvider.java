@@ -14,7 +14,15 @@ public class GermanAdsDataProvider {
 			{"de.gameofthrones", "Staffel_4"},
 			{"de.gta", "Fahrzeuge_(V)"},
 			{"de.fahrrad", "Reifenumfang_%28Tabelle%29"},
-			{"de.bindingofisaac", "Items"}
+			{"de.bindingofisaac", "Items"},
+			{"de.videospielehub", "Videospiele_Hub"}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] germanCorpPages() {
+		return new Object[][] {
+			{"de.wikia", "Wikia"}
 		};
 	}
 
