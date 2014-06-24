@@ -8,7 +8,12 @@ import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsGermanObject;
 
-public class TestIVW2AnalyticsProvider extends NewTestTemplate{
+/**
+ * @author Piotr 'PMG' Gackowski
+ * @ownership AdEngineering
+ */
+
+public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 
 	public TestIVW2AnalyticsProvider( ) {
 		super();

@@ -46,15 +46,15 @@ public class GermanAdsDataProvider {
 	@DataProvider
 	public static final Object[][] pagesForIVW2() {
 		return new Object[][] {
-			{"de.wikia", "Wikia", "RC_WIKIA_HOMEX"},
+			{"de.wikia", "Wikia", "RC_WIKIA_HOME"},
 
 			{"de.wikia", "Spezial:Kontakt", "RC_WIKIA_SVCE"},
 			{"de.wikia", "%C3%9Cber_Wikia", "RC_WIKIA_SVCE"},
-			{"de.wikia", "Presse", "'RC_WIKIA_SVCE"},
-			{"de.wikia", "Stellen", "'RC_WIKIA_SVCE"},
-			{"de.wikia", "Projekt:Datenschutz", "'RC_WIKIA_SVCE"},
-			{"de.wikia", "Spezial:Kontakt", "'RC_WIKIA_SVCE"},
-			{"de.wikia", "Spezial:UserSignup", "'RC_WIKIA_SVCE"},
+			{"de.wikia", "Presse", "RC_WIKIA_SVCE"},
+			{"de.wikia", "Stellen", "RC_WIKIA_SVCE"},
+			{"de.wikia", "Projekt:Datenschutz", "RC_WIKIA_SVCE"},
+			{"de.wikia", "Spezial:Kontakt", "RC_WIKIA_SVCE"},
+			{"de.wikia", "Spezial:UserSignup", "RC_WIKIA_SVCE"},
 
 			{"de.videospielehub", "Videospiele_Hub", "RC_WIKIA_START"},
 			{"de.lifestylehub", "Lifestyle_Hub", "RC_WIKIA_START"},
