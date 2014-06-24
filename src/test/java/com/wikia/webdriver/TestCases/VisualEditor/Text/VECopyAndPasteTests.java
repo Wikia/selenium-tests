@@ -14,8 +14,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Robert 'rochan' Chan
+ * @ownership Contribution
  *
- * VE-888 Verify VE is able to perform multiple publish on the same article in one logged in session
+ * VE-1210 Verify VE is able to perform Copy and Paste text on the edit area
  */
 
 public class VECopyAndPasteTests extends NewTestTemplateBeforeClass {
