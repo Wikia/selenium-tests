@@ -54,7 +54,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	@Test(
 			groups = {"VisualEditorEditing", "VisualEditorEditing_001"}
 	)
-	public void VisualEditorEditing_001_inserts() {
+	public void VisualEditorEditing_001_insertToNewArticle() {
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
