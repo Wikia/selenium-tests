@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsGermanObject;
 
 /**
  * Class contains tests checking ad provider on German corporate pages
@@ -37,7 +37,7 @@ public class TestAdsOnGermanCorpPages extends NewTestTemplate {
 		groups={"TestAdsOnGermanCorpPages_GeoEdgeFree"}
 	)
 	public void TestAdsOnGermanCorpPages_GeoEdgeFree() {
-		Ads71MediaObject wikiCorpPage = new Ads71MediaObject(driver, testedPage);
+		AdsGermanObject wikiCorpPage = new AdsGermanObject(driver, testedPage);
 		wikiCorpPage.verifyNoAdsOnPage();
 		wikiCorpPage.verifyNo71MediaAds();
 	}
