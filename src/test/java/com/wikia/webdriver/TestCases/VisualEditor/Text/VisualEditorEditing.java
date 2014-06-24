@@ -28,11 +28,13 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 
 	private String text = WikiTextContent.text;
 	private ArrayList<String> wikiTexts;
+	private String articleName;
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		wikiTexts = new ArrayList<>();
 		wikiTexts.add(WikiTextContent.paragraphText);
 		wikiTexts.add(WikiTextContent.headingText);
@@ -54,7 +56,7 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_001_inserts() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -65,6 +67,30 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
 		reviewDialog.verifyAddedDiffs(wikiTexts);
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
-		saveDialog.savePage();
+		article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
+
+	@Test(
+		groups = {"VisualEditorEditing", "VisualEditorEditing_002"},
+		dependsOnMethods = "VisualEditorEditing_001_inserts"
+	)
+	public void VisualEditorEditing_002_delete() {
+		String removeText = "Lorem";
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		ve.removeText(removeText);
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyDeletedDiffs(wikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
 }
