@@ -4,7 +4,7 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
+import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
 
@@ -22,8 +22,8 @@ public class TestAdsOnGermanCorpPages extends NewTestTemplate {
 	private String testedPage;
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="GermanCorpPages"
+		dataProviderClass=GermanAdsDataProvider.class,
+		dataProvider="germanCorpPages"
 	)
 	public TestAdsOnGermanCorpPages(String wikiName, String path) {
 		urlBuilder = new UrlBuilder(config.getEnv());

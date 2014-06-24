@@ -29,14 +29,6 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
-	public static final Object[][] GermanCorpPages() {
-		return new Object[][] {
-			{"de.wikia", "Wikia"},
-			{"de.videospielehub", "Videospiele_Hub"}
-		};
-	}
-
-	@DataProvider
 	public static final Object[][] popularSites() {
 		return new Object[][] {
 			{"elderscrolls", "Skyrim"},
