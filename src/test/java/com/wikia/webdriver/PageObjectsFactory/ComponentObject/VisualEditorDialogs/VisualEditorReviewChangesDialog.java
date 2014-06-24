@@ -37,6 +37,11 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 	private WebElement wikiaArticleDiffTable;
 	@FindBy(css=".diff-addedline")
 	private List<WebElement> addedLines;
+	@FindBy(css=".diff-deletedline")
+	private List<WebElement> deletedLines;
+
+	private final int DELETE = 0;
+	private final int INSERT = 1;
 
 	public VisualEditorReviewChangesDialog(WebDriver driver) {
 		super(driver);
@@ -64,6 +69,14 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 		return new VisualEditorPageObject(driver);
 	}
 
+	public void verifyDeletedDiffs(ArrayList<String> targets) {
+		waitForElementVisibleByElement(reviewDialogIFrame);
+		driver.switchTo().frame(reviewDialogIFrame);
+		verifyArticleDiffs(targets, DELETE);
+		waitForElementNotVisibleByElement(reviewDialogIFrame);
+		driver.switchTo().defaultContent();
+	}
+
 	public void verifyAddedDiffs(ArrayList<String> targets) {
 		waitForElementVisibleByElement(reviewDialogIFrame);
 		driver.switchTo().frame(reviewDialogIFrame);
@@ -71,16 +84,24 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 		if (isNewArticle) {
 			verifyNewArticleDiffs(targets);
 		} else {
-			verifyModifiedArticleDiffs(targets);
+			verifyArticleDiffs(targets, INSERT);
 		}
 		waitForElementNotVisibleByElement(reviewDialogIFrame);
 		driver.switchTo().defaultContent();
 	}
 
-	private void verifyModifiedArticleDiffs(ArrayList<String> targets) {
+	private void verifyArticleDiffs(ArrayList<String> targets, int mode) {
 		int count = 0;
-		int expectedCount = addedLines.size();
-		for (WebElement current : addedLines) {
+		int expectedCount = 0;
+		List<WebElement> lines = null;
+		if (mode == DELETE) {
+			expectedCount = deletedLines.size();
+			lines = deletedLines;
+		} else if (mode == INSERT) {
+			expectedCount = addedLines.size();
+			lines = addedLines;
+		}
+		for (WebElement current : lines) {
 			String currentText = current.getText();
 			if (!currentText.isEmpty()) {
 				if(foundAddedDiff(targets, currentText)) {
@@ -92,7 +113,9 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 			}
 		}
 		Assertion.assertNumber(expectedCount, count, "Number of diffs expected is incorrect.");
-		Assertion.assertNumber(0, targets.size(), "Number of diffs expected is incorrect.");
+		if (mode == INSERT) {
+			Assertion.assertNumber(0, targets.size(), "Number of diffs expected is incorrect.");
+		}
 	}
 
 	private void verifyNewArticleDiffs(ArrayList<String> targets) {
