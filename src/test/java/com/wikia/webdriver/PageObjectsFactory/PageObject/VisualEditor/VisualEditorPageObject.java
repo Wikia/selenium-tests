@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,6 +62,25 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		int from = textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
 		int to = from  +text.length() + 1;
 		selectText(from, to);
+	}
+
+	public int[] getTextIndex(String text) {
+		String textDump = editArea.getText();
+		int[] indexes = new int[2];
+		indexes[0] = textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
+		indexes[1] = indexes[0] +text.length();
+		if (indexes[0] == 0) {
+			throw new NoSuchElementException("String: " + text + " is not found");
+		}
+		return indexes;
+	}
+
+	public void removeText(String text) {
+		int[] indexes = getTextIndex(text);
+		String removeTextJS = "ve.instances[0].model.change("
+			+ "ve.dm.Transaction.newFromRemoval("
+			+ "ve.instances[0].model.documentModel, new ve.Range( " + indexes[0] + "," + indexes[1] + " )));";
+		((JavascriptExecutor) driver).executeScript(removeTextJS);
 	}
 
 	public void verifyNumList(List<String> elements) {
