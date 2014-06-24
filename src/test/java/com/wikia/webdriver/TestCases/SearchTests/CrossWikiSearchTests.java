@@ -102,7 +102,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getPushToTopQueries",
 			groups = {"CrossWikiSearchTests_006", "Search", "CrossWikiSearch"})
-	public void CrossWikiSearchTests_006_pushToTop_PLA_1602(String query, String wikiName) {
+	public void CrossWikiSearchTests_006_pushToTop(String query, String wikiName) {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(query);
