@@ -93,4 +93,25 @@ public class VisualEditorEditing extends NewTestTemplateBeforeClass {
 		article.logOut(wikiURL);
 	}
 
+	@Test(
+		groups = {"VisualEditorEditing", "VisualEditorEditing_003"},
+		dependsOnMethods = "VisualEditorEditing_001_inserts"
+	)
+	public void VisualEditorEditing_003_insertToExistingArticle() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		ve.typeTextInAllFormat(text);
+		ve.typeTextInAllStyle(text);
+		ve.typeTextInAllList(text);
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(wikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
 }
