@@ -21,7 +21,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  *
  */
 
-public class VisualEditorEditing extends NewTestTemplateBeforeClass {
+public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
