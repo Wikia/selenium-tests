@@ -18,5 +18,16 @@ public class CreateAMapComponentObject extends BasePageObject{
 	public CreateAMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-
+	
+	//UI Mapping
+	@FindBy(css = "#intMapCustom")
+	private WebElement customMapLink;
+	
+	public CreateACustomMapComponentObjectStep1 clickCustomMap() {
+		waitForElementByElement(customMapLink);
+		scrollAndClick(customMapLink);
+		PageObjectLogging.log("clickCustomMap", "custom map link clicked",  true, driver);
+		return new CreateACustomMapComponentObjectStep1(driver);
+	}
+	
 }

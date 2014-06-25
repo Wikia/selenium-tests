@@ -1,7 +1,11 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
@@ -15,8 +19,24 @@ public class InteractiveMapsPageObject extends BasePageObject{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	//UI Mapping
+	@FindBy(css = "#createMap")
+	private WebElement createAMapButton;
+	
+	public CreateAMapComponentObject clickCreateAMap() {
+		waitForElementByElement(createAMapButton);
+		scrollAndClick(createAMapButton);
+		PageObjectLogging.log("clickCreateAMap", "create a map button clicked",  true, driver);
+		return new CreateAMapComponentObject(driver);
+	}
+	
+	public void verifyMapIsBeingProcessedMessage() {
+		
+	}
+	
 }
+
 
 
 
