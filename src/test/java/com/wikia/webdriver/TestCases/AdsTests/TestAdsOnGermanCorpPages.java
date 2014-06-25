@@ -1,12 +1,12 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
-import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
-import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsCorpPageObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
+
+import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
+import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
 
 /**
  * Class contains tests checking ad provider on German corporate pages
@@ -15,19 +15,15 @@ import org.testng.annotations.Test;
  * @ownership AdEngineering
  *
  * @description
- * 1. Test ads from IDG on corporate pages when geo=US
- * 2. Test ads from IDG on corporate pages when geo=AU
- * 3. Test ads from IDG on corporate pages when geo=CA
- * 4. Test ads from IDG on corporate pages when geo=DE
- * 5. Test ads from IDG on corporate pages when geo=HR
+ * 1. Test no ads on corporate pages
  */
 public class TestAdsOnGermanCorpPages extends NewTestTemplate {
 
 	private String testedPage;
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="GermanCorpPages"
+		dataProviderClass=GermanAdsDataProvider.class,
+		dataProvider="germanCorpPages"
 	)
 	public TestAdsOnGermanCorpPages(String wikiName, String path) {
 		urlBuilder = new UrlBuilder(config.getEnv());
@@ -37,53 +33,12 @@ public class TestAdsOnGermanCorpPages extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="US")
 	@Test(
-		groups={"Ads_on_German_corp_pages", "Ads_on_German_corp_pages_DART"}
+		groups={"TestAdsOnGermanCorpPages_GeoEdgeFree"}
 	)
-	public void TestAdsOnGermanCorpPages_DART() throws Exception {
-		AdsCorpPageObject wikiCorpPage = new AdsCorpPageObject(driver, testedPage);
-		wikiCorpPage.verifyNoLiftiumAdsOnPage();
-		wikiCorpPage.verifyProviderAds("IDG");
-	}
-
-	@GeoEdgeProxy(country="CA")
-	@Test(
-		groups={"Ads_on_German_corp_pages", "Ads_on_German_corp_pages_Evolve"}
-	)
-	public void TestAdsOnGermanCorpPages_Evolve_CA() throws Exception {
-		AdsCorpPageObject wikiCorpPage = new AdsCorpPageObject(driver, testedPage);
-		wikiCorpPage.verifyNoLiftiumAdsOnPage();
-		wikiCorpPage.verifyProviderAds("IDG");
-	}
-
-	@GeoEdgeProxy(country="AU")
-	@Test(
-		groups={"Ads_on_German_corp_pages", "Ads_on_German_corp_pages_Evolve"}
-	)
-	public void TestAdsOnGermanCorpPages_Evolve_AU() throws Exception {
-		AdsCorpPageObject wikiCorpPage = new AdsCorpPageObject(driver, testedPage);
-		wikiCorpPage.verifyNoLiftiumAdsOnPage();
-		wikiCorpPage.verifyProviderAds("IDG");
-	}
-
-	@GeoEdgeProxy(country="DE")
-	@Test(
-		groups={"Ads_on_German_corp_pages", "Ads_on_German_corp_pages_IDG"}
-	)
-	public void TestAdsOnGermanCorpPages_IDG() throws Exception {
-		AdsCorpPageObject wikiCorpPage = new AdsCorpPageObject(driver, testedPage);
-		wikiCorpPage.verifyNoLiftiumAdsOnPage();
-		wikiCorpPage.verifyProviderAds("IDG");
-	}
-
-	@GeoEdgeProxy(country="HR")
-	@Test(
-		groups={"Ads_on_German_corp_pages", "Ads_on_German_corp_pages_Liftium"}
-	)
-	public void TestAdsOnGermanCorpPages_Liftium() throws Exception {
-		AdsCorpPageObject wikiCorpPage = new AdsCorpPageObject(driver, testedPage);
-		wikiCorpPage.verifyNoLiftiumAdsOnPage();
-		wikiCorpPage.verifyProviderAds("IDG");
+	public void TestAdsOnGermanCorpPages_GeoEdgeFree() {
+		Ads71MediaObject wikiCorpPage = new Ads71MediaObject(driver, testedPage);
+		wikiCorpPage.verifyNoAdsOnPage();
+		wikiCorpPage.verifyNo71MediaAds();
 	}
 }

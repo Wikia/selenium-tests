@@ -159,4 +159,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		typeReturn();
 		selectIndentation(Indentation.DECREASE);
 	}
+
+	public void copyAndPaste() {
+		waitForElementClickableByElement(editArea);
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
+	}
 }

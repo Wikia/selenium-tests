@@ -51,5 +51,4 @@ public class LoginTests extends NewTestTemplate {
 		dropDown.logIn(credentials.userNameStaff, credentials.passwordStaff);
 		base.verifyUserLoggedIn(credentials.userNameStaff);
 	}
-
 }

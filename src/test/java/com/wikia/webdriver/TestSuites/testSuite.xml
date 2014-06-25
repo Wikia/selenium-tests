@@ -132,9 +132,11 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ClicktrackingArticleEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideosModule.VideosModuleTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoHomePageTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoPageAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditingPreferencesTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VERecaptchaTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VisualEditorEditingTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VECopyAndPasteTests"/>
 		</classes>
 	</test>
 </suite>

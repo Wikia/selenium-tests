@@ -14,6 +14,8 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.FeaturedVideoAdminPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -227,6 +229,12 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL);
 		PageObjectLogging.log("openVideoHomePageObject", wikiURL + " opened", true);
 		return new VideoHomePageObject(driver);
+	}
+
+	public FeaturedVideoAdminPageObject openVideoPageAdminObject(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialVideoPageAdmin);
+		PageObjectLogging.log("openVideoPageAdminObject", wikiURL + " opened", true);
+		return new FeaturedVideoAdminPageObject(driver);
 	}
 
 	public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
