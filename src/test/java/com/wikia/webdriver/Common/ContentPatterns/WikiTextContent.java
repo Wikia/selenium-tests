@@ -32,17 +32,19 @@ public class WikiTextContent {
 	public static String text = PageContent.articleText;
 
 	public static String paragraphText = text;
-	public static String headingText = WikiTextContent.headingPrefix + text + WikiTextContent.headingPostfix;
-	public static String subHeading1Text = WikiTextContent.subHeading1Prefix + text + WikiTextContent.subHeading1Postix;
-	public static String subHeading2Text = WikiTextContent.subHeading2Prefix + text + WikiTextContent.subHeading2Postix;
-	public static String subHeading3Text = WikiTextContent.subHeading3Prefix + text + WikiTextContent.subHeading3Postix;
-	public static String subHeading4Text = WikiTextContent.subHeading4Prefix + text + WikiTextContent.subHeading4Postix;
-	public static String preformattedText = WikiTextContent.preformatted + text;
-	public static String boldText = WikiTextContent.bold + text + WikiTextContent.bold;
-	public static String italicText = WikiTextContent.italic + text + WikiTextContent.italic;
-	public static String striketroughText = WikiTextContent.strikethroughPrefix + text + WikiTextContent.strikethroughPostfix;
-	public static String underlineText = WikiTextContent.underlinePrefix + text + WikiTextContent.underlinePostfix;
-	public static String subscriptText = WikiTextContent.subscriptPrefix + text + WikiTextContent.subscriptPostfix;
-	public static String superscriptText = WikiTextContent.superscriptPrefix + text + WikiTextContent.superscriptPostfix;
+	public static String headingText = headingPrefix + text + headingPostfix;
+	public static String subHeading1Text = subHeading1Prefix + text + subHeading1Postix;
+	public static String subHeading2Text = subHeading2Prefix + text + subHeading2Postix;
+	public static String subHeading3Text = subHeading3Prefix + text + subHeading3Postix;
+	public static String subHeading4Text = subHeading4Prefix + text + subHeading4Postix;
+	public static String preformattedText = preformatted + text;
+	public static String boldText = bold + text + bold;
+	public static String italicText = italic + text + italic;
+	public static String striketroughText = strikethroughPrefix + text + strikethroughPostfix;
+	public static String underlineText = underlinePrefix + text + underlinePostfix;
+	public static String subscriptText = subscriptPrefix + text + subscriptPostfix;
+	public static String superscriptText = superscriptPrefix + text + superscriptPostfix;
+	public static String bulletListText = bulletList + text;
+	public static String numberedListText = nummberedList + text;
 
 }

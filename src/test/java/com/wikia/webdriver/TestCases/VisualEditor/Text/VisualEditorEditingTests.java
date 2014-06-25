@@ -49,6 +49,8 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		wikiTexts.add(WikiTextContent.underlineText);
 		wikiTexts.add(WikiTextContent.subscriptText);
 		wikiTexts.add(WikiTextContent.superscriptText);
+		wikiTexts.add(WikiTextContent.bulletListText);
+		wikiTexts.add(WikiTextContent.numberedListText);
 	}
 
 	@Test(
