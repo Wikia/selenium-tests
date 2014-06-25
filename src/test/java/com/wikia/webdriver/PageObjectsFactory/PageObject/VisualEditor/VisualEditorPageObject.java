@@ -124,7 +124,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void typeReturn() {
 		waitForElementVisibleByElement(editArea);
-		editArea.sendKeys(Keys.ENTER);
+		editArea.sendKeys(Keys.RETURN);
 	}
 
 	public void typeTextInAllFormat(String text) {
