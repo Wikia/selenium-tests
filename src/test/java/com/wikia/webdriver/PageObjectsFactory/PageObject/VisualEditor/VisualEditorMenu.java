@@ -53,14 +53,14 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement numListButton;
 	@FindBy(css=".oo-ui-icon-bullet-list")
 	private WebElement bulletListButton;
-	@FindBy(css=".oo-ui-menuToolGroup")
+	@FindBy(css=".oo-ui-menuToolGroup .oo-ui-indicator-down")
 	private WebElement formattingDropDown;
 	@FindBy(css=".ve-ui-toolbar-saveButton .oo-ui-labeledElement-label")
 	private WebElement publishPageButton;
 	@FindBy(css=".oo-ui-listToolGroup")
 	private WebElement moreOptionsWrapper;
-	@FindBy(css=".oo-ui-menuToolGroup>div>span")
-	private List<WebElement> formattingDropDownItem;
+	@FindBy(css=".oo-ui-menuToolGroup")
+	private WebElement formattingDropDownItems;
 	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")
 	private List<WebElement> toolListDropDowns;
 	@FindBy(css=".oo-ui-listToolGroup")
@@ -87,6 +87,14 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By templateBy = By.cssSelector(".oo-ui-icon-template");
 	private By referenceBy = By.cssSelector(".oo-ui-icon-reference");
 	private By referenceListBy = By.cssSelector(".oo-ui-icon-references");
+	private By paragraphBy = By.cssSelector(".oo-ui-tool-name-paragraph");
+	private By headingBy = By.cssSelector(".oo-ui-tool-name-heading2");
+	private By subHeading1By = By.cssSelector(".oo-ui-tool-name-heading3");
+	private By subHeading2By = By.cssSelector(".oo-ui-tool-name-heading4");
+	private By subHeading3By = By.cssSelector(".oo-ui-tool-name-heading5");
+	private By subHeading4By = By.cssSelector(".oo-ui-tool-name-heading6");
+	private By preformatedBy = By.cssSelector(".oo-ui-tool-name-preformatted");
+	private By menuItemBy = By.cssSelector(".oo-ui-tool-title");
 
 	private void clickStyleFromStyleDropDown(By styleBy) {
 		waitForElementByElement(styleList);
@@ -121,6 +129,43 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			break;
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
+	}
+
+	public void clickFormatting(By formatBy) {
+		waitForElementClickableByElement(formattingDropDown);
+		Actions actions = new Actions(driver);
+		actions
+		.click(formattingDropDown)
+		.click(formattingDropDownItems.findElement(formatBy).findElement(menuItemBy))
+		.build()
+		.perform();
+	}
+
+	public void selectFormatting(Formatting format) {
+
+		switch (format) {
+		case PARAGRAPH:
+			clickFormatting(paragraphBy);
+			break;
+		case HEADING:
+			clickFormatting(headingBy);
+			break;
+		case SUBHEADING1:
+			clickFormatting(subHeading1By);
+			break;
+		case SUBHEADING2:
+			clickFormatting(subHeading2By);
+			break;
+		case SUBHEADING3:
+			clickFormatting(subHeading3By);
+			break;
+		case SUBHEADING4:
+			clickFormatting(subHeading4By);
+			break;
+		case PREFORMATTED:
+			clickFormatting(preformatedBy);
+			break;
+		}
 	}
 
 	public void selectIndentation(Indentation indent) {
@@ -205,11 +250,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
 	}
 
-	public void selectFormatting(Formatting format) {
-		waitForElementClickableByElement(formattingDropDown);
-		formattingDropDown.click();
-		formattingDropDownItem.get(format.ordinal()).click();
-	}
 
 	public VisualEditorSaveChangesDialog clickPublishButton() {
 		waitForElementNotPresent(publishButtonDisabled);
