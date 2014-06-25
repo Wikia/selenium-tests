@@ -33,7 +33,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
 		base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		wikiTexts = new ArrayList<>();
 		wikiTexts.add(WikiTextContent.paragraphText);
@@ -54,7 +54,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-			groups = {"VisualEditorEditing", "VisualEditorEditing_001"}
+		groups = {"VisualEditorEditing", "VisualEditorEditing_001"}
 	)
 	public void VisualEditorEditing_001_insertToNewArticle() {
 		ArticlePageObject article =
@@ -71,7 +71,6 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -92,7 +91,6 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -114,6 +112,5 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
 	}
 }

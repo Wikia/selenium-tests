@@ -67,7 +67,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	public int[] getTextIndex(String text) {
 		String textDump = editArea.getText();
 		int[] indexes = new int[2];
-		indexes[0] = textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
+		//+1 because index is counted differently in selectText() method
+		indexes[0] = textDump.indexOf(text) + 1;
 		indexes[1] = indexes[0] +text.length();
 		if (indexes[0] == 0) {
 			throw new NoSuchElementException("String: " + text + " is not found");
@@ -77,10 +78,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void removeText(String text) {
 		int[] indexes = getTextIndex(text);
-		String removeTextJS = "ve.instances[0].model.change("
-			+ "ve.dm.Transaction.newFromRemoval("
-			+ "ve.instances[0].model.documentModel, new ve.Range( " + indexes[0] + "," + indexes[1] + " )));";
-		((JavascriptExecutor) driver).executeScript(removeTextJS);
+		String script = "ve.instances[0].model.change("
+			+"ve.dm.Transaction.newFromRemoval(ve.instances[0].model.documentModel,"
+			+"new ve.Range(arguments[0],arguments[1])));";
+		((JavascriptExecutor) driver).executeScript(script, indexes[0], indexes[1]);
 	}
 
 	public void verifyNumList(List<String> elements) {
