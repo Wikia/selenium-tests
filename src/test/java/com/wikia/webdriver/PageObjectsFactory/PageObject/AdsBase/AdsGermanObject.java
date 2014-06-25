@@ -37,9 +37,9 @@ public class AdsGermanObject extends AdsBaseObject {
 		WebDriver driver,
 		String page,
 		NetworkTrafficInterceptor networkTrafficInterceptor
-		) {
-			super(driver, page, networkTrafficInterceptor);
-		}
+	) {
+		super(driver, page, networkTrafficInterceptor);
+	}
 
 	/*
 	 * List of all possible combinations for 71M ads with their characteristic slots
@@ -177,7 +177,7 @@ public class AdsGermanObject extends AdsBaseObject {
 
 	public void verifyParamFromIVW2Present(String ivw2Param) {
 		if (driver.getPageSource().indexOf(ivw2Param) >= 0) {
-			PageObjectLogging.log("ParameterFromIVW2IsPresent", "Parameter from IVW2 is present", true);
+			PageObjectLogging.log("ParameterFromIVW2IsPresent", "Parameter " + ivw2Param + " from IVW2 is present", true);
 		} else {
 			throw new NoSuchElementException("Parameter from IVW2 is not present");
 		}

@@ -22,7 +22,7 @@ public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 
 	@NetworkTrafficDump
 	@Test(
-		groups = {"IVW2_GeoEdgeFree"},
+		groups = {"TestIVW2AnalyticsProvider_GeoEdgeFree"},
 		dataProviderClass=GermanAdsDataProvider.class,
 		dataProvider="pagesForIVW2"
 	)
