@@ -9,7 +9,6 @@ import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetOptionsComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject.StyleVideo;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.PreviewEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
@@ -60,7 +59,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		article.verifyVideoCaption(caption);
 	}
 
-	@Test(groups = {"VetModalCaption", "VetModalCaption_002"}, dependsOnMethods = "Vet_Modal_001_captionOnPage")
+	@Test(groups = {"VetModalCaption", "VetModalCaption_002"}, dependsOnGroups = "VetModalCaption_001")
 	public void VetModalCaption_002_captionInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
