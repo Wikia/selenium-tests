@@ -34,9 +34,9 @@ public class AdsGermanObject extends AdsBaseObject {
 
 
 	public AdsGermanObject(
-			WebDriver driver,
-			String page,
-			NetworkTrafficInterceptor networkTrafficInterceptor
+		WebDriver driver,
+		String page,
+		NetworkTrafficInterceptor networkTrafficInterceptor
 		) {
 			super(driver, page, networkTrafficInterceptor);
 		}

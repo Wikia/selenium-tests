@@ -26,8 +26,7 @@ public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 		dataProviderClass=GermanAdsDataProvider.class,
 		dataProvider="pagesForIVW2"
 	)
-	public void TestIVW2AnalyticsProvider_GeoEdgeFree(String wikiName, String article, String ivw2Param )
-	{
+	public void TestIVW2AnalyticsProvider_GeoEdgeFree(String wikiName, String article, String ivw2Param) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsGermanObject wikiPage = new AdsGermanObject(driver, testedPage, networkTrafficIntereceptor);
 		wikiPage.verifyCallToIVW2Issued();
