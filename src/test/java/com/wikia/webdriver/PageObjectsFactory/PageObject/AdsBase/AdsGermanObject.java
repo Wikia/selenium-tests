@@ -1,10 +1,9 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,17 +12,33 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
+import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
+
 /**
  *
  * @author Bogna 'bognix' Knychala
  */
-public class Ads71MediaObject extends AdsBaseObject {
+public class AdsGermanObject extends AdsBaseObject {
 
-	public Ads71MediaObject(WebDriver driver, String page) {
+	private final String ivw2Script = "script.ioam.de";
+
+
+	public AdsGermanObject(WebDriver driver, String page) {
 		super(driver);
 		getUrl(page);
 		setSlots();
 		driver.manage().window().setSize(new Dimension(1920, 1080));
+	}
+
+
+	public AdsGermanObject(
+		WebDriver driver,
+		String page,
+		NetworkTrafficInterceptor networkTrafficInterceptor
+	) {
+		super(driver, page, networkTrafficInterceptor);
 	}
 
 	/*
@@ -150,5 +165,21 @@ public class Ads71MediaObject extends AdsBaseObject {
 			}
 		}
 		return true;
+	}
+
+	public void verifyCallToIVW2Issued() {
+		if (networkTrafficInterceptor.searchRequestUrlInHar(ivw2Script)) {
+			PageObjectLogging.log("RequestToIVW2Issued", "Request to IVW2 issued", true);
+		} else {
+			throw new NoSuchElementException("Request to IVW2 not issued");
+		}
+	}
+
+	public void verifyParamFromIVW2Present(String ivw2Param) {
+		if (driver.getPageSource().indexOf(ivw2Param) >= 0) {
+			PageObjectLogging.log("ParameterFromIVW2IsPresent", "Parameter " + ivw2Param + " from IVW2 is present", true);
+		} else {
+			throw new NoSuchElementException("Parameter from IVW2 is not present");
+		}
 	}
 }

@@ -4,7 +4,7 @@ import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsGermanObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
@@ -41,7 +41,7 @@ public class Test71MediaNoAdsForUsers extends NewTestTemplate {
 	@Test (groups={"Ads", "NoAds71Media_GeoEdgeFree", "NoAds71Media"})
 	public void NoAds71Media_GeoEdgeFree() throws Exception {
 		loginSteps();
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
 		ads71Media.verifyNo71MediaAds();
 	}
 }
