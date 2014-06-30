@@ -9,6 +9,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiTextContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorHyperLinkDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -112,5 +113,19 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
+	}
+
+	@Test(
+		groups = {"VisualEditorEditing", "VisualEditorEditing_004"}
+	)
+	public void VisualEditorEditing_004_insertLinks() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
+		veLinkDialog.typeInLinkInput("abc");
+		veLinkDialog.viewResults();
 	}
 }

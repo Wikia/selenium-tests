@@ -16,6 +16,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorHyperLinkDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorNewTemplateDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceListDialog;
@@ -225,9 +226,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		.perform();
 	}
 
-	public void clickLinkButton() {
+	public VisualEditorHyperLinkDialog clickLinkButton() {
 		linkButton.click();
 		PageObjectLogging.log("clickLinkButton", "link button clicked", true);
+		return new VisualEditorHyperLinkDialog(driver);
 	}
 
 	public void clickCodeButton() {
