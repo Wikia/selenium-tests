@@ -4,7 +4,7 @@ import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsGermanObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -32,20 +32,20 @@ public class Test71MediaAds extends NewTestTemplate {
 	@GeoEdgeProxy(country="DE")
 	@Test (groups={"Ads", "Test71MediaAds_DE", "Ads71Media"})
 	public void Test71MediaAds_DE() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
 
 	@GeoEdgeProxy(country="AU")
 	@Test (groups={"Ads", "Test71MediaAds_AU", "Ads71Media"})
 	public void Test71MediaAds_AU() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
 
 	@Test (groups={"Ads", "Test71MediaAds_GeoEdgeFree", "Ads71Media"})
 	public void Test71MediaAds_GeoEdgeFree() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
 		ads71Media.veriy71MediaAdsPresent();
 	}
 }

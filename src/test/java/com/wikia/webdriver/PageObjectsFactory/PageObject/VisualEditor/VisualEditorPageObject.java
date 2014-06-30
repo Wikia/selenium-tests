@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
@@ -61,6 +64,26 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		selectText(from, to);
 	}
 
+	public int[] getTextIndex(String text) {
+		String textDump = editArea.getText();
+		int[] indexes = new int[2];
+		//+1 because index is counted differently in selectText() method
+		indexes[0] = textDump.indexOf(text) + 1;
+		indexes[1] = indexes[0] +text.length();
+		if (indexes[0] == 0) {
+			throw new NoSuchElementException("String: " + text + " is not found");
+		}
+		return indexes;
+	}
+
+	public void removeText(String text) {
+		int[] indexes = getTextIndex(text);
+		String script = "ve.instances[0].model.change("
+			+"ve.dm.Transaction.newFromRemoval(ve.instances[0].model.documentModel,"
+			+"new ve.Range(arguments[0],arguments[1])));";
+		((JavascriptExecutor) driver).executeScript(script, indexes[0], indexes[1]);
+	}
+
 	public void verifyNumList(List<String> elements) {
 		for (int i=0; i<elements.size(); i++) {
 			Assertion.assertEquals(elements.get(i), numList.get(i).getText());
@@ -98,5 +121,52 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
 		PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
+	}
+
+	public void typeReturn() {
+		waitForElementVisibleByElement(editArea);
+		editArea.sendKeys(Keys.RETURN);
+	}
+
+	public void typeTextInAllFormat(String text) {
+		for (Formatting format : Formatting.values()){
+			PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
+			selectFormatting(format);
+			typeTextArea(text);
+			typeReturn();
+			if (format.name().equals("PREFORMATTED")) {
+				selectFormatting(Formatting.PARAGRAPH);
+			}
+		}
+	}
+
+	public void typeTextInAllStyle(String text) {
+		for (Style style : Style.values()) {
+			PageObjectLogging.log("Style selection", style.toString() + " selected", true);
+			selectStyle(style);
+			typeTextArea(text);
+			typeReturn();
+		}
+	}
+
+	public void typeTextInAllList(String text) {
+		typeReturn();
+		typeTextArea(text);
+		insertList(InsertList.BULLET_LIST);
+		typeReturn();
+		selectIndentation(Indentation.DECREASE);
+		typeTextArea(text);
+		insertList(InsertList.NUMBERED_LIST);
+		typeReturn();
+		selectIndentation(Indentation.DECREASE);
+	}
+
+	public void copyAndPaste() {
+		waitForElementClickableByElement(editArea);
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
 	}
 }

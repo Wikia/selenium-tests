@@ -1,8 +1,9 @@
 package com.wikia.webdriver.Common.DataProvider.Ads;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.DataProvider;
-import java.util.Arrays;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -24,15 +25,6 @@ public class AdsDataProvider {
 			{"it.onepiece", "One_Piece_Wiki_Italia"},
 			{"zh.pad", "Puzzle_%26_Dragons_%E7%BB%B4%E5%9F%BA"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
-		};
-	}
-
-	@DataProvider
-	public static final Object[][] GermanCorpPages() {
-		return new Object[][] {
-			{"de.wikia", "Wikia"},
-			{"de.wikia", "Videospiele"},
-			{"de.wikia", "Videospiele/gamescom"}
 		};
 	}
 
