@@ -36,7 +36,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo"}
 	)
-	public void VEEnabledEditorEntryVEPreferredTests_001_AddNonPremiumVid() throws InterruptedException {
+	public void VEAddExternalVideoTests_001_AddNonPremiumVid() throws InterruptedException {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
@@ -57,7 +57,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
 	)
-	public void VEEnabledEditorEntryVEPreferredTests_002_AddPremiumVid() {
+	public void VEAddExternalVideoTests_002_AddPremiumVid() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
@@ -74,4 +74,5 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
 	}
+
 }
