@@ -28,13 +28,12 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	WikiBasePageObject base;
 
 	private String text = WikiTextContent.text;
-	private ArrayList<String> wikiTexts;
+	private ArrayList<String> wikiTexts, linkWikiTexts;
 	private String articleName;
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
 		base = new WikiBasePageObject(driver);
-
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		wikiTexts = new ArrayList<>();
 		wikiTexts.add(WikiTextContent.paragraphText);
@@ -52,6 +51,10 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		wikiTexts.add(WikiTextContent.superscriptText);
 		wikiTexts.add(WikiTextContent.bulletListText);
 		wikiTexts.add(WikiTextContent.numberedListText);
+		linkWikiTexts = new ArrayList<>();
+		linkWikiTexts.add(WikiTextContent.blueLinkText);
+		linkWikiTexts.add(WikiTextContent.redLinkText);
+		linkWikiTexts.add(WikiTextContent.externalLinkText);
 	}
 
 	@Test(
@@ -125,7 +128,22 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
-		veLinkDialog.typeInLinkInput("abc");
-		veLinkDialog.viewResults();
+		veLinkDialog.typeInLinkInput(PageContent.internalLink);
+		veLinkDialog.verifyMatchingPageIsTop();
+		ve = veLinkDialog.clickLinkResult();
+		ve.typeReturn();
+		veLinkDialog = ve.clickLinkButton();
+		veLinkDialog.typeInLinkInput(PageContent.redLink);
+		veLinkDialog.verifyNewPageIsTop();
+		ve = veLinkDialog.clickLinkResult();
+		ve.typeReturn();
+		veLinkDialog = ve.clickLinkButton();
+		veLinkDialog.typeInLinkInput(PageContent.externalLink);
+		veLinkDialog.verifyExternalLinkIsTop();
+		ve = veLinkDialog.clickLinkResult();
+		ve.typeReturn();
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(linkWikiTexts);
 	}
 }
