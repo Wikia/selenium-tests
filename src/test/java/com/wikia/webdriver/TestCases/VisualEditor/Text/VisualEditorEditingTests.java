@@ -20,6 +20,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * @author Robert 'rochan' Chan
  * @ownership Contribution
  *
+ * 1. VE-1228 Adding all style text, heading text and list to a new article
+ * 2. VE-1228 Removing a piece of text from the article
+ * 3. VE-1228 Adding all style text, heading text and list to an existing article
+ * 4. VE-1271 Adding blue link, red link and external link to a new article
  */
 
 public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
