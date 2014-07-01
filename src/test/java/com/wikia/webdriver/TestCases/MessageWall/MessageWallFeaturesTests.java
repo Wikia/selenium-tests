@@ -100,9 +100,9 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 		wall.writeTitle(title);
 		wall.triggerMessageArea();
 		NewMessageWallAddLinkComponentObject addLink = wall.clickLinkButton();
-		addLink.addInternalLink(PageContent.internalLink, PageContent.textLink);
+		addLink.addInternalLink(PageContent.redirectLink, PageContent.textLink);
 		wall.submit();
-		wall.verifyInternalLink(title, PageContent.internalLink, PageContent.textLink, wikiURL);
+		wall.verifyInternalLink(title, PageContent.redirectLink, PageContent.textLink, wikiURL);
 	}
 
 	@Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures"})
