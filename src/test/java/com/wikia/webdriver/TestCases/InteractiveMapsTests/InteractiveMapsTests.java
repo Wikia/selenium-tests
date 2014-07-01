@@ -17,7 +17,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * Date: 20.06.14
  * Time: 16:53
     - Special:Maps page
-	IM01: Check that creating a custom new map will place it on the top of Special:Maps page
+	IM01: Creating a custom new map based on new image upload
+	IMXX: Create a custom new map based on existing template
+	IMXX: Create a real map flow
 	IM02: Click on a map and verify correct redirect and URL
 	IM03: Click create a map button as anon and make sure log in modal is displayed
 	- Special Map page
@@ -52,6 +54,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	
 	//move to other class:
 	private String mapName = "RMG";
+	private String templateName = "RMG";
+	private String pinTypeName = "RMG";
 
 	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_001_CreateCustomMap() {
@@ -61,12 +65,24 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		CreateAMapComponentObject newMap = map.clickCreateAMap();
 		CreateACustomMapComponentObjectStep1 cm1 = newMap.clickCustomMap();
 		CreateACustomMapComponentObjectStep2 cm2 = cm1.selectFileToUpload(PageContent.file);
+		cm2.verifyTemplateImagePreview();
 		cm2.typeMapName(mapName);
+		cm2.typeTemplateName(templateName);
 		CreatePinTypesComponentObject cm3 = cm2.clickNext();		
-		cm3.typePinTypetitle(pinTypeName);
+		cm3.typePinTypeTitle(pinTypeName);
 		InteractiveMapsPageObject map2 = cm3.clickNext();
 		map2.verifyMapIsBeingProcessedMessage();
 	}	
+	
+	@Test(groups = {"InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_002_ClickMapAndCheckURL() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject map = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject newMap = map.clickCreateAMap();
+		CreateACustomMapComponentObjectStep1 cm1 = newMap.clickExistingTemplateMap();
+		
+	}
 }
 		
 		

@@ -30,9 +30,10 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	private WebElement nextButton;
 	
 	public void typePinTypeTitle(String pinTypeName) {
-		waitForElementByElement(namePinType);
-		pinTypeName.sendKeys(typeName);
-		PageObjectLogging.log("typePinTypeTitle", typeName+" title for pin type is typed in", true);
+		WebElement firstPin = namePinType.get(0);
+		waitForElementByElement(firstPin);
+		namePinType.sendKeys(firstPin);
+		PageObjectLogging.log("typePinTypeTitle", pinTypeName+" title for pin type is typed in", true);
 	}
 	
 	public InteractiveMapsPageObject clickNext() {

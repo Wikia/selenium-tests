@@ -23,6 +23,11 @@ public class InteractiveMapsPageObject extends BasePageObject{
 	//UI Mapping
 	@FindBy(css = "#createMap")
 	private WebElement createAMapButton;
+	@FindBy(css = "iframe[name=wikia-interactive-map]")
+	private WebElement mapFrame;
+	@FindBy(css = ".error-wrapper")
+	private WebElement mapBeingProcessedModal;
+	
 	
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
@@ -32,8 +37,11 @@ public class InteractiveMapsPageObject extends BasePageObject{
 	}
 	
 	public void verifyMapIsBeingProcessedMessage() {
-		
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(mapBeingProcessedModal);
+		driver.switchTo().defaultContent();
 	}
+	
 	
 }
 

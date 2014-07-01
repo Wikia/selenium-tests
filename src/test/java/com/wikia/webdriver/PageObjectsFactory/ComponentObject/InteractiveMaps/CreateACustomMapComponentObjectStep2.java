@@ -24,6 +24,10 @@ public class CreateACustomMapComponentObjectStep2 extends BasePageObject{
 	private WebElement mapTitleField;
 	@FindBy(css = "#intMapNext")
 	private WebElement nextButton;
+	@FindBy(css = "#intMapPreviewImage")
+	private WebElement templateImagePreview;
+	@FindBy(css = "input[name='tile-set-title[]']")
+	private WebElement templateImageField;
 	
 	
 	public void clickMapTitleField() {
@@ -43,5 +47,16 @@ public class CreateACustomMapComponentObjectStep2 extends BasePageObject{
 		nextButton.click();
 		PageObjectLogging.log("clickNext", "clicked next button in naming map modal", true);
 		return new CreatePinTypesComponentObject(driver);
+	}
+
+	public void verifyTemplateImagePreview() {
+		waitForElementByElement(templateImagePreview);
+		
+	}
+
+	public void typeTemplateName(String templateName) {
+		waitForElementByElement(templateImageField);
+		mapTitleField.sendKeys(templateName);
+		PageObjectLogging.log("typeTemplateName", templateName+" title for map typed in", true);
 	}
 }
