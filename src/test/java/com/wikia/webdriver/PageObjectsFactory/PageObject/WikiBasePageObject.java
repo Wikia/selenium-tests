@@ -14,8 +14,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.FeaturedVideoAdminPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -90,6 +88,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.FeaturedVideoAdminPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
@@ -458,7 +458,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
-		disableOptimizely();
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
@@ -466,7 +465,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
-		disableOptimizely();
 		WebElement sectionEditButton = sectionEditButtons.get(section);
 		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
