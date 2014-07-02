@@ -1,5 +1,8 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +30,12 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement externalVideoThumbnail;
 	@FindBy(css=".oo-ui-dialog-open .oo-ui-frame")
 	private WebElement insertMediaDialogIFrame;
+	@FindBy(css=".oo-ui-window-body")
+	private WebElement mediaDialogBody;
+
+	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
+	private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
+	private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
 
 	public VisualEditorAddMediaDialog(WebDriver driver) {
 		super(driver);
@@ -52,12 +61,35 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		addMediaButton.click();
 	}
 
-	public VisualEditorPageObject addMedia(String url) {
+	public VisualEditorPageObject addMediaByURL(String url) {
 		waitForElementVisibleByElement(insertMediaDialogIFrame);
 		driver.switchTo().frame(insertMediaDialogIFrame);
 		typeInSearchTextField(url);
 		clickAddMediaButton();
 		waitForElementNotVisibleByElement(insertMediaDialogIFrame);
+		driver.switchTo().defaultContent();
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditorAddMediaDialog searchMedia(String searchText) {
+		waitForElementVisibleByElement(insertMediaDialogIFrame);
+		driver.switchTo().frame(insertMediaDialogIFrame);
+		typeInSearchTextField(searchText);
+		driver.switchTo().defaultContent();
+		return new VisualEditorAddMediaDialog(driver);
+	}
+
+	public VisualEditorPageObject addExistingMedia(int number) {
+		waitForElementVisibleByElement(insertMediaDialogIFrame);
+		driver.switchTo().frame(insertMediaDialogIFrame);
+		WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
+		waitForElementVisibleByElement(mediaResultsWidget);
+		List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
+		for (int i = 0; i<number; i++) {
+			WebElement mediaAddIcon = mediaResults.get(i).findElement(mediaAddIconBy);
+			mediaAddIcon.click();
+		}
+		clickAddMediaButton();
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
 	}
