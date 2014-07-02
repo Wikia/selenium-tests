@@ -45,7 +45,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
-		VisualEditorPageObject veNew = mediaDialog.addMedia(VideoContent.nonPremiumVideoURL);
+		VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.nonPremiumVideoURL);
 		veNew.verifyVideo();
 		veNew.verifyVEToolBarPresent();
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
@@ -66,7 +66,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
-		VisualEditorPageObject veNew = mediaDialog.addMedia(VideoContent.premiumVideoURL);
+		VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.premiumVideoURL);
 		veNew.verifyVideo();
 		veNew.verifyVEToolBarPresent();
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
@@ -75,4 +75,25 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		article.logOut(wikiURL);
 	}
 
+	@Test(
+		groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
+	)
+	public void VEAddExternalVideoTests_003_AddExistingVid() {
+		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("y");
+		VisualEditorPageObject veNew = mediaDialog.addExistingMedia(2);
+		veNew.verifyVideos(2);
+		veNew.verifyVEToolBarPresent();
+		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
+		article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
 }

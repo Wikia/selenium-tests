@@ -40,6 +40,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement veEditorSurface;
 	@FindBy(css=".image.video.video-thumbnail.medium")
 	private WebElement mediaNode;
+	@FindBy(css=".image.video.video-thumbnail.medium")
+	private List<WebElement> mediaNodes;
 
 	public void typeTextArea(String text) {
 		waitForElementVisibleByElement(editArea);
@@ -121,6 +123,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
 		PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
+	}
+
+	public void verifyVideos(int expected) {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		Assertion.assertNumber(expected, mediaNodes.size(), "Checking the correct number of video nodes added");
+		PageObjectLogging.log("verifyVideos", mediaNodes.size() + " videos displayed", true);
 	}
 
 	public void typeReturn() {
