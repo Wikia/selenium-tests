@@ -28,7 +28,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement removeThisItemButton;
 	@FindBy(css=".video.oo-ui-pageLayout-active .video-thumbnail")
 	private WebElement externalVideoThumbnail;
-	@FindBy(css=".oo-ui-dialog-open .oo-ui-frame")
+	@FindBy(css=".oo-ui-frame")
 	private WebElement insertMediaDialogIFrame;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mediaDialogBody;
