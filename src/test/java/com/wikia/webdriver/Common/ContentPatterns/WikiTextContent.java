@@ -29,6 +29,9 @@ public class WikiTextContent {
 	public static String bulletList = "* ";
 	public static String nummberedList = "# ";
 
+	public static String linkPrefix = "[[";
+	public static String linkPostfix = "]]";
+
 	public static String text = PageContent.articleText;
 
 	public static String paragraphText = text;
@@ -46,5 +49,10 @@ public class WikiTextContent {
 	public static String superscriptText = superscriptPrefix + text + superscriptPostfix;
 	public static String bulletListText = bulletList + text;
 	public static String numberedListText = nummberedList + text;
+
+	public static String blueLinkText = linkPrefix + PageContent.internalLink + linkPostfix;
+	public static String externalLinkText = linkPrefix + PageContent.externalLink + linkPostfix;
+	public static String redLinkText = linkPrefix + PageContent.redLink + linkPostfix;
+	public static String redirectLinkText = linkPrefix + PageContent.redirectLink + linkPostfix;
 
 }

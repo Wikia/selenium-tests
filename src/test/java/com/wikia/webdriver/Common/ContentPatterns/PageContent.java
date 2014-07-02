@@ -71,8 +71,10 @@ public class PageContent {
 
 	//links
 	public static String externalLink = "http://www.wikia.com/";
-	public static String internalLink = "Formatting";
+	public static String internalLink = "Home";
+	public static String redirectLink = "Formatting";
 	public static String textLink = "qaLink";
+	public static String redLink = "QAasdfasjsad123213lj";
 
 	//forum
 	public static String forumTitlePrefix = "QABoardTitle ";
