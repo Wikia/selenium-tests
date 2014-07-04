@@ -82,6 +82,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		CreateAMapComponentObject newMap = map.clickCreateAMap();
 		CreateACustomMapComponentObjectStep1 cm1 = newMap.clickExistingTemplateMap();
 		
+		
 	}
 }
 		

@@ -32,7 +32,7 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	public void typePinTypeTitle(String pinTypeName) {
 		WebElement firstPin = namePinType.get(0);
 		waitForElementByElement(firstPin);
-		namePinType.sendKeys(firstPin);
+		firstPin.sendKeys(pinTypeName);
 		PageObjectLogging.log("typePinTypeTitle", pinTypeName+" title for pin type is typed in", true);
 	}
 	
