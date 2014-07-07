@@ -4,10 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.sun.tools.javac.util.List;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -21,24 +19,23 @@ public class CreateAMapComponentObject extends BasePageObject{
 	}
 	
 	//UI Mapping
-	@FindBy(css = "#intMapCustom")
+	@FindBy(css = ".int-map-icon-geo-tile-set-blue")
+	private WebElement realMapLink;
+	@FindBy(css = ".int-map-icon-custom-tile-set-blue")
 	private WebElement customMapLink;
-	@FindBy(css = ".modalEvent")
-	private List<WebElement> existingTemplate;
 	
-	public CreateACustomMapComponentObjectStep1 clickCustomMap() {
+	public CreateACustomMapComponentObject clickCustomMap() {
 		waitForElementByElement(customMapLink);
 		customMapLink.click();
 		PageObjectLogging.log("clickCustomMap", "custom map link clicked",  true, driver);
-		return new CreateACustomMapComponentObjectStep1(driver);
+		return new CreateACustomMapComponentObject(driver);
 	}
 
-	public CreateACustomMapComponentObjectStep1 clickExistingTemplateMap() {
-		waitForElementByElement(existingTemplate.get(0));
-		WebElement firstExistingTemplate = existingTemplate.get(0);
-		firstExistingTemplate.click();
-		PageObjectLogging.log("clickExistingTemplateMap", "custom existing template clicked",  true, driver);
-		return new CreateACustomMapComponentObjectStep1(driver);
+	public CreateRealMapComponentObject clickRealMap() {
+		waitForElementByElement(realMapLink);
+		realMapLink.click();
+		PageObjectLogging.log("clickRealMap", "Real Map link clicked",  true, driver);
+		return new CreateRealMapComponentObject(driver);
 	}
 	
 }

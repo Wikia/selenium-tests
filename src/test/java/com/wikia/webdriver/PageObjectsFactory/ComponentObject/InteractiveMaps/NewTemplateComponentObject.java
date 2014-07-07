@@ -13,9 +13,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
  *
  */
 
-public class CreateACustomMapComponentObjectStep2 extends BasePageObject{
+public class NewTemplateComponentObject extends BasePageObject{
 
-	public CreateACustomMapComponentObjectStep2(WebDriver driver) {
+	public NewTemplateComponentObject(WebDriver driver) {
 		super(driver);
 	}
 	
