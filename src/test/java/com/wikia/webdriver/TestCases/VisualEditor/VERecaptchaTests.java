@@ -29,9 +29,10 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"}
+		groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"},
+		enabled = false
 	)
-	public void VEAddRecaptchaTests_001_AddExternalURL() throws InterruptedException {
+	public void VEAddRecaptchaTests_001_AddExternalURL_QAART_366() throws InterruptedException {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
