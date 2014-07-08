@@ -65,6 +65,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		verifyRecaptchaIsVisible();
 		waitForElementByElement(recaptchaImage);
 		String imageSrc = recaptchaImage.getAttribute("src");
+		PageObjectLogging.log("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
 		driver.switchTo().defaultContent();
 		return imageSrc;
 	}
