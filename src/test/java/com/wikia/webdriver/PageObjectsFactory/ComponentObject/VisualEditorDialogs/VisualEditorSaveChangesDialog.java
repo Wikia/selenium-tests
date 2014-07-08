@@ -21,7 +21,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		".oo-ui-buttonWidget .oo-ui-labeledElement-label"
 	)
 	private WebElement publishButton;
-	@FindBy(css=".oo-ui-dialog-open .oo-ui-frame")
+	@FindBy(css=".oo-ui-frame")
 	private WebElement saveDialogIFrame;
 	@FindBy(css="#recaptcha_area")
 	private WebElement recaptchaArea;
@@ -65,6 +65,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		verifyRecaptchaIsVisible();
 		waitForElementByElement(recaptchaImage);
 		String imageSrc = recaptchaImage.getAttribute("src");
+		PageObjectLogging.log("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
 		driver.switchTo().defaultContent();
 		return imageSrc;
 	}
