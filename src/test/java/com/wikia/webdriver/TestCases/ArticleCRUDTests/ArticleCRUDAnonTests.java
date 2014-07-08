@@ -46,8 +46,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_003"},
-		enabled = false
+		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_003"}
 	)
 	public void ArticleCRUDAnon_003_addDropdown_QAART_366() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -92,8 +91,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_006"},
-		enabled = false
+		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_006"}
 	)
 	public void ArticleCRUDAnon_006_editDropdown_QAART_366() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

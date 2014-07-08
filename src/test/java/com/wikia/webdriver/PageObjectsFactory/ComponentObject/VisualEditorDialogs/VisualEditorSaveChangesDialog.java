@@ -21,7 +21,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		".oo-ui-buttonWidget .oo-ui-labeledElement-label"
 	)
 	private WebElement publishButton;
-	@FindBy(css=".oo-ui-dialog-open .oo-ui-frame")
+	@FindBy(css=".oo-ui-frame")
 	private WebElement saveDialogIFrame;
 	@FindBy(css="#recaptcha_area")
 	private WebElement recaptchaArea;
