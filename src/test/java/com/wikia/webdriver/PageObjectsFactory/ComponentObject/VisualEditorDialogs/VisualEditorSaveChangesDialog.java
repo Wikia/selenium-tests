@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +30,10 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 	private WebElement recaptchaImage;
 	@FindBy(css=".secondary .oo-ui-labeledElement-label")
 	private WebElement reviewChangesButton;
+	@FindBy(css=".oo-ui-window-body")
+	private WebElement saveDialogBody;
+
+	private By recaptchaImageBy = By.cssSelector("#recaptcha_challenge_image");
 
 	public VisualEditorSaveChangesDialog(WebDriver driver) {
 		super(driver);
@@ -63,20 +68,25 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 		waitForElementVisibleByElement(saveDialogIFrame);
 		driver.switchTo().frame(saveDialogIFrame);
 		verifyRecaptchaIsVisible();
-		waitForElementByElement(recaptchaImage);
+		waitForElementVisibleByElement(recaptchaImage);
 		String imageSrc = recaptchaImage.getAttribute("src");
 		PageObjectLogging.log("getRecaptchaImageSrc", "RECAPTCHA img source is: " + imageSrc, true, driver);
 		driver.switchTo().defaultContent();
 		return imageSrc;
 	}
 
-	public void clickSaveWithRecaptcha() {
+	public VisualEditorSaveChangesDialog clickSaveWithRecaptcha() {
 		waitForElementVisibleByElement(saveDialogIFrame);
 		driver.switchTo().frame(saveDialogIFrame);
 		waitForElementClickableByElement(publishButton);
+		if(checkIfElementOnPage(recaptchaArea)) {
+			WebElement recaptchaImage = saveDialogBody.findElement(recaptchaImageBy);
+			waitForElementVisibleByElement(recaptchaImage);
+		}
 		publishButton.click();
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickSaveWithRecaptcha", "The 2nd Publish Button is clicked", true);
+		return new VisualEditorSaveChangesDialog(driver);
 	}
 
 	public void verifyIsNewRecaptcha(String target) {

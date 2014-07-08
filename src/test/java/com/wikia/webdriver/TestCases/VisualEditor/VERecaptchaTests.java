@@ -40,10 +40,9 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 		ve.verifyEditorSurfacePresent();
 		ve.typeTextArea(URLsContent.externalURL);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-		saveDialog.verifyRecaptchaIsNotVisible();
-		saveDialog.clickSaveWithRecaptcha();
+		saveDialog = saveDialog.clickSaveWithRecaptcha();
 		String firstImgSrc = saveDialog.getRecaptchaImageSrc();
-		saveDialog.clickSaveWithRecaptcha();
+		saveDialog = saveDialog.clickSaveWithRecaptcha();
 		saveDialog.verifyIsNewRecaptcha(firstImgSrc);
 	}
 }
