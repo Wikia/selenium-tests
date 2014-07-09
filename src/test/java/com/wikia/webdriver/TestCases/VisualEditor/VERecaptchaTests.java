@@ -31,7 +31,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"}
 	)
-	public void VEAddRecaptchaTests_001_AddExternalURL_QAART_366() {
+	public void VEAddRecaptchaTests_001_AddExternalURL() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
@@ -41,8 +41,11 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 		ve.typeTextArea(URLsContent.externalURL);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		saveDialog = saveDialog.clickSaveWithRecaptcha();
+		saveDialog.verifyRecaptchaImageSrc();
 		String firstImgSrc = saveDialog.getRecaptchaImageSrc();
 		saveDialog = saveDialog.clickSaveWithRecaptcha();
+		saveDialog.verifyRecaptchaIsVisible();
+		saveDialog.verifyRecaptchaImageSrc();
 		saveDialog.verifyIsNewRecaptcha(firstImgSrc);
 	}
 }
