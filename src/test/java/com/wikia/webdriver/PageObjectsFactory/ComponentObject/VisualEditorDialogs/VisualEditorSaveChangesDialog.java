@@ -18,11 +18,10 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 
 	@FindBy(
 		css=
-		".oo-ui-widget.oo-ui-flaggableElement-constructive" +
-		".oo-ui-buttonWidget .oo-ui-labeledElement-label"
+		".oo-ui-window-foot .oo-ui-flaggableElement-constructive .oo-ui-labeledElement-label"
 	)
 	private WebElement publishButton;
-	@FindBy(css=".oo-ui-frame")
+	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
 	private WebElement saveDialogIFrame;
 	@FindBy(css="#recaptcha_area")
 	private WebElement recaptchaArea;
@@ -40,7 +39,7 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 	}
 
 	public ArticlePageObject savePage() {
-		waitForElementVisibleByElement(saveDialogIFrame);
+		waitForElementByElement(saveDialogIFrame);
 		driver.switchTo().frame(saveDialogIFrame);
 		waitForElementByElement(publishButton);
 		waitForElementClickableByElement(publishButton);
