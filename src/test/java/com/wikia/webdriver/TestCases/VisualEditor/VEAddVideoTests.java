@@ -36,7 +36,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo"}
 	)
-	public void VEAddExternalVideoTests_001_AddNonPremiumVid() throws InterruptedException {
+	public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
