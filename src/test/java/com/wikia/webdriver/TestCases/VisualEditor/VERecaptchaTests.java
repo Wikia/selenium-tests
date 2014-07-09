@@ -31,7 +31,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"}
 	)
-	public void VEAddRecaptchaTests_001_AddExternalURL_QAART_366() {
+	public void VEAddRecaptchaTests_001_AddExternalURL() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
