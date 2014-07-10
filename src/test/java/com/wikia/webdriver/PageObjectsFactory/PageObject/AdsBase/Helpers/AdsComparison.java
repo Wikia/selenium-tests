@@ -1,23 +1,26 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers;
 
-import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
-import com.wikia.webdriver.Common.Core.ImageUtilities.ImageEditor;
-import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageEditor;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -155,5 +158,40 @@ public class AdsComparison {
 
 	private String readFileAsString(String filePath) throws IOException {
 		return IOUtils.toString(new FileInputStream(new File(filePath)), "UTF-8");
+	}
+
+	protected boolean checkIfScriptInsideScripts(List<WebElement> scripts, String script, WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		for (WebElement scriptNode : scripts) {
+			String result = (String) js.executeScript(
+				"return arguments[0].innerHTML", scriptNode
+			);
+			String trimedResult = result.replaceAll("\\s", "");
+			if (trimedResult.contains(script)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public boolean hasSkin(WebElement element, String elementSelector, WebDriver driver) {
+		List<WebElement> scriptsInFrame = element.findElements(By.tagName("script"));
+		String skinCallJS = "top.loadCustomAd";
+		PageObjectLogging.log(
+				"Checking for skin call",
+				"skin call found in " + elementSelector,
+				true
+			);
+
+		if (checkIfScriptInsideScripts(scriptsInFrame, skinCallJS, driver)) {
+			PageObjectLogging.log(
+				"Found skin call",
+				"skin call found in " + elementSelector,
+				true
+			);
+			return true;
+		}
+		return false;
 	}
 }

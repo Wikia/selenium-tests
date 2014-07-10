@@ -52,12 +52,16 @@ public class AdsGermanObject extends AdsBaseObject {
 		HashMap<String,Object> flashtalkingMap = new HashMap<String, Object>();
 		HashMap<String,Object> wp_internMap = new HashMap<String, Object>();
 		HashMap<String,Object> leaderboardMap = new HashMap<String, Object>();
+		HashMap<String,Object> medrecMap = new HashMap<String, Object>();
+		HashMap<String,Object> prefooterMap = new HashMap<String, Object>();
 
 		List<String> billboard = new ArrayList<String>();
 		List<String> fireplace = new ArrayList<String>();
 		List<String> flashtalking = new ArrayList<String>();
 		List<String> wp_intern = new ArrayList<String>();
 		List<String> leaderboard = new ArrayList<String>();
+		List<String> medrec = new ArrayList<String>();
+		List<String> prefooter = new ArrayList<String>();
 
 		billboard.add("#ad-skyscraper1-outer");
 		billboardMap.put("name", "billboard");
@@ -77,13 +81,25 @@ public class AdsGermanObject extends AdsBaseObject {
 		wp_internMap.put("slots", wp_intern);
 
 		leaderboard.add("#ad-fullbanner2-outer");
-		wp_internMap.put("name", "leaderboard");
-		wp_internMap.put("slots", leaderboard);
+		leaderboardMap.put("name", "leaderboard");
+		leaderboardMap.put("slots", leaderboard);
+
+		medrec.add("#ad-rectangle1");
+		medrecMap.put("name", "medrec");
+		medrecMap.put("slots", medrec);
+
+		prefooter.add("#ad-promo1");
+		prefooterMap.put("name", "prefooter");
+		prefooterMap.put("slots", prefooter);
 
 		combinations.add(billboardMap);
 		combinations.add(fireplaceMap);
 		combinations.add(flashtalkingMap);
 		combinations.add(wp_internMap);
+		combinations.add(leaderboardMap);
+		combinations.add(medrecMap);
+		combinations.add(prefooterMap);
+
 	}
 
 	public void veriy71MediaAdsPresent() {
@@ -104,6 +120,10 @@ public class AdsGermanObject extends AdsBaseObject {
 							driver.findElement(By.cssSelector(elementSelector)),
 							elementSelector,
 							driver
+						) ||  adsComparison.hasSkin(
+							driver.findElement(By.cssSelector(elementSelector)),
+							elementSelector,
+							driver
 						)
 					) {
 						throw new NoSuchElementException(
@@ -118,6 +138,7 @@ public class AdsGermanObject extends AdsBaseObject {
 					}
 				}
 				combinationFound = true;
+				break;
 			}
 		}
 		if (!combinationFound) {
