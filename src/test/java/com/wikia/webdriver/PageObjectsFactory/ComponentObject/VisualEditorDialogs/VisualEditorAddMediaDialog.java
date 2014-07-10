@@ -22,13 +22,13 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement closeButton;
 	@FindBy(css=".oo-ui-window-foot .oo-ui-buttonedElement-button")
 	private WebElement addMediaButton;
-	@FindBy(css=".ve-ui-wikiaUploadButtonWidget")
+	@FindBy(css=".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labeledElement-label")
 	private WebElement topUploadButton;
 	@FindBy(css=".video.oo-ui-pageLayout-active .oo-ui-buttonedElement-button")
 	private WebElement removeThisItemButton;
 	@FindBy(css=".video.oo-ui-pageLayout-active .video-thumbnail")
 	private WebElement externalVideoThumbnail;
-	@FindBy(css=".oo-ui-dialog-open .oo-ui-frame")
+	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
 	private WebElement insertMediaDialogIFrame;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mediaDialogBody;
@@ -65,6 +65,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		waitForElementVisibleByElement(insertMediaDialogIFrame);
 		driver.switchTo().frame(insertMediaDialogIFrame);
 		typeInSearchTextField(url);
+		waitForElementVisibleByElement(topUploadButton);
 		clickAddMediaButton();
 		waitForElementNotVisibleByElement(insertMediaDialogIFrame);
 		driver.switchTo().defaultContent();
