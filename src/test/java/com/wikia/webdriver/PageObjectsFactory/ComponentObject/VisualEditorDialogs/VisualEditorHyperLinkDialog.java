@@ -64,14 +64,13 @@ public class VisualEditorHyperLinkDialog extends WikiBasePageObject {
 		pageCategoryIndex[REDIRECTPAGEINDEX] = -1;
 	}
 
-	public VisualEditorPageObject typeInLinkInput(String text) {
+	public void typeInLinkInput(String text) {
 		waitForElementByElement(hyperLinkIFrame);
 		driver.switchTo().frame(hyperLinkIFrame);
 		waitForElementVisibleByElement(linkInput);
 		waitForElementClickableByElement(linkInput);
 		linkInput.sendKeys(text);
 		driver.switchTo().defaultContent();
-		return new VisualEditorPageObject(driver);
 	}
 
 	private void viewLinkResults() {
