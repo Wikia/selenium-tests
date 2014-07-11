@@ -22,7 +22,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"VetAddVideo_001", "VetTests", "VetAddVideo"})
-	public void VetAddVideo_001_MessageWallProvider_MAIN_2538() {
+	public void VetAddVideo_001_MessageWallProvider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
@@ -42,7 +42,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"VetAddVideo_002", "VetTests", "VetAddVideo"})
-	public void VetAddVideo_002_MessageWallLibrary_MAIN_2538() {
+	public void VetAddVideo_002_MessageWallLibrary() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
