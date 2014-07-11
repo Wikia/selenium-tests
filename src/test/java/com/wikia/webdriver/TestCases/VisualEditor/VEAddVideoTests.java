@@ -26,6 +26,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
+	String articleName;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
@@ -37,7 +38,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo"}
 	)
 	public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
@@ -92,6 +93,24 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		veNew.verifyVideos(2);
 		veNew.verifyVEToolBarPresent();
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
+		article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+
+	@Test(
+		groups = {"VEAddVideo", "VEAddExternalVideoTests_004", "VEAddExistingVideo"},
+		dependsOnGroups = "VEAddExternalVideoTests_001"
+	)
+	public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		ve.selectMediaAndDelete();
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		article = save.savePage();
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
