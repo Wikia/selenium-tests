@@ -89,8 +89,10 @@ public class VisualEditorSaveChangesDialog extends WikiBasePageObject {
 	}
 
 	public VisualEditorReviewChangesDialog clickReviewYourChanges() {
+		waitForElementByElement(saveDialogIFrame);
 		waitForElementVisibleByElement(saveDialogIFrame);
 		driver.switchTo().frame(saveDialogIFrame);
+		waitForElementByElement(reviewChangesButton);
 		waitForElementClickableByElement(reviewChangesButton);
 		reviewChangesButton.click();
 		driver.switchTo().defaultContent();

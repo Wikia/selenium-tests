@@ -17,7 +17,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  */
 public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 
-	@FindBy(css=".oo-ui-dialog-open .oo-ui-frame")
+	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
 	private WebElement reviewDialogIFrame;
 	@FindBy(css=".secondary .oo-ui-labeledElement-label")
 	private WebElement reviewChangesButton;
