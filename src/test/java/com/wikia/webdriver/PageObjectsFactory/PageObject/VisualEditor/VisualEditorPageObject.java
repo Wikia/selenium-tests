@@ -51,6 +51,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		mediaNode.click();
 		Actions actions2 = new Actions(driver);
 		actions2.sendKeys(Keys.DELETE).build().perform();
+		PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
 	}
 
 	public void typeTextArea(String text) {
@@ -133,6 +134,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
 		PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
+	}
+
+	public void verifyNoVideo() {
+		if(checkIfElementOnPage(mediaNode))
+			throw new AssertionError("Media Node is still on the page");
+		else
+			PageObjectLogging.log("verifyNoVideo", "Verified no video is on page", true, driver);
 	}
 
 	public void verifyVideos(int expected) {

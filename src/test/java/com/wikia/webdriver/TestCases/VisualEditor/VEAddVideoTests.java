@@ -110,6 +110,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.selectMediaAndDelete();
+		ve.verifyNoVideo();
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		article = save.savePage();
 		article.verifyVEPublishComplete();
