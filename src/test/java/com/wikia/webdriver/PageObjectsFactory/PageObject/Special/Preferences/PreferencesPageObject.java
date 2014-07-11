@@ -81,7 +81,7 @@ public class PreferencesPageObject extends WikiBasePageObject{
 
 	public PreferencesPageObject clickSaveButton() {
 		waitForElementClickableByElement(saveButton);
-		saveButton.click();
+		scrollAndClick(saveButton);
 		PageObjectLogging.log("clickSaveButton", "Save button clicked", true);
 		return new PreferencesPageObject(driver);
 	}
