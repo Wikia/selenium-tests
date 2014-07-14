@@ -52,7 +52,11 @@ public class VisualEditorDataProvider {
 		MEDIA,
 		TEMPLATE,
 		REFERENCE,
-		REFERENCE_LIST;
+		REFERENCE_LIST,
+		PAGE_SETTINGS,
+		CATEGORIES,
+		KEYBOARD_SHORTCUTS,
+		SOURCE_EDITOR;
 	}
 
 	public enum InsertList {
