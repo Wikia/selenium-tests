@@ -137,10 +137,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	public void verifyNoVideo() {
-		if(checkIfElementOnPage(mediaNode))
+		if(checkIfElementOnPage(mediaNode)) {
 			throw new AssertionError("Media Node is still on the page");
-		else
+		} else {
 			PageObjectLogging.log("verifyNoVideo", "Verified no video is on page", true, driver);
+		}
 	}
 
 	public void verifyVideos(int expected) {
