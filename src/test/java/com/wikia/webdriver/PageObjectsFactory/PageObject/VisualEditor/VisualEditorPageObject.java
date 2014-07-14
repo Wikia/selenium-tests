@@ -7,6 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -39,9 +40,19 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	@FindBy(css=".ve-init-mw-viewPageTarget-surface")
 	private WebElement veEditorSurface;
 	@FindBy(css=".image.video.video-thumbnail.medium")
-	private WebElement mediaNode;
-	@FindBy(css=".image.video.video-thumbnail.medium")
 	private List<WebElement> mediaNodes;
+	@FindBy(css="figure.ve-ce-branchNode a")
+	private WebElement mediaNode;
+
+	public void selectMediaAndDelete() {
+		waitForElementByElement(editArea);
+		editArea.click();
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+		Actions actions2 = new Actions(driver);
+		actions2.sendKeys(Keys.DELETE).build().perform();
+		PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
+	}
 
 	public void typeTextArea(String text) {
 		waitForElementVisibleByElement(editArea);
@@ -123,6 +134,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
 		PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
+	}
+
+	public void verifyNoVideo() {
+		if(checkIfElementOnPage(mediaNode)) {
+			throw new AssertionError("Media Node is still on the page");
+		} else {
+			PageObjectLogging.log("verifyNoVideo", "Verified no video is on page", true, driver);
+		}
 	}
 
 	public void verifyVideos(int expected) {
