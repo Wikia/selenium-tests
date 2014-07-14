@@ -31,7 +31,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"}
 	)
-	public void VEAddRecaptchaTests_001_AddExternalURL() throws InterruptedException {
+	public void VEAddRecaptchaTests_001_AddExternalURL() {
 		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
@@ -40,10 +40,12 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 		ve.verifyEditorSurfacePresent();
 		ve.typeTextArea(URLsContent.externalURL);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-		saveDialog.verifyRecaptchaIsNotVisible();
-		saveDialog.clickSaveWithRecaptcha();
+		saveDialog = saveDialog.clickSaveWithRecaptcha();
+		saveDialog.verifyRecaptchaImageSrc();
 		String firstImgSrc = saveDialog.getRecaptchaImageSrc();
-		saveDialog.clickSaveWithRecaptcha();
+		saveDialog = saveDialog.clickSaveWithRecaptcha();
+		saveDialog.verifyRecaptchaIsVisible();
+		saveDialog.verifyRecaptchaImageSrc();
 		saveDialog.verifyIsNewRecaptcha(firstImgSrc);
 	}
 }

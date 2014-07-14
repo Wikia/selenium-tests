@@ -46,6 +46,7 @@ public class VisualEditorHyperLinkDialog extends WikiBasePageObject {
 	private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
 	private By linkResultsBy = By.cssSelector("li");
 	private By linkCategoryBy = By.cssSelector(".oo-ui-labeledElement-label");
+	private By selectedResultsBy = By.cssSelector(".oo-ui-optionWidget-selected");
 
 	private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
@@ -74,6 +75,8 @@ public class VisualEditorHyperLinkDialog extends WikiBasePageObject {
 
 	private void viewLinkResults() {
 		waitForElementNotVisibleByElement(inputPending);
+		waitForElementByElement(desktopContext);
+		WebElement selectedResult = desktopContext.findElement(selectedResultsBy);
 		waitForElementByElement(selectedResult);
 		WebElement linkResultMenu = desktopContext.findElement(linkResultMenuBy);
 		List<WebElement> linkResults = linkResultMenu.findElements(linkResultsBy);
@@ -156,6 +159,7 @@ public class VisualEditorHyperLinkDialog extends WikiBasePageObject {
 		waitForElementNotVisibleByElement(inputPending);
 		waitForElementByElement(selectedResult);
 		WebElement matchingResult = desktopContext.findElement(matchingResultBy);
+		waitForElementByElement(matchingResult);
 		waitForElementClickableByElement(matchingResult);
 		matchingResult.click();
 		waitForElementByElement(hyperLinkIFrame);

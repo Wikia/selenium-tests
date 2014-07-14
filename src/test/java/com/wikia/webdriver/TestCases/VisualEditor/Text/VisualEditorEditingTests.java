@@ -126,8 +126,9 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		groups = {"VisualEditorEditing", "VisualEditorEditing_004"}
 	)
 	public void VisualEditorEditing_004_insertLinks() {
+		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, articleName);
+			base.openArticleByName(wikiURL, articleName2);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
