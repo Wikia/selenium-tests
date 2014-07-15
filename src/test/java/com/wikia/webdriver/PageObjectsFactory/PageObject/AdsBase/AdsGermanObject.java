@@ -116,7 +116,7 @@ public class AdsGermanObject extends AdsBaseObject {
 				);
 				for (String elementSelector: combinationSlots) {
 					if (
-						adsComparison.compareSlotOnOff(
+						!adsComparison.compareSlotOnOff(
 							driver.findElement(By.cssSelector(elementSelector)),
 							elementSelector,
 							driver
@@ -125,17 +125,19 @@ public class AdsGermanObject extends AdsBaseObject {
 							elementSelector,
 							driver
 						)
-					) {
-						throw new NoSuchElementException(
-							"Ad in slot not found; CSS: " + elementSelector
-						);
-					} else {
+					){
 						PageObjectLogging.log(
-							"Ad in slot found",
-							"Ad in slot found; CSS: " + elementSelector,
-							true
+								"Ad in slot found",
+								"Ad in slot found; CSS: " + elementSelector,
+								true
 						);
 					}
+
+					 else {
+							throw new NoSuchElementException(
+								"Ad in slot not found; CSS: " + elementSelector
+							);
+						}
 				}
 				combinationFound = true;
 				break;

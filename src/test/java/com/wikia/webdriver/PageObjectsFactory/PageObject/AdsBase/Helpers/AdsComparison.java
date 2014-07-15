@@ -178,11 +178,6 @@ public class AdsComparison {
 	public boolean hasSkin(WebElement element, String elementSelector, WebDriver driver) {
 		List<WebElement> scriptsInFrame = element.findElements(By.tagName("script"));
 		String skinCallJS = "top.loadCustomAd";
-		PageObjectLogging.log(
-				"Checking for skin call",
-				"skin call found in " + elementSelector,
-				true
-			);
 
 		if (checkIfScriptInsideScripts(scriptsInFrame, skinCallJS, driver)) {
 			PageObjectLogging.log(
