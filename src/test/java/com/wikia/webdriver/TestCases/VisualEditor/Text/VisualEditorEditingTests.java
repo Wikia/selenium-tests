@@ -187,6 +187,5 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-
 	}
 }
