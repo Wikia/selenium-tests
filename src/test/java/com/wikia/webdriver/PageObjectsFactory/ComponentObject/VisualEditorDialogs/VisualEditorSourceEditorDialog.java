@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
@@ -26,6 +27,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		driver.switchTo().frame(sourceEditorDialogIFrame);
 		waitForElementClickableByElement(closeButton);
 		closeButton.click();
+		PageObjectLogging.log("clickCloseButton", "Clicked on the close button", true);
 		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
@@ -47,6 +49,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		editArea.sendKeys(text);
 		waitForElementClickableByElement(applyChangesButton);
 		applyChangesButton.click();
+		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
