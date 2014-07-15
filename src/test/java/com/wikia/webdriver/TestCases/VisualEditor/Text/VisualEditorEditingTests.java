@@ -7,11 +7,13 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.WikiTextContent;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorHyperLinkDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
@@ -24,6 +26,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * 2. VE-1228 Removing a piece of text from the article
  * 3. VE-1228 Adding all style text, heading text and list to an existing article
  * 4. VE-1271 Adding blue link, red link and external link to a new article
+ * 5. VE-1332 Editing in VE's source mode, review change, then edit once more in source more then publish
  */
 
 public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
@@ -32,7 +35,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	WikiBasePageObject base;
 
 	private String text = WikiTextContent.text;
-	private ArrayList<String> wikiTexts, linkWikiTexts;
+	private ArrayList<String> wikiTexts, linkWikiTexts, firstSourceText, secondSourceText;
 	private String articleName;
 
 	@BeforeClass(alwaysRun = true)
@@ -59,6 +62,10 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		linkWikiTexts.add(WikiTextContent.blueLinkText);
 		linkWikiTexts.add(WikiTextContent.redLinkText);
 		linkWikiTexts.add(WikiTextContent.externalLinkText);
+		firstSourceText = new ArrayList<>();
+		firstSourceText.add(text);
+		secondSourceText = new ArrayList<>();
+		secondSourceText.add(text+text);
 	}
 
 	@Test(
@@ -150,5 +157,36 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
 		reviewDialog.verifyAddedDiffs(linkWikiTexts);
+	}
+
+	@Test(
+		groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
+	)
+	public void VisualEditorEditing_005_switchToSourceMode() {
+		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		ArticlePageObject article =
+			base.openArticleByName(wikiURL, articleName2);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorSourceEditorDialog veSrcDialog =
+			(VisualEditorSourceEditorDialog) ve.selectInsertToOpenDialog(InsertDialog.SOURCE_EDITOR);
+		ve = veSrcDialog.typeInEditArea(text);
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(firstSourceText);
+		ve = reviewDialog.clickCloseButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		veSrcDialog =
+			(VisualEditorSourceEditorDialog) ve.selectInsertToOpenDialog(InsertDialog.SOURCE_EDITOR);
+		ve = veSrcDialog.typeInEditArea(text);
+		saveDialog = ve.clickPublishButton();
+		reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(secondSourceText);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+
 	}
 }

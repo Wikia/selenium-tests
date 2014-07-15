@@ -26,6 +26,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		driver.switchTo().frame(sourceEditorDialogIFrame);
 		waitForElementClickableByElement(closeButton);
 		closeButton.click();
+		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
 	}
@@ -39,11 +40,15 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		return new VisualEditorPageObject(driver);
 	}
 
-	public void typeInEditArea(String text) {
+	public VisualEditorPageObject typeInEditArea(String text) {
 		waitForElementVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().frame(sourceEditorDialogIFrame);
 		waitForElementByElement(editArea);
 		editArea.sendKeys(text);
+		waitForElementClickableByElement(applyChangesButton);
+		applyChangesButton.click();
+		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().defaultContent();
+		return new VisualEditorPageObject(driver);
 	}
 }
