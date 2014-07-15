@@ -186,6 +186,5 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		reviewDialog.verifyAddedDiffs(secondSourceText);
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
-		article.verifyVEPublishComplete();
 	}
 }
