@@ -72,7 +72,7 @@ public class AdsComparison {
 			throw new RuntimeException(ex);
 		}
 		Shooter shooter = new Shooter();
-		File capturedScreen =  shooter.capturePageAndCrop(
+		File capturedScreen = shooter.capturePageAndCrop(
 			startPoint, screenshotSize, driver
 		);
 
@@ -86,33 +86,14 @@ public class AdsComparison {
 		boolean success = true;
 
 		if (!(
-			imageComparison.comapareBaseEncodedImagesBasedOnBytes(
-				encodedExpectedScreen, encodedCapturedScreen
-			))
+			imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen))
 		) {
 			success = false;
 		}
 		return success;
 	}
 
-	public boolean compareElementWithScreenshot(
-		WebElement element, String expectedElementFilePath, Dimension expectedElementSize, WebDriver driver
-	) throws IOException{
-		Shooter shooter = new Shooter();
-		String encodedExpectedAd = readFileAsString(expectedElementFilePath);
-		File elementScreenshot = shooter.captureWebElementAndCrop(element, expectedElementSize, driver);
-		String encodedElementScreenshot = readFileAndEncodeToBase(elementScreenshot);
-		elementScreenshot.delete();
-		if (
-			imageComparison.comapareBaseEncodedImagesBasedOnBytes(encodedExpectedAd, encodedElementScreenshot)
-		) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean compareSlotOnOff(WebElement element, String elementSelector, WebDriver driver) {
+	public boolean isAdVisible(WebElement element, String elementSelector, WebDriver driver) {
 		Shooter shooter = new Shooter();
 		if (element.getSize().height <= 1 || element.getSize().width <= 1) {
 			throw new NoSuchElementException(
@@ -132,10 +113,10 @@ public class AdsComparison {
 			"Screenshot of element off taken; CSS " + elementSelector,
 			true
 		);
-		boolean result = imageComparison.compareImagesBasedOnBytes(preSwitch, postSwitch);
+		boolean imagesTheSame = imageComparison.areFilesTheSame(preSwitch, postSwitch);
 		preSwitch.delete();
 		postSwitch.delete();
-		return result;
+		return !imagesTheSame;
 	}
 
 	public File getMobileSlotScreenshot(WebElement element, WebDriver driver) {
@@ -158,35 +139,5 @@ public class AdsComparison {
 
 	private String readFileAsString(String filePath) throws IOException {
 		return IOUtils.toString(new FileInputStream(new File(filePath)), "UTF-8");
-	}
-
-	protected boolean checkIfScriptInsideScripts(List<WebElement> scripts, String script, WebDriver driver) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement scriptNode : scripts) {
-			String result = (String) js.executeScript(
-				"return arguments[0].innerHTML", scriptNode
-			);
-			String trimedResult = result.replaceAll("\\s", "");
-			if (trimedResult.contains(script)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-
-	public boolean hasSkin(WebElement element, String elementSelector, WebDriver driver) {
-		List<WebElement> scriptsInFrame = element.findElements(By.tagName("script"));
-		String skinCallJS = "top.loadCustomAd";
-
-		if (checkIfScriptInsideScripts(scriptsInFrame, skinCallJS, driver)) {
-			PageObjectLogging.log(
-				"Found skin call",
-				"skin call found in " + elementSelector,
-				true
-			);
-			return true;
-		}
-		return false;
 	}
 }

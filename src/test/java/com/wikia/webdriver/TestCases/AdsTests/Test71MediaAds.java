@@ -18,7 +18,6 @@ public class Test71MediaAds extends NewTestTemplate {
 	private String testedPage;
 	private final String media71ForceResponse = "showroom=billboard&subsite=ingrid";
 
-
 	@Factory(
 		dataProviderClass=GermanAdsDataProvider.class,
 		dataProvider="popularGermanArticles"
@@ -36,20 +35,20 @@ public class Test71MediaAds extends NewTestTemplate {
 	@Test (groups={"Ads", "Test71MediaAds_DE", "Ads71Media"})
 	public void Test71MediaAds_DE() {
 		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
+		ads71Media.verify71MediaAdsPresent();
 	}
 
 	@GeoEdgeProxy(country="AU")
 	@Test (groups={"Ads", "Test71MediaAds_AU", "Ads71Media"})
 	public void Test71MediaAds_AU() {
 		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
+		ads71Media.verify71MediaAdsPresent();
 	}
 
 	@Test (groups={"Ads", "Test71MediaAds_GeoEdgeFree", "Ads71Media"})
 	public void Test71MediaAds_GeoEdgeFree() {
 		String testedPage71Media = urlBuilder.appendQueryStringToURL(testedPage, media71ForceResponse);
 		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage71Media);
-		ads71Media.veriy71MediaAdsPresent();
+		ads71Media.verify71MediaAdsPresent();
 	}
 }

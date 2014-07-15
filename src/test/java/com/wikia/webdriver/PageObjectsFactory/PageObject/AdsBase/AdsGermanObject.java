@@ -23,7 +23,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComp
 public class AdsGermanObject extends AdsBaseObject {
 
 	private final String ivw2Script = "script.ioam.de";
-
+	private final String jsSkinCall = "top.loadCustomAd({type:\"skin\",destUrl:\"";
 
 	public AdsGermanObject(WebDriver driver, String page) {
 		super(driver);
@@ -102,9 +102,9 @@ public class AdsGermanObject extends AdsBaseObject {
 
 	}
 
-	public void veriy71MediaAdsPresent() {
+	public void verify71MediaAdsPresent() {
 		AdsComparison adsComparison = new AdsComparison();
-		boolean combinationFound = false;
+
 		for (HashMap<String,Object> combination: combinations) {
 			List<String> combinationSlots = (List)combination.get("slots");
 			if (checkIfCombinationOnPage(combinationSlots)) {
@@ -114,38 +114,23 @@ public class AdsGermanObject extends AdsBaseObject {
 					true,
 					driver
 				);
-				for (String elementSelector: combinationSlots) {
-					if (
-						!adsComparison.compareSlotOnOff(
-							driver.findElement(By.cssSelector(elementSelector)),
-							elementSelector,
-							driver
-						) ||  adsComparison.hasSkin(
-							driver.findElement(By.cssSelector(elementSelector)),
-							elementSelector,
-							driver
-						)
-					){
+				for (String slotSelector : combinationSlots) {
+					WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+					if (hasSkin(slot, slotSelector) || adsComparison.isAdVisible(slot, slotSelector, driver)) {
 						PageObjectLogging.log(
 								"Ad in slot found",
-								"Ad in slot found; CSS: " + elementSelector,
+								"Ad in slot found; CSS: " + slotSelector,
 								true
 						);
+					} else {
+						throw new NoSuchElementException("Ad in slot not found; CSS: " + slotSelector);
 					}
-
-					 else {
-							throw new NoSuchElementException(
-								"Ad in slot not found; CSS: " + elementSelector
-							);
-						}
 				}
-				combinationFound = true;
-				break;
+				return;
 			}
 		}
-		if (!combinationFound) {
-			throw new NoSuchElementException("No known combination from 71 media present");
-		}
+
+		throw new NoSuchElementException("No known combination from 71 media present");
 	}
 
 	public void verifyNo71MediaAds() {
@@ -204,5 +189,13 @@ public class AdsGermanObject extends AdsBaseObject {
 		} else {
 			throw new NoSuchElementException("Parameter from IVW2 is not present");
 		}
+	}
+
+	private boolean hasSkin(WebElement element, String elementSelector) {
+		if (isScriptPresentInElement(element, jsSkinCall)) {
+			PageObjectLogging.log("Found skin call", "skin call found in " + elementSelector, true);
+			return true;
+		}
+		return false;
 	}
 }

@@ -124,7 +124,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 		File expectedImageFile = new File(PageContent.resourcesPath + fileName);
 		File actualImageFile = getUploadedImage();
 		ImageComparison comparer = new ImageComparison();
-		Boolean ifEqual = comparer.compareImagesBasedOnBytes(expectedImageFile, actualImageFile);
+		Boolean ifEqual = comparer.areFilesTheSame(expectedImageFile, actualImageFile);
 		actualImageFile.delete();
 		Assertion.assertTrue(ifEqual);
 	}
