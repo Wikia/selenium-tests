@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -38,12 +38,20 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		return new NewTemplateComponentObject(driver);
 	}
 	
-	
-	
-	public  selectTemplate(int templateId) {
-		waitForElementClickableByElement(templateList);
-		WebElement
+	public void typeTilesetName(String templateName) {
+		waitForElementByElement(searchField);
+		searchField.sendKeys(templateName);
+		PageObjectLogging.log("typeTilesetName", templateName+" title for template is typed in", true);
 	}
+
+	public TemplateComponentObject selectTemplate(int templateId) {
+		waitForElementByElement(browseForFileInput);
+		WebElement templateSelected = templateList.get(templateId);
+		templateSelected.click();
+		return new TemplateComponentObject(driver);
+	}
+	
+	
 	
 }
 	
