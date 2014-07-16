@@ -162,7 +162,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
 	)
-	public void VisualEditorEditing_005_switchToSourceMode() {
+	public void VisualEditorEditing_005_switchToSourceMode_VE_1338() {
 		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName2);
@@ -186,5 +186,6 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		reviewDialog.verifyAddedDiffs(secondSourceText);
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
 	}
 }
