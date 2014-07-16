@@ -35,7 +35,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	WikiBasePageObject base;
 
 	private String text = WikiTextContent.text;
-	private ArrayList<String> wikiTexts, linkWikiTexts, firstSourceText, secondSourceText;
+	private ArrayList<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
 	private String articleName;
 
 	@BeforeClass(alwaysRun = true)
@@ -62,10 +62,10 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		linkWikiTexts.add(WikiTextContent.blueLinkText);
 		linkWikiTexts.add(WikiTextContent.redLinkText);
 		linkWikiTexts.add(WikiTextContent.externalLinkText);
-		firstSourceText = new ArrayList<>();
-		firstSourceText.add(text);
-		secondSourceText = new ArrayList<>();
-		secondSourceText.add(text+text);
+		firstSourceEditText = new ArrayList<>();
+		firstSourceEditText.add(text);
+		secondSourceEditText = new ArrayList<>();
+		secondSourceEditText.add(text+text);
 	}
 
 	@Test(
@@ -170,20 +170,20 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorSourceEditorDialog veSrcDialog =
-			(VisualEditorSourceEditorDialog) ve.selectInsertToOpenDialog(InsertDialog.SOURCE_EDITOR);
+			(VisualEditorSourceEditorDialog) ve.openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
 		ve = veSrcDialog.typeInEditArea(text);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
-		reviewDialog.verifyAddedDiffs(firstSourceText);
+		reviewDialog.verifyAddedDiffs(firstSourceEditText);
 		ve = reviewDialog.clickCloseButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		veSrcDialog =
-			(VisualEditorSourceEditorDialog) ve.selectInsertToOpenDialog(InsertDialog.SOURCE_EDITOR);
+			(VisualEditorSourceEditorDialog) ve.openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
 		ve = veSrcDialog.typeInEditArea(text);
 		saveDialog = ve.clickPublishButton();
 		reviewDialog = saveDialog.clickReviewYourChanges();
-		reviewDialog.verifyAddedDiffs(secondSourceText);
+		reviewDialog.verifyAddedDiffs(secondSourceEditText);
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		article = saveDialog.savePage();
 		article.verifyVEPublishComplete();

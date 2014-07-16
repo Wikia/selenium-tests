@@ -105,7 +105,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By keyboardShortcutsBy = By.cssSelector(".oo-ui-icon-keyboard");
 	private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
 
-	private void clickStyleFromStyleDropDown(By styleBy) {
+	private void clickStyleItemFromDropDown(By styleBy) {
 		waitForElementByElement(styleList);
 		Actions actions = new Actions(driver);
 		actions
@@ -125,16 +125,16 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			italicButton.click();
 			break;
 		case STRIKETHROUGH:
-			clickStyleFromStyleDropDown(strikeStyleBy);
+			clickStyleItemFromDropDown(strikeStyleBy);
 			break;
 		case SUBSCRIPT:
-			clickStyleFromStyleDropDown(subscriptStyleBy);
+			clickStyleItemFromDropDown(subscriptStyleBy);
 			break;
 		case SUPERSCRIPT:
-			clickStyleFromStyleDropDown(superscriptStyleBy);
+			clickStyleItemFromDropDown(superscriptStyleBy);
 			break;
 		case UNDERLINE:
-			clickStyleFromStyleDropDown(underlineStyleBy);
+			clickStyleItemFromDropDown(underlineStyleBy);
 			break;
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
@@ -144,10 +144,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		waitForElementClickableByElement(formattingDropDown);
 		Actions actions = new Actions(driver);
 		actions
-		.click(formattingDropDown)
-		.click(formattingDropDownItems.findElement(formatBy).findElement(menuItemBy))
-		.build()
-		.perform();
+			.click(formattingDropDown)
+			.click(formattingDropDownItems.findElement(formatBy).findElement(menuItemBy))
+			.build()
+			.perform();
 	}
 
 	public void selectFormatting(Formatting format) {
@@ -180,46 +180,46 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public void selectIndentation(Indentation indent) {
 		switch (indent) {
 		case INCREASE:
-			clickStyleFromStyleDropDown(indentBy);
+			clickStyleItemFromDropDown(indentBy);
 			break;
 		case DECREASE:
-			clickStyleFromStyleDropDown(outdentBy);
+			clickStyleItemFromDropDown(outdentBy);
 			break;
 		}
 	}
 
-	public VisualEditorDialog selectInsertToOpenDialog(InsertDialog insert) {
+	public VisualEditorDialog openDialogFromMenu(InsertDialog insert) {
 		switch (insert) {
 		case MEDIA:
-			clickInsertFromInsertDropDown(mediaBy);
+			clickInsertItemFromDropDown(mediaBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorAddMediaDialog(driver);
 		case REFERENCE:
-			clickInsertFromInsertDropDown(referenceBy);
+			clickInsertItemFromDropDown(referenceBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorReferenceDialog(driver);
 		case REFERENCE_LIST:
-			clickInsertFromInsertDropDown(referenceListBy);
+			clickInsertItemFromDropDown(referenceListBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorReferenceListDialog(driver);
 		case TEMPLATE:
-			clickInsertFromInsertDropDown(templateBy);
+			clickInsertItemFromDropDown(templateBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorNewTemplateDialog(driver);
 		case PAGE_SETTINGS:
-			clickHamburgerFromInsertDropDown(pageSettingsBy);
+			clickHamburgerItemFromDropDown(pageSettingsBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorPageSettingsDialog(driver);
 		case CATEGORIES:
-			clickHamburgerFromInsertDropDown(categoriesBy);
+			clickHamburgerItemFromDropDown(categoriesBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorCategoriesDialog(driver);
 		case KEYBOARD_SHORTCUTS:
-			clickHamburgerFromInsertDropDown(keyboardShortcutsBy);
+			clickHamburgerItemFromDropDown(keyboardShortcutsBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorKeyboardShortcutsDialog(driver);
 		case SOURCE_EDITOR:
-			clickHamburgerFromInsertDropDown(sourceEditorBy);
+			clickHamburgerItemFromDropDown(sourceEditorBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorSourceEditorDialog(driver);
 		default:
@@ -230,27 +230,27 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public void insertList(InsertList insert) {
 		switch (insert) {
 		case BULLET_LIST:
-			clickInsertFromInsertDropDown(bulletListBy);
+			clickInsertItemFromDropDown(bulletListBy);
 			break;
 		case NUMBERED_LIST:
-			clickInsertFromInsertDropDown(numberbedListBy);
+			clickInsertItemFromDropDown(numberbedListBy);
 			break;
 		}
 		PageObjectLogging.log("selectInsertToInsertList", insert.toString() + " selected", true);
 	}
 
-	private void clickInsertFromInsertDropDown(By insertBy) {
+	private void clickInsertItemFromDropDown(By insertBy) {
 		waitForElementVisibleByElement(insertList);
 		waitForElementClickableByElement(insertList);
 		Actions actions = new Actions(driver);
 		actions
-		.click(insertList)
-		.click(insertItems.findElement(insertBy))
-		.build()
-		.perform();
+			.click(insertList)
+			.click(insertItems.findElement(insertBy))
+			.build()
+			.perform();
 	}
 
-	private void clickHamburgerFromInsertDropDown(By insertBy) {
+	private void clickHamburgerItemFromDropDown(By insertBy) {
 		waitForElementVisibleByElement(hamburgerList);
 		waitForElementClickableByElement(hamburgerList);
 		Actions actions = new Actions(driver);
@@ -286,7 +286,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		bulletListButton.click();
 		PageObjectLogging.log("clickBullListButton", "bullet list button clicked", true);
 	}
-
 
 	public VisualEditorSaveChangesDialog clickPublishButton() {
 		waitForElementNotPresent(publishButtonDisabled);
