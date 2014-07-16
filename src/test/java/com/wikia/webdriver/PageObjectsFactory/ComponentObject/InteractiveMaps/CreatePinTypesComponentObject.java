@@ -6,16 +6,14 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
+ * @author: Lukasz Jedrzejczak
  *
  */
 
@@ -27,7 +25,7 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	
 	//UI Mapping
 	@FindBy(css = "input[name='poiCategoryNames[]']")
-	private List<WebElement> pinTypeTitle;
+	private List<WebElement> pinTypeTitleInputs;
 	@FindBy(css = "input[name='poiCategoryMarkers[]']")
 	private List<WebElement> uploadMarker;
 	@FindBy(css = ".button.normal.primary")
@@ -38,13 +36,14 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	private WebElement mainParentCategorySelector;
 	@FindBy(css = ".poi-category-dropdown > option")
 	private List<WebElement> parentCatOption;
-	
+	@FindBy(css = ".modal.medium.int-map-modal")
+	private WebElement creatingPinDialog;
 	
 	public void typePinTypeTitle(String pinTypeName) {
-		WebElement firstPin = pinTypeTitle.get(0);
+		WebElement firstPin = pinTypeTitleInputs.get(0);
 		waitForElementByElement(firstPin);
 		firstPin.sendKeys(pinTypeName);
-		PageObjectLogging.log("typePinTypeTitle", pinTypeName+" title for pin type is typed in", true);
+		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type is typed in", true, driver);
 	}
 	
 	public InteractiveMapsPageObject clickSave() {

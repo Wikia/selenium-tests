@@ -74,8 +74,12 @@ public class TemplateComponentObject extends BasePageObject{
 		waitForElementByElement(newTemplateDialog);
 		PageObjectLogging.log("verifyTemplateDialog", "Template dialog is visible", true);
 	}
+	
+	public void verifyTemplateImagePreview() {
+		waitForElementByElement(templateImagePreview);
+	}
 
-	public void verifyTemplateImagePreview(String selectedTemplateName) {
+	public void verifyTemplateImage(String selectedTemplateName) {
 		waitForElementByElement(templateImagePreview);
 		Assert.assertTrue(templateImagePreview.getAttribute("src").endsWith(selectedTemplateName));
 	}

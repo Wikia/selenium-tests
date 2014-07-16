@@ -5,15 +5,16 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateACustomMapComponentObjectStep1;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateACustomMapComponentObjectStep2;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateACustomMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.TemplateComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
 /**
  * Author: Rodrigo Molinero Gomez
+ * @author: Lukasz Jedrzejczak
  * Date: 20.06.14
  * Time: 16:53
     - Special:Maps page
@@ -51,42 +52,50 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 public class InteractiveMapsTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
+	int selectedTemplateIndex = 1;
 	
 	//move to other class:
-	private String mapName = "RMG";
-	private String templateName = "RMG";
-	private String pinTypeName = "RMG";
+	private final String mapName = "RMG";
+	private final String pinTypeName = "RMG";
+	private String templateName;
+
 
 	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_001_CreateCustomMap() {
+	public void InteractiveMaps_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		InteractiveMapsPageObject map = base.openSpecialInteractiveMaps(wikiURL);
-		CreateAMapComponentObject newMap = map.clickCreateAMap();
-		CreateACustomMapComponentObjectStep1 cm1 = newMap.clickCustomMap();
-		CreateACustomMapComponentObjectStep2 cm2 = cm1.selectFileToUpload(PageContent.file);
-		cm2.verifyTemplateImagePreview();
-		cm2.typeMapName(mapName);
-		cm2.typeTemplateName(templateName);
-		CreatePinTypesComponentObject cm3 = cm2.clickNext();		
-		cm3.typePinTypeTitle(pinTypeName);
-		InteractiveMapsPageObject map2 = cm3.clickNext();
-		map2.verifyMapIsBeingProcessedMessage();
-	}	
-	
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject map = specialMap.clickCreateAMap();
+		CreateACustomMapComponentObject customMap = map.clickCustomMap();
+		TemplateComponentObject template = customMap.selectFileToUpload(PageContent.file);
+		template.verifyTemplateImagePreview();
+		template.typeMapName(mapName);
+		templateName = base.getTimeStamp();
+		template.typeTemplateName(templateName);
+		CreatePinTypesComponentObject pinDialog = template.clickNext();
+		pinDialog.typePinTypeTitle(pinTypeName);
+		specialMap = pinDialog.clickSave();
+		specialMap.verifyCreatedMapTitle(mapName);
+		specialMap.verifyMapAdded();
+		specialMap.verifyCreatedPins(pinTypeName);
+	}
+
 	@Test(groups = {"InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_002_ClickMapAndCheckURL() {
+	public void InteractiveMaps_002_CreateCustomMapWithExistingTemplate() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		InteractiveMapsPageObject map = base.openSpecialInteractiveMaps(wikiURL);
-		CreateAMapComponentObject newMap = map.clickCreateAMap();
-		CreateACustomMapComponentObjectStep1 cm1 = newMap.clickExistingTemplateMap();
-		
-		
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject map = specialMap.clickCreateAMap();
+		CreateACustomMapComponentObject customMap = map.clickCustomMap();
+		String selectedImageName = customMap.getSelectedTemplateImageName(selectedTemplateIndex);
+		TemplateComponentObject template = customMap.selectTemplate(selectedTemplateIndex);
+		template.verifyTemplateImage(selectedImageName);
+		template.typeMapName(mapName);
+		CreatePinTypesComponentObject pinDialog = template.clickNext();
+		pinDialog.typePinTypeTitle(pinTypeName);
+		specialMap = pinDialog.clickSave();
+		specialMap.verifyCreatedMapTitle(mapName);
+		specialMap.verifyMapAdded();
+		specialMap.verifyCreatedPins(pinTypeName);
 	}
 }
-		
-		
-		
-		
-		

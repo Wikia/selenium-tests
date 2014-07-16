@@ -11,6 +11,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
+ * @author Lukasz Jedrzejczak
  *
  */
 
@@ -21,21 +22,25 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	}
 	
 	//UI Mapping
-	@FindBy(css = "#intMapUploadLink")
+	@FindBy(css = "#intMapUpload")
 	private WebElement browseForFileInput;
+	@FindBy(css = "#intMapUploadLink")
+	private WebElement uploadFileTile;
 	@FindBy(css = "#intMapTileSetSearch")
 	private WebElement searchField;
 	@FindBy(css = "#intMapBack")
 	private WebElement backButton;
-	@FindBy(css = ".tile-set-thumb")
+	@FindBy(css = ".modalEvent>img")
 	private List<WebElement> templateList;
 	
+	String beforeImageName = "116x116-";
 	
-	public NewTemplateComponentObject selectFileToUpload(String file) {
+	
+	public TemplateComponentObject selectFileToUpload(String file) {
 		browseForFileInput.sendKeys(
 				getAbsolutePathForFile(PageContent.resourcesPath + file));
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
-		return new NewTemplateComponentObject(driver);
+		return new TemplateComponentObject(driver);
 	}
 	
 	public void typeTilesetName(String templateName) {
@@ -45,13 +50,16 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	}
 
 	public TemplateComponentObject selectTemplate(int templateId) {
-		waitForElementByElement(browseForFileInput);
-		WebElement templateSelected = templateList.get(templateId);
-		templateSelected.click();
+		waitForElementByElement(templateList.get(templateId));
+		templateList.get(templateId).click();
 		return new TemplateComponentObject(driver);
 	}
 	
-	
+	public String getSelectedTemplateImageName(int selectedImageIndex) {
+		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
+		String selectedTemplateImageName = templateList.get(selectedImageIndex)
+			.getAttribute("src").substring(imageNameIndex + beforeImageName.length());
+		return selectedTemplateImageName;
+	}
 	
 }
-	

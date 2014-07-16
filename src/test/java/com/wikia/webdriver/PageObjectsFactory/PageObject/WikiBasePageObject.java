@@ -396,7 +396,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 	
 	public InteractiveMapsPageObject openSpecialInteractiveMaps(String wikiURL) {
-		getUrl(wikiURL + URLsContent.specialInteractiveMaps);
+		getUrl(wikiURL + URLsContent.specialMaps);
 		return new InteractiveMapsPageObject(driver);
 	}
 
