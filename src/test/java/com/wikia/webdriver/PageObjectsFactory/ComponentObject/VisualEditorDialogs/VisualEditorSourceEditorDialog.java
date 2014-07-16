@@ -47,9 +47,9 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		driver.switchTo().frame(sourceEditorDialogIFrame);
 		waitForElementByElement(editArea);
 		editArea.sendKeys(text);
+		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementClickableByElement(applyChangesButton);
 		applyChangesButton.click();
-		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
