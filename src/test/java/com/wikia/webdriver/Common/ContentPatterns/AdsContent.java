@@ -41,7 +41,7 @@ public class AdsContent {
 	public static final String mobilePrefooter = "MOBILE_PREFOOTER";
 
 	//CONTAINERS
-    public static final String prefootersContainer = "Prefooters";
+	public static final String prefootersContainer = "Prefooters";
 	public static final String adsInContentContainer = "AdsInContent";
 
 	//SLOTS SELECTORS
