@@ -45,7 +45,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
-			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.nonPremiumVideoURL);
 		veNew.verifyVideo();
 		veNew.verifyVEToolBarPresent();
@@ -66,7 +66,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
-			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		VisualEditorPageObject veNew = mediaDialog.addMediaByURL(VideoContent.premiumVideoURL);
 		veNew.verifyVideo();
 		veNew.verifyVEToolBarPresent();
@@ -87,7 +87,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =
-			(VisualEditorAddMediaDialog) ve.selectInsertToOpenDialog(InsertDialog.MEDIA);
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("y");
 		VisualEditorPageObject veNew = mediaDialog.addExistingMedia(2);
 		veNew.verifyVideos(2);

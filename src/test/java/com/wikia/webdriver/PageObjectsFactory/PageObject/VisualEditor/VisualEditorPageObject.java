@@ -13,10 +13,12 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
@@ -196,5 +198,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
+	}
+
+	public VisualEditorPageObject typeInSourceEditor(String text) {
+		VisualEditorSourceEditorDialog veSrcDialog =
+			(VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
+		veSrcDialog.typeInEditArea(text);
+		return new VisualEditorPageObject(driver);
 	}
 }
