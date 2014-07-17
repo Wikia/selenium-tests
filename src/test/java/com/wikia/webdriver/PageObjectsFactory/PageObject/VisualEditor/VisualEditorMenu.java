@@ -193,7 +193,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public VisualEditorDialog openDialogFromMenu(InsertDialog insert) {
 		switch (insert) {
 		case MAP:
-			clickInsertFromInsertDropDown(mapBy);
+			clickInsertItemFromDropDown(mapBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 			return new VisualEditorAddMapDialog(driver);
 		case MEDIA:
