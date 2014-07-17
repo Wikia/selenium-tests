@@ -1,16 +1,10 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
-import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
-import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +15,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
+import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -293,14 +295,20 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyNoLiftiumAdsOnPage() {
-		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
-		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
 		verifyNoLiftiumAds();
 	}
 
 	public void verifyNoAdsOnPage() {
-		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
-		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
+		verifyNoAds();
+	}
+
+	public void verifyNoAdsOnMobilePage() {
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobileAdInContent));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobilePrefooter));
 		verifyNoAds();
 	}
 

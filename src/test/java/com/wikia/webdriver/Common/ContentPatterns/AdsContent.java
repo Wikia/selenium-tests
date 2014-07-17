@@ -7,36 +7,42 @@ import java.util.HashMap;
  * @author Bogna 'bognix' Knychala
  */
 public class AdsContent {
-
-    //HashMap with slots selector
+	//HashMap with slots selector
 	public static HashMap<String, String> slotsSelectors;
 	public static HashMap<String, String> adsProviders;
 
 	//SCRIPTS
-	public static String adsPushSlotScript =
+	public static final String adsPushSlotScript =
 		"window.adslots2.push([\"%slot%\",null,\"AdEngine2\"]);";
-	public static String adDriverForcedStatusSuccessScript =
+	public static final String adDriverForcedStatusSuccessScript =
 		"top.window.adDriver2ForcedStatus['%s']='success';";
 
-	public static String slotTweakerHideSlotScript =
+	public static final String slotTweakerHideSlotScript =
 			"top.window.adDriver2ForcedStatus['%slot%']='success';"
 			+ "varst=top.window.SlotTweaker(top.window.Wikia.log,top.document,top.window);"
 			+ "st.hide('%slot%');";
 
     //SLOTS NAMES
-	public static String homeTopLB = "HOME_TOP_LEADERBOARD";
-	public static String hubLB = "HUB_TOP_LEADERBOARD";
-	public static String hubLB_gpt = "HUB_TOP_LEADERBOARD_gpt";
-	public static String corpTopLB = "CORP_TOP_LEADERBOARD";
-	public static String topLB = "TOP_LEADERBOARD";
-	public static String homeMedrec = "HOME_TOP_RIGHT_BOXAD";
-	public static String medrec = "TOP_RIGHT_BOXAD";
-	public static String floatingMedrec = "INCONTENT_BOXAD_1";
-	public static String leftSkyscraper2 = "LEFT_SKYSCRAPER_2";
-	public static String leftSkyscraper3 = "LEFT_SKYSCRAPER_3";
-	public static String prefooterLeft = "PREFOOTER_LEFT_BOXAD";
-	public static String prefooterRight = "PREFOOTER_RIGHT_BOXAD";
+	public static final String homeTopLB = "HOME_TOP_LEADERBOARD";
+	public static final String hubLB = "HUB_TOP_LEADERBOARD";
+	public static final String hubLB_gpt = "HUB_TOP_LEADERBOARD_gpt";
+	public static final String corpTopLB = "CORP_TOP_LEADERBOARD";
+	public static final String topLB = "TOP_LEADERBOARD";
+	public static final String homeMedrec = "HOME_TOP_RIGHT_BOXAD";
+	public static final String medrec = "TOP_RIGHT_BOXAD";
+	public static final String floatingMedrec = "INCONTENT_BOXAD_1";
+	public static final String leftSkyscraper2 = "LEFT_SKYSCRAPER_2";
+	public static final String leftSkyscraper3 = "LEFT_SKYSCRAPER_3";
+	public static final String prefooterLeft = "PREFOOTER_LEFT_BOXAD";
+	public static final String prefooterRight = "PREFOOTER_RIGHT_BOXAD";
 	public static final String wikiaBar = "WIKIA_BAR_BOXAD_1";
+	public static final String mobileTopLB = "MOBILE_TOP_LEADERBOARD";
+	public static final String mobileAdInContent = "MOBILE_IN_CONTENT";
+	public static final String mobilePrefooter = "MOBILE_PREFOOTER";
+
+	//CONTAINERS
+    public static final String prefootersContainer = "Prefooters";
+	public static final String adsInContentContainer = "AdsInContent";
 
 	//SLOTS SELECTORS
 	public static final String wikiaBarSelector = "#" + wikiaBar;
@@ -74,8 +80,12 @@ public class AdsContent {
 		slotsSelectors.put(prefooterLeft, "#PREFOOTER_LEFT_BOXAD");
 		slotsSelectors.put(prefooterRight, "#PREFOOTER_RIGHT_BOXAD");
 		slotsSelectors.put(wikiaBar, "#WIKIA_BAR_BOXAD_1");
-		slotsSelectors.put("AdsInContent", "#WikiaAdInContentPlaceHolder");
-		slotsSelectors.put("Prefooters", "#WikiaArticleBottomAd");
+		slotsSelectors.put(adsInContentContainer, "#WikiaAdInContentPlaceHolder");
+		slotsSelectors.put(prefootersContainer, "#WikiaArticleBottomAd");
+		slotsSelectors.put(mobileTopLB, "#MOBILE_TOP_LEADERBOARD");
+		slotsSelectors.put(mobileAdInContent, "#MOBILE_IN_CONTENT");
+		slotsSelectors.put(mobilePrefooter, "#MOBILE_PREFOOTER");
+
 	}
 }
 
