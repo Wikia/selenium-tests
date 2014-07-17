@@ -13,8 +13,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AdsAmazonObject extends AdsBaseObject {
 
-	@FindBy(css="body > script")
-	private List<WebElement> scriptsInBody;
+	@FindBy(css="body")
+	private WebElement body;
 	@FindBy(css="div[id*=_gpt][data-gpt-page-params*=amzn]")
 	private List<WebElement> slotsWithAmazonParams;
 
@@ -30,7 +30,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 	}
 
 	public void verifyAmazonScriptIncluded() {
-		if (checkIfScriptInsideScripts(scriptsInBody, amazonScript)) {
+		if (isScriptPresentInElement(body, amazonScript)) {
 			PageObjectLogging.log("AmazonScriptFound", "Script from Amazon found", true);
 		} else {
 			throw new NoSuchElementException("Amazon script not found on page");

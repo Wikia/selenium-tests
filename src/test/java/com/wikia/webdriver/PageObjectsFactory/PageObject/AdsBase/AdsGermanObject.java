@@ -23,7 +23,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComp
 public class AdsGermanObject extends AdsBaseObject {
 
 	private final String ivw2Script = "script.ioam.de";
-
+	private final String jsSkinCall = "top.loadCustomAd({type:\"skin\",destUrl:\"";
 
 	public AdsGermanObject(WebDriver driver, String page) {
 		super(driver);
@@ -52,12 +52,16 @@ public class AdsGermanObject extends AdsBaseObject {
 		HashMap<String,Object> flashtalkingMap = new HashMap<String, Object>();
 		HashMap<String,Object> wp_internMap = new HashMap<String, Object>();
 		HashMap<String,Object> leaderboardMap = new HashMap<String, Object>();
+		HashMap<String,Object> medrecMap = new HashMap<String, Object>();
+		HashMap<String,Object> prefooterMap = new HashMap<String, Object>();
 
 		List<String> billboard = new ArrayList<String>();
 		List<String> fireplace = new ArrayList<String>();
 		List<String> flashtalking = new ArrayList<String>();
 		List<String> wp_intern = new ArrayList<String>();
 		List<String> leaderboard = new ArrayList<String>();
+		List<String> medrec = new ArrayList<String>();
+		List<String> prefooter = new ArrayList<String>();
 
 		billboard.add("#ad-skyscraper1-outer");
 		billboardMap.put("name", "billboard");
@@ -77,18 +81,30 @@ public class AdsGermanObject extends AdsBaseObject {
 		wp_internMap.put("slots", wp_intern);
 
 		leaderboard.add("#ad-fullbanner2-outer");
-		wp_internMap.put("name", "leaderboard");
-		wp_internMap.put("slots", leaderboard);
+		leaderboardMap.put("name", "leaderboard");
+		leaderboardMap.put("slots", leaderboard);
+
+		medrec.add("#ad-rectangle1");
+		medrecMap.put("name", "medrec");
+		medrecMap.put("slots", medrec);
+
+		prefooter.add("#ad-promo1");
+		prefooterMap.put("name", "prefooter");
+		prefooterMap.put("slots", prefooter);
 
 		combinations.add(billboardMap);
 		combinations.add(fireplaceMap);
 		combinations.add(flashtalkingMap);
 		combinations.add(wp_internMap);
+		combinations.add(leaderboardMap);
+		combinations.add(medrecMap);
+		combinations.add(prefooterMap);
+
 	}
 
-	public void veriy71MediaAdsPresent() {
+	public void verify71MediaAdsPresent() {
 		AdsComparison adsComparison = new AdsComparison();
-		boolean combinationFound = false;
+
 		for (HashMap<String,Object> combination: combinations) {
 			List<String> combinationSlots = (List)combination.get("slots");
 			if (checkIfCombinationOnPage(combinationSlots)) {
@@ -98,31 +114,23 @@ public class AdsGermanObject extends AdsBaseObject {
 					true,
 					driver
 				);
-				for (String elementSelector: combinationSlots) {
-					if (
-						adsComparison.compareSlotOnOff(
-							driver.findElement(By.cssSelector(elementSelector)),
-							elementSelector,
-							driver
-						)
-					) {
-						throw new NoSuchElementException(
-							"Ad in slot not found; CSS: " + elementSelector
+				for (String slotSelector : combinationSlots) {
+					WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+					if (hasSkin(slot, slotSelector) || adsComparison.isAdVisible(slot, slotSelector, driver)) {
+						PageObjectLogging.log(
+								"Ad in slot found",
+								"Ad in slot found; CSS: " + slotSelector,
+								true
 						);
 					} else {
-						PageObjectLogging.log(
-							"Ad in slot found",
-							"Ad in slot found; CSS: " + elementSelector,
-							true
-						);
+						throw new NoSuchElementException("Ad in slot not found; CSS: " + slotSelector);
 					}
 				}
-				combinationFound = true;
+				return;
 			}
 		}
-		if (!combinationFound) {
-			throw new NoSuchElementException("No known combination from 71 media present");
-		}
+
+		throw new NoSuchElementException("No known combination from 71 media present");
 	}
 
 	public void verifyNo71MediaAds() {
@@ -181,5 +189,13 @@ public class AdsGermanObject extends AdsBaseObject {
 		} else {
 			throw new NoSuchElementException("Parameter from IVW2 is not present");
 		}
+	}
+
+	private boolean hasSkin(WebElement element, String elementSelector) {
+		if (isScriptPresentInElement(element, jsSkinCall)) {
+			PageObjectLogging.log("Found skin call", "skin call found in " + elementSelector, true);
+			return true;
+		}
+		return false;
 	}
 }

@@ -27,7 +27,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
-	private final String  wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
+	private final String wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
 	private final String liftiumIframeSelector = "iframe[id*='Liftium']";
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
@@ -134,11 +134,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 			WebElement slotElement = driver.findElement(By.id(slot));
 			WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
 			driver.switchTo().frame(slotGptIframe);
-			List<WebElement> scriptsInFrame = driver.findElements(By.tagName("script"));
+			WebElement iframeHtml = driver.findElement(By.tagName("html"));
 			String adDriverForcedSuccessFormatted = String.format(
 				AdsContent.adDriverForcedStatusSuccessScript, slot
 			);
-			if (checkIfScriptInsideScripts(scriptsInFrame, adDriverForcedSuccessFormatted)) {
+			if (isScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
 				PageObjectLogging.log(
 					"AdDriver2ForceStatus script",
 					"adDriverForcedSuccess script found in slot " + slot,
@@ -163,10 +163,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
 		AdsComparison adsComparison = new AdsComparison();
 		extractLiftiumTagId(slotSelector);
-		boolean result = adsComparison.compareSlotOnOff(
-			slot, slotSelector, driver
-		);
-		if(result) {
+		boolean adVisible = adsComparison.isAdVisible(slot, slotSelector, driver);
+		if (adVisible) {
+			PageObjectLogging.log("CompareScreenshot", "Screenshots are different", true);
+		} else {
 			PageObjectLogging.log(
 				"CompareScreenshot", "Screenshots look the same", false
 			);
@@ -174,10 +174,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 				"Screenshots of element on/off look the same."
 				+ "Most probable ad is not present; CSS "
 				+ slotSelector
-			);
-		} else {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots are different", true
 			);
 		}
 	}
@@ -325,22 +321,18 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	private boolean checkScriptPresentInSlot(WebElement slot, String script) {
-		List<WebElement> scriptsTags = slot.findElements(By.tagName("script"));
-		return checkIfScriptInsideScripts(scriptsTags, script);
-	}
-
-	protected boolean checkIfScriptInsideScripts(List<WebElement> scripts, String script) {
+	protected boolean isScriptPresentInElement(WebElement element, String scriptText) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement scriptNode : scripts) {
-			String result = (String) js.executeScript(
-				"return arguments[0].innerHTML", scriptNode
-			);
-			String trimedResult = result.replaceAll("\\s", "");
-			if (trimedResult.contains(script)) {
+
+		scriptText = scriptText.replaceAll("\\s", "");
+
+		for (WebElement scriptNode : element.findElements(By.tagName("script"))) {
+			String result = (String) js.executeScript("return arguments[0].innerHTML", scriptNode);
+			if (result.replaceAll("\\s", "").contains(scriptText)) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -348,7 +340,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		String scriptExpectedResult = AdsContent.adsPushSlotScript.replace(
 			"%slot%", slotName
 		);
-		boolean scriptFound = checkScriptPresentInSlot(slotElement, scriptExpectedResult);
+		boolean scriptFound = isScriptPresentInElement(slotElement, scriptExpectedResult);
 		if (scriptFound) {
 			PageObjectLogging.log(
 				"PushSlotsScriptFound",
