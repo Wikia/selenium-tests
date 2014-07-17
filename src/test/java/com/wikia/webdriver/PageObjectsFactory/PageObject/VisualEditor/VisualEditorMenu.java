@@ -14,6 +14,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorCategoriesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorDialog;
@@ -86,6 +87,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By indentBy = By.cssSelector(".oo-ui-icon-indent-list");
 	private By outdentBy = By.cssSelector(".oo-ui-icon-outdent-list");
 	private By publishButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
+	private By mapBy = By.cssSelector(".oo-ui-tool-name-wikiaMapInsert .oo-ui-tool-title");
 	private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
 	private By numberbedListBy = By.cssSelector(".oo-ui-icon-number-list");
 	private By bulletListBy = By.cssSelector(".oo-ui-icon-bullet-list");
@@ -190,6 +192,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 
 	public VisualEditorDialog openDialogFromMenu(InsertDialog insert) {
 		switch (insert) {
+		case MAP:
+			clickInsertFromInsertDropDown(mapBy);
+			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+			return new VisualEditorAddMapDialog(driver);
 		case MEDIA:
 			clickInsertItemFromDropDown(mediaBy);
 			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
