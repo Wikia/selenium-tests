@@ -9,6 +9,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.Cr
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.TemplateComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
@@ -53,6 +54,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 	int selectedTemplateIndex = 1;
+	int selectedMapIndex = 0;
 	
 	//move to other class:
 	private final String mapName = "RMG";
@@ -74,10 +76,10 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		template.typeTemplateName(templateName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
 		pinDialog.typePinTypeTitle(pinTypeName);
-		specialMap = pinDialog.clickSave();
-		specialMap.verifyCreatedMapTitle(mapName);
-		specialMap.verifyMapAdded();
-		specialMap.verifyCreatedPins(pinTypeName);
+		InteractiveMapPageObject createdMap = pinDialog.clickSave();
+		createdMap.verifyCreatedMapTitle(mapName);
+		createdMap.verifyMapOpened();
+		createdMap.verifyCreatedPins(pinTypeName);
 	}
 
 	@Test(groups = {"InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps"})
@@ -93,9 +95,31 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		template.typeMapName(mapName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
 		pinDialog.typePinTypeTitle(pinTypeName);
-		specialMap = pinDialog.clickSave();
-		specialMap.verifyCreatedMapTitle(mapName);
-		specialMap.verifyMapAdded();
-		specialMap.verifyCreatedPins(pinTypeName);
+		InteractiveMapPageObject createdMap = pinDialog.clickSave();
+		createdMap.verifyCreatedMapTitle(mapName);
+		createdMap.verifyMapOpened();
+		createdMap.verifyCreatedPins(pinTypeName);
+	}
+
+	@Test(groups = {"InteractiveMaps_004", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_004_ClickMapAndVerifyCorrectRedirect() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		String mapUrl = specialMap.getMapLink(selectedMapIndex);
+		String mapTitle = specialMap.getMapTitle(selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		selectedMap.verifyURL(mapUrl);
+		selectedMap.verifyCreatedMapTitle(mapTitle);
+	}
+
+	@Test(groups = {"InteractiveMaps_005", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_005_VerifyLoginModalWhenAnon() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logOut(wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject map = specialMap.clickCreateAMap();
+		map.verifyLoginModal();
 	}
 }

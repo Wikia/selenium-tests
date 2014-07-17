@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
 /**
@@ -46,11 +47,11 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type is typed in", true, driver);
 	}
 	
-	public InteractiveMapsPageObject clickSave() {
+	public InteractiveMapPageObject clickSave() {
 		waitForElementByElement(saveButton);
 		saveButton.click();
 		PageObjectLogging.log("clickSave", "clicked save button in create pin types modal", true);
-		return new InteractiveMapsPageObject(driver);
+		return new InteractiveMapPageObject(driver);
 	}
 	
 	public void selectParentCategory(int catValue) {

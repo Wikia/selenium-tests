@@ -9,6 +9,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
+ * @author: Lukasz Jedrzejczak
  *
  */
 
@@ -23,6 +24,8 @@ public class CreateAMapComponentObject extends BasePageObject{
 	private WebElement realMapLink;
 	@FindBy(css = ".int-map-icon-custom-tile-set-blue")
 	private WebElement customMapLink;
+	@FindBy(css = "#userForceLoginModal")
+	private WebElement loginModal;
 	
 	public CreateACustomMapComponentObject clickCustomMap() {
 		waitForElementByElement(customMapLink);
@@ -38,4 +41,9 @@ public class CreateAMapComponentObject extends BasePageObject{
 		return new CreateRealMapComponentObject(driver);
 	}
 	
+	public void verifyLoginModal() {
+		waitForElementByElement(loginModal);
+		PageObjectLogging.log("verifyLoginModal", "Login modal is displayed", true);
+	}
+
 }
