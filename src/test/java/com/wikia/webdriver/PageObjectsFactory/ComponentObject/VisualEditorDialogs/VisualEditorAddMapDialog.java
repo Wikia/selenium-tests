@@ -33,7 +33,6 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
 	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
 	private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
-	private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
 
 	public VisualEditorAddMapDialog(WebDriver driver) {
 		super(driver);
@@ -74,5 +73,16 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 		map.click();
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
+	}
+
+	public void checkIsEmptyState() {
+		waitForElementVisibleByElement(insertMapDialogIFrame);
+		driver.switchTo().frame(insertMapDialogIFrame);
+		waitForElementVisibleByElement(emptyStateDialogHeadline);
+		waitForElementVisibleByElement(emptyStateDialogText);
+		waitForElementVisibleByElement(emptyStateCreateAMapButton);
+		PageObjectLogging.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
+		driver.switchTo().defaultContent();
+
 	}
 }

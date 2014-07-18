@@ -18,6 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * @author Robert 'Rochan' Chan
  *
  * VE-1337 - Adding existing map onto article
+ * VE-1337 - Checking empty state dialog on wiki with no maps
  *
  */
 
@@ -48,5 +49,17 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VEAddMap", "VEAddMapTests_002", "VEEmptyMap"}
+	)
+	public void VEAddMapTests_002_CheckEmptyMapWiki() {
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
+		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMapDialog mapDialog =
+			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
+		mapDialog.checkIsEmptyState();
 	}
 }
