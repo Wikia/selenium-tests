@@ -22,6 +22,14 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 	private WebElement createAMapButton;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mediaDialogBody;
+	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-headline")
+	private WebElement emptyStateDialogHeadline;
+	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-text")
+	private WebElement emptyStateDialogText;
+	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-text a")
+	private WebElement emptyStateLearnMoreLink;
+	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-button .oo-ui-labeledElement-label")
+	private WebElement emptyStateCreateAMapButton;
 
 	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
 	private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
@@ -56,14 +64,14 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 		//Goes to http://muppets.ve.wikia-dev.com/wiki/Special:Maps#createMap
 	}
 
-	public VisualEditorPageObject addExistingMedia(int number) {
+	public VisualEditorPageObject addExistingMap(int number) {
 		waitForElementVisibleByElement(insertMapDialogIFrame);
 		driver.switchTo().frame(insertMapDialogIFrame);
 		WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
 		waitForElementVisibleByElement(mediaResultsWidget);
-		List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
-		WebElement mediaAddIcon = mediaResults.get(number).findElement(mediaAddIconBy);
-		mediaAddIcon.click();
+		List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
+		WebElement map = maps.get(number);
+		map.click();
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
 	}
