@@ -45,6 +45,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private List<WebElement> mediaNodes;
 	@FindBy(css="figure.ve-ce-branchNode a")
 	private WebElement mediaNode;
+	@FindBy(css="figure.wikia-interactive-map-thumbnail")
+	private WebElement mapNode;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -136,6 +138,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
 		PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
+	}
+
+	public void verifyMapPresent() {
+		waitForElementByElement(mapNode);
+		waitForElementVisibleByElement(mapNode);
+		PageObjectLogging.log("verifyMapPresent", "VE map is displayed", true);
 	}
 
 	public void verifyNoVideo() {

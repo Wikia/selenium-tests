@@ -35,14 +35,15 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEAddMap", "VEAddVideoTests_001", "VEAddExistingMap"}
+		groups = {"VEAddMap", "VEAddMapTests_001", "VEAddExistingMap"}
 	)
-	public void VEAddVideoTests_001_AddExistingMap() {
+	public void VEAddMapTests_001_AddExistingMap() {
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		VisualEditorPageObject veNew = mapDialog.addExistingMap(0);
+		veNew.verifyMapPresent();
 		VisualEditorSaveChangesDialog save = veNew.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
