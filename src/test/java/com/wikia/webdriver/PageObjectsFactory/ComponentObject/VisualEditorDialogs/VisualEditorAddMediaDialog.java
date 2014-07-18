@@ -57,6 +57,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	}
 
 	private void clickAddMediaButton() {
+		waitForElementVisibleByElement(addMediaButton);
 		waitForElementClickableByElement(addMediaButton);
 		addMediaButton.click();
 	}
@@ -66,6 +67,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		driver.switchTo().frame(insertMediaDialogIFrame);
 		typeInSearchTextField(url);
 		waitForElementVisibleByElement(topUploadButton);
+		waitForElementClickableByElement(topUploadButton);
 		clickAddMediaButton();
 		waitForElementNotVisibleByElement(insertMediaDialogIFrame);
 		driver.switchTo().defaultContent();
