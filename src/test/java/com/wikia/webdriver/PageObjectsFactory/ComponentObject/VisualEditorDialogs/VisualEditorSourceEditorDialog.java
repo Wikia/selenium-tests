@@ -49,7 +49,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		editArea.sendKeys(text);
 		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementClickableByElement(applyChangesButton);
-		applyChangesButton.click();
+		scrollAndClick(applyChangesButton);
 		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
