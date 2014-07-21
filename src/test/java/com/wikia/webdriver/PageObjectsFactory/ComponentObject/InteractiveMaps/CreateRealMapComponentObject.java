@@ -23,7 +23,7 @@ public class CreateRealMapComponentObject extends BasePageObject{
 	@FindBy(css = "input[name=map-title]")
 	private WebElement mapTitleField;
 	@FindBy(css = "#intMapPreviewImage")
-	private WebElement templateImagePreview;
+	private WebElement realMapImagePreview;
 	@FindBy(css = "#intMapBack")
 	private WebElement backButton;
 	@FindBy(css = "#intMapNext")
@@ -48,5 +48,10 @@ public class CreateRealMapComponentObject extends BasePageObject{
 		mapTitleField.sendKeys(mapName);
 		PageObjectLogging.log("typeMapName", mapName+" title for map is typed in", true);
 	}
+	
+	public void verifyRealMapPreviewImage() {
+		waitForElementByElement(realMapImagePreview);
+		PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
+	} 
 	
 }

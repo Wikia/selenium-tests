@@ -1,7 +1,10 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+
 import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +37,10 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement mapBeingProcessedModal;
 	@FindBy(css = "#refresh")
 	private WebElement refreshButton;
+	@FindBy(css = ".leaflet-draw-draw-marker")
+	private WebElement addPin;
+	@FindBy(css = "")
+	private WebElement tile;
 	
 	
 	public void verifyMapOpened() {
@@ -78,6 +85,16 @@ public class InteractiveMapPageObject extends BasePageObject{
 		while(checkIfElementOnPage(mapBeingProcessedModal)) {
 			refreshButton.click();
 		}
+	}
+	
+	public AddPinComponentObject placePinInMap() {
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(addPin);
+		addPin.click();
+		waitForElementByElement(map);
+		map.click();
+		driver.switchTo().defaultContent();
+		return new AddPinComponentObject(driver);
 	}
 
 }

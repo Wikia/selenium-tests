@@ -5,9 +5,11 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateACustomMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateRealMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.TemplateComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -20,15 +22,14 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * Time: 16:53
     - Special:Maps page
 	IM01: Creating a custom new map based on new image upload
-	IMXX: Create a custom new map based on existing template
-	IMXX: Create a real map flow
-	IM02: Click on a map and verify correct redirect and URL
-	IM03: Click create a map button as anon and make sure log in modal is displayed
+	IM02: Create a custom new map based on existing template
+	IM03: Create a real map flow
+	IM04: Click on a map and verify correct redirect and URL
+	IM05: Click create a map button as anon and make sure log in modal is displayed
 	- Special Map page
-	IM04: Create a real map, add pin types and categories and then verify those elements appear along with bottom right hand
-	      options: add a pin, zoom in/out and embed code
-	IM05: Click on a PIN and verify following elements: title, description, article link, thumbnail, edit link, more link 
+	IM06: Create a PIN and verify following elements: title, description, article link, thumbnail, edit link, more link 
 	      when description is long
+	IM07: 
 	- Create PIN Types Modal      
 	IM06: Create PIN Types modal: Check image error validation for small size, big size and non-image extension
 	IM07: Verify clicking "Add another pin type" link will display a new line and fields for adding new information  
@@ -100,6 +101,21 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		createdMap.verifyMapOpened();
 		createdMap.verifyCreatedPins(pinTypeName);
 	}
+	
+	@Test(groups = {"InteractiveMaps_003", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_003_CreateRealMap() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject map = specialMap.clickCreateAMap();
+		CreateRealMapComponentObject realMap = map.clickRealMap();	
+		realMap.verifyRealMapPreviewImage();
+		realMap.typeMapName(mapName);
+		CreatePinTypesComponentObject pinDialog = realMap.clickNext();
+		pinDialog.typePinTypeTitle(pinTypeName);
+		InteractiveMapPageObject createdMap = pinDialog.clickSave();
+		createdMap.verifyMapOpened();
+		}
 
 	@Test(groups = {"InteractiveMaps_004", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_004_ClickMapAndVerifyCorrectRedirect() {
@@ -122,4 +138,15 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		CreateAMapComponentObject map = specialMap.clickCreateAMap();
 		map.verifyLoginModal();
 	}
+	
+	@Test(groups = {"InteractiveMaps_006", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_006_CreatePin() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(0);
+		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
+		pinDialog.verifyAssociatedArticleFieldIsDisplayed();
+	}
+	
 }
