@@ -1,12 +1,13 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -56,5 +57,13 @@ public class TestNoAdsOnAdFreeWikis extends NewTestTemplate {
 	public void TestNoAdsOnAdsFreeWikis_GeoEdgeFree() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoAdsOnPage();
+	}
+
+	@Test (
+		groups={"TestNoAdsOnAdsFreeWikisMobile_GeoEdgeFree"}
+	)
+	public void TestNoAdsOnAdsFreeWikisMobile_GeoEdgeFree() {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoAdsOnMobilePage();
 	}
 }

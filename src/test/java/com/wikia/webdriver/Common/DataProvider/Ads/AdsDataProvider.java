@@ -169,6 +169,8 @@ public class AdsDataProvider {
 		return new Object[][] {
 			{"api", "Wikia_API_Wiki"},
 			{"sfhomeless", "Glide_Memorial_Church"},
+			{"geekfeminism", "Dickwolves"},
+			{"suicideprevention", "USA"}
 		};
 	}
 
