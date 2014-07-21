@@ -294,18 +294,37 @@ public class AdsBaseObject extends WikiBasePageObject {
 		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
 		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
 		verifyNoLiftiumAds();
+		PageObjectLogging.log(
+			"verifyNoLiftiumAdsOnPage",
+			"No ads detected",
+			true,
+			driver
+		);
 	}
 
 	public void verifyNoAdsOnPage() {
 		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
 		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
 		verifyNoAds();
+		PageObjectLogging.log(
+			"verifyNoAdsOnPage",
+			"No ads detected",
+			true,
+			driver
+		);
 	}
 
 	public void verifyNoAdsOnMobilePage() {
 		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobileAdInContent));
 		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobilePrefooter));
 		verifyNoAds();
+		PageObjectLogging.log(
+			"verifyNoAdsOnMobilePage",
+			"No ads detected",
+			true,
+			driver
+		);
+
 	}
 
 	private boolean checkTagsPresent(WebElement slotElement) {
