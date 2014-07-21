@@ -1,23 +1,26 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers;
 
-import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
-import com.wikia.webdriver.Common.Core.ImageUtilities.ImageEditor;
-import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageEditor;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -69,7 +72,7 @@ public class AdsComparison {
 			throw new RuntimeException(ex);
 		}
 		Shooter shooter = new Shooter();
-		File capturedScreen =  shooter.capturePageAndCrop(
+		File capturedScreen = shooter.capturePageAndCrop(
 			startPoint, screenshotSize, driver
 		);
 
@@ -83,33 +86,14 @@ public class AdsComparison {
 		boolean success = true;
 
 		if (!(
-			imageComparison.comapareBaseEncodedImagesBasedOnBytes(
-				encodedExpectedScreen, encodedCapturedScreen
-			))
+			imageComparison.areBase64StringsTheSame(encodedExpectedScreen, encodedCapturedScreen))
 		) {
 			success = false;
 		}
 		return success;
 	}
 
-	public boolean compareElementWithScreenshot(
-		WebElement element, String expectedElementFilePath, Dimension expectedElementSize, WebDriver driver
-	) throws IOException{
-		Shooter shooter = new Shooter();
-		String encodedExpectedAd = readFileAsString(expectedElementFilePath);
-		File elementScreenshot = shooter.captureWebElementAndCrop(element, expectedElementSize, driver);
-		String encodedElementScreenshot = readFileAndEncodeToBase(elementScreenshot);
-		elementScreenshot.delete();
-		if (
-			imageComparison.comapareBaseEncodedImagesBasedOnBytes(encodedExpectedAd, encodedElementScreenshot)
-		) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean compareSlotOnOff(WebElement element, String elementSelector, WebDriver driver) {
+	public boolean isAdVisible(WebElement element, String elementSelector, WebDriver driver) {
 		Shooter shooter = new Shooter();
 		if (element.getSize().height <= 1 || element.getSize().width <= 1) {
 			throw new NoSuchElementException(
@@ -129,10 +113,10 @@ public class AdsComparison {
 			"Screenshot of element off taken; CSS " + elementSelector,
 			true
 		);
-		boolean result = imageComparison.compareImagesBasedOnBytes(preSwitch, postSwitch);
+		boolean imagesTheSame = imageComparison.areFilesTheSame(preSwitch, postSwitch);
 		preSwitch.delete();
 		postSwitch.delete();
-		return result;
+		return !imagesTheSame;
 	}
 
 	public File getMobileSlotScreenshot(WebElement element, WebDriver driver) {

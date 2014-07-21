@@ -867,6 +867,10 @@ public class WikiBasePageObject extends BasePageObject {
 				xmlResponse = EntityUtils.toString(entity);
 
 				xmlResponseArr = xmlResponse.split("\"");
+
+				if (xmlResponse.contains("WrongPass")) {
+					throw new WebDriverException("Incorrect password provided for user: " + userName);
+				}
 			}
 
 			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";

@@ -31,6 +31,6 @@ public class Test71MediaAdsOnRedirects extends NewTestTemplate {
 	@Test(groups={"Ads", "TestAds71MediaRedirects_GeoEdgeFree", "Ads71Media"})
 	public void TestAds71MediaRedirects_GeoEdgeFree() {
 		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
+		ads71Media.verify71MediaAdsPresent();
 	}
 }

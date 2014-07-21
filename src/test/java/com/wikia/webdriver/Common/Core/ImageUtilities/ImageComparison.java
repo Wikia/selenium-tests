@@ -21,7 +21,7 @@ public class ImageComparison {
 	 * @param File file2 - file containing second image
 	 * @return boolean   - if images are the same
 	 */
-	public boolean compareImagesBasedOnBytes(File file1, File file2) {
+	public boolean areFilesTheSame(File file1, File file2) {
 		byte[] fileInBytes1 = null;
 		byte[] fileInBytes2 = null;
 		try {
@@ -36,7 +36,7 @@ public class ImageComparison {
 		return false;
 	}
 
-	public boolean comapareBaseEncodedImagesBasedOnBytes(String base1, String base2) {
+	public boolean areBase64StringsTheSame(String base1, String base2) {
 		Base64 coder = new Base64();
 		byte[] baseInBytes1 = coder.decode(base1);
 		byte[] baseInBytes2 = coder.decode(base2);

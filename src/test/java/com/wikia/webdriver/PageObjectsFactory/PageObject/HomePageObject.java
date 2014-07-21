@@ -59,12 +59,6 @@ public class HomePageObject extends WikiBasePageObject {
 	{
 		startWikiButton.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
-		if (wikiURL.contains("preview"))
-		{
-			String currentUrl = driver.getCurrentUrl();
-			String desiredUrl = currentUrl.replace("www.wikia.com", "preview.www.wikia.com");
-			getUrl(desiredUrl);
-		}
 		return new CreateNewWikiPageObjectStep1(driver);
 	}
 
