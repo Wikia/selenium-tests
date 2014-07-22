@@ -15,8 +15,10 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 	private WebElement sourceEditorDialogIFrame;
 	@FindBy(css=".oo-ui-window-foot .oo-ui-buttonedElement-button")
 	private WebElement applyChangesButton;
-	@FindBy(css=".oo-ui-textInputWidget textarea")
+	@FindBy(css=".oo-ui-widget-enabled.oo-ui-textInputWidget textarea")
 	private WebElement editArea;
+	@FindBy(css=".wikiaThrobber")
+	private WebElement loadingIndicator;
 
 	public VisualEditorSourceEditorDialog(WebDriver driver) {
 		super(driver);
@@ -45,11 +47,13 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 	public VisualEditorPageObject typeInEditArea(String text) {
 		waitForElementVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().frame(sourceEditorDialogIFrame);
-		waitForElementByElement(editArea);
+		waitForElementNotVisibleByElement(loadingIndicator);
+		waitForElementVisibleByElement(editArea);
+		waitForElementClickableByElement(editArea);
 		editArea.sendKeys(text);
 		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementClickableByElement(applyChangesButton);
-		applyChangesButton.click();
+		scrollAndClick(applyChangesButton);
 		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
