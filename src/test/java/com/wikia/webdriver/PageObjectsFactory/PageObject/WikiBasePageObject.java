@@ -842,12 +842,12 @@ public class WikiBasePageObject extends BasePageObject {
 			String[] xmlResponseArr = xmlResponse.split("\"");
 			String token;
 			//Insert here for logging responses -- QAART 371
-			try{
+			try {
 				token = xmlResponseArr[5];
 			} catch (ArrayIndexOutOfBoundsException e) {
 				throw new WebDriverException(
 					"No token received from request. HTTP response is " + response.toString() +
-					" xmlReponse is " + xmlResponse);
+					", xmlReponse is " + xmlResponse);
 			}
 
 			while (xmlResponseArr.length < 11) {// sometimes first request
