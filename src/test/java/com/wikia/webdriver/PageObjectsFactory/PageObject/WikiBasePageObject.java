@@ -1116,4 +1116,12 @@ public class WikiBasePageObject extends BasePageObject {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window['optimizely'].push(['disable']);");
 	}
+
+	public VisualEditorPageObject launchVisualEditorWithMainEdit(String articleName, String wikiURL) {
+		ArticlePageObject article = openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		return new VisualEditorPageObject(driver);
+	}
 }
