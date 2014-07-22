@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 import java.util.List;
@@ -41,8 +42,33 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement addPin;
 	@FindBy(css = "")
 	private WebElement tile;
+	@FindBy(css = ".leaflet-control-embed-map-code-button")
+	private WebElement embedMapCodeButton;
+	@FindBy(css = ".leaflet-draw-draw-marker")
+	private WebElement addPinButton;
+	@FindBy(css = "#intMapEmbedMap")
+	private WebElement embedMapDialog;
+	@FindBy(css = ".code-sample.small")
+	private WebElement embedMapCodeSmall;
+	@FindBy(css = ".code-sample.medium")
+	private WebElement embedMapCodeMedium; 
+	@FindBy(css = ".code-sample.large")
+	private WebElement embedMapCodeLarge;
+	@FindBy(css = "button[data-size='small']")
+	private WebElement embedMapCodeSmallButton;
+	@FindBy(css = "button[data-size='medium']")
+	private WebElement embedMapCodeMediumButton; 
+	@FindBy(css = "button[data-size='large']")
+	private WebElement embedMapCodeLargeButton;
 	
-	
+	public void clickEmbedMapCodeButton() {
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(embedMapCodeButton);
+		scrollAndClick(embedMapCodeButton);
+		PageObjectLogging.log("clickEmbedMapCodeButton", "Embed map code button clicked", true, driver);
+		driver.switchTo().defaultContent();
+	}
+
 	public void verifyMapOpened() {
 		driver.switchTo().frame(mapFrame);
 		closeMapBeingProcessedModalIfVisible();
@@ -81,6 +107,11 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().defaultContent();
 	}
 	
+	public void verifyEmbedMapDialog() {
+		waitForElementByElement(embedMapDialog);
+		checkIfElementOnPage(embedMapCodeSmall);
+	}
+	
 	public void closeMapBeingProcessedModalIfVisible() {
 		while(checkIfElementOnPage(mapBeingProcessedModal)) {
 			refreshButton.click();
@@ -96,5 +127,36 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().defaultContent();
 		return new AddPinComponentObject(driver);
 	}
-
+	
+	public enum embedMapDialogButtons {
+		small, medium, large;
+	}
+	
+	public void clickEmbedMapCodeButton(embedMapDialogButtons button) {
+		switch (button) {
+			case small:
+				embedMapCodeSmallButton.click();
+				break;
+			case medium:
+				embedMapCodeMediumButton.click();
+				break;
+			case large:
+				embedMapCodeLargeButton.click();
+				break;
+		}
+	}
+	
+	public void verifyEmbedMapCode(embedMapDialogButtons button) {
+		switch (button) {
+			case small:
+				waitForElementVisibleByElement(embedMapCodeSmall);
+				break;
+			case medium:
+				waitForElementVisibleByElement(embedMapCodeMedium);
+				break;
+			case large:
+				waitForElementVisibleByElement(embedMapCodeLarge);
+				break;
+		}
+	}
 }

@@ -48,7 +48,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
     - Random Test Cases
     IM14: Verify possibility of embedding wikia map in other pages. Verify following elements in map: PIN description when
           clicking, zoom, no add/edit features, extra bar at the bottom with Wikia wordmark          
-	
+	IM15: Verify embed map code dialog works correctly
 */ 
 
 public class InteractiveMapsTests extends NewTestTemplate{
@@ -115,7 +115,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.typePinTypeTitle(pinTypeName);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
-		}
+	}
 
 	@Test(groups = {"InteractiveMaps_004", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_004_ClickMapAndVerifyCorrectRedirect() {
@@ -149,4 +149,20 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.verifyAssociatedArticleFieldIsDisplayed();
 	}
 	
+	@Test(groups = {"InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_015_VerifyEmbedMapCodeButton() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		selectedMap.clickEmbedMapCodeButton();
+		selectedMap.verifyEmbedMapDialog();
+		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.small);
+		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.small);
+		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.medium);
+		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.medium);
+		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.large);
+		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.large);
+	}
 }
