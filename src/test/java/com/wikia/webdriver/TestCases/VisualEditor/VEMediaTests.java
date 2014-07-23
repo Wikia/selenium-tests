@@ -32,10 +32,10 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEMediaTests", "VEAddExternalVideoTests_001", "VEPreviewVideo"}
+		groups = {"VEMediaTests", "VEMediaTests_001", "VEPreviewVideo"}
 	)
 	public void VEMediaTests_001_previewVideo() {
-		String title = "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
+		String mediaTitle = "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
 		String providerName = "youtube";
 
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -43,7 +43,22 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
-		ve = mediaDialog.previewExistingMediaByTitle(title);
+		ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
 		ve.verifyPreviewVideoPlay(providerName);
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_002", "VEPreviewImage"}
+	)
+	public void VEMediaTests_002_previewImage() {
+		String mediaTitle = "Thomas Wright 1792 - 1849";
+
+		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
+		ve.verifyPreviewImage();
 	}
 }
