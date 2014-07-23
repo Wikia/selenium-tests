@@ -113,6 +113,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		driver.switchTo().frame(insertMediaDialogIFrame);
 		WebElement media = findMediaByTitle(title);
 		media.click();
+		PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
 	}
@@ -129,6 +130,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 			if (mediaTitle.equals(title)) {
 				found = true;
 				elementFound = mediaTitles.get(i);
+				PageObjectLogging.log("findMediaByTitle", title + " found from media dialog", true);
 			}
 			i++;
 		}
