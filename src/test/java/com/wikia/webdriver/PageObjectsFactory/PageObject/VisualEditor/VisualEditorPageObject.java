@@ -52,7 +52,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement previewMeditaTitle;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-closeButton .oo-ui-buttonedElement-button")
 	private WebElement previewCloseButton;
-	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay")
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay img")
 	private WebElement previewImage;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
 	private WebElement previewVideoWrapper;
@@ -219,8 +219,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	public void verifyPreviewVideoPlay(String providerName) {
+		waitForElementVisibleByElement(previewOverlay);
 		waitForElementVisibleByElement(previewVideoWrapper);
 		VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
 		video.verifyVideoAutoplay(providerName, true);
+	}
+
+	public void verifyPreviewImage() {
+		waitForElementVisibleByElement(previewOverlay);
+		waitForElementVisibleByElement(previewImage);
+		PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
 	}
 }
