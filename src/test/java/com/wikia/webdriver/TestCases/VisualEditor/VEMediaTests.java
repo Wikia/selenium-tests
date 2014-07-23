@@ -14,8 +14,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 /**
  * @author Robert 'Rochan' Chan
  *
- * VE-1134 Adding Youtube Video
- * VE-1134 Adding Premium Video with full URL
+ * VE-1335 Previewing Youtube video from VE's media dialog
+ * VE-1335 Previewing image from VE's media dialog
  *
  */
 
@@ -29,6 +29,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	public void setup_VEPreferred() {
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 	}
 
 	@Test(
@@ -38,7 +39,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String mediaTitle = "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
 		String providerName = "youtube";
 
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
@@ -53,7 +53,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	public void VEMediaTests_002_previewImage() {
 		String mediaTitle = "Thomas Wright 1792 - 1849";
 
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
