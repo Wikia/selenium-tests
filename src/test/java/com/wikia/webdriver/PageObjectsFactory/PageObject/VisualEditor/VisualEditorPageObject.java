@@ -223,6 +223,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(previewVideoWrapper);
 		VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
 		video.verifyVideoAutoplay(providerName, true);
+		PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
 	}
 
 	public void verifyPreviewImage() {
