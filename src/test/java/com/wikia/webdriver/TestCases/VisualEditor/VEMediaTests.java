@@ -8,7 +8,9 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
@@ -59,5 +61,19 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		mediaDialog = mediaDialog.searchMedia("h");
 		ve = mediaDialog.previewExistingMediaByTitle(mediaTitle);
 		ve.verifyPreviewImage();
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_003", "VEUploadImage"}
+	)
+	public void VEMediaTests_003_AddImageFromUpload() {
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		ve = mediaDialog.uploadImage(PageContent.file);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 }
