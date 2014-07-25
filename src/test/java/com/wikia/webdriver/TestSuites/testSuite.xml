@@ -103,6 +103,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FBConnectTests"/>
 			<class name="com.wikia.webdriver.TestCases.UserProfileTests.UserAvatarTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VEAddVideoTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VEMediaTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorFormattingTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStylesTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorMultiplePublishTests"/>
