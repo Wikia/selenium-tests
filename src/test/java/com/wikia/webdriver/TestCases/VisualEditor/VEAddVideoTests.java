@@ -116,4 +116,19 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
 	}
+
+	@Test(
+		groups = {"VEAddVideo", "VEAddExternalVideoTests_005", "VEAddExistingVideo"}
+	)
+	public void VEAddExternalVideoTests_005_AddVideoFromUpload() {
+		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		ve = mediaDialog.uploadImage(PageContent.file);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
 }
