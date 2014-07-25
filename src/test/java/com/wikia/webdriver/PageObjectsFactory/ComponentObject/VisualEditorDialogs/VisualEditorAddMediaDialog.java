@@ -116,9 +116,9 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 			getAbsolutePathForFile(PageContent.resourcesPath + fileName)
 		);
 		PageObjectLogging.log(
-				"selectFileToUpload",
-				"file " + fileName + " added to upload",
-				true
+			"selectFileToUpload",
+			"file " + fileName + " added to upload",
+			true
 		);
 	}
 }
