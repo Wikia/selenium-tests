@@ -840,7 +840,15 @@ public class WikiBasePageObject extends BasePageObject {
 			xmlResponse = EntityUtils.toString(entity);
 
 			String[] xmlResponseArr = xmlResponse.split("\"");
-			String token = xmlResponseArr[5];
+			String token;
+			//Insert here for logging responses -- QAART 371
+			try {
+				token = xmlResponseArr[5];
+			} catch (ArrayIndexOutOfBoundsException e) {
+				throw new WebDriverException(
+					"No token received from request. HTTP response is " + response.toString() +
+					", xmlReponse is " + xmlResponse);
+			}
 
 			while (xmlResponseArr.length < 11) {// sometimes first request
 				// does
@@ -1107,5 +1115,13 @@ public class WikiBasePageObject extends BasePageObject {
 	public void disableOptimizely() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window['optimizely'].push(['disable']);");
+	}
+
+	public VisualEditorPageObject launchVisualEditorWithMainEdit(String articleName, String wikiURL) {
+		ArticlePageObject article = openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		return new VisualEditorPageObject(driver);
 	}
 }

@@ -13,10 +13,13 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
@@ -43,6 +46,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private List<WebElement> mediaNodes;
 	@FindBy(css="figure.ve-ce-branchNode a")
 	private WebElement mediaNode;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay")
+	private WebElement previewOverlay;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-title")
+	private WebElement previewMeditaTitle;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-closeButton .oo-ui-buttonedElement-button")
+	private WebElement previewCloseButton;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay img")
+	private WebElement previewImage;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
+	private WebElement previewVideoWrapper;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -196,5 +209,26 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
+	}
+
+	public VisualEditorPageObject typeInSourceEditor(String text) {
+		VisualEditorSourceEditorDialog veSrcDialog =
+			(VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
+		veSrcDialog.typeInEditArea(text);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public void verifyPreviewVideoPlay(String providerName) {
+		waitForElementVisibleByElement(previewOverlay);
+		waitForElementVisibleByElement(previewVideoWrapper);
+		VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
+		video.verifyVideoAutoplay(providerName, true);
+		PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
+	}
+
+	public void verifyPreviewImage() {
+		waitForElementVisibleByElement(previewOverlay);
+		waitForElementVisibleByElement(previewImage);
+		PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
 	}
 }
