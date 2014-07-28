@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
@@ -28,26 +29,26 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 	IM05: Click create a map button as anon and make sure log in modal is displayed
 	
 	- PIN Creation - Add a Pin modal
-	IM06: Click Add a pin and verify following elements: Title, Associated article, Select pin type, Description, 
-          Add pin button, Cancel button, Close button, Delete PIN button
-	IM07: Create A Pin, modify its values and verify they are correctly saved when reopening modal through Edit link
+	IM06: Verify it is possible to add a pin to the map and that add pin dialog has all required elements
+	IM07: Verify removing a suggestion of article with image will remove image from placeholder
 	
 	-Edit PIN Types Modal       
 	IM08: Check image error validation for small size, big size and non-image extension
 	IM09: Verify clicking "Add another pin type" link will display a new line and fields for adding new information  
 	IM10: Verify saving any new data will actually update the data for that pin edited
-	IM11: All pin types and their images appear with their associated name when opening Edit PIN Types modal
     
-    - Random Test Cases
-    IM12: Verify possibility of embedding wikia map in other wikia pages. Verify following elements in map modal: PIN description when
-          clicking, zoom, add/edit features for pin types and pins, embed map button, filters box 
+    - Other Test Cases
+    IM11: Verify possibility of embedding wikia map in other wikia pages. 
+    IM12: Verify following elements in map modal when a map is embedded in a wikia page: PIN description when
+          clicking, zoom, add/edit features for pin types and pins, embed map button, filters box. Verify there is no branding footer 
     IM13: Test template search works correctly for unexisting and existing templates        
 	IM14: Verify following behaviours in "Filters" left hand side column:
 		All categories are checked and user clicks on single category: We uncheck clicked category and "All categories".
 		All categories but one are checked and user clicks on unchecked one: We check clicked category and "All categories".
 		All categories are checked (so "All categories" is checked too) and user clicks "All categories": We uncheck all categories and "All categories".
 		Some categories are checked (so "All categories" is unchecked) and user clicks "All categories": We check all categories and "All categories".		
-	IM15: Verify embed map code dialog works correctly
+	IM15: Verify embed map code dialog works correctly from Special:Map page
+	IM16: Embed a map outside of wikia and verify there is a branding footer, zoom in/out options and filters box collapsibility
 	*/
 
 public class InteractiveMapsTests extends NewTestTemplate{
@@ -57,9 +58,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	int selectedMapIndex = 0;
 	
 	//move to other class:
-	private final String mapName = "RMG";
-	private final String pinTypeName = "RMG";
-	private final String pinName = "RMG";
+	
 	private String templateName;
 	private final String associatedArticleName = "Slid";
 
@@ -73,15 +72,15 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		CreateACustomMapComponentObject customMap = map.clickCustomMap();
 		TemplateComponentObject template = customMap.selectFileToUpload(PageContent.file);
 		template.verifyTemplateImagePreview();
-		template.typeMapName(mapName);
+		template.typeMapName(InteractiveMapsContent.mapName);
 		templateName = base.getTimeStamp();
 		template.typeTemplateName(templateName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		pinDialog.typePinTypeTitle(pinTypeName);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
-		createdMap.verifyCreatedMapTitle(mapName);
+		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
-		createdMap.verifyCreatedPins(pinTypeName);
+		createdMap.verifyCreatedPins(InteractiveMapsContent.pinTypeName);
 	}
 
 	@Test(groups = {"InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps"})
@@ -94,13 +93,13 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		String selectedImageName = customMap.getSelectedTemplateImageName(selectedTemplateIndex);
 		TemplateComponentObject template = customMap.selectTemplate(selectedTemplateIndex);
 		template.verifyTemplateImage(selectedImageName);
-		template.typeMapName(mapName);
+		template.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		pinDialog.typePinTypeTitle(pinTypeName);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
-		createdMap.verifyCreatedMapTitle(mapName);
+		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
-		createdMap.verifyCreatedPins(pinTypeName);
+		createdMap.verifyCreatedPins(InteractiveMapsContent.pinTypeName);
 	}
 	
 	@Test(groups = {"InteractiveMaps_003", "InteractiveMapTests", "InteractiveMaps"})
@@ -111,9 +110,9 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		CreateAMapComponentObject map = specialMap.clickCreateAMap();
 		CreateRealMapComponentObject realMap = map.clickRealMap();	
 		realMap.verifyRealMapPreviewImage();
-		realMap.typeMapName(mapName);
+		realMap.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = realMap.clickNext();
-		pinDialog.typePinTypeTitle(pinTypeName);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
 	}
@@ -163,24 +162,12 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(0);
 		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
 		pinDialog.verifyPinTitleFieldIsDisplayed();
-		pinDialog.typePinName(pinName);
+		pinDialog.typePinName(InteractiveMapsContent.pinName);
 		String placeholderSrc = pinDialog.getAssociatedArticleImageSrc();
 		pinDialog.typeAssociatedArticle(associatedArticleName);
 		pinDialog.clickSugggestion(0);
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
 		pinDialog.verifyImage();
-		
-
-	
-//		pinDialog.selectPinCategory();
-//		pinDialog.typeDescription();
-//		selectedMap = pinDialog.clickSaveButton();
-//		pinDialog = selectedMap.clickEditPin();
-//		pinDialog.verifyPinTitle();
-//		pinDialog.verifyAssociatedArticle();
-//		pinDialog.verifyAssociatedArticleImage();
-//		pinDialog.verifySelectedPinCategory();
-//		pinDialog.verifyDescription();
 	}
 	
 	@Test(groups = {"InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps"})
