@@ -53,5 +53,4 @@ public class CreateRealMapComponentObject extends BasePageObject{
 		waitForElementByElement(realMapImagePreview);
 		PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
 	} 
-	
 }

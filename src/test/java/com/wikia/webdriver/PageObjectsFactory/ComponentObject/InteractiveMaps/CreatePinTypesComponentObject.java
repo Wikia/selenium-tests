@@ -66,6 +66,5 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		waitForElementByElement(addMorePinTypesLink);
 		addMorePinTypesLink.click();
 		PageObjectLogging.log("clickAddAnotherPinType", "clicked add more pin types link in create pin types modal", true);
-	}
-		
+	}	
 }

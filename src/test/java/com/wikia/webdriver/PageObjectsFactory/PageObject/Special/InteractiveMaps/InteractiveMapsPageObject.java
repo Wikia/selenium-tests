@@ -30,7 +30,6 @@ public class InteractiveMapsPageObject extends BasePageObject{
 	@FindBy(css = ".map-list>li>a>h3")
 	private List<WebElement> mapTitleList;
 	
-	
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
 		scrollAndClick(createAMapButton);
@@ -55,5 +54,4 @@ public class InteractiveMapsPageObject extends BasePageObject{
 		String mapTitle = mapTitleList.get(mapIndex).getText();
 		return mapTitle;
 	}
-
 }

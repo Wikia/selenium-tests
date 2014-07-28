@@ -44,7 +44,6 @@ public class AddPinComponentObject extends BasePageObject{
 	@FindBy(css = ".article-image-url")
 	private WebElement articleImageUrl;
 	
-	
 	public void verifyPinTitleFieldIsDisplayed() {
 		waitForElementByElement(pinNameField);
 		PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
@@ -111,5 +110,4 @@ public class AddPinComponentObject extends BasePageObject{
 		waitForElementByElement(articleImageUrl);
 		Assertion.assertStringContains(articleImageUrl.getAttribute("src"), "Robert_Pattison");
 	}
-	
 }

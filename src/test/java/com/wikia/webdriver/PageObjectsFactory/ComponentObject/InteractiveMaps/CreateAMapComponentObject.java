@@ -45,5 +45,4 @@ public class CreateAMapComponentObject extends BasePageObject{
 		waitForElementByElement(loginModal);
 		PageObjectLogging.log("verifyLoginModal", "Login modal is displayed", true);
 	}
-
 }

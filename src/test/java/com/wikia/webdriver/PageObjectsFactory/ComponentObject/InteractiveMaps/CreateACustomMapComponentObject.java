@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -24,8 +25,6 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	//UI Mapping
 	@FindBy(css = "#intMapUpload")
 	private WebElement browseForFileInput;
-	@FindBy(css = "#intMapUploadLink")
-	private WebElement uploadFileTile;
 	@FindBy(css = "#intMapTileSetSearch")
 	private WebElement searchField;
 	@FindBy(css = "#intMapBack")
@@ -34,7 +33,6 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	private List<WebElement> templateList;
 	
 	String beforeImageName = "116x116-";
-	
 	
 	public TemplateComponentObject selectFileToUpload(String file) {
 		browseForFileInput.sendKeys(
@@ -61,5 +59,4 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 			.getAttribute("src").substring(imageNameIndex + beforeImageName.length());
 		return selectedTemplateImageName;
 	}
-	
 }

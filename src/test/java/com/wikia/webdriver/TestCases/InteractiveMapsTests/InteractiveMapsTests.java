@@ -62,7 +62,6 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	private String templateName;
 	private final String associatedArticleName = "Slid";
 
-
 	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
