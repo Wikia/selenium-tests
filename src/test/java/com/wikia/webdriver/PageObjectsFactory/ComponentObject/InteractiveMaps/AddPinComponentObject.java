@@ -22,7 +22,6 @@ public class AddPinComponentObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping
 	@FindBy(css = "input[name=name]")
 	private WebElement pinNameField;
 	@FindBy(css = "#intMapArticleTitle")
@@ -97,7 +96,6 @@ public class AddPinComponentObject extends BasePageObject{
 	public String getAssociatedArticleImageSrc() {
 		waitForElementByElement(associatedArticleImage);
 		String imageSrc = articleImageUrl.getAttribute("src");
-		System.out.println(imageSrc);
 		return imageSrc;
 	}
 	

@@ -22,7 +22,6 @@ public class InteractiveMapsPageObject extends BasePageObject{
 		// TODO Auto-generated constructor stub
 	}
 	
-	//UI Mapping
 	@FindBy(css = "#createMap")
 	private WebElement createAMapButton;
 	@FindBy(css = ".map-list>li>a")

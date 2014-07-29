@@ -19,8 +19,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 /**
  * Author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
- * Date: 20.06.14
- * Time: 16:53
     - Special:Maps page
 	IM01: Creating a custom new map based on new image upload
 	IM02: Create a custom new map based on existing template

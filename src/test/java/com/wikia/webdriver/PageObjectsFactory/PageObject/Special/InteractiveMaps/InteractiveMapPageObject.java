@@ -21,7 +21,6 @@ public class InteractiveMapPageObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping
 	@FindBy(css = "#map")
 	private WebElement map;
 	@FindBy(css = ".WikiaPageHeader>h1")
