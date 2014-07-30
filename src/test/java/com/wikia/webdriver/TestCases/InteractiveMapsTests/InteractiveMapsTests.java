@@ -47,6 +47,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 		Some categories are checked (so "All categories" is unchecked) and user clicks "All categories": We check all categories and "All categories".		
 	IM15: Verify embed map code dialog works correctly from Special:Map page
 	IM16: Embed a map outside of wikia and verify there is a branding footer, zoom in/out options and filters box collapsibility
+	IM17: Verify back button works correctly on every dialog
 	*/
 
 public class InteractiveMapsTests extends NewTestTemplate{
@@ -182,5 +183,24 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.medium);
 		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.large);
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.large);
+	}
+
+	@Test(groups = {"InteractiveMaps_017", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_017_VerifyBackButtonWorksCorrectly() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject map = specialMap.clickCreateAMap();
+		CreateACustomMapComponentObject customMap = map.clickCustomMap();
+		TemplateComponentObject template = customMap.selectTemplate(selectedTemplateIndex);
+		template.verifyTemplateImagePreview();
+		customMap = template.clickBack();
+		customMap.verifyTemplateListElementVisible(selectedTemplateIndex);
+		map = customMap.clickBack();
+		map.verifyRealMapAndCustomMapButtons();
+		CreateRealMapComponentObject realMap = map.clickRealMap();
+		realMap.verifyRealMapPreviewImage();
+		map = realMap.clickBack();
+		map.verifyRealMapAndCustomMapButtons();
 	}
 }

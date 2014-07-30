@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -19,7 +18,6 @@ public class CreateRealMapComponentObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping	
 	@FindBy(css = "input[name=map-title]")
 	private WebElement mapTitleField;
 	@FindBy(css = "#intMapPreviewImage")

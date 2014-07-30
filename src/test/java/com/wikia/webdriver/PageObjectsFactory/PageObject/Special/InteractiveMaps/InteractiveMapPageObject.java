@@ -90,22 +90,6 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().defaultContent();
 	}
 	
-	public void verifyCreatedPins(List<String> pinNamesList) {
-		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(filterBox);
-		Assert.assertEquals(pinNamesList.size(), createdPinCells.size());
-		for(int i = 0; i < createdPinCells.size(); i++) {
-			Assert.assertEquals(pinNamesList.get(i), createdPinNames.get(i).getText());
-		}
-		driver.switchTo().defaultContent();
-	}
-	
-	public void verifyMapIsBeingProcessedMessage() {
-		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(mapBeingProcessedModal);
-		driver.switchTo().defaultContent();
-	}
-	
 	public void verifyEmbedMapDialog() {
 		waitForElementByElement(embedMapDialog);
 		checkIfElementOnPage(embedMapCodeSmall);

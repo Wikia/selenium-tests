@@ -10,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -24,21 +23,10 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping
 	@FindBy(css = "input[name='poiCategoryNames[]']")
 	private List<WebElement> pinTypeTitleInputs;
-	@FindBy(css = "input[name='poiCategoryMarkers[]']")
-	private List<WebElement> uploadMarker;
 	@FindBy(css = ".button.normal.primary")
 	private WebElement saveButton;
-	@FindBy(css = ".addPoiCategory.modalEvent")
-	private WebElement addMorePinTypesLink;
-	@FindBy(css = ".poi-category-dropdown")
-	private WebElement mainParentCategorySelector;
-	@FindBy(css = ".poi-category-dropdown > option")
-	private List<WebElement> parentCatOption;
-	@FindBy(css = ".modal.medium.int-map-modal")
-	private WebElement creatingPinDialog;
 	
 	public void typePinTypeTitle(String pinTypeName) {
 		WebElement firstPin = pinTypeTitleInputs.get(0);
@@ -53,18 +41,4 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickSave", "clicked save button in create pin types modal", true);
 		return new InteractiveMapPageObject(driver);
 	}
-	
-	public void selectParentCategory(int catValue) {
-		waitForElementClickableByElement(mainParentCategorySelector);
-		mainParentCategorySelector.click();
-		WebElement parentSelected = parentCatOption.get(catValue);
-		waitForElementVisibleByElement(parentSelected);
-		parentSelected.click();
-	}
-	
-	public void clickAddAnotherPinType() {
-		waitForElementByElement(addMorePinTypesLink);
-		addMorePinTypesLink.click();
-		PageObjectLogging.log("clickAddAnotherPinType", "clicked add more pin types link in create pin types modal", true);
-	}	
 }

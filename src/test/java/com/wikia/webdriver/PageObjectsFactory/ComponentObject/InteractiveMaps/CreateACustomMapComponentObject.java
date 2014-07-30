@@ -22,15 +22,12 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping
 	@FindBy(css = "#intMapUpload")
 	private WebElement browseForFileInput;
-	@FindBy(css = "#intMapTileSetSearch")
-	private WebElement searchField;
-	@FindBy(css = "#intMapBack")
-	private WebElement backButton;
 	@FindBy(css = ".modalEvent>img")
 	private List<WebElement> templateList;
+	@FindBy(css = "#intMapBack")
+	private WebElement backButton;
 	
 	String beforeImageName = "116x116-";
 	
@@ -40,23 +37,28 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 		return new TemplateComponentObject(driver);
 	}
-	
-	public void typeTilesetName(String templateName) {
-		waitForElementByElement(searchField);
-		searchField.sendKeys(templateName);
-		PageObjectLogging.log("typeTilesetName", templateName+" title for template is typed in", true);
-	}
 
 	public TemplateComponentObject selectTemplate(int templateId) {
 		waitForElementByElement(templateList.get(templateId));
 		templateList.get(templateId).click();
 		return new TemplateComponentObject(driver);
 	}
-	
+
 	public String getSelectedTemplateImageName(int selectedImageIndex) {
 		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
 		String selectedTemplateImageName = templateList.get(selectedImageIndex)
 			.getAttribute("src").substring(imageNameIndex + beforeImageName.length());
 		return selectedTemplateImageName;
+	}
+
+	public CreateAMapComponentObject clickBack() {
+		waitForElementByElement(backButton);
+		backButton.click();
+		PageObjectLogging.log("clickCustomMap", "custom map link clicked",  true, driver);
+		return new CreateAMapComponentObject(driver);
+	}
+
+	public void verifyTemplateListElementVisible(int element) {
+		waitForElementByElement(templateList.get(element));
 	}
 }
