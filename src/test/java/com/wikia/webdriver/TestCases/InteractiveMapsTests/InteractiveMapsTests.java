@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
 import org.testng.annotations.Test;
 
+import org.openqa.selenium.WebElement;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -75,7 +76,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		templateName = base.getTimeStamp();
 		template.typeTemplateName(templateName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,0);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
@@ -94,7 +95,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		template.verifyTemplateImage(selectedImageName);
 		template.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,0);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
@@ -111,7 +112,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		realMap.verifyRealMapPreviewImage();
 		realMap.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = realMap.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,0);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
 	}
@@ -164,10 +165,57 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.typePinName(InteractiveMapsContent.pinName);
 		String placeholderSrc = pinDialog.getAssociatedArticleImageSrc();
 		pinDialog.typeAssociatedArticle(associatedArticleName);
-		pinDialog.clickSugggestion(0);
+		pinDialog.clickSuggestion(0);
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
 		pinDialog.verifyImage();
 	}
+	
+
+	
+	@Test(groups = {"InteractiveMaps_009", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_009_VerifyClickingAddAnotherPinType(){
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(0);
+		selectedMap.verifyMapOpened();
+		selectedMap.clickEditPinTypesButton();
+		CreatePinTypesComponentObject pinTypesDialog = new CreatePinTypesComponentObject(driver); 
+	    pinTypesDialog.verifyPinTypesDialog();
+		pinTypesDialog.savePinTypesListState();
+	    pinTypesDialog.clickAddAnotherPinType();
+	    pinTypesDialog.verifyAddAnotherPinType();
+	}
+	
+	//IM10: Verify saving any new data will actually update the data for that pin edited
+	@Test(groups = {"InteractiveMaps_010", "InteractiveMapTests","InteracviteMaps"})
+	public void InteractiveMaps_010_VerifySavingNewData(){
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
+		pinDialog.verifyPinCategorySelectorIsDisplayed();
+		String choosedSelector = pinDialog.selectPinCategorySelector();
+		pinDialog.verifyDescriptionFieldIsDisplayed();
+		pinDialog.typePinDescription(InteractiveMapsContent.pinDescription);
+		pinDialog.verifyPinTitleFieldIsDisplayed();
+		pinDialog.typePinName(InteractiveMapsContent.pinName);		
+		
+		selectedMap = pinDialog.clickSaveButton();
+		
+		
+		selectedMap.clickEditPinTypesButton();
+		CreatePinTypesComponentObject pinTypesDialog = new CreatePinTypesComponentObject(driver);
+		pinTypesDialog.verifyPinTypesDialog();
+		int selectorFieldNumber = pinTypesDialog.checkPinTypeTitleId(choosedSelector);
+		pinTypesDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,selectorFieldNumber);
+		selectedMap = pinTypesDialog.clickSave();
+		selectedMap.verifyChangesInPin(choosedSelector);
+		
+	}
+	
 	
 	@Test(groups = {"InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_015_VerifyEmbedMapCodeButton() {

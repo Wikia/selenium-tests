@@ -2,9 +2,11 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -43,10 +45,18 @@ public class AddPinComponentObject extends BasePageObject{
 	private List<WebElement> suggestedOption;
 	@FindBy(css = ".article-image-url")
 	private WebElement articleImageUrl;
+	@FindBy(name = "lon")
+	private WebElement hiddenLonInput;
+
 	
 	public void verifyPinTitleFieldIsDisplayed() {
 		waitForElementByElement(pinNameField);
 		PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
+	}
+	
+	public boolean verifyPinTitleFieldIsFilled(){
+		waitForElementByElement(pinNameField);
+		return !pinNameField.equals("") ? true: false;
 	}
 	
 	public void verifyAssociatedArticleFieldIsDisplayed() {
@@ -75,11 +85,24 @@ public class AddPinComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickCancelButton", "cancel button clicked",  true, driver);
 		return new InteractiveMapPageObject(driver);
 	}
+	public InteractiveMapPageObject clickSaveButton(){
+		waitForElementByElement(hiddenLonInput);
+		waitForElementByElement(saveButton);
+		saveButton.click();
+		PageObjectLogging.log("clickSaveButton","save button clicked", true, driver);
+		return new InteractiveMapPageObject(driver);
+	}
 
 	public void typePinName(String pinName) {
 		waitForElementByElement(pinNameField);
 		pinNameField.sendKeys(pinName);
-		PageObjectLogging.log("typePinName", pinName+" title for Pin is typed in", true);
+		PageObjectLogging.log("typePinName", pinName+" title for Pin was typed in", true);
+	}
+	
+	public void typePinDescription(String pinDescription){
+		waitForElementByElement(descriptionField);
+		descriptionField.sendKeys(pinDescription);
+		PageObjectLogging.log("typePinDescription","Pin description was typed in", true);
 	}
 	
 	public void typeAssociatedArticle(String associatedArticleName) {
@@ -88,7 +111,19 @@ public class AddPinComponentObject extends BasePageObject{
 		PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in", true);
 	}
 	
-	public void clickSugggestion(int opt) {
+	public String selectPinCategorySelector(){
+		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
+		List<WebElement> pinCategorySelectorList = pinCategorySelectorDropDown.getOptions();
+		waitForElementByElement(pinCategorySelectorList.get(pinCategorySelectorList.size()-1));
+		pinCategorySelectorList.get(pinCategorySelectorList.size()-1).click();
+		PageObjectLogging.log("typePinCategorySelector", "Pin Category choosed is "+pinCategorySelectorList.get(pinCategorySelectorList.size()-1), true);
+		return pinCategorySelectorList.get(pinCategorySelectorList.size()-1).getText();
+		//pinCategorySelectorList.size()-1 is the last one from selector list
+	}
+	
+	
+	
+	public void clickSuggestion(int opt) {
 		waitForElementVisibleByElement(suggestedOption.get(opt));
 		WebElement suggestionSelected = suggestedOption.get(opt);
 		suggestionSelected.click();
@@ -110,4 +145,9 @@ public class AddPinComponentObject extends BasePageObject{
 		waitForElementByElement(articleImageUrl);
 		Assertion.assertStringContains(articleImageUrl.getAttribute("src"), "Robert_Pattison");
 	}
+	
+	
+	
+	
+	
 }

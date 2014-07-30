@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -60,6 +61,16 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement embedMapCodeMediumButton; 
 	@FindBy(css = "button[data-size='large']")
 	private WebElement embedMapCodeLargeButton;
+	@FindBy(css = ".edit-point-types")
+	private WebElement editPinTypesButton;
+	@FindBy(css = "#intMapPoiCategories")
+	private WebElement mapPoiCategoriesDialog;
+	@FindBy(css = ".leaflet-popup-tip")
+	private List<WebElement> pinCollection;
+	@FindBy(css = ".edit-poi-link")
+	private List<WebElement> editPoiLinkCollection;
+	
+
 	
 	public void clickEmbedMapCodeButton() {
 		driver.switchTo().frame(mapFrame);
@@ -159,4 +170,30 @@ public class InteractiveMapPageObject extends BasePageObject{
 				break;
 		}
 	}
+	
+
+	public void clickEditPinTypesButton(){
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(editPinTypesButton);
+	    editPinTypesButton.click();
+		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button clicked", true, driver);
+		driver.switchTo().defaultContent();
+	}	
+	
+	
+	public AddPinComponentObject verifyChangesInPin(String pinTypeCategory){
+		
+		driver.switchTo().frame(mapFrame);
+		pinCollection.get(pinCollection.size()-1).click();
+		editPoiLinkCollection.get(editPoiLinkCollection.size()-1).click();
+				
+		PageObjectLogging.log("verifyChangesInPin", "Edit pin dialog was opened", true, driver);
+		return new AddPinComponentObject(driver);
+		
+	}
+	
+	
+	
+	
+	
 }
