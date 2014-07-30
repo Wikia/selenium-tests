@@ -46,6 +46,8 @@ public class HomePageObject extends WikiBasePageObject {
 	//These Bys are being used to prevent stale browser exception
 	private By languageSelectorBy = By.cssSelector(".wikia-menu-button li > a");
 	private By languageButtonSelectorBy = By.cssSelector("section.grid-1 nav");
+	private By corporateFooterSelectorBy = By.cssSelector(".CorporateFooter");
+
 
 	private String languageDropdownString = "nav.wikia-menu-button";
 
@@ -124,13 +126,20 @@ public class HomePageObject extends WikiBasePageObject {
 		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		String languageClass = languagesList.get(index).getAttribute("class");
 		languagesList.get(index).click();
-		waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
+		verifyCorporateFooter();
+		if (!executeScriptRetBool("!!mw.config.get( 'wikiaPageIsHub' )")) {
+			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
+		}
 		PageObjectLogging.log("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
 		return new HomePageObject(driver);
 	}
 
 	public void verifyLanguageButton() {
 		waitForElementByBy(languageButtonSelectorBy);
+	}
+
+	public void verifyCorporateFooter() {
+		waitForElementByBy(corporateFooterSelectorBy);
 	}
 
 	public String getLanguageURL(int index) {
@@ -146,12 +155,18 @@ public class HomePageObject extends WikiBasePageObject {
 	public void verifyLanguageDropdownURLs() {
 		int numOfLanguages = getNumOfLanguages();
 		HomePageObject newHome;
+
 		for (int i=0; i<numOfLanguages; i++) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
 			String languageURL = getLanguageURL(i) + URLsContent.wikiaDir;
 			newHome = selectLanguage(i);
-			newHome.verifyLanguageButton();
-			newHome.verifyURL(languageURL);
+
+			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
+			// (and language dropDown)
+			if (!executeScriptRetBool("!!mw.config.get( 'wikiaPageIsHub' )")) {
+				newHome.verifyLanguageButton();
+				newHome.verifyURL(languageURL);
+			}
 			newHome.navigateBack();
 		}
 	}
