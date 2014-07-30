@@ -127,7 +127,7 @@ public class HomePageObject extends WikiBasePageObject {
 		String languageClass = languagesList.get(index).getAttribute("class");
 		languagesList.get(index).click();
 		verifyCorporateFooter();
-		if (!executeScriptRetBool("!!mw.config.get( 'wikiaPageIsHub' )")) {
+		if (!checkIfPageIsHub()) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
 		}
 		PageObjectLogging.log("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
@@ -147,6 +147,10 @@ public class HomePageObject extends WikiBasePageObject {
 		return languagesList.get(index).getAttribute("href");
 	}
 
+	public Boolean checkIfPageIsHub() {
+		return executeScriptRetBool("!!mw.config.get( 'wikiaPageIsHub' )");
+	}
+
 	public int getNumOfLanguages() {
 		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		return languagesList.size();
@@ -163,7 +167,7 @@ public class HomePageObject extends WikiBasePageObject {
 
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
 			// (and language dropDown)
-			if (!executeScriptRetBool("!!mw.config.get( 'wikiaPageIsHub' )")) {
+			if (!checkIfPageIsHub()) {
 				newHome.verifyLanguageButton();
 				newHome.verifyURL(languageURL);
 			}
