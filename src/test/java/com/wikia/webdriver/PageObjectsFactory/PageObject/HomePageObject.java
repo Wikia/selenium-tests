@@ -48,7 +48,6 @@ public class HomePageObject extends WikiBasePageObject {
 	private By languageButtonSelectorBy = By.cssSelector("section.grid-1 nav");
 	private By corporateFooterSelectorBy = By.cssSelector(".CorporateFooter");
 
-
 	private String languageDropdownString = "nav.wikia-menu-button";
 
 	public HomePageObject(WebDriver driver)
