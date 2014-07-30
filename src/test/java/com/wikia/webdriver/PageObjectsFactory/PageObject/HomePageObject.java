@@ -124,7 +124,11 @@ public class HomePageObject extends WikiBasePageObject {
 		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		String languageClass = languagesList.get(index).getAttribute("class");
 		languagesList.get(index).click();
-		waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
+		if (!checkIfPageIsHub()) {
+			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
+		} else {
+			PageObjectLogging.log("selectLanguage", "page is a Hub and language dropdown is not present", true);
+		}
 		PageObjectLogging.log("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
 		return new HomePageObject(driver);
 	}
@@ -138,6 +142,10 @@ public class HomePageObject extends WikiBasePageObject {
 		return languagesList.get(index).getAttribute("href");
 	}
 
+	public Boolean checkIfPageIsHub() {
+		return executeScriptRetBool("!!mw.config.get( 'wikiaPageIsHub' )");
+	}
+
 	public int getNumOfLanguages() {
 		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		return languagesList.size();
@@ -146,12 +154,24 @@ public class HomePageObject extends WikiBasePageObject {
 	public void verifyLanguageDropdownURLs() {
 		int numOfLanguages = getNumOfLanguages();
 		HomePageObject newHome;
+
 		for (int i=0; i<numOfLanguages; i++) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
 			String languageURL = getLanguageURL(i) + URLsContent.wikiaDir;
 			newHome = selectLanguage(i);
-			newHome.verifyLanguageButton();
-			newHome.verifyURL(languageURL);
+
+			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
+			// (and language dropDown)
+			if (!checkIfPageIsHub()) {
+				newHome.verifyLanguageButton();
+				newHome.verifyURL(languageURL);
+			} else {
+				PageObjectLogging.log(
+					"selectLanguage",
+					"page is a Hub and language dropdown is not present and main url is different",
+					true
+				);
+			}
 			newHome.navigateBack();
 		}
 	}
