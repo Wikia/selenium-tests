@@ -46,7 +46,6 @@ public class HomePageObject extends WikiBasePageObject {
 	//These Bys are being used to prevent stale browser exception
 	private By languageSelectorBy = By.cssSelector(".wikia-menu-button li > a");
 	private By languageButtonSelectorBy = By.cssSelector("section.grid-1 nav");
-	private By corporateFooterSelectorBy = By.cssSelector(".CorporateFooter");
 
 	private String languageDropdownString = "nav.wikia-menu-button";
 
@@ -125,9 +124,10 @@ public class HomePageObject extends WikiBasePageObject {
 		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		String languageClass = languagesList.get(index).getAttribute("class");
 		languagesList.get(index).click();
-		verifyCorporateFooter();
 		if (!checkIfPageIsHub()) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
+		} else {
+			PageObjectLogging.log("selectLanguage", "page is a Hub and language dropdown is not present", true);
 		}
 		PageObjectLogging.log("selectLanguage", "language number " + Integer.toString(index) + " selected", true);
 		return new HomePageObject(driver);
@@ -135,10 +135,6 @@ public class HomePageObject extends WikiBasePageObject {
 
 	public void verifyLanguageButton() {
 		waitForElementByBy(languageButtonSelectorBy);
-	}
-
-	public void verifyCorporateFooter() {
-		waitForElementByBy(corporateFooterSelectorBy);
 	}
 
 	public String getLanguageURL(int index) {
@@ -169,6 +165,12 @@ public class HomePageObject extends WikiBasePageObject {
 			if (!checkIfPageIsHub()) {
 				newHome.verifyLanguageButton();
 				newHome.verifyURL(languageURL);
+			} else {
+				PageObjectLogging.log(
+					"selectLanguage",
+					"page is a Hub and language dropdown is not present and main url is different",
+					true
+				);
 			}
 			newHome.navigateBack();
 		}
