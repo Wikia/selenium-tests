@@ -27,7 +27,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001" })
 	public void PlayingVideoTests_001_ooyala() {
 		String providerName = "ooyala";
-		String articleName = "VideoOoyala";
+		String articleName = "VideoOoyalaAgegate";
 
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		article.verifyVideo();
@@ -43,7 +43,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002" })
 	public void PlayingVideoTests_002_ooyala() {
 		String providerName = "ooyala";
-		String articleName = "VideoOoyala";
+		String articleName = "VideoOoyalaAgegate";
 
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		article.verifyVideo();
