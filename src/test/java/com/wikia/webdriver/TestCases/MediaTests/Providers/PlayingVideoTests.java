@@ -1,6 +1,7 @@
 package com.wikia.webdriver.TestCases.MediaTests.Providers;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
@@ -11,11 +12,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * @author Saipetch Kongkatong
+ * @author Saipetch Kongkatong, Liz Lee
  */
 public class PlayingVideoTests extends NewTestTemplate {
 
 	WikiBasePageObject base;
+	Credentials credentials = config.getCredentials();
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_Preferred() {
@@ -29,6 +31,8 @@ public class PlayingVideoTests extends NewTestTemplate {
 		String providerName = "ooyala";
 		String articleName = "VideoOoyalaAgegate";
 
+		// Agegate works more reliably when logged in (issue tracked here VID-1879)
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		article.verifyVideo();
 
@@ -45,6 +49,8 @@ public class PlayingVideoTests extends NewTestTemplate {
 		String providerName = "ooyala";
 		String articleName = "VideoOoyalaAgegate";
 
+		// Agegate works more reliably when logged in (issue tracked here VID-1879)
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		article.verifyVideo();
 
@@ -71,7 +77,6 @@ public class PlayingVideoTests extends NewTestTemplate {
 
 		VideoComponentObject video = lightbox.getVideoPlayer();
 		video.verifyVideoEmbedWidth();
-		video.verifyVideoOoyalaAgeGate();
 		video.verifyVideoObjectVisible();
 		video.verifyVideoOoyalaEmbed();
 	}
