@@ -25,18 +25,23 @@ public class PlayingVideoTests extends NewTestTemplate {
 		base = new WikiBasePageObject(driver);
 	}
 
-	// Test: Ooyala video in lightbox or inline
+	// Test: Ooyala video in lightbox
 	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_001" })
 	public void PlayingVideoTests_001_ooyala() {
 		String providerName = "ooyala";
-		String articleName = "VideoOoyalaAgegate";
+		String articleName = "VideoOoyalaAgegateLightbox";
 
 		// Agegate works more reliably when logged in (issue tracked here VID-1879)
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		article.verifyVideo();
 
-		VideoComponentObject video = article.clickThumbnailVideo(providerName);
+		LightboxComponentObject lightbox = article.clickThumbnailVideoLightbox();
+		lightbox.verifyLightboxVideo();
+		lightbox.verifyVideoAutoplay(providerName);
+
+		VideoComponentObject video;
+		video = lightbox.getVideoPlayer();
 		video.verifyVideoEmbedWidth();
 		video.verifyVideoOoyalaAgeGate();
 		video.verifyVideoObjectVisible();
@@ -47,7 +52,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_002" })
 	public void PlayingVideoTests_002_ooyala() {
 		String providerName = "ooyala";
-		String articleName = "VideoOoyalaAgegate";
+		String articleName = "VideoOoyalaAgegateInline";
 
 		// Agegate works more reliably when logged in (issue tracked here VID-1879)
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -58,25 +63,6 @@ public class PlayingVideoTests extends NewTestTemplate {
 		article.verifyVideoAutoplay(providerName);
 		video.verifyVideoEmbedWidth();
 		video.verifyVideoOoyalaAgeGate();
-		video.verifyVideoObjectVisible();
-		video.verifyVideoOoyalaEmbed();
-	}
-
-	// Test: Ooyala video in lightbox
-	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_003" })
-	public void PlayingVideoTests_003_ooyala() {
-		int itemNumber = 0;
-		String providerName = "ooyala";
-		String queryString = "provider="+providerName;
-
-		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL, queryString);
-		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
-		lightbox.verifyLightboxPopup();
-		lightbox.verifyLightboxVideo();
-		lightbox.verifyVideoAutoplay(providerName);
-
-		VideoComponentObject video = lightbox.getVideoPlayer();
-		video.verifyVideoEmbedWidth();
 		video.verifyVideoObjectVisible();
 		video.verifyVideoOoyalaEmbed();
 	}
