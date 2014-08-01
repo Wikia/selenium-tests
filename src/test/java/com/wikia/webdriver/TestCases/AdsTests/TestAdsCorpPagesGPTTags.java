@@ -25,5 +25,4 @@ public class TestAdsCorpPagesGPTTags extends NewTestTemplate{
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyCorrectGPTSlotNameOnCorpPages(gptParam);
 	}
-
 }
