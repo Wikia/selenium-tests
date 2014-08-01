@@ -202,4 +202,18 @@ public class AdsDataProvider {
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
 		};
 	}
+
+	@DataProvider
+	public static final Object[][] pagesForCorpGPTCheck() {
+		return new Object[][] {
+				{"www.wikia", "Wikia",
+				"google_ads_iframe_/5441/wka.wikia/_wikiaglobal//home/CORP_TOP_LEADERBOARD_gpt_0__container__"},
+				{"www.wikia", "Alliance",
+				"google_ads_iframe_/5441/wka.wikia/_wikiaglobal//article/CORP_TOP_LEADERBOARD_gpt_0__container__"},
+				{"gameshub", "Games_Hub",
+				"google_ads_iframe_/5441/wka.hub/_gaming_hub//hub/HUB_TOP_LEADERBOARD_gpt_0__container__"},
+				{"lifestylehub", "Lifestyle_Hub",
+				"google_ads_iframe_/5441/wka.hub/_life_hub//hub/HUB_TOP_LEADERBOARD_gpt_0__container__"}
+		};
+	}
 }

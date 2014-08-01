@@ -511,4 +511,14 @@ public class AdsBaseObject extends WikiBasePageObject {
 			}
 		}
 	}
+
+	public void verifyCorrectGPTSlotNameOnCorpPages(String gptParam) {
+		if (driver.getPageSource().indexOf(gptParam) >= 0) {
+			PageObjectLogging.log("GPT Parameter present", "Parameter " + gptParam + " on corp page is present", true, driver);
+		} else {
+			throw new NoSuchElementException("GPT Parameter is not present");
+		}
+	}
+
+
 }
