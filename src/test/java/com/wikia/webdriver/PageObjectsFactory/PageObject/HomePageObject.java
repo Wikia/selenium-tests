@@ -124,6 +124,7 @@ public class HomePageObject extends WikiBasePageObject {
 		List<WebElement> languagesList = driver.findElements(languageSelectorBy);
 		String languageClass = languagesList.get(index).getAttribute("class");
 		languagesList.get(index).click();
+		waitForStringInURL(languageClass);
 		if (!checkIfPageIsHub()) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", languageClass);
 		} else {
