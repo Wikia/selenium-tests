@@ -47,9 +47,19 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] corporatePages() {
 		return new Object[][] {
-			{"wikia", "Wikia"},
-			{"es.wikia", "Wikia"},
-			{"wikia", "About_Us"}
+				{"wikia", "Wikia", "wka.wikia/_wikiaglobal//home"},
+				{"wikia", "About_Us", "wka.wikia/_wikiaglobal//article"},
+				{"wikia", "Alliance", "wka.wikia/_wikiaglobal//article"},
+				{"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article"},
+				{"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home"},
+				{"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub"},
+				{"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub"},
+				{"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub"},
+				{"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub"},
+				{"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub"},
+				{"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub"},
+				{"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub"},
+				{"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub"},
 		};
 	}
 
@@ -200,20 +210,6 @@ public class AdsDataProvider {
 			{"memory-alpha", "Portal:Main"},
 			{"gameofthrones", "Season_4"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"}
-		};
-	}
-
-	@DataProvider
-	public static final Object[][] pagesForCorpGPTCheck() {
-		return new Object[][] {
-				{"www.wikia", "Wikia",
-				"google_ads_iframe_/5441/wka.wikia/_wikiaglobal//home/CORP_TOP_LEADERBOARD_gpt_0__container__"},
-				{"www.wikia", "Alliance",
-				"google_ads_iframe_/5441/wka.wikia/_wikiaglobal//article/CORP_TOP_LEADERBOARD_gpt_0__container__"},
-				{"gameshub", "Games_Hub",
-				"google_ads_iframe_/5441/wka.hub/_gaming_hub//hub/HUB_TOP_LEADERBOARD_gpt_0__container__"},
-				{"lifestylehub", "Lifestyle_Hub",
-				"google_ads_iframe_/5441/wka.hub/_life_hub//hub/HUB_TOP_LEADERBOARD_gpt_0__container__"}
 		};
 	}
 }

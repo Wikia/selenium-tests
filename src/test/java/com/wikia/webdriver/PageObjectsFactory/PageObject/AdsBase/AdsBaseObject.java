@@ -512,13 +512,23 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	public void verifyCorrectGPTSlotNameOnCorpPages(String gptParam) {
-		if (driver.getPageSource().indexOf(gptParam) >= 0) {
-			PageObjectLogging.log("GPT Parameter present", "Parameter " + gptParam + " on corp page is present", true, driver);
+	/**
+	 * Test wether the correct GPT ad unit is called
+	 *
+	 * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+	 */
+	public void verifyGptIframe(String adUnit) {
+		String slotName = presentLeaderboard.getAttribute("id");
+		String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + slotName + "_gpt_0";
+		String cssSelector = "iframe[id^='" + iframeId + "']";
+
+		if (checkIfElementInElement(cssSelector, presentLeaderboard)) {
+			String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
+			PageObjectLogging.log("verifyGptIframe", msg, true, driver);
 		} else {
-			throw new NoSuchElementException("GPT Parameter is not present");
+			String msg = "GPT iframe #" + iframeId + " not found for slot " + slotName;
+			PageObjectLogging.log("verifyGptIframe", msg, false, driver);
+			throw new NoSuchElementException(msg);
 		}
 	}
-
-
 }

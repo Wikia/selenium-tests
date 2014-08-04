@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
+ * @author Piotr Gackowski
+ * @author Piotr Gabryjeluk
  * @ownership AdEngineering
  */
 @Test (
@@ -18,13 +20,15 @@ import org.testng.annotations.Test;
 public class TestAdsOnCorporatePages extends NewTestTemplate {
 
 	private String testedPage;
+	private String adUnit;
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="corporatePages"
 	)
-	public TestAdsOnCorporatePages(String wikiName, String path) {
+	public TestAdsOnCorporatePages(String wikiName, String path, String adUnit) {
 		super();
+		this.adUnit = adUnit;
 		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		if (config.getQS() != null) {
@@ -34,10 +38,23 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 
 	@GeoEdgeProxy(country="VE")
 	@Test (
-		groups={"TestCorporatePage_VE"}
+			groups={"TestCorporatePage_VE"}
 	)
 	public void TestCorporatePage_VE() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
+
+		// Not verifying GPT iframes in low value countries
+	}
+
+	@Test (
+			groups={"TestCorporatePageHVC_GEF"}
+	)
+	public void TestCorporatePage_GEF() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.verifyNoLiftiumAdsOnPage();
+
+		// Verifying GPT iframes in high value countries:
+		wikiPage.verifyGptIframe(adUnit);
 	}
 }
