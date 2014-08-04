@@ -13,7 +13,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 */
 public class FacebookUserPageObject extends WikiBasePageObject {
 
-	@FindBy(css = "#pageLogo")
+	@FindBy(css = "a[href$='?ref=logo']")
 	private WebElement pageLogo;
 
 	public FacebookUserPageObject(WebDriver driver) {

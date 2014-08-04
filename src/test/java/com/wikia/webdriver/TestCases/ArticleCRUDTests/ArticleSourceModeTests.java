@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
-import com.wikia.webdriver.Common.Properties.Properties;
+import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
@@ -33,12 +33,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.Source
  */
 public class ArticleSourceModeTests extends NewTestTemplate{
 
+	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
 		base = new WikiBasePageObject(driver);
-		base.logInCookie(Properties.userNameStaff, Properties.passwordStaff, wikiURL);
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_001"})

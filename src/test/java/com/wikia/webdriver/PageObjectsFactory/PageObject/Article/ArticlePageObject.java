@@ -713,20 +713,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new LightboxComponentObject(driver);
 	}
 
-	public VideoComponentObject clickThumbnailVideo(String providerName) {
-		VideoComponentObject video;
-		if ( getVideoWidth(videoThumbnail) > minInlineVideoSize ) {
-			video = clickThumbnailVideoInline();
-			verifyVideoAutoplay(providerName);
-		} else {
-			LightboxComponentObject lightbox = clickThumbnailVideoLightbox();
-			lightbox.verifyLightboxVideo();
-			lightbox.verifyVideoAutoplay(providerName);
-			video = lightbox.getVideoPlayer();
-		}
-		return video;
-	}
-
 	public LightboxComponentObject clickThumbnailVideoLightbox() {
 		waitForElementClickableByElement(videoThumbnail);
 		videoThumbnail.click();
