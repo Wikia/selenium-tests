@@ -417,16 +417,6 @@ public class BasePageObject{
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
-	/**
-	 * Checks if the element is hidden on browser
-	 *
-	 ** @param element
-	 *			The element to be checked
-	 * @throws Exception
-	 */
-	public void waitForElementByElementIsHidden(WebElement element) {
-		wait.until(ExpectedConditions.visibilityOf(element));
-	}
 
 	/**
 	 * Checks if the element is present in DOM

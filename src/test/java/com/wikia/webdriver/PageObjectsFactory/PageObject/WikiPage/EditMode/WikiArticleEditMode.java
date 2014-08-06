@@ -2,6 +2,8 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.ArrayList;
 
+import junit.framework.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +24,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 
 public class WikiArticleEditMode extends WikiEditMode {
 
@@ -145,6 +148,12 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement videoWidthEditor;
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
+	@FindBy(css = "span[id=cke_22_label]")
+	private WebElement sourceButton;
+	@FindBy(css = "a[data-map-title]")
+	private WebElement embededMap;
+
+
 
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By videoOnArticleEditMode = By.cssSelector("img.video");
@@ -213,13 +222,20 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void deleteArticleContent() {
 		driver.switchTo().frame(iFrame);
+		waitForElementByElement(bodyContent);
 		bodyContent.clear();
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
-
+	}
+	
+	public void verifySourceEditorContentIsEmpty(){
+		waitForElementByElement(sourceModeTextArea);
+		Assert.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
+		PageObjectLogging.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned", true);
 	}
 
-	public void clearSource() {
+	public void clearSource(){
+		driver.switchTo().defaultContent();
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
@@ -240,14 +256,20 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public void typeInContent(String content) {
-		waitForElementByElement(visualModeIFrame);
-		driver.switchTo().frame(visualModeIFrame);
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
 		waitForElementByElement(bodyContent);
 		bodyContent.sendKeys(content);
+		PageObjectLogging.log("typeInContent", "content "+bodyContent.getText()+" - type into article body", true, driver);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}
-
+	
+	public void clickSourceButton(){
+		waitForElementByElement(sourceButton);
+		sourceButton.click();
+		driver.switchTo().defaultContent();
+	}
+	
 	public void clickReturnToEditingButton() {
 		waitForElementByElement(returnToEditingButton);
 		returnToEditingButton.click();
@@ -391,10 +413,29 @@ public class WikiArticleEditMode extends WikiEditMode {
 				"Delete all source code on the article", true, driver);
 	}
 
+	public void typeContentInSourceMode(String content){
+		waitForElementByElement(sourceModeTextArea);
+		sourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log("typeInContent",
+				"content type into source mode textarea", true, driver);
+	}
+	
 	public void typeInTemplateContent(String content) {
+		driver.switchTo().defaultContent();
+		
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
 		PageObjectLogging.log("typeInContent",
 				"content type into source mode textarea", true, driver);
+	}
+	
+	
+	public void verifyEmbededMap(String mapID){
+		waitForElementByElement(embededMap);
+		String embededMapID = embededMap.getAttribute("data-map-id");
+		System.out.println(embededMapID);
+		Assert.assertEquals(mapID,embededMapID);
+		PageObjectLogging.log("verifyEmbededMap",
+				"Map was embeded properly", true, driver);
 	}
 }

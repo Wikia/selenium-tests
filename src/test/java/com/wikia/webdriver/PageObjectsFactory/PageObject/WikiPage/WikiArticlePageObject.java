@@ -93,6 +93,12 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 				"random page button clicked", true, driver);
 		return new WikiArticlePageObject(driver);
 	}
+	
+	public WikiArticlePageObject openArticleByName(String name){
+		String newUrl = URLsContent.viewArticle.replace("%title%", name);
+		getUrl(Global.DOMAIN + newUrl);
+		return new WikiArticlePageObject(driver);
+	}
 
 	public void verifyArticleText(String content)
 	{

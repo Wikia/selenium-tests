@@ -32,6 +32,8 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	private List<WebElement> pinTypeTitleInputs;
 	@FindBy(css = "input[name='poiCategoryMarkers[]']")
 	private List<WebElement> uploadMarker;
+	@FindBy(css = "input[name='wpUploadFile']")
+	private List<WebElement> uploadInputs;
 	@FindBy(css = ".button.normal.primary")
 	private WebElement saveButton;
 	@FindBy(css = ".addPoiCategory.modalEvent")
@@ -44,20 +46,24 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	private List<WebElement> parentCatElements;
 	@FindBy(css = ".modal.medium.int-map-modal")
 	private WebElement creatingPinDialog;
+	@FindBy(css = "")
 	
 	private int sizepinTypeTitleInputs,sizeuploadMarker,sizeparentCatElements; 
 	
 	public void typePinTypeTitle(String pinTypeName, int index) {
 		WebElement firstPin = pinTypeTitleInputs.get(index);
 		waitForElementByElement(firstPin);
+		firstPin.clear();
 		firstPin.sendKeys(pinTypeName);
 		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type is typed in", true, driver);
 	}
+	
 	
 	public InteractiveMapPageObject clickSave() {
 		waitForElementByElement(saveButton);
 		saveButton.click();
 		PageObjectLogging.log("clickSave", "clicked save button in create pin types modal", true);
+		driver.switchTo().defaultContent();
 		return new InteractiveMapPageObject(driver);
 	}
 	
@@ -101,8 +107,5 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		}
 		return i-1; 
 	}
-	
-	
-	
 	
 }

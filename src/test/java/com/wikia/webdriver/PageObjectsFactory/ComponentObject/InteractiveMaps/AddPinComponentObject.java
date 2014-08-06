@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import org.junit.Assert;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -45,8 +46,8 @@ public class AddPinComponentObject extends BasePageObject{
 	private List<WebElement> suggestedOption;
 	@FindBy(css = ".article-image-url")
 	private WebElement articleImageUrl;
-	@FindBy(name = "lon")
-	private WebElement hiddenLonInput;
+	@FindBy(css=".error")
+	WebElement errorField;
 
 	
 	public void verifyPinTitleFieldIsDisplayed() {
@@ -78,6 +79,7 @@ public class AddPinComponentObject extends BasePageObject{
 		waitForElementByElement(associatedArticleImage);
 		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true, driver);
 	}
+	
 
 	public InteractiveMapPageObject clickCancelButton() {
 		waitForElementByElement(cancelButton);
@@ -85,11 +87,17 @@ public class AddPinComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickCancelButton", "cancel button clicked",  true, driver);
 		return new InteractiveMapPageObject(driver);
 	}
+	
+	public boolean verifyNoErrorInAddPinDialog(){
+		return errorField.getText().equals("") ? true : false;
+	}
+	
 	public InteractiveMapPageObject clickSaveButton(){
-		waitForElementByElement(hiddenLonInput);
-		waitForElementByElement(saveButton);
-		saveButton.click();
+		waitForElementClickableByElement(saveButton);
+		saveButton.click();	
+		Assert.assertEquals(verifyNoErrorInAddPinDialog(),true);
 		PageObjectLogging.log("clickSaveButton","save button clicked", true, driver);
+		driver.switchTo().activeElement();
 		return new InteractiveMapPageObject(driver);
 	}
 
@@ -110,19 +118,6 @@ public class AddPinComponentObject extends BasePageObject{
 		associatedArticleField.sendKeys(associatedArticleName);
 		PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in", true);
 	}
-	
-	public String selectPinCategorySelector(){
-		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
-		List<WebElement> pinCategorySelectorList = pinCategorySelectorDropDown.getOptions();
-		waitForElementByElement(pinCategorySelectorList.get(pinCategorySelectorList.size()-1));
-		pinCategorySelectorList.get(pinCategorySelectorList.size()-1).click();
-		PageObjectLogging.log("typePinCategorySelector", "Pin Category choosed is "+pinCategorySelectorList.get(pinCategorySelectorList.size()-1), true);
-		return pinCategorySelectorList.get(pinCategorySelectorList.size()-1).getText();
-		//pinCategorySelectorList.size()-1 is the last one from selector list
-	}
-	
-	
-	
 	public void clickSuggestion(int opt) {
 		waitForElementVisibleByElement(suggestedOption.get(opt));
 		WebElement suggestionSelected = suggestedOption.get(opt);
@@ -146,6 +141,13 @@ public class AddPinComponentObject extends BasePageObject{
 		Assertion.assertStringContains(articleImageUrl.getAttribute("src"), "Robert_Pattison");
 	}
 	
+	public void verifyChangedCategory(String newCategory){
+		waitForElementByElement(pinCategorySelector);
+		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
+		List<WebElement> pinCategorySelectorList = pinCategorySelectorDropDown.getAllSelectedOptions();
+		Assert.assertEquals("Saving new data in pin types changed category correctly",newCategory, pinCategorySelectorList.get(0));
+		
+	}
 	
 	
 	

@@ -65,12 +65,22 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement editPinTypesButton;
 	@FindBy(css = "#intMapPoiCategories")
 	private WebElement mapPoiCategoriesDialog;
-	@FindBy(css = ".leaflet-popup-tip")
+	@FindBy(css = ".leaflet-marker-icon")
 	private List<WebElement> pinCollection;
 	@FindBy(css = ".edit-poi-link")
-	private List<WebElement> editPoiLinkCollection;
-	
-
+	private WebElement editPoiLinkForActivePin;
+	@FindBy(css = ".leaflet-popup-content")
+	private WebElement popUpContent;
+	@FindBy(css = ".description > h3")
+	private WebElement titlePinForActivePin;
+	@FindBy(css = "#intMapEditPOI")
+	private WebElement intMapEditPOI;
+	@FindBy(css = "#allPointTypes")
+	private WebElement allPinTypes;
+	@FindBy(css = ".point-type.enabled")
+	private List<WebElement> enabledPinTypesCollection;
+	@FindBy(css = ".point-type")
+	private List<WebElement> disabledPinTypesCollection;
 	
 	public void clickEmbedMapCodeButton() {
 		driver.switchTo().frame(mapFrame);
@@ -108,6 +118,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		Assert.assertEquals(pinNamesList.size(), createdPinCells.size());
 		for(int i = 0; i < createdPinCells.size(); i++) {
 			Assert.assertEquals(pinNamesList.get(i), createdPinNames.get(i).getText());
+			
 		}
 		driver.switchTo().defaultContent();
 	}
@@ -181,16 +192,75 @@ public class InteractiveMapPageObject extends BasePageObject{
 	}	
 	
 	
-	public AddPinComponentObject verifyChangesInPin(String pinTypeCategory){
-		
-		driver.switchTo().frame(mapFrame);
-		pinCollection.get(pinCollection.size()-1).click();
-		editPoiLinkCollection.get(editPoiLinkCollection.size()-1).click();
-				
-		PageObjectLogging.log("verifyChangesInPin", "Edit pin dialog was opened", true, driver);
-		return new AddPinComponentObject(driver);
-		
+	public String getEmbedMapWikiCode(){
+		String mapID = mapFrame.getAttribute("data-mapid");
+		String r = "<imap map-id='"+mapID+"'/>";
+		return r;
 	}
+	
+	public String getEmbedMapID(){
+		String mapID = mapFrame.getAttribute("data-mapid");
+		return mapID;
+	}
+	
+	public void clickOnSingleEnabledCategory(){
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(mapFrame);		
+		waitForElementByElement(enabledPinTypesCollection.get(0));
+		enabledPinTypesCollection.get(0).click();
+		PageObjectLogging.log("clickOnSingleEnabledCategory","Single enabled category was clicked", true);
+		driver.switchTo().activeElement();
+	}
+	
+	public void clickOnSingleDisabledCategory(){
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(mapFrame);		
+		waitForElementByElement(disabledPinTypesCollection.get(0));
+		disabledPinTypesCollection.get(0).click();
+		PageObjectLogging.log("clickOnSingleDisabledCategory","Single disabled category was clicked", true);
+		driver.switchTo().activeElement();
+	}
+	
+	public void clickOnAllPinTypes(){
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(mapFrame);		
+		waitForElementByElement(allPinTypes);
+		allPinTypes.click();
+		PageObjectLogging.log("clickOnAllCategories","All categories was clicked", true);
+		driver.switchTo().activeElement();
+	}
+	
+	public void verifyAllPinTypesIsCheck(){
+		waitForElementByElement(allPinTypes);
+		waitForElementByElement(enabledPinTypesCollection.get(0));
+		if(allPinTypes.getAttribute("class").contains("enabled")){
+			PageObjectLogging.log("verifyAllPointTypesIsCheck","All pin types was checked", true, driver);
+		}else{
+			PageObjectLogging.log("verifyAllPointTypesIsCheck","All pin types was unchecked", false, driver);
+		}
+	}
+	
+	public void verifyAllPinTypesIsUncheck(){
+		waitForElementByElement(allPinTypes);
+		if(allPinTypes.getAttribute("class").contains("enabled")){
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck","All pin types was checked", false, driver);
+		}else{
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck","All pin types was unchecked", true, driver);
+		}
+	}
+	
+	
+	public void verifyPinTypesAreUncheck(){
+		waitForElementByElement(disabledPinTypesCollection.get(0));
+		Assert.assertEquals(0, enabledPinTypesCollection.size());
+	}
+	public void verifyPinTypesAreCheck(){
+		waitForElementByElement(enabledPinTypesCollection.get(0));
+		Assert.assertEquals(0, disabledPinTypesCollection.size());		
+	}
+	
+
+	
 	
 	
 	
