@@ -23,7 +23,7 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups = { "ShareToolbar001", "Toolbar" , "Smoke4"})
-	public void ShareToolbar001_VerifyingElements_CON_526() {
+	public void ShareToolbar001_VerifyingElements() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -35,7 +35,7 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(groups = { "ShareToolbar002", "Toolbar" })
-	public void ShareToolbar002_VerifyingTwitterModal_CON_526() {
+	public void ShareToolbar002_VerifyingTwitterModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -47,7 +47,7 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 
 	//SecurityError: Blocked a frame with origin "http://mediawiki119.wikia.com" from accessing a cross-origin frame.
 	@Test(enabled = false, groups = { "ShareToolbar003", "Toolbar" })
-	public void ShareToolbar003_VerifyingFBModal_CON_526() {
+	public void ShareToolbar003_VerifyingFBModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -58,7 +58,7 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(groups = { "ShareToolbar004", "Toolbar" })
-	public void ShareToolbar004_VerifyingLogInModalForAnons_CON_526() {
+	public void ShareToolbar004_VerifyingLogInModalForAnons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logOut(wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -69,7 +69,7 @@ public class ShareToolbarTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(groups = { "ShareToolbar005", "Toolbar" })
-	public void ShareToolbar005_VerifyingEmailModalElements_CON_526() {
+	public void ShareToolbar005_VerifyingEmailModalElements() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
 		base.openRandomArticle(wikiURL);

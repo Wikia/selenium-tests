@@ -17,6 +17,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -47,6 +48,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement mediaNode;
 	@FindBy(css="figure.wikia-interactive-map-thumbnail")
 	private WebElement mapNode;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay")
+	private WebElement previewOverlay;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-title")
+	private WebElement previewMeditaTitle;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-closeButton .oo-ui-buttonedElement-button")
+	private WebElement previewCloseButton;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay img")
+	private WebElement previewImage;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
+	private WebElement previewVideoWrapper;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -213,5 +224,19 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			(VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
 		veSrcDialog.typeInEditArea(text);
 		return new VisualEditorPageObject(driver);
+	}
+
+	public void verifyPreviewVideoPlay(String providerName) {
+		waitForElementVisibleByElement(previewOverlay);
+		waitForElementVisibleByElement(previewVideoWrapper);
+		VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
+		video.verifyVideoAutoplay(providerName, true);
+		PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
+	}
+
+	public void verifyPreviewImage() {
+		waitForElementVisibleByElement(previewOverlay);
+		waitForElementVisibleByElement(previewImage);
+		PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
 	}
 }

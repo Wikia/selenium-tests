@@ -85,7 +85,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPageObject(driver);
 	}
-	
+
 	public CrossWikiSearchPageObject searchForEnter( String term ) {
 		searchInput.clear();
 		searchInput.sendKeys( term );
@@ -156,7 +156,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 	 * @return result page
 	 */
 	public WikiArticleHomePage openResult(int resultNumeber) {
-		resultLinks.get(resultNumeber).click();
+		WebElement resultLink = resultLinks.get(resultNumeber);
+		waitForElementByElement(resultLink);
+		scrollAndClick(resultLink);
 		return new WikiArticleHomePage(driver);
 	}
 

@@ -73,12 +73,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private List<WebElement> toolListItems;
 	@FindBy(css=".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
 	private WebElement enabledPublishButton;
-	private WebElement styleList = toolListDropDowns.get(STYLELIST);
-	private WebElement insertList = toolListDropDowns.get(INSERTLIST);
-	private WebElement hamburgerList = toolListDropDowns.get(HAMBURGERLIST);
-	private WebElement styleItems = toolListItems.get(STYLELIST);
-	private WebElement insertItems = toolListItems.get(INSERTLIST);
-	private WebElement hamburgerItems = toolListItems.get(HAMBURGERLIST);
 
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
 	private By underlineStyleBy = By.cssSelector(".oo-ui-icon-underline-u");
@@ -108,6 +102,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
 
 	private void clickStyleItemFromDropDown(By styleBy) {
+		WebElement styleList = toolListDropDowns.get(STYLELIST);
+		WebElement styleItems = toolListItems.get(STYLELIST);
 		waitForElementByElement(styleList);
 		Actions actions = new Actions(driver);
 		actions
@@ -246,6 +242,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	private void clickInsertItemFromDropDown(By insertBy) {
+		WebElement insertList = toolListDropDowns.get(INSERTLIST);
+		WebElement insertItems = toolListItems.get(INSERTLIST);
 		waitForElementVisibleByElement(insertList);
 		waitForElementClickableByElement(insertList);
 		Actions actions = new Actions(driver);
@@ -257,6 +255,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	private void clickHamburgerItemFromDropDown(By insertBy) {
+		WebElement hamburgerList = toolListDropDowns.get(HAMBURGERLIST);
+		WebElement hamburgerItems = toolListItems.get(HAMBURGERLIST);
 		waitForElementVisibleByElement(hamburgerList);
 		waitForElementClickableByElement(hamburgerList);
 		Actions actions = new Actions(driver);
