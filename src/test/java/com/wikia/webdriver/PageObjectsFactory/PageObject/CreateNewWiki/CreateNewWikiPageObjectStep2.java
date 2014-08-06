@@ -46,7 +46,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 		waitForElementByElement(wikiCategory);
 		Select dropList = new Select(wikiCategory);
 		dropList.selectByVisibleText(category);
-		PageObjectLogging.log("selectCategory", "selected " + category + " category", true);
+		PageObjectLogging.log("selectCategory", "selected " + category + " category", true, driver);
 	}
 
 	public CreateNewWikiPageObjectStep3 submit() {
