@@ -97,7 +97,10 @@ public class InteractiveMapPageObject extends BasePageObject{
 	
 	public void closeMapBeingProcessedModalIfVisible() {
 		while(checkIfElementOnPage(mapBeingProcessedModal)) {
-			refreshButton.click();
+				this.navigateBack(); 
+				InteractiveMapsPageObject mapBack = new InteractiveMapsPageObject(driver); 
+				mapBack.clickMapWithIndex(0);
+				driver.switchTo().frame(mapFrame);
 		}
 	}
 	
