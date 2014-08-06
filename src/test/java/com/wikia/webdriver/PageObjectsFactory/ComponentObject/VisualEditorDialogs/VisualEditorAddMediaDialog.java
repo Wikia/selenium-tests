@@ -36,8 +36,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement mediaDialogBody;
 	@FindBy(css=".oo-ui-bookletLayout .ve-ui-wikiaUploadButtonWidget input")
 	private WebElement fileInput;
-	@FindBy(css=".oo-ui-bookletLayout .ve-ui-wikiaUploadButtonWidget form")
-	private WebElement fileInput1;
 
 	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
 	private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
