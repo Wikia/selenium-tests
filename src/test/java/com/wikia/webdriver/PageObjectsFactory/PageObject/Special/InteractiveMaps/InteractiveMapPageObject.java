@@ -70,7 +70,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 
 	public void verifyMapOpened() {
 		driver.switchTo().frame(mapFrame);
-		openMapAgain();
+		closeMapBeingProcessedModalIfVisible();
 		waitForElementByElement(map);
 		driver.switchTo().defaultContent();
 	}
@@ -95,12 +95,9 @@ public class InteractiveMapPageObject extends BasePageObject{
 		checkIfElementOnPage(embedMapCodeSmall);
 	}
 	
-	public void openMapAgain() {
-		if(checkIfElementOnPage(mapBeingProcessedModal)){
-			this.navigateBack(); 
-			InteractiveMapsPageObject mapBack = new InteractiveMapsPageObject(driver); 
-			mapBack.clickMapWithIndex(0);
-			driver.switchTo().frame(mapFrame);
+	public void closeMapBeingProcessedModalIfVisible(){
+		while(checkIfElementOnPage(mapBeingProcessedModal)) {
+			refreshButton.click();
 		}
 	}
 	
