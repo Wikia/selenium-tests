@@ -21,7 +21,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 
 	@FindBy(css="textarea#Description")
 	private WebElement descriptionField;
-	@FindBy(css="select[name='wiki-category']")
+	@FindBy(css="select[name='wiki-vertical']")
 	private WebElement wikiCategory;
 	@FindBy(css="form[name='desc-form'] input[class='next']")
 	private WebElement submitButton;
