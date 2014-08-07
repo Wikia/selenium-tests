@@ -108,9 +108,8 @@ public class SpecialPromotePageObject extends BasePageObject {
 	public void verifyCrossWikiSearchDescription(String firstDescription) {
 		waitForElementByElement(wikiaDescription);
 		Assertion.assertStringContains(
-			wikiaDescription.getText(),
-			firstDescription.substring(0,
-			firstDescription.length()-3)
+				firstDescription.substring(0,
+				firstDescription.length()-3), wikiaDescription.getText()
 		);
 	}
 

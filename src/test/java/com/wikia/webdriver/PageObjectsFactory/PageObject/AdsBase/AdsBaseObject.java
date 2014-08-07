@@ -200,12 +200,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 		String backgroundImageUrlAfter = getPseudoElementValue(
 			body, ":after", "backgroundImage"
 		);
-		Assertion.assertStringContains(backgroundImageUrlAfter, adSkinUrl);
+		Assertion.assertStringContains(adSkinUrl, backgroundImageUrlAfter);
 
 		String backgroundImageUrlBefore = getPseudoElementValue(
 			body, ":before", "backgroundImage"
 		);
-		Assertion.assertStringContains(backgroundImageUrlBefore, adSkinUrl);
+		Assertion.assertStringContains(adSkinUrl, backgroundImageUrlBefore);
 
 		PageObjectLogging.log(
 			"ScreenshotPage",

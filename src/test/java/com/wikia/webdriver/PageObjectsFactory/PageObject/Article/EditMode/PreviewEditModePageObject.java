@@ -74,7 +74,7 @@ public class PreviewEditModePageObject extends EditMode {
 
 	public void verifyVideoCaption(String desiredCaption) {
 		String caption = previewModal.findElement(videoCaptionSelector).getText();
-		Assertion.assertStringContains(caption, desiredCaption);
+		Assertion.assertStringContains(desiredCaption, caption);
 	}
 
 	public void closePreviewModal() {

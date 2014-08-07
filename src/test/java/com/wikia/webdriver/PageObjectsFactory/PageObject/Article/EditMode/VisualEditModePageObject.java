@@ -163,13 +163,13 @@ public class VisualEditModePageObject extends EditMode {
 		driver.switchTo().defaultContent();
 		switch (position) {
 			case left:
-				Assertion.assertStringContains(positionClass, "alignLeft");
+				Assertion.assertStringContains("alignLeft", positionClass);
 				break;
 			case center:
-				Assertion.assertStringContains(positionClass, "alignCenter");
+				Assertion.assertStringContains("alignCenter", positionClass);
 				break;
 			case right:
-				Assertion.assertStringContains(positionClass, "alignRight");
+				Assertion.assertStringContains("alignRight", positionClass);
 				break;
 		}
 	}

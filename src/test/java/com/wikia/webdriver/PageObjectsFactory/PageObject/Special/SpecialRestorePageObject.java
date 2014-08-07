@@ -26,7 +26,7 @@ public class SpecialRestorePageObject extends WikiBasePageObject {
 
 	public void verifyArticleName(String articleName) {
 		waitForElementVisibleByElement(articleToRestore);
-		Assertion.assertStringContains(articleToRestore.getText(), articleName);
+		Assertion.assertStringContains(articleName, articleToRestore.getText());
 	}
 
 	public void giveReason(String reason) {

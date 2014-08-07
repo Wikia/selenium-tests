@@ -343,7 +343,7 @@ public class ArticleRTETest extends NewTestTemplate {
 
 			e = driver.findElement(By.cssSelector(".cke_source"));
 			;
-			if (Assertion.assertStringContains(e.getAttribute("value"), wikitext)){
+			if (Assertion.assertStringContains(wikitext, e.getAttribute("value"))){
 				tmp1 = e.getAttribute("value").replace("<", "&lt");
 				tmp1.replace(">", "&gt");
 				PageObjectLogging.log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
