@@ -25,7 +25,6 @@ public class TestAdSkinPresence extends NewTestTemplate {
 	 * @param article - name of the article
 	 * @param screenImageUrl - DFP link with ad skin image
 	 * @param windowResolution - window resolution
-	 * @param skinWidth - ad skin width on both sides of the article
 	 * @param skinLeftSide - path to file with decoded using Base64 ad skin
 	 * @param skinRightSide - path to file with decoded using Base64 ad skin
 	 * @throws IOException
@@ -34,16 +33,14 @@ public class TestAdSkinPresence extends NewTestTemplate {
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="skin",
 		groups={"TestSkinPresence_GeoEdgeFree"},
-		invocationCount=5
+		invocationCount=3
 	)
 	public void TestSkinPresence_GeoEdgeFree(
 		String wikiName, String article, String screenImageUrl,
-		Dimension windowResolution, int skinWidth, String skinLeftSide, String skinRightSide
+		Dimension windowResolution, String skinLeftSide, String skinRightSide
 	) throws IOException {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-		wikiPage.verifyAdSkinPresenceOnGivenResolution(
-			testedPage, screenImageUrl, windowResolution, skinWidth, skinLeftSide, skinRightSide
-		);
+		wikiPage.verifyAdSkinPresence(screenImageUrl, skinLeftSide, skinRightSide);
 	}
 }

@@ -31,18 +31,10 @@ public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 	)
 	public void TestRoadblock_GeoEdgeFree(
 		String wikiName, String article, String screenImageUrl,
-		Dimension windowResolution, int skinWidth, String skinLeftSide, String skinRightSide
+		Dimension windowResolution, String skinLeftSide, String skinRightSide
 	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-		wikiPage.verifyRoadblockServedAfterMultiplePageViews(
-			testedPage,
-			screenImageUrl,
-			windowResolution,
-			skinWidth,
-			skinLeftSide,
-			skinRightSide,
-			pageViewsCount
-		);
+		wikiPage.verifyRoadblockServedAfterMultiplePageViews(screenImageUrl, skinLeftSide, skinRightSide, pageViewsCount);
 	}
 }
