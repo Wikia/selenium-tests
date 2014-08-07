@@ -40,7 +40,7 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 	@Test (
 			groups={"TestCorporatePage_VE"}
 	)
-	public void TestCorporatePage_VE() throws Exception {
+	public void TestCorporatePage_VE() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
 
@@ -50,7 +50,7 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 	@Test (
 			groups={"TestCorporatePageHVC_GEF"}
 	)
-	public void TestCorporatePage_GEF() throws Exception {
+	public void TestCorporatePage_GEF() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
 
