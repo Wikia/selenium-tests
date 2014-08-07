@@ -511,4 +511,24 @@ public class AdsBaseObject extends WikiBasePageObject {
 			}
 		}
 	}
+
+	/**
+	 * Test wether the correct GPT ad unit is called
+	 *
+	 * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+	 */
+	public void verifyGptIframe(String adUnit) {
+		String slotName = presentLeaderboard.getAttribute("id");
+		String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + slotName + "_gpt_0";
+		String cssSelector = "iframe[id^='" + iframeId + "']";
+
+		if (checkIfElementInElement(cssSelector, presentLeaderboard)) {
+			String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
+			PageObjectLogging.log("verifyGptIframe", msg, true, driver);
+		} else {
+			String msg = "GPT iframe #" + iframeId + " not found for slot " + slotName;
+			PageObjectLogging.log("verifyGptIframe", msg, false, driver);
+			throw new NoSuchElementException(msg);
+		}
+	}
 }
