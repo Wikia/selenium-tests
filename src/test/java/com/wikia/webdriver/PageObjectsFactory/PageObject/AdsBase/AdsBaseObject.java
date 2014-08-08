@@ -18,7 +18,6 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -50,6 +49,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected String presentLeaderboardSelector;
 	protected String presentMedrecName;
 	protected String presentMedrecSelector;
+
+	private int skinWidth = 90;
+	private int skinMarginTop = 100;
+	private int skinMarginHorizontal = 5;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
@@ -101,31 +104,16 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyRoadblockServedAfterMultiplePageViews(
-		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
-		String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
+			String adSkinUrl, String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
 	) {
 		setSlots();
 		String leaderboardAd = getSlotImageAd(presentLeaderboard);
 		String medrecAd = getSlotImageAd(presentMedrec);
-		verifyAdSkinPresenceOnGivenResolution(
-			page,
-			adSkinUrl,
-			windowResolution,
-			skinWidth,
-			expectedAdSkinLeftPart,
-			expectedAdSkinRightPart
-		);
+		verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
 
 		for (int i=0; i <= numberOfPageViews; i++) {
 			refreshPage();
-			verifyAdSkinPresenceOnGivenResolution(
-				page,
-				adSkinUrl,
-				windowResolution,
-				skinWidth,
-				expectedAdSkinLeftPart,
-				expectedAdSkinRightPart
-			);
+			verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
 			Assertion.assertEquals(leaderboardAd, getSlotImageAd(presentLeaderboard));
 			Assertion.assertEquals(medrecAd, getSlotImageAd(presentMedrec));
 		}
@@ -183,18 +171,14 @@ public class AdsBaseObject extends WikiBasePageObject {
 	/**
 	 * Check Ad skin on page with provided resolution.
 	 * Compare left and right sides of skin with provided Base64.
-	 * @param page - url
 	 * @param adSkinUrl - DFP link with ad skin image
-	 * @param windowResolution - resolution
-	 * @param skinWidth - skin width on the sides of the article
 	 * @param expectedAdSkinLeftPart - path to file with expected skin encoded in Base64
 	 * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
 	 */
-	public void verifyAdSkinPresenceOnGivenResolution(
-		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
-		String expectedAdSkinLeftPart, String expectedAdSkinRightPart
+	public void verifyAdSkinPresence(
+			String adSkinUrl,
+			String expectedAdSkinLeftPart, String expectedAdSkinRightPart
 	) {
-		Shooter shooter = new Shooter();
 		AdsContent.setSlotsSelectors();
 
 		String backgroundImageUrlAfter = getPseudoElementValue(
@@ -219,8 +203,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
-		Point articleLeftSideStartPoint = new Point(articleLocationX - skinWidth,100);
-		Point articleRightSideStartPoint = new Point(articleLocationX + articleWidth,100);
+		Point articleLeftSideStartPoint = new Point(articleLocationX - skinMarginHorizontal - skinWidth, skinMarginTop);
+		Point articleRightSideStartPoint = new Point(articleLocationX + articleWidth + skinMarginHorizontal, skinMarginTop);
 		Dimension skinSize = new Dimension(skinWidth, 500);
 
 		boolean successLeft = adsComparison.compareImageWithScreenshot(
