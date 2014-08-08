@@ -16,14 +16,22 @@ public class Assertion extends Assert {
 		String patternEncoded = encodeSpecialChars(pattern);
 		try {
 			if (current.contains(pattern)){
-				PageObjectLogging.log("assertStringContains", "assertion passed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,  true);
+				PageObjectLogging.log(
+						"assertStringContains",
+						"assertion passed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+						true
+				);
 				return true;
 			} else {
 				throw new AssertionError();
 			}
 		} catch (AssertionError ass) {
 			addVerificationFailure(ass);
-			PageObjectLogging.log("assertStringContains", "assertion failed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,  false);
+			PageObjectLogging.log(
+					"assertStringContains",
+					"assertion failed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+					false
+			);
 			return false;
 		}
 	}
