@@ -228,7 +228,8 @@ public class NewMessageWall extends WikiBasePageObject {
 	public void verifyThreadClosed(String userName, String reason, String message) {
 		refreshPage();
 		Assertion.assertStringContains(
-				userName + " closed this thread because:\n" + reason, driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText()
+				userName + " closed this thread because:\n" + reason,
+				driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText()
 		);
 		PageObjectLogging.log("verifyThreadClosed", "verifyed thread closed", true);
 	}

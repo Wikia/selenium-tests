@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Toolbars;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -66,7 +67,7 @@ public class ShareToolbarComponentObject extends BasePageObject {
 	}
 
 	public void verifyTwitterModalURL() {
-		Assertion.assertStringContains("twitter.com", getCurrentUrl());
+		Assertion.assertStringContains(URLsContent.twitterDomain, getCurrentUrl());
 		PageObjectLogging.log("verifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true);
 	}
 
@@ -82,7 +83,7 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		Assertion.assertStringContains("facebook.com", getCurrentUrl());
+		Assertion.assertStringContains(URLsContent.facebookDomain, getCurrentUrl());
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyFBModalURL", "Verify that the FB Modal URL is correct", true);
 	}
