@@ -288,8 +288,8 @@ public class SourceEditModePageObject extends EditMode{
 	}
 
 	public void verifyVideoAlignment(PositionsVideo position) {
-		Assertion.assertStringContains(getContent(),
-				position.toString().toLowerCase());
+		Assertion.assertStringContains(position.toString().toLowerCase(), getContent()
+		);
 	}
 
 	public void verifyVideoWidth(int widthDesired) {
@@ -305,7 +305,7 @@ public class SourceEditModePageObject extends EditMode{
 	}
 
 	public void verifyVideoCaption(String desiredCaption) {
-		Assertion.assertStringContains(getContent(), desiredCaption);
+		Assertion.assertStringContains(desiredCaption, getContent());
 	}
 
 	/**

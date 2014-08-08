@@ -83,7 +83,7 @@ public class SpecialMultipleUploadPageObject extends WikiBasePageObject {
 	public void verifySuccessfulUpload(String[] filesNamesList) {
 		waitForElementByElement(uploadedFilesListContener);
 		for (int i = 0; i < filesNamesList.length; i++) {
-			Assertion.assertStringContains(uploadedFileslist.get(i).getText(), filesNamesList[i]);
+			Assertion.assertStringContains(filesNamesList[i], uploadedFileslist.get(i).getText());
 		}
 	}
 }

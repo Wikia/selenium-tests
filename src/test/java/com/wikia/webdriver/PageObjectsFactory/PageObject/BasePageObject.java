@@ -15,7 +15,6 @@ import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -235,7 +234,7 @@ public class BasePageObject{
 
 	public void verifyURLcontains(String givenString) {
 		String currentURL = driver.getCurrentUrl();
-		Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
+		Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
 		PageObjectLogging.log("verifyURLcontains",
 				"current url is the same as expetced url", true);
 	}

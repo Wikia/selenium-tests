@@ -27,7 +27,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	private WebElement previewZoomer;
 
 	public void verifyEditModeContent(String targetText) {
-		Assertion.assertStringContains(targetText, articleText.getText());
+		Assertion.assertStringContains(articleText.getText(), targetText);
 		PageObjectLogging.log(
 			"verifyEditModeContent",
 			"The article shows " + targetText,
@@ -36,7 +36,7 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 	}
 
 	public void verifyPreviewPageHeader(String targetText) {
-		Assertion.assertStringContains(targetText, selectedPageHeader.getText());
+		Assertion.assertStringContains(selectedPageHeader.getText(), targetText);
 		PageObjectLogging.log(
 			"verifyPreviewPageHeader",
 			"The summary shows " + targetText,
