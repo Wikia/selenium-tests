@@ -1,6 +1,8 @@
 package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
+
 import org.testng.annotations.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -165,6 +167,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(0);
+		selectedMap.verifyMapOpened();
 		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
 		pinDialog.verifyPinTitleFieldIsDisplayed();
 		pinDialog.typePinName(InteractiveMapsContent.pinName);
@@ -174,7 +177,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
 		pinDialog.verifyImage();
 	}
-	
+		
 	@Test(groups = {"InteractiveMaps_009", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_009_VerifyClickingAddAnotherPinType() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -202,7 +205,6 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		String wikiEmbedCode = selectedMap.getEmbedMapWikiCode();
 		String mapID = selectedMap.getEmbedMapID();
 		WikiArticleEditMode EditMode = new WikiArticleEditMode(driver);
-	
 		EditMode.editArticleByName(InteractiveMapsContent.embedMapArticleName);
 		EditMode.clickSourceButton();
 		EditMode.clearSource();

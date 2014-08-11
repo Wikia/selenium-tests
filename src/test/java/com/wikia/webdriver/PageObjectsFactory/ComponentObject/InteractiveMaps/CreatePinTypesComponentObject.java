@@ -6,8 +6,10 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
+
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -28,7 +30,7 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	@FindBy(css = "input[name='poiCategoryMarkers[]']")
 	private List<WebElement> uploadMarker;
 	@FindBy(css = "input[name='wpUploadFile']")
-	private List<WebElement> uploadInputs;
+	private List<WebElement> uploadInputsCollection;
 	@FindBy(css = ".button.normal.primary")
 	private WebElement saveButton;
 	@FindBy(css = ".addPoiCategory.modalEvent")
@@ -41,6 +43,8 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	private List<WebElement> parentCatElements;
 	@FindBy(css = ".modal.medium.int-map-modal")
 	private WebElement creatingPinDialog;
+	@FindBy(css = "#intMapError")
+	private WebElement pinTypesError;
 	
 	private int amountPinTypeTitleInputs,amountUploadMarker,amountParentCatElements; 
 	
@@ -51,7 +55,6 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		firstPin.sendKeys(pinTypeName);
 		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type is typed in", true, driver);
 	}
-	
 	
 	public InteractiveMapPageObject clickSave() {
 		waitForElementByElement(saveButton);
@@ -87,9 +90,36 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		PageObjectLogging.log("savePinTypesListState", "State of pin types list is saved", true);
 	}
 	
+
 	public void verifyAddAnotherPinType() {
 		 Assertion.assertEquals(amountPinTypeTitleInputs+1, pinTypeTitleInputs.size());
 		 Assertion.assertEquals(amountUploadMarker+1, uploadMarker.size());
 		 Assertion.assertEquals(amountParentCatElements+1, parentCatElements.size());
 	}
+
+	
+	public int checkPinTypeTitleId(String pinTypeName){
+		int i=0;
+		for(i=0;i<pinTypeTitleInputs.size();i++){
+			if(pinTypeName.equals(pinTypeTitleInputs.get(i).getText())){ 	break;	}
+		}
+		return i-1; 
+	}
+	
+	public void selectFileToUpload(String file,String typeOfFile){
+		uploadInputsCollection.get(0).sendKeys(getAbsolutePathForFile(PageContent.resourcesPath+file));
+		PageObjectLogging.log("selectFileToUpload","Tried to upload "+typeOfFile, true);
+	}
+	
+	
+	
+	public void verifyErrorsExist(){
+		waitForElementByElement(pinTypesError);
+		Assertion.assertEquals(false,pinTypesError.getText().isEmpty());
+	}
+	
+	public void verifyErrorsNotExist(){
+		Assertion.assertEquals(true,pinTypesError.getText().isEmpty());
+	}
 }
+	
