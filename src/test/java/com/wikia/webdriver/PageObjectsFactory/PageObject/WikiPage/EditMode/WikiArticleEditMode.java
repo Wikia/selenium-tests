@@ -1,9 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.ArrayList;
-
 import junit.framework.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -24,7 +21,6 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.Slidesho
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 
 public class WikiArticleEditMode extends WikiEditMode {
 
@@ -152,8 +148,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement sourceButton;
 	@FindBy(css = "a[data-map-title]")
 	private WebElement embededMap;
-
-
 
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By videoOnArticleEditMode = By.cssSelector("img.video");
@@ -422,20 +416,16 @@ public class WikiArticleEditMode extends WikiEditMode {
 	
 	public void typeInTemplateContent(String content) {
 		driver.switchTo().defaultContent();
-		
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("typeInContent",
-				"content type into source mode textarea", true, driver);
-	}
-	
+		PageObjectLogging.log("typeInContent","content type into source mode textarea", true, driver);
+	}	
 	
 	public void verifyEmbededMap(String mapID){
+		driver.switchTo().defaultContent();
 		waitForElementByElement(embededMap);
 		String embededMapID = embededMap.getAttribute("data-map-id");
 		System.out.println(embededMapID);
 		Assert.assertEquals(mapID,embededMapID);
-		PageObjectLogging.log("verifyEmbededMap",
-				"Map was embeded properly", true, driver);
 	}
 }

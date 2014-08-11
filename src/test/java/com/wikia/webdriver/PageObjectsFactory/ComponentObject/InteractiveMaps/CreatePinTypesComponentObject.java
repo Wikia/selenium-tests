@@ -1,23 +1,18 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
 import org.openqa.selenium.WebDriver;
-
 import java.util.List;
-import java.util.Iterator;
-
-import junit.framework.Assert;
-
+import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author: Lukasz Jedrzejczak
+ * @author Łukasz Nowak (Dyktus)
  *
  */
 
@@ -46,9 +41,8 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	private List<WebElement> parentCatElements;
 	@FindBy(css = ".modal.medium.int-map-modal")
 	private WebElement creatingPinDialog;
-	@FindBy(css = "")
 	
-	private int sizepinTypeTitleInputs,sizeuploadMarker,sizeparentCatElements; 
+	private int amountPinTypeTitleInputs,amountUploadMarker,amountParentCatElements; 
 	
 	public void typePinTypeTitle(String pinTypeName, int index) {
 		WebElement firstPin = pinTypeTitleInputs.get(index);
@@ -81,31 +75,21 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickAddAnotherPinType", "clicked add more pin types link in create pin types modal", true);
 	}	
 	
-	public void verifyPinTypesDialog(){
+	public void verifyPinTypesDialog() {
 		waitForElementByElement(creatingPinDialog);
 		PageObjectLogging.log("verifyPinTypesDialog", "Pin types dialog was showed", true);
 	}
 	
-	public void savePinTypesListState(){
-		sizepinTypeTitleInputs = pinTypeTitleInputs.size();
-		sizeuploadMarker = uploadMarker.size();
-		sizeparentCatElements = parentCatElements.size();
+	public void savePinTypesListState() {
+		amountPinTypeTitleInputs = pinTypeTitleInputs.size();
+		amountUploadMarker = uploadMarker.size();
+		amountParentCatElements = parentCatElements.size();
 		PageObjectLogging.log("savePinTypesListState", "State of pin types list is saved", true);
 	}
 	
-	public void verifyAddAnotherPinType(){
-		 Assert.assertEquals(sizepinTypeTitleInputs+1, pinTypeTitleInputs.size());
-		 Assert.assertEquals(sizeuploadMarker+1, uploadMarker.size());
-		 Assert.assertEquals(sizeparentCatElements+1, parentCatElements.size());
-         PageObjectLogging.log("verifyAddAnotherPinType","New line and fields was displayed after clicking Add another pin type", true);
+	public void verifyAddAnotherPinType() {
+		 Assertion.assertEquals(amountPinTypeTitleInputs+1, pinTypeTitleInputs.size());
+		 Assertion.assertEquals(amountUploadMarker+1, uploadMarker.size());
+		 Assertion.assertEquals(amountParentCatElements+1, parentCatElements.size());
 	}
-	
-	public int checkPinTypeTitleId(String pinTypeName){
-		int i=0;
-		for(i=0;i<pinTypeTitleInputs.size();i++){
-			if(pinTypeName.equals(pinTypeTitleInputs.get(i).getText())){ 	break;	}
-		}
-		return i-1; 
-	}
-	
 }

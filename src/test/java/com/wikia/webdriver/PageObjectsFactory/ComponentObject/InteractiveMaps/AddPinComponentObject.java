@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
+ * @author Łukasz Nowak (Dyktus)
  *
  */
 
@@ -55,11 +55,6 @@ public class AddPinComponentObject extends BasePageObject{
 		PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
 	}
 	
-	public boolean verifyPinTitleFieldIsFilled(){
-		waitForElementByElement(pinNameField);
-		return !pinNameField.equals("") ? true: false;
-	}
-	
 	public void verifyAssociatedArticleFieldIsDisplayed() {
 		waitForElementByElement(associatedArticleField);
 		PageObjectLogging.log("verifyAssociatedArticleFieldIsDisplayed", "Associated article field is visible",  true, driver);
@@ -88,14 +83,14 @@ public class AddPinComponentObject extends BasePageObject{
 		return new InteractiveMapPageObject(driver);
 	}
 	
-	public boolean verifyNoErrorInAddPinDialog(){
+	public boolean verifyNoErrorInAddPinDialog() {
 		return errorField.getText().equals("") ? true : false;
 	}
 	
-	public InteractiveMapPageObject clickSaveButton(){
+	public InteractiveMapPageObject clickSaveButton() {
 		waitForElementClickableByElement(saveButton);
 		saveButton.click();	
-		Assert.assertEquals(verifyNoErrorInAddPinDialog(),true);
+		Assertion.assertEquals(verifyNoErrorInAddPinDialog(),true);
 		PageObjectLogging.log("clickSaveButton","save button clicked", true, driver);
 		driver.switchTo().activeElement();
 		return new InteractiveMapPageObject(driver);
@@ -107,7 +102,7 @@ public class AddPinComponentObject extends BasePageObject{
 		PageObjectLogging.log("typePinName", pinName+" title for Pin was typed in", true);
 	}
 	
-	public void typePinDescription(String pinDescription){
+	public void typePinDescription(String pinDescription) {
 		waitForElementByElement(descriptionField);
 		descriptionField.sendKeys(pinDescription);
 		PageObjectLogging.log("typePinDescription","Pin description was typed in", true);
@@ -141,15 +136,10 @@ public class AddPinComponentObject extends BasePageObject{
 		Assertion.assertStringContains(articleImageUrl.getAttribute("src"), "Robert_Pattison");
 	}
 	
-	public void verifyChangedCategory(String newCategory){
+	public void verifyChangedCategory(String newCategory) {
 		waitForElementByElement(pinCategorySelector);
 		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
 		List<WebElement> pinCategorySelectorList = pinCategorySelectorDropDown.getAllSelectedOptions();
-		Assert.assertEquals("Saving new data in pin types changed category correctly",newCategory, pinCategorySelectorList.get(0));
-		
+		Assertion.assertEquals(newCategory, pinCategorySelectorList.get(0));
 	}
-	
-	
-	
-	
 }

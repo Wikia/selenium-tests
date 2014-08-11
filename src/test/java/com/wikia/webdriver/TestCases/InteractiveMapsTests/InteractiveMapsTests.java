@@ -17,11 +17,9 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.Cr
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.TemplateComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+
 
 /**
  * Author: Rodrigo Molinero Gomez
@@ -83,7 +81,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		templateName = base.getTimeStamp();
 		template.typeTemplateName(templateName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,0);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,InteractiveMapsContent.pinTypeIndex);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
@@ -102,7 +100,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		template.verifyTemplateImage(selectedImageName);
 		template.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,0);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,InteractiveMapsContent.pinTypeIndex);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
@@ -119,7 +117,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		realMap.verifyRealMapPreviewImage();
 		realMap.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = realMap.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,0);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,InteractiveMapsContent.pinTypeIndex);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
 	}
@@ -178,7 +176,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	}
 	
 	@Test(groups = {"InteractiveMaps_009", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_009_VerifyClickingAddAnotherPinType(){
+	public void InteractiveMaps_009_VerifyClickingAddAnotherPinType() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -192,10 +190,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	    pinTypesDialog.verifyAddAnotherPinType();
 	}
 	
-
-
 	@Test(groups = {"InteractiveMaps_011","InteractiveMapTests","InteractiveMaps"})
-	public void InteractiveMaps_011_VerifyEmbedMapInWikiaPage(){
+	public void InteractiveMaps_011_VerifyEmbedMapInWikiaPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 	
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -218,7 +214,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 
 	
 	@Test(groups = {"InteractiveMaps_013","InteractiveMapTests","InteractiveMaps"})
-	public void InteractiveMaps_013_VerifyTemplateSearch(){
+	public void InteractiveMaps_013_VerifyTemplateSearch() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -234,7 +230,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	}
 	
 	@Test(groups = {"InteractiveMaps_014A","InteractiveMaps_014","InteractiveMapTests","InteractiveMaps"})
-	public void InteractiveMaps_014A_VerifyUncheckedSingleCategory(){
+	public void InteractiveMaps_014A_VerifyUncheckedSingleCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -245,7 +241,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	}
 	
 	@Test(groups = {"InteractiveMaps_014B","InteractiveMaps_014","InteractiveMapTests","InteractiveMaps"})
-	public void InteractiveMaps_014B_VerifyClickOnUncheckedCategory(){
+	public void InteractiveMaps_014B_VerifyClickOnUncheckedCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -258,7 +254,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	}
 	
 	@Test(groups = {"InteractiveMaps_014C","InteractiveMaps_014","InteractiveMapTests","InteractiveMaps"})
-	public void InteractiveMaps_014C_VerifyClickAllCategoriesUncheckCategories(){
+	public void InteractiveMaps_014C_VerifyClickAllCategoriesUncheckCategories() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -268,8 +264,9 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyAllPinTypesIsUncheck();
 		selectedMap.verifyPinTypesAreUncheck();
 	}
+	
 	@Test(groups = {"InteractiveMaps_014D","InteractiveMaps_014","InteractiveMapTests","InteractiveMaps"})
-	public void InteractiveMaps_014D_VerifyClickAllCategoriesCheckAllPinTypes(){
+	public void InteractiveMaps_014D_VerifyClickAllCategoriesCheckAllPinTypes() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -280,13 +277,9 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.clickOnAllPinTypes();
 		selectedMap.verifyAllPinTypesIsCheck();
 		selectedMap.verifyPinTypesAreCheck();
-		
-		
 		selectedMap.verifyPinTypesAreUncheck();
 	}
 	
-
-		
 	@Test(groups = {"InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_015_VerifyEmbedMapCodeButton() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

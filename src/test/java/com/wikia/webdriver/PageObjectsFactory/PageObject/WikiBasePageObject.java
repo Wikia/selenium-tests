@@ -884,7 +884,7 @@ public class WikiBasePageObject extends BasePageObject {
 						"page timeout after login by cookie", true);
 			}
 
-			//verifyUserLoggedIn(userName);
+			verifyUserLoggedIn(userName);
 
 			PageObjectLogging.log("loginCookie",
 					"user was logged in by cookie", true, driver);

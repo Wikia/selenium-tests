@@ -416,7 +416,6 @@ public class BasePageObject{
 	public void waitForElementByElement(WebElement element) {
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
-	
 
 	/**
 	 * Checks if the element is present in DOM

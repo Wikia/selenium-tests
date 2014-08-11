@@ -1,16 +1,16 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 
 /**
  * @author lukaszjedrzejczak
@@ -99,15 +99,15 @@ public class InteractiveMapPageObject extends BasePageObject{
 	
 	public void verifyCreatedMapTitle(String mapTitle) {
 		waitForElementByElement(createdMapTitle);
-		Assert.assertEquals(mapTitle, createdMapTitle.getText());
+		Assertion.assertEquals(mapTitle, createdMapTitle.getText());
 	}
 	
 	public void verifyCreatedPins(String pinName) {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(filterBox);
-		Assert.assertEquals(1, createdPinCells.size());
+		Assertion.assertEquals(1, createdPinCells.size());
 		for(int i = 0; i < createdPinCells.size(); i++) {
-			Assert.assertEquals(pinName, createdPinNames.get(i).getText());
+			Assertion.assertEquals(pinName, createdPinNames.get(i).getText());
 		}
 		driver.switchTo().defaultContent();
 	}
@@ -115,9 +115,9 @@ public class InteractiveMapPageObject extends BasePageObject{
 	public void verifyCreatedPins(List<String> pinNamesList) {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(filterBox);
-		Assert.assertEquals(pinNamesList.size(), createdPinCells.size());
+		Assertion.assertEquals(pinNamesList.size(), createdPinCells.size());
 		for(int i = 0; i < createdPinCells.size(); i++) {
-			Assert.assertEquals(pinNamesList.get(i), createdPinNames.get(i).getText());
+			Assertion.assertEquals(pinNamesList.get(i), createdPinNames.get(i).getText());
 			
 		}
 		driver.switchTo().defaultContent();
@@ -182,8 +182,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		}
 	}
 	
-
-	public void clickEditPinTypesButton(){
+	public void clickEditPinTypesButton() {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(editPinTypesButton);
 	    editPinTypesButton.click();
@@ -192,36 +191,33 @@ public class InteractiveMapPageObject extends BasePageObject{
 	}	
 	
 	
-	public String getEmbedMapWikiCode(){
-		String mapID = mapFrame.getAttribute("data-mapid");
-		String r = "<imap map-id='"+mapID+"'/>";
-		return r;
+	public String getEmbedMapWikiCode() {
+		return "<imap map-id='"+mapFrame.getAttribute("data-mapid")+"'/>";
 	}
 	
 	public String getEmbedMapID(){
-		String mapID = mapFrame.getAttribute("data-mapid");
-		return mapID;
+		return mapFrame.getAttribute("data-mapid");
 	}
 	
-	public void clickOnSingleEnabledCategory(){
+	public void clickOnSingleEnabledCategory() {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(mapFrame);		
-		waitForElementByElement(enabledPinTypesCollection.get(0));
-		enabledPinTypesCollection.get(0).click();
+		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex).click();
 		PageObjectLogging.log("clickOnSingleEnabledCategory","Single enabled category was clicked", true);
 		driver.switchTo().activeElement();
 	}
 	
-	public void clickOnSingleDisabledCategory(){
+	public void clickOnSingleDisabledCategory() {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(mapFrame);		
-		waitForElementByElement(disabledPinTypesCollection.get(0));
+		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		disabledPinTypesCollection.get(0).click();
 		PageObjectLogging.log("clickOnSingleDisabledCategory","Single disabled category was clicked", true);
 		driver.switchTo().activeElement();
 	}
 	
-	public void clickOnAllPinTypes(){
+	public void clickOnAllPinTypes() {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(mapFrame);		
 		waitForElementByElement(allPinTypes);
@@ -230,9 +226,9 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().activeElement();
 	}
 	
-	public void verifyAllPinTypesIsCheck(){
+	public void verifyAllPinTypesIsCheck() {
 		waitForElementByElement(allPinTypes);
-		waitForElementByElement(enabledPinTypesCollection.get(0));
+		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		if(allPinTypes.getAttribute("class").contains("enabled")){
 			PageObjectLogging.log("verifyAllPointTypesIsCheck","All pin types was checked", true, driver);
 		}else{
@@ -240,7 +236,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		}
 	}
 	
-	public void verifyAllPinTypesIsUncheck(){
+	public void verifyAllPinTypesIsUncheck() {
 		waitForElementByElement(allPinTypes);
 		if(allPinTypes.getAttribute("class").contains("enabled")){
 			PageObjectLogging.log("verifyAllPointTypesIsUnCheck","All pin types was checked", false, driver);
@@ -249,21 +245,13 @@ public class InteractiveMapPageObject extends BasePageObject{
 		}
 	}
 	
-	
-	public void verifyPinTypesAreUncheck(){
-		waitForElementByElement(disabledPinTypesCollection.get(0));
-		Assert.assertEquals(0, enabledPinTypesCollection.size());
-	}
-	public void verifyPinTypesAreCheck(){
-		waitForElementByElement(enabledPinTypesCollection.get(0));
-		Assert.assertEquals(0, disabledPinTypesCollection.size());		
+	public void verifyPinTypesAreUncheck() {
+		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		Assertion.assertEquals(0, enabledPinTypesCollection.size());
 	}
 	
-
-	
-	
-	
-	
-	
-	
+	public void verifyPinTypesAreCheck() {
+		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		Assertion.assertEquals(0, disabledPinTypesCollection.size());		
+	}	
 }

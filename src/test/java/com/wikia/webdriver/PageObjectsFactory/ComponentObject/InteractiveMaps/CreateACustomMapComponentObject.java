@@ -3,11 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
-
-import junit.framework.Assert;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -15,7 +11,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author Lukasz Jedrzejczak
- * @author Lukasz Nowak
+ * @author Lukasz Nowak (Dyktus)
  *
  */
 
@@ -74,7 +70,7 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		return selectedTemplateImageName;
 	}
 	
-	public void verifyThereIsError(){
+	public void verifyThereIsError() {
 		waitForElementByElement(errorField);
 		if(errorField.getText().isEmpty()){
 			PageObjectLogging.log("verifyThereIsError", "Template was found. Error was not showed.",false,driver);
@@ -83,7 +79,7 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		}
 	}
 	
-	public void verifyTemplateWasFound(String query){
+	public void verifyTemplateWasFound(String query) { 
 		waitForElementByElement(templatesBox);
 		waitForElementByElement(thumbTitleCollection.get(0));
 		if(thumbCollection.size()>0){			
@@ -93,17 +89,17 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		}
 	}
 	
-	public void clearSearchTitle(){
+	public void clearSearchTitle() { 
 		waitForElementByElement(searchField);
 		searchField.clear();
 	}
-	public void verifyChangeContent(Integer firstAmount, Integer secondAmount){
+	
+	public void verifyChangeContent(Integer firstAmount, Integer secondAmount) { 
 		if(firstAmount==secondAmount){
 			PageObjectLogging.log("verifyChangeContent", "Content was not changed",false,driver);
 		}else{
 			PageObjectLogging.log("verifyChangeContent", "Content was changed",true,driver);	
 		}
 	}
-	
 	
 }
