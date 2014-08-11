@@ -14,6 +14,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorCategoriesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorDialog;
@@ -80,6 +81,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By indentBy = By.cssSelector(".oo-ui-icon-indent-list");
 	private By outdentBy = By.cssSelector(".oo-ui-icon-outdent-list");
 	private By publishButtonDisabled = By.cssSelector(".oo-ui-toolbar-saveButton.ve-ui-widget-disabled");
+	private By mapBy = By.cssSelector(".oo-ui-tool-name-wikiaMapInsert .oo-ui-tool-title");
 	private By mediaBy = By.cssSelector(".oo-ui-tool-name-wikiaMediaInsert .oo-ui-tool-title");
 	private By numberbedListBy = By.cssSelector(".oo-ui-icon-number-list");
 	private By bulletListBy = By.cssSelector(".oo-ui-icon-bullet-list");
@@ -114,24 +116,24 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public void selectStyle(Style style) {
 
 		switch (style) {
-		case BOLD:
-			boldButton.click();
-			break;
-		case ITALIC:
-			italicButton.click();
-			break;
-		case STRIKETHROUGH:
-			clickStyleItemFromDropDown(strikeStyleBy);
-			break;
-		case SUBSCRIPT:
-			clickStyleItemFromDropDown(subscriptStyleBy);
-			break;
-		case SUPERSCRIPT:
-			clickStyleItemFromDropDown(superscriptStyleBy);
-			break;
-		case UNDERLINE:
-			clickStyleItemFromDropDown(underlineStyleBy);
-			break;
+			case BOLD:
+				boldButton.click();
+				break;
+			case ITALIC:
+				italicButton.click();
+				break;
+			case STRIKETHROUGH:
+				clickStyleItemFromDropDown(strikeStyleBy);
+				break;
+			case SUBSCRIPT:
+				clickStyleItemFromDropDown(subscriptStyleBy);
+				break;
+			case SUPERSCRIPT:
+				clickStyleItemFromDropDown(superscriptStyleBy);
+				break;
+			case UNDERLINE:
+				clickStyleItemFromDropDown(underlineStyleBy);
+				break;
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
 	}
@@ -149,88 +151,92 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	public void selectFormatting(Formatting format) {
 
 		switch (format) {
-		case PARAGRAPH:
-			clickFormatting(paragraphBy);
-			break;
-		case HEADING:
-			clickFormatting(headingBy);
-			break;
-		case SUBHEADING1:
-			clickFormatting(subHeading1By);
-			break;
-		case SUBHEADING2:
-			clickFormatting(subHeading2By);
-			break;
-		case SUBHEADING3:
-			clickFormatting(subHeading3By);
-			break;
-		case SUBHEADING4:
-			clickFormatting(subHeading4By);
-			break;
-		case PREFORMATTED:
-			clickFormatting(preformatedBy);
-			break;
+			case PARAGRAPH:
+				clickFormatting(paragraphBy);
+				break;
+			case HEADING:
+				clickFormatting(headingBy);
+				break;
+			case SUBHEADING1:
+				clickFormatting(subHeading1By);
+				break;
+			case SUBHEADING2:
+				clickFormatting(subHeading2By);
+				break;
+			case SUBHEADING3:
+				clickFormatting(subHeading3By);
+				break;
+			case SUBHEADING4:
+				clickFormatting(subHeading4By);
+				break;
+			case PREFORMATTED:
+				clickFormatting(preformatedBy);
+				break;
 		}
 	}
 
 	public void selectIndentation(Indentation indent) {
 		switch (indent) {
-		case INCREASE:
-			clickStyleItemFromDropDown(indentBy);
-			break;
-		case DECREASE:
-			clickStyleItemFromDropDown(outdentBy);
-			break;
+			case INCREASE:
+				clickStyleItemFromDropDown(indentBy);
+				break;
+			case DECREASE:
+				clickStyleItemFromDropDown(outdentBy);
+				break;
 		}
 	}
 
 	public VisualEditorDialog openDialogFromMenu(InsertDialog insert) {
 		switch (insert) {
-		case MEDIA:
-			clickInsertItemFromDropDown(mediaBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorAddMediaDialog(driver);
-		case REFERENCE:
-			clickInsertItemFromDropDown(referenceBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorReferenceDialog(driver);
-		case REFERENCE_LIST:
-			clickInsertItemFromDropDown(referenceListBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorReferenceListDialog(driver);
-		case TEMPLATE:
-			clickInsertItemFromDropDown(templateBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorNewTemplateDialog(driver);
-		case PAGE_SETTINGS:
-			clickHamburgerItemFromDropDown(pageSettingsBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorPageSettingsDialog(driver);
-		case CATEGORIES:
-			clickHamburgerItemFromDropDown(categoriesBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorCategoriesDialog(driver);
-		case KEYBOARD_SHORTCUTS:
-			clickHamburgerItemFromDropDown(keyboardShortcutsBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorKeyboardShortcutsDialog(driver);
-		case SOURCE_EDITOR:
-			clickHamburgerItemFromDropDown(sourceEditorBy);
-			PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-			return new VisualEditorSourceEditorDialog(driver);
-		default:
-			return null;
+			case MAP:
+				clickInsertItemFromDropDown(mapBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorAddMapDialog(driver);
+			case MEDIA:
+				clickInsertItemFromDropDown(mediaBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorAddMediaDialog(driver);
+			case REFERENCE:
+				clickInsertItemFromDropDown(referenceBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorReferenceDialog(driver);
+			case REFERENCE_LIST:
+				clickInsertItemFromDropDown(referenceListBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorReferenceListDialog(driver);
+			case TEMPLATE:
+				clickInsertItemFromDropDown(templateBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorNewTemplateDialog(driver);
+			case PAGE_SETTINGS:
+				clickHamburgerItemFromDropDown(pageSettingsBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorPageSettingsDialog(driver);
+			case CATEGORIES:
+				clickHamburgerItemFromDropDown(categoriesBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorCategoriesDialog(driver);
+			case KEYBOARD_SHORTCUTS:
+				clickHamburgerItemFromDropDown(keyboardShortcutsBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorKeyboardShortcutsDialog(driver);
+			case SOURCE_EDITOR:
+				clickHamburgerItemFromDropDown(sourceEditorBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorSourceEditorDialog(driver);
+			default:
+				return null;
 		}
 	}
 
 	public void insertList(InsertList insert) {
 		switch (insert) {
-		case BULLET_LIST:
-			clickInsertItemFromDropDown(bulletListBy);
-			break;
-		case NUMBERED_LIST:
-			clickInsertItemFromDropDown(numberbedListBy);
-			break;
+			case BULLET_LIST:
+				clickInsertItemFromDropDown(bulletListBy);
+				break;
+			case NUMBERED_LIST:
+				clickInsertItemFromDropDown(numberbedListBy);
+				break;
 		}
 		PageObjectLogging.log("selectInsertToInsertList", insert.toString() + " selected", true);
 	}

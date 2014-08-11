@@ -15,21 +15,40 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsGermanObject
 
 public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 
-	public TestIVW2AnalyticsProvider( ) {
-		super();
-		urlBuilder = new UrlBuilder(config.getEnv());
-	}
-
-	@NetworkTrafficDump
-	@Test(
-		groups = {"TestIVW2AnalyticsProvider_GeoEdgeFree"},
-		dataProviderClass=GermanAdsDataProvider.class,
-		dataProvider="pagesForIVW2"
-	)
-	public void TestIVW2AnalyticsProvider_GeoEdgeFree(String wikiName, String article, String ivw2Param) {
+	private void testIVW2(String wikiName, String article, String ivw2Param) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsGermanObject wikiPage = new AdsGermanObject(driver, testedPage, networkTrafficIntereceptor);
 		wikiPage.verifyCallToIVW2Issued();
 		wikiPage.verifyParamFromIVW2Present(ivw2Param);
+	}
+
+	@NetworkTrafficDump
+	@Test(
+			groups = {"TestIVW2AnalyticsProviderCorporate_GEF"},
+			dataProviderClass=GermanAdsDataProvider.class,
+			dataProvider="pagesForIVW2Corporate"
+	)
+	public void TestIVW2AnalyticsProviderCorporate_GEF(String wikiName, String article, String ivw2Param) {
+		testIVW2(wikiName, article, ivw2Param);
+	}
+
+	@NetworkTrafficDump
+	@Test(
+			groups = {"TestIVW2AnalyticsProviderHubs_GEF"},
+			dataProviderClass=GermanAdsDataProvider.class,
+			dataProvider="pagesForIVW2Hubs"
+	)
+	public void TestIVW2AnalyticsProviderHubs_GEF(String wikiName, String article, String ivw2Param) {
+		testIVW2(wikiName, article, ivw2Param);
+	}
+
+	@NetworkTrafficDump
+	@Test(
+			groups = {"TestIVW2AnalyticsProviderOther_GEF"},
+			dataProviderClass=GermanAdsDataProvider.class,
+			dataProvider="pagesForIVW2Other"
+	)
+	public void TestIVW2AnalyticsProviderOther_GEF(String wikiName, String article, String ivw2Param) {
+		testIVW2(wikiName, article, ivw2Param);
 	}
 }

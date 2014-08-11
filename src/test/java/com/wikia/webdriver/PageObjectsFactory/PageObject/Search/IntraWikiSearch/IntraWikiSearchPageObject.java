@@ -108,7 +108,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		searchField.sendKeys(query);
 		waitForElementByElement(suggestionsList.get(0));
 		for(int i = 0; i < suggestionsList.size(); i++) {
-			Assertion.assertStringContains(suggestionsList.get(i).getText(), query);
+			Assertion.assertStringContains(query, suggestionsList.get(i).getText());
 		}
 	}
 
@@ -127,7 +127,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void verifyFirstResult(String query) {
-		Assertion.assertStringContains(firstResult.getText(), query.replaceAll("_", " "));
+		Assertion.assertStringContains(query.replaceAll("_", " "), firstResult.getText());
 		for (WebElement elem:descriptions) {
 			Assertion.assertTrue(!elem.getText().isEmpty());
 		}
@@ -303,7 +303,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void verifyPushToTopWikiTitle(String searchWiki) {
-		Assertion.assertStringContains(pushToTopWikiResult.getText(), searchWiki);
+		Assertion.assertStringContains(searchWiki, pushToTopWikiResult.getText());
 	}
 
 	public void verifyPushToTopWikiThumbnail() {
@@ -318,7 +318,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementByElement(newSuggestionsList.get(0));
 		System.out.println(newSuggestionsList.size() );
 		for(int i = 0; i < newSuggestionsList.size(); i++) {
-			Assertion.assertStringContains(suggestionTextsList.get(i).getText(), query);
+			Assertion.assertStringContains(query, suggestionTextsList.get(i).getText());
 			Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
 		}
 		PageObjectLogging.log("verifyNewSuggestionsTextAndImages", "Image and text next to every suggestion is verified", true);

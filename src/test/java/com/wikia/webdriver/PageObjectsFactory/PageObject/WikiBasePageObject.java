@@ -969,7 +969,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyHeader(String fileName) {
 		waitForElementByElement(wikiFirstHeader);
-		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
+		Assertion.assertStringContains(fileName, wikiFirstHeader.getText());
 	}
 
 	public void disableCaptcha() {

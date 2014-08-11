@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
@@ -17,7 +18,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement searchInputTextField;
 	@FindBy(css=".oo-ui-pageLayout-active .ve-ui-wikiaUploadButtonWidget")
 	private WebElement clickToUploadArea;
-	@FindBy(css=".oo-ui-pageLayout-active .oo-ui-buttonWidget")
+	@FindBy(css=".oo-ui-pageLayout-active .oo-ui-labeledElement-label")
 	private WebElement midUploadButton;
 	@FindBy(css=".oo-ui-icon-close")
 	private WebElement closeButton;
@@ -33,6 +34,8 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement insertMediaDialogIFrame;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mediaDialogBody;
+	@FindBy(css=".oo-ui-bookletLayout .ve-ui-wikiaUploadButtonWidget input")
+	private WebElement fileInput;
 
 	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
 	private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
@@ -59,6 +62,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	}
 
 	private void clickAddMediaButton() {
+		waitForElementVisibleByElement(addMediaButton);
 		waitForElementClickableByElement(addMediaButton);
 		addMediaButton.click();
 	}
@@ -68,6 +72,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		driver.switchTo().frame(insertMediaDialogIFrame);
 		typeInSearchTextField(url);
 		waitForElementVisibleByElement(topUploadButton);
+		waitForElementClickableByElement(topUploadButton);
 		clickAddMediaButton();
 		waitForElementNotVisibleByElement(insertMediaDialogIFrame);
 		driver.switchTo().defaultContent();
@@ -97,6 +102,17 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		return new VisualEditorPageObject(driver);
 	}
 
+	public VisualEditorPageObject uploadImage(String fileName) {
+		waitForElementVisibleByElement(insertMediaDialogIFrame);
+		driver.switchTo().frame(insertMediaDialogIFrame);
+		selectFileToUpload(fileName);
+		waitForElementVisibleByElement(topUploadButton);
+		clickAddMediaButton();
+		waitForElementNotVisibleByElement(insertMediaDialogIFrame);
+		driver.switchTo().defaultContent();
+		return new VisualEditorPageObject(driver);
+	}
+
 	public VisualEditorPageObject previewExistingMediaByIndex(int index) {
 		waitForElementVisibleByElement(insertMediaDialogIFrame);
 		driver.switchTo().frame(insertMediaDialogIFrame);
@@ -106,6 +122,17 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		targetMedia.click();
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
+	}
+
+	private void selectFileToUpload(String fileName) {
+		fileInput.sendKeys(
+			getAbsolutePathForFile(PageContent.resourcesPath + fileName)
+		);
+		PageObjectLogging.log(
+			"selectFileToUpload",
+			"file " + fileName + " added to upload",
+			true
+		);
 	}
 
 	public VisualEditorPageObject previewExistingMediaByTitle(String title) {

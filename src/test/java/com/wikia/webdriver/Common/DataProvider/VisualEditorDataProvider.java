@@ -49,6 +49,7 @@ public class VisualEditorDataProvider {
 	}
 
 	public enum InsertDialog {
+		MAP,
 		MEDIA,
 		TEMPLATE,
 		REFERENCE,

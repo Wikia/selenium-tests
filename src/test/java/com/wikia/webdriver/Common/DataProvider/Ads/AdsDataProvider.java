@@ -47,9 +47,19 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] corporatePages() {
 		return new Object[][] {
-			{"wikia", "Wikia"},
-			{"es.wikia", "Wikia"},
-			{"wikia", "About_Us"}
+				{"wikia", "Wikia", "wka.wikia/_wikiaglobal//home"},
+				{"wikia", "About_Us", "wka.wikia/_wikiaglobal//article"},
+				{"wikia", "Alliance", "wka.wikia/_wikiaglobal//article"},
+				{"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article"},
+				{"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home"},
+				{"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub"},
+				{"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub"},
+				{"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub"},
+				{"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub"},
+				{"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub"},
+				{"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub"},
+				{"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub"},
+				{"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub"},
 		};
 	}
 
@@ -129,21 +139,18 @@ public class AdsDataProvider {
 				"adtest-fluid", "Skin",
 				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(1366, 768),
-				100,
 				"src/test/resources/adsResources/skin1366_left",
 				"src/test/resources/adsResources/skin1366_right",
 			}, {
 				"adtest-fluid", "Skin",
 				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(1920, 1080),
-				170,
 				"src/test/resources/adsResources/skin1920_left",
 				"src/test/resources/adsResources/skin1920_right",
 			}, {
 				"adtest-fluid", "Skin",
 				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(2400, 1080),
-				350,
 				"src/test/resources/adsResources/skin2400_left",
 				"src/test/resources/adsResources/skin2400_right",
 			}
@@ -157,7 +164,6 @@ public class AdsDataProvider {
 				"adtest-fluid", "Skin",
 				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(1920, 1080),
-				170,
 				"src/test/resources/adsResources/skin1920_left",
 				"src/test/resources/adsResources/skin1920_right",
 			}
