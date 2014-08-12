@@ -18,7 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  *
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
- *
+ * VE-1336 Uploading an image
  */
 
 public class VEMediaTests extends NewTestTemplateBeforeClass {
@@ -76,4 +76,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
 	}
+
+
 }
