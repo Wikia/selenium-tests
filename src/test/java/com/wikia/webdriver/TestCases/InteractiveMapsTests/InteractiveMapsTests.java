@@ -29,25 +29,25 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 	- PIN Creation - Add a Pin modal
 	IM06: Verify it is possible to add a pin to the map and that add pin dialog has all required elements
 	IM07: Verify removing a suggestion of article with image will remove image from placeholder
-	
+	IM08: Embed a map outside of wikia and verify there is a branding footer, zoom in/out options and filters box collapsibility
+	IM09: Verify back button works correctly on every dialog
+
 	-Edit PIN Types Modal       
-	IM08: Check image error validation for small size, big size and non-image extension
-	IM09: Verify clicking "Add another pin type" link will display a new line and fields for adding new information  
-	IM10: Verify saving any new data will actually update the data for that pin edited
+	IM10: Check image error validation for small size, big size and non-image extension
+	IM11: Verify clicking "Add another pin type" link will display a new line and fields for adding new information  
+	IM12: Verify saving any new data will actually update the data for that pin edited
     
     - Other Test Cases
-    IM11: Verify possibility of embedding wikia map in other wikia pages. 
-    IM12: Verify following elements in map modal when a map is embedded in a wikia page: PIN description when
+    IM13: Verify possibility of embedding wikia map in other wikia pages. 
+    IM14: Verify following elements in map modal when a map is embedded in a wikia page: PIN description when
           clicking, zoom, add/edit features for pin types and pins, embed map button, filters box. Verify there is no branding footer 
-    IM13: Test template search works correctly for unexisting and existing templates        
-	IM14: Verify following behaviours in "Filters" left hand side column:
+    IM15: Test template search works correctly for unexisting and existing templates        
+	IM16: Verify following behaviours in "Filters" left hand side column:
 		All categories are checked and user clicks on single category: We uncheck clicked category and "All categories".
 		All categories but one are checked and user clicks on unchecked one: We check clicked category and "All categories".
 		All categories are checked (so "All categories" is checked too) and user clicks "All categories": We uncheck all categories and "All categories".
 		Some categories are checked (so "All categories" is unchecked) and user clicks "All categories": We check all categories and "All categories".		
-	IM15: Verify embed map code dialog works correctly from Special:Map page
-	IM16: Embed a map outside of wikia and verify there is a branding footer, zoom in/out options and filters box collapsibility
-	IM17: Verify back button works correctly on every dialog
+	IM17: Verify embed map code dialog works correctly from Special:Map page	
 	*/
 
 public class InteractiveMapsTests extends NewTestTemplate{
@@ -61,7 +61,10 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	private String templateName;
 	private final String associatedArticleName = "Slid";
 
-	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(
+		groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"},
+		enabled = false
+	)
 	public void InteractiveMaps_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -168,8 +171,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.verifyImage();
 	}
 	
-	@Test(groups = {"InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_015_VerifyEmbedMapCodeButton() {
+	@Test(groups = {"InteractiveMaps_008", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_008_VerifyEmbedMapCodeButton() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -185,8 +188,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.large);
 	}
 
-	@Test(groups = {"InteractiveMaps_017", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_017_VerifyBackButtonWorksCorrectly() {
+	@Test(groups = {"InteractiveMaps_009", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_009_VerifyBackButtonWorksCorrectly() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);

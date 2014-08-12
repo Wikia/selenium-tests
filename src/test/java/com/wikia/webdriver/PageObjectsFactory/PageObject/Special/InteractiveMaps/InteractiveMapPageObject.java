@@ -94,13 +94,23 @@ public class InteractiveMapPageObject extends BasePageObject{
 		waitForElementByElement(embedMapDialog);
 		checkIfElementOnPage(embedMapCodeSmall);
 	}
-	
-	public void closeMapBeingProcessedModalIfVisible(){
+
+	public void closeMapBeingProcessedModalIfVisible() {
+		int i = 0;
 		while(checkIfElementOnPage(mapBeingProcessedModal)) {
 			refreshButton.click();
+			i += 1;
+			if(i > 10) {
+				PageObjectLogging.log(
+					"closeMapBeingProcessedModalIfVisible",
+					"Close map being processed dialog cannot be closed",
+					false
+				);
+				return;
+			}
 		}
 	}
-	
+
 	public AddPinComponentObject placePinInMap() {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(addPin);
