@@ -70,7 +70,7 @@ public class AddPinComponentObject extends BasePageObject{
 		waitForElementByElement(associatedArticleImage);
 		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true, driver);
 	}
-	
+
 	public InteractiveMapPageObject clickCancelButton() {
 		waitForElementByElement(cancelButton);
 		cancelButton.click();
@@ -81,7 +81,7 @@ public class AddPinComponentObject extends BasePageObject{
 	public InteractiveMapPageObject clickSaveButton() {
 		waitForElementByElement(saveButton);
 		saveButton.click();
-		PageObjectLogging.log("clickSaveButton", "Save button clicked",  true, driver);
+		PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
 		return new InteractiveMapPageObject(driver);
 	}
 	
@@ -92,7 +92,7 @@ public class AddPinComponentObject extends BasePageObject{
 	public void typePinName(String pinName) {
 		waitForElementByElement(pinNameField);
 		pinNameField.sendKeys(pinName);
-		PageObjectLogging.log("typePinName", pinName+" title for Pin was typed in", true);
+		PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
 	}
 	
 	public void typePinDescription(String pinDescription) {
@@ -128,12 +128,5 @@ public class AddPinComponentObject extends BasePageObject{
 	public void verifyImage() {
 		waitForElementByElement(articleImageUrl);
 		Assertion.assertStringContains(articleImageUrl.getAttribute("src"), "Robert_Pattison");
-	}
-	
-	public void verifyChangedCategory(String newCategory) {
-		waitForElementByElement(pinCategorySelector);
-		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
-		List<WebElement> pinCategorySelectorList = pinCategorySelectorDropDown.getAllSelectedOptions();
-		Assertion.assertEquals(newCategory, pinCategorySelectorList.get(0));
 	}
 }

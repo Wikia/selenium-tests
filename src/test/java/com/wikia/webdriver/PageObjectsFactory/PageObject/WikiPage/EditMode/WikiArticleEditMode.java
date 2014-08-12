@@ -224,7 +224,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	
 	public void verifySourceEditorContentIsEmpty(){
 		waitForElementByElement(sourceModeTextArea);
-		Assert.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
+		Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
 		PageObjectLogging.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned", true);
 	}
 
@@ -254,7 +254,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().frame(iFrame);
 		waitForElementByElement(bodyContent);
 		bodyContent.sendKeys(content);
-		PageObjectLogging.log("typeInContent", "content "+bodyContent.getText()+" - type into article body", true, driver);
+		PageObjectLogging.log("typeInContent", "content " + bodyContent.getText() + " - type into article body", true, driver);
 		driver.switchTo().defaultContent();
 	}
 	
@@ -262,6 +262,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(sourceButton);
 		sourceButton.click();
 		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickSourceButton", "Source button was clicked", true, driver);
 	}
 	
 	public void clickReturnToEditingButton() {
@@ -434,6 +435,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(embededMap);
 		String embededMapID = embededMap.getAttribute("data-map-id");
 		System.out.println(embededMapID);
-		Assert.assertEquals(mapID,embededMapID);
+		Assertion.assertEquals(mapID,embededMapID);
 	}
 }

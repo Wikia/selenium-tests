@@ -40,7 +40,6 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	private WebElement clearSearchTitleButton;
 	@FindBy(css = "#intMapTileSetsList")
 	private WebElement templatesBox;
-
 	String beforeImageName = "116x116-";
 	
 	public TemplateComponentObject selectFileToUpload(String file) {
@@ -53,7 +52,7 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	public void typeSearchTile(String templateName) {
 		waitForElementByElement(searchField);
 		searchField.sendKeys(templateName);
-		PageObjectLogging.log("typeTilesetName", "title ("+templateName+") for template is typed in", true);
+		PageObjectLogging.log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
 	}
 
 	public TemplateComponentObject selectTemplate(int templateId) {
@@ -72,9 +71,9 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	public void verifyThereIsError() {
 		waitForElementByElement(errorField);
 		if(errorField.getText().isEmpty()) {
-			PageObjectLogging.log("verifyThereIsError", "Template was found. Error was not showed.",false,driver);
+			PageObjectLogging.log("verifyThereIsError", "Template was found. Error was not showed.",false, driver);
 		}else {
-			PageObjectLogging.log("verifyThereIsError", "Template was not found. Error was showed",true,driver);
+			PageObjectLogging.log("verifyThereIsError", "Template was not found. Error was showed", true, driver);
 		}
 	}
 	
@@ -82,9 +81,9 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		waitForElementByElement(templatesBox);
 		waitForElementByElement(thumbTitleCollection.get(0));
 		if(thumbCollection.size()>0) {			
-			PageObjectLogging.log("verifyTemplateWasFound", "Some template was found but not this which you searched",true,driver);
+			PageObjectLogging.log("verifyTemplateWasFound", "Some template was found but not this which you searched", true, driver);
 		}else {
-			PageObjectLogging.log("verifyTemplateWasFound", "Template was not found",false,driver);
+			PageObjectLogging.log("verifyTemplateWasFound", "Template was not found", false, driver);
 		}
 	}
 	
@@ -95,9 +94,9 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	
 	public void verifyChangeContent(Integer firstAmount, Integer secondAmount) { 
 		if(firstAmount==secondAmount) {
-			PageObjectLogging.log("verifyChangeContent", "Content was not changed",false,driver);
+			PageObjectLogging.log("verifyChangeContent", "Content was not changed", false, driver);
 		}else {
-			PageObjectLogging.log("verifyChangeContent", "Content was changed",true,driver);	
+			PageObjectLogging.log("verifyChangeContent", "Content was changed", true, driver);	
 		}
 	}
 }

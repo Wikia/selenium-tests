@@ -96,20 +96,6 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		 Assertion.assertEquals(amountParentCatElements+1, parentCatElements.size());
 	}
 
-	
-	public int checkPinTypeTitleId(String pinTypeName) {
-		int i=0;
-		while(pinTypeName.equals(pinTypeTitleInputs.get(i).getText())){
-			i++;
-		}
-		return i-1; 
-	}
-	
-	public void selectFileToUpload(String file,String typeOfFile) {
-		uploadInputsCollection.get(0).sendKeys(getAbsolutePathForFile(PageContent.resourcesPath+file));
-		PageObjectLogging.log("selectFileToUpload", "Tried to upload "+typeOfFile, true);
-	}
-	
 	public void verifyErrorsExist() {
 		waitForElementByElement(pinTypesError);
 		Assertion.assertEquals(false,pinTypesError.getText().isEmpty());

@@ -2,6 +2,7 @@ package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
 
 import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -16,7 +17,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-
 
 /**
  * Author: Rodrigo Molinero Gomez
@@ -57,6 +57,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 public class InteractiveMapsTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
+	private String test1 = "test";
+	private String test2 = "1234567890123123123123213";
 	
 	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_001_CreateCustomMapNewImageUpload() {
@@ -75,7 +77,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
-		createdMap.verifyCreatedPins(InteractiveMapsContent.pinTypeName);
+		createdMap.verifyCreatedPinTypesForNewMap(InteractiveMapsContent.pinTypeName);
 	}
 
 	@Test(groups = {"InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps"})
@@ -94,7 +96,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
-		createdMap.verifyCreatedPins(InteractiveMapsContent.pinTypeName);
+		createdMap.verifyCreatedPinTypesForNewMap(InteractiveMapsContent.pinTypeName);
 	}
 	
 	@Test(groups = {"InteractiveMaps_003", "InteractiveMapTests", "InteractiveMaps"})
@@ -208,8 +210,6 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject createMapDialog = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMapDialog = createMapDialog.clickCustomMap();
-		String test1 = "test";
-		String test2 = "1234567890123123123123213";
 		customMapDialog.typeSearchTile(test1);
 		customMapDialog.verifyTemplateWasFound(test1);
 		customMapDialog.clearSearchTitle();
@@ -250,7 +250,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnAllPinTypes();
 		selectedMap.verifyAllPinTypesIsUncheck();
-		selectedMap.verifyPinTypesAreUncheck();
+		selectedMap.verifyPinTypesAreUnchecked();
 	}
 	
 	@Test(groups = {"InteractiveMaps_014D","InteractiveMaps_014","InteractiveMapTests","InteractiveMaps"})
@@ -264,8 +264,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyAllPinTypesIsUncheck();
 		selectedMap.clickOnAllPinTypes();
 		selectedMap.verifyAllPinTypesIsCheck();
-		selectedMap.verifyPinTypesAreCheck();
-		selectedMap.verifyPinTypesAreUncheck();
+		selectedMap.verifyPinTypesAreChecked();
+		selectedMap.verifyPinTypesAreUnchecked();
 	}
 	
 	@Test(groups = {"InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps"})

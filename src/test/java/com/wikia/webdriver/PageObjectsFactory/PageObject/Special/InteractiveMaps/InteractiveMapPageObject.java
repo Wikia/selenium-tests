@@ -106,23 +106,10 @@ public class InteractiveMapPageObject extends BasePageObject{
 		Assertion.assertEquals(mapTitle, createdMapTitle.getText());
 	}
 	
-	public void verifyCreatedPins(String pinName) {
+	public void verifyCreatedPinTypesForNewMap(String pinName) {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(filterBox);
 		Assertion.assertEquals(1, createdPinCells.size());
-		for(int i = 0; i < createdPinCells.size(); i++) {
-			Assertion.assertEquals(pinName, createdPinNames.get(i).getText());
-		}
-		driver.switchTo().defaultContent();
-	}
-	
-	public void verifyCreatedPins(List<String> pinNamesList) {
-		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(filterBox);
-		Assertion.assertEquals(pinNamesList.size(), createdPinCells.size());
-		for(int i = 0; i < createdPinCells.size(); i++) {
-			Assertion.assertEquals(pinNamesList.get(i), createdPinNames.get(i).getText());
-		}
 		driver.switchTo().defaultContent();
 	}
 	
@@ -188,7 +175,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 	public void clickEditPinTypesButton() {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(editPinTypesButton);
-	    editPinTypesButton.click();
+		editPinTypesButton.click();
 		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button clicked", true, driver);
 		driver.switchTo().defaultContent();
 	}
@@ -267,12 +254,12 @@ public class InteractiveMapPageObject extends BasePageObject{
 		}
 	}
 	
-	public void verifyPinTypesAreUncheck() {
+	public void verifyPinTypesAreUnchecked() {
 		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		Assertion.assertEquals(0, enabledPinTypesCollection.size());
 	}
 	
-	public void verifyPinTypesAreCheck() {
+	public void verifyPinTypesAreChecked() {
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		Assertion.assertEquals(0, disabledPinTypesCollection.size());		
 	}	
