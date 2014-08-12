@@ -410,15 +410,23 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void typeContentInSourceMode(String content){
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("typeInContent",
-				"content type into source mode textarea", true, driver);
+		PageObjectLogging.log(
+				"typeInContent", 
+				"content type into source mode textarea", 
+				true,
+				driver
+		);
 	}
 	
 	public void typeInTemplateContent(String content) {
 		driver.switchTo().defaultContent();
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("typeInContent","content type into source mode textarea", true, driver);
+		PageObjectLogging.log("typeInContent", 
+				"content type into source mode textarea",
+				true,
+				driver
+		);
 	}	
 	
 	public void verifyEmbededMap(String mapID){

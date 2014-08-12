@@ -41,8 +41,6 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement refreshButton;
 	@FindBy(css = ".leaflet-draw-draw-marker")
 	private WebElement addPin;
-	@FindBy(css = "")
-	private WebElement tile;
 	@FindBy(css = ".leaflet-control-embed-map-code-button")
 	private WebElement embedMapCodeButton;
 	@FindBy(css = ".leaflet-draw-draw-marker")
@@ -124,7 +122,6 @@ public class InteractiveMapPageObject extends BasePageObject{
 		Assertion.assertEquals(pinNamesList.size(), createdPinCells.size());
 		for(int i = 0; i < createdPinCells.size(); i++) {
 			Assertion.assertEquals(pinNamesList.get(i), createdPinNames.get(i).getText());
-			
 		}
 		driver.switchTo().defaultContent();
 	}
@@ -211,12 +208,10 @@ public class InteractiveMapPageObject extends BasePageObject{
 		PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
 	}
 	
-	public void verifyZoomMap(){
+	public void verifyZoomMap() {
 		waitForElementByElement(zoomAnim);
 		PageObjectLogging.log("verifyZoomMap", "Map was zoomed", true, driver);
 	}
-	
-	
 	
 	public String getEmbedMapWikiCode() {
 		return "<imap map-id='"+mapFrame.getAttribute("data-mapid")+"'/>";
@@ -256,18 +251,18 @@ public class InteractiveMapPageObject extends BasePageObject{
 	public void verifyAllPinTypesIsCheck() {
 		waitForElementByElement(allPinTypes);
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
-		if(allPinTypes.getAttribute("class").contains("enabled")){
+		if(allPinTypes.getAttribute("class").contains("enabled")) {
 			PageObjectLogging.log("verifyAllPointTypesIsCheck","All pin types was checked", true, driver);
-		}else{
+		}else {
 			PageObjectLogging.log("verifyAllPointTypesIsCheck","All pin types was unchecked", false, driver);
 		}
 	}
 	
 	public void verifyAllPinTypesIsUncheck() {
 		waitForElementByElement(allPinTypes);
-		if(allPinTypes.getAttribute("class").contains("enabled")){
+		if(allPinTypes.getAttribute("class").contains("enabled")) {
 			PageObjectLogging.log("verifyAllPointTypesIsUnCheck","All pin types was checked", false, driver);
-		}else{
+		}else {
 			PageObjectLogging.log("verifyAllPointTypesIsUnCheck","All pin types was unchecked", true, driver);
 		}
 	}

@@ -57,14 +57,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 public class InteractiveMapsTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
-	int selectedTemplateIndex = 1;
-	int selectedMapIndex = 0;
 	
-	//move to other class:
-	
-	private String templateName;
-	private final String associatedArticleName = "Slid";
-
 	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -75,8 +68,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		TemplateComponentObject template = customMap.selectFileToUpload(PageContent.file);
 		template.verifyTemplateImagePreview();
 		template.typeMapName(InteractiveMapsContent.mapName);
-		templateName = base.getTimeStamp();
-		template.typeTemplateName(templateName);
+		InteractiveMapsContent.templateName = base.getTimeStamp();
+		template.typeTemplateName(InteractiveMapsContent.templateName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
 		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,InteractiveMapsContent.pinTypeIndex);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
@@ -92,8 +85,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject map = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMap = map.clickCustomMap();
-		String selectedImageName = customMap.getSelectedTemplateImageName(selectedTemplateIndex);
-		TemplateComponentObject template = customMap.selectTemplate(selectedTemplateIndex);
+		String selectedImageName = customMap.getSelectedTemplateImageName(InteractiveMapsContent.selectedTemplateIndex);
+		TemplateComponentObject template = customMap.selectTemplate(InteractiveMapsContent.selectedTemplateIndex);
 		template.verifyTemplateImage(selectedImageName);
 		template.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
@@ -124,9 +117,9 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		String mapUrl = specialMap.getMapLink(selectedMapIndex);
-		String mapTitle = specialMap.getMapTitle(selectedMapIndex);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(selectedMapIndex);
+		String mapUrl = specialMap.getMapLink(InteractiveMapsContent.selectedMapIndex);
+		String mapTitle = specialMap.getMapTitle(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.verifyURL(mapUrl);
 		selectedMap.verifyCreatedMapTitle(mapTitle);
@@ -142,11 +135,11 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	}
 	
 	@Test(groups = {"InteractiveMaps_006", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_006_CreatePin() {
+	public void InteractiveMaps_006_VerifyPinModalContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(0);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
 		pinDialog.verifyPinTitleFieldIsDisplayed();
 		pinDialog.verifyAssociatedArticleFieldIsDisplayed();
@@ -161,13 +154,13 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(0);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
 		pinDialog.verifyPinTitleFieldIsDisplayed();
 		pinDialog.typePinName(InteractiveMapsContent.pinName);
 		String placeholderSrc = pinDialog.getAssociatedArticleImageSrc();
-		pinDialog.typeAssociatedArticle(associatedArticleName);
+		pinDialog.typeAssociatedArticle(InteractiveMapsContent.associatedArticleName);
 		pinDialog.clickSuggestion(0);
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
 		pinDialog.verifyImage();
@@ -178,14 +171,14 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(0);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEditPinTypesButton();
 		CreatePinTypesComponentObject pinTypesDialog = new CreatePinTypesComponentObject(driver); 
-	    pinTypesDialog.verifyPinTypesDialog();
+		pinTypesDialog.verifyPinTypesDialog();
 		pinTypesDialog.savePinTypesListState();
-	    pinTypesDialog.clickAddAnotherPinType();
-	    pinTypesDialog.verifyAddAnotherPinType();
+		pinTypesDialog.clickAddAnotherPinType();
+		pinTypesDialog.verifyAddAnotherPinType();
 	}
 	
 	@Test(groups = {"InteractiveMaps_011","InteractiveMapTests","InteractiveMaps"})
@@ -193,7 +186,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(3);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		String wikiEmbedCode = selectedMap.getEmbedMapWikiCode();
 		String mapID = selectedMap.getEmbedMapID();
@@ -229,7 +222,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(2);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnSingleEnabledCategory();
 		selectedMap.verifyAllPinTypesIsUncheck();
@@ -240,7 +233,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(2);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnSingleEnabledCategory();
 		selectedMap.verifyAllPinTypesIsUncheck();
@@ -253,7 +246,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(2);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnAllPinTypes();
 		selectedMap.verifyAllPinTypesIsUncheck();
@@ -265,7 +258,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName,credentials.password,wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(2);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnSingleEnabledCategory();
 		selectedMap.verifyAllPinTypesIsUncheck();
@@ -280,7 +273,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEmbedMapCodeButton();
 		selectedMap.verifyEmbedMapDialog();
@@ -297,7 +290,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickZoomInButton();
 		selectedMap.clickZoomOutButton();

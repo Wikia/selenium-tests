@@ -71,9 +71,9 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	
 	public void verifyThereIsError() {
 		waitForElementByElement(errorField);
-		if(errorField.getText().isEmpty()){
+		if(errorField.getText().isEmpty()) {
 			PageObjectLogging.log("verifyThereIsError", "Template was found. Error was not showed.",false,driver);
-		}else{
+		}else {
 			PageObjectLogging.log("verifyThereIsError", "Template was not found. Error was showed",true,driver);
 		}
 	}
@@ -81,9 +81,9 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	public void verifyTemplateWasFound(String query) { 
 		waitForElementByElement(templatesBox);
 		waitForElementByElement(thumbTitleCollection.get(0));
-		if(thumbCollection.size()>0){			
+		if(thumbCollection.size()>0) {			
 			PageObjectLogging.log("verifyTemplateWasFound", "Some template was found but not this which you searched",true,driver);
-		}else{
+		}else {
 			PageObjectLogging.log("verifyTemplateWasFound", "Template was not found",false,driver);
 		}
 	}
@@ -94,11 +94,10 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	}
 	
 	public void verifyChangeContent(Integer firstAmount, Integer secondAmount) { 
-		if(firstAmount==secondAmount){
+		if(firstAmount==secondAmount) {
 			PageObjectLogging.log("verifyChangeContent", "Content was not changed",false,driver);
-		}else{
+		}else {
 			PageObjectLogging.log("verifyChangeContent", "Content was changed",true,driver);	
 		}
 	}
-	
 }

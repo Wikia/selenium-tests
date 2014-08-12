@@ -90,7 +90,6 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		PageObjectLogging.log("savePinTypesListState", "State of pin types list is saved", true);
 	}
 	
-
 	public void verifyAddAnotherPinType() {
 		 Assertion.assertEquals(amountPinTypeTitleInputs+1, pinTypeTitleInputs.size());
 		 Assertion.assertEquals(amountUploadMarker+1, uploadMarker.size());
@@ -98,28 +97,25 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	}
 
 	
-	public int checkPinTypeTitleId(String pinTypeName){
+	public int checkPinTypeTitleId(String pinTypeName) {
 		int i=0;
-		for(i=0;i<pinTypeTitleInputs.size();i++){
-			if(pinTypeName.equals(pinTypeTitleInputs.get(i).getText())){ 	break;	}
+		while(pinTypeName.equals(pinTypeTitleInputs.get(i).getText())){
+			i++;
 		}
 		return i-1; 
 	}
 	
-	public void selectFileToUpload(String file,String typeOfFile){
+	public void selectFileToUpload(String file,String typeOfFile) {
 		uploadInputsCollection.get(0).sendKeys(getAbsolutePathForFile(PageContent.resourcesPath+file));
-		PageObjectLogging.log("selectFileToUpload","Tried to upload "+typeOfFile, true);
+		PageObjectLogging.log("selectFileToUpload", "Tried to upload "+typeOfFile, true);
 	}
 	
-	
-	
-	public void verifyErrorsExist(){
+	public void verifyErrorsExist() {
 		waitForElementByElement(pinTypesError);
 		Assertion.assertEquals(false,pinTypesError.getText().isEmpty());
 	}
 	
-	public void verifyErrorsNotExist(){
+	public void verifyErrorsNotExist() {
 		Assertion.assertEquals(true,pinTypesError.getText().isEmpty());
 	}
 }
-	

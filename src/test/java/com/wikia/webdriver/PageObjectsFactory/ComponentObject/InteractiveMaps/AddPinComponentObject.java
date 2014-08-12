@@ -98,7 +98,7 @@ public class AddPinComponentObject extends BasePageObject{
 	public void typePinDescription(String pinDescription) {
 		waitForElementByElement(descriptionField);
 		descriptionField.sendKeys(pinDescription);
-		PageObjectLogging.log("typePinDescription","Pin description was typed in", true);
+		PageObjectLogging.log("typePinDescription", "Pin description was typed in", true);
 	}
 	
 	public void typeAssociatedArticle(String associatedArticleName) {

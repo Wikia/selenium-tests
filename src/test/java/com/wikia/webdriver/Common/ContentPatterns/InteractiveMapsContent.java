@@ -14,5 +14,8 @@ public class InteractiveMapsContent {
 			+ "Pellentesque consectetur gravida mi in lobortis. Aliquam amet";
 	public static final String embedMapArticleName = "embedMap";
 	public static final int pinTypeIndex = 0;
-
+	public static final int selectedMapIndex = 0;
+	public static final int selectedTemplateIndex = 0;
+	public static final String associatedArticleName = "Slid";
+	public static String templateName;
 }
