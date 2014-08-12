@@ -17,9 +17,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 /**
  * @author Robert 'Rochan' Chan
  *
- * VE-1134 Adding Youtube Video
+ * VE-1134 Adding non-premium (Youtube) video
  * VE-1134 Adding Premium Video with full URL
- *
+ * VE-1264 Adding Existing videos to an article
+ * VE-1265 Deleting a video from the article
  */
 
 public class VEAddVideoTests extends NewTestTemplateBeforeClass {
