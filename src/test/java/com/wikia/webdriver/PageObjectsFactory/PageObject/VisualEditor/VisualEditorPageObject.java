@@ -61,6 +61,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement previewVideoWrapper;
 	@FindBy(css=".ve-ui-desktopContext-menu .oo-ui-icon-edit")
 	private WebElement mediaContextMenu;
+	@FindBy(css="figure figcaption .caption")
+	private WebElement mediaCaption;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -253,5 +255,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(previewOverlay);
 		waitForElementVisibleByElement(previewImage);
 		PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
+	}
+
+	public void verifyVideoCaption(String caption) {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		waitForElementByElement(mediaCaption);
+		Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
+		PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
 	}
 }
