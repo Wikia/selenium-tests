@@ -1,13 +1,10 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import org.junit.Assert;
-
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -49,7 +46,6 @@ public class AddPinComponentObject extends BasePageObject{
 	@FindBy(css=".error")
 	WebElement errorField;
 
-	
 	public void verifyPinTitleFieldIsDisplayed() {
 		waitForElementByElement(pinNameField);
 		PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
@@ -75,7 +71,6 @@ public class AddPinComponentObject extends BasePageObject{
 		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true, driver);
 	}
 	
-
 	public InteractiveMapPageObject clickCancelButton() {
 		waitForElementByElement(cancelButton);
 		cancelButton.click();
@@ -83,19 +78,17 @@ public class AddPinComponentObject extends BasePageObject{
 		return new InteractiveMapPageObject(driver);
 	}
 	
+	public InteractiveMapPageObject clickSaveButton() {
+		waitForElementByElement(saveButton);
+		saveButton.click();
+		PageObjectLogging.log("clickSaveButton", "Save button clicked",  true, driver);
+		return new InteractiveMapPageObject(driver);
+	}
+	
 	public boolean verifyNoErrorInAddPinDialog() {
 		return errorField.getText().equals("") ? true : false;
 	}
 	
-	public InteractiveMapPageObject clickSaveButton() {
-		waitForElementClickableByElement(saveButton);
-		saveButton.click();	
-		Assertion.assertEquals(verifyNoErrorInAddPinDialog(),true);
-		PageObjectLogging.log("clickSaveButton","save button clicked", true, driver);
-		driver.switchTo().activeElement();
-		return new InteractiveMapPageObject(driver);
-	}
-
 	public void typePinName(String pinName) {
 		waitForElementByElement(pinNameField);
 		pinNameField.sendKeys(pinName);
@@ -113,6 +106,7 @@ public class AddPinComponentObject extends BasePageObject{
 		associatedArticleField.sendKeys(associatedArticleName);
 		PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in", true);
 	}
+	
 	public void clickSuggestion(int opt) {
 		waitForElementVisibleByElement(suggestedOption.get(opt));
 		WebElement suggestionSelected = suggestedOption.get(opt);

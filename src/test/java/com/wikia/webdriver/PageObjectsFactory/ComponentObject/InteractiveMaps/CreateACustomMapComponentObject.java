@@ -41,7 +41,6 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	@FindBy(css = "#intMapTileSetsList")
 	private WebElement templatesBox;
 
-	
 	String beforeImageName = "116x116-";
 	
 	public TemplateComponentObject selectFileToUpload(String file) {

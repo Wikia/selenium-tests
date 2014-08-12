@@ -81,6 +81,12 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private List<WebElement> enabledPinTypesCollection;
 	@FindBy(css = ".point-type")
 	private List<WebElement> disabledPinTypesCollection;
+	@FindBy(css = ".leaflet-control-zoom-in")
+	private WebElement zoomInButton;
+	@FindBy(css = ".leaflet-control-zoom-out")
+	private WebElement zoomOutButton;
+	@FindBy(css = ".leaflet-map-pane.leaflet-zoom-anim")
+	private WebElement zoomAnim;
 	
 	public void clickEmbedMapCodeButton() {
 		driver.switchTo().frame(mapFrame);
@@ -188,14 +194,35 @@ public class InteractiveMapPageObject extends BasePageObject{
 	    editPinTypesButton.click();
 		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button clicked", true, driver);
 		driver.switchTo().defaultContent();
-	}	
+	}
+	
+	public void clickZoomInButton() {
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(zoomInButton);
+		zoomInButton.click();
+		waitForElementByElement(zoomAnim);
+		PageObjectLogging.log("clickZoomInButton", "Map zoom in was clicked", true, driver);
+	}
+	
+	public void clickZoomOutButton() {
+		waitForElementByElement(zoomOutButton);
+		zoomOutButton.click();
+		waitForElementByElement(zoomAnim);
+		PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
+	}
+	
+	public void verifyZoomMap(){
+		waitForElementByElement(zoomAnim);
+		PageObjectLogging.log("verifyZoomMap", "Map was zoomed", true, driver);
+	}
+	
 	
 	
 	public String getEmbedMapWikiCode() {
 		return "<imap map-id='"+mapFrame.getAttribute("data-mapid")+"'/>";
 	}
 	
-	public String getEmbedMapID(){
+	public String getEmbedMapID() {
 		return mapFrame.getAttribute("data-mapid");
 	}
 	

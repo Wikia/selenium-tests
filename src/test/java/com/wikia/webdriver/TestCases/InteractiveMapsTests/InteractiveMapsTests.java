@@ -2,13 +2,8 @@ package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
 
 import org.testng.annotations.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
@@ -196,10 +191,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	@Test(groups = {"InteractiveMaps_011","InteractiveMapTests","InteractiveMaps"})
 	public void InteractiveMaps_011_VerifyEmbedMapInWikiaPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-	
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(3);
 		selectedMap.verifyMapOpened();
 		String wikiEmbedCode = selectedMap.getEmbedMapWikiCode();
@@ -297,5 +290,16 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.medium);
 		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.large);
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.large);
+	}
+	
+	@Test(groups = {"InteractiveMaps_016", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_016_VerifyMapZoomOptions(){
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		selectedMap.clickZoomInButton();
+		selectedMap.clickZoomOutButton();
 	}
 }
