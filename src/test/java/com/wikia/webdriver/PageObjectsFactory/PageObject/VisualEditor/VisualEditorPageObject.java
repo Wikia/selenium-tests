@@ -18,6 +18,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertLi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -58,6 +59,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement previewImage;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
 	private WebElement previewVideoWrapper;
+	@FindBy(css=".ve-ui-desktopContext-menu .oo-ui-icon-edit")
+	private WebElement mediaContextMenu;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -170,6 +173,18 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(mediaNode);
 		Assertion.assertNumber(expected, mediaNodes.size(), "Checking the correct number of video nodes added");
 		PageObjectLogging.log("verifyVideos", mediaNodes.size() + " videos displayed", true);
+	}
+
+	public VisualEditorMediaSettingsDialog openMediaSettings () {
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+		clickContextMenu();
+		return new VisualEditorMediaSettingsDialog(driver);
+	}
+
+	private void clickContextMenu() {
+		waitForElementClickableByElement(mediaContextMenu);
+		mediaContextMenu.click();
 	}
 
 	public void typeReturn() {
