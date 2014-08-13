@@ -45,8 +45,6 @@ import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
