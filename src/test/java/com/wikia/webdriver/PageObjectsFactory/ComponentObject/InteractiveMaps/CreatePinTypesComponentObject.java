@@ -6,7 +6,6 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 
@@ -99,9 +98,5 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	public void verifyErrorsExist() {
 		waitForElementByElement(pinTypesError);
 		Assertion.assertEquals(false,pinTypesError.getText().isEmpty());
-	}
-	
-	public void verifyErrorsNotExist() {
-		Assertion.assertEquals(true,pinTypesError.getText().isEmpty());
 	}
 }

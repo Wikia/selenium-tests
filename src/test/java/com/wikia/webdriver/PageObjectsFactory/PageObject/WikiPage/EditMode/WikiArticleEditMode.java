@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.ArrayList;
-import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -423,7 +422,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().defaultContent();
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("typeInContent", 
+		PageObjectLogging.log(
+				"typeInContent", 
 				"content type into source mode textarea",
 				true,
 				driver

@@ -105,7 +105,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		Assertion.assertEquals(mapTitle, createdMapTitle.getText());
 	}
 	
-	public void verifyCreatedPinTypesForNewMap(String pinName) {
+	public void verifyCreatedPinTypesForNewMap() {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(filterBox);
 		Assertion.assertEquals(1, createdPinCells.size());
@@ -170,7 +170,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 				break;
 		}
 	}
-	
+
 	public void clickEditPinTypesButton() {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(editPinTypesButton);
@@ -212,7 +212,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().frame(mapFrame);		
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex).click();
-		PageObjectLogging.log("clickOnSingleEnabledCategory","Single enabled category was clicked", true);
+		PageObjectLogging.log("clickOnSingleEnabledCategory", "Single enabled category was clicked", true);
 		driver.switchTo().activeElement();
 	}
 	
@@ -221,7 +221,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().frame(mapFrame);		
 		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		disabledPinTypesCollection.get(0).click();
-		PageObjectLogging.log("clickOnSingleDisabledCategory","Single disabled category was clicked", true);
+		PageObjectLogging.log("clickOnSingleDisabledCategory", "Single disabled category was clicked", true);
 		driver.switchTo().activeElement();
 	}
 	
@@ -230,7 +230,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().frame(mapFrame);		
 		waitForElementByElement(allPinTypes);
 		allPinTypes.click();
-		PageObjectLogging.log("clickOnAllCategories","All categories was clicked", true);
+		PageObjectLogging.log("clickOnAllCategories", "All categories was clicked", true);
 		driver.switchTo().activeElement();
 	}
 	
@@ -238,18 +238,18 @@ public class InteractiveMapPageObject extends BasePageObject{
 		waitForElementByElement(allPinTypes);
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		if(allPinTypes.getAttribute("class").contains("enabled")) {
-			PageObjectLogging.log("verifyAllPointTypesIsCheck","All pin types was checked", true, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was checked", true, driver);
 		}else {
-			PageObjectLogging.log("verifyAllPointTypesIsCheck","All pin types was unchecked", false, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was unchecked", false, driver);
 		}
 	}
 	
 	public void verifyAllPinTypesIsUncheck() {
 		waitForElementByElement(allPinTypes);
 		if(allPinTypes.getAttribute("class").contains("enabled")) {
-			PageObjectLogging.log("verifyAllPointTypesIsUnCheck","All pin types was checked", false, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was checked", false, driver);
 		}else {
-			PageObjectLogging.log("verifyAllPointTypesIsUnCheck","All pin types was unchecked", true, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was unchecked", true, driver);
 		}
 	}
 	

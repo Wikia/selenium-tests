@@ -24,7 +24,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
 	public void ForgottenPassword_001_dropdown() {
 		String userName = credentials.userNameForgottenPassword;
-
+		System.out.println(userName);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		DropDownComponentObject dropdown = new DropDownComponentObject(driver);

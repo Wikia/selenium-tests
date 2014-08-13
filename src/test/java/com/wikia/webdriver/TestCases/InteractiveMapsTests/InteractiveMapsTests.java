@@ -57,10 +57,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 public class InteractiveMapsTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
-	private String test1 = "test";
-	private String test2 = "1234567890123123123123213";
 	
-	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"},
+	enabled = false)
 	public void InteractiveMaps_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -77,7 +76,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
-		createdMap.verifyCreatedPinTypesForNewMap(InteractiveMapsContent.pinTypeName);
+		createdMap.verifyCreatedPinTypesForNewMap();
 	}
 
 	@Test(groups = {"InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps"})
@@ -96,7 +95,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
-		createdMap.verifyCreatedPinTypesForNewMap(InteractiveMapsContent.pinTypeName);
+		createdMap.verifyCreatedPinTypesForNewMap();
 	}
 	
 	@Test(groups = {"InteractiveMaps_003", "InteractiveMapTests", "InteractiveMaps"})
@@ -210,10 +209,10 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject createMapDialog = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMapDialog = createMapDialog.clickCustomMap();
-		customMapDialog.typeSearchTile(test1);
-		customMapDialog.verifyTemplateWasFound(test1);
+		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldBeFound);
+		customMapDialog.verifyTemplateWasFound(InteractiveMapsContent.templateNameToSearchShouldBeFound);
 		customMapDialog.clearSearchTitle();
-		customMapDialog.typeSearchTile(test2);
+		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldNotBeFound);
 		customMapDialog.verifyThereIsError();
 	}
 	

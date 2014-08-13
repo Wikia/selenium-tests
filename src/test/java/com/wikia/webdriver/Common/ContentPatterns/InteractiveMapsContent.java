@@ -18,4 +18,6 @@ public class InteractiveMapsContent {
 	public static final int selectedTemplateIndex = 0;
 	public static final String associatedArticleName = "Slid";
 	public static String templateName;
+	public static final String templateNameToSearchShouldBeFound = "test";
+	public static final String templateNameToSearchShouldNotBeFound = "1234567890123123123123213";
 }

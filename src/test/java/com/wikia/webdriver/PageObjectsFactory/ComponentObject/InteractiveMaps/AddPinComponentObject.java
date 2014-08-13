@@ -84,10 +84,6 @@ public class AddPinComponentObject extends BasePageObject{
 		return new InteractiveMapPageObject(driver);
 	}
 	
-	public boolean verifyNoErrorInAddPinDialog() {
-		return errorField.getText().equals("") ? true : false;
-	}
-	
 	public void typePinName(String pinName) {
 		waitForElementByElement(pinNameField);
 		pinNameField.sendKeys(pinName);
