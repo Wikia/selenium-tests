@@ -45,6 +45,7 @@ import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
@@ -204,11 +205,11 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	public String resetForgotPasswordTime(String userName) {
+	public String resetForgotPasswordTime(String userName, String apiToken) {		
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},
-				{"token", Properties.apiToken},
+				{"token", apiToken},
 				{"format", "json"},
 		};
 		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);

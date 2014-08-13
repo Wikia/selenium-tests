@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.LoginTests;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.DropDownComponentObject.DropDownComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -24,13 +25,13 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
 	public void ForgottenPassword_001_dropdown() {
 		String userName = credentials.userNameForgottenPassword;
-
+		
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		DropDownComponentObject dropdown = new DropDownComponentObject(driver);
 		dropdown.openDropDown();
-		dropdown.remindPassword(userName);
-
+		dropdown.remindPassword(userName,credentials.apiToken);
+		
 		dropdown.verifyMessageAboutNewPassword(userName);
 		String newPassword = dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		dropdown.openDropDown();
@@ -51,7 +52,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 	)
 	public void ForgottenPassword_002_specialPage_QAART_358() {
 		String userName = credentials.userNameForgottenPassword2;
-
+		
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
