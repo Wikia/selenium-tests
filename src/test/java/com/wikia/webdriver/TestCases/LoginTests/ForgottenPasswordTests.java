@@ -55,7 +55,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
-		login.remindPassword(userName);
+		login.remindPassword(userName, credentials.apiToken);
 		login.verifyMessageAboutNewPassword(userName);
 		String newPassword = login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		login.login(userName, newPassword);
