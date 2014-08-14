@@ -29,7 +29,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		base.openWikiPage(wikiURL);
 		DropDownComponentObject dropdown = new DropDownComponentObject(driver);
 		dropdown.openDropDown();
-		dropdown.remindPassword(userName,credentials.apiToken);
+		dropdown.remindPassword(userName, credentials.apiToken);
 		
 		dropdown.verifyMessageAboutNewPassword(userName);
 		String newPassword = dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
