@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -297,5 +298,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public Point getVideoSWHandle() {
 		return SWResizeHandle.getLocation();
+	}
+
+	public void verifyVideoResized(Dimension source) {
+		verifyElementResized(source, mediaNode);
+	}
+
+	public Dimension getVideoDimension() {
+		return mediaNode.getSize();
 	}
 }

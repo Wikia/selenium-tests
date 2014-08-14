@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -101,7 +102,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
 	)
-	public void VEMediaTests_005_resizeVideo() {
+	public void VEMediaTests_005_resizeVideoWithHandle() {
 		int numOfVideo = 1;
 
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
@@ -113,5 +114,25 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		Point source = ve.getVideoSWHandle();
 		ve.randomResizeOnMedia();
 		ve.verifyVideoSWHandleMoved(source);
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
+	)
+	public void VEMediaTests_006_resizeVideoWithSetting() {
+		int numOfVideo = 1;
+
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.addExistingMedia(numOfVideo);
+		ve.verifyVideos(numOfVideo);
+		Dimension source = ve.getVideoDimension();
+		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
+		mediaSettingsDialog.selectAdvancedSettings();
+		mediaSettingsDialog.setCustomSize(250);
+		mediaSettingsDialog.clickApplyChangesButton();
+		ve.verifyVideoResized(source);
 	}
 }
