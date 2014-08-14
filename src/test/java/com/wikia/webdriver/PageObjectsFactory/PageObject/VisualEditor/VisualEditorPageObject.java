@@ -264,4 +264,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
 		PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
 	}
+
+	public void selectMedia() {
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+	}
 }

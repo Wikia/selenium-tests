@@ -8,13 +8,13 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -30,6 +30,7 @@ import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import com.wikia.webdriver.Common.Core.Purge.PurgeMethod;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -760,4 +761,19 @@ public class BasePageObject{
 		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
 	}
 
+	public void verifyElementMoved(Point source, WebElement element) {
+		Point target = element.getLocation();
+		if (source.x == target.x && source.y == target.y) {
+			Assertion.fail(
+				"Element did not move. Old coordinate (" + source.x + "," + source.y + ") " +
+					"New coordinate (" + target.x + "," + target.y + ")"
+			);
+		}
+		PageObjectLogging.log(
+			"verifyElementMoved", "Element did move. From (" + source.x + "," + source.y + ") to ("
+				+ target.x + ","+target.y + ")",
+			true,
+			driver
+		);
+	}
 }

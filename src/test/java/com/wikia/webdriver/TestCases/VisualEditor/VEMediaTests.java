@@ -96,4 +96,17 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		ve = mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoCaption(captionText);
 	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
+	)
+	public void VEMeaTests_005_resizeVideo() {
+		int numOfVideo = 1;
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.addExistingMedia(numOfVideo);
+		ve.verifyVideos(numOfVideo);
+	}
 }
