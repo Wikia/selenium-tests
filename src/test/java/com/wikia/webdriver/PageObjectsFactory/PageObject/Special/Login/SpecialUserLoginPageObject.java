@@ -92,10 +92,10 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		clickLoginButton();
 	}
 
-	public void remindPassword(String name){
+	public void remindPassword(String name, String apiToken){
 		Assertion.assertEquals(
 			ApiActions.apiActionForgotPasswordResponse,
-			resetForgotPasswordTime(name));
+			resetForgotPasswordTime(name, apiToken));
 		typeInUserName(name);
 		clickForgotPasswordLink();
 	}
