@@ -22,6 +22,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-1335 Previewing image from VE's media dialog
  * VE-1336 Uploading an image
  * VE-1334 Adding caption to a media
+ * VE-1333 Resizing a media with the highlight handle
+ * VE-1333 Resizing a media with the advance setting from the media dialog
  */
 
 public class VEMediaTests extends NewTestTemplateBeforeClass {
@@ -116,7 +118,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
+		groups = {"VEMediaTests", "VEMediaTests_006", "VEResizeVideo"}
 	)
 	public void VEMediaTests_006_resizeVideoWithSetting() {
 		int numOfVideo = 1;
