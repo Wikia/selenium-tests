@@ -27,8 +27,10 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	private WebElement captionEditArea;
 	@FindBy(css=".oo-ui-window-foot .oo-ui-labeledElement-label")
 	private WebElement applyChangesButton;
+	@FindBy(css=".ve-ui-dimensionsWidget input")
+	private WebElement customSizeInput;
 
-	private By labeledElementBy = By.cssSelector("oo-ui-labeledElement-label");
+	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
 
 	public VisualEditorMediaSettingsDialog(WebDriver driver) {
 		super(driver);
@@ -47,7 +49,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	public void selectAdvancedSettings() {
 		waitForElementVisibleByElement(mediaSettingsIFrame);
 		driver.switchTo().frame(mediaSettingsIFrame);
-		WebElement advancedSetting = outlineMenuItems.get(GENERAL).findElement(labeledElementBy);
+		WebElement advancedSetting = outlineMenuItems.get(ADVANCED).findElement(labeledElementBy);
 		waitForElementClickableByElement(advancedSetting);
 		advancedSetting.click();
 		PageObjectLogging.log("selectAdvancedSettings", "Advanved settings is selected", true);
@@ -81,5 +83,20 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 		applyChangesButton.click();
 		driver.switchTo().defaultContent();
 		return new VisualEditorPageObject(driver);
+	}
+
+	private void typeCustomSize(int size) {
+		waitForElementVisibleByElement(customSizeInput);
+		customSizeInput.clear();
+		customSizeInput.sendKeys(Integer.toString(size));
+		PageObjectLogging.log("typeCustomSize", "Typed " + size + " in the field", true, driver);
+		driver.switchTo().defaultContent();
+	}
+
+	public void setCustomSize(int size) {
+		waitForElementVisibleByElement(mediaSettingsIFrame);
+		driver.switchTo().frame(mediaSettingsIFrame);
+		typeCustomSize(size);
+		driver.switchTo().defaultContent();
 	}
 }
