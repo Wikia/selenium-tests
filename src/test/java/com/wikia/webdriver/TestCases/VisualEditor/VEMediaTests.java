@@ -1,7 +1,6 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -111,9 +110,9 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		mediaDialog = mediaDialog.searchMedia("h");
 		ve = mediaDialog.addExistingMedia(numOfVideo);
 		ve.verifyVideos(numOfVideo);
-		Point source = ve.getVideoSWHandle();
+		Dimension source = ve.getVideoDimension();
 		ve.randomResizeOnMedia();
-		ve.verifyVideoSWHandleMoved(source);
+		ve.verifyVideoResized(source);
 	}
 
 	@Test(
