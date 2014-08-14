@@ -13,6 +13,7 @@ import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
@@ -772,6 +773,27 @@ public class BasePageObject{
 		PageObjectLogging.log(
 			"verifyElementMoved", "Element did move. From (" + source.x + "," + source.y + ") to ("
 				+ target.x + ","+target.y + ")",
+			true,
+			driver
+		);
+	}
+
+	public void verifyElementResized(Dimension source, WebElement element) {
+		Dimension target = element.getSize();
+		int sourceWidth = source.width;
+		int sourceHeight = source.height;
+		int targetWidth = target.width;
+		int targetHeight = target.height;
+
+		if (sourceWidth == targetWidth && sourceHeight == targetHeight) {
+			Assertion.fail(
+				"Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight + ") " +
+					"New dimension (" + targetWidth + "," + targetHeight + ")"
+			);
+		}
+		PageObjectLogging.log(
+			"verifyElementMoved", "Element did resize. From (" + sourceWidth + "," + sourceHeight + ") to ("
+				+ targetWidth + ","+targetHeight + ")",
 			true,
 			driver
 		);
