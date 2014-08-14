@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -63,6 +64,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement mediaContextMenu;
 	@FindBy(css="figure figcaption .caption")
 	private WebElement mediaCaption;
+	@FindBy(css=".ve-ce-resizableNode-swHandle")
+	private WebElement SWResizeHandle;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -268,5 +271,31 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	public void selectMedia() {
 		waitForElementByElement(mediaNode);
 		mediaNode.click();
+	}
+
+	public void randomResizeOnMedia() {
+		int randomX = (int) (Math.random()*100);
+		int randomY = (int) (-Math.random()*100);
+		resizeMedia(randomX, randomY);
+	}
+
+	private void resizeMedia(int xOffSet, int yOffset) {
+		PageObjectLogging.log("resizeMedia", "Before resizing", true, driver);
+		selectMedia();
+		waitForElementVisibleByElement(SWResizeHandle);
+		Actions actions = new Actions(driver);
+		actions
+			.dragAndDropBy(SWResizeHandle, xOffSet, yOffset)
+			.build()
+			.perform();
+		PageObjectLogging.log("resizeMedia", "After resizing", true, driver);
+	}
+
+	public void verifyVideoSWHandleMoved(Point source) {
+		verifyElementMoved(source, SWResizeHandle);
+	}
+
+	public Point getVideoSWHandle() {
+		return SWResizeHandle.getLocation();
 	}
 }
