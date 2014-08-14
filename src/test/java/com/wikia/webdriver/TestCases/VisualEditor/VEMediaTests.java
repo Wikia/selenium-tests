@@ -122,6 +122,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEMediaTests_006_resizeVideoWithSetting() {
 		int numOfVideo = 1;
+		int resizeNumber = 250;
 
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
@@ -132,7 +133,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		Dimension source = ve.getVideoDimension();
 		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
 		mediaSettingsDialog.selectAdvancedSettings();
-		mediaSettingsDialog.setCustomSize(250);
+		mediaSettingsDialog.setCustomSize(resizeNumber);
 		mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoResized(source);
 	}
