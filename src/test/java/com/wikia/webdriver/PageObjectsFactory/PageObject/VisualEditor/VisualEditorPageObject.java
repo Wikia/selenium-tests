@@ -2,9 +2,11 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -18,6 +20,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertLi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -58,6 +61,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement previewImage;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
 	private WebElement previewVideoWrapper;
+	@FindBy(css=".ve-ui-desktopContext-menu .oo-ui-icon-edit")
+	private WebElement mediaContextMenu;
+	@FindBy(css="figure figcaption .caption")
+	private WebElement mediaCaption;
+	@FindBy(css=".ve-ce-resizableNode-swHandle")
+	private WebElement SWResizeHandle;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -172,6 +181,18 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		PageObjectLogging.log("verifyVideos", mediaNodes.size() + " videos displayed", true);
 	}
 
+	public VisualEditorMediaSettingsDialog openMediaSettings () {
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+		clickContextMenu();
+		return new VisualEditorMediaSettingsDialog(driver);
+	}
+
+	private void clickContextMenu() {
+		waitForElementClickableByElement(mediaContextMenu);
+		mediaContextMenu.click();
+	}
+
 	public void typeReturn() {
 		waitForElementVisibleByElement(editArea);
 		editArea.sendKeys(Keys.RETURN);
@@ -238,5 +259,52 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(previewOverlay);
 		waitForElementVisibleByElement(previewImage);
 		PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
+	}
+
+	public void verifyVideoCaption(String caption) {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		waitForElementByElement(mediaCaption);
+		Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
+		PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
+	}
+
+	public void selectMedia() {
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+	}
+
+	public void randomResizeOnMedia() {
+		int randomX = (int) (Math.random()*100);
+		int randomY = (int) (-Math.random()*100);
+		resizeMedia(randomX, randomY);
+	}
+
+	private void resizeMedia(int xOffSet, int yOffset) {
+		PageObjectLogging.log("resizeMedia", "Before resizing", true, driver);
+		selectMedia();
+		waitForElementVisibleByElement(SWResizeHandle);
+		Actions actions = new Actions(driver);
+		actions
+			.dragAndDropBy(SWResizeHandle, xOffSet, yOffset)
+			.build()
+			.perform();
+		PageObjectLogging.log("resizeMedia", "After resizing", true, driver);
+	}
+
+	public void verifyVideoSWHandleMoved(Point source) {
+		verifyElementMoved(source, SWResizeHandle);
+	}
+
+	public Point getVideoSWHandle() {
+		return SWResizeHandle.getLocation();
+	}
+
+	public void verifyVideoResized(Dimension source) {
+		verifyElementResized(source, mediaNode);
+	}
+
+	public Dimension getVideoDimension() {
+		return mediaNode.getSize();
 	}
 }
