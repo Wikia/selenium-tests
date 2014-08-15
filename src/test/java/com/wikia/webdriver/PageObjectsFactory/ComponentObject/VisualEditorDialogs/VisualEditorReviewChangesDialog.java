@@ -9,16 +9,12 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
  * @author Robert 'rochan' Chan
  */
-public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
+public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
-	private WebElement reviewDialogIFrame;
 	@FindBy(css=".secondary .oo-ui-labeledElement-label")
 	private WebElement reviewChangesButton;
 	@FindBy(css=
@@ -26,8 +22,6 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 		"div:not(.oo-ui-flaggableElement-secondary):not(.oo-ui-flaggableElement-constructive) " +
 		".oo-ui-labeledElement-label")
 	private WebElement returnToSaveFormButton;
-	@FindBy(css=".oo-ui-window-head .oo-ui-icon-close")
-	private WebElement closeButton;
 	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle")
 	private WebElement wikiaArticle;
 	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")
@@ -47,45 +41,28 @@ public class VisualEditorReviewChangesDialog extends WikiBasePageObject {
 	}
 
 	public VisualEditorSaveChangesDialog clickReturnToSaveFormButton() {
-		waitForElementVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().frame(reviewDialogIFrame);
+		switchToIFrame();
 		waitForElementClickableByElement(returnToSaveFormButton);
 		returnToSaveFormButton.click();
 		PageObjectLogging.log("clickReturnToSaveFormButton", "Return To Save Form button clicked", true);
-		waitForElementNotVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorSaveChangesDialog(driver);
 	}
 
-	public VisualEditorPageObject clickCloseButton() {
-		waitForElementVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().frame(reviewDialogIFrame);
-		waitForElementClickableByElement(closeButton);
-		closeButton.click();
-		PageObjectLogging.log("clickCloseButton", "Close button clicked", true);
-		waitForElementNotVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().defaultContent();
-		return new VisualEditorPageObject(driver);
-	}
-
 	public void verifyDeletedDiffs(ArrayList<String> targets) {
-		waitForElementVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().frame(reviewDialogIFrame);
+		switchToIFrame();
 		verifyArticleDiffs(targets, DELETE);
-		waitForElementNotVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 	}
 
 	public void verifyAddedDiffs(ArrayList<String> targets) {
-		waitForElementVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().frame(reviewDialogIFrame);
+		switchToIFrame();
 		if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
 			verifyNewArticleDiffs(targets);
 		} else {
 			verifyArticleDiffs(targets, INSERT);
 		}
-		waitForElementNotVisibleByElement(reviewDialogIFrame);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 	}
 
 	private void verifyArticleDiffs(ArrayList<String> targets, int mode) {
