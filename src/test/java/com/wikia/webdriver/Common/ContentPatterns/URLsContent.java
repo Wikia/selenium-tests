@@ -108,7 +108,7 @@ public class URLsContent {
 	// replace %title% with new article name
 	public static final String addArticle = "index.php?title=%title%&action=edit";
 
-	public static final String apiUrl = Global.DOMAIN + "api.php";
+	public static final String apiUrl = "api.php";
 
 	// File Pages
 	public static String fileNameSpace = "File:";

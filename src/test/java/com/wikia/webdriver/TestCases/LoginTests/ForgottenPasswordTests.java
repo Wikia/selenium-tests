@@ -24,22 +24,21 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 
 	public void ForgottenPassword_001_dropdown() {
 		String userName = credentials.userNameForgottenPassword;
-
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		DropDownComponentObject dropdown = new DropDownComponentObject(driver);
 		dropdown.openDropDown();
-		dropdown.remindPassword(userName, credentials.apiToken);
-		
+		dropdown.remindPassword(userName, credentials.apiToken, wikiURL);
+
 		dropdown.verifyMessageAboutNewPassword(userName);
 		String newPassword = dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		dropdown.openDropDown();
 		dropdown.logIn(userName, newPassword);
 		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
-		newPassword = login.setNewPassword();
+		newPassword = login.setNewPassword(credentials.password);
 		login.verifyUserLoggedIn(userName);
 
-		login.logOut(driver);
+		login.logOut(wikiURL);
 		dropdown.openDropDown();
 		dropdown.logIn(userName, newPassword);
 		dropdown.verifyUserLoggedIn(userName);
@@ -55,11 +54,11 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
-		login.remindPassword(userName, credentials.apiToken);
+		login.remindPassword(userName, credentials.apiToken, wikiURL);
 		login.verifyMessageAboutNewPassword(userName);
 		String newPassword = login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		login.login(userName, newPassword);
-		newPassword = login.setNewPassword();
+		newPassword = login.setNewPassword(credentials.password);
 		login.verifyUserLoggedIn(userName);
 
 		login.logOut(wikiURL);

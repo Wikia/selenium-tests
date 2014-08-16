@@ -203,14 +203,14 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	public String resetForgotPasswordTime(String userName, String apiToken) {		
+	public String resetForgotPasswordTime(String userName, String apiToken, String wikiURL) {		
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},
 				{"token", apiToken},
 				{"format", "json"},
 		};
-		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
+		return CommonUtils.sendPost(wikiURL + URLsContent.apiUrl, apiRequestParameters);
 	}
 
 	public void verifyModalLoginAppeared() {

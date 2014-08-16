@@ -92,25 +92,25 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		clickLoginButton();
 	}
 
-	public void remindPassword(String name, String apiToken){
+	public void remindPassword(String name, String apiToken, String wikiURL){
 		Assertion.assertEquals(
 			ApiActions.apiActionForgotPasswordResponse,
-			resetForgotPasswordTime(name, apiToken));
+			resetForgotPasswordTime(name, apiToken, wikiURL));
 		typeInUserName(name);
 		clickForgotPasswordLink();
 	}
 
-	public String setNewPassword() {
-		String password = Properties.password + getTimeStamp();
-		typeInNewPassword(password);
-		retypeInNewPassword(password);
+	public String setNewPassword(String password) {
+		String newPassword = password + getTimeStamp();
+		typeInNewPassword(newPassword);
+		retypeInNewPassword(newPassword);
 		clickLoginButton();
 		PageObjectLogging.log(
 			"setNewPassword",
 			"new password is set",
 			true, driver
 		);
-		return password;
+		return newPassword;
 	}
 
 	public void verifyMessageAboutNewPassword(String userName) {
