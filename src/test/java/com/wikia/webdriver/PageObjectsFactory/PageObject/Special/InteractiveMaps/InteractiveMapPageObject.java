@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -39,12 +40,8 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement refreshButton;
 	@FindBy(css = ".leaflet-draw-draw-marker")
 	private WebElement addPin;
-	@FindBy(css = "")
-	private WebElement tile;
 	@FindBy(css = ".leaflet-control-embed-map-code-button")
 	private WebElement embedMapCodeButton;
-	@FindBy(css = ".leaflet-draw-draw-marker")
-	private WebElement addPinButton;
 	@FindBy(css = "#intMapEmbedMap")
 	private WebElement embedMapDialog;
 	@FindBy(css = ".code-sample.small")
@@ -77,7 +74,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 	
 	public void verifyCreatedMapTitle(String mapTitle) {
 		waitForElementByElement(createdMapTitle);
-		Assert.assertEquals(mapTitle, createdMapTitle.getText());
+		Assertion.assertEquals(mapTitle, createdMapTitle.getText());
 	}
 	
 	public void verifyCreatedPins(String pinName) {

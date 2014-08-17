@@ -65,7 +65,12 @@ public class AddPinComponentObject extends BasePageObject{
 	
 	public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
 		waitForElementByElement(associatedArticleImage);
-		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true, driver);
+		PageObjectLogging.log(
+			"verifyAssociatedArticleImageIsDisplayed",
+			"Associated article image placeholder is visible",
+			true,
+			driver
+		);
 	}
 
 	public InteractiveMapPageObject clickCancelButton() {

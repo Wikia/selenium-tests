@@ -55,11 +55,6 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	Credentials credentials = config.getCredentials();
 	int selectedTemplateIndex = 1;
 	int selectedMapIndex = 0;
-	
-	//move to other class:
-	
-	private String templateName;
-	private final String associatedArticleName = "Slid";
 
 	@Test(
 		groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"},
@@ -74,7 +69,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		TemplateComponentObject template = customMap.selectFileToUpload(PageContent.file);
 		template.verifyTemplateImagePreview();
 		template.typeMapName(InteractiveMapsContent.mapName);
-		templateName = base.getTimeStamp();
+		String templateName = base.getTimeStamp();
 		template.typeTemplateName(templateName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
 		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName);
@@ -165,7 +160,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.verifyPinTitleFieldIsDisplayed();
 		pinDialog.typePinName(InteractiveMapsContent.pinName);
 		String placeholderSrc = pinDialog.getAssociatedArticleImageSrc();
-		pinDialog.typeAssociatedArticle(associatedArticleName);
+		pinDialog.typeAssociatedArticle(InteractiveMapsContent.associatedArticleName);
 		pinDialog.clickSugggestion(0);
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
 		pinDialog.verifyImage();

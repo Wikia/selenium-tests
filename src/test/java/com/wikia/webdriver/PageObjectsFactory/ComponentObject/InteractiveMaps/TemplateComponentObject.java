@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
-import org.testng.Assert;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -64,6 +64,6 @@ public class TemplateComponentObject extends BasePageObject{
 
 	public void verifyTemplateImage(String selectedTemplateName) {
 		waitForElementByElement(templateImagePreview);
-		Assert.assertTrue(templateImagePreview.getAttribute("src").endsWith(selectedTemplateName));
+		Assertion.assertTrue(templateImagePreview.getAttribute("src").endsWith(selectedTemplateName));
 	}
 }
