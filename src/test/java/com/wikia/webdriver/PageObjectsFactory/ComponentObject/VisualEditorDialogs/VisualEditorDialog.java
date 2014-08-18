@@ -42,8 +42,4 @@ public class VisualEditorDialog extends WikiBasePageObject{
 		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
-
-	public WebElement getIFrame() {
-		return iframe;
-	}
 }
