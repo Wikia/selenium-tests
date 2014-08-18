@@ -98,6 +98,10 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		mediaSettingsDialog.typeCaption(captionText);
 		ve = mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoCaption(captionText);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -115,6 +119,10 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		Dimension source = ve.getVideoDimension();
 		ve.randomResizeOnMedia();
 		ve.verifyVideoResized(source);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 
 	@Test(
@@ -136,5 +144,9 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		mediaSettingsDialog.setCustomSize(resizeNumber);
 		mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoResized(source);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 }
