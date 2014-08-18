@@ -99,6 +99,12 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement pinPopupImage;
 	@FindBy(css = ".wikia-interactive-map-wrapper")
 	private WebElement mapPane;
+	@FindBy(css = ".leaflet-tile-loaded")
+	private List<WebElement> mapImagesCollection;
+	@FindBy(css = ".description")
+	private WebElement pinPopUp;
+	@FindBy(css = ".code-sample")
+	private WebElement embedCode;
 	
 	public void clickEmbedMapCodeButton() {
 		driver.switchTo().frame(mapFrame);
@@ -148,13 +154,8 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(addPin);
 		addPin.click();
-//		I tried to do it in another way
-//		Actions actions = new Actions(driver);
-//		actions.moveByOffset(-240, -240).click();
-//		actions.moveToElement(map).click();
-//		actions.release().perform();
-		
-		map.click();
+		waitForElementByElement(mapImagesCollection.get(0));
+		mapImagesCollection.get(0).click();
 		driver.switchTo().defaultContent();
 		return new AddPinComponentObject(driver);
 	}
@@ -189,6 +190,11 @@ public class InteractiveMapPageObject extends BasePageObject{
 				waitForElementVisibleByElement(embedMapCodeLarge);
 				break;
 		}
+	}
+	
+	public String getEmbedMapCode() {
+		waitForElementByElement(embedCode);
+		return embedCode.getText();
 	}
 	
 	public void clickEditPinTypesButton() {
@@ -310,15 +316,20 @@ public class InteractiveMapPageObject extends BasePageObject{
 		PageObjectLogging.log("verifyControlButtonsAreVisible", "embedMap, zoom in/out buttons are visible", true);
 	}
 	
-	public void verifyPinPopupImageIsVisible(){
+	public void verifyPinPopupImageIsVisible() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		Assertion.assertEquals(checkIfElementOnPage(pinPopupImage), true);
 	}
 	
-	public void verifyPinPopupImageNotExist(){
+	public void verifyPinPopupImageNotExist() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		Assertion.assertEquals(checkIfElementOnPage(pinPopupImage), false);
+	}
+	
+	public void verifyPinPopUp() {
+		Assertion.assertEquals(checkIfElementOnPage(pinPopUp), true);
+		Assertion.assertEquals(checkIfElementOnPage(pinEditLink), true);
 	}
 }

@@ -13,6 +13,7 @@ public class InteractiveMapsContent {
 			+ "placerat, mauris est rhoncus turpis, vitae dapibus augue enim vel lectus. "
 			+ "Pellentesque consectetur gravida mi in lobortis. Aliquam amet";
 	public static final String embedMapArticleName = "embedMap";
+	public static final String embedMapOutOfWikia = "embedMapOutOfWikia";
 	public static final int pinTypeIndex = 0;
 	public static final int selectedMapIndex = 0;
 	public static final int selectedTemplateIndex = 0;

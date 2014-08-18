@@ -16,6 +16,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatti
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
@@ -150,6 +151,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement standardLayoutPageRadioButton;
 	@FindBy(css="#WikiaPageHeader .chevron")
 	private WebElement openEditDropdown;
+	@FindBy(css=".view")
+	private WebElement viewEmbedMapButton;
 
 	final String editButtonSelector = ".article-comm-edit";
 	final String deleteButtonSelector = ".article-comm-delete";
@@ -787,5 +790,12 @@ public class ArticlePageObject extends WikiBasePageObject {
 		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
 		articleModal.createPageWithBlankLayout("");
 		return new SourceEditModePageObject(driver);
+	}
+	
+	public EmbedMapComponentObject clickViewEmbedMap(){
+		waitForElementByElement(viewEmbedMapButton);
+		viewEmbedMapButton.click();
+		driver.switchTo().activeElement();
+		return new EmbedMapComponentObject(driver);
 	}
 }
