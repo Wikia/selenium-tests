@@ -148,11 +148,13 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(addPin);
 		addPin.click();
-		Actions actions = new Actions(driver);
+//		I tried to do it in another way
+//		Actions actions = new Actions(driver);
 //		actions.moveByOffset(-240, -240).click();
-		actions.moveToElement(map).click();
-		actions.release().perform();
-//		map.click();
+//		actions.moveToElement(map).click();
+//		actions.release().perform();
+		
+		map.click();
 		driver.switchTo().defaultContent();
 		return new AddPinComponentObject(driver);
 	}
