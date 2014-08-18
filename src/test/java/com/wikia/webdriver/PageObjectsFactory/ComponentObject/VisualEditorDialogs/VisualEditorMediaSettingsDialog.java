@@ -15,8 +15,10 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	private final int GENERAL = 0;
 	private final int ADVANCED = 1;
 
-	@FindBy(css=".oo-ui-outlineWidget")
-	private WebElement outlineMenu;
+	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
+	private WebElement mediaSettingsIFrame;
+	@FindBy(css=".oo-ui-icon-close")
+	private WebElement closeButton;
 	@FindBy(css=".oo-ui-outlineWidget li")
 	private List<WebElement> outlineMenuItems;
 	@FindBy(css=".ve-ce-documentNode")
