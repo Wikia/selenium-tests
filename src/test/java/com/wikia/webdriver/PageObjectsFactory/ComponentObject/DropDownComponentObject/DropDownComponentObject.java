@@ -55,10 +55,10 @@ public class DropDownComponentObject extends WikiBasePageObject {
 		);
 	}
 
-	public void remindPassword(String userName) {
+	public void remindPassword(String userName, String apiToken) {
 		Assertion.assertEquals(
 				ApiActions.apiActionForgotPasswordResponse,
-				resetForgotPasswordTime(userName));
+				resetForgotPasswordTime(userName, apiToken));
 		fillUserNameInput(userName);
 		waitForElementByElement(formForgotPasswordLink);
 		scrollAndClick(formForgotPasswordLink);
