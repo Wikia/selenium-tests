@@ -18,6 +18,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertLi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -58,6 +59,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement previewImage;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
 	private WebElement previewVideoWrapper;
+	@FindBy(css=".ve-ui-desktopContext-menu .oo-ui-icon-edit")
+	private WebElement mediaContextMenu;
+	@FindBy(css="figure figcaption .caption")
+	private WebElement mediaCaption;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -172,6 +177,18 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		PageObjectLogging.log("verifyVideos", mediaNodes.size() + " videos displayed", true);
 	}
 
+	public VisualEditorMediaSettingsDialog openMediaSettings () {
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+		clickContextMenu();
+		return new VisualEditorMediaSettingsDialog(driver);
+	}
+
+	private void clickContextMenu() {
+		waitForElementClickableByElement(mediaContextMenu);
+		mediaContextMenu.click();
+	}
+
 	public void typeReturn() {
 		waitForElementVisibleByElement(editArea);
 		editArea.sendKeys(Keys.RETURN);
@@ -238,5 +255,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(previewOverlay);
 		waitForElementVisibleByElement(previewImage);
 		PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
+	}
+
+	public void verifyVideoCaption(String caption) {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		waitForElementByElement(mediaCaption);
+		Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
+		PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
 	}
 }

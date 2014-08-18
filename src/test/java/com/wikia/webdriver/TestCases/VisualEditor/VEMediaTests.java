@@ -8,6 +8,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -18,7 +19,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  *
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
- *
+ * VE-1336 Uploading an image
+ * VE-1334 Adding caption to a media
  */
 
 public class VEMediaTests extends NewTestTemplateBeforeClass {
@@ -75,5 +77,23 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_004", "VEPreviewVideo"}
+	)
+	public void VEMediaTests_004_editCaption() {
+		String captionText = "test123";
+
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.addExistingMedia(1);
+		ve.verifyVideo();
+		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
+		mediaSettingsDialog.typeCaption(captionText);
+		ve = mediaSettingsDialog.clickApplyChangesButton();
+		ve.verifyVideoCaption(captionText);
 	}
 }
