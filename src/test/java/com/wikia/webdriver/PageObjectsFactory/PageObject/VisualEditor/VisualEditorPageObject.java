@@ -2,7 +2,6 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -64,8 +63,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement mediaContextMenu;
 	@FindBy(css="figure figcaption .caption")
 	private WebElement mediaCaption;
-	@FindBy(css=".ve-ce-resizableNode-swHandle")
-	private WebElement SWResizeHandle;
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -266,36 +263,5 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(mediaCaption);
 		Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
 		PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
-	}
-
-	public void selectMedia() {
-		waitForElementByElement(mediaNode);
-		mediaNode.click();
-	}
-
-	public void randomResizeOnMedia() {
-		int randomX = (int) (Math.random()*100);
-		int randomY = (int) (-Math.random()*100);
-		resizeMedia(randomX, randomY);
-	}
-
-	private void resizeMedia(int xOffSet, int yOffset) {
-		PageObjectLogging.log("resizeMedia", "Before resizing", true, driver);
-		selectMedia();
-		waitForElementVisibleByElement(SWResizeHandle);
-		Actions actions = new Actions(driver);
-		actions
-			.dragAndDropBy(SWResizeHandle, xOffSet, yOffset)
-			.build()
-			.perform();
-		PageObjectLogging.log("resizeMedia", "After resizing", true, driver);
-	}
-
-	public void verifyVideoResized(Dimension source) {
-		verifyElementResized(source, mediaNode);
-	}
-
-	public Dimension getVideoDimension() {
-		return mediaNode.getSize();
 	}
 }

@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
-import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -22,8 +21,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-1335 Previewing image from VE's media dialog
  * VE-1336 Uploading an image
  * VE-1334 Adding caption to a media
- * VE-1333 Resizing a media with the highlight handle
- * VE-1333 Resizing a media with the advance setting from the media dialog
  */
 
 public class VEMediaTests extends NewTestTemplateBeforeClass {
@@ -98,43 +95,5 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		mediaSettingsDialog.typeCaption(captionText);
 		ve = mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoCaption(captionText);
-	}
-
-	@Test(
-		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
-	)
-	public void VEMediaTests_005_resizeVideoWithHandle() {
-		int numOfVideo = 1;
-
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
-		VisualEditorAddMediaDialog mediaDialog =
-			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-		mediaDialog = mediaDialog.searchMedia("h");
-		ve = mediaDialog.addExistingMedia(numOfVideo);
-		ve.verifyVideos(numOfVideo);
-		Dimension source = ve.getVideoDimension();
-		ve.randomResizeOnMedia();
-		ve.verifyVideoResized(source);
-	}
-
-	@Test(
-		groups = {"VEMediaTests", "VEMediaTests_006", "VEResizeVideo"}
-	)
-	public void VEMediaTests_006_resizeVideoWithSetting() {
-		int numOfVideo = 1;
-		int resizeNumber = 250;
-
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
-		VisualEditorAddMediaDialog mediaDialog =
-			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-		mediaDialog = mediaDialog.searchMedia("h");
-		ve = mediaDialog.addExistingMedia(numOfVideo);
-		ve.verifyVideos(numOfVideo);
-		Dimension source = ve.getVideoDimension();
-		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
-		mediaSettingsDialog.selectAdvancedSettings();
-		mediaSettingsDialog.setCustomSize(resizeNumber);
-		mediaSettingsDialog.clickApplyChangesButton();
-		ve.verifyVideoResized(source);
 	}
 }
