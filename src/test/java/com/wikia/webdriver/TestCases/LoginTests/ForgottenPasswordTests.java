@@ -29,8 +29,8 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		base.openWikiPage(wikiURL);
 		DropDownComponentObject dropdown = new DropDownComponentObject(driver);
 		dropdown.openDropDown();
-		dropdown.remindPassword(userName);
-
+		dropdown.remindPassword(userName, credentials.apiToken);
+		
 		dropdown.verifyMessageAboutNewPassword(userName);
 		String newPassword = dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		dropdown.openDropDown();
@@ -55,7 +55,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		SpecialUserLoginPageObject login = base.openSpecialUserLogin(wikiURL);
-		login.remindPassword(userName);
+		login.remindPassword(userName, credentials.apiToken);
 		login.verifyMessageAboutNewPassword(userName);
 		String newPassword = login.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		login.login(userName, newPassword);
