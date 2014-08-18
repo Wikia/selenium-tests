@@ -92,7 +92,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		clickLoginButton();
 	}
 
-	public void remindPassword(String name, String apiToken, String wikiURL){
+	public void remindPassword(String name, String apiToken, String wikiURL) {
 		Assertion.assertEquals(
 			ApiActions.apiActionForgotPasswordResponse,
 			resetForgotPasswordTime(name, apiToken, wikiURL));
