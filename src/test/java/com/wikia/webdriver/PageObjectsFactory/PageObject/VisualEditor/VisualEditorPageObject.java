@@ -6,6 +6,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -289,6 +290,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			.build()
 			.perform();
 		PageObjectLogging.log("resizeMedia", "After resizing", true, driver);
+	}
+
+	public void verifyVideoSWHandleMoved(Point source) {
+		verifyElementMoved(source, SWResizeHandle);
+	}
+
+	public Point getVideoSWHandle() {
+		return SWResizeHandle.getLocation();
 	}
 
 	public void verifyVideoResized(Dimension source) {
