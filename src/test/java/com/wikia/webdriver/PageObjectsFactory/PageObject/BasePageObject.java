@@ -394,7 +394,20 @@ public class BasePageObject{
 			PageObjectLogging.log("sendKeys", e.toString(), false);
 		}
 	}
-
+	
+	//You can get access to hidden elements by changing class
+	public void unhideElementByClassChange(String elementName,String classWithoutHidden, int... OptionalIndex){
+		int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('class', '" + classWithoutHidden + "');");
+	}
+	
+	//You can get access to hidden elements by type
+	public void unhideElementByTypeChange(String elementName, String newType, int... OptionalIndex){
+			int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('type', '" + newType + "');");
+	}
 	/**
 	 * Checks if the element is visible on browser
 	 *

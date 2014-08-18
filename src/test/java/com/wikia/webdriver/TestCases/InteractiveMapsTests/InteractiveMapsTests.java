@@ -2,7 +2,6 @@ package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
 
 import org.testng.annotations.Test;
-
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -18,6 +17,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
+
 /**
  * Author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
@@ -25,15 +25,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
  * Date: 20.06.14
  * Time: 16:53
     - Special:Maps page
-	IM01: Creating a custom new map based on new image upload
-	IM02: Create a custom new map based on existing template
-	IM03: Create a real map flow
-	IM04: Click on a map and verify correct redirect and URL
-	IM05: Click create a map button as anon and make sure log in modal is displayed
+	IM01: Creating a custom new map based on new image upload v 
+	IM02: Create a custom new map based on existing template v
+	IM03: Create a real map flow v
+	IM04: Click on a map and verify correct redirect and URL v
+	IM05: Click create a map button as anon and make sure log in modal is displayed v
 	
 	- PIN Creation - Add a Pin modal
-	IM06: Verify it is possible to add a pin to the map and that add pin dialog has all required elements
-	IM07: Verify removing a suggestion of article with image will remove image from placeholder
+	IM06: Verify it is possible to add a pin to the map and that add pin dialog has all required elements v
+	IM07: Verify removing a suggestion of article with image will remove image from placeholder v
 	
 	-Edit PIN Types Modal       
 	IM08: Check image error validation for small size and non-image extension
@@ -52,6 +52,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
 		Some categories are checked (so "All categories" is unchecked) and user clicks "All categories": We check all categories and "All categories".		
 	IM15: Verify embed map code dialog works correctly from Special:Map page
 	IM16: Embed a map outside of wikia and verify there is a branding footer, zoom in/out options and filters box collapsibility
+	
+	Added to this list by Łukasz Nowak
+	IM17: Verify zoom in and zoom out of map
+	IM18: => POIETC11: Verify pin data is correctly updated after saving (T1 priority)
 	*/
 
 public class InteractiveMapsTests extends NewTestTemplate{
@@ -77,6 +81,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
 		createdMap.verifyCreatedPinTypesForNewMap();
+		createdMap.verifyControButtonsAreVisible();
 	}
 
 	@Test(groups = {"InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps"})
@@ -96,6 +101,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
 		createdMap.verifyCreatedPinTypesForNewMap();
+		createdMap.verifyControButtonsAreVisible();
 	}
 	
 	@Test(groups = {"InteractiveMaps_003", "InteractiveMapTests", "InteractiveMaps"})
@@ -111,6 +117,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,InteractiveMapsContent.pinTypeIndex);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
+		createdMap.verifyControButtonsAreVisible();
 	}
 
 	@Test(groups = {"InteractiveMaps_004", "InteractiveMapTests", "InteractiveMaps"})
@@ -164,7 +171,22 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinDialog.typeAssociatedArticle(InteractiveMapsContent.associatedArticleName);
 		pinDialog.clickSuggestion(0);
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
-		pinDialog.verifyImage();
+	}
+	
+	@Test(groups = {"InteractiveMaps_008", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_008_VerifyImageValidationInPinTypeModal() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		selectedMap.clickEditPinTypesButton();
+		CreatePinTypesComponentObject pinTypeModal = new CreatePinTypesComponentObject(driver);
+		pinTypeModal.verifyPinTypesDialog();
+		pinTypeModal.selectFileToUpload(PageContent.smallFile, "Small image");
+		pinTypeModal.verifyErrorsExist();
+		pinTypeModal.selectFileToUpload(PageContent.brokenExtensionFile, "Image with wrong extension");
+		pinTypeModal.verifyErrorsExist();
 	}
 		
 	@Test(groups = {"InteractiveMaps_009", "InteractiveMapTests", "InteractiveMaps"})
@@ -211,6 +233,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		CreateACustomMapComponentObject customMapDialog = createMapDialog.clickCustomMap();
 		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldBeFound);
 		customMapDialog.verifyTemplateWasFound(InteractiveMapsContent.templateNameToSearchShouldBeFound);
+		customMapDialog.verifyThereIsNoError();
 		customMapDialog.clearSearchTitle();
 		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldNotBeFound);
 		customMapDialog.verifyThereIsError();
@@ -249,7 +272,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnAllPinTypes();
 		selectedMap.verifyAllPinTypesIsUncheck();
-		selectedMap.verifyPinTypesAreUnchecked();
+		selectedMap.verifyPinTypesAreUncheck();
 	}
 	
 	@Test(groups = {"InteractiveMaps_014D","InteractiveMaps_014","InteractiveMapTests","InteractiveMaps"})
@@ -263,8 +286,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyAllPinTypesIsUncheck();
 		selectedMap.clickOnAllPinTypes();
 		selectedMap.verifyAllPinTypesIsCheck();
-		selectedMap.verifyPinTypesAreChecked();
-		selectedMap.verifyPinTypesAreUnchecked();
+		selectedMap.verifyPinTypesAreCheck();
+		selectedMap.verifyPinTypesAreUncheck();
 	}
 	
 	@Test(groups = {"InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps"})
@@ -284,8 +307,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.large);
 	}
 	
-	@Test(groups = {"InteractiveMaps_016", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_016_VerifyMapZoomOptions(){
+	@Test(groups = {"InteractiveMaps_017", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_017_VerifyMapZoomOptions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -293,5 +316,28 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyMapOpened();
 		selectedMap.clickZoomInButton();
 		selectedMap.clickZoomOutButton();
+	}
+	
+	@Test(groups = {"InteractiveMaps_018", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_018_VerifyChangePinData() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		AddPinComponentObject pinModal = selectedMap.placePinInMap();
+		String pinTitle = base.getTimeStamp();
+		String pinDescription = base.getTimeStamp();
+		pinModal.typePinName(pinTitle);
+		pinModal.selectPinType();
+		pinModal.typePinDescription(pinDescription);
+		selectedMap = pinModal.clickSaveButton();
+		pinModal = selectedMap.editLastAddedPin();
+		pinModal.clearPinName();
+		pinModal.typePinName(base.getTimeStamp());
+		pinModal.clearPinDescription();
+		pinModal.typePinDescription(base.getTimeStamp());
+		selectedMap = pinModal.clickSaveButton();
+		selectedMap.verifyPinDataWasChanged(pinTitle, pinDescription);
 	}
 }

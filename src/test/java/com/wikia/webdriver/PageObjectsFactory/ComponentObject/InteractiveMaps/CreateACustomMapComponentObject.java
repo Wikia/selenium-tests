@@ -3,8 +3,11 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -60,30 +63,34 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 		templateList.get(templateId).click();
 		return new TemplateComponentObject(driver);
 	}
-	
+
 	public String getSelectedTemplateImageName(int selectedImageIndex) {
 		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
 		String selectedTemplateImageName = templateList.get(selectedImageIndex)
 			.getAttribute("src").substring(imageNameIndex + beforeImageName.length());
 		return selectedTemplateImageName;
 	}
-	
+
 	public void verifyThereIsError() {
 		waitForElementByElement(errorField);
 		if(errorField.getText().isEmpty()) {
-			PageObjectLogging.log("verifyThereIsError", "Template was found. Error was not showed.",false, driver);
+			PageObjectLogging.log("verifyThereIsError", "Template was found. Error was not showed.",false,driver);
 		}else {
-			PageObjectLogging.log("verifyThereIsError", "Template was not found. Error was showed", true, driver);
+			PageObjectLogging.log("verifyThereIsError", "Template was not found. Error was showed",true,driver);
 		}
+	}
+	
+	public void verifyThereIsNoError(){
+		Assertion.assertEquals(checkIfElementOnPage(errorField), false);
 	}
 	
 	public void verifyTemplateWasFound(String query) { 
 		waitForElementByElement(templatesBox);
 		waitForElementByElement(thumbTitleCollection.get(0));
 		if(thumbCollection.size()>0) {			
-			PageObjectLogging.log("verifyTemplateWasFound", "Some template was found but not this which you searched", true, driver);
+			PageObjectLogging.log("verifyTemplateWasFound", "Some template was found but not this which you searched",true,driver);
 		}else {
-			PageObjectLogging.log("verifyTemplateWasFound", "Template was not found", false, driver);
+			PageObjectLogging.log("verifyTemplateWasFound", "Template was not found",false,driver);
 		}
 	}
 	
@@ -94,9 +101,9 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	
 	public void verifyChangeContent(Integer firstAmount, Integer secondAmount) { 
 		if(firstAmount==secondAmount) {
-			PageObjectLogging.log("verifyChangeContent", "Content was not changed", false, driver);
+			PageObjectLogging.log("verifyChangeContent", "Content was not changed",false,driver);
 		}else {
-			PageObjectLogging.log("verifyChangeContent", "Content was changed", true, driver);	
+			PageObjectLogging.log("verifyChangeContent", "Content was changed",true,driver);	
 		}
 	}
 }

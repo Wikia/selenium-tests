@@ -1,11 +1,14 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
-import org.openqa.selenium.WebDriver;
 import java.util.List;
-import com.wikia.webdriver.Common.Core.Assertion;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.JavascriptExecutor;
+
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 
@@ -78,6 +81,7 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 	}	
 	
 	public void verifyPinTypesDialog() {
+		driver.switchTo().activeElement();
 		waitForElementByElement(creatingPinDialog);
 		PageObjectLogging.log("verifyPinTypesDialog", "Pin types dialog was showed", true);
 	}
@@ -88,6 +92,14 @@ public class CreatePinTypesComponentObject extends BasePageObject{
 		amountParentCatElements = parentCatElements.size();
 		PageObjectLogging.log("savePinTypesListState", "State of pin types list is saved", true);
 	}
+	
+	public void selectFileToUpload(String file,String typeOfFile) {
+		System.out.println("Size of collection:" + uploadInputsCollection.size());
+		unhideElementByClassChange("wpUploadFile","poi-category-marker-image-upload");		
+ 		uploadInputsCollection.get(0).sendKeys(getAbsolutePathForFile(PageContent.resourcesPath+file));
+		PageObjectLogging.log("selectFileToUpload", "Tried to upload " + typeOfFile, true, driver);
+		
+ 	}
 	
 	public void verifyAddAnotherPinType() {
 		 Assertion.assertEquals(amountPinTypeTitleInputs+1, pinTypeTitleInputs.size());

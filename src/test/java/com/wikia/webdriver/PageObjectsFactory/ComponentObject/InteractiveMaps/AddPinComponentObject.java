@@ -4,6 +4,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -69,7 +70,7 @@ public class AddPinComponentObject extends BasePageObject{
 		waitForElementByElement(associatedArticleImage);
 		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true, driver);
 	}
-
+	
 	public InteractiveMapPageObject clickCancelButton() {
 		waitForElementByElement(cancelButton);
 		cancelButton.click();
@@ -80,7 +81,7 @@ public class AddPinComponentObject extends BasePageObject{
 	public InteractiveMapPageObject clickSaveButton() {
 		waitForElementByElement(saveButton);
 		saveButton.click();
-		PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
+		PageObjectLogging.log("clickSaveButton", "Save button clicked",  true, driver);
 		return new InteractiveMapPageObject(driver);
 	}
 	
@@ -90,10 +91,28 @@ public class AddPinComponentObject extends BasePageObject{
 		PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
 	}
 	
+	public void clearPinName(){
+		waitForElementByElement(pinNameField);
+		pinNameField.clear();
+		PageObjectLogging.log("clearPinName", "Pin name input was cleared", true);
+	}
+	
+	public void clearAssociatedArticleField(){
+		waitForElementByElement(associatedArticleField);
+		associatedArticleField.clear();
+		PageObjectLogging.log("clearAssociatedArticleField", "Associated article field was cleared", true);
+	}
+	
 	public void typePinDescription(String pinDescription) {
 		waitForElementByElement(descriptionField);
 		descriptionField.sendKeys(pinDescription);
 		PageObjectLogging.log("typePinDescription", "Pin description was typed in", true);
+	}
+	
+	public void clearPinDescription(){
+		waitForElementByElement(descriptionField);
+		descriptionField.clear();
+		PageObjectLogging.log("clearPinName", "Description input was cleared", true);
 	}
 	
 	public void typeAssociatedArticle(String associatedArticleName) {
@@ -123,5 +142,20 @@ public class AddPinComponentObject extends BasePageObject{
 	public void verifyImage() {
 		waitForElementByElement(articleImageUrl);
 		Assertion.assertStringContains(articleImageUrl.getAttribute("src"), "Robert_Pattison");
+	}
+	
+	public void verifyChangedCategory(String newCategory) {
+		waitForElementByElement(pinCategorySelector);
+		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
+		List<WebElement> pinCategorySelectorList = pinCategorySelectorDropDown.getAllSelectedOptions();
+		Assertion.assertEquals(newCategory, pinCategorySelectorList.get(0));
+	}
+	
+	public void selectPinType(){
+		waitForElementByElement(pinCategorySelector);
+		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
+		List<WebElement> pinCategoryList = pinCategorySelectorDropDown.getOptions();
+		pinCategoryList.get(1).click();
+		PageObjectLogging.log("selectPinType", "Pin type was choosed", true, driver);
 	}
 }
