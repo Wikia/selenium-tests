@@ -56,6 +56,16 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 		driver.switchTo().defaultContent();
 	}
 
+	public VisualEditorPageObject closeDialog() {
+		waitForElementVisibleByElement(mediaSettingsIFrame);
+		driver.switchTo().frame(mediaSettingsIFrame);
+		waitForElementClickableByElement(closeButton);
+		closeButton.click();
+		PageObjectLogging.log("closeDialog", "Closed button on the dialog is clicked", true);
+		driver.switchTo().defaultContent();
+		return new VisualEditorPageObject(driver);
+	}
+
 	public void typeCaption(String text) {
 		waitForElementVisibleByElement(mediaSettingsIFrame);
 		driver.switchTo().frame(mediaSettingsIFrame);
