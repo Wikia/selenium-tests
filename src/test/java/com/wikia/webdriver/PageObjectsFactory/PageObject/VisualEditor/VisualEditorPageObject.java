@@ -69,6 +69,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement SWResizeHandle;
 	@FindBy(css=".ve-ui-desktopContext-menu")
 	private WebElement contextMenu;
+	@FindBy(css=".ve-ui-surface-overlay-local")
+	private WebElement surfaceOverlay;
 
 	private By mediaContextMenuBy = By.cssSelector(".ve-ui-desktopContext-menu .oo-ui-icon-edit");
 
@@ -193,8 +195,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	private void clickContextMenu() {
-		waitForElementByElement(contextMenu);
-		WebElement mediaContextMenu = contextMenu.findElement(mediaContextMenuBy);
+		waitForElementByElement(SWResizeHandle);
+		WebElement mediaContextMenu = surfaceOverlay.findElement(mediaContextMenuBy);
 		waitForElementClickableByElement(mediaContextMenu);
 		mediaContextMenu.click();
 	}
