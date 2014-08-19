@@ -69,10 +69,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement SWResizeHandle;
 	@FindBy(css=".ve-ui-desktopContext-menu")
 	private WebElement contextMenu;
-	@FindBy(css=".ve-ui-surface-overlay-local")
-	private WebElement surfaceOverlay;
 
-	private By mediaContextMenuBy = By.cssSelector(".ve-ui-desktopContext-menu .oo-ui-icon-edit");
+	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget .oo-ui-icon-edit");
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -188,15 +186,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	public VisualEditorMediaSettingsDialog openMediaSettings () {
-		waitForElementByElement(mediaNode);
+		waitForElementByElement(editArea);
+		waitForElementVisibleByElement(mediaNode);
 		mediaNode.click();
 		clickContextMenu();
 		return new VisualEditorMediaSettingsDialog(driver);
 	}
 
 	private void clickContextMenu() {
-		waitForElementByElement(SWResizeHandle);
-		WebElement mediaContextMenu = surfaceOverlay.findElement(mediaContextMenuBy);
+		waitForElementVisibleByElement(contextMenu);
+		WebElement mediaContextMenu = driver.findElement(mediaContextMenuBy);
 		waitForElementClickableByElement(mediaContextMenu);
 		mediaContextMenu.click();
 	}
