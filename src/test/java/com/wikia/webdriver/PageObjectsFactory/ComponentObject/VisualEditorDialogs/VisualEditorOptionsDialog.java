@@ -2,9 +2,9 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialo
 
 import org.openqa.selenium.WebDriver;
 
-public class VisualEditorCategoriesDialog extends VisualEditorDialog {
+public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
-	public VisualEditorCategoriesDialog(WebDriver driver) {
+	public VisualEditorOptionsDialog(WebDriver driver) {
 		super(driver);
 	}
 }
