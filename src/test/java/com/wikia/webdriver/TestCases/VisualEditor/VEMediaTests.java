@@ -109,8 +109,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
 	)
 	public void VEMediaTests_005_resizeVideoWithHandle() {
-
-
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
