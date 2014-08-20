@@ -31,6 +31,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 	String articleName;
+	int numOfVideo = 1;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
@@ -108,7 +109,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
 	)
 	public void VEMediaTests_005_resizeVideoWithHandle() {
-		int numOfVideo = 1;
+
 
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
@@ -129,7 +130,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		groups = {"VEMediaTests", "VEMediaTests_006", "VEResizeVideo"}
 	)
 	public void VEMediaTests_006_resizeVideoWithSetting() {
-		int numOfVideo = 1;
 		int resizeNumber = 250;
 
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
