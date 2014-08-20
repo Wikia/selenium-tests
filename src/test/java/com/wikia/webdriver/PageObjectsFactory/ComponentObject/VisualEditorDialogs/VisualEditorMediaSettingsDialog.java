@@ -15,10 +15,8 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	private final int GENERAL = 0;
 	private final int ADVANCED = 1;
 
-	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
-	private WebElement mediaSettingsIFrame;
-	@FindBy(css=".oo-ui-icon-close")
-	private WebElement closeButton;
+	@FindBy(css=".oo-ui-outlineWidget")
+	private WebElement outlineMenu;
 	@FindBy(css=".oo-ui-outlineWidget li")
 	private List<WebElement> outlineMenuItems;
 	@FindBy(css=".ve-ce-documentNode")
@@ -35,8 +33,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	}
 
 	public void selectGeneralSettings() {
-		waitForElementVisibleByElement(mediaSettingsIFrame);
-		driver.switchTo().frame(mediaSettingsIFrame);
+		switchToIFrame();
 		WebElement generalSetting = outlineMenuItems.get(GENERAL).findElement(labeledElementBy);
 		waitForElementClickableByElement(generalSetting);
 		generalSetting.click();
@@ -45,8 +42,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	}
 
 	public void selectAdvancedSettings() {
-		waitForElementVisibleByElement(mediaSettingsIFrame);
-		driver.switchTo().frame(mediaSettingsIFrame);
+		switchToIFrame();
 		WebElement advancedSetting = outlineMenuItems.get(ADVANCED).findElement(labeledElementBy);
 		waitForElementClickableByElement(advancedSetting);
 		advancedSetting.click();
@@ -55,8 +51,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	}
 
 	public void typeCaption(String text) {
-		waitForElementVisibleByElement(mediaSettingsIFrame);
-		driver.switchTo().frame(mediaSettingsIFrame);
+		switchToIFrame();
 		waitForElementByElement(captionEditArea);
 		captionEditArea.sendKeys(text);
 		PageObjectLogging.log("typeCaption", "Typed " + text + " in caption area", true);
@@ -64,8 +59,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	}
 
 	public VisualEditorPageObject clickApplyChangesButton() {
-		waitForElementVisibleByElement(mediaSettingsIFrame);
-		driver.switchTo().frame(mediaSettingsIFrame);
+		switchToIFrame();
 		waitForElementVisibleByElement(applyChangesButton);
 		waitForElementClickableByElement(applyChangesButton);
 		applyChangesButton.click();
@@ -82,8 +76,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	}
 
 	public void setCustomSize(int size) {
-		waitForElementVisibleByElement(mediaSettingsIFrame);
-		driver.switchTo().frame(mediaSettingsIFrame);
+		switchToIFrame();
 		typeCustomSize(size);
 		driver.switchTo().defaultContent();
 	}
