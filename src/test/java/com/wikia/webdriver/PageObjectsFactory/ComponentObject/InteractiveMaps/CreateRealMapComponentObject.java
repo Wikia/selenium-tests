@@ -44,7 +44,7 @@ public class CreateRealMapComponentObject extends BasePageObject{
 	public void typeMapName(String mapName) {
 		waitForElementByElement(mapTitleField);
 		mapTitleField.sendKeys(mapName);
-		PageObjectLogging.log("typeMapName", mapName+" title for map is typed in", true);
+		PageObjectLogging.log("typeMapName", mapName + " title for map is typed in", true);
 	}
 	
 	public void verifyRealMapPreviewImage() {

@@ -285,7 +285,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 	}
 	
 	@Test(groups = {"InteractiveMaps_016", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_016_VerifyMapZoomOptions(){
+	public void InteractiveMaps_016_VerifyMapZoomOptions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);

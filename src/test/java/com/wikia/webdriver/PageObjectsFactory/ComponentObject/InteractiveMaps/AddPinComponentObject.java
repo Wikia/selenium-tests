@@ -52,22 +52,22 @@ public class AddPinComponentObject extends BasePageObject{
 	
 	public void verifyAssociatedArticleFieldIsDisplayed() {
 		waitForElementByElement(associatedArticleField);
-		PageObjectLogging.log("verifyAssociatedArticleFieldIsDisplayed", "Associated article field is visible",  true, driver);
+		PageObjectLogging.log("verifyAssociatedArticleFieldIsDisplayed", "Associated article field is visible",  true);
 	}
 	
 	public void verifyPinCategorySelectorIsDisplayed() {
 		waitForElementByElement(pinCategorySelector);
-		PageObjectLogging.log("verifyPinCategorySelector", "Pin category selector is visible",  true, driver);
+		PageObjectLogging.log("verifyPinCategorySelector", "Pin category selector is visible",  true);
 	}
 	
 	public void verifyDescriptionFieldIsDisplayed() {
 		waitForElementByElement(descriptionField);
-		PageObjectLogging.log("verifyPinCategorySelector", "Pin category selector is visible",  true, driver);
+		PageObjectLogging.log("verifyPinCategorySelector", "Pin category selector is visible",  true);
 	}
 	
 	public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
 		waitForElementByElement(associatedArticleImage);
-		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true, driver);
+		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true);
 	}
 
 	public InteractiveMapPageObject clickCancelButton() {

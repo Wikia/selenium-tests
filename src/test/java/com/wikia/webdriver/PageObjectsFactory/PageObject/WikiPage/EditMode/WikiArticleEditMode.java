@@ -171,7 +171,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	public void verifyThatThePhotoAppears(String caption) {
 		waitForElementByElement(visualModeIFrame);
 		driver.switchTo().frame(visualModeIFrame);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[data-rte-meta*='"+caption+"']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[data-rte-meta*='" + caption + "']")));
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode", true, driver);
 	}
@@ -234,12 +234,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
 	}
 
-	public void writeSourceMode(String source) {
-		sourceModeTextArea.sendKeys();
-		PageObjectLogging.log("writeSourceMode", "Write in source mode: "+source, true);
-	}
-
-
 	public WikiArticlePageObject clickOnPublishButtonPreview() {
 		waitForElementByElement(publishButtonPreview);
 		waitForElementClickableByElement(publishButtonPreview);
@@ -301,7 +295,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
 	}
 
-
 	public void verifyLeftAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
 		clickOnModifyImageLink();
@@ -354,12 +347,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
 		return new SliderBuilderComponentObject(driver);
 	}
+	
 	public SlideshowBuilderComponentObject clickSlideshowButton() {
 		waitForElementByElement(slideshowButton);
 		scrollAndClick(slideshowButton);
 		PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
 		return new SlideshowBuilderComponentObject(driver);
 	}
+	
 	public GalleryBuilderComponentObject clickGalleryButton() {
 		waitForElementByElement(galleryButton);
 		scrollAndClick(galleryButton);
@@ -435,6 +430,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(embededMap);
 		String embededMapID = embededMap.getAttribute("data-map-id");
 		System.out.println(embededMapID);
-		Assertion.assertEquals(mapID,embededMapID);
+		Assertion.assertEquals(mapID, embededMapID);
 	}
 }

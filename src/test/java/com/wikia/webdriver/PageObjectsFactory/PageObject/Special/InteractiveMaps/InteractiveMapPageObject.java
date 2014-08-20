@@ -196,7 +196,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 	
 	public void verifyZoomMap() {
 		waitForElementByElement(zoomAnim);
-		PageObjectLogging.log("verifyZoomMap", "Map was zoomed", true, driver);
+		PageObjectLogging.log("verifyZoomMap", "Map was zoomed", true);
 	}
 	
 	public String getEmbedMapWikiCode() {
@@ -238,18 +238,18 @@ public class InteractiveMapPageObject extends BasePageObject{
 		waitForElementByElement(allPinTypes);
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		if(allPinTypes.getAttribute("class").contains("enabled")) {
-			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was checked", true, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was checked", true);
 		}else {
-			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was unchecked", false, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was unchecked", false);
 		}
 	}
 	
 	public void verifyAllPinTypesIsUncheck() {
 		waitForElementByElement(allPinTypes);
 		if(allPinTypes.getAttribute("class").contains("enabled")) {
-			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was checked", false, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was checked", false);
 		}else {
-			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was unchecked", true, driver);
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was unchecked", true);
 		}
 	}
 	
