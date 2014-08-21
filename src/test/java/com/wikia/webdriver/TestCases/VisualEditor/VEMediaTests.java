@@ -31,6 +31,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 	String articleName;
+	int numOfVideo = 1;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
@@ -98,14 +99,16 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		mediaSettingsDialog.typeCaption(captionText);
 		ve = mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoCaption(captionText);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 
 	@Test(
 		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
 	)
 	public void VEMediaTests_005_resizeVideoWithHandle() {
-		int numOfVideo = 1;
-
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
@@ -115,13 +118,16 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		Dimension source = ve.getVideoDimension();
 		ve.randomResizeOnMedia();
 		ve.verifyVideoResized(source);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 
 	@Test(
 		groups = {"VEMediaTests", "VEMediaTests_006", "VEResizeVideo"}
 	)
 	public void VEMediaTests_006_resizeVideoWithSetting() {
-		int numOfVideo = 1;
 		int resizeNumber = 250;
 
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
@@ -136,5 +142,9 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		mediaSettingsDialog.setCustomSize(resizeNumber);
 		mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoResized(source);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 }

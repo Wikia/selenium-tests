@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -67,6 +68,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement mediaCaption;
 	@FindBy(css=".ve-ce-resizableNode-swHandle")
 	private WebElement SWResizeHandle;
+	@FindBy(css=".ve-ui-desktopContext-menu")
+	private WebElement contextMenu;
+
+	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget .oo-ui-icon-edit");
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -182,13 +187,16 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	public VisualEditorMediaSettingsDialog openMediaSettings () {
-		waitForElementByElement(mediaNode);
+		waitForElementByElement(editArea);
+		waitForElementVisibleByElement(mediaNode);
 		mediaNode.click();
 		clickContextMenu();
 		return new VisualEditorMediaSettingsDialog(driver);
 	}
 
 	private void clickContextMenu() {
+		waitForElementVisibleByElement(contextMenu);
+		WebElement mediaContextMenu = driver.findElement(mediaContextMenuBy);
 		waitForElementClickableByElement(mediaContextMenu);
 		mediaContextMenu.click();
 	}
