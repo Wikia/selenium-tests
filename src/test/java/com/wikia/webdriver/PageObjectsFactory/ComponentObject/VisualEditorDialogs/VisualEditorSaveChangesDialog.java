@@ -82,7 +82,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
 	public VisualEditorReviewChangesDialog clickReviewYourChanges() {
 		switchToIFrame();
-		waitForElementByElement(reviewChangesButton);
+		waitForElementVisibleByElement(reviewChangesButton);
 		waitForElementClickableByElement(reviewChangesButton);
 		reviewChangesButton.click();
 		PageObjectLogging.log("clickReviewYourChanges", "Review Your Changes Button is clicked", true);
