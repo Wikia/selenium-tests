@@ -293,6 +293,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	}
 
 	public VisualEditorSaveChangesDialog clickPublishButton() {
+		driver.switchTo().defaultContent();
 		waitForElementNotPresent(publishButtonDisabled);
 		waitForElementClickableByElement(enabledPublishButton);
 		publishPageButton.click();

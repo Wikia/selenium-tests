@@ -28,6 +28,8 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	private WebElement desktopContext;
 	@FindBy(css=".ve-ui-mwCategoryInputWidget-menu .oo-ui-optionWidget-selected")
 	private WebElement selectedResult;
+	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
+	private WebElement categoryItem;
 
 	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
 	private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
@@ -77,6 +79,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		switchToIFrame();
 		typeCategory(cat);
 		clickLinkResult();
+		waitForElementByElement(categoryItem);
 		driver.switchTo().defaultContent();
 	}
 
