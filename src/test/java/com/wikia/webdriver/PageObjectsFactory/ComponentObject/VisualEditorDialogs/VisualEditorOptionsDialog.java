@@ -88,6 +88,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		typeCategory(cat);
 		clickLinkResult();
 		waitForElementByElement(categoryItem);
+		PageObjectLogging.log("addCategory", "Category: " + cat + " is added", true, driver);
 		driver.switchTo().defaultContent();
 	}
 
@@ -114,7 +115,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		categoryDownIndicator.click();
 		waitForElementVisibleByElement(categoryPopUp);
 		categoryRemoveButton.click();
-		PageObjectLogging.log("removeCategory", "Category: " + cat + " is removed", true);
+		PageObjectLogging.log("removeCategory", "Category: " + cat + " is removed", true, driver);
 		driver.switchTo().defaultContent();
 	}
 }
