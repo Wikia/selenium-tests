@@ -96,17 +96,16 @@ public class ForumEditModeTests extends NewTestTemplate{
 	}
 
 	@Test(groups = {"Forum_006", "Forum", "ForumEditMode"})
-	public void forumEditModeTests_006_templatesInBoardDescription() {
-		SpecialUserLoginPageObject login = new SpecialUserLoginPageObject(driver);
+	public void forumEditModeTests_006_templatesInBoardDescription() {		
 		ForumPageObject forumMainPage = new ForumPageObject( driver );
 
 		// create a template
 		String templateNameAndContent = "Forum_test_template_" + forumMainPage.getTimeStamp();
 		WikiArticlePageObject article = new WikiArticlePageObject( driver );
+		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		article.createNewTemplate(wikiURL, templateNameAndContent, templateNameAndContent );
-
-		// login & open forum page and create new board
-		login.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		
+		// open forum page and create new board
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject forumManageBoardPage = forumMainPage.clickManageBoardsButton();
 
