@@ -103,6 +103,7 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved(testedPage);
 		specialCss.clickPublishButtonDropdown();
+		specialCss.verifyDeleteButtonPresence();
 		specialCss.clickDeleteButton();
 		specialCss.confirmDelete();
 
