@@ -14,6 +14,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.PageObjectTemplate;
 
 public class SpecialCssPageObject extends SpecialPageObject {
 
@@ -148,6 +149,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		public void clickPublishButtonDropdown() {
 			scrollAndClick(cssPublishButtonDropdown);
 			PageObjectLogging.log("clickCssPublishButton", "click on publish button dropdown", true);
+			waitForElementByElement(cssPublishButtonDropdown);
 		}
 
 		public void clickMinorCheckbox() {
