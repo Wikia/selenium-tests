@@ -5,7 +5,9 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+
 import java.util.List;
+
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -201,7 +203,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(editPinTypesButton);
 	    editPinTypesButton.click();
-		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button clicked", true, driver);
+		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button were clicked", true, driver);
 		driver.switchTo().defaultContent();
 	}
 	
@@ -256,26 +258,34 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().frame(mapFrame);		
 		waitForElementByElement(allPinTypes);
 		allPinTypes.click();
-		PageObjectLogging.log("clickOnAllCategories", "All categories was clicked", true);
+		PageObjectLogging.log("clickOnAllCategories", "All categories were clicked", true);
 		driver.switchTo().activeElement();
 	}
 	
 	public void verifyAllPinTypesIsCheck() {
-		waitForElementByElement(allPinTypes);
-		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
-		if(allPinTypes.getAttribute("class").contains("enabled")) {
-			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was checked", true, driver);
-		}else {
-			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types was unchecked", false, driver);
+		try{
+			waitForElementByElement(allPinTypes);
+			waitForElementByElement(enabledPinTypesCollection
+					.get(InteractiveMapsContent.pinTypeIndex));
+			if (allPinTypes.getAttribute("class").contains("enabled")) {
+				PageObjectLogging.log("verifyAllPointTypesIsCheck",
+						"All pin types were checked", true);
+			}
+		}catch(Exception e){
+			PageObjectLogging.log("verifyAllPointTypesIsCheck", e.toString(), false);
 		}
 	}
 	
 	public void verifyAllPinTypesIsUncheck() {
-		waitForElementByElement(allPinTypes);
-		if(allPinTypes.getAttribute("class").contains("enabled")) {
-			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was checked", false, driver);
-		}else {
-			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types was unchecked", true, driver);
+		try{
+			waitForElementByElement(allPinTypes);
+			if(!allPinTypes.getAttribute("class").contains("enabled")) {
+				PageObjectLogging.log("verifyAllPointTypesIsUnCheck",
+						"All pin types were unchecked", true);
+			} 
+		}catch(Exception e){
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck",
+					"All pin types were checked", false);
 		}
 	}
 	
@@ -313,7 +323,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		waitForElementByElement(embedMapCodeButton);
 		waitForElementByElement(zoomInButton);
 		waitForElementByElement(zoomOutButton);
-		PageObjectLogging.log("verifyControlButtonsAreVisible", "embedMap, zoom in/out buttons are visible", true);
+		PageObjectLogging.log("verifyControlButtonsAreVisible", "embedMap, zoom in/out buttons were visible", true);
 	}
 	
 	public void verifyPinPopupImageIsVisible() {

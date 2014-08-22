@@ -72,38 +72,27 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	}
 
 	public void verifyThereIsError() {
-		waitForElementByElement(errorField);
-		if(errorField.getText().isEmpty()) {
-			PageObjectLogging.log("verifyThereIsError", "Template was found. Error was not showed.",false,driver);
-		}else {
-			PageObjectLogging.log("verifyThereIsError", "Template was not found. Error was showed",true,driver);
-		}
+		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
 	}
 	
 	public void verifyThereIsNoError(){
 		Assertion.assertEquals(checkIfElementOnPage(errorField), false);
 	}
 	
-	public void verifyTemplateWasFound(String query) { 
-		waitForElementByElement(templatesBox);
-		waitForElementByElement(thumbTitleCollection.get(0));
-		if(thumbCollection.size()>0) {			
-			PageObjectLogging.log("verifyTemplateWasFound", "Some template was found but not this which you searched",true,driver);
-		}else {
-			PageObjectLogging.log("verifyTemplateWasFound", "Template was not found",false,driver);
+	public void verifyTemplateWasFound() {
+		try{
+			waitForElementByElement(templatesBox);
+			waitForElementByElement(thumbTitleCollection.get(0));
+			if(thumbCollection.size()>0) {			
+				PageObjectLogging.log("verifyTemplateWasFound", "Templates were found", true, driver);
+			}
+		}catch(Exception e){
+			PageObjectLogging.log("verifyTemplateWasFound", e.toString(), false);
 		}
 	}
 	
 	public void clearSearchTitle() { 
 		waitForElementByElement(searchField);
 		searchField.clear();
-	}
-	
-	public void verifyChangeContent(Integer firstAmount, Integer secondAmount) { 
-		if(firstAmount==secondAmount) {
-			PageObjectLogging.log("verifyChangeContent", "Content was not changed",false,driver);
-		}else {
-			PageObjectLogging.log("verifyChangeContent", "Content was changed",true,driver);	
-		}
 	}
 }
