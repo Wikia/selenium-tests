@@ -9,10 +9,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-icon-close")
-	private WebElement closeButton;
-	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
-	private WebElement sourceEditorDialogIFrame;
 	@FindBy(css=".oo-ui-window-foot .oo-ui-buttonedElement-button")
 	private WebElement applyChangesButton;
 	@FindBy(css=".oo-ui-widget-enabled.oo-ui-textInputWidget textarea")
@@ -24,29 +20,16 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
-	public VisualEditorPageObject clickCloseButton() {
-		waitForElementVisibleByElement(sourceEditorDialogIFrame);
-		driver.switchTo().frame(sourceEditorDialogIFrame);
-		waitForElementClickableByElement(closeButton);
-		closeButton.click();
-		PageObjectLogging.log("clickCloseButton", "Clicked on the close button", true);
-		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
-		driver.switchTo().defaultContent();
-		return new VisualEditorPageObject(driver);
-	}
-
 	public VisualEditorPageObject clickApplyChangesButton() {
-		waitForElementVisibleByElement(sourceEditorDialogIFrame);
-		driver.switchTo().frame(sourceEditorDialogIFrame);
+		switchToIFrame();
 		waitForElementClickableByElement(applyChangesButton);
 		applyChangesButton.click();
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditorPageObject typeInEditArea(String text) {
-		waitForElementVisibleByElement(sourceEditorDialogIFrame);
-		driver.switchTo().frame(sourceEditorDialogIFrame);
+		switchToIFrame();
 		waitForElementNotVisibleByElement(loadingIndicator);
 		waitForElementVisibleByElement(editArea);
 		waitForElementClickableByElement(editArea);
@@ -54,8 +37,7 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementClickableByElement(applyChangesButton);
 		scrollAndClick(applyChangesButton);
-		waitForElementNotVisibleByElement(sourceEditorDialogIFrame);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 }

@@ -20,8 +20,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement clickToUploadArea;
 	@FindBy(css=".oo-ui-pageLayout-active .oo-ui-labeledElement-label")
 	private WebElement midUploadButton;
-	@FindBy(css=".oo-ui-icon-close")
-	private WebElement closeButton;
 	@FindBy(css=".oo-ui-window-foot .oo-ui-labeledElement-label")
 	private WebElement addMediaButton;
 	@FindBy(css=".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labeledElement-label")
@@ -30,8 +28,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement removeThisItemButton;
 	@FindBy(css=".video.oo-ui-pageLayout-active .video-thumbnail")
 	private WebElement externalVideoThumbnail;
-	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
-	private WebElement insertMediaDialogIFrame;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mediaDialogBody;
 	@FindBy(css=".oo-ui-bookletLayout .ve-ui-wikiaUploadButtonWidget input")
@@ -46,16 +42,6 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
-	public VisualEditorPageObject closeDialog() {
-		waitForElementVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().frame(insertMediaDialogIFrame);
-		waitForElementClickableByElement(closeButton);
-		closeButton.click();
-		PageObjectLogging.log("closeAddMediaDialog", "Add Media dialog is closed", true);
-		driver.switchTo().defaultContent();
-		return new VisualEditorPageObject(driver);
-	}
-
 	private void typeInSearchTextField(String input) {
 		waitForElementByElement(searchInputTextField);
 		searchInputTextField.sendKeys(input);
@@ -68,28 +54,24 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	}
 
 	public VisualEditorPageObject addMediaByURL(String url) {
-		waitForElementVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().frame(insertMediaDialogIFrame);
+		switchToIFrame();
 		typeInSearchTextField(url);
 		waitForElementVisibleByElement(topUploadButton);
 		waitForElementClickableByElement(topUploadButton);
 		clickAddMediaButton();
-		waitForElementNotVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditorAddMediaDialog searchMedia(String searchText) {
-		waitForElementVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().frame(insertMediaDialogIFrame);
+		switchToIFrame();
 		typeInSearchTextField(searchText);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorAddMediaDialog(driver);
 	}
 
 	public VisualEditorPageObject addExistingMedia(int number) {
-		waitForElementVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().frame(insertMediaDialogIFrame);
+		switchToIFrame();
 		WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
 		waitForElementVisibleByElement(mediaResultsWidget);
 		List<WebElement> mediaResults = mediaResultsWidget.findElements(mediaResultsBy);
@@ -98,29 +80,26 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 			mediaAddIcon.click();
 		}
 		clickAddMediaButton();
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditorPageObject uploadImage(String fileName) {
-		waitForElementVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().frame(insertMediaDialogIFrame);
+		switchToIFrame();
 		selectFileToUpload(fileName);
 		waitForElementVisibleByElement(topUploadButton);
 		clickAddMediaButton();
-		waitForElementNotVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditorPageObject previewExistingMediaByIndex(int index) {
-		waitForElementVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().frame(insertMediaDialogIFrame);
+		switchToIFrame();
 		WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
 		waitForElementVisibleByElement(mediaResultsWidget);
 		WebElement targetMedia = mediaResultsWidget.findElements(mediaTitlesBy).get(index);
 		targetMedia.click();
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 
@@ -136,12 +115,11 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	}
 
 	public VisualEditorPageObject previewExistingMediaByTitle(String title) {
-		waitForElementVisibleByElement(insertMediaDialogIFrame);
-		driver.switchTo().frame(insertMediaDialogIFrame);
+		switchToIFrame();
 		WebElement media = findMediaByTitle(title);
 		media.click();
 		PageObjectLogging.log("previewExistingMediaByTitle", "Media clicked", true);
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 

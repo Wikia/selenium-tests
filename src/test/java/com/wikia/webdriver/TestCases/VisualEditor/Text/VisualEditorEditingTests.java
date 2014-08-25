@@ -153,7 +153,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
 		reviewDialog.verifyAddedDiffs(firstSourceEditText);
-		ve = reviewDialog.clickCloseButton();
+		ve = reviewDialog.closeDialog();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve = ve.typeInSourceEditor(text);

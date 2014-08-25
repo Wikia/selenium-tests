@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -8,6 +9,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -18,7 +20,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  *
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
- *
+ * VE-1336 Uploading an image
+ * VE-1334 Adding caption to a media
+ * VE-1333 Resizing a media with the highlight handle
+ * VE-1333 Resizing a media with the advance setting from the media dialog
  */
 
 public class VEMediaTests extends NewTestTemplateBeforeClass {
@@ -26,6 +31,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 	String articleName;
+	int numOfVideo = 1;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
@@ -71,6 +77,71 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		ve = mediaDialog.uploadImage(PageContent.file);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_004", "VEPreviewVideo"}
+	)
+	public void VEMediaTests_004_editCaption() {
+		String captionText = "test123";
+
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.addExistingMedia(1);
+		ve.verifyVideo();
+		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
+		mediaSettingsDialog.typeCaption(captionText);
+		ve = mediaSettingsDialog.clickApplyChangesButton();
+		ve.verifyVideoCaption(captionText);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
+	)
+	public void VEMediaTests_005_resizeVideoWithHandle() {
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.addExistingMedia(numOfVideo);
+		ve.verifyVideos(numOfVideo);
+		Dimension source = ve.getVideoDimension();
+		ve.randomResizeOnMedia();
+		ve.verifyVideoResized(source);
+		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
+		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_006", "VEResizeVideo"}
+	)
+	public void VEMediaTests_006_resizeVideoWithSetting() {
+		int resizeNumber = 250;
+
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.addExistingMedia(numOfVideo);
+		ve.verifyVideos(numOfVideo);
+		Dimension source = ve.getVideoDimension();
+		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
+		mediaSettingsDialog.selectAdvancedSettings();
+		mediaSettingsDialog.setCustomSize(resizeNumber);
+		mediaSettingsDialog.clickApplyChangesButton();
+		ve.verifyVideoResized(source);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
