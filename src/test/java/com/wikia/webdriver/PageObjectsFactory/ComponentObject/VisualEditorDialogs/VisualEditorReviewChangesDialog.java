@@ -87,9 +87,9 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 				expectedCount--;
 			}
 		}
-		Assertion.assertNumber(expectedCount, count, "Number of diffs expected is incorrect.");
+		Assertion.assertNumber(expectedCount, count, "Number of diffs.");
 		if (mode == INSERT) {
-			Assertion.assertNumber(0, targets.size(), "Number of diffs expected is incorrect.");
+			Assertion.assertNumber(0, targets.size(), "Number of diffs.");
 		}
 	}
 

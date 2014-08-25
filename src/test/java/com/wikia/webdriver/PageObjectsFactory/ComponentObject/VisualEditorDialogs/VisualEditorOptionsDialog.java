@@ -30,6 +30,14 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	private WebElement selectedResult;
 	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
 	private WebElement categoryItem;
+	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
+	private List<WebElement> categoryItems;
+	@FindBy(css=".ve-ui-mwCategoryPopupWidget-content")
+	private WebElement categoryPopUp;
+	@FindBy(css=".oo-ui-indicator-down")
+	private WebElement categoryDownIndicator;
+	@FindBy(css=".ve-ui-mwCategoryPopupWidget-content .oo-ui-icon-remove")
+	private WebElement categoryRemoveButton;
 
 	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
 	private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
@@ -80,6 +88,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		typeCategory(cat);
 		clickLinkResult();
 		waitForElementByElement(categoryItem);
+		PageObjectLogging.log("addCategory", "Category: " + cat + " is added", true, driver);
 		driver.switchTo().defaultContent();
 	}
 
@@ -96,5 +105,17 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		waitForElementByElement(matchingResult);
 		waitForElementClickableByElement(matchingResult);
 		matchingResult.click();
+	}
+
+	public void removeCategory(String cat) {
+		switchToIFrame();
+		waitForElementByElement(categoryItem);
+		WebElement elementToRemove = getElementByText(categoryItems, cat);
+		waitForElementClickableByElement(elementToRemove);
+		categoryDownIndicator.click();
+		waitForElementVisibleByElement(categoryPopUp);
+		categoryRemoveButton.click();
+		PageObjectLogging.log("removeCategory", "Category: " + cat + " is removed", true, driver);
+		driver.switchTo().defaultContent();
 	}
 }

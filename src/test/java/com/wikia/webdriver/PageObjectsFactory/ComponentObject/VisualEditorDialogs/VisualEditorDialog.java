@@ -17,6 +17,8 @@ public class VisualEditorDialog extends WikiBasePageObject{
 
 	@FindBy(css=".oo-ui-window-ready .oo-ui-frame")
 	private WebElement iframe;
+	@FindBy(css=".oo-ui-window-ready")
+	private WebElement dialog;
 	@FindBy(css=".oo-ui-icon-close")
 	private WebElement closeButton;
 
@@ -25,12 +27,12 @@ public class VisualEditorDialog extends WikiBasePageObject{
 	}
 
 	public void switchToIFrame() {
-		waitForElementVisibleByElement(iframe);
+		waitForElementVisibleByElement(dialog);
 		driver.switchTo().frame(iframe);
 	}
 
 	public void switchOutOfIFrame() {
-		waitForElementNotVisibleByElement(iframe);
+		waitForElementNotVisibleByElement(dialog);
 		driver.switchTo().defaultContent();
 	}
 
