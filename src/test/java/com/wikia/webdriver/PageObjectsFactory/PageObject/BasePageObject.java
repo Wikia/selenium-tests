@@ -801,12 +801,12 @@ public class BasePageObject{
 		);
 	}
 
-	public WebElement findElementByValue(List<WebElement> elements, String attribute, String value) {
+	public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
 		WebElement foundElement = null;
 		for(WebElement element : elements) {
 			if (element.getAttribute(attribute).equals(value)) {
 				foundElement = element;
-				PageObjectLogging.log("findElementByText",
+				PageObjectLogging.log("getElementByValue",
 					"Element with attribute: " + attribute + " with the value: " + value + " is found from the list",
 					true
 				);
@@ -816,17 +816,18 @@ public class BasePageObject{
 		if (foundElement == null) {
 			throw new NoSuchElementException(
 				"Element with attribute: " + attribute + " with the value: "
-					+ value + " is not found from the list");
+				+ value + " is not found from the list"
+			);
 		}
 		return foundElement;
 	}
 
-	public WebElement findElementByText(List<WebElement> elements, String value) {
+	public WebElement getElementByText(List<WebElement> elements, String value) {
 		WebElement foundElement = null;
 		for(WebElement element : elements) {
 			if (element.getText().equalsIgnoreCase(value)) {
 				foundElement = element;
-				PageObjectLogging.log("findElementByText", "Element with text: " + value + " is found from the list", true);
+				PageObjectLogging.log("getElementByText", "Element with text: " + value + " is found from the list", true);
 				break;
 			}
 		}

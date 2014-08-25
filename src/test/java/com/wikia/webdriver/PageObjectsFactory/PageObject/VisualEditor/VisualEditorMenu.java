@@ -97,6 +97,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By categoriesBy = By.cssSelector(".oo-ui-icon-tag");
 	private By keyboardShortcutsBy = By.cssSelector(".oo-ui-icon-keyboard");
 	private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
+	private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
 
 	private void clickStyleItemFromDropDown(By styleBy) {
 		WebElement styleList = toolListDropDowns.get(STYLELIST);
@@ -294,7 +295,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		driver.switchTo().defaultContent();
 		waitForElementNotPresent(publishButtonDisabled);
 		waitForElementVisibleByElement(enabledPublishButton);
-		WebElement publishButton = enabledPublishButton.findElement(By.cssSelector(".oo-ui-labeledElement-label"));
+		WebElement publishButton = enabledPublishButton.findElement(labelBy);
 		waitForElementClickableByElement(publishButton);
 		publishButton.click();
 		PageObjectLogging.log("clickPublishButton", "Publish button on the VE toolbar is clicked", true);

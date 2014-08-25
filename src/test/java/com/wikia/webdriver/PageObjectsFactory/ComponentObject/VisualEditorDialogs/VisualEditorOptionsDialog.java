@@ -110,7 +110,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	public void removeCategory(String cat) {
 		switchToIFrame();
 		waitForElementByElement(categoryItem);
-		WebElement elementToRemove = findElementByText(categoryItems, cat);
+		WebElement elementToRemove = getElementByText(categoryItems, cat);
 		waitForElementClickableByElement(elementToRemove);
 		categoryDownIndicator.click();
 		waitForElementVisibleByElement(categoryPopUp);
