@@ -404,8 +404,8 @@ public class BasePageObject{
 	public WebElement waitForElementByBy(By by) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(by));
 		return driver.findElement(by);
-	}
-
+	}	
+	
 	/**
 	 * Checks if the element is visible on browser
 	 *

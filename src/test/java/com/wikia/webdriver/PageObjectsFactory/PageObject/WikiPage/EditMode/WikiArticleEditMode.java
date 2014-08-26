@@ -429,7 +429,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().defaultContent();
 		waitForElementByElement(embededMap);
 		String embededMapID = embededMap.getAttribute("data-map-id");
-		System.out.println(embededMapID);
 		Assertion.assertEquals(mapID, embededMapID);
 	}
 }

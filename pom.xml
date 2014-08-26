@@ -144,8 +144,8 @@
 						<platform-version>${platform-version}</platform-version>
 						<device-id>${device-id}</device-id>
 						<mobile-config>/selenium-config/mobile-config.xml</mobile-config>
-						<config>/selenium-config/config.xml</config>
-						<captcha>/selenium-config/captcha.txt</captcha>
+						<config>selenium-config/config.xml</config>
+						<captcha>selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/testSuite.xml</suiteXmlFile>
