@@ -27,6 +27,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -789,8 +790,11 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void verifyRevisionMarkedAsMinor() {
-		waitForElementByElement(cssMinorEdit);
-		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+		if(checkIfElementOnPage(cssMinorEdit)) {
+			PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+		} else {
+			throw new NoSuchElementException("Minor Edit is not present on the page");
+		}
 	}
 
 	public void logOut(WebDriver driver) {
