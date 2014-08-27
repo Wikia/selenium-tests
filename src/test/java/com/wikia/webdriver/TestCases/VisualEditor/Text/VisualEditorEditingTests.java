@@ -179,4 +179,19 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
 		historyPage.verifyLatestEditSummary(text);
 	}
+
+	@Test(
+		groups = {"VisualEditorEditing", "VisualEditorEditing_007"}
+	)
+	public void VisualEditorEditing_007_minorEdit() {
+		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.typeTextArea("b");
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		saveDialog.clickMinorEdit();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
+		historyPage.verifyRevisionMarkedAsMinor();
+	}
 }
