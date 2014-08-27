@@ -90,6 +90,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 
@@ -203,7 +204,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	public String resetForgotPasswordTime(String userName, String apiToken) {		
+	public String resetForgotPasswordTime(String userName, String apiToken) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},
@@ -1122,5 +1123,10 @@ public class WikiBasePageObject extends BasePageObject {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		return new VisualEditorPageObject(driver);
+	}
+
+	public WikiHistoryPageObject openArticleHistoryPage(String wikiURL) {
+		getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.historyAction));
+		return new WikiHistoryPageObject(driver);
 	}
 }
