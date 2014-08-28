@@ -28,6 +28,8 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 	private WebElement reviewChangesButton;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement saveDialogBody;
+	@FindBy(css=".ve-ui-mwSaveDialog-summary textarea")
+	private WebElement editSummary;
 
 	private By recaptchaImageBy = By.cssSelector("#recaptcha_challenge_image");
 
@@ -92,5 +94,13 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
 	public void verifyRecaptchaImageSrc() {
 		Assertion.assertNotEquals("", getRecaptchaImageSrc(), "Verify RECAPTCHA image source is not empty");
+	}
+
+	public void typeEditSummary(String text) {
+		switchToIFrame();
+		waitForElementVisibleByElement(editSummary);
+		editSummary.sendKeys(text);
+		waitForValueToBePresentInElementsAttributeByElement(editSummary, "value", text);
+		switchOutOfIFrame();
 	}
 }
