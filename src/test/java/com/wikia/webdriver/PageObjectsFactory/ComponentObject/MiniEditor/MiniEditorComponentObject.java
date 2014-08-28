@@ -56,6 +56,9 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 
 	public void writeMiniEditor(String text){
 		waitForElementByElement(messageBodyField);
+		// This was intensively investigated and sleep is the only way to make the tests more reliable.
+		// The reason is the Minieditor defectiveness
+		try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
 		messageBodyField.clear();
 		messageBodyField.sendKeys(text);
 	}
