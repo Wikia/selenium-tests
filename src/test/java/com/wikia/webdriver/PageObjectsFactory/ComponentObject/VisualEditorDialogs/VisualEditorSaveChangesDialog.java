@@ -30,6 +30,8 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 	private WebElement saveDialogBody;
 	@FindBy(css=".ve-ui-mwSaveDialog-summary textarea")
 	private WebElement editSummary;
+	@FindBy(css="#wpMinoredit")
+	private WebElement minorEdit;
 
 	private By recaptchaImageBy = By.cssSelector("#recaptcha_challenge_image");
 
@@ -101,6 +103,13 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 		waitForElementVisibleByElement(editSummary);
 		editSummary.sendKeys(text);
 		waitForValueToBePresentInElementsAttributeByElement(editSummary, "value", text);
+		switchOutOfIFrame();
+	}
+
+	public void clickMinorEdit() {
+		switchToIFrame();
+		waitForElementClickableByElement(minorEdit);
+		minorEdit.click();
 		switchOutOfIFrame();
 	}
 }
