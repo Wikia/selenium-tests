@@ -126,6 +126,18 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		driver.switchTo().defaultContent();
 	}
 
+	public void addSortKeyToCategory(String cat, String key) {
+		switchToIFrame();
+		waitForElementByElement(categoryItem);
+		WebElement elementToRemove = getElementByText(categoryItems, cat);
+		waitForElementClickableByElement(elementToRemove);
+		categoryDownIndicator.click();
+		waitForElementVisibleByElement(categoryPopUp);
+		WebElement sortKeyInput = categoryPopUp.findElement(By.cssSelector("input"));
+		sortKeyInput.sendKeys(key);
+		driver.switchTo().defaultContent();
+	}
+
 	public ArrayList<WebElement> getLinkResults(String searchStr, CategoryResultType resultType) {
 		String matchCategoryStr = null;
 		ArrayList<WebElement> foundResults = new ArrayList<>();

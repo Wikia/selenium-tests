@@ -36,10 +36,10 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
-		testCategory = "ca";
+		testCategory = "Ca";
 		categorySearchStr = "abcd";
 		categoryWikiTexts = new ArrayList<>();
-		categoryWikiTexts.add("[[Category:Ca]]");
+		categoryWikiTexts.add("[[Category:" + testCategory + "]]");
 		base = new WikiBasePageObject(driver);
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 	}
@@ -97,5 +97,29 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		VisualEditorOptionsDialog optionsDialog =
 			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
 		optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.MATCHING);
+	}
+
+	@Test(
+	groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
+	)
+	public void VECategoryTests_005_AddNewCategoryWithSortKey() {
+		String testCategory2 = "Newstuff";
+		String sortKey = "testkey";
+		ArrayList<String> categoryWithSortKeyWikiTexts = new ArrayList<>();
+		categoryWithSortKeyWikiTexts.add("[[Category:" + testCategory2 + "|" + sortKey + "]]");
+
+		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
+		VisualEditorOptionsDialog optionsDialog =
+			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
+		optionsDialog.addCategory(testCategory2);
+		optionsDialog.addSortKeyToCategory(testCategory2, sortKey);
+		ve = optionsDialog.clickApplyChangesButton();
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(categoryWithSortKeyWikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
 	}
 }
