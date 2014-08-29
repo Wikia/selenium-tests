@@ -43,16 +43,22 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	private WebElement templatesBox;
 	String beforeImageName = "116x116-";
 
+	public void clearSearchTitle() {
+		waitForElementByElement(searchField);
+		searchField.clear();
+	}
+	
+	public String getSelectedTemplateImageName(int selectedImageIndex) {
+		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
+		String selectedTemplateImageName = templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
+				+ beforeImageName.length());
+		return selectedTemplateImageName;
+	}
+	
 	public TemplateComponentObject selectFileToUpload(String file) {
 		browseForFileInput.sendKeys(getAbsolutePathForFile(PageContent.resourcesPath + file));
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 		return new TemplateComponentObject(driver);
-	}
-
-	public void typeSearchTile(String templateName) {
-		waitForElementByElement(searchField);
-		searchField.sendKeys(templateName);
-		PageObjectLogging.log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
 	}
 
 	public TemplateComponentObject selectTemplate(int templateId) {
@@ -61,11 +67,10 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 		return new TemplateComponentObject(driver);
 	}
 
-	public String getSelectedTemplateImageName(int selectedImageIndex) {
-		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
-		String selectedTemplateImageName = templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
-				+ beforeImageName.length());
-		return selectedTemplateImageName;
+	public void typeSearchTile(String templateName) {
+		waitForElementByElement(searchField);
+		searchField.sendKeys(templateName);
+		PageObjectLogging.log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
 	}
 
 	public void verifyThereIsError() {
@@ -79,8 +84,4 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 		Assertion.assertEquals(checkIfElementOnPage(thumbCollection.get(0)), true);
 	}
 
-	public void clearSearchTitle() {
-		waitForElementByElement(searchField);
-		searchField.clear();
-	}
 }

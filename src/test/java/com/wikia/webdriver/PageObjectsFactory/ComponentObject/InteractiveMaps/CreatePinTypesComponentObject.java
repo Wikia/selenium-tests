@@ -46,20 +46,18 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
 	private int amountPinTypeTitleInputs, amountUploadMarker, amountParentCatElements;
 
-	public void typePinTypeTitle(String pinTypeName, int index) {
-		WebElement firstPin = pinTypeTitleInputs.get(index);
-		waitForElementByElement(firstPin);
-		firstPin.clear();
-		firstPin.sendKeys(pinTypeName);
-		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type is typed in", true, driver);
-	}
-
 	public InteractiveMapPageObject clickSave() {
 		waitForElementByElement(saveButton);
 		saveButton.click();
 		PageObjectLogging.log("clickSave", "clicked save button in create pin types modal", true);
 		driver.switchTo().defaultContent();
 		return new InteractiveMapPageObject(driver);
+	}
+
+	public void clickAddAnotherPinType() {
+		waitForElementByElement(addMorePinTypesLink);
+		addMorePinTypesLink.click();
+		PageObjectLogging.log("clickAddAnotherPinType", "clicked add more pin types link in create pin types modal", true);
 	}
 
 	public void selectParentCategory(int catValue) {
@@ -70,22 +68,24 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 		parentSelected.click();
 	}
 
-	public void clickAddAnotherPinType() {
-		waitForElementByElement(addMorePinTypesLink);
-		addMorePinTypesLink.click();
-		PageObjectLogging.log("clickAddAnotherPinType", "clicked add more pin types link in create pin types modal", true);
-	}
-
-	public void verifyPinTypesDialog() {
-		waitForElementByElement(creatingPinDialog);
-		PageObjectLogging.log("verifyPinTypesDialog", "Pin types dialog was showed", true);
-	}
-
 	public void savePinTypesListState() {
 		amountPinTypeTitleInputs = pinTypeTitleInputs.size();
 		amountUploadMarker = uploadMarker.size();
 		amountParentCatElements = parentCatElements.size();
 		PageObjectLogging.log("savePinTypesListState", "State of pin types list is saved", true);
+	}
+
+	public void typePinTypeTitle(String pinTypeName, int index) {
+		WebElement firstPin = pinTypeTitleInputs.get(index);
+		waitForElementByElement(firstPin);
+		firstPin.clear();
+		firstPin.sendKeys(pinTypeName);
+		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type is typed in", true, driver);
+	}
+
+	public void verifyPinTypesDialog() {
+		waitForElementByElement(creatingPinDialog);
+		PageObjectLogging.log("verifyPinTypesDialog", "Pin types dialog was showed", true);
 	}
 
 	public void verifyAddAnotherPinType() {
@@ -96,6 +96,6 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
 	public void verifyErrorsExist() {
 		waitForElementByElement(pinTypesError);
-		Assertion.assertEquals(false, pinTypesError.getText().isEmpty());
+		Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);
 	}
 }

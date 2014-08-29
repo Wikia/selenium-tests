@@ -44,7 +44,51 @@ public class AddPinComponentObject extends BasePageObject{
 	private WebElement articleImageUrl;
 	@FindBy(css=".error")
 	WebElement errorField;
+	
+	public InteractiveMapPageObject clickCancelButton() {
+		waitForElementByElement(cancelButton);
+		cancelButton.click();
+		PageObjectLogging.log("clickCancelButton", "cancel button clicked",  true, driver);
+		return new InteractiveMapPageObject(driver);
+	}
+	
+	public InteractiveMapPageObject clickSaveButton() {
+		waitForElementByElement(saveButton);
+		saveButton.click();
+		PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
+		return new InteractiveMapPageObject(driver);
+	}
+	
+	public void clickSuggestion(int opt) {
+		waitForElementVisibleByElement(suggestedOption.get(opt));
+		WebElement suggestionSelected = suggestedOption.get(opt);
+		suggestionSelected.click();
+	}
+	
+	public String getAssociatedArticleImageSrc() {
+		waitForElementByElement(associatedArticleImage);
+		String imageSrc = articleImageUrl.getAttribute("src");
+		return imageSrc;
+	}
 
+	public void typePinName(String pinName) {
+		waitForElementByElement(pinNameField);
+		pinNameField.sendKeys(pinName);
+		PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
+	}
+	
+	public void typePinDescription(String pinDescription) {
+		waitForElementByElement(descriptionField);
+		descriptionField.sendKeys(pinDescription);
+		PageObjectLogging.log("typePinDescription", "Pin description was typed in", true);
+	}
+	
+	public void typeAssociatedArticle(String associatedArticleName) {
+		waitForElementByElement(associatedArticleField);
+		associatedArticleField.sendKeys(associatedArticleName);
+		PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in", true);
+	}
+	
 	public void verifyPinTitleFieldIsDisplayed() {
 		waitForElementByElement(pinNameField);
 		PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
@@ -68,51 +112,6 @@ public class AddPinComponentObject extends BasePageObject{
 	public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
 		waitForElementByElement(associatedArticleImage);
 		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible",  true);
-	}
-
-	public InteractiveMapPageObject clickCancelButton() {
-		waitForElementByElement(cancelButton);
-		cancelButton.click();
-		PageObjectLogging.log("clickCancelButton", "cancel button clicked",  true, driver);
-		return new InteractiveMapPageObject(driver);
-	}
-	
-	public InteractiveMapPageObject clickSaveButton() {
-		waitForElementByElement(saveButton);
-		saveButton.click();
-		PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
-		return new InteractiveMapPageObject(driver);
-	}
-	
-	public void typePinName(String pinName) {
-		waitForElementByElement(pinNameField);
-		pinNameField.sendKeys(pinName);
-		PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
-	}
-	
-	public void typePinDescription(String pinDescription) {
-		waitForElementByElement(descriptionField);
-		descriptionField.sendKeys(pinDescription);
-		PageObjectLogging.log("typePinDescription", "Pin description was typed in", true);
-	}
-	
-	public void typeAssociatedArticle(String associatedArticleName) {
-		waitForElementByElement(associatedArticleField);
-		associatedArticleField.sendKeys(associatedArticleName);
-		PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in", true);
-	}
-	
-	public void clickSuggestion(int opt) {
-		waitForElementVisibleByElement(suggestedOption.get(opt));
-		WebElement suggestionSelected = suggestedOption.get(opt);
-		suggestionSelected.click();
-	}
-	
-	public String getAssociatedArticleImageSrc() {
-		waitForElementByElement(associatedArticleImage);
-		String imageSrc = articleImageUrl.getAttribute("src");
-		System.out.println(imageSrc);
-		return imageSrc;
 	}
 	
 	public void verifyAssociatedImageIsVisible(String placeholderImageSrc) {
