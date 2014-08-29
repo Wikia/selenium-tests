@@ -76,8 +76,6 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	public void verifyTemplateWasFound() {
 		waitForElementVisibleByElement(templatesBox);
 		waitForElementByElement(thumbCollection.get(0));
-		System.out.println(thumbCollection.get(0));
-		System.out.println(checkIfElementOnPage(thumbCollection.get(0)));
 		Assertion.assertEquals(checkIfElementOnPage(thumbCollection.get(0)), true);
 	}
 
