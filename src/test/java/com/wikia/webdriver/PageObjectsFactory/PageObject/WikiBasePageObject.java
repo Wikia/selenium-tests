@@ -84,6 +84,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
@@ -398,6 +399,11 @@ public class WikiBasePageObject extends BasePageObject {
 	public InteractiveMapsPageObject openSpecialInteractiveMaps(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialMaps);
 		return new InteractiveMapsPageObject(driver);
+	}
+	
+	public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
+		getUrl(wikiURL + URLsContent.specialMaps + "/" + id);
+		return new InteractiveMapPageObject(driver);
 	}
 
 	public FilePagePageObject openFilePage(String wikiURL, String fileName) {

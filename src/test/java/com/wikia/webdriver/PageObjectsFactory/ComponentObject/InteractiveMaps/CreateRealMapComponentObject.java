@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -26,6 +27,8 @@ public class CreateRealMapComponentObject extends BasePageObject{
 	private WebElement backButton;
 	@FindBy(css = "#intMapNext")
 	private WebElement nextButton;
+	@FindBy(css = ".close")
+	private WebElement closeButton;
 	
 	public CreateAMapComponentObject clickBack() {
 		waitForElementByElement(backButton);
@@ -39,6 +42,12 @@ public class CreateRealMapComponentObject extends BasePageObject{
 		nextButton.click();
 		PageObjectLogging.log("clickCustomMap", "custom map link clicked",  true, driver);
 		return new CreatePinTypesComponentObject(driver);
+	}
+	
+	public InteractiveMapsPageObject clickClose(){
+		waitForElementByElement(closeButton);
+		closeButton.click();
+		return new InteractiveMapsPageObject(driver);
 	}
 	
 	public void typeMapName(String mapName) {

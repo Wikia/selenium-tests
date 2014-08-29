@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -38,6 +39,9 @@ public class InteractiveMapsPageObject extends BasePageObject{
 	private WebElement paginationList;
 	@FindBy(css = ".next")
 	private WebElement paginationNext;
+	@FindBy(css = "#intMapCreateMapModal")
+	private WebElement createMapModal;
+	
 	
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
@@ -81,5 +85,9 @@ public class InteractiveMapsPageObject extends BasePageObject{
 		waitForElementByElement(paginationNext);
 		Assert.assertEquals(checkIfElementOnPage(paginationNext), true);
 		PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true);
+	}
+	
+	public void verifyCreateMapModalNotExist() {
+		Assertion.assertEquals(checkIfElementOnPage(createMapModal), false, "Create map modal was not closed");
 	}
 }

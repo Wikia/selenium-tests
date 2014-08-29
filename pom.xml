@@ -143,7 +143,7 @@
 						<platform>${platform}</platform>
 						<platform-version>${platform-version}</platform-version>
 						<device-id>${device-id}</device-id>
-						<mobile-config>/selenium-config/mobile-config.xml</mobile-config>
+						<mobile-config>../selenium-config/mobile-config.xml</mobile-config>
 						<config>../selenium-config/config.xml</config>
 						<captcha>../selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>

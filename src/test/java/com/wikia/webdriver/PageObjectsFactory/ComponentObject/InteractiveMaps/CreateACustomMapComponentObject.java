@@ -10,6 +10,7 @@ import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -18,13 +19,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
  *
  */
 
-public class CreateACustomMapComponentObject extends BasePageObject{
+public class CreateACustomMapComponentObject extends BasePageObject {
 
 	public CreateACustomMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-	
-	//UI Mapping
+
+	// UI Mapping
 	@FindBy(css = "#intMapUpload")
 	private WebElement browseForFileInput;
 	@FindBy(css = "#intMapTileSetSearch")
@@ -43,15 +44,22 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 	private WebElement clearSearchTitleButton;
 	@FindBy(css = "#intMapTileSetsList")
 	private WebElement templatesBox;
+	@FindBy(css = ".close")
+	private WebElement closeButton;
 	String beforeImageName = "116x116-";
-	
+
+	public InteractiveMapsPageObject clickCloseButton() {
+		waitForElementByElement(closeButton);
+		closeButton.click();
+		return new InteractiveMapsPageObject(driver);
+	}
+
 	public TemplateComponentObject selectFileToUpload(String file) {
-		browseForFileInput.sendKeys(
-				getAbsolutePathForFile(PageContent.resourcesPath + file));
+		browseForFileInput.sendKeys(getAbsolutePathForFile(PageContent.resourcesPath + file));
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 		return new TemplateComponentObject(driver);
 	}
-	
+
 	public void typeSearchTile(String templateName) {
 		waitForElementByElement(searchField);
 		searchField.sendKeys(templateName);
@@ -66,32 +74,27 @@ public class CreateACustomMapComponentObject extends BasePageObject{
 
 	public String getSelectedTemplateImageName(int selectedImageIndex) {
 		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
-		String selectedTemplateImageName = templateList.get(selectedImageIndex)
-			.getAttribute("src").substring(imageNameIndex + beforeImageName.length());
+		String selectedTemplateImageName = templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
+				+ beforeImageName.length());
 		return selectedTemplateImageName;
 	}
 
 	public void verifyThereIsError() {
+		waitForElementVisibleByElement(errorField);
 		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
 	}
-	
-	public void verifyThereIsNoError(){
+
+	public void verifyThereIsNoError() {
 		Assertion.assertEquals(checkIfElementOnPage(errorField), false);
 	}
-	
+
 	public void verifyTemplateWasFound() {
-		try{
-			waitForElementByElement(templatesBox);
-			waitForElementByElement(thumbTitleCollection.get(0));
-			if(thumbCollection.size()>0) {			
-				PageObjectLogging.log("verifyTemplateWasFound", "Templates were found", true, driver);
-			}
-		}catch(Exception e){
-			PageObjectLogging.log("verifyTemplateWasFound", e.toString(), false);
-		}
+		waitForElementVisibleByElement(templatesBox);
+		waitForElementByElement(thumbCollection.get(0));
+		Assertion.assertEquals(checkIfElementOnPage(thumbCollection.get(0)), true);
 	}
-	
-	public void clearSearchTitle() { 
+
+	public void clearSearchTitle() {
 		waitForElementByElement(searchField);
 		searchField.clear();
 	}

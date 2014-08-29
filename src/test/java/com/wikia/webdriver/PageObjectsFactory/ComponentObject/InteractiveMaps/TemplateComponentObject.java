@@ -35,6 +35,8 @@ public class TemplateComponentObject extends BasePageObject{
 	private WebElement templateImagePreview;
 	@FindBy(css = ".modal.medium.int-map-modal")
 	private WebElement newTemplateDialog;
+	@FindBy(css = "#intMapError")
+	private WebElement mapError;
 	
 	public void typeMapName(String mapName) {
 		waitForElementByElement(mapTitleField);
@@ -81,5 +83,10 @@ public class TemplateComponentObject extends BasePageObject{
 	public void verifyTemplateImage(String selectedTemplateName) {
 		waitForElementByElement(templateImagePreview);
 		Assertion.assertTrue(templateImagePreview.getAttribute("src").endsWith(selectedTemplateName));
+	}
+	
+	public void verifyErrorExist(){
+		waitForElementByElement(mapError);
+		Assertion.assertEquals(checkIfElementOnPage(mapError), true);
 	}
 }

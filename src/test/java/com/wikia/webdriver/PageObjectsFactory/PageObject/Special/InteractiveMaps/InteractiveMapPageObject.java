@@ -38,13 +38,11 @@ public class InteractiveMapPageObject extends BasePageObject{
 	@FindBy(css = ".filter-menu.shown-box")
 	private WebElement filterBox;
 	@FindBy(css = "iframe[name=wikia-interactive-map]")
-	private WebElement mapFrame;
+	private static WebElement mapFrame;
 	@FindBy(css = ".error-wrapper")
 	private WebElement mapBeingProcessedModal;
 	@FindBy(css = "#refresh")
 	private WebElement refreshButton;
-	@FindBy(css = ".leaflet-draw-draw-marker")
-	private WebElement addPin;
 	@FindBy(css = ".leaflet-control-embed-map-code-button")
 	private WebElement embedMapCodeButton;
 	@FindBy(css = ".leaflet-draw-draw-marker")
@@ -63,18 +61,18 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement embedMapCodeMediumButton; 
 	@FindBy(css = "button[data-size='large']")
 	private WebElement embedMapCodeLargeButton;
+	@FindBy(css = ".code-sample")
+	private WebElement embedCode;
 	@FindBy(css = ".edit-point-types")
 	private WebElement editPinTypesButton;
 	@FindBy(css = "#intMapPoiCategories")
 	private WebElement mapPoiCategoriesDialog;
-	@FindBy(css = ".leaflet-marker-icon")
+	@FindBy(css = ".leaflet-marker-pane > img")
 	private List<WebElement> pinCollection;
-	@FindBy(css = ".edit-poi-link")
-	private WebElement editPoiLinkForActivePin;
 	@FindBy(css = ".leaflet-popup-content")
 	private WebElement popUpContent;
 	@FindBy(css = ".description > h3")
-	private WebElement titlePinForActivePin;
+	private WebElement pinTitle;
 	@FindBy(css = "#intMapEditPOI")
 	private WebElement intMapEditPOI;
 	@FindBy(css = "#allPointTypes")
@@ -89,11 +87,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement zoomOutButton;
 	@FindBy(css = ".leaflet-map-pane.leaflet-zoom-anim")
 	private WebElement zoomAnim;
-	@FindBy(css = ".leaflet-marker-pane > img")
-	private List<WebElement> pinCollections;
-	@FindBy(css = ".description>h3")
-	private WebElement pinTitle;
-	@FindBy(css = ".description>p")
+	@FindBy(css = ".description")
 	private WebElement pinDescription;
 	@FindBy(css = ".edit-poi-link")
 	private WebElement pinEditLink;
@@ -103,10 +97,6 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement mapPane;
 	@FindBy(css = ".leaflet-tile-loaded")
 	private List<WebElement> mapImagesCollection;
-	@FindBy(css = ".description")
-	private WebElement pinPopUp;
-	@FindBy(css = ".code-sample")
-	private WebElement embedCode;
 	
 	public void clickEmbedMapCodeButton() {
 		driver.switchTo().frame(mapFrame);
@@ -153,9 +143,10 @@ public class InteractiveMapPageObject extends BasePageObject{
 	}
 	
 	public AddPinComponentObject placePinInMap() {
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(addPin);
-		addPin.click();
+		waitForElementByElement(addPinButton);
+		addPinButton.click();
 		waitForElementByElement(mapImagesCollection.get(0));
 		mapImagesCollection.get(0).click();
 		driver.switchTo().defaultContent();
@@ -192,6 +183,11 @@ public class InteractiveMapPageObject extends BasePageObject{
 				waitForElementVisibleByElement(embedMapCodeLarge);
 				break;
 		}
+	}
+	
+	public void verifyPopUpVisible() {
+		waitForElementByElement(pinDescription);
+		Assertion.assertEquals(checkIfElementOnPage(pinDescription), true);
 	}
 	
 	public String getEmbedMapCode() {
@@ -235,6 +231,18 @@ public class InteractiveMapPageObject extends BasePageObject{
 		return mapFrame.getAttribute("data-mapid");
 	}
 	
+	public String getOpenPinName() {
+		 return pinTitle.getText(); 
+	}
+	
+	public void clickOnPin(Integer pinListPosition){
+		waitForElementByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(pinCollection.get(pinListPosition));
+		pinCollection.get(pinListPosition).click();
+		PageObjectLogging.log("clickOnPin", "Pin was clicked", true, driver);
+	}
+	
 	public void clickOnSingleEnabledCategory() {
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame(mapFrame);		
@@ -260,6 +268,16 @@ public class InteractiveMapPageObject extends BasePageObject{
 		allPinTypes.click();
 		PageObjectLogging.log("clickOnAllCategories", "All categories were clicked", true);
 		driver.switchTo().activeElement();
+	}
+	
+	public AddPinComponentObject clickOnEditPin() {
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(pinEditLink);
+		pinEditLink.click();
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickOnEditPin", "Pin edit link was clicked", true);
+		return new AddPinComponentObject(driver);
 	}
 	
 	public void verifyAllPinTypesIsCheck() {
@@ -291,7 +309,18 @@ public class InteractiveMapPageObject extends BasePageObject{
 	
 	public void verifyPinTypesAreUncheck() {
 		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
-		Assertion.assertEquals(0, enabledPinTypesCollection.size());
+		Assertion.assertEquals(0, enabledPinTypesCollection.size(), "Pin types were unchecked");
+	}
+	
+	public void verifyPinNotExist(String pinTitle){
+		Integer pinSize = pinCollection.size()-1;
+		while (pinSize>=0){
+			if(pinCollection.get(pinSize).getText().contains(pinTitle)){
+				break;
+			}
+			pinSize--;
+		}
+		Assertion.assertEquals(pinSize.intValue(), -1, "Pin was deleted correctly");
 	}
 	
 	public void verifyPinTypesAreCheck() {
@@ -307,16 +336,7 @@ public class InteractiveMapPageObject extends BasePageObject{
 		waitForElementByElement(pinDescription);
 		Assertion.assertNotEquals(pinDesc, pinDescription.getText());
 	}
-	
-	public AddPinComponentObject editLastAddedPin() {
-		waitForElementByElement(mapFrame);
-		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(pinEditLink);
-		pinEditLink.click();
-		driver.switchTo().defaultContent();
-		return new AddPinComponentObject(driver);
-	}
-	
+
 	public void verifyControButtonsAreVisible() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
@@ -339,7 +359,12 @@ public class InteractiveMapPageObject extends BasePageObject{
 	}
 	
 	public void verifyPinPopUp() {
-		Assertion.assertEquals(checkIfElementOnPage(pinPopUp), true);
+		Assertion.assertEquals(checkIfElementOnPage(pinDescription), true);
 		Assertion.assertEquals(checkIfElementOnPage(pinEditLink), true);
 	}
+	
+	public void verifyMapWasNotLoaded(){
+		Assertion.assertEquals(checkIfElementOnPage(map), false);
+	}
+	
 }

@@ -53,7 +53,16 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 		waitForElementByElement(firstPin);
 		firstPin.clear();
 		firstPin.sendKeys(pinTypeName);
-		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type is typed in", true, driver);
+		PageObjectLogging.log("typePinTypeTitle", pinTypeName + " title for pin type was typed in", true, driver);
+	}
+	
+	public void typeManyPinTypeTitle(String pinTypeName, int amountFields) {
+		for(Integer $i = 0; $i < amountFields ; $i++) {
+			clickAddAnotherPinType();
+			waitForElementByElement(pinTypeTitleInputs.get(pinTypeTitleInputs.size()-1));
+			pinTypeTitleInputs.get(pinTypeTitleInputs.size()-1).sendKeys(pinTypeName);
+		}		
+		PageObjectLogging.log("typeManyPinTypeTitle", "Added " + amountFields + " pin types", true, driver);
 	}
 
 	public InteractiveMapPageObject clickSave() {
