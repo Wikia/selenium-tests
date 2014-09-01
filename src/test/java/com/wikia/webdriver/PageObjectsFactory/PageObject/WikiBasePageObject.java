@@ -27,6 +27,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -90,6 +91,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 
@@ -203,7 +205,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	public String resetForgotPasswordTime(String userName, String apiToken) {		
+	public String resetForgotPasswordTime(String userName, String apiToken) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},
@@ -788,8 +790,11 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void verifyRevisionMarkedAsMinor() {
-		waitForElementByElement(cssMinorEdit);
-		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+		if(checkIfElementOnPage(cssMinorEdit)) {
+			PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+		} else {
+			throw new NoSuchElementException("Minor Edit is not present on the page");
+		}
 	}
 
 	public void logOut(WebDriver driver) {
@@ -1122,5 +1127,10 @@ public class WikiBasePageObject extends BasePageObject {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		return new VisualEditorPageObject(driver);
+	}
+
+	public WikiHistoryPageObject openArticleHistoryPage(String wikiURL) {
+		getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.historyAction));
+		return new WikiHistoryPageObject(driver);
 	}
 }

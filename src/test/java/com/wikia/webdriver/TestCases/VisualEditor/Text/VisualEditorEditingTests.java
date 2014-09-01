@@ -15,6 +15,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialog
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 
 /**
  * @author Robert 'rochan' Chan
@@ -146,7 +147,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
 	)
-	public void VisualEditorEditing_005_switchToSourceMode_VE_1338() {
+	public void VisualEditorEditing_005_switchToSourceMode() {
 		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		ve = ve.typeInSourceEditor(text);
@@ -163,5 +164,34 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
+	}
+
+	@Test(
+		groups = {"VisualEditorEditing", "VisualEditorEditing_006"}
+	)
+	public void VisualEditorEditing_006_editSummary() {
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.typeTextArea("a");
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		saveDialog.typeEditSummary(text);
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
+		historyPage.verifyLatestEditSummary(text);
+	}
+
+	@Test(
+		groups = {"VisualEditorEditing", "VisualEditorEditing_007"}
+	)
+	public void VisualEditorEditing_007_minorEdit() {
+		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.typeTextArea("b");
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		saveDialog.clickMinorEdit();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
+		historyPage.verifyRevisionMarkedAsMinor();
 	}
 }

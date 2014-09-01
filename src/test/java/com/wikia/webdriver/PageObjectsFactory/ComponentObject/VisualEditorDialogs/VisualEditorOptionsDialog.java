@@ -1,12 +1,15 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.CategoryResultType;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
@@ -30,9 +33,21 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	private WebElement selectedResult;
 	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
 	private WebElement categoryItem;
+	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
+	private List<WebElement> categoryItems;
+	@FindBy(css=".ve-ui-mwCategoryPopupWidget-content")
+	private WebElement categoryPopUp;
+	@FindBy(css=".oo-ui-indicator-down")
+	private WebElement categoryDownIndicator;
+	@FindBy(css=".ve-ui-mwCategoryPopupWidget-content .oo-ui-icon-remove")
+	private WebElement categoryRemoveButton;
+	@FindBy(css=".ve-ui-mwCategoryInputWidget-menu li")
+	private List<WebElement> categorySuggestions;
 
 	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
 	private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
+
+	private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
 	public VisualEditorOptionsDialog(WebDriver driver) {
 		super(driver);
@@ -80,6 +95,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		typeCategory(cat);
 		clickLinkResult();
 		waitForElementByElement(categoryItem);
+		PageObjectLogging.log("addCategory", "Category: " + cat + " is added", true, driver);
 		driver.switchTo().defaultContent();
 	}
 
@@ -96,5 +112,96 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		waitForElementByElement(matchingResult);
 		waitForElementClickableByElement(matchingResult);
 		matchingResult.click();
+	}
+
+	public void removeCategory(String searchStr) {
+		switchToIFrame();
+		waitForElementByElement(categoryItem);
+		WebElement elementToRemove = getElementByText(categoryItems, searchStr);
+		waitForElementClickableByElement(elementToRemove);
+		categoryDownIndicator.click();
+		waitForElementVisibleByElement(categoryPopUp);
+		categoryRemoveButton.click();
+		PageObjectLogging.log("removeCategory", "Category: " + searchStr + " is removed", true, driver);
+		driver.switchTo().defaultContent();
+	}
+
+	public void addSortKeyToCategory(String cat, String key) {
+		switchToIFrame();
+		waitForElementByElement(categoryItem);
+		WebElement elementToRemove = getElementByText(categoryItems, cat);
+		waitForElementClickableByElement(elementToRemove);
+		categoryDownIndicator.click();
+		waitForElementVisibleByElement(categoryPopUp);
+		WebElement sortKeyInput = categoryPopUp.findElement(By.cssSelector("input"));
+		sortKeyInput.sendKeys(key);
+		driver.switchTo().defaultContent();
+	}
+
+	public ArrayList<WebElement> getLinkResults(String searchStr, CategoryResultType resultType) {
+		String matchCategoryStr = null;
+		ArrayList<WebElement> foundResults = new ArrayList<>();
+		boolean isMatchingCategory = false;
+
+		switchToIFrame();
+		typeCategory(searchStr);
+
+		switch (resultType) {
+		case NEW:
+			matchCategoryStr = "New category";
+			break;
+		case MATCHING:
+			matchCategoryStr = "Matching categories";
+			break;
+		}
+
+		for (int i = 0; i< categorySuggestions.size(); i++) {
+			WebElement linkResult = categorySuggestions.get(i);
+			String elementClassName = linkResult.getAttribute("class");
+			if (elementClassName.contains(menuSectionItemText)) {
+				String linkCategory = linkResult.findElement(labeledElementBy).getAttribute("title");
+				if (linkCategory.equals(matchCategoryStr)) {
+					isMatchingCategory = true;
+				} else {
+					isMatchingCategory = false;
+				}
+			} else {
+				if (isMatchingCategory) {
+					foundResults.add(linkResult);
+				}
+			}
+		}
+
+		if (foundResults.isEmpty()) {
+			throw new NoSuchElementException(
+				"No '" + matchCategoryStr + "' found with the search word: " + searchStr
+			);
+		}
+
+		PageObjectLogging.log(
+			"getLinkResults",
+			"Found " + foundResults.size() + " result(s) under '" + matchCategoryStr + "'",
+			true
+		);
+		switchOutOfIFrame();
+		return foundResults;
+	}
+
+	public void verifyLinkSuggestions(String searchStr, CategoryResultType resultType) {
+		ArrayList<WebElement> results = getLinkResults(searchStr, resultType);
+		switchToIFrame();
+		for (WebElement result : results) {
+			verifyLinkSuggestion(result, searchStr);
+		}
+		switchOutOfIFrame();
+	}
+
+	private void verifyLinkSuggestion(WebElement linkResult, String searchStr) {
+		String categoryStr = linkResult.findElement(labeledElementBy).getAttribute("title");
+		if (categoryStr.toLowerCase().contains(searchStr.toLowerCase())) {
+			PageObjectLogging.log("getLinkResults", "Found type ahead suggestion: " + categoryStr, true);
+		} else {
+			throw new NoSuchElementException(searchStr + " is NOT found in type ahead suggestion: " + categoryStr);
+		}
 	}
 }

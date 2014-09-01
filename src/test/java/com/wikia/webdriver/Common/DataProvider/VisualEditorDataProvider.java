@@ -70,6 +70,11 @@ public class VisualEditorDataProvider {
 		DECREASE;
 	}
 
+	public enum CategoryResultType {
+		NEW,
+		MATCHING;
+	}
+
 	/**
 	 * Data provider with text formatting
 	 */
