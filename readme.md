@@ -45,9 +45,13 @@ Example command:
 
     mvn clean test -Dbrowser=FF -Denv=prod -Dwiki-name=mediawiki119 -Dgroups=Login
 
-##### Running tests on devbox for muppets wikia
+##### Running tests on devbox for muppet wikia
 
-    mvn clean test -Dbrowser=CHROME -Denv=dev-karol -Dwiki-name=muppets -Dgroups=Login
+    mvn clean test -Dbrowser=CHROME -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
+
+##### Running tests on devbox for muppet wikia on a Chrome pretending to be an Android device
+
+    mvn clean test -Dbrowser=CHROMEMOBILE -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
 
 If everything goes right it should log in as a QATestsUser.
 
