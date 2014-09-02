@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +21,6 @@ public class TemplateComponentObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping
 	@FindBy(css = "input[name='map-title']")
 	private WebElement mapTitleField;
 	@FindBy(css = "input[name='tile-set-title']")
@@ -29,8 +29,6 @@ public class TemplateComponentObject extends BasePageObject{
 	private WebElement nextButton;
 	@FindBy(css = "#intMapBack")
 	private WebElement backButton;
-	@FindBy(css = ".close")
-	private WebElement closeButton;
 	@FindBy(css = ".intMapPreviewImage")
 	private WebElement templateImagePreview;
 	@FindBy(css = ".modal.medium.int-map-modal")
@@ -62,18 +60,6 @@ public class TemplateComponentObject extends BasePageObject{
 		backButton.click();
 		PageObjectLogging.log("clickBack", "clicked back button in naming map modal", true, driver);
 		return new CreateACustomMapComponentObject(driver);
-	}
-	
-	public InteractiveMapsPageObject closeTemplateComponentDialog() {
-		waitForElementClickableByElement(closeButton);
-		closeButton.click();
-		PageObjectLogging.log("closeTemplateComponentDialog", "Template dialog was closed", true, driver);
-		return new InteractiveMapsPageObject(driver);
-	}
-	
-	public void verifyTemplateDialog() {
-		waitForElementByElement(newTemplateDialog);
-		PageObjectLogging.log("verifyTemplateDialog", "Template dialog is visible", true);
 	}
 	
 	public void verifyTemplateImagePreview() {

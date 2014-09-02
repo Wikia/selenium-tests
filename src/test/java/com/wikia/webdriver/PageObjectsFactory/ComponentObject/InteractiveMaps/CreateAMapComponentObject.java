@@ -20,8 +20,7 @@ public class CreateAMapComponentObject extends BasePageObject {
 	public CreateAMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-
-	// UI Mapping
+	
 	@FindBy(css = ".int-map-icon-geo-tile-set-blue")
 	private WebElement realMapLink;
 	@FindBy(css = ".int-map-icon-custom-tile-set-blue")
@@ -63,5 +62,15 @@ public class CreateAMapComponentObject extends BasePageObject {
 	public void verifyLoginModal() {
 		waitForElementByElement(loginModal);
 		PageObjectLogging.log("verifyLoginModal", "Login modal is displayed", true);
+	}
+
+	public void verifyRealMapAndCustomMapButtons() {
+		waitForElementByElement(realMapLink);
+		waitForElementByElement(customMapLink);
+		PageObjectLogging.log(
+			"verifyRealMapAndCustomMapButtons",
+			"Real Map and Custom Map links are visible",
+			true
+		);
 	}
 }

@@ -24,28 +24,28 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	public CreateACustomMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-
-	// UI Mapping
+	
 	@FindBy(css = "#intMapUpload")
-	private WebElement browseForFileInput;
-	@FindBy(css = "#intMapTileSetSearch")
-	private WebElement searchField;
-	@FindBy(css = "#intMapBack")
-	private WebElement backButton;
-	@FindBy(css = ".modalEvent>img")
-	private List<WebElement> templateList;
-	@FindBy(css = "#intMapError")
-	private WebElement errorField;
-	@FindBy(css = ".tile-set-thumb")
-	private List<WebElement> thumbCollection;
-	@FindBy(css = ".tile-set-thumb > strong")
-	private List<WebElement> thumbTitleCollection;
-	@FindBy(css = ".clear-search secondary")
-	private WebElement clearSearchTitleButton;
-	@FindBy(css = "#intMapTileSetsList")
-	private WebElement templatesBox;
-	@FindBy(css = ".close")
-	private WebElement closeButton;
+	 private WebElement browseForFileInput;
+	 @FindBy(css = "#intMapTileSetSearch")
+	 private WebElement searchField;
+	 @FindBy(css = "#intMapBack")
+	 private WebElement backButton;
+	 @FindBy(css = ".modalEvent>img")
+	 private List<WebElement> templateList;
+	 @FindBy(css = "#intMapError")
+	 private WebElement errorField;
+	 @FindBy(css = ".tile-set-thumb")
+	 private List<WebElement> thumbCollection;
+	 @FindBy(css = ".tile-set-thumb > strong")
+	 private List<WebElement> thumbTitleCollection;
+	 @FindBy(css = ".clear-search secondary")
+	 private WebElement clearSearchTitleButton;
+	 @FindBy(css = "#intMapTileSetsList")
+	 private WebElement templatesBox;
+	 @FindBy(css = ".close")
+	 private WebElement closeButton;
+
 	String beforeImageName = "116x116-";
 
 	public InteractiveMapsPageObject clickCloseButton() {
@@ -97,5 +97,16 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	public void clearSearchTitle() {
 		waitForElementByElement(searchField);
 		searchField.clear();
+	}
+	
+	public CreateAMapComponentObject clickBack() {
+		waitForElementByElement(backButton);
+		backButton.click();
+		PageObjectLogging.log("clickCustomMap", "custom map link clicked",  true, driver);
+		return new CreateAMapComponentObject(driver);
+	}
+
+	public void verifyTemplateListElementVisible(int element) {
+		waitForElementByElement(templateList.get(element));
 	}
 }

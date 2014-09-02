@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -24,7 +25,6 @@ public class InteractiveMapPageObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping
 	@FindBy(css = "#map")
 	private WebElement map;
 	@FindBy(css = ".enable-edit")
@@ -43,10 +43,9 @@ public class InteractiveMapPageObject extends BasePageObject{
 	private WebElement mapBeingProcessedModal;
 	@FindBy(css = "#refresh")
 	private WebElement refreshButton;
-	@FindBy(css = ".leaflet-control-embed-map-code-button")
-	private WebElement embedMapCodeButton;
 	@FindBy(css = ".leaflet-draw-draw-marker")
 	private WebElement addPinButton;
+	private WebElement embedMapCodeButton;
 	@FindBy(css = "#intMapEmbedMap")
 	private WebElement embedMapDialog;
 	@FindBy(css = ".code-sample.small")
@@ -125,23 +124,27 @@ public class InteractiveMapPageObject extends BasePageObject{
 		driver.switchTo().defaultContent();
 	}
 
-	public void verifyMapIsBeingProcessedMessage() {
-		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(mapBeingProcessedModal);
-		driver.switchTo().defaultContent();
-	}
-	
 	public void verifyEmbedMapDialog() {
 		waitForElementByElement(embedMapDialog);
 		checkIfElementOnPage(embedMapCodeSmall);
 	}
-	
+
 	public void closeMapBeingProcessedModalIfVisible() {
+		int i = 0;
 		while(checkIfElementOnPage(mapBeingProcessedModal)) {
 			refreshButton.click();
+			i += 1;
+			if(i > 10) {
+				PageObjectLogging.log(
+					"closeMapBeingProcessedModalIfVisible",
+					"Close map being processed dialog cannot be closed",
+					false
+				);
+				return;
+			}
 		}
 	}
-	
+
 	public AddPinComponentObject placePinInMap() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);

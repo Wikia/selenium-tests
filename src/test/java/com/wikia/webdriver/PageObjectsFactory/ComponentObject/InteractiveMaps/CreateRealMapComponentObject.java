@@ -18,7 +18,6 @@ public class CreateRealMapComponentObject extends BasePageObject{
 		super(driver);
 	}
 	
-	//UI Mapping	
 	@FindBy(css = "input[name=map-title]")
 	private WebElement mapTitleField;
 	@FindBy(css = "#intMapPreviewImage")

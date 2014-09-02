@@ -24,7 +24,6 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 		super(driver);
 	}
 
-	// UI Mapping
 	@FindBy(css = "input[name='poiCategoryNames[]']")
 	private List<WebElement> pinTypeTitleInputs;
 	@FindBy(css = "input[name='poiCategoryMarkers[]']")

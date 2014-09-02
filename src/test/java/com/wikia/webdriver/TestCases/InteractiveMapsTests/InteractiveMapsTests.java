@@ -25,8 +25,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
  * Author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * Date: 20.06.14
- * Time: 16:53
+ * 
     - Special:Maps page
 	IM01: Creating a custom new map based on new image upload v 
 	IM02: Create a custom new map based on existing template v
@@ -61,14 +60,40 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 	IM18: => POIETC11: Verify pin data is correctly updated after saving (T1 priority) v
 	IM19: SMPTC02 =>Check all required elements from page are displayed: create new map link, list of maps (max 10), pagination
 	IM23  : Click Create a map button and check that Learn more link redirects to maps.wikia.com
+	IM06: Verify it is possible to add a pin to the map and that add pin dialog has all required elements
+	IM07: Verify removing a suggestion of article with image will remove image from placeholder
+	IM08: Embed a map outside of wikia and verify there is a branding footer, zoom in/out options and filters box collapsibility
+	IM09: Verify back button works correctly on every dialog
+
+	-Edit PIN Types Modal       
+	IM10: Check image error validation for small size, big size and non-image extension
+	IM11: Verify clicking "Add another pin type" link will display a new line and fields for adding new information  
+	IM12: Verify saving any new data will actually update the data for that pin edited
+    
+    - Other Test Cases
+    IM13: Verify possibility of embedding wikia map in other wikia pages. 
+    IM14: Verify following elements in map modal when a map is embedded in a wikia page: PIN description when
+          clicking, zoom, add/edit features for pin types and pins, embed map button, filters box. Verify there is no branding footer 
+    IM15: Test template search works correctly for unexisting and existing templates        
+	IM16: Verify following behaviours in "Filters" left hand side column:
+		All categories are checked and user clicks on single category: We uncheck clicked category and "All categories".
+		All categories but one are checked and user clicks on unchecked one: We check clicked category and "All categories".
+		All categories are checked (so "All categories" is checked too) and user clicks "All categories": We uncheck all categories and "All categories".
+		Some categories are checked (so "All categories" is unchecked) and user clicks "All categories": We check all categories and "All categories".		
+	IM17: Verify embed map code dialog works correctly from Special:Map page	
 	*/
 
 public class InteractiveMapsTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
-	
-	@Test(groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"},
-	enabled = false)
+
+	int selectedTemplateIndex = 1;
+	int selectedMapIndex = 0;
+
+	@Test(
+		groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"},
+		enabled = false
+	)
 	public void InteractiveMaps_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -81,7 +106,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsContent.templateName = base.getTimeStamp();
 		template.typeTemplateName(InteractiveMapsContent.templateName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName,InteractiveMapsContent.pinTypeIndex);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName, InteractiveMapsContent.pinTypeIndex);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
@@ -192,6 +217,25 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		pinTypeModal.verifyErrorsExist();
 		pinTypeModal.selectFileToUpload(PageContent.brokenExtensionFile, "Image with wrong extension");
 		pinTypeModal.verifyErrorsExist();
+	}
+	
+	@Test(groups = {"InteractiveMaps_009", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_009_VerifyBackButtonWorksCorrectly() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject map = specialMap.clickCreateAMap();
+		CreateACustomMapComponentObject customMap = map.clickCustomMap();
+		TemplateComponentObject template = customMap.selectTemplate(selectedTemplateIndex);
+		template.verifyTemplateImagePreview();
+		customMap = template.clickBack();
+		customMap.verifyTemplateListElementVisible(selectedTemplateIndex);
+		map = customMap.clickBack();
+		map.verifyRealMapAndCustomMapButtons();
+		CreateRealMapComponentObject realMap = map.clickRealMap();
+		realMap.verifyRealMapPreviewImage();
+		map = realMap.clickBack();
+		map.verifyRealMapAndCustomMapButtons();
 	}
 		
 	@Test(groups = {"InteractiveMaps_010", "InteractiveMapTests", "InteractiveMaps"})

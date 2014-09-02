@@ -3,9 +3,6 @@ package com.wikia.webdriver.Common.ContentPatterns;
 
 public class InteractiveMapsContent {
 
-	public static final String mapName = "RMG";
-	public static final String pinTypeName = "RMG";
-	public static final String pinName = "RMG";
 	public static final String pinDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 			+ " Morbi eget porta eros, a dapibus nulla. Cras quis vulputate mauris, vel aliquam quam. "
 			+ "Praesent lobortis massa a malesuada cursus. Ut ac bibendum metus. Aliquam vitae justo nunc. "
@@ -23,4 +20,7 @@ public class InteractiveMapsContent {
 	public static final String templateNameToSearchShouldBeFound = "test";
 	public static final String templateNameToSearchShouldNotBeFound = "1234567890123123123123213";
 	public static final String learnMoreLink = "http://maps.wikia.com";
+	public static final String mapName = "testingMapName";
+	public static final String pinTypeName = "testingPinType";
+	public static final String pinName = "testingPinName";
 }

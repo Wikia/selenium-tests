@@ -21,8 +21,7 @@ public class AddPinComponentObject extends BasePageObject {
 	public AddPinComponentObject(WebDriver driver) {
 		super(driver);
 	}
-
-	// UI Mapping
+	
 	@FindBy(css = "input[name=name]")
 	private WebElement pinNameField;
 	@FindBy(css = "#intMapArticleTitle")
@@ -70,7 +69,12 @@ public class AddPinComponentObject extends BasePageObject {
 
 	public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
 		waitForElementByElement(associatedArticleImage);
-		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible", true, driver);
+		PageObjectLogging.log(
+			"verifyAssociatedArticleImageIsDisplayed",
+			"Associated article image placeholder is visible",
+			true,
+			driver
+		);
 	}
 	
 	public void verifyErrorIsPresented() {
@@ -137,7 +141,6 @@ public class AddPinComponentObject extends BasePageObject {
 	public String getAssociatedArticleImageSrc() {
 		waitForElementByElement(associatedArticleImage);
 		String imageSrc = articleImageUrl.getAttribute("src");
-		System.out.println(imageSrc);
 		return imageSrc;
 	}
 	
