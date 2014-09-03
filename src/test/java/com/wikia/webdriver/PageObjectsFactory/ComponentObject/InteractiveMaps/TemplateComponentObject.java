@@ -15,12 +15,12 @@ import com.wikia.webdriver.Common.Core.Assertion;
  *
  */
 
-public class TemplateComponentObject extends BasePageObject{
+public class TemplateComponentObject extends BasePageObject {
 
 	public TemplateComponentObject(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(css = "input[name='map-title']")
 	private WebElement mapTitleField;
 	@FindBy(css = "input[name='tile-set-title']")
@@ -35,33 +35,33 @@ public class TemplateComponentObject extends BasePageObject{
 	private WebElement newTemplateDialog;
 	@FindBy(css = "#intMapError")
 	private WebElement mapError;
-	
-	public void typeMapName(String mapName) {
-		waitForElementByElement(mapTitleField);
-		mapTitleField.sendKeys(mapName);
-		PageObjectLogging.log("typeMapName", mapName + " title for map typed in", true, driver);
-	}
-	
-	public void typeTemplateName(String templateName) {
-		waitForElementByElement(nameTemplateField);
-		nameTemplateField.sendKeys(templateName);
-		PageObjectLogging.log("typeTemplateName", templateName + " title for template typed in", true, driver);
-	}
-	
+
 	public CreatePinTypesComponentObject clickNext() {
 		waitForElementClickableByElement(nextButton);
 		nextButton.click();
 		PageObjectLogging.log("clickNext", "clicked next button in naming map modal", true, driver);
 		return new CreatePinTypesComponentObject(driver);
 	}
-	
+
 	public CreateACustomMapComponentObject clickBack() {
 		waitForElementClickableByElement(backButton);
 		backButton.click();
 		PageObjectLogging.log("clickBack", "clicked back button in naming map modal", true, driver);
 		return new CreateACustomMapComponentObject(driver);
 	}
-	
+
+	public void typeMapName(String mapName) {
+		waitForElementByElement(mapTitleField);
+		mapTitleField.sendKeys(mapName);
+		PageObjectLogging.log("typeMapName", mapName + " title for map typed in", true, driver);
+	}
+
+	public void typeTemplateName(String templateName) {
+		waitForElementByElement(nameTemplateField);
+		nameTemplateField.sendKeys(templateName);
+		PageObjectLogging.log("typeTemplateName", templateName + " title for template typed in", true, driver);
+	}
+
 	public void verifyTemplateImagePreview() {
 		waitForElementByElement(templateImagePreview);
 	}
@@ -70,8 +70,8 @@ public class TemplateComponentObject extends BasePageObject{
 		waitForElementByElement(templateImagePreview);
 		Assertion.assertTrue(templateImagePreview.getAttribute("src").endsWith(selectedTemplateName));
 	}
-	
-	public void verifyErrorExist(){
+
+	public void verifyErrorExist() {
 		waitForElementByElement(mapError);
 		Assertion.assertEquals(checkIfElementOnPage(mapError), true);
 	}

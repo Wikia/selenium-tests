@@ -87,9 +87,6 @@ public class InteractiveMapsTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
-	int selectedTemplateIndex = 1;
-	int selectedMapIndex = 0;
-
 	@Test(
 		groups = {"InteractiveMaps_001", "InteractiveMapTests", "InteractiveMaps"},
 		enabled = false
@@ -226,10 +223,10 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject map = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMap = map.clickCustomMap();
-		TemplateComponentObject template = customMap.selectTemplate(selectedTemplateIndex);
+		TemplateComponentObject template = customMap.selectTemplate(InteractiveMapsContent.selectedTemplateIndex);
 		template.verifyTemplateImagePreview();
 		customMap = template.clickBack();
-		customMap.verifyTemplateListElementVisible(selectedTemplateIndex);
+		customMap.verifyTemplateListElementVisible(InteractiveMapsContent.selectedTemplateIndex);
 		map = customMap.clickBack();
 		map.verifyRealMapAndCustomMapButtons();
 		CreateRealMapComponentObject realMap = map.clickRealMap();
@@ -531,18 +528,6 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		CreateACustomMapComponentObject customMapModal = createMapModal.clickCustomMap();
 		customMapModal.clickCloseButton();
 		specialMap.verifyCreateMapModalNotExist();		
-	}
-	
-	@Test(groups = {"InteractiveMaps_029", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_029_VerifyScrollPinTypes() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject mapPage = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
-		mapPage.clickEditPinTypesButton();
-		CreatePinTypesComponentObject editPinModal = new CreatePinTypesComponentObject(driver);
-		editPinModal.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 20);
-		editPinModal.clickSave();		
 	}
 
 }

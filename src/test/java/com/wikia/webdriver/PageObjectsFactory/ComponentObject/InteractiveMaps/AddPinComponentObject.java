@@ -21,7 +21,7 @@ public class AddPinComponentObject extends BasePageObject {
 	public AddPinComponentObject(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(css = "input[name=name]")
 	private WebElement pinNameField;
 	@FindBy(css = "#intMapArticleTitle")
@@ -47,6 +47,83 @@ public class AddPinComponentObject extends BasePageObject {
 	@FindBy(css = ".error")
 	WebElement errorField;
 
+	public void clearPinName() {
+		waitForElementByElement(pinNameField);
+		pinNameField.clear();
+		PageObjectLogging.log("clearPinName", "Pin name input was cleared", true);
+	}
+
+	public void clearAssociatedArticleField() {
+		waitForElementByElement(associatedArticleField);
+		associatedArticleField.clear();
+		PageObjectLogging.log("clearAssociatedArticleField", "Associated article field was cleared", true);
+	}
+
+	public InteractiveMapPageObject clickCancelButton() {
+		waitForElementByElement(cancelButton);
+		cancelButton.click();
+		PageObjectLogging.log("clickCancelButton", "cancel button clicked", true, driver);
+		return new InteractiveMapPageObject(driver);
+	}
+
+	public void clearPinDescription() {
+		waitForElementByElement(descriptionField);
+		descriptionField.clear();
+		PageObjectLogging.log("clearPinName", "Description input was cleared", true);
+	}
+
+	public InteractiveMapPageObject clickSaveButton() {
+		waitForElementByElement(saveButton);
+		saveButton.click();
+		PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
+		return new InteractiveMapPageObject(driver);
+	}
+
+	public void clickSuggestion(int opt) {
+		waitForElementVisibleByElement(suggestedOption.get(opt));
+		WebElement suggestionSelected = suggestedOption.get(opt);
+		suggestionSelected.click();
+	}
+
+	public InteractiveMapPageObject clickDeletePin() {
+		waitForElementByElement(deleteButton);
+		deleteButton.click();
+		driver.switchTo().defaultContent();
+		return new InteractiveMapPageObject(driver);
+	}
+
+	public String getAssociatedArticleImageSrc() {
+		waitForElementByElement(associatedArticleImage);
+		String imageSrc = articleImageUrl.getAttribute("src");
+		return imageSrc;
+	}
+
+	public void selectPinType() {
+		waitForElementByElement(pinCategorySelector);
+		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
+		List<WebElement> pinCategoryList = pinCategorySelectorDropDown.getOptions();
+		pinCategoryList.get(1).click();
+		PageObjectLogging.log("selectPinType", "Pin type was choosed", true, driver);
+	}
+
+	public void typePinName(String pinName) {
+		waitForElementByElement(pinNameField);
+		pinNameField.sendKeys(pinName);
+		PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
+	}
+
+	public void typePinDescription(String pinDescription) {
+		waitForElementByElement(descriptionField);
+		descriptionField.sendKeys(pinDescription);
+		PageObjectLogging.log("typePinDescription", "Pin description was typed in", true);
+	}
+
+	public void typeAssociatedArticle(String associatedArticleName) {
+		waitForElementByElement(associatedArticleField);
+		associatedArticleField.sendKeys(associatedArticleName);
+		PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in", true);
+	}
+
 	public void verifyPinTitleFieldIsDisplayed() {
 		waitForElementByElement(pinNameField);
 		PageObjectLogging.log("verifyPinTitleFieldIsDisplayed", "Pin name field is visible", true);
@@ -69,86 +146,12 @@ public class AddPinComponentObject extends BasePageObject {
 
 	public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
 		waitForElementByElement(associatedArticleImage);
-		PageObjectLogging.log(
-			"verifyAssociatedArticleImageIsDisplayed",
-			"Associated article image placeholder is visible",
-			true,
-			driver
-		);
+		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible", true, driver);
 	}
-	
+
 	public void verifyErrorIsPresented() {
 		waitForElementByElement(errorField);
 		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
-	}
-
-	public InteractiveMapPageObject clickCancelButton() {
-		waitForElementByElement(cancelButton);
-		cancelButton.click();
-		PageObjectLogging.log("clickCancelButton", "cancel button clicked", true, driver);
-		return new InteractiveMapPageObject(driver);
-	}
-
-	public InteractiveMapPageObject clickSaveButton() {
-		waitForElementByElement(saveButton);
-		saveButton.click();
-		PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
-		return new InteractiveMapPageObject(driver);
-	}
-
-	public void typePinName(String pinName) {
-		waitForElementByElement(pinNameField);
-		pinNameField.sendKeys(pinName);
-		PageObjectLogging.log("typePinName", pinName + " title for Pin was typed in", true);
-	}
-
-	public void clearPinName() {
-		waitForElementByElement(pinNameField);
-		pinNameField.clear();
-		PageObjectLogging.log("clearPinName", "Pin name input was cleared", true);
-	}
-
-	public void clearAssociatedArticleField() {
-		waitForElementByElement(associatedArticleField);
-		associatedArticleField.clear();
-		PageObjectLogging.log("clearAssociatedArticleField", "Associated article field was cleared", true);
-	}
-
-	public void typePinDescription(String pinDescription) {
-		waitForElementByElement(descriptionField);
-		descriptionField.sendKeys(pinDescription);
-		PageObjectLogging.log("typePinDescription", "Pin description was typed in", true);
-	}
-
-	public void clearPinDescription() {
-		waitForElementByElement(descriptionField);
-		descriptionField.clear();
-		PageObjectLogging.log("clearPinName", "Description input was cleared", true);
-	}
-
-	public void typeAssociatedArticle(String associatedArticleName) {
-		waitForElementByElement(associatedArticleField);
-		associatedArticleField.sendKeys(associatedArticleName);
-		PageObjectLogging.log("typePinName", associatedArticleName + " Associated article is typed in", true);
-	}
-
-	public void clickSuggestion(int opt) {
-		waitForElementVisibleByElement(suggestedOption.get(opt));
-		WebElement suggestionSelected = suggestedOption.get(opt);
-		suggestionSelected.click();
-	}
-
-	public String getAssociatedArticleImageSrc() {
-		waitForElementByElement(associatedArticleImage);
-		String imageSrc = articleImageUrl.getAttribute("src");
-		return imageSrc;
-	}
-	
-	public InteractiveMapPageObject clickDeletePin() {
-		waitForElementByElement(deleteButton);
-		deleteButton.click();
-		driver.switchTo().defaultContent();
-		return new InteractiveMapPageObject(driver);
 	}
 
 	public void verifyAssociatedImageIsVisible(String placeholderImageSrc) {
@@ -168,11 +171,4 @@ public class AddPinComponentObject extends BasePageObject {
 		Assertion.assertEquals(newCategory, pinCategorySelectorList.get(0));
 	}
 
-	public void selectPinType() {
-		waitForElementByElement(pinCategorySelector);
-		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
-		List<WebElement> pinCategoryList = pinCategorySelectorDropDown.getOptions();
-		pinCategoryList.get(1).click();
-		PageObjectLogging.log("selectPinType", "Pin type was choosed", true, driver);
-	}
 }

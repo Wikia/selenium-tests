@@ -24,34 +24,53 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	public CreateACustomMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(css = "#intMapUpload")
-	 private WebElement browseForFileInput;
-	 @FindBy(css = "#intMapTileSetSearch")
-	 private WebElement searchField;
-	 @FindBy(css = "#intMapBack")
-	 private WebElement backButton;
-	 @FindBy(css = ".modalEvent>img")
-	 private List<WebElement> templateList;
-	 @FindBy(css = "#intMapError")
-	 private WebElement errorField;
-	 @FindBy(css = ".tile-set-thumb")
-	 private List<WebElement> thumbCollection;
-	 @FindBy(css = ".tile-set-thumb > strong")
-	 private List<WebElement> thumbTitleCollection;
-	 @FindBy(css = ".clear-search secondary")
-	 private WebElement clearSearchTitleButton;
-	 @FindBy(css = "#intMapTileSetsList")
-	 private WebElement templatesBox;
-	 @FindBy(css = ".close")
-	 private WebElement closeButton;
+	private WebElement browseForFileInput;
+	@FindBy(css = "#intMapTileSetSearch")
+	private WebElement searchField;
+	@FindBy(css = "#intMapBack")
+	private WebElement backButton;
+	@FindBy(css = ".modalEvent>img")
+	private List<WebElement> templateList;
+	@FindBy(css = "#intMapError")
+	private WebElement errorField;
+	@FindBy(css = ".tile-set-thumb")
+	private List<WebElement> thumbCollection;
+	@FindBy(css = ".tile-set-thumb > strong")
+	private List<WebElement> thumbTitleCollection;
+	@FindBy(css = ".clear-search secondary")
+	private WebElement clearSearchTitleButton;
+	@FindBy(css = "#intMapTileSetsList")
+	private WebElement templatesBox;
+	@FindBy(css = ".close")
+	private WebElement closeButton;
 
 	String beforeImageName = "116x116-";
+
+	public void clearSearchTitle() {
+		waitForElementByElement(searchField);
+		searchField.clear();
+	}
 
 	public InteractiveMapsPageObject clickCloseButton() {
 		waitForElementByElement(closeButton);
 		closeButton.click();
 		return new InteractiveMapsPageObject(driver);
+	}
+
+	public CreateAMapComponentObject clickBack() {
+		waitForElementByElement(backButton);
+		backButton.click();
+		PageObjectLogging.log("clickCustomMap", "custom map link clicked", true, driver);
+		return new CreateAMapComponentObject(driver);
+	}
+
+	public String getSelectedTemplateImageName(int selectedImageIndex) {
+		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
+		String selectedTemplateImageName = templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
+				+ beforeImageName.length());
+		return selectedTemplateImageName;
 	}
 
 	public TemplateComponentObject selectFileToUpload(String file) {
@@ -60,23 +79,16 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 		return new TemplateComponentObject(driver);
 	}
 
-	public void typeSearchTile(String templateName) {
-		waitForElementByElement(searchField);
-		searchField.sendKeys(templateName);
-		PageObjectLogging.log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
-	}
-
 	public TemplateComponentObject selectTemplate(int templateId) {
 		waitForElementByElement(templateList.get(templateId));
 		templateList.get(templateId).click();
 		return new TemplateComponentObject(driver);
 	}
 
-	public String getSelectedTemplateImageName(int selectedImageIndex) {
-		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
-		String selectedTemplateImageName = templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
-				+ beforeImageName.length());
-		return selectedTemplateImageName;
+	public void typeSearchTile(String templateName) {
+		waitForElementByElement(searchField);
+		searchField.sendKeys(templateName);
+		PageObjectLogging.log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
 	}
 
 	public void verifyThereIsError() {
@@ -92,18 +104,6 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 		waitForElementVisibleByElement(templatesBox);
 		waitForElementByElement(thumbCollection.get(0));
 		Assertion.assertEquals(checkIfElementOnPage(thumbCollection.get(0)), true);
-	}
-
-	public void clearSearchTitle() {
-		waitForElementByElement(searchField);
-		searchField.clear();
-	}
-	
-	public CreateAMapComponentObject clickBack() {
-		waitForElementByElement(backButton);
-		backButton.click();
-		PageObjectLogging.log("clickCustomMap", "custom map link clicked",  true, driver);
-		return new CreateAMapComponentObject(driver);
 	}
 
 	public void verifyTemplateListElementVisible(int element) {
