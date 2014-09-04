@@ -77,6 +77,7 @@ public class AddPinComponentObject extends BasePageObject {
 		waitForElementByElement(saveButton);
 		saveButton.click();
 		PageObjectLogging.log("clickSaveButton", "Save button clicked", true, driver);
+		driver.switchTo().defaultContent();
 		return new InteractiveMapPageObject(driver);
 	}
 

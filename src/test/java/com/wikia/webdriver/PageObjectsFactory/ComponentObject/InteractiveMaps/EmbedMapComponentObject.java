@@ -60,6 +60,7 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject{
 	public void verifyMapElementsPresented() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
+		scrollToElement(mapFrame);
 		waitForElementVisibleByElement(filterBox);
 		Assertion.assertEquals(checkIfElementOnPage(filterBox), true);
 		waitForElementVisibleByElement(zoomInButton);

@@ -9,6 +9,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 import java.util.List;
 
+import org.testng.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
@@ -77,7 +78,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement allPinTypes;
 	@FindBy(css = ".point-type.enabled")
 	private List<WebElement> enabledPinTypesCollection;
-	@FindBy(css = ".point-type")
+	@FindBy(css = "li[class=point-type]")
 	private List<WebElement> disabledPinTypesCollection;
 	@FindBy(css = ".leaflet-control-zoom-in")
 	private WebElement zoomInButton;
@@ -154,26 +155,29 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void clickZoomInButton() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(zoomInButton);
+		waitForElementClickableByElement(zoomInButton);
 		zoomInButton.click();
 		waitForElementByElement(zoomAnim);
+		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickZoomInButton", "Map zoom in was clicked", true, driver);
 	}
 
 	public void clickZoomOutButton() {
-		waitForElementVisibleByElement(zoomOutButton);
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		waitForElementClickableByElement(zoomOutButton);
 		zoomOutButton.click();
 		waitForElementByElement(zoomAnim);
+		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
 	}
 
 	public void clickOnPin(Integer pinListPosition) {
-		waitForElementByElement(mapFrame);
+		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(pinCollection.get(pinListPosition));
 		pinCollection.get(pinListPosition).click();
 		PageObjectLogging.log("clickOnPin", "Pin was clicked", true, driver);
-		driver.switchTo().defaultContent();
 	}
 
 	public void clickOnSingleEnabledCategory() {
@@ -182,7 +186,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex).click();
 		PageObjectLogging.log("clickOnSingleEnabledCategory", "Single enabled category was clicked", true);
-		driver.switchTo().activeElement();
+		driver.switchTo().defaultContent();
 	}
 
 	public void clickOnSingleDisabledCategory() {
@@ -202,7 +206,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(allPinTypes);
 		allPinTypes.click();
 		PageObjectLogging.log("clickOnAllCategories", "All categories were clicked", true);
-		driver.switchTo().activeElement();
+		driver.switchTo().defaultContent();
 	}
 
 	public AddPinComponentObject clickOnEditPin() {
@@ -225,6 +229,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public String getOpenPinName() {
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		waitForElementVisibleByElement(pinTitle);
+		driver.switchTo().defaultContent();
 		return pinTitle.getText();
 	}
 
@@ -247,10 +255,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyMapOpened() {
-		waitForElementByElement(mapFrame);
+		scrollToElement(mapFrame);
+		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		driver.switchTo().defaultContent();
-		scrollToElement(mapFrame);
 	}
 
 	public void verifyCreatedMapTitle(String mapTitle) {
@@ -297,11 +305,14 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyAllPinTypesIsCheck() {
 		try {
+			waitForElementVisibleByElement(mapFrame);
+			driver.switchTo().frame(mapFrame);
 			waitForElementByElement(allPinTypes);
 			waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 			if (allPinTypes.getAttribute("class").contains("enabled")) {
 				PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were checked", true);
 			}
+			driver.switchTo().defaultContent();
 		}catch (Exception e) {
 			PageObjectLogging.log("verifyAllPointTypesIsCheck", e.toString(), false);
 		}
@@ -309,10 +320,13 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyAllPinTypesIsUncheck() {
 		try {
+			waitForElementVisibleByElement(mapFrame);
+			driver.switchTo().frame(mapFrame);
 			waitForElementVisibleByElement(allPinTypes);
 			if (!allPinTypes.getAttribute("class").contains("enabled")) {
 				PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were unchecked", true);
 			}
+			driver.switchTo().defaultContent();
 		}catch (Exception e) {
 			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were checked", false);
 		}
@@ -335,17 +349,26 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyPinTypesAreCheck() {
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		Assertion.assertEquals(disabledPinTypesCollection.size(), 0);
+		driver.switchTo().defaultContent();
 	}
 
 	public void verifyPinDataWasChanged(String pinName, String pinDesc) {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
+		waitForElementVisibleByElement(popUpContent);
+		scrollToElement(popUpContent);
 		waitForElementVisibleByElement(pinTitle);
-		Assertion.assertNotEquals(pinName, pinTitle.getText());
 		waitForElementVisibleByElement(pinDescription);
-		Assertion.assertNotEquals(pinDesc, pinDescription.getText());
+		String actualTitle = pinTitle.getText();
+		String actualDesc  = pinDescription.getText();
+		System.out.println(actualTitle+"!="+pinTitle.getText());
+		System.out.println(actualDesc+"!="+pinDescription.getText());
+		Assertion.assertNotEquals(pinName, actualTitle);
+		Assertion.assertNotEquals(pinDesc, actualDesc);
 	}
 
 	public void verifyControButtonsAreVisible() {

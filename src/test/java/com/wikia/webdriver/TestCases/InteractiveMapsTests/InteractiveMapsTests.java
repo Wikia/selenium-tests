@@ -25,6 +25,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
  * Author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
+ * @ownership: Mobile Web
  * 
     - Special:Maps page
 	IM01: Creating a custom new map based on new image upload v 
