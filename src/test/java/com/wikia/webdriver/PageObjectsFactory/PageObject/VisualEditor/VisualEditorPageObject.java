@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -62,16 +63,19 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement previewImage;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
 	private WebElement previewVideoWrapper;
-	@FindBy(css=".ve-ui-desktopContext-menu .oo-ui-icon-edit")
-	private WebElement mediaContextMenu;
 	@FindBy(css="figure figcaption .caption")
 	private WebElement mediaCaption;
 	@FindBy(css=".ve-ce-resizableNode-swHandle")
 	private WebElement SWResizeHandle;
-	@FindBy(css=".ve-ui-desktopContext-menu")
+	@FindBy(css=".ve-ui-desktopContext .oo-ui-popupWidget")
 	private WebElement contextMenu;
+	@FindBy(css=".ve-ce-node-focused")
+	private WebElement focusedNode;
+	@FindBy(css=".ve-ce-focusableNode-highlights")
+	private WebElement nodeHighlight;
 
-	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget .oo-ui-icon-edit");
+	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget");
+	private By mediaEditBy = By.cssSelector(".oo-ui-icon-edit");
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -190,15 +194,21 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(editArea);
 		waitForElementVisibleByElement(mediaNode);
 		mediaNode.click();
+		waitForElementByElement(focusedNode);
 		clickContextMenu();
 		return new VisualEditorMediaSettingsDialog(driver);
 	}
 
 	private void clickContextMenu() {
 		waitForElementVisibleByElement(contextMenu);
-		WebElement mediaContextMenu = driver.findElement(mediaContextMenuBy);
-		waitForElementClickableByElement(mediaContextMenu);
-		mediaContextMenu.click();
+		WebElement mediaEdit;
+		try {
+			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
+			mediaEdit.click();
+		} catch (StaleElementReferenceException e) {
+			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
+			mediaEdit.click();
+		}
 	}
 
 	public void typeReturn() {
