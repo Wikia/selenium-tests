@@ -67,6 +67,9 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 		waitForElementClickableByElement(linkInput);
 		linkInput.sendKeys(text);
 		waitForValueToBePresentInElementsAttributeByElement(linkInput, "value", text);
+		//Due to fast typing, refocus on the input to force type ahead suggestion to refresh
+		title.click();
+		linkInput.click();
 		driver.switchTo().defaultContent();
 	}
 
