@@ -197,11 +197,6 @@ public class BasePageObject{
 			}
 		}
 	}
-	
-	protected void scrollPageDown() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("scrollTo(0,250)");	
-	}
 
 	public void jQueryClick(String cssSelector){
 		executeScript("$('" + cssSelector + "').click()");

@@ -101,7 +101,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void clickEmbedMapCodeButton() {
-		scrollPageDown();
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(embedMapCodeButton);
@@ -162,19 +161,19 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void clickZoomOutButton() {
-		waitForElementByElement(zoomOutButton);
+		waitForElementVisibleByElement(zoomOutButton);
 		zoomOutButton.click();
 		waitForElementByElement(zoomAnim);
 		PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
 	}
 
 	public void clickOnPin(Integer pinListPosition) {
-		scrollPageDown();
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(pinCollection.get(pinListPosition));
+		waitForElementVisibleByElement(pinCollection.get(pinListPosition));
 		pinCollection.get(pinListPosition).click();
 		PageObjectLogging.log("clickOnPin", "Pin was clicked", true, driver);
+		driver.switchTo().defaultContent();
 	}
 
 	public void clickOnSingleEnabledCategory() {
@@ -237,19 +236,21 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public AddPinComponentObject placePinInMap() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(addPinButton);
+		waitForElementVisibleByElement(addPinButton);
 		addPinButton.click();
-		waitForElementVisibleByElement(mapImagesCollection.get(0));
-		mapImagesCollection.get(0).click();
+		waitForElementByElement(mapImagesCollection.get(0));
+		scrollToElement(mapImagesCollection.get(0));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(mapImagesCollection.get(0)).click().build().perform();
 		driver.switchTo().defaultContent();
 		return new AddPinComponentObject(driver);
 	}
 
 	public void verifyMapOpened() {
-		scrollPageDown();
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		driver.switchTo().defaultContent();
+		scrollToElement(mapFrame);
 	}
 
 	public void verifyCreatedMapTitle(String mapTitle) {
@@ -339,11 +340,11 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyPinDataWasChanged(String pinName, String pinDesc) {
-		waitForElementByElement(mapFrame);
+		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(pinTitle);
+		waitForElementVisibleByElement(pinTitle);
 		Assertion.assertNotEquals(pinName, pinTitle.getText());
-		waitForElementByElement(pinDescription);
+		waitForElementVisibleByElement(pinDescription);
 		Assertion.assertNotEquals(pinDesc, pinDescription.getText());
 	}
 

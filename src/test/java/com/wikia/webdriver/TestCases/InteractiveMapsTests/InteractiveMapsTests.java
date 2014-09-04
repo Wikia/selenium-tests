@@ -403,14 +403,14 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject pinModal = selectedMap.placePinInMap();
 		String pinTitle = base.getTimeStamp();
-		String pinDescription = base.getTimeStamp();
+		String pinDescription = base.getTimeStamp()+base.getTimeStamp();
 		pinModal.typePinName(pinTitle);
 		pinModal.selectPinType();
 		pinModal.typePinDescription(pinDescription);
 		selectedMap = pinModal.clickSaveButton();
 		pinModal = selectedMap.clickOnEditPin();
 		pinModal.clearPinName();
-		pinModal.typePinName(base.getTimeStamp());
+		pinModal.typePinName(base.getTimeStamp()+base.getTimeStamp());
 		pinModal.clearPinDescription();
 		pinModal.typePinDescription(base.getTimeStamp());
 		selectedMap = pinModal.clickSaveButton();
