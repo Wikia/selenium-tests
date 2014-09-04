@@ -35,7 +35,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	@FindBy(css = ".filter-menu.shown-box")
 	private WebElement filterBox;
 	@FindBy(css = "iframe[name=wikia-interactive-map]")
-	private static WebElement mapFrame;
+	private WebElement mapFrame;
 	@FindBy(css = ".error-wrapper")
 	private WebElement mapBeingProcessedModal;
 	@FindBy(css = "#refresh")
@@ -100,9 +100,11 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void clickEmbedMapCodeButton() {
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(embedMapCodeButton);
-		scrollAndClick(embedMapCodeButton);
+//		scrollAndClick(embedMapCodeButton);
+		embedMapCodeButton.click();
 		PageObjectLogging.log("clickEmbedMapCodeButton", "Embed map code button clicked", true, driver);
 		driver.switchTo().defaultContent();
 	}
@@ -134,6 +136,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void clickEditPinTypesButton() {
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(editPinTypesButton);
 		editPinTypesButton.click();
@@ -141,7 +144,15 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 	}
 
+	public void clickZoomButton() {
+		waitForElementByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		
+		PageObjectLogging.log("clickZoomInButton", "Map zoom in was clicked", true, driver);
+	}
+	
 	public void clickZoomInButton() {
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(zoomInButton);
 		zoomInButton.click();
@@ -165,7 +176,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void clickOnSingleEnabledCategory() {
-		driver.switchTo().defaultContent();
+//		driver.switchTo().defaultContent();
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex).click();
@@ -175,6 +187,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void clickOnSingleDisabledCategory() {
 		driver.switchTo().defaultContent();
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		disabledPinTypesCollection.get(0).click();
@@ -184,6 +197,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void clickOnAllPinTypes() {
 		driver.switchTo().defaultContent();
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(allPinTypes);
 		allPinTypes.click();
@@ -193,6 +207,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public AddPinComponentObject clickOnEditPin() {
 		driver.switchTo().defaultContent();
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(pinEditLink);
 		pinEditLink.click();
@@ -230,9 +245,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyMapOpened() {
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		closeMapBeingProcessedModalIfVisible();
-		waitForElementByElement(map);
 		driver.switchTo().defaultContent();
 	}
 
@@ -242,6 +256,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyCreatedPinTypesForNewMap() {
+		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(filterBox);
 		Assertion.assertEquals(1, enabledPinTypesCollection.size());
@@ -318,7 +333,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyPinTypesAreCheck() {
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
-		Assertion.assertEquals(0, disabledPinTypesCollection.size());
+		Assertion.assertEquals(disabledPinTypesCollection.size(), 0);
 	}
 
 	public void verifyPinDataWasChanged(String pinName, String pinDesc) {

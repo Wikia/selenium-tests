@@ -410,8 +410,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
-		selectedMap.clickZoomInButton();
 		selectedMap.clickZoomOutButton();
+		selectedMap.clickZoomInButton();		
 	}
 	
 	@Test(groups = {"InteractiveMaps_021", "InteractiveMapTests", "InteractiveMaps"})
