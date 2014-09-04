@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -73,7 +74,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	@FindBy(css=".ve-ce-focusableNode-highlights")
 	private WebElement nodeHighlight;
 
-	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextItemWidget.oo-ui-labeledElement");
+	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget");
 	private By mediaEditBy = By.cssSelector(".oo-ui-icon-edit");
 
 	public void selectMediaAndDelete() {
@@ -200,11 +201,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	private void clickContextMenu() {
 		waitForElementVisibleByElement(contextMenu);
-		waitForElementByElement(SWResizeHandle);
-		waitForElementByElement(nodeHighlight);
-		WebElement mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
-		waitForElementClickableByElement(mediaEdit);
-		mediaEdit.click();
+		WebElement mediaEdit;
+		try {
+			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
+			mediaEdit.click();
+		} catch (StaleElementReferenceException e) {
+			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
+			mediaEdit.click();
+		}
 	}
 
 	public void typeReturn() {
