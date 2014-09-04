@@ -793,7 +793,8 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 	
 	public EmbedMapComponentObject clickViewEmbedMap(){
-		waitForElementByElement(viewEmbedMapButton);
+		scrollPageDown();
+		waitForElementVisibleByElement(viewEmbedMapButton);
 		viewEmbedMapButton.click();
 		driver.switchTo().activeElement();
 		return new EmbedMapComponentObject(driver);

@@ -110,6 +110,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 		Assertion.assertEquals(amountPinTypeTitleInputs + 1, pinTypeTitleInputs.size());
 		Assertion.assertEquals(amountUploadMarker + 1, uploadMarker.size());
 		Assertion.assertEquals(amountParentCatElements + 1, parentCatElements.size());
+		driver.switchTo().defaultContent();
 	}
 
 	public void verifyErrorsExist() {

@@ -63,6 +63,7 @@ public class AddPinComponentObject extends BasePageObject {
 		waitForElementByElement(cancelButton);
 		cancelButton.click();
 		PageObjectLogging.log("clickCancelButton", "cancel button clicked", true, driver);
+		driver.switchTo().defaultContent();
 		return new InteractiveMapPageObject(driver);
 	}
 
