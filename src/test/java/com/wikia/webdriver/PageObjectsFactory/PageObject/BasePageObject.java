@@ -804,7 +804,14 @@ public class BasePageObject{
 	public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
 		WebElement foundElement = null;
 		for(WebElement element : elements) {
-			if (element.getAttribute(attribute).equals(value)) {
+			String retAttribute = element.getAttribute(attribute);
+			if (attribute.equals("href")) {
+				retAttribute = retAttribute.substring(retAttribute.indexOf("File:")+5).replace("%20", " ");
+				if (!element.getAttribute("class").contains("video")) {
+					retAttribute = retAttribute.substring(0, retAttribute.indexOf('.'));
+				}
+			}
+			if (retAttribute.equals(value)) {
 				foundElement = element;
 				PageObjectLogging.log("getElementByValue",
 					"Element with attribute: " + attribute + " with the value: " + value + " is found from the list",

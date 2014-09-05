@@ -1,15 +1,20 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
+import java.util.ArrayList;
+
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Setting;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -24,6 +29,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-1334 Adding caption to a media
  * VE-1333 Resizing a media with the highlight handle
  * VE-1333 Resizing a media with the advance setting from the media dialog
+ * VE-1419 Adjusting media's horizontal alignment
  */
 
 public class VEMediaTests extends NewTestTemplateBeforeClass {
@@ -138,12 +144,51 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		ve.verifyVideos(numOfVideo);
 		Dimension source = ve.getVideoDimension();
 		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
-		mediaSettingsDialog.selectAdvancedSettings();
+		mediaSettingsDialog.selectSettings(Setting.ADVANCED);
 		mediaSettingsDialog.setCustomSize(resizeNumber);
 		mediaSettingsDialog.clickApplyChangesButton();
 		ve.verifyVideoResized(source);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VEMediaTests", "VEMediaTests_007", "VEAlignMedia"}
+	)
+	public void VEMediaTests_007_changeAlignment() {
+		int numOfMedia = 3;
+		ArrayList<String> wikiTexts = new ArrayList<String>();
+		wikiTexts.add("|centre");
+		wikiTexts.add("|left");
+
+		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorAddMediaDialog mediaDialog =
+			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
+		mediaDialog = mediaDialog.searchMedia("h");
+		ve = mediaDialog.addExistingMedia(numOfMedia);
+		ve.verifyMedias(numOfMedia);
+		ve.verifyVEToolBarPresent();
+		ve.selectMediaByIndex(2);
+		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
+		mediaSettingsDialog.selectSettings(Setting.ADVANCED);
+		mediaSettingsDialog.clickAlignment(Alignment.LEFT);
+		ve = mediaSettingsDialog.clickApplyChangesButton();
+		ve.verifyVEToolBarPresent();
+		ve.selectMediaByIndex(0);
+		mediaSettingsDialog = ve.openMediaSettings();
+		mediaSettingsDialog.selectSettings(Setting.ADVANCED);
+		mediaSettingsDialog.clickAlignment(Alignment.CENTER);
+		ve = mediaSettingsDialog.clickApplyChangesButton();
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(wikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
 	}

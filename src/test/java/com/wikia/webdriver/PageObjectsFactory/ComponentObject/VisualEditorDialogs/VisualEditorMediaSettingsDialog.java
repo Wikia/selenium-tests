@@ -7,13 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Alignment;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Setting;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
-
-	private final int GENERAL = 0;
-	private final int ADVANCED = 1;
 
 	@FindBy(css=".oo-ui-outlineWidget")
 	private WebElement outlineMenu;
@@ -25,6 +24,8 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	private WebElement applyChangesButton;
 	@FindBy(css=".ve-ui-dimensionsWidget input")
 	private WebElement customSizeInput;
+	@FindBy(css=".oo-ui-buttonSelectWidget a")
+	private List<WebElement> positionButtons;
 
 	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
 
@@ -32,21 +33,12 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
-	public void selectGeneralSettings() {
+	public void selectSettings(Setting setting) {
 		switchToIFrame();
-		WebElement generalSetting = outlineMenuItems.get(GENERAL).findElement(labeledElementBy);
+		WebElement generalSetting = outlineMenuItems.get(setting.ordinal()).findElement(labeledElementBy);
 		waitForElementClickableByElement(generalSetting);
 		generalSetting.click();
-		PageObjectLogging.log("selectGeneralSettings", "General settings is selected", true);
-		driver.switchTo().defaultContent();
-	}
-
-	public void selectAdvancedSettings() {
-		switchToIFrame();
-		WebElement advancedSetting = outlineMenuItems.get(ADVANCED).findElement(labeledElementBy);
-		waitForElementClickableByElement(advancedSetting);
-		advancedSetting.click();
-		PageObjectLogging.log("selectAdvancedSettings", "Advanved settings is selected", true);
+		PageObjectLogging.log("selectSettings", setting.toString() + " setting is selected", true);
 		driver.switchTo().defaultContent();
 	}
 
@@ -63,7 +55,7 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 		waitForElementVisibleByElement(applyChangesButton);
 		waitForElementClickableByElement(applyChangesButton);
 		applyChangesButton.click();
-		driver.switchTo().defaultContent();
+		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 
@@ -78,6 +70,15 @@ public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 	public void setCustomSize(int size) {
 		switchToIFrame();
 		typeCustomSize(size);
+		driver.switchTo().defaultContent();
+	}
+
+	public void clickAlignment(Alignment align) {
+		switchToIFrame();
+		WebElement button = positionButtons.get(align.ordinal()).findElement(labeledElementBy);
+		waitForElementClickableByElement(button);
+		button.click();
+		PageObjectLogging.log("clickAlignment", align.toString() + " align is selected", true);
 		driver.switchTo().defaultContent();
 	}
 }

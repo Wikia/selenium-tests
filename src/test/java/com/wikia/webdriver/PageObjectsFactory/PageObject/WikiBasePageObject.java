@@ -1114,6 +1114,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(veMode);
 		waitForElementNotVisibleByElement(focusMode);
 		waitForElementNotVisibleByElement(veToolMenu);
+		PageObjectLogging.log("verifyVEPublishComplete", "Publish is done", true, driver);
 	}
 
 	public void disableOptimizely() {
