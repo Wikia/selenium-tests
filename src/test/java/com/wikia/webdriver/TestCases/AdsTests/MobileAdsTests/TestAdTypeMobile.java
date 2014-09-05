@@ -19,6 +19,8 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	public void TestAdTypeAsync_001_imageAd(String wikiName, String article, String slotName, String imgUrl) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotName);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotName + "_mobile_0\"]");
 		ads.verifyImgAdLoadedInSlot(slotName, imgUrl);
 	}
 
@@ -27,10 +29,15 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 			dataProviderClass = AdTypeDataProvider.class,
 			dataProvider = "asyncHopNoAd"
 	)
-	public void TestAdTypeAsync_002_noAd(String wikiName, String article, String slotName) {
+	public void TestAdTypeAsync_002_noAd(String wikiName, String article, String slotName, String slotName2) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotName);
+		ads.waitUntilElementAppears('#' + slotName2);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotName + "_mobile_0\"]");
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotName2 + "_mobile_0\"]");
 		ads.verifyNoAdInSlot(slotName);
+		ads.verifyNoAdInSlot(slotName2);
 	}
 
 	@Test(
@@ -41,6 +48,8 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	public void TestAdTypeAsync_003_noAdSuccess(String wikiName, String article, String slotName) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotName);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotName + "_mobile_0\"]");
 		ads.verifySlotExpanded(slotName);
 	}
 
@@ -52,6 +61,8 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	public void TestAdTypeAsync_004_imgAdHop(String wikiName, String article, String slotName) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotName);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotName + "_mobile_0\"]");
 		ads.verifyNoAdInSlot(slotName);
 	}
 
@@ -63,6 +74,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	public void TestAdTypeAsync_005_hopSpecialProvider(String wikiName, String article, String slotName) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotName);
 		ads.verifyNoAdInSlot(slotName);
 	}
 
@@ -76,6 +88,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotNameWithAd);
+		ads.waitUntilElementAppears('#' + slotNameWithoutAd);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotNameWithAd + "_mobile_0\"]");
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotNameWithoutAd + "_mobile_0\"]");
 		ads.verifyImgAdLoadedInSlot(slotNameWithAd, imgUrl);
 		ads.verifyNoAdInSlot(slotNameWithoutAd);
 	}
@@ -88,6 +104,8 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	public void TestAdTypeForcedSuccess_001_noAd(String wikiName, String article, String slotName) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotName);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotName + "_mobile_0\"]");
 		ads.verifySlotExpanded(slotName);
 	}
 
@@ -99,6 +117,8 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	public void TestAdTypeInspectIframe_001_withAd(String wikiName, String article, String slotName, String imgUrl) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears('#' + slotName);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/" + slotName + "_mobile_0\"]");
 		ads.verifyImgAdLoadedInSlot(slotName, imgUrl);
 	}
 
@@ -110,6 +130,9 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	public void TestAdTypeInspectIframe_002_specialProvider(String wikiName, String article) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
+		ads.waitUntilElementAppears("iframe[name=\"google_ads_iframe_/5441/wka.ent/_adtest//article/MOBILE_TOP_LEADERBOARD_mobile_0\"]");
+		ads.waitUntilIframeLoaded("google_ads_iframe_/5441/wka.ent/_adtest//article/MOBILE_TOP_LEADERBOARD_mobile_0");
+		ads.waitUntilElementAppears("#MOBILE_TOP_LEADERBOARD .celtra-ad-v3");
 		ads.verifyMobileTopLeaderboard();
 	}
 }

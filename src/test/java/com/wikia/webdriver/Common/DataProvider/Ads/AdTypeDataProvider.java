@@ -11,7 +11,7 @@ public class AdTypeDataProvider{
 	public static final Object[][] asyncSuccessWithAd() {
 		return new Object[][] {
 			{
-				"glee", "Tina-Brittany_Relationship",
+				"adtest", "SyntheticTests/Async/Success",
 				"MOBILE_PREFOOTER",
 				"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
 			}
@@ -22,8 +22,8 @@ public class AdTypeDataProvider{
 	public static final Object[][] asyncHopNoAd() {
 		return new Object[][] {
 			{
-				"glee", "Finn-Kurt_Relationship",
-				"MOBILE_PREFOOTER"
+				"adtest", "SyntheticTests/Async/Hop",
+				"MOBILE_PREFOOTER", "MOBILE_IN_CONTENT"
 			}
 		};
 	}
@@ -32,7 +32,7 @@ public class AdTypeDataProvider{
 	public static final Object[][] asyncSuccessNoAd() {
 		return new Object[][] {
 			{
-				"glee", "Taisha_Monique_Clark",
+				"adtest", "SyntheticTests/Async/Success/NoAd",
 				"MOBILE_PREFOOTER"
 			}
 		};
@@ -42,7 +42,7 @@ public class AdTypeDataProvider{
 	public static final Object[][] asyncHopWithAd() {
 		return new Object[][] {
 			{
-				"glee", "Sue-Cooter_Relationship",
+				"adtest", "SyntheticTests/Async/Hop/WithAd",
 				"MOBILE_PREFOOTER"
 			}
 		};
@@ -52,7 +52,7 @@ public class AdTypeDataProvider{
 	public static final Object[][] asyncHopAndAsyncSuccess() {
 		return new Object[][] {
 			{
-				"glee", "The_Shuck_Team",
+				"adtest", "SyntheticTests/Async/Success",
 				"MOBILE_PREFOOTER",
 				"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
 				"MOBILE_IN_CONTENT"
@@ -64,8 +64,7 @@ public class AdTypeDataProvider{
 	public static final Object[][] forcedSuccessNoAd() {
 		return new Object[][] {
 			{
-				"glee", "Sexy_and_I_Know_It",
-				"MOBILE_PREFOOTER"
+				"adtest", "SyntheticTests/AdType/ForcedSuccess", "MOBILE_PREFOOTER"
 			}
 		};
 	}
@@ -74,7 +73,7 @@ public class AdTypeDataProvider{
 	public static final Object[][] inspectIframeImg() {
 		return new Object[][] {
 			{
-				"glee", "A_Thousand_Years",
+				"adtest", "SyntheticTests/AdType/InspectIframe",
 				"MOBILE_PREFOOTER",
 				"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
 			}
@@ -84,7 +83,7 @@ public class AdTypeDataProvider{
 	@DataProvider
 	public static final Object[][] inspectIframeSpecialAdProvider() {
 		return new Object[][] {
-			{"glee", "Mr._Sylvester"}
+			{"adtest", "SyntheticTests/CELTRA"}
 		};
 	}
 

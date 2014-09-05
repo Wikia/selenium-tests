@@ -12,8 +12,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Bogna 'bognix' Knychala
@@ -134,4 +134,36 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 			slotName
 		);
 	}
+
+	public void waitUntilElementAppears(String selector) {
+		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeAsyncScript(
+			"function setVerifySlotTimer(selector, cb) { " +
+				"if (!document.querySelector(selector)){" +
+					"setTimeout(function(){setVerifySlotTimer(selector, cb);}, 500);" +
+				"} else { " +
+					"cb(); " +
+				"} " +
+			"}" +
+			"setVerifySlotTimer(arguments[0], arguments[arguments.length - 1]);",
+			selector
+		);
+	}
+
+
+	public void waitUntilIframeLoaded(String iframeId) {
+		driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeAsyncScript(
+			"var callback = arguments[arguments.length - 1]; " +
+			"var iframe = document.getElementById(arguments[0]);" +
+			"if (iframe.contentWindow.document.readyState === 'complete'){ return callback(); } else {" +
+				"iframe.contentWindow.addEventListener('load', function () {return callback(); }) " +
+			"}",
+			iframeId
+		);
+	}
+
+
 }
