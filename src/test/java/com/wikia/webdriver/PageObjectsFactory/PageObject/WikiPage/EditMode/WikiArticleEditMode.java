@@ -1,7 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.ArrayList;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -145,6 +143,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement videoWidthEditor;
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
+	@FindBy(css = "span[id=cke_22_label]")
+	private WebElement sourceButton;
+	@FindBy(css = "a[data-map-title]")
+	private WebElement embededMap;
 
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By videoOnArticleEditMode = By.cssSelector("img.video");
@@ -213,13 +215,20 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void deleteArticleContent() {
 		driver.switchTo().frame(iFrame);
+		waitForElementByElement(bodyContent);
 		bodyContent.clear();
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
-
+	}
+	
+	public void verifySourceEditorContentIsEmpty(){
+		waitForElementByElement(sourceModeTextArea);
+		Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
+		PageObjectLogging.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned", true);
 	}
 
-	public void clearSource() {
+	public void clearSource(){
+		driver.switchTo().defaultContent();
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
@@ -240,14 +249,21 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public void typeInContent(String content) {
-		waitForElementByElement(visualModeIFrame);
-		driver.switchTo().frame(visualModeIFrame);
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
 		waitForElementByElement(bodyContent);
 		bodyContent.sendKeys(content);
+		PageObjectLogging.log("typeInContent", "content " + bodyContent.getText() + " - type into article body", true, driver);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}
-
+	
+	public void clickSourceButton(){
+		waitForElementByElement(sourceButton);
+		sourceButton.click();
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickSourceButton", "Source button was clicked", true, driver);
+	}
+	
 	public void clickReturnToEditingButton() {
 		waitForElementByElement(returnToEditingButton);
 		returnToEditingButton.click();
@@ -391,10 +407,33 @@ public class WikiArticleEditMode extends WikiEditMode {
 				"Delete all source code on the article", true, driver);
 	}
 
+	public void typeContentInSourceMode(String content){
+		waitForElementByElement(sourceModeTextArea);
+		sourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log(
+				"typeInContent", 
+				"content type into source mode textarea", 
+				true,
+				driver
+		);
+	}
+	
 	public void typeInTemplateContent(String content) {
+		driver.switchTo().defaultContent();
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("typeInContent",
-				"content type into source mode textarea", true, driver);
+		PageObjectLogging.log(
+				"typeInContent", 
+				"content type into source mode textarea",
+				true,
+				driver
+		);
+	}	
+	
+	public void verifyEmbededMap(String mapID){
+		driver.switchTo().defaultContent();
+		waitForElementByElement(embededMap);
+		String embededMapID = embededMap.getAttribute("data-map-id");
+		Assertion.assertEquals(mapID,embededMapID);
 	}
 }

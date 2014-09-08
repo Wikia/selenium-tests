@@ -53,6 +53,9 @@ public class PageContent {
 	public static String file = "Image001.jpg";
 	public static String filePng = "Image001.png";
 	public static String file2Png = "Image002.png";
+	public static String smallFile = "Image011-Small-image.png";
+	public static String brokenExtensionFile = "broken-extension-image.fer";
+
 	public static String[] listOfFiles = {
 			"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
 			"Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"
@@ -71,8 +74,10 @@ public class PageContent {
 
 	//links
 	public static String externalLink = "http://www.wikia.com/";
-	public static String internalLink = "Formatting";
+	public static String internalLink = "Home";
+	public static String redirectLink = "Formatting";
 	public static String textLink = "qaLink";
+	public static String redLink = "QAasdfasjsad123213lj";
 
 	//forum
 	public static String forumTitlePrefix = "QABoardTitle ";
