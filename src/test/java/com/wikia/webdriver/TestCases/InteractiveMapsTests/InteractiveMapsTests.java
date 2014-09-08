@@ -18,7 +18,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-
+import com.wikia.webdriver.PageObjectsFactory.PageObject.DabbletComPageObject;
 
 
 /**
@@ -375,13 +375,11 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		selectedMap.verifyEmbedMapDialog();
 		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.small);
 		String mapCode = selectedMap.getEmbedMapCode();
-		WikiArticleEditMode EditMode = new WikiArticleEditMode(driver);
-		EditMode.editArticleByName(InteractiveMapsContent.embedMapOutOfWikia);
-		EditMode.clickSourceButton();
-		EditMode.clearSource();
-		EditMode.verifySourceEditorContentIsEmpty();
-		EditMode.typeContentInSourceMode(mapCode);
-		EditMode.clickOnPublish();
+		System.out.println(mapCode);
+		DabbletComPageObject outPage = new DabbletComPageObject(driver);
+		outPage.openOutPage();
+		outPage.typeHtmlCode(mapCode);
+		outPage.verifyMapEmbed();
 	}
 	
 	@Test(groups = {"InteractiveMaps_020", "InteractiveMapTests", "InteractiveMaps"})
