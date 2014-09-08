@@ -402,6 +402,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();
+		selectedMap.clickOnFilterBoxTitle();
 		AddPinComponentObject pinModal = selectedMap.placePinInMap();
 		String pinTitle = base.getTimeStamp();
 		String pinDescription = base.getTimeStamp()+base.getTimeStamp();
@@ -485,6 +486,8 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		selectedMap.clickOnFilterBoxTitle();
 		selectedMap.clickOnPin(0);
 		String pinName = selectedMap.getOpenPinName();
 		selectedMap.verifyPopUpVisible();

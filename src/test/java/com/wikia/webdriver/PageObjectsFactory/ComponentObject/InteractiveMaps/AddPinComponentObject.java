@@ -88,7 +88,7 @@ public class AddPinComponentObject extends BasePageObject {
 	}
 
 	public InteractiveMapPageObject clickDeletePin() {
-		waitForElementByElement(deleteButton);
+		waitForElementVisibleByElement(deleteButton);
 		deleteButton.click();
 		driver.switchTo().defaultContent();
 		return new InteractiveMapPageObject(driver);
