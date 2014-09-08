@@ -119,6 +119,7 @@ The following are valid for use in the `-Dgroups` parameter:
 * ImageServing
 * ImageStorageTests
 * Login
+* Media
 * MessageWall
 * MessageWallFeatures
 * MessageWallNotificationsFollowersMessageTests
