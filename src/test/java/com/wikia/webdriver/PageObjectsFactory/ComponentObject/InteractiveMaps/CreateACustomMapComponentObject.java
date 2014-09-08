@@ -97,12 +97,13 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	}
 
 	public void verifyThereIsNoError() {
+		waitForElementNotVisibleByElement(errorField);
 		Assertion.assertEquals(checkIfElementOnPage(errorField), false);
 	}
 
 	public void verifyTemplateWasFound() {
 		waitForElementVisibleByElement(templatesBox);
-		waitForElementByElement(thumbCollection.get(0));
+		waitForElementVisibleByElement(thumbCollection.get(0));
 		Assertion.assertEquals(checkIfElementOnPage(thumbCollection.get(0)), true);
 	}
 

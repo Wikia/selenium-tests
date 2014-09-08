@@ -289,12 +289,11 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject createMapDialog = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMapDialog = createMapDialog.clickCustomMap();
-		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldBeFound);
-		customMapDialog.verifyTemplateWasFound();
-		customMapDialog.verifyThereIsNoError();
-		customMapDialog.clearSearchTitle();
 		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldNotBeFound);
 		customMapDialog.verifyThereIsError();
+		customMapDialog.clearSearchTitle();
+		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldBeFound);
+		customMapDialog.verifyTemplateListElementVisible(0);
 	}
 	
 	@Test(groups = {"InteractiveMaps_014", "InteractiveMapTests", "InteractiveMaps"})
