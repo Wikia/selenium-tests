@@ -27,6 +27,7 @@ public class VisualEditorDialog extends WikiBasePageObject{
 	}
 
 	public void switchToIFrame() {
+		waitForElementByElement(dialog);
 		waitForElementVisibleByElement(dialog);
 		driver.switchTo().frame(iframe);
 	}

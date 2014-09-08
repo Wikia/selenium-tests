@@ -41,6 +41,7 @@ import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -1132,5 +1133,18 @@ public class WikiBasePageObject extends BasePageObject {
 	public WikiHistoryPageObject openArticleHistoryPage(String wikiURL) {
 		getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.historyAction));
 		return new WikiHistoryPageObject(driver);
+	}
+
+	private String getArticleName() {
+		return executeScriptRet(WikiaGlobalVariables.wgPageName);
+	}
+
+	public void verifyArticleName(String targetText) {
+		Assertion.assertStringContains(getArticleName(), targetText);
+		PageObjectLogging.log(
+			"verifyArticleName",
+			"The article shows " + targetText,
+			true
+		);
 	}
 }
