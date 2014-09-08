@@ -302,6 +302,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void selectMediaByIndex(int index) {
 		WebElement selectedMedia = mediaNodes.get(index);
+		waitForElementVisibleByElement(selectedMedia);
 		selectedMedia.click();
 	}
 
