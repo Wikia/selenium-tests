@@ -145,6 +145,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement captionInEditor;
 	@FindBy(css = "span[id=cke_22_label]")
 	private WebElement sourceButton;
+	@FindBy(css = "#cke_32_frame")
+	private WebElement sourceFrame;
 	@FindBy(css = "a[data-map-title]")
 	private WebElement embededMap;
 
@@ -228,7 +230,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public void clearSource(){
-		driver.switchTo().defaultContent();
 		waitForElementVisibleByElement(sourceModeTextArea);
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
