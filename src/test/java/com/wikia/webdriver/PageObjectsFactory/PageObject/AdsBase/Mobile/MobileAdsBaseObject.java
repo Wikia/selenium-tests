@@ -23,6 +23,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	private final String smartBannerSelector = ".smartbanner.android";
 	private AdsComparison adsComparison;
 	private ImageComparison imageComparison;
+	private By gptIframeTopLeaderBoardSelector = By.cssSelector("#WikiaMainContent a[data-id='edit']");
+	private By celtraAdSelector = By.cssSelector(".celtra-ad-v3 iframe");
 
 	public MobileAdsBaseObject(WebDriver driver, String page) {
 		super(driver, page);
@@ -44,6 +46,18 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		}
 	}
 
+	public String getGptIframeName(String slotName) {
+		return getGptIframeName("adtest", slotName, "mobile");
+	}
+
+	public String getGptIframeName(String s0, String slotName) {
+		return getGptIframeName(s0, slotName, "mobile");
+	}
+
+	public String getGptIframeName(String s0, String slotName, String src) {
+		return "iframe[name=\"google_ads_iframe_/5441/wka.ent/_" + s0 + "//article/" + slotName + "_" + src + "_0";
+	}
+
 	public void verifyMobileTopLeaderboard() {
 		removeSmartBanner();
 		if (!checkIfSlotExpanded(presentLeaderboard)) {
@@ -54,6 +68,35 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		PageObjectLogging.log(
 			"CompareScreenshot", "Page before hidding ads", true, driver
 		);
+		if (areAdsEmpty(presentLeaderboardSelector, presentLeaderboard)) {
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots look the same", false
+			);
+			throw new NoSuchElementException(
+				"Screenshots of element on/off look the same."
+				+ "Most probable ad is not present; CSS "
+				+ presentLeaderboardSelector
+			);
+		} else {
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots look different", true
+			);
+		}
+	}
+	public void verifyMobileTopLeaderboardSpecial() {
+		removeSmartBanner();
+		if (!checkIfSlotExpanded(presentLeaderboard)) {
+			throw new NoSuchElementException(
+				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
+			);
+		}
+		PageObjectLogging.log(
+			"CompareScreenshot", "Page before hidding ads", true, driver
+		);
+
+		waitForElementPresenceByBy(celtraAdSelector);
+		waitForIframeLoaded(presentLeaderboard.findElement(celtraAdSelector));
+
 		if (areAdsEmpty(presentLeaderboardSelector, presentLeaderboard)) {
 			PageObjectLogging.log(
 				"CompareScreenshot", "Screenshots look the same", false
@@ -120,7 +163,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	private void removeSmartBanner() {
 		if (checkIfElementOnPage(smartBannerSelector)) {
 			WebElement smartBanner = driver.findElement(By.cssSelector(smartBannerSelector));
-			JavascriptExecutor js = (JavascriptExecutor)driver;
+			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).css('display', 'none')", smartBanner);
 			waitForElementNotVisibleByElement(smartBanner);
 		}
@@ -134,36 +177,5 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 			slotName
 		);
 	}
-
-	public void waitUntilElementAppears(String selector) {
-		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeAsyncScript(
-			"function setVerifySlotTimer(selector, cb) { " +
-				"if (!document.querySelector(selector)){" +
-					"setTimeout(function(){setVerifySlotTimer(selector, cb);}, 500);" +
-				"} else { " +
-					"cb(); " +
-				"} " +
-			"}" +
-			"setVerifySlotTimer(arguments[0], arguments[arguments.length - 1]);",
-			selector
-		);
-	}
-
-
-	public void waitUntilIframeLoaded(String iframeId) {
-		driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeAsyncScript(
-			"var callback = arguments[arguments.length - 1]; " +
-			"var iframe = document.getElementById(arguments[0]);" +
-			"if (iframe.contentWindow.document.readyState === 'complete'){ return callback(); } else {" +
-				"iframe.contentWindow.addEventListener('load', function () {return callback(); }) " +
-			"}",
-			iframeId
-		);
-	}
-
 
 }

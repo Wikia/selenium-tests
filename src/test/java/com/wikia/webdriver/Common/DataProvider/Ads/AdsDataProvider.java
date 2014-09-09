@@ -47,19 +47,19 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] corporatePages() {
 		return new Object[][] {
-				{"wikia", "Wikia", "wka.wikia/_wikiaglobal//home"},
-				{"wikia", "About_Us", "wka.wikia/_wikiaglobal//article"},
-				{"wikia", "Alliance", "wka.wikia/_wikiaglobal//article"},
-				{"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article"},
-				{"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home"},
-				{"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub"},
-				{"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub"},
-				{"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub"},
-				{"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub"},
-				{"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub"},
-				{"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub"},
-				{"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub"},
-				{"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub"},
+				{"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
+				{"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+				{"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+				{"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+				{"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
+				{"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
 		};
 	}
 
