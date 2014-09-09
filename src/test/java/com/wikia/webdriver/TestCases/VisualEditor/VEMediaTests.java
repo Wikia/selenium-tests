@@ -20,10 +20,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Robert 'Rochan' Chan
+ * @ownership Contribution
  *
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
- * VE-1336 Uploading an image
+ * VE-1336 1519 Uploading an image with a new file name
  * VE-1334 Adding caption to a media
  * VE-1333 Resizing a media with the highlight handle
  * VE-1333 Resizing a media with the advance setting from the media dialog
