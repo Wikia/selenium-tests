@@ -11,16 +11,17 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
+
 /**
  * @author Łukasz Nowak (Dyktus)
  */
 
-public class EmbedMapComponentObject extends InteractiveMapPageObject{
-	
+public class EmbedMapComponentObject extends InteractiveMapPageObject {
+
 	public EmbedMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(css = ".leaflet-control-embed-map-code-button")
 	private WebElement embedMapButton;
 	@FindBy(css = ".leaflet-draw-draw-marker")
@@ -29,7 +30,7 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject{
 	private WebElement zoomInButton;
 	@FindBy(css = ".leaflet-control-zoom-out")
 	private WebElement zoomOutButton;
-	@FindBy(css = ".filter-menu-header")
+	@FindBy(css = ".filter-menu.shown-box")
 	private WebElement filterBox;
 	@FindBy(css = "a[title=close]")
 	private WebElement closeModalButton;
@@ -37,30 +38,29 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject{
 	private WebElement mapTitle;
 	@FindBy(css = "iframe[name=wikia-interactive-map]")
 	private WebElement mapFrame;
-	@FindBy(css = ".modal.large")
+	@FindBy(css = ".modal")
 	private WebElement mapModal;
 	@FindBy(css = "#attr")
 	private WebElement brandFooter;
-	
+
 	public void verifyMapTitlePresented() {
 		waitForElementVisibleByElement(mapTitle);
 		Assertion.assertEquals(checkIfElementOnPage(mapTitle), true);
 	}
-	
+
 	public void verifyCloseButtonPresented() {
 		waitForElementVisibleByElement(closeModalButton);
 		Assertion.assertEquals(checkIfElementOnPage(closeModalButton), true);
 	}
-	
+
 	public void verifyEmbedMapModalOpened() {
 		waitForElementVisibleByElement(mapModal);
-		Assertion.assertEquals(checkIfElementOnPage(mapModal),true);
+		Assertion.assertEquals(checkIfElementOnPage(mapModal), true);
 	}
-	
+
 	public void verifyMapElementsPresented() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		scrollToElement(mapFrame);
 		waitForElementVisibleByElement(filterBox);
 		Assertion.assertEquals(checkIfElementOnPage(filterBox), true);
 		waitForElementVisibleByElement(zoomInButton);
@@ -70,13 +70,13 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject{
 		PageObjectLogging.log("verifyMapElementsPresented", "Map elements was presented", true, driver);
 		driver.switchTo().defaultContent();
 	}
-	
+
 	public void verifyBranFooterNotVisible() {
 		Assertion.assertEquals(checkIfElementOnPage(brandFooter), false);
 	}
-	
+
 	public void verifyBranFooterVisible() {
 		Assertion.assertEquals(checkIfElementOnPage(brandFooter), true);
 	}
-	
+
 }

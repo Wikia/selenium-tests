@@ -460,6 +460,7 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();
 		selectedMap.clickOnPin(0);		
 		selectedMap.verifyPopUpVisible();
 	}
@@ -510,26 +511,4 @@ public class InteractiveMapsTests extends NewTestTemplate{
 		customMapModal.clickCloseButton();
 		specialMap.verifyCreateMapModalNotExist();		
 	}
-	
-	@Test(groups = {"InteractiveMaps_029", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_029_VerifyPins(){
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		ArticlePageObject article = new ArticlePageObject(driver);
-		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
-		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
-		embedMapDialog.verifyEmbedMapModalOpened();
-		AddPinComponentObject pinModal = embedMapDialog.placePinInMap();
-		String pinTitle = base.getTimeStamp();
-		String pinDescription = base.getTimeStamp();
-		pinModal.typePinName(pinTitle);
-		pinModal.typeAssociatedArticle(InteractiveMapsContent.associatedArticleName);
-		pinModal.clickSuggestion(0);
-		pinModal.selectPinType();
-		pinModal.typePinDescription(pinDescription);
-		pinModal.clickSaveButton();
-		embedMapDialog.verifyPinPopupImageIsVisible();
-		embedMapDialog.verifyPinPopUp();
-	}
-
 }

@@ -34,7 +34,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement createdMapTitle;
 	@FindBy(css = ".point-type.enabled > span")
 	private List<WebElement> createdPinNames;
-	@FindBy(css = ".filter-menu.shown-box")
+	@FindBy(css = "#filterMenu")
 	private WebElement filterBox;
 	@FindBy(css = "iframe[name=wikia-interactive-map]")
 	private WebElement mapFrame;
@@ -171,7 +171,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(pinCollection.get(pinListPosition));
 		actions.click().perform();
-		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickOnPin", "Pin was clicked", true, driver);
 	}
 
@@ -191,7 +190,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		disabledPinTypesCollection.get(0).click();
 		PageObjectLogging.log("clickOnSingleDisabledCategory", "Single disabled category was clicked", true);
-		driver.switchTo().activeElement();
+		driver.switchTo().defaultContent();
 	}
 
 	public void clickOnAllPinTypes() {
@@ -233,12 +232,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public String getOpenPinName() {
-		waitForElementVisibleByElement(mapFrame);
-		driver.switchTo().frame(mapFrame);
-		scrollToElement(mapFrame);
 		waitForElementByElement(pinTitle);
 		String pinName = pinTitle.getText();
-		driver.switchTo().defaultContent();
 		return pinName;
 	}
 
@@ -253,13 +248,14 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(addPinButton);
 		addPinButton.click();
 		Actions actions = new Actions(driver);
-		actions.moveToElement(mapImagesCollection.get(0)).click().build().perform();
+		actions.moveToElement(mapImagesCollection.get(0));
+		actions.click().perform();
 		driver.switchTo().defaultContent();
 		return new AddPinComponentObject(driver);
 	}
 
 	public void verifyMapOpened() {
-		waitForElementByElement(mapFrame);
+		waitForElementVisibleByElement(mapFrame);
 		scrollToElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		driver.switchTo().defaultContent();
@@ -271,7 +267,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyCreatedPinTypesForNewMap() {
-		waitForElementByElement(mapFrame);
+		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(filterBox);
 		Assertion.assertEquals(1, enabledPinTypesCollection.size());
@@ -298,8 +294,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyPopUpVisible() {
-		waitForElementVisibleByElement(mapFrame);
-		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(pinDescription);
 		Assertion.assertEquals(checkIfElementOnPage(pinDescription), true);
 		driver.switchTo().defaultContent();
@@ -340,7 +334,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyPinTypesAreUncheck() {
-		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
 		Assertion.assertEquals(0, enabledPinTypesCollection.size(), "Pin types were unchecked");
 	}
 

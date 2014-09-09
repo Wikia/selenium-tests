@@ -24,21 +24,21 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css = "input[name='poiCategoryNames[]']")
+	@FindBy(css = "input[name='poiCategories[][name]']")
 	private List<WebElement> pinTypeTitleInputs;
-	@FindBy(css = "input[name='poiCategoryMarkers[]']")
+	@FindBy(css = "input[name='poiCategories[][marker]']")
 	private List<WebElement> uploadMarker;
 	@FindBy(css = "input[name='wpUploadFile']")
 	private List<WebElement> uploadInputsCollection;
 	@FindBy(css = ".button.normal.primary")
 	private WebElement saveButton;
-	@FindBy(css = ".addPoiCategory.modalEvent")
+	@FindBy(css = ".addPoiCategory")
 	private WebElement addMorePinTypesLink;
 	@FindBy(css = ".poi-category-dropdown")
 	private WebElement mainParentCategorySelector;
 	@FindBy(css = ".poi-category-dropdown > option")
 	private List<WebElement> parentCatOption;
-	@FindBy(css = "select[name='poiCategoryParents[]']")
+	@FindBy(css = "select[name='poiCategories[][parent_poi_category_id]']")
 	private List<WebElement> parentCatElements;
 	@FindBy(css = ".modal.medium.int-map-modal")
 	private WebElement creatingPinDialog;

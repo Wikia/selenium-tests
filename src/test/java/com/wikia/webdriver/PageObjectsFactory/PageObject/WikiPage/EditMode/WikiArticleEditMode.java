@@ -222,14 +222,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 	
 	public void verifySourceEditorContentIsEmpty(){
-		waitForElementByElement(sourceModeTextArea);
+		waitForElementVisibleByElement(sourceModeTextArea);
 		Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
 		PageObjectLogging.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned", true);
 	}
 
 	public void clearSource(){
 		driver.switchTo().defaultContent();
-		waitForElementByElement(sourceModeTextArea);
+		waitForElementVisibleByElement(sourceModeTextArea);
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
 	}
