@@ -10,6 +10,7 @@ public class VideoContent {
 	public static String youtubeVideoURL3 = "http://www.youtube.com/watch?v=LQjkDW3UPVk";
 	public static String youtubeVideoURL4 = "https://www.youtube.com/watch?v=bKHz7wOjb9w";
 	public static String youtubeVideoURL4FileName = "The_JET_Bicycle_-_The_most_dangerous_unsafe_bike_EVER";
+	public static String youtubeVideoURL4FileTitle = "The JET Bicycle - The most dangerous unsafe bike EVER";
 	public static String youtubeVideoURL5 = "https://www.youtube.com/watch?v=ewum1Uq2MtU";
 
 	public static String wikiaVideoQuery = "wikia";
