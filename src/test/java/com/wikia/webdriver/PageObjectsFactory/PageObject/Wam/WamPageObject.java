@@ -266,8 +266,10 @@ public class WamPageObject extends BasePageObject {
 		waitForElementByBy(wamIndexTable);
 		List<String> current = getCurrentIndexNo();
 		for (int i = 0; i <= endElement - startElement; i++) {
-			Assertion.assertEquals(current.get(i),
-					Integer.toString(i + startElement));
+			Assertion.assertEquals(
+				current.get(i),
+				Integer.toString(i + startElement)
+			);
 		}
 		Assertion.assertEquals(current.size(), endElement - startElement + 1);
 	}
