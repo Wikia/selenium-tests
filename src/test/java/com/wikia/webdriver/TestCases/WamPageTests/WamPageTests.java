@@ -60,4 +60,14 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 		wam.selectTab(4);
 		wam.checkTabAndHeaderName();
 	}
+
+	@Test(groups = {"wamPage_005", "WamPageTests"})
+	public void wamPage_005_testDatePicker() {
+		wam.verifyTodayDateInDatePicker();
+		String lastMonthDate = wam.changeDateToLastMonth();
+		wam.verifyDateInDatePicker(lastMonthDate);
+		String date = "July 12, 2014";
+		wam.typeDateInDatePicker(date);
+		wam.verifyDateInDatePicker(date);
+	}
 }
