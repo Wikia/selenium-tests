@@ -13,7 +13,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
- * @author: Lukasz Jedrzejczak
+ * @author Lukasz Jedrzejczak
  * @author Łukasz Nowak (Dyktus)
  *
  */
@@ -115,6 +115,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
 	public void verifyErrorsExist() {
 		waitForElementByElement(pinTypesError);
-		Assertion.assertEquals(false, pinTypesError.getText().isEmpty());
+		Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);
+		
 	}
 }

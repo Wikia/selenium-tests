@@ -2,15 +2,12 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMap
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 import java.util.List;
 
-import org.testng.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -135,13 +132,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 	}
 
-	public void clickZoomButton() {
-		waitForElementByElement(mapFrame);
-		driver.switchTo().frame(mapFrame);
-
-		PageObjectLogging.log("clickZoomInButton", "Map zoom in was clicked", true, driver);
-	}
-
 	public void clickZoomInButton() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
@@ -167,7 +157,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(pinCollection.get(pinListPosition));
 		scrollToElement(pinCollection.get(pinListPosition));
-		// pinCollection.get(pinListPosition).click();
 		Actions actions = new Actions(driver);
 		actions.moveToElement(pinCollection.get(pinListPosition));
 		actions.click().perform();

@@ -20,8 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 import com.wikia.webdriver.PageObjectsFactory.PageObject.DabbletComPageObject;
 
 /**
- * Author: Rodrigo Molinero Gomez
- * 
+ * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
  * @ownership: Mobile Web
@@ -526,4 +525,5 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		customMapModal.clickCloseButton();
 		specialMap.verifyCreateMapModalNotExist();
 	}
+	
 }
