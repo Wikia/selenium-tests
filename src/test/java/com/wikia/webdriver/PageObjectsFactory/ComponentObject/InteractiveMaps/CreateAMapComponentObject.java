@@ -20,7 +20,7 @@ public class CreateAMapComponentObject extends BasePageObject {
 	public CreateAMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(css = ".int-map-icon-geo-tile-set-blue")
 	private WebElement realMapLink;
 	@FindBy(css = ".int-map-icon-custom-tile-set-blue")
@@ -53,7 +53,7 @@ public class CreateAMapComponentObject extends BasePageObject {
 		closeButton.click();
 		return new InteractiveMapsPageObject(driver);
 	}
-	
+
 	public void verifyLearnMoreLinkRedirect(String link) {
 		waitForElementByElement(learnMoreLink);
 		Assertion.assertEquals(learnMoreLink.getAttribute("href").contains(link), true);
@@ -67,10 +67,6 @@ public class CreateAMapComponentObject extends BasePageObject {
 	public void verifyRealMapAndCustomMapButtons() {
 		waitForElementByElement(realMapLink);
 		waitForElementByElement(customMapLink);
-		PageObjectLogging.log(
-			"verifyRealMapAndCustomMapButtons",
-			"Real Map and Custom Map links are visible",
-			true
-		);
+		PageObjectLogging.log("verifyRealMapAndCustomMapButtons", "Real Map and Custom Map links are visible", true);
 	}
 }

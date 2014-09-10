@@ -167,7 +167,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(pinCollection.get(pinListPosition));
 		scrollToElement(pinCollection.get(pinListPosition));
-//		pinCollection.get(pinListPosition).click();
+		// pinCollection.get(pinListPosition).click();
 		Actions actions = new Actions(driver);
 		actions.moveToElement(pinCollection.get(pinListPosition));
 		actions.click().perform();
@@ -212,11 +212,11 @@ public class InteractiveMapPageObject extends BasePageObject {
 		PageObjectLogging.log("clickOnEditPin", "Pin edit link was clicked", true);
 		return new AddPinComponentObject(driver);
 	}
-	
-	public void clickOnFilterBoxTitle(){
+
+	public void clickOnFilterBoxTitle() {
 		waitForElementVisibleByElement(mapFrame);
 		scrollToElement(mapFrame);
-		driver.switchTo().frame(mapFrame);		
+		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(filterBoxTitle);
 		Actions actions = new Actions(driver);
 		actions.moveToElement(filterBoxTitle).click().perform();
@@ -364,7 +364,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(pinTitle);
 		waitForElementVisibleByElement(pinDescription);
 		String actualTitle = pinTitle.getText();
-		String actualDesc  = pinDescription.getText();
+		String actualDesc = pinDescription.getText();
 		Assertion.assertNotEquals(pinName, actualTitle);
 		Assertion.assertNotEquals(pinDesc, actualDesc);
 	}

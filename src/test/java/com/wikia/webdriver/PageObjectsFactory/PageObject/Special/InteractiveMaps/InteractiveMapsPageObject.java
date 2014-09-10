@@ -14,18 +14,18 @@ import java.util.List;
 import junit.framework.Assert;
 
 /**
-* @author Rodrigo 'RodriGomez' Molinero
-* @author: Lukasz Jedrzejczak
-*
-*/
+ * @author Rodrigo 'RodriGomez' Molinero
+ * @author: Lukasz Jedrzejczak
+ *
+ */
 
-public class InteractiveMapsPageObject extends BasePageObject{
+public class InteractiveMapsPageObject extends BasePageObject {
 
 	public InteractiveMapsPageObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@FindBy(css = "#createMap")
 	private WebElement createAMapButton;
 	@FindBy(css = ".map-list>li>a")
@@ -40,15 +40,14 @@ public class InteractiveMapsPageObject extends BasePageObject{
 	private WebElement paginationNext;
 	@FindBy(css = "#intMapCreateMapModal")
 	private WebElement createMapModal;
-	
-	
+
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
 		scrollAndClick(createAMapButton);
-		PageObjectLogging.log("clickCreateAMap", "create a map button clicked",  true, driver);
+		PageObjectLogging.log("clickCreateAMap", "create a map button clicked", true, driver);
 		return new CreateAMapComponentObject(driver);
 	}
-	
+
 	public InteractiveMapPageObject clickMapWithIndex(int mapIndex) {
 		WebElement selectedMap = mapList.get(mapIndex);
 		waitForElementByElement(selectedMap);
@@ -56,28 +55,28 @@ public class InteractiveMapsPageObject extends BasePageObject{
 		PageObjectLogging.log("clickMap", "Selected map clicked", true);
 		return new InteractiveMapPageObject(driver);
 	}
-	
+
 	public String getMapLink(int mapIndex) {
 		String mapLink = mapList.get(mapIndex).getAttribute("href");
 		return mapLink;
 	}
-	
+
 	public String getMapTitle(int mapIndex) {
 		String mapTitle = mapTitleList.get(mapIndex).getText();
 		return mapTitle;
 	}
-	
+
 	public void verifyCreateMapButtonExist() {
 		waitForElementByElement(createAMapButton);
 		Assert.assertEquals(checkIfElementOnPage(createAMapButton), true);
 	}
-	
+
 	public void verifyAmountMapOnTheList() {
 		waitForElementByElement(mapCollection.get(0));
 		Assert.assertEquals(mapCollection.size(), 10);
 		PageObjectLogging.log("verifyAmountMapOnTheList", "There is " + mapCollection.size() + " maps on the list", true);
 	}
-	
+
 	public void verifyCorrectPagination() {
 		waitForElementByElement(paginationList);
 		Assert.assertEquals(checkIfElementOnPage(paginationList), true);
@@ -85,7 +84,7 @@ public class InteractiveMapsPageObject extends BasePageObject{
 		Assert.assertEquals(checkIfElementOnPage(paginationNext), true);
 		PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true);
 	}
-	
+
 	public void verifyCreateMapModalNotExist() {
 		Assertion.assertEquals(checkIfElementOnPage(createMapModal), false, "Create map modal was not closed");
 	}
