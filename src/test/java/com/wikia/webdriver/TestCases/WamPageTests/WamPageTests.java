@@ -6,6 +6,11 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Wam.WamPageObject;
 
+/**
+ * @author Qaga
+ * @ownership Consumer
+ */
+
 public class WamPageTests extends NewTestTemplateBeforeClass {
 
 	private WamPageObject wam;
