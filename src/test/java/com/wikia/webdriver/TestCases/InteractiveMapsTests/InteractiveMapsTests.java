@@ -295,7 +295,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		embedMapDialog.verifyMapTitlePresented();
 		embedMapDialog.verifyCloseButtonPresented();
 		embedMapDialog.verifyMapElementsPresented();
-		embedMapDialog.verifyBranFooterNotVisible();
+		embedMapDialog.verifyBrandFooterNotVisible();
 	}
 
 	@Test(groups = { "InteractiveMaps_013", "InteractiveMapTests", "InteractiveMaps" })

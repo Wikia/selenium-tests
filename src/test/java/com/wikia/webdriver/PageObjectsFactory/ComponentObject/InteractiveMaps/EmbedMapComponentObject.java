@@ -28,7 +28,7 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
 	private WebElement zoomInButton;
 	@FindBy(css = ".leaflet-control-zoom-out")
 	private WebElement zoomOutButton;
-	@FindBy(css = ".filter-menu.shown-box")
+	@FindBy(css = "#filterMenu")
 	private WebElement filterBox;
 	@FindBy(css = "a[title=close]")
 	private WebElement closeModalButton;
@@ -69,7 +69,7 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
 		driver.switchTo().defaultContent();
 	}
 
-	public void verifyBranFooterNotVisible() {
+	public void verifyBrandFooterNotVisible() {
 		Assertion.assertEquals(checkIfElementOnPage(brandFooter), false);
 	}
 
