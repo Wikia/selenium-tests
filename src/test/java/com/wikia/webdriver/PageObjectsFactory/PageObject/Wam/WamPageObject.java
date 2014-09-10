@@ -107,9 +107,7 @@ public class WamPageObject extends BasePageObject {
 
 		/**
 		 * @desc Checks if passed value is in enum
-		 * @param value
-		 *            mostly a select-box option
-		 *
+		 * @param value mostly a select-box option
 		 * @return true if enum has the value; false otherwise
 		 */
 		public static Boolean contains(String value) {
@@ -146,8 +144,7 @@ public class WamPageObject extends BasePageObject {
 	/**
 	 * @desc Checks if given tab has an anchor with "selected" class
 	 *
-	 * @param tabIndex
-	 *            number of a tab starting with 0
+	 * @param tabIndex number of a tab starting with 0
 	 */
 	public void verifyTabIsSelected(int tabIndex) {
 		WebElement wamTab = wamTabs.get(tabIndex);
@@ -155,55 +152,55 @@ public class WamPageObject extends BasePageObject {
 
 		waitForElementByElement(wamTab);
 
-		PageObjectLogging.log("verifyTabIsSelected", "tab with index "
-				+ tabIndex + " exist", true);
+		PageObjectLogging.log("verifyTabIsSelected", "tab with index " + tabIndex + " exist", true);
 
 		waitForElementByElement(wamTabAnchor);
-		PageObjectLogging.log("verifyTabIsSelected",
-				"the tab's anchor's selected", true);
+		PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's selected", true);
 	}
 
 	/**
-	 * @desc Checks if there is a table row different than head one in WAM index
-	 *       table
+	 * @desc Checks if there is a table row different than head one in WAM index table
 	 */
 	public void verifyWamIndexIsNotEmpty() {
 		waitForElementByBy(wamIndexTable);
 		int rows = wamIndexRows.size();
 
 		if (rows > 1) {
-			PageObjectLogging.log("verifyWamIndexIsNotEmpty",
-					"there are more rows in the table than just a head row ("
-							+ rows + ")", true);
+			PageObjectLogging.log(
+				"verifyWamIndexIsNotEmpty",
+				"there are more rows in the table than just a head row (" + rows + ")",
+				true
+			);
 		} else {
-			PageObjectLogging.log("verifyTabIsSelected",
-					"there is only the head row", false);
+			PageObjectLogging.log(
+				"verifyTabIsSelected",
+				"there is only the head row",
+				false
+			);
 		}
 	}
 
 	/**
-	 * @desc Checks if there are as many rows in the WAM index table as we
-	 *       expect
-	 *
-	 * @param expectedRowsNo
-	 *            the number of expecting table rows
+	 * @desc Checks if there are as many rows in the WAM index table as we expect
+	 * @param expectedRowsNo the number of expecting table rows
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
 		waitForElementByBy(wamIndexTable);
-		Assertion.assertNumber(expectedRowsNo, wamIndexRows.size(),
-				"wam index rows equals " + expectedRowsNo);
+		Assertion.assertNumber(
+			expectedRowsNo,
+			wamIndexRows.size(),
+			"wam index rows equals " + expectedRowsNo
+		);
 	}
 
 	/**
-	 * @desc Checks if vertical filter except "All" option has options with our
-	 *       verticals' ids
+	 * @desc Checks if vertical filter except "All" option has options with our verticals' ids
 	 */
 	public void verifyWamVerticalFilterOptions() {
 		waitForElementByElement(wamVerticalFilterSelect);
 		Select verticalSelectBox = new Select(wamVerticalFilterSelect);
 		List<WebElement> options = verticalSelectBox.getOptions();
-		options.remove(0); // first option is "All" and we don't care about it
-							// here
+		options.remove(0); // first option is "All" and we don't care about it here
 		Boolean result = true;
 
 		for (WebElement e : options) {
@@ -217,21 +214,23 @@ public class WamPageObject extends BasePageObject {
 		}
 
 		if (result.equals(true)) {
-			PageObjectLogging.log("verifyWamVerticalFilterOptions",
-					"There are correct options in the vertical select box",
-					true);
+			PageObjectLogging.log(
+				"verifyWamVerticalFilterOptions",
+				"There are correct options in the vertical select box",
+				true
+			);
 		} else {
-			PageObjectLogging
-					.log("verifyWamVerticalFilterOptions",
-							"There is invalid option in the vertical select box",
-							false);
+			PageObjectLogging.log(
+				"verifyWamVerticalFilterOptions",
+				"There is invalid option in the vertical select box",
+				false
+			);
 		}
 	}
 
 	/**
 	 * @desc Selects vertical in vertical select box
-	 * @param verticalId
-	 *            vertical id
+	 * @param verticalId vertical id
 	 */
 	public void selectVertical(VerticalsIds verticalId) {
 		waitForElementByElement(wamVerticalFilterSelect);
@@ -241,15 +240,13 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Checks if "Vertical" column in WAM index has the same values for
-	 *       each row
+	 * @desc Checks if "Vertical" column in WAM index has the same values for each row
 	 */
 	public void verifyVerticalColumnValuesAreTheSame() {
 		waitForElementByBy(wamIndexTable);
 		waitForElementByElement(wamVerticalFilterSelect);
 		Select verticalSelectBox = new Select(wamVerticalFilterSelect);
-		String selectedValue = verticalSelectBox.getFirstSelectedOption()
-				.getText();
+		String selectedValue = verticalSelectBox.getFirstSelectedOption().getText();
 		for (WebElement item : verticalColumn) {
 			Assertion.assertEquals(item.getText(), selectedValue);
 		}
@@ -278,8 +275,11 @@ public class WamPageObject extends BasePageObject {
 	public void clickNextPaginator() {
 		waitForElementByElement(paginationNext);
 		scrollAndClick(paginationNext);
-		PageObjectLogging.log("clickNextPaginator",
-				"next button in pagination was clicked", true);
+		PageObjectLogging.log(
+			"clickNextPaginator",
+			"next button in pagination was clicked",
+			true
+		);
 	}
 
 	public void selectTab(int tabNumber) {
@@ -289,17 +289,19 @@ public class WamPageObject extends BasePageObject {
 
 	private void verifyTabSelected(int tabNumber) {
 		tabNumber++;
-		WebElement tabSelected = driver.findElement(By
-				.cssSelector("ul.wam-tabs li:nth-child(" + tabNumber
-						+ ") a.selected"));
+		WebElement tabSelected = driver.findElement(By.cssSelector(
+			"ul.wam-tabs li:nth-child(" + tabNumber + ") a.selected")
+		);
 		waitForElementByElement(tabSelected);
 	}
 
 	public void checkTabAndHeaderName() {
 		String selectedTabName = getSelectedTabName();
 		String selectedHeaderName = getSelectedHeaderName();
-		Assertion.assertEquals(selectedHeaderName.toLowerCase(),
-				selectedTabName.toLowerCase());
+		Assertion.assertEquals(
+			selectedHeaderName.toLowerCase(),
+			selectedTabName.toLowerCase()
+		);
 	}
 
 	private String getSelectedTabName() {
@@ -315,11 +317,12 @@ public class WamPageObject extends BasePageObject {
 	public void verifyTodayDateInDatePicker() {
 		String currentDate = datePickerInput.getAttribute("value");
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy",
-				Locale.ENGLISH);
-		String todayDate = sdf.format(date);
-		Assertion.assertEquals(todayDate, currentDate,
-				"Current date and today date are not the same");
+		String todayDate = getFormatedDate(date, "MMMM d, yyyy");
+		Assertion.assertEquals(
+			todayDate,
+			currentDate,
+			"Current date and today date are not the same"
+		);
 	}
 
 	public String changeDateToLastMonth() {
@@ -329,19 +332,18 @@ public class WamPageObject extends BasePageObject {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.MONTH, -1);
 		Date date = calendar.getTime();
-		SimpleDateFormat sdfMonth = new SimpleDateFormat("MMMM", Locale.ENGLISH);
-		String previousMonth = sdfMonth.format(date);
+		String previousMonth = getFormatedDate(date, "MMMM");
 		waitForTextToBePresentInElementByElement(monthInCalendar, previousMonth);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
+		// first day of the current month
 		WebElement firstDay = (WebElement) js.executeScript(
-		 "return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
-		 calendarElement
+			"return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
+		 	calendarElement
 		 );
 		 firstDay.click();
 
-		SimpleDateFormat sdfYear = new SimpleDateFormat("YYYY");
-		String year = sdfYear.format(date);
+		String year = getFormatedDate(date, "YYYY");
 
 		String expectedDate = previousMonth + " 1, " + year;
 		return expectedDate;
@@ -349,8 +351,11 @@ public class WamPageObject extends BasePageObject {
 
 	public void verifyDateInDatePicker(String date) {
 		String currentDate = datePickerInput.getAttribute("value");
-		Assertion.assertEquals(date, currentDate,
-				"Current date and expected date are not the same");
+		Assertion.assertEquals(
+			date,
+			currentDate,
+			"Current date and expected date are not the same"
+		);
 	}
 
 	public void typeDateInDatePicker(String date) {
@@ -361,5 +366,10 @@ public class WamPageObject extends BasePageObject {
 		Actions actions = new Actions(driver);
 		actions.sendKeys(datePickerInput, "\n");
 		actions.build().perform();
+	}
+
+	private String getFormatedDate(Date date, String format) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+	    return dateFormat.format(date);
 	}
 }
