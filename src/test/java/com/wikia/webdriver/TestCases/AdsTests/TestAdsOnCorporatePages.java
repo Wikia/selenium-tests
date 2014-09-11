@@ -21,14 +21,16 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 
 	private String testedPage;
 	private String adUnit;
+	private String slotName;
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="corporatePages"
 	)
-	public TestAdsOnCorporatePages(String wikiName, String path, String adUnit) {
+	public TestAdsOnCorporatePages(String wikiName, String path, String adUnit, String slotName) {
 		super();
 		this.adUnit = adUnit;
+		this.slotName = slotName;
 		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		if (config.getQS() != null) {
@@ -55,6 +57,6 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 		wikiPage.verifyNoLiftiumAdsOnPage();
 
 		// Verifying GPT iframes in high value countries:
-		wikiPage.verifyGptIframe(adUnit);
+		wikiPage.verifyGptIframe(adUnit, slotName, "gpt");
 	}
 }
