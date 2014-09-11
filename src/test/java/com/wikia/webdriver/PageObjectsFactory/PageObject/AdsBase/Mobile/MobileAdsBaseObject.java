@@ -46,18 +46,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		}
 	}
 
-	public String getGptIframeName(String slotName) {
-		return getGptIframeName("adtest", slotName, "mobile");
-	}
-
-	public String getGptIframeName(String s0, String slotName) {
-		return getGptIframeName(s0, slotName, "mobile");
-	}
-
-	public String getGptIframeName(String s0, String slotName, String src) {
-		return "iframe[name=\"google_ads_iframe_/5441/wka.ent/_" + s0 + "//article/" + slotName + "_" + src + "_0";
-	}
-
 	public void verifyMobileTopLeaderboard() {
 		removeSmartBanner();
 		if (!checkIfSlotExpanded(presentLeaderboard)) {
