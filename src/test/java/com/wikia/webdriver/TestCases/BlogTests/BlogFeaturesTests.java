@@ -88,7 +88,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		blogPage.verifySlider();
 	}
 
-	@Test(groups={"BlogFeatures_004", "BlogFeaturesTests"})
+	@Test(groups={"BlogFeatures_004", "BlogFeaturesTests", "Media"})
 	public void BlogFeatures_004_AddingVideo(){
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
