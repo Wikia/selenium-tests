@@ -3,7 +3,7 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsGermanObject;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
@@ -28,9 +28,9 @@ public class Test71MediaAdsOnRedirects extends NewTestTemplate {
 		}
 	}
 
-	@Test(groups={"Ads", "TestAds71MediaRedirects_001", "Ads71Media"})
-	public void TestAds71MediaRedirects_001() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
+	@Test(groups={"Ads", "TestAds71MediaRedirects_GeoEdgeFree", "Ads71Media"})
+	public void TestAds71MediaRedirects_GeoEdgeFree() {
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
+		ads71Media.verify71MediaAdsPresent();
 	}
 }

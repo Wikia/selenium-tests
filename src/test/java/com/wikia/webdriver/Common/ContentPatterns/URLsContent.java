@@ -31,6 +31,7 @@ public class URLsContent {
 	public static final String specialPhalanx = "wiki/Special:Phalanx";
 	public static final String specialPhalanxTest = "wiki/Special:Phalanx/test";
 	public static final String specialPreferences = "wiki/Special:Preferences";
+	public static final String specialEditingPreferences = "wiki/Special:Preferences#mw-prefsection-editing";
 	public static final String specialPromote = "wiki/Special:Promote";
 	public static final String specialCreatePage = "wiki/Special:CreatePage";
 	public static final String specialCreateBlogPage = "wiki/Special:CreateBlogPage";
@@ -62,6 +63,7 @@ public class URLsContent {
 	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
 	public static final String specialEditHub = "wiki/Special:EditHub";
 	public static final String specialMaps = "wiki/Special:Maps";
+	public static final String specialVideoPageAdmin = "wiki/Special:VideoPageAdmin/edit";
 
 	//Urls for mobile
 	public static final String mobileTestMainPage = "wiki/Mobileregressiontesting_Wiki";
@@ -161,4 +163,7 @@ public class URLsContent {
 
 	//Other wikis to test on
 	public static final String videoTestWiki = "sktest123";
+
+	//External URL
+	public static final String externalURL = "http://www.wikia.com";
 }

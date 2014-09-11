@@ -60,7 +60,7 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
 		specialCss.appendToUrl(URLsContent.historyAction);
 		String editSummary = specialCss.getFirstCssRevision();
-		Assertion.assertStringContains(editSummary, currentTimestamp);
+		Assertion.assertStringContains(currentTimestamp, editSummary);
 	}
 
 	/**
@@ -103,6 +103,7 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved(testedPage);
 		specialCss.clickPublishButtonDropdown();
+		specialCss.verifyDeleteButtonPresence();
 		specialCss.clickDeleteButton();
 		specialCss.confirmDelete();
 

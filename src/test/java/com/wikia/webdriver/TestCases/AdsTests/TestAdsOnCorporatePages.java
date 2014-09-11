@@ -10,21 +10,25 @@ import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
+ * @author Piotr Gackowski
+ * @author Piotr Gabryjeluk
  * @ownership AdEngineering
  */
 @Test (
-	groups={"Ads_Corporate_Page", "Ads"}
+	groups={"Ads_Corporate_Page"}
 )
 public class TestAdsOnCorporatePages extends NewTestTemplate {
 
 	private String testedPage;
+	private String adUnit;
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
 		dataProvider="corporatePages"
 	)
-	public TestAdsOnCorporatePages(String wikiName, String path) {
+	public TestAdsOnCorporatePages(String wikiName, String path, String adUnit) {
 		super();
+		this.adUnit = adUnit;
 		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, path);
 		if (config.getQS() != null) {
@@ -32,57 +36,25 @@ public class TestAdsOnCorporatePages extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="US")
+	@GeoEdgeProxy(country="VE")
 	@Test (
-		groups={"Ads_Corporate_Page_001", "US"}
+			groups={"TestCorporatePage_VE"}
 	)
-	public void TestCorporatePage_US() throws Exception {
+	public void TestCorporatePage_VE() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
+
+		// Not verifying GPT iframes in low value countries
 	}
 
-	@GeoEdgeProxy(country="GB")
 	@Test (
-		groups={"Ads_Corporate_Page_002", "GB"}
+			groups={"TestCorporatePageHVC_GEF"}
 	)
-	public void TestCorporatePage_GB() throws Exception {
+	public void TestCorporatePage_GEF() {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
 
-	@GeoEdgeProxy(country="CA")
-	@Test (
-		groups={"Ads_Corporate_Page_003", "CA"}
-	)
-	public void TestCorporatePage_CA() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="PL")
-	@Test (
-		groups={"Ads_Corporate_Page_004", "PL"}
-	)
-	public void TestCorporatePage_PL() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="RU")
-	@Test (
-		groups={"Ads_Corporate_Page_005", "RU"}
-	)
-	public void TestCorporatePage_RU() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
-	}
-
-	@GeoEdgeProxy(country="JP")
-	@Test (
-		groups={"Ads_Corporate_Page_006", "JP"}
-	)
-	public void TestCorporatePage_JP() throws Exception {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
-		wikiPage.verifyNoLiftiumAdsOnPage();
+		// Verifying GPT iframes in high value countries:
+		wikiPage.verifyGptIframe(adUnit);
 	}
 }

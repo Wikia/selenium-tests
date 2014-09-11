@@ -38,8 +38,6 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.UserAndRights"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.ThemeDesigner"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditAccountTests"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsInContent"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestToolbarAdGPT"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnGermanCorpPages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnAdFreeWikis"/>
@@ -47,15 +45,13 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestRoadblocksAfterMultiplePageViews"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnCorporatePages"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestBasicLayout"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnHubs"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAdsOnRedirects"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsForSony"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNo71MediaAdsForSony"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestIVW2AnalyticsProvider"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdDriverForcedStatus"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestLeaderboardPresenceOnMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestAdTypeMobile"/>
@@ -107,6 +103,9 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.FBConnectTests"/>
 			<class name="com.wikia.webdriver.TestCases.UserProfileTests.UserAvatarTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VEAddVideoTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VEAddMapTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VECategoryTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VEMediaTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorFormattingTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorStylesTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VisualEditorMultiplePublishTests"/>
@@ -137,7 +136,12 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ClicktrackingArticleEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideosModule.VideosModuleTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoHomePageTests"/>
-                        <class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.InteractiveMapsTests"/>
+            <class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.InteractiveMapsTests"/>
+			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoPageAdminTests"/>
+			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditingPreferencesTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VERecaptchaTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VisualEditorEditingTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VECopyAndPasteTests"/>
 		</classes>
 	</test>
 </suite>

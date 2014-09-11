@@ -1,13 +1,14 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.Core.Annotations.NetworkTrafficDump;
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsAmazonObject;
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -20,7 +21,7 @@ public class TestAmazonAds extends NewTestTemplate {
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
-		dataProvider="popularSites"
+		dataProvider="amazonSites"
 	)
 	public TestAmazonAds(String wikiName, String path) {
 		super();
@@ -31,10 +32,9 @@ public class TestAmazonAds extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="US")
 	@NetworkTrafficDump
-	@Test(groups = {"AmazonAds", "AmazonAds_US", "Ads"})
-	public void AmazonAdsTest_US() {
+	@Test(groups = {"AmazonAds", "AmazonAds_GeoEdgeFree", "Ads"})
+	public void AmazonAds_GeoEdgeFree() {
 		AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
 		amazonAds.verifyAmazonScriptIncluded();
 		amazonAds.verifyCallToAmazonIssued();
@@ -51,10 +51,9 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
 
-	@GeoEdgeProxy(country="US")
 	@NetworkTrafficDump
-	@Test(groups = {"AmazonAds", "AmazonAds_US_debugMode", "Ads"})
-	public void AmazonAdsTest_US_debugMode() {
+	@Test(groups = {"AmazonAds", "AmazonAds_GeoEdgeFree_debugMode", "Ads"})
+	public void AmazonAds_GeoEdgeFree_debugMode() {
 		testedPage = urlBuilder.appendQueryStringToURL(testedPage, amazonForceResponse);
 		AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
 		amazonAds.verifyAmazonScriptIncluded();

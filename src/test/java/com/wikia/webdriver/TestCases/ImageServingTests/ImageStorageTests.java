@@ -56,7 +56,7 @@ public class ImageStorageTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
-	public void ImageStorage_002_moveImage_MAIN_2397() {
+	public void ImageStorage_002_moveImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);

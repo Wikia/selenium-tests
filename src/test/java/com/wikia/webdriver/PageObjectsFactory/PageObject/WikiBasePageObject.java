@@ -27,6 +27,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -45,8 +46,6 @@ import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Core.MailFunctions;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.Properties.Properties;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.RenamePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -88,9 +87,13 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.FeaturedVideoAdminPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
 
@@ -204,11 +207,11 @@ public class WikiBasePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	public String resetForgotPasswordTime(String userName) {
+	public String resetForgotPasswordTime(String userName, String apiToken) {
 		String[][] apiRequestParameters = {
 				{"action", ApiActions.apiActionForgotPassword},
 				{"user", userName},
-				{"token", Properties.apiToken},
+				{"token", apiToken},
 				{"format", "json"},
 		};
 		return CommonUtils.sendPost(URLsContent.apiUrl, apiRequestParameters);
@@ -229,6 +232,12 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL);
 		PageObjectLogging.log("openVideoHomePageObject", wikiURL + " opened", true);
 		return new VideoHomePageObject(driver);
+	}
+
+	public FeaturedVideoAdminPageObject openVideoPageAdminObject(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialVideoPageAdmin);
+		PageObjectLogging.log("openVideoPageAdminObject", wikiURL + " opened", true);
+		return new FeaturedVideoAdminPageObject(driver);
 	}
 
 	public SpecialUnusedVideosPageObject openSpecialUnusedVideosPage(String wikiURL) {
@@ -304,6 +313,12 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL+URLsContent.specialPreferences);
 		PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 		return new PreferencesPageObject(driver);
+	}
+
+	public EditingPreferencesPageObject openSpecialEditingPreferencesPage(String wikiURL) {
+		getUrl(wikiURL+URLsContent.specialEditingPreferences);
+		PageObjectLogging.log("EditingPreferencesPageObject", "Special:Prefereces#mw-prefsection-editing page opened", true);
+		return new EditingPreferencesPageObject(driver);
 	}
 
 	public SpecialPromotePageObject openSpecialPromotePage(String wikiURL){
@@ -456,7 +471,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithMainEditButton() {
-		disableOptimizely();
 		waitForElementByElement(veEditButton);
 		veEditButton.click();
 		PageObjectLogging.log("openVEModeWithMainEditButton", "VE main edit button clicked", true, driver);
@@ -464,7 +478,6 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public VisualEditorPageObject openVEModeWithSectionEditButton(int section) {
-		disableOptimizely();
 		WebElement sectionEditButton = sectionEditButtons.get(section);
 		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
@@ -789,8 +802,11 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void verifyRevisionMarkedAsMinor() {
-		waitForElementByElement(cssMinorEdit);
-		PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+		if(checkIfElementOnPage(cssMinorEdit)) {
+			PageObjectLogging.log("cssEditSummary", "minor edit is marked in first revision", true);
+		} else {
+			throw new NoSuchElementException("Minor Edit is not present on the page");
+		}
 	}
 
 	public void logOut(WebDriver driver) {
@@ -840,7 +856,15 @@ public class WikiBasePageObject extends BasePageObject {
 			xmlResponse = EntityUtils.toString(entity);
 
 			String[] xmlResponseArr = xmlResponse.split("\"");
-			String token = xmlResponseArr[5];
+			String token;
+			//Insert here for logging responses -- QAART 371
+			try {
+				token = xmlResponseArr[5];
+			} catch (ArrayIndexOutOfBoundsException e) {
+				throw new WebDriverException(
+					"No token received from request. HTTP response is " + response.toString() +
+					", xmlReponse is " + xmlResponse);
+			}
 
 			while (xmlResponseArr.length < 11) {// sometimes first request
 				// does
@@ -867,6 +891,10 @@ public class WikiBasePageObject extends BasePageObject {
 				xmlResponse = EntityUtils.toString(entity);
 
 				xmlResponseArr = xmlResponse.split("\"");
+
+				if (xmlResponse.contains("WrongPass")) {
+					throw new WebDriverException("Incorrect password provided for user: " + userName);
+				}
 			}
 
 			String domain = (wikiURL.contains("wikia-dev")) ? "wikia-dev.com" : "wikia.com";
@@ -957,7 +985,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyHeader(String fileName) {
 		waitForElementByElement(wikiFirstHeader);
-		Assertion.assertStringContains(wikiFirstHeader.getText(), fileName);
+		Assertion.assertStringContains(fileName, wikiFirstHeader.getText());
 	}
 
 	public void disableCaptcha() {
@@ -1103,5 +1131,18 @@ public class WikiBasePageObject extends BasePageObject {
 	public void disableOptimizely() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window['optimizely'].push(['disable']);");
+	}
+
+	public VisualEditorPageObject launchVisualEditorWithMainEdit(String articleName, String wikiURL) {
+		ArticlePageObject article = openArticleByName(wikiURL, articleName);
+		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		return new VisualEditorPageObject(driver);
+	}
+
+	public WikiHistoryPageObject openArticleHistoryPage(String wikiURL) {
+		getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.historyAction));
+		return new WikiHistoryPageObject(driver);
 	}
 }

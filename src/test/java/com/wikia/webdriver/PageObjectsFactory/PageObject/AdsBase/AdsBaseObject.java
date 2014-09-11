@@ -1,17 +1,10 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
-import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
-import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,12 +16,19 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
+
 /**
  * @author Bogna 'bognix' Knychala
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
-	private final String  wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
+	private final String wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
 	private final String liftiumIframeSelector = "iframe[id*='Liftium']";
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
@@ -49,6 +49,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected String presentLeaderboardSelector;
 	protected String presentMedrecName;
 	protected String presentMedrecSelector;
+
+	private int skinWidth = 90;
+	private int skinMarginTop = 100;
+	private int skinMarginHorizontal = 5;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
@@ -71,6 +75,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	public AdsBaseObject(WebDriver driver) {
 		super(driver);
+		AdsContent.setSlotsSelectors();
 	}
 
 	public AdsBaseObject(WebDriver driver, String testedPage, Dimension resolution) {
@@ -99,31 +104,16 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyRoadblockServedAfterMultiplePageViews(
-		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
-		String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
+			String adSkinUrl, String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
 	) {
 		setSlots();
 		String leaderboardAd = getSlotImageAd(presentLeaderboard);
 		String medrecAd = getSlotImageAd(presentMedrec);
-		verifyAdSkinPresenceOnGivenResolution(
-			page,
-			adSkinUrl,
-			windowResolution,
-			skinWidth,
-			expectedAdSkinLeftPart,
-			expectedAdSkinRightPart
-		);
+		verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
 
 		for (int i=0; i <= numberOfPageViews; i++) {
 			refreshPage();
-			verifyAdSkinPresenceOnGivenResolution(
-				page,
-				adSkinUrl,
-				windowResolution,
-				skinWidth,
-				expectedAdSkinLeftPart,
-				expectedAdSkinRightPart
-			);
+			verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
 			Assertion.assertEquals(leaderboardAd, getSlotImageAd(presentLeaderboard));
 			Assertion.assertEquals(medrecAd, getSlotImageAd(presentMedrec));
 		}
@@ -134,11 +124,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 			WebElement slotElement = driver.findElement(By.id(slot));
 			WebElement slotGptIframe = slotElement.findElement(By.cssSelector("div > iframe"));
 			driver.switchTo().frame(slotGptIframe);
-			List<WebElement> scriptsInFrame = driver.findElements(By.tagName("script"));
+			WebElement iframeHtml = driver.findElement(By.tagName("html"));
 			String adDriverForcedSuccessFormatted = String.format(
 				AdsContent.adDriverForcedStatusSuccessScript, slot
 			);
-			if (checkIfScriptInsideScripts(scriptsInFrame, adDriverForcedSuccessFormatted)) {
+			if (isScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
 				PageObjectLogging.log(
 					"AdDriver2ForceStatus script",
 					"adDriverForcedSuccess script found in slot " + slot,
@@ -163,10 +153,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
 		AdsComparison adsComparison = new AdsComparison();
 		extractLiftiumTagId(slotSelector);
-		boolean result = adsComparison.compareSlotOnOff(
-			slot, slotSelector, driver
-		);
-		if(result) {
+		boolean adVisible = adsComparison.isAdVisible(slot, slotSelector, driver);
+		if (adVisible) {
+			PageObjectLogging.log("CompareScreenshot", "Screenshots are different", true);
+		} else {
 			PageObjectLogging.log(
 				"CompareScreenshot", "Screenshots look the same", false
 			);
@@ -175,39 +165,31 @@ public class AdsBaseObject extends WikiBasePageObject {
 				+ "Most probable ad is not present; CSS "
 				+ slotSelector
 			);
-		} else {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots are different", true
-			);
 		}
 	}
 
 	/**
 	 * Check Ad skin on page with provided resolution.
 	 * Compare left and right sides of skin with provided Base64.
-	 * @param page - url
 	 * @param adSkinUrl - DFP link with ad skin image
-	 * @param windowResolution - resolution
-	 * @param skinWidth - skin width on the sides of the article
 	 * @param expectedAdSkinLeftPart - path to file with expected skin encoded in Base64
 	 * @param expectedAdSkinRightPart - path to file with expected skin encoded in Base64
 	 */
-	public void verifyAdSkinPresenceOnGivenResolution(
-		String page, String adSkinUrl, Dimension windowResolution, int skinWidth,
-		String expectedAdSkinLeftPart, String expectedAdSkinRightPart
+	public void verifyAdSkinPresence(
+			String adSkinUrl,
+			String expectedAdSkinLeftPart, String expectedAdSkinRightPart
 	) {
-		Shooter shooter = new Shooter();
 		AdsContent.setSlotsSelectors();
 
 		String backgroundImageUrlAfter = getPseudoElementValue(
 			body, ":after", "backgroundImage"
 		);
-		Assertion.assertStringContains(backgroundImageUrlAfter, adSkinUrl);
+		Assertion.assertStringContains(adSkinUrl, backgroundImageUrlAfter);
 
 		String backgroundImageUrlBefore = getPseudoElementValue(
 			body, ":before", "backgroundImage"
 		);
-		Assertion.assertStringContains(backgroundImageUrlBefore, adSkinUrl);
+		Assertion.assertStringContains(adSkinUrl, backgroundImageUrlBefore);
 
 		PageObjectLogging.log(
 			"ScreenshotPage",
@@ -221,8 +203,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
-		Point articleLeftSideStartPoint = new Point(articleLocationX - skinWidth,100);
-		Point articleRightSideStartPoint = new Point(articleLocationX + articleWidth,100);
+		Point articleLeftSideStartPoint = new Point(articleLocationX - skinMarginHorizontal - skinWidth, skinMarginTop);
+		Point articleRightSideStartPoint = new Point(articleLocationX + articleWidth + skinMarginHorizontal, skinMarginTop);
 		Dimension skinSize = new Dimension(skinWidth, 500);
 
 		boolean successLeft = adsComparison.compareImageWithScreenshot(
@@ -271,55 +253,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	public void checkExpectedToolbar(
-		String expectedToolbarFilePath, Dimension expectedToolbarSize
-	) throws IOException {
-		AdsComparison adsComparison = new AdsComparison();
-		boolean result = adsComparison.compareElementWithScreenshot(
-				toolbar, expectedToolbarFilePath, expectedToolbarSize, driver
-		);
-		if (result) {
-			PageObjectLogging.log(
-				"ExpectedAdFound", "Expected ad found in toolbar", true
-			);
-		} else {
-			PageObjectLogging.log(
-				"ExpectedAdNotFound", "Expected ad not found in toolbar", false
-			);
-			throw new NoSuchElementException(
-				"Expected ad not found on page"
-				+ "CSS: "
-				+ AdsContent.wikiaBarSelector
-			);
-		}
-	}
-
-	public void verifyPrefooters() {
-		String prefooterSelector = AdsContent.getSlotSelector("Prefooters");
-		WebElement prefooterElement = driver.findElement(By.cssSelector(prefooterSelector));
-
-		//Scroll to AIC container and wait for <div> to be present inside it
-		if (!scrollToSelector(prefooterSelector)) {
-			PageObjectLogging.log(
-				"SelectorNotFound",
-				"Selector " + prefooterSelector + " not found on page",
-				false,
-				driver
-			);
-		}
-		checkTagsPresent(prefooterElement);
-	}
-
-	public void verifyTopLeaderBoardAndMedrec() throws Exception {
-		waitForElementByElement(presentLeaderboard);
-		checkScriptPresentInSlotScripts(presentLeaderboardName, presentLeaderboard);
-		checkTagsPresent(presentLeaderboard);
-
-		waitForElementByElement(presentMedrec);
-		checkScriptPresentInSlotScripts(presentMedrecName, presentMedrec);
-		checkTagsPresent(presentMedrec);
-	}
-
 	public void verifyHubTopLeaderboard() throws Exception {
 		String hubLBName = AdsContent.hubLB;
 		WebElement hubLB = driver.findElement(By.cssSelector(AdsContent.getSlotSelector(hubLBName)));
@@ -342,33 +275,40 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyNoLiftiumAdsOnPage() {
-		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
-		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
 		verifyNoLiftiumAds();
+		PageObjectLogging.log(
+			"verifyNoLiftiumAdsOnPage",
+			"No ads detected",
+			true,
+			driver
+		);
 	}
 
 	public void verifyNoAdsOnPage() {
-		scrollToSelector(AdsContent.getSlotSelector("AdsInContent"));
-		scrollToSelector(AdsContent.getSlotSelector("Prefooters"));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
 		verifyNoAds();
+		PageObjectLogging.log(
+			"verifyNoAdsOnPage",
+			"No ads detected",
+			true,
+			driver
+		);
 	}
 
-	public boolean verifyAdsInContent() {
-		String aicSelector = AdsContent.getSlotSelector("AdsInContent");
-		WebElement aicContainer = driver.findElement(By.cssSelector(aicSelector));
+	public void verifyNoAdsOnMobilePage() {
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobileAdInContent));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobilePrefooter));
+		verifyNoAds();
+		PageObjectLogging.log(
+			"verifyNoAdsOnMobilePage",
+			"No ads detected",
+			true,
+			driver
+		);
 
-		//Scroll to AIC container and wait for <div> to be present inside it
-		if (!scrollToSelector(aicSelector)) {
-			PageObjectLogging.log(
-				"SelectorNotFound",
-				"Selector " + aicSelector + " not found on page",
-				false,
-				driver
-			);
-			return false;
-		}
-		waitForElementByElement(aicContainer.findElement(By.cssSelector("div")));
-		return checkTagsPresent(aicContainer);
 	}
 
 	private boolean checkTagsPresent(WebElement slotElement) {
@@ -392,22 +332,18 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
-	private boolean checkScriptPresentInSlot(WebElement slot, String script) {
-		List<WebElement> scriptsTags = slot.findElements(By.tagName("script"));
-		return checkIfScriptInsideScripts(scriptsTags, script);
-	}
-
-	protected boolean checkIfScriptInsideScripts(List<WebElement> scripts, String script) {
+	protected boolean isScriptPresentInElement(WebElement element, String scriptText) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement scriptNode : scripts) {
-			String result = (String) js.executeScript(
-				"return arguments[0].innerHTML", scriptNode
-			);
-			String trimedResult = result.replaceAll("\\s", "");
-			if (trimedResult.contains(script)) {
+
+		scriptText = scriptText.replaceAll("\\s", "");
+
+		for (WebElement scriptNode : element.findElements(By.tagName("script"))) {
+			String result = (String) js.executeScript("return arguments[0].innerHTML", scriptNode);
+			if (result.replaceAll("\\s", "").contains(scriptText)) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -415,7 +351,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		String scriptExpectedResult = AdsContent.adsPushSlotScript.replace(
 			"%slot%", slotName
 		);
-		boolean scriptFound = checkScriptPresentInSlot(slotElement, scriptExpectedResult);
+		boolean scriptFound = isScriptPresentInElement(slotElement, scriptExpectedResult);
 		if (scriptFound) {
 			PageObjectLogging.log(
 				"PushSlotsScriptFound",
@@ -434,22 +370,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return scriptFound;
 	}
 
-	protected boolean checkIfSlotHiddenBySlotTweaker(WebElement slot, String slotName) {
-		WebElement firstLevelIframe = slot.findElement(
-				By.cssSelector("iframe[id*=" + slotName + "]")
-		);
-
-		//Prepare slotTweaker script's draft and look for it inside slot's iframe
-		driver.switchTo().frame(firstLevelIframe);
-		String slotTweakerHideMedrecScript = AdsContent.slotTweakerHideSlotScript.replaceAll(
-			"%slot%", slotName
-		);
-		boolean result = checkScriptPresentInSlot(body, slotTweakerHideMedrecScript);
-
-		driver.switchTo().defaultContent();
-		return result;
-	}
-
 	private void verifyNoAds() {
 		Collection<String> slotsSelectors = AdsContent.slotsSelectors.values();
 		for (String selector: slotsSelectors) {
@@ -460,12 +380,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 					&& element.getSize().getHeight() > 1
 					&& element.getSize().getWidth() > 1
 				) {
-					PageObjectLogging.log(
-						"AdsFound",
-						"Ads found on page with selector: " + selector,
-						false,
-						driver
-					);
+					throw new WebDriverException("Ads found on page");
 				} else {
 					PageObjectLogging.log(
 						"AdsFoundButNotVisible",
@@ -517,16 +432,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 		} else {
 			PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
 		}
-	}
-
-	public void verifyNoSpotlights() {
-		for (WebElement spotlight: spotlights) {
-			if (spotlight.isDisplayed()) {
-				PageObjectLogging.log("SpotlightVisible", "Spotlight visible, should be hidden", false);
-				throw new WebDriverException("Spotlight visible, should be hidden");
-			}
-		}
-		PageObjectLogging.log("SpotlightsHidden", "Spotlights are hidden", true);
 	}
 
 	private String extractLiftiumTagId(String slotSelector) {
@@ -588,6 +493,26 @@ public class AdsBaseObject extends WikiBasePageObject {
 			} else {
 				PageObjectLogging.log("LiftiumNotFound", "Liftium not found in slot " + slot, true);
 			}
+		}
+	}
+
+	/**
+	 * Test wether the correct GPT ad unit is called
+	 *
+	 * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
+	 */
+	public void verifyGptIframe(String adUnit) {
+		String slotName = presentLeaderboard.getAttribute("id");
+		String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + slotName + "_gpt_0";
+		String cssSelector = "iframe[id^='" + iframeId + "']";
+
+		if (checkIfElementInElement(cssSelector, presentLeaderboard)) {
+			String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
+			PageObjectLogging.log("verifyGptIframe", msg, true, driver);
+		} else {
+			String msg = "GPT iframe #" + iframeId + " not found for slot " + slotName;
+			PageObjectLogging.log("verifyGptIframe", msg, false, driver);
+			throw new NoSuchElementException(msg);
 		}
 	}
 }

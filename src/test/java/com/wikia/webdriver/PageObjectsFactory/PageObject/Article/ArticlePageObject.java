@@ -184,7 +184,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyContent(String content) {
 		waitForElementVisibleByElement(articleContent);
-		Assertion.assertStringContains(articleContent.getText(), content);
+		Assertion.assertStringContains(content, articleContent.getText());
 	}
 
 
@@ -283,7 +283,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyCommentText(String comment) {
 		WebElement mostRecentComment = articleComments.get(0);
 		waitForTextToBePresentInElementByElement(mostRecentComment, comment);
-		Assertion.assertStringContains(mostRecentComment.getText(), comment);
+		Assertion.assertStringContains(comment, mostRecentComment.getText());
 	}
 
 	public void verifyCommentVideo(String videoName) {
@@ -333,7 +333,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		WebElement mostRecentComment = articleComments.get(0);
 		WebElement editedByArea = mostRecentComment.findElement(By.cssSelector(commentAuthorLink));
 		waitForElementVisibleByElement(editedByArea);
-		Assertion.assertStringContains(editedByArea.getText(), userName);
+		Assertion.assertStringContains(userName, editedByArea.getText());
 	}
 
 	public MiniEditorComponentObject triggerCommentReply() {
@@ -354,14 +354,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public void verifyCommentReply(String reply) {
 		WebElement mostRecentReply = commentReplies.get(0);
 		waitForElementVisibleByElement(mostRecentReply);
-		Assertion.assertStringContains(mostRecentReply.getText(), reply);
+		Assertion.assertStringContains(reply, mostRecentReply.getText());
 	}
 
 	public void verifyReplyCreator(String userName) {
 		WebElement mostRecentReply = commentReplies.get(0);
 		WebElement editedByArea = mostRecentReply.findElement(By.cssSelector(commentAuthorLink));
 		waitForElementVisibleByElement(editedByArea);
-		Assertion.assertStringContains(editedByArea.getText(), userName);
+		Assertion.assertStringContains(userName, editedByArea.getText());
 	}
 
 	public String getArticleName() {
@@ -495,7 +495,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 			position = "position is not provided";
 			break;
 		}
-		Assertion.assertStringContains(videoClass, position);
+		Assertion.assertStringContains(position, videoClass);
 	}
 
 	public Integer getVideoWidth(WebElement thumbnail) {
@@ -519,7 +519,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		String caption = videoThumbnailWrapper.findElement(
 			By.className("caption")
 		).getText();
-		Assertion.assertStringContains(caption, captionDesired);
+		Assertion.assertStringContains(captionDesired, caption);
 		PageObjectLogging.log("verifyVideoCaption", "video has expected caption", true);
 	}
 
@@ -527,7 +527,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		String name = videoThumbnailWrapper.findElement(
 			By.className("title")
 		).getText();
-		Assertion.assertStringContains(name, nameDesired);
+		Assertion.assertStringContains(nameDesired, name);
 		PageObjectLogging.log("verifyVideoName", "video has expected name", true);
 	}
 
@@ -691,7 +691,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
-		Assertion.assertStringContains(welcomeLightBoxTitle.getText(), wikiName);
+		Assertion.assertStringContains(wikiName, welcomeLightBoxTitle.getText());
 	}
 
 	public void closeNewWikiCongratulationsLightBox() {
@@ -701,7 +701,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyWikiTitleHeader(String wikiName) {
-		Assertion.assertStringContains(wikiNameHeader.getText(), wikiName);
+		Assertion.assertStringContains(wikiName, wikiNameHeader.getText());
 	}
 
 	public void verifyTableRemoved() {
@@ -714,20 +714,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 		thumbnailImageArticle.click();
 		PageObjectLogging.log("clickThumbnailImage", "Thumbnail image is clicked", true);
 		return new LightboxComponentObject(driver);
-	}
-
-	public VideoComponentObject clickThumbnailVideo(String providerName) {
-		VideoComponentObject video;
-		if ( getVideoWidth(videoThumbnail) > minInlineVideoSize ) {
-			video = clickThumbnailVideoInline();
-			verifyVideoAutoplay(providerName);
-		} else {
-			LightboxComponentObject lightbox = clickThumbnailVideoLightbox();
-			lightbox.verifyLightboxVideo();
-			lightbox.verifyVideoAutoplay(providerName);
-			video = lightbox.getVideoPlayer();
-		}
-		return video;
 	}
 
 	public LightboxComponentObject clickThumbnailVideoLightbox() {

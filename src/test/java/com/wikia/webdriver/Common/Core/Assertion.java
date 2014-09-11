@@ -11,33 +11,37 @@ import org.testng.Reporter;
 
 public class Assertion extends Assert {
 	
-	public static boolean assertStringContains(String bigger, String smaller){
-		boolean isAssertPassed = true;
-		try{
-			if (bigger.contains(smaller)){				
-				PageObjectLogging.log("assertStringContains", "assertion passed<br/>pattern: "+bigger+"<br/>current: "+smaller,  true);
+	public static boolean assertStringContains(String pattern, String current) {
+		String currentEncoded = encodeSpecialChars(current);
+		String patternEncoded = encodeSpecialChars(pattern);
+		try {
+			if (current.contains(pattern)){
+				PageObjectLogging.log(
+						"assertStringContains",
+						"assertion passed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+						true
+				);
 				return true;
-			}
-			else{
+			} else {
 				throw new AssertionError();
 			}
-		}
-		catch(AssertionError ass){
-			isAssertPassed = false;
+		} catch (AssertionError ass) {
 			addVerificationFailure(ass);
-			PageObjectLogging.log("assertStringContains", "assertion failed<br/>pattern: "+bigger+"<br/>current: "+smaller,  false);
+			PageObjectLogging.log(
+					"assertStringContains",
+					"assertion failed<br/>current: " + currentEncoded + "<br/>pattern: " + patternEncoded,
+					false
+			);
 			return false;
 		}
 	}
 
-	public static void assertEquals(String pattern, String current){
-		boolean isAssertPassed = true;
+	public static void assertEquals(String pattern, String current) {
 		String patternEncoded = encodeSpecialChars(pattern);
 		String currentEncoded = encodeSpecialChars(current);
 		try {
 			Assert.assertEquals(pattern, current);
-		} catch(AssertionError err){
-			isAssertPassed = false;
+		} catch(AssertionError err) {
 			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertEquals",
@@ -55,13 +59,11 @@ public class Assertion extends Assert {
 	}
 
 	public static void assertNotEquals(String pattern, String current){
-		boolean isAssertPassed = true;
 		String patternEncoded = encodeSpecialChars(pattern);
 		String currentEncoded = encodeSpecialChars(current);
 		try {
 			Assert.assertNotEquals(pattern, current);
 		} catch(AssertionError err) {
-			isAssertPassed = false;
 			addVerificationFailure(err);
 			PageObjectLogging.log(
 				"assertNotEquals",
@@ -78,15 +80,12 @@ public class Assertion extends Assert {
 		);
 	}
 
-	public static void assertNumber(Number expected, Number actual,
-			String message) {
-		boolean isAssertPassed = true;
+	public static void assertNumber(Number expected, Number actual, String message) {
 		try {
 			Assert.assertEquals(expected, actual);
 			PageObjectLogging.log("assertNumber", message + ", expected: "
 					+ expected + ", got: " + actual, true);
 		} catch (AssertionError ass) {
-			isAssertPassed = false;
 			addVerificationFailure(ass);
 			PageObjectLogging.log("assertNumber", message + ", expected: "
 					+ expected + ", got: " + actual, false);

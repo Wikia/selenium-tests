@@ -1,6 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.util.List;
@@ -14,13 +13,12 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AdsAmazonObject extends AdsBaseObject {
 
-	@FindBy(css="body > script")
-	private List<WebElement> scriptsInBody;
+	@FindBy(css="body")
+	private WebElement body;
 	@FindBy(css="div[id*=_gpt][data-gpt-page-params*=amzn]")
 	private List<WebElement> slotsWithAmazonParams;
 
 	private final String amazonScriptOnPage = "head > script[src*='amazon']";
-	private final String amazonEmptyResponse = "void(0)";
 	private final String amazonScript = "amazon-adsystem.com/e/dtb/bid";
 
 	public AdsAmazonObject(
@@ -32,7 +30,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 	}
 
 	public void verifyAmazonScriptIncluded() {
-		if (checkIfScriptInsideScripts(scriptsInBody, amazonScript)) {
+		if (isScriptPresentInElement(body, amazonScript)) {
 			PageObjectLogging.log("AmazonScriptFound", "Script from Amazon found", true);
 		} else {
 			throw new NoSuchElementException("Amazon script not found on page");
@@ -56,6 +54,10 @@ public class AdsAmazonObject extends AdsBaseObject {
 	}
 
 	public void verifyGPTParams() {
-		Assertion.assertTrue(slotsWithAmazonParams.size() > 0);
+		if (slotsWithAmazonParams.size() > 0) {
+			PageObjectLogging.log("AmazonAdFound", "Slot with amazon ad found", true);
+		} else {
+			throw new NoSuchElementException("Amazon Ad not found on page");
+		}
 	}
 }

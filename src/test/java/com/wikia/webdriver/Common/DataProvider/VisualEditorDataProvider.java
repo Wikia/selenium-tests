@@ -16,8 +16,7 @@ public class VisualEditorDataProvider {
 		SUBHEADING2 (By.tagName("h4")),
 		SUBHEADING3 (By.tagName("h5")),
 		SUBHEADING4 (By.tagName("h6")),
-		PREFORMATTED (By.tagName("pre")),
-		TITLE (By.tagName("h1"));
+		PREFORMATTED (By.tagName("pre"));
 
 		private By tag;
 
@@ -50,15 +49,30 @@ public class VisualEditorDataProvider {
 	}
 
 	public enum InsertDialog {
+		MAP,
 		MEDIA,
 		TEMPLATE,
 		REFERENCE,
-		REFERENCE_LIST;
+		REFERENCE_LIST,
+		PAGE_SETTINGS,
+		CATEGORIES,
+		KEYBOARD_SHORTCUTS,
+		SOURCE_EDITOR;
 	}
 
 	public enum InsertList {
 		NUMBERED_LIST,
 		BULLET_LIST;
+	}
+
+	public enum Indentation {
+		INCREASE,
+		DECREASE;
+	}
+
+	public enum CategoryResultType {
+		NEW,
+		MATCHING;
 	}
 
 	/**
@@ -74,7 +88,6 @@ public class VisualEditorDataProvider {
 			{Formatting.SUBHEADING2},
 			{Formatting.SUBHEADING3},
 			{Formatting.SUBHEADING4},
-			{Formatting.TITLE},
 		};
 	}
 

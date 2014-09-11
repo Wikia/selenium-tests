@@ -108,9 +108,8 @@ public class SpecialPromotePageObject extends BasePageObject {
 	public void verifyCrossWikiSearchDescription(String firstDescription) {
 		waitForElementByElement(wikiaDescription);
 		Assertion.assertStringContains(
-			wikiaDescription.getText(),
-			firstDescription.substring(0,
-			firstDescription.length()-3)
+				firstDescription.substring(0,
+				firstDescription.length()-3), wikiaDescription.getText()
 		);
 	}
 
@@ -124,7 +123,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 		File expectedImageFile = new File(PageContent.resourcesPath + fileName);
 		File actualImageFile = getUploadedImage();
 		ImageComparison comparer = new ImageComparison();
-		Boolean ifEqual = comparer.compareImagesBasedOnBytes(expectedImageFile, actualImageFile);
+		Boolean ifEqual = comparer.areFilesTheSame(expectedImageFile, actualImageFile);
 		actualImageFile.delete();
 		Assertion.assertTrue(ifEqual);
 	}

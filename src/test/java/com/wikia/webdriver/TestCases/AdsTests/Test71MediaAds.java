@@ -1,12 +1,13 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.GermanAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Ads71MediaObject;
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsGermanObject;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -15,6 +16,7 @@ import org.testng.annotations.Test;
 public class Test71MediaAds extends NewTestTemplate {
 
 	private String testedPage;
+	private final String media71ForceResponse = "showroom=billboard&subsite=ingrid";
 
 	@Factory(
 		dataProviderClass=GermanAdsDataProvider.class,
@@ -29,37 +31,24 @@ public class Test71MediaAds extends NewTestTemplate {
 		}
 	}
 
-	@GeoEdgeProxy(country="US")
-	@Test (groups={"Ads", "Test71MediaAds_US", "Ads71Media"})
-	public void Test71MediaAds_US() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
-	}
-
 	@GeoEdgeProxy(country="DE")
 	@Test (groups={"Ads", "Test71MediaAds_DE", "Ads71Media"})
 	public void Test71MediaAds_DE() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
-	}
-
-	@GeoEdgeProxy(country="HR")
-	@Test (groups={"Ads", "Test71MediaAds_HR", "Ads71Media"})
-	public void Test71MediaAds_HR() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
+		ads71Media.verify71MediaAdsPresent();
 	}
 
 	@GeoEdgeProxy(country="AU")
 	@Test (groups={"Ads", "Test71MediaAds_AU", "Ads71Media"})
 	public void Test71MediaAds_AU() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage);
+		ads71Media.verify71MediaAdsPresent();
 	}
 
 	@Test (groups={"Ads", "Test71MediaAds_GeoEdgeFree", "Ads71Media"})
 	public void Test71MediaAds_GeoEdgeFree() {
-		Ads71MediaObject ads71Media = new Ads71MediaObject(driver, testedPage);
-		ads71Media.veriy71MediaAdsPresent();
+		String testedPage71Media = urlBuilder.appendQueryStringToURL(testedPage, media71ForceResponse);
+		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage71Media);
+		ads71Media.verify71MediaAdsPresent();
 	}
 }

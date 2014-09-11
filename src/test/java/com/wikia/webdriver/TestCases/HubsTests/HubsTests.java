@@ -149,6 +149,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	@Test(dataProvider = "provideHubName", groups = { "HubsTest_007", "Hubs" })
 	public void HubsTest_007_VerifyLinkInWikiaBar(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
+		home.logOut(wikiURL);
 		home.openCorporateHomePage(wikiCorporateURL);
 		HubBasePageObject hub = new HubBasePageObject(driver);
 		hub.clickWikiaBarLink(hubName);

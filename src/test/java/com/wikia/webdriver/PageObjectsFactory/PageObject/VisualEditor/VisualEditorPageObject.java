@@ -2,17 +2,29 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 /**
@@ -36,7 +48,44 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	@FindBy(css=".ve-init-mw-viewPageTarget-surface")
 	private WebElement veEditorSurface;
 	@FindBy(css=".image.video.video-thumbnail.medium")
+	private List<WebElement> mediaNodes;
+	@FindBy(css="figure.ve-ce-branchNode a")
 	private WebElement mediaNode;
+	@FindBy(css="figure.wikia-interactive-map-thumbnail")
+	private WebElement mapNode;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay")
+	private WebElement previewOverlay;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-title")
+	private WebElement previewMeditaTitle;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-closeButton .oo-ui-buttonedElement-button")
+	private WebElement previewCloseButton;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay img")
+	private WebElement previewImage;
+	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
+	private WebElement previewVideoWrapper;
+	@FindBy(css="figure figcaption .caption")
+	private WebElement mediaCaption;
+	@FindBy(css=".ve-ce-resizableNode-swHandle")
+	private WebElement SWResizeHandle;
+	@FindBy(css=".ve-ui-desktopContext .oo-ui-popupWidget")
+	private WebElement contextMenu;
+	@FindBy(css=".ve-ce-node-focused")
+	private WebElement focusedNode;
+	@FindBy(css=".ve-ce-focusableNode-highlights")
+	private WebElement nodeHighlight;
+
+	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget");
+	private By mediaEditBy = By.cssSelector(".oo-ui-icon-edit");
+
+	public void selectMediaAndDelete() {
+		waitForElementByElement(editArea);
+		editArea.click();
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+		Actions actions2 = new Actions(driver);
+		actions2.sendKeys(Keys.DELETE).build().perform();
+		PageObjectLogging.log("selectMediaAndDelete", "Selected media and click delete", true, driver);
+	}
 
 	public void typeTextArea(String text) {
 		waitForElementVisibleByElement(editArea);
@@ -59,6 +108,26 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		int from = textDump.indexOf(text) + 1; //+1 because index is counted differently in selectText() method
 		int to = from  +text.length() + 1;
 		selectText(from, to);
+	}
+
+	public int[] getTextIndex(String text) {
+		String textDump = editArea.getText();
+		int[] indexes = new int[2];
+		//+1 because index is counted differently in selectText() method
+		indexes[0] = textDump.indexOf(text) + 1;
+		indexes[1] = indexes[0] +text.length();
+		if (indexes[0] == 0) {
+			throw new NoSuchElementException("String: " + text + " is not found");
+		}
+		return indexes;
+	}
+
+	public void removeText(String text) {
+		int[] indexes = getTextIndex(text);
+		String script = "ve.instances[0].model.change("
+			+"ve.dm.Transaction.newFromRemoval(ve.instances[0].model.documentModel,"
+			+"new ve.Range(arguments[0],arguments[1])));";
+		((JavascriptExecutor) driver).executeScript(script, indexes[0], indexes[1]);
 	}
 
 	public void verifyNumList(List<String> elements) {
@@ -98,5 +167,162 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
 		PageObjectLogging.log("verifyVideo", "VE video is displayed", true);
+	}
+
+	public void verifyMapPresent() {
+		waitForElementByElement(mapNode);
+		waitForElementVisibleByElement(mapNode);
+		PageObjectLogging.log("verifyMapPresent", "VE map is displayed", true);
+	}
+
+	public void verifyNoVideo() {
+		if(checkIfElementOnPage(mediaNode)) {
+			throw new AssertionError("Media Node is still on the page");
+		} else {
+			PageObjectLogging.log("verifyNoVideo", "Verified no video is on page", true, driver);
+		}
+	}
+
+	public void verifyVideos(int expected) {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		Assertion.assertNumber(expected, mediaNodes.size(), "Checking the correct number of video nodes added");
+		PageObjectLogging.log("verifyVideos", mediaNodes.size() + " videos displayed", true);
+	}
+
+	public VisualEditorMediaSettingsDialog openMediaSettings () {
+		waitForElementByElement(editArea);
+		waitForElementVisibleByElement(mediaNode);
+		mediaNode.click();
+		waitForElementByElement(focusedNode);
+		clickContextMenu();
+		return new VisualEditorMediaSettingsDialog(driver);
+	}
+
+	private void clickContextMenu() {
+		waitForElementVisibleByElement(contextMenu);
+		WebElement mediaEdit;
+		try {
+			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
+			mediaEdit.click();
+		} catch (StaleElementReferenceException e) {
+			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
+			mediaEdit.click();
+		}
+	}
+
+	public void typeReturn() {
+		waitForElementVisibleByElement(editArea);
+		editArea.sendKeys(Keys.RETURN);
+	}
+
+	public void typeTextInAllFormat(String text) {
+		for (Formatting format : Formatting.values()){
+			PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
+			selectFormatting(format);
+			typeTextArea(text);
+			typeReturn();
+			if (format.name().equals("PREFORMATTED")) {
+				selectFormatting(Formatting.PARAGRAPH);
+			}
+		}
+	}
+
+	public void typeTextInAllStyle(String text) {
+		for (Style style : Style.values()) {
+			PageObjectLogging.log("Style selection", style.toString() + " selected", true);
+			selectStyle(style);
+			typeTextArea(text);
+			typeReturn();
+		}
+	}
+
+	public void typeTextInAllList(String text) {
+		typeReturn();
+		typeTextArea(text);
+		insertList(InsertList.BULLET_LIST);
+		typeReturn();
+		selectIndentation(Indentation.DECREASE);
+		typeTextArea(text);
+		insertList(InsertList.NUMBERED_LIST);
+		typeReturn();
+		selectIndentation(Indentation.DECREASE);
+	}
+
+	public void copyAndPaste() {
+		waitForElementClickableByElement(editArea);
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "c"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		editArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
+		PageObjectLogging.log("copyAndPaste", editArea.getText(), true, driver);
+	}
+
+	public VisualEditorPageObject typeInSourceEditor(String text) {
+		VisualEditorSourceEditorDialog veSrcDialog =
+			(VisualEditorSourceEditorDialog) openDialogFromMenu(InsertDialog.SOURCE_EDITOR);
+		veSrcDialog.typeInEditArea(text);
+		return new VisualEditorPageObject(driver);
+	}
+
+	public void verifyPreviewVideoPlay(String providerName) {
+		waitForElementVisibleByElement(previewOverlay);
+		waitForElementVisibleByElement(previewVideoWrapper);
+		VideoComponentObject video = new VideoComponentObject(driver, previewVideoWrapper);
+		video.verifyVideoAutoplay(providerName, true);
+		PageObjectLogging.log("verifyPreviewVideoPlay", "Preview for Video loaded", true, driver);
+	}
+
+	public void verifyPreviewImage() {
+		waitForElementVisibleByElement(previewOverlay);
+		waitForElementVisibleByElement(previewImage);
+		PageObjectLogging.log("verifyPreviewImage", "Preview for Image loaded", true, driver);
+	}
+
+	public void verifyVideoCaption(String caption) {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		waitForElementByElement(mediaCaption);
+		Assertion.assertEquals(caption, mediaCaption.getText(), "The video caption does not match");
+		PageObjectLogging.log("verifyVideoCaption", "Video caption matches", true, driver);
+	}
+
+	public void selectMedia() {
+		waitForElementByElement(mediaNode);
+		mediaNode.click();
+	}
+
+	public void randomResizeOnMedia() {
+		int randomX = (int) (Math.random()*100);
+		int randomY = (int) (-Math.random()*100);
+		resizeMedia(randomX, randomY);
+	}
+
+	private void resizeMedia(int xOffSet, int yOffset) {
+		PageObjectLogging.log("resizeMedia", "Before resizing", true, driver);
+		selectMedia();
+		waitForElementVisibleByElement(SWResizeHandle);
+		Actions actions = new Actions(driver);
+		actions
+			.dragAndDropBy(SWResizeHandle, xOffSet, yOffset)
+			.build()
+			.perform();
+		PageObjectLogging.log("resizeMedia", "After resizing", true, driver);
+	}
+
+	public void verifyVideoSWHandleMoved(Point source) {
+		verifyElementMoved(source, SWResizeHandle);
+	}
+
+	public Point getVideoSWHandle() {
+		return SWResizeHandle.getLocation();
+	}
+
+	public void verifyVideoResized(Dimension source) {
+		verifyElementResized(source, mediaNode);
+	}
+
+	public Dimension getVideoDimension() {
+		return mediaNode.getSize();
 	}
 }

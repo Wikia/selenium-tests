@@ -71,6 +71,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 	public void clickTab(int tab) {
 		WebElement currentTab = tabList.get(tab);
+		waitForElementByElement(currentTab);
 		scrollAndClick(currentTab);
 		PageObjectLogging.log(
 				"clickTab",

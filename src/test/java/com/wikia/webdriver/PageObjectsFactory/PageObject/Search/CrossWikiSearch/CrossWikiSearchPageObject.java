@@ -85,7 +85,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 		PageObjectLogging.log("searchFor", "Search button clicked", true, driver);
 		return new CrossWikiSearchPageObject(driver);
 	}
-	
+
 	public CrossWikiSearchPageObject searchForEnter( String term ) {
 		searchInput.clear();
 		searchInput.sendKeys( term );
@@ -156,7 +156,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 	 * @return result page
 	 */
 	public WikiArticleHomePage openResult(int resultNumeber) {
-		resultLinks.get(resultNumeber).click();
+		WebElement resultLink = resultLinks.get(resultNumeber);
+		waitForElementByElement(resultLink);
+		scrollAndClick(resultLink);
 		return new WikiArticleHomePage(driver);
 	}
 
@@ -195,7 +197,7 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 	public void verifyThumbnails(int number){
 		Assertion.assertNumber(number, thumbnails.size(), "checking number of thumbnails");
 		for (WebElement elem:thumbnails){
-			Assertion.assertStringContains(elem.getAttribute("src"), ".png");
+			Assertion.assertStringContains(".png", elem.getAttribute("src"));
 		}
 		PageObjectLogging.log("verifyThumbnails", "thumbnails verified",
 				true);
@@ -215,9 +217,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 		Assertion.assertEquals(statisticsImages.size(), number);
 		Assertion.assertEquals(statisticsVideos.size(), number);
 		for (int i=0; i<number; i++){
-			Assertion.assertStringContains(statisticsPages.get(i).getText(), "PAGE");
-			Assertion.assertStringContains(statisticsImages.get(i).getText(), "IMAGE");
-			Assertion.assertStringContains(statisticsVideos.get(i).getText(), "VIDEO");
+			Assertion.assertStringContains("PAGE", statisticsPages.get(i).getText());
+			Assertion.assertStringContains("IMAGE", statisticsImages.get(i).getText());
+			Assertion.assertStringContains("VIDEO", statisticsVideos.get(i).getText());
 		}
 	}
 

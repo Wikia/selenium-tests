@@ -36,9 +36,12 @@ public class CrossWikiSearchProvider {
 		return new Object[][]{
 			{
 				"Gauzz's Sandbox", "Gauzz's Sandbox Wiki"
-			}, {
-				"Marvel: Avengers Alliance Wiki", "Marvel: Avengers Alliance Wiki"
-			}, {
+			},
+// PLA-1602
+//			{
+//				"Marvel: Avengers Alliance Wiki", "Marvel: Avengers Alliance Wiki"
+//			},
+			{
 				"Red vs. Blue", "Red vs. Blue Wiki"
 			}, {
 				"PlayStation All-Stars FanFiction Royale", "PlayStation All-Stars FanFiction Royale Wiki"

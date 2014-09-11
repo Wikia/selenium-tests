@@ -293,7 +293,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void verifyWikiTextInSourceMode(String text) {
 		String wikiText = sourceModeTextArea.getAttribute("value");
-		Assertion.assertStringContains(wikiText, text);
+		Assertion.assertStringContains(text, wikiText);
 	}
 
 	public void clickOnModifyImageLink() {

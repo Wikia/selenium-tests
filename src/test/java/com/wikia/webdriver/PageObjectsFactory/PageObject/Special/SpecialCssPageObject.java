@@ -271,5 +271,10 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			waitForElementByElement(mwTalkBubble);
 			return Integer.parseInt(mwTalkBubble.getText());
 		}
+		
+		public void verifyDeleteButtonPresence() {
+			waitForElementByElement(deleteButton);
+			PageObjectLogging.log("verifyDeleteButtonPresence", "Delete Button is present.", true);
+		}
 
 }

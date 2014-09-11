@@ -19,7 +19,7 @@ public class VetSpecialVideosTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"VetTests001", "VetTests", "SpecialVideo"})
+	@Test(groups = {"VetTests001", "VetTests", "SpecialVideo", "Media"})
 	public void SpecialVideos_001_Provider() {
 		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver) ;
 		specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -29,7 +29,7 @@ public class VetSpecialVideosTests extends NewTestTemplate{
 		specialVideos.verifyVideoAdded(VideoContent.youtubeVideoURL2name);
 	}
 
-	@Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo"})
+	@Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo", "Media"})
 	public void SpecialVideos_002_Library() {
 		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver) ;
 		specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);

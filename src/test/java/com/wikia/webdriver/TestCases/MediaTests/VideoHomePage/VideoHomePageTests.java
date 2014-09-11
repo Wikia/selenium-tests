@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 
 /**

@@ -228,8 +228,8 @@ public class NewMessageWall extends WikiBasePageObject {
 	public void verifyThreadClosed(String userName, String reason, String message) {
 		refreshPage();
 		Assertion.assertStringContains(
-				driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText(),
-				userName + " closed this thread because:\n" + reason
+				userName + " closed this thread because:\n" + reason,
+				driver.findElement(firstMessageWrapperBy).findElement(closeThreadInfobox).getText()
 		);
 		PageObjectLogging.log("verifyThreadClosed", "verifyed thread closed", true);
 	}
@@ -360,7 +360,7 @@ public class NewMessageWall extends WikiBasePageObject {
 	public void verifyPostedMessageVideo(String title) {
 		waitForElementByXPath(
 				"//div[@class='msg-title']/a[contains(text(), "
-				+ "'"+title+"')]/../../div[@class='editarea']//a[@class='video video-thumbnail medium video image lightbox ']");
+				+ "'"+title+"')]/../../div[@class='editarea']//a[contains(@class, 'video-thumbnail')]");
 		PageObjectLogging.log("verifyPostedMessageImage", "message with image title verified", true);
 	}
 }

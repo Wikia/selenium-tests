@@ -5,17 +5,19 @@ import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -31,6 +33,7 @@ import com.wikia.webdriver.Common.ContentPatterns.XSSContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.Global;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import com.wikia.webdriver.Common.Core.Purge.PurgeMethod;
 import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -235,7 +238,7 @@ public class BasePageObject{
 
 	public void verifyURLcontains(String givenString) {
 		String currentURL = driver.getCurrentUrl();
-		Assertion.assertStringContains(currentURL.toLowerCase(), givenString.toLowerCase());
+		Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
 		PageObjectLogging.log("verifyURLcontains",
 				"current url is the same as expetced url", true);
 	}
@@ -774,4 +777,77 @@ public class BasePageObject{
 		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
 	}
 
+	public void verifyElementMoved(Point source, WebElement element) {
+		Point target = element.getLocation();
+		if (source.x == target.x && source.y == target.y) {
+			Assertion.fail(
+				"Element did not move. Old coordinate (" + source.x + "," + source.y + ") " +
+					"New coordinate (" + target.x + "," + target.y + ")"
+			);
+		}
+		PageObjectLogging.log(
+			"verifyElementMoved", "Element did move. From (" + source.x + "," + source.y + ") to ("
+				+ target.x + ","+target.y + ")",
+			true,
+			driver
+		);
+	}
+
+	public void verifyElementResized(Dimension source, WebElement element) {
+		Dimension target = element.getSize();
+		int sourceWidth = source.width;
+		int sourceHeight = source.height;
+		int targetWidth = target.width;
+		int targetHeight = target.height;
+
+		if (sourceWidth == targetWidth && sourceHeight == targetHeight) {
+			Assertion.fail(
+				"Element did not resize. Old dimension (" + sourceWidth + "," + sourceHeight + ") " +
+					"New dimension (" + targetWidth + "," + targetHeight + ")"
+			);
+		}
+		PageObjectLogging.log(
+			"verifyElementMoved", "Element did resize. From (" + sourceWidth + "," + sourceHeight + ") to ("
+				+ targetWidth + ","+targetHeight + ")",
+			true,
+			driver
+		);
+	}
+
+	public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
+		WebElement foundElement = null;
+		for(WebElement element : elements) {
+			if (element.getAttribute(attribute).equals(value)) {
+				foundElement = element;
+				PageObjectLogging.log("getElementByValue",
+					"Element with attribute: " + attribute + " with the value: " + value + " is found from the list",
+					true
+				);
+				break;
+			}
+		}
+		if (foundElement == null) {
+			throw new NoSuchElementException(
+				"Element with attribute: " + attribute + " with the value: "
+				+ value + " is not found from the list"
+			);
+		}
+		return foundElement;
+	}
+
+	public WebElement getElementByText(List<WebElement> elements, String value) {
+		WebElement foundElement = null;
+		for(WebElement element : elements) {
+			if (element.getText().equalsIgnoreCase(value)) {
+				foundElement = element;
+				PageObjectLogging.log("getElementByText", "Element with text: " + value + " is found from the list", true);
+				break;
+			}
+		}
+		if (foundElement == null) {
+			throw new NoSuchElementException(
+				"Element with text: " + value + " is not found from the list");
+		}
+		return foundElement;
+	}
 }

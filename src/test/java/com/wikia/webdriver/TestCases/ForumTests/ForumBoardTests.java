@@ -60,7 +60,7 @@ public class ForumBoardTests extends NewTestTemplate {
 	@Test(groups= {"ForumBoardTests_004", "ForumBoardTests", "Forum"} )
 	public void ForumBoardTests_004_startDiscussionWithLink(){
 		String Externallink = PageContent.externalLink;
-		String Internallink = PageContent.internalLink;
+		String Internallink = PageContent.redirectLink;
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();

@@ -54,7 +54,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		PageObjectLogging.log(
 			"CompareScreenshot", "Page before hidding ads", true, driver
 		);
-		if (checkIfAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard)) {
+		if (areAdsEmpty(presentLeaderboardSelector, presentLeaderboard)) {
 			PageObjectLogging.log(
 				"CompareScreenshot", "Screenshots look the same", false
 			);
@@ -106,15 +106,15 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		PageObjectLogging.log("AdInSlot", "Ad found in slot", true);
 	}
 
-	private boolean checkIfAdVisibleInSlot(String slotSelector, WebElement slot) {
+	private boolean areAdsEmpty(String slotSelector, WebElement slot) {
 		File preSwitch = adsComparison.getMobileSlotScreenshot(slot, driver);
 		adsComparison.hideSlot(slotSelector, driver);
 		waitForElementNotVisibleByElement(slot);
 		File postSwitch = adsComparison.getMobileSlotScreenshot(slot, driver);
-		boolean result = imageComparison.compareImagesBasedOnBytes(preSwitch, postSwitch);
+		boolean imagesTheSame = imageComparison.areFilesTheSame(preSwitch, postSwitch);
 		preSwitch.delete();
 		postSwitch.delete();
-		return result;
+		return imagesTheSame;
 	}
 
 	private void removeSmartBanner() {

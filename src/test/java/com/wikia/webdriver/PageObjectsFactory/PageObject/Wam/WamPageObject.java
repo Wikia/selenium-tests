@@ -1,14 +1,17 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Wam;
 
-
-
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -25,44 +28,59 @@ public class WamPageObject extends BasePageObject {
 	public final int DEFAULT_WAM_INDEX_ROWS = 21;
 	private final int VERTICAL_COLUMN_INDEX = 5;
 
-	@FindBy(id="verticalId")
+	@FindBy(id = "verticalId")
 	private WebElement wamVerticalFilterSelect;
 
-	@FindBy(id="WamFilterDate")
+	@FindBy(id = "WamFilterDate")
 	private WebElement wamDateInput;
 
-	@FindBy(id="langCode")
+	@FindBy(id = "langCode")
 	private WebElement wamLanguageFilterSelect;
 
-	@FindBy(css=".wam-index-search .searching input[name=searchPhrase]")
+	@FindBy(css = ".wam-index-search .searching input[name=searchPhrase]")
 	private WebElement wamSearchPhrase;
 
-	@FindBy(css=".wam-tabs")
+	@FindBy(css = ".wam-tabs")
 	private List<WebElement> wamTabs;
 
-	@FindBy(css="#wam-index table tr")
+	@FindBy(css = "#wam-index table tr")
 	private List<WebElement> wamIndexRows;
 
-	@FindBys(@FindBy(css="ul.wam-tabs li a"))
+	@FindBys(@FindBy(css = "ul.wam-tabs li a"))
 	private List<WebElement> tabsList;
 
-	@FindBy(css="a.paginator-next")
+	@FindBy(css = "a.paginator-next")
 	private WebElement paginationNext;
 
-	@FindBy(css="div.wam-index tr td:nth-child(1)")
+	@FindBy(css = "div.wam-index tr td:nth-child(1)")
 	private List<WebElement> indexList;
 
-	@FindBy(css="div.wikia-paginator ul li a.paginator-page")
+	@FindBy(css = "div.wikia-paginator ul li a.paginator-page")
 	private List<WebElement> paginationPageNo;
 
-	@FindBy(css="a.selected")
+	@FindBy(css = "a.selected")
 	private WebElement tabSelected;
 
-	@FindBy(css="div.wam-header h2")
+	@FindBy(css = "div.wam-header h2")
 	private WebElement selectedHeaderName;
 
-	@FindBy(css="tr td:nth-child(5)")
+	@FindBy(css = "tr td:nth-child(5)")
 	private List<WebElement> verticalColumn;
+
+	@FindBy(id = "WamFilterHumanDate")
+	private WebElement datePickerInput;
+
+	@FindBy(id = "ui-datepicker-div")
+	private WebElement calendarElement;
+
+	@FindBy(css = ".ui-datepicker-prev.ui-corner-all")
+	private WebElement previousMonthArrow;
+
+	@FindBy(css = ".ui-datepicker-month")
+	private WebElement monthInCalendar;
+
+	@FindBy(css = "#wam-index-search button.secondary")
+	private WebElement searchSubmitButton;
 
 	By wamIndexTable = By.cssSelector("#wam-index table");
 
@@ -90,12 +108,11 @@ public class WamPageObject extends BasePageObject {
 		/**
 		 * @desc Checks if passed value is in enum
 		 * @param value mostly a select-box option
-		 *
 		 * @return true if enum has the value; false otherwise
 		 */
 		public static Boolean contains(String value) {
-			for( VerticalsIds vids : VerticalsIds.values() ) {
-				if( vids.getIdAsString().equals(value)) {
+			for (VerticalsIds vids : VerticalsIds.values()) {
+				if (vids.getIdAsString().equals(value)) {
 					return true;
 				}
 			}
@@ -148,21 +165,32 @@ public class WamPageObject extends BasePageObject {
 		waitForElementByBy(wamIndexTable);
 		int rows = wamIndexRows.size();
 
-		if( rows > 1 ) {
-			PageObjectLogging.log("verifyWamIndexIsNotEmpty", "there are more rows in the table than just a head row (" + rows + ")", true);
+		if (rows > 1) {
+			PageObjectLogging.log(
+				"verifyWamIndexIsNotEmpty",
+				"there are more rows in the table than just a head row (" + rows + ")",
+				true
+			);
 		} else {
-			PageObjectLogging.log("verifyTabIsSelected", "there is only the head row", false);
+			PageObjectLogging.log(
+				"verifyTabIsSelected",
+				"there is only the head row",
+				false
+			);
 		}
 	}
 
 	/**
 	 * @desc Checks if there are as many rows in the WAM index table as we expect
-	 *
 	 * @param expectedRowsNo the number of expecting table rows
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
 		waitForElementByBy(wamIndexTable);
-		Assertion.assertNumber(expectedRowsNo, wamIndexRows.size(), "wam index rows equals " + expectedRowsNo );
+		Assertion.assertNumber(
+			expectedRowsNo,
+			wamIndexRows.size(),
+			"wam index rows equals " + expectedRowsNo
+		);
 	}
 
 	/**
@@ -175,20 +203,28 @@ public class WamPageObject extends BasePageObject {
 		options.remove(0); // first option is "All" and we don't care about it here
 		Boolean result = true;
 
-		for( WebElement e : options ) {
+		for (WebElement e : options) {
 			String optionValue = e.getAttribute("value");
 
-			if( !VerticalsIds.contains(optionValue) ) {
+			if (!VerticalsIds.contains(optionValue)) {
 				// once an option is not in our ENUM the test is failed
 				result = false;
 				break;
 			}
 		}
 
-		if( result.equals(true) ) {
-			PageObjectLogging.log("verifyWamVerticalFilterOptions", "There are correct options in the vertical select box", true);
+		if (result.equals(true)) {
+			PageObjectLogging.log(
+				"verifyWamVerticalFilterOptions",
+				"There are correct options in the vertical select box",
+				true
+			);
 		} else {
-			PageObjectLogging.log("verifyWamVerticalFilterOptions", "There is invalid option in the vertical select box", false);
+			PageObjectLogging.log(
+				"verifyWamVerticalFilterOptions",
+				"There is invalid option in the vertical select box",
+				false
+			);
 		}
 	}
 
@@ -199,7 +235,7 @@ public class WamPageObject extends BasePageObject {
 	public void selectVertical(VerticalsIds verticalId) {
 		waitForElementByElement(wamVerticalFilterSelect);
 		Select verticalSelectBox = new Select(wamVerticalFilterSelect);
-		verticalSelectBox.selectByValue( verticalId.getIdAsString() );
+		verticalSelectBox.selectByValue(verticalId.getIdAsString());
 		waitForElementByBy(wamIndexTable);
 	}
 
@@ -229,8 +265,11 @@ public class WamPageObject extends BasePageObject {
 	public void verifyWamIndexPageFirstColumn(int startElement, int endElement) {
 		waitForElementByBy(wamIndexTable);
 		List<String> current = getCurrentIndexNo();
-		for (int i=0; i<=endElement - startElement; i++) {
-			Assertion.assertEquals(current.get(i), Integer.toString(i + startElement));
+		for (int i = 0; i <= endElement - startElement; i++) {
+			Assertion.assertEquals(
+				current.get(i),
+				Integer.toString(i + startElement)
+			);
 		}
 		Assertion.assertEquals(current.size(), endElement - startElement + 1);
 	}
@@ -238,25 +277,33 @@ public class WamPageObject extends BasePageObject {
 	public void clickNextPaginator() {
 		waitForElementByElement(paginationNext);
 		scrollAndClick(paginationNext);
-		PageObjectLogging.log("clickNextPaginator", "next button in pagination was clicked", true);
+		PageObjectLogging.log(
+			"clickNextPaginator",
+			"next button in pagination was clicked",
+			true
+		);
 	}
 
-	public void selectTab(int tabNumber){
+	public void selectTab(int tabNumber) {
 		tabsList.get(tabNumber).click();
 		verifyTabSelected(tabNumber);
 	}
 
-	private void verifyTabSelected(int tabNumber){
+	private void verifyTabSelected(int tabNumber) {
 		tabNumber++;
-		WebElement tabSelected = driver.findElement(By
-				.cssSelector("ul.wam-tabs li:nth-child("+tabNumber+") a.selected"));
+		WebElement tabSelected = driver.findElement(By.cssSelector(
+			"ul.wam-tabs li:nth-child(" + tabNumber + ") a.selected")
+		);
 		waitForElementByElement(tabSelected);
 	}
 
 	public void checkTabAndHeaderName() {
 		String selectedTabName = getSelectedTabName();
 		String selectedHeaderName = getSelectedHeaderName();
-		Assertion.assertEquals(selectedHeaderName.toLowerCase(), selectedTabName.toLowerCase());
+		Assertion.assertEquals(
+			selectedHeaderName.toLowerCase(),
+			selectedTabName.toLowerCase()
+		);
 	}
 
 	private String getSelectedTabName() {
@@ -268,5 +315,63 @@ public class WamPageObject extends BasePageObject {
 		String headerName = selectedHeaderName.getText();
 		return headerName;
 	}
-}
 
+	public void verifyTodayDateInDatePicker() {
+		String currentDate = datePickerInput.getAttribute("value");
+		Date date = new Date();
+		String todayDate = getFormatedDate(date, "MMMM d, yyyy");
+		Assertion.assertEquals(
+			todayDate,
+			currentDate,
+			"Current date and today date are not the same"
+		);
+	}
+
+	public String changeDateToLastMonth() {
+		datePickerInput.click();
+		waitForElementVisibleByElement(calendarElement);
+		previousMonthArrow.click();
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MONTH, -1);
+		Date date = calendar.getTime();
+		String previousMonth = getFormatedDate(date, "MMMM");
+		waitForTextToBePresentInElementByElement(monthInCalendar, previousMonth);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		// first day of the current month
+		WebElement firstDay = (WebElement) js.executeScript(
+			"return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
+		 	calendarElement
+		 );
+		 firstDay.click();
+
+		String year = getFormatedDate(date, "YYYY");
+
+		String expectedDate = previousMonth + " 1, " + year;
+		return expectedDate;
+	}
+
+	public void verifyDateInDatePicker(String date) {
+		String currentDate = datePickerInput.getAttribute("value");
+		Assertion.assertEquals(
+			date,
+			currentDate,
+			"Current date and expected date are not the same"
+		);
+	}
+
+	public void typeDateInDatePicker(String date) {
+		waitForElementClickableByElement(datePickerInput);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("$(arguments[0])[0].value=''", datePickerInput);
+		datePickerInput.sendKeys(date);
+		Actions actions = new Actions(driver);
+		actions.sendKeys(datePickerInput, "\n");
+		actions.build().perform();
+	}
+
+	private String getFormatedDate(Date date, String format) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+	    return dateFormat.format(date);
+	}
+}
