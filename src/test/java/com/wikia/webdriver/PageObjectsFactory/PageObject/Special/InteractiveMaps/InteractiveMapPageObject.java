@@ -137,7 +137,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().frame(mapFrame);
 		waitForElementClickableByElement(zoomInButton);
 		zoomInButton.click();
-		waitForElementByElement(zoomAnim);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickZoomInButton", "Map zoom in was clicked", true, driver);
 	}
@@ -147,7 +146,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().frame(mapFrame);
 		waitForElementClickableByElement(zoomOutButton);
 		zoomOutButton.click();
-		waitForElementByElement(zoomAnim);
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickZoomOutButton", "Map zoom out was clicked", true, driver);
 	}

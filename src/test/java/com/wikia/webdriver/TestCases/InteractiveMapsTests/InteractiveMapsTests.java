@@ -25,81 +25,61 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.DabbletComPageObject;
  * @author: Lukasz Nowak
  * @ownership: Mobile Web
  * 
- *             - Special:Maps page IM01: Creating a custom new map based on new
- *             image upload v IM02: Create a custom new map based on existing
- *             template v IM03: Create a real map flow v IM04: Click on a map
- *             and verify correct redirect and URL v IM05: Click create a map
- *             button as anon and make sure log in modal is displayed v
+ *             - Special:Maps page 
+ *             IM01: Creating a custom new map based on new image upload v 
+ *             IM02: Create a custom new map based on existing template v 
+ *             IM03: Create a real map flow v 
+ *             IM04: Click on a map and verify correct redirect and URL v
+ *             IM05: Click create a map button as anon and make sure log in 
+ *             modal is displayed v
+ *             
+ *             - PIN Creation - Add a Pin modal 
+ *             IM06: Verify it is possible to  add a pin to the map and that 
+ *             add pin dialog has all required elements v
+ *             IM07: Verify removing a suggestion of article with image will
+ *             remove image from placeholder v
  * 
- *             - PIN Creation - Add a Pin modal IM06: Verify it is possible to
- *             add a pin to the map and that add pin dialog has all required
- *             elements v IM07: Verify removing a suggestion of article with
- *             image will remove image from placeholder v
+ *             - Edit PIN Types Modal 
+ *             IM08: Check image error validation for small size and non-image 
+ *             extension v
+ *             IM09: Verify back button works correctly on every dialog 
+ *             IM10: Verify clicking "Add another pin type" link will display a 
+ *             new line and fields for adding new information v                  
  * 
- *             -Edit PIN Types Modal IM08: Check image error validation for
- *             small size and non-image extension v IM09: Verify clicking
- *             "Add another pin type" link will display a new line and fields
- *             for adding new information v IM10: Verify saving any new data
- *             will actually update the data for that pin edited
- * 
- *             - Other Test Cases IM11: Verify possibility of embedding wikia
- *             map in other wikia pages. v IM12: Verify following elements in
- *             map modal when a map is embedded in a wikia page: PIN description
- *             when clicking, zoom, add/edit features for pin types and pins,
- *             embed map button, filters box. Verify there is no branding footer
- *             v IM13: Test template search works correctly for unexisting and
- *             existing templates v IM14: Verify following behaviours in
- *             "Filters" left hand side column: All categories are checked and
- *             user clicks on single category: We uncheck clicked category and
- *             "All categories". v All categories but one are checked and user
- *             clicks on unchecked one: We check clicked category and
- *             "All categories". v All categories are checked (so
- *             "All categories" is checked too) and user clicks
- *             "All categories": We uncheck all categories and "All categories".
- *             v Some categories are checked (so "All categories" is unchecked)
- *             and user clicks "All categories": We check all categories and
- *             "All categories". v IM15: Verify embed map code dialog works
- *             correctly from Special:Map page v IM16: Embed a map outside of
- *             wikia and verify there is a branding footer, zoom in/out options
- *             and filters box collapsibility
- * 
- *             Added to this list by Łukasz Nowak IM17: Verify zoom in and zoom
- *             out of map v IM18: => POIETC11: Verify pin data is correctly
- *             updated after saving (T1 priority) v IM19: SMPTC02 =>Check all
- *             required elements from page are displayed: create new map link,
- *             list of maps (max 10), pagination IM23 : Click Create a map
- *             button and check that Learn more link redirects to maps.wikia.com
- *             IM06: Verify it is possible to add a pin to the map and that add
- *             pin dialog has all required elements IM07: Verify removing a
- *             suggestion of article with image will remove image from
- *             placeholder IM08: Embed a map outside of wikia and verify there
- *             is a branding footer, zoom in/out options and filters box
- *             collapsibility IM09: Verify back button works correctly on every
- *             dialog
- * 
- *             -Edit PIN Types Modal IM10: Check image error validation for
- *             small size, big size and non-image extension IM11: Verify
- *             clicking "Add another pin type" link will display a new line and
- *             fields for adding new information IM12: Verify saving any new
- *             data will actually update the data for that pin edited
- * 
- *             - Other Test Cases IM13: Verify possibility of embedding wikia
- *             map in other wikia pages. IM14: Verify following elements in map
- *             modal when a map is embedded in a wikia page: PIN description
- *             when clicking, zoom, add/edit features for pin types and pins,
- *             embed map button, filters box. Verify there is no branding footer
- *             IM15: Test template search works correctly for unexisting and
- *             existing templates IM16: Verify following behaviours in "Filters"
- *             left hand side column: All categories are checked and user clicks
- *             on single category: We uncheck clicked category and
- *             "All categories". All categories but one are checked and user
- *             clicks on unchecked one: We check clicked category and
- *             "All categories". All categories are checked (so "All categories"
- *             is checked too) and user clicks "All categories": We uncheck all
- *             categories and "All categories". Some categories are checked (so
- *             "All categories" is unchecked) and user clicks "All categories":
- *             We check all categories and "All categories". IM17: Verify embed
- *             map code dialog works correctly from Special:Map page
+ *             - Other Test Cases 
+ *             IM11: Verify possibility of embedding wikia map in other wikia pages. v
+ *             IM12: Verify following elements in  map modal when a map is embedded in 
+ *             a wikia page: PIN description when clicking, zoom, add/edit features for 
+ *             pin types and pins, embed map button, filters box. Verify there is no 
+ *             branding footer. v
+ *             IM13: Test template search works correctly for unexisting and
+ *             existing templates v 
+ *             IM14: Verify following behaviours in "Filters" left hand side column: All
+ *             categories are checked and user clicks on single category: We uncheck 
+ *             clicked category and "All categories". v 
+ *             IM15: All categories but one are checked and user clicks on unchecked one:
+ *             We check clicked category and "All categories". v
+ *             IM16: All categories are checked (so "All categories" is checked too) and
+ *             user clicks "All categories": We uncheck all categories and "All categories" v
+ *             IM!7: Some categories are checked (so "All categories" is unchecked)
+ *             and user clicks "All categories": We check all categories and "All categories" v             
+ *             IM18: Verify embed map code dialog works correctly from Special:Map page v
+ *             IM19: Embed a map outside of wikia and verify there is a branding footer,
+ *             zoom in/out options and filters box collapsibility
+ *             
+ *             - Added to this list by Łukasz Nowak 
+ *             IM20: Verify zoom in and zoom out of map v             
+ *             IM21: Verify pin data is correctly updated after saving v
+ *             IM22: required elements from page are displayed: create new map link,
+ *             list of maps (max 10), pagination 
+ *             IM23 : Click Create a map button and check that Learn more link redirects
+ *             to maps.wikia.com
+ *             IM24: Verify the 3 possible errors possible when adding a pin to a map
+ *             IM25: Verify clicking existing pin will open pop-up
+ *             IM26: Verify name must be set when creating a new custom map
+ *             IM27: Verify delete pin functionality works appropriately
+ *             IM28: Make sure visibility of all close buttons through map creation flow     
+ *                              
  */
 
 public class InteractiveMapsTests extends NewTestTemplate {
