@@ -131,10 +131,10 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 			dataProviderClass = AdTypeDataProvider.class,
 			dataProvider = "inspectIframeSpecialAdProvider"
 	)
-	public void TestAdTypeInspectIframe_002_specialProvider(String wikiName, String article, String adUnit, String slotName) {
+	public void TestAdTypeInspectIframe_002_celtra(String wikiName, String article, String adUnit, String slotName) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 		ads.verifyGptIframe(adUnit, slotName, "mobile");
-		ads.verifyMobileTopLeaderboardSpecial();
+		ads.verifyCeltraMobileTopLeaderboard();
 	}
 }

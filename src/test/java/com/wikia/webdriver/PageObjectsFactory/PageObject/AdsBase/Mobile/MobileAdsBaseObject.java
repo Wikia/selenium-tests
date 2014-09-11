@@ -71,7 +71,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 			);
 		}
 	}
-	public void verifyMobileTopLeaderboardSpecial() {
+	public void verifyCeltraMobileTopLeaderboard() {
 		removeSmartBanner();
 		if (!checkIfSlotExpanded(presentLeaderboard)) {
 			throw new NoSuchElementException(
