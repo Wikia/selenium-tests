@@ -208,7 +208,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyComponentRemoved(Components.Slider);
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDUser_007", "ArticleFeaturesCRUDUser"})
+	@Test(groups={"ArticleFeaturesCRUDUser_007", "ArticleFeaturesCRUDUser", "Media"})
 	public void ArticleFeaturesCRUDUser_007_addModifyVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -231,7 +231,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyVideo();
 	}
 
-	@Test(groups={"ArticleFeaturesCRUDUser_008", "ArticleFeaturesCRUDUser", "Smoke5"})
+	@Test(groups={"ArticleFeaturesCRUDUser_008", "ArticleFeaturesCRUDUser", "Smoke5", "Media"})
 	public void ArticleFeaturesCRUDUser_008_addDeleteVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
