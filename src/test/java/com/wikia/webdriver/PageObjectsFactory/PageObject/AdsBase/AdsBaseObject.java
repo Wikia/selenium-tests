@@ -529,18 +529,18 @@ public class AdsBaseObject extends WikiBasePageObject {
 		if (isTop1k) {
 			Assertion.assertTrue(dataGptPageParams.contains(top1k), "parameter 1k not found");
 			PageObjectLogging.log(
-					"verifyTop1kParamState",
-					"Verification done, parameter found " + dataGptPageParams,
-					true,
-					driver
+				"verifyTop1kParamState",
+				"Verification done, parameter found " + dataGptPageParams,
+				true,
+				driver
 			);
 		} else {
 			Assertion.assertFalse(dataGptPageParams.contains(top1k), "parameter 1k found");
 			PageObjectLogging.log(
-					"verifyTop1kParamState",
-					"Verification done, parameter not found " + dataGptPageParams,
-					true,
-					driver
+				"verifyTop1kParamState",
+				"Verification done, parameter not found " + dataGptPageParams,
+				true,
+				driver
 			);
 		}
 	}
@@ -549,10 +549,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 		String pattern = "List of wikis with matched criteria ("+numberOfWikis+")";
 		waitForElementByElement(headerWhereIsMyExtensionPage);
 		PageObjectLogging.log(
-				"verifyNumberOfTop1kWikis",
-				"Verification of top 1k wikis",
-				true,
-				driver
+			"verifyNumberOfTop1kWikis",
+			"Verification of top 1k wikis",
+			true,
+			driver
 		);
 		Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
 	}
