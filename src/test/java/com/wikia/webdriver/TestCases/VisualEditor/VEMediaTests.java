@@ -10,6 +10,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog.ImageLicense;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -79,16 +80,18 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	public void VEMediaTests_003_uploadImageWithCustomFileName() {
 		String testFileUploadName = "TestFile";
 		String testFullFileName = testFileUploadName + ".png";
+		ImageLicense testImageLicense = ImageLicense.CCBYSA;
 
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-		ve = mediaDialog.uploadImageWithFileName(PageContent.file2Png, testFileUploadName);
+		ve = mediaDialog.uploadImage(PageContent.file2Png, testFileUploadName, testImageLicense);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
 		FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
+		filePage.verifyImageLicense(testImageLicense);
 		filePage.selectHistoryTab();
 		filePage.verifyArticleName(URLsContent.fileNameSpace + testFullFileName);
 		DeletePageObject deletePage = filePage.deleteVersion(1);

@@ -7,6 +7,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -34,11 +35,40 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 	private WebElement fileUploadInput;
 	@FindBy(css=".oo-ui-fieldsetLayout input")
 	private WebElement fileNameInput;
+	@FindBy(css=".ve-ui-wikiaMediaPageWidget-item-license select")
+	private WebElement imageLicenseDropdown;
 
 	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
 	private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
 	private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
 	private By mediaTitlesBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li>.oo-ui-labeledElement-label");
+
+	public enum ImageLicense {
+		NONESELECTED("None selected", ""),
+		FAIRUSE("Fairuse", ""),
+		SELF("Self", "This file was uploaded by the photographer or author."),
+		FROMWIKIMEDIA("From Wikimedia", "This file was originally uploaded on Wikipedia or another Wikimedia project."),
+		CCBYSA("CC-BY-SA", "This file is licensed under the Creative Commons Attribution-Share Alike License"),
+		OTHERFREE("Other free", "This file is licensed under a free license."),
+		PD("PD", "This file is in the public domain"),
+		PERMISSION("Permission", "This file is copyrighted. The copyright holder has given permission for its use.");
+
+		private String displayName;
+		private String displayText;
+
+		ImageLicense(String displayName, String displayText) {
+			this.displayName = displayName;
+			this.displayText = displayText;
+		}
+
+		public String toString() {
+			return displayName;
+		}
+
+		public String getText() {
+			return displayText;
+		}
+	}
 
 	public VisualEditorAddMediaDialog(WebDriver driver) {
 		super(driver);
@@ -95,11 +125,29 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditorPageObject uploadImageWithFileName(String fileName, String newFileName) {
+	public VisualEditorPageObject uploadImage(String fileName, String newFileName) {
 		switchToIFrame();
 		selectFileToUpload(fileName);
 		waitForElementVisibleByElement(topUploadButton);
 		typeNewFileName(newFileName);
+		clickAddMediaButton();
+		switchOutOfIFrame();
+		return new VisualEditorPageObject(driver);
+	}
+
+	public void selectImageLicense(ImageLicense imageLicense) {
+		waitForElementVisibleByElement(imageLicenseDropdown);
+		Select imageLicenseSelect = new Select(imageLicenseDropdown);
+		imageLicenseSelect.selectByValue(imageLicense.toString());
+		PageObjectLogging.log("selectImageLicense", "License: " + imageLicense.toString() + " selected", true);
+	}
+
+	public VisualEditorPageObject uploadImage(String fileName, String newFileName, ImageLicense imageLicense) {
+		switchToIFrame();
+		selectFileToUpload(fileName);
+		waitForElementVisibleByElement(topUploadButton);
+		typeNewFileName(newFileName);
+		selectImageLicense(imageLicense);
 		clickAddMediaButton();
 		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
