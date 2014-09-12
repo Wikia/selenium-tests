@@ -46,8 +46,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentMedrec;
 	@FindBy(css="div[id*='TOP_LEADERBOARD_gpt']")
 	protected WebElement presentLeaderboardGpt;
-	@FindBy(css="h3[id='headerWikis']")
-	protected WebElement headerWhereIsMyExtensionPage;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 	protected String presentLeaderboardName;
@@ -543,17 +541,5 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
-	}
-
-	public void verifyNumberOfTop1kWikis(Integer numberOfWikis){
-		String pattern = "List of wikis with matched criteria ("+numberOfWikis+")";
-		waitForElementByElement(headerWhereIsMyExtensionPage);
-		PageObjectLogging.log(
-			"verifyNumberOfTop1kWikis",
-			"Verification of top 1k wikis",
-			true,
-			driver
-		);
-		Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
 	}
 }

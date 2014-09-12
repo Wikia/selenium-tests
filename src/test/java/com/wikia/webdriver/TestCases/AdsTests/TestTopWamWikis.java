@@ -7,6 +7,7 @@ import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
 
 /**
@@ -44,7 +45,7 @@ public class TestTopWamWikis extends NewTestTemplate {
 
 	@Test(groups = {"TopWamWikisWhereIsMyExtension"})
 	public void TopWamWikisWhereIsMyExtension_GeoEdgeFree() {
-		AdsBaseObject wikiPage = new AdsBaseObject(driver);
+		WikiBasePageObject wikiPage = new WikiBasePageObject(driver);
 		wikiPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		driver.get(wikiURL + URLsContent.specialWhereIsExtension);
 		wikiPage.appendToUrl(extensionURL);
