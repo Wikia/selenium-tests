@@ -103,8 +103,8 @@ public class AdTypeDataProvider {
 	public static final Object[][] asyncHopWithSpecialProvider() {
 		return new Object[][]{
 				{
-						"glee", "Jesse_St._James",
-						"wka.ent/_glee//article",
+						"adtest", "SyntheticTests/Async/Hop/WithAd",
+						"wka.ent/_adtest//article",
 						"MOBILE_TOP_LEADERBOARD"
 				}
 		};

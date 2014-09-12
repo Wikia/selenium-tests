@@ -127,7 +127,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 	}
 
 	@Test(
-			groups = {"TestAdTypeInspectIframe_002", "TestAdType"},
+			groups = {"TestAdTypeInspectIframe_002", "TestAdTypeThirdparty"},
 			dataProviderClass = AdTypeDataProvider.class,
 			dataProvider = "inspectIframeSpecialAdProvider"
 	)
