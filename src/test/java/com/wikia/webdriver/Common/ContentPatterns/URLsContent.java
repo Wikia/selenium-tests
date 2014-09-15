@@ -166,4 +166,7 @@ public class URLsContent {
 
 	//External URL
 	public static final String externalURL = "http://www.wikia.com";
+	
+	//Embed map URL for Interactive Maps
+	public static final String embedMapEditPage = "wiki/EmbedMap?action=edit";
 }

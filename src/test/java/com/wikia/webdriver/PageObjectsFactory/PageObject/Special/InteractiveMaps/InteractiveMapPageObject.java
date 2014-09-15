@@ -4,7 +4,9 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 import java.util.List;
 
@@ -331,7 +333,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 			}
 			pinSize--;
 		}
-		Assertion.assertEquals(pinSize -1, "Pin was deleted correctly");
+		Assertion.assertEquals(pinSize, -1, "Pin was deleted correctly");
 	}
 
 	public void verifyPinTypesAreCheck() {
@@ -384,5 +386,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void verifyMapWasNotLoaded() {
 		Assertion.assertEquals(checkIfElementOnPage(map), false);
 	}
-
+	
+	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
+		getUrl(wikiURL+URLsContent.embedMapEditPage);
+		System.out.println(wikiURL+URLsContent.embedMapEditPage);
+		return new WikiArticleEditMode(driver);
+	}
 }

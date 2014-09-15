@@ -256,8 +256,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		selectedMap.verifyMapOpened();
 		String wikiEmbedCode = selectedMap.getEmbedMapWikiCode();
 		String mapID = selectedMap.getEmbedMapID();
-		WikiArticleEditMode EditMode = new WikiArticleEditMode(driver);
-		EditMode.editArticleByName(InteractiveMapsContent.embedMapArticleName);
+		WikiArticleEditMode EditMode = selectedMap.openEmbedMapPageEdit(wikiURL);
 		EditMode.clickSourceButton();
 		EditMode.clearSource();
 		EditMode.verifySourceEditorContentIsEmpty();

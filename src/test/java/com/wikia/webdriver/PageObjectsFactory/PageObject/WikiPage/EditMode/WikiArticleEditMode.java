@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode;
 
 import java.util.ArrayList;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
@@ -18,7 +20,9 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class WikiArticleEditMode extends WikiEditMode {
@@ -163,11 +167,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-
-	public WikiArticleEditMode editArticleByName(String name) {
-		String newUrl = URLsContent.addArticle.replace("%title%", name);
-		getUrl(Global.DOMAIN + newUrl);
-		return new WikiArticleEditMode(driver);
+	
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialVideos);
+		return new SpecialVideosPageObject(driver);
 	}
 
 	public void verifyThatThePhotoAppears(String caption) {
