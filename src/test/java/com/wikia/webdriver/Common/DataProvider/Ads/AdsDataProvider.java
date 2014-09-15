@@ -203,7 +203,7 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] topWamWikis() {
 		return new Object[][] {
-			{"gta", "Phone_36", true},
+			{"pl.assassinscreed", "Ercole_Massimo", true},
 			{"mobileregressiontesting", "PMG", false}
 		};
 	}
