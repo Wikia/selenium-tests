@@ -305,6 +305,11 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
 	}
 
+	public WikiArticleEditMode editArticleByName(String name, String wikiUrl) {
+		String newUrl = URLsContent.addArticle.replace("%title%", name);
+		getUrl(wikiUrl + newUrl);
+		return new WikiArticleEditMode(driver);
+	}
 
 	public void verifyLeftAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
