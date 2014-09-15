@@ -208,6 +208,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(filterBoxTitle).click().perform();
 		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickOnFilterBoxTitle", "Filter box title was clicked", true);
 	}
 
 	public String getEmbedMapWikiCode() {
@@ -220,8 +221,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public String getOpenPinName() {
 		waitForElementByElement(pinTitle);
-		String pinName = pinTitle.getText();
-		return pinName;
+		return pinTitle.getText();
 	}
 
 	public String getEmbedMapCode() {
@@ -238,6 +238,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		actions.moveToElement(mapImagesCollection.get(0));
 		actions.click().perform();
 		driver.switchTo().defaultContent();
+		PageObjectLogging.log("placePinInMap", "Pin was placed in map", true);
 		return new AddPinComponentObject(driver);
 	}
 
@@ -246,6 +247,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		scrollToElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		driver.switchTo().defaultContent();
+		PageObjectLogging.log("verifyMapOpened", "Map was opened", true);
 	}
 
 	public void verifyCreatedMapTitle(String mapTitle) {
@@ -278,6 +280,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 			waitForElementVisibleByElement(embedMapCodeLarge);
 			break;
 		}
+		PageObjectLogging.log("verifyEmbedMapCode", button + "embed map code was correctly displayed", true);
 	}
 
 	public void verifyPopUpVisible() {
@@ -350,10 +353,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 		scrollToElement(popUpContent);
 		waitForElementVisibleByElement(pinTitle);
 		waitForElementVisibleByElement(pinDescription);
-		String actualTitle = pinTitle.getText();
-		String actualDesc = pinDescription.getText();
-		Assertion.assertNotEquals(pinName, actualTitle);
-		Assertion.assertNotEquals(pinDesc, actualDesc);
+		Assertion.assertNotEquals(pinName, pinTitle.getText());
+		Assertion.assertNotEquals(pinDesc, pinDescription.getText());
 	}
 
 	public void verifyControButtonsAreVisible() {

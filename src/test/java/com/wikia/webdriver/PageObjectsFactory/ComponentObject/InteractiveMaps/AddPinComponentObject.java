@@ -96,15 +96,13 @@ public class AddPinComponentObject extends BasePageObject {
 
 	public String getAssociatedArticleImageSrc() {
 		waitForElementByElement(associatedArticleImage);
-		String imageSrc = articleImageUrl.getAttribute("src");
-		return imageSrc;
+		return articleImageUrl.getAttribute("src");
 	}
 
 	public void selectPinType() {
 		waitForElementByElement(pinCategorySelector);
 		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
-		List<WebElement> pinCategoryList = pinCategorySelectorDropDown.getOptions();
-		pinCategoryList.get(1).click();
+		pinCategorySelectorDropDown.selectByIndex(1);
 		PageObjectLogging.log("selectPinType", "Pin type was choosed", true, driver);
 	}
 
@@ -117,7 +115,7 @@ public class AddPinComponentObject extends BasePageObject {
 	public void typePinDescription(String pinDescription) {
 		waitForElementByElement(descriptionField);
 		descriptionField.sendKeys(pinDescription);
-		PageObjectLogging.log("typePinDescription", "Pin description was typed in", true);
+		PageObjectLogging.log("typePinDescription", pinDescription + "Pin description was typed in", true);
 	}
 
 	public void typeAssociatedArticle(String associatedArticleName) {
@@ -143,7 +141,7 @@ public class AddPinComponentObject extends BasePageObject {
 
 	public void verifyDescriptionFieldIsDisplayed() {
 		waitForElementByElement(descriptionField);
-		PageObjectLogging.log("verifyPinCategorySelector", "Pin category selector is visible", true, driver);
+		PageObjectLogging.log("verifyDescriptionFieldIsDisplayed", "Description field is visible", true, driver);
 	}
 
 	public void verifyAssociatedArticleImagePlaceholderIsDisplayed() {
@@ -154,23 +152,12 @@ public class AddPinComponentObject extends BasePageObject {
 	public void verifyErrorIsPresented() {
 		waitForElementByElement(errorField);
 		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
+		PageObjectLogging.log("verifyErrorIsPresented", "Error message is visible", true, driver);
 	}
 
 	public void verifyAssociatedImageIsVisible(String placeholderImageSrc) {
 		waitForElementByElement(articleImageUrl);
 		Assertion.assertNotEquals(placeholderImageSrc, getAssociatedArticleImageSrc());
-	}
-
-	public void verifyImage() {
-		waitForElementByElement(articleImageUrl);
-		Assertion.assertStringContains(articleImageUrl.getAttribute("src"), "Robert_Pattison");
-	}
-
-	public void verifyChangedCategory(String newCategory) {
-		waitForElementByElement(pinCategorySelector);
-		Select pinCategorySelectorDropDown = new Select(pinCategorySelector);
-		List<WebElement> pinCategorySelectorList = pinCategorySelectorDropDown.getAllSelectedOptions();
-		Assertion.assertEquals(newCategory, pinCategorySelectorList.get(0));
 	}
 
 }

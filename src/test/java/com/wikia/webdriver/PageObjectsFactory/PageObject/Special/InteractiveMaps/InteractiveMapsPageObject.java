@@ -57,13 +57,11 @@ public class InteractiveMapsPageObject extends BasePageObject {
 	}
 
 	public String getMapLink(int mapIndex) {
-		String mapLink = mapList.get(mapIndex).getAttribute("href");
-		return mapLink;
+		return mapList.get(mapIndex).getAttribute("href");
 	}
 
 	public String getMapTitle(int mapIndex) {
-		String mapTitle = mapTitleList.get(mapIndex).getText();
-		return mapTitle;
+		return mapTitleList.get(mapIndex).getText();
 	}
 
 	public void verifyCreateMapButtonExist() {

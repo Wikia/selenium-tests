@@ -109,5 +109,6 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 
 	public void verifyTemplateListElementVisible(int element) {
 		waitForElementByElement(templateList.get(element));
+		PageObjectLogging.log("verifyTemplateListElementVisible", "Template element is visible ", true);
 	}
 }

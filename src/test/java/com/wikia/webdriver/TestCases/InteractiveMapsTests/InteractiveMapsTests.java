@@ -505,5 +505,4 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		customMapModal.clickCloseButton();
 		specialMap.verifyCreateMapModalNotExist();
 	}
-	
 }

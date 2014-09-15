@@ -74,6 +74,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 		WebElement parentSelected = parentCatOption.get(catValue);
 		waitForElementVisibleByElement(parentSelected);
 		parentSelected.click();
+		PageObjectLogging.log("selectParentCategory", "Parent category selected", true);
 	}
 
 	public void selectFileToUpload(String file, String typeOfFile) {
@@ -115,7 +116,6 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
 	public void verifyErrorsExist() {
 		waitForElementByElement(pinTypesError);
-		Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);
-		
+		Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);		
 	}
 }

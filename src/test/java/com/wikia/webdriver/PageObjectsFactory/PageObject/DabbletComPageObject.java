@@ -48,9 +48,7 @@ public class DabbletComPageObject extends BasePageObject{
 		driver.switchTo().frame(resultBox);
 		driver.switchTo().frame(0);
 		EmbedMapComponentObject embedMap = new EmbedMapComponentObject(driver);
-		embedMap.verifyBranFooterVisible();
-		
+		embedMap.verifyBranFooterVisible();		
 		driver.switchTo().defaultContent();
 	}
-	
 }
