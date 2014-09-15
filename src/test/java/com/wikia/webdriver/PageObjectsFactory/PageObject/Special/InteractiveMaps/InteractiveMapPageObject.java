@@ -295,32 +295,28 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyAllPinTypesIsCheck() {
-		try {
-			waitForElementVisibleByElement(mapFrame);
-			driver.switchTo().frame(mapFrame);
-			waitForElementByElement(allPinTypes);
-			waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
-			if (allPinTypes.getAttribute("class").contains("enabled")) {
-				PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were checked", true);
-			}
-			driver.switchTo().defaultContent();
-		}catch (Exception e) {
-			PageObjectLogging.log("verifyAllPointTypesIsCheck", e.toString(), false);
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		waitForElementByElement(allPinTypes);
+		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		if (allPinTypes.getAttribute("class").contains("enabled")) {
+			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were checked", true);
+		}else {
+			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were not checked", false);
 		}
+		driver.switchTo().defaultContent();
 	}
 
 	public void verifyAllPinTypesIsUncheck() {
-		try {
-			waitForElementVisibleByElement(mapFrame);
-			driver.switchTo().frame(mapFrame);
-			waitForElementVisibleByElement(allPinTypes);
-			if (!allPinTypes.getAttribute("class").contains("enabled")) {
-				PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were unchecked", true);
-			}
-			driver.switchTo().defaultContent();
-		}catch (Exception e) {
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		waitForElementVisibleByElement(allPinTypes);
+		if (!allPinTypes.getAttribute("class").contains("enabled")) {
+			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were unchecked", true);
+		}else {
 			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were checked", false);
 		}
+		driver.switchTo().defaultContent();
 	}
 
 	public void verifyPinTypesAreUncheck() {
