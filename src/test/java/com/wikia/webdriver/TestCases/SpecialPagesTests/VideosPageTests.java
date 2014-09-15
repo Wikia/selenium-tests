@@ -36,7 +36,7 @@ public class VideosPageTests extends NewTestTemplate {
 	public void VideosPageTest_002() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
+		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
 		specialVideos.verifyDeleteViaGlobalNotifications();
 	}
 
@@ -53,7 +53,7 @@ public class VideosPageTests extends NewTestTemplate {
 	public void VideosPageTest_003() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		SpecialVideosPageObject specialVideos = base.openSpecialVideoPageMostRecent(wikiURL);
+		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
 		specialVideos.verifyDeleteViaVideoNotPresent();
 	}
 

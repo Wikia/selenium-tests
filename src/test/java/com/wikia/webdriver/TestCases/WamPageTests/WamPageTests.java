@@ -6,6 +6,11 @@ import org.testng.annotations.Test;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Wam.WamPageObject;
 
+/**
+ * @author Qaga
+ * @ownership Consumer
+ */
+
 public class WamPageTests extends NewTestTemplateBeforeClass {
 
 	private WamPageObject wam;
@@ -59,5 +64,15 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 		wam.checkTabAndHeaderName();
 		wam.selectTab(4);
 		wam.checkTabAndHeaderName();
+	}
+
+	@Test(groups = {"wamPage_005", "WamPageTests"})
+	public void wamPage_005_testDatePicker() {
+		wam.verifyTodayDateInDatePicker();
+		String lastMonthDate = wam.changeDateToLastMonth();
+		wam.verifyDateInDatePicker(lastMonthDate);
+		String date = "July 12, 2014";
+		wam.typeDateInDatePicker(date);
+		wam.verifyDateInDatePicker(date);
 	}
 }

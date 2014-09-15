@@ -92,10 +92,10 @@ public class FilePageTests extends NewTestTemplate {
 		vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL4);
 
 		// Verify the video is actually there
-		FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, VideoContent.youtubeVideoURL4FileName);
-		filePage.verifyEmbeddedVideoIsPresent();
+		specialVideos.verifyVideoAdded(VideoContent.youtubeVideoURL4FileTitle);
 
 		// Now delete the video
+		FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, VideoContent.youtubeVideoURL4FileName);
 		DeletePageObject deletePage = filePage.deletePage();
 		deletePage.submitDeletion();
 
@@ -121,10 +121,10 @@ public class FilePageTests extends NewTestTemplate {
 		vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL4);
 
 		// Verify the video is actually there
-		FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, VideoContent.youtubeVideoURL4FileName);
-		filePage.verifyEmbeddedVideoIsPresent();
+		specialVideos.verifyVideoAdded(VideoContent.youtubeVideoURL4FileTitle);
 
 		// Go to the history tab and add a second video to test deleting a version
+		FilePagePageObject filePage = specialVideos.openFilePage(wikiURL, VideoContent.youtubeVideoURL4FileName);
 		filePage.selectHistoryTab();
 		filePage.replaceVideo(VideoContent.youtubeVideoURL5);
 

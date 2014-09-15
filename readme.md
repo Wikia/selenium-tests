@@ -35,7 +35,9 @@ It is also possible to run mobile tests on real devices (Currently only Android 
 
 If both platform-version and device-id are provided device with provided uuid would be chosen.
 
-Example command:
+### Example commands
+
+All commands must be run from the `selenium-tests` directory cloned during setup process above
 
 ##### Running tests on preview for mediawiki119 wikia
 
@@ -117,6 +119,7 @@ The following are valid for use in the `-Dgroups` parameter:
 * ImageServing
 * ImageStorageTests
 * Login
+* Media
 * MessageWall
 * MessageWallFeatures
 * MessageWallNotificationsFollowersMessageTests
