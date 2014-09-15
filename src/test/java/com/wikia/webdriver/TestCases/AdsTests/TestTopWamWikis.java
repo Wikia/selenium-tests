@@ -18,14 +18,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
  * 1. TestTopWamWikis_GeoEdgeFree - go to two wikis and check that first of them have
  * correct parameter and second don`t have parameter.
  * 2. TestTopWamWikisWikifactory_GeoEdgeFree - go to Special:WhereIsMyExtension
- * and check how many wikis have set wgAdDriverWikiIsTop1000 variable
+ * and check how many wikis have set wgAdDriverWikiIsTop1000 variable.
+ * Need in settings wikiName=community
  *
  */
 
 public class TestTopWamWikis extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
-	Integer numberOfTop1kWikis = 999;
+	Integer numberOfTop1kWikis = 1000;
 	String extensionURL = "var=1429&searchType=bool&val=2&likeValue=true";
 
 	public TestTopWamWikis() {
@@ -47,7 +48,7 @@ public class TestTopWamWikis extends NewTestTemplate {
 	public void TopWamWikisWhereIsMyExtension_GeoEdgeFree() {
 		WikiBasePageObject wikiPage = new WikiBasePageObject(driver);
 		wikiPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		driver.get(wikiURL + URLsContent.specialWhereIsExtension);
+		wikiPage.getUrl(wikiURL + URLsContent.specialWhereIsExtension);
 		wikiPage.appendToUrl(extensionURL);
 		wikiPage.verifyNumberOfTop1kWikis(numberOfTop1kWikis);
 	}
