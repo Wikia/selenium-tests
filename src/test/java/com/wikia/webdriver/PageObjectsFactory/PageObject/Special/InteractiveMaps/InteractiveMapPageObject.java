@@ -324,14 +324,14 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyPinNotExist(String pinTitle) {
-		Integer pinSize = pinCollection.size() - 1;
+		int pinSize = pinCollection.size() - 1;
 		while (pinSize >= 0) {
 			if (pinCollection.get(pinSize).getText().contains(pinTitle)) {
 				break;
 			}
 			pinSize--;
 		}
-		Assertion.assertEquals(pinSize.intValue(), -1, "Pin was deleted correctly");
+		Assertion.assertEquals(pinSize -1, "Pin was deleted correctly");
 	}
 
 	public void verifyPinTypesAreCheck() {
