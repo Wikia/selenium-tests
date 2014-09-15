@@ -144,6 +144,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		ve = mediaDialog.addExistingMedia(numOfVideo);
 		ve.verifyVideos(numOfVideo);
 		Dimension source = ve.getVideoDimension();
+		ve.selectMedia();
 		VisualEditorMediaSettingsDialog mediaSettingsDialog = ve.openMediaSettings();
 		mediaSettingsDialog.selectSettings(Setting.ADVANCED);
 		mediaSettingsDialog.setCustomSize(resizeNumber);
