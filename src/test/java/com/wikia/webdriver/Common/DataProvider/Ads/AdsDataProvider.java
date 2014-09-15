@@ -201,6 +201,14 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] topWamWikis() {
+		return new Object[][] {
+			{"pl.assassinscreed", "Ercole_Massimo", true},
+			{"mobileregressiontesting", "PMG", false}
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] amazonSites() {
 		return new Object[][] {
 			{"memory-alpha", "Portal:Main"},

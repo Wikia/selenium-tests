@@ -173,6 +173,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement focusMode;
 	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
 	protected WebElement veToolMenu;
+	@FindBy(css="h3[id='headerWikis']")
+	protected WebElement headerWhereIsMyExtensionPage;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -1132,5 +1134,17 @@ public class WikiBasePageObject extends BasePageObject {
 	public WikiHistoryPageObject openArticleHistoryPage(String wikiURL) {
 		getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.historyAction));
 		return new WikiHistoryPageObject(driver);
+	}
+
+	public void verifyNumberOfTop1kWikis(Integer numberOfWikis){
+		String pattern = "List of wikis with matched criteria ("+numberOfWikis+")";
+		waitForElementByElement(headerWhereIsMyExtensionPage);
+		PageObjectLogging.log(
+			"verifyNumberOfTop1kWikis",
+			"Verification of top 1k wikis",
+			true,
+			driver
+		);
+		Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
 	}
 }
