@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Alignment;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Setting;
@@ -17,15 +18,18 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialog
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
  * @author Robert 'Rochan' Chan
+ * @ownership Contribution
  *
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
- * VE-1336 Uploading an image
+ * VE-1336 1519 Uploading an image with a new file name
  * VE-1334 Adding caption to a media
  * VE-1333 Resizing a media with the highlight handle
  * VE-1333 Resizing a media with the advance setting from the media dialog
@@ -78,15 +82,24 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	@Test(
 		groups = {"VEMediaTests", "VEMediaTests_003", "VEUploadImage"}
 	)
-	public void VEMediaTests_003_AddImageFromUpload() {
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+	public void VEMediaTests_003_uploadImageWithCustomFileName() {
+		String testFileUploadName = "TestFile";
+		String testFullFileName = testFileUploadName + ".png";
+
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-		ve = mediaDialog.uploadImage(PageContent.file);
+		ve = mediaDialog.uploadImageWithFileName(PageContent.file2Png, testFileUploadName);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		article.logOut(wikiURL);
+		FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
+		filePage.selectHistoryTab();
+		filePage.verifyArticleName(URLsContent.fileNameSpace + testFullFileName);
+		DeletePageObject deletePage = filePage.deleteVersion(1);
+		WikiBasePageObject base = deletePage.submitDeletion();
+		base.logOut(wikiURL);
 	}
 
 	@Test(

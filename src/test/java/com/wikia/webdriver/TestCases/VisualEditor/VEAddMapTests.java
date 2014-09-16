@@ -16,6 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Robert 'Rochan' Chan
+ * @ownership Contribution
  *
  * VE-1337 - Adding existing map onto article
  * VE-1337 - Checking empty state dialog on wiki with no maps
