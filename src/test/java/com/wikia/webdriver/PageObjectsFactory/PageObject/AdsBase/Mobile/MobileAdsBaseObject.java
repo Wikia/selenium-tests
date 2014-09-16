@@ -36,7 +36,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	@Override
 	protected void setWindowSize() {
 		try {
-			driver.manage().window().setSize(new Dimension(768, 1280));
+			driver.manage().window().setSize(new Dimension(360, 640));
 		} catch (WebDriverException ex) {
 			PageObjectLogging.log(
 				"ResizeWindowForMobile",
@@ -113,6 +113,15 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 			}
 		}
 		throw new NoSuchElementException("Slot expanded, should be collapsed");
+	}
+
+	public void verifyNoSlotPresent(String slotName) {
+		if (!checkIfElementOnPage("#" + slotName)) {
+			PageObjectLogging.log("AdInSlot", "No slot found as expected", true);
+			return;
+		} else {
+			throw new NoSuchElementException("Slot is added to the page");
+		}
 	}
 
 	public void verifySlotExpanded(String slotName) {

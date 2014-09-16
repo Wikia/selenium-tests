@@ -40,6 +40,7 @@
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditAccountTests"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestAdTypeMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestLeaderboardPresenceOnMobile"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestSlotsMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAdsOnRedirects"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
@@ -52,7 +53,6 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestIVW2AnalyticsProvider"/>
-			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnAdFreeWikis"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnSonyReferrer"/>
