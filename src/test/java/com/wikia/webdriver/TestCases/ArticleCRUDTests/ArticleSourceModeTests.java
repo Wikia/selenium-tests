@@ -223,7 +223,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.submitArticle();
 	}
 
-	@Test(groups={"RTE_extended","RTE_extended_016"})
+	@Test(groups={"RTE_extended","RTE_extended_016", "Media"})
 	public void RTE_016_Video(){
 		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);

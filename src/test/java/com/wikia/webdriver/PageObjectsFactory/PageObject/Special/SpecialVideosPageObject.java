@@ -97,7 +97,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public void verifyVideoAdded(String videoTitle) {
 		waitForTextToBePresentInElementByElement(newestVideoTitle, videoTitle);
-		PageObjectLogging.log("verifyVideoAdded", "verify that video with following descriotion was added: "+videoTitle, true);
+		PageObjectLogging.log("verifyVideoAdded", "verify that video with following description was added: "+videoTitle, true);
 	}
 
 	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
@@ -123,6 +123,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public void deleteVideo(){
+		openSpecialVideoPageMostRecent(getWikiUrl());
 		executeScript("$('.special-videos-grid .remove').first().show()");
 		waitForElementByElement(newestVideo);
 		newestVideoDeleteIcon.click();
@@ -132,7 +133,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public void verifyDeleteViaGlobalNotifications() {
 		addVideoViaAjax(VideoContent.youtubeVideoURL2);
-		refreshUntilElementOnPage(VideoContent.youtubeVideo2Selector, refreshLimit);
 		deleteVideo();
 		String deletedVideo = "\"File:" + VideoContent.youtubeVideoURL2name + "\" has been deleted. (undelete)";
 		Assertion.assertEquals(deletedVideo, getFlashMessageText());
@@ -141,7 +141,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public void verifyDeleteViaVideoNotPresent() {
 		addVideoViaAjax(VideoContent.youtubeVideoURL2);
-		refreshUntilElementOnPage(VideoContent.youtubeVideo2Selector, refreshLimit);
 		deleteVideo();
 		verifyNotificationMessage();
 		Assertion.assertNotEquals(VideoContent.youtubeVideoURL2name, getNewestVideoTitle());

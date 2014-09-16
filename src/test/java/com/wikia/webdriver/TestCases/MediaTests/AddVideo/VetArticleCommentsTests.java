@@ -23,7 +23,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"VetArticleComments_001", "VetArticleComments"})
+	@Test(groups = {"VetArticleComments_001", "VetArticleComments", "Media"})
 	public void VetArticleComments_001_Provider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -37,7 +37,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 		article.verifyCommentVideo(VideoContent.youtubeVideoURL2name);
 	}
 
-	@Test(groups = {"VetArticleComments_002", "VetArticleComments"})
+	@Test(groups = {"VetArticleComments_002", "VetArticleComments", "Media"})
 	public void VetArticleComments_002_Library() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

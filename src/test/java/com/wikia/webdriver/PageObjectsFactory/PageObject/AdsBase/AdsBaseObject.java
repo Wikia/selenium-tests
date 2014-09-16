@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +26,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComp
 
 /**
  * @author Bogna 'bognix' Knychala
+ * @ownership AdEngineering
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
@@ -43,6 +45,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentLeaderboard;
 	@FindBy(css="div[id*='TOP_RIGHT_BOXAD']")
 	protected WebElement presentMedrec;
+	@FindBy(css="div[id*='TOP_LEADERBOARD_gpt']")
+	protected WebElement presentLeaderboardGpt;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 	protected String presentLeaderboardName;
@@ -496,23 +500,60 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 	}
 
+	public void waitForIframeLoaded(WebElement iframe) {
+		driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeAsyncScript(
+				"var callback = arguments[arguments.length - 1]; " +
+						"var iframe = arguments[0];" +
+						"if (iframe.contentWindow.document.readyState === 'complete'){ return callback(); } else {" +
+						"iframe.contentWindow.addEventListener('load', function () {return callback(); }) " +
+						"}",
+				iframe
+		);
+	}
+
 	/**
-	 * Test wether the correct GPT ad unit is called
+	 * Test whether the correct GPT ad unit is called
 	 *
 	 * @param adUnit the ad unit passed to GPT, like wka.wikia/_wikiaglobal//home
 	 */
-	public void verifyGptIframe(String adUnit) {
-		String slotName = presentLeaderboard.getAttribute("id");
-		String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + slotName + "_gpt_0";
-		String cssSelector = "iframe[id^='" + iframeId + "']";
+	public void verifyGptIframe(String adUnit, String slotName, String src) {
+		String iframeId = "google_ads_iframe_/5441/" + adUnit + "/" + slotName + "_" + src + "_0";
+		By cssSelector = By.cssSelector("iframe[id^='" + iframeId + "']") ;
 
-		if (checkIfElementInElement(cssSelector, presentLeaderboard)) {
-			String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
-			PageObjectLogging.log("verifyGptIframe", msg, true, driver);
+		waitForElementPresenceByBy(cssSelector);
+
+		String msg = "GPT iframe #" + iframeId + " found in slot " + slotName;
+		PageObjectLogging.log("verifyGptIframe", msg, true, driver);
+
+		waitForIframeLoaded(driver.findElement(cssSelector));
+
+		msg = "Received \"load\" event from GPT iframe #" + iframeId + "  in slot " + slotName;
+		PageObjectLogging.log("verifyGptIframe", msg, true, driver);
+	}
+
+	public void verifyTop1kParamState(Boolean isTop1k){
+		waitForElementByElement(presentLeaderboard);
+		String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
+		String top1k = "\"top\":\"1k\"";
+
+		if (isTop1k) {
+			Assertion.assertTrue(dataGptPageParams.contains(top1k), "parameter 1k not found");
+			PageObjectLogging.log(
+				"verifyTop1kParamState",
+				"Verification done, parameter found " + dataGptPageParams,
+				true,
+				driver
+			);
 		} else {
-			String msg = "GPT iframe #" + iframeId + " not found for slot " + slotName;
-			PageObjectLogging.log("verifyGptIframe", msg, false, driver);
-			throw new NoSuchElementException(msg);
+			Assertion.assertFalse(dataGptPageParams.contains(top1k), "parameter 1k found");
+			PageObjectLogging.log(
+				"verifyTop1kParamState",
+				"Verification done, parameter not found " + dataGptPageParams,
+				true,
+				driver
+			);
 		}
 	}
 }
