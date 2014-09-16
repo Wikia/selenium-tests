@@ -43,8 +43,8 @@ public class VideoUrlProvider {
 				"http://www.hulu.com/watch/489169",
 				"The Unnatural (Bob's Burgers)"
 			}, {
-				"http://www.metacafe.com/watch/10534054/fast_furious_6_favourite_stunts/",
-				"Fast Furious 6 Favourite Stunts"
+				"http://www.metacafe.com/watch/11364628/everything_wrong_with_crimson_tide/",
+				"Everything Wrong with Crimson Tide"
 			}, {
 				"http://www.myvideo.de/watch/9112478/Snowblind",
 				"Snowblind"
