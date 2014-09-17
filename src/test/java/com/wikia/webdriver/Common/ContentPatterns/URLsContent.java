@@ -63,6 +63,7 @@ public class URLsContent {
 	public static final String specialMostLinkedFiles = "wiki/Special:MostLinkedFiles";
 	public static final String specialLicensedVideoSwap = "wiki/Special:LicensedVideoSwap";
 	public static final String specialEditHub = "wiki/Special:EditHub";
+	public static final String specialMaps = "wiki/Special:Maps";
 	public static final String specialVideoPageAdmin = "wiki/Special:VideoPageAdmin/edit";
 
 	//Urls for mobile
@@ -108,7 +109,7 @@ public class URLsContent {
 
 	// replace %title% with new article name
 	public static final String addArticle = "index.php?title=%title%&action=edit";
-
+	public static final String viewArticle = "index.php?title=%title%";
 	public static final String apiUrl = Global.DOMAIN + "api.php";
 
 	// File Pages
@@ -166,4 +167,7 @@ public class URLsContent {
 
 	//External URL
 	public static final String externalURL = "http://www.wikia.com";
+	
+	//Embed map URL for Interactive Maps
+	public static final String embedMapEditPage = "wiki/EmbedMap?action=edit";
 }
