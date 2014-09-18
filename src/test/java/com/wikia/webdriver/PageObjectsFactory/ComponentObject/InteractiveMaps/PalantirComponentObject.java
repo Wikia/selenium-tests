@@ -134,6 +134,12 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		Assertion.assertEquals("422", responseCode);
 		Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_ZOOM, msg);
 	}
+	
+	public void verifyDecimalZoomLevel(String success, String responseCode, String msg) {
+		Assertion.assertEquals("false", success);
+		Assertion.assertEquals("422", responseCode);
+		Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_PARAMETER, msg);
+	}
 
 	public void verifyPlayerPosDeleted(String success, String responseCode, String msg) {
 		Assertion.assertEquals("true", success);

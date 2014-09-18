@@ -39,6 +39,7 @@ public class PalantirContent {
 	public static final String PONTOMSG_REMOVEPLAYER = "Player location removed from map successfully";
 	public static final String PONTOMSG_MAPPOS_SUCCESS = "Map position updated successfully";
 	public static final String PONTOMSG_WRONG_ZOOM = "Invalid zoom level value";
+	public static final String PONTOMSG_WRONG_PARAMETER = "Wrong parameters types";
 	
 	public String success;
 	public String responseCode;
