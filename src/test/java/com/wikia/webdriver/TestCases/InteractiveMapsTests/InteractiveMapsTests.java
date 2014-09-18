@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
+import com.wikia.webdriver.Common.ContentPatterns.PalantirContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
@@ -11,7 +12,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.Cr
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateRealMapComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.PalantirObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.PalantirComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.TemplateComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
@@ -508,59 +509,69 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	}
 	
 	//palantir tests
-	@Test(groups = {"InteractiveMaps_029", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_029", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_029_PalantirSetPlayerCorrectPosition() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
 		selectedMap.openMap(wikiURL, 3);
 		selectedMap.verifyMapOpened();
-		PalantirObject poi = new PalantirObject(driver);
-		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);	
+		PalantirComponentObject poi = new PalantirComponentObject(driver);
+		PalantirContent handle = new PalantirContent();
+		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);	
+		poi.verifyCorrectPlayerPos(handle.success, handle.responseCode, handle.message);
 		poi.verifyPoiAppearOnMap();
 	}
 	
-	@Test(groups = {"InteractiveMaps_030", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_030", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_030_PalantirSetPlayerPositionOutOfMap() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
 		selectedMap.openMap(wikiURL, 3);
 		selectedMap.verifyMapOpened();
-		PalantirObject poi = new PalantirObject(driver);
-		poi.setAndVerifyPlayerPosition(9300, 15000, 3, true, false);	
+		PalantirComponentObject poi = new PalantirComponentObject(driver);
+		PalantirContent handle = new PalantirContent();
+		handle = poi.setAndVerifyPlayerPosition(9300, 15000, 3, true);	
+		poi.verifyWrongPlayerPos(handle.success, handle.responseCode, handle.message);
 		poi.verifyPoiNotAppearOnMap();
 	}
 	
-	@Test(groups = {"InteractiveMaps_031", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_031", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_031_PalantirSetAndRemovePlayerPosition() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
 		selectedMap.openMap(wikiURL, 3);
 		selectedMap.verifyMapOpened();
-		PalantirObject poi = new PalantirObject(driver);
-		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);	
+		PalantirComponentObject poi = new PalantirComponentObject(driver);
+		PalantirContent handle = new PalantirContent();
+		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);
+		poi.verifyCorrectPlayerPos(handle.success, handle.responseCode, handle.message);
 		poi.verifyPoiAppearOnMap();
-		poi.deletePlayerPosition();
+		handle = poi.deletePlayerPosition();
+		poi.verifyPlayerPosDeleted(handle.success, handle.responseCode, handle.message);
+		poi.verifyPoiNotAppearOnMap();		
+	}
+	
+	@Test(groups = {"InteractiveMaps_032", "PalantirTests", "InteractiveMaps"})
+	public void InteractiveMaps_032_PalantirSetHugeZoomVerifyError() {
+		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
+		selectedMap.openMap(wikiURL, 3);
+		selectedMap.verifyMapOpened();
+		PalantirComponentObject poi = new PalantirComponentObject(driver);
+		PalantirContent handle = new PalantirContent();
+		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3000, true);
+		poi.verifyWrongZoomLevel(handle.success, handle.responseCode, handle.message);
 		poi.verifyPoiNotAppearOnMap();
 	}
 	
-	@Test(groups = {"InteractiveMaps_032", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_032_PalantirSetHugeZoomVerifyError() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
-		selectedMap.openMap(wikiURL, 3);
-		selectedMap.verifyMapOpened();
-		PalantirObject poi = new PalantirObject(driver);
-		poi.setAndVerifyPlayerPosition(-40, -10, 3000, true, false);
-	}
-	
-	@Test(groups = {"InteractiveMaps_035", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_035", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_035_PalantirUpdateMapPosition() {
 		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
 		selectedMap.openMap(wikiURL, 3);
 		selectedMap.verifyMapOpened();
-		PalantirObject poi = new PalantirObject(driver);
-		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);
-		poi.updateMapPosition(-90, -10, 3);
+		PalantirComponentObject poi = new PalantirComponentObject(driver);
+		PalantirContent handle = new PalantirContent();
+		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);
+		poi.verifyCorrectPlayerPos(handle.success, handle.responseCode, handle.message);
+		handle = poi.updateMapPosition(-90, -10, 3);
+		poi.verifyMapPositionUpdated(handle.success, handle.responseCode, handle.message);
+		
 	}
 	
 	
