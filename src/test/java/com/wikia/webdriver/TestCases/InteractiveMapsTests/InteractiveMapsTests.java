@@ -531,7 +531,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	}
 	
 	@Test(groups = {"InteractiveMaps_031", "InteractiveMapTests", "InteractiveMaps"})
-	public void InteractiveMaps_031_PalantirRemovePlayerPosition() {
+	public void InteractiveMaps_031_PalantirSetAndRemovePlayerPosition() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
 		selectedMap.openMap(wikiURL, 3);
@@ -542,4 +542,26 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		poi.deletePlayerPosition();
 		poi.verifyPoiNotAppearOnMap();
 	}
+	
+	@Test(groups = {"InteractiveMaps_032", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_032_PalantirSetHugeZoomVerifyError() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
+		selectedMap.openMap(wikiURL, 3);
+		selectedMap.verifyMapOpened();
+		PalantirObject poi = new PalantirObject(driver);
+		poi.setAndVerifyPlayerPosition(-40, -10, 3000, true, false);
+	}
+	
+	@Test(groups = {"InteractiveMaps_035", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_035_PalantirUpdateMapPosition() {
+		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
+		selectedMap.openMap(wikiURL, 3);
+		selectedMap.verifyMapOpened();
+		PalantirObject poi = new PalantirObject(driver);
+		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);
+		poi.updateMapPosition(-90, -10, 3);
+	}
+	
+	
 }
