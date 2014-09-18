@@ -43,9 +43,19 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 			handle.responseCode = json.getString(PalantirContent.PONTO_MSG_RESPONSECODE); 
 			handle.message = json.getString(PalantirContent.PONTO_MSG_MESSAGE);
 			
-			PageObjectLogging.log("deletePlayerPosition", handle.message, true, driver);
+			PageObjectLogging.log(
+					"deletePlayerPosition", 
+					handle.message, 
+					true, 
+					driver
+			);
 		}catch (JSONException e) {
-			PageObjectLogging.log("deletePlayerPosition", "Player position was not deleted", false, driver);				
+			PageObjectLogging.log(
+					"deletePlayerPosition", 
+					"Player position was not deleted", 
+					false, 
+					driver
+			);				
 		}
 		return handle;
 	}
@@ -76,12 +86,16 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 						driver
 				);
 			}catch (JSONException e) {
-				PageObjectLogging.log("setAndVerifyPlayerPosition", "Position was not set", false, driver);
+				PageObjectLogging.log(
+						"setAndVerifyPlayerPosition", 
+						"Position was not set", 
+						false, 
+						driver
+				);
 			}
 		return handle;
 	}
 	
-
 	public PalantirContent updateMapPosition(double lat, double lng, int zoom) {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().activeElement();
@@ -106,7 +120,10 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 					true
 			);
 		}catch (JSONException e) {
-			PageObjectLogging.log("updateMapPosition", "Map position was not changed", true);
+			PageObjectLogging.log(
+					"updateMapPosition", 
+					"Map position was not changed", 
+					true);
 		}
 		return handle;
 	}
