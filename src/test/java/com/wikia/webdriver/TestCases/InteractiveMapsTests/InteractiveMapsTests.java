@@ -504,4 +504,13 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		customMapModal.clickCloseButton();
 		specialMap.verifyCreateMapModalNotExist();
 	}
+	
+	@Test(groups = { "InteractiveMaps_029", "InteractiveMapTests", "InteractiveMaps" })
+	public void InteractiveMaps_029_VerifyMapIsDisplayedForAnons() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logOut(wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();		
+	}
 }
