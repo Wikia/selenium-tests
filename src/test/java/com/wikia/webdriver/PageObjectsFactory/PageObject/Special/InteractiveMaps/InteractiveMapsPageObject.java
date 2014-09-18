@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
@@ -62,6 +63,11 @@ public class InteractiveMapsPageObject extends BasePageObject {
 
 	public String getMapTitle(int mapIndex) {
 		return mapTitleList.get(mapIndex).getText();
+	}
+	
+	public InteractiveMapPageObject openMap(String wikiURL, int id){
+		getUrl(wikiURL + URLsContent.specialMaps + '/' + id);
+		return new InteractiveMapPageObject(driver);
 	}
 
 	public void verifyCreateMapButtonExist() {

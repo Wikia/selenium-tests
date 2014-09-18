@@ -1,6 +1,7 @@
 package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
 import org.testng.annotations.Test;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -10,6 +11,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.Cr
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateRealMapComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.PalantirObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.TemplateComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
@@ -503,5 +505,44 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreateACustomMapComponentObject customMapModal = createMapModal.clickCustomMap();
 		customMapModal.clickCloseButton();
 		specialMap.verifyCreateMapModalNotExist();
+	}
+	
+	//palantir tests
+	@Test(groups = {"InteractiveMaps_029", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_029_PalantirSetPlayerCorrectPosition() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, 3);
+		selectedMap.verifyMapOpened();
+		PalantirObject poi = new PalantirObject(driver);
+		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);	
+		poi.verifyPoiAppearOnMap();
+	}
+	
+	@Test(groups = {"InteractiveMaps_030", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_030_PalantirSetPlayerPositionOutOfMap() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, 3385);
+		selectedMap.verifyMapOpened();
+		PalantirObject poi = new PalantirObject(driver);
+		poi.setAndVerifyPlayerPosition(9300, 15000, 3, true, false);	
+		poi.verifyPoiNotAppearOnMap();
+	}
+	
+	@Test(groups = {"InteractiveMaps_031", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_031_PalantirRemovePlayerPosition() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, 3);
+		selectedMap.verifyMapOpened();
+		PalantirObject poi = new PalantirObject(driver);
+		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);	
+		poi.verifyPoiAppearOnMap();
+		poi.deletePlayerPosition();
+		poi.verifyPoiNotAppearOnMap();
 	}
 }
