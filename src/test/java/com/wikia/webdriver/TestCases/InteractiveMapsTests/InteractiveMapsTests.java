@@ -511,9 +511,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	@Test(groups = {"InteractiveMaps_029", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_029_PalantirSetPlayerCorrectPosition() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, 3);
+		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
+		selectedMap.openMap(wikiURL, 3);
 		selectedMap.verifyMapOpened();
 		PalantirObject poi = new PalantirObject(driver);
 		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);	
@@ -523,9 +522,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	@Test(groups = {"InteractiveMaps_030", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_030_PalantirSetPlayerPositionOutOfMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, 3385);
+		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
+		selectedMap.openMap(wikiURL, 3);
 		selectedMap.verifyMapOpened();
 		PalantirObject poi = new PalantirObject(driver);
 		poi.setAndVerifyPlayerPosition(9300, 15000, 3, true, false);	
@@ -535,9 +533,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
 	@Test(groups = {"InteractiveMaps_031", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_031_PalantirRemovePlayerPosition() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, 3);
+		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
+		selectedMap.openMap(wikiURL, 3);
 		selectedMap.verifyMapOpened();
 		PalantirObject poi = new PalantirObject(driver);
 		poi.setAndVerifyPlayerPosition(-40, -10, 3, true, true);	

@@ -26,7 +26,7 @@ public class PalantirObject extends InteractiveMapPageObject {
 	
 	@FindBy(css = "iframe[name=wikia-interactive-map]")
 	private WebElement mapFrame;
-	@FindBy(css = "img[src='*/player_location_marker.png']")
+	@FindBy(css = "img[src*='player_location_marker.png']")
 	private WebElement playerPoint;
 
 	public void deletePlayerPosition(){
@@ -73,7 +73,7 @@ public class PalantirObject extends InteractiveMapPageObject {
 						);
 				PageObjectLogging.log("setAndVerifyPlayerPosition", "Position setted correctly", true, driver);
 			}catch(JSONException e){
-				PageObjectLogging.log("setAndVerifyPlayerPosition", "Position was not setted", false, driver);
+				PageObjectLogging.log("setAndVerifyPlayerPosition", "Position was not set", false, driver);
 			}
 		}else{
 			try{

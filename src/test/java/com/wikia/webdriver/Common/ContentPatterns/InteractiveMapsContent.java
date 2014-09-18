@@ -37,7 +37,7 @@ public class InteractiveMapsContent {
 	
 	public static final String PONTO_REMOVEPLAYER = "var callback = arguments[arguments.length - 1];"
 			+ "Ponto.invoke('im.pontoCommunicationAPI','removePlayerLocation',"
-			+ "null, callback"
+			+ "null, callback,"
 			+ "function (response) {console.log(response)}, true);";
 	
 	public static final String PONTO_UPDATEPOSITION = "var callback = arguments[arguments.length - 1];"
