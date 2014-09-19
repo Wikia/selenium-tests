@@ -37,6 +37,11 @@ public class VisualEditorDialog extends WikiBasePageObject{
 		driver.switchTo().defaultContent();
 	}
 
+	public void switchOutOfAllIFrame() {
+		driver.switchTo().defaultContent();
+		waitForElementNotVisibleByElement(dialog);
+	}
+
 	public VisualEditorPageObject closeDialog() {
 		switchToIFrame();
 		waitForElementClickableByElement(closeButton);

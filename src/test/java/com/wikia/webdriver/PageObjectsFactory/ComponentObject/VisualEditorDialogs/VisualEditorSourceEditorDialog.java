@@ -34,10 +34,11 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		waitForElementVisibleByElement(editArea);
 		waitForElementClickableByElement(editArea);
 		editArea.sendKeys(text);
+		waitForValueToBePresentInElementsAttributeByElement(editArea, "value", text);
 		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementClickableByElement(applyChangesButton);
 		scrollAndClick(applyChangesButton);
-		switchOutOfIFrame();
+		switchOutOfAllIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 }
