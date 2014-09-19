@@ -97,6 +97,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		article.verifyPhoto();
 		LightboxComponentObject lightbox = article.clickThumbnailImage();
 		lightbox.clickPinButton();
+		lightbox.makeHeaderVisible(); // Assure header buttons are not invisible if not hovered over
 		lightbox.clickShareButton();
 		lightbox.verifyShareButtons();
 		lightbox.clickFacebookShareButton();

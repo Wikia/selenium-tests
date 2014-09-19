@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,9 +28,9 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement pinButton;
 	@FindBy(css=".WikiaLightbox .share")
 	private WebElement shareScreen;
-	@FindBy(css="button.share-button.secondary")
+	@FindBy(css="a.share-button.secondary")
 	private WebElement shareButton;
-	@FindBy(css="div.hero-inner")
+	@FindBy(css="div.hero-inner img")
 	private WebElement moreInfoThumbnail;
 	@FindBy(css="a.facebook")
 	private WebElement facebookShareLink;
@@ -86,6 +87,11 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		return new LightboxComponentObject(driver);
 	}
 
+	public void makeHeaderVisible() {
+		waitForElementByElement(titleLink);
+		executeScript("$('.LightboxHeader').css('opacity', 'initial')");
+	}
+
 	public void clickCloseButton() {
 		waitForElementByElement(closeModalButton);
 		scrollAndClick(closeModalButton);
@@ -102,7 +108,13 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
 	public void clickShareButton() {
 		waitForElementByElement(shareButton);
-		shareButton.click();
+
+		// Click the button
+		// Incredibly chrome drive fails to click, thus using JS here
+		// Both click() and builder click() failed in this case
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("$('a.share-button.secondary').click()");
+
 		waitForElementByElement(moreInfoThumbnail);
 		PageObjectLogging.log("clickShareButton", "share button is clicked", true);
 	}
