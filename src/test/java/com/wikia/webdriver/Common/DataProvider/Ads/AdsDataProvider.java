@@ -76,6 +76,30 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] noAdsForSonyReferrer () {
+		return new Object[][] {
+				// Articles
+				{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+				{"it.creepypastaitalia", "Categoria:Creepypasta"},
+				{"monsterhunter", "MH3U:_Monsters"},
+				{"monsterhunter", "Portal:MH3U"},
+
+				// Corporate pages
+				{"wikia", "Wikia"},
+				{"wikia", "Video_Games/Lizzunchbox"},
+
+				// Main pages
+				{"runescape", "RuneScape_Wiki"},
+				{"yugioh", "Main_Page"},
+				{"naruto", "Narutopedia"},
+				{"leagueoflegends" ,"League_of_Legends_Wiki"},
+				{"es.drama", "Portada"},
+				{"de.memory-alpha", "Hauptseite"},
+				{"de.marvel-filme", "Marvel-Filme"},
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] pagesWithAIC() {
 		return new Object[][] {
 			{"zh.pad", "%E7%9A%87%E3%81%9F%E3%82%8B%E6%A9%9F%E6%A2%B0%E9%BE%8D"},
