@@ -387,6 +387,24 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Assertion.assertEquals(checkIfElementOnPage(map), false);
 	}
 	
+	public void verifyPinTypeExist(String pinTypeName){
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		while(createdPinNames.size()-1!=0){
+			if(createdPinNames
+					.get(createdPinNames.size()-1)
+					.getText()
+					.contains(pinTypeName)
+				){
+				Assertion.assertEquals(
+						pinTypeName, 
+						createdPinNames.get(createdPinNames.size()-1).getText());
+				break;
+			}
+		}
+		driver.switchTo().defaultContent();
+	}
+	
 	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
 		getUrl(wikiURL+URLsContent.embedMapEditPage);
 		System.out.println(wikiURL+URLsContent.embedMapEditPage);
