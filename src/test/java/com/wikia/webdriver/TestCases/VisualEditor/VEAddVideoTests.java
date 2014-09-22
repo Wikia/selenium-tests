@@ -16,6 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Robert 'Rochan' Chan
+ * @ownership Contribution
  *
  * VE-1134 Adding non-premium (Youtube) video
  * VE-1134 Adding Premium Video with full URL

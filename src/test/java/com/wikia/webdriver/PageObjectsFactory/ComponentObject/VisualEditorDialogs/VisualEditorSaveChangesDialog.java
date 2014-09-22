@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialo
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -39,11 +40,27 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
+	public void switchToIFrame() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		super.switchToIFrame();
+	}
+
 	public ArticlePageObject savePage() {
 		switchToIFrame();
-		waitForElementByElement(publishButton);
+		waitForElementInViewPort(editSummary);
+		WebElement publishButton = driver.findElement(By.cssSelector(".oo-ui-window-foot .oo-ui-flaggableElement-constructive .oo-ui-labeledElement-label"));
 		waitForElementClickableByElement(publishButton);
-		publishButton.click();
+		try {
+			publishButton.click();
+		} catch (WebDriverException e) {
+			PageObjectLogging.log("savePage", "Publish Button is not ready yet. Retry", true);
+			publishButton.click();
+		}
 		PageObjectLogging.log("savePage", "The 2nd Publish Button is clicked", true);
 		switchOutOfIFrame();
 		return new ArticlePageObject(driver);

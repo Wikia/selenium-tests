@@ -48,9 +48,11 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	@FindBy(css=".ve-init-mw-viewPageTarget-surface")
 	private WebElement veEditorSurface;
 	@FindBy(css=".image.video.video-thumbnail.medium")
-	private List<WebElement> mediaNodes;
+	private List<WebElement> videoNodes;
 	@FindBy(css="figure.ve-ce-branchNode a")
 	private WebElement mediaNode;
+	@FindBy(css="figure.ve-ce-branchNode a")
+	private List<WebElement> mediaNodes;
 	@FindBy(css="figure.wikia-interactive-map-thumbnail")
 	private WebElement mapNode;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay")
@@ -186,14 +188,20 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	public void verifyVideos(int expected) {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
-		Assertion.assertNumber(expected, mediaNodes.size(), "Checking the correct number of video nodes added");
-		PageObjectLogging.log("verifyVideos", mediaNodes.size() + " videos displayed", true);
+		Assertion.assertNumber(expected, videoNodes.size(), "Checking the correct number of video nodes added");
+		PageObjectLogging.log("verifyVideos", videoNodes.size() + " videos displayed", true);
+	}
+
+	public void verifyMedias(int expected) {
+		waitForElementByElement(mediaNode);
+		waitForElementVisibleByElement(mediaNode);
+		Assertion.assertNumber(expected, mediaNodes.size(), "Checking the correct number of media nodes added");
+		PageObjectLogging.log("verifyMedias", mediaNodes.size() + " media displayed", true);
 	}
 
 	public VisualEditorMediaSettingsDialog openMediaSettings () {
 		waitForElementByElement(editArea);
 		waitForElementVisibleByElement(mediaNode);
-		mediaNode.click();
 		waitForElementByElement(focusedNode);
 		clickContextMenu();
 		return new VisualEditorMediaSettingsDialog(driver);
@@ -290,6 +298,17 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	public void selectMedia() {
 		waitForElementByElement(mediaNode);
 		mediaNode.click();
+	}
+
+	public void selectMediaByIndex(int index) {
+		WebElement selectedMedia = mediaNodes.get(index);
+		waitForElementVisibleByElement(selectedMedia);
+		selectedMedia.click();
+	}
+
+	public void selectMediaByTitle(String title) {
+		WebElement selectedMedia = getElementByValue(mediaNodes, "href", title);
+		selectedMedia.click();
 	}
 
 	public void randomResizeOnMedia() {

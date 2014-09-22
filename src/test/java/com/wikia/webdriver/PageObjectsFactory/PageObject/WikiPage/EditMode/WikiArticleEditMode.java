@@ -20,7 +20,9 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
 
 public class WikiArticleEditMode extends WikiEditMode {
@@ -145,6 +147,12 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement videoWidthEditor;
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
+	@FindBy(css = "span[id=cke_22_label]")
+	private WebElement sourceButton;
+	@FindBy(css = "#cke_32_frame")
+	private WebElement sourceFrame;
+	@FindBy(css = "a[data-map-title]")
+	private WebElement embededMap;
 
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
 	private By videoOnArticleEditMode = By.cssSelector("img.video");
@@ -159,11 +167,10 @@ public class WikiArticleEditMode extends WikiEditMode {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-
-	public WikiArticleEditMode editArticleByName(String name) {
-		String newUrl = URLsContent.addArticle.replace("%title%", name);
-		getUrl(Global.DOMAIN + newUrl);
-		return new WikiArticleEditMode(driver);
+	
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
+		getUrl(wikiURL+URLsContent.specialVideos);
+		return new SpecialVideosPageObject(driver);
 	}
 
 	public void verifyThatThePhotoAppears(String caption) {
@@ -213,14 +220,20 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void deleteArticleContent() {
 		driver.switchTo().frame(iFrame);
+		waitForElementByElement(bodyContent);
 		bodyContent.clear();
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
-
+	}
+	
+	public void verifySourceEditorContentIsEmpty(){
+		waitForElementVisibleByElement(sourceModeTextArea);
+		Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
+		PageObjectLogging.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned", true);
 	}
 
-	public void clearSource() {
-		waitForElementByElement(sourceModeTextArea);
+	public void clearSource(){
+		waitForElementVisibleByElement(sourceModeTextArea);
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
 	}
@@ -240,14 +253,21 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public void typeInContent(String content) {
-		waitForElementByElement(visualModeIFrame);
-		driver.switchTo().frame(visualModeIFrame);
+		waitForElementByElement(iFrame);
+		driver.switchTo().frame(iFrame);
 		waitForElementByElement(bodyContent);
 		bodyContent.sendKeys(content);
+		PageObjectLogging.log("typeInContent", "content " + bodyContent.getText() + " - type into article body", true, driver);
 		driver.switchTo().defaultContent();
-		PageObjectLogging.log("typeInContent", "content type into article body", true, driver);
 	}
-
+	
+	public void clickSourceButton(){
+		waitForElementByElement(sourceButton);
+		sourceButton.click();
+		driver.switchTo().defaultContent();
+		PageObjectLogging.log("clickSourceButton", "Source button was clicked", true, driver);
+	}
+	
 	public void clickReturnToEditingButton() {
 		waitForElementByElement(returnToEditingButton);
 		returnToEditingButton.click();
@@ -285,6 +305,11 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickOnModifyImageLink", "Modify image link is clicked", true, driver);
 	}
 
+	public WikiArticleEditMode editArticleByName(String name, String wikiUrl) {
+		String newUrl = URLsContent.addArticle.replace("%title%", name);
+		getUrl(wikiUrl + newUrl);
+		return new WikiArticleEditMode(driver);
+	}
 
 	public void verifyLeftAlignmentIsSelected() {
 		mouseOverInArticleIframe(imageArticleIFrame);
@@ -391,10 +416,33 @@ public class WikiArticleEditMode extends WikiEditMode {
 				"Delete all source code on the article", true, driver);
 	}
 
+	public void typeContentInSourceMode(String content){
+		waitForElementByElement(sourceModeTextArea);
+		sourceModeTextArea.sendKeys(content);
+		PageObjectLogging.log(
+				"typeInContent", 
+				"content type into source mode textarea", 
+				true,
+				driver
+		);
+	}
+	
 	public void typeInTemplateContent(String content) {
+		driver.switchTo().defaultContent();
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("typeInContent",
-				"content type into source mode textarea", true, driver);
+		PageObjectLogging.log(
+				"typeInContent", 
+				"content type into source mode textarea",
+				true,
+				driver
+		);
+	}	
+	
+	public void verifyEmbededMap(String mapID){
+		driver.switchTo().defaultContent();
+		waitForElementByElement(embededMap);
+		String embededMapID = embededMap.getAttribute("data-map-id");
+		Assertion.assertEquals(mapID,embededMapID);
 	}
 }
