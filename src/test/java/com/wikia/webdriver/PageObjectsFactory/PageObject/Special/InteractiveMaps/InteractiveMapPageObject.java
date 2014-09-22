@@ -129,7 +129,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public CreatePinTypesComponentObject clickEditPinTypesButton() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementInViewPort(editPinTypesButton);
+		waitForElementVisibleByElement(filterBox);
+		waitForElementVisibleByElement(editPinTypesButton);
 		editPinTypesButton.click();
 		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button were clicked", true, driver);
 		driver.switchTo().defaultContent();
