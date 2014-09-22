@@ -525,8 +525,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		addPinModal.verifyPinTitleFieldIsDisplayed();
 		addPinModal.verifyDescriptionFieldIsDisplayed();
 		addPinModal.clickCancelButton();
-		embedMapDialog.clickEditPinTypesButton();
-		CreatePinTypesComponentObject pinTypesDialog = new CreatePinTypesComponentObject(driver);
+		CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
 		pinTypesDialog.verifyPinTypesDialog();
 	}
 	
@@ -537,8 +536,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
 		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
-		embedMapDialog.clickEditPinTypesButton();
-		CreatePinTypesComponentObject pinTypesDialog = new CreatePinTypesComponentObject(driver);
+		CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
 		pinTypesDialog.verifyPinTypesDialog();
 		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
 		pinTypesDialog.clickSave();

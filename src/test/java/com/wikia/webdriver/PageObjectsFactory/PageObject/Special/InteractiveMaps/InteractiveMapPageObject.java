@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMap
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -61,7 +62,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement embedMapCodeLargeButton;
 	@FindBy(css = ".code-sample")
 	private WebElement embedCode;
-	@FindBy(css = ".edit-point-types")
+	@FindBy(css = "#editPointTypes")
 	private WebElement editPinTypesButton;
 	@FindBy(css = "#intMapPoiCategories")
 	private WebElement mapPoiCategoriesDialog;
@@ -125,13 +126,14 @@ public class InteractiveMapPageObject extends BasePageObject {
 		}
 	}
 
-	public void clickEditPinTypesButton() {
+	public CreatePinTypesComponentObject clickEditPinTypesButton() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementVisibleByElement(editPinTypesButton);
+		waitForElementInViewPort(editPinTypesButton);
 		editPinTypesButton.click();
 		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button were clicked", true, driver);
 		driver.switchTo().defaultContent();
+		return new CreatePinTypesComponentObject(driver);
 	}
 
 	public void clickZoomInButton() {
@@ -395,13 +397,20 @@ public class InteractiveMapPageObject extends BasePageObject {
 					.get(createdPinNames.size()-1)
 					.getText()
 					.contains(pinTypeName)
-				){
+			){
 				Assertion.assertEquals(
 						pinTypeName, 
 						createdPinNames.get(createdPinNames.size()-1).getText());
+			} else {
+				PageObjectLogging.log(
+						"verifyPinTypeExist",
+						"Pin type with name " + pinTypeName + " does not exist",
+						true
+					);
+					
+				}
 				break;
-			}
-		}
+			}	
 		driver.switchTo().defaultContent();
 	}
 	
