@@ -538,11 +538,9 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
 		CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
 		pinTypesDialog.verifyPinTypesDialog();
+		pinTypesDialog.deletePinTypes();
 		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
 		pinTypesDialog.clickSave();
 		embedMapDialog.verifyPinTypeExist(InteractiveMapsContent.pinTypeName);
-		embedMapDialog.clickEditPinTypesButton();
-		pinTypesDialog.deletePinTypes();
-		pinTypesDialog.clickSave();
 	}	
 }
