@@ -28,7 +28,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement pinButton;
 	@FindBy(css=".WikiaLightbox .share")
 	private WebElement shareScreen;
-	@FindBy(css="a.share-button.secondary")
+	@FindBy(css=".WikiaLightbox a.share-button.secondary")
 	private WebElement shareButton;
 	@FindBy(css="div.hero-inner img")
 	private WebElement moreInfoThumbnail;
@@ -108,13 +108,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
 	public void clickShareButton() {
 		waitForElementByElement(shareButton);
-
-		// Click the button
-		// Incredibly chrome drive fails to click, thus using JS here
-		// Both click() and builder click() failed in this case
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("$('a.share-button.secondary').click()");
-
+		shareButton.click();
 		waitForElementByElement(moreInfoThumbnail);
 		PageObjectLogging.log("clickShareButton", "share button is clicked", true);
 	}
