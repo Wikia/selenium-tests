@@ -28,42 +28,33 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 	private WebElement mapFrame;
 	@FindBy(css = "img[src*='player_location_marker.png']")
 	private WebElement playerPoint;
+	
+	private PalantirContent getResponse(Object response, String methodName) {
+		PalantirContent handle = new PalantirContent();
+		try {			
+			JSONObject json = new JSONObject(response.toString());
+			handle.getResponse(
+				json.getString(PalantirContent.PONTO_MSG_SUCCESS), 
+				json.getString(PalantirContent.PONTO_MSG_RESPONSECODE), 
+				json.getString(PalantirContent.PONTO_MSG_MESSAGE)
+			);			
+			PageObjectLogging.log(methodName, handle.getMessage(), true, driver);
+		}catch (JSONException e) {
+			PageObjectLogging.log(methodName, handle.getMessage(), false, driver);
+		}
+		return handle;		
+	}
 
 	public PalantirContent deletePlayerPosition() {
 		waitForElementVisibleByElement(mapFrame);
-		driver.switchTo().activeElement();
-
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(PalantirContent.PONTO_REMOVEPLAYER);
-		PalantirContent handle = new PalantirContent();
-		try {
-			JSONObject json = new JSONObject(res.toString());
-			handle.success = json.getString(PalantirContent.PONTO_MSG_SUCCESS); 
-			handle.responseCode = json.getString(PalantirContent.PONTO_MSG_RESPONSECODE); 
-			handle.message = json.getString(PalantirContent.PONTO_MSG_MESSAGE);
-			
-			PageObjectLogging.log(
-					"deletePlayerPosition", 
-					handle.message, 
-					true, 
-					driver
-			);
-		}catch (JSONException e) {
-			PageObjectLogging.log(
-					"deletePlayerPosition", 
-					"Player position was not deleted", 
-					false, 
-					driver
-			);				
-		}
-		return handle;
+		return getResponse(res, "deletePlayerPosition");
 	}
 
 	public PalantirContent setAndVerifyPlayerPosition(double lat, double lng, double zoom, boolean centerMap) {
 		waitForElementVisibleByElement(mapFrame);
-		driver.switchTo().activeElement();
-		
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
@@ -73,33 +64,11 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 						zoom, 
 						centerMap
 					);
-		PalantirContent handle = new PalantirContent();
-			try {
-				JSONObject json = new JSONObject(res.toString());
-				handle.success = json.getString(PalantirContent.PONTO_MSG_SUCCESS); 
-				handle.responseCode = json.getString(PalantirContent.PONTO_MSG_RESPONSECODE); 
-				handle.message = json.getString(PalantirContent.PONTO_MSG_MESSAGE);
-				PageObjectLogging.log(
-						"setAndVerifyPlayerPosition", 
-						handle.message, 
-						true, 
-						driver
-				);
-			}catch (JSONException e) {
-				PageObjectLogging.log(
-						"setAndVerifyPlayerPosition", 
-						"Position was not set", 
-						false, 
-						driver
-				);
-			}
-		return handle;
+		return getResponse(res, "setAndVerifyPlayerPosition");
 	}
 	
 	public PalantirContent updateMapPosition(double lat, double lng, int zoom) {
 		waitForElementVisibleByElement(mapFrame);
-		driver.switchTo().activeElement();
-		
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
@@ -108,60 +77,43 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 						lng, 
 						zoom
 					);
-		PalantirContent handle = new PalantirContent();
-		try {
-			JSONObject json = new JSONObject(res.toString());
-			handle.success = json.getString(PalantirContent.PONTO_MSG_SUCCESS);
-			handle.responseCode = json.getString(PalantirContent.PONTO_MSG_RESPONSECODE); 
-			handle.message = json.getString(PalantirContent.PONTO_MSG_MESSAGE);
-			PageObjectLogging.log(
-					"updateMapPosition", 
-					handle.message, 
-					true
-			);
-		}catch (JSONException e) {
-			PageObjectLogging.log(
-					"updateMapPosition", 
-					"Map position was not changed", 
-					true);
-		}
-		return handle;
+		return getResponse(res, "updateMapPosition");
 	}
 
-	public void verifyMapPositionUpdated(String success, String responseCode, String msg) {
-		Assertion.assertEquals("true", success);
-		Assertion.assertEquals("200", responseCode);
-		Assertion.assertEquals(PalantirContent.PONTOMSG_MAPPOS_SUCCESS, msg);
+	public void verifyMapPositionUpdated(PalantirContent handle) {
+		Assertion.assertEquals("true", handle.getSuccess());
+		Assertion.assertEquals("200", handle.getResponseCode());
+		Assertion.assertEquals(PalantirContent.PONTOMSG_MAPPOS_SUCCESS, handle.getMessage());
 	}
 
-	public void verifyCorrectPlayerPos(String success, String responseCode, String msg) {
-		Assertion.assertEquals("true", success);
-		Assertion.assertEquals("200", responseCode);
-		Assertion.assertEquals(PalantirContent.PONTOMSG_PLAYER_SUCCESS, msg);
+	public void verifyCorrectPlayerPos(PalantirContent handle) {
+		Assertion.assertEquals("true", handle.getSuccess());
+		Assertion.assertEquals("200", handle.getResponseCode());
+		Assertion.assertEquals(PalantirContent.PONTOMSG_PLAYER_SUCCESS, handle.getMessage());
 	}
 
-	public void verifyWrongPlayerPos(String success, String responseCode, String msg) {
-		Assertion.assertEquals("false", success);
-		Assertion.assertEquals("422", responseCode);
-		Assertion.assertEquals(PalantirContent.PONTOMSG_PLAYER_OUTOFBOUNDARIES, msg);
+	public void verifyWrongPlayerPos(PalantirContent handle) {
+		Assertion.assertEquals("false", handle.getSuccess());
+		Assertion.assertEquals("422", handle.getResponseCode());
+		Assertion.assertEquals(PalantirContent.PONTOMSG_PLAYER_OUTOFBOUNDARIES, handle.getMessage());
 	}
 	
-	public void verifyWrongZoomLevel(String success, String responseCode, String msg) {
-		Assertion.assertEquals("false", success);
-		Assertion.assertEquals("422", responseCode);
-		Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_ZOOM, msg);
+	public void verifyWrongZoomLevel(PalantirContent handle) {
+		Assertion.assertEquals("false", handle.getSuccess());
+		Assertion.assertEquals("422", handle.getResponseCode());
+		Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_ZOOM, handle.getMessage());
 	}
 	
-	public void verifyDecimalZoomLevel(String success, String responseCode, String msg) {
-		Assertion.assertEquals("false", success);
-		Assertion.assertEquals("422", responseCode);
-		Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_PARAMETER, msg);
+	public void verifyDecimalZoomLevel(PalantirContent handle) {
+		Assertion.assertEquals("false", handle.getSuccess());
+		Assertion.assertEquals("422", handle.getResponseCode());
+		Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_PARAMETER, handle.getMessage());
 	}
 
-	public void verifyPlayerPosDeleted(String success, String responseCode, String msg) {
-		Assertion.assertEquals("true", success);
-		Assertion.assertEquals("200", responseCode);
-		Assertion.assertEquals(PalantirContent.PONTOMSG_REMOVEPLAYER, msg);
+	public void verifyPlayerPosDeleted(PalantirContent handle) {
+		Assertion.assertEquals("true", handle.getSuccess());
+		Assertion.assertEquals("200", handle.getResponseCode());
+		Assertion.assertEquals(PalantirContent.PONTOMSG_REMOVEPLAYER, handle.getMessage());
 	}
 
 	public void verifyPoiAppearOnMap() {

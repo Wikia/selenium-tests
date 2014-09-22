@@ -65,7 +65,7 @@ public class InteractiveMapsPageObject extends BasePageObject {
 		return mapTitleList.get(mapIndex).getText();
 	}
 	
-	public InteractiveMapPageObject openMap(String wikiURL, int id){
+	public InteractiveMapPageObject openMap(String wikiURL, int id) {
 		getUrl(wikiURL + URLsContent.specialMaps + '/' + id);
 		return new InteractiveMapPageObject(driver);
 	}

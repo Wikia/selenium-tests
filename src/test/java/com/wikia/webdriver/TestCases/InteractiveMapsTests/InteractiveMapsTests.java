@@ -519,77 +519,77 @@ public class InteractiveMapsTests extends NewTestTemplate {
 
 	@Test(groups = {"InteractiveMaps_030", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_030_PalantirSetPlayerCorrectPosition() {
-		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
-		selectedMap.openMap(wikiURL, 3);
+		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);		
 		selectedMap.verifyMapOpened();
 		PalantirComponentObject poi = new PalantirComponentObject(driver);
 		PalantirContent handle = new PalantirContent();
 		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);	
-		poi.verifyCorrectPlayerPos(handle.success, handle.responseCode, handle.message);
+		poi.verifyCorrectPlayerPos(handle);
 		poi.verifyPoiAppearOnMap();
 	}
 	
 	@Test(groups = {"InteractiveMaps_031", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_031_PalantirSetPlayerPositionOutOfMap() {
-		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
-		selectedMap.openMap(wikiURL, 3);
+		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
 		PalantirComponentObject poi = new PalantirComponentObject(driver);
 		PalantirContent handle = new PalantirContent();
 		handle = poi.setAndVerifyPlayerPosition(9300, 15000, 3, true);	
-		poi.verifyWrongPlayerPos(handle.success, handle.responseCode, handle.message);
+		poi.verifyWrongPlayerPos(handle);
 		poi.verifyPoiNotAppearOnMap();
 	}
 	
 	@Test(groups = {"InteractiveMaps_032", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_032_PalantirSetAndRemovePlayerPosition() {
-		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
-		selectedMap.openMap(wikiURL, 3);
+		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
 		PalantirComponentObject poi = new PalantirComponentObject(driver);
 		PalantirContent handle = new PalantirContent();
 		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);
-		poi.verifyCorrectPlayerPos(handle.success, handle.responseCode, handle.message);
+		poi.verifyCorrectPlayerPos(handle);
 		poi.verifyPoiAppearOnMap();
 		handle = poi.deletePlayerPosition();
-		poi.verifyPlayerPosDeleted(handle.success, handle.responseCode, handle.message);
+		poi.verifyPlayerPosDeleted(handle);
 		poi.verifyPoiNotAppearOnMap();		
 	}
 	
 	@Test(groups = {"InteractiveMaps_033", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_033_PalantirSetHugeZoomVerifyError() {
-		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
-		selectedMap.openMap(wikiURL, 3);
+		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
 		PalantirComponentObject poi = new PalantirComponentObject(driver);
 		PalantirContent handle = new PalantirContent();
 		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3000, true);
-		poi.verifyWrongZoomLevel(handle.success, handle.responseCode, handle.message);
+		poi.verifyWrongZoomLevel(handle);
 		poi.verifyPoiNotAppearOnMap();
 	}
 	
 	@Test(groups = {"InteractiveMaps_034", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_034_PalantirUpdateMapPosition() {
-		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
-		selectedMap.openMap(wikiURL, 3);
+		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
 		PalantirComponentObject poi = new PalantirComponentObject(driver);
 		PalantirContent handle = new PalantirContent();
 		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3, true);
-		poi.verifyCorrectPlayerPos(handle.success, handle.responseCode, handle.message);
+		poi.verifyCorrectPlayerPos(handle);
 		handle = poi.updateMapPosition(-90, -10, 3);
-		poi.verifyMapPositionUpdated(handle.success, handle.responseCode, handle.message);	
+		poi.verifyMapPositionUpdated(handle);	
 	}
 	
 	@Test(groups = {"InteractiveMaps_035", "PalantirTests", "InteractiveMaps"})
 	public void InteractiveMaps_035_PalantirSetDecimalZoom() {
-		InteractiveMapPageObject selectedMap =  new InteractiveMapPageObject(driver);
-		selectedMap.openMap(wikiURL, 3);
+		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
+		InteractiveMapPageObject selectedMap =  specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
 		PalantirComponentObject poi = new PalantirComponentObject(driver);
 		PalantirContent handle = new PalantirContent();
 		handle = poi.setAndVerifyPlayerPosition(-40, -10, 3.4, true);
-		poi.verifyDecimalZoomLevel(handle.success, handle.responseCode, handle.message);
+		poi.verifyDecimalZoomLevel(handle);
 		poi.verifyPoiNotAppearOnMap();
 	}
 }

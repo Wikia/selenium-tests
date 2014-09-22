@@ -230,10 +230,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementByElement(embedCode);
 		return embedCode.getText();
 	}
-	
-	public void openMap(String wikiURL, int id){
-		getUrl(wikiURL + URLsContent.specialMaps + '/' + id);
-	}
 
 	public AddPinComponentObject placePinInMap() {
 		waitForElementByElement(mapFrame);
