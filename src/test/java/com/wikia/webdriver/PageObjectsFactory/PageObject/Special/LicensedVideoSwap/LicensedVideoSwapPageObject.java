@@ -14,15 +14,13 @@ import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
 
 public class LicensedVideoSwapPageObject extends SpecialPageObject {
+
 	@FindBy(css = ".lvs-history-btn")
 	private WebElement lvsHistoryBtn;
-
 	@FindBy(xpath = "//a[@title='Special:LicensedVideoSwap']" )
 	private WebElement backLink;
-
 	@FindBy(css = ".swap-button")
 	private WebElement firstSwapButton;
-
 	@FindBy(css = ".count")
 	private WebElement swapCount;
 
@@ -32,12 +30,12 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
 	public LicensedVideoSwapHistoryPageObject navigateToHistoryPage() {
 		// Make sure the button has been drawn
-		this.waitForElementByElement(lvsHistoryBtn);
+		waitForElementByElement(lvsHistoryBtn);
 		lvsHistoryBtn.click();
 
 		// Make sure the click above has happened and the browser has responded by looking for an element
 		// on the history page
-		this.waitForElementByElement(backLink);
+		waitForElementByElement(backLink);
 		PageObjectLogging.log("navigateToHistoryPage", "lvs history button navigates to right page", true);
 
 		return new LicensedVideoSwapHistoryPageObject(driver);
@@ -51,14 +49,14 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
 	public void verifySwapVideo() {
 		// Make sure the element is on page before trying to retrieve it
-		this.waitForElementByElement(swapCount);
+		waitForElementByElement(swapCount);
 		int initialCount = Integer.parseInt(swapCount.getText());
 
 		// Swap the first video
-		this.waitForElementByElement(firstSwapButton);
-		firstSwapButton.click();
+		waitForElementByElement(firstSwapButton);
+		scrollAndClick(firstSwapButton);
 
-		this.waitForTextToBePresentInElementByElement(swapCount,  String.valueOf(initialCount-1));
+		waitForTextToBePresentInElementByElement(swapCount,  String.valueOf(initialCount-1));
 
 		PageObjectLogging.log("verifyClickSwap", "Swap button has been clicked", true);
 	}
