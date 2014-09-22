@@ -541,5 +541,8 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
 		pinTypesDialog.clickSave();
 		embedMapDialog.verifyPinTypeExist(InteractiveMapsContent.pinTypeName);
+		embedMapDialog.clickEditPinTypesButton();
+		pinTypesDialog.deletePinTypes();
+		pinTypesDialog.clickSave();
 	}	
 }
