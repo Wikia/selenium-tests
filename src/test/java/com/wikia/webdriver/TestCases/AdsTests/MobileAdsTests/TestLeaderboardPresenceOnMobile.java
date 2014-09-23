@@ -21,7 +21,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		dataProviderClass=MobileAdsDataProvider.class,
 		dataProvider="articlesWithTopLeaderboard"
 	)
-		public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
+	public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
 		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, article);
 	}
