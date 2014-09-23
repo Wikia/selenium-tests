@@ -330,6 +330,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
 	public void searchForInGlobalNav(String query) {
 		searchInputInGlobalNav.sendKeys(query);
+		waitForValueToBePresentInElementsAttributeByElement(searchInputInGlobalNav, "value", query);
 		searchFormInGlobalNav.submit();
 	}
 }
