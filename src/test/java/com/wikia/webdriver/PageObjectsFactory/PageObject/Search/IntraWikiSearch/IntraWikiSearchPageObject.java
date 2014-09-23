@@ -85,6 +85,10 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	private List<WebElement> newSuggestionsList;
 	@FindBy(css=".block")
 	private List<WebElement> suggestionTextsList;
+	@FindBy(id="searchInput")
+	private WebElement searchInputInGlobalNav;
+	@FindBy(id="searchForm")
+	private WebElement searchFormInGlobalNav;
 
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
 
@@ -322,5 +326,10 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 			Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
 		}
 		PageObjectLogging.log("verifyNewSuggestionsTextAndImages", "Image and text next to every suggestion is verified", true);
+	}
+
+	public void searchForInGlobalNav(String query) {
+		searchInputInGlobalNav.sendKeys(query);
+		searchFormInGlobalNav.submit();
 	}
 }
