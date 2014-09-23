@@ -123,9 +123,9 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
 	public void deletePinTypes() {
 		waitForElementByElement(deletePinTypeButton);
-		while (pinTypeTitleInputs.size() >=1) {
+		while (pinTypeTitleInputs.size() >1) {
 			deletePinTypeButton.click();
 		}
-		PageObjectLogging.log("deletePinTypes", "All pin types except one were deleted", true);
+		PageObjectLogging.log("deletePinTypes", "Only one pin type is displayed", true);
 	}
 }
