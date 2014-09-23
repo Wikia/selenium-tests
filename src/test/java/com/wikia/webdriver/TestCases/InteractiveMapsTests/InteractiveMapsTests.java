@@ -513,34 +513,4 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		selectedMap.verifyMapOpened();		
 	}
-	
-	@Test(groups = { "InteractiveMaps_036", "InteractiveMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_036_VerifyEmbedMapContributeModals() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		ArticlePageObject article = new ArticlePageObject(driver);
-		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
-		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
-		AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();
-		addPinModal.verifyPinTitleFieldIsDisplayed();
-		addPinModal.verifyDescriptionFieldIsDisplayed();
-		addPinModal.clickCancelButton();
-		CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
-		pinTypesDialog.verifyPinTypesDialog();
-	}
-	
-	@Test(groups = { "InteractiveMaps_037", "InteractiveMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_037_VerifyEmbedMapAddPinType() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		ArticlePageObject article = new ArticlePageObject(driver);
-		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
-		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
-		CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
-		pinTypesDialog.verifyPinTypesDialog();
-		pinTypesDialog.deletePinTypes();
-		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
-		pinTypesDialog.clickSave();
-		embedMapDialog.verifyPinTypeExist(InteractiveMapsContent.pinTypeName);
-	}	
 }
