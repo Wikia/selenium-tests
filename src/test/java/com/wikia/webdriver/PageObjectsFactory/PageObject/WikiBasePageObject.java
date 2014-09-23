@@ -179,6 +179,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement veToolMenu;
 	@FindBy(css="h3[id='headerWikis']")
 	protected WebElement headerWhereIsMyExtensionPage;
+	@FindBy(id="globalNavigation")
+	protected WebElement newGlobalNavigation;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -1174,5 +1176,9 @@ public class WikiBasePageObject extends BasePageObject {
 			driver
 		);
 		Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
+	}
+
+	protected Boolean isNewGlobalNavPresent() {
+		return checkIfElementOnPage(newGlobalNavigation);
 	}
 }

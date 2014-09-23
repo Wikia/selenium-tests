@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.DeleteAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -63,7 +64,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement embedMapCodeLargeButton;
 	@FindBy(css = ".code-sample")
 	private WebElement embedCode;
-	@FindBy(css = ".edit-point-types")
+	@FindBy(css = "#editPointTypes")
 	private WebElement editPinTypesButton;
 	@FindBy(css = "#intMapPoiCategories")
 	private WebElement mapPoiCategoriesDialog;
@@ -131,13 +132,15 @@ public class InteractiveMapPageObject extends BasePageObject {
 		}
 	}
 
-	public void clickEditPinTypesButton() {
+	public CreatePinTypesComponentObject clickEditPinTypesButton() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
+		waitForElementVisibleByElement(filterBox);
 		waitForElementVisibleByElement(editPinTypesButton);
 		editPinTypesButton.click();
 		PageObjectLogging.log("clickEditPinTypesButton", "Edit Pin Types button were clicked", true, driver);
 		driver.switchTo().defaultContent();
+		return new CreatePinTypesComponentObject(driver);
 	}
 
 	public void clickZoomInButton() {
@@ -391,6 +394,31 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyMapWasNotLoaded() {
 		Assertion.assertEquals(checkIfElementOnPage(map), false);
+	}
+
+	public void verifyPinTypeExist(String pinTypeName){
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		while(createdPinNames.size()-1!=0){
+			if(createdPinNames
+					.get(createdPinNames.size()-1)
+					.getText()
+					.contains(pinTypeName)
+			){
+				Assertion.assertEquals(
+						pinTypeName,
+						createdPinNames.get(createdPinNames.size()-1).getText());
+			} else {
+				PageObjectLogging.log(
+						"verifyPinTypeExist",
+						"Pin type with name " + pinTypeName + " does not exist",
+						true
+					);
+
+				}
+				break;
+			}
+		driver.switchTo().defaultContent();
 	}
 
 	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
