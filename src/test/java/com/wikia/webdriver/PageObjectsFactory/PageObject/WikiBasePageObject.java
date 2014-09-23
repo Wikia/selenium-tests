@@ -181,7 +181,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-
+	private String loggedInUserSelectorVenus = ".ajaxLogin.global-navigation-link[title*='%s']";
 
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
@@ -190,10 +190,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public enum PositionsVideo {
 		left, center, right
-	}
-
-	public enum StyleVideo {
-		caption, nocaption;
 	}
 
 	public enum HubName {
@@ -579,21 +575,14 @@ public class WikiBasePageObject extends BasePageObject {
 		return new LicensedVideoSwapPageObject(driver);
 	}
 
-	public void verifyAvatarPresent() {
-		waitForElementByElement(userProfileAvatar);
-		PageObjectLogging.log(
-			"verifyAvatarPresent",
-			"avatar is visible",
-			true
-		);
-	}
-
 	public void verifyUserLoggedIn(String userName) {
 		if (body.getAttribute("class").contains("skin-monobook")) {
 			driver.findElement(
 				By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(" ", "_"))));// only for verification
-		}
-		else {
+		} else if (checkIfElementOnPage(".global-navigation")) {
+			//New GlobalNav is enabled
+			driver.findElement(By.cssSelector(String.format(loggedInUserSelectorVenus, userName)));
+		} else {
 			//oasis
 			driver.findElement(
 				By.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName.replace(" ", "_"))));// only for verification
