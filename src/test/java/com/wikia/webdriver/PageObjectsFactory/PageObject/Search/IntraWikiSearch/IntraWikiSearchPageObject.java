@@ -328,9 +328,15 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		PageObjectLogging.log("verifyNewSuggestionsTextAndImages", "Image and text next to every suggestion is verified", true);
 	}
 
-	public void searchForInGlobalNav(String query) {
-		searchInputInGlobalNav.sendKeys(query);
-		waitForValueToBePresentInElementsAttributeByElement(searchInputInGlobalNav, "value", query);
-		searchFormInGlobalNav.submit();
+	public void searchForInGlobalNavIfPresent(String query) {
+		if (isNewGlobalNavPresent()) {
+			searchInputInGlobalNav.sendKeys(query);
+			waitForValueToBePresentInElementsAttributeByElement(searchInputInGlobalNav, "value", query);
+			searchFormInGlobalNav.submit();
+		} else {
+			searchField.sendKeys(query);
+			searchButton.click();
+		}
+		PageObjectLogging.log("searchFor", "searching for query: " + query, true, driver);
 	}
 }

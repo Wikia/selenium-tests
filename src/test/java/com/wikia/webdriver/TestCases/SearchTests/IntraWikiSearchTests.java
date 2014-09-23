@@ -230,7 +230,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 	public void IntraWikiSearch_016_communityPushToTopWikiResult() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openWikiPage(communityWiki);
-		search.searchForInGlobalNav(searchWiki);
+		search.searchForInGlobalNavIfPresent(searchWiki);
 		search.verifyPushToTopWikiTitle(searchWiki);
 		search.verifyPushToTopWikiThumbnail();
 	}
