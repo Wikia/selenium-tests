@@ -21,10 +21,11 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		dataProviderClass=MobileAdsDataProvider.class,
 		dataProvider="articlesWithTopLeaderboard"
 	)
-	public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
+		public TestLeaderboardPresenceOnMobile(String wikiName, String article) {
 		urlBuilder = new UrlBuilder(config.getEnv());
 		testedPage = urlBuilder.getUrlForPath(wikiName, article);
 	}
+
 	@GeoEdgeProxy(country="VE")
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_VE"}
@@ -33,6 +34,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
 		mobileAds.verifyMobileTopLeaderboard();
 	}
+
 	@GeoEdgeProxy(country="AU")
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_AU"}
@@ -41,6 +43,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
 		mobileAds.verifyMobileTopLeaderboard();
 	}
+
 	@GeoEdgeProxy(country="DE")
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_DE"}
@@ -49,6 +52,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
 		mobileAds.verifyMobileTopLeaderboard();
 	}
+
 	@GeoEdgeProxy(country="GB")
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_GB"}
@@ -57,6 +61,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
 		mobileAds.verifyMobileTopLeaderboard();
 	}
+
 	@GeoEdgeProxy(country="LT")
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_LT"}
@@ -65,6 +70,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
 		mobileAds.verifyMobileTopLeaderboard();
 	}
+
 	@GeoEdgeProxy(country="TW")
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_TW"}
