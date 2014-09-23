@@ -2,6 +2,7 @@ package com.wikia.webdriver.Common.ContentPatterns;
 
 /*
  * @author: Łukasz Nowak
+ * @ownership: Mobile Web
  */
 
 public class PalantirContent {
@@ -55,7 +56,11 @@ public class PalantirContent {
 			+ "	true"
 			+ ");";
 	
-
+        public PalantirContent(String success, String responseCode, String message) {
+            this.success = success;
+            this.responseCode = responseCode;
+            this.message = message;
+        }
 	
 	public String getSuccess() {
 		return this.success;
@@ -79,11 +84,5 @@ public class PalantirContent {
 	
 	public void setMessage(String message) {
 		this.message = message;
-	}
-	
-	public void getResponse(String successMsg, String responseCodeMsg, String messageMsg) {
-		success = successMsg;
-		responseCode = responseCodeMsg;
-		message = messageMsg;
 	}
 }
