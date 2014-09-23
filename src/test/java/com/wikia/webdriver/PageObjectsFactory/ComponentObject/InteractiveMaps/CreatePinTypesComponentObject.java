@@ -44,8 +44,6 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 	private WebElement creatingPinDialog;
 	@FindBy(css = "#intMapError")
 	private WebElement pinTypesError;
-	@FindBy(css = ".delete-icon")
-	private WebElement deletePinTypeButton;
 
 	private int amountPinTypeTitleInputs, amountUploadMarker, amountParentCatElements;
 
@@ -119,13 +117,5 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 	public void verifyErrorsExist() {
 		waitForElementByElement(pinTypesError);
 		Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);		
-	}
-
-	public void deletePinTypes() {
-		waitForElementByElement(deletePinTypeButton);
-		while (pinTypeTitleInputs.size() >=1) {
-			deletePinTypeButton.click();
-		}
-		PageObjectLogging.log("deletePinTypes", "All pin types except one were deleted", true);
 	}
 }
