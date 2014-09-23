@@ -47,19 +47,19 @@ public class AdsDataProvider {
 	@DataProvider
 	public static final Object[][] corporatePages() {
 		return new Object[][] {
-				{"wikia", "Wikia", "wka.wikia/_wikiaglobal//home"},
-				{"wikia", "About_Us", "wka.wikia/_wikiaglobal//article"},
-				{"wikia", "Alliance", "wka.wikia/_wikiaglobal//article"},
-				{"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article"},
-				{"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home"},
-				{"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub"},
-				{"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub"},
-				{"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub"},
-				{"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub"},
-				{"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub"},
-				{"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub"},
-				{"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub"},
-				{"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub"},
+				{"wikia", "Wikia", "wka.wikia/_wikiaglobal//home", "CORP_TOP_LEADERBOARD"},
+				{"wikia", "About_Us", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+				{"wikia", "Alliance", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+				{"wikia", "Parent_Pages", "wka.wikia/_wikiaglobal//article", "CORP_TOP_LEADERBOARD"},
+				{"es.wikia", "Wikia", "wka.wikia/_corporatespanish//home", "CORP_TOP_LEADERBOARD"},
+				{"gameshub", "Games_Hub", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"gameshub", "What's_Hot", "wka.hub/_gaming_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"lifestylehub", "Lifestyle_Hub", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"lifestylehub", "From_the_Community", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"bookshub", "Mini_Book_Club", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"bookshub", "Portal:YA_Society_Reads", "wka.hub/_life_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"movieshub", "Movies_Hub", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
+				{"movieshub", "From_the_Community", "wka.hub/_ent_hub//hub", "HUB_TOP_LEADERBOARD"},
 		};
 	}
 
@@ -72,6 +72,30 @@ public class AdsDataProvider {
 			{"wikia", "Video_Games/Lizzunchbox"},
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"monsterhunter", "Portal:MH3U"},
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] noAdsForSonyReferrer () {
+		return new Object[][] {
+				// Articles
+				{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+				{"it.creepypastaitalia", "Categoria:Creepypasta"},
+				{"monsterhunter", "MH3U:_Monsters"},
+				{"monsterhunter", "Portal:MH3U"},
+
+				// Corporate pages
+				{"wikia", "Wikia"},
+				{"wikia", "Video_Games/Lizzunchbox"},
+
+				// Main pages
+				{"runescape", "RuneScape_Wiki"},
+				{"yugioh", "Main_Page"},
+				{"naruto", "Narutopedia"},
+				{"leagueoflegends" ,"League_of_Legends_Wiki"},
+				{"es.drama", "Portada"},
+				{"de.memory-alpha", "Hauptseite"},
+				{"de.marvel-filme", "Marvel-Filme"},
 		};
 	}
 
@@ -197,6 +221,14 @@ public class AdsDataProvider {
 				"AdDriver2ForceStatus/Success",
 				Arrays.asList("TOP_LEADERBOARD", "TOP_RIGHT_BOXAD")
 			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] topWamWikis() {
+		return new Object[][] {
+			{"pl.assassinscreed", "Ercole_Massimo", true},
+			{"mobileregressiontesting", "PMG", false}
 		};
 	}
 

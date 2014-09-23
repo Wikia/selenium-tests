@@ -24,7 +24,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder"})
+	@Test(groups = {"VideoArticlePlacehoder_001", "VideoArticlePlacehoder", "Media"})
 	public void Placeholders_001_PublishedProvider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -39,7 +39,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		article.verifyVideo();
 	}
 
-	@Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder"})
+	@Test(groups = {"VideoArticlePlacehoder_002", "VideoArticlePlacehoder", "Media"})
 	public void Placeholders_002_PublishedLibrary() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -54,7 +54,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		article.verifyVideo();
 	}
 
-	@Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder"})
+	@Test(groups = {"VideoArticlePlacehoder_003", "VideoArticlePlacehoder", "Media"})
 	public void Placeholders_003_EditModeProvider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -71,7 +71,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		article.verifyVideo();
 	}
 
-	@Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder"})
+	@Test(groups = {"VideoArticlePlacehoder_004", "VideoArticlePlacehoder", "Media"})
 	public void Placeholders_004_EditModeLibrary() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

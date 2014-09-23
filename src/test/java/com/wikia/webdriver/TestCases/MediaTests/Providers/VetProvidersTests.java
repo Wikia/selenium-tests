@@ -23,7 +23,7 @@ public class VetProvidersTests extends NewTestTemplate {
 	@Test(
 			dataProviderClass = VideoUrlProvider.class,
 			dataProvider = "videoUrl",
-			groups = {"VetProvidersArticle", "VetProvidersTests_001"}
+			groups = {"VetProvidersArticle", "VetProvidersTests_001", "Media"}
 	)
 	public void VetProvidersTests_001_article(String videoUrl, String videoName) {
 		PageObjectLogging.log("", videoUrl, true);

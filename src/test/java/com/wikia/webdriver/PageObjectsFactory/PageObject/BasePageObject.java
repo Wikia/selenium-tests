@@ -397,7 +397,20 @@ public class BasePageObject{
 			PageObjectLogging.log("sendKeys", e.toString(), false);
 		}
 	}
-
+	
+	//You can get access to hidden elements by changing class
+	public void unhideElementByClassChange(String elementName,String classWithoutHidden, int... OptionalIndex){
+		int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('class', '" + classWithoutHidden + "');");
+	}
+	
+	//You can get access to hidden elements by type
+	public void unhideElementByTypeChange(String elementName, String newType, int... OptionalIndex){
+			int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('type', '" + newType + "');");
+	}
 	/**
 	 * Checks if the element is visible on browser
 	 *
@@ -804,7 +817,14 @@ public class BasePageObject{
 	public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
 		WebElement foundElement = null;
 		for(WebElement element : elements) {
-			if (element.getAttribute(attribute).equals(value)) {
+			String retAttribute = element.getAttribute(attribute);
+			if (attribute.equals("href")) {
+				retAttribute = retAttribute.substring(retAttribute.indexOf("File:")+5).replace("%20", " ");
+				if (!element.getAttribute("class").contains("video")) {
+					retAttribute = retAttribute.substring(0, retAttribute.indexOf('.'));
+				}
+			}
+			if (retAttribute.equals(value)) {
 				foundElement = element;
 				PageObjectLogging.log("getElementByValue",
 					"Element with attribute: " + attribute + " with the value: " + value + " is found from the list",

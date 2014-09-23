@@ -40,7 +40,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = {"LightboxTest", "LightboxTest_001"})
+	@Test(groups = {"LightboxTest", "LightboxTest_001", "Media"})
 	public void LightboxTest_001_latestPhotos() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);
@@ -49,7 +49,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_003"})
+	@Test(groups = {"LightboxTest", "LightboxTest_003", "Media"})
 	public void LightboxTest_004_unusedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUnusedFilesPageObject unusedFiles = base.openSpecialUnusedFilesPage(wikiURL);
@@ -57,7 +57,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_004"})
+	@Test(groups = {"LightboxTest", "LightboxTest_004", "Media"})
 	public void LightboxTest_005_unusedVideos() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUnusedVideosPageObject unusedFiles = base.openSpecialUnusedVideosPage(wikiURL);
@@ -65,7 +65,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_005"})
+	@Test(groups = {"LightboxTest", "LightboxTest_005", "Media"})
 	public void LightboxTest_006_uncategorizedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialUncategorizedFilesPageObject unusedFiles = base.openSpecialUncategorizedFilesPage(wikiURL);
@@ -73,7 +73,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_006"})
+	@Test(groups = {"LightboxTest", "LightboxTest_006", "Media"})
 	public void LightboxTest_007_mostLinkedFiles() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialMostLinkedFilesPageObject unusedFiles = base.openSpecialMostLinkedFilesPage(wikiURL);
@@ -81,7 +81,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxPopup();
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_007"})
+	@Test(groups = {"LightboxTest", "LightboxTest_007", "Media"})
 	public void LightboxTest_008_verifyExistenceAndURLsOfSocialButtons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -115,7 +115,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxClosed();
 	}
 
-    @Test(groups = {"LightboxTest", "Lightbox_008"})
+    @Test(groups = {"LightboxTest", "Lightbox_008", "Media"})
     public void LightboxTest_008_verifyCarousel() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -126,7 +126,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyCarouselLeftDisabled();
     }
 
-	@Test(groups = {"LightboxTest", "LightboxTest_009"})
+	@Test(groups = {"LightboxTest", "LightboxTest_009", "Media"})
 	public void LightboxTest_009_specialVideo() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
@@ -135,7 +135,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxVideo();
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_010"})
+	@Test(groups = {"LightboxTest", "LightboxTest_010", "Media"})
 	/**
 	 * Open lightbox from Special:Videos, verify title url, verify More Info button and verify file page (logged-in user)
 	 */
@@ -158,7 +158,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		filePage.verifyVideoAutoplay(true);
 	}
 
-	@Test(groups = {"LightboxTest", "LightboxTest_011"})
+	@Test(groups = {"LightboxTest", "LightboxTest_011", "Media"})
 	/**
 	 * Open lightbox from Special:NewFiles, verify title url, verify More Info button and verify file page (logged-in user)
 	 */

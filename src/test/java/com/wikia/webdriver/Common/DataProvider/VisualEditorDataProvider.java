@@ -75,6 +75,17 @@ public class VisualEditorDataProvider {
 		MATCHING;
 	}
 
+	public enum Alignment {
+		LEFT,
+		CENTER,
+		RIGHT
+	}
+
+	public enum Setting {
+		GENERAL,
+		ADVANCED
+	}
+
 	/**
 	 * Data provider with text formatting
 	 */

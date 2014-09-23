@@ -48,7 +48,7 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 			testedWiki = urlBuilder.getUrlForWiki(wikiName);
 		}
 
-	@Test(groups = { "VideoSuggestions_001", "VideoSuggestions" })
+	@Test(groups = { "VideoSuggestions_001", "VideoSuggestions", "Media" })
 	public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed() {
 		WikiArticlePageObject article = new WikiArticlePageObject(driver);
 		article.logInCookie(credentials.userName,
