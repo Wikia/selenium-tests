@@ -7,14 +7,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mapDialogBody;
-	@FindBy(css=".ve-ui-wikiaMapInsertDialog-results-headline .oo-ui-labeledElement-label")
+	@FindBy(css=".ve-ui-wikiaMapInsertDialog-results-headline a .oo-ui-labeledElement-label")
 	private WebElement createAMapButton;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mediaDialogBody;
@@ -39,13 +41,19 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 		//Goes to http://maps.wikia.com/wiki/Maps_Wiki
 	}
 
-	public void clickCreateAMapButton() {
+	public CreateAMapComponentObject clickCreateAMapButton() {
 		switchToIFrame();
-		waitForElementClickableByElement(createAMapButton);
-		createAMapButton.click();
-		PageObjectLogging.log("clickCreateAMapButton", "Create A Map button is clicked", true);
-		driver.switchTo().defaultContent();
-		//Goes to http://muppets.ve.wikia-dev.com/wiki/Special:Maps#createMap
+		if (checkIfElementOnPage(emptyStateCreateAMapButton)) {
+			waitForElementClickableByElement(emptyStateCreateAMapButton);
+			emptyStateCreateAMapButton.click();
+			PageObjectLogging.log("clickCreateAMapButton", "Empty State: Create A Map button is clicked", true);
+		} else {
+			waitForElementClickableByElement(createAMapButton);
+			createAMapButton.click();
+			PageObjectLogging.log("clickCreateAMapButton", "Create A Map button is clicked", true);
+		}
+		switchToNewBrowserTab();
+		return new CreateAMapComponentObject(driver);
 	}
 
 	public VisualEditorPageObject addExistingMap(int number) {
@@ -66,5 +74,14 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 		waitForElementVisibleByElement(emptyStateCreateAMapButton);
 		PageObjectLogging.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
 		driver.switchTo().defaultContent();
+	}
+
+	public void verifyNumOfMaps(int num) {
+		switchToIFrame();
+		WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
+		waitForElementVisibleByElement(mediaResultsWidget);
+		List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
+		Assertion.assertEquals(maps.size(), num, "Expecting " + num + " of maps. Actual is " + maps.size());
+		switchOutOfIFrame();
 	}
 }
