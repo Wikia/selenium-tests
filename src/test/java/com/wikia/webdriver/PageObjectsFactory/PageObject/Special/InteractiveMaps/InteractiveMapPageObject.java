@@ -12,6 +12,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.DeleteAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMapDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
@@ -98,6 +99,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private List<WebElement> mapImagesCollection;
 	@FindBy(css = ".filter-menu-header > span")
 	private WebElement filterBoxTitle;
+	@FindBy(css = ".wikia-interactive-maps-page-header .drop")
+	private WebElement actionDropDown;
+	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #deleteMap")
+	private WebElement deleteMapButton;
 
 	public enum embedMapDialogButtons {
 		small, medium, large;
@@ -396,5 +401,16 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public VisualEditorAddMapDialog switchBackToVETab() {
 		switchToBrowserTab(0);
 		return new VisualEditorAddMapDialog(driver);
+	}
+
+	public DeleteAMapComponentObject deleteMap() {
+		waitForElementByElement(actionDropDown);
+		Actions actions = new Actions(driver);
+		actions
+			.click(actionDropDown)
+			.click(deleteMapButton)
+			.build()
+			.perform();
+		return new DeleteAMapComponentObject(driver);
 	}
 }
