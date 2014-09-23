@@ -37,7 +37,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	@Override
 	protected void setWindowSize() {
 		try {
-			driver.manage().window().setSize(new Dimension(640, 1136));
+			driver.manage().window().setSize(new Dimension(360, 640));
 		} catch (WebDriverException ex) {
 			PageObjectLogging.log(
 				"ResizeWindowForMobile",
