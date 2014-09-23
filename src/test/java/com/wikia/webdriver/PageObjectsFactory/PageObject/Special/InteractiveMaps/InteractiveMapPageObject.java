@@ -1,19 +1,20 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-
 import java.util.List;
 
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMapDialog;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 /**
  * @author lukaszjedrzejczak
@@ -386,10 +387,14 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void verifyMapWasNotLoaded() {
 		Assertion.assertEquals(checkIfElementOnPage(map), false);
 	}
-	
+
 	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
 		getUrl(wikiURL+URLsContent.embedMapEditPage);
-		System.out.println(wikiURL+URLsContent.embedMapEditPage);
 		return new WikiArticleEditMode(driver);
+	}
+
+	public VisualEditorAddMapDialog switchBackToVETab() {
+		switchToBrowserTab(0);
+		return new VisualEditorAddMapDialog(driver);
 	}
 }
