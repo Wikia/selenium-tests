@@ -33,11 +33,11 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		PalantirContent handle = null;
 		try {			
 			JSONObject json = new JSONObject(response.toString());
-                        handle = new PalantirContent(
-                        	json.getString(PalantirContent.PONTO_MSG_SUCCESS), 
-				json.getString(PalantirContent.PONTO_MSG_RESPONSECODE), 
-				json.getString(PalantirContent.PONTO_MSG_MESSAGE)
-                        );		
+				handle = new PalantirContent(
+							json.getString(PalantirContent.PONTO_MSG_SUCCESS),
+							json.getString(PalantirContent.PONTO_MSG_RESPONSECODE),
+							json.getString(PalantirContent.PONTO_MSG_MESSAGE)
+						);
 			PageObjectLogging.log(methodName, handle.getMessage(), true, driver);
 		}catch (JSONException e) {
 			PageObjectLogging.log(methodName, handle.getMessage(), false, driver);
@@ -58,10 +58,10 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
-						PalantirContent.PONTO_SETPLAYER, 
-						lat, 
-						lng, 
-						zoom, 
+						PalantirContent.PONTO_SETPLAYER,
+						lat,
+						lng,
+						zoom,
 						centerMap
 					);
 		return getResponse(res, "setAndVerifyPlayerPosition");
@@ -72,9 +72,9 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
-						PalantirContent.PONTO_UPDATEPOSITION, 
-						lat, 
-						lng, 
+						PalantirContent.PONTO_UPDATEPOSITION,
+						lat,
+						lng,
 						zoom
 					);
 		return getResponse(res, "updateMapPosition");
