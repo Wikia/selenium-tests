@@ -92,7 +92,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
 		mapID = createdMap.getEmbedMapID();
-		createdMap.verifyControButtonsAreVisible();
+		createdMap.verifyControlButtonsAreVisible();
 		//commenting out the next few lines - Defect VE-1557
 //		mapDialog = createdMap.switchBackToVETab();
 //		//the next line would fail

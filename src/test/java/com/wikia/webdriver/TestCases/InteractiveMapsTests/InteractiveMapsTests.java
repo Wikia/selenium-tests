@@ -104,7 +104,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
 		createdMap.verifyCreatedPinTypesForNewMap();
-		createdMap.verifyControButtonsAreVisible();
+		createdMap.verifyControlButtonsAreVisible();
 	}
 
 	@Test(groups = { "InteractiveMaps_002", "InteractiveMapTests", "InteractiveMaps" })
@@ -124,7 +124,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		createdMap.verifyCreatedMapTitle(InteractiveMapsContent.mapName);
 		createdMap.verifyMapOpened();
 		createdMap.verifyCreatedPinTypesForNewMap();
-		createdMap.verifyControButtonsAreVisible();
+		createdMap.verifyControlButtonsAreVisible();
 	}
 
 	@Test(groups = { "InteractiveMaps_003", "InteractiveMapTests", "InteractiveMaps" })
@@ -140,7 +140,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName, InteractiveMapsContent.pinTypeIndex);
 		InteractiveMapPageObject createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
-		createdMap.verifyControButtonsAreVisible();
+		createdMap.verifyControlButtonsAreVisible();
 	}
 
 	@Test(groups = { "InteractiveMaps_004", "InteractiveMapTests", "InteractiveMaps" })

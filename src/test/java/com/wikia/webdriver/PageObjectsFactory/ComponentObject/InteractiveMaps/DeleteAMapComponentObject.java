@@ -14,12 +14,12 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 
 public class DeleteAMapComponentObject extends BasePageObject {
 
+	@FindBy(css = "#intMapsDeleteMapModal .button.primary")
+	private WebElement deleteMapButton;
+
 	public DeleteAMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
-
-	@FindBy(css = "#intMapsDeleteMapModal .button.primary")
-	private WebElement deleteMapButton;
 
 	public InteractiveMapsPageObject deleteMap() {
 		waitForElementClickableByElement(deleteMapButton);

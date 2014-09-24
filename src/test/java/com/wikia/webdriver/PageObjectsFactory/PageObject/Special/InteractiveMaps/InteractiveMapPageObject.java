@@ -364,7 +364,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Assertion.assertNotEquals(pinDesc, pinDescription.getText());
 	}
 
-	public void verifyControButtonsAreVisible() {
+	public void verifyControlButtonsAreVisible() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(embedMapCodeButton);
