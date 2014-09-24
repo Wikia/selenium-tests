@@ -19,9 +19,9 @@ public class UserAgentsRegistry {
 		);
 		userAgentRegistry.put(
 			"iPhone",
-			"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en)"
-			+ "AppleWebKit/420+ (KHTML, like Gecko)"
-			+ "Version/3.0 Mobile/1A543a Safari/419.3"
+			"Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_1 like Mac OS X) "
+			+ "AppleWebKit/537.51.2 (KHTML, like Gecko) "
+			+ "Version/7.0 Mobile/11D257 Safari/9537.53"
 		);
 	}
 
