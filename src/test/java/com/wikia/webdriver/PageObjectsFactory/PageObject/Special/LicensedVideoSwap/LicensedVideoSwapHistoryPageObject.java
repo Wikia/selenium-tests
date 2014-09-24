@@ -4,19 +4,13 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoS
  * Created by kenkouot on 3/19/14.
  */
 
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.By;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 
 
 public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
@@ -52,7 +46,7 @@ public class LicensedVideoSwapHistoryPageObject extends SpecialPageObject {
 	public void verifyUndoSucceeded() {
 		waitForElementByElement(notification);
 		String notificationMsg = notification.getText();
-		Assertion.assertEquals(notificationMsg, "This page has been restored.");
+		Assertion.assertEquals(notificationMsg, "You have restored the video to this list.");
 		PageObjectLogging.log("verifyUndoSucceeded", "able to undo a swapped video", true);
 	}
 }
