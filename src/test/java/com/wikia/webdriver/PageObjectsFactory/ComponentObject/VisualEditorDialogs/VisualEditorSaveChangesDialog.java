@@ -52,7 +52,6 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 	public ArticlePageObject savePage() {
 		switchToIFrame();
 		waitForElementInViewPort(editSummary);
-		WebElement publishButton = driver.findElement(By.cssSelector(".oo-ui-window-foot .oo-ui-flaggableElement-constructive .oo-ui-labeledElement-label"));
 		waitForElementClickableByElement(publishButton);
 		publishButton.click();
 		PageObjectLogging.log("savePage", "The 2nd Publish Button is clicked", true);

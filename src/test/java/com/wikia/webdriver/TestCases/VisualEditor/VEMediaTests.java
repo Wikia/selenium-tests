@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.VisualEditor;
 import java.util.ArrayList;
 
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -41,8 +42,9 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
-	String articleName;
+	String articleName, testFullFileName;
 	int numOfVideo = 1;
+	ImageLicense testImageLicense;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
@@ -85,8 +87,8 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEMediaTests_003_uploadImageWithCustomFileName() {
 		String testFileUploadName = "TestFile";
-		String testFullFileName = testFileUploadName + ".png";
-		ImageLicense testImageLicense = ImageLicense.CCBYSA;
+		testFullFileName = testFileUploadName + ".png";
+		testImageLicense = ImageLicense.CCBYSA;
 
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
@@ -96,13 +98,6 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
-		filePage.verifyImageLicense(testImageLicense);
-		filePage.selectHistoryTab();
-		filePage.verifyArticleName(URLsContent.fileNameSpace + testFullFileName);
-		DeletePageObject deletePage = filePage.deleteVersion(1);
-		WikiBasePageObject base = deletePage.submitDeletion();
-		base.logOut(wikiURL);
 	}
 
 	@Test(
@@ -209,5 +204,16 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
+	}
+
+	@AfterGroups(groups = "VEMediaTests_003")
+	public void delete_Image() {
+		FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
+		filePage.verifyImageLicense(testImageLicense);
+		filePage.selectHistoryTab();
+		filePage.verifyArticleName(URLsContent.fileNameSpace + testFullFileName);
+		DeletePageObject deletePage = filePage.deleteVersion(1);
+		WikiBasePageObject base = deletePage.submitDeletion();
+		base.logOut(wikiURL);
 	}
 }
