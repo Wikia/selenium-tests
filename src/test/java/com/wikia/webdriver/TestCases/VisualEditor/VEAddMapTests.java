@@ -19,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialog
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
@@ -103,6 +104,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	public void delete_Map() {
 		InteractiveMapPageObject iMap = base.openInteractiveMapById(wikiURL, Integer.parseInt(mapID));
 		DeleteAMapComponentObject deleteMapModal = iMap.deleteMap();
-		deleteMapModal.deleteMap();
+		InteractiveMapsPageObject specialMaps = deleteMapModal.deleteMap();
+		specialMaps.verifyEmptyState();
 	}
 }

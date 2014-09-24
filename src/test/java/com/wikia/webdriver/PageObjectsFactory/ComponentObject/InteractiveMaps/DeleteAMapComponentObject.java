@@ -16,14 +16,18 @@ public class DeleteAMapComponentObject extends BasePageObject {
 
 	@FindBy(css = "#intMapsDeleteMapModal .button.primary")
 	private WebElement deleteMapButton;
+	@FindBy(css = "#intMapsDeleteMapModal")
+	private WebElement deleteMapModal;
 
 	public DeleteAMapComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
 	public InteractiveMapsPageObject deleteMap() {
+		waitForElementVisibleByElement(deleteMapModal);
 		waitForElementClickableByElement(deleteMapButton);
 		deleteMapButton.click();
+		waitForElementNotVisibleByElement(deleteMapModal);
 		return new InteractiveMapsPageObject(driver);
 	}
 }

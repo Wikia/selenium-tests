@@ -433,12 +433,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public DeleteAMapComponentObject deleteMap() {
 		waitForElementByElement(actionDropDown);
-		Actions actions = new Actions(driver);
-		actions
-			.click(actionDropDown)
-			.click(deleteMapButton)
-			.build()
-			.perform();
+		actionDropDown.click();
+		deleteMapButton.click();
 		return new DeleteAMapComponentObject(driver);
 	}
 }
