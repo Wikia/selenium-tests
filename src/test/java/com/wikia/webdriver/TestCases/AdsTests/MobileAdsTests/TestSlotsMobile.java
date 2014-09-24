@@ -13,22 +13,19 @@ import org.testng.annotations.Test;
 public class TestSlotsMobile extends MobileTestTemplate {
 
 	@Test(
-			groups = {"TestAdSlotsMobile_001", "TestAdSlotsMobile"},
-			dataProviderClass = MobileAdsDataProvider.class,
-			dataProvider = "allSlots"
+		groups = {"TestAdSlotsMobile_001", "TestAdSlotsMobile"},
+		dataProviderClass = MobileAdsDataProvider.class,
+		dataProvider = "allSlots"
 	)
 	public void TestAllSlotsOnPage(String wikiName, String article, String adUnit, String leaderBoardSlot, String inContentSlot,  String prefooterSlot, String imgUrl) {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 
-		ads.waitForElementById(leaderBoardSlot);
 		ads.verifyGptIframe(adUnit, leaderBoardSlot, "mobile");
 
-		ads.waitForElementById(inContentSlot);
 		ads.verifyGptIframe(adUnit, inContentSlot, "mobile");
 
-		ads.waitForElementById(prefooterSlot);
 		ads.verifyGptIframe(adUnit, prefooterSlot, "mobile");
 
 		ads.verifyImgAdLoadedInSlot(leaderBoardSlot, imgUrl);
@@ -38,19 +35,17 @@ public class TestSlotsMobile extends MobileTestTemplate {
 	}
 
 	@Test(
-			groups = {"TestAdSlotsMobile_002", "TestAdSlotsMobile"},
-			dataProviderClass = MobileAdsDataProvider.class,
-			dataProvider = "leaderboardAndPrefooterSlots"
+		groups = {"TestAdSlotsMobile_002", "TestAdSlotsMobile"},
+		dataProviderClass = MobileAdsDataProvider.class,
+		dataProvider = "leaderboardAndPrefooterSlots"
 	)
 	public void TestLeaderboardAndPrefooterOnPage(String wikiName, String article, String adUnit, String leaderBoardSlot, String inContentSlot,  String prefooterSlot, String imgUrl) {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 
-		ads.waitForElementById(leaderBoardSlot);
 		ads.verifyGptIframe(adUnit, leaderBoardSlot, "mobile");
 
-		ads.waitForElementById(prefooterSlot);
 		ads.verifyGptIframe(adUnit, prefooterSlot, "mobile");
 
 		ads.verifyImgAdLoadedInSlot(leaderBoardSlot, imgUrl);
@@ -61,19 +56,17 @@ public class TestSlotsMobile extends MobileTestTemplate {
 	}
 
 	@Test(
-			groups = {"TestAdSlotsMobile_003", "TestAdSlotsMobile"},
-			dataProviderClass = MobileAdsDataProvider.class,
-			dataProvider = "leaderboardAndInContentSlots"
+		groups = {"TestAdSlotsMobile_003", "TestAdSlotsMobile"},
+		dataProviderClass = MobileAdsDataProvider.class,
+		dataProvider = "leaderboardAndInContentSlots"
 	)
 	public void TestLeaderboardAndInContentOnPage(String wikiName, String article, String adUnit, String leaderBoardSlot, String inContentSlot,  String prefooterSlot, String imgUrl) {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
 
-		ads.waitForElementById(leaderBoardSlot);
 		ads.verifyGptIframe(adUnit, leaderBoardSlot, "mobile");
 
-		ads.waitForElementById(inContentSlot);
 		ads.verifyGptIframe(adUnit, inContentSlot, "mobile");
 
 		ads.verifyImgAdLoadedInSlot(leaderBoardSlot, imgUrl);
