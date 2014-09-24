@@ -54,13 +54,6 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 		waitForElementInViewPort(editSummary);
 		WebElement publishButton = driver.findElement(By.cssSelector(".oo-ui-window-foot .oo-ui-flaggableElement-constructive .oo-ui-labeledElement-label"));
 		waitForElementClickableByElement(publishButton);
-		//Temp work around - The dialog needs time to transition to the front
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		publishButton.click();
 		PageObjectLogging.log("savePage", "The 2nd Publish Button is clicked", true);
 		switchOutOfIFrame();
