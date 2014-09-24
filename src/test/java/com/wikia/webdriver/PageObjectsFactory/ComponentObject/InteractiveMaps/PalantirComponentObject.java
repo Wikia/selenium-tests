@@ -58,11 +58,11 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
-						PalantirContent.PONTO_SETPLAYER,
-						lat,
-						lng,
-						zoom,
-						centerMap
+					PalantirContent.PONTO_SETPLAYER,
+					lat,
+					lng,
+					zoom,
+					centerMap
 					);
 		return getResponse(res, "setAndVerifyPlayerPosition");
 	}
@@ -72,10 +72,10 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
-						PalantirContent.PONTO_UPDATEPOSITION,
-						lat,
-						lng,
-						zoom
+					PalantirContent.PONTO_UPDATEPOSITION,
+					lat,
+					lng,
+					zoom
 					);
 		return getResponse(res, "updateMapPosition");
 	}
