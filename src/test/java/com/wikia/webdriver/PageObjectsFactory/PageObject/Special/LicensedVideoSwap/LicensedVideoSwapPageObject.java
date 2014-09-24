@@ -17,7 +17,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
 	@FindBy(css = ".lvs-history-btn")
 	private WebElement lvsHistoryBtn;
-	@FindBy(xpath = "//a[@title='Special:LicensedVideoSwap']" )
+	@FindBy(css = ".subtitle a")
 	private WebElement backLink;
 	@FindBy(css = ".swap-button")
 	private WebElement firstSwapButton;
