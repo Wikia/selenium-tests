@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.VisualEditor;
 import java.util.ArrayList;
 
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,6 +15,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Setting;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog.ImageLicense;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
@@ -40,8 +42,9 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
-	String articleName;
+	String articleName, testFullFileName;
 	int numOfVideo = 1;
+	ImageLicense testImageLicense;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
@@ -84,22 +87,17 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEMediaTests_003_uploadImageWithCustomFileName() {
 		String testFileUploadName = "TestFile";
-		String testFullFileName = testFileUploadName + ".png";
+		testFullFileName = testFileUploadName + ".png";
+		testImageLicense = ImageLicense.CCBYSA;
 
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-		ve = mediaDialog.uploadImageWithFileName(PageContent.file2Png, testFileUploadName);
+		ve = mediaDialog.uploadImage(PageContent.file2Png, testFileUploadName, testImageLicense);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
-		FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
-		filePage.selectHistoryTab();
-		filePage.verifyArticleName(URLsContent.fileNameSpace + testFullFileName);
-		DeletePageObject deletePage = filePage.deleteVersion(1);
-		WikiBasePageObject base = deletePage.submitDeletion();
-		base.logOut(wikiURL);
 	}
 
 	@Test(
@@ -206,5 +204,16 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);
+	}
+
+	@AfterGroups(groups = "VEMediaTests_003")
+	public void delete_Image() {
+		FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
+		filePage.verifyImageLicense(testImageLicense);
+		filePage.selectHistoryTab();
+		filePage.verifyArticleName(URLsContent.fileNameSpace + testFullFileName);
+		DeletePageObject deletePage = filePage.deleteVersion(1);
+		WikiBasePageObject base = deletePage.submitDeletion();
+		base.logOut(wikiURL);
 	}
 }
