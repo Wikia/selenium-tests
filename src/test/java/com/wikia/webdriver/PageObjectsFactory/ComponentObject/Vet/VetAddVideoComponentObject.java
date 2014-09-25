@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 public class VetAddVideoComponentObject extends WikiBasePageObject{
 
@@ -124,9 +125,10 @@ public class VetAddVideoComponentObject extends WikiBasePageObject{
 		PageObjectLogging.log("verifySuggestionsIsDisplayed", "Verified suggested module appeared", true, driver);
 	}
 
-	public void clickCloseButton() {
+	public WikiArticleEditMode clickCloseButton() {
 		waitForElementByElement(closeButton);
 		scrollAndClick(closeButton);
 		PageObjectLogging.log("updateVideoButton", "update video button clicked",  true);
+		return new WikiArticleEditMode(driver);
 	}
 }

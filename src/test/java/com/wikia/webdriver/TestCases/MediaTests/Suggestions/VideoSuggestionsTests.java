@@ -4,14 +4,13 @@
 package com.wikia.webdriver.TestCases.MediaTests.Suggestions;
 
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.Core.URLBuilder.UrlBuilder;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 /**
@@ -29,10 +28,6 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 	 * @author Rodrigo 'RodriGomez' Molinero
 	 */
 
-
-	private String testedPage;
-	private String testedWiki;
-
 	@DataProvider
 	private static final Object[][] wikis() {
 		return new Object[][] {
@@ -40,25 +35,22 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 		};
 	}
 
-	@Factory(dataProvider="wikis")
-		public VideoSuggestionsTests(String wikiName, String path) {
-			super();
-			UrlBuilder urlBuilder = new UrlBuilder(config.getEnv());
-			testedPage = urlBuilder.getUrlForPath(wikiName, path);
-			testedWiki = urlBuilder.getUrlForWiki(wikiName);
-		}
+	@Test(
+		groups = { "VideoSuggestions_001", "VideoSuggestions", "Media" },
+		dataProvider="wikis"
+	)
+	public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed(String wikiName, String articleName) {
+		wikiURL = urlBuilder.getUrlForWiki(wikiName);
 
-	@Test(groups = { "VideoSuggestions_001", "VideoSuggestions", "Media" })
-	public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed() {
-		WikiArticlePageObject article = new WikiArticlePageObject(driver);
-		article.logInCookie(credentials.userName,
-				credentials.password, testedWiki);
-		driver.get(testedPage);
-		WikiArticleEditMode edit = article.edit();
-		VetAddVideoComponentObject vetAddingVideo = edit.clickVideoButton();
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.userName, credentials.password, wikiURL);
+		article = article.openArticleByName(wikiURL, articleName);
+		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
+		ck.verifyContentLoaded();
+		VetAddVideoComponentObject vetAddingVideo = ck.clickVideoButton();
 		vetAddingVideo.verifySuggestionsIsDisplayed();
-		vetAddingVideo.clickCloseButton();
+		WikiArticleEditMode edit = vetAddingVideo.clickCloseButton();
 		edit.clickOnPublishButton();
+		edit.logOut(wikiURL);
 	}
-
 }
