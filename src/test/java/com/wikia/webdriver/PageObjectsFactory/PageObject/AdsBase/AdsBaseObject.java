@@ -80,12 +80,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public AdsBaseObject(WebDriver driver) {
 		super(driver);
 		AdsContent.setSlotsSelectors();
+		setSlots();
 	}
 
 	public AdsBaseObject(WebDriver driver, String testedPage, Dimension resolution) {
 		super(driver);
 		driver.manage().window().setSize(resolution);
 		getUrl(testedPage);
+		AdsContent.setSlotsSelectors();
+		setSlots();
 	}
 
 	private void setSlots() {

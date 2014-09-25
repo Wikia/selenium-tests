@@ -40,6 +40,16 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
+	public void switchToIFrame() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		super.switchToIFrame();
+	}
+
 	public ArticlePageObject savePage() {
 		switchToIFrame();
 		waitForElementInViewPort(editSummary);

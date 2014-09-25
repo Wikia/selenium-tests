@@ -1,10 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Mobile;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
+import java.io.File;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,8 +9,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import java.io.File;
-import java.util.concurrent.TimeUnit;
+
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 
 /**
  * Bogna 'bognix' Knychala
@@ -36,7 +37,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	@Override
 	protected void setWindowSize() {
 		try {
-			driver.manage().window().setSize(new Dimension(768, 1280));
+			driver.manage().window().setSize(new Dimension(360, 640));
 		} catch (WebDriverException ex) {
 			PageObjectLogging.log(
 				"ResizeWindowForMobile",
@@ -113,6 +114,13 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 			}
 		}
 		throw new NoSuchElementException("Slot expanded, should be collapsed");
+	}
+
+	public void verifyNoSlotPresent(String slotName) {
+		if (checkIfElementOnPage("#" + slotName)) {
+			throw new NoSuchElementException("Slot is added to the page");
+		}
+		PageObjectLogging.log("AdInSlot", "No slot found as expected", true);
 	}
 
 	public void verifySlotExpanded(String slotName) {
