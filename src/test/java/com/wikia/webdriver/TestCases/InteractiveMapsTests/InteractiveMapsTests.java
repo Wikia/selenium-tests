@@ -678,4 +678,33 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
 		template.verifyErrorExist();
 	}
+	
+	@Test(groups = {"InteractiveMaps_042", "InteractiveMaps", "InteractiveMaps"})
+	public void InteractiveMaps_042_VerifyBlockedUserCannotEditPinTypesOnEmbeddedMap() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
+		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
+		CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
+		pinTypesDialog.verifyPinTypesDialog();
+		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
+		pinTypesDialog.clickSave();
+		pinTypesDialog.verifyErrorsExist();
+	}
+	
+	@Test(groups = {"InteractiveMaps_043", "InteractiveMaps", "InteractiveMaps"})
+	public void InteractiveMaps_043_VerifyBlockedUserCannotAddPinOnEmbeddedMap() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
+		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
+		AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();
+		addPinModal.typePinName(InteractiveMapsContent.pinName);
+		addPinModal.typePinDescription(InteractiveMapsContent.pinDescription);
+		addPinModal.selectPinType();
+		addPinModal.clickSaveButton();
+		addPinModal.verifyErrorIsPresented();
+	}
 }
