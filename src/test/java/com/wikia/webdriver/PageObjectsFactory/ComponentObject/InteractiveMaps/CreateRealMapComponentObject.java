@@ -3,6 +3,8 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
@@ -30,7 +32,9 @@ public class CreateRealMapComponentObject extends BasePageObject {
 	private WebElement nextButton;
 	@FindBy(css = ".close")
 	private WebElement closeButton;
-
+	@FindBy(id = "intMapError")
+	private WebElement mapErrorField;
+	
 	public CreateAMapComponentObject clickBack() {
 		waitForElementByElement(backButton);
 		backButton.click();
@@ -60,5 +64,10 @@ public class CreateRealMapComponentObject extends BasePageObject {
 	public void verifyRealMapPreviewImage() {
 		waitForElementByElement(realMapImagePreview);
 		PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
+	}
+	
+	public void verifyErrorAppear() {
+		waitForElementVisibleByElement(mapErrorField);
+		Assertion.assertEquals(mapErrorField.getText().isEmpty(), false);
 	}
 }

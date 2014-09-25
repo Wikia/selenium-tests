@@ -624,5 +624,58 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
 		pinTypesDialog.clickSave();
 		embedMapDialog.verifyPinTypeExist(InteractiveMapsContent.pinTypeName);
-	}	
+	}
+	
+	@Test(groups = {"InteractiveMaps_038", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_038_VerifyBlockedUsersCannotEditPinTypes() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		CreatePinTypesComponentObject editPinTypes = selectedMap.clickEditPinTypesButton();
+		editPinTypes.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 3);
+		editPinTypes.clickSave();
+		editPinTypes.verifyErrorsExist();
+	}
+	
+	@Test(groups = {"InteractiveMaps_039", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_039_VerifyBlockedUsersCannotAddPin() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
+		addPinModal.typePinName(InteractiveMapsContent.pinName);
+		addPinModal.typePinDescription(InteractiveMapsContent.pinDescription);
+		addPinModal.selectPinType();
+		addPinModal.clickSaveButton();
+		addPinModal.verifyErrorIsPresented();
+	}
+	
+	@Test(groups = {"InteractiveMaps_040", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_040_VerifyBlockedUsersCannotCreateRealMap() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject createMap = specialMaps.clickCreateAMap();
+		CreateRealMapComponentObject realMap = createMap.clickRealMap();
+		realMap.typeMapName(InteractiveMapsContent.mapName);
+		realMap.clickNext();
+		realMap.verifyErrorAppear();
+	}
+	
+	@Test(groups = {"InteractiveMaps_041", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_041_VerifyBlockedUsersCannotCreateCustomMap() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject createMap = specialMaps.clickCreateAMap();
+		CreateACustomMapComponentObject customMap = createMap.clickCustomMap();
+		String selectedImageName = customMap.getSelectedTemplateImageName(InteractiveMapsContent.selectedTemplateIndex);
+		TemplateComponentObject template = customMap.selectTemplate(InteractiveMapsContent.selectedTemplateIndex);
+		template.verifyTemplateImage(selectedImageName);
+		template.typeMapName(InteractiveMapsContent.mapName);
+		CreatePinTypesComponentObject pinDialog = template.clickNext();
+		template.verifyErrorExist();
+	}
 }
