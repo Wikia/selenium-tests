@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialo
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -69,10 +70,14 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
 	public void checkIsEmptyState() {
 		switchToIFrame();
-		waitForElementVisibleByElement(emptyStateDialogHeadline);
-		waitForElementVisibleByElement(emptyStateDialogText);
-		waitForElementVisibleByElement(emptyStateCreateAMapButton);
-		PageObjectLogging.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
+		if (checkIfElementOnPage(emptyStateDialogHeadline)) {
+			waitForElementVisibleByElement(emptyStateDialogHeadline);
+			waitForElementVisibleByElement(emptyStateDialogText);
+			waitForElementVisibleByElement(emptyStateCreateAMapButton);
+			PageObjectLogging.log("checkIsEmptyState", "The Map dialog is in empty state", true, driver);
+		} else {
+			throw new NoSuchElementException("The wiki is not in an empty state, the wiki contains maps.");
+		}
 		driver.switchTo().defaultContent();
 	}
 
