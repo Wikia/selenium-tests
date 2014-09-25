@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.interactions.Actions;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
@@ -107,7 +108,9 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 */
 	public WikiArticleEditMode edit() {
 		waitForElementByElement(editButton);
-		scrollAndClick(editButton);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(editButton).click();
+		actions.build().perform();
 		PageObjectLogging.log(
 			"edit",
 			"Edit article",
