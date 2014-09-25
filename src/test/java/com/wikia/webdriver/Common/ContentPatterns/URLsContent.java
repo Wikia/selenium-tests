@@ -50,7 +50,7 @@ public class URLsContent {
 	public static final String userProfile = "wiki/User:%userName%";
 	public static final String specialCreateNewWiki = "Special:CreateNewWiki";
 	public static final String specialWikiFactory = "wiki/Special:WikiFactory";
-	public static final String specialWhereIsExtension = "wiki/Special:WhereIsExtension";
+	public static final String specialWhereIsExtension = "Special:WhereIsExtension";
 	public static final String specialContributions = "wiki/Special:Contributions";
 	public static final String specialBlockList = "wiki/Special:BlockList";
 	public static final String specialUnblock = "wiki/Special:Unblock";
@@ -167,7 +167,7 @@ public class URLsContent {
 
 	//External URL
 	public static final String externalURL = "http://www.wikia.com";
-	
+
 	//Embed map URL for Interactive Maps
 	public static final String embedMapEditPage = "wiki/EmbedMap?action=edit";
 }

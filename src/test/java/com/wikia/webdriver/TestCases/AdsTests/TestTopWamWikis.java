@@ -46,10 +46,11 @@ public class TestTopWamWikis extends NewTestTemplate {
 
 	@Test(groups = {"TopWamWikisWhereIsMyExtension"})
 	public void TopWamWikisWhereIsMyExtension_GeoEdgeFree() {
+		String whereIsExtensionUrl = urlBuilder.getUrlForPath("community", URLsContent.specialWhereIsExtension);
+		whereIsExtensionUrl = urlBuilder.appendQueryStringToURL(whereIsExtensionUrl, extensionURL);
 		WikiBasePageObject wikiPage = new WikiBasePageObject(driver);
 		wikiPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		wikiPage.getUrl(wikiURL + URLsContent.specialWhereIsExtension);
-		wikiPage.appendToUrl(extensionURL);
+		wikiPage.getUrl(whereIsExtensionUrl);
 		wikiPage.verifyNumberOfTop1kWikis(numberOfTop1kWikis);
 	}
 }
