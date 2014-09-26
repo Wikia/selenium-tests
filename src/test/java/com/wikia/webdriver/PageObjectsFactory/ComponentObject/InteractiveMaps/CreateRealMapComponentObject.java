@@ -32,7 +32,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
 	private WebElement nextButton;
 	@FindBy(css = ".close")
 	private WebElement closeButton;
-	@FindBy(id = "intMapError")
+	@FindBy(css = "#intMapError")
 	private WebElement mapErrorField;
 	
 	public CreateAMapComponentObject clickBack() {
@@ -68,6 +68,6 @@ public class CreateRealMapComponentObject extends BasePageObject {
 	
 	public void verifyErrorAppear() {
 		waitForElementVisibleByElement(mapErrorField);
-		Assertion.assertEquals(mapErrorField.getText().isEmpty(), false);
+		Assertion.assertFalse(mapErrorField.getText().isEmpty());
 	}
 }
