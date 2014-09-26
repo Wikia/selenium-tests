@@ -96,7 +96,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHome
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -181,8 +180,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(id="globalNavigation")
 	protected WebElement newGlobalNavigation;
-	@FindBy(css="#WikiHeader .drop")
-	protected WebElement contributeDropdown;
 	
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");

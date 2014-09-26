@@ -8,8 +8,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
-
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -20,7 +19,7 @@ import junit.framework.Assert;
  *
  */
 
-public class InteractiveMapsPageObject extends WikiBasePageObject {
+public class InteractiveMapsPageObject extends ArticlePageObject {
 
 	public InteractiveMapsPageObject(WebDriver driver) {
 		super(driver);
@@ -42,7 +41,7 @@ public class InteractiveMapsPageObject extends WikiBasePageObject {
 	@FindBy(css = "#intMapCreateMapModal")
 	private WebElement createMapModal;
 	@FindBy(css = ".wikia-maps-create-map")
-	private WebElement createMapUnderContribute;
+	protected WebElement createMapUnderContribute;
 
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
