@@ -42,7 +42,7 @@ public class InteractiveMapsPageObject extends WikiBasePageObject {
 	@FindBy(css = "#intMapCreateMapModal")
 	private WebElement createMapModal;
 	@FindBy(css = ".wikia-maps-create-map")
-	private WebElement createMapContribute;
+	private WebElement createMapUnderContribute;
 
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
@@ -52,10 +52,10 @@ public class InteractiveMapsPageObject extends WikiBasePageObject {
 	}
 	
 	public CreateAMapComponentObject clickCreateAMapUnderContributeButton() {
-		waitForElementByElement(contributeButton);
-		scrollAndClick(contributeButton);
-		waitForElementVisibleByElement(createMapContribute);
-		scrollAndClick(createMapContribute);
+		waitForElementByElement(contributeDropdown);
+		scrollAndClick(contributeDropdown);
+		waitForElementVisibleByElement(createMapUnderContribute);
+		scrollAndClick(createMapUnderContribute);
 		PageObjectLogging.log("clickCreateAMapUnderContributeButton", "create a map button under contribute button clicked", true, driver);
 		return new CreateAMapComponentObject(driver);
 	}

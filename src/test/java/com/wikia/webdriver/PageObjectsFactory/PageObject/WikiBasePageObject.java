@@ -181,8 +181,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(id="globalNavigation")
 	protected WebElement newGlobalNavigation;
-	@FindBy(css = ".contribute")
-	protected WebElement contributeButton;
+	@FindBy(css="#WikiHeader .drop")
+	protected WebElement contributeDropdown;
 	
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
