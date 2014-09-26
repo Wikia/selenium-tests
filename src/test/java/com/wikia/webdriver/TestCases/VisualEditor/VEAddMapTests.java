@@ -37,6 +37,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 	String articleName, mapID;
+	InteractiveMapPageObject createdMap;
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
@@ -90,7 +91,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		realMap.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = realMap.clickNext();
 		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName, InteractiveMapsContent.pinTypeIndex);
-		InteractiveMapPageObject createdMap = pinDialog.clickSave();
+		createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
 		mapID = createdMap.getEmbedMapID();
 		createdMap.verifyControlButtonsAreVisible();
@@ -100,10 +101,10 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 //		mapDialog.verifyNumOfMaps(expectedMapNum);
 	}
 
-	@AfterGroups(groups = "VEAddMapTests_003")
+	@AfterGroups(groups = {"VEAddMapTests_003", "VEEmptyMap"})
 	public void delete_Map() {
-		InteractiveMapPageObject iMap = base.openInteractiveMapById(wikiURL, Integer.parseInt(mapID));
-		DeleteAMapComponentObject deleteMapModal = iMap.deleteMap();
+		createdMap = base.openInteractiveMapById(wikiURL, Integer.parseInt(mapID));
+		DeleteAMapComponentObject deleteMapModal = createdMap.deleteMap();
 		InteractiveMapsPageObject specialMaps = deleteMapModal.deleteMap();
 		specialMaps.verifyEmptyState();
 	}
