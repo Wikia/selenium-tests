@@ -60,10 +60,14 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 	public VisualEditorPageObject addExistingMap(int number) {
 		switchToIFrame();
 		WebElement mediaResultsWidget = mediaDialogBody.findElement(mediaResultsWidgetBy);
-		waitForElementVisibleByElement(mediaResultsWidget);
-		List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
-		WebElement map = maps.get(number);
-		map.click();
+		if (checkIfElementOnPage(mediaResultsWidget)) {
+			waitForElementVisibleByElement(mediaResultsWidget);
+			List<WebElement> maps = mediaResultsWidget.findElements(mediaResultsBy);
+			WebElement map = maps.get(number);
+			map.click();
+		} else {
+			throw new NoSuchElementException("The dialog is in empty state, the wiki needs to contain map.");
+		}
 		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
