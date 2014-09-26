@@ -707,4 +707,13 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		addPinModal.clickSaveButton();
 		addPinModal.verifyErrorIsPresented();
 	}
+	
+	@Test(groups = {"InteractiveMaps_044", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_044_VerifyCreateMapButtonUnderContribution() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		CreateAMapComponentObject createMap = specialMaps.clickCreateAMapUnderContributeButton();
+		createMap.verifyRealMapAndCustomMapButtons();
+	}
 }

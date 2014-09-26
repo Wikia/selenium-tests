@@ -8,7 +8,7 @@ import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import junit.framework.Assert;
  *
  */
 
-public class InteractiveMapsPageObject extends BasePageObject {
+public class InteractiveMapsPageObject extends WikiBasePageObject {
 
 	public InteractiveMapsPageObject(WebDriver driver) {
 		super(driver);
@@ -41,11 +41,22 @@ public class InteractiveMapsPageObject extends BasePageObject {
 	private WebElement paginationNext;
 	@FindBy(css = "#intMapCreateMapModal")
 	private WebElement createMapModal;
+	@FindBy(css = ".wikia-maps-create-map")
+	private WebElement createMapContribute;
 
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
 		scrollAndClick(createAMapButton);
 		PageObjectLogging.log("clickCreateAMap", "create a map button clicked", true, driver);
+		return new CreateAMapComponentObject(driver);
+	}
+	
+	public CreateAMapComponentObject clickCreateAMapUnderContributeButton() {
+		waitForElementByElement(contributeButton);
+		scrollAndClick(contributeButton);
+		waitForElementVisibleByElement(createMapContribute);
+		scrollAndClick(createMapContribute);
+		PageObjectLogging.log("clickCreateAMapUnderContributeButton", "create a map button under contribute button clicked", true, driver);
 		return new CreateAMapComponentObject(driver);
 	}
 
