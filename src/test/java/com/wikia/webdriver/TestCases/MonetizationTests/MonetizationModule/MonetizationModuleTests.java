@@ -69,4 +69,93 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
+	/**
+	 * Check the width of the adsense ad in the monetization module
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"})
+	public void MonetizationModuleTest_005() {
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieFromSearch();
+
+		monetizationModule.resizeWindow(400, 600);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyMonetizationModuleAdsenseWidth(320);
+
+		monetizationModule.resizeWindow(500, 600);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyMonetizationModuleAdsenseWidth(468);
+
+		monetizationModule.resizeWindow(800, 600);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyMonetizationModuleAdsenseWidth(690);
+
+		monetizationModule.resizeWindow(1031, 600);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyMonetizationModuleAdsenseWidth(700);
+
+		monetizationModule.resizeWindow(1410, 600);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyMonetizationModuleAdsenseWidth(728);
+	}
+
+	/**
+	 * Adsense: The monetization module is shown on article page (via search engine)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
+	public void MonetizationModuleTest_006() {
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieFromSearch();
+
+		// anon user
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+
+		// anon user
+		base.logOut(wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+	}
+
+	/**
+	 * Adsense: The monetization module is not shown on article page (not via search engine)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_007", "Monetization"})
+	public void MonetizationModuleTest_007() {
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.deleteCookieFromSearch();
+
+		// anon user
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+
+		// anon user
+		base.logOut(wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+	}
+
 }
