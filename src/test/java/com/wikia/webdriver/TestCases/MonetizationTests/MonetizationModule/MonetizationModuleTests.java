@@ -19,7 +19,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_001() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleShown();
@@ -33,7 +33,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_002() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
@@ -48,7 +48,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
@@ -63,7 +63,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
@@ -107,25 +107,22 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	}
 
 	/**
-	 * Adsense: The monetization module is shown on article page (via search engine)
+	 * Adsense: The monetization module is shown on article page for anon user (via search engine)
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
 	public void MonetizationModuleTest_006() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
-
 		// anon user
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleAdsenseShown();
-
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
-
 		// anon user
 		base.logOut(wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -140,22 +137,93 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_007() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-        MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
-
 		// anon user
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
-
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
-
 		// anon user
 		base.logOut(wikiURL);
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
 	}
 
+	/**
+	 * The monetization module is not shown on article page for blocked geos
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_008", "Monetization"})
+	public void MonetizationModuleTest_008() {
+		String[] blockedGeos = {"US", "GB", "DE", "CA", "AU"};
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		for (int i = 0; i < 2; i++) {
+			if (i == 0) {
+				monetizationModule.setCookieFromSearch();
+			} else {
+				monetizationModule.deleteCookieFromSearch();
+			}
+			for (String countryCode : blockedGeos ) {
+				monetizationModule.setCookieGeo(countryCode);
+				// logged in user
+				base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+				base.openRandomArticle(wikiURL);
+				monetizationModule.verifyMonetizationModuleNotShown();
+				// anon user
+				base.logOut(wikiURL);
+				base.openRandomArticle(wikiURL);
+				monetizationModule.verifyMonetizationModuleNotShown();
+			}
+		}
+	}
+
+	/**
+	 * The monetization module is shown on article page for anon user with non-blocked geos (via search engine)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_009", "Monetization"})
+	public void MonetizationModuleTest_009() {
+		String countryCode = "TH";
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieFromSearch();
+		monetizationModule.setCookieGeo(countryCode);
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+		// anon user
+		base.logOut(wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleShown();
+	}
+
+
+	/**
+	 * The monetization module is not shown on article page for non-blocked geos (not via search engine)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_010", "Monetization"})
+	public void MonetizationModuleTest_010() {
+		String countryCode = "TH";
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.deleteCookieFromSearch();
+		monetizationModule.setCookieGeo(countryCode);
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+		// anon user
+		base.logOut(wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+	}
 }

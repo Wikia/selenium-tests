@@ -3,6 +3,8 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.MonetizationModul
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriverException;
@@ -29,12 +31,26 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	public void setCookieFromSearch() {
 		Cookie newCookie= new Cookie("fromsearch", "1");
 		driver.manage().addCookie(newCookie);
-		PageObjectLogging.log("setCookieFromSearch", "Set 'fromsearch' variable to 1 to cookie", true);
+		PageObjectLogging.log("setCookieFromSearch", "Set cookie: 'fromsearch' to 1", true);
 	}
 
 	public void deleteCookieFromSearch() {
 		driver.manage().deleteCookieNamed("fromsearch");
-		PageObjectLogging.log("deleteCookieFromSearch", "Remove 'fromsearch' variable from cookie", true);
+		PageObjectLogging.log("deleteCookieFromSearch", "Remove 'fromsearch' from cookie", true);
+	}
+
+	public void setCookieGeo(String countryCode) {
+		String cookieName = "Geo";
+		try {
+			JSONObject geo = new JSONObject();
+			geo.put("country", countryCode);
+			String value = geo.toString();
+			Cookie newCookie= new Cookie(cookieName, value);
+			driver.manage().addCookie(newCookie);
+			PageObjectLogging.log("setCookieFromSearch", "Set cookie: '"+cookieName+"' to '"+value+"'", true);
+		} catch (JSONException ex) {
+			PageObjectLogging.log("setCookieGeo", "Cannot set cookie ('"+cookieName+"')", true);
+		}
 	}
 
 	public void resizeWindow(Integer width, Integer height) {
@@ -77,5 +93,4 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 		Assertion.assertEquals(width, expected);
 		PageObjectLogging.log("verifyMonetizationModuleAdsenseWidth", "Verify the width of the adsense ad (width="+width+")", true);
 	}
-
 }
