@@ -68,7 +68,9 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VisualEditorEditing", "VisualEditorEditing_001"}
+		groups = {
+			"VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002", "VisualEditorEditing_003"
+		}
 	)
 	public void VisualEditorEditing_001_insertToNewArticle() {
 		base = new WikiBasePageObject(driver);
