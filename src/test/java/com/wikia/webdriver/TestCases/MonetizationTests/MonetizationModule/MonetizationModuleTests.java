@@ -159,7 +159,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_008", "Monetization"})
 	public void MonetizationModuleTest_008() {
 		String[] blockedGeos = {"US", "GB", "DE", "CA", "AU"};
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		for (int i = 0; i < 2; i++) {
@@ -168,7 +168,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 			} else {
 				monetizationModule.deleteCookieFromSearch();
 			}
-			for (String countryCode : blockedGeos ) {
+			for (String countryCode : blockedGeos) {
 				monetizationModule.setCookieGeo(countryCode);
 				// logged in user
 				base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -189,7 +189,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_009", "Monetization"})
 	public void MonetizationModuleTest_009() {
 		String countryCode = "TH";
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
@@ -204,7 +204,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleShown();
 	}
 
-
 	/**
 	 * The monetization module is not shown on article page for non-blocked geos (not via search engine)
 	 * @author Saipetch Kongkatong
@@ -212,7 +211,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_010", "Monetization"})
 	public void MonetizationModuleTest_010() {
 		String countryCode = "TH";
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
