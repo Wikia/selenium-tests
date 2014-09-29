@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog.ImageLicense;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Actions.DeletePageObject;
 
@@ -66,6 +67,8 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private WebElement addButton;
 	@FindBys(@FindBy(css="table.filehistory tr td:nth-child(1)>a"))
 	private List<WebElement> historyDeleteLinks;
+	@FindBy(css=".boilerplate b")
+	private WebElement imgLicensePlate;
 
 	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
 
@@ -206,4 +209,10 @@ public class FilePagePageObject extends WikiBasePageObject {
 		return new DeletePageObject(driver);
 	}
 
+	public void verifyImageLicense(ImageLicense imageLicense) {
+		Assertion.assertStringContains(
+			imageLicense.getText(),
+			imgLicensePlate.getText()
+		);
+	}
 }

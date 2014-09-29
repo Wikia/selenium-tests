@@ -14,9 +14,9 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
  */
 public class GalleryBox extends WikiBasePageObject {
 
-	@FindBy(css = ".gallerybox a.image img.play")
+	@FindBy(css = ".gallerybox a.image img:not([data-video-name=''])")
 	private List<WebElement> galleryVideoBox;
-	@FindBy(css = ".gallerybox a.image img:not(.play)")
+	@FindBy(css = ".gallerybox a.image img:not([data-image-name=''])")
 	private List<WebElement> galleryImageBox;
 
 	public GalleryBox(WebDriver driver) {
