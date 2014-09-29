@@ -180,7 +180,7 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(id="globalNavigation")
 	protected WebElement newGlobalNavigation;
-	
+
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
 
@@ -188,7 +188,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-	
+
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
 		return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));

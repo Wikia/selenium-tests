@@ -34,7 +34,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
 	private WebElement closeButton;
 	@FindBy(css = "#intMapError")
 	private WebElement mapErrorField;
-	
+
 	public CreateAMapComponentObject clickBack() {
 		waitForElementByElement(backButton);
 		backButton.click();
@@ -66,7 +66,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
 		PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
 	}
 	
-	public void verifyErrorAppear() {
+	public void verifyErrorExist() {
 		waitForElementVisibleByElement(mapErrorField);
 		Assertion.assertFalse(mapErrorField.getText().isEmpty());
 	}
