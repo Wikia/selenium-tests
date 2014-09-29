@@ -125,6 +125,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_004_insertLinks() {
 		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
 		veLinkDialog.typeInLinkInput(PageContent.internalLink);
@@ -144,6 +145,10 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
 		reviewDialog.verifyAddedDiffs(linkWikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 
 	@Test(
