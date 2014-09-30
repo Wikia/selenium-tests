@@ -38,6 +38,8 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	private WebElement frame;
 	@FindBy(css=".ve-ui-mwLinkTargetInputWidget-menu")
 	private WebElement resultsMenu;
+	@FindBy(css=".oo-ui-window.ve-ui-inspector")
+	private WebElement dialog;
 
 	private By linkResultMenuBy = By.cssSelector(".ve-ui-mwLinkTargetInputWidget-menu");
 	private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
@@ -62,6 +64,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	}
 
 	public void typeInLinkInput(String text) {
+		waitForElementVisibleByElement(dialog);
 		switchToIFrame();
 		waitForElementVisibleByElement(linkInput);
 		waitForElementClickableByElement(linkInput);
@@ -167,6 +170,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 		waitForElementClickableByElement(previousButton);
 		previousButton.click();
 		switchOutOfIFrame();
+		waitForElementNotVisibleByElement(dialog);
 		return new VisualEditorPageObject(driver);
 	}
 }
