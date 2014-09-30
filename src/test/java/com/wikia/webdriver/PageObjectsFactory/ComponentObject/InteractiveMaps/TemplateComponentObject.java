@@ -69,7 +69,7 @@ public class TemplateComponentObject extends BasePageObject {
 		Assertion.assertTrue(templateImagePreview.getAttribute("src").endsWith(selectedTemplateName));
 	}
 
-	public void verifyErrorExist() {
+	public void verifyErrorExists() {
 		waitForElementByElement(mapError);
 		Assertion.assertEquals(checkIfElementOnPage(mapError), true);
 	}

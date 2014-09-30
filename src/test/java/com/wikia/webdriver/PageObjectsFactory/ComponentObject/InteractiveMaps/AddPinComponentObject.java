@@ -149,7 +149,7 @@ public class AddPinComponentObject extends BasePageObject {
 		PageObjectLogging.log("verifyAssociatedArticleImageIsDisplayed", "Associated article image placeholder is visible", true, driver);
 	}
 
-	public void verifyErrorExist() {
+	public void verifyErrorExists() {
 		waitForElementByElement(errorField);
 		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
 		PageObjectLogging.log("verifyErrorIsPresented", "Error message is visible", true, driver);

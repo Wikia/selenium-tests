@@ -220,9 +220,9 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreatePinTypesComponentObject pinTypeModal = new CreatePinTypesComponentObject(driver);
 		pinTypeModal.verifyPinTypesDialog();
 		pinTypeModal.selectFileToUpload(PageContent.smallFile, "Small image");
-		pinTypeModal.verifyErrorExist();
+		pinTypeModal.verifyErrorExists();
 		pinTypeModal.selectFileToUpload(PageContent.brokenExtensionFile, "Image with wrong extension");
-		pinTypeModal.verifyErrorExist();
+		pinTypeModal.verifyErrorExists();
 	}
 
 	@Test(groups = { "InteractiveMaps_009", "InteractiveMapTests", "InteractiveMaps" })
@@ -297,7 +297,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreateAMapComponentObject createMapDialog = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMapDialog = createMapDialog.clickCustomMap();
 		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldNotBeFound);
-		customMapDialog.verifyErrorExist();
+		customMapDialog.verifyErrorExists();
 		customMapDialog.clearSearchTitle();
 		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldBeFound);
 		customMapDialog.verifyTemplateListElementVisible(0);
@@ -429,7 +429,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		specialMap.verifyAmountMapOnTheList();
-		specialMap.verifyCreateMapButtonExist();
+		specialMap.verifyCreateMapButtonExists();
 		specialMap.verifyCorrectPagination();
 	}
 
@@ -451,13 +451,13 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
 		addPinModal.clickSaveButton();
-		addPinModal.verifyErrorExist();
+		addPinModal.verifyErrorExists();
 		addPinModal.typePinName(InteractiveMapsContent.pinDescription);
 		addPinModal.clickSaveButton();
-		addPinModal.verifyErrorExist();
+		addPinModal.verifyErrorExists();
 		addPinModal.selectPinType();
 		addPinModal.clickSaveButton();
-		addPinModal.verifyErrorExist();
+		addPinModal.verifyErrorExists();
 	}
 
 	@Test(groups = { "InteractiveMaps_025", "InteractiveMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
@@ -480,7 +480,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreateACustomMapComponentObject customMap = createMap.clickCustomMap();
 		TemplateComponentObject templateMap = customMap.selectTemplate(InteractiveMapsContent.selectedTemplateIndex);
 		templateMap.clickNext();
-		templateMap.verifyErrorExist();
+		templateMap.verifyErrorExists();
 	}
 
 	@Test(groups = { "InteractiveMaps_027", "InteractiveMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
@@ -496,7 +496,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		selectedMap.verifyPopUpVisible();
 		AddPinComponentObject editPinModal = selectedMap.clickOnEditPin();
 		selectedMap = editPinModal.clickDeletePin();
-		selectedMap.verifyPinNotExist(pinName);
+		selectedMap.verifyPinNotExists(pinName);
 	}
 
 	@Test(groups = { "InteractiveMaps_028", "InteractiveMapTests", "InteractiveMaps" })
@@ -506,15 +506,15 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject createMapModal = specialMap.clickCreateAMap();
 		specialMap = createMapModal.clickCloseButton();
-		specialMap.verifyCreateMapModalNotExist();
+		specialMap.verifyCreateMapModalNotExists();
 		createMapModal = specialMap.clickCreateAMap();
 		CreateRealMapComponentObject realMapModal = createMapModal.clickRealMap();
 		specialMap = realMapModal.clickClose();
-		specialMap.verifyCreateMapModalNotExist();
+		specialMap.verifyCreateMapModalNotExists();
 		createMapModal = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMapModal = createMapModal.clickCustomMap();
 		customMapModal.clickCloseButton();
-		specialMap.verifyCreateMapModalNotExist();
+		specialMap.verifyCreateMapModalNotExists();
 	}
 
 	@Test(groups = { "InteractiveMaps_029", "InteractiveMapTests", "InteractiveMaps" })
@@ -623,7 +623,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		pinTypesDialog.deletePinTypes();
 		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
 		pinTypesDialog.clickSave();
-		embedMapDialog.verifyPinTypeExist(InteractiveMapsContent.pinTypeName);
+		embedMapDialog.verifyPinTypeExists(InteractiveMapsContent.pinTypeName);
 	}
 	
 	@Test(groups = {"InteractiveMaps_038", "InteractiveMapTests", "InteractiveMaps"})
@@ -635,7 +635,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreatePinTypesComponentObject editPinTypes = selectedMap.clickEditPinTypesButton();
 		editPinTypes.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 3);
 		editPinTypes.clickSave();
-		editPinTypes.verifyErrorExist();
+		editPinTypes.verifyErrorExists();
 	}
 	
 	@Test(groups = {"InteractiveMaps_039", "InteractiveMapTests", "InteractiveMaps"})
@@ -649,7 +649,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		addPinModal.typePinDescription(InteractiveMapsContent.pinDescription);
 		addPinModal.selectPinType();
 		addPinModal.clickSaveButton();
-		addPinModal.verifyErrorExist();
+		addPinModal.verifyErrorExists();
 	}
 	
 	@Test(groups = {"InteractiveMaps_040", "InteractiveMapTests", "InteractiveMaps"})
@@ -661,7 +661,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreateRealMapComponentObject realMap = createMap.clickRealMap();
 		realMap.typeMapName(InteractiveMapsContent.mapName);
 		realMap.clickNext();
-		realMap.verifyErrorExist();
+		realMap.verifyErrorExists();
 	}
 	
 	@Test(groups = {"InteractiveMaps_041", "InteractiveMapTests", "InteractiveMaps"})
@@ -676,7 +676,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		template.verifyTemplateImage(selectedImageName);
 		template.typeMapName(InteractiveMapsContent.mapName);
 		CreatePinTypesComponentObject pinDialog = template.clickNext();
-		template.verifyErrorExist();
+		template.verifyErrorExists();
 	}
 	
 	@Test(groups = {"InteractiveMaps_042", "InteractiveMaps", "InteractiveMaps"})
@@ -690,7 +690,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		pinTypesDialog.verifyPinTypesDialog();
 		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
 		pinTypesDialog.clickSave();
-		pinTypesDialog.verifyErrorExist();
+		pinTypesDialog.verifyErrorExists();
 	}
 	
 	@Test(groups = {"InteractiveMaps_043", "InteractiveMaps", "InteractiveMaps"})
@@ -705,7 +705,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		addPinModal.typePinDescription(InteractiveMapsContent.pinDescription);
 		addPinModal.selectPinType();
 		addPinModal.clickSaveButton();
-		addPinModal.verifyErrorExist();
+		addPinModal.verifyErrorExists();
 	}
 	
 	@Test(groups = {"InteractiveMaps_044", "InteractiveMapTests", "InteractiveMaps"})

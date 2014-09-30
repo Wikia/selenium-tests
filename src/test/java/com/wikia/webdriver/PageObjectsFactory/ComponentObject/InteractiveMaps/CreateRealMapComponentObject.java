@@ -66,7 +66,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
 		PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
 	}
 	
-	public void verifyErrorExist() {
+	public void verifyErrorExists() {
 		waitForElementVisibleByElement(mapErrorField);
 		Assertion.assertFalse(mapErrorField.getText().isEmpty());
 	}

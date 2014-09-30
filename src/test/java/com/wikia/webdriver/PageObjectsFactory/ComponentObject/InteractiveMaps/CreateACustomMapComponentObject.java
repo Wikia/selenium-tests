@@ -91,7 +91,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 		PageObjectLogging.log("typeTilesetName", "title (" + templateName + ") for template is typed in", true);
 	}
 
-	public void verifyErrorExist() {
+	public void verifyErrorExists() {
 		waitForElementVisibleByElement(errorField);
 		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
 	}

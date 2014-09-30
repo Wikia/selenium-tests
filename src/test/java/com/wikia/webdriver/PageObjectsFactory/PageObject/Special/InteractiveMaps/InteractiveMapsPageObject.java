@@ -85,7 +85,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 		return new InteractiveMapPageObject(driver);
 	}
 
-	public void verifyCreateMapButtonExist() {
+	public void verifyCreateMapButtonExists() {
 		waitForElementByElement(createAMapButton);
 		Assert.assertEquals(checkIfElementOnPage(createAMapButton), true);
 	}
@@ -104,7 +104,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 		PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true);
 	}
 
-	public void verifyCreateMapModalNotExist() {
+	public void verifyCreateMapModalNotExists() {
 		Assertion.assertEquals(checkIfElementOnPage(createMapModal), false, "Create map modal was not closed");
 	}
 
