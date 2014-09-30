@@ -1,5 +1,9 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
+import java.util.List;
+
+import junit.framework.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,9 +13,7 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreateAMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import java.util.List;
 
-import junit.framework.Assert;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
@@ -20,11 +22,6 @@ import junit.framework.Assert;
  */
 
 public class InteractiveMapsPageObject extends ArticlePageObject {
-
-	public InteractiveMapsPageObject(WebDriver driver) {
-		super(driver);
-		// TODO Auto-generated constructor stub
-	}
 
 	@FindBy(css = "#createMap")
 	private WebElement createAMapButton;
@@ -42,6 +39,14 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	private WebElement createMapModal;
 	@FindBy(css = ".wikia-maps-create-map")
 	protected WebElement createMapUnderContribute;
+	@FindBy(css = ".no-maps")
+	private WebElement emptyStateSection;
+
+	public InteractiveMapsPageObject(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
@@ -101,5 +106,10 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
 	public void verifyCreateMapModalNotExist() {
 		Assertion.assertEquals(checkIfElementOnPage(createMapModal), false, "Create map modal was not closed");
+	}
+
+	public void verifyEmptyState() {
+		Assertion.assertTrue(checkIfElementOnPage(emptyStateSection), "Expecting a empty state");
+		PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true, driver);
 	}
 }

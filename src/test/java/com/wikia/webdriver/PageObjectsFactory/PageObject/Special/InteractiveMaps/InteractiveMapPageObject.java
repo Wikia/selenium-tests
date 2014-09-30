@@ -1,20 +1,22 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps;
 
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
-
 import java.util.List;
 
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.AddPinComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.CreatePinTypesComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.DeleteAMapComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMapDialog;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 /**
  * @author lukaszjedrzejczak
@@ -98,6 +100,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private List<WebElement> mapImagesCollection;
 	@FindBy(css = ".filter-menu-header > span")
 	private WebElement filterBoxTitle;
+	@FindBy(css = ".wikia-interactive-maps-page-header .drop")
+	private WebElement actionDropDown;
+	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #deleteMap")
+	private WebElement deleteMapButton;
 
 	public enum embedMapDialogButtons {
 		small, medium, large;
@@ -358,7 +364,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Assertion.assertNotEquals(pinDesc, pinDescription.getText());
 	}
 
-	public void verifyControButtonsAreVisible() {
+	public void verifyControlButtonsAreVisible() {
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementVisibleByElement(embedMapCodeButton);
@@ -389,7 +395,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void verifyMapWasNotLoaded() {
 		Assertion.assertEquals(checkIfElementOnPage(map), false);
 	}
-	
+
 	public void verifyPinTypeExist(String pinTypeName){
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
@@ -400,7 +406,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 					.contains(pinTypeName)
 			){
 				Assertion.assertEquals(
-						pinTypeName, 
+						pinTypeName,
 						createdPinNames.get(createdPinNames.size()-1).getText());
 			} else {
 				PageObjectLogging.log(
@@ -408,16 +414,27 @@ public class InteractiveMapPageObject extends BasePageObject {
 						"Pin type with name " + pinTypeName + " does not exist",
 						true
 					);
-					
+
 				}
 				break;
-			}	
+			}
 		driver.switchTo().defaultContent();
 	}
-	
+
 	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
 		getUrl(wikiURL+URLsContent.embedMapEditPage);
-		System.out.println(wikiURL+URLsContent.embedMapEditPage);
 		return new WikiArticleEditMode(driver);
+	}
+
+	public VisualEditorAddMapDialog switchBackToVETab() {
+		switchToBrowserTab(0);
+		return new VisualEditorAddMapDialog(driver);
+	}
+
+	public DeleteAMapComponentObject deleteMap() {
+		waitForElementByElement(actionDropDown);
+		actionDropDown.click();
+		deleteMapButton.click();
+		return new DeleteAMapComponentObject(driver);
 	}
 }
