@@ -334,7 +334,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Assertion.assertEquals(0, enabledPinTypesCollection.size(), "Pin types were unchecked");
 	}
 
-	public void verifyPinNotExist(String pinTitle) {
+	public void verifyPinNotExists(String pinTitle) {
 		int pinSize = pinCollection.size() - 1;
 		while (pinSize >= 0) {
 			if (pinCollection.get(pinSize).getText().contains(pinTitle)) {
@@ -396,7 +396,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Assertion.assertEquals(checkIfElementOnPage(map), false);
 	}
 
-	public void verifyPinTypeExist(String pinTypeName){
+	public void verifyPinTypeExists(String pinTypeName){
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		while(createdPinNames.size()-1!=0){

@@ -189,7 +189,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
 
-
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
 		return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
