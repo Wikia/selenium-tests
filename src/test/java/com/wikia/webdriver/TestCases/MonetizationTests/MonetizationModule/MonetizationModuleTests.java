@@ -5,8 +5,12 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MonetizationModule.MonetizationModuleComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+/**
+ * @ownership Monetization
+ */
 public class MonetizationModuleTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
@@ -69,41 +73,35 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
+	@DataProvider(name="DataMonetizationModule_005")
+	public static Object[][] DataMonetizationModule_005() {
+		return new Object[][] {
+			{400, 600, 320},
+			{500, 600, 468},
+			{800, 600, 690},
+			{1031, 600, 700},
+			{1410, 600, 728},
+		};
+	}
+
 	/**
 	 * Check the width of the adsense ad in the monetization module
 	 * @author Saipetch Kongkatong
 	 */
-	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"})
-	public void MonetizationModuleTest_005() {
+	@Test(
+		dataProvider = "DataMonetizationModule_005",
+		groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"}
+	)
+	public void MonetizationModuleTest_005(int width, int height, int expected) {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
 
-		monetizationModule.resizeWindow(400, 600);
+		monetizationModule.resizeWindow(width, height);
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleAdsenseShown();
-		monetizationModule.verifyMonetizationModuleAdsenseWidth(320);
-
-		monetizationModule.resizeWindow(500, 600);
-		base.openRandomArticle(wikiURL);
-		monetizationModule.verifyMonetizationModuleAdsenseShown();
-		monetizationModule.verifyMonetizationModuleAdsenseWidth(468);
-
-		monetizationModule.resizeWindow(800, 600);
-		base.openRandomArticle(wikiURL);
-		monetizationModule.verifyMonetizationModuleAdsenseShown();
-		monetizationModule.verifyMonetizationModuleAdsenseWidth(690);
-
-		monetizationModule.resizeWindow(1031, 600);
-		base.openRandomArticle(wikiURL);
-		monetizationModule.verifyMonetizationModuleAdsenseShown();
-		monetizationModule.verifyMonetizationModuleAdsenseWidth(700);
-
-		monetizationModule.resizeWindow(1410, 600);
-		base.openRandomArticle(wikiURL);
-		monetizationModule.verifyMonetizationModuleAdsenseShown();
-		monetizationModule.verifyMonetizationModuleAdsenseWidth(728);
+		monetizationModule.verifyMonetizationModuleAdsenseWidth(expected);
 	}
 
 	/**
@@ -152,34 +150,43 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
 	}
 
+	@DataProvider(name="DataMonetizationModuleTest_008")
+	public static Object[][] DataMonetizationModuleTest_008() {
+		return new Object[][] {
+			{"US", true}, {"US", false},
+			{"GB", true}, {"GB", false},
+			{"DE", true}, {"DE", false},
+			{"CA", true}, {"CA", false},
+			{"AU", true}, {"AU", false},
+		};
+	}
+
 	/**
 	 * The monetization module is not shown on article page for blocked geos
 	 * @author Saipetch Kongkatong
 	 */
-	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_008", "Monetization"})
-	public void MonetizationModuleTest_008() {
-		String[] blockedGeos = {"US", "GB", "DE", "CA", "AU"};
+	@Test(
+		dataProvider = "DataMonetizationModuleTest_008",
+		groups = {"MonetizationModule", "MonetizationModuleTest_008", "Monetization"}
+	)
+	public void MonetizationModuleTest_008(String countryCode, Boolean isFromsearch) {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
-		for (int i = 0; i < 2; i++) {
-			if (i == 0) {
-				monetizationModule.setCookieFromSearch();
-			} else {
-				monetizationModule.deleteCookieFromSearch();
-			}
-			for (String countryCode : blockedGeos) {
-				monetizationModule.setCookieGeo(countryCode);
-				// logged in user
-				base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-				base.openRandomArticle(wikiURL);
-				monetizationModule.verifyMonetizationModuleNotShown();
-				// anon user
-				base.logOut(wikiURL);
-				base.openRandomArticle(wikiURL);
-				monetizationModule.verifyMonetizationModuleNotShown();
-			}
+		if (isFromsearch) {
+			monetizationModule.setCookieFromSearch();
+		} else {
+			monetizationModule.deleteCookieFromSearch();
 		}
+		monetizationModule.setCookieGeo(countryCode);
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+		// anon user
+		base.logOut(wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
 	/**
