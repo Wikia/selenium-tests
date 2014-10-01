@@ -47,7 +47,6 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public CreateAMapComponentObject clickCreateAMap() {
 		waitForElementByElement(createAMapButton);
 		scrollAndClick(createAMapButton);
