@@ -1,5 +1,5 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.File;
 import java.net.HttpURLConnection;
@@ -105,6 +105,25 @@ public class BasePageObject{
 		boolean isElementOnPage = true;
 		try {
 			if (driver.findElements(By.cssSelector(cssSelector)).size() < 1) {
+				isElementOnPage = false;
+			}
+		} catch (Exception ex) {
+			isElementOnPage = false;
+		} finally {
+			restoreDeaultImplicitWait();
+		}
+		return isElementOnPage;
+	}
+
+	/*
+	 * Simple method for checking if element is on page or not.
+	 * Changing the implicitWait value allows us no need for waiting 30 seconds
+	 */
+	protected boolean checkIfElementOnPage(By cssSelectorBy) {
+		changeImplicitWait(500, TimeUnit.MILLISECONDS);
+		boolean isElementOnPage = true;
+		try {
+			if (driver.findElements(cssSelectorBy).size() < 1) {
 				isElementOnPage = false;
 			}
 		} catch (Exception ex) {
@@ -867,5 +886,21 @@ public class BasePageObject{
 	public void switchToNewBrowserTab() {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(tabs.size()-1));
+	}
+
+	public WebElement getElementByChildText(List<WebElement> elements, By childBySelector, String value) {
+		WebElement foundElement = null;
+		for(WebElement element : elements) {
+			if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
+				foundElement = element;
+				PageObjectLogging.log("getElementByChildText", "Element's child with text: " + value + " is found from the list", true);
+				break;
+			}
+		}
+		if (foundElement == null) {
+			throw new NoSuchElementException(
+				"Element's child with text: " + value + " is not found from the list");
+		}
+		return foundElement;
 	}
 }

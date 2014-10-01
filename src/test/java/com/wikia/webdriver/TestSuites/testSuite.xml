@@ -143,6 +143,7 @@
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoPageAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditingPreferencesTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VERecaptchaTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VETemplateTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VisualEditorEditingTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VECopyAndPasteTests"/>
 		</classes>

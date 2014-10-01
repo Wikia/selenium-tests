@@ -19,7 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialog
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorHyperLinkDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorKeyboardShortcutsDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorNewTemplateDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorInsertTemplateDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorOptionsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceListDialog;
@@ -205,7 +205,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			case TEMPLATE:
 				clickInsertItemFromDropDown(templateBy);
 				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
-				return new VisualEditorNewTemplateDialog(driver);
+				return new VisualEditorInsertTemplateDialog(driver);
 			case PAGE_SETTINGS:
 				clickHamburgerItemFromDropDown(pageSettingsBy);
 				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
