@@ -37,7 +37,9 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo"}
+		groups = {
+			"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo", "VEAddExternalVideoTests_004"
+		}
 	)
 	public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();

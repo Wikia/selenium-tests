@@ -116,8 +116,9 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 	}
 
-	public void verifyErrorsExist() {
-		waitForElementByElement(pinTypesError);
+	public void verifyErrorExists() {
+		waitForElementVisibleByElement(pinTypesError);
+		scrollToElement(pinTypesError);
 		Assertion.assertEquals(pinTypesError.getText().isEmpty(), false);		
 	}
 

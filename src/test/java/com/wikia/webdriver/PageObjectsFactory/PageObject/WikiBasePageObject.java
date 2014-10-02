@@ -83,8 +83,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
@@ -96,7 +96,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHome
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Cookie;
@@ -183,7 +182,7 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement veToolMenu;
 	@FindBy(css="h3[id='headerWikis']")
 	protected WebElement headerWhereIsMyExtensionPage;
-	@FindBy(id="globalNavigation")
+	@FindBy(css="#globalNavigation")
 	protected WebElement newGlobalNavigation;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
@@ -193,7 +192,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-
 
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
