@@ -61,6 +61,6 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	public void verifyMonetizationModuleAdsenseWidth(int expected) {
 		int width = adsenseIns.getSize().width;
 		Assertion.assertEquals(width, expected);
-		PageObjectLogging.log("verifyMonetizationModuleAdsenseWidth", "Verify the width of the adsense ad (width="+width+")", true);
+		PageObjectLogging.log("verifyMonetizationModuleAdsenseWidth", "Verify the width of the adsense ad (width=" + width + ")", true);
 	}
 }

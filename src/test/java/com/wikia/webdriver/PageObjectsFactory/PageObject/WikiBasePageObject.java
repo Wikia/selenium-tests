@@ -1202,8 +1202,7 @@ public class WikiBasePageObject extends BasePageObject {
 		try {
 			JSONObject geo = new JSONObject();
 			geo.put("country", countryCode);
-			String value = geo.toString();
-			setCookie(cookieName, value);
+			setCookie(cookieName, geo.toString());
 		} catch (JSONException ex) {
 			PageObjectLogging.log("setCookieGeo", "Cannot set cookie ('" + cookieName + "')", true);
 		}
