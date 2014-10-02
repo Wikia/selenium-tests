@@ -155,7 +155,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		return new Object[][] {
 			{"US", true}, {"US", false},
 			{"GB", true}, {"GB", false},
-			{"DE", true}, {"DE", false},
 			{"CA", true}, {"CA", false},
 			{"AU", true}, {"AU", false},
 		};
