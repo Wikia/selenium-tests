@@ -22,6 +22,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-1413 Verify search suggestion on templates
  * VE-1413 Verify suggested templates appear by default
  * VE-1412 Verify adding template with params and template with no param
+ * VE-1412 Verify adding template to a middle of paragraph or to a block node would insert template as block node
  */
 
 public class VETemplateTests extends NewTestTemplateBeforeClass {
@@ -88,6 +89,35 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		editTemplateDialog = templateDialog.selectResultTemplate("per", 1);
 		ve = editTemplateDialog.closeDialog();
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate"}
+	)
+	public void VETemplateTests_004_CheckBlockedTransclusion() {
+		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		String selectText = PageContent.articleText.substring(12, 13);
+		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
+		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
+		ve.typeTextArea(PageContent.articleText);
+		ve.selectText(selectText);
+		VisualEditorInsertTemplateDialog templateDialog =
+			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
+		VisualEditorEditTemplateDialog editTemplateDialog = templateDialog.selectResultTemplate("book", 0);
+		ve = editTemplateDialog.clickDone();
+		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
+		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
+		templateDialog =
+			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
+		editTemplateDialog = templateDialog.selectResultTemplate("book", 0);
+		ve = editTemplateDialog.clickDone();
+		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
+		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();

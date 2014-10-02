@@ -78,6 +78,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget");
 	private By mediaEditBy = By.cssSelector(".oo-ui-icon-edit");
+	private By blockTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionBlockNode");
+	private By inlineTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionInlineNode");
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -343,5 +345,21 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public Dimension getVideoDimension() {
 		return mediaNode.getSize();
+	}
+
+	public int getNumberOfBlockTransclusion() {
+		return getNumOfElementOnPage(blockTransclusionBy);
+	}
+
+	public int getNumberOfInlineTransclusion() {
+		return getNumOfElementOnPage(inlineTransclusionBy);
+	}
+
+	public void verifyNumberOfBlockTransclusion(int expected) {
+		Assertion.assertNumber(expected, getNumOfElementOnPage(blockTransclusionBy), "The number of blocked transclusion node is not equal");
+	}
+
+	public void verifyNumberOfInlineTransclusion(int expected) {
+		Assertion.assertNumber(expected, getNumOfElementOnPage(inlineTransclusionBy), "The number of inline transclusion node is not equal");
 	}
 }
