@@ -69,9 +69,10 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 		switchToIFrame();
 		waitForElementVisibleByElement(resultWidget);
 		WebElement selected = resultTemplates.get(index).findElement(labelBy);
+		String templateName = selected.getText();
 		selected.click();
 		switchOutOfIFrame();
-		PageObjectLogging.log("selectSuggestedTemplate", "Template selected: " + selected.getText(), true);
+		PageObjectLogging.log("selectSuggestedTemplate", "Template selected: " + templateName, true);
 		return new VisualEditorEditTemplateDialog(driver);
 	}
 
