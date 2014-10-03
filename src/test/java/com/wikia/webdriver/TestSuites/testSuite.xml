@@ -51,6 +51,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsOnHubs"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestAmazonAds"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestDfpParamsPresent"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestIVW2AnalyticsProvider"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
