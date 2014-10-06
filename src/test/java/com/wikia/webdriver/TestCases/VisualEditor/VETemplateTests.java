@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.VEContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
@@ -47,19 +48,19 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		//1 character search 'a', not matching article name, no result
-		templateDialog.typeInSearchInput("a");
+		templateDialog.typeInSearchInput(VEContent.templateSearchStr1);
 		templateDialog.verifyNoResultTemplate();
 		//2 characters search 'ab', not matching article name, no result
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput("ab");
+		templateDialog.typeInSearchInput(VEContent.templateSearchStr2);
 		templateDialog.verifyNoResultTemplate();
 		//3 characters search 'per', not matching article name, 2 results on template name
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput("per");
+		templateDialog.typeInSearchInput(VEContent.templateSearchStr3);
 		templateDialog.verifyIsResultTemplate();
 		//2 characters search 'ar', matching article name, 3 results on the article
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput("ar");
+		templateDialog.typeInSearchInput(VEContent.templateSearchStr4);
 		templateDialog.verifyIsResultTemplate();
 	}
 
