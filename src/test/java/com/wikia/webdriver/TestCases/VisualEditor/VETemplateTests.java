@@ -85,11 +85,12 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		VisualEditorEditTemplateDialog editTemplateDialog = templateDialog.selectResultTemplate("per", 0);
+		VisualEditorEditTemplateDialog editTemplateDialog =
+			templateDialog.selectResultTemplate(VEContent.templateSearchStr3, 0);
 		ve = editTemplateDialog.clickDone();
 		templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		editTemplateDialog = templateDialog.selectResultTemplate("per", 1);
+		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearchStr3, 1);
 		ve = editTemplateDialog.closeDialog();
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		ArticlePageObject article = saveDialog.savePage();
@@ -110,13 +111,14 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		ve.selectText(selectText);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		VisualEditorEditTemplateDialog editTemplateDialog = templateDialog.selectResultTemplate("book", 0);
+		VisualEditorEditTemplateDialog editTemplateDialog =
+			templateDialog.selectResultTemplate(VEContent.templateSearchStr5, 0);
 		ve = editTemplateDialog.clickDone();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
 		templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		editTemplateDialog = templateDialog.selectResultTemplate("book", 0);
+		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearchStr5, 0);
 		ve = editTemplateDialog.clickDone();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
