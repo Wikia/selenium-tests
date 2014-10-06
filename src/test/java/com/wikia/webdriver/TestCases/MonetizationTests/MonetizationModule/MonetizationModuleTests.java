@@ -23,6 +23,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_001() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
 		base.openRandomArticle(wikiURL);
@@ -37,6 +38,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_002() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
 		base.openRandomArticle(wikiURL);
@@ -95,6 +97,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_005(int width, int height, int expected) {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
 
@@ -112,6 +115,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_006() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
 		// anon user
@@ -135,6 +139,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_007() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
 		// anon user
@@ -171,6 +176,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_008(String countryCode, Boolean isFromsearch) {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		if (isFromsearch) {
 			monetizationModule.setCookieFromSearch();
@@ -197,6 +203,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		String countryCode = "TH";
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
 		monetizationModule.setCookieGeo(countryCode);
@@ -219,6 +226,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		String countryCode = "TH";
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
 		monetizationModule.setCookieGeo(countryCode);
