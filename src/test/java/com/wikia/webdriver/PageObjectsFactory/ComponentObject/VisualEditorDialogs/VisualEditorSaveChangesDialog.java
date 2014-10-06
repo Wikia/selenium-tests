@@ -39,6 +39,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
+	@Override
 	public void switchToIFrame() {
 		try {
 			Thread.sleep(1000);
