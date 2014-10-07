@@ -63,7 +63,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEAddMap", "VEAddMapTests_002", "VEEmptyMap"}
+		groups = {"VEAddMap", "VEAddMapTests_002", "VEEmptyMap", "VEAddMapTests_003"}
 	)
 	public void VEAddMapTests_002_CheckEmptyMapWiki() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
