@@ -2,6 +2,8 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -75,11 +77,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement focusedNode;
 	@FindBy(css=".ve-ce-focusableNode-highlights")
 	private WebElement nodeHighlight;
+	@FindBy(css=".mw-body-content")
+	private WebElement mainContent;
 
 	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget");
 	private By mediaEditBy = By.cssSelector(".oo-ui-icon-edit");
 	private By blockTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionBlockNode");
 	private By inlineTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionInlineNode");
+
+	private String blockTransclusionString = ".ve-ce-mwTransclusionBlockNode";
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -361,5 +367,37 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void verifyNumberOfInlineTransclusion(int expected) {
 		Assertion.assertNumber(expected, getNumOfElementOnPage(inlineTransclusionBy), "The number of inline transclusion node is not equal");
+	}
+
+	public void deleteBlockTransclusion(int index) {
+		clickBlockTransclusion(index);
+		Actions actions2 = new Actions(driver);
+		actions2.sendKeys(Keys.DELETE).build().perform();
+	}
+
+	public void clickBlockTransclusion(int index) {
+		Point tempLocation = getBlockTransclusionLocation(index);
+		int tempLeft = tempLocation.x;
+		int tempTop = tempLocation.y;
+		Actions actions = new Actions(driver);
+		actions.moveToElement(mainContent, tempLeft, tempTop).click().build().perform();
+		PageObjectLogging.log("clickBlockTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true, driver);
+	}
+
+	private Point getBlockTransclusionLocation(int index) {
+		String boundingScript = "return jQuery.data( $('" + blockTransclusionString + "')["+ index +"] ).view.getBoundingRect();";
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		Object templateBounding = js.executeScript(boundingScript);
+		JSONObject json;
+		int tempLeft = 0, tempTop = 0;
+		try {
+			json = new JSONObject(templateBounding.toString());
+			tempLeft = (int) json.get("left");
+			tempTop = (int) json.get("top");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Point(tempLeft, tempTop);
 	}
 }
