@@ -32,6 +32,8 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 		".oo-ui-flaggableElement-secondary:not(.ve-ui-mwTransclusionDialog-modeButton)" +
 		":not(.ve-ui-wikiaTransclusionDialog-cancelButton) a")
 	private WebElement updatePreviewButon;
+	@FindBy(css = ".ve-ui-mwTemplateDialog-ready")
+	private WebElement templateDialog;
 
 	private By paramLabelBy = By.cssSelector(".ve-ui-mwParameterPage-label");
 	private By paramInputBy = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
@@ -41,6 +43,12 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	public VisualEditorEditTemplateDialog(WebDriver driver) {
 		super(driver);
+	}
+
+	@Override
+	public void switchToIFrame() {
+		waitForElementVisibleByElement(templateDialog);
+		super.switchToIFrame();
 	}
 
 	public ArticlePageObject clickGetInfoLink() {

@@ -152,6 +152,23 @@ public class BasePageObject{
 		return isElementOnPage;
 	}
 
+	/*
+	 * Simple method for getting number of element on page.
+	 * Changing the implicitWait value allows us no need for waiting 30 seconds
+	 */
+	protected int getNumOfElementOnPage(By cssSelectorBy) {
+		changeImplicitWait(500, TimeUnit.MILLISECONDS);
+		int numElementOnPage = 0;
+		try {
+			numElementOnPage = driver.findElements(cssSelectorBy).size();
+		} catch (Exception ex) {
+			numElementOnPage = 0;
+		} finally {
+			restoreDeaultImplicitWait();
+		}
+		return numElementOnPage;
+	}
+
 	protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
 		changeImplicitWait(500, TimeUnit.MILLISECONDS);
 		boolean isElementInElement = true;
