@@ -25,6 +25,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertLi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
@@ -81,8 +82,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	@FindBy(css=".mw-body-content")
 	private WebElement mainContent;
 
-	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget");
-	private By mediaEditBy = By.cssSelector(".oo-ui-icon-edit");
+	private By contextMenuBy = By.cssSelector(".ve-ui-contextWidget");
+	private By contextEditBy = By.cssSelector(".oo-ui-icon-edit");
 	private By blockTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionBlockNode");
 	private By inlineTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionInlineNode");
 
@@ -218,13 +219,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	private void clickContextMenu() {
 		waitForElementVisibleByElement(contextMenu);
-		WebElement mediaEdit;
+		WebElement contextEdit;
 		try {
-			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
-			mediaEdit.click();
+			contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
+			contextEdit.click();
 		} catch (StaleElementReferenceException e) {
-			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
-			mediaEdit.click();
+			contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
+			contextEdit.click();
 		}
 	}
 
@@ -403,5 +404,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			e.printStackTrace();
 		}
 		return new Point(tempLeft, tempTop);
+	}
+
+	public VisualEditorEditTemplateDialog openEditTemplateDialog() {
+		waitForElementByElement(editArea);
+		waitForElementByElement(focusedNode);
+		clickContextMenu();
+		return new VisualEditorEditTemplateDialog(driver);
 	}
 }
