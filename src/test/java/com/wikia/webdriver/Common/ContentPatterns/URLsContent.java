@@ -50,7 +50,7 @@ public class URLsContent {
 	public static final String userProfile = "wiki/User:%userName%";
 	public static final String specialCreateNewWiki = "Special:CreateNewWiki";
 	public static final String specialWikiFactory = "wiki/Special:WikiFactory";
-	public static final String specialWhereIsExtension = "wiki/Special:WhereIsExtension";
+	public static final String specialWhereIsExtension = "Special:WhereIsExtension";
 	public static final String specialContributions = "wiki/Special:Contributions";
 	public static final String specialBlockList = "wiki/Special:BlockList";
 	public static final String specialUnblock = "wiki/Special:Unblock";
@@ -164,6 +164,7 @@ public class URLsContent {
 
 	//Other wikis to test on
 	public static final String videoTestWiki = "sktest123";
+	public static final String communityWiki = "community";
 	public static final String monetizationGeoTestWiki = "th.sktest123";
 
 	//External URL
