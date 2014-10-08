@@ -225,6 +225,35 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] dfpParams() {
+		return new Object[][] {
+			{
+				"adtest",
+				"SyntheticTests/DfpParams",
+				"wka.ent/_adtest//article",
+				"TOP_LEADERBOARD",
+				Arrays.asList(
+					"\"s0\":\"ent\"",
+					"\"s1\":\"_adtest\"",
+					"\"s2\":\"article\"",
+					"\"dmn\":\"wikiacom\"",
+					"\"hostpre\":\"adtest\"",
+					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"lang\":\"en\"",
+					"\"pageid\":\"_adtest/2218\"",
+					"\"hasp\":\"no\"",
+					"\"esrb\":\"teen\""
+				),
+				Arrays.asList(
+					"\"loc\":\"top\"",
+					"\"pos\":\"TOP_LEADERBOARD\"",
+					"\"src\":\"gpt\""
+				)
+			}
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] topWamWikis() {
 		return new Object[][] {
 			{"pl.assassinscreed", "Ercole_Massimo", true},

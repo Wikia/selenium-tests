@@ -536,6 +536,37 @@ public class AdsBaseObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyGptIframe", msg, true, driver);
 	}
 
+	/**
+	 * Test whether the correct GPT ad parameters are passed
+	 *
+	 * @param slotName Slotname
+	 * @param pageParams List of gpt page-level params to test
+	 * @param slotParams List of gpt slot-level params to test
+	 */
+	public void verifyGptParams(String slotName, List<String> pageParams,  List<String> slotParams) {
+
+		String gptIframeWrapId = slotName + "_gpt";
+		WebElement gptIframeWrap = driver.findElement(By.id(gptIframeWrapId));
+
+		String dataGptPageParams = gptIframeWrap.getAttribute("data-gpt-page-params");
+		String dataGptSlotParams = gptIframeWrap.getAttribute("data-gpt-slot-params");
+
+		for (String param : pageParams) {
+			Assertion.assertStringContains(param, dataGptPageParams);
+		}
+
+		for (String param : slotParams) {
+			Assertion.assertStringContains(param, dataGptSlotParams);
+		}
+
+		PageObjectLogging.log(
+			"verifyGptParams",
+			"All page-level and slot-level params present as expected " + dataGptPageParams + ", " + dataGptSlotParams,
+			true,
+			driver
+		);
+	}
+
 	public void verifyTop1kParamState(Boolean isTop1k){
 		waitForElementByElement(presentLeaderboard);
 		String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
