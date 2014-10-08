@@ -165,6 +165,7 @@ public class URLsContent {
 	//Other wikis to test on
 	public static final String videoTestWiki = "sktest123";
 	public static final String communityWiki = "community";
+	public static final String monetizationGeoTestWiki = "th.sktest123";
 
 	//External URL
 	public static final String externalURL = "http://www.wikia.com";

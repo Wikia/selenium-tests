@@ -145,6 +145,7 @@
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VERecaptchaTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VisualEditorEditingTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VECopyAndPasteTests"/>
+			<class name="com.wikia.webdriver.TestCases.MonetizationTests.MonetizationModule.MonetizationModuleTests"/>
 		</classes>
 	</test>
 </suite>

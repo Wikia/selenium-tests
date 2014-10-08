@@ -182,8 +182,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("historyButton", "click on history button", true);
 		}
 
-		public void clickDeleteButton() {
-			scrollAndClick(deleteButton);
+		public void clickDeleteButton() {	
+			deleteButton.click();
 			verifyUrl("action=delete");
 			PageObjectLogging.log("deleteButton", "click on delete button", true);
 		}
@@ -218,7 +218,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		private void clickUndeleteButton() {
-			scrollAndClick(undeleteButton);
+			undeleteButton.click();
 			try {
 				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.mediaWikiCss, "UTF-8"));
 			} catch (UnsupportedEncodingException e) {
