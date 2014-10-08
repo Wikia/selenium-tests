@@ -10,6 +10,9 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @author Sergey Naumov
  *
+ * These are synthetic tests, the related order in DFP is:
+ * https://www.google.com/dfp/5441#delivery/OrderDetail/orderId=245575332
+ *
  * @ownership AdEngineering
  */
 public class TestAdTypeMobile extends MobileTestTemplate {
