@@ -17,11 +17,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * 
  */
 
-public class FilterBoxTickBehaviorTests extends NewTestTemplate {
+public class FilterBoxMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_014", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_014", "FilterBoxMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_014_VerifyUncheckedSingleCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -32,7 +32,7 @@ public class FilterBoxTickBehaviorTests extends NewTestTemplate {
 		selectedMap.verifyAllPinTypesIsUncheck();
 	}
 
-	@Test(groups = { "InteractiveMaps_015", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_015", "FilterBoxMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_015_VerifyClickOnUncheckedCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -45,7 +45,7 @@ public class FilterBoxTickBehaviorTests extends NewTestTemplate {
 		selectedMap.verifyAllPinTypesIsCheck();
 	}
 
-	@Test(groups = { "InteractiveMaps_016", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_016", "FilterBoxMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_016_VerifyClickAllCategoriesUncheckCategories() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -57,7 +57,7 @@ public class FilterBoxTickBehaviorTests extends NewTestTemplate {
 		selectedMap.verifyPinTypesAreUncheck();
 	}
 
-	@Test(groups = { "InteractiveMaps_017", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_017", "FilterBoxMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_017_VerifyClickAllCategoriesCheckAllPinTypes() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

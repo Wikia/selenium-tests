@@ -20,11 +20,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  *             will display a new line and fields for adding new information v
  */
 
-public class PinTypeTests extends NewTestTemplate {
+public class PinTypeMaTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_008", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_008", "PinTypeMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_008_VerifyImageValidationInPinTypeModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -40,7 +40,7 @@ public class PinTypeTests extends NewTestTemplate {
 		pinTypeModal.verifyErrorExists();
 	}
 
-	@Test(groups = { "InteractiveMaps_010", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_010", "PinTypeMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_010_VerifyClickingAddAnotherPinType() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

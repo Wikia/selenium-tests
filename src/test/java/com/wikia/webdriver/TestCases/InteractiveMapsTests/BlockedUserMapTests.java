@@ -25,11 +25,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  *                              
  */
 
-public class BlockedUserTests extends NewTestTemplate {
+public class BlockedUserMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	
-	@Test(groups = {"InteractiveMaps_038", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_038", "BlockedUserMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_038_VerifyBlockedUsersCannotEditPinTypes() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
@@ -41,7 +41,7 @@ public class BlockedUserTests extends NewTestTemplate {
 		editPinTypes.verifyErrorExists();
 	}
 	
-	@Test(groups = {"InteractiveMaps_039", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_039", "BlockedUserMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_039_VerifyBlockedUsersCannotAddPin() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
@@ -55,7 +55,7 @@ public class BlockedUserTests extends NewTestTemplate {
 		addPinModal.verifyErrorExists();
 	}
 	
-	@Test(groups = {"InteractiveMaps_040", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_040", "BlockedUserMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_040_VerifyBlockedUsersCannotCreateRealMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
@@ -67,7 +67,7 @@ public class BlockedUserTests extends NewTestTemplate {
 		realMap.verifyErrorExists();
 	}
 	
-	@Test(groups = {"InteractiveMaps_041", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_041", "BlockedUserMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_041_VerifyBlockedUsersCannotCreateCustomMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
@@ -82,7 +82,7 @@ public class BlockedUserTests extends NewTestTemplate {
 		template.verifyErrorExists();
 	}
 	
-	@Test(groups = {"InteractiveMaps_042", "InteractiveMaps", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_042", "BlockedUserMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_042_VerifyBlockedUserCannotEditPinTypesOnEmbeddedMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);
@@ -96,7 +96,7 @@ public class BlockedUserTests extends NewTestTemplate {
 		pinTypesDialog.verifyErrorExists();
 	}
 	
-	@Test(groups = {"InteractiveMaps_043", "InteractiveMaps", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_043", "BlockedUserMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_043_VerifyBlockedUserCannotAddPinOnEmbeddedMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlockedAccount, credentials.passwordBlockedAccount, wikiURL);

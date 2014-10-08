@@ -20,11 +20,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  *             from placeholder v
  */
 
-public class PinTests extends NewTestTemplate {
+public class PinMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_006", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_006", "PinMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_006_VerifyPinModalContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -40,7 +40,7 @@ public class PinTests extends NewTestTemplate {
 		selectedMap = pinDialog.clickCancelButton();
 	}
 
-	@Test(groups = { "InteractiveMaps_007", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_007", "PinMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_007_VerifySuggestionsAndAssociatedImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -56,7 +56,7 @@ public class PinTests extends NewTestTemplate {
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
 	}
 
-	@Test(groups = { "InteractiveMaps_024", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_024", "PinMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_024_VerifyPinCreationErrors() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -74,7 +74,7 @@ public class PinTests extends NewTestTemplate {
 		addPinModal.verifyErrorExists();
 	}
 
-	@Test(groups = { "InteractiveMaps_025", "InteractiveMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
+	@Test(groups = { "InteractiveMaps_025", "PinMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
 	public void InteractiveMaps_025_VerifyPopUpAfterClickPin() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -85,7 +85,7 @@ public class PinTests extends NewTestTemplate {
 		selectedMap.verifyPopUpVisible();
 	}
 
-	@Test(groups = { "InteractiveMaps_027", "InteractiveMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
+	@Test(groups = { "InteractiveMaps_027", "PinMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
 	public void InteractiveMaps_027_VerifyDeletePin() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -101,7 +101,7 @@ public class PinTests extends NewTestTemplate {
 		selectedMap.verifyPinNotExists(pinName);
 	}
 
-	@Test(groups = { "InteractiveMaps_021", "InteractiveMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_021", "PinMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_021_VerifyChangePinData() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
