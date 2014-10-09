@@ -157,6 +157,11 @@ public class AddPinComponentObject extends BasePageObject {
 		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
 		PageObjectLogging.log("verifyErrorIsPresented", "Error message is visible", true, driver);
 	}
+	
+	public void verifyErrorContent(String errorMessage) {
+		waitForElementByElement(errorField);
+		Assertion.assertEquals(errorMessage, errorField.getText());
+	}
 
 	public void verifyAssociatedImageIsVisible(String placeholderImageSrc) {
 		waitForElementByElement(articleImageUrl);

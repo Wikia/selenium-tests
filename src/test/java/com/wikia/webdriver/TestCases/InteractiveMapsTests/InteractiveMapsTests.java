@@ -746,9 +746,12 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		addPinModal.typeAssociatedArticle(InteractiveMapsContent.articleWhichDoesNotExist);
 		addPinModal.selectPinType();
 		addPinModal.clickSaveButton();
-		addPinModal.verifyErrorExists();
+		addPinModal.verifyErrorContent(InteractiveMapsContent.articleNotExistsError.replace(
+				"%article%",
+				InteractiveMapsContent.articleWhichDoesNotExist
+				));
 	}
-	
+
 	@Test(groups = {"InteractiveMaps_047", "InteractiveMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_047_VerifyArticlePlaceholder() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
