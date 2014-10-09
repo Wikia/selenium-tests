@@ -716,4 +716,47 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		CreateAMapComponentObject createMap = specialMaps.clickCreateAMapUnderContributeButton();
 		createMap.verifyRealMapAndCustomMapButtons();
 	}
+
+	@Test(groups = {"InteractiveMaps_045", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_045_VerifyValidExternalUrlCanBeAdded() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
+		addPinModal.typePinName(InteractiveMapsContent.pinName);
+		addPinModal.typeAssociatedArticle(InteractiveMapsContent.externalLink);
+		addPinModal.selectPinType();
+		selectedMap = addPinModal.clickSaveButton();
+		selectedMap.verifyPinTitleLink();
+		selectedMap.clickOpenPinTitle();
+		selectedMap.verifyUrlInNewWindow(InteractiveMapsContent.externalLink);
+	}
+
+	@Test(groups = {"InteractiveMaps_046", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_046_VerifyErrorMessageWhenAssociatedArticleNotExist() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
+		addPinModal.typePinName(InteractiveMapsContent.pinName);
+		addPinModal.typeAssociatedArticle(InteractiveMapsContent.articleWhichDoesNotExist);
+		addPinModal.selectPinType();
+		addPinModal.clickSaveButton();
+		addPinModal.verifyErrorExists();
+	}
+	
+	@Test(groups = {"InteractiveMaps_047", "InteractiveMapTests", "InteractiveMaps"})
+	public void InteractiveMaps_047_VerifyArticlePlaceholder() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		selectedMap.verifyMapOpened();
+		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
+		addPinModal.verifyAssociatedArticlePlaceholder();
+	}
 }

@@ -104,6 +104,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement actionDropDown;
 	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #deleteMap")
 	private WebElement deleteMapButton;
+	@FindBy(css = ".poi-article-link")
+	private WebElement poiArticleLink;
 
 	public enum embedMapDialogButtons {
 		small, medium, large;
@@ -220,6 +222,12 @@ public class InteractiveMapPageObject extends BasePageObject {
 		actions.moveToElement(filterBoxTitle).click().perform();
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickOnFilterBoxTitle", "Filter box title was clicked", true);
+	}
+	
+	public void clickOpenPinTitle() {
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		poiArticleLink.click();
 	}
 
 	public String getEmbedMapWikiCode() {
@@ -418,6 +426,13 @@ public class InteractiveMapPageObject extends BasePageObject {
 				}
 				break;
 			}
+		driver.switchTo().defaultContent();
+	}
+
+	public void verifyPinTitleLink() {
+		waitForElementVisibleByElement(mapFrame);
+		driver.switchTo().frame(mapFrame);
+		Assertion.assertEquals(checkIfElementOnPage(poiArticleLink), true);
 		driver.switchTo().defaultContent();
 	}
 

@@ -23,4 +23,8 @@ public class InteractiveMapsContent {
 	public static final String mapName = "testingMapName";
 	public static final String pinTypeName = "testingPinType";
 	public static final String pinName = "testingPinName";
+	public static final String externalLink = "http://www.wikia.com/Wikia";
+	public static final String shortExternalLink = "google.com";
+	public static final String articleWhichDoesNotExist = "asdkljaskldjaskldjaskldjaskldjaskldjaskldjaskldjaskljdaskl";
+	public static final String associatedArticlePlaceholder= "Related article name or external URL";
 }

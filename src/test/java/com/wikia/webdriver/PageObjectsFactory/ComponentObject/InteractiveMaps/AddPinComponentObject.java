@@ -1,10 +1,13 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
+import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -160,4 +163,12 @@ public class AddPinComponentObject extends BasePageObject {
 		Assertion.assertNotEquals(placeholderImageSrc, getAssociatedArticleImageSrc());
 	}
 
+	public void verifyAssociatedArticlePlaceholder() {
+		waitForElementByElement(associatedArticleField);
+		Assertion.assertEquals(
+				InteractiveMapsContent.associatedArticlePlaceholder,
+				associatedArticleField.getAttribute("placeholder"),
+				"Associated article place holder is not correct"
+		);
+	}
 }
