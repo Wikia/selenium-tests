@@ -20,7 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  *             will display a new line and fields for adding new information v
  */
 
-public class PinTypeMaTests extends NewTestTemplate {
+public class PinTypeMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
