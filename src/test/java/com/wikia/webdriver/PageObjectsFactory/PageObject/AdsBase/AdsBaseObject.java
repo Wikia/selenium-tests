@@ -32,6 +32,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	private final String wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
 	private final String liftiumIframeSelector = "iframe[id*='Liftium']";
+	private final String gptDivSelector = "[data-gpt-creative-size]";
+	private final String[] gptDataAttributes = {
+			"data-gpt-line-item-id",
+			"data-gpt-creative-id",
+			"data-gpt-creative-size",
+	};
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	private WebElement toolbar;
@@ -160,6 +166,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
 		AdsComparison adsComparison = new AdsComparison();
 		extractLiftiumTagId(slotSelector);
+		extractGptInfo(slotSelector);
 		boolean adVisible = adsComparison.isAdVisible(slot, slotSelector, driver);
 		if (adVisible) {
 			PageObjectLogging.log("CompareScreenshot", "Screenshots are different", true);
@@ -474,6 +481,19 @@ public class AdsBaseObject extends WikiBasePageObject {
 		}
 
 		return liftiumTagId;
+	}
+
+	private void extractGptInfo(String slotSelector) {
+		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+		String log = "GPT ad not found in slot: " + slotSelector;
+		if (checkIfElementInElement(gptDivSelector, slot)) {
+			log = "GPT ad found in slot: " + slotSelector;
+			WebElement gptDiv = slot.findElement(By.cssSelector(gptDivSelector));
+			for (String attribute : gptDataAttributes) {
+				log += "; " + attribute + " = " + gptDiv.getAttribute(attribute);
+			}
+		}
+		PageObjectLogging.log("extractGptInfo", log, true, driver);
 	}
 
 	protected String getSlotImageAd(WebElement slot) {
