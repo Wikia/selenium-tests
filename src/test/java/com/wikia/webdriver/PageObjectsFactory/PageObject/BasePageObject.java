@@ -158,7 +158,7 @@ public class BasePageObject{
 	 */
 	protected int getNumOfElementOnPage(By cssSelectorBy) {
 		changeImplicitWait(500, TimeUnit.MILLISECONDS);
-		int numElementOnPage = 0;
+		int numElementOnPage;
 		try {
 			numElementOnPage = driver.findElements(cssSelectorBy).size();
 		} catch (Exception ex) {

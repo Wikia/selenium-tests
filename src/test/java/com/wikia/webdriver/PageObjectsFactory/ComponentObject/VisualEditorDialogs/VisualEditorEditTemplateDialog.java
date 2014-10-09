@@ -45,6 +45,12 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
+	@Override
+	public void switchToIFrame() {
+		waitForElementVisibleByElement(templateDialog);
+		super.switchToIFrame();
+	}
+
 	public ArticlePageObject clickGetInfoLink() {
 		switchToIFrame();
 		waitForElementByElement(getInfoLink);
@@ -77,11 +83,6 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 		}
 		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
-	}
-
-	public void switchToIFrame() {
-		waitForElementVisibleByElement(templateDialog);
-		super.switchToIFrame();
 	}
 
 	public VisualEditorPageObject clickCancel() {
