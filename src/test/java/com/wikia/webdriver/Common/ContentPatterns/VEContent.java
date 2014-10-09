@@ -7,4 +7,6 @@ public class VEContent {
 	public static String templateSearchStr3 = "per";
 	public static String templateSearchStr4 = "ar";
 	public static String templateSearchStr5 = "book";
+
+	public static String boundingScript = "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
 }
