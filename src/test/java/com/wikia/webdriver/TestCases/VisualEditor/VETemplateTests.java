@@ -24,6 +24,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  * VE-1413 Verify suggested templates appear by default
  * VE-1412 Verify adding template with params and template with no param
  * VE-1412 Verify adding template to a middle of paragraph or to a block node would insert template as block node
+ * VE-1414 Verify deleting template from an article
  */
 
 public class VETemplateTests extends NewTestTemplateBeforeClass {
@@ -98,7 +99,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate"}
+		groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005"}
 	)
 	public void VETemplateTests_004_CheckBlockedTransclusion() {
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -120,6 +121,23 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearchStr5, 0);
 		ve = editTemplateDialog.clickDone();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
+		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VETemplate", "VETemplateTests_005", "VEDeleteTemplate"},
+		dependsOnGroups = "VETemplateTests_004"
+	)
+	public void VETemplateTests_005_DeleteTemplates() {
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
+		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
+		ve.deleteBlockTransclusion(1);
+		ve.verifyNumberOfBlockTransclusion(--numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		ArticlePageObject article = saveDialog.savePage();
