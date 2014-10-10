@@ -83,15 +83,20 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	public void VETemplateTests_003_AddTemplates() {
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
+		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		VisualEditorEditTemplateDialog editTemplateDialog =
-			templateDialog.selectResultTemplate(VEContent.templateSearch3CharsPartialMatch, 0);
+		VisualEditorEditTemplateDialog editTemplateDialog = templateDialog.selectSuggestedTemplate(0);
 		ve = editTemplateDialog.clickDone();
+		ve.verifyNumberOfBlockTransclusion(numBlockTransclusion);
+		ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
 		templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearch3CharsPartialMatch, 1);
 		ve = editTemplateDialog.closeDialog();
+		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
+		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
