@@ -49,19 +49,19 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		//1 character search 'a', not matching article name, no result
-		templateDialog.typeInSearchInput(VEContent.templateSearchStr1);
+		templateDialog.typeInSearchInput(VEContent.templateSearch1CharNoMatch);
 		templateDialog.verifyNoResultTemplate();
 		//2 characters search 'ab', not matching article name, no result
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput(VEContent.templateSearchStr2);
+		templateDialog.typeInSearchInput(VEContent.templateSearch2CharsNoMatch);
 		templateDialog.verifyNoResultTemplate();
 		//3 characters search 'per', not matching article name, 2 results on template name
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput(VEContent.templateSearchStr3);
+		templateDialog.typeInSearchInput(VEContent.templateSearch3CharsPartialMatch);
 		templateDialog.verifyIsResultTemplate();
 		//2 characters search 'ar', matching article name, 3 results on the article
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput(VEContent.templateSearchStr4);
+		templateDialog.typeInSearchInput(VEContent.templateSearchMatchArticle);
 		templateDialog.verifyIsResultTemplate();
 	}
 
@@ -86,11 +86,11 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		VisualEditorEditTemplateDialog editTemplateDialog =
-			templateDialog.selectResultTemplate(VEContent.templateSearchStr3, 0);
+			templateDialog.selectResultTemplate(VEContent.templateSearch3CharsPartialMatch, 0);
 		ve = editTemplateDialog.clickDone();
 		templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearchStr3, 1);
+		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearch3CharsPartialMatch, 1);
 		ve = editTemplateDialog.closeDialog();
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		ArticlePageObject article = saveDialog.savePage();
@@ -112,13 +112,13 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		VisualEditorEditTemplateDialog editTemplateDialog =
-			templateDialog.selectResultTemplate(VEContent.templateSearchStr5, 0);
+			templateDialog.selectResultTemplate(VEContent.templateSearchExactMatch, 0);
 		ve = editTemplateDialog.clickDone();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
 		templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearchStr5, 0);
+		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearchExactMatch, 0);
 		ve = editTemplateDialog.clickDone();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);

@@ -35,11 +35,9 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	@FindBy(css = ".ve-ui-mwTemplateDialog-ready")
 	private WebElement templateDialog;
 
-	private By paramLabelBy = By.cssSelector(".ve-ui-mwParameterPage-label");
-	private By paramInputBy = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
-	private By templateParamsBy = By.cssSelector(".ve-ui-mwParameterPage");
-
-	private String templateParamsString = ".ve-ui-mwParameterPage";
+	private static final By paramLabelBy = By.cssSelector(".ve-ui-mwParameterPage-label");
+	private static final By paramInputBy = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
+	private static final By templateParamsBy = By.cssSelector(".ve-ui-mwParameterPage");
 
 	public VisualEditorEditTemplateDialog(WebDriver driver) {
 		super(driver);
