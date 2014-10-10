@@ -378,10 +378,14 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void clickBlockTransclusion(int index) {
 		Point tempLocation = getBlockTransclusionLocation(index);
-		int tempLeft = tempLocation.x;
-		int tempTop = tempLocation.y;
+		int xOffset = 10;
+		int yOffset = 10;
+		int tempLeft = tempLocation.x + xOffset;
+		int tempTop = tempLocation.y + yOffset;
 		Actions actions = new Actions(driver);
-		actions.moveToElement(mainContent, tempLeft, tempTop).click().build().perform();
+		actions.moveToElement(mainContent, tempLeft, tempTop).clickAndHold().build().perform();
+		WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
+		waitForElementVisibleByElement(contextEdit);
 		PageObjectLogging.log("clickBlockTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true, driver);
 	}
 
@@ -392,8 +396,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		int tempLeft = 0, tempTop = 0;
 		try {
 			json = new JSONObject(templateBounding.toString());
-			tempLeft = (int) json.get("left");
-			tempTop = (int) json.get("top");
+			tempLeft = new Double(json.get("left").toString()).intValue();
+			tempTop = new Double(json.get("top").toString()).intValue();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
