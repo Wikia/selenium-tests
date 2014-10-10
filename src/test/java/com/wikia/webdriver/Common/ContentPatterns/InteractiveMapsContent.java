@@ -23,7 +23,7 @@ public class InteractiveMapsContent {
 	public static final String mapName = "testingMapName";
 	public static final String pinTypeName = "testingPinType";
 	public static final String pinName = "testingPinName";
-	public static final String externalLink = "http://www.wikia.com/Wikia";
+	public static final String externalLink = "http://uk.ign.com/";
 	public static final String articleWhichDoesNotExist = "asdkljaskldjaskldjaskldjaskldjaskldjaskldjaskldjaskljdaskl";
 	public static final String associatedArticlePlaceholder= "Related article name or external URL";
 	public static final String articleNotExistsError = "Error message: there is no %articlename% article on this wikia nor it's valid URL address.";

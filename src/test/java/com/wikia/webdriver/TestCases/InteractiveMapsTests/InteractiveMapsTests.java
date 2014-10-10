@@ -717,7 +717,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		createMap.verifyRealMapAndCustomMapButtons();
 	}
 
-	@Test(groups = {"InteractiveMaps_045", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_045", "PinMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_045_VerifyValidExternalUrlCanBeAdded() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -734,7 +734,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		selectedMap.verifyUrlInNewWindow(InteractiveMapsContent.externalLink);
 	}
 
-	@Test(groups = {"InteractiveMaps_046", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_046", "PinMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_046_VerifyErrorMessageWhenAssociatedArticleNotExist() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -752,7 +752,7 @@ public class InteractiveMapsTests extends NewTestTemplate {
 				));
 	}
 
-	@Test(groups = {"InteractiveMaps_047", "InteractiveMapTests", "InteractiveMaps"})
+	@Test(groups = {"InteractiveMaps_047", "PinMapTests", "InteractiveMaps"})
 	public void InteractiveMaps_047_VerifyArticlePlaceholder() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
