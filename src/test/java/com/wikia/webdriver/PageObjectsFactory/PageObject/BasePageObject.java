@@ -121,17 +121,11 @@ public class BasePageObject{
 	 */
 	protected boolean checkIfElementOnPage(By cssSelectorBy) {
 		changeImplicitWait(500, TimeUnit.MILLISECONDS);
-		boolean isElementOnPage = true;
 		try {
-			if (driver.findElements(cssSelectorBy).size() < 1) {
-				isElementOnPage = false;
-			}
-		} catch (Exception ex) {
-			isElementOnPage = false;
+			return driver.findElements(cssSelectorBy).size() > 0;
 		} finally {
 			restoreDeaultImplicitWait();
 		}
-		return isElementOnPage;
 	}
 
 	/*
