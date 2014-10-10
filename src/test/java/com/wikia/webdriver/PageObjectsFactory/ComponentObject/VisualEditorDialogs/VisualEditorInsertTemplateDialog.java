@@ -78,11 +78,9 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
 	public int getNumberOfResultTemplates() {
 		switchToIFrame();
-		int numberOfTemplates = -1;
+		int numberOfTemplates = 0;
 		if (checkIfElementOnPage(resultTemplatesBy)) {
 			numberOfTemplates = resultTemplates.size();
-		} else {
-			numberOfTemplates = 0;
 		}
 		switchOutOfIFrame();
 		PageObjectLogging.log("getNumberOfResultTemplates", "Number of result templates found: " + numberOfTemplates, true);

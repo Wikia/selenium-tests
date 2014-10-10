@@ -20,4 +20,6 @@ public class VEContent {
 	public static String templateWikiText =
 		paramSeparator + templateParamLabel1 + templateAssignment + templateParamValue1 +
 		paramSeparator + templateParamLabel2 + templateAssignment + templateParamValue2;
+
+	public static String boundingScript = "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
 }

@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.VEContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
@@ -386,9 +387,8 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	}
 
 	private Point getBlockTransclusionLocation(int index) {
-		String boundingScript = "return jQuery.data( $('" + blockTransclusionString + "')["+ index +"] ).view.getBoundingRect();";
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		Object templateBounding = js.executeScript(boundingScript);
+		Object templateBounding = js.executeScript(VEContent.boundingScript, blockTransclusionString, index);
 		JSONObject json;
 		int tempLeft = 0, tempTop = 0;
 		try {
