@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 /**
- * Sergey Naumov
+ * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=115974612
+ * @author Sergey Naumov
  * @ownership AdEngineering
  */
 public class TestDfpParamsPresent extends NewTestTemplate {
