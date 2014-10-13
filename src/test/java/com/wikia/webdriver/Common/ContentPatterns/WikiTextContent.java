@@ -13,7 +13,7 @@ public class WikiTextContent {
 	public static String subHeading4Prefix = "====== ";
 	public static String subHeading4Postix = " ======";
 
-	public static String preformatted = " ";
+	public static String preformatted = "";
 	public static String bold = "'''";
 	public static String italic = "''";
 
