@@ -1,5 +1,7 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
+import java.util.ArrayList;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,6 +12,7 @@ import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorInsertTemplateDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReviewChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
@@ -104,7 +107,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005"}
+		groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005", "VETemplateTests_006"}
 	)
 	public void VETemplateTests_004_CheckBlockedTransclusion() {
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
@@ -145,6 +148,28 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		ve.verifyNumberOfBlockTransclusion(--numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
+	}
+
+	@Test(
+		groups = {"VETemplate", "VETemplateTests_006", "VEAddTemplate"},
+		dependsOnGroups = "VETemplateTests_004"
+	)
+	public void VETemplateTests_006_CheckBlockedTransclusion() {
+		ArrayList<String> templateWikiTexts = new ArrayList<>();
+		templateWikiTexts.add(VEContent.templateWikiText);
+		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.clickBlockTransclusion(0);
+		VisualEditorEditTemplateDialog editTemplateDialog = ve.openEditTemplateDialog();
+		editTemplateDialog.typeInParam(VEContent.templateParamLabel1, VEContent.templateParamValue1);
+		editTemplateDialog.typeInParam(VEContent.templateParamLabel2, VEContent.templateParamValue2);
+		ve = editTemplateDialog.clickDone();
+		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
+		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
+		reviewDialog.verifyAddedDiffs(templateWikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
 		article.logOut(wikiURL);

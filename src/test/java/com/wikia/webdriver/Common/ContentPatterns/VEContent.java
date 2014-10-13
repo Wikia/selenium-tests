@@ -8,5 +8,18 @@ public class VEContent {
 	public static String templateSearchMatchArticle = "ar";
 	public static String templateSearchExactMatch = "book";
 
+	public static String templateParamLabel1 = "author";
+	public static String templateParamLabel2 = "next";
+
+	public static String templateParamValue1 = "contribution";
+	public static String templateParamValue2 = "others";
+
+	public static String templateAssignment = " = ";
+	public static String paramSeparator = "|";
+
+	public static String templateWikiText =
+		paramSeparator + templateParamLabel1 + templateAssignment + templateParamValue1 +
+		paramSeparator + templateParamLabel2 + templateAssignment + templateParamValue2;
+
 	public static String boundingScript = "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
 }

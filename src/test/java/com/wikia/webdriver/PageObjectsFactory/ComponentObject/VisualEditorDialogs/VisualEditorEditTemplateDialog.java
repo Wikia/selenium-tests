@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
@@ -64,13 +65,14 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	public void typeInParam(String paramName, String text) {
 		switchToIFrame();
 		if(checkIfElementOnPage(templateParamsBy)) {
-			WebElement targetParam = getElementByChildText(templateParams, paramLabelBy, text);
+			WebElement targetParam = getElementByChildText(templateParams, paramLabelBy, paramName);
 			WebElement targetParamInput = targetParam.findElement(paramInputBy);
 			targetParamInput.sendKeys(text);
 			waitForValueToBePresentInElementsAttributeByElement(targetParamInput, "value", text);
 		} else {
 			throw new NoSuchElementException("This template has no param.");
 		}
+		PageObjectLogging.log("typeInParam", "Type " + text + " in the " + paramName + " field.", true, driver);
 		switchOutOfIFrame();
 	}
 
