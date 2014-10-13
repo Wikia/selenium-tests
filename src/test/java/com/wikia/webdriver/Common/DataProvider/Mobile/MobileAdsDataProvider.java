@@ -50,7 +50,7 @@ public class MobileAdsDataProvider {
 					"\"s1\":\"_adtest\"",
 					"\"s2\":\"article\"",
 					"\"dmn\":\"wikiacom\"",
-					"\"hostpre\":\"adtest\"",
+					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
 					"\"lang\":\"en\"",
 					"\"pageid\":\"_adtest/2218\"",
