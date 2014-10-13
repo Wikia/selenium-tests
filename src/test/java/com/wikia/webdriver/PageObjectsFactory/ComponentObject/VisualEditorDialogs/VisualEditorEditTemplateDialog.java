@@ -51,11 +51,14 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	public ArticlePageObject clickGetInfoLink() {
 		switchToIFrame();
-		waitForElementByElement(getInfoLink);
-		//Opens new tab to Template namespace
-		getInfoLink.click();
-		switchOutOfIFrame();
-		return new ArticlePageObject(driver);
+		try {
+			waitForElementByElement(getInfoLink);
+			//Opens new tab to Template namespace
+			getInfoLink.click();
+			return new ArticlePageObject(driver);
+		} finally {
+			switchOutOfIFrame();
+		}
 	}
 
 	public void typeInParam(String paramName, String text) {
