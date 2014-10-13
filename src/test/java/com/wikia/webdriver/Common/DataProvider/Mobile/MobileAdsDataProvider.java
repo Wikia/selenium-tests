@@ -2,6 +2,8 @@ package com.wikia.webdriver.Common.DataProvider.Mobile;
 
 import org.testng.annotations.DataProvider;
 
+import java.util.Arrays;
+
 /**
  * Bogna 'bognix' Knychala
  */
@@ -31,4 +33,38 @@ public class MobileAdsDataProvider {
 			{"zh.pad", "wiki/Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
 		};
 	}
+
+
+	@DataProvider
+	public static Object[][] dfpParams() {
+		return new Object[][] {
+			{
+				"adtest",
+				"SyntheticTests/DfpParams",
+				"wka.ent/_adtest//article",
+				"MOBILE_TOP_LEADERBOARD",
+				"115974612",
+				"48506262012",
+				Arrays.asList(
+					"\"s0\":\"ent\"",
+					"\"s1\":\"_adtest\"",
+					"\"s2\":\"article\"",
+					"\"dmn\":\"wikiacom\"",
+					"\"hostpre\":\"adtest\"",
+					"\"wpage\":\"synthetictests/dfpparams\"",
+					"\"lang\":\"en\"",
+					"\"pageid\":\"_adtest/2218\"",
+					"\"hasp\":\"no\"",
+					"\"esrb\":\"teen\""
+				),
+				Arrays.asList(
+					"\"pos\":\"MOBILE_TOP_LEADERBOARD\"",
+					"\"src\":\"mobile\""
+				)
+			}
+		};
+	}
+
+
+
 }
