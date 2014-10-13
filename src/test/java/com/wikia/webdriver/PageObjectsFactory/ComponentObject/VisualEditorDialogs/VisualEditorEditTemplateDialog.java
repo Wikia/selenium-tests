@@ -76,25 +76,31 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	public VisualEditorPageObject clickDone() {
 		switchToIFrame();
-		if(checkIfElementOnPage(templateParamsBy)) {
-			waitForElementClickableByElement(doneButton);
-			doneButton.click();
-		} else {
-			throw new NoSuchElementException("This template has no param.");
+		try {
+			if(checkIfElementOnPage(templateParamsBy)) {
+				waitForElementClickableByElement(doneButton);
+				doneButton.click();
+			} else {
+				throw new NoSuchElementException("This template has no param.");
+			}
+			return new VisualEditorPageObject(driver);
+		} finally {
+			switchOutOfIFrame();
 		}
-		switchOutOfIFrame();
-		return new VisualEditorPageObject(driver);
 	}
 
 	public VisualEditorPageObject clickCancel() {
 		switchToIFrame();
-		if(checkIfElementOnPage(templateParamsBy)) {
-			waitForElementClickableByElement(cancelButton);
-			cancelButton.click();
-		} else {
-			throw new NoSuchElementException("This template has no param.");
+		try {
+			if(checkIfElementOnPage(templateParamsBy)) {
+				waitForElementClickableByElement(cancelButton);
+				cancelButton.click();
+			} else {
+				throw new NoSuchElementException("This template has no param.");
+			}
+			return new VisualEditorPageObject(driver);
+		} finally {
+			switchOutOfIFrame();
 		}
-		switchOutOfIFrame();
-		return new VisualEditorPageObject(driver);
 	}
 }

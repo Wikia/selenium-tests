@@ -26,7 +26,6 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 	private List<WebElement> resultTemplates;
 
 	private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
-	private By resultTemplatesBy = By.cssSelector(".oo-ui-searchWidget-results:not(.ve-ui-wikiaTemplateSearchWidget-suggestions) ul li");
 	private By suggestedTemplatesBy = By.cssSelector(".ve-ui-wikiaTemplateSearchWidget-suggestions ul li");
 
 	public VisualEditorInsertTemplateDialog(WebDriver driver) {
@@ -56,25 +55,37 @@ public class VisualEditorInsertTemplateDialog extends VisualEditorDialog {
 
 	public VisualEditorEditTemplateDialog selectSuggestedTemplate(int index) {
 		switchToIFrame();
-		waitForElementVisibleByElement(suggestedWidget);
-		WebElement selected = suggestedTemplates.get(index).findElement(labelBy);
-		String templateName = selected.getText();
-		selected.click();
-		switchOutOfIFrame();
-		PageObjectLogging.log("selectSuggestedTemplate", "Suggested template selected: " + templateName, true);
-		return new VisualEditorEditTemplateDialog(driver);
+		try {
+			waitForElementVisibleByElement(suggestedWidget);
+			WebElement selected = suggestedTemplates.get(index).findElement(labelBy);
+			selected.click();
+			PageObjectLogging.log(
+				"selectSuggestedTemplate",
+				"Suggested template selected: " + selected.getText(),
+				true
+			);
+			return new VisualEditorEditTemplateDialog(driver);
+		} finally {
+			switchOutOfIFrame();
+		}
 	}
 
 	public VisualEditorEditTemplateDialog selectResultTemplate(String searchString, int index) {
 		typeInSearchInput(searchString);
 		switchToIFrame();
-		waitForElementVisibleByElement(resultWidget);
-		WebElement selected = resultTemplates.get(index).findElement(labelBy);
-		String templateName = selected.getText();
-		selected.click();
-		switchOutOfIFrame();
-		PageObjectLogging.log("selectResultTemplate", "Search result template selected: " + templateName, true);
-		return new VisualEditorEditTemplateDialog(driver);
+		try {
+			waitForElementVisibleByElement(resultWidget);
+			WebElement selected = resultTemplates.get(index).findElement(labelBy);
+			selected.click();
+			PageObjectLogging.log(
+				"selectResultTemplate",
+				"Search result template selected: " + selected.getText(),
+				true
+			);
+			return new VisualEditorEditTemplateDialog(driver);
+		} finally {
+			switchOutOfIFrame();
+		}
 	}
 
 	public int getNumberOfResultTemplates() {
