@@ -54,6 +54,9 @@ public class PinMapTests extends NewTestTemplate {
 		pinDialog.typeAssociatedArticle(InteractiveMapsContent.associatedArticleName);
 		pinDialog.clickSuggestion(0);
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
+		pinDialog.selectPinType();
+		selectedMap = pinDialog.clickSaveButton();
+		selectedMap.verifyPinPopupImageIsVisible();
 	}
 
 	@Test(groups = { "InteractiveMaps_024", "PinMapTests", "InteractiveMaps" })
