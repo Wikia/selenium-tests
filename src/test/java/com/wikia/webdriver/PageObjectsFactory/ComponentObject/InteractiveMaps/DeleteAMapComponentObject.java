@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 
@@ -29,5 +30,9 @@ public class DeleteAMapComponentObject extends BasePageObject {
 		deleteMapButton.click();
 		waitForElementNotVisibleByElement(deleteMapModal);
 		return new InteractiveMapsPageObject(driver);
+	}
+	
+	public static void verifyMapWasDeleted(String deletedMapId, String openMap) {
+		Assertion.assertEquals(deletedMapId, openMap);
 	}
 }

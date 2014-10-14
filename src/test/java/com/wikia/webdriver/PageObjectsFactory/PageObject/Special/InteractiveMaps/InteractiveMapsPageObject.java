@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -41,6 +42,8 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	protected WebElement createMapUnderContribute;
 	@FindBy(css = ".no-maps")
 	private WebElement emptyStateSection;
+	@FindBy(css = ".msg")
+	private WebElement msgTopBar;
 
 	public InteractiveMapsPageObject(WebDriver driver) {
 		super(driver);
@@ -110,5 +113,10 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	public void verifyEmptyState() {
 		Assertion.assertTrue(checkIfElementOnPage(emptyStateSection), "Expecting a empty state");
 		PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true, driver);
+	}
+
+	public void verifyMapDeletedMessage() {
+		waitForElementVisibleByElement(msgTopBar);
+		Assertion.assertEquals(InteractiveMapsContent.mapDeletedSuccesfull, msgTopBar.getText());
 	}
 }
