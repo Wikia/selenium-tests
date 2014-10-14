@@ -41,6 +41,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestAdTypeMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestLeaderboardPresenceOnMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestSlotsMobile"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestDfpParamsPresentMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAdsOnRedirects"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
