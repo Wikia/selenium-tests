@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
@@ -19,6 +20,8 @@ public class DeleteAMapComponentObject extends BasePageObject {
 	private WebElement deleteMapButton;
 	@FindBy(css = "#intMapsDeleteMapModal")
 	private WebElement deleteMapModal;
+	@FindBy(css = ".intMapError")
+	private WebElement deleteMapError;
 
 	public DeleteAMapComponentObject(WebDriver driver) {
 		super(driver);
@@ -28,11 +31,16 @@ public class DeleteAMapComponentObject extends BasePageObject {
 		waitForElementVisibleByElement(deleteMapModal);
 		waitForElementClickableByElement(deleteMapButton);
 		deleteMapButton.click();
-		waitForElementNotVisibleByElement(deleteMapModal);
+//		waitForElementNotVisibleByElement(deleteMapModal);
 		return new InteractiveMapsPageObject(driver);
 	}
-	
+
 	public static void verifyMapWasDeleted(String deletedMapId, String openMap) {
-		Assertion.assertEquals(deletedMapId, openMap);
+		Assertion.assertNotEquals(deletedMapId, openMap);
+	}
+
+	public void verifyDeleteMapError() {
+		waitForElementVisibleByElement(deleteMapError);
+		Assertion.assertEquals(InteractiveMapsContent.mapDeleteError, deleteMapError.getText());
 	}
 }
