@@ -63,6 +63,7 @@ public class CreateRealMapComponentObject extends BasePageObject {
 
 	public void verifyRealMapPreviewImage() {
 		waitForElementByElement(realMapImagePreview);
+		Assertion.assertEquals(realMapImagePreview.getAttribute("src").isEmpty(), false);
 		PageObjectLogging.log("verifyRealMapPreviewImage", "Real map preview image is visible", true);
 	}
 	
