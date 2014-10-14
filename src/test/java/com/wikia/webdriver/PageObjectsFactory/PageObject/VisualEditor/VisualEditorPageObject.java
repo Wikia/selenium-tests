@@ -383,8 +383,9 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		int yOffset = 10;
 		int tempLeft = tempLocation.x + xOffset;
 		int tempTop = tempLocation.y + yOffset;
+		editArea.click();
 		Actions actions = new Actions(driver);
-		actions.moveToElement(mainContent, tempLeft, tempTop).clickAndHold().build().perform();
+		actions.moveToElement(mainContent, tempLeft, tempTop).clickAndHold().release().build().perform();
 		WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
 		waitForElementVisibleByElement(contextEdit);
 		PageObjectLogging.log("clickBlockTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true, driver);
