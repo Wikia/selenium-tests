@@ -228,6 +228,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		poiArticleLink.click();
+		driver.switchTo().defaultContent();
 	}
 
 	public String getEmbedMapWikiCode() {
