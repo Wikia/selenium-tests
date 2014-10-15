@@ -47,6 +47,7 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	}
 
 	public void checkIgnoreAnyWarnings() {
+		waitForElementClickableByElement(ignoreAnyWarnings);
 		scrollAndClick(ignoreAnyWarnings);
 		PageObjectLogging.log(
 				"checkIgnoreAnyWarnings",
