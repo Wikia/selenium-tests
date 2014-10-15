@@ -158,8 +158,6 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@DataProvider(name="DataMonetizationModuleTest_008")
 	public static Object[][] DataMonetizationModuleTest_008() {
 		return new Object[][] {
-			{"US", true}, {"US", false},
-			{"GB", true}, {"GB", false},
 			{"CA", true}, {"CA", false},
 			{"AU", true}, {"AU", false},
 		};
