@@ -52,7 +52,8 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 		PageObjectLogging.log(
 				"checkIgnoreAnyWarnings",
 				"ignore warnings checkbox selected",
-				true
+				true,
+				driver
 		);
 
 	}
