@@ -72,8 +72,6 @@ public class FilePagePageObject extends WikiBasePageObject {
 	@FindBy(css=".tabBody.selected")
 	private WebElement tabBody;
 
-	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
-
 	public void clickTab(int tab) {
 		WebElement currentTab = tabList.get(tab);
 		waitForElementByElement(currentTab);
@@ -97,7 +95,7 @@ public class FilePagePageObject extends WikiBasePageObject {
 
 	public void verifySelectedTab(String tabName) {
 		waitForElementByElement(tabBody);
-		driver.findElement(By.cssSelector(selectedTab.replace("%name%", tabName)));
+		Assertion.assertEquals(tabName, tabBody.getAttribute("data-tab-body"));
 		PageObjectLogging.log(
 				"verified selected tab",
 				tabName + " selected",
