@@ -25,7 +25,6 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
-		selectedMap.verifyMapOpened();
 		String deletedMapId = selectedMap.getEmbedMapID();
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		specialMap = deleteMapModal.deleteMap();
@@ -35,7 +34,6 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		DeleteAMapComponentObject.verifyMapWasDeleted(deletedMapId, openMapId);
 	}
 
-	//To do when will be on prod
 	@Test(groups = {"DeleteAndRestoreMapTests_002", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTests_002_VerifyDeleteMapByMapNotOwner() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -44,7 +42,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
 		String tryDeleteMapId = selectedMap.getEmbedMapID();
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
-		deleteMapModal.deleteMap();
+		deleteMapModal.clickDeleteMap();
 		deleteMapModal.verifyDeleteMapError();
 		specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);

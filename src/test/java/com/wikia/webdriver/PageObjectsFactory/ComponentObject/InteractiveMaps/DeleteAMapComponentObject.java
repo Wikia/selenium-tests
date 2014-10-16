@@ -20,7 +20,7 @@ public class DeleteAMapComponentObject extends BasePageObject {
 	private WebElement deleteMapButton;
 	@FindBy(css = "#intMapsDeleteMapModal")
 	private WebElement deleteMapModal;
-	@FindBy(css = ".intMapError")
+	@FindBy(css = "#intMapError")
 	private WebElement deleteMapError;
 
 	public DeleteAMapComponentObject(WebDriver driver) {

@@ -104,7 +104,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement actionDropDown;
 	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #deleteMap")
 	private WebElement deleteMapButton;
-	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #unDeleteMap")
+	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #undeleteMap")
 	private WebElement restoreMapButton;
 	@FindBy(css = ".msg")
 	private WebElement msgTopBar;
