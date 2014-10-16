@@ -99,12 +99,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_005(int width, int height, int expected) {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.openWikiPage(wikiURL);
+		base.openRandomArticle(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
-
 		monetizationModule.resizeWindow(width, height);
-		base.openRandomArticle(wikiURL);
+		monetizationModule.refreshPage();
 		monetizationModule.verifyMonetizationModuleAdsenseShown();
 		monetizationModule.verifyMonetizationModuleAdsenseWidth(expected);
 	}
