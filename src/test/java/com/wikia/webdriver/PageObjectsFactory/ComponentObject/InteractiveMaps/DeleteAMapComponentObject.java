@@ -28,11 +28,15 @@ public class DeleteAMapComponentObject extends BasePageObject {
 	}
 
 	public InteractiveMapsPageObject deleteMap() {
+		clickDeleteMap();
+		waitForElementNotVisibleByElement(deleteMapModal);
+		return new InteractiveMapsPageObject(driver);
+	}
+
+	public void clickDeleteMap() {
 		waitForElementVisibleByElement(deleteMapModal);
 		waitForElementClickableByElement(deleteMapButton);
 		deleteMapButton.click();
-//		waitForElementNotVisibleByElement(deleteMapModal);
-		return new InteractiveMapsPageObject(driver);
 	}
 
 	public static void verifyMapWasDeleted(String deletedMapId, String openMap) {
