@@ -96,6 +96,12 @@ public class AdsComparison {
 	public boolean isAdVisible(WebElement element, String elementSelector, WebDriver driver) {
 		Shooter shooter = new Shooter();
 		if (element.getSize().height <= 1 || element.getSize().width <= 1) {
+			PageObjectLogging.log(
+					"ScreenshotElement",
+					"Element has size 1px x 1px or smaller. Most probable is not displayed; CSS " + elementSelector,
+					false,
+					driver
+			);
 			throw new NoSuchElementException(
 				"Element has size 1px x 1px or smaller. Most probable is not displayed"
 			);

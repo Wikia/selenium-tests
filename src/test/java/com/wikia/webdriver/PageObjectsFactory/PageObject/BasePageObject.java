@@ -1,9 +1,10 @@
-package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
+package com.wikia.webdriver.PageObjectsFactory.PageObject;
 
 import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -118,6 +119,19 @@ public class BasePageObject{
 	 * Simple method for checking if element is on page or not.
 	 * Changing the implicitWait value allows us no need for waiting 30 seconds
 	 */
+	protected boolean checkIfElementOnPage(By cssSelectorBy) {
+		changeImplicitWait(500, TimeUnit.MILLISECONDS);
+		try {
+			return driver.findElements(cssSelectorBy).size() > 0;
+		} finally {
+			restoreDeaultImplicitWait();
+		}
+	}
+
+	/*
+	 * Simple method for checking if element is on page or not.
+	 * Changing the implicitWait value allows us no need for waiting 30 seconds
+	 */
 	protected boolean checkIfElementOnPage(WebElement element) {
 		changeImplicitWait(500, TimeUnit.MILLISECONDS);
 		boolean isElementOnPage = true;
@@ -130,6 +144,23 @@ public class BasePageObject{
 			restoreDeaultImplicitWait();
 		}
 		return isElementOnPage;
+	}
+
+	/*
+	 * Simple method for getting number of element on page.
+	 * Changing the implicitWait value allows us no need for waiting 30 seconds
+	 */
+	protected int getNumOfElementOnPage(By cssSelectorBy) {
+		changeImplicitWait(500, TimeUnit.MILLISECONDS);
+		int numElementOnPage;
+		try {
+			numElementOnPage = driver.findElements(cssSelectorBy).size();
+		} catch (Exception ex) {
+			numElementOnPage = 0;
+		} finally {
+			restoreDeaultImplicitWait();
+		}
+		return numElementOnPage;
 	}
 
 	protected boolean checkIfElementInElement(String cssSelector, WebElement element) {
@@ -398,6 +429,19 @@ public class BasePageObject{
 		}
 	}
 
+	//You can get access to hidden elements by changing class
+	public void unhideElementByClassChange(String elementName,String classWithoutHidden, int... OptionalIndex){
+		int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('class', '" + classWithoutHidden + "');");
+	}
+
+	//You can get access to hidden elements by type
+	public void unhideElementByTypeChange(String elementName, String newType, int... OptionalIndex){
+			int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('type', '" + newType + "');");
+	}
 	/**
 	 * Checks if the element is visible on browser
 	 *
@@ -804,7 +848,14 @@ public class BasePageObject{
 	public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
 		WebElement foundElement = null;
 		for(WebElement element : elements) {
-			if (element.getAttribute(attribute).equals(value)) {
+			String retAttribute = element.getAttribute(attribute);
+			if (attribute.equals("href")) {
+				retAttribute = retAttribute.substring(retAttribute.indexOf("File:")+5).replace("%20", " ");
+				if (!element.getAttribute("class").contains("video")) {
+					retAttribute = retAttribute.substring(0, retAttribute.indexOf('.'));
+				}
+			}
+			if (retAttribute.equals(value)) {
 				foundElement = element;
 				PageObjectLogging.log("getElementByValue",
 					"Element with attribute: " + attribute + " with the value: " + value + " is found from the list",
@@ -834,6 +885,32 @@ public class BasePageObject{
 		if (foundElement == null) {
 			throw new NoSuchElementException(
 				"Element with text: " + value + " is not found from the list");
+		}
+		return foundElement;
+	}
+
+	public void switchToBrowserTab(int index) {
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(index));
+	}
+
+	public void switchToNewBrowserTab() {
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(tabs.size()-1));
+	}
+
+	public WebElement getElementByChildText(List<WebElement> elements, By childBySelector, String value) {
+		WebElement foundElement = null;
+		for(WebElement element : elements) {
+			if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
+				foundElement = element;
+				PageObjectLogging.log("getElementByChildText", "Element's child with text: " + value + " is found from the list", true);
+				break;
+			}
+		}
+		if (foundElement == null) {
+			throw new NoSuchElementException(
+				"Element's child with text: " + value + " is not found from the list");
 		}
 		return foundElement;
 	}

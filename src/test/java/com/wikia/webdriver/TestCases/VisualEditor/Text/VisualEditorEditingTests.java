@@ -65,10 +65,13 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		firstSourceEditText.add(text);
 		secondSourceEditText = new ArrayList<>();
 		secondSourceEditText.add(text+text);
+
 	}
 
 	@Test(
-		groups = {"VisualEditorEditing", "VisualEditorEditing_001"}
+		groups = {
+			"VisualEditorEditing", "VisualEditorEditing_001", "VisualEditorEditing_002", "VisualEditorEditing_003"
+		}
 	)
 	public void VisualEditorEditing_001_insertToNewArticle() {
 		base = new WikiBasePageObject(driver);
@@ -91,11 +94,15 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_002_delete() {
 		String removeText = "Lorem";
+		ArrayList<String> deletedWikiTexts;
+		deletedWikiTexts = new ArrayList<>();
+		deletedWikiTexts.add(removeText);
+
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		ve.removeText(removeText);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
-		reviewDialog.verifyDeletedDiffs(wikiTexts);
+		reviewDialog.verifyDeletedDiffs(deletedWikiTexts);
 		saveDialog = reviewDialog.clickReturnToSaveFormButton();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
@@ -123,6 +130,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_004_insertLinks() {
 		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
 		veLinkDialog.typeInLinkInput(PageContent.internalLink);
@@ -142,6 +150,10 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();
 		reviewDialog.verifyAddedDiffs(linkWikiTexts);
+		saveDialog = reviewDialog.clickReturnToSaveFormButton();
+		ArticlePageObject article = saveDialog.savePage();
+		article.verifyVEPublishComplete();
+		article.logOut(wikiURL);
 	}
 
 	@Test(

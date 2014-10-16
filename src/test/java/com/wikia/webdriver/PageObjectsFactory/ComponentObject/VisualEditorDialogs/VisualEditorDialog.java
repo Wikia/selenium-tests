@@ -27,6 +27,7 @@ public class VisualEditorDialog extends WikiBasePageObject{
 	}
 
 	public void switchToIFrame() {
+		waitForElementByElement(dialog);
 		waitForElementVisibleByElement(dialog);
 		driver.switchTo().frame(iframe);
 	}
@@ -34,6 +35,11 @@ public class VisualEditorDialog extends WikiBasePageObject{
 	public void switchOutOfIFrame() {
 		waitForElementNotVisibleByElement(dialog);
 		driver.switchTo().defaultContent();
+	}
+
+	public void switchOutOfAllIFrame() {
+		driver.switchTo().defaultContent();
+		waitForElementNotVisibleByElement(dialog);
 	}
 
 	public VisualEditorPageObject closeDialog() {

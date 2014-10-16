@@ -39,9 +39,20 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
+	@Override
+	public void switchToIFrame() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		super.switchToIFrame();
+	}
+
 	public ArticlePageObject savePage() {
 		switchToIFrame();
-		waitForElementByElement(publishButton);
+		waitForElementInViewPort(editSummary);
 		waitForElementClickableByElement(publishButton);
 		publishButton.click();
 		PageObjectLogging.log("savePage", "The 2nd Publish Button is clicked", true);

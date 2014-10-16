@@ -20,6 +20,17 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
+	@Override
+	public void switchToIFrame() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		super.switchToIFrame();
+	}
+
 	public VisualEditorPageObject clickApplyChangesButton() {
 		switchToIFrame();
 		waitForElementClickableByElement(applyChangesButton);
@@ -34,10 +45,11 @@ public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 		waitForElementVisibleByElement(editArea);
 		waitForElementClickableByElement(editArea);
 		editArea.sendKeys(text);
+		waitForValueToBePresentInElementsAttributeByElement(editArea, "value", text);
 		PageObjectLogging.log("typeInEditArea", "Typed " + text, true, driver);
 		waitForElementClickableByElement(applyChangesButton);
 		scrollAndClick(applyChangesButton);
-		switchOutOfIFrame();
+		switchOutOfAllIFrame();
 		return new VisualEditorPageObject(driver);
 	}
 }

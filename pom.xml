@@ -21,6 +21,18 @@
 			<artifactId>phantomjs-qunit-runner</artifactId>
 			<version>1.0.14</version>
 		</dependency>
+		<!-- QAART-397 Overriding jetty-server version that browsermob-proxy uses -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>8.1.15.v20140411</version>
+		</dependency>
+		<!-- QAART-397 Overriding jetty-servlet version that browsermob-proxy uses -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>8.1.15.v20140411</version>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
@@ -35,6 +47,8 @@
 			<groupId>biz.neustar</groupId>
 			<artifactId>browsermob-proxy</artifactId>
 			<version>2.0-beta-7</version>
+			<!-- QAART-397 Added exclusions as browsermob-proxy uses version 7.3.0.v20110203 -->
+			<!-- which no longer return http 200  -->
 			<exclusions>
 				<exclusion>
 					<groupId>org.eclipse.jetty</groupId>

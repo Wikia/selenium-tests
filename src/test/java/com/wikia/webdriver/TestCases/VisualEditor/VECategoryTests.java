@@ -45,7 +45,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory"}
+		groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"}
 	)
 	public void VECategoryTests_001_AddNewCategory() {
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);

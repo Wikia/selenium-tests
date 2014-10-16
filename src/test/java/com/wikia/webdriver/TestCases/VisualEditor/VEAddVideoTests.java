@@ -16,6 +16,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 /**
  * @author Robert 'Rochan' Chan
+ * @ownership Contribution
  *
  * VE-1134 Adding non-premium (Youtube) video
  * VE-1134 Adding Premium Video with full URL
@@ -36,7 +37,9 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo"}
+		groups = {
+			"VEAddVideo", "VEAddExternalVideoTests_001", "VEAddExternalVideo", "VEAddExternalVideoTests_004"
+		}
 	)
 	public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();

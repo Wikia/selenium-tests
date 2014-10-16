@@ -324,7 +324,7 @@ public class ArticleRTETest extends NewTestTemplate {
 	public void ArticleRTETest_001(String[] wikiTexts)
 	{
 		WikiArticleEditMode edit = new WikiArticleEditMode(driver);
-		edit.editArticleByName("RTE_test_page");
+		edit.editArticleByName("RTE_test_page", wikiURL);
 		edit.clickOnSourceButton();
 		for (String wikitext : wikiTexts)
 		{

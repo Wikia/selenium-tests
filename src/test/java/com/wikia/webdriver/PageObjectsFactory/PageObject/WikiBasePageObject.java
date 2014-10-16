@@ -41,6 +41,7 @@ import com.wikia.webdriver.Common.Clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.Common.ContentPatterns.ApiActions;
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
+import com.wikia.webdriver.Common.ContentPatterns.WikiaGlobalVariables;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
 import com.wikia.webdriver.Common.Core.Global;
@@ -82,6 +83,8 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.Sp
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapsPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.LicensedVideoSwap.LicensedVideoSwapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
@@ -93,6 +96,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHome
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
 
 
 public class WikiBasePageObject extends BasePageObject {
@@ -173,6 +180,10 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement focusMode;
 	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
 	protected WebElement veToolMenu;
+	@FindBy(css="h3[id='headerWikis']")
+	protected WebElement headerWhereIsMyExtensionPage;
+	@FindBy(css="#globalNavigation")
+	protected WebElement newGlobalNavigation;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -403,6 +414,16 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialMultipleUploadPageObject openSpecialMultipleUpload(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialMultipleUpload);
 		return new SpecialMultipleUploadPageObject(driver);
+	}
+
+	public InteractiveMapsPageObject openSpecialInteractiveMaps(String wikiURL) {
+		getUrl(wikiURL + URLsContent.specialMaps);
+		return new InteractiveMapsPageObject(driver);
+	}
+
+	public InteractiveMapPageObject openInteractiveMapById(String wikiURL, Integer id) {
+		getUrl(wikiURL + URLsContent.specialMaps + "/" + id);
+		return new InteractiveMapPageObject(driver);
 	}
 
 	public FilePagePageObject openFilePage(String wikiURL, String fileName) {
@@ -1103,6 +1124,7 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementNotVisibleByElement(veMode);
 		waitForElementNotVisibleByElement(focusMode);
 		waitForElementNotVisibleByElement(veToolMenu);
+		PageObjectLogging.log("verifyVEPublishComplete", "Publish is done", true, driver);
 	}
 
 	public void disableOptimizely() {
@@ -1122,4 +1144,65 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.historyAction));
 		return new WikiHistoryPageObject(driver);
 	}
+
+	private String getArticleName() {
+		return executeScriptRet(WikiaGlobalVariables.wgPageName);
+	}
+
+	public void verifyArticleName(String targetText) {
+		Assertion.assertStringContains(getArticleName(), targetText);
+		PageObjectLogging.log(
+			"verifyArticleName",
+			"The article shows " + targetText,
+			true
+		);
+	}
+
+	public void verifyNumberOfTop1kWikis(Integer numberOfWikis){
+		String pattern = "List of wikis with matched criteria ("+numberOfWikis+")";
+		waitForElementByElement(headerWhereIsMyExtensionPage);
+		PageObjectLogging.log(
+			"verifyNumberOfTop1kWikis",
+			"Verification of top 1k wikis",
+			true,
+			driver
+		);
+		Assertion.assertStringContains(pattern, headerWhereIsMyExtensionPage.getText());
+	}
+
+	protected Boolean isNewGlobalNavPresent() {
+		return checkIfElementOnPage(newGlobalNavigation);
+	}
+
+	public void setCookie(String name, String value) {
+		Cookie newCookie= new Cookie(name, value);
+		driver.manage().addCookie(newCookie);
+		PageObjectLogging.log("setCookie", "Set cookie: '" + name + "' to " + value, true);
+	}
+
+	public void deleteCookie(String name) {
+		driver.manage().deleteCookieNamed(name);
+		PageObjectLogging.log("deleteCookie", "Remove '" + name + "' from cookie", true);
+	}
+
+	public void setCookieGeo(String countryCode) {
+		String cookieName = "Geo";
+		try {
+			JSONObject geo = new JSONObject();
+			geo.put("country", countryCode);
+			setCookie(cookieName, geo.toString());
+		} catch (JSONException ex) {
+			PageObjectLogging.log("setCookieGeo", "Cannot set cookie ('" + cookieName + "')", true);
+		}
+	}
+
+	public void resizeWindow(int width, int height) {
+		try {
+			driver.manage().window().setSize(new Dimension(width, height));
+			PageObjectLogging.log("ResizeWindow", "Resize window (width=" + width + ", height=" + height + ")", true);
+		} catch (WebDriverException ex) {
+			PageObjectLogging.log("ResizeWindow", "Cannot resize window (width=" + width + ", height=" + height + ")", true);
+		}
+	}
+
 }
