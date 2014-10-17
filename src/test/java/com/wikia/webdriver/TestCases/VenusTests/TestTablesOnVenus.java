@@ -6,6 +6,10 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Venus.VenusArticlePageO
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
+/**
+ * Bogna 'bognix' Knychala
+ * @ownership Consumer
+ */
 public class TestTablesOnVenus extends NewTestTemplate {
 
 	@Test(
