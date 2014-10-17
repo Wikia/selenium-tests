@@ -74,7 +74,7 @@ public class EditAccount extends BasePageObject {
 		newPasswordRadio.click();
 		newPasswordField.sendKeys(newPassword);
 		newPasswordField.submit();
-		clearDisableFlagButton.click();
+		scrollAndClick(clearDisableFlagButton);
 		PageObjectLogging.log(
 				"reopenAccount",
 				"account reopened",
