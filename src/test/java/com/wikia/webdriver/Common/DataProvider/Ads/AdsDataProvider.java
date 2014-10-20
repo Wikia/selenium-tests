@@ -40,7 +40,7 @@ public class AdsDataProvider {
 			{"wowwiki", "Portal:Main"},
 			{"gameofthrones", "Season_4"},
 			{"zh.pad", "Homepage/Mobile"},
-			{"zh.pad", "wiki/Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
+			{"zh.pad", "Special:%E6%90%9C%E7%B4%A2?search=dragon&fulltext=Search&ns0=1&ns14=1"}
 		};
 	}
 
