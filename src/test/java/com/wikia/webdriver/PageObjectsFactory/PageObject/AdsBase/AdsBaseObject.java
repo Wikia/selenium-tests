@@ -32,6 +32,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	private final String wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
 	private final String liftiumIframeSelector = "iframe[id*='Liftium']";
+	private final String gptDivSelector = "[data-gpt-creative-size]";
+	private final String[] gptDataAttributes = {
+			"data-gpt-line-item-id",
+			"data-gpt-creative-id",
+			"data-gpt-creative-size",
+	};
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	private WebElement toolbar;
@@ -160,6 +166,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
 		AdsComparison adsComparison = new AdsComparison();
 		extractLiftiumTagId(slotSelector);
+		extractGptInfo(slotSelector);
 		boolean adVisible = adsComparison.isAdVisible(slot, slotSelector, driver);
 		if (adVisible) {
 			PageObjectLogging.log("CompareScreenshot", "Screenshots are different", true);
@@ -476,6 +483,19 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return liftiumTagId;
 	}
 
+	private void extractGptInfo(String slotSelector) {
+		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
+		String log = "GPT ad not found in slot: " + slotSelector;
+		if (checkIfElementInElement(gptDivSelector, slot)) {
+			log = "GPT ad found in slot: " + slotSelector;
+			WebElement gptDiv = slot.findElement(By.cssSelector(gptDivSelector));
+			for (String attribute : gptDataAttributes) {
+				log += "; " + attribute + " = " + gptDiv.getAttribute(attribute);
+			}
+		}
+		PageObjectLogging.log("extractGptInfo", log, true, driver);
+	}
+
 	protected String getSlotImageAd(WebElement slot) {
 		WebElement iframeWithAd = slot.findElement(
 			By.cssSelector("div > iframe:not([id*='hidden'])")
@@ -543,9 +563,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 	 * @param pageParams List of gpt page-level params to test
 	 * @param slotParams List of gpt slot-level params to test
 	 */
-	public void verifyGptParams(String slotName, List<String> pageParams,  List<String> slotParams) {
+	public void verifyGptParams(String slotName, String src, List<String> pageParams,  List<String> slotParams) {
 
-		String gptIframeWrapId = slotName + "_gpt";
+		String gptIframeWrapId = slotName + "_" + src;
 		WebElement gptIframeWrap = driver.findElement(By.id(gptIframeWrapId));
 
 		String dataGptPageParams = gptIframeWrap.getAttribute("data-gpt-page-params");
@@ -562,6 +582,29 @@ public class AdsBaseObject extends WikiBasePageObject {
 		PageObjectLogging.log(
 			"verifyGptParams",
 			"All page-level and slot-level params present as expected " + dataGptPageParams + ", " + dataGptSlotParams,
+			true,
+			driver
+		);
+	}
+
+	/**
+	 * Test whether the correct GPT ad parameters are passed
+	 *
+	 * @param slotName Slotname
+	 * @param lineItemId expected line item id
+	 * @param creativeId expected creative id
+	 */
+	public void verifyGptAdInSlot(String slotName, String src, String lineItemId,  String creativeId) {
+
+		String gptIframeWrapId = slotName + "_" + src;
+		WebElement gptIframeWrap = driver.findElement(By.id(gptIframeWrapId));
+
+		Assertion.assertEquals(gptIframeWrap.getAttribute("data-gpt-line-item-id"), lineItemId);
+		Assertion.assertEquals(gptIframeWrap.getAttribute("data-gpt-creative-id"), creativeId);
+
+		PageObjectLogging.log(
+			"verifyGptAdInSlot",
+			"Line item id loaded: " + lineItemId + ", creativeId:" + creativeId,
 			true,
 			driver
 		);

@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
  */
 public class MonetizationModuleTests extends NewTestTemplate {
 
+	private static final String testWikiGeoRestrictions = "muppet";	// blocked countires per wikia
+
 	Credentials credentials = config.getCredentials();
 
 	/**
@@ -97,12 +99,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public void MonetizationModuleTest_005(int width, int height, int expected) {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.openWikiPage(wikiURL);
+		base.openRandomArticle(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
-
 		monetizationModule.resizeWindow(width, height);
-		base.openRandomArticle(wikiURL);
+		monetizationModule.refreshPage();
 		monetizationModule.verifyMonetizationModuleAdsenseShown();
 		monetizationModule.verifyMonetizationModuleAdsenseWidth(expected);
 	}
@@ -158,15 +159,13 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@DataProvider(name="DataMonetizationModuleTest_008")
 	public static Object[][] DataMonetizationModuleTest_008() {
 		return new Object[][] {
-			{"US", true}, {"US", false},
-			{"GB", true}, {"GB", false},
 			{"CA", true}, {"CA", false},
 			{"AU", true}, {"AU", false},
 		};
 	}
 
 	/**
-	 * The monetization module is not shown on article page for blocked geos
+	 * The monetization module is not shown on article page for blocked geos (use default blocked countries)
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -194,14 +193,25 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
+	@DataProvider(name="DataMonetizationModuleGeoTestWikis")
+	public static Object[][] DataMonetizationModuleGeoTestWikis() {
+		return new Object[][] {
+			{URLsContent.monetizationGeoTestWiki},
+			{testWikiGeoRestrictions},
+		};
+	}
+
 	/**
 	 * The monetization module is shown on article page for anon user with non-blocked geos (via search engine)
 	 * @author Saipetch Kongkatong
 	 */
-	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_009", "Monetization"})
-	public void MonetizationModuleTest_009() {
+	@Test(
+		dataProvider = "DataMonetizationModuleGeoTestWikis",
+		groups = {"MonetizationModule", "MonetizationModuleTest_009", "Monetization"}
+	)
+	public void MonetizationModuleTest_009(String testWiki) {
 		String countryCode = "TH";
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(testWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -221,10 +231,13 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 * The monetization module is not shown on article page for non-blocked geos (not via search engine)
 	 * @author Saipetch Kongkatong
 	 */
-	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_010", "Monetization"})
-	public void MonetizationModuleTest_010() {
+	@Test(
+		dataProvider = "DataMonetizationModuleGeoTestWikis",
+		groups = {"MonetizationModule", "MonetizationModuleTest_010", "Monetization"}
+	)
+	public void MonetizationModuleTest_010(String testWiki) {
 		String countryCode = "TH";
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(testWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -239,4 +252,44 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
+
+	@DataProvider(name="DataMonetizationModuleTest_011")
+	public static Object[][] DataMonetizationModuleTest_011() {
+		return new Object[][] {
+			{"US", true}, {"US", false},
+			{"GB", true}, {"GB", false},
+			{"CA", true}, {"CA", false},
+			{"AU", true}, {"AU", false},
+		};
+	}
+
+	/**
+	 * The monetization module is not shown on article page for blocked geos (set blocked countries per wiki)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(
+		dataProvider = "DataMonetizationModuleTest_011",
+		groups = {"MonetizationModule", "MonetizationModuleTest_011", "Monetization"}
+	)
+	public void MonetizationModuleTest_011(String countryCode, Boolean isFromsearch) {
+		wikiURL = urlBuilder.getUrlForWiki(testWikiGeoRestrictions);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(wikiURL);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		if (isFromsearch) {
+			monetizationModule.setCookieFromSearch();
+		} else {
+			monetizationModule.deleteCookieFromSearch();
+		}
+		monetizationModule.setCookieGeo(countryCode);
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+		// anon user
+		base.logOut(wikiURL);
+		base.openRandomArticle(wikiURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+	}
+
 }

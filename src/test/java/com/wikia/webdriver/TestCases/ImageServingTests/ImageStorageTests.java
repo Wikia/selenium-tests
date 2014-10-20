@@ -40,8 +40,8 @@ public class ImageStorageTests extends NewTestTemplate {
 		newFiles.verifyURLStatus(200, imageThumbnailURL);
 
 		DeletePageObject delete = newFiles.deletePage();
-		delete.submitDeletion();
-		delete.verifyNotificationMessage();
+		base = delete.submitDeletion();
+		base.verifyNotificationMessage();
 
 		base.verifyURLStatus(404, imageURL);
 		base.verifyURLStatus(404, imageThumbnailURL);
