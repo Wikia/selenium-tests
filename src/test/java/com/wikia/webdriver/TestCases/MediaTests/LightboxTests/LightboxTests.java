@@ -13,13 +13,13 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.RightRail.LatestPh
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialMostLinkedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUncategorizedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedFilesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.GalleryBoxes.SpecialUnusedVideosPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -146,8 +146,6 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
 
 		int itemNumber = 0;
-		String fileUrl = specialVideos.getFileUrl(wikiURL, itemNumber);
-
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(itemNumber);
 		lightbox.verifyLightboxPopup();
 		lightbox.verifyLightboxVideo();
@@ -169,7 +167,6 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		SpecialNewFilesPageObject specialNewFiles = base.openSpecialNewFiles(wikiURL);
 
 		int itemNumber = 0;
-		String fileUrl = specialNewFiles.getFileUrl(wikiURL, itemNumber);
 
 		LightboxComponentObject lightbox = specialNewFiles.openLightbox(itemNumber);
 		lightbox.verifyLightboxPopup();

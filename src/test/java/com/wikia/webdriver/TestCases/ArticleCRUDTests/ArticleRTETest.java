@@ -330,9 +330,6 @@ public class ArticleRTETest extends NewTestTemplate {
 		{
 			String tmp1;
 			String tmp2;
-			char[] tmp1arr;
-			char[] tmp2arr;
-
 			edit.clearSource();
 
 			WebElement e = driver.findElement(By.cssSelector(".cke_source"));
