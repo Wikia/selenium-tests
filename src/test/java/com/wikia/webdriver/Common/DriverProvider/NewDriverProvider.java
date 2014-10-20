@@ -157,6 +157,8 @@ public class NewDriverProvider {
 		}
 
 		caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+		//Disable auto-scroll to frames
+		caps.setCapability("elementScrollBehavior", 1);
 		return new EventFiringWebDriver(new FirefoxDriver(caps));
 	}
 
