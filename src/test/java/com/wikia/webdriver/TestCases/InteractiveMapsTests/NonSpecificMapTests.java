@@ -134,7 +134,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 	@Test(groups = { "InteractiveMaps_048", "NonSpecificMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_048_VerifyFragmentContentTagVisibility() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.escapedFragmentMapId);
 		selectedMap.verifyEscapedFragmentMetaTag();
@@ -143,7 +142,6 @@ public class NonSpecificMapTests extends NewTestTemplate {
 	@Test(groups = { "InteractiveMaps_049", "NonSpecificMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_049_VerifyEscapedFragmentPageContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.escapedFragmentMapId);
 		selectedMap.verifyPoiCategoryTitle();
