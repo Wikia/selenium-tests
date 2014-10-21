@@ -451,7 +451,16 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyMapDeleteError() {
 		waitForElementVisibleByElement(msgTopBar);
-		Assertion.assertEquals(msgTopBar.getText().isEmpty(), false);
+		Assertion.assertFalse(msgTopBar.getText().isEmpty());
+	}
+
+	public void verifyMapDeletedMsg() {
+		waitForElementVisibleByElement(msgTopBar);
+		Assertion.assertEquals(msgTopBar.getText(), InteractiveMapsContent.mapDeletedMsg);
+	}
+
+	public void verifyMapDeletedMsgNotVisible() {
+		Assertion.assertFalse(checkIfElementOnPage(msgTopBar));
 	}
 
 	public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {

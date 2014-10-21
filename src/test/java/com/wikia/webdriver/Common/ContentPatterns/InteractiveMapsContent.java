@@ -15,6 +15,7 @@ public class InteractiveMapsContent {
 	public static final int pinTypeIndex = 0;
 	public static final int selectedMapIndex = 0;
 	public static final int selectedTemplateIndex = 0;
+	public static final int mapToDeleteAndRestore = 4258;
 	public static final String associatedArticleName = "Slid";
 	public static String templateName;
 	public static final String templateNameToSearchShouldBeFound = "te";
@@ -25,4 +26,5 @@ public class InteractiveMapsContent {
 	public static final String pinName = "testingPinName";
 	public static final String mapDeletedSuccesfull = "Map was successfully deleted!";
 	public static final String mapDeleteError = "Sorry, you do not have permission to edit on this wikia. If you think this was a mistake, please contact an administrator.";
+	public static final String mapDeletedMsg = "This map is deleted";
 }
