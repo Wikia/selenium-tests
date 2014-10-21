@@ -33,8 +33,4 @@ public class VenusArticlePageObject extends WikiBasePageObject {
 			throw new WebDriverException("Scrollable table found on page");
 		}
 	}
-
-	public void resizeWindow(Dimension resolution) {
-		driver.manage().window().setSize(resolution);
-	}
 }

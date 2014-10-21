@@ -1215,4 +1215,7 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
+	public void resizeWindow(Dimension resolution) {
+		resizeWindow(resolution.width, resolution.height);
+	}
 }
