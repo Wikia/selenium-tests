@@ -22,9 +22,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 
 
 public class CommonUtils {
@@ -61,13 +58,6 @@ public class CommonUtils {
 
 	public static void appendTextToFile(String filePath, String textToWrite) {
 		try {
-			boolean append;
-			File file = new File(filePath);
-			if (!file.exists()) {
-				append = false;
-			} else {
-				append = true;
-			}
 			FileWriter newFile = new FileWriter(filePath, true);
 			BufferedWriter out = new BufferedWriter(newFile);
 			out.write(textToWrite);
