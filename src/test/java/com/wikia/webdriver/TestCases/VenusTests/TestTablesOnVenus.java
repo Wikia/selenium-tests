@@ -19,7 +19,8 @@ public class TestTablesOnVenus extends NewTestTemplate {
 	)
 	public void TestTablesOnVenus_001_scrollableTablePresent(String wikiName, String article) {
 		String url = urlBuilder.getUrlForPath(wikiName, article);
-		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver, url);
+		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
+		venusArticle.getUrl(url);
 		venusArticle.verifyScrollableTablePresent();
 	}
 
@@ -30,7 +31,8 @@ public class TestTablesOnVenus extends NewTestTemplate {
 	)
 	public void TestTablesOnVenus_002_scrollableTablePresentOnSmallResolution(String wikiName, String article, Dimension bigResolution, Dimension smallResolution) {
 		String url = urlBuilder.getUrlForPath(wikiName, article);
-		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver, url);
+		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
+		venusArticle.getUrl(url);
 		venusArticle.resizeWindow(bigResolution);
 		venusArticle.verifyScrollableTableNotPresent();
 		venusArticle.resizeWindow(smallResolution);
@@ -44,7 +46,8 @@ public class TestTablesOnVenus extends NewTestTemplate {
 	)
 	public void TestTablesOnVenus_002_scrollableTableNotPresent(String wikiName, String article) {
 		String url = urlBuilder.getUrlForPath(wikiName, article);
-		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver, url);
+		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
+		venusArticle.getUrl(url);
 		venusArticle.verifyScrollableTableNotPresent();
 	}
 }

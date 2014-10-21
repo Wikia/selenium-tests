@@ -14,9 +14,8 @@ public class VenusArticlePageObject extends WikiBasePageObject {
 	@FindBy(css = ".table-scrollable-wrapper")
 	private WebElement scrollableTable;
 
-	public VenusArticlePageObject(WebDriver driver, String page) {
+	public VenusArticlePageObject(WebDriver driver) {
 		super(driver);
-		getUrl(page);
 	}
 
 	public void verifyScrollableTablePresent() {
