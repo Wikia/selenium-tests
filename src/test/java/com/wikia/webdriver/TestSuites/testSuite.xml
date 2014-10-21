@@ -156,6 +156,7 @@
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VisualEditorEditingTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VECopyAndPasteTests"/>
 			<class name="com.wikia.webdriver.TestCases.MonetizationTests.MonetizationModule.MonetizationModuleTests"/>
+			<class name="com.wikia.webdriver.TestCases.VenusTests.TestTablesOnVenus"/>
 		</classes>
 	</test>
 </suite>
