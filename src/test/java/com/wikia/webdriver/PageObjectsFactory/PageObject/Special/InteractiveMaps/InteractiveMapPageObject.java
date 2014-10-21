@@ -470,16 +470,16 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyPoiCategoryTitle() {
 		waitForElementByElement(poiCategorySection);
-		PageObjectLogging.log("verifyPoiCategoryTitle", "Poi category section is displayed", true);		
+		PageObjectLogging.log("verifyPoiCategoryTitle", "Poi category section is displayed", true);
 	}
 	
 	public void verifyPoiPointTitle() {
 		waitForElementByElement(poiNameSection);
-		PageObjectLogging.log("verifyPoiPointTitle", "Poi name section is displayed", true);		
+		PageObjectLogging.log("verifyPoiPointTitle", "Poi name section is displayed", true);
 	}
 	
 	public void verifyPoiPointDescription() {
 		waitForElementByElement(poiDescriptionSection);
-		PageObjectLogging.log("verifyPoiPointDescription", "Poi description section is displayed", true);		
+		PageObjectLogging.log("verifyPoiPointDescription", "Poi description section is displayed", true);
 	}
 }

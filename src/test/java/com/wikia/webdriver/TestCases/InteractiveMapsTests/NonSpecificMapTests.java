@@ -140,7 +140,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		selectedMap.verifyEscapedFragmentMetaTag();
 	}
 	
-	@Test(groups = { "InteractiveMaps049", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = { "InteractiveMaps_049", "NonSpecificMapTests", "InteractiveMaps" })
 	public void InteractiveMaps_049_VerifyEscapedFragmentPageContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
