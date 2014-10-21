@@ -130,4 +130,24 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		CreateAMapComponentObject createMap = specialMaps.clickCreateAMapUnderContributeButton();
 		createMap.verifyRealMapAndCustomMapButtons();
 	}
+	
+	@Test(groups = { "InteractiveMaps_048", "NonSpecificMapTests", "InteractiveMaps" })
+	public void InteractiveMaps_048_VerifyFragmentContentTagVisibility() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.escapedFragmentMapId);
+		selectedMap.verifyEscapedFragmentMetaTag();
+	}
+	
+	@Test(groups = { "InteractiveMaps049", "NonSpecificMapTests", "InteractiveMaps" })
+	public void InteractiveMaps_049_VerifyEscapedFragmentPageContent() {
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.logInCookie(credentials.userName, credentials.password, wikiURL);
+		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
+		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.escapedFragmentMapId);
+		selectedMap.verifyPoiCategoryTitle();
+		selectedMap.verifyPoiPointTitle();
+		selectedMap.verifyPoiPointDescription();
+	}
 }
