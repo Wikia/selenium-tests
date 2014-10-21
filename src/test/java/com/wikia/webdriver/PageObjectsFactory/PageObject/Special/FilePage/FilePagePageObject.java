@@ -69,8 +69,8 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private List<WebElement> historyDeleteLinks;
 	@FindBy(css=".boilerplate b")
 	private WebElement imgLicensePlate;
-
-	String selectedTab = ".tabBody.selected[data-tab-body='%name%']";
+	@FindBy(css=".tabBody.selected")
+	private WebElement tabBody;
 
 	public void clickTab(int tab) {
 		WebElement currentTab = tabList.get(tab);
@@ -94,7 +94,8 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 
 	public void verifySelectedTab(String tabName) {
-		driver.findElement(By.cssSelector(selectedTab.replace("%name%", tabName)));
+		waitForElementByElement(tabBody);
+		Assertion.assertEquals(tabName, tabBody.getAttribute("data-tab-body"));
 		PageObjectLogging.log(
 				"verified selected tab",
 				tabName + " selected",

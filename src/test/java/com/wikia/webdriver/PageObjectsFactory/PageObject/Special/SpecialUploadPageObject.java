@@ -12,11 +12,11 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePa
 public class SpecialUploadPageObject extends WikiBasePageObject {
 
 
-	@FindBy(css="input[name='wpUploadFile']")
+	@FindBy(css="#wpUploadFile")
 	private WebElement browseForFileInput;
-	@FindBy(css="input[name='wpIgnoreWarning']")
+	@FindBy(css="#wpIgnoreWarning")
 	private WebElement ignoreAnyWarnings;
-	@FindBy(css="input.mw-htmlform-submit[value*='Upload']")
+	@FindBy(css="input.mw-htmlform-submit")
 	private WebElement uploadFileInput;
 	@FindBy(css="#wpDestFile")
 	private WebElement uploadFileName;
@@ -47,11 +47,13 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	}
 
 	public void checkIgnoreAnyWarnings() {
+		waitForElementClickableByElement(ignoreAnyWarnings);
 		scrollAndClick(ignoreAnyWarnings);
 		PageObjectLogging.log(
 				"checkIgnoreAnyWarnings",
 				"ignore warnings checkbox selected",
-				true
+				true,
+				driver
 		);
 
 	}
