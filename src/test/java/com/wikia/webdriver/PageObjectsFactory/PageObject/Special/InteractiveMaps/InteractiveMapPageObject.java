@@ -113,8 +113,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement poiNameSection;
 	@FindBy(css = ".wikia-interactive-map dd")
 	private WebElement poiDescriptionSection;
-	private By escapedFragmentMetaDataTag = By
-			.cssSelector("meta[name='fragment']");
+	private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
 	public enum embedMapDialogButtons {
 		small, medium, large;
