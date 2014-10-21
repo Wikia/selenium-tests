@@ -104,6 +104,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement actionDropDown;
 	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #deleteMap")
 	private WebElement deleteMapButton;
+	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #undeleteMap")
+	private WebElement restoreMapButton;
+	@FindBy(css = ".msg")
+	private WebElement msgTopBar;
 
 	public enum embedMapDialogButtons {
 		small, medium, large;
@@ -436,5 +440,30 @@ public class InteractiveMapPageObject extends BasePageObject {
 		actionDropDown.click();
 		deleteMapButton.click();
 		return new DeleteAMapComponentObject(driver);
+	}
+	
+	public DeleteAMapComponentObject restoreMap() {
+		waitForElementByElement(actionDropDown);
+		actionDropDown.click();
+		restoreMapButton.click();
+		return new DeleteAMapComponentObject(driver);
+	}
+
+	public void verifyMapDeleteError() {
+		waitForElementVisibleByElement(msgTopBar);
+		Assertion.assertFalse(msgTopBar.getText().isEmpty());
+	}
+
+	public void verifyMapDeletedMsg() {
+		waitForElementVisibleByElement(msgTopBar);
+		Assertion.assertEquals(InteractiveMapsContent.mapDeletedMsg, msgTopBar.getText());
+	}
+
+	public void verifyMapDeletedMsgNotVisible() {
+		Assertion.assertFalse(checkIfElementOnPage(msgTopBar));
+	}
+
+	public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {
+		Assertion.assertEquals(mapIdExpected, mapIdActual);
 	}
 }

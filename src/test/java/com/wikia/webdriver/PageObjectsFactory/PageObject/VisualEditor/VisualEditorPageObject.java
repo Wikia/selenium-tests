@@ -2,6 +2,8 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import com.wikia.webdriver.Common.ContentPatterns.VEContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Indentation;
@@ -22,6 +25,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertLi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorEditTemplateDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorMediaSettingsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
@@ -75,9 +79,15 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement focusedNode;
 	@FindBy(css=".ve-ce-focusableNode-highlights")
 	private WebElement nodeHighlight;
+	@FindBy(css=".mw-body-content")
+	private WebElement mainContent;
 
-	private By mediaContextMenuBy = By.cssSelector(".ve-ui-contextWidget");
-	private By mediaEditBy = By.cssSelector(".oo-ui-icon-edit");
+	private By contextMenuBy = By.cssSelector(".ve-ui-contextWidget");
+	private By contextEditBy = By.cssSelector(".oo-ui-icon-edit");
+	private By blockTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionBlockNode");
+	private By inlineTransclusionBy = By.cssSelector(".ve-ce-mwTransclusionInlineNode");
+
+	private String blockTransclusionString = ".ve-ce-mwTransclusionBlockNode";
 
 	public void selectMediaAndDelete() {
 		waitForElementByElement(editArea);
@@ -209,13 +219,13 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	private void clickContextMenu() {
 		waitForElementVisibleByElement(contextMenu);
-		WebElement mediaEdit;
+		WebElement contextEdit;
 		try {
-			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
-			mediaEdit.click();
+			contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
+			contextEdit.click();
 		} catch (StaleElementReferenceException e) {
-			mediaEdit = contextMenu.findElement(mediaContextMenuBy).findElement(mediaEditBy);
-			mediaEdit.click();
+			contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
+			contextEdit.click();
 		}
 	}
 
@@ -343,5 +353,63 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public Dimension getVideoDimension() {
 		return mediaNode.getSize();
+	}
+
+	public int getNumberOfBlockTransclusion() {
+		return getNumOfElementOnPage(blockTransclusionBy);
+	}
+
+	public int getNumberOfInlineTransclusion() {
+		return getNumOfElementOnPage(inlineTransclusionBy);
+	}
+
+	public void verifyNumberOfBlockTransclusion(int expected) {
+		Assertion.assertNumber(expected, getNumOfElementOnPage(blockTransclusionBy), "The number of blocked transclusion node is not equal");
+	}
+
+	public void verifyNumberOfInlineTransclusion(int expected) {
+		Assertion.assertNumber(expected, getNumOfElementOnPage(inlineTransclusionBy), "The number of inline transclusion node is not equal");
+	}
+
+	public void deleteBlockTransclusion(int index) {
+		clickBlockTransclusion(index);
+		Actions actions2 = new Actions(driver);
+		actions2.sendKeys(Keys.DELETE).build().perform();
+	}
+
+	public void clickBlockTransclusion(int index) {
+		Point tempLocation = getBlockTransclusionLocation(index);
+		int xOffset = 10;
+		int yOffset = 10;
+		int tempLeft = tempLocation.x + xOffset;
+		int tempTop = tempLocation.y + yOffset;
+		Actions actions = new Actions(driver);
+		actions.moveToElement(mainContent, tempLeft, tempTop).clickAndHold().build().perform();
+		WebElement contextEdit = contextMenu.findElement(contextMenuBy).findElement(contextEditBy);
+		waitForElementVisibleByElement(contextEdit);
+		PageObjectLogging.log("clickBlockTransclusion", "Clicked at X: " + tempLeft + ", Y: " + tempTop, true, driver);
+	}
+
+	private Point getBlockTransclusionLocation(int index) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		Object templateBounding = js.executeScript(VEContent.boundingScript, blockTransclusionString, index);
+		JSONObject json;
+		int tempLeft = 0, tempTop = 0;
+		try {
+			json = new JSONObject(templateBounding.toString());
+			tempLeft = new Double(json.get("left").toString()).intValue();
+			tempTop = new Double(json.get("top").toString()).intValue();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Point(tempLeft, tempTop);
+	}
+
+	public VisualEditorEditTemplateDialog openEditTemplateDialog() {
+		waitForElementByElement(editArea);
+		waitForElementByElement(focusedNode);
+		clickContextMenu();
+		return new VisualEditorEditTemplateDialog(driver);
 	}
 }

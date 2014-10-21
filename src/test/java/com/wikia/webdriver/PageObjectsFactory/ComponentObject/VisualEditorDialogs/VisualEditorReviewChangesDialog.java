@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialo
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,8 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 	private List<WebElement> addedLines;
 	@FindBy(css=".diff-deletedline")
 	private List<WebElement> deletedLines;
+
+	private final String diffLineString = ".diffchange-inline";
 
 	private final int DELETE = 0;
 	private final int INSERT = 1;
@@ -68,23 +71,37 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 	private void verifyArticleDiffs(ArrayList<String> targets, int mode) {
 		int count = 0;
 		int expectedCount = 0;
-		List<WebElement> lines = null;
+		List<WebElement> diffLines = null;
 		if (mode == DELETE) {
 			expectedCount = deletedLines.size();
-			lines = deletedLines;
+			diffLines = deletedLines;
 		} else if (mode == INSERT) {
 			expectedCount = addedLines.size();
-			lines = addedLines;
+			diffLines = addedLines;
 		}
-		for (WebElement current : lines) {
-			String currentText = current.getText();
-			if (!currentText.isEmpty()) {
-				if(foundAddedDiff(targets, currentText)) {
-					targets.remove(currentText);
-					count++;
+		for (WebElement currentDiff : diffLines) {
+			String currentText;
+			//Check to see if the current diff line has inline diff
+			if(checkIfElementInElement(diffLineString, currentDiff)) {
+				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(diffLineString));
+				//iterate through multiple inline diffs
+				for(WebElement currentInlineDiff : inlineDiffs) {
+					String currentInlineText = currentInlineDiff.getText();
+					if(isDiffFound(targets, currentInlineText)) {
+						targets.remove(currentInlineText);
+						count++;
+					}
 				}
 			} else {
-				expectedCount--;
+				currentText = currentDiff.getText();
+				if (currentText.isEmpty()) {
+					expectedCount--;
+				} else {
+					if(isDiffFound(targets, currentText)) {
+						targets.remove(currentText);
+						count++;
+					}
+				}
 			}
 		}
 		Assertion.assertNumber(expectedCount, count, "Number of diffs.");
@@ -104,7 +121,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		Assertion.assertStringContains(target, source);
 	}
 
-	private boolean foundAddedDiff(ArrayList<String> targets, String source) {
+	private boolean isDiffFound(ArrayList<String> targets, String source) {
 		for (String target : targets) {
 			if (source.contains(target))
 				return true;

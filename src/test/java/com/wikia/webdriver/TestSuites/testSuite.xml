@@ -41,6 +41,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestAdTypeMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestLeaderboardPresenceOnMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestSlotsMobile"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests.TestDfpParamsPresentMobile"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAds"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaAdsOnRedirects"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.Test71MediaNoAdsForUsers"/>
@@ -140,10 +141,18 @@
 			<class name="com.wikia.webdriver.TestCases.ArticleCRUDTests.ClicktrackingArticleEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideosModule.VideosModuleTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoHomePageTests"/>
-			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.InteractiveMapsTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.BlockedUserMapTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.EmbedMapTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.FilterBoxMapTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.MapFlowTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.NonSpecificMapTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.PalantirTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.PinMapTests"/>
+			<class name="com.wikia.webdriver.TestCases.InteractiveMapsTests.PinTypeMapTests"/>
 			<class name="com.wikia.webdriver.TestCases.MediaTests.VideoHomePage.VideoPageAdminTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.EditingPreferencesTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.VERecaptchaTests"/>
+			<class name="com.wikia.webdriver.TestCases.VisualEditor.VETemplateTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VisualEditorEditingTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.Text.VECopyAndPasteTests"/>
 			<class name="com.wikia.webdriver.TestCases.MonetizationTests.MonetizationModule.MonetizationModuleTests"/>
