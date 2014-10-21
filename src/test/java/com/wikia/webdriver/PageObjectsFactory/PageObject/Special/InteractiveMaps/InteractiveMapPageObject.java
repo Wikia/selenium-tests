@@ -456,7 +456,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyMapDeletedMsg() {
 		waitForElementVisibleByElement(msgTopBar);
-		Assertion.assertEquals(msgTopBar.getText(), InteractiveMapsContent.mapDeletedMsg);
+		Assertion.assertEquals(InteractiveMapsContent.mapDeletedMsg, msgTopBar.getText());
 	}
 
 	public void verifyMapDeletedMsgNotVisible() {
@@ -464,6 +464,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {
-		Assertion.assertEquals(mapIdActual, mapIdExpected);
+		Assertion.assertEquals(mapIdExpected, mapIdActual);
 	}
 }
