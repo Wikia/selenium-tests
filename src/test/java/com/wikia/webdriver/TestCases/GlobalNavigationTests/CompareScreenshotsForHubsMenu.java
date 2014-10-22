@@ -20,34 +20,41 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 	 */
 	@Test(groups = {"HubsMenu_001", "GlobalNav"})
 	public void compareScreenshotForHubsMenu() {
-		Shooter shooter = new Shooter();
+
 
 		HomePageObject homePage = new HomePageObject(driver);
-		homePage.openWikiPage("http://sandbox-qa02.serowiec.wikia.com/wiki/Serowiec_123_Wiki");
+		homePage.openWikiPage(urlBuilder.getUrlForWiki("serowiec"));
 
-		ImageComparison comparator = new ImageComparison();
-		boolean ifFailed = false;
+		boolean failed = false;
 
-		for (GlobalNavPageObject.Hub label : GlobalNavPageObject.Hub.values()) {
-			homePage.getGlobalNav().openHub(label);
-			File currentFile = shooter.captureWebElement(homePage.getGlobalNav().getMenuScreenShotArea(), driver);
-			String expectedFilePath = ClassLoader.getSystemResource("Baseline/" + label.getLabelText() + ".png")
-					.getPath();
-			File expectedFile = new File(expectedFilePath);
-			try {
-				Assertion
-						.assertTrue(comparator.areFilesTheSame(currentFile, expectedFile));
-			} catch (AssertionError e) {
-				ifFailed = true;
-				PageObjectLogging
-						.log("Design is not as expected for: " + label
-								.getLabelText(), "Expected: " + expectedFilePath, false, driver);
-			}
+		for (GlobalNavPageObject.Hub hubName : GlobalNavPageObject.Hub.values()) {
+			homePage.getGlobalNav().openHub(hubName);
+			failed = takeScreenshotAndCompare(homePage.getGlobalNav().getMenuScreenShotArea(), hubName.getLabelText());
 		}
 
 		//Throw exception if any test fails, just to mark whole test as failed
-		if (ifFailed) {
+		if (failed) {
 			throw new AssertionError();
+		}
+	}
+
+	private boolean takeScreenshotAndCompare(org.openqa.selenium.WebElement element, String expectedFileName) {
+		Shooter shooter = new Shooter();
+
+		ImageComparison comparator = new ImageComparison();
+
+		File currentFile = shooter.captureWebElement(element, driver);
+		String expectedFilePath = ClassLoader.getSystemResource("Baseline/" + expectedFileName + ".png")
+				.getPath();
+		File expectedFile = new File(expectedFilePath);
+		try {
+			Assertion
+					.assertTrue(comparator.areFilesTheSame(currentFile, expectedFile));
+			return false;
+		} catch (AssertionError e) {
+			PageObjectLogging
+					.log("Design is not as expected for: " + expectedFileName, "Expected: " + expectedFilePath, false, driver);
+			return true;
 		}
 	}
 }

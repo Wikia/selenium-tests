@@ -40,7 +40,21 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Login.SpecialUs
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Multiwikifinder.SpecialMultiWikiFinderPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences.PreferencesPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.*;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialAdminDashboardPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialContributionsPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCreatePagePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialCssPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialEditHubPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFBConnectPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialFactoryPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialManageWikiaHome;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialMultipleUploadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialNewFilesPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialPromotePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialRestorePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialUploadPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialWikiActivityPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.FeaturedVideoAdminPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHomePageObject;
@@ -60,9 +74,16 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.json.Json;
@@ -253,7 +274,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SpecialUncategorizedFilesPageObject openSpecialUncategorizedFilesPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUncategorizedFiles);
-		PageObjectLogging.log("openSpecialUncategorizedFilesPage", URLsContent.specialUncategorizedFiles + " opened", true);
+		PageObjectLogging
+				.log("openSpecialUncategorizedFilesPage", URLsContent.specialUncategorizedFiles + " opened", true);
 		return new SpecialUncategorizedFilesPageObject(driver);
 	}
 
@@ -300,7 +322,8 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public HistoryPagePageObject openFileHistoryPage(String articlePage, String wikiURL) {
-		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + articlePage, URLsContent.historyAction));
+		getUrl(urlBuilder
+				.appendQueryStringToURL(wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + articlePage, URLsContent.historyAction));
 		PageObjectLogging.log("openFileHistoryPage", "history page opened", true);
 		return new HistoryPagePageObject(driver);
 	}
@@ -320,7 +343,8 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public EditingPreferencesPageObject openSpecialEditingPreferencesPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialEditingPreferences);
-		PageObjectLogging.log("EditingPreferencesPageObject", "Special:Prefereces#mw-prefsection-editing page opened", true);
+		PageObjectLogging
+				.log("EditingPreferencesPageObject", "Special:Prefereces#mw-prefsection-editing page opened", true);
 		return new EditingPreferencesPageObject(driver);
 	}
 
@@ -597,11 +621,13 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyUserLoggedIn(String userName) {
 		if (body.getAttribute("class").contains("skin-monobook")) {
 			driver.findElement(
-					By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(" ", "_"))));// only for verification
+					By.cssSelector(loggedInUserSelectorMonobook
+							.replace("%userName%", userName.replace(" ", "_"))));// only for verification
 		} else {
 			//oasis
 			driver.findElement(
-					By.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName.replace(" ", "_"))));// only for verification
+					By.cssSelector(loggedInUserSelectorOasis
+							.replace("%userName%", userName.replace(" ", "_"))));// only for verification
 		}
 		PageObjectLogging.log(
 				"verifyUserLoggedIn",
@@ -1174,7 +1200,8 @@ public class WikiBasePageObject extends BasePageObject {
 			driver.manage().window().setSize(new Dimension(width, height));
 			PageObjectLogging.log("ResizeWindow", "Resize window (width=" + width + ", height=" + height + ")", true);
 		} catch (WebDriverException ex) {
-			PageObjectLogging.log("ResizeWindow", "Cannot resize window (width=" + width + ", height=" + height + ")", true);
+			PageObjectLogging
+					.log("ResizeWindow", "Cannot resize window (width=" + width + ", height=" + height + ")", true);
 		}
 	}
 
