@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
@@ -23,9 +24,9 @@ public class PhotoAddComponentObject extends BasePageObject{
 	@FindBy(css="#WMU_source_0")
 	private WebElement thisWikiButton;
 	@FindBy(css="#ImageUploadFile")
-	private WebElement chooseFileInput;	
+	private WebElement chooseFileInput;
 	@FindBy(css="#ImageUploadForm input:nth-child(2)")
-	private WebElement uploadButton;	
+	private WebElement uploadButton;
 	@FindBy(css="tr.ImageUploadFindImages td a")
 	private List<WebElement> addThisPhotoList;
 
@@ -62,6 +63,14 @@ public class PhotoAddComponentObject extends BasePageObject{
 		return new PhotoOptionsComponentObject(driver);
 	}
 
+	public PhotoOptionsComponentObject clickAddThisPhoto(String fileName){
+		WebElement photo = getElementByValue(addThisPhotoList, "title", fileName);
+		photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
+		scrollAndClick(photo);
+		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
+		return new PhotoOptionsComponentObject(driver);
+	}
+
 	public String getPhotoName(){
 		return photoName;
 	}
@@ -76,6 +85,13 @@ public class PhotoAddComponentObject extends BasePageObject{
 		clickAddThisPhoto(photoNumber);
 		return new PhotoOptionsComponentObject(driver);
 	}
+
+	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName){
+		typeSearchQuery(photoName);
+		clickAddThisPhoto(photoName);
+		return new PhotoOptionsComponentObject(driver);
+	}
+
 
 	public void clickThisWiki(){
 		thisWikiButton.click();
