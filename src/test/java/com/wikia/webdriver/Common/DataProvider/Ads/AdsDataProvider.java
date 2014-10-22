@@ -127,21 +127,6 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
-	public static final Object[][] mobileDesktopOverlapping() {
-		return new Object[][] {
-			{
-				"adtest", "Mobile:MobileDesktopOverlapping",
-				"http://pagead2.googlesyndication.com/simgad/13365248683236755956",
-				"http://pagead2.googlesyndication.com/simgad/1444156043613737882"
-			}, {
-				"adtest", "Mobile:MobileDesktopOverlapping_postSwitch",
-				"http://pagead2.googlesyndication.com/simgad/2078293277703974918",
-				"http://pagead2.googlesyndication.com/simgad/10332844232748374153"
-			}
-		};
-	}
-
-	@DataProvider
 	public static final Object[][] gptAdsInToolbar() {
 		return new Object[][] {
 			{
@@ -161,19 +146,19 @@ public class AdsDataProvider {
 		return new Object[][] {
 			{
 				"adtest-fluid", "Skin",
-				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				"googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(1366, 768),
 				"src/test/resources/adsResources/skin1366_left",
 				"src/test/resources/adsResources/skin1366_right",
 			}, {
 				"adtest-fluid", "Skin",
-				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				"googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(1920, 1080),
 				"src/test/resources/adsResources/skin1920_left",
 				"src/test/resources/adsResources/skin1920_right",
 			}, {
 				"adtest-fluid", "Skin",
-				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				"googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(2400, 1080),
 				"src/test/resources/adsResources/skin2400_left",
 				"src/test/resources/adsResources/skin2400_right",
@@ -186,7 +171,7 @@ public class AdsDataProvider {
 		return new Object[][] {
 			{
 				"adtest-fluid", "Skin",
-				"http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
+				"googlesyndication.com/pagead/imgad?id=CICAgKDj_tGgExABGAEyCAFOS9flq_rQ",
 				new Dimension(1920, 1080),
 				"src/test/resources/adsResources/skin1920_left",
 				"src/test/resources/adsResources/skin1920_right",
