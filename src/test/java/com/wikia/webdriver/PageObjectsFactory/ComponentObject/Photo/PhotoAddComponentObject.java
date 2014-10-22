@@ -92,7 +92,6 @@ public class PhotoAddComponentObject extends BasePageObject{
 		return new PhotoOptionsComponentObject(driver);
 	}
 
-
 	public void clickThisWiki(){
 		thisWikiButton.click();
 		PageObjectLogging.log("clickThisWiki", "this wiki button clicked", true);
