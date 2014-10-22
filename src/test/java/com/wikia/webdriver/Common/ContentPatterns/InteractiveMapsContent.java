@@ -27,4 +27,5 @@ public class InteractiveMapsContent {
 	public static final String articleWhichDoesNotExist = "asdkljaskldjaskldjaskldjaskldjaskldjaskldjaskldjaskljdaskl";
 	public static final String associatedArticlePlaceholder= "Related article name or external URL";
 	public static final String articleNotExistsError = "Error message: there is no %articlename% article on this wikia nor it's valid URL address.";
+	public static final String escapedFragmentMapId = "69";
 }
