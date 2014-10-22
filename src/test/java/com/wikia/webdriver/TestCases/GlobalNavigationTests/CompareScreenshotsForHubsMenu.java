@@ -18,7 +18,7 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 	 * Test is taking screenshots of of hubs menu in global navigation and comparing to the expected designs from
 	 * resources folder located in 'Baseline' folder
 	 */
-	@Test(groups = {"HubsMenu_001", "GlobalNav"})
+	@Test(groups = {"HubsMenu_001_comapreScreenshotsForHubsMenu", "GlobalNav"})
 	public void compareScreenshotForHubsMenu() {
 
 
