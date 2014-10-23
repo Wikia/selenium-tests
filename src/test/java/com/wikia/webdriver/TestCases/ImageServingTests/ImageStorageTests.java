@@ -60,12 +60,17 @@ public class ImageStorageTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-		String fileName = newFiles.getRandomImageName();
+		String fileName = PageContent.fileRename;
 		FilePagePageObject file = newFiles.openFilePage(wikiURL, fileName);
 		RenamePageObject renamePage = file.renameUsingDropdown();
 		String imageNewName = renamePage.getTimeStamp() + fileName;
 		renamePage.rename(imageNewName);
 		file.verifyHeader(imageNewName);
+		file.verifyNotificationMessage();
+		file = newFiles.openFilePage(wikiURL, imageNewName);
+		renamePage = file.renameUsingDropdown();
+		renamePage.rename(fileName);
+		file.verifyHeader(fileName);
 		file.verifyNotificationMessage();
 	}
 }

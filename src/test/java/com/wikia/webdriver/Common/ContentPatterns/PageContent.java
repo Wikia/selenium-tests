@@ -57,6 +57,7 @@ public class PageContent {
 	public static String brokenExtensionFile = "broken-extension-image.fer";
 	//image storage
 	public static String fileDeleteAndRestore = "Constantine_test.png";
+	public static String fileRename = "HongKongHarbour.jpg";
 
 	public static String[] listOfFiles = {
 			"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
