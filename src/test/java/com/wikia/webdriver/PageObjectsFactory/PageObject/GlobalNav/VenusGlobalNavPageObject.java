@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GlobalNavPageObject {
+public class VenusGlobalNavPageObject {
 
 	private static final String HUBS_XPATH_FORMAT = ".//a[./span[@class='label'][contains(text(),'%s')]]";
 
@@ -22,13 +22,13 @@ public class GlobalNavPageObject {
 
 	private WebDriver driver;
 
-	public GlobalNavPageObject(WebDriver driver) {
+	public VenusGlobalNavPageObject(WebDriver driver) {
 		this.driver = driver;
 
 		PageFactory.initElements(this.driver, this);
 	}
 
-	public GlobalNavPageObject openHub(Hub hub) {
+	public VenusGlobalNavPageObject openHub(Hub hub) {
 
 		openHubsMenu();
 
@@ -46,7 +46,7 @@ public class GlobalNavPageObject {
 		return this;
 	}
 
-	private GlobalNavPageObject openHubsMenu() {
+	private VenusGlobalNavPageObject openHubsMenu() {
 		new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
 			@Override
 			public Boolean apply(WebDriver webDriver) {

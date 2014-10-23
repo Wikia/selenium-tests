@@ -5,7 +5,6 @@ import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav.GlobalNavPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import org.testng.annotations.Test;
 
@@ -17,17 +16,18 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 	 * Test is taking screenshots of of hubs menu in global navigation and comparing to the expected designs from
 	 * resources folder located in 'Baseline' folder
 	 */
-	@Test(groups = {"HubsMenu_001_comapreScreenshotsForHubsMenu", "GlobalNav"})
-	public void compareScreenshotForHubsMenu() {
+	@Test(groups = {"HubsMenu_001", "GlobalNav"})
+	public void HubsMenu_001_compareScreenshotForHubsMenu() {
 
 		HomePageObject homePage = new HomePageObject(driver);
 		homePage.openWikiPage(urlBuilder.getUrlForWiki("serowiec"));
 
 		boolean failed = false;
 
-		for (GlobalNavPageObject.Hub hubName : GlobalNavPageObject.Hub.values()) {
-			homePage.getGlobalNav().openHub(hubName);
-			failed = takeScreenshotAndCompare(homePage.getGlobalNav().getMenuScreenShotArea(), hubName.getLabelText());
+		for (com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav.VenusGlobalNavPageObject.Hub hubName : com
+				.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav.VenusGlobalNavPageObject.Hub.values()) {
+			homePage.getVenusGlobalNav().openHub(hubName);
+			failed = takeScreenshotAndCompare(homePage.getVenusGlobalNav().getMenuScreenShotArea(), hubName.getLabelText());
 		}
 
 		//Throw exception if any test fails, just to mark whole test as failed
