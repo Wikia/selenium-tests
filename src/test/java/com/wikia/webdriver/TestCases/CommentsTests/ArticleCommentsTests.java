@@ -73,7 +73,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ArticleComments_004", "ArticleComments"})
-	public void ArticleComments_004_deleteComment() {
+	public void ArticleComments_004_deleteComment_MAIN_3055() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
