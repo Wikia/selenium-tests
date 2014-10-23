@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.GlobalNavigationTests;
 
-
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
@@ -20,7 +19,6 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 	 */
 	@Test(groups = {"HubsMenu_001_comapreScreenshotsForHubsMenu", "GlobalNav"})
 	public void compareScreenshotForHubsMenu() {
-
 
 		HomePageObject homePage = new HomePageObject(driver);
 		homePage.openWikiPage(urlBuilder.getUrlForWiki("serowiec"));
@@ -53,7 +51,8 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 			return false;
 		} catch (AssertionError e) {
 			PageObjectLogging
-					.log("Design is not as expected for: " + expectedFileName, "Expected: " + expectedFilePath, false, driver);
+					.log("Design is not as expected for: " + expectedFileName, "Expected: " + expectedFilePath, false,
+							driver);
 			return true;
 		}
 	}
