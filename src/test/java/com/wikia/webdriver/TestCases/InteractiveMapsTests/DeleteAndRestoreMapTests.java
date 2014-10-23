@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
@@ -17,22 +18,23 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
 public class DeleteAndRestoreMapTests extends NewTestTemplate{
 
 	Credentials credentials = config.getCredentials();
+	WikiBasePageObject base;
+	InteractiveMapPageObject selectedMap;
 
-	@Test(groups = {"DeleteAndRestoreMapTests_001", "InteractiveMaps"})
+	@Test(groups = {"DeleteAndRestoreMapTests_001", "DeleteAndRestoreMapTests", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTestsMapTests_001_DeleteMapAsAMapOwner() {
-		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		InteractiveMapPageObject selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore);
+		selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore);
 		String deletedMapId = selectedMap.getEmbedMapID();
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
 		specialMap.verifyMapDeletedMessage();
-		selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
-		String openMapId = selectedMap.getEmbedMapID();
-		DeleteAMapComponentObject.verifyMapWasDeleted(deletedMapId, openMapId);
+		selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore);
+		selectedMap.verifyMapDeletedMsg();
 	}
 
-	@Test(groups = {"DeleteAndRestoreMapTests_002", "InteractiveMaps"})
+	@Test(groups = {"DeleteAndRestoreMapTests_002", "DeleteAndRestoreMapTests", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTests_002_RestoreMapAsAMapOwner() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -42,7 +44,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		selectedMap.restoreMap();
 	}
 
-	@Test(groups = {"DeleteAndRestoreMapTests_003", "InteractiveMaps"})
+	@Test(groups = {"DeleteAndRestoreMapTests_003", "DeleteAndRestoreMapTests", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTests_003_DeleteMapByNotOwner() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName2, credentials.password2, wikiURL);
@@ -51,14 +53,9 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		deleteMapModal.clickDeleteMap();
 		deleteMapModal.verifyDeleteMapError();
-		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
-		String openSecondMapId = selectedMap.getEmbedMapID();
-		selectedMap.verifyMapOpened();
-		selectedMap.verifyOpenMapId(openSecondMapId, tryDeleteMapId);
 	}
 
-	@Test(groups = {"DeleteAndRestoreMapTests_004", "InteractiveMaps"})
+	@Test(groups = {"DeleteAndRestoreMapTests_004", "DeleteAndRestoreMapTests", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTests_004_StaffUserCanDeleteMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -68,12 +65,9 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
 		specialMap.verifyMapDeletedMessage();
-		selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
-		String openMapId = selectedMap.getEmbedMapID();
-		DeleteAMapComponentObject.verifyMapWasDeleted(deletedMapId, openMapId);
 	}
 
-	@Test(groups = {"DeleteAndRestoreMapTests_005", "InteractiveMaps"})
+	@Test(groups = {"DeleteAndRestoreMapTests_005", "DeleteAndRestoreMapTests", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTests_005_StaffUserCanRestoreMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -84,7 +78,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		selectedMap.verifyMapDeletedMsgNotVisible();
 	}
 
-	@Test(groups = {"DeleteAndRestoreMapTests_006", "InteractiveMaps"})
+	@Test(groups = {"DeleteAndRestoreMapTests_006", "DeleteAndRestoreMapTests", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTests_006_SysOpCanDeleteMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSysop, credentials.passwordSysop, wikiURL);
@@ -94,12 +88,9 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
 		specialMap.verifyMapDeletedMessage();
-		selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
-		String openMapId = selectedMap.getEmbedMapID();
-		DeleteAMapComponentObject.verifyMapWasDeleted(deletedMapId, openMapId);
 	}
 
-	@Test(groups = {"DeleteAndRestoreMapTests_007", "InteractiveMaps"})
+	@Test(groups = {"DeleteAndRestoreMapTests_007", "DeleteAndRestoreMapTests", "InteractiveMaps"})
 	public void DeleteAndRestoreMapTests_007_SysOpCanRestoreMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameSysop, credentials.passwordSysop, wikiURL);
