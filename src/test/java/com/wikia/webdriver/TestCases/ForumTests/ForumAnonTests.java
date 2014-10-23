@@ -21,7 +21,7 @@ public class ForumAnonTests extends NewTestTemplate{
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 	}
 
-	@Test(groups= {"ForumAnonTests_002", "ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumAnonTests_002", "ForumAnonTests", "Forum"} )
 	public void ForumAnonTests_002_replyToThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		String title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
