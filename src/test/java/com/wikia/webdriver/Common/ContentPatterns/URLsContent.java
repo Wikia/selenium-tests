@@ -172,4 +172,7 @@ public class URLsContent {
 
 	//Embed map URL for Interactive Maps
 	public static final String embedMapEditPage = "wiki/EmbedMap?action=edit";
+	
+	//Escaped frament URL for Maps
+	public static final String escapedFragment = "?_escaped_fragment_";
 }

@@ -3,8 +3,6 @@ package com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests;
 import com.wikia.webdriver.Common.DataProvider.Ads.MobileAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.Mobile.MobileTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Mobile.MobileAdsBaseObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 /**
