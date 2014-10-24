@@ -97,6 +97,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VideoHomePage.VideoHome
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Cookie;
@@ -193,6 +194,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+	private String loggedInUserSelectorVenus = ".ajaxLogin.global-navigation-link[title*='%s']";
 
 	private VenusGlobalNavPageObject venusGlobalNav;
 
@@ -203,10 +205,6 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public enum PositionsVideo {
 		left, center, right
-	}
-
-	public enum StyleVideo {
-		caption, nocaption;
 	}
 
 	public enum HubName {
@@ -321,15 +319,14 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public PreferencesPageObject openSpecialPreferencesPage(String wikiURL){
-		getUrl(wikiURL+URLsContent.specialPreferences);
+		getUrl(wikiURL + URLsContent.specialPreferences);
 		PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 		return new PreferencesPageObject(driver);
 	}
 
 	public EditingPreferencesPageObject openSpecialEditingPreferencesPage(String wikiURL) {
 		getUrl(wikiURL+URLsContent.specialEditingPreferences);
-		PageObjectLogging.log("EditingPreferencesPageObject", "Special:Prefereces#mw-prefsection-editing page opened",
-				true);
+		PageObjectLogging.log("EditingPreferencesPageObject", "Special:Prefereces#mw-prefsection-editing page opened", true);
 		return new EditingPreferencesPageObject(driver);
 	}
 
@@ -494,11 +491,11 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementClickableByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-				"openVEModeWithSectionEditButton",
-				"VE edit button clicked at section: " + section,
-				true,
-				driver
-							 );
+			"openVEModeWithSectionEditButton",
+			"VE edit button clicked at section: " + section,
+			true,
+			driver
+		);
 		return new VisualEditorPageObject(driver);
 	}
 
@@ -507,11 +504,11 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-				"openCKModeWithSectionEditButton",
-				"RTE edit button clicked at section: " + section,
-				true,
-				driver
-							 );
+			"openCKModeWithSectionEditButton",
+			"RTE edit button clicked at section: " + section,
+			true,
+			driver
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -520,21 +517,21 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-			"openSrcModeWithSectionEditButton",
-			"Src edit button clicked at section: " + section,
-			true,
-			driver
-		);
+				"openSrcModeWithSectionEditButton",
+				"Src edit button clicked at section: " + section,
+				true,
+				driver
+							 );
 		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToCurrentArticleEditPage() {
 		getUrl(
-				urlBuilder.appendQueryStringToURL(
-						driver.getCurrentUrl(),
-						URLsContent.actionEditParameter
-												 )
-			  );
+			urlBuilder.appendQueryStringToURL(
+				driver.getCurrentUrl(),
+				URLsContent.actionEditParameter
+			)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -549,23 +546,23 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SourceEditModePageObject navigateToArticleEditPageSrc(String wikiURL, String article) {
 		getUrl(
-				urlBuilder.appendQueryStringToURL(
-						wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
-												 )
-			  );
+			urlBuilder.appendQueryStringToURL(
+				wikiURL + URLsContent.wikiDir + article, URLsContent.actionEditParameter
+			)
+		);
 		return new SourceEditModePageObject(driver);
 	}
 
 	public VisualEditModePageObject goToArticleDefaultContentEditPage(String wikiURL, String article) {
 		getUrl(
+			urlBuilder.appendQueryStringToURL(
 				urlBuilder.appendQueryStringToURL(
-						urlBuilder.appendQueryStringToURL(
-								wikiURL + URLsContent.wikiDir + article,
-								URLsContent.actionEditParameter
-														 ),
-						URLsContent.useDefaultFormat
-												 )
-			  );
+					wikiURL + URLsContent.wikiDir + article,
+					URLsContent.actionEditParameter
+				),
+				URLsContent.useDefaultFormat
+			)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -586,38 +583,31 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialUserLoginPageObject openSpecialUserLoginOnWiki(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUserLogin);
 		PageObjectLogging.log(
-				"SpecialUserLoginOnWiki",
-				"Special:UserLogin opened on: " + wikiURL,
-				true
-							 );
+			"SpecialUserLoginOnWiki",
+			"Special:UserLogin opened on: " + wikiURL,
+			true
+		);
 		return new SpecialUserLoginPageObject(driver);
 	}
 
 	public LicensedVideoSwapPageObject openLicensedVideoSwap (String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialLicensedVideoSwap);
 		PageObjectLogging.log(
-				"LicensedVideoSwapPageObject",
-				"Special:LicensedVideoSwap opened on: " + wikiURL,
-				true
-							 );
+			"LicensedVideoSwapPageObject",
+			"Special:LicensedVideoSwap opened on: " + wikiURL,
+			true
+		);
 		return new LicensedVideoSwapPageObject(driver);
-	}
-
-	public void verifyAvatarPresent() {
-		waitForElementByElement(userProfileAvatar);
-		PageObjectLogging.log(
-				"verifyAvatarPresent",
-				"avatar is visible",
-				true
-							 );
 	}
 
 	public void verifyUserLoggedIn(String userName) {
 		if (body.getAttribute("class").contains("skin-monobook")) {
 			driver.findElement(
 				By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(" ", "_"))));// only for verification
-		}
-		else {
+		} else if (checkIfElementOnPage(".global-navigation")) {
+			//New GlobalNav is enabled
+			driver.findElement(By.cssSelector(String.format(loggedInUserSelectorVenus, userName)));
+		} else {
 			//oasis
 			driver.findElement(
 				By.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName.replace(" ", "_"))));// only for verification
@@ -684,10 +674,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public BlogPageObject openBlogByName(String wikiURL, String blogTitle, String userName) {
 		getUrl(
-				wikiURL +
-						URLsContent.blogNameSpace.replace("%userName%", userName) +
-						blogTitle
-			  );
+			wikiURL +
+			URLsContent.blogNameSpace.replace("%userName%", userName) +
+			blogTitle
+		);
 		return new BlogPageObject(driver);
 	}
 
@@ -720,7 +710,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public void verifyLoginReguiredMessage() {
 		waitForTextToBePresentInElementByElement(
 				wikiFirstHeader, PageContent.loginRequired
-		);
+												);
 		PageObjectLogging.log(
 				"LoginRequiredMessage",
 				"Login required message in first header present",
@@ -734,7 +724,7 @@ public class WikiBasePageObject extends BasePageObject {
 				"LoginLinkPresent",
 				"Link to login special page present",
 				true, driver
-							 );
+		);
 		scrollAndClick(specialUserLoginLink);
 		PageObjectLogging.log(
 				"LoginLinkClicked",
@@ -794,7 +784,7 @@ public class WikiBasePageObject extends BasePageObject {
 				"NewPasswordRecived",
 				"New password recived from mail",
 				true
-		);
+							 );
 
 		return newPassword;
 	}
@@ -809,7 +799,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public String getFirstCssRevision() {
 		waitForElementByElement(cssEditSummary);
 		String summary = cssEditSummary.getText();
-		PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: " + summary, true);
+		PageObjectLogging.log("cssEditSummary", "the following edit summaty was get from Wikia.css: "+summary, true);
 		return summary;
 	}
 
@@ -1217,6 +1207,10 @@ public class WikiBasePageObject extends BasePageObject {
 		} catch (WebDriverException ex) {
 			PageObjectLogging.log("ResizeWindow", "Cannot resize window (width=" + width + ", height=" + height + ")", true);
 		}
+	}
+
+	public void resizeWindow(Dimension resolution) {
+		resizeWindow(resolution.width, resolution.height);
 	}
 
 	public VenusGlobalNavPageObject getVenusGlobalNav() {
