@@ -6,10 +6,15 @@ import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.io.File;
 
+/**
+ * @author Ludwik Kaźmierczak
+ * @ownership Consumer
+ */
 public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 
 	/**
@@ -36,7 +41,7 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 		}
 	}
 
-	private boolean takeScreenshotAndCompare(org.openqa.selenium.WebElement element, String expectedFileName) {
+	private boolean takeScreenshotAndCompare(WebElement element, String expectedFileName) {
 		Shooter shooter = new Shooter();
 
 		ImageComparison comparator = new ImageComparison();

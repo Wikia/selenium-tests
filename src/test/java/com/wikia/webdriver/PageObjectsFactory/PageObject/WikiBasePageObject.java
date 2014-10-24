@@ -108,89 +108,129 @@ public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "body")
 	protected WebElement body;
-	@FindBy(css = "a.ajaxRegister")
-	private WebElement signUpLink;
-	@FindBy(css = "article span.drop")
-	private WebElement editDropDown;
-	@FindBy(css = "input#wpConfirmB")
-	private WebElement deleteConfirmationButton;
-	@FindBy(css = ".global-notification div.msg a")
-	private WebElement undeleteLink;
-	@FindBy(css = ".global-notification")
-	private WebElement flashMessage;
-	@FindBy(css = "input#mw-undelete-submit")
-	private WebElement restoreButton;
-	@FindBy(css = "input#wpReason")
-	private WebElement deleteCommentReasonField;
-	@FindBy(css="div.permissions-errors")
-	private WebElement premissionErrorMessage;
-	@FindBy(css="div.mw-warning-with-logexcerpt p")
-	private WebElement pageDeletedInfo;
+
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
+
 	@FindBy(css = ".UserLoginModal input[name='password']")
 	protected WebElement modalPasswordInput;
+
 	@FindBy (css = "#WikiaPageHeader h1")
 	protected WebElement wikiFirstHeader;
-	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
-	private WebElement specialUserLoginLink;
+
 	@FindBy(css = ".UserLoginModal input[name='username']")
 	protected WebElement modalUserNameInput;
+
 	@FindBy(css="#AccountNavigation > li > a > .avatar")
 	protected WebElement userProfileAvatar;
+
 	@FindBy(css="#AccountNavigation > li > a ~ ul > li > a[data-id='logout']")
 	protected WebElement navigationLogoutLink;
+
 	@FindBy(css="#userForceLoginModal")
 	protected WebElement logInModal;
+
 	@FindBy(css="a[data-id='login']")
 	protected WebElement loginButton;
+
 	@FindBy(css = "#WikiaMainContent a[data-id='edit']")
 	protected WebElement editButton;
+
 	@FindBy(css=".msg")
 	protected WebElement userMessage;
+
 	@FindBy(css = "#mw-content-text .source-css")
 	protected WebElement cssSource;
+
 	@FindBy(css = "ul#pagehistory > li:first-child .comment")
 	protected WebElement cssEditSummary;
+
 	@FindBy(css = "ul#pagehistory > li:first-child .minoredit")
 	protected WebElement cssMinorEdit;
+
 	@FindBy(css = "#ca-watch")
 	protected WebElement followButton;
+
 	@FindBy(css="#WikiaMainContent .drop img")
 	protected WebElement articleEditDropdown;
+
 	@FindBy(css="#ca-delete")
 	protected WebElement deleteDropdown;
+
 	@FindBy(css="#ca-protect")
 	protected WebElement protectDropdown;
+
 	@FindBy(css="#ca-move")
 	protected WebElement renameDropdown;
+
 	@FindBy(css="#ca-ve-edit")
 	protected WebElement veEditButton;
+
 	@FindBy(css="body.ve")
 	protected WebElement veMode;
+
 	@FindBy(css=".editsection")
 	protected List<WebElement> sectionEditButtons;
+
 	@FindBy(css="a.new[href$='redlink=1']")
 	protected List<WebElement> redLinks;
+
 	@FindBy(css="body.rte_wysiwyg")
 	protected WebElement rteMode;
+
 	@FindBy(css="body.rte_source")
 	protected WebElement srcInRteMode;
+
 	@FindBy(css="body:not(.rte_source):not(.ve):not(.rte_wysiwyg)")
 	protected WebElement srcOnlyMode;
+
 	@FindBy(css=".oo-ui-widget-enabled.ve-ui-wikiaFocusWidget")
 	protected WebElement focusMode;
+
 	@FindBy(css=".ve-init-mw-viewPageTarget-toolbar")
 	protected WebElement veToolMenu;
+
 	@FindBy(css="h3[id='headerWikis']")
 	protected WebElement headerWhereIsMyExtensionPage;
+
 	@FindBy(css="#globalNavigation")
 	protected WebElement newGlobalNavigation;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
+
 	protected By parentBy = By.xpath("./..");
 
 	protected String modalWrapper = "#WikiaConfirm";
+
+	@FindBy(css = "a.ajaxRegister")
+	private WebElement signUpLink;
+
+	@FindBy(css = "article span.drop")
+	private WebElement editDropDown;
+
+	@FindBy(css = "input#wpConfirmB")
+	private WebElement deleteConfirmationButton;
+
+	@FindBy(css = ".global-notification div.msg a")
+	private WebElement undeleteLink;
+
+	@FindBy(css = ".global-notification")
+	private WebElement flashMessage;
+
+	@FindBy(css = "input#mw-undelete-submit")
+	private WebElement restoreButton;
+
+	@FindBy(css = "input#wpReason")
+	private WebElement deleteCommentReasonField;
+
+	@FindBy(css="div.permissions-errors")
+	private WebElement premissionErrorMessage;
+
+	@FindBy(css="div.mw-warning-with-logexcerpt p")
+	private WebElement pageDeletedInfo;
+
+	@FindBy (css = "#WikiaArticle a[href*='Special:UserLogin']")
+	private WebElement specialUserLoginLink;
 
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
@@ -198,22 +238,14 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private VenusGlobalNavPageObject venusGlobalNav;
 
-	public String getWikiUrl() {
-		String currentURL = driver.getCurrentUrl();
-		return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
-	}
-
-	public enum PositionsVideo {
-		left, center, right
-	}
-
-	public enum HubName {
-		Video_Games, Entertainment, Lifestyle
-	}
-
 	public WikiBasePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+	}
+
+	public String getWikiUrl() {
+		String currentURL = driver.getCurrentUrl();
+		return currentURL.substring(0, currentURL.lastIndexOf("wiki/"));
 	}
 
 	public String resetForgotPasswordTime(String userName, String apiToken) {
@@ -291,13 +323,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialBlockListPageObject(driver);
 	}
 
-
 	public SpecialUnblockPageObject openSpecialUnblockPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialUnblock);
 		PageObjectLogging.log("openSpecialUnblockPage", "special unblock page opened", true);
 		return new SpecialUnblockPageObject(driver);
 	}
-
 
 	public SpecialBlockPageObject openSpecialBlockPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialBlock);
@@ -404,14 +434,13 @@ public class WikiBasePageObject extends BasePageObject {
 		return new ForumPageObject(driver);
 	}
 
-
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
 		PageObjectLogging.log(
-				"openSpecialMultiWikiFinderPage",
-				"Special MultiWikiFinder page was opened",
-				true
-							 );
+			"openSpecialMultiWikiFinderPage",
+			"Special MultiWikiFinder page was opened",
+			true
+		);
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
@@ -517,11 +546,11 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-				"openSrcModeWithSectionEditButton",
-				"Src edit button clicked at section: " + section,
-				true,
-				driver
-							 );
+			"openSrcModeWithSectionEditButton",
+			"Src edit button clicked at section: " + section,
+			true,
+			driver
+		);
 		return new SourceEditModePageObject(driver);
 	}
 
@@ -685,7 +714,6 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(wikiURL + URLsContent.specialChat);
 		return new ChatPageObject(driver);
 	}
-
 
 	public ArticlePageObject openRandomArticle(String wikiURL) {
 		getUrl(wikiURL + URLsContent.specialRandom);
@@ -1219,5 +1247,13 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 
 		return venusGlobalNav;
+	}
+
+	public enum PositionsVideo {
+		left, center, right
+	}
+
+	public enum HubName {
+		Video_Games, Entertainment, Lifestyle
 	}
 }
