@@ -188,7 +188,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog.typeEditSummary(text);
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
+		WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
 		historyPage.verifyLatestEditSummary(text);
 	}
 
@@ -203,7 +203,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog.clickMinorEdit();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
+		WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
 		historyPage.verifyRevisionMarkedAsMinor();
 	}
 }
