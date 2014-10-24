@@ -43,6 +43,5 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		RenamePageObject renamePage = article.renameUsingDropdown();
 		renamePage.rename(articleNewName);
 		article.verifyArticleTitle(articleNewName);
-		article.verifyNotificationMessage();
 	}
 }
