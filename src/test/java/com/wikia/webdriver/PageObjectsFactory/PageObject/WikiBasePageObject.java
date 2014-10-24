@@ -408,9 +408,9 @@ public class WikiBasePageObject extends BasePageObject {
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.specialMultiWikiFinderPage);
 		PageObjectLogging.log(
-				"openSpecialMultiWikiFinderPage",
-				"Special MultiWikiFinder page was opened",
-				true
+			"openSpecialMultiWikiFinderPage",
+			"Special MultiWikiFinder page was opened",
+			true
 		);
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
@@ -517,11 +517,11 @@ public class WikiBasePageObject extends BasePageObject {
 		waitForElementByElement(sectionEditButton);
 		sectionEditButton.click();
 		PageObjectLogging.log(
-				"openSrcModeWithSectionEditButton",
-				"Src edit button clicked at section: " + section,
-				true,
-				driver
-							 );
+			"openSrcModeWithSectionEditButton",
+			"Src edit button clicked at section: " + section,
+			true,
+			driver
+		);
 		return new SourceEditModePageObject(driver);
 	}
 
@@ -575,8 +575,8 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(
 				urlBuilder.appendQueryStringToURL(
 						wikiURL + URLsContent.wikiDir + article, URLsContent.actionVisualEditParameter
-												 )
-			  );
+				)
+		);
 		return new VisualEditorPageObject(driver);
 	}
 
@@ -1207,10 +1207,6 @@ public class WikiBasePageObject extends BasePageObject {
 		} catch (WebDriverException ex) {
 			PageObjectLogging.log("ResizeWindow", "Cannot resize window (width=" + width + ", height=" + height + ")", true);
 		}
-	}
-
-	public void resizeWindow(Dimension resolution) {
-		resizeWindow(resolution.width, resolution.height);
 	}
 
 	public VenusGlobalNavPageObject getVenusGlobalNav() {
