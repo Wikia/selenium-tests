@@ -74,7 +74,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_003", "SignUp"})
-	public void SignUp_003_existingUserName_MAIN_2159() {
+	public void SignUp_003_existingUserName() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(credentials.userName);
