@@ -2,7 +2,7 @@ package com.wikia.webdriver.TestCases.GlobalNavigationTests;
 
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNavigation.GlobalNavigationPageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -20,18 +20,18 @@ public class TestGameStarLogo extends NewTestTemplate {
 	@Test(groups = {"TestGameStarLogo_001", "TestGameStarLogo"})
 	public void TestGameStarLogo_001_gameStarLogoPresentOnBigResolution() {
 		String url = urlBuilder.getUrlForPath(wikiName, "");
-		GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
-		globalNavigation.getUrl(url);
-		globalNavigation.resizeWindow(bigResolution);
-		Assertion.assertTrue(globalNavigation.GameStarLinkDisplay(), "GameStar Logo should be visible");
+		HomePageObject homePage = new HomePageObject(driver);
+		homePage.getUrl(url);
+		homePage.resizeWindow(bigResolution);
+		Assertion.assertTrue(homePage.getVenusGlobalNav().GameStarLinkDisplay(), "GameStar Logo should be visible");
 	}
 
 	@Test(groups = {"TestGameStarLogo_002", "TestGameStarLogo"})
 	public void TestGameStarLogo_002_gameStarLogoNotPresentOnSmallResolution() {
 		String url = urlBuilder.getUrlForPath(wikiName, "");
-		GlobalNavigationPageObject globalNavigation = new GlobalNavigationPageObject(driver);
-		globalNavigation.getUrl(url);
-		globalNavigation.resizeWindow(smallResolution);
-		Assertion.assertFalse(globalNavigation.GameStarLinkDisplay(), "GameStar Logo shouldn't be visible");
+		HomePageObject homePage = new HomePageObject(driver);
+		homePage.getUrl(url);
+		homePage.resizeWindow(smallResolution);
+		Assertion.assertFalse(homePage.getVenusGlobalNav().GameStarLinkDisplay(), "Game,tar Logo shouldn't be visible");
 	}
 }

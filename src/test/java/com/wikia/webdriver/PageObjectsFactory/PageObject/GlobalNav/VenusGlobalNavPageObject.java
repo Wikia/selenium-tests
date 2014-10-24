@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav;
 
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,6 +20,9 @@ public class VenusGlobalNavPageObject {
 
 	@FindBy(css = "nav#hubs")
 	private WebElement hubsMenu;
+
+	@FindBy(css = ".gamestar-logo")
+	private WebElement gameStarLink;
 
 	private WebDriver driver;
 
@@ -59,6 +63,15 @@ public class VenusGlobalNavPageObject {
 		});
 
 		return this;
+	}
+
+	public boolean GameStarLinkDisplay() {
+
+		try{
+			return gameStarLink.isDisplayed();
+		}catch (NoSuchElementException e){
+			return false;
+		}
 	}
 
 	public WebElement getMenuScreenShotArea() {
