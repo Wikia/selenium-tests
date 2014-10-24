@@ -189,7 +189,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void confirmDelete() {
-			clickArticleDeleteConfirmationButton(URLsContent.mediaWikiCss);
+			clickArticleDeleteConfirmationButton();
 		}
 
 		public void verifyArticleIsRemoved() {
