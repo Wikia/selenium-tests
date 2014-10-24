@@ -4,6 +4,7 @@ import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,6 +20,9 @@ public class VenusGlobalNavPageObject {
 
 	@FindBy(css = "nav#hubs")
 	private WebElement hubsMenu;
+
+	@FindBy(css = ".gamestar-logo")
+	private WebElement gameStarLink;
 
 	private WebDriver driver;
 
@@ -77,6 +81,15 @@ public class VenusGlobalNavPageObject {
 
 		public String getLabelText() {
 			return labelText;
+		}
+	}
+
+	public Boolean GameStarLinkDisplay() {
+		try {
+			return gameStarLink.isDisplayed();
+		}
+		catch(NoSuchElementException e) {
+			return false;
 		}
 	}
 }
