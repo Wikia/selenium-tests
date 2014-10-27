@@ -15,17 +15,17 @@ import org.testng.annotations.Test;
 public class TestGameStarLogo extends NewTestTemplate {
 
 	private final static String deWikiName = "de.gta";
-	private final static Dimension bigResolution = new Dimension(1400, 900);
-	private final static Dimension smallResolution = new Dimension(1000, 900);
+	private static final Dimension SHOW_LOGO_RESOLUTION = new Dimension(1300, 900);
+	private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1299, 900);
 
 	@Test(groups = {"TestGameStarLogo_001", "GameStarLogo", "GlobalNav"})
 	public void TestGameStarLogo_001_gameStarLogoPresentOnBigResolution() {
 		HomePageObject homePage = new HomePageObject(driver);
 		VenusGlobalNavPageObject globalNav = new VenusGlobalNavPageObject(driver);
 		homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
-		homePage.resizeWindow(bigResolution);
+		homePage.resizeWindow(SHOW_LOGO_RESOLUTION);
 
-		Assertion.assertTrue(globalNav.GameStarLinkDisplay(), "GameStar Logo should be visible");
+		Assertion.assertTrue(globalNav.isGameStarLogoDisplayed(), "GameStar Logo should be visible");
 	}
 
 	@Test(groups = {"TestGameStarLogo_002", "GameStarLogo", "GlobalNav"})
@@ -33,8 +33,8 @@ public class TestGameStarLogo extends NewTestTemplate {
 		HomePageObject homePage = new HomePageObject(driver);
 		VenusGlobalNavPageObject globalNav = new VenusGlobalNavPageObject(driver);
 		homePage.openWikiPage(urlBuilder.getUrlForWiki(deWikiName));
-		homePage.resizeWindow(smallResolution);
+		homePage.resizeWindow(HIDE_LOGO_RESOLUTION);
 
-		Assertion.assertFalse(globalNav.GameStarLinkDisplay(), "GameStar Logo shouldn't be visible");
+		Assertion.assertFalse(globalNav.isGameStarLogoDisplayed(), "GameStar Logo shouldn't be visible");
 	}
 }
