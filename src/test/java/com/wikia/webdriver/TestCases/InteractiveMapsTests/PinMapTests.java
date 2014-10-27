@@ -41,7 +41,7 @@ public class PinMapTests extends NewTestTemplate {
 	}
 
 	@Test(groups = { "InteractiveMaps_007", "PinMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_007_VerifySuggestionsAndAssociatedImage() {
+	public void InteractiveMaps_007_VerifySuggestionsAndAssociatedImage_OPS_5322() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);

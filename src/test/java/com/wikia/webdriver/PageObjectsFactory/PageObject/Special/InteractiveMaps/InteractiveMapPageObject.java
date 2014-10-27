@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMap
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -106,6 +107,14 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement deleteMapButton;
 	@FindBy(css = ".poi-article-link")
 	private WebElement poiArticleLink;
+	@FindBy(css = ".wikia-interactive-map h2")
+	private WebElement poiCategorySection;
+	@FindBy(css = ".wikia-interactive-map dt")
+	private WebElement poiNameSection;
+	@FindBy(css = ".wikia-interactive-map dd")
+	private WebElement poiDescriptionSection;
+	
+	private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
 	public enum embedMapDialogButtons {
 		small, medium, large;
@@ -452,5 +461,26 @@ public class InteractiveMapPageObject extends BasePageObject {
 		actionDropDown.click();
 		deleteMapButton.click();
 		return new DeleteAMapComponentObject(driver);
+	}
+
+	public void verifyEscapedFragmentMetaTag() {
+		waitForElementByElement(createdMapTitle);
+		waitForElementPresenceByBy(escapedFragmentMetaDataTag);
+		PageObjectLogging.log("verifyEscapedFragmentMetaTag", "Escaped fragment meta tag is in DOM", true);
+	}
+
+	public void verifyPoiCategoryTitle() {
+		waitForElementByElement(poiCategorySection);
+		PageObjectLogging.log("verifyPoiCategoryTitle", "Poi category section is displayed", true);
+	}
+	
+	public void verifyPoiPointTitle() {
+		waitForElementByElement(poiNameSection);
+		PageObjectLogging.log("verifyPoiPointTitle", "Poi name section is displayed", true);
+	}
+	
+	public void verifyPoiPointDescription() {
+		waitForElementByElement(poiDescriptionSection);
+		PageObjectLogging.log("verifyPoiPointDescription", "Poi description section is displayed", true);
 	}
 }

@@ -208,7 +208,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	}
 
 	@Test(groups = {"Chat_009", "Chat", "Modals"})
-	public void Chat_009_banUser() {
+	public void Chat_009_banUser_QAART_410() {
 		switchToWindow(driverOne);
 		openChatForUser(driverOne, userToBeBanned, userToBeBannedPassword);
 
