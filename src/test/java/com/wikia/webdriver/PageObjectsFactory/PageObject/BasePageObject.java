@@ -52,6 +52,7 @@ public class BasePageObject{
 	public WebDriverWait wait;
 	public Actions builder;
 	protected UrlBuilder urlBuilder;
+	private LogEntries logEntries;
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
@@ -918,10 +919,14 @@ public class BasePageObject{
 		return foundElement;
 	}
 
-	public void extractJSLogs() {
-		LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
+	private void setBrowserLogs() {
+		logEntries = driver.manage().logs().get(LogType.BROWSER);
+	}
+
+	public void extractBrowserLogs() {
+		setBrowserLogs();
 		for (LogEntry entry : logEntries) {
-			PageObjectLogging.log("extractJSLogs", new Date(entry.getTimestamp()) + " ||| " + entry.getLevel() + " ||| " + entry.getMessage(), false);
+			PageObjectLogging.log("extractJSLogs", entry.getMessage(), false);
 		}
 	}
 }
