@@ -33,7 +33,7 @@ public class ImageStorageTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-		FilePagePageObject file = newFiles.openImage(PageContent.fileDeleteAndRestore);
+		FilePagePageObject file = newFiles.openImage(PageContent.FILEDELETEANDRESTORE);
 		imageURL = file.getImageUrl();
 		imageThumbnailURL = file.getImageThumbnailUrl();
 		newFiles.verifyURLStatus(200, imageURL);
@@ -59,7 +59,7 @@ public class ImageStorageTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-		String fileName = PageContent.fileRename;
+		String fileName = PageContent.FILERENAME;
 		FilePagePageObject file = newFiles.openFilePage(wikiURL, fileName);
 		RenamePageObject renamePage = file.renameUsingDropdown();
 		String imageNewName = renamePage.getTimeStamp() + fileName;
