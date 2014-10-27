@@ -16,7 +16,7 @@ public class PalantirContent {
 	public static final String PONTO_MSG_RESPONSECODE = "responseCode";
 	public static final String PONTO_MSG_MESSAGE= "message";
 	public static final String PONTOMSG_PLAYER_SUCCESS = "Player location set successfully";
-	public static final String PONTOMSG_PLAYER_OUTOFBOUNDARIES = "Map location must be inside map boundaries";
+	public static final String PONTOMSG_MAP_OUTOFBOUNDARIES = "Map location must be inside map boundaries";
 	public static final String PONTOMSG_WRONG_PARAM = "Wrong parameters types";
 	public static final String PONTOMSG_REMOVEPLAYER = "Player location removed from map successfully";
 	public static final String PONTOMSG_MAPPOS_SUCCESS = "Map position updated successfully";
