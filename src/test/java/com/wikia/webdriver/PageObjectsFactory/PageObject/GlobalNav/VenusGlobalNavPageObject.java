@@ -1,5 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav;
 
+import com.wikia.webdriver.Common.Core.ElementStateHelper;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,9 @@ public class VenusGlobalNavPageObject {
 	@FindBy(css = "nav#hubs")
 	private WebElement hubsMenu;
 
+	@FindBy(css = ".gamestar-logo")
+	private WebElement gameStarLink;
+
 	private WebDriver driver;
 
 	public VenusGlobalNavPageObject(WebDriver driver) {
@@ -29,7 +33,6 @@ public class VenusGlobalNavPageObject {
 	}
 
 	public VenusGlobalNavPageObject openHub(Hub hub) {
-
 		openHubsMenu();
 
 		final WebElement destinationHub = hubsMenu.findElement(By
@@ -38,7 +41,6 @@ public class VenusGlobalNavPageObject {
 		new Actions(driver)
 				.moveToElement(destinationHub).
 				perform();
-
 
 		new WebDriverWait(driver, 5, 150)
 				.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
@@ -59,6 +61,10 @@ public class VenusGlobalNavPageObject {
 		});
 
 		return this;
+	}
+
+	public boolean isGameStarLogoDisplayed() {
+		return ElementStateHelper.isElementVisible(gameStarLink, driver);
 	}
 
 	public WebElement getMenuScreenShotArea() {
