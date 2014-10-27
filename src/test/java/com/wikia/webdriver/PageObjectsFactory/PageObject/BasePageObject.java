@@ -24,6 +24,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -913,5 +916,12 @@ public class BasePageObject{
 				"Element's child with text: " + value + " is not found from the list");
 		}
 		return foundElement;
+	}
+
+	public void extractJSLogs() {
+		LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
+		for (LogEntry entry : logEntries) {
+			PageObjectLogging.log("extractJSLogs", new Date(entry.getTimestamp()) + " ||| " + entry.getLevel() + " ||| " + entry.getMessage(), false);
+		}
 	}
 }
