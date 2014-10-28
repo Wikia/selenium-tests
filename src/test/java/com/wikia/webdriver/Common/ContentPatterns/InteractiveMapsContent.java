@@ -15,7 +15,7 @@ public class InteractiveMapsContent {
 	public static final int pinTypeIndex = 0;
 	public static final int selectedMapIndex = 0;
 	public static final int selectedTemplateIndex = 0;
-	public static final int mapToDeleteAndRestore = 4258;
+	public static final int[] mapToDeleteAndRestore = {4258, 71, 72, 56};
 	public static final String associatedArticleName = "Slid";
 	public static String templateName;
 	public static final String templateNameToSearchShouldBeFound = "te";
