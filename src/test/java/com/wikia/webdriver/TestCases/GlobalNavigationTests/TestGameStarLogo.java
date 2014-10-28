@@ -15,8 +15,8 @@ import org.testng.annotations.Test;
 public class TestGameStarLogo extends NewTestTemplate {
 
 	private final static String deWikiName = "de.gta";
-	private static final Dimension SHOW_LOGO_RESOLUTION = new Dimension(1331, 900);
-	private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1330, 900);
+	private static final Dimension SHOW_LOGO_RESOLUTION = new Dimension(1400, 900);
+	private static final Dimension HIDE_LOGO_RESOLUTION = new Dimension(1200, 900);
 
 	@Test(groups = {"TestGameStarLogo_001", "GameStarLogo", "GlobalNav"})
 	public void TestGameStarLogo_001_gameStarLogoPresentOnBigResolution() {
