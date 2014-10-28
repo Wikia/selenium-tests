@@ -15,7 +15,7 @@ public class InteractiveMapsContent {
 	public static final int pinTypeIndex = 0;
 	public static final int selectedMapIndex = 0;
 	public static final int selectedTemplateIndex = 0;
-	public static final String associatedArticleName = "Slid";
+	public static final String associatedArticleName = "Test";
 	public static String templateName;
 	public static final String templateNameToSearchShouldBeFound = "te";
 	public static final String templateNameToSearchShouldNotBeFound = "1234567890123123123123213";

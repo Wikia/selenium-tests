@@ -99,7 +99,7 @@ public class CssChromeTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CssChrome_007", "CssChrome", "AdminDashboard"})
-	public void CssChrome_007_verifyDeleteButtonAppearsAndWorks() {
+	public void CssChrome_007_verifyDeleteButtonAppearsAndWorks_QAART_411() {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyArticleIsNotRemoved(testedPage);
 		specialCss.clickPublishButtonDropdown();

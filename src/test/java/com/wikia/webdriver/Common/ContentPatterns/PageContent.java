@@ -58,6 +58,7 @@ public class PageContent {
 	//image storage
 	public static final String FILEDELETEANDRESTORE = "Constantine_test.png";
 	public static final String FILERENAME = "HongKongHarbour.jpg";
+	public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
 	public static String[] listOfFiles = {
 			"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
