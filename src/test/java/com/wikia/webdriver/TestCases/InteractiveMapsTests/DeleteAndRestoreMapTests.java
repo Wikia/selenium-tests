@@ -26,9 +26,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		InteractiveMapPageObject selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore[0]);
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
-		specialMap.verifyMapDeletedMessage();
 		selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore[0]);
-		selectedMap.verifyMapDeletedMsg();
 	}
 
 	@Test(groups = {"DeleteAndRestoreMapTests_002", "DeleteAndRestoreMapTests", "InteractiveMaps"})
@@ -37,7 +35,6 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapPageObject selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore[0]);
 		selectedMap.verifyMapOpened();
-		selectedMap.verifyMapDeletedMsg();
 		selectedMap.restoreMap();
 	}
 
@@ -59,7 +56,6 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		selectedMap.verifyMapOpened();
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		InteractiveMapsPageObject specialMap = deleteMapModal.deleteMap();
-		specialMap.verifyMapDeletedMessage();
 	}
 
 	@Test(groups = {"DeleteAndRestoreMapTests_005", "DeleteAndRestoreMapTests", "InteractiveMaps"})
