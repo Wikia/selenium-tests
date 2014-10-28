@@ -11,7 +11,6 @@ public class InteractiveMapsContent {
 			+ "vitae dapibus augue enim vel lectus. Pellentesque consectetur gravida mi in "
 			+ "lobortis. Aliquam amet";
 	public static final String EMBED_MAP_ARTICLE_NAME = "embedMap";
-//	public static final String EMBED_MAP_OUT_OF_WIKIA = "embedMapOutOfWikia";
 	public static final int PIN_TYPE_INDEX = 0;
 	public static final int SELECTED_MAP_INDEX = 0;
 	public static final int SELECTED_TEMPLATE_INDEX = 0;

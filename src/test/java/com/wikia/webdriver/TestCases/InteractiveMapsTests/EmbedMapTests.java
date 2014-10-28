@@ -84,7 +84,6 @@ public class EmbedMapTests extends NewTestTemplate {
 		selectedMap.verifyEmbedMapDialog();
 		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.small);
 		String mapCode = selectedMap.getEmbedMapCode();
-		System.out.println(mapCode);
 		DabbletComPageObject outPage = new DabbletComPageObject(driver);
 		outPage.openOutPage();
 		outPage.typeHtmlCode(mapCode);
