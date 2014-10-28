@@ -18,7 +18,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author: Lukasz Jedrzejczak
- *
  */
 
 public class InteractiveMapsPageObject extends ArticlePageObject {
@@ -97,7 +96,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	public void verifyAmountMapOnTheList() {
 		waitForElementByElement(mapCollection.get(0));
 		Assert.assertEquals(mapCollection.size(), 10);
-		PageObjectLogging.log("verifyAmountMapOnTheList", "There is " + mapCollection.size() + " maps on the list", true);
+		PageObjectLogging.log("verifyAmountMapOnTheList", "There are " + mapCollection.size() + " maps on the list", true);
 	}
 
 	public void verifyCorrectPagination() {

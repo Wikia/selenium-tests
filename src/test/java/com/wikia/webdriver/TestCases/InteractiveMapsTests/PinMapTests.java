@@ -14,22 +14,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * @ownership: Mobile Web IM06: Verify it is possible to add a pin to the map
- *             and that add pin dialog has all required elements v IM07: Verify
- *             removing a suggestion of article with image will remove image
- *             from placeholder v
+ * @ownership: Mobile Web 
  */
 
 public class PinMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_006", "PinMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_006_VerifyPinModalContent() {
+	@Test(groups = { "PinMapTests_001", "PinMapTests", "InteractiveMaps" })
+	public void PinMapTests_001_VerifyPinModalContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
 		pinDialog.verifyPinTitleFieldIsDisplayed();
@@ -40,18 +37,18 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap = pinDialog.clickCancelButton();
 	}
 
-	@Test(groups = { "InteractiveMaps_007", "PinMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_007_VerifySuggestionsAndAssociatedImage() {
+	@Test(groups = { "PinMapTests_002", "PinMapTests", "InteractiveMaps" })
+	public void PinMapTests_002_VerifySuggestionsAndAssociatedImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject pinDialog = selectedMap.placePinInMap();
 		pinDialog.verifyPinTitleFieldIsDisplayed();
-		pinDialog.typePinName(InteractiveMapsContent.pinName);
+		pinDialog.typePinName(InteractiveMapsContent.PIN_NAME);
 		String placeholderSrc = pinDialog.getAssociatedArticleImageSrc();
-		pinDialog.typeAssociatedArticle(InteractiveMapsContent.associatedArticleName);
+		pinDialog.typeAssociatedArticle(InteractiveMapsContent.ASSOCIATED_ARTICLE_NAME);
 		pinDialog.clickSuggestion(0);
 		pinDialog.verifyAssociatedImageIsVisible(placeholderSrc);
 		pinDialog.selectPinType();
@@ -59,17 +56,17 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap.verifyPinPopupImageIsVisible();
 	}
 
-	@Test(groups = { "InteractiveMaps_024", "PinMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_024_VerifyPinCreationErrors() {
+	@Test(groups = { "PinMapTests_003", "PinMapTests", "InteractiveMaps" })
+	public void PinMapTests_003_VerifyPinCreationErrors() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
 		addPinModal.clickSaveButton();
 		addPinModal.verifyErrorExists();
-		addPinModal.typePinName(InteractiveMapsContent.pinDescription);
+		addPinModal.typePinName(InteractiveMapsContent.PIN_DESCRIPTION);
 		addPinModal.clickSaveButton();
 		addPinModal.verifyErrorExists();
 		addPinModal.selectPinType();
@@ -77,23 +74,25 @@ public class PinMapTests extends NewTestTemplate {
 		addPinModal.verifyErrorExists();
 	}
 
-	@Test(groups = { "InteractiveMaps_025", "PinMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
-	public void InteractiveMaps_025_VerifyPopUpAfterClickPin() {
+	@Test(groups = { "PinMapTests_004", "PinMapTests", "InteractiveMaps" }, 
+			dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
+	public void PinMapTests_004_VerifyPopUpAfterClickPin() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnPin(0);
 		selectedMap.verifyPopUpVisible();
 	}
 
-	@Test(groups = { "InteractiveMaps_027", "PinMapTests", "InteractiveMaps" }, dependsOnMethods = "InteractiveMaps_021_VerifyChangePinData")
-	public void InteractiveMaps_027_VerifyDeletePin() {
+	@Test(groups = { "PinMapTests_005", "PinMapTests", "InteractiveMaps" }, 
+			dependsOnMethods = "PinMapTests_006_VerifyChangePinData")
+	public void PinMapTests_005_VerifyDeletePin() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnFilterBoxTitle();
 		selectedMap.clickOnPin(0);
@@ -104,12 +103,12 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap.verifyPinNotExists(pinName);
 	}
 
-	@Test(groups = { "InteractiveMaps_021", "PinMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_021_VerifyChangePinData() {
+	@Test(groups = { "PinMapTests_006", "PinMapTests", "InteractiveMaps" })
+	public void PinMapTests_006_VerifyChangePinData() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnFilterBoxTitle();
 		AddPinComponentObject pinModal = selectedMap.placePinInMap();
@@ -127,48 +126,48 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap = pinModal.clickSaveButton();
 		selectedMap.verifyPinDataWasChanged(pinTitle, pinDescription);
 	}
-	
-	@Test(groups = {"InteractiveMaps_045", "PinMapTests", "InteractiveMaps"}, enabled = false)
-	public void InteractiveMaps_045_VerifyValidExternalUrlCanBeAdded() {
+
+	@Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"}, enabled = false)
+	public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
-		addPinModal.typePinName(InteractiveMapsContent.pinName);
-		addPinModal.typeAssociatedArticle(InteractiveMapsContent.externalLink);
+		addPinModal.typePinName(InteractiveMapsContent.PIN_NAME);
+		addPinModal.typeAssociatedArticle(InteractiveMapsContent.EXTERNAL_LINK);
 		addPinModal.selectPinType();
 		selectedMap = addPinModal.clickSaveButton();
 		selectedMap.verifyPinTitleLink();
 		selectedMap.clickOpenPinTitle();
-		selectedMap.verifyUrlInNewWindow(InteractiveMapsContent.externalLink);
+		selectedMap.verifyUrlInNewWindow(InteractiveMapsContent.EXTERNAL_LINK);
 	}
 
-	@Test(groups = {"InteractiveMaps_046", "PinMapTests", "InteractiveMaps"}, enabled = false)
-	public void InteractiveMaps_046_VerifyErrorMessageWhenAssociatedArticleNotExist() {
+	@Test(groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"}, enabled = false)
+	public void PinMapTests_008_VerifyErrorMessageWhenAssociatedArticleNotExist() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
-		addPinModal.typePinName(InteractiveMapsContent.pinName);
-		addPinModal.typeAssociatedArticle(InteractiveMapsContent.articleWhichDoesNotExist);
+		addPinModal.typePinName(InteractiveMapsContent.PIN_NAME);
+		addPinModal.typeAssociatedArticle(InteractiveMapsContent.ARTICLE_WHICH_DOES_NOT_EXIST);
 		addPinModal.selectPinType();
 		addPinModal.clickSaveButton();
-		addPinModal.verifyErrorContent(InteractiveMapsContent.articleNotExistsError.replace(
+		addPinModal.verifyErrorContent(InteractiveMapsContent.ARTICLE_NOT_EXIST_ERROR.replace(
 				"%article%",
-				InteractiveMapsContent.articleWhichDoesNotExist
+				InteractiveMapsContent.ARTICLE_WHICH_DOES_NOT_EXIST
 				));
 	}
 
-	@Test(groups = {"InteractiveMaps_047", "PinMapTests", "InteractiveMaps"}, enabled = false)
-	public void InteractiveMaps_047_VerifyArticlePlaceholder() {
+	@Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"}, enabled = false)
+	public void PinMapTests_009_VerifyArticlePlaceholder() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMaps.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		AddPinComponentObject addPinModal = selectedMap.placePinInMap();
 		addPinModal.verifyAssociatedArticlePlaceholder();

@@ -28,7 +28,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 	private WebElement mapFrame;
 	@FindBy(css = "img[src*='player_location_marker.png']")
 	private WebElement playerPoint;
-	
+
 	private PalantirContent getResponse(Object response, String methodName) {
 		PalantirContent handle = null;
 		try {			
