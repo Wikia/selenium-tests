@@ -160,12 +160,13 @@ public class NewDriverProvider {
 			}
 		}
 
-		//Adding JS Error logging
+		caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+
+		//Adding console logging for FF browser
 		LoggingPreferences loggingprefs = new LoggingPreferences();
 		loggingprefs.enable(LogType.BROWSER, Level.SEVERE);
 		caps.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
 
-		caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
 		return new EventFiringWebDriver(new FirefoxDriver(caps));
 	}
 
@@ -204,7 +205,7 @@ public class NewDriverProvider {
             return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
 		}
 
-		//Adding JS Error logging
+		//Adding console logging for Chrome browser
 		LoggingPreferences loggingprefs = new LoggingPreferences();
 		loggingprefs.enable(LogType.BROWSER, Level.SEVERE);
 		caps.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
