@@ -55,6 +55,7 @@ public class PageContent {
 	public static String file2Png = "Image002.png";
 	public static String smallFile = "Image011-Small-image.png";
 	public static String brokenExtensionFile = "broken-extension-image.fer";
+	public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
 	public static String[] listOfFiles = {
 			"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
