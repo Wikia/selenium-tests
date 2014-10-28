@@ -64,7 +64,6 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		InteractiveMapPageObject selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore[2]);
 		selectedMap.verifyMapOpened();
-		selectedMap.verifyMapDeletedMsg();
 		selectedMap.restoreMap();
 	}
 
@@ -84,7 +83,6 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		base.logInCookie(credentials.userNameSysop, credentials.passwordSysop, wikiURL);
 		InteractiveMapPageObject selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore[3]);
 		selectedMap.verifyMapOpened();
-		selectedMap.verifyMapDeletedMsg();
 		selectedMap.restoreMap();
 	}
 }
