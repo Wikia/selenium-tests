@@ -49,6 +49,7 @@ public class ImageStorageTests extends NewTestTemplate {
 		SpecialRestorePageObject restore = delete.undeleteByFlashMessage();
 		restore.giveReason(PageContent.caption);
 		restore.restorePage();
+		restore.verifyNotificationMessage();
 
 		newFiles.verifyURLStatus(200, imageURL);
 		newFiles.verifyURLStatus(200, imageThumbnailURL);
@@ -64,12 +65,12 @@ public class ImageStorageTests extends NewTestTemplate {
 		RenamePageObject renamePage = file.renameUsingDropdown();
 		String imageNewName = renamePage.getTimeStamp() + fileName;
 		renamePage.rename(imageNewName);
-		file.verifyHeader(imageNewName);
 		file.verifyNotificationMessage();
+		file.verifyHeader(imageNewName);
 		file = newFiles.openFilePage(wikiURL, imageNewName);
 		renamePage = file.renameUsingDropdown();
 		renamePage.rename(fileName);
-		file.verifyHeader(fileName);
 		file.verifyNotificationMessage();
+		file.verifyHeader(fileName);
 	}
 }
