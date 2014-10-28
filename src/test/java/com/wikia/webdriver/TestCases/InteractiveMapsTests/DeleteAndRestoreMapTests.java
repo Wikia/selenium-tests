@@ -1,9 +1,9 @@
 package com.wikia.webdriver.TestCases.InteractiveMapsTests;
 
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -45,7 +45,7 @@ public class DeleteAndRestoreMapTests extends NewTestTemplate{
 		InteractiveMapPageObject selectedMap = base.openInteractiveMapById(wikiURL, InteractiveMapsContent.mapToDeleteAndRestore[1]);
 		DeleteAMapComponentObject deleteMapModal = selectedMap.deleteMap();
 		deleteMapModal.clickDeleteMap();
-		deleteMapModal.verifyDeleteMapError();
+		Assertion.assertEquals(InteractiveMapsContent.mapDeleteError, deleteMapModal.getDeleteMapError());
 	}
 
 	@Test(groups = {"DeleteAndRestoreMapTests_004", "DeleteAndRestoreMapTests", "InteractiveMaps"})

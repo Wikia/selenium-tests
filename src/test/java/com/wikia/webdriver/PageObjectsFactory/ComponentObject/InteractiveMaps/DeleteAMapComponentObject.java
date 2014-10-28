@@ -39,8 +39,8 @@ public class DeleteAMapComponentObject extends BasePageObject {
 		deleteMapButton.click();
 	}
 
-	public void verifyDeleteMapError() {
+	public String getDeleteMapError() {
 		waitForElementVisibleByElement(deleteMapError);
-		Assertion.assertEquals(InteractiveMapsContent.mapDeleteError, deleteMapError.getText());
+		return deleteMapError.getText();
 	}
 }
