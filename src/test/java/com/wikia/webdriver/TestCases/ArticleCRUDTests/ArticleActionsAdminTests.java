@@ -42,7 +42,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		String articleNewName = PageContent.articleNamePrefix + article.getTimeStamp();
 		RenamePageObject renamePage = article.renameUsingDropdown();
 		renamePage.rename(articleNewName);
-		article.verifyArticleTitle(articleNewName);
 		article.verifyNotificationMessage();
+		article.verifyArticleTitle(articleNewName);
 	}
 }

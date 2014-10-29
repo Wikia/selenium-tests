@@ -55,6 +55,9 @@ public class PageContent {
 	public static String file2Png = "Image002.png";
 	public static String smallFile = "Image011-Small-image.png";
 	public static String brokenExtensionFile = "broken-extension-image.fer";
+	//image storage
+	public static final String FILEDELETEANDRESTORE = "Constantine_test.png";
+	public static final String FILERENAME = "HongKongHarbour.jpg";
 	public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
 	public static String[] listOfFiles = {
