@@ -49,6 +49,12 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 		File currentFile = shooter.captureWebElement(element, driver);
 		String expectedFilePath = ClassLoader.getSystemResource("Baseline/" + expectedFileName + ".png")
 				.getPath();
+
+		String currentFileCopyPath =  ClassLoader.getSystemResource("Baseline/").getPath() +  expectedFileName + "_current.png";
+
+		currentFile.renameTo(new File(currentFileCopyPath));
+		currentFile = new File(currentFileCopyPath);
+
 		File expectedFile = new File(expectedFilePath);
 		try {
 			Assertion
