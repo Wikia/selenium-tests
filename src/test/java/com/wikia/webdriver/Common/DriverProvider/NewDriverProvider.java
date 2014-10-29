@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,8 +13,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -157,6 +161,10 @@ public class NewDriverProvider {
 		}
 
 		caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
+
+		//Adding console logging for FF browser
+		setBrowserLogging(Level.SEVERE);
+
 		return new EventFiringWebDriver(new FirefoxDriver(caps));
 	}
 
@@ -194,6 +202,9 @@ public class NewDriverProvider {
             );
             return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
 		}
+
+		//Adding console logging for Chrome browser
+		setBrowserLogging(Level.SEVERE);
 
 		return new EventFiringWebDriver(new ChromeDriver(caps));
 	}
@@ -243,5 +254,11 @@ public class NewDriverProvider {
 
 	public static void setDriverCapabilities(DesiredCapabilities newCaps) {
 		caps = newCaps;
+	}
+
+	private static void setBrowserLogging(Level logLevel) {
+		LoggingPreferences loggingprefs = new LoggingPreferences();
+		loggingprefs.enable(LogType.BROWSER, logLevel);
+		caps.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
 	}
 }
