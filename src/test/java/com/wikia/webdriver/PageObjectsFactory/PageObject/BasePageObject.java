@@ -786,11 +786,11 @@ public class BasePageObject{
 		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
 	}
 
-	private void changeImplicitWait(int value, TimeUnit timeUnit) {
+	protected void changeImplicitWait(int value, TimeUnit timeUnit) {
 		driver.manage().timeouts().implicitlyWait(value, timeUnit);
 	}
 
-	private void restoreDeaultImplicitWait() {
+	protected void restoreDeaultImplicitWait() {
 		changeImplicitWait(timeOut, TimeUnit.SECONDS);
 	}
 

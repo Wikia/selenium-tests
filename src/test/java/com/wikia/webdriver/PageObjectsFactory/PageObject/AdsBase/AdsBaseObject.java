@@ -514,7 +514,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void waitForSlotCollapsed(WebElement slot) {
-		wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void verifyNoLiftiumAdsInSlots(List<String> slots) {
