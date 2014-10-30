@@ -82,12 +82,14 @@ public class PhotoAddComponentObject extends BasePageObject{
 	 */
 	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName, int photoNumber){
 		typeSearchQuery(photoName);
+		clickFind();
 		clickAddThisPhoto(photoNumber);
 		return new PhotoOptionsComponentObject(driver);
 	}
 
 	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName){
 		typeSearchQuery(photoName);
+		clickFind();
 		clickAddThisPhoto(photoName);
 		return new PhotoOptionsComponentObject(driver);
 	}

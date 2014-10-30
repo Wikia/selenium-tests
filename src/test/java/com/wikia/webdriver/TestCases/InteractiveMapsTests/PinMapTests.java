@@ -127,7 +127,7 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap.verifyPinDataWasChanged(pinTitle, pinDescription);
 	}
 
-	@Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"}, enabled = false)
+	@Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
 	public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -144,7 +144,7 @@ public class PinMapTests extends NewTestTemplate {
 		selectedMap.verifyUrlInNewWindow(InteractiveMapsContent.EXTERNAL_LINK);
 	}
 
-	@Test(groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"}, enabled = false)
+	@Test(groups = {"PinMapTests_008", "PinMapTests", "InteractiveMaps"})
 	public void PinMapTests_008_VerifyErrorMessageWhenAssociatedArticleNotExist() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -162,7 +162,7 @@ public class PinMapTests extends NewTestTemplate {
 				));
 	}
 
-	@Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"}, enabled = false)
+	@Test(groups = {"PinMapTests_009", "PinMapTests", "InteractiveMaps"})
 	public void PinMapTests_009_VerifyArticlePlaceholder() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

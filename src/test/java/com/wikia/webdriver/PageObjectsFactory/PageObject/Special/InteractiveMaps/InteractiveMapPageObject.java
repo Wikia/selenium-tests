@@ -105,6 +105,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement actionDropDown;
 	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #deleteMap")
 	private WebElement deleteMapButton;
+	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #undeleteMap")
+	private WebElement restoreMapButton;
+	@FindBy(css = ".msg")
+	private WebElement msgTopBar;
 	@FindBy(css = ".poi-article-link")
 	private WebElement poiArticleLink;
 	@FindBy(css = ".wikia-interactive-map h2")
@@ -113,7 +117,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement poiNameSection;
 	@FindBy(css = ".wikia-interactive-map dd")
 	private WebElement poiDescriptionSection;
-	
+
 	private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
 	public enum embedMapDialogButtons {
@@ -463,6 +467,17 @@ public class InteractiveMapPageObject extends BasePageObject {
 		return new DeleteAMapComponentObject(driver);
 	}
 
+	public DeleteAMapComponentObject restoreMap() {
+		waitForElementByElement(actionDropDown);
+		actionDropDown.click();
+		restoreMapButton.click();
+		return new DeleteAMapComponentObject(driver);
+	}
+
+	public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {
+		Assertion.assertEquals(mapIdExpected, mapIdActual);
+	}
+
 	public void verifyEscapedFragmentMetaTag() {
 		waitForElementByElement(createdMapTitle);
 		waitForElementPresenceByBy(escapedFragmentMetaDataTag);
@@ -473,12 +488,12 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementByElement(poiCategorySection);
 		PageObjectLogging.log("verifyPoiCategoryTitle", "Poi category section is displayed", true);
 	}
-	
+
 	public void verifyPoiPointTitle() {
 		waitForElementByElement(poiNameSection);
 		PageObjectLogging.log("verifyPoiPointTitle", "Poi name section is displayed", true);
 	}
-	
+
 	public void verifyPoiPointDescription() {
 		waitForElementByElement(poiDescriptionSection);
 		PageObjectLogging.log("verifyPoiPointDescription", "Poi description section is displayed", true);

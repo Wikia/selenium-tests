@@ -40,6 +40,8 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	protected WebElement createMapUnderContribute;
 	@FindBy(css = ".no-maps")
 	private WebElement emptyStateSection;
+	@FindBy(css = ".msg")
+	private WebElement msgTopBar;
 
 	public InteractiveMapsPageObject(WebDriver driver) {
 		super(driver);

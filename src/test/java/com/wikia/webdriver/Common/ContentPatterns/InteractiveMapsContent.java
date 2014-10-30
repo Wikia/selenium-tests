@@ -10,10 +10,12 @@ public class InteractiveMapsContent {
 			+ "tellus. Duis elementum, arcu et eleifend placerat, mauris est rhoncus turpis, "
 			+ "vitae dapibus augue enim vel lectus. Pellentesque consectetur gravida mi in "
 			+ "lobortis. Aliquam amet";
+
 	public static final String EMBED_MAP_ARTICLE_NAME = "embedMap";
 	public static final int PIN_TYPE_INDEX = 0;
 	public static final int SELECTED_MAP_INDEX = 0;
 	public static final int SELECTED_TEMPLATE_INDEX = 0;
+	public static final int[] MAP_TO_DELETE_AND_RESTORE = {4258, 71, 72, 56};
 	public static final String ASSOCIATED_ARTICLE_NAME = "Test";
 	public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_BE_FOUND = "te";
 	public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_NOT_BE_FOUND = "1234567890123123123123213";
@@ -22,6 +24,9 @@ public class InteractiveMapsContent {
 	public static final String MAP_NAME = "testingMapName";
 	public static final String PIN_TYPE_NAME = "testingPinType";
 	public static final String PIN_NAME = "testingPinName";
+	public static final String MAP_DELETED_SUCCESSFUL = "Map was successfully deleted!";
+	public static final String MAP_DELETE_ERROR = "Sorry, you do not have permission to edit on this wikia. If you think this was a mistake, please contact an administrator.";
+	public static final String MAP_DELETED_MSG = "This map is deleted";
 	public static final String EXTERNAL_LINK = "http://uk.ign.com/";
 	public static final String ARTICLE_WHICH_DOES_NOT_EXIST = "asdkljaskldjaskldjaskldjaskldjaskldjaskldjaskldjaskljdaskl";
 	public static final String ASSOCIATED_ARTICLE_PLACEHOLDER = "Related article name or external URL";
