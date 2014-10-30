@@ -2,6 +2,9 @@ package com.wikia.webdriver.Common.Templates;
 
 import com.wikia.webdriver.Common.Core.Annotations.UserAgent;
 import java.lang.reflect.Method;
+
+import com.wikia.webdriver.Common.DriverProvider.NewDriverProvider;
+import com.wikia.webdriver.Common.DriverProvider.UseUnstablePageLoadStrategy;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +24,13 @@ public class NewTestTemplate extends NewTestTemplateCore {
 				method.getAnnotation(UserAgent.class).userAgent()
 			);
 		}
-		startBrowser();
+
+		if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)){
+			NewDriverProvider.setUnstablePageLoadStrategy(true);
+		}
+
+		//Reset unstable page load strategy to default 'false' value
+		NewDriverProvider.setUnstablePageLoadStrategy(false);
 		logOut();
 	}
 
