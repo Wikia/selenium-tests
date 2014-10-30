@@ -67,11 +67,11 @@ public class MailFunctions {
 			}
 		}
 		catch (NoSuchProviderException e) {
-			System.out.println("problems : " + e.getMessage());
+			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
 		}
 		catch (MessagingException e) {
-			System.out.println("problems : " + e.getMessage());
+			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
 		} catch (InterruptedException e) {
 			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);

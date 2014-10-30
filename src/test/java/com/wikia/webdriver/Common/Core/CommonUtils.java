@@ -123,7 +123,7 @@ public class CommonUtils {
 			PageObjectLogging.log("sendPost", e.getMessage(), false);
 			return null;
 		} catch (IOException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("sendPost", e.getMessage(), false);
 			return null;
 		}
 	}
