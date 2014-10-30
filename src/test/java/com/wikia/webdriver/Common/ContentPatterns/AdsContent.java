@@ -36,6 +36,7 @@ public class AdsContent {
 	public static final String prefooterLeft = "PREFOOTER_LEFT_BOXAD";
 	public static final String prefooterRight = "PREFOOTER_RIGHT_BOXAD";
 	public static final String wikiaBar = "WIKIA_BAR_BOXAD_1";
+	public static final String topIncontentBoxad = "TOP_INCONTENT_BOXAD";
 	public static final String mobileTopLB = "MOBILE_TOP_LEADERBOARD";
 	public static final String mobileAdInContent = "MOBILE_IN_CONTENT";
 	public static final String mobilePrefooter = "MOBILE_PREFOOTER";
@@ -82,6 +83,7 @@ public class AdsContent {
 		slotsSelectors.put(wikiaBar, "#WIKIA_BAR_BOXAD_1");
 		slotsSelectors.put(adsInContentContainer, "#WikiaAdInContentPlaceHolder");
 		slotsSelectors.put(prefootersContainer, "#WikiaArticleBottomAd");
+		slotsSelectors.put(topIncontentBoxad, "#TOP_INCONTENT_BOXAD");
 		slotsSelectors.put(mobileTopLB, "#MOBILE_TOP_LEADERBOARD");
 		slotsSelectors.put(mobileAdInContent, "#MOBILE_IN_CONTENT");
 		slotsSelectors.put(mobilePrefooter, "#MOBILE_PREFOOTER");
