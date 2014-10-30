@@ -157,7 +157,7 @@ public class PinMapTests extends NewTestTemplate {
 		addPinModal.selectPinType();
 		addPinModal.clickSaveButton();
 		addPinModal.verifyErrorContent(InteractiveMapsContent.ARTICLE_NOT_EXIST_ERROR.replace(
-				"%article%",
+				"%articlename%",
 				InteractiveMapsContent.ARTICLE_WHICH_DOES_NOT_EXIST
 				));
 	}
