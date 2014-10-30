@@ -20,7 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 /**
- * @author lukaszjedrzejczak
+ * @author Łukasz Jędrzejczak
  * @author Łukasz Nowak (Dyktus)
  */
 public class InteractiveMapPageObject extends BasePageObject {
@@ -190,8 +190,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void clickOnSingleEnabledCategory() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
-		enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex).click();
+		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
+		enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX).click();
 		PageObjectLogging.log("clickOnSingleEnabledCategory", "Single enabled category was clicked", true);
 		driver.switchTo().defaultContent();
 	}
@@ -200,7 +200,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
 		disabledPinTypesCollection.get(0).click();
 		PageObjectLogging.log("clickOnSingleDisabledCategory", "Single disabled category was clicked", true);
 		driver.switchTo().defaultContent();
@@ -331,7 +331,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(allPinTypes);
-		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
 		if (allPinTypes.getAttribute("class").contains("enabled")) {
 			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were checked", true);
 		}else {
@@ -370,7 +370,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void verifyPinTypesAreCheck() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
 		Assertion.assertEquals(disabledPinTypesCollection.size(), 0);
 		driver.switchTo().defaultContent();
 	}

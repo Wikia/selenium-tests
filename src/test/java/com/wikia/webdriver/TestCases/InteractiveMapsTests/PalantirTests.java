@@ -14,24 +14,14 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
  * @ownership: Mobile Web
- * 
- *             Test for Palantir App (Shadow of Mordor) IM30: Set player
- *             position and verify if poi appear on the map IM31: Set player
- *             position out of map boundaries and verify error. Verify that pin
- *             does not appear on map IM32: Set player position and after that
- *             remove player position. Verify that pin disappear. IM33: Set huge
- *             zoom level and verify error IM34: Update map position and verify
- *             respond IM35: Set decimal zoom value and verify error. Check that
- *             pin does not appear on map
- * 
- */
+*/
 
 public class PalantirTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_030", "PalantirTests", "InteractiveMaps" })
-	public void InteractiveMaps_030_PalantirSetPlayerCorrectPosition() {
+	@Test(groups = { "PalantirTests_001", "PalantirTests", "InteractiveMaps" })
+	public void PalantirTest_001_PalantirSetPlayerCorrectPosition() {
 		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
 		InteractiveMapPageObject selectedMap = specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
@@ -41,8 +31,8 @@ public class PalantirTests extends NewTestTemplate {
 		poi.verifyPoiAppearOnMap();
 	}
 
-	@Test(groups = { "InteractiveMaps_031", "PalantirTests", "InteractiveMaps" })
-	public void InteractiveMaps_031_PalantirSetPlayerPositionOutOfMap() {
+	@Test(groups = { "PalantirTest_002", "PalantirTests", "InteractiveMaps" })
+	public void PalantirTest_002_SetPlayerPositionOutOfMap() {
 		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
 		InteractiveMapPageObject selectedMap = specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
@@ -52,8 +42,8 @@ public class PalantirTests extends NewTestTemplate {
 		poi.verifyPoiNotAppearOnMap();
 	}
 
-	@Test(groups = { "InteractiveMaps_032", "PalantirTests", "InteractiveMaps" })
-	public void InteractiveMaps_032_PalantirSetAndRemovePlayerPosition() {
+	@Test(groups = { "PalantirTest_003", "PalantirTests", "InteractiveMaps" })
+	public void PalantirTest_003_PalantirSetAndRemovePlayerPosition() {
 		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
 		InteractiveMapPageObject selectedMap = specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
@@ -66,8 +56,8 @@ public class PalantirTests extends NewTestTemplate {
 		poi.verifyPoiNotAppearOnMap();
 	}
 
-	@Test(groups = { "InteractiveMaps_033", "PalantirTests", "InteractiveMaps" })
-	public void InteractiveMaps_033_PalantirSetHugeZoomVerifyError() {
+	@Test(groups = { "PalantirTest_004", "PalantirTests", "InteractiveMaps" })
+	public void PalantirTest_004_PalantirSetHugeZoomVerifyError() {
 		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
 		InteractiveMapPageObject selectedMap = specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
@@ -77,8 +67,8 @@ public class PalantirTests extends NewTestTemplate {
 		poi.verifyPoiNotAppearOnMap();
 	}
 
-	@Test(groups = { "InteractiveMaps_034", "PalantirTests", "InteractiveMaps" })
-	public void InteractiveMaps_034_PalantirUpdateMapPosition() {
+	@Test(groups = { "PalantirTest_005", "PalantirTests", "InteractiveMaps" })
+	public void PalantirTest_005_PalantirUpdateMapPosition() {
 		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
 		InteractiveMapPageObject selectedMap = specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();
@@ -89,8 +79,8 @@ public class PalantirTests extends NewTestTemplate {
 		poi.verifyMapPositionUpdated(handle);
 	}
 
-	@Test(groups = { "InteractiveMaps_035", "PalantirTests", "InteractiveMaps" })
-	public void InteractiveMaps_035_PalantirSetDecimalZoom() {
+	@Test(groups = { "PalantirTest_006", "PalantirTests", "InteractiveMaps" })
+	public void PalantirTest_006_PalantirSetDecimalZoom() {
 		InteractiveMapsPageObject specialMap = new InteractiveMapsPageObject(driver);
 		InteractiveMapPageObject selectedMap = specialMap.openMap(wikiURL, PalantirContent.PALANTIR_MAP);
 		selectedMap.verifyMapOpened();

@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.Common.ContentPatterns.InteractiveMapsContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
@@ -19,7 +18,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObje
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author: Lukasz Jedrzejczak
- *
  */
 
 public class InteractiveMapsPageObject extends ArticlePageObject {
@@ -100,7 +98,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	public void verifyAmountMapOnTheList() {
 		waitForElementByElement(mapCollection.get(0));
 		Assert.assertEquals(mapCollection.size(), 10);
-		PageObjectLogging.log("verifyAmountMapOnTheList", "There is " + mapCollection.size() + " maps on the list", true);
+		PageObjectLogging.log("verifyAmountMapOnTheList", "There are " + mapCollection.size() + " maps on the list", true);
 	}
 
 	public void verifyCorrectPagination() {
@@ -118,10 +116,5 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	public void verifyEmptyState() {
 		Assertion.assertTrue(checkIfElementOnPage(emptyStateSection), "Expecting a empty state");
 		PageObjectLogging.log("verifyCorrectPagination", "Paggination was showed", true, driver);
-	}
-
-	public void verifyMapDeletedMessage() {
-		waitForElementVisibleByElement(msgTopBar);
-		Assertion.assertEquals(InteractiveMapsContent.mapDeletedSuccesful, msgTopBar.getText());
 	}
 }
