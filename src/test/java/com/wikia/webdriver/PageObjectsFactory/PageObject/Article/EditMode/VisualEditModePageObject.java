@@ -258,14 +258,19 @@ public class VisualEditModePageObject extends EditMode {
 		switch (component) {
 		case Photo:
 			waitForElementNotPresent(imageBy);
+			break;
 		case Gallery:
 			waitForElementNotPresent(galleryBy);
+			break;
 		case Slideshow:
 			waitForElementNotPresent(slideshowBy);
+			break;
 		case Slider:
 			waitForElementNotPresent(sliderBy);
+			break;
 		case Video:
 			waitForElementNotPresent(videoBy);
+			break;
 		default:
 			break;
 		}
