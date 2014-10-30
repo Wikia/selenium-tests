@@ -449,20 +449,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 		return new DeleteAMapComponentObject(driver);
 	}
 
-	public void verifyMapDeleteError() {
-		waitForElementVisibleByElement(msgTopBar);
-		Assertion.assertFalse(msgTopBar.getText().isEmpty());
-	}
-
-	public void verifyMapDeletedMsg() {
-		waitForElementVisibleByElement(msgTopBar);
-		Assertion.assertEquals(InteractiveMapsContent.mapDeletedMsg, msgTopBar.getText());
-	}
-
-	public void verifyMapDeletedMsgNotVisible() {
-		Assertion.assertFalse(checkIfElementOnPage(msgTopBar));
-	}
-
 	public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {
 		Assertion.assertEquals(mapIdExpected, mapIdActual);
 	}

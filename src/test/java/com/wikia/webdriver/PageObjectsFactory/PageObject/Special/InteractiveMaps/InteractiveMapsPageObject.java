@@ -117,6 +117,6 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 
 	public void verifyMapDeletedMessage() {
 		waitForElementVisibleByElement(msgTopBar);
-		Assertion.assertEquals(InteractiveMapsContent.mapDeletedSuccesfull, msgTopBar.getText());
+		Assertion.assertEquals(InteractiveMapsContent.mapDeletedSuccesful, msgTopBar.getText());
 	}
 }
