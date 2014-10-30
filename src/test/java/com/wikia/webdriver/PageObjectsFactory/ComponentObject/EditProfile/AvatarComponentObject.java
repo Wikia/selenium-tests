@@ -31,7 +31,7 @@ public class AvatarComponentObject extends EditProfileComponentObject {
 			try {
 				throw new Exception("the file doesn't exist");
 			} catch (Exception e) {
-				e.printStackTrace();
+				PageObjectLogging.log("uploadAvatar", e.getMessage(), false);
 			}
 		}
 		uploadInput.sendKeys(fileCheck.getAbsoluteFile().toString());

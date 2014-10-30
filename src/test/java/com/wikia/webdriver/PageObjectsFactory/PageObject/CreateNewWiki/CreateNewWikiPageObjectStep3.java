@@ -46,7 +46,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("selectTheme", e.getMessage(), false);
 		}
 		PageObjectLogging.log("selectTheme", "skin number: " + skinNumber + " selected", true, driver);
 	}

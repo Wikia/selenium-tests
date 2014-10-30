@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Point;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 /**
  * Bogna 'bognix' Knychala
  */
@@ -39,7 +41,7 @@ public class ImageEditor {
 		try {
 			inputImage = ImageIO.read(inputFile);
 		} catch (IOException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("scaleImage", e.getMessage(), false);
 		}
 		BufferedImage outputImage = new BufferedImage(
 				inputImage.getWidth(), inputImage.getHeight(), BufferedImage.TYPE_INT_RGB
