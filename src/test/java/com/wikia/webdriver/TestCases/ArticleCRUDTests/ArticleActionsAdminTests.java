@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.ArticleCRUDTests;
 
+import com.wikia.webdriver.Common.DriverProvider.UseUnstablePageLoadStrategy;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -19,6 +20,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups={"ArticleActionsAdmin_001", "ArticleActionsAdmin"})
+	@UseUnstablePageLoadStrategy
 	public void ArticleActionsAdmin_001_deleteUndelete_CON_2014() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -35,6 +37,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 	}
 
 	@Test(groups={"ArticleActionsAdmin_002", "ArticleActionsAdmin"})
+	@UseUnstablePageLoadStrategy
 	public void ArticleActionsAdmin_002_move_CON_2014() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -42,7 +45,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		String articleNewName = PageContent.articleNamePrefix + article.getTimeStamp();
 		RenamePageObject renamePage = article.renameUsingDropdown();
 		renamePage.rename(articleNewName);
-		article.verifyArticleTitle(articleNewName);
 		article.verifyNotificationMessage();
+		article.verifyArticleTitle(articleNewName);
 	}
 }

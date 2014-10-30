@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -101,7 +102,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
-
 
 public class WikiBasePageObject extends BasePageObject {
 
@@ -667,7 +667,12 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public void verifyNotificationMessage() {
-		waitForElementVisibleByElement(flashMessage);
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			waitForElementVisibleByElement(flashMessage);
+		}finally {
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		}
 	}
 
 	public String getFlashMessageText() {
