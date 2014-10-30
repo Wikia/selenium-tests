@@ -2,9 +2,11 @@ package com.wikia.webdriver.Common.Core.GeoEdge;
 
 import java.io.IOException;
 import java.util.HashMap;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -36,7 +38,6 @@ public class GeoEdgeUtils {
 
     public String createBaseFromCredentials() {
         String credentials = getGeoEdgeUserName() + ":" + getGeoEdgePassword();
-        Base64 base = new Base64();
         byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
         final String encodedString = new String(encodedCredentials);
         return encodedString;
@@ -48,12 +49,12 @@ public class GeoEdgeUtils {
 
 	private String getGeoEdgeUserName() {
 		Element geoEdgeCredentials = (Element) doc.getElementsByTagName("GeoEdgeCredentials").item(0);
-		return (String) geoEdgeCredentials.getElementsByTagName("userName").item(0).getTextContent();
+		return geoEdgeCredentials.getElementsByTagName("userName").item(0).getTextContent();
 	}
 
 	private String getGeoEdgePassword() {
 		Element geoEdgeCredentials = (Element) doc.getElementsByTagName("GeoEdgeCredentials").item(0);
-		return (String) geoEdgeCredentials.getElementsByTagName("password").item(0).getTextContent();
+		return geoEdgeCredentials.getElementsByTagName("password").item(0).getTextContent();
 	}
 
 	private void setIPsForCountries() {
@@ -63,8 +64,8 @@ public class GeoEdgeUtils {
 		for (int s = 0; s < listOfCountries.getLength(); s++) {
 			Element oneCountry = (Element) listOfCountries.item(s);
 			countriesConfiguration.put(
-				(String) oneCountry.getElementsByTagName("Name").item(0).getTextContent(),
-				(String) oneCountry.getElementsByTagName("IP").item(0).getTextContent()
+				oneCountry.getElementsByTagName("Name").item(0).getTextContent(),
+				oneCountry.getElementsByTagName("IP").item(0).getTextContent()
 			);
 		}
 	}

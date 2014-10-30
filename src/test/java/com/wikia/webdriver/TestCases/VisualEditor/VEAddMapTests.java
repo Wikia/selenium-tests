@@ -80,7 +80,6 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEAddMapTests_003_InsertMapFromZeroState() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
-		int expectedMapNum = 1;
 
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMapDialog mapDialog =

@@ -1,13 +1,14 @@
 package com.wikia.webdriver.TestCases.ChatTests;
 
-import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Templates.NewTestTemplate_TwoDrivers;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import com.wikia.webdriver.Common.Properties.Credentials;
+import com.wikia.webdriver.Common.Templates.NewTestTemplate_TwoDrivers;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.ChatPageObject.ChatPageObject;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -208,12 +209,12 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	}
 
 	@Test(groups = {"Chat_009", "Chat", "Modals"})
-	public void Chat_009_banUser() {
+	public void Chat_009_banUser_QAART_410() {
 		switchToWindow(driverOne);
 		openChatForUser(driverOne, userToBeBanned, userToBeBannedPassword);
 
 		ChatPageObject chatUserStaff = openChatForUser(
-			driverOne, userStaff, userStaffPassword
+			driverTwo, userStaff, userStaffPassword
 		);
 
 		chatUserStaff.clickOnDifferentUser(userToBeBanned);

@@ -13,14 +13,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Core.CommonUtils;
-import com.wikia.webdriver.Common.Core.Global;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Gallery.GalleryBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.SpecialVideosPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePageObject;
@@ -167,7 +165,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
 		getUrl(wikiURL+URLsContent.specialVideos);
 		return new SpecialVideosPageObject(driver);
@@ -225,7 +223,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
 	}
-	
+
 	public void verifySourceEditorContentIsEmpty(){
 		waitForElementVisibleByElement(sourceModeTextArea);
 		Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
@@ -260,14 +258,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("typeInContent", "content " + bodyContent.getText() + " - type into article body", true, driver);
 		driver.switchTo().defaultContent();
 	}
-	
+
 	public void clickSourceButton(){
 		waitForElementByElement(sourceButton);
 		sourceButton.click();
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickSourceButton", "Source button was clicked", true, driver);
 	}
-	
+
 	public void clickReturnToEditingButton() {
 		waitForElementByElement(returnToEditingButton);
 		returnToEditingButton.click();
@@ -420,25 +418,25 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.sendKeys(content);
 		PageObjectLogging.log(
-				"typeInContent", 
-				"content type into source mode textarea", 
+				"typeInContent",
+				"content type into source mode textarea",
 				true,
 				driver
 		);
 	}
-	
+
 	public void typeInTemplateContent(String content) {
 		driver.switchTo().defaultContent();
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
 		PageObjectLogging.log(
-				"typeInContent", 
+				"typeInContent",
 				"content type into source mode textarea",
 				true,
 				driver
 		);
-	}	
-	
+	}
+
 	public void verifyEmbededMap(String mapID){
 		driver.switchTo().defaultContent();
 		waitForElementByElement(embededMap);

@@ -74,6 +74,17 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 		super(driver);
 	}
 
+	@Override
+	public void switchToIFrame() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		super.switchToIFrame();
+	}
+
 	private void typeInSearchTextField(String input) {
 		waitForElementByElement(searchInput);
 		searchInput.sendKeys(input);

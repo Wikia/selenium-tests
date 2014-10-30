@@ -50,6 +50,12 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 		super.switchToIFrame();
 	}
 
+	@Override
+	public void switchOutOfIFrame() {
+		waitForElementNotVisibleByElement(templateDialog);
+		super.switchOutOfIFrame();
+	}
+
 	public ArticlePageObject clickGetInfoLink() {
 		switchToIFrame();
 		try {

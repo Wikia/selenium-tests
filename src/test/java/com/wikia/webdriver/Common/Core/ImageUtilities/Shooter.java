@@ -1,6 +1,7 @@
 package com.wikia.webdriver.Common.Core.ImageUtilities;
 
 import java.io.File;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
@@ -19,11 +20,6 @@ public class Shooter {
 
 	public Shooter() {
 		imageEditor = new ImageEditor();
-	}
-
-	public Shooter Shooter() {
-		imageEditor = new ImageEditor();
-		return this;
 	}
 
 	public void savePageScreenshot(String path, WebDriver driver) {

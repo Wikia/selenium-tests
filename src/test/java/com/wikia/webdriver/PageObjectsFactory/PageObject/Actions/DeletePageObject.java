@@ -20,7 +20,8 @@ public class DeletePageObject extends WikiBasePageObject {
 	}
 
 	public WikiBasePageObject submitDeletion() {
-		submitButton.click();
+		waitForElementClickableByElement(submitButton);
+		scrollAndClick(submitButton);
 		PageObjectLogging.log("submitDeletion", "page deleted", true);
 		return new WikiBasePageObject(driver);
 	}

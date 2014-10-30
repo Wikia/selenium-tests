@@ -85,7 +85,7 @@ public class MessageWallTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"MessageWall_004", "MessageWall"})
-	public void MessageWall_004_writeQuote() {
+	public void MessageWall_004_writeQuote_QAART_368() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userNameStaff, wikiURL);

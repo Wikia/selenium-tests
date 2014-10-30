@@ -1,11 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import org.apache.tools.ant.types.CommandlineJava.SysProperties;
 
 public class ImageComparisonHelper {
 	

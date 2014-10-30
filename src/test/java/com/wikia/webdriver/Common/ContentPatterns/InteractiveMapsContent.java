@@ -16,7 +16,7 @@ public class InteractiveMapsContent {
 	public static final int selectedMapIndex = 0;
 	public static final int selectedTemplateIndex = 0;
 	public static final int[] mapToDeleteAndRestore = {4258, 71, 72, 56};
-	public static final String associatedArticleName = "Slid";
+	public static final String associatedArticleName = "Test";
 	public static String templateName;
 	public static final String templateNameToSearchShouldBeFound = "te";
 	public static final String templateNameToSearchShouldNotBeFound = "1234567890123123123123213";
@@ -27,4 +27,9 @@ public class InteractiveMapsContent {
 	public static final String mapDeletedSuccesful = "Map was successfully deleted!";
 	public static final String mapDeleteError = "Sorry, you do not have permission to edit on this wikia. If you think this was a mistake, please contact an administrator.";
 	public static final String mapDeletedMsg = "This map is deleted";
+	public static final String externalLink = "http://uk.ign.com/";
+	public static final String articleWhichDoesNotExist = "asdkljaskldjaskldjaskldjaskldjaskldjaskldjaskldjaskljdaskl";
+	public static final String associatedArticlePlaceholder= "Related article name or external URL";
+	public static final String articleNotExistsError = "Error message: there is no %articlename% article on this wikia nor it's valid URL address.";
+	public static final String escapedFragmentMapId = "69";
 }

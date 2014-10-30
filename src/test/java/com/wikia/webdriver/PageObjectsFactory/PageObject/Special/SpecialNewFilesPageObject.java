@@ -139,6 +139,11 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		throw new NoSuchElementException("there is no " + imageName + " on Special:NewFiles page");
 	}
 
+	public FilePagePageObject openImage(String imageName) {
+		driver.get(getImageUrl(imageName));
+		return new FilePagePageObject(driver);
+	}
+
 	public FilePagePageObject openRandomImage() {
 		driver.get(
 				getRandomImageUrl()
