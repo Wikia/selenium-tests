@@ -32,7 +32,7 @@ public class VideoUrlProvider {
 			// Non-Premium Provider Links
 			{
 				"http://blip.tv/q-tv/ken-jeong-in-studio-q-6609739",
-				"Q with Jian Ghomeshi - Ken Jeong in Studio Q"
+				"Q on CBC - Ken Jeong in Studio Q-1414748287"
 			}, {
 				"http://www.dailymotion.com/video/x101vdw_robert-pattison-y-kristen-stewart-se-dan-un-tiempo_people#.UZovsrWnqXw",
 				"Robert Pattison y Kristen Stewart se dan un tiempo"

@@ -153,7 +153,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 	}
 
 	@Test(groups={"RTE_extended","RTE_extended_012"})
-	public void RTE_012_Photo(){
+	public void RTE_012_Photo_QAART_434(){
 		String articleName = PageContent.articleNamePrefix+base.getTimeStamp();
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		SourceEditModePageObject source = article.openCurrectArticleSourceMode();

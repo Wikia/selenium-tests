@@ -128,7 +128,7 @@ public class PinMapTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"PinMapTests_007", "PinMapTests", "InteractiveMaps"})
-	public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded() {
+	public void PinMapTests_007_VerifyValidExternalUrlCanBeAdded_QAART_435() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
