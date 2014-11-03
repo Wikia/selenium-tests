@@ -5,6 +5,7 @@ import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
 import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav.VenusGlobalNavPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -29,8 +30,7 @@ public class CompareScreenshotsForHubsMenu extends NewTestTemplate {
 
 		boolean failed = false;
 
-		for (com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav.VenusGlobalNavPageObject.Hub hubName : com
-				.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav.VenusGlobalNavPageObject.Hub.values()) {
+		for (VenusGlobalNavPageObject.Hub hubName : VenusGlobalNavPageObject.Hub.values()) {
 			homePage.getVenusGlobalNav().openHub(hubName);
 			failed = takeScreenshotAndCompare(homePage.getVenusGlobalNav().getMenuScreenShotArea(), hubName.getLabelText());
 		}
