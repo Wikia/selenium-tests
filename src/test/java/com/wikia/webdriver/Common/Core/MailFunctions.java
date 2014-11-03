@@ -15,6 +15,8 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 /**
  *
  * @author Karol 'kkarolk' Kujawiak
@@ -65,17 +67,17 @@ public class MailFunctions {
 			}
 		}
 		catch (NoSuchProviderException e) {
-			System.out.println("problems : " + e.getMessage());
+			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
 		}
 		catch (MessagingException e) {
-			System.out.println("problems : " + e.getMessage());
+			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
 		} catch (IOException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
 		}
 	}
