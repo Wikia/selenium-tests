@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -38,6 +39,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			"data-gpt-creative-id",
 			"data-gpt-creative-size",
 	};
+	private final String topIncontentBoxadSelector = "div[id*='TOP_INCONTENT_BOXAD']";
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	private WebElement toolbar;
@@ -53,6 +55,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentMedrec;
 	@FindBy(css="div[id*='TOP_LEADERBOARD_gpt']")
 	protected WebElement presentLeaderboardGpt;
+	@FindBy(css=topIncontentBoxadSelector)
+	protected WebElement topIncontentBoxad;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 	protected String presentLeaderboardName;
@@ -161,6 +165,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	public void checkTopLeaderboard() {
 		checkAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
+	}
+
+	public void checkTopIncontentBoxad() {
+		checkAdVisibleInSlot(topIncontentBoxadSelector, topIncontentBoxad);
 	}
 
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
@@ -510,6 +518,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected boolean checkIfSlotExpanded(WebElement slot) {
 		return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
+	}
+
+	public void waitForSlotCollapsed(WebElement slot) {
+		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void verifyNoLiftiumAdsInSlots(List<String> slots) {
