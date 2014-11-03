@@ -272,6 +272,11 @@ public class VisualEditModePageObject extends EditMode {
 			waitForElementNotPresent(videoBy);
 			break;
 		default:
+			PageObjectLogging.log(
+				"verifyComponentRemoved",
+				"Invalid component: " + component.name() +" selected",
+				false
+			);
 			break;
 		}
 		driver.switchTo().defaultContent();
