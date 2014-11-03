@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -510,6 +511,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected boolean checkIfSlotExpanded(WebElement slot) {
 		return slot.getSize().getHeight() > 1 && slot.getSize().getWidth() > 1;
+	}
+
+	public void waitForSlotCollapsed(WebElement slot) {
+		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+		} finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void verifyNoLiftiumAdsInSlots(List<String> slots) {

@@ -389,4 +389,23 @@ public class CommonExpectedConditions {
 				}
 			};
 		}
+
+	public static ExpectedCondition<Boolean> elementHasSize(
+			final WebElement element, final int width, final int height) {
+		return new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				return element.getSize().getWidth() == width && element.getSize().getHeight() == height;
+			}
+
+			@Override
+			public String toString() {
+				return String.format(
+						"#%s element. Expected size: [%s, %s], Actual size: [%s, %s]",
+						element.getAttribute("id"),
+						width, height, element.getSize().getWidth(), element.getSize().getHeight()
+				);
+			}
+		};
 	}
+}

@@ -105,15 +105,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	public void verifyNoAdInSlot(String slotName) {
 		scrollToSlotOnMobile(slotName);
 		WebElement slot = driver.findElement(By.id(slotName));
-		if (!checkIfSlotExpanded(slot)) {
-			if (!slot.isDisplayed()) {
-				PageObjectLogging.log("AdInSlot", "Ad not found in slot as expected", true);
-				return;
-			} else {
-				throw new NoSuchElementException("Slot is displayed, should be hidden");
-			}
-		}
-		throw new NoSuchElementException("Slot expanded, should be collapsed");
+		waitForSlotCollapsed(slot);
+		PageObjectLogging.log("AdInSlot", "Ad is not found in slot as expected.", true);
 	}
 
 	public void verifyNoSlotPresent(String slotName) {

@@ -90,7 +90,7 @@ public class TestAdTypeMobile extends MobileTestTemplate {
 			dataProviderClass = AdTypeDataProvider.class,
 			dataProvider = "asyncHopAndAsyncSuccess"
 	)
-	public void TestAdTypeAsync_005_asyncHopAndAsyncSuccess(
+	public void TestAdTypeAsync_006_asyncHopAndAsyncSuccess(
 		String wikiName, String article, String adUnit, String slotNameWithAd, String imgUrl, String slotNameWithoutAd
 	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
