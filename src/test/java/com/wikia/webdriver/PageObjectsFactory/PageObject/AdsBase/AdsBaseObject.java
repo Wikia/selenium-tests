@@ -39,6 +39,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			"data-gpt-creative-id",
 			"data-gpt-creative-size",
 	};
+	private final String topIncontentBoxadSelector = "div[id*='TOP_INCONTENT_BOXAD']";
 
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	private WebElement toolbar;
@@ -54,6 +55,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentMedrec;
 	@FindBy(css="div[id*='TOP_LEADERBOARD_gpt']")
 	protected WebElement presentLeaderboardGpt;
+	@FindBy(css=topIncontentBoxadSelector)
+	protected WebElement topIncontentBoxad;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 	protected String presentLeaderboardName;
@@ -162,6 +165,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	public void checkTopLeaderboard() {
 		checkAdVisibleInSlot(presentLeaderboardSelector, presentLeaderboard);
+	}
+
+	public void checkTopIncontentBoxad() {
+		checkAdVisibleInSlot(topIncontentBoxadSelector, topIncontentBoxad);
 	}
 
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
