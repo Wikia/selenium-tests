@@ -29,6 +29,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 			NewDriverProvider.setUnstablePageLoadStrategy(true);
 		}
 
+		startBrowser();
 		//Reset unstable page load strategy to default 'false' value
 		NewDriverProvider.setUnstablePageLoadStrategy(false);
 		logOut();
