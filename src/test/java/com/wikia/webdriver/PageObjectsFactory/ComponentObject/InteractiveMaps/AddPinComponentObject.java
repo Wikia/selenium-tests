@@ -171,7 +171,7 @@ public class AddPinComponentObject extends BasePageObject {
 	public void verifyAssociatedArticlePlaceholder() {
 		waitForElementByElement(associatedArticleField);
 		Assertion.assertEquals(
-				InteractiveMapsContent.associatedArticlePlaceholder,
+				InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
 				associatedArticleField.getAttribute("placeholder"),
 				"Associated article place holder is not correct"
 		);

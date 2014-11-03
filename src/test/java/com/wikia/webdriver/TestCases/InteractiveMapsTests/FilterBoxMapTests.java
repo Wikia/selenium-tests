@@ -14,30 +14,29 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
  * @ownership: Mobile Web
- * 
  */
 
 public class FilterBoxMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_014", "FilterBoxMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_014_VerifyUncheckedSingleCategory() {
+	@Test(groups = { "FilterBoxMapTests_001", "FilterBoxMapTests", "InteractiveMaps" })
+	public void FilterBoxMapTests_001_VerifyUncheckedSingleCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnSingleEnabledCategory();
 		selectedMap.verifyAllPinTypesIsUncheck();
 	}
 
-	@Test(groups = { "InteractiveMaps_015", "FilterBoxMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_015_VerifyClickOnUncheckedCategory() {
+	@Test(groups = { "FilterBoxMapTests_002", "FilterBoxMapTests", "InteractiveMaps" })
+	public void FilterBoxMapTests_002_VerifyClickOnUncheckedCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnSingleEnabledCategory();
 		selectedMap.verifyAllPinTypesIsUncheck();
@@ -45,24 +44,24 @@ public class FilterBoxMapTests extends NewTestTemplate {
 		selectedMap.verifyAllPinTypesIsCheck();
 	}
 
-	@Test(groups = { "InteractiveMaps_016", "FilterBoxMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_016_VerifyClickAllCategoriesUncheckCategories() {
+	@Test(groups = { "FilterBoxMapTests_003", "FilterBoxMapTests", "InteractiveMaps" })
+	public void FilterBoxMapTests_003_VerifyClickAllCategoriesUncheckCategories() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnAllPinTypes();
 		selectedMap.verifyAllPinTypesIsUncheck();
 		selectedMap.verifyPinTypesAreUncheck();
 	}
 
-	@Test(groups = { "InteractiveMaps_017", "FilterBoxMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_017_VerifyClickAllCategoriesCheckAllPinTypes() {
+	@Test(groups = { "FilterBoxMapTests_004", "FilterBoxMapTests", "InteractiveMaps" })
+	public void FilterBoxMapTests_004_VerifyClickAllCategoriesCheckAllPinTypes() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickOnSingleEnabledCategory();
 		selectedMap.verifyAllPinTypesIsUncheck();
