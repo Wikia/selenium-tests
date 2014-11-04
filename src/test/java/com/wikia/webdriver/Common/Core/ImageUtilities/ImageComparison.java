@@ -1,8 +1,11 @@
 package com.wikia.webdriver.Common.Core.ImageUtilities;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
@@ -27,7 +30,7 @@ public class ImageComparison {
 		try {
 			fileInBytes1 = FileUtils.readFileToByteArray(file1);
 			fileInBytes2 = FileUtils.readFileToByteArray(file2);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		if (Arrays.equals(fileInBytes1, fileInBytes2)) {
@@ -44,5 +47,24 @@ public class ImageComparison {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean isColorImage(BufferedImage image, Color color, int accuracy) {
+		int count = image.getHeight() * image.getWidth();
+		int matchCount = 0;
+		int diffCount = 0;
+		for (int row = 0; row < image.getWidth(); row++) {
+			for (int column = 0; column < image.getHeight(); column++) {
+				if (image.getRGB(row, column) == color.getRGB()) {
+					matchCount += 1;
+				} else {
+					diffCount += 1;
+				}
+			}
+			if (diffCount > ((100 - accuracy) * count) / 100D) {
+				return false;
+			}
+		}
+		return matchCount >= (accuracy * count) / 100D;
 	}
 }

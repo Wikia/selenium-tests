@@ -270,9 +270,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void hideMessage() {
-		if (checkIfElementOnPage(wikiaMessageBuble)) {
+		hideElement(wikiaMessageBuble);
+	}
+
+	protected void hideElement(String cssSelector) {
+		if (checkIfElementOnPage(cssSelector)) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$(arguments[0]).css('visibility', 'hidden')", wikiaMessageBuble);
+			js.executeScript("$(arguments[0]).css('visibility', 'hidden')", cssSelector);
 		}
 	}
 

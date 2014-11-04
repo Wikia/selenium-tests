@@ -1,10 +1,14 @@
 package com.wikia.webdriver.Common.Core;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -404,6 +408,27 @@ public class CommonExpectedConditions {
 						"#%s element. Expected size: [%s, %s], Actual size: [%s, %s]",
 						element.getAttribute("id"),
 						width, height, element.getSize().getWidth(), element.getSize().getHeight()
+				);
+			}
+		};
+	}
+
+	public static ExpectedCondition<Boolean> elementHasColor(final WebElement element, final Color color,
+															 final int accuracy) {
+		final Shooter shooter = new Shooter();
+		final ImageComparison imageComparison = new ImageComparison();
+		return new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				BufferedImage image = shooter.takeScreenshot(element, driver);
+				return imageComparison.isColorImage(image, color, accuracy);
+			}
+
+			@Override
+			public String toString() {
+				return String.format(
+						"At least %s percents of element does not have %s color",
+						(100 - accuracy), color.toString()
 				);
 			}
 		};
