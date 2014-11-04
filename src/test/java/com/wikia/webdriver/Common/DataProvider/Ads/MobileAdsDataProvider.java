@@ -16,7 +16,7 @@ public class MobileAdsDataProvider {
 				"MOBILE_TOP_LEADERBOARD",
 				"MOBILE_IN_CONTENT",
 				"MOBILE_PREFOOTER",
-				"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+				"googlesyndication.com/simgad/8216620376696319112"
 			}
 		};
 	}
@@ -30,7 +30,7 @@ public class MobileAdsDataProvider {
 				"MOBILE_TOP_LEADERBOARD",
 				"MOBILE_IN_CONTENT",
 				"MOBILE_PREFOOTER",
-				"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+				"googlesyndication.com/simgad/8216620376696319112"
 			}
 		};
 	}
@@ -44,7 +44,7 @@ public class MobileAdsDataProvider {
 				"MOBILE_TOP_LEADERBOARD",
 				"MOBILE_IN_CONTENT",
 				"MOBILE_PREFOOTER",
-				"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+				"googlesyndication.com/simgad/8216620376696319112"
 			}
 		};
 	}
