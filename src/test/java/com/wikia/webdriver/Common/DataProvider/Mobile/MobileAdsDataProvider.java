@@ -44,7 +44,7 @@ public class MobileAdsDataProvider {
 				"wka.ent/_adtest//article",
 				"MOBILE_TOP_LEADERBOARD",
 				"115974612",
-				"48506262012",
+				"50006703732",
 				Arrays.asList(
 					"\"s0\":\"ent\"",
 					"\"s1\":\"_adtest\"",
