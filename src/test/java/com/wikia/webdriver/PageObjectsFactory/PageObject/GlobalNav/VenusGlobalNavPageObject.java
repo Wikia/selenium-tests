@@ -49,7 +49,7 @@ public class VenusGlobalNavPageObject {
 	}
 
 	private VenusGlobalNavPageObject openHubsMenu() {
-		new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
+		new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
 			@Override
 			public Boolean apply(WebDriver webDriver) {
 				if (!hubsMenu.isDisplayed()) {
