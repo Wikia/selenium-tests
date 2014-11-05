@@ -1,6 +1,6 @@
 package com.wikia.webdriver.Common.Core.ImageUtilities;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -49,15 +49,15 @@ public class ImageComparison {
 		return false;
 	}
 
+	/**
+	 * @param accuracy in percentage between 0 and 100.
+	 */
 	public boolean isColorImage(BufferedImage image, Color color, int accuracy) {
-		int count = image.getHeight() * image.getWidth();
-		int matchCount = 0;
+		int count = image.getHeight() * image.getWidth();;
 		int diffCount = 0;
 		for (int row = 0; row < image.getWidth(); row++) {
 			for (int column = 0; column < image.getHeight(); column++) {
-				if (image.getRGB(row, column) == color.getRGB()) {
-					matchCount += 1;
-				} else {
+				if (image.getRGB(row, column) != color.getRGB()) {
 					diffCount += 1;
 				}
 			}
@@ -65,6 +65,6 @@ public class ImageComparison {
 				return false;
 			}
 		}
-		return matchCount >= (accuracy * count) / 100D;
+		return true;
 	}
 }

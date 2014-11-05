@@ -1,6 +1,6 @@
 package com.wikia.webdriver.Common.Core;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

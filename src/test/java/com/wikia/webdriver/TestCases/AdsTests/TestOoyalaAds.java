@@ -1,12 +1,11 @@
 package com.wikia.webdriver.TestCases.AdsTests;
 
-import com.wikia.webdriver.Common.Core.GeoEdge.GeoEdgeProxy;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsOoyalaObject;
 import org.testng.annotations.Test;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Dmytro Rets
