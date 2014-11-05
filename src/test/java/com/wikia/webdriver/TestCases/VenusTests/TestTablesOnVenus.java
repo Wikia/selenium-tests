@@ -13,13 +13,13 @@ import org.testng.annotations.Test;
  */
 public class TestTablesOnVenus extends NewTestTemplate {
 
-	private final static String wikiName = "mediawiki119";
-	private final static Dimension bigResolution = new Dimension(1920, 900);
-	private final static Dimension smallResolution = new Dimension(768, 1024);
+	private final static String WIKI_NAME = "mediawiki119";
+	private final static Dimension BIG_RESOLUTION = new Dimension(1500, 720);
+	private final static Dimension SMALL_RESOLUTION = new Dimension(768, 720);
 
 	@Test(groups = {"TestTablesOnVenus_001", "TestTablesOnVenus"})
 	public void TestTablesOnVenus_001_scrollableTablePresent() {
-		String url = urlBuilder.getUrlForPath(wikiName, "Tables/ScrollableTable");
+		String url = urlBuilder.getUrlForPath(WIKI_NAME, "Tables/ScrollableTable");
 		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
 		venusArticle.getUrl(url);
 		Assertion.assertTrue(venusArticle.isScrollableTablePresent(), "Scrollable table should be present");
@@ -27,20 +27,21 @@ public class TestTablesOnVenus extends NewTestTemplate {
 
 	@Test(groups = {"TestTablesOnVenus_002", "TestTablesOnVenus"})
 	public void TestTablesOnVenus_002_scrollableTablePresentOnSmallResolution() {
-		String url = urlBuilder.getUrlForPath(wikiName, "Tables/ScrollableTableOnSmallRes");
+		String url = urlBuilder.getUrlForPath(WIKI_NAME, "Tables/ScrollableTableOnSmallRes");
 		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
 		venusArticle.getUrl(url);
-		venusArticle.resizeWindow(bigResolution);
+		venusArticle.resizeWindow(BIG_RESOLUTION);
 		Assertion.assertFalse(venusArticle.isScrollableTablePresent(), "Scrollable table shouldn't be present");
-		venusArticle.resizeWindow(smallResolution);
+		venusArticle.resizeWindow(SMALL_RESOLUTION);
 		Assertion.assertTrue(venusArticle.isScrollableTablePresent(), "Scrollable table should be present");
 	}
 
 	@Test(groups = {"TestTablesOnVenus_003", "TestTablesOnVenus"})
-	public void TestTablesOnVenus_002_scrollableTableNotPresent() {
-		String url = urlBuilder.getUrlForPath(wikiName, "Tables/NotScrollableTable");
+	public void TestTablesOnVenus_003_scrollableTableNotPresent() {
+		String url = urlBuilder.getUrlForPath(WIKI_NAME, "Tables/NotScrollableTable");
 		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
 		venusArticle.getUrl(url);
+		Assertion.assertTrue(venusArticle.isTablePresent(), "Table should be present");
 		Assertion.assertFalse(venusArticle.isScrollableTablePresent(), "Scrollable table shouldn't be present");
 	}
 }
