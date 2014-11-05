@@ -37,6 +37,7 @@ public class NewDriverProvider {
 	private static FirefoxProfile firefoxProfile = new FirefoxProfile();
 	private static ChromeOptions chromeOptions = new ChromeOptions();
 	private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
+	private static boolean unstablePageLoadStrategy = false;
 
 	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
 		browserName = browser;
@@ -160,6 +161,10 @@ public class NewDriverProvider {
 			}
 		}
 
+		if(unstablePageLoadStrategy) {
+			firefoxProfile.setPreference("webdriver.load.strategy", "unstable");
+		}
+
 		caps.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
 
 		//Adding console logging for FF browser
@@ -260,5 +265,9 @@ public class NewDriverProvider {
 		LoggingPreferences loggingprefs = new LoggingPreferences();
 		loggingprefs.enable(LogType.BROWSER, logLevel);
 		caps.setCapability(CapabilityType.LOGGING_PREFS, loggingprefs);
+	}
+
+	public static void setUnstablePageLoadStrategy(boolean value){
+		unstablePageLoadStrategy = value;
 	}
 }
