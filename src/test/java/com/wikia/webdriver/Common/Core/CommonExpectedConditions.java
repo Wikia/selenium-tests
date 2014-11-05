@@ -394,8 +394,8 @@ public class CommonExpectedConditions {
 			};
 		}
 
-	public static ExpectedCondition<Boolean> elementHasSize(
-			final WebElement element, final int width, final int height) {
+	public static ExpectedCondition<Boolean> elementToHaveSize(
+		final WebElement element, final int width, final int height) {
 		return new ExpectedCondition<Boolean>() {
 			@Override
 			public Boolean apply(WebDriver driver) {
@@ -413,8 +413,11 @@ public class CommonExpectedConditions {
 		};
 	}
 
-	public static ExpectedCondition<Boolean> elementHasColor(final WebElement element, final Color color,
-															 final int accuracy) {
+	/**
+	 * @param accuracy in percentage between 0 and 100.
+	 */
+	public static ExpectedCondition<Boolean> elementToHaveColor(final WebElement element, final Color color,
+																final int accuracy) {
 		final Shooter shooter = new Shooter();
 		final ImageComparison imageComparison = new ImageComparison();
 		return new ExpectedCondition<Boolean>() {

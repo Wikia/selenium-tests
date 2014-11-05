@@ -529,7 +529,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size now: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		changeImplicitWait(250, TimeUnit.MILLISECONDS);
 		try {
-			wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+			wait.until(CommonExpectedConditions.elementToHaveSize(slot, 0, 0));
 			PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size after wait.until: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		} finally {
 			restoreDeaultImplicitWait();
