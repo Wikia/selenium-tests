@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -521,9 +522,11 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void waitForSlotCollapsed(WebElement slot) {
+		PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size now: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		changeImplicitWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+			PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size after wait.until: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		} finally {
 			restoreDeaultImplicitWait();
 		}
