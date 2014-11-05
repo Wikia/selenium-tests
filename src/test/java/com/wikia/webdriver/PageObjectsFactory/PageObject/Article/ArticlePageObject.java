@@ -39,7 +39,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
-	@FindBy(css="#WikiaPageHeader h1")
+	@FindBy(css="article header h1")
 	protected WebElement articleHeader;
 	@FindBy(css="#mw-content-text")
 	protected WebElement articleContentContainer;
@@ -47,11 +47,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement pageContentContainer;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
-	@FindBy(css="#WikiHeader .drop")
+	@FindBy(css=".wikia-menu-button.contribute, .contribute-button")
 	protected WebElement contributeDropdown;
 	@FindBy(css="#ca-history")
 	protected WebElement historyDropdown;
-	@FindBy(css=".WikiaMenuElement .createpage")
+	@FindBy(css=".WikiaMenuElement .createpage, ul .createpage")
 	protected WebElement addArticleInDropdown;
 	@FindBy(css="#wpCreatePageDialogTitle")
 	protected WebElement articleTitleInputModal;

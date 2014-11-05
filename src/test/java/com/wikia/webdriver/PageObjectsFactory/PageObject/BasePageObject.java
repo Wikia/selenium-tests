@@ -501,7 +501,12 @@ public class BasePageObject{
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {
-		wait.until(CommonExpectedConditions.elementToBeClickable(element));
+		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.elementToBeClickable(element));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void waitForElementNotClickableByElement(WebElement element) {
