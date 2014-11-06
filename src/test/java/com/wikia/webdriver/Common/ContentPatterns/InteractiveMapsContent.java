@@ -27,7 +27,7 @@ public class InteractiveMapsContent {
 	public static final String MAP_DELETED_SUCCESSFUL = "Map was successfully deleted!";
 	public static final String MAP_DELETE_ERROR = "Sorry, you do not have permission to edit on this wikia. If you think this was a mistake, please contact an administrator.";
 	public static final String MAP_DELETED_MSG = "This map is deleted";
-	public static final String EXTERNAL_LINK = "https://www.google.pl/";
+	public static final String EXTERNAL_LINK = "https://www.wikia.com";
 	public static final String ARTICLE_WHICH_DOES_NOT_EXIST = "asdkljaskldjaskldjaskldjaskldjaskldjaskldjaskldjaskljdaskl";
 	public static final String ASSOCIATED_ARTICLE_PLACEHOLDER = "Related article name or external URL";
 	public static final String ARTICLE_NOT_EXIST_ERROR = "Error message: there is no %articlename% article on this wikia nor it's valid URL address.";
