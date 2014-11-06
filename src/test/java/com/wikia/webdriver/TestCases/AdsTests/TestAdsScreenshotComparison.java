@@ -83,6 +83,26 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
 		wikiPage.checkMedrec();
 	}
 
+	@GeoEdgeProxy(country="CA")
+	@Test (
+			groups={"Ads_Screenshot_CA"}
+	)
+	public void Ads_Screenshot_CA() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.checkTopLeaderboard();
+		wikiPage.checkMedrec();
+	}
+
+	@GeoEdgeProxy(country="GB")
+	@Test (
+			groups={"Ads_Screenshot_GB"}
+	)
+	public void Ads_Screenshot_GB() throws Exception {
+		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
+		wikiPage.checkTopLeaderboard();
+		wikiPage.checkMedrec();
+	}
+
 	@Test (
 		groups={"Ads_Screenshot_GeoEdgeFree"}
 	)
