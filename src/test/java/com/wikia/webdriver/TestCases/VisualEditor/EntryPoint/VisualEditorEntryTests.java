@@ -1,6 +1,5 @@
 package com.wikia.webdriver.TestCases.VisualEditor.EntryPoint;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -10,11 +9,7 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.EditorPref;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.SourceEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.EditMode.VisualEditModePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 /**
  * @author Robert 'Rochan' Chan
@@ -26,13 +21,6 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 
 	Credentials credentials = config.getCredentials();
 
-
-	ArticlePageObject article;
-	VisualEditModePageObject ck;
-	SourceEditModePageObject src;
-	VisualEditorPageObject ve;
-	String articleName;
-
 	@Test(
 		groups = {"VisualEditorEntry", "VisualEditorEntryTest_001", "categoryEntry"},
 		dataProviderClass = VisualEditorDataProvider.class,
@@ -40,10 +28,10 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_001_Category(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.categoryPage);
-		verifyMainEditEditor(expectedEditor);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.openArticleByName(wikiURL, URLsContent.categoryPage);
+		article.verifyMainEditEditor(expectedEditor);
 	}
 
 	@Test(
@@ -53,11 +41,11 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_002_CreateAPage(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, articleName);
-		verifyCreateAPageEditor(expectedEditor);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		String articleName = PageContent.articleNamePrefix + article.getTimeStamp();
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.openArticleByName(wikiURL, articleName);
+		article.verifyCreateAPageEditor(expectedEditor, articleName);
 	}
 
 	@Test(
@@ -67,10 +55,10 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_003_List(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.listPage);
-		verifyMainEditEditor(expectedEditor);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.openArticleByName(wikiURL, URLsContent.listPage);
+		article.verifyMainEditEditor(expectedEditor);
 	}
 
 	@Test(
@@ -80,10 +68,10 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_004_Article(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.testingPage);
-		verifyMainEditEditor(expectedEditor);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.openArticleByName(wikiURL, URLsContent.testingPage);
+		article.verifyMainEditEditor(expectedEditor);
 	}
 
 	@Test(
@@ -93,10 +81,10 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_005_redLink(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.testingPage);
-		verifyRedLinkEditor(expectedEditor);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.openArticleByName(wikiURL, URLsContent.testingPage);
+		article.verifyRedLinkEditor(expectedEditor);
 	}
 
 	@Test(
@@ -106,11 +94,10 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_006_sectionEdit(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.testingPage);
-		verifySectionEditEditor(expectedEditor);
-		article.logOut(wikiURL);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.openArticleByName(wikiURL, URLsContent.testingPage);
+		article.verifySectionEditEditor(expectedEditor);
 	}
 
 	@Test(
@@ -120,10 +107,10 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_007_template(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.templatePage);
-		verifyMainEditEditor(expectedEditor);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.openArticleByName(wikiURL, URLsContent.templatePage);
+		article.verifyMainEditEditor(expectedEditor);
 	}
 
 	@Test(
@@ -133,10 +120,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_008_urlActionEdit(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.testingPage);
-		verifyURLActionEditEditor(expectedEditor);
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.verifyURLActionEditEditor(expectedEditor, URLsContent.testingPage, wikiURL);
 	}
 
 	@Test(
@@ -146,113 +132,8 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEntryTest_009_urlVEActionEdit(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
-		WikiBasePageObject base = new WikiBasePageObject(driver);
-		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
-		article = base.openArticleByName(wikiURL, URLsContent.testingPage);
-		verifyURLVEActionEditEditor(expectedEditor);
-	}
-
-	private void verifyMainEditEditor(Editor expectedEditor) {
-		switch(expectedEditor) {
-			case VE:
-				ve = article.openVEModeWithMainEditButton();
-				ve.verifyVEToolBarPresent();
-				ve.verifyEditorSurfacePresent();
-				break;
-			case CK:
-				ck = article.openCKModeWithMainEditButton();
-				ck.verifyContentLoaded();
-				ck.clickPublishButton();
-				break;
-			case SRC:
-				src = article.openSrcModeWithMainEditButton();
-				src.verifySourceOnlyMode();
-				break;
-			}
-	}
-
-	private void verifyCreateAPageEditor(Editor expectedEditor) {
-		switch(expectedEditor) {
-			case VE:
-				ve = article.createArticleInVEUsingDropdown(articleName);
-				ve.verifyVEToolBarPresent();
-				ve.verifyEditorSurfacePresent();
-				break;
-			case CK:
-				ck = article.createArticleInCKUsingDropdown(articleName);
-				ck.verifyContentLoaded();
-				ck.clickPublishButton();
-				break;
-			case SRC:
-				src = article.createArticleInSrcUsingDropdown(articleName);
-				src.verifySourceOnlyMode();
-				break;
-		}
-	}
-
-	private void verifySectionEditEditor(Editor expectedEditor) {
-		switch(expectedEditor) {
-			case VE:
-				ve = article.openVEModeWithSectionEditButton(0);
-				ve.verifyVEToolBarPresent();
-				ve.verifyEditorSurfacePresent();
-				break;
-			case CK:
-				ck = article.openCKModeWithSectionEditButton(0);
-				ck.verifyContentLoaded();
-				ck.clickPublishButton();
-				break;
-			case SRC:
-				src = article.openSrcModeWithSectionEditButton(0);
-				src.verifySourceOnlyMode();
-				break;
-		}
-	}
-
-	private void verifyRedLinkEditor(Editor expectedEditor) {
-		switch(expectedEditor) {
-			case VE:
-				ve = article.openVEModeWithRedLinks(0);
-				ve.verifyVEToolBarPresent();
-				ve.verifyEditorSurfacePresent();
-				break;
-			case CK:
-				ck = article.openCKModeWithRedLinks(0);
-				ck.verifyContentLoaded();
-				ck.clickPublishButton();
-				break;
-			case SRC:
-				src = article.openSrcModeWithRedLinks(0);
-				src.verifySourceOnlyMode();
-				break;
-		}
-	}
-
-	private void verifyURLActionEditEditor(Editor expectedEditor) {
-		switch(expectedEditor) {
-			case CK:
-				ck = article.navigateToArticleEditPageCK(wikiURL, articleName);
-				ck.verifyContentLoaded();
-				ck.clickPublishButton();
-				break;
-			case SRC:
-				src = article.navigateToArticleEditPageSrc(wikiURL, articleName);
-				src.verifySourceOnlyMode();
-				break;
-			default:
-				throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
-		}
-	}
-
-	private void verifyURLVEActionEditEditor(Editor expectedEditor) {
-		switch(expectedEditor) {
-			case VE:
-				ve = article.openNewArticleEditModeVisual(wikiURL);
-				ve.verifyVEToolBarPresent();
-				ve.verifyEditorSurfacePresent();
-				break;
-			default:
-				throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
-		}
+		ArticlePageObject article = new ArticlePageObject(driver);
+		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
+		article.verifyURLVEActionEditEditor(expectedEditor, wikiURL);
 	}
 }

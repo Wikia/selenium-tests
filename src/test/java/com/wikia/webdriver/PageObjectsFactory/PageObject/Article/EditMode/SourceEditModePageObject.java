@@ -19,6 +19,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Photo.PhotoAddComp
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
 
 public class SourceEditModePageObject extends EditMode{
 
@@ -349,5 +350,11 @@ public class SourceEditModePageObject extends EditMode{
 		} else {
 			throw new NoSuchElementException("Can not detect the page to be in Edit mode");
 		}
+	}
+
+	public ArticlePageObject clickPublishButton() {
+		waitForElementByElement(submitButton);
+		submitButton.click();
+		return new ArticlePageObject(driver);
 	}
 }
