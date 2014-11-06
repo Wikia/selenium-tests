@@ -77,4 +77,8 @@ public class UrlBuilder {
 		}
 		return url;
 	}
+
+	public String removeProtocolServerNameFromUrl(String url) {
+		return url.substring(url.indexOf('.') + 1, url.length());
+	}
 }

@@ -14,7 +14,7 @@ public class AdTypeDataProvider {
 						"adtest", "SyntheticTests/Async/Success",
 						"wka.ent/_adtest//article",
 						"MOBILE_PREFOOTER",
-						"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+						"googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
 				}
 		};
 	}
@@ -59,7 +59,7 @@ public class AdTypeDataProvider {
 						"adtest", "SyntheticTests/Async/Success",
 						"wka.ent/_adtest//article",
 						"MOBILE_PREFOOTER",
-						"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
+						"googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg",
 						"MOBILE_IN_CONTENT"
 				}
 		};
@@ -83,7 +83,7 @@ public class AdTypeDataProvider {
 						"adtest", "SyntheticTests/AdType/InspectIframe",
 						"wka.ent/_adtest//article",
 						"MOBILE_PREFOOTER",
-						"https://tpc.googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+						"googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
 				}
 		};
 	}
