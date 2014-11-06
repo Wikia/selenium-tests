@@ -110,6 +110,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
 		article = base.openArticleByName(wikiURL, URLsContent.testingPage);
 		verifySectionEditEditor(expectedEditor);
+		article.logOut(wikiURL);
 	}
 
 	@Test(

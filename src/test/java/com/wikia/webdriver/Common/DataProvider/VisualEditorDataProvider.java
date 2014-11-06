@@ -269,16 +269,16 @@ public class VisualEditorDataProvider {
 		return new Object[][] {
 			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
 			{false, true, EditorPref.CK, Editor.SRC},
-			{false, true, EditorPref.SRC, Editor.SRC},
-			{false, true, EditorPref.VE, Editor.VE},
 			{false, false, EditorPref.CK, Editor.SRC},
-			{false, false, EditorPref.SRC, Editor.SRC},
-			{false, false, EditorPref.VE, Editor.VE},
-			{true, false, EditorPref.SRC, Editor.SRC},
-			{true, false, EditorPref.VE, Editor.VE},
 			{true, false, EditorPref.CK, Editor.CK},
 			{true, true, EditorPref.CK, Editor.CK},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.SRC, Editor.SRC},
 			{true, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.VE, Editor.VE},
 			{true, true, EditorPref.VE, Editor.VE},
 		};
 	}
