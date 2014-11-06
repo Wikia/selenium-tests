@@ -804,9 +804,12 @@ public class BasePageObject{
 
 	public void verifyUrlInNewWindow(String URL) {
 		waitForWindow("", "");
+		System.out.println("Czekam");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
+		System.out.println("Czekam");
 		waitForStringInURL(URL);
+		System.out.println("Doczekalem sie");
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
