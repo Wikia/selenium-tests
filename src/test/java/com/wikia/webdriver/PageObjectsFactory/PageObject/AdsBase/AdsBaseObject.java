@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -125,15 +124,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 			String adSkinUrl, String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
 	) {
 		setSlots();
-		String leaderboardAd = getSlotImageAd(presentLeaderboard);
-		String medrecAd = getSlotImageAd(presentMedrec);
+		String leaderboardAd = urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentLeaderboard));
+		String medrecAd = urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentMedrec));
 		verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
 
 		for (int i=0; i <= numberOfPageViews; i++) {
 			refreshPage();
 			verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
-			Assertion.assertEquals(leaderboardAd, getSlotImageAd(presentLeaderboard));
-			Assertion.assertEquals(medrecAd, getSlotImageAd(presentMedrec));
+			Assertion.assertStringContains(leaderboardAd, getSlotImageAd(presentLeaderboard));
+			Assertion.assertStringContains(medrecAd, getSlotImageAd(presentMedrec));
 		}
 	}
 

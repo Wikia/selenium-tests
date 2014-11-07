@@ -2,7 +2,7 @@ package com.wikia.webdriver.TestCases.AdsTests.MobileAdsTests;
 
 import org.testng.annotations.Test;
 
-import com.wikia.webdriver.Common.DataProvider.Ads.MobileAdsDataProvider;
+import com.wikia.webdriver.Common.DataProvider.Mobile.MobileAdsDataProvider;
 import com.wikia.webdriver.Common.Templates.Mobile.MobileTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Mobile.MobileAdsBaseObject;
 
