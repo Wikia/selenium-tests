@@ -31,7 +31,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_001"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_001_deleteImage_CON_2014() {
+	public void ImageStorage_001_deleteImage_QAART_436() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
@@ -59,7 +59,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_002_moveImage_CON_2014() {
+	public void ImageStorage_002_moveImage_QAART_437() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
