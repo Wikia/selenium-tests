@@ -270,9 +270,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void hideMessage() {
-		if (checkIfElementOnPage(wikiaMessageBuble)) {
+		hideElement(wikiaMessageBuble);
+	}
+
+	protected void hideElement(String cssSelector) {
+		if (checkIfElementOnPage(cssSelector)) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$(arguments[0]).css('visibility', 'hidden')", wikiaMessageBuble);
+			js.executeScript("$(arguments[0]).css('visibility', 'hidden')", cssSelector);
 		}
 	}
 
@@ -525,7 +529,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size now: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		changeImplicitWait(250, TimeUnit.MILLISECONDS);
 		try {
-			wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+			wait.until(CommonExpectedConditions.elementToHaveSize(slot, 0, 0));
 			PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size after wait.until: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		} finally {
 			restoreDeaultImplicitWait();
