@@ -26,6 +26,7 @@ public class AdsOoyalaObject extends AdsBaseObject {
 	}
 
 	public void verifyVideoThumbnail(Color thumbnailColor) {
+		scrollToElement(thumbnail);
 		hideElement(thumbnailPlayCircleSelector);
 		hideElement(thumbnailDurationSelector);
 		verifyColorAd(thumbnail, thumbnailColor);
