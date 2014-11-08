@@ -21,7 +21,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_Preferred() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		base = new WikiBasePageObject(driver);
 	}
 

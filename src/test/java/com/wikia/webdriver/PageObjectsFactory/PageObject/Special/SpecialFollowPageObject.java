@@ -19,7 +19,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 
 	public SpecialFollowPageObject(WebDriver driver, String wikiURL) {
 		super(driver);
-		getUrl(wikiURL + URLsContent.specialFollow);
+		getUrl(wikiURL + URLsContent.SPECIAL_FOLLOW);
 	}
 
 	public void verifyFollowedArticle(String articleName) {

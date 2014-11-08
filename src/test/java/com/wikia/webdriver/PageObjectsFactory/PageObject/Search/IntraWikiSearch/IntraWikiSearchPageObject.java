@@ -97,7 +97,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	 * by adding "&uselang=qqx" to URl
 	 */
 	public void addQqxUselang() {
-		appendToUrl(URLsContent.translatableLanguage);
+		appendToUrl(URLsContent.TRANSLATABLE_LANGUAGE);
 	}
 
 	public void searchFor(String query) {

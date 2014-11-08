@@ -158,7 +158,7 @@ public class HomePageObject extends WikiBasePageObject {
 
 		for (int i=0; i<numOfLanguages; i++) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
-			String languageURL = getLanguageURL(i) + URLsContent.wikiaDir;
+			String languageURL = getLanguageURL(i) + URLsContent.WIKIA_DIR;
 			newHome = selectLanguage(i);
 
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer

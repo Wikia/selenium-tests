@@ -451,7 +451,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
-		getUrl(wikiURL+URLsContent.embedMapEditPage);
+		getUrl(wikiURL+URLsContent.EMBEDED_MAP_EDITPAGE);
 		return new WikiArticleEditMode(driver);
 	}
 

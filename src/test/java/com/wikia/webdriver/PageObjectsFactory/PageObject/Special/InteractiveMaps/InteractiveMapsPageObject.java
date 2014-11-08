@@ -81,12 +81,12 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	}
 	
 	public InteractiveMapPageObject openMap(String wikiURL, int id) {
-		getUrl(wikiURL + URLsContent.specialMaps + '/' + id);
+		getUrl(wikiURL + URLsContent.SPECIAL_MAPS + '/' + id);
 		return new InteractiveMapPageObject(driver);
 	}
 	
 	public InteractiveMapPageObject openEscapedFragmentMap(String wikiURL, String id) {
-		getUrl(wikiURL + URLsContent.specialMaps + '/' + id + URLsContent.escapedFragment);
+		getUrl(wikiURL + URLsContent.SPECIAL_MAPS + '/' + id + URLsContent.ESCAPED_FRAGMENT);
 		return new InteractiveMapPageObject(driver);
 	}
 

@@ -23,7 +23,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_001", "Monetization"})
 	public void MonetizationModuleTest_001() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -38,7 +38,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_002", "Monetization"})
 	public void MonetizationModuleTest_002() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -53,7 +53,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_003", "Monetization"})
 	public void MonetizationModuleTest_003() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -68,7 +68,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_004", "Monetization"})
 	public void MonetizationModuleTest_004() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -97,7 +97,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"}
 	)
 	public void MonetizationModuleTest_005(int width, int height, int expected) {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -114,7 +114,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_006", "Monetization"})
 	public void MonetizationModuleTest_006() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -138,7 +138,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_007", "Monetization"})
 	public void MonetizationModuleTest_007() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -173,7 +173,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		groups = {"MonetizationModule", "MonetizationModuleTest_008", "Monetization"}
 	)
 	public void MonetizationModuleTest_008(String countryCode, Boolean isFromsearch) {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.monetizationGeoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.MONETIZATION_GEOTEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -196,7 +196,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@DataProvider(name="DataMonetizationModuleGeoTestWikis")
 	public static Object[][] DataMonetizationModuleGeoTestWikis() {
 		return new Object[][] {
-			{URLsContent.monetizationGeoTestWiki},
+			{URLsContent.MONETIZATION_GEOTEST_WIKI},
 			{testWikiGeoRestrictions},
 		};
 	}
