@@ -110,7 +110,7 @@ public class SignUpTests extends NewTestTemplate {
 		CustomizedToolbarComponentObject toolbar = new CustomizedToolbarComponentObject(driver);
 		toolbar.verifyUserToolBar();
 		PreferencesPageObject preferences = userProfile.openSpecialPreferencesPage(wikiURL);
-		preferences.selectTab(tabNames.Email);
+		preferences.selectTab(tabNames.EMAIL);
 		preferences.verifyEmailMeSection();
 	}
 
@@ -208,7 +208,7 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.verifyUserLoggedIn(userName);
 		PreferencesPageObject preferences;
 		preferences = signUp.openSpecialPreferencesPage(wikiURL);
-		preferences.selectTab(tabNames.Facebook);
+		preferences.selectTab(tabNames.FACEBOOK);
 		preferences.disconnectFromFacebook();
 	}
 }
