@@ -77,7 +77,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		String blogPostTitle = PageContent.blogPostNamePrefix + createPage.getTimeStamp();
 		VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
 		SliderBuilderComponentObject sliderBuilder = blogEdit.clickSliderButton();
-		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);

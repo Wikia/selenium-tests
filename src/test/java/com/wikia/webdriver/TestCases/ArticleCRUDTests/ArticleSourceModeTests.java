@@ -213,7 +213,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		source.clickAddGallery();
 		source.verifyComponentSelector();
 		SliderBuilderComponentObject sliderBuilder = (SliderBuilderComponentObject)source.addComponent("slider");
-		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		List<String> photoNames = sliderAddPhoto.choosePhotos(4);

@@ -162,7 +162,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
 		SliderBuilderComponentObject sliderBuilder = visualEditMode.clickSliderButton();
-		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);
@@ -174,7 +174,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 
 		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.SLIDER);
-		sliderBuilder.selectMenuPosition(MenuPositions.Horizontal);
+		sliderBuilder.selectMenuPosition(MenuPositions.HORIZONTAL);
 		sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(8);
@@ -193,7 +193,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.clearContent();
 		SliderBuilderComponentObject sliderBuilder = visualEditMode.clickSliderButton();
-		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);
