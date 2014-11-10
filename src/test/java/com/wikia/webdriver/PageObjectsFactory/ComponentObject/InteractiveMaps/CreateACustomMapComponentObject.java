@@ -1,10 +1,10 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.Core.Assertion;
@@ -37,10 +37,6 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	private WebElement errorField;
 	@FindBy(css = ".tile-set-thumb")
 	private List<WebElement> thumbCollection;
-	@FindBy(css = ".tile-set-thumb > strong")
-	private List<WebElement> thumbTitleCollection;
-	@FindBy(css = ".clear-search secondary")
-	private WebElement clearSearchTitleButton;
 	@FindBy(css = "#intMapTileSetsList")
 	private WebElement templatesBox;
 	@FindBy(css = ".close")

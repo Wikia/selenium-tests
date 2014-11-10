@@ -1,8 +1,6 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
 import org.openqa.selenium.WebDriver;
-
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -20,10 +18,6 @@ public class EmbedMapComponentObject extends InteractiveMapPageObject {
 		super(driver);
 	}
 
-	@FindBy(css = ".leaflet-control-embed-map-code-button")
-	private WebElement embedMapButton;
-	@FindBy(css = ".leaflet-draw-draw-marker")
-	private WebElement addPinButton;
 	@FindBy(css = ".leaflet-control-zoom-in")
 	private WebElement zoomInButton;
 	@FindBy(css = ".leaflet-control-zoom-out")
