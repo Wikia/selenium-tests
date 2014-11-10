@@ -72,7 +72,7 @@ public class PhotoAddComponentObject extends BasePageObject{
 	}
 
 	public String getPhotoName(){
-		return photoName;
+		return photoName.replace(' ', '_');
 	}
 
 	/**

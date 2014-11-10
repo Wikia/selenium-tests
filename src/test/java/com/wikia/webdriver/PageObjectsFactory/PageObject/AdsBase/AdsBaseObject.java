@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -125,15 +124,15 @@ public class AdsBaseObject extends WikiBasePageObject {
 			String adSkinUrl, String expectedAdSkinLeftPart, String expectedAdSkinRightPart, int numberOfPageViews
 	) {
 		setSlots();
-		String leaderboardAd = getSlotImageAd(presentLeaderboard);
-		String medrecAd = getSlotImageAd(presentMedrec);
+		String leaderboardAd = urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentLeaderboard));
+		String medrecAd = urlBuilder.removeProtocolServerNameFromUrl(getSlotImageAd(presentMedrec));
 		verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
 
 		for (int i=0; i <= numberOfPageViews; i++) {
 			refreshPage();
 			verifyAdSkinPresence(adSkinUrl, expectedAdSkinLeftPart, expectedAdSkinRightPart);
-			Assertion.assertEquals(leaderboardAd, getSlotImageAd(presentLeaderboard));
-			Assertion.assertEquals(medrecAd, getSlotImageAd(presentMedrec));
+			Assertion.assertStringContains(leaderboardAd, getSlotImageAd(presentLeaderboard));
+			Assertion.assertStringContains(medrecAd, getSlotImageAd(presentMedrec));
 		}
 	}
 
@@ -270,9 +269,13 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void hideMessage() {
-		if (checkIfElementOnPage(wikiaMessageBuble)) {
+		hideElement(wikiaMessageBuble);
+	}
+
+	protected void hideElement(String cssSelector) {
+		if (checkIfElementOnPage(cssSelector)) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$(arguments[0]).css('visibility', 'hidden')", wikiaMessageBuble);
+			js.executeScript("$(arguments[0]).css('visibility', 'hidden')", cssSelector);
 		}
 	}
 
@@ -525,7 +528,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size now: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		changeImplicitWait(250, TimeUnit.MILLISECONDS);
 		try {
-			wait.until(CommonExpectedConditions.elementHasSize(slot, 0, 0));
+			wait.until(CommonExpectedConditions.elementToHaveSize(slot, 0, 0));
 			PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size after wait.until: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		} finally {
 			restoreDeaultImplicitWait();

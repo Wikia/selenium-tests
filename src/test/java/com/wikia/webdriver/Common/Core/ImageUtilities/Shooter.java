@@ -1,5 +1,6 @@
 package com.wikia.webdriver.Common.Core.ImageUtilities;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import org.openqa.selenium.Dimension;
@@ -42,6 +43,14 @@ public class Shooter {
 		File screen = capturePage(driver);
 		Point start = element.getLocation();
 		return imageEditor.cropImage(start, element.getSize(), screen);
+	}
+
+	public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
+		File screen = capturePage(driver);
+		Point start = element.getLocation();
+		Dimension size = element.getSize();
+		BufferedImage image = imageEditor.fileToImage(screen);
+		return image.getSubimage(start.getX(), start.getY(), size.width, size.height);
 	}
 
 	public File captureWebElementAndCrop(WebElement element, Dimension size, WebDriver driver) {
