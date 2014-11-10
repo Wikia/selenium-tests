@@ -307,7 +307,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		addTable.verifyAddTableLightbox();
 		addTable.typeAmountOfRows(3);
 		addTable.typeAmountOfColumns(2);
-		addTable.selectHeader(Headers.FirstColumn);
+		addTable.selectHeader(Headers.FIRSTCOLUMN);
 		addTable.typeBorderSize(border);
 		addTable.selectAlignment(alignment);
 		addTable.typeWidth(width);
