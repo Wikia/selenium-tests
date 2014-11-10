@@ -218,7 +218,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public String resetForgotPasswordTime(String userName, String apiToken) {
 		String[][] apiRequestParameters = {
-				{"action", ApiActions.apiActionForgotPassword},
+				{"action", ApiActions.API_ACTION_FORGOT_PASSWORD},
 				{"user", userName},
 				{"token", apiToken},
 				{"format", "json"},
