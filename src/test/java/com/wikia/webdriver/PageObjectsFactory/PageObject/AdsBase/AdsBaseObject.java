@@ -41,7 +41,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	};
 	private final String topIncontentBoxadSelector = "div[id*='TOP_INCONTENT_BOXAD']";
 
-	@FindBy(css=AdsContent.wikiaBarSelector)
+	@FindBy(css=AdsContent.WIKIA_BAR_SELECTOR)
 	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
 	private WebElement wikiaArticle;
@@ -143,7 +143,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			driver.switchTo().frame(slotGptIframe);
 			WebElement iframeHtml = driver.findElement(By.tagName("html"));
 			String adDriverForcedSuccessFormatted = String.format(
-				AdsContent.adDriverForcedStatusSuccessScript, slot
+				AdsContent.AD_DRIVER_FORCED_STATUS_SUCCESS_SCRIPT, slot
 			);
 			if (isScriptPresentInElement(iframeHtml, adDriverForcedSuccessFormatted)) {
 				PageObjectLogging.log(
@@ -220,7 +220,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		);
 
 		AdsComparison adsComparison = new AdsComparison();
-		adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.wikiaBar), driver);
+		adsComparison.hideSlot(AdsContent.getSlotSelector(AdsContent.WIKIA_BAR), driver);
 		hideMessage();
 
 		int articleLocationX = wikiaArticle.getLocation().x;
@@ -280,12 +280,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyHubTopLeaderboard() throws Exception {
-		String hubLBName = AdsContent.hubLB;
+		String hubLBName = AdsContent.HUB_LB;
 		WebElement hubLB = driver.findElement(By.cssSelector(AdsContent.getSlotSelector(hubLBName)));
 		checkScriptPresentInSlotScripts(hubLBName, hubLB);
 		PageObjectLogging.log("HUB_TOP_LEADERBOARD found", "HUB_TOP_LEADERBOARD found", true);
 
-		WebElement hubGPT_LB = hubLB.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.hubLB_gpt)));
+		WebElement hubGPT_LB = hubLB.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.HUB_LB_GPT)));
 		PageObjectLogging.log("HUB_TOP_LEADERBOARD_gpt found", "HUB_TOP_LEADERBOARD_gpt found", true);
 
 		if(hubGPT_LB.findElements(By.cssSelector("iframe")).size() > 1) {
@@ -301,8 +301,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyNoLiftiumAdsOnPage() {
-		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
-		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
 		verifyNoLiftiumAds();
 		PageObjectLogging.log(
 			"verifyNoLiftiumAdsOnPage",
@@ -313,8 +313,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyNoAdsOnPage() {
-		scrollToSelector(AdsContent.getSlotSelector(AdsContent.adsInContentContainer));
-		scrollToSelector(AdsContent.getSlotSelector(AdsContent.prefootersContainer));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.ADS_IN_CONTENT_CONTAINER));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.PREFOOTERS_CONTAINER));
 		verifyNoAds();
 		PageObjectLogging.log(
 			"verifyNoAdsOnPage",
@@ -325,8 +325,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void verifyNoAdsOnMobilePage() {
-		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobileAdInContent));
-		scrollToSelector(AdsContent.getSlotSelector(AdsContent.mobilePrefooter));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_AD_IN_CONTENT));
+		scrollToSelector(AdsContent.getSlotSelector(AdsContent.MOBILE_PREFOOTER));
 		verifyNoAds();
 		PageObjectLogging.log(
 			"verifyNoAdsOnMobilePage",
@@ -374,7 +374,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private boolean checkScriptPresentInSlotScripts(String slotName, WebElement slotElement) throws Exception {
-		String scriptExpectedResult = AdsContent.adsPushSlotScript.replace(
+		String scriptExpectedResult = AdsContent.ADS_PUSHSLOT_SCRIPT.replace(
 			"%slot%", slotName
 		);
 		boolean scriptFound = isScriptPresentInElement(slotElement, scriptExpectedResult);
