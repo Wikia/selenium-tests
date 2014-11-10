@@ -40,10 +40,10 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
 		galleryAddPhoto.clickSelect();
-		galleryBuiler.adjustPosition(PositionsGallery.center);
+		galleryBuiler.adjustPosition(PositionsGallery.CENTER);
 		galleryBuiler.adjustColumns("2");
-		galleryBuiler.adjustSpacing(SpacingGallery.small);
-		galleryBuiler.adjustOrientation(Orientation.landscape);
+		galleryBuiler.adjustSpacing(SpacingGallery.SMALL);
+		galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
 		galleryBuiler.clickFinish();
 		blogEdit.verifyGallery();
 		BlogPageObject blogPage = blogEdit.submitBlog();
