@@ -59,7 +59,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyGallery();
 
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.modifyComponent(Components.Gallery);
+		visualEditMode.modifyComponent(Components.GALLERY);
 		galleryBuiler.clickAddPhoto();
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(2);
@@ -96,8 +96,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifyGallery();
 
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.removeComponent(Components.Gallery);
-		visualEditMode.verifyComponentRemoved(Components.Gallery);
+		visualEditMode.removeComponent(Components.GALLERY);
+		visualEditMode.verifyComponentRemoved(Components.GALLERY);
 	}
 
 	@Test(groups={"ArticleFeaturesCRUDUser_003", "ArticleFeaturesCRUDUser"})
@@ -119,7 +119,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifySlideshow();
 
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.modifyComponent(Components.Slideshow);
+		visualEditMode.modifyComponent(Components.SLIDESHOW);
 		slideshowBuilder.clickAddPhoto();
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(8);
@@ -150,8 +150,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifySlideshow();
 
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.removeComponent(Components.Slideshow);
-		visualEditMode.verifyComponentRemoved(Components.Slideshow);
+		visualEditMode.removeComponent(Components.SLIDESHOW);
+		visualEditMode.verifyComponentRemoved(Components.SLIDESHOW);
 	}
 
 	@Test(groups={"ArticleFeaturesCRUDUser_005", "ArticleFeaturesCRUDUser"})
@@ -173,7 +173,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifySlider();
 
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.modifyComponent(Components.Slider);
+		visualEditMode.modifyComponent(Components.SLIDER);
 		sliderBuilder.selectMenuPosition(MenuPositions.Horizontal);
 		sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
@@ -204,8 +204,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		article.verifySlider();
 
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.removeComponent(Components.Slider);
-		visualEditMode.verifyComponentRemoved(Components.Slider);
+		visualEditMode.removeComponent(Components.SLIDER);
+		visualEditMode.verifyComponentRemoved(Components.SLIDER);
 	}
 
 	@Test(groups={"ArticleFeaturesCRUDUser_007", "ArticleFeaturesCRUDUser", "Media"})
@@ -223,7 +223,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifyVideo();
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.modifyComponent(Components.Video);
+		visualEditMode.modifyComponent(Components.VIDEO);
 		vetOptions.setCaption(PageContent.caption2);
 		vetOptions.update();
 		visualEditMode.verifyVideo();
@@ -246,8 +246,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.submitArticle();
 		article.verifyVideo();
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.removeComponent(Components.Video);
-		visualEditMode.verifyComponentRemoved(Components.Video);
+		visualEditMode.removeComponent(Components.VIDEO);
+		visualEditMode.verifyComponentRemoved(Components.VIDEO);
 	}
 
 	@Test(groups={"ArticleFeaturesCRUDUser_009", "ArticleFeaturesCRUDUser", "Smoke4"})
@@ -264,7 +264,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.modifyComponent(Components.Photo);
+		visualEditMode.modifyComponent(Components.PHOTO);
 		photoOptions.setCaption(PageContent.caption2);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
@@ -286,8 +286,8 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();
 		article.editArticleInRTEUsingDropdown();
-		visualEditMode.removeComponent(Components.Photo);
-		visualEditMode.verifyComponentRemoved(Components.Photo);
+		visualEditMode.removeComponent(Components.PHOTO);
+		visualEditMode.verifyComponentRemoved(Components.PHOTO);
 	}
 
 	@Test(
