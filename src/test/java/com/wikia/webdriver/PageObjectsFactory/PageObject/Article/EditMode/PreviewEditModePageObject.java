@@ -16,8 +16,6 @@ public class PreviewEditModePageObject extends EditMode {
 
 	@FindBy(css=".modalWrapper.preview")
 	private WebElement previewModal;
-	@FindBy(css=".article-thumb figcaption")
-	private WebElement figcaption;
 	@FindBy(css=".preview .video-thumbnail")
 	protected WebElement videoArticle;
 

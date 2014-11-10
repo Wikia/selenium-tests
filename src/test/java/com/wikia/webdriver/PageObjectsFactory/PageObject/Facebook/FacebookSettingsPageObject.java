@@ -20,8 +20,6 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 
 	@FindBy(css = "#pageLogo")
 	private WebElement pageLogo;
-	@FindBy(css = "#application-li-112328095453510 .uiCloseButtonSmall")
-	private WebElement wikiAppRemoveButton;
 	@FindBy(css = "#pop_content .uiButtonConfirm")
 	private WebElement removeButton;
 	@FindBy(css = ".pop_container_advanced")

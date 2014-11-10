@@ -10,9 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.VideoContent;
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Vet.VetAddVideoComponentObject;
@@ -42,8 +42,6 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	private WebElement deleteConfirmButton;
 	@FindBy(css = "#sorting-dropdown")
 	private WebElement sortDropdown;
-
-	private int refreshLimit = 3;
 
 	public SpecialVideosPageObject(WebDriver driver) {
 		super(driver);

@@ -33,8 +33,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	private WebElement moreOrFewerOptions;
 	@FindBy(css="div.toggles input[name='wpIgnoreWarning']")
 	private WebElement ignoreAnyWarnings;
-	@FindBy(css="section[id='UploadPhotosWrapper']")
-	private WebElement uploadPhotoDialog;
 	@FindBy(css="div.wikia-gallery div.wikia-gallery-item img")
 	private WebElement wikiaPreviewImg;
 	@FindBys(@FindBy(css="#mw-content-text img"))

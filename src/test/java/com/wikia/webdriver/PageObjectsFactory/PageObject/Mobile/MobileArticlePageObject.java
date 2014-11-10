@@ -20,7 +20,6 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	private String wikiTOC = "wiki/TOC#";
-	private String modal = "#Modal";
 	private String mainPageTitle = "Mobileregressiontesting Wiki";
 	private String curtainNotOpened = ".ads";
 	private String backCssSelector = ".goBck";
@@ -57,8 +56,6 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private List<WebElement> sectionOpenedList;
 	@FindBy(css="div#mw-content-text h2.collSec.open")
 	private WebElement sectionVisibilityElement;
-	@FindBy(css="#wkArtCnt")
-	private WebElement numberOfComments;
 	@FindBy(css="#wkMdlImages > .current > img")
 	private WebElement openedImage;
 	@FindBy(css = "#wkCurtain")

@@ -16,8 +16,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageO
 
 public class UserProfilePageObject extends WikiBasePageObject {
 
-	@FindBy(css="header#WikiaHeader a.ajaxLogin")
-	private WebElement logInLink;
 	@FindBy(css="li[data-id='blog'] a")
 	private WebElement blogTab;
 	@FindBy(css="a[data-id='createblogpost']")

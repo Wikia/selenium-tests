@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,6 +19,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -41,14 +41,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	};
 	private final String topIncontentBoxadSelector = "div[id*='TOP_INCONTENT_BOXAD']";
 
-	@FindBy(css=AdsContent.wikiaBarSelector)
-	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
 	private WebElement wikiaArticle;
-	@FindBy(css=".WikiaSpotlight")
-	private List<WebElement> spotlights;
-	@FindBy(css=liftiumIframeSelector)
-	private List<WebElement> liftiumIframes;
 	@FindBy(css="div[id*='TOP_LEADERBOARD']")
 	protected WebElement presentLeaderboard;
 	@FindBy(css="div[id*='TOP_RIGHT_BOXAD']")

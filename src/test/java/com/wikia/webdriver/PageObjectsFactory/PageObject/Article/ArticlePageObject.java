@@ -16,8 +16,8 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatti
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -145,10 +145,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImageArticle;
 	@FindBy(css=".wikia-menu-button")
 	private WebElement articleEditButton;
-	@FindBy(css="#CreatePageDialogBlank")
-	private WebElement blankPageRadioButton;
-	@FindBy(css="#CreatePageDialogFormat")
-	private WebElement standardLayoutPageRadioButton;
 	@FindBy(css="#WikiaPageHeader .chevron")
 	private WebElement openEditDropdown;
 	@FindBy(css=".view")
@@ -777,7 +773,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		articleModal.createPageWithBlankLayout("");
 		return new SourceEditModePageObject(driver);
 	}
-	
+
 	public EmbedMapComponentObject clickViewEmbedMap(){
 		waitForElementVisibleByElement(viewEmbedMapButton);
 		scrollToElement(viewEmbedMapButton);

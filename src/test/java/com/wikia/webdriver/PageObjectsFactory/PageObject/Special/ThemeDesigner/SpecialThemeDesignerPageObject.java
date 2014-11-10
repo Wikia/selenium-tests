@@ -24,10 +24,6 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	private List<WebElement> themes;
 	@FindBy(css=".next.chevron")
 	private WebElement nextButton;
-	@FindBy(css=".previous.chevron")
-	private WebElement previousButton;
-	@FindBy(css=".PreviewFrame")
-	private WebElement previewFrame;
 	//customize tab
 	@FindBy(css=".color-body")
 	private WebElement bgColor;

@@ -20,22 +20,6 @@ public class HomePageObject extends WikiBasePageObject {
 
 	@FindBy(css="header.wikiahomepage-header a.button")
 	private WebElement startWikiButton;
-	@FindBy(css="section.grid-2.videogames a img")
-	private WebElement OpenVideoGamesHub;
-	@FindBy(css="section.grid-2.entertainment a img")
-	private WebElement OpenEntertainmentHub;
-	@FindBy(css="section.grid-2.lifestyle a img")
-	private WebElement OpenLifestyleHub;
-	@FindBy(css="a.ajaxLogin")
-	private WebElement LoginOverlay;
-	@FindBy(css="div#UserLoginDropdown input[name='username']")
-	private WebElement UserNameField;
-	@FindBy(css="div#UserLoginDropdown a.forgot-password")
-	private WebElement ForgotYourPassword;
-	@FindBy(css="#WikiaSearch button.wikia-button")
-	private WebElement searchButton;
-	@FindBy(css="#WikiaSearch input[name='search']")
-	private WebElement searchInput;
 	@FindBy(css=".hub > a")
 	private WebElement hubIndicator;
 	@FindBy(css=".preview-pane a.goVisit")

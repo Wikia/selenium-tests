@@ -11,8 +11,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Watch.WatchPage
 
 public class BlogPageObject extends ArticlePageObject {
 
-	@FindBy(css="div.author-details")
-	private WebElement usernameField;
 	@FindBy(css=".WikiaBlogPostHeader h1")
 	private WebElement blogHeader;
 

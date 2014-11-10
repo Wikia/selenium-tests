@@ -7,8 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
-import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -20,14 +18,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 
 public class CommonExpectedConditions {
 
 	private final static Logger log = Logger.getLogger(ExpectedConditions.class.getName());
-
-	private static WebDriver driver = DriverProvider.getWebDriver();
-
 
 	/**
 	 * An expectation for checking if the given text is present in the specified

@@ -63,8 +63,6 @@ public class SourceEditModePageObject extends EditMode{
 	private WebElement createGallery;
 	@FindBy(css="a.wikia-button[type='3']")
 	private WebElement createSlider;
-	@FindBy(css="#wpSave")
-	private WebElement submitButton;
 	@FindBy(css=".loading-indicator")
 	private WebElement sourceModeLoadingIndicator;
 	@FindBy(css=".editpage-editarea")

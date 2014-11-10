@@ -47,8 +47,6 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement targetPageOrURL;
 	@FindBy(css="span.cke_dialog_ui_button")
 	private WebElement linkModalOkButton;
-	@FindBy (css=".loading-throbber")
-	private WebElement loader;
 	@FindBy (css="[id*='_uiElement'] .link-yes")
 	private WebElement linkExistsIcon;
 	@FindBy (css="[id*='_uiElement'] .external")
