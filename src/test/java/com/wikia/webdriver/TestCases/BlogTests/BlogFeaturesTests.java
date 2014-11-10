@@ -62,7 +62,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
 		slideshowAddPhoto.clickSelect();
-		slideshowBuilder.adjustPosition(Positions.Center);
+		slideshowBuilder.adjustPosition(Positions.CENTER);
 		slideshowBuilder.clickFinish();
 		blogEdit.verifySlideshow();
 		BlogPageObject blogPage = blogEdit.submitBlog();

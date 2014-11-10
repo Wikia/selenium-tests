@@ -112,7 +112,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
 		slideshowAddPhoto.clickSelect();
-		slideshowBuilder.adjustPosition(Positions.Center);
+		slideshowBuilder.adjustPosition(Positions.CENTER);
 		slideshowBuilder.clickFinish();
 		visualEditMode.verifySlideshow();
 		visualEditMode.submitArticle();
@@ -124,7 +124,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(8);
 		slideshowAddPhoto.clickSelect();
-		slideshowBuilder.adjustPosition(Positions.Right);
+		slideshowBuilder.adjustPosition(Positions.RIGHT);
 		slideshowBuilder.clickFinish();
 		visualEditMode.verifySlideshow();
 		visualEditMode.submitArticle();
@@ -143,7 +143,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
 		slideshowAddPhoto.clickSelect();
-		slideshowBuilder.adjustPosition(Positions.Center);
+		slideshowBuilder.adjustPosition(Positions.CENTER);
 		slideshowBuilder.clickFinish();
 		visualEditMode.verifySlideshow();
 		visualEditMode.submitArticle();

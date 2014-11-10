@@ -178,7 +178,7 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		slideshowAddPhoto.search("image");
 		List<String> photoNames = slideshowAddPhoto.choosePhotos(4);
 		slideshowAddPhoto.clickSelect();
-		slideshowBuilder.adjustPosition(Positions.Center);
+		slideshowBuilder.adjustPosition(Positions.CENTER);
 		slideshowBuilder.clickFinish();
 		source.checkSourceContent("<gallery type=\"slideshow\" position=\"center\">\n"+photoNames.get(0)+"\n"+photoNames.get(1)+"\n"+photoNames.get(2)+"\n"+photoNames.get(3)+"\n</gallery>");
 		source.submitArticle();
