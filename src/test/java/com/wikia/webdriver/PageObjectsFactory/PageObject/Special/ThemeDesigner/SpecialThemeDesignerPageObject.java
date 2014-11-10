@@ -114,7 +114,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 
 	public enum Tab {
-		Theme, Customize, Wordmark
+		THEME, CUSTOMIZE, WORDMARK
 	}
 
 	public void selectTab(Tab tabName){
