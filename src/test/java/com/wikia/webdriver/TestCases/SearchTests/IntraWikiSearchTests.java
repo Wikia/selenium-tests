@@ -124,11 +124,11 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.selectPhotosVideos();
 		search.selectVideosOnly();
 		search.verifyTitlesNotEmpty();
-		search.sortBy(sortOptions.duration);
+		search.sortBy(sortOptions.DURATION);
 		List<String> titles1 = search.getTitles();
-		search.sortBy(sortOptions.relevancy);
+		search.sortBy(sortOptions.RELEVANCY);
 		List<String> titles2 = search.getTitles();
-		search.sortBy(sortOptions.publishDate);
+		search.sortBy(sortOptions.PUBLISH_DATE);
 		List<String> titles3 = search.getTitles();
 		search.compareTitleListsNotEquals(titles1, titles2);
 		search.compareTitleListsNotEquals(titles1, titles3);
@@ -143,9 +143,9 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.selectPhotosVideos();
 		search.selectPhotosOnly();
 		search.verifyTitlesNotEmpty();
-		search.sortBy(sortOptions.relevancy);
+		search.sortBy(sortOptions.RELEVANCY);
 		List<String> titles1 = search.getTitles();
-		search.sortBy(sortOptions.publishDate);
+		search.sortBy(sortOptions.PUBLISH_DATE);
 		List<String> titles2 = search.getTitles();
 		search.compareTitleListsNotEquals(titles1, titles2);
 	}
