@@ -239,6 +239,6 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 	public void IntraWikiSearch_017_searchSuggestionsVisibility() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openWikiPage(searchSuggestionsWiki);
-		search.verifyNewSuggestionsTextAndImages(SearchContent.searchPhraseNewSuggestions);
+		search.verifyNewSuggestionsTextAndImages(SearchContent.SEARCH_PHRASE_NEW_SUGGESTIONS);
 	}
 }
