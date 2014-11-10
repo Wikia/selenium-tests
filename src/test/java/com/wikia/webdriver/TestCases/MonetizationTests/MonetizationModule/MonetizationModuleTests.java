@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class MonetizationModuleTests extends NewTestTemplate {
 
-	private static final String testWikiGeoRestrictions = "muppet";	// blocked countires per wikia
+	private static final String TEST_WIKI_GEO_RESTRICTIONS = "muppet";	// blocked countires per wikia
 
 	Credentials credentials = config.getCredentials();
 
@@ -197,7 +197,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	public static Object[][] DataMonetizationModuleGeoTestWikis() {
 		return new Object[][] {
 			{URLsContent.MONETIZATION_GEOTEST_WIKI},
-			{testWikiGeoRestrictions},
+			{TEST_WIKI_GEO_RESTRICTIONS},
 		};
 	}
 
@@ -272,7 +272,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		groups = {"MonetizationModule", "MonetizationModuleTest_011", "Monetization"}
 	)
 	public void MonetizationModuleTest_011(String countryCode, Boolean isFromsearch) {
-		wikiURL = urlBuilder.getUrlForWiki(testWikiGeoRestrictions);
+		wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI_GEO_RESTRICTIONS);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
