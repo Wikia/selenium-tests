@@ -200,15 +200,15 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public enum PositionsVideo {
-		left, center, right
+		LEFT, CENTER, RIGHT
 	}
 
 	public enum StyleVideo {
-		caption, nocaption;
+		CAPTION, NOCAPTION;
 	}
 
 	public enum HubName {
-		Video_Games, Entertainment, Lifestyle
+		VIDEO_GAMES, ENTERTAINMENT, LIFESTYLE
 	}
 
 	public WikiBasePageObject(WebDriver driver) {

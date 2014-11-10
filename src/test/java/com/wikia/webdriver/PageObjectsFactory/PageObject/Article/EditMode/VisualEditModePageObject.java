@@ -162,13 +162,13 @@ public class VisualEditModePageObject extends EditMode {
 		String positionClass = video.getAttribute("class");
 		driver.switchTo().defaultContent();
 		switch (position) {
-			case left:
+			case LEFT:
 				Assertion.assertStringContains("alignLeft", positionClass);
 				break;
-			case center:
+			case CENTER:
 				Assertion.assertStringContains("alignCenter", positionClass);
 				break;
-			case right:
+			case RIGHT:
 				Assertion.assertStringContains("alignRight", positionClass);
 				break;
 		}

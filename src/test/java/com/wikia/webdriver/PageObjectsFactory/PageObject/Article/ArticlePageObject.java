@@ -482,13 +482,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 		).getAttribute("class");
 		String position;
 		switch(positions) {
-		case left:
+		case LEFT:
 			position = "left";
 			break;
-		case center:
+		case CENTER:
 			position = "none";
 			break;
-		case right:
+		case RIGHT:
 			position = "right";
 			break;
 		default:
