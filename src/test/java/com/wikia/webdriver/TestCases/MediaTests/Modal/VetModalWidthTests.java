@@ -30,7 +30,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 
 	String articleTitle;
 
-	final static int width = 250;
+	final static int WIDTH = 250;
 
 	@Test(groups = {"VetModalWidth", "VetModalwidth_001", "Media"})
 	public void Vet_Modal_001_widthOnPage() {
@@ -41,17 +41,17 @@ public class VetModalWidthTests extends NewTestTemplate{
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.adjustWith(width);
+		vetOptions.adjustWith(WIDTH);
 		vetOptions.submit();
-		visualEditMode.verifyVideoWidth(width);
+		visualEditMode.verifyVideoWidth(WIDTH);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
 		sourceEditMode.verifySourceModeEnabled();
-		sourceEditMode.verifyVideoWidth(width);
+		sourceEditMode.verifyVideoWidth(WIDTH);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
-		previewMode.verifyVideoWidth(width);
+		previewMode.verifyVideoWidth(WIDTH);
 		previewMode.closePreviewModal();
 		ArticlePageObject article = sourceEditMode.submitArticle();
-		article.verifyVideoWidth(width);
+		article.verifyVideoWidth(WIDTH);
 	}
 
 	@Test(groups = {"VetModalWidth", "VetModalwidth_002", "Media"}, dependsOnMethods = "Vet_Modal_001_widthOnPage")
@@ -61,6 +61,6 @@ public class VetModalWidthTests extends NewTestTemplate{
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		VetOptionsComponentObject vetOptions =
 				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
-		vetOptions.verifyVideoWidth(width);
+		vetOptions.verifyVideoWidth(WIDTH);
 	}
 }
