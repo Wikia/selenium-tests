@@ -71,8 +71,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement finalAddPhotoButton;
 	@FindBy(css="div#ImageUploadHeadline")
 	private WebElement ImageUploadHeadline;
-	@FindBy(css = "section[id='WikiaPhotoGalleryEditor']")
-	private WebElement objectModal;
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
 	@FindBy(css = "span[id=cke_22_label]")
