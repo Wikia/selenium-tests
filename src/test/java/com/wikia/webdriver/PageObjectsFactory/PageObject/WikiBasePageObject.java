@@ -1114,7 +1114,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal 'justnpT' Nowierski
 	 */
 	public void compareTrackedEventsTo(List<JsonObject> expectedEventsList){
-		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
+		executeScript(ClickTrackingScriptsProvider.EVENTS_CAPTURE_INSTALLATION);
 		ArrayList<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
 		List<JsonObject> trackedEventsList;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
