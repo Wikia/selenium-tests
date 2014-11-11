@@ -39,9 +39,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		cnw1.typeInWikiName(wikiName);
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
+		cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
+		cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
 		ArticlePageObject article = cnw3.submit();
 		article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
 		article.closeNewWikiCongratulationsLightBox();
@@ -63,10 +63,10 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		cnw1.typeInWikiName(wikiName);
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
+		cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
 		cnw2.selectAllAgesCheckbox();
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
+		cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
 		ArticlePageObject article = cnw3.submit();
 		article.closeNewWikiCongratulationsLightBox();
 		article.verifyUserLoggedIn(credentials.userName);
@@ -91,9 +91,9 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		cnw1.typeInWikiDomain(wikiDomain);
 		cnw1.verifySuccessIcon();
 		CreateNewWikiPageObjectStep2 cnw2 = cnw1.submit();
-		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
+		cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
+		cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
 		ArticlePageObject article = cnw3.submit();
 		article.closeNewWikiCongratulationsLightBox();
 		article.verifyUserLoggedIn(credentials.userName);
