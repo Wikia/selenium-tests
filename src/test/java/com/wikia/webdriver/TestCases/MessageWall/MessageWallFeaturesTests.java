@@ -36,8 +36,8 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		wall.clickSourceModeButton();
 		wall.writeSourceMode(message);
 		wall.writeTitle(title);
@@ -51,8 +51,8 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		wall.clickBoldButton();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
@@ -66,8 +66,8 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		wall.clickItalicButton();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
@@ -80,12 +80,12 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
-		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		wall.writeTitle(title);
 		wall.triggerMessageArea();
 		PhotoAddComponentObject photoAddPhoto = wall.clickImageButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
-		photoOptions.setCaption(PageContent.caption);
+		photoOptions.setCaption(PageContent.CAPTION);
 		photoOptions.clickAddPhoto();
 		wall.submit();
 		wall.verifyImageAdded(title);
@@ -96,13 +96,13 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
-		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		wall.writeTitle(title);
 		wall.triggerMessageArea();
 		NewMessageWallAddLinkComponentObject addLink = wall.clickLinkButton();
-		addLink.addInternalLink(PageContent.redirectLink, PageContent.textLink);
+		addLink.addInternalLink(PageContent.REDIRECT_LINK, PageContent.TEXT_LINK);
 		wall.submit();
-		wall.verifyInternalLink(title, PageContent.redirectLink, PageContent.textLink, wikiURL);
+		wall.verifyInternalLink(title, PageContent.REDIRECT_LINK, PageContent.TEXT_LINK, wikiURL);
 	}
 
 	@Test(groups = {"MessageWallFeatures_006", "MessageWallFeatures"})
@@ -110,12 +110,12 @@ public class MessageWallFeaturesTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
-		String title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		wall.writeTitle(title);
 		wall.triggerMessageArea();
 		NewMessageWallAddLinkComponentObject addLink = wall.clickLinkButton();
-		addLink.addExternalLink(PageContent.externalLink, PageContent.textLink);
+		addLink.addExternalLink(PageContent.EXTERNAL_LINK, PageContent.TEXT_LINK);
 		wall.submit();
-		wall.verifyExternalLink(title, PageContent.externalLink, PageContent.textLink, wikiURL);
+		wall.verifyExternalLink(title, PageContent.EXTERNAL_LINK, PageContent.TEXT_LINK, wikiURL);
 	}
 }

@@ -721,7 +721,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyLoginReguiredMessage() {
 		waitForTextToBePresentInElementByElement(
-				wikiFirstHeader, PageContent.loginRequired
+				wikiFirstHeader, PageContent.LOGIN_REQUIRED
 		);
 		PageObjectLogging.log(
 				"LoginRequiredMessage",
@@ -749,7 +749,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyNotLoggedInMessage() {
 		waitForTextToBePresentInElementByElement(
-				wikiFirstHeader, PageContent.notLoggedInMessage
+				wikiFirstHeader, PageContent.NOT_LOGGED_IN_MESSAGE
 		);
 		PageObjectLogging.log(
 				"NotLoggedInMessage",
@@ -1019,7 +1019,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public String getNameForArticle () {
-		return PageContent.articleNamePrefix + getTimeStamp();
+		return PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
 	}
 
 	public void openSpecialPromoteOnCurrentWiki() {

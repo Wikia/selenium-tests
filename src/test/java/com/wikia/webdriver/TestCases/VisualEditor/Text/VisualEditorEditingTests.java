@@ -40,7 +40,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
 		base = new WikiBasePageObject(driver);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		wikiTexts = new ArrayList<>();
 		wikiTexts.add(WikiTextContent.paragraphText);
 		wikiTexts.add(WikiTextContent.headingText);
@@ -75,7 +75,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_001_insertToNewArticle() {
 		base = new WikiBasePageObject(driver);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		ve.typeTextInAllFormat(text);
 		ve.typeTextInAllStyle(text);
@@ -129,21 +129,21 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		groups = {"VisualEditorEditing", "VisualEditorEditing_004"}
 	)
 	public void VisualEditorEditing_004_insertLinks() {
-		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
-		veLinkDialog.typeInLinkInput(PageContent.internalLink);
+		veLinkDialog.typeInLinkInput(PageContent.INTERNAL_LINK);
 		veLinkDialog.verifyMatchingPageIsTop();
 		ve = veLinkDialog.clickLinkResult();
 		ve.typeReturn();
 		veLinkDialog = ve.clickLinkButton();
-		veLinkDialog.typeInLinkInput(PageContent.redLink);
+		veLinkDialog.typeInLinkInput(PageContent.REDLINK);
 		veLinkDialog.verifyNewPageIsTop();
 		ve = veLinkDialog.clickLinkResult();
 		ve.typeReturn();
 		veLinkDialog = ve.clickLinkButton();
-		veLinkDialog.typeInLinkInput(PageContent.externalLink);
+		veLinkDialog.typeInLinkInput(PageContent.EXTERNAL_LINK);
 		veLinkDialog.verifyExternalLinkIsTop();
 		ve = veLinkDialog.clickLinkResult();
 		ve.typeReturn();
@@ -160,7 +160,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
 	)
 	public void VisualEditorEditing_005_switchToSourceMode() {
-		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		ve = ve.typeInSourceEditor(text);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();

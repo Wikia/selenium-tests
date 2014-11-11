@@ -31,7 +31,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
-		vetOptions.setCaption(PageContent.caption);
+		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		article.submitComment();
 		article.verifyCommentVideo(VideoContent.youtubeVideoURL2name);
@@ -45,7 +45,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
-		vetOptions.setCaption(PageContent.caption);
+		vetOptions.setCaption(PageContent.CAPTION);
 		String desiredVideoName = vetOptions.getVideoName();
 		vetOptions.submit();
 		article.submitComment();

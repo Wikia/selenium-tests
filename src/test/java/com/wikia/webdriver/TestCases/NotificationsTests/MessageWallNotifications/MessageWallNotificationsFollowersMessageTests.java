@@ -55,8 +55,8 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 		base.logInCookie(credentials.userName6, credentials.password6, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName6, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();

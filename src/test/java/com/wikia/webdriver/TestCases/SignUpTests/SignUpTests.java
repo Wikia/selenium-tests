@@ -45,9 +45,9 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.typeEmail(credentials.emailQaart1);
 		signUp.typePassword(signUp.getTimeStamp());
 		signUp.enterBirthDate(
-				PageContent.wikiSignUpBirthMonth,
-				PageContent.wikiSignUpBirthDay,
-				PageContent.wikiSignUpBirthYear
+				PageContent.WIKI_SIGN_UP_BIRTHMONTH,
+				PageContent.WIKI_SIGN_UP_BIRTHDAY,
+				PageContent.WIKI_SIGN_UP_BIRTHYEAR
 		);
 		signUp.typeCaptcha(signUp.getTimeStamp());
 		signUp.submit();
@@ -96,9 +96,9 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.typeUserName(userName);
 		signUp.typePassword(password);
 		signUp.enterBirthDate(
-			PageContent.wikiSignUpBirthMonth,
-			PageContent.wikiSignUpBirthDay,
-			PageContent.wikiSignUpBirthYear
+			PageContent.WIKI_SIGN_UP_BIRTHMONTH,
+			PageContent.WIKI_SIGN_UP_BIRTHDAY,
+			PageContent.WIKI_SIGN_UP_BIRTHYEAR
 		);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
@@ -134,9 +134,9 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.typeUserName(userName);
 		signUp.typePassword(password);
 		signUp.enterBirthDate(
-			PageContent.wikiSignUpBirthMonth,
-			PageContent.wikiSignUpBirthDay,
-			PageContent.wikiSignUpBirthYear
+			PageContent.WIKI_SIGN_UP_BIRTHMONTH,
+			PageContent.WIKI_SIGN_UP_BIRTHDAY,
+			PageContent.WIKI_SIGN_UP_BIRTHYEAR
 		);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
@@ -161,9 +161,9 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.typeUserName(userName);
 		signUp.typePassword(password);
 		signUp.enterBirthDate(
-				PageContent.wikiSignUpBirthMonth,
-				PageContent.wikiSignUpBirthDay,
-				PageContent.wikiSignUpBirthYear
+				PageContent.WIKI_SIGN_UP_BIRTHMONTH,
+				PageContent.WIKI_SIGN_UP_BIRTHDAY,
+				PageContent.WIKI_SIGN_UP_BIRTHYEAR
 				);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();

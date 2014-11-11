@@ -80,7 +80,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 	@Test(groups = {"ForcedLogin_005_addMedia", "ForcedLogin"})
 	public void ForcedLogin_005_addMedia () {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, articleName);
 		edit.clickPhotoButton();
 		edit.logInViaModal(credentials.userName, credentials.password);

@@ -45,7 +45,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		groups = {"RTEDisabledEditorEntryDefaultPreferred", "RTEDisabledEditorEntryDefaultPreferredTests_001", "createPageEntry"}
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
 		ve.verifyVEToolBarPresent();
@@ -128,7 +128,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		src.verifySourceOnlyMode();
 	}
 }

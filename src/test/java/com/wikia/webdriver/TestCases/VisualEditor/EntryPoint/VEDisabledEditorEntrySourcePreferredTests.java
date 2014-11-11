@@ -46,7 +46,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_001_CreatePageEntry_sourcePreferred() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+				base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
 		src.verifySourceOnlyMode();
 	}
@@ -56,7 +56,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+				base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -125,7 +125,7 @@ public class VEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBe
 	)
 	public void VEDisabledEditorEntrySourcePreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		src.verifySourceOnlyMode();
 	}
 }

@@ -28,8 +28,8 @@ public class ForumNotificationsTests extends NewTestTemplate {
 	public void forumNotificationsTests_001_userAStartsDiscussion() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userName, credentials.password, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
+		message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		forumBoardTitle = forumBoard.getTitle();

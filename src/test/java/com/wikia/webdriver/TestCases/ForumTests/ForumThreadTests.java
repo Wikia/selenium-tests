@@ -22,8 +22,8 @@ public class ForumThreadTests extends NewTestTemplate{
 	public void ForumThreadTests_001_replyToThread(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
+		message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
@@ -36,8 +36,8 @@ public class ForumThreadTests extends NewTestTemplate{
 	public void ForumThreadTests_002_removeThreadAndUndo(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
+		message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
@@ -52,8 +52,8 @@ public class ForumThreadTests extends NewTestTemplate{
 	public void ForumThreadTests_003_moveThreadToOtherBoard(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
+		message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		List<String> forumNames = forumMainPage.getForumNamesList();
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
@@ -67,8 +67,8 @@ public class ForumThreadTests extends NewTestTemplate{
 	public void ForumThreadTests_004_threadHistory(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
+		message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
@@ -81,13 +81,13 @@ public class ForumThreadTests extends NewTestTemplate{
 	public void ForumThreadTests_005_closeThreadAndReopen(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		title = PageContent.forumTitlePrefix + forumMainPage.getTimeStamp();
-		message = PageContent.forumMessage + forumMainPage.getTimeStamp();
+		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
+		message = PageContent.FORUM_MESSAGE + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
 		ForumThreadPageObject forumThread = forumBoard.startDiscussion(title, message, false);
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
-		forumThread.closeThread(PageContent.closeReason);
+		forumThread.closeThread(PageContent.CLOSE_REASON);
 		forumThread.verifyThreadClosed();
 		forumThread.reopenThread();
 		forumThread.verifyThreadReopened();

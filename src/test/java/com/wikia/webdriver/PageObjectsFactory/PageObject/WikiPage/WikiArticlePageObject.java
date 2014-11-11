@@ -82,7 +82,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewDefaultArticle(){
-		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
+		this.pageName = PageContent.ARTICLE_NAME_PREFIX+getTimeStamp();
 		return createNewArticle(this.pageName, 1);
 	}
 

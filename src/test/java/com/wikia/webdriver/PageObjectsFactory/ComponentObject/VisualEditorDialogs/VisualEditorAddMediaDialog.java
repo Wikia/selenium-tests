@@ -185,7 +185,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
 	private void selectFileToUpload(String fileName) {
 		fileUploadInput.sendKeys(
-			getAbsolutePathForFile(PageContent.resourcesPath + fileName)
+			getAbsolutePathForFile(PageContent.RESOURCES_PATH + fileName)
 		);
 		PageObjectLogging.log(
 			"selectFileToUpload",

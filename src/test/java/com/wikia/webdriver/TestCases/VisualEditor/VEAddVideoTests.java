@@ -42,7 +42,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		}
 	)
 	public void VEAddExternalVideoTests_001_AddNonPremiumVid() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
@@ -63,7 +63,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_002", "VEAddExternalVideo"}
 	)
 	public void VEAddExternalVideoTests_002_AddPremiumVid() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
@@ -84,7 +84,7 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		groups = {"VEAddVideo", "VEAddExternalVideoTests_003", "VEAddExistingVideo"}
 	)
 	public void VEAddExternalVideoTests_003_AddExistingVid() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();

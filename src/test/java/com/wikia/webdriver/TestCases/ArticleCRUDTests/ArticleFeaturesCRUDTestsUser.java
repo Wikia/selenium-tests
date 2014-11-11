@@ -217,14 +217,14 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.clearContent();
 		VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.setCaption(PageContent.caption);
+		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
 		visualEditMode.submitArticle();
 		article.verifyVideo();
 		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.Video);
-		vetOptions.setCaption(PageContent.caption2);
+		vetOptions.setCaption(PageContent.CAPTION2);
 		vetOptions.update();
 		visualEditMode.verifyVideo();
 		visualEditMode.submitArticle();
@@ -240,7 +240,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.clearContent();
 		VetAddVideoComponentObject vetAddVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.setCaption(PageContent.caption);
+		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
 		visualEditMode.submitArticle();
@@ -259,13 +259,13 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.clearContent();
 		PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
-		photoOptions.setCaption(PageContent.caption);
+		photoOptions.setCaption(PageContent.CAPTION);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();
 		article.editArticleInRTEUsingDropdown();
 		visualEditMode.modifyComponent(Components.Photo);
-		photoOptions.setCaption(PageContent.caption2);
+		photoOptions.setCaption(PageContent.CAPTION2);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();
@@ -281,7 +281,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		visualEditMode.clearContent();
 		PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
-		photoOptions.setCaption(PageContent.caption);
+		photoOptions.setCaption(PageContent.CAPTION);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();
@@ -386,13 +386,13 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		base.openRandomArticle(wikiURL);
-		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		PhotoAddComponentObject photoAddPhoto = article.clickAddImagePlaceholder();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 2);
-		photoOptions.setCaption(PageContent.caption);
+		photoOptions.setCaption(PageContent.CAPTION);
 		photoOptions.clickAddPhoto();
 		article.verifyPhoto();
 	}

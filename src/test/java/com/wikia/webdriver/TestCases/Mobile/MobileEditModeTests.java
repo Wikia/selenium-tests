@@ -47,13 +47,13 @@ public class MobileEditModeTests extends NewTestTemplate{
 		mobile.loginDropDown(credentials.userName, credentials.password);
 		MobileEditModePageObject mobileEdit =
 				mobile.openNewArticleEditMode(wikiURL);
-		mobileEdit.typIntoEditArea(PageContent.articleText);
+		mobileEdit.typIntoEditArea(PageContent.ARTICLE_TEXT);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
-		mobilePreview.verifyEditModeContent(PageContent.articleText);
+		mobilePreview.verifyEditModeContent(PageContent.ARTICLE_TEXT);
 		mobilePreview.verifyPreviewPageHeader(MobilePageContent.previewHeader);
 		mobilePreview.typeSummaryText(MobilePageContent.summaryText);
 		MobileEditModePageObject continueMobileEdit = mobilePreview.clickKeepEditing();
-		continueMobileEdit.verifyEditText(PageContent.articleText);
+		continueMobileEdit.verifyEditText(PageContent.ARTICLE_TEXT);
 		MobileEditPreviewPageObject continueMobilePreview = continueMobileEdit.clickPreview();
 		continueMobilePreview.verifySummaryText(MobilePageContent.summaryText);
 	}
@@ -66,9 +66,9 @@ public class MobileEditModeTests extends NewTestTemplate{
 		MobileEditModePageObject mobileEdit =
 				mobile.openNewArticleEditMode(wikiURL);
 		String articleName = mobile.getCurrentUrl();
-		mobileEdit.typIntoEditArea(PageContent.articleText);
+		mobileEdit.typIntoEditArea(PageContent.ARTICLE_TEXT);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
-		mobilePreview.verifyEditModeContent(PageContent.articleText);
+		mobilePreview.verifyEditModeContent(PageContent.ARTICLE_TEXT);
 		mobilePreview.verifyPreviewPageHeader(MobilePageContent.previewHeader);
 		mobilePreview.typeSummaryText(MobilePageContent.summaryText);
 		MobileArticlePageObject mobileArticle = mobilePreview.clickPublish();

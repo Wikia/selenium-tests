@@ -313,7 +313,7 @@ public class SourceEditModePageObject extends EditMode{
 	 */
 	public void addTOC() {
 		clearContent();
-		appendContent(PageContent.articleWithTOClines);
+		appendContent(PageContent.ARTICLE_WITH_TOC_LINES);
 	}
 
 	private void appendContent(String content) {

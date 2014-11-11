@@ -46,7 +46,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(VE);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
@@ -59,7 +59,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(CK);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		VisualEditModePageObject ck = aritclePage.editArticleInRTEUsingDropdown();
 		ck.verifyContentLoaded();
@@ -72,7 +72,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(SOURCE);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		SourceEditModePageObject src = aritclePage.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
@@ -84,7 +84,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(DEFAULT);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();

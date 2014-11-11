@@ -57,8 +57,8 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 		base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName8, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -92,7 +92,7 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 		NewMessageWall wall = base.openMessageWall(credentials.userName8, wikiURL);
 		NewMessageWallThreadPageObject thread = wall.openThread(title);
 		MiniEditorComponentObject miniReply = thread.triggerMessageArea();
-		String reply = PageContent.messageWallQuotePrefix + wall.getTimeStamp();
+		String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
 		miniReply.switchAndWrite(reply);
 		thread.submitQuote();
 		thread.verifyLastReply(credentials.userName8, reply);

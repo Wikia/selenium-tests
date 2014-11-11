@@ -90,7 +90,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		visualEditMode.clearContent();
 		PhotoAddComponentObject photoAddPhoto = visualEditMode.clickPhotoButton();
 		PhotoOptionsComponentObject photoOptions = photoAddPhoto.addPhotoFromWiki("image", 1);
-		photoOptions.setCaption(PageContent.caption);
+		photoOptions.setCaption(PageContent.CAPTION);
 		photoOptions.clickAddPhoto();
 		visualEditMode.verifyPhoto();
 		visualEditMode.submitArticle();

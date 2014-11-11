@@ -47,7 +47,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"}
 	)
 	public void VETemplateTests_001_SearchTemplate() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
@@ -72,7 +72,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"}
 	)
 	public void VETemplateTests_002_SuggestedTemplate() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
@@ -84,7 +84,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"}
 	)
 	public void VETemplateTests_003_AddTemplates() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
 		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
@@ -110,12 +110,12 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005", "VETemplateTests_006"}
 	)
 	public void VETemplateTests_004_CheckBlockedTransclusion() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
-		String selectText = PageContent.articleText.substring(12, 13);
+		String selectText = PageContent.ARTICLE_TEXT.substring(12, 13);
 		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
 		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
-		ve.typeTextArea(PageContent.articleText);
+		ve.typeTextArea(PageContent.ARTICLE_TEXT);
 		ve.selectText(selectText);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
