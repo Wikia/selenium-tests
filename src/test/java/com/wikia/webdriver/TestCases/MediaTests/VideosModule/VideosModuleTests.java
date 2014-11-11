@@ -22,7 +22,7 @@ public class VideosModuleTests extends NewTestTemplate {
 		VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 		base.openRandomArticle(wikiURL);
 		videosModule.verifyVideosModuleShowing();
-		base.openFilePage(wikiURL, VideoContent.youtubeVideoURL2FileName);
+		base.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
 		videosModule.verifyVideosModuleShowing();
 	}
 

@@ -78,7 +78,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
-		forumBoard.startDiscussionWithVideo(VideoContent.youtubeVideoURL3, title);
+		forumBoard.startDiscussionWithVideo(VideoContent.YOUTUBE_VIDEO_URL3, title);
 		forumBoard.clickPostButton();
 	}
 

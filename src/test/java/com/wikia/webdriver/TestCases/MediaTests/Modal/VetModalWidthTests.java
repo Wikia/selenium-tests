@@ -40,7 +40,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+				.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.adjustWith(width);
 		vetOptions.submit();
 		visualEditMode.verifyVideoWidth(width);

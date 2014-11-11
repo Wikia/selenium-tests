@@ -44,7 +44,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle_caption);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+				.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		caption = PageContent.CAPTION + vetOptions.getTimeStamp();
 		vetOptions.setCaption(caption);
 		vetOptions.submit();
@@ -77,7 +77,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle_notEditable);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByQuery(VideoContent.wikiaVideoQuery, 1);
+				.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 1);
 		vetOptions.verifyNameNotEditable();
 	}
 }

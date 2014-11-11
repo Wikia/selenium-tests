@@ -99,7 +99,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		waitForElementByElement(addVideoButton);
 		scrollAndClick(addVideoButton);
 		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.submit();
 		verifyVideoMiniEditor();
 	}

@@ -47,7 +47,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle1);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+				.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.adjustPosition(PositionsVideo.left);
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.left);
@@ -79,7 +79,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle2);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+				.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.adjustPosition(PositionsVideo.center);
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.center);
@@ -111,7 +111,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle3);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+				.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.adjustPosition(PositionsVideo.right);
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.right);

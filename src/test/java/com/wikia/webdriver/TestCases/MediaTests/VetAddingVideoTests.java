@@ -33,7 +33,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL2);
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();
@@ -53,7 +53,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		VetAddVideoComponentObject vetAddingVideo = mini.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		mini.verifyVideoMiniEditor();

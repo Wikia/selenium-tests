@@ -96,7 +96,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
 		VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
 		VetAddVideoComponentObject vetAddVideo = blogEdit.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+		VetOptionsComponentObject vetOptions = vetAddVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		blogEdit.verifyVideo();

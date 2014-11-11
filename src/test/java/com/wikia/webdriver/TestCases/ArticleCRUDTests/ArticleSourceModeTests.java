@@ -229,10 +229,10 @@ public class ArticleSourceModeTests extends NewTestTemplate{
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		SourceEditModePageObject source = article.openCurrectArticleSourceMode();
 		VetAddVideoComponentObject vetAddingVideo = source.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
-		source.checkSourceVideoContent("[["+VideoContent.youtubeVideoWikiText+PageContent.CAPTION+"]]");
+		source.checkSourceVideoContent("[["+VideoContent.YOUTUBE_VIDEO_WIKITEXT+PageContent.CAPTION+"]]");
 		source.submitArticle();
 	}
 
