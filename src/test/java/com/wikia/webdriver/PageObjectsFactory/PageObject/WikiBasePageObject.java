@@ -1160,7 +1160,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	private String getArticleName() {
-		return executeScriptRet(WikiaGlobalVariables.wgPageName);
+		return executeScriptRet(WikiaGlobalVariables.WG_PAGE_NAME);
 	}
 
 	public void verifyArticleName(String targetText) {

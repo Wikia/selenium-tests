@@ -343,7 +343,7 @@ public class SourceEditModePageObject extends EditMode{
 
 	public void verifySourceOnlyMode() {
 		waitForElementByElement(sourceOnlyModeTextArea);
-		if (!executeScriptRetBool(WikiaGlobalVariables.wgIsArticle)) {
+		if (!executeScriptRetBool(WikiaGlobalVariables.WG_IS_ARTICLE)) {
 			waitForElementByElement(srcOnlyMode);
 			PageObjectLogging.log("verifySourceOnlyMode", "source only mode enabled", true, driver);
 		} else {
