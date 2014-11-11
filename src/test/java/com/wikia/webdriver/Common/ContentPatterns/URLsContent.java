@@ -5,18 +5,18 @@ import com.wikia.webdriver.Common.Core.Global;
 public class URLsContent {
 
 	//api
-	public static String wikiaPhp = "wikia.php";
+	public static final String wikiaPhp = "wikia.php";
 
-	public static String followingToolbarTest = "QAautoPage";
+	public static final String followingToolbarTest = "QAautoPage";
 
 	// Common url component
-	public static String wikiDir = "wiki/";
-	public static String wikiaDir = "Wikia";
+	public static final String wikiDir = "wiki/";
+	public static final String wikiaDir = "Wikia";
 
 	// Hubs
-	public static String VideoGamesHubUrl = "/Video_Games";
-	public static String EntertainmentHubUrl = "/Entertainment";
-	public static String LifestyleHubUrl = "/Lifestyle";
+	public static final String VideoGamesHubUrl = "/Video_Games";
+	public static final String EntertainmentHubUrl = "/Entertainment";
+	public static final String LifestyleHubUrl = "/Lifestyle";
 
 	//Special Urls - links to special pages
 	public static final String specialUserLogin = "wiki/Special:UserLogin";
@@ -113,40 +113,40 @@ public class URLsContent {
 	public static final String apiUrl = Global.DOMAIN + "api.php";
 
 	// File Pages
-	public static String fileNameSpace = "File:";
-	public static String fileName001 = "Grammy_Muppet_Critics";
-	public static String fileName002 = "New_Batman_Year_One_Clip";
+	public static final String fileNameSpace = "File:";
+	public static final String fileName001 = "Grammy_Muppet_Critics";
+	public static final String fileName002 = "New_Batman_Year_One_Clip";
 
 	// History Pages
-	public static String historyAction = "action=history";
+	public static final String historyAction = "action=history";
 
 	// Article Pages
-	public static String articleName001 = "TestVid001";
-	public static String articleName002 = "TestVid002";
-	public static String articleName003 = "TestVid003";
-	public static String articleName004 = "TestVid004";
+	public static final String articleName001 = "TestVid001";
+	public static final String articleName002 = "TestVid002";
+	public static final String articleName003 = "TestVid003";
+	public static final String articleName004 = "TestVid004";
 
-	public static String intraWikiSearchPage = "wiki/Special:Search";
+	public static final String intraWikiSearchPage = "wiki/Special:Search";
 
 	//languages
-	public static String translatableLanguage = "uselang=qqx";
+	public static final String translatableLanguage = "uselang=qqx";
 
 	//External sites
-	public static String facebookDomain = "facebook.com";
-	public static String twitterDomain = "twitter.com";
-	public static String googleDomain = "accounts.google.com";
-	public static String redditDomain = "reddit.com";
-	public static String stumpleUponDomain = "stumbleupon.com";
+	public static final String facebookDomain = "facebook.com";
+	public static final String twitterDomain = "twitter.com";
+	public static final String googleDomain = "accounts.google.com";
+	public static final String redditDomain = "reddit.com";
+	public static final String stumpleUponDomain = "stumbleupon.com";
 
 	//Facebook
-	public static String facebookMainPage = "http://www.facebook.com/";
-	public static String facebookSettingsPage = "http://www.facebook.com/settings";
-	public static String facebookSettingsAppTab = "tab=applications";
-	public static String facebookWikiaAppID = "112328095453510";
-	public static String facebookWikiaDevAppID = "116800565037587";
+	public static final String facebookMainPage = "http://www.facebook.com/";
+	public static final String facebookSettingsPage = "http://www.facebook.com/settings";
+	public static final String facebookSettingsAppTab = "tab=applications";
+	public static final String facebookWikiaAppID = "112328095453510";
+	public static final String facebookWikiaDevAppID = "116800565037587";
 
 	//avatars
-	public static String avatarGeneric = "150px-Avatar.jpg";
+	public static final String avatarGeneric = "150px-Avatar.jpg";
 
 	//Urls for VE editor
 	public static final String veEnabledTestMainPage = "vetest";
@@ -172,7 +172,7 @@ public class URLsContent {
 
 	//Embed map URL for Interactive Maps
 	public static final String embedMapEditPage = "wiki/EmbedMap?action=edit";
-	
+
 	//Escaped frament URL for Maps
 	public static final String escapedFragment = "?_escaped_fragment_";
 }
