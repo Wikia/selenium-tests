@@ -208,7 +208,7 @@ public class SourceEditModePageObject extends EditMode{
 	public String buildTablePropertiesContent(
 		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
 	) {
-		String tablePropertiesContent = SourceModeContent.table
+		String tablePropertiesContent = SourceModeContent.TABLE
 			.replace("%border%", Integer.toString(border))
 			.replace("%cellpadding%", Integer.toString(cellpadding))
 			.replace("%cellspacing%", Integer.toString(cellspacing))

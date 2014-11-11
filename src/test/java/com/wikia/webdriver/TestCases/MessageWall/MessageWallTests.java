@@ -154,7 +154,7 @@ public class MessageWallTests extends NewTestTemplate {
 		wall.triggerMessageArea();
 		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
 		wall.clickSourceModeButton();
-		wall.writeSourceMode(SourceModeContent.unclosedDivComment);
+		wall.writeSourceMode(SourceModeContent.UNCLOSED_DIV_COMMENT);
 		wall.writeTitle(title);
 		wall.submit();
 		wall.verifyMessageTitle(title);
