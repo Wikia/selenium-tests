@@ -23,6 +23,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 
 public class CommonUtils {
 
@@ -80,7 +82,7 @@ public class CommonUtils {
 			FileUtils.deleteDirectory(new File(dirName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			PageObjectLogging.log("deleteDirectory", e.getMessage(), false);
 		}
 	}
 
@@ -115,13 +117,13 @@ public class CommonUtils {
 			HttpEntity entity = response.getEntity();
 			return EntityUtils.toString(entity);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("sendPost", e.getMessage(), false);
 			return null;
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("sendPost", e.getMessage(), false);
 			return null;
 		} catch (IOException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("sendPost", e.getMessage(), false);
 			return null;
 		}
 	}

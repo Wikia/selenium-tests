@@ -17,39 +17,27 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
  * @ownership: Mobile Web
- * 
- *             - Special:Map and SpecialMaps Page Tests IM04: Click on a map and
- *             verify correct redirect and URL v IM05: Click create a map button
- *             as anon and make sure log in modal is displayed v IM13: Test
- *             template search works correctly for unexisting and existing
- *             templates v IM20: Verify zoom in and zoom out of map v IM22:
- *             required elements from page are displayed: create new map link,
- *             list of maps (max 10),pagination IM23 : Click Create a map button
- *             and check that Learn more link redirects to maps.wikia.com IM26:
- *             Verify name must beset when creating a new custom map IM29:
- *             Verify that map is visible for anon IM44: Verify Create Map
- *             Button in Contribute dropdown
  */
 
 public class NonSpecificMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_004", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_004_ClickMapAndVerifyCorrectRedirect() {
+	@Test(groups = { "NonSpecificMapTests_001", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_001_ClickMapAndVerifyCorrectRedirect() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		String mapUrl = specialMap.getMapLink(InteractiveMapsContent.selectedMapIndex);
-		String mapTitle = specialMap.getMapTitle(InteractiveMapsContent.selectedMapIndex);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		String mapUrl = specialMap.getMapLink(InteractiveMapsContent.SELECTED_MAP_INDEX);
+		String mapTitle = specialMap.getMapTitle(InteractiveMapsContent.SELECTED_MAP_INDEX);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.verifyURL(mapUrl);
 		selectedMap.verifyCreatedMapTitle(mapTitle);
 	}
 
-	@Test(groups = { "InteractiveMaps_005", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_005_VerifyLoginModalWhenAnon() {
+	@Test(groups = { "NonSpecificMapTests_002", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_002_VerifyLoginModalWhenAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logOut(wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -57,33 +45,33 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		map.verifyLoginModal();
 	}
 
-	@Test(groups = { "InteractiveMaps_013", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_013_VerifyTemplateSearch() {
+	@Test(groups = { "NonSpecificMapTests_003", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_003_VerifyTemplateSearch() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject createMapDialog = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMapDialog = createMapDialog.clickCustomMap();
-		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldNotBeFound);
+		customMapDialog.typeSearchTile(InteractiveMapsContent.TEMPLATE_NAME_TO_SEARCH_SHOULD_NOT_BE_FOUND);
 		customMapDialog.verifyErrorExists();
 		customMapDialog.clearSearchTitle();
-		customMapDialog.typeSearchTile(InteractiveMapsContent.templateNameToSearchShouldBeFound);
+		customMapDialog.typeSearchTile(InteractiveMapsContent.TEMPLATE_NAME_TO_SEARCH_SHOULD_BE_FOUND);
 		customMapDialog.verifyTemplateListElementVisible(0);
 	}
 
-	@Test(groups = { "InteractiveMaps_020", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_020_VerifyMapZoomOptions() {
+	@Test(groups = { "NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickZoomOutButton();
 		selectedMap.clickZoomInButton();
 	}
 
-	@Test(groups = { "InteractiveMaps_022", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_022_VerifyMapListElements() {
+	@Test(groups = { "NonSpecificMapTests_005", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_005_VerifyMapListElements() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
@@ -92,38 +80,38 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		specialMap.verifyCorrectPagination();
 	}
 
-	@Test(groups = { "InteractiveMaps_023", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_023_VerifyLearnMoreLink() {
+	@Test(groups = { "NonSpecificMapTests_006", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_006_VerifyLearnMoreLink() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject createMapModal = specialMap.clickCreateAMap();
-		createMapModal.verifyLearnMoreLinkRedirect(InteractiveMapsContent.learnMoreLink);
+		createMapModal.verifyLearnMoreLinkRedirect(InteractiveMapsContent.LEARN_MORE_LINK);
 	}
 
-	@Test(groups = { "InteractiveMaps_026", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_026_VerifyCreateCustomMapErrors() {
+	@Test(groups = { "NonSpecificMapTests_007", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_007_VerifyCreateCustomMapErrors() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject createMap = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMap = createMap.clickCustomMap();
-		TemplateComponentObject templateMap = customMap.selectTemplate(InteractiveMapsContent.selectedTemplateIndex);
+		TemplateComponentObject templateMap = customMap.selectTemplate(InteractiveMapsContent.SELECTED_TEMPLATE_INDEX);
 		templateMap.clickNext();
 		templateMap.verifyErrorExists();
 	}
 
-	@Test(groups = { "InteractiveMaps_029", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_029_VerifyMapIsDisplayedForAnons() {
+	@Test(groups = { "NonSpecificMapTests_008", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logOut(wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 	}
 
-	@Test(groups = { "InteractiveMaps_044", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_044_VerifyCreateMapButtonUnderContribution() {
+	@Test(groups = { "NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_009_VerifyCreateMapButtonUnderContribution() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMaps = base.openSpecialInteractiveMaps(wikiURL);
@@ -131,19 +119,19 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		createMap.verifyRealMapAndCustomMapButtons();
 	}
 	
-	@Test(groups = { "InteractiveMaps_048", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_048_VerifyFragmentContentTagVisibility() {
+	@Test(groups = { "NonSpecificMapTests_010", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_010_VerifyFragmentContentTagVisibility() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.escapedFragmentMapId);
+		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.ESCAPED_FRAGMENT_MAP_ID);
 		selectedMap.verifyEscapedFragmentMetaTag();
 	}
 	
-	@Test(groups = { "InteractiveMaps_049", "NonSpecificMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_049_VerifyEscapedFragmentPageContent() {
+	@Test(groups = { "NonSpecificMapTests_011", "NonSpecificMapTests", "InteractiveMaps" })
+	public void NonSpecificMapTests_011_VerifyEscapedFragmentPageContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.escapedFragmentMapId);
+		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.ESCAPED_FRAGMENT_MAP_ID);
 		selectedMap.verifyPoiCategoryTitle();
 		selectedMap.verifyPoiPointTitle();
 		selectedMap.verifyPoiPointDescription();

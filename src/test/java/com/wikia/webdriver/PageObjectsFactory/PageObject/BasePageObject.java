@@ -24,6 +24,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -49,6 +52,7 @@ public class BasePageObject{
 	public WebDriverWait wait;
 	public Actions builder;
 	protected UrlBuilder urlBuilder;
+	private LogEntries logEntries;
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
@@ -92,7 +96,7 @@ public class BasePageObject{
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("mouseOverInArticleIframe", e.getMessage(), false);
 		}
 	}
 
@@ -188,7 +192,7 @@ public class BasePageObject{
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("mouseOver", e.getMessage(), false);
 		}
 	}
 
@@ -197,7 +201,7 @@ public class BasePageObject{
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("mouseRelease", e.getMessage(), false);
 		}
 	}
 
@@ -318,7 +322,7 @@ public class BasePageObject{
 				windows = driver.getWindowHandles().toArray();
 				sumDelay += 500;
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				PageObjectLogging.log(windowName, e.getMessage(), false);
 			}
 			if (sumDelay > 5000) {
 				PageObjectLogging.log(windowName, comment, false);
@@ -392,7 +396,7 @@ public class BasePageObject{
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("executeScript", e.getMessage(), false);
 		}
 	}
 
@@ -417,7 +421,7 @@ public class BasePageObject{
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("executeScript", e.getMessage(), false);
 		}
 	}
 
@@ -425,7 +429,7 @@ public class BasePageObject{
 		try {
 			pageElem.sendKeys(KeysToSend);
 		} catch (Exception e) {
-			PageObjectLogging.log("sendKeys", e.toString(), false);
+			PageObjectLogging.log("sendKeys", e.getMessage(), false);
 		}
 	}
 
@@ -787,11 +791,11 @@ public class BasePageObject{
 		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
 	}
 
-	private void changeImplicitWait(int value, TimeUnit timeUnit) {
+	protected void changeImplicitWait(int value, TimeUnit timeUnit) {
 		driver.manage().timeouts().implicitlyWait(value, timeUnit);
 	}
 
-	private void restoreDeaultImplicitWait() {
+	protected void restoreDeaultImplicitWait() {
 		changeImplicitWait(timeOut, TimeUnit.SECONDS);
 	}
 
@@ -918,5 +922,16 @@ public class BasePageObject{
 				"Element's child with text: " + value + " is not found from the list");
 		}
 		return foundElement;
+	}
+
+	private void setBrowserLogs() {
+		logEntries = driver.manage().logs().get(LogType.BROWSER);
+	}
+
+	public void extractBrowserLogs() {
+		setBrowserLogs();
+		for (LogEntry entry : logEntries) {
+			PageObjectLogging.log("extractJSLogs", entry.getMessage(), false);
+		}
 	}
 }

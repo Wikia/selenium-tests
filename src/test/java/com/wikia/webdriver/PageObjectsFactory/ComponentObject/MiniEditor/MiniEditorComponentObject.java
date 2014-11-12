@@ -53,6 +53,8 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	private WebElement linkExistsIcon;
 	@FindBy (css="[id*='_uiElement'] .external")
 	private WebElement linkExternalIcon;
+	@FindBy (css=".MiniEditorWrapper.active.editor-open")
+	private WebElement miniEditorWrapper;
 
 	public void writeMiniEditor(String text){
 		waitForElementByElement(messageBodyField);
@@ -61,7 +63,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("writeMiniEditor", e.getMessage(), false);
 		}
 		messageBodyField.clear();
 		messageBodyField.sendKeys(text);
@@ -167,9 +169,12 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 	}
 
 	public void switchAndQuoteMessageWall(String reply) {
+		waitForElementByElement(miniEditorWrapper);
+		quoteMessageWallFrame = miniEditorWrapper.findElement(By.cssSelector(".cke_contents iframe"));
 		driver.switchTo().frame(quoteMessageWallFrame);
-		driver.findElement(By.cssSelector("body#bodyContent")).clear();
-		driver.findElement(By.cssSelector("body#bodyContent")).sendKeys(reply);
+		WebElement quoteMessageTextArea = driver.findElement(By.cssSelector("body#bodyContent"));
+		quoteMessageTextArea.clear();
+		quoteMessageTextArea.sendKeys(reply);
 		PageObjectLogging.log("switchAndQuoteMessageWall", "quote typed", true);
 	}
 }

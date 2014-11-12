@@ -87,9 +87,9 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		CreateAMapComponentObject map = mapDialog.clickCreateAMapButton();
 		CreateRealMapComponentObject realMap = map.clickRealMap();
 		realMap.verifyRealMapPreviewImage();
-		realMap.typeMapName(InteractiveMapsContent.mapName);
+		realMap.typeMapName(InteractiveMapsContent.MAP_NAME);
 		CreatePinTypesComponentObject pinDialog = realMap.clickNext();
-		pinDialog.typePinTypeTitle(InteractiveMapsContent.pinTypeName, InteractiveMapsContent.pinTypeIndex);
+		pinDialog.typePinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME, InteractiveMapsContent.PIN_TYPE_INDEX);
 		createdMap = pinDialog.clickSave();
 		createdMap.verifyMapOpened();
 		mapID = createdMap.getEmbedMapID();

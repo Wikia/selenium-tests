@@ -19,28 +19,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * @ownership: Mobile Web IM11: Verify possibility of embedding wikia map in
- *             other wikia pages. v IM12: Verify following elements in map modal
- *             when a map is embedded in a wikia page: PIN description when
- *             clicking, zoom, add/edit features for pin types and pins, embed
- *             map button, filters box. Verify there is no branding footer. v
- *             IM18: Verify embed map code dialog works correctly from
- *             Special:Map page v IM19: Embed a map outside of wikia and verify
- *             there is a branding footer, zoom in/out options and filters box
- *             collapsibility
- * 
+ * @ownership: Mobile Web
  */
 
 public class EmbedMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_011", "EmbedMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_011_VerifyEmbedMapInWikiaPage() {
+	@Test(groups = { "EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps" })
+	public void EmbedMapTests_001_EmbedMapInWikiaPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		String wikiEmbedCode = selectedMap.getEmbedMapWikiCode();
 		String mapID = selectedMap.getEmbedMapID();
@@ -53,10 +44,10 @@ public class EmbedMapTests extends NewTestTemplate {
 		EditMode.verifyEmbededMap(mapID);
 	}
 
-	@Test(groups = { "InteractiveMaps_012", "EmbedMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_012_VerifyEmbedMapElements() {
+	@Test(groups = { "EmbedMapTests_002", "EmbedMapTests", "InteractiveMaps" })
+	public void EmbedMapTests_002_VerifyEmbedMapElements() {
 		ArticlePageObject article = new ArticlePageObject(driver);
-		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
+		article.openArticleByName(wikiURL, InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
 		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
 		embedMapDialog.verifyEmbedMapModalOpened();
 		embedMapDialog.verifyMapTitlePresented();
@@ -65,12 +56,12 @@ public class EmbedMapTests extends NewTestTemplate {
 		embedMapDialog.verifyBrandFooterNotVisible();
 	}
 
-	@Test(groups = { "InteractiveMaps_018", "EmbedMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_018_VerifyEmbedMapCodeButton() {
+	@Test(groups = { "EmbedMapTests_003", "EmbedMapTests", "InteractiveMaps" })
+	public void EmbedMapTests_003_VerifyEmbedMapCodeButton() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEmbedMapCodeButton();
 		selectedMap.verifyEmbedMapDialog();
@@ -82,30 +73,29 @@ public class EmbedMapTests extends NewTestTemplate {
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.large);
 	}
 
-	@Test(groups = { "InteractiveMaps_019", "EmbedMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_019_VerifyEmbedMapOutsideWikia() {
+	@Test(groups = { "EmbedMapTests_004", "EmbedMapTests", "InteractiveMaps" })
+	public void EmbedMapTests_004_VerifyEmbedMapOutsideWikia() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEmbedMapCodeButton();
 		selectedMap.verifyEmbedMapDialog();
 		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.small);
 		String mapCode = selectedMap.getEmbedMapCode();
-		System.out.println(mapCode);
 		DabbletComPageObject outPage = new DabbletComPageObject(driver);
 		outPage.openOutPage();
 		outPage.typeHtmlCode(mapCode);
 		outPage.verifyMapEmbed();
 	}
 
-	@Test(groups = { "InteractiveMaps_036", "EmbedMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_036_VerifyEmbedMapContributeModals() {
+	@Test(groups = { "EmbedMapTests_005", "EmbedMapTests", "InteractiveMaps" })
+	public void EmbedMapTests_005_VerifyEmbedMapContributeModals() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = new ArticlePageObject(driver);
-		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
+		article.openArticleByName(wikiURL, InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
 		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
 		AddPinComponentObject addPinModal = embedMapDialog.placePinInMap();
 		addPinModal.verifyPinTitleFieldIsDisplayed();
@@ -115,18 +105,18 @@ public class EmbedMapTests extends NewTestTemplate {
 		pinTypesDialog.verifyPinTypesDialog();
 	}
 
-	@Test(groups = { "InteractiveMaps_037", "EmbedMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_037_VerifyEmbedMapAddPinType() {
+	@Test(groups = { "EmbedMapTests_006", "EmbedMapTests", "InteractiveMaps" })
+	public void EmbedMapTests_006_VerifyEmbeddedMapAddPinType() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = new ArticlePageObject(driver);
-		article.openArticleByName(wikiURL, InteractiveMapsContent.embedMapArticleName);
+		article.openArticleByName(wikiURL, InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
 		EmbedMapComponentObject embedMapDialog = article.clickViewEmbedMap();
 		CreatePinTypesComponentObject pinTypesDialog = embedMapDialog.clickEditPinTypesButton();
 		pinTypesDialog.verifyPinTypesDialog();
 		pinTypesDialog.deletePinTypes();
-		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.pinTypeName, 4);
+		pinTypesDialog.typeManyPinTypeTitle(InteractiveMapsContent.PIN_TYPE_NAME, 4);
 		pinTypesDialog.clickSave();
-		embedMapDialog.verifyPinTypeExists(InteractiveMapsContent.pinTypeName);
+		embedMapDialog.verifyPinTypeExists(InteractiveMapsContent.PIN_TYPE_NAME);
 	}
 }

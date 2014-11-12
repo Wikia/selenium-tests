@@ -112,14 +112,14 @@ public class MobileBasePageObject extends WikiBasePageObject {
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				PageObjectLogging.log("clickFbWindowTriggerButton", e.getMessage(), false);
 			}
 //		}
 		scrollAndClick(loginFbButton);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("clickFbWindowTriggerButton", e.getMessage(), false);
 		}
 		PageObjectLogging.log("clickFbWindowTriggerButton",
 				"facebook button clicked in login drop-down", true, driver);

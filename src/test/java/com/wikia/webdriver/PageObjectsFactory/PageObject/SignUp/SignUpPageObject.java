@@ -122,7 +122,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 					true
 			);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("enterBirthDate", e.getMessage(), false);
 		}
 	}
 

@@ -118,6 +118,7 @@ The following are valid for use in the `-Dgroups` parameter:
 * Hubs
 * ImageServing
 * ImageStorageTests
+* InteractiveMaps
 * Login
 * Media
 * MessageWall

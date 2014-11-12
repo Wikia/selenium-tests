@@ -20,7 +20,7 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiArticleEditMode;
 
 /**
- * @author lukaszjedrzejczak
+ * @author Łukasz Jędrzejczak
  * @author Łukasz Nowak (Dyktus)
  */
 public class InteractiveMapPageObject extends BasePageObject {
@@ -105,6 +105,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement actionDropDown;
 	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #deleteMap")
 	private WebElement deleteMapButton;
+	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #undeleteMap")
+	private WebElement restoreMapButton;
+	@FindBy(css = ".msg")
+	private WebElement msgTopBar;
 	@FindBy(css = ".poi-article-link")
 	private WebElement poiArticleLink;
 	@FindBy(css = ".wikia-interactive-map h2")
@@ -113,7 +117,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement poiNameSection;
 	@FindBy(css = ".wikia-interactive-map dd")
 	private WebElement poiDescriptionSection;
-	
+
 	private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
 	public enum embedMapDialogButtons {
@@ -186,8 +190,8 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void clickOnSingleEnabledCategory() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
-		enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex).click();
+		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
+		enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX).click();
 		PageObjectLogging.log("clickOnSingleEnabledCategory", "Single enabled category was clicked", true);
 		driver.switchTo().defaultContent();
 	}
@@ -196,7 +200,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 		waitForElementByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		waitForElementByElement(disabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
 		disabledPinTypesCollection.get(0).click();
 		PageObjectLogging.log("clickOnSingleDisabledCategory", "Single disabled category was clicked", true);
 		driver.switchTo().defaultContent();
@@ -327,7 +331,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(allPinTypes);
-		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
 		if (allPinTypes.getAttribute("class").contains("enabled")) {
 			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were checked", true);
 		}else {
@@ -366,7 +370,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	public void verifyPinTypesAreCheck() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.pinTypeIndex));
+		waitForElementVisibleByElement(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
 		Assertion.assertEquals(disabledPinTypesCollection.size(), 0);
 		driver.switchTo().defaultContent();
 	}
@@ -463,6 +467,17 @@ public class InteractiveMapPageObject extends BasePageObject {
 		return new DeleteAMapComponentObject(driver);
 	}
 
+	public DeleteAMapComponentObject restoreMap() {
+		waitForElementByElement(actionDropDown);
+		actionDropDown.click();
+		restoreMapButton.click();
+		return new DeleteAMapComponentObject(driver);
+	}
+
+	public void verifyOpenMapId(String mapIdActual, String mapIdExpected) {
+		Assertion.assertEquals(mapIdExpected, mapIdActual);
+	}
+
 	public void verifyEscapedFragmentMetaTag() {
 		waitForElementByElement(createdMapTitle);
 		waitForElementPresenceByBy(escapedFragmentMetaDataTag);
@@ -473,12 +488,12 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementByElement(poiCategorySection);
 		PageObjectLogging.log("verifyPoiCategoryTitle", "Poi category section is displayed", true);
 	}
-	
+
 	public void verifyPoiPointTitle() {
 		waitForElementByElement(poiNameSection);
 		PageObjectLogging.log("verifyPoiPointTitle", "Poi name section is displayed", true);
 	}
-	
+
 	public void verifyPoiPointDescription() {
 		waitForElementByElement(poiDescriptionSection);
 		PageObjectLogging.log("verifyPoiPointDescription", "Poi description section is displayed", true);

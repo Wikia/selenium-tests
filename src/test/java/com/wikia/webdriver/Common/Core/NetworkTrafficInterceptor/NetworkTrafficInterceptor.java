@@ -3,12 +3,15 @@ package com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.browsermob.core.har.Har;
 import org.browsermob.core.har.HarEntry;
 import org.browsermob.proxy.ProxyServer;
 import org.browsermob.proxy.http.BrowserMobHttpRequest;
 import org.browsermob.proxy.http.RequestInterceptor;
 import org.openqa.selenium.Proxy;
+
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -60,7 +63,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
 						newValue
 					);
 				} catch (Exception e) {
-					e.printStackTrace();
+					PageObjectLogging.log("changeHeader", e.getMessage(), false);
 				}
 			}
 		});

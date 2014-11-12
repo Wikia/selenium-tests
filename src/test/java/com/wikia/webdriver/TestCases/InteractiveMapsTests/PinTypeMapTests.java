@@ -15,21 +15,19 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * @ownership: IM08: Check image error validation for small size and non-image
- *             extension v IM10: Verify clicking "Add another pin type" link
- *             will display a new line and fields for adding new information v
+ * @ownership: Mobile Web 
  */
 
 public class PinTypeMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "InteractiveMaps_008", "PinTypeMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_008_VerifyImageValidationInPinTypeModal() {
+	@Test(groups = { "PinTypeMapTests_001", "PinTypeMapTests", "InteractiveMaps" })
+	public void PinTypeMapTests_001_VerifyImageValidationInPinTypeModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEditPinTypesButton();
 		CreatePinTypesComponentObject pinTypeModal = new CreatePinTypesComponentObject(driver);
@@ -40,12 +38,12 @@ public class PinTypeMapTests extends NewTestTemplate {
 		pinTypeModal.verifyErrorExists();
 	}
 
-	@Test(groups = { "InteractiveMaps_010", "PinTypeMapTests", "InteractiveMaps" })
-	public void InteractiveMaps_010_VerifyClickingAddAnotherPinType() {
+	@Test(groups = { "PinTypeMapTests_002", "PinTypeMapTests", "InteractiveMaps" })
+	public void PinTypeMapTests_002_VerifyClickingAddAnotherPinType() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
-		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.selectedMapIndex);
+		InteractiveMapPageObject selectedMap = specialMap.clickMapWithIndex(InteractiveMapsContent.SELECTED_MAP_INDEX);
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEditPinTypesButton();
 		CreatePinTypesComponentObject pinTypesDialog = new CreatePinTypesComponentObject(driver);

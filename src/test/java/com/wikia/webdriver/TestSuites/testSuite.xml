@@ -59,6 +59,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnAdFreeWikis"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnSonyReferrer"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestRoadblocksAfterMultiplePageViews"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestTopIncontentBoxad"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestTopWamWikis"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumEditModeTests"/>
 			<class name="com.wikia.webdriver.TestCases.ForumTests.ForumBoardTests"/>

@@ -28,7 +28,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 	private WebElement mapFrame;
 	@FindBy(css = "img[src*='player_location_marker.png']")
 	private WebElement playerPoint;
-	
+
 	private PalantirContent getResponse(Object response, String methodName) {
 		PalantirContent handle = null;
 		try {			
@@ -95,7 +95,7 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 	public void verifyWrongPlayerPos(PalantirContent handle) {
 		Assertion.assertEquals("false", handle.getSuccess());
 		Assertion.assertEquals("422", handle.getResponseCode());
-		Assertion.assertEquals(PalantirContent.PONTOMSG_PLAYER_OUTOFBOUNDARIES, handle.getMessage());
+		Assertion.assertEquals(PalantirContent.PONTOMSG_MAP_OUTOFBOUNDARIES, handle.getMessage());
 	}
 	
 	public void verifyWrongZoomLevel(PalantirContent handle) {

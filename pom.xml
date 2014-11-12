@@ -38,7 +38,7 @@
 			<artifactId>browsermob-proxy</artifactId>
 			<version>2.0-beta-7</version>
 			<!-- QAART-397 Added exclusions as browsermob-proxy uses version 7.3.0.v20110203 -->
-			<!-- which no longer return http 200  -->
+			<!-- which no longer return http 200 -->
 			<exclusions>
 				<exclusion>
 					<groupId>org.eclipse.jetty</groupId>
@@ -51,25 +51,25 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-		  <groupId>de.sstoehr</groupId>
-		  <artifactId>har-reader</artifactId>
-		  <version>1.0.0</version>
+			<groupId>de.sstoehr</groupId>
+			<artifactId>har-reader</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-   			<groupId>xmlunit</groupId>
-   			<artifactId>xmlunit</artifactId>
-   			<version>1.3</version>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.3</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.seleniumhq.selenium</groupId>
-		    <artifactId>selenium-chrome-driver</artifactId>
-		    <version>2.43.1</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>2.43.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.7</version>
-		<scope>test</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -94,14 +94,14 @@
 			<artifactId>selenium-api</artifactId>
 			<version>2.43.1</version>
 		</dependency>
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.8</version>
-        </dependency>
 		<dependency>
-         		<groupId>org.apache.httpcomponents</groupId>
-        		<artifactId>httpclient</artifactId>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
 			<version>4.3.5</version>
 		</dependency>
 		<dependency>
@@ -130,9 +130,9 @@
 			<version>2.2.3</version>
 		</dependency>
 		<dependency>
-    		<groupId>javax.json</groupId>
-    		<artifactId>javax.json-api</artifactId>
-    		<version>1.0</version>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.glassfish</groupId>
@@ -180,14 +180,14 @@
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.4.1</version>
-			<configuration>
-				<filesets>
-					<fileset>
-						<directory>${base-path}/logs</directory>
-						<followSymlinks>false</followSymlinks>
-					</fileset>
-				</filesets>
-			</configuration>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${base-path}/logs</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

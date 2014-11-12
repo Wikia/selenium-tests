@@ -3,6 +3,7 @@
  */
 package com.wikia.webdriver.TestCases.ImageServingTests;
 
+import com.wikia.webdriver.Common.DriverProvider.UseUnstablePageLoadStrategy;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
@@ -29,11 +30,12 @@ public class ImageStorageTests extends NewTestTemplate {
 	String imageThumbnailURL;
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_001"})
-	public void ImageStorage_001_deleteImage() {
+	@UseUnstablePageLoadStrategy
+	public void ImageStorage_001_deleteImage_QAART_436() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-		FilePagePageObject file = newFiles.openRandomImage();
+		FilePagePageObject file = newFiles.openImage(PageContent.FILEDELETEANDRESTORE);
 		imageURL = file.getImageUrl();
 		imageThumbnailURL = file.getImageThumbnailUrl();
 		newFiles.verifyURLStatus(200, imageURL);
@@ -56,16 +58,22 @@ public class ImageStorageTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
-	public void ImageStorage_002_moveImage() {
+	@UseUnstablePageLoadStrategy
+	public void ImageStorage_002_moveImage_QAART_437() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
-		String fileName = newFiles.getRandomImageName();
+		String fileName = PageContent.FILERENAME;
 		FilePagePageObject file = newFiles.openFilePage(wikiURL, fileName);
 		RenamePageObject renamePage = file.renameUsingDropdown();
 		String imageNewName = renamePage.getTimeStamp() + fileName;
 		renamePage.rename(imageNewName);
-		file.verifyHeader(imageNewName);
 		file.verifyNotificationMessage();
+		file.verifyHeader(imageNewName);
+		file = newFiles.openFilePage(wikiURL, imageNewName);
+		renamePage = file.renameUsingDropdown();
+		renamePage.rename(fileName);
+		file.verifyNotificationMessage();
+		file.verifyHeader(fileName);
 	}
 }
