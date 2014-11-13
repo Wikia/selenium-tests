@@ -27,7 +27,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		wall.clickBoldButton();
 		mini.switchAndWrite(message);
@@ -47,7 +47,7 @@ public class VetAddingVideoTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		wall.clickBoldButton();
 		mini.switchAndWrite(message);

@@ -32,11 +32,11 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 	String title;
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsFollowersResponseTests_001",
 					"MessageWallNotificationsFollowersResponseTests"
 			}
-			)
+	)
 	public void followerNotificationResponse_setup_1() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
@@ -46,19 +46,19 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsFollowersResponseTests_002",
 					"MessageWallNotificationsFollowersResponseTests"
 			},
 			dependsOnMethods = "followerNotificationResponse_setup_1"
-			)
+	)
 	public void followerNotificationResponse_setup_2() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName8, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -66,12 +66,12 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsFollowersResponseTests_003",
 					"MessageWallNotificationsFollowersResponseTests"
 			},
 			dependsOnMethods = "followerNotificationResponse_setup_2"
-			)
+	)
 	public void followerNotificationResponse_setup_3() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
@@ -80,12 +80,12 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsFollowersResponseTests_004",
 					"MessageWallNotificationsFollowersResponseTests"
 			},
 			dependsOnMethods = "followerNotificationResponse_setup_3"
-			)
+	)
 	public void followerNotificationResponse_setup_4() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName8, credentials.password8, wikiURL);
@@ -100,12 +100,12 @@ public class MessageWallNotificationsFollowersResponseTests extends NewTestTempl
 
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsFollowersResponseTests_005",
 					"MessageWallNotificationsFollowersResponseTests"
 			},
 			dependsOnMethods = "followerNotificationResponse_setup_4"
-			)
+	)
 	public void followerNotificationResponse_verification() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName7, credentials.password7, wikiURL);
