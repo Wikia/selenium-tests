@@ -44,7 +44,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsFollowersMessageTests_002",
 					"MessageWallNotificationsFollowersMessageTests"
 			},
@@ -56,7 +56,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 		NewMessageWall wall = base.openMessageWall(credentials.userName6, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -64,7 +64,7 @@ public class MessageWallNotificationsFollowersMessageTests extends NewTestTempla
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsFollowersMessageTests_003",
 					"MessageWallNotificationsFollowersMessageTests"
 			},
