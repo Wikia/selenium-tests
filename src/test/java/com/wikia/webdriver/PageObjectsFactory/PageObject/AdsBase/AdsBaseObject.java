@@ -41,6 +41,8 @@ public class AdsBaseObject extends WikiBasePageObject {
 	};
 	private final String topIncontentBoxadSelector = "div[id*='TOP_INCONTENT_BOXAD']";
 
+	private final String KRUX_CONTROL_TAG_URL_PREFIX = "http://cdn.krxd.net/controltag?confid=";
+
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
@@ -57,6 +59,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentLeaderboardGpt;
 	@FindBy(css=topIncontentBoxadSelector)
 	protected WebElement topIncontentBoxad;
+
+	@FindBy(css="script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
+	private WebElement kruxControlTag;
 
 	protected NetworkTrafficInterceptor networkTrafficInterceptor;
 	protected String presentLeaderboardName;
@@ -633,27 +638,61 @@ public class AdsBaseObject extends WikiBasePageObject {
 		);
 	}
 
-	public void verifyTop1kParamState(Boolean isTop1k){
+	private boolean isGptParamPresent(String key, String value) {
 		waitForElementByElement(presentLeaderboard);
 		String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
-		String top1k = "\"top\":\"1k\"";
+		String gptParamPattern = '"' + key + '"' + ':' + '"' + value + '"';
 
+		PageObjectLogging.log(
+			"GPT parameter search",
+			"searching for: " + gptParamPattern + " in<br>" + dataGptPageParams,
+			true
+		);
+
+		return dataGptPageParams.contains(gptParamPattern);
+	}
+
+	/**
+	 * Test whether the top=1k parameter is passed (or not passed) to DART
+	 *
+	 * @param isTop1k should the top=1k parameter be passed to DART
+	 */
+	public void verifyTop1kParamState(Boolean isTop1k) {
 		if (isTop1k) {
-			Assertion.assertTrue(dataGptPageParams.contains(top1k), "parameter 1k not found");
+			Assertion.assertTrue(isGptParamPresent("top", "1k"), /* error msg: */ "parameter top=1k not found");
 			PageObjectLogging.log(
 				"verifyTop1kParamState",
-				"Verification done, parameter found " + dataGptPageParams,
+				"parameter top=1k found",
 				true,
 				driver
 			);
 		} else {
-			Assertion.assertFalse(dataGptPageParams.contains(top1k), "parameter 1k found");
+			Assertion.assertFalse(isGptParamPresent("top", "1k"), /* error msg: */ "parameter top=1k found");
 			PageObjectLogging.log(
 				"verifyTop1kParamState",
-				"Verification done, parameter not found " + dataGptPageParams,
+				"parameter top=1k not found",
 				true,
 				driver
 			);
 		}
+	}
+
+	/**
+	 * Test whether the Krux control tag is called with the proper site ID
+	 *
+	 * @param kruxSiteId the expected Krux site ID
+	 */
+	public void verifyKruxControlTag(String kruxSiteId) {
+		String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
+		Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
+	}
+
+	/**
+	 * Test whether the Krux user id is not empty and added to GPT calls
+	 */
+	public void verifyKruxUserParam() {
+		String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
+		Assertion.assertStringNotEmpty(kruxUser);
+		Assertion.assertTrue(isGptParamPresent("u", kruxUser));
 	}
 }
