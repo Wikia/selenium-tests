@@ -35,7 +35,7 @@ public class MessageWallTests extends NewTestTemplate {
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -54,7 +54,7 @@ public class MessageWallTests extends NewTestTemplate {
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -71,7 +71,7 @@ public class MessageWallTests extends NewTestTemplate {
 		NewMessageWall wall = base.openMessageWall(credentials.userNameStaff, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -91,7 +91,7 @@ public class MessageWallTests extends NewTestTemplate {
 		NewMessageWall wall = base.openMessageWall(credentials.userNameStaff, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -110,7 +110,7 @@ public class MessageWallTests extends NewTestTemplate {
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		MiniEditorPreviewComponentObject preview = wall.preview();
@@ -126,14 +126,14 @@ public class MessageWallTests extends NewTestTemplate {
 		NewMessageWall wall = base.openMessageWall(credentials.userName, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
 		wall.verifyMessageText(title, message, credentials.userName);
 		MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
 		String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
-		miniReply.switchAndQuoteMessageWall(reply);;
+		miniReply.switchAndQuoteMessageWall(reply);
 		wall.submitQuote();
 		wall.verifyQuote(reply);
 	}
@@ -152,7 +152,7 @@ public class MessageWallTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName11, wikiURL);
 		wall.triggerMessageArea();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		wall.clickSourceModeButton();
 		wall.writeSourceMode(SourceModeContent.UNCLOSED_DIV_COMMENT);
 		wall.writeTitle(title);
@@ -191,7 +191,7 @@ public class MessageWallTests extends NewTestTemplate {
 		NewMessageWall wall = base.openMessageWall(credentials.userNameBlockedAccount, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
 		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
-		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX+ wall.getTimeStamp();
+		String title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
