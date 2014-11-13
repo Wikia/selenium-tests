@@ -19,6 +19,7 @@ public class InteractiveMapsContent {
 	public static final String ASSOCIATED_ARTICLE_NAME = "Test";
 	public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_BE_FOUND = "te";
 	public static final String TEMPLATE_NAME_TO_SEARCH_SHOULD_NOT_BE_FOUND = "1234567890123123123123213";
+	public static String TEMPLATE_NAME;
 	public static final String LEARN_MORE_LINK = "http://maps.wikia.com";
 	public static final String MAP_NAME = "testingMapName";
 	public static final String PIN_TYPE_NAME = "testingPinType";
