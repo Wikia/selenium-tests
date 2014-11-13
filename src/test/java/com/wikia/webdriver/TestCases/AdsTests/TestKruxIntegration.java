@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
  */
 public class TestKruxIntegration extends NewTestTemplate {
 
-	static final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
-	static final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
+	static private final String KRUX_SITE_ID_DESKTOP = "JU3_GW1b";
+	static private final String KRUX_SITE_ID_MOBILE = "JTKzTN3f";
 
 	@Test(
 		dataProviderClass = AdsDataProvider.class,

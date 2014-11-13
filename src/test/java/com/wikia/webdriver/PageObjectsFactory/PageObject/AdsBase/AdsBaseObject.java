@@ -31,25 +31,31 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComp
  */
 public class AdsBaseObject extends WikiBasePageObject {
 
-	private final String wikiaMessageBuble = "#WikiaNotifications div[id*='msg']";
-	private final String liftiumIframeSelector = "iframe[id*='Liftium']";
-	private final String gptDivSelector = "[data-gpt-creative-size]";
-	private final String[] gptDataAttributes = {
-			"data-gpt-line-item-id",
-			"data-gpt-creative-id",
-			"data-gpt-creative-size",
+	// Constants
+	static private final String KRUX_CONTROL_TAG_URL_PREFIX = "http://cdn.krxd.net/controltag?confid=";
+	static private final int SKIN_WIDTH = 90;
+	static private final int SKIN_MARGIN_TOP = 100;
+	static private final int SKIN_MARGIN_HORIZONTAL = 5;
+	static private final String[] GPT_DATA_ATTRIBUTES = {
+		"data-gpt-line-item-id",
+		"data-gpt-creative-id",
+		"data-gpt-creative-size",
 	};
-	private final String topIncontentBoxadSelector = "div[id*='TOP_INCONTENT_BOXAD']";
 
-	private final String KRUX_CONTROL_TAG_URL_PREFIX = "http://cdn.krxd.net/controltag?confid=";
+	// Selectors
+	static private final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
+	static private final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
+	static private final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
+	static private final String TOP_INCONTENT_BOXAD_SELECTOR = "div[id*='TOP_INCONTENT_BOXAD']";
 
+	// Elements
 	@FindBy(css=AdsContent.wikiaBarSelector)
 	private WebElement toolbar;
 	@FindBy(css="#WikiaPage")
 	private WebElement wikiaArticle;
 	@FindBy(css=".WikiaSpotlight")
 	private List<WebElement> spotlights;
-	@FindBy(css=liftiumIframeSelector)
+	@FindBy(css=LIFTIUM_IFRAME_SELECTOR)
 	private List<WebElement> liftiumIframes;
 	@FindBy(css="div[id*='TOP_LEADERBOARD']")
 	protected WebElement presentLeaderboard;
@@ -57,7 +63,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentMedrec;
 	@FindBy(css="div[id*='TOP_LEADERBOARD_gpt']")
 	protected WebElement presentLeaderboardGpt;
-	@FindBy(css=topIncontentBoxadSelector)
+	@FindBy(css=TOP_INCONTENT_BOXAD_SELECTOR)
 	protected WebElement topIncontentBoxad;
 
 	@FindBy(css="script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
@@ -68,10 +74,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected String presentLeaderboardSelector;
 	protected String presentMedrecName;
 	protected String presentMedrecSelector;
-
-	private int skinWidth = 90;
-	private int skinMarginTop = 100;
-	private int skinMarginHorizontal = 5;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
@@ -173,7 +175,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void checkTopIncontentBoxad() {
-		checkAdVisibleInSlot(topIncontentBoxadSelector, topIncontentBoxad);
+		checkAdVisibleInSlot(TOP_INCONTENT_BOXAD_SELECTOR, topIncontentBoxad);
 	}
 
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
@@ -230,9 +232,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 		int articleLocationX = wikiaArticle.getLocation().x;
 		int articleWidth = wikiaArticle.getSize().width;
-		Point articleLeftSideStartPoint = new Point(articleLocationX - skinMarginHorizontal - skinWidth, skinMarginTop);
-		Point articleRightSideStartPoint = new Point(articleLocationX + articleWidth + skinMarginHorizontal, skinMarginTop);
-		Dimension skinSize = new Dimension(skinWidth, 500);
+		Point articleLeftSideStartPoint = new Point(articleLocationX - SKIN_MARGIN_HORIZONTAL - SKIN_WIDTH, SKIN_MARGIN_TOP);
+		Point articleRightSideStartPoint = new Point(articleLocationX + articleWidth + SKIN_MARGIN_HORIZONTAL, SKIN_MARGIN_TOP);
+		Dimension skinSize = new Dimension(SKIN_WIDTH, 500);
 
 		boolean successLeft = adsComparison.compareImageWithScreenshot(
 			expectedAdSkinLeftPart, skinSize, articleLeftSideStartPoint, driver
@@ -274,7 +276,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void hideMessage() {
-		hideElement(wikiaMessageBuble);
+		hideElement(WIKIA_MESSAGE_BUBLE);
 	}
 
 	protected void hideElement(String cssSelector) {
@@ -458,7 +460,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void verifyNoLiftiumAds() {
-		if (checkIfElementOnPage(liftiumIframeSelector)) {
+		if (checkIfElementOnPage(LIFTIUM_IFRAME_SELECTOR)) {
 			throw new WebDriverException("Liftium ads found!");
 		} else {
 			PageObjectLogging.log("LiftiumAdsNotFound", "Liftium ads not found", true);
@@ -468,7 +470,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	private String extractLiftiumTagId(String slotSelector) {
 		String liftiumTagId = null;
 		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
-		if (checkIfElementInElement(liftiumIframeSelector, slot)) {
+		if (checkIfElementInElement(LIFTIUM_IFRAME_SELECTOR, slot)) {
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			WebElement currentLiftiumIframe = (WebElement)js.executeScript(
 				"return $(arguments[0] + ' iframe[id*=\\'Liftium\\']:visible')[0];",
@@ -503,10 +505,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 	private void extractGptInfo(String slotSelector) {
 		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
 		String log = "GPT ad not found in slot: " + slotSelector;
-		if (checkIfElementInElement(gptDivSelector, slot)) {
+		if (checkIfElementInElement(GPT_DIV_SELECTOR, slot)) {
 			log = "GPT ad found in slot: " + slotSelector;
-			WebElement gptDiv = slot.findElement(By.cssSelector(gptDivSelector));
-			for (String attribute : gptDataAttributes) {
+			WebElement gptDiv = slot.findElement(By.cssSelector(GPT_DIV_SELECTOR));
+			for (String attribute : GPT_DATA_ATTRIBUTES) {
 				log += "; " + attribute + " = " + gptDiv.getAttribute(attribute);
 			}
 		}
@@ -543,7 +545,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public void verifyNoLiftiumAdsInSlots(List<String> slots) {
 		for (String slot : slots) {
 			WebElement slotElement = driver.findElement(By.id(slot));
-			if (checkIfElementInElement(liftiumIframeSelector, slotElement)) {
+			if (checkIfElementInElement(LIFTIUM_IFRAME_SELECTOR, slotElement)) {
 				throw new NoSuchElementException("Liftium found in slot " + slot);
 			} else {
 				PageObjectLogging.log("LiftiumNotFound", "Liftium not found in slot " + slot, true);
