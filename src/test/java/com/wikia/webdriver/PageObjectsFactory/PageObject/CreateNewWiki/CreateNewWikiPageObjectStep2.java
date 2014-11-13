@@ -19,15 +19,15 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 
-	@FindBy(css="textarea#Description")
+	@FindBy(css = "textarea#Description")
 	private WebElement descriptionField;
-	@FindBy(css="select[name='wiki-vertical']")
+	@FindBy(css = "select[name='wiki-vertical']")
 	private WebElement wikiCategory;
-	@FindBy(css="form[name='desc-form'] input[class='next']")
+	@FindBy(css = "form[name='desc-form'] input[class='next']")
 	private WebElement submitButton;
 	@FindBy(name = "all-ages")
 	private WebElement allAgesCheckBox;
-	@FindBy(css="#DescWiki .submit-error.error-msg")
+	@FindBy(css = "#DescWiki .submit-error.error-msg")
 	private WebElement categoryErrorMsg;
 
 	public CreateNewWikiPageObjectStep2(WebDriver driver) {
@@ -35,8 +35,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void describeYourTopic(String description)
-	{
+	public void describeYourTopic(String description) {
 		waitForElementByElement(descriptionField);
 		descriptionField.sendKeys(description);
 		PageObjectLogging.log("describeYourTopic", "describe your topic populated with: " + description, true);

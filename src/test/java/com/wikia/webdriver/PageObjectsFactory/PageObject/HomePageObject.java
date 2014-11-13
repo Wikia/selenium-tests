@@ -18,29 +18,29 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNew
 
 public class HomePageObject extends WikiBasePageObject {
 
-	@FindBy(css="header.wikiahomepage-header a.button")
+	@FindBy(css = "header.wikiahomepage-header a.button")
 	private WebElement startWikiButton;
-	@FindBy(css="section.grid-2.videogames a img")
+	@FindBy(css = "section.grid-2.videogames a img")
 	private WebElement OpenVideoGamesHub;
-	@FindBy(css="section.grid-2.entertainment a img")
+	@FindBy(css = "section.grid-2.entertainment a img")
 	private WebElement OpenEntertainmentHub;
-	@FindBy(css="section.grid-2.lifestyle a img")
+	@FindBy(css = "section.grid-2.lifestyle a img")
 	private WebElement OpenLifestyleHub;
-	@FindBy(css="a.ajaxLogin")
+	@FindBy(css = "a.ajaxLogin")
 	private WebElement LoginOverlay;
-	@FindBy(css="div#UserLoginDropdown input[name='username']")
+	@FindBy(css = "div#UserLoginDropdown input[name='username']")
 	private WebElement UserNameField;
-	@FindBy(css="div#UserLoginDropdown a.forgot-password")
+	@FindBy(css = "div#UserLoginDropdown a.forgot-password")
 	private WebElement ForgotYourPassword;
-	@FindBy(css="#WikiaSearch button.wikia-button")
+	@FindBy(css = "#WikiaSearch button.wikia-button")
 	private WebElement searchButton;
-	@FindBy(css="#WikiaSearch input[name='search']")
+	@FindBy(css = "#WikiaSearch input[name='search']")
 	private WebElement searchInput;
-	@FindBy(css=".hub > a")
+	@FindBy(css = ".hub > a")
 	private WebElement hubIndicator;
-	@FindBy(css=".preview-pane a.goVisit")
+	@FindBy(css = ".preview-pane a.goVisit")
 	private List<WebElement> visualizationWikis;
-	@FindBy(css="section.grid-1 nav")
+	@FindBy(css = "section.grid-1 nav")
 	private WebElement languageButton;
 
 	//These Bys are being used to prevent stale browser exception
@@ -49,14 +49,12 @@ public class HomePageObject extends WikiBasePageObject {
 
 	private String languageDropdownString = "nav.wikia-menu-button";
 
-	public HomePageObject(WebDriver driver)
-	{
+	public HomePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL)
-	{
+	public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL) {
 		startWikiButton.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
 		return new CreateNewWikiPageObjectStep1(driver);

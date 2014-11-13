@@ -26,11 +26,9 @@ public class PropertiesSetter {
 		Global.CAPTCHA_FILE = new File(seleniumConfigDir+File.separator+"captcha.txt");
 
 		Global.LOG_VERBOSE = 2;
-		if (Global.DOMAIN.contains("dev")||Global.DOMAIN.contains("sandbox"))
-		{
+		if (Global.DOMAIN.contains("dev") || Global.DOMAIN.contains("sandbox")) {
 			Global.LOGIN_BY_COOKIE = false;
-		}
-		else {
+		} else {
 			Global.LOGIN_BY_COOKIE = true;
 		}
 		Global.LOG_ENABLED = true;

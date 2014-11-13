@@ -321,13 +321,11 @@ public class ArticleRTETest extends NewTestTemplate {
 	}
 
 	@Test(dataProvider="wikiTextsProvider", groups={"RTE"})
-	public void ArticleRTETest_001(String[] wikiTexts)
-	{
+	public void ArticleRTETest_001(String[] wikiTexts) {
 		WikiArticleEditMode edit = new WikiArticleEditMode(driver);
 		edit.editArticleByName("RTE_test_page", wikiURL);
 		edit.clickOnSourceButton();
-		for (String wikitext : wikiTexts)
-		{
+		for (String wikitext : wikiTexts) {
 			String tmp1;
 			String tmp2;
 			edit.clearSource();
@@ -340,11 +338,11 @@ public class ArticleRTETest extends NewTestTemplate {
 
 			e = driver.findElement(By.cssSelector(".cke_source"));
 			;
-			if (Assertion.assertStringContains(wikitext, e.getAttribute("value"))){
+			if (Assertion.assertStringContains(wikitext, e.getAttribute("value"))) {
 				tmp1 = e.getAttribute("value").replace("<", "&lt");
 				tmp1.replace(">", "&gt");
 				PageObjectLogging.log("checking value passed", "<pre>" + e.getAttribute("value") + "</pre>", true);
-			} else{
+			} else {
 				tmp1 = e.getAttribute("value").replace("<", "&lt;");
 				tmp1 = tmp1.replace(">", "&gt;");
 				tmp1 = tmp1.replace(" ", "&nbsp;");

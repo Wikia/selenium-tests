@@ -20,35 +20,35 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticleHom
  */
 public class CrossWikiSearchPageObject extends SearchPageObject {
 
-	@FindBy(css=".result")
+	@FindBy(css = ".result")
 	private List<WebElement> searchResultList;
-	@FindBy(css=".Results > :nth-child(1)")
+	@FindBy(css = ".Results > :nth-child(1)")
 	private WebElement firstResult;
-	@FindBy(css=".Results > :nth-child(1) > .result-description > :nth-child(2)")
+	@FindBy(css = ".Results > :nth-child(1) > .result-description > :nth-child(2)")
 	private WebElement firstResultVertical;
-	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle")
+	@FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle")
 	private WebElement firstResultStatistics;
-	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(1)")
+	@FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(1)")
 	private WebElement firstResultStatisticsPageCount;
-	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(2)")
+	@FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(2)")
 	private WebElement firstResultStatisticsPageImages;
-	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(3)")
+	@FindBy(css = ".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(3)")
 	private WebElement firstResultStatisticsPageVideos;
-	@FindBy(css=".Results > :nth-child(1) .result-description > .description")
+	@FindBy(css = ".Results > :nth-child(1) .result-description > .description")
 	private WebElement firstResultDescription;
 	@FindBy(css = "a[data-event=\"search_click_match\"]")
 	private WebElement match;
-	@FindBy(css=".results-wrapper i")
+	@FindBy(css = ".results-wrapper i")
 	private WebElement noResultsCaption;
-	@FindBy(css=".wikiPromoteThumbnail")
+	@FindBy(css = ".wikiPromoteThumbnail")
 	private List<WebElement> thumbnails;
-	@FindBy(css=".description")
+	@FindBy(css = ".description")
 	private List<WebElement> descriptions;
-	@FindBy(css=".wiki-statistics>li:nth-child(1)")
+	@FindBy(css = ".wiki-statistics>li:nth-child(1)")
 	private List<WebElement> statisticsPages;
-	@FindBy(css=".wiki-statistics>li:nth-child(2)")
+	@FindBy(css = ".wiki-statistics>li:nth-child(2)")
 	private List<WebElement> statisticsImages;
-	@FindBy(css=".wiki-statistics>li:nth-child(3)")
+	@FindBy(css = ".wiki-statistics>li:nth-child(3)")
 	private List<WebElement> statisticsVideos;
 
 	public CrossWikiSearchPageObject(WebDriver driver) {
@@ -67,11 +67,9 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void goToSearchPage(String searchUrl) {
-		try{
-			getUrl(searchUrl+"index.php?title=Special:Search");
-		}
-		catch (TimeoutException e)
-		{
+		try {
+			getUrl(searchUrl + "index.php?title=Special:Search");
+		} catch (TimeoutException e) {
 			PageObjectLogging.log("goToSearchPage", "timeouted when opening search page", false);
 		}
 	}

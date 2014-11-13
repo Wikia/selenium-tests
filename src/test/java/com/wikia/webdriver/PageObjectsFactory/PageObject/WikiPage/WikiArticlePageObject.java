@@ -17,9 +17,9 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	protected String articlename;
 
-	@FindBy(css="div.WikiaPageHeaderDiffHistory")
+	@FindBy(css = "div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
-	@FindBy(css="#mw-content-text img.thumbimage")
+	@FindBy(css = "#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
 	@FindBy(css = "a[data-canonical='random']")
 	private WebElement randomPageButton;
@@ -89,13 +89,11 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public WikiArticlePageObject openRandomArticle() {
 		scrollAndClick(randomPageButton);
 		waitForElementByElement(searchButton);
-		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
+		PageObjectLogging.log("openRandomArticle", "random page button clicked", true, driver);
 		return new WikiArticlePageObject(driver);
 	}
 
-	public void verifyArticleText(String content)
-	{
+	public void verifyArticleText(String content) {
 		waitForTextToBePresentInElementByBy(articleContentBy, content);
 		PageObjectLogging.log("verifyArticleText", "article text is verified", true);
 	}
@@ -108,11 +106,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public WikiArticleEditMode edit() {
 		waitForElementByElement(editButton);
 		scrollAndClick(editButton);
-		PageObjectLogging.log(
-			"edit",
-			"Edit article",
-			true
-		);
+		PageObjectLogging.log("edit", "Edit article", true);
 		return new WikiArticleEditMode(driver);
 	}
 
@@ -126,8 +120,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
 	}
 
-	public WikiHistoryPageObject openHistoryPage()
-	{
+	public WikiHistoryPageObject openHistoryPage() {
 		getUrl(driver.getCurrentUrl() + "?action=history");
 		waitForElementByElement(historyHeadLine);
 		return new WikiHistoryPageObject(driver);

@@ -1,36 +1,37 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special;
 
-import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
-import com.wikia.webdriver.Common.Core.Assertion;
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class SpecialFactoryPageObject extends SpecialPageObject
-{
-	@FindBy(id="citydomain")
+import com.wikia.webdriver.Common.ContentPatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
+import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
+public class SpecialFactoryPageObject extends SpecialPageObject {
+
+	@FindBy(id = "citydomain")
 	private WebElement domainField;
-	@FindBy(css="form[id='WikiFactoryDomainSelector'] button")
+	@FindBy(css = "form[id='WikiFactoryDomainSelector'] button")
 	private WebElement getConfigButton;
-	@FindBy(css="a[href*=close]")
+	@FindBy(css = "a[href*=close]")
 	private WebElement closeWikiButton;
-	@FindBy(css="#flag_1")
+	@FindBy(css = "#flag_1")
 	private WebElement dumpCheckBox;
-	@FindBy(css="#flag_2")
+	@FindBy(css = "#flag_2")
 	private WebElement imageArchiveCheckBox;
-	@FindBy(css="input[name='close_saveBtn']")
+	@FindBy(css = "input[name='close_saveBtn']")
 	private WebElement confirmCloseButton;
-	@FindBy(css="a.free")
+	@FindBy(css = "a.free")
 	private WebElement closedWikiaLink;
-	@FindBy(css="#wfOnlyWithString")
+	@FindBy(css = "#wfOnlyWithString")
 	private WebElement variableFiled;
-	@FindBy(css="select#wk-variable-select")
+	@FindBy(css = "select#wk-variable-select")
 	private WebElement variableList;
-	@FindBy(css="div > div[style*=left] > pre")
+	@FindBy(css = "div > div[style*=left] > pre")
 	private WebElement variableValue;
-	@FindBy(css="div > div[style*=right] > pre")
+	@FindBy(css = "div > div[style*=right] > pre")
 	private WebElement defaultVariableValue;
 
 	public SpecialFactoryPageObject(WebDriver driver) {

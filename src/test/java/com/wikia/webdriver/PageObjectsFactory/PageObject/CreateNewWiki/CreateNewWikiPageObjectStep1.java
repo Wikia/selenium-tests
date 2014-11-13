@@ -20,22 +20,22 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject{
 
-	@FindBy(name="wiki-name")
+	@FindBy(name = "wiki-name")
 	private WebElement wikiName;
-	@FindBy(name="wiki-domain")
+	@FindBy(name = "wiki-domain")
 	private WebElement wikiDomain;
-	@FindBy(css="span.domain-status-icon img[src*='check.png']")
+	@FindBy(css = "span.domain-status-icon img[src*='check.png']")
 	private WebElement successIcon;
-	@FindBy(css=".next.enabled")
+	@FindBy(css = ".next.enabled")
 	private WebElement submitButton;
-	@FindBy(css="select[name='wiki-language']")
+	@FindBy(css = "select[name='wiki-language']")
 	private WebElement languageSelector;
-	@FindBy(css="#ChangeLang")
+	@FindBy(css = "#ChangeLang")
 	private WebElement languageSelectorTrigger;
-	@FindBy(css=".domain-country")
+	@FindBy(css = ".domain-country")
 	private WebElement languageSelectedIndicator;
-	@FindBy(css=".wiki-domain-error.error-msg")
-	private WebElement wikiDomainErrorMessage;;
+	@FindBy(css = ".wiki-domain-error.error-msg")
+	private WebElement wikiDomainErrorMessage;
 
 	private String wikiNameString;
 
@@ -49,19 +49,16 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject{
 	}
 
 
-	public void selectLanguage(String lang)
-	{
+	public void selectLanguage(String lang) {
 		scrollAndClick(languageSelectorTrigger);
 		waitForElementByElement(languageSelector);
 		Select language = new Select(languageSelector);
 		List<WebElement> langList = language.getOptions();
-		for (int i=0; i<langList.size(); i++)
-		{
+		for (int i = 0; i < langList.size(); i++) {
 			String langDropElement = langList.get(i).getText();
-			if (langDropElement.contains(lang+":"))
-			{
+			if (langDropElement.contains(lang + ":")) {
 				language.selectByIndex(i);
-				Assertion.assertEquals(lang+".", languageSelectedIndicator.getText());
+				Assertion.assertEquals(lang + ".", languageSelectedIndicator.getText());
 				break;
 			}
 		}

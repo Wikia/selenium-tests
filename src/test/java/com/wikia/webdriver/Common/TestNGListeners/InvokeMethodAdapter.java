@@ -12,18 +12,15 @@ import com.wikia.webdriver.Common.Core.Assertion;
 public class InvokeMethodAdapter implements IInvokedMethodListener {
 
 	@Override
-	public void afterInvocation(IInvokedMethod method, ITestResult result)
-	{
-		//Reporter.setCurrentTestResult(result);
-		if (method.isTestMethod())
-		{
+	public void afterInvocation(IInvokedMethod method, ITestResult result) {
+		// Reporter.setCurrentTestResult(result);
+		if (method.isTestMethod()) {
 			List verificationFailures = Assertion.getVerificationFailures(result);
-			//if there are verification failures...
-			if(verificationFailures.size() > 0)
-			{
-				//set the test to failed
+			// if there are verification failures...
+			if (verificationFailures.size() > 0) {
+				// set the test to failed
 				result.setStatus(ITestResult.FAILURE);
-				for (Object failure:verificationFailures){
+				for (Object failure : verificationFailures) {
 					result.setThrowable((Throwable) failure);
 				}
 			}

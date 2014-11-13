@@ -25,87 +25,87 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiArticlePag
 
 public class WikiArticleEditMode extends WikiEditMode {
 
-	@FindBy(css="a.RTEImageButton")
+	@FindBy(css = "a.RTEImageButton")
 	private WebElement photoButton;
-	@FindBy(css="a.RTEVideoButton")
+	@FindBy(css = "a.RTEVideoButton")
 	private WebElement videoButton;
-	@FindBy(css="a.RTEGalleryButton")
+	@FindBy(css = "a.RTEGalleryButton")
 	private WebElement galleryButton;
-	@FindBy(css="a.RTESlideshowButton")
+	@FindBy(css = "a.RTESlideshowButton")
 	private WebElement slideshowButton;
-	@FindBy(css="a.RTESliderButton")
+	@FindBy(css = "a.RTESliderButton")
 	private WebElement sliderButton;
-	@FindBy(css="div.reset[id='ImageUpload']")
+	@FindBy(css = "div.reset[id='ImageUpload']")
 	private WebElement imageUploadModal;
-	@FindBy(css="div.cke_skin_wikia.visible div.cke_contents iframe")
+	@FindBy(css = "div.cke_skin_wikia.visible div.cke_contents iframe")
 	private WebElement visualModeIFrame;
-	@FindBy(css=".cke_source")
+	@FindBy(css = ".cke_source")
 	private WebElement sourceModeTextArea;
-	@FindBy(css="#wpTextbox1")
+	@FindBy(css = "#wpTextbox1")
 	private WebElement messageSourceModeTextArea;
-	@FindBy(css="div.cke_wrapper.cke_ltr div.cke_contents iframe")
+	@FindBy(css = "div.cke_wrapper.cke_ltr div.cke_contents iframe")
 	private WebElement iFrame;
-	@FindBy(css="header.WikiaHeader")
+	@FindBy(css = "header.WikiaHeader")
 	private WebElement header;
-	@FindBy(css="#wpPreview")
+	@FindBy(css = "#wpPreview")
 	private WebElement previewButton;
-	@FindBy(css="div.neutral.modalToolbar a[id='publish']")
+	@FindBy(css = "div.neutral.modalToolbar a[id='publish']")
 	private WebElement publishButtonPreview;
-	@FindBy(css="span.cke_button_ModeSource a span.cke_label")
+	@FindBy(css = "span.cke_button_ModeSource a span.cke_label")
 	private WebElement sourceModeButton;
-	@FindBy(css="span.RTEMediaOverlayEdit")
+	@FindBy(css = "span.RTEMediaOverlayEdit")
 	private WebElement modifyButton;
-	@FindBy(css="[type='video-placeholder'] span.RTEMediaOverlayEdit")
+	@FindBy(css = "[type='video-placeholder'] span.RTEMediaOverlayEdit")
 	private WebElement modifyButtonVideoPlaceholder;
-	@FindBy(css="span.RTEMediaOverlayDelete")
+	@FindBy(css = "span.RTEMediaOverlayDelete")
 	private WebElement removeButton;
-	@FindBy(css="div.RTEConfirmButtons a[id='RTEConfirmCancel'] span")
+	@FindBy(css = "div.RTEConfirmButtons a[id='RTEConfirmCancel'] span")
 	private WebElement cancelImageRemovalButton;
-	@FindBy(css="a[id='RTEConfirmOk']")
+	@FindBy(css = "a[id='RTEConfirmOk']")
 	private WebElement oKbutton;
-	@FindBy(css="img.video")
+	@FindBy(css = "img.video")
 	private WebElement videoInEditMode;
-	@FindBy(css="span.cke_button_ModeWysiwyg a")
+	@FindBy(css = "span.cke_button_ModeWysiwyg a")
 	private WebElement visualModeButton;
-	@FindBy(css="section.modalWrapper.preview section.modalContent figure a img")
+	@FindBy(css = "section.modalWrapper.preview section.modalContent figure a img")
 	private WebElement imageOnPreview;
-	@FindBy(css="body[id='bodyContent']")
+	@FindBy(css = "body[id='bodyContent']")
 	private WebElement bodyContent;
-	@FindBy(css="span.cke_button_table a")
+	@FindBy(css = "span.cke_button_table a")
 	private WebElement tableButton;
-	@FindBy(css="div.cke_dialog.modalWrapper")
+	@FindBy(css = "div.cke_dialog.modalWrapper")
 	private WebElement tableModal;
-	@FindBy(css="a.cke_dialog_ui_button.wikia-button")
+	@FindBy(css = "a.cke_dialog_ui_button.wikia-button")
 	private WebElement tableModalOKbutton;
-	@FindBy(css="table.article-table")
+	@FindBy(css = "table.article-table")
 	private WebElement VisualModeTable;
-	@FindBy(css="#VideoEmbedUrlSubmit")
+	@FindBy(css = "#VideoEmbedUrlSubmit")
 	private WebElement videoSubmitButton;
-	@FindBy(css=".VideoEmbedNoBorder input[type='submit']")
+	@FindBy(css = ".VideoEmbedNoBorder input[type='submit']")
 	private WebElement addVideoButton;
-	@FindBy(css="input[value='Return to editing']")
+	@FindBy(css = "input[value='Return to editing']")
 	private WebElement returnToEditingButton;
-	@FindBy (css = "#wpSave")
+	@FindBy(css = "#wpSave")
 	private WebElement publishButton;
-	@FindBy(css="input[id='ImageUploadLayoutLeft']")
+	@FindBy(css = "input[id='ImageUploadLayoutLeft']")
 	private WebElement imageLeftAlignmentOption;
-	@FindBy(css="input[id='ImageUploadLayoutRight']")
+	@FindBy(css = "input[id='ImageUploadLayoutRight']")
 	private WebElement imageRightAlignmentOption;
-	@FindBy(css="input[name='search'][placeholder='Search photos on this wiki']")
+	@FindBy(css = "input[name='search'][placeholder='Search photos on this wiki']")
 	private WebElement searchFieldImageInLightBox;
-	@FindBy(css="img.sprite.search")
+	@FindBy(css = "img.sprite.search")
 	private WebElement searchButtonImageInLightBox;
-	@FindBy(css="button.close")
+	@FindBy(css = "button.close")
 	private WebElement imageUploadCloseButton;
-	@FindBy(css="div#ImageUploadBody")
+	@FindBy(css = "div#ImageUploadBody")
 	private WebElement imageUploadBodyModal;
-	@FindBy(css="input#ImageQuery")
+	@FindBy(css = "input#ImageQuery")
 	private WebElement findInputField;
-	@FindBy(css="input[value='Find']")
+	@FindBy(css = "input[value='Find']")
 	private WebElement findButton;
-	@FindBy(css="input[value='Add photo']")
+	@FindBy(css = "input[value='Add photo']")
 	private WebElement finalAddPhotoButton;
-	@FindBy(css="div#ImageUploadHeadline")
+	@FindBy(css = "div#ImageUploadHeadline")
 	private WebElement ImageUploadHeadline;
 	@FindBy(css = "div.details input")
 	private WebElement addPhotoButton;
@@ -123,27 +123,27 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement videoDialog;
 	@FindBy(css = "input[value='Return to editing']")
 	private WebElement videoReturnToEditing;
-	@FindBy(css="input[id='VideoEmbedCaption']")
+	@FindBy(css = "input[id='VideoEmbedCaption']")
 	private WebElement videoCaptionTextArea;
 	@FindBy(css = "div.input-group.VideoEmbedNoBorder input")
 	private WebElement videoAddVideoButton;
-	@FindBy(css="img.alignLeft")
+	@FindBy(css = "img.alignLeft")
 	private WebElement leftAlignedVideoOnEditor;
-	@FindBy(css="img.alignRight")
+	@FindBy(css = "img.alignRight")
 	private WebElement rightAlignedVideoOnEditor;
-	@FindBy(css="img.alignCenter")
+	@FindBy(css = "img.alignCenter")
 	private WebElement centerAlignedVideoOnEditor;
-	@FindBy(css="figure.tleft")
+	@FindBy(css = "figure.tleft")
 	private WebElement leftAlignedVideoOnPreview;
-	@FindBy(css="figure.tright")
+	@FindBy(css = "figure.tright")
 	private WebElement rightAlignedVideoOnPreview;
-	@FindBy(css="button.close.wikia-chiclet-button")
+	@FindBy(css = "button.close.wikia-chiclet-button")
 	private WebElement closePreviewModal;
-	@FindBy(css="figure.tnone")
+	@FindBy(css = "figure.tnone")
 	private WebElement centerAlignedVideoOnPreview;
-	@FindBy(css="img[width='250']")
+	@FindBy(css = "img[width='250']")
 	private WebElement videoWidthEditor;
-	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
+	@FindBy(css = "img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
 	@FindBy(css = "span[id=cke_22_label]")
 	private WebElement sourceButton;
@@ -402,27 +402,20 @@ public class WikiArticleEditMode extends WikiEditMode {
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		String builder = "";
-		for (int i = 0; i<videos.size(); i++)
-		{
-			builder+=videos.get(i);
-			builder+="\n";
+		for (int i = 0; i < videos.size(); i++) {
+			builder += videos.get(i);
+			builder += "\n";
 		}
 		CommonUtils.setClipboardContents(builder);
 		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 
-		PageObjectLogging.log("deleteUnwantedVideoFromMessage",
-				"Delete all source code on the article", true, driver);
+		PageObjectLogging.log("deleteUnwantedVideoFromMessage", "Delete all source code on the article", true, driver);
 	}
 
 	public void typeContentInSourceMode(String content){
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log(
-				"typeInContent",
-				"content type into source mode textarea",
-				true,
-				driver
-		);
+		PageObjectLogging.log("typeInContent", "content type into source mode textarea", true, driver);
 	}
 
 	public void typeInTemplateContent(String content) {
