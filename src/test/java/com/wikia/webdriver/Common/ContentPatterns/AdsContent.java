@@ -13,7 +13,7 @@ public class AdsContent {
 
 	//SCRIPTS
 	public static final String adsPushSlotScript =
-		"window.adslots2.push([\"%slot%\",null,\"AdEngine2\"]);";
+		"window.adslots2.push([\"%slot%\"]);";
 	public static final String adDriverForcedStatusSuccessScript =
 		"top.window.adDriver2ForcedStatus['%s']='success';";
 
