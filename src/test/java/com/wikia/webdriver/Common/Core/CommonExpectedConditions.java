@@ -24,7 +24,7 @@ import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
 
 public class CommonExpectedConditions {
 
-	private final static Logger log = Logger.getLogger(ExpectedConditions.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(ExpectedConditions.class.getName());
 
 	private static WebDriver driver = DriverProvider.getWebDriver();
 
@@ -240,7 +240,7 @@ public class CommonExpectedConditions {
 		} catch (NoSuchElementException e) {
 			throw e;
 		} catch (WebDriverException e) {
-			log.log(Level.WARNING,
+			LOGGER.log(Level.WARNING,
 					String.format("WebDriverException thrown by findElement(%s)", by), e);
 			throw e;
 		}
