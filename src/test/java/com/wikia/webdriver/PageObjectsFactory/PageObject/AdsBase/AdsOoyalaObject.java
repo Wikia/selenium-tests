@@ -15,26 +15,11 @@ import java.util.concurrent.TimeUnit;
  * @ownership AdEngineering
  */
 public class AdsOoyalaObject extends AdsBaseObject {
-	private static final String THUMBNAIL_DURATION_SELECTOR = ".WikiaArticle .duration";
-	@FindBy(css=".WikiaArticle img.thumbimage")
-	private WebElement thumbnail;
-	@FindBy(css=".WikiaArticle .play-circle")
-	private WebElement thumbnailPlayCircle;
 	@FindBy(css="object[data^='http://player.ooyala.com/player.swf']")
 	private WebElement lightbox;
 
 	public AdsOoyalaObject(WebDriver driver, String page) {
 		super(driver, page);
-	}
-
-	public void verifyVideoThumbnail(Color thumbnailColor) {
-		scrollToElement(thumbnail);
-		hideElement(THUMBNAIL_DURATION_SELECTOR);
-		verifyColorAd(thumbnail, thumbnailColor);
-	}
-
-	public void openLightbox() {
-		thumbnailPlayCircle.click();
 	}
 
 	public void verifyLightboxAd(Color lightboxAdColor, int adDurationSec) {
@@ -47,11 +32,6 @@ public class AdsOoyalaObject extends AdsBaseObject {
 		verifyColorAd(lightbox, lightboxVideoColor, videoDurationSec);
 		PageObjectLogging.log("LightboxVideo",
 			"Lightbox had " + lightboxVideoColor + " during " + videoDurationSec + " seconds", true);
-	}
-
-	private void verifyColorAd(WebElement element, Color color) {
-		AdsComparison adsComparison = new AdsComparison();
-		adsComparison.verifyColorAd(element, color, driver);
 	}
 
 	private void verifyColorAd(WebElement element, Color color, int durationSec) {

@@ -10,21 +10,14 @@ import java.util.Arrays;
  * @author Bogna 'bognix' Knychala
  */
 public class AdsDataProvider {
-	private final static Color LIGHT_GREEN = new Color(3, 253, 5);
-	private final static Color GREEN = new Color(0, 214, 0);
-	private final static Color BLUE = new Color(3, 0, 252);
 
 	@DataProvider
 	public static final Object[][] ooyalaAds() {
 		return new Object[][] {
 			{
 				"adtest",
-				"SyntheticTests/OoyalaVideo/Simple",
-				LIGHT_GREEN,
-				BLUE,
-				30,
-				GREEN,
-				30
+				"SyntheticTests/OoyalaVideo/" +
+					"Simple?file=Synthetic_video_ad_test_(all_green_video)_320x240_(ooyala-stored_video)",
 			}
 		};
 	}
