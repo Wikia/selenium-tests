@@ -72,8 +72,7 @@ public class DriverProvider {
             		    profile.setPreference(domain + "netexport.showPreview", false);
             		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.harDirPath);
             		}   catch (IOException e) {
-            			// TODO Auto-generated catch block
-            			e.printStackTrace();
+            			System.out.println("Error while setting up event tracking. " + e.getMessage());
             		}
 				}
                 caps.setCapability(FirefoxDriver.PROFILE, profile);
