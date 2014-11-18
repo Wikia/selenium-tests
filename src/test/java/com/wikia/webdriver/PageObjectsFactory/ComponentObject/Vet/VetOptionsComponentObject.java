@@ -122,13 +122,13 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 	public void adjustPosition(PositionsVideo position){
 		waitForElementByElement(videoEmbedLayotRow);
 		switch (position){
-		case left:
+		case LEFT:
 			positionLayoutLeft.click();
 			break;
-		case center:
+		case CENTER:
 			positionLayoutCenter.click();
 			break;
-		case right:
+		case RIGHT:
 			positionLayoutRight.click();
 			break;
 		}
@@ -142,13 +142,13 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 				.getAttribute("id");
 		String desiredPositionId;
 		switch (positions){
-		case left:
+		case LEFT:
 			desiredPositionId = "VET_LayoutLeftBox";
 			break;
-		case center:
+		case CENTER:
 			desiredPositionId = "VET_LayoutCenterBox";
 			break;
-		case right:
+		case RIGHT:
 			desiredPositionId = "VET_LayoutRightBox";
 			break;
 		default:

@@ -45,7 +45,7 @@ public class CssChromeTests extends NewTestTemplate {
 	public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
 		String cssContent = specialCss.getWikiaCssContent();
 		Assertion.assertEquals(currentTimestamp, cssContent);
 	}
@@ -57,8 +57,8 @@ public class CssChromeTests extends NewTestTemplate {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.sendEditSummaryText(currentTimestamp);
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
-		specialCss.appendToUrl(URLsContent.historyAction);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+		specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
 		String editSummary = specialCss.getFirstCssRevision();
 		Assertion.assertStringContains(currentTimestamp, editSummary);
 	}
@@ -86,8 +86,8 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyMinorEditAppears();
 		specialCss.clickMinorCheckbox();
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
-		specialCss.appendToUrl(URLsContent.historyAction);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+		specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
 		specialCss.verifyRevisionMarkedAsMinor();
 	}
 

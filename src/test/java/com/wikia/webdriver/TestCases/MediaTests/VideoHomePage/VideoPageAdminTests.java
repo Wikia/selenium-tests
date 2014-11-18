@@ -24,7 +24,7 @@ public class VideoPageAdminTests extends NewTestTemplate {
 	@Test(groups = {"VideoPageAdmin_001", "Media", "VideoPageAdminTest"})
 	public void VideoPageAdmin_001_AddFeaturedVideo() {
 		base = new WikiBasePageObject(driver);
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		FeaturedVideoAdminPageObject featuredVideoAdminObject = base.openVideoPageAdminObject(wikiURL);
 

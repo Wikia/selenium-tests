@@ -31,9 +31,9 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
 	 */
 	public HashMap<String, Integer> getSlotSetup() {
 		HashMap<String, Integer> slotSetup = new HashMap<String, Integer>();
-		slotSetup.put(HubName.Video_Games.toString(), Integer.parseInt(videoGamesAmount.getAttribute("value")));
-		slotSetup.put(HubName.Entertainment.toString(), Integer.parseInt(entertainmentAmount.getAttribute("value")));
-		slotSetup.put(HubName.Lifestyle.toString(), Integer.parseInt(lifestyleAmount.getAttribute("value")));
+		slotSetup.put(HubName.VIDEO_GAMES.toString(), Integer.parseInt(videoGamesAmount.getAttribute("value")));
+		slotSetup.put(HubName.ENTERTAINMENT.toString(), Integer.parseInt(entertainmentAmount.getAttribute("value")));
+		slotSetup.put(HubName.LIFESTYLE.toString(), Integer.parseInt(lifestyleAmount.getAttribute("value")));
 		return slotSetup;
 	}
 }

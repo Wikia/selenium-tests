@@ -61,7 +61,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 		SpecialUserLoginPageObject special = base.clickLoginOnSpecialPage();
 		special.login(credentials.userName, credentials.password);
 		special.verifyUserLoggedIn(credentials.userName);
-		special.verifyURLcontains(URLsContent.specialUpload);
+		special.verifyURLcontains(URLsContent.SPECIAL_UPLOAD);
 	}
 
 	@Test(groups = {"ForcedLogin_004_notLoggedIn", "ForcedLogin"})
@@ -74,7 +74,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 		SpecialUserLoginPageObject special = new SpecialUserLoginPageObject(driver);
 		special.login(credentials.userName, credentials.password);
 		special.verifyUserLoggedIn(credentials.userName);
-		special.verifyURLcontains(URLsContent.specialWatchList);
+		special.verifyURLcontains(URLsContent.SPECIAL_WATCHLIST);
 	}
 
 	@Test(groups = {"ForcedLogin_005_addMedia", "ForcedLogin"})
@@ -86,7 +86,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 		edit.logInViaModal(credentials.userName, credentials.password);
 		edit.verifyUserLoggedIn(credentials.userName);
 		edit.verifyURLcontains(articleName);
-		edit.verifyURLcontains(URLsContent.actionEditParameter);
+		edit.verifyURLcontains(URLsContent.ACTION_EDIT);
 		PhotoAddComponentObject addPhoto = edit.clickPhotoButton();
 		addPhoto.verifyAddPhotoModal();
 

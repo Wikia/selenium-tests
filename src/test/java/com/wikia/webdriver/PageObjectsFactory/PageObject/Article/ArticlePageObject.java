@@ -419,7 +419,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideo() {
-		waitForElementByElement(videoThumbnail);
+		driver.findElement(By.cssSelector("#mw-content-text .video-thumbnail"));
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
@@ -482,13 +482,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 		).getAttribute("class");
 		String position;
 		switch(positions) {
-		case left:
+		case LEFT:
 			position = "left";
 			break;
-		case center:
+		case CENTER:
 			position = "none";
 			break;
-		case right:
+		case RIGHT:
 			position = "right";
 			break;
 		default:
@@ -639,7 +639,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public WatchPageObject unfollowArticle(String wikiURL) {
 		String url = urlBuilder.appendQueryStringToURL(wikiURL, "title=" + articleTitle.getText());
-		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
+		url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}

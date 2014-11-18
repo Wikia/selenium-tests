@@ -40,10 +40,10 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		galleryAddPhoto.search("image");
 		galleryAddPhoto.choosePhotos(4);
 		galleryAddPhoto.clickSelect();
-		galleryBuiler.adjustPosition(PositionsGallery.center);
+		galleryBuiler.adjustPosition(PositionsGallery.CENTER);
 		galleryBuiler.adjustColumns("2");
-		galleryBuiler.adjustSpacing(SpacingGallery.small);
-		galleryBuiler.adjustOrientation(Orientation.landscape);
+		galleryBuiler.adjustSpacing(SpacingGallery.SMALL);
+		galleryBuiler.adjustOrientation(Orientation.LANDSCAPE);
 		galleryBuiler.clickFinish();
 		blogEdit.verifyGallery();
 		BlogPageObject blogPage = blogEdit.submitBlog();
@@ -62,7 +62,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		slideshowAddPhoto.search("image");
 		slideshowAddPhoto.choosePhotos(4);
 		slideshowAddPhoto.clickSelect();
-		slideshowBuilder.adjustPosition(Positions.Center);
+		slideshowBuilder.adjustPosition(Positions.CENTER);
 		slideshowBuilder.clickFinish();
 		blogEdit.verifySlideshow();
 		BlogPageObject blogPage = blogEdit.submitBlog();
@@ -77,7 +77,7 @@ public class BlogFeaturesTests extends NewTestTemplate{
 		String blogPostTitle = PageContent.BLOG_POST_NAME_PREFIX + createPage.getTimeStamp();
 		VisualEditModePageObject blogEdit = createPage.populateTitleField(blogPostTitle);
 		SliderBuilderComponentObject sliderBuilder = blogEdit.clickSliderButton();
-		sliderBuilder.selectMenuPosition(MenuPositions.Vertical);
+		sliderBuilder.selectMenuPosition(MenuPositions.VERTICAL);
 		AddPhotoComponentObject sliderAddPhoto = sliderBuilder.clickAddPhoto();
 		sliderAddPhoto.search("image");
 		sliderAddPhoto.choosePhotos(4);

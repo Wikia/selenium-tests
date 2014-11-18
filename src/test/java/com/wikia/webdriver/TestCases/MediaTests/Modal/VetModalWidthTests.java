@@ -30,7 +30,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 
 	String articleTitle;
 
-	final static int width = 250;
+	final static int WIDTH = 250;
 
 	@Test(groups = {"VetModalWidth", "VetModalwidth_001", "Media"})
 	public void Vet_Modal_001_widthOnPage() {
@@ -39,19 +39,18 @@ public class VetModalWidthTests extends NewTestTemplate{
 		articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
-		vetOptions.adjustWith(width);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+		vetOptions.adjustWith(WIDTH);
 		vetOptions.submit();
-		visualEditMode.verifyVideoWidth(width);
+		visualEditMode.verifyVideoWidth(WIDTH);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
 		sourceEditMode.verifySourceModeEnabled();
-		sourceEditMode.verifyVideoWidth(width);
+		sourceEditMode.verifyVideoWidth(WIDTH);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
-		previewMode.verifyVideoWidth(width);
+		previewMode.verifyVideoWidth(WIDTH);
 		previewMode.closePreviewModal();
 		ArticlePageObject article = sourceEditMode.submitArticle();
-		article.verifyVideoWidth(width);
+		article.verifyVideoWidth(WIDTH);
 	}
 
 	@Test(groups = {"VetModalWidth", "VetModalwidth_002", "Media"}, dependsOnMethods = "Vet_Modal_001_widthOnPage")
@@ -60,7 +59,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
-		vetOptions.verifyVideoWidth(width);
+				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+		vetOptions.verifyVideoWidth(WIDTH);
 	}
 }

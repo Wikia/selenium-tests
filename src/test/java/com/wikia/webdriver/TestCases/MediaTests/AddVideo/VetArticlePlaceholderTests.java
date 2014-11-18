@@ -61,7 +61,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VideoPlaceholder);
+		VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
@@ -78,7 +78,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VideoPlaceholder);
+		VetAddVideoComponentObject vetAddingVideo = (VetAddVideoComponentObject) visualEditMode.modifyComponent(Components.VIDEO_PLACEHOLDER);
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();

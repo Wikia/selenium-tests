@@ -38,7 +38,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		ve.typeTextArea(URLsContent.externalURL);
+		ve.typeTextArea(URLsContent.EXTERNAL_URL);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		saveDialog = saveDialog.clickSaveWithRecaptcha();
 		saveDialog.verifyRecaptchaImageSrc();

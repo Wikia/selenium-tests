@@ -26,7 +26,7 @@ public class FacebookUserPageObject extends WikiBasePageObject {
 	}
 
 	public FacebookSettingsPageObject fbOpenSettings() {
-		getUrl(URLsContent.facebookSettingsPage);
+		getUrl(URLsContent.FACEBOOK_SETTINGSPAGE);
 		return new FacebookSettingsPageObject(driver);
 	}
 }

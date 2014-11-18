@@ -211,7 +211,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		FilePagePageObject filePage = base.openFilePage(wikiURL, testFullFileName);
 		filePage.verifyImageLicense(testImageLicense);
 		filePage.selectHistoryTab();
-		filePage.verifyArticleName(URLsContent.fileNameSpace + testFullFileName);
+		filePage.verifyArticleName(URLsContent.FILE_NAMESPACE + testFullFileName);
 		DeletePageObject deletePage = filePage.deleteVersion(1);
 		WikiBasePageObject base = deletePage.submitDeletion();
 		base.logOut(wikiURL);

@@ -36,9 +36,9 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	@FindBy(css = ".ve-ui-mwTemplateDialog-ready")
 	private WebElement templateDialog;
 
-	private static final By paramLabelBy = By.cssSelector(".ve-ui-mwParameterPage-label");
-	private static final By paramInputBy = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
-	private static final By templateParamsBy = By.cssSelector(".ve-ui-mwParameterPage");
+	private static final By PARAM_LABEL_BY = By.cssSelector(".ve-ui-mwParameterPage-label");
+	private static final By PARAM_INPUT_BY = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
+	private static final By TEMPLATE_PARAMS_BY = By.cssSelector(".ve-ui-mwParameterPage");
 
 	public VisualEditorEditTemplateDialog(WebDriver driver) {
 		super(driver);
@@ -70,9 +70,9 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	public void typeInParam(String paramName, String text) {
 		switchToIFrame();
-		if(checkIfElementOnPage(templateParamsBy)) {
-			WebElement targetParam = getElementByChildText(templateParams, paramLabelBy, paramName);
-			WebElement targetParamInput = targetParam.findElement(paramInputBy);
+		if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
+			WebElement targetParam = getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
+			WebElement targetParamInput = targetParam.findElement(PARAM_INPUT_BY);
 			targetParamInput.sendKeys(text);
 			waitForValueToBePresentInElementsAttributeByElement(targetParamInput, "value", text);
 		} else {
@@ -85,7 +85,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	public VisualEditorPageObject clickDone() {
 		switchToIFrame();
 		try {
-			if(checkIfElementOnPage(templateParamsBy)) {
+			if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
 				waitForElementClickableByElement(doneButton);
 				doneButton.click();
 			} else {
@@ -100,7 +100,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	public VisualEditorPageObject clickCancel() {
 		switchToIFrame();
 		try {
-			if(checkIfElementOnPage(templateParamsBy)) {
+			if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
 				waitForElementClickableByElement(cancelButton);
 				cancelButton.click();
 			} else {

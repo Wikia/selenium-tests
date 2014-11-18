@@ -42,7 +42,7 @@ public class AlmostTherePageObject extends WikiBasePageObject {
 	}
 
 	public ConfirmationPageObject enterActivationLink(String email, String password, String wikiURL) {
-		getUrl(wikiURL + URLsContent.wikiDir + getActivationLinkFromMail(email, password));
+		getUrl(wikiURL + URLsContent.WIKI_DIR + getActivationLinkFromMail(email, password));
 		PageObjectLogging.log("enterActivationLink", "activation page is displayed", true, driver);
 		return new ConfirmationPageObject(driver);
 	}

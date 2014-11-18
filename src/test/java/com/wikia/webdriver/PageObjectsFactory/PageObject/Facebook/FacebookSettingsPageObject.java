@@ -43,7 +43,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 	}
 
 	public void openApps() {
-		appendToUrl(URLsContent.facebookSettingsAppTab);
+		appendToUrl(URLsContent.FACEBOOK_SETTINGS_APP_TAB);
 		PageObjectLogging.log("openApps", "Apps tab opened", true);
 	}
 

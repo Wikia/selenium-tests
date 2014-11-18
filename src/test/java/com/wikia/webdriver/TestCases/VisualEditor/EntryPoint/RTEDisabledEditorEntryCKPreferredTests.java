@@ -36,7 +36,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_CKPreferred() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.rteDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.RTE_DISABLED_WIKI);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 	}
@@ -67,7 +67,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.testingPage);
+				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		SourceEditModePageObject src = article.openSrcModeWithRedLinks(0);
 		src.verifySourceOnlyMode();
 	}
@@ -77,7 +77,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.testingPage);
+				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		SourceEditModePageObject src = article.openSrcModeWithSectionEditButton(0);
 		src.verifySourceOnlyMode();
 	}
@@ -96,7 +96,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_006_ListNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.listPage);
+			base.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -106,7 +106,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_007_CategoryNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -116,7 +116,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_008_TemplateNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.templatePage);
+			base.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}

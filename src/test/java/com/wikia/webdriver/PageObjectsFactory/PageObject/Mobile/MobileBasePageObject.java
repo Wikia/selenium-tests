@@ -128,7 +128,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	public void verifyFBLogin() {
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		Assertion.assertStringContains(URLsContent.facebookDomain, getCurrentUrl());
+		Assertion.assertStringContains(URLsContent.FACEBOOK_DOMAIN, getCurrentUrl());
 		PageObjectLogging.log("VerifyFBLogin", "FB login window was opened", true, driver);
 	}
 
@@ -173,7 +173,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	}
 
 	public MobileArticlePageObject openCommentsWithPagination(String wikiURL) {
-		getUrl(wikiURL + URLsContent.articleComments);
+		getUrl(wikiURL + URLsContent.ARTICLE_COMMENTS);
 		return new MobileArticlePageObject(driver);
 	}
 
@@ -276,7 +276,7 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	public void logOutMobile(String wikiURL) {
 		try {
 			driver.manage().deleteAllCookies();
-			driver.get(wikiURL + URLsContent.logout);
+			driver.get(wikiURL + URLsContent.LOGOUT);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("logOut",
 					"page loads for more than 30 seconds", true);
@@ -293,8 +293,8 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	public MobileEditModePageObject openNewArticleEditMode(String wikiURL) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
-				wikiURL + URLsContent.wikiDir +	getNameForArticle(),
-				URLsContent.actionEditParameter
+				wikiURL + URLsContent.WIKI_DIR +	getNameForArticle(),
+				URLsContent.ACTION_EDIT
 			)
 		);
 		PageObjectLogging.log(

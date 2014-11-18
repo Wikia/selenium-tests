@@ -89,7 +89,7 @@ public class VisualEditModePageObject extends EditMode {
 	private String categoryRemovedSelector = "li.category[data-name='%categoryName%']";
 
 	public enum Components {
-		Photo, Gallery, Slideshow, Slider, Video, VideoPlaceholder
+		PHOTO, GALLERY, SLIDESHOW, SLIDER, VIDEO, VIDEO_PLACEHOLDER
 	}
 
 	public VisualEditModePageObject(WebDriver driver) {
@@ -162,13 +162,13 @@ public class VisualEditModePageObject extends EditMode {
 		String positionClass = video.getAttribute("class");
 		driver.switchTo().defaultContent();
 		switch (position) {
-			case left:
+			case LEFT:
 				Assertion.assertStringContains("alignLeft", positionClass);
 				break;
-			case center:
+			case CENTER:
 				Assertion.assertStringContains("alignCenter", positionClass);
 				break;
-			case right:
+			case RIGHT:
 				Assertion.assertStringContains("alignRight", positionClass);
 				break;
 		}
@@ -187,34 +187,34 @@ public class VisualEditModePageObject extends EditMode {
 	}
 
 	public void verifyVideoCaption(String captionDesired) {
-		mouseOverComponent(Components.Video);
+		mouseOverComponent(Components.VIDEO);
 		Assertion.assertEquals(captionDesired, caption.getText());
 	}
 
 	private void mouseOverComponent (Components component) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		switch (component) {
-		case Gallery:
+		case GALLERY:
 			verifyComponent(gallery);
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery').mouseenter()");
 			break;
-		case Slideshow:
+		case SLIDESHOW:
 			verifyComponent(slideshow);
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-slideshow').mouseenter()");
 			break;
-		case Slider:
+		case SLIDER:
 			verifyComponent(slider);
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery-slider').mouseenter()");
 			break;
-		case Video:
+		case VIDEO:
 			verifyComponent(video);
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.video').mouseenter()");
 			break;
-		case Photo:
+		case PHOTO:
 			verifyComponent(image);
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image').mouseenter()");
 			break;
-		case VideoPlaceholder:
+		case VIDEO_PLACEHOLDER:
 			verifyComponent(videoPlaceholder);
 			js.executeScript("$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
 			break;
@@ -229,17 +229,17 @@ public class VisualEditModePageObject extends EditMode {
 		modifyComponentButton.click();
 		PageObjectLogging.log("modifyGallery", "Click on 'modify button' on gallery", true, driver);
 		switch (component) {
-		case Gallery:
+		case GALLERY:
 			return new GalleryBuilderComponentObject(driver);
-		case Photo:
+		case PHOTO:
 			return new PhotoAddComponentObject(driver);
-		case Slider:
+		case SLIDER:
 			return new SliderBuilderComponentObject(driver);
-		case Slideshow:
+		case SLIDESHOW:
 			return new SlideshowBuilderComponentObject(driver);
-		case Video:
+		case VIDEO:
 			return new VetOptionsComponentObject(driver);
-		case VideoPlaceholder:
+		case VIDEO_PLACEHOLDER:
 			return new VetAddVideoComponentObject(driver);
 		default:
 			return null;
@@ -256,19 +256,19 @@ public class VisualEditModePageObject extends EditMode {
 	public void verifyComponentRemoved(Components component) {
 		driver.switchTo().frame(iframe);
 		switch (component) {
-		case Photo:
+		case PHOTO:
 			waitForElementNotPresent(imageBy);
 			break;
-		case Gallery:
+		case GALLERY:
 			waitForElementNotPresent(galleryBy);
 			break;
-		case Slideshow:
+		case SLIDESHOW:
 			waitForElementNotPresent(slideshowBy);
 			break;
-		case Slider:
+		case SLIDER:
 			waitForElementNotPresent(sliderBy);
 			break;
-		case Video:
+		case VIDEO:
 			waitForElementNotPresent(videoBy);
 			break;
 		default:
@@ -340,7 +340,7 @@ public class VisualEditModePageObject extends EditMode {
 				Thread.sleep(500);
 				timeout += 500;
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				PageObjectLogging.log("triggerCategorySuggestions", "Interrupted Exception occurred", false);
 			}
 			pressDownArrow(categoryInput);
 			returned = (String) js.executeScript("return $('ul.ui-autocomplete li').text()");
