@@ -3,7 +3,7 @@ package com.wikia.webdriver.Common.ContentPatterns;
 public class WikiTextContent {
 
 	public static final String HEADING_PREFIX = "== ";
-	public static final String headingPostfix = " ==";
+	public static final String HEADING_POSTFIX = " ==";
 	public static final String SUBHEADING1_PREFIX = "=== ";
 	public static final String SUBHEADING1_POSTIX = " ===";
 	public static final String SUBHEADING2_PREFIX = "==== ";
@@ -35,7 +35,7 @@ public class WikiTextContent {
 	public static final String TEXT = PageContent.ARTICLE_TEXT;
 
 	public static final String PARAGRAPH_TEXT = TEXT;
-	public static final String HEADING_TEXT = HEADING_PREFIX + TEXT + headingPostfix;
+	public static final String HEADING_TEXT = HEADING_PREFIX + TEXT + HEADING_POSTFIX;
 	public static final String SUBHEADING1_TEXT = SUBHEADING1_PREFIX + TEXT + SUBHEADING1_POSTIX;
 	public static final String SUBHEADING2_TEXT = SUBHEADING2_PREFIX + TEXT + SUBHEADING2_POSTIX;
 	public static final String SUBHEADING3_TEXT = SUBHEADING3_PREFIX + TEXT + SUBHEADING3_POSTIX;
