@@ -67,7 +67,7 @@ public class ShareToolbarComponentObject extends BasePageObject {
 	}
 
 	public void verifyTwitterModalURL() {
-		Assertion.assertStringContains(URLsContent.twitterDomain, getCurrentUrl());
+		Assertion.assertStringContains(URLsContent.TWITTER_DOMAIN, getCurrentUrl());
 		PageObjectLogging.log("verifyTwitterModalURL", "Verify that the Twitter Modal URL is correct", true);
 	}
 
@@ -83,7 +83,7 @@ public class ShareToolbarComponentObject extends BasePageObject {
 		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		Assertion.assertStringContains(URLsContent.facebookDomain, getCurrentUrl());
+		Assertion.assertStringContains(URLsContent.FACEBOOK_DOMAIN, getCurrentUrl());
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyFBModalURL", "Verify that the FB Modal URL is correct", true);
 	}

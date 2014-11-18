@@ -48,17 +48,17 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.adjustPosition(PositionsVideo.left);
+		vetOptions.adjustPosition(PositionsVideo.LEFT);
 		vetOptions.submit();
-		visualEditMode.verifyVideoPosition(PositionsVideo.left);
+		visualEditMode.verifyVideoPosition(PositionsVideo.LEFT);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
 		sourceEditMode.verifySourceModeEnabled();
-		sourceEditMode.verifyVideoAlignment(PositionsVideo.left);
+		sourceEditMode.verifyVideoAlignment(PositionsVideo.LEFT);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
-		previewMode.verifyVideoAlignment(PositionsVideo.left);
+		previewMode.verifyVideoAlignment(PositionsVideo.LEFT);
 		previewMode.closePreviewModal();
 		ArticlePageObject article = sourceEditMode.submitArticle();
-		article.verifyVideoAlignment(PositionsVideo.left);
+		article.verifyVideoAlignment(PositionsVideo.LEFT);
 	}
 
 	@Test(groups = {"VetModalAlignment", "VetModalAlignment_002", "Media"}, dependsOnMethods="Vet_Modal_001_leftOnPage")
@@ -67,8 +67,8 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle1);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
-		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.left);
+				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.LEFT);
 	}
 
 	@Test(groups = {"VetModalAlignment", "VetModalAlignment_003", "Media"})
@@ -80,17 +80,17 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.adjustPosition(PositionsVideo.center);
+		vetOptions.adjustPosition(PositionsVideo.CENTER);
 		vetOptions.submit();
-		visualEditMode.verifyVideoPosition(PositionsVideo.center);
+		visualEditMode.verifyVideoPosition(PositionsVideo.CENTER);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
 		sourceEditMode.verifySourceModeEnabled();
-		sourceEditMode.verifyVideoAlignment(PositionsVideo.center);
+		sourceEditMode.verifyVideoAlignment(PositionsVideo.CENTER);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
-		previewMode.verifyVideoAlignment(PositionsVideo.center);
+		previewMode.verifyVideoAlignment(PositionsVideo.CENTER);
 		previewMode.closePreviewModal();
 		ArticlePageObject article = sourceEditMode.submitArticle();
-		article.verifyVideoAlignment(PositionsVideo.center);
+		article.verifyVideoAlignment(PositionsVideo.CENTER);
 	}
 
 	@Test(groups = {"VetModalAlignment", "VetModalAlignment_004", "Media"}, dependsOnMethods = "Vet_Modal_003_centerOnPage")
@@ -99,8 +99,8 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle2);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
-		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.center);
+				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.CENTER);
 	}
 
 	@Test(groups = {"VetModalAlignment", "VetModalAlignment_005", "Media"})
@@ -112,17 +112,17 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
 				.addVideoByUrl(VideoContent.youtubeVideoURL);
-		vetOptions.adjustPosition(PositionsVideo.right);
+		vetOptions.adjustPosition(PositionsVideo.RIGHT);
 		vetOptions.submit();
-		visualEditMode.verifyVideoPosition(PositionsVideo.right);
+		visualEditMode.verifyVideoPosition(PositionsVideo.RIGHT);
 		SourceEditModePageObject sourceEditMode = visualEditMode.clickSourceButton();
 		sourceEditMode.verifySourceModeEnabled();
-		sourceEditMode.verifyVideoAlignment(PositionsVideo.right);
+		sourceEditMode.verifyVideoAlignment(PositionsVideo.RIGHT);
 		PreviewEditModePageObject previewMode = sourceEditMode.previewArticle();
-		previewMode.verifyVideoAlignment(PositionsVideo.right);
+		previewMode.verifyVideoAlignment(PositionsVideo.RIGHT);
 		previewMode.closePreviewModal();
 		ArticlePageObject article = sourceEditMode.submitArticle();
-		article.verifyVideoAlignment(PositionsVideo.right);
+		article.verifyVideoAlignment(PositionsVideo.RIGHT);
 	}
 
 	@Test(groups = {"VetModalAlignment", "VetModalAlignment_006", "Media"}, dependsOnMethods = "Vet_Modal_005_rightOnPage")
@@ -131,7 +131,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle3);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
-		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.right);
+				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.RIGHT);
 	}
 }

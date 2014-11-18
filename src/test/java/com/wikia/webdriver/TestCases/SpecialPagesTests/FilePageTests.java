@@ -27,7 +27,7 @@ public class FilePageTests extends NewTestTemplate {
 	@Test(groups = {"FilePage", "filePage001_tabs", "Media"})
 	public void filePage001_tabs() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
-		filePage.openFilePage(wikiURL, URLsContent.fileName001);
+		filePage.openFilePage(wikiURL, URLsContent.FILENAME_001);
 
 		filePage.verifySelectedTab("about");
 
@@ -52,7 +52,7 @@ public class FilePageTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 
-		FilePagePageObject filePage = base.openFilePage(wikiURL, URLsContent.fileName001);
+		FilePagePageObject filePage = base.openFilePage(wikiURL, URLsContent.FILENAME_001);
 
 		filePage.refreshAndVerifyTabs(0);
 		filePage.refreshAndVerifyTabs(1);
@@ -69,7 +69,7 @@ public class FilePageTests extends NewTestTemplate {
 	public void filePage003_diffPage() {
 
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		HistoryPagePageObject historyPage = base.openFileHistoryPage(URLsContent.fileName001, wikiURL);
+		HistoryPagePageObject historyPage = base.openFileHistoryPage(URLsContent.FILENAME_001, wikiURL);
 
 		DiffPagePageObject diffPage = historyPage.goToDiffPageFromHistoryPage();
 		diffPage.verifyDiffTablePresent();

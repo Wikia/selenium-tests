@@ -94,7 +94,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 
 	public void remindPassword(String name, String apiToken){
 		Assertion.assertEquals(
-			ApiActions.apiActionForgotPasswordResponse,
+			ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
 			resetForgotPasswordTime(name, apiToken));
 		typeInUserName(name);
 		clickForgotPasswordLink();

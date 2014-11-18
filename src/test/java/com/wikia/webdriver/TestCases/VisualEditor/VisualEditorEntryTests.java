@@ -114,7 +114,7 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.veEnabledTestMainPage);
+			base.openArticleByName(wikiURL, URLsContent.VE_ENABLED_WIKI);
 		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();

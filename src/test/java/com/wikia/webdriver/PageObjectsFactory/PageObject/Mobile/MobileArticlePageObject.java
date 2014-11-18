@@ -187,7 +187,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public MobileArticlePageObject openSections(String wikiURL) {
-		getUrl(wikiURL + URLsContent.articleSections);
+		getUrl(wikiURL + URLsContent.ARTICLE_SECTIONS);
 		PageObjectLogging.log("openSections", "sections page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
@@ -199,7 +199,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public MobileArticlePageObject openTopbarPage(String wikiURL) {
-		getUrl(wikiURL + URLsContent.articleTopbar);
+		getUrl(wikiURL + URLsContent.ARTICLE_TOPBAR);
 		waitForElementByElement(wikiHeader);
 		PageObjectLogging.log("openTopbarPage", "Topbar page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
@@ -237,7 +237,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public MobileArticlePageObject openModals(String wikiURL) {
-		getUrl(wikiURL + URLsContent.articleModal);
+		getUrl(wikiURL + URLsContent.ARTICLE_MODAL);
 		waitForElementByElement(modalWrapper);
 		PageObjectLogging.log("openModals", "modals page was opened", true, driver);
 		return new MobileArticlePageObject(driver);
@@ -322,7 +322,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	public void verifyMainPageOpened(String wikiURL) {
 		waitForValueToBePresentInElementsAttributeByElement(wikiHeader, "innerText", mainPageTitle);
-		Assertion.assertEquals(wikiURL + URLsContent.mobileTestMainPage, getCurrentUrl(), "URLs are not equals");
+		Assertion.assertEquals(wikiURL + URLsContent.MOBILETEST_MAINPAGE, getCurrentUrl(), "URLs are not equals");
 	}
 
 	public void openMenu() {
@@ -364,7 +364,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				driver.getCurrentUrl(),
-				URLsContent.historyAction
+				URLsContent.ACTION_HISTORY
 			)
 		);
 		return new MobileHistoryPageObject(driver);

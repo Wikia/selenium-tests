@@ -65,7 +65,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle_caption);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.Video);
+				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
 		vetOptions.verifyCaption(caption);
 	}
 

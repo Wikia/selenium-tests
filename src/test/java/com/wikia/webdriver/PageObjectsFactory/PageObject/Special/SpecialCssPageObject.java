@@ -84,7 +84,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			clearCssText();
 			sendCssText(randomText);
 			clickPublishButton();
-			verifyUrl(URLsContent.specialCSS);
+			verifyUrl(URLsContent.SPECIAL_CSS);
 			verifySaveComplete();
 		}
 
@@ -189,7 +189,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void confirmDelete() {
-			clickArticleDeleteConfirmationButton(URLsContent.mediaWikiCss);
+			clickArticleDeleteConfirmationButton(URLsContent.MEDIAWIKI_CSS);
 		}
 
 		public void verifyArticleIsRemoved() {
@@ -220,7 +220,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private void clickUndeleteButton() {
 			undeleteButton.click();
 			try {
-				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.mediaWikiCss, "UTF-8"));
+				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.MEDIAWIKI_CSS, "UTF-8"));
 			} catch (UnsupportedEncodingException e) {
 				// this should never happen
 				PageObjectLogging.log("undeleteButton", "dont work", true);

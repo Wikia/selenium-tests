@@ -130,7 +130,7 @@ public class WamPageObject extends BasePageObject {
 	 * @desc Opens "WAM Scores" page in example: www.wikia.com/WAM
 	 */
 	public void openWamPage(String wikiCorporateURL) {
-		getUrl(wikiCorporateURL + URLsContent.wamPageUrl);
+		getUrl(wikiCorporateURL + URLsContent.WAM_PAGE);
 		PageObjectLogging.log("openWamPage", "WAM page opened", true);
 	}
 

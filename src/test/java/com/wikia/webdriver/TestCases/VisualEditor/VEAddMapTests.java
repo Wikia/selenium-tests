@@ -42,7 +42,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
 		base = new WikiBasePageObject(driver);
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 	}
 
@@ -66,7 +66,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		groups = {"VEAddMap", "VEAddMapTests_002", "VEEmptyMap", "VEAddMapTests_003"}
 	)
 	public void VEAddMapTests_002_CheckEmptyMapWiki() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMapDialog mapDialog =
@@ -79,7 +79,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VEAddMapTests_002"
 	)
 	public void VEAddMapTests_003_InsertMapFromZeroState() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMapDialog mapDialog =
