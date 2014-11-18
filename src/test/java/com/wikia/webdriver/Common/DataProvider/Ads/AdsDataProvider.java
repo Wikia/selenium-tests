@@ -246,7 +246,6 @@ public class AdsDataProvider {
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
 					"\"lang\":\"en\"",
-					"\"pageid\":\"_adtest/2218\"",
 					"\"hasp\":\"no\"",
 					"\"esrb\":\"teen\""
 				),
