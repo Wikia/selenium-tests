@@ -26,7 +26,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "categoryEntryPoints"
 	)
-	public void VisualEditorEntryTest_001_Category(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_001_Category(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -39,7 +41,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "createAPageEntryPoints"
 	)
-	public void VisualEditorEntryTest_002_CreateAPage(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_002_CreateAPage(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		String articleName = PageContent.articleNamePrefix + article.getTimeStamp();
@@ -53,7 +57,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "listEntryPoints"
 	)
-	public void VisualEditorEntryTest_003_List(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_003_List(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -66,7 +72,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "mainEditEntryPoints"
 	)
-	public void VisualEditorEntryTest_004_Article(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_004_Article(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -79,12 +87,16 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "redLinkEntryPoints"
 	)
-	public void VisualEditorEntryTest_005_redLink(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_005_redLink(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
+		start();
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
 		article.openArticleByName(wikiURL, URLsContent.testingPage);
 		article.verifyRedLinkEditor(expectedEditor);
+		stop();
 	}
 
 	@Test(
@@ -92,12 +104,16 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "sectionEditEntryPoints"
 	)
-	public void VisualEditorEntryTest_006_sectionEdit(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_006_sectionEdit(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
+		start();
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
 		article.openArticleByName(wikiURL, URLsContent.testingPage);
 		article.verifySectionEditEditor(expectedEditor);
+		stop();
 	}
 
 	@Test(
@@ -105,7 +121,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "templateEntryPoints"
 	)
-	public void VisualEditorEntryTest_007_template(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_007_template(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -118,7 +136,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "urlActionEditEntryPoints"
 	)
-	public void VisualEditorEntryTest_008_urlActionEdit(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_008_urlActionEdit(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
@@ -130,7 +150,9 @@ public class VisualEditorEntryTests extends NewTestTemplateBeforeClass {
 		dataProviderClass = VisualEditorDataProvider.class,
 		dataProvider = "urlVEActionEditEntryPoints"
 	)
-	public void VisualEditorEntryTest_009_urlVEActionEdit(boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor ) {
+	public void VisualEditorEntryTest_009_urlVEActionEdit(
+			boolean isRTEext, boolean isVEext, EditorPref editorPref, Editor expectedEditor
+	) {
 		wikiURL = urlBuilder.getUrlForWiki(VisualEditorDataProvider.getTestWiki(isRTEext, isVEext));
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.getUserBaseOnEditorPref(editorPref), credentials.getPassBaseOnEditorPref(editorPref), wikiURL);
