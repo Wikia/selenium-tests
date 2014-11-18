@@ -240,40 +240,42 @@ public class VisualEditorDataProvider {
 	}
 
 	/**
-	 * Data provider with article red link / section edit entry point for CK preferred user
+	 * Data provider with article red link edit entry point
 	 */
 	@DataProvider
-	public static final Object[][] linkEntryPoints_ckPref() {
+	public static final Object[][] redLinkEntryPoints() {
+		return new Object[][] {
+			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
+			{false, true, EditorPref.CK, Editor.SRC},
+			{false, true, EditorPref.SRC, Editor.SRC},
+			{false, true, EditorPref.VE, Editor.VE},
+			{false, false, EditorPref.CK, Editor.SRC},
+			{false, false, EditorPref.SRC, Editor.SRC},
+			{false, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.VE, Editor.VE},
+			{true, false, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.CK, Editor.CK},
+			{true, true, EditorPref.SRC, Editor.SRC},
+			{true, true, EditorPref.VE, Editor.VE},
+		};
+	}
+
+	/**
+	 * Data provider with article section edit entry point
+	 */
+	@DataProvider
+	public static final Object[][] sectionEditEntryPoints() {
 		return new Object[][] {
 			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
 			{false, true, EditorPref.CK, Editor.SRC},
 			{false, false, EditorPref.CK, Editor.SRC},
 			{true, false, EditorPref.CK, Editor.CK},
 			{true, true, EditorPref.CK, Editor.CK},
-		};
-	}
-
-	/**
-	 * Data provider with article red link / section  edit entry point for source preferred user
-	 */
-	@DataProvider
-	public static final Object[][] linkEntryPoints_srcPref() {
-		return new Object[][] {
-			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
 			{false, true, EditorPref.SRC, Editor.SRC},
-			{true, false, EditorPref.SRC, Editor.SRC},
 			{false, false, EditorPref.SRC, Editor.SRC},
+			{true, false, EditorPref.SRC, Editor.SRC},
 			{true, true, EditorPref.SRC, Editor.SRC},
-		};
-	}
-
-	/**
-	 * Data provider with article red link / section  edit entry point for VE preferred user
-	 */
-	@DataProvider
-	public static final Object[][] linkEntryPoints_vePref() {
-		return new Object[][] {
-			//wgEnableRTEExt, wgVisualEditorExt, user editor preference, expected editor
 			{false, true, EditorPref.VE, Editor.VE},
 			{false, false, EditorPref.VE, Editor.VE},
 			{true, false, EditorPref.VE, Editor.VE},
@@ -317,7 +319,7 @@ public class VisualEditorDataProvider {
 			{false, false, EditorPref.SRC, Editor.SRC},
 			{false, false, EditorPref.VE, Editor.SRC},
 			{true, false, EditorPref.SRC, Editor.SRC},
-			{true, false, EditorPref.VE, Editor.CK},
+			{true, false, EditorPref.VE, Editor.SRC},
 			{true, false, EditorPref.CK, Editor.CK},
 			{true, true, EditorPref.CK, Editor.CK},
 			{true, true, EditorPref.SRC, Editor.SRC},
