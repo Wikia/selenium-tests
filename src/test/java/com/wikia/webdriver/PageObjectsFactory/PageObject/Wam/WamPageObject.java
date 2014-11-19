@@ -26,19 +26,9 @@ public class WamPageObject extends BasePageObject {
 
 	private final int FIRST_WAM_TAB_INDEX = 0;
 	public final int DEFAULT_WAM_INDEX_ROWS = 21;
-	private final int VERTICAL_COLUMN_INDEX = 5;
 
 	@FindBy(id = "verticalId")
 	private WebElement wamVerticalFilterSelect;
-
-	@FindBy(id = "WamFilterDate")
-	private WebElement wamDateInput;
-
-	@FindBy(id = "langCode")
-	private WebElement wamLanguageFilterSelect;
-
-	@FindBy(css = ".wam-index-search .searching input[name=searchPhrase]")
-	private WebElement wamSearchPhrase;
 
 	@FindBy(css = ".wam-tabs")
 	private List<WebElement> wamTabs;
@@ -54,9 +44,6 @@ public class WamPageObject extends BasePageObject {
 
 	@FindBy(css = "div.wam-index tr td:nth-child(1)")
 	private List<WebElement> indexList;
-
-	@FindBy(css = "div.wikia-paginator ul li a.paginator-page")
-	private List<WebElement> paginationPageNo;
 
 	@FindBy(css = "a.selected")
 	private WebElement tabSelected;
@@ -78,9 +65,6 @@ public class WamPageObject extends BasePageObject {
 
 	@FindBy(css = ".ui-datepicker-month")
 	private WebElement monthInCalendar;
-
-	@FindBy(css = "#wam-index-search button.secondary")
-	private WebElement searchSubmitButton;
 
 	By wamIndexTable = By.cssSelector("#wam-index table");
 

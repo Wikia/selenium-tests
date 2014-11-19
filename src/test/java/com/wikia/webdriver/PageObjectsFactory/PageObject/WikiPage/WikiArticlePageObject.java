@@ -19,8 +19,6 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	@FindBy(css="div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
-	@FindBy(css="#mw-content-text img.thumbimage")
-	private WebElement thumbnailImageArticle;
 	@FindBy(css = "a[data-canonical='random']")
 	private WebElement randomPageButton;
 	@FindBy(css = ".sprite.search")

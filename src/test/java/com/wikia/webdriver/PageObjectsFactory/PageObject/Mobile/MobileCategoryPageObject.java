@@ -26,10 +26,6 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	private List<WebElement> chevronList;
 	@FindBys(@FindBy(css = ".wkExhItm"))
 	private List<WebElement> categoryExhibition;
-	@FindBys(@FindBy(css = ".artSec .wkLst"))
-	private List<WebElement> articlesList;
-	@FindBys(@FindBy(css = ".artSec.open .wkLst>li>a"))
-	private List<WebElement> articleListWithPagination;
 
 	String articlesListSelector = "#%articlesFirstLetter% .wkLst li";
 	String loadMoreButtonSelector = "#%articlesFirstLetter% .pagMore.visible";

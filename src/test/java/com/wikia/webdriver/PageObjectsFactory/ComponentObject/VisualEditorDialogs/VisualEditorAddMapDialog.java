@@ -15,8 +15,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-window-body")
-	private WebElement mapDialogBody;
 	@FindBy(css=".ve-ui-wikiaMapInsertDialog-results-headline a .oo-ui-labeledElement-label")
 	private WebElement createAMapButton;
 	@FindBy(css=".oo-ui-window-body")
@@ -25,8 +23,6 @@ public class VisualEditorAddMapDialog extends VisualEditorDialog {
 	private WebElement emptyStateDialogHeadline;
 	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-text")
 	private WebElement emptyStateDialogText;
-	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-text a")
-	private WebElement emptyStateLearnMoreLink;
 	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-button .oo-ui-labeledElement-label")
 	private WebElement emptyStateCreateAMapButton;
 

@@ -10,7 +10,7 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoC
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
 /**
- * 
+ *
  * @author Karol 'kkarolk' Kujawiak
  *
  */
@@ -20,42 +20,38 @@ public class SlideshowBuilderComponentObject extends BasePageObject{
 	private WebElement addPhotoButton;
 	@FindBy(css="#WikiaPhotoGalleryEditorSlideshowAlign")
 	private WebElement slideshowPosition;
-	@FindBy(css="")
-	private WebElement smartCropping;//TODO
-	@FindBy(css="")
-	private WebElement widthField;//TODO
 	@FindBy(css="#WikiaPhotoGalleryEditorSave")
 	private WebElement finishButton;
-	
+
 	public SlideshowBuilderComponentObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public void adjustWidth(int width){
 		//TODO
 	}
-	
+
 	public void useSmartCropping(){
 		//TODO
 	}
-	
+
 	public enum Positions{
 		LEFT, CENTER, RIGHT
 	}
-	
+
 	public void adjustPosition(Positions position){
 		Select pos = new Select(slideshowPosition);
 		pos.selectByVisibleText(position.toString());
 		PageObjectLogging.log("adjustPosition", "slideshow position set to "+position.toString(), true);
 	}
-	
+
 	public AddPhotoComponentObject clickAddPhoto(){
 		waitForElementByElement(addPhotoButton);
 		addPhotoButton.click();
 		return new AddPhotoComponentObject(driver);
 	}
-	
+
 	public void clickFinish(){
 		waitForElementByElement(finishButton);
 		finishButton.click();

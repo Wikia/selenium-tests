@@ -23,12 +23,8 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	private List<WebElement> outlineMenuItems;
 	@FindBy(css=".oo-ui-window-foot .oo-ui-labeledElement-label")
 	private WebElement applyChangesButton;
-	@FindBy(css=".ve-ui-mwCategoriesPage-defaultsort input")
-	private WebElement optionsInput;
 	@FindBy(css=".ve-ui-mwCategoryWidget input")
 	private WebElement categoriesInput;
-	@FindBy(css=".ve-ui-desktopContext")
-	private WebElement desktopContext;
 	@FindBy(css=".ve-ui-mwCategoryInputWidget-menu .oo-ui-optionWidget-selected")
 	private WebElement selectedResult;
 	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
@@ -45,7 +41,6 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	private List<WebElement> categorySuggestions;
 
 	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
-	private By matchingResultBy = By.cssSelector(".oo-ui-optionWidget-selected span");
 
 	private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 

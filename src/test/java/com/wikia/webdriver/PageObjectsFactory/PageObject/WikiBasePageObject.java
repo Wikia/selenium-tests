@@ -109,8 +109,6 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement body;
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
-	@FindBy(css = "article span.drop")
-	private WebElement editDropDown;
 	@FindBy(css = "input#wpConfirmB")
 	private WebElement deleteConfirmationButton;
 	@FindBy(css = ".global-notification div.msg a")
@@ -123,8 +121,6 @@ public class WikiBasePageObject extends BasePageObject {
 	private WebElement deleteCommentReasonField;
 	@FindBy(css="div.permissions-errors")
 	private WebElement premissionErrorMessage;
-	@FindBy(css="div.mw-warning-with-logexcerpt p")
-	private WebElement pageDeletedInfo;
 	@FindBy(css = ".UserLoginModal input[type='submit']")
 	protected WebElement modalLoginSubmit;
 	@FindBy(css = ".UserLoginModal input[name='password']")
@@ -436,7 +432,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public NewMessageWall openMessageWall(String userName, String wikiURL) {
-		getUrl(wikiURL + URLsContent.USERMESSAGEWALL + userName);
+		getUrl(wikiURL + URLsContent.USER_MESSAGE_WALL + userName);
 		return new NewMessageWall(driver);
 	}
 

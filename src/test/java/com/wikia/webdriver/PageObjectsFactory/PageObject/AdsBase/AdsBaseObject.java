@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,6 +19,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.Common.ContentPatterns.AdsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.NetworkTrafficInterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
@@ -404,7 +404,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private void verifyNoAds() {
-		Collection<String> slotsSelectors = AdsContent.slotsSelectors.values();
+		Collection<String> slotsSelectors = AdsContent.SLOTS_SELECTORS.values();
 		for (String selector: slotsSelectors) {
 			if (checkIfElementOnPage(selector)) {
 				WebElement element = driver.findElement(By.cssSelector(selector));

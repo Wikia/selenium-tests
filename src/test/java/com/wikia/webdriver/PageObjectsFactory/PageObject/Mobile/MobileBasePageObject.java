@@ -46,12 +46,6 @@ public class MobileBasePageObject extends WikiBasePageObject {
 	private WebElement loginButton;
 	@FindBy(css = "#ssoFbBtn")
 	private WebElement loginFbButton;
-	@FindBy(css = ".tiapl.input[type='email']")
-	private WebElement fbUserName;
-	@FindBy(css = ".tiapl.input[type='password']")
-	private WebElement fbPassword;
-	@FindBy(css = "[name='login']")
-	private WebElement fbLogin;
 	@FindBy(css = ".avatar")
 	private WebElement avatar;
 	@FindBy(css = "#wkNavTgl")

@@ -31,8 +31,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	@FindBy(css = "#map")
 	private WebElement map;
-	@FindBy(css = ".enable-edit")
-	private WebElement mapBody;
 	@FindBy(css = ".WikiaPageHeader>h1")
 	private WebElement createdMapTitle;
 	@FindBy(css = ".point-type.enabled > span")
@@ -41,10 +39,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement filterBox;
 	@FindBy(css = "iframe[name=wikia-interactive-map]")
 	private WebElement mapFrame;
-	@FindBy(css = ".error-wrapper")
-	private WebElement mapBeingProcessedModal;
-	@FindBy(css = "#refresh")
-	private WebElement refreshButton;
 	@FindBy(css = ".leaflet-draw-draw-marker")
 	private WebElement addPinButton;
 	@FindBy(css = ".leaflet-control-embed-map-code-button")
@@ -67,16 +61,12 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement embedCode;
 	@FindBy(css = "#editPointTypes")
 	private WebElement editPinTypesButton;
-	@FindBy(css = "#intMapPoiCategories")
-	private WebElement mapPoiCategoriesDialog;
 	@FindBy(css = ".leaflet-marker-icon")
 	private List<WebElement> pinCollection;
 	@FindBy(css = ".leaflet-popup-content")
 	private WebElement popUpContent;
 	@FindBy(css = ".description > h3")
 	private WebElement pinTitle;
-	@FindBy(css = "#intMapEditPOI")
-	private WebElement intMapEditPOI;
 	@FindBy(css = "#allPointTypes")
 	private WebElement allPinTypes;
 	@FindBy(css = ".point-type.enabled")
@@ -95,8 +85,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement pinEditLink;
 	@FindBy(css = ".photo")
 	private WebElement pinPopupImage;
-	@FindBy(css = ".wikia-interactive-map-wrapper")
-	private WebElement mapPane;
 	@FindBy(css = ".leaflet-tile-loaded")
 	private List<WebElement> mapImagesCollection;
 	@FindBy(css = ".filter-menu-header > span")
@@ -107,8 +95,6 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private WebElement deleteMapButton;
 	@FindBy(css = ".wikia-interactive-maps-page-header .WikiaMenuElement #undeleteMap")
 	private WebElement restoreMapButton;
-	@FindBy(css = ".msg")
-	private WebElement msgTopBar;
 	@FindBy(css = ".poi-article-link")
 	private WebElement poiArticleLink;
 	@FindBy(css = ".wikia-interactive-map h2")
@@ -236,7 +222,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("clickOnFilterBoxTitle", "Filter box title was clicked", true);
 	}
-	
+
 	public void clickOpenPinTitle() {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);

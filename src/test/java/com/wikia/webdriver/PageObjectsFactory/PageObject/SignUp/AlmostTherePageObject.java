@@ -18,8 +18,6 @@ public class AlmostTherePageObject extends WikiBasePageObject {
 
 	@FindBy(xpath="//h2[contains(text(), 'Almost there')]")
 	private WebElement almostThereText;
-	@FindBy(css="h1.wordmark a[href='/Wikia']")
-	private WebElement wikiaWordmark;
 	@FindBy(css="input.link[value='Send me another confirmation email']")
 	private WebElement sendAnotherMail;
 	@FindBy(css="a.change-email-link")

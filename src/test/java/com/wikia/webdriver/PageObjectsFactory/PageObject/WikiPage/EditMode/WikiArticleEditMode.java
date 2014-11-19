@@ -35,8 +35,6 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement slideshowButton;
 	@FindBy(css="a.RTESliderButton")
 	private WebElement sliderButton;
-	@FindBy(css="div.reset[id='ImageUpload']")
-	private WebElement imageUploadModal;
 	@FindBy(css="div.cke_skin_wikia.visible div.cke_contents iframe")
 	private WebElement visualModeIFrame;
 	@FindBy(css=".cke_source")
@@ -45,44 +43,16 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement messageSourceModeTextArea;
 	@FindBy(css="div.cke_wrapper.cke_ltr div.cke_contents iframe")
 	private WebElement iFrame;
-	@FindBy(css="header.WikiaHeader")
-	private WebElement header;
-	@FindBy(css="#wpPreview")
-	private WebElement previewButton;
 	@FindBy(css="div.neutral.modalToolbar a[id='publish']")
 	private WebElement publishButtonPreview;
 	@FindBy(css="span.cke_button_ModeSource a span.cke_label")
 	private WebElement sourceModeButton;
 	@FindBy(css="span.RTEMediaOverlayEdit")
 	private WebElement modifyButton;
-	@FindBy(css="[type='video-placeholder'] span.RTEMediaOverlayEdit")
-	private WebElement modifyButtonVideoPlaceholder;
-	@FindBy(css="span.RTEMediaOverlayDelete")
-	private WebElement removeButton;
-	@FindBy(css="div.RTEConfirmButtons a[id='RTEConfirmCancel'] span")
-	private WebElement cancelImageRemovalButton;
-	@FindBy(css="a[id='RTEConfirmOk']")
-	private WebElement oKbutton;
-	@FindBy(css="img.video")
-	private WebElement videoInEditMode;
 	@FindBy(css="span.cke_button_ModeWysiwyg a")
 	private WebElement visualModeButton;
-	@FindBy(css="section.modalWrapper.preview section.modalContent figure a img")
-	private WebElement imageOnPreview;
 	@FindBy(css="body[id='bodyContent']")
 	private WebElement bodyContent;
-	@FindBy(css="span.cke_button_table a")
-	private WebElement tableButton;
-	@FindBy(css="div.cke_dialog.modalWrapper")
-	private WebElement tableModal;
-	@FindBy(css="a.cke_dialog_ui_button.wikia-button")
-	private WebElement tableModalOKbutton;
-	@FindBy(css="table.article-table")
-	private WebElement VisualModeTable;
-	@FindBy(css="#VideoEmbedUrlSubmit")
-	private WebElement videoSubmitButton;
-	@FindBy(css=".VideoEmbedNoBorder input[type='submit']")
-	private WebElement addVideoButton;
 	@FindBy(css="input[value='Return to editing']")
 	private WebElement returnToEditingButton;
 	@FindBy (css = "#wpSave")
@@ -91,14 +61,8 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement imageLeftAlignmentOption;
 	@FindBy(css="input[id='ImageUploadLayoutRight']")
 	private WebElement imageRightAlignmentOption;
-	@FindBy(css="input[name='search'][placeholder='Search photos on this wiki']")
-	private WebElement searchFieldImageInLightBox;
-	@FindBy(css="img.sprite.search")
-	private WebElement searchButtonImageInLightBox;
 	@FindBy(css="button.close")
 	private WebElement imageUploadCloseButton;
-	@FindBy(css="div#ImageUploadBody")
-	private WebElement imageUploadBodyModal;
 	@FindBy(css="input#ImageQuery")
 	private WebElement findInputField;
 	@FindBy(css="input[value='Find']")
@@ -107,59 +71,17 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement finalAddPhotoButton;
 	@FindBy(css="div#ImageUploadHeadline")
 	private WebElement ImageUploadHeadline;
-	@FindBy(css = "div.details input")
-	private WebElement addPhotoButton;
-	@FindBy(css = "section[id='WikiaPhotoGalleryEditor']")
-	private WebElement objectModal;
-	@FindBy(css = "a[id='WikiaPhotoGallerySearchResultsSelect']")
-	private WebElement galleryDialogSelectButton;
-	@FindBy(css = "a[id='WikiaPhotoGalleryEditorSave']")
-	private WebElement galleryDialogFinishButton;
-	@FindBy(css = "input[id='VideoEmbedUrl']")
-	private WebElement videoModalInput;
-	@FindBy(css = "a[id='VideoEmbedUrlSubmit']")
-	private WebElement videoNextButton;
-	@FindBy(css = "#VideoEmbedThumb")
-	private WebElement videoDialog;
-	@FindBy(css = "input[value='Return to editing']")
-	private WebElement videoReturnToEditing;
-	@FindBy(css="input[id='VideoEmbedCaption']")
-	private WebElement videoCaptionTextArea;
-	@FindBy(css = "div.input-group.VideoEmbedNoBorder input")
-	private WebElement videoAddVideoButton;
-	@FindBy(css="img.alignLeft")
-	private WebElement leftAlignedVideoOnEditor;
-	@FindBy(css="img.alignRight")
-	private WebElement rightAlignedVideoOnEditor;
-	@FindBy(css="img.alignCenter")
-	private WebElement centerAlignedVideoOnEditor;
-	@FindBy(css="figure.tleft")
-	private WebElement leftAlignedVideoOnPreview;
-	@FindBy(css="figure.tright")
-	private WebElement rightAlignedVideoOnPreview;
-	@FindBy(css="button.close.wikia-chiclet-button")
-	private WebElement closePreviewModal;
-	@FindBy(css="figure.tnone")
-	private WebElement centerAlignedVideoOnPreview;
-	@FindBy(css="img[width='250']")
-	private WebElement videoWidthEditor;
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
 	@FindBy(css = "span[id=cke_22_label]")
 	private WebElement sourceButton;
-	@FindBy(css = "#cke_32_frame")
-	private WebElement sourceFrame;
 	@FindBy(css = "a[data-map-title]")
 	private WebElement embededMap;
 
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
-	private By videoOnArticleEditMode = By.cssSelector("img.video");
 	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
 	private String imageArticleIFrame = "img";
-	private String videoArticleIFrame = "img.video";
-	private String previewButtonSelector = "#wpPreview";
 	private String publishButtonSelector = "div.neutral.modalToolbar a[id=\"publish\"]";
-	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 
 	public WikiArticleEditMode(WebDriver driver) {
 		super(driver);

@@ -40,8 +40,6 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	protected WebElement createMapUnderContribute;
 	@FindBy(css = ".no-maps")
 	private WebElement emptyStateSection;
-	@FindBy(css = ".msg")
-	private WebElement msgTopBar;
 
 	public InteractiveMapsPageObject(WebDriver driver) {
 		super(driver);
@@ -54,7 +52,7 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 		PageObjectLogging.log("clickCreateAMap", "create a map button clicked", true, driver);
 		return new CreateAMapComponentObject(driver);
 	}
-	
+
 	public CreateAMapComponentObject clickCreateAMapUnderContributeButton() {
 		waitForElementByElement(contributeDropdown);
 		scrollAndClick(contributeDropdown);
@@ -79,12 +77,12 @@ public class InteractiveMapsPageObject extends ArticlePageObject {
 	public String getMapTitle(int mapIndex) {
 		return mapTitleList.get(mapIndex).getText();
 	}
-	
+
 	public InteractiveMapPageObject openMap(String wikiURL, int id) {
 		getUrl(wikiURL + URLsContent.SPECIAL_MAPS + '/' + id);
 		return new InteractiveMapPageObject(driver);
 	}
-	
+
 	public InteractiveMapPageObject openEscapedFragmentMap(String wikiURL, String id) {
 		getUrl(wikiURL + URLsContent.SPECIAL_MAPS + '/' + id + URLsContent.ESCAPED_FRAGMENT);
 		return new InteractiveMapPageObject(driver);

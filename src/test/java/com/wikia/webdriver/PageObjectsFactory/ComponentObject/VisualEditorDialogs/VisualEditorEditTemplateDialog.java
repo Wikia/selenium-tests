@@ -15,24 +15,14 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	//outside of iframe
-	@FindBy(css = ".oo-ui-dialog-drag-handle.oo-ui-icon-grabber")
-	private WebElement draggableHandle;
-	@FindBy(css = ".ve-ui-mwTemplateDialog-filter input")
-	private WebElement filterInput;
 	@FindBy(css = ".ve-ui-wikiaTemplateGetInfoWidget-templateInfoButton a")
 	private WebElement getInfoLink;
 	@FindBy(css = ".ve-ui-mwParameterPage")
 	private List<WebElement> templateParams;
-	@FindBy(css = ".ve-ui-mwParameterPage .ve-ui-mwParameterPage-label")
-	private List<WebElement> templateLabels;
 	@FindBy(css=".oo-ui-flaggableElement-primary a")
 	private WebElement doneButton;
 	@FindBy(css=".ve-ui-wikiaTransclusionDialog-cancelButton a")
 	private WebElement cancelButton;
-	@FindBy(css=
-		".oo-ui-flaggableElement-secondary:not(.ve-ui-mwTransclusionDialog-modeButton)" +
-		":not(.ve-ui-wikiaTransclusionDialog-cancelButton) a")
-	private WebElement updatePreviewButon;
 	@FindBy(css = ".ve-ui-mwTemplateDialog-ready")
 	private WebElement templateDialog;
 

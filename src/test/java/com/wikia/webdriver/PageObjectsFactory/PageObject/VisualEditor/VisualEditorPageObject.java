@@ -41,8 +41,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		super(driver);
 	}
 
-	@FindBy(css=".ve-ui-linkTargetInputWidget > input")
-	private WebElement linkInputField;
 	@FindBy(css=".ve-ce-documentNode")
 	private WebElement editArea;
 	@FindBy(css="ol.ve-ce-branchNode > li")
@@ -61,10 +59,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement mapNode;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay")
 	private WebElement previewOverlay;
-	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-title")
-	private WebElement previewMeditaTitle;
-	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-closeButton .oo-ui-buttonedElement-button")
-	private WebElement previewCloseButton;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-overlay img")
 	private WebElement previewImage;
 	@FindBy(css=".ve-ui-wikiaMediaPreviewWidget-videoWrapper")
@@ -77,8 +71,6 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement contextMenu;
 	@FindBy(css=".ve-ce-node-focused")
 	private WebElement focusedNode;
-	@FindBy(css=".ve-ce-focusableNode-highlights")
-	private WebElement nodeHighlight;
 	@FindBy(css=".mw-body-content")
 	private WebElement mainContent;
 
