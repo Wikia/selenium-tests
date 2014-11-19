@@ -22,7 +22,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class DriverProvider {
 
-	private static final DriverProvider instance = new DriverProvider();
+	private static final DriverProvider INSTANCE = new DriverProvider();
 	private static WebDriver driver;
 	private static DesiredCapabilities caps = new DesiredCapabilities();
 	private static FirefoxProfile profile = new FirefoxProfile();
@@ -72,8 +72,7 @@ public class DriverProvider {
             		    profile.setPreference(domain + "netexport.showPreview", false);
             		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.harDirPath);
             		}   catch (IOException e) {
-            			// TODO Auto-generated catch block
-            			e.printStackTrace();
+            			System.out.println("Error while setting up event tracking. " + e.getMessage());
             		}
 				}
                 caps.setCapability(FirefoxDriver.PROFILE, profile);
@@ -143,7 +142,7 @@ public class DriverProvider {
                 System.out.print(Global.BROWSER+" browser detected. Unable to set pageLoadTimeout()");
             }
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            return instance;
+            return INSTANCE;
 
 	}
 
@@ -156,7 +155,7 @@ public class DriverProvider {
             AbstractWebDriverEventListener listener = new PageObjectLogging();
             driver = new EventFiringWebDriver(new FirefoxDriver(caps)).register(listener);
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            return instance;
+            return INSTANCE;
 	}
 
 	/**

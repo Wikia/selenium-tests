@@ -61,8 +61,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
 		getUrl(
 				wikiURL +
-				URLsContent.wikiDir +
-				URLsContent.fileNameSpace +
+				URLsContent.WIKI_DIR +
+				URLsContent.FILE_NAMESPACE +
 				videoName +
 				"?action=unwatch"
 		);
@@ -104,7 +104,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public String getFileUrl(String wikiURL, int itemNumber) {
-		String fileUrl = wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + getVideoKey(itemNumber);
+		String fileUrl = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getVideoKey(itemNumber);
 		PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
 		return fileUrl;
 	}

@@ -63,7 +63,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 
 	public void openSpecialDesignerPage(String wikiURL) {
-		getUrl(wikiURL+URLsContent.specialThemeDesigner);
+		getUrl(wikiURL+URLsContent.SPECIAL_THEME_DESIGNER);
 		PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
 	}
 
@@ -110,7 +110,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 
 	public enum Tab {
-		Theme, Customize, Wordmark
+		THEME, CUSTOMIZE, WORDMARK
 	}
 
 	public void selectTab(Tab tabName){

@@ -289,13 +289,13 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void clickGlobalNavLink(HubName hubName) {
 		WebElement element;
 		switch (hubName) {
-			case Video_Games:
+			case VIDEO_GAMES:
 				element = VideoGamesTopNavLink;
 				break;
-			case Entertainment:
+			case ENTERTAINMENT:
 				element = EntertainmentTopNavLink;
 				break;
-			case Lifestyle:
+			case LIFESTYLE:
 			default:
 				element = LifestyleTopNavLink;
 				break;
@@ -313,13 +313,13 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void clickWikiaBarLink(HubName hubName) {
 		WebElement element;
 		switch (hubName) {
-			case Video_Games:
+			case VIDEO_GAMES:
 				element = VideoGamesWikiaBarLink;
 				break;
-			case Entertainment:
+			case ENTERTAINMENT:
 				element = EntertainmentWikiaBarLink;
 				break;
-			case Lifestyle:
+			case LIFESTYLE:
 			default:
 				element = LifestyleWikiaBarLink;
 				break;
@@ -338,13 +338,13 @@ public class HubBasePageObject extends WikiBasePageObject {
 		waitForElementByElement(wordmarkImage);
 		String header;
 		switch (hubName) {
-			case Video_Games:
+			case VIDEO_GAMES:
 				header = "Games Wiki";
 				break;
-			case Entertainment:
+			case ENTERTAINMENT:
 				header = "Movies Hub Wiki";
 				break;
-			case Lifestyle:
+			case LIFESTYLE:
 			default:
 				header = "LifestyleHub Wiki";
 				break;

@@ -152,10 +152,10 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	public WatchPageObject unfollowImage(String wikiURL, String imageName) {
 		String url = urlBuilder.appendQueryStringToURL(
 				wikiURL +
-				URLsContent.wikiDir +
-				URLsContent.fileNameSpace +
+				URLsContent.WIKI_DIR +
+				URLsContent.FILE_NAMESPACE +
 				imageName,
-				URLsContent.unfollowParameter
+				URLsContent.ACTION_UNFOLLOW
 		);
 		getUrl(url);
 		return new WatchPageObject(driver);
@@ -167,7 +167,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	}
 
 	public String getFileUrl(String wikiURL, int itemNumber) {
-		String fileUrl = wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + getImageKey(itemNumber);
+		String fileUrl = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getImageKey(itemNumber);
 		PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
 		return fileUrl;
 	}

@@ -37,7 +37,7 @@ public class SlideshowBuilderComponentObject extends BasePageObject{
 	}
 
 	public enum Positions{
-		Left, Center, Right
+		LEFT, CENTER, RIGHT
 	}
 
 	public void adjustPosition(Positions position){

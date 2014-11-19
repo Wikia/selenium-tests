@@ -23,7 +23,7 @@ import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 
 public class CommonExpectedConditions {
 
-	private final static Logger log = Logger.getLogger(ExpectedConditions.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(ExpectedConditions.class.getName());
 
 	/**
 	 * An expectation for checking if the given text is present in the specified
@@ -236,7 +236,7 @@ public class CommonExpectedConditions {
 		} catch (NoSuchElementException e) {
 			throw e;
 		} catch (WebDriverException e) {
-			log.log(Level.WARNING,
+			LOGGER.log(Level.WARNING,
 					String.format("WebDriverException thrown by findElement(%s)", by), e);
 			throw e;
 		}

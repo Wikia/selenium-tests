@@ -107,7 +107,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
 	public enum embedMapDialogButtons {
-		small, medium, large;
+		SMALL, MEDIUM, LARGE;
 	}
 
 	public void clickEmbedMapCodeButton() {
@@ -121,13 +121,13 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void clickEmbedMapCodeButton(embedMapDialogButtons button) {
 		switch (button) {
-		case small:
+		case SMALL:
 			embedMapCodeSmallButton.click();
 			break;
-		case medium:
+		case MEDIUM:
 			embedMapCodeMediumButton.click();
 			break;
-		case large:
+		case LARGE:
 			embedMapCodeLargeButton.click();
 			break;
 		}
@@ -289,13 +289,13 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyEmbedMapCode(embedMapDialogButtons button) {
 		switch (button) {
-		case small:
+		case SMALL:
 			waitForElementVisibleByElement(embedMapCodeSmall);
 			break;
-		case medium:
+		case MEDIUM:
 			waitForElementVisibleByElement(embedMapCodeMedium);
 			break;
-		case large:
+		case LARGE:
 			waitForElementVisibleByElement(embedMapCodeLarge);
 			break;
 		}
@@ -437,7 +437,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
-		getUrl(wikiURL+URLsContent.embedMapEditPage);
+		getUrl(wikiURL+URLsContent.EMBEDED_MAP_EDITPAGE);
 		return new WikiArticleEditMode(driver);
 	}
 

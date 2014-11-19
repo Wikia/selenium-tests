@@ -581,7 +581,7 @@ public class BasePageObject{
 	}
 
 	public void openWikiPage() {
-		getUrl(Global.DOMAIN + URLsContent.noexternals);
+		getUrl(Global.DOMAIN + URLsContent.NOEXTERNALS);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
@@ -678,7 +678,7 @@ public class BasePageObject{
 		driver.get(
 			urlBuilder.appendQueryStringToURL(
 				driver.getCurrentUrl(),
-				URLsContent.wikiaTracker
+				URLsContent.WIKIA_TRACKER
 			)
 		);
 	}

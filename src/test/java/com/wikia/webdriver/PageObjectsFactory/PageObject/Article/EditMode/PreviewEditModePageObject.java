@@ -38,13 +38,13 @@ public class PreviewEditModePageObject extends EditMode {
 		String position;
 
 		switch(positions) {
-			case left:
+			case LEFT:
 				position = "left";
 				break;
-			case right:
+			case RIGHT:
 				position = "right";
 				break;
-			case center:
+			case CENTER:
 				position = "none";
 				break;
 			default:

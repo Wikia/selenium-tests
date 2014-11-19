@@ -55,6 +55,7 @@
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestDfpParamsPresent"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestHighValueCountries"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestIVW2AnalyticsProvider"/>
+			<class name="com.wikia.webdriver.TestCases.AdsTests.TestKruxIntegration"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsLoggedInUsers"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnAdFreeWikis"/>
 			<class name="com.wikia.webdriver.TestCases.AdsTests.TestNoAdsOnSonyReferrer"/>

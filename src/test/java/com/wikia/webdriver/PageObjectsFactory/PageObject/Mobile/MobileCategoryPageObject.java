@@ -32,8 +32,8 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	String loadPeviousButtonSelector = "#%articlesFirstLetter% .pagLess.visible";
 
 	public MobileArticlePageObject openCategory(String wikiURL) {
-		getUrl(wikiURL + URLsContent.categoryPmg);
-		PageObjectLogging.log("openCategory", "category page: "+URLsContent.categoryPmg+", was opened", true, driver);
+		getUrl(wikiURL + URLsContent.CATEGORY_PMG);
+		PageObjectLogging.log("openCategory", "category page: "+URLsContent.CATEGORY_PMG+", was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 

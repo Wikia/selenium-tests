@@ -89,7 +89,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
-		getUrl(wikiURL+URLsContent.specialVideos);
+		getUrl(wikiURL+URLsContent.SPECIAL_VIDEOS);
 		return new SpecialVideosPageObject(driver);
 	}
 
@@ -226,7 +226,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public WikiArticleEditMode editArticleByName(String name, String wikiUrl) {
-		String newUrl = URLsContent.addArticle.replace("%title%", name);
+		String newUrl = URLsContent.ADD_ARTICLE.replace("%title%", name);
 		getUrl(wikiUrl + newUrl);
 		return new WikiArticleEditMode(driver);
 	}

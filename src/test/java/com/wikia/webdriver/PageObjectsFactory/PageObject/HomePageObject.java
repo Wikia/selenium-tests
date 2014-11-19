@@ -76,19 +76,19 @@ public class HomePageObject extends WikiBasePageObject {
 					break;
 			}
 			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); //example: [ Video Games ] to Video_Games
-				if (hubName.equals(HubName.Video_Games.toString().toLowerCase())) {
+				if (hubName.equals(HubName.VIDEO_GAMES.toString().toLowerCase())) {
 					video += 1;
 				}
-				if (hubName.equals(HubName.Entertainment.toString().toLowerCase())) {
+				if (hubName.equals(HubName.ENTERTAINMENT.toString().toLowerCase())) {
 					entertainment += 1;
 				}
-				if (hubName.equals(HubName.Lifestyle.toString().toLowerCase())) {
+				if (hubName.equals(HubName.LIFESTYLE.toString().toLowerCase())) {
 					lifestyle += 1;
 				}
 		}
-		visualizationSetup.put(HubName.Video_Games.toString(), video);
-		visualizationSetup.put(HubName.Entertainment.toString(), entertainment);
-		visualizationSetup.put(HubName.Lifestyle.toString(), lifestyle);
+		visualizationSetup.put(HubName.VIDEO_GAMES.toString(), video);
+		visualizationSetup.put(HubName.ENTERTAINMENT.toString(), entertainment);
+		visualizationSetup.put(HubName.LIFESTYLE.toString(), lifestyle);
 		return visualizationSetup;
 	}
 
@@ -98,9 +98,9 @@ public class HomePageObject extends WikiBasePageObject {
 	 * @param slotCurrentSetup
 	 */
 	public void verifyVisualizationURLs(HashMap<String, Integer> slotDesiredSetup, HashMap<String, Integer> slotCurrentSetup) {
-		Assertion.assertEquals(slotCurrentSetup.get(HubName.Video_Games.toString()), slotDesiredSetup.get(HubName.Video_Games.toString()));
-		Assertion.assertEquals(slotCurrentSetup.get(HubName.Entertainment.toString()), slotDesiredSetup.get(HubName.Entertainment.toString()));
-		Assertion.assertEquals(slotCurrentSetup.get(HubName.Lifestyle.toString()), slotDesiredSetup.get(HubName.Lifestyle.toString()));
+		Assertion.assertEquals(slotCurrentSetup.get(HubName.VIDEO_GAMES.toString()), slotDesiredSetup.get(HubName.VIDEO_GAMES.toString()));
+		Assertion.assertEquals(slotCurrentSetup.get(HubName.ENTERTAINMENT.toString()), slotDesiredSetup.get(HubName.ENTERTAINMENT.toString()));
+		Assertion.assertEquals(slotCurrentSetup.get(HubName.LIFESTYLE.toString()), slotDesiredSetup.get(HubName.LIFESTYLE.toString()));
 	}
 
 	public HomePageObject selectLanguage(int index) {
@@ -142,7 +142,7 @@ public class HomePageObject extends WikiBasePageObject {
 
 		for (int i=0; i<numOfLanguages; i++) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
-			String languageURL = getLanguageURL(i) + URLsContent.wikiaDir;
+			String languageURL = getLanguageURL(i) + URLsContent.WIKIA_DIR;
 			newHome = selectLanguage(i);
 
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
