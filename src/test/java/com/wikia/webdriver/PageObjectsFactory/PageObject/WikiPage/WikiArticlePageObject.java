@@ -60,8 +60,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	public WikiArticleEditMode createNewArticle(String wikiURL,
 			WikiArticlePageObject article) {
 		String pageName = article.getPageName();
-		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.wikiDir
-				+ pageName, URLsContent.actionEditParameter));
+		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR
+				+ pageName, URLsContent.ACTION_EDIT));
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
 				+ pageNameEnc + "']")));
@@ -70,7 +70,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewTemplate(String wikiURL, String templateName, String templateContent ) {
-		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.templateNs + ":" + templateName );
+		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.TEMPLATE_NAMESPACE + ":" + templateName );
 		WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle );
 		edit.typeInTemplateContent( templateContent );
 		edit.clickOnPublish();
@@ -82,7 +82,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	}
 
 	public WikiArticleEditMode createNewDefaultArticle(){
-		this.pageName = PageContent.articleNamePrefix+getTimeStamp();
+		this.pageName = PageContent.ARTICLE_NAME_PREFIX+getTimeStamp();
 		return createNewArticle(this.pageName, 1);
 	}
 

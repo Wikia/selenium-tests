@@ -18,8 +18,8 @@ import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialog
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorHyperLinkDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorKeyboardShortcutsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorInsertTemplateDialog;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorKeyboardShortcutsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorOptionsDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceDialog;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceListDialog;
@@ -60,8 +60,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement bulletListButton;
 	@FindBy(css=".oo-ui-menuToolGroup .oo-ui-indicator-down")
 	private WebElement formattingDropDown;
-	@FindBy(css=".oo-ui-listToolGroup")
-	private WebElement moreOptionsWrapper;
 	@FindBy(css=".oo-ui-menuToolGroup")
 	private WebElement formattingDropDownItems;
 	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")

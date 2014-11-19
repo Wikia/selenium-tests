@@ -20,8 +20,6 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
 	@FindBy(css=".oo-ui-icon-previous")
 	private WebElement previousButton;
-	@FindBy(css=".oo-ui-icon-remove")
-	private WebElement removeButton;
 	@FindBy(css=".ve-ui-mwLinkTargetInputWidget input")
 	private WebElement linkInput;
 	@FindBy(css=".oo-ui-texture-pending")
@@ -30,14 +28,8 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	private WebElement selectedResult;
 	@FindBy(css=".ve-ui-desktopContext")
 	private WebElement desktopContext;
-	@FindBy(css=".ve-ui-mwLinkTargetInputWidget")
-	private WebElement linkInputDiv;
 	@FindBy(css=".oo-ui-window-title")
 	private WebElement title;
-	@FindBy(css=".oo-ui-frame-html")
-	private WebElement frame;
-	@FindBy(css=".ve-ui-mwLinkTargetInputWidget-menu")
-	private WebElement resultsMenu;
 	@FindBy(css=".oo-ui-window.ve-ui-inspector")
 	private WebElement dialog;
 

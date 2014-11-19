@@ -32,11 +32,11 @@ public class ForumEditModeTests extends NewTestTemplate{
 	@DataProvider
 	private static final Object[][] getForumName() {
 		return new Object[][] {
-			{PageContent.forumTitleNonlatinPrefix},
-			{PageContent.forumTitlePrefix},
-			{PageContent.forumTitle40CharPrefix},
-			{PageContent.forumTitleSlashPrefix},
-			{PageContent.forumTitleUnderScorePrefix}
+			{PageContent.FORUM_TITLE_NON_LATIN_PREFIX},
+			{PageContent.FORUM_TITLE_PREFIX},
+			{PageContent.FORUM_TITLE_40_CHAR_PREFIX},
+			{PageContent.FORUM_TITLE_SLASH_PREFIX},
+			{PageContent.FORUM_TITLE_UNDER_SCORE_PREFIX}
 		};
 	}
 
@@ -47,7 +47,7 @@ public class ForumEditModeTests extends NewTestTemplate{
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		title = name+manageForum.getTimeStamp();
-		description = PageContent.forumDescriptionPrefix+manageForum.getTimeStamp();
+		description = PageContent.FORUM_DESCRIPTION_PREFIX+manageForum.getTimeStamp();
 		manageForum.createNewBoard(title, description);
 		manageForum.verifyBoardCreated(title, description);
 		manageForum.verifyForumExists(title, wikiURL);
@@ -73,8 +73,8 @@ public class ForumEditModeTests extends NewTestTemplate{
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumManageBoardsPageObject manageForum = forumMainPage.clickManageBoardsButton();
 		first = manageForum.getFirstForumName();
-		title = PageContent.forumTitleEditPrefix+manageForum.getTimeStamp();
-		description = PageContent.forumDescriptionEditPrefix+manageForum.getTimeStamp();
+		title = PageContent.FORUM_TITLE_EDIT_PREFIX+manageForum.getTimeStamp();
+		description = PageContent.FORUM_DESCRIPTION_EDIT_PREFIX+manageForum.getTimeStamp();
 		manageForum.editForum(first, title, description);
 		manageForum.verifyBoardCreated(title, description);
 		manageForum.verifyForumExists(title, wikiURL);

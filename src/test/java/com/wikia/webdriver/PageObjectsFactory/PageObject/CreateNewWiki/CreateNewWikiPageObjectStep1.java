@@ -44,7 +44,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject{
 	}
 
 	public String getWikiName(){
-		wikiNameString = CreateWikiMessages.wikiNamePrefix + getRandomDigits(3) + getRandomString(5);
+		wikiNameString = CreateWikiMessages.WIKINAME_PREFIX + getRandomDigits(3) + getRandomString(5);
 		return this.wikiNameString;
 	}
 
@@ -90,7 +90,7 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject{
 	}
 
 	public void verifyIncorrectWikiName() {
-		waitForTextToBePresentInElementByElement(wikiDomainErrorMessage, CreateWikiMessages.wikiNameViolatesPolicy);
+		waitForTextToBePresentInElementByElement(wikiDomainErrorMessage, CreateWikiMessages.WIKINAME_VIOLATES_POLICY);
 		PageObjectLogging.log("verifyIncorrectWikiName", "Verified wiki name violates naming policy", true);
 	}
 

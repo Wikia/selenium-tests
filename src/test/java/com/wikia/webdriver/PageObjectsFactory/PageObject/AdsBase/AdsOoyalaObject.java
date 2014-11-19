@@ -1,6 +1,7 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase;
 
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.Helpers.AdsComparison;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,10 +15,6 @@ import java.util.concurrent.TimeUnit;
  * @ownership AdEngineering
  */
 public class AdsOoyalaObject extends AdsBaseObject {
-	private String thumbnailPlayCircleSelector = ".WikiaArticle .play-circle";
-	private String thumbnailDurationSelector = ".WikiaArticle .duration";
-	@FindBy(css=".WikiaArticle img.thumbimage")
-	private WebElement thumbnail;
 	@FindBy(css="object[data^='http://player.ooyala.com/player.swf']")
 	private WebElement lightbox;
 
@@ -25,27 +22,16 @@ public class AdsOoyalaObject extends AdsBaseObject {
 		super(driver, page);
 	}
 
-	public void verifyVideoThumbnail(Color thumbnailColor) {
-		hideElement(thumbnailPlayCircleSelector);
-		hideElement(thumbnailDurationSelector);
-		verifyColorAd(thumbnail, thumbnailColor);
-	}
-
-	public void openLightbox() {
-		thumbnail.click();
-	}
-
 	public void verifyLightboxAd(Color lightboxAdColor, int adDurationSec) {
 		verifyColorAd(lightbox, lightboxAdColor, adDurationSec);
+		PageObjectLogging.log("LightboxAd",
+			"Lightbox had " + lightboxAdColor + " during " + adDurationSec + " seconds", true);
 	}
 
 	public void verifyLightboxVideo(Color lightboxVideoColor, int videoDurationSec) {
 		verifyColorAd(lightbox, lightboxVideoColor, videoDurationSec);
-	}
-
-	private void verifyColorAd(WebElement element, Color color) {
-		AdsComparison adsComparison = new AdsComparison();
-		adsComparison.verifyColorAd(element, color, driver);
+		PageObjectLogging.log("LightboxVideo",
+			"Lightbox had " + lightboxVideoColor + " during " + videoDurationSec + " seconds", true);
 	}
 
 	private void verifyColorAd(WebElement element, Color color, int durationSec) {

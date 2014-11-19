@@ -147,19 +147,13 @@ public class WikiArticleEditMode extends WikiEditMode {
 	private WebElement captionInEditor;
 	@FindBy(css = "span[id=cke_22_label]")
 	private WebElement sourceButton;
-	@FindBy(css = "#cke_32_frame")
-	private WebElement sourceFrame;
 	@FindBy(css = "a[data-map-title]")
 	private WebElement embededMap;
 
 	private By captionInPreview = By.cssSelector("section.modalWrapper.preview section.modalContent figcaption");
-	private By videoOnArticleEditMode = By.cssSelector("img.video");
 	private By addThisPhotoLink = By.cssSelector("tr.ImageUploadFindLinks td a");
 	private String imageArticleIFrame = "img";
-	private String videoArticleIFrame = "img.video";
-	private String previewButtonSelector = "#wpPreview";
 	private String publishButtonSelector = "div.neutral.modalToolbar a[id=\"publish\"]";
-	private String editButtonArticleItem = "span.RTEMediaOverlayEdit";
 
 	public WikiArticleEditMode(WebDriver driver) {
 		super(driver);
@@ -167,7 +161,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
-		getUrl(wikiURL+URLsContent.specialVideos);
+		getUrl(wikiURL+URLsContent.SPECIAL_VIDEOS);
 		return new SpecialVideosPageObject(driver);
 	}
 
@@ -304,7 +298,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public WikiArticleEditMode editArticleByName(String name, String wikiUrl) {
-		String newUrl = URLsContent.addArticle.replace("%title%", name);
+		String newUrl = URLsContent.ADD_ARTICLE.replace("%title%", name);
 		getUrl(wikiUrl + newUrl);
 		return new WikiArticleEditMode(driver);
 	}

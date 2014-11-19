@@ -228,7 +228,7 @@ public class BasePageObject{
 					element
 			);
 		} catch (WebDriverException e) {
-			if (e.getMessage().contains(XSSContent.noJQueryError)) {
+			if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
 				PageObjectLogging.log(
 					"JSError", "JQuery is not defined", false
 				);
@@ -342,7 +342,7 @@ public class BasePageObject{
 					selector
 				);
 			} catch (WebDriverException e) {
-				if (e.getMessage().contains(XSSContent.noJQueryError)) {
+				if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
 					PageObjectLogging.log(
 						"JSError", "JQuery is not defined", false
 					);
@@ -581,7 +581,7 @@ public class BasePageObject{
 	}
 
 	public void openWikiPage() {
-		getUrl(Global.DOMAIN + URLsContent.noexternals);
+		getUrl(Global.DOMAIN + URLsContent.NOEXTERNALS);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
@@ -678,7 +678,7 @@ public class BasePageObject{
 		driver.get(
 			urlBuilder.appendQueryStringToURL(
 				driver.getCurrentUrl(),
-				URLsContent.wikiaTracker
+				URLsContent.WIKIA_TRACKER
 			)
 		);
 	}

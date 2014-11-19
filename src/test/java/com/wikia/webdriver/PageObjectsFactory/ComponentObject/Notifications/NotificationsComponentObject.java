@@ -25,8 +25,6 @@ public class NotificationsComponentObject extends BasePageObject {
 	private List<WebElement> notificationsList;
 	@FindBy(css = "#WallNotifications li ul.subnav")
 	private WebElement notificationsSubnav;
-	@FindBy(css = "#WallNotifications")
-	private WebElement notifications;
 	@FindBy(css = "#bubbles_count")
 	private WebElement bubblesCount;
 	@FindBy(css = "#wall-notifications-markasread-sub")

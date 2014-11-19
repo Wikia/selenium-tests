@@ -37,7 +37,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_defaultPreferred() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 	}
@@ -46,7 +46,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 		groups = {"VEDisabledEditorEntryDefaultPreferred", "VEDisabledEditorEntryDefaultPreferredTests_001", "createPageEntry"}
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditModePageObject ck = article.createArticleInCKUsingDropdown(articleName);
@@ -59,7 +59,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		VisualEditModePageObject ck = article.editArticleInRTEUsingDropdown();
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -70,7 +70,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.testingPage);
+				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditModePageObject ck = article.openCKModeWithRedLinks(0);
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -81,7 +81,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.testingPage);
+				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditModePageObject ck = article.openCKModeWithSectionEditButton(0);
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -101,7 +101,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_006_ListNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.listPage);
+			base.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
 		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -112,7 +112,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_007_CategoryNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
 		VisualEditModePageObject ck = article.openCKModeWithMainEditButton();
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -123,7 +123,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_008_TemplateNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.templatePage);
+			base.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -133,7 +133,7 @@ public class VEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplateB
 	)
 	public void VEDisabledEditorEntryDefaultPreferredTests_009_actionEdit() {
 		VisualEditModePageObject ck =
-			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageCK(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
 	}

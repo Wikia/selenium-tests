@@ -205,7 +205,7 @@ public class SourceEditModePageObject extends EditMode{
 	public String buildTablePropertiesContent(
 		int border, int width, int height, int cellspacing, int cellpadding, Alignment alignment
 	) {
-		String tablePropertiesContent = SourceModeContent.table
+		String tablePropertiesContent = SourceModeContent.TABLE
 			.replace("%border%", Integer.toString(border))
 			.replace("%cellpadding%", Integer.toString(cellpadding))
 			.replace("%cellspacing%", Integer.toString(cellspacing))
@@ -254,10 +254,10 @@ public class SourceEditModePageObject extends EditMode{
 
 	public void checkWikiMarkupTools() {
 		for (int i = 1, j = i + 1; i < 21; i++) {
-			j=i+1;
 			clearSource();
 			clickMore();
-			String content = executeScriptRet("$('.modalContent #edittools_wikimarkup a:nth-child("+j+")').text()");
+			String content =
+					executeScriptRet("$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
 			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).click();
 			checkSourceContent(content);
 		}
@@ -297,7 +297,7 @@ public class SourceEditModePageObject extends EditMode{
 	 */
 	public void addTOC() {
 		clearContent();
-		appendContent(PageContent.articleWithTOClines);
+		appendContent(PageContent.ARTICLE_WITH_TOC_LINES);
 	}
 
 	private void appendContent(String content) {
@@ -327,7 +327,7 @@ public class SourceEditModePageObject extends EditMode{
 
 	public void verifySourceOnlyMode() {
 		waitForElementByElement(sourceOnlyModeTextArea);
-		if (!executeScriptRetBool(WikiaGlobalVariables.wgIsArticle)) {
+		if (!executeScriptRetBool(WikiaGlobalVariables.WG_IS_ARTICLE)) {
 			waitForElementByElement(srcOnlyMode);
 			PageObjectLogging.log("verifySourceOnlyMode", "source only mode enabled", true, driver);
 		} else {

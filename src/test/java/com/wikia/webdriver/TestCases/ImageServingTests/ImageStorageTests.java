@@ -49,7 +49,7 @@ public class ImageStorageTests extends NewTestTemplate {
 		base.verifyURLStatus(404, imageThumbnailURL);
 
 		SpecialRestorePageObject restore = delete.undeleteByFlashMessage();
-		restore.giveReason(PageContent.caption);
+		restore.giveReason(PageContent.CAPTION);
 		restore.restorePage();
 		restore.verifyNotificationMessage();
 
