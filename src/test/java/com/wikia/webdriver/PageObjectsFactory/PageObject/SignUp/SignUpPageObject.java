@@ -233,7 +233,8 @@ public class SignUpPageObject extends WikiBasePageObject {
 				output = String.format("%0" + (md5sum.length << 1) + "x", bigInt);
 			} finally {
 				is.close();
-			} return output;
+			}
+			return output;
 		} catch(NoSuchAlgorithmException e) {
 			PageObjectLogging.log("md5", e.toString(), false);
 			throw new RuntimeException(e);
