@@ -43,11 +43,10 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 	public void Vet_Modal_001_leftOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle1 = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleTitle1 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle1);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.adjustPosition(PositionsVideo.LEFT);
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.LEFT);
@@ -75,11 +74,10 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 	public void Vet_Modal_003_centerOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleTitle2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle2);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.adjustPosition(PositionsVideo.CENTER);
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.CENTER);
@@ -107,11 +105,10 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 	public void Vet_Modal_005_rightOnPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		articleTitle3 = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleTitle3 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle3);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
-		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.youtubeVideoURL);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		vetOptions.adjustPosition(PositionsVideo.RIGHT);
 		vetOptions.submit();
 		visualEditMode.verifyVideoPosition(PositionsVideo.RIGHT);

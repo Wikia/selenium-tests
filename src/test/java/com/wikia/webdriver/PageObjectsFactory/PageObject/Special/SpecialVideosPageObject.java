@@ -130,20 +130,20 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public void verifyDeleteViaGlobalNotifications() {
-		addVideoViaAjax(VideoContent.youtubeVideoURL2);
+		addVideoViaAjax(VideoContent.YOUTUBE_VIDEO_URL2);
 		deleteVideo();
-		String deletedVideo = "\"File:" + VideoContent.youtubeVideoURL2name + "\" has been deleted. (undelete)";
+		String deletedVideo = "\"File:" + VideoContent.YOUTUBE_VIDEO_URL2_NAME + "\" has been deleted. (undelete)";
 		Assertion.assertEquals(deletedVideo, getFlashMessageText());
 		PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo + " was deleted", true);
 	}
 
 	public void verifyDeleteViaVideoNotPresent() {
-		addVideoViaAjax(VideoContent.youtubeVideoURL2);
+		addVideoViaAjax(VideoContent.YOUTUBE_VIDEO_URL2);
 		deleteVideo();
 		verifyNotificationMessage();
-		Assertion.assertNotEquals(VideoContent.youtubeVideoURL2name, getNewestVideoTitle());
+		Assertion.assertNotEquals(VideoContent.YOUTUBE_VIDEO_URL2_NAME, getNewestVideoTitle());
 		PageObjectLogging.log("verifyDeleteVideoNotPresent",
-				"verify video " + VideoContent.youtubeVideoURL2name + " was deleted",
+				"verify video " + VideoContent.YOUTUBE_VIDEO_URL2_NAME + " was deleted",
 				true);
 	}
 

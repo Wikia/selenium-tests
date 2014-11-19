@@ -50,7 +50,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	public void setup_VEPreferred() {
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 	}
 
 	@Test(
@@ -94,7 +94,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		VisualEditorPageObject ve = base.openNewArticleEditModeVisual(wikiURL);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
-		ve = mediaDialog.uploadImage(PageContent.file2Png, testFileUploadName, testImageLicense);
+		ve = mediaDialog.uploadImage(PageContent.FILE2PNG, testFileUploadName, testImageLicense);
 		VisualEditorSaveChangesDialog save = ve.clickPublishButton();
 		ArticlePageObject article = save.savePage();
 		article.verifyVEPublishComplete();
@@ -176,7 +176,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		wikiTexts.add("|centre");
 		wikiTexts.add("|left");
 
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();

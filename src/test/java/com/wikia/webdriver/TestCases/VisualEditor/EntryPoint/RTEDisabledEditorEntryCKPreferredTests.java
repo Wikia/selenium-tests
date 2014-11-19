@@ -45,7 +45,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 		groups = {"RTEDisabledEditorEntryCKPreferred", "RTEDisabledEditorEntryCKPreferredTests_001", "createPageEntry"}
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 				base.openArticleByName(wikiURL, articleName);
 		SourceEditModePageObject src = article.createArticleInSrcUsingDropdown(articleName);
@@ -57,7 +57,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+				base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
 		src.verifySourceOnlyMode();
 	}
@@ -126,7 +126,7 @@ public class RTEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryCKPreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		src.verifySourceOnlyMode();
 	}
 }

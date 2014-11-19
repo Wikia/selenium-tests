@@ -46,7 +46,7 @@ public class VEEnabledEditorEntryDefaultPreferredTests extends NewTestTemplateBe
 		groups = {"VEEnabledEditorEntryDefaultPreferred", "VEEnabledEditorEntryDefaultPreferredTests_001", "createPageEntry"}
 	)
 	public void VEEnabledEditorEntryDefaultPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
@@ -133,7 +133,7 @@ public class VEEnabledEditorEntryDefaultPreferredTests extends NewTestTemplateBe
 	)
 	public void VEEnabledEditorEntryDefaultPreferredTests_009_actionEdit() {
 		VisualEditModePageObject ck =
-			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageCK(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
 	}

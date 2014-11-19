@@ -385,7 +385,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	private Point getBlockTransclusionLocation(int index) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		Object templateBounding = js.executeScript(VEContent.boundingScript, blockTransclusionString, index);
+		Object templateBounding = js.executeScript(VEContent.BOUNDING_SCRIPT, blockTransclusionString, index);
 		JSONObject json;
 		int tempLeft = 0, tempTop = 0;
 		try {

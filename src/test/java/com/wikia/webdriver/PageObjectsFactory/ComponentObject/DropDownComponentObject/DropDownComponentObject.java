@@ -153,7 +153,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
 	public void verifyMessageAboutNewPassword(String userName) {
 		waitForElementByElement(messagePlaceholder);
-		String newPasswordMsg = PageContent.newPasswordSentMessage.replace("%userName%", userName);
+		String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
 		waitForTextToBePresentInElementByElement(messagePlaceholder, newPasswordMsg);
 		PageObjectLogging.log(
 			"MessageAboutPasswordSent",

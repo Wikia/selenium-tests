@@ -46,7 +46,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 		groups = {"VEDisabledEditorEntryCKPreferred", "VEDisabledEditorEntryCKPreferredTests_001", "createPageEntry"}
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditModePageObject ck = article.createArticleInCKUsingDropdown(articleName);
@@ -59,7 +59,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		VisualEditModePageObject ck = article.editArticleInRTEUsingDropdown();
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
@@ -133,7 +133,7 @@ public class VEDisabledEditorEntryCKPreferredTests extends NewTestTemplateBefore
 	)
 	public void VEDisabledEditorEntryCKPreferredTests_009_actionEdit() {
 		VisualEditModePageObject ck =
-			base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageCK(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		ck.verifyContentLoaded();
 		ck.clickPublishButton();
 	}

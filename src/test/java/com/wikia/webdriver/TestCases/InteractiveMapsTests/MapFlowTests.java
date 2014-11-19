@@ -33,7 +33,7 @@ public class MapFlowTests extends NewTestTemplate {
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		CreateAMapComponentObject map = specialMap.clickCreateAMap();
 		CreateACustomMapComponentObject customMap = map.clickCustomMap();
-		TemplateComponentObject template = customMap.selectFileToUpload(PageContent.file);
+		TemplateComponentObject template = customMap.selectFileToUpload(PageContent.FILE);
 		template.verifyTemplateImagePreview();
 		template.typeMapName(InteractiveMapsContent.MAP_NAME);
 		InteractiveMapsContent.TEMPLATE_NAME = base.getTimeStamp();

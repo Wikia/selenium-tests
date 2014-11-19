@@ -45,7 +45,7 @@ public class RTEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBefor
 		groups = {"RTEDisabledEditorEntryVEPreferred", "RTEDisabledEditorEntryVEPreferredTests_001", "createPageEntry"}
 	)
 	public void RTEDisabledEditorEntryVEPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
@@ -58,7 +58,7 @@ public class RTEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryVEPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -131,7 +131,7 @@ public class RTEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBefor
 	)
 	public void RTEDisabledEditorEntryVEPreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		src.verifySourceOnlyMode();
 	}
 }

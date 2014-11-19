@@ -228,7 +228,7 @@ public class BasePageObject{
 					element
 			);
 		} catch (WebDriverException e) {
-			if (e.getMessage().contains(XSSContent.noJQueryError)) {
+			if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
 				PageObjectLogging.log(
 					"JSError", "JQuery is not defined", false
 				);
@@ -342,7 +342,7 @@ public class BasePageObject{
 					selector
 				);
 			} catch (WebDriverException e) {
-				if (e.getMessage().contains(XSSContent.noJQueryError)) {
+				if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
 					PageObjectLogging.log(
 						"JSError", "JQuery is not defined", false
 					);

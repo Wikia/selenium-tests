@@ -50,7 +50,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 		groups = {"VEAddMap", "VEAddMapTests_001", "VEAddExistingMap"}
 	)
 	public void VEAddMapTests_001_AddExistingMap() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
@@ -67,7 +67,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEAddMapTests_002_CheckEmptyMapWiki() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);

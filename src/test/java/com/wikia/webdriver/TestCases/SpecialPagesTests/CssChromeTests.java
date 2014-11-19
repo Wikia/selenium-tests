@@ -34,7 +34,7 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyHighlighting();
 		specialCss.clearCssText();
-		specialCss.sendCssText(CssEditorContent.invalidCssError);
+		specialCss.sendCssText(CssEditorContent.INVALID_CSS_ERROR);
 		specialCss.verifyAceError();
 	}
 
@@ -124,7 +124,7 @@ public class CssChromeTests extends NewTestTemplate {
 	@Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"})
 	public void CssChrome_008_verifyOnLeaveMessageWorks() {
 		specialCss.verifyAceEditorPresence();
-		specialCss.sendCssText(CssEditorContent.validCss);
+		specialCss.sendCssText(CssEditorContent.VALID_CSS);
 		driver.get(wikiURL);
 		specialCss.waitForAlertAndAccept();
 	}

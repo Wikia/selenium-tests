@@ -30,7 +30,7 @@ public class VisualEditorStylesTests extends NewTestTemplateBeforeClass {
 
 	VisualEditorPageObject ve;
 
-	private String text = PageContent.articleText;
+	private String text = PageContent.ARTICLE_TEXT;
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {

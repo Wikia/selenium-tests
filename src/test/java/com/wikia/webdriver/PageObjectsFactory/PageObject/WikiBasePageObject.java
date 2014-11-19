@@ -717,7 +717,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyLoginReguiredMessage() {
 		waitForTextToBePresentInElementByElement(
-				wikiFirstHeader, PageContent.loginRequired
+				wikiFirstHeader, PageContent.LOGIN_REQUIRED
 		);
 		PageObjectLogging.log(
 				"LoginRequiredMessage",
@@ -745,7 +745,7 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public void verifyNotLoggedInMessage() {
 		waitForTextToBePresentInElementByElement(
-				wikiFirstHeader, PageContent.notLoggedInMessage
+				wikiFirstHeader, PageContent.NOT_LOGGED_IN_MESSAGE
 		);
 		PageObjectLogging.log(
 				"NotLoggedInMessage",
@@ -1015,7 +1015,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public String getNameForArticle () {
-		return PageContent.articleNamePrefix + getTimeStamp();
+		return PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
 	}
 
 	public void openSpecialPromoteOnCurrentWiki() {
@@ -1110,7 +1110,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @author Michal 'justnpT' Nowierski
 	 */
 	public void compareTrackedEventsTo(List<JsonObject> expectedEventsList){
-		executeScript(ClickTrackingScriptsProvider.eventsCaptureInstallation);
+		executeScript(ClickTrackingScriptsProvider.EVENTS_CAPTURE_INSTALLATION);
 		ArrayList<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
 		List<JsonObject> trackedEventsList;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1156,7 +1156,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	private String getArticleName() {
-		return executeScriptRet(WikiaGlobalVariables.wgPageName);
+		return executeScriptRet(WikiaGlobalVariables.WG_PAGE_NAME);
 	}
 
 	public void verifyArticleName(String targetText) {

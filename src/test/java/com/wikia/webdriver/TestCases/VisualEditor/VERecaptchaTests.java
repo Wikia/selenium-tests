@@ -32,7 +32,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 		groups = {"VERecaptchaTests", "VEAddRecaptcha_001", "VEAnon"}
 	)
 	public void VEAddRecaptchaTests_001_AddExternalURL() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();

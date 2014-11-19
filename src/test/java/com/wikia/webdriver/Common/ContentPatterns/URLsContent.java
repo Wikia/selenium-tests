@@ -5,18 +5,18 @@ import com.wikia.webdriver.Common.Core.Global;
 public class URLsContent {
 
 	//api
-	public static String WIKIA_PHP = "wikia.php";
+	public static final String WIKIA_PHP = "wikia.php";
 
-	public static String FOLLOWING_TOOLBAR_TEST = "QAautoPage";
+	public static final String FOLLOWING_TOOLBAR_TEST = "QAautoPage";
 
 	// Common url component
-	public static String WIKI_DIR = "wiki/";
-	public static String WIKIA_DIR = "Wikia";
+	public static final String WIKI_DIR = "wiki/";
+	public static final String WIKIA_DIR = "Wikia";
 
 	// Hubs
-	public static String VIDEOGAMES_HUB_URL = "/Video_Games";
-	public static String ENTERTAINMENT_HUB_URL = "/Entertainment";
-	public static String LIFESTYLE_HUB_URL = "/Lifestyle";
+	public static final String VIDEOGAMES_HUB_URL = "/Video_Games";
+	public static final String ENTERTAINMENT_HUB_URL = "/Entertainment";
+	public static final String LIFESTYLE_HUB_URL = "/Lifestyle";
 
 	//Special Urls - links to special pages
 	public static final String SPECIAL_USER_LOGIN = "wiki/Special:UserLogin";
@@ -113,40 +113,40 @@ public class URLsContent {
 	public static final String API_URL = Global.DOMAIN + "api.php";
 
 	// File Pages
-	public static String FILE_NAMESPACE = "File:";
-	public static String FILENAME_001 = "Grammy_Muppet_Critics";
-	public static String FILENAME_002 = "New_Batman_Year_One_Clip";
+	public static final String FILE_NAMESPACE = "File:";
+	public static final String FILENAME_001 = "Grammy_Muppet_Critics";
+	public static final String FILENAME_002 = "New_Batman_Year_One_Clip";
 
 	// History Pages
-	public static String ACTION_HISTORY = "action=history";
+	public static final String ACTION_HISTORY = "action=history";
 
 	// Article Pages
-	public static String ARTICLENAME_001 = "TestVid001";
-	public static String ARTICLENAME_002 = "TestVid002";
-	public static String ARTICLENAME_003 = "TestVid003";
-	public static String ARTICLENAME_004 = "TestVid004";
+	public static final String ARTICLENAME_001 = "TestVid001";
+	public static final String ARTICLENAME_002 = "TestVid002";
+	public static final String ARTICLENAME_003 = "TestVid003";
+	public static final String ARTICLENAME_004 = "TestVid004";
 
-	public static String SPECIAL_SEARCH = "wiki/Special:Search";
+	public static final String SPECIAL_SEARCH = "wiki/Special:Search";
 
 	//languages
-	public static String TRANSLATABLE_LANGUAGE = "uselang=qqx";
+	public static final String TRANSLATABLE_LANGUAGE = "uselang=qqx";
 
 	//External sites
-	public static String FACEBOOK_DOMAIN = "facebook.com";
-	public static String TWITTER_DOMAIN = "twitter.com";
-	public static String GOOGLE_DOMAIN = "accounts.google.com";
-	public static String REDDIT_DOMAIN = "reddit.com";
-	public static String STUMPLEUPON_DOMAIN = "stumbleupon.com";
+	public static final String FACEBOOK_DOMAIN = "facebook.com";
+	public static final String TWITTER_DOMAIN = "twitter.com";
+	public static final String GOOGLE_DOMAIN = "accounts.google.com";
+	public static final String REDDIT_DOMAIN = "reddit.com";
+	public static final String STUMPLEUPON_DOMAIN = "stumbleupon.com";
 
 	//Facebook
-	public static String FACEBOOK_MAINPAGE = "http://www.facebook.com/";
-	public static String FACEBOOK_SETTINGSPAGE = "http://www.facebook.com/settings";
-	public static String FACEBOOK_SETTINGS_APP_TAB = "tab=applications";
-	public static String FACEBOOK_WIKIA_APP_ID = "112328095453510";
-	public static String FACEBOOK_WIKIA_APP_DEV_ID = "116800565037587";
+	public static final String FACEBOOK_MAINPAGE = "http://www.facebook.com/";
+	public static final String FACEBOOK_SETTINGSPAGE = "http://www.facebook.com/settings";
+	public static final String FACEBOOK_SETTINGS_APP_TAB = "tab=applications";
+	public static final String FACEBOOK_WIKIA_APP_ID = "112328095453510";
+	public static final String FACEBOOK_WIKIA_APP_DEV_ID = "116800565037587";
 
 	//avatars
-	public static String AVATAR_GENERIC = "150px-Avatar.jpg";
+	public static final String AVATAR_GENERIC = "150px-Avatar.jpg";
 
 	//Urls for VE editor
 	public static final String VE_ENABLED_WIKI = "vetest";

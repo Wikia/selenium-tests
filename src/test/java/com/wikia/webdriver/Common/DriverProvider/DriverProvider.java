@@ -58,8 +58,8 @@ public class DriverProvider {
             	}
             	if (Global.BROWSER.contains("eventTracking")) {
             		try {
-            			profile.addExtension(new File(PathsContent.fireBugPath));
-            			profile.addExtension(new File(PathsContent.netExportPath));
+            			profile.addExtension(new File(PathsContent.FIREBUG_PATH));
+            			profile.addExtension(new File(PathsContent.NET_EXPORT_PATH));
             			profile.setPreference("app.update.enabled", false);
             		        String domain = "extensions.firebug.";
             		        // Set default Firebug preferences
@@ -70,7 +70,7 @@ public class DriverProvider {
             		        // Set default NetExport preferences
             		    profile.setPreference(domain + "netexport.alwaysEnableAutoExport", true);
             		    profile.setPreference(domain + "netexport.showPreview", false);
-            		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.harDirPath);
+            		    profile.setPreference(domain + "netexport.defaultLogDir", PathsContent.HAR_DIR_PATH);
             		}   catch (IOException e) {
             			System.out.println("Error while setting up event tracking. " + e.getMessage());
             		}
