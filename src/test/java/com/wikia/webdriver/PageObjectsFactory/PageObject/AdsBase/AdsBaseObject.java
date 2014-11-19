@@ -639,7 +639,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private boolean isGptParamPresent(String key, String value) {
-		waitForElementByElement(presentLeaderboard);
+		waitForElementByElement(presentMedrec);
 		String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
 		String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
 
