@@ -105,10 +105,7 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
 	private boolean isCategoryResult(int category) {
 		viewLinkResults();
-		if (pageCategoryIndex[category] == -1)
-			return false;
-		else
-			return true;
+		return (pageCategoryIndex[category] == -1);
 	}
 
 	public void isNewPage() {
