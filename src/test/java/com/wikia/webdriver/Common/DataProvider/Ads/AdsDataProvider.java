@@ -230,7 +230,7 @@ public class AdsDataProvider {
 				"wka.ent/_adtest//article",
 				"TOP_LEADERBOARD",
 				"115974612",
-				"48506262012",
+				"37674198492",
 				Arrays.asList(
 					"\"s0\":\"ent\"",
 					"\"s1\":\"_adtest\"",
