@@ -532,11 +532,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void waitForSlotCollapsed(WebElement slot) {
-		PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size now: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		changeImplicitWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(CommonExpectedConditions.elementToHaveSize(slot, 0, 0));
-			PageObjectLogging.log("DEBUG: waitForSlotCollapsed", "Size after wait.until: " + slot.getSize().getHeight() + "x" + slot.getSize().getWidth(), true, driver);
 		} finally {
 			restoreDeaultImplicitWait();
 		}
@@ -641,7 +639,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	private boolean isGptParamPresent(String key, String value) {
-		waitForElementByElement(presentLeaderboard);
+		waitForElementByElement(presentMedrec);
 		String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
 		String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
 

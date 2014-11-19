@@ -173,7 +173,7 @@ public class AdsComparison {
 		}
 	}
 
-	public void verifyColorAd(WebElement element, Color color, WebDriver driver) {
+	private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
 		BufferedImage image = shooter.takeScreenshot(element, driver);
 		if (imageComparison.isColorImage(image, color, IMAGE_ACCURACY_PERCENT)) {
 			PageObjectLogging.log(

@@ -54,6 +54,7 @@ public class MobileAdsDataProvider {
 			{"zh.tos" ,"Category:%E5%9C%96%E9%91%92"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+			{"ru.elderscrolls", "The_Elder_Scrolls_Wiki"},
 			{"it.creepypastaitalia", "Slenderman"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
