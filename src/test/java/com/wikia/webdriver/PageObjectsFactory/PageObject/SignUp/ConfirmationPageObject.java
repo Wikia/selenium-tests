@@ -32,8 +32,7 @@ public class ConfirmationPageObject extends BasePageObject{
 	 * @author Karol Kujawiak
 	 * @param userName
 	 */
-	public void typeInUserName(String userName)
-	{
+	public void typeInUserName(String userName) {
 		userNameField.sendKeys(userName);
 		PageObjectLogging.log("typeInUserName ", "user name field populated", true, driver);
 	}
@@ -42,8 +41,7 @@ public class ConfirmationPageObject extends BasePageObject{
 	 * @author Karol Kujawiak
 	 * @param password
 	 */
-	public void typeInPassword(String password)
-	{
+	public void typeInPassword(String password) {
 		passwordField.sendKeys(password);
 		PageObjectLogging.log("typeInUserPassword ", "password field populated", true, driver);
 	}
@@ -51,16 +49,14 @@ public class ConfirmationPageObject extends BasePageObject{
 	/**
 	 * @author Karol Kujawiak
 	 */
-	public UserProfilePageObject clickSubmitButton(String email, String password)
-	{
+	public UserProfilePageObject clickSubmitButton(String email, String password) {
 		MailFunctions.deleteAllEmails(email, password);
 		scrollAndClick(confirmationButton);
 		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);
 		return new UserProfilePageObject(driver);
 	}
 
-	public CreateNewWikiPageObjectStep1 CNWSubmitButton(String email, String password)
-	{
+	public CreateNewWikiPageObjectStep1 CNWSubmitButton(String email, String password) {
 		MailFunctions.deleteAllEmails(email, password);
 		scrollAndClick(confirmationButton);
 		PageObjectLogging.log("submit button clicked ", "submit button clicked", true, driver);

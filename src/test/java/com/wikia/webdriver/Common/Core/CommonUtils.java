@@ -36,27 +36,24 @@ public class CommonUtils {
 	 * @param textToWrite
 	 * @author Karol Kujawiak
 	 */
-	  public static void setClipboardContents(String content)
-	  {
-		  StringSelection ss = new StringSelection(content);
-		  Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-	  }
+	public static void setClipboardContents(String content) {
+		StringSelection ss = new StringSelection(content);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+	}
 
-
-		public static List<String> getLinesInFile(String pathToFile) {
-			List<String> list = new ArrayList<String>();
-			try {
-				BufferedReader br = new BufferedReader(
-				new FileReader(pathToFile));
-				String line;
-				while ((line = br.readLine()) != null) {
-					list.add(line);
-				}
-			} catch (IOException e) {
-
+	public static List<String> getLinesInFile(String pathToFile) {
+		List<String> list = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(pathToFile));
+			String line;
+			while ((line = br.readLine()) != null) {
+				list.add(line);
 			}
-			return list;
+		} catch (IOException e) {
+
 		}
+		return list;
+	}
 
 	public static void appendTextToFile(String filePath, String textToWrite) {
 		try {
@@ -67,7 +64,7 @@ public class CommonUtils {
 			out.flush();
 			out.close();
 		} catch (Exception e) {
-				System.out.println("ERROR in saveTextToFile(2 args) in CommonUtils.java \n"+ e.getMessage());
+			System.out.println("ERROR in saveTextToFile(2 args) in CommonUtils.java \n" + e.getMessage());
 		}
 	}
 
@@ -76,8 +73,7 @@ public class CommonUtils {
 	 * @param fileName
 	 * @author Karol Kujawiak
 	 */
-	public static void deleteDirectory(String dirName)
-	{
+	public static void deleteDirectory(String dirName) {
 		try {
 			FileUtils.deleteDirectory(new File(dirName));
 		} catch (IOException e) {
@@ -106,7 +102,7 @@ public class CommonUtils {
 			HttpPost httpPost = new HttpPost(apiUrl);
 			List<NameValuePair> paramPairs = new ArrayList<NameValuePair>();
 
-			for (int i=0; i<param.length; i++){
+			for (int i = 0; i < param.length; i++) {
 				paramPairs.add(new BasicNameValuePair(param[i][0], param[i][1]));
 			}
 			httpPost.setEntity(new UrlEncodedFormEntity(paramPairs));

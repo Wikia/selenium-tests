@@ -1,16 +1,18 @@
 package com.wikia.webdriver.Common.Core;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
+import com.wikia.webdriver.Common.Logging.PageObjectLogging;
+
 public class Assertion extends Assert {
-	
+
 	public static boolean assertStringContains(String pattern, String current) {
 		String currentEncoded = encodeSpecialChars(current);
 		String patternEncoded = encodeSpecialChars(pattern);
@@ -91,24 +93,21 @@ public class Assertion extends Assert {
 					+ expected + ", got: " + actual, false);
 		}
 	}
-	
+
 	private static Map<ITestResult, List> verificationFailuresMap = new HashMap<ITestResult, List>();
-	
-	private static void addVerificationFailure(Throwable e) 
-	{
+
+	private static void addVerificationFailure(Throwable e) {
 		List verificationFailures = getVerificationFailures();
 		verificationFailuresMap.put(Reporter.getCurrentTestResult(), verificationFailures);
 		verificationFailures.add(e);
 	}
 
-	public static List getVerificationFailures() 
-	{
+	public static List getVerificationFailures() {
 		List verificationFailures = verificationFailuresMap.get(Reporter.getCurrentTestResult());
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}
-	
-	public static List getVerificationFailures(ITestResult result) 
-	{
+
+	public static List getVerificationFailures(ITestResult result) {
 		List verificationFailures = verificationFailuresMap.get(result);
 		return verificationFailures == null ? new ArrayList() : verificationFailures;
 	}

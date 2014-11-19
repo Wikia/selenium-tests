@@ -37,10 +37,9 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 		PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);
 	}
 
-	public void selectTheme(int skinNumber)
-	{
+	public void selectTheme(int skinNumber) {
 		waitForElementByCss(dataThemeList);
-		jQueryClick("li[data-theme]:nth-child("+skinNumber+")");
+		jQueryClick("li[data-theme]:nth-child(" + skinNumber + ")");
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {

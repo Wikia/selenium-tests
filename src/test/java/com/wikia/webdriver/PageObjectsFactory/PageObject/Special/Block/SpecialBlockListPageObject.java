@@ -19,13 +19,13 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css="#mw-input-wpTarget")
+	@FindBy(css = "#mw-input-wpTarget")
 	private WebElement userNameField;
-	@FindBy(css="input.mw-htmlform-submit")
+	@FindBy(css = "input.mw-htmlform-submit")
 	private WebElement searchButton;
-	@FindBy(xpath="//p[contains(text(), 'The requested IP address or username is not blocked.')]")
+	@FindBy(xpath = "//p[contains(text(), 'The requested IP address or username is not blocked.')]")
 	private WebElement userUnblockedMessage;
-	@FindBy(css=".mw-blocklist td:nth-child(3)")
+	@FindBy(css = ".mw-blocklist td:nth-child(3)")
 	private WebElement expirationDate;
 
 	private void typeInUserName(String userName){
@@ -68,17 +68,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 		}
 		SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
 		String expirationDateText = expirationDate.getText();
-        try
-        {
-            Date expirationDate = blockListDateFormat.parse(expirationDateText);
-            Date currentDate = new Date();
-            isBlocked = currentDate.before(expirationDate);
-        }
-        catch (ParseException ex)
-        {
-        	throw new RuntimeException("Can't parse expirationDateText: "+expirationDateText);
-        }
-        PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked?" blocked":"n't blocked"), true);
-        return isBlocked;
+		try {
+			Date expirationDate = blockListDateFormat.parse(expirationDateText);
+			Date currentDate = new Date();
+			isBlocked = currentDate.before(expirationDate);
+		} catch (ParseException ex) {
+			throw new RuntimeException("Can't parse expirationDateText: " + expirationDateText);
+		}
+		PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
+		return isBlocked;
 	}
 }
