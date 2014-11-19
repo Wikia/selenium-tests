@@ -135,10 +135,8 @@ public class NotificationsComponentObject extends BasePageObject {
 		for (int i = 0; i < this.notificationsList.size(); i++) {
 			WebElement n = this.notificationsList.get(i);
 			WebElement nTitle = n.findElement(notificationTitle);
-			if (n != null) {
-				if (title.equals(nTitle.getText())) {
-					notifications.add(n);
-				}
+			if (n != null && title.equals(nTitle.getText())) {
+				notifications.add(n);
 			}
 		}
 		return notifications;
