@@ -114,9 +114,10 @@ public class NewDriverProvider {
 
 	private static EventFiringWebDriver getAndroidInstance(){
 		DesiredCapabilities destCaps = new DesiredCapabilities();
+		destCaps.setCapability("deviceName", "Android");
 		URL url = null;
 		try {
-			url = new URL("http://10.10.11.54:4723/wd/hub");
+			url = new URL("http://10.10.11.54:4723/wd/hub"); //Put Appium server IP address here (locally on Windows it is 127.0.0.1:4723/wd/hub on Mac)
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
