@@ -287,19 +287,32 @@ public class BasePageObject{
 	}
 
 	public void getUrl(String url) {
+		getUrl(url, false);
+	}
+
+	public void getUrl(String url, boolean makeScreenshot) {
 		try {
 			driver.get(url);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("getUrl",
-					"page %page% loaded for more then 30 seconds".replace(
-						"%page%", url), false);
+				"page %page% loaded for more then 30 seconds".replace(
+					"%page%", url), false);
 			return;
 		}
-		PageObjectLogging.log(
-			"NavigateTo",
-			String.format("Navigate to %s", url),
-			true
-		);
+		if (makeScreenshot) {
+			PageObjectLogging.log(
+				"NavigateTo",
+				String.format("Navigate to %s", url),
+				true,
+				driver
+			);
+		} else {
+			PageObjectLogging.log(
+				"NavigateTo",
+				String.format("Navigate to %s", url),
+				true
+			);
+		}
 	}
 
 	public void refreshPage() {
