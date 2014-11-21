@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,12 +13,13 @@ import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Editor;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatting;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -777,12 +779,121 @@ public class ArticlePageObject extends WikiBasePageObject {
 		articleModal.createPageWithBlankLayout("");
 		return new SourceEditModePageObject(driver);
 	}
-	
+
 	public EmbedMapComponentObject clickViewEmbedMap(){
 		waitForElementVisibleByElement(viewEmbedMapButton);
 		scrollToElement(viewEmbedMapButton);
 		viewEmbedMapButton.click();
 		driver.switchTo().activeElement();
 		return new EmbedMapComponentObject(driver);
+	}
+
+	public void verifyMainEditEditor(Editor expectedEditor) {
+		switch(expectedEditor) {
+			case VE:
+				VisualEditorPageObject ve = openVEModeWithMainEditButton();
+				ve.verifyVEToolBarPresent();
+				ve.verifyEditorSurfacePresent();
+				break;
+			case CK:
+				VisualEditModePageObject ck = openCKModeWithMainEditButton();
+				ck.verifyContentLoaded();
+				ck.clickPublishButton();
+				break;
+			case SRC:
+				SourceEditModePageObject src = openSrcModeWithMainEditButton();
+				src.verifySourceOnlyMode();
+				src.clickPublishButton();
+				break;
+		}
+	}
+
+	public void verifyCreateAPageEditor(Editor expectedEditor, String articleName) {
+		switch(expectedEditor) {
+			case VE:
+				VisualEditorPageObject ve = createArticleInVEUsingDropdown(articleName);
+				ve.verifyVEToolBarPresent();
+				ve.verifyEditorSurfacePresent();
+				break;
+			case CK:
+				VisualEditModePageObject ck = createArticleInCKUsingDropdown(articleName);
+				ck.verifyContentLoaded();
+				ck.clickPublishButton();
+				break;
+			case SRC:
+				SourceEditModePageObject src = createArticleInSrcUsingDropdown(articleName);
+				src.verifySourceOnlyMode();
+				src.clickPublishButton();
+				break;
+		}
+	}
+
+	public void verifySectionEditEditor(Editor expectedEditor) {
+		switch(expectedEditor) {
+			case VE:
+				VisualEditorPageObject ve = openVEModeWithSectionEditButton(0);
+				ve.verifyVEToolBarPresent();
+				ve.verifyEditorSurfacePresent();
+				break;
+			case CK:
+				VisualEditModePageObject ck = openCKModeWithSectionEditButton(0);
+				ck.verifyContentLoaded();
+				ck.clickPublishButton();
+				break;
+			case SRC:
+				SourceEditModePageObject src = openSrcModeWithSectionEditButton(0);
+				src.verifySourceOnlyMode();
+				src.clickPublishButton();
+				break;
+		}
+	}
+
+	public void verifyRedLinkEditor(Editor expectedEditor) {
+		switch(expectedEditor) {
+			case VE:
+				VisualEditorPageObject ve = openVEModeWithRedLinks(0);
+				ve.verifyVEToolBarPresent();
+				ve.verifyEditorSurfacePresent();
+				break;
+			case CK:
+				VisualEditModePageObject ck = openCKModeWithRedLinks(0);
+				ck.verifyContentLoaded();
+				ck.clickPublishButton();
+				break;
+			case SRC:
+				SourceEditModePageObject src = openSrcModeWithRedLinks(0);
+				src.verifySourceOnlyMode();
+				src.clickPublishButton();
+				break;
+		}
+	}
+
+	public void verifyURLActionEditEditor(Editor expectedEditor, String articleName, String wikiURL) {
+		switch(expectedEditor) {
+			case CK:
+				VisualEditModePageObject ck = navigateToArticleEditPageCK(wikiURL, articleName);
+				ck.verifyContentLoaded();
+				ck.clickPublishButton();
+				break;
+			case SRC:
+				SourceEditModePageObject src = navigateToArticleEditPageSrc(wikiURL, articleName);
+				src.verifySourceOnlyMode();
+				src.clickPublishButton();
+				break;
+			default:
+				throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
+		}
+	}
+
+	public void verifyURLVEActionEditEditor(Editor expectedEditor, String wikiURL) {
+		switch(expectedEditor) {
+			case VE:
+				VisualEditorPageObject ve = openNewArticleEditModeVisual(wikiURL);
+				ve.verifyVEToolBarPresent();
+				ve.verifyEditorSurfacePresent();
+				break;
+			default:
+				throw new NoSuchElementException("Invalid expected editor chosen: " + expectedEditor.name());
+		}
 	}
 }

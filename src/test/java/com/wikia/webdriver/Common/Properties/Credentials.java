@@ -3,6 +3,7 @@ package com.wikia.webdriver.Common.Properties;
 import java.io.File;
 
 import com.wikia.webdriver.Common.Core.XMLFunctions;
+import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.EditorPref;
 
 /**
  *
@@ -219,5 +220,31 @@ public class Credentials {
 		passwordSysop = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.user.wikiasysop.password");
 
 		apiToken = XMLFunctions.getXMLConfiguration(credentialsFile, "ci.api.token");
+	}
+
+	public String getUserBaseOnEditorPref(EditorPref editorPref) {
+		switch (editorPref) {
+		case VE:
+			return userNameVEPreferred;
+		case CK:
+			return userNameCKPreferred;
+		case SRC:
+			return userNameSourcePreferred;
+		default:
+			return "";
+		}
+	}
+
+	public String getPassBaseOnEditorPref(EditorPref editorPref) {
+		switch (editorPref) {
+		case VE:
+			return passwordVEPreferred;
+		case CK:
+			return passwordCKPreferred;
+		case SRC:
+			return passwordSourcePreferred;
+		default:
+			return "";
+		}
 	}
 }
