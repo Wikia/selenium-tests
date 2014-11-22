@@ -638,7 +638,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		);
 	}
 
-	private boolean isGptParamPresent(String key, String value) {
+	protected boolean isGptParamPresent(String key, String value) {
 		waitForElementByElement(presentMedrec);
 		String dataGptPageParams = presentLeaderboardGpt.getAttribute("data-gpt-page-params");
 		String gptParamPattern = String.format("\"%s\":\"%s\"", key, value);
@@ -675,24 +675,5 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
-	}
-
-	/**
-	 * Test whether the Krux control tag is called with the proper site ID
-	 *
-	 * @param kruxSiteId the expected Krux site ID
-	 */
-	public void verifyKruxControlTag(String kruxSiteId) {
-		String expectedUrl = KRUX_CONTROL_TAG_URL_PREFIX + kruxSiteId;
-		Assertion.assertEquals(expectedUrl, kruxControlTag.getAttribute("src"));
-	}
-
-	/**
-	 * Test whether the Krux user id is not empty and added to GPT calls
-	 */
-	public void verifyKruxUserParam() {
-		String kruxUser = (String) ((JavascriptExecutor) driver).executeScript("return Krux.user;");
-		Assertion.assertStringNotEmpty(kruxUser);
-		Assertion.assertTrue(isGptParamPresent("u", kruxUser));
 	}
 }
