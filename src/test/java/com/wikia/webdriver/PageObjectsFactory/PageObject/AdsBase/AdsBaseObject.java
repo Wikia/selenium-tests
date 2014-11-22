@@ -78,7 +78,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
 		AdsContent.setSlotsSelectors();
-		getUrl(page);
+		getUrl(page, true);
 		setSlots();
 	}
 
@@ -89,7 +89,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		super(driver);
 		AdsContent.setSlotsSelectors();
 		networkTrafficInterceptor.startIntercepting(page);
-		getUrl(page);
+		getUrl(page, true);
 		this.networkTrafficInterceptor = networkTrafficInterceptor;
 		setSlots();
 	}
@@ -103,7 +103,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	public AdsBaseObject(WebDriver driver, String testedPage, Dimension resolution) {
 		super(driver);
 		driver.manage().window().setSize(resolution);
-		getUrl(testedPage);
+		getUrl(testedPage, true);
 		AdsContent.setSlotsSelectors();
 		setSlots();
 	}
