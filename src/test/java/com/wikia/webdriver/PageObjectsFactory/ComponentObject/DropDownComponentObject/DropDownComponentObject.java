@@ -57,7 +57,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
 	public void remindPassword(String userName, String apiToken) {
 		Assertion.assertEquals(
-				ApiActions.apiActionForgotPasswordResponse,
+				ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
 				resetForgotPasswordTime(userName, apiToken));
 		fillUserNameInput(userName);
 		waitForElementByElement(formForgotPasswordLink);
@@ -153,7 +153,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
 	public void verifyMessageAboutNewPassword(String userName) {
 		waitForElementByElement(messagePlaceholder);
-		String newPasswordMsg = PageContent.newPasswordSentMessage.replace("%userName%", userName);
+		String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
 		waitForTextToBePresentInElementByElement(messagePlaceholder, newPasswordMsg);
 		PageObjectLogging.log(
 			"MessageAboutPasswordSent",

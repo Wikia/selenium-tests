@@ -33,8 +33,6 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	private WebElement moreOrFewerOptions;
 	@FindBy(css="div.toggles input[name='wpIgnoreWarning']")
 	private WebElement ignoreAnyWarnings;
-	@FindBy(css="section[id='UploadPhotosWrapper']")
-	private WebElement uploadPhotoDialog;
 	@FindBy(css="div.wikia-gallery div.wikia-gallery-item img")
 	private WebElement wikiaPreviewImg;
 	@FindBys(@FindBy(css="#mw-content-text img"))
@@ -85,7 +83,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 
 	public void selectFileToUpload(String file) {
 		browseForFileInput.sendKeys(
-				getAbsolutePathForFile(PageContent.resourcesPath + file)
+				getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
 		);
 		PageObjectLogging.log("typeInFileToUploadPath", "type file " + file + " to upload it", true);
 	}
@@ -154,10 +152,10 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	public WatchPageObject unfollowImage(String wikiURL, String imageName) {
 		String url = urlBuilder.appendQueryStringToURL(
 				wikiURL +
-				URLsContent.wikiDir +
-				URLsContent.fileNameSpace +
+				URLsContent.WIKI_DIR +
+				URLsContent.FILE_NAMESPACE +
 				imageName,
-				URLsContent.unfollowParameter
+				URLsContent.ACTION_UNFOLLOW
 		);
 		getUrl(url);
 		return new WatchPageObject(driver);
@@ -169,7 +167,7 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 	}
 
 	public String getFileUrl(String wikiURL, int itemNumber) {
-		String fileUrl = wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + getImageKey(itemNumber);
+		String fileUrl = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getImageKey(itemNumber);
 		PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
 		return fileUrl;
 	}

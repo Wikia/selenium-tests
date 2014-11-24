@@ -24,10 +24,6 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	private List<WebElement> themes;
 	@FindBy(css=".next.chevron")
 	private WebElement nextButton;
-	@FindBy(css=".previous.chevron")
-	private WebElement previousButton;
-	@FindBy(css=".PreviewFrame")
-	private WebElement previewFrame;
 	//customize tab
 	@FindBy(css=".color-body")
 	private WebElement bgColor;
@@ -67,7 +63,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 
 	public void openSpecialDesignerPage(String wikiURL) {
-		getUrl(wikiURL+URLsContent.specialThemeDesigner);
+		getUrl(wikiURL+URLsContent.SPECIAL_THEME_DESIGNER);
 		PageObjectLogging.log("openSpecialDesignerPage", "special designer page opened", true, driver);
 	}
 
@@ -114,7 +110,7 @@ public class SpecialThemeDesignerPageObject extends WikiBasePageObject{
 	}
 
 	public enum Tab {
-		Theme, Customize, Wordmark
+		THEME, CUSTOMIZE, WORDMARK
 	}
 
 	public void selectTab(Tab tabName){

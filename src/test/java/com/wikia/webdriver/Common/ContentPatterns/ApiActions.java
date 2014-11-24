@@ -2,7 +2,7 @@ package com.wikia.webdriver.Common.ContentPatterns;
 
 public class ApiActions {
 	
-	public static final String apiActionForgotPassword = "resetpasswordtime";
-	public static final String apiActionForgotPasswordResponse = "{\"resetpasswordtime\":{\"success\":true}}";
+	public static final String API_ACTION_FORGOT_PASSWORD = "resetpasswordtime";
+	public static final String API_ACTION_FORGOT_PASSWORD_RESPONSE = "{\"resetpasswordtime\":{\"success\":true}}";
 
 }

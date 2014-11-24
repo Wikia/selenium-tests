@@ -18,8 +18,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.EditMode.WikiA
  */
 public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 
-		@FindBy(css=".main-header")
-		private WebElement videoOptionsHeader;
 		@FindBy(css="#VideoEmbedLayoutRow")
 		private WebElement videoEmbedLayotRow;
 		@FindBy(css="#VideoEmbedCaption")
@@ -32,30 +30,18 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 		private WebElement positionLayoutCenter;
 		@FindBy(css="#VET_LayoutRightBox label")
 		private WebElement positionLayoutRight;
-		@FindBy(css="#VideoEmbedName")
-		private WebElement videoName;
 		@FindBy(css=".input-group.button-group input")
 		private WebElement addAvideo;
 		@FindBy(css="#VideoEmbedCloseButton")
 		private WebElement returnToEditing;
 		@FindBy(css="input.wikia-button.v-float-right")
 		private WebElement updateVideoButton;
-		@FindBy(css="span#VET_LayoutLeftBox.selected")
-		private WebElement positionLayoutLeftSelected;
-		@FindBy(css="span#VET_LayoutRightBox.selected")
-		private WebElement positionLayoutRightSelected;
-		@FindBy(css="span#VET_LayoutCenterBox.selected")
-		private WebElement positionLayoutCenterSelected;
 		@FindBy(css="input#VideoEmbedName")
 		private WebElement uneditableVideoNameField;
-		@FindBy(css="input[type='text'][id='VideoEmbedName']")
-		private WebElement editableVideoNameField;
 		@FindBy(css="#VideoEmbedThumb .video-embed")
 		private WebElement videoThumbnail;
 		@FindBy(css="div#VideoEmbedNameRow p")
 		private WebElement videoNameCaption;
-		@FindBy(css="#VET_LayoutLeftBox")
-		private WebElement leftPositionButton;
 
 		public VetOptionsComponentObject(WebDriver driver) {
 		super(driver);
@@ -122,13 +108,13 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 	public void adjustPosition(PositionsVideo position){
 		waitForElementByElement(videoEmbedLayotRow);
 		switch (position){
-		case left:
+		case LEFT:
 			positionLayoutLeft.click();
 			break;
-		case center:
+		case CENTER:
 			positionLayoutCenter.click();
 			break;
-		case right:
+		case RIGHT:
 			positionLayoutRight.click();
 			break;
 		}
@@ -142,13 +128,13 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 				.getAttribute("id");
 		String desiredPositionId;
 		switch (positions){
-		case left:
+		case LEFT:
 			desiredPositionId = "VET_LayoutLeftBox";
 			break;
-		case center:
+		case CENTER:
 			desiredPositionId = "VET_LayoutCenterBox";
 			break;
-		case right:
+		case RIGHT:
 			desiredPositionId = "VET_LayoutRightBox";
 			break;
 		default:

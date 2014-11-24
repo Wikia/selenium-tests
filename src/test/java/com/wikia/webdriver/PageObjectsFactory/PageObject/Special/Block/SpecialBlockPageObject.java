@@ -14,8 +14,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 public class SpecialBlockPageObject extends WikiBasePageObject{
 
-	@FindBy(xpath="//h1[contains(text(), 'Block')]")
-	private WebElement blockPageHeader;
 	@FindBy(css="input[name='wpTarget']")
 	private WebElement userNameField;
 	@FindBy(css="select#mw-input-wpExpiry")

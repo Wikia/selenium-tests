@@ -81,7 +81,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 
 	public void selectFileToUpload(String file, String typeOfFile) {
 		unhideElementByClassChange("wpUploadFile", "poi-category-marker-image-upload");
-		uploadInputsCollection.get(0).sendKeys(getAbsolutePathForFile(PageContent.resourcesPath + file));
+		uploadInputsCollection.get(0).sendKeys(getAbsolutePathForFile(PageContent.RESOURCES_PATH + file));
 		PageObjectLogging.log("selectFileToUpload", "Tried to upload " + typeOfFile, true, driver);
 
 	}

@@ -1,9 +1,10 @@
 package com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps;
 
-import com.wikia.webdriver.Common.Core.Assertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
 
@@ -29,8 +30,6 @@ public class TemplateComponentObject extends BasePageObject {
 	private WebElement backButton;
 	@FindBy(css = ".intMapPreviewImage")
 	private WebElement templateImagePreview;
-	@FindBy(css = ".modal.medium.int-map-modal")
-	private WebElement newTemplateDialog;
 	@FindBy(css = "#intMapError")
 	private WebElement mapError;
 

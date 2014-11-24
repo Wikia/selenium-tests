@@ -1,11 +1,11 @@
 package com.wikia.webdriver.Common.Clicktracking;
 
 public enum EventParameter {
-	eventName,
-	ga_category,
-	ga_action,
-	trackingMethod,
-	action,
-	category,
-	label,
+	EVENT_NAME,
+	GA_CATEGORY,
+	GA_ACTION,
+	TRACKING_METHOD,
+	ACTION,
+	CATEGORY,
+	LABEL,
 }

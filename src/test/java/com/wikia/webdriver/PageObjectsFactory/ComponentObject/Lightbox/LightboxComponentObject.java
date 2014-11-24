@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.FilePage.FilePagePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
@@ -59,8 +59,6 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement closeShareScreenButton;
 	@FindBy(css=".LightboxHeader button.close.wikia-chiclet-button")
 	protected WebElement closeModalButton;
-	@FindBy(css="div.video-media")
-	private WebElement mediaContainer;
 
 	private final Integer videoWidthLightbox = 737;
 
