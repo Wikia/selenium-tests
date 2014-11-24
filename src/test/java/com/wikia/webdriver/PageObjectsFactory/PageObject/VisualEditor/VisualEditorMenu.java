@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor;
 
 import java.util.List;
 
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,17 +15,6 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDi
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertList;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMapDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorAddMediaDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorHyperLinkDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorKeyboardShortcutsDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorInsertTemplateDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorOptionsDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorReferenceListDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSaveChangesDialog;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.VisualEditorSourceEditorDialog;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 
 /**
@@ -85,6 +75,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By templateBy = By.cssSelector(".oo-ui-icon-template");
 	private By referenceBy = By.cssSelector(".oo-ui-icon-reference");
 	private By referenceListBy = By.cssSelector(".oo-ui-icon-references");
+	private By galleryBy = By.cssSelector(".oo-ui-icon-gallery");
 	private By paragraphBy = By.cssSelector(".oo-ui-tool-name-paragraph");
 	private By headingBy = By.cssSelector(".oo-ui-tool-name-heading2");
 	private By subHeading1By = By.cssSelector(".oo-ui-tool-name-heading3");
@@ -222,6 +213,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 				clickHamburgerItemFromDropDown(sourceEditorBy);
 				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 				return new VisualEditorSourceEditorDialog(driver);
+			case GALLERY:
+				clickInsertItemFromDropDown(galleryBy);
+				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
+				return new VisualEditorInsertGalleryDialog(driver);
 			default:
 				return null;
 		}

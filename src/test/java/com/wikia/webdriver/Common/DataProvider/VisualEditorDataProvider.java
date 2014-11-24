@@ -57,7 +57,8 @@ public class VisualEditorDataProvider {
 		PAGE_SETTINGS,
 		CATEGORIES,
 		KEYBOARD_SHORTCUTS,
-		SOURCE_EDITOR;
+		SOURCE_EDITOR,
+		GALLERY;
 	}
 
 	public enum InsertList {
