@@ -138,6 +138,7 @@
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.EntryPoint.VEEnabledEditorEntryDefaultPreferredTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.EntryPoint.VEEnabledEditorEntrySourcePreferredTests"/>
 			<class name="com.wikia.webdriver.TestCases.VisualEditor.EntryPoint.VEEnabledEditorEntryVEPreferredTests"/>
+            <class name="com.wikia.webdriver.TestCases.VisualEditor.VEGalleryTests"/>
 			<class name="com.wikia.webdriver.TestCases.FacebookTests.FacebookTests"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.LicensedVideoSwap"/>
 			<class name="com.wikia.webdriver.TestCases.SpecialPagesTests.VideosPageTests"/>
