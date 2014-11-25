@@ -9,6 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
+		<mvn_run>true</mvn_run>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -158,7 +159,7 @@
 				<version>2.16</version>
 				<configuration>
 					<systemPropertyVariables>
-						<run_mvn>true</run_mvn>
+						<run_mvn>${mvn_run}</run_mvn>
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
 						<wiki-name>${wiki-name}</wiki-name>
@@ -191,4 +192,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>manualConfig</id>
+			<properties>
+				<mvn_run>false</mvn_run>
+			</properties>
+		</profile>
+	</profiles>
 </project>
