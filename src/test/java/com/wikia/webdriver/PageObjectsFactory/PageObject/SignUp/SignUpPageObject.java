@@ -96,7 +96,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 				.findElement(parentBy)
 				.findElement(errorMsgBy)
 				.getText();
-		Assertion.assertEquals(message, PageContent.signUpTooYoungMessage);
+		Assertion.assertEquals(message, PageContent.SIGN_UP_TOO_YOUNG_MESSAGE);
 	}
 
 	public void verifySubmitButtonDisabled() {
@@ -174,7 +174,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 				.findElement(parentBy)
 				.findElement(errorMsgBy)
 				.getText();
-		Assertion.assertEquals(message, PageContent.signUpInvalidCaptchaMessage);
+		Assertion.assertEquals(message, PageContent.SIGN_UP_INVALID_CAPTCHA_MESSAGE);
 	}
 
 	public void verifyUserExistsMessage() {
@@ -182,7 +182,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 				.findElement(parentBy)
 				.findElement(errorMsgBy)
 				.getText();
-		Assertion.assertEquals(message, PageContent.signUpUserExistsMessage);
+		Assertion.assertEquals(message, PageContent.SIGN_UP_USER_EXISTS_MESSAGE);
 	}
 
 	private String getWordFromCaptcha(File captchaFile) {
@@ -233,7 +233,8 @@ public class SignUpPageObject extends WikiBasePageObject {
 				output = String.format("%0" + (md5sum.length << 1) + "x", bigInt);
 			} finally {
 				is.close();
-			} return output;
+			}
+			return output;
 		} catch(NoSuchAlgorithmException e) {
 			PageObjectLogging.log("md5", e.toString(), false);
 			throw new RuntimeException(e);

@@ -24,7 +24,6 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	private final String smartBannerSelector = ".smartbanner.android";
 	private AdsComparison adsComparison;
 	private ImageComparison imageComparison;
-	private By gptIframeTopLeaderBoardSelector = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	private By celtraAdSelector = By.cssSelector(".celtra-ad-v3 iframe");
 
 	public MobileAdsBaseObject(WebDriver driver, String page) {

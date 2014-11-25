@@ -34,7 +34,7 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyHighlighting();
 		specialCss.clearCssText();
-		specialCss.sendCssText(CssEditorContent.invalidCssError);
+		specialCss.sendCssText(CssEditorContent.INVALID_CSS_ERROR);
 		specialCss.verifyAceError();
 	}
 
@@ -45,7 +45,7 @@ public class CssChromeTests extends NewTestTemplate {
 	public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
 		String cssContent = specialCss.getWikiaCssContent();
 		Assertion.assertEquals(currentTimestamp, cssContent);
 	}
@@ -57,8 +57,8 @@ public class CssChromeTests extends NewTestTemplate {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.sendEditSummaryText(currentTimestamp);
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
-		specialCss.appendToUrl(URLsContent.historyAction);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+		specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
 		String editSummary = specialCss.getFirstCssRevision();
 		Assertion.assertStringContains(currentTimestamp, editSummary);
 	}
@@ -86,8 +86,8 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyMinorEditAppears();
 		specialCss.clickMinorCheckbox();
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
-		specialCss.appendToUrl(URLsContent.historyAction);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+		specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
 		specialCss.verifyRevisionMarkedAsMinor();
 	}
 
@@ -124,7 +124,7 @@ public class CssChromeTests extends NewTestTemplate {
 	@Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"})
 	public void CssChrome_008_verifyOnLeaveMessageWorks() {
 		specialCss.verifyAceEditorPresence();
-		specialCss.sendCssText(CssEditorContent.validCss);
+		specialCss.sendCssText(CssEditorContent.VALID_CSS);
 		driver.get(wikiURL);
 		specialCss.waitForAlertAndAccept();
 	}

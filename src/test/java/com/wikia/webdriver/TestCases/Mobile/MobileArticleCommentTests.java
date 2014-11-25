@@ -26,7 +26,7 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
-		article.addComment(PageContent.commentTextNonLatin + timeStamp);
+		article.addComment(PageContent.COMMENT_TEXT_NON_LATIN + timeStamp);
 	}
 
 	@Test(groups={"MobileArticleComment_002", "MobileArticleComment", "Mobile"})
@@ -35,8 +35,8 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
-		article.addComment(PageContent.commentTextNonLatin + timeStamp);
-		article.addReply(PageContent.replyText2 + timeStamp);
+		article.addComment(PageContent.COMMENT_TEXT_NON_LATIN + timeStamp);
+		article.addReply(PageContent.REPLY_TEXT2 + timeStamp);
 	}
 
 	@Test(groups={"MobileArticleComment_003", "MobileArticleComment", "Mobile"})
@@ -58,7 +58,7 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
-		article.verifyNumberOfComments(PageContent.commentText2 + timeStamp);
+		article.verifyNumberOfComments(PageContent.COMMENT_TEXT2 + timeStamp);
 	}
 
 	@Test(groups={"MobileArticleComment_005", "MobileArticleComment", "Mobile"})
@@ -67,6 +67,6 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		mobile.openHome(wikiURL);
 		MobileArticlePageObject article = mobile.openRandomPage();
 		timeStamp = article.getTimeStamp();
-		article.verifyInputExpand(PageContent.commentText2 + timeStamp);
+		article.verifyInputExpand(PageContent.COMMENT_TEXT2 + timeStamp);
 	}
 }

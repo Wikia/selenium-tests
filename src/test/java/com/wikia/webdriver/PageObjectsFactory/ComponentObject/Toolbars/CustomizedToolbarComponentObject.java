@@ -37,10 +37,6 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 	private WebElement saveButton;
 	@FindBy(css="span.reset-defaults img")
 	private WebElement resetDefaultsButton;
-	@FindBy(css="li.mytools.menu")
-	private WebElement myToolsMenuButton;
-	@FindBy(css="ul[id='my-tools-menu']")
-	private WebElement myToolsMenu;
 	@FindBy(css=".overflow-menu > .tools-menu li > a[href*=Special]")
 	private List<WebElement> myToolsList;
 

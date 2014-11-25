@@ -41,15 +41,15 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
 	public enum PositionsGallery {
-		left, center, right
+		LEFT, CENTER, RIGHT
 	}
 
 	public enum SpacingGallery {
-		small, medium, large
+		SMALL, MEDIUM, LARGE
 	}
 
 	public enum Orientation{
-		none, square, landscape, portrait
+		NONE, SQUARE, LANDSCAPE, PORTRAIT
 	}
 
 	public GalleryBuilderComponentObject(WebDriver driver) {
@@ -83,16 +83,16 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	public void adjustOrientation(Orientation orientionGallery){
 		waitForElementByElement(orientation);
 		switch(orientionGallery){
-		case none:
+		case NONE:
 			orientation.findElement(orintationNone);
 			break;
-		case square:
+		case SQUARE:
 			orientation.findElement(orintationSquare);
 			break;
-		case landscape:
+		case LANDSCAPE:
 			orientation.findElement(orintationLandscape);
 			break;
-		case portrait:
+		case PORTRAIT:
 			orientation.findElement(orintationPortrait);
 			break;
 		}

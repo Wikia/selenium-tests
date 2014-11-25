@@ -35,7 +35,7 @@ public class EditAccountTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		EditAccount editAccount = new EditAccount(driver, testedWiki, credentials.userNameClosedAccount);
-		editAccount.closeAccount(PageContent.caption);
+		editAccount.closeAccount(PageContent.CAPTION);
 		editAccount.verifyAccountClosedMessage();
 	}
 

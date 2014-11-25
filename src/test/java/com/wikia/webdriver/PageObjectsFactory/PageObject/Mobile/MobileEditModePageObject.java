@@ -43,10 +43,10 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 	}
 
 	public void verifyModeName() {
-		Assertion.assertEquals(MobilePageContent.editModeHeader, getModeName());
+		Assertion.assertEquals(MobilePageContent.EDITMODE_HEADER, getModeName());
 		PageObjectLogging.log(
 			"verifyModeName",
-			"The header shows '" + MobilePageContent.editModeHeader + "'",
+			"The header shows '" + MobilePageContent.EDITMODE_HEADER + "'",
 			true
 		);
 	}

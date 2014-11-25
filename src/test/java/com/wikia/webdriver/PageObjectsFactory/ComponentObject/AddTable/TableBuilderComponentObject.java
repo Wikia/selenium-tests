@@ -89,23 +89,23 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 	}
 
 	public enum Headers {
-		None, FirstRow, FirstColumn, Both
+		NONE, FIRSTROW, FIRSTCOLUMN, BOTH
 	}
 
 	public void selectHeader(Headers header) {
 		waitForElementByElement(tablePropertiesDropdownOptions.get(0));
 		Select headerDropdown = new Select(tablePropertiesDropdownOptions.get(0));
 		switch(header) {
-		case None:
+		case NONE:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case FirstRow:
+		case FIRSTROW:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case FirstColumn:
+		case FIRSTCOLUMN:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case Both:
+		case BOTH:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
 		}
@@ -113,20 +113,20 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 	}
 
 	public enum Alignment {
-		Left, Center, Right
+		LEFT, CENTER, RIGHT
 	}
 
 	public void selectAlignment(Alignment position) {
 		waitForElementByElement(tablePropertiesDropdownOptions.get(1));
 		Select positionDropdown = new Select(tablePropertiesDropdownOptions.get(1));
 		switch(position) {
-		case Left:
+		case LEFT:
 			positionDropdown.selectByVisibleText(position.toString());
 			break;
-		case Center:
+		case CENTER:
 			positionDropdown.selectByVisibleText(position.toString());
 			break;
-		case Right:
+		case RIGHT:
 			positionDropdown.selectByVisibleText(position.toString());
 			break;
 		}

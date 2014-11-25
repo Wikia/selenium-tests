@@ -33,7 +33,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	public void CategoriesTestsArticle_001_anon() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
-		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
+		String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
 		article.addCategory(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);
@@ -44,11 +44,11 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver);
 		visualEditMode.navigateToArticleEditPageCK(
 				wikiURL,
-				PageContent.articleNamePrefix + visualEditMode.getTimeStamp()
+				PageContent.ARTICLE_NAME_PREFIX + visualEditMode.getTimeStamp()
 		);
-		visualEditMode.addContent(PageContent.articleText);
+		visualEditMode.addContent(PageContent.ARTICLE_TEXT);
 		ArticlePageObject article = visualEditMode.submitArticle();
-		String desiredCategory = article.addCategorySuggestions(PageContent.categoryNamePrefix, 2);
+		String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
 		article.submitCategory();
 		article.verifyCategoryPresent(desiredCategory);
 	}
@@ -58,7 +58,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
+		String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
 		article.addCategory(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);
@@ -70,11 +70,11 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(
 				wikiURL,
-				PageContent.articleNamePrefix + base.getTimeStamp()
+				PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp()
 		);
-		visualEditMode.addContent(PageContent.articleText);
+		visualEditMode.addContent(PageContent.ARTICLE_TEXT);
 		ArticlePageObject article = visualEditMode.submitArticle();
-		String desiredCategory = article.addCategorySuggestions(PageContent.categoryNamePrefix, 2);
+		String desiredCategory = article.addCategorySuggestions(PageContent.CATEGORY_NAME_PREFIX, 2);
 		article.submitCategory();
 		article.verifyCategoryPresent(desiredCategory);
 	}
@@ -83,10 +83,10 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	public void CategoriesTestsArticle_005_anonEdit() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
-		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
+		String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
 		article.addCategory(categoryName);
 		EditCategoryComponentObject editCategory = article.editCategory(categoryName);
-		categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
+		categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
 		editCategory.editCategoryName(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);
@@ -96,7 +96,7 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	public void CategoriesTestsArticle_006_anonDelete() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openRandomArticle(wikiURL);
-		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
+		String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
 		article.addCategory(categoryName);
 		article.verifySubmitCategoryEnabled();
 		article.removeCategory(categoryName);
