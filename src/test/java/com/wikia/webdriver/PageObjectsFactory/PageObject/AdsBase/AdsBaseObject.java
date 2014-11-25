@@ -180,9 +180,9 @@ public class AdsBaseObject extends WikiBasePageObject {
 
 	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
 		AdsComparison adsComparison = new AdsComparison();
+		boolean adVisible = adsComparison.isAdVisible(slot, slotSelector, driver);
 		extractLiftiumTagId(slotSelector);
 		extractGptInfo(slotSelector);
-		boolean adVisible = adsComparison.isAdVisible(slot, slotSelector, driver);
 		if (adVisible) {
 			PageObjectLogging.log("CompareScreenshot", "Screenshots are different", true);
 		} else {
