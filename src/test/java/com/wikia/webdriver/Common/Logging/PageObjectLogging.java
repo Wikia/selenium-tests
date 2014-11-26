@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import junit.framework.Assert;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.By;
@@ -193,6 +194,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
+		//THIS IS JUST A HOT_FIX
+		//TODO - FIX THE FLOW PROBLEM BY IMPLEMENTING A PROPER SKIP_EXCEPTION CATCH
+		Assert.assertTrue(false);
+		result.setStatus(ITestResult.FAILURE);
 	}
 
 	@Override

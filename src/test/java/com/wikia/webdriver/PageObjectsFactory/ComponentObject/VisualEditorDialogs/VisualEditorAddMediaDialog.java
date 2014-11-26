@@ -17,18 +17,10 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
 	@FindBy(css=".oo-ui-textInputWidget-decorated>input")
 	private WebElement searchInput;
-	@FindBy(css=".oo-ui-pageLayout-active .ve-ui-wikiaUploadButtonWidget")
-	private WebElement clickToUploadArea;
-	@FindBy(css=".oo-ui-pageLayout-active .oo-ui-labeledElement-label")
-	private WebElement midUploadButton;
 	@FindBy(css=".oo-ui-window-foot .oo-ui-labeledElement-label")
 	private WebElement addMediaButton;
 	@FindBy(css=".ve-ui-wikiaMediaQueryWidget-uploadWrapper .oo-ui-labeledElement-label")
 	private WebElement topUploadButton;
-	@FindBy(css=".secondary .oo-ui-labeledElement-label")
-	private WebElement removeThisItemButton;
-	@FindBy(css=".video.oo-ui-pageLayout-active .video-thumbnail")
-	private WebElement externalVideoThumbnail;
 	@FindBy(css=".oo-ui-window-body")
 	private WebElement mediaDialogBody;
 	@FindBy(css=".oo-ui-bookletLayout .ve-ui-wikiaUploadButtonWidget input")
@@ -185,7 +177,7 @@ public class VisualEditorAddMediaDialog extends VisualEditorDialog {
 
 	private void selectFileToUpload(String fileName) {
 		fileUploadInput.sendKeys(
-			getAbsolutePathForFile(PageContent.resourcesPath + fileName)
+			getAbsolutePathForFile(PageContent.RESOURCES_PATH + fileName)
 		);
 		PageObjectLogging.log(
 			"selectFileToUpload",

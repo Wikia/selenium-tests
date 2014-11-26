@@ -1,7 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.Special.Preferences;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,10 +15,6 @@ public class EditingPreferencesPageObject extends PreferencesPageObject {
 
 	@FindBy(css="select#mw-input-wpeditor")
 	private WebElement preferredEditorDropdown;
-	@FindBy(css="select#mw-input-wpeditor option")
-	private List<WebElement> preferredEditorOptions;
-	@FindBy(css="#mw-htmlform-editing-experience .mw-htmlform-field-HTMLSelectField .mw-input")
-	private WebElement dropdown;
 
 	public void selectPreferredEditor(String value) {
 		waitForElementClickableByElement(preferredEditorDropdown);

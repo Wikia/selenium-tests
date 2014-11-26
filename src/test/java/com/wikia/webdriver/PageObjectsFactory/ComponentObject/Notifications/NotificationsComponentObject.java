@@ -25,8 +25,6 @@ public class NotificationsComponentObject extends BasePageObject {
 	private List<WebElement> notificationsList;
 	@FindBy(css = "#WallNotifications li ul.subnav")
 	private WebElement notificationsSubnav;
-	@FindBy(css = "#WallNotifications")
-	private WebElement notifications;
 	@FindBy(css = "#bubbles_count")
 	private WebElement bubblesCount;
 	@FindBy(css = "#wall-notifications-markasread-sub")
@@ -137,10 +135,8 @@ public class NotificationsComponentObject extends BasePageObject {
 		for (int i = 0; i < this.notificationsList.size(); i++) {
 			WebElement n = this.notificationsList.get(i);
 			WebElement nTitle = n.findElement(notificationTitle);
-			if (n != null) {
-				if (title.equals(nTitle.getText())) {
-					notifications.add(n);
-				}
+			if (n != null && title.equals(nTitle.getText())) {
+				notifications.add(n);
 			}
 		}
 		return notifications;
