@@ -53,14 +53,14 @@ public class MailFunctions {
 			if (messages.length != 0) {
 				Message m = messages[0];
 				String line;
-				StringBuffer buffer = new StringBuffer();
+				StringBuilder builder = new StringBuilder();
 				InputStreamReader in = new InputStreamReader(m.getInputStream());
 				BufferedReader reader = new BufferedReader(in);
 				while((line = reader.readLine()) != null) {
-					buffer.append(line);
+					builder.append(line);
 				}
 				store.close();
-				return buffer.toString();
+				return builder.toString();
 			} else {
 				store.close();
 				return "no messages";

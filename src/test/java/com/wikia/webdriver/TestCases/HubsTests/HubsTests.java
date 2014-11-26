@@ -26,9 +26,9 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	@DataProvider
 	 private final Object[][] provideHubName() {
 		return new Object[][] {
-				{HubName.Video_Games},
-				{HubName.Entertainment},
-				{HubName.Lifestyle}
+				{HubName.VIDEO_GAMES},
+				{HubName.ENTERTAINMENT},
+				{HubName.LIFESTYLE}
 		};
 	}
 
