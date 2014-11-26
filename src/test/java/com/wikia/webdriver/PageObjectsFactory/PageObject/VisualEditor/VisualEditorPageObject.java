@@ -73,6 +73,10 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement focusedNode;
 	@FindBy(css=".mw-body-content")
 	private WebElement mainContent;
+	@FindBy(css=".ve-ce-documentNode .media-gallery-wrapper")
+	private WebElement galleryNode;
+	@FindBy(css=".ve-ce-documentNode .media-gallery-wrapper")
+	private List<WebElement> galleryNodes;
 
 	private By contextMenuBy = By.cssSelector(".ve-ui-contextWidget");
 	private By contextEditBy = By.cssSelector(".oo-ui-icon-edit");
@@ -192,6 +196,21 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		waitForElementVisibleByElement(mediaNode);
 		Assertion.assertNumber(expected, videoNodes.size(), "Checking the correct number of video nodes added");
 		PageObjectLogging.log("verifyVideos", videoNodes.size() + " videos displayed", true);
+	}
+
+	public void verifyGalleries(int expected) {
+		waitForElementVisibleByElement(galleryNode);
+		Assertion.assertNumber(expected, galleryNodes.size(), "Checking the correct number of gallery nodes added");
+		PageObjectLogging.log("verifyGalleries", galleryNodes.size() + " galleries displayed", true);
+	}
+
+	public void verifyMediasInGallery(int expected) {
+		waitForElementByElement(galleryNode);
+		String className = galleryNode.getAttribute("class");
+		String count = className.substring(className.indexOf("count-"));
+		int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
+		Assertion.assertNumber(expected, numOfMediasInGallery, "Checking the correct number of media in gallery");
+		PageObjectLogging.log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
 	}
 
 	public void verifyMedias(int expected) {
