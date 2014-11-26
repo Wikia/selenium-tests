@@ -59,4 +59,40 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		article = saveChangesDialog.savePage();
 		article.verifyVEPublishComplete();
 	}
+
+	@Test(
+			groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
+	)
+	public void VEGalleryTests_002_GalleryCart() {
+		int numOfMedias = 7;
+		int numToRemoveFirst = 1;
+		int numToRemoveSecond = 2;
+		int numToAdd = 2;
+
+		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorInsertGalleryDialog galleryDialog =
+				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+		galleryDialog = galleryDialog.searchMedia("he");
+		//verify # of cart items  = 9
+		galleryDialog.addMediaToCart(numOfMedias);
+		galleryDialog.verifyNumOfCartItems(numOfMedias);
+		//verify # of cart items  = 8
+		galleryDialog.removeMediaFromCart(numToRemoveFirst);
+		numOfMedias = numOfMedias - numToRemoveFirst;
+		galleryDialog.verifyNumOfCartItems(numOfMedias);
+		//verify # of cart item = 11
+		galleryDialog = galleryDialog.searchMedia("a");
+		galleryDialog.addMediaToCart(numToAdd);
+		numOfMedias = numOfMedias + numToAdd;
+		galleryDialog.verifyNumOfCartItems(numOfMedias);
+		//verify # of cart item = 9
+		galleryDialog = galleryDialog.searchMedia("he");
+		galleryDialog.removeMediaFromCart(numToRemoveSecond);
+		numOfMedias = numOfMedias - numToRemoveSecond;
+		galleryDialog.verifyNumOfCartItems(numOfMedias);
+
+	}
 }
