@@ -47,6 +47,8 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 
 		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
 			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
