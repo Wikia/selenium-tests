@@ -1,6 +1,7 @@
 package com.wikia.webdriver.TestCases.VisualEditor;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
+import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
 import com.wikia.webdriver.Common.ContentPatterns.VEContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.Properties.Credentials;
@@ -34,6 +35,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
 		article = new ArticlePageObject(driver);
 		article.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 	}
