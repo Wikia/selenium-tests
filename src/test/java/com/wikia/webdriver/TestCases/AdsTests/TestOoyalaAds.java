@@ -13,7 +13,7 @@ import java.awt.Color;
  */
 public class TestOoyalaAds extends NewTestTemplate {
 	private final static Color GREEN = new Color(0, 214, 0);
-	private final static Color BLUE = new Color(3, 0, 252);
+	private final static Color BLUE = new Color(0, 13, 255);
 	private final static int AD_DURATION_SEC = 30;
 	private final static int VIDEO_DURATION_SEC = 30;
 
