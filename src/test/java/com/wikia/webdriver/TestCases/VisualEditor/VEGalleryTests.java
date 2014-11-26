@@ -2,19 +2,14 @@ package com.wikia.webdriver.TestCases.VisualEditor;
 
 import com.wikia.webdriver.Common.ContentPatterns.PageContent;
 import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.ContentPatterns.VEContent;
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
 import com.wikia.webdriver.Common.Properties.Credentials;
 import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.*;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Special.InteractiveMaps.InteractiveMapPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 /**
  * @author Robert 'Rochan' Chan
@@ -60,5 +55,37 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
 		article = saveChangesDialog.savePage();
 		article.verifyVEPublishComplete();
+	}
+
+	@Test(
+			groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
+	)
+	public void VEGalleryTests_003_PreviewOnTitle() {
+
+		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorInsertGalleryDialog galleryDialog =
+				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+		galleryDialog = galleryDialog.searchMedia("he");
+		ve = galleryDialog.clickTitleToPreview(7);
+		ve.verifyPreviewImage();
+	}
+
+	@Test(
+			groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
+	)
+	public void VEGalleryTests_004_PreviewOnMetadata() {
+
+		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorInsertGalleryDialog galleryDialog =
+				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+		galleryDialog = galleryDialog.searchMedia("he");
+		ve = galleryDialog.clickMetaDataToPreview(3);
+		ve.verifyPreviewImage();
 	}
 }
