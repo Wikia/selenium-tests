@@ -33,9 +33,9 @@ public class TestHighValueCountries extends NewTestTemplate {
 		wikiFactory = new SpecialFactoryPageObject(driver);
 		wikiFactory.openWikiFactoryPage(testedWiki);
 		Object[] variableKeysFromCommunity = wikiFactory.getVariableDefaultValueKeys(
-			WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES
+			WikiFactoryVariables.wgHighValueCountries
 		);
-		String wgHVC_JSConsole = instantGlobalsPrefix + WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES.toString();
+		String wgHVC_JSConsole = instantGlobalsPrefix + WikiFactoryVariables.wgHighValueCountries.toString();
 		Object[] wgHVC_valueInConsole = wikiFactory.getWgVariableKeysFromPage(testedWiki, wgHVC_JSConsole);
 
 		wikiFactory.verifyWgVariableValuesTheSame(

@@ -6,7 +6,7 @@ package com.wikia.webdriver.Common.ContentPatterns;
 public class WikiFactoryVariablesProvider {
 
 	public enum WikiFactoryVariables {
-		WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
-		WG_HIGH_VALUE_COUNTRIES,
+		wgWikiDirectedAtChildrenByFounder,
+		wgHighValueCountries,
 	}
 }
