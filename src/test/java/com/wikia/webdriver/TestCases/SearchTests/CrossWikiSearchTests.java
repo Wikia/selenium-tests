@@ -83,8 +83,8 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		wikiArticleHomePage.verifyThisIsWikiHomePage();
 	}
 
-	@Test(groups = {"CrossWikiSearchTests_004", "Search", "CrossWikiSearch"})
-	public void CrossWikiSearchTests_004_noResults() {
+	@Test(groups = {"CrossWikiSearch_004", "Search", "CrossWikiSearch"})
+	public void crossWikiSearch_004_noResults() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(SearchContent.SEARCH_PHRASE_NO_RESULTS);
@@ -92,8 +92,8 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		search.verifyNoResultsCaption();
 	}
 
-	@Test(groups = {"CrossWikiSearchTests_005", "Search", "CrossWikiSearch"})
-	public void CrossWikiSearchTests_005_onePageResult() {
+	@Test(groups = {"CrossWikiSearch_005", "Search", "CrossWikiSearch"})
+	public void crossWikiSearch_005_onePageResult() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(SearchContent.SEARCH_PHRASE_ONE_PAGE_RESULTS);
@@ -101,8 +101,8 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	}
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getPushToTopQueries",
-			groups = {"CrossWikiSearchTests_006", "Search", "CrossWikiSearch"})
-	public void CrossWikiSearchTests_006_pushToTop(String query, String wikiName) {
+			groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch"})
+	public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(query);
@@ -110,7 +110,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch"})
-	public void crossWikiSearch_007_specialPromoteData_PLA_1504() {
+	public void crossWikiSearch_007_specialPromoteData() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
