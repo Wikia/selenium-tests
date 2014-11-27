@@ -75,7 +75,7 @@ public class CreateWikiTests_loggedInUser extends NewTestTemplate {
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, newWikiURL);
 		SpecialFactoryPageObject factory = article.openWikiFactoryPage(newWikiURL);
 		factory.verifyVariableValue(
-				WikiFactoryVariables.WG_WIKI_DIRECTED_AT_CHILDREN_BY_FOUNDER,
+				WikiFactoryVariables.wgWikiDirectedAtChildrenByFounder,
 				"true"
 		);
 	}
