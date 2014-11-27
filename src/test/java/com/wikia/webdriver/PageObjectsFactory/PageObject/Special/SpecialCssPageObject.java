@@ -185,7 +185,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void confirmDelete() {
-			clickArticleDeleteConfirmationButton(URLsContent.MEDIAWIKI_CSS);
+			clickArticleDeleteConfirmationButton();
 		}
 
 		public void verifyArticleIsRemoved() {
