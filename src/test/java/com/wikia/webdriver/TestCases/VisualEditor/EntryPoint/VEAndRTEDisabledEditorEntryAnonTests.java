@@ -34,7 +34,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_VEPreferred() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_AND_RTE_DISABLED_WIKI);
 		base = new WikiBasePageObject(driver);
 	}
 
@@ -65,7 +65,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_003_RedlinkEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.testingPage);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -76,7 +76,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.testingPage);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -96,7 +96,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_006_ListNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.listPage);
+			base.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -107,7 +107,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_007_CategoryNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -117,7 +117,7 @@ public class VEAndRTEDisabledEditorEntryAnonTests extends NewTestTemplateBeforeC
 	)
 	public void VEAndRTEDisabledEditorEntryAnonTests_008_TemplateNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.templatePage);
+			base.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}

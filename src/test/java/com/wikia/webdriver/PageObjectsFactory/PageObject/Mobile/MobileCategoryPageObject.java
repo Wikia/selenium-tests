@@ -26,18 +26,14 @@ public class MobileCategoryPageObject extends MobileBasePageObject {
 	private List<WebElement> chevronList;
 	@FindBys(@FindBy(css = ".wkExhItm"))
 	private List<WebElement> categoryExhibition;
-	@FindBys(@FindBy(css = ".artSec .wkLst"))
-	private List<WebElement> articlesList;
-	@FindBys(@FindBy(css = ".artSec.open .wkLst>li>a"))
-	private List<WebElement> articleListWithPagination;
 
 	String articlesListSelector = "#%articlesFirstLetter% .wkLst li";
 	String loadMoreButtonSelector = "#%articlesFirstLetter% .pagMore.visible";
 	String loadPeviousButtonSelector = "#%articlesFirstLetter% .pagLess.visible";
 
 	public MobileArticlePageObject openCategory(String wikiURL) {
-		getUrl(wikiURL + URLsContent.categoryPmg);
-		PageObjectLogging.log("openCategory", "category page: "+URLsContent.categoryPmg+", was opened", true, driver);
+		getUrl(wikiURL + URLsContent.CATEGORY_PMG);
+		PageObjectLogging.log("openCategory", "category page: "+URLsContent.CATEGORY_PMG+", was opened", true, driver);
 		return new MobileArticlePageObject(driver);
 	}
 

@@ -35,7 +35,7 @@ public class ImageEditor {
 	}
 
 	public BufferedImage scaleImage(
-			File inputFile, double scaleX, double scaleY
+		File inputFile, double scaleX, double scaleY
 	) {
 		BufferedImage inputImage = null;
 		try {
@@ -44,7 +44,7 @@ public class ImageEditor {
 			PageObjectLogging.log("scaleImage", e.getMessage(), false);
 		}
 		BufferedImage outputImage = new BufferedImage(
-				inputImage.getWidth(), inputImage.getHeight(), BufferedImage.TYPE_INT_RGB
+			inputImage.getWidth(), inputImage.getHeight(), BufferedImage.TYPE_INT_RGB
 		);
 		Graphics2D graphics = outputImage.createGraphics();
 		AffineTransform affineTransform = AffineTransform.getScaleInstance(scaleX, scaleY);
@@ -82,7 +82,7 @@ public class ImageEditor {
 		BufferedImage img;
 		try {
 			img = ImageIO.read(file);
-		} catch (IOException e){
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		return img;

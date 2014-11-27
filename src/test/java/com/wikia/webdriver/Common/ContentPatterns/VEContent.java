@@ -2,24 +2,24 @@ package com.wikia.webdriver.Common.ContentPatterns;
 
 public class VEContent {
 
-	public static String templateSearch1CharNoMatch = "a";
-	public static String templateSearch2CharsNoMatch = "ab";
-	public static String templateSearch3CharsPartialMatch = "per";
-	public static String templateSearchMatchArticle = "testtemplate";
-	public static String templateSearchExactMatch = "book";
+	public static final String TEMPLATE_SEARCH_1CHAR_NOMATCH = "a";
+	public static final String TEMPLATE_SEARCH_2CHARS_NOMATCH = "ab";
+	public static final String TEMPLATE_SEARCH_3CHARS_PARTIALMATCH = "per";
+	public static final String TEMPLATE_SEARCH_MATCH_ARTICLE = "testtemplate";
+	public static final String TEMPLATE_SEARCH_EXACTMATCH = "book";
 
-	public static String templateParamLabel1 = "author";
-	public static String templateParamLabel2 = "next";
+	public static final String TEMPLATE_PARAM_LABEL1 = "author";
+	public static final String TEMPLATE_PARAM_LABEL2 = "next";
 
-	public static String templateParamValue1 = "contribution";
-	public static String templateParamValue2 = "others";
+	public static final String TEMPLATE_PARAM_VALUE1 = "contribution";
+	public static final String TEMPLATE_PARAM_VALUE2 = "others";
 
-	public static String templateAssignment = " = ";
-	public static String paramSeparator = "|";
+	public static final String TEMPLATE_ASSIGNMENT = " = ";
+	public static final String PARAM_SEPARATOR = "|";
 
-	public static String templateWikiText =
-		paramSeparator + templateParamLabel1 + templateAssignment + templateParamValue1 +
-		paramSeparator + templateParamLabel2 + templateAssignment + templateParamValue2;
+	public static final String TEMPLATE_WIKITEXT =
+		PARAM_SEPARATOR + TEMPLATE_PARAM_LABEL1 + TEMPLATE_ASSIGNMENT + TEMPLATE_PARAM_VALUE1 +
+		PARAM_SEPARATOR + TEMPLATE_PARAM_LABEL2 + TEMPLATE_ASSIGNMENT + TEMPLATE_PARAM_VALUE2;
 
-	public static String boundingScript = "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
+	public static final String BOUNDING_SCRIPT = "return jQuery.data( $(arguments[0])[arguments[1]] ).view.getBoundingRect();";
 }

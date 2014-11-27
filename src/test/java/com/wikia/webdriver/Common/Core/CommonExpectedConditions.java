@@ -1,5 +1,7 @@
 package com.wikia.webdriver.Common.Core;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -16,14 +18,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.wikia.webdriver.Common.DriverProvider.DriverProvider;
+import com.wikia.webdriver.Common.Core.ImageUtilities.ImageComparison;
+import com.wikia.webdriver.Common.Core.ImageUtilities.Shooter;
 
 public class CommonExpectedConditions {
 
-	private final static Logger log = Logger.getLogger(ExpectedConditions.class.getName());
-
-	private static WebDriver driver = DriverProvider.getWebDriver();
-
+	private final static Logger LOGGER = Logger.getLogger(ExpectedConditions.class.getName());
 
 	/**
 	 * An expectation for checking if the given text is present in the specified
@@ -236,7 +236,7 @@ public class CommonExpectedConditions {
 		} catch (NoSuchElementException e) {
 			throw e;
 		} catch (WebDriverException e) {
-			log.log(Level.WARNING,
+			LOGGER.log(Level.WARNING,
 					String.format("WebDriverException thrown by findElement(%s)", by), e);
 			throw e;
 		}
@@ -390,8 +390,8 @@ public class CommonExpectedConditions {
 			};
 		}
 
-	public static ExpectedCondition<Boolean> elementHasSize(
-			final WebElement element, final int width, final int height) {
+	public static ExpectedCondition<Boolean> elementToHaveSize(
+		final WebElement element, final int width, final int height) {
 		return new ExpectedCondition<Boolean>() {
 			@Override
 			public Boolean apply(WebDriver driver) {
@@ -404,6 +404,30 @@ public class CommonExpectedConditions {
 						"#%s element. Expected size: [%s, %s], Actual size: [%s, %s]",
 						element.getAttribute("id"),
 						width, height, element.getSize().getWidth(), element.getSize().getHeight()
+				);
+			}
+		};
+	}
+
+	/**
+	 * @param accuracy in percentage between 0 and 100.
+	 */
+	public static ExpectedCondition<Boolean> elementToHaveColor(final WebElement element, final Color color,
+																final int accuracy) {
+		final Shooter shooter = new Shooter();
+		final ImageComparison imageComparison = new ImageComparison();
+		return new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				BufferedImage image = shooter.takeScreenshot(element, driver);
+				return imageComparison.isColorImage(image, color, accuracy);
+			}
+
+			@Override
+			public String toString() {
+				return String.format(
+						"At least %s percents of element does not have %s color",
+						(100 - accuracy), color.toString()
 				);
 			}
 		};

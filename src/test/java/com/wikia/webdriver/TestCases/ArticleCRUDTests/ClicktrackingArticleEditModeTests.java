@@ -26,7 +26,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
 		visualEditMode.verifyContentLoaded();
-		visualEditMode.executeScript(ClickTrackingScriptsProvider.trackerInstallation);
+		visualEditMode.executeScript(ClickTrackingScriptsProvider.TRACKER_INSTALLATION);
 		visualEditMode.previewArticle();
 
 		List<JsonObject> expectedEvents = Arrays.asList(

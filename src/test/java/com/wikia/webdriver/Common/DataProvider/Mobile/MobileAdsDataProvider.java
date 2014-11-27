@@ -10,7 +10,43 @@ import java.util.Arrays;
 public class MobileAdsDataProvider {
 
 	@DataProvider
-	public static Object[][] articlesWithTopLeaderboard() {
+	public static final Object[][] leaderboardAndPrefooterSlots() {
+		return new Object[][]{
+			{
+				"adtest", "SyntheticTests/Slots/leaderboard+prefooter",
+				"wka.ent/_adtest//article",
+				"googlesyndication.com/simgad/8216620376696319112",
+				"googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] leaderboardAndInContentSlots() {
+		return new Object[][]{
+			{
+				"adtest", "SyntheticTests/Slots/leaderboard+in_content",
+				"wka.ent/_adtest//article",
+				"googlesyndication.com/simgad/8216620376696319112",
+				"googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] allSlots() {
+		return new Object[][]{
+			{
+				"adtest", "SyntheticTests/Slots/leaderboard+in content+prefooter",
+				"wka.ent/_adtest//article",
+				"googlesyndication.com/simgad/8216620376696319112",
+				"googlesyndication.com/pagead/imgad?id=CICAgKCNj62dEhCsAhj6ASgBMgjBw3U0lR5Thg"
+			}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] articlesWithTopLeaderboard() {
 		return new Object[][] {
 			{"elderscrolls", "Skyrim"},
 			{"dragonvale", "Eggs"},
@@ -18,6 +54,7 @@ public class MobileAdsDataProvider {
 			{"zh.tos" ,"Category:%E5%9C%96%E9%91%92"},
 			{"es.dragonball", "Dragon_Ball_Z:_La_Batalla_de_los_Dioses"},
 			{"ru.elderscrolls", "%D0%9A%D0%B2%D0%B5%D1%81%D1%82%D1%8B_%28Skyrim%29"},
+			{"ru.elderscrolls", "The_Elder_Scrolls_Wiki"},
 			{"it.creepypastaitalia", "Slenderman"},
 			{"it.creepypastaitalia", "Categoria:Creepypasta"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
@@ -34,9 +71,8 @@ public class MobileAdsDataProvider {
 		};
 	}
 
-
 	@DataProvider
-	public static Object[][] dfpParams() {
+	public static final Object[][] dfpParams() {
 		return new Object[][] {
 			{
 				"adtest",
@@ -53,7 +89,6 @@ public class MobileAdsDataProvider {
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
 					"\"lang\":\"en\"",
-					"\"pageid\":\"_adtest/2218\"",
 					"\"hasp\":\"no\"",
 					"\"esrb\":\"teen\""
 				),
@@ -64,7 +99,4 @@ public class MobileAdsDataProvider {
 			}
 		};
 	}
-
-
-
 }

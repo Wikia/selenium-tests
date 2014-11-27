@@ -14,8 +14,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 
 public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-outlineWidget")
-	private WebElement outlineMenu;
 	@FindBy(css=".oo-ui-outlineWidget li")
 	private List<WebElement> outlineMenuItems;
 	@FindBy(css=".ve-ce-documentNode")

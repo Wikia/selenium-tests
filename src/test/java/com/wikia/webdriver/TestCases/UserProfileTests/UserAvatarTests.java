@@ -26,7 +26,7 @@ public class UserAvatarTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
 		AvatarComponentObject avatar = profile.clickEditAvatar();
-		avatar.uploadAvatar(PageContent.file);
+		avatar.uploadAvatar(PageContent.FILE);
 		avatar.saveProfile();
 		profile.verifyAvatar(credentials.userNameStaffId);
 		String avatarURL = profile.getAvatarUrl();
@@ -42,6 +42,6 @@ public class UserAvatarTests extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);
 		profile.clickRemoveAvatar();
-		profile.verifyAvatar(URLsContent.avatarGeneric);
+		profile.verifyAvatar(URLsContent.AVATAR_GENERIC);
 	}
 }

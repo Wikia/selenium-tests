@@ -16,8 +16,8 @@ import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Formatti
 import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.Style;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable.TableBuilderComponentObject.Alignment;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.EditCategory.EditCategoryComponentObject;
+import com.wikia.webdriver.PageObjectsFactory.ComponentObject.InteractiveMaps.EmbedMapComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Lightbox.LightboxComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.Media.VideoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.MiniEditor.MiniEditorComponentObject;
@@ -145,10 +145,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImageArticle;
 	@FindBy(css=".wikia-menu-button")
 	private WebElement articleEditButton;
-	@FindBy(css="#CreatePageDialogBlank")
-	private WebElement blankPageRadioButton;
-	@FindBy(css="#CreatePageDialogFormat")
-	private WebElement standardLayoutPageRadioButton;
 	@FindBy(css="#WikiaPageHeader .chevron")
 	private WebElement openEditDropdown;
 	@FindBy(css=".view")
@@ -419,7 +415,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideo() {
-		waitForElementByElement(videoThumbnail);
+		driver.findElement(By.cssSelector("#mw-content-text .video-thumbnail"));
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
@@ -482,13 +478,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 		).getAttribute("class");
 		String position;
 		switch(positions) {
-		case left:
+		case LEFT:
 			position = "left";
 			break;
-		case center:
+		case CENTER:
 			position = "none";
 			break;
-		case right:
+		case RIGHT:
 			position = "right";
 			break;
 		default:
@@ -639,7 +635,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public WatchPageObject unfollowArticle(String wikiURL) {
 		String url = urlBuilder.appendQueryStringToURL(wikiURL, "title=" + articleTitle.getText());
-		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
+		url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}
@@ -777,7 +773,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		articleModal.createPageWithBlankLayout("");
 		return new SourceEditModePageObject(driver);
 	}
-	
+
 	public EmbedMapComponentObject clickViewEmbedMap(){
 		waitForElementVisibleByElement(viewEmbedMapButton);
 		scrollToElement(viewEmbedMapButton);
