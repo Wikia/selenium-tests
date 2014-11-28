@@ -3,7 +3,9 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.MessageWall;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -103,7 +105,15 @@ public class NewMessageWall extends WikiBasePageObject {
 
 	public void submit() {
 		driver.switchTo().defaultContent();
-		scrollAndClick(postButton);
+		//THIS IS A HACK - show it to Ludwik and tell him it works for fixed global nav
+		try {
+			scrollAndClick(postButton);
+		} catch (WebDriverException ex) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0,-57);");
+			waitForElementClickableByElement(postButton);
+			postButton.click();
+		}
 		PageObjectLogging.log("submit", "message submitted", true);
 	}
 

@@ -17,9 +17,9 @@ public class SearchPageObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#search-v2-input")
+	@FindBy(css="#searchInput")
 	protected WebElement searchInput;
-	@FindBy(css="#search-v2-button")
+	@FindBy(css=".search-submit")
 	protected WebElement searchButton;
 	@FindBy(css=".Results")
 	protected WebElement resultsContainer;
