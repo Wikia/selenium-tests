@@ -41,11 +41,31 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	private By orintationPortrait = By.cssSelector("[id*='portrait']");
 
 	public enum PositionsGallery {
-		LEFT, CENTER, RIGHT
+		LEFT, CENTER, RIGHT;
+
+		private final String label;
+
+		PositionsGallery() {
+			this.label = this.toString().toLowerCase();
+		}
+
+		public String getPositionGallery() {
+			return this.label;
+		}
 	}
 
 	public enum SpacingGallery {
-		SMALL, MEDIUM, LARGE
+		SMALL, MEDIUM, LARGE;
+
+		private final String label;
+
+		SpacingGallery() {
+			this.label = this.toString().toLowerCase();
+		}
+
+		public String getSpacingGallery() {
+			return this.label;
+		}
 	}
 
 	public enum Orientation{
@@ -59,7 +79,7 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	public void adjustPosition(PositionsGallery positionGallery){
 		waitForElementByElement(position);
 		Select positionDropdown = new Select(position);
-		positionDropdown.selectByValue(positionGallery.toString());
+		positionDropdown.selectByValue(positionGallery.getPositionGallery());
 	}
 
 	/**
@@ -76,7 +96,7 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	public void adjustSpacing(SpacingGallery spacingGallery){
 		waitForElementByElement(spacing);
 		Select spacingDropdown = new Select(spacing);
-		spacingDropdown.selectByValue(spacingGallery.toString());
+		spacingDropdown.selectByValue(spacingGallery.getSpacingGallery());
 	}
 
 

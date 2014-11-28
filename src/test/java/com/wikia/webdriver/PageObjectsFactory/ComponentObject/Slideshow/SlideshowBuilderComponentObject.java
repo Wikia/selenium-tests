@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddPhoto.AddPhotoComponentObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -36,14 +37,24 @@ public class SlideshowBuilderComponentObject extends BasePageObject{
 		//TODO
 	}
 
-	public enum Positions{
-		LEFT, CENTER, RIGHT
+	public enum Positions {
+		LEFT, CENTER, RIGHT;
+
+		private final String label;
+
+		Positions() {
+			this.label = StringUtils.capitalize(this.toString().toLowerCase());
+		}
+
+		public String getPosition() {
+			return this.label;
+		}
 	}
 
 	public void adjustPosition(Positions position){
 		Select pos = new Select(slideshowPosition);
-		pos.selectByVisibleText(position.toString());
-		PageObjectLogging.log("adjustPosition", "slideshow position set to "+position.toString(), true);
+		pos.selectByVisibleText(position.getPosition());
+		PageObjectLogging.log("adjustPosition", "slideshow position set to "+ position.getPosition(), true);
 	}
 
 	public AddPhotoComponentObject clickAddPhoto(){
