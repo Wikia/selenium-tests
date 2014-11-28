@@ -10,19 +10,17 @@ import org.testng.annotations.Test;
  * @ownership AdEngineering
  */
 public class TestKruxSegment extends NewTestTemplate {
-	private static final String KRUX_SEGMENT_ID = "n4mr5r49z";
+	private static final String KRUX_SEGMENT_ID = "l7lznzoty";
 
 	@Test(
 		dataProviderClass = AdsDataProvider.class,
-		dataProvider = "popularSites",
-		groups = {"TestKruxSegment_GeoEdgeFree", "Ads"}
+		dataProvider = "mainWikiPages",
+		groups = {"KruxSegmentDesktop_GeoEdgeFree", "KruxSegmentMobile_GeoEdgeFree", "Ads"}
 	)
 	public void TestKruxSegment_GeoEdgeFree(String wikiName, String article) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-		AdsKruxObject ads = new AdsKruxObject(driver);
-		ads.setKruxSegment(KRUX_SEGMENT_ID);
-		ads.verifyKruxSegmentByKrux(KRUX_SEGMENT_ID);
-		ads.getUrl(testedPage, true);
+		AdsKruxObject ads = new AdsKruxObject(driver, testedPage);
+		ads.refreshPage();
 		ads.refreshPage();
 		ads.refreshPage();
 		ads.verifyKruxSegment(KRUX_SEGMENT_ID);
