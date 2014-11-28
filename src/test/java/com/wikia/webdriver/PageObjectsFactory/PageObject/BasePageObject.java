@@ -224,7 +224,7 @@ public class BasePageObject{
 		try {
 			js.executeScript(
 					"var x = $(arguments[0]);"
-					+ "window.scroll(0,parseInt(x.offset().top));",
+					+ "window.scroll(0,parseInt(x.offset().top - 60));",
 					element
 			);
 		} catch (WebDriverException e) {
@@ -478,7 +478,12 @@ public class BasePageObject{
 	 * @throws Exception
 	 */
 	public void waitForElementByElement(WebElement element) {
-		wait.until(ExpectedConditions.visibilityOf(element));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(ExpectedConditions.visibilityOf(element));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	/**
@@ -497,7 +502,12 @@ public class BasePageObject{
 	 * @param element
 	 */
 	public void waitForElementVisibleByElement(WebElement element) {
-		wait.until(CommonExpectedConditions.elementVisible(element));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.elementVisible(element));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public WebElement waitForElementByCss(String cssSelector) {
@@ -549,6 +559,10 @@ public class BasePageObject{
 
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
 		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
+	}
+
+	public void waitForTextToBePresentInElementLocatedBy(By locator, String text) {
+		wait.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
 	}
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +43,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	private WebElement deleteConfirmButton;
 	@FindBy(css = "#sorting-dropdown")
 	private WebElement sortDropdown;
+
+	private By newestVideoBy = By.cssSelector(".special-videos-grid li:nth-child(1) .title");
 
 	public SpecialVideosPageObject(WebDriver driver) {
 		super(driver);
@@ -94,7 +97,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public void verifyVideoAdded(String videoTitle) {
-		waitForTextToBePresentInElementByElement(newestVideoTitle, videoTitle);
+		waitForTextToBePresentInElementLocatedBy(newestVideoBy, videoTitle);
 		PageObjectLogging.log("verifyVideoAdded", "verify that video with following description was added: "+videoTitle, true);
 	}
 

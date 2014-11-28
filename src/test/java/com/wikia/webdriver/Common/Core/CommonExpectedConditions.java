@@ -188,6 +188,27 @@ public class CommonExpectedConditions {
 	 * An expectation for checking if the given text is present in the specified
 	 * element.
 	 */
+	public static ExpectedCondition<Boolean> textToBePresentInElementLocatedBy(
+		final By elmentLocator, final String text) {
+
+		return new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				String elementText = driver.findElement(elmentLocator).getText();
+				return elementText.contains(text);
+			}
+
+			@Override
+			public String toString() {
+				return String.format("text ('%s') to be present in element located by %s",
+					text, elmentLocator.toString());
+			}
+		};
+	}
+
+	/**
+	 * An expectation for checking if the given text is present in the specified
+	 * element.
+	 */
 	public static ExpectedCondition<Boolean> textToBePresentInElement(
 			final By selectorBy, final String text) {
 
