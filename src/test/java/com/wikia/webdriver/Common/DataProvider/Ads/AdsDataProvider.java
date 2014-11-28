@@ -239,7 +239,6 @@ public class AdsDataProvider {
 					"\"hostpre\":\"",
 					"\"wpage\":\"synthetictests/dfpparams\"",
 					"\"lang\":\"en\"",
-					"\"hasp\":\"no\"",
 					"\"esrb\":\"teen\""
 				),
 				Arrays.asList(
