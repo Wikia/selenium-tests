@@ -66,10 +66,11 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 			groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
 	)
 	public void VEGalleryTests_002_GalleryCart() {
-		int numOfMedias = 7;
-		int numToRemoveFirst = 1;
-		int numToRemoveSecond = 2;
-		int numToAdd = 2;
+		final int NUM_OF_MEDIA_TO_REMOVE_FIRST = 1;
+		final int NUM_OF_MEDIA_TO_REMOVE_SECOND = 2;
+		final int NUM_OF_MEDIA_TO_ADD = 2;
+		final int INITIAL_NUM_OF_MEDIA = 7;
+		int expectedNumOfMedia = INITIAL_NUM_OF_MEDIA;
 
 		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
@@ -79,22 +80,22 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		//verify # of cart items  = 9
-		galleryDialog.addMediaToCart(numOfMedias);
-		galleryDialog.verifyNumOfCartItems(numOfMedias);
+		galleryDialog.addMediaToCart(INITIAL_NUM_OF_MEDIA);
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 		//verify # of cart items  = 8
-		galleryDialog.removeMediaFromCart(numToRemoveFirst);
-		numOfMedias = numOfMedias - numToRemoveFirst;
-		galleryDialog.verifyNumOfCartItems(numOfMedias);
+		galleryDialog.removeMediaFromCart(NUM_OF_MEDIA_TO_REMOVE_FIRST);
+		expectedNumOfMedia = expectedNumOfMedia - NUM_OF_MEDIA_TO_REMOVE_FIRST;
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 		//verify # of cart item = 11
 		galleryDialog = galleryDialog.searchMedia("a");
-		galleryDialog.addMediaToCart(numToAdd);
-		numOfMedias = numOfMedias + numToAdd;
-		galleryDialog.verifyNumOfCartItems(numOfMedias);
+		galleryDialog.addMediaToCart(NUM_OF_MEDIA_TO_ADD);
+		expectedNumOfMedia = expectedNumOfMedia + NUM_OF_MEDIA_TO_ADD;
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 		//verify # of cart item = 9
 		galleryDialog = galleryDialog.searchMedia("he");
-		galleryDialog.removeMediaFromCart(numToRemoveSecond);
-		numOfMedias = numOfMedias - numToRemoveSecond;
-		galleryDialog.verifyNumOfCartItems(numOfMedias);
+		galleryDialog.removeMediaFromCart(NUM_OF_MEDIA_TO_REMOVE_SECOND);
+		expectedNumOfMedia = expectedNumOfMedia - NUM_OF_MEDIA_TO_REMOVE_SECOND;
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 
 	}
 }
