@@ -3,6 +3,7 @@ package com.wikia.webdriver.TestCases.AdsTests;
 import com.wikia.webdriver.Common.DataProvider.Ads.AdsDataProvider;
 import com.wikia.webdriver.Common.Templates.NewTestTemplate;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsBaseObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.AdsBase.AdsKruxObject;
 import org.testng.annotations.Test;
 
 /**
@@ -34,7 +35,7 @@ public class TestKruxIntegration extends NewTestTemplate {
 
 	private void testKruxIntegration(String wikiName, String article, String kruxSiteId) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
-		AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+		AdsKruxObject ads = new AdsKruxObject(driver, testedPage);
 		ads.verifyKruxControlTag(kruxSiteId);
 
 		// Second page view
