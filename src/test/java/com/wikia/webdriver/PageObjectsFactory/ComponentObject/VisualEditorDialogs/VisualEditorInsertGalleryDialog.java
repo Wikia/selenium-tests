@@ -41,6 +41,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 	private By mediaResultsBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li");
 	private By mediaAddIconBy = By.cssSelector(".oo-ui-icon-unchecked");
 	private By mediaTitlesBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget ul li>.oo-ui-labeledElement-label");
+	private By mediaMetaBy = By.cssSelector(".ve-ui-wikiaMediaOptionWidget-metaData");
 
 	public VisualEditorInsertGalleryDialog(WebDriver driver) {
 		super(driver);
@@ -78,12 +79,24 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 		return new VisualEditorPageObject(driver);
 	}
 
-	public VisualEditorPageObject previewExistingMediaByIndex(int index) {
+	public VisualEditorPageObject clickTitleToPreview(int index) {
 		switchToIFrame();
 		WebElement mediaResultsWidget = dialogBody.findElement(mediaResultsWidgetBy);
 		waitForElementVisibleByElement(mediaResultsWidget);
-		WebElement targetMedia = mediaResultsWidget.findElements(mediaTitlesBy).get(index);
+		WebElement targetMedia = mediaResultsWidget.findElements(mediaMetaBy).get(index);
 		targetMedia.click();
+		PageObjectLogging.log("clickTitleToPreview", "Media title clicked", true);
+		switchOutOfIFrame();
+		return new VisualEditorPageObject(driver);
+	}
+
+	public VisualEditorPageObject clickMetaDataToPreview(int index) {
+		switchToIFrame();
+		WebElement mediaResultsWidget = dialogBody.findElement(mediaResultsWidgetBy);
+		waitForElementVisibleByElement(mediaResultsWidget);
+		WebElement targetMedia = mediaResultsWidget.findElements(mediaMetaBy).get(index);
+		targetMedia.click();
+		PageObjectLogging.log("clickMetaDataToPreview", "Media metadata clicked", true);
 		switchOutOfIFrame();
 		return new VisualEditorPageObject(driver);
 	}
