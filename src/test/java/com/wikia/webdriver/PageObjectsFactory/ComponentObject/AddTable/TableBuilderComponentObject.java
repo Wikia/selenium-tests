@@ -3,6 +3,7 @@ package com.wikia.webdriver.PageObjectsFactory.ComponentObject.AddTable;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
 import java.util.List;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -113,7 +114,17 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 	}
 
 	public enum Alignment {
-		LEFT, CENTER, RIGHT
+		LEFT, CENTER, RIGHT;
+
+		private final String label;
+
+		Alignment() {
+			this.label = StringUtils.capitalize(this.toString().toLowerCase());
+		}
+
+		public String getAlignment() {
+			return this.label;
+		}
 	}
 
 	public void selectAlignment(Alignment position) {
@@ -121,16 +132,16 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 		Select positionDropdown = new Select(tablePropertiesDropdownOptions.get(1));
 		switch(position) {
 		case LEFT:
-			positionDropdown.selectByVisibleText(position.toString());
+			positionDropdown.selectByVisibleText(position.getAlignment());
 			break;
 		case CENTER:
-			positionDropdown.selectByVisibleText(position.toString());
+			positionDropdown.selectByVisibleText(position.getAlignment());
 			break;
 		case RIGHT:
-			positionDropdown.selectByVisibleText(position.toString());
+			positionDropdown.selectByVisibleText(position.getAlignment());
 			break;
 		}
-		PageObjectLogging.log("selectPosition", position.toString() + " position selected", true, driver);
+		PageObjectLogging.log("selectPosition", position.getAlignment() + " position selected", true, driver);
 	}
 
 	public void submitTable() {
