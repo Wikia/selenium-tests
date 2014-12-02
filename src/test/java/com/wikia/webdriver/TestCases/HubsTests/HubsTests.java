@@ -132,22 +132,10 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	}
 
 	/**
-	 * Verify that links in Global Navigation are working
-	 */
-	@Test(dataProvider = "provideHubName", groups = { "HubsTest_006", "Hubs" })
-	public void HubsTest_006_VerifyLinkInGlobalNavigation(HubName hubName) {
-		HomePageObject home = new HomePageObject(driver);
-		home.openCorporateHomePage(wikiCorporateURL);
-		HubBasePageObject hub = new HubBasePageObject(driver);
-		hub.clickGlobalNavLink(hubName);
-		hub.verifyHubTitle(hubName);
-	}
-
-	/**
 	 * Verify that links in WikiaBar are working
 	 */
 	@Test(dataProvider = "provideHubName", groups = { "HubsTest_007", "Hubs" })
-	public void HubsTest_007_VerifyLinkInWikiaBar(HubName hubName) {
+	public void HubsTest_006_VerifyLinkInWikiaBar(HubName hubName) {
 		HomePageObject home = new HomePageObject(driver);
 		home.logOut(wikiURL);
 		home.openCorporateHomePage(wikiCorporateURL);
