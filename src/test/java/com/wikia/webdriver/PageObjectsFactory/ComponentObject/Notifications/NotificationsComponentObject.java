@@ -13,6 +13,8 @@ import org.openqa.selenium.support.FindBys;
 import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.BasePageObject;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NotificationsComponentObject extends BasePageObject {
 
@@ -24,7 +26,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	protected WebElement notificationsBubbles;
 	@FindBys(@FindBy(css = ".notification.unread"))
 	private List<WebElement> notificationsList;
-	@FindBy(css = "#WallNotifications li ul.subnav")
+	@FindBy(css = "#AccountNavigation .subnav")
 	private WebElement notificationsSubnav;
 	@FindBy(css = ".bubbles-count")
 	private WebElement bubblesCount;
@@ -36,7 +38,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	private WebElement markNotificationsAsReadThisWiki;
 	@FindBy(css = "#AccountNavigation .bubbles")
 	private WebElement emptyNumberOfUnreadNotifications;
-	@FindBy(css = "#AccountNavigation .ajaxLogin")
+	@FindBy(css = "#AccountNavigation")
 	private WebElement accountNavigationEntryPoint;
 	@FindBy(css = "#notifications .notification-message")
 	private WebElement notificationsMessage;
@@ -52,9 +54,17 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * hover the mouse over the notification bubble and wait for it to expand
 	 */
 	private void openNotifications() {
-		Actions builder = new Actions(driver);
-		builder.moveToElement(accountNavigationEntryPoint).build().perform();
-		waitForElementVisibleByElement(notificationsMessage);
+		new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver webDriver) {
+				if (!notificationsSubnav.isDisplayed()) {
+					accountNavigationEntryPoint.click();
+
+					return false;
+				}
+				return true;
+			}
+		});
 	}
 
 	/**
@@ -190,7 +200,7 @@ public class NotificationsComponentObject extends BasePageObject {
 		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0)
-				.findElement(By.cssSelector("div.msg-body")).getText();
+				.findElement(By.cssSelector("div.notification-message")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
 		Assertion.assertTrue(notificationMessageBody.contains(messageContent));
 	}
