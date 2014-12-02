@@ -9,7 +9,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
-		<mvn_run>true</mvn_run>
+		<mvn.run>true</mvn.run>
+		<webdriver.version>2.44.0</webdriver.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -64,7 +65,24 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-chrome-driver</artifactId>
-			<version>2.43.1</version>
+			<version>${webdriver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
+			<version>${webdriver.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${webdriver.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>${webdriver.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -77,23 +95,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>2.43.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>2.43.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-api</artifactId>
-			<version>2.43.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.yaml</groupId>
@@ -140,6 +141,12 @@
 			<artifactId>javax.json</artifactId>
 			<version>1.0.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20080701</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -159,7 +166,7 @@
 				<version>2.16</version>
 				<configuration>
 					<systemPropertyVariables>
-						<run_mvn>${mvn_run}</run_mvn>
+						<run_mvn>${mvn.run}</run_mvn>
 						<base-address>${base-address}</base-address>
 						<live-domain>${live-domain}</live-domain>
 						<wiki-name>${wiki-name}</wiki-name>
@@ -196,7 +203,7 @@
 		<profile>
 			<id>manualConfig</id>
 			<properties>
-				<mvn_run>false</mvn_run>
+				<mvn.run>false</mvn.run>
 			</properties>
 		</profile>
 	</profiles>
