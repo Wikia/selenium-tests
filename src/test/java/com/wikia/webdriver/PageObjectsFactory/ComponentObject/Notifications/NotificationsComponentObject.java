@@ -116,7 +116,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	public String getNotificationLink(String text) {
 		for (int i = 0; i < notificationsList.size(); i++) {
 			if (notificationsList.get(i)
-					.findElement(By.cssSelector(".msg-body")).getText()
+					.findElement(By.cssSelector("div.notification-message")).getText()
 					.contains(text)) {
 				PageObjectLogging.log("getNotificationLink",
 						"get addres that of " + i + 1
