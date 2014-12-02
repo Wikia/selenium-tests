@@ -15,6 +15,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -450,6 +451,15 @@ public class CommonExpectedConditions {
 						"At least %s percents of element does not have %s color",
 						(100 - accuracy), color.toString()
 				);
+			}
+		};
+	}
+
+	public static ExpectedCondition<Boolean> scriptReturnsTrue(final String jsScript) {
+		return new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				return (Boolean) ((JavascriptExecutor) driver).executeScript(jsScript);
 			}
 		};
 	}

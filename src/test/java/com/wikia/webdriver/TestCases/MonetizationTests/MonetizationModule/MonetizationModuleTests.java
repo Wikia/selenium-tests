@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 public class MonetizationModuleTests extends NewTestTemplate {
 
 	private static final String TEST_WIKI_GEO_RESTRICTIONS = "muppet";	// blocked countires per wikia
+	private static final String TEST_COUNTRY_CODE = "TH";	// country that the ads will be shown
 
 	Credentials credentials = config.getCredentials();
 
@@ -27,6 +28,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.setCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleShown();
@@ -42,6 +44,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.deleteCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
@@ -57,6 +60,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.setCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
@@ -72,6 +76,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.deleteCookieFromSearch();
 		base.openRandomArticle(wikiURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
@@ -80,11 +85,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@DataProvider(name="DataMonetizationModule_005")
 	public static Object[][] DataMonetizationModule_005() {
 		return new Object[][] {
-			{400, 600, 320},
-			{500, 600, 468},
-			{800, 600, 690},
-			{1031, 600, 700},
-			{1410, 600, 728},
+			{800, 600, 728},
+			{1024, 600, 690},
+			{1700, 600, 728},
 		};
 	}
 
@@ -101,6 +104,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openRandomArticle(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.setCookieFromSearch();
 		monetizationModule.resizeWindow(width, height);
 		monetizationModule.refreshPage();
@@ -118,6 +122,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.setCookieFromSearch();
 		// anon user
 		base.openRandomArticle(wikiURL);
@@ -142,6 +147,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.deleteCookieFromSearch();
 		// anon user
 		base.openRandomArticle(wikiURL);
@@ -210,13 +216,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		groups = {"MonetizationModule", "MonetizationModuleTest_009", "Monetization"}
 	)
 	public void MonetizationModuleTest_009(String testWiki) {
-		String countryCode = "TH";
 		wikiURL = urlBuilder.getUrlForWiki(testWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieFromSearch();
-		monetizationModule.setCookieGeo(countryCode);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openRandomArticle(wikiURL);
@@ -236,13 +241,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		groups = {"MonetizationModule", "MonetizationModuleTest_010", "Monetization"}
 	)
 	public void MonetizationModuleTest_010(String testWiki) {
-		String countryCode = "TH";
 		wikiURL = urlBuilder.getUrlForWiki(testWiki);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.deleteCookieFromSearch();
-		monetizationModule.setCookieGeo(countryCode);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openRandomArticle(wikiURL);
