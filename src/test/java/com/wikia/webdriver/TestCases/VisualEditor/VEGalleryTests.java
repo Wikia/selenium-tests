@@ -15,11 +15,6 @@ import org.testng.annotations.Test;
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
  *
- * VE-1413 Verify search suggestion on templates
- * VE-1413 Verify suggested templates appear by default
- * VE-1412 Verify adding template with params and template with no param
- * VE-1412 Verify adding template to a middle of paragraph or to a block node would insert template as block node
- * VE-1414 Verify deleting template from an article
  */
 
 public class VEGalleryTests extends NewTestTemplateBeforeClass {
@@ -55,6 +50,42 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
 		article = saveChangesDialog.savePage();
 		article.verifyVEPublishComplete();
+	}
+
+	@Test(
+			groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
+	)
+	public void VEGalleryTests_002_GalleryCart() {
+		final int NUM_OF_MEDIA_TO_REMOVE_FIRST = 1;
+		final int NUM_OF_MEDIA_TO_REMOVE_SECOND = 2;
+		final int NUM_OF_MEDIA_TO_ADD = 2;
+		final int INITIAL_NUM_OF_MEDIA = 7;
+		int expectedNumOfMedia = INITIAL_NUM_OF_MEDIA;
+
+		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		VisualEditorInsertGalleryDialog galleryDialog =
+				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+		galleryDialog = galleryDialog.searchMedia("he");
+		//verify # of cart items  = 9
+		galleryDialog.addMediaToCart(INITIAL_NUM_OF_MEDIA);
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
+		//verify # of cart items  = 8
+		galleryDialog.removeMediaFromCart(NUM_OF_MEDIA_TO_REMOVE_FIRST);
+		expectedNumOfMedia = expectedNumOfMedia - NUM_OF_MEDIA_TO_REMOVE_FIRST;
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
+		//verify # of cart item = 11
+		galleryDialog = galleryDialog.searchMedia("a");
+		galleryDialog.addMediaToCart(NUM_OF_MEDIA_TO_ADD);
+		expectedNumOfMedia = expectedNumOfMedia + NUM_OF_MEDIA_TO_ADD;
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
+		//verify # of cart item = 9
+		galleryDialog = galleryDialog.searchMedia("he");
+		galleryDialog.removeMediaFromCart(NUM_OF_MEDIA_TO_REMOVE_SECOND);
+		expectedNumOfMedia = expectedNumOfMedia - NUM_OF_MEDIA_TO_REMOVE_SECOND;
+		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 	}
 
 	@Test(
