@@ -18,7 +18,7 @@ public class VenusGlobalNavPageObject {
 	@FindBy(css = ".hubs-entry-point")
 	private WebElement menuButton;
 
-	@FindBy(css = "nav#hubs")
+	@FindBy(css = "#hubs")
 	private WebElement hubsMenu;
 
 	@FindBy(css = ".gamestar-logo")
@@ -32,7 +32,7 @@ public class VenusGlobalNavPageObject {
 		PageFactory.initElements(this.driver, this);
 	}
 
-	public VenusGlobalNavPageObject openHub(Hub hub) {
+	public WebElement openHub(Hub hub) {
 		openHubsMenu();
 
 		final WebElement destinationHub = hubsMenu.findElement(By
@@ -45,7 +45,19 @@ public class VenusGlobalNavPageObject {
 		new WebDriverWait(driver, 5, 150)
 				.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
 
+		return destinationHub;
+	}
+
+	public VenusGlobalNavPageObject clickHub(Hub hub) {
+		final WebElement destinationHub = hubsMenu.findElement(By
+			.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
+		destinationHub.click();
+
 		return this;
+	}
+
+	public String getHubLink(WebElement hub) {
+		return hub.getAttribute("href");
 	}
 
 	private VenusGlobalNavPageObject openHubsMenu() {
@@ -61,6 +73,20 @@ public class VenusGlobalNavPageObject {
 		});
 
 		return this;
+	}
+
+	public VenusGlobalNavPageObject openHubsMenuViaHover() {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(menuButton);
+		actions.build().perform();
+
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		wait.until(CommonExpectedConditions.elementVisible(hubsMenu));
+		return this;
+	}
+
+	public boolean isHubsMenuOpened() {
+		return hubsMenu.isDisplayed();
 	}
 
 	public boolean isGameStarLogoDisplayed() {

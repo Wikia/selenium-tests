@@ -1,5 +1,7 @@
 package com.wikia.webdriver.Common.Core.URLBuilder;
 
+import org.apache.xpath.SourceTree;
+
 /**
  *
  * @author Bogna 'bognix' Knychala
