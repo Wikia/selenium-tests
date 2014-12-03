@@ -163,6 +163,7 @@
 			<class name="com.wikia.webdriver.TestCases.GlobalNavigationTests.TestGameStarLogo"/>
 			<class name="com.wikia.webdriver.TestCases.GlobalNavigationTests.CompareScreenshotsForHubsMenu"/>
 			<class name="com.wikia.webdriver.TestCases.GlobalNavigationTests.TestHubLinksInGlobalNav"/>
+			<class name="com.wikia.webdriver.TestCases.GlobalNavigationTests.TestWikiaLogoInGlobalNav"/>
 			<class name="com.wikia.webdriver.TestCases.VenusTests.TestTablesOnVenus"/>
 		</classes>
 	</test>

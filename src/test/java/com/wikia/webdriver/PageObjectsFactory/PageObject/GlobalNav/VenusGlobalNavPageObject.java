@@ -24,6 +24,9 @@ public class VenusGlobalNavPageObject {
 	@FindBy(css = ".gamestar-logo")
 	private WebElement gameStarLink;
 
+	@FindBy(css = ".wikia-logo")
+	private WebElement wikiaLogo;
+
 	private WebDriver driver;
 
 	public VenusGlobalNavPageObject(WebDriver driver) {
@@ -95,6 +98,21 @@ public class VenusGlobalNavPageObject {
 
 	public WebElement getMenuScreenShotArea() {
 		return hubsMenu;
+	}
+
+	public VenusGlobalNavPageObject clickWikiaLogo() {
+		wikiaLogo.click();
+
+		return this;
+	}
+
+	public void waitForCorrectUrl(String environment) {
+		if (!environment.equals("prod") && !environment.contains("dev")) {
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(
+				CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
+			);
+		}
 	}
 
 	public enum Hub {
