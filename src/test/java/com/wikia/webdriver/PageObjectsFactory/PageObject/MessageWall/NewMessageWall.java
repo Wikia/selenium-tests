@@ -105,15 +105,7 @@ public class NewMessageWall extends WikiBasePageObject {
 
 	public void submit() {
 		driver.switchTo().defaultContent();
-		//THIS IS A HACK - show it to Ludwik and tell him it works for fixed global nav
-		try {
-			scrollAndClick(postButton);
-		} catch (WebDriverException ex) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy(0,-57);");
-			waitForElementClickableByElement(postButton);
-			postButton.click();
-		}
+		scrollAndClick(postButton);
 		PageObjectLogging.log("submit", "message submitted", true);
 	}
 

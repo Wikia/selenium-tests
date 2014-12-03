@@ -1,5 +1,6 @@
 package com.wikia.webdriver.TestCases.SpecialPagesTests;
 
+import com.wikia.webdriver.Common.DriverProvider.UseUnstablePageLoadStrategy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -42,6 +43,7 @@ public class CssChromeTests extends NewTestTemplate {
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
 	@Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"})
+	@UseUnstablePageLoadStrategy
 	public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.saveCssContent(currentTimestamp);
@@ -53,6 +55,7 @@ public class CssChromeTests extends NewTestTemplate {
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
 	@Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"})
+	@UseUnstablePageLoadStrategy
 	public void CssChrome_003_verifyEditSummaryAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.sendEditSummaryText(currentTimestamp);
@@ -81,6 +84,7 @@ public class CssChromeTests extends NewTestTemplate {
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
 	@Test(groups = {"CssChrome_005", "CssChrome", "AdminDashboard"})
+	@UseUnstablePageLoadStrategy
 	public void CssChrome_005_verifyMinorEditAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.verifyMinorEditAppears();

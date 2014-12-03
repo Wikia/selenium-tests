@@ -80,8 +80,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			clearCssText();
 			sendCssText(randomText);
 			clickPublishButton();
-			verifyUrl(URLsContent.SPECIAL_CSS);
 			verifySaveComplete();
+			verifyUrl(URLsContent.SPECIAL_CSS);
 		}
 
 		public void clearCssText() {
@@ -138,7 +138,6 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 		public void clickPublishButton() {
 			scrollAndClick(cssPublishButton);
-			PageObjectLogging.log("clickCssPublishButton", "click on publish button", true);
 		}
 
 		public void clickPublishButtonDropdown() {
@@ -185,7 +184,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		}
 
 		public void confirmDelete() {
-			clickArticleDeleteConfirmationButton(URLsContent.MEDIAWIKI_CSS);
+			clickArticleDeleteConfirmationButton();
 		}
 
 		public void verifyArticleIsRemoved() {

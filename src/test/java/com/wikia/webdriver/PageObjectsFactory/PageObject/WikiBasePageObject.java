@@ -15,6 +15,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+import com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav.VenusGlobalNavPageObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -102,7 +103,6 @@ import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEdit
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.WikiHistoryPageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiPage.Blog.BlogPageObject;
 
-
 public class WikiBasePageObject extends BasePageObject {
 
 	@FindBy(css = "body")
@@ -189,6 +189,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
+	private String loggedInUserSelectorVenus = ".ajaxLogin.global-navigation-link[title*='%s']";
+	
+	private VenusGlobalNavPageObject venusGlobalNav;
 
 	public String getWikiUrl() {
 		String currentURL = driver.getCurrentUrl();
@@ -622,7 +625,7 @@ public class WikiBasePageObject extends BasePageObject {
 		);
 	}
 
-	protected void clickArticleDeleteConfirmationButton(String articleName) {
+	protected void clickArticleDeleteConfirmationButton() {
 		waitForElementByElement(deleteConfirmationButton);
 		waitForElementByElement(deleteCommentReasonField);
 		deleteCommentReasonField.clear();
@@ -1150,7 +1153,7 @@ public class WikiBasePageObject extends BasePageObject {
 		return new VisualEditorPageObject(driver);
 	}
 
-	public WikiHistoryPageObject openArticleHistoryPage(String wikiURL) {
+	public WikiHistoryPageObject openArticleHistoryPage() {
 		getUrl(urlBuilder.appendQueryStringToURL(getCurrentUrl(), URLsContent.ACTION_HISTORY));
 		return new WikiHistoryPageObject(driver);
 	}
@@ -1215,4 +1218,15 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 	}
 
+	public void resizeWindow(Dimension resolution) {
+		resizeWindow(resolution.width, resolution.height);
+	}
+	
+	public VenusGlobalNavPageObject getVenusGlobalNav() {
+		if(venusGlobalNav==null){
+			venusGlobalNav = new VenusGlobalNavPageObject(driver);
+		}
+
+		return venusGlobalNav;
+	}
 }

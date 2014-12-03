@@ -97,7 +97,7 @@ public class ForumBoardTests extends NewTestTemplate {
 		forumBoard.verifyTextOnFollowButton(1, "Follow");
 	}
 
-	@Test(groups= {"ForumBoardTests_007", "ForumBoardTests", "Forum"} )
+	@Test(groups= {"ForumBoardTests_007", "ForumBoardTests", "Forum"}, enabled= false )
 	public void ForumBoardTests_007_highlightDiscussion_MAIN_2106(){
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);

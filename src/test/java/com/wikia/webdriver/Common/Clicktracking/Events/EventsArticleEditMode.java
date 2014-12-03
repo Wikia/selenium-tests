@@ -9,11 +9,10 @@ public class EventsArticleEditMode {
 
 	public static JsonObject previewEvent = Json.createObjectBuilder()
 		.add("0", Json.createObjectBuilder()
-			.add(EventParameter.ACTION.toString(), "click")
-			.add(EventParameter.TRACKING_METHOD.toString(), "both")
-			.add(EventParameter.CATEGORY.toString(), "editor-ck"))
+			.add(EventParameter.ACTION.getEventParameter(), "click")
+			.add(EventParameter.TRACKING_METHOD.getEventParameter(), "both")
+			.add(EventParameter.CATEGORY.getEventParameter(), "editor-ck"))
 		.add("1", Json.createObjectBuilder()
-			.add(EventParameter.LABEL.toString(), "preview"))
+			.add(EventParameter.LABEL.getEventParameter(), "preview"))
 		.build();
-
 }
