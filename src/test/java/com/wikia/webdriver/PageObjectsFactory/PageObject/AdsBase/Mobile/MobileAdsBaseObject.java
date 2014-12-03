@@ -49,16 +49,16 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	public void verifyMobileTopLeaderboard() {
 		extractGptInfo(presentLeaderboardSelector);
 		removeSmartBanner();
-		if (!checkIfSlotExpanded(presentLeaderboard)) {
-			throw new NoSuchElementException(
-				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
-			);
-		}
 		if (checkIfElementOnPage(fliteMaskSelector)) {
 			PageObjectLogging.log(
 				"FliteAd", "Page contains the flite ad", true, driver
 			);
 			return;
+		}
+		if (!checkIfSlotExpanded(presentLeaderboard)) {
+			throw new NoSuchElementException(
+				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
+			);
 		}
 		if (areAdsEmpty(presentLeaderboardSelector, presentLeaderboard)) {
 			throw new NoSuchElementException(
