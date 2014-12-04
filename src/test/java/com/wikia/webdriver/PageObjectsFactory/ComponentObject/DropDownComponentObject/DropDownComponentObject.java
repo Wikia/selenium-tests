@@ -10,6 +10,8 @@ import com.wikia.webdriver.Common.Core.Assertion;
 import com.wikia.webdriver.Common.Logging.PageObjectLogging;
 import com.wikia.webdriver.Common.Properties.Properties;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.WikiBasePageObject;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -45,9 +47,19 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	private WebElement messagePlaceholder;
 
 	public void openDropDown() {
-		waitForElementByElement(loginDropdownTrigger);
-		scrollAndClick(loginDropdownTrigger);
-		waitForElementInViewPort(loginDropdown);
+
+		new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver webDriver) {
+				if (!loginDropdown.isDisplayed()) {
+					loginDropdownTrigger.click();
+
+					return false;
+				}
+				return true;
+			}
+		});
+
 		PageObjectLogging.log(
 			"DropdownVisible",
 			"Login dropdown is visible",
