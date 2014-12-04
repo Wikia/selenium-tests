@@ -2,6 +2,7 @@ package com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav;
 
 import com.wikia.webdriver.Common.Core.ElementStateHelper;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SearchPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VenusGlobalNavPageObject {
@@ -26,6 +28,15 @@ public class VenusGlobalNavPageObject {
 
 	@FindBy(css = ".wikia-logo")
 	private WebElement wikiaLogo;
+
+	@FindBy(css = "#searchSelect")
+	private WebElement searchSelect;
+
+	@FindBy(css = "#search-label-inline")
+	private WebElement inlineSearch;
+
+	@FindBy(css = "#searchInput")
+	private WebElement searchInput;
 
 	private WebDriver driver;
 
@@ -113,6 +124,20 @@ public class VenusGlobalNavPageObject {
 				CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
 			);
 		}
+	}
+
+	public SearchPageObject searchGlobally(String query) {
+		Select searchSelectElement = new Select(searchSelect);
+		searchSelectElement.selectByValue("global");
+		searchInput.sendKeys(query);
+		searchInput.submit();
+		return new SearchPageObject(driver);
+	}
+
+	public boolean isLocalSearchDisabled() {
+		return
+			!ElementStateHelper.isElementVisible(searchSelect, driver) &&
+			ElementStateHelper.isElementVisible(inlineSearch, driver);
 	}
 
 	public enum Hub {
