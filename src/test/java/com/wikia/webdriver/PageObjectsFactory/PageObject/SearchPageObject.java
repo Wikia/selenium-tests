@@ -71,6 +71,11 @@ public class SearchPageObject extends WikiBasePageObject {
 		}
 	}
 
+	public boolean isResultPresent() {
+		waitForElementByElement(resultCountMessage);
+		return resultCountMessage.isDisplayed();
+	}
+
 	public void clickSearchButton() {
 		searchButton.click();
 		PageObjectLogging.log("clickSearchButton", "Search button was clicked", true, driver);

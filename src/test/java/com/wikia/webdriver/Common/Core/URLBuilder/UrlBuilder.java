@@ -33,7 +33,13 @@ public class UrlBuilder {
 		String url = "http://";
 
 		if (isWikia) {
-			prefix = "www.";
+			//If wikia.com than append www
+			if (wikiName.equals("wikia")) {
+				prefix = "www.";
+			} else {
+				//for different languages, for example de.wikia, don't prepend www
+				prefix = "";
+			}
 			suffix = ".com/";
 		} else {
 			prefix = "";
