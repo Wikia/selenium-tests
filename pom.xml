@@ -10,7 +10,7 @@
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<mvn.run>true</mvn.run>
-		<webdriver.version>2.44.0</webdriver.version>
+		<webdriver.version>2.43.1</webdriver.version>
 	</properties>
 	<dependencies>
 		<dependency>

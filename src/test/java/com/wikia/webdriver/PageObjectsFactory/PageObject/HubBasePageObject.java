@@ -286,30 +286,6 @@ public class HubBasePageObject extends WikiBasePageObject {
 		);
 	}
 
-	public void clickGlobalNavLink(HubName hubName) {
-		WebElement element;
-		switch (hubName) {
-			case VIDEO_GAMES:
-				element = VideoGamesTopNavLink;
-				break;
-			case ENTERTAINMENT:
-				element = EntertainmentTopNavLink;
-				break;
-			case LIFESTYLE:
-			default:
-				element = LifestyleTopNavLink;
-				break;
-		}
-		waitForElementClickableByElement(element);
-		element.click();
-
-		PageObjectLogging.log(
-				"clickGlobalNavLink",
-				"Click hub link in Global Navigation",
-				true
-		);
-	}
-
 	public void clickWikiaBarLink(HubName hubName) {
 		WebElement element;
 		switch (hubName) {
