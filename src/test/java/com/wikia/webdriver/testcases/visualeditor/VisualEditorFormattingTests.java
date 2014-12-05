@@ -34,7 +34,7 @@ public class VisualEditorFormattingTests extends NewTestTemplateBeforeClass {
 
 	VisualEditorPageObject ve;
 
-	private String text = PageContent.articleText;
+	private String text = PageContent.ARTICLE_TEXT;
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
@@ -52,7 +52,7 @@ public class VisualEditorFormattingTests extends NewTestTemplateBeforeClass {
 		PageObjectLogging.log("Formatting selection", format.toString() + " selected", true);
 		ve.navigateToArticleEditModeVisual(
 			wikiURL,
-			PageContent.articleNamePrefix + ve.getTimeStamp()
+			PageContent.ARTICLE_NAME_PREFIX + ve.getTimeStamp()
 		);
 		ve.selectFormatting(format);
 		ve.typeTextArea(text);

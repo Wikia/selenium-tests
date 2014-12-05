@@ -33,34 +33,34 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 
-	private String text = WikiTextContent.text;
+	private String text = WikiTextContent.TEXT;
 	private ArrayList<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
 	private String articleName;
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
 		base = new WikiBasePageObject(driver);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		wikiTexts = new ArrayList<>();
-		wikiTexts.add(WikiTextContent.paragraphText);
-		wikiTexts.add(WikiTextContent.headingText);
-		wikiTexts.add(WikiTextContent.subHeading1Text);
-		wikiTexts.add(WikiTextContent.subHeading2Text);
-		wikiTexts.add(WikiTextContent.subHeading3Text);
-		wikiTexts.add(WikiTextContent.subHeading4Text);
-		wikiTexts.add(WikiTextContent.preformattedText);
-		wikiTexts.add(WikiTextContent.boldText);
-		wikiTexts.add(WikiTextContent.italicText);
-		wikiTexts.add(WikiTextContent.striketroughText);
-		wikiTexts.add(WikiTextContent.underlineText);
-		wikiTexts.add(WikiTextContent.subscriptText);
-		wikiTexts.add(WikiTextContent.superscriptText);
-		wikiTexts.add(WikiTextContent.bulletListText);
-		wikiTexts.add(WikiTextContent.numberedListText);
+		wikiTexts.add(WikiTextContent.PARAGRAPH_TEXT);
+		wikiTexts.add(WikiTextContent.HEADING_TEXT);
+		wikiTexts.add(WikiTextContent.SUBHEADING1_TEXT);
+		wikiTexts.add(WikiTextContent.SUBHEADING2_TEXT);
+		wikiTexts.add(WikiTextContent.SUBHEADING3_TEXT);
+		wikiTexts.add(WikiTextContent.SUBHEADING4_TEXT);
+		wikiTexts.add(WikiTextContent.PREFORMATTED_TEXT);
+		wikiTexts.add(WikiTextContent.BOLD_TEXT);
+		wikiTexts.add(WikiTextContent.ITALIC_TEXT);
+		wikiTexts.add(WikiTextContent.STRIKETROUGH_TEXT);
+		wikiTexts.add(WikiTextContent.UNDERLINE_TEXT);
+		wikiTexts.add(WikiTextContent.SUBSCRIPT_TEXT);
+		wikiTexts.add(WikiTextContent.SUPERSCRIPT_TEXT);
+		wikiTexts.add(WikiTextContent.BULLET_LIST_TEXT);
+		wikiTexts.add(WikiTextContent.NUMBERED_LIST_TEXT);
 		linkWikiTexts = new ArrayList<>();
-		linkWikiTexts.add(WikiTextContent.blueLinkText);
-		linkWikiTexts.add(WikiTextContent.redLinkText);
-		linkWikiTexts.add(WikiTextContent.externalLinkText);
+		linkWikiTexts.add(WikiTextContent.BLUELINK_TEXT);
+		linkWikiTexts.add(WikiTextContent.REDLINK_TEXT);
+		linkWikiTexts.add(WikiTextContent.EXTERNAL_LINK_TEXT);
 		firstSourceEditText = new ArrayList<>();
 		firstSourceEditText.add(text);
 		secondSourceEditText = new ArrayList<>();
@@ -75,7 +75,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_001_insertToNewArticle() {
 		base = new WikiBasePageObject(driver);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		ve.typeTextInAllFormat(text);
 		ve.typeTextInAllStyle(text);
@@ -129,21 +129,21 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		groups = {"VisualEditorEditing", "VisualEditorEditing_004"}
 	)
 	public void VisualEditorEditing_004_insertLinks() {
-		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		base.logInCookie(credentials.userNameVEPreferred, credentials.passwordVEPreferred, wikiURL);
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		VisualEditorHyperLinkDialog veLinkDialog = ve.clickLinkButton();
-		veLinkDialog.typeInLinkInput(PageContent.internalLink);
+		veLinkDialog.typeInLinkInput(PageContent.INTERNAL_LINK);
 		veLinkDialog.verifyMatchingPageIsTop();
 		ve = veLinkDialog.clickLinkResult();
 		ve.typeReturn();
 		veLinkDialog = ve.clickLinkButton();
-		veLinkDialog.typeInLinkInput(PageContent.redLink);
+		veLinkDialog.typeInLinkInput(PageContent.REDLINK);
 		veLinkDialog.verifyNewPageIsTop();
 		ve = veLinkDialog.clickLinkResult();
 		ve.typeReturn();
 		veLinkDialog = ve.clickLinkButton();
-		veLinkDialog.typeInLinkInput(PageContent.externalLink);
+		veLinkDialog.typeInLinkInput(PageContent.EXTERNAL_LINK);
 		veLinkDialog.verifyExternalLinkIsTop();
 		ve = veLinkDialog.clickLinkResult();
 		ve.typeReturn();
@@ -160,7 +160,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		groups = {"VisualEditorEditing", "VisualEditorEditing_005"}
 	)
 	public void VisualEditorEditing_005_switchToSourceMode() {
-		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		ve = ve.typeInSourceEditor(text);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
@@ -188,7 +188,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog.typeEditSummary(text);
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
+		WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
 		historyPage.verifyLatestEditSummary(text);
 	}
 
@@ -203,7 +203,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		saveDialog.clickMinorEdit();
 		ArticlePageObject article = saveDialog.savePage();
 		article.verifyVEPublishComplete();
-		WikiHistoryPageObject historyPage = article.openArticleHistoryPage(wikiURL);
+		WikiHistoryPageObject historyPage = article.openArticleHistoryPage();
 		historyPage.verifyRevisionMarkedAsMinor();
 	}
 }

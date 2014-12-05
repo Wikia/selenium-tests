@@ -17,12 +17,12 @@ public class VideosModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"VideosModule", "VideosModuleTest_001", "Media"})
 	public void VideosModuleTest_001() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 		base.openRandomArticle(wikiURL);
 		videosModule.verifyVideosModuleShowing();
-		base.openFilePage(wikiURL, VideoContent.youtubeVideoURL2FileName);
+		base.openFilePage(wikiURL, VideoContent.YOUTUBE_VIDEO_URL2_FILENAME);
 		videosModule.verifyVideosModuleShowing();
 	}
 
@@ -35,7 +35,7 @@ public class VideosModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"VideosModule", "VideosModuleTest_002", "Media"})
 	public void VideosModuleTest_002() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 		base.openWikiPage(wikiURL);
@@ -51,7 +51,7 @@ public class VideosModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"VideosModule", "VideosModuleTest_003", "Media"})
 	public void VideosModuleTest_003() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 		base.openRandomArticle(wikiURL);
@@ -64,7 +64,7 @@ public class VideosModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"VideosModule", "VideosModuleTest_004", "Media"})
 	public void VideosModuleTest_004() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		VideosModuleComponentObject videosModule = new VideosModuleComponentObject(driver);
 		base.openRandomArticle(wikiURL);

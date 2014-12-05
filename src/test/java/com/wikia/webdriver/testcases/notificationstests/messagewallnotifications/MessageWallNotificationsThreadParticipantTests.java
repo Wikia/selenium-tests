@@ -27,7 +27,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 	String title;
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsThreadParticipantTests_001",
 					"MessageWallNotificationsThreadParticipantTests"
 			}
@@ -37,8 +37,8 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 		base.logInCookie(credentials.userName3, credentials.password3, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -46,7 +46,7 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsThreadParticipantTests_002",
 					"MessageWallNotificationsThreadParticipantTests"
 			},
@@ -57,33 +57,34 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 		base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
 		MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
-		String reply = PageContent.messageWallQuotePrefix + wall.getTimeStamp();
-		miniReply.switchAndQuoteMessageWall(reply);;
+		String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
+		miniReply.switchAndQuoteMessageWall(reply);
+		;
 		wall.submitQuote();
 		wall.verifyQuote(reply);
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsThreadParticipantTests_003",
 					"MessageWallNotificationsThreadParticipantTests"
 			},
 			dependsOnMethods = "threadCreatorNotification_setup_2"
-			)
+	)
 	public void threadCreatorNotification_setup_3() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName3, credentials.password3, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName3, wikiURL);
 		NewMessageWallThreadPageObject thread = wall.openThread(title);
 		MiniEditorComponentObject miniReply = thread.triggerMessageArea();
-		String reply = PageContent.messageWallQuotePrefix + wall.getTimeStamp();
+		String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
 		miniReply.switchAndWrite(reply);
 		thread.submitQuote();
 		thread.verifyLastReply(credentials.userName3, reply);
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsThreadParticipantTests_004",
 					"MessageWallNotificationsThreadParticipantTests"
 			},
@@ -94,6 +95,6 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 		base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
 		NotificationsComponentObject notifications = new NotificationsComponentObject(driver);
 		notifications.showNotifications();
-		notifications.verifyNotification(title, credentials.userName3, "replied to "+credentials.userName3);
+		notifications.verifyNotification(title, credentials.userName3, "replied to " + credentials.userName3);
 	}
 }

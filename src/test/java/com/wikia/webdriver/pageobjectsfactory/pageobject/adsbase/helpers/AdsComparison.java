@@ -162,28 +162,29 @@ public class AdsComparison {
 		int attempts = 0;
 		try {
 			do {
-				currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
 				verifyColorAd(element, color, driver);
 				Thread.sleep(TIME_STEP_MILLS);
 				attempts += 1;
+				currentTime = (System.currentTimeMillis() - startTime) / MILLIS_IN_SEC;
+				PageObjectLogging.log("verifyColorAd", "Current time: " + currentTime + " seconds", true);
 			} while ((currentTime < acceptableDurationSec) && (attempts < MAX_ATTEMPTS));
 		} catch (InterruptedException e) {
-			PageObjectLogging.log("verifyColorAd", e.getMessage(), false);
+			PageObjectLogging.log("verifyColorAd", e.getMessage(), false, driver);
 		}
 	}
 
-	public void verifyColorAd(WebElement element, Color color, WebDriver driver) {
+	private void verifyColorAd(WebElement element, Color color, WebDriver driver) {
 		BufferedImage image = shooter.takeScreenshot(element, driver);
 		if (imageComparison.isColorImage(image, color, IMAGE_ACCURACY_PERCENT)) {
 			PageObjectLogging.log(
 				"verifyColorAd",
-				String.format("At least %s percents of Ad has %s color", IMAGE_ACCURACY_PERCENT, color.toString()),
-				true
+				"At least " + IMAGE_ACCURACY_PERCENT + " percents of Ad has " + color,
+				true,
+				driver
 			);
 		} else {
 			throw new NoSuchElementException(
-				String.format("At least %s percents of Ad does not have %s color",
-					(100 - IMAGE_ACCURACY_PERCENT), color.toString())
+				"At least " + (100 - IMAGE_ACCURACY_PERCENT) + " percents of Ad does not have " + color
 			);
 		}
 	}

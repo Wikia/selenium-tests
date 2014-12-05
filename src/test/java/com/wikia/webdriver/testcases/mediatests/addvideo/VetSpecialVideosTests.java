@@ -25,8 +25,8 @@ public class VetSpecialVideosTests extends NewTestTemplate{
 		specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);
 		specialVideos.openSpecialVideoPage(wikiURL);
 		VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-		vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
-		specialVideos.verifyVideoAdded(VideoContent.youtubeVideoURL2name);
+		vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL2);
+		specialVideos.verifyVideoAdded(VideoContent.YOUTUBE_VIDEO_URL2_NAME);
 	}
 
 	@Test(enabled = false, groups = {"VetTests002", "VetTests", "SpecialVideo", "Media"})
@@ -35,7 +35,7 @@ public class VetSpecialVideosTests extends NewTestTemplate{
 		specialVideos.logInCookie(credentials.userName, credentials.password, wikiURL);
 		specialVideos.openSpecialVideoPage(wikiURL);
 		VetAddVideoComponentObject vetAddingVideo = specialVideos.clickAddAVideo();
-		vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
+		vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
 		specialVideos.verifyVideoAdded(vetAddingVideo.getVideoName());
 	}
 

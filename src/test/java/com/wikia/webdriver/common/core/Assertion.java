@@ -128,4 +128,23 @@ public class Assertion extends Assert {
 		}
 		return pattern;
 	}
+
+	public static void assertStringNotEmpty(String current) {
+		String currentEncoded = encodeSpecialChars(current);
+		try {
+			Assert.assertNotEquals("", current);
+		} catch (AssertionError err) {
+			addVerificationFailure(err);
+			PageObjectLogging.log(
+				"assertStringNotEmpty",
+				"assertion failed. String is empty",
+				false
+			);
+		}
+		PageObjectLogging.log(
+			"assertStringNotEmpty",
+			"assertion passed<br/>current: " + currentEncoded,
+			true
+		);
+	}
 }

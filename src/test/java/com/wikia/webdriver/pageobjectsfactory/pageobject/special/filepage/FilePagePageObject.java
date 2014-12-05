@@ -53,10 +53,6 @@ public class FilePagePageObject extends WikiBasePageObject {
 	private List<WebElement> tabs;
 	@FindBy(css=".video-provider a")
 	private WebElement provider;
-	@FindBy(css=".fullImageLink iframe")
-	private WebElement playerIframe;
-	@FindBy(css=".fullImageLink [name=flashvars]")
-	private WebElement playerObject;
 	@FindBy(css="div#mw-imagepage-nofile")
 	private WebElement noFileText;
 	@FindBy(css="li#mw-imagepage-reupload-link a")

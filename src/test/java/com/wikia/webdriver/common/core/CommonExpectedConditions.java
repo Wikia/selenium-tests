@@ -17,17 +17,16 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 
+
 public class CommonExpectedConditions {
 
-	private final static Logger log = Logger.getLogger(ExpectedConditions.class.getName());
-
-	private static WebDriver driver = DriverProvider.getWebDriver();
-
+	private final static Logger LOGGER = Logger.getLogger(ExpectedConditions.class.getName());
 
 	/**
 	 * An expectation for checking if the given text is present in the specified
@@ -192,6 +191,27 @@ public class CommonExpectedConditions {
 	 * An expectation for checking if the given text is present in the specified
 	 * element.
 	 */
+	public static ExpectedCondition<Boolean> textToBePresentInElementLocatedBy(
+		final By elmentLocator, final String text) {
+
+		return new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				String elementText = driver.findElement(elmentLocator).getText();
+				return elementText.contains(text);
+			}
+
+			@Override
+			public String toString() {
+				return String.format("text ('%s') to be present in element located by %s",
+					text, elmentLocator.toString());
+			}
+		};
+	}
+
+	/**
+	 * An expectation for checking if the given text is present in the specified
+	 * element.
+	 */
 	public static ExpectedCondition<Boolean> textToBePresentInElement(
 			final By selectorBy, final String text) {
 
@@ -240,7 +260,7 @@ public class CommonExpectedConditions {
 		} catch (NoSuchElementException e) {
 			throw e;
 		} catch (WebDriverException e) {
-			log.log(Level.WARNING,
+			LOGGER.log(Level.WARNING,
 					String.format("WebDriverException thrown by findElement(%s)", by), e);
 			throw e;
 		}
@@ -433,6 +453,15 @@ public class CommonExpectedConditions {
 						"At least %s percents of element does not have %s color",
 						(100 - accuracy), color.toString()
 				);
+			}
+		};
+	}
+
+	public static ExpectedCondition<Boolean> scriptReturnsTrue(final String jsScript) {
+		return new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				return (Boolean) ((JavascriptExecutor) driver).executeScript(jsScript);
 			}
 		};
 	}

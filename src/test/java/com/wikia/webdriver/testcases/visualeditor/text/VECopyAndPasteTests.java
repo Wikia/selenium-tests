@@ -33,13 +33,13 @@ public class VECopyAndPasteTests extends NewTestTemplateBeforeClass {
 		groups = {"VECopyAndPasteTests", "VECopyAndPasteTests_001"}
 	)
 	public void VECopyAndPasteTests_001_copyAndPaste() throws InterruptedException {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 			base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
-		String text = PageContent.articleText;
+		String text = PageContent.ARTICLE_TEXT;
 		ve.typeTextArea(text);
 		ve.copyAndPaste();
 		ve.verifyFormatting(Formatting.PARAGRAPH, text + text);

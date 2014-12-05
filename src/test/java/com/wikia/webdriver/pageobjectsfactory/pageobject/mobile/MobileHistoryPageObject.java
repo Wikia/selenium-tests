@@ -15,8 +15,6 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#pagehistory > li.mw-tag-mobileedit")
-	private List<WebElement> editHistories;
 	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.mw-tag-markers")
 	private List<WebElement> editHistoriesDevice;
 	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.comment")

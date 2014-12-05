@@ -47,24 +47,24 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_001", "VETemplateSearch"}
 	)
 	public void VETemplateTests_001_SearchTemplate() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		//1 character search 'a', not matching article name, no result
-		templateDialog.typeInSearchInput(VEContent.templateSearch1CharNoMatch);
+		templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_1CHAR_NOMATCH);
 		templateDialog.verifyNoResultTemplate();
 		//2 characters search 'ab', not matching article name, no result
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput(VEContent.templateSearch2CharsNoMatch);
+		templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_2CHARS_NOMATCH);
 		templateDialog.verifyNoResultTemplate();
 		//3 characters search 'per', not matching article name, 2 results on template name
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput(VEContent.templateSearch3CharsPartialMatch);
+		templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_3CHARS_PARTIALMATCH);
 		templateDialog.verifyIsResultTemplate();
 		//2 characters search 'ar', matching article name, 3 results on the article
 		templateDialog.clearSearchInput();
-		templateDialog.typeInSearchInput(VEContent.templateSearchMatchArticle);
+		templateDialog.typeInSearchInput(VEContent.TEMPLATE_SEARCH_MATCH_ARTICLE);
 		templateDialog.verifyIsResultTemplate();
 	}
 
@@ -72,7 +72,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_002", "VETemplateSuggestion"}
 	)
 	public void VETemplateTests_002_SuggestedTemplate() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
@@ -84,7 +84,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_003", "VEAddTemplate"}
 	)
 	public void VETemplateTests_003_AddTemplates() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
 		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
@@ -96,7 +96,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		ve.verifyNumberOfInlineTransclusion(++numInlineTransclusion);
 		templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearch3CharsPartialMatch, 1);
+		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_3CHARS_PARTIALMATCH, 1);
 		ve = editTemplateDialog.closeDialog();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
@@ -110,23 +110,23 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		groups = {"VETemplate", "VETemplateTests_004", "VEAddTemplate", "VETemplateTests_005", "VETemplateTests_006"}
 	)
 	public void VETemplateTests_004_CheckBlockedTransclusion() {
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
-		String selectText = PageContent.articleText.substring(12, 13);
+		String selectText = PageContent.ARTICLE_TEXT.substring(12, 13);
 		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
 		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
-		ve.typeTextArea(PageContent.articleText);
+		ve.typeTextArea(PageContent.ARTICLE_TEXT);
 		ve.selectText(selectText);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		VisualEditorEditTemplateDialog editTemplateDialog =
-			templateDialog.selectResultTemplate(VEContent.templateSearchExactMatch, 0);
+			templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH, 0);
 		ve = editTemplateDialog.clickDone();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
 		templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
-		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.templateSearchExactMatch, 0);
+		editTemplateDialog = templateDialog.selectResultTemplate(VEContent.TEMPLATE_SEARCH_EXACTMATCH, 0);
 		ve = editTemplateDialog.clickDone();
 		ve.verifyNumberOfBlockTransclusion(++numBlockTransclusion);
 		ve.verifyNumberOfInlineTransclusion(numInlineTransclusion);
@@ -159,12 +159,12 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	)
 	public void VETemplateTests_006_CheckBlockedTransclusion() {
 		ArrayList<String> templateWikiTexts = new ArrayList<>();
-		templateWikiTexts.add(VEContent.templateWikiText);
+		templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
 		ve.clickBlockTransclusion(0);
 		VisualEditorEditTemplateDialog editTemplateDialog = ve.openEditTemplateDialog();
-		editTemplateDialog.typeInParam(VEContent.templateParamLabel1, VEContent.templateParamValue1);
-		editTemplateDialog.typeInParam(VEContent.templateParamLabel2, VEContent.templateParamValue2);
+		editTemplateDialog.typeInParam(VEContent.TEMPLATE_PARAM_LABEL1, VEContent.TEMPLATE_PARAM_VALUE1);
+		editTemplateDialog.typeInParam(VEContent.TEMPLATE_PARAM_LABEL2, VEContent.TEMPLATE_PARAM_VALUE2);
 		ve = editTemplateDialog.clickDone();
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
 		VisualEditorReviewChangesDialog reviewDialog = saveDialog.clickReviewYourChanges();

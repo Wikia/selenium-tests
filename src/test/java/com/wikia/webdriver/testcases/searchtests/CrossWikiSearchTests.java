@@ -48,34 +48,34 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	public void crossWikiSearch_002_pagination() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
-		search.searchFor(SearchContent.searchPhrase);
+		search.searchFor(SearchContent.SEARCH_PHRASE);
 		// verify results pos parameter for first page
-		search.verifyResultsPosForPage(0, SearchContent.resultsPerPage);
-		search.verifyResultsCount(SearchContent.resultsPerPage);
-		search.verifyThumbnails(SearchContent.resultsPerPage);
-		search.verifyDescription(SearchContent.resultsPerPage);
-		search.verifyStatistics(SearchContent.resultsPerPage);
+		search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
+		search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
+		search.verifyThumbnails(SearchContent.RESULTS_PER_PAGE);
+		search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
+		search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
 		search.nextPage();
 		// verify results pos parameter for second page
-		search.verifyResultsPosForPage(1, SearchContent.resultsPerPage);
-		search.verifyResultsCount(SearchContent.resultsPerPage);
-		search.verifyThumbnails(SearchContent.resultsPerPage);
-		search.verifyDescription(SearchContent.resultsPerPage);
-		search.verifyStatistics(SearchContent.resultsPerPage);
+		search.verifyResultsPosForPage(1, SearchContent.RESULTS_PER_PAGE);
+		search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
+		search.verifyThumbnails(SearchContent.RESULTS_PER_PAGE);
+		search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
+		search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
 		search.prevPage();
 		// verify results pos parameter for first page
-		search.verifyResultsPosForPage(0, SearchContent.resultsPerPage);
-		search.verifyResultsCount(SearchContent.resultsPerPage);
-		search.verifyThumbnails(SearchContent.resultsPerPage);
-		search.verifyDescription(SearchContent.resultsPerPage);
-		search.verifyStatistics(SearchContent.resultsPerPage);
+		search.verifyResultsPosForPage(0, SearchContent.RESULTS_PER_PAGE);
+		search.verifyResultsCount(SearchContent.RESULTS_PER_PAGE);
+		search.verifyThumbnails(SearchContent.RESULTS_PER_PAGE);
+		search.verifyDescription(SearchContent.RESULTS_PER_PAGE);
+		search.verifyStatistics(SearchContent.RESULTS_PER_PAGE);
 	}
 
 	@Test(groups= {"CrossWikiSearchTests_003" , "Search", "CrossWikiSearch"} )
 	public void crossWikiSearch_003_resultClick() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
-		search.searchFor(SearchContent.searchPhrase);
+		search.searchFor(SearchContent.SEARCH_PHRASE);
 		WikiArticleHomePage wikiArticleHomePage = search.openResult(0);
 		wikiArticleHomePage.verifyThisIsWikiHomePage();
 		search.navigateBack();
@@ -83,26 +83,26 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 		wikiArticleHomePage.verifyThisIsWikiHomePage();
 	}
 
-	@Test(groups = {"CrossWikiSearchTests_004", "Search", "CrossWikiSearch"})
-	public void CrossWikiSearchTests_004_noResults() {
+	@Test(groups = {"CrossWikiSearch_004", "Search", "CrossWikiSearch"})
+	public void crossWikiSearch_004_noResults() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
-		search.searchFor(SearchContent.searchPhraseNoResults);
+		search.searchFor(SearchContent.SEARCH_PHRASE_NO_RESULTS);
 		search.verifyNoPagination();
 		search.verifyNoResultsCaption();
 	}
 
-	@Test(groups = {"CrossWikiSearchTests_005", "Search", "CrossWikiSearch"})
-	public void CrossWikiSearchTests_005_onePageResult() {
+	@Test(groups = {"CrossWikiSearch_005", "Search", "CrossWikiSearch"})
+	public void crossWikiSearch_005_onePageResult() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
-		search.searchFor(SearchContent.searchPhraseOnePageResults);
+		search.searchFor(SearchContent.SEARCH_PHRASE_ONE_PAGE_RESULTS);
 		search.verifyNoPagination();
 	}
 	@Test(dataProviderClass = CrossWikiSearchProvider.class,
 			dataProvider = "getPushToTopQueries",
-			groups = {"CrossWikiSearchTests_006", "Search", "CrossWikiSearch"})
-	public void CrossWikiSearchTests_006_pushToTop(String query, String wikiName) {
+			groups = {"CrossWikiSearch_006", "Search", "CrossWikiSearch"})
+	public void crossWikiSearch_006_pushToTop(String query, String wikiName) {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
 		search.searchFor(query);
@@ -110,12 +110,12 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"CrossWikiSearchTests_007", "Search", "CrossWikiSearch"})
-	public void crossWikiSearch_007_specialPromoteData_PLA_1504() {
+	public void crossWikiSearch_007_specialPromoteData() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
-		search.searchFor(SearchContent.searchPhrase);
+		search.searchFor(SearchContent.SEARCH_PHRASE);
 		String searchDescription = search.getFirstDescription();
 		String searchImage = search.getFirstImageText();
 		search.openResult(0);
@@ -132,7 +132,7 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	public void crossWikiSearch_008_wikimatch( String expectedWikiTitle ) {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
-		search.searchFor(SearchContent.searchPhraseResultsSameOrder);
+		search.searchFor(SearchContent.SEARCH_PHRASE_RESULTS_SAME_ORDER);
 		search.verifyQuery(expectedWikiTitle);
 	}
 
@@ -147,10 +147,10 @@ public class CrossWikiSearchTests extends NewTestTemplate {
 	public void crossWikiSearch_009_romanNumbersMatch_PLA_1245() {
 		CrossWikiSearchPageObject search = new CrossWikiSearchPageObject(driver);
 		search.goToSearchPage(wikiCorporateURL);
-		search.searchFor(SearchContent.searchPhraseRomanNumber);
-		search.verifyQuery(SearchContent.wikiName);
-		search.searchFor(SearchContent.searchPhraseDecimalNumber);
-		search.verifyQuery(SearchContent.wikiName);
+		search.searchFor(SearchContent.SEARCH_PHRASE_ROMAN_NUMBER);
+		search.verifyQuery(SearchContent.WIKI_NAME);
+		search.searchFor(SearchContent.SEARCH_PHRASE_DECIMAL_NUMBER);
+		search.verifyQuery(SearchContent.WIKI_NAME);
 	}
 
 }

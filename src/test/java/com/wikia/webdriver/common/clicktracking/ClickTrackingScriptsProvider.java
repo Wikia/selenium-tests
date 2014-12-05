@@ -47,7 +47,7 @@ public class ClickTrackingScriptsProvider {
 		+ "};";
 
 
-	public static String trackerInstallation =
+	public static final String TRACKER_INSTALLATION =
 			enableWikiaTracker
 		+	enableSeleniumTracker
 		+ 	seleniumGetEventsFunction
@@ -68,7 +68,7 @@ public class ClickTrackingScriptsProvider {
 		+ "    return result;"
 		+ "};";
 
-	public static String eventsCaptureInstallation =
+	public static final String EVENTS_CAPTURE_INSTALLATION =
 			windowSeleniumGetEventsFunction
 		+	windowSeleniumPopEventsFunction;
 }

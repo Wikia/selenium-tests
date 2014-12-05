@@ -20,7 +20,7 @@ public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 		base1.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialCssPageObject specialCss1 = base1.openSpecialCss(wikiURL);
 		specialCss1.verifyAceEditorPresence();
-		specialCss1.sendCssText(CssEditorContent.validCss);
+		specialCss1.sendCssText(CssEditorContent.VALID_CSS);
 		//second user opens the special:CSS
 
 		switchToWindow(driverTwo);
@@ -28,7 +28,7 @@ public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 		base2.logInCookie(credentials.userNameStaff2, credentials.passwordStaff2, wikiURL);
 		SpecialCssPageObject specialCss2 = base2.openSpecialCss(wikiURL);
 		specialCss2.verifyAceEditorPresence();
-		specialCss2.sendCssText(CssEditorContent.validCss2);
+		specialCss2.sendCssText(CssEditorContent.VALID_CSS2);
 
 		//first publishes his changes
 		switchToWindow(driverOne);

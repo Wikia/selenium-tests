@@ -27,7 +27,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 	String title;
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsOwnerTests_001",
 					"MessageWallNotificationsOwnerTests"
 			}
@@ -37,8 +37,8 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName9, credentials.password9, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName10, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -46,7 +46,7 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsOwnerTests_002",
 					"MessageWallNotificationsOwnerTests"
 			},

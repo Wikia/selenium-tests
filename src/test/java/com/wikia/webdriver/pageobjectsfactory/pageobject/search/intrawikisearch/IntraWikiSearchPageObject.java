@@ -25,9 +25,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
 	@FindBy(css=".photos-and-videos")
 	private WebElement photosVideos;
-	@FindBy(css="#WikiaSearchHeader input[name=search]")
+	@FindBy(css="#searchInput")
 	private WebElement searchField;
-	@FindBy(css="#WikiaSearchHeader .wikia-button")
+	@FindBy(css="#searchForm .search-submit")
 	private WebElement searchButton;
 	@FindBy(css="[value=is_image]")
 	private WebElement filterPhotos;
@@ -97,7 +97,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	 * by adding "&uselang=qqx" to URl
 	 */
 	public void addQqxUselang() {
-		appendToUrl(URLsContent.translatableLanguage);
+		appendToUrl(URLsContent.TRANSLATABLE_LANGUAGE);
 	}
 
 	public void searchFor(String query) {
@@ -276,19 +276,19 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public enum sortOptions {
-		relevancy, publishDate, duration;
+		RELEVANCY, PUBLISH_DATE, DURATION;
 	}
 
 	public void sortBy(sortOptions option) {
 		Select dropDown = new Select(sortingOptions);
 		switch (option) {
-		case relevancy:
+		case RELEVANCY:
 			dropDown.selectByIndex(0);
 			break;
-		case publishDate:
+		case PUBLISH_DATE:
 			dropDown.selectByIndex(1);
 			break;
-		case duration:
+		case DURATION:
 			dropDown.selectByIndex(2);
 			break;
 		}

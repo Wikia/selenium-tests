@@ -22,14 +22,14 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		String comment = PageContent.commentText + article.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		editor.switchAndWrite(comment);
 		article.submitComment();
 		article.verifyCommentText(comment);
 		article.verifyCommentCreator(credentials.userName);
 		article.triggerEditCommentArea();
-		String commentEdited = PageContent.commentText + article.getTimeStamp();
+		String commentEdited = PageContent.COMMENT_TEXT + article.getTimeStamp();
 		editor.switchAndEditComment(commentEdited);
 		article.submitEditComment();
 		article.verifyCommentText(commentEdited);
@@ -40,14 +40,14 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		String comment = PageContent.commentText + article.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		editor.switchAndWrite(comment);
 		article.submitComment();
 		article.verifyCommentText(comment);
 		article.verifyCommentCreator(credentials.userName);
 		article.triggerCommentReply();
-		String commentReply = PageContent.replyText + article.getTimeStamp();
+		String commentReply = PageContent.REPLY_TEXT + article.getTimeStamp();
 		editor.switchAndReplyComment(commentReply);
 		article.submitReplyComment();
 		article.verifyCommentReply(commentReply);
@@ -58,18 +58,18 @@ public class ArticleCommentsTests extends NewTestTemplate {
 	public void ArticleComments_003_anonReplyComment() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		String comment = PageContent.commentText + article.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		editor.switchAndWrite(comment);
 		article.submitComment();
 		article.verifyCommentText(comment);
-		article.verifyCommentCreator(PageContent.wikiaContributor);
+		article.verifyCommentCreator(PageContent.WIKIA_CONTRIBUTOR);
 		article.triggerCommentReply();
-		String commentReply = PageContent.replyText + article.getTimeStamp();
+		String commentReply = PageContent.REPLY_TEXT + article.getTimeStamp();
 		editor.switchAndReplyComment(commentReply);
 		article.submitReplyComment();
 		article.verifyCommentReply(commentReply);
-		article.verifyReplyCreator(PageContent.wikiaContributor);
+		article.verifyReplyCreator(PageContent.WIKIA_CONTRIBUTOR);
 	}
 
 	@Test(groups = {"ArticleComments_004", "ArticleComments"})
@@ -77,7 +77,7 @@ public class ArticleCommentsTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		String comment = PageContent.commentText + article.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + article.getTimeStamp();
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		editor.switchAndWrite(comment);
 		article.submitComment();

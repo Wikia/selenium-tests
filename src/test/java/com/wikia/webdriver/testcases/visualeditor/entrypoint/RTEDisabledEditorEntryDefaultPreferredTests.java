@@ -36,7 +36,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_defaultPreferred() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.rteDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.RTE_DISABLED_WIKI);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameDefaultPreferred, credentials.passwordDefaultPreferred, wikiURL);
 	}
@@ -45,7 +45,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		groups = {"RTEDisabledEditorEntryDefaultPreferred", "RTEDisabledEditorEntryDefaultPreferredTests_001", "createPageEntry"}
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleName);
 		ve.verifyVEToolBarPresent();
@@ -66,7 +66,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 		groups = {"RTEDisabledEditorEntryDefaultPreferred", "RTEDisabledEditorEntryDefaultPreferredTests_003", "redlinkEntry"}
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_003_RedlinkEntry() {
-		ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.testingPage);
+		ArticlePageObject article = base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditorPageObject ve = article.openVEModeWithRedLinks(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -77,7 +77,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.testingPage);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		VisualEditorPageObject ve = article.openVEModeWithSectionEditButton(0);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -97,7 +97,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_006_ListNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.listPage);
+			base.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
 		VisualEditorPageObject ve = article.openNewArticleEditModeVisual(wikiURL);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
@@ -108,7 +108,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_007_CategoryNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -118,7 +118,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_008_TemplateNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.templatePage);
+			base.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -128,7 +128,7 @@ public class RTEDisabledEditorEntryDefaultPreferredTests extends NewTestTemplate
 	)
 	public void RTEDisabledEditorEntryDefaultPreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		src.verifySourceOnlyMode();
 	}
 }

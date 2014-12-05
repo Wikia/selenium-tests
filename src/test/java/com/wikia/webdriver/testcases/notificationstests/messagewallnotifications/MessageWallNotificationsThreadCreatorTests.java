@@ -27,7 +27,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate{
 	String title;
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsThreadCreatorTests_001",
 					"MessageWallNotificationsThreadCreatorTests"
 			}
@@ -37,8 +37,8 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName11, credentials.password11, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName12, wikiURL);
 		MiniEditorComponentObject mini = wall.triggerMessageArea();
-		String message = PageContent.messageWallMessagePrefix + wall.getTimeStamp();
-		title = PageContent.messageWallTitlePrefix+ wall.getTimeStamp();
+		String message = PageContent.MESSAGE_WALL_MESSAGE_PREFIX + wall.getTimeStamp();
+		title = PageContent.MESSAGE_WALL_TITLE_PREFIX + wall.getTimeStamp();
 		mini.switchAndWrite(message);
 		wall.writeTitle(title);
 		wall.submit();
@@ -46,7 +46,7 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate{
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsThreadCreatorTests_002",
 					"MessageWallNotificationsThreadCreatorTests"
 			},
@@ -57,14 +57,15 @@ public class MessageWallNotificationsThreadCreatorTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName12, credentials.password12, wikiURL);
 		NewMessageWall wall = base.openMessageWall(credentials.userName12, wikiURL);
 		MiniEditorComponentObject miniReply = wall.triggerReplyMessageArea();
-		String reply = PageContent.messageWallQuotePrefix + wall.getTimeStamp();
-		miniReply.switchAndQuoteMessageWall(reply);;
+		String reply = PageContent.MESSAGE_WALL_QUOTE_PREFIX + wall.getTimeStamp();
+		miniReply.switchAndQuoteMessageWall(reply);
+		;
 		wall.submitQuote();
 		wall.verifyQuote(reply);
 	}
 
 	@Test(
-			groups= {
+			groups = {
 					"MessageWallNotificationsThreadCreatorTests_003",
 					"MessageWallNotificationsThreadCreatorTests"
 			},

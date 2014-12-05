@@ -19,7 +19,7 @@ public class ThemeDesigner extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
 		designer.openSpecialDesignerPage(wikiURL);
-		designer.selectTab(Tab.Theme);
+		designer.selectTab(Tab.THEME);
 		themeName = designer.selectTheme(3);
 		designer.verifyThemeSelected(themeName);
 	}
@@ -30,7 +30,7 @@ public class ThemeDesigner extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
 		designer.openSpecialDesignerPage(wikiURL);
-		designer.selectTab(Tab.Theme);
+		designer.selectTab(Tab.THEME);
 		themeName = designer.selectTheme(6);
 		designer.verifyThemeSelected(themeName);
 	}
@@ -41,7 +41,7 @@ public class ThemeDesigner extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
 		designer.openSpecialDesignerPage(wikiURL);
-		designer.selectTab(Tab.Theme);
+		designer.selectTab(Tab.THEME);
 		themeName = designer.selectTheme(10);
 		designer.verifyThemeSelected(themeName);
 	}
@@ -52,7 +52,7 @@ public class ThemeDesigner extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
 		designer.openSpecialDesignerPage(wikiURL);
-		designer.selectTab(Tab.Theme);
+		designer.selectTab(Tab.THEME);
 		themeName = designer.selectTheme(1);
 		designer.verifyThemeSelected(themeName);
 		designer.submitThemeSelection();
@@ -64,7 +64,7 @@ public class ThemeDesigner extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
 		designer.openSpecialDesignerPage(wikiURL);
-		designer.selectTab(Tab.Customize);
+		designer.selectTab(Tab.CUSTOMIZE);
 		designer.verifyCustomizeTab();
 	}
 
@@ -74,7 +74,7 @@ public class ThemeDesigner extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
 		designer.openSpecialDesignerPage(wikiURL);
-		designer.selectTab(Tab.Wordmark);
+		designer.selectTab(Tab.WORDMARK);
 		designer.verifyWordmarkTab();
 	}
 
@@ -88,7 +88,7 @@ public class ThemeDesigner extends NewTestTemplate {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialThemeDesignerPageObject designer = new SpecialThemeDesignerPageObject(driver);
 		designer.openSpecialDesignerPage(wikiURL);
-		designer.selectTab(Tab.Customize);
+		designer.selectTab(Tab.CUSTOMIZE);
 		designer.verifyCustomizeTab();
 		designer.openImagePicker();
 		designer.clickOutsideImagePicker();

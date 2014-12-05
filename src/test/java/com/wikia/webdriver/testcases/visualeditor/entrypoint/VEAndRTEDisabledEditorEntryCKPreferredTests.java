@@ -36,7 +36,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_CKPreferred() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veAndrteDisabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_AND_RTE_DISABLED_WIKI);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameCKPreferred, credentials.passwordCKPreferred, wikiURL);
 	}
@@ -45,7 +45,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 		groups = {"VEAndRTEDisabledEditorEntryCKPreferred", "VEAndRTEDisabledEditorEntryCKPreferredTests_001", "createPageEntry"}
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_001_CreatePageEntry() {
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article =
 				base.openArticleByName(wikiURL, articleName);
 		SourceEditModePageObject src = article.createArticleInSrcUsingDropdown(articleName);
@@ -57,7 +57,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+				base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
 		src.verifySourceOnlyMode();
 	}
@@ -67,7 +67,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.testingPage);
+				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		SourceEditModePageObject src = article.openSrcModeWithRedLinks(0);
 		src.verifySourceOnlyMode();
 	}
@@ -77,7 +77,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.testingPage);
+				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		SourceEditModePageObject src = article.openSrcModeWithSectionEditButton(0);
 		src.verifySourceOnlyMode();
 	}
@@ -96,7 +96,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_006_ListNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.listPage);
+			base.openArticleByName(wikiURL, URLsContent.LIST_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -106,7 +106,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_007_CategoryNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.categoryPage);
+			base.openArticleByName(wikiURL, URLsContent.CATEGORY_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -116,7 +116,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_008_TemplateNamespace() {
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, URLsContent.templatePage);
+			base.openArticleByName(wikiURL, URLsContent.TEMPLATE_PAGE);
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -126,7 +126,7 @@ public class VEAndRTEDisabledEditorEntryCKPreferredTests extends NewTestTemplate
 	)
 	public void VEAndRTEDisabledEditorEntryCKPreferredTests_009_actionEdit() {
 		SourceEditModePageObject src =
-			base.navigateToArticleEditPageSrc(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.navigateToArticleEditPageSrc(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		src.verifySourceOnlyMode();
 	}
 }

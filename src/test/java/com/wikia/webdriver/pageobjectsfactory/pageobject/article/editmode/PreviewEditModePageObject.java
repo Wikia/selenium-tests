@@ -16,8 +16,6 @@ public class PreviewEditModePageObject extends EditMode {
 
 	@FindBy(css=".modalWrapper.preview")
 	private WebElement previewModal;
-	@FindBy(css=".article-thumb figcaption")
-	private WebElement figcaption;
 	@FindBy(css=".preview .video-thumbnail")
 	protected WebElement videoArticle;
 
@@ -40,13 +38,13 @@ public class PreviewEditModePageObject extends EditMode {
 		String position;
 
 		switch(positions) {
-			case left:
+			case LEFT:
 				position = "left";
 				break;
-			case right:
+			case RIGHT:
 				position = "right";
 				break;
-			case center:
+			case CENTER:
 				position = "none";
 				break;
 			default:

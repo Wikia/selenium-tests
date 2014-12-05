@@ -21,7 +21,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup_Preferred() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		base = new WikiBasePageObject(driver);
 	}
 
@@ -54,7 +54,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 		String providerName = "ooyala";
 		String articleName = "VideoOoyalaAgegateInline";
 
-		// Agegate works more reliably when logged in (issue tracked here VID-1879)
+		// Age gate works more reliably when logged in (issue tracked here VID-1879)
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openArticleByName(wikiURL, articleName);
 		article.verifyVideo();

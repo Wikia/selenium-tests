@@ -27,7 +27,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 	@Test(groups = { "ArticleTOCTests", "ArticleTOCTests_001" })
 	public void ArticleTOCTests_001_CreateArticleWithTOCasAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		SpecialCreatePagePageObject specialCreatePage = base
 				.openSpecialCreatePage(wikiURL);
 		VisualEditModePageObject visualEditMode = specialCreatePage

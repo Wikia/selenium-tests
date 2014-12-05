@@ -32,17 +32,17 @@ public class BlogCommentsTests extends NewTestTemplate {
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
-		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
 		blogPage.verifyCommentText(comment);
-		blogPage.verifyCommentCreator(PageContent.wikiaContributor);
+		blogPage.verifyCommentCreator(PageContent.WIKIA_CONTRIBUTOR);
 		blogPage.triggerCommentReply();
-		String commentReply = PageContent.commentText + blogPage.getTimeStamp();
+		String commentReply = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
 		editor.switchAndReplyComment(commentReply);
 		blogPage.submitReplyComment();
 		blogPage.verifyCommentReply(commentReply);
-		blogPage.verifyReplyCreator(PageContent.wikiaContributor);
+		blogPage.verifyReplyCreator(PageContent.WIKIA_CONTRIBUTOR);
 	}
 
 	@Test(groups = { "BlogComments_002", "BlogCommentsTests"})
@@ -53,13 +53,13 @@ public class BlogCommentsTests extends NewTestTemplate {
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
-		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
 		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userName);
 		blogPage.triggerCommentReply();
-		String commentReply = PageContent.commentText + blogPage.getTimeStamp();
+		String commentReply = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
 		editor.switchAndReplyComment(commentReply);
 		blogPage.submitReplyComment();
 		blogPage.verifyCommentReply(commentReply);
@@ -75,13 +75,13 @@ public class BlogCommentsTests extends NewTestTemplate {
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
-		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
 		blogPage.verifyCommentText(comment);
 		blogPage.verifyCommentCreator(credentials.userName);
 		blogPage.triggerEditCommentArea();
-		String commentEdited = PageContent.commentText + blogPage.getTimeStamp();
+		String commentEdited = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
 		editor.switchAndEditComment(commentEdited);
 		blogPage.submitEditComment();
 		blogPage.verifyCommentText(commentEdited);
@@ -95,7 +95,7 @@ public class BlogCommentsTests extends NewTestTemplate {
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		MiniEditorComponentObject editor = blogPage.triggerCommentArea();
-		String comment = PageContent.commentText + blogPage.getTimeStamp();
+		String comment = PageContent.COMMENT_TEXT + blogPage.getTimeStamp();
 		editor.switchAndWrite(comment);
 		blogPage.submitComment();
 		blogPage.verifyCommentText(comment);

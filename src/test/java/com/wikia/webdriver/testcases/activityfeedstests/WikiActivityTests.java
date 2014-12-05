@@ -28,7 +28,7 @@ public class WikiActivityTests extends NewTestTemplate {
 	public void WikiActivityTests_001_newEditionIsRecordedOnAvtivityModule() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String articleContent = PageContent.articleText+base.getTimeStamp(); //timeStamp required
+		String articleContent = PageContent.ARTICLE_TEXT+base.getTimeStamp(); //timeStamp required
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String articleName = article.getArticleName();
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
@@ -47,8 +47,8 @@ public class WikiActivityTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
-		String articleContent = PageContent.articleText;
-		String articleTitle = PageContent.articleNamePrefix + specialCreatePage.getTimeStamp();
+		String articleContent = PageContent.ARTICLE_TEXT;
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + specialCreatePage.getTimeStamp();
 		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
@@ -66,8 +66,8 @@ public class WikiActivityTests extends NewTestTemplate {
 	public void WikiActivityTests_003_newBlogCreationIsRecordedOnAvtivityModule() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String blogTitle = PageContent.blogPostNamePrefix + base.getTimeStamp();
-		String blogContent = PageContent.blogContent + base.getTimeStamp();
+		String blogTitle = PageContent.BLOG_POST_NAME_PREFIX + base.getTimeStamp();
+		String blogContent = PageContent.BLOG_CONTENT + base.getTimeStamp();
 		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName, wikiURL);
 		userProfile.clickOnBlogTab();
 		SpecialCreatePagePageObject createBlogPage = userProfile.clickOnCreateBlogPost();
@@ -89,7 +89,7 @@ public class WikiActivityTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		String articleName = article.getArticleName();
-		String categoryName = PageContent.categoryNamePrefix + article.getTimeStamp();
+		String categoryName = PageContent.CATEGORY_NAME_PREFIX + article.getTimeStamp();
 		article.addCategory(categoryName);
 		article.submitCategory();
 		article.verifyCategoryPresent(categoryName);

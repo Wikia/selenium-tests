@@ -23,7 +23,7 @@ public class EditCategoryComponentObject extends BasePageObject{
 
 	@FindBy(css=".WikiaForm .categoryName > input")
 	private WebElement categoryNameField;
-	@FindBy(css="#CategorySelectEditModal button.primary")
+	@FindBy(css="#categorySelectEditModal button.primary")
 	private WebElement saveButton;
 
 	public ArticlePageObject editCategoryName(String newCategoryName) {

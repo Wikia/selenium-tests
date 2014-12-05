@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -34,7 +35,7 @@ public class CssChromeTests extends NewTestTemplate {
 		specialCss.verifyAceEditorPresence();
 		specialCss.verifyHighlighting();
 		specialCss.clearCssText();
-		specialCss.sendCssText(CssEditorContent.invalidCssError);
+		specialCss.sendCssText(CssEditorContent.INVALID_CSS_ERROR);
 		specialCss.verifyAceError();
 	}
 
@@ -42,10 +43,11 @@ public class CssChromeTests extends NewTestTemplate {
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
 	@Test(groups = {"CssChrome_002", "CssChrome", "AdminDashboard"})
+	@UseUnstablePageLoadStrategy
 	public void CssChrome_002_verifyPublishButtonAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
 		String cssContent = specialCss.getWikiaCssContent();
 		Assertion.assertEquals(currentTimestamp, cssContent);
 	}
@@ -53,12 +55,13 @@ public class CssChromeTests extends NewTestTemplate {
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
 	@Test(groups = {"CssChrome_003", "CssChrome", "AdminDashboard"})
+	@UseUnstablePageLoadStrategy
 	public void CssChrome_003_verifyEditSummaryAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.sendEditSummaryText(currentTimestamp);
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
-		specialCss.appendToUrl(URLsContent.historyAction);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+		specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
 		String editSummary = specialCss.getFirstCssRevision();
 		Assertion.assertStringContains(currentTimestamp, editSummary);
 	}
@@ -81,13 +84,14 @@ public class CssChromeTests extends NewTestTemplate {
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */
 	@Test(groups = {"CssChrome_005", "CssChrome", "AdminDashboard"})
+	@UseUnstablePageLoadStrategy
 	public void CssChrome_005_verifyMinorEditAppearsAndWorks() {
 		String currentTimestamp = specialCss.getTimeStamp();
 		specialCss.verifyMinorEditAppears();
 		specialCss.clickMinorCheckbox();
 		specialCss.saveCssContent(currentTimestamp);
-		specialCss.openArticleByName(wikiURL, URLsContent.mediaWikiCss);
-		specialCss.appendToUrl(URLsContent.historyAction);
+		specialCss.openArticleByName(wikiURL, URLsContent.MEDIAWIKI_CSS);
+		specialCss.appendToUrl(URLsContent.ACTION_HISTORY);
 		specialCss.verifyRevisionMarkedAsMinor();
 	}
 
@@ -124,7 +128,7 @@ public class CssChromeTests extends NewTestTemplate {
 	@Test(groups = {"CssChrome_008", "CssChrome", "AdminDashboard"})
 	public void CssChrome_008_verifyOnLeaveMessageWorks() {
 		specialCss.verifyAceEditorPresence();
-		specialCss.sendCssText(CssEditorContent.validCss);
+		specialCss.sendCssText(CssEditorContent.VALID_CSS);
 		driver.get(wikiURL);
 		specialCss.waitForAlertAndAccept();
 	}

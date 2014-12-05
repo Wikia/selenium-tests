@@ -25,8 +25,8 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
-		String articleContent = PageContent.articleText;
-		String articleTitle = PageContent.articleNamePrefix + specialCreatePage.getTimeStamp();
+		String articleContent = PageContent.ARTICLE_TEXT;
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + specialCreatePage.getTimeStamp();
 		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
@@ -40,8 +40,8 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	public void ArticleCRUDUser_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String articleContent = PageContent.articleText;
-		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleContent = PageContent.ARTICLE_TEXT;
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
@@ -55,8 +55,8 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	public void ArticleCRUDUser_003_addDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String articleContent = PageContent.articleText;
-		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleContent = PageContent.ARTICLE_TEXT;
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.createArticleInCKUsingDropdown(articleTitle);
 		visualEditMode.addContent(articleContent);
@@ -73,7 +73,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	public void ArticleCRUDUser_004_differentTitles(String articleTitle) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String articleContent = PageContent.articleText;
+		String articleContent = PageContent.ARTICLE_TEXT;
 		articleTitle = articleTitle + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
@@ -88,7 +88,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	public void ArticleCRUDUser_005_editByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String articleContent = PageContent.articleText;
+		String articleContent = PageContent.ARTICLE_TEXT;
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.addContent(articleContent);
@@ -102,7 +102,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	public void ArticleCRUDUser_006_editDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
-		String articleContent = PageContent.articleText;
+		String articleContent = PageContent.ARTICLE_TEXT;
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.editArticleInRTEUsingDropdown();
 		visualEditMode.addContent(articleContent);

@@ -85,11 +85,11 @@ public class NewTestTemplateCore {
 	}
 
 	protected void logOut() {
-		driver.get(wikiURL + URLsContent.logout);
+		driver.get(wikiURL + URLsContent.LOGOUT);
 	}
 
 	protected void logOutCustomDriver(WebDriver customDriver) {
-		customDriver.get(wikiURL + URLsContent.logout);
+		customDriver.get(wikiURL + URLsContent.LOGOUT);
 	}
 
 	protected void stopBrowser() {

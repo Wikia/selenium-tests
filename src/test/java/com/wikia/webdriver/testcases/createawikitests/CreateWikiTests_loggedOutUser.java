@@ -38,9 +38,9 @@ public class CreateWikiTests_loggedOutUser extends NewTestTemplate{
 		cnwLogin.typeInUserName(credentials.userName);
 		cnwLogin.typeInPassword(credentials.password);
 		CreateNewWikiPageObjectStep2 cnw2 = cnwLogin.submitLogin();
-		cnw2.selectCategory(CreateWikiMessages.wikiCategory);
+		cnw2.selectCategory(CreateWikiMessages.WIKI_CATEGORY);
 		CreateNewWikiPageObjectStep3 cnw3 = cnw2.submit();
-		cnw3.selectThemeByName(CreateWikiMessages.wikiTheme);
+		cnw3.selectThemeByName(CreateWikiMessages.WIKI_THEME);
 		ArticlePageObject article = cnw3.submit();
 		article.verifyWikiTitleOnCongratualtionsLightBox(wikiName);
 		article.closeNewWikiCongratulationsLightBox();

@@ -26,12 +26,6 @@ public class TableOfContentsComponentObject extends MobileBasePageObject {
 	private WebElement closeTOCbutton;
 	@FindBys(@FindBy(css=".toc-list:first-child > li > a"))
 	private List<WebElement> tocLevel1Sections;
-	@FindBys(@FindBy(css=".toclevel-2 > a"))
-	private List<WebElement> tocLevel2Sections;
-	@FindBys(@FindBy(css=".toclevel-3 > a"))
-	private List<WebElement> tocLevel3Sections;
-	@FindBys(@FindBy(css=".toclevel-4 > a"))
-	private List<WebElement> tocLevel4Sections;
 
 	public void verifyTocElements() {
 		waitForElementByElement(tocSideMenu);

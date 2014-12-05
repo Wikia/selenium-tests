@@ -32,7 +32,7 @@ public class UserAndRights extends NewTestTemplate {
 	public void usersAndRights002_VerifyBlockedUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
-		VisualEditModePageObject edit = base.goToArticleDefaultContentEditPage(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		VisualEditModePageObject edit = base.goToArticleDefaultContentEditPage(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		edit.verifyBlockedUserMessage();
 	}
 
@@ -58,8 +58,8 @@ public class UserAndRights extends NewTestTemplate {
 	public void usersAndRights005_VerifyUnblockedUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
-		String title = PageContent.articleNamePrefix + base.getTimeStamp();
-		VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+		String title = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
+		VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		ArticlePageObject article = edit.submitArticle();
 		article.verifyArticleTitle(title);
 	}
@@ -78,7 +78,7 @@ public class UserAndRights extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		String pageContent = base.getTimeStamp();
-		String pageName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String pageName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, pageName);
 		edit.clearContent();
 		edit.addContent(pageContent);

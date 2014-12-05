@@ -10,6 +10,8 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -45,9 +47,19 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	private WebElement messagePlaceholder;
 
 	public void openDropDown() {
-		waitForElementByElement(loginDropdownTrigger);
-		scrollAndClick(loginDropdownTrigger);
-		waitForElementInViewPort(loginDropdown);
+
+		new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver webDriver) {
+				if (!loginDropdown.isDisplayed()) {
+					loginDropdownTrigger.click();
+
+					return false;
+				}
+				return true;
+			}
+		});
+
 		PageObjectLogging.log(
 			"DropdownVisible",
 			"Login dropdown is visible",
@@ -57,7 +69,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
 	public void remindPassword(String userName, String apiToken) {
 		Assertion.assertEquals(
-				ApiActions.apiActionForgotPasswordResponse,
+				ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
 				resetForgotPasswordTime(userName, apiToken));
 		fillUserNameInput(userName);
 		waitForElementByElement(formForgotPasswordLink);
@@ -153,7 +165,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
 	public void verifyMessageAboutNewPassword(String userName) {
 		waitForElementByElement(messagePlaceholder);
-		String newPasswordMsg = PageContent.newPasswordSentMessage.replace("%userName%", userName);
+		String newPasswordMsg = PageContent.NEW_PASSWORD_SENT_MESSAGE.replace("%userName%", userName);
 		waitForTextToBePresentInElementByElement(messagePlaceholder, newPasswordMsg);
 		PageObjectLogging.log(
 			"MessageAboutPasswordSent",

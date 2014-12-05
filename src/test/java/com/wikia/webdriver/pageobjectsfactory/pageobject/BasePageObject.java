@@ -224,11 +224,11 @@ public class BasePageObject{
 		try {
 			js.executeScript(
 					"var x = $(arguments[0]);"
-					+ "window.scroll(0,parseInt(x.offset().top));",
+					+ "window.scroll(0,parseInt(x.offset().top - 60));",
 					element
 			);
 		} catch (WebDriverException e) {
-			if (e.getMessage().contains(XSSContent.noJQueryError)) {
+			if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
 				PageObjectLogging.log(
 					"JSError", "JQuery is not defined", false
 				);
@@ -287,19 +287,32 @@ public class BasePageObject{
 	}
 
 	public void getUrl(String url) {
+		getUrl(url, false);
+	}
+
+	public void getUrl(String url, boolean makeScreenshot) {
 		try {
 			driver.get(url);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("getUrl",
-					"page %page% loaded for more then 30 seconds".replace(
-						"%page%", url), false);
+				"page %page% loaded for more then 30 seconds".replace(
+					"%page%", url), false);
 			return;
 		}
-		PageObjectLogging.log(
-			"NavigateTo",
-			String.format("Navigate to %s", url),
-			true
-		);
+		if (makeScreenshot) {
+			PageObjectLogging.log(
+				"NavigateTo",
+				String.format("Navigate to %s", url),
+				true,
+				driver
+			);
+		} else {
+			PageObjectLogging.log(
+				"NavigateTo",
+				String.format("Navigate to %s", url),
+				true
+			);
+		}
 	}
 
 	public void refreshPage() {
@@ -342,7 +355,7 @@ public class BasePageObject{
 					selector
 				);
 			} catch (WebDriverException e) {
-				if (e.getMessage().contains(XSSContent.noJQueryError)) {
+				if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
 					PageObjectLogging.log(
 						"JSError", "JQuery is not defined", false
 					);
@@ -465,7 +478,12 @@ public class BasePageObject{
 	 * @throws Exception
 	 */
 	public void waitForElementByElement(WebElement element) {
-		wait.until(ExpectedConditions.visibilityOf(element));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(ExpectedConditions.visibilityOf(element));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	/**
@@ -484,7 +502,12 @@ public class BasePageObject{
 	 * @param element
 	 */
 	public void waitForElementVisibleByElement(WebElement element) {
-		wait.until(CommonExpectedConditions.elementVisible(element));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.elementVisible(element));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public WebElement waitForElementByCss(String cssSelector) {
@@ -505,7 +528,12 @@ public class BasePageObject{
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {
-		wait.until(CommonExpectedConditions.elementToBeClickable(element));
+		changeImplicitWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.elementToBeClickable(element));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void waitForElementNotClickableByElement(WebElement element) {
@@ -531,6 +559,10 @@ public class BasePageObject{
 
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
 		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
+	}
+
+	public void waitForTextToBePresentInElementLocatedBy(By locator, String text) {
+		wait.until(CommonExpectedConditions.textToBePresentInElementLocatedBy(locator, text));
 	}
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {
@@ -581,7 +613,7 @@ public class BasePageObject{
 	}
 
 	public void openWikiPage() {
-		getUrl(Global.DOMAIN + URLsContent.noexternals);
+		getUrl(Global.DOMAIN + URLsContent.NOEXTERNALS);
 		PageObjectLogging.log("WikiPageOpened", "Wiki page is opened", true);
 	}
 
@@ -678,7 +710,7 @@ public class BasePageObject{
 		driver.get(
 			urlBuilder.appendQueryStringToURL(
 				driver.getCurrentUrl(),
-				URLsContent.wikiaTracker
+				URLsContent.WIKIA_TRACKER
 			)
 		);
 	}

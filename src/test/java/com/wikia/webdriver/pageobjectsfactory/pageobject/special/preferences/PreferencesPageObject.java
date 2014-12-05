@@ -33,29 +33,29 @@ public class PreferencesPageObject extends WikiBasePageObject{
 	private WebElement saveNotfication;
 
 	public enum tabNames{
-		Info, Email, Editing, Under, Facebook
+		INFO, EMAIL, EDITING, UNDER, FACEBOOK
 	}
 
 	public PreferencesPageObject selectTab(tabNames tab){
 		int tabNum = -1;
 		switch(tab){
-		case Info:
+		case INFO:
 			tabNum = 0;
 			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
 			break;
-		case Email:
+		case EMAIL:
 			tabNum = 1;
 			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
 			break;
-		case Editing:
+		case EDITING:
 			tabNum = 2;
 			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
 			break;
-		case Under:
+		case UNDER:
 			tabNum = 3;
 			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
 			break;
-		case Facebook:
+		case FACEBOOK:
 			tabNum = 4;
 			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
 			break;

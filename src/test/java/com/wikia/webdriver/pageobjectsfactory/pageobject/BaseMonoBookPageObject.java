@@ -26,7 +26,7 @@ public class BaseMonoBookPageObject extends WikiBasePageObject {
     }
 
     public void openWikiPageWithMonobook() {
-        getUrl(Global.DOMAIN + URLsContent.noexternals);
+        getUrl(Global.DOMAIN + URLsContent.NOEXTERNALS);
         PageObjectLogging.log(
             "OpenWikiPage",
             "Wiki Page opened with success", true

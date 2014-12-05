@@ -43,7 +43,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
 	public void verifyOnLvsPage() {
 		String url = driver.getCurrentUrl();
-		Assertion.assertTrue(url.contains(URLsContent.specialLicensedVideoSwap));
+		Assertion.assertTrue(url.contains(URLsContent.SPECIAL_LICENSED_VIDEO_SWAP));
 		PageObjectLogging.log("verifyOnLvsPage", "url is the correct one for LVS page", true);
 	}
 

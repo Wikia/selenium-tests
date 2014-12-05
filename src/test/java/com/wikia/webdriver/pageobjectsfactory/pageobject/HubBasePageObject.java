@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
 import java.util.List;
+
 import junit.framework.Assert;
 
 import org.openqa.selenium.By;
@@ -16,50 +17,22 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
  * @author Karol 'kkarolk' Kujawiak
  */
 public class HubBasePageObject extends WikiBasePageObject {
-	@FindBy(css="div.button.scrollleft p")
-	private WebElement RelatedVideosScrollLeft;
-	@FindBy(css="div.button.scrollright p")
-	private WebElement RelatedVideosScrollRight;
-	@FindBy(css="form.WikiaSearch input[name='search']")
-	private WebElement SearchField;
-	@FindBy(css="form.WikiaSearch button.wikia-button")
-	private WebElement SearchButton;
-	@FindBy(css="form.WikiaSearch button.wikia-button")
-	private WebElement NewsTabsNav;
-	@FindBy(css="section.modalWrapper")
-	private WebElement VideoPlayer;
 	@FindBy(css="#suggestArticleDialogModal a")
 	private WebElement modalWrapper_X_CloseButton;
 	@FindBy(css="#suggestArticleDialogModal button.secondary")
 	private WebElement modalWrapper_Cancel_CloseButton;
-	@FindBy(css="button[id='suggestVideo']")
-	private WebElement suggestVideoButton;
 	@FindBy(css="button[id='suggestArticle']")
 	private WebElement getPromotedButton;
 	@FindBy(css="#suggestArticleDialogModal")
 	private WebElement suggestVideoOrArticleModal;
 	@FindBy(css="#suggestArticleDialogModal h3")
 	private WebElement suggestVideoOrArticleModalTopic;
-	@FindBy(css="div.videourl input")
-	private WebElement suggestVideoWhatInput;
 	@FindBy(css="#suggestArticleDialogModal input")
 	private WebElement suggestArticleWhatInput;
-	@FindBy(css="div.wikiname input")
-	private WebElement suggestVideoWhichWikiInput;
 	@FindBy(css="#suggestArticleDialogModal textarea")
 	private WebElement suggestArticleWhyCooliInput;
 	@FindBy(css="#suggestArticleDialogModal button.primary")
 	private WebElement submitButton;
-	@FindBy(css="section.wikiahubs-pulse")
-	private WebElement pulseModule;
-	@FindBy(css="a[id='facebook']")
-	private WebElement FacebookButton;
-	@FindBy(css="a[id='twitter']")
-	private WebElement TwitterButton;
-	@FindBy(css="a[id='google']")
-	private WebElement GoogleButton;
-	@FindBy(css="div.top-wikis-content")
-	private WebElement topWikisModule;
 	@FindBy(css="ul.wikia-mosaic-thumb-region img")
 	List<WebElement> mosaicSliderThumbRegionImages;
 	@FindBy(css="ul.wikia-mosaic-thumb-region img")
@@ -313,40 +286,16 @@ public class HubBasePageObject extends WikiBasePageObject {
 		);
 	}
 
-	public void clickGlobalNavLink(HubName hubName) {
-		WebElement element;
-		switch (hubName) {
-			case Video_Games:
-				element = VideoGamesTopNavLink;
-				break;
-			case Entertainment:
-				element = EntertainmentTopNavLink;
-				break;
-			case Lifestyle:
-			default:
-				element = LifestyleTopNavLink;
-				break;
-		}
-		waitForElementClickableByElement(element);
-		element.click();
-
-		PageObjectLogging.log(
-				"clickGlobalNavLink",
-				"Click hub link in Global Navigation",
-				true
-		);
-	}
-
 	public void clickWikiaBarLink(HubName hubName) {
 		WebElement element;
 		switch (hubName) {
-			case Video_Games:
+			case VIDEO_GAMES:
 				element = VideoGamesWikiaBarLink;
 				break;
-			case Entertainment:
+			case ENTERTAINMENT:
 				element = EntertainmentWikiaBarLink;
 				break;
-			case Lifestyle:
+			case LIFESTYLE:
 			default:
 				element = LifestyleWikiaBarLink;
 				break;
@@ -365,13 +314,13 @@ public class HubBasePageObject extends WikiBasePageObject {
 		waitForElementByElement(wordmarkImage);
 		String header;
 		switch (hubName) {
-			case Video_Games:
+			case VIDEO_GAMES:
 				header = "Games Wiki";
 				break;
-			case Entertainment:
+			case ENTERTAINMENT:
 				header = "Movies Hub Wiki";
 				break;
-			case Lifestyle:
+			case LIFESTYLE:
 			default:
 				header = "LifestyleHub Wiki";
 				break;

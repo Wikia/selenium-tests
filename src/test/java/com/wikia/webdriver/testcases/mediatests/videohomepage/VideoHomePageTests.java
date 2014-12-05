@@ -14,7 +14,7 @@ public class VideoHomePageTests extends NewTestTemplate {
 	@Test(groups = {"VideoHomePage_001", "Media", "VideoHomePageTests"})
 	public void VideoHomePage_001_FeaturedVideoSlider() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
 		videoHomePageObject.verifyFeaturedSliderInitialized();
 		videoHomePageObject.verifyFeaturedSliderSlides(5);
@@ -23,7 +23,7 @@ public class VideoHomePageTests extends NewTestTemplate {
 	@Test(groups = {"VideoHomePage_002", "Media", "VideoHomePageTests"})
 	public void VideoHomePage_002_LatestVideos() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.videoTestWiki);
+		String wikiURL = urlBuilder.getUrlForWiki(URLsContent.VIDEO_TEST_WIKI);
 		VideoHomePageObject videoHomePageObject = base.openVideoHomePageObject(wikiURL);
 		videoHomePageObject.verifyLatestVideosRows(3);
 

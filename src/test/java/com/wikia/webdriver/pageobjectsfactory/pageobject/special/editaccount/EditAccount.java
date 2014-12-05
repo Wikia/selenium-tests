@@ -36,13 +36,13 @@ public class EditAccount extends BasePageObject {
 		super(driver);
 		driver.get(
 				communityWikiURL +
-				URLsContent.specialEditAccount
+				URLsContent.SPECIAL_EDIT_ACCOUNT
 		);
 		userNameField.sendKeys(userName);
 		userNameField.submit();
 		PageObjectLogging.log(
 				"editAccount",
-				URLsContent.specialEditAccount +" page opened",
+				URLsContent.SPECIAL_EDIT_ACCOUNT +" page opened",
 				true
 		);
 	}

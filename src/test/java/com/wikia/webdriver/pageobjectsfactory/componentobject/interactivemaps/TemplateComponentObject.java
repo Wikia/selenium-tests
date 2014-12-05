@@ -29,8 +29,6 @@ public class TemplateComponentObject extends BasePageObject {
 	private WebElement backButton;
 	@FindBy(css = ".intMapPreviewImage")
 	private WebElement templateImagePreview;
-	@FindBy(css = ".modal.medium.int-map-modal")
-	private WebElement newTemplateDialog;
 	@FindBy(css = "#intMapError")
 	private WebElement mapError;
 

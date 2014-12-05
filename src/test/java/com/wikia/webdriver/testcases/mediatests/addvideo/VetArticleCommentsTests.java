@@ -30,11 +30,11 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.youtubeVideoURL2);
-		vetOptions.setCaption(PageContent.caption);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL2);
+		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		article.submitComment();
-		article.verifyCommentVideo(VideoContent.youtubeVideoURL2name);
+		article.verifyCommentVideo(VideoContent.YOUTUBE_VIDEO_URL2_NAME);
 	}
 
 	@Test(groups = {"VetArticleComments_002", "VetArticleComments", "Media"})
@@ -44,8 +44,8 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		MiniEditorComponentObject editor = article.triggerCommentArea();
 		VetAddVideoComponentObject vetAddingVideo = editor.clickAddVideo();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.wikiaVideoQuery, 0);
-		vetOptions.setCaption(PageContent.caption);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+		vetOptions.setCaption(PageContent.CAPTION);
 		String desiredVideoName = vetOptions.getVideoName();
 		vetOptions.submit();
 		article.submitComment();

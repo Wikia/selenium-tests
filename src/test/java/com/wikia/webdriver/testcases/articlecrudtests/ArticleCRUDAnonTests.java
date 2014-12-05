@@ -21,8 +21,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	)
 	public void ArticleCRUDAnon_001_addBySpecialPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String articleContent = PageContent.articleText;
-		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleContent = PageContent.ARTICLE_TEXT;
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
 		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
@@ -36,8 +36,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	)
 	public void ArticleCRUDAnon_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String articleContent = PageContent.articleText;
-		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleContent = PageContent.ARTICLE_TEXT;
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
 		ArticlePageObject article  = visualEditMode.submitArticle();
@@ -50,8 +50,8 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	)
 	public void ArticleCRUDAnon_003_addDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String articleContent = PageContent.articleText;
-		String articleTitle = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleContent = PageContent.ARTICLE_TEXT;
+		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditorPageObject ve = article.createArticleInVEUsingDropdown(articleTitle);
 		ve.verifyVEToolBarPresent();
@@ -68,7 +68,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	)
 	public void ArticleCRUDAnon_004_differentTitles(String articleTitle) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String articleContent = PageContent.articleText;
+		String articleContent = PageContent.ARTICLE_TEXT;
 		articleTitle = articleTitle + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
@@ -82,7 +82,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	)
 	public void ArticleCRUDAnon_005_editByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String articleContent = PageContent.articleText;
+		String articleContent = PageContent.ARTICLE_TEXT;
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		VisualEditModePageObject visualEditMode = article.goToCurrentArticleEditPage();
 		visualEditMode.addContent(articleContent);
@@ -95,9 +95,9 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 	)
 	public void ArticleCRUDAnon_006_editDropdown() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
-		String articleContent = PageContent.articleText;
+		String articleContent = PageContent.ARTICLE_TEXT;
 		ArticlePageObject article =
-			base.openArticleByName(wikiURL, PageContent.articleNamePrefix + base.getTimeStamp());
+			base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();

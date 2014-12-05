@@ -61,21 +61,21 @@ public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject{
 
 	public void verifyEmptyUserNameValidation() {
 		waitForElementByElement(errorMessage);
-		Assertion.assertEquals(CreateWikiMessages.blankUserNameErrorMessage, errorMessage.getText());
+		Assertion.assertEquals(CreateWikiMessages.BLANK_USERNAME_ERROR_MESSAGE, errorMessage.getText());
 	}
 
 	public void verifyInvalidUserNameValidation() {
 		waitForElementByElement(errorMessage);
-		Assertion.assertEquals(CreateWikiMessages.invalidUserNameErrorMessage, errorMessage.getText());
+		Assertion.assertEquals(CreateWikiMessages.INVALID_USERNAME_ERROR_MESSAGE, errorMessage.getText());
 	}
 
 	public void verifyBlankPasswordValidation() {
 		waitForElementByElement(errorMessage);
-		Assertion.assertEquals(CreateWikiMessages.blankPasswordErrorMessage, errorMessage.getText());
+		Assertion.assertEquals(CreateWikiMessages.BLANK_PASSWORD_ERROR_MESSAGE, errorMessage.getText());
 	}
 
 	public void verifyInvalidPasswordValidation() {
 		waitForElementByElement(errorMessage);
-		Assertion.assertEquals(CreateWikiMessages.invalidPasswordErrorMessage, errorMessage.getText());
+		Assertion.assertEquals(CreateWikiMessages.INVALID_PASSWORD_ERROR_MESSAGE, errorMessage.getText());
 	}
 }

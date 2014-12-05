@@ -15,30 +15,20 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	//outside of iframe
-	@FindBy(css = ".oo-ui-dialog-drag-handle.oo-ui-icon-grabber")
-	private WebElement draggableHandle;
-	@FindBy(css = ".ve-ui-mwTemplateDialog-filter input")
-	private WebElement filterInput;
 	@FindBy(css = ".ve-ui-wikiaTemplateGetInfoWidget-templateInfoButton a")
 	private WebElement getInfoLink;
 	@FindBy(css = ".ve-ui-mwParameterPage")
 	private List<WebElement> templateParams;
-	@FindBy(css = ".ve-ui-mwParameterPage .ve-ui-mwParameterPage-label")
-	private List<WebElement> templateLabels;
 	@FindBy(css=".oo-ui-flaggableElement-primary a")
 	private WebElement doneButton;
 	@FindBy(css=".ve-ui-wikiaTransclusionDialog-cancelButton a")
 	private WebElement cancelButton;
-	@FindBy(css=
-		".oo-ui-flaggableElement-secondary:not(.ve-ui-mwTransclusionDialog-modeButton)" +
-		":not(.ve-ui-wikiaTransclusionDialog-cancelButton) a")
-	private WebElement updatePreviewButon;
 	@FindBy(css = ".ve-ui-mwTemplateDialog-ready")
 	private WebElement templateDialog;
 
-	private static final By paramLabelBy = By.cssSelector(".ve-ui-mwParameterPage-label");
-	private static final By paramInputBy = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
-	private static final By templateParamsBy = By.cssSelector(".ve-ui-mwParameterPage");
+	private static final By PARAM_LABEL_BY = By.cssSelector(".ve-ui-mwParameterPage-label");
+	private static final By PARAM_INPUT_BY = By.cssSelector(".ve-ui-mwParameterPage-field textarea");
+	private static final By TEMPLATE_PARAMS_BY = By.cssSelector(".ve-ui-mwParameterPage");
 
 	public VisualEditorEditTemplateDialog(WebDriver driver) {
 		super(driver);
@@ -70,9 +60,9 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 
 	public void typeInParam(String paramName, String text) {
 		switchToIFrame();
-		if(checkIfElementOnPage(templateParamsBy)) {
-			WebElement targetParam = getElementByChildText(templateParams, paramLabelBy, paramName);
-			WebElement targetParamInput = targetParam.findElement(paramInputBy);
+		if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
+			WebElement targetParam = getElementByChildText(templateParams, PARAM_LABEL_BY, paramName);
+			WebElement targetParamInput = targetParam.findElement(PARAM_INPUT_BY);
 			targetParamInput.sendKeys(text);
 			waitForValueToBePresentInElementsAttributeByElement(targetParamInput, "value", text);
 		} else {
@@ -85,7 +75,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	public VisualEditorPageObject clickDone() {
 		switchToIFrame();
 		try {
-			if(checkIfElementOnPage(templateParamsBy)) {
+			if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
 				waitForElementClickableByElement(doneButton);
 				doneButton.click();
 			} else {
@@ -100,7 +90,7 @@ public class VisualEditorEditTemplateDialog extends VisualEditorDialog {
 	public VisualEditorPageObject clickCancel() {
 		switchToIFrame();
 		try {
-			if(checkIfElementOnPage(templateParamsBy)) {
+			if(checkIfElementOnPage(TEMPLATE_PARAMS_BY)) {
 				waitForElementClickableByElement(cancelButton);
 				cancelButton.click();
 			} else {

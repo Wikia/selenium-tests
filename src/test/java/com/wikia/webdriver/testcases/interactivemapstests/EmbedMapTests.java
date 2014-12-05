@@ -65,12 +65,12 @@ public class EmbedMapTests extends NewTestTemplate {
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEmbedMapCodeButton();
 		selectedMap.verifyEmbedMapDialog();
-		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.small);
-		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.small);
-		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.medium);
-		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.medium);
-		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.large);
-		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.large);
+		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.SMALL);
+		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.SMALL);
+		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.MEDIUM);
+		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.MEDIUM);
+		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.LARGE);
+		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.LARGE);
 	}
 
 	@Test(groups = { "EmbedMapTests_004", "EmbedMapTests", "InteractiveMaps" })
@@ -82,7 +82,7 @@ public class EmbedMapTests extends NewTestTemplate {
 		selectedMap.verifyMapOpened();
 		selectedMap.clickEmbedMapCodeButton();
 		selectedMap.verifyEmbedMapDialog();
-		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.small);
+		selectedMap.clickEmbedMapCodeButton(InteractiveMapPageObject.embedMapDialogButtons.SMALL);
 		String mapCode = selectedMap.getEmbedMapCode();
 		DabbletComPageObject outPage = new DabbletComPageObject(driver);
 		outPage.openOutPage();

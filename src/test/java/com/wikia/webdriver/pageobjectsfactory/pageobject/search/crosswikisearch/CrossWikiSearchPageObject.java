@@ -26,8 +26,6 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 	private WebElement firstResult;
 	@FindBy(css=".Results > :nth-child(1) > .result-description > :nth-child(2)")
 	private WebElement firstResultVertical;
-	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle")
-	private WebElement firstResultStatistics;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(1)")
 	private WebElement firstResultStatisticsPageCount;
 	@FindBy(css=".Results > :nth-child(1) .wiki-statistics.subtle > :nth-child(2)")
@@ -36,8 +34,6 @@ public class CrossWikiSearchPageObject extends SearchPageObject {
 	private WebElement firstResultStatisticsPageVideos;
 	@FindBy(css=".Results > :nth-child(1) .result-description > .description")
 	private WebElement firstResultDescription;
-	@FindBy(css = "a[data-event=\"search_click_match\"]")
-	private WebElement match;
 	@FindBy(css=".results-wrapper i")
 	private WebElement noResultsCaption;
 	@FindBy(css=".wikiPromoteThumbnail")

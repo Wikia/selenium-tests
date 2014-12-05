@@ -20,8 +20,6 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 
 	@FindBy(css = "#pageLogo")
 	private WebElement pageLogo;
-	@FindBy(css = "#application-li-112328095453510 .uiCloseButtonSmall")
-	private WebElement wikiAppRemoveButton;
 	@FindBy(css = "#pop_content .uiButtonConfirm")
 	private WebElement removeButton;
 	@FindBy(css = ".pop_container_advanced")
@@ -43,7 +41,7 @@ public class FacebookSettingsPageObject extends WikiBasePageObject{
 	}
 
 	public void openApps() {
-		appendToUrl(URLsContent.facebookSettingsAppTab);
+		appendToUrl(URLsContent.FACEBOOK_SETTINGS_APP_TAB);
 		PageObjectLogging.log("openApps", "Apps tab opened", true);
 	}
 

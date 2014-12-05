@@ -25,17 +25,17 @@ public class SliderBuilderComponentObject extends BasePageObject{
 	}
 
 	public enum MenuPositions{
-		Horizontal, Vertical
+		HORIZONTAL, VERTICAL
 	}
 
 	public void selectMenuPosition(MenuPositions pos){
 		waitForElementByElement(hPosition);
 		waitForElementByElement(vPosition);
 		switch(pos){
-		case Horizontal:
+		case HORIZONTAL:
 			hPosition.click();
 			break;
-		case Vertical:
+		case VERTICAL:
 			vPosition.click();
 			break;
 		}

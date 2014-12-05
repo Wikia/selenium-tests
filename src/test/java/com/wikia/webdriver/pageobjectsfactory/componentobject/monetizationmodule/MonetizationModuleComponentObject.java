@@ -19,7 +19,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	private WebElement monetizationModuleContainer;
 	@FindBy(css=".monetization-module,.adunit")
 	private WebElement adsenseContainer;
-	@FindBy(css=".adsbygoogle,.ad-responsive")
+	@FindBy(css=".adsbygoogle")
 	private WebElement adsenseIns;
 
 	public MonetizationModuleComponentObject (WebDriver driver) {

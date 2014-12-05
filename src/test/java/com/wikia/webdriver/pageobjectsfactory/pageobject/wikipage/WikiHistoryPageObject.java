@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -15,18 +14,10 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 
 	protected String articlename;
 
-	@FindBy(css=".historysubmit:first")
-	private WebElement compareRevisionsTopButton;
-	@FindBy(css=".historysubmit:last")
-	private WebElement compareRevisionsBottomButton;
 	@FindBy(css="input[value='Go']")
 	private WebElement goButton;
 	@FindBy(css="input#year")
 	private WebElement fromYearField;
-	@FindBy(css="select#month")
-	private Select fromMonthDropDown;
-	@FindBy(css="input#mw-show-deleted-only")
-	private WebElement deletedOnlyCheckBox;
 	@FindBy(xpath="//a[contains(text(), 'Back to page')]")
 	private WebElement backToPageLink;
 	@FindBy(css="span.mw-rollback-link a")

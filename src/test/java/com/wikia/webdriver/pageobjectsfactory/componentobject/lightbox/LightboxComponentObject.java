@@ -59,8 +59,6 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	private WebElement closeShareScreenButton;
 	@FindBy(css=".LightboxHeader button.close.wikia-chiclet-button")
 	protected WebElement closeModalButton;
-	@FindBy(css="div.video-media")
-	private WebElement mediaContainer;
 
 	private final Integer videoWidthLightbox = 737;
 

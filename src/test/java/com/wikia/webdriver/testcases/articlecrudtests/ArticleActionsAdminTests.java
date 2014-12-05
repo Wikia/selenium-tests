@@ -42,7 +42,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
-		String articleNewName = PageContent.articleNamePrefix + article.getTimeStamp();
+		String articleNewName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 		RenamePageObject renamePage = article.renameUsingDropdown();
 		renamePage.rename(articleNewName);
 		article.verifyNotificationMessage();

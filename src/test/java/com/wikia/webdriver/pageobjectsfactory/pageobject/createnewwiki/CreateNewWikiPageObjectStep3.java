@@ -22,8 +22,6 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 	private By loadingIndicatorBy = By.cssSelector(".wikiaThrobber");
 	private String themeLocator = "li[data-theme='%name%']";
 
-	@FindBy(css=dataThemeList)
-	private WebElement themeList;
 	@FindBy(css="li[id='ThemeWiki'] input[class='next enabled']")
 	private WebElement submitButton;
 

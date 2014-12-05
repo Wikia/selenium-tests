@@ -39,7 +39,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
-	@FindBy(css="#WikiaPageHeader h1")
+	@FindBy(css="article header h1")
 	protected WebElement articleHeader;
 	@FindBy(css="#mw-content-text")
 	protected WebElement articleContentContainer;
@@ -47,11 +47,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 	protected WebElement pageContentContainer;
 	@FindBy(css="#mw-content-text p")
 	protected WebElement articleContent;
-	@FindBy(css="#WikiHeader .drop")
+	@FindBy(css=".wikia-menu-button.contribute, .contribute-button")
 	protected WebElement contributeDropdown;
 	@FindBy(css="#ca-history")
 	protected WebElement historyDropdown;
-	@FindBy(css=".WikiaMenuElement .createpage")
+	@FindBy(css=".WikiaMenuElement .createpage, ul .createpage")
 	protected WebElement addArticleInDropdown;
 	@FindBy(css="#wpCreatePageDialogTitle")
 	protected WebElement articleTitleInputModal;
@@ -119,7 +119,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement addCategoryInput;
 	@FindBy(css="#CategorySelectSave")
 	private WebElement saveCategory;
-	@FindBy(css=".WikiaArticleCategories li > span a")
+	@FindBy(css="#articleCategories .category.normal .name a")
 	private List<WebElement> categoryList;
 	@FindBy(css=".ui-autocomplete")
 	private WebElement categorySuggestionsList;
@@ -145,10 +145,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement thumbnailImageArticle;
 	@FindBy(css=".wikia-menu-button")
 	private WebElement articleEditButton;
-	@FindBy(css="#CreatePageDialogBlank")
-	private WebElement blankPageRadioButton;
-	@FindBy(css="#CreatePageDialogFormat")
-	private WebElement standardLayoutPageRadioButton;
 	@FindBy(css="#WikiaPageHeader .chevron")
 	private WebElement openEditDropdown;
 	@FindBy(css=".view")
@@ -162,9 +158,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	final Integer minInlineVideoSize = 400;
 
 	String editCategorySelector =
-			"li[data-name='%categoryName%'] li.editCategory > img";
+			"li[data-name='%categoryName%'] .toolbar .editCategory";
 	String removeCategorySelector =
-			"li[data-name='%categoryName%'] li.removeCategory > img";
+			"li[data-name='%categoryName%'] .toolbar .removeCategory";
 	String videoInCommentsSelector =
 			".speech-bubble-message img[data-video-name*='%videoName%']";
 
@@ -419,7 +415,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyVideo() {
-		waitForElementByElement(videoThumbnail);
+		driver.findElement(By.cssSelector("#mw-content-text .video-thumbnail"));
 		PageObjectLogging.log("verifyVideo", "video is visible", true);
 	}
 
@@ -482,13 +478,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 		).getAttribute("class");
 		String position;
 		switch(positions) {
-		case left:
+		case LEFT:
 			position = "left";
 			break;
-		case center:
+		case CENTER:
 			position = "none";
 			break;
-		case right:
+		case RIGHT:
 			position = "right";
 			break;
 		default:
@@ -627,19 +623,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertTrue(categoryVisible, "category " + category + " not present");
 	}
 
-	public void verifyCategoryNotPresent(String category) {
-		boolean categoryVisible = true;
-		for (WebElement elem : categoryList) {
-			if (elem.getText().equals(category)) {
-				categoryVisible = false;
-			}
-		}
-		Assertion.assertTrue(categoryVisible, "category " + category + " present");
-	}
-
 	public WatchPageObject unfollowArticle(String wikiURL) {
 		String url = urlBuilder.appendQueryStringToURL(wikiURL, "title=" + articleTitle.getText());
-		url = urlBuilder.appendQueryStringToURL(url, URLsContent.unfollowParameter);
+		url = urlBuilder.appendQueryStringToURL(url, URLsContent.ACTION_UNFOLLOW);
 		getUrl(url);
 		return new WatchPageObject(driver);
 	}
@@ -777,7 +763,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		articleModal.createPageWithBlankLayout("");
 		return new SourceEditModePageObject(driver);
 	}
-	
+
 	public EmbedMapComponentObject clickViewEmbedMap(){
 		waitForElementVisibleByElement(viewEmbedMapButton);
 		scrollToElement(viewEmbedMapButton);

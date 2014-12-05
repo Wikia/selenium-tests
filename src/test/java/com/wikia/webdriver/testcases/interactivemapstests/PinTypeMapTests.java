@@ -32,9 +32,9 @@ public class PinTypeMapTests extends NewTestTemplate {
 		selectedMap.clickEditPinTypesButton();
 		CreatePinTypesComponentObject pinTypeModal = new CreatePinTypesComponentObject(driver);
 		pinTypeModal.verifyPinTypesDialog();
-		pinTypeModal.selectFileToUpload(PageContent.smallFile, "Small image");
+		pinTypeModal.selectFileToUpload(PageContent.SMALLFILE, "Small image");
 		pinTypeModal.verifyErrorExists();
-		pinTypeModal.selectFileToUpload(PageContent.brokenExtensionFile, "Image with wrong extension");
+		pinTypeModal.selectFileToUpload(PageContent.BROKENEXTENSIONFILE, "Image with wrong extension");
 		pinTypeModal.verifyErrorExists();
 	}
 

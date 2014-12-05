@@ -60,8 +60,6 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private WebElement bulletListButton;
 	@FindBy(css=".oo-ui-menuToolGroup .oo-ui-indicator-down")
 	private WebElement formattingDropDown;
-	@FindBy(css=".oo-ui-listToolGroup")
-	private WebElement moreOptionsWrapper;
 	@FindBy(css=".oo-ui-menuToolGroup")
 	private WebElement formattingDropDownItems;
 	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")

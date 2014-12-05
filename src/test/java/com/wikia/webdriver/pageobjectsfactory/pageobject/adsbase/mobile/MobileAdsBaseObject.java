@@ -22,10 +22,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComp
 public class MobileAdsBaseObject extends AdsBaseObject {
 
 	private final String smartBannerSelector = ".smartbanner.android";
+	private final String fliteMaskSelector = ".flite-mask";
 	private AdsComparison adsComparison;
 	private ImageComparison imageComparison;
-	private By gptIframeTopLeaderBoardSelector = By.cssSelector("#WikiaMainContent a[data-id='edit']");
-	private By celtraAdSelector = By.cssSelector(".celtra-ad-v3 iframe");
 
 	public MobileAdsBaseObject(WebDriver driver, String page) {
 		super(driver, page);
@@ -48,56 +47,24 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	}
 
 	public void verifyMobileTopLeaderboard() {
+		extractGptInfo(presentLeaderboardSelector);
 		removeSmartBanner();
+		if (checkIfElementOnPage(fliteMaskSelector)) {
+			PageObjectLogging.log(
+				"FliteAd", "Page contains the flite ad", true, driver
+			);
+			return;
+		}
 		if (!checkIfSlotExpanded(presentLeaderboard)) {
 			throw new NoSuchElementException(
 				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
 			);
 		}
-		PageObjectLogging.log(
-			"CompareScreenshot", "Page before hidding ads", true, driver
-		);
 		if (areAdsEmpty(presentLeaderboardSelector, presentLeaderboard)) {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look the same", false
-			);
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
-				+ "Most probable ad is not present; CSS "
-				+ presentLeaderboardSelector
-			);
-		} else {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look different", true
-			);
-		}
-	}
-	public void verifyCeltraMobileTopLeaderboard() {
-		removeSmartBanner();
-		if (!checkIfSlotExpanded(presentLeaderboard)) {
-			throw new NoSuchElementException(
-				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
-			);
-		}
-		PageObjectLogging.log(
-			"CompareScreenshot", "Page before hidding ads", true, driver
-		);
-
-		waitForElementPresenceByBy(celtraAdSelector);
-		waitForIframeLoaded(presentLeaderboard.findElement(celtraAdSelector));
-
-		if (areAdsEmpty(presentLeaderboardSelector, presentLeaderboard)) {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look the same", false
-			);
-			throw new NoSuchElementException(
-				"Screenshots of element on/off look the same."
-				+ "Most probable ad is not present; CSS "
-				+ presentLeaderboardSelector
-			);
-		} else {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look different", true
+					+ "Most probable ad is not present; CSS "
+					+ presentLeaderboardSelector
 			);
 		}
 	}
@@ -139,6 +106,9 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	}
 
 	private boolean areAdsEmpty(String slotSelector, WebElement slot) {
+		PageObjectLogging.log(
+			"CompareScreenshot", "Page before hidding ads", true, driver
+		);
 		File preSwitch = adsComparison.getMobileSlotScreenshot(slot, driver);
 		adsComparison.hideSlot(slotSelector, driver);
 		waitForElementNotVisibleByElement(slot);
@@ -146,6 +116,15 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		boolean imagesTheSame = imageComparison.areFilesTheSame(preSwitch, postSwitch);
 		preSwitch.delete();
 		postSwitch.delete();
+		if (imagesTheSame) {
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots look the same", false
+			);
+		} else {
+			PageObjectLogging.log(
+				"CompareScreenshot", "Screenshots look different", true
+			);
+		}
 		return imagesTheSame;
 	}
 

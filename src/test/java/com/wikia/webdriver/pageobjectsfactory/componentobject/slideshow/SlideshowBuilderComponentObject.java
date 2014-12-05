@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.addphoto.AddPhotoC
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
- * 
+ *
  * @author Karol 'kkarolk' Kujawiak
  *
  */
@@ -20,42 +21,48 @@ public class SlideshowBuilderComponentObject extends BasePageObject{
 	private WebElement addPhotoButton;
 	@FindBy(css="#WikiaPhotoGalleryEditorSlideshowAlign")
 	private WebElement slideshowPosition;
-	@FindBy(css="")
-	private WebElement smartCropping;//TODO
-	@FindBy(css="")
-	private WebElement widthField;//TODO
 	@FindBy(css="#WikiaPhotoGalleryEditorSave")
 	private WebElement finishButton;
-	
+
 	public SlideshowBuilderComponentObject(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public void adjustWidth(int width){
 		//TODO
 	}
-	
+
 	public void useSmartCropping(){
 		//TODO
 	}
-	
-	public enum Positions{
-		Left, Center, Right
+
+	public enum Positions {
+		LEFT, CENTER, RIGHT;
+
+		private final String label;
+
+		Positions() {
+			this.label = StringUtils.capitalize(this.toString().toLowerCase());
+		}
+
+		public String getPosition() {
+			return this.label;
+		}
 	}
-	
+
 	public void adjustPosition(Positions position){
 		Select pos = new Select(slideshowPosition);
-		pos.selectByVisibleText(position.toString());
-		PageObjectLogging.log("adjustPosition", "slideshow position set to "+position.toString(), true);
+		pos.selectByVisibleText(position.getPosition());
+		PageObjectLogging.log("adjustPosition", "slideshow position set to "+ position.getPosition(), true);
 	}
-	
+
 	public AddPhotoComponentObject clickAddPhoto(){
 		waitForElementByElement(addPhotoButton);
 		addPhotoButton.click();
 		return new AddPhotoComponentObject(driver);
 	}
-	
+
 	public void clickFinish(){
 		waitForElementByElement(finishButton);
 		finishButton.click();

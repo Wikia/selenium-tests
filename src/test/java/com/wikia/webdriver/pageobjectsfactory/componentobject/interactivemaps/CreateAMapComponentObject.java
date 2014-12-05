@@ -31,8 +31,6 @@ public class CreateAMapComponentObject extends BasePageObject {
 	private WebElement learnMoreLink;
 	@FindBy(css = ".close")
 	private WebElement closeButton;
-	@FindBy(css = "#intMapCreateMapModal")
-	private WebElement mapModal;
 
 	public CreateACustomMapComponentObject clickCustomMap() {
 		waitForElementByElement(customMapLink);

@@ -1,5 +1,6 @@
 package com.wikia.webdriver.testcases.logintests;
 
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import com.wikia.webdriver.common.properties.Credentials;
@@ -7,6 +8,8 @@ import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
+
+import javax.swing.*;
 
 /**
  * @author Karol 'kkarolk' Kujawiak

@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.addtable;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import java.util.List;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -89,23 +90,23 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 	}
 
 	public enum Headers {
-		None, FirstRow, FirstColumn, Both
+		NONE, FIRSTROW, FIRSTCOLUMN, BOTH
 	}
 
 	public void selectHeader(Headers header) {
 		waitForElementByElement(tablePropertiesDropdownOptions.get(0));
 		Select headerDropdown = new Select(tablePropertiesDropdownOptions.get(0));
 		switch(header) {
-		case None:
+		case NONE:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case FirstRow:
+		case FIRSTROW:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case FirstColumn:
+		case FIRSTCOLUMN:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
-		case Both:
+		case BOTH:
 			headerDropdown.selectByIndex(header.ordinal());
 			break;
 		}
@@ -113,24 +114,34 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 	}
 
 	public enum Alignment {
-		Left, Center, Right
+		LEFT, CENTER, RIGHT;
+
+		private final String label;
+
+		Alignment() {
+			this.label = StringUtils.capitalize(this.toString().toLowerCase());
+		}
+
+		public String getAlignment() {
+			return this.label;
+		}
 	}
 
 	public void selectAlignment(Alignment position) {
 		waitForElementByElement(tablePropertiesDropdownOptions.get(1));
 		Select positionDropdown = new Select(tablePropertiesDropdownOptions.get(1));
 		switch(position) {
-		case Left:
-			positionDropdown.selectByVisibleText(position.toString());
+		case LEFT:
+			positionDropdown.selectByVisibleText(position.getAlignment());
 			break;
-		case Center:
-			positionDropdown.selectByVisibleText(position.toString());
+		case CENTER:
+			positionDropdown.selectByVisibleText(position.getAlignment());
 			break;
-		case Right:
-			positionDropdown.selectByVisibleText(position.toString());
+		case RIGHT:
+			positionDropdown.selectByVisibleText(position.getAlignment());
 			break;
 		}
-		PageObjectLogging.log("selectPosition", position.toString() + " position selected", true, driver);
+		PageObjectLogging.log("selectPosition", position.getAlignment() + " position selected", true, driver);
 	}
 
 	public void submitTable() {

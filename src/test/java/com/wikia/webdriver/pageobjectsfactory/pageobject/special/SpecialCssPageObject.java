@@ -25,8 +25,6 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement aceLayerTextArea;
 		@FindBys(@FindBy(css = ".ace_content div[class*='ace']"))
 		private List<WebElement> aceElementsList;
-		@FindBys(@FindBy(css = "div.ace_line span"))
-		private List<WebElement> aceLinesList;
 		@FindBy(css = ".ace_error")
 		private WebElement aceError;
 		@FindBy(css = ".css-publish-button")
@@ -49,8 +47,6 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private WebElement historyButton;
 		@FindBy(css = ".css-side-bar .wikia-menu-button .WikiaMenuElement a[href*=\"action=delete\"]")
 		private WebElement deleteButton;
-		@FindBy(css = "#wikiDiff")
-		private WebElement conflictArea;
 		@FindBy(css = "td.diff-otitle")
 		private WebElement oRevisionTitle;
 		@FindBy(css = ".css-editor .mw-warning-with-logexcerpt")
@@ -84,8 +80,8 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			clearCssText();
 			sendCssText(randomText);
 			clickPublishButton();
-			verifyUrl(URLsContent.specialCSS);
 			verifySaveComplete();
+			verifyUrl(URLsContent.SPECIAL_CSS);
 		}
 
 		public void clearCssText() {
@@ -142,7 +138,6 @@ public class SpecialCssPageObject extends SpecialPageObject {
 
 		public void clickPublishButton() {
 			scrollAndClick(cssPublishButton);
-			PageObjectLogging.log("clickCssPublishButton", "click on publish button", true);
 		}
 
 		public void clickPublishButtonDropdown() {
@@ -182,14 +177,14 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			PageObjectLogging.log("historyButton", "click on history button", true);
 		}
 
-		public void clickDeleteButton() {	
+		public void clickDeleteButton() {
 			deleteButton.click();
 			verifyUrl("action=delete");
 			PageObjectLogging.log("deleteButton", "click on delete button", true);
 		}
 
 		public void confirmDelete() {
-			clickArticleDeleteConfirmationButton(URLsContent.mediaWikiCss);
+			clickArticleDeleteConfirmationButton();
 		}
 
 		public void verifyArticleIsRemoved() {
@@ -220,7 +215,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 		private void clickUndeleteButton() {
 			undeleteButton.click();
 			try {
-				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.mediaWikiCss, "UTF-8"));
+				verifyUrl("Special:Undelete?target=" + URLEncoder.encode(URLsContent.MEDIAWIKI_CSS, "UTF-8"));
 			} catch (UnsupportedEncodingException e) {
 				// this should never happen
 				PageObjectLogging.log("undeleteButton", "dont work", true);
@@ -271,7 +266,7 @@ public class SpecialCssPageObject extends SpecialPageObject {
 			waitForElementByElement(mwTalkBubble);
 			return Integer.parseInt(mwTalkBubble.getText());
 		}
-		
+
 		public void verifyDeleteButtonPresence() {
 			waitForElementByElement(deleteButton);
 			PageObjectLogging.log("verifyDeleteButtonPresence", "Delete Button is present.", true);

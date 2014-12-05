@@ -27,7 +27,7 @@ public class BlogListPageObject extends BasePageObject{
 
 	public BlogListPageObject verifyBlogListPage(String listName){
 		verifyURL(Global.DOMAIN+
-				URLsContent.blogList.replace("%listName%", listName));
+				URLsContent.BLOG_LIST.replace("%listName%", listName));
 		waitForElementByElement(blogListHeader);
 		waitForElementByElement(createBlogPostButton);
 		return this;

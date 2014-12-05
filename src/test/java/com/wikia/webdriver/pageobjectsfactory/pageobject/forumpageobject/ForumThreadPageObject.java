@@ -25,8 +25,6 @@ public class ForumThreadPageObject extends BasePageObject{
 	private WebElement discussionTitle;
 	@FindBy(css=".replyButton")
 	private WebElement replyButton;
-	@FindBy(css=".quote-button")
-	private WebElement quoteButton;
 	@FindBy(css=".speech-bubble-message nav")
 	private WebElement moreButton;
 	@FindBy(css=".WikiaMenuElement .remove-message")

@@ -35,7 +35,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup() {
-		wikiURL = urlBuilder.getUrlForWiki(URLsContent.veEnabledTestMainPage);
+		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_ENABLED_WIKI);
 		base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName5, credentials.password5, wikiURL);
 	}
@@ -46,7 +46,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(VE);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();
@@ -59,7 +59,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(CK);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		VisualEditModePageObject ck = aritclePage.editArticleInRTEUsingDropdown();
 		ck.verifyContentLoaded();
@@ -72,7 +72,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(SOURCE);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		SourceEditModePageObject src = aritclePage.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
@@ -84,7 +84,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 		editPrefPage.selectPreferredEditor(DEFAULT);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
-		String articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		ArticlePageObject aritclePage = prefPage.openArticleByName(wikiURL, articleName);
 		VisualEditorPageObject ve = aritclePage.openVEModeWithMainEditButton();
 		ve.verifyVEToolBarPresent();

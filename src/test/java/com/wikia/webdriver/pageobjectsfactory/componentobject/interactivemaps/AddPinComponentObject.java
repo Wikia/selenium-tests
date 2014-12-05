@@ -41,8 +41,6 @@ public class AddPinComponentObject extends BasePageObject {
 	private WebElement cancelButton;
 	@FindBy(css = "button[data-event=deletePOI]")
 	private WebElement deleteButton;
-	@FindBy(css = "#intMapArticleSuggestions")
-	private WebElement suggestionsDropdown;
 	@FindBy(css = ".article-suggestions>li>a")
 	private List<WebElement> suggestedOption;
 	@FindBy(css = ".article-image-url")
@@ -157,7 +155,7 @@ public class AddPinComponentObject extends BasePageObject {
 		Assertion.assertEquals(checkIfElementOnPage(errorField), true);
 		PageObjectLogging.log("verifyErrorIsPresented", "Error message is visible", true, driver);
 	}
-	
+
 	public void verifyErrorContent(String errorMessage) {
 		waitForElementByElement(errorField);
 		Assertion.assertEquals(errorMessage, errorField.getText());

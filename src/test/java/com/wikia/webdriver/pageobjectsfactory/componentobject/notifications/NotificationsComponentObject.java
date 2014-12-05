@@ -6,12 +6,15 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NotificationsComponentObject extends BasePageObject {
 
@@ -21,13 +24,11 @@ public class NotificationsComponentObject extends BasePageObject {
 
 	@FindBy(css = "div.bubbles")
 	protected WebElement notificationsBubbles;
-	@FindBys(@FindBy(css = "li.unread_notification a"))
+	@FindBys(@FindBy(css = ".notification.unread"))
 	private List<WebElement> notificationsList;
-	@FindBy(css = "#WallNotifications li ul.subnav")
+	@FindBy(css = "#AccountNavigation .subnav")
 	private WebElement notificationsSubnav;
-	@FindBy(css = "#WallNotifications")
-	private WebElement notifications;
-	@FindBy(css = "#bubbles_count")
+	@FindBy(css = ".bubbles-count")
 	private WebElement bubblesCount;
 	@FindBy(css = "#wall-notifications-markasread-sub")
 	private WebElement markNotificationsAsRead;
@@ -35,12 +36,16 @@ public class NotificationsComponentObject extends BasePageObject {
 	private WebElement markNotificationsAsReadAllWikis;
 	@FindBy(css = "#wall-notifications-markasread-this-wiki")
 	private WebElement markNotificationsAsReadThisWiki;
+	@FindBy(css = "#AccountNavigation .bubbles")
+	private WebElement emptyNumberOfUnreadNotifications;
+	@FindBy(css = "#AccountNavigation")
+	private WebElement accountNavigationEntryPoint;
+	@FindBy(css = "#notifications .notification-message")
+	private WebElement notificationsMessage;
 	private By notificationDropdownForCurrentWiki = By
 			.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
 	private By emptyNotificationDropdownForCurrentWiki = By
 			.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
-	private By emptyNumberOfUnreadNotifications = By
-			.cssSelector("#WallNotifications .subnav > li.notifications-empty");
 	private By notificationTitle = By.cssSelector("div.msg-title");
 	private By unreadNotificationReddot = By
 			.cssSelector("#WallNotifications > li > div.reddot");
@@ -49,7 +54,17 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * hover the mouse over the notification bubble and wait for it to expand
 	 */
 	private void openNotifications() {
-		executeScript("$('#WallNotifications li ul.subnav').addClass('show');$('#WallNotifications').mouseover();");
+		new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver webDriver) {
+				if (!notificationsSubnav.isDisplayed()) {
+					accountNavigationEntryPoint.click();
+
+					return false;
+				}
+				return true;
+			}
+		});
 	}
 
 	/**
@@ -70,7 +85,6 @@ public class NotificationsComponentObject extends BasePageObject {
 	public void showNotifications() {
 		waitForNotificationsLoaded();
 		openNotifications();
-		waitForNotificationsMessagesToLoad();
 		PageObjectLogging.log("#WallNotifications li ul.subnav",
 				"show notifications", true);
 	}
@@ -93,7 +107,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * of unread notifications)
 	 */
 	private void waitForNotificationsLoaded() {
-		waitForElementNotPresent(emptyNumberOfUnreadNotifications);
+		waitForElementVisibleByElement(emptyNumberOfUnreadNotifications);
 	}
 
 	/**
@@ -102,7 +116,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	public String getNotificationLink(String text) {
 		for (int i = 0; i < notificationsList.size(); i++) {
 			if (notificationsList.get(i)
-					.findElement(By.cssSelector(".msg-body")).getText()
+					.findElement(By.cssSelector("div.notification-message")).getText()
 					.contains(text)) {
 				PageObjectLogging.log("getNotificationLink",
 						"get addres that of " + i + 1
@@ -136,11 +150,9 @@ public class NotificationsComponentObject extends BasePageObject {
 		ArrayList<WebElement> notifications = new ArrayList<WebElement>();
 		for (int i = 0; i < this.notificationsList.size(); i++) {
 			WebElement n = this.notificationsList.get(i);
-			WebElement nTitle = n.findElement(notificationTitle);
-			if (n != null) {
-				if (title.equals(nTitle.getText())) {
-					notifications.add(n);
-				}
+			WebElement nTitle = n.findElement(By.cssSelector(".notification-message h4"));
+			if (n != null && title.equals(nTitle.getText())) {
+				notifications.add(n);
 			}
 		}
 		return notifications;
@@ -174,7 +186,7 @@ public class NotificationsComponentObject extends BasePageObject {
 		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0)
-				.findElement(By.cssSelector("div.msg-body")).getText();
+				.findElement(By.cssSelector("p")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
 	}
 
@@ -188,7 +200,7 @@ public class NotificationsComponentObject extends BasePageObject {
 		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0)
-				.findElement(By.cssSelector("div.msg-body")).getText();
+				.findElement(By.cssSelector("div.notification-message")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
 		Assertion.assertTrue(notificationMessageBody.contains(messageContent));
 	}

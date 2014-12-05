@@ -2,17 +2,17 @@ package com.wikia.webdriver.common.contentpatterns;
 
 public class MobilePageContent {
 
-	public static String loginEmptyPasswordErrorMessage =
+	public static final String LOGIN_EMPTY_PASSWORD_ERROR_MESSAGE =
 			"Oops, please fill in the password field.";
-	public static String loginWrongLoginErrorMessage =
+	public static final String LOGIN_WRONG_LOGIN_ERROR_MESSAGE =
 			"Hm, we don't recognize this name. Don't forget usernames are case sensitive.";
-	public static String loginWrongPasswordErrorMessage =
+	public static final String LOGIN_WRONG_PASSWORD_ERROR_MESSAGE =
 			"Oops, wrong password. Make sure caps lock is off and try again.";
 	//mobile article
-	public static String editModeHeader = "Editing";
-	public static String previewHeader = "Preview";
-	public static String summaryText = "This is a sample summary text";
-	public static String historySummaryText = "(This is a sample summary text)";
-	public static String historyHeader = "Revision history of";
-	public static String mobileEditTag = "(Mobile)";
+	public static final String EDITMODE_HEADER = "Editing";
+	public static final String PREVIEW_HEADER = "Preview";
+	public static final String SUMMARY_TEXT = "This is a sample summary text";
+	public static final String HISTORY_SUMMARY_TEXT = "(This is a sample summary text)";
+	public static final String HISTORY_HEADER = "Revision history of";
+	public static final String MOBILE_EDIT_TAG = "(Mobile)";
 }

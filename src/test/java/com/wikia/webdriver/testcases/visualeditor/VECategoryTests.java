@@ -41,7 +41,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		categoryWikiTexts = new ArrayList<>();
 		categoryWikiTexts.add("[[Category:" + testCategory + "]]");
 		base = new WikiBasePageObject(driver);
-		articleName = PageContent.articleNamePrefix + base.getTimeStamp();
+		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 	}
 
 	@Test(
@@ -108,7 +108,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		ArrayList<String> categoryWithSortKeyWikiTexts = new ArrayList<>();
 		categoryWithSortKeyWikiTexts.add("[[Category:" + testCategory2 + "|" + sortKey + "]]");
 
-		String articleName2 = PageContent.articleNamePrefix + base.getTimeStamp();
+		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
 		VisualEditorOptionsDialog optionsDialog =
 			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);

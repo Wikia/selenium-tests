@@ -36,7 +36,7 @@ public class SpecialCreatePagePageObject extends SpecialPageObject {
 	public void addPageWithGivenTitleAndDefaultContent(String title) {
 		populateTitleField(title);
 		WikiArticleEditMode article = new WikiArticleEditMode(driver);
-		article.typeInContent(PageContent.articleText);
+		article.typeInContent(PageContent.ARTICLE_TEXT);
 		article.clickOnPublish();
 	}
 }

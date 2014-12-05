@@ -13,13 +13,12 @@ import org.openqa.selenium.support.FindBy;
  */
 public class AdsAmazonObject extends AdsBaseObject {
 
-	@FindBy(css="body")
-	private WebElement body;
+	private final static String AMAZON_SCRIPT_RESPONSE = "head > script[src*='amazon']";
+	private final static String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb/bid";
+	private final static String AMAZON_SCRIPT = "script[src*=\"" + AMAZON_SCRIPT_URL + "\"]";
+
 	@FindBy(css="div[id*=_gpt][data-gpt-page-params*=amzn]")
 	private List<WebElement> slotsWithAmazonParams;
-
-	private final String amazonScriptOnPage = "head > script[src*='amazon']";
-	private final String amazonScript = "amazon-adsystem.com/e/dtb/bid";
 
 	public AdsAmazonObject(
 		WebDriver driver,
@@ -30,7 +29,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 	}
 
 	public void verifyAmazonScriptIncluded() {
-		if (isScriptPresentInElement(body, amazonScript)) {
+		if (checkIfElementOnPage(AMAZON_SCRIPT)) {
 			PageObjectLogging.log("AmazonScriptFound", "Script from Amazon found", true);
 		} else {
 			throw new NoSuchElementException("Amazon script not found on page");
@@ -38,7 +37,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 	}
 
 	public void verifyCallToAmazonIssued() {
-		if (networkTrafficInterceptor.searchRequestUrlInHar(amazonScript)) {
+		if (networkTrafficInterceptor.searchRequestUrlInHar(AMAZON_SCRIPT_URL)) {
 			PageObjectLogging.log("RequestToAmazonIssued", "Request to amazon issued", true);
 		} else {
 			throw new NoSuchElementException("Request to Amazon not issued");
@@ -46,7 +45,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 	}
 
 	public void verifyResponseFromAmazonPresent() {
-		if (checkIfElementOnPage(amazonScriptOnPage)) {
+		if (checkIfElementOnPage(AMAZON_SCRIPT_RESPONSE)) {
 			PageObjectLogging.log("ScriptFromAmazonPresent", "Script returned by Amazon present", true);
 		} else {
 			throw new NoSuchElementException("Script from Amazon not found");

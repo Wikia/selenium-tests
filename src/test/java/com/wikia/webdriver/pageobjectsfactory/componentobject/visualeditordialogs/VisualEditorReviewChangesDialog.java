@@ -16,19 +16,13 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
  */
 public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
-	@FindBy(css=".secondary .oo-ui-labeledElement-label")
-	private WebElement reviewChangesButton;
 	@FindBy(css=
 		".oo-ui-window-foot " +
 		"div:not(.oo-ui-flaggableElement-secondary):not(.oo-ui-flaggableElement-constructive) " +
 		".oo-ui-labeledElement-label")
 	private WebElement returnToSaveFormButton;
-	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle")
-	private WebElement wikiaArticle;
 	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")
 	private WebElement wikiaAritlceFirstPreview;
-	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle")
-	private WebElement wikiaArticleDiffTable;
 	@FindBy(css=".diff-addedline")
 	private List<WebElement> addedLines;
 	@FindBy(css=".diff-deletedline")
@@ -123,8 +117,9 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
 	private boolean isDiffFound(ArrayList<String> targets, String source) {
 		for (String target : targets) {
-			if (source.contains(target))
+			if (source.contains(target)) {
 				return true;
+			}
 		}
 		return false;
 	}

@@ -47,15 +47,15 @@ public class MobileEditModeTests extends NewTestTemplate{
 		mobile.loginDropDown(credentials.userName, credentials.password);
 		MobileEditModePageObject mobileEdit =
 				mobile.openNewArticleEditMode(wikiURL);
-		mobileEdit.typIntoEditArea(PageContent.articleText);
+		mobileEdit.typIntoEditArea(PageContent.ARTICLE_TEXT);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
-		mobilePreview.verifyEditModeContent(PageContent.articleText);
-		mobilePreview.verifyPreviewPageHeader(MobilePageContent.previewHeader);
-		mobilePreview.typeSummaryText(MobilePageContent.summaryText);
+		mobilePreview.verifyEditModeContent(PageContent.ARTICLE_TEXT);
+		mobilePreview.verifyPreviewPageHeader(MobilePageContent.PREVIEW_HEADER);
+		mobilePreview.typeSummaryText(MobilePageContent.SUMMARY_TEXT);
 		MobileEditModePageObject continueMobileEdit = mobilePreview.clickKeepEditing();
-		continueMobileEdit.verifyEditText(PageContent.articleText);
+		continueMobileEdit.verifyEditText(PageContent.ARTICLE_TEXT);
 		MobileEditPreviewPageObject continueMobilePreview = continueMobileEdit.clickPreview();
-		continueMobilePreview.verifySummaryText(MobilePageContent.summaryText);
+		continueMobilePreview.verifySummaryText(MobilePageContent.SUMMARY_TEXT);
 	}
 
 	@Test(groups={"MobileEdit_003", "MobileEdit", "Mobile"})
@@ -66,17 +66,17 @@ public class MobileEditModeTests extends NewTestTemplate{
 		MobileEditModePageObject mobileEdit =
 				mobile.openNewArticleEditMode(wikiURL);
 		String articleName = mobile.getCurrentUrl();
-		mobileEdit.typIntoEditArea(PageContent.articleText);
+		mobileEdit.typIntoEditArea(PageContent.ARTICLE_TEXT);
 		MobileEditPreviewPageObject mobilePreview = mobileEdit.clickPreview();
-		mobilePreview.verifyEditModeContent(PageContent.articleText);
-		mobilePreview.verifyPreviewPageHeader(MobilePageContent.previewHeader);
-		mobilePreview.typeSummaryText(MobilePageContent.summaryText);
+		mobilePreview.verifyEditModeContent(PageContent.ARTICLE_TEXT);
+		mobilePreview.verifyPreviewPageHeader(MobilePageContent.PREVIEW_HEADER);
+		mobilePreview.typeSummaryText(MobilePageContent.SUMMARY_TEXT);
 		MobileArticlePageObject mobileArticle = mobilePreview.clickPublish();
 		MobileHistoryPageObject mobileArticleHistory =
 				mobileArticle.goToCurrentArticleHistoryPage();
-		mobileArticleHistory.verifyHistoryPageHeader(MobilePageContent.historyHeader);
+		mobileArticleHistory.verifyHistoryPageHeader(MobilePageContent.HISTORY_HEADER);
 		mobileArticleHistory.verifyArticleName(articleName);
-		mobileArticleHistory.verifyLastEditHistorySummary(MobilePageContent.historySummaryText);
-		mobileArticleHistory.verifyLastEditHistoryDevice(MobilePageContent.mobileEditTag);
+		mobileArticleHistory.verifyLastEditHistorySummary(MobilePageContent.HISTORY_SUMMARY_TEXT);
+		mobileArticleHistory.verifyLastEditHistoryDevice(MobilePageContent.MOBILE_EDIT_TAG);
 	}
 }

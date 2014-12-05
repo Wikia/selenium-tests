@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,7 +44,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	@FindBy(css = "#sorting-dropdown")
 	private WebElement sortDropdown;
 
-	private int refreshLimit = 3;
+	private By newestVideoBy = By.cssSelector(".special-videos-grid li:nth-child(1) .title");
 
 	public SpecialVideosPageObject(WebDriver driver) {
 		super(driver);
@@ -63,8 +64,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
 		getUrl(
 				wikiURL +
-				URLsContent.wikiDir +
-				URLsContent.fileNameSpace +
+				URLsContent.WIKI_DIR +
+				URLsContent.FILE_NAMESPACE +
 				videoName +
 				"?action=unwatch"
 		);
@@ -96,7 +97,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public void verifyVideoAdded(String videoTitle) {
-		waitForTextToBePresentInElementByElement(newestVideoTitle, videoTitle);
+		waitForTextToBePresentInElementLocatedBy(newestVideoBy, videoTitle);
 		PageObjectLogging.log("verifyVideoAdded", "verify that video with following description was added: "+videoTitle, true);
 	}
 
@@ -106,7 +107,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public String getFileUrl(String wikiURL, int itemNumber) {
-		String fileUrl = wikiURL + URLsContent.wikiDir + URLsContent.fileNameSpace + getVideoKey(itemNumber);
+		String fileUrl = wikiURL + URLsContent.WIKI_DIR + URLsContent.FILE_NAMESPACE + getVideoKey(itemNumber);
 		PageObjectLogging.log("getFileUrl", "File url: " + fileUrl, true);
 		return fileUrl;
 	}
@@ -132,20 +133,20 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	}
 
 	public void verifyDeleteViaGlobalNotifications() {
-		addVideoViaAjax(VideoContent.youtubeVideoURL2);
+		addVideoViaAjax(VideoContent.YOUTUBE_VIDEO_URL2);
 		deleteVideo();
-		String deletedVideo = "\"File:" + VideoContent.youtubeVideoURL2name + "\" has been deleted. (undelete)";
+		String deletedVideo = "\"File:" + VideoContent.YOUTUBE_VIDEO_URL2_NAME + "\" has been deleted. (undelete)";
 		Assertion.assertEquals(deletedVideo, getFlashMessageText());
 		PageObjectLogging.log("verifyDeleteVideoGlobalNotifications", "verify video " + deletedVideo + " was deleted", true);
 	}
 
 	public void verifyDeleteViaVideoNotPresent() {
-		addVideoViaAjax(VideoContent.youtubeVideoURL2);
+		addVideoViaAjax(VideoContent.YOUTUBE_VIDEO_URL2);
 		deleteVideo();
 		verifyNotificationMessage();
-		Assertion.assertNotEquals(VideoContent.youtubeVideoURL2name, getNewestVideoTitle());
+		Assertion.assertNotEquals(VideoContent.YOUTUBE_VIDEO_URL2_NAME, getNewestVideoTitle());
 		PageObjectLogging.log("verifyDeleteVideoNotPresent",
-				"verify video " + VideoContent.youtubeVideoURL2name + " was deleted",
+				"verify video " + VideoContent.YOUTUBE_VIDEO_URL2_NAME + " was deleted",
 				true);
 	}
 

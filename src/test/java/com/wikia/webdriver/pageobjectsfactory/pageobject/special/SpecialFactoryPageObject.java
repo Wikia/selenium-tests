@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.WikiFactoryVariables;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,10 +11,6 @@ import org.openqa.selenium.support.ui.Select;
 
 public class SpecialFactoryPageObject extends SpecialPageObject
 {
-	@FindBy(id="citydomain")
-	private WebElement domainField;
-	@FindBy(css="form[id='WikiFactoryDomainSelector'] button")
-	private WebElement getConfigButton;
 	@FindBy(css="a[href*=close]")
 	private WebElement closeWikiButton;
 	@FindBy(css="#flag_1")
@@ -24,8 +21,6 @@ public class SpecialFactoryPageObject extends SpecialPageObject
 	private WebElement confirmCloseButton;
 	@FindBy(css="a.free")
 	private WebElement closedWikiaLink;
-	@FindBy(css="#wfOnlyWithString")
-	private WebElement variableFiled;
 	@FindBy(css="select#wk-variable-select")
 	private WebElement variableList;
 	@FindBy(css="div > div[style*=left] > pre")
