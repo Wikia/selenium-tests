@@ -29,9 +29,8 @@ public class TestWikiaLogoInGlobalNav extends NewTestTemplate {
 	public void TestWikiaLogoInGlobalNav_001_centralWikiExists(String wikiName, String expectedCentralUrl) {
 		HomePageObject homePage = new HomePageObject(driver);
 		homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
-		VenusGlobalNavPageObject globalNav = homePage.getVenusGlobalNav();
-		globalNav.waitForCorrectUrl(config.getEnv());
-		globalNav.clickWikiaLogo();
+		homePage.getVenusGlobalNav()
+			.clickWikiaLogo();
 
 		Assertion.assertStringContains(urlBuilder.getUrlForWiki(expectedCentralUrl), driver.getCurrentUrl());
 	}

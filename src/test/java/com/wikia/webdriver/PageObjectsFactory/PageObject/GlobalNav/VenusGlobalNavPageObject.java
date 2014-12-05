@@ -1,7 +1,10 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav;
 
+import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import com.wikia.webdriver.Common.Core.ElementStateHelper;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
 import com.wikia.webdriver.PageObjectsFactory.PageObject.SearchPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -62,14 +65,6 @@ public class VenusGlobalNavPageObject {
 		return destinationHub;
 	}
 
-	public VenusGlobalNavPageObject clickHub(Hub hub) {
-		final WebElement destinationHub = hubsMenu.findElement(By
-			.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
-		destinationHub.click();
-
-		return this;
-	}
-
 	public String getHubLink(WebElement hub) {
 		return hub.getAttribute("href");
 	}
@@ -90,12 +85,11 @@ public class VenusGlobalNavPageObject {
 	}
 
 	public VenusGlobalNavPageObject openHubsMenuViaHover() {
-		Actions actions = new Actions(driver);
-		actions.moveToElement(menuButton);
-		actions.build().perform();
+		new Actions(driver)
+			.moveToElement(menuButton)
+			.perform();
 
-		WebDriverWait wait = new WebDriverWait(driver, 5);
-		wait.until(CommonExpectedConditions.elementVisible(hubsMenu));
+		new WebDriverWait(driver, 5).until(CommonExpectedConditions.elementVisible(hubsMenu));
 		return this;
 	}
 
@@ -111,24 +105,22 @@ public class VenusGlobalNavPageObject {
 		return hubsMenu;
 	}
 
-	public VenusGlobalNavPageObject clickWikiaLogo() {
-		wikiaLogo.click();
-
-		return this;
-	}
-
-	public void waitForCorrectUrl(String environment) {
+	public HomePageObject clickWikiaLogo() {
+		String environment = ConfigurationFactory.getConfig().getEnv();
 		if (!environment.equals("prod") && !environment.contains("dev")) {
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			wait.until(
-				CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
+					CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
 			);
 		}
+
+		wikiaLogo.click();
+		return new HomePageObject(driver);
 	}
 
 	public SearchPageObject searchGlobally(String query) {
-		Select searchSelectElement = new Select(searchSelect);
-		searchSelectElement.selectByValue("global");
+		new Select(searchSelect)
+			.selectByValue("global");
 		searchInput.sendKeys(query);
 		searchInput.submit();
 		return new SearchPageObject(driver);

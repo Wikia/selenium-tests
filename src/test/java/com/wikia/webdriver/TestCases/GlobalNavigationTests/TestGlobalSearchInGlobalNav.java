@@ -35,8 +35,8 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 	) {
 		HomePageObject homePage = new HomePageObject(driver);
 		homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
-		VenusGlobalNavPageObject globalNav = homePage.getVenusGlobalNav();
-		SearchPageObject search = globalNav.searchGlobally(query);
+		SearchPageObject search = homePage.getVenusGlobalNav()
+			.searchGlobally(query);
 
 		String currentUrl = driver.getCurrentUrl();
 		Assertion.assertStringContains(expectedSpecialPage, currentUrl);
@@ -64,8 +64,8 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 		String wikiUrl = urlBuilder.getUrlForWiki(wikiName);
 		homePage.getUrl(wikiUrl);
 		homePage.logInCookie(credentials.userName, credentials.password, wikiUrl);
-		VenusGlobalNavPageObject globalNav = homePage.getVenusGlobalNav();
-		SearchPageObject search = globalNav.searchGlobally(query);
+		SearchPageObject search = homePage.getVenusGlobalNav()
+			.searchGlobally(query);
 
 		String currentUrl = driver.getCurrentUrl();
 		Assertion.assertStringContains(expectedSpecialPage, currentUrl);
