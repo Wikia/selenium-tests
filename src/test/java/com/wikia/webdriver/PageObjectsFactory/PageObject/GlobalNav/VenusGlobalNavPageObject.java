@@ -1,7 +1,5 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav;
 
-import com.wikia.webdriver.Common.Core.ElementStateHelper;
-import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.Common.Core.ElementStateHelper;
 
 public class VenusGlobalNavPageObject {
 
@@ -23,6 +24,9 @@ public class VenusGlobalNavPageObject {
 
 	@FindBy(css = ".gamestar-logo")
 	private WebElement gameStarLink;
+
+	@FindBy(css = ".global-navigation-item.start-wikia-container")
+	private WebElement startNewWikiButton;
 
 	private WebDriver driver;
 
@@ -69,6 +73,10 @@ public class VenusGlobalNavPageObject {
 
 	public WebElement getMenuScreenShotArea() {
 		return hubsMenu;
+	}
+
+	public void clickStartNewWiki(){
+		startNewWikiButton.click();
 	}
 
 	public enum Hub {
