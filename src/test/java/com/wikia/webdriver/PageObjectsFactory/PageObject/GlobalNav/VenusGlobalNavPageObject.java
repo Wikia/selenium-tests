@@ -1,7 +1,11 @@
 package com.wikia.webdriver.PageObjectsFactory.PageObject.GlobalNav;
 
+import com.wikia.webdriver.Common.Core.Configuration.AbstractConfiguration;
+import com.wikia.webdriver.Common.Core.Configuration.ConfigurationFactory;
 import com.wikia.webdriver.Common.Core.ElementStateHelper;
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.HomePageObject;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.SearchPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VenusGlobalNavPageObject {
@@ -18,11 +23,23 @@ public class VenusGlobalNavPageObject {
 	@FindBy(css = ".hubs-entry-point")
 	private WebElement menuButton;
 
-	@FindBy(css = "nav#hubs")
+	@FindBy(css = "#hubs")
 	private WebElement hubsMenu;
 
 	@FindBy(css = ".gamestar-logo")
 	private WebElement gameStarLink;
+
+	@FindBy(css = ".wikia-logo")
+	private WebElement wikiaLogo;
+
+	@FindBy(css = "#searchSelect")
+	private WebElement searchSelect;
+
+	@FindBy(css = "#search-label-inline")
+	private WebElement inlineSearch;
+
+	@FindBy(css = "#searchInput")
+	private WebElement searchInput;
 
 	private WebDriver driver;
 
@@ -32,7 +49,7 @@ public class VenusGlobalNavPageObject {
 		PageFactory.initElements(this.driver, this);
 	}
 
-	public VenusGlobalNavPageObject openHub(Hub hub) {
+	public WebElement openHub(Hub hub) {
 		openHubsMenu();
 
 		final WebElement destinationHub = hubsMenu.findElement(By
@@ -45,7 +62,11 @@ public class VenusGlobalNavPageObject {
 		new WebDriverWait(driver, 5, 150)
 				.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
 
-		return this;
+		return destinationHub;
+	}
+
+	public String getHubLink(WebElement hub) {
+		return hub.getAttribute("href");
 	}
 
 	private VenusGlobalNavPageObject openHubsMenu() {
@@ -63,12 +84,52 @@ public class VenusGlobalNavPageObject {
 		return this;
 	}
 
+	public VenusGlobalNavPageObject openHubsMenuViaHover() {
+		new Actions(driver)
+			.moveToElement(menuButton)
+			.perform();
+
+		new WebDriverWait(driver, 5).until(CommonExpectedConditions.elementVisible(hubsMenu));
+		return this;
+	}
+
+	public boolean isHubsMenuOpened() {
+		return hubsMenu.isDisplayed();
+	}
+
 	public boolean isGameStarLogoDisplayed() {
 		return ElementStateHelper.isElementVisible(gameStarLink, driver);
 	}
 
 	public WebElement getMenuScreenShotArea() {
 		return hubsMenu;
+	}
+
+	public HomePageObject clickWikiaLogo() {
+		String environment = ConfigurationFactory.getConfig().getEnv();
+		if (!environment.equals("prod") && !environment.contains("dev")) {
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(
+					CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
+			);
+		}
+
+		wikiaLogo.click();
+		return new HomePageObject(driver);
+	}
+
+	public SearchPageObject searchGlobally(String query) {
+		new Select(searchSelect)
+			.selectByValue("global");
+		searchInput.sendKeys(query);
+		searchInput.submit();
+		return new SearchPageObject(driver);
+	}
+
+	public boolean isLocalSearchDisabled() {
+		return
+			!ElementStateHelper.isElementVisible(searchSelect, driver) &&
+			ElementStateHelper.isElementVisible(inlineSearch, driver);
 	}
 
 	public enum Hub {
