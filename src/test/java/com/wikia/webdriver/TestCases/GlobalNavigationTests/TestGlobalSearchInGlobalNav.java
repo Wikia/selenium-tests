@@ -22,12 +22,12 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 		return new Object[][] {
 			{"muppet", "gta", "Special:Search", "resultsLang=en"},
 			{"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
-			{"zh.pad", "muppet", "Special:Searach", "resultsLang=en"}
+			{"zh.pad", "muppet", "Special:Search", "resultsLang=zh"}
 		};
 	}
 
 	@Test(
-		groups = {"TestGlobalSearchInGlobalNav_001"},
+		groups = {"TestGlobalSearchInGlobalNav_001", "TestGlobalSearchInGlobalNav"},
 		dataProvider = "getDataForGlobalSearchAnon"
 	)
 	public void TestGlobalSearchInGlobalNav_001_asAnon(
@@ -49,12 +49,12 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 		return new Object[][] {
 				{"muppet", "gta", "Special:Search", "resultsLang=en"},
 				{"de.gta", "muppet", "Spezial:Suche", "resultsLang=en"},
-				{"zh.pad", "muppet", "Special:Searach", "resultsLang=en"}
+				{"zh.pad", "muppet", "Special:Search", "resultsLang=en"}
 		};
 	}
 
 	@Test(
-		groups = {"TestGlobalSearchInGlobalNav_002"},
+		groups = {"TestGlobalSearchInGlobalNav_002", "TestGlobalSearchInGlobalNav"},
 		dataProvider = "getDataForGlobalSearchLoggedIn"
 	)
 	public void TestGlobalSearchInGlobalNav_002_asLoggedIn(
@@ -82,7 +82,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 	}
 
 	@Test(
-		groups = {"TestGlobalSearchInGlobalNav_003"},
+		groups = {"TestGlobalSearchInGlobalNav_003", "TestGlobalSearchInGlobalNav"},
 		dataProvider = "getWikisWithDisabledLocalSearch"
 	)
 	public void TestGlobalSearchInGlobalNav_003_localSearchDisabled(String wikiName) {
