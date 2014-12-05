@@ -119,7 +119,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	private WebElement addCategoryInput;
 	@FindBy(css="#CategorySelectSave")
 	private WebElement saveCategory;
-	@FindBy(css=".WikiaArticleCategories li > span a")
+	@FindBy(css="#articleCategories .category.normal .name a")
 	private List<WebElement> categoryList;
 	@FindBy(css=".ui-autocomplete")
 	private WebElement categorySuggestionsList;
@@ -158,9 +158,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 	final Integer minInlineVideoSize = 400;
 
 	String editCategorySelector =
-			"li[data-name='%categoryName%'] li.editCategory > img";
+			"li[data-name='%categoryName%'] .toolbar .editCategory";
 	String removeCategorySelector =
-			"li[data-name='%categoryName%'] li.removeCategory > img";
+			"li[data-name='%categoryName%'] .toolbar .removeCategory";
 	String videoInCommentsSelector =
 			".speech-bubble-message img[data-video-name*='%videoName%']";
 
@@ -621,16 +621,6 @@ public class ArticlePageObject extends WikiBasePageObject {
 			}
 		}
 		Assertion.assertTrue(categoryVisible, "category " + category + " not present");
-	}
-
-	public void verifyCategoryNotPresent(String category) {
-		boolean categoryVisible = true;
-		for (WebElement elem : categoryList) {
-			if (elem.getText().equals(category)) {
-				categoryVisible = false;
-			}
-		}
-		Assertion.assertTrue(categoryVisible, "category " + category + " present");
 	}
 
 	public WatchPageObject unfollowArticle(String wikiURL) {

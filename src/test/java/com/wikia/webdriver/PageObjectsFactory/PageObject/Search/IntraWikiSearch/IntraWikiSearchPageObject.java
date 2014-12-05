@@ -25,9 +25,9 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
 	@FindBy(css=".photos-and-videos")
 	private WebElement photosVideos;
-	@FindBy(css="#WikiaSearchHeader input[name=search]")
+	@FindBy(css="#searchInput")
 	private WebElement searchField;
-	@FindBy(css="#WikiaSearchHeader .wikia-button")
+	@FindBy(css="#searchForm .search-submit")
 	private WebElement searchButton;
 	@FindBy(css="[value=is_image]")
 	private WebElement filterPhotos;

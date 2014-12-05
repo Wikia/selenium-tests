@@ -187,10 +187,9 @@ public class WikiBasePageObject extends BasePageObject {
 
 	protected String modalWrapper = "#WikiaConfirm";
 
-	private String loggedInUserSelectorOasis = ".AccountNavigation a[href*=%userName%]";
+	private String loggedInUserSelectorVenus = ".AccountNavigation a[href*=%userName%]";
 	private String loggedInUserSelectorMonobook = "#pt-userpage a[href*=%userName%]";
-	private String loggedInUserSelectorVenus = ".ajaxLogin.global-navigation-link[title*='%s']";
-	
+
 	private VenusGlobalNavPageObject venusGlobalNav;
 
 	public String getWikiUrl() {
@@ -614,9 +613,9 @@ public class WikiBasePageObject extends BasePageObject {
 				By.cssSelector(loggedInUserSelectorMonobook.replace("%userName%", userName.replace(" ", "_"))));// only for verification
 		}
 		else {
-			//oasis
+			//Venus
 			driver.findElement(
-				By.cssSelector(loggedInUserSelectorOasis.replace("%userName%", userName.replace(" ", "_"))));// only for verification
+				By.cssSelector(loggedInUserSelectorVenus.replace("%userName%", userName)));// only for verification
 		}
 		PageObjectLogging.log(
 				"verifyUserLoggedIn",

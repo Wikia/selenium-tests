@@ -502,7 +502,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 		return liftiumTagId;
 	}
 
-	private void extractGptInfo(String slotSelector) {
+	protected void extractGptInfo(String slotSelector) {
 		WebElement slot = driver.findElement(By.cssSelector(slotSelector));
 		String log = "GPT ad not found in slot: " + slotSelector;
 		if (checkIfElementInElement(GPT_DIV_SELECTOR, slot)) {
