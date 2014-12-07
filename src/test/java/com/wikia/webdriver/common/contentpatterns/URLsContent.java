@@ -23,7 +23,6 @@ public class URLsContent {
 	public static final String SPECIAL_USER_SIGNUP = "wiki/Special:UserSignup";
 	public static final String SPECIAL_ADD_BLOG_LISTING_PAGE = "wiki/Special:CreateBlogListingPage";
 	public static final String SPECIAL_NEW_FILES = "wiki/Special:NewFiles";
-	public static final String SPECIAL_CONNECT = "wiki/Special:Connect";
 	public static final String SPECIAL_VIDEOS = "wiki/Special:Videos";
 	public static final String SPECIAL_UPLOAD = "wiki/Special:Upload";
 	public static final String SPECIAL_MULTIPLE_UPLOAD = "wiki/Special:MultipleUpload";

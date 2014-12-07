@@ -391,17 +391,11 @@ public class WikiBasePageObject extends BasePageObject {
 		return new SpecialWikiActivityPageObject(driver);
 	}
 
-	public SpecialFBConnectPageObject openSpecialFBConnectPage(String wikiURL) {
-		getUrl(wikiURL + URLsContent.SPECIAL_CONNECT);
-		return new SpecialFBConnectPageObject(driver);
-	}
-
 	public ForumPageObject openForumMainPage(String wikiURL) {
 		getUrl(wikiURL + URLsContent.SPECIAL_FORUM);
 		PageObjectLogging.log("openForumPage", "forum page opened", true);
 		return new ForumPageObject(driver);
 	}
-
 
 	public SpecialMultiWikiFinderPageObject openSpecialMultiWikiFinderPage(String wikiURL){
 		getUrl(wikiURL + URLsContent.SPECIAL_MULTI_WIKI_FINDER);
