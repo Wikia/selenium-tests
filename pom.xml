@@ -180,7 +180,7 @@
 						<captcha>/selenium-config/captcha.txt</captcha>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/java/com/wikia/webdriver/TestSuites/testSuite.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/java/com/wikia/webdriver/testsuites/testSuite.xml</suiteXmlFile>
 					</suiteXmlFiles>
 					<argLine>-Xms800m -Xmx800m -XX:MaxPermSize=1024m</argLine>
 				</configuration>
