@@ -48,7 +48,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		groups = {"VECategoryTests", "VECategoryTests_001", "VEAddCategory", "VECategoryTests_002"}
 	)
 	public void VECategoryTests_001_AddNewCategory() {
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorOptionsDialog optionsDialog =
 			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
 		optionsDialog.addCategory(testCategory);
@@ -66,7 +66,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VECategoryTests_001"
 	)
 	public void VECategoryTests_002_RemoveCategory() {
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorOptionsDialog optionsDialog =
 			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
 		optionsDialog.removeCategory(testCategory);
@@ -83,7 +83,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		groups = {"VECategoryTests", "VECategoryTests_003", "VEAddCategory"}
 	)
 	public void VECategoryTests_003_NewCategorySuggestions() {
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorOptionsDialog optionsDialog =
 			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
 		optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.NEW);
@@ -93,7 +93,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		groups = {"VECategoryTests", "VECategoryTests_004", "VEAddCategory"}
 	)
 	public void VECategoryTests_004_MatchingCategorySuggestions() {
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorOptionsDialog optionsDialog =
 			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
 		optionsDialog.verifyLinkSuggestions(categorySearchStr, CategoryResultType.MATCHING);
@@ -109,7 +109,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 		categoryWithSortKeyWikiTexts.add("[[Category:" + testCategory2 + "|" + sortKey + "]]");
 
 		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName2, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorOptionsDialog optionsDialog =
 			(VisualEditorOptionsDialog) ve.openDialogFromMenu(InsertDialog.CATEGORIES);
 		optionsDialog.addCategory(testCategory2);
