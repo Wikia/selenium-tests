@@ -178,22 +178,22 @@ public class AdsBaseObject extends WikiBasePageObject {
 		checkAdVisibleInSlot(TOP_INCONTENT_BOXAD_SELECTOR, topIncontentBoxad);
 	}
 
-	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot ) {
-		AdsComparison adsComparison = new AdsComparison();
-		boolean adVisible = adsComparison.isAdVisible(slot, slotSelector, driver);
+	protected void checkAdVisibleInSlot(String slotSelector, WebElement slot) {
+		verifySlotExpanded(slot);
+		boolean adVisible = new AdsComparison().isAdVisible(slot, slotSelector, driver);
 		extractLiftiumTagId(slotSelector);
 		extractGptInfo(slotSelector);
-		if (adVisible) {
-			PageObjectLogging.log("CompareScreenshot", "Screenshots are different", true);
-		} else {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look the same", false
-			);
+		if (!adVisible) {
 			throw new NoSuchElementException(
-				"Screenshots of element on/off look the same."
-				+ "Most probable ad is not present; CSS "
-				+ slotSelector
+				"Ad is not present in " + slotSelector
 			);
+		}
+		PageObjectLogging.log("ScreenshotsComparison", "Ad is present in " + slotSelector, true);
+	}
+
+	public void verifySlotExpanded(WebElement element) {
+		if (!checkIfSlotExpanded(element)) {
+			throw new NoSuchElementException(element.getAttribute("id") + " is collapsed");
 		}
 	}
 
