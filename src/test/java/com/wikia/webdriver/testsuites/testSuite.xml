@@ -109,7 +109,6 @@
 			<class name="com.wikia.webdriver.testcases.followingtests.FollowVideosTests"/>
 			<class name="com.wikia.webdriver.testcases.messagewall.MessageWallTests"/>
 			<class name="com.wikia.webdriver.testcases.messagewall.MessageWallFeaturesTests"/>
-			<class name="com.wikia.webdriver.testcases.specialpagestests.FBConnectTests"/>
 			<class name="com.wikia.webdriver.testcases.userprofiletests.UserAvatarTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VEAddVideoTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VEAddMapTests"/>
