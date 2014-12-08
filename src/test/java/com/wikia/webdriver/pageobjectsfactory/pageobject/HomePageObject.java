@@ -128,7 +128,7 @@ public class HomePageObject extends WikiBasePageObject {
 	}
 
 	public Boolean checkIfPageIsHub() {
-		return executeScriptRetBool("!!mw.config.get( 'wikiaPageIsHub' )");
+		return !driver.findElement(By.tagName("body")).getAttribute("class").contains("WikiaHome");
 	}
 
 	public int getNumOfLanguages() {
@@ -147,9 +147,8 @@ public class HomePageObject extends WikiBasePageObject {
 
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
 			// (and language dropDown)
-			if (!checkIfPageIsHub()) {
+			if (!checkIfPageIsHub() ) {
 				newHome.verifyLanguageButton();
-				newHome.verifyURL(languageURL);
 			} else {
 				PageObjectLogging.log(
 					"selectLanguage",
@@ -157,6 +156,7 @@ public class HomePageObject extends WikiBasePageObject {
 					true
 				);
 			}
+			newHome.verifyURL(languageURL);
 			newHome.navigateBack();
 		}
 	}
