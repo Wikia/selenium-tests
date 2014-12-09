@@ -403,7 +403,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"openSpecialMultiWikiFinderPage",
 			"Special MultiWikiFinder page was opened",
 			true
-							 );
+			);
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
@@ -522,8 +522,8 @@ public class WikiBasePageObject extends BasePageObject {
 			urlBuilder.appendQueryStringToURL(
 				driver.getCurrentUrl(),
 				URLsContent.ACTION_EDIT
-											 )
-			  );
+			)
+		);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -531,8 +531,7 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.WIKI_DIR + article, URLsContent.ACTION_EDIT
-											 )
-			  );
+			));
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -578,7 +577,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"SpecialUserLoginOnWiki",
 			"Special:UserLogin opened on: " + wikiURL,
 			true
-							 );
+		);
 		return new SpecialUserLoginPageObject(driver);
 	}
 
@@ -588,7 +587,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"LicensedVideoSwapPageObject",
 			"Special:LicensedVideoSwap opened on: " + wikiURL,
 			true
-							 );
+		);
 		return new LicensedVideoSwapPageObject(driver);
 	}
 
@@ -638,7 +637,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log(
 			"verifyEditButtonNotPresent",
 			"edit button is not present", true
-							 );
+		);
 	}
 
 	protected void clickRestoreArticleButton() {
@@ -719,7 +718,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"LoginRequiredMessage",
 			"Login required message in first header present",
 			true, driver
-							 );
+		);
 	}
 
 	public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
@@ -1069,10 +1068,10 @@ public class WikiBasePageObject extends BasePageObject {
 		String randomArticle = wikiURL + URLsContent.WIKI_DIR + getNameForArticle();
 		String randomArticleWithVETrigger = urlBuilder.appendQueryStringToURL(
 			randomArticle, URLsContent.VEACTION_EDIT
-																			 );
+		);
 		String randomArticleWithVEAndRedLink = urlBuilder.appendQueryStringToURL(
 			randomArticleWithVETrigger, URLsContent.REDLINK
-																				);
+		);
 		getUrl(randomArticleWithVEAndRedLink);
 		return new VisualEditorPageObject(driver);
 	}
