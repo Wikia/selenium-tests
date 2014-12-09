@@ -236,13 +236,11 @@ public class CommonExpectedConditions {
 
 		return new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
-				String elementText = null;
 				try {
-					elementText = driver.findElement(by).getText();
+					return !driver.findElement(by).getText().contains(text);
 				}catch (NoSuchElementException | StaleElementReferenceException e){
 					return false;
 				}
-				return !elementText.contains(text);
 			}
 
 			@Override
