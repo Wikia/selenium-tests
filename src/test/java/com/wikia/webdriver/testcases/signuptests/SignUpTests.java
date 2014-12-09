@@ -38,7 +38,7 @@ public class SignUpTests extends NewTestTemplate {
 	File captchaFile = config.getCaptchaFile();
 
 	@Test(groups = {"SignUp_001", "SignUp"})
-	public void SignUp_001_wrongBlurryWord_MAIN_2157() {
+	public void SignUp_001_wrongBlurryWord() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());
@@ -56,7 +56,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_002", "SignUp"})
-	public void SignUp_002_tooYoungUser_MAIN_2158() {
+	public void SignUp_002_tooYoungUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.typeUserName(signUp.getTimeStamp());

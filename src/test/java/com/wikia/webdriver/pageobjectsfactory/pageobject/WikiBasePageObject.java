@@ -311,13 +311,13 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public SignUpPageObject openSpecialSignUpPage(String wikiURL) {
 		getUrl(wikiURL);
-		signUpLink.click();
+		getVenusGlobalNav().signUp();
 		PageObjectLogging.log("openSpecialSignUpPage", "Special:UserSignUp page opened", true);
 		return new SignUpPageObject(driver);
 	}
 
 	public PreferencesPageObject openSpecialPreferencesPage(String wikiURL){
-		getUrl(wikiURL+URLsContent.SPECIAL_PREFERENCES);
+		getUrl(wikiURL + URLsContent.SPECIAL_PREFERENCES);
 		PageObjectLogging.log("openSpecialPreferencesPage", "Special:Prefereces page opened", true);
 		return new PreferencesPageObject(driver);
 	}
@@ -403,7 +403,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"openSpecialMultiWikiFinderPage",
 			"Special MultiWikiFinder page was opened",
 			true
-		);
+							 );
 		return new SpecialMultiWikiFinderPageObject(driver);
 	}
 
@@ -522,8 +522,8 @@ public class WikiBasePageObject extends BasePageObject {
 			urlBuilder.appendQueryStringToURL(
 				driver.getCurrentUrl(),
 				URLsContent.ACTION_EDIT
-			)
-		);
+											 )
+			  );
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -531,8 +531,8 @@ public class WikiBasePageObject extends BasePageObject {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.WIKI_DIR + article, URLsContent.ACTION_EDIT
-			)
-		);
+											 )
+			  );
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -578,7 +578,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"SpecialUserLoginOnWiki",
 			"Special:UserLogin opened on: " + wikiURL,
 			true
-		);
+							 );
 		return new SpecialUserLoginPageObject(driver);
 	}
 
@@ -588,7 +588,7 @@ public class WikiBasePageObject extends BasePageObject {
 			"LicensedVideoSwapPageObject",
 			"Special:LicensedVideoSwap opened on: " + wikiURL,
 			true
-		);
+							 );
 		return new LicensedVideoSwapPageObject(driver);
 	}
 
@@ -638,7 +638,7 @@ public class WikiBasePageObject extends BasePageObject {
 		PageObjectLogging.log(
 			"verifyEditButtonNotPresent",
 			"edit button is not present", true
-		);
+							 );
 	}
 
 	protected void clickRestoreArticleButton() {
@@ -716,10 +716,10 @@ public class WikiBasePageObject extends BasePageObject {
 				wikiFirstHeader, PageContent.LOGIN_REQUIRED
 		);
 		PageObjectLogging.log(
-				"LoginRequiredMessage",
-				"Login required message in first header present",
-				true, driver
-		);
+			"LoginRequiredMessage",
+			"Login required message in first header present",
+			true, driver
+							 );
 	}
 
 	public SpecialUserLoginPageObject clickLoginOnSpecialPage() {
@@ -796,7 +796,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public String getWikiaCssContent() {
 		waitForElementByElement(cssSource);
 		String source = cssSource.getText();
-		PageObjectLogging.log("cssSource", "the following text was get from Wikia.css: "+source, true);
+		PageObjectLogging.log("cssSource", "the following text was get from Wikia.css: " + source, true);
 		return source;
 	}
 
@@ -1069,18 +1069,18 @@ public class WikiBasePageObject extends BasePageObject {
 		String randomArticle = wikiURL + URLsContent.WIKI_DIR + getNameForArticle();
 		String randomArticleWithVETrigger = urlBuilder.appendQueryStringToURL(
 			randomArticle, URLsContent.VEACTION_EDIT
-		);
+																			 );
 		String randomArticleWithVEAndRedLink = urlBuilder.appendQueryStringToURL(
 			randomArticleWithVETrigger, URLsContent.REDLINK
-		);
+																				);
 		getUrl(randomArticleWithVEAndRedLink);
 		return new VisualEditorPageObject(driver);
 	}
 
 	public void addVideoViaAjax(String videoURL) {
 		executeScript("$.ajax('" + getWikiUrl() + "wikia.php?controller=Videos&method=addVideo&format=json', {" +
-				"data: {url: '" + videoURL + "'}," +
-				"type: 'POST' } );");
+			"data: {url: '" + videoURL + "'}," +
+			"type: 'POST' } );");
 	}
 
 	/**

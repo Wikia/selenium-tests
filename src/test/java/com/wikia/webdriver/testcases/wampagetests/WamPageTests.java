@@ -67,7 +67,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(groups = {"wamPage_005", "WamPageTests"})
-	public void wamPage_005_testDatePicker_MAIN_3024() {
+	public void wamPage_005_testDatePicker() {
 		wam.verifyTodayDateInDatePicker();
 		String lastMonthDate = wam.changeDateToLastMonth();
 		wam.verifyDateInDatePicker(lastMonthDate);

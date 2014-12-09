@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,8 +46,10 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	private WebElement facebookSubmitButton;
 	@FindBy (css="#UserLoginDropdown .error-msg")
 	private WebElement messagePlaceholder;
+	@FindBy(css = "a.ajaxRegister")
+	private WebElement signUpLink;
 
-	public void openDropDown() {
+	public DropDownComponentObject openDropDown() {
 
 		new WebDriverWait(driver, 20, 2000).until(new ExpectedCondition<Boolean>() {
 			@Override
@@ -65,6 +68,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
 			"Login dropdown is visible",
 			true, driver
 		);
+
+		return this;
 	}
 
 	public void remindPassword(String userName, String apiToken) {
@@ -161,6 +166,12 @@ public class DropDownComponentObject extends WikiBasePageObject {
 			"switching to main window",
 			true
 		);
+	}
+
+	public SignUpPageObject clickSignUpLink() {
+		signUpLink.click();
+
+		return new SignUpPageObject(driver);
 	}
 
 	public void verifyMessageAboutNewPassword(String userName) {
