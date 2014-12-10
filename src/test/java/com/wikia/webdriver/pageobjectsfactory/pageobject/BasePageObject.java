@@ -496,7 +496,7 @@ public class BasePageObject{
 	public void waitForElementByElementLocatedBy(By elementBy) {
 		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
 		try {
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(elementBy));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
 		}finally {
 			restoreDeaultImplicitWait();
 		}
