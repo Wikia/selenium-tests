@@ -34,7 +34,7 @@ public class AdsComparison {
 	public static final int IMAGE_ACCURACY_PERCENT = 70;
 	private static final int TIME_STEP_MILLS = 1000;
 	private static final int MAX_ATTEMPTS = 600;
-	private static final int AD_TIMEOUT_SEC = 10;
+	private static final int AD_TIMEOUT_SEC = 15;
 	private Shooter shooter;
 	protected ImageComparison imageComparison;
 	//Chromedriver has an open issue and all screenshots made in chromedriver on mobile are scaled
@@ -46,16 +46,7 @@ public class AdsComparison {
 	}
 
 	public void hideSlot(String selector, WebDriver driver) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		// Check if we are using mobile skin. Since mobile skin uses different version of jQuery
-		if (selector.toUpperCase().contains("MOBILE")) {
-			js.executeScript(
-				"$(arguments[0]).css('visibility', 'hidden')",
-				selector
-			);
-		} else {
-			changeVisibility(selector, "hidden", driver);
-		}
+		changeVisibility(selector, "hidden", driver);
 	}
 
 	private void showSlot(String selector, WebDriver driver) {
@@ -64,7 +55,7 @@ public class AdsComparison {
 
 	private void changeVisibility(String selector, String visibility, WebDriver driver) {
 		((JavascriptExecutor) driver).executeScript(
-			"$(arguments[0] + ' *').css('visibility', arguments[1]);",
+			"$(arguments[0]).css('visibility', arguments[1]);",
 			selector, visibility
 		);
 	}
