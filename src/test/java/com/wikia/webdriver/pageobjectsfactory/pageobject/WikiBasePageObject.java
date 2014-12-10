@@ -438,7 +438,7 @@ public class WikiBasePageObject extends BasePageObject {
 	}
 
 	public SpecialFactoryPageObject openWikiFactoryPage(String wikiURL) {
-		getUrl(wikiURL + URLsContent.SPECIAL_WIKI_FACTORY);
+		getUrl(wikiURL + URLsContent.SPECIAL_WIKI_FACTORY, true);
 		return new SpecialFactoryPageObject(driver);
 	}
 
@@ -1028,7 +1028,8 @@ public class WikiBasePageObject extends BasePageObject {
 			PageObjectLogging.log(
 				"VariablesAreTheSame",
 				"Variable on wiki and on community are the same",
-				true
+				true,
+				driver
 			);
 		} else {
 			throw new WebDriverException("Values on community and on wiki are different");
