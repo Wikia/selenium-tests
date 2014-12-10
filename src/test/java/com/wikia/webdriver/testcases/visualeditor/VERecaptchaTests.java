@@ -33,9 +33,7 @@ public class VERecaptchaTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEAddRecaptchaTests_001_AddExternalURL() {
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, articleName);
-		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.typeTextArea(URLsContent.EXTERNAL_URL);

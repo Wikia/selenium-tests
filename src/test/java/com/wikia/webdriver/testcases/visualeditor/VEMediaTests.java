@@ -60,7 +60,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		String mediaTitle = "Short film directed by Guy Ritchie starring David Beckham - H&M Spring 2013";
 		String providerName = "youtube";
 
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -74,7 +74,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	public void VEMediaTests_002_previewImage() {
 		String mediaTitle = "Thomas Wright 1792 - 1849";
 
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -106,7 +106,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	public void VEMediaTests_004_editCaption() {
 		String captionText = "test123";
 
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -127,7 +127,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		groups = {"VEMediaTests", "VEMediaTests_005", "VEResizeVideo"}
 	)
 	public void VEMediaTests_005_resizeVideoWithHandle() {
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -148,7 +148,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	public void VEMediaTests_006_resizeVideoWithSetting() {
 		int resizeNumber = 250;
 
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMediaDialog mediaDialog =
 			(VisualEditorAddMediaDialog) ve.openDialogFromMenu(InsertDialog.MEDIA);
 		mediaDialog = mediaDialog.searchMedia("h");
@@ -177,7 +177,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 		wikiTexts.add("|left");
 
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorAddMediaDialog mediaDialog =

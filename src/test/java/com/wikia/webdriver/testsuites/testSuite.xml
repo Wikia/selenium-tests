@@ -114,10 +114,7 @@
 			<class name="com.wikia.webdriver.testcases.visualeditor.VEAddMapTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VECategoryTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VEMediaTests"/>
-			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorFormattingTests"/>
-			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorStylesTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
-			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorEntryTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryCKPreferredTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryDefaultPreferredTests"/>
