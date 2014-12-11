@@ -12,50 +12,49 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatPageObject extends WikiBasePageObject
-{
+public class ChatPageObject extends WikiBasePageObject {
 
-	@FindBy(css="textarea[name='message']")
+	@FindBy(css = "textarea[name='message']")
 	private WebElement messageWritingArea;
-	@FindBy(css="div.Rail")
+	@FindBy(css = "div.Rail")
 	private WebElement sideBar;
-	@FindBy(css="div.User span.username")
+	@FindBy(css = "div.User span.username")
 	private WebElement userName;
-	@FindBy(css="[id*='Chat'] .inline-alert[id*='entry']")
+	@FindBy(css = "[id*='Chat'] .inline-alert[id*='entry']")
 	private WebElement chatInlineAlert;
-	@FindBy(css="div.User img")
+	@FindBy(css = "div.User img")
 	private WebElement userAvatar;
-	@FindBy(css="#UserStatsMenu .private")
+	@FindBy(css = "#UserStatsMenu .private")
 	private WebElement privateMassageButton;
-	@FindBy(css="#UserStatsMenu")
+	@FindBy(css = "#UserStatsMenu")
 	private WebElement userStatsMenu;
-	@FindBy(css="li.private-allow")
+	@FindBy(css = "li.private-allow")
 	private WebElement allowPrivateMassageButton;
-	@FindBy(css="li.private-block")
+	@FindBy(css = "li.private-block")
 	private WebElement blockPrivateMassageButton;
-	@FindBy(css="h1.public.wordmark.selected")
+	@FindBy(css = "h1.public.wordmark.selected")
 	private WebElement mainChatSelection;
-	@FindBy(css="ul.PrivateChatList span.splotch")
+	@FindBy(css = "ul.PrivateChatList span.splotch")
 	private WebElement privateMessageNotification;
-	@FindBy(css=".continued.inline-alert")
+	@FindBy(css = ".continued.inline-alert")
 	private WebElement chatInlineAlertContinued;
-	@FindBy(css="#UserStatsMenu li.ban")
+	@FindBy(css = "#UserStatsMenu li.ban")
 	private WebElement banUserButton;
-	@FindBy(css="#ChatBanModal")
+	@FindBy(css = "#ChatBanModal")
 	private WebElement chatBanModal;
-	@FindBy(css="#ChatBanModal button.primary")
+	@FindBy(css = "#ChatBanModal button.primary")
 	private WebElement chatBanModalButton;
-	@FindBy (css="#UserStatsMenu .regular-actions li")
+	@FindBy(css = "#UserStatsMenu .regular-actions li")
 	private List<WebElement> userDropDownActionsElements;
-	@FindBy (css="#UserStatsMenu .admin-actions li")
+	@FindBy(css = "#UserStatsMenu .admin-actions li")
 	private List<WebElement> adminDropDownActionsElements;
-	@FindBy (css="#Rail h1.private")
+	@FindBy(css = "#Rail h1.private")
 	private WebElement privateMessagesHeader;
-	@FindBy (css="#Rail img.wordmark")
+	@FindBy(css = "#Rail img.wordmark")
 	private WebElement chatWordmarkImage;
-	@FindBy (css="#WikiChatList li")
+	@FindBy(css = "#WikiChatList li")
 	private WebElement chatLoadedIndicator;
-	@FindBy (css="#ChatHeader h1.private")
+	@FindBy(css = "#ChatHeader h1.private")
 	private WebElement privateChatHeader;
 
 	private final String userUnbanLink =
@@ -138,7 +137,7 @@ public class ChatPageObject extends WikiBasePageObject
 			driver
 		);
 	}
-	
+
 	public void verifyPrivateMessageNotification(int notificationCount) {
 		waitForElementByXPath(String.format(notificationCounter, notificationCount));
 		PageObjectLogging.log(
@@ -198,7 +197,7 @@ public class ChatPageObject extends WikiBasePageObject
 		Assertion.assertNumber(3, list.size(), "Checking number of elements in the drop-down");
 		Assertion.assertEquals("message-wall", list.get(0).getAttribute("class"));
 		Assertion.assertEquals("contribs", list.get(1).getAttribute("class"));
-		Assertion.assertEquals("private-allow", list.get(2).getAttribute("class"));	
+		Assertion.assertEquals("private-allow", list.get(2).getAttribute("class"));
 	}
 
 	public void verifyPrivateUserDropdown(String userName) {
@@ -327,7 +326,7 @@ public class ChatPageObject extends WikiBasePageObject
 		WebElement userOnPrivateMessagesList = getElementForUser(userName, privateMessageUserSelector);
 		boolean hidden = !userStatsMenu.isDisplayed();
 		int i = 0;
-		while(hidden) {
+		while (hidden) {
 			userOnPrivateMessagesList.click();
 			if (userStatsMenu.isDisplayed() || i >= 10) {
 				hidden = false;
@@ -394,19 +393,19 @@ public class ChatPageObject extends WikiBasePageObject
 
 	public List<String> sendMultipleMessagesFromUser(String userName, int messagesCount) {
 		List<String> messagesSent = new ArrayList<>();
-		for (int i=0; i<messagesCount; i++) {
+		for (int i = 0; i < messagesCount; i++) {
 			String message = generateMessageFromUser(userName);
 			writeOnChat(message);
 			messagesSent.add(message);
 		}
-		return  messagesSent;
+		return messagesSent;
 	}
 
 	public void verifyMultiplePrivateMessages(List<String> messagesReceived, String senderUser) {
 		verifyPrivateMessageHeader();
 		verifyPrivateMessageNotification(messagesReceived.size());
 		clickOnUserInPrivateMessageSection(senderUser);
-		for (String message: messagesReceived) {
+		for (String message : messagesReceived) {
 			verifyMessageOnChat(message);
 		}
 	}

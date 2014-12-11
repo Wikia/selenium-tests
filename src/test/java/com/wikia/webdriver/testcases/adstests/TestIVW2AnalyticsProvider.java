@@ -23,9 +23,9 @@ public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 
 	@NetworkTrafficDump
 	@Test(
-			groups = {"TestIVW2AnalyticsProviderCorporate_GEF"},
-			dataProviderClass=GermanAdsDataProvider.class,
-			dataProvider="pagesForIVW2Corporate"
+		groups = {"TestIVW2AnalyticsProviderCorporate_GEF"},
+		dataProviderClass = GermanAdsDataProvider.class,
+		dataProvider = "pagesForIVW2Corporate"
 	)
 	public void TestIVW2AnalyticsProviderCorporate_GEF(String wikiName, String article, String ivw2Param) {
 		testIVW2(wikiName, article, ivw2Param);
@@ -33,9 +33,9 @@ public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 
 	@NetworkTrafficDump
 	@Test(
-			groups = {"TestIVW2AnalyticsProviderHubs_GEF"},
-			dataProviderClass=GermanAdsDataProvider.class,
-			dataProvider="pagesForIVW2Hubs"
+		groups = {"TestIVW2AnalyticsProviderHubs_GEF"},
+		dataProviderClass = GermanAdsDataProvider.class,
+		dataProvider = "pagesForIVW2Hubs"
 	)
 	public void TestIVW2AnalyticsProviderHubs_GEF(String wikiName, String article, String ivw2Param) {
 		testIVW2(wikiName, article, ivw2Param);
@@ -43,9 +43,9 @@ public class TestIVW2AnalyticsProvider extends NewTestTemplate {
 
 	@NetworkTrafficDump
 	@Test(
-			groups = {"TestIVW2AnalyticsProviderOther_GEF"},
-			dataProviderClass=GermanAdsDataProvider.class,
-			dataProvider="pagesForIVW2Other"
+		groups = {"TestIVW2AnalyticsProviderOther_GEF"},
+		dataProviderClass = GermanAdsDataProvider.class,
+		dataProvider = "pagesForIVW2Other"
 	)
 	public void TestIVW2AnalyticsProviderOther_GEF(String wikiName, String article, String ivw2Param) {
 		testIVW2(wikiName, article, ivw2Param);

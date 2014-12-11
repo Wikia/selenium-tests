@@ -13,17 +13,17 @@ public class MobileEditPreviewPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#wkSummary")
+	@FindBy(css = "#wkSummary")
 	private WebElement summaryTextBox;
-	@FindBy(css="#wkContinueEditing")
+	@FindBy(css = "#wkContinueEditing")
 	private WebElement keepEditingButton;
-	@FindBy(css="#wkSave")
+	@FindBy(css = "#wkSave")
 	private WebElement publishButton;
-	@FindBy(css="#wkMdlCnt #mw-content-text > p")
+	@FindBy(css = "#wkMdlCnt #mw-content-text > p")
 	private WebElement articleText;
-	@FindBy(css="#wkMdlTlBar > span")
+	@FindBy(css = "#wkMdlTlBar > span")
 	private WebElement selectedPageHeader;
-	@FindBy(css="#wkMdlWrp.open")
+	@FindBy(css = "#wkMdlWrp.open")
 	private WebElement previewZoomer;
 
 	public void verifyEditModeContent(String targetText) {

@@ -14,15 +14,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 public class VisualEditorMediaSettingsDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-outlineWidget li")
+	@FindBy(css = ".oo-ui-outlineWidget li")
 	private List<WebElement> outlineMenuItems;
-	@FindBy(css=".ve-ce-documentNode")
+	@FindBy(css = ".ve-ce-documentNode")
 	private WebElement captionEditArea;
-	@FindBy(css=".oo-ui-window-foot .oo-ui-labeledElement-label")
+	@FindBy(css = ".oo-ui-window-foot .oo-ui-labeledElement-label")
 	private WebElement applyChangesButton;
-	@FindBy(css=".ve-ui-dimensionsWidget input")
+	@FindBy(css = ".ve-ui-dimensionsWidget input")
 	private WebElement customSizeInput;
-	@FindBy(css=".oo-ui-buttonSelectWidget a")
+	@FindBy(css = ".oo-ui-buttonSelectWidget a")
 	private List<WebElement> positionButtons;
 
 	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");

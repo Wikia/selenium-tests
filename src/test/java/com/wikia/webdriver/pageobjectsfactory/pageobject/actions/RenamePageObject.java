@@ -12,9 +12,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
  */
 public class RenamePageObject extends ArticlePageObject {
 
-	@FindBy(css="#wpNewTitleMain")
+	@FindBy(css = "#wpNewTitleMain")
 	private WebElement newNameInput;
-	@FindBy(css=".mw-submit [name='wpMove']")
+	@FindBy(css = ".mw-submit [name='wpMove']")
 	private WebElement submitRename;
 
 	public RenamePageObject(WebDriver driver) {

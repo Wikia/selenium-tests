@@ -14,23 +14,22 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Robert 'rochan' Chan
- *
  */
 public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-icon-previous")
+	@FindBy(css = ".oo-ui-icon-previous")
 	private WebElement previousButton;
-	@FindBy(css=".ve-ui-mwLinkTargetInputWidget input")
+	@FindBy(css = ".ve-ui-mwLinkTargetInputWidget input")
 	private WebElement linkInput;
-	@FindBy(css=".oo-ui-texture-pending")
+	@FindBy(css = ".oo-ui-texture-pending")
 	private WebElement inputPending;
-	@FindBy(css=".oo-ui-optionWidget-selected")
+	@FindBy(css = ".oo-ui-optionWidget-selected")
 	private WebElement selectedResult;
-	@FindBy(css=".ve-ui-desktopContext")
+	@FindBy(css = ".ve-ui-desktopContext")
 	private WebElement desktopContext;
-	@FindBy(css=".oo-ui-window-title")
+	@FindBy(css = ".oo-ui-window-title")
 	private WebElement title;
-	@FindBy(css=".oo-ui-window.ve-ui-inspector")
+	@FindBy(css = ".oo-ui-window.ve-ui-inspector")
 	private WebElement dialog;
 
 	private By linkResultMenuBy = By.cssSelector(".ve-ui-mwLinkTargetInputWidget-menu");
@@ -76,12 +75,12 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 		WebElement linkResultMenu = desktopContext.findElement(linkResultMenuBy);
 		waitForElementVisibleByElement(linkResultMenu);
 		List<WebElement> linkResults = linkResultMenu.findElements(linkResultsBy);
-		for (int i = 0; i< linkResults.size(); i++) {
+		for (int i = 0; i < linkResults.size(); i++) {
 			WebElement linkResult = linkResults.get(i);
 			String elementClassName = linkResult.getAttribute("class");
 			if (elementClassName.contains(menuSectionItemText)) {
 				String linkCategory = linkResult.findElement(linkCategoryBy).getText();
-				switch(linkCategory) {
+				switch (linkCategory) {
 					case "New page":
 						pageCategoryIndex[NEWPAGEINDEX] = i;
 						break;

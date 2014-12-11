@@ -39,115 +39,115 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
  */
 public class ArticlePageObject extends WikiBasePageObject {
 
-	@FindBy(css="article header h1")
+	@FindBy(css = "article header h1")
 	protected WebElement articleHeader;
-	@FindBy(css="#mw-content-text")
+	@FindBy(css = "#mw-content-text")
 	protected WebElement articleContentContainer;
-	@FindBy(css="#WikiaMainContentContainer")
+	@FindBy(css = "#WikiaMainContentContainer")
 	protected WebElement pageContentContainer;
-	@FindBy(css="#mw-content-text p")
+	@FindBy(css = "#mw-content-text p")
 	protected WebElement articleContent;
-	@FindBy(css=".wikia-menu-button.contribute, .contribute-button")
+	@FindBy(css = ".wikia-menu-button.contribute, .contribute-button")
 	protected WebElement contributeDropdown;
-	@FindBy(css="#ca-history")
+	@FindBy(css = "#ca-history")
 	protected WebElement historyDropdown;
-	@FindBy(css=".WikiaMenuElement .createpage, ul .createpage")
+	@FindBy(css = ".WikiaMenuElement .createpage, ul .createpage")
 	protected WebElement addArticleInDropdown;
-	@FindBy(css="#wpCreatePageDialogTitle")
+	@FindBy(css = "#wpCreatePageDialogTitle")
 	protected WebElement articleTitleInputModal;
-	@FindBy(css="#CreatePageModalDialog .primary")
+	@FindBy(css = "#CreatePageModalDialog .primary")
 	protected WebElement submitModal;
-	@FindBy(css="#ca-edit")
+	@FindBy(css = "#ca-edit")
 	protected WebElement editUsingClassicEditor;
-	@FindBy(css="#article-comm")
+	@FindBy(css = "#article-comm")
 	protected WebElement commentArea;
-	@FindBy(css="#article-comm-form .loading-indicator")
+	@FindBy(css = "#article-comm-form .loading-indicator")
 	protected WebElement commentAreaLoadingIndicator;
-	@FindBy(css="#article-comm-submit")
+	@FindBy(css = "#article-comm-submit")
 	protected WebElement commentSubmitButton;
-	@FindBys(@FindBy(css=".speech-bubble-message"))
+	@FindBys(@FindBy(css = ".speech-bubble-message"))
 	protected List<WebElement> articleComments;
-	@FindBys(@FindBy(css=".sub-comments .speech-bubble-message"))
+	@FindBys(@FindBy(css = ".sub-comments .speech-bubble-message"))
 	protected List<WebElement> commentReplies;
-	@FindBys(@FindBy(css="#WikiaPageHeader .WikiaMenuElement li"))
+	@FindBys(@FindBy(css = "#WikiaPageHeader .WikiaMenuElement li"))
 	protected List<WebElement> editDropdownElements;
-	@FindBy(css="#WikiaArticleComments")
+	@FindBy(css = "#WikiaArticleComments")
 	protected WebElement allCommentsArea;
-	@FindBy(css="blockquote .article-comments .actionButton[name='wpArticleSubmit']")
+	@FindBy(css = "blockquote .article-comments .actionButton[name='wpArticleSubmit']")
 	protected WebElement editCommentSubmitButton;
-	@FindBy(css=".article-comm-edit-box .loading-indicator")
+	@FindBy(css = ".article-comm-edit-box .loading-indicator")
 	protected WebElement replyCommentLoadingIndicator;
-	@FindBy(css="blockquote .article-comm-edit-box .actionButton[name='wpArticleSubmit']")
+	@FindBy(css = "blockquote .article-comm-edit-box .actionButton[name='wpArticleSubmit']")
 	protected WebElement replyCommentSubmitButton;
-	@FindBy(css=".WikiaArticle.article-comm-text")
+	@FindBy(css = ".WikiaArticle.article-comm-text")
 	protected List<WebElement> commentTextList;
-	@FindBy(css="#mw-content-text .thumbimage")
+	@FindBy(css = "#mw-content-text .thumbimage")
 	protected WebElement imageArticle;
-	@FindBy(css="#mw-content-text .wikia-gallery")
+	@FindBy(css = "#mw-content-text .wikia-gallery")
 	protected WebElement galleryArticle;
-	@FindBy(css="#mw-content-text .wikia-slideshow")
+	@FindBy(css = "#mw-content-text .wikia-slideshow")
 	protected WebElement slideshowArticle;
-	@FindBy(css="#mw-content-text .wikiaPhotoGallery-slider-body")
+	@FindBy(css = "#mw-content-text .wikiaPhotoGallery-slider-body")
 	protected WebElement sliderArticle;
-	@FindBy(css="#toc")
+	@FindBy(css = "#toc")
 	protected WebElement tableOfContents;
-	@FindBy(css="#toc ol")
+	@FindBy(css = "#toc ol")
 	protected WebElement tableOfContentsOrderedList;
-	@FindBys(@FindBy(css="#toc ol a"))
+	@FindBys(@FindBy(css = "#toc ol a"))
 	protected List<WebElement> tableOfContentsSectionsList;
-	@FindBy(css="#togglelink")
+	@FindBy(css = "#togglelink")
 	protected WebElement tableOfContentsShowHideButton;
-	@FindBy(css="#mw-content-text .video-thumbnail")
+	@FindBy(css = "#mw-content-text .video-thumbnail")
 	protected WebElement videoThumbnail;
-	@FindBys(@FindBy(css="#mw-content-text .video-thumbnail"))
+	@FindBys(@FindBy(css = "#mw-content-text .video-thumbnail"))
 	protected List<WebElement> videoThumbnailList;
-	@FindBy(css="#mw-content-text .article-thumb")
+	@FindBy(css = "#mw-content-text .article-thumb")
 	protected WebElement videoThumbnailWrapper;
-	@FindBy(css="#mw-content-text .inline-video")
+	@FindBy(css = "#mw-content-text .inline-video")
 	protected WebElement videoInline;
-	@FindBy(css=".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
+	@FindBy(css = ".wikiaVideoPlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement videoAddPlaceholder;
-	@FindBy(css=".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
+	@FindBy(css = ".wikiaImagePlaceholder #WikiaImagePlaceholderInner0")
 	private WebElement imageAddPlaceholder;
-	@FindBy(css="figcaption p")
+	@FindBy(css = "figcaption p")
 	private WebElement videoTitle;
-	@FindBy(css="a.details.sprite")
+	@FindBy(css = "a.details.sprite")
 	private WebElement videoDetailsButton;
-	@FindBy(css="#CategorySelectAdd")
+	@FindBy(css = "#CategorySelectAdd")
 	private WebElement addCategory;
-	@FindBy(css="#CategorySelectInput")
+	@FindBy(css = "#CategorySelectInput")
 	private WebElement addCategoryInput;
-	@FindBy(css="#CategorySelectSave")
+	@FindBy(css = "#CategorySelectSave")
 	private WebElement saveCategory;
-	@FindBy(css="#articleCategories .category.normal .name a")
+	@FindBy(css = "#articleCategories .category.normal .name a")
 	private List<WebElement> categoryList;
-	@FindBy(css=".ui-autocomplete")
+	@FindBy(css = ".ui-autocomplete")
 	private WebElement categorySuggestionsList;
-	@FindBy(css=".category.new")
+	@FindBy(css = ".category.new")
 	private WebElement categoryNew;
-	@FindBy(css="button.save:not([disabled])")
+	@FindBy(css = "button.save:not([disabled])")
 	private WebElement categorySaveButtonEnabled;
-	@FindBy(css="button.save[disabled]")
+	@FindBy(css = "button.save[disabled]")
 	private WebElement categorySaveButtonDisabled;
 	@FindBy(css = ".WikiaPageHeader h1")
 	private WebElement articleTitle;
-	@FindBy(css="#WikiWelcomeModal .close")
+	@FindBy(css = "#WikiWelcomeModal .close")
 	private WebElement welcomeLightBoxCloseButton;
-	@FindBy(css="#WikiWelcomeModal h3")
+	@FindBy(css = "#WikiWelcomeModal h3")
 	private WebElement welcomeLightBoxTitle;
-	@FindBy(css="li.ui-menu-item > a")
+	@FindBy(css = "li.ui-menu-item > a")
 	private List<WebElement> categorySuggestionsListItems;
-	@FindBy(css=".article-table")
+	@FindBy(css = ".article-table")
 	private WebElement table;
-	@FindBy(css=".WikiHeader > h1 > a")
+	@FindBy(css = ".WikiHeader > h1 > a")
 	private WebElement wikiNameHeader;
-	@FindBy(css="#mw-content-text img.thumbimage")
+	@FindBy(css = "#mw-content-text img.thumbimage")
 	private WebElement thumbnailImageArticle;
-	@FindBy(css=".wikia-menu-button")
+	@FindBy(css = ".wikia-menu-button")
 	private WebElement articleEditButton;
-	@FindBy(css="#WikiaPageHeader .chevron")
+	@FindBy(css = "#WikiaPageHeader .chevron")
 	private WebElement openEditDropdown;
-	@FindBy(css=".view")
+	@FindBy(css = ".view")
 	private WebElement viewEmbedMapButton;
 
 	final String editButtonSelector = ".article-comm-edit";
@@ -158,11 +158,11 @@ public class ArticlePageObject extends WikiBasePageObject {
 	final Integer minInlineVideoSize = 400;
 
 	String editCategorySelector =
-			"li[data-name='%categoryName%'] .toolbar .editCategory";
+		"li[data-name='%categoryName%'] .toolbar .editCategory";
 	String removeCategorySelector =
-			"li[data-name='%categoryName%'] .toolbar .removeCategory";
+		"li[data-name='%categoryName%'] .toolbar .removeCategory";
 	String videoInCommentsSelector =
-			".speech-bubble-message img[data-video-name*='%videoName%']";
+		".speech-bubble-message img[data-video-name*='%videoName%']";
 
 	public ArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -189,7 +189,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		List<WebElement> elements = articleContentContainer.findElements(format.getTag());
 		boolean isPresent = false;
 		for (WebElement elem : elements) {
-			if(elem.getText().contains(content)) {
+			if (elem.getText().contains(content)) {
 				isPresent = true;
 				break;
 			}
@@ -203,7 +203,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		List<WebElement> elements = articleContentContainer.findElements(style.getTag());
 		boolean isPresent = false;
 		for (WebElement elem : elements) {
-			if(elem.getText().equals(content)) {
+			if (elem.getText().equals(content)) {
 				isPresent = true;
 				break;
 			}
@@ -305,9 +305,9 @@ public class ArticlePageObject extends WikiBasePageObject {
 		WebElement mostRecentComment = articleComments.get(0);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
-				"arguments[0].querySelector(arguments[1]).click()",
-				mostRecentComment, deleteButtonSelector
-				);
+			"arguments[0].querySelector(arguments[1]).click()",
+			mostRecentComment, deleteButtonSelector
+		);
 		return new DeletePageObject(driver);
 	}
 
@@ -318,7 +318,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 			}
 		}
 		PageObjectLogging.log("verifyCommentDeleted", "comment " + comment
-				+ " was deleted", true);
+			+ " was deleted", true);
 	}
 
 	public String getFirstCommentText() {
@@ -362,7 +362,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public String getArticleName() {
 		String articleName = articleHeader.getText();
-		PageObjectLogging.log("getArticleName", "the name of the article is: "+articleName, true);
+		PageObjectLogging.log("getArticleName", "the name of the article is: " + articleName, true);
 		return articleName;
 	}
 
@@ -477,19 +477,19 @@ public class ArticlePageObject extends WikiBasePageObject {
 			By.xpath("./..")
 		).getAttribute("class");
 		String position;
-		switch(positions) {
-		case LEFT:
-			position = "left";
-			break;
-		case CENTER:
-			position = "none";
-			break;
-		case RIGHT:
-			position = "right";
-			break;
-		default:
-			position = "position is not provided";
-			break;
+		switch (positions) {
+			case LEFT:
+				position = "left";
+				break;
+			case CENTER:
+				position = "none";
+				break;
+			case RIGHT:
+				position = "right";
+				break;
+			default:
+				position = "position is not provided";
+				break;
 		}
 		Assertion.assertStringContains(position, videoClass);
 	}
@@ -498,7 +498,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		int videoWidth = Integer.parseInt(thumbnail.findElement(
 			By.tagName("img")
 		).getAttribute("width"));
-		PageObjectLogging.log("getVideoWidth", "Video width is "+videoWidth, true);
+		PageObjectLogging.log("getVideoWidth", "Video width is " + videoWidth, true);
 		return videoWidth;
 	}
 
@@ -527,13 +527,13 @@ public class ArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyVideoName", "video has expected name", true);
 	}
 
-	public VetAddVideoComponentObject clickAddVideoPlaceholder(){
+	public VetAddVideoComponentObject clickAddVideoPlaceholder() {
 		waitForElementByElement(videoAddPlaceholder);
 		scrollAndClick(videoAddPlaceholder);
 		return new VetAddVideoComponentObject(driver);
 	}
 
-	public PhotoAddComponentObject clickAddImagePlaceholder(){
+	public PhotoAddComponentObject clickAddImagePlaceholder() {
 		waitForElementByElement(imageAddPlaceholder);
 		scrollAndClick(imageAddPlaceholder);
 		return new PhotoAddComponentObject(driver);
@@ -664,7 +664,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	 * @param numberOfTheSection - TOC link counting from the top
 	 */
 	public void verifyTOCsectionLinkWorks(int numberOfTheSection) {
-		WebElement sectionTOClink = tableOfContentsSectionsList.get(numberOfTheSection-1);
+		WebElement sectionTOClink = tableOfContentsSectionsList.get(numberOfTheSection - 1);
 		String sectionID = sectionTOClink.getAttribute("href").substring(getCurrentUrl().length());
 		WebElement sectionOnArticle = driver.findElement(By.cssSelector(sectionID));
 		int sectionYbefore = sectionOnArticle.getLocation().getY();
@@ -673,7 +673,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		Assertion.assertNotEquals(sectionYbefore, sectionYafter);
 		// assume that if section is less than 5px from top, it is scrolled up properly
 		Assertion.assertTrue(sectionYafter < 5);
-		PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section "+sectionID+" was scrolled up", true);
+		PageObjectLogging.log("verifyTOCsectionLinkWorks", "choosen section " + sectionID + " was scrolled up", true);
 	}
 
 	public void verifyWikiTitleOnCongratualtionsLightBox(String wikiName) {
@@ -722,7 +722,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public WebElement getThumbnailVideoInline() {
 		for (WebElement thumbnail : videoThumbnailList) {
 			Integer width = getVideoWidth(thumbnail);
-			if(width > minInlineVideoSize) {
+			if (width > minInlineVideoSize) {
 				PageObjectLogging.log("getThumbnailVideoInline", "Video thumbnail found", true);
 				return thumbnail;
 			}
@@ -764,7 +764,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		return new SourceEditModePageObject(driver);
 	}
 
-	public EmbedMapComponentObject clickViewEmbedMap(){
+	public EmbedMapComponentObject clickViewEmbedMap() {
 		waitForElementVisibleByElement(viewEmbedMapButton);
 		scrollToElement(viewEmbedMapButton);
 		viewEmbedMapButton.click();

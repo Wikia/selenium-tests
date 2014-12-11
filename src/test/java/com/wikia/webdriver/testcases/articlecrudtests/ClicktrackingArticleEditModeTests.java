@@ -14,12 +14,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 
-public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
+public class ClicktrackingArticleEditModeTests extends NewTestTemplate {
 
 	@Test(groups = {
-			"ClickTracking",
-			"ClickTrackingArticleEditModeTests",
-			"ClickTrackingArticleEditMode_001"
+		"ClickTracking",
+		"ClickTrackingArticleEditModeTests",
+		"ClickTrackingArticleEditMode_001"
 	})
 	public void ClickTrackingArticleEditMode_001_verifyPreviewModalEvents() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -30,7 +30,7 @@ public class ClicktrackingArticleEditModeTests extends NewTestTemplate{
 		visualEditMode.previewArticle();
 
 		List<JsonObject> expectedEvents = Arrays.asList(
-				EventsArticleEditMode.previewEvent
+			EventsArticleEditMode.previewEvent
 		);
 		visualEditMode.compareTrackedEventsTo(expectedEvents);
 	}

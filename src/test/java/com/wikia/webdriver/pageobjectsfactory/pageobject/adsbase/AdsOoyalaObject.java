@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @ownership AdEngineering
  */
 public class AdsOoyalaObject extends AdsBaseObject {
-	@FindBy(css="object[data^='http://player.ooyala.com/player.swf']")
+	@FindBy(css = "object[data^='http://player.ooyala.com/player.swf']")
 	private WebElement lightbox;
 
 	public AdsOoyalaObject(WebDriver driver, String page) {

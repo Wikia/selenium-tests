@@ -17,50 +17,50 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
  * @author Karol 'kkarolk' Kujawiak
  */
 public class HubBasePageObject extends WikiBasePageObject {
-	@FindBy(css="#suggestArticleDialogModal a")
+	@FindBy(css = "#suggestArticleDialogModal a")
 	private WebElement modalWrapper_X_CloseButton;
-	@FindBy(css="#suggestArticleDialogModal button.secondary")
+	@FindBy(css = "#suggestArticleDialogModal button.secondary")
 	private WebElement modalWrapper_Cancel_CloseButton;
-	@FindBy(css="button[id='suggestArticle']")
+	@FindBy(css = "button[id='suggestArticle']")
 	private WebElement getPromotedButton;
-	@FindBy(css="#suggestArticleDialogModal")
+	@FindBy(css = "#suggestArticleDialogModal")
 	private WebElement suggestVideoOrArticleModal;
-	@FindBy(css="#suggestArticleDialogModal h3")
+	@FindBy(css = "#suggestArticleDialogModal h3")
 	private WebElement suggestVideoOrArticleModalTopic;
-	@FindBy(css="#suggestArticleDialogModal input")
+	@FindBy(css = "#suggestArticleDialogModal input")
 	private WebElement suggestArticleWhatInput;
-	@FindBy(css="#suggestArticleDialogModal textarea")
+	@FindBy(css = "#suggestArticleDialogModal textarea")
 	private WebElement suggestArticleWhyCooliInput;
-	@FindBy(css="#suggestArticleDialogModal button.primary")
+	@FindBy(css = "#suggestArticleDialogModal button.primary")
 	private WebElement submitButton;
-	@FindBy(css="ul.wikia-mosaic-thumb-region img")
+	@FindBy(css = "ul.wikia-mosaic-thumb-region img")
 	List<WebElement> mosaicSliderThumbRegionImages;
-	@FindBy(css="ul.wikia-mosaic-thumb-region img")
+	@FindBy(css = "ul.wikia-mosaic-thumb-region img")
 	List<WebElement> fromCommunityImage;
-	@FindBy(css="ul.wikiahubs-ftc-list div.wikiahubs-ftc-title a")
+	@FindBy(css = "ul.wikiahubs-ftc-list div.wikiahubs-ftc-title a")
 	List<WebElement> fromCommunityHeadlines;
-	@FindBy(css="div.wikiahubs-ftc-subtitle a")
+	@FindBy(css = "div.wikiahubs-ftc-subtitle a")
 	List<WebElement> fromCommunityWikinameAndUsernameFields;
-	@FindBy(css="ul.wikiahubs-ftc-list div.wikiahubs-ftc-creative")
+	@FindBy(css = "ul.wikiahubs-ftc-list div.wikiahubs-ftc-creative")
 	List<WebElement> fromCommunityQuatations;
 
-	@FindBy(css="#WikiHeader h1 img")
+	@FindBy(css = "#WikiHeader h1 img")
 	private WebElement wordmarkImage;
-	@FindBy(css="li.topNav.Video_Games a")
+	@FindBy(css = "li.topNav.Video_Games a")
 	private WebElement VideoGamesTopNavLink;
-	@FindBy(css="li.topNav.Entertainment a")
+	@FindBy(css = "li.topNav.Entertainment a")
 	private WebElement EntertainmentTopNavLink;
-	@FindBy(css="li.topNav.Lifestyle a")
+	@FindBy(css = "li.topNav.Lifestyle a")
 	private WebElement LifestyleTopNavLink;
-	@FindBy(css=".wikiabar-button[href$='Video_Games']")
+	@FindBy(css = ".wikiabar-button[href$='Video_Games']")
 	private WebElement VideoGamesWikiaBarLink;
-	@FindBy(css=".wikiabar-button[href$='Entertainment']")
+	@FindBy(css = ".wikiabar-button[href$='Entertainment']")
 	private WebElement EntertainmentWikiaBarLink;
-	@FindBy(css=".wikiabar-button[href$='Lifestyle']")
+	@FindBy(css = ".wikiabar-button[href$='Lifestyle']")
 	private WebElement LifestyleWikiaBarLink;
 
 	private String mosaicSliderLargeImageDescriptionString =
-			"div.wikia-mosaic-slider-description[style*='1'] span.image-description b";
+		"div.wikia-mosaic-slider-description[style*='1'] span.image-description b";
 
 	public HubBasePageObject(WebDriver driver) {
 		super(driver);
@@ -76,7 +76,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 	/**
 	 * Hover Over Image number 'n'on Mosaic Slider
 	 *
-	 * @param  n number of the image n={1,2,3,4,5}
+	 * @param n number of the image n={1,2,3,4,5}
 	 */
 	public void mosaicSliderHoverOverImage(int n) {
 		if (n > 4) {
@@ -96,7 +96,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 	/**
 	 * Verify that Large Image has changed (by verifying description change), and get the current description
 	 *
-	 * @param  n number of the image n={1,2,3,4,5}
+	 * @param n number of the image n={1,2,3,4,5}
 	 */
 	public void mosaicSliderVerifyLargeImageDescriptionDifferent(String previousLargeImageDescription) {
 		Assertion.assertNotEquals(previousLargeImageDescription, mosaicSliderGetCurrentLargeImageDescription());
@@ -119,9 +119,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void verifySuggestAVideoOrArticleModalAppeared() {
 		waitForElementByElement(suggestVideoOrArticleModal);
 		PageObjectLogging.log(
-				"verifySuggestAVideoOrArticleModalAppeared",
-				"Verify that suggest a video modal appeared",
-				true
+			"verifySuggestAVideoOrArticleModalAppeared",
+			"Verify that suggest a video modal appeared",
+			true
 		);
 	}
 
@@ -131,9 +131,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void verifySuggestAVideoOrArticleModalTopic() {
 		waitForElementByElement(suggestVideoOrArticleModalTopic);
 		PageObjectLogging.log(
-				"verifySuggestAVideoOrArticleModalTopic",
-				"Verify that suggest a video or an article",
-				true
+			"verifySuggestAVideoOrArticleModalTopic",
+			"Verify that suggest a video or an article",
+			true
 		);
 	}
 
@@ -143,9 +143,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void closeSuggestAVideoOrArticleByXButton() {
 		closeModalWrapper();
 		PageObjectLogging.log(
-				"closeSuggestAVideoOrArticleByXButton",
-				"Click on [x] to close suggest a video or article modal",
-				true
+			"closeSuggestAVideoOrArticleByXButton",
+			"Click on [x] to close suggest a video or article modal",
+			true
 		);
 	}
 
@@ -155,9 +155,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void closeSuggestAVideoOrArticleCancelButton() {
 		scrollAndClick(modalWrapper_Cancel_CloseButton);
 		PageObjectLogging.log(
-				"closeSuggestAVideoOrArticleCancelButton",
-				"Click on Cancel to close suggest a video or article modal",
-				true
+			"closeSuggestAVideoOrArticleCancelButton",
+			"Click on Cancel to close suggest a video or article modal",
+			true
 		);
 	}
 
@@ -175,9 +175,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 		waitForElementByElement(submitButton);
 		waitForElementNotClickableByElement(submitButton);
 		PageObjectLogging.log(
-				"verifySuggestVideoOrArticleButtonNotClickable",
-				"Verify that 'Suggest Video' or 'Article' submit button button is disabled",
-				true
+			"verifySuggestVideoOrArticleButtonNotClickable",
+			"Verify that 'Suggest Video' or 'Article' submit button button is disabled",
+			true
 		);
 	}
 
@@ -187,9 +187,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void verifySuggestVideoOrArticleButtonClickable() {
 		waitForElementClickableByElement(submitButton);
 		PageObjectLogging.log(
-				"verifySuggestVideoOrArticleButtonClickable",
-				"Verify that Suggest Video or Article submit button is enabled",
-				true
+			"verifySuggestVideoOrArticleButtonClickable",
+			"Verify that Suggest Video or Article submit button is enabled",
+			true
 		);
 	}
 
@@ -199,9 +199,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void suggestArticleTypeIntoWhatVideoField(String text) {
 		suggestArticleWhatInput.sendKeys(text);
 		PageObjectLogging.log(
-				"suggestArticleTypeIntoWhatVideoField",
-				"Type '"+text+"' into 'What Video' field on 'Suggest Article Modal'",
-				true
+			"suggestArticleTypeIntoWhatVideoField",
+			"Type '" + text + "' into 'What Video' field on 'Suggest Article Modal'",
+			true
 		);
 	}
 
@@ -211,9 +211,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 	public void suggestArticleTypeIntoWhyCoolField(String text) {
 		suggestArticleWhyCooliInput.sendKeys(text);
 		PageObjectLogging.log(
-				"suggestArticleTypeIntoWhyCoolField",
-				"Type '"+text+"' into 'Why cool' field on 'Suggest Video Modal'",
-				true
+			"suggestArticleTypeIntoWhyCoolField",
+			"Type '" + text + "' into 'Why cool' field on 'Suggest Video Modal'",
+			true
 		);
 	}
 
@@ -226,9 +226,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 			waitForElementByElement(element);
 		}
 		PageObjectLogging.log(
-				"verifyFromModuleHasImages",
-				"Verify that from the community module has images",
-				true
+			"verifyFromModuleHasImages",
+			"Verify that from the community module has images",
+			true
 		);
 	}
 
@@ -241,9 +241,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 			waitForElementByElement(element);
 		}
 		PageObjectLogging.log(
-				"verifyFromModuleHasHeadline",
-				"Verify that from the community module has headline",
-				true
+			"verifyFromModuleHasHeadline",
+			"Verify that from the community module has headline",
+			true
 		);
 	}
 
@@ -256,9 +256,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 			waitForElementByElement(element);
 		}
 		PageObjectLogging.log(
-				"verifyFromModuleHasUserAndWikiField",
-				"Verify that from the community module has username field",
-				true
+			"verifyFromModuleHasUserAndWikiField",
+			"Verify that from the community module has username field",
+			true
 		);
 	}
 
@@ -271,18 +271,18 @@ public class HubBasePageObject extends WikiBasePageObject {
 			waitForElementByElement(element);
 		}
 		PageObjectLogging.log(
-				"verifyFromModuleHasQuatation",
-				"Verify that from the community module has a quatation",
-				true
+			"verifyFromModuleHasQuatation",
+			"Verify that from the community module has a quatation",
+			true
 		);
 	}
 
 	public void verifySuggestAVideoOrArticleModalDisappeared() {
 		waitForElementNotVisibleByElement(suggestVideoOrArticleModal);
 		PageObjectLogging.log(
-				"verifySuggestAVideoOrArticleModalDisappeared",
-				"Verify that video 'suggest video or article' modal disppeared",
-				true
+			"verifySuggestAVideoOrArticleModalDisappeared",
+			"Verify that video 'suggest video or article' modal disppeared",
+			true
 		);
 	}
 
@@ -304,9 +304,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 		element.click();
 
 		PageObjectLogging.log(
-				"clickWikiaBarLink",
-				"Click hub link in WikiaBar",
-				true
+			"clickWikiaBarLink",
+			"Click hub link in WikiaBar",
+			true
 		);
 	}
 
@@ -328,9 +328,9 @@ public class HubBasePageObject extends WikiBasePageObject {
 		Assert.assertEquals(header, wordmarkImage.getAttribute("alt"));
 
 		PageObjectLogging.log(
-				"verifyHubTitle",
-				"Verify title",
-				true
+			"verifyHubTitle",
+			"Verify title",
+			true
 		);
 	}
 }

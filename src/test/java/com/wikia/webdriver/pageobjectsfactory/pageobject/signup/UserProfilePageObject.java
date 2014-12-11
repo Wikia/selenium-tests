@@ -16,17 +16,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageO
 
 public class UserProfilePageObject extends WikiBasePageObject {
 
-	@FindBy(css="li[data-id='blog'] a")
+	@FindBy(css = "li[data-id='blog'] a")
 	private WebElement blogTab;
-	@FindBy(css="a[data-id='createblogpost']")
+	@FindBy(css = "a[data-id='createblogpost']")
 	private WebElement createBlogPostButton;
-	@FindBy(css=".WikiaBlogListingPost h1>a")
+	@FindBy(css = ".WikiaBlogListingPost h1>a")
 	private List<WebElement> blogPostList;
-	@FindBy(css=".masthead-avatar")
+	@FindBy(css = ".masthead-avatar")
 	private WebElement avatarWrapper;
-	@FindBy(css="#userAvatarEdit")
+	@FindBy(css = "#userAvatarEdit")
 	private WebElement avatarEditButton;
-	@FindBy(css="#UserAvatarRemove")
+	@FindBy(css = "#UserAvatarRemove")
 	private WebElement avatarRemoveButton;
 
 	private By image = By.cssSelector("img");
@@ -48,8 +48,8 @@ public class UserProfilePageObject extends WikiBasePageObject {
 		String blogURL = blogPostList.get(blogNumber).getAttribute("href");
 		getUrl(blogURL);
 		PageObjectLogging.log("openBlogPage",
-				"blog post " + blogURL + " opened",
-				true);
+			"blog post " + blogURL + " opened",
+			true);
 		return new BlogPageObject(driver);
 	}
 
@@ -57,7 +57,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 		for (int i = 0; i < blogPostList.size(); i++) {
 			BlogPageObject blogPage = openBlogPage(i);
 			String pageContent = blogPage.getAtricleTextRaw().toLowerCase();
-			if (!(pageContent.contains("deleted")||pageContent.contains("redirected"))) {
+			if (!(pageContent.contains("deleted") || pageContent.contains("redirected"))) {
 				PageObjectLogging.log("openFirstPost", "valid post found on " + i + " position", true);
 				break;
 			}

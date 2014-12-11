@@ -52,14 +52,14 @@ public class VenusGlobalNavPageObject {
 		openHubsMenu();
 
 		final WebElement destinationHub = hubsMenu.findElement(By
-				.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
+			.xpath(String.format(HUBS_XPATH_FORMAT, hub.getLabelText())));
 
 		new Actions(driver)
-				.moveToElement(destinationHub).
-				perform();
+			.moveToElement(destinationHub).
+			perform();
 
 		new WebDriverWait(driver, 5, 150)
-				.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
+			.until(CommonExpectedConditions.valueToBePresentInElementsAttribute(destinationHub, "class", "active"));
 
 		return destinationHub;
 	}
@@ -109,7 +109,7 @@ public class VenusGlobalNavPageObject {
 		if (!environment.equals("prod") && !environment.contains("dev")) {
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			wait.until(
-					CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
+				CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
 			);
 		}
 
@@ -128,7 +128,7 @@ public class VenusGlobalNavPageObject {
 	public boolean isLocalSearchDisabled() {
 		return
 			!ElementStateHelper.isElementVisible(searchSelect, driver) &&
-			ElementStateHelper.isElementVisible(inlineSearch, driver);
+				ElementStateHelper.isElementVisible(inlineSearch, driver);
 	}
 
 	public enum Hub {

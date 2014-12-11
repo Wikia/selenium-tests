@@ -19,7 +19,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-		groups={"ArticleCRUDUser", "ArticleCRUDUser_001"}
+		groups = {"ArticleCRUDUser", "ArticleCRUDUser_001"}
 	)
 	public void ArticleCRUDUser_001_specialPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -29,13 +29,13 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + specialCreatePage.getTimeStamp();
 		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
 
 	@Test(
-		groups={"ArticleCRUDUser", "ArticleCRUDUser_002"}
+		groups = {"ArticleCRUDUser", "ArticleCRUDUser_002"}
 	)
 	public void ArticleCRUDUser_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -44,7 +44,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -77,7 +77,7 @@ public class ArticleCRUDUserTests extends NewTestTemplate {
 		articleTitle = articleTitle + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}

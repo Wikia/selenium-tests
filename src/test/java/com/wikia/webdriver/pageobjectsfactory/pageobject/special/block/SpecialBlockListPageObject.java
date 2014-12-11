@@ -12,51 +12,52 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-public class SpecialBlockListPageObject extends WikiBasePageObject{
+public class SpecialBlockListPageObject extends WikiBasePageObject {
 
 	public SpecialBlockListPageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css="#mw-input-wpTarget")
+	@FindBy(css = "#mw-input-wpTarget")
 	private WebElement userNameField;
-	@FindBy(css="input.mw-htmlform-submit")
+	@FindBy(css = "input.mw-htmlform-submit")
 	private WebElement searchButton;
-	@FindBy(xpath="//p[contains(text(), 'The requested IP address or username is not blocked.')]")
+	@FindBy(xpath = "//p[contains(text(), 'The requested IP address or username is not blocked.')]")
 	private WebElement userUnblockedMessage;
-	@FindBy(css=".mw-blocklist td:nth-child(3)")
+	@FindBy(css = ".mw-blocklist td:nth-child(3)")
 	private WebElement expirationDate;
 
-	private void typeInUserName(String userName){
+	private void typeInUserName(String userName) {
 		waitForElementByElement(userNameField);
 		userNameField.sendKeys(userName);
 		PageObjectLogging.log("Special:BlockList typeInUserName", userName + " typed in username field", true);
 	}
 
-	private void clickSearchButton(){
+	private void clickSearchButton() {
 		waitForElementByElement(searchButton);
 		scrollAndClick(searchButton);
 		PageObjectLogging.log("Special:BlockList clickSearchButton", "search button clicked", true);
 	}
 
-	public void searchForUser(String userName){
+	public void searchForUser(String userName) {
 		typeInUserName(userName);
 		clickSearchButton();
 	}
 
-	public void verifyUserUnblocked(){
+	public void verifyUserUnblocked() {
 		waitForElementByElement(userUnblockedMessage);
 		PageObjectLogging.log("Special:BlockList verifyUSerUnblocked", "verified that user is not on blocked users list", true, driver);
 	}
 
-	public void verifyUserBlocked(String userName){
-		waitForElementByCss("table td.TablePager_col_ipb_target a[href='/wiki/User:"+userName+"']");
+	public void verifyUserBlocked(String userName) {
+		waitForElementByCss("table td.TablePager_col_ipb_target a[href='/wiki/User:" + userName + "']");
 		PageObjectLogging.log("Special:BlockList verifyUSerUnblocked", "verified that user is on blocked users list", true, driver);
 	}
 
 	/**
 	 * this method checks if specified user is currently blocked
+	 *
 	 * @param username user to be checked
 	 * @return boolean value with the answer for the question
 	 */
@@ -68,17 +69,14 @@ public class SpecialBlockListPageObject extends WikiBasePageObject{
 		}
 		SimpleDateFormat blockListDateFormat = new SimpleDateFormat("HH:mm, MMMM dd, yyyy");
 		String expirationDateText = expirationDate.getText();
-        try
-        {
-            Date expirationDate = blockListDateFormat.parse(expirationDateText);
-            Date currentDate = new Date();
-            isBlocked = currentDate.before(expirationDate);
-        }
-        catch (ParseException ex)
-        {
-        	throw new RuntimeException("Can't parse expirationDateText: "+expirationDateText);
-        }
-        PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked?" blocked":"n't blocked"), true);
-        return isBlocked;
+		try {
+			Date expirationDate = blockListDateFormat.parse(expirationDateText);
+			Date currentDate = new Date();
+			isBlocked = currentDate.before(expirationDate);
+		} catch (ParseException ex) {
+			throw new RuntimeException("Can't parse expirationDateText: " + expirationDateText);
+		}
+		PageObjectLogging.log("isUserBlocked", "user is" + (isBlocked ? " blocked" : "n't blocked"), true);
+		return isBlocked;
 	}
 }

@@ -14,8 +14,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 /**
  * @author Robert 'rochan' Chan
- *
- * VE-888 Verify VE is able to perform multiple publish on the same article in one logged in session
+ *         <p/>
+ *         VE-888 Verify VE is able to perform multiple publish on the same article in one logged in session
  */
 
 public class VisualEditorMultiplePublishTests extends NewTestTemplateBeforeClass {

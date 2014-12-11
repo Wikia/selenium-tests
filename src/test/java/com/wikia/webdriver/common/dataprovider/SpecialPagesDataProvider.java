@@ -9,7 +9,7 @@ public class SpecialPagesDataProvider {
 
 	@DataProvider
 	public static final Object[][] getSpecialPagesForAnons() {
-		return new Object[][] {
+		return new Object[][]{
 			{"Special:BrokenRedirects", "Broken redirects"},
 			{"Special:DeadendPages", "Dead-end pages"},
 			{"Special:DoubleRedirects", "Double redirects"},
@@ -24,7 +24,7 @@ public class SpecialPagesDataProvider {
 			{"Special:UncategorizedCategories", "Uncategorized categories"},
 			{"Special:UncategorizedPages", "Uncategorized pages"},
 			{"Special:UncategorizedFiles", "Uncategorized photos"},
-			{"Special:UncategorizedTemplates","Uncategorized templates"},
+			{"Special:UncategorizedTemplates", "Uncategorized templates"},
 			{"Special:UnusedCategories", "Unused categories"},
 			{"Special:UnusedFiles", "Unused photos"},
 			{"Special:UnusedTemplates", "Unused templates"},
@@ -37,7 +37,7 @@ public class SpecialPagesDataProvider {
 			{"Special:Categories", "Categories list"},
 			{"Special:CategoryTree", "Category tree"},
 			{"Special:Disambiguations", "Pages linking to disambiguation pages"},
-			{"Special:ListRedirects","Redirects list"}
+			{"Special:ListRedirects", "Redirects list"}
 		};
 	}
 }

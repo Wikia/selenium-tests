@@ -51,6 +51,7 @@ public class CssChromeTests extends NewTestTemplate {
 		String cssContent = specialCss.getWikiaCssContent();
 		Assertion.assertEquals(currentTimestamp, cssContent);
 	}
+
 	/**
 	 * http://wikia-inc.atlassian.net/browse/DAR-733
 	 */

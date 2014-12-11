@@ -21,14 +21,14 @@ public class UserAndRights extends NewTestTemplate {
 	public void usersAndRights001_Block() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		SpecialBlockPageObject block  = base.openSpecialBlockPage(wikiURL);
+		SpecialBlockPageObject block = base.openSpecialBlockPage(wikiURL);
 		block.deselectAllSelections();
 		block.typeInUserName(credentials.userNameBlocked);
 		block.selectExpiration("2 hours");
 		block.clickBlockButton();
 	}
 
-	@Test(groups = {"usersAndRights002", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
+	@Test(groups = {"usersAndRights002", "UsersAndRights"}, dependsOnMethods = {"usersAndRights001_Block"})
 	public void usersAndRights002_VerifyBlockedUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
@@ -36,7 +36,7 @@ public class UserAndRights extends NewTestTemplate {
 		edit.verifyBlockedUserMessage();
 	}
 
-	@Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
+	@Test(groups = {"usersAndRights003", "UsersAndRights"}, dependsOnMethods = {"usersAndRights001_Block"})
 	public void usersAndRights003_BlockListBlocked() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -45,7 +45,7 @@ public class UserAndRights extends NewTestTemplate {
 		list.verifyUserBlocked(credentials.userNameBlocked);
 	}
 
-	@Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods={"usersAndRights001_Block"})
+	@Test(groups = {"usersAndRights004", "UsersAndRights"}, dependsOnMethods = {"usersAndRights001_Block"})
 	public void usersAndRights004_Unblock() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -54,7 +54,7 @@ public class UserAndRights extends NewTestTemplate {
 		unblock.verifyUnblockMessage(credentials.userNameBlocked);
 	}
 
-	@Test(groups = {"usersAndRights005", "UsersAndRights"}, dependsOnMethods={"usersAndRights004_Unblock"})
+	@Test(groups = {"usersAndRights005", "UsersAndRights"}, dependsOnMethods = {"usersAndRights004_Unblock"})
 	public void usersAndRights005_VerifyUnblockedUser() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
@@ -64,7 +64,7 @@ public class UserAndRights extends NewTestTemplate {
 		article.verifyArticleTitle(title);
 	}
 
-	@Test(groups = {"usersAndRights006", "UsersAndRights"}, dependsOnMethods={"usersAndRights004_Unblock"})
+	@Test(groups = {"usersAndRights006", "UsersAndRights"}, dependsOnMethods = {"usersAndRights004_Unblock"})
 	public void usersAndRights006_BlockListUnblocked() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameBlocked, credentials.passwordBlocked, wikiURL);
@@ -74,7 +74,7 @@ public class UserAndRights extends NewTestTemplate {
 	}
 
 	@Test(groups = {"usersAndRights007", "UsersAndRights"})
-	public void usersAndRights007_Contributions(){
+	public void usersAndRights007_Contributions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		String pageContent = base.getTimeStamp();

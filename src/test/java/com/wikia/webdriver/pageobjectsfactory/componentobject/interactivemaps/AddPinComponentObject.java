@@ -16,7 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author Łukasz Nowak (Dyktus)
- *
  */
 
 public class AddPinComponentObject extends BasePageObject {
@@ -169,9 +168,9 @@ public class AddPinComponentObject extends BasePageObject {
 	public void verifyAssociatedArticlePlaceholder() {
 		waitForElementByElement(associatedArticleField);
 		Assertion.assertEquals(
-				InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
-				associatedArticleField.getAttribute("placeholder"),
-				"Associated article place holder is not correct"
+			InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
+			associatedArticleField.getAttribute("placeholder"),
+			"Associated article place holder is not correct"
 		);
 	}
 }

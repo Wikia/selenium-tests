@@ -47,9 +47,9 @@ public class MobileDriverProvider {
 			default:
 				throw new WebDriverException(
 					"Unknown platform provided \n" +
-					"Available platforms:" +
-					"\n\t android" +
-					"\n\t ios"
+						"Available platforms:" +
+						"\n\t android" +
+						"\n\t ios"
 				);
 		}
 		return driver;
@@ -64,8 +64,8 @@ public class MobileDriverProvider {
 			);
 		} else if (platformVersion != null) {
 			chromeOptions.setExperimentalOption(
-					"androidDeviceSerial",
-					mobileDriversRegistry.getDeviceForAndroidVersion(platformVersion)
+				"androidDeviceSerial",
+				mobileDriversRegistry.getDeviceForAndroidVersion(platformVersion)
 			);
 		}
 		return new ChromeDriver(chromeOptions);

@@ -33,23 +33,23 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	private static long imageCounter;
 	private static String reportPath = "." + File.separator + "logs"
-			+ File.separator;
+		+ File.separator;
 	private static String screenDirPath = reportPath + "screenshots"
-			+ File.separator;
+		+ File.separator;
 	private static String screenPath = screenDirPath + "screenshot";
 	private static String logFileName = "log.html";
 	private static String logPath = reportPath + logFileName;
 
 	public static void log(String command, String description, boolean success,
-			WebDriver driver) {
+						   WebDriver driver) {
 		imageCounter += 1;
 		new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
 		CommonUtils.appendTextToFile(screenPath + imageCounter + ".html",
-				driver.getPageSource());
+			driver.getPageSource());
 		String className = success ? "success" : "error";
 		StringBuilder builder = new StringBuilder();
 		builder.append(
-				"<tr class=\"" + className + "\"><td>" + command
+			"<tr class=\"" + className + "\"><td>" + command
 				+ "</td><td>" + description
 				+ "</td><td> <br/><a href='screenshots/screenshot"
 				+ imageCounter
@@ -64,17 +64,17 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	}
 
 	private static void log(String command, String description, boolean success,
-			boolean ifLowLevel) {
+							boolean ifLowLevel) {
 		String className = success ? "success" : "error";
 		StringBuilder builder = new StringBuilder();
 		if (ifLowLevel) {
 			builder.append("<tr class=\"" + className + " lowLevelAction"
-					+ "\"><td>" + command + "</td><td>" + description
-					+ "</td><td> <br/> &nbsp;</td></tr>");
+				+ "\"><td>" + command + "</td><td>" + description
+				+ "</td><td> <br/> &nbsp;</td></tr>");
 		} else {
 			builder.append("<tr class=\"" + className + "\"><td>" + command
-					+ "</td><td>" + description
-					+ "</td><td> <br/> &nbsp;</td></tr>");
+				+ "</td><td>" + description
+				+ "</td><td> <br/> &nbsp;</td></tr>");
 		}
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 		logJSError(DriverProvider.getWebDriver());
@@ -88,7 +88,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public void afterNavigateTo(String url, WebDriver driver) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("<tr class=\"success\"><td>Navigate to</td><td>" + url
-				+ "</td><td> <br/> &nbsp;</td></tr>");
+			+ "</td><td> <br/> &nbsp;</td></tr>");
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 		logJSError(driver);
 	}
@@ -107,17 +107,17 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public void afterClickOn(WebElement element, WebDriver driver) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("<tr class=\"success lowLevelAction\"><td>click</td><td>" + lastFindBy
-				+ "</td><td> <br/> &nbsp;</td></tr>");
+			+ "</td><td> <br/> &nbsp;</td></tr>");
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
 
-	private static void logJSError(WebDriver driver){
-		if (Global.JS_ERROR_ENABLED){
+	private static void logJSError(WebDriver driver) {
+		if (Global.JS_ERROR_ENABLED) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
 			if (!error.isEmpty()) {
 				StringBuilder builder = new StringBuilder();
-				builder.append("<tr class=\"error\"><td>click</td><td>"+error+"</td><td> <br/> &nbsp;</td></tr>");
+				builder.append("<tr class=\"error\"><td>click</td><td>" + error + "</td><td> <br/> &nbsp;</td></tr>");
 				CommonUtils.appendTextToFile(logPath, builder.toString());
 			}
 		}
@@ -127,7 +127,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public void afterChangeValueOf(WebElement element, WebDriver driver) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("<tr class=\"success lowLevelAction\"><td>ChangeValueOfField</td><td>" + lastFindBy
-				+ "</td><td> <br/> &nbsp;</td></tr>");
+			+ "</td><td> <br/> &nbsp;</td></tr>");
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 	}
 
@@ -137,10 +137,10 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 		String testName = result.getName().toString();
 		String className = result.getTestClass().getName().toString();
 		builder.append(
-				"<table>" +
-				"<h1>Class: <em>" +className+ "." + testName + " </em></h1>" +
+			"<table>" +
+				"<h1>Class: <em>" + className + "." + testName + " </em></h1>" +
 				"<tr class=\"step\"><td>&nbsp</td><td><h1><em>" + testName + "</em></h1></td><td> <br/> &nbsp;</td></tr>"
-				);
+		);
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 		System.out.println(className + " " + testName);
 	}
@@ -149,7 +149,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	public void onTestSuccess(ITestResult result) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(
-				"<tr class=\"step\">" +
+			"<tr class=\"step\">" +
 				"<td>&nbsp</td><td>STOP LOGGING METHOD  " +
 				"<div style=\"text-align:center\">" +
 				"<a href=\"#toc\" style=\"color:blue\">" +
@@ -161,30 +161,30 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	@Override
 	public void onTestFailure(ITestResult result) {
 		driver = DriverProvider.getWebDriver();
-		if (driver == null){
+		if (driver == null) {
 			driver = NewDriverProvider.getWebDriver();
 		}
 		if (Global.LOG_ENABLED) {
 			try {
 				new Shooter().savePageScreenshot(screenPath + imageCounter, driver);
 				CommonUtils.appendTextToFile(screenPath + imageCounter
-						+ ".html", driver.getPageSource());
+					+ ".html", driver.getPageSource());
 			} catch (Exception e) {
 				log("onException",
-						"driver has no ability to catch screenshot or html source - driver may died",
-						false);
+					"driver has no ability to catch screenshot or html source - driver may died",
+					false);
 			}
 
 			String exception = result.getThrowable().toString() +
-					"\n" +ExceptionUtils.getStackTrace(result.getThrowable());
+				"\n" + ExceptionUtils.getStackTrace(result.getThrowable());
 
 			StringBuilder builder = new StringBuilder();
 			builder.append("<tr class=\"error\"><td>error</td><td>"
-					+ exception
-					+ "</td><td> <br/><a href='screenshots/screenshot"
-					+ imageCounter
-					+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
-					+ imageCounter + ".html'>HTML Source</a></td></tr>");
+				+ exception
+				+ "</td><td> <br/><a href='screenshots/screenshot"
+				+ imageCounter
+				+ ".png'>Screenshot</a><br/><a href='screenshots/screenshot"
+				+ imageCounter + ".html'>HTML Source</a></td></tr>");
 			CommonUtils.appendTextToFile(logPath, builder.toString());
 			imageCounter += 1;
 			logJSError(driver);
@@ -213,7 +213,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 		StringBuilder builder = new StringBuilder();
 		builder.append(
-				"<html><style>" +
+			"<html><style>" +
 				"table {margin:0 auto;}td:first-child {width:200px;}td:nth-child(2) {width:660px;}td:nth-child(3) " +
 				"{width:100px;}tr.success{color:black;background-color:#CCFFCC;}" +
 				"tr.error{color:black;background-color:#FFCCCC;}" +
@@ -224,19 +224,18 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 				"<p>Date: " + dateFormat.format(date) + " UTC</p>" +
 				"<p>Browser: " + Global.BROWSER + "</p>" +
 				"<p>OS: " + System.getProperty("os.name") + "</p>" +
-				"<p>Testing environment: "+ Global.DOMAIN+"</p>" +
-				"<p>Testing environment: "+ Global.LIVE_DOMAIN+"</p>" +
-				"<p>Tested version: "+ Global.WIKI_VERSION+"</p>" +
+				"<p>Testing environment: " + Global.DOMAIN + "</p>" +
+				"<p>Testing environment: " + Global.LIVE_DOMAIN + "</p>" +
+				"<p>Tested version: " + Global.WIKI_VERSION + "</p>" +
 				"<div id='toc'></div>"
-				);
+		);
 		CommonUtils.appendTextToFile(logPath, builder.toString());
 		appendShowHideButtons();
-		try{
+		try {
 			FileInputStream input = new FileInputStream("./src/test/resources/script.txt");
 			String content = IOUtils.toString(input);
 			CommonUtils.appendTextToFile(logPath, content);
-		}
-		catch(IOException e){
+		} catch (IOException e) {
 			System.out.println("no script.txt file available");
 		}
 	}

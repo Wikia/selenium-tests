@@ -12,14 +12,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumHi
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject.ForumThreadPageObject;
 
-public class ForumThreadTests extends NewTestTemplate{
+public class ForumThreadTests extends NewTestTemplate {
 
 	private String title;
 	private String message;
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups= {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"} )
-	public void ForumThreadTests_001_replyToThread(){
+	@Test(groups = {"ForumThreadTests_001", "ForumThreadTests", "Forum", "Smoke3"})
+	public void ForumThreadTests_001_replyToThread() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -32,8 +32,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.verifyReplyMessage(1, message);
 	}
 
-	@Test(groups= {"ForumThreadTests_002", "ForumThreadTests", "Forum"} )
-	public void ForumThreadTests_002_removeThreadAndUndo(){
+	@Test(groups = {"ForumThreadTests_002", "ForumThreadTests", "Forum"})
+	public void ForumThreadTests_002_removeThreadAndUndo() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -48,8 +48,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.verifyDiscussionTitleAndMessage(title, message);
 	}
 
-	@Test(groups= {"ForumThreadTests_003", "ForumThreadTests", "Forum"} )
-	public void ForumThreadTests_003_moveThreadToOtherBoard(){
+	@Test(groups = {"ForumThreadTests_003", "ForumThreadTests", "Forum"})
+	public void ForumThreadTests_003_moveThreadToOtherBoard() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -63,8 +63,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumThread.verifyParentBoard(forumNames.get(1));
 	}
 
-	@Test(groups= {"ForumThreadTests_004", "ForumThreadTests", "Forum"} )
-	public void ForumThreadTests_004_threadHistory(){
+	@Test(groups = {"ForumThreadTests_004", "ForumThreadTests", "Forum"})
+	public void ForumThreadTests_004_threadHistory() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
@@ -77,8 +77,8 @@ public class ForumThreadTests extends NewTestTemplate{
 		forumHistory.verifyImportandPageElements();
 	}
 
-	@Test(groups= {"ForumThreadTests_005", "ForumThreadTests", "Forum"} )
-	public void ForumThreadTests_005_closeThreadAndReopen(){
+	@Test(groups = {"ForumThreadTests_005", "ForumThreadTests", "Forum"})
+	public void ForumThreadTests_005_closeThreadAndReopen() {
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();

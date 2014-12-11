@@ -25,7 +25,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 	public void wam_001_verifyDefaultPage() {
 		wam.verifyFirstTabSelected();
 		wam.verifyWamIndexIsNotEmpty();
-		wam.verifyWamIndexHasExactRowsNo( wam.DEFAULT_WAM_INDEX_ROWS );
+		wam.verifyWamIndexHasExactRowsNo(wam.DEFAULT_WAM_INDEX_ROWS);
 	}
 
 	@Test(groups = {"WamPage002", "WamPageTests"})
@@ -33,8 +33,8 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 		wam.verifyWamIndexIsNotEmpty();
 		wam.verifyWamVerticalFilterOptions();
 
-		for( WamPageObject.VerticalsIds verticalId : WamPageObject.VerticalsIds.values() ) {
-			wam.selectVertical( verticalId );
+		for (WamPageObject.VerticalsIds verticalId : WamPageObject.VerticalsIds.values()) {
+			wam.selectVertical(verticalId);
 			wam.verifyWamIndexIsNotEmpty();
 			wam.verifyVerticalColumnValuesAreTheSame();
 		}

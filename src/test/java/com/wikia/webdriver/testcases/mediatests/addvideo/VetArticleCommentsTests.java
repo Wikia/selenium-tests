@@ -17,7 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class VetArticleCommentsTests extends NewTestTemplate {
 

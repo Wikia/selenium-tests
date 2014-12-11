@@ -9,13 +9,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class EditProfileComponentObject extends WikiBasePageObject {
 
-	@FindBy(css="li[data-tab='avatar']")
+	@FindBy(css = "li[data-tab='avatar']")
 	protected WebElement avatarTab;
-	@FindBy(css="li[data-tab='about']")
+	@FindBy(css = "li[data-tab='about']")
 	protected WebElement aboutTab;
 
 	public EditProfileComponentObject(WebDriver driver) {

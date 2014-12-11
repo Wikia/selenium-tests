@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1134 Adding non-premium (Youtube) video
  * VE-1134 Adding Premium Video with full URL
  * VE-1264 Adding Existing videos to an article
@@ -102,7 +102,8 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VEAddExternalVideoTests_001"
 	)
 	public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
-		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);;
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		;
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.selectMediaAndDelete();

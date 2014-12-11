@@ -9,13 +9,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class NewMessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
 
-	@FindBy(css=".wall-action-reason")
+	@FindBy(css = ".wall-action-reason")
 	private WebElement removeReasonField;
-	@FindBy(css="#WikiaConfirmOk")
+	@FindBy(css = "#WikiaConfirmOk")
 	private WebElement removeConfirmButton;
 
 	public NewMessageWallCloseRemoveThreadPageObject(WebDriver driver) {

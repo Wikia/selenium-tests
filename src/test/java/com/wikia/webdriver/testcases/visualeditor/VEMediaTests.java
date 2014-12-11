@@ -28,7 +28,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1335 Previewing Youtube video from VE's media dialog
  * VE-1335 Previewing image from VE's media dialog
  * VE-1336 1519 Uploading an image with a new file name

@@ -11,7 +11,7 @@ public class ArticleFeaturesCRUDDataProvider {
 
 	@DataProvider
 	public static final Object[][] getTableProperties() {
-		return new Object[][] {
+		return new Object[][]{
 			{2, 500, 50, 3, 5, Alignment.RIGHT}
 		};
 	}

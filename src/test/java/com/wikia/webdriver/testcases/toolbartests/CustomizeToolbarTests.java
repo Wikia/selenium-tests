@@ -10,9 +10,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.toolbars.Customize
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 
@@ -44,12 +42,12 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 	@BeforeMethod(alwaysRun = true)
 	public void LoginAndCreateToolbar() {
 		toolbar = new CustomizedToolbarComponentObject(
-				driver);
+			driver);
 		toolbar.refreshPage();
 	}
 
-	@Test(groups = { "CustomizeToolbar001", "Toolbar", "CustomizeToolbar",
-			"Smoke4" })
+	@Test(groups = {"CustomizeToolbar001", "Toolbar", "CustomizeToolbar",
+		"Smoke4"})
 	// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Adding
 	public void CustomizeToolbar_001_adding() {
 		toolbar.clickCustomize();
@@ -61,7 +59,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 		toolbar.verifyToolOnToolbar(toolPreferences);
 	}
 
-	@Test(groups = { "CustomizeToolbar002", "Toolbar", "CustomizeToolbar" })
+	@Test(groups = {"CustomizeToolbar002", "Toolbar", "CustomizeToolbar"})
 	// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Editing
 	public void CustomizeToolbar002_Editing() {
 		toolbar.clickCustomize();
@@ -77,7 +75,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 		toolbar.verifyToolOnToolbar(toolPreferences + editSuffix);
 	}
 
-	@Test(groups = { "CustomizeToolbar003", "Toolbar", "CustomizeToolbar" })
+	@Test(groups = {"CustomizeToolbar003", "Toolbar", "CustomizeToolbar"})
 	// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Deleting
 	public void CustomizeToolbar003_Deleteing() {
 		toolbar.clickCustomize();
@@ -90,7 +88,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 		toolbar.verifyToolRemoved(toolPreferences);
 	}
 
-	@Test(groups = { "CustomizeToolbar004", "Toolbar", "CustomizeToolbar" })
+	@Test(groups = {"CustomizeToolbar004", "Toolbar", "CustomizeToolbar"})
 	// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Finding
 	public void CustomizeToolbar004_Finding() {
 		toolbar.clickCustomize();
@@ -102,7 +100,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 		toolbar.verifyToolOnToolbar(toolUploadPhoto);
 	}
 
-	@Test(groups = { "CustomizeToolbar005", "Toolbar", "CustomizeToolbar" })
+	@Test(groups = {"CustomizeToolbar005", "Toolbar", "CustomizeToolbar"})
 	// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Reset_Defaults
 	public void CustomizeToolbar005_ResetDefaults() {
 		toolbar.clickCustomize();
@@ -120,7 +118,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 		toolbar.verifyToolRemoved(toolDoubleRedirects);
 	}
 
-	@Test(groups = { "CustomizeToolbar006", "Toolbar", "CustomizeToolbar" })
+	@Test(groups = {"CustomizeToolbar006", "Toolbar", "CustomizeToolbar"})
 	// https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Customize_Toolbar_Buttons_actions
 	public void CustomizeToolbar006_ButtonsActions() {
 		toolbar.refreshPage();
@@ -139,7 +137,7 @@ public class CustomizeToolbarTests extends NewTestTemplateBeforeClass {
 		toolbar.clickSave();
 	}
 
-	@Test(groups = { "CustomizeToolbar007", "Toolbar", "CustomizeToolbar" })
+	@Test(groups = {"CustomizeToolbar007", "Toolbar", "CustomizeToolbar"})
 	public void CustomizeToolbar007_MoreButton() {
 		toolbar.clickCustomize();
 		toolbar.clickResetDefaults();

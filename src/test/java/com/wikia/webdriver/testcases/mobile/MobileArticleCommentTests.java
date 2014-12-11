@@ -6,6 +6,7 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageObject;
+
 /*
  * @author PMG
  *
@@ -20,7 +21,7 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 
 	String timeStamp;
 
-	@Test(groups={"MobileArticleComment_001", "MobileArticleComment", "Mobile"})
+	@Test(groups = {"MobileArticleComment_001", "MobileArticleComment", "Mobile"})
 	public void MobileArticleComment_001_PostComment() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -29,7 +30,7 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		article.addComment(PageContent.COMMENT_TEXT_NON_LATIN + timeStamp);
 	}
 
-	@Test(groups={"MobileArticleComment_002", "MobileArticleComment", "Mobile"})
+	@Test(groups = {"MobileArticleComment_002", "MobileArticleComment", "Mobile"})
 	public void MobileArticleComment_002_PostCommentReply() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -39,7 +40,7 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		article.addReply(PageContent.REPLY_TEXT2 + timeStamp);
 	}
 
-	@Test(groups={"MobileArticleComment_003", "MobileArticleComment", "Mobile"})
+	@Test(groups = {"MobileArticleComment_003", "MobileArticleComment", "Mobile"})
 	public void MobileArticleComment_003_CommentPagination() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -52,7 +53,7 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		article.verifyFirstCommentsEquals(firstComment);
 	}
 
-	@Test(groups={"MobileArticleComment_004", "MobileArticleComment", "Mobile"})
+	@Test(groups = {"MobileArticleComment_004", "MobileArticleComment", "Mobile"})
 	public void MobileArticleComment_004_numberOfComments() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);
@@ -61,7 +62,7 @@ public class MobileArticleCommentTests extends NewTestTemplate {
 		article.verifyNumberOfComments(PageContent.COMMENT_TEXT2 + timeStamp);
 	}
 
-	@Test(groups={"MobileArticleComment_005", "MobileArticleComment", "Mobile"})
+	@Test(groups = {"MobileArticleComment_005", "MobileArticleComment", "Mobile"})
 	public void MobileArticleComment_005_expandInput() {
 		MobileBasePageObject mobile = new MobileBasePageObject(driver);
 		mobile.openHome(wikiURL);

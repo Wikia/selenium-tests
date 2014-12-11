@@ -14,9 +14,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class FollowArticleTests extends NewTestTemplate{
+public class FollowArticleTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	String articleName;
@@ -32,7 +31,7 @@ public class FollowArticleTests extends NewTestTemplate{
 		article.verifyPageUnfollowed();
 	}
 
-	@Test(groups = "FollowArticle", dependsOnMethods={"FollowArticle_001_setup"})
+	@Test(groups = "FollowArticle", dependsOnMethods = {"FollowArticle_001_setup"})
 	public void FollowArticle_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -40,7 +39,7 @@ public class FollowArticleTests extends NewTestTemplate{
 		article.follow();
 	}
 
-	@Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods={"FollowArticle_002_follow"})
+	@Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods = {"FollowArticle_002_follow"})
 	public void FollowArticle_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

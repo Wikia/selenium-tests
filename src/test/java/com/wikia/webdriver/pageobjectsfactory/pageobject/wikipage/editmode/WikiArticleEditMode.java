@@ -25,53 +25,53 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePag
 
 public class WikiArticleEditMode extends WikiEditMode {
 
-	@FindBy(css="a.RTEImageButton")
+	@FindBy(css = "a.RTEImageButton")
 	private WebElement photoButton;
-	@FindBy(css="a.RTEVideoButton")
+	@FindBy(css = "a.RTEVideoButton")
 	private WebElement videoButton;
-	@FindBy(css="a.RTEGalleryButton")
+	@FindBy(css = "a.RTEGalleryButton")
 	private WebElement galleryButton;
-	@FindBy(css="a.RTESlideshowButton")
+	@FindBy(css = "a.RTESlideshowButton")
 	private WebElement slideshowButton;
-	@FindBy(css="a.RTESliderButton")
+	@FindBy(css = "a.RTESliderButton")
 	private WebElement sliderButton;
-	@FindBy(css="div.cke_skin_wikia.visible div.cke_contents iframe")
+	@FindBy(css = "div.cke_skin_wikia.visible div.cke_contents iframe")
 	private WebElement visualModeIFrame;
-	@FindBy(css=".cke_source")
+	@FindBy(css = ".cke_source")
 	private WebElement sourceModeTextArea;
-	@FindBy(css="#wpTextbox1")
+	@FindBy(css = "#wpTextbox1")
 	private WebElement messageSourceModeTextArea;
-	@FindBy(css="div.cke_wrapper.cke_ltr div.cke_contents iframe")
+	@FindBy(css = "div.cke_wrapper.cke_ltr div.cke_contents iframe")
 	private WebElement iFrame;
-	@FindBy(css="div.neutral.modalToolbar a[id='publish']")
+	@FindBy(css = "div.neutral.modalToolbar a[id='publish']")
 	private WebElement publishButtonPreview;
-	@FindBy(css="span.cke_button_ModeSource a span.cke_label")
+	@FindBy(css = "span.cke_button_ModeSource a span.cke_label")
 	private WebElement sourceModeButton;
-	@FindBy(css="span.RTEMediaOverlayEdit")
+	@FindBy(css = "span.RTEMediaOverlayEdit")
 	private WebElement modifyButton;
-	@FindBy(css="span.cke_button_ModeWysiwyg a")
+	@FindBy(css = "span.cke_button_ModeWysiwyg a")
 	private WebElement visualModeButton;
-	@FindBy(css="body[id='bodyContent']")
+	@FindBy(css = "body[id='bodyContent']")
 	private WebElement bodyContent;
-	@FindBy(css="input[value='Return to editing']")
+	@FindBy(css = "input[value='Return to editing']")
 	private WebElement returnToEditingButton;
-	@FindBy (css = "#wpSave")
+	@FindBy(css = "#wpSave")
 	private WebElement publishButton;
-	@FindBy(css="input[id='ImageUploadLayoutLeft']")
+	@FindBy(css = "input[id='ImageUploadLayoutLeft']")
 	private WebElement imageLeftAlignmentOption;
-	@FindBy(css="input[id='ImageUploadLayoutRight']")
+	@FindBy(css = "input[id='ImageUploadLayoutRight']")
 	private WebElement imageRightAlignmentOption;
-	@FindBy(css="button.close")
+	@FindBy(css = "button.close")
 	private WebElement imageUploadCloseButton;
-	@FindBy(css="input#ImageQuery")
+	@FindBy(css = "input#ImageQuery")
 	private WebElement findInputField;
-	@FindBy(css="input[value='Find']")
+	@FindBy(css = "input[value='Find']")
 	private WebElement findButton;
-	@FindBy(css="input[value='Add photo']")
+	@FindBy(css = "input[value='Add photo']")
 	private WebElement finalAddPhotoButton;
-	@FindBy(css="div#ImageUploadHeadline")
+	@FindBy(css = "div#ImageUploadHeadline")
 	private WebElement ImageUploadHeadline;
-	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
+	@FindBy(css = "img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
 	@FindBy(css = "span[id=cke_22_label]")
 	private WebElement sourceButton;
@@ -88,15 +88,15 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageFactory.initElements(driver, this);
 	}
 
-	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL){
-		getUrl(wikiURL+URLsContent.SPECIAL_VIDEOS);
+	public SpecialVideosPageObject openSpecialVideoPage(String wikiURL) {
+		getUrl(wikiURL + URLsContent.SPECIAL_VIDEOS);
 		return new SpecialVideosPageObject(driver);
 	}
 
 	public void verifyThatThePhotoAppears(String caption) {
 		waitForElementByElement(visualModeIFrame);
 		driver.switchTo().frame(visualModeIFrame);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[data-rte-meta*='"+caption+"']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[data-rte-meta*='" + caption + "']")));
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("VerifyThatThePhotoAppears", "Verify that the photo appears in the visual mode", true, driver);
 	}
@@ -146,13 +146,13 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
 	}
 
-	public void verifySourceEditorContentIsEmpty(){
+	public void verifySourceEditorContentIsEmpty() {
 		waitForElementVisibleByElement(sourceModeTextArea);
 		Assertion.assertEquals(sourceModeTextArea.getText().isEmpty(), true);
 		PageObjectLogging.log("verifySourceEditorContentIsEmpty", "Source editor content was cleaned", true);
 	}
 
-	public void clearSource(){
+	public void clearSource() {
 		waitForElementVisibleByElement(sourceModeTextArea);
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("deleteArticleContent", "Delete all source code on the article", true);
@@ -160,7 +160,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	public void writeSourceMode(String source) {
 		sourceModeTextArea.sendKeys();
-		PageObjectLogging.log("writeSourceMode", "Write in source mode: "+source, true);
+		PageObjectLogging.log("writeSourceMode", "Write in source mode: " + source, true);
 	}
 
 
@@ -181,7 +181,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		driver.switchTo().defaultContent();
 	}
 
-	public void clickSourceButton(){
+	public void clickSourceButton() {
 		waitForElementByElement(sourceButton);
 		sourceButton.click();
 		driver.switchTo().defaultContent();
@@ -247,7 +247,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 
 	}
 
-	public WikiArticlePageObject addImageForLightboxTesting () {
+	public WikiArticlePageObject addImageForLightboxTesting() {
 		waitForElementByElement(findInputField);
 		findInputField.sendKeys("aa");
 		waitForElementByElement(findButton);
@@ -283,12 +283,14 @@ public class WikiArticleEditMode extends WikiEditMode {
 		PageObjectLogging.log("clickSliderButton", "slider button clicked", true);
 		return new SliderBuilderComponentObject(driver);
 	}
+
 	public SlideshowBuilderComponentObject clickSlideshowButton() {
 		waitForElementByElement(slideshowButton);
 		scrollAndClick(slideshowButton);
 		PageObjectLogging.log("clickSlideshowButton", "slideshow button clicked", true);
 		return new SlideshowBuilderComponentObject(driver);
 	}
+
 	public GalleryBuilderComponentObject clickGalleryButton() {
 		waitForElementByElement(galleryButton);
 		scrollAndClick(galleryButton);
@@ -308,15 +310,15 @@ public class WikiArticleEditMode extends WikiEditMode {
 		int index = 0;
 		while (true) {
 			int previousStarIndex = sourceText.indexOf("*", index);
-			int nextStarIndex = sourceText.indexOf("*", previousStarIndex+1);
-			if (nextStarIndex<0) {
+			int nextStarIndex = sourceText.indexOf("*", previousStarIndex + 1);
+			if (nextStarIndex < 0) {
 				break;
 			}
 			String video = sourceText.substring(previousStarIndex, nextStarIndex);
 			if (!video.contains(unwantedVideoName)) {
 				videos.add(video);
 			}
-			index = previousStarIndex+1;
+			index = previousStarIndex + 1;
 		}
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.clear();
@@ -324,26 +326,25 @@ public class WikiArticleEditMode extends WikiEditMode {
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		String builder = "";
-		for (int i = 0; i<videos.size(); i++)
-		{
-			builder+=videos.get(i);
-			builder+="\n";
+		for (int i = 0; i < videos.size(); i++) {
+			builder += videos.get(i);
+			builder += "\n";
 		}
 		CommonUtils.setClipboardContents(builder);
 		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
 
 		PageObjectLogging.log("deleteUnwantedVideoFromMessage",
-				"Delete all source code on the article", true, driver);
+			"Delete all source code on the article", true, driver);
 	}
 
-	public void typeContentInSourceMode(String content){
+	public void typeContentInSourceMode(String content) {
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.sendKeys(content);
 		PageObjectLogging.log(
-				"typeInContent",
-				"content type into source mode textarea",
-				true,
-				driver
+			"typeInContent",
+			"content type into source mode textarea",
+			true,
+			driver
 		);
 	}
 
@@ -352,17 +353,17 @@ public class WikiArticleEditMode extends WikiEditMode {
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.sendKeys(content);
 		PageObjectLogging.log(
-				"typeInContent",
-				"content type into source mode textarea",
-				true,
-				driver
+			"typeInContent",
+			"content type into source mode textarea",
+			true,
+			driver
 		);
 	}
 
-	public void verifyEmbededMap(String mapID){
+	public void verifyEmbededMap(String mapID) {
 		driver.switchTo().defaultContent();
 		waitForElementByElement(embededMap);
 		String embededMapID = embededMap.getAttribute("data-map-id");
-		Assertion.assertEquals(mapID,embededMapID);
+		Assertion.assertEquals(mapID, embededMapID);
 	}
 }

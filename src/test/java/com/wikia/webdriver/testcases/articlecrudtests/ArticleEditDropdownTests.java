@@ -33,6 +33,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		article.verifyDropdownForUser();
 	}
+
 	@Test(
 		groups = {"ArticleEditDropdown_003", "ArticleEditDropdown"}
 	)

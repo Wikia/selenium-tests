@@ -13,37 +13,37 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class SearchPageObject extends WikiBasePageObject {
 
-	public SearchPageObject (WebDriver driver) {
+	public SearchPageObject(WebDriver driver) {
 		super(driver);
 	}
 
-	@FindBy(css="#searchInput")
+	@FindBy(css = "#searchInput")
 	protected WebElement searchInput;
-	@FindBy(css=".search-submit")
+	@FindBy(css = ".search-submit")
 	protected WebElement searchButton;
-	@FindBy(css=".Results")
+	@FindBy(css = ".Results")
 	protected WebElement resultsContainer;
-	@FindBy(css=".paginator-next")
+	@FindBy(css = ".paginator-next")
 	protected WebElement paginatorNext;
-	@FindBy(css=".paginator-prev")
+	@FindBy(css = ".paginator-prev")
 	protected WebElement paginatorPrev;
-	@FindBy(css=".paginator-page")
+	@FindBy(css = ".paginator-page")
 	protected List<WebElement> paginationPages;
-	@FindBy(css=".Results > :nth-child(4)")
+	@FindBy(css = ".Results > :nth-child(4)")
 	protected WebElement fourthResult;
-	@FindBy(css=".Results > :nth-child(4) h1 > a")
+	@FindBy(css = ".Results > :nth-child(4) h1 > a")
 	protected WebElement fourthResultLink;
-	@FindBy(css="h1 > a.result-link")
+	@FindBy(css = "h1 > a.result-link")
 	protected List<WebElement> resultLinks;
 	@FindBys(@FindBy(css = "li.result"))
 	protected List<WebElement> results;
-	@FindBy(css=".Results > :nth-child(1) h1 > a")
+	@FindBy(css = ".Results > :nth-child(1) h1 > a")
 	protected WebElement firstResultLink;
-	@FindBy(css="li.result:nth-child(1) a")
+	@FindBy(css = "li.result:nth-child(1) a")
 	protected WebElement firstResult;
-	@FindBy(css=".result-count.subtle")
+	@FindBy(css = ".result-count.subtle")
 	protected WebElement resultCountMessage;
-	@FindBy(css=".results-wrapper i")
+	@FindBy(css = ".results-wrapper i")
 	protected WebElement noResultsCaption;
 
 	protected By paginationContainerBy = By.cssSelector(".wikia-paginator");
@@ -64,8 +64,8 @@ public class SearchPageObject extends WikiBasePageObject {
 
 	public void verifyPagination() {
 		waitForElementByBy(paginationContainerBy);
-		int i=1;
-		for (WebElement elem:paginationPages) {
+		int i = 1;
+		for (WebElement elem : paginationPages) {
 			Assertion.assertEquals(Integer.toString(i), elem.getText());
 			i++;
 		}

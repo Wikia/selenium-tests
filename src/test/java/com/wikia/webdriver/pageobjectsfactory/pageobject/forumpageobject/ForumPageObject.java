@@ -12,17 +12,17 @@ import org.openqa.selenium.support.PageFactory;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiArticlePageObject;
 
-public class ForumPageObject extends WikiArticlePageObject{
+public class ForumPageObject extends WikiArticlePageObject {
 
-	@FindBy(css=".button.policies-link")
+	@FindBy(css = ".button.policies-link")
 	private WebElement faqButton;
-	@FindBy(css="#ForumPoliciesModal")
+	@FindBy(css = "#ForumPoliciesModal")
 	private WebElement faqLightBox;
-	@FindBy(css="#ForumPoliciesModal .secondary")
+	@FindBy(css = "#ForumPoliciesModal .secondary")
 	private WebElement closeFaqLightBoxButton;
-	@FindBy(css=".button.admin-link")
+	@FindBy(css = ".button.admin-link")
 	private WebElement manageBoardsButton;
-	@FindBy(css="div.wikiaThrobber")
+	@FindBy(css = "div.wikiaThrobber")
 	private WebElement faqModalLoadingState;
 
 	private By forumBoardsList = By.cssSelector("ul.boards h4 a");
@@ -48,7 +48,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 	private void checkFaqLightBoxOpened() {
 		waitForElementByElement(faqLightBox);
 		PageObjectLogging.log("checkFaqLightBoxOpened",
-				"faq lightbox verified", true);
+			"faq lightbox verified", true);
 	}
 
 	public void verifyFaqLightBox() {
@@ -60,27 +60,27 @@ public class ForumPageObject extends WikiArticlePageObject{
 	public ForumManageBoardsPageObject clickManageBoardsButton() {
 		scrollAndClick(manageBoardsButton);
 		PageObjectLogging.log("clickManageBoardsButton",
-				"manage boards button clicked", true);
+			"manage boards button clicked", true);
 		return new ForumManageBoardsPageObject(driver);
 	}
 
-    /*
-     * this method choose first link on the board which doesn't contain chinese signs
-     */
+	/*
+	 * this method choose first link on the board which doesn't contain chinese signs
+	 */
 	public ForumBoardPageObject openForumBoard() {
 		WebElement forumBoardLink = null;
-			for(int i = 0; i < getForumElementsList().size(); i++) {
-				if(!getForumElementsList().get(i).toString().contains("%")) {
-					forumBoardLink = getForumElementsList().get(i);
-					break;
-				}
+		for (int i = 0; i < getForumElementsList().size(); i++) {
+			if (!getForumElementsList().get(i).toString().contains("%")) {
+				forumBoardLink = getForumElementsList().get(i);
+				break;
 			}
+		}
 		waitForElementByElement(forumBoardLink);
 		waitForElementClickableByElement(forumBoardLink);
 		scrollAndClick(forumBoardLink);
 		PageObjectLogging.log("openForumBoard",
-				"click on the forum Board", true,
-				driver);
+			"click on the forum Board", true,
+			driver);
 		return new ForumBoardPageObject(driver);
 	}
 
@@ -95,13 +95,13 @@ public class ForumPageObject extends WikiArticlePageObject{
 		}
 		if (forumNumber == 0) {
 			PageObjectLogging.log("openForumBoard",
-					"didn't find forum Board with title " + forumBoardTitle,
-					true, driver);
+				"didn't find forum Board with title " + forumBoardTitle,
+				true, driver);
 			return null;
 		} else {
 			PageObjectLogging.log("openForumBoard",
-					"click on the forum Board with title " + forumBoardTitle,
-					true, driver);
+				"click on the forum Board with title " + forumBoardTitle,
+				true, driver);
 			return openForumBoard();
 		}
 	}
@@ -115,7 +115,7 @@ public class ForumPageObject extends WikiArticlePageObject{
 		return forumNames;
 	}
 
-	private List<WebElement> getForumElementsList(){
+	private List<WebElement> getForumElementsList() {
 		List<WebElement> listWebElements = driver.findElements(forumBoardsList);
 		return listWebElements;
 	}

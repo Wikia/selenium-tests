@@ -13,9 +13,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- * 1. Create wiki in different languages
+ *         1. Create wiki in different languages
  */
 
 public class CreateWikiTests_lang extends NewTestTemplate {
@@ -23,9 +22,9 @@ public class CreateWikiTests_lang extends NewTestTemplate {
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-		dataProviderClass=CreateNewWikiDataProvider.class,
-		dataProvider="getLangs",
-		groups = {"CreateNewWiki_lang_001","CNW_lang"}
+		dataProviderClass = CreateNewWikiDataProvider.class,
+		dataProvider = "getLangs",
+		groups = {"CreateNewWiki_lang_001", "CNW_lang"}
 	)
 	public void CreateNewWiki_lang_TC001(String lang) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

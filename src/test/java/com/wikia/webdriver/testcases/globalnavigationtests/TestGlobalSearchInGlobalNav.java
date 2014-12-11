@@ -19,7 +19,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 
 	@DataProvider
 	public Object[][] getDataForGlobalSearchAnon() {
-		return new Object[][] {
+		return new Object[][]{
 			{"muppet", "gta", "Special:Search", "resultsLang=en"},
 			{"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
 			{"zh.pad", "muppet", "Special:Search", "resultsLang=zh"}
@@ -46,10 +46,10 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 
 	@DataProvider
 	public Object[][] getDataForGlobalSearchLoggedIn() {
-		return new Object[][] {
-				{"muppet", "gta", "Special:Search", "resultsLang=en"},
-				{"de.gta", "muppet", "Spezial:Suche", "resultsLang=en"},
-				{"zh.pad", "muppet", "Special:Search", "resultsLang=en"}
+		return new Object[][]{
+			{"muppet", "gta", "Special:Search", "resultsLang=en"},
+			{"de.gta", "muppet", "Spezial:Suche", "resultsLang=en"},
+			{"zh.pad", "muppet", "Special:Search", "resultsLang=en"}
 		};
 	}
 
@@ -75,7 +75,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 
 	@DataProvider
 	public Object[][] getWikisWithDisabledLocalSearch() {
-		return new Object[][] {
+		return new Object[][]{
 			{"de.wikia"},
 			{"wikia"}
 		};

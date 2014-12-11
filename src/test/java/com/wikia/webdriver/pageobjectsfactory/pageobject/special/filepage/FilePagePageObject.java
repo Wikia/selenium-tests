@@ -16,11 +16,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 
 /**
- *
  * @author liz_lux
  * @author Karol 'kkarolk' Kujawiak
  * @author Saipetch Kongkatong
- *
  */
 
 public class FilePagePageObject extends WikiBasePageObject {
@@ -37,35 +35,35 @@ public class FilePagePageObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBys(@FindBy(css="ul.tabs li a"))
+	@FindBys(@FindBy(css = "ul.tabs li a"))
 	private List<WebElement> tabList;
-	@FindBy(css="section[data-listing-type='local'] h3.page-listing-title a")
+	@FindBy(css = "section[data-listing-type='local'] h3.page-listing-title a")
 	private WebElement appearsListing;
-	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.right")
+	@FindBy(css = "section[data-listing-type='local'] div.page-list-pagination img.right")
 	private WebElement localPageNext;
-	@FindBy(css="section[data-listing-type='local'] div.page-list-pagination img.left")
+	@FindBy(css = "section[data-listing-type='local'] div.page-list-pagination img.left")
 	private WebElement localPagePrev;
-	@FindBy(css=".fullImageLink")
+	@FindBy(css = ".fullImageLink")
 	private WebElement fileEmbedded;
-	@FindBy(css=".filehistory .video-thumb")
+	@FindBy(css = ".filehistory .video-thumb")
 	private WebElement videoThumbnail;
-	@FindBys(@FindBy(css=".tabs li"))
+	@FindBys(@FindBy(css = ".tabs li"))
 	private List<WebElement> tabs;
-	@FindBy(css=".video-provider a")
+	@FindBy(css = ".video-provider a")
 	private WebElement provider;
-	@FindBy(css="div#mw-imagepage-nofile")
+	@FindBy(css = "div#mw-imagepage-nofile")
 	private WebElement noFileText;
-	@FindBy(css="li#mw-imagepage-reupload-link a")
+	@FindBy(css = "li#mw-imagepage-reupload-link a")
 	private WebElement reuploadLink;
-	@FindBy(css="#wpWikiaVideoAddUrl")
+	@FindBy(css = "#wpWikiaVideoAddUrl")
 	private WebElement uploadFileURL;
-	@FindBy(css="div.submits input")
+	@FindBy(css = "div.submits input")
 	private WebElement addButton;
-	@FindBys(@FindBy(css="table.filehistory tr td:nth-child(1)>a"))
+	@FindBys(@FindBy(css = "table.filehistory tr td:nth-child(1)>a"))
 	private List<WebElement> historyDeleteLinks;
-	@FindBy(css=".boilerplate b")
+	@FindBy(css = ".boilerplate b")
 	private WebElement imgLicensePlate;
-	@FindBy(css=".tabBody.selected")
+	@FindBy(css = ".tabBody.selected")
 	private WebElement tabBody;
 
 	public void clickTab(int tab) {
@@ -73,18 +71,20 @@ public class FilePagePageObject extends WikiBasePageObject {
 		waitForElementByElement(currentTab);
 		scrollAndClick(currentTab);
 		PageObjectLogging.log(
-				"clickTab",
-				tab + " selected",
-				true
+			"clickTab",
+			tab + " selected",
+			true
 		);
 	}
 
 	public void selectAboutTab() {
 		clickTab(ABOUT_TAB);
 	}
+
 	public void selectHistoryTab() {
 		clickTab(HISTORY_TAB);
 	}
+
 	public void selectMetadataTab() {
 		clickTab(METADATA_TAB);
 	}
@@ -93,9 +93,9 @@ public class FilePagePageObject extends WikiBasePageObject {
 		waitForElementByElement(tabBody);
 		Assertion.assertEquals(tabName, tabBody.getAttribute("data-tab-body"));
 		PageObjectLogging.log(
-				"verified selected tab",
-				tabName + " selected",
-				true
+			"verified selected tab",
+			tabName + " selected",
+			true
 		);
 	}
 
@@ -158,19 +158,19 @@ public class FilePagePageObject extends WikiBasePageObject {
 	}
 
 	public void verifyTabsExistVideo() {
-		String[] expectedTabs = { "about", "history", "metadata" };
+		String[] expectedTabs = {"about", "history", "metadata"};
 		Assertion.assertEquals(expectedTabs.length, tabs.size());
 		verifyTabsExist(expectedTabs);
 	}
 
 	public void verifyTabsExistImage() {
-		String[] expectedTabs = { "about", "history" };
+		String[] expectedTabs = {"about", "history"};
 		Assertion.assertTrue(expectedTabs.length <= tabs.size());
 		verifyTabsExist(expectedTabs);
 	}
 
 	public void verifyTabsExist(String[] expectedTabs) {
-		for (int i=0; i<expectedTabs.length; i++) {
+		for (int i = 0; i < expectedTabs.length; i++) {
 			String tab = tabs.get(i).getAttribute("data-tab");
 			Assertion.assertEquals(expectedTabs[i], tab);
 		}
@@ -194,11 +194,11 @@ public class FilePagePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("replaceVideo", "add url button clicked", true, driver);
 	}
 
-	public void verifyVersionCountAtLeast( int count ) {
-		Assertion.assertTrue( historyDeleteLinks.size() >= count, "Version count is at least " + count );
+	public void verifyVersionCountAtLeast(int count) {
+		Assertion.assertTrue(historyDeleteLinks.size() >= count, "Version count is at least " + count);
 	}
 
-	public DeletePageObject deleteVersion( int num ) {
+	public DeletePageObject deleteVersion(int num) {
 		scrollAndClick(historyDeleteLinks.get(num - 1));
 
 		PageObjectLogging.log("deletePage", "delete page opened", true);

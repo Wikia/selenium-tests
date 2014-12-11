@@ -12,17 +12,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 
 /**
- *
  * @author Karol
- *
  */
-public class CreateNewWikiPageObjectStep3 extends BasePageObject{
+public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
 	private final String dataThemeList = "li[data-theme]";
 	private By loadingIndicatorBy = By.cssSelector(".wikiaThrobber");
 	private String themeLocator = "li[data-theme='%name%']";
 
-	@FindBy(css="li[id='ThemeWiki'] input[class='next enabled']")
+	@FindBy(css = "li[id='ThemeWiki'] input[class='next enabled']")
 	private WebElement submitButton;
 
 	public CreateNewWikiPageObjectStep3(WebDriver driver) {
@@ -37,10 +35,9 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 		PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);
 	}
 
-	public void selectTheme(int skinNumber)
-	{
+	public void selectTheme(int skinNumber) {
 		waitForElementByCss(dataThemeList);
-		jQueryClick("li[data-theme]:nth-child("+skinNumber+")");
+		jQueryClick("li[data-theme]:nth-child(" + skinNumber + ")");
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {

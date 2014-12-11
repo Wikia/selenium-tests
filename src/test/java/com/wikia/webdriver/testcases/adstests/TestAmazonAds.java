@@ -20,8 +20,8 @@ public class TestAmazonAds extends NewTestTemplate {
 	private final String amazonForceResponse = "amzn_debug_mode=1";
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="amazonSites"
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "amazonSites"
 	)
 	public TestAmazonAds(String wikiName, String path) {
 		super();
@@ -41,7 +41,7 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
 
-	@GeoEdgeProxy(country="GB")
+	@GeoEdgeProxy(country = "GB")
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_GB", "Ads"})
 	public void AmazonAdsTest_GB() {
@@ -62,7 +62,7 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
 
-	@GeoEdgeProxy(country="GB")
+	@GeoEdgeProxy(country = "GB")
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_GB_debugMode", "Ads"})
 	public void AmazonAdsTest_GB_debugMode() {

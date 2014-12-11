@@ -25,11 +25,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1337 - Adding existing map onto article
  * VE-1337 - Checking empty state dialog on wiki with no maps
  * VE-1351 - Adding map in a empty state
- *
  */
 
 public class VEAddMapTests extends NewTestTemplateBeforeClass {

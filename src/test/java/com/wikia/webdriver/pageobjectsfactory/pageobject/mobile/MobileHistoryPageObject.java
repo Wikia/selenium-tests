@@ -15,12 +15,12 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.mw-tag-markers")
+	@FindBy(css = "#pagehistory > li.mw-tag-mobileedit > span.mw-tag-markers")
 	private List<WebElement> editHistoriesDevice;
-	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.comment")
+	@FindBy(css = "#pagehistory > li.mw-tag-mobileedit > span.comment")
 	private List<WebElement> editHistoriesSummary;
 
-	private String getHeader(){
+	private String getHeader() {
 		return selectedPageHeader.getText();
 	}
 

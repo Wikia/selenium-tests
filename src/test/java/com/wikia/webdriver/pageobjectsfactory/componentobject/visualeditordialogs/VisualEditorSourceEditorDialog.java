@@ -9,11 +9,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-window-foot .oo-ui-buttonedElement-button")
+	@FindBy(css = ".oo-ui-window-foot .oo-ui-buttonedElement-button")
 	private WebElement applyChangesButton;
-	@FindBy(css=".oo-ui-widget-enabled.oo-ui-textInputWidget textarea")
+	@FindBy(css = ".oo-ui-widget-enabled.oo-ui-textInputWidget textarea")
 	private WebElement editArea;
-	@FindBy(css=".wikiaThrobber")
+	@FindBy(css = ".wikiaThrobber")
 	private WebElement loadingIndicator;
 
 	public VisualEditorSourceEditorDialog(WebDriver driver) {

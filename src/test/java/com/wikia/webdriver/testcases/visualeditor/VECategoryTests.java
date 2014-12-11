@@ -20,7 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1407 Adding category to an article
  * VE-1408 Deleting category from an article
  * VE-1411 New category suggestion when adding category to an article
@@ -100,7 +100,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-	groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
+		groups = {"VECategoryTests", "VECategoryTests_005", "VEAddCategory"}
 	)
 	public void VECategoryTests_005_AddNewCategoryWithSortKey() {
 		String testCategory2 = "Newstuff";

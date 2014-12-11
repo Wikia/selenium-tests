@@ -35,7 +35,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 	private WebElement newestVideoTitle;
 	@FindBy(css = ".special-videos-grid li:nth-child(1) .remove")
 	private WebElement newestVideoDeleteIcon;
-	@FindBys(@FindBy(css=".image.video > img"))
+	@FindBys(@FindBy(css = ".image.video > img"))
 	private List<WebElement> videos;
 	@FindBy(css = ".special-videos-grid a.video")
 	private List<WebElement> videoItem;
@@ -53,17 +53,17 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public String getRandomVideo() {
 		List<String> names = new ArrayList();
-		for (WebElement elem:videos) {
+		for (WebElement elem : videos) {
 			names.add(elem.getAttribute("data-video-key"));
 		}
 		Random r = new Random();
-		int rnd = r.nextInt(names.size()-1);
-		return names.get((rnd)+1);
+		int rnd = r.nextInt(names.size() - 1);
+		return names.get((rnd) + 1);
 	}
 
 	public WatchPageObject unfollowVideo(String wikiURL, String videoName) {
 		getUrl(
-				wikiURL +
+			wikiURL +
 				URLsContent.WIKI_DIR +
 				URLsContent.FILE_NAMESPACE +
 				videoName +
@@ -98,7 +98,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 
 	public void verifyVideoAdded(String videoTitle) {
 		waitForTextToBePresentInElementLocatedBy(newestVideoBy, videoTitle);
-		PageObjectLogging.log("verifyVideoAdded", "verify that video with following description was added: "+videoTitle, true);
+		PageObjectLogging.log("verifyVideoAdded", "verify that video with following description was added: " + videoTitle, true);
 	}
 
 	public LightboxComponentObject openLightboxForGridVideo(int itemNumber) {
@@ -123,7 +123,7 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 		return newestVideoTitle.getText();
 	}
 
-	public void deleteVideo(){
+	public void deleteVideo() {
 		openSpecialVideoPageMostRecent(getWikiUrl());
 		executeScript("$('.special-videos-grid .remove').first().show()");
 		waitForElementByElement(newestVideo);
@@ -146,8 +146,8 @@ public class SpecialVideosPageObject extends SpecialPageObject {
 		verifyNotificationMessage();
 		Assertion.assertNotEquals(VideoContent.YOUTUBE_VIDEO_URL2_NAME, getNewestVideoTitle());
 		PageObjectLogging.log("verifyDeleteVideoNotPresent",
-				"verify video " + VideoContent.YOUTUBE_VIDEO_URL2_NAME + " was deleted",
-				true);
+			"verify video " + VideoContent.YOUTUBE_VIDEO_URL2_NAME + " was deleted",
+			true);
 	}
 
 	public void verifyElementsOnPage() {

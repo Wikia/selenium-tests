@@ -17,7 +17,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsGermanObject extends AdsBaseObject {
@@ -44,16 +43,16 @@ public class AdsGermanObject extends AdsBaseObject {
 	/*
 	 * List of all possible combinations for 71M ads with their characteristic slots
 	 */
-	private List<HashMap<String,Object>> combinations = new ArrayList<HashMap<String, Object>>();
+	private List<HashMap<String, Object>> combinations = new ArrayList<HashMap<String, Object>>();
 
 	private void setSlots() {
-		HashMap<String,Object> billboardMap = new HashMap<String, Object>();
-		HashMap<String,Object> fireplaceMap = new HashMap<String, Object>();
-		HashMap<String,Object> flashtalkingMap = new HashMap<String, Object>();
-		HashMap<String,Object> wp_internMap = new HashMap<String, Object>();
-		HashMap<String,Object> leaderboardMap = new HashMap<String, Object>();
-		HashMap<String,Object> medrecMap = new HashMap<String, Object>();
-		HashMap<String,Object> prefooterMap = new HashMap<String, Object>();
+		HashMap<String, Object> billboardMap = new HashMap<String, Object>();
+		HashMap<String, Object> fireplaceMap = new HashMap<String, Object>();
+		HashMap<String, Object> flashtalkingMap = new HashMap<String, Object>();
+		HashMap<String, Object> wp_internMap = new HashMap<String, Object>();
+		HashMap<String, Object> leaderboardMap = new HashMap<String, Object>();
+		HashMap<String, Object> medrecMap = new HashMap<String, Object>();
+		HashMap<String, Object> prefooterMap = new HashMap<String, Object>();
 
 		List<String> billboard = new ArrayList<String>();
 		List<String> fireplace = new ArrayList<String>();
@@ -105,8 +104,8 @@ public class AdsGermanObject extends AdsBaseObject {
 	public void verify71MediaAdsPresent() {
 		AdsComparison adsComparison = new AdsComparison();
 
-		for (HashMap<String,Object> combination: combinations) {
-			List<String> combinationSlots = (List)combination.get("slots");
+		for (HashMap<String, Object> combination : combinations) {
+			List<String> combinationSlots = (List) combination.get("slots");
 			if (checkIfCombinationOnPage(combinationSlots)) {
 				PageObjectLogging.log(
 					"Combination present",
@@ -118,9 +117,9 @@ public class AdsGermanObject extends AdsBaseObject {
 					WebElement slot = driver.findElement(By.cssSelector(slotSelector));
 					if (hasSkin(slot, slotSelector) || adsComparison.isAdVisible(slot, slotSelector, driver)) {
 						PageObjectLogging.log(
-								"Ad in slot found",
-								"Ad in slot found; CSS: " + slotSelector,
-								true
+							"Ad in slot found",
+							"Ad in slot found; CSS: " + slotSelector,
+							true
 						);
 					} else {
 						throw new NoSuchElementException("Ad in slot not found; CSS: " + slotSelector);
@@ -135,8 +134,8 @@ public class AdsGermanObject extends AdsBaseObject {
 
 	public void verifyNo71MediaAds() {
 		PageObjectLogging.log("PageOpened", "Page opened", true, driver);
-		for (HashMap<String,Object> combination: combinations) {
-			List<String> combinationSlots = (List)combination.get("slots");
+		for (HashMap<String, Object> combination : combinations) {
+			List<String> combinationSlots = (List) combination.get("slots");
 			if (!checkIfCombinationOnPage(combinationSlots)) {
 				PageObjectLogging.log(
 					"Combination not present",
@@ -144,7 +143,7 @@ public class AdsGermanObject extends AdsBaseObject {
 					true
 				);
 			} else {
-				for (String elementSelector: combinationSlots) {
+				for (String elementSelector : combinationSlots) {
 					WebElement combinationElement = driver.findElement(By.cssSelector(elementSelector));
 					if (combinationElement.isDisplayed()) {
 						PageObjectLogging.log(
@@ -163,9 +162,9 @@ public class AdsGermanObject extends AdsBaseObject {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String script = "return $(arguments[0]).find('iframe, object, img').filter(':visible').length;";
 
-		for (String elementSelector: combination) {
+		for (String elementSelector : combination) {
 			if (checkIfElementOnPage(elementSelector)) {
-				if ((Long)js.executeScript(script, elementSelector) < 1) {
+				if ((Long) js.executeScript(script, elementSelector) < 1) {
 					return false;
 				}
 			} else {

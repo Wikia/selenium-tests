@@ -9,8 +9,8 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
-* @author Michal 'justnpT' Nowierski
-*/
+ * @author Michal 'justnpT' Nowierski
+ */
 public class FacebookUserPageObject extends WikiBasePageObject {
 
 	@FindBy(css = "a[href$='?ref=logo']")

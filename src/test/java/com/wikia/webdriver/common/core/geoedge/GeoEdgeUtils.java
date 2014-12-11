@@ -36,12 +36,12 @@ public class GeoEdgeUtils {
 		setIPsForCountries();
 	}
 
-    public String createBaseFromCredentials() {
-        String credentials = getGeoEdgeUserName() + ":" + getGeoEdgePassword();
-        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
-        final String encodedString = new String(encodedCredentials);
-        return encodedString;
-    }
+	public String createBaseFromCredentials() {
+		String credentials = getGeoEdgeUserName() + ":" + getGeoEdgePassword();
+		byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+		final String encodedString = new String(encodedCredentials);
+		return encodedString;
+	}
 
 	public String getIPForCountry(String countryCode) {
 		return (String) countriesConfiguration.get(countryCode);

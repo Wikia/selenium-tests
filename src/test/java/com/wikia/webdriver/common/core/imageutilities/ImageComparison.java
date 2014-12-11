@@ -53,7 +53,8 @@ public class ImageComparison {
 	 * @param accuracy in percentage between 0 and 100.
 	 */
 	public boolean isColorImage(BufferedImage image, Color color, int accuracy) {
-		int count = image.getHeight() * image.getWidth();;
+		int count = image.getHeight() * image.getWidth();
+		;
 		int diffCount = 0;
 		for (int row = 0; row < image.getWidth(); row++) {
 			for (int column = 0; column < image.getHeight(); column++) {

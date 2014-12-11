@@ -13,9 +13,7 @@ import com.wikia.webdriver.common.properties.Properties;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 
 public class SpecialUserLoginPageObject extends SpecialPageObject {
@@ -25,31 +23,31 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css=".WikiaArticle input[name='username']")
+	@FindBy(css = ".WikiaArticle input[name='username']")
 	private WebElement userName;
-	@FindBy(css=".WikiaArticle input[name='password']")
+	@FindBy(css = ".WikiaArticle input[name='password']")
 	private WebElement password;
-	@FindBy(css=".WikiaArticle input[name='newpassword']")
+	@FindBy(css = ".WikiaArticle input[name='newpassword']")
 	private WebElement newPassword;
-	@FindBy(css=".WikiaArticle input[name='retype']")
+	@FindBy(css = ".WikiaArticle input[name='retype']")
 	private WebElement retypeNewPassword;
-	@FindBy(css=".WikiaArticle input.login-button.big")
+	@FindBy(css = ".WikiaArticle input.login-button.big")
 	private WebElement loginButton;
-	@FindBy(css=".WikiaArticle .forgot-password")
+	@FindBy(css = ".WikiaArticle .forgot-password")
 	private WebElement forgotPasswordLink;
-	@FindBy (css=".UserLogin .error-msg")
+	@FindBy(css = ".UserLogin .error-msg")
 	private WebElement messagePlaceholder;
 
 	private final String disabledAccountMessage = "Your account has been disabled by Wikia.";
 
-	private void typeInUserName(String name){
+	private void typeInUserName(String name) {
 		waitForElementByElement(userName);
 		userName.clear();
 		userName.sendKeys(name);
-		PageObjectLogging.log("typeInUserName", name+" user name typed", true);
+		PageObjectLogging.log("typeInUserName", name + " user name typed", true);
 	}
 
-	private void typeInPassword(String pass){
+	private void typeInPassword(String pass) {
 		waitForElementByElement(password);
 		password.clear();
 		System.out.println("[DEBUG]" + pass);
@@ -57,42 +55,42 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 		PageObjectLogging.log("typeInUserPassword", "password typed", true);
 	}
 
-	private void typeInNewPassword(String pass){
+	private void typeInNewPassword(String pass) {
 		waitForElementByElement(newPassword);
 		newPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
 
-	private void retypeInNewPassword(String pass){
+	private void retypeInNewPassword(String pass) {
 		waitForElementByElement(retypeNewPassword);
 		retypeNewPassword.sendKeys(pass);
 		PageObjectLogging.log("typeInNewPassword", "new password retyped", true, driver);
 	}
 
-	private void clickLoginButton(){
+	private void clickLoginButton() {
 		waitForElementByElement(loginButton);
 		loginButton.click();
 		PageObjectLogging.log("clickLoginButton", "login button clicked", true);
 	}
 
-	private void clickForgotPasswordLink(){
+	private void clickForgotPasswordLink() {
 		waitForElementByElement(forgotPasswordLink);
 		scrollAndClick(forgotPasswordLink);
 	}
 
-	public void loginAndVerify(String name, String password, String wikiURL){
+	public void loginAndVerify(String name, String password, String wikiURL) {
 		openSpecialUserLogin(wikiURL);
 		login(name, password);
 		verifyUserLoggedIn(name);
 	}
 
-	public void login(String name, String pass){
+	public void login(String name, String pass) {
 		typeInUserName(name);
 		typeInPassword(pass);
 		clickLoginButton();
 	}
 
-	public void remindPassword(String name, String apiToken){
+	public void remindPassword(String name, String apiToken) {
 		Assertion.assertEquals(
 			ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
 			resetForgotPasswordTime(name, apiToken));
@@ -127,8 +125,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	public void verifyClosedAccountMessage() {
 		waitForElementByElement(messagePlaceholder);
 		Assertion.assertEquals(
-				disabledAccountMessage,
-				messagePlaceholder.getText()
+			disabledAccountMessage,
+			messagePlaceholder.getText()
 		);
 	}
 }

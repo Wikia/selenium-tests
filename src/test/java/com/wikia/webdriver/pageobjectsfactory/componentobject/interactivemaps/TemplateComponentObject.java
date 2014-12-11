@@ -11,7 +11,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author Lukasz Jedrzejczak
- *
  */
 
 public class TemplateComponentObject extends BasePageObject {

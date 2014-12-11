@@ -14,18 +14,18 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 /**
  * @author Robert 'Rochan' Chan
- *
- * Editor Entry Point Test on wiki that has wgEnabledRTEExt = false, wgVisualEditorUI = false
- * User Editor Preference is set to Source Editor
- * VE-958 verify Source Editor is loaded when clicking Add Page from the contribution drop down
- * VE-958 verify Source Editor is loaded when clicking the main edit button on the top of the article
- * VE-958 verify Source Editor is loaded when clicking the red link in the article
- * VE-958 verify Source Editor is loaded when clicking the section edit link in the article
- * VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
- * VE-898 verify Src Editor is loaded on List namespace
- * VE-898 verify Src Editor is loaded on Category namespace
- * VE-898 verify Src Editor is loaded on Template namespace
- * VE-898 verify Src Editor is loaded when using ?action=edit in the URL
+ *         <p/>
+ *         Editor Entry Point Test on wiki that has wgEnabledRTEExt = false, wgVisualEditorUI = false
+ *         User Editor Preference is set to Source Editor
+ *         VE-958 verify Source Editor is loaded when clicking Add Page from the contribution drop down
+ *         VE-958 verify Source Editor is loaded when clicking the main edit button on the top of the article
+ *         VE-958 verify Source Editor is loaded when clicking the red link in the article
+ *         VE-958 verify Source Editor is loaded when clicking the section edit link in the article
+ *         VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
+ *         VE-898 verify Src Editor is loaded on List namespace
+ *         VE-898 verify Src Editor is loaded on Category namespace
+ *         VE-898 verify Src Editor is loaded on Template namespace
+ *         VE-898 verify Src Editor is loaded when using ?action=edit in the URL
  */
 
 public class VEAndRTEDisabledEditorEntrySourcePreferredTests extends NewTestTemplateBeforeClass {
@@ -46,7 +46,7 @@ public class VEAndRTEDisabledEditorEntrySourcePreferredTests extends NewTestTemp
 	)
 	public void VEAndRTEDisabledEditorEntrySourcePreferredTests_001_CreatePageEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
+			base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		SourceEditModePageObject src = article.editArticleInSrcUsingDropdown();
 		src.verifySourceOnlyMode();
 	}
@@ -56,7 +56,7 @@ public class VEAndRTEDisabledEditorEntrySourcePreferredTests extends NewTestTemp
 	)
 	public void VEAndRTEDisabledEditorEntrySourcePreferredTests_002_MainEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
+			base.openArticleByName(wikiURL, PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp());
 		SourceEditModePageObject src = article.openSrcModeWithMainEditButton();
 		src.verifySourceOnlyMode();
 	}
@@ -66,7 +66,7 @@ public class VEAndRTEDisabledEditorEntrySourcePreferredTests extends NewTestTemp
 	)
 	public void VEAndRTEDisabledEditorEntrySourcePreferredTests_003_RedlinkEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		SourceEditModePageObject src = article.openSrcModeWithRedLinks(0);
 		src.verifySourceOnlyMode();
 	}
@@ -76,7 +76,7 @@ public class VEAndRTEDisabledEditorEntrySourcePreferredTests extends NewTestTemp
 	)
 	public void VEAndRTEDisabledEditorEntrySourcePreferredTests_004_SectionEditEntry() {
 		ArticlePageObject article =
-				base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
+			base.openArticleByName(wikiURL, URLsContent.TESTINGPAGE);
 		SourceEditModePageObject src = article.openSrcModeWithSectionEditButton(0);
 		src.verifySourceOnlyMode();
 	}

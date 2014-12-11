@@ -14,11 +14,11 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#wkPreview")
+	@FindBy(css = "#wkPreview")
 	private WebElement editPreviewButton;
-	@FindBy(css="#wpTextbox1")
+	@FindBy(css = "#wpTextbox1")
 	private WebElement editArea;
-	@FindBy(css="#wkMobileCancel")
+	@FindBy(css = "#wkMobileCancel")
 	private WebElement editCancelButton;
 
 	public MobileArticlePageObject clickCancel() {
@@ -26,7 +26,7 @@ public class MobileEditModePageObject extends MobileBasePageObject {
 		return new MobileArticlePageObject(driver);
 	}
 
-	private String getHeader(){
+	private String getHeader() {
 		return selectedPageHeader.getText();
 	}
 

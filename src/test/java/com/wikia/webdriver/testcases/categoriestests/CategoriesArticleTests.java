@@ -15,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class CategoriesArticleTests extends NewTestTemplate {
 
@@ -43,8 +42,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 	public void CategoriesTestsArticle_002_anonSuggestions() {
 		VisualEditModePageObject visualEditMode = new VisualEditModePageObject(driver);
 		visualEditMode.navigateToArticleEditPageCK(
-				wikiURL,
-				PageContent.ARTICLE_NAME_PREFIX + visualEditMode.getTimeStamp()
+			wikiURL,
+			PageContent.ARTICLE_NAME_PREFIX + visualEditMode.getTimeStamp()
 		);
 		visualEditMode.addContent(PageContent.ARTICLE_TEXT);
 		ArticlePageObject article = visualEditMode.submitArticle();
@@ -69,8 +68,8 @@ public class CategoriesArticleTests extends NewTestTemplate {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(
-				wikiURL,
-				PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp()
+			wikiURL,
+			PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp()
 		);
 		visualEditMode.addContent(PageContent.ARTICLE_TEXT);
 		ArticlePageObject article = visualEditMode.submitArticle();

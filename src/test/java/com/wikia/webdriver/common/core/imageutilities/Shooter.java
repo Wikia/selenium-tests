@@ -35,8 +35,8 @@ public class Shooter {
 	 * Create a screenshot of passed element
 	 * and save screenshot as image file in temp dir
 	 *
-	 * @param element     - WebElement you want to capture
-	 * @param driver      - instace of WebDriver
+	 * @param element - WebElement you want to capture
+	 * @param driver  - instace of WebDriver
 	 * @return File path  - file's handler which was saved in given path
 	 */
 	public File captureWebElement(WebElement element, WebDriver driver) {

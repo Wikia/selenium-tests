@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 public class ArticleCRUDAnonTests extends NewTestTemplate {
 
 	@Test(
-		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_001"}
+		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_001"}
 	)
 	public void ArticleCRUDAnon_001_addBySpecialPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -26,13 +26,13 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		SpecialCreatePagePageObject specialCreatePage = base.openSpecialCreatePage(wikiURL);
 		VisualEditModePageObject visualEditMode = specialCreatePage.populateTitleField(articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
 
 	@Test(
-		groups={"ArticleCRUDAnon", "ArticleCRUDAnon_002"}
+		groups = {"ArticleCRUDAnon", "ArticleCRUDAnon_002"}
 	)
 	public void ArticleCRUDAnon_002_addByURL() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -40,7 +40,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}
@@ -72,7 +72,7 @@ public class ArticleCRUDAnonTests extends NewTestTemplate {
 		articleTitle = articleTitle + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		visualEditMode.addContent(articleContent);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyContent(articleContent);
 		article.verifyArticleTitle(articleTitle);
 	}

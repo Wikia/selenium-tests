@@ -15,10 +15,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageW
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. User 5 is posting message on user 6 message wall
- * 2. User 6 is notified about user 6 message
- *
+ *         <p/>
+ *         1. User 5 is posting message on user 6 message wall
+ *         2. User 6 is notified about user 6 message
  */
 public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 
@@ -27,10 +26,10 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 	String title;
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsOwnerTests_001",
-					"MessageWallNotificationsOwnerTests"
-			}
+		groups = {
+			"MessageWallNotificationsOwnerTests_001",
+			"MessageWallNotificationsOwnerTests"
+		}
 	)
 	public void wallOwnerReceivesNotification_setup() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -46,11 +45,11 @@ public class MessageWallNotificationsOwnerTests extends NewTestTemplate {
 	}
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsOwnerTests_002",
-					"MessageWallNotificationsOwnerTests"
-			},
-			dependsOnMethods = "wallOwnerReceivesNotification_setup"
+		groups = {
+			"MessageWallNotificationsOwnerTests_002",
+			"MessageWallNotificationsOwnerTests"
+		},
+		dependsOnMethods = "wallOwnerReceivesNotification_setup"
 	)
 	public void wallOwnerReceivesNotification_verification() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

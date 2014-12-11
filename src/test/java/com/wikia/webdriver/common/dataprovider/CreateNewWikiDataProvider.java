@@ -6,7 +6,7 @@ public class CreateNewWikiDataProvider {
 
 	@DataProvider
 	private static final Object[][] getLangs() {
-		return new Object[][] {
+		return new Object[][]{
 			{"de"},
 			{"es"},
 			{"fr"},

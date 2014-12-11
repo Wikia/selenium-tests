@@ -15,14 +15,14 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	final String cookieFromsearchName = "fromsearch";
 	final String cookieFromsearchValue = "1";
 
-	@FindBy(css=".monetization-module")
+	@FindBy(css = ".monetization-module")
 	private WebElement monetizationModuleContainer;
-	@FindBy(css=".monetization-module,.adunit")
+	@FindBy(css = ".monetization-module,.adunit")
 	private WebElement adsenseContainer;
-	@FindBy(css=".adsbygoogle")
+	@FindBy(css = ".adsbygoogle")
 	private WebElement adsenseIns;
 
-	public MonetizationModuleComponentObject (WebDriver driver) {
+	public MonetizationModuleComponentObject(WebDriver driver) {
 		super(driver);
 	}
 

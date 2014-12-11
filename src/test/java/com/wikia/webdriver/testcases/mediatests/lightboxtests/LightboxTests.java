@@ -24,17 +24,17 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.galleryboxes.Sp
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Saipetch Kongkatong
- *
- * 1. Open lightbox from latest photo,
- * 3. Open lightbox from Special:UnusedFiles page
- * 4. Open lightbox from Special:UnusedVideos page
- * 5. Open lightbox from Special:UncategorizedFiles page
- * 6. Open lightbox from Special:MostLinkedFiles page
- * 7. Open lightbox from article image and verify social buttons
- * 8. Open lightbox from article image and verify carousel
- * 9. Open lightbox from Special:Videos and verify video
- * 10. Open lightbox from Special:Videos, verify title url and verify file page (logged-in user)
- * 11. Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in user)
+ *         <p/>
+ *         1. Open lightbox from latest photo,
+ *         3. Open lightbox from Special:UnusedFiles page
+ *         4. Open lightbox from Special:UnusedVideos page
+ *         5. Open lightbox from Special:UncategorizedFiles page
+ *         6. Open lightbox from Special:MostLinkedFiles page
+ *         7. Open lightbox from article image and verify social buttons
+ *         8. Open lightbox from article image and verify carousel
+ *         9. Open lightbox from Special:Videos and verify video
+ *         10. Open lightbox from Special:Videos, verify title url and verify file page (logged-in user)
+ *         11. Open lightbox from Special:NewFiles, verify title url and verify file page (logged-in user)
  */
 public class LightboxTests extends NewTestTemplateBeforeClass {
 
@@ -116,8 +116,8 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.verifyLightboxClosed();
 	}
 
-    @Test(groups = {"LightboxTest", "Lightbox_008", "Media"})
-    public void LightboxTest_008_verifyCarousel() {
+	@Test(groups = {"LightboxTest", "Lightbox_008", "Media"})
+	public void LightboxTest_008_verifyCarousel() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialVideosPageObject specialVideos = base.openSpecialVideoPage(wikiURL);
 		LightboxComponentObject lightbox = specialVideos.openLightboxForGridVideo(0);
@@ -125,7 +125,7 @@ public class LightboxTests extends NewTestTemplateBeforeClass {
 		lightbox.clickCarouselRight();
 		lightbox.clickCarouselLeft();
 		lightbox.verifyCarouselLeftDisabled();
-    }
+	}
 
 	@Test(groups = {"LightboxTest", "LightboxTest_009", "Media"})
 	public void LightboxTest_009_specialVideo() {

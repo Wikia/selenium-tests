@@ -15,7 +15,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiA
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class VideoSuggestionsTests extends NewTestTemplate {
 
@@ -30,14 +29,14 @@ public class VideoSuggestionsTests extends NewTestTemplate {
 
 	@DataProvider
 	private static final Object[][] wikis() {
-		return new Object[][] {
+		return new Object[][]{
 			{"callofduty", "Frank_Woods"}
 		};
 	}
 
 	@Test(
-		groups = { "VideoSuggestions_001", "VideoSuggestions", "Media" },
-		dataProvider="wikis"
+		groups = {"VideoSuggestions_001", "VideoSuggestions", "Media"},
+		dataProvider = "wikis"
 	)
 	public void Vet_Tests_001_VerifyVideoSuggestionsIsDisplayed(String wikiName, String articleName) {
 		wikiURL = urlBuilder.getUrlForWiki(wikiName);

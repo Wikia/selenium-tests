@@ -2,7 +2,9 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.addtable;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
 import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,13 +16,13 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class TableBuilderComponentObject extends WikiBasePageObject {
 
-	@FindBy(css=".cke_dialog_ui_button.wikia-button")
+	@FindBy(css = ".cke_dialog_ui_button.wikia-button")
 	private WebElement submitLightboxButton;
-	@FindBy(css=".cke_dialog_body")
+	@FindBy(css = ".cke_dialog_body")
 	private WebElement addTableLightbox;
-	@FindBy(css="input.cke_dialog_ui_input_text")
+	@FindBy(css = "input.cke_dialog_ui_input_text")
 	private List<WebElement> tablePropertiesInputs;
-	@FindBy(css=".cke_dialog_ui_input_select")
+	@FindBy(css = ".cke_dialog_ui_input_select")
 	private List<WebElement> tablePropertiesDropdownOptions;
 
 	public TableBuilderComponentObject(WebDriver driver) {
@@ -96,19 +98,19 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 	public void selectHeader(Headers header) {
 		waitForElementByElement(tablePropertiesDropdownOptions.get(0));
 		Select headerDropdown = new Select(tablePropertiesDropdownOptions.get(0));
-		switch(header) {
-		case NONE:
-			headerDropdown.selectByIndex(header.ordinal());
-			break;
-		case FIRSTROW:
-			headerDropdown.selectByIndex(header.ordinal());
-			break;
-		case FIRSTCOLUMN:
-			headerDropdown.selectByIndex(header.ordinal());
-			break;
-		case BOTH:
-			headerDropdown.selectByIndex(header.ordinal());
-			break;
+		switch (header) {
+			case NONE:
+				headerDropdown.selectByIndex(header.ordinal());
+				break;
+			case FIRSTROW:
+				headerDropdown.selectByIndex(header.ordinal());
+				break;
+			case FIRSTCOLUMN:
+				headerDropdown.selectByIndex(header.ordinal());
+				break;
+			case BOTH:
+				headerDropdown.selectByIndex(header.ordinal());
+				break;
 		}
 		PageObjectLogging.log("selectHeader", header.toString() + " header selected", true, driver);
 	}
@@ -130,16 +132,16 @@ public class TableBuilderComponentObject extends WikiBasePageObject {
 	public void selectAlignment(Alignment position) {
 		waitForElementByElement(tablePropertiesDropdownOptions.get(1));
 		Select positionDropdown = new Select(tablePropertiesDropdownOptions.get(1));
-		switch(position) {
-		case LEFT:
-			positionDropdown.selectByVisibleText(position.getAlignment());
-			break;
-		case CENTER:
-			positionDropdown.selectByVisibleText(position.getAlignment());
-			break;
-		case RIGHT:
-			positionDropdown.selectByVisibleText(position.getAlignment());
-			break;
+		switch (position) {
+			case LEFT:
+				positionDropdown.selectByVisibleText(position.getAlignment());
+				break;
+			case CENTER:
+				positionDropdown.selectByVisibleText(position.getAlignment());
+				break;
+			case RIGHT:
+				positionDropdown.selectByVisibleText(position.getAlignment());
+				break;
 		}
 		PageObjectLogging.log("selectPosition", position.getAlignment() + " position selected", true, driver);
 	}

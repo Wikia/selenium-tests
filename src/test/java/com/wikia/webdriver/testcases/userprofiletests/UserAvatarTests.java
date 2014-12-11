@@ -12,14 +12,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.UserProfilePageO
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class UserAvatarTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-			groups = {"AvatarTest", "AvatarTest_001"}
+		groups = {"AvatarTest", "AvatarTest_001"}
 	)
 	public void AvatarTest_001_uploadAvatar() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -34,8 +33,8 @@ public class UserAvatarTests extends NewTestTemplate {
 	}
 
 	@Test(
-			groups = {"AvatarTest", "AvatarTest_002"},
-			dependsOnMethods = "AvatarTest_001_uploadAvatar"
+		groups = {"AvatarTest", "AvatarTest_002"},
+		dependsOnMethods = "AvatarTest_001_uploadAvatar"
 	)
 	public void AvatarTest_002_removeAvatar() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

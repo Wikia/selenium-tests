@@ -14,47 +14,47 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-public class MiniEditorComponentObject extends WikiBasePageObject{
+public class MiniEditorComponentObject extends WikiBasePageObject {
 
 	public MiniEditorComponentObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css="body#bodyContent")
+	@FindBy(css = "body#bodyContent")
 	private WebElement messageBodyField;
-	@FindBy(css=".cke_contents iframe")
+	@FindBy(css = ".cke_contents iframe")
 	public WebElement miniEditorIframe;
-	@FindBy(css=".speech-bubble-message .cke_contents iframe")
+	@FindBy(css = ".speech-bubble-message .cke_contents iframe")
 	protected WebElement miniEditorEditCommentIFrame;
-	@FindBy(css=".article-comm-edit-box iframe")
+	@FindBy(css = ".article-comm-edit-box iframe")
 	protected WebElement replyCommentIFrame;
-	@FindBy(css=".comments .cke_contents iframe")
+	@FindBy(css = ".comments .cke_contents iframe")
 	public WebElement editMessageWallFrame;
-	@FindBy(css=".replies .cke_contents iframe")
+	@FindBy(css = ".replies .cke_contents iframe")
 	public WebElement quoteMessageWallFrame;
-	@FindBy(css=".RTEImageButton .cke_icon")
+	@FindBy(css = ".RTEImageButton .cke_icon")
 	private WebElement addImageButton;
-	@FindBy(css=".RTEVideoButton .cke_icon")
+	@FindBy(css = ".RTEVideoButton .cke_icon")
 	private WebElement addVideoButton;
-	@FindBy(css="img.video.thumb")
+	@FindBy(css = "img.video.thumb")
 	private WebElement videoInMessageEditMode;
-	@FindBy(css=".cke_toolbar_formatmini span.cke_button.cke_button_link a .cke_icon")
+	@FindBy(css = ".cke_toolbar_formatmini span.cke_button.cke_button_link a .cke_icon")
 	private WebElement addLinkButton;
-	@FindBy(css="input[value='ext']")
+	@FindBy(css = "input[value='ext']")
 	private WebElement externalLinkOption;
-	@FindBy(css="input.cke_dialog_ui_input_text")
+	@FindBy(css = "input.cke_dialog_ui_input_text")
 	private WebElement targetPageOrURL;
-	@FindBy(css="span.cke_dialog_ui_button")
+	@FindBy(css = "span.cke_dialog_ui_button")
 	private WebElement linkModalOkButton;
-	@FindBy (css="[id*='_uiElement'] .link-yes")
+	@FindBy(css = "[id*='_uiElement'] .link-yes")
 	private WebElement linkExistsIcon;
-	@FindBy (css="[id*='_uiElement'] .external")
+	@FindBy(css = "[id*='_uiElement'] .external")
 	private WebElement linkExternalIcon;
-	@FindBy (css=".MiniEditorWrapper.active.editor-open")
+	@FindBy(css = ".MiniEditorWrapper.active.editor-open")
 	private WebElement miniEditorWrapper;
 
-	public void writeMiniEditor(String text){
+	public void writeMiniEditor(String text) {
 		waitForElementByElement(messageBodyField);
 		// This was intensively investigated and sleep is the only way to make the tests more reliable.
 		// The reason is the Minieditor defectiveness
@@ -67,7 +67,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		messageBodyField.sendKeys(text);
 	}
 
-	public void writeMiniEditor(Keys key){
+	public void writeMiniEditor(Keys key) {
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(key);
 	}
@@ -79,7 +79,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		messageBodyField.sendKeys(text);
 	}
 
-	public void writeStylesMiniEditor(String message, String special){
+	public void writeStylesMiniEditor(String message, String special) {
 		String specialKey = "Not Initialized";
 		if (special.equals("Bold")) {
 			specialKey = "b";
@@ -89,11 +89,11 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		}
 		waitForElementByElement(messageBodyField);
 		messageBodyField.sendKeys(message);
-		messageBodyField.sendKeys(Keys.LEFT_CONTROL + "a" );
-		messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey );
+		messageBodyField.sendKeys(Keys.LEFT_CONTROL + "a");
+		messageBodyField.sendKeys(Keys.LEFT_CONTROL + specialKey);
 	}
 
-	public void addVideoMiniEditor(String url){
+	public void addVideoMiniEditor(String url) {
 		waitForElementByElement(addVideoButton);
 		scrollAndClick(addVideoButton);
 		VetAddVideoComponentObject vetAddingVideo = new VetAddVideoComponentObject(driver);
@@ -102,14 +102,14 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		verifyVideoMiniEditor();
 	}
 
-	public void verifyVideoMiniEditor(){
+	public void verifyVideoMiniEditor() {
 		waitForElementByElement(miniEditorIframe);
 		driver.switchTo().frame(miniEditorIframe);
 		waitForElementByElement(videoInMessageEditMode);
 		driver.switchTo().defaultContent();
 	}
 
-	public void addExternalLink(String externalLink){
+	public void addExternalLink(String externalLink) {
 		waitForElementByElement(addLinkButton);
 		scrollAndClick(addLinkButton);
 		waitForElementByElement(externalLinkOption);
@@ -119,7 +119,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		scrollAndClick(linkModalOkButton);
 	}
 
-	public void addInternalLink(String internalLink){
+	public void addInternalLink(String internalLink) {
 		waitForElementByElement(addLinkButton);
 		scrollAndClick(addLinkButton);
 		waitForElementByElement(targetPageOrURL);
@@ -129,7 +129,7 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 		scrollAndClick(linkModalOkButton);
 	}
 
-	public VetAddVideoComponentObject clickAddVideo(){
+	public VetAddVideoComponentObject clickAddVideo() {
 		waitForElementByElement(addVideoButton);
 		scrollAndClick(addVideoButton);
 		return new VetAddVideoComponentObject(driver);

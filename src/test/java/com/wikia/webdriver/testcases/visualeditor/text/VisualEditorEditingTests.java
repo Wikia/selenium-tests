@@ -20,7 +20,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.WikiHistoryPag
 /**
  * @author Robert 'rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * 1. VE-1228 Adding all style text, heading text and list to a new article
  * 2. VE-1228 Removing a piece of text from the article
  * 3. VE-1228 Adding all style text, heading text and list to an existing article
@@ -64,7 +64,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 		firstSourceEditText = new ArrayList<>();
 		firstSourceEditText.add(text);
 		secondSourceEditText = new ArrayList<>();
-		secondSourceEditText.add(text+text);
+		secondSourceEditText.add(text + text);
 
 	}
 

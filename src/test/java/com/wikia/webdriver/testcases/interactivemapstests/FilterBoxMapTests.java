@@ -20,7 +20,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "FilterBoxMapTests_001", "FilterBoxMapTests", "InteractiveMaps" })
+	@Test(groups = {"FilterBoxMapTests_001", "FilterBoxMapTests", "InteractiveMaps"})
 	public void FilterBoxMapTests_001_VerifyUncheckedSingleCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -31,7 +31,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
 		selectedMap.verifyAllPinTypesIsUncheck();
 	}
 
-	@Test(groups = { "FilterBoxMapTests_002", "FilterBoxMapTests", "InteractiveMaps" })
+	@Test(groups = {"FilterBoxMapTests_002", "FilterBoxMapTests", "InteractiveMaps"})
 	public void FilterBoxMapTests_002_VerifyClickOnUncheckedCategory() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -44,7 +44,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
 		selectedMap.verifyAllPinTypesIsCheck();
 	}
 
-	@Test(groups = { "FilterBoxMapTests_003", "FilterBoxMapTests", "InteractiveMaps" })
+	@Test(groups = {"FilterBoxMapTests_003", "FilterBoxMapTests", "InteractiveMaps"})
 	public void FilterBoxMapTests_003_VerifyClickAllCategoriesUncheckCategories() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -56,7 +56,7 @@ public class FilterBoxMapTests extends NewTestTemplate {
 		selectedMap.verifyPinTypesAreUncheck();
 	}
 
-	@Test(groups = { "FilterBoxMapTests_004", "FilterBoxMapTests", "InteractiveMaps" })
+	@Test(groups = {"FilterBoxMapTests_004", "FilterBoxMapTests", "InteractiveMaps"})
 	public void FilterBoxMapTests_004_VerifyClickAllCategoriesCheckAllPinTypes() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

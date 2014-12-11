@@ -10,44 +10,46 @@ import org.openqa.selenium.support.FindBy;
 
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+
 /**
  * class for adding photo to gallery, slider and slideshow
+ *
  * @author Karol 'kkarolk' Kujawiak
  */
-public class AddPhotoComponentObject extends BasePageObject{
+public class AddPhotoComponentObject extends BasePageObject {
 
-	@FindBy(css=".WikiaSearch#WikiaPhotoGallerySearch input[name='search']")
+	@FindBy(css = ".WikiaSearch#WikiaPhotoGallerySearch input[name='search']")
 	private WebElement searchField;
-	@FindBy(css="#WikiaPhotoGallerySearch img.search")
+	@FindBy(css = "#WikiaPhotoGallerySearch img.search")
 	private WebElement searchButton;
-	@FindBy(css="#WikiaPhotoGallerySearchResultsSelect")
+	@FindBy(css = "#WikiaPhotoGallerySearchResultsSelect")
 	private WebElement selectButton;
 
 	private By galleryDialogPhotosList = By
-			.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li");
+		.cssSelector("ul[class='WikiaPhotoGalleryResults'][type='results'] li");
 
 	public AddPhotoComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
-	private void typeSearchQuery(String query){
+	private void typeSearchQuery(String query) {
 		waitForElementByElement(searchField);
 		searchField.sendKeys(query);
-		PageObjectLogging.log("typeSearchQuery", query+" search query typed in", true);
+		PageObjectLogging.log("typeSearchQuery", query + " search query typed in", true);
 	}
 
-	private void clickSearchButton(){
+	private void clickSearchButton() {
 		waitForElementByElement(searchButton);
 		searchButton.click();
 		PageObjectLogging.log("clickSearchButton", "search button clicked", true);
 	}
 
-	public void search(String query){
+	public void search(String query) {
 		typeSearchQuery(query);
 		clickSearchButton();
 	}
 
-	public List<String> choosePhotos(int photoNum){
+	public List<String> choosePhotos(int photoNum) {
 		driver.findElement(galleryDialogPhotosList);
 		List photoNames = new ArrayList<String>();
 		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
@@ -56,12 +58,12 @@ public class AddPhotoComponentObject extends BasePageObject{
 			photoNames.add(List.get(i).getAttribute("title"));
 		}
 		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + photoNum
-				+ " image inputs", true, driver);
+			+ " image inputs", true, driver);
 		return photoNames;
 	}
 
 
-	public void clickSelect(){
+	public void clickSelect() {
 		waitForElementByElement(selectButton);
 		selectButton.click();
 		PageObjectLogging.log("clickSelect", "select button clicked", true);

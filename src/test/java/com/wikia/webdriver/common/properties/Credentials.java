@@ -5,7 +5,6 @@ import java.io.File;
 import com.wikia.webdriver.common.core.XMLFunctions;
 
 /**
- *
  * @author Bogna 'bognix' Knychała
  */
 public class Credentials {

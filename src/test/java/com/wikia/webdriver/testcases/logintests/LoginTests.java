@@ -10,11 +10,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. Login user using Special:UserLogin page,
- * 2. Login user using drop-down
- * 3. Login staff user using Special:UserLogin page,
- * 4. Login staff user using drop-down
+ *         <p/>
+ *         1. Login user using Special:UserLogin page,
+ *         2. Login user using drop-down
+ *         3. Login staff user using Special:UserLogin page,
+ *         4. Login staff user using drop-down
  */
 public class LoginTests extends NewTestTemplate {
 

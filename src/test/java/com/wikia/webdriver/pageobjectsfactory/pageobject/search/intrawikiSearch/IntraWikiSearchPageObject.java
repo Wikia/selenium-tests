@@ -23,71 +23,71 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	private String photoExtension = ".jpg";
 	private String thumbnailsVideosGroup = ".Results a.image.video.lightbox";
 
-	@FindBy(css=".photos-and-videos")
+	@FindBy(css = ".photos-and-videos")
 	private WebElement photosVideos;
-	@FindBy(css="#searchInput")
+	@FindBy(css = "#searchInput")
 	private WebElement searchField;
-	@FindBy(css="#searchForm .search-submit")
+	@FindBy(css = "#searchForm .search-submit")
 	private WebElement searchButton;
-	@FindBy(css="[value=is_image]")
+	@FindBy(css = "[value=is_image]")
 	private WebElement filterPhotos;
-	@FindBy(css="[value=is_video]")
+	@FindBy(css = "[value=is_video]")
 	private WebElement filterVideos;
-	@FindBy(css="[name=rank]")
+	@FindBy(css = "[name=rank]")
 	private WebElement sortingOptions;
-	@FindBy(css=".Results article h1 .result-link")
+	@FindBy(css = ".Results article h1 .result-link")
 	private List<WebElement> titles;
-	@FindBy(css=".Results article img")
+	@FindBy(css = ".Results article img")
 	private List<WebElement> images;
-	@FindBy(css=".Results article a img")
+	@FindBy(css = ".Results article a img")
 	private List<WebElement> videoImages;
-	@FindBy(css=".Results article")
+	@FindBy(css = ".Results article")
 	private List<WebElement> descriptions;
-	@FindBy(css=".Results article li > a")
+	@FindBy(css = ".Results article li > a")
 	private List<WebElement> urls;
-	@FindBy(css=".SearchInput .grid-1.alpha")
+	@FindBy(css = ".SearchInput .grid-1.alpha")
 	private WebElement searchHeadline;
-	@FindBy(css=".search-tabs.grid-1.alpha")
+	@FindBy(css = ".search-tabs.grid-1.alpha")
 	private WebElement searchTabs;
-	@FindBy(css="#advanced-link")
+	@FindBy(css = "#advanced-link")
 	private WebElement advancedButton;
-	@FindBy(css="#AdvancedSearch")
+	@FindBy(css = "#AdvancedSearch")
 	private WebElement advancedField;
-	@FindBy(css=".top-wiki-articles.RailModule")
+	@FindBy(css = ".top-wiki-articles.RailModule")
 	private WebElement topModule;
-	@FindBy(css=".top-wiki-article-thumbnail")
+	@FindBy(css = ".top-wiki-article-thumbnail")
 	private List<WebElement> topModuleArticleThumbnail;
-	@FindBy(css=".top-wiki-article-text")
+	@FindBy(css = ".top-wiki-article-text")
 	private List<WebElement> topModuleArticleText;
-	@FindBy(css=".top-wiki-article.result")
+	@FindBy(css = ".top-wiki-article.result")
 	private List<WebElement> topModuleResults;
-	@FindBy(css="#AdvancedSearch label")
+	@FindBy(css = "#AdvancedSearch label")
 	private List<WebElement> advancedOptions;
-	@FindBy(css="#AdvancedSearch label input")
+	@FindBy(css = "#AdvancedSearch label input")
 	private List<WebElement> advancedOptionInputs;
-	@FindBy(css=".Results .image")
+	@FindBy(css = ".Results .image")
 	private List<WebElement> thumbnailsImages;
-	@FindBy(css=".Results a.image.video.lightbox")
+	@FindBy(css = ".Results a.image.video.lightbox")
 	private List<WebElement> thumbnailsVideos;
-	@FindBy(css=".autocomplete")
+	@FindBy(css = ".autocomplete")
 	private List<WebElement> suggestionsList;
-	@FindBy(css=".search-tabs.grid-1.alpha")
+	@FindBy(css = ".search-tabs.grid-1.alpha")
 	private List<WebElement> filterOptions;
-	@FindBy(css=".play-circle")
+	@FindBy(css = ".play-circle")
 	private List<WebElement> playMovieImages;
-	@FindBy(css=".result-description .result-link")
+	@FindBy(css = ".result-description .result-link")
 	private WebElement pushToTopWikiResult;
-	@FindBy(css=".wikiPromoteThumbnail")
+	@FindBy(css = ".wikiPromoteThumbnail")
 	private WebElement pushToTopWikiThumbnail;
-	@FindBy(css=".search-suggest-img-wrapper")
+	@FindBy(css = ".search-suggest-img-wrapper")
 	private List<WebElement> suggestionImagesList;
-	@FindBy(css="#WikiaSearchHeader .search-suggest li:not(.all)")
+	@FindBy(css = "#WikiaSearchHeader .search-suggest li:not(.all)")
 	private List<WebElement> newSuggestionsList;
-	@FindBy(css=".block")
+	@FindBy(css = ".block")
 	private List<WebElement> suggestionTextsList;
-	@FindBy(id="searchInput")
+	@FindBy(id = "searchInput")
 	private WebElement searchInputInGlobalNav;
-	@FindBy(id="searchForm")
+	@FindBy(id = "searchForm")
 	private WebElement searchFormInGlobalNav;
 
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
@@ -111,7 +111,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementByBy(jqueryAutocompleteBy);
 		searchField.sendKeys(query);
 		waitForElementByElement(suggestionsList.get(0));
-		for(int i = 0; i < suggestionsList.size(); i++) {
+		for (int i = 0; i < suggestionsList.size(); i++) {
 			Assertion.assertStringContains(query, suggestionsList.get(i).getText());
 		}
 	}
@@ -122,7 +122,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void verifyLanguageTranslation() {
-		for(int i = 0; i < filterOptions.size(); i++) {
+		for (int i = 0; i < filterOptions.size(); i++) {
 			verifyLanguageTranslation(filterOptions.get(i));
 		}
 		verifyLanguageTranslation(resultCountMessage);
@@ -132,7 +132,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
 	public void verifyFirstResult(String query) {
 		Assertion.assertStringContains(query.replaceAll("_", " "), firstResult.getText());
-		for (WebElement elem:descriptions) {
+		for (WebElement elem : descriptions) {
 			Assertion.assertTrue(!elem.getText().isEmpty());
 		}
 		Assertion.assertEquals(titles.size(), urls.size());
@@ -143,12 +143,12 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void verifyLastResultPage() {
-		waitForElementClickableByElement(paginationPages.get(paginationPages.size()-1));
+		waitForElementClickableByElement(paginationPages.get(paginationPages.size() - 1));
 		do {
-			waitForElementByElement(paginationPages.get(paginationPages.size()-1));
-			scrollAndClick(paginationPages.get(paginationPages.size()-1));
+			waitForElementByElement(paginationPages.get(paginationPages.size() - 1));
+			scrollAndClick(paginationPages.get(paginationPages.size() - 1));
 		}
-		while(paginationPages.size() > 6);
+		while (paginationPages.size() > 6);
 		Assertion.assertEquals(paginationPages.size(), 6);
 		Assertion.assertTrue(titles.size() <= 25);
 	}
@@ -188,14 +188,12 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 
 	public void verifyDefaultNamespaces() {
 		waitForElementVisibleByElement(advancedField);
-		for(int i = 0; i < advancedOptions.size(); i++) {
-			if(advancedOptions.get(i).getText().equals("Articles")) {
+		for (int i = 0; i < advancedOptions.size(); i++) {
+			if (advancedOptions.get(i).getText().equals("Articles")) {
 				Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
-			}
-			else if(advancedOptions.get(i).getText().equals("Category")) {
+			} else if (advancedOptions.get(i).getText().equals("Category")) {
 				Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
-			}
-			else {
+			} else {
 				Assertion.assertNull(advancedOptionInputs.get(i).getAttribute("checked"));
 			}
 		}
@@ -211,7 +209,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	public void verifyPhotosOnly() {
 		waitForElementByElement(thumbnailsImages.get(0));
 		waitForElementNotPresent(thumbnailsVideosGroup);
-		for(int i = 0; i < titles.size(); i++) {
+		for (int i = 0; i < titles.size(); i++) {
 			waitForElementByElement(titles.get(i));
 			scrollToElement(titles.get(i));
 			waitForElementByElement(images.get(i));
@@ -224,7 +222,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		//make sure there are as many videos as play buttons
 		waitForElementByElement(playMovieImages.get(0));
 		Assertion.assertEquals(playMovieImages.size(), thumbnailsVideos.size());
-		for(int i = 0; i < titles.size(); i++) {
+		for (int i = 0; i < titles.size(); i++) {
 			waitForElementByElement(titles.get(i));
 			scrollToElement(titles.get(i));
 			waitForElementByElement(videoImages.get(i));
@@ -245,7 +243,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	public void verifyTopModule() {
 		waitForElementByElement(topModule);
 		Assertion.assertNumber(7, topModuleResults.size(), "Top module has correct amount of results");
-		for(int i = 0; i < topModuleResults.size(); i++) {
+		for (int i = 0; i < topModuleResults.size(); i++) {
 			Assertion.assertTrue(topModuleArticleThumbnail.get(i).isDisplayed());
 			Assertion.assertTrue(topModuleArticleText.get(i).isDisplayed());
 		}
@@ -270,7 +268,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void verifyTitlesNotEmpty() {
-		for (WebElement elem:titles) {
+		for (WebElement elem : titles) {
 			Assertion.assertNotNull(elem.getText());
 		}
 	}
@@ -282,21 +280,21 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	public void sortBy(sortOptions option) {
 		Select dropDown = new Select(sortingOptions);
 		switch (option) {
-		case RELEVANCY:
-			dropDown.selectByIndex(0);
-			break;
-		case PUBLISH_DATE:
-			dropDown.selectByIndex(1);
-			break;
-		case DURATION:
-			dropDown.selectByIndex(2);
-			break;
+			case RELEVANCY:
+				dropDown.selectByIndex(0);
+				break;
+			case PUBLISH_DATE:
+				dropDown.selectByIndex(1);
+				break;
+			case DURATION:
+				dropDown.selectByIndex(2);
+				break;
 		}
 	}
 
 	public List<String> getTitles() {
 		ArrayList<String> titleList = new ArrayList<String>();
-		for (WebElement elem:titles) {
+		for (WebElement elem : titles) {
 			titleList.add(elem.getText());
 		}
 		return titleList;
@@ -320,8 +318,8 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 		waitForElementByBy(jqueryAutocompleteBy);
 		searchField.sendKeys(query);
 		waitForElementByElement(newSuggestionsList.get(0));
-		System.out.println(newSuggestionsList.size() );
-		for(int i = 0; i < newSuggestionsList.size(); i++) {
+		System.out.println(newSuggestionsList.size());
+		for (int i = 0; i < newSuggestionsList.size(); i++) {
 			Assertion.assertStringContains(query, suggestionTextsList.get(i).getText());
 			Assertion.assertTrue(suggestionImagesList.get(i).isDisplayed());
 		}
