@@ -92,8 +92,8 @@ public class BlogTests extends NewTestTemplate{
 		SpecialRestorePageObject restore = base.undeleteByFlashMessage();
 		restore.giveReason(blogPage.getTimeStamp());
 		restore.restorePage();
-		blogPage.verifyBlogTitle(blogTitle);
 		blogPage.verifyNotificationMessage();
+		blogPage.verifyBlogTitle(blogTitle);
 	}
 
 	@Test(groups = { "BlogTests_005", "BlogTests"})
