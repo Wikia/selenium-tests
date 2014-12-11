@@ -49,7 +49,7 @@ public class AdsComparison {
 		changeVisibility(selector, "hidden", driver);
 	}
 
-	private void showSlot(String selector, WebDriver driver) {
+	public void showSlot(String selector, WebDriver driver) {
 		changeVisibility(selector, "visible", driver);
 	}
 
