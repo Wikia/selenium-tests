@@ -90,9 +90,9 @@ public class TestAdsScreenshotComparison extends NewTestTemplate {
 	}
 
 	@Test (
-		groups={"Ads_Screenshot_GeoEdgeFree"}
+		groups={"Ads_Screenshot_GEF"}
 	)
-	public void Ads_Screenshot_GeoEdgeFree() throws Exception {
+	public void Ads_Screenshot_GEF() throws Exception {
 		checkAds();
 	}
 
