@@ -162,6 +162,7 @@
 			<class name="com.wikia.webdriver.testcases.globalnavigationtests.TestWikiaLogoInGlobalNav"/>
 			<class name="com.wikia.webdriver.testcases.globalnavigationtests.TestGlobalSearchInGlobalNav"/>
 			<class name="com.wikia.webdriver.testcases.venustests.TestTablesOnVenus"/>
+            <class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
 		</classes>
 	</test>
 </suite>
