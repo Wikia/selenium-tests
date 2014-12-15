@@ -22,7 +22,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 			groups = { "ForgottenPassword_001", "ForgottenPassword"}
 	)
 
-	public void ForgottenPassword_001_dropdown() {
+	public void ForgottenPassword_001_dropdown_QAART_480() {
 		String userName = credentials.userNameForgottenPassword;
 
 		WikiBasePageObject base = new WikiBasePageObject(driver);

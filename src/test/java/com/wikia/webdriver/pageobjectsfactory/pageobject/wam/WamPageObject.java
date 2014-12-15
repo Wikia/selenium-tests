@@ -312,7 +312,7 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	public String changeDateToLastMonth() {
-		datePickerInput.click();
+		scrollAndClick(datePickerInput);
 		waitForElementVisibleByElement(calendarElement);
 		previousMonthArrow.click();
 		Calendar calendar = Calendar.getInstance();
@@ -348,10 +348,11 @@ public class WamPageObject extends BasePageObject {
 		waitForElementClickableByElement(datePickerInput);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("$(arguments[0])[0].value=''", datePickerInput);
+		scrollAndClick(datePickerInput);
 		datePickerInput.sendKeys(date);
 		Actions actions = new Actions(driver);
 		actions.sendKeys(datePickerInput, "\n");
-		actions.build().perform();
+		actions.perform();
 	}
 
 	private String getFormatedDate(Date date, String format) {

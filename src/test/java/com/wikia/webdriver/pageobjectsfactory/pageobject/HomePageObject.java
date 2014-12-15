@@ -142,7 +142,8 @@ public class HomePageObject extends WikiBasePageObject {
 
 		for (int i=0; i<numOfLanguages; i++) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
-			String languageURL = getLanguageURL(i) + URLsContent.WIKIA_DIR;
+			String languageURL = getLanguageURL(i);
+
 			newHome = selectLanguage(i);
 
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
@@ -150,6 +151,9 @@ public class HomePageObject extends WikiBasePageObject {
 			if (!checkIfPageIsHub() ) {
 				newHome.verifyLanguageButton();
 			} else {
+				languageURL += URLsContent.WIKI_DIR;
+				newHome.verifyURLcontains(languageURL);
+
 				PageObjectLogging.log(
 					"selectLanguage",
 					"page is a Hub and language dropdown is not present and main url is different",
