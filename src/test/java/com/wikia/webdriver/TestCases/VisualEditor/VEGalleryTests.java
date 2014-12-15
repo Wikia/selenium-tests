@@ -1,13 +1,14 @@
-package com.wikia.webdriver.TestCases.VisualEditor;
+package com.wikia.webdriver.testcases.visualeditor;
 
-import com.wikia.webdriver.Common.ContentPatterns.PageContent;
-import com.wikia.webdriver.Common.ContentPatterns.URLsContent;
-import com.wikia.webdriver.Common.DataProvider.VisualEditorDataProvider.InsertDialog;
-import com.wikia.webdriver.Common.Properties.Credentials;
-import com.wikia.webdriver.Common.Templates.NewTestTemplateBeforeClass;
-import com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs.*;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.Article.ArticlePageObject;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
+import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
+import com.wikia.webdriver.common.properties.Credentials;
+import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorInsertGalleryDialog;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.VisualEditorSaveChangesDialog;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -42,7 +43,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
-			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		ve = galleryDialog.addExistingMedia(NUM_OF_MEDIAS);
 		ve.verifyGalleries(NUM_OF_GALLERIES);
@@ -67,7 +68,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
-				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		//verify # of cart items  = 9
 		galleryDialog.addMediaToCart(INITIAL_NUM_OF_MEDIA);
@@ -98,7 +99,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
-				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		ve = galleryDialog.clickTitleToPreview(7);
 		ve.verifyPreviewImage();
@@ -114,7 +115,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
-				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(InsertDialog.GALLERY);
+				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		ve = galleryDialog.clickMetaDataToPreview(3);
 		ve.verifyPreviewImage();

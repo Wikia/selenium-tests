@@ -1,16 +1,16 @@
-package com.wikia.webdriver.PageObjectsFactory.ComponentObject.VisualEditorDialogs;
+package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
 import java.util.List;
 
-import com.wikia.webdriver.Common.Core.Assertion;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.Common.Logging.PageObjectLogging;
-import com.wikia.webdriver.PageObjectsFactory.PageObject.VisualEditor.VisualEditorPageObject;
 
 public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 
