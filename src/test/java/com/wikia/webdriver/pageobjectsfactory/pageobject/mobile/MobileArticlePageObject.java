@@ -13,7 +13,7 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mobile.TableOfContentsComponentObject;
 
-public class MobileArticlePageObject extends MobileBasePageObject{
+public class MobileArticlePageObject extends MobileBasePageObject {
 
 	public MobileArticlePageObject(WebDriver driver) {
 		super(driver);
@@ -24,59 +24,59 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	private String curtainNotOpened = ".ads";
 	private String backCssSelector = ".goBck";
 
-	@FindBy(css="#wkArtComHeader")
+	@FindBy(css = "#wkArtComHeader")
 	private WebElement commentsSectionHeader;
-	@FindBy(css=".commSbt.wkBtn.main")
+	@FindBy(css = ".commSbt.wkBtn.main")
 	private WebElement postCommentButton;
-	@FindBy(css=".commText[name='wpArticleComment']")
+	@FindBy(css = ".commText[name='wpArticleComment']")
 	private WebElement commentInputArea;
-	@FindBy(css=".cmnRpl")
+	@FindBy(css = ".cmnRpl")
 	private WebElement replyCommentButton;
-	@FindBy(css="[placeholder='Post a reply']")
+	@FindBy(css = "[placeholder='Post a reply']")
 	private WebElement replyInputArea;
-	@FindBy(css="#commMore")
+	@FindBy(css = "#commMore")
 	private WebElement loadMoreCommentsButton;
-	@FindBy(css="#commPrev")
+	@FindBy(css = "#commPrev")
 	private WebElement loadPreviousCommentsButton;
-	@FindBy(css=".lazy.media.load.loaded")
+	@FindBy(css = ".lazy.media.load.loaded")
 	private WebElement modalWrapper;
-	@FindBy(css=".swiperPage.current")
+	@FindBy(css = ".swiperPage.current")
 	private WebElement currentImageModal;
-	@FindBy(css="#wkTOC.active")
+	@FindBy(css = "#wkTOC.active")
 	private WebElement tocSideMenu;
-	@FindBy(css="#wkTOCHandle")
+	@FindBy(css = "#wkTOCHandle")
 	private WebElement openTOCbutton;
-	@FindBy(css="#wkMainCntHdr>h1")
+	@FindBy(css = "#wkMainCntHdr>h1")
 	private WebElement wikiHeader;
-	@FindBys(@FindBy(css=".txt > p"))
+	@FindBys(@FindBy(css = ".txt > p"))
 	private List<WebElement> listOfComments;
-	@FindBy(css="section.artSec.open")
+	@FindBy(css = "section.artSec.open")
 	private WebElement sectionOpened;
-	@FindBy(css="section.artSec.open")
+	@FindBy(css = "section.artSec.open")
 	private List<WebElement> sectionOpenedList;
-	@FindBy(css="div#mw-content-text h2.collSec.open")
+	@FindBy(css = "div#mw-content-text h2.collSec.open")
 	private WebElement sectionVisibilityElement;
-	@FindBy(css="#wkMdlImages > .current > img")
+	@FindBy(css = "#wkMdlImages > .current > img")
 	private WebElement openedImage;
 	@FindBy(css = "#wkCurtain")
 	private WebElement curtain;
 	@FindBy(css = "#wkNavBack")
 	private WebElement menuBackButton;
-	@FindBys(@FindBy(css=".thumb > img"))
+	@FindBys(@FindBy(css = ".thumb > img"))
 	private List<WebElement> listOfMediaElements;
-	@FindBys(@FindBy(css="#lvl1>li"))
+	@FindBys(@FindBy(css = "#lvl1>li"))
 	private List<WebElement> menuTabs;
-	@FindBys(@FindBy(css=".lvl2.cur>li"))
+	@FindBys(@FindBy(css = ".lvl2.cur>li"))
 	private List<WebElement> level2;
-	@FindBy(css=".lvl3")
+	@FindBy(css = ".lvl3")
 	private WebElement level3;
-	@FindBy(css=".lvl2.cur.anim-done")
+	@FindBy(css = ".lvl2.cur.anim-done")
 	private WebElement level2Visible;
-	@FindBy(css=".lvl3.cur.anim-done")
+	@FindBy(css = ".lvl3.cur.anim-done")
 	private WebElement level3Visible;
-	@FindBy(css="#wkCurtain:not(.active)")
+	@FindBy(css = "#wkCurtain:not(.active)")
 	private WebElement curtainClosed;
-	@FindBy(css=".editsection > a")
+	@FindBy(css = ".editsection > a")
 	private List<WebElement> editSectionList;
 
 	public void showCommentsSection() {
@@ -89,7 +89,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 
 	private void verifyAddedCommentOnTop(String comment) {
 		Assertion.assertEquals(
-				listOfComments.get(0).getAttribute("innerText"), comment, "comment is not added on top"
+			listOfComments.get(0).getAttribute("innerText"), comment, "comment is not added on top"
 		);
 	}
 
@@ -107,7 +107,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		postCommentButton.click();
 		waitForElementByXPath(
 			"//li[@class='comment']/blockquote/div[@class='txt']/p[contains(text(), '"
-			+ comment + "')]"
+				+ comment + "')]"
 		);
 		Assertion.assertTrue(listOfComments.size() == (firstNumberOfComments + 1), "size of list was not increased");
 		verifyAddedCommentOnTop(comment);
@@ -129,14 +129,14 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		postCommentButton.click();
 		waitForElementByXPath(
 			"//li[@class='comment']/blockquote/div[@class='txt']/p[contains(text(), '"
-			+ comment + "')]"
+				+ comment + "')]"
 		);
 		verifyNumberOfComments(number);
 	}
 
 	private void verifyAddedReplyOnCommentPage(String reply) {
 		waitForElementByXPath(
-				"//div[@id='wkMdlWrp']//ul[@class='sub-comments']//p[contains(text(), '" + reply + "')]"
+			"//div[@id='wkMdlWrp']//ul[@class='sub-comments']//p[contains(text(), '" + reply + "')]"
 		);
 		PageObjectLogging.log("verifyAddedReply", "reply " + reply + " is visible", true, driver);
 	}
@@ -151,7 +151,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 		replyInputArea.submit();
 		verifyURL(url);
 		verifyAddedReplyOnCommentPage(reply);
-		PageObjectLogging.log("addReply", "reply "+reply+" added", true, driver);
+		PageObjectLogging.log("addReply", "reply " + reply + " added", true, driver);
 	}
 
 	public void clickLoadMoreButton() {
@@ -180,7 +180,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public String getCommentInnerText() {
-		 return listOfComments.get(0).getAttribute("innerText");
+		return listOfComments.get(0).getAttribute("innerText");
 	}
 
 	public MobileArticlePageObject openSections(String wikiURL) {
@@ -203,7 +203,7 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	}
 
 	public void clickSection(int sectionNumber) {
-		WebElement chev = waitForElementByXPath("//div[@id='mw-content-text']/h2["+sectionNumber+"]");
+		WebElement chev = waitForElementByXPath("//div[@id='mw-content-text']/h2[" + sectionNumber + "]");
 		scrollAndClick(chev);
 		PageObjectLogging.log("clickSection", "section " + chev.getText() + " clicked", true, driver);
 	}
@@ -330,13 +330,13 @@ public class MobileArticlePageObject extends MobileBasePageObject{
 	public void verifyMenuPagination() {
 		openMenu();
 		String firstTab = menuTabs.get(0).getAttribute("innerText");
-		for(WebElement elem : menuTabs) {
-			if(elem.getAttribute("class").contains("cld")) {
+		for (WebElement elem : menuTabs) {
+			if (elem.getAttribute("class").contains("cld")) {
 				waitForElementNotVisibleByElement(level2Visible);
 				waitForElementClickableByElement(elem);
 				elem.click();
-				for(WebElement elem2 : level2) {
-					if(elem2.getAttribute("class").contains("cld")) {
+				for (WebElement elem2 : level2) {
+					if (elem2.getAttribute("class").contains("cld")) {
 						waitForElementByElement(level2Visible);
 						waitForElementNotVisibleByElement(level3);
 						elem2.click();

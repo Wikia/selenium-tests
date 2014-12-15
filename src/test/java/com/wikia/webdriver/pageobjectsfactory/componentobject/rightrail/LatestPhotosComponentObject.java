@@ -15,7 +15,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
  */
 public class LatestPhotosComponentObject extends WikiBasePageObject {
 
-	@FindBy(css=".carousel li.thumbs")
+	@FindBy(css = ".carousel li.thumbs")
 	private List<WebElement> latestPhotosList;
 
 	public LatestPhotosComponentObject(WebDriver driver) {

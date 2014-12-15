@@ -2,7 +2,9 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
 import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+
 import java.util.List;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +19,7 @@ public class AdsAmazonObject extends AdsBaseObject {
 	private final static String AMAZON_SCRIPT_URL = "amazon-adsystem.com/e/dtb/bid";
 	private final static String AMAZON_SCRIPT = "script[src*=\"" + AMAZON_SCRIPT_URL + "\"]";
 
-	@FindBy(css="div[id*=_gpt][data-gpt-page-params*=amzn]")
+	@FindBy(css = "div[id*=_gpt][data-gpt-page-params*=amzn]")
 	private List<WebElement> slotsWithAmazonParams;
 
 	public AdsAmazonObject(

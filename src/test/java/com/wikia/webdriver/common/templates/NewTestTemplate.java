@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.templates;
 
 import com.wikia.webdriver.common.core.annotations.UserAgent;
+
 import java.lang.reflect.Method;
 
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
@@ -25,7 +26,7 @@ public class NewTestTemplate extends NewTestTemplateCore {
 			);
 		}
 
-		if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)){
+		if (method.isAnnotationPresent(UseUnstablePageLoadStrategy.class)) {
 			NewDriverProvider.setUnstablePageLoadStrategy(true);
 		}
 

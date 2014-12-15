@@ -15,17 +15,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class ForcedLoginTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"ForcedLogin_001_newFile", "ForcedLogin"})
-	public void ForcedLogin_001_newFile () {
+	public void ForcedLogin_001_newFile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialNewFilesPageObject specialPage = base.openSpecialNewFiles(wikiURL);
 		specialPage.verifySpecialPage();
@@ -40,7 +38,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ForcedLogin_002_video", "ForcedLogin", "Media"})
-	public void ForcedLogin_002_video () {
+	public void ForcedLogin_002_video() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SpecialVideosPageObject specialPage = base.openSpecialVideoPage(wikiURL);
 		specialPage.clickAddAVideo();
@@ -54,7 +52,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ForcedLogin_003_loginRequired", "ForcedLogin"})
-	public void ForcedLogin_003_loginRequired () {
+	public void ForcedLogin_003_loginRequired() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openSpecialUpload(wikiURL);
 		base.verifyLoginReguiredMessage();
@@ -65,7 +63,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ForcedLogin_004_notLoggedIn", "ForcedLogin"})
-	public void ForcedLogin_004_notLoggedIn () {
+	public void ForcedLogin_004_notLoggedIn() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage();
 		base.openSpecialWatchListPage(wikiURL);
@@ -78,7 +76,7 @@ public class ForcedLoginTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"ForcedLogin_005_addMedia", "ForcedLogin"})
-	public void ForcedLogin_005_addMedia () {
+	public void ForcedLogin_005_addMedia() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject edit = base.navigateToArticleEditPageCK(wikiURL, articleName);

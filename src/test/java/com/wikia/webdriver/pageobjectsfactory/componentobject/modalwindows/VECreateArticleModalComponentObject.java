@@ -9,16 +9,15 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
- *
  * @author Robert 'rochan' Chan
  */
 public class VECreateArticleModalComponentObject extends WikiBasePageObject {
 
-	@FindBy (css = ".close")
+	@FindBy(css = ".close")
 	private WebElement closeButton;
-	@FindBy (css = ".normal.secondary")
+	@FindBy(css = ".normal.secondary")
 	private WebElement cancelButton;
-	@FindBy (css = ".normal.primary")
+	@FindBy(css = ".normal.primary")
 	private WebElement addAPageButton;
 
 	public VECreateArticleModalComponentObject(WebDriver driver) {

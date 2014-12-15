@@ -13,17 +13,16 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class EditCategoryComponentObject extends BasePageObject{
+public class EditCategoryComponentObject extends BasePageObject {
 
 	public EditCategoryComponentObject(WebDriver driver) {
 		super(driver);
 	}
 
-	@FindBy(css=".WikiaForm .categoryName > input")
+	@FindBy(css = ".WikiaForm .categoryName > input")
 	private WebElement categoryNameField;
-	@FindBy(css="#categorySelectEditModal button.primary")
+	@FindBy(css = "#categorySelectEditModal button.primary")
 	private WebElement saveButton;
 
 	public ArticlePageObject editCategoryName(String newCategoryName) {

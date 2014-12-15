@@ -15,15 +15,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 public class VisualEditorAddMapDialog extends VisualEditorDialog {
 
-	@FindBy(css=".ve-ui-wikiaMapInsertDialog-results-headline a .oo-ui-labeledElement-label")
+	@FindBy(css = ".ve-ui-wikiaMapInsertDialog-results-headline a .oo-ui-labeledElement-label")
 	private WebElement createAMapButton;
-	@FindBy(css=".oo-ui-window-body")
+	@FindBy(css = ".oo-ui-window-body")
 	private WebElement mediaDialogBody;
-	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-headline")
+	@FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-headline")
 	private WebElement emptyStateDialogHeadline;
-	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-text")
+	@FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-text")
 	private WebElement emptyStateDialogText;
-	@FindBy(css=".ve-ui-wikiaMapInsertDialog-empty-button .oo-ui-labeledElement-label")
+	@FindBy(css = ".ve-ui-wikiaMapInsertDialog-empty-button .oo-ui-labeledElement-label")
 	private WebElement emptyStateCreateAMapButton;
 
 	private By mediaResultsWidgetBy = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");

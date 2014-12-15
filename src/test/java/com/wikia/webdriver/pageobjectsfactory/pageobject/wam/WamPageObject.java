@@ -90,9 +90,9 @@ public class WamPageObject extends BasePageObject {
 		}
 
 		/**
-		 * @desc Checks if passed value is in enum
 		 * @param value mostly a select-box option
 		 * @return true if enum has the value; false otherwise
+		 * @desc Checks if passed value is in enum
 		 */
 		public static Boolean contains(String value) {
 			for (VerticalsIds vids : VerticalsIds.values()) {
@@ -126,9 +126,8 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Checks if given tab has an anchor with "selected" class
-	 *
 	 * @param tabIndex number of a tab starting with 0
+	 * @desc Checks if given tab has an anchor with "selected" class
 	 */
 	public void verifyTabIsSelected(int tabIndex) {
 		WebElement wamTab = wamTabs.get(tabIndex);
@@ -165,8 +164,8 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Checks if there are as many rows in the WAM index table as we expect
 	 * @param expectedRowsNo the number of expecting table rows
+	 * @desc Checks if there are as many rows in the WAM index table as we expect
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
 		waitForElementByBy(wamIndexTable);
@@ -213,8 +212,8 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Selects vertical in vertical select box
 	 * @param verticalId vertical id
+	 * @desc Selects vertical in vertical select box
 	 */
 	public void selectVertical(VerticalsIds verticalId) {
 		waitForElementByElement(wamVerticalFilterSelect);
@@ -276,7 +275,7 @@ public class WamPageObject extends BasePageObject {
 	private void verifyTabSelected(int tabNumber) {
 		tabNumber++;
 		WebElement tabSelected = driver.findElement(By.cssSelector(
-			"ul.wam-tabs li:nth-child(" + tabNumber + ") a.selected")
+				"ul.wam-tabs li:nth-child(" + tabNumber + ") a.selected")
 		);
 		waitForElementByElement(tabSelected);
 	}
@@ -325,9 +324,9 @@ public class WamPageObject extends BasePageObject {
 		// first day of the current month
 		WebElement firstDay = (WebElement) js.executeScript(
 			"return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
-		 	calendarElement
-		 );
-		 firstDay.click();
+			calendarElement
+		);
+		firstDay.click();
 
 		String year = getFormatedDate(date, "YYYY");
 
@@ -356,6 +355,6 @@ public class WamPageObject extends BasePageObject {
 
 	private String getFormatedDate(Date date, String format) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
-	    return dateFormat.format(date);
+		return dateFormat.format(date);
 	}
 }

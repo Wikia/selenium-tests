@@ -10,21 +10,21 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-public class WikiHistoryPageObject extends WikiBasePageObject{
+public class WikiHistoryPageObject extends WikiBasePageObject {
 
 	protected String articlename;
 
-	@FindBy(css="input[value='Go']")
+	@FindBy(css = "input[value='Go']")
 	private WebElement goButton;
-	@FindBy(css="input#year")
+	@FindBy(css = "input#year")
 	private WebElement fromYearField;
-	@FindBy(xpath="//a[contains(text(), 'Back to page')]")
+	@FindBy(xpath = "//a[contains(text(), 'Back to page')]")
 	private WebElement backToPageLink;
-	@FindBy(css="span.mw-rollback-link a")
+	@FindBy(css = "span.mw-rollback-link a")
 	private WebElement rollbackButton;
-	@FindBy(xpath="//h1[contains(text(), 'Action complete')]")
+	@FindBy(xpath = "//h1[contains(text(), 'Action complete')]")
 	private WebElement rollbackCompleteMessage;
-	@FindBy(css="p#mw-returnto a")
+	@FindBy(css = "p#mw-returnto a")
 	private WebElement backToPageLinkOnRollbackPage;
 
 
@@ -34,23 +34,20 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-	public WikiArticleRevisionEditMode clickUndoRevision(int revision)
-	{
-		WebElement undo = driver.findElement(By.xpath("//ul[@id='pagehistory']/li["+revision+"]//span[@class='mw-history-undo']/a"));
+	public WikiArticleRevisionEditMode clickUndoRevision(int revision) {
+		WebElement undo = driver.findElement(By.xpath("//ul[@id='pagehistory']/li[" + revision + "]//span[@class='mw-history-undo']/a"));
 //		WebElement undo = driver.findElement(By.cssSelector("ul#pagehistory li:nth-child("+revision+") .mw-history-undo"));
 		scrollAndClick(undo);
 		return new WikiArticleRevisionEditMode(driver);
 	}
 
-	public void rollbackPage()
-	{
+	public void rollbackPage() {
 		waitForElementByElement(rollbackButton);
 		scrollAndClick(rollbackButton);
 		waitForElementByElement(rollbackCompleteMessage);
 	}
 
-	public WikiArticlePageObject enterPageAfterRollback()
-	{
+	public WikiArticlePageObject enterPageAfterRollback() {
 		waitForElementByElement(backToPageLinkOnRollbackPage);
 		scrollAndClick(backToPageLinkOnRollbackPage);
 		return new WikiArticlePageObject(driver);
@@ -63,12 +60,12 @@ public class WikiHistoryPageObject extends WikiBasePageObject{
 		waitForElementByElement(fromYearField);
 		waitForElementByElement(backToPageLink);
 		waitForElementByElement(goButton);
-		PageObjectLogging.log("verifyImportandPageElements", "several importand history page elements are present", true , driver);
+		PageObjectLogging.log("verifyImportandPageElements", "several importand history page elements are present", true, driver);
 	}
 
 	public void verifyLatestEditSummary(String text) {
 		String editSummary = getFirstCssRevision();
-		editSummary = editSummary.substring(1, editSummary.length()-1);
+		editSummary = editSummary.substring(1, editSummary.length() - 1);
 		Assertion.assertEquals(text, editSummary);
 	}
 }

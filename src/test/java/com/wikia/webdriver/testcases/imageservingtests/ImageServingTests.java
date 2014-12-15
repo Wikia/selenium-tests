@@ -14,12 +14,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 //https://internal.wikia-inc.com/wiki/QA/Core_Features_and_Testing/Manual_Regression_Tests/Image_Serving
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- * 1. Upload file using Special:NewFiles page
- * 2. Upload file using Special:Upload page
- * 3. Upload file using Special:MultipleUpload page
- *
+ *         1. Upload file using Special:NewFiles page
+ *         2. Upload file using Special:Upload page
+ *         3. Upload file using Special:MultipleUpload page
  */
 public class ImageServingTests extends NewTestTemplate {
 
@@ -44,9 +42,9 @@ public class ImageServingTests extends NewTestTemplate {
 	}
 
 	@Test(
-			groups = {"ImageServing_002", "ImageServing"},
-			dataProviderClass = FileDataProvider.class,
-			dataProvider = "getFileNames"
+		groups = {"ImageServing_002", "ImageServing"},
+		dataProviderClass = FileDataProvider.class,
+		dataProvider = "getFileNames"
 	)
 	public void ImageServing_002_SpecialUploadTest(String fileName) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

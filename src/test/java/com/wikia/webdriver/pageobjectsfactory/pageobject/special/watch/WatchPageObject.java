@@ -12,12 +12,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class WatchPageObject extends BasePageObject {
 
 
-	@FindBy(css="[value=OK]")
+	@FindBy(css = "[value=OK]")
 	private WebElement followUnfollowConfirmation;
 
 	public WatchPageObject(WebDriver driver) {
@@ -28,7 +27,6 @@ public class WatchPageObject extends BasePageObject {
 		followUnfollowConfirmation.click();
 		PageObjectLogging.log("confirmWatchUnwatch", "follow/unfollow confirmation button clicked", true);
 	}
-
 
 
 }

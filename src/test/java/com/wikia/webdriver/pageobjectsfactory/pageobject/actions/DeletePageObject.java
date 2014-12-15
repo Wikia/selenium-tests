@@ -12,7 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
  */
 public class DeletePageObject extends WikiBasePageObject {
 
-	@FindBy(css=".mw-submit input")
+	@FindBy(css = ".mw-submit input")
 	private WebElement submitButton;
 
 	public DeletePageObject(WebDriver driver) {

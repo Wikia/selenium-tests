@@ -16,10 +16,10 @@ public class HistoryPagePageObject extends BasePageObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(css=".historysubmit")
+	@FindBy(css = ".historysubmit")
 	private List<WebElement> historySubmit;
 
-	@FindBy(css=".WikiaPageHeaderDiffHistory h1 strong")
+	@FindBy(css = ".WikiaPageHeaderDiffHistory h1 strong")
 	private WebElement diffHeader;
 
 	public DiffPagePageObject goToDiffPageFromHistoryPage() {

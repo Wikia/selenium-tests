@@ -12,21 +12,21 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileModalCompo
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author PMG
- *
- * Below test cases are executed against Special:GameGuidesPreview
- * 1. Verify that sections are opened in article view
- * 2. Verify that hide button in section works
- * 3. Verify that next image button in modal works
- * 4. Verify that previous image button in modal works
- * 5. Verify that you are able to hide top bar in modal
- * 6. Verify that back button close modal
- * 7. Verify that when you go to modal and go back you are in the same place as previously.
+ *         <p/>
+ *         Below test cases are executed against Special:GameGuidesPreview
+ *         1. Verify that sections are opened in article view
+ *         2. Verify that hide button in section works
+ *         3. Verify that next image button in modal works
+ *         4. Verify that previous image button in modal works
+ *         5. Verify that you are able to hide top bar in modal
+ *         6. Verify that back button close modal
+ *         7. Verify that when you go to modal and go back you are in the same place as previously.
  */
 public class GameGuidesPreview extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups={"GameGuidesPreview_001", "MobileGG"})
+	@Test(groups = {"GameGuidesPreview_001", "MobileGG"})
 	public void GameGuidesPreview_001_sections_chevronTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -40,7 +40,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"GameGuidesPreview_002", "MobileGG"})
+	@Test(groups = {"GameGuidesPreview_002", "MobileGG"})
 	public void GameGuidesPreview_002_sections_hideTest() {
 		MobileArticlePageObject article = new MobileArticlePageObject(driver);
 		article.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -54,7 +54,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		article.verifySectionInvisibility();
 	}
 
-	@Test(groups={"GameGuidesPreview_003", "MobileGG"})
+	@Test(groups = {"GameGuidesPreview_003", "MobileGG"})
 	public void GameGuidesPreview_003_modalTest_nextImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.WIKIA_PHP);
@@ -69,7 +69,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"GameGuidesPreview_004", "MobileGG"})
+	@Test(groups = {"GameGuidesPreview_004", "MobileGG"})
 	public void GameGuidesPreview_004_modalTest_previousImage() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.WIKIA_PHP);
@@ -84,7 +84,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"GameGuidesPreview_005", "MobileGG"})
+	@Test(groups = {"GameGuidesPreview_005", "MobileGG"})
 	public void GameGuidesPreview_005_topBarVisibleOrNot() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.WIKIA_PHP);
@@ -99,7 +99,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyTopBarVisible();
 	}
 
-	@Test(groups={"GameGuidesPreview_006", "MobileGG"})
+	@Test(groups = {"GameGuidesPreview_006", "MobileGG"})
 	public void GameGuidesPreview_006_backButton() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.WIKIA_PHP);
@@ -111,7 +111,7 @@ public class GameGuidesPreview extends NewTestTemplate {
 		modal.verifyModalClosed();
 	}
 
-	@Test(groups={"GameGuidesPreview_007", "MobileGG"})
+	@Test(groups = {"GameGuidesPreview_007", "MobileGG"})
 	public void GameGuidesPreview_007_positionAfterCloseModal() {
 		MobileArticlePageObject mobile = new MobileArticlePageObject(driver);
 		driver.get(wikiURL + URLsContent.WIKIA_PHP);

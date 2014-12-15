@@ -13,7 +13,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
- *
  */
 
 public class CreateRealMapComponentObject extends BasePageObject {

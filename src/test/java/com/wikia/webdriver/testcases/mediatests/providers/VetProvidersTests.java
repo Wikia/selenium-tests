@@ -14,16 +14,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class VetProvidersTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
 	@Test(
-			dataProviderClass = VideoUrlProvider.class,
-			dataProvider = "videoUrl",
-			groups = {"VetProvidersArticle", "VetProvidersTests_001", "Media"}
+		dataProviderClass = VideoUrlProvider.class,
+		dataProvider = "videoUrl",
+		groups = {"VetProvidersArticle", "VetProvidersTests_001", "Media"}
 	)
 	public void VetProvidersTests_001_article(String videoUrl, String videoName) {
 		PageObjectLogging.log("", videoUrl, true);

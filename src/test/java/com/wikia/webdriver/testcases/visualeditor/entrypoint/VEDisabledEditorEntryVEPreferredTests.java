@@ -15,18 +15,18 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 /**
  * @author Robert 'Rochan' Chan
- *
- * Editor Entry Point Test on wiki that has wgEnabledRTEExt = true, wgVisualEditorUI = false
- * User Editor Preference is set to VE Editor
- * VE-958 verify VE Editor is loaded when clicking Add Page from the contribution drop down
- * VE-958 verify VE Editor is loaded when clicking the main edit button on the top of the article
- * VE-958 verify VE Editor is loaded when clicking the red link in the article
- * VE-958 verify VE Editor is loaded when clicking the section edit link in the article
- * VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
- * VE-898 verify VE Editor is loaded on List namespace
- * VE-898 verify Src Editor is loaded on Category namespace
- * VE-898 verify Src Editor is loaded on Template namespace
- * VE-898 verify Src Editor is loaded when using ?action=edit in the URL
+ *         <p/>
+ *         Editor Entry Point Test on wiki that has wgEnabledRTEExt = true, wgVisualEditorUI = false
+ *         User Editor Preference is set to VE Editor
+ *         VE-958 verify VE Editor is loaded when clicking Add Page from the contribution drop down
+ *         VE-958 verify VE Editor is loaded when clicking the main edit button on the top of the article
+ *         VE-958 verify VE Editor is loaded when clicking the red link in the article
+ *         VE-958 verify VE Editor is loaded when clicking the section edit link in the article
+ *         VE-958 verify VE Editor is loaded when using ?veaction=edit in the URL
+ *         VE-898 verify VE Editor is loaded on List namespace
+ *         VE-898 verify Src Editor is loaded on Category namespace
+ *         VE-898 verify Src Editor is loaded on Template namespace
+ *         VE-898 verify Src Editor is loaded when using ?action=edit in the URL
  */
 
 public class VEDisabledEditorEntryVEPreferredTests extends NewTestTemplateBeforeClass {

@@ -8,8 +8,8 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
-* @author Bogna 'bognix' Knychala
-*/
+ * @author Bogna 'bognix' Knychala
+ */
 public class SpecialPageObject extends WikiBasePageObject {
 
 	@FindBy(css = "#WikiaPageHeader > h2")

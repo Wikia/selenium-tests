@@ -30,7 +30,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 /**
  * @author Karol 'kkarolk' Kujawiak
  * @author Robert 'rochan' Chan
- *
  */
 public class VisualEditorMenu extends WikiBasePageObject {
 
@@ -42,31 +41,31 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private final int INSERTLIST = 1;
 	private final int HAMBURGERLIST = 2;
 
-	@FindBy(css=".oo-ui-icon-bold-b")
+	@FindBy(css = ".oo-ui-icon-bold-b")
 	private WebElement boldButton;
-	@FindBy(css=".oo-ui-icon-italic-i")
+	@FindBy(css = ".oo-ui-icon-italic-i")
 	private WebElement italicButton;
-	@FindBy(css=".oo-ui-icon-link")
+	@FindBy(css = ".oo-ui-icon-link")
 	private WebElement linkButton;
-	@FindBy(css=".oo-ui-frame")
+	@FindBy(css = ".oo-ui-frame")
 	protected WebElement linkIframe;
-	@FindBy(css=".oo-ui-icon-code")
+	@FindBy(css = ".oo-ui-icon-code")
 	private WebElement codeButton;
-	@FindBy(css=".oo-ui-icon-clear")
+	@FindBy(css = ".oo-ui-icon-clear")
 	private WebElement clearButton;
-	@FindBy(css=".oo-ui-icon-number-list")
+	@FindBy(css = ".oo-ui-icon-number-list")
 	private WebElement numListButton;
-	@FindBy(css=".oo-ui-icon-bullet-list")
+	@FindBy(css = ".oo-ui-icon-bullet-list")
 	private WebElement bulletListButton;
-	@FindBy(css=".oo-ui-menuToolGroup .oo-ui-indicator-down")
+	@FindBy(css = ".oo-ui-menuToolGroup .oo-ui-indicator-down")
 	private WebElement formattingDropDown;
-	@FindBy(css=".oo-ui-menuToolGroup")
+	@FindBy(css = ".oo-ui-menuToolGroup")
 	private WebElement formattingDropDownItems;
-	@FindBy(css=".oo-ui-listToolGroup .oo-ui-indicator-down")
+	@FindBy(css = ".oo-ui-listToolGroup .oo-ui-indicator-down")
 	private List<WebElement> toolListDropDowns;
-	@FindBy(css=".oo-ui-listToolGroup")
+	@FindBy(css = ".oo-ui-listToolGroup")
 	private List<WebElement> toolListItems;
-	@FindBy(css=".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
+	@FindBy(css = ".ve-ui-toolbar-saveButton.oo-ui-widget-enabled")
 	private WebElement enabledPublishButton;
 
 	private By strikeStyleBy = By.cssSelector(".oo-ui-icon-strikethrough-s");
@@ -257,10 +256,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 		waitForElementClickableByElement(hamburgerList);
 		Actions actions = new Actions(driver);
 		actions
-		.click(hamburgerList)
-		.click(hamburgerItems.findElement(insertBy))
-		.build()
-		.perform();
+			.click(hamburgerList)
+			.click(hamburgerItems.findElement(insertBy))
+			.build()
+			.perform();
 	}
 
 	public VisualEditorHyperLinkDialog clickLinkButton() {

@@ -15,7 +15,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.contentpatterns.PalantirContent;
 
 /**
- * @author Łukasz Nowak 
+ * @author Łukasz Nowak
  */
 
 public class PalantirComponentObject extends InteractiveMapPageObject {
@@ -31,18 +31,18 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 
 	private PalantirContent getResponse(Object response, String methodName) {
 		PalantirContent handle = null;
-		try {			
+		try {
 			JSONObject json = new JSONObject(response.toString());
-				handle = new PalantirContent(
-							json.getString(PalantirContent.PONTO_MSG_SUCCESS),
-							json.getString(PalantirContent.PONTO_MSG_RESPONSECODE),
-							json.getString(PalantirContent.PONTO_MSG_MESSAGE)
-						);
+			handle = new PalantirContent(
+				json.getString(PalantirContent.PONTO_MSG_SUCCESS),
+				json.getString(PalantirContent.PONTO_MSG_RESPONSECODE),
+				json.getString(PalantirContent.PONTO_MSG_MESSAGE)
+			);
 			PageObjectLogging.log(methodName, handle.getMessage(), true, driver);
-		}catch (JSONException e) {
+		} catch (JSONException e) {
 			PageObjectLogging.log(methodName, handle.getMessage(), false, driver);
 		}
-		return handle;		
+		return handle;
 	}
 
 	public PalantirContent deletePlayerPosition() {
@@ -58,25 +58,25 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
-					PalantirContent.PONTO_SETPLAYER,
-					lat,
-					lng,
-					zoom,
-					centerMap
-					);
+			PalantirContent.PONTO_SETPLAYER,
+			lat,
+			lng,
+			zoom,
+			centerMap
+		);
 		return getResponse(res, "setAndVerifyPlayerPosition");
 	}
-	
+
 	public PalantirContent updateMapPosition(double lat, double lng, int zoom) {
 		waitForElementVisibleByElement(mapFrame);
 		JavascriptExecutor jsexec = (JavascriptExecutor) driver;
 		driver.manage().timeouts().setScriptTimeout(20, TimeUnit.SECONDS);
 		Object res = jsexec.executeAsyncScript(
-					PalantirContent.PONTO_UPDATEPOSITION,
-					lat,
-					lng,
-					zoom
-					);
+			PalantirContent.PONTO_UPDATEPOSITION,
+			lat,
+			lng,
+			zoom
+		);
 		return getResponse(res, "updateMapPosition");
 	}
 
@@ -97,13 +97,13 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 		Assertion.assertEquals("422", handle.getResponseCode());
 		Assertion.assertEquals(PalantirContent.PONTOMSG_MAP_OUTOFBOUNDARIES, handle.getMessage());
 	}
-	
+
 	public void verifyWrongZoomLevel(PalantirContent handle) {
 		Assertion.assertEquals("false", handle.getSuccess());
 		Assertion.assertEquals("422", handle.getResponseCode());
 		Assertion.assertEquals(PalantirContent.PONTOMSG_WRONG_ZOOM, handle.getMessage());
 	}
-	
+
 	public void verifyDecimalZoomLevel(PalantirContent handle) {
 		Assertion.assertEquals("false", handle.getSuccess());
 		Assertion.assertEquals("422", handle.getResponseCode());

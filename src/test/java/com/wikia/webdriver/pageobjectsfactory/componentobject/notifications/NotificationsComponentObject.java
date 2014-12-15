@@ -42,12 +42,12 @@ public class NotificationsComponentObject extends BasePageObject {
 	@FindBy(css = "#notifications .notification-message")
 	private WebElement notificationsMessage;
 	private By notificationDropdownForCurrentWiki = By
-			.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
+		.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2)");
 	private By emptyNotificationDropdownForCurrentWiki = By
-			.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
+		.cssSelector("#WallNotifications .subnav li.notifications-for-wiki:nth-child(2) li.notifications-empty");
 	private By notificationTitle = By.cssSelector("div.msg-title");
 	private By unreadNotificationReddot = By
-			.cssSelector("#WallNotifications > li > div.reddot");
+		.cssSelector("#WallNotifications > li > div.reddot");
 
 	/**
 	 * hover the mouse over the notification bubble and wait for it to expand
@@ -85,20 +85,20 @@ public class NotificationsComponentObject extends BasePageObject {
 		waitForNotificationsLoaded();
 		openNotifications();
 		PageObjectLogging.log("#WallNotifications li ul.subnav",
-				"show notifications", true);
+			"show notifications", true);
 	}
 
 	/**
 	 * click notifications bubble
 	 *
 	 * @todo: is this needed? the notifications expand on mouse hover so we
-	 *        should use the showNotifications method
+	 * should use the showNotifications method
 	 */
 	public void clickNotifications() {
 		waitForElementByElement(notificationsBubbles);
 		scrollAndClick(notificationsBubbles);
 		PageObjectLogging.log("clickshowNotifications",
-				"click on notifications bubbles", true);
+			"click on notifications bubbles", true);
 	}
 
 	/**
@@ -115,17 +115,17 @@ public class NotificationsComponentObject extends BasePageObject {
 	public String getNotificationLink(String text) {
 		for (int i = 0; i < notificationsList.size(); i++) {
 			if (notificationsList.get(i)
-					.findElement(By.cssSelector("div.notification-message")).getText()
-					.contains(text)) {
+				.findElement(By.cssSelector("div.notification-message")).getText()
+				.contains(text)) {
 				PageObjectLogging.log("getNotificationLink",
-						"get addres that of " + i + 1
-								+ " notification points to", true);
+					"get addres that of " + i + 1
+						+ " notification points to", true);
 				return notificationsList.get(i).getAttribute("href");
 			}
 		}
 		PageObjectLogging.log("getNotificationLink",
-				"No notification that contains the following text: " + text,
-				false);
+			"No notification that contains the following text: " + text,
+			false);
 		return null;
 	}
 
@@ -160,7 +160,6 @@ public class NotificationsComponentObject extends BasePageObject {
 	/**
 	 * This should be called after expanding the notifications dropdown. It
 	 * marks all the notifications as read
-	 *
 	 */
 	public void clickMarkNotificationsAsRead() {
 		if (this.getNumberOfUnreadNotifications() > 0) {
@@ -177,6 +176,7 @@ public class NotificationsComponentObject extends BasePageObject {
 
 	/**
 	 * This should be called after showNotifications method
+	 *
 	 * @param messageTitle
 	 * @param messageAuthor
 	 */
@@ -185,12 +185,13 @@ public class NotificationsComponentObject extends BasePageObject {
 		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0)
-				.findElement(By.cssSelector("p")).getText();
+			.findElement(By.cssSelector("p")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
 	}
 
 	/**
 	 * This should be called after showNotifications method
+	 *
 	 * @param messageTitle
 	 * @param messageAuthor
 	 */
@@ -199,7 +200,7 @@ public class NotificationsComponentObject extends BasePageObject {
 		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0)
-				.findElement(By.cssSelector("div.notification-message")).getText();
+			.findElement(By.cssSelector("div.notification-message")).getText();
 		Assertion.assertTrue(notificationMessageBody.contains(messageAuthor));
 		Assertion.assertTrue(notificationMessageBody.contains(messageContent));
 	}

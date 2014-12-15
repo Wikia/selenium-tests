@@ -15,14 +15,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * @ownership: Mobile Web 
+ * @ownership: Mobile Web
  */
 
 public class PinTypeMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "PinTypeMapTests_001", "PinTypeMapTests", "InteractiveMaps" })
+	@Test(groups = {"PinTypeMapTests_001", "PinTypeMapTests", "InteractiveMaps"})
 	public void PinTypeMapTests_001_VerifyImageValidationInPinTypeModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -38,7 +38,7 @@ public class PinTypeMapTests extends NewTestTemplate {
 		pinTypeModal.verifyErrorExists();
 	}
 
-	@Test(groups = { "PinTypeMapTests_002", "PinTypeMapTests", "InteractiveMaps" })
+	@Test(groups = {"PinTypeMapTests_002", "PinTypeMapTests", "InteractiveMaps"})
 	public void PinTypeMapTests_002_VerifyClickingAddAnotherPinType() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

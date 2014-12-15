@@ -14,7 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class CategoriesTestsEditMode extends NewTestTemplate {
 

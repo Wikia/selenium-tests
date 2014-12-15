@@ -16,21 +16,21 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
 public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 
 	@FindBy(
-		css=
-		".oo-ui-window-foot .oo-ui-flaggableElement-constructive .oo-ui-labeledElement-label"
+		css =
+			".oo-ui-window-foot .oo-ui-flaggableElement-constructive .oo-ui-labeledElement-label"
 	)
 	private WebElement publishButton;
-	@FindBy(css="#recaptcha_area")
+	@FindBy(css = "#recaptcha_area")
 	private WebElement recaptchaArea;
-	@FindBy(css="#recaptcha_challenge_image")
+	@FindBy(css = "#recaptcha_challenge_image")
 	private WebElement recaptchaImage;
-	@FindBy(css=".secondary .oo-ui-labeledElement-label")
+	@FindBy(css = ".secondary .oo-ui-labeledElement-label")
 	private WebElement reviewChangesButton;
-	@FindBy(css=".oo-ui-window-body")
+	@FindBy(css = ".oo-ui-window-body")
 	private WebElement saveDialogBody;
-	@FindBy(css=".ve-ui-mwSaveDialog-summary textarea")
+	@FindBy(css = ".ve-ui-mwSaveDialog-summary textarea")
 	private WebElement editSummary;
-	@FindBy(css="#wpMinoredit")
+	@FindBy(css = "#wpMinoredit")
 	private WebElement minorEdit;
 
 	private By recaptchaImageBy = By.cssSelector("#recaptcha_challenge_image");
@@ -78,7 +78,7 @@ public class VisualEditorSaveChangesDialog extends VisualEditorDialog {
 	public VisualEditorSaveChangesDialog clickSaveWithRecaptcha() {
 		switchToIFrame();
 		waitForElementClickableByElement(publishButton);
-		if(checkIfElementOnPage(recaptchaArea)) {
+		if (checkIfElementOnPage(recaptchaArea)) {
 			WebElement recaptchaImage = saveDialogBody.findElement(recaptchaImageBy);
 			waitForElementVisibleByElement(recaptchaImage);
 		}

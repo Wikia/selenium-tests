@@ -12,21 +12,21 @@ public class MobileModalComponentObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css=".zoomer.open.imgMdl")
+	@FindBy(css = ".zoomer.open.imgMdl")
 	private WebElement openedModal;
-	@FindBy(css="#wkMdlClo")
+	@FindBy(css = "#wkMdlClo")
 	private WebElement closeModalButton;
-	@FindBy(css="#prvImg")
+	@FindBy(css = "#prvImg")
 	private WebElement previousImageButton;
-	@FindBy(css="#nxtImg")
+	@FindBy(css = "#nxtImg")
 	private WebElement nextImageButton;
-	@FindBy(css="section.current>img")
+	@FindBy(css = "section.current>img")
 	private WebElement currentImage;
-	@FindBy(css=".imgMdl.zoomer:not(.hdn)")
+	@FindBy(css = ".imgMdl.zoomer:not(.hdn)")
 	private WebElement topBarVisible;
-	@FindBy(css=".imgMdl.zoomer.hdn")
+	@FindBy(css = ".imgMdl.zoomer.hdn")
 	private WebElement topBarHidden;
-	@FindBy(css=".swiperPage.current")
+	@FindBy(css = ".swiperPage.current")
 	private WebElement currentImageModal;
 
 	String modalTransition = "section[style*='transition']";

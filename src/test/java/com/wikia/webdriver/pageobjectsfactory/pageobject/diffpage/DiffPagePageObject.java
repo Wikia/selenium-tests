@@ -14,9 +14,9 @@ public class DiffPagePageObject extends BasePageObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(css="#mw-imagepage-content table.diff")
+	@FindBy(css = "#mw-imagepage-content table.diff")
 	private WebElement diffTable;
-	
+
 	public void verifyDiffTablePresent() {
 		waitForElementByElement(diffTable);
 		PageObjectLogging.log("Verify diff table", "diff table is visible", true);

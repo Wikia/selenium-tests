@@ -11,7 +11,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 public class BlogPageObject extends ArticlePageObject {
 
-	@FindBy(css=".WikiaBlogPostHeader h1")
+	@FindBy(css = ".WikiaBlogPostHeader h1")
 	private WebElement blogHeader;
 
 	By image = By.cssSelector("img");

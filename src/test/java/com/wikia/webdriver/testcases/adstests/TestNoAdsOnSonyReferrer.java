@@ -18,8 +18,8 @@ public class TestNoAdsOnSonyReferrer extends NewTestTemplate {
 	private String testedPage;
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="noAdsForSonyReferrer"
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "noAdsForSonyReferrer"
 	)
 	public TestNoAdsOnSonyReferrer(String wikiName, String path) {
 		super();
@@ -30,8 +30,8 @@ public class TestNoAdsOnSonyReferrer extends NewTestTemplate {
 		}
 	}
 
-	@Test (
-			groups={"TestNoAdsOnSonyReferrer_Desktop"}
+	@Test(
+		groups = {"TestNoAdsOnSonyReferrer_Desktop"}
 	)
 	public void TestNoAdsOnSonyReferrer_Desktop() {
 		SonySideViewObject sonyPage = new SonySideViewObject(driver);
@@ -40,8 +40,8 @@ public class TestNoAdsOnSonyReferrer extends NewTestTemplate {
 		wikiPage.verifyNoAdsOnPage();
 	}
 
-	@Test (
-			groups={"TestNoAdsOnSonyReferrer_Mobile"}
+	@Test(
+		groups = {"TestNoAdsOnSonyReferrer_Mobile"}
 	)
 	public void TestNoAdsOnSonyReferrer_Mobile() {
 		SonySideViewObject sonyPage = new SonySideViewObject(driver);

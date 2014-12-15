@@ -17,14 +17,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageW
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. Write message in source mode,
- * 2. Write message in bold font,
- * 3. Write message in italic font,
- * 4. Write message with internal link,
- * 5. Write message with external link,
- * 6. Write message with image,
- *
+ *         <p/>
+ *         1. Write message in source mode,
+ *         2. Write message in bold font,
+ *         3. Write message in italic font,
+ *         4. Write message with internal link,
+ *         5. Write message with external link,
+ *         6. Write message with image,
  */
 public class MessageWallFeaturesTests extends NewTestTemplate {
 

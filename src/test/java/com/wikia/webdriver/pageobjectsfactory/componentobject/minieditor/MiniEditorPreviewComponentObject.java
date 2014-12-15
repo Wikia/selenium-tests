@@ -17,7 +17,7 @@ public class MiniEditorPreviewComponentObject extends WikiBasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css="#WallPreviewModal")
+	@FindBy(css = "#WallPreviewModal")
 	private WebElement previewModal;
 
 	By publishButton = By.cssSelector(".buttons .primary");

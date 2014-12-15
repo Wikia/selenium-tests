@@ -15,9 +15,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPage
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class FollowVideosTests extends NewTestTemplate{
+public class FollowVideosTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	String videoName;
@@ -33,7 +32,7 @@ public class FollowVideosTests extends NewTestTemplate{
 		videoName = special.getHeaderText();
 	}
 
-	@Test(groups = "FollowVideo", dependsOnMethods={"FollowVideo_001_setup"})
+	@Test(groups = "FollowVideo", dependsOnMethods = {"FollowVideo_001_setup"})
 	public void FollowVideo_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -41,7 +40,7 @@ public class FollowVideosTests extends NewTestTemplate{
 		file.follow();
 	}
 
-	@Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods={"FollowVideo_002_follow"})
+	@Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods = {"FollowVideo_002_follow"})
 	public void FollowVideo_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

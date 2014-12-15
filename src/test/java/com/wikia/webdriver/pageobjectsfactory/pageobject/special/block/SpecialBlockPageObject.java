@@ -12,19 +12,19 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
-public class SpecialBlockPageObject extends WikiBasePageObject{
+public class SpecialBlockPageObject extends WikiBasePageObject {
 
-	@FindBy(css="input[name='wpTarget']")
+	@FindBy(css = "input[name='wpTarget']")
 	private WebElement userNameField;
-	@FindBy(css="select#mw-input-wpExpiry")
+	@FindBy(css = "select#mw-input-wpExpiry")
 	private WebElement expiry;
-	@FindBy(css="#mw-input-wpExpiry-other")
+	@FindBy(css = "#mw-input-wpExpiry-other")
 	private WebElement expiryInput;
-	@FindBy(css="#mw-input-wpReason-other")
+	@FindBy(css = "#mw-input-wpReason-other")
 	private WebElement reasonInput;
-	@FindBy(css=".mw-htmlform-submit")
+	@FindBy(css = ".mw-htmlform-submit")
 	private WebElement blockButton;
-	@FindBy(css=".mw-input [type='checkbox']")
+	@FindBy(css = ".mw-input [type='checkbox']")
 	private List<WebElement> checkBoxes;
 
 	public SpecialBlockPageObject(WebDriver driver) {
@@ -33,12 +33,12 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 		waitForElementByElement(blockButton);
 	}
 
-	public void typeInUserName(String userName){
+	public void typeInUserName(String userName) {
 		waitForElementByElement(userNameField);
 		userNameField.sendKeys(userName);
 	}
 
-	public void selectExpiration(String period){
+	public void selectExpiration(String period) {
 		waitForElementByElement(expiry);
 		Select exp = new Select(expiry);
 		exp.selectByValue(period);
@@ -47,35 +47,35 @@ public class SpecialBlockPageObject extends WikiBasePageObject{
 	/**
 	 * @param period you can type here '5 min', '10 year', ...
 	 */
-	public void typeExpiration(String period){
+	public void typeExpiration(String period) {
 		waitForElementByElement(expiryInput);
 		expiryInput.sendKeys(period);
 	}
 
-	public void typeReason(String reason){
+	public void typeReason(String reason) {
 		waitForElementByElement(reasonInput);
 		reasonInput.sendKeys(reason);
 	}
 
-	public void clickBlockButton(){
+	public void clickBlockButton() {
 		waitForElementByElement(blockButton);
 		scrollAndClick(blockButton);
 	}
 
-	public void deselectAllSelections(){
-		for (WebElement checkBox:checkBoxes){
-			if(checkBox.isSelected()){
+	public void deselectAllSelections() {
+		for (WebElement checkBox : checkBoxes) {
+			if (checkBox.isSelected()) {
 				checkBox.click();
 			}
 		}
-		for (WebElement checkBox:checkBoxes){
+		for (WebElement checkBox : checkBoxes) {
 			Assertion.assertFalse(checkBox.isSelected());
 		}
 		PageObjectLogging.log("deselectAllSelections", "all selections deselected", true);
 	}
 
-	public void verifyBlockedUserSubmitPage(String userName, String password){
-		waitForElementByXPath("//p/a[contains(text(), '"+userName+"')]");
+	public void verifyBlockedUserSubmitPage(String userName, String password) {
+		waitForElementByXPath("//p/a[contains(text(), '" + userName + "')]");
 		waitForElementByXPath("//p[contains(text(), 'has been blocked')]");
 		logOut(driver);
 	}

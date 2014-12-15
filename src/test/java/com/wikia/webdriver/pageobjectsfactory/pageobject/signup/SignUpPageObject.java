@@ -26,9 +26,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows.Faceb
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class SignUpPageObject extends WikiBasePageObject {
 
@@ -75,9 +73,9 @@ public class SignUpPageObject extends WikiBasePageObject {
 		emailField.sendKeys(email);
 		emailField.sendKeys(Keys.TAB);
 		PageObjectLogging.log(
-				"typeEmail",
-				email + " typed into email field",
-				true
+			"typeEmail",
+			email + " typed into email field",
+			true
 		);
 	}
 
@@ -85,17 +83,17 @@ public class SignUpPageObject extends WikiBasePageObject {
 		passwordField.sendKeys(password);
 		passwordField.sendKeys(Keys.TAB);
 		PageObjectLogging.log(
-				"typePassword",
-				"password typed into password field",
-				true
+			"typePassword",
+			"password typed into password field",
+			true
 		);
 	}
 
 	public void verifyTooYoungMessage() {
 		String message = birthYearField
-				.findElement(parentBy)
-				.findElement(errorMsgBy)
-				.getText();
+			.findElement(parentBy)
+			.findElement(errorMsgBy)
+			.getText();
 		Assertion.assertEquals(message, PageContent.SIGN_UP_TOO_YOUNG_MESSAGE);
 	}
 
@@ -117,9 +115,9 @@ public class SignUpPageObject extends WikiBasePageObject {
 			Thread.sleep(150);
 			monthSelect.selectByVisibleText(month);
 			PageObjectLogging.log(
-					"enterBirthDate ",
-					"Birth date: " + day +"/"+ month +"/"+ year + " selected",
-					true
+				"enterBirthDate ",
+				"Birth date: " + day + "/" + month + "/" + year + " selected",
+				true
 			);
 		} catch (InterruptedException e) {
 			PageObjectLogging.log("enterBirthDate", e.getMessage(), false);
@@ -133,9 +131,9 @@ public class SignUpPageObject extends WikiBasePageObject {
 	public void typeCaptcha(String captchaWord) {
 		captchaField.sendKeys(captchaWord);
 		PageObjectLogging.log(
-				"typeCaptcha ",
-				"captcha typed into captcha field",
-				true
+			"typeCaptcha ",
+			"captcha typed into captcha field",
+			true
 		);
 	}
 
@@ -155,40 +153,40 @@ public class SignUpPageObject extends WikiBasePageObject {
 	public AlmostTherePageObject submit() {
 		scrollAndClick(signupButton);
 		PageObjectLogging.log(
-				"submit ",
-				"sign up button clicked",
-				true
+			"submit ",
+			"sign up button clicked",
+			true
 		);
 		return new AlmostTherePageObject(driver);
 	}
 
 	public void verifyCaptchaInvalidMessage() {
 		String message = captchaField
-				.findElement(parentBy)
-				.findElement(parentBy)
-				.findElement(parentBy)
-				.findElement(parentBy)
-				.findElement(parentBy)
-				.findElement(parentBy)
-				.findElement(parentBy)
-				.findElement(parentBy)
-				.findElement(errorMsgBy)
-				.getText();
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElement(parentBy)
+			.findElement(errorMsgBy)
+			.getText();
 		Assertion.assertEquals(message, PageContent.SIGN_UP_INVALID_CAPTCHA_MESSAGE);
 	}
 
 	public void verifyUserExistsMessage() {
 		String message = userNameField
-				.findElement(parentBy)
-				.findElement(errorMsgBy)
-				.getText();
+			.findElement(parentBy)
+			.findElement(errorMsgBy)
+			.getText();
 		Assertion.assertEquals(message, PageContent.SIGN_UP_USER_EXISTS_MESSAGE);
 	}
 
 	private String getWordFromCaptcha(File captchaFile) {
 		try {
 			String captchaId = getAttributeValue(blurryWordHidden, "value");
-			String urlAd = Global.DOMAIN+ "wiki/Special:Captcha/image?wpCaptchaId="+ captchaId;
+			String urlAd = Global.DOMAIN + "wiki/Special:Captcha/image?wpCaptchaId=" + captchaId;
 			URL url = new URL(urlAd);
 
 			String md5 = md5(url.openStream());
@@ -209,8 +207,7 @@ public class SignUpPageObject extends WikiBasePageObject {
 			in.close();
 			PageObjectLogging.log("getWordFromCaptcha", "Captcha word not decoded", false);
 			return null;
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -235,10 +232,10 @@ public class SignUpPageObject extends WikiBasePageObject {
 				is.close();
 			}
 			return output;
-		} catch(NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			PageObjectLogging.log("md5", e.toString(), false);
 			throw new RuntimeException(e);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			PageObjectLogging.log("md5", e.toString(), false);
 			throw new RuntimeException(e);
 		}

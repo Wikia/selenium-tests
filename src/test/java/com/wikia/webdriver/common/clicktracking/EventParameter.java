@@ -11,11 +11,11 @@ public enum EventParameter {
 
 	private final String eventParameter;
 
-	private EventParameter(String eventParameter){
-		this.eventParameter=eventParameter;
+	private EventParameter(String eventParameter) {
+		this.eventParameter = eventParameter;
 	}
 
-	public String getEventParameter(){
+	public String getEventParameter() {
 		return eventParameter;
 	}
 }

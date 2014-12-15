@@ -46,7 +46,7 @@ public class VideosPageTests extends NewTestTemplate {
 	 * recent videos on Special:Videos. (Note: in order to accomplish this the test also adds a video
 	 * before hand to ensure that 1.) the test is sustainable, and 2.) it knows what the most recent
 	 * video is).
-	 *
+	 * <p/>
 	 * * @author James Sutterfield
 	 */
 	@Test(groups = {"VideosPage", "VideosPageTest_003", "Media"})

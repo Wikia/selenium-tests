@@ -39,7 +39,6 @@ public class EditingLocalCssTests extends NewTestTemplate {
 	 * https://wikia-inc.atlassian.net/browse/DAR-295
 	 * https://wikia-inc.atlassian.net/browse/DAR-296
 	 * https://wikia-inc.atlassian.net/browse/DAR-297
-	 *
 	 */
 	@Test(groups = {"EditingLocalCss_002", "EditingLocalCss", "AdminDashboard"})
 	public void EditingLocalCss_002_UserWithoutAdminRightsHasNoEditOption() {

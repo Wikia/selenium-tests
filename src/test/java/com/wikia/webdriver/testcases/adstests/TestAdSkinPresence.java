@@ -4,7 +4,9 @@ import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+
 import java.io.IOException;
+
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Test;
 
@@ -21,19 +23,20 @@ public class TestAdSkinPresence extends NewTestTemplate {
 
 	/**
 	 * Test ad skin presence on given resolution.
-	 * @param wikiName - name of the wiki
-	 * @param article - name of the article
-	 * @param screenImageUrl - DFP link with ad skin image
+	 *
+	 * @param wikiName         - name of the wiki
+	 * @param article          - name of the article
+	 * @param screenImageUrl   - DFP link with ad skin image
 	 * @param windowResolution - window resolution
-	 * @param skinLeftSide - path to file with decoded using Base64 ad skin
-	 * @param skinRightSide - path to file with decoded using Base64 ad skin
+	 * @param skinLeftSide     - path to file with decoded using Base64 ad skin
+	 * @param skinRightSide    - path to file with decoded using Base64 ad skin
 	 * @throws IOException
 	 */
 	@Test(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="skin",
-		groups={"TestSkinPresence_GeoEdgeFree"},
-		invocationCount=3
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "skin",
+		groups = {"TestSkinPresence_GeoEdgeFree"},
+		invocationCount = 3
 	)
 	public void TestSkinPresence_GeoEdgeFree(
 		String wikiName, String article, String screenImageUrl,

@@ -56,7 +56,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 		waitForElementByElement(firstSwapButton);
 		scrollAndClick(firstSwapButton);
 
-		waitForTextToBePresentInElementByElement(swapCount,  String.valueOf(initialCount-1));
+		waitForTextToBePresentInElementByElement(swapCount, String.valueOf(initialCount - 1));
 
 		PageObjectLogging.log("verifyClickSwap", "Swap button has been clicked", true);
 	}

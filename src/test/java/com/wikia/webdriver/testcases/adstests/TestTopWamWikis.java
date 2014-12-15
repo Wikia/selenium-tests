@@ -20,7 +20,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
  * 2. TestTopWamWikisWikifactory_GeoEdgeFree - go to Special:WhereIsMyExtension
  * and check how many wikis have set wgAdDriverWikiIsTop1000 variable.
  * Need in settings wikiName=community
- *
  */
 
 public class TestTopWamWikis extends NewTestTemplate {
@@ -35,8 +34,8 @@ public class TestTopWamWikis extends NewTestTemplate {
 	}
 
 	@Test(
-		dataProvider="topWamWikis", dataProviderClass=AdsDataProvider.class,
-		groups= {"TopWamWikis"}
+		dataProvider = "topWamWikis", dataProviderClass = AdsDataProvider.class,
+		groups = {"TopWamWikis"}
 	)
 	public void TestTopWamWikis_GeoEdgeFree(String wikiName, String article, Boolean isTop) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);

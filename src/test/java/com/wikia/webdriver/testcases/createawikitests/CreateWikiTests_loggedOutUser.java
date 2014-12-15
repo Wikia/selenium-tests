@@ -13,17 +13,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNew
 import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep3;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- * 1. Create wiki as logged out user
- * 2. Try to create wiki with wrong user password
- * 3. Try to create wiki with blank user password
- * 4. Try to create wiki with blank user name
- * 5. Try to create wiki with blank user name
- * 6. Try to create wiki with invalid user name
- *
+ *         1. Create wiki as logged out user
+ *         2. Try to create wiki with wrong user password
+ *         3. Try to create wiki with blank user password
+ *         4. Try to create wiki with blank user name
+ *         5. Try to create wiki with blank user name
+ *         6. Try to create wiki with invalid user name
  */
-public class CreateWikiTests_loggedOutUser extends NewTestTemplate{
+public class CreateWikiTests_loggedOutUser extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 

@@ -13,17 +13,15 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject
  *
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
- *
- * @description
- * 1. Test no ads on corporate pages
+ * @description 1. Test no ads on corporate pages
  */
 public class TestAdsOnGermanCorpPages extends NewTestTemplate {
 
 	private String testedPage;
 
 	@Factory(
-		dataProviderClass=GermanAdsDataProvider.class,
-		dataProvider="germanCorpPages"
+		dataProviderClass = GermanAdsDataProvider.class,
+		dataProvider = "germanCorpPages"
 	)
 	public TestAdsOnGermanCorpPages(String wikiName, String path) {
 		urlBuilder = new UrlBuilder(config.getEnv());
@@ -34,7 +32,7 @@ public class TestAdsOnGermanCorpPages extends NewTestTemplate {
 	}
 
 	@Test(
-		groups={"TestAdsOnGermanCorpPages_GeoEdgeFree"}
+		groups = {"TestAdsOnGermanCorpPages_GeoEdgeFree"}
 	)
 	public void TestAdsOnGermanCorpPages_GeoEdgeFree() {
 		AdsGermanObject wikiCorpPage = new AdsGermanObject(driver, testedPage);

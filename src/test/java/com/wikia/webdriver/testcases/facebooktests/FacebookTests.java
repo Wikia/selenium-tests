@@ -10,13 +10,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookMainPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookSettingsPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.facebook.FacebookUserPageObject;
 
-public class FacebookTests extends NewTestTemplate{
+public class FacebookTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
 	/**
 	 * dependent method: Signup_007_signUpWithFacebook
-	 *
+	 * <p/>
 	 * Steps:
 	 * 1. Log in to facebook
 	 * 2. Open Facebook settings

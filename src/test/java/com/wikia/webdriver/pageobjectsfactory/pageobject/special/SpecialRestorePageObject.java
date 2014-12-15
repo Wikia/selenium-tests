@@ -13,11 +13,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
  */
 public class SpecialRestorePageObject extends WikiBasePageObject {
 
-	@FindBy(css=".mw-undelete-pagetitle")
+	@FindBy(css = ".mw-undelete-pagetitle")
 	private WebElement articleToRestore;
-	@FindBy(css="#wpComment")
+	@FindBy(css = "#wpComment")
 	private WebElement reasonInput;
-	@FindBy(css="#mw-undelete-submit")
+	@FindBy(css = "#mw-undelete-submit")
 	private WebElement submitRestore;
 
 	public SpecialRestorePageObject(WebDriver driver) {

@@ -16,7 +16,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
  * @author Rodrigo 'RodriGomez' Molinero
  * @author Lukasz Jedrzejczak
  * @author Lukasz Nowak (Dyktus)
- *
  */
 
 public class CreateACustomMapComponentObject extends BasePageObject {
@@ -65,7 +64,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	public String getSelectedTemplateImageName(int selectedImageIndex) {
 		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
 		String selectedTemplateImageName = templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
-				+ beforeImageName.length());
+			+ beforeImageName.length());
 		return selectedTemplateImageName;
 	}
 

@@ -17,7 +17,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 
 	protected String articlename;
 
-	@FindBy(css="div.WikiaPageHeaderDiffHistory")
+	@FindBy(css = "div.WikiaPageHeaderDiffHistory")
 	private WebElement historyHeadLine;
 	@FindBy(css = "a[data-canonical='random']")
 	private WebElement randomPageButton;
@@ -27,8 +27,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
 	private By articleContentBy = By.cssSelector("#mw-content-text");
 	protected By rvFirstVideo = By.cssSelector(
-			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
-			);
+		".RVBody .item:nth-child(1) .lightbox[data-video-name]"
+	);
 	private String pageName;
 
 	public WikiArticlePageObject(WebDriver driver) {
@@ -41,36 +41,36 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		this.pageName = pageName;
 	}
 
-	public String getPageName(){
+	public String getPageName() {
 		return this.pageName;
 	}
 
 	public WikiArticleEditMode createNewArticle(String pageName,
 												int layoutNumber) {
 		getUrl(Global.DOMAIN + "index.php?title=" + pageName
-				+ "&action=edit&useFormat=" + layoutNumber);
+			+ "&action=edit&useFormat=" + layoutNumber);
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
-				+ pageNameEnc + "']")));
+			+ pageNameEnc + "']")));
 		return new WikiArticleEditMode(driver);
 	}
 
 	public WikiArticleEditMode createNewArticle(String wikiURL,
-			WikiArticlePageObject article) {
+												WikiArticlePageObject article) {
 		String pageName = article.getPageName();
 		getUrl(urlBuilder.appendQueryStringToURL(wikiURL + URLsContent.WIKI_DIR
-				+ pageName, URLsContent.ACTION_EDIT));
+			+ pageName, URLsContent.ACTION_EDIT));
 		String pageNameEnc = pageName.replace("_", " ");
 		waitForElementByElement(driver.findElement(By.cssSelector("a[title='"
-				+ pageNameEnc + "']")));
+			+ pageNameEnc + "']")));
 
 		return new WikiArticleEditMode(driver);
 	}
 
-	public WikiArticleEditMode createNewTemplate(String wikiURL, String templateName, String templateContent ) {
-		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.TEMPLATE_NAMESPACE + ":" + templateName );
-		WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle );
-		edit.typeInTemplateContent( templateContent );
+	public WikiArticleEditMode createNewTemplate(String wikiURL, String templateName, String templateContent) {
+		WikiArticlePageObject templateArticle = new WikiArticlePageObject(driver, URLsContent.TEMPLATE_NAMESPACE + ":" + templateName);
+		WikiArticleEditMode edit = templateArticle.createNewArticle(wikiURL, templateArticle);
+		edit.typeInTemplateContent(templateContent);
 		edit.clickOnPublish();
 		this.waitForElementByCss("#WikiaArticle");
 
@@ -79,8 +79,8 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		return edit;
 	}
 
-	public WikiArticleEditMode createNewDefaultArticle(){
-		this.pageName = PageContent.ARTICLE_NAME_PREFIX+getTimeStamp();
+	public WikiArticleEditMode createNewDefaultArticle() {
+		this.pageName = PageContent.ARTICLE_NAME_PREFIX + getTimeStamp();
 		return createNewArticle(this.pageName, 1);
 	}
 
@@ -88,12 +88,11 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		scrollAndClick(randomPageButton);
 		waitForElementByElement(searchButton);
 		PageObjectLogging.log("openRandomArticle",
-				"random page button clicked", true, driver);
+			"random page button clicked", true, driver);
 		return new WikiArticlePageObject(driver);
 	}
 
-	public void verifyArticleText(String content)
-	{
+	public void verifyArticleText(String content) {
 		waitForTextToBePresentInElementByBy(articleContentBy, content);
 		PageObjectLogging.log("verifyArticleText", "article text is verified", true);
 	}
@@ -124,8 +123,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
 	}
 
-	public WikiHistoryPageObject openHistoryPage()
-	{
+	public WikiHistoryPageObject openHistoryPage() {
 		getUrl(driver.getCurrentUrl() + "?action=history");
 		waitForElementByElement(historyHeadLine);
 		return new WikiHistoryPageObject(driver);

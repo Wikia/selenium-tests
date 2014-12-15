@@ -141,7 +141,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
 			"var elementY = document.getElementById(arguments[0]).offsetTop;" +
-			"window.scrollTo(0, elementY);",
+				"window.scrollTo(0, elementY);",
 			slotName
 		);
 	}

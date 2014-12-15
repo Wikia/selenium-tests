@@ -10,12 +10,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.DeleteAMapComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
+
 /**
  * @author: Lukasz Nowak
  * @ownership: Mobile Web
  */
 
-public class DeleteAndRestoreMapTests extends NewTestTemplate{
+public class DeleteAndRestoreMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 

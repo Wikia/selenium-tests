@@ -1,7 +1,6 @@
 package com.wikia.webdriver.common.core.urlbuilder;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class UrlBuilder {
@@ -20,7 +19,7 @@ public class UrlBuilder {
 	public String getUrlForPath(String wikiName, String wikiPath) {
 		String url = getUrlForWiki(wikiName);
 		if (!(isWikia)) {
-			url+= "wiki/";
+			url += "wiki/";
 		}
 		url += wikiPath;
 		return url;

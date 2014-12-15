@@ -12,27 +12,25 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject
 
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject{
+public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
 	public CreateNewWikiLogInSignUpPageObject(WebDriver driver) {
 		super(driver);
 	}
 
-	@FindBy(css="div.UserLoginModal input[name='username']")
+	@FindBy(css = "div.UserLoginModal input[name='username']")
 	WebElement userNameField;
-	@FindBy(css="div.UserLoginModal input[name='password']")
+	@FindBy(css = "div.UserLoginModal input[name='password']")
 	WebElement passwordField;
-	@FindBy(css="div.UserLoginModal input[type='submit']")
+	@FindBy(css = "div.UserLoginModal input[type='submit']")
 	WebElement submitButton;
-	@FindBy(css="div.UserLoginModal div.error-msg")
+	@FindBy(css = "div.UserLoginModal div.error-msg")
 	WebElement usernameValidationText;
-	@FindBy(css="form#SignupRedirect input[type='submit']")
+	@FindBy(css = "form#SignupRedirect input[type='submit']")
 	WebElement signUpSubmitButton;
-	@FindBy(css="div.UserLoginModal div.input-group div.error-msg")
+	@FindBy(css = "div.UserLoginModal div.input-group div.error-msg")
 	WebElement errorMessage;
 
 	public void typeInUserName(String userName) {

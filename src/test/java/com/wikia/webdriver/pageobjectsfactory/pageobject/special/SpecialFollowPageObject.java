@@ -12,9 +12,9 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class SpecialFollowPageObject extends SpecialPageObject {
 
-	@FindBy(css="#wikiafollowedpages-special-heading-blogs span>a")
+	@FindBy(css = "#wikiafollowedpages-special-heading-blogs span>a")
 	private List<WebElement> blogList;
-	@FindBy(css="#wikiafollowedpages-special-heading-media span>a")
+	@FindBy(css = "#wikiafollowedpages-special-heading-media span>a")
 	private List<WebElement> imagesList;
 
 	public SpecialFollowPageObject(WebDriver driver, String wikiURL) {
@@ -29,9 +29,9 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 
 	public void verifyFollowedImageVideo(String imageVideo) {
 		boolean isPresent = false;
-		for (WebElement elem:imagesList) {
+		for (WebElement elem : imagesList) {
 			String title = elem.getAttribute("title");
-			if (title.contains(imageVideo)){
+			if (title.contains(imageVideo)) {
 				isPresent = true;
 			}
 		}
@@ -41,7 +41,7 @@ public class SpecialFollowPageObject extends SpecialPageObject {
 
 	public void verifyFollowedBlog(String userName, String blogTitle) {
 		boolean isPresent = false;
-		for (WebElement elem:blogList) {
+		for (WebElement elem : blogList) {
 			String title = elem.getAttribute("title");
 			if (title.contains(userName) && title.contains(blogTitle)) {
 				isPresent = true;

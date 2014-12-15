@@ -19,14 +19,14 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * @ownership: Mobile Web 
+ * @ownership: Mobile Web
  */
 
 public class MapFlowTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "MapFlowTests_001", "MapFlowTests", "InteractiveMaps" }, enabled = false)
+	@Test(groups = {"MapFlowTests_001", "MapFlowTests", "InteractiveMaps"}, enabled = false)
 	public void MapFlowTests_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -47,7 +47,7 @@ public class MapFlowTests extends NewTestTemplate {
 		createdMap.verifyControlButtonsAreVisible();
 	}
 
-	@Test(groups = { "MapFlowTests_002", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_002", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_002_CreateCustomMapWithExistingTemplate() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -67,7 +67,7 @@ public class MapFlowTests extends NewTestTemplate {
 		createdMap.verifyControlButtonsAreVisible();
 	}
 
-	@Test(groups = { "MapFlowTests_003", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_003", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_003_CreateRealMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -83,7 +83,7 @@ public class MapFlowTests extends NewTestTemplate {
 		createdMap.verifyControlButtonsAreVisible();
 	}
 
-	@Test(groups = { "MapFlowTests_004", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_004", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_004_VerifyBackButtonWorksCorrectly() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -102,7 +102,7 @@ public class MapFlowTests extends NewTestTemplate {
 		map.verifyRealMapAndCustomMapButtons();
 	}
 
-	@Test(groups = { "MapFlowTests_005", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_005", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_005_VerifyCloseButtonsInCreationMapFlow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

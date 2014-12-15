@@ -18,9 +18,7 @@ import javax.mail.Store;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class MailFunctions {
 
@@ -41,11 +39,11 @@ public class MailFunctions {
 			while (messages.length == 0) {
 				Thread.sleep(150);
 				messages = inbox.getMessages();
-				counter+=1;
+				counter += 1;
 				if ((counter % 10) == 0) {
 					System.out.println("Checking mail... \r");
 				}
-				if (counter >2500) {
+				if (counter > 2500) {
 					break;
 				}
 			}
@@ -56,7 +54,7 @@ public class MailFunctions {
 				StringBuilder builder = new StringBuilder();
 				InputStreamReader in = new InputStreamReader(m.getInputStream());
 				BufferedReader reader = new BufferedReader(in);
-				while((line = reader.readLine()) != null) {
+				while ((line = reader.readLine()) != null) {
 					builder.append(line);
 				}
 				store.close();
@@ -65,12 +63,10 @@ public class MailFunctions {
 				store.close();
 				return "no messages";
 			}
-		}
-		catch (NoSuchProviderException e) {
+		} catch (NoSuchProviderException e) {
 			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
-		}
-		catch (MessagingException e) {
+		} catch (MessagingException e) {
 			PageObjectLogging.log("getFirstEmailContent", e.getMessage(), false);
 			return e.getMessage();
 		} catch (InterruptedException e) {
@@ -96,39 +92,36 @@ public class MailFunctions {
 			inbox.open(Folder.READ_WRITE);
 			Message messages[] = inbox.getMessages();
 			if (messages.length != 0) {
-				for (int i=0; i< messages.length; i++) {
+				for (int i = 0; i < messages.length; i++) {
 					messages[i].setFlag(Flags.Flag.DELETED, true);
 				}
 			} else {
 				System.out.println("There is no messages in inbox");
 			}
 			store.close();
-		}
-		catch (NoSuchProviderException e) {
+		} catch (NoSuchProviderException e) {
 			System.out.println("problems : " + e.getMessage());
-		}
-		catch (MessagingException e) {
+		} catch (MessagingException e) {
 			System.out.println("problems : " + e.getMessage());
 		}
 	}
 
 	public static String getActivationLinkFromEmailContent(String content) {
-		content = content.replace("=","" ); //mail content contain '=' chars, which has to be removed
+		content = content.replace("=", ""); //mail content contain '=' chars, which has to be removed
 		Pattern p = Pattern.compile("Special:WikiaConfirmEmail/*\\w{3,}<"); //getting activation URL from mail content
 		Matcher m = p.matcher(content);
 		if (m.find()) {
-			return m.group(0).substring(0, m.group(0).length()-1);
+			return m.group(0).substring(0, m.group(0).length() - 1);
 			//m.group(0) returns first match for the regexp
 			//last character is '<' so has to be removed
-		}
-		else {
+		} else {
 			throw new RuntimeException("There was no match in the following content: \n" + content);
 		}
 	}
 
 	public static String getPasswordFromEmailContent(String content) {
-		content = content.replace("\"","\n");
-		String [] lines = content.split("\n");
+		content = content.replace("\"", "\n");
+		String[] lines = content.split("\n");
 		return lines[1];
 	}
 }

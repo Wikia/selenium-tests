@@ -121,15 +121,15 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void clickEmbedMapCodeButton(embedMapDialogButtons button) {
 		switch (button) {
-		case SMALL:
-			embedMapCodeSmallButton.click();
-			break;
-		case MEDIUM:
-			embedMapCodeMediumButton.click();
-			break;
-		case LARGE:
-			embedMapCodeLargeButton.click();
-			break;
+			case SMALL:
+				embedMapCodeSmallButton.click();
+				break;
+			case MEDIUM:
+				embedMapCodeMediumButton.click();
+				break;
+			case LARGE:
+				embedMapCodeLargeButton.click();
+				break;
 		}
 	}
 
@@ -289,15 +289,15 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyEmbedMapCode(embedMapDialogButtons button) {
 		switch (button) {
-		case SMALL:
-			waitForElementVisibleByElement(embedMapCodeSmall);
-			break;
-		case MEDIUM:
-			waitForElementVisibleByElement(embedMapCodeMedium);
-			break;
-		case LARGE:
-			waitForElementVisibleByElement(embedMapCodeLarge);
-			break;
+			case SMALL:
+				waitForElementVisibleByElement(embedMapCodeSmall);
+				break;
+			case MEDIUM:
+				waitForElementVisibleByElement(embedMapCodeMedium);
+				break;
+			case LARGE:
+				waitForElementVisibleByElement(embedMapCodeLarge);
+				break;
 		}
 		PageObjectLogging.log("verifyEmbedMapCode", button + "embed map code was correctly displayed", true);
 	}
@@ -320,7 +320,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementByElement(enabledPinTypesCollection.get(InteractiveMapsContent.PIN_TYPE_INDEX));
 		if (allPinTypes.getAttribute("class").contains("enabled")) {
 			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were checked", true);
-		}else {
+		} else {
 			PageObjectLogging.log("verifyAllPointTypesIsCheck", "All pin types were not checked", false);
 		}
 		driver.switchTo().defaultContent();
@@ -332,7 +332,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 		waitForElementVisibleByElement(allPinTypes);
 		if (!allPinTypes.getAttribute("class").contains("enabled")) {
 			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were unchecked", true);
-		}else {
+		} else {
 			PageObjectLogging.log("verifyAllPointTypesIsUnCheck", "All pin types were checked", false);
 		}
 		driver.switchTo().defaultContent();
@@ -404,28 +404,28 @@ public class InteractiveMapPageObject extends BasePageObject {
 		Assertion.assertEquals(checkIfElementOnPage(map), false);
 	}
 
-	public void verifyPinTypeExists(String pinTypeName){
+	public void verifyPinTypeExists(String pinTypeName) {
 		waitForElementVisibleByElement(mapFrame);
 		driver.switchTo().frame(mapFrame);
-		while(createdPinNames.size()-1!=0){
-			if(createdPinNames
-					.get(createdPinNames.size()-1)
-					.getText()
-					.contains(pinTypeName)
-			){
+		while (createdPinNames.size() - 1 != 0) {
+			if (createdPinNames
+				.get(createdPinNames.size() - 1)
+				.getText()
+				.contains(pinTypeName)
+				) {
 				Assertion.assertEquals(
-						pinTypeName,
-						createdPinNames.get(createdPinNames.size()-1).getText());
+					pinTypeName,
+					createdPinNames.get(createdPinNames.size() - 1).getText());
 			} else {
 				PageObjectLogging.log(
-						"verifyPinTypeExist",
-						"Pin type with name " + pinTypeName + " does not exist",
-						true
-					);
+					"verifyPinTypeExist",
+					"Pin type with name " + pinTypeName + " does not exist",
+					true
+				);
 
-				}
-				break;
 			}
+			break;
+		}
 		driver.switchTo().defaultContent();
 	}
 
@@ -437,7 +437,7 @@ public class InteractiveMapPageObject extends BasePageObject {
 	}
 
 	public WikiArticleEditMode openEmbedMapPageEdit(String wikiURL) {
-		getUrl(wikiURL+URLsContent.EMBEDED_MAP_EDITPAGE);
+		getUrl(wikiURL + URLsContent.EMBEDED_MAP_EDITPAGE);
 		return new WikiArticleEditMode(driver);
 	}
 

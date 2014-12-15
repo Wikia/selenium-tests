@@ -23,9 +23,10 @@ import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 import org.browsermob.proxy.ProxyServer;
+
 import java.lang.reflect.Method;
 
-@Listeners({ com.wikia.webdriver.common.logging.PageObjectLogging.class })
+@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class})
 public class NewTestTemplateCore {
 
 	protected WebDriver driver;
@@ -68,7 +69,7 @@ public class NewTestTemplateCore {
 
 	protected void startBrowser() {
 		driver = registerDriverListener(
-			NewDriverProvider.getDriverInstanceForBrowser (config.getBrowser())
+			NewDriverProvider.getDriverInstanceForBrowser(config.getBrowser())
 		);
 	}
 

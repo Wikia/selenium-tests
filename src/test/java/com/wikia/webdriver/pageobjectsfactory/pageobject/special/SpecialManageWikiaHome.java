@@ -10,7 +10,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class SpecialManageWikiaHome extends WikiBasePageObject {
 
@@ -27,6 +26,7 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
 
 	/**
 	 * getting desired slot setup from http://corp.wikia.com/wiki/Special:ManageWikiaHome page
+	 *
 	 * @return
 	 */
 	public HashMap<String, Integer> getSlotSetup() {

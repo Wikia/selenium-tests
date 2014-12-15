@@ -10,23 +10,22 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class EditAccount extends BasePageObject {
 
-	@FindBy(css="[name=wpUserName]")
+	@FindBy(css = "[name=wpUserName]")
 	private WebElement userNameField;
-	@FindBy(css="[value='Close account']")
+	@FindBy(css = "[value='Close account']")
 	private WebElement closeAccountButton;
-	@FindBy(css="#wpReason")
+	@FindBy(css = "#wpReason")
 	private WebElement closeResonField;
-	@FindBy(css="#wpActionSetPass")
+	@FindBy(css = "#wpActionSetPass")
 	private WebElement newPasswordRadio;
-	@FindBy(css="[name=wpNewPass]")
+	@FindBy(css = "[name=wpNewPass]")
 	private WebElement newPasswordField;
-	@FindBy(css="[value='Clear disable flag']")
+	@FindBy(css = "[value='Clear disable flag']")
 	private WebElement clearDisableFlagButton;
-	@FindBy(css="fieldset > span")
+	@FindBy(css = "fieldset > span")
 	private WebElement statusMessage;
 
 	private final String userAccountReopenMessage = "Successfully removed disabled bit for account";
@@ -35,15 +34,15 @@ public class EditAccount extends BasePageObject {
 	public EditAccount(WebDriver driver, String communityWikiURL, String userName) {
 		super(driver);
 		driver.get(
-				communityWikiURL +
+			communityWikiURL +
 				URLsContent.SPECIAL_EDIT_ACCOUNT
 		);
 		userNameField.sendKeys(userName);
 		userNameField.submit();
 		PageObjectLogging.log(
-				"editAccount",
-				URLsContent.SPECIAL_EDIT_ACCOUNT +" page opened",
-				true
+			"editAccount",
+			URLsContent.SPECIAL_EDIT_ACCOUNT + " page opened",
+			true
 		);
 	}
 
@@ -52,21 +51,21 @@ public class EditAccount extends BasePageObject {
 		closeResonField.sendKeys(reason);
 		closeResonField.submit();
 		PageObjectLogging.log(
-				"closeAccount",
-				"account closed",
-				true
+			"closeAccount",
+			"account closed",
+			true
 		);
 	}
 
 	public void verifyAccountClosedMessage() {
 		waitForTextToBePresentInElementByElement(
-				statusMessage,
-				userAccountClosedMessage
+			statusMessage,
+			userAccountClosedMessage
 		);
 		PageObjectLogging.log(
-				"verifyAccountClosedMessage",
-				"verified account closed",
-				true
+			"verifyAccountClosedMessage",
+			"verified account closed",
+			true
 		);
 	}
 
@@ -76,21 +75,21 @@ public class EditAccount extends BasePageObject {
 		newPasswordField.submit();
 		scrollAndClick(clearDisableFlagButton);
 		PageObjectLogging.log(
-				"reopenAccount",
-				"account reopened",
-				true
+			"reopenAccount",
+			"account reopened",
+			true
 		);
 	}
 
 	public void verifyAccountReopenedMessage() {
 		waitForTextToBePresentInElementByElement(
-				statusMessage,
-				userAccountReopenMessage
+			statusMessage,
+			userAccountReopenMessage
 		);
 		PageObjectLogging.log(
-				"verifyAccountReopenedMessage",
-				"verified account reopened",
-				true
+			"verifyAccountReopenedMessage",
+			"verified account reopened",
+			true
 		);
 	}
 }

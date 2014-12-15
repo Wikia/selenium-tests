@@ -18,9 +18,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class VetArticlePlaceholderTests extends NewTestTemplate{
+public class VetArticlePlaceholderTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
@@ -31,7 +30,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
@@ -46,7 +45,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		base.openRandomArticle(wikiURL);
 		String articleTitle = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
 		VisualEditModePageObject visualEditMode = base.goToArticleDefaultContentEditPage(wikiURL, articleTitle);
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
 		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
@@ -66,7 +65,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyTitle(articleTitle);
 		article.verifyVideo();
 	}
@@ -83,7 +82,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		vetOptions.setCaption(PageContent.CAPTION);
 		vetOptions.submit();
 		visualEditMode.verifyVideo();
-		ArticlePageObject article  = visualEditMode.submitArticle();
+		ArticlePageObject article = visualEditMode.submitArticle();
 		article.verifyTitle(articleTitle);
 		article.verifyVideo();
 	}

@@ -21,7 +21,7 @@ public class SpecialFBConnectPageObject extends SpecialPageObject {
 	public void verifyFacebookButtonAppeared() {
 		waitForElementByElement(fbConnectButton);
 		PageObjectLogging.log("verifyFacebookButtonAppeared",
-				"facebook button appeared", true, driver);
+			"facebook button appeared", true, driver);
 	}
 
 }

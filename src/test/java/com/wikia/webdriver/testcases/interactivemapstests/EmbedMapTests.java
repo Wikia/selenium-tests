@@ -26,7 +26,7 @@ public class EmbedMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps" })
+	@Test(groups = {"EmbedMapTests_001", "EmbedMapTests", "InteractiveMaps"})
 	public void EmbedMapTests_001_EmbedMapInWikiaPage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -44,7 +44,7 @@ public class EmbedMapTests extends NewTestTemplate {
 		EditMode.verifyEmbededMap(mapID);
 	}
 
-	@Test(groups = { "EmbedMapTests_002", "EmbedMapTests", "InteractiveMaps" })
+	@Test(groups = {"EmbedMapTests_002", "EmbedMapTests", "InteractiveMaps"})
 	public void EmbedMapTests_002_VerifyEmbedMapElements() {
 		ArticlePageObject article = new ArticlePageObject(driver);
 		article.openArticleByName(wikiURL, InteractiveMapsContent.EMBED_MAP_ARTICLE_NAME);
@@ -56,7 +56,7 @@ public class EmbedMapTests extends NewTestTemplate {
 		embedMapDialog.verifyBrandFooterNotVisible();
 	}
 
-	@Test(groups = { "EmbedMapTests_003", "EmbedMapTests", "InteractiveMaps" })
+	@Test(groups = {"EmbedMapTests_003", "EmbedMapTests", "InteractiveMaps"})
 	public void EmbedMapTests_003_VerifyEmbedMapCodeButton() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -73,7 +73,7 @@ public class EmbedMapTests extends NewTestTemplate {
 		selectedMap.verifyEmbedMapCode(InteractiveMapPageObject.embedMapDialogButtons.LARGE);
 	}
 
-	@Test(groups = { "EmbedMapTests_004", "EmbedMapTests", "InteractiveMaps" })
+	@Test(groups = {"EmbedMapTests_004", "EmbedMapTests", "InteractiveMaps"})
 	public void EmbedMapTests_004_VerifyEmbedMapOutsideWikia() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -90,7 +90,7 @@ public class EmbedMapTests extends NewTestTemplate {
 		outPage.verifyMapEmbed();
 	}
 
-	@Test(groups = { "EmbedMapTests_005", "EmbedMapTests", "InteractiveMaps" })
+	@Test(groups = {"EmbedMapTests_005", "EmbedMapTests", "InteractiveMaps"})
 	public void EmbedMapTests_005_VerifyEmbedMapContributeModals() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -105,7 +105,7 @@ public class EmbedMapTests extends NewTestTemplate {
 		pinTypesDialog.verifyPinTypesDialog();
 	}
 
-	@Test(groups = { "EmbedMapTests_006", "EmbedMapTests", "InteractiveMaps" })
+	@Test(groups = {"EmbedMapTests_006", "EmbedMapTests", "InteractiveMaps"})
 	public void EmbedMapTests_006_VerifyEmbeddedMapAddPinType() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

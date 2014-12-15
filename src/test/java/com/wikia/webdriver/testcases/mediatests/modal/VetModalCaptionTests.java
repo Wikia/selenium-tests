@@ -17,7 +17,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class VetModalCaptionTests extends NewTestTemplate {
 
@@ -44,7 +43,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle_caption);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
+			.addVideoByUrl(VideoContent.YOUTUBE_VIDEO_URL);
 		caption = PageContent.CAPTION + vetOptions.getTimeStamp();
 		vetOptions.setCaption(caption);
 		vetOptions.submit();
@@ -65,7 +64,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle_caption);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+			(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
 		vetOptions.verifyCaption(caption);
 	}
 
@@ -77,7 +76,7 @@ public class VetModalCaptionTests extends NewTestTemplate {
 		VisualEditModePageObject visualEditMode = base.navigateToArticleEditPageCK(wikiURL, articleTitle_notEditable);
 		VetAddVideoComponentObject vetAddingVideo = visualEditMode.clickVideoButton();
 		VetOptionsComponentObject vetOptions = vetAddingVideo
-				.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 1);
+			.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 1);
 		vetOptions.verifyNameNotEditable();
 	}
 }

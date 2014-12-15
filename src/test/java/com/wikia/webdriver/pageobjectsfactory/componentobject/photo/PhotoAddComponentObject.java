@@ -11,23 +11,23 @@ import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
-public class PhotoAddComponentObject extends BasePageObject{
+public class PhotoAddComponentObject extends BasePageObject {
 
-	@FindBy(css="#ImageQuery")
+	@FindBy(css = "#ImageQuery")
 	private WebElement searchField;
-	@FindBy(css="#ImageUploadFind [value='Find']")
+	@FindBy(css = "#ImageUploadFind [value='Find']")
 	private WebElement findButton;
-	@FindBy(css="#ImageUploadProgress2")
+	@FindBy(css = "#ImageUploadProgress2")
 	private WebElement searchProgressThrobber;
-	@FindBy(css="#WMU_source_1")
+	@FindBy(css = "#WMU_source_1")
 	private WebElement flickButton;
-	@FindBy(css="#WMU_source_0")
+	@FindBy(css = "#WMU_source_0")
 	private WebElement thisWikiButton;
-	@FindBy(css="#ImageUploadFile")
+	@FindBy(css = "#ImageUploadFile")
 	private WebElement chooseFileInput;
-	@FindBy(css="#ImageUploadForm input:nth-child(2)")
+	@FindBy(css = "#ImageUploadForm input:nth-child(2)")
 	private WebElement uploadButton;
-	@FindBy(css="tr.ImageUploadFindImages td a")
+	@FindBy(css = "tr.ImageUploadFindImages td a")
 	private List<WebElement> addThisPhotoList;
 
 	private String photoName;
@@ -41,13 +41,13 @@ public class PhotoAddComponentObject extends BasePageObject{
 		waitForElementByElement(findButton);
 	}
 
-	public void typeSearchQuery(String photoName){
+	public void typeSearchQuery(String photoName) {
 		waitForElementByElement(searchField);
 		searchField.sendKeys(photoName);
-		PageObjectLogging.log("typeSearchQuery", photoName+" searching", true);
+		PageObjectLogging.log("typeSearchQuery", photoName + " searching", true);
 	}
 
-	public void clickFind(){
+	public void clickFind() {
 		waitForElementByElement(findButton);
 		scrollAndClick(findButton);
 		waitForElementVisibleByElement(searchProgressThrobber);
@@ -55,7 +55,7 @@ public class PhotoAddComponentObject extends BasePageObject{
 		PageObjectLogging.log("clickSearch", "search button clicked", true);
 	}
 
-	public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber){
+	public PhotoOptionsComponentObject clickAddThisPhoto(int photoNumber) {
 		waitForElementByElement(addThisPhotoList.get(photoNumber));
 		photoName = addThisPhotoList.get(photoNumber).findElement(By.cssSelector("img")).getAttribute("data-image-name");
 		scrollAndClick(addThisPhotoList.get(photoNumber));
@@ -63,7 +63,7 @@ public class PhotoAddComponentObject extends BasePageObject{
 		return new PhotoOptionsComponentObject(driver);
 	}
 
-	public PhotoOptionsComponentObject clickAddThisPhoto(String fileName){
+	public PhotoOptionsComponentObject clickAddThisPhoto(String fileName) {
 		WebElement photo = getElementByValue(addThisPhotoList, "title", fileName);
 		photoName = photo.findElement(By.cssSelector("img")).getAttribute("data-image-name");
 		scrollAndClick(photo);
@@ -71,42 +71,43 @@ public class PhotoAddComponentObject extends BasePageObject{
 		return new PhotoOptionsComponentObject(driver);
 	}
 
-	public String getPhotoName(){
+	public String getPhotoName() {
 		return photoName.replace(' ', '_');
 	}
 
 	/**
 	 * Adding photo with given @photoName and @photoNumber
+	 *
 	 * @param photoName
 	 * @param photoNumber
 	 */
-	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName, int photoNumber){
+	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName, int photoNumber) {
 		typeSearchQuery(photoName);
 		clickFind();
 		clickAddThisPhoto(photoNumber);
 		return new PhotoOptionsComponentObject(driver);
 	}
 
-	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName){
+	public PhotoOptionsComponentObject addPhotoFromWiki(String photoName) {
 		typeSearchQuery(photoName);
 		clickFind();
 		clickAddThisPhoto(photoName);
 		return new PhotoOptionsComponentObject(driver);
 	}
 
-	public void clickThisWiki(){
+	public void clickThisWiki() {
 		thisWikiButton.click();
 		PageObjectLogging.log("clickThisWiki", "this wiki button clicked", true);
 	}
 
-	public void clickFlickr(){
+	public void clickFlickr() {
 		flickButton.click();
 		PageObjectLogging.log("clickFlickr", "flickr button clicked", true);
 	}
 
 	public void chooseFileToUpload(String file) {
 		chooseFileInput.sendKeys(
-				getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
+			getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
 		);
 		PageObjectLogging.log("selectFileToUpload", "select file " + file + " to upload it", true);
 	}

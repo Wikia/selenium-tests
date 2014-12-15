@@ -12,9 +12,9 @@ import org.testng.annotations.Test;
  */
 public class TestTopIncontentBoxad extends NewTestTemplate {
 	@Test(
-			dataProviderClass = AdsDataProvider.class,
-			dataProvider = "topIncontentBoxad",
-			groups = {"TestTopIncontentBoxad_GeoEdgeFree"}
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "topIncontentBoxad",
+		groups = {"TestTopIncontentBoxad_GeoEdgeFree"}
 	)
 	public void TestTopIncontentBoxad_GeoEdgeFree(String wikiName, String article, Dimension windowResolution) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);

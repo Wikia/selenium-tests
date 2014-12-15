@@ -13,7 +13,7 @@ public class EditingPreferencesPageObject extends PreferencesPageObject {
 		super(driver);
 	}
 
-	@FindBy(css="select#mw-input-wpeditor")
+	@FindBy(css = "select#mw-input-wpeditor")
 	private WebElement preferredEditorDropdown;
 
 	public void selectPreferredEditor(String value) {

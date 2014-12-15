@@ -19,45 +19,45 @@ public class LightboxComponentObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css=".thumb.thumbinner")
+	@FindBy(css = ".thumb.thumbinner")
 	private WebElement imageThumbnail;
-	@FindBy(css="#LightboxModal")
+	@FindBy(css = "#LightboxModal")
 	private WebElement lightBoxModal;
-	@FindBy(css="span[data-pinned-title='Unpin top and bottom bars']")
+	@FindBy(css = "span[data-pinned-title='Unpin top and bottom bars']")
 	private WebElement pinButton;
-	@FindBy(css=".WikiaLightbox .share")
+	@FindBy(css = ".WikiaLightbox .share")
 	private WebElement shareScreen;
-	@FindBy(css=".WikiaLightbox a.share-button.secondary")
+	@FindBy(css = ".WikiaLightbox a.share-button.secondary")
 	private WebElement shareButton;
-	@FindBy(css="div.hero-inner img")
+	@FindBy(css = "div.hero-inner img")
 	private WebElement moreInfoThumbnail;
-	@FindBy(css="a.facebook")
+	@FindBy(css = "a.facebook")
 	private WebElement facebookShareLink;
-	@FindBy(css="a.twitter")
+	@FindBy(css = "a.twitter")
 	private WebElement twitterShareLink;
-	@FindBy(css="a.stumbleupon")
+	@FindBy(css = "a.stumbleupon")
 	private WebElement stumbleUponShareLink;
-	@FindBy(css="a.reddit")
+	@FindBy(css = "a.reddit")
 	private WebElement redditShareLink;
-	@FindBy(css="a.plusone")
+	@FindBy(css = "a.plusone")
 	private WebElement plusoneShareLink;
-	@FindBy(css=".video-media")
+	@FindBy(css = ".video-media")
 	private WebElement videoContainer;
-	@FindBy(css=".LightboxHeader h1 a")
+	@FindBy(css = ".LightboxHeader h1 a")
 	private WebElement titleLink;
-	@FindBy(css=".more-info-button")
+	@FindBy(css = ".more-info-button")
 	private WebElement moreInfoLink;
-	@FindBy(css=".WikiaLightbox div:not(.video-media)")
+	@FindBy(css = ".WikiaLightbox div:not(.video-media)")
 	private WebElement imageContainer;
-	@FindBy(css="span.carousel-arrow.next")
+	@FindBy(css = "span.carousel-arrow.next")
 	private WebElement carouselRight;
-	@FindBy(css="span.carousel-arrow.previous:not(.disabled)")
+	@FindBy(css = "span.carousel-arrow.previous:not(.disabled)")
 	private WebElement carouselLeft;
-	@FindBy(css="span.carousel-arrow.previous.disabled")
+	@FindBy(css = "span.carousel-arrow.previous.disabled")
 	private WebElement carouselLeftDisabled;
-	@FindBy(css="button.more-info-close")
+	@FindBy(css = "button.more-info-close")
 	private WebElement closeShareScreenButton;
-	@FindBy(css=".LightboxHeader button.close.wikia-chiclet-button")
+	@FindBy(css = ".LightboxHeader button.close.wikia-chiclet-button")
 	protected WebElement closeModalButton;
 
 	private final Integer videoWidthLightbox = 737;
@@ -97,9 +97,9 @@ public class LightboxComponentObject extends WikiBasePageObject {
 
 	public void clickPinButton() {
 		builder.moveToElement(lightBoxModal).
-				click(pinButton).
-				build().
-				perform();
+			click(pinButton).
+			build().
+			perform();
 		PageObjectLogging.log("clickPinButton", "pin button was clicked", true);
 	}
 

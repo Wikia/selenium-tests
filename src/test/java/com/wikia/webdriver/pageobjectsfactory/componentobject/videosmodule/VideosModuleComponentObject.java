@@ -15,14 +15,14 @@ import java.util.List;
  */
 public class VideosModuleComponentObject extends WikiBasePageObject {
 
-	@FindBy(css="#videosModule")
+	@FindBy(css = "#videosModule")
 	private WebElement videosModuleContainer;
-	@FindBy(css="#videosModule img")
+	@FindBy(css = "#videosModule img")
 	private List<WebElement> videos;
 	private final int videoCountMin = 3;
 	private final int videoCountMax = 5;
 
-	public VideosModuleComponentObject (WebDriver driver) {
+	public VideosModuleComponentObject(WebDriver driver) {
 		super(driver);
 	}
 

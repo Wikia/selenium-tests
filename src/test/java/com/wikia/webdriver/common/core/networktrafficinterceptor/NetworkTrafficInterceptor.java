@@ -25,7 +25,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
 
 	public NetworkTrafficInterceptor() {
 		super();
-		portNumber = Min + (int)(Math.random() * ((Max - Min) + 1));
+		portNumber = Min + (int) (Math.random() * ((Max - Min) + 1));
 	}
 
 	public Proxy startSeleniumProxyServer() {

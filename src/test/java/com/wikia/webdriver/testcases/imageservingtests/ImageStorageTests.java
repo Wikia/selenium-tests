@@ -18,9 +18,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePa
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. Delete image, verify 404 status, restore image, verify 200 status
- * 2. Move image, verify status
+ *         <p/>
+ *         1. Delete image, verify 404 status, restore image, verify 200 status
+ *         2. Move image, verify status
  */
 public class ImageStorageTests extends NewTestTemplate {
 

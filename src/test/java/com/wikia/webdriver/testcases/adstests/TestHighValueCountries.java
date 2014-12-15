@@ -24,8 +24,8 @@ public class TestHighValueCountries extends NewTestTemplate {
 	}
 
 	@Test(
-		dataProvider="getWikisWithStandardHVC", dataProviderClass=AdsDataProvider.class,
-		groups= {"HVC", "HVC_Standard"}
+		dataProvider = "getWikisWithStandardHVC", dataProviderClass = AdsDataProvider.class,
+		groups = {"HVC", "HVC_Standard"}
 	)
 	public void TestStandardHVC(String wikiName) {
 		logIn();

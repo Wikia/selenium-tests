@@ -12,9 +12,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.chatpageobject.ChatPage
 
 /**
  * @author Bogna 'bognix' Knychala
- *
- * @description
- * 1. Two users enter Chat
+ * @description 1. Two users enter Chat
  * 2. Verify dropdown menu is present when user clicks on another user with right button
  * 3. Verify blocked user dropdown
  * 4. Verify admin user dropdown
@@ -45,8 +43,8 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
 	private final int numberOfPrivateMessages = 10;
 
-	private ChatPageObject openChatForUser (
-			WebDriver driver, String userName, String password
+	private ChatPageObject openChatForUser(
+		WebDriver driver, String userName, String password
 	) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(userName, password, wikiURL);

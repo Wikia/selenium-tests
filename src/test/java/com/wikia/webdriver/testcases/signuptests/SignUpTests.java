@@ -24,7 +24,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUs
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject.tabNames;
 
- /*
+/*
  * 1. Attempt to sign up wrong blurry word,
  * 2. Attempt to sign up of too young user,
  * 3. Attempt to sign up with existing user name,
@@ -45,9 +45,9 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.typeEmail(credentials.emailQaart1);
 		signUp.typePassword(signUp.getTimeStamp());
 		signUp.enterBirthDate(
-				PageContent.WIKI_SIGN_UP_BIRTHMONTH,
-				PageContent.WIKI_SIGN_UP_BIRTHDAY,
-				PageContent.WIKI_SIGN_UP_BIRTHYEAR
+			PageContent.WIKI_SIGN_UP_BIRTHMONTH,
+			PageContent.WIKI_SIGN_UP_BIRTHDAY,
+			PageContent.WIKI_SIGN_UP_BIRTHYEAR
 		);
 		signUp.typeCaptcha(signUp.getTimeStamp());
 		signUp.submit();
@@ -64,10 +64,10 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.typePassword(signUp.getTimeStamp());
 		Calendar currentDate = Calendar.getInstance();
 		signUp.enterBirthDate(
-				// +1 because months are numerated from 0
-				Integer.toString(currentDate.get(Calendar.MONTH) + 1),
-				Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
-				Integer.toString(currentDate.get(Calendar.YEAR)- PageContent.MIN_AGE)
+			// +1 because months are numerated from 0
+			Integer.toString(currentDate.get(Calendar.MONTH) + 1),
+			Integer.toString(currentDate.get(Calendar.DAY_OF_MONTH)),
+			Integer.toString(currentDate.get(Calendar.YEAR) - PageContent.MIN_AGE)
 		);
 		signUp.verifyTooYoungMessage();
 		signUp.verifySubmitButtonDisabled();
@@ -115,7 +115,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-	public void SignUp_005_forced_signup_CNW(){
+	public void SignUp_005_forced_signup_CNW() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openWikiPage(wikiCorporateURL);
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
@@ -161,10 +161,10 @@ public class SignUpTests extends NewTestTemplate {
 		signUp.typeUserName(userName);
 		signUp.typePassword(password);
 		signUp.enterBirthDate(
-				PageContent.WIKI_SIGN_UP_BIRTHMONTH,
-				PageContent.WIKI_SIGN_UP_BIRTHDAY,
-				PageContent.WIKI_SIGN_UP_BIRTHYEAR
-				);
+			PageContent.WIKI_SIGN_UP_BIRTHMONTH,
+			PageContent.WIKI_SIGN_UP_BIRTHDAY,
+			PageContent.WIKI_SIGN_UP_BIRTHYEAR
+		);
 		AlmostTherePageObject almostTherePage = signUp.submit(email, emailPassword);
 		almostTherePage.verifyAlmostTherePage();
 
@@ -175,11 +175,11 @@ public class SignUpTests extends NewTestTemplate {
 
 	/**
 	 * Jira ticket: CONN-78
-	 *
+	 * <p/>
 	 * pre-conditions:
 	 * Facebook_001 test removes Wikia and Wikia Development App from Facebook
 	 * Facebokk_001 test stored in TestCases/FacebookTests/FacebookTests.java path
-	 *
+	 * <p/>
 	 * Steps:
 	 * 1. Log in to Facebook
 	 * 2. Open finish signup with facebook modal
@@ -187,10 +187,10 @@ public class SignUpTests extends NewTestTemplate {
 	 * 4. disconnect created account from facebook
 	 */
 	@Test(
-			groups = {"SignUp_007", "SignUp", "Modals"},
-			dependsOnGroups = "Facebook_001",
-			enabled = false
-		 )
+		groups = {"SignUp_007", "SignUp", "Modals"},
+		dependsOnGroups = "Facebook_001",
+		enabled = false
+	)
 	public void SignUp_007_signUpWithFacebook() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		FacebookMainPageObject fbLogin = base.openFacebookMainPage();

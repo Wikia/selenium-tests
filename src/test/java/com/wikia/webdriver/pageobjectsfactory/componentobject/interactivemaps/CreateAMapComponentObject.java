@@ -12,7 +12,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author: Lukasz Jedrzejczak
- *
  */
 
 public class CreateAMapComponentObject extends BasePageObject {

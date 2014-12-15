@@ -20,11 +20,11 @@ import java.util.List;
 
 public class VideoHomePageObject extends WikiBasePageObject {
 
-	@FindBy(css=".featured-video-slider .bx-controls")
+	@FindBy(css = ".featured-video-slider .bx-controls")
 	private WebElement featuredModuleControls;
-	@FindBys(@FindBy(css="#featured-video-bxslider li"))
+	@FindBys(@FindBy(css = "#featured-video-bxslider li"))
 	private List<WebElement> featuredSlides;
-	@FindBys(@FindBy(css=".latest-videos-wrapper .carousel-wrapper"))
+	@FindBys(@FindBy(css = ".latest-videos-wrapper .carousel-wrapper"))
 	private List<WebElement> latestVideoRows;
 
 	public VideoHomePageObject(WebDriver driver) {

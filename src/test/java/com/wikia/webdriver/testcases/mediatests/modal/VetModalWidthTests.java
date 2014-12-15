@@ -17,9 +17,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class VetModalWidthTests extends NewTestTemplate{
+public class VetModalWidthTests extends NewTestTemplate {
 
 	/**
 	 * 1. Verify width in visual mode, source mode, preview, and published page,
@@ -59,7 +58,7 @@ public class VetModalWidthTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+			(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
 		vetOptions.verifyVideoWidth(WIDTH);
 	}
 }

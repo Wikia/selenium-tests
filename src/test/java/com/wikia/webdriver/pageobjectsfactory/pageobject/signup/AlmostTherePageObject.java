@@ -10,17 +10,15 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class AlmostTherePageObject extends WikiBasePageObject {
 
-	@FindBy(xpath="//h2[contains(text(), 'Almost there')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Almost there')]")
 	private WebElement almostThereText;
-	@FindBy(css="input.link[value='Send me another confirmation email']")
+	@FindBy(css = "input.link[value='Send me another confirmation email']")
 	private WebElement sendAnotherMail;
-	@FindBy(css="a.change-email-link")
+	@FindBy(css = "a.change-email-link")
 	private WebElement changeMyEmail;
 
 	public AlmostTherePageObject(WebDriver driver) {
@@ -35,7 +33,7 @@ public class AlmostTherePageObject extends WikiBasePageObject {
 
 	private String getActivationLinkFromMail(String email, String password) {
 		String www = MailFunctions.getActivationLinkFromEmailContent(MailFunctions.getFirstEmailContent(email, password));
-		PageObjectLogging.log("getActivationLinkFromMail", "activation link is visible in email content: "+www, true);
+		PageObjectLogging.log("getActivationLinkFromMail", "activation link is visible in email content: " + www, true);
 		return www;
 	}
 

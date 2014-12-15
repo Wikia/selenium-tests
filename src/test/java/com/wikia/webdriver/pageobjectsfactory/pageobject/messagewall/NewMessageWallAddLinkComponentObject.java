@@ -10,11 +10,10 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class NewMessageWallAddLinkComponentObject extends WikiBasePageObject {
 
-	@FindBy(css=".linkEditorDialog > div")
+	@FindBy(css = ".linkEditorDialog > div")
 	private WebElement addLinkModal;
 
 	private By targetBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(2) input");

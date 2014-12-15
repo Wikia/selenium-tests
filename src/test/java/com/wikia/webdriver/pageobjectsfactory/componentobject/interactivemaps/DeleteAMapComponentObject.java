@@ -9,7 +9,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps
 
 /**
  * @author Robert 'Rochan' Chan
- *
  */
 
 public class DeleteAMapComponentObject extends BasePageObject {

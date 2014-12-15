@@ -15,13 +15,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCreatePa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.blog.BlogPageObject;
 
-public class BlogTests extends NewTestTemplate{
+public class BlogTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
 	/**
 	 * @author Karol 'kkarolk' Kujawiak
-	 *
+	 * <p/>
 	 * Test cases:
 	 * 1. Create blog post using "Create blog post button" (one case)
 	 * 2. Create blog post using "Special:CreateBlogPage" (data provider)
@@ -30,7 +30,7 @@ public class BlogTests extends NewTestTemplate{
 	 * 5. Move existing blog post
 	 */
 
-	@Test(groups = { "BlogTests_001", "BlogTests", "Smoke1"})
+	@Test(groups = {"BlogTests_001", "BlogTests", "Smoke1"})
 	public void BlogTests_001_addFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName4, credentials.password4, wikiURL);
@@ -47,9 +47,9 @@ public class BlogTests extends NewTestTemplate{
 	}
 
 	@Test(
-			dataProviderClass = ArticleDataProvider.class,
-			dataProvider = "articleTitles",
-			groups = { "BlogTests_002", "BlogTests"})
+		dataProviderClass = ArticleDataProvider.class,
+		dataProvider = "articleTitles",
+		groups = {"BlogTests_002", "BlogTests"})
 	public void BlogTests_002_addByUrl(String blogTitle) {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -63,7 +63,7 @@ public class BlogTests extends NewTestTemplate{
 		blogPage.verifyContent(blogContent);
 	}
 
-	@Test(groups = { "BlogTests_003", "BlogTests"})
+	@Test(groups = {"BlogTests_003", "BlogTests"})
 	public void BlogTests_003_editFromProfile() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -79,7 +79,7 @@ public class BlogTests extends NewTestTemplate{
 		blogPage.verifyContent(blogContent);
 	}
 
-	@Test(groups = { "BlogTests_004", "BlogTests"})
+	@Test(groups = {"BlogTests_004", "BlogTests"})
 	public void BlogTests_004_deleteUndelete() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -96,7 +96,7 @@ public class BlogTests extends NewTestTemplate{
 		blogPage.verifyNotificationMessage();
 	}
 
-	@Test(groups = { "BlogTests_005", "BlogTests"})
+	@Test(groups = {"BlogTests_005", "BlogTests"})
 	public void BlogTests_005_move() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
@@ -105,7 +105,7 @@ public class BlogTests extends NewTestTemplate{
 		userProfile.clickOnBlogTab();
 		BlogPageObject blogPage = userProfile.openFirstPost();
 		RenamePageObject renamePage = blogPage.renameUsingDropdown();
-		renamePage.rename(credentials.userNameStaff+"/"+blogTitleMove);
+		renamePage.rename(credentials.userNameStaff + "/" + blogTitleMove);
 		blogPage.verifyBlogTitle(blogTitleMove);
 		blogPage.verifyNotificationMessage();
 	}
