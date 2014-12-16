@@ -15,11 +15,14 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.TimeoutException;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -31,6 +34,7 @@ public class AdsComparison {
 	public static final int IMAGE_ACCURACY_PERCENT = 70;
 	private static final int TIME_STEP_MILLS = 1000;
 	private static final int MAX_ATTEMPTS = 600;
+	private static final int AD_TIMEOUT_SEC = 15;
 	private Shooter shooter;
 	protected ImageComparison imageComparison;
 	//Chromedriver has an open issue and all screenshots made in chromedriver on mobile are scaled
@@ -41,32 +45,20 @@ public class AdsComparison {
 		shooter = new Shooter();
 	}
 
-	public void hideSlot(String slotSelector, WebDriver driver) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		// Check if we are using mobile skin. Since mobile skin uses different version of jQuery
-		if (slotSelector.toUpperCase().contains("MOBILE")) {
-			js.executeScript(
-				"$(arguments[0]).css('visibility', 'hidden')",
-				slotSelector
-			);
-		} else {
-			// Find ad-containing element and set visibility = hidden on it
-			// Example selector:
-			// AD_SLOT iframe:visible:first, AD_SLOT img:visible:first, AD_SLOT object:visible:first
-			js.executeScript(
-				"var iframes = arguments[0] + ' iframe:visible, ';"
-					+ "var objects = arguments[0] + ' object:visible, ';"
-					+ "var imgs = arguments[0] + ' img:visible';"
-					+ "var elements = $(iframes + objects + imgs);"
-					+ "for (var i=0; i < elements.length; i++) { elements[i].style.visibility = 'hidden'; }",
-				slotSelector
-			);
-		}
-		PageObjectLogging.log(
-			"AdInSlotHidden", "Ad in slot hidden; Slot CSS " + slotSelector, true
-		);
+	public void hideSlot(String selector, WebDriver driver) {
+		changeVisibility(selector, "hidden", driver);
 	}
 
+	public void showSlot(String selector, WebDriver driver) {
+		changeVisibility(selector, "visible", driver);
+	}
+
+	private void changeVisibility(String selector, String visibility, WebDriver driver) {
+		((JavascriptExecutor) driver).executeScript(
+			"$(arguments[0]).css('visibility', arguments[1]);",
+			selector, visibility
+		);
+	}
 
 	public boolean compareImageWithScreenshot(
 		String filePath, Dimension screenshotSize, Point startPoint, WebDriver driver
@@ -99,36 +91,29 @@ public class AdsComparison {
 		return success;
 	}
 
-	public boolean isAdVisible(WebElement element, String elementSelector, WebDriver driver) {
-		Shooter shooter = new Shooter();
-		if (element.getSize().height <= 1 || element.getSize().width <= 1) {
-			PageObjectLogging.log(
-				"ScreenshotElement",
-				"Element has size 1px x 1px or smaller. Most probable is not displayed; CSS " + elementSelector,
-				false,
-				driver
-			);
-			throw new NoSuchElementException(
-				"Element has size 1px x 1px or smaller. Most probable is not displayed"
-			);
+	public boolean isAdVisible(final WebElement element, final String selector, final WebDriver driver) {
+		hideSlot(selector, driver);
+		final File backgroundImg = shooter.captureWebElement(element, driver);
+		PageObjectLogging.log("ScreenshotsComparison", "Background image in " + selector, true, driver);
+		showSlot(selector, driver);
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, AD_TIMEOUT_SEC);
+			wait.until(new ExpectedCondition<Object>() {
+				@Override
+				public Object apply(WebDriver driver) {
+					File adImg = shooter.captureWebElement(element, driver);
+					PageObjectLogging.log("ScreenshotsComparison", "Ad image in " + selector, true, driver);
+					boolean areFilesTheSame = imageComparison.areFilesTheSame(backgroundImg, adImg);
+					adImg.delete();
+					return !areFilesTheSame;
+				}
+			});
+		} catch (TimeoutException e) {
+			return false;
+		} finally {
+			backgroundImg.delete();
 		}
-		PageObjectLogging.log(
-			"ScreenshotElement",
-			"Screenshot of the element taken, Selector: " + elementSelector,
-			true, driver
-		);
-		File preSwitch = shooter.captureWebElement(element, driver);
-		hideSlot(elementSelector, driver);
-		File postSwitch = shooter.captureWebElement(element, driver);
-		PageObjectLogging.log(
-			"ScreenshotElement",
-			"Screenshot of element off taken; CSS " + elementSelector,
-			true
-		);
-		boolean imagesTheSame = imageComparison.areFilesTheSame(preSwitch, postSwitch);
-		preSwitch.delete();
-		postSwitch.delete();
-		return !imagesTheSame;
+		return true;
 	}
 
 	public File getMobileSlotScreenshot(WebElement element, WebDriver driver) {

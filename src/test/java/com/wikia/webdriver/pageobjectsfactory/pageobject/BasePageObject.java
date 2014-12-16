@@ -487,6 +487,22 @@ public class BasePageObject{
 	}
 
 	/**
+	 * Checks if the element is visible on browser
+	 *
+	 ** @param elementBy
+	 *			The element to be checked
+	 * @throws Exception
+	 */
+	public void waitForElementByElementLocatedBy(By elementBy) {
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
+	}
+
+	/**
 	 * Checks if the element is present in DOM
 	 *
 	 * @param locator The element to be checked
@@ -558,7 +574,21 @@ public class BasePageObject{
 	}
 
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
-		wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
+	}
+
+	public void waitForTextNotPresentInElementByElementLocatedBy(By by, String text) {
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			wait.until(CommonExpectedConditions.textNotPresentInElementLocatedBy(by, text));
+		}finally {
+			restoreDeaultImplicitWait();
+		}
 	}
 
 	public void waitForTextToBePresentInElementLocatedBy(By locator, String text) {

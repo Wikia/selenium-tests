@@ -207,6 +207,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 		search.selectAllAdvancedOptions();
 		SearchPageObject searchPage = new SearchPageObject(driver);
 		searchPage.clickSearchButton();
+		searchPage.setSearchTab(SearchPageObject.SearchTab.EVERYTHING);
 		search.verifyNamespace(namespace);
 	}
 

@@ -46,6 +46,9 @@ public class SearchPageObject extends WikiBasePageObject {
 	@FindBy(css=".results-wrapper i")
 	protected WebElement noResultsCaption;
 
+	@FindBy(css = ".everything")
+	private WebElement filterEverything;
+
 	protected By paginationContainerBy = By.cssSelector(".wikia-paginator");
 
 	public void clickNextPaginator() {
@@ -79,5 +82,23 @@ public class SearchPageObject extends WikiBasePageObject {
 	public void clickSearchButton() {
 		searchButton.click();
 		PageObjectLogging.log("clickSearchButton", "Search button was clicked", true, driver);
+	}
+
+	public void setSearchTab(SearchTab tab){
+		driver.findElement(tab.getBy()).click();
+	}
+
+	public enum SearchTab {
+		ARTICLES(".articles"), PHOTOS_AND_VIDEOS(".photos-and-videos"), PEOPLE(".people"), EVERYTHING(".everything");
+
+		private final String cssSelector;
+
+		private SearchTab(String cssSelector){
+			this.cssSelector=cssSelector;
+		}
+
+		public By getBy(){
+			return By.cssSelector(cssSelector);
+		}
 	}
 }

@@ -2,6 +2,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,6 +23,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -32,8 +34,6 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement contentInput;
 	@FindBy(css="div.cke_wrapper.cke_ltr div.cke_contents iframe")
 	private WebElement iframe;
-	@FindBy(css="img.image")
-	private WebElement image;
 	@FindBy(css="img.image-gallery")
 	private WebElement gallery;
 	@FindBy(css="img.image-slideshow")
@@ -76,7 +76,12 @@ public class VisualEditModePageObject extends EditMode {
 	private WebElement contextFrame;
 	@FindBy(css=".cke_dialog_body")
 	private WebElement addTableLightbox;
-	private By imageBy = By.cssSelector("img.image");
+
+	private static final String IMAGE_COMPONENT_CSS = "img.image";
+	@FindBy(css=IMAGE_COMPONENT_CSS)
+	private WebElement image;
+
+	private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
 	private By galleryBy = By.cssSelector("img.image-gallery");
 
 	private By slideshowBy = By.cssSelector("img.image-slideshow");
@@ -129,8 +134,14 @@ public class VisualEditModePageObject extends EditMode {
 		driver.switchTo().defaultContent();
 	}
 
+	private void verifyComponent(By componentBy){
+		driver.switchTo().frame(iframe);
+		waitForElementByElementLocatedBy(componentBy);
+		driver.switchTo().defaultContent();
+	}
+
 	public void verifyPhoto() {
-		verifyComponent(image);
+		verifyComponent(IMAGE_BY);
 	}
 
 	public void verifyGallery() {
@@ -257,7 +268,7 @@ public class VisualEditModePageObject extends EditMode {
 		driver.switchTo().frame(iframe);
 		switch (component) {
 		case PHOTO:
-			waitForElementNotPresent(imageBy);
+			waitForElementNotPresent(IMAGE_BY);
 			break;
 		case GALLERY:
 			waitForElementNotPresent(galleryBy);

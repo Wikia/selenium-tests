@@ -2,17 +2,21 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.search.intrawikiSearch
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
 
@@ -232,7 +236,18 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public void verifyNamespace(String namespace) {
-		waitForElementByElement(titles.get(0));
+		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		try {
+			new WebDriverWait(driver, 30).until(new ExpectedCondition<Boolean>() {
+				@Override
+				public Boolean apply(WebDriver webDriver) {
+					return !titles.isEmpty();
+				}
+			});
+		}finally {
+			restoreDeaultImplicitWait();
+		}
+
 		Assertion.assertTrue(titles.get(0).getText().startsWith(namespace));
 	}
 

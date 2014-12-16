@@ -202,10 +202,15 @@ public class NewDriverProvider {
 		//TODO change mobile tests to use @UserAgent annotation
 		if (browserName.equals("CHROMEMOBILE")) {
 			chromeOptions.addArguments(
-				"--user-agent="
-				+ userAgentRegistry.getUserAgent("iPhone")
-            );
-            return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
+				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone")
+			);
+			return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
+		}
+		if (browserName.equals("CHROMEMOBILEMERCURY")) {
+			chromeOptions.addArguments(
+				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury")
+			);
+			return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
 		}
 
 		//Adding console logging for Chrome browser
