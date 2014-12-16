@@ -413,7 +413,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 					&& element.getSize().getHeight() > 1
 					&& element.getSize().getWidth() > 1
 				) {
-					throw new WebDriverException("Ads found on page");
+					throw new WebDriverException("Ads found on page in selector: " + selector);
 				} else {
 					PageObjectLogging.log(
 						"AdsFoundButNotVisible",
