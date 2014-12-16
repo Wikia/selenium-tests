@@ -2,6 +2,7 @@ package com.wikia.webdriver.common.core.geoedge;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +19,7 @@ import org.xml.sax.SAXException;
  */
 public class GeoEdgeUtils {
 
-	private HashMap countriesConfiguration = new HashMap();
+	private Map countriesConfiguration = new HashMap();
 	private String configFilePath;
 	private Document doc;
 

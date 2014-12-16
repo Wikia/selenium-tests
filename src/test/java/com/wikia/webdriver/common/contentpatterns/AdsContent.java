@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.contentpatterns;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -8,8 +9,8 @@ import java.util.HashMap;
  */
 public class AdsContent {
 	//HashMap with slots selector
-	public static HashMap<String, String> SLOTS_SELECTORS;
-	public static HashMap<String, String> ADS_PROVIDERS;
+	public static Map<String, String> SLOTS_SELECTORS;
+	public static Map<String, String> ADS_PROVIDERS;
 
 	//SCRIPTS
 	public static final String ADS_PUSHSLOT_SCRIPT =

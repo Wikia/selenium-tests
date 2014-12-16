@@ -295,7 +295,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public List<String> getTitles() {
-		ArrayList<String> titleList = new ArrayList<String>();
+		List<String> titleList = new ArrayList<String>();
 		for (WebElement elem:titles) {
 			titleList.add(elem.getText());
 		}

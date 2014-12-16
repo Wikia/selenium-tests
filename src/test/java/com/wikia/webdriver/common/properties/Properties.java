@@ -101,10 +101,14 @@ public class Properties {
 	public static String apiToken;
 
 	private static void setVariables() {
-		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
-		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
-		userName2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.username");
-		password2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.password");
+		userName = setUserName(XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username"));
+		password = setPassword(XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password"));
+		userName2 = setUserName(XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.username"));
+		password2 = setPassword(XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.password"));
+//		userName = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.username");
+//		password = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular.password");
+//		userName2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.username");
+//		password2 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular2.password");
 		userName3 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular3.username");
 		password3 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular3.password");
 		userName4 = XMLFunctions.getXMLConfiguration(Global.CONFIG_FILE, "ci.user.regular4.username");
@@ -217,5 +221,13 @@ public class Properties {
 		WebElement versionTable = versionDriver.findElement(By.xpath("//td[contains(text(), 'Code')]"));
 		Global.WIKI_VERSION = versionTable.getText();
 		versionDriver.close();
+	}
+
+	private static String setUserName(String key) {
+		return key;
+	}
+
+	private static String setPassword(String key){
+		return key;
 	}
 }

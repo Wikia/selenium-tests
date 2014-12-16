@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,8 +30,8 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
 	 * getting desired slot setup from http://corp.wikia.com/wiki/Special:ManageWikiaHome page
 	 * @return
 	 */
-	public HashMap<String, Integer> getSlotSetup() {
-		HashMap<String, Integer> slotSetup = new HashMap<String, Integer>();
+	public Map<String, Integer> getSlotSetup() {
+		Map<String, Integer> slotSetup = new HashMap<String, Integer>();
 		slotSetup.put(HubName.VIDEO_GAMES.toString(), Integer.parseInt(videoGamesAmount.getAttribute("value")));
 		slotSetup.put(HubName.ENTERTAINMENT.toString(), Integer.parseInt(entertainmentAmount.getAttribute("value")));
 		slotSetup.put(HubName.LIFESTYLE.toString(), Integer.parseInt(lifestyleAmount.getAttribute("value")));

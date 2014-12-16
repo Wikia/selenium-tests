@@ -926,12 +926,12 @@ public class BasePageObject{
 	}
 
 	public void switchToBrowserTab(int index) {
-		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		List<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(index));
 	}
 
 	public void switchToNewBrowserTab() {
-		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		List<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(tabs.size()-1));
 	}
 

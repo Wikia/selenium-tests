@@ -292,7 +292,7 @@ public class VisualEditModePageObject extends EditMode {
 	 * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
 	 */
 	public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
-		ArrayList<String> videos = new ArrayList<String>();
+		List<String> videos = new ArrayList<String>();
 		waitForElementByElement(messageSourceModeTextArea);
 		String sourceText = messageSourceModeTextArea.getText();
 		int index = 0;
