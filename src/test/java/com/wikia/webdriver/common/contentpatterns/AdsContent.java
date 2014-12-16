@@ -49,6 +49,8 @@ public class AdsContent {
 	public static final String INCONTENT_3 = "INCONTENT_3";
 	public static final String INCONTENT_LB_1 = "INCONTENT_LEADERBOARD_1";
 	public static final String INCONTENT_LB_2 = "INCONTENT_LEADERBOARD_2";
+	public static final String INCONTENT_LB_3 = "INCONTENT_LEADERBOARD_3";
+
 
 	//CONTAINERS
 	public static final String PREFOOTERS_CONTAINER = "Prefooters";
@@ -101,6 +103,8 @@ public class AdsContent {
 		SLOTS_SELECTORS.put(INCONTENT_3, "[id^=INCONTENT_3]");
 		SLOTS_SELECTORS.put(INCONTENT_LB_1, "#INCONTENT_LEADERBOARD_1");
 		SLOTS_SELECTORS.put(INCONTENT_LB_2, "#INCONTENT_LEADERBOARD_2");
+		SLOTS_SELECTORS.put(INCONTENT_LB_3, "#INCONTENT_LEADERBOARD_3");
+
 	}
 }
 
