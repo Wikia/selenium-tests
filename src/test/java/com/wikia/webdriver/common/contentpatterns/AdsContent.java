@@ -1,5 +1,8 @@
 package com.wikia.webdriver.common.contentpatterns;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import java.util.HashMap;
 
 /**
@@ -7,6 +10,7 @@ import java.util.HashMap;
  * @author Bogna 'bognix' Knychala
  */
 public class AdsContent {
+
 	//HashMap with slots selector
 	public static HashMap<String, String> SLOTS_SELECTORS;
 	public static HashMap<String, String> ADS_PROVIDERS;
@@ -40,6 +44,17 @@ public class AdsContent {
 	public static final String MOBILETOP_LB = "MOBILE_TOP_LEADERBOARD";
 	public static final String MOBILE_AD_IN_CONTENT = "MOBILE_IN_CONTENT";
 	public static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
+	public static final String INCONTENT_1A = "INCONTENT_1A";
+	public static final String INCONTENT_1B = "INCONTENT_1B";
+	public static final String INCONTENT_1C = "INCONTENT_1C";
+	public static final String INCONTENT_2A = "INCONTENT_2A";
+	public static final String INCONTENT_2B = "INCONTENT_2B";
+	public static final String INCONTENT_2C = "INCONTENT_2C";
+	public static final String INCONTENT_3A = "INCONTENT_3A";
+	public static final String INCONTENT_3B = "INCONTENT_3B";
+	public static final String INCONTENT_3C = "INCONTENT_3C";
+	public static final String INCONTENT_LB_1 = "INCONTENT_LEADERBOARD_1";
+	public static final String INCONTENT_LB_2 = "INCONTENT_LEADERBOARD_2";
 
 	//CONTAINERS
 	public static final String PREFOOTERS_CONTAINER = "Prefooters";
@@ -82,12 +97,22 @@ public class AdsContent {
 		SLOTS_SELECTORS.put(PREFOOTER_RIGHT, "#PREFOOTER_RIGHT_BOXAD");
 		SLOTS_SELECTORS.put(WIKIA_BAR, "#WIKIA_BAR_BOXAD_1");
 		SLOTS_SELECTORS.put(ADS_IN_CONTENT_CONTAINER, "#WikiaAdInContentPlaceHolder");
-		SLOTS_SELECTORS.put(PREFOOTERS_CONTAINER, "#WikiaArticleBottomAd");
+		SLOTS_SELECTORS.put(PREFOOTERS_CONTAINER, "#WikiaArticleBottomAd, .bottom-ads");
 		SLOTS_SELECTORS.put(TOP_INCONTENT_BOXAD, "#TOP_INCONTENT_BOXAD");
 		SLOTS_SELECTORS.put(MOBILETOP_LB, "#MOBILE_TOP_LEADERBOARD");
 		SLOTS_SELECTORS.put(MOBILE_AD_IN_CONTENT, "#MOBILE_IN_CONTENT");
 		SLOTS_SELECTORS.put(MOBILE_PREFOOTER, "#MOBILE_PREFOOTER");
-
+		SLOTS_SELECTORS.put(INCONTENT_1A, "#INCONTENT_1A");
+		SLOTS_SELECTORS.put(INCONTENT_1B, "#INCONTENT_1B");
+		SLOTS_SELECTORS.put(INCONTENT_1C, "#INCONTENT_1C");
+		SLOTS_SELECTORS.put(INCONTENT_2A, "#INCONTENT_2A");
+		SLOTS_SELECTORS.put(INCONTENT_2B, "#INCONTENT_2B");
+		SLOTS_SELECTORS.put(INCONTENT_2C, "#INCONTENT_2C");
+		SLOTS_SELECTORS.put(INCONTENT_3A, "#INCONTENT_3A");
+		SLOTS_SELECTORS.put(INCONTENT_3B, "#INCONTENT_3B");
+		SLOTS_SELECTORS.put(INCONTENT_3C, "#INCONTENT_3C");
+		SLOTS_SELECTORS.put(INCONTENT_LB_1, "#INCONTENT_LEADERBOARD_1");
+		SLOTS_SELECTORS.put(INCONTENT_LB_2, "#INCONTENT_LEADERBOARD_2");
 	}
 }
 

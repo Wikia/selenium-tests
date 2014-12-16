@@ -83,6 +83,7 @@ public class AdsDataProvider {
 			{"wikia", "Video_Games/Lizzunchbox"},
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"monsterhunter", "Portal:MH3U"},
+			{"adtest-pluto", "VeryLongPage"},
 		};
 	}
 
