@@ -55,6 +55,10 @@ All commands must be run from the `selenium-tests` directory cloned during setup
 
     mvn clean test -Dbrowser=CHROMEMOBILE -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
 
+##### Running tests on devbox for muppet wikia on a Chrome pretending to be an Android device forcing Mercury skin
+
+    mvn clean test -Dbrowser=CHROMEMOBILEMERCURY -Denv=dev-karol -Dwiki-name=muppet -Dgroups=Login
+
 If everything goes right it should log in as a QATestsUser.
 
 ##### Running tests on real device

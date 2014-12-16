@@ -80,7 +80,7 @@ public class BlogTests extends NewTestTemplate{
 	}
 
 	@Test(groups = { "BlogTests_004", "BlogTests"})
-	public void BlogTests_004_deleteUndelete() {
+	public void BlogTests_004_deleteUndelete_QAART_479() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);
@@ -92,8 +92,8 @@ public class BlogTests extends NewTestTemplate{
 		SpecialRestorePageObject restore = base.undeleteByFlashMessage();
 		restore.giveReason(blogPage.getTimeStamp());
 		restore.restorePage();
-		blogPage.verifyBlogTitle(blogTitle);
 		blogPage.verifyNotificationMessage();
+		blogPage.verifyBlogTitle(blogTitle);
 	}
 
 	@Test(groups = { "BlogTests_005", "BlogTests"})

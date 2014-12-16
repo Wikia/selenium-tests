@@ -30,6 +30,10 @@ public class PhotoAddComponentObject extends BasePageObject{
 	@FindBy(css="tr.ImageUploadFindImages td a")
 	private List<WebElement> addThisPhotoList;
 
+	private static final String IMAGE_UPLOAD_HEADLINE_CSS = "#ImageUploadHeadline";
+	@FindBy(css = IMAGE_UPLOAD_HEADLINE_CSS)
+	private WebElement imageUploadHeadline;
+
 	private String photoName;
 
 	public PhotoAddComponentObject(WebDriver driver) {
@@ -49,9 +53,9 @@ public class PhotoAddComponentObject extends BasePageObject{
 
 	public void clickFind(){
 		waitForElementByElement(findButton);
+		String oldHeadline = imageUploadHeadline.getText();
 		scrollAndClick(findButton);
-		waitForElementVisibleByElement(searchProgressThrobber);
-		waitForElementNotVisibleByElement(searchProgressThrobber);
+		waitForTextNotPresentInElementByElementLocatedBy(By.cssSelector(IMAGE_UPLOAD_HEADLINE_CSS), oldHeadline);
 		PageObjectLogging.log("clickSearch", "search button clicked", true);
 	}
 

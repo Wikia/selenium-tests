@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import junit.framework.Assert;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openqa.selenium.By;
@@ -25,6 +24,7 @@ import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
+import org.testng.SkipException;
 
 public class PageObjectLogging extends AbstractWebDriverEventListener implements ITestListener {
 
@@ -175,8 +175,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 						false);
 			}
 
-			String exception = result.getThrowable().toString() +
-					"\n" +ExceptionUtils.getStackTrace(result.getThrowable());
+			String exception = result.getThrowable().toString()
+				+ "\n" +ExceptionUtils.getStackTrace(result.getThrowable());
 
 			StringBuilder builder = new StringBuilder();
 			builder.append("<tr class=\"error\"><td>error</td><td>"
@@ -194,10 +194,9 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
-		//THIS IS JUST A HOT_FIX
-		//TODO - FIX THE FLOW PROBLEM BY IMPLEMENTING A PROPER SKIP_EXCEPTION CATCH
-		Assert.assertTrue(false);
 		result.setStatus(ITestResult.FAILURE);
+		result.setThrowable(new SkipException("TEST SKIPPED"));
+		onTestFailure(result);
 	}
 
 	@Override

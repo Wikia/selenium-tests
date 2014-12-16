@@ -228,22 +228,25 @@ public class CommonExpectedConditions {
 	}
 
 	/**
-	 * An expectation for checking if the given text is present in the specified
-	 * element.
+	 * An expectation for checking if the given text is not present in the specified
+	 * element located by.
 	 */
-	public static ExpectedCondition<Boolean> textNotPresentInElement(
-			final WebElement GivenElement, final String text) {
+	public static ExpectedCondition<Boolean> textNotPresentInElementLocatedBy(
+			final By by, final String text) {
 
 		return new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
-				String elementText = GivenElement.getText();
-				return !elementText.contains(text);
+				try {
+					return !driver.findElement(by).getText().contains(text);
+				}catch (NoSuchElementException | StaleElementReferenceException e){
+					return false;
+				}
 			}
 
 			@Override
 			public String toString() {
-				return String.format("text ('%s') to be present in element %s",
-						text, GivenElement.getTagName());
+				return String.format("text ('%s') to be present in element located by %s",
+						text, by.toString());
 			}
 		};
 	}

@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="Wikia test suite">
+<suite name="Wikia test suite" configfailurepolicy="continue">
 	<listeners>
 		<listener class-name="com.wikia.webdriver.common.testnglisteners.InvokeMethodAdapter" />
 	</listeners>
