@@ -16,17 +16,17 @@ public class POMConfiguration extends AbstractConfiguration {
 
 	public POMConfiguration() {
 		browser = System.getProperty("browser");
-		if (browser == null) {
+		if (browser == null || browser.isEmpty()) {
 			browser = "FF"; //Set default value to Firefox;
 		}
 
 		env = System.getProperty("env");
-		if (env == null) {
+		if (env == null || env.isEmpty()) {
 			env = "prod"; //Set default value to production
 		}
 
 		wikiName = System.getProperty("wiki-name");
-		if (wikiName == null) {
+		if (wikiName == null || wikiName.isEmpty()) {
 			wikiName = "mediawiki119"; //Set default value to mediawiki119
 		}
 
