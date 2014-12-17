@@ -84,6 +84,7 @@ public class AdsDataProvider {
 			{"monsterhunter", "MH3U:_Monsters"},
 			{"monsterhunter", "Portal:MH3U"},
 			{"adtest-pluto", "VeryLongPage"},
+			{"breakingbad", "File:AARON-PAUL-JACKET.jpg"},
 		};
 	}
 
@@ -135,6 +136,22 @@ public class AdsDataProvider {
 			{"movieshub", "Communities"},
 			{"es.filmhub", "Wiki_Películas_Hub"},
 			{"portail-modedevie", "Mode_de_vie/Failsafe"}
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] specialPages() {
+		return new Object[][] {
+			{"adtest", "Special:Video", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+			{"adtest", "Special:NewFiles", "126608052", "wka.ent/_adtest//special", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+		};
+	}
+
+	@DataProvider
+	public static final Object[][] filePages() {
+		return new Object[][] {
+			{"adtest", "File:Zaznaczenie 032.png", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
+			{"adtest", "File:2012_NCLR_ALMA_AWARDS_COTE_DE_PABLO,_NCIS", "126608052", "wka.ent/_adtest//file", "TOP_LEADERBOARD", "PREFOOTER_LEFT_BOXAD"},
 		};
 	}
 
