@@ -17,6 +17,7 @@ public class TestWikiaLogoInGlobalNav extends NewTestTemplate {
 		return new Object[][] {
 			{"muppet", "wikia"},
 			{"de.gta", "de.wikia"},
+			{"ru.elderscrolls", "ru.community"},
 			{"zh.pad", "wikia"}
 		};
 	}
@@ -30,7 +31,6 @@ public class TestWikiaLogoInGlobalNav extends NewTestTemplate {
 		homePage.getUrl(urlBuilder.getUrlForWiki(wikiName));
 		homePage.getVenusGlobalNav()
 			.clickWikiaLogo();
-
 		Assertion.assertStringContains(urlBuilder.getUrlForWiki(expectedCentralUrl), driver.getCurrentUrl());
 	}
 }
