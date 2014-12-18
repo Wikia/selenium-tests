@@ -73,10 +73,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement focusedNode;
 	@FindBy(css=".mw-body-content")
 	private WebElement mainContent;
-	@FindBy(css=".ve-ce-documentNode .media-gallery-wrapper")
+	@FindBy(css=".media-gallery-wrapper.ve-ce-branchNode")
 	private WebElement galleryNode;
-	@FindBy(css=".ve-ce-documentNode .media-gallery-wrapper")
+	@FindBy(css=".media-gallery-wrapper.ve-ce-branchNode")
 	private List<WebElement> galleryNodes;
+	@FindBy(css=".media-gallery-wrapper.ve-ce-branchNode .toggler")
+	private WebElement toggler;
 
 	private By contextMenuBy = By.cssSelector(".ve-ui-contextWidget");
 	private By contextEditBy = By.cssSelector(".oo-ui-icon-edit");
@@ -380,6 +382,19 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void verifyNumberOfInlineTransclusion(int expected) {
 		Assertion.assertNumber(expected, getNumOfElementOnPage(inlineTransclusionBy), "The number of inline transclusion node is not equal");
+	}
+
+
+	public void selectGallery(int index) {
+		WebElement selectedGallery = galleryNodes.get(index);
+		waitForElementClickableByElement(selectedGallery);
+		selectedGallery.click();
+	}
+
+	public void deleteGallery(int index) {
+		selectGallery(index);
+		Actions actions2 = new Actions(driver);
+		actions2.sendKeys(Keys.DELETE).build().perform();
 	}
 
 	public void deleteBlockTransclusion(int index) {

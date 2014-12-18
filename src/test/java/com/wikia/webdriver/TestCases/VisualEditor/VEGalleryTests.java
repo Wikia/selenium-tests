@@ -122,4 +122,18 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve = galleryDialog.clickMetaDataToPreview(3);
 		ve.verifyPreviewImage();
 	}
+
+	@Test(
+		groups = {"VEGallery", "VEGalleryTests_005", "VEGalleryRemove"},
+		dependsOnGroups = "VEGalleryTests_001"
+	)
+	public void VEGalleryTests_005_Remove() {
+		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
+		ve.verifyVEToolBarPresent();
+		ve.verifyEditorSurfacePresent();
+		ve.deleteGallery(0);
+		VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
+		article = saveChangesDialog.savePage();
+		article.verifyVEPublishComplete();
+	}
 }
