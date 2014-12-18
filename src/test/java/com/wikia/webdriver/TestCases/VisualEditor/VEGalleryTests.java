@@ -2,6 +2,7 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
@@ -32,16 +33,17 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-		groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryAdd"}
+		groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryTests_005", "VEGalleryAdd"}
 	)
 	public void VEGalleryTests_001_AddGallery() {
 		final int NUM_OF_MEDIAS = 9;
 		final int NUM_OF_GALLERIES = 1;
 
 		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
-		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
+		ve.typeTextArea(PageContent.ARTICLE_TEXT);
 		VisualEditorInsertGalleryDialog galleryDialog =
 			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
@@ -64,7 +66,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		int expectedNumOfMedia = INITIAL_NUM_OF_MEDIA;
 
 		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
-		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
@@ -93,9 +95,9 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 			groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
 	)
 	public void VEGalleryTests_003_PreviewOnTitle() {
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
-		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
-		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
@@ -109,9 +111,9 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 			groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
 	)
 	public void VEGalleryTests_004_PreviewOnMetadata() {
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 
-		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
-		VisualEditorPageObject ve = article.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
