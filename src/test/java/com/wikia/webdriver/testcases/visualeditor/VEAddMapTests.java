@@ -51,7 +51,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEAddMapTests_001_AddExistingMap() {
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		VisualEditorPageObject veNew = mapDialog.addExistingMap(0);
@@ -68,7 +68,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	public void VEAddMapTests_002_CheckEmptyMapWiki() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		mapDialog.checkIsEmptyState();
@@ -81,7 +81,7 @@ public class VEAddMapTests extends NewTestTemplateBeforeClass {
 	public void VEAddMapTests_003_InsertMapFromZeroState() {
 		wikiURL = urlBuilder.getUrlForWiki(URLsContent.VE_DISABLED_WIKI);
 
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorAddMapDialog mapDialog =
 			(VisualEditorAddMapDialog) ve.openDialogFromMenu(InsertDialog.MAP);
 		CreateAMapComponentObject map = mapDialog.clickCreateAMapButton();

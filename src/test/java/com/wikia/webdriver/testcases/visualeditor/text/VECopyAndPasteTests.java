@@ -34,9 +34,7 @@ public class VECopyAndPasteTests extends NewTestTemplateBeforeClass {
 	)
 	public void VECopyAndPasteTests_001_copyAndPaste() throws InterruptedException {
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		ArticlePageObject article =
-			base.openArticleByName(wikiURL, articleName);
-		VisualEditorPageObject ve = article.openVEModeWithMainEditButton();
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		String text = PageContent.ARTICLE_TEXT;
@@ -44,7 +42,7 @@ public class VECopyAndPasteTests extends NewTestTemplateBeforeClass {
 		ve.copyAndPaste();
 		ve.verifyFormatting(Formatting.PARAGRAPH, text + text);
 		VisualEditorSaveChangesDialog saveDialog = ve.clickPublishButton();
-		article = saveDialog.savePage();
+		ArticlePageObject article = saveDialog.savePage();
 		article.verifyFormattingFromVE(Formatting.PARAGRAPH, text + text);
 	}
 }
