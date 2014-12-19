@@ -52,7 +52,6 @@ public class BasePageObject{
 	public WebDriverWait wait;
 	public Actions builder;
 	protected UrlBuilder urlBuilder;
-	private LogEntries logEntries;
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
 	protected WebElement notifications_LatestNotificationOnWiki;
@@ -92,7 +91,7 @@ public class BasePageObject{
 
 	public void mouseOverInArticleIframe(String cssSelecotr) {
 		executeScript("$($($('iframe[title*=\"Rich\"]')[0].contentDocument.body).find('"
-				+ cssSelecotr + "')).mouseenter()");
+			+ cssSelecotr + "')).mouseenter()");
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
@@ -275,7 +274,7 @@ public class BasePageObject{
 		String currentURL = driver.getCurrentUrl();
 		Assertion.assertStringContains(givenString.toLowerCase(), currentURL.toLowerCase());
 		PageObjectLogging.log("verifyURLcontains",
-				"current url is the same as expetced url", true);
+			"current url is the same as expetced url", true);
 	}
 
 	public void verifyURL(String givenURL) {
@@ -534,13 +533,13 @@ public class BasePageObject{
 
 	public WebElement waitForElementByXPath(String xPath) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath(xPath)));
+			.xpath(xPath)));
 		return driver.findElement(By.xpath(xPath));
 	}
 
 	public void waitForElementNotVisibleByElement(WebElement element) {
 		wait.until(CommonExpectedConditions
-				.invisibilityOfElementLocated(element));
+			.invisibilityOfElementLocated(element));
 	}
 
 	public void waitForElementClickableByElement(WebElement element) {
@@ -570,7 +569,7 @@ public class BasePageObject{
 	public void waitForValueToBePresentInElementsAttributeByElement(
 			WebElement element, String attribute, String value) {
 		wait.until(CommonExpectedConditions
-				.valueToBePresentInElementsAttribute(element, attribute, value));
+			.valueToBePresentInElementsAttribute(element, attribute, value));
 	}
 
 	public void waitForTextToBePresentInElementByElement(WebElement element, String text) {
@@ -597,7 +596,7 @@ public class BasePageObject{
 
 	public void waitForTextToBePresentInElementByBy(By by, String text) {
 		wait.until(CommonExpectedConditions
-				.textToBePresentInElement(by, text));
+			.textToBePresentInElement(by, text));
 	}
 
 	public void waitForStringInURL(String givenString) {
@@ -656,7 +655,7 @@ public class BasePageObject{
 	public void waitForOneOfTagsPresentInElement(WebElement slot,
 			String tagNameOne, String tagNameTwo) {
 		wait.until(CommonExpectedConditions.oneOfTagsPresentInElement(slot,
-				tagNameOne, tagNameTwo));
+			tagNameOne, tagNameTwo));
 	}
 
 
@@ -671,7 +670,7 @@ public class BasePageObject{
 		notifications_clickOnNotificationsLogo();
 		waitForElementByElement(notifications_LatestNotificationOnWiki);
 		waitForTextToBePresentInElementByElement(
-				notifications_LatestNotificationOnWiki, title);
+			notifications_LatestNotificationOnWiki, title);
 		PageObjectLogging.log("notifications_verifyNotificationTitle",
 				"Verify that the latest notification has the following title: "
 						+ title, true, driver);
@@ -690,8 +689,8 @@ public class BasePageObject{
 		waitForElementByElement(notifications_ShowNotificationsLogo);
 		executeScript("$('#WallNotifications ul.subnav').addClass('show')");
 		PageObjectLogging.log("norifications_showNotifications",
-				"show notifications by adding 'show' class to element", true,
-				driver);
+			"show notifications by adding 'show' class to element", true,
+			driver);
 	}
 
 	/**
@@ -768,9 +767,9 @@ public class BasePageObject{
 	public void pressDownArrow(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
-				"var e = jQuery.Event(\"keydown\"); " +
+			"var e = jQuery.Event(\"keydown\"); " +
 				"e.which=40; $(arguments[0]).trigger(e);",
-				element
+			element
 		);
 	}
 
@@ -981,14 +980,13 @@ public class BasePageObject{
 		return foundElement;
 	}
 
-	private void setBrowserLogs() {
-		logEntries = driver.manage().logs().get(LogType.BROWSER);
-	}
-
-	public void extractBrowserLogs() {
-		setBrowserLogs();
-		for (LogEntry entry : logEntries) {
-			PageObjectLogging.log("extractJSLogs", entry.getMessage(), false);
+	public ArrayList<String> getBrowserLogs(String filter) {
+		ArrayList<String> result = new ArrayList<>();
+		for (LogEntry logEntry : driver.manage().logs().get(LogType.BROWSER)) {
+			if (logEntry.getMessage().contains(filter)) {
+				result.add(logEntry.getMessage());
+			}
 		}
+		return result;
 	}
 }
