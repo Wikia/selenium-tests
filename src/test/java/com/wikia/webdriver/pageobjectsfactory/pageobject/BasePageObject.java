@@ -980,10 +980,14 @@ public class BasePageObject{
 		return foundElement;
 	}
 
-	public ArrayList<String> getBrowserLogs(String filter) {
-		ArrayList<String> result = new ArrayList<>();
+	/**
+	 * @param optionalFilter Optional parameter for filtering logs by specific string.
+	 */
+	public List<String> getBrowserLogs(String... optionalFilter) {
+		String filter = optionalFilter.length > 0 ? optionalFilter[0] : "";
+		List<String> result = new ArrayList<>();
 		for (LogEntry logEntry : driver.manage().logs().get(LogType.BROWSER)) {
-			if (logEntry.getMessage().contains(filter)) {
+			if (filter.isEmpty() || logEntry.getMessage().contains(filter)) {
 				result.add(logEntry.getMessage());
 			}
 		}
