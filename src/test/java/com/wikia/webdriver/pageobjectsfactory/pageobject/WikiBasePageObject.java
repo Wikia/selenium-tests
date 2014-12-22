@@ -1214,7 +1214,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public void resizeWindow(Dimension resolution) {
 		resizeWindow(resolution.width, resolution.height);
 	}
-	
+
 	public VenusGlobalNavPageObject getVenusGlobalNav() {
 		if(venusGlobalNav==null){
 			venusGlobalNav = new VenusGlobalNavPageObject(driver);
