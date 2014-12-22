@@ -222,19 +222,19 @@ public class SourceEditModePageObject extends EditMode{
 	}
 
 	public Object addComponent(String componentName){
-		if (componentName.equals("slideshow")){
+		if ("slideshow".equals(componentName)){
 			waitForElementByElement(createSlideshow);
 			createSlideshow.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
 			return new SlideshowBuilderComponentObject(driver);
 		}
-		else if (componentName.equals("gallery")){
+		else if ("gallery".equals(componentName)){
 			waitForElementByElement(createGallery);
 			createGallery.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
 			return new GalleryBuilderComponentObject(driver);
 		}
-		else if (componentName.equals("slider")){
+		else if ("slider".equals(componentName)){
 			waitForElementByElement(createSlider);
 			createSlider.click();
 			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);

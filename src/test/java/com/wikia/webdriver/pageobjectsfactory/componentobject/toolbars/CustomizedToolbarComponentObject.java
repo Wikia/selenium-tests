@@ -253,7 +253,7 @@ public class CustomizedToolbarComponentObject extends WikiBasePageObject{
 	public void unfollowIfFollowed() {
 		List<WebElement> List = driver.findElements(toolsList);
 		for (int i = 0; i < List.size(); i++) {
-			if (List.get(i).getText().equals("Following")) {
+			if ("Following".equals(List.get(i).getText())) {
 				clickOnTool("follow");
 				verifyFollowMessage();
 				waitForTextToBePresentInElementByBy(toolsList, "Follow");

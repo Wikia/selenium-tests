@@ -915,13 +915,13 @@ public class BasePageObject{
 		WebElement foundElement = null;
 		for(WebElement element : elements) {
 			String retAttribute = element.getAttribute(attribute);
-			if (attribute.equals("href")) {
+			if ("href".equals(attribute)) {
 				retAttribute = retAttribute.substring(retAttribute.indexOf("File:")+5).replace("%20", " ");
 				if (!element.getAttribute("class").contains("video")) {
 					retAttribute = retAttribute.substring(0, retAttribute.indexOf('.'));
 				}
 			}
-			if (retAttribute.equals(value)) {
+			if (value.equals(retAttribute)) {
 				foundElement = element;
 				PageObjectLogging.log("getElementByValue",
 					"Element with attribute: " + attribute + " with the value: " + value + " is found from the list",

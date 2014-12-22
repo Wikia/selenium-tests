@@ -81,10 +81,10 @@ public class MiniEditorComponentObject extends WikiBasePageObject{
 
 	public void writeStylesMiniEditor(String message, String special){
 		String specialKey = "Not Initialized";
-		if (special.equals("Bold")) {
+		if ("Bold".equals(special)) {
 			specialKey = "b";
 		}
-		if (special.equals("Italic")) {
+		if ("Italic".equals(special)) {
 			specialKey = "i";
 		}
 		waitForElementByElement(messageBodyField);
