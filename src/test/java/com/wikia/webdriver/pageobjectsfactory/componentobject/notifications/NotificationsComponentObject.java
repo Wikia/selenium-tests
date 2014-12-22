@@ -145,8 +145,8 @@ public class NotificationsComponentObject extends BasePageObject {
 	 * This should be called after expanding the notifications dropdown It will
 	 * return a list of unread notifications that have a given title
 	 */
-	private ArrayList<WebElement> getUnreadNotificationsForTitle(String title) {
-		ArrayList<WebElement> notifications = new ArrayList<WebElement>();
+	private List<WebElement> getUnreadNotificationsForTitle(String title) {
+		List<WebElement> notifications = new ArrayList<WebElement>();
 		for (int i = 0; i < this.notificationsList.size(); i++) {
 			WebElement n = this.notificationsList.get(i);
 			WebElement nTitle = n.findElement(By.cssSelector(".notification-message h4"));
@@ -182,7 +182,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	 */
 	public void verifyNotification(String messageTitle, String messageAuthor) {
 		Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
-		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
+		List<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0)
 				.findElement(By.cssSelector("p")).getText();
@@ -196,7 +196,7 @@ public class NotificationsComponentObject extends BasePageObject {
 	 */
 	public void verifyNotification(String messageTitle, String messageAuthor, String messageContent) {
 		Assertion.assertNotEquals(0, getNumberOfUnreadNotifications());
-		ArrayList<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
+		List<WebElement> notificationsListForTitle = getUnreadNotificationsForTitle(messageTitle);
 		Assertion.assertEquals(1, notificationsListForTitle.size());
 		String notificationMessageBody = notificationsListForTitle.get(0)
 				.findElement(By.cssSelector("div.notification-message")).getText();

@@ -3,6 +3,7 @@ package com.wikia.webdriver.testcases.articlecrudtests;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -305,7 +306,7 @@ public class ArticleRTETest extends NewTestTemplate {
 	@DataProvider(parallel = false, name="wikiTextsProvider")
 	public Iterator<Object[]> wikiTextsProvider() throws Exception {
 		String[] wikiTexts = ArticleRTETest.createWikitexts();
-		ArrayList al = new ArrayList();
+		List al = new ArrayList();
 		int startPos = 0;
 		int endPos = WIKI_TEXTS_PER_CYCLE;
 		while (endPos <= wikiTexts.length) {

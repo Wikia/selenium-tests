@@ -133,9 +133,9 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		driver.switchTo().defaultContent();
 	}
 
-	public ArrayList<WebElement> getLinkResults(String searchStr, CategoryResultType resultType) {
+	public List<WebElement> getLinkResults(String searchStr, CategoryResultType resultType) {
 		String matchCategoryStr = null;
-		ArrayList<WebElement> foundResults = new ArrayList<>();
+		List<WebElement> foundResults = new ArrayList<>();
 		boolean isMatchingCategory = false;
 
 		switchToIFrame();
@@ -183,7 +183,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	}
 
 	public void verifyLinkSuggestions(String searchStr, CategoryResultType resultType) {
-		ArrayList<WebElement> results = getLinkResults(searchStr, resultType);
+		List<WebElement> results = getLinkResults(searchStr, resultType);
 		switchToIFrame();
 		for (WebElement result : results) {
 			verifyLinkSuggestion(result, searchStr);

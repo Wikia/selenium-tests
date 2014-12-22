@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -114,7 +115,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	private static void logJSError(WebDriver driver){
 		if (Global.JS_ERROR_ENABLED){
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
+			List<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
 			if (!error.isEmpty()) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("<tr class=\"error\"><td>click</td><td>"+error+"</td><td> <br/> &nbsp;</td></tr>");
