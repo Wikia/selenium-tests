@@ -48,7 +48,7 @@ public class UrlBuilder {
 
 		try {
 			if (env.equals("prod")) {
-				url += wikiName + suffix;
+				url += prefix + wikiName + suffix;
 			} else if (env.equals("preview") || env.contains("sandbox")) {
 				url += env + "." + prefix + wikiName + suffix;
 			} else if (env.contains("dev")) {
