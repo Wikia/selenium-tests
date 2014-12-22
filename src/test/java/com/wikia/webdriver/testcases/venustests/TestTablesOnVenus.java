@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class TestTablesOnVenus extends NewTestTemplate {
 
-	private final static String WIKI_NAME = "mediawiki119";
+	private final static String WIKI_NAME = "venustest";
 	private final static Dimension BIG_RESOLUTION = new Dimension(1500, 720);
 	private final static Dimension SMALL_RESOLUTION = new Dimension(768, 720);
 
