@@ -29,8 +29,8 @@ public class TestTablesOnVenus extends NewTestTemplate {
 	public void TestTablesOnVenus_002_scrollableTablePresentOnSmallResolution() {
 		String url = urlBuilder.getUrlForPath(WIKI_NAME, "Tables/ScrollableTableOnSmallRes");
 		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
-		venusArticle.getUrl(url);
 		venusArticle.resizeWindow(BIG_RESOLUTION);
+		venusArticle.getUrl(url);
 		Assertion.assertFalse(venusArticle.isScrollableTablePresent(), "Scrollable table shouldn't be present");
 		venusArticle.resizeWindow(SMALL_RESOLUTION);
 		Assertion.assertTrue(venusArticle.isScrollableTablePresent(), "Scrollable table should be present");
