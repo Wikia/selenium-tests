@@ -32,21 +32,22 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComp
 public class AdsBaseObject extends WikiBasePageObject {
 
 	// Constants
-	static private final String KRUX_CONTROL_TAG_URL_PREFIX = "http://cdn.krxd.net/controltag?confid=";
-	static private final int SKIN_WIDTH = 90;
-	static private final int SKIN_MARGIN_TOP = 100;
-	static private final int SKIN_MARGIN_HORIZONTAL = 5;
-	static private final String[] GPT_DATA_ATTRIBUTES = {
+	private static final String KRUX_CONTROL_TAG_URL_PREFIX = "http://cdn.krxd.net/controltag?confid=";
+	private static final String LOGGING_PARAMS = "log_level=9&log_group=Wikia.Tracker";
+	private static final int SKIN_WIDTH = 90;
+	private static final int SKIN_MARGIN_TOP = 100;
+	private static final int SKIN_MARGIN_HORIZONTAL = 5;
+	private static final String[] GPT_DATA_ATTRIBUTES = {
 		"data-gpt-line-item-id",
 		"data-gpt-creative-id",
 		"data-gpt-creative-size",
 	};
 
 	// Selectors
-	static private final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
-	static private final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
-	static private final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
-	static private final String TOP_INCONTENT_BOXAD_SELECTOR = "div[id*='TOP_INCONTENT_BOXAD']";
+	private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
+	private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
+	private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
+	private static final String TOP_INCONTENT_BOXAD_SELECTOR = "div[id*='TOP_INCONTENT_BOXAD']";
 
 	// Elements
 	@FindBy(css=AdsContent.WIKIA_BAR_SELECTOR)
@@ -555,12 +556,12 @@ public class AdsBaseObject extends WikiBasePageObject {
 		driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeAsyncScript(
-				"var callback = arguments[arguments.length - 1]; " +
-						"var iframe = arguments[0];" +
-						"if (iframe.contentWindow.document.readyState === 'complete'){ return callback(); } else {" +
-						"iframe.contentWindow.addEventListener('load', function () {return callback(); }) " +
-						"}",
-				iframe
+			"var callback = arguments[arguments.length - 1]; " +
+				"var iframe = arguments[0];" +
+				"if (iframe.contentWindow.document.readyState === 'complete'){ return callback(); } else {" +
+				"iframe.contentWindow.addEventListener('load', function () {return callback(); }) " +
+				"}",
+			iframe
 		);
 	}
 

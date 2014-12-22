@@ -271,4 +271,16 @@ public class AdsDataProvider {
 	public static final Object[][] topIncontentBoxad() {
 		return new Object[][]{{"adtest", "SyntheticTests/TopInContentBoxad", new Dimension(1023, 1023)}};
 	}
+
+	@DataProvider
+	public static final Object[][] extraMarker() {
+		return new Object[][] {
+			{
+				"adtest",
+				"SyntheticTests/Async/Hop/ExtraMarker?log_level=9&log_group=Wikia.Tracker",
+				"TOP_RIGHT_BOXAD",
+				"adType=async;method=hop;pos=TOP_RIGHT_BOXAD;test-marker=42"
+			}
+		};
+	}
 }
