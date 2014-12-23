@@ -3,9 +3,13 @@ package com.wikia.webdriver.common.driverprovider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -62,7 +66,9 @@ public class NewDriverProvider {
 			driver = new EventFiringWebDriver(new HtmlUnitDriver());
 		} else if (browserName.equals("GHOST")){
 			driver = getPhantomJSInstance();
-		} else {
+		} else if (browserName.equals("ANDROID")){
+			driver = getAndroidInstance();
+		}else {
 			throw new RuntimeException("Provided driver is not supported.");
 		}
 
@@ -104,6 +110,18 @@ public class NewDriverProvider {
 		);
 		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 		return new EventFiringWebDriver(new InternetExplorerDriver(caps));
+	}
+
+	private static EventFiringWebDriver getAndroidInstance(){
+		DesiredCapabilities destCaps = new DesiredCapabilities();
+		destCaps.setCapability("deviceName", "Android");
+		URL url = null;
+		try {
+			url = new URL("http://10.10.11.54:4723/wd/hub"); //Put Appium server IP address here (locally on Windows it is 127.0.0.1:4723/wd/hub on Mac)
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return new EventFiringWebDriver(new AndroidDriver(url, destCaps));
 	}
 
 	private static EventFiringWebDriver getFFInstance() {
