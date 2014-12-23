@@ -14,6 +14,8 @@ public abstract class AbstractConfiguration {
 	public abstract String getEnv();
 	public abstract String getWikiName();
 	public abstract String getQS();
+	public abstract String getAppiumIp();
+	public abstract String getDeviceName();
 	public abstract File getCaptchaFile();
 	public abstract String getPlatformVersion();
 	public abstract String getPlatform();

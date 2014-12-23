@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.mercurytests;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

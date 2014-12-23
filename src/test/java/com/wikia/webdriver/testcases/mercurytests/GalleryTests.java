@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.mercurytests;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;

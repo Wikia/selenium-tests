@@ -80,4 +80,14 @@ public class ManualConfiguration extends AbstractConfiguration {
 	public String getQS() {
 		return config.get("qs");
 	}
+
+	@Override
+	public String getAppiumIp() {
+		return config.get("appium-ip");
+	}
+
+	@Override
+	public String getDeviceName() {
+		return config.get("deviceName");
+	}
 }

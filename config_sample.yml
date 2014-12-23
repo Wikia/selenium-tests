@@ -10,7 +10,9 @@ captchaPath: c:/selenium-config/captcha.txt #Path to your captcha.txt file
 qs: null
 
 #Config related with mobile devices
-platfrom: null #acceptable values: IOS and ANDROID
+platfrom: ANDROID #acceptable values: IOS and ANDROID
 platform-version: null #Example: 4.4 for Android 4.4
 device-id: null #For Android devices uuid (can be obtained by running adb devices)
-mobile-config: c:/selenium-config/mobile-config.xml #Path to your mobile-config.xml file
+mobile-config:  #Path to your mobile-config.xml file
+appium-ip: 127.0.0.1:4723 #Appium IP address with port ex. 127.0.0.1:4723 for local appium server
+deviceName: ANDROID #capability for Appium server. For Android it can be anything

@@ -83,4 +83,14 @@ public class POMConfiguration extends AbstractConfiguration {
 	public String getQS() {
 		return System.getProperty("qs");
 	}
+
+	@Override
+	public String getAppiumIp() {
+		return System.getProperty("appium-ip");
+	}
+
+	@Override
+	public String getDeviceName() {
+		return System.getProperty("deviceName");
+	}
 }

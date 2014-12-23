@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.WebDriver;
@@ -42,6 +43,7 @@ public class NewDriverProvider {
 	private static ChromeOptions chromeOptions = new ChromeOptions();
 	private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
 	private static boolean unstablePageLoadStrategy = false;
+	private static AndroidDriver mobileInteraction;
 
 	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
 		browserName = browser;
@@ -114,14 +116,16 @@ public class NewDriverProvider {
 
 	private static EventFiringWebDriver getAndroidInstance(){
 		DesiredCapabilities destCaps = new DesiredCapabilities();
-		destCaps.setCapability("deviceName", "Android");
+		destCaps.setCapability("deviceName", ConfigurationFactory.getConfig().getDeviceName().toString());
 		URL url = null;
 		try {
-			url = new URL("http://10.10.11.54:4723/wd/hub"); //Put Appium server IP address here (locally on Windows it is 127.0.0.1:4723/wd/hub on Mac)
+			url = new URL("http://" + ConfigurationFactory.getConfig().getAppiumIp().toString() + "/wd/hub");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		return new EventFiringWebDriver(new AndroidDriver(url, destCaps));
+		mobileInteraction = new AndroidDriver(url, destCaps);
+
+		return new EventFiringWebDriver(mobileInteraction);
 	}
 
 	private static EventFiringWebDriver getFFInstance() {

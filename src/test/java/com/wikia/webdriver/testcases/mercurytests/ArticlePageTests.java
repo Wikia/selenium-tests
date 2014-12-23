@@ -1,4 +1,4 @@
-package com.wikia.webdriver.TestCases.mercurytests;
+package com.wikia.webdriver.testcases.mercurytests;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.properties.Credentials;
