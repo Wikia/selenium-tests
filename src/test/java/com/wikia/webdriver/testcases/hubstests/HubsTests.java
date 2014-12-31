@@ -125,7 +125,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	/**
 	 * Verify that each language drop down  goes to the correct page
 	 */
-	public void HubsTest_005_VerifyLanguagesSelection() {
+	public void HubsTest_005_VerifyLanguagesSelection_QAART_428() {
 		HomePageObject home = new HomePageObject(driver);
 		home.openCorporateHomePage(wikiCorporateURL);
 		home.verifyLanguageDropdownURLs();
