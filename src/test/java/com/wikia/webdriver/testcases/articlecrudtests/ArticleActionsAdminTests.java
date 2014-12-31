@@ -21,7 +21,7 @@ public class ArticleActionsAdminTests extends NewTestTemplate {
 
 	@Test(groups={"ArticleActionsAdmin_001", "ArticleActionsAdmin"})
 	@UseUnstablePageLoadStrategy
-	public void ArticleActionsAdmin_001_deleteUndelete_CON_2014() {
+	public void ArticleActionsAdmin_001_deleteUndelete() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
