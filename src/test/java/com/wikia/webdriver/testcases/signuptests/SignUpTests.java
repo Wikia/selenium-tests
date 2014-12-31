@@ -83,7 +83,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-	public void SignUp_004_signup() {
+	public void SignUp_004_signup_QAART_490() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();
