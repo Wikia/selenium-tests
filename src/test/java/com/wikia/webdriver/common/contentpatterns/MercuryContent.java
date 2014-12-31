@@ -14,6 +14,7 @@ public class MercuryContent {
 	public static final String mercurySpecialPage = "Special:Mercury";
 
 	//Articles prepared for Mercury
+	public static final String MERCURY_TEST = "MercuryTest";
 	public static final String MERCURY_GALLERY_TEST_ARTICLE= "MercuryGallery";
 	public static final String MERCURY_VIDEO_TEST_ARTICLE = "MercuryVideoTest";
 	public static final String MERCURY_COMMENTS_TEST_ARTICLE = "MercuryCommentsTest";
@@ -22,6 +23,7 @@ public class MercuryContent {
 	public static final String MERCURY_TOC_TEST_ARTICLE = "MercuryToc";
 	public static final String MERCURY_MAIN_ARTICLE = "QAarticle1398440783467hh";
 
+
 	//Index variables for Mercury
 	public static final int MERCURY_GALLERY_IMAGE_INDEX = 0;
 	public static final int MERCURY_SEARCH_CLICK_INDEX = 1;
@@ -29,6 +31,7 @@ public class MercuryContent {
 	//Mercury content strings
 	public static final String MERCURY_SEARCH_PASS = "test p";
 	public static final String MERCURY_SEARCH_NOT_MATCH = "Sorry, we couldn't find anything that matched your search!";
+
 	public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);

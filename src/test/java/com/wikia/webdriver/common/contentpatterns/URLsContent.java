@@ -174,4 +174,8 @@ public class URLsContent {
 
 	//Escaped frament URL for Maps
 	public static final String ESCAPED_FRAGMENT = "?_escaped_fragment_";
+
+	//Wikis with smart banners
+	public static final String SMART_BANNER_GTA = "gta";
+	public static final String SMART_BANNER_GLEE = "glee";
 }

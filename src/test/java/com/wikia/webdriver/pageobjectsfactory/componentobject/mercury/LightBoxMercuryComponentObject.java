@@ -1,6 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
+import io.appium.java_client.MobileDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +25,14 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 	private WebElement imagesCounter;
 	@FindBy(css = ".current")
 	private WebElement currentImage;
+	@FindBy(css = ".media-lightbox")
+	private WebElement lightboxWrapper;
+	@FindBy(css = ".lightbox-content-inner")
+	private WebElement lightboxInner;
+	@FindBy(css = ".lightbox-content")
+	private WebElement lightboxContent;
+	@FindBy(css = ".page-wrapper")
+	private WebElement pageWrapper;
 
 	public MercuryBasePageObject clickCloseButton() {
 		waitForElementVisibleByElement(closeLightboxButton);
@@ -33,6 +43,18 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 	public void verifyCurrentImageIsVisible() {
 		waitForElementVisibleByElement(currentImage);
 		Assertion.assertTrue(checkIfElementOnPage(currentImage));
+	}
+
+	public void testGestures() {
+		doubleTapZoom(lightboxWrapper);
+		System.out.println("Wrapper");
+		doubleTapZoom(lightboxInner);
+		System.out.println("Inner");
+		doubleTapZoom(lightboxContent);
+		System.out.println("Content");
+		doubleTapZoom(pageWrapper);
+		System.out.println("page wrapper");
+
 	}
 
 	public void verifyLightboxClosed() {

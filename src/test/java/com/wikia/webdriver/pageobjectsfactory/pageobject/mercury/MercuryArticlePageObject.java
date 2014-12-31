@@ -4,6 +4,9 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
+import io.appium.java_client.MobileDriver;
+import io.appium.java_client.MobileElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -49,10 +52,15 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	private WebElement tocUncollapsed;
 	@FindBy(css = ".table-of-contents a")
 	private List<WebElement> tocElements;
+	@FindBy(css = "head link[rel='canonical']")
+	private WebElement canonicalUrl;
+	@FindBy(css = ".article-image img")
+	private WebElement singleImg;
 
 	public LightBoxMercuryComponentObject clickGalleryImage(int index) {
-		waitForElementVisibleByElement(galleryImagesArray.get(0));
-		tapOnElement(galleryImagesArray.get(0));
+		scrollToElement(galleryImagesArray.get(index));
+		waitForElementVisibleByElement(galleryImagesArray.get(index));
+		tapOnElement(galleryImagesArray.get(index));
 		PageObjectLogging.log("clickGalleryImage", "Image was clicked by test", true);
 		return new LightBoxMercuryComponentObject(driver);
 	}
@@ -110,6 +118,12 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 		Assertion.assertTrue(checkIfElementOnPage(commentsTimeStamps.get(0)));
 		Assertion.assertTrue(checkIfElementOnPage(commentsContent.get(0)));
 		PageObjectLogging.log("verifyCommentsElements", "Comments elements were visible", true, driver);
+	}
+
+	public void verifyCanonicalUrl() {
+		waitForElementInViewPort(canonicalUrl);
+		String pageURL = driver.getCurrentUrl();
+		Assertion.assertEquals(pageURL, canonicalUrl.getAttribute("href"));
 	}
 
 	public void verifyRepliesAreExpanded() {

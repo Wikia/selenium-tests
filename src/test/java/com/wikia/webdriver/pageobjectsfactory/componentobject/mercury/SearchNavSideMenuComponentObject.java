@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import io.appium.java_client.MobileDriver;
 import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -137,7 +138,7 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	public void verifyClosingNav() {
 		waitForElementVisibleByElement(overlay);
-		tapOnElement(overlay);
+//		tapOnElement(overlay);
 		PageObjectLogging.log("verifyClosingNav", "Nav menu is closed", true, driver);
 	}
 
