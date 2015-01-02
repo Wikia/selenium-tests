@@ -149,6 +149,8 @@ public class HomePageObject extends WikiBasePageObject {
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
 			// (and language dropDown)
 			if (!checkIfPageIsHub() ) {
+				languageURL += URLsContent.WIKIA_DIR;
+
 				newHome.verifyLanguageButton();
 				newHome.verifyURL(languageURL);
 			} else {

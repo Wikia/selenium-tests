@@ -22,7 +22,6 @@ import org.testng.ITestResult;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import org.testng.SkipException;
 
@@ -77,7 +76,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 					+ "</td><td> <br/> &nbsp;</td></tr>");
 		}
 		CommonUtils.appendTextToFile(logPath, builder.toString());
-		logJSError(DriverProvider.getWebDriver());
+		logJSError(NewDriverProvider.getWebDriver());
 	}
 
 	@Override
@@ -160,7 +159,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		driver = DriverProvider.getWebDriver();
+		driver = NewDriverProvider.getWebDriver();
 		if (driver == null){
 			driver = NewDriverProvider.getWebDriver();
 		}
