@@ -111,7 +111,7 @@ public class VenusGlobalNavPageObject {
 
 	public HomePageObject clickWikiaLogo() {
 		String environment = ConfigurationFactory.getConfig().getEnv();
-		if (!environment.equals("prod") && !environment.contains("dev")) {
+		if (!"prod".equals(environment) && !environment.contains("dev")) {
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			wait.until(
 					CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)
