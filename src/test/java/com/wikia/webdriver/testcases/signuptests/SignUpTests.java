@@ -83,7 +83,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_004", "SignUp", "Smoke4"})
-	public void SignUp_004_signup() {
+	public void SignUp_004_signup_QAART_490() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();
@@ -115,7 +115,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_005_Forced_Signup_CNW", "SignUp"})
-	public void SignUp_005_forced_signup_CNW(){
+	public void SignUp_005_forced_signup_CNW_QAART_491(){
 		HomePageObject home = new HomePageObject(driver);
 		home.openWikiPage(wikiCorporateURL);
 		CreateNewWikiPageObjectStep1 createNewWiki1 = home.startAWiki(wikiCorporateURL);
@@ -148,7 +148,7 @@ public class SignUpTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"SignUp_006", "SignUp"})
-	public void SignUp_006_loginNotVerifiedUser() {
+	public void SignUp_006_loginNotVerifiedUser_QAART_492() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		SignUpPageObject signUp = base.openSpecialSignUpPage(wikiURL);
 		signUp.disableCaptcha();

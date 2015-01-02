@@ -382,7 +382,7 @@ public class ArticleFeaturesCRUDTestsUser extends NewTestTemplate {
 	}
 
 	@Test(groups={"ArticleFeaturesCRUDUser_014", "ArticleFeaturesCRUDUser"})
-	public void ArticleFeaturesCRUDUser_014_addingImagePlaceholder_MAIN_1740() {
+	public void ArticleFeaturesCRUDUser_014_addingImagePlaceholder() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		base.openRandomArticle(wikiURL);

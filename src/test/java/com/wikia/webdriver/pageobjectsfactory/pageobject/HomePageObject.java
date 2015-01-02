@@ -150,7 +150,10 @@ public class HomePageObject extends WikiBasePageObject {
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
 			// (and language dropDown)
 			if (!checkIfPageIsHub() ) {
+				languageURL += URLsContent.WIKIA_DIR;
+
 				newHome.verifyLanguageButton();
+				newHome.verifyURL(languageURL);
 			} else {
 				languageURL += URLsContent.WIKI_DIR;
 				newHome.verifyURLcontains(languageURL);
@@ -161,7 +164,6 @@ public class HomePageObject extends WikiBasePageObject {
 					true
 				);
 			}
-			newHome.verifyURL(languageURL);
 			newHome.navigateBack();
 		}
 	}

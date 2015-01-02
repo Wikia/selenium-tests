@@ -220,7 +220,7 @@ public class IntraWikiSearchTests extends NewTestTemplate {
 	}
 
 	@Test(groups={"IntraWikiSearch_015", "IntraWikiSearch", "Search"})
-	public void IntraWikiSearch_015_topModule_PLA_1514() {
+	public void IntraWikiSearch_015_topModule() {
 		IntraWikiSearchPageObject search = new IntraWikiSearchPageObject(driver);
 		search.openWikiPage(testedWiki);
 		search.searchFor(SEARCH_PHRASE_RESULTS);
