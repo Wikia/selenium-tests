@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -174,8 +175,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 						false);
 			}
 
-			String exception = result.getThrowable().toString()
-				+ "\n" +ExceptionUtils.getStackTrace(result.getThrowable());
+			String exception = escapeHtml(result.getThrowable().toString()
+				+ "\n" +ExceptionUtils.getStackTrace(result.getThrowable()));
 
 			StringBuilder builder = new StringBuilder();
 			builder.append("<tr class=\"error\"><td>error</td><td>"
