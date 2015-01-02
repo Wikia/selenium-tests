@@ -150,6 +150,7 @@ public class HomePageObject extends WikiBasePageObject {
 			// (and language dropDown)
 			if (!checkIfPageIsHub() ) {
 				newHome.verifyLanguageButton();
+				newHome.verifyURL(languageURL);
 			} else {
 				languageURL += URLsContent.WIKI_DIR;
 				newHome.verifyURLcontains(languageURL);
@@ -160,7 +161,6 @@ public class HomePageObject extends WikiBasePageObject {
 					true
 				);
 			}
-			newHome.verifyURL(languageURL);
 			newHome.navigateBack();
 		}
 	}
