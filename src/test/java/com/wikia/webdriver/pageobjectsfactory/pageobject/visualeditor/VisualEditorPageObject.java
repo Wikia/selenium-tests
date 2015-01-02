@@ -253,7 +253,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			selectFormatting(format);
 			typeTextArea(text);
 			typeReturn();
-			if (format.name().equals("PREFORMATTED")) {
+			if ("PREFORMATTED".equals(format.name())) {
 				selectFormatting(Formatting.PARAGRAPH);
 			}
 		}

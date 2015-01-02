@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -32,7 +33,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
 	String articleName, testCategory, categorySearchStr;
-	ArrayList<String> categoryWikiTexts;
+	List<String> categoryWikiTexts;
 
 	@BeforeClass(alwaysRun = true)
 	public void setup() {
@@ -113,7 +114,7 @@ public class VECategoryTests extends NewTestTemplateBeforeClass {
 	public void VECategoryTests_005_AddNewCategoryWithSortKey() {
 		String testCategory2 = "Newstuff";
 		String sortKey = "testkey";
-		ArrayList<String> categoryWithSortKeyWikiTexts = new ArrayList<>();
+		List<String> categoryWithSortKeyWikiTexts = new ArrayList<>();
 		categoryWithSortKeyWikiTexts.add("[[Category:" + testCategory2 + "|" + sortKey + "]]");
 
 		String articleName2 = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();

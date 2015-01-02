@@ -193,10 +193,10 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	public void verifyDefaultNamespaces() {
 		waitForElementVisibleByElement(advancedField);
 		for(int i = 0; i < advancedOptions.size(); i++) {
-			if(advancedOptions.get(i).getText().equals("Articles")) {
+			if("Articles".equals(advancedOptions.get(i).getText())) {
 				Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
 			}
-			else if(advancedOptions.get(i).getText().equals("Category")) {
+			else if("Category".equals(advancedOptions.get(i).getText())) {
 				Assertion.assertEquals(advancedOptionInputs.get(i).getAttribute("checked"), "true");
 			}
 			else {
@@ -310,7 +310,7 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	}
 
 	public List<String> getTitles() {
-		ArrayList<String> titleList = new ArrayList<String>();
+		List<String> titleList = new ArrayList<String>();
 		for (WebElement elem:titles) {
 			titleList.add(elem.getText());
 		}
