@@ -59,7 +59,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
 					if (!loginDropdown.isDisplayed()) {
-						new Actions(driver).moveToElement(loginDropdownTrigger).perform();
+						new Actions(driver).moveToElement(loginDropdownTrigger).click().perform();
 
 						return false;
 					}
