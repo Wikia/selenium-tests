@@ -65,7 +65,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		final int INITIAL_NUM_OF_MEDIA = 7;
 		int expectedNumOfMedia = INITIAL_NUM_OF_MEDIA;
 
-		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
+		String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
