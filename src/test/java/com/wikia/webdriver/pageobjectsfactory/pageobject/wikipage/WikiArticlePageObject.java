@@ -24,7 +24,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	@FindBy(css = ".sprite.search")
 	private WebElement searchButton;
 
-	private By ImageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
+	private By imageOnWikiaArticle = By.cssSelector("#WikiaArticle figure a img");
 	private By articleContentBy = By.cssSelector("#mw-content-text");
 	protected By rvFirstVideo = By.cssSelector(
 			".RVBody .item:nth-child(1) .lightbox[data-video-name]"
@@ -120,7 +120,7 @@ public class WikiArticlePageObject extends WikiBasePageObject {
 	 * @author Michal Nowierski
 	 */
 	public void verifyImageOnThePage() {
-		waitForElementByBy(ImageOnWikiaArticle);
+		waitForElementByBy(imageOnWikiaArticle);
 		PageObjectLogging.log("VerifyTheImageOnThePage", "Verify that the image appears on the page", true, driver);
 	}
 

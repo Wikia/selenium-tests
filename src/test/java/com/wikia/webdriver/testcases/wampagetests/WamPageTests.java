@@ -25,7 +25,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 	public void wam_001_verifyDefaultPage() {
 		wam.verifyFirstTabSelected();
 		wam.verifyWamIndexIsNotEmpty();
-		wam.verifyWamIndexHasExactRowsNo( wam.DEFAULT_WAM_INDEX_ROWS );
+		wam.verifyWamIndexHasExactRowsNo( wam.defaultWamIndexRows);
 	}
 
 	@Test(groups = {"WamPage002", "WamPageTests"})

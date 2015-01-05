@@ -66,7 +66,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	@FindBy(css="figure figcaption .caption")
 	private WebElement mediaCaption;
 	@FindBy(css=".ve-ce-resizableNode-swHandle")
-	private WebElement SWResizeHandle;
+	private WebElement swResizeHandle;
 	@FindBy(css=".ve-ui-desktopContext .oo-ui-popupWidget")
 	private WebElement contextMenu;
 	@FindBy(css=".ve-ce-node-focused")
@@ -343,21 +343,21 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private void resizeMedia(int xOffSet, int yOffset) {
 		PageObjectLogging.log("resizeMedia", "Before resizing", true, driver);
 		selectMedia();
-		waitForElementVisibleByElement(SWResizeHandle);
+		waitForElementVisibleByElement(swResizeHandle);
 		Actions actions = new Actions(driver);
 		actions
-			.dragAndDropBy(SWResizeHandle, xOffSet, yOffset)
+			.dragAndDropBy(swResizeHandle, xOffSet, yOffset)
 			.build()
 			.perform();
 		PageObjectLogging.log("resizeMedia", "After resizing", true, driver);
 	}
 
 	public void verifyVideoSWHandleMoved(Point source) {
-		verifyElementMoved(source, SWResizeHandle);
+		verifyElementMoved(source, swResizeHandle);
 	}
 
 	public Point getVideoSWHandle() {
-		return SWResizeHandle.getLocation();
+		return swResizeHandle.getLocation();
 	}
 
 	public void verifyVideoResized(Dimension source) {

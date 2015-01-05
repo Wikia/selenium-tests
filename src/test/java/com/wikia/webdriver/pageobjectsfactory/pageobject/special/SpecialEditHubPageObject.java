@@ -8,14 +8,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class SpecialEditHubPageObject extends BasePageObject {
 	@FindBy(css = "#date-picker .ui-datepicker")
-	private WebElement edithub_dashboardCalendar;
+	private WebElement edithubDashboardCalendar;
 
 	public SpecialEditHubPageObject(WebDriver driver) {
 		super(driver);
 	}
 
 	public void verifyCalendarAppears() {
-		waitForElementByElement(edithub_dashboardCalendar);
+		waitForElementByElement(edithubDashboardCalendar);
 		PageObjectLogging.log("verifyCalendarAppears", "Curators calendar visible", true);
 	}
 }

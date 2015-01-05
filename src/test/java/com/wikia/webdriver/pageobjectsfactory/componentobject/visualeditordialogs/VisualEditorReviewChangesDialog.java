@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -30,8 +29,8 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
 	private final String diffLineString = ".diffchange-inline";
 
-	private final int DELETE = 0;
-	private final int INSERT = 1;
+	private final int delete = 0;
+	private final int insert = 1;
 
 	public VisualEditorReviewChangesDialog(WebDriver driver) {
 		super(driver);
@@ -48,7 +47,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
 	public void verifyDeletedDiffs(List<String> targets) {
 		switchToIFrame();
-		verifyArticleDiffs(targets, DELETE);
+		verifyArticleDiffs(targets, delete);
 		switchOutOfIFrame();
 	}
 
@@ -57,7 +56,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
 			verifyNewArticleDiffs(targets);
 		} else {
-			verifyArticleDiffs(targets, INSERT);
+			verifyArticleDiffs(targets, insert);
 		}
 		switchOutOfIFrame();
 	}
@@ -66,10 +65,10 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		int count = 0;
 		int expectedCount = 0;
 		List<WebElement> diffLines = null;
-		if (mode == DELETE) {
+		if (mode == delete) {
 			expectedCount = deletedLines.size();
 			diffLines = deletedLines;
-		} else if (mode == INSERT) {
+		} else if (mode == insert) {
 			expectedCount = addedLines.size();
 			diffLines = addedLines;
 		}
@@ -99,7 +98,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 			}
 		}
 		Assertion.assertNumber(expectedCount, count, "Number of diffs.");
-		if (mode == INSERT) {
+		if (mode == insert) {
 			Assertion.assertNumber(0, targets.size(), "Number of diffs.");
 		}
 	}

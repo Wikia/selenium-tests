@@ -19,13 +19,13 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 public class NetworkTrafficInterceptor extends ProxyServer {
 
 	private Har har;
-	private final int Max = 8080;
-	private final int Min = 7070;
+	private final int max = 8080;
+	private final int min = 7070;
 	private final int portNumber;
 
 	public NetworkTrafficInterceptor() {
 		super();
-		portNumber = Min + (int)(Math.random() * ((Max - Min) + 1));
+		portNumber = min + (int)(Math.random() * ((max - min) + 1));
 	}
 
 	public Proxy startSeleniumProxyServer() {

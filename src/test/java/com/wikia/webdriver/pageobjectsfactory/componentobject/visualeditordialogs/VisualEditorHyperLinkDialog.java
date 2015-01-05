@@ -42,17 +42,17 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
 	private int[] pageCategoryIndex = new int[4];
-	private final int NEWPAGEINDEX = 0;
-	private final int MATCHINGPAGEINDEX = 1;
-	private final int EXTERNALLINKINDEX = 2;
-	private final int REDIRECTPAGEINDEX = 3;
+	private final int newPageIndex = 0;
+	private final int matchingPageIndex = 1;
+	private final int externalLinkIndex = 2;
+	private final int redirectPageIndex = 3;
 
 	public VisualEditorHyperLinkDialog(WebDriver driver) {
 		super(driver);
-		pageCategoryIndex[NEWPAGEINDEX] = -1;
-		pageCategoryIndex[MATCHINGPAGEINDEX] = -1;
-		pageCategoryIndex[EXTERNALLINKINDEX] = -1;
-		pageCategoryIndex[REDIRECTPAGEINDEX] = -1;
+		pageCategoryIndex[newPageIndex] = -1;
+		pageCategoryIndex[matchingPageIndex] = -1;
+		pageCategoryIndex[externalLinkIndex] = -1;
+		pageCategoryIndex[redirectPageIndex] = -1;
 	}
 
 	public void typeInLinkInput(String text) {
@@ -83,19 +83,19 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 				String linkCategory = linkResult.findElement(linkCategoryBy).getText();
 				switch(linkCategory) {
 					case "New page":
-						pageCategoryIndex[NEWPAGEINDEX] = i;
+						pageCategoryIndex[newPageIndex] = i;
 						break;
 					case "Matching page":
-						pageCategoryIndex[MATCHINGPAGEINDEX] = i;
+						pageCategoryIndex[matchingPageIndex] = i;
 						break;
 					case "Matching pages":
-						pageCategoryIndex[MATCHINGPAGEINDEX] = i;
+						pageCategoryIndex[matchingPageIndex] = i;
 						break;
 					case "Redirect page":
-						pageCategoryIndex[REDIRECTPAGEINDEX] = i;
+						pageCategoryIndex[redirectPageIndex] = i;
 						break;
 					case "External link":
-						pageCategoryIndex[EXTERNALLINKINDEX] = i;
+						pageCategoryIndex[externalLinkIndex] = i;
 						break;
 				}
 			}
@@ -109,43 +109,43 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	}
 
 	public void isNewPage() {
-		Assertion.assertTrue(isCategoryResult(NEWPAGEINDEX), "New page index not found");
+		Assertion.assertTrue(isCategoryResult(newPageIndex), "New page index not found");
 		PageObjectLogging.log("isNewPage", "New page index found", true);
 	}
 
 	public void isMatchingPage() {
-		Assertion.assertTrue(isCategoryResult(MATCHINGPAGEINDEX), "Matching page index not found");
+		Assertion.assertTrue(isCategoryResult(matchingPageIndex), "Matching page index not found");
 		PageObjectLogging.log("isMatchingPage", "Matching page index found", true);
 	}
 
 	public void isExternalLink() {
-		Assertion.assertTrue(isCategoryResult(EXTERNALLINKINDEX), "External link index not found");
+		Assertion.assertTrue(isCategoryResult(externalLinkIndex), "External link index not found");
 		PageObjectLogging.log("isExternalLink", "External link index found", true);
 	}
 
 	public void isRedirectPage() {
-		Assertion.assertTrue(isCategoryResult(REDIRECTPAGEINDEX), "Redirect page index not found");
+		Assertion.assertTrue(isCategoryResult(redirectPageIndex), "Redirect page index not found");
 		PageObjectLogging.log("isRedirectPage", "Redirect page index found", true);
 	}
 
 	public void verifyNewPageIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[NEWPAGEINDEX], "Checking New Page is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[newPageIndex], "Checking New Page is on the top of the results.");
 	}
 
 	public void verifyMatchingPageIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[MATCHINGPAGEINDEX], "Checking Matching Page is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[matchingPageIndex], "Checking Matching Page is on the top of the results.");
 	}
 
 	public void verifyExternalLinkIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[EXTERNALLINKINDEX], "Checking External Link is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[externalLinkIndex], "Checking External Link is on the top of the results.");
 	}
 
 	public void verifyRedirectPageIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[REDIRECTPAGEINDEX], "Checking Redirect Page is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[redirectPageIndex], "Checking Redirect Page is on the top of the results.");
 	}
 
 	public VisualEditorPageObject clickLinkResult() {
