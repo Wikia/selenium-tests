@@ -30,7 +30,6 @@ public class LightboxTests extends NewTestTemplate {
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
 		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 		lightbox.verifyCurrentImageIsVisible();
-		lightbox.testGestures();
 	}
 
 	//MT02
@@ -44,28 +43,33 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyLightboxClosed();
 	}
 
-	//MT03 - NOT COMPLETED YET
 	@Test(groups = {"MercuryLightboxTests_003", "MercuryLightboxTests", "Mercury"})
-	public void MercuryLightboxTests_003_SwipeToNavigate() {
+	public void MercuryLightboxTests_003_SwipeLeft() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
 		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
-		//lightbox.verifyCurrentImageIsVisible();
-		//MobileDriver driver2 = (MobileDriver)driver;
-//		MobileDriver mobileDriver = NewDriverProvider.getMobileInteraction();
-//		TouchAction touch = new TouchAction(mobileDriver);
-
-		try {
-			Thread.sleep(5000);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-		//lightbox.tapOnElement(element,0,200);
-		try {
-			Thread.sleep(5000);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
+		String imageOne = lightbox.getCurrentImagePath();
+		lightbox.swipeImageLeft();
+		String imageTwo = lightbox.getCurrentImagePath();
+		lightbox.verifyImageWasChanged(imageOne, imageTwo);
 	}
 
+	@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
+	public void MercuryLightboxTests_004_SwipeRight() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
+		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		String imageOne = lightbox.getCurrentImagePath();
+		lightbox.swipeImageRight();
+		String imageTwo = lightbox.getCurrentImagePath();
+		lightbox.verifyImageWasChanged(imageOne, imageTwo);
+	}
+
+	@Test(groups = {"MercuryLightboxTests_005", "MercuryLightboxTests", "Mercury"})
+	public void MercuryLightboxTests_005_DoubleTapZoomImage() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
+		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.testGestures();
+	}
 }

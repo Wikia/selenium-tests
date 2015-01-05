@@ -38,24 +38,16 @@ public class MercuryBasePageObject extends MobileBasePageObject{
 	public void openMercuryWiki(String wikiURL, String wikiName){
 		wikiURL = urlBuilder.getUrlForWiki(wikiName);
 		getUrl(wikiURL);
-		//return new MercuryArticlePageObject(driver);
 	}
-	/* That how should it work with AndroidDriver
-	* element.tap()
-	element.zoom()
-	element.pinch()
-	element.swipe(direction, int)
-	*/
+
 	public void tapOnElement(WebElement element) {
-//		JavascriptExecutor jsexec = (JavascriptExecutor)driver;
-//		jsexec.executeScript("arguments[0].click();", element);
 		Actions flick = new Actions(driver);
 		flick.click(element).perform();
 	}
 
 	public void doubleTapZoom(WebElement element) {
 		Actions doubleTapZoom = new Actions(driver);
-		doubleTapZoom.doubleClick(element).build().perform();
+		doubleTapZoom.doubleClick(element).perform();
 	}
 
 	public void swipeLeft(WebElement element) {

@@ -15,6 +15,7 @@ public class MercuryContent {
 
 	//Articles prepared for Mercury
 	public static final String MERCURY_TEST = "MercuryTest";
+	public static final String MERCURY_MAPS = "embedMap";
 	public static final String MERCURY_GALLERY_TEST_ARTICLE= "MercuryGallery";
 	public static final String MERCURY_VIDEO_TEST_ARTICLE = "MercuryVideoTest";
 	public static final String MERCURY_COMMENTS_TEST_ARTICLE = "MercuryCommentsTest";
@@ -35,13 +36,6 @@ public class MercuryContent {
 	public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);
-		//Temporary solution
-		try{
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("document.cookie='useskin=mercury;domain=.wikia.com;expires=' + (new Date('2015')) +';path=/'");
-		}catch(JSException exec){
-
-		}
-		//		mercuryPage.clickMercuryButton(); Uncomment this line after temporary soultion won`t be needed any more
+		mercuryPage.clickMercuryButton();
 	}
 }
