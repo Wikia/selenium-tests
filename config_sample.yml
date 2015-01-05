@@ -2,7 +2,7 @@
 #Copy its content to config.yml file
 #It is used only when you run tests using IDE
 
-browser: CHROME #acceptable values: FF, CHROME, GHOST
+browser: FF #acceptable values: FF, CHROME, GHOST
 wikiName: mediawiki119 #default testing wiki
 env: prod #acceptable values: prod, preview, sandbox-number dev-name
 credentialsPath: c:/selenium-config/config.xml #Path to your config.xml file
