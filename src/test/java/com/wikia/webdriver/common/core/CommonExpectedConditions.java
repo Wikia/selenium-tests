@@ -100,15 +100,15 @@ public class CommonExpectedConditions {
 	   * An Expectation for checking an element is visible and enabled such that you
 	   * can click it.
 	   *
-	   * @param GivenElement element to be checked
+	   * @param givenElement element to be checked
 	   * @author Michal Nowierski
 	   */
 	  public static ExpectedCondition<WebElement> elementToBeClickable(
-	      final WebElement GivenElement) {
+	      final WebElement givenElement) {
 	    return new ExpectedCondition<WebElement>() {
 
 	      public ExpectedCondition<WebElement> visibilityOfElement =
-	          ExpectedConditions.visibilityOf(GivenElement);
+	          ExpectedConditions.visibilityOf(givenElement);
 
 	      public WebElement apply(WebDriver driver) {
 	        WebElement element = visibilityOfElement.apply(driver);
@@ -125,7 +125,7 @@ public class CommonExpectedConditions {
 
 	      @Override
 	      public String toString() {
-	        return "element to be clickable: " + GivenElement.getTagName();
+	        return "element to be clickable: " + givenElement.getTagName();
 	      }
 	    };
 	  }
@@ -134,15 +134,15 @@ public class CommonExpectedConditions {
 	   * An Expectation for checking an element is visible and not enabled such that you
 	   * can not click it.
 	   *
-	   * @param GivenElement element to be checked
+	   * @param givenElement element to be checked
 	   * @author Michal Nowierski
 	   */
 	  public static ExpectedCondition<WebElement> elementNotToBeClickable(
-	      final WebElement GivenElement) {
+	      final WebElement givenElement) {
 	    return new ExpectedCondition<WebElement>() {
 
 	      public ExpectedCondition<WebElement> visibilityOfElement =
-	          ExpectedConditions.visibilityOf(GivenElement);
+	          ExpectedConditions.visibilityOf(givenElement);
 
 	      public WebElement apply(WebDriver driver) {
 	        WebElement element = visibilityOfElement.apply(driver);
@@ -159,7 +159,7 @@ public class CommonExpectedConditions {
 
 	      @Override
 	      public String toString() {
-	        return "element to be clickable: " + GivenElement.getTagName();
+	        return "element to be clickable: " + givenElement.getTagName();
 	      }
 	    };
 	  }
@@ -169,18 +169,18 @@ public class CommonExpectedConditions {
 	* element.
 	*/
 	public static ExpectedCondition<Boolean> textToBePresentInElement(
-	final WebElement GivenElement, final String text) {
+	final WebElement givenElement, final String text) {
 
 		return new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
-				String elementText = GivenElement.getText();
+				String elementText = givenElement.getText();
 				return elementText.contains(text);
 			}
 
 			@Override
 			public String toString() {
 			return String.format("text ('%s') to be present in element %s",
-				text, GivenElement.getTagName());
+				text, givenElement.getTagName());
 			}
 		};
 	}

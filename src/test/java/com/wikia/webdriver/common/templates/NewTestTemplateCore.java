@@ -154,8 +154,8 @@ public class NewTestTemplateCore {
 		if (isGeoEdgeSet) {
 			GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
 			String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
-			String IP = geoEdgeUtils.getIPForCountry(countryCode);
-			networkTrafficIntereceptor.setProxyServer(IP);
+			String ip = geoEdgeUtils.getIPForCountry(countryCode);
+			networkTrafficIntereceptor.setProxyServer(ip);
 			networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
 		}
 

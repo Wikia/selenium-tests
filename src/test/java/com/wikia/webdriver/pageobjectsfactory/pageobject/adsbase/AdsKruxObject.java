@@ -44,11 +44,11 @@ public class AdsKruxObject extends AdsBaseObject {
 		Assertion.assertTrue(isGptParamPresent("u", kruxUser));
 	}
 
-	public void verifyKruxSegment(String seg_id) {
+	public void verifyKruxSegment(String segId) {
 		waitForKrux();
 		List segments = (ArrayList) ((JavascriptExecutor) driver).executeScript("return Krux.segments;");
 		String current = Joiner.on("\t").join(segments);
-		Assertion.assertStringContains(seg_id, current);
+		Assertion.assertStringContains(segId, current);
 	}
 
 	private void waitForKrux() {

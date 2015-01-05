@@ -11,12 +11,12 @@ public class ClickTrackingScriptsProvider {
 	private String log_level;
 
 	/**
-	 * @param log_level normally log_level = 3
+	 * @param logLevel normally log_level = 3
 	 * @param log_group normally log_group = Wikia.Tracker
 	 */
-	public ClickTrackingScriptsProvider(String log_level, String tracker) {
+	public ClickTrackingScriptsProvider(String logLevel, String tracker) {
 		this.tracker = tracker;
-		this.log_level = log_level;
+		this.log_level = logLevel;
 	}
 
 	private static String enableWikiaTracker =

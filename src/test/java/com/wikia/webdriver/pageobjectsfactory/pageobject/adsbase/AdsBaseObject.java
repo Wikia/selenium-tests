@@ -293,10 +293,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 		checkScriptPresentInSlotScripts(hubLBName, hubLB);
 		PageObjectLogging.log("HUB_TOP_LEADERBOARD found", "HUB_TOP_LEADERBOARD found", true);
 
-		WebElement hubGPT_LB = hubLB.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.HUB_LB_GPT)));
+		WebElement hubGPTLB = hubLB.findElement(By.cssSelector(AdsContent.getSlotSelector(AdsContent.HUB_LB_GPT)));
 		PageObjectLogging.log("HUB_TOP_LEADERBOARD_gpt found", "HUB_TOP_LEADERBOARD_gpt found", true);
 
-		if(hubGPT_LB.findElements(By.cssSelector("iframe")).size() > 1) {
+		if(hubGPTLB.findElements(By.cssSelector("iframe")).size() > 1) {
 			PageObjectLogging.log("IFrames found", "2 IFrames found in HUB_TOP_LEADERBOAD_gpt div", true);
 		} else {
 			PageObjectLogging.log(

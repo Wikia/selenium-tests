@@ -437,17 +437,17 @@ public class BasePageObject{
 		}
 	}
 
-	public void sendKeys(WebElement pageElem, String KeysToSend) {
+	public void sendKeys(WebElement pageElem, String keysToSend) {
 		try {
-			pageElem.sendKeys(KeysToSend);
+			pageElem.sendKeys(keysToSend);
 		} catch (Exception e) {
 			PageObjectLogging.log("sendKeys", e.getMessage(), false);
 		}
 	}
 
 	//You can get access to hidden elements by changing class
-	public void unhideElementByClassChange(String elementName,String classWithoutHidden, int... OptionalIndex){
-		int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
+	public void unhideElementByClassChange(String elementName,String classWithoutHidden, int... optionalIndex){
+		int numElem = optionalIndex.length==0 ? 0 : optionalIndex[0];
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('class', '" + classWithoutHidden + "');");
 	}
@@ -778,15 +778,15 @@ public class BasePageObject{
 		js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector, style);
 	}
 
-	private void purge(String URL) throws Exception {
+	private void purge(String url) throws Exception {
 		HttpClient client = new HttpClient();
-		HttpMethod method = new PurgeMethod(URL);
+		HttpMethod method = new PurgeMethod(url);
 		try {
 			int status = client.executeMethod(method);
 			if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
-				throw new Exception("HTTP PURGE failed for: " + URL + "(" + status + ")");
+				throw new Exception("HTTP PURGE failed for: " + url + "(" + status + ")");
 			}
-			PageObjectLogging.log("purge", URL, true);
+			PageObjectLogging.log("purge", url, true);
 			return;
 		} finally {
 			method.releaseConnection();
@@ -795,14 +795,14 @@ public class BasePageObject{
 
 	/**
 	 * return status code of given URL
-	 * @param URL
+	 * @param url
 	 * @return
 	 */
-	public int getURLStatus(String URL) {
+	public int getURLStatus(String url) {
 		try {
-			purge(URL);
+			purge(url);
 			HttpURLConnection.setFollowRedirects(false);
-			HttpURLConnection connection = (HttpURLConnection) new URL(URL).openConnection();
+			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 			connection.disconnect();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty(
@@ -821,15 +821,15 @@ public class BasePageObject{
 	/**
 	 * check if current HTTP status of given URL is the same as expected
 	 * @param desiredStatus
-	 * @param URL
+	 * @param url
 	 */
-	public void verifyURLStatus(int desiredStatus, String URL) {
+	public void verifyURLStatus(int desiredStatus, String url) {
 		int timeOut = 500;
 		int statusCode = 0;
 		boolean status = false;
 		while (!status) {
 			try {
-				statusCode = getURLStatus(URL);
+				statusCode = getURLStatus(url);
 				if (statusCode == desiredStatus){
 					status = true;
 				} else {
@@ -844,7 +844,7 @@ public class BasePageObject{
 			}
 		}
 		Assertion.assertEquals(statusCode, desiredStatus);
-		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
+		PageObjectLogging.log("verifyURLStatus", url + " has status " + statusCode, true);
 	}
 
 	protected void changeImplicitWait(int value, TimeUnit timeUnit) {
@@ -863,11 +863,11 @@ public class BasePageObject{
 		return fileCheck.getAbsolutePath();
 	}
 
-	public void verifyUrlInNewWindow(String URL) {
+	public void verifyUrlInNewWindow(String url) {
 		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForStringInURL(URL);
+		waitForStringInURL(url);
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);

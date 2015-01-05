@@ -59,16 +59,16 @@ public class ForumBoardTests extends NewTestTemplate {
 
 	@Test(groups= {"ForumBoardTests_004", "ForumBoardTests", "Forum"} )
 	public void ForumBoardTests_004_startDiscussionWithLink(){
-		String Externallink = PageContent.EXTERNAL_LINK;
-		String Internallink = PageContent.REDIRECT_LINK;
+		String externalLink = PageContent.EXTERNAL_LINK;
+		String internalLink = PageContent.REDIRECT_LINK;
 		ForumPageObject forumMainPage = new ForumPageObject(driver);
 		forumMainPage.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		title = PageContent.FORUM_TITLE_PREFIX + forumMainPage.getTimeStamp();
 		forumMainPage.openForumMainPage(wikiURL);
 		ForumBoardPageObject forumBoard = forumMainPage.openForumBoard();
-		forumBoard.startDiscussionWithLink(Internallink, Externallink, title);
+		forumBoard.startDiscussionWithLink(internalLink, externalLink, title);
 		forumBoard.clickPostButton();
-		forumBoard.verifyStartedDiscussionWithLinks(Internallink, Externallink);
+		forumBoard.verifyStartedDiscussionWithLinks(internalLink, externalLink);
 	}
 
 	@Test(groups= {"ForumBoardTests_005", "ForumBoardTests", "Forum"} )

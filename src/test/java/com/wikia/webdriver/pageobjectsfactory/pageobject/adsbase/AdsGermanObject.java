@@ -51,7 +51,7 @@ public class AdsGermanObject extends AdsBaseObject {
 		Map<String,Object> billboardMap = new HashMap<String, Object>();
 		Map<String,Object> fireplaceMap = new HashMap<String, Object>();
 		Map<String,Object> flashtalkingMap = new HashMap<String, Object>();
-		Map<String,Object> wp_internMap = new HashMap<String, Object>();
+		Map<String,Object> wpInternMap = new HashMap<String, Object>();
 		Map<String,Object> leaderboardMap = new HashMap<String, Object>();
 		Map<String,Object> medrecMap = new HashMap<String, Object>();
 		Map<String,Object> prefooterMap = new HashMap<String, Object>();
@@ -59,7 +59,7 @@ public class AdsGermanObject extends AdsBaseObject {
 		List<String> billboard = new ArrayList<String>();
 		List<String> fireplace = new ArrayList<String>();
 		List<String> flashtalking = new ArrayList<String>();
-		List<String> wp_intern = new ArrayList<String>();
+		List<String> wpIntern = new ArrayList<String>();
 		List<String> leaderboard = new ArrayList<String>();
 		List<String> medrec = new ArrayList<String>();
 		List<String> prefooter = new ArrayList<String>();
@@ -77,9 +77,9 @@ public class AdsGermanObject extends AdsBaseObject {
 		flashtalkingMap.put("name", "flashtalking");
 		flashtalkingMap.put("slots", flashtalking);
 
-		wp_intern.add("#soi_wp_skyscraper1_outer");
-		wp_internMap.put("name", "wp_intern");
-		wp_internMap.put("slots", wp_intern);
+		wpIntern.add("#soi_wp_skyscraper1_outer");
+		wpInternMap.put("name", "wp_intern");
+		wpInternMap.put("slots", wpIntern);
 
 		leaderboard.add("#ad-fullbanner2-outer");
 		leaderboardMap.put("name", "leaderboard");
@@ -96,7 +96,7 @@ public class AdsGermanObject extends AdsBaseObject {
 		combinations.add(billboardMap);
 		combinations.add(fireplaceMap);
 		combinations.add(flashtalkingMap);
-		combinations.add(wp_internMap);
+		combinations.add(wpInternMap);
 		combinations.add(leaderboardMap);
 		combinations.add(medrecMap);
 		combinations.add(prefooterMap);

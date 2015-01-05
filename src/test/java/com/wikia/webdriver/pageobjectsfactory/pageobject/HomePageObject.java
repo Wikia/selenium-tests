@@ -60,8 +60,8 @@ public class HomePageObject extends WikiBasePageObject {
 		int video = 0;
 		int entertainment = 0;
 		int lifestyle = 0;
-		for (String URL : wikiList) {
-			getUrl(URL);
+		for (String url : wikiList) {
+			getUrl(url);
 			String hubName = hubIndicator.getText().toLowerCase();
 			//example: [ Video Games ] to Video_Games
 			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_");

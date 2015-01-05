@@ -123,8 +123,8 @@ public class SignUpTests extends NewTestTemplate {
 		String wikiName = createNewWiki1.getWikiName();
 		createNewWiki1.typeInWikiName(wikiName);
 		createNewWiki1.verifySuccessIcon();
-		CreateNewWikiLogInSignUpPageObject CNWSignUpPage = createNewWiki1.submitToLogInSignUp();
-		SignUpPageObject signUp = CNWSignUpPage.submitSignup();
+		CreateNewWikiLogInSignUpPageObject cnwSignUpPage = createNewWiki1.submitToLogInSignUp();
+		SignUpPageObject signUp = cnwSignUpPage.submitSignup();
 		String userName = "User" + signUp.getTimeStamp();
 		String password = "Pass" + signUp.getTimeStamp();
 		String email = credentials.emailQaart2;

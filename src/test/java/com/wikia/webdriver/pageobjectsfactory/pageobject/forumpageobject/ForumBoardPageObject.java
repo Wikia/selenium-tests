@@ -223,7 +223,7 @@ public class ForumBoardPageObject extends BasePageObject{
 	}
 
 	public String getTitle() {
-		String Url = getCurrentUrl();
-		return Url.substring(Url.indexOf("Board:")+6);
+		String url = getCurrentUrl();
+		return url.substring(url.indexOf("Board:")+6);
 	}
 }
