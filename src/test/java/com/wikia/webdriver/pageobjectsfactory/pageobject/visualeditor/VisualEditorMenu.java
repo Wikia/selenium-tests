@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -23,10 +24,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
  *
  */
 public class VisualEditorMenu extends WikiBasePageObject {
-
-	public VisualEditorMenu(WebDriver driver) {
-		super(driver);
-	}
 
 	private final int STYLELIST = 0;
 	private final int INSERTLIST = 1;
@@ -88,6 +85,10 @@ public class VisualEditorMenu extends WikiBasePageObject {
 	private By sourceEditorBy = By.cssSelector(".oo-ui-icon-source");
 	private By labelBy = By.cssSelector(".oo-ui-labeledElement-label");
 
+	public VisualEditorMenu(WebDriver driver) {
+		super(driver);
+	}
+
 	private void clickStyleItemFromDropDown(By styleBy) {
 		WebElement styleList = toolListDropDowns.get(STYLELIST);
 		WebElement styleItems = toolListItems.get(STYLELIST);
@@ -121,6 +122,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			case UNDERLINE:
 				clickStyleItemFromDropDown(underlineStyleBy);
 				break;
+			default:
+				throw new NoSuchElementException("Non-existing style selected");
 		}
 		PageObjectLogging.log("selectStyle", style.toString() + " selected", true);
 	}
@@ -159,6 +162,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			case PREFORMATTED:
 				clickFormatting(preformatedBy);
 				break;
+			default:
+				throw new NoSuchElementException("Non-existing format selected");
 		}
 	}
 
@@ -170,6 +175,8 @@ public class VisualEditorMenu extends WikiBasePageObject {
 			case DECREASE:
 				clickStyleItemFromDropDown(outdentBy);
 				break;
+			default:
+				throw new NoSuchElementException("Non-existing indentation selected");
 		}
 	}
 
@@ -216,7 +223,7 @@ public class VisualEditorMenu extends WikiBasePageObject {
 				PageObjectLogging.log("selectInsertToOpenDialog", insert.toString() + " selected", true);
 				return new VisualEditorInsertGalleryDialog(driver);
 			default:
-				return null;
+				throw new NoSuchElementException("Non-existing dialog selected");
 		}
 	}
 

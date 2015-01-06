@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,10 +20,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class IntraWikiSearchPageObject extends SearchPageObject {
-
-	public IntraWikiSearchPageObject(WebDriver driver) {
-		super(driver);
-	}
 
 	private String photoExtension = ".jpg";
 	private String thumbnailsVideosGroup = ".Results a.image.video.lightbox";
@@ -95,6 +92,10 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	private WebElement searchFormInGlobalNav;
 
 	private By jqueryAutocompleteBy = By.cssSelector("[src*='jquery.autocomplete']");
+
+	public IntraWikiSearchPageObject(WebDriver driver) {
+		super(driver);
+	}
 
 	/*
 	 * This method is checking whether text is translatable
@@ -297,15 +298,17 @@ public class IntraWikiSearchPageObject extends SearchPageObject {
 	public void sortBy(sortOptions option) {
 		Select dropDown = new Select(sortingOptions);
 		switch (option) {
-		case RELEVANCY:
-			dropDown.selectByIndex(0);
-			break;
-		case PUBLISH_DATE:
-			dropDown.selectByIndex(1);
-			break;
-		case DURATION:
-			dropDown.selectByIndex(2);
-			break;
+			case RELEVANCY:
+				dropDown.selectByIndex(0);
+				break;
+			case PUBLISH_DATE:
+				dropDown.selectByIndex(1);
+				break;
+			case DURATION:
+				dropDown.selectByIndex(2);
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing sort option selected");
 		}
 	}
 
