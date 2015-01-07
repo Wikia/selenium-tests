@@ -15,9 +15,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
-	private final int pagesettings = 0;
-	private final int categories = 1;
-	private final int languages = 2;
+	private static final int PAGESETTINGS = 0;
+	private static final int CATEGORIES = 1;
+	private static final int LANGUAGES = 2;
 
 	@FindBy(css=".oo-ui-outlineWidget li")
 	private List<WebElement> outlineMenuItems;
@@ -50,21 +50,21 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
 	public void selectPageSettings() {
 		switchToIFrame();
-		selectFromOutlineMenu(pagesettings);
+		selectFromOutlineMenu(PAGESETTINGS);
 		PageObjectLogging.log("selectPageSettings", "Page settings is selected", true);
 		driver.switchTo().defaultContent();
 	}
 
 	public void selectCategories() {
 		switchToIFrame();
-		selectFromOutlineMenu(categories);
+		selectFromOutlineMenu(CATEGORIES);
 		PageObjectLogging.log("selectCategories", "Categories is selected", true);
 		driver.switchTo().defaultContent();
 	}
 
 	public void selectLanguages() {
 		switchToIFrame();
-		selectFromOutlineMenu(languages);
+		selectFromOutlineMenu(LANGUAGES);
 		PageObjectLogging.log("selectLanguages", "Languages is selected", true);
 		driver.switchTo().defaultContent();
 	}

@@ -19,8 +19,8 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
 	private WebElement videosModuleContainer;
 	@FindBy(css="#videosModule img")
 	private List<WebElement> videos;
-	private final int videoCountMin = 3;
-	private final int videoCountMax = 5;
+	private static final int VIDEO_COUNT_MIN = 3;
+	private static final int VIDEO_COUNT_MAX = 5;
 
 	public VideosModuleComponentObject (WebDriver driver) {
 		super(driver);
@@ -37,7 +37,7 @@ public class VideosModuleComponentObject extends WikiBasePageObject {
 	}
 
 	public void verifyDisplayCount() {
-		Assertion.assertTrue(videos.size() >= videoCountMin && videos.size() <= videoCountMax);
+		Assertion.assertTrue(videos.size() >= VIDEO_COUNT_MIN && videos.size() <= VIDEO_COUNT_MAX);
 		PageObjectLogging.log("verifyDisplayCount", "Videos Module showing correct number of videos", true);
 	}
 

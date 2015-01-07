@@ -27,10 +27,10 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 	@FindBy(css=".diff-deletedline")
 	private List<WebElement> deletedLines;
 
-	private final String diffLineString = ".diffchange-inline";
+	private static final String DIFF_LINE_STRING = ".diffchange-inline";
 
-	private final int delete = 0;
-	private final int insert = 1;
+	private static final int DELETE = 0;
+	private static final int INSERT = 1;
 
 	public VisualEditorReviewChangesDialog(WebDriver driver) {
 		super(driver);
@@ -47,7 +47,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
 	public void verifyDeletedDiffs(List<String> targets) {
 		switchToIFrame();
-		verifyArticleDiffs(targets, delete);
+		verifyArticleDiffs(targets, DELETE);
 		switchOutOfIFrame();
 	}
 
@@ -56,7 +56,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
 			verifyNewArticleDiffs(targets);
 		} else {
-			verifyArticleDiffs(targets, insert);
+			verifyArticleDiffs(targets, INSERT);
 		}
 		switchOutOfIFrame();
 	}
@@ -65,18 +65,18 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		int count = 0;
 		int expectedCount = 0;
 		List<WebElement> diffLines = null;
-		if (mode == delete) {
+		if (mode == DELETE) {
 			expectedCount = deletedLines.size();
 			diffLines = deletedLines;
-		} else if (mode == insert) {
+		} else if (mode == INSERT) {
 			expectedCount = addedLines.size();
 			diffLines = addedLines;
 		}
 		for (WebElement currentDiff : diffLines) {
 			String currentText;
 			//Check to see if the current diff line has inline diff
-			if(checkIfElementInElement(diffLineString, currentDiff)) {
-				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(diffLineString));
+			if(checkIfElementInElement(DIFF_LINE_STRING, currentDiff)) {
+				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(DIFF_LINE_STRING));
 				//iterate through multiple inline diffs
 				for(WebElement currentInlineDiff : inlineDiffs) {
 					String currentInlineText = currentInlineDiff.getText();
@@ -98,7 +98,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 			}
 		}
 		Assertion.assertNumber(expectedCount, count, "Number of diffs.");
-		if (mode == insert) {
+		if (mode == INSERT) {
 			Assertion.assertNumber(0, targets.size(), "Number of diffs.");
 		}
 	}

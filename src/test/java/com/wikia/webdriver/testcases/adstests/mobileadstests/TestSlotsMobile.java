@@ -21,9 +21,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAd
  */
 public class TestSlotsMobile extends MobileTestTemplate {
 
-	private final String mobileTopLeaderboard = "MOBILE_TOP_LEADERBOARD";
-	private final String mobileInContent = "MOBILE_IN_CONTENT";
-	private final String mobilePrefooter = "MOBILE_PREFOOTER";
+	private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
+	private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
+	private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
 
 	@Test(
 		groups = {"TestAdSlotsMobile_001", "TestAdSlotsMobile"},
@@ -36,12 +36,12 @@ public class TestSlotsMobile extends MobileTestTemplate {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-		ads.verifyGptIframe(adUnit, mobileTopLeaderboard, "mobile");
-		ads.verifyGptIframe(adUnit, mobileInContent, "mobile");
-		ads.verifyGptIframe(adUnit, mobilePrefooter, "mobile");
-		ads.verifyImgAdLoadedInSlot(mobileTopLeaderboard, topleaderboardImgUrl);
-		ads.verifyImgAdLoadedInSlot(mobileInContent, medrecImgUrl);
-		ads.verifyImgAdLoadedInSlot(mobilePrefooter, medrecImgUrl);
+		ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+		ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, "mobile");
+		ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
+		ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
+		ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
+		ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
 	}
 
 	@Test(
@@ -55,11 +55,11 @@ public class TestSlotsMobile extends MobileTestTemplate {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-		ads.verifyGptIframe(adUnit, mobileTopLeaderboard, "mobile");
-		ads.verifyGptIframe(adUnit, mobilePrefooter, "mobile");
-		ads.verifyImgAdLoadedInSlot(mobileTopLeaderboard, topleaderboardImgUrl);
-		ads.verifyImgAdLoadedInSlot(mobilePrefooter, medrecImgUrl);
-		ads.verifyNoSlotPresent(mobileInContent);
+		ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+		ads.verifyGptIframe(adUnit, MOBILE_PREFOOTER, "mobile");
+		ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
+		ads.verifyImgAdLoadedInSlot(MOBILE_PREFOOTER, medrecImgUrl);
+		ads.verifyNoSlotPresent(MOBILE_IN_CONTENT);
 	}
 
 	@Test(
@@ -73,10 +73,10 @@ public class TestSlotsMobile extends MobileTestTemplate {
 
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		MobileAdsBaseObject ads = new MobileAdsBaseObject(driver, testedPage);
-		ads.verifyGptIframe(adUnit, mobileTopLeaderboard, "mobile");
-		ads.verifyGptIframe(adUnit, mobileInContent, "mobile");
-		ads.verifyImgAdLoadedInSlot(mobileTopLeaderboard, topleaderboardImgUrl);
-		ads.verifyImgAdLoadedInSlot(mobileInContent, medrecImgUrl);
-		ads.verifyNoSlotPresent(mobilePrefooter);
+		ads.verifyGptIframe(adUnit, MOBILE_TOP_LEADERBOARD, "mobile");
+		ads.verifyGptIframe(adUnit, MOBILE_IN_CONTENT, "mobile");
+		ads.verifyImgAdLoadedInSlot(MOBILE_TOP_LEADERBOARD, topleaderboardImgUrl);
+		ads.verifyImgAdLoadedInSlot(MOBILE_IN_CONTENT, medrecImgUrl);
+		ads.verifyNoSlotPresent(MOBILE_PREFOOTER);
 	}
 }

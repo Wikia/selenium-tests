@@ -17,7 +17,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject
 public class TestAmazonAds extends NewTestTemplate {
 
 	private String testedPage;
-	private final String amazonForceResponse = "amzn_debug_mode=1";
+	private static final String AMAZON_FORCE_RESPONSE = "amzn_debug_mode=1";
 
 	@Factory(
 		dataProviderClass=AdsDataProvider.class,
@@ -54,7 +54,7 @@ public class TestAmazonAds extends NewTestTemplate {
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_GeoEdgeFree_debugMode", "Ads"})
 	public void AmazonAds_GeoEdgeFree_debugMode() {
-		testedPage = urlBuilder.appendQueryStringToURL(testedPage, amazonForceResponse);
+		testedPage = urlBuilder.appendQueryStringToURL(testedPage, AMAZON_FORCE_RESPONSE);
 		AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
 		amazonAds.verifyAmazonScriptIncluded();
 		amazonAds.verifyCallToAmazonIssued();
@@ -66,7 +66,7 @@ public class TestAmazonAds extends NewTestTemplate {
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_GB_debugMode", "Ads"})
 	public void AmazonAdsTest_GB_debugMode() {
-		testedPage = urlBuilder.appendQueryStringToURL(testedPage, amazonForceResponse);
+		testedPage = urlBuilder.appendQueryStringToURL(testedPage, AMAZON_FORCE_RESPONSE);
 		AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
 		amazonAds.verifyAmazonScriptIncluded();
 		amazonAds.verifyCallToAmazonIssued();

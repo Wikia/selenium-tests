@@ -16,7 +16,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsGermanObject
 public class Test71MediaAds extends NewTestTemplate {
 
 	private String testedPage;
-	private final String media71ForceResponse = "showroom=billboard&subsite=ingrid";
+	private static final String MEDIA_71_FORCE_RESPONSE = "showroom=billboard&subsite=ingrid";
 
 	@Factory(
 		dataProviderClass=GermanAdsDataProvider.class,
@@ -47,7 +47,7 @@ public class Test71MediaAds extends NewTestTemplate {
 
 	@Test (groups={"Ads", "Test71MediaAds_GeoEdgeFree", "Ads71Media"})
 	public void Test71MediaAds_GeoEdgeFree() {
-		String testedPage71Media = urlBuilder.appendQueryStringToURL(testedPage, media71ForceResponse);
+		String testedPage71Media = urlBuilder.appendQueryStringToURL(testedPage, MEDIA_71_FORCE_RESPONSE);
 		AdsGermanObject ads71Media = new AdsGermanObject(driver, testedPage71Media);
 		ads71Media.verify71MediaAdsPresent();
 	}

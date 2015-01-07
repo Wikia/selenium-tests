@@ -58,15 +58,15 @@ public class ChatPageObject extends WikiBasePageObject
 	@FindBy (css="#ChatHeader h1.private")
 	private WebElement privateChatHeader;
 
-	private final String userUnbanLink =
+	private static final String USER_UNBAN_LINK =
 		"//a[@data-type='ban-undo' and @data-user='%s']";
-	private final String userUnbanConfirmMessage =
+	private static final String USER_UNBAN_CONFIRM_MESSAGE =
 		"//div[@class='Chat']//li[contains(text(), 'has ended the Chat ban for %s')]";
-	private final String userSelector = "#user-%s";
-	private final String privateMessageUserSelector = "#priv-user-%s";
-	private final String privateMessageSelectedUserSelector = "#priv-user-%s.User.selected";
-	private final String messageOnChat = "//span[@class='message'][contains(text(), '%s')]";
-	private final String notificationCounter = "//span[@class='splotch' and contains(text(), '%s')]";
+	private static final String USER_SELECTOR = "#user-%s";
+	private static final String PRIVATE_MESSAGE_USER_SELECTOR = "#priv-user-%s";
+	private static final String PRIVATE_MESSAGE_SELECTED_USER_SELECTOR = "#priv-user-%s.User.selected";
+	private static final String MESSAGE_ON_CHAT = "//span[@class='message'][contains(text(), '%s')]";
+	private static final String NOTIFICATION_COUNTER = "//span[@class='splotch' and contains(text(), '%s')]";
 
 	public ChatPageObject(WebDriver driver) {
 		super(driver);
@@ -82,7 +82,7 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 
 	public void verifyMessageOnChat(String message) {
-		waitForElementByXPath(String.format(messageOnChat, message));
+		waitForElementByXPath(String.format(MESSAGE_ON_CHAT, message));
 		PageObjectLogging.log(
 			"VerifyMessageOnChatPresent",
 			"Message: " + message + " is present on chat board",
@@ -93,7 +93,7 @@ public class ChatPageObject extends WikiBasePageObject
 
 	public void verifyUserJoinToChatMessage(String userName) {
 		waitForElementByElement(chatInlineAlertContinued);
-		if (!checkIfElementOnPage(String.format(userSelector, userName))) {
+		if (!checkIfElementOnPage(String.format(USER_SELECTOR, userName))) {
 			PageObjectLogging.log(
 				"VerifyUserJoinsChat",
 				"User: " + userName + " not visible on chat's guests list",
@@ -110,7 +110,7 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 
 	public void verifyUserIsVisibleOnContactsList(String userName) {
-		waitForElementByCss(String.format(userSelector, userName));
+		waitForElementByCss(String.format(USER_SELECTOR, userName));
 		PageObjectLogging.log(
 			"verifyUserIsVisibleOnContactsList",
 			userName + " is visible on contacts list",
@@ -140,7 +140,7 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 	
 	public void verifyPrivateMessageNotification(int notificationCount) {
-		waitForElementByXPath(String.format(notificationCounter, notificationCount));
+		waitForElementByXPath(String.format(NOTIFICATION_COUNTER, notificationCount));
 		PageObjectLogging.log(
 			"verifyPrivateMessageNotification",
 			"private message notification number " + notificationCount + " is visible",
@@ -149,7 +149,7 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 
 	public void verifyPrivateMessageIsHighlighted(String user) {
-		getElementForUser(user, privateMessageSelectedUserSelector);
+		getElementForUser(user, PRIVATE_MESSAGE_SELECTED_USER_SELECTOR);
 		PageObjectLogging.log(
 			"verifyPrivateMessageIsHighlighted",
 			"private message section is highlighted",
@@ -237,7 +237,7 @@ public class ChatPageObject extends WikiBasePageObject
 		clickOnDifferentUser(userName);
 		waitForElementByElement(privateMassageButton);
 		privateMassageButton.click();
-		WebElement userInPrivateMessageSection = getElementForUser(userName, privateMessageUserSelector);
+		WebElement userInPrivateMessageSection = getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
 		waitForElementVisibleByElement(userInPrivateMessageSection);
 		PageObjectLogging.log("selectPrivateMessageToUser", "private message selected from dropdown", true);
 	}
@@ -248,7 +248,7 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 
 	public void clickOnUserInPrivateMessageSection(String userName) {
-		WebElement privateMessagesUserElement = getElementForUser(userName, privateMessageUserSelector);
+		WebElement privateMessagesUserElement = getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
 		privateMessagesUserElement.click();
 		PageObjectLogging.log(
 			"clickOnUserInPrivateMessageSection",
@@ -276,12 +276,12 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 
 	private void verifyChatUnbanMessage(String userName) {
-		waitForElementByXPath(String.format(userUnbanConfirmMessage, userName));
+		waitForElementByXPath(String.format(USER_UNBAN_CONFIRM_MESSAGE, userName));
 	}
 
 	public void unBanUser(String userName) {
 		WebElement unbanLink = driver.findElement(By.xpath(
-			String.format(userUnbanLink, userName)
+			String.format(USER_UNBAN_LINK, userName)
 		));
 		waitForElementByElement(unbanLink);
 		unbanLink.click();
@@ -294,7 +294,7 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 
 	public void clickOnDifferentUser(String userName) {
-		WebElement userOnGuestList = getElementForUser(userName, userSelector);
+		WebElement userOnGuestList = getElementForUser(userName, USER_SELECTOR);
 		boolean hidden = !userStatsMenu.isDisplayed();
 		int i = 0;
 		//we need this loop because of chat problems - sometimes we need to click more then once
@@ -324,7 +324,7 @@ public class ChatPageObject extends WikiBasePageObject
 	}
 
 	public void openUserDropDownInPrivateMessageSection(String userName) {
-		WebElement userOnPrivateMessagesList = getElementForUser(userName, privateMessageUserSelector);
+		WebElement userOnPrivateMessagesList = getElementForUser(userName, PRIVATE_MESSAGE_USER_SELECTOR);
 		boolean hidden = !userStatsMenu.isDisplayed();
 		int i = 0;
 		while(hidden) {
