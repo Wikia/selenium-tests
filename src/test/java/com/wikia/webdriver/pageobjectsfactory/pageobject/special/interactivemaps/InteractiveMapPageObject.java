@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemap
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -24,10 +25,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode.WikiA
  * @author Łukasz Nowak (Dyktus)
  */
 public class InteractiveMapPageObject extends BasePageObject {
-
-	public InteractiveMapPageObject(WebDriver driver) {
-		super(driver);
-	}
 
 	@FindBy(css = "#map")
 	private WebElement map;
@@ -106,6 +103,10 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	private By escapedFragmentMetaDataTag = By.cssSelector("meta[name='fragment']");
 
+	public InteractiveMapPageObject(WebDriver driver) {
+		super(driver);
+	}
+
 	public enum embedMapDialogButtons {
 		SMALL, MEDIUM, LARGE;
 	}
@@ -121,15 +122,17 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void clickEmbedMapCodeButton(embedMapDialogButtons button) {
 		switch (button) {
-		case SMALL:
-			embedMapCodeSmallButton.click();
-			break;
-		case MEDIUM:
-			embedMapCodeMediumButton.click();
-			break;
-		case LARGE:
-			embedMapCodeLargeButton.click();
-			break;
+			case SMALL:
+				embedMapCodeSmallButton.click();
+				break;
+			case MEDIUM:
+				embedMapCodeMediumButton.click();
+				break;
+			case LARGE:
+				embedMapCodeLargeButton.click();
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing dialog button selected");
 		}
 	}
 
@@ -289,15 +292,17 @@ public class InteractiveMapPageObject extends BasePageObject {
 
 	public void verifyEmbedMapCode(embedMapDialogButtons button) {
 		switch (button) {
-		case SMALL:
-			waitForElementVisibleByElement(embedMapCodeSmall);
-			break;
-		case MEDIUM:
-			waitForElementVisibleByElement(embedMapCodeMedium);
-			break;
-		case LARGE:
-			waitForElementVisibleByElement(embedMapCodeLarge);
-			break;
+			case SMALL:
+				waitForElementVisibleByElement(embedMapCodeSmall);
+				break;
+			case MEDIUM:
+				waitForElementVisibleByElement(embedMapCodeMedium);
+				break;
+			case LARGE:
+				waitForElementVisibleByElement(embedMapCodeLarge);
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing dialog button selected");
 		}
 		PageObjectLogging.log("verifyEmbedMapCode", button + "embed map code was correctly displayed", true);
 	}

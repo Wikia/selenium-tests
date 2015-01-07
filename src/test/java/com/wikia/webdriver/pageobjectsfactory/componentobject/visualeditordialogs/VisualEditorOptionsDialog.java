@@ -142,12 +142,14 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 		typeCategory(searchStr);
 
 		switch (resultType) {
-		case NEW:
-			matchCategoryStr = "New category";
-			break;
-		case MATCHING:
-			matchCategoryStr = "Matching categories";
-			break;
+			case NEW:
+				matchCategoryStr = "New category";
+				break;
+			case MATCHING:
+				matchCategoryStr = "Matching categories";
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing result type selected");
 		}
 
 		for (int i = 0; i< categorySuggestions.size(); i++) {
