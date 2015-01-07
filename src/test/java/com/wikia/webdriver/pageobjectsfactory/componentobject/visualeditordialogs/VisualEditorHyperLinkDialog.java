@@ -42,10 +42,10 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
 	private int[] pageCategoryIndex = new int[4];
-	private final int newPageIndex = 0;
-	private final int matchingPageIndex = 1;
-	private final int externalLinkIndex = 2;
-	private final int redirectPageIndex = 3;
+	private static final int newPageIndex = 0;
+	private static final int matchingPageIndex = 1;
+	private static final int externalLinkIndex = 2;
+	private static final int redirectPageIndex = 3;
 
 	public VisualEditorHyperLinkDialog(WebDriver driver) {
 		super(driver);
