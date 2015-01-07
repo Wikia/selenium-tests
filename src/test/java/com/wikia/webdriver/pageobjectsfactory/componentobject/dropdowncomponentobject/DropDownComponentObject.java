@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -58,16 +59,14 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	 * @return
 	 */
 	public DropDownComponentObject openDropDown() {
-		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 		try {
-			new WebDriverWait(driver, 10, 2000).until(new ExpectedCondition<Boolean>() {
+			new WebDriverWait(driver, 14, 2000).until(new ExpectedCondition<Boolean>() {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
+					new Actions(driver).moveToElement(loginDropdownTrigger).perform();
 					if (!loginDropdown.isDisplayed()) {
-						new Actions(driver)
-							.moveToElement(loginDropdownTrigger).moveByOffset(0, 60)
-							.moveToElement(loginDropdownTrigger).perform();
-
+							loginDropdownTrigger.click();
 						return false;
 					}
 					return true;
