@@ -4,9 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
-import org.json.JSONObject;
-import org.json.JSONException;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.wikia.webdriver.common.core.Assertion;
@@ -30,19 +29,14 @@ public class PalantirComponentObject extends InteractiveMapPageObject {
 	private WebElement playerPoint;
 
 	private PalantirContent getResponse(Object response, String methodName) {
-		PalantirContent handle = null;
-		try {			
-			JSONObject json = new JSONObject(response.toString());
-				handle = new PalantirContent(
-							json.getString(PalantirContent.PONTO_MSG_SUCCESS),
-							json.getString(PalantirContent.PONTO_MSG_RESPONSECODE),
-							json.getString(PalantirContent.PONTO_MSG_MESSAGE)
-						);
-			PageObjectLogging.log(methodName, handle.getMessage(), true, driver);
-		}catch (JSONException e) {
-			PageObjectLogging.log(methodName, handle.getMessage(), false, driver);
-		}
-		return handle;		
+		Map<String, String> map = (Map) response;
+		PalantirContent handle = new PalantirContent(
+			String.valueOf(map.get(PalantirContent.PONTO_MSG_SUCCESS)),
+			String.valueOf(map.get(PalantirContent.PONTO_MSG_RESPONSECODE)),
+			map.get(PalantirContent.PONTO_MSG_MESSAGE)
+		);
+		PageObjectLogging.log(methodName, handle.getMessage(), true, driver);
+		return handle;
 	}
 
 	public PalantirContent deletePlayerPosition() {
