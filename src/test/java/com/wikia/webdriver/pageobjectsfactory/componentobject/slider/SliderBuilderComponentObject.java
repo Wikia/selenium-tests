@@ -1,5 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.slider;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,12 +33,14 @@ public class SliderBuilderComponentObject extends BasePageObject{
 		waitForElementByElement(hPosition);
 		waitForElementByElement(vPosition);
 		switch(pos){
-		case HORIZONTAL:
-			hPosition.click();
-			break;
-		case VERTICAL:
-			vPosition.click();
-			break;
+			case HORIZONTAL:
+				hPosition.click();
+				break;
+			case VERTICAL:
+				vPosition.click();
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing position selected");
 		}
 		PageObjectLogging.log("selectMenuPosition", pos.toString()+" position selected", true, driver);
 	}
