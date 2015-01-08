@@ -165,6 +165,10 @@
 			<class name="com.wikia.webdriver.testcases.venustests.TestTablesOnVenus"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.LightboxTests"/>
             <class name="com.wikia.webdriver.testcases.mercurytests.InteractiveMapsTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.CommentsTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.ArticlePageTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.SearchTests"/>
+            <class name="com.wikia.webdriver.testcases.mercurytests.TopBarTests"/>
 		</classes>
 	</test>
 </suite>

@@ -29,4 +29,24 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
 		maps.verifyMapModalIsVisible();
 	}
+
+	@Test(groups = {"MercuryInteractiveMaps_002", "MercuryInteractiveMapsTests", "Mercury"})
+	public void MercuryInteractiveMaps_002_VerifyCloseButtonWillCloseModal() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+		maps.verifyMapModalIsVisible();
+		maps.clickCloseButton();
+		maps.verifyMapModalIsNotVisible();
+	}
+
+	@Test(groups = {"MercuryInteractiveMaps_003", "MercuryInteractiveMapsTests", "Mercury"})
+	public void MercuryInteractiveMaps_003_VerifyFilterBoxCanBeExpanded() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+		maps.verifyMapModalIsVisible();
+		maps.clickFilterBox();
+		maps.verifyFilterBoxWasExpanded();
+	}
 }

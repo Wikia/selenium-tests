@@ -15,13 +15,13 @@ import org.testng.annotations.Test;
  * @ownership: Mobile Web
  */
 
-public class CommentsTests extends MobileTestTemplate {
+public class CommentsTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
-		MercuryContent.turnOnMercurySkin(driver, wikiURL);
+		MercuryContent.turnOnMercurySkin(driver, MercuryContent.MERCURY_WIKI);
 	}
 
 	@Test(groups = {"MercuryCommentsTests_001", "MercuryCommentsTests", "Mercury"})

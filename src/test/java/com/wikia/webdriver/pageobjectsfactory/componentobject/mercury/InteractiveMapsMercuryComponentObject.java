@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,14 +26,40 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 	@FindBy(css = ".leaflet-control-zoom-out")
 	private WebElement zoomOutButton;
 	@FindBy(css = ".filter-menu-header")
-	private WebElement filterBox;
+	private WebElement filterBoxHeader;
+	@FindBy(css = ".point-types")
+	private WebElement filterBoxPoints;
 
+
+	public void clickCloseButton() {
+		driver.switchTo().activeElement();
+		waitForElementVisibleByElement(closeMapLightbox);
+		closeMapLightbox.click();
+		PageObjectLogging.log("clickCloseButton", "Close button was clicked", true);
+	}
+
+	public void clickFilterBox() {
+		waitForElementVisibleByElement(filterBoxHeader);
+		filterBoxHeader.click();
+		PageObjectLogging.log("clickFilterBox", "Filter box caption was clicked", true);
+	}
+
+	public void verifyFilterBoxWasExpanded() {
+		waitForElementVisibleByElement(filterBoxPoints);
+		Assertion.assertTrue(checkIfElementOnPage(filterBoxPoints));
+	}
+
+	public void verifyMapModalIsNotVisible() {
+		driver.switchTo().activeElement();
+		Assertion.assertFalse(checkIfElementOnPage(mapDiv));
+	}
 
 	public void verifyMapModalIsVisible() {
 		driver.switchTo().frame(mapFrame);
 		waitForElementByElement(mapDiv);
 		Assertion.assertTrue(checkIfElementOnPage(mapDiv));
 	}
+
 
 
 }

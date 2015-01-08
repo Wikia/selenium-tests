@@ -27,7 +27,7 @@ public class SmartBannerTests extends NewTestTemplate {
 	@Test(groups = {"MercurySmartBannerTest_001", "MercurySmartBannerTests", "Mercury"})
 	public void MercurySmartBannerTest_001_VerifyUserCanCloseSmartBanner() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-		base.openMercuryWiki(wikiURL, URLsContent.SMART_BANNER_GLEE);
+		base.openMercuryWiki(URLsContent.SMART_BANNER_GLEE);
 		SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
 		banner.clickCloseButton();
 		banner.verifySmartBannerWasClosed();

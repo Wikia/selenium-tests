@@ -77,20 +77,20 @@ public class LightboxTests extends NewTestTemplate {
 		WebElement element = mobileDriver.findElement(By.xpath("//img[contains(@class, 'loaded')]"));
 		int x = element.getLocation().x;
 		int y = element.getLocation().y;
-		int poz = (int)((322 / 559f) * 1708f) + 212;
+		int poz = (int)((322 / 559f) * 1708f) + 212; //212 - bar z godziną
 		System.out.println(x);
 		System.out.println(y);
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		System.out.println(js.executeScript("return $(window).height()"));
-		System.out.println(js.executeScript("return $(document).height()"));
+		System.out.println(js.executeScript("return $(window).height()")); //Wysokość contentu który widoczny
+		System.out.println(js.executeScript("return $(document).height()")); //wysokość aplikacji w rozdzielczości faktycznej np. FULL HD to 1000 pare
 		System.out.println("C: " + 322 / 559f + " Start: " + poz);
 		//System.out.println(mobileDriver.manage().window().getSize());
 //		new TouchActions((WebDriver)mobileDriver).singleTap(element);
 		mobileDriver.context("NATIVE_APP");
 
-//		mobileDriver.tap(1, 100, poz+15, 500);
-		mobileDriver.tap(1, 100, 2100, 500);
+		mobileDriver.tap(1, 100, poz+15, 500); //margines błędu
+//		mobileDriver.tap(1, 100, 2100, 500);
 //		mobileDriver.zoom(x, y*2+100);
 //		mobileDriver.swipe(0, poz, 0, 212, 1707);
 //		mobileDriver.scrollTo("Top Contributors");

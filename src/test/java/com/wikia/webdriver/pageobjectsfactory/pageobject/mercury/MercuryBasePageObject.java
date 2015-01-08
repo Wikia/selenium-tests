@@ -24,8 +24,8 @@ public class MercuryBasePageObject extends MobileBasePageObject{
 	}
 
 	public SpecialMercuryPageObject openSpecialMercury(String wikiURL) {
-		getUrl(wikiURL + MercuryContent.mercurySpecialPage);
-		PageObjectLogging.log("openSpecialMercury", MercuryContent.mercurySpecialPage + " opened", true);
+		getUrl(wikiURL + MercuryContent.MERCURY_SPECIAL_PAGE);
+		PageObjectLogging.log("openSpecialMercury", MercuryContent.MERCURY_SPECIAL_PAGE+ " opened", true);
 		return new SpecialMercuryPageObject(driver);
 	}
 
@@ -35,9 +35,9 @@ public class MercuryBasePageObject extends MobileBasePageObject{
 		return new MercuryArticlePageObject(driver);
 	}
 
-	public void openMercuryWiki(String wikiURL, String wikiName){
-		wikiURL = urlBuilder.getUrlForWiki(wikiName);
-		getUrl(wikiURL);
+	public void openMercuryWiki(String wikiName){
+		String mercuryWiki = urlBuilder.getUrlForWiki(wikiName);
+		getUrl(mercuryWiki);
 	}
 
 	public void tapOnElement(WebElement element) {

@@ -11,7 +11,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class MercuryContent {
 
-	public static final String mercurySpecialPage = "Special:Mercury";
+	public static final String MERCURY_WIKI = "mercurywikitests.wikia.com";
+	public static final String MERCURY_SPECIAL_PAGE = "Special:Mercury";
 
 	//Articles prepared for Mercury
 	public static final String MERCURY_TEST = "MercuryTest";
@@ -22,7 +23,7 @@ public class MercuryContent {
 	public static final String MERCURY_CATEGORY_TEST_ARTICLE = "MercuryCategoryTests";
 	public static final String MERCURY_INFOBOX_TEST_ARTICLE = "MercuryInfobox";
 	public static final String MERCURY_TOC_TEST_ARTICLE = "MercuryToc";
-	public static final String MERCURY_MAIN_ARTICLE = "QAarticle1398440783467hh";
+	public static final String MERCURY_MAIN_ARTICLE = "MercuryWikiTests_Wiki";
 
 
 	//Index variables for Mercury
