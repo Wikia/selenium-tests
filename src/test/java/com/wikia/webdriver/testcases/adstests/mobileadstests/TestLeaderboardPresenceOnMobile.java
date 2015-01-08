@@ -31,8 +31,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		groups={"MobileAds", "TopLeaderboardPresenceTest_VE"}
 	)
 	public void TopLeaderboardPresenceTest_VE() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 
 	@GeoEdgeProxy(country="AU")
@@ -40,8 +39,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		groups={"MobileAds", "TopLeaderboardPresenceTest_AU"}
 	)
 	public void TopLeaderboardPresenceTest_AU() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 
 	@GeoEdgeProxy(country="DE")
@@ -49,8 +47,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		groups={"MobileAds", "TopLeaderboardPresenceTest_DE"}
 	)
 	public void TopLeaderboardPresenceTest_DE() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 
 	@GeoEdgeProxy(country="GB")
@@ -58,8 +55,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		groups={"MobileAds", "TopLeaderboardPresenceTest_GB"}
 	)
 	public void TopLeaderboardPresenceTest_GB() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 
 	@GeoEdgeProxy(country="LT")
@@ -67,8 +63,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		groups={"MobileAds", "TopLeaderboardPresenceTest_LT"}
 	)
 	public void TopLeaderboardPresenceTest_LT() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 
 	@GeoEdgeProxy(country="TW")
@@ -76,8 +71,7 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		groups={"MobileAds", "TopLeaderboardPresenceTest_TW"}
 	)
 	public void TopLeaderboardPresenceTest_TW() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 
 	@GeoEdgeProxy(country="CA")
@@ -85,15 +79,13 @@ public class TestLeaderboardPresenceOnMobile extends MobileTestTemplate {
 		groups={"MobileAds", "TopLeaderboardPresenceTest_CA"}
 	)
 	public void TopLeaderboardPresenceTest_CA() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 
 	@Test(
 		groups={"MobileAds", "TopLeaderboardPresenceTest_GEF"}
 	)
 	public void TopLeaderboardPresenceTest_GEF() {
-		MobileAdsBaseObject mobileAds = new MobileAdsBaseObject(driver, testedPage);
-		mobileAds.verifyMobileTopLeaderboard();
+		new MobileAdsBaseObject(driver, testedPage).verifyMobileTopLeaderboard();
 	}
 }
