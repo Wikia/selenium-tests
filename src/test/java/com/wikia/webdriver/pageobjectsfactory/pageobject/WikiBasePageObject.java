@@ -562,7 +562,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 * @param wikiURL
 	 * @param article
 	 */
-	public VisualEditorPageObject navigateToArticleEditModeVisual(String wikiURL, String article) {
+	public VisualEditorPageObject openVEOnArticle(String wikiURL, String article) {
 		getUrl(
 			urlBuilder.appendQueryStringToURL(
 				wikiURL + URLsContent.WIKI_DIR + article, URLsContent.VEACTION_EDIT
@@ -1107,7 +1107,7 @@ public class WikiBasePageObject extends BasePageObject {
 	 */
 	public void compareTrackedEventsTo(List<JsonObject> expectedEventsList){
 		executeScript(ClickTrackingScriptsProvider.EVENTS_CAPTURE_INSTALLATION);
-		ArrayList<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
+		List<JsonObject> trackedEventsArrayList = new ArrayList<JsonObject>();
 		List<JsonObject> trackedEventsList;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		//prepare list of tracked events
@@ -1214,7 +1214,7 @@ public class WikiBasePageObject extends BasePageObject {
 	public void resizeWindow(Dimension resolution) {
 		resizeWindow(resolution.width, resolution.height);
 	}
-	
+
 	public VenusGlobalNavPageObject getVenusGlobalNav() {
 		if(venusGlobalNav==null){
 			venusGlobalNav = new VenusGlobalNavPageObject(driver);

@@ -7,9 +7,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +24,6 @@ import org.testng.ITestResult;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.core.Global;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
-import com.wikia.webdriver.common.driverprovider.DriverProvider;
 import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import org.testng.SkipException;
 
@@ -77,7 +78,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 					+ "</td><td> <br/> &nbsp;</td></tr>");
 		}
 		CommonUtils.appendTextToFile(logPath, builder.toString());
-		logJSError(DriverProvider.getWebDriver());
+		logJSError(NewDriverProvider.getWebDriver());
 	}
 
 	@Override
@@ -114,7 +115,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 	private static void logJSError(WebDriver driver){
 		if (Global.JS_ERROR_ENABLED){
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			ArrayList<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
+			List<String> error = (ArrayList<String>) js.executeScript("return window.JSErrorCollector_errors.pump()");
 			if (!error.isEmpty()) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("<tr class=\"error\"><td>click</td><td>"+error+"</td><td> <br/> &nbsp;</td></tr>");
@@ -160,7 +161,7 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		driver = DriverProvider.getWebDriver();
+		driver = NewDriverProvider.getWebDriver();
 		if (driver == null){
 			driver = NewDriverProvider.getWebDriver();
 		}
@@ -175,8 +176,8 @@ public class PageObjectLogging extends AbstractWebDriverEventListener implements
 						false);
 			}
 
-			String exception = result.getThrowable().toString()
-				+ "\n" +ExceptionUtils.getStackTrace(result.getThrowable());
+			String exception = escapeHtml(result.getThrowable().toString()
+				+ "\n" +ExceptionUtils.getStackTrace(result.getThrowable()));
 
 			StringBuilder builder = new StringBuilder();
 			builder.append("<tr class=\"error\"><td>error</td><td>"

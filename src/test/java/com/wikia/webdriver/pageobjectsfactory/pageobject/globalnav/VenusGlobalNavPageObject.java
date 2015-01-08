@@ -37,7 +37,7 @@ public class VenusGlobalNavPageObject {
 	@FindBy(css = "#searchSelect")
 	private WebElement searchSelect;
 
-	@FindBy(css = "#search-label-inline")
+	@FindBy(css = "#searchLabelSingle")
 	private WebElement inlineSearch;
 
 	@FindBy(css = "#searchInput")
@@ -111,7 +111,7 @@ public class VenusGlobalNavPageObject {
 
 	public HomePageObject clickWikiaLogo() {
 		String environment = ConfigurationFactory.getConfig().getEnv();
-		if (!environment.equals("prod") && !environment.contains("dev")) {
+		if (!"prod".equals(environment) && !environment.contains("dev")) {
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			wait.until(
 					CommonExpectedConditions.valueToBePresentInElementsAttribute(wikiaLogo, "href", environment)

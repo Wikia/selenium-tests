@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Dmytro Rets
@@ -45,7 +46,7 @@ public class AdsKruxObject extends AdsBaseObject {
 
 	public void verifyKruxSegment(String seg_id) {
 		waitForKrux();
-		ArrayList segments = (ArrayList) ((JavascriptExecutor) driver).executeScript("return Krux.segments;");
+		List segments = (ArrayList) ((JavascriptExecutor) driver).executeScript("return Krux.segments;");
 		String current = Joiner.on("\t").join(segments);
 		Assertion.assertStringContains(seg_id, current);
 	}

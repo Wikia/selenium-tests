@@ -46,13 +46,13 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		return new VisualEditorSaveChangesDialog(driver);
 	}
 
-	public void verifyDeletedDiffs(ArrayList<String> targets) {
+	public void verifyDeletedDiffs(List<String> targets) {
 		switchToIFrame();
 		verifyArticleDiffs(targets, DELETE);
 		switchOutOfIFrame();
 	}
 
-	public void verifyAddedDiffs(ArrayList<String> targets) {
+	public void verifyAddedDiffs(List<String> targets) {
 		switchToIFrame();
 		if (checkIfElementOnPage(wikiaAritlceFirstPreview)) {
 			verifyNewArticleDiffs(targets);
@@ -62,7 +62,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		switchOutOfIFrame();
 	}
 
-	private void verifyArticleDiffs(ArrayList<String> targets, int mode) {
+	private void verifyArticleDiffs(List<String> targets, int mode) {
 		int count = 0;
 		int expectedCount = 0;
 		List<WebElement> diffLines = null;
@@ -104,7 +104,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		}
 	}
 
-	private void verifyNewArticleDiffs(ArrayList<String> targets) {
+	private void verifyNewArticleDiffs(List<String> targets) {
 		String wikiText = wikiaAritlceFirstPreview.getText();
 		for (String target : targets) {
 			verifyNewArticleDiff(target, wikiText);
@@ -115,7 +115,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		Assertion.assertStringContains(target, source);
 	}
 
-	private boolean isDiffFound(ArrayList<String> targets, String source) {
+	private boolean isDiffFound(List<String> targets, String source) {
 		for (String target : targets) {
 			if (source.contains(target)) {
 				return true;

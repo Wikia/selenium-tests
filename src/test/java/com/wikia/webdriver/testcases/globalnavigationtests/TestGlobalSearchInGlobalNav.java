@@ -22,7 +22,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 		return new Object[][] {
 			{"muppet", "gta", "Special:Search", "resultsLang=en"},
 			{"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
-			{"zh.pad", "muppet", "Special:Search", "resultsLang=zh"}
+			{"zh.pad", "pad", "Special:Search", "resultsLang=zh"}
 		};
 	}
 
@@ -48,8 +48,8 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 	public Object[][] getDataForGlobalSearchLoggedIn() {
 		return new Object[][] {
 				{"muppet", "gta", "Special:Search", "resultsLang=en"},
-				{"de.gta", "muppet", "Spezial:Suche", "resultsLang=en"},
-				{"zh.pad", "muppet", "Special:Search", "resultsLang=en"}
+				{"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
+				{"zh.pad", "pad", "Special:Search", "resultsLang=zh"}
 		};
 	}
 

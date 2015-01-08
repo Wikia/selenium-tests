@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -48,7 +49,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	)
 	public void VETemplateTests_001_SearchTemplate() {
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		//1 character search 'a', not matching article name, no result
@@ -73,7 +74,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	)
 	public void VETemplateTests_002_SuggestedTemplate() {
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		VisualEditorInsertTemplateDialog templateDialog =
 			(VisualEditorInsertTemplateDialog) ve.openDialogFromMenu(InsertDialog.TEMPLATE);
 		templateDialog.verifyNoResultTemplate();
@@ -85,7 +86,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	)
 	public void VETemplateTests_003_AddTemplates() {
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
 		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
 		VisualEditorInsertTemplateDialog templateDialog =
@@ -111,7 +112,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 	)
 	public void VETemplateTests_004_CheckBlockedTransclusion() {
 		articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		String selectText = PageContent.ARTICLE_TEXT.substring(12, 13);
 		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
 		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
@@ -141,7 +142,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VETemplateTests_004"
 	)
 	public void VETemplateTests_005_DeleteTemplates() {
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		int numBlockTransclusion = ve.getNumberOfBlockTransclusion();
 		int numInlineTransclusion = ve.getNumberOfInlineTransclusion();
 		ve.deleteBlockTransclusion(1);
@@ -158,9 +159,9 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VETemplateTests_004"
 	)
 	public void VETemplateTests_006_CheckBlockedTransclusion() {
-		ArrayList<String> templateWikiTexts = new ArrayList<>();
+		List<String> templateWikiTexts = new ArrayList<>();
 		templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);
-		VisualEditorPageObject ve = base.launchVisualEditorWithMainEdit(articleName, wikiURL);
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		ve.clickBlockTransclusion(0);
 		VisualEditorEditTemplateDialog editTemplateDialog = ve.openEditTemplateDialog();
 		editTemplateDialog.typeInParam(VEContent.TEMPLATE_PARAM_LABEL1, VEContent.TEMPLATE_PARAM_VALUE1);

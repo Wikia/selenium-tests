@@ -51,6 +51,7 @@
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnGermanCorpPages"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
+			<class name="com.wikia.webdriver.testcases.adstests.TestExtraMarker"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
@@ -115,10 +116,7 @@
 			<class name="com.wikia.webdriver.testcases.visualeditor.VEAddMapTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VECategoryTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VEMediaTests"/>
-			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorFormattingTests"/>
-			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorStylesTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorMultiplePublishTests"/>
-			<class name="com.wikia.webdriver.testcases.visualeditor.VisualEditorEntryTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryAnonTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryCKPreferredTests"/>
 			<class name="com.wikia.webdriver.testcases.visualeditor.entrypoint.RTEDisabledEditorEntryDefaultPreferredTests"/>
@@ -166,6 +164,7 @@
 			<class name="com.wikia.webdriver.testcases.globalnavigationtests.TestWikiaLogoInGlobalNav"/>
 			<class name="com.wikia.webdriver.testcases.globalnavigationtests.TestGlobalSearchInGlobalNav"/>
 			<class name="com.wikia.webdriver.testcases.venustests.TestTablesOnVenus"/>
+			<class name="com.wikia.webdriver.testcases.visualeditor.VEGalleryTests"/>
 		</classes>
 	</test>
 </suite>

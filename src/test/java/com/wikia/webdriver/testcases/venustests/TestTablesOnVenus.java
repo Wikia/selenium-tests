@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
  */
 public class TestTablesOnVenus extends NewTestTemplate {
 
-	private final static String WIKI_NAME = "mediawiki119";
-	private final static Dimension BIG_RESOLUTION = new Dimension(1500, 720);
-	private final static Dimension SMALL_RESOLUTION = new Dimension(768, 720);
+	private final static String WIKI_NAME = "venustest";
+	private final static Dimension BIG_RESOLUTION = new Dimension(1920, 1024);
+	private final static Dimension SMALL_RESOLUTION = new Dimension(768, 1024);
 
 	@Test(groups = {"TestTablesOnVenus_001", "TestTablesOnVenus"})
 	public void TestTablesOnVenus_001_scrollableTablePresent() {
@@ -29,8 +29,8 @@ public class TestTablesOnVenus extends NewTestTemplate {
 	public void TestTablesOnVenus_002_scrollableTablePresentOnSmallResolution() {
 		String url = urlBuilder.getUrlForPath(WIKI_NAME, "Tables/ScrollableTableOnSmallRes");
 		VenusArticlePageObject venusArticle = new VenusArticlePageObject(driver);
-		venusArticle.getUrl(url);
 		venusArticle.resizeWindow(BIG_RESOLUTION);
+		venusArticle.getUrl(url);
 		Assertion.assertFalse(venusArticle.isScrollableTablePresent(), "Scrollable table shouldn't be present");
 		venusArticle.resizeWindow(SMALL_RESOLUTION);
 		Assertion.assertTrue(venusArticle.isScrollableTablePresent(), "Scrollable table should be present");

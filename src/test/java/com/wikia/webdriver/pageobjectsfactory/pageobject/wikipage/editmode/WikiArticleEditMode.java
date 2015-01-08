@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wikipage.editmode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -303,7 +304,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	}
 
 	public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
-		ArrayList<String> videos = new ArrayList<String>();
+		List<String> videos = new ArrayList<String>();
 		String sourceText = getMessageSourceText();
 		int index = 0;
 		while (true) {

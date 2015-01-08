@@ -4,17 +4,14 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.tree.ConfigurationNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Bogna 'bognix' Knychala
  */
 public class MobileDriversRegistry {
 
-	private HashMap<String, List<String>> devicesRegistry = new HashMap();
+	private Map<String, List<String>> devicesRegistry = new HashMap();
 	private String mobilePlatform;
 	private String pathToMobileConfig;
 

@@ -71,7 +71,7 @@ public class ArticleTOCTests extends NewTestTemplate {
 			groups = { "ArticleTOCTests", "ArticleTOCTests_003" },
 			dependsOnMethods = "ArticleTOCTests_001_CreateArticleWithTOCasAnon"
 		 )
-	public void ArticleTOCTests_003_verifyTOCisCollapsedOnPreviewForAnon_QAART_359() {
+	public void ArticleTOCTests_003_verifyTOCisCollapsedOnPreviewForAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		ArticlePageObject article = base.openArticleByName(wikiURL,
 				articleTitle);
