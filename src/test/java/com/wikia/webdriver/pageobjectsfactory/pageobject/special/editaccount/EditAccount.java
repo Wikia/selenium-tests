@@ -29,8 +29,8 @@ public class EditAccount extends BasePageObject {
 	@FindBy(css="fieldset > span")
 	private WebElement statusMessage;
 
-	private final String userAccountReopenMessage = "Successfully removed disabled bit for account";
-	private final String userAccountClosedMessage = "Successfully disabled account";
+	private static final String USER_ACCOUNT_REOPEN_MESSAGE = "Successfully removed disabled bit for account";
+	private static final String USER_ACCOUNT_CLOSED_MESSAGE = "Successfully disabled account";
 
 	public EditAccount(WebDriver driver, String communityWikiURL, String userName) {
 		super(driver);
@@ -61,7 +61,7 @@ public class EditAccount extends BasePageObject {
 	public void verifyAccountClosedMessage() {
 		waitForTextToBePresentInElementByElement(
 				statusMessage,
-				userAccountClosedMessage
+			USER_ACCOUNT_CLOSED_MESSAGE
 		);
 		PageObjectLogging.log(
 				"verifyAccountClosedMessage",
@@ -85,7 +85,7 @@ public class EditAccount extends BasePageObject {
 	public void verifyAccountReopenedMessage() {
 		waitForTextToBePresentInElementByElement(
 				statusMessage,
-				userAccountReopenMessage
+			USER_ACCOUNT_REOPEN_MESSAGE
 		);
 		PageObjectLogging.log(
 				"verifyAccountReopenedMessage",

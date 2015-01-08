@@ -71,7 +71,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 	@FindBy(css="input[value='Add photo']")
 	private WebElement finalAddPhotoButton;
 	@FindBy(css="div#ImageUploadHeadline")
-	private WebElement ImageUploadHeadline;
+	private WebElement imageUploadHeadline;
 	@FindBy(css="img[data-rte-meta*='QAWebdriverCaption1']")
 	private WebElement captionInEditor;
 	@FindBy(css = "span[id=cke_22_label]")
@@ -255,7 +255,7 @@ public class WikiArticleEditMode extends WikiEditMode {
 		findButton.click();
 		waitForElementByCss("#ImageUploadProgress2");
 		waitForElementByCss("img[src*='AmericaAfrica']");
-		waitForElementByElement(ImageUploadHeadline);
+		waitForElementByElement(imageUploadHeadline);
 		WebElement addThisPhoto = waitForElementByBy(addThisPhotoLink);
 		addThisPhoto.click();
 		waitForElementByElement(finalAddPhotoButton);

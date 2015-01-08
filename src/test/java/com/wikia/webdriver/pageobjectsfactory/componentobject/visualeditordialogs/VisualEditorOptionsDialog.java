@@ -15,9 +15,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEdit
 
 public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
-	private final int PAGESETTINGS = 0;
-	private final int CATEGORIES = 1;
-	private final int LANGUAGES = 2;
+	private static final int PAGESETTINGS = 0;
+	private static final int CATEGORIES = 1;
+	private static final int LANGUAGES = 2;
 
 	@FindBy(css=".oo-ui-outlineWidget li")
 	private List<WebElement> outlineMenuItems;

@@ -150,10 +150,10 @@ public class ArticlePageObject extends WikiBasePageObject {
 	@FindBy(css=".view")
 	private WebElement viewEmbedMapButton;
 
-	final String editButtonSelector = ".article-comm-edit";
-	final String deleteButtonSelector = ".article-comm-delete";
-	final String commentAuthorLink = ".edited-by";
-	final String replyCommentSelector = ".article-comm-reply";
+	private static final String EDIT_BUTTON_SELECTOR = ".article-comm-edit";
+	private static final String DELETE_BUTTON_SELECTOR = ".article-comm-delete";
+	private static final String COMMENT_AUTHOR_LINK = ".edited-by";
+	private static final String REPLY_COMMENT_SELECTOR = ".article-comm-reply";
 
 	final Integer minInlineVideoSize = 400;
 
@@ -295,7 +295,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
 			"arguments[0].querySelector(arguments[1]).click()",
-			mostRecentComment, editButtonSelector
+			mostRecentComment, EDIT_BUTTON_SELECTOR
 		);
 		return new MiniEditorComponentObject(driver);
 	}
@@ -306,7 +306,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
 				"arguments[0].querySelector(arguments[1]).click()",
-				mostRecentComment, deleteButtonSelector
+				mostRecentComment, DELETE_BUTTON_SELECTOR
 				);
 		return new DeletePageObject(driver);
 	}
@@ -327,14 +327,14 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyCommentCreator(String userName) {
 		WebElement mostRecentComment = articleComments.get(0);
-		WebElement editedByArea = mostRecentComment.findElement(By.cssSelector(commentAuthorLink));
+		WebElement editedByArea = mostRecentComment.findElement(By.cssSelector(COMMENT_AUTHOR_LINK));
 		waitForElementVisibleByElement(editedByArea);
 		Assertion.assertStringContains(userName, editedByArea.getText());
 	}
 
 	public MiniEditorComponentObject triggerCommentReply() {
 		WebElement mostRecentComment = articleComments.get(0);
-		WebElement replyButton = mostRecentComment.findElement(By.cssSelector(replyCommentSelector));
+		WebElement replyButton = mostRecentComment.findElement(By.cssSelector(REPLY_COMMENT_SELECTOR));
 		scrollAndClick(replyButton);
 		waitForElementNotVisibleByElement(replyCommentLoadingIndicator);
 		return new MiniEditorComponentObject(driver);
@@ -355,7 +355,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 
 	public void verifyReplyCreator(String userName) {
 		WebElement mostRecentReply = commentReplies.get(0);
-		WebElement editedByArea = mostRecentReply.findElement(By.cssSelector(commentAuthorLink));
+		WebElement editedByArea = mostRecentReply.findElement(By.cssSelector(COMMENT_AUTHOR_LINK));
 		waitForElementVisibleByElement(editedByArea);
 		Assertion.assertStringContains(userName, editedByArea.getText());
 	}

@@ -18,9 +18,9 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
  */
 public class HubBasePageObject extends WikiBasePageObject {
 	@FindBy(css="#suggestArticleDialogModal a")
-	private WebElement modalWrapper_X_CloseButton;
+	private WebElement modalWrapperXCloseButton;
 	@FindBy(css="#suggestArticleDialogModal button.secondary")
-	private WebElement modalWrapper_Cancel_CloseButton;
+	private WebElement modalWrapperCancelCloseButton;
 	@FindBy(css="button[id='suggestArticle']")
 	private WebElement getPromotedButton;
 	@FindBy(css="#suggestArticleDialogModal")
@@ -47,17 +47,17 @@ public class HubBasePageObject extends WikiBasePageObject {
 	@FindBy(css="#WikiHeader h1 img")
 	private WebElement wordmarkImage;
 	@FindBy(css="li.topNav.Video_Games a")
-	private WebElement VideoGamesTopNavLink;
+	private WebElement videoGamesTopNavLink;
 	@FindBy(css="li.topNav.Entertainment a")
-	private WebElement EntertainmentTopNavLink;
+	private WebElement entertainmentTopNavLink;
 	@FindBy(css="li.topNav.Lifestyle a")
-	private WebElement LifestyleTopNavLink;
+	private WebElement lifestyleTopNavLink;
 	@FindBy(css=".wikiabar-button[href$='Video_Games']")
-	private WebElement VideoGamesWikiaBarLink;
+	private WebElement videoGamesWikiaBarLink;
 	@FindBy(css=".wikiabar-button[href$='Entertainment']")
-	private WebElement EntertainmentWikiaBarLink;
+	private WebElement entertainmentWikiaBarLink;
 	@FindBy(css=".wikiabar-button[href$='Lifestyle']")
-	private WebElement LifestyleWikiaBarLink;
+	private WebElement lifestyleWikiaBarLink;
 
 	private String mosaicSliderLargeImageDescriptionString =
 			"div.wikia-mosaic-slider-description[style*='1'] span.image-description b";
@@ -153,7 +153,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 	 * Click on Cancel to close suggest a video or article modal
 	 */
 	public void closeSuggestAVideoOrArticleCancelButton() {
-		scrollAndClick(modalWrapper_Cancel_CloseButton);
+		scrollAndClick(modalWrapperCancelCloseButton);
 		PageObjectLogging.log(
 				"closeSuggestAVideoOrArticleCancelButton",
 				"Click on Cancel to close suggest a video or article modal",
@@ -165,7 +165,7 @@ public class HubBasePageObject extends WikiBasePageObject {
 	 * Close modal wrapper. Modal wrapper can be e.g 'video player' or 'suggest a video modal'.
 	 */
 	private void closeModalWrapper() {
-		scrollAndClick(modalWrapper_X_CloseButton);
+		scrollAndClick(modalWrapperXCloseButton);
 	}
 
 	/**
@@ -290,14 +290,14 @@ public class HubBasePageObject extends WikiBasePageObject {
 		WebElement element;
 		switch (hubName) {
 			case VIDEO_GAMES:
-				element = VideoGamesWikiaBarLink;
+				element = videoGamesWikiaBarLink;
 				break;
 			case ENTERTAINMENT:
-				element = EntertainmentWikiaBarLink;
+				element = entertainmentWikiaBarLink;
 				break;
 			case LIFESTYLE:
 			default:
-				element = LifestyleWikiaBarLink;
+				element = lifestyleWikiaBarLink;
 				break;
 		}
 		waitForElementClickableByElement(element);

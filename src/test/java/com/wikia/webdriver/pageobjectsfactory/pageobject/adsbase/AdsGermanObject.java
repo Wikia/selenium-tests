@@ -23,8 +23,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComp
  */
 public class AdsGermanObject extends AdsBaseObject {
 
-	private final String ivw2Script = "script.ioam.de";
-	private final String jsSkinCall = "top.loadCustomAd({type:\"skin\",destUrl:\"";
+	private static final String IVW2_SCRIPT = "script.ioam.de";
+	private static final String JS_SKIN_CALL = "top.loadCustomAd({type:\"skin\",destUrl:\"";
 
 	public AdsGermanObject(WebDriver driver, String page) {
 		super(driver);
@@ -177,7 +177,7 @@ public class AdsGermanObject extends AdsBaseObject {
 	}
 
 	public void verifyCallToIVW2Issued() {
-		if (networkTrafficInterceptor.searchRequestUrlInHar(ivw2Script)) {
+		if (networkTrafficInterceptor.searchRequestUrlInHar(IVW2_SCRIPT)) {
 			PageObjectLogging.log("RequestToIVW2Issued", "Request to IVW2 issued", true);
 		} else {
 			throw new NoSuchElementException("Request to IVW2 not issued");
@@ -193,7 +193,7 @@ public class AdsGermanObject extends AdsBaseObject {
 	}
 
 	private boolean hasSkin(WebElement element, String elementSelector) {
-		if (isScriptPresentInElement(element, jsSkinCall)) {
+		if (isScriptPresentInElement(element, JS_SKIN_CALL)) {
 			PageObjectLogging.log("Found skin call", "skin call found in " + elementSelector, true);
 			return true;
 		}

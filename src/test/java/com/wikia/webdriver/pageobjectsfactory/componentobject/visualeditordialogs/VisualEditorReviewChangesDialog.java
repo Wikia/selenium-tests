@@ -1,6 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -28,10 +27,10 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 	@FindBy(css=".diff-deletedline")
 	private List<WebElement> deletedLines;
 
-	private final String diffLineString = ".diffchange-inline";
+	private static final String DIFF_LINE_STRING = ".diffchange-inline";
 
-	private final int DELETE = 0;
-	private final int INSERT = 1;
+	private static final int DELETE = 0;
+	private static final int INSERT = 1;
 
 	public VisualEditorReviewChangesDialog(WebDriver driver) {
 		super(driver);
@@ -76,8 +75,8 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		for (WebElement currentDiff : diffLines) {
 			String currentText;
 			//Check to see if the current diff line has inline diff
-			if(checkIfElementInElement(diffLineString, currentDiff)) {
-				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(diffLineString));
+			if(checkIfElementInElement(DIFF_LINE_STRING, currentDiff)) {
+				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(DIFF_LINE_STRING));
 				//iterate through multiple inline diffs
 				for(WebElement currentInlineDiff : inlineDiffs) {
 					String currentInlineText = currentInlineDiff.getText();

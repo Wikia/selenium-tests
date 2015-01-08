@@ -60,7 +60,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	@FindBy(css=".LightboxHeader button.close.wikia-chiclet-button")
 	protected WebElement closeModalButton;
 
-	private final Integer videoWidthLightbox = 737;
+	private static final Integer VIDEO_WIDTH_LIGHTBOX = 737;
 
 	public void verifyLightboxPopup() {
 		waitForElementByElement(lightBoxModal);
@@ -202,7 +202,7 @@ public class LightboxComponentObject extends WikiBasePageObject {
 	}
 
 	public VideoComponentObject getVideoPlayer() {
-		return new VideoComponentObject(driver, videoContainer, videoWidthLightbox);
+		return new VideoComponentObject(driver, videoContainer, VIDEO_WIDTH_LIGHTBOX);
 	}
 
 }

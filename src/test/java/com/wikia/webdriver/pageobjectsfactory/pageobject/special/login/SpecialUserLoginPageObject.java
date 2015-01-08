@@ -40,7 +40,7 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	@FindBy (css=".UserLogin .error-msg")
 	private WebElement messagePlaceholder;
 
-	private final String disabledAccountMessage = "Your account has been disabled by Wikia.";
+	private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
 
 	private void typeInUserName(String name){
 		waitForElementByElement(userName);
@@ -127,8 +127,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	public void verifyClosedAccountMessage() {
 		waitForElementByElement(messagePlaceholder);
 		Assertion.assertEquals(
-				disabledAccountMessage,
-				messagePlaceholder.getText()
+			DISABLED_ACCOUNT_MESSAGE,
+			messagePlaceholder.getText()
 		);
 	}
 }

@@ -17,8 +17,8 @@ import org.openqa.selenium.support.FindBys;
  */
 public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 
-	private final String listOfLinksSelector = ".special > li > a";
-	private final String linksLimit = "a[href*='/wiki/Special:Multiwikifinder?limit=%limit%']";
+	private static final String LIST_OF_LINKS_SELECTOR = ".special > li > a";
+	private static final String LINKS_LIMIT = "a[href*='/wiki/Special:Multiwikifinder?limit=%limit%']";
 
 	@FindBy(css="#mw-content-text input[type=submit]")
 	private WebElement findButton;
@@ -53,7 +53,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 
 	public void compareResultsCount(int limit){
 		if(limit==0) {
-			waitForElementNotPresent(listOfLinksSelector);
+			waitForElementNotPresent(LIST_OF_LINKS_SELECTOR);
 			PageObjectLogging.log(
 				"verifyNoPagenameFounded",
 				"Not existing pagename is not founded",
@@ -89,7 +89,7 @@ public class SpecialMultiWikiFinderPageObject extends WikiBasePageObject{
 
 	public void checkAllLimits(){
 		for(int limit : SearchDataProvider.getSearchLimits()) {
-			String limitCssSelector = linksLimit.replace("%limit%", Integer.toString(limit));
+			String limitCssSelector = LINKS_LIMIT.replace("%limit%", Integer.toString(limit));
 			WebElement limitButton = driver.findElement(By.cssSelector(limitCssSelector));
 			limitButton.click();
 			compareResultsCount(limit);

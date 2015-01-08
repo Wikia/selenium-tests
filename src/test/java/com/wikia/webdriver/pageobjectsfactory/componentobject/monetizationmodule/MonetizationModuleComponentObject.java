@@ -12,8 +12,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
-	final String cookieFromsearchName = "fromsearch";
-	final String cookieFromsearchValue = "1";
+	private static final String COOKIE_FROMSEARCH_NAME = "fromsearch";
+	private static final String COOKIE_FROMSEARCH_VALUE = "1";
 
 	@FindBy(css=".monetization-module")
 	private WebElement monetizationModuleContainer;
@@ -27,11 +27,11 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	}
 
 	public void setCookieFromSearch() {
-		setCookie(cookieFromsearchName, cookieFromsearchValue);
+		setCookie(COOKIE_FROMSEARCH_NAME, COOKIE_FROMSEARCH_VALUE);
 	}
 
 	public void deleteCookieFromSearch() {
-		deleteCookie(cookieFromsearchName);
+		deleteCookie(COOKIE_FROMSEARCH_NAME);
 	}
 
 	public void verifyMonetizationModuleShown() {

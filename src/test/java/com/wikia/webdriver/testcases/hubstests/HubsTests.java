@@ -1,6 +1,5 @@
 package com.wikia.webdriver.testcases.hubstests;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.testng.annotations.DataProvider;
@@ -34,7 +33,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	}
 
 	Credentials credentials = config.getCredentials();
-	private final String corpWikiName = "corp";
+	private static final String CORP_WIKI_NAME = "corp";
 
 	@Test(enabled = false,
 			groups = { "HubsTest_001", "Hubs" , "Smoke4"},
@@ -114,7 +113,7 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 	public void HubsTests_004_VerifyCorporateSlotCollection() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
-		String wikiCorpSetupURL = urlBuilder.getUrlForWiki(corpWikiName);
+		String wikiCorpSetupURL = urlBuilder.getUrlForWiki(CORP_WIKI_NAME);
 		SpecialManageWikiaHome manageWikia = base.openSpecialManageWikiaHomePage(wikiCorpSetupURL);
 		Map<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
 		HomePageObject home = base.openCorporateHomePage(wikiCorporateURL);

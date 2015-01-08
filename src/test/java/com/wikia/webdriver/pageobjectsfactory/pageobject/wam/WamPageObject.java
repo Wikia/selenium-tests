@@ -24,8 +24,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 
 public class WamPageObject extends BasePageObject {
 
-	private final int FIRST_WAM_TAB_INDEX = 0;
-	public final int DEFAULT_WAM_INDEX_ROWS = 21;
+	private static final int FIRST_WAM_TAB_INDEX = 0;
+	public static final int DEFAULT_WAM_INDEX_ROWS = 21;
 
 	@FindBy(id = "verticalId")
 	private WebElement wamVerticalFilterSelect;

@@ -21,8 +21,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComp
  */
 public class MobileAdsBaseObject extends AdsBaseObject {
 
-	private final String smartBannerSelector = ".smartbanner.android";
-	private final String fliteMaskSelector = ".flite-mask";
+	private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
+	private static final String FLITE_MASK_SELECTOR = ".flite-mask";
 	private AdsComparison adsComparison;
 	private ImageComparison imageComparison;
 
@@ -49,7 +49,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	public void verifyMobileTopLeaderboard() {
 		extractGptInfo(presentLeaderboardSelector);
 		removeSmartBanner();
-		if (checkIfElementOnPage(fliteMaskSelector)) {
+		if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
 			PageObjectLogging.log(
 				"FliteAd", "Page contains the flite ad", true, driver
 			);
@@ -129,8 +129,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	}
 
 	private void removeSmartBanner() {
-		if (checkIfElementOnPage(smartBannerSelector)) {
-			WebElement smartBanner = driver.findElement(By.cssSelector(smartBannerSelector));
+		if (checkIfElementOnPage(SMART_BANNER_SELECTOR)) {
+			WebElement smartBanner = driver.findElement(By.cssSelector(SMART_BANNER_SELECTOR));
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).css('display', 'none')", smartBanner);
 			waitForElementNotVisibleByElement(smartBanner);

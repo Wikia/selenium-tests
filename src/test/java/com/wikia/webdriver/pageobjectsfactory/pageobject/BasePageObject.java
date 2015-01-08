@@ -24,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
@@ -54,9 +53,9 @@ public class BasePageObject{
 	protected UrlBuilder urlBuilder;
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
-	protected WebElement notifications_LatestNotificationOnWiki;
+	protected WebElement notificationsLatestNotificationOnWiki;
 	@FindBy(css = "#WallNotifications > li")
-	protected WebElement notifications_ShowNotificationsLogo;
+	protected WebElement notificationsShowNotificationsLogo;
 	@FindBy(css = ".mw-htmlform-submit")
 	protected WebElement followSubmit;
 	@FindBy(css = "#ca-unwatch")
@@ -668,25 +667,25 @@ public class BasePageObject{
 		// the below method is native click which is the only way to load
 		// notification
 		notifications_clickOnNotificationsLogo();
-		waitForElementByElement(notifications_LatestNotificationOnWiki);
+		waitForElementByElement(notificationsLatestNotificationOnWiki);
 		waitForTextToBePresentInElementByElement(
-			notifications_LatestNotificationOnWiki, title);
+			notificationsLatestNotificationOnWiki, title);
 		PageObjectLogging.log("notifications_verifyNotificationTitle",
 				"Verify that the latest notification has the following title: "
 						+ title, true, driver);
 	}
 
 	public void notifications_clickOnNotificationsLogo() {
-		waitForElementByElement(notifications_ShowNotificationsLogo);
-		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		notifications_ShowNotificationsLogo.click();
+		waitForElementByElement(notificationsShowNotificationsLogo);
+		waitForElementClickableByElement(notificationsShowNotificationsLogo);
+		notificationsShowNotificationsLogo.click();
 		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
 				"click on notifications logo on the upper right corner", true,
 				driver);
 	}
 
 	public void notifications_showNotifications() {
-		waitForElementByElement(notifications_ShowNotificationsLogo);
+		waitForElementByElement(notificationsShowNotificationsLogo);
 		executeScript("$('#WallNotifications ul.subnav').addClass('show')");
 		PageObjectLogging.log("norifications_showNotifications",
 			"show notifications by adding 'show' class to element", true,

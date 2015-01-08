@@ -21,9 +21,9 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.mobile.MobileAd
  */
 public class TestSlotsMobile extends MobileTestTemplate {
 
-	private final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
-	private final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
-	private final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
+	private static final String MOBILE_TOP_LEADERBOARD = "MOBILE_TOP_LEADERBOARD";
+	private static final String MOBILE_IN_CONTENT = "MOBILE_IN_CONTENT";
+	private static final String MOBILE_PREFOOTER = "MOBILE_PREFOOTER";
 
 	@Test(
 		groups = {"TestAdSlotsMobile_001", "TestAdSlotsMobile"},
