@@ -629,7 +629,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 		WebElement gptIframeWrap = driver.findElement(By.id(gptIframeWrapId));
 
 		Assertion.assertEquals(gptIframeWrap.getAttribute("data-gpt-line-item-id"), lineItemId);
-		Assertion.assertEquals(gptIframeWrap.getAttribute("data-gpt-creative-id"), creativeId);
+
+		if (creativeId.length() > 0) {
+			Assertion.assertEquals(gptIframeWrap.getAttribute("data-gpt-creative-id"), creativeId);
+		}
 
 		PageObjectLogging.log(
 			"verifyGptAdInSlot",

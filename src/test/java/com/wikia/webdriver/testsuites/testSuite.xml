@@ -50,6 +50,7 @@
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnCorporatePages"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnGermanCorpPages"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnHubs"/>
+			<class name="com.wikia.webdriver.testcases.adstests.TestAdsOnSpecial"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestExtraMarker"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
