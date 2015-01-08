@@ -16,9 +16,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	private static final String TEST_TOP_100_WIKI = "muppet";
 	private static final String TEST_TOP_100_ARTICLE = "Kermit_the_Frog";
 	private static final String TEST_TOP_700_WIKI = "th.sktest123";
-	private static final String TEST_TOP_700_ARTICLE = "VideoAll";
+	private static final String TEST_TOP_700_ARTICLE = "Style-5H2-10H3";
 	private static final String TEST_WIKI = "sktest123";
-	private static final String TEST_ARTICLE = "VideoAll";
+	private static final String TEST_ARTICLE = "Style-5H2-10H3";
 
 	Credentials credentials = config.getCredentials();
 
@@ -60,13 +60,14 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_003", "Monetization"})
 	public void MonetizationModuleTest_003() {
+		wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
+		String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.setCookieFromSearch();
-		wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-		base.openWikiPage(wikiURL);
+		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
@@ -76,13 +77,14 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	 */
 	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_004", "Monetization"})
 	public void MonetizationModuleTest_004() {
+		wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
+		String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
 		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
 		monetizationModule.deleteCookieFromSearch();
-		wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
-		base.openWikiPage(wikiURL);
+		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
@@ -171,8 +173,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	@DataProvider(name="DataMonetizationModuleTest_008")
 	public static Object[][] DataMonetizationModuleTest_008() {
 		return new Object[][] {
-			{"JP", true}, {"JP", false},
-			{"GB", true}, {"GB", false},
+			{"JP", true, TEST_WIKI, TEST_ARTICLE},
+			{"JP", false, TEST_WIKI, TEST_ARTICLE},
+			{"JP", true, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
+			{"JP", false, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
+			{"JP", true, TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},
+			{"JP", false, TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},
 		};
 	}
 
@@ -184,9 +190,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		dataProvider = "DataMonetizationModuleTest_008",
 		groups = {"MonetizationModule", "MonetizationModuleTest_008", "Monetization"}
 	)
-	public void MonetizationModuleTest_008(String countryCode, Boolean isFromsearch) {
-		wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_700_WIKI);
-		String articleURL = urlBuilder.getUrlForPath(TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE);
+	public void MonetizationModuleTest_008(String countryCode, Boolean isFromsearch, String testWiki, String testArticle) {
+		wikiURL = urlBuilder.getUrlForWiki(testWiki);
+		String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(articleURL);
 		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
@@ -283,11 +289,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 			{"GB", true}, {"GB", false},
 			{"CA", true}, {"CA", false},
 			{"AU", true}, {"AU", false},
+			{"DE", true}, {"DE", false},
 		};
 	}
 
 	/**
-	 * The monetization module is not shown on article page for blocked geos (set blocked countries per wiki)
+	 * The monetization module is not shown on article page on top 100 wikias for blocked geos (set blocked countries per wiki)
 	 * @author Saipetch Kongkatong
 	 */
 	@Test(
@@ -318,5 +325,151 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
+
+	@DataProvider(name="DataMonetizationModuleTest_012")
+	public static Object[][] DataMonetizationModuleTest_012() {
+		return new Object[][] {
+			{TEST_WIKI, TEST_ARTICLE},
+			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
+			{TEST_TOP_100_WIKI, TEST_TOP_100_ARTICLE},
+		};
+	}
+
+	/**
+	 * The monetization module is shown on article page for non-blocked geos (bt/ic/bc/af slots)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(
+		dataProvider = "DataMonetizationModuleTest_012",
+		groups = {"MonetizationModule", "MonetizationModuleTest_012", "Monetization"}
+	)
+	public void MonetizationModuleTest_012(String testWiki, String testArticle) {
+		wikiURL = urlBuilder.getUrlForWiki(testWiki);
+		String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(articleURL);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieFromSearch();
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
+		// anon user
+		base.refreshPage();
+		monetizationModule.verifyMonetizationModuleShown();
+		monetizationModule.verifyMonetizationModuleSlot();
+		monetizationModule.verifyMonetizationModuleNotShownAboveTitle();
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openWikiPage(articleURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+	}
+
+	@DataProvider(name="DataMonetizationModuleTest_013")
+	public static Object[][] DataMonetizationModuleTest_013() {
+		return new Object[][] {
+			{"JP"},
+			{"GB"},
+		};
+	}
+
+	/**
+	 * The monetization module is not shown on article page on top 700 wikias for blocked geos (set blocked countries per wiki)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(
+		dataProvider = "DataMonetizationModuleTest_013",
+		groups = {"MonetizationModule", "MonetizationModuleTest_013", "Monetization"}
+	)
+	public void MonetizationModuleTest_013(String countryCode) {
+		wikiURL = urlBuilder.getUrlForWiki(TEST_TOP_700_WIKI);
+		String articleURL = urlBuilder.getUrlForPath(TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(articleURL);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieFromSearch();
+		monetizationModule.setCookieGeo(countryCode);
+		// anon user
+		base.refreshPage();
+		monetizationModule.verifyMonetizationModuleNotShown();
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openWikiPage(articleURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+	}
+
+	@DataProvider(name="DataMonetizationModuleTest_014")
+	public static Object[][] DataMonetizationModuleTest_014() {
+		return new Object[][] {
+			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "CA"},
+			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "AU"},
+			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "DE"},
+			{TEST_WIKI, TEST_ARTICLE, "CA"},
+			{TEST_WIKI, TEST_ARTICLE, "AU"},
+			{TEST_WIKI, TEST_ARTICLE, "DE"},
+		};
+	}
+
+	/**
+	 * The monetization module is shown on article page on top 700 wikias and the rest for particular geos (ic/bc/af slots)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(
+		dataProvider = "DataMonetizationModuleTest_014",
+		groups = {"MonetizationModule", "MonetizationModuleTest_014", "Monetization"}
+	)
+	public void MonetizationModuleTest_014(String testWiki, String testArticle, String countryCode) {
+		wikiURL = urlBuilder.getUrlForWiki(testWiki);
+		String articleURL = urlBuilder.getUrlForPath(testWiki, testArticle);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(articleURL);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieFromSearch();
+		monetizationModule.setCookieGeo(countryCode);
+		// anon user
+		base.refreshPage();
+		monetizationModule.verifyMonetizationModuleSlot();
+		monetizationModule.verifyMonetizationModuleNotShownAboveTitle();
+		monetizationModule.verifyMonetizationModuleNotShownBelowTitle();
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openWikiPage(articleURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+	}
+
+	@DataProvider(name="DataMonetizationModuleTest_015")
+	public static Object[][] DataMonetizationModuleTest_015() {
+		return new Object[][] {
+			{"GB"},
+		};
+	}
+
+	/**
+	 * The monetization module is shown on article page on the rest of wikias for particular geos (bc/af slots)
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(
+		dataProvider = "DataMonetizationModuleTest_015",
+		groups = {"MonetizationModule", "MonetizationModuleTest_015", "Monetization"}
+	)
+	public void MonetizationModuleTest_015(String countryCode) {
+		wikiURL = urlBuilder.getUrlForWiki(TEST_WIKI);
+		String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(articleURL);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieFromSearch();
+		monetizationModule.setCookieGeo(countryCode);
+		// anon user
+		base.refreshPage();
+		monetizationModule.verifyMonetizationModuleSlot();
+		monetizationModule.verifyMonetizationModuleNotShownBelowCategory();
+		monetizationModule.verifyMonetizationModuleShownAboveFooter();
+		monetizationModule.verifyMonetizationModuleNotShownAboveTitle();
+		monetizationModule.verifyMonetizationModuleNotShownBelowTitle();
+		monetizationModule.verifyMonetizationModuleNotShownInContent();
+		// logged in user
+		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
+		base.openWikiPage(articleURL);
+		monetizationModule.verifyMonetizationModuleNotShown();
+	}
+
 
 }

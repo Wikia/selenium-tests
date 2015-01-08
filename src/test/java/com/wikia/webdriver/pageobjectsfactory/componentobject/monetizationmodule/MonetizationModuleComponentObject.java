@@ -1,8 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule;
 
+import java.util.List;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,10 +21,22 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
 	@FindBy(css=".monetization-module")
 	private WebElement monetizationModuleContainer;
+	@FindBy(css=".monetization-module[data-mon-slot='above_title']")
+	private WebElement slotAboveTitle;
+	@FindBy(css=".monetization-module[data-mon-slot='below_title']")
+	private WebElement slotBelowTitle;
+	@FindBy(css=".monetization-module[data-mon-slot='in_content']")
+	private WebElement slotInContent;
+	@FindBy(css=".monetization-module[data-mon-slot='below_category']")
+	private WebElement slotBelowCategory;
+	@FindBy(css=".monetization-module[data-mon-slot='above_footer']")
+	private WebElement slotAboveFooter;
 	@FindBy(css=".monetization-module,.adunit")
 	private WebElement adsenseContainer;
 	@FindBy(css=".adsbygoogle")
 	private WebElement adsenseIns;
+
+	private By MonetizationModuleList = By.cssSelector(".monetization-module");
 
 	public MonetizationModuleComponentObject (WebDriver driver) {
 		super(driver);
@@ -56,6 +72,85 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 		Assertion.assertFalse(checkIfElementOnPage(adsenseContainer));
 		Assertion.assertFalse(checkIfElementOnPage(adsenseIns));
 		PageObjectLogging.log("verifyMonetizationModuleAdsenseNotShown", "Monetization module is not shown (adsense)", true);
+	}
+
+	public void verifyMonetizationModuleSlot() {
+		List<WebElement> listWebElements = driver.findElements(MonetizationModuleList);
+		for (WebElement elem : listWebElements) {
+			String slotName = elem.getAttribute("data-mon-slot");
+			switch (slotName) {
+				case "above_title":
+					verifyMonetizationModuleShownAboveTitle();
+					break;
+				case "below_title":
+					verifyMonetizationModuleShownBelowTitle();
+					break;
+				case "in_content":
+					verifyMonetizationModuleShownInContent();
+					break;
+				case "below_category":
+					verifyMonetizationModuleShownBelowCategory();
+					break;
+				case "above_footer":
+					verifyMonetizationModuleShownAboveFooter();
+					break;
+			}
+		}
+	}
+
+	public void verifyMonetizationModuleShownAboveTitle() {
+		Assertion.assertTrue(checkIfElementOnPage(slotAboveTitle));
+		waitForElementByElement(slotAboveTitle);
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleShown", "Monetization module is visible above the title", true);
+	}
+
+	public void verifyMonetizationModuleNotShownAboveTitle() {
+		Assertion.assertFalse(checkIfElementOnPage(slotAboveTitle));
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleNotShown", "Monetization module is not shown above the title", true);
+	}
+
+	public void verifyMonetizationModuleShownBelowTitle() {
+		Assertion.assertTrue(checkIfElementOnPage(slotBelowTitle));
+		waitForElementByElement(slotBelowTitle);
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleShown", "Monetization module is visible below the title", true);
+	}
+
+	public void verifyMonetizationModuleNotShownBelowTitle() {
+		Assertion.assertFalse(checkIfElementOnPage(slotBelowTitle));
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleNotShown", "Monetization module is not shown below the title", true);
+	}
+
+	public void verifyMonetizationModuleShownInContent() {
+		Assertion.assertTrue(checkIfElementOnPage(slotInContent));
+		waitForElementByElement(slotInContent);
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleShown", "Monetization module is visible in content", true);
+	}
+
+	public void verifyMonetizationModuleNotShownInContent() {
+		Assertion.assertFalse(checkIfElementOnPage(slotInContent));
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleNotShown", "Monetization module is not shown in content", true);
+	}
+
+	public void verifyMonetizationModuleShownBelowCategory() {
+		Assertion.assertTrue(checkIfElementOnPage(slotBelowCategory));
+		waitForElementByElement(slotBelowCategory);
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleShown", "Monetization module is visible below category", true);
+	}
+
+	public void verifyMonetizationModuleNotShownBelowCategory() {
+		Assertion.assertFalse(checkIfElementOnPage(slotBelowCategory));
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleNotShown", "Monetization module is not shown below category", true);
+	}
+
+	public void verifyMonetizationModuleShownAboveFooter() {
+		Assertion.assertTrue(checkIfElementOnPage(slotAboveFooter));
+		waitForElementByElement(slotAboveFooter);
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleShown", "Monetization module is visible above footer", true);
+	}
+
+	public void verifyMonetizationModuleNotShownAboveFooter() {
+		Assertion.assertFalse(checkIfElementOnPage(slotAboveFooter));
+		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleNotShown", "Monetization module is not shown above footer", true);
 	}
 
 	public void verifyMonetizationModuleAdsenseWidth(int expected) {
