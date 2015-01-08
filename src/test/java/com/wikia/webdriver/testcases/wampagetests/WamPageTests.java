@@ -33,17 +33,14 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 		wam.verifyWamIndexIsNotEmpty();
 		wam.verifyWamVerticalFilterOptions();
 
-		for( WamPageObject.VerticalsIds verticalId : WamPageObject.VerticalsIds.values() ) {
+		for( WamPageObject.WamTab verticalId : WamPageObject.WamTab.values() ) {
 			wam.selectVertical( verticalId );
 			wam.verifyWamIndexIsNotEmpty();
 			wam.verifyVerticalColumnValuesAreTheSame();
 		}
 	}
 
-	/*
-	 * skipped per CON-324 task
-	 */
-	@Test(enabled = false, groups = {"WamPage003", "WamPageTests", "Smoke5"})
+	@Test(groups = {"WamPage003", "WamPageTests", "Smoke5"})
 	public void wam_003_verifyPaginationByNextButton() {
 		wam.verifyWamIndexPageFirstColumn(1, 20);
 		wam.clickNextPaginator();
@@ -67,7 +64,7 @@ public class WamPageTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(groups = {"wamPage_005", "WamPageTests"})
-	public void wamPage_005_testDatePicker_QAART_482() {
+	public void wamPage_005_testDatePicker() {
 		wam.verifyTodayDateInDatePicker();
 		String lastMonthDate = wam.changeDateToLastMonth();
 		wam.verifyDateInDatePicker(lastMonthDate);

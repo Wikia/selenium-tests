@@ -101,7 +101,7 @@ public class URLsContent {
 	public static final String MOST_RECENT = "?sort=recent";
 
 	// WAM Scores page url
-	public static final String WAM_PAGE = "wiki/WAM";
+	public static final String WAM_PAGE = "WAM";
 
 	//Preview url for testing video suggestions
 	public static final String VIDEO_SUGGESTIONS_URL = "http://preview.callofduty.wikia.com/wiki/Frank_Woods";
