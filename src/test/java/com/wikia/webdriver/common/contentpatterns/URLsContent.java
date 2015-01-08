@@ -145,7 +145,7 @@ public class URLsContent {
 	public static final String FACEBOOK_WIKIA_APP_DEV_ID = "116800565037587";
 
 	//avatars
-	public static final String AVATAR_GENERIC = "150px-Avatar.jpg";
+	public static final String AVATAR_GENERIC = "Avatar.jpg";
 
 	//Urls for VE editor
 	public static final String VE_ENABLED_WIKI = "vetest";
