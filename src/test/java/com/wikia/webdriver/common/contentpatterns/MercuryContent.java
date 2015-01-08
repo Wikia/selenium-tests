@@ -42,6 +42,6 @@ public class MercuryContent {
 		}catch(JSException exec){
 
 		}
-		//		mercuryPage.clickMercuryButton(); Uncomment this line after temporary soultion won`t be needed any more
+		mercuryPage.clickMercuryButton(); //Uncomment this line after temporary soultion won`t be needed any more
 	}
 }

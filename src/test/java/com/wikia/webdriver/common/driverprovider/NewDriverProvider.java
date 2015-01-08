@@ -43,7 +43,7 @@ public class NewDriverProvider {
 	private static ChromeOptions chromeOptions = new ChromeOptions();
 	private static UserAgentsRegistry userAgentRegistry = new UserAgentsRegistry();
 	private static boolean unstablePageLoadStrategy = false;
-	private static AndroidDriver mobileInteraction;
+	private static AndroidDriver mobileDriver;
 
 	public static EventFiringWebDriver getDriverInstanceForBrowser(String browser) {
 		browserName = browser;
@@ -123,9 +123,9 @@ public class NewDriverProvider {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		mobileInteraction = new AndroidDriver(url, destCaps);
+		mobileDriver = new AndroidDriver(url, destCaps);
 
-		return new EventFiringWebDriver(mobileInteraction);
+		return new EventFiringWebDriver(mobileDriver);
 	}
 
 	private static EventFiringWebDriver getFFInstance() {
@@ -296,5 +296,9 @@ public class NewDriverProvider {
 
 	public static void setUnstablePageLoadStrategy(boolean value){
 		unstablePageLoadStrategy = value;
+	}
+	
+	public static AndroidDriver getMobileDriver() {
+		return mobileDriver;
 	}
 }
