@@ -74,8 +74,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected String presentLeaderboardSelector;
 	protected String presentMedrecName;
 	protected String presentMedrecSelector;
-	protected String presentPrefooterName;
-	protected String presentPrefooterSelector;
 
 	public AdsBaseObject(WebDriver driver, String page) {
 		super(driver);
