@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.gallery;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -103,18 +104,20 @@ public class GalleryBuilderComponentObject extends BasePageObject{
 	public void adjustOrientation(Orientation orientionGallery){
 		waitForElementByElement(orientation);
 		switch(orientionGallery){
-		case NONE:
-			orientation.findElement(orintationNone);
-			break;
-		case SQUARE:
-			orientation.findElement(orintationSquare);
-			break;
-		case LANDSCAPE:
-			orientation.findElement(orintationLandscape);
-			break;
-		case PORTRAIT:
-			orientation.findElement(orintationPortrait);
-			break;
+			case NONE:
+				orientation.findElement(orintationNone);
+				break;
+			case SQUARE:
+				orientation.findElement(orintationSquare);
+				break;
+			case LANDSCAPE:
+				orientation.findElement(orintationLandscape);
+				break;
+			case PORTRAIT:
+				orientation.findElement(orintationPortrait);
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing orientation selected");
 		}
 		PageObjectLogging.log("adjustOrientation", "dropdown selected", true);
 

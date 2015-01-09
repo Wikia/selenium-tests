@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,10 +13,6 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 public class PreferencesPageObject extends WikiBasePageObject{
-
-	public PreferencesPageObject(WebDriver driver) {
-		super(driver);
-	}
 
 	@FindBy(css="#fbConnectDisconnect")
 	private WebElement facebookDisconnect;
@@ -36,29 +33,35 @@ public class PreferencesPageObject extends WikiBasePageObject{
 		INFO, EMAIL, EDITING, UNDER, FACEBOOK
 	}
 
+	public PreferencesPageObject(WebDriver driver) {
+		super(driver);
+	}
+
 	public PreferencesPageObject selectTab(tabNames tab){
 		int tabNum = -1;
 		switch(tab){
-		case INFO:
-			tabNum = 0;
-			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
-			break;
-		case EMAIL:
-			tabNum = 1;
-			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
-			break;
-		case EDITING:
-			tabNum = 2;
-			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
-			break;
-		case UNDER:
-			tabNum = 3;
-			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
-			break;
-		case FACEBOOK:
-			tabNum = 4;
-			tabs.get(tabNum).findElement(By.cssSelector("a")).click();
-			break;
+			case INFO:
+				tabNum = 0;
+				tabs.get(tabNum).findElement(By.cssSelector("a")).click();
+				break;
+			case EMAIL:
+				tabNum = 1;
+				tabs.get(tabNum).findElement(By.cssSelector("a")).click();
+				break;
+			case EDITING:
+				tabNum = 2;
+				tabs.get(tabNum).findElement(By.cssSelector("a")).click();
+				break;
+			case UNDER:
+				tabNum = 3;
+				tabs.get(tabNum).findElement(By.cssSelector("a")).click();
+				break;
+			case FACEBOOK:
+				tabNum = 4;
+				tabs.get(tabNum).findElement(By.cssSelector("a")).click();
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing tab selected");
 		}
 		waitForValueToBePresentInElementsAttributeByElement(tabs.get(tabNum), "class", "selected");
 		PageObjectLogging.log("selectTab", "tab "+tab.toString()+" selected", true);

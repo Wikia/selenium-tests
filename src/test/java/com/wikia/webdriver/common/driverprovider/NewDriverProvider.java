@@ -51,7 +51,7 @@ public class NewDriverProvider {
 			driver = getFFInstance();
 
 		//If browser equals CHROME set driver property as ChromeWebDriver instance
-		} else if ("CHROME".equals(browserName)) {
+		} else if (browserName.contains("CHROME")) {
 			driver = getChromeInstance();
 
 		//If browser equals SAFARI set driver property as SafariWebDriver instance

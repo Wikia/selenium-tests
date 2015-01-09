@@ -18,7 +18,7 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObje
  */
 public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 
-	private final String dataThemeList = "li[data-theme]";
+	private static final String DATA_THEME_LIST = "li[data-theme]";
 	private By loadingIndicatorBy = By.cssSelector(".wikiaThrobber");
 	private String themeLocator = "li[data-theme='%name%']";
 
@@ -31,7 +31,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 	}
 
 	public void selectThemeByName(String name) {
-		waitForElementByCss(dataThemeList);
+		waitForElementByCss(DATA_THEME_LIST);
 		String themeName = themeLocator.replace("%name%", name);
 		driver.findElement(By.cssSelector(themeName)).click();
 		PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);
@@ -39,7 +39,7 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 
 	public void selectTheme(int skinNumber)
 	{
-		waitForElementByCss(dataThemeList);
+		waitForElementByCss(DATA_THEME_LIST);
 		jQueryClick("li[data-theme]:nth-child("+skinNumber+")");
 		try {
 			Thread.sleep(1500);

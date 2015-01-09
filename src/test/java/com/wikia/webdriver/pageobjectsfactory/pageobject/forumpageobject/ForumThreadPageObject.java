@@ -36,17 +36,17 @@ public class ForumThreadPageObject extends BasePageObject{
 	@FindBy(css=".WikiaMenuElement .reopen-thread")
 	private WebElement reopenThreadButton;
 	@FindBy(css="#WallMoveModalWrapper select")
-	private WebElement moveThreadModal_selectElement;
+	private WebElement moveThreadModalSelectElement;
 	@FindBy(css="#WallMoveModalWrapper .primary")
-	private WebElement moveThreadModal_moveThreadButton;
+	private WebElement moveThreadModalMoveThreadButton;
 	@FindBy(css=".wall-action-reason")
-	private WebElement removeThreadModal_Textarea;
+	private WebElement removeThreadModalTextarea;
 	@FindBy(css=".reason")
 	private WebElement closeThreadMessage;
 	@FindBy(css="#reason")
 	private WebElement closeThreadTextarea;
 	@FindBy(css="#WikiaConfirmOk")
-	private WebElement removeThreadModal_removeButton;
+	private WebElement removeThreadModalRemoveButton;
 	@FindBy(css=".speech-bubble-message-removed")
 	private WebElement threadRemovedMessage;
 	@FindBy(css=".speech-bubble-message-removed a")
@@ -102,11 +102,11 @@ public class ForumThreadPageObject extends BasePageObject{
 	public void removeThread(String reason) {
 		clickOnMoreButton();
 		clickOnRemoveButton();
-		waitForElementByElement(removeThreadModal_Textarea);
-		removeThreadModal_Textarea.sendKeys(reason);
-		waitForElementByElement(removeThreadModal_removeButton);
-		waitForElementClickableByElement(removeThreadModal_removeButton);
-		scrollAndClick(removeThreadModal_removeButton);
+		waitForElementByElement(removeThreadModalTextarea);
+		removeThreadModalTextarea.sendKeys(reason);
+		waitForElementByElement(removeThreadModalRemoveButton);
+		waitForElementClickableByElement(removeThreadModalRemoveButton);
+		scrollAndClick(removeThreadModalRemoveButton);
 		PageObjectLogging.log("removeThread", "removed thread with the following reason: "+reason, true, driver);
 	}
 
@@ -169,11 +169,11 @@ public class ForumThreadPageObject extends BasePageObject{
 	public void moveThread(String forumBoardName) {
 		clickOnMoreButton();
 		clickOnMoveThreadButton();
-		waitForElementByElement(moveThreadModal_selectElement);
-		Select dropList = new Select(moveThreadModal_selectElement);
+		waitForElementByElement(moveThreadModalSelectElement);
+		Select dropList = new Select(moveThreadModalSelectElement);
 		dropList.selectByVisibleText(forumBoardName);
-		waitForElementClickableByElement(moveThreadModal_moveThreadButton);
-		scrollAndClick(moveThreadModal_moveThreadButton);
+		waitForElementClickableByElement(moveThreadModalMoveThreadButton);
+		scrollAndClick(moveThreadModalMoveThreadButton);
 		PageObjectLogging.log("moveThread", "thread moved to the following board: "+forumBoardName, true, driver);
 	}
 
@@ -182,9 +182,9 @@ public class ForumThreadPageObject extends BasePageObject{
 		clickOnCloseThreadButton();
 		waitForElementByElement(closeThreadTextarea);
 		closeThreadTextarea.sendKeys(reason);
-		waitForElementByElement(removeThreadModal_removeButton);
-		waitForElementClickableByElement(removeThreadModal_removeButton);
-		scrollAndClick(removeThreadModal_removeButton);
+		waitForElementByElement(removeThreadModalRemoveButton);
+		waitForElementClickableByElement(removeThreadModalRemoveButton);
+		scrollAndClick(removeThreadModalRemoveButton);
 		PageObjectLogging.log("closeThread", "closed thread with the following reason: "+reason, true, driver);
 	}
 

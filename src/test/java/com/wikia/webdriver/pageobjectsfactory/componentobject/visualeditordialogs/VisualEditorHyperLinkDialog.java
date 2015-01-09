@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialo
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,17 +43,17 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	private String menuSectionItemText = "oo-ui-menuSectionItemWidget";
 
 	private int[] pageCategoryIndex = new int[4];
-	private final int NEWPAGEINDEX = 0;
-	private final int MATCHINGPAGEINDEX = 1;
-	private final int EXTERNALLINKINDEX = 2;
-	private final int REDIRECTPAGEINDEX = 3;
+	private static final int NEW_PAGE_INDEX = 0;
+	private static final int MATCHING_PAGE_INDEX = 1;
+	private static final int EXTERNAL_LINK_INDEX = 2;
+	private static final int REDIRECT_PAGE_INDEX = 3;
 
 	public VisualEditorHyperLinkDialog(WebDriver driver) {
 		super(driver);
-		pageCategoryIndex[NEWPAGEINDEX] = -1;
-		pageCategoryIndex[MATCHINGPAGEINDEX] = -1;
-		pageCategoryIndex[EXTERNALLINKINDEX] = -1;
-		pageCategoryIndex[REDIRECTPAGEINDEX] = -1;
+		pageCategoryIndex[NEW_PAGE_INDEX] = -1;
+		pageCategoryIndex[MATCHING_PAGE_INDEX] = -1;
+		pageCategoryIndex[EXTERNAL_LINK_INDEX] = -1;
+		pageCategoryIndex[REDIRECT_PAGE_INDEX] = -1;
 	}
 
 	public void typeInLinkInput(String text) {
@@ -83,20 +84,22 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 				String linkCategory = linkResult.findElement(linkCategoryBy).getText();
 				switch(linkCategory) {
 					case "New page":
-						pageCategoryIndex[NEWPAGEINDEX] = i;
+						pageCategoryIndex[NEW_PAGE_INDEX] = i;
 						break;
 					case "Matching page":
-						pageCategoryIndex[MATCHINGPAGEINDEX] = i;
+						pageCategoryIndex[MATCHING_PAGE_INDEX] = i;
 						break;
 					case "Matching pages":
-						pageCategoryIndex[MATCHINGPAGEINDEX] = i;
+						pageCategoryIndex[MATCHING_PAGE_INDEX] = i;
 						break;
 					case "Redirect page":
-						pageCategoryIndex[REDIRECTPAGEINDEX] = i;
+						pageCategoryIndex[REDIRECT_PAGE_INDEX] = i;
 						break;
 					case "External link":
-						pageCategoryIndex[EXTERNALLINKINDEX] = i;
+						pageCategoryIndex[EXTERNAL_LINK_INDEX] = i;
 						break;
+					default:
+						throw new NoSuchElementException("Non-existing link category selected");
 				}
 			}
 		}
@@ -109,43 +112,43 @@ public class VisualEditorHyperLinkDialog extends VisualEditorDialog {
 	}
 
 	public void isNewPage() {
-		Assertion.assertTrue(isCategoryResult(NEWPAGEINDEX), "New page index not found");
+		Assertion.assertTrue(isCategoryResult(NEW_PAGE_INDEX), "New page index not found");
 		PageObjectLogging.log("isNewPage", "New page index found", true);
 	}
 
 	public void isMatchingPage() {
-		Assertion.assertTrue(isCategoryResult(MATCHINGPAGEINDEX), "Matching page index not found");
+		Assertion.assertTrue(isCategoryResult(MATCHING_PAGE_INDEX), "Matching page index not found");
 		PageObjectLogging.log("isMatchingPage", "Matching page index found", true);
 	}
 
 	public void isExternalLink() {
-		Assertion.assertTrue(isCategoryResult(EXTERNALLINKINDEX), "External link index not found");
+		Assertion.assertTrue(isCategoryResult(EXTERNAL_LINK_INDEX), "External link index not found");
 		PageObjectLogging.log("isExternalLink", "External link index found", true);
 	}
 
 	public void isRedirectPage() {
-		Assertion.assertTrue(isCategoryResult(REDIRECTPAGEINDEX), "Redirect page index not found");
+		Assertion.assertTrue(isCategoryResult(REDIRECT_PAGE_INDEX), "Redirect page index not found");
 		PageObjectLogging.log("isRedirectPage", "Redirect page index found", true);
 	}
 
 	public void verifyNewPageIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[NEWPAGEINDEX], "Checking New Page is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[NEW_PAGE_INDEX], "Checking New Page is on the top of the results.");
 	}
 
 	public void verifyMatchingPageIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[MATCHINGPAGEINDEX], "Checking Matching Page is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[MATCHING_PAGE_INDEX], "Checking Matching Page is on the top of the results.");
 	}
 
 	public void verifyExternalLinkIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[EXTERNALLINKINDEX], "Checking External Link is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[EXTERNAL_LINK_INDEX], "Checking External Link is on the top of the results.");
 	}
 
 	public void verifyRedirectPageIsTop() {
 		viewLinkResults();
-		Assertion.assertNumber(0, pageCategoryIndex[REDIRECTPAGEINDEX], "Checking Redirect Page is on the top of the results.");
+		Assertion.assertNumber(0, pageCategoryIndex[REDIRECT_PAGE_INDEX], "Checking Redirect Page is on the top of the results.");
 	}
 
 	public VisualEditorPageObject clickLinkResult() {

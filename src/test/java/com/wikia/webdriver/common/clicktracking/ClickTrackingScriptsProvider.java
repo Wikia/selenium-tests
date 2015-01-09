@@ -8,7 +8,7 @@ package com.wikia.webdriver.common.clicktracking;
 public class ClickTrackingScriptsProvider {
 
 	private String tracker;
-	private String log_level;
+	private String logLevel;
 
 	/**
 	 * @param logLevel normally log_level = 3
@@ -16,7 +16,7 @@ public class ClickTrackingScriptsProvider {
 	 */
 	public ClickTrackingScriptsProvider(String logLevel, String tracker) {
 		this.tracker = tracker;
-		this.log_level = logLevel;
+		this.logLevel = logLevel;
 	}
 
 	private static String enableWikiaTracker =

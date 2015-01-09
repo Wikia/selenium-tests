@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
  */
 public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 
-	private final int pageViewsCount = 5;
+	private static final int PAGE_VIEWS_COUNT = 5;
 
 	public TestRoadblocksAfterMultiplePageViews() {
 		super();
@@ -35,6 +35,6 @@ public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 	) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage, windowResolution);
-		wikiPage.verifyRoadblockServedAfterMultiplePageViews(screenImageUrl, skinLeftSide, skinRightSide, pageViewsCount);
+		wikiPage.verifyRoadblockServedAfterMultiplePageViews(screenImageUrl, skinLeftSide, skinRightSide, PAGE_VIEWS_COUNT);
 	}
 }

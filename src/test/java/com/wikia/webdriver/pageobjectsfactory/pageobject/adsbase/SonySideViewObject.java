@@ -8,11 +8,12 @@ import org.openqa.selenium.*;
  * @ownership AdEngineering
  */
 public class SonySideViewObject extends BasePageObject {
-	final String sonySideViewUrl = "http://wikiamonetization.wikia.com/info.tvsideview.sony.net/sony-sideview.html";
+	private static final String SONY_SIDE_VIEW_URL =
+		"http://wikiamonetization.wikia.com/info.tvsideview.sony.net/sony-sideview.html";
 
 	public SonySideViewObject(WebDriver driver) {
 		super(driver);
-		getUrl(sonySideViewUrl);
+		getUrl(SONY_SIDE_VIEW_URL);
 	}
 
 	public AdsBaseObject goToDestinationPage(String page) {

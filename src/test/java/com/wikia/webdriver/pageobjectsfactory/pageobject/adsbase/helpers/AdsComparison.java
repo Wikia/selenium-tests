@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -18,7 +19,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.TimeoutException;
 
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
-import com.wikia.webdriver.common.core.imageutilities.ImageEditor;
 import com.wikia.webdriver.common.core.imageutilities.Shooter;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -38,7 +38,7 @@ public class AdsComparison {
 	private Shooter shooter;
 	protected ImageComparison imageComparison;
 	//Chromedriver has an open issue and all screenshots made in chromedriver on mobile are scaled
-	private final double chromeDriverScreenshotScale = 0.5;
+	private static final double CHROME_DRIVER_SCREENSHOT_SCALE = 0.5;
 
 	public AdsComparison() {
 		imageComparison = new ImageComparison();
@@ -121,7 +121,7 @@ public class AdsComparison {
 		Shooter shooter = new Shooter();
 		File page = shooter.capturePage(driver);
 		BufferedImage scaledPage = imageEditor.scaleImage(
-			page, chromeDriverScreenshotScale, chromeDriverScreenshotScale
+			page, CHROME_DRIVER_SCREENSHOT_SCALE, CHROME_DRIVER_SCREENSHOT_SCALE
 		);
 		return imageEditor.cropImage(element.getLocation(), element.getSize(), scaledPage);
 	}

@@ -43,7 +43,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 	private String userStaff = credentials.userNameStaff;
 	private String userStaffPassword = credentials.passwordStaff;
 
-	private final int numberOfPrivateMessages = 10;
+	private static final int NUMBER_OF_PRIVATE_MESSAGES = 10;
 
 	private ChatPageObject openChatForUser (
 			WebDriver driver, String userName, String password
@@ -202,7 +202,7 @@ public class ChatTests extends NewTestTemplate_TwoDrivers {
 
 		switchToWindow(driverTwo);
 		chatUserSix.selectPrivateMessageToUser(userFive);
-		List<String> messagesSent = chatUserSix.sendMultipleMessagesFromUser(userSix, numberOfPrivateMessages);
+		List<String> messagesSent = chatUserSix.sendMultipleMessagesFromUser(userSix, NUMBER_OF_PRIVATE_MESSAGES);
 
 		switchToWindow(driverOne);
 		chatUserFive.verifyMultiplePrivateMessages(messagesSent, userSix);

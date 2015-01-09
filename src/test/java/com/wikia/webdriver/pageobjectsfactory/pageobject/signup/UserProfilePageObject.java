@@ -31,7 +31,7 @@ public class UserProfilePageObject extends WikiBasePageObject {
 
 	private By image = By.cssSelector("img");
 
-	private String avatarSelector = ".masthead-avatar > img[src*='%imageName%']";
+	private String avatarSelector = ".masthead-avatar > img[src*='/%imageName%']";
 
 	public UserProfilePageObject(WebDriver driver) {
 		super(driver);

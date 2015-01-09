@@ -21,8 +21,8 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComp
  */
 public class MobileAdsBaseObject extends AdsBaseObject {
 
-	private final String smartBannerSelector = ".smartbanner.android";
-	private final String fliteMaskSelector = ".flite-mask";
+	private static final String SMART_BANNER_SELECTOR = ".smartbanner.android";
+	private static final String FLITE_MASK_SELECTOR = ".flite-mask";
 	private AdsComparison adsComparison;
 	private ImageComparison imageComparison;
 
@@ -49,7 +49,7 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 	public void verifyMobileTopLeaderboard() {
 		extractGptInfo(presentLeaderboardSelector);
 		removeSmartBanner();
-		if (checkIfElementOnPage(fliteMaskSelector)) {
+		if (checkIfElementOnPage(FLITE_MASK_SELECTOR)) {
 			PageObjectLogging.log(
 				"FliteAd", "Page contains the flite ad", true, driver
 			);
@@ -60,7 +60,8 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 				String.format("Slot is not expanded - ad is not there; CSS selector: %s", presentLeaderboardSelector)
 			);
 		}
-		if (areAdsEmpty(presentLeaderboardSelector, presentLeaderboard)) {
+		if (!adsComparison.isAdVisible(presentLeaderboard, presentLeaderboardSelector, driver))
+		{
 			throw new NoSuchElementException(
 				"Screenshots of element on/off look the same."
 					+ "Most probable ad is not present; CSS "
@@ -105,32 +106,9 @@ public class MobileAdsBaseObject extends AdsBaseObject {
 		PageObjectLogging.log("AdInSlot", "Ad found in slot", true, driver);
 	}
 
-	private boolean areAdsEmpty(String slotSelector, WebElement slot) {
-		PageObjectLogging.log(
-			"CompareScreenshot", "Page before hidding ads", true, driver
-		);
-		File preSwitch = adsComparison.getMobileSlotScreenshot(slot, driver);
-		adsComparison.hideSlot(slotSelector, driver);
-		waitForElementNotVisibleByElement(slot);
-		File postSwitch = adsComparison.getMobileSlotScreenshot(slot, driver);
-		boolean imagesTheSame = imageComparison.areFilesTheSame(preSwitch, postSwitch);
-		preSwitch.delete();
-		postSwitch.delete();
-		if (imagesTheSame) {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look the same", false
-			);
-		} else {
-			PageObjectLogging.log(
-				"CompareScreenshot", "Screenshots look different", true
-			);
-		}
-		return imagesTheSame;
-	}
-
 	private void removeSmartBanner() {
-		if (checkIfElementOnPage(smartBannerSelector)) {
-			WebElement smartBanner = driver.findElement(By.cssSelector(smartBannerSelector));
+		if (checkIfElementOnPage(SMART_BANNER_SELECTOR)) {
+			WebElement smartBanner = driver.findElement(By.cssSelector(SMART_BANNER_SELECTOR));
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).css('display', 'none')", smartBanner);
 			waitForElementNotVisibleByElement(smartBanner);

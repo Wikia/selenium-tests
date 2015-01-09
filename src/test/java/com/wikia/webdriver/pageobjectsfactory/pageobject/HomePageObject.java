@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -75,6 +76,8 @@ public class HomePageObject extends WikiBasePageObject {
 				case "lifestyle":
 					lifestyle += 1;
 					break;
+				default:
+					throw new NoSuchElementException("Non-existing hub selected");
 			}
 			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); //example: [ Video Games ] to Video_Games
 				if (hubName.equals(HubName.VIDEO_GAMES.toString().toLowerCase())) {

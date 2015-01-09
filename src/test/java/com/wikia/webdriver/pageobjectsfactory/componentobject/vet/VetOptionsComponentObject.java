@@ -1,9 +1,6 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.vet;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -108,15 +105,17 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 	public void adjustPosition(PositionsVideo position){
 		waitForElementByElement(videoEmbedLayotRow);
 		switch (position){
-		case LEFT:
-			positionLayoutLeft.click();
-			break;
-		case CENTER:
-			positionLayoutCenter.click();
-			break;
-		case RIGHT:
-			positionLayoutRight.click();
-			break;
+			case LEFT:
+				positionLayoutLeft.click();
+				break;
+			case CENTER:
+				positionLayoutCenter.click();
+				break;
+			case RIGHT:
+				positionLayoutRight.click();
+				break;
+			default:
+				throw new NoSuchElementException("Non-existing position selected");
 		}
 		PageObjectLogging.log("adjustPosition", "position " + position.toString() + " selected", true);
 	}
