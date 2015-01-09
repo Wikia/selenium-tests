@@ -1,9 +1,7 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.browsermob.core.har.Har;
 import org.browsermob.core.har.HarEntry;
 import org.browsermob.proxy.ProxyServer;
@@ -11,7 +9,8 @@ import org.browsermob.proxy.http.BrowserMobHttpRequest;
 import org.browsermob.proxy.http.RequestInterceptor;
 import org.openqa.selenium.Proxy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -25,7 +24,7 @@ public class NetworkTrafficInterceptor extends ProxyServer {
 
 	public NetworkTrafficInterceptor() {
 		super();
-		portNumber = MIN + (int)(Math.random() * ((MAX - MIN) + 1));
+		portNumber = MIN + (int) (Math.random() * ((MAX - MIN) + 1));
 	}
 
 	public Proxy startSeleniumProxyServer() {

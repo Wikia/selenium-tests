@@ -3,20 +3,18 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class FollowArticleTests extends NewTestTemplate{
+public class FollowArticleTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	String articleName;
@@ -32,7 +30,7 @@ public class FollowArticleTests extends NewTestTemplate{
 		article.verifyPageUnfollowed();
 	}
 
-	@Test(groups = "FollowArticle", dependsOnMethods={"FollowArticle_001_setup"})
+	@Test(groups = "FollowArticle", dependsOnMethods = {"FollowArticle_001_setup"})
 	public void FollowArticle_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -40,7 +38,7 @@ public class FollowArticleTests extends NewTestTemplate{
 		article.follow();
 	}
 
-	@Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods={"FollowArticle_002_follow"})
+	@Test(groups = {"FollowArticle", "Follow"}, dependsOnMethods = {"FollowArticle_002_follow"})
 	public void FollowArticle_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

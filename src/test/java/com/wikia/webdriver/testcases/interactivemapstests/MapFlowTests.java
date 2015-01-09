@@ -1,32 +1,27 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateACustomMapComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateAMapComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreatePinTypesComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.CreateRealMapComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.TemplateComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.*;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
  * @author: Lukasz Jedrzejczak
  * @author: Lukasz Nowak
- * @ownership: Mobile Web 
+ * @ownership: Mobile Web
  */
 
 public class MapFlowTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "MapFlowTests_001", "MapFlowTests", "InteractiveMaps" }, enabled = false)
+	@Test(groups = {"MapFlowTests_001", "MapFlowTests", "InteractiveMaps"}, enabled = false)
 	public void MapFlowTests_001_CreateCustomMapNewImageUpload() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -47,7 +42,7 @@ public class MapFlowTests extends NewTestTemplate {
 		createdMap.verifyControlButtonsAreVisible();
 	}
 
-	@Test(groups = { "MapFlowTests_002", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_002", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_002_CreateCustomMapWithExistingTemplate() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -67,7 +62,7 @@ public class MapFlowTests extends NewTestTemplate {
 		createdMap.verifyControlButtonsAreVisible();
 	}
 
-	@Test(groups = { "MapFlowTests_003", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_003", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_003_CreateRealMap() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -83,7 +78,7 @@ public class MapFlowTests extends NewTestTemplate {
 		createdMap.verifyControlButtonsAreVisible();
 	}
 
-	@Test(groups = { "MapFlowTests_004", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_004", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_004_VerifyBackButtonWorksCorrectly() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -102,7 +97,7 @@ public class MapFlowTests extends NewTestTemplate {
 		map.verifyRealMapAndCustomMapButtons();
 	}
 
-	@Test(groups = { "MapFlowTests_005", "MapFlowTests", "InteractiveMaps" })
+	@Test(groups = {"MapFlowTests_005", "MapFlowTests", "InteractiveMaps"})
 	public void MapFlowTests_005_VerifyCloseButtonsInCreationMapFlow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

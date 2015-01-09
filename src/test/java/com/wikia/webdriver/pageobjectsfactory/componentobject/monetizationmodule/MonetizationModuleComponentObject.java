@@ -1,15 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule;
 
-import java.util.List;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 /**
  * @author Saipetch Kongkatong
@@ -20,26 +19,26 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	private static final String COOKIE_FROMSEARCH_VALUE = "1";
 	private static final String ATTRIBUTE_NAME_SLOT = "data-mon-slot";
 
-	@FindBy(css=".monetization-module")
+	@FindBy(css = ".monetization-module")
 	private WebElement monetizationModuleContainer;
-	@FindBy(css=".monetization-module[data-mon-slot='above_title']")
+	@FindBy(css = ".monetization-module[data-mon-slot='above_title']")
 	private WebElement slotAboveTitle;
-	@FindBy(css=".monetization-module[data-mon-slot='below_title']")
+	@FindBy(css = ".monetization-module[data-mon-slot='below_title']")
 	private WebElement slotBelowTitle;
-	@FindBy(css=".monetization-module[data-mon-slot='in_content']")
+	@FindBy(css = ".monetization-module[data-mon-slot='in_content']")
 	private WebElement slotInContent;
-	@FindBy(css=".monetization-module[data-mon-slot='below_category']")
+	@FindBy(css = ".monetization-module[data-mon-slot='below_category']")
 	private WebElement slotBelowCategory;
-	@FindBy(css=".monetization-module[data-mon-slot='above_footer']")
+	@FindBy(css = ".monetization-module[data-mon-slot='above_footer']")
 	private WebElement slotAboveFooter;
-	@FindBy(css=".monetization-module,.adunit")
+	@FindBy(css = ".monetization-module,.adunit")
 	private WebElement adsenseContainer;
-	@FindBy(css=".adsbygoogle")
+	@FindBy(css = ".adsbygoogle")
 	private WebElement adsenseIns;
 
 	private By MonetizationModuleListBy = By.cssSelector(".monetization-module");
 
-	public MonetizationModuleComponentObject (WebDriver driver) {
+	public MonetizationModuleComponentObject(WebDriver driver) {
 		super(driver);
 	}
 

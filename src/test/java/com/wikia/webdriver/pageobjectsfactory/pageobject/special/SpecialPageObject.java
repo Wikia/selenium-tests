@@ -1,15 +1,14 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 /**
-* @author Bogna 'bognix' Knychala
-*/
+ * @author Bogna 'bognix' Knychala
+ */
 public class SpecialPageObject extends WikiBasePageObject {
 
 	@FindBy(css = "#WikiaPageHeader > h2")

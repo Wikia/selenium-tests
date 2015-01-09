@@ -1,9 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.videohomepage;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.core.Assertion;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,11 +19,11 @@ import java.util.List;
 
 public class VideoHomePageObject extends WikiBasePageObject {
 
-	@FindBy(css=".featured-video-slider .bx-controls")
+	@FindBy(css = ".featured-video-slider .bx-controls")
 	private WebElement featuredModuleControls;
-	@FindBys(@FindBy(css="#featured-video-bxslider li"))
+	@FindBys(@FindBy(css = "#featured-video-bxslider li"))
 	private List<WebElement> featuredSlides;
-	@FindBys(@FindBy(css=".latest-videos-wrapper .carousel-wrapper"))
+	@FindBys(@FindBy(css = ".latest-videos-wrapper .carousel-wrapper"))
 	private List<WebElement> latestVideoRows;
 
 	public VideoHomePageObject(WebDriver driver) {

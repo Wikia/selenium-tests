@@ -15,9 +15,9 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 
-	@FindBy(css=".featured-video:first-child")
+	@FindBy(css = ".featured-video:first-child")
 	private WebElement featuredVideoForm;
-	@FindBy(css=".vpt-form button[type=submit]")
+	@FindBy(css = ".vpt-form button[type=submit]")
 	private WebElement saveButton;
 
 	public FeaturedVideoAdminPageObject(WebDriver driver) {
@@ -29,7 +29,7 @@ public class FeaturedVideoAdminPageObject extends WikiBasePageObject {
 		waitForElementByElement(featuredVideoForm);
 		WebElement addVideoButton = featuredVideoForm.findElement(By.cssSelector(".add-video-button"));
 		addVideoButton.click();
-		PageObjectLogging.log("VetAddVideoComponentObject", "Add video button clicked", true );
+		PageObjectLogging.log("VetAddVideoComponentObject", "Add video button clicked", true);
 		return new VetAddVideoComponentObject(driver);
 	}
 

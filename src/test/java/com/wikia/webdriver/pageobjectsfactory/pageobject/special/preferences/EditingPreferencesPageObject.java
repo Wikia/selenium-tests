@@ -1,11 +1,10 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class EditingPreferencesPageObject extends PreferencesPageObject {
 
@@ -13,7 +12,7 @@ public class EditingPreferencesPageObject extends PreferencesPageObject {
 		super(driver);
 	}
 
-	@FindBy(css="select#mw-input-wpeditor")
+	@FindBy(css = "select#mw-input-wpeditor")
 	private WebElement preferredEditorDropdown;
 
 	public void selectPreferredEditor(String value) {

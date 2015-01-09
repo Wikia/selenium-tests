@@ -1,17 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
-import java.util.Set;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.Set;
 
 /**
-* @author Michal 'justnpT' Nowierski
-*/
+ * @author Michal 'justnpT' Nowierski
+ */
 public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
 	@FindBy(css = "button[name='__CONFIRM__']")
@@ -42,8 +41,8 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 
 		Set<String> handles = driver.getWindowHandles();
 
-		if (handles.size()>1) {
-			for(String winHandle : handles){
+		if (handles.size() > 1) {
+			for (String winHandle : handles) {
 				//Switch to new window opened
 				driver.switchTo().window(winHandle);
 			}
@@ -64,7 +63,7 @@ public class FacebookSignupModalComponentObject extends WikiBasePageObject {
 	public void typeUserName(String userName) {
 		waitForElementByElement(usernameField);
 		usernameField.sendKeys(userName);
-		PageObjectLogging.log("typeUserName", "username "+userName+" typed into the field", true);
+		PageObjectLogging.log("typeUserName", "username " + userName + " typed into the field", true);
 	}
 
 	public void typePassword(String password) {

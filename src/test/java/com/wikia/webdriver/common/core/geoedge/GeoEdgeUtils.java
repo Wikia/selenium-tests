@@ -1,18 +1,17 @@
 package com.wikia.webdriver.common.core.geoedge;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -37,12 +36,12 @@ public class GeoEdgeUtils {
 		setIPsForCountries();
 	}
 
-    public String createBaseFromCredentials() {
-        String credentials = getGeoEdgeUserName() + ":" + getGeoEdgePassword();
-        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
-        final String encodedString = new String(encodedCredentials);
-        return encodedString;
-    }
+	public String createBaseFromCredentials() {
+		String credentials = getGeoEdgeUserName() + ":" + getGeoEdgePassword();
+		byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+		final String encodedString = new String(encodedCredentials);
+		return encodedString;
+	}
 
 	public String getIPForCountry(String countryCode) {
 		return (String) countriesConfiguration.get(countryCode);

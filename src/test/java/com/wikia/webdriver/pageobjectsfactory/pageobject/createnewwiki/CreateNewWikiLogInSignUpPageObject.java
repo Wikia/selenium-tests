@@ -1,38 +1,35 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 /**
- *
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject{
+public class CreateNewWikiLogInSignUpPageObject extends WikiBasePageObject {
 
 	public CreateNewWikiLogInSignUpPageObject(WebDriver driver) {
 		super(driver);
 	}
 
-	@FindBy(css="div.UserLoginModal input[name='username']")
+	@FindBy(css = "div.UserLoginModal input[name='username']")
 	WebElement userNameField;
-	@FindBy(css="div.UserLoginModal input[name='password']")
+	@FindBy(css = "div.UserLoginModal input[name='password']")
 	WebElement passwordField;
-	@FindBy(css="div.UserLoginModal input[type='submit']")
+	@FindBy(css = "div.UserLoginModal input[type='submit']")
 	WebElement submitButton;
-	@FindBy(css="div.UserLoginModal div.error-msg")
+	@FindBy(css = "div.UserLoginModal div.error-msg")
 	WebElement usernameValidationText;
-	@FindBy(css="form#SignupRedirect input[type='submit']")
+	@FindBy(css = "form#SignupRedirect input[type='submit']")
 	WebElement signUpSubmitButton;
-	@FindBy(css="div.UserLoginModal div.input-group div.error-msg")
+	@FindBy(css = "div.UserLoginModal div.input-group div.error-msg")
 	WebElement errorMessage;
 
 	public void typeInUserName(String userName) {

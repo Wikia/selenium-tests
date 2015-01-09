@@ -2,7 +2,6 @@ package com.wikia.webdriver.testcases.visualeditor;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.contentpatterns.VEContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplateBeforeClass;
@@ -16,7 +15,6 @@ import org.testng.annotations.Test;
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
  */
 
 public class VEGalleryTests extends NewTestTemplateBeforeClass {
@@ -56,7 +54,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-			groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
+		groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
 	)
 	public void VEGalleryTests_002_GalleryCart() {
 		int numOfMediaToRemoveFirst = 1;
@@ -70,7 +68,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
-				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		//verify # of cart items  = 9
 		galleryDialog.addMediaToCart(initialNumOfMedia);
@@ -92,7 +90,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 	}
 
 	@Test(
-			groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
+		groups = {"VEGallery", "VEGalleryTests_003", "VEGalleryPreview"}
 	)
 	public void VEGalleryTests_003_PreviewOnTitle() {
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
@@ -101,14 +99,14 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
-				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		ve = galleryDialog.clickTitleToPreview(7);
 		ve.verifyPreviewImage();
 	}
 
 	@Test(
-			groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
+		groups = {"VEGallery", "VEGalleryTests_004", "VEGalleryPreview"}
 	)
 	public void VEGalleryTests_004_PreviewOnMetadata() {
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
@@ -117,7 +115,7 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		VisualEditorInsertGalleryDialog galleryDialog =
-				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
+			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		ve = galleryDialog.clickMetaDataToPreview(3);
 		ve.verifyPreviewImage();

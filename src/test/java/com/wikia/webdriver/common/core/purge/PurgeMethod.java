@@ -7,7 +7,6 @@ import org.apache.commons.httpclient.HttpMethodBase;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class PurgeMethod extends HttpMethodBase {
 

@@ -1,17 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.CategoryResultType;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VisualEditorOptionsDialog extends VisualEditorDialog {
 
@@ -19,25 +18,25 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 	private static final int CATEGORIES = 1;
 	private static final int LANGUAGES = 2;
 
-	@FindBy(css=".oo-ui-outlineWidget li")
+	@FindBy(css = ".oo-ui-outlineWidget li")
 	private List<WebElement> outlineMenuItems;
-	@FindBy(css=".oo-ui-window-foot .oo-ui-labeledElement-label")
+	@FindBy(css = ".oo-ui-window-foot .oo-ui-labeledElement-label")
 	private WebElement applyChangesButton;
-	@FindBy(css=".ve-ui-mwCategoryWidget input")
+	@FindBy(css = ".ve-ui-mwCategoryWidget input")
 	private WebElement categoriesInput;
-	@FindBy(css=".ve-ui-mwCategoryInputWidget-menu .oo-ui-optionWidget-selected")
+	@FindBy(css = ".ve-ui-mwCategoryInputWidget-menu .oo-ui-optionWidget-selected")
 	private WebElement selectedResult;
-	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
+	@FindBy(css = ".ve-ui-mwCategoryItemWidget-button")
 	private WebElement categoryItem;
-	@FindBy(css=".ve-ui-mwCategoryItemWidget-button")
+	@FindBy(css = ".ve-ui-mwCategoryItemWidget-button")
 	private List<WebElement> categoryItems;
-	@FindBy(css=".ve-ui-mwCategoryPopupWidget-content")
+	@FindBy(css = ".ve-ui-mwCategoryPopupWidget-content")
 	private WebElement categoryPopUp;
-	@FindBy(css=".oo-ui-indicator-down")
+	@FindBy(css = ".oo-ui-indicator-down")
 	private WebElement categoryDownIndicator;
-	@FindBy(css=".ve-ui-mwCategoryPopupWidget-content .oo-ui-icon-remove")
+	@FindBy(css = ".ve-ui-mwCategoryPopupWidget-content .oo-ui-icon-remove")
 	private WebElement categoryRemoveButton;
-	@FindBy(css=".ve-ui-mwCategoryInputWidget-menu li")
+	@FindBy(css = ".ve-ui-mwCategoryInputWidget-menu li")
 	private List<WebElement> categorySuggestions;
 
 	private By labeledElementBy = By.cssSelector(".oo-ui-labeledElement-label");
@@ -152,7 +151,7 @@ public class VisualEditorOptionsDialog extends VisualEditorDialog {
 				throw new NoSuchElementException("Non-existing result type selected");
 		}
 
-		for (int i = 0; i< categorySuggestions.size(); i++) {
+		for (int i = 0; i < categorySuggestions.size(); i++) {
 			WebElement linkResult = categorySuggestions.get(i);
 			String elementClassName = linkResult.getAttribute("class");
 			if (elementClassName.contains(menuSectionItemText)) {

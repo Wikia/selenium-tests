@@ -10,9 +10,7 @@ import org.testng.annotations.Test;
 /**
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
- *
- * @description
- * 1. Check if roadblock is present after 3 PV
+ * @description 1. Check if roadblock is present after 3 PV
  */
 public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 
@@ -24,10 +22,10 @@ public class TestRoadblocksAfterMultiplePageViews extends NewTestTemplate {
 	}
 
 	@Test(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="skinLimited",
-		groups={"TestRoadblock_GeoEdgeFree"},
-		invocationCount=3
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "skinLimited",
+		groups = {"TestRoadblock_GeoEdgeFree"},
+		invocationCount = 3
 	)
 	public void TestRoadblock_GeoEdgeFree(
 		String wikiName, String article, String screenImageUrl,

@@ -1,7 +1,8 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.forumpageobject;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,50 +11,48 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.minieditor.MiniEditorComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.util.List;
 
 /**
  * Abstract representation of a Forum Thread.
  * Example: http://mediawiki119.wikia.com/wiki/Thread:41679
  */
 
-public class ForumThreadPageObject extends BasePageObject{
+public class ForumThreadPageObject extends BasePageObject {
 
-	@FindBy(css="div.msg-title a")
+	@FindBy(css = "div.msg-title a")
 	private WebElement discussionTitle;
-	@FindBy(css=".replyButton")
+	@FindBy(css = ".replyButton")
 	private WebElement replyButton;
-	@FindBy(css=".speech-bubble-message nav")
+	@FindBy(css = ".speech-bubble-message nav")
 	private WebElement moreButton;
-	@FindBy(css=".WikiaMenuElement .remove-message")
+	@FindBy(css = ".WikiaMenuElement .remove-message")
 	private WebElement removeButton;
-	@FindBy(css=".WikiaMenuElement .move-thread")
+	@FindBy(css = ".WikiaMenuElement .move-thread")
 	private WebElement moveThreadButton;
-	@FindBy(css=".WikiaMenuElement .close-thread")
+	@FindBy(css = ".WikiaMenuElement .close-thread")
 	private WebElement closeThreadButton;
-	@FindBy(css=".WikiaMenuElement .reopen-thread")
+	@FindBy(css = ".WikiaMenuElement .reopen-thread")
 	private WebElement reopenThreadButton;
-	@FindBy(css="#WallMoveModalWrapper select")
+	@FindBy(css = "#WallMoveModalWrapper select")
 	private WebElement moveThreadModalSelectElement;
-	@FindBy(css="#WallMoveModalWrapper .primary")
+	@FindBy(css = "#WallMoveModalWrapper .primary")
 	private WebElement moveThreadModalMoveThreadButton;
-	@FindBy(css=".wall-action-reason")
+	@FindBy(css = ".wall-action-reason")
 	private WebElement removeThreadModalTextarea;
-	@FindBy(css=".reason")
+	@FindBy(css = ".reason")
 	private WebElement closeThreadMessage;
-	@FindBy(css="#reason")
+	@FindBy(css = "#reason")
 	private WebElement closeThreadTextarea;
-	@FindBy(css="#WikiaConfirmOk")
+	@FindBy(css = "#WikiaConfirmOk")
 	private WebElement removeThreadModalRemoveButton;
-	@FindBy(css=".speech-bubble-message-removed")
+	@FindBy(css = ".speech-bubble-message-removed")
 	private WebElement threadRemovedMessage;
-	@FindBy(css=".speech-bubble-message-removed a")
+	@FindBy(css = ".speech-bubble-message-removed a")
 	private WebElement undoThreadRemoveButton;
-	@FindBys(@FindBy(css="div.msg-body p"))
+	@FindBys(@FindBy(css = "div.msg-body p"))
 	private List<WebElement> discussionBody;
-	@FindBy(xpath="//div[@class='msg-toolbar']//a[contains(text(), 'Thread moved by')]")
+	@FindBy(xpath = "//div[@class='msg-toolbar']//a[contains(text(), 'Thread moved by')]")
 	private WebElement movedThreadText;
 
 	By parentBoardField = By.cssSelector("div.BreadCrumbs :nth-child(3)");
@@ -83,13 +82,13 @@ public class ForumThreadPageObject extends BasePageObject{
 		miniEditor.writeMiniEditor(message);
 		driver.switchTo().defaultContent();
 		clickReplyButton();
-		PageObjectLogging.log("reply", "write a reply with the following text: "+message, true, driver);
+		PageObjectLogging.log("reply", "write a reply with the following text: " + message, true, driver);
 	}
 
 	public void verifyReplyMessage(int replyNumber, String message) {
-		WebElement replyMessage = driver.findElement(By.cssSelector(".replies li:nth-child("+replyNumber+") p"));
+		WebElement replyMessage = driver.findElement(By.cssSelector(".replies li:nth-child(" + replyNumber + ") p"));
 		waitForTextToBePresentInElementByElement(replyMessage, message);
-		PageObjectLogging.log("verifyReplyMessage", "verify that message number "+replyNumber+" has the following message: "+message, true);
+		PageObjectLogging.log("verifyReplyMessage", "verify that message number " + replyNumber + " has the following message: " + message, true);
 	}
 
 	public void clickReplyButton() {
@@ -107,7 +106,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementByElement(removeThreadModalRemoveButton);
 		waitForElementClickableByElement(removeThreadModalRemoveButton);
 		scrollAndClick(removeThreadModalRemoveButton);
-		PageObjectLogging.log("removeThread", "removed thread with the following reason: "+reason, true, driver);
+		PageObjectLogging.log("removeThread", "removed thread with the following reason: " + reason, true, driver);
 	}
 
 	public void clickOnRemoveButton() {
@@ -174,7 +173,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		dropList.selectByVisibleText(forumBoardName);
 		waitForElementClickableByElement(moveThreadModalMoveThreadButton);
 		scrollAndClick(moveThreadModalMoveThreadButton);
-		PageObjectLogging.log("moveThread", "thread moved to the following board: "+forumBoardName, true, driver);
+		PageObjectLogging.log("moveThread", "thread moved to the following board: " + forumBoardName, true, driver);
 	}
 
 	public void closeThread(String reason) {
@@ -185,7 +184,7 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementByElement(removeThreadModalRemoveButton);
 		waitForElementClickableByElement(removeThreadModalRemoveButton);
 		scrollAndClick(removeThreadModalRemoveButton);
-		PageObjectLogging.log("closeThread", "closed thread with the following reason: "+reason, true, driver);
+		PageObjectLogging.log("closeThread", "closed thread with the following reason: " + reason, true, driver);
 	}
 
 	public void reopenThread() {
@@ -198,11 +197,11 @@ public class ForumThreadPageObject extends BasePageObject{
 		waitForElementByElement(movedThreadText);
 		waitForElementByBy(parentBoardField);
 		waitForTextToBePresentInElementByBy(parentBoardField, forumBoardName);
-		PageObjectLogging.log("verifyParentBoard", "verify that the parent board of current thread is the following: "+forumBoardName, true);
+		PageObjectLogging.log("verifyParentBoard", "verify that the parent board of current thread is the following: " + forumBoardName, true);
 	}
 
 	public ForumHistoryPageObject openHistory() {
-		getUrl(getCurrentUrl()+"?action=history");
+		getUrl(getCurrentUrl() + "?action=history");
 		PageObjectLogging.log("openHistory", "thread history page opened", true, driver);
 		return new ForumHistoryPageObject(driver);
 	}

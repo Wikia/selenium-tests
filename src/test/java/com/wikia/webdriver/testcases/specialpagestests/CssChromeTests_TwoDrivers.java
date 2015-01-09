@@ -1,12 +1,11 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.CssEditorContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate_TwoDrivers;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialCssPageObject;
+import org.testng.annotations.Test;
 
 public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 

@@ -1,22 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author Lukasz Jedrzejczak
  * @author Lukasz Nowak (Dyktus)
- *
  */
 
 public class CreateACustomMapComponentObject extends BasePageObject {
@@ -65,7 +63,7 @@ public class CreateACustomMapComponentObject extends BasePageObject {
 	public String getSelectedTemplateImageName(int selectedImageIndex) {
 		int imageNameIndex = templateList.get(selectedImageIndex).getAttribute("src").indexOf(beforeImageName);
 		String selectedTemplateImageName = templateList.get(selectedImageIndex).getAttribute("src").substring(imageNameIndex
-				+ beforeImageName.length());
+			+ beforeImageName.length());
 		return selectedTemplateImageName;
 	}
 

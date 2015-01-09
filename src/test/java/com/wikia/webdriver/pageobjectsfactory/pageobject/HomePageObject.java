@@ -1,10 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -13,20 +12,20 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki.CreateNewWikiPageObjectStep1;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HomePageObject extends WikiBasePageObject {
 
-	@FindBy(css="header.wikiahomepage-header a.button")
+	@FindBy(css = "header.wikiahomepage-header a.button")
 	private WebElement startWikiButton;
-	@FindBy(css=".hub > a")
+	@FindBy(css = ".hub > a")
 	private WebElement hubIndicator;
-	@FindBy(css=".preview-pane a.goVisit")
+	@FindBy(css = ".preview-pane a.goVisit")
 	private List<WebElement> visualizationWikis;
-	@FindBy(css="section.grid-1 nav")
+	@FindBy(css = "section.grid-1 nav")
 	private WebElement languageButton;
 
 	//These Bys are being used to prevent stale browser exception
@@ -35,14 +34,12 @@ public class HomePageObject extends WikiBasePageObject {
 
 	private String languageDropdownString = "nav.wikia-menu-button";
 
-	public HomePageObject(WebDriver driver)
-	{
+	public HomePageObject(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 
-	public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL)
-	{
+	public CreateNewWikiPageObjectStep1 startAWiki(String wikiURL) {
 		startWikiButton.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("form[name='label-wiki-form']")));
 		return new CreateNewWikiPageObjectStep1(driver);
@@ -50,6 +47,7 @@ public class HomePageObject extends WikiBasePageObject {
 
 	/**
 	 * getting current slot setup on visualization component
+	 *
 	 * @return
 	 */
 	public Map<String, Integer> getVisualizationWikisSetup() {
@@ -80,15 +78,15 @@ public class HomePageObject extends WikiBasePageObject {
 					throw new NoSuchElementException("Non-existing hub selected");
 			}
 			hubName = hubName.substring(2, hubName.length() - 2).replace(" ", "_"); //example: [ Video Games ] to Video_Games
-				if (hubName.equals(HubName.VIDEO_GAMES.toString().toLowerCase())) {
-					video += 1;
-				}
-				if (hubName.equals(HubName.ENTERTAINMENT.toString().toLowerCase())) {
-					entertainment += 1;
-				}
-				if (hubName.equals(HubName.LIFESTYLE.toString().toLowerCase())) {
-					lifestyle += 1;
-				}
+			if (hubName.equals(HubName.VIDEO_GAMES.toString().toLowerCase())) {
+				video += 1;
+			}
+			if (hubName.equals(HubName.ENTERTAINMENT.toString().toLowerCase())) {
+				entertainment += 1;
+			}
+			if (hubName.equals(HubName.LIFESTYLE.toString().toLowerCase())) {
+				lifestyle += 1;
+			}
 		}
 		visualizationSetup.put(HubName.VIDEO_GAMES.toString(), video);
 		visualizationSetup.put(HubName.ENTERTAINMENT.toString(), entertainment);
@@ -98,6 +96,7 @@ public class HomePageObject extends WikiBasePageObject {
 
 	/**
 	 * comparing desired slot setup with current visualization setup
+	 *
 	 * @param slotDesiredSetup
 	 * @param slotCurrentSetup
 	 */
@@ -144,7 +143,7 @@ public class HomePageObject extends WikiBasePageObject {
 		int numOfLanguages = getNumOfLanguages();
 		HomePageObject newHome;
 
-		for (int i=0; i<numOfLanguages; i++) {
+		for (int i = 0; i < numOfLanguages; i++) {
 			waitForValueToBePresentInElementsAttributeByCss(languageDropdownString, "class", "en");
 			String languageURL = getLanguageURL(i);
 
@@ -152,7 +151,7 @@ public class HomePageObject extends WikiBasePageObject {
 
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
 			// (and language dropDown)
-			if (!checkIfPageIsHub() ) {
+			if (!checkIfPageIsHub()) {
 				languageURL += URLsContent.WIKIA_DIR;
 
 				newHome.verifyLanguageButton();

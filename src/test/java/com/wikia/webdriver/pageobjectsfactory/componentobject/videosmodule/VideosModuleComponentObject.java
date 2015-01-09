@@ -1,12 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.videosmodule;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 
 import java.util.List;
 
@@ -15,14 +14,14 @@ import java.util.List;
  */
 public class VideosModuleComponentObject extends WikiBasePageObject {
 
-	@FindBy(css="#videosModule")
+	@FindBy(css = "#videosModule")
 	private WebElement videosModuleContainer;
-	@FindBy(css="#videosModule img")
+	@FindBy(css = "#videosModule img")
 	private List<WebElement> videos;
 	private static final int VIDEO_COUNT_MIN = 3;
 	private static final int VIDEO_COUNT_MAX = 5;
 
-	public VideosModuleComponentObject (WebDriver driver) {
+	public VideosModuleComponentObject(WebDriver driver) {
 		super(driver);
 	}
 

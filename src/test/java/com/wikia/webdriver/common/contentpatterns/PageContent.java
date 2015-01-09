@@ -17,8 +17,8 @@ public class PageContent {
 	public static final String ARTICLE_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 	public static final String ARTICLE_TEXT_EDIT = "Brand new content";
 	public static final String ARTICLE_TEXT_SECOND_EDIT =
-		"Ut enim ad minim veniam, quis nostrud exercitation "+
-		"ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+		"Ut enim ad minim veniam, quis nostrud exercitation " +
+			"ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 	public static final String COMMENT_TEXT = "Lorem ipsum dolor sit amet, comment";
 	public static final String COMMENT_TEXT2 = "QAComment";
 	public static final String COMMENT_TEXT_NON_LATIN = "QAComment 한국어 위키백과에 На Вама је да одлучите 佛教藝術";
@@ -27,13 +27,13 @@ public class PageContent {
 	public static final String REPLY_TEXT2 = "QAReply";
 	//articles with TOC
 	public static final String ARTICLE_WITH_TOC_LINES =
-			"==First Heading==\n"+
-			"text of the sub-heading number 2\n"+
-			"==Second heading==\n"+
-			"text of the second heading\n"+
-			"===sub-heading number 1===\n"+
-			"text of the sub-heading number 1\n"+
-			"===sub-heading number 2===\n"+
+		"==First Heading==\n" +
+			"text of the sub-heading number 2\n" +
+			"==Second heading==\n" +
+			"text of the second heading\n" +
+			"===sub-heading number 1===\n" +
+			"text of the sub-heading number 1\n" +
+			"===sub-heading number 2===\n" +
 			"text of the sub-heading number 2\n";
 	//blogs
 	public static final String BLOG_POST_NAME_PREFIX = "blogPost";
@@ -61,11 +61,11 @@ public class PageContent {
 	public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 
 	public static final String[] LIST_OF_FILES = {
-			"Image001.jpg","Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
-			"Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"
+		"Image001.jpg", "Image002.jpg", "Image003.jpg", "Image004.jpg", "Image005.jpg",
+		"Image006.jpg", "Image007.jpg", "Image008.jpg", "Image009.jpg", "Image010.jpg"
 	};
 	public static final String RESOURCES_PATH =
-			"." + File.separator + "src" + File.separator +
+		"." + File.separator + "src" + File.separator +
 			"test" + File.separator + "resources" + File.separator +
 			"ImagesForUploadTests" + File.separator;
 	//message wall

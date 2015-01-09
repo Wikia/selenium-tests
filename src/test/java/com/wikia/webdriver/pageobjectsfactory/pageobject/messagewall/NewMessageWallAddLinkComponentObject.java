@@ -1,20 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class NewMessageWallAddLinkComponentObject extends WikiBasePageObject {
 
-	@FindBy(css=".linkEditorDialog > div")
+	@FindBy(css = ".linkEditorDialog > div")
 	private WebElement addLinkModal;
 
 	private By targetBy = By.cssSelector(".linkEditorDialog > div tr:nth-child(2) input");
