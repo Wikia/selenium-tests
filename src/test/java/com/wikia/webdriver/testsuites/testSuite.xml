@@ -55,7 +55,6 @@
 			<class name="com.wikia.webdriver.testcases.adstests.TestAdsScreenshotComparison"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestAmazonAds"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestDfpParamsPresent"/>
-			<class name="com.wikia.webdriver.testcases.adstests.TestEvolveAds"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestHighValueCountries"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestIVW2AnalyticsProvider"/>
 			<class name="com.wikia.webdriver.testcases.adstests.TestKruxIntegration"/>
