@@ -18,6 +18,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 
 	final String cookieFromsearchName = "fromsearch";
 	final String cookieFromsearchValue = "1";
+	final String attributeNameSlot = "data-mon-slot";
 
 	@FindBy(css=".monetization-module")
 	private WebElement monetizationModuleContainer;
@@ -36,7 +37,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	@FindBy(css=".adsbygoogle")
 	private WebElement adsenseIns;
 
-	private By MonetizationModuleList = By.cssSelector(".monetization-module");
+	private By MonetizationModuleListBy = By.cssSelector(".monetization-module");
 
 	public MonetizationModuleComponentObject (WebDriver driver) {
 		super(driver);
@@ -75,9 +76,9 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	}
 
 	public void verifyMonetizationModuleSlot() {
-		List<WebElement> listWebElements = driver.findElements(MonetizationModuleList);
+		List<WebElement> listWebElements = driver.findElements(MonetizationModuleListBy);
 		for (WebElement elem : listWebElements) {
-			String slotName = elem.getAttribute("data-mon-slot");
+			String slotName = elem.getAttribute(attributeNameSlot);
 			switch (slotName) {
 				case "above_title":
 					verifyMonetizationModuleShownAboveTitle();
@@ -93,6 +94,9 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 					break;
 				case "above_footer":
 					verifyMonetizationModuleShownAboveFooter();
+					break;
+				default:
+					PageObjectLogging.log("verifyMonetizationModuleSlot", "Invalid slot name (Name: " + slotName + ")", true);
 					break;
 			}
 		}
