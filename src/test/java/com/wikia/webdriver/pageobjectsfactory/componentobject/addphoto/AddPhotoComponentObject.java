@@ -50,10 +50,10 @@ public class AddPhotoComponentObject extends BasePageObject{
 	public List<String> choosePhotos(int photoNum){
 		driver.findElement(galleryDialogPhotosList);
 		List photoNames = new ArrayList<String>();
-		List<WebElement> List = driver.findElements(galleryDialogPhotosList);
+		List<WebElement> list = driver.findElements(galleryDialogPhotosList);
 		for (int i = 0; i < photoNum; i++) {
-			scrollAndClick(List.get(i).findElement(By.cssSelector("[type=checkbox]")));
-			photoNames.add(List.get(i).getAttribute("title"));
+			scrollAndClick(list.get(i).findElement(By.cssSelector("[type=checkbox]")));
+			photoNames.add(list.get(i).getAttribute("title"));
 		}
 		PageObjectLogging.log("CheckGalleryImageInputs", "Check first " + photoNum
 				+ " image inputs", true, driver);

@@ -16,8 +16,8 @@ public class PurgeMethod extends HttpMethodBase {
 		setFollowRedirects(true);
 	}
 
-	public PurgeMethod(String URL) {
-		super(URL);
+	public PurgeMethod(String url) {
+		super(url);
 		setFollowRedirects(true);
 	}
 

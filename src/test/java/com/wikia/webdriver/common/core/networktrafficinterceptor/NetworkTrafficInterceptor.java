@@ -69,9 +69,9 @@ public class NetworkTrafficInterceptor extends ProxyServer {
 		});
 	}
 
-	public void setProxyServer(String IP) {
+	public void setProxyServer(String ip) {
 		Map<String, String> options = new HashMap<>();
-		options.put("httpProxy", IP);
+		options.put("httpProxy", ip);
 		setOptions(options);
 	}
 

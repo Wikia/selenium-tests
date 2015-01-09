@@ -36,8 +36,8 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		groups = {"VEGallery", "VEGalleryTests_001", "VEGalleryTests_005", "VEGalleryAdd"}
 	)
 	public void VEGalleryTests_001_AddGallery() {
-		final int NUM_OF_MEDIAS = 9;
-		final int NUM_OF_GALLERIES = 1;
+		int numOfMedias = 9;
+		int numOfGalleries = 1;
 
 		articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
@@ -47,9 +47,9 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 		VisualEditorInsertGalleryDialog galleryDialog =
 			(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
-		ve = galleryDialog.addExistingMedia(NUM_OF_MEDIAS);
-		ve.verifyGalleries(NUM_OF_GALLERIES);
-		ve.verifyMediasInGallery(NUM_OF_MEDIAS);
+		ve = galleryDialog.addExistingMedia(numOfMedias);
+		ve.verifyGalleries(numOfGalleries);
+		ve.verifyMediasInGallery(numOfMedias);
 		VisualEditorSaveChangesDialog saveChangesDialog = ve.clickPublishButton();
 		article = saveChangesDialog.savePage();
 		article.verifyVEPublishComplete();
@@ -59,11 +59,11 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 			groups = {"VEGallery", "VEGalleryTests_002", "VEGalleryCart"}
 	)
 	public void VEGalleryTests_002_GalleryCart() {
-		final int NUM_OF_MEDIA_TO_REMOVE_FIRST = 1;
-		final int NUM_OF_MEDIA_TO_REMOVE_SECOND = 2;
-		final int NUM_OF_MEDIA_TO_ADD = 2;
-		final int INITIAL_NUM_OF_MEDIA = 7;
-		int expectedNumOfMedia = INITIAL_NUM_OF_MEDIA;
+		int numOfMediaToRemoveFirst = 1;
+		int numOfMediaToRemoveSecond = 2;
+		int numOfMediaToAdd = 2;
+		int initialNumOfMedia = 7;
+		int expectedNumOfMedia = initialNumOfMedia;
 
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + article.getTimeStamp();
 		VisualEditorPageObject ve = article.openVEOnArticle(wikiURL, articleName);
@@ -73,21 +73,21 @@ public class VEGalleryTests extends NewTestTemplateBeforeClass {
 				(VisualEditorInsertGalleryDialog) ve.openDialogFromMenu(VisualEditorDataProvider.InsertDialog.GALLERY);
 		galleryDialog = galleryDialog.searchMedia("he");
 		//verify # of cart items  = 9
-		galleryDialog.addMediaToCart(INITIAL_NUM_OF_MEDIA);
+		galleryDialog.addMediaToCart(initialNumOfMedia);
 		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 		//verify # of cart items  = 8
-		galleryDialog.removeMediaFromCart(NUM_OF_MEDIA_TO_REMOVE_FIRST);
-		expectedNumOfMedia = expectedNumOfMedia - NUM_OF_MEDIA_TO_REMOVE_FIRST;
+		galleryDialog.removeMediaFromCart(numOfMediaToRemoveFirst);
+		expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveFirst;
 		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 		//verify # of cart item = 11
 		galleryDialog = galleryDialog.searchMedia("a");
-		galleryDialog.addMediaToCart(NUM_OF_MEDIA_TO_ADD);
-		expectedNumOfMedia = expectedNumOfMedia + NUM_OF_MEDIA_TO_ADD;
+		galleryDialog.addMediaToCart(numOfMediaToAdd);
+		expectedNumOfMedia = expectedNumOfMedia + numOfMediaToAdd;
 		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 		//verify # of cart item = 9
 		galleryDialog = galleryDialog.searchMedia("he");
-		galleryDialog.removeMediaFromCart(NUM_OF_MEDIA_TO_REMOVE_SECOND);
-		expectedNumOfMedia = expectedNumOfMedia - NUM_OF_MEDIA_TO_REMOVE_SECOND;
+		galleryDialog.removeMediaFromCart(numOfMediaToRemoveSecond);
+		expectedNumOfMedia = expectedNumOfMedia - numOfMediaToRemoveSecond;
 		galleryDialog.verifyNumOfCartItems(expectedNumOfMedia);
 	}
 

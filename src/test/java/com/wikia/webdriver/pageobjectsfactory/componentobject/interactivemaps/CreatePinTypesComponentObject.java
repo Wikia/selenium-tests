@@ -95,7 +95,7 @@ public class CreatePinTypesComponentObject extends BasePageObject {
 	}
 
 	public void typeManyPinTypeTitle(String pinTypeName, int amountFields) {
-		for (Integer $i = 0; $i < amountFields; $i++) {
+		for (Integer i = 0; i < amountFields; i++) {
 			clickAddAnotherPinType();
 			waitForElementByElement(pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1));
 			pinTypeTitleInputs.get(pinTypeTitleInputs.size() - 1).sendKeys(pinTypeName);

@@ -35,11 +35,11 @@ public class TestHighValueCountries extends NewTestTemplate {
 		Object[] variableKeysFromCommunity = wikiFactory.getVariableDefaultValueKeys(
 			WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES
 		);
-		String wgHVC_JSConsole = instantGlobalsPrefix + WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES.toString();
-		Object[] wgHVC_valueInConsole = wikiFactory.getWgVariableKeysFromPage(testedWiki, wgHVC_JSConsole);
+		String wgHVCJSConsole = instantGlobalsPrefix + WikiFactoryVariables.WG_HIGH_VALUE_COUNTRIES.toString();
+		Object[] wgHVCValueInConsole = wikiFactory.getWgVariableKeysFromPage(testedWiki, wgHVCJSConsole);
 
 		wikiFactory.verifyWgVariableValuesTheSame(
-			wgHVC_valueInConsole, variableKeysFromCommunity
+			wgHVCValueInConsole, variableKeysFromCommunity
 		);
 	}
 }

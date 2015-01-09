@@ -56,12 +56,12 @@ public class VetOptionsComponentObject extends AddMediaModalComponentObject {
 		PageObjectLogging.log("setCaption", "caption was set to: "+caption, true);
 	}
 
-	public void adjustWith(int Width) {
-		String width = Integer.toString(Width);
+	public void adjustWith(int width) {
+		String widthString = Integer.toString(width);
 		waitForElementByElement(widthInputField);
 		widthInputField.clear();
-		widthInputField.sendKeys(width);
-		PageObjectLogging.log("adjustWith", "width set to: "+Width,  true, driver);
+		widthInputField.sendKeys(widthString);
+		PageObjectLogging.log("adjustWith", "width set to: " + width,  true, driver);
 	}
 
 	private void clickAddaVideo() {

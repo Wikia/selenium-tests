@@ -35,13 +35,13 @@ public class EmbedMapTests extends NewTestTemplate {
 		selectedMap.verifyMapOpened();
 		String wikiEmbedCode = selectedMap.getEmbedMapWikiCode();
 		String mapID = selectedMap.getEmbedMapID();
-		WikiArticleEditMode EditMode = selectedMap.openEmbedMapPageEdit(wikiURL);
-		EditMode.clickSourceButton();
-		EditMode.clearSource();
-		EditMode.verifySourceEditorContentIsEmpty();
-		EditMode.typeContentInSourceMode(wikiEmbedCode);
-		EditMode.clickOnPublish();
-		EditMode.verifyEmbededMap(mapID);
+		WikiArticleEditMode editMode = selectedMap.openEmbedMapPageEdit(wikiURL);
+		editMode.clickSourceButton();
+		editMode.clearSource();
+		editMode.verifySourceEditorContentIsEmpty();
+		editMode.typeContentInSourceMode(wikiEmbedCode);
+		editMode.clickOnPublish();
+		editMode.verifyEmbededMap(mapID);
 	}
 
 	@Test(groups = { "EmbedMapTests_002", "EmbedMapTests", "InteractiveMaps" })
