@@ -90,8 +90,8 @@ public class LightboxTests extends NewTestTemplate {
 //		new TouchActions((WebDriver)mobileDriver).singleTap(element);
 		mobileDriver.context("NATIVE_APP");
 
-//		mobileDriver.tap(1, 100, poz+15, 500);
-		mobileDriver.tap(1, 100, 2100, 500);
+		mobileDriver.tap(1, 100, poz+15, 500);
+//		mobileDriver.tap(1, 100, 2100, 500);
 //		mobileDriver.zoom(x, y*2+100);
 //		mobileDriver.swipe(0, poz, 0, 212, 1707);
 //		mobileDriver.scrollTo("Top Contributors");
