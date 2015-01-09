@@ -52,15 +52,20 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
 
+	/**
+	 * Open dropdown - we need to move mouse outside the element
+	 * and move back to element to trigger the event
+	 * @return
+	 */
 	public DropDownComponentObject openDropDown() {
-		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 		try {
-			new WebDriverWait(driver, 15, 3000).until(new ExpectedCondition<Boolean>() {
+			new WebDriverWait(driver, 14, 2000).until(new ExpectedCondition<Boolean>() {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
+					new Actions(driver).moveToElement(loginDropdownTrigger).perform();
 					if (!loginDropdown.isDisplayed()) {
-						new Actions(driver).moveToElement(loginDropdownTrigger).perform();
-
+							loginDropdownTrigger.click();
 						return false;
 					}
 					return true;

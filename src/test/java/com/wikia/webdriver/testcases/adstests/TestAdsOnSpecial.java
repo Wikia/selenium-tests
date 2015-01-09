@@ -1,0 +1,51 @@
+package com.wikia.webdriver.testcases.adstests;
+
+import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
+import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
+import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsBaseObject;
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
+
+/**
+ * @link https://www.google.com/dfp/5441#delivery/LineItemDetail/lineItemId=126608052
+ * @author Sergey Naumov
+ * @ownership AdEngineering
+ */
+@Test (
+	groups={"Ads_Special_Pages", "Ads"}
+)
+public class TestAdsOnSpecial extends NewTestTemplate {
+
+	@Test (
+		groups={"TestAdsOnSpecialPages_GeoEdgeFree"},
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="specialPages"
+	)
+	public void TestAdsOnSpecialPages_GeoEdgeFree(String wikiName, String article, String lineItemId, String adUnit, String leaderboardSlot, String prefooterSlot) throws Exception {
+		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+		AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+
+		ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
+		ads.verifyGptAdInSlot(leaderboardSlot, "gpt", lineItemId, "");
+		ads.verifyGptIframe(adUnit, prefooterSlot, "gpt");
+		ads.verifyGptAdInSlot(prefooterSlot, "gpt", lineItemId, "");
+	}
+
+	@Test (
+		groups={"TestAdsOnFilePages_GeoEdgeFree"},
+		dataProviderClass=AdsDataProvider.class,
+		dataProvider="filePages"
+	)
+	public void TestAdsOnFilePages_GeoEdgeFree(String wikiName, String article, String lineItemId, String adUnit, String leaderboardSlot, String prefooterSlot) throws Exception {
+		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
+		AdsBaseObject ads = new AdsBaseObject(driver, testedPage);
+
+		ads.verifyGptIframe(adUnit, leaderboardSlot, "gpt");
+		ads.verifyGptAdInSlot(leaderboardSlot, "gpt", lineItemId, "");
+		ads.verifyGptIframe(adUnit, prefooterSlot, "gpt");
+		ads.verifyGptAdInSlot(prefooterSlot, "gpt", lineItemId, "");
+	}
+
+
+}
