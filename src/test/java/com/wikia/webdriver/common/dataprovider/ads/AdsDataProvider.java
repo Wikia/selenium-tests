@@ -300,9 +300,4 @@ public class AdsDataProvider {
 			}
 		};
 	}
-
-	@DataProvider
-	public static final Object[][] evolveTestPage() {
-		return new Object[][]{{"adtest", "Evolve"}};
-	}
 }
