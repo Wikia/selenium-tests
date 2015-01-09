@@ -1,24 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 
+import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
+import org.openqa.selenium.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-
-import com.wikia.webdriver.common.core.networktrafficinterceptor.NetworkTrafficInterceptor;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.helpers.AdsComparison;
-
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AdsGermanObject extends AdsBaseObject {
@@ -48,13 +40,13 @@ public class AdsGermanObject extends AdsBaseObject {
 	private List<Map<String, Object>> combinations = new ArrayList<>();
 
 	private void setSlots() {
-		Map<String,Object> billboardMap = new HashMap<String, Object>();
-		Map<String,Object> fireplaceMap = new HashMap<String, Object>();
-		Map<String,Object> flashtalkingMap = new HashMap<String, Object>();
-		Map<String,Object> wpInternMap = new HashMap<String, Object>();
-		Map<String,Object> leaderboardMap = new HashMap<String, Object>();
-		Map<String,Object> medrecMap = new HashMap<String, Object>();
-		Map<String,Object> prefooterMap = new HashMap<String, Object>();
+		Map<String, Object> billboardMap = new HashMap<String, Object>();
+		Map<String, Object> fireplaceMap = new HashMap<String, Object>();
+		Map<String, Object> flashtalkingMap = new HashMap<String, Object>();
+		Map<String, Object> wpInternMap = new HashMap<String, Object>();
+		Map<String, Object> leaderboardMap = new HashMap<String, Object>();
+		Map<String, Object> medrecMap = new HashMap<String, Object>();
+		Map<String, Object> prefooterMap = new HashMap<String, Object>();
 
 		List<String> billboard = new ArrayList<String>();
 		List<String> fireplace = new ArrayList<String>();
@@ -106,8 +98,8 @@ public class AdsGermanObject extends AdsBaseObject {
 	public void verify71MediaAdsPresent() {
 		AdsComparison adsComparison = new AdsComparison();
 
-		for (Map<String,Object> combination: combinations) {
-			List<String> combinationSlots = (List)combination.get("slots");
+		for (Map<String, Object> combination : combinations) {
+			List<String> combinationSlots = (List) combination.get("slots");
 			if (checkIfCombinationOnPage(combinationSlots)) {
 				PageObjectLogging.log(
 					"Combination present",
@@ -119,9 +111,9 @@ public class AdsGermanObject extends AdsBaseObject {
 					WebElement slot = driver.findElement(By.cssSelector(slotSelector));
 					if (hasSkin(slot, slotSelector) || adsComparison.isAdVisible(slot, slotSelector, driver)) {
 						PageObjectLogging.log(
-								"Ad in slot found",
-								"Ad in slot found; CSS: " + slotSelector,
-								true
+							"Ad in slot found",
+							"Ad in slot found; CSS: " + slotSelector,
+							true
 						);
 					} else {
 						throw new NoSuchElementException("Ad in slot not found; CSS: " + slotSelector);
@@ -136,8 +128,8 @@ public class AdsGermanObject extends AdsBaseObject {
 
 	public void verifyNo71MediaAds() {
 		PageObjectLogging.log("PageOpened", "Page opened", true, driver);
-		for (Map<String,Object> combination: combinations) {
-			List<String> combinationSlots = (List)combination.get("slots");
+		for (Map<String, Object> combination : combinations) {
+			List<String> combinationSlots = (List) combination.get("slots");
 			if (!checkIfCombinationOnPage(combinationSlots)) {
 				PageObjectLogging.log(
 					"Combination not present",
@@ -145,7 +137,7 @@ public class AdsGermanObject extends AdsBaseObject {
 					true
 				);
 			} else {
-				for (String elementSelector: combinationSlots) {
+				for (String elementSelector : combinationSlots) {
 					WebElement combinationElement = driver.findElement(By.cssSelector(elementSelector));
 					if (combinationElement.isDisplayed()) {
 						PageObjectLogging.log(
@@ -164,9 +156,9 @@ public class AdsGermanObject extends AdsBaseObject {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String script = "return $(arguments[0]).find('iframe, object, img').filter(':visible').length;";
 
-		for (String elementSelector: combination) {
+		for (String elementSelector : combination) {
 			if (checkIfElementOnPage(elementSelector)) {
-				if ((Long)js.executeScript(script, elementSelector) < 1) {
+				if ((Long) js.executeScript(script, elementSelector) < 1) {
 					return false;
 				}
 			} else {

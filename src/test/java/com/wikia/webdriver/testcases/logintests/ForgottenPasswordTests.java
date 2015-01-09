@@ -1,24 +1,22 @@
 package com.wikia.webdriver.testcases.logintests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject.DropDownComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
+import org.testng.annotations.Test;
 
 
 /**
  * @author Bogna 'bognix' Knychala
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class ForgottenPasswordTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "ForgottenPassword_001", "ForgottenPassword"})
+	@Test(groups = {"ForgottenPassword_001", "ForgottenPassword"})
 	public void ForgottenPassword_001_dropdown() {
 		String userName = credentials.userNameForgottenPassword;
 
@@ -27,7 +25,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 		DropDownComponentObject dropdown = new DropDownComponentObject(driver);
 		dropdown.openDropDown();
 		dropdown.remindPassword(userName, credentials.apiToken);
-		
+
 		dropdown.verifyMessageAboutNewPassword(userName);
 		String newPassword = dropdown.receiveMailWithNewPassowrd(credentials.email, credentials.emailPassword);
 		dropdown.openDropDown();
@@ -43,7 +41,7 @@ public class ForgottenPasswordTests extends NewTestTemplate {
 	}
 
 	@Test(
-			groups = { "ForgottenPassword_002", "ForgottenPassword"}
+		groups = {"ForgottenPassword_002", "ForgottenPassword"}
 	)
 	public void ForgottenPassword_002_specialPage() {
 		String userName = credentials.userNameForgottenPassword2;

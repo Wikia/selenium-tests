@@ -1,13 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mobile;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
 
 public class MobileHistoryPageObject extends MobileBasePageObject {
 
@@ -15,12 +14,12 @@ public class MobileHistoryPageObject extends MobileBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.mw-tag-markers")
+	@FindBy(css = "#pagehistory > li.mw-tag-mobileedit > span.mw-tag-markers")
 	private List<WebElement> editHistoriesDevice;
-	@FindBy(css="#pagehistory > li.mw-tag-mobileedit > span.comment")
+	@FindBy(css = "#pagehistory > li.mw-tag-mobileedit > span.comment")
 	private List<WebElement> editHistoriesSummary;
 
-	private String getHeader(){
+	private String getHeader() {
 		return selectedPageHeader.getText();
 	}
 

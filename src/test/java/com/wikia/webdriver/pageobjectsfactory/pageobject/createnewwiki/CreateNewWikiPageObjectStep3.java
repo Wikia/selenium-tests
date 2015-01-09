@@ -1,28 +1,25 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-
 
 /**
- *
  * @author Karol
- *
  */
-public class CreateNewWikiPageObjectStep3 extends BasePageObject{
+public class CreateNewWikiPageObjectStep3 extends BasePageObject {
 
 	private static final String DATA_THEME_LIST = "li[data-theme]";
 	private By loadingIndicatorBy = By.cssSelector(".wikiaThrobber");
 	private String themeLocator = "li[data-theme='%name%']";
 
-	@FindBy(css="li[id='ThemeWiki'] input[class='next enabled']")
+	@FindBy(css = "li[id='ThemeWiki'] input[class='next enabled']")
 	private WebElement submitButton;
 
 	public CreateNewWikiPageObjectStep3(WebDriver driver) {
@@ -37,10 +34,9 @@ public class CreateNewWikiPageObjectStep3 extends BasePageObject{
 		PageObjectLogging.log("selectTheme", "skin " + name + " selected", true, driver);
 	}
 
-	public void selectTheme(int skinNumber)
-	{
+	public void selectTheme(int skinNumber) {
 		waitForElementByCss(DATA_THEME_LIST);
-		jQueryClick("li[data-theme]:nth-child("+skinNumber+")");
+		jQueryClick("li[data-theme]:nth-child(" + skinNumber + ")");
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {

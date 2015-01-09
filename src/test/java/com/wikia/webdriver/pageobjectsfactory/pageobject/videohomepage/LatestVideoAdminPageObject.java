@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class LatestVideoAdminPageObject extends WikiBasePageObject {
 
-	@FindBy(css=".left-menu-tabs a[title=Featured]")
+	@FindBy(css = ".left-menu-tabs a[title=Featured]")
 	private WebElement featuredTab;
 
 	public LatestVideoAdminPageObject(WebDriver driver) {

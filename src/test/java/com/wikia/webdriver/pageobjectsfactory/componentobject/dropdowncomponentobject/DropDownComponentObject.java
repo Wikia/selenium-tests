@@ -1,53 +1,51 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.dropdowncomponentobject;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class DropDownComponentObject extends WikiBasePageObject {
 
 	public DropDownComponentObject(WebDriver driver) {
-			super(driver);
+		super(driver);
 	}
 
-	@FindBy (css=".ajaxLogin")
+	@FindBy(css = ".ajaxLogin")
 	private WebElement loginDropdownTrigger;
-	@FindBy (css="#UserLoginDropdown")
+	@FindBy(css = "#UserLoginDropdown")
 	private WebElement loginDropdown;
-	@FindBy (css="#UserLoginDropdown input[name='username']")
+	@FindBy(css = "#UserLoginDropdown input[name='username']")
 	private WebElement formUsernameInput;
-	@FindBy (css="#UserLoginDropdown input[name='password']")
+	@FindBy(css = "#UserLoginDropdown input[name='password']")
 	private WebElement formPassowrdInput;
-	@FindBy (css="#UserLoginDropdown input[type='submit']")
+	@FindBy(css = "#UserLoginDropdown input[type='submit']")
 	private WebElement formSubmitButton;
-	@FindBy (css="#UserLoginDropdown .forgot-password")
+	@FindBy(css = "#UserLoginDropdown .forgot-password")
 	private WebElement formForgotPasswordLink;
-	@FindBy (css="#UserLoginDropdown .wikia-button-facebook")
+	@FindBy(css = "#UserLoginDropdown .wikia-button-facebook")
 	private WebElement formConnectWithFbButton;
-	@FindBy (css="#facebook #email")
+	@FindBy(css = "#facebook #email")
 	private WebElement facebookEmailInput;
-	@FindBy (css="#facebook #pass")
+	@FindBy(css = "#facebook #pass")
 	private WebElement facebookPasswordInput;
-	@FindBy (css="#facebook input[name='login']")
+	@FindBy(css = "#facebook input[name='login']")
 	private WebElement facebookSubmitButton;
-	@FindBy (css="#UserLoginDropdown .error-msg")
+	@FindBy(css = "#UserLoginDropdown .error-msg")
 	private WebElement messagePlaceholder;
 	@FindBy(css = "a.ajaxRegister")
 	private WebElement signUpLink;
@@ -55,6 +53,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	/**
 	 * Open dropdown - we need to move mouse outside the element
 	 * and move back to element to trigger the event
+	 *
 	 * @return
 	 */
 	public DropDownComponentObject openDropDown() {
@@ -65,13 +64,13 @@ public class DropDownComponentObject extends WikiBasePageObject {
 				public Boolean apply(WebDriver webDriver) {
 					new Actions(driver).moveToElement(loginDropdownTrigger).perform();
 					if (!loginDropdown.isDisplayed()) {
-							loginDropdownTrigger.click();
+						loginDropdownTrigger.click();
 						return false;
 					}
 					return true;
 				}
 			});
-		}finally {
+		} finally {
 			restoreDeaultImplicitWait();
 		}
 
@@ -86,8 +85,8 @@ public class DropDownComponentObject extends WikiBasePageObject {
 
 	public void remindPassword(String userName, String apiToken) {
 		Assertion.assertEquals(
-				ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
-				resetForgotPasswordTime(userName, apiToken));
+			ApiActions.API_ACTION_FORGOT_PASSWORD_RESPONSE,
+			resetForgotPasswordTime(userName, apiToken));
 		fillUserNameInput(userName);
 		waitForElementByElement(formForgotPasswordLink);
 		scrollAndClick(formForgotPasswordLink);

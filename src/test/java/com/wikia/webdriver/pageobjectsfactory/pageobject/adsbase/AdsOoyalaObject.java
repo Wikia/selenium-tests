@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @ownership AdEngineering
  */
 public class AdsOoyalaObject extends AdsBaseObject {
-	@FindBy(css="object[data^='http://player.ooyala.com/player.swf']")
+	@FindBy(css = "object[data^='http://player.ooyala.com/player.swf']")
 	private WebElement lightbox;
 
 	public AdsOoyalaObject(WebDriver driver, String page) {

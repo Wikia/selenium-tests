@@ -1,21 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class NewMessageWallCloseRemoveThreadPageObject extends WikiBasePageObject {
 
-	@FindBy(css=".wall-action-reason")
+	@FindBy(css = ".wall-action-reason")
 	private WebElement removeReasonField;
-	@FindBy(css="#WikiaConfirmOk")
+	@FindBy(css = "#WikiaConfirmOk")
 	private WebElement removeConfirmButton;
 
 	public NewMessageWallCloseRemoveThreadPageObject(WebDriver driver) {

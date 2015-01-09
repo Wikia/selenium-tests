@@ -1,12 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
+import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +12,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class WamPageObject extends BasePageObject {
 
@@ -72,17 +67,16 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Checks if given tab has an anchor with "selected" class
-	 *
 	 * @param tab WamTab enum
+	 * @desc Checks if given tab has an anchor with "selected" class
 	 */
 	public void verifyTabIsSelected(WamTab tab) {
 		WebElement wamTab = driver.findElement(By.cssSelector(String.format(WAM_TAB_CSS_SELECTOR_FORMAT, tab.getId())));
 		PageObjectLogging.log("verifyTabIsSelected", "tab with index " + tab.getId() + " exist", true);
 
-		if (wamTab.getAttribute("class").contains("icon-vertical-selected")){
+		if (wamTab.getAttribute("class").contains("icon-vertical-selected")) {
 			PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's selected", true);
-		}else{
+		} else {
 			PageObjectLogging.log("verifyTabIsSelected", "the tab's anchor's NOT selected", false);
 		}
 	}
@@ -110,8 +104,8 @@ public class WamPageObject extends BasePageObject {
 	}
 
 	/**
-	 * @desc Checks if there are as many rows in the WAM index table as we expect
 	 * @param expectedRowsNo the number of expecting table rows
+	 * @desc Checks if there are as many rows in the WAM index table as we expect
 	 */
 	public void verifyWamIndexHasExactRowsNo(int expectedRowsNo) {
 		waitForElementByBy(WAM_INDEX_TABLE);
@@ -160,7 +154,7 @@ public class WamPageObject extends BasePageObject {
 		waitForElementByBy(WAM_INDEX_TABLE);
 		String selectedValue = tabSelected.getAttribute("data-vertical-id");
 
-		for (int i =1; i<wamIndexRows.size(); ++i) {
+		for (int i = 1; i < wamIndexRows.size(); ++i) {
 			Assertion.assertEquals(wamIndexRows.get(i).getAttribute("data-vertical-id"), selectedValue);
 		}
 	}
@@ -237,9 +231,9 @@ public class WamPageObject extends BasePageObject {
 		// first day of the current month
 		WebElement firstDay = (WebElement) js.executeScript(
 			"return $(arguments[0]).find('.ui-state-default:not(.ui-priority-secondary):nth(0)')[0]",
-		 	calendarElement
-		 );
-		 firstDay.click();
+			calendarElement
+		);
+		firstDay.click();
 
 		String year = getFormattedDate(date, "YYYY");
 
@@ -268,6 +262,6 @@ public class WamPageObject extends BasePageObject {
 
 	private String getFormattedDate(Date date, String format) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
-	    return dateFormat.format(date);
+		return dateFormat.format(date);
 	}
 }

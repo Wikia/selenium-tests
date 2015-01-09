@@ -1,17 +1,15 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class SpecialManageWikiaHome extends WikiBasePageObject {
 
@@ -28,6 +26,7 @@ public class SpecialManageWikiaHome extends WikiBasePageObject {
 
 	/**
 	 * getting desired slot setup from http://corp.wikia.com/wiki/Special:ManageWikiaHome page
+	 *
 	 * @return
 	 */
 	public Map<String, Integer> getSlotSetup() {

@@ -1,40 +1,38 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 public class SpecialPromotePageObject extends BasePageObject {
 
-	@FindBy(css="#curMainImageName")
+	@FindBy(css = "#curMainImageName")
 	protected WebElement thumbnailImage;
-	@FindBy(css=".description-wrapper textarea")
+	@FindBy(css = ".description-wrapper textarea")
 	protected WebElement wikiaDescription;
-	@FindBy(css=".headline-wrapper input")
+	@FindBy(css = ".headline-wrapper input")
 	protected WebElement wikiaHeadline;
-	@FindBy(css=".wikia-button.upload-button")
+	@FindBy(css = ".wikia-button.upload-button")
 	protected WebElement addPhotoButton;
-	@FindBy(css=".modify-remove.show")
+	@FindBy(css = ".modify-remove.show")
 	protected WebElement modifyThumbnailButton;
-	@FindBy(css=".button.normal.primary")
+	@FindBy(css = ".button.normal.primary")
 	protected WebElement submitButton;
-	@FindBy(css=".button.big")
+	@FindBy(css = ".button.big")
 	protected WebElement publishButton;
-	@FindBy(css="input[name='wpUploadFile']")
+	@FindBy(css = "input[name='wpUploadFile']")
 	protected WebElement uploadFileInput;
 
 
@@ -43,7 +41,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void clickPublishButton(){
+	public void clickPublishButton() {
 		waitForElementByElement(publishButton);
 		scrollAndClick(publishButton);
 		PageObjectLogging.log("clickPublishButton", "publish button click", true);
@@ -55,7 +53,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 		return thumbnailImage.getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
 	}
 
-	public void modifyThumnailImage(String file){
+	public void modifyThumnailImage(String file) {
 		waitForElementByElement(thumbnailImage);
 		scrollAndClick(thumbnailImage);
 		waitForElementByElement(modifyThumbnailButton);
@@ -63,14 +61,14 @@ public class SpecialPromotePageObject extends BasePageObject {
 		waitForElementByElement(uploadFileInput);
 		uploadFileInput.sendKeys(
 			getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
-			);
+		);
 		PageObjectLogging.log(
 			"modifyThumnailImage",
 			"file " + file + " added to upload",
 			true);
 	}
 
-	public void typeIntoHeadline(String text){
+	public void typeIntoHeadline(String text) {
 		waitForElementByElement(wikiaHeadline);
 		wikiaHeadline.clear();
 		wikiaHeadline.sendKeys(text);
@@ -80,7 +78,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 			true);
 	}
 
-	public void typeIntoDescription(String text){
+	public void typeIntoDescription(String text) {
 		waitForElementByElement(wikiaDescription);
 		wikiaDescription.clear();
 		wikiaDescription.sendKeys(text);
@@ -90,13 +88,13 @@ public class SpecialPromotePageObject extends BasePageObject {
 			true);
 	}
 
-	public void uploadThumbnailImage(String file){
+	public void uploadThumbnailImage(String file) {
 		waitForElementByElement(addPhotoButton);
 		scrollAndClick(addPhotoButton);
 		waitForElementByElement(uploadFileInput);
 		uploadFileInput.sendKeys(
 			getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
-			);
+		);
 		PageObjectLogging.log(
 			"uploadThumbnailImage",
 			"file " + file + " added to upload",
@@ -108,8 +106,8 @@ public class SpecialPromotePageObject extends BasePageObject {
 	public void verifyCrossWikiSearchDescription(String firstDescription) {
 		waitForElementByElement(wikiaDescription);
 		Assertion.assertStringContains(
-				firstDescription.substring(0,
-				firstDescription.length()-3), wikiaDescription.getText()
+			firstDescription.substring(0,
+				firstDescription.length() - 3), wikiaDescription.getText()
 		);
 	}
 
@@ -137,14 +135,14 @@ public class SpecialPromotePageObject extends BasePageObject {
 	public File getUploadedImage() {
 		waitForElementByElement(thumbnailImage);
 		File uploadedImageFile = new File(PageContent.RESOURCES_PATH + "shouldBeDeleted.png");
-        try {
-        	URL url = new URL(thumbnailImage.getAttribute("src"));
-        	BufferedImage bufImgOne = ImageIO.read(url);
-        	ImageIO.write(bufImgOne, "png", uploadedImageFile);
-        } catch (IOException e) {
+		try {
+			URL url = new URL(thumbnailImage.getAttribute("src"));
+			BufferedImage bufImgOne = ImageIO.read(url);
+			ImageIO.write(bufImgOne, "png", uploadedImageFile);
+		} catch (IOException e) {
 			throw new RuntimeException();
 		}
-        return uploadedImageFile;
+		return uploadedImageFile;
 	}
 
 }

@@ -30,13 +30,13 @@ public class MobileDriversRegistry {
 			String knownVersions = "";
 			Iterator itr = devicesRegistry.keySet().iterator();
 			while (itr.hasNext()) {
-				knownVersions += itr.next().toString() +  ", " ;
+				knownVersions += itr.next().toString() + ", ";
 			}
 			throw new RuntimeException(
 				String.format(
 					"We don't have any device for provided version.\n" +
-					"Please make sure device with provided version is present in mobile-config.xml file.\n" +
-					"Provided version: %s, Known versions: %s",
+						"Please make sure device with provided version is present in mobile-config.xml file.\n" +
+						"Provided version: %s, Known versions: %s",
 					version,
 					knownVersions
 				)
@@ -56,8 +56,8 @@ public class MobileDriversRegistry {
 			mobilePlatform.toLowerCase()
 		).get(0);
 		List devicesForPlatform = platformNode.getChildren();
-		for (int i=0; i<devicesForPlatform.size(); i++) {
-			ConfigurationNode node = (ConfigurationNode)devicesForPlatform.get(i);
+		for (int i = 0; i < devicesForPlatform.size(); i++) {
+			ConfigurationNode node = (ConfigurationNode) devicesForPlatform.get(i);
 			String version = getAttributeValue("platform-version", node);
 			String uuid = getAttributeValue("uuid", node);
 			appendToDevicesList(version, uuid);
@@ -65,7 +65,7 @@ public class MobileDriversRegistry {
 	}
 
 	private String getAttributeValue(String attributeName, ConfigurationNode node) {
-		for (int i=0; i<node.getAttributeCount(); i++) {
+		for (int i = 0; i < node.getAttributeCount(); i++) {
 			if (node.getAttribute(i).getName().equalsIgnoreCase(attributeName)) {
 				return (String) node.getAttribute(i).getValue();
 			}

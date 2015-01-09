@@ -1,33 +1,30 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.createnewwiki;
 
+import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import com.wikia.webdriver.common.contentpatterns.CreateWikiMessages;
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
-
 /**
- *
  * @author Karol
- *
  */
 
-public class CreateNewWikiPageObjectStep2 extends BasePageObject{
+public class CreateNewWikiPageObjectStep2 extends BasePageObject {
 
-	@FindBy(css="textarea#Description")
+	@FindBy(css = "textarea#Description")
 	private WebElement descriptionField;
-	@FindBy(css="select[name='wiki-vertical']")
+	@FindBy(css = "select[name='wiki-vertical']")
 	private WebElement wikiCategory;
-	@FindBy(css="form[name='desc-form'] input[class='next']")
+	@FindBy(css = "form[name='desc-form'] input[class='next']")
 	private WebElement submitButton;
 	@FindBy(name = "all-ages")
 	private WebElement allAgesCheckBox;
-	@FindBy(css="#DescWiki .submit-error.error-msg")
+	@FindBy(css = "#DescWiki .submit-error.error-msg")
 	private WebElement categoryErrorMsg;
 
 	public CreateNewWikiPageObjectStep2(WebDriver driver) {
@@ -35,8 +32,7 @@ public class CreateNewWikiPageObjectStep2 extends BasePageObject{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void describeYourTopic(String description)
-	{
+	public void describeYourTopic(String description) {
 		waitForElementByElement(descriptionField);
 		descriptionField.sendKeys(description);
 		PageObjectLogging.log("describeYourTopic", "describe your topic populated with: " + description, true);

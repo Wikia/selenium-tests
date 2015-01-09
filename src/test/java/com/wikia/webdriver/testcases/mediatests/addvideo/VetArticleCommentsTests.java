@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.mediatests.addvideo;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -14,10 +12,10 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoCom
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class VetArticleCommentsTests extends NewTestTemplate {
 

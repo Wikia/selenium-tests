@@ -47,7 +47,7 @@ public class MobileAdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] articlesWithTopLeaderboard() {
-		return new Object[][] {
+		return new Object[][]{
 			{"elderscrolls", "Skyrim"},
 			{"it.creepypastaitalia", "Slenderman"},
 			{"ja.gundam", "%E3%82%AC%E3%83%B3%E3%83%80%E3%83%9A%E3%83%87%E3%82%A3%E3%82%A2"},
@@ -63,7 +63,7 @@ public class MobileAdsDataProvider {
 
 	@DataProvider
 	public static final Object[][] dfpParams() {
-		return new Object[][] {
+		return new Object[][]{
 			{
 				"adtest",
 				"SyntheticTests/DfpParams",

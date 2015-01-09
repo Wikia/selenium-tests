@@ -4,14 +4,13 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special.licensedvideos
  * Created by kenkouot on 3/19/14.
  */
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialPageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LicensedVideoSwapPageObject extends SpecialPageObject {
 
@@ -56,7 +55,7 @@ public class LicensedVideoSwapPageObject extends SpecialPageObject {
 		waitForElementByElement(firstSwapButton);
 		scrollAndClick(firstSwapButton);
 
-		waitForTextToBePresentInElementByElement(swapCount,  String.valueOf(initialCount-1));
+		waitForTextToBePresentInElementByElement(swapCount, String.valueOf(initialCount - 1));
 
 		PageObjectLogging.log("verifyClickSwap", "Swap button has been clicked", true);
 	}

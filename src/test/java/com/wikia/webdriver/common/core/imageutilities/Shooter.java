@@ -1,14 +1,9 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
+import org.openqa.selenium.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
-
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Class responsible for taking and saving screenshots
@@ -35,8 +30,8 @@ public class Shooter {
 	 * Create a screenshot of passed element
 	 * and save screenshot as image file in temp dir
 	 *
-	 * @param element     - WebElement you want to capture
-	 * @param driver      - instace of WebDriver
+	 * @param element - WebElement you want to capture
+	 * @param driver  - instace of WebDriver
 	 * @return File path  - file's handler which was saved in given path
 	 */
 	public File captureWebElement(WebElement element, WebDriver driver) {

@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.interactivemapstests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -11,6 +9,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps.Te
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapsPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author: Rodrigo Molinero Gomez
@@ -23,7 +22,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
-	@Test(groups = { "NonSpecificMapTests_001", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_001", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_001_ClickMapAndVerifyCorrectRedirect() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -36,7 +35,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		selectedMap.verifyCreatedMapTitle(mapTitle);
 	}
 
-	@Test(groups = { "NonSpecificMapTests_002", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_002", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_002_VerifyLoginModalWhenAnon() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logOut(wikiURL);
@@ -45,7 +44,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		map.verifyLoginModal();
 	}
 
-	@Test(groups = { "NonSpecificMapTests_003", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_003", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_003_VerifyTemplateSearch() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -59,7 +58,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		customMapDialog.verifyTemplateListElementVisible(0);
 	}
 
-	@Test(groups = { "NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_004", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_004_VerifyMapZoomOptions() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -70,7 +69,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		selectedMap.clickZoomInButton();
 	}
 
-	@Test(groups = { "NonSpecificMapTests_005", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_005", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_005_VerifyMapListElements() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -80,7 +79,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		specialMap.verifyCorrectPagination();
 	}
 
-	@Test(groups = { "NonSpecificMapTests_006", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_006", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_006_VerifyLearnMoreLink() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -89,7 +88,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		createMapModal.verifyLearnMoreLinkRedirect(InteractiveMapsContent.LEARN_MORE_LINK);
 	}
 
-	@Test(groups = { "NonSpecificMapTests_007", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_007", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_007_VerifyCreateCustomMapErrors() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -101,7 +100,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		templateMap.verifyErrorExists();
 	}
 
-	@Test(groups = { "NonSpecificMapTests_008", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_008", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_008_VerifyMapIsDisplayedForAnons() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logOut(wikiURL);
@@ -110,7 +109,7 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		selectedMap.verifyMapOpened();
 	}
 
-	@Test(groups = { "NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps" })
+	@Test(groups = {"NonSpecificMapTests_009", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_009_VerifyCreateMapButtonUnderContribution() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -118,16 +117,16 @@ public class NonSpecificMapTests extends NewTestTemplate {
 		CreateAMapComponentObject createMap = specialMaps.clickCreateAMapUnderContributeButton();
 		createMap.verifyRealMapAndCustomMapButtons();
 	}
-	
-	@Test(groups = { "NonSpecificMapTests_010", "NonSpecificMapTests", "InteractiveMaps" })
+
+	@Test(groups = {"NonSpecificMapTests_010", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_010_VerifyFragmentContentTagVisibility() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);
 		InteractiveMapPageObject selectedMap = specialMap.openEscapedFragmentMap(wikiURL, InteractiveMapsContent.ESCAPED_FRAGMENT_MAP_ID);
 		selectedMap.verifyEscapedFragmentMetaTag();
 	}
-	
-	@Test(groups = { "NonSpecificMapTests_011", "NonSpecificMapTests", "InteractiveMaps" })
+
+	@Test(groups = {"NonSpecificMapTests_011", "NonSpecificMapTests", "InteractiveMaps"})
 	public void NonSpecificMapTests_011_VerifyEscapedFragmentPageContent() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		InteractiveMapsPageObject specialMap = base.openSpecialInteractiveMaps(wikiURL);

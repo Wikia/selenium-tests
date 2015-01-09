@@ -1,7 +1,5 @@
 package com.wikia.webdriver.testcases.mediatests.modal;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -15,14 +13,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Previe
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.SourceEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.VisualEditModePageObject.Components;
-
+import org.testng.annotations.Test;
 
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class VetModalAlignmentTests extends NewTestTemplate{
+public class VetModalAlignmentTests extends NewTestTemplate {
 
 	/**
 	 * 1. Verify left alignment in visual mode, source mode, preview, and published page,
@@ -60,13 +57,13 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		article.verifyVideoAlignment(PositionsVideo.LEFT);
 	}
 
-	@Test(groups = {"VetModalAlignment", "VetModalAlignment_002", "Media"}, dependsOnMethods="Vet_Modal_001_leftOnPage")
+	@Test(groups = {"VetModalAlignment", "VetModalAlignment_002", "Media"}, dependsOnMethods = "Vet_Modal_001_leftOnPage")
 	public void Vet_Modal_002_leftInModal() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle1);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+			(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
 		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.LEFT);
 	}
 
@@ -97,7 +94,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle2);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+			(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
 		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.CENTER);
 	}
 
@@ -128,7 +125,7 @@ public class VetModalAlignmentTests extends NewTestTemplate{
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		VisualEditModePageObject visualEditModePageObject = base.navigateToArticleEditPageCK(wikiURL, articleTitle3);
 		VetOptionsComponentObject vetOptions =
-				(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
+			(VetOptionsComponentObject) visualEditModePageObject.modifyComponent(Components.VIDEO);
 		vetOptions.verifyVideoAlignmentSelected(PositionsVideo.RIGHT);
 	}
 }

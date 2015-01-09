@@ -1,19 +1,18 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
-
 public class VisualEditorSourceEditorDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-window-foot .oo-ui-buttonedElement-button")
+	@FindBy(css = ".oo-ui-window-foot .oo-ui-buttonedElement-button")
 	private WebElement applyChangesButton;
-	@FindBy(css=".oo-ui-widget-enabled.oo-ui-textInputWidget textarea")
+	@FindBy(css = ".oo-ui-widget-enabled.oo-ui-textInputWidget textarea")
 	private WebElement editArea;
-	@FindBy(css=".wikiaThrobber")
+	@FindBy(css = ".wikiaThrobber")
 	private WebElement loadingIndicator;
 
 	public VisualEditorSourceEditorDialog(WebDriver driver) {

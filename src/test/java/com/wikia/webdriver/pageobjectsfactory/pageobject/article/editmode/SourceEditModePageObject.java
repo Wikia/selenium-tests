@@ -1,13 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.SourceModeContent;
 import com.wikia.webdriver.common.contentpatterns.WikiaGlobalVariables;
@@ -19,56 +11,59 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.photo.PhotoAddComp
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slider.SliderBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.SlideshowBuilderComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class SourceEditModePageObject extends EditMode{
+public class SourceEditModePageObject extends EditMode {
 
 
-	@FindBy(css="#mw-editbutton-bold")
+	@FindBy(css = "#mw-editbutton-bold")
 	private WebElement bold;
-	@FindBy(css="#mw-editbutton-italic")
+	@FindBy(css = "#mw-editbutton-italic")
 	private WebElement italic;
-	@FindBy(css="#mw-editbutton-link")
+	@FindBy(css = "#mw-editbutton-link")
 	private WebElement internalLink;
-	@FindBy(css="#mw-editbutton-extlink")
+	@FindBy(css = "#mw-editbutton-extlink")
 	private WebElement externalLink;
-	@FindBy(css="#mw-editbutton-headline")
+	@FindBy(css = "#mw-editbutton-headline")
 	private WebElement lvl2headLine;
-	@FindBy(css="#mw-editbutton-image")
+	@FindBy(css = "#mw-editbutton-image")
 	private WebElement embedFile;
-	@FindBy(css="#mw-editbutton-media")
+	@FindBy(css = "#mw-editbutton-media")
 	private WebElement embedMedia;
-	@FindBy(css="#mw-editbutton-math")
+	@FindBy(css = "#mw-editbutton-math")
 	private WebElement math;
-	@FindBy(css="#mw-editbutton-nowiki")
+	@FindBy(css = "#mw-editbutton-nowiki")
 	private WebElement nowiki;
-	@FindBy(css="#mw-editbutton-signature")
+	@FindBy(css = "#mw-editbutton-signature")
 	private WebElement signature;
-	@FindBy(css="#mw-editbutton-hr")
+	@FindBy(css = "#mw-editbutton-hr")
 	private WebElement hline;
-	@FindBy(css="#mw-editbutton-wmu")
+	@FindBy(css = "#mw-editbutton-wmu")
 	private WebElement photo;
-	@FindBy(css="#mw-editbutton-wpg")
+	@FindBy(css = "#mw-editbutton-wpg")
 	private WebElement gallery;
-	@FindBy(css="#mw-editbutton-vet")
+	@FindBy(css = "#mw-editbutton-vet")
 	private WebElement video;
-	@FindBy(css=".cke_toolbar_source .cke_toolbar_expand")
+	@FindBy(css = ".cke_toolbar_source .cke_toolbar_expand")
 	private WebElement more;
-	@FindBy(css=".close.wikia-chiclet-button")
+	@FindBy(css = ".close.wikia-chiclet-button")
 	private WebElement moreClose;
-	@FindBy(css="section#WikiaPhotoGalleryEditor")
+	@FindBy(css = "section#WikiaPhotoGalleryEditor")
 	private WebElement componentSelector;
-	@FindBy(css="a.wikia-button[type='2']")
+	@FindBy(css = "a.wikia-button[type='2']")
 	private WebElement createSlideshow;
-	@FindBy(css="a.wikia-button[type='1']")
+	@FindBy(css = "a.wikia-button[type='1']")
 	private WebElement createGallery;
-	@FindBy(css="a.wikia-button[type='3']")
+	@FindBy(css = "a.wikia-button[type='3']")
 	private WebElement createSlider;
-	@FindBy(css=".loading-indicator")
+	@FindBy(css = ".loading-indicator")
 	private WebElement sourceModeLoadingIndicator;
-	@FindBy(css=".editpage-editarea")
+	@FindBy(css = ".editpage-editarea")
 	private WebElement sourceOnlyModeTextArea;
 
-	@FindBy(css=".cke_source")
+	@FindBy(css = ".cke_source")
 	private WebElement sourceModeTextArea;
 
 	public SourceEditModePageObject(WebDriver driver) {
@@ -76,125 +71,123 @@ public class SourceEditModePageObject extends EditMode{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void focusTextArea()
-	{
+	public void focusTextArea() {
 		jQueryFocus(".cke_source");
 	}
 
-	public String getSourceContent()
-	{
+	public String getSourceContent() {
 		return executeScriptRet("$('.cke_source').attr('value')");
 	}
 
-	public void checkSourceContent(String desiredContent){
+	public void checkSourceContent(String desiredContent) {
 		waitForElementClickableByElement(sourceModeTextArea);
 		Assertion.assertEquals(desiredContent, getSourceContent());
 	}
 
-	public void checkSourceVideoContent(String desiredContent){
+	public void checkSourceVideoContent(String desiredContent) {
 		Assertion.assertEquals(desiredContent.substring(1, 38) + desiredContent.substring(48), getSourceContent().substring(1, 38) + getSourceContent().substring(48));
 	}
 
 
-	public void clickBold(){
+	public void clickBold() {
 		focusTextArea();
 		bold.click();
 		PageObjectLogging.log("clickBold", "bold button was clicked", true, driver);
 	}
 
 
-	public void clickItalic(){
+	public void clickItalic() {
 		focusTextArea();
 		italic.click();
 		PageObjectLogging.log("clickItalic", "italic button was clicked", true, driver);
 	}
 
-	public void clickInternalLink(){
+	public void clickInternalLink() {
 		focusTextArea();
 		internalLink.click();
 		PageObjectLogging.log("clickInternalLink", "internal link button was clicked", true, driver);
 	}
 
-	public void clickExternalLink(){
+	public void clickExternalLink() {
 		focusTextArea();
 		externalLink.click();
 		PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
 	}
 
-	public void clickLvl2Headline(){
+	public void clickLvl2Headline() {
 		focusTextArea();
 		lvl2headLine.click();
 		PageObjectLogging.log("clickExternalLink", "external link button was clicked", true, driver);
 	}
 
-	public void clickEmbedFile(){
+	public void clickEmbedFile() {
 		focusTextArea();
 		embedFile.click();
 		PageObjectLogging.log("clickEmbedFile", "embed file button was clicked", true, driver);
 	}
 
-	public void clickEmbedMedia(){
+	public void clickEmbedMedia() {
 		focusTextArea();
 		embedMedia.click();
 		PageObjectLogging.log("clickEmbedMedia", "embed media button was clicked", true, driver);
 	}
 
-	public void clickMath(){
+	public void clickMath() {
 		focusTextArea();
 		math.click();
 		PageObjectLogging.log("clickMath", "math button was clicked", true, driver);
 	}
 
-	public void clickNowiki(){
+	public void clickNowiki() {
 		focusTextArea();
 		nowiki.click();
 		PageObjectLogging.log("clickNoWiki", "nowwiki button was clicked", true, driver);
 	}
 
-	public void clickSignature(){
+	public void clickSignature() {
 		focusTextArea();
 		signature.click();
 		PageObjectLogging.log("clickSignature", "signature button was clicked", true, driver);
 	}
 
-	public void clickHorizontalLine(){
+	public void clickHorizontalLine() {
 		focusTextArea();
 		hline.click();
 		PageObjectLogging.log("clickHorizontalLine", "horizontal line button was clicked", true, driver);
 	}
 
-	public PhotoAddComponentObject clickAddPhoto(){
+	public PhotoAddComponentObject clickAddPhoto() {
 		focusTextArea();
 		photo.click();
 		PageObjectLogging.log("clickAddPhot", "add photo button was clicked", true, driver);
 		return new PhotoAddComponentObject(driver);
 	}
 
-	public void clickAddGallery(){
+	public void clickAddGallery() {
 		focusTextArea();
 		gallery.click();
 		PageObjectLogging.log("clickAddGallery", "add gallery button was clicked", true, driver);
 	}
 
-	public VetAddVideoComponentObject clickAddVideo(){
+	public VetAddVideoComponentObject clickAddVideo() {
 		focusTextArea();
 		video.click();
 		PageObjectLogging.log("clickAddVideo", "add video button was clicked", true, driver);
 		return new VetAddVideoComponentObject(driver);
 	}
 
-	public void clickMore(){
+	public void clickMore() {
 		focusTextArea();
 		more.click();
 		PageObjectLogging.log("clickMore", "more button was clicked", true, driver);
 	}
 
-	public void clearSource(){
+	public void clearSource() {
 		sourceModeTextArea.clear();
 		PageObjectLogging.log("clearSource", "source area erased", true, driver);
 	}
 
-	public void closeMore(){
+	public void closeMore() {
 		moreClose.click();
 	}
 
@@ -221,61 +214,55 @@ public class SourceEditModePageObject extends EditMode{
 		PageObjectLogging.log("verifyComponentSelector", "component selector is visible", true, driver);
 	}
 
-	public Object addComponent(String componentName){
-		if ("slideshow".equals(componentName)){
+	public Object addComponent(String componentName) {
+		if ("slideshow".equals(componentName)) {
 			waitForElementByElement(createSlideshow);
 			createSlideshow.click();
-			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+			PageObjectLogging.log("addComponent", "selected " + componentName + " component", true);
 			return new SlideshowBuilderComponentObject(driver);
-		}
-		else if ("gallery".equals(componentName)){
+		} else if ("gallery".equals(componentName)) {
 			waitForElementByElement(createGallery);
 			createGallery.click();
-			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+			PageObjectLogging.log("addComponent", "selected " + componentName + " component", true);
 			return new GalleryBuilderComponentObject(driver);
-		}
-		else if ("slider".equals(componentName)){
+		} else if ("slider".equals(componentName)) {
 			waitForElementByElement(createSlider);
 			createSlider.click();
-			PageObjectLogging.log("addComponent", "selected "+componentName+" component", true);
+			PageObjectLogging.log("addComponent", "selected " + componentName + " component", true);
 			return new SliderBuilderComponentObject(driver);
-		}
-		else{
-			PageObjectLogging.log("addComponent", "not supported component name: "+componentName, false);
+		} else {
+			PageObjectLogging.log("addComponent", "not supported component name: " + componentName, false);
 			return null;
 		}
 	}
 
-	public void checkMainTools()
-	{
-		for (int i=1; i<17; i++){
+	public void checkMainTools() {
+		for (int i = 1; i < 17; i++) {
 			clearSource();
 			clickMore();
-			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a["+i+"]")).getText();
-			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a["+i+"]")).click();
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]")).getText();
+			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_main']/a[" + i + "]")).click();
 			checkSourceContent(content);
 		}
 	}
 
-	public void checkWikiMarkupTools()
-	{
-		for (int i=1,j=i+1; i<21; i++){
+	public void checkWikiMarkupTools() {
+		for (int i = 1, j = i + 1; i < 21; i++) {
 			clearSource();
 			clickMore();
 			String content =
-					executeScriptRet("$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
-			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a["+i+"]")).click();
+				executeScriptRet("$('.modalContent #edittools_wikimarkup a:nth-child(" + (i + 1) + ")').text()");
+			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_wikimarkup']/a[" + i + "]")).click();
 			checkSourceContent(content);
 		}
 	}
 
-	public void checkSymbolsTools()
-	{
-		for (int i=1; i<65; i++){
+	public void checkSymbolsTools() {
+		for (int i = 1; i < 65; i++) {
 			clearSource();
 			clickMore();
-			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).getText();
-			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a["+i+"]")).click();
+			String content = driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]")).getText();
+			driver.findElement(By.xpath("//section[@class='modalContent']//span[@id='edittools_symbols']/a[" + i + "]")).click();
 			checkSourceContent(content);
 		}
 	}
@@ -293,12 +280,12 @@ public class SourceEditModePageObject extends EditMode{
 	public void verifyVideoWidth(int widthDesired) {
 		String content = getContent();
 		int width = Integer.parseInt(
-				content.substring(content.indexOf("px")-4, content.indexOf("px")-1)
+			content.substring(content.indexOf("px") - 4, content.indexOf("px") - 1)
 		);
 		Assertion.assertNumber(
-				width,
-				widthDesired,
-				"width is " + width + " should be " + widthDesired
+			width,
+			widthDesired,
+			"width is " + width + " should be " + widthDesired
 		);
 	}
 
@@ -317,14 +304,14 @@ public class SourceEditModePageObject extends EditMode{
 	private void appendContent(String content) {
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("appendContent", "text: '"+content+"', added to the source mode", true);
+		PageObjectLogging.log("appendContent", "text: '" + content + "', added to the source mode", true);
 	}
 
 	private void appendNewLine(String content) {
 		waitForElementByElement(sourceModeTextArea);
 		sourceModeTextArea.sendKeys(Keys.ENTER);
 		sourceModeTextArea.sendKeys(content);
-		PageObjectLogging.log("appendNewLine", "text "+content+" added to the source mode in new line", true);
+		PageObjectLogging.log("appendNewLine", "text " + content + " added to the source mode in new line", true);
 	}
 
 	public void clearContent() {

@@ -1,30 +1,29 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.List;
-
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.List;
 
 /**
  * @author Robert 'rochan' Chan
  */
 public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 
-	@FindBy(css=
+	@FindBy(css =
 		".oo-ui-window-foot " +
-		"div:not(.oo-ui-flaggableElement-secondary):not(.oo-ui-flaggableElement-constructive) " +
-		".oo-ui-labeledElement-label")
+			"div:not(.oo-ui-flaggableElement-secondary):not(.oo-ui-flaggableElement-constructive) " +
+			".oo-ui-labeledElement-label")
 	private WebElement returnToSaveFormButton;
-	@FindBy(css=".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")
+	@FindBy(css = ".ve-ui-mwSaveDialog-viewer.WikiaArticle pre")
 	private WebElement wikiaAritlceFirstPreview;
-	@FindBy(css=".diff-addedline")
+	@FindBy(css = ".diff-addedline")
 	private List<WebElement> addedLines;
-	@FindBy(css=".diff-deletedline")
+	@FindBy(css = ".diff-deletedline")
 	private List<WebElement> deletedLines;
 
 	private static final String DIFF_LINE_STRING = ".diffchange-inline";
@@ -75,12 +74,12 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 		for (WebElement currentDiff : diffLines) {
 			String currentText;
 			//Check to see if the current diff line has inline diff
-			if(checkIfElementInElement(DIFF_LINE_STRING, currentDiff)) {
+			if (checkIfElementInElement(DIFF_LINE_STRING, currentDiff)) {
 				List<WebElement> inlineDiffs = currentDiff.findElements(By.cssSelector(DIFF_LINE_STRING));
 				//iterate through multiple inline diffs
-				for(WebElement currentInlineDiff : inlineDiffs) {
+				for (WebElement currentInlineDiff : inlineDiffs) {
 					String currentInlineText = currentInlineDiff.getText();
-					if(isDiffFound(targets, currentInlineText)) {
+					if (isDiffFound(targets, currentInlineText)) {
 						targets.remove(currentInlineText);
 						count++;
 					}
@@ -90,7 +89,7 @@ public class VisualEditorReviewChangesDialog extends VisualEditorDialog {
 				if (currentText.isEmpty()) {
 					expectedCount--;
 				} else {
-					if(isDiffFound(targets, currentText)) {
+					if (isDiffFound(targets, currentText)) {
 						targets.remove(currentText);
 						count++;
 					}

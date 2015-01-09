@@ -1,18 +1,17 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import com.wikia.webdriver.common.contentpatterns.VideoContent;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.DeletePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.diffpage.DiffPagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.historypage.HistoryPagePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import org.testng.annotations.Test;
 
 public class FilePageTests extends NewTestTemplate {
 
@@ -31,13 +30,13 @@ public class FilePageTests extends NewTestTemplate {
 
 		filePage.verifySelectedTab("about");
 
-		filePage.clickTab( FilePagePageObject.HISTORY_TAB );
+		filePage.clickTab(FilePagePageObject.HISTORY_TAB);
 		filePage.verifySelectedTab("history");
 
-		filePage.clickTab( FilePagePageObject.ABOUT_TAB );
+		filePage.clickTab(FilePagePageObject.ABOUT_TAB);
 		filePage.verifySelectedTab("about");
 
-		filePage.clickTab( FilePagePageObject.METADATA_TAB );
+		filePage.clickTab(FilePagePageObject.METADATA_TAB);
 		filePage.verifySelectedTab("metadata");
 	}
 
@@ -83,7 +82,7 @@ public class FilePageTests extends NewTestTemplate {
 	@Test(groups = {"FilePage", "filePage004_delete", "Media"})
 	public void filePage004_delete_QAART_478() {
 		// Go to Special:Videos to add a video
-		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver) ;
+		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
 		specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		specialVideos.openSpecialVideoPage(wikiURL);
 
@@ -112,7 +111,7 @@ public class FilePageTests extends NewTestTemplate {
 	@Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
 	public void filePage005_deleteFromHistory() {
 		// Go to Special:Videos to add a video
-		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver) ;
+		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver);
 		specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		specialVideos.openSpecialVideoPage(wikiURL);
 
@@ -137,7 +136,7 @@ public class FilePageTests extends NewTestTemplate {
 		filePage.verifyVersionCountAtLeast(2);
 
 		// Delete the second version
-		DeletePageObject deletePage = filePage.deleteVersion( 2 );
+		DeletePageObject deletePage = filePage.deleteVersion(2);
 		deletePage.submitDeletion();
 
 		// Load the file page again, should have the same name
@@ -145,7 +144,7 @@ public class FilePageTests extends NewTestTemplate {
 		filePage.verifyEmbeddedVideoIsPresent();
 
 		// Delete the first version and thus the whole page
-		deletePage = filePage.deleteVersion( 1 );
+		deletePage = filePage.deleteVersion(1);
 		deletePage.submitDeletion();
 
 		// Go back to the file page and make sure its gone

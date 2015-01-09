@@ -1,22 +1,20 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.interactivemaps;
 
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-
 import com.wikia.webdriver.common.contentpatterns.InteractiveMapsContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.interactivemaps.InteractiveMapPageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 /**
  * @author Rodrigo 'RodriGomez' Molinero
  * @author Łukasz Nowak (Dyktus)
- *
  */
 
 public class AddPinComponentObject extends BasePageObject {
@@ -169,9 +167,9 @@ public class AddPinComponentObject extends BasePageObject {
 	public void verifyAssociatedArticlePlaceholder() {
 		waitForElementByElement(associatedArticleField);
 		Assertion.assertEquals(
-				InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
-				associatedArticleField.getAttribute("placeholder"),
-				"Associated article place holder is not correct"
+			InteractiveMapsContent.ASSOCIATED_ARTICLE_PLACEHOLDER,
+			associatedArticleField.getAttribute("placeholder"),
+			"Associated article place holder is not correct"
 		);
 	}
 }

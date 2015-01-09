@@ -4,8 +4,8 @@ import com.wikia.webdriver.common.contentpatterns.WikiFactoryVariablesProvider.W
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFactoryPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.special.login.SpecialUserLoginPageObject;
 import org.testng.annotations.Test;
 
 /**
@@ -24,8 +24,8 @@ public class TestHighValueCountries extends NewTestTemplate {
 	}
 
 	@Test(
-		dataProvider="getWikisWithStandardHVC", dataProviderClass=AdsDataProvider.class,
-		groups= {"HVC", "HVC_Standard"}
+		dataProvider = "getWikisWithStandardHVC", dataProviderClass = AdsDataProvider.class,
+		groups = {"HVC", "HVC_Standard"}
 	)
 	public void TestStandardHVC(String wikiName) {
 		logIn();
