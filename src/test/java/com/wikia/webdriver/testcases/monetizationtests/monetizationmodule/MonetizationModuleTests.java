@@ -4,8 +4,11 @@ import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.monetizationmodule.MonetizationModuleComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.lang.System;
 
 /**
  * @ownership Monetization
@@ -94,10 +97,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	@DataProvider(name = "DataMonetizationModule_005")
 	public static Object[][] DataMonetizationModule_005() {
-		return new Object[][]{
-			{800, 600, 728},
-			{1024, 600, 690},
-			{1700, 600, 728},
+		return new Object[][] {
+			{800, 600, 468, 728},
+			{1024, 600, 320, 690},
+			{1440, 600, 468, 728},
+			{1665, 600, 690, 728},
+			{1700, 600, 728, 728},
 		};
 	}
 
@@ -110,7 +115,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		dataProvider = "DataMonetizationModule_005",
 		groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"}
 	)
-	public void MonetizationModuleTest_005(int width, int height, int expected) {
+	public void MonetizationModuleTest_005(int width, int height, int expectedInContent, int expectedOthers) {
 		wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
@@ -120,7 +125,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.resizeWindow(width, height);
 		base.refreshPage();
 		monetizationModule.verifyMonetizationModuleAdsenseShown();
-		monetizationModule.verifyMonetizationModuleAdsenseWidth(expected);
+		monetizationModule.verifyMonetizationModuleAdsenseWidth(expectedInContent, expectedOthers);
 	}
 
 	/**
@@ -486,5 +491,21 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
+	/**
+	 * Adsense: The header of monetization module is shown on article page
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_016", "Monetization"})
+	public void MonetizationModuleTest_016() {
+		String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(articleURL);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
+		monetizationModule.setCookieFromSearch();
+		base.refreshPage();
+		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyAdsenseHeader();
+	}
 
 }
