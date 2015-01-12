@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.Common.Core.CommonExpectedConditions;
 import com.wikia.webdriver.Common.Core.ElementStateHelper;
+import com.wikia.webdriver.PageObjectsFactory.PageObject.CreateNewWiki.CreateNewWikiPageObjectStep1;
 
 public class VenusGlobalNavPageObject {
 
@@ -75,8 +76,9 @@ public class VenusGlobalNavPageObject {
 		return hubsMenu;
 	}
 
-	public void clickStartNewWiki(){
+	public CreateNewWikiPageObjectStep1 clickStartNewWiki(){
 		startNewWikiButton.click();
+		return new CreateNewWikiPageObjectStep1(driver);
 	}
 
 	public enum Hub {

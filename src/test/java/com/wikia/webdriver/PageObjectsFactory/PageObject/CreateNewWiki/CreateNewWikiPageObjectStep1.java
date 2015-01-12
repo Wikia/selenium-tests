@@ -114,4 +114,12 @@ public class CreateNewWikiPageObjectStep1 extends WikiBasePageObject{
 		PageObjectLogging.log("verifyWikiName", "verified wiki name equals: " + expectedWikiName, true);
 	}
 
+	public boolean verifyPage() {
+		boolean isURLcorrect = driver.getCurrentUrl().contains("Special:CreateNewWiki");
+		boolean isWikiNameFieldCorrect = wikiName.isDisplayed();
+		boolean isWikiDomainFieldCorrect = wikiDomain.isDisplayed();
+
+		return isURLcorrect && isWikiNameFieldCorrect && isWikiDomainFieldCorrect;
+	}
+
 }
