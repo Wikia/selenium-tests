@@ -40,6 +40,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
 	private static final String TOP_INCONTENT_BOXAD_SELECTOR = "div[id*='TOP_INCONTENT_BOXAD']";
 
+
 	// Elements
 	@FindBy(css = AdsContent.WIKIA_BAR_SELECTOR)
 	private WebElement toolbar;
@@ -57,6 +58,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentLeaderboardGpt;
 	@FindBy(css = TOP_INCONTENT_BOXAD_SELECTOR)
 	protected WebElement topIncontentBoxad;
+
 
 	@FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
 	private WebElement kruxControlTag;
@@ -672,5 +674,10 @@ public class AdsBaseObject extends WikiBasePageObject {
 				driver
 			);
 		}
+	}
+
+	public void checkSpotlights() {
+		// selector for spotlights is already loaded
+		// use screenshot comparison from "checkAdVisibleInSlot" method
 	}
 }
