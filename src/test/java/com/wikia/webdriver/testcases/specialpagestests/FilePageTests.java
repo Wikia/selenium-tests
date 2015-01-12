@@ -24,7 +24,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author "Liz Lee"
 	 */
 	@Test(groups = {"FilePage", "filePage001_tabs", "Media"})
-	public void filePage001_tabs() {
+	public void filePage001_tabs_QARRT_500() {
 		FilePagePageObject filePage = new FilePagePageObject(driver);
 		filePage.openFilePage(wikiURL, URLsContent.FILENAME_001);
 
@@ -47,7 +47,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author "Liz Lee"
 	 */
 	@Test(groups = {"FilePage", "filePage002_tabsLoggedIn", "Media"})
-	public void filePage002_tabsLoggedIn() {
+	public void filePage002_tabsLoggedIn_QAART_500() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 
@@ -65,7 +65,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author "Liz Lee"
 	 */
 	@Test(groups = {"FilePage", "filePage003_diffPage", "Media"})
-	public void filePage003_diffPage() {
+	public void filePage003_diffPage_QAART_499() {
 
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		HistoryPagePageObject historyPage = base.openFileHistoryPage(URLsContent.FILENAME_001, wikiURL);

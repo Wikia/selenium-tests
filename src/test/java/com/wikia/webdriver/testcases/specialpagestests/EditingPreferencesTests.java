@@ -78,7 +78,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"EditingPreferencesTest", "EditPreferences_004"})
-	public void EditPreferences_004_selectDefault() {
+	public void EditPreferences_004_selectDefault_QAART_498() {
 		EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
 		editPrefPage.selectPreferredEditor(defaultEdit);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
