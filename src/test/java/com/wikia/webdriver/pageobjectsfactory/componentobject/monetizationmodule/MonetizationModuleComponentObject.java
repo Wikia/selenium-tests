@@ -19,6 +19,7 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	final String cookieFromsearchName = "fromsearch";
 	final String cookieFromsearchValue = "1";
 	final String attributeNameSlot = "data-mon-slot";
+	final String adsenseHeaderValue = "advertisement";
 
 	@FindBy(css=".monetization-module")
 	private WebElement monetizationModuleContainer;
@@ -36,6 +37,22 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	private WebElement adsenseContainer;
 	@FindBy(css=".adsbygoogle")
 	private WebElement adsenseIns;
+	@FindBy(css=".adsbygoogle,.ad-responsive-ic")
+	private WebElement adsenseInsInContent;
+	@FindBy(css=".adsbygoogle,.ad-responsive")
+	private WebElement adsenseInsOthers;
+	@FindBy(css="#monetization-adunit-above_title")
+	private WebElement slotAboveTitleAdsense;
+	@FindBy(css="#monetization-adunit-below_title")
+	private WebElement slotBelowTitleAdsense;
+	@FindBy(css="#monetization-adunit-in_content")
+	private WebElement slotInContentAdsense;
+	@FindBy(css="#monetization-adunit-below_category")
+	private WebElement slotBelowCategoryAdsense;
+	@FindBy(css="#monetization-adunit-above_footer")
+	private WebElement slotAboveFooterAdsense;
+	@FindBy(css=".ad-header")
+	private	WebElement adHeader;
 
 	private By MonetizationModuleListBy = By.cssSelector(".monetization-module");
 
@@ -157,9 +174,27 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 		PageObjectLogging.log("verifyMonetizationModuleSlotAboveTitleNotShown", "Monetization module is not shown above footer", true);
 	}
 
-	public void verifyMonetizationModuleAdsenseWidth(int expected) {
-		int width = adsenseIns.getSize().width;
-		Assertion.assertEquals(width, expected);
-		PageObjectLogging.log("verifyMonetizationModuleAdsenseWidth", "Verify the width of the adsense ad (width=" + width + ")", true);
+	public void verifyMonetizationModuleAdsenseWidth(int expectedInContent, int expectedOthers) {
+		int width;
+		List<WebElement> listWebElements = driver.findElements(MonetizationModuleListBy);
+		for (WebElement elem : listWebElements) {
+			String slotName = elem.getAttribute(attributeNameSlot);
+			width = elem.findElement(By.cssSelector(".adsbygoogle")).getSize().width;
+			if (slotName.equals("in_content")) {
+				Assertion.assertEquals(width, expectedInContent);
+			} else {
+				Assertion.assertEquals(width, expectedOthers);
+			}
+			PageObjectLogging.log("verifyMonetizationModuleAdsenseWidth", "Verify the width of the adsense ad for " + slotName + " (width=" + width + ")", true);
+		}
 	}
+
+	public void verifyAdsenseHeader() {
+		Assertion.assertTrue(checkIfElementOnPage(adHeader));
+		waitForElementByElement(adHeader);
+		Assertion.assertEquals(adsenseHeaderValue.toUpperCase(), adHeader.getText());
+		PageObjectLogging.log("verifyAdsenseHeader", "The header of monetization module is visible (adsense)", true);
+	}
+
+
 }
