@@ -1,5 +1,50 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultBackoffStrategy;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import com.wikia.webdriver.common.clicktracking.ClickTrackingScriptsProvider;
 import com.wikia.webdriver.common.clicktracking.ClickTrackingSupport;
 import com.wikia.webdriver.common.contentpatterns.ApiActions;
@@ -816,7 +861,10 @@ public class WikiBasePageObject extends BasePageObject {
 
 	public String logInCookie(String userName, String password, String wikiURL) {
 		try {
-			DefaultHttpClient httpclient = new DefaultHttpClient();
+			HttpClient httpclient = HttpClientBuilder.create()
+				.setConnectionBackoffStrategy(new DefaultBackoffStrategy())
+				.disableAutomaticRetries()
+				.build();
 			HttpPost httpPost = new HttpPost(wikiURL + "api.php");
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
@@ -825,11 +873,9 @@ public class WikiBasePageObject extends BasePageObject {
 			nvps.add(new BasicNameValuePair("lgname", userName));
 			nvps.add(new BasicNameValuePair("lgpassword", password));
 
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
 
-			HttpResponse response = null;
-
-			response = httpclient.execute(httpPost);
+			HttpResponse response = httpclient.execute(httpPost);
 
 			HttpEntity entity = response.getEntity();
 			String xmlResponse = null;
@@ -863,7 +909,7 @@ public class WikiBasePageObject extends BasePageObject {
 				nvps2.add(new BasicNameValuePair("lgtoken", token));
 
 				httpPost.setEntity(new UrlEncodedFormEntity(nvps2,
-					HTTP.UTF_8));
+						StandardCharsets.UTF_8));
 
 				response = httpclient.execute(httpPost);
 
