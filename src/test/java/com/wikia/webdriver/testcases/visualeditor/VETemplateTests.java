@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -158,7 +159,7 @@ public class VETemplateTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VETemplateTests_004"
 	)
 	public void VETemplateTests_006_CheckBlockedTransclusion() {
-		ArrayList<String> templateWikiTexts = new ArrayList<>();
+		List<String> templateWikiTexts = new ArrayList<>();
 		templateWikiTexts.add(VEContent.TEMPLATE_WIKITEXT);
 		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
 		ve.clickBlockTransclusion(0);

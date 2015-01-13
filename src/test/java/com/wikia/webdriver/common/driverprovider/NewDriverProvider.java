@@ -48,11 +48,11 @@ public class NewDriverProvider {
 		browserName = browser;
 
 		//If browser equals IE set driver property as IEWebDriver instance
-		if (browserName.equals("IE")) {
+		if ("IE".equals(browserName)) {
 			driver = getIEInstance();
 
 		//If browser contains FF set driver property as FFWebDriver instance
-		} else if(browserName.contains("FF")) {
+		} else if("FF".equals(browserName)) {
 			driver = getFFInstance();
 
 		//If browser equals CHROME set driver property as ChromeWebDriver instance
@@ -60,12 +60,12 @@ public class NewDriverProvider {
 			driver = getChromeInstance();
 
 		//If browser equals SAFARI set driver property as SafariWebDriver instance
-		} else if (browserName.equals("SAFARI")) {
+		} else if ("SAFARI".equals(browserName)) {
 			driver = getSafariInstance();
 
-		} else if (browserName.equals("HTMLUNIT")) {
+		} else if ("HTMLUNIT".equals(browserName)) {
 			driver = new EventFiringWebDriver(new HtmlUnitDriver());
-		} else if (browserName.equals("GHOST")){
+		} else if ("GHOST".equals(browserName)){
 			driver = getPhantomJSInstance();
 		} else if (browserName.equals("ANDROID")){
 			driver = getAndroidInstance();
@@ -130,7 +130,7 @@ public class NewDriverProvider {
 	private static EventFiringWebDriver getFFInstance() {
 		//Windows 8 requires to set webdriver.firefox.bin system variable
 		//to path where executive file of FF is placed
-		if (System.getProperty("os.name").toUpperCase().equals("WINDOWS 8")){
+		if ("WINDOWS 8".equals(System.getProperty("os.name").toUpperCase())){
 			System.setProperty(
 				"webdriver.firefox.bin",
 				"c:" + File.separator
@@ -141,7 +141,7 @@ public class NewDriverProvider {
 		}
 
 		//Check if user who is running tests have write access in ~/.mozilla dir and home dir
-		 if (System.getProperty("os.name").toUpperCase().equals("LINUX")) {
+		 if ("LINUX".equals(System.getProperty("os.name").toUpperCase())) {
 			File homePath = new File(System.getenv("HOME") + File.separator);
 			File mozillaPath = new File(homePath + File.separator + ".mozilla");
 			File tmpFile;
@@ -221,13 +221,13 @@ public class NewDriverProvider {
 		}
 
 		//TODO change mobile tests to use @UserAgent annotation
-		if (browserName.equals("CHROMEMOBILE")) {
+		if ("CHROMEMOBILE".equals(browserName)) {
 			chromeOptions.addArguments(
 				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone")
 			);
 			return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
 		}
-		if (browserName.equals("CHROMEMOBILEMERCURY")) {
+		if ("CHROMEMOBILEMERCURY".equals(browserName)) {
 			chromeOptions.addArguments(
 				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury")
 			);

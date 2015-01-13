@@ -73,6 +73,12 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 	private WebElement focusedNode;
 	@FindBy(css=".mw-body-content")
 	private WebElement mainContent;
+	@FindBy(css=".media-gallery-wrapper.ve-ce-branchNode")
+	private WebElement galleryNode;
+	@FindBy(css=".media-gallery-wrapper.ve-ce-branchNode")
+	private List<WebElement> galleryNodes;
+	@FindBy(css=".media-gallery-wrapper.ve-ce-branchNode .toggler")
+	private WebElement toggler;
 
 	private By contextMenuBy = By.cssSelector(".ve-ui-contextWidget");
 	private By contextEditBy = By.cssSelector(".oo-ui-icon-edit");
@@ -194,6 +200,21 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 		PageObjectLogging.log("verifyVideos", videoNodes.size() + " videos displayed", true);
 	}
 
+	public void verifyGalleries(int expected) {
+		waitForElementVisibleByElement(galleryNode);
+		Assertion.assertNumber(expected, galleryNodes.size(), "Checking the correct number of gallery nodes added");
+		PageObjectLogging.log("verifyGalleries", galleryNodes.size() + " galleries displayed", true);
+	}
+
+	public void verifyMediasInGallery(int expected) {
+		waitForElementByElement(galleryNode);
+		String className = galleryNode.getAttribute("class");
+		String count = className.substring(className.indexOf("count-"));
+		int numOfMediasInGallery = Integer.parseInt(count.substring(count.indexOf('-') + 1));
+		Assertion.assertNumber(expected, numOfMediasInGallery, "Checking the correct number of media in gallery");
+		PageObjectLogging.log("verifyMediasInGallery", numOfMediasInGallery + " medias displayed", true);
+	}
+
 	public void verifyMedias(int expected) {
 		waitForElementByElement(mediaNode);
 		waitForElementVisibleByElement(mediaNode);
@@ -232,7 +253,7 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 			selectFormatting(format);
 			typeTextArea(text);
 			typeReturn();
-			if (format.name().equals("PREFORMATTED")) {
+			if ("PREFORMATTED".equals(format.name())) {
 				selectFormatting(Formatting.PARAGRAPH);
 			}
 		}
@@ -361,6 +382,19 @@ public class VisualEditorPageObject extends VisualEditorMenu {
 
 	public void verifyNumberOfInlineTransclusion(int expected) {
 		Assertion.assertNumber(expected, getNumOfElementOnPage(inlineTransclusionBy), "The number of inline transclusion node is not equal");
+	}
+
+
+	public void selectGallery(int index) {
+		WebElement selectedGallery = galleryNodes.get(index);
+		waitForElementClickableByElement(selectedGallery);
+		selectedGallery.click();
+	}
+
+	public void deleteGallery(int index) {
+		selectGallery(index);
+		Actions actions2 = new Actions(driver);
+		actions2.sendKeys(Keys.DELETE).build().perform();
 	}
 
 	public void deleteBlockTransclusion(int index) {

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.common.driverprovider;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -8,7 +9,7 @@ import java.util.HashMap;
  */
 public class UserAgentsRegistry {
 
-	private HashMap<String, String> userAgentRegistry;
+	private Map<String, String> userAgentRegistry;
 
 	public UserAgentsRegistry() {
 		userAgentRegistry = new HashMap();

@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterGroups;
@@ -172,7 +173,7 @@ public class VEMediaTests extends NewTestTemplateBeforeClass {
 	)
 	public void VEMediaTests_007_changeAlignment() {
 		int numOfMedia = 3;
-		ArrayList<String> wikiTexts = new ArrayList<String>();
+		List<String> wikiTexts = new ArrayList<String>();
 		wikiTexts.add("|centre");
 		wikiTexts.add("|left");
 
