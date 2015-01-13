@@ -38,7 +38,7 @@ public class VetArticleCommentsTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"VetArticleComments_002", "VetArticleComments", "Media"})
-	public void VetArticleComments_002_Library() {
+	public void VetArticleComments_002_Library_MAIN_3527() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
