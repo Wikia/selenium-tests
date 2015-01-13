@@ -58,7 +58,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_002_moveImage_QAART_437() {
+	public void ImageStorage_002_moveImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
@@ -71,7 +71,7 @@ public class ImageStorageTests extends NewTestTemplate {
 		file.verifyHeader(imageNewName);
 		file = newFiles.openFilePage(wikiURL, imageNewName);
 		renamePage = file.renameUsingDropdown();
-		renamePage.rename(fileName);
+		renamePage.rename(fileName).confirmRename();
 		file.verifyNotificationMessage();
 		file.verifyHeader(fileName);
 	}
