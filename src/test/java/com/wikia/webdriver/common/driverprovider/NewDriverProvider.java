@@ -10,7 +10,6 @@ import java.util.logging.Level;
 
 import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

@@ -4,7 +4,6 @@ import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
-import io.appium.java_client.MobileDriver;
 import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -106,7 +105,6 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
 	public void verifySearchNotMatch() {
 		waitForElementByElement(searchAlerts);
-		//PageObjectLogging.log("verifySearchNotMatch", searchAlerts.getText(), true);
 		Assertion.assertTrue(searchAlerts.getText().contains(MercuryContent.MERCURY_SEARCH_NOT_MATCH));
 	}
 
@@ -114,6 +112,7 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 		waitForElementVisibleByElement(noChevrons.get(anchorIndex));
 		if (noChevrons.size() != 0) {
 			noChevrons.get(anchorIndex).click();
+			PageObjectLogging.log("verifyOpeningArticleInNav", "New article opened", true, driver);
 		}
 	}
 

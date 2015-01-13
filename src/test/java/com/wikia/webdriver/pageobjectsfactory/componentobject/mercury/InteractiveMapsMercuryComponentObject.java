@@ -59,7 +59,4 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 		waitForElementByElement(mapDiv);
 		Assertion.assertTrue(checkIfElementOnPage(mapDiv));
 	}
-
-
-
 }

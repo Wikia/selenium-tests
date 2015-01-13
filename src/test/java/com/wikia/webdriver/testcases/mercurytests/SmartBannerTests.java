@@ -5,7 +5,6 @@ import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SmartBannerComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

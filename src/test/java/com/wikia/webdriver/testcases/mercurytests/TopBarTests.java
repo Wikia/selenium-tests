@@ -41,7 +41,7 @@ public class TopBarTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"MercuryTopBarTests_003", "MercuryTopBarTests", "Mercury"})
-	public void MercuryTopBarTests_003_ClickingOptionWithChevronOpenArticle() { //FIX TYPO
+	public void MercuryTopBarTests_003_ClickingOptionWithChevronOpensNextLevel() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAIN_ARTICLE);
 		SearchNavSideMenuComponentObject nav = article.clickSearchButton();
