@@ -33,8 +33,11 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 	@FindBy(css = ".point-types")
 	private WebElement filterBoxPoints;
 	@FindBy(css = ".leaflet-tile")
-	private List<WebElement> leafletTile;
-
+	private WebElement leafletTile;
+	@FindBy(css = ".leaflet-marker-icon")
+	private WebElement poiPin;
+	@FindBy(css = ".leaflet-popup")
+	private WebElement poiPopUp;
 
 	public void clickCloseButton() {
 		driver.switchTo().activeElement();
@@ -56,8 +59,8 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 	}
 
 	public void clickZoomIn(int amountOfClicks) {
-		waitForElementVisibleByElement(zoomInButton);
 		while(amountOfClicks!=0){
+			waitForElementClickableByElement(zoomInButton);
 			tapOnElement(zoomInButton);
 			amountOfClicks--;
 		}
@@ -72,16 +75,22 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 
 
 	public void clickZoomOut(int amountOfClicks) {
-		waitForElementVisibleByElement(zoomOutButton);
 		while(amountOfClicks!=0) {
+			waitForElementClickableByElement(zoomOutButton);
 			tapOnElement(zoomOutButton);
 			amountOfClicks--;
 		}
 		PageObjectLogging.log("clickZoomOut", "Zoom out button was clicked", true);
 	}
 
+	public void clickPin() {
+		waitForElementVisibleByElement(poiPin);
+		tapOnElement(poiPin);
+		PageObjectLogging.log("clickPin", "Pin was clicked", true);
+	}
+
 	public String getMapLeafletSrc() {
-		return leafletTile.get(0).getAttribute("src");
+		return leafletTile.getAttribute("src");
 	}
 
 	public void verifyFilterBoxWasExpanded() {
@@ -112,8 +121,12 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 	}
 
 	public void verifyMapZoomChangedView(String leaflet, String newLeaflet) {
-		System.out.println(leaflet);
-		System.out.println(newLeaflet);
 		Assertion.assertFalse(leaflet.contains(newLeaflet));
+		PageObjectLogging.log("verifyMapZoomChangedView", "Map view was changed", true, driver);
+	}
+
+	public void verifyPinPopUpAppeared() {
+		Assertion.assertTrue(checkIfElementOnPage(poiPopUp));
+		PageObjectLogging.log("verifyPinPopUpAppeared", "Pin popup appeared after click", true, driver);
 	}
 }

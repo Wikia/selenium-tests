@@ -78,6 +78,19 @@ public class InteractiveMapsTests extends NewTestTemplate {
 		maps.clickZoomOut(6);
 		String newLeaflet = maps.getMapLeafletSrc();
 		maps.verifyMapZoomChangedView(leaflet, newLeaflet);
+		leaflet = maps.getMapLeafletSrc();
+		maps.clickZoomIn(3);
+		newLeaflet = maps.getMapLeafletSrc();
+		maps.verifyMapZoomChangedView(leaflet, newLeaflet);
+	}
 
+	@Test(groups = {"MercuryInteractiveMaps_007", "MercuryInteractiveMapsTests", "Mercury"})
+	public void MercuryInteractiveMaps_007_VerifyPoiIsClickable() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_MAPS);
+		InteractiveMapsMercuryComponentObject maps = article.clickViewMapButton();
+		maps.verifyMapModalIsVisible();
+		maps.clickPin();
+		maps.verifyPinPopUpAppeared();
 	}
 }
