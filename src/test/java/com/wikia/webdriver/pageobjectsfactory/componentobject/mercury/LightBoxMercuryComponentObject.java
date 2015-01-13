@@ -1,6 +1,7 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
 import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import io.appium.java_client.MobileDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -40,9 +41,23 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		return new MercuryBasePageObject(driver);
 	}
 
+	public String getCurrentImagePath() {
+		return currentImage.getAttribute("src");
+	}
+
 	public void verifyCurrentImageIsVisible() {
 		waitForElementVisibleByElement(currentImage);
 		Assertion.assertTrue(checkIfElementOnPage(currentImage));
+	}
+
+	public void swipeImageLeft() {
+		swipeLeft(lightboxContent);
+		PageObjectLogging.log("swipeImageLeft", "Swipe left was simulated", true, driver);
+	}
+
+	public void swipeImageRight() {
+		swipeRight(lightboxContent);
+		PageObjectLogging.log("swipeImageRight", "Swipe left was simulated", true, driver);
 	}
 
 	public void testGestures() {
@@ -55,6 +70,10 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		doubleTapZoom(pageWrapper);
 		System.out.println("page wrapper");
 
+	}
+
+	public void verifyImageWasChanged(String imageOnePath, String imageTwoPath) {
+		Assertion.assertFalse(imageOnePath.equals(imageTwoPath), "Image in lightbox was changed");
 	}
 
 	public void verifyLightboxClosed() {

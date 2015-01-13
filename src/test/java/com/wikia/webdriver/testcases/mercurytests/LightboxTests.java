@@ -47,7 +47,6 @@ public class LightboxTests extends NewTestTemplate {
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
 		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 		lightbox.verifyCurrentImageIsVisible();
-		lightbox.testGestures();
 	}
 
 	//MT02
@@ -61,11 +60,11 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyLightboxClosed();
 	}
 
-	//MT03 - NOT COMPLETED YET
 	@Test(groups = {"MercuryLightboxTests_003", "MercuryLightboxTests", "Mercury"})
-	public void MercuryLightboxTests_003_SwipeToNavigate() {
+	public void MercuryLightboxTests_003_SwipeLeft() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
+
 		//LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 		//lightbox.verifyCurrentImageIsVisible();
 		//MobileDriver driver2 = (MobileDriver)driver;
@@ -81,17 +80,18 @@ public class LightboxTests extends NewTestTemplate {
 		WebElement element = mobileDriver.findElement(By.xpath("//img[contains(@class, 'loaded')]"));
 		int x = element.getLocation().x;
 		int y = element.getLocation().y;
-		int poz = (int)((322 / 559f) * 1708f) + 212;
+		int poz = (int)((322 / 559f) * 1708f) + 212; //212 - bar z godziną
 		System.out.println(x);
 		System.out.println(y);
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		System.out.println(js.executeScript("return $(window).height()"));
-		System.out.println(js.executeScript("return $(document).height()"));
+		System.out.println(js.executeScript("return $(window).height()")); //Wysokość contentu który widoczny
+		System.out.println(js.executeScript("return $(document).height()")); //wysokość aplikacji w rozdzielczości faktycznej np. FULL HD to 1000 pare
 		System.out.println("C: " + 322 / 559f + " Start: " + poz);
 		//System.out.println(mobileDriver.manage().window().getSize());
 //		new TouchActions((WebDriver)mobileDriver).singleTap(element);
 		mobileDriver.context("NATIVE_APP");
+
 
 		mobileDriver.tap(1, 100, poz+15, 500);
 		
@@ -118,6 +118,7 @@ public class LightboxTests extends NewTestTemplate {
 		}
 //		System.out.println(js.executeScript("return $(document).height()"));
 //		PageObjectLogging.log("Scroll", "After", true, driver);
+
 	}
 	
 	//MT04 - NOT COMPLETED YET
@@ -196,4 +197,11 @@ public class LightboxTests extends NewTestTemplate {
 			
 		}
 
+	@Test(groups = {"MercuryLightboxTests_005", "MercuryLightboxTests", "Mercury"})
+	public void MercuryLightboxTests_005_DoubleTapZoomImage() {
+		MercuryBasePageObject base = new MercuryBasePageObject(driver);
+		MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
+		LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+		lightbox.testGestures();
+	}
 }

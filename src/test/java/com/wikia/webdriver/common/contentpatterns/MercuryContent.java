@@ -11,17 +11,19 @@ import org.openqa.selenium.WebDriver;
  */
 public class MercuryContent {
 
-	public static final String mercurySpecialPage = "Special:Mercury";
+	public static final String MERCURY_WIKI = "mercurywikitests.wikia.com";
+	public static final String MERCURY_SPECIAL_PAGE = "Special:Mercury";
 
 	//Articles prepared for Mercury
 	public static final String MERCURY_TEST = "MercuryTest";
+	public static final String MERCURY_MAPS = "embedMap";
 	public static final String MERCURY_GALLERY_TEST_ARTICLE= "MercuryGallery";
 	public static final String MERCURY_VIDEO_TEST_ARTICLE = "MercuryVideoTest";
 	public static final String MERCURY_COMMENTS_TEST_ARTICLE = "MercuryCommentsTest";
 	public static final String MERCURY_CATEGORY_TEST_ARTICLE = "MercuryCategoryTests";
 	public static final String MERCURY_INFOBOX_TEST_ARTICLE = "MercuryInfobox";
 	public static final String MERCURY_TOC_TEST_ARTICLE = "MercuryToc";
-	public static final String MERCURY_MAIN_ARTICLE = "QAarticle1398440783467hh";
+	public static final String MERCURY_MAIN_ARTICLE = "MercuryWikiTests_Wiki";
 
 
 	//Index variables for Mercury
@@ -35,13 +37,6 @@ public class MercuryContent {
 	public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);
-		//Temporary solution
-		try{
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("document.cookie='useskin=mercury;domain=.wikia.com;expires=' + (new Date('2015')) +';path=/'");
-		}catch(JSException exec){
-
-		}
 		mercuryPage.clickMercuryButton(); //Uncomment this line after temporary soultion won`t be needed any more
 	}
 }

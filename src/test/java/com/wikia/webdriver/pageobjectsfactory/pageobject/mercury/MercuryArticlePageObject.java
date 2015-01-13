@@ -4,12 +4,14 @@ import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsMercuryComponentObject;
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 
 import java.util.List;
 
@@ -56,6 +58,9 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	private WebElement canonicalUrl;
 	@FindBy(css = ".article-image img")
 	private WebElement singleImg;
+	@FindBy(css = ".view-map")
+	private WebElement viewMapButton;
+
 
 	public LightBoxMercuryComponentObject clickGalleryImage(int index) {
 		scrollToElement(galleryImagesArray.get(index));
@@ -87,6 +92,12 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 		scrollAndClick(tocCollapsed);
 	}
 
+	public InteractiveMapsMercuryComponentObject clickViewMapButton() {
+		waitForElementVisibleByElement(viewMapButton);
+		viewMapButton.click();
+		PageObjectLogging.log("clickMapButton", "Map button was clicked", true);
+		return new InteractiveMapsMercuryComponentObject(driver);
+	}
 	public void verifyCommentsAreUncollapsed() {
 		Assertion.assertFalse(commentsHeader.getAttribute("class").contains("collapsed"));
 	}
