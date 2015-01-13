@@ -57,20 +57,19 @@ public class DropDownComponentObject extends WikiBasePageObject {
 	 * @return
 	 */
 	public DropDownComponentObject openDropDown() {
-		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		try {
-			new WebDriverWait(driver, 14, 2000).until(new ExpectedCondition<Boolean>() {
+			new WebDriverWait(driver, 15, 3000).until(new ExpectedCondition<Boolean>() {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
-					new Actions(driver).moveToElement(loginDropdownTrigger).perform();
-					if (!loginDropdown.isDisplayed()) {
-						loginDropdownTrigger.click();
+					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
+						new Actions(driver).click(loginDropdownTrigger).perform();
 						return false;
 					}
 					return true;
 				}
 			});
-		} finally {
+		}finally {
 			restoreDeaultImplicitWait();
 		}
 
@@ -78,7 +77,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 			"DropdownVisible",
 			"Login dropdown is visible",
 			true, driver
-		);
+							 );
 
 		return this;
 	}
