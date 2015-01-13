@@ -13,7 +13,7 @@ public class CssChromeTests_TwoDrivers extends NewTestTemplate_TwoDrivers {
 	Credentials credentials = config.getCredentials();
 
 	@Test(groups = {"cssChromeTwoDrivers_001", "CssChrome"})
-	public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision_QAART_365() {
+	public void cssChromeTwoDrivers_001_verifyThatConflictAppearsWithTheLatestRevision() {
 		//first user opens the special:CSS
 		switchToWindow(driverOne);
 		WikiBasePageObject base1 = new WikiBasePageObject(driverOne);

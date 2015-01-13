@@ -1,13 +1,11 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.mercury;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
-import io.appium.java_client.MobileDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.WebElement;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
 /*
@@ -57,7 +55,7 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 
 	public void swipeImageRight() {
 		swipeRight(lightboxContent);
-		PageObjectLogging.log("swipeImageRight", "Swipe left was simulated", true, driver);
+		PageObjectLogging.log("swipeImageRight", "Swipe right was simulated", true, driver);
 	}
 
 	public void testGestures() {
@@ -69,7 +67,6 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 		System.out.println("Content");
 		doubleTapZoom(pageWrapper);
 		System.out.println("page wrapper");
-
 	}
 
 	public void verifyImageWasChanged(String imageOnePath, String imageTwoPath) {
@@ -79,5 +76,5 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 	public void verifyLightboxClosed() {
 		Assertion.assertFalse(checkIfElementOnPage(currentImage));
 	}
-
 }
+

@@ -1,19 +1,16 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
-import com.wikia.webdriver.common.core.Assertion;
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
-import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsMercuryComponentObject;
-import io.appium.java_client.MobileDriver;
-import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
-import java.util.List;
+import com.wikia.webdriver.common.core.Assertion;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.InteractiveMapsMercuryComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
+import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavSideMenuComponentObject;
 
 public class MercuryArticlePageObject extends MercuryBasePageObject{
 
@@ -79,17 +76,20 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	public void clickViewReplies() {
 		waitForElementVisibleByElement(showRepliesButtons.get(0));
 		scrollAndClick(showRepliesButtons.get(0));
+		PageObjectLogging.log("clickViewReplies", "View replies was clicked", true, driver);
 	}
 
 	public SearchNavSideMenuComponentObject clickSearchButton() {
 		waitForElementVisibleByElement(searchButton);
 		searchButton.click();
+		PageObjectLogging.log("clickSearchButton", "Search button was clicked", true, driver);
 		return new SearchNavSideMenuComponentObject(driver);
 	}
 
 	public void clickTocCaption() {
 		waitForElementVisibleByElement(tocCollapsed);
 		scrollAndClick(tocCollapsed);
+		PageObjectLogging.log("clickTocCaption", "Toc was clicked", true, driver);
 	}
 
 	public InteractiveMapsMercuryComponentObject clickViewMapButton() {

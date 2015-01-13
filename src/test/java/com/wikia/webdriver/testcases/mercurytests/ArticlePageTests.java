@@ -8,8 +8,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
 /**l
  * @authors: Rodrigo Gomez, Łukasz Nowak
  * @ownership: Mobile Web
@@ -46,6 +44,5 @@ public class ArticlePageTests extends NewTestTemplate {
 		MercuryArticlePageObject articlePage = base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_TEST);
 		articlePage.verifyCanonicalUrl();
 	}
-
 }
 

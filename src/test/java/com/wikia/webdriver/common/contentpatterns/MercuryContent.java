@@ -1,10 +1,9 @@
 package com.wikia.webdriver.common.contentpatterns;
 
+import org.openqa.selenium.WebDriver;
+
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.SpecialMercuryPageObject;
-import netscape.javascript.JSException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 
 /**
  * @author: Rodrigo Gomez, Łukasz Nowak
@@ -25,7 +24,6 @@ public class MercuryContent {
 	public static final String MERCURY_TOC_TEST_ARTICLE = "MercuryToc";
 	public static final String MERCURY_MAIN_ARTICLE = "MercuryWikiTests_Wiki";
 
-
 	//Index variables for Mercury
 	public static final int MERCURY_GALLERY_IMAGE_INDEX = 0;
 	public static final int MERCURY_SEARCH_CLICK_INDEX = 1;
@@ -37,6 +35,6 @@ public class MercuryContent {
 	public static void turnOnMercurySkin(WebDriver driver, String wikiURL) {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		SpecialMercuryPageObject mercuryPage = base.openSpecialMercury(wikiURL);
-		mercuryPage.clickMercuryButton(); //Uncomment this line after temporary soultion won`t be needed any more
+		mercuryPage.clickMercuryButton(); //Uncomment this line after temporary solution won`t be needed any more
 	}
 }

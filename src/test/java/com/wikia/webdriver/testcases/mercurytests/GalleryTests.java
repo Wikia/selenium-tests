@@ -34,7 +34,7 @@ public class GalleryTests extends NewTestTemplate {
 		lightbox.verifyCurrentImageIsVisible();
 	}
 
-	@Test(groups = {"MercuryGallerYTests_002", "MercuryGalleryTests", "Mercury"})
+	@Test(groups = {"MercuryGalleryTests_002", "MercuryGalleryTests", "Mercury"})
 	public void MercuryGalleryTests_002_VerifyCloseButtonWillCloseLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
 		base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
@@ -44,5 +44,4 @@ public class GalleryTests extends NewTestTemplate {
 		base = lightbox.clickCloseButton();
 		lightbox.verifyLightboxClosed();
 	}
-
 }

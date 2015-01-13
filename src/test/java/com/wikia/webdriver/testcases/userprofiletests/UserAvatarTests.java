@@ -37,7 +37,7 @@ public class UserAvatarTests extends NewTestTemplate {
 			groups = {"AvatarTest", "AvatarTest_002"},
 			dependsOnMethods = "AvatarTest_001_uploadAvatar"
 	)
-	public void AvatarTest_002_removeAvatar_QAART_477() {
+	public void AvatarTest_002_removeAvatar() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject profile = base.openProfilePage(credentials.userNameStaff, wikiURL);

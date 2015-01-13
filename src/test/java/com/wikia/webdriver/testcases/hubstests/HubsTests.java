@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.hubstests;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -115,9 +116,9 @@ public class HubsTests extends NewTestTemplateBeforeClass {
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		String wikiCorpSetupURL = urlBuilder.getUrlForWiki(corpWikiName);
 		SpecialManageWikiaHome manageWikia = base.openSpecialManageWikiaHomePage(wikiCorpSetupURL);
-		HashMap<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
+		Map<String, Integer> slotDesiredSetup = manageWikia.getSlotSetup();
 		HomePageObject home = base.openCorporateHomePage(wikiCorporateURL);
-		HashMap<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
+		Map<String, Integer> slotCurrentSetup = home.getVisualizationWikisSetup();
 		home.verifyVisualizationURLs(slotDesiredSetup, slotCurrentSetup);
 	}
 

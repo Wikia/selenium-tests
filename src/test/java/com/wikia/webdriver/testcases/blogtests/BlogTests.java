@@ -80,7 +80,7 @@ public class BlogTests extends NewTestTemplate{
 	}
 
 	@Test(groups = { "BlogTests_004", "BlogTests"})
-	public void BlogTests_004_deleteUndelete_QAART_479() {
+	public void BlogTests_004_deleteUndelete() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		UserProfilePageObject userProfile = base.openProfilePage(credentials.userName4, wikiURL);

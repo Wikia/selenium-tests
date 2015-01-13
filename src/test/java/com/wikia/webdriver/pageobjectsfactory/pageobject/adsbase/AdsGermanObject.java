@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -44,16 +45,16 @@ public class AdsGermanObject extends AdsBaseObject {
 	/*
 	 * List of all possible combinations for 71M ads with their characteristic slots
 	 */
-	private List<HashMap<String,Object>> combinations = new ArrayList<HashMap<String, Object>>();
+	private List<Map<String, Object>> combinations = new ArrayList<>();
 
 	private void setSlots() {
-		HashMap<String,Object> billboardMap = new HashMap<String, Object>();
-		HashMap<String,Object> fireplaceMap = new HashMap<String, Object>();
-		HashMap<String,Object> flashtalkingMap = new HashMap<String, Object>();
-		HashMap<String,Object> wp_internMap = new HashMap<String, Object>();
-		HashMap<String,Object> leaderboardMap = new HashMap<String, Object>();
-		HashMap<String,Object> medrecMap = new HashMap<String, Object>();
-		HashMap<String,Object> prefooterMap = new HashMap<String, Object>();
+		Map<String,Object> billboardMap = new HashMap<String, Object>();
+		Map<String,Object> fireplaceMap = new HashMap<String, Object>();
+		Map<String,Object> flashtalkingMap = new HashMap<String, Object>();
+		Map<String,Object> wp_internMap = new HashMap<String, Object>();
+		Map<String,Object> leaderboardMap = new HashMap<String, Object>();
+		Map<String,Object> medrecMap = new HashMap<String, Object>();
+		Map<String,Object> prefooterMap = new HashMap<String, Object>();
 
 		List<String> billboard = new ArrayList<String>();
 		List<String> fireplace = new ArrayList<String>();
@@ -105,7 +106,7 @@ public class AdsGermanObject extends AdsBaseObject {
 	public void verify71MediaAdsPresent() {
 		AdsComparison adsComparison = new AdsComparison();
 
-		for (HashMap<String,Object> combination: combinations) {
+		for (Map<String,Object> combination: combinations) {
 			List<String> combinationSlots = (List)combination.get("slots");
 			if (checkIfCombinationOnPage(combinationSlots)) {
 				PageObjectLogging.log(
@@ -135,7 +136,7 @@ public class AdsGermanObject extends AdsBaseObject {
 
 	public void verifyNo71MediaAds() {
 		PageObjectLogging.log("PageOpened", "Page opened", true, driver);
-		for (HashMap<String,Object> combination: combinations) {
+		for (Map<String,Object> combination: combinations) {
 			List<String> combinationSlots = (List)combination.get("slots");
 			if (!checkIfCombinationOnPage(combinationSlots)) {
 				PageObjectLogging.log(

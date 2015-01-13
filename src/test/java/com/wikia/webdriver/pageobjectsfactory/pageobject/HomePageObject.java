@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -50,9 +51,9 @@ public class HomePageObject extends WikiBasePageObject {
 	 * getting current slot setup on visualization component
 	 * @return
 	 */
-	public HashMap<String, Integer> getVisualizationWikisSetup() {
+	public Map<String, Integer> getVisualizationWikisSetup() {
 		List<String> wikiList = new ArrayList<String>();
-		HashMap<String, Integer> visualizationSetup = new HashMap<String, Integer>();
+		Map<String, Integer> visualizationSetup = new HashMap<String, Integer>();
 		for (WebElement element : visualizationWikis) {
 			wikiList.add(element.getAttribute("href"));
 		}
@@ -97,7 +98,7 @@ public class HomePageObject extends WikiBasePageObject {
 	 * @param slotDesiredSetup
 	 * @param slotCurrentSetup
 	 */
-	public void verifyVisualizationURLs(HashMap<String, Integer> slotDesiredSetup, HashMap<String, Integer> slotCurrentSetup) {
+	public void verifyVisualizationURLs(Map<String, Integer> slotDesiredSetup, Map<String, Integer> slotCurrentSetup) {
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.VIDEO_GAMES.toString()), slotDesiredSetup.get(HubName.VIDEO_GAMES.toString()));
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.ENTERTAINMENT.toString()), slotDesiredSetup.get(HubName.ENTERTAINMENT.toString()));
 		Assertion.assertEquals(slotCurrentSetup.get(HubName.LIFESTYLE.toString()), slotDesiredSetup.get(HubName.LIFESTYLE.toString()));
@@ -149,7 +150,10 @@ public class HomePageObject extends WikiBasePageObject {
 			// Brasilian page is a corporate page, but actually it is hacked hub page and it doesn't have corporate footer
 			// (and language dropDown)
 			if (!checkIfPageIsHub() ) {
+				languageURL += URLsContent.WIKIA_DIR;
+
 				newHome.verifyLanguageButton();
+				newHome.verifyURL(languageURL);
 			} else {
 				languageURL += URLsContent.WIKI_DIR;
 				newHome.verifyURLcontains(languageURL);
@@ -160,7 +164,6 @@ public class HomePageObject extends WikiBasePageObject {
 					true
 				);
 			}
-			newHome.verifyURL(languageURL);
 			newHome.navigateBack();
 		}
 	}

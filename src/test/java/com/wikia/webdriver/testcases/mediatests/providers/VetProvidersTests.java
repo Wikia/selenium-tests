@@ -25,7 +25,7 @@ public class VetProvidersTests extends NewTestTemplate {
 			dataProvider = "videoUrl",
 			groups = {"VetProvidersArticle", "VetProvidersTests_001", "Media"}
 	)
-	public void VetProvidersTests_001_article(String videoUrl, String videoName) {
+	public void VetProvidersTests_001_article_MAIN_3413(String videoUrl, String videoName) {
 		PageObjectLogging.log("", videoUrl, true);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

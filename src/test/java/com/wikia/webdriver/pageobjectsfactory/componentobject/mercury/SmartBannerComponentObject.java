@@ -31,6 +31,7 @@ public class SmartBannerComponentObject extends MercuryBasePageObject{
 	public void clickCloseButton() {
 		waitForElementVisibleByElement(closeButton);
 		closeButton.click();
+		PageObjectLogging.log("clickCloseButton", "Close button was clicked", true, driver);
 	}
 
 	public void clickInstallButton() {

@@ -69,7 +69,7 @@ public class PlayingVideoTests extends NewTestTemplate {
 
 	// Test: IGN video in lightbox
 	@Test(groups = { "Media", "ProviderTests", "PlayingVideoTests", "PlayingVideoTests_004" })
-	public void PlayingVideoTests_004_ign_QAART_483() {
+	public void PlayingVideoTests_004_ign() {
 		int itemNumber = 0;
 		String providerName = "ign";
 		String queryString = "provider="+providerName;

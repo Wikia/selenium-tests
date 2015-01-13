@@ -146,8 +146,8 @@
 			<artifactId>json</artifactId>
 			<version>20080701</version>
 			<scope>test</scope>
-        </dependency>
-        <dependency>
+		</dependency>
+		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
 			<version>2.1.0</version>

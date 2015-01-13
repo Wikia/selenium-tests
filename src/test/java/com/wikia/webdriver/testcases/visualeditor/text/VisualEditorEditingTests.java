@@ -1,6 +1,7 @@
 package com.wikia.webdriver.testcases.visualeditor.text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,7 +35,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	WikiBasePageObject base;
 
 	private String text = WikiTextContent.TEXT;
-	private ArrayList<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
+	private List<String> wikiTexts, linkWikiTexts, firstSourceEditText, secondSourceEditText;
 	private String articleName;
 
 	@BeforeClass(alwaysRun = true)
@@ -94,7 +95,7 @@ public class VisualEditorEditingTests extends NewTestTemplateBeforeClass {
 	)
 	public void VisualEditorEditing_002_delete() {
 		String removeText = "Lorem";
-		ArrayList<String> deletedWikiTexts;
+		List<String> deletedWikiTexts;
 		deletedWikiTexts = new ArrayList<>();
 		deletedWikiTexts.add(removeText);
 
