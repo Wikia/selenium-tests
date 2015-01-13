@@ -1,5 +1,7 @@
 package com.wikia.webdriver.testcases.mercurytests;
 
+import java.util.List;
+
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
 
@@ -12,6 +14,7 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.gallery.GalleryBui
 import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.LightBoxMercuryComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.PerformTouchAction;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 
 import org.openqa.selenium.By;
@@ -91,6 +94,7 @@ public class LightboxTests extends NewTestTemplate {
 		mobileDriver.context("NATIVE_APP");
 
 		mobileDriver.tap(1, 100, poz+15, 500);
+		
 //		mobileDriver.tap(1, 100, 2100, 500);
 //		mobileDriver.zoom(x, y*2+100);
 //		mobileDriver.swipe(0, poz, 0, 212, 1707);
@@ -115,5 +119,64 @@ public class LightboxTests extends NewTestTemplate {
 //		System.out.println(js.executeScript("return $(document).height()"));
 //		PageObjectLogging.log("Scroll", "After", true, driver);
 	}
+	
+	//MT04 - NOT COMPLETED YET
+		@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
+		public void MercuryLightboxTests_004_SwipeToNavigate() {
+			MercuryBasePageObject base = new MercuryBasePageObject(driver);
+			base.getUrl("http://wikia.com/");
+			List<WebElement> hubs = driver.findElements(By.cssSelector("img.wkhome-img"));
+			//hubs.get(4).click();
+			AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
+			WebElement hub = hubs.get(0);
+			try {
+				Thread.sleep(3000);
+				System.out.println("Before...");
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
+			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left");
+			try {
+				Thread.sleep(3000);
+				System.out.println("After...");
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+//			System.out.println(By.cssSelector("img.wkhome-img"));
+//			PerformTouchAction.SwipeToWebElement(driver, mobileDriver, hub);
+//			JavascriptExecutor js = (JavascriptExecutor) driver;
+//			PageObjectLogging.log("screen", "before", true, driver);
+//			js.executeScript("window.scrollTo(0, 1338)");
+//			PageObjectLogging.log("screen", "after", true, driver);
+//			mobileDriver.context("NATIVE_APP");
+			
+//			mobileDriver.tap(1, hub, 300);
+//			mobileDriver.
+//			mobileDriver.context("WEBVIEW_1");
+			
+		}
+		
+		//MT04 - NOT COMPLETED YET
+		@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
+		public void MercuryLightboxTests_005_SwipeToNavigate() {
+			MercuryBasePageObject base = new MercuryBasePageObject(driver);
+			MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
+			LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+			lightbox.verifyCurrentImageIsVisible();
+			
+			AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
+			
+			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
+			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left");
+			try {
+				Thread.sleep(3000);
+				System.out.println("After...");
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+
+			
+		}
 
 }
