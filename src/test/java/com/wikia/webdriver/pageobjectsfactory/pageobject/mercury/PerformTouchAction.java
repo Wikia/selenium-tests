@@ -52,6 +52,7 @@ public class PerformTouchAction {
 		nativeHeight = mobileDriver.manage().window().getSize().height;
 		nativeWidth = mobileDriver.manage().window().getSize().width;
 		mobileDriver.context("WEBVIEW_1");
+		System.out.println(mobileDriver.getContext());
 		try {
 			int startX = nativeWidth / 2;
 			int startY = nativeHeight - 1;
@@ -61,12 +62,16 @@ public class PerformTouchAction {
 			mobileDriver.context("NATIVE_APP");
 			mobileDriver.swipe(startX, startY, endX, endY, duration);
 			mobileDriver.context("WEBVIEW_1");
-			System.out.println(mobileDriver.getContext());
+			System.out.println("after swipe");
 			try {
 				Thread.sleep(duration * 2);
-			} catch(Exception e) {}
+			} catch(Exception e) {System.out.println(e);}
 			js.executeScript("window.scrollTo(0, 0)");
-		} catch (Exception e) {}
+		} catch (Exception e) {System.out.println(e);}
+		System.out.println(mobileDriver.getContext());
+		if (mobileDriver.getContext() != "WEBVIEW_1") {
+			mobileDriver.context("WEBVIEW_1");
+		}
 		appWebviewHeight = Integer.parseInt(js.executeScript("return $(window).height()").toString());
 		appWebviewWidth = Integer.parseInt(js.executeScript("return $(window).width()").toString());
 		loadedPageHeight = Integer.parseInt(js.executeScript("return $(document).height()").toString());
@@ -111,16 +116,22 @@ public class PerformTouchAction {
 		System.out.println("=======================================");
 	}
 	
-	public void SwipeFromCenterToDirection (WebDriver driver, AndroidDriver mobileDriver, String direction, int duration){
+	public void SwipeFromCenterToDirection (WebDriver driver, AndroidDriver mobileDriver, String direction, int pixelPath, int duration){
 		int centerX = appNativeWidth / 2;
 		int centerY = appNativeHeight / 2;
-		int path = (centerX / 5) * 4;
+		int path = 0;
 		switch (direction) {
 			case "left": 
 				try {
+					if (pixelPath < centerX) {
+						path = pixelPath;
+					} else {
+						path = centerX - 1;
+					}
 					System.out.println(centerX + " " + centerY + " " + (centerX - path) + " " + centerY + " " + duration);
 					mobileDriver.context("NATIVE_APP");
 					mobileDriver.swipe(centerX, centerY, centerX - path, centerY, duration);
+//					mobileDriver.swipe(360, 615, 300, 615, duration);
 					mobileDriver.context("WEBVIEW_1");
 					try {
 						Thread.sleep(duration * 2);
@@ -129,6 +140,9 @@ public class PerformTouchAction {
 				break;
 				
 			default: break;
+		}
+		if (mobileDriver.getContext() != "WEBVIEW_1") {
+			mobileDriver.context("WEBVIEW_1");
 		}
 	}
 	

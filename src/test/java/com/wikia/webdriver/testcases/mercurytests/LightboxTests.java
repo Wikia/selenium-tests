@@ -167,18 +167,23 @@ public class LightboxTests extends NewTestTemplate {
 			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
 			
 			LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
+			
+			
+			
+			
+//			try {
+//				Thread.sleep(5000);
+//				System.out.println("S1...");
+//			} catch(InterruptedException ex) {
+//				Thread.currentThread().interrupt();
+//			}
+//			System.out.println(lightbox.currentImageSrcPath());
+//			System.out.println(lightbox.currentImageSrcPath());
+			
 			lightbox.verifyCurrentImageIsVisible();
+			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left", 150, 100);
 			
-			
-			
-			try {
-				Thread.sleep(5000);
-				System.out.println("S1...");
-			} catch(InterruptedException ex) {
-				Thread.currentThread().interrupt();
-			}
-			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left", 100);
-			
+			//lightbox.verifyImageWasChanged(imageOnePath, imageTwoPath);
 //			try {
 //				Thread.sleep(5000);
 //				System.out.println("S2...");
@@ -193,7 +198,7 @@ public class LightboxTests extends NewTestTemplate {
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
-
+//			System.out.println(lightbox.currentImageSrcPath());
 			
 		}
 

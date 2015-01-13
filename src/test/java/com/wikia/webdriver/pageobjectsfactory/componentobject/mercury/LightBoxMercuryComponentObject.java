@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
 
 /*
-* @author: Rodrigo Gomez, Łukasz Nowak
+* @author: Rodrigo Gomez, Łukasz Nowak, Tomasz Napieralski
 * */
 
 public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
@@ -78,6 +78,10 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 
 	public void verifyLightboxClosed() {
 		Assertion.assertFalse(checkIfElementOnPage(currentImage));
+	}
+	
+	public String currentImageSrcPath () {
+		return currentImage.getAttribute("src");
 	}
 
 }
