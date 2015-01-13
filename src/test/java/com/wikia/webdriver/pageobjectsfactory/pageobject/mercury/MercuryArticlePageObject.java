@@ -20,7 +20,7 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(css = ".article-gallery > figure > img")
+	@FindBy(css = ".article-gallery img")
 	private List<WebElement> galleryImagesArray;
 	@FindBy(css = ".article-gallery")
 	private List<WebElement> articleGalleryFigure;

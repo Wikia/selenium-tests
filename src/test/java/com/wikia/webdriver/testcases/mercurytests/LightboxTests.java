@@ -136,7 +136,7 @@ public class LightboxTests extends NewTestTemplate {
 				Thread.currentThread().interrupt();
 			}
 			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
-			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left");
+//			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left");
 			try {
 				Thread.sleep(3000);
 				System.out.println("After...");
@@ -160,17 +160,34 @@ public class LightboxTests extends NewTestTemplate {
 		//MT04 - NOT COMPLETED YET
 		@Test(groups = {"MercuryLightboxTests_004", "MercuryLightboxTests", "Mercury"})
 		public void MercuryLightboxTests_005_SwipeToNavigate() {
+			AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
 			MercuryBasePageObject base = new MercuryBasePageObject(driver);
 			MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
+			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
+			
 			LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 			lightbox.verifyCurrentImageIsVisible();
 			
-			AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
 			
-			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
-			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left");
+			
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
+				System.out.println("S1...");
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left", 100);
+			
+//			try {
+//				Thread.sleep(5000);
+//				System.out.println("S2...");
+//			} catch(InterruptedException ex) {
+//				Thread.currentThread().interrupt();
+//			}
+//			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left", 100);
+			
+			try {
+				Thread.sleep(5000);
 				System.out.println("After...");
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();

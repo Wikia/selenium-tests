@@ -47,10 +47,10 @@ public class MercuryBasePageObject extends MobileBasePageObject{
 	element.swipe(direction, int)
 	*/
 	public void tapOnElement(WebElement element) {
-//		JavascriptExecutor jsexec = (JavascriptExecutor)driver;
-//		jsexec.executeScript("arguments[0].click();", element);
-		Actions flick = new Actions(driver);
-		flick.click(element).perform();
+		JavascriptExecutor jsexec = (JavascriptExecutor)driver;
+		jsexec.executeScript("arguments[0].click();", element);
+//		Actions flick = new Actions(driver);
+//		flick.click(element).perform();
 	}
 
 	public void doubleTapZoom(WebElement element) {

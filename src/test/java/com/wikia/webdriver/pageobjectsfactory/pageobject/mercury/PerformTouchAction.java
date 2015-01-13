@@ -61,8 +61,9 @@ public class PerformTouchAction {
 			mobileDriver.context("NATIVE_APP");
 			mobileDriver.swipe(startX, startY, endX, endY, duration);
 			mobileDriver.context("WEBVIEW_1");
+			System.out.println(mobileDriver.getContext());
 			try {
-				Thread.sleep(duration);
+				Thread.sleep(duration * 2);
 			} catch(Exception e) {}
 			js.executeScript("window.scrollTo(0, 0)");
 		} catch (Exception e) {}
@@ -110,18 +111,19 @@ public class PerformTouchAction {
 		System.out.println("=======================================");
 	}
 	
-	public void SwipeFromCenterToDirection (WebDriver driver, AndroidDriver mobileDriver, String direction){
+	public void SwipeFromCenterToDirection (WebDriver driver, AndroidDriver mobileDriver, String direction, int duration){
 		int centerX = appNativeWidth / 2;
 		int centerY = appNativeHeight / 2;
 		int path = (centerX / 5) * 4;
 		switch (direction) {
 			case "left": 
 				try {
+					System.out.println(centerX + " " + centerY + " " + (centerX - path) + " " + centerY + " " + duration);
 					mobileDriver.context("NATIVE_APP");
-					mobileDriver.swipe(centerX, centerY, centerX - path, centerY, path);
+					mobileDriver.swipe(centerX, centerY, centerX - path, centerY, duration);
 					mobileDriver.context("WEBVIEW_1");
 					try {
-						Thread.sleep(path);
+						Thread.sleep(duration * 2);
 					} catch (Exception e) {}
 				} catch (Exception e) {}
 				break;
