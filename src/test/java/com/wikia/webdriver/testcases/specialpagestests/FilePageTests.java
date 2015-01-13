@@ -110,7 +110,7 @@ public class FilePageTests extends NewTestTemplate {
 	 * @author garth
 	 */
 	@Test(groups = {"FilePage", "filePage005_deleteFromHistory", "Media"})
-	public void filePage005_deleteFromHistory() {
+	public void filePage005_deleteFromHistory_MAIN_3524() {
 		// Go to Special:Videos to add a video
 		SpecialVideosPageObject specialVideos = new SpecialVideosPageObject(driver) ;
 		specialVideos.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
