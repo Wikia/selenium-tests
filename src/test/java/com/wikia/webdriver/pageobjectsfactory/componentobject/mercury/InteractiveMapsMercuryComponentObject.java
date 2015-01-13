@@ -7,6 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+import java.util.Map;
+
 public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject {
 
 	public InteractiveMapsMercuryComponentObject(WebDriver driver) {
@@ -29,6 +32,8 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 	private WebElement filterBoxHeader;
 	@FindBy(css = ".point-types")
 	private WebElement filterBoxPoints;
+	@FindBy(css = ".leaflet-tile")
+	private List<WebElement> leafletTile;
 
 
 	public void clickCloseButton() {
@@ -40,8 +45,43 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 
 	public void clickFilterBox() {
 		waitForElementVisibleByElement(filterBoxHeader);
-		filterBoxHeader.click();
+		tapOnElement(filterBoxHeader);
 		PageObjectLogging.log("clickFilterBox", "Filter box caption was clicked", true);
+	}
+
+	public void clickZoomIn() {
+		waitForElementVisibleByElement(zoomInButton);
+		tapOnElement(zoomInButton);
+		PageObjectLogging.log("clickZoomIn", "Zoom in button was clicked", true);
+	}
+
+	public void clickZoomIn(int amountOfClicks) {
+		waitForElementVisibleByElement(zoomInButton);
+		while(amountOfClicks!=0){
+			tapOnElement(zoomInButton);
+			amountOfClicks--;
+		}
+		PageObjectLogging.log("clickZoomIn", "Zoom in button was clicked", true);
+	}
+
+	public void clickZoomOut() {
+		waitForElementVisibleByElement(zoomOutButton);
+		tapOnElement(zoomOutButton);
+		PageObjectLogging.log("clickZoomOut", "Zoom out button was clicked", true);
+	}
+
+
+	public void clickZoomOut(int amountOfClicks) {
+		waitForElementVisibleByElement(zoomOutButton);
+		while(amountOfClicks!=0) {
+			tapOnElement(zoomOutButton);
+			amountOfClicks--;
+		}
+		PageObjectLogging.log("clickZoomOut", "Zoom out button was clicked", true);
+	}
+
+	public String getMapLeafletSrc() {
+		return leafletTile.get(0).getAttribute("src");
 	}
 
 	public void verifyFilterBoxWasExpanded() {
@@ -60,6 +100,20 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 		Assertion.assertTrue(checkIfElementOnPage(mapDiv));
 	}
 
+	public void verifyMapTitleInHeader() {
+		driver.switchTo().defaultContent();
+		waitForElementVisibleByElement(mapTitle);
+		Assertion.assertFalse(mapTitle.getText().isEmpty());
+	}
 
+	public void verifyMapIdInUrl() {
+		driver.switchTo().defaultContent();
+		Assertion.assertTrue(driver.getCurrentUrl().toString().contains("?map="));
+	}
 
+	public void verifyMapZoomChangedView(String leaflet, String newLeaflet) {
+		System.out.println(leaflet);
+		System.out.println(newLeaflet);
+		Assertion.assertFalse(leaflet.contains(newLeaflet));
+	}
 }

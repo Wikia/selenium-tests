@@ -32,17 +32,4 @@ public class SmartBannerTests extends NewTestTemplate {
 		banner.clickCloseButton();
 		banner.verifySmartBannerWasClosed();
 	}
-
-//	@Test(groups = {"MercurySmartBannerTest_002", "MercurySmartBannerTests", "Mercury"})
-//	public void MercurySmartBannerTest_002_ClickInstallButton() {
-//		MercuryBasePageObject base = new MercuryBasePageObject(driver);
-//		base.openMercuryWiki(wikiURL, URLsContent.SMART_BANNER_GLEE);
-//		SmartBannerComponentObject banner = new SmartBannerComponentObject(driver);
-//		banner.clickInstallButton();
-//		//TO DO
-//		/*
-//		* On our devices for tests phone should remember how to open links like these (with chrome)
-//		* and verify link Google Play/App store
-//		* */
-//	}
 }
