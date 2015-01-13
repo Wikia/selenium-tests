@@ -49,7 +49,7 @@ public class VetArticlePlaceholderTests extends NewTestTemplate{
 		ArticlePageObject article  = visualEditMode.submitArticle();
 		article.verifyArticleTitle(articleTitle);
 		VetAddVideoComponentObject vetAddingVideo = article.clickAddVideoPlaceholder();
-		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 0);
+		VetOptionsComponentObject vetOptions = vetAddingVideo.addVideoByQuery(VideoContent.WIKIA_VIDEO_QUERY, 2);
 		vetOptions.submit();
 		article.verifyVideo();
 	}
