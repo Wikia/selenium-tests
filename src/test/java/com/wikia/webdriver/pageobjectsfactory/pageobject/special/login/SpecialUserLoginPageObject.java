@@ -36,6 +36,8 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 	private WebElement forgotPasswordLink;
 	@FindBy(css = ".UserLogin .error-msg")
 	private WebElement messagePlaceholder;
+	@FindBy(css = "#mw-content-text .wikia-button-facebook")
+	private WebElement facebookSignUpButton;
 
 	private static final String DISABLED_ACCOUNT_MESSAGE = "Your account has been disabled by Wikia.";
 
@@ -127,5 +129,9 @@ public class SpecialUserLoginPageObject extends SpecialPageObject {
 			DISABLED_ACCOUNT_MESSAGE,
 			messagePlaceholder.getText()
 		);
+	}
+
+	public void verifyFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(facebookSignUpButton));
 	}
 }

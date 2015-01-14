@@ -169,6 +169,8 @@ public class WikiBasePageObject extends BasePageObject {
 	protected WebElement headerWhereIsMyExtensionPage;
 	@FindBy(css = "#globalNavigation")
 	protected WebElement newGlobalNavigation;
+	@FindBy(css = "#userForceLoginModal .wikia-button-facebook")
+	private WebElement facebookSignUpButton;
 
 	protected By editButtonBy = By.cssSelector("#WikiaMainContent a[data-id='edit']");
 	protected By parentBy = By.xpath("./..");
@@ -1212,5 +1214,9 @@ public class WikiBasePageObject extends BasePageObject {
 		}
 
 		return venusGlobalNav;
+	}
+
+	public void verifyFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(facebookSignUpButton));
 	}
 }

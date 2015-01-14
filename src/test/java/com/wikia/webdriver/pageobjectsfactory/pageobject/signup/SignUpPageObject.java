@@ -235,4 +235,8 @@ public class SignUpPageObject extends WikiBasePageObject {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public void verifyFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(facebookSignUpButton));
+	}
 }

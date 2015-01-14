@@ -27,6 +27,8 @@ public class PreferencesPageObject extends WikiBasePageObject {
 	private WebElement restoreDefaultLink;
 	@FindBy(css = ".global-notification.confirm")
 	private WebElement saveNotfication;
+	@FindBy(css = "#mw-content-text .wikia-button-facebook")
+	private WebElement facebookSignUpButton;
 
 	public enum tabNames {
 		INFO, EMAIL, EDITING, UNDER, FACEBOOK
@@ -97,5 +99,9 @@ public class PreferencesPageObject extends WikiBasePageObject {
 	public void verifySaveNotification() {
 		waitForElementVisibleByElement(saveNotfication);
 		PageObjectLogging.log("verifySaveNotification", "Restore Deault Link clicked", true);
+	}
+
+	public void verifyFBButtonVisible() {
+		Assertion.assertTrue(checkIfElementOnPage(facebookSignUpButton));
 	}
 }
