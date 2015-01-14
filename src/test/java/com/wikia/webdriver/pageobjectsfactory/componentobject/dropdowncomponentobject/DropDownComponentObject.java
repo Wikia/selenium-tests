@@ -25,7 +25,7 @@ public class DropDownComponentObject extends WikiBasePageObject {
 		super(driver);
 	}
 
-	@FindBy(css = ".ajaxLogin")
+	@FindBy(css = "#AccountNavigation")
 	private WebElement loginDropdownTrigger;
 	@FindBy(css = "#UserLoginDropdown")
 	private WebElement loginDropdown;
