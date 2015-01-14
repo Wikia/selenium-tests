@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Class responsible for taking and saving screenshots
@@ -36,8 +37,18 @@ public class Shooter {
 	 */
 	public File captureWebElement(WebElement element, WebDriver driver) {
 		File screen = capturePage(driver);
-		Point start = element.getLocation();
-		return imageEditor.cropImage(start, element.getSize(), screen);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		ArrayList<String> list = (ArrayList<String>) js.executeScript(
+			"var rect =  arguments[0].getBoundingClientRect();" +
+				"return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
+			element
+		);
+
+		Point start = new Point(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)));
+		Dimension size = new Dimension(Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));
+
+		return imageEditor.cropImage(start, size, screen);
 	}
 
 	public BufferedImage takeScreenshot(WebElement element, WebDriver driver) {
