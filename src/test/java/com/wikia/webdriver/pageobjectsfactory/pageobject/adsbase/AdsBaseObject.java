@@ -34,12 +34,17 @@ public class AdsBaseObject extends WikiBasePageObject {
 		"data-gpt-creative-size",
 	};
 
+	private static final String[] SPOTLIGHT_SLOTS = {
+		"#SPOTLIGHT_FOOTER_1",
+		"#SPOTLIGHT_FOOTER_2",
+		"#SPOTLIGHT_FOOTER_3",
+	};
+
 	// Selectors
 	private static final String WIKIA_MESSAGE_BUBLE = "#WikiaNotifications div[id*='msg']";
 	private static final String LIFTIUM_IFRAME_SELECTOR = "iframe[id*='Liftium']";
 	private static final String GPT_DIV_SELECTOR = "[data-gpt-creative-size]";
 	private static final String TOP_INCONTENT_BOXAD_SELECTOR = "div[id*='TOP_INCONTENT_BOXAD']";
-
 
 	// Elements
 	@FindBy(css = AdsContent.WIKIA_BAR_SELECTOR)
@@ -58,7 +63,6 @@ public class AdsBaseObject extends WikiBasePageObject {
 	protected WebElement presentLeaderboardGpt;
 	@FindBy(css = TOP_INCONTENT_BOXAD_SELECTOR)
 	protected WebElement topIncontentBoxad;
-
 
 	@FindBy(css = "script[src^=\"" + KRUX_CONTROL_TAG_URL_PREFIX + "\"]")
 	private WebElement kruxControlTag;
@@ -677,7 +681,19 @@ public class AdsBaseObject extends WikiBasePageObject {
 	}
 
 	public void checkSpotlights() {
-		// selector for spotlights is already loaded
-		// use screenshot comparison from "checkAdVisibleInSlot" method
+		// Removing comments section as it expands content downwards
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].parentNode.removeChild(arguments[0]);", waitForElementByCss("#WikiaArticleComments"));
+
+		AdsComparison adsComparison = new AdsComparison();
+
+		scrollToElement(waitForElementByCss("#SPOTLIGHT_FOOTER"));
+
+		for (String spotlightSelector : SPOTLIGHT_SLOTS) {
+			WebElement slot = waitForElementByCss(spotlightSelector);
+			verifySlotExpanded(slot);
+
+			adsComparison.isSlotVisible(slot, spotlightSelector, driver);
+		}
 	}
 }
