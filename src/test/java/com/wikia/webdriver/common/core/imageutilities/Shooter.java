@@ -1,14 +1,10 @@
 package com.wikia.webdriver.common.core.imageutilities;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Class responsible for taking and saving screenshots
