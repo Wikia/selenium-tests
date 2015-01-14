@@ -252,6 +252,7 @@ public class LightboxTests extends NewTestTemplate {
 			
 		}
 
+		
 	@Test(groups = {"MercuryLightboxTests_005", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_005_DoubleTapZoomImage() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);

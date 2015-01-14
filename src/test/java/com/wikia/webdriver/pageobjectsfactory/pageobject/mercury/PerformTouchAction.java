@@ -2,6 +2,8 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.mercury;
 
 import java.util.List;
 
+import io.appium.java_client.MultiTouchAction;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 
 import org.openqa.selenium.By;
@@ -195,6 +197,24 @@ public class PerformTouchAction {
 		}
 	}
 	
-//	public void Z
+	public void ZoomInPointXY (AndroidDriver mobileDriver, int startX, int startY, int pixelPath) {
+		TouchAction touchOne = new TouchAction(mobileDriver);
+		TouchAction touchTwo = new TouchAction(mobileDriver);
+		MultiTouchAction multiTouch = new MultiTouchAction(mobileDriver);
+		int halfPath = 0;
+		int endXOne = 0;
+		int endXTwo = 0;
+		int offSet = 0;
+		if (pixelPath < appNativeWidth) {
+			halfPath = pixelPath / 2;
+		} else {
+			halfPath = (appNativeWidth - 2) / 2;
+		}
+		//done
+		endXOne = startX - halfPath;
+		if (endXOne < 0) {
+			
+		}
+	}
 	
 }
