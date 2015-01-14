@@ -276,6 +276,13 @@ public class AdsDataProvider {
 	}
 
 	@DataProvider
+	public static final Object[][] spotlights() {
+		return new Object[][]{
+			{"glee", "Rachel"}
+		};
+	}
+
+	@DataProvider
 	public static final Object[][] amazonSites() {
 		return new Object[][]{
 			{"memory-alpha", "Portal:Main"},
