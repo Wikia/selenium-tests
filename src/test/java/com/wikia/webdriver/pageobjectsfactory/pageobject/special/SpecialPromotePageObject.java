@@ -3,6 +3,7 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.imageutilities.ImageComparison;
+import com.wikia.webdriver.common.core.imageutilities.ImageHelper;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebDriver;
@@ -48,9 +49,7 @@ public class SpecialPromotePageObject extends BasePageObject {
 	}
 
 	public String getUniqueThumbnailTextSpecialPromotePage() {
-		int indexComparisonStart = thumbnailImage.getAttribute("src").indexOf("px-");
-		int indexComparisonFinish = thumbnailImage.getAttribute("src").indexOf("-Wikia-Visualization-Main");
-		return thumbnailImage.getAttribute("src").substring(indexComparisonStart + 3, indexComparisonFinish - 1);
+		return ImageHelper.getImageId(thumbnailImage);
 	}
 
 	public void modifyThumnailImage(String file) {
