@@ -16,11 +16,11 @@ public class TestExtraMarker extends NewTestTemplate {
 		groups = {"TestExtraMarker_GHOST"},
 		dataProvider = "extraMarker"
 	)
-	public void TestExtraMarker_GHOST(String wikiName, String article, String slot, String extra_marker_message) {
+	public void TestExtraMarker_GHOST(String wikiName, String article, String slot, String extraMarkerMessage) {
 		String testedPage = urlBuilder.getUrlForPath(wikiName, article);
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);
 		String logs = wikiPage.getBrowserLogs(slot).toString();
 		Assertion.assertStringNotEmpty(logs);
-		Assertion.assertStringContains(extra_marker_message, logs);
+		Assertion.assertStringContains(extraMarkerMessage, logs);
 	}
 }

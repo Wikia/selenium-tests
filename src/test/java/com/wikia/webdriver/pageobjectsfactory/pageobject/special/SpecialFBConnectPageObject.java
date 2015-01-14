@@ -1,10 +1,9 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 public class SpecialFBConnectPageObject extends SpecialPageObject {
 
@@ -21,7 +20,7 @@ public class SpecialFBConnectPageObject extends SpecialPageObject {
 	public void verifyFacebookButtonAppeared() {
 		waitForElementByElement(fbConnectButton);
 		PageObjectLogging.log("verifyFacebookButtonAppeared",
-				"facebook button appeared", true, driver);
+			"facebook button appeared", true, driver);
 	}
 
 }

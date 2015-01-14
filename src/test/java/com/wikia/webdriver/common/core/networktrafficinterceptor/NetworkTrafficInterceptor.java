@@ -1,9 +1,7 @@
 package com.wikia.webdriver.common.core.networktrafficinterceptor;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 import org.browsermob.core.har.Har;
 import org.browsermob.core.har.HarEntry;
 import org.browsermob.proxy.ProxyServer;
@@ -11,7 +9,8 @@ import org.browsermob.proxy.http.BrowserMobHttpRequest;
 import org.browsermob.proxy.http.RequestInterceptor;
 import org.openqa.selenium.Proxy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -19,13 +18,13 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 public class NetworkTrafficInterceptor extends ProxyServer {
 
 	private Har har;
-	private final int Max = 8080;
-	private final int Min = 7070;
+	private static final int MAX = 8080;
+	private static final int MIN = 7070;
 	private final int portNumber;
 
 	public NetworkTrafficInterceptor() {
 		super();
-		portNumber = Min + (int)(Math.random() * ((Max - Min) + 1));
+		portNumber = MIN + (int) (Math.random() * ((MAX - MIN) + 1));
 	}
 
 	public Proxy startSeleniumProxyServer() {
@@ -69,9 +68,9 @@ public class NetworkTrafficInterceptor extends ProxyServer {
 		});
 	}
 
-	public void setProxyServer(String IP) {
+	public void setProxyServer(String ip) {
 		Map<String, String> options = new HashMap<>();
-		options.put("httpProxy", IP);
+		options.put("httpProxy", ip);
 		setOptions(options);
 	}
 

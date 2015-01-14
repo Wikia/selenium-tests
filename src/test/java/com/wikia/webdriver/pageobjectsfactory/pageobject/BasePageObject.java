@@ -1,36 +1,4 @@
-
 package com.wikia.webdriver.pageobjectsfactory.pageobject;
-
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpStatus;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.contentpatterns.XSSContent;
@@ -41,11 +9,31 @@ import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.core.purge.PurgeMethod;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.HttpStatus;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Karol
  */
-public class BasePageObject{
+public class BasePageObject {
 
 	public WebDriver driver;
 	protected int timeOut = 30;
@@ -54,9 +42,9 @@ public class BasePageObject{
 	protected UrlBuilder urlBuilder;
 
 	@FindBy(css = "#WallNotifications div.notification div.msg-title")
-	protected WebElement notifications_LatestNotificationOnWiki;
+	protected WebElement notificationsLatestNotificationOnWiki;
 	@FindBy(css = "#WallNotifications > li")
-	protected WebElement notifications_ShowNotificationsLogo;
+	protected WebElement notificationsShowNotificationsLogo;
 	@FindBy(css = ".mw-htmlform-submit")
 	protected WebElement followSubmit;
 	@FindBy(css = "#ca-unwatch")
@@ -222,9 +210,9 @@ public class BasePageObject{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
 			js.executeScript(
-					"var x = $(arguments[0]);"
+				"var x = $(arguments[0]);"
 					+ "window.scroll(0,parseInt(x.offset().top - 60));",
-					element
+				element
 			);
 		} catch (WebDriverException e) {
 			if (e.getMessage().contains(XSSContent.NO_JQUERY_ERROR)) {
@@ -235,11 +223,11 @@ public class BasePageObject{
 		}
 	}
 
-	public void jQueryClick(String cssSelector){
+	public void jQueryClick(String cssSelector) {
 		executeScript("$('" + cssSelector + "').click()");
 	}
 
-	public void jQueryClick(WebElement element){
+	public void jQueryClick(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("$(arguments[0])[0].click()", element);
 	}
@@ -250,11 +238,11 @@ public class BasePageObject{
 		actions.perform();
 	}
 
-	public void jQueryFocus(String cssSelector){
+	public void jQueryFocus(String cssSelector) {
 		executeScript("$('" + cssSelector + "').focus()");
 	}
 
-	public void jQueryFocus(WebElement element){
+	public void jQueryFocus(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("$(arguments[0]).focus()", element);
 	}
@@ -349,8 +337,8 @@ public class BasePageObject{
 			try {
 				js.executeScript(
 					"var x = $(arguments[0]);"
-					+ "window.scroll(0,x.position()['top']+x.height()+100);"
-					+ "$(window).trigger('scroll');",
+						+ "window.scroll(0,x.position()['top']+x.height()+100);"
+						+ "$(window).trigger('scroll');",
 					selector
 				);
 			} catch (WebDriverException e) {
@@ -376,9 +364,9 @@ public class BasePageObject{
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(
 				"var x = document.querySelector(arguments[0]);"
-				+ "var event = new Event('scroll');"
-				+ "window.scroll(0,x.offsetTop + x.clientHeight);"
-				+ "window.dispatchEvent(event)",
+					+ "var event = new Event('scroll');"
+					+ "window.scroll(0,x.offsetTop + x.clientHeight);"
+					+ "window.dispatchEvent(event)",
 				selector
 			);
 			return true;
@@ -392,13 +380,13 @@ public class BasePageObject{
 		}
 	}
 
-	public void navigateBack(){
-		try{
+	public void navigateBack() {
+		try {
 			driver.navigate().back();
 			PageObjectLogging.log("navigateBack", "previous page loaded", true);
 		} catch (TimeoutException e) {
 			PageObjectLogging.log("navigateBack",
-					"page loaded for more then 30 seconds after navigating back", true);
+				"page loaded for more then 30 seconds after navigating back", true);
 		}
 	}
 
@@ -437,32 +425,33 @@ public class BasePageObject{
 		}
 	}
 
-	public void sendKeys(WebElement pageElem, String KeysToSend) {
+	public void sendKeys(WebElement pageElem, String keysToSend) {
 		try {
-			pageElem.sendKeys(KeysToSend);
+			pageElem.sendKeys(keysToSend);
 		} catch (Exception e) {
 			PageObjectLogging.log("sendKeys", e.getMessage(), false);
 		}
 	}
 
 	//You can get access to hidden elements by changing class
-	public void unhideElementByClassChange(String elementName,String classWithoutHidden, int... OptionalIndex){
-		int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
+	public void unhideElementByClassChange(String elementName, String classWithoutHidden, int... optionalIndex) {
+		int numElem = optionalIndex.length == 0 ? 0 : optionalIndex[0];
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('class', '" + classWithoutHidden + "');");
 	}
 
 	//You can get access to hidden elements by type
-	public void unhideElementByTypeChange(String elementName, String newType, int... OptionalIndex){
-			int numElem = OptionalIndex.length==0 ? 0 : OptionalIndex[0];
-			JavascriptExecutor jse = (JavascriptExecutor)driver;
-			jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('type', '" + newType + "');");
+	public void unhideElementByTypeChange(String elementName, String newType, int... OptionalIndex) {
+		int numElem = OptionalIndex.length == 0 ? 0 : OptionalIndex[0];
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("document.getElementsByName('" + elementName + "')[" + numElem + "].setAttribute('type', '" + newType + "');");
 	}
+
 	/**
 	 * Checks if the element is visible on browser
-	 *
-	 ** @param by
-	 *			The By class defined for the element
+	 * <p/>
+	 * * @param by
+	 * The By class defined for the element
 	 */
 	public WebElement waitForElementByBy(By by) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -471,32 +460,34 @@ public class BasePageObject{
 
 	/**
 	 * Checks if the element is visible on browser
+	 * <p/>
+	 * * @param element
+	 * The element to be checked
 	 *
-	 ** @param element
-	 *			The element to be checked
 	 * @throws Exception
 	 */
 	public void waitForElementByElement(WebElement element) {
 		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(ExpectedConditions.visibilityOf(element));
-		}finally {
+		} finally {
 			restoreDeaultImplicitWait();
 		}
 	}
 
 	/**
 	 * Checks if the element is visible on browser
+	 * <p/>
+	 * * @param elementBy
+	 * The element to be checked
 	 *
-	 ** @param elementBy
-	 *			The element to be checked
 	 * @throws Exception
 	 */
 	public void waitForElementByElementLocatedBy(By elementBy) {
 		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
-		}finally {
+		} finally {
 			restoreDeaultImplicitWait();
 		}
 	}
@@ -520,14 +511,14 @@ public class BasePageObject{
 		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(CommonExpectedConditions.elementVisible(element));
-		}finally {
+		} finally {
 			restoreDeaultImplicitWait();
 		}
 	}
 
 	public WebElement waitForElementByCss(String cssSelector) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.cssSelector(cssSelector)));
+			.cssSelector(cssSelector)));
 		return driver.findElement(By.cssSelector(cssSelector));
 	}
 
@@ -546,7 +537,7 @@ public class BasePageObject{
 		changeImplicitWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(CommonExpectedConditions.elementToBeClickable(element));
-		}finally {
+		} finally {
 			restoreDeaultImplicitWait();
 		}
 	}
@@ -560,14 +551,14 @@ public class BasePageObject{
 	}
 
 	public void waitForValueToBePresentInElementsAttributeByCss(
-			String selector, String attribute, String value) {
+		String selector, String attribute, String value) {
 		wait.until(CommonExpectedConditions
-				.valueToBePresentInElementsAttribute(By.cssSelector(selector),
-						attribute, value));
+			.valueToBePresentInElementsAttribute(By.cssSelector(selector),
+				attribute, value));
 	}
 
 	public void waitForValueToBePresentInElementsAttributeByElement(
-			WebElement element, String attribute, String value) {
+		WebElement element, String attribute, String value) {
 		wait.until(CommonExpectedConditions
 			.valueToBePresentInElementsAttribute(element, attribute, value));
 	}
@@ -576,7 +567,7 @@ public class BasePageObject{
 		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(CommonExpectedConditions.textToBePresentInElement(element, text));
-		}finally {
+		} finally {
 			restoreDeaultImplicitWait();
 		}
 	}
@@ -585,7 +576,7 @@ public class BasePageObject{
 		driver.manage().timeouts().implicitlyWait(250, TimeUnit.MILLISECONDS);
 		try {
 			wait.until(CommonExpectedConditions.textNotPresentInElementLocatedBy(by, text));
-		}finally {
+		} finally {
 			restoreDeaultImplicitWait();
 		}
 	}
@@ -601,7 +592,7 @@ public class BasePageObject{
 
 	public void waitForStringInURL(String givenString) {
 		wait.until(CommonExpectedConditions.givenStringtoBePresentInURL(givenString));
-		PageObjectLogging.log("waitForStringInURL", "verify that url contains "+givenString, true);
+		PageObjectLogging.log("waitForStringInURL", "verify that url contains " + givenString, true);
 	}
 
 	public void waitForAlertAndAccept() {
@@ -621,21 +612,21 @@ public class BasePageObject{
 	public String getRandomDigits(int length) {
 		String timeStamp = getTimeStamp();
 		int timeStampLenght = timeStamp.length();
-		int timeStampCut = timeStampLenght-length;
+		int timeStampCut = timeStampLenght - length;
 		return timeStamp.substring(timeStampCut);
 	}
 
 	public String getRandomString(int length) {
-		char [] alphabet = {
-				'A','B','C','D','E','F','G','H','I',
-				'J','K','L','M','N','O','P','Q','R',
-				'S','T','U','V','W','X','Y','Z',
-				'a','b','c','d','e','f','g','h','i',
-				'j','l','k','l','m','n','o','p','r',
-				's','t','u','v','w','x','y','z'};
+		char[] alphabet = {
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+			'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+			'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+			'j', 'l', 'k', 'l', 'm', 'n', 'o', 'p', 'r',
+			's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 		Random rnd = new Random();
 		StringBuilder sb = new StringBuilder();
-		for (int i=0; i<length; i++) {
+		for (int i = 0; i < length; i++) {
 			sb.append(alphabet[rnd.nextInt(alphabet.length)]);
 		}
 		return sb.toString();
@@ -653,11 +644,10 @@ public class BasePageObject{
 	 * @param tagNameTwo - second tag name
 	 */
 	public void waitForOneOfTagsPresentInElement(WebElement slot,
-			String tagNameOne, String tagNameTwo) {
+												 String tagNameOne, String tagNameTwo) {
 		wait.until(CommonExpectedConditions.oneOfTagsPresentInElement(slot,
 			tagNameOne, tagNameTwo));
 	}
-
 
 
 	/*
@@ -668,25 +658,25 @@ public class BasePageObject{
 		// the below method is native click which is the only way to load
 		// notification
 		notifications_clickOnNotificationsLogo();
-		waitForElementByElement(notifications_LatestNotificationOnWiki);
+		waitForElementByElement(notificationsLatestNotificationOnWiki);
 		waitForTextToBePresentInElementByElement(
-			notifications_LatestNotificationOnWiki, title);
+			notificationsLatestNotificationOnWiki, title);
 		PageObjectLogging.log("notifications_verifyNotificationTitle",
-				"Verify that the latest notification has the following title: "
-						+ title, true, driver);
+			"Verify that the latest notification has the following title: "
+				+ title, true, driver);
 	}
 
 	public void notifications_clickOnNotificationsLogo() {
-		waitForElementByElement(notifications_ShowNotificationsLogo);
-		waitForElementClickableByElement(notifications_ShowNotificationsLogo);
-		notifications_ShowNotificationsLogo.click();
+		waitForElementByElement(notificationsShowNotificationsLogo);
+		waitForElementClickableByElement(notificationsShowNotificationsLogo);
+		notificationsShowNotificationsLogo.click();
 		PageObjectLogging.log("notifications_clickOnNotificationsLogo",
-				"click on notifications logo on the upper right corner", true,
-				driver);
+			"click on notifications logo on the upper right corner", true,
+			driver);
 	}
 
 	public void notifications_showNotifications() {
-		waitForElementByElement(notifications_ShowNotificationsLogo);
+		waitForElementByElement(notificationsShowNotificationsLogo);
 		executeScript("$('#WallNotifications ul.subnav').addClass('show')");
 		PageObjectLogging.log("norifications_showNotifications",
 			"show notifications by adding 'show' class to element", true,
@@ -704,6 +694,7 @@ public class BasePageObject{
 
 	/**
 	 * Wait for element to not be present in DOM
+	 *
 	 * @param selector
 	 */
 	public void waitForElementNotPresent(final By selector) {
@@ -733,7 +724,9 @@ public class BasePageObject{
 		wait.until(
 			CommonExpectedConditions.newWindowPresent()
 		);
-	};
+	}
+
+	;
 
 	public void enableWikiaTracker() {
 		driver.get(
@@ -751,7 +744,7 @@ public class BasePageObject{
 
 	public void appendMultipleQueryStringsToUrl(String[] queryStrings) {
 		String currentUrl = getCurrentUrl();
-		for(int i = 0; i < queryStrings.length; i++) {
+		for (int i = 0; i < queryStrings.length; i++) {
 			currentUrl = urlBuilder.appendQueryStringToURL(currentUrl, queryStrings[i]);
 		}
 		driver.get(currentUrl);
@@ -773,20 +766,20 @@ public class BasePageObject{
 		);
 	}
 
-	public void setDisplayStyle(String  selector, String style) {
+	public void setDisplayStyle(String selector, String style) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("document.querySelector(arguments[0]).style.display = arguments[1]", selector, style);
 	}
 
-	private void purge(String URL) throws Exception {
+	private void purge(String url) throws Exception {
 		HttpClient client = new HttpClient();
-		HttpMethod method = new PurgeMethod(URL);
+		HttpMethod method = new PurgeMethod(url);
 		try {
 			int status = client.executeMethod(method);
 			if (status != HttpStatus.SC_OK && status != HttpStatus.SC_NOT_FOUND) {
-				throw new Exception("HTTP PURGE failed for: " + URL + "(" + status + ")");
+				throw new Exception("HTTP PURGE failed for: " + url + "(" + status + ")");
 			}
-			PageObjectLogging.log("purge", URL, true);
+			PageObjectLogging.log("purge", url, true);
 			return;
 		} finally {
 			method.releaseConnection();
@@ -795,19 +788,20 @@ public class BasePageObject{
 
 	/**
 	 * return status code of given URL
-	 * @param URL
+	 *
+	 * @param url
 	 * @return
 	 */
-	public int getURLStatus(String URL) {
+	public int getURLStatus(String url) {
 		try {
-			purge(URL);
+			purge(url);
 			HttpURLConnection.setFollowRedirects(false);
-			HttpURLConnection connection = (HttpURLConnection) new URL(URL).openConnection();
+			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 			connection.disconnect();
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty(
-					"User-Agent",
-					"Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) " +
+				"User-Agent",
+				"Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) " +
 					"Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)"
 			);
 			int status = connection.getResponseCode();
@@ -820,17 +814,18 @@ public class BasePageObject{
 
 	/**
 	 * check if current HTTP status of given URL is the same as expected
+	 *
 	 * @param desiredStatus
-	 * @param URL
+	 * @param url
 	 */
-	public void verifyURLStatus(int desiredStatus, String URL) {
+	public void verifyURLStatus(int desiredStatus, String url) {
 		int timeOut = 500;
 		int statusCode = 0;
 		boolean status = false;
 		while (!status) {
 			try {
-				statusCode = getURLStatus(URL);
-				if (statusCode == desiredStatus){
+				statusCode = getURLStatus(url);
+				if (statusCode == desiredStatus) {
 					status = true;
 				} else {
 					Thread.sleep(500);
@@ -844,7 +839,7 @@ public class BasePageObject{
 			}
 		}
 		Assertion.assertEquals(statusCode, desiredStatus);
-		PageObjectLogging.log("verifyURLStatus", URL + " has status " + statusCode, true);
+		PageObjectLogging.log("verifyURLStatus", url + " has status " + statusCode, true);
 	}
 
 	protected void changeImplicitWait(int value, TimeUnit timeUnit) {
@@ -856,18 +851,18 @@ public class BasePageObject{
 	}
 
 	protected String getAbsolutePathForFile(String relativePath) {
-		File fileCheck  = new File(relativePath);
+		File fileCheck = new File(relativePath);
 		if (!fileCheck.isFile()) {
 			throw new RuntimeException("file " + relativePath + " doesn't exists");
 		}
 		return fileCheck.getAbsolutePath();
 	}
 
-	public void verifyUrlInNewWindow(String URL) {
+	public void verifyUrlInNewWindow(String url) {
 		waitForWindow("", "");
 		Object[] windows = driver.getWindowHandles().toArray();
 		driver.switchTo().window(windows[1].toString());
-		waitForStringInURL(URL);
+		waitForStringInURL(url);
 		driver.close();
 		driver.switchTo().window(windows[0].toString());
 		PageObjectLogging.log("verifyUrlInNewWindow", "url in new window verified", true);
@@ -883,7 +878,7 @@ public class BasePageObject{
 		}
 		PageObjectLogging.log(
 			"verifyElementMoved", "Element did move. From (" + source.x + "," + source.y + ") to ("
-				+ target.x + ","+target.y + ")",
+				+ target.x + "," + target.y + ")",
 			true,
 			driver
 		);
@@ -904,7 +899,7 @@ public class BasePageObject{
 		}
 		PageObjectLogging.log(
 			"verifyElementMoved", "Element did resize. From (" + sourceWidth + "," + sourceHeight + ") to ("
-				+ targetWidth + ","+targetHeight + ")",
+				+ targetWidth + "," + targetHeight + ")",
 			true,
 			driver
 		);
@@ -912,10 +907,10 @@ public class BasePageObject{
 
 	public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
 		WebElement foundElement = null;
-		for(WebElement element : elements) {
+		for (WebElement element : elements) {
 			String retAttribute = element.getAttribute(attribute);
 			if ("href".equals(attribute)) {
-				retAttribute = retAttribute.substring(retAttribute.indexOf("File:")+5).replace("%20", " ");
+				retAttribute = retAttribute.substring(retAttribute.indexOf("File:") + 5).replace("%20", " ");
 				if (!element.getAttribute("class").contains("video")) {
 					retAttribute = retAttribute.substring(0, retAttribute.indexOf('.'));
 				}
@@ -932,7 +927,7 @@ public class BasePageObject{
 		if (foundElement == null) {
 			throw new NoSuchElementException(
 				"Element with attribute: " + attribute + " with the value: "
-				+ value + " is not found from the list"
+					+ value + " is not found from the list"
 			);
 		}
 		return foundElement;
@@ -940,7 +935,7 @@ public class BasePageObject{
 
 	public WebElement getElementByText(List<WebElement> elements, String value) {
 		WebElement foundElement = null;
-		for(WebElement element : elements) {
+		for (WebElement element : elements) {
 			if (element.getText().equalsIgnoreCase(value)) {
 				foundElement = element;
 				PageObjectLogging.log("getElementByText", "Element with text: " + value + " is found from the list", true);
@@ -955,18 +950,18 @@ public class BasePageObject{
 	}
 
 	public void switchToBrowserTab(int index) {
-		List<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(index));
 	}
 
 	public void switchToNewBrowserTab() {
-		List<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-		driver.switchTo().window(tabs.get(tabs.size()-1));
+		List<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(tabs.size() - 1));
 	}
 
 	public WebElement getElementByChildText(List<WebElement> elements, By childBySelector, String value) {
 		WebElement foundElement = null;
-		for(WebElement element : elements) {
+		for (WebElement element : elements) {
 			if (element.findElement(childBySelector).getText().equalsIgnoreCase(value)) {
 				foundElement = element;
 				PageObjectLogging.log("getElementByChildText", "Element's child with text: " + value + " is found from the list", true);

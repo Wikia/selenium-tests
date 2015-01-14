@@ -11,16 +11,16 @@ import org.testng.annotations.Test;
  * @author Bogna 'bognix' Knychala
  * @ownership AdEngineering
  */
-@Test (
-	groups={"Ads_Hubs_Pages", "Ads"}
+@Test(
+	groups = {"Ads_Hubs_Pages", "Ads"}
 )
 public class TestAdsOnHubs extends NewTestTemplate {
 
 	private String testedPage;
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="hubsPages"
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "hubsPages"
 	)
 	public TestAdsOnHubs(String wikiName, String path) {
 		super();
@@ -31,8 +31,8 @@ public class TestAdsOnHubs extends NewTestTemplate {
 		}
 	}
 
-	@Test (
-		groups={"TestAdsOnHubs_GeoEdgeFree"}
+	@Test(
+		groups = {"TestAdsOnHubs_GeoEdgeFree"}
 	)
 	public void TestAdsOnHubs_GeoEdgeFree() throws Exception {
 		AdsBaseObject wikiPage = new AdsBaseObject(driver, testedPage);

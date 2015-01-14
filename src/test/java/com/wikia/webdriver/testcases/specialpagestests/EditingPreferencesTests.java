@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.specialpagestests;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
 import com.wikia.webdriver.common.properties.Credentials;
@@ -14,11 +11,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode.Visual
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.EditingPreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.preferences.PreferencesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * @author Robert 'rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1202 Select VE from editor preference page then clicking on main article edit would launch VE
  * VE-1202 Select CK from editor preference page then clicking on main article edit would launch CK
  * VE-1202 Select Source from editor preference page then clicking on main article edit would launch source
@@ -28,10 +27,10 @@ public class EditingPreferencesTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	WikiBasePageObject base;
-	String DEFAULT = "0";
-	String SOURCE = "1";
-	String VE = "2";
-	String CK = "3";
+	String defaultEdit = "0";
+	String source = "1";
+	String ve = "2";
+	String ck = "3";
 
 	@BeforeMethod(alwaysRun = true)
 	public void setup() {
@@ -43,7 +42,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 	@Test(groups = {"EditingPreferencesTest", "EditPreferences_001"})
 	public void EditPreferences_001_selectVE() {
 		EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
-		editPrefPage.selectPreferredEditor(VE);
+		editPrefPage.selectPreferredEditor(ve);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -56,7 +55,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 	@Test(groups = {"EditingPreferencesTest", "EditPreferences_002"})
 	public void EditPreferences_002_selectCK() {
 		EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
-		editPrefPage.selectPreferredEditor(CK);
+		editPrefPage.selectPreferredEditor(ck);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -69,7 +68,7 @@ public class EditingPreferencesTests extends NewTestTemplate {
 	@Test(groups = {"EditingPreferencesTest", "EditPreferences_003"})
 	public void EditPreferences_003_selectSource() {
 		EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
-		editPrefPage.selectPreferredEditor(SOURCE);
+		editPrefPage.selectPreferredEditor(source);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();
@@ -79,9 +78,9 @@ public class EditingPreferencesTests extends NewTestTemplate {
 	}
 
 	@Test(groups = {"EditingPreferencesTest", "EditPreferences_004"})
-	public void EditPreferences_004_selectDefault() {
+	public void EditPreferences_004_selectDefault_QAART_498() {
 		EditingPreferencesPageObject editPrefPage = base.openSpecialEditingPreferencesPage(wikiURL);
-		editPrefPage.selectPreferredEditor(DEFAULT);
+		editPrefPage.selectPreferredEditor(defaultEdit);
 		PreferencesPageObject prefPage = editPrefPage.clickSaveButton();
 		prefPage.verifyNotificationMessage();
 		String articleName = PageContent.ARTICLE_NAME_PREFIX + base.getTimeStamp();

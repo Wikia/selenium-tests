@@ -3,12 +3,13 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.wam;
 /**
  * Created by Ludwik Kaźmierczak
  */
+
 /**
  * @desc Wikia wam tabs (hubs)
  */
 public enum WamTab {
-	ALL(0, ""), TV(1, "TV"),VIDEO_GAMES(2, "GAMES"), BOOKS(3, "BOOKS"),
-	COMICS(4, "COMICS"), MUSIC(6, "MUSIC"),  LIFESTYLE(5, "LIFESTYLE"),  MOVIES(7, "MOVIES");
+	ALL(0, ""), TV(1, "TV"), VIDEO_GAMES(2, "GAMES"), BOOKS(3, "BOOKS"),
+	COMICS(4, "COMICS"), MUSIC(6, "MUSIC"), LIFESTYLE(5, "LIFESTYLE"), MOVIES(7, "MOVIES");
 
 	private final int verticalId;
 
@@ -24,7 +25,7 @@ public enum WamTab {
 	}
 
 	public String getExpectedHeaderName() {
-		return verticalId>0 ? String.format("TOP GAINERS: %s", expectedHeader) : "TOP GAINERS";
+		return verticalId > 0 ? String.format("TOP GAINERS: %s", expectedHeader) : "TOP GAINERS";
 	}
 
 	private String getIdAsString() {
@@ -32,9 +33,9 @@ public enum WamTab {
 	}
 
 	/**
-	 * @desc Checks if passed value is in enum
 	 * @param value mostly a select-box option
 	 * @return true if enum has the value; false otherwise
+	 * @desc Checks if passed value is in enum
 	 */
 	public static Boolean contains(String value) {
 		for (WamTab vids : WamTab.values()) {

@@ -2,7 +2,6 @@ package com.wikia.webdriver.common.contentpatterns;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
 public class WikiaGlobalVariables {
 

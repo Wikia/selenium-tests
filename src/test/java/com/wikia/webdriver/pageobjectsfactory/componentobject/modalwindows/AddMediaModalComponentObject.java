@@ -1,14 +1,12 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.modalwindows;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
-
 /**
- *
  * @author Bogna 'bognix' Knychala
  */
 public class AddMediaModalComponentObject extends WikiBasePageObject {
@@ -17,9 +15,9 @@ public class AddMediaModalComponentObject extends WikiBasePageObject {
 	private WebElement addPhotoModal;
 	@FindBy(css = "#UploadPhotosWrapper .close")
 	private WebElement modalAddPhotoClose;
-	@FindBy (css = "#VideoEmbedBackWrapper button.close")
+	@FindBy(css = "#VideoEmbedBackWrapper button.close")
 	private WebElement modalAddVideoClose;
-	@FindBy (css = "#VideoEmbedBackWrapper")
+	@FindBy(css = "#VideoEmbedBackWrapper")
 	protected WebElement addVideoModal;
 
 	public AddMediaModalComponentObject(WebDriver driver) {

@@ -1,18 +1,8 @@
 package com.wikia.webdriver.common.templates;
 
-import java.io.File;
-
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
-import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.CommonUtils;
+import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.configuration.AbstractConfiguration;
 import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
@@ -23,9 +13,18 @@ import com.wikia.webdriver.common.driverprovider.NewDriverProvider;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 import org.browsermob.proxy.ProxyServer;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
+
+import java.io.File;
 import java.lang.reflect.Method;
 
-@Listeners({ com.wikia.webdriver.common.logging.PageObjectLogging.class })
+@Listeners({com.wikia.webdriver.common.logging.PageObjectLogging.class})
 public class NewTestTemplateCore {
 
 	protected WebDriver driver;
@@ -68,7 +67,7 @@ public class NewTestTemplateCore {
 
 	protected void startBrowser() {
 		driver = registerDriverListener(
-			NewDriverProvider.getDriverInstanceForBrowser (config.getBrowser())
+			NewDriverProvider.getDriverInstanceForBrowser(config.getBrowser())
 		);
 	}
 
@@ -154,8 +153,8 @@ public class NewTestTemplateCore {
 		if (isGeoEdgeSet) {
 			GeoEdgeUtils geoEdgeUtils = new GeoEdgeUtils(config.getCredentialsFilePath());
 			String credentialsBase64 = "Basic " + geoEdgeUtils.createBaseFromCredentials();
-			String IP = geoEdgeUtils.getIPForCountry(countryCode);
-			networkTrafficIntereceptor.setProxyServer(IP);
+			String ip = geoEdgeUtils.getIPForCountry(countryCode);
+			networkTrafficIntereceptor.setProxyServer(ip);
 			networkTrafficIntereceptor.changeHeader("Proxy-Authorization", credentialsBase64);
 		}
 

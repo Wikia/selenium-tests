@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.followingtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -12,12 +10,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialFollowPa
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialVideosPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
  */
-public class FollowVideosTests extends NewTestTemplate{
+public class FollowVideosTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 	String videoName;
@@ -33,7 +31,7 @@ public class FollowVideosTests extends NewTestTemplate{
 		videoName = special.getHeaderText();
 	}
 
-	@Test(groups = "FollowVideo", dependsOnMethods={"FollowVideo_001_setup"})
+	@Test(groups = "FollowVideo", dependsOnMethods = {"FollowVideo_001_setup"})
 	public void FollowVideo_002_follow() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);
@@ -41,7 +39,7 @@ public class FollowVideosTests extends NewTestTemplate{
 		file.follow();
 	}
 
-	@Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods={"FollowVideo_002_follow"})
+	@Test(groups = {"FollowVideo", "Follow"}, dependsOnMethods = {"FollowVideo_002_follow"})
 	public void FollowVideo_003_verify() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userName, credentials.password, wikiURL);

@@ -3,10 +3,8 @@
  */
 package com.wikia.webdriver.testcases.imageservingtests;
 
-import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
+import com.wikia.webdriver.common.driverprovider.UseUnstablePageLoadStrategy;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
@@ -15,12 +13,13 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.actions.RenamePageObjec
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialNewFilesPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.SpecialRestorePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author Karol 'kkarolk' Kujawiak
- *
- * 1. Delete image, verify 404 status, restore image, verify 200 status
- * 2. Move image, verify status
+ *         <p/>
+ *         1. Delete image, verify 404 status, restore image, verify 200 status
+ *         2. Move image, verify status
  */
 public class ImageStorageTests extends NewTestTemplate {
 
@@ -31,7 +30,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_001"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_001_deleteImage_QAART_436() {
+	public void ImageStorage_001_deleteImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);
@@ -59,7 +58,7 @@ public class ImageStorageTests extends NewTestTemplate {
 
 	@Test(groups = {"ImageStorageTests", "ImageStorage_002"})
 	@UseUnstablePageLoadStrategy
-	public void ImageStorage_002_moveImage_QAART_437() {
+	public void ImageStorage_002_moveImage() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		SpecialNewFilesPageObject newFiles = base.openSpecialNewFiles(wikiURL);

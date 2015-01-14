@@ -3,8 +3,6 @@
  */
 package com.wikia.webdriver.testcases.notificationstests.MessageWallNotifications;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
@@ -13,24 +11,25 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.notifications.Noti
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWall;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.messagewall.NewMessageWallThreadPageObject;
+import org.testng.annotations.Test;
+
 /**
  * 1. User 5 is writing message on his message wall,
  * 2. User 6 is replying on user 5 message wall,
  * 3. User 5 is replying on user 6 message wall,
  * 3. User 6 is notified about reply on user's 5 message wall
- *
  */
-public class MessageWallNotificationsThreadParticipantTests extends NewTestTemplate{
+public class MessageWallNotificationsThreadParticipantTests extends NewTestTemplate {
 
 	Credentials credentials = config.getCredentials();
 
 	String title;
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsThreadParticipantTests_001",
-					"MessageWallNotificationsThreadParticipantTests"
-			}
+		groups = {
+			"MessageWallNotificationsThreadParticipantTests_001",
+			"MessageWallNotificationsThreadParticipantTests"
+		}
 	)
 	public void threadCreatorNotification_setup_1() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -46,11 +45,11 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 	}
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsThreadParticipantTests_002",
-					"MessageWallNotificationsThreadParticipantTests"
-			},
-			dependsOnMethods = "threadCreatorNotification_setup_1"
+		groups = {
+			"MessageWallNotificationsThreadParticipantTests_002",
+			"MessageWallNotificationsThreadParticipantTests"
+		},
+		dependsOnMethods = "threadCreatorNotification_setup_1"
 	)
 	public void threadCreatorNotification_setup_2() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -65,11 +64,11 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 	}
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsThreadParticipantTests_003",
-					"MessageWallNotificationsThreadParticipantTests"
-			},
-			dependsOnMethods = "threadCreatorNotification_setup_2"
+		groups = {
+			"MessageWallNotificationsThreadParticipantTests_003",
+			"MessageWallNotificationsThreadParticipantTests"
+		},
+		dependsOnMethods = "threadCreatorNotification_setup_2"
 	)
 	public void threadCreatorNotification_setup_3() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);
@@ -84,11 +83,11 @@ public class MessageWallNotificationsThreadParticipantTests extends NewTestTempl
 	}
 
 	@Test(
-			groups = {
-					"MessageWallNotificationsThreadParticipantTests_004",
-					"MessageWallNotificationsThreadParticipantTests"
-			},
-			dependsOnMethods = "threadCreatorNotification_setup_3"
+		groups = {
+			"MessageWallNotificationsThreadParticipantTests_004",
+			"MessageWallNotificationsThreadParticipantTests"
+		},
+		dependsOnMethods = "threadCreatorNotification_setup_3"
 	)
 	public void threadCreatorNotification_verification() {
 		WikiBasePageObject base = new WikiBasePageObject(driver);

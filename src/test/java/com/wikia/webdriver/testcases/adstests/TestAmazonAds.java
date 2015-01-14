@@ -1,14 +1,13 @@
 package com.wikia.webdriver.testcases.adstests;
 
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.core.annotations.NetworkTrafficDump;
 import com.wikia.webdriver.common.core.geoedge.GeoEdgeProxy;
 import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.dataprovider.ads.AdsDataProvider;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject;
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
 
 /**
  * @author Bogna 'bognix' Knychala
@@ -17,11 +16,11 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.adsbase.AdsAmazonObject
 public class TestAmazonAds extends NewTestTemplate {
 
 	private String testedPage;
-	private final String amazonForceResponse = "amzn_debug_mode=1";
+	private static final String AMAZON_FORCE_RESPONSE = "amzn_debug_mode=1";
 
 	@Factory(
-		dataProviderClass=AdsDataProvider.class,
-		dataProvider="amazonSites"
+		dataProviderClass = AdsDataProvider.class,
+		dataProvider = "amazonSites"
 	)
 	public TestAmazonAds(String wikiName, String path) {
 		super();
@@ -41,7 +40,7 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
 
-	@GeoEdgeProxy(country="GB")
+	@GeoEdgeProxy(country = "GB")
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_GB", "Ads"})
 	public void AmazonAdsTest_GB() {
@@ -54,7 +53,7 @@ public class TestAmazonAds extends NewTestTemplate {
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_GeoEdgeFree_debugMode", "Ads"})
 	public void AmazonAds_GeoEdgeFree_debugMode() {
-		testedPage = urlBuilder.appendQueryStringToURL(testedPage, amazonForceResponse);
+		testedPage = urlBuilder.appendQueryStringToURL(testedPage, AMAZON_FORCE_RESPONSE);
 		AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
 		amazonAds.verifyAmazonScriptIncluded();
 		amazonAds.verifyCallToAmazonIssued();
@@ -62,11 +61,11 @@ public class TestAmazonAds extends NewTestTemplate {
 		amazonAds.verifyResponseFromAmazonPresent();
 	}
 
-	@GeoEdgeProxy(country="GB")
+	@GeoEdgeProxy(country = "GB")
 	@NetworkTrafficDump
 	@Test(groups = {"AmazonAds", "AmazonAds_GB_debugMode", "Ads"})
 	public void AmazonAdsTest_GB_debugMode() {
-		testedPage = urlBuilder.appendQueryStringToURL(testedPage, amazonForceResponse);
+		testedPage = urlBuilder.appendQueryStringToURL(testedPage, AMAZON_FORCE_RESPONSE);
 		AdsAmazonObject amazonAds = new AdsAmazonObject(driver, testedPage, networkTrafficIntereceptor);
 		amazonAds.verifyAmazonScriptIncluded();
 		amazonAds.verifyCallToAmazonIssued();

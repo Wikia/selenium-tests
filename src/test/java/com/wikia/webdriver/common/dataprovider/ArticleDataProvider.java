@@ -6,7 +6,7 @@ public class ArticleDataProvider {
 
 	@DataProvider
 	public static final Object[][] getArticleName() {
-		return new Object[][] {
+		return new Object[][]{
 			{"QAarticle"},
 			{"QAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleNameQAVeryLongArticleName"},
 			{"QA/article"},
@@ -17,7 +17,7 @@ public class ArticleDataProvider {
 
 	@DataProvider
 	public static final Object[][] articleTitles() {
-		return new Object[][] {
+		return new Object[][]{
 			{"QAarticleĄŻŁ"},
 			{"QAarticle國歷史"},
 			{"QAarticle/"},
@@ -27,7 +27,7 @@ public class ArticleDataProvider {
 
 	@DataProvider
 	public static final Object[][] getPageNames() {
-		return new Object[][] {
+		return new Object[][]{
 			{"Muppets"},
 			{"Gta"},
 			{"Star_trek"},

@@ -1,8 +1,5 @@
 package com.wikia.webdriver.testcases.visualeditor;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.VideoContent;
 import com.wikia.webdriver.common.dataprovider.VisualEditorDataProvider.InsertDialog;
@@ -13,11 +10,13 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialog
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * @author Robert 'Rochan' Chan
  * @ownership Contribution
- *
+ * <p/>
  * VE-1134 Adding non-premium (Youtube) video
  * VE-1134 Adding Premium Video with full URL
  * VE-1264 Adding Existing videos to an article
@@ -102,7 +101,8 @@ public class VEAddVideoTests extends NewTestTemplateBeforeClass {
 		dependsOnGroups = "VEAddExternalVideoTests_001"
 	)
 	public void VEAddExternalVideoTests_004_RemoveVideoFromArticle() {
-		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);;
+		VisualEditorPageObject ve = base.openVEOnArticle(wikiURL, articleName);
+		;
 		ve.verifyVEToolBarPresent();
 		ve.verifyEditorSurfacePresent();
 		ve.selectMediaAndDelete();

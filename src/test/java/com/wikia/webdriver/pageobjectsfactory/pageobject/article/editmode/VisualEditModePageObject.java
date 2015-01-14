@@ -1,17 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.article.editmode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.core.CommonUtils;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
@@ -23,62 +11,67 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.slideshow.Slidesho
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetAddVideoComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.vet.VetOptionsComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: Bogna 'bognix' Knychała
  */
 public class VisualEditModePageObject extends EditMode {
 
-	@FindBy(css="#bodyContent")
+	@FindBy(css = "#bodyContent")
 	private WebElement contentInput;
-	@FindBy(css="div.cke_wrapper.cke_ltr div.cke_contents iframe")
+	@FindBy(css = "div.cke_wrapper.cke_ltr div.cke_contents iframe")
 	private WebElement iframe;
-	@FindBy(css="img.image-gallery")
+	@FindBy(css = "img.image-gallery")
 	private WebElement gallery;
-	@FindBy(css="img.image-slideshow")
+	@FindBy(css = "img.image-slideshow")
 	private WebElement slideshow;
-	@FindBy(css="img.image-gallery-slider")
+	@FindBy(css = "img.image-gallery-slider")
 	private WebElement slider;
-	@FindBy(css="img.video")
+	@FindBy(css = "img.video")
 	private WebElement video;
-	@FindBy(css="img.video-placeholder")
+	@FindBy(css = "img.video-placeholder")
 	private WebElement videoPlaceholder;
-	@FindBy(css=".video-thumbnail")
+	@FindBy(css = ".video-thumbnail")
 	protected WebElement videoArticle;
-	@FindBy(css=".RTEMediaOverlayEdit")
+	@FindBy(css = ".RTEMediaOverlayEdit")
 	private WebElement modifyComponentButton;
-	@FindBy(css="[style*=\"block\"] .RTEMediaOverlayDelete")
+	@FindBy(css = "[style*=\"block\"] .RTEMediaOverlayDelete")
 	private WebElement removeComponentButton;
-	@FindBy(css="#RTEConfirmOk > span")
+	@FindBy(css = "#RTEConfirmOk > span")
 	private WebElement removeConfirmationButton;
-	@FindBy(css="#wpTextbox1")
+	@FindBy(css = "#wpTextbox1")
 	private WebElement messageSourceModeTextArea;
-	@FindBy(css="input#CategorySelectInput")
+	@FindBy(css = "input#CategorySelectInput")
 	private WebElement categoryInput;
-	@FindBy(css="#CategorySelect .ui-autocomplete")
+	@FindBy(css = "#CategorySelect .ui-autocomplete")
 	private WebElement categorySuggestionsContainer;
-	@FindBy(css="li.category")
+	@FindBy(css = "li.category")
 	private List<WebElement> categoryList;
-	@FindBy(css=".RTEMediaCaption")
+	@FindBy(css = ".RTEMediaCaption")
 	private WebElement caption;
-	@FindBy(xpath="//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
+	@FindBy(xpath = "//p[contains(text(), 'You do not have permission to edit this page, for the following reason:')]")
 	private WebElement blockedUserMessage1;
-	@FindBy(xpath="//b[contains(text(), 'Your user name or IP address has been blocked.')]")
+	@FindBy(xpath = "//b[contains(text(), 'Your user name or IP address has been blocked.')]")
 	private WebElement blockedUserMessage2;
-	@FindBy(css=".cke_button_tabledelete > span.cke_label")
+	@FindBy(css = ".cke_button_tabledelete > span.cke_label")
 	private WebElement deleteItem;
-	@FindBy(css=".cke_button_table")
+	@FindBy(css = ".cke_button_table")
 	private WebElement propertiesItem;
-	@FindBy(css=".article-table")
+	@FindBy(css = ".article-table")
 	private WebElement visualModeTable;
-	@FindBy(css=".cke_contextmenu iframe")
+	@FindBy(css = ".cke_contextmenu iframe")
 	private WebElement contextFrame;
-	@FindBy(css=".cke_dialog_body")
+	@FindBy(css = ".cke_dialog_body")
 	private WebElement addTableLightbox;
 
 	private static final String IMAGE_COMPONENT_CSS = "img.image";
-	@FindBy(css=IMAGE_COMPONENT_CSS)
+	@FindBy(css = IMAGE_COMPONENT_CSS)
 	private WebElement image;
 
 	private static final By IMAGE_BY = By.cssSelector(IMAGE_COMPONENT_CSS);
@@ -128,13 +121,13 @@ public class VisualEditModePageObject extends EditMode {
 		PageObjectLogging.log("appendContent", "content " + content + " added to the article", true);
 	}
 
-	private void verifyComponent(WebElement component){
+	private void verifyComponent(WebElement component) {
 		driver.switchTo().frame(iframe);
 		waitForElementByElement(component);
 		driver.switchTo().defaultContent();
 	}
 
-	private void verifyComponent(By componentBy){
+	private void verifyComponent(By componentBy) {
 		driver.switchTo().frame(iframe);
 		waitForElementByElementLocatedBy(componentBy);
 		driver.switchTo().defaultContent();
@@ -182,6 +175,8 @@ public class VisualEditModePageObject extends EditMode {
 			case RIGHT:
 				Assertion.assertStringContains("alignRight", positionClass);
 				break;
+			default:
+				throw new NoSuchElementException("Non-existing position selected");
 		}
 	}
 
@@ -191,9 +186,9 @@ public class VisualEditModePageObject extends EditMode {
 		int widthCurrent = Integer.parseInt(video.getAttribute("width"));
 		driver.switchTo().defaultContent();
 		Assertion.assertNumber(
-				widthDesired,
-				widthCurrent,
-				"width should be " + widthDesired + " but is " + widthCurrent
+			widthDesired,
+			widthCurrent,
+			"width should be " + widthDesired + " but is " + widthCurrent
 		);
 	}
 
@@ -202,35 +197,35 @@ public class VisualEditModePageObject extends EditMode {
 		Assertion.assertEquals(captionDesired, caption.getText());
 	}
 
-	private void mouseOverComponent (Components component) {
+	private void mouseOverComponent(Components component) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		switch (component) {
-		case GALLERY:
-			verifyComponent(gallery);
-			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery').mouseenter()");
-			break;
-		case SLIDESHOW:
-			verifyComponent(slideshow);
-			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-slideshow').mouseenter()");
-			break;
-		case SLIDER:
-			verifyComponent(slider);
-			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery-slider').mouseenter()");
-			break;
-		case VIDEO:
-			verifyComponent(video);
-			js.executeScript("$('div.cke_contents>iframe').contents().find('img.video').mouseenter()");
-			break;
-		case PHOTO:
-			verifyComponent(image);
-			js.executeScript("$('div.cke_contents>iframe').contents().find('img.image').mouseenter()");
-			break;
-		case VIDEO_PLACEHOLDER:
-			verifyComponent(videoPlaceholder);
-			js.executeScript("$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
-			break;
-		default:
-			break;
+			case GALLERY:
+				verifyComponent(gallery);
+				js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery').mouseenter()");
+				break;
+			case SLIDESHOW:
+				verifyComponent(slideshow);
+				js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-slideshow').mouseenter()");
+				break;
+			case SLIDER:
+				verifyComponent(slider);
+				js.executeScript("$('div.cke_contents>iframe').contents().find('img.image-gallery-slider').mouseenter()");
+				break;
+			case VIDEO:
+				verifyComponent(video);
+				js.executeScript("$('div.cke_contents>iframe').contents().find('img.video').mouseenter()");
+				break;
+			case PHOTO:
+				verifyComponent(image);
+				js.executeScript("$('div.cke_contents>iframe').contents().find('img.image').mouseenter()");
+				break;
+			case VIDEO_PLACEHOLDER:
+				verifyComponent(videoPlaceholder);
+				js.executeScript("$('div.cke_contents>iframe').contents().find('img.video-placeholder').mouseenter()");
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -240,20 +235,20 @@ public class VisualEditModePageObject extends EditMode {
 		modifyComponentButton.click();
 		PageObjectLogging.log("modifyGallery", "Click on 'modify button' on gallery", true, driver);
 		switch (component) {
-		case GALLERY:
-			return new GalleryBuilderComponentObject(driver);
-		case PHOTO:
-			return new PhotoAddComponentObject(driver);
-		case SLIDER:
-			return new SliderBuilderComponentObject(driver);
-		case SLIDESHOW:
-			return new SlideshowBuilderComponentObject(driver);
-		case VIDEO:
-			return new VetOptionsComponentObject(driver);
-		case VIDEO_PLACEHOLDER:
-			return new VetAddVideoComponentObject(driver);
-		default:
-			return null;
+			case GALLERY:
+				return new GalleryBuilderComponentObject(driver);
+			case PHOTO:
+				return new PhotoAddComponentObject(driver);
+			case SLIDER:
+				return new SliderBuilderComponentObject(driver);
+			case SLIDESHOW:
+				return new SlideshowBuilderComponentObject(driver);
+			case VIDEO:
+				return new VetOptionsComponentObject(driver);
+			case VIDEO_PLACEHOLDER:
+				return new VetAddVideoComponentObject(driver);
+			default:
+				return null;
 		}
 	}
 
@@ -267,28 +262,28 @@ public class VisualEditModePageObject extends EditMode {
 	public void verifyComponentRemoved(Components component) {
 		driver.switchTo().frame(iframe);
 		switch (component) {
-		case PHOTO:
-			waitForElementNotPresent(IMAGE_BY);
-			break;
-		case GALLERY:
-			waitForElementNotPresent(galleryBy);
-			break;
-		case SLIDESHOW:
-			waitForElementNotPresent(slideshowBy);
-			break;
-		case SLIDER:
-			waitForElementNotPresent(sliderBy);
-			break;
-		case VIDEO:
-			waitForElementNotPresent(videoBy);
-			break;
-		default:
-			PageObjectLogging.log(
-				"verifyComponentRemoved",
-				"Invalid component: " + component.name() +" selected",
-				false
-			);
-			break;
+			case PHOTO:
+				waitForElementNotPresent(IMAGE_BY);
+				break;
+			case GALLERY:
+				waitForElementNotPresent(galleryBy);
+				break;
+			case SLIDESHOW:
+				waitForElementNotPresent(slideshowBy);
+				break;
+			case SLIDER:
+				waitForElementNotPresent(sliderBy);
+				break;
+			case VIDEO:
+				waitForElementNotPresent(videoBy);
+				break;
+			default:
+				PageObjectLogging.log(
+					"verifyComponentRemoved",
+					"Invalid component: " + component.name() + " selected",
+					false
+				);
+				break;
 		}
 		driver.switchTo().defaultContent();
 		PageObjectLogging.log("verifyGalleryRemoved", "Click on 'remove button' on gallery", true);
@@ -299,8 +294,8 @@ public class VisualEditModePageObject extends EditMode {
 	 * Message article page is e.g http://mediawiki119.wikia.com/wiki/MediaWiki:RelatedVideosGlobalList
 	 * This method destination is exactly related videos message article
 	 *
-	 * @author Michal Nowierski
 	 * @param unwantedVideoName e.g "What is love (?) - on piano (Haddway)"
+	 * @author Michal Nowierski
 	 */
 	public void deleteUnwantedVideoFromMessage(String unwantedVideoName) {
 		List<String> videos = new ArrayList<String>();
@@ -309,15 +304,15 @@ public class VisualEditModePageObject extends EditMode {
 		int index = 0;
 		while (true) {
 			int previousStarIndex = sourceText.indexOf("*", index);
-			int nextStarIndex = sourceText.indexOf("*", previousStarIndex+1);
-			if (nextStarIndex<0) {
+			int nextStarIndex = sourceText.indexOf("*", previousStarIndex + 1);
+			if (nextStarIndex < 0) {
 				break;
 			}
 			String video = sourceText.substring(previousStarIndex, nextStarIndex);
 			if (!video.contains(unwantedVideoName)) {
 				videos.add(video);
 			}
-			index = previousStarIndex+1;
+			index = previousStarIndex + 1;
 		}
 		waitForElementByElement(messageSourceModeTextArea);
 		messageSourceModeTextArea.clear();
@@ -325,9 +320,9 @@ public class VisualEditModePageObject extends EditMode {
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		messageSourceModeTextArea.sendKeys(Keys.ENTER);
 		String builder = "";
-		for (int i = 0; i<videos.size(); i++) {
-			builder+=videos.get(i);
-			builder+="\n";
+		for (int i = 0; i < videos.size(); i++) {
+			builder += videos.get(i);
+			builder += "\n";
 		}
 		CommonUtils.setClipboardContents(builder);
 		messageSourceModeTextArea.sendKeys(Keys.chord(Keys.CONTROL, "v"));
@@ -346,7 +341,7 @@ public class VisualEditModePageObject extends EditMode {
 		pressDownArrow(categoryInput);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String returned = (String) js.executeScript("return $('ul.ui-autocomplete li').text()");
-		while(returned.isEmpty()&&timeout<=5000) {
+		while (returned.isEmpty() && timeout <= 5000) {
 			try {
 				Thread.sleep(500);
 				timeout += 500;
@@ -370,7 +365,7 @@ public class VisualEditModePageObject extends EditMode {
 				categoryVisible = true;
 			}
 		}
-		Assertion.assertTrue(categoryVisible, "category "+category+" not present");
+		Assertion.assertTrue(categoryVisible, "category " + category + " not present");
 	}
 
 	public void verifyCategoryNotPresent(String category) {
@@ -381,14 +376,14 @@ public class VisualEditModePageObject extends EditMode {
 				categoryVisible = false;
 			}
 		}
-		Assertion.assertTrue(categoryVisible, "category "+category+" present");
+		Assertion.assertTrue(categoryVisible, "category " + category + " present");
 	}
 
 	public String selectCategorySuggestions(int categoryNumber) {
 		waitForElementByElement(categorySuggestionsContainer);
 		WebElement categoryItem = categorySuggestionsContainer
-				.findElements(categorySuggestionsList)
-				.get(categoryNumber);
+			.findElements(categorySuggestionsList)
+			.get(categoryNumber);
 		String categoryName = categoryItem.getText();
 		categoryItem.click();
 		waitForElementNotVisibleByElement(categorySuggestionsContainer);
@@ -398,9 +393,9 @@ public class VisualEditModePageObject extends EditMode {
 
 	public EditCategoryComponentObject editCategory(String categoryName) {
 		WebElement category = driver.findElement(
-				By.cssSelector(
-						categoryEditSelector.replace("%categoryName%", categoryName)
-				)
+			By.cssSelector(
+				categoryEditSelector.replace("%categoryName%", categoryName)
+			)
 		);
 		jQueryClick(category);
 		PageObjectLogging.log("editCategory", "edit category button clicked on category " + categoryName, true);
@@ -409,9 +404,9 @@ public class VisualEditModePageObject extends EditMode {
 
 	public void removeCategory(String categoryName) {
 		WebElement category = driver.findElement(
-				By.cssSelector(
-						categoryRemoveSelector.replace("%categoryName%", categoryName)
-				)
+			By.cssSelector(
+				categoryRemoveSelector.replace("%categoryName%", categoryName)
+			)
 		);
 		jQueryClick(category);
 		PageObjectLogging.log("removeCategory", "remove category button clicked on category " + categoryName, true);

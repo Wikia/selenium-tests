@@ -1,24 +1,23 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class SpecialUploadPageObject extends WikiBasePageObject {
 
 
-	@FindBy(css="#wpUploadFile")
+	@FindBy(css = "#wpUploadFile")
 	private WebElement browseForFileInput;
-	@FindBy(css="#wpIgnoreWarning")
+	@FindBy(css = "#wpIgnoreWarning")
 	private WebElement ignoreAnyWarnings;
-	@FindBy(css="input.mw-htmlform-submit")
+	@FindBy(css = "input.mw-htmlform-submit")
 	private WebElement uploadFileInput;
-	@FindBy(css="#wpDestFile")
+	@FindBy(css = "#wpDestFile")
 	private WebElement uploadFileName;
 
 	public SpecialUploadPageObject(WebDriver driver) {
@@ -28,20 +27,19 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 	/**
 	 * Selects given file in upload browser.
 	 *
-	 *
 	 * @author Michal Nowierski
 	 * ** @param file file to Be uploaded
 	 * <p> Look at folder acceptancesrc/src/test/resources/ImagesForUploadTests - this is where those files are stored
-	 *  */
+	 */
 
-	public void selectFileToUpload(String file){
+	public void selectFileToUpload(String file) {
 		browseForFileInput.sendKeys(
-				getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
+			getAbsolutePathForFile(PageContent.RESOURCES_PATH + file)
 		);
 		PageObjectLogging.log(
-				"typeInFileToUploadPath",
-				"file " + file + " added to upload",
-				true
+			"typeInFileToUploadPath",
+			"file " + file + " added to upload",
+			true
 		);
 
 	}
@@ -50,10 +48,10 @@ public class SpecialUploadPageObject extends WikiBasePageObject {
 		waitForElementClickableByElement(ignoreAnyWarnings);
 		scrollAndClick(ignoreAnyWarnings);
 		PageObjectLogging.log(
-				"checkIgnoreAnyWarnings",
-				"ignore warnings checkbox selected",
-				true,
-				driver
+			"checkIgnoreAnyWarnings",
+			"ignore warnings checkbox selected",
+			true,
+			driver
 		);
 
 	}

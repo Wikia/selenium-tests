@@ -1,7 +1,5 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.visualeditordialogs;
 
-import java.util.List;
-
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.visualeditor.VisualEditorPageObject;
@@ -11,28 +9,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 
 public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 
-	@FindBy(css=".oo-ui-textInputWidget-decorated>input")
+	@FindBy(css = ".oo-ui-textInputWidget-decorated>input")
 	private WebElement searchInput;
-	@FindBy(css=".secondary .oo-ui-labeledElement-label")
+	@FindBy(css = ".secondary .oo-ui-labeledElement-label")
 	private WebElement cancelButton;
-	@FindBy(css=".oo-ui-flaggableElement-primary .oo-ui-labeledElement-label")
+	@FindBy(css = ".oo-ui-flaggableElement-primary .oo-ui-labeledElement-label")
 	private WebElement doneButton;
-	@FindBy(css=".oo-ui-clearableTextInputWidget-clearButton")
+	@FindBy(css = ".oo-ui-clearableTextInputWidget-clearButton")
 	private WebElement clearInputButton;
-	@FindBy(css=".oo-ui-window-body")
+	@FindBy(css = ".oo-ui-window-body")
 	private WebElement dialogBody;
 
 	//Cart
-	@FindBy(css=".oo-ui-icon-cart-grid")
+	@FindBy(css = ".oo-ui-icon-cart-grid")
 	private WebElement gridViewButton;
-	@FindBy(css=".oo-ui-icon-cart-list")
+	@FindBy(css = ".oo-ui-icon-cart-list")
 	private WebElement listViewButton;
-	@FindBy(css=".oo-ui-widget-enabled.ve-ui-wikiaSingleMediaCartWidget")
+	@FindBy(css = ".oo-ui-widget-enabled.ve-ui-wikiaSingleMediaCartWidget")
 	private WebElement cart;
-	@FindBy(css=".ve-ui-wikiaSingleMediaCartWidget li")
+	@FindBy(css = ".ve-ui-wikiaSingleMediaCartWidget li")
 	private List<WebElement> cartItems;
 
 	private static final By MEDIA_RESULTS_WIDGET_BY = By.cssSelector(".ve-ui-wikiaMediaResultsWidget");
@@ -80,7 +80,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 		WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
 		waitForElementVisibleByElement(mediaResultsWidget);
 		List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_RESULTS_BY);
-		for (int i = 0; i<number; i++) {
+		for (int i = 0; i < number; i++) {
 			WebElement mediaAddIcon = mediaResults.get(i).findElement(MEDIA_ADD_ICON_BY);
 			mediaAddIcon.click();
 		}
@@ -94,7 +94,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 		WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
 		waitForElementVisibleByElement(mediaResultsWidget);
 		List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_CHECKED_ICON_BY);
-		for (int i = 0; i<number; i++) {
+		for (int i = 0; i < number; i++) {
 			mediaResults.get(i).click();
 			PageObjectLogging.log("removeMediaFromCart", "1 item unchecked from grid", true);
 		}
@@ -112,7 +112,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 		WebElement mediaResultsWidget = dialogBody.findElement(MEDIA_RESULTS_WIDGET_BY);
 		waitForElementVisibleByElement(mediaResultsWidget);
 		List<WebElement> mediaResults = mediaResultsWidget.findElements(MEDIA_ADD_ICON_BY);
-		for (int i = 0; i<number; i++) {
+		for (int i = 0; i < number; i++) {
 			mediaResults.get(i).click();
 			PageObjectLogging.log("addMediaToCart", "1 item checked from grid", true);
 		}
@@ -157,7 +157,7 @@ public class VisualEditorInsertGalleryDialog extends VisualEditorDialog {
 		List<WebElement> mediaTitles = mediaResultsWidget.findElements(MEDIA_TITLES_BY);
 		int i = 0;
 		boolean found = false;
-		while(i<mediaTitles.size() && found == false) {
+		while (i < mediaTitles.size() && found == false) {
 			String mediaTitle = mediaTitles.get(i).getAttribute("title");
 			if (mediaTitle.equals(title)) {
 				found = true;

@@ -1,25 +1,24 @@
 package com.wikia.webdriver.pageobjectsfactory.componentobject.photo;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.BasePageObject;
+public class PhotoOptionsComponentObject extends BasePageObject {
 
-public class PhotoOptionsComponentObject extends BasePageObject{
-
-	@FindBy(css="#ImageUploadCaption")
+	@FindBy(css = "#ImageUploadCaption")
 	private WebElement captionField;
-	@FindBy(css="#ImageUploadDetails input[type='submit']")
+	@FindBy(css = "#ImageUploadDetails input[type='submit']")
 	private WebElement addPhotoButton;
-	@FindBy(css="#ImageLayoutRow")
+	@FindBy(css = "#ImageLayoutRow")
 	private WebElement alignmentRow;
-	@FindBy(css="#ImageUploadLayoutLeft")
+	@FindBy(css = "#ImageUploadLayoutLeft")
 	private WebElement alignmentLeft;
-	@FindBy(css="#ImageUploadLayoutRight")
+	@FindBy(css = "#ImageUploadLayoutRight")
 	private WebElement alignmentRight;
-	@FindBy(css=".yui-back")
+	@FindBy(css = ".yui-back")
 	private WebElement selectAnotherPhotoButton;
 
 	public PhotoOptionsComponentObject(WebDriver driver) {
@@ -27,36 +26,42 @@ public class PhotoOptionsComponentObject extends BasePageObject{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setCaption(String caption){
+	public void setCaption(String caption) {
 		waitForElementByElement(captionField);
 		captionField.clear();
 		captionField.sendKeys(caption);
-		PageObjectLogging.log("setCaption", caption+" set", true);
+		PageObjectLogging.log("setCaption", caption + " set", true);
 	}
-	public void clickAddPhoto(){
+
+	public void clickAddPhoto() {
 		waitForElementByElement(addPhotoButton);
 		scrollAndClick(addPhotoButton);
 		waitForElementNotVisibleByElement(addPhotoButton);
 		PageObjectLogging.log("clickAddPhoto", "add photo button clicked", true);
 	}
 
-	public void adjustAlignment(int i){
+	public void adjustAlignment(int i) {
 		waitForElementByElement(alignmentRow);
-		switch(i){
-		case 1: alignmentLeft.click();
-				PageObjectLogging.log("adjustAlignment", "left alignment selected",  true);
+		switch (i) {
+			case 1:
+				alignmentLeft.click();
+				PageObjectLogging.log("adjustAlignment", "left alignment selected", true);
 				break;
-		case 2: alignmentRight.click();
-				PageObjectLogging.log("adjustAlignment", "right alignment selected",  true);
+			case 2:
+				alignmentRight.click();
+				PageObjectLogging.log("adjustAlignment", "right alignment selected", true);
 				break;
-		default: PageObjectLogging.log("adjustAlignment", "invalid alignment selected",  false);
+			default:
+				PageObjectLogging.log("adjustAlignment", "invalid alignment selected", false);
 
 		}
 	}
-	public void adjustLayout(){
+
+	public void adjustLayout() {
 		//TODO
 	}
-	public void replaceCaption(){
+
+	public void replaceCaption() {
 		//TODO
 	}
 

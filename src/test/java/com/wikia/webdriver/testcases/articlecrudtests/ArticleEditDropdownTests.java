@@ -1,11 +1,10 @@
 package com.wikia.webdriver.testcases.articlecrudtests;
 
-import org.testng.annotations.Test;
-
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
+import org.testng.annotations.Test;
 
 /**
  * @author: Bogna 'bognix' Knychała
@@ -33,6 +32,7 @@ public class ArticleEditDropdownTests extends NewTestTemplate {
 		ArticlePageObject article = base.openRandomArticle(wikiURL);
 		article.verifyDropdownForUser();
 	}
+
 	@Test(
 		groups = {"ArticleEditDropdown_003", "ArticleEditDropdown"}
 	)

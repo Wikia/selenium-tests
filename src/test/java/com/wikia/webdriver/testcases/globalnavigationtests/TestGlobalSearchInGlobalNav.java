@@ -3,9 +3,9 @@ package com.wikia.webdriver.testcases.globalnavigationtests;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.properties.Credentials;
 import com.wikia.webdriver.common.templates.NewTestTemplate;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.HomePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.SearchPageObject;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.globalnav.VenusGlobalNavPageObject;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -19,7 +19,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 
 	@DataProvider
 	public Object[][] getDataForGlobalSearchAnon() {
-		return new Object[][] {
+		return new Object[][]{
 			{"muppet", "gta", "Special:Search", "resultsLang=en"},
 			{"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
 			{"zh.pad", "pad", "Special:Search", "resultsLang=zh"}
@@ -46,10 +46,10 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 
 	@DataProvider
 	public Object[][] getDataForGlobalSearchLoggedIn() {
-		return new Object[][] {
-				{"muppet", "gta", "Special:Search", "resultsLang=en"},
-				{"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
-				{"zh.pad", "pad", "Special:Search", "resultsLang=zh"}
+		return new Object[][]{
+			{"muppet", "gta", "Special:Search", "resultsLang=en"},
+			{"de.gta", "icarly", "Spezial:Suche", "resultsLang=de"},
+			{"zh.pad", "pad", "Special:Search", "resultsLang=zh"}
 		};
 	}
 
@@ -75,7 +75,7 @@ public class TestGlobalSearchInGlobalNav extends NewTestTemplate {
 
 	@DataProvider
 	public Object[][] getWikisWithDisabledLocalSearch() {
-		return new Object[][] {
+		return new Object[][]{
 			{"de.wikia"},
 			{"wikia"}
 		};

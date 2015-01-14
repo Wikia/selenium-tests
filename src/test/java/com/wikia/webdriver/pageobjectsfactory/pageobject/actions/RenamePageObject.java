@@ -1,20 +1,19 @@
 package com.wikia.webdriver.pageobjectsfactory.pageobject.actions;
 
+import com.wikia.webdriver.common.logging.PageObjectLogging;
+import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.wikia.webdriver.common.logging.PageObjectLogging;
-import com.wikia.webdriver.pageobjectsfactory.pageobject.article.ArticlePageObject;
 
 /**
  * @author: Bogna 'bognix' Knychała
  */
 public class RenamePageObject extends ArticlePageObject {
 
-	@FindBy(css="#wpNewTitleMain")
+	@FindBy(css = "#wpNewTitleMain")
 	private WebElement newNameInput;
-	@FindBy(css=".mw-submit [name='wpMove']")
+	@FindBy(css = ".mw-submit [name='wpMove']")
 	private WebElement submitRename;
 
 	public RenamePageObject(WebDriver driver) {
