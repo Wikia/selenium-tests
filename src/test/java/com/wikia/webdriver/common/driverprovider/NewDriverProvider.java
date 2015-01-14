@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import com.wikia.webdriver.common.core.configuration.ConfigurationFactory;
+
 import io.appium.java_client.android.AndroidDriver;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,6 +29,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.wikia.webdriver.common.core.Global;
+import com.wikia.webdriver.common.logging.PageObjectLogging;
 
 /**
  *
@@ -120,7 +123,7 @@ public class NewDriverProvider {
 		try {
 			url = new URL("http://" + ConfigurationFactory.getConfig().getAppiumIp().toString() + "/wd/hub");
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			PageObjectLogging.log("getAndroindInstance", e.getMessage(), false);
 		}
 		mobileDriver = new AndroidDriver(url, destCaps);
 

@@ -12,12 +12,12 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mobile.MobileBasePageOb
  */
 public class SpecialMercuryPageObject extends MobileBasePageObject {
 
+	@FindBy(css = "button[name=opt]")
+	private WebElement optInButton;
+
 	public SpecialMercuryPageObject(WebDriver driver) {
 		super(driver);
 	}
-
-	@FindBy(css = "button[name=opt]")
-	private WebElement optInButton;
 
 	public void clickMercuryButton() {
 		waitForElementVisibleByElement(optInButton);

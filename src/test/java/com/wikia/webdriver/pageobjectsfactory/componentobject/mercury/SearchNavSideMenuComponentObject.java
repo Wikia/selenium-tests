@@ -18,10 +18,6 @@ import java.util.List;
 * */
 public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 
-	public SearchNavSideMenuComponentObject(WebDriver driver) {
-		super(driver);
-	}
-
 	@FindBy(css = ".ember-text-field")
 	private WebElement searchInput;
 	@FindBy(css = ".local-nav-menu > li")
@@ -54,6 +50,10 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 	private WebElement backChevron;
 	@FindBy(css = ".overlay")
 	private WebElement overlay;
+
+	public SearchNavSideMenuComponentObject(WebDriver driver) {
+		super(driver);
+	}
 
 	public void clickSearchField() {
 		waitForElementByElement(searchInput);
@@ -131,7 +131,7 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 			chevrons.get(anchorIndex).click();
 			waitForElementVisibleByElement(backChevron);
 			backChevron.click();
-			PageObjectLogging.log("verifyOpeningNextLevelInNav", "Back button is working", true, driver);
+			PageObjectLogging.log("verifyBackLinkFunctionality", "Back button is working", true, driver);
 		}
 	}
 
@@ -144,7 +144,6 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 	public void verifyTextEllipsis(int anchorIndex) {
 		waitForElementVisibleByElement(noChevrons.get(anchorIndex));
 		waitForElementVisibleByElement(chevrons.get(anchorIndex));
-		//x = noChevrons.get(anchorIndex).getCssValue("text-overflow");		
 		if (noChevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis") && chevrons.get(anchorIndex).getCssValue("text-overflow").contains("ellipsis")) {
 			PageObjectLogging.log("verifyTextEllipsis", "CSS selector is set to ellipsis", true);
 		} else {

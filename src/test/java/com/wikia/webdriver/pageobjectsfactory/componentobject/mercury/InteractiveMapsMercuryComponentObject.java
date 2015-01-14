@@ -9,10 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject {
 
-	public InteractiveMapsMercuryComponentObject(WebDriver driver) {
-		super(driver);
-	}
-
 	@FindBy(css = ".current")
 	private WebElement mapFrame;
 	@FindBy(css = "div[id='map']")
@@ -30,6 +26,9 @@ public class InteractiveMapsMercuryComponentObject extends MercuryBasePageObject
 	@FindBy(css = ".point-types")
 	private WebElement filterBoxPoints;
 
+	public InteractiveMapsMercuryComponentObject(WebDriver driver) {
+		super(driver);
+	}
 
 	public void clickCloseButton() {
 		driver.switchTo().activeElement();

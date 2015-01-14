@@ -14,10 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePage
 
 public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 
-	public LightBoxMercuryComponentObject(WebDriver driver) {
-		super(driver);
-	}
-
 	@FindBy(css = ".lightbox-close-wrapper")
 	private WebElement closeLightboxButton;
 	@FindBy(css = ".lightbox-header-title")
@@ -32,6 +28,10 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 	private WebElement lightboxContent;
 	@FindBy(css = ".page-wrapper")
 	private WebElement pageWrapper;
+
+	public LightBoxMercuryComponentObject(WebDriver driver) {
+		super(driver);
+	}
 
 	public MercuryBasePageObject clickCloseButton() {
 		waitForElementVisibleByElement(closeLightboxButton);
@@ -60,13 +60,10 @@ public class LightBoxMercuryComponentObject extends MercuryBasePageObject{
 
 	public void testGestures() {
 		doubleTapZoom(lightboxWrapper);
-		System.out.println("Wrapper");
 		doubleTapZoom(lightboxInner);
-		System.out.println("Inner");
 		doubleTapZoom(lightboxContent);
-		System.out.println("Content");
 		doubleTapZoom(pageWrapper);
-		System.out.println("page wrapper");
+		PageObjectLogging.log("testGestures", "Double tap zoom was correctly simulated 4 times", true, driver);
 	}
 
 	public void verifyImageWasChanged(String imageOnePath, String imageTwoPath) {

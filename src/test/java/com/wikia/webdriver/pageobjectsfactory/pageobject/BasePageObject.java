@@ -71,7 +71,7 @@ public class BasePageObject{
 		urlBuilder = new UrlBuilder(ConfigurationFactory.getConfig().getEnv());
 	}
 
-	protected void setWindowSize() {
+	protected void setWindowSizeAndroid() {
 		if(!ConfigurationFactory.getConfig().getBrowser().toString().contains("ANDROID")) {
 			driver.manage().window().maximize();
 		}

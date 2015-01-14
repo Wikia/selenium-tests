@@ -14,11 +14,6 @@ import com.wikia.webdriver.pageobjectsfactory.componentobject.mercury.SearchNavS
 
 public class MercuryArticlePageObject extends MercuryBasePageObject{
 
-	public MercuryArticlePageObject(WebDriver driver) {
-		super(driver);
-		// TODO Auto-generated constructor stub
-	}
-
 	@FindBy(css = ".article-gallery > figure > img")
 	private List<WebElement> galleryImagesArray;
 	@FindBy(css = ".article-gallery")
@@ -58,6 +53,9 @@ public class MercuryArticlePageObject extends MercuryBasePageObject{
 	@FindBy(css = ".view-map")
 	private WebElement viewMapButton;
 
+	public MercuryArticlePageObject(WebDriver driver) {
+		super(driver);
+	}
 
 	public LightBoxMercuryComponentObject clickGalleryImage(int index) {
 		scrollToElement(galleryImagesArray.get(index));
