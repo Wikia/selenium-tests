@@ -37,13 +37,16 @@ public class Shooter {
 	 */
 	public File captureWebElement(WebElement element, WebDriver driver) {
 		File screen = capturePage(driver);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		JavascriptExecutor js = (JavascriptExecutor)driver;
-		ArrayList<String> list = (ArrayList<String>) js.executeScript("var rect =  arguments[0].getBoundingClientRect();" +
-			"return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]", element);
+		ArrayList<String> list = (ArrayList<String>) js.executeScript(
+			"var rect =  arguments[0].getBoundingClientRect();" +
+				"return [ '' + parseInt(rect.left), '' + parseInt(rect.top), '' + parseInt(rect.width), '' + parseInt(rect.height) ]",
+			element
+		);
 
 		Point start = new Point(Integer.parseInt(list.get(0)), Integer.parseInt(list.get(1)));
-		Dimension size = new Dimension( Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));
+		Dimension size = new Dimension(Integer.parseInt(list.get(2)), Integer.parseInt(list.get(3)));
 
 		return imageEditor.cropImage(start, size, screen);
 	}
