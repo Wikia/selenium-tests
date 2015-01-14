@@ -693,7 +693,7 @@ public class AdsBaseObject extends WikiBasePageObject {
 			WebElement slot = waitForElementByCss(spotlightSelector);
 			verifySlotExpanded(slot);
 
-			adsComparison.isSlotVisible(slot, spotlightSelector, driver);
+			adsComparison.isAdVisible(slot, spotlightSelector, driver);
 		}
 	}
 }
