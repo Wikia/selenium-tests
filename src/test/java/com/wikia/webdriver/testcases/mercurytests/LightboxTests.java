@@ -3,6 +3,8 @@ package com.wikia.webdriver.testcases.mercurytests;
 import java.util.List;
 
 import io.appium.java_client.MobileDriver;
+import io.appium.java_client.MultiTouchAction;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 
 import com.wikia.webdriver.common.contentpatterns.MercuryContent;
@@ -22,7 +24,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.internal.TouchAction;
+//import org.openqa.selenium.interactions.internal.TouchAction;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -171,17 +173,59 @@ public class LightboxTests extends NewTestTemplate {
 			
 			
 			
-//			try {
-//				Thread.sleep(5000);
-//				System.out.println("S1...");
-//			} catch(InterruptedException ex) {
-//				Thread.currentThread().interrupt();
-//			}
+			try {
+				Thread.sleep(5000);
+				System.out.println("S1...");
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
 //			System.out.println(lightbox.currentImageSrcPath());
 //			System.out.println(lightbox.currentImageSrcPath());
+			System.out.println("zoom");
 			
-			lightbox.verifyCurrentImageIsVisible();
-			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left", 150, 100);
+			TouchAction ta1 = new TouchAction(mobileDriver);
+			TouchAction ta2 = new TouchAction(mobileDriver);
+			MultiTouchAction mt = new MultiTouchAction(mobileDriver);
+			
+			mobileDriver.context("NATIVE_APP");
+			ta1.press(400, 1000).moveTo(200, 1000).release();
+			ta2.press(500, 1000).moveTo(700, 1000).release();
+//			ta2.moveTo(700, 1000);
+//			ta1.perform();
+//			ta2.perform();
+			
+//			mt.add(new TouchAction(mobileDriver).press(400, 1000).moveTo(0, 1000).release());
+//			mt.add(new TouchAction(mobileDriver).press(500, 1000).moveTo(900, 1000).release());
+			mt.add(ta1);
+			mt.add(ta2);
+			mt.perform();
+//			mobileDriver.zoom(500, 1000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, PerformTouchAction.DIRECTION_LEFT, 200, 300, 0);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, PerformTouchAction.DIRECTION_RIGHT, 200, 300, 0);
+			mobileDriver.context("WEBVIEW_1");
+			
+			
+			
+//			mobileDriver.context("NATIVE_APP");
+//			mobileDriver.zoom(500, 1000);
+//			mobileDriver.performMultiTouchAction(multiAction);
+//			mobileDriver.context("WEBVIEW_1");
+			
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, "up", 500, 1000, 2000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, "down", 500, 1000, 2000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, PerformTouchAction.DIRECTION_LEFT, 500, 300, 5000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, "right", 500, 300, 5000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, "right", 500, 300, 5000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, "right", 500, 300, 5000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, "right", 500, 300, 5000);
+//			touchAction.SwipeFromCenterToDirection(mobileDriver, "left", 500, 300, 2000);
+			
+//			lightbox.verifyCurrentImageIsVisible();
+//			touchAction.SwipeFromPointToPoint(mobileDriver, 50, 80, 50, 20, 1000, 3000);
+//			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left", 150, 100);
+//			mobileDriver.context("NATIVE_APP");
+//			mobileDriver.swipe(500, 1700, 500, 500, 1000);
+//			mobileDriver.context("WEBVIEW_1");
 			
 			//lightbox.verifyImageWasChanged(imageOnePath, imageTwoPath);
 //			try {
@@ -191,6 +235,12 @@ public class LightboxTests extends NewTestTemplate {
 //				Thread.currentThread().interrupt();
 //			}
 //			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left", 100);
+			
+//			mobileDriver.context("NATIVE_APP");
+//			mobileDriver.swipe(500, 500, 500, 1700, 1200);
+//			mobileDriver.context("WEBVIEW_1");
+			
+//			touchAction.SwipeFromPointToPoint(mobileDriver, 50, 20, 50, 80, 1000, 3000);
 			
 			try {
 				Thread.sleep(5000);
