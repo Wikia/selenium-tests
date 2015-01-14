@@ -211,7 +211,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
 		CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
-		articleModal.createPageWithBlankLayout(articleTitle);
+		articleModal.createPage(articleTitle);
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -219,7 +219,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 		actionsClick(contributeDropdown);
 		waitForElementVisibleByElement(addArticleInDropdown);
 		CreateArticleModalComponentObject articleModal = clickArticleInDropDown(addArticleInDropdown);
-		articleModal.createPageWithBlankLayout(articleTitle);
+		articleModal.createPage(articleTitle);
 		return new SourceEditModePageObject(driver);
 	}
 
@@ -736,7 +736,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public VisualEditModePageObject openCKModeWithRedLinks(int linkNumber) {
 		WebElement redLinkToClick = redLinks.get(linkNumber);
 		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
-		articleModal.createPageWithBlankLayout("");
+		articleModal.createPage("");
 		return new VisualEditModePageObject(driver);
 	}
 
@@ -755,7 +755,7 @@ public class ArticlePageObject extends WikiBasePageObject {
 	public SourceEditModePageObject openSrcModeWithRedLinks(int linkNumber) {
 		WebElement redLinkToClick = redLinks.get(linkNumber);
 		CreateArticleModalComponentObject articleModal = clickRedLink(redLinkToClick);
-		articleModal.createPageWithBlankLayout("");
+		articleModal.createPage("");
 		return new SourceEditModePageObject(driver);
 	}
 
