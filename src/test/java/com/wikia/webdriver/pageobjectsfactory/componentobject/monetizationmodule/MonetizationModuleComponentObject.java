@@ -34,15 +34,15 @@ public class MonetizationModuleComponentObject extends WikiBasePageObject {
 	private WebElement slotBelowCategory;
 	@FindBy(css = ".monetization-module[data-mon-slot='above_footer']")
 	private WebElement slotAboveFooter;
-	@FindBy(css=".monetization-module[data-mon-type='adunit']")
+	@FindBy(css = ".monetization-module[data-mon-type='adunit']")
 	private WebElement adsenseContainer;
 	@FindBy(css = ".adsbygoogle")
 	private WebElement adsenseIns;
-	@FindBy(css=".adsbygoogle.ad-responsive-ic")
+	@FindBy(css = ".adsbygoogle.ad-responsive-ic")
 	private WebElement adsenseInsInContent;
-	@FindBy(css=".adsbygoogle.ad-responsive")
+	@FindBy(css = ".adsbygoogle.ad-responsive")
 	private WebElement adsenseInsOthers;
-	@FindBy(css=".ad-header")
+	@FindBy(css = ".ad-header")
 	private	WebElement adHeader;
 
 	private By monetizationModuleContainer = By.cssSelector(".monetization-module");
