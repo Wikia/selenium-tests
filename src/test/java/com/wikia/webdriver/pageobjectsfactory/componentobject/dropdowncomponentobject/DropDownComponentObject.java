@@ -7,6 +7,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.common.properties.Properties;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.WikiBasePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.signup.SignUpPageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -63,7 +64,9 @@ public class DropDownComponentObject extends WikiBasePageObject {
 				@Override
 				public Boolean apply(WebDriver webDriver) {
 					if (!loginDropdownTrigger.getAttribute("class").contains("active")) {
-						new Actions(driver).click(loginDropdownTrigger).perform();
+						new Actions(driver)
+							.moveToElement(driver.findElement(By.cssSelector("#hubsEntryPoint")))
+							.moveToElement(loginDropdownTrigger).perform();
 						return false;
 					}
 					return true;
