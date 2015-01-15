@@ -67,7 +67,7 @@ public class BasePageObject{
 		this.driver = driver;
 		builder = new Actions(driver);
 		PageFactory.initElements(driver, this);
-		this.setWindowSize();
+		this.setWindowSizeAndroid();
 		urlBuilder = new UrlBuilder(ConfigurationFactory.getConfig().getEnv());
 	}
 
