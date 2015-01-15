@@ -56,7 +56,7 @@ public class PageContent {
 	public static final String SMALLFILE = "Image011-Small-image.png";
 	public static final String BROKENEXTENSIONFILE = "broken-extension-image.fer";
 	//image storage
-	public static final String FILEDELETEANDRESTORE = "Constantine_test.png";
+	public static final String FILE_DELETE_AND_RESTORE = "Constantine_test.png";
 	public static final String FILERENAME = "HongKongHarbour.jpg";
 	public static final String ARTICLESOURCEMODEFILE = "VE_ContributeDropDown.png";
 

@@ -2,10 +2,12 @@ package com.wikia.webdriver.pageobjectsfactory.pageobject.special;
 
 import com.wikia.webdriver.common.contentpatterns.PageContent;
 import com.wikia.webdriver.common.contentpatterns.URLsContent;
+import com.wikia.webdriver.common.core.urlbuilder.UrlBuilder;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 import com.wikia.webdriver.pageobjectsfactory.componentobject.lightbox.LightboxComponentObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.filepage.FilePagePageObject;
 import com.wikia.webdriver.pageobjectsfactory.pageobject.special.watch.WatchPageObject;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -135,8 +137,14 @@ public class SpecialNewFilesPageObject extends SpecialPageObject {
 		throw new NoSuchElementException("there is no " + imageName + " on Special:NewFiles page");
 	}
 
-	public FilePagePageObject openImage(String imageName) {
-		driver.get(getImageUrl(imageName));
+	public FilePagePageObject openImage(String imageName, boolean noRedirect) {
+		String url = getImageUrl(imageName);
+		if (noRedirect) {
+			String parameter = "redirect=no";
+			UrlBuilder builer = new UrlBuilder();
+			url = builer.appendQueryStringToURL(url, parameter);
+		}
+		driver.get(url);
 		return new FilePagePageObject(driver);
 	}
 
