@@ -17,7 +17,7 @@ import com.wikia.webdriver.common.logging.PageObjectLogging;
 /**
  * @authors: Tomasz Napieralski
  * @created: 9 Jan 2015
- * @updated: 14 Jan 2015
+ * @updated: 15 Jan 2015
  */
 
 public class PerformTouchAction {
@@ -41,21 +41,16 @@ public class PerformTouchAction {
 	private static int loadedPageHeight = 0;
 	private static int loadedPageWidth = 0;
 	
-	private static int elementStartPointX = 0;
-	private static int elementStartPointY = 0;
-	private static int elementHeight = 0;
-	private static int elementWidth = 0;
-	
 	public static final String DIRECTION_LEFT = "left";
 	public static final String DIRECTION_RIGHT = "right";
 	public static final String DIRECTION_UP = "up";
 	public static final String DIRECTION_DOWN = "down";
 	
-	public PerformTouchAction (WebDriver driver, AndroidDriver mobileDriver, Boolean showSmartBanner) {
+	public static final String ZOOM_WAY_IN = "in";
+	public static final String ZOOM_WAY_OUT = "out";
+	
+	public PerformTouchAction (WebDriver driver, AndroidDriver mobileDriver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		if (!showSmartBanner) {
-			js.executeScript("document.cookie='sb-closed=1'");
-		}
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
 		}
@@ -116,20 +111,15 @@ public class PerformTouchAction {
 		System.out.println("loadedPageHeight: " + loadedPageHeight); //2484
 		System.out.println("loadedPageWidth: " + loadedPageWidth); //360
 		System.out.println("=======================================");
-		System.out.println("elementStartPointX: " + elementStartPointX);
-		System.out.println("elementStartPointY: " + elementStartPointY);
-		System.out.println("elementHeight: " + elementHeight);
-		System.out.println("elementWidth: " + elementWidth);
-		System.out.println("=======================================");
 	}
 	
 	/**
 	 * 
 	 * @param mobileDriver
-	 * @param direction Use public var DIRECTION from that class
+	 * @param direction Use public const DIRECTION from that class
 	 * @param pixelPath	From 0 to half of screen X or Y, if path will be too high it will be set to edge of app
 	 * @param duration In milliseconds
-	 * @param waitAfter In milliseconds
+	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
 	public void SwipeFromCenterToDirection (AndroidDriver mobileDriver, String direction, int pixelPath, int duration, int waitAfter){
 		int centerX = appNativeWidth / 2;
@@ -192,12 +182,12 @@ public class PerformTouchAction {
 	/**
 	 * 
 	 * @param mobileDriver
-	 * @param startX Use value 0-100, it is percent of app width
-	 * @param startY Use value 0-100, it is percent of app height
-	 * @param endX Use value 0-100, it is percent of app width
-	 * @param endY Use value 0-100, it is percent of app height
+	 * @param startX Use value 0-100, it is percent of app width, Reccomend 10-90
+	 * @param startY Use value 0-100, it is percent of app height, Reccomend 10-90
+	 * @param endX Use value 0-100, it is percent of app width, Reccomend 10-90
+	 * @param endY Use value 0-100, it is percent of app height, Reccomend 10-90
 	 * @param duration In milliseconds
-	 * @param waitAfter In milliseconds
+	 * @param waitAfter In milliseconds, Reccomend 2*duration
 	 */
 	public void SwipeFromPointToPoint (AndroidDriver mobileDriver, int startX, int startY, int endX, int endY, int duration, int waitAfter) {		
 		startX = (int)((startX / 100f) * appNativeWidth);
@@ -219,15 +209,18 @@ public class PerformTouchAction {
 	}
 	
 	/**
-	 * 
+	 * It uses two fingers to zoom in.
 	 * @param mobileDriver
-	 * @param startX Use value 0-100, it is percent of app width
-	 * @param startY Use value 0-100, it is percent of app height
+	 * @param startX Use value 0-100, it is percent of app width, Reccomend 50
+	 * @param startY Use value 0-100, it is percent of app height, Reccomend 10-90
+	 * @param fingersSpace Space between two fingers, In pixel, It must be less than pixelPath, Reccomend 20-100
 	 * @param pixelPath From 0 to half of screen X, if path will be too high it will be set to edge of app
+	 * @param zoomWay Use public const ZOOM_WAY from that class
+	 * @param waitAfter In milliseconds
 	 */
-	public void ZoomInPointXY (AndroidDriver mobileDriver, int startX, int startY, int pixelPath) {
-		startX = (int)((startX / 100f) * appNativeWidth);
-		startY = (int)((startY / 100f) * appNativeHeight);
+	public void ZoomInOutPointXY (AndroidDriver mobileDriver, int pointX, int pointY, int fingersSpace, int pixelPath, String zoomWay, int waitAfter) {
+		pointX = (int)((pointX / 100f) * appNativeWidth);
+		pointY = (int)((pointY / 100f) * appNativeHeight);
 		TouchAction touchOne = new TouchAction(mobileDriver);
 		TouchAction touchTwo = new TouchAction(mobileDriver);
 		MultiTouchAction multiTouch = new MultiTouchAction(mobileDriver);
@@ -235,17 +228,23 @@ public class PerformTouchAction {
 		int endXOne = 0;
 		int endXTwo = 0;
 		int offSet = 0;
+		int startXOne = 0;
+		int startXTwo = 0;
+		if (fingersSpace >= pixelPath) {
+			fingersSpace = pixelPath - 2;
+		}
+		fingersSpace /= 2;
 		if (pixelPath < appNativeWidth) {
 			halfPath = pixelPath / 2;
 		} else {
 			halfPath = (appNativeWidth - 2) / 2;
 		}
-		endXOne = startX - halfPath;
+		endXOne = pointX - halfPath;
 		if (endXOne < 0) {
 			offSet = -endXOne;
 			endXOne = 0;
 		}
-		endXTwo = startX + halfPath;
+		endXTwo = pointX + halfPath;
 		if (endXTwo > (appNativeWidth - 2)) {
 			offSet = (appNativeWidth - 2) - endXTwo;
 			endXTwo = (appNativeWidth - 2);
@@ -256,17 +255,114 @@ public class PerformTouchAction {
 		if (offSet < 0) {
 			endXOne += offSet;
 		}
+		startXOne = pointX - fingersSpace;
+		if (startXOne <= 0) {
+			startXOne = 1;
+		}
+		startXTwo = pointX + fingersSpace;
+		if (startXTwo >= (appNativeWidth - 2)) {
+			startXTwo = appNativeWidth - 3;
+		}
+		if (zoomWay == "out") {
+			int temp;
+			temp = startXOne;
+			startXOne = endXOne;
+			endXOne = temp;
+			temp = startXTwo;
+			startXTwo = endXTwo;
+			endXTwo = temp;
+		}
+		System.out.println("startXOne: "+startXOne+", endXOne: "+endXOne+", startXTwo: "+startXTwo+", endXTwo: "+endXTwo+" ");
 		if (mobileDriver.getContext() != "NATIVE_APP") {
 			mobileDriver.context("NATIVE_APP");
 		}
-		touchOne.press(startX, startY).moveTo(endXOne, startY).release();
-		touchTwo.press(startX, startY).moveTo(endXTwo, startY).release();
+		touchOne.press(startXOne, pointY).moveTo(endXOne, pointY).release();
+		touchTwo.press(startXTwo, pointY).moveTo(endXTwo, pointY).release();
 		multiTouch.add(touchOne);
 		multiTouch.add(touchTwo);
-		multiTouch.perform();
+		try {
+			multiTouch.perform();
+		} catch (Exception e) {}
+		try {
+			Thread.sleep(waitAfter);
+		} catch (Exception e) {}
 		if (mobileDriver.getContext() != "WEBVIEW_1") {
 			mobileDriver.context("WEBVIEW_1");
 		}
+	}
+	
+	/**
+	 * 
+	 * @param mobileDriver
+	 * @param pointX Use value 0-100, it is percent of app width, Reccomend 10-90
+	 * @param pointY Use value 0-100, it is percent of app height, Reccomend 10-90
+	 * @param duration In milliseconds, Reccomend 500
+	 * @param waitAfter In milliseconds
+	 */
+	public void TapOnPointXY (AndroidDriver mobileDriver, int pointX, int pointY, int duration, int waitAfter) {
+		pointX = (int)((pointX / 100f) * appNativeWidth);
+		pointY = (int)((pointY / 100f) * appNativeHeight);
+		if (mobileDriver.getContext() != "NATIVE_APP") {
+			mobileDriver.context("NATIVE_APP");
+		}
+		try {
+			mobileDriver.tap(1, pointX, pointY, duration);
+		} catch (Exception e) {}
+		try {
+			Thread.sleep(waitAfter);
+		} catch (Exception e) {}
+		if (mobileDriver.getContext() != "WEBVIEW_1") {
+			mobileDriver.context("WEBVIEW_1");
+		}
+	}
+	
+	//IN PROGRESS
+	public void TapOnWebElement (WebDriver driver, AndroidDriver mobileDriver, By locator, int index, int duration, int waitAfter) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		
+		//ADD INDEX HANDLE HERE
+		
+		WebElement element = driver.findElement(locator);
+		int elementStartPointX = element.getLocation().getX();
+		int elementStartPointY = element.getLocation().getY();
+		int elementHeight = element.getSize().getHeight();
+		int elementWidth = element.getSize().getHeight();
+			
+		System.out.println("=======================================");
+		System.out.println("elementStartPointX: " + elementStartPointX);
+		System.out.println("elementStartPointY: " + elementStartPointY);
+		System.out.println("elementHeight: " + elementHeight);
+		System.out.println("elementWidth: " + elementWidth);
+		System.out.println("=======================================");
+		
+		int offSetY = loadedPageHeight - element.getLocation().getY() - appWebviewHeight;
+		if (offSetY < 0) {
+			offSetY = -offSetY;
+		} else {
+			offSetY = 0;
+		}
+		
+		js.executeScript("window.scrollTo(0, "+element.getLocation().getY()+")");
+		
+		int pointX = (elementStartPointX + (elementWidth / 2)) * ratio;
+		int pointY = (taskbarWebviewHeight + (elementHeight / 2) + offSetY) * ratio; 
+		
+		
+		if (mobileDriver.getContext() != "NATIVE_APP") {
+			mobileDriver.context("NATIVE_APP");
+		}
+		try {
+			mobileDriver.tap(1, pointX, pointY, duration);
+		} catch (Exception e) {}
+		try {
+			Thread.sleep(waitAfter);
+		} catch (Exception e) {}
+		if (mobileDriver.getContext() != "WEBVIEW_1") {
+			mobileDriver.context("WEBVIEW_1");
+		}
+		
+		
+		
 	}
 	
 }

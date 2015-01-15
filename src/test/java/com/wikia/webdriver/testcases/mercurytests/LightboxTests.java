@@ -138,7 +138,7 @@ public class LightboxTests extends NewTestTemplate {
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
-			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
+			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver);
 //			touchAction.SwipeFromCenterToDirection(driver, mobileDriver, "left");
 			try {
 				Thread.sleep(3000);
@@ -166,7 +166,7 @@ public class LightboxTests extends NewTestTemplate {
 			AndroidDriver mobileDriver = NewDriverProvider.getMobileDriver();
 			MercuryBasePageObject base = new MercuryBasePageObject(driver);
 			MercuryArticlePageObject article =  base.openMercuryArticleByName(wikiURL, MercuryContent.MERCURY_GALLERY_TEST_ARTICLE);
-			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver, false);
+			PerformTouchAction touchAction = new PerformTouchAction(driver, mobileDriver);
 			
 			LightBoxMercuryComponentObject lightbox = article.clickGalleryImage(MercuryContent.MERCURY_GALLERY_IMAGE_INDEX);
 			
@@ -184,9 +184,19 @@ public class LightboxTests extends NewTestTemplate {
 			System.out.println("zoom");
 			
 			
+//			touchAction.TapOnPointXY(mobileDriver, 40, 60, 500, 0);
+//			touchAction.TapOnWebElement(driver, mobileDriver, By.cssSelector("img.loaded"), 0, 500, 0);
+			
+//			mobileDriver.context("NATIVE_APP");
+//			mobileDriver.tap(1, 400, 1100, 500);
+//			mobileDriver.context("WEBVIEW_1");
 			
 			
-			touchAction.ZoomInPointXY(mobileDriver, 50, 50, 100);
+//			
+			
+			/*********************** FOR LUDWIK *****************************/
+			touchAction.ZoomInOutPointXY(mobileDriver, 50, 50, 50, 100, "in", 2000); //It should zoom in center
+			touchAction.ZoomInOutPointXY(mobileDriver, 50, 50, 50, 100, "out", 0); //It should zoom out but it doesn't
 			
 			
 			
