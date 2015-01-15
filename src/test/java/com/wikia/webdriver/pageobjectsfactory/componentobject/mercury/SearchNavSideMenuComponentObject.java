@@ -4,6 +4,7 @@ import com.wikia.webdriver.common.contentpatterns.MercuryContent;
 import com.wikia.webdriver.common.core.Assertion;
 import com.wikia.webdriver.common.logging.PageObjectLogging;
 
+import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryArticlePageObject;
 import org.openqa.selenium.WebDriver;
 
 import com.wikia.webdriver.pageobjectsfactory.pageobject.mercury.MercuryBasePageObject;
@@ -54,6 +55,8 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 	private WebElement backChevron;
 	@FindBy(css = ".overlay")
 	private WebElement overlay;
+	@FindBy(css = "a[href='/wiki/Special:Random']")
+	private WebElement randomPage;
 
 	public void clickSearchField() {
 		waitForElementByElement(searchInput);
@@ -70,6 +73,13 @@ public class SearchNavSideMenuComponentObject extends MercuryBasePageObject{
 	public void clickCancelButton() {
 		waitForElementVisibleByElement(cancelSearchCaption);
 		cancelSearchCaption.click();
+	}
+
+	public MercuryArticlePageObject clickRandomPage() {
+		waitForElementVisibleByElement(randomPage);
+		tapOnElement(randomPage);
+		PageObjectLogging.log("clickRandomPage", "Random page button was clicked", true);
+		return new MercuryArticlePageObject(driver);
 	}
 
 	public String getSearchResultHref(int searchPosition) {

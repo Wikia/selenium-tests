@@ -23,7 +23,6 @@ public class LightboxTests extends NewTestTemplate {
 		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
-	//MT01
 	@Test(groups = {"MercuryLightboxTests_001", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_001_TappingImageOpenLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
@@ -32,7 +31,6 @@ public class LightboxTests extends NewTestTemplate {
 		lightbox.verifyCurrentImageIsVisible();
 	}
 
-	//MT02
 	@Test(groups = {"MercuryLightboxTests_002", "MercuryLightboxTests", "Mercury"})
 	public void MercuryLightboxTests_002_TappingCloseButtonCloseLightbox() {
 		MercuryBasePageObject base = new MercuryBasePageObject(driver);
