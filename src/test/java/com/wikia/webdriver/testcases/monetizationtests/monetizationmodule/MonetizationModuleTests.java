@@ -94,10 +94,12 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	@DataProvider(name = "DataMonetizationModule_005")
 	public static Object[][] DataMonetizationModule_005() {
-		return new Object[][]{
-			{800, 600, 728},
-			{1024, 600, 690},
-			{1700, 600, 728},
+		return new Object[][] {
+			{800, 600, 468, 728},
+			{1024, 600, 320, 690},
+			{1440, 600, 468, 728},
+			{1665, 600, 690, 728},
+			{1700, 600, 728, 728},
 		};
 	}
 
@@ -110,7 +112,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		dataProvider = "DataMonetizationModule_005",
 		groups = {"MonetizationModule", "MonetizationModuleTest_005", "Monetization"}
 	)
-	public void MonetizationModuleTest_005(int width, int height, int expected) {
+	public void MonetizationModuleTest_005(int width, int height, int expectedInContent, int expectedOthers) {
 		wikiURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
 		WikiBasePageObject base = new WikiBasePageObject(driver);
 		base.openWikiPage(wikiURL);
@@ -119,8 +121,8 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.setCookieFromSearch();
 		monetizationModule.resizeWindow(width, height);
 		base.refreshPage();
-		monetizationModule.verifyMonetizationModuleAdsenseShown();
-		monetizationModule.verifyMonetizationModuleAdsenseWidth(expected);
+		monetizationModule.verifyAdsenseUnitShown();
+		monetizationModule.verifyAdsenseUnitWidth(expectedInContent, expectedOthers);
 	}
 
 	/**
@@ -139,15 +141,15 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.setCookieFromSearch();
 		// anon user
 		base.refreshPage();
-		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyAdsenseUnitShown();
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openWikiPage(articleURL);
-		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+		monetizationModule.verifyAdsenseUnitNotShown();
 		// anon user
 		base.logOut(wikiURL);
 		base.openWikiPage(articleURL);
-		monetizationModule.verifyMonetizationModuleAdsenseShown();
+		monetizationModule.verifyAdsenseUnitShown();
 	}
 
 	/**
@@ -166,20 +168,20 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.deleteCookieFromSearch();
 		// anon user
 		base.refreshPage();
-		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+		monetizationModule.verifyAdsenseUnitNotShown();
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openWikiPage(articleURL);
-		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+		monetizationModule.verifyAdsenseUnitNotShown();
 		// anon user
 		base.logOut(wikiURL);
 		base.openWikiPage(articleURL);
-		monetizationModule.verifyMonetizationModuleAdsenseNotShown();
+		monetizationModule.verifyAdsenseUnitNotShown();
 	}
 
 	@DataProvider(name = "DataMonetizationModuleTest_008")
 	public static Object[][] DataMonetizationModuleTest_008() {
-		return new Object[][]{
+		return new Object[][] {
 			{"JP", true, TEST_WIKI, TEST_ARTICLE},
 			{"JP", false, TEST_WIKI, TEST_ARTICLE},
 			{"JP", true, TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE},
@@ -347,7 +349,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	}
 
 	/**
-	 * The monetization module is shown on article page for non-blocked geos (bt/ic/bc/af slots)
+	 * Adsense: The monetization module is shown on article page for non-blocked geos (bt/ic/bc/af slots)
 	 *
 	 * @author Saipetch Kongkatong
 	 */
@@ -366,8 +368,9 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		// anon user
 		base.refreshPage();
 		monetizationModule.verifyMonetizationModuleShown();
-		monetizationModule.verifyMonetizationModuleSlot();
-		monetizationModule.verifyMonetizationModuleNotShownAboveTitle();
+		monetizationModule.verifyAdsenseUnitShown();
+		monetizationModule.verifyAdsenseUnitSlot();
+		monetizationModule.verifyAdsenseUnitNotShownAboveTitle();
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openWikiPage(articleURL);
@@ -376,14 +379,15 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	@DataProvider(name = "DataMonetizationModuleTest_013")
 	public static Object[][] DataMonetizationModuleTest_013() {
-		return new Object[][]{
+		return new Object[][] {
 			{"JP"},
 			{"GB"},
+			{"US"},
 		};
 	}
 
 	/**
-	 * The monetization module is not shown on article page on top 700 wikias for blocked geos (set blocked countries per wiki)
+	 * Adsense: The monetization module is not shown on article page on top 700 wikias for blocked geos (set blocked countries per wiki)
 	 *
 	 * @author Saipetch Kongkatong
 	 */
@@ -401,7 +405,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.setCookieGeo(countryCode);
 		// anon user
 		base.refreshPage();
-		monetizationModule.verifyMonetizationModuleNotShown();
+		monetizationModule.verifyAdsenseUnitNotShown();
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openWikiPage(articleURL);
@@ -410,7 +414,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	@DataProvider(name = "DataMonetizationModuleTest_014")
 	public static Object[][] DataMonetizationModuleTest_014() {
-		return new Object[][]{
+		return new Object[][] {
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "CA"},
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "AU"},
 			{TEST_TOP_700_WIKI, TEST_TOP_700_ARTICLE, "DE"},
@@ -421,7 +425,7 @@ public class MonetizationModuleTests extends NewTestTemplate {
 	}
 
 	/**
-	 * The monetization module is shown on article page on top 700 wikias and the rest for particular geos (ic/bc/af slots)
+	 * Adsense: The monetization module is shown on article page on top 700 wikias and the rest for particular geos (ic/bc/af slots)
 	 *
 	 * @author Saipetch Kongkatong
 	 */
@@ -439,9 +443,11 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.setCookieGeo(countryCode);
 		// anon user
 		base.refreshPage();
-		monetizationModule.verifyMonetizationModuleSlot();
-		monetizationModule.verifyMonetizationModuleNotShownAboveTitle();
-		monetizationModule.verifyMonetizationModuleNotShownBelowTitle();
+		monetizationModule.verifyMonetizationModuleShown();
+		monetizationModule.verifyAdsenseUnitShown();
+		monetizationModule.verifyAdsenseUnitSlot();
+		monetizationModule.verifyAdsenseUnitNotShownAboveTitle();
+		monetizationModule.verifyAdsenseUnitNotShownBelowTitle();
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openWikiPage(articleURL);
@@ -450,13 +456,14 @@ public class MonetizationModuleTests extends NewTestTemplate {
 
 	@DataProvider(name = "DataMonetizationModuleTest_015")
 	public static Object[][] DataMonetizationModuleTest_015() {
-		return new Object[][]{
+		return new Object[][] {
 			{"GB"},
+			{"US"},
 		};
 	}
 
 	/**
-	 * The monetization module is shown on article page on the rest of wikias for particular geos (bc/af slots)
+	 * Adsense: The monetization module is shown on article page on the rest of wikias for particular geos (bc/af slots)
 	 *
 	 * @author Saipetch Kongkatong
 	 */
@@ -474,17 +481,33 @@ public class MonetizationModuleTests extends NewTestTemplate {
 		monetizationModule.setCookieGeo(countryCode);
 		// anon user
 		base.refreshPage();
-		monetizationModule.verifyMonetizationModuleSlot();
-		monetizationModule.verifyMonetizationModuleNotShownBelowCategory();
-		monetizationModule.verifyMonetizationModuleShownAboveFooter();
-		monetizationModule.verifyMonetizationModuleNotShownAboveTitle();
-		monetizationModule.verifyMonetizationModuleNotShownBelowTitle();
-		monetizationModule.verifyMonetizationModuleNotShownInContent();
+		monetizationModule.verifyAdsenseUnitShown();
+		monetizationModule.verifyAdsenseUnitSlot();
+		monetizationModule.verifyAdsenseUnitNotShownAboveTitle();
+		monetizationModule.verifyAdsenseUnitNotShownBelowTitle();
+		monetizationModule.verifyAdsenseUnitNotShownInContent();
 		// logged in user
 		base.logInCookie(credentials.userNameStaff, credentials.passwordStaff, wikiURL);
 		base.openWikiPage(articleURL);
 		monetizationModule.verifyMonetizationModuleNotShown();
 	}
 
+	/**
+	 * Adsense: The header of monetization module is shown on article page
+	 *
+	 * @author Saipetch Kongkatong
+	 */
+	@Test(groups = {"MonetizationModule", "MonetizationModuleTest_016", "Monetization"})
+	public void MonetizationModuleTest_016() {
+		String articleURL = urlBuilder.getUrlForPath(TEST_WIKI, TEST_ARTICLE);
+		WikiBasePageObject base = new WikiBasePageObject(driver);
+		base.openWikiPage(articleURL);
+		MonetizationModuleComponentObject monetizationModule = new MonetizationModuleComponentObject(driver);
+		monetizationModule.setCookieGeo(TEST_COUNTRY_CODE);
+		monetizationModule.setCookieFromSearch();
+		base.refreshPage();
+		monetizationModule.verifyAdsenseUnitShown();
+		monetizationModule.verifyAdsenseHeaderShown();
+	}
 
 }
