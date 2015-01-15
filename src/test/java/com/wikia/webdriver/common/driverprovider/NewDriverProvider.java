@@ -202,14 +202,13 @@ public class NewDriverProvider {
 			chromeOptions.addArguments(
 				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone")
 			);
-			return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
 		}
 		if ("CHROMEMOBILEMERCURY".equals(browserName)) {
 			chromeOptions.addArguments(
 				"--user-agent=" + userAgentRegistry.getUserAgent("iPhone+Mercury")
 			);
-			return new EventFiringWebDriver(new ChromeDriver(chromeOptions));
 		}
+		caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
 		//Adding console logging for Chrome browser
 		setBrowserLogging(Level.SEVERE);
