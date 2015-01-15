@@ -22,7 +22,7 @@ public class GalleryTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
-		MercuryContent.turnOnMercurySkin(driver, MercuryContent.MERCURY_WIKI);
+		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
 	@Test(groups = {"MercuryGalleryTests_001", "MercuryGalleryTests", "Mercury"})

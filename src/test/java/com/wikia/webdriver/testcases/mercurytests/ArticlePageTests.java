@@ -19,7 +19,7 @@ public class ArticlePageTests extends NewTestTemplate {
 
 	@BeforeMethod(alwaysRun = true)
 	public void optInMercury() {
-		MercuryContent.turnOnMercurySkin(driver, MercuryContent.MERCURY_WIKI);
+		MercuryContent.turnOnMercurySkin(driver, wikiURL);
 	}
 
 	@Test(groups = {"MercuryArticleTests_001", "MercuryArticleTests", "Mercury"})
